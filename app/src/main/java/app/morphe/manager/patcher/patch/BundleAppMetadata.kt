@@ -20,7 +20,6 @@ import app.morphe.patcher.patch.ApkFileType
  * @param apkFileType  Preferred/required APK input format. Null if not declared.
  * @param signatures   Union of all valid SHA-256 signing fingerprints across all bundles.
  *                     Null means no bundle declared signatures → skip verification.
- * @param experimentalVersions Union of all versions marked as experimental across all bundles.
  */
 data class BundleAppMetadata(
     val packageName: String,
@@ -28,7 +27,6 @@ data class BundleAppMetadata(
     val appIconColor: Int?,
     val apkFileType: ApkFileType?,
     val signatures: Set<String>?,
-    val experimentalVersions: Set<String>,
 ) {
     /** Derived gradient color list for home screen buttons. Null means use fallback. */
     val gradientColors: List<Color>? = appIconColor?.let { rgb ->
@@ -54,7 +52,6 @@ data class BundleAppMetadata(
             val iconColors = mutableMapOf<String, Int>()
             val apkFileTypes = mutableMapOf<String, ApkFileType>()
             val signaturesMap = mutableMapOf<String, MutableSet<String>>()
-            val experimentalMap = mutableMapOf<String, MutableSet<String>>()
 
             bundleInfoMap.values
                 .filter { it.enabled }
@@ -80,9 +77,6 @@ data class BundleAppMetadata(
                         pkg.signatures?.let {
                             signaturesMap.getOrPut(pkgName) { mutableSetOf() }.addAll(it)
                         }
-                        pkg.experimentalVersions?.let {
-                            experimentalMap.getOrPut(pkgName) { mutableSetOf() }.addAll(it)
-                        }
                     }
                 }
 
@@ -93,7 +87,6 @@ data class BundleAppMetadata(
                     appIconColor = iconColors[pkgName] ?: legacyAppIconColor(pkgName),
                     apkFileType = apkFileTypes[pkgName],
                     signatures = signaturesMap[pkgName]?.toSet(),
-                    experimentalVersions = experimentalMap[pkgName] ?: emptySet(),
                 )
             }
         }

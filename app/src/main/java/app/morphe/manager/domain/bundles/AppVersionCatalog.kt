@@ -14,6 +14,7 @@ import app.morphe.patcher.patch.AppTarget
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 
 /**
  * An [AppTarget] annotated with the bundle it originates from.
@@ -24,7 +25,9 @@ data class BundledAppTarget(
     val bundleUid: Int,
     val bundleName: String,
     /** Allowed build codes for this version, sourced from the patch bundle. Null means no constraint. */
-    val buildCodes: Set<Int>? = null
+    val buildCodes: Set<Int>? = null,
+    /** Whether the source this version comes from is set to use experimental app versions. */
+    val experimentalEnabled: Boolean = false
 )
 
 /**
@@ -50,26 +53,33 @@ fun List<BundledAppTarget>.experimentalVersions(): Set<String> =
     filter { it.target.isExperimental }.mapNotNullTo(mutableSetOf()) { it.target.version }
 
 /**
- * What one source offers for an app: the version it stands behind, and the version the manager
- * will actually patch at.
+ * The versions worth putting in front of the user, out of everything the sources cover.
  *
- * The experimental toggle only moves the latter. A source does not recommend a version it marks
- * experimental, so a list that badged one as recommended would put words in its mouth.
+ * Experimental versions survive only for the sources switched into experimental mode: leaving
+ * that off says they are not wanted at all, not merely that another one is suggested. A source
+ * carrying nothing but experimental versions still shows them, because filtering it down to
+ * nothing would leave the user with no version to pick.
  */
-data class BundleRecommendation(
-    /** Null when a source carries nothing but experimental versions for the app. */
-    val declared: AppTarget?,
-    val effective: AppTarget
-)
+fun List<BundledAppTarget>.offered(): List<BundledAppTarget> =
+    filter { !it.target.isExperimental || it.experimentalEnabled }.ifEmpty { this }
+
+/** Whether this device meets the minimum SDK the version declares. */
+fun BundledAppTarget.installableOnDevice(): Boolean =
+    target.minSdk.let { it == null || Build.VERSION.SDK_INT >= it }
 
 /**
- * What the enabled sources say about one app's versions: which to suggest, and which come
- * with the caveat that they are experimental.
+ * Versions the device can install, out of targets that arrive newest first. Dropping them all
+ * would leave the UI with nothing to show, so in that case they are kept.
  */
-data class AppVersionHints(
-    val recommendedVersion: String?,
-    val experimentalVersions: Set<String>
-)
+fun List<BundledAppTarget>.installable(): List<BundledAppTarget> =
+    filter { it.installableOnDevice() }.ifEmpty { this }
+
+/**
+ * The version to suggest out of these targets: the newest one the device can install, once the
+ * versions the user does not want to see are out of the way.
+ */
+fun List<BundledAppTarget>.recommended(): AppTarget? =
+    offered().installable().firstOrNull()?.target
 
 /**
  * Which app versions the enabled patch sources can work with, and which one to suggest.
@@ -81,136 +91,44 @@ class AppVersionCatalog(
     patchBundleRepository: PatchBundleRepository,
     prefs: PreferencesManager
 ) {
-    /** Every version each package can be patched at, grouped by source, newest first. */
-    val compatibleVersions: Flow<Map<String, List<BundledAppTarget>>> =
-        patchBundleRepository.bundleInfoFlow
-            .combine(patchBundleRepository.sources) { bundleInfo, sources ->
-                val enabledSources = sources.filter { it.enabled }
-                extract(
-                    bundleInfo = bundleInfo,
-                    bundleNames = enabledSources.associate { it.uid to it.displayTitle },
-                    enabledBundleUids = enabledSources.map { it.uid }.toSet()
-                )
-            }
-
-    /** The single version to offer per package, honoring the experimental toggle per source. */
-    val recommendedVersions: Flow<Map<String, AppTarget>> = combine(
-        compatibleVersions,
-        prefs.bundleExperimentalVersionsEnabled.flow,
+    /**
+     * Every version each package can be patched at, grouped by source, newest first. This is the
+     * full set, which is what an APK already on the device has to be judged against; [offered]
+     * narrows it to what a picker should put in front of the user.
+     */
+    val compatibleVersions: Flow<Map<String, List<BundledAppTarget>>> = combine(
         patchBundleRepository.bundleInfoFlow,
-        patchBundleRepository.sources
-    ) { versionData, experimentalEnabledUids, bundleInfo, sources ->
-        val enabledUids = sources.filter { it.enabled }.map { it.uid }.toSet()
-        // Packages for which at least one enabled bundle has experimental toggle on
-        val experimentalEnabledPackages = bundleInfo
-            .filterKeys { it in enabledUids && it.toString() in experimentalEnabledUids }
-            .values
-            .flatMap { it.patches }
-            .flatMap { it.compatiblePackages.orEmpty() }
-            .mapNotNull { it.packageName }
-            .toSet()
-
-        versionData.mapValues { (packageName, bundledTargets) ->
-            pick(
-                targets = bundledTargets.map { it.target },
-                preferExperimental = packageName in experimentalEnabledPackages
-            )
-        }
+        patchBundleRepository.sources,
+        prefs.bundleExperimentalVersionsEnabled.flow
+    ) { bundleInfo, sources, experimentalEnabledUids ->
+        val enabledSources = sources.filter { it.enabled }
+        extract(
+            bundleInfo = bundleInfo,
+            bundleNames = enabledSources.associate { it.uid to it.displayTitle },
+            enabledBundleUids = enabledSources.map { it.uid }.toSet(),
+            experimentalEnabledUids = experimentalEnabledUids
+        )
     }
 
-    /**
-     * The same choice made per source, so the version list can badge each section
-     * independently. Sources differ in which versions they carry and whether experimental
-     * ones are enabled for them.
-     */
-    val recommendedVersionsByBundle: Flow<Map<String, Map<Int, BundleRecommendation>>> = combine(
-        compatibleVersions,
-        prefs.bundleExperimentalVersionsEnabled.flow,
-        patchBundleRepository.bundleInfoFlow,
-        patchBundleRepository.sources
-    ) { versionData, experimentalEnabledUids, bundleInfo, sources ->
-        val enabledUids = sources.filter { it.enabled }.map { it.uid }.toSet()
-        // Per-bundle set of packages that have experimental mode enabled
-        val experimentalPackagesByBundle: Map<Int, Set<String>> = bundleInfo
-            .filterKeys { it in enabledUids && it.toString() in experimentalEnabledUids }
-            .mapValues { (_, info) ->
-                info.patches
-                    .flatMap { it.compatiblePackages.orEmpty() }
-                    .mapNotNull { it.packageName }
-                    .toSet()
-            }
-
-        versionData.mapValues { (packageName, bundledTargets) ->
-            bundledTargets
-                .groupBy { it.bundleUid }
-                .mapValues { (bundleUid, targets) ->
-                    val appTargets = targets.map { it.target }
-                    BundleRecommendation(
-                        declared = declared(appTargets),
-                        effective = pick(
-                            targets = appTargets,
-                            preferExperimental = experimentalPackagesByBundle[bundleUid]
-                                ?.contains(packageName) == true
-                        )
-                    )
+    /** The single version to offer per package. */
+    val recommendedVersions: Flow<Map<String, AppTarget>> =
+        compatibleVersions.map { versionData ->
+            buildMap {
+                versionData.forEach { (packageName, bundledTargets) ->
+                    bundledTargets.recommended()?.let { put(packageName, it) }
                 }
+            }
         }
-    }
 
-    /**
-     * Versions the device can install, out of [targets], which arrive newest first. Dropping
-     * them all would leave the UI with nothing to show, so in that case they are kept.
-     */
-    private fun installable(targets: List<AppTarget>): List<AppTarget> {
-        val deviceSdk = Build.VERSION.SDK_INT
-        return targets
-            .filter { it.minSdk == null || deviceSdk >= it.minSdk!! }
-            .ifEmpty { targets }
-    }
-
-    /**
-     * The version a source stands behind. Null when it carries none the device can install
-     * outside the experimental ones, which a source does not recommend by definition.
-     */
-    private fun declared(targets: List<AppTarget>): AppTarget? =
-        installable(targets).firstOrNull { !it.isExperimental }
-
-    /** Picks the one version to offer out of [targets], which arrive newest first. */
-    private fun pick(targets: List<AppTarget>, preferExperimental: Boolean): AppTarget {
-        val candidates = installable(targets)
-
-        return if (preferExperimental) {
-            candidates.firstOrNull { it.isExperimental } ?: candidates.first()
-        } else {
-            candidates.firstOrNull { !it.isExperimental } ?: candidates.first()
-        }
-    }
-
-    /**
-     * Everything the batch planner needs to say about an app's versions, resolved in one pass.
-     *
-     * The maps behind it are derived from every patch of every source, so a planner that asked
-     * per app would rebuild the whole catalog for each one.
-     */
-    suspend fun hints(): Map<String, AppVersionHints> {
-        val recommended = recommendedVersions.first()
-        val compatible = compatibleVersions.first()
-
-        return compatible.mapValues { (packageName, targets) ->
-            AppVersionHints(
-                recommendedVersion = recommended[packageName]?.version,
-                experimentalVersions = targets.experimentalVersions()
-            )
-        }
-    }
-
-    /** One-shot lookup for a single app, for the entry points that resolve one at a time. */
-    suspend fun hints(packageName: String): AppVersionHints? = hints()[packageName]
+    /** One-shot lookup for the entry points that resolve one app at a time. */
+    suspend fun recommendedVersion(packageName: String): String? =
+        recommendedVersions.first()[packageName]?.version
 
     private fun extract(
         bundleInfo: Map<Int, PatchBundleInfo>,
         bundleNames: Map<Int, String>,
         enabledBundleUids: Set<Int> = emptySet(),
+        experimentalEnabledUids: Set<String> = emptySet(),
     ): Map<String, List<BundledAppTarget>> {
         // packageName → bundleUid → version → AppTarget
         val targetsByPackage = mutableMapOf<String, MutableMap<Int, MutableMap<String, AppTarget>>>()
@@ -263,7 +181,8 @@ class AppVersionCatalog(
                                     target = target,
                                     bundleUid = uid,
                                     bundleName = bundleNames[uid] ?: "Bundle $uid",
-                                    buildCodes = target.version?.let { codesForBundle?.get(it) }
+                                    buildCodes = target.version?.let { codesForBundle?.get(it) },
+                                    experimentalEnabled = uid.toString() in experimentalEnabledUids
                                 )
                             }
                     }

@@ -11,7 +11,6 @@ import android.util.Log
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.trackingKey
 import app.morphe.manager.domain.bundles.AppVersionCatalog
-import app.morphe.manager.domain.bundles.AppVersionHints
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
@@ -131,10 +130,14 @@ class BatchPlanResolver(
     ): List<BatchPatchItem> = coroutineScope {
         // Built once for the whole plan: it is derived from every patch of every source, and
         // resolving it per app would repeat that work for each one of them
-        val hints = versionCatalog.hints()
+        val recommended = versionCatalog.recommendedVersions.first()
         targets
             .distinctBy { it.id }
-            .map { target -> async { resolve(target, useMount, hints = hints[target.packageName]) } }
+            .map { target ->
+                async {
+                    resolve(target, useMount, suggestedVersion = recommended[target.packageName]?.version)
+                }
+            }
             .awaitAll()
     }
 
@@ -142,6 +145,8 @@ class BatchPlanResolver(
      * Resolves a single target. [attachedFile] overrides source discovery and is used when
      * the user attaches an APK from the preflight screen.
      *
+     * @param suggestedVersion Passed in when the whole plan already resolved it, so the version
+     *   catalog is not rebuilt once per app; looked up here otherwise.
      * @param allowUnverifiedSignature Set once the user has accepted an APK whose signing
      *   certificate no bundle vouches for, so the same file is not questioned twice.
      */
@@ -149,15 +154,14 @@ class BatchPlanResolver(
         target: BatchTarget,
         useMount: Boolean,
         attachedFile: File? = null,
-        hints: AppVersionHints? = null,
+        suggestedVersion: String? = null,
         allowIncompatible: Boolean = false,
         allowUnverifiedSignature: Boolean = false,
         preferInstalled: Boolean = false
     ): BatchPatchItem = withContext(Dispatchers.IO) {
         val packageName = target.packageName
         val appName = resolveAppName(target)
-        val versions = hints ?: versionCatalog.hints(packageName)
-        val suggested = versions?.recommendedVersion
+        val suggested = suggestedVersion ?: versionCatalog.recommendedVersion(packageName)
 
         val attached = try {
             attachedFile?.let { readAttachedApk(it) }
@@ -215,7 +219,6 @@ class BatchPlanResolver(
             source = source,
             useMount = useMount,
             suggested = suggested,
-            experimental = source.version in versions?.experimentalVersions.orEmpty(),
             forceIncompatible = allowIncompatible
         )
     }
@@ -319,7 +322,6 @@ class BatchPlanResolver(
         source: BatchApkSource,
         useMount: Boolean,
         suggested: String?,
-        experimental: Boolean,
         forceIncompatible: Boolean
     ): BatchPatchItem {
         val packageName = target.packageName
@@ -327,6 +329,10 @@ class BatchPlanResolver(
             .scopedBundleInfoFlow(packageName, source.version, source.versionCode)
             .first()
             .filter { it.enabled }
+
+        // Asked of the bundles the APK is being resolved against rather than of the version
+        // catalog, so the badge cannot disagree with the warning the single-app flow shows
+        val experimental = bundles.any { it.isVersionExperimental }
 
         // Forced per app from the preflight screen, or globally by the compatibility setting
         val allowIncompatible = forceIncompatible || prefs.disablePatchVersionCompatCheck.get()

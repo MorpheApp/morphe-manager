@@ -25,8 +25,8 @@ import app.morphe.manager.domain.apk.LocalApkSources
 import app.morphe.manager.domain.apk.SavedApkInfo
 import app.morphe.manager.domain.batch.*
 import app.morphe.manager.domain.bundles.AppVersionCatalog
-import app.morphe.manager.domain.bundles.BundleRecommendation
 import app.morphe.manager.domain.bundles.BundledAppTarget
+import app.morphe.manager.domain.bundles.offered
 import app.morphe.manager.domain.manager.DownloadUrlResolver
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
@@ -256,7 +256,6 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent, ApkDownloadHelperHost 
         val item: BatchPatchItem,
         val recommended: AppTarget?,
         val compatible: List<BundledAppTarget>,
-        val recommendedByBundle: Map<Int, BundleRecommendation>,
         val saved: SavedApkInfo?,
         val installed: InstalledApkInfo?,
         val installedOnDevice: Boolean,
@@ -277,7 +276,6 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent, ApkDownloadHelperHost 
                 item = item,
                 recommended = recommended,
                 compatible = versionCatalog.compatibleVersions.first()[item.packageName].orEmpty(),
-                recommendedByBundle = versionCatalog.recommendedVersionsByBundle.first()[item.packageName].orEmpty(),
                 saved = withContext(Dispatchers.IO) { localApkSources.saved(item.packageName) },
                 installed = installed,
                 installedOnDevice = onDevice,
@@ -399,7 +397,11 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent, ApkDownloadHelperHost 
             appName = search.item.appName,
             versionName = search.version,
             versionCodes = requestedVersionCodes,
-            compatibleVersionNames = search.compatible.mapNotNull { it.target.version }.distinct(),
+            // Narrowed the same way the picker is: a helper told an experimental version is
+            // acceptable would hand back the very one the user chose to hide
+            compatibleVersionNames = search.compatible.offered()
+                .mapNotNull { it.target.version }
+                .distinct(),
             supportedAbis = Build.SUPPORTED_ABIS,
             fileType = apkFileType?.toHelperFileType(),
             // Mirrors the single-app request - only a required plain APK rules split archives out

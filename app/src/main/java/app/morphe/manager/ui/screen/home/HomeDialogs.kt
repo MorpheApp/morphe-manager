@@ -95,7 +95,6 @@ fun HomeDialogs(
         val appName = homeViewModel.pendingAppName ?: return@AnimatedVisibility
         val recommendedVersion = homeViewModel.pendingRecommendedVersion
         val compatibleVersions = homeViewModel.pendingCompatibleVersions
-        val recommendedBundleVersions = homeViewModel.pendingRecommendedBundleVersions
         val selectedDownloadVersion = homeViewModel.pendingSelectedDownloadVersion
         val usingMountInstall = homeViewModel.usingMountInstall
         val isExpertMode = homeViewModel.prefs.useExpertMode.getBlocking()
@@ -107,7 +106,6 @@ fun HomeDialogs(
             appName = appName,
             recommendedVersion = recommendedVersion,
             compatibleVersions = compatibleVersions,
-            recommendedBundleVersions = recommendedBundleVersions,
             selectedDownloadVersion = selectedDownloadVersion,
             onVersionSelect = { homeViewModel.pendingSelectedDownloadVersion = it },
             usingMountInstall = usingMountInstall,
@@ -376,9 +374,10 @@ fun HomeDialogs(
     // Simple mode bundle selection dialog - shown when 2+ bundles have patches for the same app
     if (homeViewModel.showSimpleBundleSelectDialog) {
         val candidates = homeViewModel.simpleBundleSelectCandidates
-        val bundleRecommendedVersions = homeViewModel.pendingPackageName?.let {
-            homeViewModel.recommendedBundleVersions[it]
-        } ?: emptyMap()
+        val versionsBySource = homeViewModel.pendingPackageName
+            ?.let { homeViewModel.compatibleVersions[it] }
+            .orEmpty()
+            .groupBy { it.bundleUid }
         SimpleBundleSelectDialog(
             candidates = candidates.map { (bundle, patches) ->
                 val source = homeViewModel.getPatchSource(bundle.uid)
@@ -388,7 +387,7 @@ fun HomeDialogs(
                         ?: homeViewModel.getBundleDisplayName(bundle.uid)
                         ?: bundle.name,
                     patchCount = patches.size,
-                    recommendedVersion = bundleRecommendedVersions[bundle.uid]?.effective?.version,
+                    recommendedVersion = versionsBySource[bundle.uid].orEmpty().recommended()?.version,
                     patchVersion = source?.version ?: bundle.version,
                     sourceType = source?.sourceType
                 )
@@ -654,7 +653,6 @@ internal fun ApkAvailabilityDialog(
     appName: String,
     recommendedVersion: AppTarget?,
     compatibleVersions: List<BundledAppTarget>,
-    recommendedBundleVersions: Map<Int, BundleRecommendation>,
     selectedDownloadVersion: AppTarget?,
     onVersionSelect: (AppTarget) -> Unit,
     usingMountInstall: Boolean,
@@ -668,7 +666,9 @@ internal fun ApkAvailabilityDialog(
     onUseSaved: () -> Unit,
     onUseInstalled: () -> Unit
 ) {
-    val deviceSdk = Build.VERSION.SDK_INT
+    // Every check below still runs against the full set: an APK already on the device stays
+    // usable whatever the experimental toggle says, it is only the picker that narrows
+    val offeredVersions = remember(compatibleVersions) { compatibleVersions.offered() }
 
     // The installed APK is dropped upstream when the patches do not target it, but a saved
     // copy is offered whatever it is: it may be the only APK the user still has
@@ -686,14 +686,10 @@ internal fun ApkAvailabilityDialog(
     }
 
     // Versions whose minSdk exceeds the current device - shown greyed-out and non-selectable
-    val incompatibleSdkVersions: Set<String> = remember(compatibleVersions, deviceSdk) {
-        compatibleVersions
-            .mapNotNull { b ->
-                val v = b.target.version ?: return@mapNotNull null
-                val minSdk = b.target.minSdk ?: return@mapNotNull null
-                if (deviceSdk < minSdk) v else null
-            }
-            .toSet()
+    val incompatibleSdkVersions: Set<String> = remember(offeredVersions) {
+        offeredVersions
+            .filterNot { it.installableOnDevice() }
+            .mapNotNullTo(mutableSetOf()) { it.target.version }
     }
     AppDialog(
         onDismissRequest = onDismiss,
@@ -779,7 +775,7 @@ internal fun ApkAvailabilityDialog(
             verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            if (isExpertMode && compatibleVersions.isNotEmpty()) {
+            if (isExpertMode && offeredVersions.isNotEmpty()) {
                 // Expert mode: selectable version list
                 Text(
                     text = htmlAnnotatedString(stringResource(
@@ -791,26 +787,25 @@ internal fun ApkAvailabilityDialog(
                     textAlign = TextAlign.Center
                 )
 
-                if (compatibleVersions.size > 1) {
+                if (offeredVersions.size > 1) {
                     SelectableVersionListCard(
-                        versions = compatibleVersions,
+                        versions = offeredVersions,
                         selectedVersion = selectedDownloadVersion,
-                        recommendedBundleVersions = recommendedBundleVersions,
                         onVersionSelect = onVersionSelect,
                         anyString = anyString,
-                        hasMultipleBundles = compatibleVersions.map { it.bundleUid }.distinct().size > 1,
+                        hasMultipleBundles = offeredVersions.map { it.bundleUid }.distinct().size > 1,
                         incompatibleSdkVersions = incompatibleSdkVersions,
                         savedVersion = savedApkInfo?.version,
                     )
                 } else {
                     VersionListCard(
-                        versions = compatibleVersions.map { it.target.version ?: anyString },
-                        experimentalVersions = compatibleVersions.experimentalVersions(),
-                        descriptions = compatibleVersions
+                        versions = offeredVersions.map { it.target.version ?: anyString },
+                        experimentalVersions = offeredVersions.experimentalVersions(),
+                        descriptions = offeredVersions
                             .mapNotNull { b -> b.target.version?.let { v -> b.target.description?.let { d -> v to d } } }
                             .toMap(),
                         incompatibleSdkVersions = incompatibleSdkVersions,
-                        versionCodes = compatibleVersions
+                        versionCodes = offeredVersions
                             .mapNotNull { b ->
                                 val v = b.target.version ?: return@mapNotNull null
                                 val codes = b.buildCodes ?: return@mapNotNull null
@@ -1342,7 +1337,6 @@ private fun SelectableVersionListCard(
     modifier: Modifier = Modifier,
     versions: List<BundledAppTarget>,
     selectedVersion: AppTarget?,
-    recommendedBundleVersions: Map<Int, BundleRecommendation>,
     onVersionSelect: (AppTarget) -> Unit,
     anyString: String,
     hasMultipleBundles: Boolean,
@@ -1350,6 +1344,15 @@ private fun SelectableVersionListCard(
     savedVersion: String? = null
 ) {
     if (versions.isEmpty()) return
+
+    // The version each source stands behind, experimental ones aside: a source does not
+    // recommend a version it marks experimental, whatever the toggle promotes above it
+    val recommendedByBundle = remember(versions) {
+        versions.groupBy { it.bundleUid }
+            .mapValues { (_, section) ->
+                section.installable().firstOrNull { !it.target.isExperimental }?.target?.version
+            }
+    }
 
     Surface(
         modifier = modifier.fillMaxWidth(),
@@ -1365,10 +1368,8 @@ private fun SelectableVersionListCard(
                 val versionString = target.version ?: anyString
                 val isIncompatibleSdk = target.version != null && target.version in incompatibleSdkVersions
                 val isSelected = !isIncompatibleSdk && target.version != null && target.version == selectedVersion?.version
-                // The version the source declares, not the one the experimental toggle promotes:
-                // a source does not recommend a version it marks experimental
                 val isRecommended = !isIncompatibleSdk && target.version != null &&
-                        target.version == recommendedBundleVersions[bundled.bundleUid]?.declared?.version
+                        target.version == recommendedByBundle[bundled.bundleUid]
                 val selectedLabel = stringResource(R.string.home_selected_version)
                 val tags = versionTagsOf(
                     requiresAndroidSdk = target.minSdk.takeIf { isIncompatibleSdk },

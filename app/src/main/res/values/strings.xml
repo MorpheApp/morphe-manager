@@ -142,7 +142,7 @@
     <string name="sources_prerelease_warning_message">Pre-release builds are still in development. Patches may fail or break the app, and features can change without warning</string>
     <string name="expert_mode_prerelease_notice">This source is on pre-release patches. Patching may fail or behave unexpectedly</string>
     <string name="sources_management_experimental_versions_toggle">Experimental app versions</string>
-    <string name="sources_management_experimental_versions_toggle_description">Patches experimental app targets if available</string>
+    <string name="sources_management_experimental_versions_toggle_description">Shows and patches experimental app targets</string>
     <string name="sources_management_already_exists">This source has already been added</string>
     <string name="sources_management_invalid_url">Invalid source URL. Please check the address and try again</string>
     <string name="sources_management_blocked">This patch source is blocked and cannot be added</string>

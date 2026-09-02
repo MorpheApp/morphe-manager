@@ -351,8 +351,6 @@ class HomeViewModel(
     var pendingAppName by mutableStateOf<String?>(null)
     var pendingRecommendedVersion by mutableStateOf<AppTarget?>(null)
     var pendingCompatibleVersions by mutableStateOf<List<BundledAppTarget>>(emptyList())
-    // Per-bundle recommended versions for multi-bundle display in ApkAvailabilityDialog
-    var pendingRecommendedBundleVersions by mutableStateOf<Map<Int, BundleRecommendation>>(emptyMap())
     // Version selected by the user in Dialog 1 for the APK search query. Defaults to pendingRecommendedVersion
     var pendingSelectedDownloadVersion by mutableStateOf<AppTarget?>(null)
     var pendingSelectedApp by mutableStateOf<SelectedApp?>(null)
@@ -400,7 +398,10 @@ class HomeViewModel(
         pendingSelectedBundleUid = bundleUid
 
         // Update recommended version to the one the chosen bundle will be used at
-        val bundleRecommended = recommendedBundleVersions[packageName]?.get(bundleUid)?.effective
+        val bundleRecommended = compatibleVersions[packageName]
+            .orEmpty()
+            .filter { it.bundleUid == bundleUid }
+            .recommended()
         if (bundleRecommended != null) {
             pendingRecommendedVersion = bundleRecommended
             pendingSelectedDownloadVersion = bundleRecommended
@@ -443,18 +444,6 @@ class HomeViewModel(
 
     /** Convenience accessor - reads expert mode preference without blocking. */
     private suspend fun isExpertMode() = prefs.useExpertMode.get()
-
-    /**
-     * Per-bundle recommended version for each package.
-     * Returns Map<PackageName, Map<BundleUid, AppTarget>> so the APK availability dialog
-     * can show the correct "Recommended" badge independently for each bundle section.
-     */
-    val recommendedBundleVersionsFlow: StateFlow<Map<String, Map<Int, BundleRecommendation>>> =
-        versionCatalog.recommendedVersionsByBundle
-            .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
-
-    val recommendedBundleVersions: Map<String, Map<Int, BundleRecommendation>>
-        get() = recommendedBundleVersionsFlow.value
 
     // Track available updates for installed apps
     private val _appUpdatesAvailable = MutableStateFlow<Map<String, AppPatchUpdate>>(emptyMap())
@@ -1816,12 +1805,12 @@ class HomeViewModel(
     }
 
     /**
-     * Returns the set of experimental version strings for a package from all currently enabled bundles.
-     * Derived directly from [compatibleVersions] which already contains [AppTarget] objects.
-     * Used by the UI to show "Experimental" badges on specific versions.
+     * Returns the set of experimental version strings for a package from all currently enabled
+     * bundles, narrowed to the versions the user is actually offered. Used by the UI to show
+     * "Experimental" badges on specific versions.
      */
     fun getExperimentalVersionsForPackage(packageName: String): Set<String> =
-        compatibleVersions[packageName].orEmpty().experimentalVersions()
+        compatibleVersions[packageName].orEmpty().offered().experimentalVersions()
 
     /** Triggers the swipe gesture hint whenever a custom bundle is added. */
     val showSwipeGestureHint = MutableStateFlow(false)
@@ -1983,7 +1972,6 @@ class HomeViewModel(
             ?: KnownApps.getAppName(packageName)
         pendingRecommendedVersion = recommendedVersions[packageName]
         pendingCompatibleVersions = compatibleVersions[packageName] ?: emptyList()
-        pendingRecommendedBundleVersions = recommendedBundleVersions[packageName] ?: emptyMap()
         pendingSelectedDownloadVersion = pendingRecommendedVersion
         // Reset per-package cached state so a new flow always loads fresh data
         pendingSavedApkInfo = null
@@ -1998,13 +1986,8 @@ class HomeViewModel(
         pendingSavedApkInfo = savedInfo
 
         // Check if every declared version is incompatible with the current device SDK
-        val versions = compatibleVersions[packageName] ?: emptyList()
-        val deviceSdk = Build.VERSION.SDK_INT
-        val allIncompatible = versions.isNotEmpty() &&
-                versions.all { b ->
-                    val minSdk = b.target.minSdk
-                    minSdk != null && deviceSdk < minSdk
-                }
+        val versions = compatibleVersions[packageName].orEmpty().offered()
+        val allIncompatible = versions.isNotEmpty() && versions.none { it.installableOnDevice() }
         if (allIncompatible) {
             showNoCompatibleVersionsDialog = packageName
             return
@@ -2592,27 +2575,8 @@ class HomeViewModel(
         }
 
         if (versionMismatch && !allowIncompatible) {
-            val recommendedVersion = recommendedVersions[selectedApp.packageName]
-            val allBundled = compatibleVersions[selectedApp.packageName] ?: emptyList()
             pendingSelectedApp = selectedApp
-            showUnsupportedVersionDialog = UnsupportedVersionDialogState(
-                packageName = selectedApp.packageName,
-                version = selectedApp.version ?: "unknown",
-                versionCode = selectedApp.versionCode,
-                recommendedVersion = recommendedVersion,
-                compatibleVersionNames = allBundled.mapNotNull { it.target.version },
-                compatibleVersionDescriptions = allBundled.mapNotNull { b ->
-                    val v = b.target.version ?: return@mapNotNull null
-                    val d = b.target.description ?: return@mapNotNull null
-                    v to d
-                }.toMap(),
-                compatibleVersionCodes = allBundled.mapNotNull { b ->
-                    val v = b.target.version ?: return@mapNotNull null
-                    val codes = b.buildCodes ?: return@mapNotNull null
-                    v to codes
-                }.toMap(),
-                isExperimental = isVersionExperimental
-            )
+            showUnsupportedVersionDialog = unsupportedVersionState(selectedApp, isVersionExperimental)
             cleanupPendingData(keepSelectedApp = true, keepBundleUid = true)
             return
         }
@@ -2621,27 +2585,8 @@ class HomeViewModel(
         // - Experimental mode ON → ExperimentalVersionWarningDialog
         // - Experimental mode OFF → UnsupportedVersionWarningDialog
         if (isVersionExperimental && !allowIncompatible) {
-            val recommendedVersion = recommendedVersions[selectedApp.packageName]
-            val allBundled = compatibleVersions[selectedApp.packageName] ?: emptyList()
             pendingSelectedApp = selectedApp
-            val state = UnsupportedVersionDialogState(
-                packageName = selectedApp.packageName,
-                version = selectedApp.version ?: "unknown",
-                versionCode = selectedApp.versionCode,
-                recommendedVersion = recommendedVersion,
-                compatibleVersionNames = allBundled.mapNotNull { it.target.version },
-                compatibleVersionDescriptions = allBundled.mapNotNull { b ->
-                    val v = b.target.version ?: return@mapNotNull null
-                    val d = b.target.description ?: return@mapNotNull null
-                    v to d
-                }.toMap(),
-                compatibleVersionCodes = allBundled.mapNotNull { b ->
-                    val v = b.target.version ?: return@mapNotNull null
-                    val codes = b.buildCodes ?: return@mapNotNull null
-                    v to codes
-                }.toMap(),
-                isExperimental = true
-            )
+            val state = unsupportedVersionState(selectedApp, isExperimental = true)
             if (isExperimentalModeEnabled) {
                 showExperimentalVersionDialog = state
             } else {
@@ -2657,6 +2602,36 @@ class HomeViewModel(
         // Show the pre-patching mode dialog so the user can choose.
         // For non-root devices, just proceed - installer selection happens after patching.
         processSelectedAppIgnoringSignature(selectedApp)
+    }
+
+    /**
+     * The way out of a version the sources do not stand behind: what the user picked, and the
+     * versions they can go for instead. Shared by both warnings, which differ only in tone.
+     */
+    private fun unsupportedVersionState(
+        selectedApp: SelectedApp,
+        isExperimental: Boolean
+    ): UnsupportedVersionDialogState {
+        val offered = compatibleVersions[selectedApp.packageName].orEmpty().offered()
+
+        return UnsupportedVersionDialogState(
+            packageName = selectedApp.packageName,
+            version = selectedApp.version ?: "unknown",
+            versionCode = selectedApp.versionCode,
+            recommendedVersion = recommendedVersions[selectedApp.packageName],
+            compatibleVersionNames = offered.mapNotNull { it.target.version },
+            compatibleVersionDescriptions = offered.mapNotNull { b ->
+                val v = b.target.version ?: return@mapNotNull null
+                val d = b.target.description ?: return@mapNotNull null
+                v to d
+            }.toMap(),
+            compatibleVersionCodes = offered.mapNotNull { b ->
+                val v = b.target.version ?: return@mapNotNull null
+                val codes = b.buildCodes ?: return@mapNotNull null
+                v to codes
+            }.toMap(),
+            isExperimental = isExperimental
+        )
     }
 
     /**
@@ -2965,7 +2940,6 @@ class HomeViewModel(
         pendingAppName = null
         pendingRecommendedVersion = null
         pendingCompatibleVersions = emptyList()
-        pendingRecommendedBundleVersions = emptyMap()
         pendingSelectedDownloadVersion = null
         pendingSelectedBundleUid = null
         resolvedDownloadUrl = null
@@ -3289,7 +3263,11 @@ class HomeViewModel(
             appName = appName,
             versionName = requestedVersion?.version,
             versionCodes = requestedVersionCodes,
-            compatibleVersionNames = pendingCompatibleVersions.mapNotNull { it.target.version }.distinct(),
+            // Narrowed the same way the picker is: a helper told an experimental version is
+            // acceptable would hand back the very one the user chose to hide
+            compatibleVersionNames = pendingCompatibleVersions.offered()
+                .mapNotNull { it.target.version }
+                .distinct(),
             supportedAbis = Build.SUPPORTED_ABIS,
             fileType = apkFileType?.toHelperFileType(),
             // Mirrors processSelectedApp - only a required plain APK rules split archives out
@@ -3340,7 +3318,6 @@ class HomeViewModel(
         pendingAppName = null
         pendingRecommendedVersion = null
         pendingCompatibleVersions = emptyList()
-        pendingRecommendedBundleVersions = emptyMap()
         pendingSelectedDownloadVersion = null
         if (!keepBundleUid) pendingSelectedBundleUid = null
         resolvedDownloadUrl = null
