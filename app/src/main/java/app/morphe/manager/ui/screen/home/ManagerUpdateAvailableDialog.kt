@@ -26,16 +26,25 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.compose.LifecycleEventEffect
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.repeatOnLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.UpdateViewModel
 import app.morphe.manager.util.formatMegabytes
 import app.morphe.manager.util.isolateLtr
+import kotlinx.coroutines.delay
+import kotlin.time.Duration.Companion.milliseconds
 
 private val ProgressBarHeight = 8.dp
 private val SuccessIconContainerSize = 80.dp
 private val SuccessIconSize = 40.dp
+
+/**
+ * How long the app must hold the foreground before an install left in
+ * [UpdateViewModel.State.INSTALLING] counts as abandoned rather than merely still opening.
+ */
+private val AbandonedInstallGrace = 1500.milliseconds
 
 /**
  * The distinct bodies the update dialog can show. States that share a body map to the same
@@ -81,10 +90,13 @@ fun ManagerUpdateDetailsDialog(
     val state = updateViewModel.state
 
     // An installer activity reports nothing when it is dismissed, so an abandoned install shows
-    // up only as the app coming back to the foreground still holding INSTALLING. Returning from
-    // the installer and reopening the dialog onto that state are the same event here
-    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
-        updateViewModel.resetIfInstallCancelled()
+    // up only as the app holding the foreground while the state is still INSTALLING
+    val lifecycleOwner = LocalLifecycleOwner.current
+    LaunchedEffect(lifecycleOwner, updateViewModel) {
+        lifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+            delay(AbandonedInstallGrace)
+            updateViewModel.resetIfInstallCancelled()
+        }
     }
 
     // Collapse "Show older releases" when the dialog closes so it reopens fresh next time
