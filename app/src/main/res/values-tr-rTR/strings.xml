@@ -85,7 +85,7 @@
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
     <string name="home_greeting_4">Başka bir gün, başka bir reklam engellenmiş başyapıt</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Reklam izlemek ister misiniz? Biz de istemeyiz</string>
+    <string name="home_greeting_5">Reklam izlemek ister misin? Ben de istemem</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="home_greeting_6">Uygulamalarınızın davranışlarını düzeltelim</string>
     <!-- Whimsical forecast-style joke, not meant literally -->

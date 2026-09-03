@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">Tá leaganacha réamh-eisiúna fós á bhforbairt. D’fhéadfadh paistí teip nó an aip a bhriseadh, agus d’fhéadfadh gnéithe athrú gan rabhadh.</string>
     <string name="expert_mode_prerelease_notice">Tá an fhoinse seo ar phaistí réamh-eisiúna. D’fhéadfadh teip nó iompar gan choinne a bheith mar thoradh ar phaistí.</string>
     <string name="sources_management_experimental_versions_toggle">Leaganacha turgnamhacha aipeanna</string>
-    <string name="sources_management_experimental_versions_toggle_description">Taispeánann agus paisteálann sé spriocanna aipe turgnamhacha</string>
+    <string name="sources_management_experimental_versions_toggle_description">Taispeánann agus paistíonn spriocanna aipeanna turgnamhacha</string>
     <string name="sources_management_already_exists">Tá an fhoinse seo curtha leis cheana féin</string>
     <string name="sources_management_invalid_url">URL foinse neamhbhailí. Seiceáil an seoladh agus bain triail eile as</string>
     <string name="sources_management_blocked">Tá an foinse paiste seo blocáilte agus ní féidir í a chur leis</string>
@@ -462,10 +462,10 @@ Crios seachtrach (daite): féadfaidh masc an lainseálaí é a bhearradh - coinn
     <string name="patcher_field_app">Aip</string>
     <string name="patcher_field_package">Pacáiste</string>
     <string name="patcher_field_source">Foinse</string>
-    <string name="patcher_field_split">APK scoilte</string>
+    <string name="patcher_field_split">APK Scoilte</string>
     <string name="patcher_field_manager">Bainisteoir</string>
     <string name="patcher_field_patcher">Paisteoir</string>
-    <string name="patcher_field_runtime">Am rite</string>
+    <string name="patcher_field_runtime">Am rith</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Leabharlanna</string>
     <string name="patcher_field_android">Android</string>
@@ -475,9 +475,9 @@ Crios seachtrach (daite): féadfaidh masc an lainseálaí é a bhearradh - coinn
     <string name="patcher_field_storage">Stóras</string>
     <string name="patcher_field_value_unknown">anaithnid</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
-    <string name="patcher_field_value_stripped">bainte</string>
+    <string name="patcher_field_value_stripped">stróicthe</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
-    <string name="patcher_field_value_kept">coinnithe</string>
+    <string name="patcher_field_value_kept">coimeádta</string>
     <string name="patcher_tab_logs">Logaí paisteora</string>
     <string name="patcher_tab_game">Cluichí</string>
     <string name="patcher_logs_waiting">Ag fanacht le haschur loga…</string>
@@ -488,7 +488,7 @@ Crios seachtrach (daite): féadfaidh masc an lainseálaí é a bhearradh - coinn
     <string name="patcher_success_subtitle">Tá do aip paisteáilte agus suiteáilte!</string>
     <string name="patcher_complete_title">Paisteáil críochnaithe! ✨</string>
     <string name="patcher_failed_title">Úps! Chuaigh rud éigin mícheart.</string>
-    <string name="patcher_failed_hint">Tapaigh %s chun a fheiceáil cad a chuaigh mícheart</string>
+    <string name="patcher_failed_hint">Tapáil %s chun a fheiceáil cad a chuaigh mícheart</string>
     <string name="patcher_failed_dialog_title">Theip ar phaisteáil</string>
     <string name="patcher_unknown_error">Tharla earráid anaithnid</string>
     <string name="patcher_split_step_extracting">Ag baint APKanna scoilte</string>
@@ -1192,7 +1192,7 @@ Sonraí: %2$s"</string>
     <string name="importing_ellipsis">Ag iompórtáil…</string>
     <string name="imported_successfully">Iompórtáladh go rathúil</string>
     <string name="changelog">Féach ar logaí athruithe</string>
-    <string name="changelog_for_app">Athruithe do %s</string>
+    <string name="changelog_for_app">Athruithe le haghaidh %s</string>
     <string name="changelog_general_changes">Athruithe ginearálta</string>
     <string name="whats_new">Cad atá nua</string>
     <string name="changelog_description">Féach ar na hathruithe is déanaí sa nuashonrú seo</string>

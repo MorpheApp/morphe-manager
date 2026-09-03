@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">Wersje przedpremierowe są nadal w fazie rozwoju. Modyfikacje mogą zakończyć się niepowodzeniem lub popsuć aplikację, a funkcje mogą ulec zmianie bez ostrzeżenia</string>
     <string name="expert_mode_prerelease_notice">To źródło korzysta z przedpremierowych modyfikacji. Modyfikowanie może się nie powieść lub działać nieoczekiwanie</string>
     <string name="sources_management_experimental_versions_toggle">Eksperymentalne wersje aplikacji</string>
-    <string name="sources_management_experimental_versions_toggle_description">Pokazuje i patchuje eksperymentalne targety aplikacji</string>
+    <string name="sources_management_experimental_versions_toggle_description">Wyświetla i modyfikuje eksperymentalne wersje docelowe aplikacji</string>
     <string name="sources_management_already_exists">To źródło zostało już dodane</string>
     <string name="sources_management_invalid_url">Nieprawidłowy adres źródła. Sprawdź adres i spróbuj ponownie</string>
     <string name="sources_management_blocked">To źródło modyfikacji jest zablokowane i nie może zostać dodane</string>
@@ -463,22 +463,22 @@ Strefa zewnętrzna (linia przerywana): może zostać przycięta - najważniejsze
     <string name="patcher_field_app">Aplikacja</string>
     <string name="patcher_field_package">Pakiet</string>
     <string name="patcher_field_source">Źródło</string>
-    <string name="patcher_field_split">Podzielony APK</string>
+    <string name="patcher_field_split">Podzielony plik APK</string>
     <string name="patcher_field_manager">Menedżer</string>
     <string name="patcher_field_patcher">Modyfikator</string>
-    <string name="patcher_field_runtime">Środowisko uruchomieniowe</string>
+    <string name="patcher_field_runtime">Środowisko</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Biblioteki</string>
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Urządzenie</string>
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">Pamięć</string>
-    <string name="patcher_field_storage">Pamięć</string>
+    <string name="patcher_field_storage">Przestrzeń</string>
     <string name="patcher_field_value_unknown">nieznany</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
-    <string name="patcher_field_value_stripped">usunięte</string>
+    <string name="patcher_field_value_stripped">okrojone</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
-    <string name="patcher_field_value_kept">pozostawione</string>
+    <string name="patcher_field_value_kept">zachowane</string>
     <string name="patcher_tab_logs">Logi modyfikatora</string>
     <string name="patcher_tab_game">Gry</string>
     <string name="patcher_logs_waiting">Oczekiwanie na logi…</string>

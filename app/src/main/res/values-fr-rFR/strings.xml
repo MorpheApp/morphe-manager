@@ -137,7 +137,7 @@
     <string name="expert_mode_prerelease_notice">Cette source utilise des patchs en préversion. Le patching peut échouer ou entraîner un comportement inattendu.
 </string>
     <string name="sources_management_experimental_versions_toggle">Versions expérimentales de l\'application</string>
-    <string name="sources_management_experimental_versions_toggle_description">Affiche et corrige les cibles d\'application expérimentales</string>
+    <string name="sources_management_experimental_versions_toggle_description">Affiche et patche les cibles d\'applications expérimentales</string>
     <string name="sources_management_already_exists">Cette source a déjà été ajoutée</string>
     <string name="sources_management_invalid_url">L\'URL de la source est invalide. Vérifiez l\'adresse puis réessayez</string>
     <string name="sources_management_blocked">Cette source de patchs est bloquée et ne peut pas être ajoutée</string>
@@ -463,12 +463,12 @@ Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - g
     <string name="patcher_error_dialog_diagnostics">Diagnostics</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Application</string>
-    <string name="patcher_field_package">Package</string>
+    <string name="patcher_field_package">Paquet</string>
     <string name="patcher_field_source">Source</string>
-    <string name="patcher_field_split">APK fractionnée</string>
+    <string name="patcher_field_split">APK fractionné</string>
     <string name="patcher_field_manager">Gestionnaire</string>
     <string name="patcher_field_patcher">Patcheur</string>
-    <string name="patcher_field_runtime">Runtime</string>
+    <string name="patcher_field_runtime">Temps d\'exécution</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Bibliothèques</string>
     <string name="patcher_field_android">Android</string>
@@ -491,7 +491,7 @@ Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - g
     <string name="patcher_success_subtitle">Votre application est patchée et installée !</string>
     <string name="patcher_complete_title">Patching terminé ! ✨</string>
     <string name="patcher_failed_title">Oups ! Quelque chose s\'est mal passé</string>
-    <string name="patcher_failed_hint">Touchez %s pour voir ce qui n\'a pas fonctionné</string>
+    <string name="patcher_failed_hint">Appuyez sur %s pour voir ce qui n\'a pas fonctionné</string>
     <string name="patcher_failed_dialog_title">Échec du patching</string>
     <string name="patcher_unknown_error">Une erreur inconnue s\'est produite</string>
     <string name="patcher_split_step_extracting">Extraction des APK fractionnés</string>
