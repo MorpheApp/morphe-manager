@@ -20,11 +20,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.Defaults
 import kotlin.math.abs
@@ -158,9 +158,13 @@ class Game2048State(
 
 enum class Direction { LEFT, RIGHT, UP, DOWN }
 
-// Minimum drag distance (px) before a swipe is recognized as a move
-private const val SwipeThresholdPx = 40f
-private val TileGap = 8.dp
+// Minimum drag distance before a swipe is recognized as a move
+private val SwipeThreshold = 14.dp
+
+// Board metrics are fractions of the board size so the grid holds its proportions
+// at any screen size
+private const val TILE_GAP_RATIO = 0.024f
+private const val TILE_CORNER_RATIO = 0.09f
 
 @Composable
 fun Game2048Board(state: Game2048State) {
@@ -182,23 +186,25 @@ fun Game2048Board(state: Game2048State) {
 
 @Composable
 private fun BoardGrid(state: Game2048State, size: Dp) {
-    val tileSize = (size - TileGap * 5) / 4
+    val gap = size * TILE_GAP_RATIO
+    val tileSize = (size - gap * 5) / 4
 
     Box(
         modifier = Modifier
             .size(size)
             .background(BoardBg, RoundedCornerShape(Defaults.CompactCornerRadius))
             .pointerInput(Unit) {
+                val threshold = SwipeThreshold.toPx()
                 var drag = Offset.Zero
                 detectDragGestures(
                     onDragStart = { drag = Offset.Zero },
                     onDragEnd = {
                         if (abs(drag.x) > abs(drag.y)) {
-                            if (drag.x > SwipeThresholdPx) state.move(Direction.RIGHT)
-                            else if (drag.x < -SwipeThresholdPx) state.move(Direction.LEFT)
+                            if (drag.x > threshold) state.move(Direction.RIGHT)
+                            else if (drag.x < -threshold) state.move(Direction.LEFT)
                         } else {
-                            if (drag.y > SwipeThresholdPx) state.move(Direction.DOWN)
-                            else if (drag.y < -SwipeThresholdPx) state.move(Direction.UP)
+                            if (drag.y > threshold) state.move(Direction.DOWN)
+                            else if (drag.y < -threshold) state.move(Direction.UP)
                         }
                     }
                 ) { change, amount ->
@@ -208,23 +214,27 @@ private fun BoardGrid(state: Game2048State, size: Dp) {
             }
     ) {
         Column(
-            modifier = Modifier.padding(TileGap),
-            verticalArrangement = Arrangement.spacedBy(TileGap)
+            modifier = Modifier.padding(gap),
+            verticalArrangement = Arrangement.spacedBy(gap)
         ) {
             for (r in 0 until BOARD_SIZE) {
-                Row(horizontalArrangement = Arrangement.spacedBy(TileGap)) {
+                Row(horizontalArrangement = Arrangement.spacedBy(gap)) {
                     for (c in 0 until BOARD_SIZE) {
-                        TileCell(value = state.board[r][c], size = tileSize, emptyColor = EmptyTileBg)
+                        TileCell(
+                            value = state.board[r][c],
+                            size = tileSize,
+                            corner = tileSize * TILE_CORNER_RATIO,
+                            emptyColor = EmptyTileBg
+                        )
                     }
                 }
             }
         }
-
     }
 }
 
 @Composable
-private fun TileCell(value: Int, size: Dp, emptyColor: Color) {
+private fun TileCell(value: Int, size: Dp, corner: Dp, emptyColor: Color) {
     val bg by animateColorAsState(
         targetValue = if (value == 0) emptyColor else tileBackground(value),
         animationSpec = tween(120),
@@ -233,20 +243,24 @@ private fun TileCell(value: Int, size: Dp, emptyColor: Color) {
     Box(
         modifier = Modifier
             .size(size)
-            .clip(RoundedCornerShape(6.dp))
+            .clip(RoundedCornerShape(corner))
             .background(bg),
         contentAlignment = Alignment.Center
     ) {
         if (value > 0) {
+            // The ratio drops as digits are added so long values still fit the tile
+            val ratio = when {
+                value < 100   -> 0.34f
+                value < 1000  -> 0.28f
+                value < 10000 -> 0.20f
+                else          -> 0.16f
+            }
             Text(
                 text = value.toString(),
                 color = tileForeground(value),
                 fontWeight = FontWeight.Bold,
-                fontSize = when {
-                    value < 100  -> 24.sp
-                    value < 1000 -> 20.sp
-                    else         -> 14.sp
-                }
+                // toSp() locks the glyphs to the tile size, out of reach of the user font scale
+                fontSize = with(LocalDensity.current) { (size * ratio).toSp() }
             )
         }
     }
