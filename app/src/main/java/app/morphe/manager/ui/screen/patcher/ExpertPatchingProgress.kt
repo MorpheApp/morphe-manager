@@ -823,7 +823,10 @@ private fun PatcherInfoCard(
  */
 @Composable
 private fun StartBannerCard(item: LogItem.StartBanner) {
-    PatcherInfoCard(title = "Patching started", variant = CardVariant.Start) {
+    PatcherInfoCard(
+        title = stringResource(R.string.patcher_card_started),
+        variant = CardVariant.Start
+    ) {
         BannerFieldCell(
             label = stringResource(R.string.patcher_field_package),
             value = item.packageName,
@@ -983,17 +986,21 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
  */
 @Composable
 private fun SuccessSummaryCard(item: LogItem.SuccessSummary) {
-    PatcherInfoCard(title = "Patching succeeded", variant = CardVariant.Success, badge = "✓") {
+    PatcherInfoCard(
+        title = stringResource(R.string.patcher_card_succeeded),
+        variant = CardVariant.Success,
+        badge = "✓"
+    ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             BannerFieldCell(
-                label = "Output size",
+                label = stringResource(R.string.patcher_field_output_size),
                 value = item.outputSizeMb,
                 modifier = Modifier.weight(1f))
             BannerFieldCell(
-                label = "Time",
+                label = stringResource(R.string.patcher_field_time),
                 value = item.elapsedSec,
                 modifier = Modifier.weight(1f))
         }
@@ -1004,11 +1011,11 @@ private fun SuccessSummaryCard(item: LogItem.SuccessSummary) {
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 BannerFieldCell(
-                    label = "Memory average",
+                    label = stringResource(R.string.patcher_field_memory_average),
                     value = item.processHeapAverageMb,
                     modifier = Modifier.weight(1f))
                 BannerFieldCell(
-                    label = "Memory max",
+                    label = stringResource(R.string.patcher_field_memory_max),
                     value = item.processHeapMaxMb ?: "?",
                     modifier = Modifier.weight(1f))
             }
@@ -1020,7 +1027,7 @@ private fun SuccessSummaryCard(item: LogItem.SuccessSummary) {
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 BannerFieldCell(
-                    label = "Storage I/O peak",
+                    label = stringResource(R.string.patcher_field_io_peak),
                     value = item.ioPeakRate,
                     modifier = Modifier.weight(1f))
             }
