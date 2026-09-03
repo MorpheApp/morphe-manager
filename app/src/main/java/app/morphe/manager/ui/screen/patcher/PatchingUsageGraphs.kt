@@ -225,7 +225,6 @@ private fun HeapUsagePanel(
 
     UsagePanel(
         label = stringResource(R.string.memory_usage),
-        // The limit rides along in the detail, which the compact layout has no room for anyway
         headline = "${samples.lastOrNull() ?: 0} MB",
         detail = "${current.asPercent()} of $limitMb MB",
         // The dot reads the same average as the bars, so the two cannot disagree on the tint
@@ -234,7 +233,9 @@ private fun HeapUsagePanel(
         metrics = metrics,
         reserveTwoLines = reserveTwoLines,
         onLabelWraps = onLabelWraps,
-        modifier = modifier
+        modifier = modifier,
+        // The compact layout has no detail line, so the limit rides next to the reading there
+        headlineSuffix = "/ $limitMb".takeIf { compact }
     ) {
         UsageHistoryBars(
             fractions = fractions,
@@ -317,7 +318,8 @@ private fun IoUsagePanel(
 
 /**
  * Shell every usage panel shares: an accent dot and title, the current reading, and the graph.
- * The secondary detail is dropped in the compact layout, where a panel only gets a third of a row.
+ * The secondary detail is dropped in the compact layout, where a panel only gets a third of a row,
+ * so anything it still has to carry there goes in [headlineSuffix].
  */
 @Composable
 private fun UsagePanel(
@@ -330,6 +332,7 @@ private fun UsagePanel(
     reserveTwoLines: Boolean,
     onLabelWraps: () -> Unit,
     modifier: Modifier = Modifier,
+    headlineSuffix: String? = null,
     graph: @Composable () -> Unit
 ) {
     val labelLineHeight = 12.sp
@@ -381,12 +384,11 @@ private fun UsagePanel(
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                     onTextLayout = { if (it.lineCount > 1) onLabelWraps() },
-                    modifier = Modifier.weight(1f, fill = false)
+                    // Takes the row on its own, so the detail keeps to the trailing edge
+                    modifier = Modifier.weight(1f)
                 )
 
                 if (!compact) {
-                    Spacer(Modifier.weight(1f))
-
                     Text(
                         text = detail,
                         style = MaterialTheme.typography.labelSmall,
@@ -399,16 +401,34 @@ private fun UsagePanel(
                 }
             }
 
-            Text(
-                text = headline,
-                style = MaterialTheme.typography.titleSmall,
-                fontFamily = FontFamily.Monospace,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.onSurface,
-                fontSize = metrics.headlineSize,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                verticalAlignment = Alignment.Bottom
+            ) {
+                Text(
+                    text = headline,
+                    style = MaterialTheme.typography.titleSmall,
+                    fontFamily = FontFamily.Monospace,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontSize = metrics.headlineSize,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    // The reading gives way first, so a narrow panel keeps the limit beside it
+                    modifier = Modifier.weight(1f, fill = false)
+                )
+
+                if (headlineSuffix != null) {
+                    Text(
+                        text = headlineSuffix,
+                        style = MaterialTheme.typography.titleSmall,
+                        fontFamily = FontFamily.Monospace,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
+                        fontSize = metrics.headlineSize * 0.75f,
+                        maxLines = 1
+                    )
+                }
+            }
 
             graph()
         }
@@ -460,7 +480,7 @@ private fun CoreLoadBars(
     // when the overall picture has not changed at all
     val sortedLoads = loads.sorted()
 
-    // Polling is slow enough that stepping straight to each reading reads as noise
+    // Polling is slow enough that stepping straight to each sample reads as noise
     val fractions = sortedLoads.mapIndexed { rank, load ->
         key(rank) {
             animateFloatAsState(
