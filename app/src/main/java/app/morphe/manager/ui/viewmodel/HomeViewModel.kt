@@ -2064,7 +2064,7 @@ class HomeViewModel(
      */
     private fun applyInstalledApkInfo(installed: Boolean, info: InstalledApkInfo?) {
         pendingTargetAppInstalled = installed
-        pendingInstalledApkInfo = info?.takeIf { pendingCompatibleVersions.patchableAt(it.version, it.versionCode) }
+        pendingInstalledApkInfo = info.patchableBy(pendingCompatibleVersions)
     }
 
     /**

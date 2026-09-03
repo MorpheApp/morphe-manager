@@ -27,7 +27,7 @@ import app.morphe.manager.domain.batch.*
 import app.morphe.manager.domain.bundles.AppVersionCatalog
 import app.morphe.manager.domain.bundles.BundledAppTarget
 import app.morphe.manager.domain.bundles.offered
-import app.morphe.manager.domain.bundles.patchableAt
+import app.morphe.manager.domain.bundles.patchableBy
 import app.morphe.manager.domain.manager.DownloadUrlResolver
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
@@ -270,6 +270,7 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent, ApkDownloadHelperHost 
         viewModelScope.launch {
             val recommended = versionCatalog.recommendedVersions.first()[item.packageName]
             val compatible = versionCatalog.compatibleVersions.first()[item.packageName].orEmpty()
+            val expertMode = prefs.useExpertMode.get()
             val (onDevice, installed) = withContext(Dispatchers.IO) {
                 localApkSources.installed(item.packageName)
             }
@@ -279,9 +280,9 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent, ApkDownloadHelperHost 
                 recommended = recommended,
                 compatible = compatible,
                 saved = withContext(Dispatchers.IO) { localApkSources.saved(item.packageName) },
-                // Kept only when the patches target its version, so the dialog offers the
-                // installed source under the same condition the single-app flow does
-                installed = installed?.takeIf { compatible.patchableAt(it.version, it.versionCode) },
+                // The installed source is an expert-mode offer, and only for a version the
+                // patches target: the two conditions the single-app flow puts on the button
+                installed = installed.takeIf { expertMode }.patchableBy(compatible),
                 installedOnDevice = onDevice,
                 selectedVersion = recommended
             )
