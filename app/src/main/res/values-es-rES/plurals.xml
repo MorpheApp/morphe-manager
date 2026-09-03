@@ -44,9 +44,9 @@
         <item quantity="one">%s aplicación lista para parchear</item>
         <item quantity="other">%s aplicaciones listas para parchear</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">%s aplicación está lista para instalar</item>
-        <item quantity="other">%s aplicaciones están listas para instalar</item>
+    <plurals name="repatch_available_count">
+        <item quantity="one">%s aplicación puede volver a parchearse</item>
+        <item quantity="other">%s aplicaciones pueden volver a parchearse</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">%s aplicación omitida</item>
@@ -67,6 +67,10 @@
     <plurals name="home_category_app_count">
         <item quantity="one">%s aplicación</item>
         <item quantity="other">%s aplicaciones</item>
+    </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="one">%s seleccionado</item>
+        <item quantity="other">%s seleccionados</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="one">Se copió el parche %s del paquete seleccionado</item>

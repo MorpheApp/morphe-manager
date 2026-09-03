@@ -66,11 +66,11 @@
         <item quantity="many">%s aplikace připraveny k opravě</item>
         <item quantity="other">%s aplikace připraveny k opravě</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">%s aplikace je připravena k instalaci</item>
-        <item quantity="few">%s aplikace jsou připraveny k instalaci</item>
-        <item quantity="many">%s aplikace jsou připraveny k instalaci</item>
-        <item quantity="other">%s aplikace jsou připraveny k instalaci</item>
+    <plurals name="repatch_available_count">
+        <item quantity="one">%s aplikace může být znovu opravena</item>
+        <item quantity="few">%s aplikace mohou být znovu opraveny</item>
+        <item quantity="many">%s aplikací může být znovu opraveno</item>
+        <item quantity="other">%s aplikací může být znovu opraveno</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Přeskočena %s aplikace</item>
@@ -101,6 +101,12 @@
         <item quantity="few">%s aplikace</item>
         <item quantity="many">%s aplikací</item>
         <item quantity="other">%s aplikací</item>
+    </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="one">Vybráno: %s</item>
+        <item quantity="few">Vybráno: %s</item>
+        <item quantity="many">Vybráno: %s</item>
+        <item quantity="other">Vybráno: %s</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="one">Zkopírovaná %s záplata z vybraného balíčku</item>

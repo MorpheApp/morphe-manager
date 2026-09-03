@@ -83,7 +83,6 @@
     <string name="sources_management_prerelease_toggle">Bandomosios versijos pataisos</string>
     <string name="sources_management_prerelease_toggle_description">Gaukite ankstyvą prieigą prie naujų eksperimentinių pataisos versijų</string>
     <string name="sources_management_experimental_versions_toggle">Eksperimentinės programos versijos</string>
-    <string name="sources_management_experimental_versions_toggle_description">Pataisas </string>
     <string name="sources_management_already_exists">Šis šaltinis jau pridėtas</string>
     <string name="sources_management_invalid_url">Neteisynga šaltinio URL. Patikrinkite adresą ir bandykite dar kartą</string>
     <string name="sources_management_metadata_unavailable">Metaduomenys N/A</string>
@@ -113,6 +112,7 @@
     <string name="sources_dialog_url_invalid">URL turi rodyti į GitHub/GitLab repo arba .json failą</string>
     <string name="sources_dialog_local_change_file">Pakeisti failą</string>
     <string name="sources_dialog_preinstalled">iš anksto įdiegta</string>
+    <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_update_success">Sėkmingas atnaujinimas</string>
     <string name="sources_update_unavailable">Atnaujinimo nėra</string>
     <string name="sources_download_fail">Nepavyko atsisiųsti šaltinio: %s</string>
@@ -295,7 +295,12 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <string name="patcher_error_copied">Klaida nukopijuota į iškarpinę</string>
     <string name="patcher_error_log">Klaidų žurnalas</string>
     <string name="patcher_error_technical">Techninė informacija</string>
-    <string name="patcher_error_dialog_app_info">Programos inform</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_value_unknown">nežinoma</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_tab_game">Žaidimai</string>
     <string name="patcher_long_step_warning">Šis žingsnis gali užtrukti. Palaukite…</string>
     <string name="patcher_installing_subtitle">Beveik laikas rokenrolui! 🎸</string>
@@ -303,7 +308,6 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <string name="patcher_success_subtitle">Jūsų programėlė pataisyta ir įdiegta!</string>
     <string name="patcher_complete_title">Taisymas baigtas! ✨</string>
     <string name="patcher_failed_title">Oops! Kažkas nepavyko</string>
-    <string name="patcher_failed_subtitle">Patikrinkite klaidų išsamią informaciją žemiau</string>
     <string name="patcher_failed_dialog_title">Pataisyti nepavyko</string>
     <string name="patcher_unknown_error">Įvyko nežinoma klaida</string>
     <string name="patcher_split_step_extracting">Išskleidžiami išskaldyti APK failai</string>
@@ -448,7 +452,9 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <string name="settings_appearance_app_icon_change_dialog_confirm">Pakeisti piktogramą</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Atnaujinimai</string>
-    <string name="settings_advanced_updates_use_prereleases">Eksperimentiniai atnaujinimai</string>
+    <string name="settings_advanced_updates_manager_prereleases">Eksperimentiniai atnaujinimai</string>
+    <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
+    <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
     <string name="settings_advanced_updates_allow_metered">Atnaujinimai per mobiliuosius duomenis</string>
     <string name="settings_advanced_updates_allow_metered_description">Laidžia Morphe ir pataisymų atnaujinimus siųsti per mobiliuosius duomenis</string>
     <string name="settings_advanced_updates_background_notifications">Foniniai atnaujinimo pranešimai</string>
@@ -532,7 +538,7 @@ Pasirinktinai, nuoroda gali turėti pranešimo piktogramą viename iš išvardin
     <!-- Shared strings -->
     <string name="search">Ieškoti</string>
     <string name="patching">Taisoma</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <!-- Onboarding coach marks -->
     <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <!-- Translate "System" the same way as the System settings tab -->

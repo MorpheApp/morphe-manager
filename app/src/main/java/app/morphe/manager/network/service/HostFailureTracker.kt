@@ -5,7 +5,7 @@
 
 package app.morphe.manager.network.service
 
-import java.util.concurrent.ConcurrentHashMap
+import app.morphe.manager.util.TimedCache
 
 /**
  * Remembers hosts whose retries have just been exhausted.
@@ -17,21 +17,17 @@ import java.util.concurrent.ConcurrentHashMap
  * [now] is injectable so the cool-off window can be exercised without waiting for it.
  */
 internal class HostFailureTracker(
-    private val ttlMillis: Long,
-    private val now: () -> Long = System::currentTimeMillis
+    ttlMillis: Long,
+    now: () -> Long = System::currentTimeMillis
 ) {
-    private val failures = ConcurrentHashMap<String, Long>()
+    // A verdict is the timestamp alone, so the entries carry no value of their own
+    private val failures = TimedCache<String, Unit>(ttlMillis, now)
 
     /** Whether [host] is still inside its cool-off window. A null host is never failing. */
-    fun isFailing(host: String?): Boolean {
-        val failedAt = failures[host ?: return false] ?: return false
-        if (now() - failedAt <= ttlMillis) return true
-        failures.remove(host)
-        return false
-    }
+    fun isFailing(host: String?): Boolean = failures[host ?: return false] != null
 
     fun markFailed(host: String) {
-        failures[host] = now()
+        failures[host] = Unit
     }
 
     /** Drops the verdict once [host] answers again, so a recovered host is not held back. */

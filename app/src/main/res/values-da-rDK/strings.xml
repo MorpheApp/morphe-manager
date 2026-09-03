@@ -2,6 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Andre apps</string>
+    <string name="home_other_apps_action">Vælg andre apps</string>
     <string name="home_not_patched_yet">Ikke patchet endnu</string>
     <string name="home_unpatched_version_installed">Upatchet version installeret</string>
     <string name="home_unpatched_badge">Ikke patchet</string>
@@ -28,6 +29,7 @@
     <string name="home_outdated_manager_subtitle">Nogle kilde-feeds kræver en nyere version</string>
     <string name="home_metered_skipped_title">Opdateringer pauset på mobildata</string>
     <string name="home_metered_skipped_subtitle">Tryk for at tillade opdateringer over mobildata</string>
+    <string name="home_repatch_available_subtitle">Tryk for at kø dem alle</string>
     <string name="home_update_error">Opdatering mislykkedes</string>
     <string name="home_update_error_subtitle">Der opstod en fejl under opdatering af kilder</string>
     <string name="home_update_skipped_metered">Opdateringer oversprunget</string>
@@ -53,6 +55,8 @@
     <string name="home_app_sort_name_desc_description">Omvendt alfabetisk, fra Z til A</string>
     <string name="home_app_sort_updates_first">Patch-opdateringer først</string>
     <string name="home_app_sort_updates_first_description">Apps med opdateringsmærker først, derefter i anbefalet rækkefølge</string>
+    <string name="home_app_sort_recently_patched">Senest patchet</string>
+    <string name="home_app_sort_recently_patched_description">Senest patchede apps først</string>
     <string name="home_no_apps_title">Ingen apps tilgængelige</string>
     <string name="home_no_apps_subtitle">Tilføj en patchkilde eller aktiver en eksisterende i %s</string>
     <string name="home_no_apps_search_subtitle">Ingen apps matcher \"%s\"</string>
@@ -124,11 +128,15 @@
     <string name="sources_sort_enabled_first">Aktiveret først</string>
     <string name="sources_sort_enabled_first_description">Vis aktive kilder før deaktiverede kilder</string>
     <string name="sources_management_open_in_browser">Åbn links i browser</string>
+    <string name="sources_management_report_issue">Rapportér et problem</string>
     <string name="sources_management_failed_to_open_url">Kunne ikke åbne URL</string>
     <string name="sources_management_prerelease_toggle">Pre-release patches</string>
     <string name="sources_management_prerelease_toggle_description">Få tidlig adgang til nye eksperimentelle patch versioner</string>
+    <string name="sources_prerelease_warning_title">Aktivér præ-release-patcher?</string>
+    <string name="sources_prerelease_warning_message">Præ-release-versioner er stadig under udvikling. Patcher kan mislykkes eller ødelægge appen, og funktioner kan ændres uden advarsel</string>
+    <string name="expert_mode_prerelease_notice">Denne kilde er på præ-release-patcher. Patchning kan mislykkes eller opføre sig uventet</string>
     <string name="sources_management_experimental_versions_toggle">Eksperimentelle app-versioner</string>
-    <string name="sources_management_experimental_versions_toggle_description">Patch eksperimentelle app-targets, hvis de er tilgængelige</string>
+    <string name="sources_management_experimental_versions_toggle_description">Viser og retter eksperimentelle app-mål</string>
     <string name="sources_management_already_exists">Denne kilde er allerede tilføjet</string>
     <string name="sources_management_invalid_url">Ugyldig kilde-URL. Kontroller venligst adressen og prøv igen</string>
     <string name="sources_management_blocked">Denne patchkilde er blokeret og kan ikke tilføjes</string>
@@ -162,6 +170,12 @@
     <string name="sources_dialog_url_invalid">URL\'en skal pege på et GitHub/GitLab-lager eller en .json-fil</string>
     <string name="sources_dialog_local_change_file">Ændre fil</string>
     <string name="sources_dialog_preinstalled">Forhåndsinstalleret</string>
+    <string name="sources_dialog_community">Fællesskabets patches</string>
+    <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
+    <string name="sources_dialog_community_notice_title">Tredjeparts patch-kilder</string>
+    <string name="sources_dialog_community_notice_message">"Fællesskabets patch-kilder er lavet og vedligeholdt af deres egne forfattere. Morphe gennemgår eller verificerer ikke tredjeparts patches og er ikke ansvarlig for deres indhold eller for hvad de gør på din enhed.
+
+Alt, hvad du tilføjer fra denne hjemmeside, bruges på egen risiko."</string>
     <string name="sources_update_success">Opdatering vellykket</string>
     <string name="sources_update_unavailable">Ingen opdatering tilgængelig</string>
     <string name="sources_download_fail">Kunne ikke hente patchkilder: %s</string>
@@ -192,6 +206,7 @@
     <string name="home_apk_helper_installed_incompatible">Den installerede version kan ikke blive patchet</string>
     <string name="home_apk_use_saved">Brug gemt APK</string>
     <string name="home_apk_use_installed">Brug installeret APK</string>
+    <string name="home_apk_use_saved_unsupported">Patch\'ene understøtter ikke denne gemte kopi. At patche den vil bede dig om at bekræfte, eller vælg en anden APK.</string>
     <string name="home_apk_use_installed_unverified">Kunne ikke verificere signaturen af den installerede app, så den kan allerede være blevet patchet</string>
     <string name="home_unverified">Uverificeret</string>
     <string name="home_install_verification_pending">Kontrollerer installation…</string>
@@ -251,6 +266,8 @@
     <string name="expert_mode_enable_all">Aktiver alle</string>
     <string name="expert_mode_enable_all_done">Alle patches aktiveret</string>
     <string name="expert_mode_enable_all_universal_pending">Tryk igen for universelle patches</string>
+    <string name="expert_mode_universal_all_warning_title">Aktivér alle universelle patcher?</string>
+    <string name="expert_mode_universal_all_warning_message">Universelle patcher er ikke testet sammen. Aktivering af alle på én gang kan forårsage konflikter, mislykket patchning eller nedbrud</string>
     <string name="expert_mode_reset_to_default">Aktivér anbefalede patches</string>
     <string name="expert_mode_reset_to_default_done">Anbefalede patches anvendt</string>
     <string name="expert_mode_restore_saved">Gendan gemt valg</string>
@@ -258,8 +275,11 @@
     <string name="expert_mode_copy_from_bundle">Kopier udvalg fra en anden pakke</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Ingen matchende patches i denne pakke</string>
     <string name="expert_mode_no_results">Ingen patches fundet</string>
+    <string name="expert_mode_selected_only_on">Viser kun udvalgte patches</string>
+    <string name="expert_mode_selected_only_off">Viser alle patches</string>
     <string name="expert_mode_universal_patches">Universelle patches</string>
     <string name="expert_mode_new_patches">Ny</string>
+    <string name="expert_mode_options_customized">Tilpasset</string>
     <string name="expert_mode_patch_required_by_installer">Nødvendig for det valgte installationsmål</string>
     <string name="expert_mode_patch_unavailable_for_installer">Ikke tilgængelig for det valgte installationsmål</string>
     <string name="expert_mode_multiple_sources_warning_title">Flere patchkilder valgt</string>
@@ -437,7 +457,27 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="patcher_error_copied">Fejl kopieret til udklipsholder</string>
     <string name="patcher_error_log">Fejllog</string>
     <string name="patcher_error_technical">Tekniske oplysninger</string>
-    <string name="patcher_error_dialog_app_info">App-oplysninger</string>
+    <string name="patcher_error_dialog_diagnostics">Diagnostik</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">App</string>
+    <string name="patcher_field_package">Pakke</string>
+    <string name="patcher_field_source">Kilde</string>
+    <string name="patcher_field_split">Opdelt APK</string>
+    <string name="patcher_field_manager">Manager</string>
+    <string name="patcher_field_patcher">Patcher</string>
+    <string name="patcher_field_runtime">Runtime</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Biblioteker</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Enhed</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Hukommelse</string>
+    <string name="patcher_field_storage">Lagring</string>
+    <string name="patcher_field_value_unknown">ukendt</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">strippet</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">beholdt</string>
     <string name="patcher_tab_logs">Patch-logfiler</string>
     <string name="patcher_tab_game">Spil</string>
     <string name="patcher_logs_waiting">Vent på log output…</string>
@@ -448,7 +488,7 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="patcher_success_subtitle">Din app er patchet og installeret!</string>
     <string name="patcher_complete_title">Patch fuldført! ✨</string>
     <string name="patcher_failed_title">Ups! Noget gik galt</string>
-    <string name="patcher_failed_subtitle">Se fejldetaljerne nedenfor</string>
+    <string name="patcher_failed_hint">Tryk på %s for at se, hvad der gik galt</string>
     <string name="patcher_failed_dialog_title">Patch mislykkedes</string>
     <string name="patcher_unknown_error">Ukendt fejl opstod</string>
     <string name="patcher_split_step_extracting">Udpakker split-APK\'er</string>
@@ -623,6 +663,8 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Vis en hilsenbesked på startskærmen</string>
     <string name="settings_appearance_app_grouping">App-gruppering</string>
     <string name="settings_appearance_app_grouping_description">Vis en hjemmeskærms-skifter til at gruppere apps efter kilde eller dine egne kategorier, og bevar udvælgelsen, når den er slået fra</string>
+    <string name="settings_appearance_repatch_notice">Meddelelse om gen-patch</string>
+    <string name="settings_appearance_repatch_notice_description">Vis et banner på startskærmen, når patchede apps kan gen-patches</string>
     <string name="settings_appearance_sort_button">Sorterings- og filterknap</string>
     <string name="settings_appearance_sort_button_description">Vis sorterings- og filterknappen på hjemmeskærmen</string>
     <string name="settings_appearance_app_card_colors">App-kort farver</string>
@@ -654,8 +696,14 @@ Afinstallation sletter permanent alle appdata."</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Opdateringer</string>
     <string name="settings_advanced_patcher">Patcher</string>
-    <string name="settings_advanced_updates_use_prereleases">Pre-release opdateringer</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Tidlig adgang til nye Morphe-appversioner. Aktivér pre-release pr. kilde i patch-kilder</string>
+    <string name="settings_advanced_updates_manager_prereleases">Præ-release-opdateringer</string>
+    <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
+    <string name="settings_advanced_updates_manager_prereleases_description">Tidlig adgang til nye Morphe-versioner</string>
+    <string name="settings_advanced_updates_prerelease_warning_title">Aktivér præ-release-opdateringer?</string>
+    <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
+    <string name="settings_advanced_updates_prerelease_warning_message">"Præ-release-versioner af Morphe er stadig under udvikling og kan være ustabile.
+
+Patcher er ikke påvirket: aktivér præ-release-patcher for hver kilde i patch-kildelisten"</string>
     <string name="settings_advanced_updates_allow_metered">Mobildataopdateringer</string>
     <string name="settings_advanced_updates_allow_metered_description">Tillad Morphe og patchopdateringer at downloade over mobildata</string>
     <string name="settings_advanced_updates_background_notifications">Baggrundsopdateringsmeddelelser</string>
@@ -669,14 +717,6 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="settings_advanced_update_interval_monthly">En gang om måneden</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Baggrundsopdateringsfrekvens</string>
     <string name="settings_advanced_update_interval_battery_warning">Baggrundsopdateringer fungerer muligvis ikke på visse enheder. Mærker som Xiaomi, Huawei, Samsung og OnePlus begrænser ofte baggrundsprocesser aggressivt for at spare batteri</string>
-    <string name="settings_advanced_auto_patch">Automatisk genpatchning</string>
-    <string name="settings_advanced_auto_patch_description">Genpatcher installerede apps i baggrunden, når deres patches ændres. Kun apps med en gemt original APK er inkluderet</string>
-    <string name="settings_advanced_auto_patch_interval">Genpatch-frekvens</string>
-    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Hvor ofte rettede apps genopbygges</string>
-    <string name="settings_advanced_auto_patch_charging">Kun mens der oplades</string>
-    <string name="settings_advanced_auto_patch_charging_description">Patching belaster CPU og hukommelse, så det venter på en oplader</string>
-    <string name="settings_advanced_auto_patch_install">Installer automatisk</string>
-    <string name="settings_advanced_auto_patch_install_description">Kræver Shizuku som installatør. Med andre installatører gemmes de rettede apps kun</string>
     <string name="settings_advanced_external_batch_patch">Tillad eksterne triggere</string>
     <string name="settings_advanced_external_batch_patch_description">Lader automatiseringsapps starte batch patching med et intent. Enhver anmodning bekræftes, før noget køres</string>
     <string name="external_batch_patch_title">Start batch patching?</string>
@@ -684,13 +724,6 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="external_batch_patch_trust_caller">Tillad altid denne app</string>
     <string name="external_batch_patch_unknown_caller">En ukendt app</string>
     <!-- Notification content -->
-    <string name="notification_auto_patch_title">Automatisk genpatchning fuldført</string>
-    <string name="notification_auto_patch_running_title">Genpatchning af apps</string>
-    <string name="notification_auto_patch_blocked_title">Automatisk genpatchning blev ikke kørt</string>
-    <string name="notification_auto_patch_blocked_battery">Systemet blokerede denne installation. På Xiaomi og lignende enheder skal du aktivere \"Installer via USB\" i udviklerindstillingerne. På en arbejdsprofil kan installationer være begrænset af politikken</string>
-    <string name="notification_auto_patch_blocked_foreground">Android tillod ikke patching at starte i baggrunden. Åbn Morphe og patch fra appen</string>
-    <string name="notification_channel_auto_patch">Automatisk genpatchning</string>
-    <string name="notification_channel_auto_patch_description">Stille fremskridt og resultatnotifikationer for planlagt genpatchning</string>
     <string name="notification_manager_update_title">Morphe-opdatering tilgængelig</string>
     <string name="notification_bundle_update_title">Nye patches tilgængelige</string>
     <string name="notification_update_text">Version %s er klar til download</string>
@@ -1159,6 +1192,9 @@ Detaljer: %2$s"</string>
     <string name="importing_ellipsis">Importerer…</string>
     <string name="imported_successfully">Importeret med succes</string>
     <string name="changelog">Se ændringslogge</string>
+    <string name="changelog_for_app">Ændringer for %s</string>
+    <string name="changelog_general_changes">Generelle ændringer</string>
+    <string name="whats_new">Hvad er nyt</string>
     <string name="changelog_description">Se de seneste ændringer i denne opdatering</string>
     <string name="changelog_download_fail">Kunne ikke downloade ændringslog: %s</string>
     <string name="changelog_empty">Ingen ændringslog tilgængelig</string>
@@ -1171,13 +1207,13 @@ Detaljer: %2$s"</string>
     <string name="install_update_manager_failed">Kunne ikke installere opdatering</string>
     <string name="installing_manager_update">Installerer opdatering…</string>
     <string name="downloading_manager_update">Downloader opdatering…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB downloadet</string>
     <string name="manager_update_not_ready">Denne udgivelse er stadig ved at blive publiceret. Prøv igen om et par minutter</string>
+    <string name="update_download_missing">Den downloadede opdatering er ikke længere tilgængelig. Download den igen</string>
     <string name="download_manager_failed">Kunne ikke downloade opdatering: %s</string>
     <string name="failed_to_check_updates">Kunne ikke søge efter opdateringer: %s</string>
     <string name="failed_to_download_update">Kunne ikke downloade opdatering: %s</string>
-    <string name="resume_download">Genoptag download</string>
     <string name="download_confirmation_metered">"Du er i øjeblikket på en begrænset forbindelse, og der kan opkræves datagebyrer fra din udbyder.
 
 Vil du stadig fortsætte?"</string>

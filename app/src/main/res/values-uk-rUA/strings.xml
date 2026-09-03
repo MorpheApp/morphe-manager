@@ -2,6 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Інші застосунки</string>
+    <string name="home_other_apps_action">Обрати інші застосунки</string>
     <string name="home_not_patched_yet">Ще не патчено</string>
     <string name="home_unpatched_version_installed">Встановлено непропатчену версію</string>
     <string name="home_unpatched_badge">Не патчено</string>
@@ -28,6 +29,7 @@
     <string name="home_outdated_manager_subtitle">Деякі джерела патчів потребують новішої версії</string>
     <string name="home_metered_skipped_title">Оновлення призупинено в мобільній мережі</string>
     <string name="home_metered_skipped_subtitle">Натисніть, щоб дозволити оновлення в мобільній мережі</string>
+    <string name="home_repatch_available_subtitle">Натисніть, щоб додати їх усі в чергу</string>
     <string name="home_update_error">Помилка оновлення</string>
     <string name="home_update_error_subtitle">Під час оновлення джерел сталася помилка</string>
     <string name="home_update_skipped_metered">Оновлення пропущено</string>
@@ -53,6 +55,8 @@
     <string name="home_app_sort_name_desc_description">Зворотний алфавітний порядок, від Я до А</string>
     <string name="home_app_sort_updates_first">Спочатку оновлення патчів</string>
     <string name="home_app_sort_updates_first_description">Спочатку застосунки з позначками оновлень, потім рекомендований порядок</string>
+    <string name="home_app_sort_recently_patched">Нещодавно пропатчено</string>
+    <string name="home_app_sort_recently_patched_description">Спочатку останні пропатчені додатки</string>
     <string name="home_no_apps_title">Немає доступних застосунків</string>
     <string name="home_no_apps_subtitle">Додайте джерело патчів або ввімкніть існуюче в %s</string>
     <string name="home_no_apps_search_subtitle">Не знайдено застосунків за запитом \"%s\"</string>
@@ -124,12 +128,15 @@
     <string name="sources_sort_enabled_first">Спочатку увімкнені</string>
     <string name="sources_sort_enabled_first_description">Показувати активні джерела перед вимкненими</string>
     <string name="sources_management_open_in_browser">Відкрити в браузері</string>
+    <string name="sources_management_report_issue">Повідомити про проблему</string>
     <string name="sources_management_failed_to_open_url">Не вдалося відкрити URL</string>
     <string name="sources_management_prerelease_toggle">Передрелізні версії патчів</string>
     <string name="sources_management_prerelease_toggle_description">Отримує ранній доступ до нових експериментальних версій патчів</string>
+    <string name="sources_prerelease_warning_title">Увімкнути передрелізні патчі?</string>
+    <string name="sources_prerelease_warning_message">Передрелізні збірки ще перебувають у розробці. Патчі можуть не спрацювати або пошкодити застосунок, а функції можуть змінюватися без попередження</string>
+    <string name="expert_mode_prerelease_notice">Це джерело використовує передрелізні патчі. Патчинг може не спрацювати або поводитися непередбачувано</string>
     <string name="sources_management_experimental_versions_toggle">Експериментальні версії застосунків</string>
-    <string name="sources_management_experimental_versions_toggle_description">Патчить експериментальні версії застосунків, якщо доступні
-</string>
+    <string name="sources_management_experimental_versions_toggle_description">Показує та патчить експериментальні версії застосунків</string>
     <string name="sources_management_already_exists">Це джерело вже додано</string>
     <string name="sources_management_invalid_url">Недійсна URL-адреса джерела. Перевірте адресу та спробуйте ще раз</string>
     <string name="sources_management_blocked">Це джерело патчів заблоковано і не може бути додано</string>
@@ -163,6 +170,12 @@
     <string name="sources_dialog_url_invalid">URL має вказувати на репозиторій GitHub/GitLab або .json файл</string>
     <string name="sources_dialog_local_change_file">Змінити файл</string>
     <string name="sources_dialog_preinstalled">Вбудоване</string>
+    <string name="sources_dialog_community">Патчі спільноти</string>
+    <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
+    <string name="sources_dialog_community_notice_title">Сторонні джерела патчів</string>
+    <string name="sources_dialog_community_notice_message">"Джерела патчів спільноти створюються та підтримуються їхніми власними авторами. Morphe не перевіряє та не гарантує сторонні патчі, а також не несе відповідальності за їхній вміст або за те, що вони роблять на вашому пристрої.
+
+Усе, що ви додаєте з цього сайту, використовується на ваш власний ризик"</string>
     <string name="sources_update_success">Оновлення успішне</string>
     <string name="sources_update_unavailable">Оновлення недоступне</string>
     <string name="sources_download_fail">Не вдалося завантажити джерела: %s</string>
@@ -193,6 +206,7 @@
     <string name="home_apk_helper_installed_incompatible">Встановлену версію неможливо пропатчити</string>
     <string name="home_apk_use_saved">Збережений APK</string>
     <string name="home_apk_use_installed">Встановлений APK</string>
+    <string name="home_apk_use_saved_unsupported">Ці патчі не підтримують цю збережену копію. Патчинг запитає підтвердження або вибір іншого APK</string>
     <string name="home_apk_use_installed_unverified">Не вдалося перевірити підпис встановленого застосунку, тому він може бути вже пропатчений</string>
     <string name="home_unverified">Непідтверджено</string>
     <string name="home_install_verification_pending">Перевірка встановлення…</string>
@@ -252,6 +266,8 @@
     <string name="expert_mode_enable_all">Увімкнути всі</string>
     <string name="expert_mode_enable_all_done">Усі патчі ввімкнено</string>
     <string name="expert_mode_enable_all_universal_pending">Натисніть ще раз для універсальних патчів</string>
+    <string name="expert_mode_universal_all_warning_title">Увімкнути всі універсальні патчі?</string>
+    <string name="expert_mode_universal_all_warning_message">Універсальні патчі не тестуються разом. Увімкнення всіх одночасно може спричинити конфлікти, невдалий патчинг або збої</string>
     <string name="expert_mode_reset_to_default">Увімкнути рекомендовані патчі</string>
     <string name="expert_mode_reset_to_default_done">Рекомендовані патчі застосовано</string>
     <string name="expert_mode_restore_saved">Відновити збережений вибір</string>
@@ -259,8 +275,11 @@
     <string name="expert_mode_copy_from_bundle">Копіювати вибір з іншого пакета</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Немає відповідних патчів у цьому пакеті</string>
     <string name="expert_mode_no_results">Патчі не знайдено</string>
+    <string name="expert_mode_selected_only_on">Показано лише вибрані патчі</string>
+    <string name="expert_mode_selected_only_off">Показано всі патчі</string>
     <string name="expert_mode_universal_patches">Універсальні патчі</string>
     <string name="expert_mode_new_patches">Новий</string>
+    <string name="expert_mode_options_customized">Налаштовано</string>
     <string name="expert_mode_patch_required_by_installer">Обов\'язково для вибраного типу встановлення</string>
     <string name="expert_mode_patch_unavailable_for_installer">Недоступно для вибраного типу встановлення</string>
     <string name="expert_mode_multiple_sources_warning_title">Вибрано декілька джерел патчів</string>
@@ -438,7 +457,27 @@
     <string name="patcher_error_copied">Помилку скопійовано у буфер обміну</string>
     <string name="patcher_error_log">Журнал помилок</string>
     <string name="patcher_error_technical">Технічні деталі</string>
-    <string name="patcher_error_dialog_app_info">Інформація про застосунок</string>
+    <string name="patcher_error_dialog_diagnostics">Діагностика</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">Додаток</string>
+    <string name="patcher_field_package">Пакет</string>
+    <string name="patcher_field_source">Джерело</string>
+    <string name="patcher_field_split">Split APK</string>
+    <string name="patcher_field_manager">Менеджер</string>
+    <string name="patcher_field_patcher">Патчер</string>
+    <string name="patcher_field_runtime">Середовище</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Бібліотеки</string>
+    <string name="patcher_field_android">Андроїд</string>
+    <string name="patcher_field_device">Пристрій</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Пам\'ять</string>
+    <string name="patcher_field_storage">Сховище</string>
+    <string name="patcher_field_value_unknown">невідомо</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">видалено</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">збережено</string>
     <string name="patcher_tab_logs">Журнали патчера</string>
     <string name="patcher_tab_game">Ігри</string>
     <string name="patcher_logs_waiting">Очікування виводу журналу…</string>
@@ -449,7 +488,7 @@
     <string name="patcher_success_subtitle">Ваш застосунок пропатчено та встановлено!</string>
     <string name="patcher_complete_title">Патчинг завершено! ✨</string>
     <string name="patcher_failed_title">Ой! Щось пішло не так</string>
-    <string name="patcher_failed_subtitle">Перевірте деталі помилки нижче</string>
+    <string name="patcher_failed_hint">Натисніть %s, щоб побачити, що пішло не так</string>
     <string name="patcher_failed_dialog_title">Помилка патчингу</string>
     <string name="patcher_unknown_error">Сталася невідома помилка</string>
     <string name="patcher_split_step_extracting">Видобування split APK файлів</string>
@@ -625,6 +664,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Показувати вітальне повідомлення на головному екрані</string>
     <string name="settings_appearance_app_grouping">Групування застосунків</string>
     <string name="settings_appearance_app_grouping_description">Показує перемикач на головному екрані для групування застосунків за джерелом або власними категоріями, зберігаючи вибір при вимкненні</string>
+    <string name="settings_appearance_repatch_notice">Сповіщення про перепатчинг</string>
+    <string name="settings_appearance_repatch_notice_description">Показувати банер на головному екрані, коли пропатчені застосунки можна перепатчити</string>
     <string name="settings_appearance_sort_button">Кнопка сортування та фільтрування</string>
     <string name="settings_appearance_sort_button_description">Показувати кнопку сортування та фільтрування на головному екрані</string>
     <string name="settings_appearance_app_card_colors">Кольори картки застосунку</string>
@@ -656,8 +697,14 @@
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Оновлення</string>
     <string name="settings_advanced_patcher">Патчер</string>
-    <string name="settings_advanced_updates_use_prereleases">Передрелізні оновлення</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Ранній доступ до нових версій застосунку Morphe. Увімкніть попередні релізи окремо для кожного джерела в джерелах патчів</string>
+    <string name="settings_advanced_updates_manager_prereleases">Передрелізні оновлення</string>
+    <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
+    <string name="settings_advanced_updates_manager_prereleases_description">Ранній доступ до нових версій Morphe</string>
+    <string name="settings_advanced_updates_prerelease_warning_title">Увімкнути передрелізні оновлення?</string>
+    <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
+    <string name="settings_advanced_updates_prerelease_warning_message">"Передрелізні версії Morphe все ще розробляються та можуть бути нестабільними.
+
+Це не стосується патчів: увімкніть передрелізні версії патчів для кожного джерела у списку джерел патчів"</string>
     <string name="settings_advanced_updates_allow_metered">Оновлення через мобільну мережу</string>
     <string name="settings_advanced_updates_allow_metered_description">Дозволяє завантаження оновлень Morphe та патчів через мобільну мережу</string>
     <string name="settings_advanced_updates_background_notifications">Фонові сповіщення про оновлення</string>
@@ -671,14 +718,6 @@
     <string name="settings_advanced_update_interval_monthly">Раз на місяць</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Частота перевірки у фоновому режимі</string>
     <string name="settings_advanced_update_interval_battery_warning">Фонові перевірки можуть не працювати надійно на деяких пристроях. Виробники, такі як Xiaomi, Huawei, Samsung та OnePlus, часто агресивно обмежують фонові процеси, щоб зберегти заряд батареї</string>
-    <string name="settings_advanced_auto_patch">Автоматичний перепатчинг</string>
-    <string name="settings_advanced_auto_patch_description">Перепатчує встановлені застосунки у фоновому режимі, коли їхні патчі змінюються. Охоплює лише застосунки зі збереженим оригінальним APK</string>
-    <string name="settings_advanced_auto_patch_interval">Частота перепатчингу</string>
-    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Як часто перебудовуються пропатчені застосунки</string>
-    <string name="settings_advanced_auto_patch_charging">Лише під час заряджання</string>
-    <string name="settings_advanced_auto_patch_charging_description">Патчинг сильно навантажує процесор і пам\'ять, тому чекає на зарядний пристрій</string>
-    <string name="settings_advanced_auto_patch_install">Встановити автоматично</string>
-    <string name="settings_advanced_auto_patch_install_description">Вимагає Shizuku як інсталятор. З будь-яким іншим інсталятором пропатчені застосунки лише зберігаються</string>
     <string name="settings_advanced_external_batch_patch">Дозволити зовнішні тригери</string>
     <string name="settings_advanced_external_batch_patch_description">Дозволяє застосункам автоматизації запускати пакетний патчинг за допомогою intent. Кожен запит підтверджується перед виконанням</string>
     <string name="external_batch_patch_title">Почати пакетний патчинг?</string>
@@ -686,13 +725,6 @@
     <string name="external_batch_patch_trust_caller">Завжди дозволяти цьому застосунку</string>
     <string name="external_batch_patch_unknown_caller">Невідомий застосунок</string>
     <!-- Notification content -->
-    <string name="notification_auto_patch_title">Автоматичний перепатчинг завершено</string>
-    <string name="notification_auto_patch_running_title">Перепатчинг застосунків</string>
-    <string name="notification_auto_patch_blocked_title">Автоматичний перепатчинг не виконано</string>
-    <string name="notification_auto_patch_blocked_battery">Виключіть Morphe з оптимізації батареї, інакше Android зупинить процес до його початку</string>
-    <string name="notification_auto_patch_blocked_foreground">Android не дозволив запустити патчинг у фоновому режимі. Відкрийте Morphe і пропатчіть із застосунку</string>
-    <string name="notification_channel_auto_patch">Автоматичний перепатчинг</string>
-    <string name="notification_channel_auto_patch_description">Тихі сповіщення про прогрес і результат запланованого перепатчингу</string>
     <string name="notification_manager_update_title">Доступне оновлення Morphe</string>
     <string name="notification_bundle_update_title">Доступні нові патчі</string>
     <string name="notification_update_text">Версія %s готова до завантаження</string>
@@ -1162,7 +1194,10 @@ morphe_header_custom_dark.png
     <string name="importing_ellipsis">Імпортування…</string>
     <string name="imported_successfully">Імпортовано успішно</string>
     <string name="changelog">Переглянути списки змін</string>
-    <string name="changelog_description">Перегляньте останні зміни цього оновлення</string>
+    <string name="changelog_for_app">Зміни для %s</string>
+    <string name="changelog_general_changes">Загальні зміни</string>
+    <string name="whats_new">Що нового</string>
+    <string name="changelog_description">Ознайомтеся з останніми змінами в цьому оновленні</string>
     <string name="changelog_download_fail">Не вдалося завантажити список змін: %s</string>
     <string name="changelog_empty">Список змін відсутній</string>
     <string name="changelog_show_older">Показати старіші релізи</string>
@@ -1174,13 +1209,13 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">Не вдалося встановити оновлення</string>
     <string name="installing_manager_update">Встановлення оновлення…</string>
     <string name="downloading_manager_update">Завантаження оновлення…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">Завантажено %1$.1f МБ</string>
     <string name="manager_update_not_ready">Цей реліз ще публікується. Спробуйте знову за кілька хвилин</string>
+    <string name="update_download_missing">Завантажене оновлення більше недоступне. Завантажте його знову</string>
     <string name="download_manager_failed">Помилка завантаження оновлення: %s</string>
     <string name="failed_to_check_updates">Не вдалося перевірити наявність оновлень: %s</string>
     <string name="failed_to_download_update">Помилка завантаження оновлення: %s</string>
-    <string name="resume_download">Продовжити завантаження</string>
     <string name="download_confirmation_metered">"Ви зараз користуєтеся лімітним з’єднанням, і ваш постачальник послуг може стягувати плату за передачу даних.
 
 Ви все ще хочете продовжити?"</string>
@@ -1193,7 +1228,7 @@ morphe_header_custom_dark.png
     <string name="onboarding_swipe_desc">Проведіть праворуч по картці застосунку, щоб переглянути доступні патчі. Проведіть ліворуч, щоб приховати картку з головного екрана</string>
     <string name="onboarding_settings_desc">Налаштуйте Morphe: зовнішній вигляд, розширені параметри та системні інструменти</string>
     <string name="onboarding_sources_patches_desc">Натисніть, щоб переглянути всі патчі з цього джерела</string>
-    <string name="onboarding_sources_version_desc">Натисніть на версію, щоб переглянути повний журнал змін для цього джерела</string>
+    <string name="onboarding_sources_version_desc">Натисніть на версію, щоб переглянути повний список змін для цього джерела</string>
     <string name="onboarding_sources_prerelease_desc">Увімкніть це, щоб отримувати попередні версії патчів із цього джерела</string>
     <string name="onboarding_appearance_tab_desc">Налаштуйте вигляд застосунку: тему, акцентний колір та фон</string>
     <string name="onboarding_appearance_theme_desc">Виберіть світлу, темну або системну тему. Ви також можете вибрати власний акцентний колір або увімкнути динамічний колір</string>

@@ -59,6 +59,7 @@
     <string name="sources_dialog_remote_url">સ્રોત URL</string>
     <string name="sources_dialog_remote_url_formats_title">ઉદાહરણો:</string>
     <string name="sources_dialog_local">સ્થાનિક</string>
+    <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <!-- Home Screen - Dialog 1: APK Availability -->
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">મૂળ APK ડાઉનલોડ કરો</string>
@@ -92,11 +93,17 @@
     <!-- Home Screen - Root Mode -->
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">ભૂલ ક્લિપબોર્ડ પર કૉપિ કરવામાં આવેલ છે</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_patcher">પેચર</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_value_unknown">અજ્ઞાત</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_long_step_warning">આ પગલામાં થોડો સમય લાગી શકે છે. કૃપા કરીને રાહ જુઓ...</string>
     <string name="patcher_installing_subtitle">લગભગ નાચવા માટે તૈયાર! 🎸</string>
     <string name="patcher_success_subtitle">તમારી એપ્લિકેશન પેચ અને ઇન્સ્ટોલ કરેલી છે!</string>
     <string name="patcher_failed_title">અરે! કંઈક ખોટું થયું</string>
-    <string name="patcher_failed_subtitle">ભૂલની વિગતો નીચે તપાસો</string>
     <string name="patcher_unknown_error">અજાણી ભૂલ આવી</string>
     <string name="patcher_conflict_title">પેકેજ સંઘર્ષ</string>
     <string name="patcher_conflict_subtitle">તમારે વર્તમાન સંસ્કરણને અનઇન્સ્ટોલ કરવાની જરૂર છે</string>
@@ -161,6 +168,8 @@
     <string name="settings_appearance_app_icon_dark_3">ઈન્ડિગો</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_patcher">પેચર</string>
+    <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
+    <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
     <!-- Notification content -->
     <string name="notification_manager_update_title">મોર્ફે અદ્યતન ઉપલબ્ધ છે</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
@@ -226,7 +235,7 @@ morphe_header_custom_dark.png
     <string name="settings">સેટિંગ્સ</string>
     <string name="search">શોધો</string>
     <string name="search_no_results">કોઈ પરિણામ મળ્યું નથી.</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <!-- Onboarding coach marks -->
     <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <!-- Translate "System" the same way as the System settings tab -->

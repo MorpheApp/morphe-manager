@@ -247,7 +247,6 @@ internal fun DynamicAppCard(
     modifier: Modifier = Modifier,
     item: HomeAppItem,
     isLoading: Boolean,
-    hasUpdate: Boolean,
     onAppClick: () -> Unit,
     onHide: () -> Unit,
     onShowPatches: () -> Unit,
@@ -356,7 +355,9 @@ internal fun DynamicAppCard(
         ) {
             SelectableCard(
                 isSelected = isSelected,
-                isSelectionMode = isMultiSelectMode
+                isSelectionMode = isMultiSelectMode,
+                // The drag handle already sits in the corner the check badge would land in
+                showCheckmark = dragHandleModifier == null
             ) {
                 Crossfade(
                     targetState = isLoading,
@@ -366,37 +367,16 @@ internal fun DynamicAppCard(
                     if (loading) {
                         AppLoadingCard(gradientColors = item.gradientColors)
                     } else {
-                        if (item.installedApp != null) {
-                            InstalledAppCard(
-                                installedApp = item.installedApp,
-                                packageInfo = item.packageInfo,
-                                displayName = item.displayName,
-                                gradientColors = item.gradientColors,
-                                isClone = item.isClone,
-                                onClick = onAppClick,
-                                hasUpdate = hasUpdate,
-                                isAppDeleted = item.isDeleted,
-                                isInstallStateNotPatched = item.isInstallStateNotPatched,
-                                isInstallStateUnknown = item.isInstallStateUnknown,
-                                isInstallStatePending = item.isInstallStatePending,
-                                onLongClick = {
-                                    view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-                                    onLongPress()
-                                }
-                            )
-                        } else {
-                            AppButton(
-                                packageName = item.packageName,
-                                displayName = item.displayName,
-                                packageInfo = item.packageInfo,
-                                gradientColors = item.gradientColors,
-                                onClick = onAppClick,
-                                onLongClick = {
-                                    view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-                                    onLongPress()
-                                }
-                            )
-                        }
+                        HomeAppCard(
+                            item = item,
+                            onClick = onAppClick,
+                            // The drag handle takes the end of the card over while reordering
+                            showStatusBadges = dragHandleModifier == null,
+                            onLongClick = {
+                                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                                onLongPress()
+                            }
+                        )
                     }
                 }
             }
@@ -499,29 +479,10 @@ internal fun HiddenSearchAppCard(
                 )
             }
         ) {
-            if (item.installedApp != null) {
-                InstalledAppCard(
-                    installedApp = item.installedApp,
-                    packageInfo = item.packageInfo,
-                    displayName = item.displayName,
-                    gradientColors = item.gradientColors,
-                    isClone = item.isClone,
-                    onClick = onAppClick,
-                    hasUpdate = item.hasUpdate,
-                    isAppDeleted = item.isDeleted,
-                    isInstallStateNotPatched = item.isInstallStateNotPatched,
-                    isInstallStateUnknown = item.isInstallStateUnknown,
-                    isInstallStatePending = item.isInstallStatePending
-                )
-            } else {
-                AppButton(
-                    packageName = item.packageName,
-                    displayName = item.displayName,
-                    packageInfo = item.packageInfo,
-                    gradientColors = item.gradientColors,
-                    onClick = onAppClick
-                )
-            }
+            HomeAppCard(
+                item = item,
+                onClick = onAppClick
+            )
         }
     }
 }

@@ -66,12 +66,6 @@
         <item quantity="many">%s праграм, гатовых да патчынгу</item>
         <item quantity="other">%s праграм, гатовых да патчынгу</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">%s праграма, гатовая да ўсталёўкі</item>
-        <item quantity="few">%s праграмы, гатовыя да ўсталёўкі</item>
-        <item quantity="many">%s праграм, гатовых да ўсталёўкі</item>
-        <item quantity="other">%s праграм, гатовых да ўсталёўкі</item>
-    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Прапушчана %s праграма</item>
         <item quantity="few">Прапушчана %s праграмы</item>

@@ -88,13 +88,13 @@
         <item quantity="many">%s تطبيق جاهز للتعديل</item>
         <item quantity="other">%s تطبيق جاهز للتعديل</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="zero">%s تطبيق جاهز للتثبيت</item>
-        <item quantity="one">%s تطبيق جاهز للتثبيت</item>
-        <item quantity="two">%s تطبيق جاهز للتثبيت</item>
-        <item quantity="few">%s تطبيق جاهز للتثبيت</item>
-        <item quantity="many">%s تطبيق جاهز للتثبيت</item>
-        <item quantity="other">%s تطبيق جاهز للتثبيت</item>
+    <plurals name="repatch_available_count">
+        <item quantity="zero">%s تطبيق يمكن إعادة تعديله</item>
+        <item quantity="one">%s تطبيق يمكن إعادة تعديله</item>
+        <item quantity="two">%s تطبيق يمكن إعادة تعديله</item>
+        <item quantity="few">%s تطبيق يمكن إعادة تعديله</item>
+        <item quantity="many">%s تطبيقات يمكن إعادة تعديلها</item>
+        <item quantity="other">%s تطبيق يمكن إعادة تعديله</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="zero">تم تخطي %s تطبيق</item>
@@ -135,6 +135,14 @@
         <item quantity="few">%s تطبيقات</item>
         <item quantity="many">%s تطبيقات</item>
         <item quantity="other">%s تطبيقات</item>
+    </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="zero">%s تم تحديده</item>
+        <item quantity="one">%s تم تحديده</item>
+        <item quantity="two">%s تم تحديدهما</item>
+        <item quantity="few">%s تم تحديدهم</item>
+        <item quantity="many">%s تم تحديده</item>
+        <item quantity="other">%s تم تحديده</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="zero">تم نسخ %s من التعديلات من الحزمة المحددة</item>

@@ -1,17 +1,18 @@
 package app.morphe.manager.network.service
 
 import android.util.Log
+import app.morphe.manager.network.service.HttpService.Companion.HOST_FAILURE_TTL_MS
+import app.morphe.manager.network.service.HttpService.Companion.INITIAL_RETRY_DELAY_MS
+import app.morphe.manager.network.service.HttpService.Companion.MAX_RETRY_ATTEMPTS
+import app.morphe.manager.network.service.HttpService.Companion.PROGRESS_INTERVAL_MS
+import app.morphe.manager.network.service.HttpService.Companion.PROGRESS_MIN_BYTES
 import app.morphe.manager.network.utils.APIError
 import app.morphe.manager.network.utils.APIFailure
 import app.morphe.manager.network.utils.APIResponse
 import app.morphe.manager.util.tag
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
-import io.ktor.client.request.HttpRequestBuilder
-import io.ktor.client.request.header
-import io.ktor.client.request.prepareGet
-import io.ktor.client.request.request
-import io.ktor.client.request.url
+import io.ktor.client.request.*
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpHeaders
@@ -29,7 +30,6 @@ import java.io.OutputStream
 import java.nio.ByteBuffer
 import java.nio.channels.FileChannel
 import java.nio.file.StandardOpenOption
-import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicLong
 import kotlin.math.abs
 import kotlin.random.Random
@@ -39,7 +39,6 @@ import kotlin.time.Duration.Companion.milliseconds
  * Central HTTP service built on Ktor Client. Handles:
  *  - JSON deserialization via [request]
  *  - Single-connection streaming via [streamTo]
- *  - Simple file download with resume support via [download]
  *  - Multi-threaded parallel download via [downloadToFile]
  *  - Automatic retry on HTTP 429 with Retry-After support via [runWith429Retry]
  *  - Exponential-backoff retry for dropped connections via [runWithRetry]
@@ -147,62 +146,6 @@ class HttpService(
                         }
 
                         else -> throw HttpException(response.status)
-                    }
-                }
-            }
-        } catch (_: TooManyRequestsException) {
-            throw HttpException(HttpStatusCode.TooManyRequests)
-        }
-    }
-
-    /**
-     * Downloads a file to [saveLocation], optionally resuming from [resumeFrom] bytes.
-     *
-     * If the server acknowledges the Range request (HTTP 206), the file is opened in append
-     * mode; otherwise any existing partial file is deleted and re-downloaded from scratch.
-     *
-     * A connection dropped mid-body is retried from the bytes already on disk, so an interrupted
-     * download costs only the remainder rather than the whole file.
-     */
-    suspend fun download(
-        saveLocation: File,
-        resumeFrom: Long = 0,
-        builder: HttpRequestBuilder.() -> Unit
-    ) {
-        var attempt = 0
-        try {
-            runWithRetry("download", host = hostOf(builder)) {
-                // Retries resume from what already landed on disk; the caller only owns the offset
-                // of the first attempt
-                val offset = if (attempt++ == 0) resumeFrom else saveLocation.length()
-
-                runWith429Retry("download") {
-                    http.prepareGet {
-                        if (offset > 0) header(HttpHeaders.Range, "bytes=$offset-")
-                        builder()
-                        Log.i(tag, "HttpService.download: ${url.buildString()}")
-                    }.execute { response ->
-                        when {
-                            response.status == HttpStatusCode.TooManyRequests ->
-                                throw TooManyRequestsException(response.retryAfterMillis())
-
-                            response.status.isSuccess() -> {
-                                val channel: ByteReadChannel = response.body()
-                                // Append only when the server confirmed partial content (HTTP 206)
-                                val append =
-                                    offset > 0 && response.status == HttpStatusCode.PartialContent
-                                if (offset > 0 && !append && saveLocation.exists()) {
-                                    saveLocation.delete()
-                                }
-                                withContext(Dispatchers.IO) {
-                                    FileOutputStream(saveLocation, append).use { out ->
-                                        channel.copyToStream(out)
-                                    }
-                                }
-                            }
-
-                            else -> throw HttpException(response.status)
-                        }
                     }
                 }
             }
@@ -684,7 +627,7 @@ private const val MAX_CAUSE_DEPTH = 10
  * Whether [t] is a dropped connection, timeout or server-side hiccup that another attempt could
  * get past, as opposed to a verdict the server already reached.
  *
- * Retrying what the server decided on purpose is worse than failing: a 404 stays a 404, and a
+ * Retrying what the server decided on purpose is worse than failing: 404 stays a 404, and a
  * rate limit answers its own retry layer, which is why both are excluded here.
  *
  * The cause chain is walked because engine level IO errors reach callers wrapped by Ktor, and

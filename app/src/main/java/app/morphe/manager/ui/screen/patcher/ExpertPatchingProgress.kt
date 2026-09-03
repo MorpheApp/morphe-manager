@@ -349,6 +349,7 @@ fun ExpertPatchingInProgress(
 
                     // Action bar inside left column
                     PatcherBottomActionBar(
+                        horizontalPadding = 0.dp,
                         showCancelButton = patcherSucceeded == null,
                         showHomeButton = patcherSucceeded == true,
                         showInstallButton = patcherSucceeded == true,
@@ -824,7 +825,7 @@ private fun PatcherInfoCard(
 private fun StartBannerCard(item: LogItem.StartBanner) {
     PatcherInfoCard(title = "Patching started", variant = CardVariant.Start) {
         BannerFieldCell(
-            label = "Package",
+            label = stringResource(R.string.patcher_field_package),
             value = item.packageName,
             modifier = Modifier.weight(1f)
         )
@@ -834,11 +835,11 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             BannerFieldCell(
-                label = "App version",
+                label = stringResource(R.string.version),
                 value = item.version,
                 modifier = Modifier.weight(1f))
             BannerFieldCell(
-                label = "APK size",
+                label = stringResource(R.string.home_app_info_apk_size),
                 value = item.apkSizeMb,
                 modifier = Modifier.weight(1f))
         }
@@ -848,21 +849,25 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             BannerFieldCell(
-                label = "Patches",
+                label = stringResource(R.string.patches),
                 value = item.patchCount.toString(),
                 modifier = Modifier.weight(1f))
             BannerFieldCell(
-                label = "Split APK",
-                value = if (item.isSplit) "yes" else "no",
+                label = stringResource(R.string.patcher_field_split),
+                value = stringResource(if (item.isSplit) R.string.yes else R.string.no),
                 modifier = Modifier.weight(1f),
                 valueColor = if (item.isSplit) MaterialTheme.colorScheme.tertiary else null
             )
         }
 
         // A cell per source, so a version always sits under the name it belongs to. Laid out
-        // two per row like everything else, and an odd one keeps its half rather than stretching
+        // two per row like everything else, and an odd one keeps it's half rather than stretching
         if (item.sources.isEmpty()) {
-            BannerFieldCell(label = "Patches version", value = "?", modifier = Modifier.weight(1f))
+            BannerFieldCell(
+                label = stringResource(R.string.patcher_field_source),
+                value = stringResource(R.string.patcher_field_value_unknown),
+                modifier = Modifier.weight(1f)
+            )
         } else {
             item.sources.chunked(2).forEach { pair ->
                 Row(
@@ -891,11 +896,11 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             BannerFieldCell(
-                label = "Manager",
+                label = stringResource(R.string.patcher_field_manager),
                 value = item.managerVersion ?: "?",
                 modifier = Modifier.weight(1f))
             BannerFieldCell(
-                label = "Patcher",
+                label = stringResource(R.string.patcher_field_patcher),
                 value = item.patcherVersion ?: "?",
                 modifier = Modifier.weight(1f))
         }
@@ -907,7 +912,7 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
             // The heap limit only exists for the process runtime, so it rides along with the
             // runtime name rather than taking a cell that is empty half the time
             BannerFieldCell(
-                label = "Runtime",
+                label = stringResource(R.string.patcher_field_runtime),
                 value = item.runtimeMemoryLimitMb
                     ?.let { "Process $it" }
                     ?: "Coroutine",
@@ -916,8 +921,11 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
             )
             item.stripsNativeLibs?.let { strips ->
                 BannerFieldCell(
-                    label = "Native libs",
-                    value = if (strips) "stripped" else "kept",
+                    label = stringResource(R.string.patcher_field_libraries),
+                    value = stringResource(
+                        if (strips) R.string.patcher_field_value_stripped
+                        else R.string.patcher_field_value_kept
+                    ),
                     modifier = Modifier.weight(1f),
                     valueColor = if (strips) MaterialTheme.colorScheme.tertiary else null
                 )
@@ -932,7 +940,7 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
             ) {
                 item.androidVersion?.let {
                     BannerFieldCell(
-                        label = "Android",
+                        label = stringResource(R.string.patcher_field_android),
                         value = it,
                         modifier = Modifier.weight(1f))
                 }
@@ -941,7 +949,7 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
                         listOfNotNull(item.deviceManufacturer, item.deviceModel).joinToString(" ")
                     }
                     BannerFieldCell(
-                        label = "Device",
+                        label = stringResource(R.string.patcher_field_device),
                         value = deviceLabel,
                         modifier = Modifier.weight(1f))
                 }
@@ -953,13 +961,13 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     BannerFieldCell(
-                        label = "RAM free",
+                        label = stringResource(R.string.patcher_field_memory),
                         value = "${item.ramAvailable ?: "?"} / ${item.ramTotal}",
                         modifier = Modifier.weight(1f)
                     )
                     if (item.storageTotal != null) {
                         BannerFieldCell(
-                            label = "Storage free",
+                            label = stringResource(R.string.patcher_field_storage),
                             value = "${item.storageAvailable ?: "?"} / ${item.storageTotal}",
                             modifier = Modifier.weight(1f)
                         )

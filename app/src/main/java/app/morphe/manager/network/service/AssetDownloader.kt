@@ -9,7 +9,6 @@ import android.util.Log
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.network.api.MorpheAPI
 import app.morphe.manager.util.tag
-import io.ktor.client.plugins.onDownload
 import io.ktor.client.request.header
 import io.ktor.client.request.url
 import io.ktor.http.ContentType
@@ -32,50 +31,42 @@ class AssetDownloader(
     private val prefs: PreferencesManager
 ) {
     /**
-     * Downloads [downloadUrl] into [saveLocation], resuming from [resumeFrom] bytes when the
-     * caller already holds part of the file.
+     * Downloads [downloadUrl] into [saveLocation].
+     *
+     * An attempt that does not run to completion leaves nothing behind. The parallel downloader
+     * fills the file at independent offsets, so a partial one is sparse. There is nothing to
+     * resume from, and what stays on disk would pass for a whole file.
      */
     suspend fun downloadToFile(
         downloadUrl: String,
         saveLocation: File,
-        resumeFrom: Long = 0,
         onProgress: ((bytesRead: Long, contentLength: Long?) -> Unit)? = null
     ) {
         try {
-            direct(downloadUrl, saveLocation, resumeFrom, onProgress)
-        } catch (e: Exception) {
-            if (e is CancellationException || !isTransientNetworkError(e)) throw e
+            try {
+                direct(downloadUrl, saveLocation, onProgress)
+            } catch (e: Exception) {
+                if (e is CancellationException || !isTransientNetworkError(e)) throw e
 
-            val signedUrl = resolveThroughApi(downloadUrl) ?: throw e
-            Log.i(tag, "Retrying $downloadUrl through the GitHub API")
-            direct(signedUrl, saveLocation, resumeFrom, onProgress)
+                val signedUrl = resolveThroughApi(downloadUrl) ?: throw e
+                Log.i(tag, "Retrying $downloadUrl through the GitHub API")
+                direct(signedUrl, saveLocation, onProgress)
+            }
+        } catch (error: Throwable) {
+            saveLocation.delete()
+            throw error
         }
     }
 
     private suspend fun direct(
         url: String,
         saveLocation: File,
-        resumeFrom: Long,
         onProgress: ((bytesRead: Long, contentLength: Long?) -> Unit)?
-    ) {
-        if (resumeFrom <= 0L) {
-            http.downloadToFile(
-                saveLocation = saveLocation,
-                builder = { url(url) },
-                onProgress = onProgress
-            )
-            return
-        }
-
-        http.download(saveLocation, resumeFrom) {
-            url(url)
-            onProgress?.let { report ->
-                onDownload { bytesSentTotal, contentLength ->
-                    report(resumeFrom + bytesSentTotal, contentLength?.let { resumeFrom + it })
-                }
-            }
-        }
-    }
+    ) = http.downloadToFile(
+        saveLocation = saveLocation,
+        builder = { url(url) },
+        onProgress = onProgress
+    )
 
     /**
      * Resolves the pre-signed URL serving the same asset, or null when [downloadUrl] is not a

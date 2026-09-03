@@ -44,9 +44,9 @@
         <item quantity="one">%s App bereit zum Patchen</item>
         <item quantity="other">%s Apps bereit zum Patchen</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">%s App ist bereit zur Installation</item>
-        <item quantity="other">%s Apps sind bereit zur Installation</item>
+    <plurals name="repatch_available_count">
+        <item quantity="one">%s App kann erneut gepatcht werden</item>
+        <item quantity="other">%s Apps können erneut gepatcht werden</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">%s App übersprungen</item>
@@ -67,6 +67,10 @@
     <plurals name="home_category_app_count">
         <item quantity="one">%s App</item>
         <item quantity="other">%s Apps</item>
+    </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="one">%s ausgewählt</item>
+        <item quantity="other">%s ausgewählt</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="one">%s Patch von ausgewähltem Paket kopiert</item>

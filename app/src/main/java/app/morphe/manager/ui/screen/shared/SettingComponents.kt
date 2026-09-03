@@ -83,6 +83,9 @@ object Defaults {
     /** Height of a dialog action button. Matches [TallTouchTarget]. */
     val DialogButtonHeight = TallTouchTarget
 
+    /** Width a centered content column stops at, so a bar under one lines up with its cards. */
+    val ContentMaxWidth = 560.dp
+
     val ContentPaddingSmall = 8.dp
     val ContentPadding = 16.dp
     val ContentPaddingMedium = 24.dp

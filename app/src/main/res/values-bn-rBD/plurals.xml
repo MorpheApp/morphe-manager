@@ -44,9 +44,9 @@
         <item quantity="one">%s অ্যাপ প্যাচ করার জন্য প্রস্তুত</item>
         <item quantity="other">%s অ্যাপ প্যাচ করার জন্য প্রস্তুত</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">%s অ্যাপ ইনস্টল করার জন্য প্রস্তুত</item>
-        <item quantity="other">%s অ্যাপ ইনস্টল করার জন্য প্রস্তুত</item>
+    <plurals name="repatch_available_count">
+        <item quantity="one">%s অ্যাপ পুনরায় প্যাচ করা যাবে</item>
+        <item quantity="other">%s অ্যাপগুলো পুনরায় প্যাচ করা যাবে</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">%s অ্যাপ বাদ দেওয়া হয়েছে</item>
@@ -67,6 +67,10 @@
     <plurals name="home_category_app_count">
         <item quantity="one">%s টি অ্যাপ</item>
         <item quantity="other">%s টি অ্যাপস</item>
+    </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="one">%sটি নির্বাচিত</item>
+        <item quantity="other">%sটি নির্বাচিত</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="one">নির্বাচিত বান্ডেল থেকে %s প্যাচ কপি করা হয়েছে</item>

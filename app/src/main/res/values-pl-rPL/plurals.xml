@@ -66,11 +66,11 @@
         <item quantity="many">%s aplikacji gotowych do modyfikacji</item>
         <item quantity="other">%s aplikacji gotowych do modyfikacji</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">%s aplikacja jest gotowa do zainstalowania</item>
-        <item quantity="few">%s aplikacje są gotowe do zainstalowania</item>
-        <item quantity="many">%s aplikacji jest gotowych do zainstalowania</item>
-        <item quantity="other">%s aplikacji jest gotowych do zainstalowania</item>
+    <plurals name="repatch_available_count">
+        <item quantity="one">%s aplikacja może zostać ponownie zmodyfikowana</item>
+        <item quantity="few">%s aplikacje mogą zostać ponownie zmodyfikowane</item>
+        <item quantity="many">%s aplikacji może zostać ponownie zmodyfikowanych</item>
+        <item quantity="other">%s aplikacji może zostać ponownie zmodyfikowanych</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Pominięto %s aplikację</item>
@@ -101,6 +101,12 @@
         <item quantity="few">%s aplikacje</item>
         <item quantity="many">%s aplikacji</item>
         <item quantity="other">%s aplikacji</item>
+    </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="one">%s wybrany</item>
+        <item quantity="few">%s wybrane</item>
+        <item quantity="many">%s wybranych</item>
+        <item quantity="other">%s wybranych</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="one">Skopiowano %s modyfikację z wybranego pakietu</item>

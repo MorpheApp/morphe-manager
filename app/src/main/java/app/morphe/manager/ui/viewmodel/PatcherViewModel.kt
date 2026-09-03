@@ -355,8 +355,12 @@ class PatcherViewModel(
      * Called after patching fails so the dialog opens instantly without an extra async wait.
      */
     suspend fun buildErrorInfo(): PatcherErrorInfo {
+        // Read from what the run started with, since a failed run leaves no output APK to name
         val label = runCatching {
-            pm.getPackageInfo(outputFile)?.let { with(pm) { it.label() } }
+            when (val selected = selectedApp) {
+                is SelectedApp.Local -> pm.getPackageInfo(selected.file)
+                else -> pm.getPackageInfo(packageName)
+            }?.let { with(pm) { it.label() } }
         }.getOrNull()
         val bundles = collectSelectedBundleMetadata().map {
             PatcherErrorInfo.BundleInfo(name = it.name, version = it.version)
@@ -365,7 +369,9 @@ class PatcherViewModel(
             appName = label ?: packageName,
             packageName = packageName,
             appVersion = version ?: "unspecified",
-            bundles = bundles
+            patchCount = patchCount,
+            bundles = bundles,
+            stripsNativeLibs = prefs.stripUnusedNativeLibs.get()
         )
     }
 

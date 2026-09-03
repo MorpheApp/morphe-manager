@@ -164,6 +164,7 @@ private fun AdaptiveProgressContent(
 
                 // Action bar
                 PatcherBottomActionBar(
+                    horizontalPadding = 0.dp,
                     showCancelButton = true,
                     showHomeButton = false,
                     showSaveButton = false,
@@ -360,7 +361,7 @@ private fun CircularProgressWithStats(
             val totalPatchesText = pluralStringResource(
                 R.plurals.patch_count,
                 total,
-                total
+                total.toString()
             )
 
             Text(

@@ -19,10 +19,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.BottomActionBar
 import app.morphe.manager.ui.screen.shared.BottomActionButton
 import app.morphe.manager.ui.screen.shared.BottomActionTone
+import app.morphe.manager.ui.screen.shared.Defaults
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.seconds
@@ -30,10 +32,14 @@ import kotlin.time.Duration.Companion.seconds
 /**
  * Patcher bottom action bar.
  * Left: Cancel Patching | Center: Home | Right: Save / Error button.
+ *
+ * Pass a zero [horizontalPadding] where the bar sits in a column that is inset already, so the
+ * two insets do not stack and the buttons keep the edges of the content above them.
  */
 @Composable
 fun PatcherBottomActionBar(
     modifier: Modifier = Modifier,
+    horizontalPadding: Dp = Defaults.ContentPadding,
 
     // Visibility control
     showCancelButton: Boolean = true,
@@ -79,7 +85,7 @@ fun PatcherBottomActionBar(
         listOf(leadingLabel, homeLabel, trailingLabel).filter { it.isNotEmpty() }
     }
 
-    BottomActionBar(modifier = modifier, labels = labels) {
+    BottomActionBar(modifier = modifier, labels = labels, horizontalPadding = horizontalPadding) {
         // Left: Install / Cancel / Logs button
         if (showInstallButton) {
             BottomActionButton(

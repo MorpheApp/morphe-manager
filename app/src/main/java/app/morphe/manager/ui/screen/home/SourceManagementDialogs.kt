@@ -25,6 +25,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.InsertDriveFile
+import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -36,6 +37,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -46,8 +48,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.APIPatchBundle
-import app.morphe.manager.domain.bundles.JsonPatchBundle
 import app.morphe.manager.domain.bundles.PatchBundleSource
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.usesPrerelease
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.patcher.patch.PatchInfo
@@ -87,22 +89,58 @@ fun AddSourceDialog(
     val localFileValidation = rememberLocalFileValidation(selectedLocalPath)
     val isLocalValid = localFileValidation == FieldValidation.Valid
 
+    val uriHandler = LocalUriHandler.current
+    var showCommunityNotice by rememberSaveable { mutableStateOf(false) }
+
+    if (showCommunityNotice) {
+        ConfirmDialog(
+            title = stringResource(R.string.sources_dialog_community_notice_title),
+            message = stringResource(R.string.sources_dialog_community_notice_message),
+            primaryText = stringResource(R.string.open),
+            isPrimaryDestructive = false,
+            onDismiss = { showCommunityNotice = false },
+            onConfirm = {
+                showCommunityNotice = false
+                uriHandler.openUri(COMMUNITY_PATCHES_URL)
+            }
+        )
+    }
+
     AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.sources_dialog_add_source),
         footer = {
-            AppDialogButtonRow(
-                primaryText = stringResource(R.string.add),
-                onPrimaryClick = {
-                    when (selectedTab) {
-                        0 -> if (isRemoteValid) onRemoteSubmit(normalizeUrl(remoteUrl))
-                        1 -> if (isLocalValid) onLocalSubmit()
+            Column(modifier = Modifier.fillMaxWidth()) {
+                // The website hands out remote URLs, so it has nothing to offer the local tab
+                AnimatedVisibility(
+                    visible = selectedTab == 0,
+                    enter = Animations.expandFadeEnter,
+                    exit = Animations.shrinkFadeExit
+                ) {
+                    Column {
+                        // Nothing that website lists is reviewed by Morphe, so the disclaimer comes first
+                        AppDialogOutlinedButton(
+                            text = stringResource(R.string.sources_dialog_community),
+                            onClick = { showCommunityNotice = true },
+                            icon = Icons.AutoMirrored.Outlined.OpenInNew,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                        Spacer(modifier = Modifier.height(Defaults.ContentPadding / 2))
                     }
-                },
-                primaryEnabled = if (selectedTab == 0) isRemoteValid else isLocalValid,
-                secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = onDismiss
-            )
+                }
+                AppDialogButtonRow(
+                    primaryText = stringResource(R.string.add),
+                    onPrimaryClick = {
+                        when (selectedTab) {
+                            0 -> if (isRemoteValid) onRemoteSubmit(normalizeUrl(remoteUrl))
+                            1 -> if (isLocalValid) onLocalSubmit()
+                        }
+                    },
+                    primaryEnabled = if (selectedTab == 0) isRemoteValid else isLocalValid,
+                    secondaryText = stringResource(android.R.string.cancel),
+                    onSecondaryClick = onDismiss
+                )
+            }
         }
     ) {
         Column(
@@ -919,10 +957,47 @@ private fun PatchVersionBadge(
 }
 
 /**
+ * What a changelog dialog shows: the source it reads, the version "new" is measured from,
+ * and the scopes the entries are narrowed to.
+ */
+data class BundleChangelogRequest(
+    val bundleUid: Int,
+    val sinceVersion: String? = null,
+    val appNames: Set<String> = emptySet()
+)
+
+/**
+ * Hosts [BundleChangelogDialog] for the source a [request] names, so every entry point opens
+ * it the same way. A missing source, deleted under an open dialog included, shows nothing.
+ */
+@Composable
+fun BundleChangelogHost(
+    request: BundleChangelogRequest?,
+    sources: List<PatchBundleSource>,
+    onDismissRequest: () -> Unit
+) {
+    if (request == null) return
+    val bundle = sources.filterIsInstance<RemotePatchBundle>()
+        .find { it.uid == request.bundleUid } ?: return
+
+    // A different request, source version or channel has to start the fetch over
+    key(request, bundle.installedVersionSignature, bundle.usesPrerelease) {
+        BundleChangelogDialog(
+            src = bundle,
+            onDismissRequest = onDismissRequest,
+            sinceVersion = request.sinceVersion,
+            appNames = request.appNames
+        )
+    }
+}
+
+/**
  * Changelog dialog for a bundle.
  *
  * Prerelease channel: entries from the last stable release onwards.
  * Stable: entries newer than the installed version, plus the installed version itself.
+ * A [sinceVersion] replaces both baselines with the caller's own, and [appNames] narrows
+ * every entry to the bullets scoped to one app.
  *
  * Fetched once and cached; cache invalidated on channel switch.
  * Falls back to GitHub Release info if CHANGELOG.md is unavailable.
@@ -930,8 +1005,11 @@ private fun PatchVersionBadge(
 @Composable
 fun BundleChangelogDialog(
     src: RemotePatchBundle,
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
+    sinceVersion: String? = null,
+    appNames: Set<String> = emptySet()
 ) {
+    val generalChangesHeading = stringResource(R.string.changelog_general_changes)
     var state: BundleChangelogState by remember { mutableStateOf(BundleChangelogState.Loading) }
     var olderState: OlderBundleState by remember { mutableStateOf(OlderBundleState.Collapsed) }
     val scope = rememberCoroutineScope()
@@ -943,28 +1021,36 @@ fun BundleChangelogDialog(
         state = BundleChangelogState.Loading
         state = withContext(Dispatchers.Default) {
             try {
-                val usePrerelease = (src as? APIPatchBundle)?.usePrerelease == true
-                        || (src as? JsonPatchBundle)?.usePrerelease == true
+                val usePrerelease = src.usesPrerelease
 
                 val allEntries = src.fetchChangelogEntries(sinceVersion = null)
 
-                val entries = if (usePrerelease) {
-                    // Prerelease: from the last stable release onwards
-                    val lastStable = allEntries.firstOrNull { !it.version.contains("-") }
-                    if (lastStable != null)
-                        ChangelogParser.entriesNewerThan(allEntries, lastStable.version) + lastStable
-                    else allEntries.take(30)
-                } else {
-                    // Stable: from the installed version onwards
-                    val installed = src.installedVersionSignature
-                    val installedEntry = installed?.let {
-                        ChangelogParser.findVersion(allEntries, it)
+                val shownEntries = when {
+                    // A caller's baseline asks what changed since it, not including it
+                    sinceVersion != null ->
+                        ChangelogParser.entriesNewerThan(allEntries, sinceVersion)
+
+                    usePrerelease -> {
+                        // Prerelease: from the last stable release onwards
+                        val lastStable = allEntries.firstOrNull { !it.version.contains("-") }
+                        if (lastStable != null)
+                            ChangelogParser.entriesNewerThan(allEntries, lastStable.version) + lastStable
+                        else allEntries.take(30)
                     }
-                    val newer = if (installed != null)
-                        ChangelogParser.entriesNewerThan(allEntries, installed)
-                    else allEntries
-                    if (installedEntry != null) newer + installedEntry else newer
+
+                    else -> {
+                        // Stable: from the installed version onwards
+                        val installed = src.installedVersionSignature
+                        val installedEntry = installed?.let {
+                            ChangelogParser.findVersion(allEntries, it)
+                        }
+                        val newer = if (installed != null)
+                            ChangelogParser.entriesNewerThan(allEntries, installed)
+                        else allEntries
+                        if (installedEntry != null) newer + installedEntry else newer
+                    }
                 }
+                val entries = ChangelogParser.entriesFor(shownEntries, appNames, generalChangesHeading)
 
                 // APIPatchBundle has endpoint="api" - use SOURCE_REPO_URL directly
                 val repoUrl = when (src) {
@@ -975,7 +1061,7 @@ fun BundleChangelogDialog(
                     repoUrl?.let { releasePageUrl(it, version) }
                 }
 
-                if (entries.isNotEmpty()) {
+                if (entries.isNotEmpty() || appNames.isNotEmpty()) {
                     BundleChangelogState.Entries(
                         entries = entries,
                         parsedMarkdown = preParseChangelogEntries(entries),
@@ -1021,7 +1107,9 @@ fun BundleChangelogDialog(
                         it.version.removePrefix("v").trim() !in shownVersions
                                 && !it.version.contains("-")
                     }
-                    OlderBundleState.Loaded(filtered)
+                    OlderBundleState.Loaded(
+                        ChangelogParser.entriesFor(filtered, appNames, generalChangesHeading)
+                    )
                 }.getOrElse {
                     // Surface failure as collapsed so a retry click re-triggers the fetch
                     OlderBundleState.Collapsed
@@ -1037,7 +1125,10 @@ fun BundleChangelogDialog(
         onEntered = { if (fetchTrigger == 0) fetchTrigger = 1 },
         scrollable = false,
         title = when (state) {
-            is BundleChangelogState.Entries -> null
+            // Entries carry their own headers, so only a list narrowed to one app needs a title
+            is BundleChangelogState.Entries ->
+                appNames.firstOrNull()?.let { stringResource(R.string.changelog_for_app, it) }
+
             is BundleChangelogState.Error -> stringResource(R.string.changelog)
             BundleChangelogState.Loading -> stringResource(R.string.changelog)
         },

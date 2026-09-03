@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -33,6 +34,13 @@ import app.morphe.manager.ui.viewmodel.BundleUpdateStatus
 /** Visibility flag paired with the tap callback for a single [AlertSnackbar] slot. */
 @Immutable
 data class AlertState(val visible: Boolean, val onShow: () -> Unit)
+
+/**
+ * The apps whose patches have moved on, and the tap that queues them. Shown from one app up,
+ * which is also when the cards themselves start showing their update badge.
+ */
+@Immutable
+data class RepatchAlertState(val count: Int, val visible: Boolean, val onShow: () -> Unit)
 
 /** Transient state driving the bundle-update progress snackbar. */
 @Immutable
@@ -50,6 +58,7 @@ data class HomeNotificationsUi(
     val blockedSources: AlertState,
     val metadataErrors: AlertState,
     val meteredSkipped: AlertState,
+    val repatchAvailable: RepatchAlertState,
     val bundleUpdate: BundleUpdateState
 )
 
@@ -120,6 +129,23 @@ fun NotificationsOverlay(
                 title = stringResource(R.string.home_update_available),
                 subtitle = stringResource(R.string.home_update_available_subtitle),
                 onShowDetails = notifications.managerUpdate.onShow,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            // The badges on the cards say the same thing one app at a time. This says it once
+            // and queues every one of them, which is the part that is otherwise several taps
+            AlertSnackbar(
+                visible = notifications.repatchAvailable.visible &&
+                        notifications.repatchAvailable.count > 0,
+                level = AlertLevel.Info,
+                icon = Icons.Outlined.AutoFixHigh,
+                title = pluralStringResource(
+                    R.plurals.repatch_available_count,
+                    notifications.repatchAvailable.count,
+                    notifications.repatchAvailable.count.toString()
+                ),
+                subtitle = stringResource(R.string.home_repatch_available_subtitle),
+                onShowDetails = notifications.repatchAvailable.onShow,
                 modifier = Modifier.fillMaxWidth()
             )
 

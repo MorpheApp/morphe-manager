@@ -19,15 +19,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
+import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.ui.screen.shared.Defaults
 import app.morphe.manager.ui.screen.shared.SettingsDivider
 import app.morphe.manager.ui.screen.shared.SettingsGroup
 import app.morphe.manager.ui.screen.shared.SettingsItem
-import app.morphe.manager.ui.viewmodel.UpdateViewModel
 import app.morphe.manager.util.isolateLtr
 import app.morphe.manager.util.toast
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
-import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
 
 /**
  * About section.
@@ -38,7 +38,7 @@ fun AboutSection(
     onAboutClick: () -> Unit,
     onChangelogClick: () -> Unit,
     onStartTour: (() -> Unit)? = null,
-    updateViewModel: UpdateViewModel = koinViewModel()
+    networkInfo: NetworkInfo = koinInject()
 ) {
     val context = LocalContext.current
     val noNetworkToast = stringResource(R.string.no_network_toast)
@@ -67,7 +67,7 @@ fun AboutSection(
             title = stringResource(R.string.changelog),
             subtitle = stringResource(R.string.changelog_description),
             onClick = {
-                if (!updateViewModel.isConnected) {
+                if (!networkInfo.isConnected()) {
                     context.toast(noNetworkToast)
                     return@SettingsItem
                 }

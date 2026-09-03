@@ -29,12 +29,12 @@
         <item quantity="other">Εγκαταστάθηκαν οι εφαρμογές %s</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
-        <item quantity="one">Επανεγκαταστάθηκε η εφαρμογή %s</item>
-        <item quantity="other">Επανεγκαταστάθηκαν οι εφαρμογές %s</item>
+        <item quantity="one">Επανεγκαταστάθηκε %s εφαρμογή</item>
+        <item quantity="other">Επανεγκαταστάθηκαν %s εφαρμογές</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
-        <item quantity="one">Καταργήθηκε η εφαρμογή %s</item>
-        <item quantity="other">Καταργήθηκαν οι εφαρμογές %s</item>
+        <item quantity="one">Καταργήθηκε %s εφαρμογή</item>
+        <item quantity="other">Καταργήθηκαν %s εφαρμογές</item>
     </plurals>
     <plurals name="batch_uninstall_confirm_title">
         <item quantity="one">Κατάργηση της εφαρμογής %s;</item>
@@ -44,13 +44,13 @@
         <item quantity="one">Η εφαρμογή %s είναι έτοιμη για ενημέρωση</item>
         <item quantity="other">Οι εφαρμογές %s είναι έτοιμες για ενημέρωση</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">Η εφαρμογή %s είναι έτοιμη για εγκατάσταση</item>
-        <item quantity="other">Οι εφαρμογές %s είναι έτοιμες για εγκατάσταση</item>
+    <plurals name="repatch_available_count">
+        <item quantity="one">%s εφαρμογή μπορεί να τροποποιηθεί ξανά</item>
+        <item quantity="other">%s εφαρμογές μπορούν να τροποποιηθούν ξανά</item>
     </plurals>
     <plurals name="batch_skipped_summary">
-        <item quantity="one">Παραλείφθηκε η εφαρμογή %s</item>
-        <item quantity="other">Παραλείφθηκαν οι εφαρμογές %s</item>
+        <item quantity="one">Παραλείφθηκε %s εφαρμογή</item>
+        <item quantity="other">Παραλείφθηκαν %s εφαρμογές</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Αφαιρέθηκε %s παλιά τροποποίηση από την αποθηκευμένη επιλογή</item>
@@ -68,8 +68,12 @@
         <item quantity="one">%s εφαρμογή</item>
         <item quantity="other">%s εφαρμογές</item>
     </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="one">%s επιλεγμένη</item>
+        <item quantity="other">%s επιλεγμένη</item>
+    </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
-        <item quantity="one">Αντιγράφηκε η επιλογή %s από την επιλεγμένη δέσμη</item>
-        <item quantity="other">Αντιγράφηκαν οι επιλογές %s από την επιλεγμένη δέσμη</item>
+        <item quantity="one">Αντιγράφηκε %s επιλογή από την επιλεγμένη δέσμη</item>
+        <item quantity="other">Αντιγράφηκαν %s επιλογές από την επιλεγμένη δέσμη</item>
     </plurals>
 </resources>

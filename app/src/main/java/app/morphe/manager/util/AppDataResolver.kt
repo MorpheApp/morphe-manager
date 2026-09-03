@@ -6,9 +6,11 @@
 package app.morphe.manager.util
 
 import android.content.Context
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
+import androidx.core.content.res.ResourcesCompat
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
@@ -195,30 +197,9 @@ class AppDataResolver(
     private suspend fun tryGetFromOriginalApk(packageName: String): ResolvedAppData? {
         return try {
             val originalApk = originalApkRepository.get(packageName) ?: return null
-            val file = File(originalApk.filePath)
-            if (!file.exists()) return null
+            val file = File(originalApk.filePath).takeIf { it.exists() } ?: return null
 
-            val packageInfo = packageManager.getPackageArchiveInfo(
-                file.absolutePath,
-                PackageManager.GET_META_DATA
-            ) ?: return null
-
-            // Set source paths so we can load icon
-            packageInfo.applicationInfo?.apply {
-                sourceDir = file.absolutePath
-                publicSourceDir = file.absolutePath
-            }
-
-            val appInfo = packageInfo.applicationInfo
-            ResolvedAppData(
-                packageName = packageName,
-                displayName = appInfo?.loadLabel(packageManager)?.toString()
-                    ?: packageName,
-                version = originalApk.version,
-                icon = appInfo?.loadIcon(packageManager),
-                packageInfo = packageInfo,
-                source = AppDataSource.ORIGINAL_APK
-            )
+            readApkArchive(packageName, file, originalApk.version, AppDataSource.ORIGINAL_APK)
         } catch (_: Exception) {
             null
         }
@@ -236,8 +217,7 @@ class AppDataResolver(
         return try {
             val installedApp = installedAppRepository.get(packageName)
                 ?: installedAppRepository.getAll().first()
-                    .filter { it.originalPackageName == packageName }
-                    .singleOrNull()
+                    .singleOrNull { it.originalPackageName == packageName }
                 ?: return null
 
             // Get saved APK file from filesystem - try both current and original package names
@@ -246,31 +226,51 @@ class AppDataResolver(
                 filesystem.getPatchedAppFile(installedApp.originalPackageName, installedApp.version)
             ).distinct().firstOrNull { it.exists() } ?: return null
 
-            val packageInfo = packageManager.getPackageArchiveInfo(
-                savedFile.absolutePath,
-                PackageManager.GET_META_DATA
-            ) ?: return null
-
-            // Set source paths so we can load icon
-            packageInfo.applicationInfo?.apply {
-                sourceDir = savedFile.absolutePath
-                publicSourceDir = savedFile.absolutePath
-            }
-
-            val appInfo = packageInfo.applicationInfo
-            ResolvedAppData(
-                packageName = packageName,
-                displayName = appInfo?.loadLabel(packageManager)?.toString()
-                    ?: packageName,
-                version = installedApp.version,
-                icon = appInfo?.loadIcon(packageManager),
-                packageInfo = packageInfo,
-                source = AppDataSource.PATCHED_APK
-            )
+            readApkArchive(packageName, savedFile, installedApp.version, AppDataSource.PATCHED_APK)
         } catch (_: Exception) {
             null
         }
     }
+
+    /** Reads an APK on disk as an app data source, or null when it cannot be parsed. */
+    private fun readApkArchive(
+        packageName: String,
+        file: File,
+        version: String?,
+        source: AppDataSource
+    ): ResolvedAppData? {
+        val packageInfo = packageManager.getPackageArchiveInfo(
+            file.absolutePath,
+            PackageManager.GET_META_DATA
+        ) ?: return null
+
+        // Set source paths so we can load icon
+        val appInfo = packageInfo.applicationInfo?.apply {
+            sourceDir = file.absolutePath
+            publicSourceDir = file.absolutePath
+        }
+
+        return ResolvedAppData(
+            packageName = packageName,
+            displayName = appInfo?.loadLabel(packageManager)?.toString() ?: packageName,
+            version = version,
+            icon = appInfo?.let(::archiveIcon),
+            packageInfo = packageInfo,
+            source = source
+        )
+    }
+
+    /**
+     * Icon read from the archive's own resources: the cache behind [ApplicationInfo.loadIcon] is
+     * keyed by package name and icon resource id alone, so a saved APK would otherwise serve its
+     * icon to the installed app of the same name for the rest of the process, and the other way
+     * round. Falls back the way [ApplicationInfo.loadIcon] does.
+     */
+    private fun archiveIcon(appInfo: ApplicationInfo): Drawable =
+        runCatching {
+            val resources = packageManager.getResourcesForApplication(appInfo)
+            appInfo.icon.takeIf { it != 0 }?.let { ResourcesCompat.getDrawable(resources, it, null) }
+        }.getOrNull() ?: packageManager.defaultActivityIcon
 
     /**
      * Try to get app display name from patch bundle metadata.

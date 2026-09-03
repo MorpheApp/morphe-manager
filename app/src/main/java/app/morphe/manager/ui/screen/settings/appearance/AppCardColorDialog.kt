@@ -280,7 +280,6 @@ private fun AppCardColorPreview(colors: List<Color>?) {
     CompositionLocalProvider(LocalAppCardColorResolver provides resolver) {
         AppCardLayout(
             gradientColors = AppCardColorDefaults.defaultGradientColors,
-            enabled = true,
             onClick = {}
         ) {
             AppCardContent(

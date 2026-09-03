@@ -53,6 +53,8 @@
     <string name="home_app_sort_name_desc_description">Alfabetîkî bi paşve, Z heta A</string>
     <string name="home_app_sort_updates_first">Pêşîn nûvekirinên patchê</string>
     <string name="home_app_sort_updates_first_description">Serlêdanên bi nîşanên nûvekirinê pêşîn, paşê rêza pêşnîgar kirî</string>
+    <string name="home_app_sort_recently_patched">Nû patchkirî</string>
+    <string name="home_app_sort_recently_patched_description">Sepanên herî nû patchkirî pêşî</string>
     <string name="home_no_apps_title">Bername nîn in.</string>
     <string name="home_no_apps_subtitle">Çavkanîyê zêde bike an yek jibo %s veşêre.</string>
     <string name="home_no_apps_search_subtitle">Tu din li gor \'%s\' hene</string>
@@ -124,11 +126,14 @@
     <string name="sources_sort_enabled_first">Pêşîn çalak</string>
     <string name="sources_sort_enabled_first_description">Nîşana çavkaniyên çalak berê, paşê çavkaniyên neçalak</string>
     <string name="sources_management_open_in_browser">Di ragirinê de vebêje</string>
+    <string name="sources_management_report_issue">Pirsgirêkek rapor bike</string>
     <string name="sources_management_failed_to_open_url">Serokê URL nefirote</string>
     <string name="sources_management_prerelease_toggle">Patch-ên pêş-bernameyê</string>
     <string name="sources_management_prerelease_toggle_description">Bi destê pêşîn bigihîje guhertoyên nû yên ceribandinê</string>
+    <string name="sources_prerelease_warning_title">Patchên pêş-berdanê çalak bike?</string>
+    <string name="sources_prerelease_warning_message">Nusxeyên pêş-berdanê hê jî di pêşveçûnê de ne. Patch dibe ku têk biçin an sepanê bişkînin, û taybetmendî dikarin bê hişyarî biguherin.</string>
+    <string name="expert_mode_prerelease_notice">Ev çavkanî li ser patchên pêş-berdanê ye. Patchkirin dibe ku têk biçe an bi awayekî neçaverêkirî tevbigere.</string>
     <string name="sources_management_experimental_versions_toggle">Werzîyonên sepanê yên eksperîmental</string>
-    <string name="sources_management_experimental_versions_toggle_description">Daxwazên sepanê yên ceribandinê yên hewce ne heger hebin</string>
     <string name="sources_management_already_exists">Evîn pêştirîye, berê zêdekirine.</string>
     <string name="sources_management_invalid_url">URL-a çavkaniyê nebaş e. Ji kerema xwe navnîşanê kontrol bikin û dîsa biceribîn</string>
     <string name="sources_management_blocked">Çavkaniya vê pelikê blok kirî ye û nikare were zêdekirin</string>
@@ -162,6 +167,12 @@
     <string name="sources_dialog_url_invalid">URL gihub/gitlab depoyê an pelê .json\'yê nîşan bide</string>
     <string name="sources_dialog_local_change_file">Guherîne dosya</string>
     <string name="sources_dialog_preinstalled">Destekî çêkirî</string>
+    <string name="sources_dialog_community">Patchên civakê</string>
+    <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
+    <string name="sources_dialog_community_notice_title">Çavkaniyên patch ên partiya sêyem</string>
+    <string name="sources_dialog_community_notice_message">"Çavkaniyên patch ên civakê ji aliyê nivîskarên xwe ve têne çêkirin û têne parastin. Morphe patchên partiya sêyem nirx nake û verast nake, û ji naveroka wan an ji tiştê ku ew li ser cîhaza we dikin berpirsiyar nabe.
+
+Her tiştê ku hûn ji vê malperê zêde dikin bi xetereya we tê bikaranîn."</string>
     <string name="sources_update_success">Nûvekirin serketî</string>
     <string name="sources_update_unavailable">Nûvekirin peyda nebûye</string>
     <string name="sources_download_fail">Nêzîk davêtin: %s</string>
@@ -251,6 +262,8 @@
     <string name="expert_mode_enable_all">Hemû çêbakîne</string>
     <string name="expert_mode_enable_all_done">Hemû pelikên guherînê aktîv hatin kirin</string>
     <string name="expert_mode_enable_all_universal_pending">Dîsa bikirtîne ji bo pêçekên gerdûnî</string>
+    <string name="expert_mode_universal_all_warning_title">Hemû patchên gerdûnî çalak bike?</string>
+    <string name="expert_mode_universal_all_warning_message">Patchên gerdûnî bi hev re nehatine ceribandin. Çalakkirina hemûyan bi carekê dikare bibe sedema nakokî, patchkirina têkçûyî, an jî hilweşînan.</string>
     <string name="expert_mode_reset_to_default">Pêşdixeşinên pêşniyar kirî çêbêje</string>
     <string name="expert_mode_reset_to_default_done">Pelîkên ku hatine pêşniyar kirin hatin çêkirin</string>
     <string name="expert_mode_restore_saved">Şêvikî serdest vegerîne</string>
@@ -260,6 +273,7 @@
     <string name="expert_mode_no_results">Paqejiyê ne hebin</string>
     <string name="expert_mode_universal_patches">Pêtên hevpar.</string>
     <string name="expert_mode_new_patches">Nû</string>
+    <string name="expert_mode_options_customized">xweserkirî</string>
     <string name="expert_mode_patch_required_by_installer">Ji bo hedefê ku hatî hilbijartîn hewce ye</string>
     <string name="expert_mode_patch_unavailable_for_installer">Ji bo hedefê ku hatî hilbijartîn peyda nabe</string>
     <string name="expert_mode_multiple_sources_warning_title">Berî çend seyarên bejna tê</string>
@@ -435,7 +449,11 @@ Herêma derveyî (qutkirî): dikare ji aliyê maskeya launcher'ê ve were qutkir
     <string name="patcher_error_copied">Xetalî bi mêjiyê kopî kirin</string>
     <string name="patcher_error_log">Log xistina</string>
     <string name="patcher_error_technical">Agahî teknîk</string>
-    <string name="patcher_error_dialog_app_info">Agahdariya sepanê</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <!-- Free and total RAM of the device, never its storage -->
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_tab_logs">Tovêrên patcherê</string>
     <string name="patcher_tab_game">Lîstik</string>
     <string name="patcher_logs_waiting">Li bendê ne ku derketina logê bê nivîsîn…</string>
@@ -446,7 +464,6 @@ Herêma derveyî (qutkirî): dikare ji aliyê maskeya launcher'ê ve were qutkir
     <string name="patcher_success_subtitle">Sepîka we tê saxkirin û saz bike!</string>
     <string name="patcher_complete_title">Patchkirin temam bû! ✨</string>
     <string name="patcher_failed_title">Ooops! Tiştek çêû.</string>
-    <string name="patcher_failed_subtitle">Hêsanî xetalî di binê vê de binêre</string>
     <string name="patcher_failed_dialog_title">Patchkirin têk çû</string>
     <string name="patcher_unknown_error">Xetalî nenas çê bû</string>
     <string name="patcher_split_step_extracting">Derxistina APKyên parvekirî</string>
@@ -653,8 +670,14 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Nûvekirin</string>
     <string name="settings_advanced_patcher">Patchker</string>
-    <string name="settings_advanced_updates_use_prereleases">Nûvekirinên berî berhemkirinê</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Têkevinî pêşî li gorî nûvekirinên nû yên Morphe. Çavkaniyan li gorî nûvekirinê hilbijêrin</string>
+    <string name="settings_advanced_updates_manager_prereleases">Nûvekirinên pêş-weşanê</string>
+    <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
+    <string name="settings_advanced_updates_manager_prereleases_description">Gihîştina zû ya guhertoyên nû yên Morphe</string>
+    <string name="settings_advanced_updates_prerelease_warning_title">Nûvekirinên pêş-weşanê çalak bike?</string>
+    <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
+    <string name="settings_advanced_updates_prerelease_warning_message">"Guhertoyên pêş-weşanê yên Morphe hê jî di pêşxistinê de ne û dibe ku ne aram bin.
+
+Patch ne bandor in: ji bo her çavkaniyê di lîsteya çavkaniyên patch de patchên pêş-weşanê çalak bike."</string>
     <string name="settings_advanced_updates_allow_metered">Nûvekirinên daneya mobîl</string>
     <string name="settings_advanced_updates_allow_metered_description">Destûrê dide Morphe\'yê u nûvekirinên qeyikan da ku li ser danebîna mobîlê biçin</string>
     <string name="settings_advanced_updates_background_notifications">Ragahdaniyên nûvekirina paşînê</string>
@@ -668,14 +691,6 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <string name="settings_advanced_update_interval_monthly">Her meh</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Rêjeya kontrolê paşîn</string>
     <string name="settings_advanced_update_interval_battery_warning">Kontrolên paşîn dibin sedem ku hin alavkêm nekar in. Hilberîneran weke Xiaomi, Huawei, Samsung, û OnePlus gelek caran pêvajeyên paşîn ji bo parastina bataryayê asteng dikin.</string>
-    <string name="settings_advanced_auto_patch">Patchkirina dîsa otomatîk</string>
-    <string name="settings_advanced_auto_patch_description">Sepayên saz kirî piştî ku patchan diguhere di paşnavê de dîsa patch dike. Tenê sepanên ku rêgezî APKek hatî tomar kirin, têne girtin</string>
-    <string name="settings_advanced_auto_patch_interval">Frekansiya dîsa patchkirinê</string>
-    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Çewtî sepayên patchkirî têne nûkirin</string>
-    <string name="settings_advanced_auto_patch_charging">Tenê dema ku tê barkirin</string>
-    <string name="settings_advanced_auto_patch_charging_description">Patchkirin li ser CPU û bîranê giran e, ji ber vê yekê ew li bendî barkirinê dimîne</string>
-    <string name="settings_advanced_auto_patch_install">Otomatîk saz bike</string>
-    <string name="settings_advanced_auto_patch_install_description">Divê Shizuku wek sazker be. Bi her sazkerê din tenê sepanên patchkirî hatine tomar kirin</string>
     <string name="settings_advanced_external_batch_patch">Têkirina ji derve bidê dest</string>
     <string name="settings_advanced_external_batch_patch_description">Dê sepanên otomatîk bidê dest bi patchkirina batchê bi niyetek. Her daxwazê berî her tiştê tê pejirandin</string>
     <string name="external_batch_patch_title">Dest bi patchkirina batchê bike?</string>
@@ -683,13 +698,6 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <string name="external_batch_patch_trust_caller">Her gav bidê vê sepayê</string>
     <string name="external_batch_patch_unknown_caller">Sepeyek nenas</string>
     <!-- Notification content -->
-    <string name="notification_auto_patch_title">Patchkirina dîsa otomatîk qedî bû</string>
-    <string name="notification_auto_patch_running_title">Sepayên patchkirinê</string>
-    <string name="notification_auto_patch_blocked_title">Patchkirina dîsa otomatîk neçû</string>
-    <string name="notification_auto_patch_blocked_battery">Sîstem nedikare patchkirinê dest pê bike. Li ser Xiaomi û cîhazên mîna wê, \"Sazkirin bi USB\" di vebijarkên pêşkeftî de vekin. Li ser profîlek kar, saz kirin dikare bi polîtîkayê were sînordar kirin</string>
-    <string name="notification_auto_patch_blocked_foreground">Android nedikare dest pê kirina patchkirinê di paşnavê de bidê dest. Morphe veke û ji sepanê de patch bike</string>
-    <string name="notification_channel_auto_patch">Patchkirina dîsa otomatîk</string>
-    <string name="notification_channel_auto_patch_description">Agahiyên pêşkeftinê bê deng ên ji bo patchkirina dîsa otomatîk</string>
     <string name="notification_manager_update_title">Nûvekirina Morphe heye</string>
     <string name="notification_bundle_update_title">Patchên nû hene</string>
     <string name="notification_update_text">Versiyona %s amade ye ku dakêşin.</string>
@@ -1171,13 +1179,13 @@ Detay: %2$s"</string>
     <string name="install_update_manager_failed">Sazkirina nûvekirinê serket</string>
     <string name="installing_manager_update">Sazkirina nûvekirinê…</string>
     <string name="downloading_manager_update">Bar kirina nûvekirinê…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB hat dakêşkirin</string>
     <string name="manager_update_not_ready">Ev weşan hîn tê weşandin. Çend hûrdan piştî din bicirêbin</string>
+    <string name="update_download_missing">Nûvekirina dakêşandî êdî ne berdest e. Dîsa dakêşin.</string>
     <string name="download_manager_failed">Bar kirina nûvekirinê serket: %s</string>
     <string name="failed_to_check_updates">Serketina kontrolkirina nûvekirinê: %s</string>
     <string name="failed_to_download_update">Bar kirina nûvekirinê serket: %s</string>
-    <string name="resume_download">Downloadê vegerîne</string>
     <string name="download_confirmation_metered">"Hûn niha bi komek xercxwedanê ve girêdayî ne, û xeberçewaniya xebatkarê xizmetê we bi navê we kontrol bike. 
 
 Ma hûn hê jî dixwazin dom bikevin?"</string>

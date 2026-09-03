@@ -33,8 +33,8 @@
     <plurals name="batch_patch_ready_count">
         <item quantity="other">%s 個應用程式已準備好進行修補</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="other">%s 個應用程式已準備好安裝</item>
+    <plurals name="repatch_available_count">
+        <item quantity="other">有 %s 個應用程式可以重新修補</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="other">已跳過 %s 個應用程式</item>
@@ -50,6 +50,9 @@
     </plurals>
     <plurals name="home_category_app_count">
         <item quantity="other">%s 個應用程式</item>
+    </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="other">已選取 %s 個項目</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="other">已從選取套件複製 %s 個修補程式</item>

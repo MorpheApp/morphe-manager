@@ -66,11 +66,11 @@
         <item quantity="many">%s приложений готовы к установке</item>
         <item quantity="other">%s приложений готовы к установке</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">%s приложение готово к установке</item>
-        <item quantity="few">%s приложения готовы к установке</item>
-        <item quantity="many">%s приложений готовы к установке</item>
-        <item quantity="other">%s приложений готовы к установке</item>
+    <plurals name="repatch_available_count">
+        <item quantity="one">%s приложение можно перепатчить</item>
+        <item quantity="few">%s приложения можно перепатчить</item>
+        <item quantity="many">%s приложений можно перепатчить</item>
+        <item quantity="other">%s приложений можно перепатчить</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Пропущено %s приложений</item>
@@ -101,6 +101,12 @@
         <item quantity="few">%s приложения</item>
         <item quantity="many">%s приложений</item>
         <item quantity="other">%s приложений</item>
+    </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="one">%s выбран</item>
+        <item quantity="few">%s выбрано</item>
+        <item quantity="many">%s выбрано</item>
+        <item quantity="other">%s выбрано</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="one">Скопирован %s патч из выбранного набора</item>

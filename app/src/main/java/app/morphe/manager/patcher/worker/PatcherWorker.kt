@@ -1,7 +1,6 @@
 package app.morphe.manager.patcher.worker
 
 import android.annotation.SuppressLint
-import android.app.ActivityManager
 import android.app.Notification
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -11,7 +10,6 @@ import android.content.pm.ServiceInfo
 import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.PowerManager
-import android.os.StatFs
 import android.util.Log
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
@@ -135,7 +133,6 @@ class PatcherWorker(
             .setSmallIcon(Icon.createWithResource(applicationContext, R.drawable.ic_notification))
             .setContentIntent(pendingIntent)
             .setCategory(Notification.CATEGORY_SERVICE)
-            .setGroup(UpdateNotificationManager.GROUP_PATCHING)
             .setOngoing(true)
             .build()
     }
@@ -333,11 +330,7 @@ class PatcherWorker(
             val selectedCount = args.selectedPatches.values.sumOf { it.size }
 
             // Log device environment for diagnostics
-            val memInfo = ActivityManager.MemoryInfo().also {
-                (applicationContext.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager)
-                    .getMemoryInfo(it)
-            }
-            val statFs = StatFs(applicationContext.filesDir.absolutePath)
+            val deviceStats = applicationContext.deviceStats()
 
             // What this build of Morphe brings to the run. Every bug report needs the versions,
             // and native lib stripping silently changes what ends up in the output APK.
@@ -353,10 +346,10 @@ class PatcherWorker(
                 "$LOG_WORKER_PREFIX_DEVICE " +
                         "$LOG_WORKER_FIELD_ANDROID=${Build.VERSION.RELEASE} " +
                         "$LOG_WORKER_FIELD_API=${Build.VERSION.SDK_INT} " +
-                        "$LOG_WORKER_FIELD_RAM_AVAIL=\"${formatBytes(memInfo.availMem)}\" " +
-                        "$LOG_WORKER_FIELD_RAM_TOTAL=\"${formatBytes(memInfo.totalMem)}\" " +
-                        "$LOG_WORKER_FIELD_STORAGE_AVAIL=\"${formatBytes(statFs.availableBytes)}\" " +
-                        "$LOG_WORKER_FIELD_STORAGE_TOTAL=\"${formatBytes(statFs.totalBytes)}\""
+                        "$LOG_WORKER_FIELD_RAM_AVAIL=\"${formatBytes(deviceStats?.ramAvailable ?: 0L)}\" " +
+                        "$LOG_WORKER_FIELD_RAM_TOTAL=\"${formatBytes(deviceStats?.ramTotal ?: 0L)}\" " +
+                        "$LOG_WORKER_FIELD_STORAGE_AVAIL=\"${formatBytes(deviceStats?.storageAvailable ?: 0L)}\" " +
+                        "$LOG_WORKER_FIELD_STORAGE_TOTAL=\"${formatBytes(deviceStats?.storageTotal ?: 0L)}\""
             )
 
             args.logger.info(

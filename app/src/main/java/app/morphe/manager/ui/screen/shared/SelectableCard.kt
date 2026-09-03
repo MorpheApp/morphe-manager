@@ -29,6 +29,9 @@ import androidx.compose.ui.unit.dp
  * Wraps [content] with the shared selection affordances used by the home app grid and the
  * saved-APK dialog: an animated check badge in the top-right corner when [isSelected] is true,
  * and a dim overlay when [isSelectionMode] is active but this card is not selected.
+ *
+ * @param showCheckmark Whether the check badge may show. A card that puts a control of its own
+ *   in that corner turns it off and is left with the dim overlay to tell the selection apart.
  */
 @Composable
 fun SelectableCard(
@@ -36,6 +39,7 @@ fun SelectableCard(
     isSelected: Boolean,
     isSelectionMode: Boolean,
     checkmarkContentDescription: String? = null,
+    showCheckmark: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val checkScale by animateFloatAsState(
@@ -58,7 +62,7 @@ fun SelectableCard(
         }
 
         // Animated checkmark badge - top-right corner
-        if (checkScale > 0f) {
+        if (showCheckmark && checkScale > 0f) {
             Box(
                 modifier = Modifier
                     .align(Alignment.TopEnd)

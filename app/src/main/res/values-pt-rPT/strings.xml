@@ -2,6 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Outras aplicações</string>
+    <string name="home_other_apps_action">Selecionar outros aplicativos</string>
     <string name="home_not_patched_yet">Ainda não foi modificado</string>
     <string name="home_unpatched_version_installed">Versão não corrigida instalada</string>
     <string name="home_unpatched_badge">Não modificado</string>
@@ -28,6 +29,7 @@
     <string name="home_outdated_manager_subtitle">Algumas fontes de patch precisam de uma versão mais recente</string>
     <string name="home_metered_skipped_title">Atualizações pausadas em dados móveis</string>
     <string name="home_metered_skipped_subtitle">Toque para permitir atualizações usando dados móveis</string>
+    <string name="home_repatch_available_subtitle">Toque para enfileirar todos eles</string>
     <string name="home_update_error">Atualização falhou</string>
     <string name="home_update_error_subtitle">Algo deu errado ao atualizar as fontes</string>
     <string name="home_update_skipped_metered">Atualizações ignoradas</string>
@@ -53,6 +55,8 @@
     <string name="home_app_sort_name_desc_description">Ordem alfabética inversa, de Z a A</string>
     <string name="home_app_sort_updates_first">Atualizações de patch primeiro</string>
     <string name="home_app_sort_updates_first_description">Aplicativos com emblemas de atualização primeiro, depois na ordem recomendada</string>
+    <string name="home_app_sort_recently_patched">Corrigido recentemente</string>
+    <string name="home_app_sort_recently_patched_description">Aplicativos corrigidos mais recentemente primeiro</string>
     <string name="home_no_apps_title">Nenhuma aplicação disponível</string>
     <string name="home_no_apps_subtitle">Adiciona uma fonte de modificações ou ativa uma já existente em %s</string>
     <string name="home_no_apps_search_subtitle">Nenhuma aplicação corresponde a \"%s\"</string>
@@ -124,11 +128,15 @@
     <string name="sources_sort_enabled_first">Habilitados primeiro</string>
     <string name="sources_sort_enabled_first_description">Mostrar fontes ativas antes das desabilitadas</string>
     <string name="sources_management_open_in_browser">Abrir links no navegador</string>
+    <string name="sources_management_report_issue">Relatar um problema</string>
     <string name="sources_management_failed_to_open_url">Erro ao abrir URL</string>
     <string name="sources_management_prerelease_toggle">Modificações pré-lançamento</string>
     <string name="sources_management_prerelease_toggle_description">Recebe acesso antecipado às novas versões experimentais de modificações</string>
+    <string name="sources_prerelease_warning_title">Ativar correções de pré-lançamento?</string>
+    <string name="sources_prerelease_warning_message">As versões de pré-lançamento ainda estão em desenvolvimento. As correções podem falhar ou quebrar o aplicativo, e os recursos podem mudar sem aviso prévio.</string>
+    <string name="expert_mode_prerelease_notice">Esta fonte está em correções de pré-lançamento. A correção pode falhar ou se comportar inesperadamente.</string>
     <string name="sources_management_experimental_versions_toggle">Versões experimentais da aplicação</string>
-    <string name="sources_management_experimental_versions_toggle_description">Aplicar modificações em versões experimentais das aplicações, se disponíveis</string>
+    <string name="sources_management_experimental_versions_toggle_description">Mostra e aplica patches em alvos de aplicativos experimentais</string>
     <string name="sources_management_already_exists">Esta fonte já foi adicionada</string>
     <string name="sources_management_invalid_url">URL de origem inválida. Verifique o endereço e tente novamente</string>
     <string name="sources_management_blocked">Esta fonte de atualização está bloqueada e não pode ser adicionada</string>
@@ -162,6 +170,12 @@
     <string name="sources_dialog_url_invalid">O URL deve apontar para um repositório do GitHub/GitLab ou ficheiro .json</string>
     <string name="sources_dialog_local_change_file">Alterar ficheiro</string>
     <string name="sources_dialog_preinstalled">Pré-instalado</string>
+    <string name="sources_dialog_community">Patches da comunidade</string>
+    <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
+    <string name="sources_dialog_community_notice_title">Fontes de patches de terceiros</string>
+    <string name="sources_dialog_community_notice_message">"Community patch sources are made and maintained by their own authors. Morphe does not review or verify third-party patches, and is not responsible for their content or for what they do on your device.
+
+Anything you add from this website is used at your own risk"</string>
     <string name="sources_update_success">Atualização bem-sucedida</string>
     <string name="sources_update_unavailable">Não há atualizações disponíveis</string>
     <string name="sources_download_fail">Erro ao descarregar fontes: %s</string>
@@ -192,6 +206,7 @@
     <string name="home_apk_helper_installed_incompatible">A versão instalada não pode ser modificada</string>
     <string name="home_apk_use_saved">Usar APK salvo</string>
     <string name="home_apk_use_installed">Usar APK instalado</string>
+    <string name="home_apk_use_saved_unsupported">Os patches não suportam esta cópia salva. Aplicar o patch nela pedirá que você confirme, ou escolha outro APK</string>
     <string name="home_apk_use_installed_unverified">Não foi possível verificar a assinatura do aplicativo instalado, portanto, ele pode já estar modificado</string>
     <string name="home_unverified">Não verificado</string>
     <string name="home_install_verification_pending">Verificando instalação…</string>
@@ -251,6 +266,8 @@
     <string name="expert_mode_enable_all">Ativar todas</string>
     <string name="expert_mode_enable_all_done">Todas as modificações atividades</string>
     <string name="expert_mode_enable_all_universal_pending">Toque novamente para patches universais</string>
+    <string name="expert_mode_universal_all_warning_title">Ativar todas as correções universais?</string>
+    <string name="expert_mode_universal_all_warning_message">As correções universais não são testadas em conjunto. Ativar todas de uma vez pode causar conflitos, falhas de correção ou travamentos.</string>
     <string name="expert_mode_reset_to_default">Ativar modificações recomendadas</string>
     <string name="expert_mode_reset_to_default_done">Modificações recomendadas aplicadas</string>
     <string name="expert_mode_restore_saved">Restaurar seleção guardada</string>
@@ -258,8 +275,11 @@
     <string name="expert_mode_copy_from_bundle">Copiar seleção de outro pacote</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Nenhum patch correspondente neste pacote</string>
     <string name="expert_mode_no_results">Nenhuma modificação encontrada</string>
+    <string name="expert_mode_selected_only_on">Mostrando apenas patches selecionados</string>
+    <string name="expert_mode_selected_only_off">Mostrando todos os patches</string>
     <string name="expert_mode_universal_patches">Modificações universais</string>
     <string name="expert_mode_new_patches">Novo</string>
+    <string name="expert_mode_options_customized">Personalizado</string>
     <string name="expert_mode_patch_required_by_installer">Necessário para o alvo de instalação selecionado</string>
     <string name="expert_mode_patch_unavailable_for_installer">Não disponível para o alvo de instalação selecionado</string>
     <string name="expert_mode_multiple_sources_warning_title">Várias fontes de modificações selecionadas</string>
@@ -437,7 +457,27 @@ Zona externa (tracejada): pode ser cortada pela máscara do iniciador - mantenha
     <string name="patcher_error_copied">Erro copiado para a área de transferência</string>
     <string name="patcher_error_log">Log de erros</string>
     <string name="patcher_error_technical">Detalhes técnicos</string>
-    <string name="patcher_error_dialog_app_info">Informações da aplicação</string>
+    <string name="patcher_error_dialog_diagnostics">Diagnósticos</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">Aplicativo</string>
+    <string name="patcher_field_package">Pacote</string>
+    <string name="patcher_field_source">Fonte</string>
+    <string name="patcher_field_split">APK dividido</string>
+    <string name="patcher_field_manager">Gerenciador</string>
+    <string name="patcher_field_patcher">Patcher</string>
+    <string name="patcher_field_runtime">Runtime</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Bibliotecas</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Dispositivo</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Memória</string>
+    <string name="patcher_field_storage">Armazenamento</string>
+    <string name="patcher_field_value_unknown">desconhecido</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">removidas</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">mantidas</string>
     <string name="patcher_tab_logs">Logs do Patcher</string>
     <string name="patcher_tab_game">Jogos</string>
     <string name="patcher_logs_waiting">Aguardando saída do log…</string>
@@ -448,7 +488,7 @@ Zona externa (tracejada): pode ser cortada pela máscara do iniciador - mantenha
     <string name="patcher_success_subtitle">A tua aplicação foi modificada e instalada!</string>
     <string name="patcher_complete_title">Modificação Concluída! ✨</string>
     <string name="patcher_failed_title">Ups! Algo correu mal</string>
-    <string name="patcher_failed_subtitle">Verifica os detalhes do erro em baixo</string>
+    <string name="patcher_failed_hint">Toque em %s para ver o que deu errado</string>
     <string name="patcher_failed_dialog_title">Erro ao aplicar modificações</string>
     <string name="patcher_unknown_error">Ocorreu um erro desconhecido</string>
     <string name="patcher_split_step_extracting">Extraindo APKs divididos</string>
@@ -624,6 +664,8 @@ Desinstalar apagará permanentemente todos os dados do aplicativo."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Mostrar uma mensagem de boas-vindas no ecrã principal</string>
     <string name="settings_appearance_app_grouping">Agrupamento de aplicativos</string>
     <string name="settings_appearance_app_grouping_description">Mostrar um seletor de tela inicial para agrupar aplicativos por origem ou suas próprias categorias, mantendo a seleção quando desativado</string>
+    <string name="settings_appearance_repatch_notice">Aviso de reaplicação de patch</string>
+    <string name="settings_appearance_repatch_notice_description">Mostrar um banner na tela inicial quando aplicativos com patch puderem ser reaplicados</string>
     <string name="settings_appearance_sort_button">Botão de ordenar e filtrar</string>
     <string name="settings_appearance_sort_button_description">Mostrar o botão de ordenar e filtrar no ecrã inicial</string>
     <string name="settings_appearance_app_card_colors">Cores do cartão do aplicativo</string>
@@ -655,8 +697,14 @@ Desinstalar apagará permanentemente todos os dados do aplicativo."</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Atualizações</string>
     <string name="settings_advanced_patcher">Patcher</string>
-    <string name="settings_advanced_updates_use_prereleases">Modificações pré-lançamento</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Acesso antecipado a novas versões do Morphe. Ativa pré-lançamento por origem nas fontes de modificação</string>
+    <string name="settings_advanced_updates_manager_prereleases">Atualizações de pré-lançamento</string>
+    <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
+    <string name="settings_advanced_updates_manager_prereleases_description">Acesso antecipado a novas versões do Morphe</string>
+    <string name="settings_advanced_updates_prerelease_warning_title">Ativar atualizações de pré-lançamento?</string>
+    <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
+    <string name="settings_advanced_updates_prerelease_warning_message">"As versões de pré-lançamento do Morphe ainda estão em desenvolvimento e podem ser instáveis.
+
+Os patches não são afetados: ative os patches de pré-lançamento para cada fonte na lista de fontes de patch"</string>
     <string name="settings_advanced_updates_allow_metered">Dados móveis estão ativados</string>
     <string name="settings_advanced_updates_allow_metered_description">Permitir que o Morphe e as atualizações das modificações sejam transferidos com dados móveis</string>
     <string name="settings_advanced_updates_background_notifications">Atualizações em segundo plano</string>
@@ -670,14 +718,6 @@ Desinstalar apagará permanentemente todos os dados do aplicativo."</string>
     <string name="settings_advanced_update_interval_monthly">Uma vez por mês</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Frequência de verificação em segundo plano</string>
     <string name="settings_advanced_update_interval_battery_warning">As verificações em segundo plano podem não funcionar de forma confiável em alguns dispositivos. Fabricantes como Xiaomi, Huawei, Samsung e OnePlus frequentemente restringem agressivamente os processos em segundo plano para poupar bateria</string>
-    <string name="settings_advanced_auto_patch">Correção automática</string>
-    <string name="settings_advanced_auto_patch_description">Refaz a correção dos aplicativos instalados em segundo plano quando seus patches mudam. Apenas aplicativos com um APK original salvo são cobertos</string>
-    <string name="settings_advanced_auto_patch_interval">Frequência de refazer correção</string>
-    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Com que frequência os aplicativos corrigidos são reconstruídos</string>
-    <string name="settings_advanced_auto_patch_charging">Apenas enquanto carregando</string>
-    <string name="settings_advanced_auto_patch_charging_description">A correção consome muita CPU e memória, então aguarda um carregador</string>
-    <string name="settings_advanced_auto_patch_install">Instalar automaticamente</string>
-    <string name="settings_advanced_auto_patch_install_description">Requer Shizuku como o instalador. Com qualquer outro instalador, os aplicativos corrigidos são apenas salvos</string>
     <string name="settings_advanced_external_batch_patch">Permitir gatilhos externos</string>
     <string name="settings_advanced_external_batch_patch_description">Permite que aplicativos de automação iniciem a correção em lote com uma intent. Cada solicitação é confirmada antes de qualquer execução</string>
     <string name="external_batch_patch_title">Iniciar correção em lote?</string>
@@ -685,13 +725,6 @@ Desinstalar apagará permanentemente todos os dados do aplicativo."</string>
     <string name="external_batch_patch_trust_caller">Sempre permitir este aplicativo</string>
     <string name="external_batch_patch_unknown_caller">Um aplicativo desconhecido</string>
     <!-- Notification content -->
-    <string name="notification_auto_patch_title">Correção automática concluída</string>
-    <string name="notification_auto_patch_running_title">Refazendo a correção dos aplicativos</string>
-    <string name="notification_auto_patch_blocked_title">A correção automática não foi executada</string>
-    <string name="notification_auto_patch_blocked_battery">O sistema bloqueou esta instalação. Em dispositivos Xiaomi e similares, ative \"Instalar via USB\" nas opções do desenvolvedor. Em um perfil de trabalho, as instalações podem ser restritas por política</string>
-    <string name="notification_auto_patch_blocked_foreground">Falhou</string>
-    <string name="notification_channel_auto_patch">Cancelado</string>
-    <string name="notification_channel_auto_patch_description">Pronto</string>
     <string name="notification_manager_update_title">Atualização do Morphe disponível</string>
     <string name="notification_bundle_update_title">Novas modificações disponíveis</string>
     <string name="notification_update_text">Versão %s está pronta para transferir</string>
@@ -1161,6 +1194,9 @@ Detalhes: %2$s"</string>
     <string name="importing_ellipsis">A Importar…</string>
     <string name="imported_successfully">Importado com sucesso</string>
     <string name="changelog">Ver registos de alterações</string>
+    <string name="changelog_for_app">Alterações para %s</string>
+    <string name="changelog_general_changes">Alterações gerais</string>
+    <string name="whats_new">Novidades</string>
     <string name="changelog_description">Confere as últimas alterações nesta atualização</string>
     <string name="changelog_download_fail">Erro ao transferir registo de alterações: %s</string>
     <string name="changelog_empty">Nenhum registo de alterações disponível</string>
@@ -1173,13 +1209,13 @@ Detalhes: %2$s"</string>
     <string name="install_update_manager_failed">Erro ao instalar a atualização</string>
     <string name="installing_manager_update">A instalar atualização…</string>
     <string name="downloading_manager_update">A transferir atualização…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB baixado</string>
     <string name="manager_update_not_ready">Este lançamento ainda está sendo publicado. Tente novamente em alguns minutos</string>
+    <string name="update_download_missing">A atualização baixada não está mais disponível. Baixe-a novamente.</string>
     <string name="download_manager_failed">Erro ao transferir atualização: %s</string>
     <string name="failed_to_check_updates">Erro ao verificar por atualizações: %s</string>
     <string name="failed_to_download_update">Erro ao transferir atualização: %s</string>
-    <string name="resume_download">Continuar transferência</string>
     <string name="download_confirmation_metered">"Estás a utilizar uma ligação de dados limitados, e podem ser aplicadas cobranças de dados do teu provedor de serviços.
 
 Queres continuar na mesma?"</string>

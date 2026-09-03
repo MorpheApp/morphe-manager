@@ -25,15 +25,26 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.repeatOnLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.UpdateViewModel
 import app.morphe.manager.util.formatMegabytes
 import app.morphe.manager.util.isolateLtr
+import kotlinx.coroutines.delay
+import kotlin.time.Duration.Companion.milliseconds
 
 private val ProgressBarHeight = 8.dp
 private val SuccessIconContainerSize = 80.dp
 private val SuccessIconSize = 40.dp
+
+/**
+ * How long the app must hold the foreground before an install left in
+ * [UpdateViewModel.State.INSTALLING] counts as abandoned rather than merely still opening.
+ */
+private val AbandonedInstallGrace = 1500.milliseconds
 
 /**
  * The distinct bodies the update dialog can show. States that share a body map to the same
@@ -78,20 +89,13 @@ fun ManagerUpdateDetailsDialog(
 ) {
     val state = updateViewModel.state
 
-    // Reset state when dialog is opened if installation was canceled
-    // This handles the case when user canceled the system install dialog
-    DisposableEffect(state) {
-        // When dialog opens, if we're in INSTALLING state but no actual installation is running,
-        // reset to CAN_INSTALL (the file is already downloaded)
-        if (state == UpdateViewModel.State.INSTALLING) {
+    // An installer activity reports nothing when it is dismissed, so an abandoned install shows
+    // up only as the app holding the foreground while the state is still INSTALLING
+    val lifecycleOwner = LocalLifecycleOwner.current
+    LaunchedEffect(lifecycleOwner, updateViewModel) {
+        lifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+            delay(AbandonedInstallGrace)
             updateViewModel.resetIfInstallCancelled()
-        }
-
-        onDispose {
-            // When dialog closes during download, notify dismiss
-            if (state == UpdateViewModel.State.DOWNLOADING) {
-                onDismiss()
-            }
         }
     }
 
@@ -202,10 +206,7 @@ private fun UpdateDialogFooter(
         UpdateViewModel.State.CAN_DOWNLOAD -> buildList {
             add(
                 DialogAction(
-                    text = stringResource(
-                        if (updateViewModel.canResumeDownload) R.string.resume_download
-                        else R.string.download
-                    ),
+                    text = stringResource(R.string.download),
                     onClick = { updateViewModel.downloadUpdate() },
                     icon = Icons.Outlined.Download,
                     // Nothing to download until the check resolves an actual release
@@ -252,21 +253,13 @@ private fun UpdateDialogFooter(
         }
 
         UpdateViewModel.State.FAILED -> listOfNotNull(
-            if (updateViewModel.canResumeDownload) {
-                // Download failed/canceled - offer to resume
-                DialogAction(
-                    text = stringResource(R.string.resume_download),
-                    onClick = { updateViewModel.downloadUpdate() },
-                    icon = Icons.Outlined.Download
-                )
-            } else {
-                // Download completed but install failed - offer to retry install
-                DialogAction(
-                    text = stringResource(R.string.install),
-                    onClick = { updateViewModel.installUpdate() },
-                    icon = Icons.Outlined.InstallMobile
-                )
-            },
+            // Only an install can end here, so the retry is always an install; a download that
+            // fails drops what it wrote and returns to CAN_DOWNLOAD
+            DialogAction(
+                text = stringResource(R.string.install),
+                onClick = { updateViewModel.installUpdate() },
+                icon = Icons.Outlined.InstallMobile
+            ),
             changelog,
             DialogAction(
                 text = stringResource(android.R.string.cancel),
@@ -324,8 +317,8 @@ private fun UpdateDetailsContent(updateViewModel: UpdateViewModel) {
 /**
  * Download progress with an animated bar.
  *
- * The total size is unknown until the first progress callback, so a resumed download shows an
- * indeterminate bar rather than one pinned at zero while bytes are already arriving.
+ * The total size is unknown until the first progress callback, and stays unknown when the server
+ * streams the release without a content length, so both cases fall back to an indeterminate bar.
  */
 @Composable
 private fun DownloadProgressCard(
@@ -373,7 +366,7 @@ private fun DownloadProgressCard(
                         R.string.manager_update_progress_detail,
                         formatMegabytes(downloadedSize),
                         formatMegabytes(totalSize),
-                        (animatedProgress * 100).toInt()
+                        (progress * 100).toInt()
                     )
                 } else {
                     stringResource(

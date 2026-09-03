@@ -65,6 +65,9 @@ object ChangelogParser {
      */
     private val BULLET_SCOPE_RE = Regex("""^\* \*\*(.+?):\*\*""")
 
+    /** Any changelog bullet, scoped or not. */
+    private val BULLET_RE = Regex("""^\*\s""")
+
     /**
      * Matches a bullet that *only* adds experimental support for a new app
      * version, e.g. "Add experimental support for `21.25.523`" (or the past
@@ -194,19 +197,85 @@ object ChangelogParser {
         appNames: Collection<String>,
     ): Boolean {
         if (appNames.isEmpty()) return false
-        val newerEntries = entriesNewerThan(entries, installedVersion)
-        if (newerEntries.isEmpty()) return false
-        return newerEntries.any { entry ->
-            entry.scopedBullets.any { (scope, bullets) ->
-                val scopeMatches = appNames.any { name ->
-                    scope.equals(name, ignoreCase = true) ||
-                            scope.startsWith("$name - ", ignoreCase = true)
-                }
-                scopeMatches && bullets.any { bullet ->
-                    !EXPERIMENTAL_VERSION_ADDITION_RE.containsMatchIn(bullet)
-                }
+        return entriesNewerThan(entries, installedVersion).any { it.hasChangesFor(appNames) }
+    }
+
+    /**
+     * Narrows [entries] to one app, dropping entries with no substantive bullet for it. Kept
+     * entries hold its bullets and, under [generalHeading], the ones scoped to no app at all.
+     */
+    fun entriesFor(
+        entries: List<ChangelogEntry>,
+        appNames: Collection<String>,
+        generalHeading: String? = null,
+    ): List<ChangelogEntry> {
+        if (appNames.isEmpty()) return entries
+        return entries
+            .filter { it.hasChangesFor(appNames) }
+            .map { entry ->
+                entry.copy(
+                    content = entry.content.keepScopedLines(appNames, generalHeading),
+                    scopedBullets = entry.scopedBullets.filterKeys { it.matchesApp(appNames) }
+                )
+            }
+    }
+
+    /** True when the scope names the app, exactly or as one of its sub-scopes. */
+    private fun String.matchesApp(appNames: Collection<String>) = appNames.any { name ->
+        equals(name, ignoreCase = true) || startsWith("$name - ", ignoreCase = true)
+    }
+
+    /** True when the app has a bullet here that is more than bookkeeping. */
+    private fun ChangelogEntry.hasChangesFor(appNames: Collection<String>) =
+        scopedBullets.any { (scope, bullets) ->
+            scope.matchesApp(appNames) && bullets.any {
+                !EXPERIMENTAL_VERSION_ADDITION_RE.containsMatchIn(it)
             }
         }
+
+    /**
+     * Rebuilds the entry's markdown from the app's bullets, dropping emptied headings.
+     * Unscoped bullets follow under [generalHeading], and are left out when it is null.
+     */
+    private fun String.keepScopedLines(
+        appNames: Collection<String>,
+        generalHeading: String?
+    ): String {
+        val kept = mutableListOf<String>()
+        val general = mutableListOf<String>()
+        var pendingHeading: String? = null
+        for (rawLine in lines()) {
+            val line = rawLine.trim()
+            if (line.startsWith("#")) {
+                pendingHeading = rawLine
+                continue
+            }
+            if (!BULLET_RE.containsMatchIn(line)) continue
+
+            val scope = BULLET_SCOPE_RE.find(line)?.groupValues?.get(1)
+            if (scope == null) {
+                if (generalHeading != null) general += rawLine
+                continue
+            }
+            if (!scope.matchesApp(appNames)) continue
+
+            pendingHeading?.let {
+                if (kept.isNotEmpty()) kept += ""
+                kept += it
+                kept += ""
+                pendingHeading = null
+            }
+            kept += rawLine
+        }
+
+        // Everything the release changed beyond this app, gathered under one heading of its own
+        if (general.isNotEmpty()) {
+            if (kept.isNotEmpty()) kept += ""
+            kept += "### $generalHeading"
+            kept += ""
+            kept += general
+        }
+        return kept.joinToString("\n")
     }
 
     /**

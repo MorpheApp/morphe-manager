@@ -69,6 +69,7 @@ fun AppearanceTabContent(
     val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val appLanguage by themeViewModel.prefs.appLanguage.getAsState()
     val showGreetingPhrases by themeViewModel.prefs.showGreetingPhrases.getAsState()
+    val showRepatchNotice by themeViewModel.prefs.showRepatchNotice.getAsState()
     val appCardColorMode by themeViewModel.prefs.appCardColorMode.getAsState()
     val customAppCardColors by themeViewModel.prefs.customAppCardColors.getAsState()
     val showAppGroupingSwitcher by homeAppButtonPrefs.showCategoryViewSwitcher.collectAsStateWithLifecycle()
@@ -139,9 +140,11 @@ fun AppearanceTabContent(
 
         HomeScreenSection(
             showGreetingPhrases = showGreetingPhrases,
+            showRepatchNotice = showRepatchNotice,
             showSortButton = showSortButton,
             showAppGrouping = showAppGroupingSwitcher,
             onGreetingPhrasesToggle = { themeViewModel.toggleShowGreetingPhrases(showGreetingPhrases) },
+            onRepatchNoticeToggle = { themeViewModel.toggleShowRepatchNotice(showRepatchNotice) },
             onSortButtonToggle = { homeAppButtonPrefs.setShowSortButton(!showSortButton) },
             onAppGroupingToggle = { homeAppButtonPrefs.setShowCategoryViewSwitcher(!showAppGroupingSwitcher) }
         )
@@ -414,9 +417,11 @@ private fun ColorsSection(
 @Composable
 private fun HomeScreenSection(
     showGreetingPhrases: Boolean,
+    showRepatchNotice: Boolean,
     showSortButton: Boolean,
     showAppGrouping: Boolean,
     onGreetingPhrasesToggle: () -> Unit,
+    onRepatchNoticeToggle: () -> Unit,
     onSortButtonToggle: () -> Unit,
     onAppGroupingToggle: () -> Unit
 ) {
@@ -432,6 +437,14 @@ private fun HomeScreenSection(
             icon = Icons.Outlined.ChatBubbleOutline,
             checked = showGreetingPhrases,
             onToggle = onGreetingPhrasesToggle
+        )
+        SettingsDivider()
+        SettingsSwitchItem(
+            title = stringResource(R.string.settings_appearance_repatch_notice),
+            subtitle = stringResource(R.string.settings_appearance_repatch_notice_description),
+            icon = Icons.Outlined.AutoFixHigh,
+            checked = showRepatchNotice,
+            onToggle = onRepatchNoticeToggle
         )
         SettingsDivider()
         SettingsSwitchItem(

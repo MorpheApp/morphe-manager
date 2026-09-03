@@ -55,10 +55,10 @@
         <item quantity="few">%s апликације спремне за закрпу</item>
         <item quantity="other">%s апликација спремних за закрпу</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">%s апликација је спремна за инсталацију</item>
-        <item quantity="few">%s апликације су спремне за инсталацију</item>
-        <item quantity="other">%s апликација је спремно за инсталацију</item>
+    <plurals name="repatch_available_count">
+        <item quantity="one">%s апликација се може поново закрпити</item>
+        <item quantity="few">%s апликације се могу поново закрпити</item>
+        <item quantity="other">%s апликација се може поново закрпити</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Прескочена %s апликација</item>
@@ -84,6 +84,11 @@
         <item quantity="one">%s aplikacija</item>
         <item quantity="few">%s aplikacije</item>
         <item quantity="other">%s aplikacija</item>
+    </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="one">%s изабран</item>
+        <item quantity="few">%s изабрана</item>
+        <item quantity="other">%s изабраних</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="one">Копиран %s патч из одабраног пакета</item>

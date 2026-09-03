@@ -6,6 +6,7 @@ import app.morphe.manager.patcher.logger.Logger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.io.InputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 import java.util.zip.ZipInputStream
@@ -126,6 +127,36 @@ object NativeLibStripper {
                     .toList()
             }
         }.getOrDefault(emptyList())
+
+    /**
+     * The same answer as [extractAbisFromApk] for an APK that arrives on [stream], which is how
+     * a module of a split archive is reached when it has no file of its own to open.
+     *
+     * Streaming has no central directory to consult, so the walk ends with the run of lib/
+     * entries every build tool writes them as, rather than inflating the whole APK behind it.
+     * An APK that turns out unreadable is answered by whatever it yielded up to that point.
+     */
+    fun extractAbisFromStream(stream: InputStream): List<String> {
+        val abis = LinkedHashSet<String>()
+        var insideLibs = false
+
+        runCatching {
+            ZipInputStream(stream.buffered()).use { zis ->
+                while (true) {
+                    val entry = zis.nextEntry ?: break
+                    val abi = extractAbiFromEntry(entry.name)
+                    if (abi == null) {
+                        if (insideLibs) break
+                    } else {
+                        insideLibs = true
+                        abis += abi
+                    }
+                }
+            }
+        }
+
+        return abis.toList()
+    }
 
     /**
      * The one ABI a run keeps out of [abisInApk], which is the first of [supportedAbis] the APK

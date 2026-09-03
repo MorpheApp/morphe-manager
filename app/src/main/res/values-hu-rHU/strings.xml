@@ -2,6 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Egyéb alkalmazások</string>
+    <string name="home_other_apps_action">Más alkalmazások kiválasztása</string>
     <string name="home_not_patched_yet">Még nincs módosítva</string>
     <string name="home_unpatched_version_installed">Nem módosított verzió van telepítve</string>
     <string name="home_unpatched_badge">Nincs módosítva</string>
@@ -28,6 +29,7 @@
     <string name="home_outdated_manager_subtitle">Néhány módosítási forráshoz újabb verzió szükséges</string>
     <string name="home_metered_skipped_title">A frissítések szünetelnek mobiladáton</string>
     <string name="home_metered_skipped_subtitle">Érintse meg a frissítések engedélyezéséhez mobiladatokon keresztül</string>
+    <string name="home_repatch_available_subtitle">Koppintson az összes sorba állításához</string>
     <string name="home_update_error">A frissítés sikertelen</string>
     <string name="home_update_error_subtitle">Hiba történt a források frissítése közben</string>
     <string name="home_update_skipped_metered">Frissítések kihagyva</string>
@@ -53,6 +55,8 @@
     <string name="home_app_sort_name_desc_description">Fordított betűrend, Z-től A-ig</string>
     <string name="home_app_sort_updates_first">Először a javítások</string>
     <string name="home_app_sort_updates_first_description">Az alkalmazások frissítési jelzéssel először, majd a javasolt sorrendben</string>
+    <string name="home_app_sort_recently_patched">Legutóbb javítva</string>
+    <string name="home_app_sort_recently_patched_description">A legutóbb javított alkalmazások kerülnek előre</string>
     <string name="home_no_apps_title">Nincsenek elérhető alkalmazások</string>
     <string name="home_no_apps_subtitle">Adj hozzá egy módosításforrást, vagy kapcsolj be egyet itt: %s</string>
     <string name="home_no_apps_search_subtitle">Nincs találat erre: „%s”</string>
@@ -124,11 +128,15 @@
     <string name="sources_sort_enabled_first">Először az engedélyezettek</string>
     <string name="sources_sort_enabled_first_description">Az aktív forrásokat mutassa először a letiltott forrásokkal szemben</string>
     <string name="sources_management_open_in_browser">Megnyitás böngészőben</string>
+    <string name="sources_management_report_issue">Hiba jelentése</string>
     <string name="sources_management_failed_to_open_url">Hiba történt az URL megnyitásakor</string>
     <string name="sources_management_prerelease_toggle">Kiadás előtti javítások</string>
     <string name="sources_management_prerelease_toggle_description">Korai hozzáférés kísérleti új javításverziókhoz</string>
+    <string name="sources_prerelease_warning_title">Előzetes javítások engedélyezése?</string>
+    <string name="sources_prerelease_warning_message">Az előzetes verziók még fejlesztés alatt állnak. A javítások meghiúsulhatnak vagy megtörhetik az alkalmazást, és a funkciók figyelmeztetés nélkül változhatnak.</string>
+    <string name="expert_mode_prerelease_notice">Ez a forrás előzetes verzió. A javítás meghiúsulhat vagy váratlanul viselkedhet.</string>
     <string name="sources_management_experimental_versions_toggle">Kísérleti alkalmazásverziók</string>
-    <string name="sources_management_experimental_versions_toggle_description">Módosítsa a kísérleti alkalmazás célpontjait, ha elérhetők</string>
+    <string name="sources_management_experimental_versions_toggle_description">Megmutatja és javítja a kísérleti alkalmazás célpontjait. MaxLength: null. Applied translations: none.</string>
     <string name="sources_management_already_exists">Ez a forrás már hozzá lett adva</string>
     <string name="sources_management_invalid_url">Érvénytelen forrás URL. Kérjük, ellenőrizze a címet, és próbálja újra.</string>
     <string name="sources_management_blocked">Ez a javításcsomag forrás le van blokkolva, és nem adható hozzá</string>
@@ -162,6 +170,12 @@
     <string name="sources_dialog_url_invalid">Az URL-nek GitHub/GitLab repóra vagy .json fájlra kell mutatnia</string>
     <string name="sources_dialog_local_change_file">Fájl megváltoztatása</string>
     <string name="sources_dialog_preinstalled">Előretelepített</string>
+    <string name="sources_dialog_community">Közösségi javítások</string>
+    <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
+    <string name="sources_dialog_community_notice_title">Harmadik féltől származó javításforrások</string>
+    <string name="sources_dialog_community_notice_message">"A közösségi javításforrásokat saját szerzőik készítik és tartják karban. A Morphe nem vizsgálja felül és nem ellenőrzi a harmadik féltől származó javításokat, és nem felelős azok tartalmáért vagy azért, amit az eszközén tesznek.
+
+Bármit is ad hozzá erről a weboldalról, azt saját felelősségére teszi."</string>
     <string name="sources_update_success">A frissítés sikeres</string>
     <string name="sources_update_unavailable">Nincs elérhető frissítés</string>
     <string name="sources_download_fail">Nem sikerült letölteni a forrásokat: %s</string>
@@ -192,6 +206,7 @@
     <string name="home_apk_helper_installed_incompatible">A telepített verzió nem foltozható.</string>
     <string name="home_apk_use_saved">Mentett APK használata</string>
     <string name="home_apk_use_installed">Telepített APK használata</string>
+    <string name="home_apk_use_saved_unsupported">A javítások nem támogatják ezt a mentett másolatot. A javítás megerősítést fog kérni, vagy válasszon másik APK-t.</string>
     <string name="home_apk_use_installed_unverified">Nem sikerült ellenőrizni a telepített alkalmazás áláísás állását, ezért lehetséges, hogy már másolták.</string>
     <string name="home_unverified">Nem ellenőrzött</string>
     <string name="home_install_verification_pending">Telepítés ellenőrzése…</string>
@@ -251,6 +266,8 @@
     <string name="expert_mode_enable_all">Minden módosítás engedélyezése</string>
     <string name="expert_mode_enable_all_done">Az összes patch engedélyezve van</string>
     <string name="expert_mode_enable_all_universal_pending">Koppintson újra az univerzális javításokhoz.</string>
+    <string name="expert_mode_universal_all_warning_title">Az összes univerzális javítás engedélyezése?</string>
+    <string name="expert_mode_universal_all_warning_message">Az univerzális javítások nincsenek együtt tesztelve. Ha egyszerre engedélyezed mindet, az ütközéseket, sikertelen javítást vagy összeomlást okozhat.</string>
     <string name="expert_mode_reset_to_default">Ajánlott módosítások engedélyezése</string>
     <string name="expert_mode_reset_to_default_done">A javasolt patch-ek alkalmazva</string>
     <string name="expert_mode_restore_saved">Mentett összeállítás visszaállítása</string>
@@ -258,8 +275,11 @@
     <string name="expert_mode_copy_from_bundle">Más csomagból másolja a kiválasztást</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Nincs megfelelő patch ehhez a csomaghoz</string>
     <string name="expert_mode_no_results">Nem találhatók módosítások</string>
+    <string name="expert_mode_selected_only_on">Csak a kiválasztott javítások megjelenítése</string>
+    <string name="expert_mode_selected_only_off">Az összes javítás megjelenítése</string>
     <string name="expert_mode_universal_patches">Univerzális módosítások</string>
     <string name="expert_mode_new_patches">Új</string>
+    <string name="expert_mode_options_customized">Testreszabott</string>
     <string name="expert_mode_patch_required_by_installer">Szükséges a kiválasztott telepítési célhoz.</string>
     <string name="expert_mode_patch_unavailable_for_installer">Nem érhető el a kiválasztott telepítési célhoz.</string>
     <string name="expert_mode_multiple_sources_warning_title">Több patchforrás van kiválasztva</string>
@@ -437,7 +457,27 @@ Külső zóna (szaggatott): az indító maszk levághatja – tartsa a fontos r�
     <string name="patcher_error_copied">A hiba másolva a vágólapra</string>
     <string name="patcher_error_log">Hibanapló</string>
     <string name="patcher_error_technical">Technikai részletek</string>
-    <string name="patcher_error_dialog_app_info">Alkalmazásinformáció</string>
+    <string name="patcher_error_dialog_diagnostics">Diagnosztika</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">Alkalmazás</string>
+    <string name="patcher_field_package">Csomag</string>
+    <string name="patcher_field_source">Forrás</string>
+    <string name="patcher_field_split">APK felosztása</string>
+    <string name="patcher_field_manager">Kezelő</string>
+    <string name="patcher_field_patcher">Patcher</string>
+    <string name="patcher_field_runtime">Futtatókörnyezet</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Könyvtárak</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Eszköz</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Memória</string>
+    <string name="patcher_field_storage">Tárhely</string>
+    <string name="patcher_field_value_unknown">ismeretlen</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">eltávolítva</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">megtartva</string>
     <string name="patcher_tab_logs">Javító naplók</string>
     <string name="patcher_tab_game">Játékok</string>
     <string name="patcher_logs_waiting">Várja a napló kimenetét…</string>
@@ -448,7 +488,7 @@ Külső zóna (szaggatott): az indító maszk levághatja – tartsa a fontos r�
     <string name="patcher_success_subtitle">Az alkalmazás módosítva és telepítve!</string>
     <string name="patcher_complete_title">A javítás befejeződött! ✨</string>
     <string name="patcher_failed_title">Hoppá! Valami hiba történt</string>
-    <string name="patcher_failed_subtitle">Ellenőrizd a hiba részleteit alább</string>
+    <string name="patcher_failed_hint">Koppintson a(z) %s elemre a hiba megtekintéséhez</string>
     <string name="patcher_failed_dialog_title">A javítás sikertelen</string>
     <string name="patcher_unknown_error">Ismeretlen hiba történt</string>
     <string name="patcher_split_step_extracting">Osztott APK-k kibontása</string>
@@ -467,6 +507,7 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="patcher_ready_to_install_subtitle">Nyomd meg az alábbi gombot a telepítéshez</string>
     <string name="patcher_ready_to_mount_subtitle">Nyomd meg az alábbi gombot a csatoláshoz</string>
     <string name="patcher_patches_excluded_for_installer">Nem érhető el a telepítési módszerhez és kizárt: %s</string>
+    <string name="patcher_back_to_game_hint">Koppints a(z) %1$s elemre a játékhoz való visszatéréshez</string>
     <string name="patcher_storage_permission_dialog_title">Az elérési útvonal nem hozzáférhető</string>
     <string name="patcher_incompatible_patcher_title">Frissítés szükséges</string>
     <string name="patcher_incompatible_patcher_description">A &lt;b&gt;%1$s&lt;/b&gt; csomag a &lt;b&gt;%2$s&lt;/b&gt; vagy újabb módosításverziót igényli. Kérjük, frissítsd a Morphe-t az alkalmazás módosításához.</string>
@@ -622,6 +663,8 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Üdvözlő üzenet megjelenítése a kezdőképernyőn</string>
     <string name="settings_appearance_app_grouping">Alkalmazáscsoportosítás</string>
     <string name="settings_appearance_app_grouping_description">Mutasson egy főképernyő váltót az alkalmazások forrás vagy saját kategóriák szerinti csoportosításához, a kiválasztást megőrizve, ha ki van kapcsolva</string>
+    <string name="settings_appearance_repatch_notice">Újrajavítási értesítés</string>
+    <string name="settings_appearance_repatch_notice_description">Jelenítsen meg egy szalagot a kezdőképernyőn, amikor a javított alkalmazások újra javíthatók</string>
     <string name="settings_appearance_sort_button">Rendezés és szűrés gomb</string>
     <string name="settings_appearance_sort_button_description">A rendezés és szűrés gomb megjelenítése a kezdőképernyőn</string>
     <string name="settings_appearance_app_card_colors">Alkalmazáskártyák színei</string>
@@ -653,8 +696,14 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Frissítések</string>
     <string name="settings_advanced_patcher">Patcher</string>
-    <string name="settings_advanced_updates_use_prereleases">Kiadás előtti módosítások használata</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Korai hozzáférés az új Morphe alkalmazásverziókhoz. Engedélyezés forrásonként a módosítás forrásoknál.</string>
+    <string name="settings_advanced_updates_manager_prereleases">Előzetes frissítések</string>
+    <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
+    <string name="settings_advanced_updates_manager_prereleases_description">Korai hozzáférés az új Morphe verziókhoz</string>
+    <string name="settings_advanced_updates_prerelease_warning_title">Engedélyezd az előzetes frissítéseket?</string>
+    <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
+    <string name="settings_advanced_updates_prerelease_warning_message">"Pre-release versions of Morphe are still in development and can be unstable.
+
+Patches are not affected: enable pre-release patches for each source in the patch sources list"</string>
     <string name="settings_advanced_updates_allow_metered">Mobiladat-forgalom aktív</string>
     <string name="settings_advanced_updates_allow_metered_description">A Morphe és a módosítások frissítéseinek letöltése mobiladattal.</string>
     <string name="settings_advanced_updates_background_notifications">Háttérfrissítési értesítések</string>
@@ -668,14 +717,6 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="settings_advanced_update_interval_monthly">Havonta</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Háttérellenőrzés gyakorisága</string>
     <string name="settings_advanced_update_interval_battery_warning">A háttérellenőrzések egyes eszközökön nem működnek megbízhatóan. Az olyan gyártók, mint a Xiaomi, a Huawei, a Samsung és a OnePlus gyakran agresszíven korlátozzák a háttérfolyamatokat az akkumulátor kímélése érdekében</string>
-    <string name="settings_advanced_auto_patch">Automatikus újra javítás</string>
-    <string name="settings_advanced_auto_patch_description">A telepített alkalmazásokat háttérben újra javítja, ha a javítások megváltoznak. Csak az alkalmazások, amelyekhez mentett eredeti APK van, érintettek</string>
-    <string name="settings_advanced_auto_patch_interval">Újra javítás gyakorisága</string>
-    <string name="settings_advanced_auto_patch_interval_chip_subtitle">A javított alkalmazások újraépítési gyakorisága</string>
-    <string name="settings_advanced_auto_patch_charging">Csak töltés közben</string>
-    <string name="settings_advanced_auto_patch_charging_description">A javítás erősen terheli a CPU-t és a memóriát, ezért csak töltés közben történik</string>
-    <string name="settings_advanced_auto_patch_install">Automatikus telepítés</string>
-    <string name="settings_advanced_auto_patch_install_description">A Shizuku szükséges a telepítőként. Más telepítőkkel csak az APK-k lesznek elmentve</string>
     <string name="settings_advanced_external_batch_patch">Külső események engedélyezése</string>
     <string name="settings_advanced_external_batch_patch_description">Lehetővé teszi az automatizálási alkalmazások számára a csoportos javítás elindítását egy szándékkal. Minden kérést megerősítenek a futtatás előtt</string>
     <string name="external_batch_patch_title">Elindítsa a csoportos javítást?</string>
@@ -683,13 +724,6 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="external_batch_patch_trust_caller">Mindig engedélyezze ezt az alkalmazást</string>
     <string name="external_batch_patch_unknown_caller">Egy ismeretlen alkalmazás</string>
     <!-- Notification content -->
-    <string name="notification_auto_patch_title">Az automatikus újra javítás befejeződött</string>
-    <string name="notification_auto_patch_running_title">Az alkalmazások újra javítása</string>
-    <string name="notification_auto_patch_blocked_title">Az automatikus újra javítás nem futott</string>
-    <string name="notification_auto_patch_blocked_battery">Zárja ki a Morphe-t az akkumulátor optimalizálásból, különben az Android leállítja a futtatást, mielőtt az elindulna</string>
-    <string name="notification_auto_patch_blocked_foreground">Az Android nem engedélyezte a javítás elindítását a háttérben. Nyissa meg a Morphe-t és javítsa meg az alkalmazást</string>
-    <string name="notification_channel_auto_patch">Automatikus újra javítás</string>
-    <string name="notification_channel_auto_patch_description">Némaságos haladás és eredmény értesítések a időzített újra javításhoz</string>
     <string name="notification_manager_update_title">Morphe frissítés elérhető</string>
     <string name="notification_bundle_update_title">Új módosítások érhetők el</string>
     <string name="notification_update_text">A(z) %s verzió letöltésre kész</string>
@@ -1040,6 +1074,10 @@ Részletek: %2$s"</string>
     <string name="credits_prior_development">Korábbi fejlesztők</string>
     <string name="opensource_licenses">Nyílt forráskódú licencek</string>
     <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <string name="easter_egg_pill_title">Egy választás</string>
+    <string name="easter_egg_pill_message">Take the blue pill and the ads stay exactly where they are. Take the red one and see how deep the bytecode goes</string>
+    <string name="easter_egg_pill_red">Piros pirula</string>
+    <string name="easter_egg_pill_blue">Kék pirula</string>
     <string name="easter_egg_pill_red_toast">Mátrix háttér feloldva</string>
     <string name="easter_egg_pill_blue_toast">A reklámok várni fognak rád</string>
     <string name="easter_egg_pill_message_again">Már a Mátrixban vagy. A piros pirula visszadob az esőbe, a kék pedig felébreszt.</string>
@@ -1155,6 +1193,9 @@ Részletek: %2$s"</string>
     <string name="importing_ellipsis">Importálás…</string>
     <string name="imported_successfully">Sikeresen importálva</string>
     <string name="changelog">Változásnaplók megtekintése</string>
+    <string name="changelog_for_app">A(z) %s változásai</string>
+    <string name="changelog_general_changes">Általános változások</string>
+    <string name="whats_new">Újdonságok</string>
     <string name="changelog_description">Nézd meg a frissítés legújabb változásait</string>
     <string name="changelog_download_fail">Nem sikerült letölteni a változásnaplót: %s</string>
     <string name="changelog_empty">A változásnapló nem elérhető</string>
@@ -1167,13 +1208,13 @@ Részletek: %2$s"</string>
     <string name="install_update_manager_failed">Nem sikerült telepíteni a frissítést</string>
     <string name="installing_manager_update">Frissítés telepítése…</string>
     <string name="downloading_manager_update">Frissítés letöltése…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">Letöltve: %1$.1f MB</string>
     <string name="manager_update_not_ready">A kiadás még folyamatban van. Próbálkozz néhány perc múlva újra.</string>
+    <string name="update_download_missing">A letöltött frissítés már nem elérhető. Töltsd le újra.</string>
     <string name="download_manager_failed">A frissítés letöltése sikertelen: %s</string>
     <string name="failed_to_check_updates">A frissítések ellenőrzése sikertelen: %s</string>
     <string name="failed_to_download_update">A frissítés letöltése sikertelen: %s</string>
-    <string name="resume_download">Letöltés folytatása</string>
     <string name="download_confirmation_metered">"Jelenleg korlátozott adatforgalmú kapcsolatot használsz, a szolgáltatód adatforgalmi díjakat számíthat fel.
 
 Szeretnéd folytatni?"</string>

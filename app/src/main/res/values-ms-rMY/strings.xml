@@ -81,7 +81,6 @@
     <string name="sources_management_prerelease_toggle">Tampalan prakeluaran</string>
     <string name="sources_management_prerelease_toggle_description">Menerima capaian awal kepada versi tampalan uji kaji baru</string>
     <string name="sources_management_experimental_versions_toggle">Versi aplikasi uji kaji</string>
-    <string name="sources_management_experimental_versions_toggle_description">Menampal sasaran aplikasi uji kaji jika tersedia</string>
     <string name="sources_management_already_exists">Sumber ini sudah pun ditambah</string>
     <string name="sources_management_invalid_url">URL sumber tidak sah. Sila periksa alamat dan cuba lagi</string>
     <string name="sources_management_metadata_unavailable">Metadata tidak tersedia</string>
@@ -111,6 +110,7 @@
     <string name="sources_dialog_url_invalid">URL mestilah menghala ke repositori GitHub/GitLab atau fail .json</string>
     <string name="sources_dialog_local_change_file">Tukar fail</string>
     <string name="sources_dialog_preinstalled">Prapasang</string>
+    <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_update_success">Kemas kini berjaya</string>
     <string name="sources_update_unavailable">Tiada kemas kini tersedia</string>
     <string name="sources_download_fail">Gagal untuk memuat turun sumber: %s</string>
@@ -291,13 +291,19 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="patcher_error_copied">Ralat disalin ke papan keratan</string>
     <string name="patcher_error_log">Log ralat</string>
     <string name="patcher_error_technical">Perincian teknikal</string>
-    <string name="patcher_error_dialog_app_info">Maklumat aplikasi</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_patcher">Penampal</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_storage">Storan</string>
+    <string name="patcher_field_value_unknown">tidak diketahui</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_tab_game">Permainan</string>
     <string name="patcher_long_step_warning">Langkah ini mungkin mengambil sedikit masa. Sila tunggu…</string>
     <string name="patcher_installing_subtitle">Hampir bersedia untuk beraksi! 🎸</string>
     <string name="patcher_success_subtitle">Aplikasi anda ditampal dan dipasang!</string>
     <string name="patcher_failed_title">Oops! Ada sesuatu yang tidak kena</string>
-    <string name="patcher_failed_subtitle">Semak butiran ralat di bawah</string>
     <string name="patcher_unknown_error">Ralat yang tidak diketahui berlaku</string>
     <string name="patcher_conflict_title">Konflik pakej</string>
     <string name="patcher_conflict_subtitle">Anda perlu menyahpasang versi sedia ada</string>
@@ -433,6 +439,8 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Kemas kini</string>
     <string name="settings_advanced_patcher">Penampal</string>
+    <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
+    <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
     <string name="settings_advanced_updates_background_notifications">Pemberitahuan kemas kini latar belakang</string>
     <string name="settings_advanced_updates_background_notifications_description">Semak kemas kini secara berkala di latar belakang dan beritahu apabila tersedia</string>
     <string name="settings_advanced_update_interval">Semak kekerapan</string>
@@ -709,11 +717,10 @@ Dimensi gambar mestilah seperti berikut:
     <string name="install_update_manager_failed">Gagal memasang kemas kini</string>
     <string name="installing_manager_update">Memasang kemas kini…</string>
     <string name="downloading_manager_update">Memukim kemas kini…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="download_manager_failed">Gagal memukim kemas kini: %s</string>
     <string name="failed_to_check_updates">Gagal menyemak kemas kini: %s</string>
     <string name="failed_to_download_update">Gagal memukim kemas kini: %s</string>
-    <string name="resume_download">Lanjutkan mukim</string>
     <string name="download_confirmation_metered">"Anda sedang disambungkan ke sambungan terukur, dan caj data daripada penyedia perkhidmatan anda mungkin terpakai.
 
 Adakah anda masih ingin meneruskan?"</string>

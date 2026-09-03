@@ -91,8 +91,7 @@ class BatchPatchCoordinator(
     fun plan(
         targets: List<BatchTarget>,
         useMount: Boolean,
-        policy: BatchInstallPolicy,
-        scheduled: Boolean = false
+        policy: BatchInstallPolicy
     ) {
         if (isRunning) return
         runJob?.cancel()
@@ -101,8 +100,7 @@ class BatchPatchCoordinator(
                 items = targets.map { placeholder(it) },
                 phase = BatchPhase.PLANNING,
                 policy = policy,
-                useMount = useMount,
-                scheduled = scheduled
+                useMount = useMount
             )
             val items = resolver.resolve(targets, useMount)
             _state.update { it.copy(items = items, phase = BatchPhase.PREFLIGHT) }
@@ -337,8 +335,6 @@ class BatchPatchCoordinator(
     private suspend fun installUnattendedIfRequested() {
         val state = _state.value ?: return
         if (state.policy != BatchInstallPolicy.INSTALL_AFTER) return
-        // A scheduled run is installed by its own worker, which decides by its own preference
-        if (state.scheduled) return
         if (ManagerApplication.isInForeground) return
 
         installPatchedUnattended(state.patchedItems)
@@ -346,18 +342,17 @@ class BatchPatchCoordinator(
 
     /**
      * Installs [items] through Shizuku, the only installer that never asks, and records what
-     * happened on the run. Returns how many apps went in, leaving the rest for whoever asked
-     * to fall back on the interactive installer.
+     * happened on the run. Whatever does not go in stays on the summary, where the user
+     * installs it through the interactive installer.
      */
-    suspend fun installPatchedUnattended(items: List<BatchPatchItem>): Int {
+    private suspend fun installPatchedUnattended(items: List<BatchPatchItem>) {
         val token = installerManager.getPrimaryToken()
         val asPlayStore = token == InstallerManager.Token.ShizukuPlayStore
         if (token != InstallerManager.Token.Shizuku && !asPlayStore) {
             Log.d(TAG, "Primary installer cannot install unattended")
-            return 0
+            return
         }
 
-        var installed = 0
         for (item in items) {
             if (item.installOutcome == BatchInstallOutcome.INSTALLED) continue
             val file = item.patchedFile?.takeIf { it.exists() } ?: continue
@@ -392,21 +387,15 @@ class BatchPatchCoordinator(
                 outcome = BatchInstallOutcome.INSTALLED,
                 installedPackageName = targetPackage
             )
-            installed++
         }
-        return installed
     }
 
     /**
      * Reports a finished queue once, instead of once per app: a queue of eight would otherwise
      * ping eight times, and no single app finishing is something the user can act on.
-     *
-     * Scheduled runs stay silent. They are reported by their own worker and often finish at
-     * night, which is the last time anyone wants a tone.
      */
     private suspend fun announceCompletion() {
         val state = _state.value ?: return
-        if (state.scheduled) return
         if (state.succeeded == 0 && state.failed == 0) return
 
         // The summary screen already says all of this when the user is watching it, the same

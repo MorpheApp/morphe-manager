@@ -11,9 +11,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
@@ -30,6 +34,9 @@ import app.morphe.manager.util.toast
 
 /**
  * Bundle controls: pill row with per-bundle bulk actions.
+ *
+ * A null [onCopyFromBundle] drops that pill, for the callers where a selection has nowhere
+ * to be copied from.
  */
 @Composable
 internal fun BundlePatchControls(
@@ -40,9 +47,11 @@ internal fun BundlePatchControls(
     onDeselectAll: () -> Unit,
     onResetToDefault: () -> Unit,
     onRestoreSaved: () -> Unit,
-    onCopyFromBundle: () -> Unit,
+    onCopyFromBundle: (() -> Unit)?,
     hasSavedSelection: Boolean,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    /** True when this "Enable all" tap would also enable the universal patches. */
+    warnOnUniversalAll: Boolean = false
 ) {
     val context = LocalContext.current
 
@@ -55,8 +64,11 @@ internal fun BundlePatchControls(
     val selectAllLabel = stringResource(R.string.expert_mode_enable_all)
     val defaultLabel = stringResource(R.string.expert_mode_reset_to_default)
     val restoreLabel = stringResource(R.string.expert_mode_restore_saved)
-    val copyLabel = stringResource(R.string.expert_mode_copy_from_bundle)
     val deselectAllLabel = stringResource(R.string.expert_mode_disable_all)
+
+    // The second "Enable all" tap applies every universal patch at once, which is a common
+    // cause of conflicts and failed patching. Confirmation makes that risk explicit.
+    var showUniversalAllWarning by remember { mutableStateOf(false) }
 
     // Universal patches stay off until a second tap, so the first one must not claim otherwise
     val enabledDone = if (holdsUniversalPatches) {
@@ -70,16 +82,20 @@ internal fun BundlePatchControls(
 
     ActionPillRow(modifier = modifier) {
         ActionPillButton(
-            onClick = withToast(enabledDone, onSelectAll),
+            onClick = {
+                if (warnOnUniversalAll) {
+                    showUniversalAllWarning = true
+                } else {
+                    withToast(enabledDone, onSelectAll)()
+                }
+            },
             icon = Icons.Outlined.DoneAll,
             contentDescription = selectAllLabel,
             tooltip = selectAllLabel,
             enabled = enabledCount < totalCount,
-            colors = IconButtonDefaults.filledTonalIconButtonColors(
-                containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
-                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
-                disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+            colors = tonalIconColors(
+                container = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
+                content = MaterialTheme.colorScheme.onPrimaryContainer
             )
         )
         ActionPillButton(
@@ -87,11 +103,9 @@ internal fun BundlePatchControls(
             icon = Icons.Outlined.Recommend,
             contentDescription = defaultLabel,
             tooltip = defaultLabel,
-            colors = IconButtonDefaults.filledTonalIconButtonColors(
-                containerColor = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.6f),
-                contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
-                disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
-                disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+            colors = tonalIconColors(
+                container = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.6f),
+                content = MaterialTheme.colorScheme.onTertiaryContainer
             )
         )
         ActionPillButton(
@@ -100,40 +114,67 @@ internal fun BundlePatchControls(
             contentDescription = restoreLabel,
             tooltip = restoreLabel,
             enabled = hasSavedSelection,
-            colors = IconButtonDefaults.filledTonalIconButtonColors(
-                containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.6f),
-                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
-                disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+            colors = tonalIconColors(
+                container = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.6f),
+                content = MaterialTheme.colorScheme.onSecondaryContainer
             )
         )
-        ActionPillButton(
-            onClick = onCopyFromBundle,
-            icon = Icons.Outlined.ContentCopy,
-            contentDescription = copyLabel,
-            tooltip = copyLabel,
-            colors = IconButtonDefaults.filledTonalIconButtonColors(
-                containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.4f),
-                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
-                disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+        if (onCopyFromBundle != null) {
+            val copyLabel = stringResource(R.string.expert_mode_copy_from_bundle)
+            ActionPillButton(
+                onClick = onCopyFromBundle,
+                icon = Icons.Outlined.ContentCopy,
+                contentDescription = copyLabel,
+                tooltip = copyLabel,
+                colors = tonalIconColors(
+                    container = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.4f),
+                    content = MaterialTheme.colorScheme.onSecondaryContainer
+                )
             )
-        )
+        }
         ActionPillButton(
             onClick = withToast(disabledDone, onDeselectAll),
             icon = Icons.Outlined.ClearAll,
             contentDescription = deselectAllLabel,
             tooltip = deselectAllLabel,
             enabled = enabledCount > 0,
-            colors = IconButtonDefaults.filledTonalIconButtonColors(
-                containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f),
-                contentColor = MaterialTheme.colorScheme.error,
-                disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
-                disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+            colors = tonalIconColors(
+                container = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.5f),
+                content = MaterialTheme.colorScheme.error
             )
         )
     }
+
+    if (showUniversalAllWarning) {
+        ConfirmDialog(
+            title = stringResource(R.string.expert_mode_universal_all_warning_title),
+            message = stringResource(R.string.expert_mode_universal_all_warning_message),
+            primaryText = stringResource(R.string.enable),
+            isPrimaryDestructive = false,
+            onDismiss = { showUniversalAllWarning = false },
+            onConfirm = {
+                showUniversalAllWarning = false
+                withToast(enabledDone, onSelectAll)()
+            }
+        )
+    }
 }
+
+/**
+ * Tonal button colors for this screen: only the tint carries meaning, the disabled pair is the
+ * same washed-out surface everywhere.
+ */
+@Composable
+private fun tonalIconColors(
+    container: Color,
+    content: Color,
+    disabledContent: Color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+) = IconButtonDefaults.filledTonalIconButtonColors(
+    containerColor = container,
+    contentColor = content,
+    disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
+    disabledContentColor = disabledContent
+)
 
 /**
  * Individual patch card with toggle and options button.
@@ -146,6 +187,7 @@ internal fun PatchCard(
     isNew: Boolean = false,
     buildsClone: Boolean = false,
     hasRequiredOptionsMissing: Boolean = false,
+    hasCustomOptions: Boolean = false,
     lockState: PatchLockState = PatchLockState.NONE,
     onToggle: () -> Unit,
     onConfigureOptions: () -> Unit,
@@ -158,6 +200,7 @@ internal fun PatchCard(
     val patchState = if (isEnabled) enabledState else disabledState
     val newLabel = stringResource(R.string.expert_mode_new_patches)
     val cloneLabel = stringResource(R.string.clone)
+    val customizedLabel = stringResource(R.string.expert_mode_options_customized)
     // The card speaks for its whole contents, so the badges have to be read out here or not at all
     val badges = listOfNotNull(newLabel.takeIf { isNew }, cloneLabel.takeIf { buildsClone })
     val contentDesc = remember(patch.displayName, patchState, badges) {
@@ -175,7 +218,14 @@ internal fun PatchCard(
     } else onToggle
 
     val colors = MaterialTheme.colorScheme
-    val showErrorBorder = hasRequiredOptionsMissing && isEnabled
+    val showMissingRequired = hasRequiredOptionsMissing && isEnabled
+    // A missing required option blocks the run, so it outranks the tint that only reports
+    // that the defaults were changed
+    val showCustomOptions = hasCustomOptions && isEnabled && !showMissingRequired
+    val optionsDesc = remember(patch.displayName, settings, customizedLabel, showCustomOptions) {
+        listOfNotNull(patch.displayName, settings, customizedLabel.takeIf { showCustomOptions })
+            .joinToString(", ")
+    }
     val containerColor = when {
         isNew && isEnabled -> colors.tertiaryContainer.copy(alpha = 0.55f)
         isNew -> colors.tertiaryContainer.copy(alpha = 0.25f)
@@ -188,7 +238,7 @@ internal fun PatchCard(
         color = containerColor,
         borderWidth = 1.dp,
         borderColor = when {
-            showErrorBorder -> colors.error.copy(alpha = 0.6f)
+            showMissingRequired -> colors.error.copy(alpha = 0.6f)
             !isEnabled -> colors.outlineVariant.copy(alpha = 0.5f)
             else -> colors.outlineVariant
         },
@@ -266,20 +316,21 @@ internal fun PatchCard(
                         modifier = Modifier
                             .size(36.dp)
                             .semantics {
-                                contentDescription = "${patch.displayName}, $settings"
+                                contentDescription = optionsDesc
                             },
                         enabled = isEnabled,
-                        colors = IconButtonDefaults.filledTonalIconButtonColors(
-                            containerColor = if (hasRequiredOptionsMissing && isEnabled)
-                                MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.8f)
-                            else
-                                MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.6f),
-                            contentColor = if (hasRequiredOptionsMissing && isEnabled)
-                                MaterialTheme.colorScheme.error
-                            else
-                                MaterialTheme.colorScheme.onSecondaryContainer,
-                            disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
-                            disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.3f)
+                        colors = tonalIconColors(
+                            container = when {
+                                showMissingRequired -> colors.errorContainer.copy(alpha = 0.8f)
+                                showCustomOptions -> colors.primaryContainer.copy(alpha = 0.7f)
+                                else -> colors.secondaryContainer.copy(alpha = 0.6f)
+                            },
+                            content = when {
+                                showMissingRequired -> colors.error
+                                showCustomOptions -> colors.onPrimaryContainer
+                                else -> colors.onSecondaryContainer
+                            },
+                            disabledContent = colors.onSurfaceVariant.copy(alpha = 0.3f)
                         )
                     ) {
                         Icon(

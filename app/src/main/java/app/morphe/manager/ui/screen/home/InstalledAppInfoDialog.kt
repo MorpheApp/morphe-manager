@@ -13,6 +13,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.*
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,7 +23,6 @@ import androidx.compose.material.icons.automirrored.outlined.Launch
 import androidx.compose.material.icons.automirrored.outlined.List
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,11 +41,8 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
-import app.morphe.manager.data.room.apps.installed.InstallType
-import app.morphe.manager.data.room.apps.installed.InstalledApp
-import app.morphe.manager.data.room.apps.installed.SelectionPayload
-import app.morphe.manager.data.room.apps.installed.supportsMount
-import app.morphe.manager.data.room.apps.installed.trackingKey
+import app.morphe.manager.data.room.apps.installed.*
+import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.patcher.util.NativeLibStripper
 import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
@@ -123,7 +120,8 @@ fun InstalledAppInfoDialog(
 
     // Get update status from the shared HomeViewModel instance
     val appUpdates by homeViewModel.appUpdatesAvailable.collectAsStateWithLifecycle()
-    val hasUpdate = appUpdates[packageName] == true
+    val appUpdate = appUpdates[packageName]
+    val hasUpdate = appUpdate != null
     val showsUpdateBanner = hasUpdate &&
             !viewModel.isAppDeleted &&
             !viewModel.isInstallStateNotPatched &&
@@ -146,6 +144,7 @@ fun InstalledAppInfoDialog(
     val showUninstallConfirm = remember { mutableStateOf(false) }
     val showDeleteDialog = remember { mutableStateOf(false) }
     val showAppliedPatchesDialog = remember { mutableStateOf(false) }
+    val changelogRequest = remember { mutableStateOf<BundleChangelogRequest?>(null) }
     val showMountWarningDialog = remember { mutableStateOf(false) }
     val signatureConflict = remember { mutableStateOf<InstallViewModel.InstallState.Conflict?>(null) }
     val pendingMountWarningAction = remember { mutableStateOf<(() -> Unit)?>(null) }
@@ -154,6 +153,20 @@ fun InstalledAppInfoDialog(
     val entered = remember { mutableStateOf(false) }
 
     // Bundle data
+    val sources by homeViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle()
+    // Only a remote source has a changelog to read the pending update from
+    val updateChangelogRequest = appUpdate
+        ?.takeIf { update -> sources.any { it.uid == update.bundleUid && it is RemotePatchBundle } }
+        ?.let {
+            BundleChangelogRequest(
+                bundleUid = it.bundleUid,
+                sinceVersion = it.patchedWithVersion,
+                appNames = it.appNames
+            )
+        }
+    val onShowUpdateChangelog: (() -> Unit)? = updateChangelogRequest?.let { request ->
+        { changelogRequest.value = request }
+    }
     val appliedBundles by viewModel.appliedBundles.collectAsStateWithLifecycle()
     val bundlesUsedSummary by viewModel.bundlesUsedSummary.collectAsStateWithLifecycle()
     val availablePatches by viewModel.availablePatches.collectAsStateWithLifecycle()
@@ -296,6 +309,13 @@ fun InstalledAppInfoDialog(
             onDismiss = { showAppliedPatchesDialog.value = false }
         )
     }
+
+    // What the pending patch update changed for this app
+    BundleChangelogHost(
+        request = changelogRequest.value,
+        sources = sources,
+        onDismissRequest = { changelogRequest.value = null }
+    )
 
     // Mount warning dialog
     if (showMountWarningDialog.value) {
@@ -493,77 +513,16 @@ fun InstalledAppInfoDialog(
                             )
                         }
                         item(key = "banners") {
-                            Column(
-                                modifier = Modifier.padding(horizontal = Defaults.ContentPadding),
-                                verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
-                            ) {
-                                AnimatedVisibility(
-                                    visible = viewModel.isAppDeleted && !viewModel.isInstallStateNotPatched,
-                                    enter = Animations.expandFadeEnter,
-                                    exit = Animations.shrinkFadeExit
-                                ) {
-                                    StaggeredItem(entered = entered.value, index = 2) {
-                                        WarningBanner(
-                                            icon = Icons.Outlined.Warning,
-                                            title = stringResource(R.string.home_app_info_app_deleted_warning),
-                                            description = stringResource(R.string.home_app_info_app_deleted_description),
-                                            buttonText = stringResource(R.string.patch),
-                                            buttonIcon = Icons.Outlined.AutoFixHigh,
-                                            onClick = { onTriggerPatchFlow(installedApp.originalPackageName, installedApp.trackingKey) },
-                                            accentColor = infoAccentColor,
-                                            isError = true
-                                        )
-                                    }
-                                }
-                                AnimatedVisibility(
-                                    visible = viewModel.isInstallStateNotPatched,
-                                    enter = Animations.expandFadeEnter,
-                                    exit = Animations.shrinkFadeExit
-                                ) {
-                                    StaggeredItem(entered = entered.value, index = 2) {
-                                        WarningBanner(
-                                            icon = Icons.Outlined.AutoFixHigh,
-                                            title = stringResource(R.string.home_unpatched_version_installed),
-                                            description = stringResource(R.string.home_app_info_not_patched_description),
-                                            buttonText = stringResource(R.string.patch),
-                                            buttonIcon = Icons.Outlined.AutoFixHigh,
-                                            onClick = { onTriggerPatchFlow(installedApp.originalPackageName, installedApp.trackingKey) },
-                                            accentColor = infoAccentColor
-                                        )
-                                    }
-                                }
-                                AnimatedVisibility(
-                                    visible = viewModel.isInstallStateUnknown,
-                                    enter = Animations.expandFadeEnter,
-                                    exit = Animations.shrinkFadeExit
-                                ) {
-                                    StaggeredItem(entered = entered.value, index = 2) {
-                                        Notice(
-                                            text = stringResource(R.string.home_app_info_install_unverified),
-                                            tone = SemanticTone.Warning,
-                                            icon = Icons.AutoMirrored.Outlined.HelpOutline
-                                        )
-                                    }
-                                }
-                                AnimatedVisibility(
-                                    visible = showsUpdateBanner,
-                                    enter = Animations.expandFadeEnter,
-                                    exit = Animations.shrinkFadeExit
-                                ) {
-                                    StaggeredItem(entered = entered.value, index = 3) {
-                                        WarningBanner(
-                                            icon = Icons.Outlined.Update,
-                                            title = stringResource(R.string.home_app_info_patch_update_available),
-                                            description = stringResource(R.string.home_app_info_patch_update_available_description),
-                                            buttonText = stringResource(R.string.patch),
-                                            buttonIcon = Icons.Outlined.AutoFixHigh,
-                                            onClick = { onTriggerPatchFlow(installedApp.originalPackageName, installedApp.trackingKey) },
-                                            accentColor = infoAccentColor,
-                                            isError = false
-                                        )
-                                    }
-                                }
-                            }
+                            InstalledAppBanners(
+                                viewModel = viewModel,
+                                showsUpdateBanner = showsUpdateBanner,
+                                entered = entered.value,
+                                staggerIndex = 2,
+                                accentColor = infoAccentColor,
+                                onPatch = { onTriggerPatchFlow(installedApp.originalPackageName, installedApp.trackingKey) },
+                                onShowUpdateChangelog = onShowUpdateChangelog,
+                                modifier = Modifier.padding(horizontal = Defaults.ContentPadding)
+                            )
                         }
                         item {
                             StaggeredItem(entered = entered.value, index = 4) {
@@ -606,96 +565,17 @@ fun InstalledAppInfoDialog(
 
                         // Warning banners (deleted / update)
                         item(key = "banner") {
-                            Column {
-                                androidx.compose.animation.AnimatedVisibility(
-                                    visible = viewModel.isAppDeleted && !viewModel.isInstallStateNotPatched,
-                                    enter = Animations.expandFadeEnter,
-                                    exit = Animations.shrinkFadeExit
-                                ) {
-                                    Column {
-                                        Spacer(Modifier.height(Defaults.ItemSpacing))
-                                        StaggeredItem(entered = entered.value, index = 1) {
-                                            WarningBanner(
-                                                icon = Icons.Outlined.Warning,
-                                                title = stringResource(R.string.home_app_info_app_deleted_warning),
-                                                description = stringResource(R.string.home_app_info_app_deleted_description),
-                                                buttonText = stringResource(R.string.patch),
-                                                buttonIcon = Icons.Outlined.AutoFixHigh,
-                                                onClick = {
-                                                    onTriggerPatchFlow(installedApp.originalPackageName, installedApp.trackingKey)
-                                                },
-                                                accentColor = infoAccentColor,
-                                                isError = true,
-                                                modifier = Modifier.padding(horizontal = Defaults.ContentPadding)
-                                            )
-                                        }
-                                    }
-                                }
-                                androidx.compose.animation.AnimatedVisibility(
-                                    visible = viewModel.isInstallStateNotPatched,
-                                    enter = Animations.expandFadeEnter,
-                                    exit = Animations.shrinkFadeExit
-                                ) {
-                                    Column {
-                                        Spacer(Modifier.height(Defaults.ItemSpacing))
-                                        StaggeredItem(entered = entered.value, index = 1) {
-                                            WarningBanner(
-                                                icon = Icons.Outlined.AutoFixHigh,
-                                                title = stringResource(R.string.home_unpatched_version_installed),
-                                                description = stringResource(R.string.home_app_info_not_patched_description),
-                                                buttonText = stringResource(R.string.patch),
-                                                buttonIcon = Icons.Outlined.AutoFixHigh,
-                                                onClick = {
-                                                    onTriggerPatchFlow(installedApp.originalPackageName, installedApp.trackingKey)
-                                                },
-                                                accentColor = infoAccentColor,
-                                                modifier = Modifier.padding(horizontal = Defaults.ContentPadding)
-                                            )
-                                        }
-                                    }
-                                }
-                                androidx.compose.animation.AnimatedVisibility(
-                                    visible = viewModel.isInstallStateUnknown,
-                                    enter = Animations.expandFadeEnter,
-                                    exit = Animations.shrinkFadeExit
-                                ) {
-                                    Column {
-                                        Spacer(Modifier.height(Defaults.ItemSpacing))
-                                        StaggeredItem(entered = entered.value, index = 1) {
-                                            Notice(
-                                                text = stringResource(R.string.home_app_info_install_unverified),
-                                                tone = SemanticTone.Warning,
-                                                icon = Icons.AutoMirrored.Outlined.HelpOutline,
-                                                modifier = Modifier.padding(horizontal = Defaults.ContentPadding)
-                                            )
-                                        }
-                                    }
-                                }
-                                androidx.compose.animation.AnimatedVisibility(
-                                    visible = showsUpdateBanner,
-                                    enter = Animations.expandFadeEnter,
-                                    exit = Animations.shrinkFadeExit
-                                ) {
-                                    Column {
-                                        Spacer(Modifier.height(Defaults.ItemSpacing))
-                                        StaggeredItem(entered = entered.value, index = 1) {
-                                            WarningBanner(
-                                                icon = Icons.Outlined.Update,
-                                                title = stringResource(R.string.home_app_info_patch_update_available),
-                                                description = stringResource(R.string.home_app_info_patch_update_available_description),
-                                                buttonText = stringResource(R.string.patch),
-                                                buttonIcon = Icons.Outlined.AutoFixHigh,
-                                                onClick = {
-                                                    onTriggerPatchFlow(installedApp.originalPackageName, installedApp.trackingKey)
-                                                },
-                                                accentColor = infoAccentColor,
-                                                isError = false,
-                                                modifier = Modifier.padding(horizontal = Defaults.ContentPadding)
-                                            )
-                                        }
-                                    }
-                                }
-                            }
+                            InstalledAppBanners(
+                                viewModel = viewModel,
+                                showsUpdateBanner = showsUpdateBanner,
+                                entered = entered.value,
+                                staggerIndex = 1,
+                                accentColor = infoAccentColor,
+                                onPatch = { onTriggerPatchFlow(installedApp.originalPackageName, installedApp.trackingKey) },
+                                onShowUpdateChangelog = onShowUpdateChangelog,
+                                bannerModifier = Modifier.padding(horizontal = Defaults.ContentPadding),
+                                spaceAboveEachBanner = true
+                            )
                         }
 
                         // Info Section
@@ -785,6 +665,125 @@ private fun Color.accentContentColor(alpha: Float): Color =
             .requiresLightContent()) Color.White else Color.Black
 
 /**
+ * The banners above an installed app's information. [spaceAboveEachBanner] moves the gap above
+ * a banner into the banner, for a parent that spaces nothing of its own.
+ */
+@Composable
+private fun InstalledAppBanners(
+    viewModel: InstalledAppInfoViewModel,
+    showsUpdateBanner: Boolean,
+    entered: Boolean,
+    staggerIndex: Int,
+    accentColor: Color,
+    onPatch: () -> Unit,
+    onShowUpdateChangelog: (() -> Unit)?,
+    modifier: Modifier = Modifier,
+    bannerModifier: Modifier = Modifier,
+    spaceAboveEachBanner: Boolean = false
+) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = if (spaceAboveEachBanner) Arrangement.Top
+        else Arrangement.spacedBy(Defaults.ItemSpacing)
+    ) {
+        BannerSlot(
+            visible = viewModel.isAppDeleted && !viewModel.isInstallStateNotPatched,
+            entered = entered,
+            staggerIndex = staggerIndex,
+            spaceAbove = spaceAboveEachBanner
+        ) {
+            WarningBanner(
+                icon = Icons.Outlined.Warning,
+                title = stringResource(R.string.home_app_info_app_deleted_warning),
+                description = stringResource(R.string.home_app_info_app_deleted_description),
+                buttonText = stringResource(R.string.patch),
+                buttonIcon = Icons.Outlined.AutoFixHigh,
+                onClick = onPatch,
+                accentColor = accentColor,
+                isError = true,
+                modifier = bannerModifier
+            )
+        }
+        BannerSlot(
+            visible = viewModel.isInstallStateNotPatched,
+            entered = entered,
+            staggerIndex = staggerIndex,
+            spaceAbove = spaceAboveEachBanner
+        ) {
+            WarningBanner(
+                icon = Icons.Outlined.AutoFixHigh,
+                title = stringResource(R.string.home_unpatched_version_installed),
+                description = stringResource(R.string.home_app_info_not_patched_description),
+                buttonText = stringResource(R.string.patch),
+                buttonIcon = Icons.Outlined.AutoFixHigh,
+                onClick = onPatch,
+                accentColor = accentColor,
+                modifier = bannerModifier
+            )
+        }
+        BannerSlot(
+            visible = viewModel.isInstallStateUnknown,
+            entered = entered,
+            staggerIndex = staggerIndex,
+            spaceAbove = spaceAboveEachBanner
+        ) {
+            Notice(
+                text = stringResource(R.string.home_app_info_install_unverified),
+                tone = SemanticTone.Warning,
+                icon = Icons.AutoMirrored.Outlined.HelpOutline,
+                modifier = bannerModifier
+            )
+        }
+        BannerSlot(
+            visible = showsUpdateBanner,
+            entered = entered,
+            staggerIndex = staggerIndex,
+            spaceAbove = spaceAboveEachBanner
+        ) {
+            WarningBanner(
+                icon = Icons.Outlined.Update,
+                title = stringResource(R.string.home_app_info_patch_update_available),
+                description = stringResource(R.string.home_app_info_patch_update_available_description),
+                buttonText = stringResource(R.string.patch),
+                buttonIcon = Icons.Outlined.AutoFixHigh,
+                onClick = onPatch,
+                accentColor = accentColor,
+                isError = false,
+                secondaryAction = onShowUpdateChangelog?.let {
+                    ActionItem(
+                        text = stringResource(R.string.whats_new),
+                        icon = Icons.Outlined.History,
+                        onClick = it
+                    )
+                },
+                modifier = bannerModifier
+            )
+        }
+    }
+}
+
+/** One banner's place in the group, animated in and out of it. */
+@Composable
+private fun BannerSlot(
+    visible: Boolean,
+    entered: Boolean,
+    staggerIndex: Int,
+    spaceAbove: Boolean,
+    content: @Composable () -> Unit
+) {
+    AnimatedVisibility(
+        visible = visible,
+        enter = Animations.expandFadeEnter,
+        exit = Animations.shrinkFadeExit
+    ) {
+        Column {
+            if (spaceAbove) Spacer(Modifier.height(Defaults.ItemSpacing))
+            StaggeredItem(entered = entered, index = staggerIndex, content = content)
+        }
+    }
+}
+
+/**
  * Unified banner component for warnings and updates.
  */
 @Composable
@@ -797,7 +796,8 @@ private fun WarningBanner(
     onClick: () -> Unit,
     accentColor: Color,
     modifier: Modifier = Modifier,
-    isError: Boolean = false
+    isError: Boolean = false,
+    secondaryAction: ActionItem? = null
 ) {
     val baseColor = if (isError) MaterialTheme.colorScheme.error else accentColor
     val containerColor = if (baseColor.isExtremeAccent()) MaterialTheme.colorScheme.surfaceVariant else baseColor.copy(alpha = 0.15f)
@@ -853,6 +853,14 @@ private fun WarningBanner(
             contentColorOverride = contentColor,
             modifier = Modifier.fillMaxWidth()
         )
+
+        secondaryAction?.let {
+            TileActionButton(
+                action = it,
+                horizontal = true,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
     }
 }
 
@@ -1169,7 +1177,7 @@ private fun InfoSection(
                 InfoRowWithAction(
                     icon = Icons.Outlined.DoneAll,
                     label = stringResource(R.string.home_app_info_applied_patches),
-                    value = pluralStringResource(R.plurals.patch_count, totalPatches, totalPatches),
+                    value = pluralStringResource(R.plurals.patch_count, totalPatches, totalPatches.toString()),
                     accentColor = accentColor,
                     onAction = onShowPatches
                 )
@@ -1814,7 +1822,7 @@ private fun AppliedPatchesDialog(
                         )
                     } else {
                         Text(
-                            text = pluralStringResource(R.plurals.source_count, bundles.size, bundles.size),
+                            text = pluralStringResource(R.plurals.source_count, bundles.size, bundles.size.toString()),
                             style = MaterialTheme.typography.bodySmall,
                             color = LocalDialogSecondaryTextColor.current
                         )

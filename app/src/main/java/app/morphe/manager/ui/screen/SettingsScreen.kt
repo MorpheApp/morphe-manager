@@ -52,7 +52,6 @@ import app.morphe.manager.ui.viewmodel.*
 import app.morphe.manager.util.*
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
-import org.koin.core.parameter.parametersOf
 
 /** Settings tabs for bottom navigation. */
 private enum class SettingsTab(
@@ -76,9 +75,6 @@ fun SettingsScreen(
         viewModelStoreOwner = LocalActivity.current as ComponentActivity
     ),
     settingsViewModel: SettingsViewModel = koinViewModel(),
-    updateViewModel: UpdateViewModel = koinViewModel {
-        parametersOf(false)
-    },
     globalOnboardingState: GlobalOnboardingState? = null,
     onStartTour: (() -> Unit)? = null
 ) {
@@ -248,6 +244,10 @@ fun SettingsScreen(
 
     // Manager changelog dialog
     if (showChangelogDialog.value) {
+        // Activity-scoped so this shares the update state and staged download with the home screen
+        val updateViewModel: UpdateViewModel = koinViewModel(
+            viewModelStoreOwner = LocalActivity.current as ComponentActivity
+        )
         ChangelogDialog(
             onDismiss = { showChangelogDialog.value = false },
             updateViewModel = updateViewModel

@@ -44,9 +44,9 @@
         <item quantity="one">%s sovellus valmis päivitykseen</item>
         <item quantity="other">%s sovellusta valmis päivitykseen</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">%s sovellus on valmis asennettavaksi</item>
-        <item quantity="other">%s sovellusta on valmis asennettavaksi</item>
+    <plurals name="repatch_available_count">
+        <item quantity="one">%s sovellus voidaan paikata uudelleen</item>
+        <item quantity="other">%s sovellusta voidaan paikata uudelleen</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Ohitettu %s sovellus</item>
@@ -67,6 +67,10 @@
     <plurals name="home_category_app_count">
         <item quantity="one">%s sovellus</item>
         <item quantity="other">%s sovellusta</item>
+    </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="one">%s valittu</item>
+        <item quantity="other">%s valittua</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="one">Kopioitiin %s korjaustiedosto valitusta paketista</item>

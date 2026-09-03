@@ -2,6 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Ostale aplikacije</string>
+    <string name="home_other_apps_action">Izaberi druge aplikacije</string>
     <string name="home_not_patched_yet">Još nisu ispravljene</string>
     <string name="home_unpatched_version_installed">Instalirana je nezakrpana verzija</string>
     <string name="home_unpatched_badge">Nije ispravljeno</string>
@@ -28,6 +29,7 @@
     <string name="home_outdated_manager_subtitle">Neki izvori zakrpa zahtevaju noviju verziju</string>
     <string name="home_metered_skipped_title">Ažuriranja su pauzirana na mobilnim podacima</string>
     <string name="home_metered_skipped_subtitle">Dodirnite da biste dozvolili ažuriranja putem mobilnih podataka</string>
+    <string name="home_repatch_available_subtitle">Dodirni da ih sve dodaš u red čekanja</string>
     <string name="home_update_error">Ažuriranje nije uspelo</string>
     <string name="home_update_error_subtitle">Došlo je do greške prilikom ažuriranja izvora</string>
     <string name="home_update_skipped_metered">Ažuriranja su preskočena</string>
@@ -53,6 +55,8 @@
     <string name="home_app_sort_name_desc_description">Obrnuti abecedni redosled, od Z do A</string>
     <string name="home_app_sort_updates_first">Prvo ažuriranja zakrpa</string>
     <string name="home_app_sort_updates_first_description">Aplikacije sa oznakama ažuriranja prvo, pa preporučeni redosled</string>
+    <string name="home_app_sort_recently_patched">Nedavno zakrpljeno</string>
+    <string name="home_app_sort_recently_patched_description">Najskorije zakrpljene aplikacije prvo</string>
     <string name="home_no_apps_title">Nema dostupnih aplikacija</string>
     <string name="home_no_apps_subtitle">Dodajte izvor aplikacije ili omogućite postojeći u %s</string>
     <string name="home_no_apps_search_subtitle">Nijedna aplikacija ne odgovara na \"%s\"</string>
@@ -124,11 +128,15 @@
     <string name="sources_sort_enabled_first">Omogućeni prvo</string>
     <string name="sources_sort_enabled_first_description">Prikaži aktivne izvore pre onemogućenih izvora</string>
     <string name="sources_management_open_in_browser">Otvori u pregledaču</string>
+    <string name="sources_management_report_issue">Prijavi problem</string>
     <string name="sources_management_failed_to_open_url">Otvaranje URL-a nije uspelo</string>
     <string name="sources_management_prerelease_toggle">Zakrpe u predprodukciji</string>
     <string name="sources_management_prerelease_toggle_description">Dobija rani pristup novim eksperimentalnim verzijama zakrpa</string>
+    <string name="sources_prerelease_warning_title">Omogući zakrpe za predizdanje?</string>
+    <string name="sources_prerelease_warning_message">Predizdanja su još u razvoju. Zakrpe mogu da ne uspeju ili da pokvare aplikaciju, a funkcije se mogu promeniti bez upozorenja.</string>
+    <string name="expert_mode_prerelease_notice">Ovaj izvor je na zakrpama za predizdanje. Zakrpljivanje može da ne uspe ili da se ponaša neočekivano.</string>
     <string name="sources_management_experimental_versions_toggle">Eksperimentalne verzije aplikacije</string>
-    <string name="sources_management_experimental_versions_toggle_description">Zakrpljuje ciljeve eksperimentalnih aplikacija ako su dostupni</string>
+    <string name="sources_management_experimental_versions_toggle_description">Prikazuje i zakrpava eksperimentalne ciljne aplikacije</string>
     <string name="sources_management_already_exists">Ovaj izvor je već dodat</string>
     <string name="sources_management_invalid_url">Nevalidna URL adresa izvora. Molimo proverite adresu i pokušajte ponovo.</string>
     <string name="sources_management_blocked">Ovaj izvor zakrpa je blokiran i ne može biti dodat</string>
@@ -162,6 +170,12 @@
     <string name="sources_dialog_url_invalid">URL mora da pokazuje na GitHub/GitLab repozitorijum ili .json fajl</string>
     <string name="sources_dialog_local_change_file">Promeni fajl</string>
     <string name="sources_dialog_preinstalled">Preinstalirano</string>
+    <string name="sources_dialog_community">Zakrpe zajednice</string>
+    <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
+    <string name="sources_dialog_community_notice_title">Izvori zakrpa trećih strana</string>
+    <string name="sources_dialog_community_notice_message">"Izvore zakrpa zajednice kreiraju i održavaju njihovi autori. Morphe ne pregleda niti verifikuje zakrpe trećih strana i nije odgovoran za njihov sadržaj ili za ono što rade na vašem uređaju.
+
+Sve što dodate sa ove veb stranice koristite na sopstvenu odgovornost."</string>
     <string name="sources_update_success">Uspešno ažurirano</string>
     <string name="sources_update_unavailable">Nema dostupnih ažuriranja</string>
     <string name="sources_download_fail">Neuspešno preuzimanje izvora: %s</string>
@@ -192,6 +206,7 @@
     <string name="home_apk_helper_installed_incompatible">Instalirana verzija ne može da se zakrpi</string>
     <string name="home_apk_use_saved">Koristi sačuvani APK</string>
     <string name="home_apk_use_installed">Koristi instalirani APK</string>
+    <string name="home_apk_use_saved_unsupported">Zakrpe ne podržavaju ovu sačuvanu kopiju. Primena zakrpe će tražiti da potvrdiš ili izaberi drugi APK.</string>
     <string name="home_apk_use_installed_unverified">Nije bilo moguće da se potvrdi potpis instalirane aplikacije, tako da je možda već ispravljena</string>
     <string name="home_unverified">Neverifikovano</string>
     <string name="home_install_verification_pending">Provera instalacije…</string>
@@ -251,6 +266,8 @@
     <string name="expert_mode_enable_all">Omogući sve</string>
     <string name="expert_mode_enable_all_done">Sve zakrpe su uključene</string>
     <string name="expert_mode_enable_all_universal_pending">Dodirnite ponovo za univerzalne zakrpe</string>
+    <string name="expert_mode_universal_all_warning_title">Omogući sve univerzalne zakrpe?</string>
+    <string name="expert_mode_universal_all_warning_message">Univerzalne zakrpe nisu testirane zajedno. Omogućavanje svih odjednom može izazvati sukobe, neuspešno zakrpljivanje ili padove.</string>
     <string name="expert_mode_reset_to_default">Омогући препоручене пакете</string>
     <string name="expert_mode_reset_to_default_done">Preporučene zakrpe su primenjene</string>
     <string name="expert_mode_restore_saved">Ponovi poslednji izbor</string>
@@ -258,8 +275,11 @@
     <string name="expert_mode_copy_from_bundle">Kopiraj selekciju iz drugog paketa</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Nema odgovarajućih zakrpa u ovom paketu</string>
     <string name="expert_mode_no_results">Nema pronađenih zakrpa</string>
+    <string name="expert_mode_selected_only_on">Prikazuju se samo odabrane zakrpe</string>
+    <string name="expert_mode_selected_only_off">Prikazuju se sve zakrpe</string>
     <string name="expert_mode_universal_patches">Univerzalne zakrpe </string>
     <string name="expert_mode_new_patches">Novo</string>
+    <string name="expert_mode_options_customized">Prilagođen</string>
     <string name="expert_mode_patch_required_by_installer">Potrebno za izabrani cilj instalacije</string>
     <string name="expert_mode_patch_unavailable_for_installer">Nije dostupno za izabrani cilj instalacije</string>
     <string name="expert_mode_multiple_sources_warning_title">Izabrali ste patch-ove izvišnje izvora</string>
@@ -437,7 +457,27 @@ Spoljna zona (isprekidana): može biti isečena maskom pokretača – držite va
     <string name="patcher_error_copied">Greška kopirana u privremenu memoriju</string>
     <string name="patcher_error_log">Dnevnik grešaka</string>
     <string name="patcher_error_technical">Tehničke informacije</string>
-    <string name="patcher_error_dialog_app_info">Informacije o aplikaciji</string>
+    <string name="patcher_error_dialog_diagnostics">Dijagnostika</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">Aplikacija</string>
+    <string name="patcher_field_package">Paket</string>
+    <string name="patcher_field_source">Izvor</string>
+    <string name="patcher_field_split">Razdvojeni APK</string>
+    <string name="patcher_field_manager">Menadžer</string>
+    <string name="patcher_field_patcher">Zakrpač</string>
+    <string name="patcher_field_runtime">Izvršno okruženje</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Biblioteke</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Uređaj</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Memorija</string>
+    <string name="patcher_field_storage">Skladište</string>
+    <string name="patcher_field_value_unknown">nepoznato</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">uklonjeno</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">zadržano</string>
     <string name="patcher_tab_logs">Evidencije peča</string>
     <string name="patcher_tab_game">Igre</string>
     <string name="patcher_logs_waiting">Čeka se izlaz loga…</string>
@@ -448,7 +488,7 @@ Spoljna zona (isprekidana): može biti isečena maskom pokretača – držite va
     <string name="patcher_success_subtitle">Vaša aplikacija je zakrpljena i instalirana!</string>
     <string name="patcher_complete_title">Pečanje je završeno! ✨</string>
     <string name="patcher_failed_title">Ups! Nešto je pošlo po zlu</string>
-    <string name="patcher_failed_subtitle">Proverite detalje greške ispod</string>
+    <string name="patcher_failed_hint">Dodirnite %s da vidite šta je pošlo po zlu</string>
     <string name="patcher_failed_dialog_title">Pečanje je neuspešno</string>
     <string name="patcher_unknown_error">Dogodila se nepoznata greška</string>
     <string name="patcher_split_step_extracting">Ekstrahovanje split APK-ova</string>
@@ -624,6 +664,8 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Prikaži poruku dobrodošlice na početnom ekranu</string>
     <string name="settings_appearance_app_grouping">Grupisanje aplikacija</string>
     <string name="settings_appearance_app_grouping_description">Pokaži prekidač na početnom ekranu da bi grupisao aplikacije po izvoru ili vlastitim kategorijama, zadržavajući selekciju kada je isključen</string>
+    <string name="settings_appearance_repatch_notice">Obaveštenje o ponovnom zakrpavanju</string>
+    <string name="settings_appearance_repatch_notice_description">Prikaži baner na početnom ekranu kada se zakrpane aplikacije mogu ponovo zakrpiti</string>
     <string name="settings_appearance_sort_button">Dugme za sortiranje i filtriranje</string>
     <string name="settings_appearance_sort_button_description">Prikaži dugme za sortiranje i filtriranje na početnom ekranu</string>
     <string name="settings_appearance_app_card_colors">Boje kartice aplikacije</string>
@@ -655,8 +697,14 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Ažuriranja</string>
     <string name="settings_advanced_patcher">Patchovanje</string>
-    <string name="settings_advanced_updates_use_prereleases">Pre-release ažuriranja</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Rani pristup novim verzijama aplikacije Morphe. Omogućite pre-release po izvoru u izvorima patchovanja</string>
+    <string name="settings_advanced_updates_manager_prereleases">Prerelease ažuriranja</string>
+    <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
+    <string name="settings_advanced_updates_manager_prereleases_description">Rani pristup novim Morphe verzijama</string>
+    <string name="settings_advanced_updates_prerelease_warning_title">Omogući prerelease ažuriranja?</string>
+    <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
+    <string name="settings_advanced_updates_prerelease_warning_message">"Prerelease verzije Morphe-a su još u razvoju i mogu biti nestabilne.
+
+Zakrpe nisu pogođene: omogućite prerelease zakrpe za svaki izvor na listi izvora zakrpa"</string>
     <string name="settings_advanced_updates_allow_metered">Ažuriranja putem mobilnih podataka</string>
     <string name="settings_advanced_updates_allow_metered_description">Omogućava preuzimanje ažuriranja aplikacije Morphe i patchovanja putem mobilnih podataka</string>
     <string name="settings_advanced_updates_background_notifications">Ažuriranja u pozadini</string>
@@ -670,14 +718,6 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="settings_advanced_update_interval_monthly">Jednom mesečno</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Učestalost pozadinskog proveravanja</string>
     <string name="settings_advanced_update_interval_battery_warning">Pronalaženje u pozadini možda neće funkcionisati pouzdano na nekim uređajima. Proizvođači poput Xiaomi, Huawei, Samsunga i OnePlus često agresivno ograničavaju processe u pozadini da bi sačuvali bateriju</string>
-    <string name="settings_advanced_auto_patch">Automatsko ponovno zakrpljivanje</string>
-    <string name="settings_advanced_auto_patch_description">Ponovo zakrpljuje instalirane aplikacije u pozadini kada se njihove zakrpe promene. Pokrivene su samo aplikacije sa sačuvanim originalnim APK-om</string>
-    <string name="settings_advanced_auto_patch_interval">Učestalost ponovnog zakrpljivanja</string>
-    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Koliko često se ponovo grade zakrpljene aplikacije</string>
-    <string name="settings_advanced_auto_patch_charging">Samo dok se puni</string>
-    <string name="settings_advanced_auto_patch_charging_description">Zakrpljivanje je zahtevno za CPU i memoriju, pa čeka punjač</string>
-    <string name="settings_advanced_auto_patch_install">Instaliraj automatski</string>
-    <string name="settings_advanced_auto_patch_install_description">Zahteva Shizuku kao instalator. Uz bilo koji drugi instalator, zakrpljene aplikacije se samo sačuvanju</string>
     <string name="settings_advanced_external_batch_patch">Dozvoli eksterne okidače</string>
     <string name="settings_advanced_external_batch_patch_description">Omogućava aplikacijama za automatizaciju da pokrenu masovno zakrpljivanje sa namerom. Svaki zahtev je potvrđen pre nego što se išta pokrene</string>
     <string name="external_batch_patch_title">Pokreni masovno zakrpljivanje?</string>
@@ -685,13 +725,6 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="external_batch_patch_trust_caller">Uvek dozvoli ovu aplikaciju</string>
     <string name="external_batch_patch_unknown_caller">Nepoznata aplikacija</string>
     <!-- Notification content -->
-    <string name="notification_auto_patch_title">Automatsko ponovno zakrpljivanje je završeno</string>
-    <string name="notification_auto_patch_running_title">Ponovno zakrpljivanje aplikacija</string>
-    <string name="notification_auto_patch_blocked_title">Automatsko ponovno zakrpljivanje nije pokrenuto</string>
-    <string name="notification_auto_patch_blocked_battery">Sistem je blokirao ovu instalaciju. Na Xiaomi i sličnim uređajima, uključite \"Instaliraj preko USB-a\" u opcijama za programere. Na radnom profilu, instalacije mogu biti ograničene politikom</string>
-    <string name="notification_auto_patch_blocked_foreground">Android nije dozvolio pokretanje zakrpljivanja u pozadini. Otvorite Morphe i zakrpajte iz aplikacije</string>
-    <string name="notification_channel_auto_patch">Automatsko ponovno zakrpljivanje</string>
-    <string name="notification_channel_auto_patch_description">Tiha obaveštenja o napretku i rezultatima za zakazano ponovno zakrpljivanje</string>
     <string name="notification_manager_update_title">Доступна је надоградња Morphe-а</string>
     <string name="notification_bundle_update_title">Dostupne ispravke</string>
     <string name="notification_update_text">Verzija %s je spremna za preuzimanje</string>
@@ -1145,6 +1178,9 @@ Detalji: %2$s"</string>
     <string name="importing_ellipsis">Uvozi…</string>
     <string name="imported_successfully">Uspelo uveženo</string>
     <string name="changelog">Prikaži zapise o promenama</string>
+    <string name="changelog_for_app">Izmene za %s</string>
+    <string name="changelog_general_changes">Opšte izmene</string>
+    <string name="whats_new">Šta je novo</string>
     <string name="changelog_description">Pogledaj najnovije promene u ovom ažuriranju</string>
     <string name="changelog_download_fail">Preuzimanje zapisa o promenama nije uspelo: %s</string>
     <string name="changelog_empty">Nema dostupne verzije promjene</string>
@@ -1157,13 +1193,13 @@ Detalji: %2$s"</string>
     <string name="install_update_manager_failed">Neuspešno instaliranje ažuriranja</string>
     <string name="installing_manager_update">Instaliranje ažuriranja…</string>
     <string name="downloading_manager_update">Preuzimanje ažuriranja…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB preuzeto</string>
     <string name="manager_update_not_ready">Ovo izdanje je i dalje u objavljivanju. Pokušajte ponovo za nekoliko minuta</string>
+    <string name="update_download_missing">Preuzeto ažuriranje više nije dostupno. Preuzmite ga ponovo.</string>
     <string name="download_manager_failed">Nije uspelo preuzimanje ažuriranja: %s</string>
     <string name="failed_to_check_updates">Nije uspelo proveravanje ažuriranja: %s</string>
     <string name="failed_to_download_update">Neuspešno preuzimanje ažuriranja: %s</string>
-    <string name="resume_download">Nastavi preuzimanje</string>
     <string name="download_confirmation_metered">"Trenutno ste povezani na plaćenu vezu i mogu se primeniti troškovi prenosa podataka od vašeg provajdera usluga.
 
 Da li i dalje želite da nastavite?"</string>

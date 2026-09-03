@@ -44,10 +44,6 @@
         <item quantity="one">ඇප් %sක් පැච් කිරීමට සූදානම්</item>
         <item quantity="other">ඇප් %sක් පැච් කිරීමට සූදානම්</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">ඇප් %sක් ඉන්ස්ටෝල් කිරීමට සූදානම්</item>
-        <item quantity="other">ඇප් %sක් ඉන්ස්ටෝල් කිරීමට සූදානම්</item>
-    </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">ඇප් %sක් මගහැරියා</item>
         <item quantity="other">ඇප් %sක් මගහැරියා</item>

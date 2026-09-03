@@ -2,6 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">אפליקציות אחרות</string>
+    <string name="home_other_apps_action">בחר אפליקציות אחרות</string>
     <string name="home_not_patched_yet">עדיין לא תוקן</string>
     <string name="home_unpatched_version_installed">מותקנת גרסה לא מתוקנת</string>
     <string name="home_unpatched_badge">לא תוקן</string>
@@ -29,6 +30,7 @@
     <string name="home_outdated_manager_subtitle">חלק ממקורות הטלאים דורשים גרסה חדשה יותר</string>
     <string name="home_metered_skipped_title">עדכונים הופסקו בזמן שימוש בנתונים סלולריים</string>
     <string name="home_metered_skipped_subtitle">הקש כדי לאפשר עדכונים בנתונים סלולריים</string>
+    <string name="home_repatch_available_subtitle">הקש כדי להוסיף את כולם לתור</string>
     <string name="home_update_error">העדכון נכשל</string>
     <string name="home_update_error_subtitle">משהו השתבש בזמן עדכון המקורות</string>
     <string name="home_update_skipped_metered">עדכונים שדולגו</string>
@@ -54,6 +56,8 @@
     <string name="home_app_sort_name_desc_description">הפוך אלפביתי, מ-Z ל-A</string>
     <string name="home_app_sort_updates_first">עדכוני טלאים קודם</string>
     <string name="home_app_sort_updates_first_description">אפליקציות עם סמני עדכון קודם, ואז לפי סדר מומלץ</string>
+    <string name="home_app_sort_recently_patched">עדכון לאחרונה</string>
+    <string name="home_app_sort_recently_patched_description">אפליקציות שעודכנו לאחרונה ראשונות</string>
     <string name="home_no_apps_title">אין אפליקציות זמינות</string>
     <string name="home_no_apps_subtitle">הוסף מקור לאפליקציה או הפעל מקור קיים ב-\"%s\"</string>
     <string name="home_no_apps_search_subtitle">אף אפליקציה לא תואמת ל-\"%s\"</string>
@@ -125,11 +129,15 @@
     <string name="sources_sort_enabled_first">מופעלים קודם</string>
     <string name="sources_sort_enabled_first_description">הצג מקורות פעילים לפני מקורות מושבתים</string>
     <string name="sources_management_open_in_browser">פתח בדפדפן</string>
+    <string name="sources_management_report_issue">דווח על בעיה</string>
     <string name="sources_management_failed_to_open_url">כישלון בפתיחת כתובת אינטרנט</string>
     <string name="sources_management_prerelease_toggle">תיקונים לפני הפצה</string>
     <string name="sources_management_prerelease_toggle_description">מקבל גישה מוקדמת לגרסאות תיקונים ניסיוניות חדשות</string>
+    <string name="sources_prerelease_warning_title">להפעיל תיקונים לגרסאות מוקדמות?</string>
+    <string name="sources_prerelease_warning_message">גרסאות מוקדמות עדיין בפיתוח. תיקונים עלולים להיכשל או לשבור את האפליקציה, ותכונות עשויות להשתנות ללא אזהרה</string>
+    <string name="expert_mode_prerelease_notice">מקור זה נמצא בגרסה מוקדמת. תיקונים עלולים להיכשל או להתנהג באופן בלתי צפוי</string>
     <string name="sources_management_experimental_versions_toggle">גרסאות אפליקציה ניסיוניות</string>
-    <string name="sources_management_experimental_versions_toggle_description">תקן גרסאות אפליקציה ניסיוניות זמינות</string>
+    <string name="sources_management_experimental_versions_toggle_description">מציג ומתקן יעדים ניסיוניים של אפליקציות</string>
     <string name="sources_management_already_exists">מקור זה כבר נוסף</string>
     <string name="sources_management_invalid_url">כתובת URL מקור לא תקינה. אנא בדוק את הכתובת ונסה שוב</string>
     <string name="sources_management_blocked">מקור הטלאים הזה חסום ואינו יכול להיות מוסף</string>
@@ -163,6 +171,12 @@
     <string name="sources_dialog_url_invalid">הכתובת חייבת להפנות למאגר GitHub/GitLab או לקובץ ‎.json</string>
     <string name="sources_dialog_local_change_file">שנה קובץ</string>
     <string name="sources_dialog_preinstalled">מובן מראשון</string>
+    <string name="sources_dialog_community">תיקוני קהילה</string>
+    <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
+    <string name="sources_dialog_community_notice_title">מקורות תיקונים של צד שלישי</string>
+    <string name="sources_dialog_community_notice_message">"מקורות תיקוני קהילה נעשים ומתוחזקים על ידי מחבריהם. Morphe אינו בודק או מאמת תיקוני צד שלישי, ואינו אחראי לתוכנם או למה שהם עושים במכשירך.
+
+כל דבר שתוסיף מאתר זה בשימוש על אחריותך בלבד."</string>
     <string name="sources_update_success">עדכון הצליח</string>
     <string name="sources_update_unavailable">אין עדכון זמין</string>
     <string name="sources_download_fail">שגגה להוריד תצוגים: %s</string>
@@ -193,6 +207,7 @@
     <string name="home_apk_helper_installed_incompatible">לא ניתן לתקן את הגרסה המותקנת</string>
     <string name="home_apk_use_saved">השתמש ב-APK שמור</string>
     <string name="home_apk_use_installed">השתמש ב-APK מותקן</string>
+    <string name="home_apk_use_saved_unsupported">הטלאים אינם תומכים בעותק השמור הזה. תיקונו ידרוש ממך אישור, או בחר APK אחר.</string>
     <string name="home_apk_use_installed_unverified">לא ניתן לאמת את החתימה של האפליקציה המותקנת, כך שהיא עשויה להיות כבר מטופלת</string>
     <string name="home_unverified">לא מאומת</string>
     <string name="home_install_verification_pending">מתבצעת בדיקת התקנה…</string>
@@ -252,6 +267,8 @@
     <string name="expert_mode_enable_all">הפעל את כולם</string>
     <string name="expert_mode_enable_all_done">כל התיקונים מופעלים</string>
     <string name="expert_mode_enable_all_universal_pending">הקש שוב עבור תיקונים אוניברסליים</string>
+    <string name="expert_mode_universal_all_warning_title">להפעיל את כל התיקונים האוניברסליים?</string>
+    <string name="expert_mode_universal_all_warning_message">תיקונים אוניברסליים אינם נבדקים יחד. הפעלת כולם עלולה לגרום להתנגשויות, כשלים בתיקון או קריסות</string>
     <string name="expert_mode_reset_to_default">להפעיל תיקונים מומלצים</string>
     <string name="expert_mode_reset_to_default_done">התיקונים המומלצים הוחלו</string>
     <string name="expert_mode_restore_saved">שחזור בחירה שמורה</string>
@@ -259,8 +276,11 @@
     <string name="expert_mode_copy_from_bundle">העתק את הבחירה מחבילה אחרת</string>
     <string name="expert_mode_copy_from_bundle_no_patches">לא נמצאו התאמות מדבקות בחבילה זו</string>
     <string name="expert_mode_no_results">לא נמצאו תיקונים</string>
+    <string name="expert_mode_selected_only_on">מציג רק טלאים נבחרים</string>
+    <string name="expert_mode_selected_only_off">מציג את כל הטלאים</string>
     <string name="expert_mode_universal_patches">עדכונים אוניברסליים</string>
     <string name="expert_mode_new_patches">חדש</string>
+    <string name="expert_mode_options_customized">מותאם אישית</string>
     <string name="expert_mode_patch_required_by_installer">נדרש עבור יעד ההתקנה הנבחר</string>
     <string name="expert_mode_patch_unavailable_for_installer">לא זמין עבור יעד ההתקנה הנבחר</string>
     <string name="expert_mode_multiple_sources_warning_title">נבחרו מקורות ציורים מרובים</string>
@@ -438,7 +458,27 @@
     <string name="patcher_error_copied">השגיאה הועתקה ללוח</string>
     <string name="patcher_error_log">יומן שגיאות</string>
     <string name="patcher_error_technical">פרטי טכניים</string>
-    <string name="patcher_error_dialog_app_info">מידע על האפליקציה</string>
+    <string name="patcher_error_dialog_diagnostics">אבחון</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">אפליקציה</string>
+    <string name="patcher_field_package">חבילה</string>
+    <string name="patcher_field_source">מקור</string>
+    <string name="patcher_field_split">פיצול APK</string>
+    <string name="patcher_field_manager">מנהל</string>
+    <string name="patcher_field_patcher">מתקן</string>
+    <string name="patcher_field_runtime">זמן ריצה</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">ספריות</string>
+    <string name="patcher_field_android">אנדרואיד</string>
+    <string name="patcher_field_device">מכשיר</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">זיכרון</string>
+    <string name="patcher_field_storage">אחסון</string>
+    <string name="patcher_field_value_unknown">לא ידוע</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">הוסרו</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">נשמרו</string>
     <string name="patcher_tab_logs">יומני תיקונים</string>
     <string name="patcher_tab_game">משחקים</string>
     <string name="patcher_logs_waiting">ממתין לפלט לוג…</string>
@@ -449,7 +489,7 @@
     <string name="patcher_success_subtitle">האפליקציה שלך מתוקנת ומותקנת!</string>
     <string name="patcher_complete_title">התיקון הושלם! ✨</string>
     <string name="patcher_failed_title">אופס! משהו השתבש</string>
-    <string name="patcher_failed_subtitle">בדוק את פרטי השגיאה למטה</string>
+    <string name="patcher_failed_hint">הקש %s כדי לראות מה השתבש</string>
     <string name="patcher_failed_dialog_title">התיקון נכשל</string>
     <string name="patcher_unknown_error">אירעה שגיאה לא ידועה</string>
     <string name="patcher_split_step_extracting">חילוץ קבצי APK מפוצלים</string>
@@ -625,6 +665,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">הצגת הודעת פתיחה על מסך הבית</string>
     <string name="settings_appearance_app_grouping">קיבוץ אפליקציות</string>
     <string name="settings_appearance_app_grouping_description">הצג מחליף מסך בית לקיבוץ אפליקציות לפי מקור או קטגוריות משלך, ושמור את הבחירה כאשר הוא כבוי</string>
+    <string name="settings_appearance_repatch_notice">הודעת תיקון מחדש</string>
+    <string name="settings_appearance_repatch_notice_description">הצג באנר על מסך הבית כאשר אפליקציות מתוקנות ניתנות לתיקון מחדש</string>
     <string name="settings_appearance_sort_button">כפתור מיון וסינון</string>
     <string name="settings_appearance_sort_button_description">הצג את כפתור המיון והסינון במסך הבית</string>
     <string name="settings_appearance_app_card_colors">צבעי כרטיסי האפליקציה</string>
@@ -656,8 +698,14 @@
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">עדכונים</string>
     <string name="settings_advanced_patcher">מטלאה</string>
-    <string name="settings_advanced_updates_use_prereleases">עדכונים לפני הפצה</string>
-    <string name="settings_advanced_updates_use_prereleases_description">גישה מוקדמת לגרסאות חדשות של אפליקציית Morphe. הפעלת גרסאות מוקדמות לכל מקור במקורות התיקון</string>
+    <string name="settings_advanced_updates_manager_prereleases">עדכוני טרום-שחרור</string>
+    <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
+    <string name="settings_advanced_updates_manager_prereleases_description">גישה מוקדמת לגרסאות חדשות של Morphe</string>
+    <string name="settings_advanced_updates_prerelease_warning_title">להפעיל עדכוני טרום-שחרור?</string>
+    <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
+    <string name="settings_advanced_updates_prerelease_warning_message">"גרסאות טרום-שחרור של Morphe עדיין בפיתוח ועשויות להיות לא יציבות
+
+תיקונים אינם מושפעים: הפעל תיקוני טרום-שחרור עבור כל מקור ברשימת מקורות התיקונים"</string>
     <string name="settings_advanced_updates_allow_metered">עדכוני נתונים ניידים</string>
     <string name="settings_advanced_updates_allow_metered_description">מאפשר לאפליקציית Morphe ולעדכוני תיקונים להוריד דרך נתונים ניידים</string>
     <string name="settings_advanced_updates_background_notifications">התראות עדכונים רקע</string>
@@ -671,14 +719,6 @@
     <string name="settings_advanced_update_interval_monthly">פעם בחודש</string>
     <string name="settings_advanced_update_interval_chip_subtitle">תדירות בדיקה ברקע</string>
     <string name="settings_advanced_update_interval_battery_warning">בדיקות ברקע עשויות שלא לעבוד באופן אמין על חלק מהמכשירים. יצרנים כמו Xiaomi, Huawei, Samsung ו-OnePlus לעיתים קרובות מוגבלים את תהליכי הרקע כדי לשמר סוללה</string>
-    <string name="settings_advanced_auto_patch">תיקון מחדש אוטומטי</string>
-    <string name="settings_advanced_auto_patch_description">מתקן מחדש אפליקציות מותקנות ברקע כאשר הטלאים שלהן משתנים. רק אפליקציות עם APK מקורי שמור נכללות</string>
-    <string name="settings_advanced_auto_patch_interval">תדירות תיקון מחדש</string>
-    <string name="settings_advanced_auto_patch_interval_chip_subtitle">באיזו תדירות אפליקציות שעברו תיקון מבוצעות מחדש</string>
-    <string name="settings_advanced_auto_patch_charging">רק בזמן הטעינה</string>
-    <string name="settings_advanced_auto_patch_charging_description">התיקון דורש משאבי CPU וזיכרון רבים, לכן הוא ממתין למטען</string>
-    <string name="settings_advanced_auto_patch_install">התקן באופן אוטומטי</string>
-    <string name="settings_advanced_auto_patch_install_description">דורש את Shizuku כמתקין. עם כל מתקין אחר, רק האפליקציות המותאמות נשמרות</string>
     <string name="settings_advanced_external_batch_patch">אפשר טריגרים חיצוניים</string>
     <string name="settings_advanced_external_batch_patch_description">מאפשר לאפליקציות אוטומציה להתחיל תיקון באצווה עם כוונה. כל בקשה מאושרת לפני ביצוע</string>
     <string name="external_batch_patch_title">התחל תיקון באצווה?</string>
@@ -686,13 +726,6 @@
     <string name="external_batch_patch_trust_caller">אפשר תמיד לאפליקציה זו</string>
     <string name="external_batch_patch_unknown_caller">אפליקציה לא ידועה</string>
     <!-- Notification content -->
-    <string name="notification_auto_patch_title">תיקון אוטומטי מחדש הסתיים</string>
-    <string name="notification_auto_patch_running_title">מתקן מחדש אפליקציות</string>
-    <string name="notification_auto_patch_blocked_title">תיקון מחדש אוטומטי לא בוצע</string>
-    <string name="notification_auto_patch_blocked_battery">הסר את Morphe מאופטימיזציית הסוללה, אחרת אנדרואיד עוצר את ההפעלה לפני שהיא מתחילה</string>
-    <string name="notification_auto_patch_blocked_foreground">אנדרואיד לא אפשרה הפעלה של תיקון ברקע. פתח את Morphe ובצע תיקון מהאפליקציה</string>
-    <string name="notification_channel_auto_patch">תיקון מחדש אוטומטי</string>
-    <string name="notification_channel_auto_patch_description">התראות שקטות על התקדמות ותוצאות עבור תיקון מחדש מתוזמן</string>
     <string name="notification_manager_update_title">עדכון Morphe זמין</string>
     <string name="notification_bundle_update_title">תיקונים חדשים זמינים</string>
     <string name="notification_update_text">גרסה %s מוכנה להורדה</string>
@@ -1172,6 +1205,9 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="importing_ellipsis">מוצא... </string>
     <string name="imported_successfully">יובא בהצלחה</string>
     <string name="changelog">הצג יומני שינויים</string>
+    <string name="changelog_for_app">שינויים עבור %s</string>
+    <string name="changelog_general_changes">שינויים כלליים</string>
+    <string name="whats_new">מה חדש</string>
     <string name="changelog_description">בדוק את השינויים האחרונים בסוג זה של עדכון</string>
     <string name="changelog_download_fail">שגיאה בהורדת היסטוריית שינויים: %s</string>
     <string name="changelog_empty">אין תיקון זמין</string>
@@ -1184,13 +1220,13 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="install_update_manager_failed">שגיאה בהתקנת עדכון</string>
     <string name="installing_manager_update">מתקין עדכון…</string>
     <string name="downloading_manager_update">מוריד עדכון…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB הורדו</string>
     <string name="manager_update_not_ready">גרסה זו עדיין מפורסמת. נסה שוב בעוד מספר דקות</string>
+    <string name="update_download_missing">העדכון שהורד כבר אינו זמין. הורד אותו שוב</string>
     <string name="download_manager_failed">שגיאה בהורדת עדכון: %s</string>
     <string name="failed_to_check_updates">בדיקת עדכונים נכשלה: %s</string>
     <string name="failed_to_download_update">כשל בהורדת העדכון: %s</string>
-    <string name="resume_download">המשך הורדה</string>
     <string name="download_confirmation_metered">"אתה מחובר כעת לחיבור מוגבל בנפח נתונים, וייתכן שיחולו חיובי נתונים מספק השירות שלך.
 
 האם אתה עדיין רוצה להמשיך?"</string>

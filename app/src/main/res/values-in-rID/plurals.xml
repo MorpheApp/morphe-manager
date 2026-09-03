@@ -33,8 +33,8 @@
     <plurals name="batch_patch_ready_count">
         <item quantity="other">%s aplikasi siap ditambal</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="other">%s aplikasi siap dipasang</item>
+    <plurals name="repatch_available_count">
+        <item quantity="other">%s aplikasi dapat di-tambal ulang</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="other">%s aplikasi dilewati</item>
@@ -50,6 +50,9 @@
     </plurals>
     <plurals name="home_category_app_count">
         <item quantity="other">%s aplikasi</item>
+    </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="other">%s dipilih</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="other">%s tambalan disalin dari bundel yang dipilih</item>

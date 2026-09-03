@@ -2,6 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Andere Apps</string>
+    <string name="home_other_apps_action">Andere Apps auswählen</string>
     <string name="home_not_patched_yet">Noch nicht gepatcht</string>
     <string name="home_unpatched_version_installed">Ungepatchte Version installiert</string>
     <string name="home_unpatched_badge">Nicht gepatcht</string>
@@ -28,6 +29,7 @@
     <string name="home_outdated_manager_subtitle">Einige Patch-Quellen benötigen eine neuere Version</string>
     <string name="home_metered_skipped_title">Updates über mobile Daten wurden pausiert</string>
     <string name="home_metered_skipped_subtitle">Tippe, um Updates über mobile Daten zu erlauben</string>
+    <string name="home_repatch_available_subtitle">Tippen, um alle in die Warteschlange zu stellen</string>
     <string name="home_update_error">Update fehlgeschlagen</string>
     <string name="home_update_error_subtitle">Bei der Aktualisierung der Quellen ist ein Fehler aufgetreten</string>
     <string name="home_update_skipped_metered">Updates übersprungen</string>
@@ -53,6 +55,8 @@
     <string name="home_app_sort_name_desc_description">Umgekehrte alphabetische Reihenfolge, Z bis A</string>
     <string name="home_app_sort_updates_first">Patch-Updates zuerst</string>
     <string name="home_app_sort_updates_first_description">Apps mit Update-Badges zuerst, dann in empfohlener Reihenfolge</string>
+    <string name="home_app_sort_recently_patched">Zuletzt gepatcht</string>
+    <string name="home_app_sort_recently_patched_description">Zuletzt gepatchte Apps zuerst</string>
     <string name="home_no_apps_title">Keine Apps verfügbar</string>
     <string name="home_no_apps_subtitle">Eine Patch-Quelle hinzufügen oder eine vorhandene in %s aktivieren</string>
     <string name="home_no_apps_search_subtitle">Keine Apps passen zu \"%s\"</string>
@@ -124,11 +128,14 @@
     <string name="sources_sort_enabled_first">Aktivierte zuerst</string>
     <string name="sources_sort_enabled_first_description">Aktive Quellen vor deaktivierten Quellen anzeigen</string>
     <string name="sources_management_open_in_browser">Im Browser öffnen</string>
+    <string name="sources_management_report_issue">Problem melden</string>
     <string name="sources_management_failed_to_open_url">Fehler beim Öffnen der URL</string>
     <string name="sources_management_prerelease_toggle">Vorab-Patches</string>
     <string name="sources_management_prerelease_toggle_description">Erhalten Sie frühzeitigen Zugriff auf neue experimentelle Patch-Versionen</string>
+    <string name="sources_prerelease_warning_title">Vorab-Patches aktivieren?</string>
+    <string name="sources_prerelease_warning_message">Vorabversionen befinden sich noch in der Entwicklung. Patches können fehlschlagen oder die App beschädigen, und Funktionen können sich ohne Vorwarnung ändern.</string>
+    <string name="expert_mode_prerelease_notice">Diese Quelle ist in der Vorabversion. Das Patchen kann fehlschlagen oder unerwartetes Verhalten verursachen.</string>
     <string name="sources_management_experimental_versions_toggle">Experimentelle App-Versionen</string>
-    <string name="sources_management_experimental_versions_toggle_description">Experimentelle App-Versionen patchen, falls verfügbar</string>
     <string name="sources_management_already_exists">Diese Quelle wurde bereits hinzugefügt</string>
     <string name="sources_management_invalid_url">Ungültige Quell-URL. Bitte überprüfen Sie die Adresse und versuchen Sie es erneut</string>
     <string name="sources_management_blocked">Diese Patchquelle ist blockiert und kann nicht hinzugefügt werden</string>
@@ -162,6 +169,11 @@
     <string name="sources_dialog_url_invalid">Die URL muss auf ein GitHub-/GitLab-Repository oder eine .json Datei verweisen</string>
     <string name="sources_dialog_local_change_file">Datei ändern</string>
     <string name="sources_dialog_preinstalled">Vorinstalliert</string>
+    <string name="sources_dialog_community">Community-Patches</string>
+    <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
+    <string name="sources_dialog_community_notice_title">Drittanbieter-Patchquellen</string>
+    <string name="sources_dialog_community_notice_message">"Community-Patchquellen werden von ihren eigenen Autoren erstellt und gepflegt. Morphe überprüft oder verifiziert Drittanbieter-Patches nicht und ist nicht verantwortlich für deren Inhalt oder dafür, was sie auf Ihrem Gerät bewirken.
+Alles, was Sie von dieser Website hinzufügen, geschieht auf eigenes Risiko"</string>
     <string name="sources_update_success">Update erfolgreich</string>
     <string name="sources_update_unavailable">Kein Update verfügbar</string>
     <string name="sources_download_fail">Fehler beim Herunterladen der Quellen: %s</string>
@@ -192,6 +204,7 @@
     <string name="home_apk_helper_installed_incompatible">Die installierte Version kann nicht gepatcht werden</string>
     <string name="home_apk_use_saved">Gespeicherte APK verwenden</string>
     <string name="home_apk_use_installed">Installierte App verwenden</string>
+    <string name="home_apk_use_saved_unsupported">Die Patches unterstützen diese gespeicherte Kopie nicht. Das Patchen wird Sie zur Bestätigung auffordern, oder wählen Sie eine andere APK</string>
     <string name="home_apk_use_installed_unverified">Die Signatur der installierten App konnte nicht verifiziert werden. Sie ist möglicherweise bereits gepatcht.</string>
     <string name="home_unverified">Unbestätigt</string>
     <string name="home_install_verification_pending">Installation wird überprüft…</string>
@@ -251,6 +264,8 @@
     <string name="expert_mode_enable_all">Alle aktivieren</string>
     <string name="expert_mode_enable_all_done">Alle Patches aktiviert</string>
     <string name="expert_mode_enable_all_universal_pending">Tippe erneut für universelle Patches</string>
+    <string name="expert_mode_universal_all_warning_title">Alle universellen Patches aktivieren?</string>
+    <string name="expert_mode_universal_all_warning_message">Universelle Patches werden nicht gemeinsam getestet. Wenn sie alle auf einmal aktiviert werden, kann dies zu Konflikten, fehlgeschlagenen Patches oder Abstürzen führen.</string>
     <string name="expert_mode_reset_to_default">Empfohlene Patches aktivieren</string>
     <string name="expert_mode_reset_to_default_done">Empfohlene Patches angewendet</string>
     <string name="expert_mode_restore_saved">Gespeicherte Auswahl wiederherstellen</string>
@@ -258,8 +273,11 @@
     <string name="expert_mode_copy_from_bundle">Auswahl von einem anderen Paket kopieren</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Keine übereinstimmenden Patches in diesem Bundle</string>
     <string name="expert_mode_no_results">Keine Patches gefunden</string>
+    <string name="expert_mode_selected_only_on">Nur ausgewählte Patches anzeigen</string>
+    <string name="expert_mode_selected_only_off">Alle Patches anzeigen</string>
     <string name="expert_mode_universal_patches">Universelle Patches</string>
     <string name="expert_mode_new_patches">Neu</string>
+    <string name="expert_mode_options_customized">Angepasst</string>
     <string name="expert_mode_patch_required_by_installer">Für das ausgewählte Installationsziel erforderlich</string>
     <string name="expert_mode_patch_unavailable_for_installer">Nicht verfügbar für das ausgewählte Installationsziel</string>
     <string name="expert_mode_multiple_sources_warning_title">Mehrere Patch-Quellen ausgewählt</string>
@@ -437,7 +455,27 @@ Für optimale Ergebnisse empfiehlt diese App, eine &lt;b&gt;vollständige APK&lt
     <string name="patcher_error_copied">URL in Zwischenablage kopiert</string>
     <string name="patcher_error_log">Fehlerprotokoll</string>
     <string name="patcher_error_technical">Technische Details</string>
-    <string name="patcher_error_dialog_app_info">App-Informationen</string>
+    <string name="patcher_error_dialog_diagnostics">Diagnose</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">App</string>
+    <string name="patcher_field_package">Paket</string>
+    <string name="patcher_field_source">Quelle</string>
+    <string name="patcher_field_split">Split-APK</string>
+    <string name="patcher_field_manager">Manager</string>
+    <string name="patcher_field_patcher">Patcher</string>
+    <string name="patcher_field_runtime">Laufzeit</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Bibliotheken</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Gerät</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Arbeitsspeicher</string>
+    <string name="patcher_field_storage">Speicher</string>
+    <string name="patcher_field_value_unknown">unbekannt</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">entfernt</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">behalten</string>
     <string name="patcher_tab_logs">Patcher-Protokolle</string>
     <string name="patcher_tab_game">Spiele</string>
     <string name="patcher_logs_waiting">Warte auf die Log-Ausgabe…</string>
@@ -448,7 +486,7 @@ Für optimale Ergebnisse empfiehlt diese App, eine &lt;b&gt;vollständige APK&lt
     <string name="patcher_success_subtitle">Ihre App ist gepatcht und installiert!</string>
     <string name="patcher_complete_title">Patch-Vorgang abgeschlossen! ✨</string>
     <string name="patcher_failed_title">Hoppla! Da ist etwas schiefgelaufen</string>
-    <string name="patcher_failed_subtitle">Überprüfe die Fehlerdetails unten</string>
+    <string name="patcher_failed_hint">Tippe auf %s, um zu sehen, was schiefgelaufen ist.</string>
     <string name="patcher_failed_dialog_title">Patch-Vorgang fehlgeschlagen</string>
     <string name="patcher_unknown_error">Ein unbekannter Fehler ist aufgetreten</string>
     <string name="patcher_split_step_extracting">Extrahiere Split-APKs</string>
@@ -625,6 +663,8 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Zeige auf dem Startbildschirm eine Begrüßung an</string>
     <string name="settings_appearance_app_grouping">App-Gruppierung</string>
     <string name="settings_appearance_app_grouping_description">Zeigt einen Home-Bildschirm-Wechsler an, um Apps nach Quelle oder Ihren eigenen Kategorien zu gruppieren und die Auswahl bei Deaktivierung beizubehalten</string>
+    <string name="settings_appearance_repatch_notice">Hinweis zum erneuten Patchen</string>
+    <string name="settings_appearance_repatch_notice_description">Auf dem Startbildschirm ein Banner anzeigen, wenn gepatchte Apps erneut gepatcht werden können</string>
     <string name="settings_appearance_sort_button">Schaltfläche zum Sortieren und Filtern</string>
     <string name="settings_appearance_sort_button_description">Zeigt eine Schaltfläche zum Sortieren und Filtern auf dem Startbildschirm an</string>
     <string name="settings_appearance_app_card_colors">Farben der App-Karten</string>
@@ -656,8 +696,14 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Updates</string>
     <string name="settings_advanced_patcher">Patcher</string>
-    <string name="settings_advanced_updates_use_prereleases">Updates für Vorabversionen</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Frühzeitiger Zugriff auf neue Morphe-App-Versionen. Aktivieren Sie Vorabversionen pro Quelle in den Patchquellen</string>
+    <string name="settings_advanced_updates_manager_prereleases">Updates für Vorabversionen</string>
+    <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
+    <string name="settings_advanced_updates_manager_prereleases_description">Früher Zugang zu neuen Morphe-Versionen</string>
+    <string name="settings_advanced_updates_prerelease_warning_title">Vorabversionen aktivieren?</string>
+    <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
+    <string name="settings_advanced_updates_prerelease_warning_message">"Vorabversionen von Morphe befinden sich noch in der Entwicklung und können instabil sein.
+
+Patches sind nicht betroffen: Aktivieren Sie Vorab-Patches für jede Quelle in der Liste der Patch-Quellen"</string>
     <string name="settings_advanced_updates_allow_metered">Mobile Daten-Updates</string>
     <string name="settings_advanced_updates_allow_metered_description">Ermöglicht das Herunterladen von Morphe- und Patch-Updates über mobile Daten</string>
     <string name="settings_advanced_updates_background_notifications">Benachrichtigungen über Updates im Hintergrund</string>
@@ -671,14 +717,6 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="settings_advanced_update_interval_monthly">Monatlich</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Häufigkeit der Update-Suche im Hintergrund</string>
     <string name="settings_advanced_update_interval_battery_warning">Die Suche nach Updates im Hintergrund funktioniert möglicherweise auf einigen Geräten nicht zuverlässig. Hersteller wie Xiaomi, Huawei, Samsung und OnePlus beschränken oft aggressiv Hintergrundprozesse, um Batterieleistung zu sparen</string>
-    <string name="settings_advanced_auto_patch">Automatisches Neu-Patchen</string>
-    <string name="settings_advanced_auto_patch_description">Patched installierte Apps im Hintergrund neu, wenn sich ihre Patches ändern. Nur Apps mit einer gespeicherten ursprünglichen APK werden berücksichtigt</string>
-    <string name="settings_advanced_auto_patch_interval">Häufigkeit des Neu-Patchings</string>
-    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Wie oft gepatchte Apps neu erstellt werden</string>
-    <string name="settings_advanced_auto_patch_charging">Nur während des Ladevorgangs</string>
-    <string name="settings_advanced_auto_patch_charging_description">Das Patchen beansprucht viel CPU und Speicher, daher wird gewartet, bis ein Ladegerät angeschlossen ist</string>
-    <string name="settings_advanced_auto_patch_install">Automatisch installieren</string>
-    <string name="settings_advanced_auto_patch_install_description">Benötigt Shizuku als Installer. Mit jedem anderen Installer werden die gepatchten Apps nur gespeichert</string>
     <string name="settings_advanced_external_batch_patch">Externe Trigger zulassen</string>
     <string name="settings_advanced_external_batch_patch_description">Ermöglicht es Automatisierungs-Apps, das Batch-Patchen mit einer Absicht zu starten. Jede Anfrage wird vor der Ausführung bestätigt</string>
     <string name="external_batch_patch_title">Batch-Patchen starten?</string>
@@ -686,13 +724,6 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="external_batch_patch_trust_caller">Immer diese App zulassen</string>
     <string name="external_batch_patch_unknown_caller">Eine unbekannte App</string>
     <!-- Notification content -->
-    <string name="notification_auto_patch_title">Automatisches Neu-Patchen abgeschlossen</string>
-    <string name="notification_auto_patch_running_title">Apps werden neu gepatcht</string>
-    <string name="notification_auto_patch_blocked_title">Automatisches Neu-Patchen wurde nicht ausgeführt</string>
-    <string name="notification_auto_patch_blocked_battery">Befreie Morphe von der Batteriestoppfunktion, andernfalls stoppt Android die Ausführung, bevor sie beginnt</string>
-    <string name="notification_auto_patch_blocked_foreground">Android hat das Starten des Patchvorgangs im Hintergrund nicht zugelassen. Öffne Morphe und patche die App</string>
-    <string name="notification_channel_auto_patch">Automatisches Neu-Patchen</string>
-    <string name="notification_channel_auto_patch_description">Leise Fortschritts- und Ergebnismeldungen für das geplante Neu-Patchen</string>
     <string name="notification_manager_update_title">Morphe-Update verfügbar</string>
     <string name="notification_bundle_update_title">Neue Patches verfügbar</string>
     <string name="notification_update_text">Version %s ist zum Herunterladen bereit</string>
@@ -1162,6 +1193,9 @@ Details: %2$s"</string>
     <string name="importing_ellipsis">Importiere…</string>
     <string name="imported_successfully">Erfolgreich importiert</string>
     <string name="changelog">Changelogs anzeigen</string>
+    <string name="changelog_for_app">Änderungen für %s</string>
+    <string name="changelog_general_changes">Allgemeine Änderungen</string>
+    <string name="whats_new">Was ist neu</string>
     <string name="changelog_description">Entdecken Sie die neuesten Änderungen in diesem Update</string>
     <string name="changelog_download_fail">Download des Changelogs fehlgeschlagen: %s</string>
     <string name="changelog_empty">Kein Changelog verfügbar</string>
@@ -1174,13 +1208,13 @@ Details: %2$s"</string>
     <string name="install_update_manager_failed">Installation des Updates fehlgeschlagen</string>
     <string name="installing_manager_update">Installiere Update…</string>
     <string name="downloading_manager_update">Lade Update herunter…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB heruntergeladen</string>
     <string name="manager_update_not_ready">Diese Version wird noch veröffentlicht. Versuchen Sie es in wenigen Minuten erneut</string>
+    <string name="update_download_missing">Das heruntergeladene Update ist nicht mehr verfügbar. Laden Sie es erneut herunter.</string>
     <string name="download_manager_failed">Herunterladen des Updates fehlgeschlagen: %s</string>
     <string name="failed_to_check_updates">Prüfung auf Updates fehlgeschlagen: %s</string>
     <string name="failed_to_download_update">Herunterladen des Updates fehlgeschlagen: %s</string>
-    <string name="resume_download">Download fortsetzen</string>
     <string name="download_confirmation_metered">"Sie sind derzeit über eine getaktete Verbindung verbunden und es können Datengebühren Ihres Anbieters anfallen.
 
 Wollen Sie trotzdem fortfahren?"</string>

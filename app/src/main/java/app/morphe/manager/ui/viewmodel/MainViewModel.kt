@@ -26,6 +26,18 @@ class MainViewModel(
     var pendingUpdateCheck by mutableStateOf(false)
 
     /**
+     * Set by [app.morphe.manager.MainActivity.handleDeepLinkIntent] when the changelog action of
+     * an update notification is tapped. MorpheManager shows it, then resets the flag to null.
+     */
+    var pendingBundleChangelogUid: Int? by mutableStateOf(null)
+
+    /**
+     * Set by [app.morphe.manager.MainActivity.handleDeepLinkIntent] when the changelog action of
+     * a manager update notification is tapped. MorpheManager shows it, then clears the flag.
+     */
+    var pendingManagerChangelog by mutableStateOf(false)
+
+    /**
      * Set by [app.morphe.manager.MainActivity.handleDeepLinkIntent] when the app is opened
      * via a deep link to add a patch source. HomeScreen observes this via LaunchedEffect,
      * shows a confirmation dialog, then resets the flag to null.
@@ -108,9 +120,9 @@ class MainViewModel(
     }
 
     /**
-     * Resolves the apps a launcher shortcut asked to re-patch. No confirmation dialog here:
-     * the request comes from Morphe's own shortcut and only opens the preflight list, which
-     * the user still has to start by hand.
+     * Resolves the apps the launcher shortcut or the re-patch notification asked about. No
+     * confirmation dialog here: the request comes from Morphe itself and only opens the
+     * preflight list, which the user still has to start by hand.
      */
     fun onShortcutBatchRequest() {
         pendingOutdatedBatch = false
@@ -129,7 +141,7 @@ class MainViewModel(
     }
 
     /**
-     * Reopens the queue an automatic run left behind. Navigating with its own target list
+     * Reopens the queue a run finished in the background. Navigating with its own target list
      * keeps the finished state, which the batch screen would otherwise re-plan away.
      */
     fun onShowBatchResult() {

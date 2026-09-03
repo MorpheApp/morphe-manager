@@ -1,6 +1,7 @@
 ﻿<resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Other apps</string>
+    <string name="home_other_apps_action">Select other apps</string>
     <string name="home_not_patched_yet">Not patched yet</string>
     <string name="home_unpatched_version_installed">Unpatched version installed</string>
     <string name="home_unpatched_badge">Not patched</string>
@@ -29,6 +30,7 @@
     <string name="home_outdated_manager_subtitle">Some patch sources need a newer version</string>
     <string name="home_metered_skipped_title">Updates paused on mobile data</string>
     <string name="home_metered_skipped_subtitle">Tap to allow updates on mobile data</string>
+    <string name="home_repatch_available_subtitle">Tap to queue them all</string>
     <string name="home_update_error">Update failed</string>
     <string name="home_update_error_subtitle">Something went wrong while updating sources</string>
     <string name="home_update_skipped_metered">Updates skipped</string>
@@ -57,6 +59,8 @@
     <string name="home_app_sort_name_desc_description">Reverse alphabetical, Z to A</string>
     <string name="home_app_sort_updates_first">Patch updates first</string>
     <string name="home_app_sort_updates_first_description">Apps with update badges first, then recommended order</string>
+    <string name="home_app_sort_recently_patched">Recently patched</string>
+    <string name="home_app_sort_recently_patched_description">Most recently patched apps first</string>
     <string name="home_no_apps_title">No apps available</string>
     <string name="home_no_apps_subtitle">Add a patch source or enable an existing one in %s</string>
     <string name="home_no_apps_search_subtitle">No apps match \"%s\"</string>
@@ -130,11 +134,15 @@
     <string name="sources_sort_enabled_first">Enabled first</string>
     <string name="sources_sort_enabled_first_description">Show active sources before disabled sources</string>
     <string name="sources_management_open_in_browser">Open in browser</string>
+    <string name="sources_management_report_issue">Report an issue</string>
     <string name="sources_management_failed_to_open_url">Failed to open URL</string>
     <string name="sources_management_prerelease_toggle">Pre-release patches</string>
     <string name="sources_management_prerelease_toggle_description">Receives early access to new experimental patch versions</string>
+    <string name="sources_prerelease_warning_title">Enable pre-release patches?</string>
+    <string name="sources_prerelease_warning_message">Pre-release builds are still in development. Patches may fail or break the app, and features can change without warning</string>
+    <string name="expert_mode_prerelease_notice">This source is on pre-release patches. Patching may fail or behave unexpectedly</string>
     <string name="sources_management_experimental_versions_toggle">Experimental app versions</string>
-    <string name="sources_management_experimental_versions_toggle_description">Patches experimental app targets if available</string>
+    <string name="sources_management_experimental_versions_toggle_description">Shows and patches experimental app targets</string>
     <string name="sources_management_already_exists">This source has already been added</string>
     <string name="sources_management_invalid_url">Invalid source URL. Please check the address and try again</string>
     <string name="sources_management_blocked">This patch source is blocked and cannot be added</string>
@@ -169,6 +177,12 @@
     <string name="sources_dialog_url_invalid">URL must point to a GitHub/GitLab repo or .json file</string>
     <string name="sources_dialog_local_change_file">Change file</string>
     <string name="sources_dialog_preinstalled">Pre-installed</string>
+    <string name="sources_dialog_community">Community patches</string>
+    <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
+    <string name="sources_dialog_community_notice_title">Third-party patch sources</string>
+    <string name="sources_dialog_community_notice_message">"Community patch sources are made and maintained by their own authors. Morphe does not review or verify third-party patches, and is not responsible for their content or for what they do on your device.
+
+Anything you add from this website is used at your own risk"</string>
     <string name="sources_update_success">Update successful</string>
     <string name="sources_update_unavailable">No update available</string>
     <string name="sources_download_fail">Failed to download sources: %s</string>
@@ -200,6 +214,7 @@
     <string name="home_apk_helper_installed_incompatible">The installed version cannot be patched</string>
     <string name="home_apk_use_saved">Use saved APK</string>
     <string name="home_apk_use_installed">Use installed APK</string>
+    <string name="home_apk_use_saved_unsupported">The patches do not support this saved copy. Patching it will ask you to confirm, or pick another APK</string>
     <string name="home_apk_use_installed_unverified">Could not verify the signature of the installed app, so it may already be patched</string>
     <string name="home_unverified">Unverified</string>
     <string name="home_install_verification_pending">Checking install…</string>
@@ -262,6 +277,8 @@
     <string name="expert_mode_enable_all">Enable all</string>
     <string name="expert_mode_enable_all_done">All patches enabled</string>
     <string name="expert_mode_enable_all_universal_pending">Tap again for universal patches</string>
+    <string name="expert_mode_universal_all_warning_title">Enable all universal patches?</string>
+    <string name="expert_mode_universal_all_warning_message">Universal patches are not tested together. Enabling all of them at once can cause conflicts, failed patching, or crashes</string>
     <string name="expert_mode_reset_to_default">Enable recommended patches</string>
     <string name="expert_mode_reset_to_default_done">Recommended patches applied</string>
     <string name="expert_mode_restore_saved">Restore saved selection</string>
@@ -269,8 +286,11 @@
     <string name="expert_mode_copy_from_bundle">Copy selection from another bundle</string>
     <string name="expert_mode_copy_from_bundle_no_patches">No matching patches in this bundle</string>
     <string name="expert_mode_no_results">No patches found</string>
+    <string name="expert_mode_selected_only_on">Showing selected patches only</string>
+    <string name="expert_mode_selected_only_off">Showing all patches</string>
     <string name="expert_mode_universal_patches">Universal patches</string>
     <string name="expert_mode_new_patches">New</string>
+    <string name="expert_mode_options_customized">Customized</string>
     <string name="expert_mode_patch_required_by_installer">Required for the selected install target</string>
     <string name="expert_mode_patch_unavailable_for_installer">Not available for the selected install target</string>
     <string name="expert_mode_multiple_sources_warning_title">Multiple patch sources selected</string>
@@ -458,7 +478,27 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="patcher_error_copied">Error copied to clipboard</string>
     <string name="patcher_error_log">Error log</string>
     <string name="patcher_error_technical">Technical details</string>
-    <string name="patcher_error_dialog_app_info">App info</string>
+    <string name="patcher_error_dialog_diagnostics">Diagnostics</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">App</string>
+    <string name="patcher_field_package">Package</string>
+    <string name="patcher_field_source">Source</string>
+    <string name="patcher_field_split">Split APK</string>
+    <string name="patcher_field_manager">Manager</string>
+    <string name="patcher_field_patcher">Patcher</string>
+    <string name="patcher_field_runtime">Runtime</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Libraries</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Device</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Memory</string>
+    <string name="patcher_field_storage">Storage</string>
+    <string name="patcher_field_value_unknown">unknown</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">stripped</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">kept</string>
     <string name="patcher_patches_progress_format" translatable="false">%1$s / %2$s</string>
     <string name="patcher_percentage" translatable="false">%s%%</string>
     <string name="patcher_tab_logs">Patcher logs</string>
@@ -471,7 +511,7 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="patcher_success_subtitle">Your app is patched and installed!</string>
     <string name="patcher_complete_title">Patching complete! ✨</string>
     <string name="patcher_failed_title">Oops! Something went wrong</string>
-    <string name="patcher_failed_subtitle">Check the error details below</string>
+    <string name="patcher_failed_hint">Tap %s to see what went wrong</string>
     <string name="patcher_failed_dialog_title">Patching failed</string>
     <string name="patcher_unknown_error">Unknown error occurred</string>
     <string name="patcher_split_step_extracting">Extracting split APKs</string>
@@ -675,6 +715,8 @@ Uninstalling will permanently erase all app data"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Show a greeting message on the home screen</string>
     <string name="settings_appearance_app_grouping">App grouping</string>
     <string name="settings_appearance_app_grouping_description">Show a home screen switcher to group apps by source or your own categories, keeping the selection when off</string>
+    <string name="settings_appearance_repatch_notice">Re-patch notice</string>
+    <string name="settings_appearance_repatch_notice_description">Show a banner on the home screen when patched apps can be re-patched</string>
     <string name="settings_appearance_sort_button">Sort and filter button</string>
     <string name="settings_appearance_sort_button_description">Show the sort and filter button on the home screen</string>
     <string name="settings_appearance_app_card_colors">App card colors</string>
@@ -708,8 +750,14 @@ Uninstalling will permanently erase all app data"</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Updates</string>
     <string name="settings_advanced_patcher">Patcher</string>
-    <string name="settings_advanced_updates_use_prereleases">Pre-release updates</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Early access to new Morphe app versions. Enable pre-release per source in patch sources</string>
+    <string name="settings_advanced_updates_manager_prereleases">Pre-release updates</string>
+    <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
+    <string name="settings_advanced_updates_manager_prereleases_description">Early access to new Morphe versions</string>
+    <string name="settings_advanced_updates_prerelease_warning_title">Enable pre-release updates?</string>
+    <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
+    <string name="settings_advanced_updates_prerelease_warning_message">"Pre-release versions of Morphe are still in development and can be unstable.
+
+Patches are not affected: enable pre-release patches for each source in the patch sources list"</string>
     <string name="settings_advanced_updates_allow_metered">Mobile data updates</string>
     <string name="settings_advanced_updates_allow_metered_description">Allows Morphe and patch updates to download over mobile data</string>
     <string name="settings_advanced_updates_background_notifications">Background update notifications</string>
@@ -724,15 +772,6 @@ Uninstalling will permanently erase all app data"</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Background check frequency</string>
     <string name="settings_advanced_update_interval_battery_warning">Background checks may not work reliably on some devices. Manufacturers like Xiaomi, Huawei, Samsung, and OnePlus often aggressively restrict background processes to save battery</string>
 
-    <string name="settings_advanced_auto_patch">Automatic re-patching</string>
-    <string name="settings_advanced_auto_patch_description">Re-patches installed apps in the background when their patches change. Only apps with a saved original APK are covered</string>
-    <string name="settings_advanced_auto_patch_interval">Re-patch frequency</string>
-    <string name="settings_advanced_auto_patch_interval_chip_subtitle">How often patched apps are rebuilt</string>
-    <string name="settings_advanced_auto_patch_charging">Only while charging</string>
-    <string name="settings_advanced_auto_patch_charging_description">Patching is heavy on the CPU and memory, so it waits for a charger</string>
-    <string name="settings_advanced_auto_patch_install">Install automatically</string>
-    <string name="settings_advanced_auto_patch_install_description">Requires Shizuku as the installer. With any other installer the patched apps are only saved</string>
-
     <string name="settings_advanced_external_batch_patch">Allow external triggers</string>
     <string name="settings_advanced_external_batch_patch_description">Lets automation apps start batch patching with an intent. Every request is confirmed before anything runs</string>
     <string name="external_batch_patch_title">Start batch patching?</string>
@@ -741,13 +780,6 @@ Uninstalling will permanently erase all app data"</string>
     <string name="external_batch_patch_unknown_caller">An unknown app</string>
 
     <!-- Notification content -->
-    <string name="notification_auto_patch_title">Automatic re-patching finished</string>
-    <string name="notification_auto_patch_running_title">Re-patching apps</string>
-    <string name="notification_auto_patch_blocked_title">Automatic re-patching did not run</string>
-    <string name="notification_auto_patch_blocked_battery">Exempt Morphe from battery optimization, otherwise Android stops the run before it starts</string>
-    <string name="notification_auto_patch_blocked_foreground">Android did not allow patching to start in the background. Open Morphe and patch from the app</string>
-    <string name="notification_channel_auto_patch">Automatic re-patching</string>
-    <string name="notification_channel_auto_patch_description">Silent progress and result notifications for scheduled re-patching</string>
     <string name="notification_manager_update_title">Morphe update available</string>
     <string name="notification_bundle_update_title">New patches available</string>
     <string name="notification_update_text">Version %s is ready to download</string>
@@ -1244,6 +1276,9 @@ Details: %2$s"</string>
     <string name="imported_successfully">Imported successfully</string>
 
     <string name="changelog">View changelogs</string>
+    <string name="changelog_for_app">Changes for %s</string>
+    <string name="changelog_general_changes">General changes</string>
+    <string name="whats_new">What\'s new</string>
     <string name="changelog_description">Check out the latest changes in this update</string>
     <string name="changelog_download_fail">Failed to download changelog: %s</string>
     <string name="changelog_empty">No changelog available</string>
@@ -1257,14 +1292,14 @@ Details: %2$s"</string>
     <string name="install_update_manager_failed">Failed to install update</string>
     <string name="installing_manager_update">Installing update…</string>
     <string name="downloading_manager_update">Downloading update…</string>
-    <string name="manager_update_progress_detail" translatable="false">%1$.1f MB / %2$.1f MB (%3$s%%)</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <string name="manager_update_progress_detail" translatable="false">%1$.1f MB / %2$.1f MB (%3$d%%)</string>
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB downloaded</string>
     <string name="manager_update_not_ready">This release is still being published. Try again in a few minutes</string>
+    <string name="update_download_missing">The downloaded update is no longer available. Download it again</string>
     <string name="download_manager_failed">Failed to download update: %s</string>
     <string name="failed_to_check_updates">Failed to check for updates: %s</string>
     <string name="failed_to_download_update">Failed to download update: %s</string>
-    <string name="resume_download">Resume download</string>
     <string name="download_confirmation_metered">"You are currently on a metered connection, and data charges from your service provider may apply.
 
 Do you still want to continue?"</string>

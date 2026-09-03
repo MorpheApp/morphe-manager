@@ -79,7 +79,7 @@ class Session(
             name = androidContext.resources.getQuantityString(
                 R.plurals.patches_executed,
                 selectedPatches.size,
-                selectedPatches.size
+                selectedPatches.size.toString()
             )
         )
     }

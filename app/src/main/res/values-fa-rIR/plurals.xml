@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="patch_count">
-        <item quantity="one">%s پچ</item>
-        <item quantity="other">%s پچ ها</item>
+        <item quantity="one">%s وصله</item>
+        <item quantity="other">%s وصله</item>
+    </plurals>
+    <plurals name="option_count">
+        <item quantity="one">%s گزینه وصله</item>
+        <item quantity="other">%s گزینه وصله</item>
+    </plurals>
+    <plurals name="source_count">
+        <item quantity="one">%s منبع</item>
+        <item quantity="other">%s منبع</item>
+    </plurals>
+    <plurals name="settings_system_apks_count">
+        <item quantity="one">%s فایل APK</item>
+        <item quantity="other">%s فایل APK</item>
+    </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">برنامه %s نصب شد</item>
+        <item quantity="other">برنامه‌های %s نصب شدند</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
-        <item quantity="one">حذف شده %s پچ قدیمی از انتخاب ذخیره شده</item>
-        <item quantity="other">حذف شده %s پچ های قدیمی از انتخاب ذخیره شده</item>
+        <item quantity="one">%s وصله قدیمی از انتخاب ذخیره شده حذف شد</item>
+        <item quantity="other">حذف شده %s وصله های قدیمی از انتخاب ذخیره شده</item>
     </plurals>
     <plurals name="sources_management_subtitle">
-        <item quantity="one">%s سورس نصب شده</item>
-        <item quantity="other">%s منابع نصب شده</item>
+        <item quantity="one">%s منبع نصب شده</item>
+        <item quantity="other">%s منبع نصب شده</item>
+    </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s برنامه</item>
+        <item quantity="other">%s برنامه</item>
     </plurals>
 </resources>

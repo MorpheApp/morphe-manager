@@ -16,10 +16,10 @@ fun Context.batchActionSummary(
 ): String? {
     val parts = buildList {
         if (completed > 0) {
-            add(resources.getQuantityString(completedActionPluralRes, completed, completed))
+            add(resources.getQuantityString(completedActionPluralRes, completed, completed.toString()))
         }
         if (skipped > 0) {
-            add(resources.getQuantityString(R.plurals.batch_skipped_summary, skipped, skipped))
+            add(resources.getQuantityString(R.plurals.batch_skipped_summary, skipped, skipped.toString()))
         }
     }
 

@@ -98,7 +98,7 @@ internal fun HomeAppsSectionDialogs(
             title = pluralStringResource(
                 R.plurals.batch_uninstall_confirm_title,
                 pendingItems.size,
-                pendingItems.size
+                pendingItems.size.toString()
             ),
             message = stringResource(R.string.batch_uninstall_confirm_body),
             primaryText = stringResource(R.string.uninstall),

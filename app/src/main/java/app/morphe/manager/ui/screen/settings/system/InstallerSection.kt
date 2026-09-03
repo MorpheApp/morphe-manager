@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.SessionInstaller
+import app.morphe.manager.domain.installer.ShizukuEnvironment
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
@@ -641,38 +642,37 @@ private fun ShizukuStatusDialog(
                     )
                 }
 
-                ShizukuStatusRow(
-                    label = stringResource(R.string.installer_shizuku_status_mode),
-                    value = when (current.mode) {
-                        SessionInstaller.ShizukuMode.Shizuku -> stringResource(R.string.home_app_info_install_type_shizuku)
-                        SessionInstaller.ShizukuMode.Sui -> "Sui"
-                    }
-                )
-                ShizukuStatusRow(
-                    label = stringResource(R.string.installed),
-                    value = statusYesNo(current.installed)
-                )
-                ShizukuStatusRow(
-                    label = stringResource(R.string.installer_shizuku_status_supported),
-                    value = statusYesNo(current.supported)
-                )
-                ShizukuStatusRow(
-                    label = stringResource(R.string.installer_shizuku_status_running),
-                    value = statusYesNo(current.running)
-                )
-                ShizukuStatusRow(
-                    label = stringResource(R.string.installer_shizuku_status_permission),
-                    value = if (current.permissionGranted) {
-                        stringResource(R.string.installer_shizuku_status_granted)
-                    } else {
-                        stringResource(R.string.installer_shizuku_status_missing)
-                    }
-                )
-                current.packageName?.let { provider ->
+                if (current.installed) {
                     ShizukuStatusRow(
-                        label = stringResource(R.string.installer_shizuku_status_provider),
-                        value = provider
+                        label = stringResource(R.string.installer_shizuku_status_mode),
+                        value = when (current.flavor) {
+                            ShizukuEnvironment.Flavor.Shizuku -> stringResource(R.string.home_app_info_install_type_shizuku)
+                            ShizukuEnvironment.Flavor.ShizukuPlus -> "Shizuku+"
+                            ShizukuEnvironment.Flavor.Sui -> "Sui"
+                        }
                     )
+                    ShizukuStatusRow(
+                        label = stringResource(R.string.installer_shizuku_status_supported),
+                        value = statusYesNo(current.supported)
+                    )
+                    ShizukuStatusRow(
+                        label = stringResource(R.string.installer_shizuku_status_running),
+                        value = statusYesNo(current.running)
+                    )
+                    ShizukuStatusRow(
+                        label = stringResource(R.string.installer_shizuku_status_permission),
+                        value = if (current.permissionGranted) {
+                            stringResource(R.string.installer_shizuku_status_granted)
+                        } else {
+                            stringResource(R.string.installer_shizuku_status_missing)
+                        }
+                    )
+                    current.packageName?.let { provider ->
+                        ShizukuStatusRow(
+                            label = stringResource(R.string.installer_shizuku_status_provider),
+                            value = provider
+                        )
+                    }
                 }
             } else {
                 CircularProgressIndicator(

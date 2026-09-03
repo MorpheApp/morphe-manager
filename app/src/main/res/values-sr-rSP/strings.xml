@@ -2,6 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Друге апликације</string>
+    <string name="home_other_apps_action">Изаберите друге апликације</string>
     <string name="home_not_patched_yet">Još није исправљено</string>
     <string name="home_unpatched_version_installed">Инсталирана незакрпљена верзија</string>
     <string name="home_unpatched_badge">Није исправљено</string>
@@ -28,6 +29,7 @@
     <string name="home_outdated_manager_subtitle">Неки извори закрпа захтевају новију верзију</string>
     <string name="home_metered_skipped_title">Ажурирања су паузирана на мобилним подацима</string>
     <string name="home_metered_skipped_subtitle">Додирните да бисте дозволили ажурирања преко мобилних података</string>
+    <string name="home_repatch_available_subtitle">Додирните да их све ставите у ред чекања</string>
     <string name="home_update_error">Ажурирање није успело</string>
     <string name="home_update_error_subtitle">Нешто је пошло по злом док се ажурирају извори</string>
     <string name="home_update_skipped_metered">Пропуштено ажурирања</string>
@@ -53,6 +55,8 @@
     <string name="home_app_sort_name_desc_description">Упадна абецеда, од З до А</string>
     <string name="home_app_sort_updates_first">Прво ажурирања закрпа</string>
     <string name="home_app_sort_updates_first_description">Апликације са ознакама за ажурирање прво, затим препоручени редослед</string>
+    <string name="home_app_sort_recently_patched">Недавно закрпљене</string>
+    <string name="home_app_sort_recently_patched_description">Најновије закрпљене апликације прво</string>
     <string name="home_no_apps_title">Нисe доступни апликације</string>
     <string name="home_no_apps_subtitle">Додај извор пача или омогући постојећи у %s</string>
     <string name="home_no_apps_search_subtitle">Нема апликација које одговарају на \"%s\"</string>
@@ -124,11 +128,15 @@
     <string name="sources_sort_enabled_first">Омогућени први</string>
     <string name="sources_sort_enabled_first_description">Прикажи активне изворе пре онемогућених извора</string>
     <string name="sources_management_open_in_browser">Отвори у прегледачу</string>
+    <string name="sources_management_report_issue">Пријави проблем</string>
     <string name="sources_management_failed_to_open_url">Неуспешно отварање URL адресе</string>
     <string name="sources_management_prerelease_toggle">Предвершајуће закрпе</string>
     <string name="sources_management_prerelease_toggle_description">Примање ране приступности новим експерименталним верзијама пача</string>
+    <string name="sources_prerelease_warning_title">Омогући пре-издање закрпе?</string>
+    <string name="sources_prerelease_warning_message">Пре-издање верзије су још увек у развоју. Закрпе могу да не успеју или да оштете апликацију, а функције се могу променити без упозорења.</string>
+    <string name="expert_mode_prerelease_notice">Овај извор користи пре-издање закрпе. Примена закрпа може да не успе или да се понаша неочекивано.</string>
     <string name="sources_management_experimental_versions_toggle">Експерименталне верзије апликације</string>
-    <string name="sources_management_experimental_versions_toggle_description">Пачује експерименталне циљеве апликација ако су доступни</string>
+    <string name="sources_management_experimental_versions_toggle_description">Приказује и исправља експерименталне циљеве апликација</string>
     <string name="sources_management_already_exists">Ovaj izvor je već dodan</string>
     <string name="sources_management_invalid_url">Невалидна УРЛ адреса извора. Молимо проверите адресу и покушајте поново</string>
     <string name="sources_management_blocked">Овај извор за надоградњу је блокиран и не може бити додат</string>
@@ -162,6 +170,12 @@
     <string name="sources_dialog_url_invalid">УРЛ мора да указује на GitHub/GitLab репозиторијум или .json датотеку</string>
     <string name="sources_dialog_local_change_file">Промени фајл</string>
     <string name="sources_dialog_preinstalled">Предпостављени</string>
+    <string name="sources_dialog_community">Патчеви заједнице</string>
+    <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
+    <string name="sources_dialog_community_notice_title">Извори патчева трећих страна</string>
+    <string name="sources_dialog_community_notice_message">"Патчеве заједнице праве и одржавају њихови аутори. Morphe не прегледа нити проверава патчеве трећих страна и није одговоран за њихов садржај или за оно што они раде на вашем уређају.
+
+Све што додате са ове веб странице користите на сопствену одговорност."</string>
     <string name="sources_update_success">Успешно ажурирано</string>
     <string name="sources_update_unavailable">Нema ажурирање</string>
     <string name="sources_download_fail">Неуспешно преузимање извора: %s</string>
@@ -192,6 +206,7 @@
     <string name="home_apk_helper_installed_incompatible">Инсталирана верзија не може да се пачује</string>
     <string name="home_apk_use_saved">Користи сачувани APK</string>
     <string name="home_apk_use_installed">Користи инсталирани APK</string>
+    <string name="home_apk_use_saved_unsupported">Ове закрпе не подржавају сачувану копију. Приликом примене затражиће потврду или изаберите другу АПК датотеку.</string>
     <string name="home_apk_use_installed_unverified">Нисмо могли да потврдимо потпис инсталиране апликације, тако да је она можда већ закрпљена</string>
     <string name="home_unverified">Неверификовано. Морпхе не може да потврди да је инсталирана апликација верзија коју је закрпио. Поново је инсталирајте из сачуваног АПК-а да бисте вратили његове радње.</string>
     <string name="home_install_verification_pending">Проверавање инсталације…</string>
@@ -251,6 +266,8 @@
     <string name="expert_mode_enable_all">Омогући све</string>
     <string name="expert_mode_enable_all_done">Све закрпе су активиране</string>
     <string name="expert_mode_enable_all_universal_pending">Додирните поново за универзалне закрпе</string>
+    <string name="expert_mode_universal_all_warning_title">Омогући све универзалне закрпе?</string>
+    <string name="expert_mode_universal_all_warning_message">Универзалне закрпе нису тестиране заједно. Омогућавање свих одједном може изазвати конфликте, неуспех примене закрпа или падове.</string>
     <string name="expert_mode_reset_to_default">Омогући препоручене исправке</string>
     <string name="expert_mode_reset_to_default_done">Примењене препоручене закрпе</string>
     <string name="expert_mode_restore_saved">Поврати сачувани избор</string>
@@ -258,8 +275,11 @@
     <string name="expert_mode_copy_from_bundle">Копирај селекцију из другог пакета</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Нема поклапајућих закрпа у овом пакету</string>
     <string name="expert_mode_no_results">Нema пронађених печева</string>
+    <string name="expert_mode_selected_only_on">Приказ само изабраних закрпа</string>
+    <string name="expert_mode_selected_only_off">Приказ свих закрпа</string>
     <string name="expert_mode_universal_patches">Универзалне површине</string>
     <string name="expert_mode_new_patches">Ново</string>
+    <string name="expert_mode_options_customized">Прилагођено</string>
     <string name="expert_mode_patch_required_by_installer">Захтевно за изабрану циљну инсталацију</string>
     <string name="expert_mode_patch_unavailable_for_installer">Није доступно за изабрану циљну инсталацију</string>
     <string name="expert_mode_multiple_sources_warning_title">Одабрана су више извора за патч</string>
@@ -437,7 +457,27 @@
     <string name="patcher_error_copied">Грешка је копирана у привремену меморију</string>
     <string name="patcher_error_log">Лог грешaka</string>
     <string name="patcher_error_technical">Техничке информације</string>
-    <string name="patcher_error_dialog_app_info">Информације о апликацији</string>
+    <string name="patcher_error_dialog_diagnostics">Дијагностика</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">Апликација</string>
+    <string name="patcher_field_package">Пакет</string>
+    <string name="patcher_field_source">Извор</string>
+    <string name="patcher_field_split">Подељени АПК</string>
+    <string name="patcher_field_manager">Менаџер</string>
+    <string name="patcher_field_patcher">Пачер</string>
+    <string name="patcher_field_runtime">Рантим</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Библиотеке</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Уређај</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Меморија</string>
+    <string name="patcher_field_storage">Складиште</string>
+    <string name="patcher_field_value_unknown">непознато</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">уклоњене</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">задржане</string>
     <string name="patcher_tab_logs">Евиденција закрпа</string>
     <string name="patcher_tab_game">Игре</string>
     <string name="patcher_logs_waiting">Чека се излаз дневника…</string>
@@ -448,7 +488,7 @@
     <string name="patcher_success_subtitle">Ваша апликација је печована и инсталирана!</string>
     <string name="patcher_complete_title">Закрапа завршено! ✨</string>
     <string name="patcher_failed_title">Упс! Дошло је до грешке</string>
-    <string name="patcher_failed_subtitle">Проверите детаље грешке испод</string>
+    <string name="patcher_failed_hint">Додирните %s да бисте видели шта је пошло по злу</string>
     <string name="patcher_failed_dialog_title">Закрапа није успела</string>
     <string name="patcher_unknown_error">Дошло је до непознате грешке</string>
     <string name="patcher_split_step_extracting">Екстракција подељених APK-ова</string>
@@ -624,6 +664,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Прикажи поруку на почетном екрану</string>
     <string name="settings_appearance_app_grouping">Груписање апликација</string>
     <string name="settings_appearance_app_grouping_description">Прикажи прекидач почетног екрана за груписање апликација по извору или властитим категоријама, задржавајући селекцију када је искључено</string>
+    <string name="settings_appearance_repatch_notice">Обавештење о поновном закрпавању</string>
+    <string name="settings_appearance_repatch_notice_description">Прикажи банер на почетном екрану када закрпане апликације могу бити поново закрпане</string>
     <string name="settings_appearance_sort_button">Дугме за сортирање и филтрирање</string>
     <string name="settings_appearance_sort_button_description">Прикажи дугме за сортирање и филтрирање на почетном екрану</string>
     <string name="settings_appearance_app_card_colors">Боје картица апликација</string>
@@ -655,8 +697,14 @@
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Ажурирања</string>
     <string name="settings_advanced_patcher">Пачер</string>
-    <string name="settings_advanced_updates_use_prereleases">Претходне верзије</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Рани приступ новим верзијама апликације Morphe. Омогућите претходне верзије по извору у изворима закрпе</string>
+    <string name="settings_advanced_updates_manager_prereleases">Ажурирања пре издања</string>
+    <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
+    <string name="settings_advanced_updates_manager_prereleases_description">Рани приступ новим верзијама Morphe</string>
+    <string name="settings_advanced_updates_prerelease_warning_title">Омогући ажурирања пре издања?</string>
+    <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
+    <string name="settings_advanced_updates_prerelease_warning_message">"Pre-release versions of Morphe are still in development and can be unstable.
+
+Patches are not affected: enable pre-release patches for each source in the patch sources list"</string>
     <string name="settings_advanced_updates_allow_metered">Ажурирања преко мобилних података</string>
     <string name="settings_advanced_updates_allow_metered_description">Омогућава апликацији Morphe и ажурирањима закрпе да се преузму преко мобилних података</string>
     <string name="settings_advanced_updates_background_notifications">Opozori o pozadinskom ažuriranju</string>
@@ -670,14 +718,6 @@
     <string name="settings_advanced_update_interval_monthly">Одавно једном на месец</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Фреквенција позадинских провере</string>
     <string name="settings_advanced_update_interval_battery_warning">Позадинске провере могу не радити на неким уређајима. Производитељи попут Xiaomi, Huawei, Samsung и OnePlus често агресивно ограничавају позадинске процесе да би сачували батерију</string>
-    <string name="settings_advanced_auto_patch">Аутоматско поновно печење</string>
-    <string name="settings_advanced_auto_patch_description">Поново пеци инсталиране апликације у позадини када се њихови печеви промене. Само апликације са сачуваним оригиналним APK-ом су обухваћене</string>
-    <string name="settings_advanced_auto_patch_interval">Фреквенција поновног печења</string>
-    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Како често се печене апликације поново граде</string>
-    <string name="settings_advanced_auto_patch_charging">Само током пуњења</string>
-    <string name="settings_advanced_auto_patch_charging_description">Печење је напорно за процесор и меморију, па се чека пуњач</string>
-    <string name="settings_advanced_auto_patch_install">Инсталирај аутоматски</string>
-    <string name="settings_advanced_auto_patch_install_description">Захтева Shizuku као инсталатер. Са било којим другим инсталатером, печене апликације се само сачувају</string>
     <string name="settings_advanced_external_batch_patch">Дозволи екстерне окидаче</string>
     <string name="settings_advanced_external_batch_patch_description">Омогућава апликацијама за аутоматизацију да почну групно печење помоћу намене. Сваки захтев се потврђује пре него што се било шта изврши</string>
     <string name="external_batch_patch_title">Почните групно печење?</string>
@@ -685,13 +725,6 @@
     <string name="external_batch_patch_trust_caller">Увек дозволи ову апликацију</string>
     <string name="external_batch_patch_unknown_caller">Непозната апликација</string>
     <!-- Notification content -->
-    <string name="notification_auto_patch_title">Аутоматско поновно печење је завршено</string>
-    <string name="notification_auto_patch_running_title">Поновно пеци апликације</string>
-    <string name="notification_auto_patch_blocked_title">Аутоматско поновно печење није покренуто</string>
-    <string name="notification_auto_patch_blocked_battery">Систем је блокирао ову инсталацију. На Xiaomi и сличним уређајима, укључите \"Инсталирај преко USB-а\" у опцијама за програмере. На радном профилу, инсталације могу бити ограничене политиком</string>
-    <string name="notification_auto_patch_blocked_foreground">Android није дозволио да се печење почне у позадини. Отворите Morphe и пеците из апликације</string>
-    <string name="notification_channel_auto_patch">Аутоматско поновно печење</string>
-    <string name="notification_channel_auto_patch_description">Тиха напредна и резултатска обавештења за планирано поновно печење</string>
     <string name="notification_manager_update_title">Доступно ажурирање Morphe-а</string>
     <string name="notification_bundle_update_title">Доступна су нова патчеа</string>
     <string name="notification_update_text">Верзија %s је спремна за преузимање</string>
@@ -1161,6 +1194,9 @@ morphe_header_custom_dark.png
     <string name="importing_ellipsis">Увоз…</string>
     <string name="imported_successfully">Успјешно импортирано</string>
     <string name="changelog">Прегледајте дневнике промена</string>
+    <string name="changelog_for_app">Измене за %s</string>
+    <string name="changelog_general_changes">Опште измене</string>
+    <string name="whats_new">Шта је ново</string>
     <string name="changelog_description">Pogledajte najnovije promene u ovom ažuriranju</string>
     <string name="changelog_download_fail">Није успело преузимање дневника промена: %s</string>
     <string name="changelog_empty">Нема доступних промена</string>
@@ -1173,13 +1209,13 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">Неуспешно инсталирање ажурирања</string>
     <string name="installing_manager_update">Инсталирање ажурирања…</string>
     <string name="downloading_manager_update">Преузимање ажурирања…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">Преузето %1$.1f MB</string>
     <string name="manager_update_not_ready">Овај издање је и даље у процесу објављивања. Покушајте поново за неколико минута</string>
+    <string name="update_download_missing">Преузето ажурирање више није доступно. Преузмите га поново.</string>
     <string name="download_manager_failed">Није успело преузимање ажурирања: %s</string>
     <string name="failed_to_check_updates">Није успело провера ажурирања: %s</string>
     <string name="failed_to_download_update">Није успело преузимање ажурирања: %s</string>
-    <string name="resume_download">Настави преузимање</string>
     <string name="download_confirmation_metered">"Тренутно сте на вези са ограниченим подацима, а могу се примењивати трошкови за пренос података вашег оператера.
 
 Да ли и даље желите да наставите?"</string>

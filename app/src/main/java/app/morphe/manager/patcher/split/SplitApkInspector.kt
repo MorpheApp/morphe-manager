@@ -41,13 +41,13 @@ object SplitApkInspector {
     private fun selectBestEntry(zip: ZipFile): ZipEntry? {
         val entries = zip.entries().asSequence()
             .filterNot { it.isDirectory }
-            .filter { it.name.lowercase(Locale.ROOT).endsWith(".apk") }
+            .filter { SplitApkPreparer.isSplitModuleEntry(it.name) }
             .toList()
         if (entries.isEmpty()) return null
 
         val lowered = entries.associateWith { it.name.lowercase(Locale.ROOT) }
         val baseEntry = lowered.entries.firstOrNull { (_, name) ->
-            name.endsWith("/base.apk") || name.endsWith("base.apk") || "base-master" in name || "base-main" in name
+            name.endsWith("base.apk") || "base-master" in name || "base-main" in name
         }?.key
         if (baseEntry != null) return baseEntry
 

@@ -66,11 +66,11 @@
         <item quantity="few">%s aplikacije so pripravljene za popravek</item>
         <item quantity="other">%s aplikacije so pripravljene za popravek</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">%s aplikacija je pripravljena za namestitev</item>
-        <item quantity="two">%s aplikaciji sta pripravljeni za namestitev</item>
-        <item quantity="few">%s aplikacije so pripravljene za namestitev</item>
-        <item quantity="other">%s aplikacije so pripravljene za namestitev</item>
+    <plurals name="repatch_available_count">
+        <item quantity="one">%s aplikacija se lahko ponovno zakrpa</item>
+        <item quantity="two">%s aplikaciji se lahko ponovno zakrpata</item>
+        <item quantity="few">%s aplikacije se lahko ponovno zakrpajo</item>
+        <item quantity="other">%s aplikacij se lahko ponovno zakrpa</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Preskočena %s aplikacija</item>
@@ -101,6 +101,12 @@
         <item quantity="two">%s aplikaciji</item>
         <item quantity="few">%s aplikacije</item>
         <item quantity="other">%s aplikacije</item>
+    </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="one">%s izbrano</item>
+        <item quantity="two">%s izbrani</item>
+        <item quantity="few">%s izbrana</item>
+        <item quantity="other">%s izbranih</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="one">Kopiran %s popravek iz izbranega paketa</item>

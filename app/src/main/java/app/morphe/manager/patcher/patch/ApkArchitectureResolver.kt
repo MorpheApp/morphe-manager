@@ -7,6 +7,7 @@ package app.morphe.manager.patcher.patch
 
 import android.os.Build
 import app.morphe.manager.patcher.split.SplitApkPreparer
+import app.morphe.manager.patcher.util.Abi
 import app.morphe.manager.patcher.util.NativeLibStripper
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.util.PM
@@ -25,19 +26,6 @@ import java.util.Locale
  * native code is not built for an architecture at all and stays [ApkArchitecture.UNIVERSAL].
  */
 object ApkArchitectureResolver {
-    // A name is always listed ahead of the ones it contains, so armeabi-v7a and x86_64 are never
-    // claimed by armeabi and x86. The order doubles as the preference for an APK that carries
-    // nothing the device itself runs
-    private val ARCHITECTURES = linkedMapOf(
-        "arm64-v8a" to ApkArchitecture.ARM64_V8A,
-        "armeabi-v7a" to ApkArchitecture.ARMEABI_V7A,
-        "armeabi" to ApkArchitecture.ARMEABI_V7A,
-        "x86_64" to ApkArchitecture.X86_64,
-        "x86" to ApkArchitecture.X86,
-    )
-
-    private val knownAbis = ARCHITECTURES.keys.toList()
-
     /** Architecture of the APK [selectedApp] will be patched from. */
     suspend fun resolve(selectedApp: SelectedApp, pm: PM): ApkArchitecture =
         withContext(Dispatchers.IO) {
@@ -63,18 +51,18 @@ object ApkArchitectureResolver {
         of(abis, Build.SUPPORTED_ABIS?.toList().orEmpty())
 
     internal fun of(abis: Collection<String>, deviceAbis: List<String>): ApkArchitecture {
-        val present = abis
-            .mapTo(mutableSetOf()) { it.lowercase(Locale.ROOT) }
-            .filterTo(mutableSetOf()) { it in ARCHITECTURES }
+        val present = abis.mapNotNullTo(mutableSetOf()) { abi ->
+            abi.lowercase(Locale.ROOT).takeIf { Abi.architectureOf(it) != null }
+        }
         if (present.isEmpty()) return ApkArchitecture.UNIVERSAL
 
         // Asked of the stripper rather than decided here, so the answer stays the ABI the run
         // actually keeps. An APK carrying nothing this device runs is still answered by what it
         // does carry, so patches see the file for what it is instead of where it was opened
         val abi = NativeLibStripper.preferredAbi(present, deviceAbis.map { it.lowercase(Locale.ROOT) })
-            ?: knownAbis.first { it in present }
+            ?: Abi.NAMES.first { it in present }
 
-        return ARCHITECTURES.getValue(abi)
+        return Abi.architectureOf(abi) ?: ApkArchitecture.UNIVERSAL
     }
 
     private fun installedApks(packageName: String, pm: PM): List<File> {

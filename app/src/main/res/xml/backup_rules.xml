@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-   Sample backup rules file; uncomment and customize as necessary.
-   See https://developer.android.com/guide/topics/data/autobackup
-   for details.
-   Note: This file is ignored for devices older that API 31
-   See https://developer.android.com/about/versions/12/backup-restore
--->
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Applies below API 31, where a backup and a device transfer follow the same rules. -->
 <full-backup-content>
-    <!--
-   <include domain="sharedpref" path="."/>
-   <exclude domain="sharedpref" path="device.xml"/>
--->
+    <exclude domain="root" path="app_original-apks" />
+    <exclude domain="root" path="app_patched-apps" />
+    <exclude domain="root" path="app_patch_bundles" />
+    <exclude domain="root" path="app_ephemeral" />
+    <exclude domain="root" path="app_ui_ephemeral" />
+
+    <!-- Nothing here tells a cloud backup from a device transfer, so the signing key stays out -->
+    <exclude domain="root" path="app_signing" />
 </full-backup-content>

@@ -55,8 +55,8 @@ time:
 > **Settings → System**. With the first one off, every update means downloading the APK
 > again.
 
-With several apps behind at once, patch them in one queue instead of one at a time, or let
-Morphe do it on a schedule, see [Patching several apps at once](batch-patching.md).
+With several apps behind at once, patch them in one queue instead of one at a time, see
+[Patching several apps at once](batch-patching.md).
 
 When patching finishes, install as usual. Android accepts it as an update to the existing
 app because Morphe signs every build with the same keystore, so your data, logins, and

@@ -59,6 +59,9 @@ import kotlinx.coroutines.delay
 import sh.calvin.reorderable.rememberReorderableLazyListState
 import kotlin.time.Duration.Companion.milliseconds
 
+/** Cards get more room where the layout splits into two columns and each holds only its half. */
+private val LandscapeMaxCardWidth = 700.dp
+
 internal fun HomeCategoryGroup.selectionKey(): String =
     sourceUid?.let { "source_$it" } ?: id?.let { "category_$it" } ?: "uncategorized"
 
@@ -236,8 +239,7 @@ fun SectionsLayout(
             }
         }
 
-        // Section 1: Notifications overlay - matches maxCardWidth in AdaptiveContent
-        val maxCardWidth = if (isLandscape()) 700.dp else 560.dp
+        val maxCardWidth = if (isLandscape()) LandscapeMaxCardWidth else Defaults.ContentMaxWidth
         NotificationsOverlay(
             notifications = notifications,
             modifier = Modifier
@@ -268,7 +270,7 @@ private fun AdaptiveContent(
     val contentPadding = windowSize.contentPadding
     val itemSpacing = windowSize.itemSpacing
     val useTwoColumns = isLandscape()
-    val maxCardWidth = if (useTwoColumns) 700.dp else 560.dp
+    val maxCardWidth = if (useTwoColumns) LandscapeMaxCardWidth else Defaults.ContentMaxWidth
 
     // True empty state: loaded and no items from any bundle: all disabled or no sources
     val isAppsEmpty by remember(apps.visible, apps.installedAppsLoading) {
@@ -492,7 +494,7 @@ private fun HomeFooterControls(
             Column {
                 Spacer(modifier = Modifier.height(itemSpacing))
                 GlassButton(
-                    label = stringResource(R.string.home_other_apps),
+                    label = stringResource(R.string.home_other_apps_action),
                     selected = false,
                     onClick = onOtherAppsClick,
                     modifier = Modifier

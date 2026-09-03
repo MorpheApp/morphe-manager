@@ -44,9 +44,9 @@
         <item quantity="one">Ang %s app ay handa nang i-patch</item>
         <item quantity="other">Ang %s apps ay handa nang i-patch</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">Ang %s app ay handa nang i-install</item>
-        <item quantity="other">Ang %s apps ay handa nang i-install</item>
+    <plurals name="repatch_available_count">
+        <item quantity="one">%s app ay maaaring i-repatch</item>
+        <item quantity="other">%s apps ay maaaring i-repatch</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Hindi isinama ang %s app</item>
@@ -67,6 +67,10 @@
     <plurals name="home_category_app_count">
         <item quantity="one">%s app</item>
         <item quantity="other">%s apps</item>
+    </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="one">%s ang napili</item>
+        <item quantity="other">%s ang napili</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="one">Kopyado ang %s patch mula sa napiling bundle</item>

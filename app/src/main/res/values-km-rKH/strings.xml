@@ -35,6 +35,7 @@
     <string name="sources_dialog_add_source">បន្ថែមប្រភពបំណះ</string>
     <string name="sources_dialog_remote_url">URL ប្រភព</string>
     <string name="sources_dialog_local_file">រើសឯកសារប្រភពបំណះ</string>
+    <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_update_unavailable">មិនទាន់មានការអាប់ដេតឡើយ</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -51,6 +52,11 @@
     <!-- Home Screen - App Info Screen -->
     <!-- Home Screen - Root Mode -->
     <!-- Patcher Screen -->
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <!-- Free and total RAM of the device, never its storage -->
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <!-- Value of "Libraries": every library was left in the patched APK -->
     <!-- Patcher Screen - Patcher Steps -->
     <!-- Battery optimization pre-flight dialog -->
     <!-- Memory limit dialog, shown after the patcher process was killed -->
@@ -76,6 +82,8 @@
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">អាយខនកម្មវិធី</string>
     <!-- Settings - Advanced Tab - Updates Section -->
+    <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
+    <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
     <!-- Notification content -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <!-- Bytecode mode -->
@@ -111,7 +119,7 @@
     <string name="import_">នាំចូល</string>
     <string name="copy">ចម្លង</string>
     <string name="allow">អនុញ្ញាត</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <!-- Onboarding coach marks -->
     <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <!-- Translate "System" the same way as the System settings tab -->

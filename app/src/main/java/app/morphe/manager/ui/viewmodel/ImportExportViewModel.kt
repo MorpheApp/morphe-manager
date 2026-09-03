@@ -1,6 +1,5 @@
 package app.morphe.manager.ui.viewmodel
 
-import android.app.ActivityManager
 import android.app.Application
 import android.content.ContentValues
 import android.net.Uri
@@ -497,24 +496,28 @@ class ImportExportViewModel(
         writer.write("ABI        : ${Build.SUPPORTED_ABIS.joinToString()}\n")
         writer.write("Locale     : ${Locale.getDefault().toLanguageTag()}\n")
 
-        writer.write("\n--- Memory ---\n")
-        val activityManager = app.getSystemService(ActivityManager::class.java)
-        val memInfo = ActivityManager.MemoryInfo().also { activityManager.getMemoryInfo(it) }
+        val stats = app.deviceStats()
         val toMb = { bytes: Long -> bytes / 1024 / 1024 }
-        writer.write("RAM avail  : ${toMb(memInfo.availMem)} MB / ${toMb(memInfo.totalMem)} MB\n")
-        writer.write("Low memory : ${memInfo.lowMemory}\n")
-        writer.write("Low mem thr: ${toMb(memInfo.threshold)} MB\n")
+
+        writer.write("\n--- Memory ---\n")
+        if (stats == null) {
+            writer.write("Unavailable\n")
+        } else {
+            writer.write("RAM avail  : ${toMb(stats.ramAvailable)} MB / ${toMb(stats.ramTotal)} MB\n")
+            writer.write("Low memory : ${stats.lowMemory}\n")
+            writer.write("Low mem thr: ${toMb(stats.lowMemoryThreshold)} MB\n")
+        }
 
         writer.write("\n--- Storage ---\n")
-        val internalDir = app.filesDir
-        val toMbL = { bytes: Long -> bytes / 1024 / 1024 }
-        writer.write("Internal   : ${toMbL(internalDir.freeSpace)} MB free / ${toMbL(internalDir.totalSpace)} MB total\n")
+        if (stats != null) {
+            writer.write("Internal   : ${toMb(stats.storageAvailable)} MB free / ${toMb(stats.storageTotal)} MB total\n")
+        }
         var sdCardIndex = 1
         app.externalStorageVolumes().forEach { (isPrimary, root) ->
             if (isPrimary) {
-                writer.write("External   : ${toMbL(root.freeSpace)} MB free / ${toMbL(root.totalSpace)} MB total\n")
+                writer.write("External   : ${toMb(root.freeSpace)} MB free / ${toMb(root.totalSpace)} MB total\n")
             } else {
-                writer.write("SD Card $sdCardIndex  : ${toMbL(root.freeSpace)} MB free / ${toMbL(root.totalSpace)} MB total\n")
+                writer.write("SD Card $sdCardIndex  : ${toMb(root.freeSpace)} MB free / ${toMb(root.totalSpace)} MB total\n")
                 sdCardIndex++
             }
         }

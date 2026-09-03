@@ -6,6 +6,7 @@
 package app.morphe.manager.ui.screen.home
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
@@ -16,8 +17,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,14 +30,18 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.Animations
 import app.morphe.manager.ui.screen.shared.AppDialogTextField
 import app.morphe.manager.ui.screen.shared.Defaults
+import app.morphe.manager.ui.screen.shared.EmptyState
 import app.morphe.manager.ui.screen.shared.HeroInfoCard
+import app.morphe.manager.ui.screen.shared.SemanticTone
+import app.morphe.manager.ui.screen.shared.StatusBadge
 import app.morphe.manager.ui.screen.shared.animatedListItem
 import app.morphe.manager.util.toHsv
 
@@ -62,7 +71,7 @@ internal fun PatchesListHeaderCard(
         val patchCountLabel = pluralStringResource(
             R.plurals.patch_count,
             totalCount,
-            totalCount
+            totalCount.toString()
         )
         val countText = if (isFiltering) "$filteredCount/$patchCountLabel"
         else patchCountLabel
@@ -108,6 +117,9 @@ internal fun rememberAccentCardColor(accentColor: Color?): Color? =
  *
  * [accentColor] is the color the bundle marks its own patches with, so the header stays part of
  * the block it opens when several bundles each contribute a universal section.
+ *
+ * [selectedCount] is badged on the header itself, since a folded section is the one place a
+ * patch can be enabled without being visible.
  */
 @Composable
 internal fun UniversalPatchesHeader(
@@ -115,7 +127,8 @@ internal fun UniversalPatchesHeader(
     isExpanded: Boolean,
     onToggle: (() -> Unit)?,
     modifier: Modifier = Modifier,
-    accentColor: Color? = null
+    accentColor: Color? = null,
+    selectedCount: Int = 0
 ) {
     // One chevron that turns, so the fold reads as the same control in both states
     val chevronRotation by animateFloatAsState(
@@ -124,9 +137,14 @@ internal fun UniversalPatchesHeader(
         label = "universal_patches_chevron"
     )
 
+    // Held while the badge fades out, so the count does not blink to zero on its way off
+    val lastSelectedCount = remember { mutableIntStateOf(selectedCount) }
+    if (selectedCount > 0) lastSelectedCount.intValue = selectedCount
+    val shownSelectedCount = lastSelectedCount.intValue
+
     HomeGlassCategoryRow(
         title = stringResource(R.string.expert_mode_universal_patches),
-        count = pluralStringResource(R.plurals.patch_count, count, count),
+        count = pluralStringResource(R.plurals.patch_count, count, count.toString()),
         onClick = onToggle,
         leading = {
             Icon(
@@ -137,17 +155,44 @@ internal fun UniversalPatchesHeader(
             )
         },
         trailing = {
-            if (onToggle != null) {
-                Icon(
-                    imageVector = Icons.Outlined.ExpandMore,
-                    contentDescription = stringResource(
-                        if (isExpanded) R.string.collapse else R.string.expand
-                    ),
-                    modifier = Modifier
-                        .size(24.dp)
-                        .graphicsLayer { rotationZ = chevronRotation },
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+            // One slot for both, so the chevron holds its place as the badge comes and goes
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                AnimatedVisibility(
+                    visible = selectedCount > 0,
+                    enter = Animations.expandHorizFadeIn,
+                    exit = Animations.shrinkHorizFadeOut
+                ) {
+                    val selectedLabel = pluralStringResource(
+                        R.plurals.expert_mode_selected_count,
+                        shownSelectedCount,
+                        shownSelectedCount.toString()
+                    )
+                    StatusBadge(
+                        text = shownSelectedCount.toString(),
+                        icon = Icons.Outlined.Check,
+                        tone = SemanticTone.Primary,
+                        // The bare number is meaningless read out, and the row merges its children
+                        modifier = Modifier
+                            .padding(end = Defaults.ContentPaddingSmall)
+                            .clearAndSetSemantics { contentDescription = selectedLabel }
+                    )
+                }
+                AnimatedVisibility(
+                    visible = onToggle != null,
+                    enter = Animations.expandHorizFadeIn,
+                    exit = Animations.shrinkHorizFadeOut
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.ExpandMore,
+                        contentDescription = stringResource(
+                            if (isExpanded) R.string.collapse else R.string.expand
+                        ),
+                        modifier = Modifier
+                            .size(24.dp)
+                            .graphicsLayer { rotationZ = chevronRotation },
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             }
         },
         cornerRadius = Defaults.SettingsCornerRadius,
@@ -161,8 +206,8 @@ internal fun UniversalPatchesHeader(
  * behind a collapsible header.
  *
  * Universal patches apply to every app and would otherwise bury the handful written for this one.
- * There is nothing worth folding away when they are the whole list, or when a search already
- * narrows it, so [isSearching] and an empty [specific] both keep the section open.
+ * There is nothing worth folding away when they are the whole list, or when a filter already
+ * narrows it, so [isFiltering] and an empty [specific] both keep the section open.
  *
  * [row] draws one patch and stays with the caller, since the lists differ in what a row carries
  * and in what it can be toggled into.
@@ -172,17 +217,18 @@ internal fun <T> LazyListScope.patchSectionRows(
     specific: List<T>,
     universal: List<T>,
     key: (T) -> Any,
-    isSearching: Boolean,
+    isFiltering: Boolean,
     isUniversalExpanded: Boolean,
     onUniversalExpandedChange: (Boolean) -> Unit,
     accentColor: Color? = null,
+    universalSelectedCount: Int = 0,
     row: @Composable LazyItemScope.(T) -> Unit
 ) {
     items(specific, key = key, itemContent = row)
 
     if (universal.isEmpty()) return
 
-    val alwaysOpen = isSearching || specific.isEmpty()
+    val alwaysOpen = isFiltering || specific.isEmpty()
     val isExpanded = alwaysOpen || isUniversalExpanded
 
     item(key = "universal_header_$sectionKey") {
@@ -191,6 +237,7 @@ internal fun <T> LazyListScope.patchSectionRows(
             isExpanded = isExpanded,
             onToggle = if (alwaysOpen) null else { { onUniversalExpandedChange(!isUniversalExpanded) } },
             accentColor = accentColor,
+            selectedCount = universalSelectedCount,
             modifier = Modifier.animatedListItem(this)
         )
     }
@@ -266,28 +313,29 @@ internal fun PatchesListSearchRow(
  */
 @Composable
 internal fun PatchesListEmptyState(modifier: Modifier = Modifier) {
-    Box(
+    EmptyState(
+        message = stringResource(R.string.expert_mode_no_results),
+        icon = Icons.Outlined.SearchOff,
         modifier = modifier
-            .fillMaxWidth()
-            .padding(vertical = 48.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Outlined.SearchOff,
-                contentDescription = null,
-                modifier = Modifier.size(48.dp),
-                tint = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-            Text(
-                text = stringResource(R.string.expert_mode_no_results),
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center
-            )
-        }
+    )
+}
+
+/**
+ * Which bundles have their universal section unfolded.
+ *
+ * The state belongs to the screen rather than to the section, since "enable all" has to open a
+ * section on the tap that finally reaches its universal patches.
+ */
+@Stable
+internal class UniversalSectionState {
+    private var expandedUids by mutableStateOf(emptySet<Int>())
+
+    operator fun contains(bundleUid: Int) = bundleUid in expandedUids
+
+    fun setExpanded(bundleUid: Int, expanded: Boolean) {
+        expandedUids = if (expanded) expandedUids + bundleUid else expandedUids - bundleUid
     }
 }
+
+@Composable
+internal fun rememberUniversalSectionState() = remember { UniversalSectionState() }

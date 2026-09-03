@@ -35,6 +35,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import app.morphe.manager.domain.batch.BatchTarget
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.model.navigation.*
 import app.morphe.manager.ui.screen.BatchPatcherScreen
 import app.morphe.manager.ui.screen.HomeScreen
@@ -49,6 +50,7 @@ import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.MainViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import app.morphe.manager.ui.viewmodel.ThemeSettingsViewModel
+import app.morphe.manager.ui.viewmodel.UpdateViewModel
 import app.morphe.manager.util.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -165,7 +167,24 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        // Automatic re-patch notification: reopens the queue it reports about
+        // Changelog action of an update notification: checks for nothing on the way in, so the
+        // notes are read against the installed version
+        if (intent?.action == ACTION_SHOW_BUNDLE_CHANGELOG) {
+            vm.pendingBundleChangelogUid = intent.getIntExtra(
+                EXTRA_CHANGELOG_BUNDLE_UID,
+                PatchBundleRepository.DEFAULT_SOURCE_UID
+            )
+            return
+        }
+
+        // Same action on a manager update notification. This one does resolve the release on
+        // the way in, because the notes it shows belong to a version that is not installed yet
+        if (intent?.action == ACTION_SHOW_MANAGER_CHANGELOG) {
+            vm.pendingManagerChangelog = true
+            return
+        }
+
+        // Batch result notification: reopens the queue it reports about
         if (intent?.action == ACTION_SHOW_BATCH_RESULT) {
             vm.pendingBatchResult = true
             return
@@ -189,8 +208,9 @@ class MainActivity : AppCompatActivity() {
                     ?.filter(String::isNotBlank)
 
             if (packageNames.isNullOrEmpty()) {
-                // No list means the launcher shortcut, which asks the app to work out what is
-                // outdated. It only opens the preflight list, so it needs no caller gate
+                // No list means the launcher shortcut or the re-patch notification, which
+                // ask the app to work out what is outdated. Either only opens the preflight
+                // list, so neither needs a caller gate
                 vm.pendingOutdatedBatch = true
             } else {
                 vm.pendingBatchPatch = MainViewModel.BatchPatchRequest(
@@ -268,6 +288,15 @@ class MainActivity : AppCompatActivity() {
         /** Action that reopens the batch queue from an automatic re-patch notification. */
         const val ACTION_SHOW_BATCH_RESULT = "app.morphe.manager.action.SHOW_BATCH_RESULT"
 
+        /** Action behind the changelog button of an update notification. */
+        const val ACTION_SHOW_BUNDLE_CHANGELOG = "app.morphe.manager.action.SHOW_BUNDLE_CHANGELOG"
+
+        /** Source whose changelog the update notification opens. */
+        const val EXTRA_CHANGELOG_BUNDLE_UID = "changelog_bundle_uid"
+
+        /** Action behind the changelog button of a manager update notification. */
+        const val ACTION_SHOW_MANAGER_CHANGELOG = "app.morphe.manager.action.SHOW_MANAGER_CHANGELOG"
+
         /** Package the per-app shortcut opens the patch dialog for. */
         const val EXTRA_PATCH_PACKAGE = "patch_package"
     }
@@ -330,6 +359,27 @@ private fun MorpheManager(vm: MainViewModel) {
 
     LaunchedEffect(vm.pendingBatchResult) {
         if (vm.pendingBatchResult) vm.onShowBatchResult()
+    }
+
+    // Changelog asked for from an update notification, shown over whichever screen is open
+    val patchSources by homeViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle()
+    BundleChangelogHost(
+        request = vm.pendingBundleChangelogUid?.let { BundleChangelogRequest(it) },
+        sources = patchSources,
+        onDismissRequest = { vm.pendingBundleChangelogUid = null }
+    )
+
+    // The manager has no changelog view of its own for a release it has not installed, so the
+    // update dialog is the answer to "what's new": it lists exactly the entries being offered
+    if (vm.pendingManagerChangelog) {
+        // Activity-scoped, so this shares the check and the download with the home screen
+        val updateViewModel: UpdateViewModel = koinViewModel(
+            viewModelStoreOwner = LocalActivity.current as ComponentActivity
+        )
+        ManagerUpdateDetailsDialog(
+            onDismiss = { vm.pendingManagerChangelog = false },
+            updateViewModel = updateViewModel
+        )
     }
 
     // Per-app shortcut reuses the trigger the installed-app dialog already goes through
@@ -522,7 +572,9 @@ private fun MorpheManager(vm: MainViewModel) {
             enterTransition = { Animations.screenEnter },
             exitTransition = { Animations.screenExit },
             popEnterTransition = { Animations.screenEnter },
-            popExitTransition = { Animations.screenExit }
+            popExitTransition = { Animations.screenExit },
+            predictivePopEnterTransition = { Animations.screenEnter },
+            predictivePopExitTransition = { Animations.pushExit }
         ) {
             composable<HomeScreen> { entry ->
                 val bundleUpdateProgress by homeViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)

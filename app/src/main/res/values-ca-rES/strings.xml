@@ -52,6 +52,7 @@
     <string name="sources_dialog_display_name">Nom mostrat</string>
     <string name="sources_dialog_rename">Canviar la font del pegat</string>
     <string name="sources_dialog_duplicate_name_error">Una font de pegats amb aquest nom ja existeix</string>
+    <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <!-- Home Screen - Dialog 1: APK Availability -->
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Descarrega l\'APK original</string>
@@ -74,6 +75,12 @@
     <!-- Home Screen - App Info Screen -->
     <!-- Home Screen - Root Mode -->
     <!-- Patcher Screen -->
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_value_unknown">desconegut</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <!-- Value of "Libraries": every library was left in the patched APK -->
     <!-- Patcher Screen - Patcher Steps -->
     <!-- Battery optimization pre-flight dialog -->
     <!-- Memory limit dialog, shown after the patcher process was killed -->
@@ -95,6 +102,8 @@
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <!-- Settings - Advanced Tab - Updates Section -->
+    <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
+    <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
     <!-- Notification content -->
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <!-- Bytecode mode -->
@@ -120,7 +129,7 @@
     <string name="settings_system_about">Quant a</string>
     <!-- Easter egg offered after seven taps on the version in the about dialog -->
     <!-- Shared strings -->
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <!-- Onboarding coach marks -->
     <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <!-- Translate "System" the same way as the System settings tab -->

@@ -24,6 +24,10 @@
         <item quantity="one">%s فایلی ئەی پی کەی</item>
         <item quantity="other">%s فایلەکانی ئەی پی کەی</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">بەرنامەی %s دامەزراو</item>
+        <item quantity="other">بەرنامە %s دامەزێنراوەکان</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">سڕینەوەی %s پینەی بەسەرچوو لە هەڵبژاردنی پاشەکەوتکراوەوە</item>
         <item quantity="other">سڕینەوەی %s پینەکانی بەسەرچوو لە هەڵبژاردنی پاشەکەوتکراوەوە</item>
@@ -35,5 +39,13 @@
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s ئەپ شاراوە</item>
         <item quantity="other">%s ئەپە شاراوەکان</item>
+    </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s بەرنامە</item>
+        <item quantity="other">%s بەرنامەکان</item>
+    </plurals>
+    <plurals name="expert_mode_copy_from_bundle_done">
+        <item quantity="one">پینە %s لە باندڵی هەڵبژێردراوەوە کۆپی کراوە</item>
+        <item quantity="other">پینەکان %s لە باندڵی هەڵبژێردراوەوە کۆپی کراون</item>
     </plurals>
 </resources>

@@ -70,6 +70,7 @@
     <string name="sources_dialog_local_file_description">یک فایل منبع پچ .mpp را از حافظه داخلی انتخاب کنید</string>
     <string name="sources_dialog_local_change_file">تغییر فایل</string>
     <string name="sources_dialog_preinstalled">پیش نصب شده</string>
+    <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_update_success">به روزرسانی موفقیت آمیز</string>
     <string name="sources_update_unavailable">هیچ به روزرسانی ای در دسترس نیست</string>
     <string name="sources_download_fail">دانلود منابع شکست خورد: %s</string>
@@ -174,6 +175,12 @@
     <!-- Home Screen - App Info Screen -->
     <!-- Home Screen - Root Mode -->
     <!-- Patcher Screen -->
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_value_unknown">ناشناخته</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <!-- Value of "Libraries": every library was left in the patched APK -->
     <!-- Patcher Screen - Patcher Steps -->
     <!-- Battery optimization pre-flight dialog -->
     <!-- Memory limit dialog, shown after the patcher process was killed -->
@@ -199,6 +206,8 @@
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <!-- Settings - Advanced Tab - Updates Section -->
+    <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
+    <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
     <!-- Notification content -->
     <string name="notification_manager_update_title">به‌روزرسانی Morphe در دسترس است</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
@@ -219,6 +228,7 @@
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
+    <string name="settings_system_patch_options_section">گزینه وصله</string>
     <!-- Copy selection from another bundle -->
     <!-- Settings - System Tab - Custom file picker -->
     <!-- Settings - System Tab - APK download helper -->
@@ -233,7 +243,7 @@
     <string name="disabled">غیرفعال</string>
     <string name="download">دانلود</string>
     <string name="allow">اجازه</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <!-- Onboarding coach marks -->
     <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <!-- Translate "System" the same way as the System settings tab -->

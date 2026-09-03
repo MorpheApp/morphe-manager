@@ -44,9 +44,9 @@
         <item quantity="one">%s ilova yangilanishga tayyor</item>
         <item quantity="other">%s ta ilova yangilanishga tayyor</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">%s ilova o‘rnatishga tayyor</item>
-        <item quantity="other">%s ta ilova o‘rnatishga tayyor</item>
+    <plurals name="repatch_available_count">
+        <item quantity="one">%s ta ilova qayta yamoqlanishi mumkin</item>
+        <item quantity="other">%s ta ilova qayta yamoqlanishi mumkin</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">%s ilova o‘tkazib yuborildi</item>

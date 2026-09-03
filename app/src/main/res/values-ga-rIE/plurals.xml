@@ -77,12 +77,12 @@
         <item quantity="many">%s aipeanna réidh le paisteáil</item>
         <item quantity="other">%s aipeanna réidh le paisteáil</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">Tá %s aip réidh le suiteáil</item>
-        <item quantity="two">Tá %s aipanna réidh le suiteáil</item>
-        <item quantity="few">Tá %s aipanna réidh le suiteáil</item>
-        <item quantity="many">Tá %s aipanna réidh le suiteáil</item>
-        <item quantity="other">Tá %s aipanna réidh le suiteáil</item>
+    <plurals name="repatch_available_count">
+        <item quantity="one">Is féidir %s aip a phaisteáil arís</item>
+        <item quantity="two">Is féidir %s aip a phaisteáil arís</item>
+        <item quantity="few">Is féidir %s aip a phaisteáil arís</item>
+        <item quantity="many">Is féidir %s aip a phaisteáil arís</item>
+        <item quantity="other">Is féidir %s aip a phaisteáil arís</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Scipeáladh %s aip</item>
@@ -118,6 +118,13 @@
         <item quantity="few">%s aip</item>
         <item quantity="many">%s aip</item>
         <item quantity="other">%s aip</item>
+    </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="one">%s roghnaithe</item>
+        <item quantity="two">%s roghnaithe</item>
+        <item quantity="few">%s roghnaithe</item>
+        <item quantity="many">%s roghnaithe</item>
+        <item quantity="other">%s roghnaithe</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="one">Cóipeáladh %s paiste ón bpacáiste roghnaithe</item>

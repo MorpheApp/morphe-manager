@@ -96,13 +96,25 @@ internal fun HomeAppListOptionsDialog(
                             )
                         }
 
-                        else -> HomeAppFilterMode.entries.forEach { mode ->
-                            RadioSelectionCard(
-                                selected = filterMode == mode,
-                                onSelect = { onFilterModeChange(mode) },
-                                title = stringResource(mode.labelRes),
-                                description = stringResource(mode.descriptionRes)
+                        // Filters are not SortModeSpec, so they get the same ordering here
+                        else -> {
+                            val filters = HomeAppFilterMode.entries.map { mode ->
+                                Triple(
+                                    mode,
+                                    stringResource(mode.labelRes),
+                                    stringResource(mode.descriptionRes)
+                                )
+                            }.sortedWith(
+                                compareBy(String.CASE_INSENSITIVE_ORDER) { (_, label, _) -> label }
                             )
+                            filters.forEach { (mode, label, description) ->
+                                RadioSelectionCard(
+                                    selected = filterMode == mode,
+                                    onSelect = { onFilterModeChange(mode) },
+                                    title = label,
+                                    description = description
+                                )
+                            }
                         }
                     }
                 }

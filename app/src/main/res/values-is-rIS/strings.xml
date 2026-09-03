@@ -2,6 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Önnur app</string>
+    <string name="home_other_apps_action">Veldu önnur forrit</string>
     <string name="home_not_patched_yet">Ekki breytt ennþá</string>
     <string name="home_unpatched_version_installed">Óplötuð útgáfa uppsett</string>
     <string name="home_unpatched_badge">Ekki púttað</string>
@@ -28,6 +29,7 @@
     <string name="home_outdated_manager_subtitle">Sumar uppsprettur þarf að uppfæra</string>
     <string name="home_metered_skipped_title">Uppfærslur á vinnslasvæði eru á stöðu</string>
     <string name="home_metered_skipped_subtitle">Tap til að leyfa uppfærslur á farsímagögnunum</string>
+    <string name="home_repatch_available_subtitle">Snertu til að setja þau öll í biðröð</string>
     <string name="home_update_error">Uppskera mistókst</string>
     <string name="home_update_error_subtitle">Eitthvað fór úrskeidandi þegar uppfæra átti heimildirnar</string>
     <string name="home_update_skipped_metered">Uppfærslur höfðu</string>
@@ -53,6 +55,8 @@
     <string name="home_app_sort_name_desc_description">Omreverse alfabetískt, Z til A</string>
     <string name="home_app_sort_updates_first">Pætingar fyrst</string>
     <string name="home_app_sort_updates_first_description">Forrit með uppfærslumerki fyrst, svo í mæltu lagi</string>
+    <string name="home_app_sort_recently_patched">Nýlega plástuð</string>
+    <string name="home_app_sort_recently_patched_description">Nýlegast plástruð forrit fyrst</string>
     <string name="home_no_apps_title">Engin forrit í boði</string>
     <string name="home_no_apps_subtitle">Bættu við heimild eða virkjaðu núverandi í %s</string>
     <string name="home_no_apps_search_subtitle">Engin forrit passa við \"%s\"</string>
@@ -124,11 +128,15 @@
     <string name="sources_sort_enabled_first">Gerilt fyrst</string>
     <string name="sources_sort_enabled_first_description">Sýna virka uppruna á undan óvirkuppruna</string>
     <string name="sources_management_open_in_browser">Opna í vafra</string>
+    <string name="sources_management_report_issue">Nýlega uppfærð forrit fyrst</string>
     <string name="sources_management_failed_to_open_url">Ekki tókst að opna vefslóð</string>
     <string name="sources_management_prerelease_toggle">For úgáfur</string>
     <string name="sources_management_prerelease_toggle_description">Fáðu snemma aðgang að nýjum tilraunabreytingar útgáfum</string>
+    <string name="sources_prerelease_warning_title">Tilkynna vandamál</string>
+    <string name="sources_prerelease_warning_message">Virkja forútgáfuplástra?</string>
+    <string name="expert_mode_prerelease_notice">Þessi uppspretta er með forútgáfuplástra. Plástrun getur mistekist eða hegðað sér óvænt.</string>
     <string name="sources_management_experimental_versions_toggle">Tilrauna app úgáfur</string>
-    <string name="sources_management_experimental_versions_toggle_description">Breytir tilrauna app markmiðum ef fáanlegt</string>
+    <string name="sources_management_experimental_versions_toggle_description">Sýnir og lagar tilraunamarkmið forrita</string>
     <string name="sources_management_already_exists">Þessi heimild hefur þegar verið bætt við</string>
     <string name="sources_management_invalid_url">Ógild URL uppspretta. Vinsamlegast skoðaðu netfangið og reyndu aftur</string>
     <string name="sources_management_blocked">Þessi uppfærslujafi er blokkaður og ekki er hægt að bæta við honum</string>
@@ -162,6 +170,12 @@
     <string name="sources_dialog_url_invalid">URL verður að benda á GitHub/GitLab repository eða .json skrá</string>
     <string name="sources_dialog_local_change_file">Breyta skrá</string>
     <string name="sources_dialog_preinstalled">Foruppsett</string>
+    <string name="sources_dialog_community">Samfélagsplástrar</string>
+    <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
+    <string name="sources_dialog_community_notice_title">Þriðja aðila plástrauppsprettur</string>
+    <string name="sources_dialog_community_notice_message">"Samfélagsplástrauppsprettur eru gerðar og viðhaldnar af eigin höfundum þeirra. Morphe endurskoðar eða staðfestir ekki þriðja aðila plástra, og ber ekki ábyrgð á innihaldi þeirra eða því sem þeir gera á tækinu þínu.
+
+Allt sem þú bætir við frá þessari vefsíðu er notað á eigin ábyrgð."</string>
     <string name="sources_update_success">Uppfærsla vel heppnað</string>
     <string name="sources_update_unavailable">Ekki tókst að uppfæra</string>
     <string name="sources_download_fail">Ekki tókst að sækja heimildir: %s</string>
@@ -192,6 +206,7 @@
     <string name="home_apk_helper_installed_incompatible">Ekki er hægt að plástra uppsettu útgáfuna</string>
     <string name="home_apk_use_saved">Nota vistað APK</string>
     <string name="home_apk_use_installed">Nota upphætt APK</string>
+    <string name="home_apk_use_saved_unsupported">Plástrarnir styðja ekki þetta vistaða afrit. Að setja plástra á það mun biðja þig um staðfestingu, eða veldu aðra APK</string>
     <string name="home_apk_use_installed_unverified">Gat ekki staðfest undirskrift uppsetts forrits, þannig að það gæti þegar verið lagað</string>
     <string name="home_unverified">Óstaðfest</string>
     <string name="home_install_verification_pending">Athuga uppsetningu…</string>
@@ -251,6 +266,8 @@
     <string name="expert_mode_enable_all">Gerðu allt virkt</string>
     <string name="expert_mode_enable_all_done">Allar breytingar virkar</string>
     <string name="expert_mode_enable_all_universal_pending">Ýttu aftur til að fá algilda plástra</string>
+    <string name="expert_mode_universal_all_warning_title">Virkja alla alhliða plástra?</string>
+    <string name="expert_mode_universal_all_warning_message">Alhliða plástrar eru ekki prófaðir saman. Að virkja alla í einu getur valdið árekstrum, mistekinni plástrun eða hruni.</string>
     <string name="expert_mode_reset_to_default">Virkja mæltu breytingar</string>
     <string name="expert_mode_reset_to_default_done">Mæltu breytingarnar notaðar</string>
     <string name="expert_mode_restore_saved">Endurheimta valda</string>
@@ -258,8 +275,11 @@
     <string name="expert_mode_copy_from_bundle">Afrita val frá öðrum pakka</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Engar samsvarandi breytingar í þessum pakka</string>
     <string name="expert_mode_no_results">Engar breytistillingar fundust</string>
+    <string name="expert_mode_selected_only_on">Sýni aðeins valda plástra</string>
+    <string name="expert_mode_selected_only_off">Sýni alla plástra</string>
     <string name="expert_mode_universal_patches">Alhliða breytingar</string>
     <string name="expert_mode_new_patches">Nýtt</string>
+    <string name="expert_mode_options_customized">Sérsniðið</string>
     <string name="expert_mode_patch_required_by_installer">Þetta er nauðsynlegt fyrir valið uppsetningarmark</string>
     <string name="expert_mode_patch_unavailable_for_installer">Ekki í boði fyrir valið uppsetningarmark</string>
     <string name="expert_mode_multiple_sources_warning_title">Fleiri pakkningagjafar valdar</string>
@@ -435,7 +455,27 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="patcher_error_copied">Villa afrituð á klippiborð</string>
     <string name="patcher_error_log">Villulog</string>
     <string name="patcher_error_technical">Tæknilegar upplýsingar</string>
-    <string name="patcher_error_dialog_app_info">Upplýsingar um app</string>
+    <string name="patcher_error_dialog_diagnostics">Villugreining</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">Forrit</string>
+    <string name="patcher_field_package">Pakki</string>
+    <string name="patcher_field_source">Uppruni</string>
+    <string name="patcher_field_split">Skipt APK</string>
+    <string name="patcher_field_manager">Stjórnandi</string>
+    <string name="patcher_field_patcher">Plástrari</string>
+    <string name="patcher_field_runtime">Keyrslutími</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Söfn</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Tæki</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Minni</string>
+    <string name="patcher_field_storage">Geymsla</string>
+    <string name="patcher_field_value_unknown">óþekkt</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">fjarlægð</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">varðveitt</string>
     <string name="patcher_tab_logs">Patcher skrá</string>
     <string name="patcher_tab_game">Leikir</string>
     <string name="patcher_logs_waiting">Bíð eftir útgáfu skráa…</string>
@@ -446,7 +486,7 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="patcher_success_subtitle">Appið þitt er breytt og uppsett!</string>
     <string name="patcher_complete_title">Viðgerð lokið! ✨</string>
     <string name="patcher_failed_title">Afsakið! Eitthvað fór úrskeikur</string>
-    <string name="patcher_failed_subtitle">Vinsamlegast skoðaðu villuupplýsingarnar hér að neðan</string>
+    <string name="patcher_failed_hint">Ýttu á %s til að sjá hvað fór úrskeiðis</string>
     <string name="patcher_failed_dialog_title">Viðgerðin mislukkaðist</string>
     <string name="patcher_unknown_error">Óþekkt villa kom upp</string>
     <string name="patcher_split_step_extracting">Útdráttur af flíknum APK</string>
@@ -622,6 +662,8 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Sýna kveðju skilaboð á heimaskjá</string>
     <string name="settings_appearance_app_grouping">Forritaflokkun</string>
     <string name="settings_appearance_app_grouping_description">Sýna rofasa á heimaskjá til að flokka forrit eftir uppruna eða eigin flokkum, halda vali þegar slökkt er á rofanum</string>
+    <string name="settings_appearance_repatch_notice">Tilkynning um endurplástrun</string>
+    <string name="settings_appearance_repatch_notice_description">Sýna borða á heimaskjánum þegar hægt er að plástra forritin aftur</string>
     <string name="settings_appearance_sort_button">Röðunar- og síunarhnappur</string>
     <string name="settings_appearance_sort_button_description">Sýna röðunar- og síunarhnappinn á heimaskjánum</string>
     <string name="settings_appearance_app_card_colors">Litir á app kortum</string>
@@ -653,8 +695,14 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Uppfæra</string>
     <string name="settings_advanced_patcher">Patcher</string>
-    <string name="settings_advanced_updates_use_prereleases">Uppfærsla fyrir útgáfur</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Snemma aðgangur að nýjum Morphe app útgáfum. Virkja for útgáfur per heimild í breytandas heimildum</string>
+    <string name="settings_advanced_updates_manager_prereleases">Forútgáfuuppfærslur</string>
+    <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
+    <string name="settings_advanced_updates_manager_prereleases_description">Snemma aðgangur að nýjum Morphe útgáfum</string>
+    <string name="settings_advanced_updates_prerelease_warning_title">Virkja forútgáfuuppfærslur?</string>
+    <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
+    <string name="settings_advanced_updates_prerelease_warning_message">"Forútgáfuútgáfur af Morphe eru enn í þróun og geta verið óstöðugar.
+
+Plástrar verða ekki fyrir áhrifum: virkjaðu forútgáfuplástra fyrir hverja uppsprettu í lista yfir uppsprettur."</string>
     <string name="settings_advanced_updates_allow_metered">Gagnagáfa á gögnum</string>
     <string name="settings_advanced_updates_allow_metered_description">Leyfir Morphe og breytingar uppfærslu hlaði niður á farsímaneton</string>
     <string name="settings_advanced_updates_background_notifications">Bakgrunns uppfærslukynning</string>
@@ -668,14 +716,6 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="settings_advanced_update_interval_monthly">Einu sinni á mánuði</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Bakgrunns þjónastútur tímatali</string>
     <string name="settings_advanced_update_interval_battery_warning">Bakgrunnur prótanir mega ekki virka á ákveðnum tækjum. Framleiðendur eins og Xiaomi, Huawei, Samsung og OnePlus takast oft á við bakgrunns prótanir til að spara rafmagn</string>
-    <string name="settings_advanced_auto_patch">Sjálfvirk endurbreyting</string>
-    <string name="settings_advanced_auto_patch_description">Endurbreyta uppsettum appum í bakgrunni þegar breytingar á þeim gerast. Aðeins appum með vistaðan upprunalegan APK er hyljað</string>
-    <string name="settings_advanced_auto_patch_interval">Endurbreytingartíðni</string>
-    <string name="settings_advanced_auto_patch_interval_chip_subtitle">Hversu oft breytt app er endurbreytt</string>
-    <string name="settings_advanced_auto_patch_charging">Aðeins þegar hlaðið er</string>
-    <string name="settings_advanced_auto_patch_charging_description">Breytingar eru þungar á örgjörvann og minni, þannig að það bíður eftir hleðslu</string>
-    <string name="settings_advanced_auto_patch_install">Settur upp sjálfkrafa</string>
-    <string name="settings_advanced_auto_patch_install_description">Krefst Shizuku sem uppsetningaraðila. Með öðrum uppsetningaraðila eru breytt app bara vistað</string>
     <string name="settings_advanced_external_batch_patch">Leyfa ytri kveikja</string>
     <string name="settings_advanced_external_batch_patch_description">Leyfir sjálfvirkni forritum að heja breytingum með því að nota fyrirspurn. Allar beiðnir eru staðfestar áður en eitthvað er keyrt</string>
     <string name="external_batch_patch_title">Heja breytingum?</string>
@@ -683,13 +723,6 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="external_batch_patch_trust_caller">Alltaf leyfa þessu appi</string>
     <string name="external_batch_patch_unknown_caller">Óþekkt app</string>
     <!-- Notification content -->
-    <string name="notification_auto_patch_title">Sjálfvirk endurbreyting lokið</string>
-    <string name="notification_auto_patch_running_title">Endurbreyting appa</string>
-    <string name="notification_auto_patch_blocked_title">Sjálfvirk endurbreyting hófst ekki</string>
-    <string name="notification_auto_patch_blocked_battery">Kerfið lokaði þessari uppsetningu. Á Xiaomi og sambærilegum tækjum, kveiktu á \"Uppsetningu í gegnum USB\" í valkostum fyrir forritara. Á vinnusniðum geta uppsetningar verið takmörkuð af stefnu</string>
-    <string name="notification_auto_patch_blocked_foreground">Android leyfði ekki breytingum að hefjast í bakgrunni. Opnaðu Morphe og breyttu frá appinu</string>
-    <string name="notification_channel_auto_patch">Sjálfvirk endurbreyting</string>
-    <string name="notification_channel_auto_patch_description">Hlífðarlaus framvindandi og niðurstöðugar tilkynningar um skipulagða endurbreytingu</string>
     <string name="notification_manager_update_title">Morphe uppfærsla í boði</string>
     <string name="notification_bundle_update_title">Nýjar pakkningar í boði</string>
     <string name="notification_update_text">Útgáfa %s er tilbúin til að hlaða niður</string>
@@ -1156,6 +1189,9 @@ Nánari upplýsingar: %2$s"</string>
     <string name="importing_ellipsis">Innflutningur…</string>
     <string name="imported_successfully">Flutt inn með árangri</string>
     <string name="changelog">Skoða breytingaskrá</string>
+    <string name="changelog_for_app">Breytingar fyrir %s</string>
+    <string name="changelog_general_changes">Almennar breytingar</string>
+    <string name="whats_new">Hvað er nýtt</string>
     <string name="changelog_description">Skoða nýjustu breytingarnar í þessari uppfærslu</string>
     <string name="changelog_download_fail">Ekki tókst að sækja breytingaskrá: %s</string>
     <string name="changelog_empty">Engin breytingaskrá í boði</string>
@@ -1168,13 +1204,13 @@ Nánari upplýsingar: %2$s"</string>
     <string name="install_update_manager_failed">Ekki tókst að setja upp uppfærslu</string>
     <string name="installing_manager_update">Sæti uppfærslu…</string>
     <string name="downloading_manager_update">Sæki uppfærslu…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB niðurhalin</string>
     <string name="manager_update_not_ready">Þessi útgáfa er enn í útgáfuferlinu. Reyndu aftur á nokkrum mínútum</string>
+    <string name="update_download_missing">Sótta uppfærslan er ekki lengur tiltæk. Sæktu hana aftur.</string>
     <string name="download_manager_failed">Ekki tókst að sækja uppfærslu: %s</string>
     <string name="failed_to_check_updates">Ekki tókst að skoða uppfærslur: %s</string>
     <string name="failed_to_download_update">Ekki tókst að sækja uppfærslu: %s</string>
-    <string name="resume_download">Endurheimta niðuhlaðningu</string>
     <string name="download_confirmation_metered">"Þú ert núna á mældri tengingu og gjalda frá þjónustuaðilum þínum gætu átt við.
 
 Haltu samt sem áður?"</string>

@@ -5,7 +5,6 @@ import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.patcher.patch.PatchLockState
 import app.morphe.manager.util.PatchSelectionUtils.bulkEnablePatches
-import app.morphe.manager.util.PatchSelectionUtils.filterGmsCore
 import app.morphe.manager.util.PatchSelectionUtils.sanitizeForPatcher
 import app.morphe.manager.util.PatchSelectionUtils.spansMultipleBundles
 import app.morphe.patcher.patch.ApkArchitecture
@@ -57,13 +56,21 @@ fun SelectionPayload.remapAndExtractSelection(
 object PatchSelectionUtils {
 
     /**
+     * Puts [patches] under [bundleUid], dropping the entry when nothing is left selected.
+     *
+     * A bundle absent from the map and a bundle mapped to an empty set would otherwise both mean
+     * "nothing selected here", and the rest of the selection code reads only the first as such.
+     */
+    fun PatchSelection.withBundle(bundleUid: Int, patches: Set<String>): PatchSelection =
+        if (patches.isEmpty()) this - bundleUid else this + (bundleUid to patches)
+
+    /**
      * Toggle a patch in a selection map.
      * If the patch is selected, it will be deselected and vice versa.
      * Allows adding patches from bundles not yet in the selection (creates new entry).
      */
     fun PatchSelection.togglePatch(bundleUid: Int, patchName: String): PatchSelection {
-        val current = this.toMutableMap()
-        val bundlePatches = current[bundleUid]?.toMutableSet() ?: mutableSetOf()
+        val bundlePatches = this[bundleUid]?.toMutableSet() ?: mutableSetOf()
 
         if (patchName in bundlePatches) {
             bundlePatches.remove(patchName)
@@ -71,13 +78,7 @@ object PatchSelectionUtils {
             bundlePatches.add(patchName)
         }
 
-        if (bundlePatches.isEmpty()) {
-            current.remove(bundleUid)
-        } else {
-            current[bundleUid] = bundlePatches
-        }
-
-        return current
+        return withBundle(bundleUid, bundlePatches)
     }
 
     /**
@@ -113,6 +114,14 @@ object PatchSelectionUtils {
         val hasUnselectedUniversal = selectable.any { (patch, enabled) -> patch.isUniversal && !enabled }
         return hasUnselectedUniversal && !(universalArmed && selectable.allRegularSelected())
     }
+
+    /**
+     * True when a bulk enable of [this] would turn on at least one universal patch, i.e. the
+     * locked off ones do not count because [bulkEnablePatches] leaves them alone.
+     */
+    fun List<Pair<PatchInfo, Boolean>>.hasEnablableUniversal(
+        lockStateOf: (PatchInfo) -> PatchLockState
+    ) = selectable(lockStateOf).any { (patch, enabled) -> patch.isUniversal && !enabled }
 
     /** Patches the user is allowed to turn on, i.e. everything except the locked off ones. */
     private fun List<Pair<PatchInfo, Boolean>>.selectable(lockStateOf: (PatchInfo) -> PatchLockState) =
@@ -186,6 +195,49 @@ object PatchSelectionUtils {
             }.toMap()
             if (cleanedBundle.isEmpty()) null else bundleUid to cleanedBundle
         }.toMap()
+
+    /**
+     * True when [values] holds at least one option the user moved off the value the patch itself
+     * would use. Options are only ever stored on an explicit edit, but a stored value can still
+     * match the default, and blanks are the cleared fields [sanitizeForPatcher] drops before the
+     * run, so neither counts as a customization.
+     */
+    fun PatchInfo.hasCustomizedOptions(values: Map<String, Any?>?): Boolean {
+        if (values.isNullOrEmpty()) return false
+
+        return options?.any { option ->
+            val value = values[option.key] ?: return@any false
+            if (value is String && value.isBlank()) return@any false
+            value != option.default
+        } == true
+    }
+
+    /**
+     * True when a required option is left without a usable value: neither a stored one nor a
+     * default of the patch's own. A blank counts as missing only where the default is not itself
+     * blank, since a patch may ship an empty default on purpose.
+     */
+    fun PatchInfo.hasMissingRequiredOptions(values: Map<String, Any?>?): Boolean =
+        options?.any { option ->
+            if (!option.required) return@any false
+            val effectiveValue = values?.get(option.key) ?: option.default
+            effectiveValue == null || (
+                effectiveValue is String && effectiveValue.isBlank() &&
+                !(option.default is String && option.default.isBlank())
+            )
+        } == true
+
+    /**
+     * Merge [bundleOptions] into the entry of [bundleUid], replacing whole patches rather than
+     * individual keys, so a patch it does not mention keeps the values it already had.
+     */
+    fun Options.mergeBundleOptions(
+        bundleUid: Int,
+        bundleOptions: Map<String, Map<String, Any?>>
+    ): Options {
+        val merged = this[bundleUid].orEmpty() + bundleOptions
+        return if (merged.isEmpty()) this - bundleUid else this + (bundleUid to merged)
+    }
 
     /**
      * Reset all options for a specific patch in an options map.
@@ -277,8 +329,7 @@ object PatchSelectionUtils {
      * patch still starts out selected through [PatchInfo.defaultSelected], it merely stays
      * unlockable until the run is down to a single bundle again.
      *
-     * Patches without an availability resolver are left untouched here. Legacy GmsCore hardcoding
-     * lives in [filterGmsCore] for the transition period.
+     * Patches without an availability resolver are left untouched here.
      */
     fun PatchSelection.applyAvailability(
         installerType: InstallerType,
@@ -306,25 +357,4 @@ object PatchSelectionUtils {
             if (current.isEmpty()) null else bundleUid to current.toSet()
         }.toMap()
     }
-
-    /**
-     * Filter out GmsCore support patch from selection (for mount installs).
-     *
-     * Safety net for bundles that predate the availability API or come from third-party sources
-     * that have not adopted it yet. Matches strictly by patch name so it becomes a no-op the
-     * moment the bundle's own resolver removes the patch first.
-     */
-    // TODO: Delete once the patches release declaring `availability {}` for "GmsCore support"
-    //  has propagated to users, together with both call sites:
-    //  HomeViewModel.applyInstallerRules and BatchPlanResolver.applyLegacyMountRules
-    @Deprecated(
-        message = "Kept for legacy bundles. Prefer applyAvailability with the patch-declared resolver.",
-        replaceWith = ReplaceWith("applyAvailability(InstallerType.MOUNT, apkArchitecture, allBundlePatches)")
-    )
-    fun PatchSelection.filterGmsCore(): PatchSelection {
-        return mapValues { (_, patches) ->
-            patches.filterNot { it.equals("GmsCore support", ignoreCase = true) }.toSet()
-        }.filterValues { it.isNotEmpty() }
-    }
-
 }

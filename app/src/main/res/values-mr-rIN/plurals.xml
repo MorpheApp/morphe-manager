@@ -44,9 +44,9 @@
         <item quantity="one">%s ॲप पॅच करण्यासाठी तयार आहे</item>
         <item quantity="other">%s ॲप्स पॅच करण्यासाठी तयार आहेत</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">%s ॲप स्थापनेसाठी तयार आहे</item>
-        <item quantity="other">%s ॲप्स स्थापनेसाठी तयार आहेत</item>
+    <plurals name="repatch_available_count">
+        <item quantity="one">%s अॅप पुन्हा पॅच केले जाऊ शकते</item>
+        <item quantity="other">%s अॅप्स पुन्हा पॅच केले जाऊ शकतात</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">%s ॲप वगळले</item>

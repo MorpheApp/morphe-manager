@@ -42,6 +42,9 @@ class PreferencesManager(
 
     val pureBlackTheme = booleanPreference("pure_black_theme", false)
     val showGreetingPhrases = booleanPreference("show_greeting_phrases", true)
+
+    /** The per-app badges carry the same news, so the banner is worth turning off. */
+    val showRepatchNotice = booleanPreference("show_repatch_notice", true)
     val customAccentColor = stringPreference("custom_accent_color", "")
     val customThemeColor = stringPreference("custom_theme_color", "")
     val appCardColorMode = enumPreference("app_card_color_mode", AppCardColorMode.DEFAULT)
@@ -71,21 +74,6 @@ class PreferencesManager(
 
     /**  How often the background update check should run. */
     val updateCheckInterval = enumPreference("update_check_interval", UpdateCheckInterval.DAILY)
-
-    /** Whether patched apps are re-patched automatically when their patch bundle changes. */
-    val autoPatchEnabled = booleanPreference("auto_patch_enabled", false)
-
-    /** How often the automatic re-patch check runs. */
-    val autoPatchInterval = enumPreference("auto_patch_interval", UpdateCheckInterval.WEEKLY)
-
-    /** Restricts automatic re-patching to a charging device, patching is CPU and RAM heavy. */
-    val autoPatchRequiresCharging = booleanPreference("auto_patch_requires_charging", true)
-
-    /**
-     * Installs automatically re-patched apps without asking. Only possible with an installer
-     * that works unattended, otherwise the run stops after saving the APKs.
-     */
-    val autoPatchInstall = booleanPreference("auto_patch_install", false)
 
     /** Whether other apps may start a batch patch run through an intent. */
     val externalBatchPatchEnabled = booleanPreference("external_batch_patch_enabled", false)
@@ -256,15 +244,12 @@ class PreferencesManager(
         val bundleExperimentalVersionsEnabled: Set<String>? = null,
         val disablePatchVersionCompatCheck: Boolean? = null,
         val showGreetingPhrases: Boolean? = null,
+        val showRepatchNotice: Boolean? = null,
         val backgroundType: BackgroundType? = null,
         val randomBackgroundInterval: RandomInterval? = null,
         val matrixBackgroundUnlocked: Boolean? = null,
         val useExpertMode: Boolean? = null,
         val updateCheckInterval: UpdateCheckInterval? = null,
-        val autoPatchEnabled: Boolean? = null,
-        val autoPatchInterval: UpdateCheckInterval? = null,
-        val autoPatchRequiresCharging: Boolean? = null,
-        val autoPatchInstall: Boolean? = null,
         val externalBatchPatchEnabled: Boolean? = null,
         val externalBatchPatchAllowlist: Set<String>? = null,
         val customBundles: List<BundleSnapshot>? = null,
@@ -303,9 +288,6 @@ class PreferencesManager(
         installerPrimary = installerPrimary.get(),
         installerCustomComponents = installerCustomComponents.get(),
         installerHiddenComponents = installerHiddenComponents.get(),
-        keystoreAlias = keystoreAlias.get(),
-        keystorePass = keystorePass.get(),
-        keystorePassword = keystorePassword.get().takeIf { it.isNotEmpty() },
         firstLaunch = firstLaunch.get(),
         useManagerPrereleases = useManagerPrereleases.get(),
         // Custom sources carry prerelease/experimental toggles in customBundles, and the official
@@ -315,15 +297,12 @@ class PreferencesManager(
             bundleExperimentalVersionsEnabled.get().contains(DEFAULT_SOURCE_UID.toString()),
         disablePatchVersionCompatCheck = disablePatchVersionCompatCheck.get(),
         showGreetingPhrases = showGreetingPhrases.get(),
+        showRepatchNotice = showRepatchNotice.get(),
         backgroundType = backgroundType.get(),
         randomBackgroundInterval = randomBackgroundInterval.get(),
         matrixBackgroundUnlocked = matrixBackgroundUnlocked.get(),
         useExpertMode = useExpertMode.get(),
         updateCheckInterval = updateCheckInterval.get(),
-        autoPatchEnabled = autoPatchEnabled.get(),
-        autoPatchInterval = autoPatchInterval.get(),
-        autoPatchRequiresCharging = autoPatchRequiresCharging.get(),
-        autoPatchInstall = autoPatchInstall.get(),
         externalBatchPatchEnabled = externalBatchPatchEnabled.get(),
         externalBatchPatchAllowlist = externalBatchPatchAllowlist.get(),
         bytecodeModePreference = bytecodeModePreference.get(),
@@ -388,15 +367,12 @@ class PreferencesManager(
         }
         snapshot.disablePatchVersionCompatCheck?.let { disablePatchVersionCompatCheck.value = it }
         snapshot.showGreetingPhrases?.let { showGreetingPhrases.value = it }
+        snapshot.showRepatchNotice?.let { showRepatchNotice.value = it }
         snapshot.backgroundType?.let { backgroundType.value = it }
         snapshot.randomBackgroundInterval?.let { randomBackgroundInterval.value = it }
         snapshot.matrixBackgroundUnlocked?.let { matrixBackgroundUnlocked.value = it }
         snapshot.useExpertMode?.let { useExpertMode.value = it }
         snapshot.updateCheckInterval?.let { updateCheckInterval.value = it }
-        snapshot.autoPatchEnabled?.let { autoPatchEnabled.value = it }
-        snapshot.autoPatchInterval?.let { autoPatchInterval.value = it }
-        snapshot.autoPatchRequiresCharging?.let { autoPatchRequiresCharging.value = it }
-        snapshot.autoPatchInstall?.let { autoPatchInstall.value = it }
         snapshot.externalBatchPatchEnabled?.let { externalBatchPatchEnabled.value = it }
         snapshot.externalBatchPatchAllowlist?.let { externalBatchPatchAllowlist.value = it }
         snapshot.bytecodeModePreference?.let { bytecodeModePreference.value = it }

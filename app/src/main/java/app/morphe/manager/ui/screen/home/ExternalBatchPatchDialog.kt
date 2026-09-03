@@ -70,7 +70,7 @@ fun ExternalBatchPatchDialog(
                 text = pluralStringResource(
                     R.plurals.batch_patch_ready_count,
                     packageCount,
-                    packageCount
+                    packageCount.toString()
                 ),
                 style = MaterialTheme.typography.bodyMedium,
                 color = LocalDialogSecondaryTextColor.current,

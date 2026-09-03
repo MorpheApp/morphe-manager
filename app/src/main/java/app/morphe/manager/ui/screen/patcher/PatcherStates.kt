@@ -34,6 +34,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_BUILD
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_DEVICE
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_SOURCE
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.InstallViewModel.InstallState
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
@@ -45,10 +48,23 @@ data class PatcherErrorInfo(
     val appName: String,
     val packageName: String,
     val appVersion: String,
-    val bundles: List<BundleInfo>
+    val patchCount: Int,
+    val bundles: List<BundleInfo>,
+    /** Null where the setting the run used is no longer known, as in a batch run. */
+    val stripsNativeLibs: Boolean?
 ) {
     data class BundleInfo(val name: String, val version: String?)
 }
+
+/**
+ * Log lines the error dialog already spells out field by field in its diagnostics card, dropped
+ * from the log it falls back to so the same values are not read twice.
+ */
+private val SummarisedLogPrefixes = listOf(
+    LOG_WORKER_PREFIX_BUILD,
+    LOG_WORKER_PREFIX_DEVICE,
+    LOG_WORKER_PREFIX_SOURCE
+)
 
 /** Enum for patcher states. */
 enum class PatcherState {
@@ -72,13 +88,15 @@ class PatcherScreenState(
     var hasPatchingError by mutableStateOf(false)
 
     /**
-     * The message shown in the error dialog. If [errorMessage] is blank or generic,
-     * falls back to the full patching log so the user always sees actionable information.
+     * The message shown in the error dialog. If [errorMessage] is blank or generic, falls back
+     * to the patching log so the user always sees actionable information.
      */
     val effectiveErrorMessage: String
         get() {
             if (errorMessage.isNotBlank()) return errorMessage
-            val logText = viewModel.patchRun.logs.joinToString("\n") { (level, msg) -> "[$level] $msg" }
+            val logText = viewModel.patchRun.logs
+                .filterNot { (_, message) -> SummarisedLogPrefixes.any { message.startsWith(it) } }
+                .joinToString("\n") { (level, msg) -> "[$level] $msg" }
             return logText.ifBlank { errorMessage }
         }
 
@@ -268,6 +286,7 @@ private fun AdaptiveSuccessContent(
                 BackToGameCallout(visible = showBackToGameHint && !installState.failed)
 
                 PatcherBottomActionBar(
+                    horizontalPadding = 0.dp,
                     showCancelButton = false,
                     showLogsButton = isExpertMode,
                     showHomeButton = true,
@@ -770,7 +789,7 @@ fun PatchingFailed(
                 )
 
                 Text(
-                    text = stringResource(R.string.patcher_failed_subtitle),
+                    text = stringResource(R.string.patcher_failed_hint, stringResource(R.string.error_)),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center

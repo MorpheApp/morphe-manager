@@ -948,7 +948,7 @@ private fun ApkManagementDialogContent(
                                 title = pluralStringResource(
                                     R.plurals.settings_system_apks_count,
                                     meta.count,
-                                    meta.count
+                                    meta.count.toString()
                                 ),
                                 containerColor = meta.accentColor.copy(alpha = 0.15f),
                                 iconContainerColor = meta.accentColor.copy(alpha = 0.25f),
@@ -1054,7 +1054,7 @@ private fun ApkManagementDialogContent(
 
     if (showUninstallSelectedConfirmation) {
         ConfirmDialog(
-            title = pluralStringResource(R.plurals.batch_uninstall_confirm_title, selectedInstalledItems.size, selectedInstalledItems.size),
+            title = pluralStringResource(R.plurals.batch_uninstall_confirm_title, selectedInstalledItems.size, selectedInstalledItems.size.toString()),
             message = stringResource(R.string.batch_uninstall_confirm_body),
             primaryText = stringResource(R.string.uninstall),
             onConfirm = {
@@ -1069,7 +1069,7 @@ private fun ApkManagementDialogContent(
 
     itemToUninstallConfirm?.let { item ->
         ConfirmDialog(
-            title = pluralStringResource(R.plurals.batch_uninstall_confirm_title, 1, 1),
+            title = pluralStringResource(R.plurals.batch_uninstall_confirm_title, 1, "1"),
             message = stringResource(R.string.batch_uninstall_confirm_body),
             primaryText = stringResource(R.string.uninstall),
             onConfirm = {
@@ -1288,7 +1288,7 @@ private fun DeleteAllConfirmationDialog(
             LabeledSection {
                 DeleteListItem(
                     icon = Icons.Outlined.Delete,
-                    text = pluralStringResource(R.plurals.settings_system_apks_count, count, count)
+                    text = pluralStringResource(R.plurals.settings_system_apks_count, count, count.toString())
                 )
                 DeleteListItem(
                     icon = Icons.Outlined.Storage,

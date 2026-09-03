@@ -28,4 +28,8 @@
         <item quantity="one">%s સ્રોત ઇન્સ્ટોલ કરેલ છે</item>
         <item quantity="other">%s સ્ત્રોતો ઇન્સ્ટોલ કરેલ છે</item>
     </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="one">%s પસંદ કરેલ</item>
+        <item quantity="other">%s પસંદ કરેલ</item>
+    </plurals>
 </resources>

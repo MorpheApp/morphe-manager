@@ -2,6 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">其他应用</string>
+    <string name="home_other_apps_action">选择其他应用</string>
     <string name="home_not_patched_yet">尚未修补</string>
     <string name="home_unpatched_version_installed">已安装未修补版本</string>
     <string name="home_unpatched_badge">未修补</string>
@@ -28,6 +29,7 @@
     <string name="home_outdated_manager_subtitle">部分补丁需要更新管理器版本</string>
     <string name="home_metered_skipped_title">在移动数据上暂停更新</string>
     <string name="home_metered_skipped_subtitle">点击允许在移动数据上更新</string>
+    <string name="home_repatch_available_subtitle">点击以全部排队</string>
     <string name="home_update_error">更新失败</string>
     <string name="home_update_error_subtitle">更新源时发生错误</string>
     <string name="home_update_skipped_metered">更新已跳过</string>
@@ -53,6 +55,8 @@
     <string name="home_app_sort_name_desc_description">反向字母顺序，Z 到 A</string>
     <string name="home_app_sort_updates_first">补丁更新优先</string>
     <string name="home_app_sort_updates_first_description">有更新标记的应用优先，然后按推荐顺序排列</string>
+    <string name="home_app_sort_recently_patched">最近修补的</string>
+    <string name="home_app_sort_recently_patched_description">最近修补的应用优先</string>
     <string name="home_no_apps_title">没有可用的应用</string>
     <string name="home_no_apps_subtitle">添加一个补丁源或在 %s 中启用现有补丁源</string>
     <string name="home_no_apps_search_subtitle">没有应用匹配“%s”</string>
@@ -124,11 +128,15 @@
     <string name="sources_sort_enabled_first">已启用优先</string>
     <string name="sources_sort_enabled_first_description">在禁用源之前显示活动源</string>
     <string name="sources_management_open_in_browser">在浏览器中打开链接</string>
+    <string name="sources_management_report_issue">报告问题</string>
     <string name="sources_management_failed_to_open_url">无法打开URL</string>
     <string name="sources_management_prerelease_toggle">预发布补丁</string>
     <string name="sources_management_prerelease_toggle_description">接收新实验性补丁版本的早期访问权限</string>
+    <string name="sources_prerelease_warning_title">启用预发布补丁？</string>
+    <string name="sources_prerelease_warning_message">预发布版本仍在开发中。补丁可能导致应用崩溃或行为异常，且功能可能随时更改，恕不另行通知。</string>
+    <string name="expert_mode_prerelease_notice">此源使用预发布补丁。应用可能崩溃或出现意外行为。</string>
     <string name="sources_management_experimental_versions_toggle">实验版应用版本</string>
-    <string name="sources_management_experimental_versions_toggle_description">如果可用，对实验性应用目标进行修补</string>
+    <string name="sources_management_experimental_versions_toggle_description">显示并修补实验性应用目标</string>
     <string name="sources_management_already_exists">此资源已添加</string>
     <string name="sources_management_invalid_url">无效的源URL。请检查地址并重试</string>
     <string name="sources_management_blocked">此补丁源被阻止，无法添加</string>
@@ -162,6 +170,12 @@
     <string name="sources_dialog_url_invalid">URL 必须指向 GitHub/GitLab 仓库或 .json 文件</string>
     <string name="sources_dialog_local_change_file">更改文件</string>
     <string name="sources_dialog_preinstalled">预安装</string>
+    <string name="sources_dialog_community">社区补丁</string>
+    <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
+    <string name="sources_dialog_community_notice_title">第三方补丁来源</string>
+    <string name="sources_dialog_community_notice_message">"社区补丁源由其作者自行制作和维护。Morphe 不审查或验证第三方补丁，也不对其内容或对您设备造成的影响负责。
+
+您从此网站添加的任何内容均由您自行承担风险。"</string>
     <string name="sources_update_success">更新成功</string>
     <string name="sources_update_unavailable">无可用更新</string>
     <string name="sources_download_fail">下载补丁失败：%s</string>
@@ -192,6 +206,7 @@
     <string name="home_apk_helper_installed_incompatible">已安装的版本无法修补</string>
     <string name="home_apk_use_saved">使用保存的 APK</string>
     <string name="home_apk_use_installed">使用已安装的 APK</string>
+    <string name="home_apk_use_saved_unsupported">补丁不支持此保存的副本。打补丁将要求您确认，或选择另一个APK。</string>
     <string name="home_apk_use_installed_unverified">无法验证已安装应用的签名，因此该应用可能已被修补</string>
     <string name="home_unverified">未验证</string>
     <string name="home_install_verification_pending">正在检查安装...</string>
@@ -251,6 +266,8 @@
     <string name="expert_mode_enable_all">启用所有</string>
     <string name="expert_mode_enable_all_done">所有补丁已启用</string>
     <string name="expert_mode_enable_all_universal_pending">再次点按以启用通用补丁</string>
+    <string name="expert_mode_universal_all_warning_title">启用所有通用补丁？</string>
+    <string name="expert_mode_universal_all_warning_message">通用补丁未经全面测试。同时启用可能导致冲突、补丁失败或崩溃。</string>
     <string name="expert_mode_reset_to_default">启用推荐补丁</string>
     <string name="expert_mode_reset_to_default_done">已应用推荐补丁</string>
     <string name="expert_mode_restore_saved">还原已保存的选择</string>
@@ -258,8 +275,11 @@
     <string name="expert_mode_copy_from_bundle">从其他包复制选定的内容</string>
     <string name="expert_mode_copy_from_bundle_no_patches">此包中没有匹配的补丁</string>
     <string name="expert_mode_no_results">未找到修补的应用</string>
+    <string name="expert_mode_selected_only_on">正在显示选中的补丁仅显示选中的补丁</string>
+    <string name="expert_mode_selected_only_off">正在显示所有补丁</string>
     <string name="expert_mode_universal_patches">通用补丁</string>
     <string name="expert_mode_new_patches">新</string>
+    <string name="expert_mode_options_customized">自定义</string>
     <string name="expert_mode_patch_required_by_installer">所选安装目标需要</string>
     <string name="expert_mode_patch_unavailable_for_installer">不适用于所选安装目标</string>
     <string name="expert_mode_multiple_sources_warning_title">已选择多个补丁源</string>
@@ -437,7 +457,23 @@
     <string name="patcher_error_copied">错误已复制到剪贴板</string>
     <string name="patcher_error_log">错误日志</string>
     <string name="patcher_error_technical">技术细节</string>
-    <string name="patcher_error_dialog_app_info">应用信息</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_split">拆分APK</string>
+    <string name="patcher_field_manager">管理器</string>
+    <string name="patcher_field_patcher">修补程序</string>
+    <string name="patcher_field_runtime">运行时</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">库</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">设备</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">内存</string>
+    <string name="patcher_field_storage">存储</string>
+    <string name="patcher_field_value_unknown">未知</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">已移除</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">已保留</string>
     <string name="patcher_tab_logs">补丁日志</string>
     <string name="patcher_tab_game">游戏</string>
     <string name="patcher_logs_waiting">正在等待日志输出…</string>
@@ -448,7 +484,7 @@
     <string name="patcher_success_subtitle">您的应用已修补并安装！</string>
     <string name="patcher_complete_title">补丁完成！✨</string>
     <string name="patcher_failed_title">哎呀！出现错误</string>
-    <string name="patcher_failed_subtitle">请查看下方的错误详情</string>
+    <string name="patcher_failed_hint">点击%s查看错误详情</string>
     <string name="patcher_failed_dialog_title">补丁失败</string>
     <string name="patcher_unknown_error">发生未知错误</string>
     <string name="patcher_split_step_extracting">提取拆分 APK</string>
@@ -624,6 +660,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">在主屏幕上显示问候消息</string>
     <string name="settings_appearance_app_grouping">应用分组</string>
     <string name="settings_appearance_app_grouping_description">显示主屏幕切换器，按来源或您自己的分类对应用进行分组，并在关闭时保持选择</string>
+    <string name="settings_appearance_repatch_notice">重新打补丁通知</string>
+    <string name="settings_appearance_repatch_notice_description">在主页面上显示可重新打补丁的应用的横幅</string>
     <string name="settings_appearance_sort_button">排序和筛选按钮</string>
     <string name="settings_appearance_sort_button_description">在主屏幕上显示排序和筛选按钮</string>
     <string name="settings_appearance_app_card_colors">应用卡片颜色</string>
@@ -655,8 +693,14 @@
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">更新</string>
     <string name="settings_advanced_patcher">修补程序</string>
-    <string name="settings_advanced_updates_use_prereleases">预发布更新</string>
-    <string name="settings_advanced_updates_use_prereleases_description">提前访问新的 Morphe 应用版本。在补丁来源中启用预发布版本</string>
+    <string name="settings_advanced_updates_manager_prereleases">预发布更新</string>
+    <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
+    <string name="settings_advanced_updates_manager_prereleases_description">抢先体验新的 Morphe 版本</string>
+    <string name="settings_advanced_updates_prerelease_warning_title">启用预发布更新？</string>
+    <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
+    <string name="settings_advanced_updates_prerelease_warning_message">"Morphe 的预发布版本仍在开发中，可能不稳定。
+
+补丁不受影响：为补丁来源列表中的每个来源启用预发布补丁。"</string>
     <string name="settings_advanced_updates_allow_metered">移动数据更新</string>
     <string name="settings_advanced_updates_allow_metered_description">允许 Morphe 通过移动数据下载应用和补丁更新</string>
     <string name="settings_advanced_updates_background_notifications">后台更新通知</string>
@@ -670,14 +714,6 @@
     <string name="settings_advanced_update_interval_monthly">每月一次</string>
     <string name="settings_advanced_update_interval_chip_subtitle">后台检查频率</string>
     <string name="settings_advanced_update_interval_battery_warning">后台检查在某些设备上可能无法可靠工作。制造商如小米、华为、三星和一加经常积极限制后台进程以节省电池</string>
-    <string name="settings_advanced_auto_patch">自动重新修补</string>
-    <string name="settings_advanced_auto_patch_description">在后台重新修补已安装的应用程序，只要它们的补丁发生更改。仅涵盖具有已保存原始 APK 的应用程序</string>
-    <string name="settings_advanced_auto_patch_interval">重新修补频率</string>
-    <string name="settings_advanced_auto_patch_interval_chip_subtitle">已修补的应用程序被重建的频率</string>
-    <string name="settings_advanced_auto_patch_charging">仅在充电时</string>
-    <string name="settings_advanced_auto_patch_charging_description">修补对 CPU 和内存的消耗很大，因此它会等到充电器</string>
-    <string name="settings_advanced_auto_patch_install">自动安装</string>
-    <string name="settings_advanced_auto_patch_install_description">需要 Shizuku 作为安装程序。使用任何其他安装程序，已修补的应用程序仅会被保存</string>
     <string name="settings_advanced_external_batch_patch">允许外部触发器</string>
     <string name="settings_advanced_external_batch_patch_description">允许自动化应用程序使用意图启动批量修补。每个请求在任何操作开始之前都会被确认</string>
     <string name="external_batch_patch_title">开始批量修补？</string>
@@ -685,13 +721,6 @@
     <string name="external_batch_patch_trust_caller">始终允许此应用程序</string>
     <string name="external_batch_patch_unknown_caller">一个未知应用程序</string>
     <!-- Notification content -->
-    <string name="notification_auto_patch_title">自动重新修补完成</string>
-    <string name="notification_auto_patch_running_title">正在重新修补应用程序</string>
-    <string name="notification_auto_patch_blocked_title">自动重新修补未运行</string>
-    <string name="notification_auto_patch_blocked_battery">系统阻止本次安装。在小米等设备上，请在开发者选项中打开“通过 USB 安装”。在工作配置文件中，可以限制通过策略进行安装</string>
-    <string name="notification_auto_patch_blocked_foreground">Android 不允许在后台启动修补。打开 Morphe 并从应用程序中进行修补</string>
-    <string name="notification_channel_auto_patch">自动重新修补</string>
-    <string name="notification_channel_auto_patch_description">计划重新修补的静默进度和结果通知</string>
     <string name="notification_manager_update_title">Morphe update available</string>
     <string name="notification_bundle_update_title">有新的补丁可用</string>
     <string name="notification_update_text">版本 %s 已准备好下载。</string>
@@ -1046,6 +1075,11 @@ morphe_header_custom_dark.png
     <string name="easter_egg_pill_message">服用蓝色药丸，广告就会保持原样。服用红色药丸，看看字节码究竟有多深。</string>
     <string name="easter_egg_pill_red">红色药丸</string>
     <string name="easter_egg_pill_blue">蓝色药丸</string>
+    <string name="easter_egg_pill_red_toast">矩阵背景已解锁</string>
+    <string name="easter_egg_pill_blue_toast">广告在等着你</string>
+    <string name="easter_egg_pill_message_again">你已经在矩阵中。红色药丸让你回到雨中，蓝色药丸让你醒来。</string>
+    <string name="easter_egg_pill_red_toast_again">回到雨中</string>
+    <string name="easter_egg_pill_blue_toast_again">已断开。回去的路始终在那里。</string>
     <!-- Shared strings -->
     <string name="select_file">选择文件</string>
     <string name="select_folder">选择文件夹</string>
@@ -1156,6 +1190,9 @@ morphe_header_custom_dark.png
     <string name="importing_ellipsis">正在导入…</string>
     <string name="imported_successfully">设置导入成功</string>
     <string name="changelog">查看更新日志</string>
+    <string name="changelog_for_app">%s 的更改</string>
+    <string name="changelog_general_changes">一般更改</string>
+    <string name="whats_new">新功能</string>
     <string name="changelog_description">查看此更新中的最新更改</string>
     <string name="changelog_download_fail">下载更新日志失败：%s</string>
     <string name="changelog_empty">无可用更新日志</string>
@@ -1168,13 +1205,13 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">安装更新失败</string>
     <string name="installing_manager_update">正在安装更新…</string>
     <string name="downloading_manager_update">正在下载更新…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">已下载 %1$.1f MB</string>
     <string name="manager_update_not_ready">此版本仍在发布中。几分钟后重试</string>
+    <string name="update_download_missing">下载的更新不再可用。请重新下载。</string>
     <string name="download_manager_failed">下载更新失败：%s</string>
     <string name="failed_to_check_updates">检查更新失败：%s</string>
     <string name="failed_to_download_update">下载更新失败：%s</string>
-    <string name="resume_download">继续下载</string>
     <string name="download_confirmation_metered">"您当前使用的是计量连接，可能会产生服务提供商的数据费用。\n\n您仍然要继续吗？"</string>
     <string name="download_update_confirmation">下载更新？</string>
     <!-- Onboarding coach marks -->

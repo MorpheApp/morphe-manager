@@ -20,6 +20,8 @@ import app.morphe.manager.domain.manager.HomeAppSortMode
 import app.morphe.manager.ui.screen.shared.BottomActionBar
 import app.morphe.manager.ui.screen.shared.BottomActionButton
 import app.morphe.manager.ui.screen.shared.BottomActionTone
+import app.morphe.manager.ui.screen.shared.contentPadding
+import app.morphe.manager.ui.screen.shared.rememberWindowSize
 
 /**
  * Section 5: Bottom action bar.
@@ -41,8 +43,14 @@ fun HomeBottomActionBar(
     onSourcesPositioned: ((Rect) -> Unit)? = null,
     onSettingsPositioned: ((Rect) -> Unit)? = null
 ) {
+    // Matches the inset of the app cards and the footer above, so the bar shares their edges
+    val horizontalPadding = rememberWindowSize().contentPadding
+
     val sourcesLabel = stringResource(R.string.sources)
-    val searchLabel = stringResource(R.string.home_search_apps)
+    // One word like its neighbors, since a slot this narrow drops every label the moment one of
+    // them overflows. The fuller wording stays on the tooltip and for screen readers
+    val searchLabel = stringResource(R.string.search)
+    val searchAppsLabel = stringResource(R.string.home_search_apps)
     val sortLabel = stringResource(R.string.sort)
     val settingsLabel = stringResource(R.string.settings)
     val expertModeLabel = stringResource(R.string.settings_advanced_expert_mode)
@@ -58,7 +66,7 @@ fun HomeBottomActionBar(
         )
     }
 
-    BottomActionBar(modifier = modifier, labels = labels) {
+    BottomActionBar(modifier = modifier, labels = labels, horizontalPadding = horizontalPadding) {
         // Left: Sources button
         BottomActionButton(
             onClick = onBundlesClick,
@@ -79,6 +87,7 @@ fun HomeBottomActionBar(
                 icon = if (searchActive) Icons.Outlined.SearchOff else Icons.Outlined.Search,
                 text = searchLabel,
                 showLabel = showLabels,
+                contentDescription = searchAppsLabel,
                 stateDescription = if (searchActive) searchExpandedLabel else searchCollapsedLabel
             )
         }

@@ -1564,16 +1564,19 @@ class PatchBundleRepository(
         checkManualUpdates()
     }
 
+    /** A remote source that has an update waiting, and the version waiting for it. */
+    data class AvailableBundleUpdate(val bundleUid: Int, val version: String)
+
     /**
      * Silently checks whether any remote bundle has a newer version available.
      * Does NOT download or apply the update - only compares version signatures.
      *
      * Used by [app.morphe.manager.worker.UpdateCheckWorker] for background update notifications.
      *
-     * @return The latest version string of the first updated bundle found (e.g. "4.21.0"),
+     * @return The first updated bundle found and its latest version (e.g. "4.21.0"),
      *   or null if no updates are available or the check could not be completed.
      */
-    suspend fun checkForBundleUpdatesQuiet(): String? {
+    suspend fun checkForBundleUpdatesQuiet(): AvailableBundleUpdate? {
         if (!networkInfo.isConnected()) return null
 
         val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
@@ -1597,9 +1600,9 @@ class PatchBundleRepository(
                                     .removePrefix("v")
                                     .takeUnless { it.isBlank() }
                                 val installedSignature = bundle.installedVersionSignature
-                                // Return version when signatures differ (or installed is null)
+                                // Report the bundle when signatures differ (or installed is null)
                                 if (latestSignature != null && installedSignature != latestSignature)
-                                    latestSignature
+                                    AvailableBundleUpdate(bundle.uid, latestSignature)
                                 else
                                     null
                             } catch (e: Exception) {
@@ -1609,7 +1612,7 @@ class PatchBundleRepository(
                         }
                     }
                     .awaitAll()
-                    .firstOrNull { it != null }
+                    .firstNotNullOfOrNull { it }
             }
         } catch (e: Exception) {
             Log.e(tag, "Failed to quietly check for bundle updates", e)

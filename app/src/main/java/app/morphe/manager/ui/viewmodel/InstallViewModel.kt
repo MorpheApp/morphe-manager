@@ -715,10 +715,13 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
         try {
             launchInstaller()
-        } catch (e: ActivityNotFoundException) {
+        } catch (error: Exception) {
+            // No activity claims the install intent, or the APK went away before it could be
+            // handed over. Either way nothing was launched, so there is nothing to monitor
+            if (error !is ActivityNotFoundException && error !is MissingApkException) throw error
             pendingIntentFallbackPackage = null
             pendingIntentFallbackInstallType = InstallType.DEFAULT
-            handleInstallError(app.getString(R.string.install_app_fail, e.simpleMessage()))
+            handleInstallError(app.getString(R.string.install_app_fail, error.simpleMessage()))
             return
         }
 

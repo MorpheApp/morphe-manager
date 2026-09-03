@@ -87,7 +87,7 @@ fun AppPatchesDialog(
     val selectedBundle = remember { mutableStateOf<Int?>(null) }
     val showFilterSheet = remember { mutableStateOf(false) }
     val collapsedBundles = remember { mutableStateOf(emptySet<Int>()) }
-    val expandedUniversal = remember { mutableStateOf(emptySet<Int>()) }
+    val expandedUniversal = rememberUniversalSectionState()
 
     val filteredPatches = remember(allPatches, searchQuery.value, selectedBundle.value) {
         allPatches.filter { (uid, patch) ->
@@ -269,15 +269,9 @@ fun AppPatchesDialog(
                                     key = { patch: PatchInfo ->
                                         "$uid:${patch.name}:${patch.compatiblePackages?.joinToString { it.packageName.orEmpty() }.orEmpty()}"
                                     },
-                                    isSearching = isFiltering,
-                                    isUniversalExpanded = uid in expandedUniversal.value,
-                                    onUniversalExpandedChange = { expanded ->
-                                        expandedUniversal.value = if (expanded) {
-                                            expandedUniversal.value + uid
-                                        } else {
-                                            expandedUniversal.value - uid
-                                        }
-                                    },
+                                    isFiltering = isFiltering,
+                                    isUniversalExpanded = uid in expandedUniversal,
+                                    onUniversalExpandedChange = { expandedUniversal.setExpanded(uid, it) },
                                     accentColor = bundleAccentColors[uid]
                                 ) { patch ->
                                     PatchItemCard(
@@ -384,7 +378,6 @@ internal fun HideAppDialog(
             // Original app card preview
             AppCardLayout(
                 gradientColors = item.gradientColors,
-                enabled = true,
                 onClick = {},
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -570,7 +563,6 @@ internal fun HiddenAppsDialog(
                             ) {
                                 AppCardLayout(
                                     gradientColors = item.gradientColors,
-                                    enabled = true,
                                     onClick = {
                                         if (isMultiSelectMode.value) {
                                             selectedPackages.toggle(item.id)

@@ -6,4 +6,7 @@
     <plurals name="sources_management_subtitle">
         <item quantity="other">%s ប្រភពដែលបានដំឡើង</item>
     </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="other">%s ដែលបានរើស</item>
+    </plurals>
 </resources>

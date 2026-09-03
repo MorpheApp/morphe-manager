@@ -2,6 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">অন্যান্য অ্যাপ</string>
+    <string name="home_other_apps_action">অন্যান্য অ্যাপ নির্বাচন করুন</string>
     <string name="home_not_patched_yet">এখনো প্যাচ করা হয়নি</string>
     <string name="home_unpatched_version_installed">অপ্যাচড সংস্করণ ইনস্টল করা হয়েছে</string>
     <string name="home_unpatched_badge">প্যাচ করা হয়নি</string>
@@ -28,6 +29,7 @@
     <string name="home_outdated_manager_subtitle">কিছু প্যাচ উৎসের একটি নতুন সংস্করণ প্রয়োজন</string>
     <string name="home_metered_skipped_title">মোবাইল ডেটাতে আপডেটগুলিPaused</string>
     <string name="home_metered_skipped_subtitle">মোবাইল ডেটাতে আপডেট করার জন্য ট্যাপ করুন</string>
+    <string name="home_repatch_available_subtitle">সবগুলো সারিবদ্ধ করতে ট্যাপ করুন</string>
     <string name="home_update_error">আপডেট ব্যর্থ হয়েছে</string>
     <string name="home_update_error_subtitle">সোর্স আপডেট করার সময় কিছু ভুল হয়েছে।</string>
     <string name="home_update_skipped_metered">আপডেটগুলি ছাড়া রাখা হয়েছে</string>
@@ -53,6 +55,8 @@
     <string name="home_app_sort_name_desc_description">বিপরীত বর্ণানুক্রমিক, Z থেকে A</string>
     <string name="home_app_sort_updates_first">প্রথমে প্যাচ আপডেট</string>
     <string name="home_app_sort_updates_first_description">আপডেট ব্যাজ সহ অ্যাপ্লিকেশনগুলি প্রথমে, তারপর প্রস্তাবিত ক্রম</string>
+    <string name="home_app_sort_recently_patched">সম্প্রতি প্যাচ করা</string>
+    <string name="home_app_sort_recently_patched_description">সবচেয়ে সম্প্রতি প্যাচ করা অ্যাপগুলো প্রথমে</string>
     <string name="home_no_apps_title">কোনো অ্যাপস পাওয়া যায়নি</string>
     <string name="home_no_apps_subtitle">একটি প্যাচ উৎস যোগ করুন অথবা %s-এ বিদ্যমান একটি সক্ষম করুন</string>
     <string name="home_no_apps_search_subtitle">\"%s\" এর সাথে মেলে এমন কোনো অ্যাপ নেই</string>
@@ -124,11 +128,15 @@
     <string name="sources_sort_enabled_first">প্রথমে সক্ষম</string>
     <string name="sources_sort_enabled_first_description">অক্ষম সোর্সের আগে সক্রিয় সোর্স দেখান</string>
     <string name="sources_management_open_in_browser">ব্রাউজারে ওপেন করুন</string>
+    <string name="sources_management_report_issue">একটি সমস্যা রিপোর্ট করুন</string>
     <string name="sources_management_failed_to_open_url">URL খুলতে ব্যর্থ হয়েছে</string>
     <string name="sources_management_prerelease_toggle">প্রি-রিলিজ প্যাচ</string>
     <string name="sources_management_prerelease_toggle_description">নতুন পরীক্ষামূলক প্যাচ সংস্করণে প্রাথমিক অ্যাক্সেস গ্রহণ করে</string>
+    <string name="sources_prerelease_warning_title">প্রি-রিলিজ প্যাচ সক্রিয় করবেন?</string>
+    <string name="sources_prerelease_warning_message">প্রি-রিলিজ বিল্ডগুলো এখনও উন্নয়নাধীন। প্যাচ ব্যর্থ হতে পারে বা অ্যাপটি ভেঙে দিতে পারে, এবং বৈশিষ্ট্যগুলি সতর্কতা ছাড়াই পরিবর্তন হতে পারে।</string>
+    <string name="expert_mode_prerelease_notice">এই উৎসটি প্রি-রিলিজে রয়েছে। প্যাচিং ব্যর্থ হতে পারে বা অপ্রত্যাশিত আচরণ করতে পারে।</string>
     <string name="sources_management_experimental_versions_toggle">পরীক্ষামূলক অ্যাপ সংস্করণ</string>
-    <string name="sources_management_experimental_versions_toggle_description">উপलब्ध থাকলে পরীক্ষামূলক অ্যাপ টার্গেট প্যাচ করে</string>
+    <string name="sources_management_experimental_versions_toggle_description">পরীক্ষামূলক অ্যাপ টার্গেট দেখায় এবং প্যাচ করে</string>
     <string name="sources_management_already_exists">এই উৎসটি ইতিমধ্যেই যোগ করা হয়েছে</string>
     <string name="sources_management_invalid_url">অবৈধ উৎস URL। অনুগ্রহ করে ঠিকানাটি পরীক্ষা করুন এবং পুনরায় চেষ্টা করুন</string>
     <string name="sources_management_blocked">এই প্যাচ উৎসটি ব্লক করা হয়েছে এবং এটি যোগ করা যাবে না</string>
@@ -162,6 +170,12 @@
     <string name="sources_dialog_url_invalid">URL টি অবশ্যই একটি GitHub/GitLab রেপো অথবা .json ফাইল নির্দেশ করতে হবে।</string>
     <string name="sources_dialog_local_change_file">ফাইল পরিবর্তন করুন</string>
     <string name="sources_dialog_preinstalled">প্র-ইনস্টল করা হয়েছে</string>
+    <string name="sources_dialog_community">কমিউনিটি প্যাচ</string>
+    <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
+    <string name="sources_dialog_community_notice_title">তৃতীয় পক্ষের প্যাচ উৎস</string>
+    <string name="sources_dialog_community_notice_message">"কমিউনিটি প্যাচ সোর্স তাদের নিজ নিজ লেখকগণ দ্বারা তৈরি ও রক্ষণাবেক্ষণ করা হয়। Morphe তৃতীয় পক্ষের প্যাচগুলো পর্যালোচনা বা যাচাই করে না, এবং তাদের বিষয়বস্তু বা আপনার ডিভাইসে যা করে তার জন্য দায়ী নয়।
+
+আপনি এই ওয়েবসাইট থেকে যা কিছু যোগ করেন তা আপনার নিজের ঝুঁকিতে ব্যবহৃত হয়।"</string>
     <string name="sources_update_success">আপডেট সফল হয়েছে</string>
     <string name="sources_update_unavailable">আপডেট উপলব্ধ নেই</string>
     <string name="sources_download_fail">সোর্স ডাউনলোড ব্যর্থ হয়েছে: %s</string>
@@ -192,6 +206,7 @@
     <string name="home_apk_helper_installed_incompatible">ইনস্টল করা সংস্করণটি প্যাচ করা যায় না</string>
     <string name="home_apk_use_saved">সেভ করে রাখা APK-টি ব্যবহার করুন</string>
     <string name="home_apk_use_installed">ফোনে ইনস্টল থাকা APK-টি ব্যবহার করুন</string>
+    <string name="home_apk_use_saved_unsupported">প্যাচগুলো এই সংরক্ষিত কপি সমর্থন করে না। এটি প্যাচ করতে গেলে আপনাকে নিশ্চিত করতে বলা হবে, অথবা অন্য একটি APK বেছে নিন</string>
     <string name="home_apk_use_installed_unverified">ইনস্টল করা অ্যাপের স্বাক্ষর যাচাই করা যায়নি, তাই এটি ইতোমধ্যেই প্যাচ করা থাকতে পারে</string>
     <string name="home_unverified">অপ্রমাণিত</string>
     <string name="home_install_verification_pending">ইনস্টলেশন পরীক্ষা করা হচ্ছে…</string>
@@ -251,6 +266,8 @@
     <string name="expert_mode_enable_all">সবকিছুক্ষমতাকার্তা করুন</string>
     <string name="expert_mode_enable_all_done">সমস্ত প্যাচ সক্রিয় করা হয়েছে</string>
     <string name="expert_mode_enable_all_universal_pending">সর্বজনীন প্যাচের জন্য আবার ট্যাপ করুন</string>
+    <string name="expert_mode_universal_all_warning_title">সব ইউনিভার্সাল প্যাচ সক্রিয় করবেন?</string>
+    <string name="expert_mode_universal_all_warning_message">ইউনিভার্সাল প্যাচগুলো একসাথে পরীক্ষা করা হয়নি। একসাথে সব সক্রিয় করলে সংঘর্ষ, ব্যর্থ প্যাচ, বা ক্র্যাশ হতে পারে।</string>
     <string name="expert_mode_reset_to_default">প্রস্তাবিত প্যাচগুলি সক্ষম করুন</string>
     <string name="expert_mode_reset_to_default_done">সুপারিশ করা প্যাচগুলি প্রয়োগ করা হয়েছে</string>
     <string name="expert_mode_restore_saved">সংরক্ষিত নির্বাচন পুনরুদ্ধার করুন</string>
@@ -258,8 +275,11 @@
     <string name="expert_mode_copy_from_bundle">অন্য বান্ডেল থেকে নির্বাচন কপি করুন</string>
     <string name="expert_mode_copy_from_bundle_no_patches">এই বান্ডেলে কোনো মেলানো প্যাচ নেই</string>
     <string name="expert_mode_no_results">কোনো প্যাচ পাওয়া যায়নি</string>
+    <string name="expert_mode_selected_only_on">শুধুমাত্র নির্বাচিত প্যাচ দেখানো হচ্ছে</string>
+    <string name="expert_mode_selected_only_off">সব প্যাচ দেখানো হচ্ছে</string>
     <string name="expert_mode_universal_patches">সার্বজনীন প্যাচ</string>
     <string name="expert_mode_new_patches">নতুন</string>
+    <string name="expert_mode_options_customized">কাস্টমাইজড</string>
     <string name="expert_mode_patch_required_by_installer">নির্বাচিত ইনস্টল টার্গেটের জন্য এটি প্রয়োজনীয়</string>
     <string name="expert_mode_patch_unavailable_for_installer">নির্বাচিত ইনস্টল টার্গেটের জন্য এটি পাওয়া যাচ্ছে না</string>
     <string name="expert_mode_multiple_sources_warning_title">বহু প্যাচ সোর্স নির্বাচিত</string>
@@ -437,7 +457,27 @@
     <string name="patcher_error_copied">ত্রুটি ক্লিপবোর্ডে অনুলিপি করা হয়েছে</string>
     <string name="patcher_error_log">ত্রুটি রিপোর্ট</string>
     <string name="patcher_error_technical">প্রযুক্তি বিবরণ</string>
-    <string name="patcher_error_dialog_app_info">অ্যাপ তথ্য</string>
+    <string name="patcher_error_dialog_diagnostics">ডায়াগনস্টিকস</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">অ্যাপ</string>
+    <string name="patcher_field_package">প্যাকেজ</string>
+    <string name="patcher_field_source">উৎস</string>
+    <string name="patcher_field_split">স্প্লিট APK</string>
+    <string name="patcher_field_manager">ম্যানেজার</string>
+    <string name="patcher_field_patcher">প্যাচার</string>
+    <string name="patcher_field_runtime">রানটাইম</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">লাইব্রেরি</string>
+    <string name="patcher_field_android">অ্যান্ড্রয়েড</string>
+    <string name="patcher_field_device">ডিভাইস</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">মেমোরি</string>
+    <string name="patcher_field_storage">স্টোরেজ</string>
+    <string name="patcher_field_value_unknown">অজানা</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">বাদ দেওয়া হয়েছে</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">রাখা হয়েছে</string>
     <string name="patcher_tab_logs">প্যাচার লগ</string>
     <string name="patcher_tab_game">গেমস</string>
     <string name="patcher_logs_waiting">লগ আউটপুটের জন্য অপেক্ষা করা হচ্ছে…</string>
@@ -448,7 +488,7 @@
     <string name="patcher_success_subtitle">আপনার অ্যাপটি প্যাচ করা এবং ইনস্টল করা হয়েছে!</string>
     <string name="patcher_complete_title">প্যাচিং সম্পন্ন! ✨</string>
     <string name="patcher_failed_title">ওহ! কিছু একটা ভুল হয়েছে</string>
-    <string name="patcher_failed_subtitle">নীচে ত্রুটির বিবরণ দেখুন</string>
+    <string name="patcher_failed_hint">কী ভুল হয়েছে তা দেখতে %s-এ আলতো চাপুন</string>
     <string name="patcher_failed_dialog_title">প্যাচিং ব্যর্থ হয়েছে</string>
     <string name="patcher_unknown_error">অজানা ত্রুটি ঘটেছে</string>
     <string name="patcher_split_step_extracting">স্প্লিট APK এক্সট্রাক্ট করা হচ্ছে</string>
@@ -624,6 +664,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">হোম স্ক্রিনে একটি শুভেচ্ছা বার্তা দেখান</string>
     <string name="settings_appearance_app_grouping">অ্যাপ grouping</string>
     <string name="settings_appearance_app_grouping_description">উৎস অথবা আপনার নিজের বিভাগ অনুসারে অ্যাপ grouping করার জন্য একটি হোম স্ক্রিন সুইচ দেখান, বন্ধ থাকা অবস্থায় নির্বাচন ধরে রাখুন।</string>
+    <string name="settings_appearance_repatch_notice">পুনরায় প্যাচ বিজ্ঞপ্তি</string>
+    <string name="settings_appearance_repatch_notice_description">হোম স্ক্রিনে একটি ব্যানার দেখান যখন প্যাচ করা অ্যাপগুলি পুনরায় প্যাচ করা যেতে পারে</string>
     <string name="settings_appearance_sort_button">সাজানো ও ফিল্টার বাটন</string>
     <string name="settings_appearance_sort_button_description">হোম স্ক্রিনে সাজানো ও ফিল্টার বাটন দেখান</string>
     <string name="settings_appearance_app_card_colors">অ্যাপ কার্ডের রং</string>
@@ -655,8 +697,14 @@
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">আপডেটগুলি</string>
     <string name="settings_advanced_patcher">প্যাচার</string>
-    <string name="settings_advanced_updates_use_prereleases">প্রি-রিলিজ আপডেট।</string>
-    <string name="settings_advanced_updates_use_prereleases_description">নতুন Morphe অ্যাপ সংস্করণে আর্লি অ্যাক্সেস। প্যাচ সোর্সগুলিতে প্রি-রিলিজ সক্ষম করুন।</string>
+    <string name="settings_advanced_updates_manager_prereleases">প্রাক-রিলিজ আপডেট</string>
+    <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
+    <string name="settings_advanced_updates_manager_prereleases_description">নতুন Morphe সংস্করণগুলোতে প্রাথমিক অ্যাক্সেস</string>
+    <string name="settings_advanced_updates_prerelease_warning_title">প্রাক-রিলিজ আপডেট সক্রিয় করবেন?</string>
+    <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
+    <string name="settings_advanced_updates_prerelease_warning_message">"Morphe-এর প্রাক-রিলিজ সংস্করণগুলো এখনও উন্নয়নাধীন এবং অস্থির হতে পারে।
+
+প্যাচগুলো প্রভাবিত হয় না: প্যাচ উৎস তালিকায় প্রতিটি উৎসের জন্য প্রাক-রিলিজ প্যাচ সক্রিয় করুন।"</string>
     <string name="settings_advanced_updates_allow_metered">মোবাইল ডেটা আপডেট।</string>
     <string name="settings_advanced_updates_allow_metered_description">Morphe এবং প্যাচ আপডেট মোবাইল ডেটার মাধ্যমে ডাউনলোড করার অনুমতি দেয়।</string>
     <string name="settings_advanced_updates_background_notifications">ব্যাকগ্রাউন্ড আপডেট নোটিফিকেশন</string>
@@ -670,14 +718,6 @@
     <string name="settings_advanced_update_interval_monthly">এক মাস অন্তরে</string>
     <string name="settings_advanced_update_interval_chip_subtitle">ব্যাকগ্রাউন্ড চেকের সময়</string>
     <string name="settings_advanced_update_interval_battery_warning">কিছু ডিভাইসে ব্যাকগ্রাউন্ড চেকগুলি সঠিকভাবে কাজ করতে পারে না। ব্যাটারি সংরক্ষণের জন্য ম্যানুফ্যাকচারাররা যেমন এক্সিয়োমি, হুয়াওয়েই, স্যামসাং এবং অনেপ্লাস ব্যাকগ্রাউন্ড প্রসেসগুলি সীমিত করে।</string>
-    <string name="settings_advanced_auto_patch">স্বয়ংক্রিয় পুনরায় প্যাচিং</string>
-    <string name="settings_advanced_auto_patch_description">প্যাচ পরিবর্তন হলে ব্যাকগ্রাউন্ডে ইনস্টল করা অ্যাপগুলি পুনরায় প্যাচ করে। শুধুমাত্র সেভ করা মূল APK সহ অ্যাপগুলি অন্তর্ভুক্ত থাকবে</string>
-    <string name="settings_advanced_auto_patch_interval">পুনরায় প্যাচ করার ফ্রিকোয়েন্সি</string>
-    <string name="settings_advanced_auto_patch_interval_chip_subtitle">প্যাচ করা অ্যাপগুলি কত ঘন ঘন পুনরায় তৈরি করা হবে</string>
-    <string name="settings_advanced_auto_patch_charging">শুধুমাত্র চার্জ করার সময়</string>
-    <string name="settings_advanced_auto_patch_charging_description">প্যাচিং CPU এবং মেমরির উপর ভারী, তাই এটি চার্জারের জন্য অপেক্ষা করে</string>
-    <string name="settings_advanced_auto_patch_install">স্বয়ংক্রিয়ভাবে ইনস্টল করুন</string>
-    <string name="settings_advanced_auto_patch_install_description">ইনস্টলার হিসাবে Shizuku প্রয়োজন। অন্য কোনো ইনস্টলারের সাথে প্যাচ করা অ্যাপগুলি শুধুমাত্র সেভ করা হবে</string>
     <string name="settings_advanced_external_batch_patch">বাহ্যিক ট্রিগার করার অনুমতি দিন</string>
     <string name="settings_advanced_external_batch_patch_description">স্বয়ংক্রিয়তা অ্যাপ্লিকেশনগুলিকে একটি অভিপ্রায় দিয়ে ব্যাচ প্যাচিং শুরু করতে দেয়। কোনো কিছু চালানোর আগে প্রতিটি অনুরোধ নিশ্চিত করা হবে</string>
     <string name="external_batch_patch_title">ব্যাচ প্যাচিং শুরু করবেন?</string>
@@ -685,13 +725,6 @@
     <string name="external_batch_patch_trust_caller">সর্বদা এই অ্যাপটিকে অনুমতি দিন</string>
     <string name="external_batch_patch_unknown_caller">একটি অজানা অ্যাপ</string>
     <!-- Notification content -->
-    <string name="notification_auto_patch_title">স্বয়ংক্রিয় পুনরায় প্যাচিং সম্পন্ন হয়েছে</string>
-    <string name="notification_auto_patch_running_title">অ্যাপগুলি পুনরায় প্যাচ করা হচ্ছে</string>
-    <string name="notification_auto_patch_blocked_title">স্বয়ংক্রিয় পুনরায় প্যাচিং চালাননি</string>
-    <string name="notification_auto_patch_blocked_battery">ব্যাটারি অপ্টিমাইজেশন থেকে Morphe কে অব্যাহতি দিন, অন্যথায় Android শুরু হওয়ার আগেই চালাবে</string>
-    <string name="notification_auto_patch_blocked_foreground">Android ব্যাকগ্রাউন্ডে প্যাচিং শুরু করতে দেয়নি। Morphe খুলুন এবং অ্যাপ থেকে প্যাচ করুন</string>
-    <string name="notification_channel_auto_patch">স্বয়ংক্রিয় পুনরায় প্যাচিং</string>
-    <string name="notification_channel_auto_patch_description">अनुसूचित পুনরায় প্যাচিংয়ের জন্য নীরব অগ্রগতি এবং ফলাফল বিজ্ঞপ্তি</string>
     <string name="notification_manager_update_title">Morphe আপডেট উপলব্ধ</string>
     <string name="notification_bundle_update_title">নতুন প্যাচ পাওয়া গেছে</string>
     <string name="notification_update_text">Version %s ডাউনলোড করার জন্য প্রস্তুত</string>
@@ -1152,6 +1185,9 @@ morphe_adaptive_monochrome_custom.xml
     <string name="importing_ellipsis">আমদানি করছেন…</string>
     <string name="imported_successfully">সফলভাবে আমদানি করা হয়েছে</string>
     <string name="changelog">পরিবর্তনলগ দেখুন</string>
+    <string name="changelog_for_app">%s এর জন্য পরিবর্তন</string>
+    <string name="changelog_general_changes">সাধারণ পরিবর্তন</string>
+    <string name="whats_new">নতুন কী</string>
     <string name="changelog_description">এই আপডেটে সর্বশেষ পরিবর্তনের জন্য চেক করুন</string>
     <string name="changelog_download_fail">চেঞ্জলগ ডাউনলোড করা যায়নি: %s</string>
     <string name="changelog_empty">কোনো চ্যাঞলগ উপলব্ধ নেই</string>
@@ -1164,13 +1200,13 @@ morphe_adaptive_monochrome_custom.xml
     <string name="install_update_manager_failed">আপডেট ইনস্টল করতে ব্যর্থ</string>
     <string name="installing_manager_update">আপডেট ইনস্টল করা হচ্ছে…</string>
     <string name="downloading_manager_update">আপডেট ডাউনলোড হচ্ছে…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f এমবি ডাউনলোড করা হয়েছে</string>
     <string name="manager_update_not_ready">এই রিলিজটি এখনও প্রকাশ করা হচ্ছে। কয়েক মিনিট পর আবার চেষ্টা করুন।</string>
+    <string name="update_download_missing">ডাউনলোড করা আপডেটটি আর উপলব্ধ নেই। আবার ডাউনলোড করুন।</string>
     <string name="download_manager_failed">আপডেট ডাউনলোড করা যায়নি: %s</string>
     <string name="failed_to_check_updates">আপডেটগুলি পরীক্ষা করতে ব্যর্থ: %s</string>
     <string name="failed_to_download_update">আপডেট ডাউনলোড করতে ব্যর্থ: %s</string>
-    <string name="resume_download">ডাউনলোড আবার শুরু করুন</string>
     <string name="download_confirmation_metered">"আপনি বর্তমানে একটি মিটারযুক্ত সংযোগে আছেন, এবং আপনার পরিষেবা প্রদানকারীর ডেটা চার্জ প্রযোজ্য হতে পারে।
 
 আপনি কি এখনও চালিয়ে যেতে চান?"</string>

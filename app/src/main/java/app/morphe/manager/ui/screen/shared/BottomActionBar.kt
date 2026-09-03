@@ -33,7 +33,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 
-private val BarMaxWidth = 540.dp
 private const val EnterMillis = 200
 
 /** Emphasis of a [BottomActionButton], resolved through [GlassButtonDefaults]. */
@@ -54,11 +53,15 @@ class BottomActionBarScope internal constructor(
 /**
  * Centered, width-capped row of [BottomActionButton]s, weighted equally and animated as the set
  * changes. [labels] lists one entry per button so the bar decides once whether they all fit.
+ *
+ * [horizontalPadding] is what the content above the bar is inset by, so the buttons line up with
+ * it. The default suits a bar nested in a column that carries the screen padding already.
  */
 @Composable
 fun BottomActionBar(
     modifier: Modifier = Modifier,
     labels: List<String> = emptyList(),
+    horizontalPadding: Dp = Defaults.ContentPadding,
     content: @Composable BottomActionBarScope.() -> Unit
 ) {
     val reduceMotion = rememberAccessibilityEnabled()
@@ -68,8 +71,8 @@ fun BottomActionBar(
     LaunchedEffect(Unit) { settled.value = true }
 
     BoxWithConstraints(modifier = modifier.fillMaxWidth()) {
-        val barWidth = maxWidth.coerceAtMost(BarMaxWidth)
-        val showLabels = labelsFit(labels, barWidth)
+        val barWidth = maxWidth.coerceAtMost(Defaults.ContentMaxWidth)
+        val showLabels = labelsFit(labels, barWidth, horizontalPadding)
 
         Row(
             modifier = Modifier
@@ -78,7 +81,7 @@ fun BottomActionBar(
                 // The gap between buttons and the gap below them are one rhythm, so the
                 // bar reads as evenly spaced rather than wider in one direction
                 .padding(bottom = Defaults.ItemSpacing)
-                .padding(horizontal = Defaults.ContentPadding),
+                .padding(horizontal = horizontalPadding),
             horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -108,16 +111,17 @@ fun BottomActionCallout(
     modifier: Modifier = Modifier,
     icon: ImageVector? = null,
     containerColor: Color = MaterialTheme.colorScheme.secondaryContainer,
-    contentColor: Color = MaterialTheme.colorScheme.onSecondaryContainer
+    contentColor: Color = MaterialTheme.colorScheme.onSecondaryContainer,
+    horizontalPadding: Dp = Defaults.ContentPadding
 ) {
     BoxWithConstraints(modifier = modifier.fillMaxWidth()) {
-        val barWidth = maxWidth.coerceAtMost(BarMaxWidth)
+        val barWidth = maxWidth.coerceAtMost(Defaults.ContentMaxWidth)
 
         Column(
             modifier = Modifier
                 .width(barWidth)
                 .align(Alignment.Center)
-                .padding(horizontal = Defaults.ContentPadding)
+                .padding(horizontal = horizontalPadding)
         ) {
             Surface(
                 shape = RoundedCornerShape(Defaults.CompactCornerRadius),
@@ -252,11 +256,12 @@ fun BottomActionBarScope.BottomActionButton(
             .then(if (entering) Modifier.graphicsLayer { alpha = entry.value } else Modifier)
             .then(modifier)
     ) {
-        // Only surface a tooltip when the label itself is hidden; otherwise the two would repeat
-        if (!showLabel && text != null) {
+        // Only surface a tooltip when the label itself is hidden; otherwise the two would repeat.
+        // It carries the accessible label, so a qualified icon explains itself without a reader
+        if (!showLabel && label != null) {
             TooltipBox(
                 positionProvider = TooltipDefaults.rememberTooltipPositionProvider(TooltipAnchorPosition.Above),
-                tooltip = { PlainTooltip { Text(text) } },
+                tooltip = { PlainTooltip { Text(label) } },
                 state = rememberTooltipState(),
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -270,15 +275,15 @@ fun BottomActionBarScope.BottomActionButton(
 
 /** Whether every one of [labels] fits its slot of a bar [barWidth] wide. */
 @Composable
-private fun labelsFit(labels: List<String>, barWidth: Dp): Boolean {
+private fun labelsFit(labels: List<String>, barWidth: Dp, horizontalPadding: Dp): Boolean {
     if (labels.isEmpty()) return false
 
     val measurer = rememberTextMeasurer()
     val style = GlassButtonDefaults.labelStyle
     val density = LocalDensity.current
 
-    return remember(labels, barWidth, style, density, measurer) {
-        val slotWidth = (barWidth - Defaults.ContentPadding * 2 -
+    return remember(labels, barWidth, horizontalPadding, style, density, measurer) {
+        val slotWidth = (barWidth - horizontalPadding * 2 -
                 Defaults.ItemSpacing * (labels.size - 1)) / labels.size
         // What a button spends on everything but the label
         val inset = GlassButtonDefaults.HorizontalPadding * 2 +

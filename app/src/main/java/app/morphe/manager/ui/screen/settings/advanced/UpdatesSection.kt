@@ -37,18 +37,26 @@ import kotlin.math.roundToInt
 @Composable
 fun UpdatesSettingsItem(
     settingsViewModel: SettingsViewModel,
-    onManagerPrereleasesToggle: () -> Unit,
-    onAutoPatchClick: () -> Unit
+    onManagerPrereleasesToggle: () -> Unit
 ) {
     val prefs = settingsViewModel.prefs
     val backgroundUpdateNotifications by prefs.backgroundUpdateNotifications.getAsState()
     val updateCheckInterval by prefs.updateCheckInterval.getAsState()
     val allowMeteredUpdates by prefs.allowMeteredUpdates.getAsState()
-    val autoPatchEnabled by prefs.autoPatchEnabled.getAsState()
-    val autoPatchInterval by prefs.autoPatchInterval.getAsState()
+    val externalBatchPatchEnabled by prefs.externalBatchPatchEnabled.getAsState()
     val useManagerPrereleases by prefs.useManagerPrereleases.getAsState()
     val usePatchesPrereleases by prefs.bundlePrereleasesEnabled.getAsState()
     val showIntervalDialog = remember { mutableStateOf(false) }
+    val showPrereleaseWarning = remember { mutableStateOf(false) }
+
+    fun applyManagerPrereleases() {
+        settingsViewModel.toggleManagerPrereleases(
+            currentValue = useManagerPrereleases,
+            backgroundNotificationsEnabled = backgroundUpdateNotifications,
+            patchesPrereleaseIds = usePatchesPrereleases,
+            onCheckUpdate = onManagerPrereleasesToggle
+        )
+    }
 
     if (showIntervalDialog.value) {
         UpdateCheckIntervalDialog(
@@ -61,21 +69,35 @@ fun UpdatesSettingsItem(
         )
     }
 
+    if (showPrereleaseWarning.value) {
+        ConfirmDialog(
+            title = stringResource(R.string.settings_advanced_updates_prerelease_warning_title),
+            message = stringResource(R.string.settings_advanced_updates_prerelease_warning_message),
+            primaryText = stringResource(R.string.enable),
+            isPrimaryDestructive = false,
+            onDismiss = { showPrereleaseWarning.value = false },
+            onConfirm = {
+                showPrereleaseWarning.value = false
+                applyManagerPrereleases()
+            }
+        )
+    }
+
     SettingsGroup {
         // Use manager prereleases toggle
         SettingsSwitchItem(
             checked = useManagerPrereleases,
             onToggle = {
-                settingsViewModel.toggleManagerPrereleases(
-                    currentValue = useManagerPrereleases,
-                    backgroundNotificationsEnabled = backgroundUpdateNotifications,
-                    patchesPrereleaseIds = usePatchesPrereleases,
-                    onCheckUpdate = onManagerPrereleasesToggle
-                )
+                if (useManagerPrereleases) {
+                    applyManagerPrereleases()
+                } else {
+                    // Explain what pre-release means, and that patches are separate, before flipping it on
+                    showPrereleaseWarning.value = true
+                }
             },
             icon = Icons.Outlined.Science,
-            title = stringResource(R.string.settings_advanced_updates_use_prereleases),
-            subtitle = stringResource(R.string.settings_advanced_updates_use_prereleases_description)
+            title = stringResource(R.string.settings_advanced_updates_manager_prereleases),
+            subtitle = stringResource(R.string.settings_advanced_updates_manager_prereleases_description)
         )
 
         // Check frequency interval selector (non-GMS only), shown when background notifications
@@ -110,16 +132,13 @@ fun UpdatesSettingsItem(
 
         SettingsDivider()
 
-        // Automatic re-patching, configured in its own dialog
-        SettingsItem(
-            onClick = onAutoPatchClick,
-            title = stringResource(R.string.settings_advanced_auto_patch),
-            subtitle = if (autoPatchEnabled) {
-                stringResource(autoPatchInterval.labelResId)
-            } else {
-                stringResource(R.string.disabled)
-            },
-            leadingContent = { ThemedIcon(icon = Icons.Outlined.AutoMode) }
+        // Entry point other apps use to start a re-patch queue
+        SettingsSwitchItem(
+            checked = externalBatchPatchEnabled,
+            onToggle = { settingsViewModel.toggleExternalBatchPatch(externalBatchPatchEnabled) },
+            icon = Icons.Outlined.Api,
+            title = stringResource(R.string.settings_advanced_external_batch_patch),
+            subtitle = stringResource(R.string.settings_advanced_external_batch_patch_description)
         )
     }
 }
@@ -167,18 +186,15 @@ fun NotificationPermissionDialog(
     }
 }
 
-/**
- * Discrete-slider dialog to pick a periodic background interval. Shared by the update check
- * and the automatic re-patch schedule, which is why the wording is passed in.
- */
+/** Discrete-slider dialog to pick how often the background update check runs. */
 @Composable
 internal fun UpdateCheckIntervalDialog(
     currentInterval: UpdateCheckInterval,
     onIntervalSelected: (UpdateCheckInterval) -> Unit,
-    onDismiss: () -> Unit,
-    title: String = stringResource(R.string.settings_advanced_update_interval_dialog_title),
-    chipSubtitle: String = stringResource(R.string.settings_advanced_update_interval_chip_subtitle)
+    onDismiss: () -> Unit
 ) {
+    val title = stringResource(R.string.settings_advanced_update_interval_dialog_title)
+    val chipSubtitle = stringResource(R.string.settings_advanced_update_interval_chip_subtitle)
     val entries = UpdateCheckInterval.entries
     var sliderIndex by remember { mutableFloatStateOf(entries.indexOf(currentInterval).toFloat()) }
     val selectedInterval = entries[sliderIndex.roundToInt().coerceIn(entries.indices)]

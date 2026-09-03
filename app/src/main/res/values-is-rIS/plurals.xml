@@ -44,9 +44,9 @@
         <item quantity="one">%s app tilbúið til að flikka</item>
         <item quantity="other">%s app tilbúið til að flikka</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">%s app tilbúið til uppsetningar</item>
-        <item quantity="other">%s app tilbúið til uppsetningar</item>
+    <plurals name="repatch_available_count">
+        <item quantity="one">Hægt er að endurplástra %s app</item>
+        <item quantity="other">Hægt er að endurplástra %s öpp</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Hlétt af %s app</item>
@@ -67,6 +67,10 @@
     <plurals name="home_category_app_count">
         <item quantity="one">%s app</item>
         <item quantity="other">%s apps</item>
+    </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="one">%s valið</item>
+        <item quantity="other">%s valin</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="one">Afritað %s breytingu úr völdum pakka</item>

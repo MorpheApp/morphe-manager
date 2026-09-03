@@ -110,6 +110,10 @@ class ThemeSettingsViewModel(
         prefs.showGreetingPhrases.update(!current)
     }
 
+    fun toggleShowRepatchNotice(current: Boolean) = viewModelScope.launch {
+        prefs.showRepatchNotice.update(!current)
+    }
+
     fun setPureBlackTheme(enabled: Boolean) = viewModelScope.launch {
         prefs.pureBlackTheme.update(enabled)
     }

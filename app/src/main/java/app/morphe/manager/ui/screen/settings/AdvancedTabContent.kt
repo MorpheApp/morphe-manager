@@ -24,7 +24,6 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import app.morphe.manager.R
-import app.morphe.manager.ui.screen.settings.advanced.AutoPatchDialog
 import app.morphe.manager.ui.screen.settings.advanced.GitHubPatSettingsItem
 import app.morphe.manager.ui.screen.settings.advanced.PatchOptionsSection
 import app.morphe.manager.ui.screen.settings.advanced.PatcherTuningSection
@@ -60,16 +59,8 @@ fun AdvancedTabContent(
 
     val showExpertModeNotice = settingsViewModel.showExpertModeNotice
     val showExpertModeDialog = remember { mutableStateOf(false) }
-    val showAutoPatchDialog = remember { mutableStateOf(false) }
     val gitHubPat by prefs.gitHubPat.getAsState()
     val includeGitHubPatInExports by prefs.includeGitHubPatInExports.getAsState()
-
-    if (showAutoPatchDialog.value) {
-        AutoPatchDialog(
-            settingsViewModel = settingsViewModel,
-            onDismiss = { showAutoPatchDialog.value = false }
-        )
-    }
 
     // Expert mode confirmation dialog
     if (showExpertModeDialog.value) {
@@ -99,8 +90,7 @@ fun AdvancedTabContent(
 
         UpdatesSettingsItem(
             settingsViewModel = settingsViewModel,
-            onManagerPrereleasesToggle = { homeViewModel.triggerUpdateCheck() },
-            onAutoPatchClick = { showAutoPatchDialog.value = true }
+            onManagerPrereleasesToggle = { homeViewModel.triggerUpdateCheck() }
         )
 
         // Patcher tuning

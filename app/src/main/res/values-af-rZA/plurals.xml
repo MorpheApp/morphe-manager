@@ -44,9 +44,9 @@
         <item quantity="one">%s app gereed om te patsj</item>
         <item quantity="other">%s toepassings gereed om te patsj</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">%s app is gereed om te installeer</item>
-        <item quantity="other">%s toepassings is gereed om te installeer</item>
+    <plurals name="repatch_available_count">
+        <item quantity="one">%s app kan weer gepatch word</item>
+        <item quantity="other">%s apps kan weer gepatch word</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">%s app oorgeslaan</item>
@@ -67,6 +67,10 @@
     <plurals name="home_category_app_count">
         <item quantity="one">%s app</item>
         <item quantity="other">%s apps</item>
+    </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="one">%s geselekteer</item>
+        <item quantity="other">%s geselekteer</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="one">%s patch van geselekteerde bundel gekopieer</item>

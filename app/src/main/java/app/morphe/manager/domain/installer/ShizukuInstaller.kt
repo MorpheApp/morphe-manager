@@ -20,9 +20,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
 import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuBinderWrapper
-import rikka.shizuku.ShizukuProvider
 import rikka.shizuku.SystemServiceHelper
-import rikka.sui.Sui
 import java.io.File
 import java.io.IOException
 import java.lang.reflect.Constructor
@@ -34,18 +32,32 @@ import kotlin.time.Duration.Companion.seconds
  *
  * Communicates directly with the system [IPackageInstaller] through Shizuku binder IPC,
  * bypassing the user confirmation dialog required by the standard PackageInstaller API.
+ *
+ * Expects the binder bootstrap [ShizukuEnvironment] performs to have already run.
  */
 class ShizukuInstaller(private val app: Application) {
 
-    init {
-        val isSui = Sui.init(app.packageName)
-        if (!isSui) {
-            runCatching { ShizukuProvider.requestBinderForNonProviderProcess(app) }
-        }
-    }
-
     /** Result of a silent PackageInstaller operation. */
     data class OperationResult(val status: Int, val message: String?)
+
+    /**
+     * An [IntentSender] paired with the [OperationResult] the intent delivered to it completes,
+     * which is the only way the system reports the outcome of a session.
+     */
+    private class PendingOperation {
+        val result = CompletableDeferred<OperationResult>()
+        val intentSender: IntentSender = IntentSenderCompat.create { intent ->
+            result.complete(
+                OperationResult(
+                    status = intent.getIntExtra(
+                        PackageInstaller.EXTRA_STATUS,
+                        PackageInstaller.STATUS_FAILURE
+                    ),
+                    message = intent.getStringExtra(PackageInstaller.EXTRA_STATUS_MESSAGE)
+                )
+            )
+        }
+    }
 
     /**
      * Silently installs [sourceFile] via Shizuku/Sui. Suspends until the installation completes.
@@ -62,14 +74,7 @@ class ShizukuInstaller(private val app: Application) {
         installerPackageNameOverride: String? = null
     ): OperationResult = withContext(Dispatchers.IO) {
         val packageInstaller = obtainPackageInstaller()
-        val identity = installerIdentity(installerPackageNameOverride)
-
-        val packageInstallerWrapper = PackageInstallerCompat.createPackageInstaller(
-            packageInstaller,
-            identity.packageName,
-            identity.attributionTag,
-            identity.userId
-        )
+        val packageInstallerWrapper = packageInstaller.asPackageInstaller(installerPackageNameOverride)
         val params = PackageInstaller.SessionParams(PackageInstaller.SessionParams.MODE_FULL_INSTALL).apply {
             runCatching { setAppPackageName(expectedPackage) }
             @Suppress("WrongConstant")
@@ -94,20 +99,12 @@ class ShizukuInstaller(private val app: Application) {
                 }
             }
 
-            val resultDeferred = CompletableDeferred<OperationResult>()
-            val intentSender = IntentSenderCompat.create { intent ->
-                val status = intent.getIntExtra(PackageInstaller.EXTRA_STATUS, PackageInstaller.STATUS_FAILURE)
-                val message = intent.getStringExtra(PackageInstaller.EXTRA_STATUS_MESSAGE)
-                resultDeferred.complete(OperationResult(status, message))
-            }
-
-            session.commit(intentSender)
-            val result = withTimeout(INSTALL_RESULT_TIMEOUT) { resultDeferred.await() }
+            val operation = PendingOperation()
+            session.commit(operation.intentSender)
+            val result = withTimeout(INSTALL_RESULT_TIMEOUT) { operation.result.await() }
+            // Set before the status check - a delivered failure leaves nothing to abandon
             completed = true
-            if (result.status != PackageInstaller.STATUS_SUCCESS) {
-                throw InstallerOperationException(result.status, result.message)
-            }
-            result
+            result.requireSuccess()
         } finally {
             if (!completed) {
                 runCatching { packageInstallerWrapper.abandonSession(sessionId) }
@@ -117,33 +114,24 @@ class ShizukuInstaller(private val app: Application) {
     }
 
     /**
-     * Silently uninstalls [packageName] via Shizuku/Sui. Suspends until the uninstall completes.
+     * Silently uninstalls [packageName] via Shizuku/Sui. Suspends until uninstall completes.
      *
      * @throws InstallerOperationException if the uninstall fails or is aborted.
      */
     suspend fun uninstall(packageName: String): OperationResult = withContext(Dispatchers.IO) {
-        val packageInstaller = obtainPackageInstaller()
-        val identity = installerIdentity()
-        val packageInstallerWrapper = PackageInstallerCompat.createPackageInstaller(
-            packageInstaller,
-            identity.packageName,
-            identity.attributionTag,
-            identity.userId
-        )
+        val packageInstallerWrapper = obtainPackageInstaller().asPackageInstaller()
+        val operation = PendingOperation()
 
-        val resultDeferred = CompletableDeferred<OperationResult>()
-        val intentSender = IntentSenderCompat.create { intent ->
-            val status = intent.getIntExtra(PackageInstaller.EXTRA_STATUS, PackageInstaller.STATUS_FAILURE)
-            val message = intent.getStringExtra(PackageInstaller.EXTRA_STATUS_MESSAGE)
-            resultDeferred.complete(OperationResult(status, message))
-        }
+        packageInstallerWrapper.uninstall(packageName, operation.intentSender)
+        withTimeout(UNINSTALL_RESULT_TIMEOUT) { operation.result.await() }.requireSuccess()
+    }
 
-        packageInstallerWrapper.uninstall(packageName, intentSender)
-        val result = withTimeout(UNINSTALL_RESULT_TIMEOUT) { resultDeferred.await() }
-        if (result.status != PackageInstaller.STATUS_SUCCESS) {
-            throw InstallerOperationException(result.status, result.message)
+    /** Returns this result, or throws [InstallerOperationException] when the operation failed. */
+    private fun OperationResult.requireSuccess(): OperationResult {
+        if (status != PackageInstaller.STATUS_SUCCESS) {
+            throw InstallerOperationException(status, message)
         }
-        result
+        return this
     }
 
     /** Resolves [IPackageInstaller] via the Shizuku binder IPC. */
@@ -157,6 +145,19 @@ class ShizukuInstaller(private val app: Application) {
         } catch (error: RemoteException) {
             throw IOException(error)
         }
+    }
+
+    /** Wraps this remote installer in a [PackageInstaller] attributed to the caller's identity. */
+    private fun IPackageInstaller.asPackageInstaller(
+        installerPackageNameOverride: String? = null
+    ): PackageInstaller {
+        val identity = installerIdentity(installerPackageNameOverride)
+        return PackageInstallerCompat.createPackageInstaller(
+            this,
+            identity.packageName,
+            identity.attributionTag,
+            identity.userId
+        )
     }
 
     /** Returns the user ID derived from the current process UID. */
@@ -186,7 +187,6 @@ class ShizukuInstaller(private val app: Application) {
         private const val BASE_APK_NAME = "base.apk"
         private val INSTALL_RESULT_TIMEOUT = 5.minutes
         private val UNINSTALL_RESULT_TIMEOUT = 30.seconds
-        internal const val PACKAGE_NAME = "moe.shizuku.privileged.api"
     }
 }
 

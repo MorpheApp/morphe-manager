@@ -501,14 +501,14 @@ private fun SelectionList(
                     title = pluralStringResource(
                         R.plurals.package_count,
                         selections.size,
-                        selections.size
+                        selections.size.toString()
                     ),
                     subtitle = {
                         Text(
                             text = pluralStringResource(
                                 R.plurals.patch_count,
                                 data.totalSelections,
-                                data.totalSelections
+                                data.totalSelections.toString()
                             ),
                             style = MaterialTheme.typography.bodyMedium,
                             color = LocalDialogSecondaryTextColor.current
@@ -673,7 +673,7 @@ private fun PackageSelectionItem(
                                 text = pluralStringResource(
                                     R.plurals.patch_count,
                                     totalPatches,
-                                    totalPatches
+                                    totalPatches.toString()
                                 ),
                                 tone = SemanticTone.Primary
                             )
@@ -683,7 +683,7 @@ private fun PackageSelectionItem(
                                     text = pluralStringResource(
                                         R.plurals.source_count,
                                         bundleMap.size,
-                                        bundleMap.size
+                                        bundleMap.size.toString()
                                     ),
                                     tone = SemanticTone.Neutral
                                 )
@@ -780,7 +780,7 @@ private fun BundleSelectionItem(
     // Display bundle name or fallback to "Bundle #N"
     val displayName = bundleName
         ?: stringResource(R.string.settings_system_patch_selection_source_format, bundleUid)
-    val patchCountText = pluralStringResource(R.plurals.patch_count, patchCount, patchCount)
+    val patchCountText = pluralStringResource(R.plurals.patch_count, patchCount, patchCount.toString())
 
     // Export launcher
     val exportLauncher = rememberLauncherForActivityResult(
@@ -896,8 +896,8 @@ private fun ConfirmResetSelectedDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
-    val patchesText = pluralStringResource(R.plurals.patch_count, totalPatches, totalPatches)
-    val packagesText = pluralStringResource(R.plurals.package_count, packageCount, packageCount)
+    val patchesText = pluralStringResource(R.plurals.patch_count, totalPatches, totalPatches.toString())
+    val packagesText = pluralStringResource(R.plurals.package_count, packageCount, packageCount.toString())
     ConfirmResetDialog(
         title = stringResource(R.string.settings_system_patch_selection_reset_selected_confirm_title),
         message = AnnotatedString(stringResource(R.string.settings_system_patch_selection_reset_selected_warning)),
@@ -930,8 +930,8 @@ private fun ConfirmResetAllDialog(
         totalOptions = settingsViewModel.loadTotalOptionsCount()
     }
 
-    val patchesText = pluralStringResource(R.plurals.patch_count, totalSelections, totalSelections)
-    val packagesText = pluralStringResource(R.plurals.package_count, packageCount, packageCount)
+    val patchesText = pluralStringResource(R.plurals.patch_count, totalSelections, totalSelections.toString())
+    val packagesText = pluralStringResource(R.plurals.package_count, packageCount, packageCount.toString())
     ConfirmResetDialog(
         title = stringResource(R.string.settings_system_patch_selection_reset_all_confirm_title),
         message = AnnotatedString(stringResource(R.string.settings_system_patch_selection_reset_all_warning)),
@@ -946,7 +946,7 @@ private fun ConfirmResetAllDialog(
         if (totalOptions > 0) {
             DeleteListItem(
                 icon = Icons.Outlined.Tune,
-                text = pluralStringResource(R.plurals.option_count, totalOptions, totalOptions)
+                text = pluralStringResource(R.plurals.option_count, totalOptions, totalOptions.toString())
             )
         }
     }
@@ -973,8 +973,8 @@ private fun ConfirmResetPackageDialog(
         optionsCount = settingsViewModel.loadOptionsCountForPackage(packageName)
     }
 
-    val patchesText = pluralStringResource(R.plurals.patch_count, patchCount, patchCount)
-    val sourcesText = pluralStringResource(R.plurals.source_count, bundleCount, bundleCount)
+    val patchesText = pluralStringResource(R.plurals.patch_count, patchCount, patchCount.toString())
+    val sourcesText = pluralStringResource(R.plurals.source_count, bundleCount, bundleCount.toString())
     ConfirmResetDialog(
         title = stringResource(R.string.settings_system_patch_selection_reset_package_confirm_title),
         message = htmlAnnotatedString(stringResource(R.string.settings_system_patch_selection_reset_package_warning, displayName)),
@@ -989,7 +989,7 @@ private fun ConfirmResetPackageDialog(
         if (optionsCount > 0) {
             DeleteListItem(
                 icon = Icons.Outlined.Tune,
-                text = pluralStringResource(R.plurals.option_count, optionsCount, optionsCount)
+                text = pluralStringResource(R.plurals.option_count, optionsCount, optionsCount.toString())
             )
         }
     }
@@ -1028,12 +1028,12 @@ private fun ConfirmResetPackageBundleDialog(
     ) {
         DeleteListItem(
             icon = Icons.Outlined.Delete,
-            text = pluralStringResource(R.plurals.patch_count, patchCount, patchCount)
+            text = pluralStringResource(R.plurals.patch_count, patchCount, patchCount.toString())
         )
         if (optionsCount > 0) {
             DeleteListItem(
                 icon = Icons.Outlined.Tune,
-                text = pluralStringResource(R.plurals.option_count, optionsCount, optionsCount)
+                text = pluralStringResource(R.plurals.option_count, optionsCount, optionsCount.toString())
             )
         }
     }

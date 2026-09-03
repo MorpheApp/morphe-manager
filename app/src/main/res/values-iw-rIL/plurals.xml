@@ -3,109 +3,96 @@
     <plurals name="patch_count">
         <item quantity="one">תיקון אחד</item>
         <item quantity="two">שני תיקונים</item>
-        <item quantity="many">%s תיקונים</item>
         <item quantity="other">%s תיקונים</item>
     </plurals>
     <plurals name="option_count">
         <item quantity="one">אופציית תיקון אחת</item>
         <item quantity="two">שתי אופציות תיקון</item>
-        <item quantity="many">%s אופציות תיקון</item>
         <item quantity="other">%s אופציות תיקון</item>
     </plurals>
     <plurals name="source_count">
         <item quantity="one">מקור אחד</item>
         <item quantity="two">שני מקורות</item>
-        <item quantity="many">%s מקורות</item>
         <item quantity="other">%s מקורות</item>
     </plurals>
     <plurals name="package_count">
         <item quantity="one">חבילה אחת</item>
         <item quantity="two">שתי חבילות</item>
-        <item quantity="many">%s חבילות</item>
         <item quantity="other">%s חבילות</item>
     </plurals>
     <plurals name="patches_executed">
         <item quantity="one">הופעל תיקון %s</item>
         <item quantity="two">התבצעו %s תיקונים</item>
-        <item quantity="many">התבצעו %s תיקונים</item>
         <item quantity="other">התבצעו %s תיקונים</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">קובץ APK אחד</item>
         <item quantity="two">שני קבצי APK</item>
-        <item quantity="many">%s קבצי APK</item>
         <item quantity="other">%s קבצי APK</item>
     </plurals>
     <plurals name="batch_install_summary">
         <item quantity="one">הותקנו %s אפליקציות</item>
         <item quantity="two">הותקנו %s אפליקציות</item>
-        <item quantity="many">הותקנו %s אפליקציות</item>
         <item quantity="other">הותקנו %s אפליקציות</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
         <item quantity="one">הותקנו מחדש %s אפליקציה</item>
         <item quantity="two">הותקנו מחדש %s אפליקציות</item>
-        <item quantity="many">הותקנו מחדש %s אפליקציות</item>
         <item quantity="other">הותקנו מחדש %s אפליקציות</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
         <item quantity="one">הוסרו %s אפליקציות</item>
         <item quantity="two">הוסרו %s אפליקציות</item>
-        <item quantity="many">הוסרו %s אפליקציות</item>
         <item quantity="other">הוסרו %s אפליקציות</item>
     </plurals>
     <plurals name="batch_uninstall_confirm_title">
         <item quantity="one">להסיר %s אפליקציה?</item>
         <item quantity="two">להסיר %s אפליקציות?</item>
-        <item quantity="many">להסיר %s אפליקציות?</item>
         <item quantity="other">להסיר %s אפליקציות?</item>
     </plurals>
     <plurals name="batch_patch_ready_count">
         <item quantity="one">%s אפליקציה מוכנה לתיקון</item>
         <item quantity="two">%s אפליקציות מוכנות לתיקון</item>
-        <item quantity="many">%s אפליקציות מוכנות לתיקון</item>
         <item quantity="other">%s אפליקציות מוכנות לתיקון</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">%s אפליקציה מוכנה להתקנה</item>
-        <item quantity="two">%s אפליקציות מוכנות להתקנה</item>
-        <item quantity="many">%s אפליקציות מוכנות להתקנה</item>
-        <item quantity="other">%s אפליקציות מוכנות להתקנה</item>
+    <plurals name="repatch_available_count">
+        <item quantity="one">%s אפליקציה ניתנת לתיקון מחדש</item>
+        <item quantity="two">%s אפליקציות נתתות לתיקון מחדש</item>
+        <item quantity="other">%s אפליפשריות נותות לתיקון מחדש</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">דילוג על %s אפליקציה</item>
         <item quantity="two">דילוג על %s אפליקציות</item>
-        <item quantity="many">דילוג על %s אפליקציות</item>
         <item quantity="other">דילוג על %s אפליקציות</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">הוסר תיקון מיושן אחד מהמבחר השמור</item>
         <item quantity="two">הוסרו שני תיקונים מיושנים מהמבחר השמור</item>
-        <item quantity="many">הוסרו %s תיקונים מיושנים מהמבחר השמור</item>
         <item quantity="other">הוסרו %s תיקונים מיושנים מהמבחר השמור</item>
     </plurals>
     <plurals name="sources_management_subtitle">
         <item quantity="one">מקור אחד הותקן</item>
         <item quantity="two">שני מקורות הותקנו</item>
-        <item quantity="many">%s מקורות הותקנו</item>
         <item quantity="other">%s מקורות הותקנו</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s אפליקציה מוסתרת</item>
         <item quantity="two">%s אפליקציות מוסתרות</item>
-        <item quantity="many">%s אפליקציות מוסתרות</item>
         <item quantity="other">%s אפליקציות מוסתרות</item>
     </plurals>
     <plurals name="home_category_app_count">
         <item quantity="one">%s אפליקציה</item>
         <item quantity="two">%s אפליקציות</item>
-        <item quantity="many">%s אפליקציות</item>
         <item quantity="other">%s אפליקציות</item>
+    </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="one">%s נבחר</item>
+        <item quantity="two">%s נבחרו</item>
+        <item quantity="other">%s נבחרו</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="one">הועתקו %s תיקונים מהחבילה הנבחרת</item>
         <item quantity="two">הועתקו %s תיקונים מהחבילה הנבחרת</item>
-        <item quantity="many">הועתקו %s תיקונים מהחבילה הנבחרת</item>
         <item quantity="other">הועתקו %s תיקונים מהחבילה הנבחרת</item>
     </plurals>
 </resources>

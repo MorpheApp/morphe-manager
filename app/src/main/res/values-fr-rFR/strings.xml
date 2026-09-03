@@ -2,6 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Autres applications</string>
+    <string name="home_other_apps_action">Sélectionner d\'autres applications</string>
     <string name="home_not_patched_yet">Pas encore patchée</string>
     <string name="home_unpatched_version_installed">Version non patchée installée</string>
     <string name="home_unpatched_badge">Non patchée</string>
@@ -28,6 +29,7 @@
     <string name="home_outdated_manager_subtitle">Certaines sources de patchs nécessitent une version plus récente</string>
     <string name="home_metered_skipped_title">Mises à jour suspendues sur les données mobiles</string>
     <string name="home_metered_skipped_subtitle">Appuyez pour autoriser les mises à jour via les données mobiles</string>
+    <string name="home_repatch_available_subtitle">Appuyez pour toutes les mettre dans la file d\'attente</string>
     <string name="home_update_error">Mise à jour échouée</string>
     <string name="home_update_error_subtitle">Une erreur s\'est produite lors de la mise à jour des sources</string>
     <string name="home_update_skipped_metered">Mises à jour passées</string>
@@ -53,6 +55,8 @@
     <string name="home_app_sort_name_desc_description">Ordre alphabétique inversé, Z à A</string>
     <string name="home_app_sort_updates_first">Mises à jour de patchs en premier</string>
     <string name="home_app_sort_updates_first_description">Applications avec badge de mise à jour en premier, puis ordre recommandé</string>
+    <string name="home_app_sort_recently_patched">Récemment patchée</string>
+    <string name="home_app_sort_recently_patched_description">Applications récemment patchées en premier</string>
     <string name="home_no_apps_title">Aucune application disponible</string>
     <string name="home_no_apps_subtitle">Ajoutez une source de patchs ou activez-en une existante dans %s</string>
     <string name="home_no_apps_search_subtitle">Aucune application ne correspond à \"%s\"</string>
@@ -124,11 +128,16 @@
     <string name="sources_sort_enabled_first">Activées en premier</string>
     <string name="sources_sort_enabled_first_description">Afficher les sources actives avant les sources désactivées</string>
     <string name="sources_management_open_in_browser">Ouvrir dans le navigateur</string>
+    <string name="sources_management_report_issue">Signaler un problème</string>
     <string name="sources_management_failed_to_open_url">Échec de l\'ouverture de l\'URL</string>
     <string name="sources_management_prerelease_toggle">Patchs en préversion</string>
     <string name="sources_management_prerelease_toggle_description">Reçoit un accès anticipé aux nouvelles versions expérimentales des patchs</string>
+    <string name="sources_prerelease_warning_title">Activer les patchs en préversion ?</string>
+    <string name="sources_prerelease_warning_message">Les builds en préversion sont encore en cours de développement. Les patchs peuvent échouer ou entraîner un dysfonctionnement de l\'application, et les fonctionnalités peuvent changer sans avertissement</string>
+    <string name="expert_mode_prerelease_notice">Cette source utilise des patchs en préversion. Le patching peut échouer ou entraîner un comportement inattendu.
+</string>
     <string name="sources_management_experimental_versions_toggle">Versions expérimentales de l\'application</string>
-    <string name="sources_management_experimental_versions_toggle_description">Patche les cibles de l\'application expérimentale si disponibles</string>
+    <string name="sources_management_experimental_versions_toggle_description">Affiche et patche les cibles d\'applications expérimentales</string>
     <string name="sources_management_already_exists">Cette source a déjà été ajoutée</string>
     <string name="sources_management_invalid_url">L\'URL de la source est invalide. Vérifiez l\'adresse puis réessayez</string>
     <string name="sources_management_blocked">Cette source de patchs est bloquée et ne peut pas être ajoutée</string>
@@ -162,6 +171,12 @@
     <string name="sources_dialog_url_invalid">L\'URL doit pointer vers un dépôt GitHub/GitLab ou un fichier .json</string>
     <string name="sources_dialog_local_change_file">Changer de fichier</string>
     <string name="sources_dialog_preinstalled">Préinstallée</string>
+    <string name="sources_dialog_community">Patchs communautaires</string>
+    <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
+    <string name="sources_dialog_community_notice_title">Sources de patchs tierces</string>
+    <string name="sources_dialog_community_notice_message">"Les sources de patchs communautaires sont créées et maintenues par leurs propres auteurs. Morphe ne vérifie ni n'examine les patchs tiers et n'est pas responsable de leur contenu ni de leurs actions sur votre appareil.
+
+Tout ce que vous ajoutez depuis ce site web est utilisé à vos propres risques"</string>
     <string name="sources_update_success">Mise à jour réussie</string>
     <string name="sources_update_unavailable">Aucune mise à jour disponible</string>
     <string name="sources_download_fail">Échec du téléchargement des sources : %s</string>
@@ -194,6 +209,7 @@
     <string name="home_apk_helper_installed_incompatible">La version installée ne peut pas être patchée</string>
     <string name="home_apk_use_saved">Utiliser l\'APK enregistré</string>
     <string name="home_apk_use_installed">Utiliser l\'APK installé</string>
+    <string name="home_apk_use_saved_unsupported">Les patchs ne prennent pas en charge cette copie enregistrée. Le patching vous demandera de confirmer, ou de choisir un autre APK</string>
     <string name="home_apk_use_installed_unverified">Impossible de vérifier la signature de l\'application installée, il est donc possible qu\'elle soit déjà patchée</string>
     <string name="home_unverified">Non vérifiée</string>
     <string name="home_install_verification_pending">Vérification de l\'installation…</string>
@@ -253,6 +269,8 @@
     <string name="expert_mode_enable_all">Tout activer</string>
     <string name="expert_mode_enable_all_done">Tous les patchs sont activés</string>
     <string name="expert_mode_enable_all_universal_pending">Appuyez à nouveau pour les patchs universels</string>
+    <string name="expert_mode_universal_all_warning_title">Activer tous les patchs universels ?</string>
+    <string name="expert_mode_universal_all_warning_message">Les patchs universels ne sont pas testés ensemble. Les activer tous en même temps peut entraîner des conflits, un échec du patching ou des plantages</string>
     <string name="expert_mode_reset_to_default">Activer les patchs recommandés</string>
     <string name="expert_mode_reset_to_default_done">Patchs recommandés appliqués</string>
     <string name="expert_mode_restore_saved">Restaurer la sélection enregistrée</string>
@@ -260,8 +278,11 @@
     <string name="expert_mode_copy_from_bundle">Copier la sélection depuis un autre bundle</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Aucun patch correspondant dans ce bundle</string>
     <string name="expert_mode_no_results">Aucun patch trouvé</string>
+    <string name="expert_mode_selected_only_on">Affichage des patchs sélectionnés uniquement</string>
+    <string name="expert_mode_selected_only_off">Affichage de tous les patchs</string>
     <string name="expert_mode_universal_patches">Patchs universels</string>
     <string name="expert_mode_new_patches">Nouveau</string>
+    <string name="expert_mode_options_customized">Personnalisées</string>
     <string name="expert_mode_patch_required_by_installer">Nécessaire pour la cible d\'installation sélectionnée</string>
     <string name="expert_mode_patch_unavailable_for_installer">Indisponible pour la cible d\'installation sélectionnée</string>
     <string name="expert_mode_multiple_sources_warning_title">Plusieurs sources de patchs sélectionnées</string>
@@ -281,11 +302,11 @@ Pour de meilleurs résultats, cette application recommande d'effectuer le patchi
     <string name="home_dialog_unsupported_version_experimental_description">Cette version bénéficie d\'un support expérimental et peut être instable ou incomplète</string>
     <string name="morphe_experimental_app_version_dialog_title">Voulez-vous expérimenter ? 🧪</string>
     <string name="morphe_experimental_app_version_dialog_message">Cette version de &lt;b&gt;%s&lt;/b&gt; bénéficie d\'un support expérimental.&lt;br/&gt;&lt;br/&gt; Attendez-vous à des comportements étranges ou à des bugs non identifiés, car les patchs sont encore en cours d\'affinement pour cette version de l\'application</string>
-    <string name="home_dialog_unsupported_version_dialog_title">Version non supportée</string>
+    <string name="home_dialog_unsupported_version_dialog_title">Version non prise en charge</string>
     <string name="home_dialog_unsupported_version_dialog_description">Cette version de l\'APK n\'est pas recommandée. Continuer peut rendre l\'application dysfonctionnelle</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Continuer quand même</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Versions compatibles :</string>
-    <string name="home_dialog_unsupported_version_unsupported_label">Non supporté</string>
+    <string name="home_dialog_unsupported_version_unsupported_label">Non pris en charge</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Build %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Il s\'agit d\'un build différent de la même version. Les patchs nécessitent un build spécifique</string>
@@ -439,7 +460,27 @@ Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - g
     <string name="patcher_error_copied">Erreur copiée dans le presse-papiers</string>
     <string name="patcher_error_log">Journal d\'erreur</string>
     <string name="patcher_error_technical">Détails techniques</string>
-    <string name="patcher_error_dialog_app_info">Informations sur l\'application</string>
+    <string name="patcher_error_dialog_diagnostics">Diagnostics</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">Application</string>
+    <string name="patcher_field_package">Paquet</string>
+    <string name="patcher_field_source">Source</string>
+    <string name="patcher_field_split">APK fractionné</string>
+    <string name="patcher_field_manager">Gestionnaire</string>
+    <string name="patcher_field_patcher">Patcheur</string>
+    <string name="patcher_field_runtime">Temps d\'exécution</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Bibliothèques</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Appareil</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Mémoire</string>
+    <string name="patcher_field_storage">Stockage</string>
+    <string name="patcher_field_value_unknown">inconnu</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">supprimées</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">conservées</string>
     <string name="patcher_tab_logs">Journaux du patcheur</string>
     <string name="patcher_tab_game">Jeux</string>
     <string name="patcher_logs_waiting">En attente de la sortie du journal…</string>
@@ -450,7 +491,7 @@ Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - g
     <string name="patcher_success_subtitle">Votre application est patchée et installée !</string>
     <string name="patcher_complete_title">Patching terminé ! ✨</string>
     <string name="patcher_failed_title">Oups ! Quelque chose s\'est mal passé</string>
-    <string name="patcher_failed_subtitle">Vérifiez les détails de l\'erreur ci-dessous</string>
+    <string name="patcher_failed_hint">Appuyez sur %s pour voir ce qui n\'a pas fonctionné</string>
     <string name="patcher_failed_dialog_title">Échec du patching</string>
     <string name="patcher_unknown_error">Une erreur inconnue s\'est produite</string>
     <string name="patcher_split_step_extracting">Extraction des APK fractionnés</string>
@@ -626,6 +667,8 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="settings_appearance_greeting_phrases_subtitle">Afficher un message de salutation sur l\'écran d\'accueil</string>
     <string name="settings_appearance_app_grouping">Regroupement d\'applications</string>
     <string name="settings_appearance_app_grouping_description">Afficher un sélecteur sur l\'écran d\'accueil pour regrouper les applications par source ou selon vos propres catégories, en conservant la sélection lorsqu\'il est désactivé</string>
+    <string name="settings_appearance_repatch_notice">Avis de re-patch</string>
+    <string name="settings_appearance_repatch_notice_description">Afficher une bannière sur l\'écran d\'accueil lorsque les applications patchées peuvent être re-patchées</string>
     <string name="settings_appearance_sort_button">Bouton trier et filtrer</string>
     <string name="settings_appearance_sort_button_description">Afficher le bouton trier et filtrer sur l\'écran d\'accueil</string>
     <string name="settings_appearance_app_card_colors">Couleurs des cartes des applications</string>
@@ -657,8 +700,14 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Mises à jour</string>
     <string name="settings_advanced_patcher">Patcheur</string>
-    <string name="settings_advanced_updates_use_prereleases">Mises à jour de préversion</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Accès anticipé aux nouvelles versions de l\'application Morphe. Activez les préversions par source dans les sources de patchs</string>
+    <string name="settings_advanced_updates_manager_prereleases">Mises à jour en préversion</string>
+    <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
+    <string name="settings_advanced_updates_manager_prereleases_description">Accès anticipé aux nouvelles versions de Morphe</string>
+    <string name="settings_advanced_updates_prerelease_warning_title">Activer les mises à jour en préversion ?</string>
+    <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
+    <string name="settings_advanced_updates_prerelease_warning_message">"Les versions de préversion de Morphe sont encore en cours de développement et peuvent être instables.
+
+Les patchs ne sont pas affectés : activez les patchs en préversion pour chaque source dans la liste des sources de patchs"</string>
     <string name="settings_advanced_updates_allow_metered">Mises à jour via les données mobiles</string>
     <string name="settings_advanced_updates_allow_metered_description">Autorise Morphe et les mises à jour de patchs à se télécharger via les données mobiles</string>
     <string name="settings_advanced_updates_background_notifications">Notifications de mise à jour en arrière-plan</string>
@@ -672,14 +721,6 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="settings_advanced_update_interval_monthly">Une fois par mois</string>
     <string name="settings_advanced_update_interval_chip_subtitle">Fréquence de vérification en arrière-plan</string>
     <string name="settings_advanced_update_interval_battery_warning">Les vérifications en arrière-plan peuvent ne pas fonctionner fiablement sur certains appareils. Des fabricants tels que Xiaomi, Huawei, Samsung et OnePlus restreignent souvent de manière agressive les processus en arrière-plan pour économiser la batterie</string>
-    <string name="settings_advanced_auto_patch">Re-patching automatique</string>
-    <string name="settings_advanced_auto_patch_description">Re-patche les applications installées en arrière-plan lorsque leurs patchs changent. Seules les applications avec un APK d\'origine enregistré sont couvertes</string>
-    <string name="settings_advanced_auto_patch_interval">Fréquence de re-patch</string>
-    <string name="settings_advanced_auto_patch_interval_chip_subtitle">À quelle fréquence les applications patchées sont reconstruites</string>
-    <string name="settings_advanced_auto_patch_charging">Uniquement pendant la charge</string>
-    <string name="settings_advanced_auto_patch_charging_description">Le patching sollicite fortement le processeur et la mémoire, il attend donc un chargeur</string>
-    <string name="settings_advanced_auto_patch_install">Installer automatiquement</string>
-    <string name="settings_advanced_auto_patch_install_description">Nécessite Shizuku comme installateur. Avec tout autre installateur les applications patchées sont uniquement enregistrées</string>
     <string name="settings_advanced_external_batch_patch">Autoriser les déclencheurs externes</string>
     <string name="settings_advanced_external_batch_patch_description">Permet aux applications d\'automatisation de démarrer le patching par lots avec une intention. Chaque demande est confirmée avant toute exécution</string>
     <string name="external_batch_patch_title">Démarrer le patching par lots ?</string>
@@ -687,13 +728,6 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="external_batch_patch_trust_caller">Toujours autoriser cette application</string>
     <string name="external_batch_patch_unknown_caller">Une application inconnue</string>
     <!-- Notification content -->
-    <string name="notification_auto_patch_title">Le re-patching automatique est terminé</string>
-    <string name="notification_auto_patch_running_title">Re-patching des applications</string>
-    <string name="notification_auto_patch_blocked_title">Le re-patching automatique ne s\'est pas exécuté</string>
-    <string name="notification_auto_patch_blocked_battery">Exemptez Morphe de l\'optimisation de la batterie, sinon Android arrête l\'exécution avant qu\'elle ne démarre</string>
-    <string name="notification_auto_patch_blocked_foreground">Android n\'a pas autorisé le démarrage du patching en arrière-plan. Ouvrez Morphe et patcher depuis l\'application</string>
-    <string name="notification_channel_auto_patch">Re-patching automatique</string>
-    <string name="notification_channel_auto_patch_description">Notifications de progression et de résultat silencieuses pour le re-patching planifié</string>
     <string name="notification_manager_update_title">Mise à jour de Morphe disponible</string>
     <string name="notification_bundle_update_title">Nouveaux patchs disponibles</string>
     <string name="notification_update_text">La version %s est prête à être téléchargée</string>
@@ -745,7 +779,7 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="settings_advanced_patch_options_custom_branding">Branding personnalisé</string>
     <string name="settings_advanced_patch_options_custom_branding_description">Change le nom d\'affichage de l\'application</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Nom de l\'application</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Entrez le nom personnalisé</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Entrez un nom personnalisé</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Icône personnalisée</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Dossier contenant les images à utiliser comme icône personnalisée.
 
@@ -1167,6 +1201,9 @@ Détails : %2$s"</string>
     <string name="importing_ellipsis">Importation…</string>
     <string name="imported_successfully">Importé avec succès</string>
     <string name="changelog">Voir le journal des modifications</string>
+    <string name="changelog_for_app">Changements pour %s</string>
+    <string name="changelog_general_changes">Changements généraux</string>
+    <string name="whats_new">Nouveautés</string>
     <string name="changelog_description">Découvrez les dernières modifications de cette mise à jour</string>
     <string name="changelog_download_fail">Échec du téléchargement du journal des modifications : %s</string>
     <string name="changelog_empty">Aucun journal des modifications disponible</string>
@@ -1179,13 +1216,13 @@ Détails : %2$s"</string>
     <string name="install_update_manager_failed">Échec de l\'installation de la mise à jour</string>
     <string name="installing_manager_update">Installation de la mise à jour…</string>
     <string name="downloading_manager_update">Téléchargement de la mise à jour…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f Mo téléchargés</string>
     <string name="manager_update_not_ready">Cette version est toujours en cours de publication. Réessayez dans quelques minutes</string>
+    <string name="update_download_missing">La mise à jour téléchargée n\'est plus disponible. Téléchargez-la à nouveau</string>
     <string name="download_manager_failed">Échec du téléchargement de la mise à jour : %s</string>
     <string name="failed_to_check_updates">Échec de la vérification des mises à jour : %s</string>
     <string name="failed_to_download_update">Échec du téléchargement de la mise à jour : %s</string>
-    <string name="resume_download">Reprendre le téléchargement</string>
     <string name="download_confirmation_metered">"Vous utilisez actuellement une connexion à débit limité et des frais de données peuvent vous être facturés par votre fournisseur d'accès.
 
 Voulez-vous tout de même continuer ?"</string>

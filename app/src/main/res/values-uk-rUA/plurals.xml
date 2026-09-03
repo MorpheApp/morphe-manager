@@ -66,11 +66,11 @@
         <item quantity="many">%s застосунків готові до патчингу</item>
         <item quantity="other">%s застосунків готові до патчингу</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">%s застосунок готовий до встановлення</item>
-        <item quantity="few">%s застосунки готові до встановлення</item>
-        <item quantity="many">%s застосунків готові до встановлення</item>
-        <item quantity="other">%s застосунків готові до встановлення</item>
+    <plurals name="repatch_available_count">
+        <item quantity="one">%s застосунок можна перепатчити</item>
+        <item quantity="few">%s застосунки можна перепатчити</item>
+        <item quantity="many">%s застосунків можна перепатчити</item>
+        <item quantity="other">%s застосунків можна перепатчити</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Пропущено %s застосунок</item>
@@ -101,6 +101,12 @@
         <item quantity="few">%s застосунки</item>
         <item quantity="many">%s застосунків</item>
         <item quantity="other">%s застосунків</item>
+    </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="one">%s вибрано</item>
+        <item quantity="few">%s вибрано</item>
+        <item quantity="many">%s вибрано</item>
+        <item quantity="other">%s вибрано</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="one">Скопійовано %s патч із вибраного пакета</item>

@@ -113,11 +113,11 @@ class UpdateCheckWorker(
         val sources = patchBundleRepository.sources.first()
         if (sources.isEmpty()) return
 
-        val updatedVersion = patchBundleRepository.checkForBundleUpdatesQuiet()
+        val update = patchBundleRepository.checkForBundleUpdatesQuiet()
 
-        if (updatedVersion != null) {
-            Log.d(tag, "UpdateCheckWorker: patch bundle update available ($updatedVersion)")
-            notificationManager.showBundleUpdateNotification(updatedVersion)
+        if (update != null) {
+            Log.d(tag, "UpdateCheckWorker: patch bundle update available (${update.version})")
+            notificationManager.showBundleUpdateNotification(update.version, update.bundleUid)
         } else {
             Log.d(tag, "UpdateCheckWorker: patch bundles are up to date")
         }

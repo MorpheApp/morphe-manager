@@ -8,7 +8,9 @@ import app.morphe.manager.network.service.AssetDownloader
 import app.morphe.manager.network.service.HttpService
 import app.morphe.manager.network.utils.getOrThrow
 import app.morphe.manager.util.ChangelogEntry
+import app.morphe.manager.util.ChangelogParser
 import app.morphe.manager.util.SOURCE_REPO_URL
+import app.morphe.manager.util.TimedCache
 import app.morphe.manager.util.compareVersions
 import app.morphe.manager.util.releasePageUrl
 import io.ktor.client.request.header
@@ -22,8 +24,6 @@ import io.ktor.utils.io.readAvailable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
@@ -126,17 +126,9 @@ sealed class RemotePatchBundle(
 
     suspend fun fetchLatestReleaseInfo(): MorpheAsset {
         val key = "$uid|$endpoint"
-        val now = System.currentTimeMillis()
-        val cached = changelogCacheMutex.withLock {
-            changelogCache[key]?.takeIf { now - it.timestamp <= CHANGELOG_CACHE_TTL }
-        }
-        if (cached != null) return cached.asset
+        releaseInfoCache[key]?.let { return it }
 
-        val asset = latestInfo()
-        changelogCacheMutex.withLock {
-            changelogCache[key] = CachedChangelog(asset, now)
-        }
-        return asset
+        return latestInfo().also { releaseInfoCache[key] = it }
     }
 
     /**
@@ -155,6 +147,18 @@ sealed class RemotePatchBundle(
         get() = inferPageUrlFromEndpoint(endpoint) ?: manifestPageUrl ?: endpoint
 
     /**
+     * Where the "report an issue" action takes the user: the repository's issues page.
+     *
+     * Follows the same order as [browsePageUrl] and appends the host's issues path
+     * (GitHub: /issues, GitLab: /-/issues). Hosts other than GitHub and GitLab have no known
+     * issues layout, so those land on the browse page instead of a guessed path.
+     */
+    open val issuesPageUrl: String
+        get() = inferIssuesUrlFromEndpoint(endpoint)
+            ?: manifestPageUrl?.let { issuesUrlForRepoUrl(it) }
+            ?: browsePageUrl
+
+    /**
      * Shared cache logic for [fetchChangelogEntries] and its overrides.
      */
     protected suspend fun fetchAndCacheEntries(
@@ -162,16 +166,10 @@ sealed class RemotePatchBundle(
         sinceVersion: String?,
         fetch: suspend () -> List<ChangelogEntry>
     ): List<ChangelogEntry> {
-        val now = System.currentTimeMillis()
-        val allEntries = entriesCacheMutex.withLock {
-            entriesCache[cacheKey]?.takeIf { now - it.first <= CHANGELOG_CACHE_TTL }?.second
-        } ?: run {
-            val fetched = fetch()
-            entriesCacheMutex.withLock { entriesCache[cacheKey] = now to fetched }
-            fetched
-        }
+        val allEntries = entriesCache[cacheKey] ?: fetch().also { entriesCache[cacheKey] = it }
+
         return if (sinceVersion != null)
-            app.morphe.manager.util.ChangelogParser.entriesNewerThan(allEntries, sinceVersion)
+            ChangelogParser.entriesNewerThan(allEntries, sinceVersion)
         else allEntries
     }
 
@@ -196,23 +194,11 @@ sealed class RemotePatchBundle(
      */
     open suspend fun fetchFullChangelogEntries(): List<ChangelogEntry> = emptyList()
 
+    /** Drops every cached read for this source, so the next one goes to the network. */
     fun clearChangelogCache() {
-        val assetKey = "$uid|$endpoint"
         pageUrls.remove(uid)
-        changelogCacheMutex.tryLock()
-        try {
-            changelogCache.remove(assetKey)
-        } finally {
-            changelogCacheMutex.unlock()
-        }
-
-        entriesCacheMutex.tryLock()
-
-        try {
-            entriesCache.keys.removeAll { it.startsWith("$uid|") }
-        } finally {
-            entriesCacheMutex.unlock()
-        }
+        releaseInfoCache.remove("$uid|$endpoint")
+        entriesCache.removeKeys { it.startsWith("$uid|") }
     }
 
     companion object {
@@ -220,10 +206,8 @@ sealed class RemotePatchBundle(
         const val BRANCH_DEV = "dev"
 
         internal const val CHANGELOG_CACHE_TTL = 10 * 60 * 1000L
-        private val changelogCacheMutex = Mutex()
-        private val changelogCache = mutableMapOf<String, CachedChangelog>()
-        internal val entriesCacheMutex = Mutex()
-        internal val entriesCache = mutableMapOf<String, Pair<Long, List<ChangelogEntry>>>()
+        private val releaseInfoCache = TimedCache<String, MorpheAsset>(CHANGELOG_CACHE_TTL)
+        private val entriesCache = TimedCache<String, List<ChangelogEntry>>(CHANGELOG_CACHE_TTL)
 
         // Manifest page URLs by source uid, kept here because bundle instances are recreated on every reload
         private val pageUrls = ConcurrentHashMap<Int, String>()
@@ -253,6 +237,20 @@ sealed class RemotePatchBundle(
             } catch (_: Exception) {
                 null
             }
+        }
+
+        /**
+         * Infer the issues page URL from various endpoint formats.
+         * Returns null for hosts other than GitHub and GitLab, whose issues layout is unknown.
+         */
+        fun inferIssuesUrlFromEndpoint(endpoint: String): String? =
+            inferPageUrlFromEndpoint(endpoint)?.let { issuesUrlForRepoUrl(it) }
+
+        /** Appends the host's issues path to an already resolved repository URL. */
+        fun issuesUrlForRepoUrl(repoUrl: String): String? = when {
+            repoUrl.startsWith("https://github.com/") -> "$repoUrl/issues"
+            repoUrl.startsWith("https://gitlab.com/") -> "$repoUrl/-/issues"
+            else -> null
         }
     }
 
@@ -502,6 +500,8 @@ class APIPatchBundle(
     // The endpoint is the API identifier rather than a browsable URL
     override val browsePageUrl: String get() = SOURCE_REPO_URL
 
+    override val issuesPageUrl: String get() = "$SOURCE_REPO_URL/issues"
+
     override suspend fun fetchChangelogEntries(sinceVersion: String?): List<ChangelogEntry> {
         val branch = if (usePrerelease) BRANCH_DEV else BRANCH_STABLE
         return fetchAndCacheEntries("$uid|$branch", sinceVersion) {
@@ -686,5 +686,3 @@ class GitHubPullRequestBundle(
         enabled
     )
 }
-
-private data class CachedChangelog(val asset: MorpheAsset, val timestamp: Long)

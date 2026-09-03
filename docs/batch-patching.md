@@ -4,7 +4,8 @@ Patching one app at a time means sitting through every dialog again for the next
 run asks everything up front, then works through the whole list on its own: same patcher,
 same result, one queue.
 
-Morphe can also do this without you, on a schedule, for apps whose patches have moved on.
+Morphe also keeps track of which patched apps have fallen behind their patches, and offers the
+whole set as one queue.
 
 ## Starting a batch
 
@@ -122,42 +123,20 @@ The refresh button next to the title re-plans the apps that failed or were cance
 > it off they live long enough for you to install them from this screen and are dropped when
 > the next batch starts.
 
-## Automatic re-patching
+## When patches move on
 
-**Settings → Advanced → Automatic re-patching** lets Morphe do all of the above on its own
-when a patch source releases something newer than what your apps were built with.
+A patch source that releases something newer than what your apps were built with leaves those
+apps behind. The cards say so one at a time with their **Update** badge; above them, Morphe
+says it once: **3 apps can be re-patched**, and tapping that queues every one of them in a
+preflight list.
 
-Only apps that need no input are queued: they must have a saved original APK (or an unpatched
-copy on the device) and a saved patch selection. Anything that would raise a question is
-skipped rather than guessed.
+This appears once the new patches are actually on the device, which is when Morphe can tell
+which apps are behind. Opening the app after a **New patches available** notification is
+exactly that moment: the notification pulls the sources in, and the count appears with them.
 
-| Setting | What it does |
-| --- | --- |
-| **Automatic re-patching** | Turns the schedule on |
-| **Re-patch frequency** | How often Morphe checks, hourly through monthly |
-| **Only while charging** | Waits for a charger, since patching is heavy on CPU and memory |
-| **Install automatically** | Installs the results without asking. Needs Shizuku, see below |
-
-Morphe reports itself through silent notifications: an ongoing one while the queue runs, and
-a result when it finishes. Tapping either opens the queue, where the patched apps are waiting
-to be installed.
-
-### What it needs to work at all
-
-Android does not let a background app run heavy work or start a foreground service on its own.
-The one thing that changes this is exempting Morphe from battery optimization, which is why
-Morphe asks for it the moment you turn the schedule on.
-
-Without that exemption the run stops before it starts and tells you why, instead of failing
-silently halfway through an app.
-
-Installing without asking is a separate matter: only **Shizuku** can install unattended. With
-any other installer the run patches, saves the APKs, and notifies you that they are ready.
-
-> [!IMPORTANT]
-> Some manufacturers, Xiaomi, Huawei, Samsung and OnePlus among them, kill background work
-> regardless of Android's own rules. If the schedule never produces anything on such a device,
-> allow Morphe to run in the background in the system settings as well.
+The run itself begins when you tap **Start patching**. Android does not let a background app
+run work this heavy or install anything on its own, so re-patching stays a deliberate tap
+rather than something that half-happens overnight.
 
 ## Starting a batch from another app
 
@@ -171,7 +150,8 @@ adb shell am start -n app.morphe.manager/app.morphe.manager.MainActivity \
 
 `packages` takes a string array or a comma-separated string of package names.
 
-This is off by default. Turn on **Allow external triggers** in the same settings dialog, and
+This is off by default. Turn on **Allow external triggers** in **Settings → Advanced →
+Updates**, and
 every request asks for your confirmation first. A request never starts patching by itself: it
 opens the preflight list, and the run begins when you tap **Start patching**.
 
@@ -197,7 +177,7 @@ again next time.
 | An app sits at **No APK** | Morphe has no saved original for it. Attach a file, or patch it once normally so the original gets saved |
 | An app sits at **Version** | The APK version is not supported by the patches. Attach a supported version, or **Patch anyway** if you know what you are doing |
 | **Batch patching is already running** | A queue is in progress. Opening it from the home screen shows the running one instead of starting a second |
-| The schedule never runs | Exempt Morphe from battery optimization, and check that your manufacturer is not blocking background work |
+| No re-patch count on the home screen | The new patches are not on the device yet. Let the sources finish updating, or pull them by hand from the source sheet |
 | **Install failed** on a renamed app | Installing a renamed package is a new install, not an update. On Xiaomi and similar devices, turn on "Install via USB" in developer options |
 
 ## Next steps

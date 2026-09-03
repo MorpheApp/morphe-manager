@@ -44,9 +44,9 @@
         <item quantity="one">%s app pêşniyar kirin bo paqijkirinê</item>
         <item quantity="other">%s appan pêşniyar kirin bo paqijkirinê</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">%s app amade ye bo saz kirinê</item>
-        <item quantity="other">%s appan amade ne bo saz kirinê</item>
+    <plurals name="repatch_available_count">
+        <item quantity="one">%s app dikare ji nû ve were nûkirin</item>
+        <item quantity="other">%s appan dikarin ji nû ve werin nûkirin</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">%s app derbas kirin</item>

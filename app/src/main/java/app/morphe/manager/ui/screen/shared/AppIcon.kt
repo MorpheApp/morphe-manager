@@ -99,7 +99,10 @@ private fun SimpleAppIcon(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val cacheKey = "${packageInfo.packageName}:${packageInfo.versionName}"
+    // Keyed by the APK the info came from as well: an installed app and the copies Morphe keeps
+    // for it share a package name and version, yet a patch can have replaced the icon in between
+    val cacheKey = "${packageInfo.packageName}:${packageInfo.versionName}:" +
+            packageInfo.applicationInfo?.sourceDir
     val request = remember(cacheKey) {
         coil.request.ImageRequest.Builder(context)
             .data(packageInfo)

@@ -44,9 +44,9 @@
         <item quantity="one">%s tətbiq yamaqlanmağa hazırdır</item>
         <item quantity="other">%s tətbiq yamaqlanmağa hazırdır</item>
     </plurals>
-    <plurals name="batch_patch_notification_ready">
-        <item quantity="one">%s tətbiq quraşdırılmağa hazırdır</item>
-        <item quantity="other">%s tətbiq quraşdırılmağa hazırdır</item>
+    <plurals name="repatch_available_count">
+        <item quantity="one">%s tətbiq yenidən yamaqlana bilər</item>
+        <item quantity="other">%s tətbiq yenidən yamaqlana bilər</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">%s tətbiq ötürüldü</item>
@@ -67,6 +67,10 @@
     <plurals name="home_category_app_count">
         <item quantity="one">%s tətbiq</item>
         <item quantity="other">%s tətbiq</item>
+    </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="one">%s seçildi</item>
+        <item quantity="other">%s seçildi</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="one">Seçilmiş paketdən %s yamaq köçürüldü</item>

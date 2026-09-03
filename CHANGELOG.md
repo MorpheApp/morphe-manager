@@ -1,3 +1,137 @@
+# [1.29.0-dev.11](https://github.com/MorpheApp/morphe-manager/compare/v1.29.0-dev.10...v1.29.0-dev.11) (2026-09-03)
+
+
+### Bug Fixes
+
+* Stop the update dialog reverting while the installer opens ([fdff1fc](https://github.com/MorpheApp/morphe-manager/commit/fdff1fc04f715fd375a238248785412c15825646))
+
+
+### Features
+
+* Hide experimental app versions unless the source enables them ([#928](https://github.com/MorpheApp/morphe-manager/issues/928)) ([50b723d](https://github.com/MorpheApp/morphe-manager/commit/50b723d0870ca766ba0f063fe26a35b5f4ed8a17))
+* Show the full patching diagnostics in the failure dialog ([f846d25](https://github.com/MorpheApp/morphe-manager/commit/f846d25a5ee418cdb8c978e99a745c020d315077))
+
+# [1.29.0-dev.10](https://github.com/MorpheApp/morphe-manager/compare/v1.29.0-dev.9...v1.29.0-dev.10) (2026-09-02)
+
+
+### Features
+
+* Add Shizuku+ support ([#926](https://github.com/MorpheApp/morphe-manager/issues/926)) ([d6e6838](https://github.com/MorpheApp/morphe-manager/commit/d6e68386c96eba72fb130854be5dbd8b529c5766))
+* Open the manager changelog from its update notification ([b8a2fc5](https://github.com/MorpheApp/morphe-manager/commit/b8a2fc5ceed07eea976eb72778e3fe9907937481))
+
+# [1.29.0-dev.9](https://github.com/MorpheApp/morphe-manager/compare/v1.29.0-dev.8...v1.29.0-dev.9) (2026-09-02)
+
+
+### Bug Fixes
+
+* Correct manager update progress and stop the dialog closing itself ([ef58c0b](https://github.com/MorpheApp/morphe-manager/commit/ef58c0b16d9d57bb48de18258c7ce2674007e8b2))
+
+# [1.29.0-dev.8](https://github.com/MorpheApp/morphe-manager/compare/v1.29.0-dev.7...v1.29.0-dev.8) (2026-09-02)
+
+
+### Bug Fixes
+
+* Keep signing material and tokens out of cloud backups ([3a07ae5](https://github.com/MorpheApp/morphe-manager/commit/3a07ae5ca114667e8f085802ff76c4addb7825db))
+* Make the changelog caches safe to clear while a fetch is running ([fd66032](https://github.com/MorpheApp/morphe-manager/commit/fd66032bdb5769b5be868c1b7a71feef34ed01c9))
+* Stop exporting keystore credentials with the manager settings ([757fa04](https://github.com/MorpheApp/morphe-manager/commit/757fa04d0e066c08af609ad74f10f4894195999e))
+
+
+### Features
+
+* Show the changelog of an available patch update ([#924](https://github.com/MorpheApp/morphe-manager/issues/924)) ([3c1e4ac](https://github.com/MorpheApp/morphe-manager/commit/3c1e4acb8aa3d43207a8d5f8a254e95f54b60073))
+
+# [1.29.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.29.0-dev.6...v1.29.0-dev.7) (2026-09-01)
+
+
+### Bug Fixes
+
+* Animate the expert mode selected-only filter toggle ([a2d5382](https://github.com/MorpheApp/morphe-manager/commit/a2d53825a8a8a69134a14972643fe104553b5a41))
+* Show the expert mode filter icon whenever the filter is available ([98cbff5](https://github.com/MorpheApp/morphe-manager/commit/98cbff5da21027d54d45c78ec598cd59971a6a79))
+* Stop a saved APK's icon from standing in for the installed app ([175dbb9](https://github.com/MorpheApp/morphe-manager/commit/175dbb9b20c24ebcd75ca1cd72737d84fac26b41))
+
+# [1.29.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.29.0-dev.5...v1.29.0-dev.6) (2026-09-01)
+
+
+### Bug Fixes
+
+* Align the bottom action bar with the content above it ([d365e1f](https://github.com/MorpheApp/morphe-manager/commit/d365e1f68eeb5e3f949e1c664a92a5917985bd89))
+* Keep the back gesture on the screen transitions the app defines ([95c28dc](https://github.com/MorpheApp/morphe-manager/commit/95c28dcae3bfa14bde5925fd09fc16f224077085))
+
+
+### Features
+
+* Add a setting to hide the re-patch notice on the home screen ([48b5eb3](https://github.com/MorpheApp/morphe-manager/commit/48b5eb35cca095ee045785285f616aed26360cf0))
+* Copy a patch selection between sources from the batch queue ([836bef3](https://github.com/MorpheApp/morphe-manager/commit/836bef36c4d8da27e60920a8c35c6c3bf9376888))
+* Filter the expert mode patch list down to the selected patches ([#918](https://github.com/MorpheApp/morphe-manager/issues/918)) ([d74f786](https://github.com/MorpheApp/morphe-manager/commit/d74f7864ce9ae3022ad4b06da483a430732a64f7))
+* Name the other apps button by its action and qualify bar tooltips ([#919](https://github.com/MorpheApp/morphe-manager/issues/919)) ([fbe059f](https://github.com/MorpheApp/morphe-manager/commit/fbe059f87154eae5b22029de46a47ec457370300))
+* Shorten the home search button label so the bar labels can fit ([2b08fa8](https://github.com/MorpheApp/morphe-manager/commit/2b08fa83fdec86fa20d4d5b2d502812de2ebcde8))
+
+# [1.29.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.29.0-dev.4...v1.29.0-dev.5) (2026-08-30)
+
+
+### Bug Fixes
+
+* Hide the app card check badge while reordering ([8edb718](https://github.com/MorpheApp/morphe-manager/commit/8edb718d56514183e5be8a413a222181d72cc859))
+* Hide the app card status badges while reordering ([6012d7f](https://github.com/MorpheApp/morphe-manager/commit/6012d7f3d83d9803897bcbcd3c5ed1c5b0f056d6))
+
+# [1.29.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.29.0-dev.3...v1.29.0-dev.4) (2026-08-30)
+
+
+### Bug Fixes
+
+* Read a bundle's architecture from its base module when no split names it ([f89129a](https://github.com/MorpheApp/morphe-manager/commit/f89129a00cc0f76f8cd3195e10e942147e410342))
+
+# [1.29.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.29.0-dev.2...v1.29.0-dev.3) (2026-08-28)
+
+
+### Bug Fixes
+
+* Replace a bundle's selection through one shared helper ([1cec4d7](https://github.com/MorpheApp/morphe-manager/commit/1cec4d7b108455ca964b562f93225db5c2b34a34))
+
+
+### Features
+
+* Highlight the patch options button when options are customized ([#908](https://github.com/MorpheApp/morphe-manager/issues/908)) ([df66e7d](https://github.com/MorpheApp/morphe-manager/commit/df66e7d79a1a2eec6143e7974a59e3ba9ae95661))
+* Retire the pre-release notice a few seconds after it is seen ([4b3ce8e](https://github.com/MorpheApp/morphe-manager/commit/4b3ce8e77072a8e232d29809bfe0ece86797c2ef))
+
+# [1.29.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.29.0-dev.1...v1.29.0-dev.2) (2026-08-27)
+
+
+### Bug Fixes
+
+* Add "Pre-release updates" confirmation dialog ([#904](https://github.com/MorpheApp/morphe-manager/issues/904)) ([31bab05](https://github.com/MorpheApp/morphe-manager/commit/31bab05b040da538ebaaaaccc4fd533393c3cce4))
+* Allow building with any JDK 17 or newer ([efb7d75](https://github.com/MorpheApp/morphe-manager/commit/efb7d75ff7aa8b8da8cdc78a5a1d4490cab6dd25))
+
+
+### Features
+
+* Add a community patches button to the add source dialog ([#835](https://github.com/MorpheApp/morphe-manager/issues/835)) ([c2a6dff](https://github.com/MorpheApp/morphe-manager/commit/c2a6dff98897fec01fefe8ae5bcc72744de1f156))
+
+
+### Performance Improvements
+
+* Repackage the archive only when signing rejects it ([#906](https://github.com/MorpheApp/morphe-manager/issues/906)) ([98315b6](https://github.com/MorpheApp/morphe-manager/commit/98315b691ab9aaa315104029904761e331666ab9))
+
+# [1.29.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.28.1-dev.1...v1.29.0-dev.1) (2026-08-26)
+
+
+### Bug Fixes
+
+* Morphe update crash when the staged APK is gone ([addfc70](https://github.com/MorpheApp/morphe-manager/commit/addfc706eb7f1c884d64b149bb79b644eedcf3a6))
+
+
+### Features
+
+* Add per-bundle issue reporting, pre-release warnings, and home screen improvements ([#902](https://github.com/MorpheApp/morphe-manager/issues/902)) ([208e7ef](https://github.com/MorpheApp/morphe-manager/commit/208e7eff059f0336c99e5e4fe76066fbcd90db34))
+
+## [1.28.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.28.0...v1.28.1-dev.1) (2026-08-25)
+
+
+### Bug Fixes
+
+* Replace the automatic re-patching schedule with a re-patch alert on the home screen ([e977ccd](https://github.com/MorpheApp/morphe-manager/commit/e977ccddea85f2f363f44ce786f7dcccede6e3a4))
+* Show the build code of a saved APK only when the patches do not support it ([2c03321](https://github.com/MorpheApp/morphe-manager/commit/2c0332167fc0b8e153aa14c13a06b0a2aad61de9))
+
 # [1.28.0](https://github.com/MorpheApp/morphe-manager/compare/v1.27.0...v1.28.0) (2026-08-25)
 
 

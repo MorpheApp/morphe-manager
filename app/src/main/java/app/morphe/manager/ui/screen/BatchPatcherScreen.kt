@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.batch.*
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.usesPrerelease
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.home.*
@@ -161,12 +162,16 @@ fun BatchPatcherScreen(
     // The same dialog the single-app flow uses, pointed at one queued app instead of the
     // patcher, so the queue never has to grow a second patch list
     viewModel.edit?.let { edit ->
+        // Reading the property re-walks and re-sorts every bundle's patches, so it is taken once
+        val allPatchesInfo = edit.allPatchesInfo
+        val sources by patchBundleRepository.sources.collectAsStateWithLifecycle()
+        val sourcesByUid = remember(sources) { sources.associateBy { it.uid } }
         ExpertModeDialog(
             newPatches = edit.newPatches,
             options = edit.options,
-            allPatchesInfo = edit.allPatchesInfo,
+            allPatchesInfo = allPatchesInfo,
             totalSelectedCount = edit.totalSelectedCount,
-            totalPatchesCount = edit.totalPatchesCount,
+            totalPatchesCount = allPatchesInfo.sumOf { (_, patches) -> patches.size },
             hasMultipleBundles = edit.hasMultipleBundles,
             patchActions = ExpertPatchActions(
                 onPatchToggle = edit::togglePatch,
@@ -174,21 +179,37 @@ fun BatchPatcherScreen(
                 onDeselectAll = edit::deselectAll,
                 onResetToDefault = edit::resetToDefault,
                 onRestoreSaved = edit::restoreSaved,
-                // Copying a selection between sources belongs to the app's own patch dialog,
-                // where it can be saved, rather than to a single queued run
-                onCopyFromBundle = {},
+                onCopyFromBundle = viewModel::openEditCopyDialog,
                 onOptionChange = edit::updateOption,
                 onResetOptions = edit::resetOptions
             ),
             savedPatches = edit.savedSelection,
             lockStateOf = edit::lockStateOf,
             holdsUniversalPatches = edit::selectAllHoldsUniversal,
+            prereleaseBundleUids = allPatchesInfo.mapNotNull { (bundle, _) ->
+                bundle.uid.takeIf { sourcesByUid[it]?.usesPrerelease == true }
+            }.toSet(),
             proceedText = stringResource(R.string.save),
             // The queue combines sources by design, and the tabs make it plain enough
             warnOnMultipleBundles = false,
             onDismiss = viewModel::cancelEdit,
             onProceed = viewModel::applyEdit
         )
+
+        viewModel.editCopy.targetBundleUid?.let { targetUid ->
+            val targetBundle = edit.bundles.firstOrNull { it.uid == targetUid } ?: return@let
+            CopySelectionFromBundleDialog(
+                target = CopySelectionTarget(
+                    packageName = edit.configurationKey,
+                    bundleUid = targetUid,
+                    bundleName = targetBundle.name,
+                    appDisplayName = edit.appName
+                ),
+                candidates = viewModel.editCopy.candidates,
+                onConfirm = viewModel::applyEditCopy,
+                onDismiss = viewModel.editCopy::close
+            )
+        }
     }
 
     // The single-app flow's own APK question, pointed at a queued app. It carries the version
@@ -198,7 +219,6 @@ fun BatchPatcherScreen(
             appName = choice.item.appName,
             recommendedVersion = choice.recommended,
             compatibleVersions = choice.compatible,
-            recommendedBundleVersions = choice.recommendedByBundle,
             selectedDownloadVersion = choice.selectedVersion,
             onVersionSelect = viewModel::selectApkVersion,
             usingMountInstall = false,
@@ -316,9 +336,11 @@ fun BatchPatcherScreen(
                 appName = item.appName,
                 packageName = item.packageName,
                 appVersion = item.version.orEmpty(),
+                patchCount = item.selection.values.sumOf { it.size },
                 bundles = item.bundles.map {
                     PatcherErrorInfo.BundleInfo(name = it.name, version = null)
-                }
+                },
+                stripsNativeLibs = null
             ),
             onDismiss = { errorItem = null }
         )
@@ -571,15 +593,15 @@ private fun BatchStatusCard(state: BatchRunState) {
     val summary = when (state.phase) {
         BatchPhase.FINISHED -> stringResource(
             R.string.batch_patch_summary,
-            state.succeeded,
-            state.failed,
-            state.skipped
+            state.succeeded.toString(),
+            state.failed.toString(),
+            state.skipped.toString()
         )
 
         else -> pluralStringResource(
             R.plurals.batch_patch_ready_count,
             state.runnable.size,
-            state.runnable.size
+            state.runnable.size.toString()
         )
     }
 
@@ -726,7 +748,7 @@ private fun BatchItemCard(
                         }
                     }
 
-                    // The install's own package, which is what tells clones of one app apart
+                    // This entry's own package, which is what tells clones of one app apart
                     Text(
                         text = item.id,
                         style = MaterialTheme.typography.bodySmall,
@@ -943,7 +965,7 @@ private fun itemDetails(item: BatchPatchItem): String = when (item.state) {
         val patches = pluralStringResource(
             R.plurals.patch_count,
             item.patchCount,
-            item.patchCount
+            item.patchCount.toString()
         )
         // Only the sources actually contributing patches, so narrowing an app to one source
         // is reflected here instead of still listing everything the plan looked at

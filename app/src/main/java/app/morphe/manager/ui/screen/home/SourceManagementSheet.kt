@@ -56,6 +56,7 @@ import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.avatarUrls
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.sourceType
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.usesPrerelease
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.manager.SourceBundleSortMode
 import app.morphe.manager.domain.repository.BlocklistRepository
@@ -109,6 +110,9 @@ fun BundleManagementSheet(
     val showSheetOnboarding = globalOnboardingState?.sheetOnboardingActive == true
 
     val bundleToDelete = remember { mutableStateOf<PatchBundleSource?>(null) }
+    // Set when the user flips pre-releases on: the toggle waits for confirmation first,
+    // so the meaning of unstable testing builds is explained before anything changes
+    val bundleToConfirmPrerelease = remember { mutableStateOf<PatchBundleSource?>(null) }
     var showSortDialog by remember { mutableStateOf(false) }
     // Search is offered from two sources up
     val isSearchable = sources.size >= 2
@@ -174,12 +178,17 @@ fun BundleManagementSheet(
     val bundleToShowPatches = remember { mutableStateOf<PatchBundleSource?>(null) }
     var bundleRequiringManagerUpdate by remember { mutableStateOf<PatchBundleSource?>(null) }
     var bundleToShowChangelogUid by remember { mutableStateOf<Int?>(null) }
-    val bundleToShowChangelog = bundleToShowChangelogUid
-        ?.let { uid -> sources.filterIsInstance<RemotePatchBundle>().find { it.uid == uid } }
-    val bundleToShowChangelogKey = bundleToShowChangelog?.let {
-        val usePrerelease = (it as? APIPatchBundle)?.usePrerelease == true
-                || (it as? JsonPatchBundle)?.usePrerelease == true
-        "${it.installedVersionSignature}|$usePrerelease"
+
+    // Switching branches invalidates whatever the changelog dialog is holding, so the cache goes
+    // and an open dialog closes rather than keeping entries from the branch that was just left
+    fun applyPrerelease(bundle: PatchBundleSource, usePrerelease: Boolean) {
+        if (bundle.uid == bundleToShowChangelogUid) {
+            bundleToShowChangelogUid = null
+        }
+        (bundle as? RemotePatchBundle)?.clearChangelogCache()
+        scope.launch {
+            patchBundleRepository.setUsePrerelease(bundle.uid, usePrerelease)
+        }
     }
 
     // Check if only default bundle exists
@@ -224,7 +233,7 @@ fun BundleManagementSheet(
                                 text = pluralStringResource(
                                     R.plurals.sources_management_subtitle,
                                     sources.size,
-                                    sources.size
+                                    sources.size.toString()
                                 ),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -368,15 +377,11 @@ fun BundleManagementSheet(
                                     onPrereleasesToggle = when {
                                         bundle is JsonPatchBundle && bundle.supportsPrerelease ||
                                                 bundle is APIPatchBundle -> { usePrerelease ->
-                                            if (bundle.uid == bundleToShowChangelogUid) {
-                                                bundleToShowChangelogUid = null
-                                            }
-                                            bundle.clearChangelogCache()
-                                            scope.launch {
-                                                patchBundleRepository.setUsePrerelease(
-                                                    bundle.uid,
-                                                    usePrerelease
-                                                )
+                                            if (usePrerelease) {
+                                                // Explain what pre-release means before flipping it on
+                                                bundleToConfirmPrerelease.value = bundle
+                                            } else {
+                                                applyPrerelease(bundle, false)
                                             }
                                         }
 
@@ -407,6 +412,15 @@ fun BundleManagementSheet(
                                             ?: SOURCE_REPO_URL
                                         try {
                                             uriHandler.openUri(pageUrl)
+                                        } catch (_: Exception) {
+                                            context.toast(failedToOpenUrlText)
+                                        }
+                                    },
+                                    onReportIssue = {
+                                        val issuesUrl = (bundle as? RemotePatchBundle)?.issuesPageUrl
+                                            ?: SOURCE_REPO_URL
+                                        try {
+                                            uriHandler.openUri(issuesUrl)
                                         } catch (_: Exception) {
                                             context.toast(failedToOpenUrlText)
                                         }
@@ -481,6 +495,21 @@ fun BundleManagementSheet(
         )
     }
 
+    // Pre-release enable confirmation dialog
+    bundleToConfirmPrerelease.value?.let { bundle ->
+        ConfirmDialog(
+            title = stringResource(R.string.sources_prerelease_warning_title),
+            message = stringResource(R.string.sources_prerelease_warning_message),
+            primaryText = stringResource(R.string.enable),
+            isPrimaryDestructive = false,
+            onDismiss = { bundleToConfirmPrerelease.value = null },
+            onConfirm = {
+                bundleToConfirmPrerelease.value = null
+                applyPrerelease(bundle, true)
+            }
+        )
+    }
+
     // Patches dialog
     if (bundleToShowPatches.value != null) {
         BundlePatchesDialog(
@@ -499,14 +528,11 @@ fun BundleManagementSheet(
     }
 
     // Changelog dialog
-    if (bundleToShowChangelog != null) {
-        key(bundleToShowChangelogKey) {
-            BundleChangelogDialog(
-                src = bundleToShowChangelog,
-                onDismissRequest = { bundleToShowChangelogUid = null }
-            )
-        }
-    }
+    BundleChangelogHost(
+        request = bundleToShowChangelogUid?.let { BundleChangelogRequest(it) },
+        sources = sources,
+        onDismissRequest = { bundleToShowChangelogUid = null }
+    )
 }
 
 private fun List<PatchBundleSource>.sortedForSourceSort(
@@ -549,6 +575,7 @@ private fun PatchBundleSource.sourceSortTitle(): String =
 /**
  * Card for individual bundle management.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun BundleManagementCard(
     bundle: PatchBundleSource,
@@ -576,6 +603,7 @@ private fun BundleManagementCard(
     onPatchesClick: () -> Unit,
     onVersionClick: () -> Unit,
     onOpenInBrowser: () -> Unit,
+    onReportIssue: () -> Unit,
     onOutdatedManagerClick: () -> Unit,
     forceExpanded: Boolean = false
 ) {
@@ -585,6 +613,7 @@ private fun BundleManagementCard(
     val enabledState = stringResource(R.string.enabled)
     val disabledState = stringResource(R.string.disabled)
     val openInBrowser = stringResource(R.string.sources_management_open_in_browser)
+    val reportIssue = stringResource(R.string.sources_management_report_issue)
 
     val context = LocalContext.current
     fun withToast(doneMessage: String, action: () -> Unit): () -> Unit = {
@@ -784,35 +813,61 @@ private fun BundleManagementCard(
                             enabled = !isUpdating
                         )
 
-                        // Open in browser button
+                        // Both actions leave for the same repository, so they share a row.
+                        // Only the primary one carries a label, keeping it clear of the
+                        // width its own translation happens to need
                         if (bundle is RemotePatchBundle) {
-                            FilledTonalButton(
-                                onClick = onOpenInBrowser,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(48.dp)
-                                    .semantics {
-                                        contentDescription = openInBrowser
-                                    },
-                                shape = RoundedCornerShape(Defaults.CompactCornerRadius)
+                            val issueDesc = reportIssue + " " + bundle.displayTitle
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
                             ) {
-                                Icon(
-                                    Icons.AutoMirrored.Outlined.OpenInNew,
-                                    contentDescription = null
-                                )
-                                Spacer(Modifier.width(8.dp))
-                                Text(openInBrowser)
+                                FilledTonalButton(
+                                    onClick = onOpenInBrowser,
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .height(48.dp)
+                                        .semantics {
+                                            contentDescription = openInBrowser
+                                        },
+                                    shape = RoundedCornerShape(Defaults.CompactCornerRadius)
+                                ) {
+                                    Icon(
+                                        Icons.AutoMirrored.Outlined.OpenInNew,
+                                        contentDescription = null
+                                    )
+                                    Spacer(Modifier.width(8.dp))
+                                    Text(openInBrowser)
+                                }
+
+                                TooltipBox(
+                                    positionProvider = TooltipDefaults.rememberTooltipPositionProvider(
+                                        TooltipAnchorPosition.Above
+                                    ),
+                                    tooltip = { PlainTooltip { Text(reportIssue) } },
+                                    state = rememberTooltipState()
+                                ) {
+                                    FilledTonalIconButton(
+                                        onClick = onReportIssue,
+                                        modifier = Modifier
+                                            .size(48.dp)
+                                            .semantics {
+                                                contentDescription = issueDesc
+                                            },
+                                        shape = RoundedCornerShape(Defaults.CompactCornerRadius)
+                                    ) {
+                                        Icon(
+                                            Icons.Outlined.BugReport,
+                                            contentDescription = null
+                                        )
+                                    }
+                                }
                             }
                         }
 
                         SettingsDivider(fullWidth = true)
 
                         // Resolve prerelease state once
-                        val currentUsePrerelease = when (bundle) {
-                            is JsonPatchBundle -> bundle.usePrerelease
-                            is APIPatchBundle -> bundle.usePrerelease
-                            else -> false
-                        }
+                        val currentUsePrerelease = bundle.usesPrerelease
 
                         // Prerelease toggle (for JsonPatchBundle with GitHub endpoint or APIPatchBundle)
                         if (onPrereleasesToggle != null) {

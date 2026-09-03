@@ -71,7 +71,6 @@
     <string name="sources_management_prerelease_toggle">Пред-издадени закрпи</string>
     <string name="sources_management_prerelease_toggle_description">Прима ран пристап до нови експериментални верзии на закрпи</string>
     <string name="sources_management_experimental_versions_toggle">Експериментални верзии на апликацијата</string>
-    <string name="sources_management_experimental_versions_toggle_description">Закрпува експериментални цели на апликации доколку се достапни</string>
     <string name="sources_management_already_exists">Овој извор веќе е додаден</string>
     <string name="sources_management_invalid_url">Невалидна URL адреса на извор. Проверете ја адресата и обидете се повторно</string>
     <string name="sources_management_metadata_unavailable">Метаподатоци N/A</string>
@@ -101,6 +100,7 @@
     <string name="sources_dialog_url_invalid">URL мора да укажува на репозиториум GitHub/GitLab или датотека .json</string>
     <string name="sources_dialog_local_change_file">Промени датотека</string>
     <string name="sources_dialog_preinstalled">Претходно инсталирано</string>
+    <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_update_success">Ажурирањето е успешно</string>
     <string name="sources_update_unavailable">Нема достапно ажурирање</string>
     <string name="sources_download_fail">Не успеа да се преземат извори: %s</string>
@@ -279,13 +279,16 @@
     <string name="patcher_error_copied">Грешката е копирана во штитката</string>
     <string name="patcher_error_log">Дневник на грешки</string>
     <string name="patcher_error_technical">Технички детали</string>
-    <string name="patcher_error_dialog_app_info">Информации за апликацијата</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <!-- Free and total RAM of the device, never its storage -->
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_tab_game">Игри</string>
     <string name="patcher_long_step_warning">Овој чекор може да потрае некое време. Ве молам, почекајте…</string>
     <string name="patcher_installing_subtitle">Почти сте спремни за акција! 🎸</string>
     <string name="patcher_success_subtitle">Вашата апликација е поправена и инсталирана!</string>
     <string name="patcher_failed_title">Опа! Нешто се случи</string>
-    <string name="patcher_failed_subtitle">Проверете ги деталите за грешката подолу</string>
     <string name="patcher_unknown_error">Се случи непозната грешка</string>
     <string name="patcher_conflict_title">Конфликт на пакети</string>
     <string name="patcher_conflict_subtitle">Мора да ја деинсталирате постоечката верзија</string>
@@ -438,8 +441,8 @@
     <string name="settings_appearance_app_icon_change_dialog_confirm">Потврди го промените</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">Напредните подесувања</string>
-    <string name="settings_advanced_updates_use_prereleases">Прикажува дијалог за избор на инсталер секој пат кога се инсталира закрпена апликација</string>
-    <string name="settings_advanced_updates_use_prereleases_description">Го одржува закрпувачот да работи кога апликацијата е минимизирана</string>
+    <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
+    <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
     <string name="settings_advanced_updates_allow_metered">Завршува закрпувањето во посебен процес за поголема стабилност</string>
     <string name="settings_advanced_updates_allow_metered_description">Повисоките граници го забрзуваат закрпувањето на способни уреди</string>
     <string name="settings_advanced_updates_background_notifications">Известувања за ажурирање во позадина</string>
@@ -784,11 +787,10 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">Не успеа да се инсталира ажурирањето</string>
     <string name="installing_manager_update">Инсталирање ажурирање…</string>
     <string name="downloading_manager_update">Преземање ажурирање…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="download_manager_failed">Не успеа да се преземе ажурирање: %s</string>
     <string name="failed_to_check_updates">Не успеа да се провери за ажурирања: %s</string>
     <string name="failed_to_download_update">Не успеа да се преземе ажурирање: %s</string>
-    <string name="resume_download">Почни го преземањето повторно</string>
     <string name="download_confirmation_metered">"Во моментов сте на мерена врска, и може да се наплатат трошоци за податоци од вашиот провајдер.
 
 Дали сепак сакате да продолжите?"</string>
