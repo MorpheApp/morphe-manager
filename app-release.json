@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-09-02T14:11:46",
-  "description": "# [1.29.0-dev.10](https://github.com/MorpheApp/morphe-manager/compare/v1.29.0-dev.9...v1.29.0-dev.10) (2026-09-02)\n\n\n### Features\n\n* Add Shizuku+ support ([#926](https://github.com/MorpheApp/morphe-manager/issues/926)) ([d6e6838](https://github.com/MorpheApp/morphe-manager/commit/d6e68386c96eba72fb130854be5dbd8b529c5766))\n* Open the manager changelog from its update notification ([b8a2fc5](https://github.com/MorpheApp/morphe-manager/commit/b8a2fc5ceed07eea976eb72778e3fe9907937481))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.29.0-dev.10/morphe-manager-1.29.0-dev.10.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.29.0-dev.10/morphe-manager-1.29.0-dev.10.apk.asc",
-  "version": "1.29.0-dev.10"
+  "created_at": "2026-09-03T06:13:02",
+  "description": "# [1.29.0-dev.11](https://github.com/MorpheApp/morphe-manager/compare/v1.29.0-dev.10...v1.29.0-dev.11) (2026-09-03)\n\n\n### Bug Fixes\n\n* Stop the update dialog reverting while the installer opens ([fdff1fc](https://github.com/MorpheApp/morphe-manager/commit/fdff1fc04f715fd375a238248785412c15825646))\n\n\n### Features\n\n* Hide experimental app versions unless the source enables them ([#928](https://github.com/MorpheApp/morphe-manager/issues/928)) ([50b723d](https://github.com/MorpheApp/morphe-manager/commit/50b723d0870ca766ba0f063fe26a35b5f4ed8a17))\n* Show the full patching diagnostics in the failure dialog ([f846d25](https://github.com/MorpheApp/morphe-manager/commit/f846d25a5ee418cdb8c978e99a745c020d315077))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.29.0-dev.11/morphe-manager-1.29.0-dev.11.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.29.0-dev.11/morphe-manager-1.29.0-dev.11.apk.asc",
+  "version": "1.29.0-dev.11"
 }
