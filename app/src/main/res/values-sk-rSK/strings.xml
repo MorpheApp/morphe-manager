@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">Predbežné verzie sú stále vo vývoji. Opravy môžu zlyhať alebo poškodiť aplikáciu a funkcie sa môžu bez upozornenia zmeniť.</string>
     <string name="expert_mode_prerelease_notice">Tento zdroj je na predbežných opravách. Opravovanie môže zlyhať alebo sa správať neočakávane.</string>
     <string name="sources_management_experimental_versions_toggle">Experimentálne verzie aplikácie</string>
-    <string name="sources_management_experimental_versions_toggle_description">Nainštaluje experimentálne verzie aplikácie, ak sú dostupné</string>
+    <string name="sources_management_experimental_versions_toggle_description">Zobrazuje a opravuje experimentálne ciele aplikácií</string>
     <string name="sources_management_already_exists">Tento zdroj už bol pridaný</string>
     <string name="sources_management_invalid_url">Neplatná URL adresa zdroja. Skontrolujte adresu a skúste to znova</string>
     <string name="sources_management_blocked">Tento zdroj záplat je zablokovaný a nie je možné ho pridať</string>
@@ -457,7 +457,27 @@ Vnútorná zóna (čiarkovaná): môže byť orezaná maskou spúšťača – uc
     <string name="patcher_error_copied">Chyba bola skopírovaná do schránky</string>
     <string name="patcher_error_log">Záznam o chybách</string>
     <string name="patcher_error_technical">Technické detaily</string>
-    <string name="patcher_error_dialog_app_info">Informácie o aplikácii</string>
+    <string name="patcher_error_dialog_diagnostics">Diagnostika</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">Aplikácia</string>
+    <string name="patcher_field_package">Balík</string>
+    <string name="patcher_field_source">Zdroj</string>
+    <string name="patcher_field_split">Rozdelený APK</string>
+    <string name="patcher_field_manager">Správca</string>
+    <string name="patcher_field_patcher">Patcher</string>
+    <string name="patcher_field_runtime">Runtime</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Knižnice</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Zariadenie</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Pamäť</string>
+    <string name="patcher_field_storage">Úložisko</string>
+    <string name="patcher_field_value_unknown">neznáme</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">odstránené</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">ponechané</string>
     <string name="patcher_tab_logs">Logy aplikácie záplat</string>
     <string name="patcher_tab_game">Hry</string>
     <string name="patcher_logs_waiting">Čaká sa na log…</string>
@@ -468,7 +488,7 @@ Vnútorná zóna (čiarkovaná): môže byť orezaná maskou spúšťača – uc
     <string name="patcher_success_subtitle">Vaša aplikácia je zaplátaná a nainštalovaná!</string>
     <string name="patcher_complete_title">Oprava dokončená! ✨</string>
     <string name="patcher_failed_title">Ups! Niečo sa pokazilo</string>
-    <string name="patcher_failed_subtitle">Skontrolujte detaily chyby nižšie</string>
+    <string name="patcher_failed_hint">Klepnutím na %s zistíte, čo sa pokazilo</string>
     <string name="patcher_failed_dialog_title">Oprava zlyhala</string>
     <string name="patcher_unknown_error">Vyskytla sa neznáma chyba</string>
     <string name="patcher_split_step_extracting">Extrahujem rozdelené APK</string>
@@ -1174,6 +1194,9 @@ Podrobnosti: %2$s"</string>
     <string name="importing_ellipsis">Importovanie…</string>
     <string name="imported_successfully">Úspešne importované</string>
     <string name="changelog">Zobraziť zoznam zmien</string>
+    <string name="changelog_for_app">Zmeny pre %s</string>
+    <string name="changelog_general_changes">Všeobecné zmeny</string>
+    <string name="whats_new">Čo je nové</string>
     <string name="changelog_description">Pozrite si najnovšie zmeny v tejto aktualizácii</string>
     <string name="changelog_download_fail">Nepodarilo sa stiahnuť zoznam zmien: %s</string>
     <string name="changelog_empty">Zoznam zmien nie je k dispozícii</string>
@@ -1186,14 +1209,13 @@ Podrobnosti: %2$s"</string>
     <string name="install_update_manager_failed">Nepodarilo sa nainštalovať aktualizáciu</string>
     <string name="installing_manager_update">Inštalácia aktualizácie…</string>
     <string name="downloading_manager_update">Sťahovanie aktualizácie…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">Stiahnuté %1$.1f MB</string>
     <string name="manager_update_not_ready">Toto vydanie sa stále publikuje. Skúste to znova o niekoľko minút</string>
     <string name="update_download_missing">Stiahnutá aktualizácia už nie je k dispozícii. Stiahnite si ju znova.</string>
     <string name="download_manager_failed">Nepodarilo sa stiahnuť aktualizáciu: %s</string>
     <string name="failed_to_check_updates">Nepodarilo sa skontrolovať aktualizácie: %s</string>
     <string name="failed_to_download_update">Nepodarilo sa stiahnuť aktualizáciu: %s</string>
-    <string name="resume_download">Pokračovať v sťahovaní</string>
     <string name="download_confirmation_metered">"Aktuálne požívate dátové pripojenie s obmedzeným objemom a váš poskytovateľ služieb vám môže účtovať poplatky za prenos dát.
 
 Chcete aj tak pokračovať?"</string>

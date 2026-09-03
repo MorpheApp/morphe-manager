@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">प्री-रिलीज़ बिल्ड अभी भी विकास में हैं। पैच विफल हो सकते हैं या ऐप को तोड़ सकते हैं, और सुविधाएं बिना चेतावनी के बदल सकती हैं</string>
     <string name="expert_mode_prerelease_notice">यह स्रोत प्री-रिलीज़ पैच पर है। पैचिंग विफल हो सकती है या अप्रत्याशित व्यवहार कर सकती है</string>
     <string name="sources_management_experimental_versions_toggle">प्रायोगिक ऐप संस्करण</string>
-    <string name="sources_management_experimental_versions_toggle_description">यदि उपलब्ध हों तो प्रायोगिक ऐप लक्ष्यों को पैच करता है</string>
+    <string name="sources_management_experimental_versions_toggle_description">प्रयोगात्मक ऐप टारगेट्स को दिखाता और पैच करता है</string>
     <string name="sources_management_already_exists">यह स्रोत पहले से ही जोड़ा गया है</string>
     <string name="sources_management_invalid_url">अमान्य स्रोत URL। कृपया पता जांचें और फिर प्रयास करें</string>
     <string name="sources_management_blocked">यह पैच स्रोत अवरुद्ध है और इसे नहीं जोड़ा जा सकता</string>
@@ -457,7 +457,27 @@
     <string name="patcher_error_copied">Error copied to clipboard</string>
     <string name="patcher_error_log">त्रुटि रिपोर्ट</string>
     <string name="patcher_error_technical">तकनीकी विवरण</string>
-    <string name="patcher_error_dialog_app_info">ऐप जानकारी</string>
+    <string name="patcher_error_dialog_diagnostics">निदान</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">ऐप</string>
+    <string name="patcher_field_package">पैकेज</string>
+    <string name="patcher_field_source">स्रोत</string>
+    <string name="patcher_field_split">विभाजित एपीके</string>
+    <string name="patcher_field_manager">प्रबंधक</string>
+    <string name="patcher_field_patcher">पैचर</string>
+    <string name="patcher_field_runtime">रनटाइम</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">लाइब्रेरीज़</string>
+    <string name="patcher_field_android">एंड्रॉइड</string>
+    <string name="patcher_field_device">डिवाइस</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">मेमोरी</string>
+    <string name="patcher_field_storage">स्टोरेज</string>
+    <string name="patcher_field_value_unknown">अज्ञात</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">हटाई गईं</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">रखी गईं</string>
     <string name="patcher_tab_logs">पैचर लॉग</string>
     <string name="patcher_tab_game">खेल</string>
     <string name="patcher_logs_waiting">लॉग आउटपुट की प्रतीक्षा की जा रही है…</string>
@@ -468,7 +488,7 @@
     <string name="patcher_success_subtitle">Your app is patched and installed!</string>
     <string name="patcher_complete_title">पैचिंग पूरी हुई! ✨</string>
     <string name="patcher_failed_title">Oops! Something went wrong</string>
-    <string name="patcher_failed_subtitle">Check the error details below</string>
+    <string name="patcher_failed_hint">क्या गलत हुआ यह देखने के लिए %s टैप करें</string>
     <string name="patcher_failed_dialog_title">पैचिंग विफल रही</string>
     <string name="patcher_unknown_error">Unknown error occurred</string>
     <string name="patcher_split_step_extracting">स्प्लिट APK निकाल रहे हैं</string>
@@ -1174,6 +1194,9 @@ morphe_header_custom_dark.png
     <string name="importing_ellipsis">आयम…</string>
     <string name="imported_successfully">सफलतापूर्वक आयात किया गया</string>
     <string name="changelog">चंगेलॉग्स देखें</string>
+    <string name="changelog_for_app">%s के लिए परिवर्तन</string>
+    <string name="changelog_general_changes">सामान्य परिवर्तन</string>
+    <string name="whats_new">नया क्या है</string>
     <string name="changelog_description">इस अपडेट में नवीनतम बदलाव देखें</string>
     <string name="changelog_download_fail">परिवर्तन लॉग डाउनलोड करने में विफल: %s</string>
     <string name="changelog_empty">कोई चेंजलॉग उपलब्ध नहीं है</string>
@@ -1186,14 +1209,13 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">अपडेट स्थापित करने में विफल</string>
     <string name="installing_manager_update">अपडेट इंस्टॉल हो रहा है…</string>
     <string name="downloading_manager_update">अपडेट डाउनलोड हो रहा है…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB डाउनलोड किया गया</string>
     <string name="manager_update_not_ready">यह रिलीज़ अभी भी प्रकाशित की जा रही है। कुछ मिनटों में फिर प्रयास करें</string>
     <string name="update_download_missing">डाउनलोड किया गया अपडेट अब उपलब्ध नहीं है। इसे फिर से डाउनलोड करें</string>
     <string name="download_manager_failed">अपडेट डाउनलोड करने में विफल: %s</string>
     <string name="failed_to_check_updates">अपडेट के लिए जाँच करने में विफल: %s</string>
     <string name="failed_to_download_update">अपडेट डाउनलोड करने में विफल: %s</string>
-    <string name="resume_download">डाउनलोड फिर से शुरू करें</string>
     <string name="download_confirmation_metered">"आप मापित कनेक्शन पर हैं, और आपके सेवा प्रदाता से डेटा चार्ज लागू हो सकते हैं.
 
 क्या आप अभी भी आगे बढ़ना चाहते हैं?"</string>

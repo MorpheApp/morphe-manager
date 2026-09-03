@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">إصدارات ما قبل الإطلاق لا تزال قيد التطوير. قد تفشل التعديلات أو تتسبب في تعطل التطبيق، ويمكن أن تتغير الميزات دون إشعار مسبق</string>
     <string name="expert_mode_prerelease_notice">هذا المصدر مخصص لتعديلات ما قبل الإطلاق. قد تفشل عملية التعديل أو تتصرف بشكل غير متوقع</string>
     <string name="sources_management_experimental_versions_toggle">إصدارات تجريبية للتطبيقات</string>
-    <string name="sources_management_experimental_versions_toggle_description">تعديل الإصدارات التجريبية للتطبيقات المستهدفة إن توفرت</string>
+    <string name="sources_management_experimental_versions_toggle_description">عرض وتعديل التطبيقات المستهدفة التجريبية</string>
     <string name="sources_management_already_exists">تمت إضافة هذا المصدر بالفعل</string>
     <string name="sources_management_invalid_url">عنوان URL المصدر غير صالح. يرجى التحقق من العنوان والمحاولة مرة أخرى</string>
     <string name="sources_management_blocked">تم حظر مصدر التعديل هذا ولا يمكن إضافته</string>
@@ -457,7 +457,27 @@
     <string name="patcher_error_copied">تم نسخ الخطأ إلى الحافظة</string>
     <string name="patcher_error_log">سجل الأخطاء</string>
     <string name="patcher_error_technical">التفاصيل التقنية</string>
-    <string name="patcher_error_dialog_app_info">معلومات التطبيق</string>
+    <string name="patcher_error_dialog_diagnostics">التشخيص</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">التطبيق</string>
+    <string name="patcher_field_package">الحزمة</string>
+    <string name="patcher_field_source">المصدر</string>
+    <string name="patcher_field_split">Split APK</string>
+    <string name="patcher_field_manager">المدير</string>
+    <string name="patcher_field_patcher">أداة التعديل</string>
+    <string name="patcher_field_runtime">بيئة التشغيل</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">المكتبات</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">الجهاز</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">الذاكرة</string>
+    <string name="patcher_field_storage">التخزين</string>
+    <string name="patcher_field_value_unknown">غير معروف</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">مستبعدة</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">محتفظ بها</string>
     <string name="patcher_tab_logs">سجلات أداة التعديل</string>
     <string name="patcher_tab_game">ألعاب</string>
     <string name="patcher_logs_waiting">في انتظار مخرجات السجل…</string>
@@ -468,7 +488,7 @@
     <string name="patcher_success_subtitle">تم تعديل تطبيقك وتثبيته!</string>
     <string name="patcher_complete_title">اكتمل التعديل! ✨</string>
     <string name="patcher_failed_title">عفوًا! حدث خطأ ما</string>
-    <string name="patcher_failed_subtitle">تحقق من تفاصيل الخطأ أدناه</string>
+    <string name="patcher_failed_hint">انقر على %s لمعرفة سبب الخطأ</string>
     <string name="patcher_failed_dialog_title">فشل التعديل</string>
     <string name="patcher_unknown_error">حدث خطأ غير معروف</string>
     <string name="patcher_split_step_extracting">استخراج ملفات APK المقسمة</string>
@@ -1180,6 +1200,9 @@ morphe_adaptive_monochrome_custom.xml
     <string name="importing_ellipsis">جارٍ استيراد…</string>
     <string name="imported_successfully">تم الاستيراد بنجاح</string>
     <string name="changelog">عرض سجل التغييرات</string>
+    <string name="changelog_for_app">التغييرات لـ %s</string>
+    <string name="changelog_general_changes">تغييرات عامة</string>
+    <string name="whats_new">ما الجديد</string>
     <string name="changelog_description">اطّلع على آخر التغييرات في هذا التحديث</string>
     <string name="changelog_download_fail">فشل تنزيل سجل التغييرات: %s</string>
     <string name="changelog_empty">لا يتوفر سجل تغييرات</string>
@@ -1192,14 +1215,13 @@ morphe_adaptive_monochrome_custom.xml
     <string name="install_update_manager_failed">فشل تثبيت التحديث</string>
     <string name="installing_manager_update">جارٍ تثبيت التحديث...</string>
     <string name="downloading_manager_update">جارٍ تنزيل التحديث...</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f م.ب تم تنزيلها</string>
     <string name="manager_update_not_ready">هذا الإصدار لا يزال قيد النشر. حاول مرة أخرى بعد بضع دقائق</string>
     <string name="update_download_missing">التحديث الذي تم تنزيله لم يعد متاحًا. يرجى تنزيله مرة أخرى</string>
     <string name="download_manager_failed">فشل تنزيل التحديث: %s</string>
     <string name="failed_to_check_updates">فشل التحقق من التحديثات: %s</string>
     <string name="failed_to_download_update">فشل تنزيل التحديث: %s</string>
-    <string name="resume_download">استئناف التنزيل</string>
     <string name="download_confirmation_metered">"أنت حاليًا على اتصال محدود البيانات، وقد يتم تطبيق رسوم بيانات من مزود الخدمة الخاص بك.
 
 هل لا تزال ترغب في المتابعة؟"</string>

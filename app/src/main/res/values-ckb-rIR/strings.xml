@@ -239,12 +239,15 @@
     <string name="patcher_error_copied">هەڵە کۆپی کرا بۆ ڕوونووسگە</string>
     <string name="patcher_error_log">تۆماری هەڵە</string>
     <string name="patcher_error_technical">وردەکاری تەکنیکی</string>
-    <string name="patcher_error_dialog_app_info">زانیاری ئەپ</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <!-- Free and total RAM of the device, never its storage -->
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_long_step_warning">ئەم هەنگاوە لەوانەیە ماوەیەک بخایەنێت. تکایه چاوەڕوان بکه...</string>
     <string name="patcher_installing_subtitle">خەریکە ئامادە دەبم بۆ ڕۆک! 🎸</string>
     <string name="patcher_success_subtitle">ئەپەکەت پینەکراوە و دامەزرێنراوە!</string>
     <string name="patcher_failed_title">ئۆپس! هەڵەیەک ڕوویدا</string>
-    <string name="patcher_failed_subtitle">وردەکاریەکانی هەڵەکانی خوارەوە بپشکنە</string>
     <string name="patcher_unknown_error">هەڵەیەکی نەناسراو ڕوویدا</string>
     <string name="patcher_conflict_title">ناکۆکی پاکەت</string>
     <string name="patcher_conflict_subtitle">پێویستە وەشانی بەردەست لاببەیت</string>
@@ -480,7 +483,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="patching">پینەکردن</string>
     <string name="patched">پینەکراو</string>
     <string name="allow">ڕێگەپێدان</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <!-- Onboarding coach marks -->
     <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <!-- Translate "System" the same way as the System settings tab -->

@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">プレリリース版はまだ開発中です。パッチが失敗したりアプリが壊れる可能性があり、機能は予告なく変更されることがあります。</string>
     <string name="expert_mode_prerelease_notice">このソースはプレリリース版パッチを使用しています。パッチ適用が失敗したり、予期しない動作をする可能性があります。</string>
     <string name="sources_management_experimental_versions_toggle">実験的なバージョンのアプリを使用</string>
-    <string name="sources_management_experimental_versions_toggle_description">利用可能な場合に、実験的なバージョンのアプリをパッチ対象にします</string>
+    <string name="sources_management_experimental_versions_toggle_description">実験的なアプリターゲットを表示し、パッチを適用します</string>
     <string name="sources_management_already_exists">このソースは既に存在します</string>
     <string name="sources_management_invalid_url">無効なソースURLです。アドレスを確認して、もう一度試してください。</string>
     <string name="sources_management_blocked">このパッチソースはブロックされており、追加できません</string>
@@ -457,7 +457,27 @@
     <string name="patcher_error_copied">エラーをクリップボードにコピーしました</string>
     <string name="patcher_error_log">エラーログ</string>
     <string name="patcher_error_technical">技術的な詳細</string>
-    <string name="patcher_error_dialog_app_info">アプリ情報</string>
+    <string name="patcher_error_dialog_diagnostics">診断</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">アプリ</string>
+    <string name="patcher_field_package">パッケージ</string>
+    <string name="patcher_field_source">ソース</string>
+    <string name="patcher_field_split">分割APK</string>
+    <string name="patcher_field_manager">マネージャー</string>
+    <string name="patcher_field_patcher">パッチャー</string>
+    <string name="patcher_field_runtime">ランタイム</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">ライブラリ</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">デバイス</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">メモリ</string>
+    <string name="patcher_field_storage">ストレージ</string>
+    <string name="patcher_field_value_unknown">不明</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">削除済み</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">保持済み</string>
     <string name="patcher_tab_logs">パッチャーのログ</string>
     <string name="patcher_tab_game">ゲーム</string>
     <string name="patcher_logs_waiting">ログの出力を待機中…</string>
@@ -468,7 +488,7 @@
     <string name="patcher_success_subtitle">アプリのパッチ適用とインストールが完了しました！</string>
     <string name="patcher_complete_title">パッチが完了しました！✨</string>
     <string name="patcher_failed_title">おっと！何か問題が発生したようです</string>
-    <string name="patcher_failed_subtitle">エラーの詳細については以下を確認してください</string>
+    <string name="patcher_failed_hint">%sをタップしてエラー内容を確認</string>
     <string name="patcher_failed_dialog_title">パッチに失敗しました</string>
     <string name="patcher_unknown_error">不明なエラーが発生しました</string>
     <string name="patcher_split_step_extracting">分割 APK の抽出中</string>
@@ -1172,6 +1192,9 @@ morphe_header_custom_dark.png
     <string name="importing_ellipsis">インポート中…</string>
     <string name="imported_successfully">インポートに成功しました</string>
     <string name="changelog">変更履歴を表示</string>
+    <string name="changelog_for_app">%sの変更</string>
+    <string name="changelog_general_changes">一般的な変更</string>
+    <string name="whats_new">新着情報</string>
     <string name="changelog_description">最新のアップデートでの変更点を確認します</string>
     <string name="changelog_download_fail">変更履歴のダウンロードに失敗しました: %s</string>
     <string name="changelog_empty">利用可能な更新はありません</string>
@@ -1184,14 +1207,13 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">アップデートのインストールに失敗しました</string>
     <string name="installing_manager_update">アップデートをインストールしています…</string>
     <string name="downloading_manager_update">アップデートをダウンロードしています…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB ダウンロード済み</string>
     <string name="manager_update_not_ready">このリリースはまだ公開中です。しばらくしてから再度お試しください</string>
     <string name="update_download_missing">ダウンロードしたアップデートは利用できなくなりました。再度ダウンロードしてください。</string>
     <string name="download_manager_failed">アップデートのダウンロードに失敗しました: %s</string>
     <string name="failed_to_check_updates">アップデートの確認に失敗しました: %s</string>
     <string name="failed_to_download_update">アップデートのダウンロードに失敗しました: %s</string>
-    <string name="resume_download">ダウンロードを再開</string>
     <string name="download_confirmation_metered">"現在、従量制接続を使用しています。通信事業者から追加料金が発生する場合があります。
 
 それでも続行しますか？"</string>

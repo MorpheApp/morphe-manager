@@ -135,7 +135,6 @@
     <string name="sources_prerelease_warning_message">Oldindan chiqarilgan versiyalar hali ham ishlab chiqilmoqda. Yangilanishlar muvaffaqiyatsiz bo\'lishi yoki ilovani buzishi mumkin, va xususiyatlar ogohlantirishsiz o\'zgarishi mumkin.</string>
     <string name="expert_mode_prerelease_notice">Bu manba oldindan chiqarilgan yangilanishlarda. Yangilash muvaffaqiyatsiz bo\'lishi yoki kutilmagan xatti-harakatlarga olib kelishi mumkin.</string>
     <string name="sources_management_experimental_versions_toggle">Eksperimental ilova versiyalari</string>
-    <string name="sources_management_experimental_versions_toggle_description">Agar mavjud bo‘lsa, eksperimental ilova versiyalarini patchlaydi</string>
     <string name="sources_management_already_exists">Ushbu manba allaqachon qo\'shilgan</string>
     <string name="sources_management_invalid_url">Noto‘g‘ri manba URL. Iltimos, manzilni tekshiring va yana urinib ko‘ring</string>
     <string name="sources_management_blocked">Sumber tambalan ini diblokir dan tidak dapat ditambahkan</string>
@@ -454,7 +453,11 @@ Chekka hudud (chizikli): launcher niqobi tomonidan kesilishi mumkin - muhim tafs
     <string name="patcher_error_copied">Xatolik buferga kopyalandi</string>
     <string name="patcher_error_log">Xatolik jurnali</string>
     <string name="patcher_error_technical">Texnik tafsilotlar</string>
-    <string name="patcher_error_dialog_app_info">Ilova haqida ma\'lumot</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <!-- Free and total RAM of the device, never its storage -->
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_tab_logs">Patcher jurnallari</string>
     <string name="patcher_tab_game">Kechirdi</string>
     <string name="patcher_logs_waiting">Jurnal chiqishini kutish…</string>
@@ -465,7 +468,6 @@ Chekka hudud (chizikli): launcher niqobi tomonidan kesilishi mumkin - muhim tafs
     <string name="patcher_success_subtitle">Ilovaniz patch qilingan va o‘rnatilgan!</string>
     <string name="patcher_complete_title">Qo\'llash tugallandi! ✨</string>
     <string name="patcher_failed_title">Afsus! Biron bir narsa noto‘g‘ri ketdi</string>
-    <string name="patcher_failed_subtitle">Xatolik tavsiflarini quyida ko‘ring</string>
     <string name="patcher_failed_dialog_title">Qo\'llash muvaffaqiyatsiz yakunlandi</string>
     <string name="patcher_unknown_error">Noma’lum xatolik sodir bo‘ldi</string>
     <string name="patcher_split_step_extracting">Split APKlarni chiqarish</string>
@@ -1180,14 +1182,13 @@ Ma’lumotlar: %2$s"</string>
     <string name="install_update_manager_failed">Yangilanishni o‘rnatishda xatolik</string>
     <string name="installing_manager_update">Yangilanish o‘rnatilmoqda…</string>
     <string name="downloading_manager_update">Yangilanish yuklanmoqda…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB yuklab olindi</string>
     <string name="manager_update_not_ready">Ushbu nashr hali e\'lon qilinmoqda. Bir necha daqiqadan keyin qayta urinib ko\'ring</string>
     <string name="update_download_missing">Yuklab olingan yangilanish endi mavjud emas. Uni qayta yuklab oling.</string>
     <string name="download_manager_failed">Yangilanishni yuklab olishda xatolik: %s</string>
     <string name="failed_to_check_updates">Yangilanishlarni tekshirishda xatolik: %s</string>
     <string name="failed_to_download_update">Yangilanishni yuklab olishda xatolik: %s</string>
-    <string name="resume_download">Yuklab olishni davom ettirish</string>
     <string name="download_confirmation_metered">"Hozir siz o'lchangan ulanishdan foydalanmoqdasiz va sizning provayderingiz tomonidan ma'lumotlar uchun to'lovlar amalga oshirilishi mumkin.
 
 Davom etmoqchimisiz?"</string>

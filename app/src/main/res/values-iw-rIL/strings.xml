@@ -137,7 +137,7 @@
     <string name="sources_prerelease_warning_message">גרסאות מוקדמות עדיין בפיתוח. תיקונים עלולים להיכשל או לשבור את האפליקציה, ותכונות עשויות להשתנות ללא אזהרה</string>
     <string name="expert_mode_prerelease_notice">מקור זה נמצא בגרסה מוקדמת. תיקונים עלולים להיכשל או להתנהג באופן בלתי צפוי</string>
     <string name="sources_management_experimental_versions_toggle">גרסאות אפליקציה ניסיוניות</string>
-    <string name="sources_management_experimental_versions_toggle_description">תקן גרסאות אפליקציה ניסיוניות זמינות</string>
+    <string name="sources_management_experimental_versions_toggle_description">מציג ומתקן יעדים ניסיוניים של אפליקציות</string>
     <string name="sources_management_already_exists">מקור זה כבר נוסף</string>
     <string name="sources_management_invalid_url">כתובת URL מקור לא תקינה. אנא בדוק את הכתובת ונסה שוב</string>
     <string name="sources_management_blocked">מקור הטלאים הזה חסום ואינו יכול להיות מוסף</string>
@@ -458,7 +458,27 @@
     <string name="patcher_error_copied">השגיאה הועתקה ללוח</string>
     <string name="patcher_error_log">יומן שגיאות</string>
     <string name="patcher_error_technical">פרטי טכניים</string>
-    <string name="patcher_error_dialog_app_info">מידע על האפליקציה</string>
+    <string name="patcher_error_dialog_diagnostics">אבחון</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">אפליקציה</string>
+    <string name="patcher_field_package">חבילה</string>
+    <string name="patcher_field_source">מקור</string>
+    <string name="patcher_field_split">פיצול APK</string>
+    <string name="patcher_field_manager">מנהל</string>
+    <string name="patcher_field_patcher">מתקן</string>
+    <string name="patcher_field_runtime">זמן ריצה</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">ספריות</string>
+    <string name="patcher_field_android">אנדרואיד</string>
+    <string name="patcher_field_device">מכשיר</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">זיכרון</string>
+    <string name="patcher_field_storage">אחסון</string>
+    <string name="patcher_field_value_unknown">לא ידוע</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">הוסרו</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">נשמרו</string>
     <string name="patcher_tab_logs">יומני תיקונים</string>
     <string name="patcher_tab_game">משחקים</string>
     <string name="patcher_logs_waiting">ממתין לפלט לוג…</string>
@@ -469,7 +489,7 @@
     <string name="patcher_success_subtitle">האפליקציה שלך מתוקנת ומותקנת!</string>
     <string name="patcher_complete_title">התיקון הושלם! ✨</string>
     <string name="patcher_failed_title">אופס! משהו השתבש</string>
-    <string name="patcher_failed_subtitle">בדוק את פרטי השגיאה למטה</string>
+    <string name="patcher_failed_hint">הקש %s כדי לראות מה השתבש</string>
     <string name="patcher_failed_dialog_title">התיקון נכשל</string>
     <string name="patcher_unknown_error">אירעה שגיאה לא ידועה</string>
     <string name="patcher_split_step_extracting">חילוץ קבצי APK מפוצלים</string>
@@ -1185,6 +1205,9 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="importing_ellipsis">מוצא... </string>
     <string name="imported_successfully">יובא בהצלחה</string>
     <string name="changelog">הצג יומני שינויים</string>
+    <string name="changelog_for_app">שינויים עבור %s</string>
+    <string name="changelog_general_changes">שינויים כלליים</string>
+    <string name="whats_new">מה חדש</string>
     <string name="changelog_description">בדוק את השינויים האחרונים בסוג זה של עדכון</string>
     <string name="changelog_download_fail">שגיאה בהורדת היסטוריית שינויים: %s</string>
     <string name="changelog_empty">אין תיקון זמין</string>
@@ -1197,14 +1220,13 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="install_update_manager_failed">שגיאה בהתקנת עדכון</string>
     <string name="installing_manager_update">מתקין עדכון…</string>
     <string name="downloading_manager_update">מוריד עדכון…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB הורדו</string>
     <string name="manager_update_not_ready">גרסה זו עדיין מפורסמת. נסה שוב בעוד מספר דקות</string>
     <string name="update_download_missing">העדכון שהורד כבר אינו זמין. הורד אותו שוב</string>
     <string name="download_manager_failed">שגיאה בהורדת עדכון: %s</string>
     <string name="failed_to_check_updates">בדיקת עדכונים נכשלה: %s</string>
     <string name="failed_to_download_update">כשל בהורדת העדכון: %s</string>
-    <string name="resume_download">המשך הורדה</string>
     <string name="download_confirmation_metered">"אתה מחובר כעת לחיבור מוגבל בנפח נתונים, וייתכן שיחולו חיובי נתונים מספק השירות שלך.
 
 האם אתה עדיין רוצה להמשיך?"</string>

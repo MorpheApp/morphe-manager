@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">Pre-release 빌드는 아직 개발 중입니다. 패치가 실패하거나 앱이 손상될 수 있으며, 기능은 예고 없이 변경될 수 있습니다</string>
     <string name="expert_mode_prerelease_notice">이 소스는 Pre-release 패치를 사용하고 있습니다. 패치가 실패하거나 예상치 못한 방식으로 작동할 수 있습니다</string>
     <string name="sources_management_experimental_versions_toggle">실험 앱 버전</string>
-    <string name="sources_management_experimental_versions_toggle_description">사용 가능한 경우에 실험 앱 버전으로 패치합니다</string>
+    <string name="sources_management_experimental_versions_toggle_description">실험 앱 대상을 표시하고 패치합니다</string>
     <string name="sources_management_already_exists">이 소스는 이미 추가되어 있습니다</string>
     <string name="sources_management_invalid_url">잘못된 소스 URL입니다. 주소를 확인하고 다시 시도하세요</string>
     <string name="sources_management_blocked">이 패치 소스는 차단되어 추가할 수 없습니다</string>
@@ -457,7 +457,27 @@
     <string name="patcher_error_copied">오류 정보를 클립보드에 복사하였습니다</string>
     <string name="patcher_error_log">오류 로그</string>
     <string name="patcher_error_technical">기술 세부 정보</string>
-    <string name="patcher_error_dialog_app_info">앱 정보</string>
+    <string name="patcher_error_dialog_diagnostics">진단</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">앱</string>
+    <string name="patcher_field_package">패키지</string>
+    <string name="patcher_field_source">소스</string>
+    <string name="patcher_field_split">분할 APK</string>
+    <string name="patcher_field_manager">매니저</string>
+    <string name="patcher_field_patcher">패처</string>
+    <string name="patcher_field_runtime">런타임</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">라이브러리</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">기기</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">메모리</string>
+    <string name="patcher_field_storage">기기 저장소</string>
+    <string name="patcher_field_value_unknown">알 수 없음</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">제거됨</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">유지됨</string>
     <string name="patcher_tab_logs">패처 로그</string>
     <string name="patcher_tab_game">게임</string>
     <string name="patcher_logs_waiting">로그 출력을 기다리는 중…</string>
@@ -468,7 +488,7 @@
     <string name="patcher_success_subtitle">앱을 패치 및 설치하였습니다!</string>
     <string name="patcher_complete_title">패치 완료! ✨</string>
     <string name="patcher_failed_title">이런! 오류가 발생하였습니다</string>
-    <string name="patcher_failed_subtitle">아래에서 오류 세부 정보를 확인하세요</string>
+    <string name="patcher_failed_hint">무엇이 잘못되었는지 확인하려면 \'%s\'를 탭하세요</string>
     <string name="patcher_failed_dialog_title">패치 실패</string>
     <string name="patcher_unknown_error">알 수 없는 오류가 발생하였습니다</string>
     <string name="patcher_split_step_extracting">분할 APK를 추출하는 중</string>
@@ -1187,14 +1207,13 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">업데이트를 할 수 없습니다</string>
     <string name="installing_manager_update">업데이트를 설치하는 중…</string>
     <string name="downloading_manager_update">업데이트를 다운로드하는 중…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB 다운로드됨</string>
     <string name="manager_update_not_ready">이 릴리스를 게시하는 중입니다. 몇 분 후 다시 시도해 주세요</string>
     <string name="update_download_missing">다운로드한 업데이트를 더 이상 사용할 수 없습니다. 다시 다운로드하세요</string>
     <string name="download_manager_failed">업데이트를 다운로드할 수 없습니다: %s</string>
     <string name="failed_to_check_updates">업데이트를 확인할 수 없습니다: %s</string>
     <string name="failed_to_download_update">업데이트를 다운로드할 수 없습니다: %s</string>
-    <string name="resume_download">다운로드 재개</string>
     <string name="download_confirmation_metered">"현재 모바일 데이터를 사용하고 있습니다. 통신사 데이터 요금이 부과될 수 있습니다
 
 그래도 계속하시겠습니까?"</string>

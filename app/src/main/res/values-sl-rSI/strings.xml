@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">Pred-različice so še v razvoju. Popravki lahko ne uspejo ali poškodujejo aplikacijo, funkcije pa se lahko spremenijo brez opozorila.</string>
     <string name="expert_mode_prerelease_notice">Ta vir uporablja pred-popravke. Popravljanje lahko ne uspe ali se obnaša nepričakovano.</string>
     <string name="sources_management_experimental_versions_toggle">Eksperimentalne različice aplikacij</string>
-    <string name="sources_management_experimental_versions_toggle_description">Popravi eksperimentalne aplikacije, če so na voljo</string>
+    <string name="sources_management_experimental_versions_toggle_description">Prikaže in popravi eksperimentalne cilje aplikacij</string>
     <string name="sources_management_already_exists">Ta vir je bil že dodan</string>
     <string name="sources_management_invalid_url">Neveljaven izvorni URL. Preverite naslov in poskusite znova</string>
     <string name="sources_management_blocked">Ta vir popravkov je blokiran in ga ni mogoče dodati</string>
@@ -457,7 +457,27 @@ Zunanje območje (črtkano): maska zaganjalnika ga lahko obreže – pomembne po
     <string name="patcher_error_copied">Napaka je kopirana v odložišče</string>
     <string name="patcher_error_log">Dnevnik napak</string>
     <string name="patcher_error_technical">Tehnične podrobnosti</string>
-    <string name="patcher_error_dialog_app_info">Podatki o aplikaciji</string>
+    <string name="patcher_error_dialog_diagnostics">Diagnostika</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">Aplikacija</string>
+    <string name="patcher_field_package">Paket</string>
+    <string name="patcher_field_source">Vir</string>
+    <string name="patcher_field_split">Razdeljen APK</string>
+    <string name="patcher_field_manager">Upravitelj</string>
+    <string name="patcher_field_patcher">Patcher</string>
+    <string name="patcher_field_runtime">Runtime</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Knjižnice</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Naprava</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Pomnilnik</string>
+    <string name="patcher_field_storage">Shramba</string>
+    <string name="patcher_field_value_unknown">neznano</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">odstranjene</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">ohranjene</string>
     <string name="patcher_tab_logs">Dnevniki popravkov</string>
     <string name="patcher_tab_game">Igre</string>
     <string name="patcher_logs_waiting">Čakam na izpis dnevnika…</string>
@@ -468,7 +488,7 @@ Zunanje območje (črtkano): maska zaganjalnika ga lahko obreže – pomembne po
     <string name="patcher_success_subtitle">Vaša aplikacija je popravljena in nameščena!</string>
     <string name="patcher_complete_title">Popravljanje končano! ✨</string>
     <string name="patcher_failed_title">Ojoj! Nekaj je šlo narobe</string>
-    <string name="patcher_failed_subtitle">Preverite podrobnosti napake spodaj</string>
+    <string name="patcher_failed_hint">Tapni %s, da vidiš, kaj je šlo narobe</string>
     <string name="patcher_failed_dialog_title">Popravljanje je spodletelo</string>
     <string name="patcher_unknown_error">Prišlo je do neznane napake</string>
     <string name="patcher_split_step_extracting">Izvlečenje razdeljenih datotek APK</string>
@@ -1174,6 +1194,9 @@ Podrobnosti: %2$s"</string>
     <string name="importing_ellipsis">Uvažam…</string>
     <string name="imported_successfully">Uspešno uvoženo</string>
     <string name="changelog">Poglejte dnevnike sprememb</string>
+    <string name="changelog_for_app">Spremembe za %s</string>
+    <string name="changelog_general_changes">Splošne spremembe</string>
+    <string name="whats_new">Kaj je novega</string>
     <string name="changelog_description">Oglejte si najnovejše spremembe v tej posodobitvi</string>
     <string name="changelog_download_fail">Ni mogoče prenesti dnevnika sprememb: %s</string>
     <string name="changelog_empty">Ni na voljo dnevnika sprememb</string>
@@ -1186,14 +1209,13 @@ Podrobnosti: %2$s"</string>
     <string name="install_update_manager_failed">Posodobitev ni uspela</string>
     <string name="installing_manager_update">Nameščanje posodobitve…</string>
     <string name="downloading_manager_update">Prenašanje posodobitve…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB prenesenih</string>
     <string name="manager_update_not_ready">Ta različica je še v objavljanju. Poskusite znova čez nekaj minut.</string>
     <string name="update_download_missing">Prenesena posodobitev ni več na voljo. Prenesi jo znova.</string>
     <string name="download_manager_failed">Prenos posodobitve ni uspel: %s</string>
     <string name="failed_to_check_updates">Ni uspelo preveriti posodobitev: %s</string>
     <string name="failed_to_download_update">Prenos posodobitve ni uspel: %s</string>
-    <string name="resume_download">Nadaljuj prenos</string>
     <string name="download_confirmation_metered">"Trenutno ste povezani z omejeno povezavo in se vam lahko zaračunajo stroški ponudnika storitev. Želite nadaljevati?"</string>
     <string name="download_update_confirmation">Prenesem posodobitev?</string>
     <!-- Onboarding coach marks -->

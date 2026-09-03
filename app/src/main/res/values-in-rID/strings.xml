@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">Build pra-rilis masih tahap pengembangan. Tambalan mungkin gagal atau merusak aplikasi, dan fitur dapat berubah tanpa pemberitahuan</string>
     <string name="expert_mode_prerelease_notice">Sumber ini menggunakan tambalan pra-rilis. Proses penambalan mungkin gagal atau berjalan tidak sesuai harapan</string>
     <string name="sources_management_experimental_versions_toggle">Versi aplikasi eksperimental</string>
-    <string name="sources_management_experimental_versions_toggle_description">Menambal aplikasi eksperimental jika tersedia</string>
+    <string name="sources_management_experimental_versions_toggle_description">Menampilkan dan menambal target aplikasi eksperimental</string>
     <string name="sources_management_already_exists">Sumber ini sudah ditambahkan</string>
     <string name="sources_management_invalid_url">URL sumber tidak sah. Harap periksa alamatnya dan coba lagi</string>
     <string name="sources_management_blocked">Sumber tambalan ini diblokir dan tidak dapat ditambahkan</string>
@@ -458,7 +458,27 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="patcher_error_copied">Kesalahan disalin ke papan klip</string>
     <string name="patcher_error_log">Catatan kesalahan</string>
     <string name="patcher_error_technical">Rincian teknis</string>
-    <string name="patcher_error_dialog_app_info">Info aplikasi</string>
+    <string name="patcher_error_dialog_diagnostics">Diagnostik</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">Aplikasi</string>
+    <string name="patcher_field_package">Paket</string>
+    <string name="patcher_field_source">Sumber</string>
+    <string name="patcher_field_split">APK Terpisah</string>
+    <string name="patcher_field_manager">Pengelola</string>
+    <string name="patcher_field_patcher">Penambal</string>
+    <string name="patcher_field_runtime">Runtime</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Pustaka</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Perangkat</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Memori</string>
+    <string name="patcher_field_storage">Penyimpanan</string>
+    <string name="patcher_field_value_unknown">tidak diketahui</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">dihilangkan</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">dipertahankan</string>
     <string name="patcher_tab_logs">Catatan Penambal</string>
     <string name="patcher_tab_game">Permainan</string>
     <string name="patcher_logs_waiting">Menunggu keluaran log…</string>
@@ -469,7 +489,7 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="patcher_success_subtitle">Aplikasi Anda telah ditambal dan dipasang!</string>
     <string name="patcher_complete_title">Penambalan selesai! ✨</string>
     <string name="patcher_failed_title">Oops! Terjadi kesalahan</string>
-    <string name="patcher_failed_subtitle">Periksa detail kesalahan di bawah ini</string>
+    <string name="patcher_failed_hint">Ketuk %s untuk melihat apa yang salah</string>
     <string name="patcher_failed_dialog_title">Gagal Menambal</string>
     <string name="patcher_unknown_error">Terjadi kesalahan yang tidak diketahui</string>
     <string name="patcher_split_step_extracting">Mengekstrak APK yang terpisah</string>
@@ -1175,6 +1195,9 @@ Rincian: %2$s"</string>
     <string name="importing_ellipsis">Mengimpor…</string>
     <string name="imported_successfully">Berhasil diimpor</string>
     <string name="changelog">Lihat catatan perubahan</string>
+    <string name="changelog_for_app">Perubahan untuk %s</string>
+    <string name="changelog_general_changes">Perubahan umum</string>
+    <string name="whats_new">Apa yang baru</string>
     <string name="changelog_description">Lihat perubahan terbaru dalam pembaruan ini</string>
     <string name="changelog_download_fail">Gagal mengunduh catatan perubahan: %s</string>
     <string name="changelog_empty">Tidak ada catatan perubahan tersedia</string>
@@ -1187,14 +1210,13 @@ Rincian: %2$s"</string>
     <string name="install_update_manager_failed">Gagal memasang pembaruan</string>
     <string name="installing_manager_update">Memasang pembaruan…</string>
     <string name="downloading_manager_update">Mengunduh pembaruan…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB diunduh</string>
     <string name="manager_update_not_ready">Rilis ini masih dalam proses penerbitan. Coba lagi dalam beberapa menit</string>
     <string name="update_download_missing">Pembaruan yang diunduh sudah tidak tersedia lagi. Unduh ulang</string>
     <string name="download_manager_failed">Gagal mengunduh pembaruan: %s</string>
     <string name="failed_to_check_updates">Gagal memeriksa pembaruan: %s</string>
     <string name="failed_to_download_update">Gagal mengunduh pembaruan: %s</string>
-    <string name="resume_download">Lanjutkan pengunduhan</string>
     <string name="download_confirmation_metered">"Anda saat ini menggunakan koneksi berbayar per data, dan biaya data dari penyedia layanan Anda mungkin berlaku.
 
 Apakah Anda masih ingin melanjutkan?"</string>

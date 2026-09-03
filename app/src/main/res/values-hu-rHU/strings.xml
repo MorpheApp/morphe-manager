@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">Az előzetes verziók még fejlesztés alatt állnak. A javítások meghiúsulhatnak vagy megtörhetik az alkalmazást, és a funkciók figyelmeztetés nélkül változhatnak.</string>
     <string name="expert_mode_prerelease_notice">Ez a forrás előzetes verzió. A javítás meghiúsulhat vagy váratlanul viselkedhet.</string>
     <string name="sources_management_experimental_versions_toggle">Kísérleti alkalmazásverziók</string>
-    <string name="sources_management_experimental_versions_toggle_description">Módosítsa a kísérleti alkalmazás célpontjait, ha elérhetők</string>
+    <string name="sources_management_experimental_versions_toggle_description">Megmutatja és javítja a kísérleti alkalmazás célpontjait. MaxLength: null. Applied translations: none.</string>
     <string name="sources_management_already_exists">Ez a forrás már hozzá lett adva</string>
     <string name="sources_management_invalid_url">Érvénytelen forrás URL. Kérjük, ellenőrizze a címet, és próbálja újra.</string>
     <string name="sources_management_blocked">Ez a javításcsomag forrás le van blokkolva, és nem adható hozzá</string>
@@ -457,7 +457,27 @@ Külső zóna (szaggatott): az indító maszk levághatja – tartsa a fontos r�
     <string name="patcher_error_copied">A hiba másolva a vágólapra</string>
     <string name="patcher_error_log">Hibanapló</string>
     <string name="patcher_error_technical">Technikai részletek</string>
-    <string name="patcher_error_dialog_app_info">Alkalmazásinformáció</string>
+    <string name="patcher_error_dialog_diagnostics">Diagnosztika</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">Alkalmazás</string>
+    <string name="patcher_field_package">Csomag</string>
+    <string name="patcher_field_source">Forrás</string>
+    <string name="patcher_field_split">APK felosztása</string>
+    <string name="patcher_field_manager">Kezelő</string>
+    <string name="patcher_field_patcher">Patcher</string>
+    <string name="patcher_field_runtime">Futtatókörnyezet</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Könyvtárak</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Eszköz</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Memória</string>
+    <string name="patcher_field_storage">Tárhely</string>
+    <string name="patcher_field_value_unknown">ismeretlen</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">eltávolítva</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">megtartva</string>
     <string name="patcher_tab_logs">Javító naplók</string>
     <string name="patcher_tab_game">Játékok</string>
     <string name="patcher_logs_waiting">Várja a napló kimenetét…</string>
@@ -468,7 +488,7 @@ Külső zóna (szaggatott): az indító maszk levághatja – tartsa a fontos r�
     <string name="patcher_success_subtitle">Az alkalmazás módosítva és telepítve!</string>
     <string name="patcher_complete_title">A javítás befejeződött! ✨</string>
     <string name="patcher_failed_title">Hoppá! Valami hiba történt</string>
-    <string name="patcher_failed_subtitle">Ellenőrizd a hiba részleteit alább</string>
+    <string name="patcher_failed_hint">Koppintson a(z) %s elemre a hiba megtekintéséhez</string>
     <string name="patcher_failed_dialog_title">A javítás sikertelen</string>
     <string name="patcher_unknown_error">Ismeretlen hiba történt</string>
     <string name="patcher_split_step_extracting">Osztott APK-k kibontása</string>
@@ -1173,6 +1193,9 @@ Részletek: %2$s"</string>
     <string name="importing_ellipsis">Importálás…</string>
     <string name="imported_successfully">Sikeresen importálva</string>
     <string name="changelog">Változásnaplók megtekintése</string>
+    <string name="changelog_for_app">A(z) %s változásai</string>
+    <string name="changelog_general_changes">Általános változások</string>
+    <string name="whats_new">Újdonságok</string>
     <string name="changelog_description">Nézd meg a frissítés legújabb változásait</string>
     <string name="changelog_download_fail">Nem sikerült letölteni a változásnaplót: %s</string>
     <string name="changelog_empty">A változásnapló nem elérhető</string>
@@ -1185,14 +1208,13 @@ Részletek: %2$s"</string>
     <string name="install_update_manager_failed">Nem sikerült telepíteni a frissítést</string>
     <string name="installing_manager_update">Frissítés telepítése…</string>
     <string name="downloading_manager_update">Frissítés letöltése…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">Letöltve: %1$.1f MB</string>
     <string name="manager_update_not_ready">A kiadás még folyamatban van. Próbálkozz néhány perc múlva újra.</string>
     <string name="update_download_missing">A letöltött frissítés már nem elérhető. Töltsd le újra.</string>
     <string name="download_manager_failed">A frissítés letöltése sikertelen: %s</string>
     <string name="failed_to_check_updates">A frissítések ellenőrzése sikertelen: %s</string>
     <string name="failed_to_download_update">A frissítés letöltése sikertelen: %s</string>
-    <string name="resume_download">Letöltés folytatása</string>
     <string name="download_confirmation_metered">"Jelenleg korlátozott adatforgalmú kapcsolatot használsz, a szolgáltatód adatforgalmi díjakat számíthat fel.
 
 Szeretnéd folytatni?"</string>

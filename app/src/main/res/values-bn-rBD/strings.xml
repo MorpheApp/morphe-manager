@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">প্রি-রিলিজ বিল্ডগুলো এখনও উন্নয়নাধীন। প্যাচ ব্যর্থ হতে পারে বা অ্যাপটি ভেঙে দিতে পারে, এবং বৈশিষ্ট্যগুলি সতর্কতা ছাড়াই পরিবর্তন হতে পারে।</string>
     <string name="expert_mode_prerelease_notice">এই উৎসটি প্রি-রিলিজে রয়েছে। প্যাচিং ব্যর্থ হতে পারে বা অপ্রত্যাশিত আচরণ করতে পারে।</string>
     <string name="sources_management_experimental_versions_toggle">পরীক্ষামূলক অ্যাপ সংস্করণ</string>
-    <string name="sources_management_experimental_versions_toggle_description">উপलब्ध থাকলে পরীক্ষামূলক অ্যাপ টার্গেট প্যাচ করে</string>
+    <string name="sources_management_experimental_versions_toggle_description">পরীক্ষামূলক অ্যাপ টার্গেট দেখায় এবং প্যাচ করে</string>
     <string name="sources_management_already_exists">এই উৎসটি ইতিমধ্যেই যোগ করা হয়েছে</string>
     <string name="sources_management_invalid_url">অবৈধ উৎস URL। অনুগ্রহ করে ঠিকানাটি পরীক্ষা করুন এবং পুনরায় চেষ্টা করুন</string>
     <string name="sources_management_blocked">এই প্যাচ উৎসটি ব্লক করা হয়েছে এবং এটি যোগ করা যাবে না</string>
@@ -457,7 +457,27 @@
     <string name="patcher_error_copied">ত্রুটি ক্লিপবোর্ডে অনুলিপি করা হয়েছে</string>
     <string name="patcher_error_log">ত্রুটি রিপোর্ট</string>
     <string name="patcher_error_technical">প্রযুক্তি বিবরণ</string>
-    <string name="patcher_error_dialog_app_info">অ্যাপ তথ্য</string>
+    <string name="patcher_error_dialog_diagnostics">ডায়াগনস্টিকস</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">অ্যাপ</string>
+    <string name="patcher_field_package">প্যাকেজ</string>
+    <string name="patcher_field_source">উৎস</string>
+    <string name="patcher_field_split">স্প্লিট APK</string>
+    <string name="patcher_field_manager">ম্যানেজার</string>
+    <string name="patcher_field_patcher">প্যাচার</string>
+    <string name="patcher_field_runtime">রানটাইম</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">লাইব্রেরি</string>
+    <string name="patcher_field_android">অ্যান্ড্রয়েড</string>
+    <string name="patcher_field_device">ডিভাইস</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">মেমোরি</string>
+    <string name="patcher_field_storage">স্টোরেজ</string>
+    <string name="patcher_field_value_unknown">অজানা</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">বাদ দেওয়া হয়েছে</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">রাখা হয়েছে</string>
     <string name="patcher_tab_logs">প্যাচার লগ</string>
     <string name="patcher_tab_game">গেমস</string>
     <string name="patcher_logs_waiting">লগ আউটপুটের জন্য অপেক্ষা করা হচ্ছে…</string>
@@ -468,7 +488,7 @@
     <string name="patcher_success_subtitle">আপনার অ্যাপটি প্যাচ করা এবং ইনস্টল করা হয়েছে!</string>
     <string name="patcher_complete_title">প্যাচিং সম্পন্ন! ✨</string>
     <string name="patcher_failed_title">ওহ! কিছু একটা ভুল হয়েছে</string>
-    <string name="patcher_failed_subtitle">নীচে ত্রুটির বিবরণ দেখুন</string>
+    <string name="patcher_failed_hint">কী ভুল হয়েছে তা দেখতে %s-এ আলতো চাপুন</string>
     <string name="patcher_failed_dialog_title">প্যাচিং ব্যর্থ হয়েছে</string>
     <string name="patcher_unknown_error">অজানা ত্রুটি ঘটেছে</string>
     <string name="patcher_split_step_extracting">স্প্লিট APK এক্সট্রাক্ট করা হচ্ছে</string>
@@ -1165,6 +1185,9 @@ morphe_adaptive_monochrome_custom.xml
     <string name="importing_ellipsis">আমদানি করছেন…</string>
     <string name="imported_successfully">সফলভাবে আমদানি করা হয়েছে</string>
     <string name="changelog">পরিবর্তনলগ দেখুন</string>
+    <string name="changelog_for_app">%s এর জন্য পরিবর্তন</string>
+    <string name="changelog_general_changes">সাধারণ পরিবর্তন</string>
+    <string name="whats_new">নতুন কী</string>
     <string name="changelog_description">এই আপডেটে সর্বশেষ পরিবর্তনের জন্য চেক করুন</string>
     <string name="changelog_download_fail">চেঞ্জলগ ডাউনলোড করা যায়নি: %s</string>
     <string name="changelog_empty">কোনো চ্যাঞলগ উপলব্ধ নেই</string>
@@ -1177,14 +1200,13 @@ morphe_adaptive_monochrome_custom.xml
     <string name="install_update_manager_failed">আপডেট ইনস্টল করতে ব্যর্থ</string>
     <string name="installing_manager_update">আপডেট ইনস্টল করা হচ্ছে…</string>
     <string name="downloading_manager_update">আপডেট ডাউনলোড হচ্ছে…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f এমবি ডাউনলোড করা হয়েছে</string>
     <string name="manager_update_not_ready">এই রিলিজটি এখনও প্রকাশ করা হচ্ছে। কয়েক মিনিট পর আবার চেষ্টা করুন।</string>
     <string name="update_download_missing">ডাউনলোড করা আপডেটটি আর উপলব্ধ নেই। আবার ডাউনলোড করুন।</string>
     <string name="download_manager_failed">আপডেট ডাউনলোড করা যায়নি: %s</string>
     <string name="failed_to_check_updates">আপডেটগুলি পরীক্ষা করতে ব্যর্থ: %s</string>
     <string name="failed_to_download_update">আপডেট ডাউনলোড করতে ব্যর্থ: %s</string>
-    <string name="resume_download">ডাউনলোড আবার শুরু করুন</string>
     <string name="download_confirmation_metered">"আপনি বর্তমানে একটি মিটারযুক্ত সংযোগে আছেন, এবং আপনার পরিষেবা প্রদানকারীর ডেটা চার্জ প্রযোজ্য হতে পারে।
 
 আপনি কি এখনও চালিয়ে যেতে চান?"</string>

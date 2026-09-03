@@ -136,7 +136,6 @@
     <string name="sources_prerelease_warning_message">預發佈版本仍在開發中。修補程式可能失敗或導致應用程式損壞，功能也可能在未經警告的情況下變更</string>
     <string name="expert_mode_prerelease_notice">此來源使用預發佈修補程式。修補可能失敗或產生非預期行為</string>
     <string name="sources_management_experimental_versions_toggle">實驗性應用程式版本</string>
-    <string name="sources_management_experimental_versions_toggle_description">若有可用的實驗性應用程式，則對其進行修補</string>
     <string name="sources_management_already_exists">已新增此來源</string>
     <string name="sources_management_invalid_url">來源 URL 無效。請檢查位址並重試</string>
     <string name="sources_management_blocked">此修補程式來源已封鎖，無法新增</string>
@@ -457,7 +456,27 @@
     <string name="patcher_error_copied">已將錯誤複製到剪貼簿</string>
     <string name="patcher_error_log">錯誤記錄檔</string>
     <string name="patcher_error_technical">技術細節</string>
-    <string name="patcher_error_dialog_app_info">應用程式資訊</string>
+    <string name="patcher_error_dialog_diagnostics">診斷</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">應用程式</string>
+    <string name="patcher_field_package">套件</string>
+    <string name="patcher_field_source">來源</string>
+    <string name="patcher_field_split">分割 APK</string>
+    <string name="patcher_field_manager">管理員</string>
+    <string name="patcher_field_patcher">修補程式</string>
+    <string name="patcher_field_runtime">執行階段</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">程式庫</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">裝置</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">記憶體</string>
+    <string name="patcher_field_storage">儲存空間</string>
+    <string name="patcher_field_value_unknown">未知</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">已移除</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">已保留</string>
     <string name="patcher_tab_logs">修補程式記錄</string>
     <string name="patcher_tab_game">遊戲</string>
     <string name="patcher_logs_waiting">正在等待日誌輸出…</string>
@@ -468,7 +487,7 @@
     <string name="patcher_success_subtitle">你的應用程式現已修補與安裝！</string>
     <string name="patcher_complete_title">修補完成！ ✨</string>
     <string name="patcher_failed_title">糟糕！發生錯誤</string>
-    <string name="patcher_failed_subtitle">請檢查下方的錯誤細節</string>
+    <string name="patcher_failed_hint">輕觸 %s 以查看哪裡出了問題</string>
     <string name="patcher_failed_dialog_title">修補失敗</string>
     <string name="patcher_unknown_error">發生未知錯誤</string>
     <string name="patcher_split_step_extracting">提取分割 APK</string>
@@ -1171,6 +1190,9 @@ morphe_header_custom_dark.png
     <string name="importing_ellipsis">匯入……</string>
     <string name="imported_successfully">匯入成功</string>
     <string name="changelog">檢視變更紀錄</string>
+    <string name="changelog_for_app">%s 的變更</string>
+    <string name="changelog_general_changes">一般變更</string>
+    <string name="whats_new">新增內容</string>
     <string name="changelog_description">查看此更新中的最新變更</string>
     <string name="changelog_download_fail">無法下載變更紀錄：%s</string>
     <string name="changelog_empty">沒有可用的變更紀錄</string>
@@ -1183,14 +1205,13 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">無法安裝更新</string>
     <string name="installing_manager_update">正在安裝更新……</string>
     <string name="downloading_manager_update">正在下載更新……</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">已下載 %1$.1f MB</string>
     <string name="manager_update_not_ready">此版本仍在發布中。請幾分鐘後再試</string>
     <string name="update_download_missing">下載的更新已不再可用。請重新下載</string>
     <string name="download_manager_failed">無法下載更新：%s</string>
     <string name="failed_to_check_updates">無法檢查更新：%s</string>
     <string name="failed_to_download_update">無法下載更新：%s</string>
-    <string name="resume_download">繼續下載</string>
     <string name="download_confirmation_metered">"\"您目前正使用計量付費連線，服務供應商可能會向您收取數據傳輸費用。
 
 您仍要繼續嗎？\""</string>

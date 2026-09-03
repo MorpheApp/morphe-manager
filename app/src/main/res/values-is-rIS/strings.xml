@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">Virkja forútgáfuplástra?</string>
     <string name="expert_mode_prerelease_notice">Þessi uppspretta er með forútgáfuplástra. Plástrun getur mistekist eða hegðað sér óvænt.</string>
     <string name="sources_management_experimental_versions_toggle">Tilrauna app úgáfur</string>
-    <string name="sources_management_experimental_versions_toggle_description">Breytir tilrauna app markmiðum ef fáanlegt</string>
+    <string name="sources_management_experimental_versions_toggle_description">Sýnir og lagar tilraunamarkmið forrita</string>
     <string name="sources_management_already_exists">Þessi heimild hefur þegar verið bætt við</string>
     <string name="sources_management_invalid_url">Ógild URL uppspretta. Vinsamlegast skoðaðu netfangið og reyndu aftur</string>
     <string name="sources_management_blocked">Þessi uppfærslujafi er blokkaður og ekki er hægt að bæta við honum</string>
@@ -455,7 +455,27 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="patcher_error_copied">Villa afrituð á klippiborð</string>
     <string name="patcher_error_log">Villulog</string>
     <string name="patcher_error_technical">Tæknilegar upplýsingar</string>
-    <string name="patcher_error_dialog_app_info">Upplýsingar um app</string>
+    <string name="patcher_error_dialog_diagnostics">Villugreining</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">Forrit</string>
+    <string name="patcher_field_package">Pakki</string>
+    <string name="patcher_field_source">Uppruni</string>
+    <string name="patcher_field_split">Skipt APK</string>
+    <string name="patcher_field_manager">Stjórnandi</string>
+    <string name="patcher_field_patcher">Plástrari</string>
+    <string name="patcher_field_runtime">Keyrslutími</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Söfn</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Tæki</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Minni</string>
+    <string name="patcher_field_storage">Geymsla</string>
+    <string name="patcher_field_value_unknown">óþekkt</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">fjarlægð</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">varðveitt</string>
     <string name="patcher_tab_logs">Patcher skrá</string>
     <string name="patcher_tab_game">Leikir</string>
     <string name="patcher_logs_waiting">Bíð eftir útgáfu skráa…</string>
@@ -466,7 +486,7 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="patcher_success_subtitle">Appið þitt er breytt og uppsett!</string>
     <string name="patcher_complete_title">Viðgerð lokið! ✨</string>
     <string name="patcher_failed_title">Afsakið! Eitthvað fór úrskeikur</string>
-    <string name="patcher_failed_subtitle">Vinsamlegast skoðaðu villuupplýsingarnar hér að neðan</string>
+    <string name="patcher_failed_hint">Ýttu á %s til að sjá hvað fór úrskeiðis</string>
     <string name="patcher_failed_dialog_title">Viðgerðin mislukkaðist</string>
     <string name="patcher_unknown_error">Óþekkt villa kom upp</string>
     <string name="patcher_split_step_extracting">Útdráttur af flíknum APK</string>
@@ -1169,6 +1189,9 @@ Nánari upplýsingar: %2$s"</string>
     <string name="importing_ellipsis">Innflutningur…</string>
     <string name="imported_successfully">Flutt inn með árangri</string>
     <string name="changelog">Skoða breytingaskrá</string>
+    <string name="changelog_for_app">Breytingar fyrir %s</string>
+    <string name="changelog_general_changes">Almennar breytingar</string>
+    <string name="whats_new">Hvað er nýtt</string>
     <string name="changelog_description">Skoða nýjustu breytingarnar í þessari uppfærslu</string>
     <string name="changelog_download_fail">Ekki tókst að sækja breytingaskrá: %s</string>
     <string name="changelog_empty">Engin breytingaskrá í boði</string>
@@ -1181,14 +1204,13 @@ Nánari upplýsingar: %2$s"</string>
     <string name="install_update_manager_failed">Ekki tókst að setja upp uppfærslu</string>
     <string name="installing_manager_update">Sæti uppfærslu…</string>
     <string name="downloading_manager_update">Sæki uppfærslu…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB niðurhalin</string>
     <string name="manager_update_not_ready">Þessi útgáfa er enn í útgáfuferlinu. Reyndu aftur á nokkrum mínútum</string>
     <string name="update_download_missing">Sótta uppfærslan er ekki lengur tiltæk. Sæktu hana aftur.</string>
     <string name="download_manager_failed">Ekki tókst að sækja uppfærslu: %s</string>
     <string name="failed_to_check_updates">Ekki tókst að skoða uppfærslur: %s</string>
     <string name="failed_to_download_update">Ekki tókst að sækja uppfærslu: %s</string>
-    <string name="resume_download">Endurheimta niðuhlaðningu</string>
     <string name="download_confirmation_metered">"Þú ert núna á mældri tengingu og gjalda frá þjónustuaðilum þínum gætu átt við.
 
 Haltu samt sem áður?"</string>

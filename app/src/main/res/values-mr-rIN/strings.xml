@@ -135,7 +135,6 @@
     <string name="sources_prerelease_warning_message">डाउनलोड केलेले अपडेट यापुढे उपलब्ध नाही. ते पुन्हा डाउनलोड करा.</string>
     <string name="expert_mode_prerelease_notice">हे स्रोत पूर्व-प्रकाशन पॅचवर आहे. पॅचिंग अयशस्वी होऊ शकते किंवा अनपेक्षित वर्तन होऊ शकते.</string>
     <string name="sources_management_experimental_versions_toggle">प्रायोगिक ॲप आवृत्त्या</string>
-    <string name="sources_management_experimental_versions_toggle_description">शक्य असल्यास प्रायोगिक ॲप्सवर पॅच लागू करा</string>
     <string name="sources_management_already_exists">हे मूळ आधीच जोडले गेले आहे</string>
     <string name="sources_management_invalid_url">अवैध स्रोत URL. कृपया पत्ता तपासा आणि पुन्हा प्रयत्न करा</string>
     <string name="sources_management_blocked">हे पॅच स्रोत अवरोधित केले आहे आणि ते जोडले जाऊ शकत नाही</string>
@@ -449,7 +448,11 @@
     <string name="patcher_error_copied">एरर क्लिपबोर्डवर कॉपी केला गेला</string>
     <string name="patcher_error_log">एरर लॉग</string>
     <string name="patcher_error_technical">तांत्रिक तपशील</string>
-    <string name="patcher_error_dialog_app_info">ॲप माहिती</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <!-- Free and total RAM of the device, never its storage -->
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_tab_logs">पॅचर लॉग</string>
     <string name="patcher_tab_game">गेम</string>
     <string name="patcher_logs_waiting">लॉग आउटपुटची प्रतीक्षा करत आहे…</string>
@@ -460,7 +463,6 @@
     <string name="patcher_success_subtitle">तुमचा ॲप पॅच केला गेला आहे आणि इंस्टॉल झाला आहे!</string>
     <string name="patcher_complete_title">पॅचिंग पूर्ण झाले! ✨</string>
     <string name="patcher_failed_title">अरेरे! काहीतरी गडबड झाली</string>
-    <string name="patcher_failed_subtitle">खालील एरर डिटेल्स तपासा</string>
     <string name="patcher_failed_dialog_title">पॅचिंग अयशस्वी झाले</string>
     <string name="patcher_unknown_error">अज्ञात एरर आली आहे</string>
     <string name="patcher_split_step_extracting">स्प्लिट APK काढत आहे</string>
@@ -1175,14 +1177,13 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">अपडेट स्थापित करण्यात अयशस्वी</string>
     <string name="installing_manager_update">अपडेट स्थापित करत आहे…</string>
     <string name="downloading_manager_update">अपडेट डाउनलोड करत आहे…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB डाउनलोड केले</string>
     <string name="manager_update_not_ready">हे प्रकाशन अजूनही जारी केले जात आहे. कृपया काही मिनिटांनी पुन्हा प्रयत्न करा.</string>
     <string name="update_download_missing">डाउनलोड केलेले अद्यतन आता उपलब्ध नाही. ते पुन्हा डाउनलोड करा.</string>
     <string name="download_manager_failed">अपडेट डाउनलोड करण्यात अयशस्वी: %s</string>
     <string name="failed_to_check_updates">अपडेट तपासण्यात अयशस्वी: %s</string>
     <string name="failed_to_download_update">अपडेट डाउनलोड करण्यात अयशस्वी: %s</string>
-    <string name="resume_download">डाउनलोड पुन्हा सुरू करा</string>
     <string name="download_confirmation_metered">"तुम्ही सध्या मोजलेल्या कनेक्शनवर आहात, आणि तुमच्या सेवा प्रदात्याकडून डेटा शुल्क लागू होऊ शकते.
 
 तुम्ही तरीही पुढे जाऊ इच्छिता?"</string>

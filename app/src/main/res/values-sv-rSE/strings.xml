@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">Förhandsversioner är fortfarande under utveckling. Patchar kan misslyckas eller krascha appen, och funktioner kan ändras utan förvarning</string>
     <string name="expert_mode_prerelease_notice">Den här källan har förhandsversioner av patchar. Patchning kan misslyckas eller bete sig oväntat</string>
     <string name="sources_management_experimental_versions_toggle">Experimentella appversioner</string>
-    <string name="sources_management_experimental_versions_toggle_description">Modifierar experimentella appmål om sådana finns</string>
+    <string name="sources_management_experimental_versions_toggle_description">Visar och patchar experimentella appmål</string>
     <string name="sources_management_already_exists">Den här källan har redan lagts till</string>
     <string name="sources_management_invalid_url">Ogiltig källadress. Kontrollera adressen och försök igen</string>
     <string name="sources_management_blocked">Den här tilläggskällan är blockerad och kan inte läggas till</string>
@@ -457,7 +457,27 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="patcher_error_copied">Felmeddelande kopierades till urklipp</string>
     <string name="patcher_error_log">Fellogg</string>
     <string name="patcher_error_technical">Teknisk information</string>
-    <string name="patcher_error_dialog_app_info">Appinformation</string>
+    <string name="patcher_error_dialog_diagnostics">Diagnostik</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">App</string>
+    <string name="patcher_field_package">Paket</string>
+    <string name="patcher_field_source">Källa</string>
+    <string name="patcher_field_split">Uppdelad APK</string>
+    <string name="patcher_field_manager">Hanterare</string>
+    <string name="patcher_field_patcher">Modifieringsverktyg</string>
+    <string name="patcher_field_runtime">Körtid</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Bibliotek</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Enhet</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Minne</string>
+    <string name="patcher_field_storage">Lagring</string>
+    <string name="patcher_field_value_unknown">okänd</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">borttagna</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">behållna</string>
     <string name="patcher_tab_logs">Modifieringsloggar</string>
     <string name="patcher_tab_game">Spel</string>
     <string name="patcher_logs_waiting">Väntar på loggutdata…</string>
@@ -468,7 +488,7 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="patcher_success_subtitle">Appen är modifierad och installerad!</string>
     <string name="patcher_complete_title">Modifieringen är klar! ✨</string>
     <string name="patcher_failed_title">Hoppsan! Något gick fel</string>
-    <string name="patcher_failed_subtitle">Kontrollera felinformationen nedan</string>
+    <string name="patcher_failed_hint">Tryck på %s för att se vad som gick fel</string>
     <string name="patcher_failed_dialog_title">Modifieringen misslyckades</string>
     <string name="patcher_unknown_error">Okänt fel uppstod</string>
     <string name="patcher_split_step_extracting">Extraherar delade APK-filer</string>
@@ -1172,6 +1192,9 @@ Information: %2$s"</string>
     <string name="importing_ellipsis">Importerar …</string>
     <string name="imported_successfully">Importen lyckades</string>
     <string name="changelog">Visa ändringsloggar</string>
+    <string name="changelog_for_app">Ändringar för %s</string>
+    <string name="changelog_general_changes">Allmänna ändringar</string>
+    <string name="whats_new">Vad är nytt</string>
     <string name="changelog_description">Kolla in de senaste ändringarna i den här uppdateringen</string>
     <string name="changelog_download_fail">Det gick inte att ladda ned ändringsloggen: %s</string>
     <string name="changelog_empty">Ingen ändringslogg är tillgänglig</string>
@@ -1184,14 +1207,13 @@ Information: %2$s"</string>
     <string name="install_update_manager_failed">Det gick inte att installera uppdateringen</string>
     <string name="installing_manager_update">Installerar uppdateringen …</string>
     <string name="downloading_manager_update">Laddar ned uppdateringen …</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB nedladdat</string>
     <string name="manager_update_not_ready">Den här utgåvan publiceras fortfarande. Försök igen om några minuter.</string>
     <string name="update_download_missing">Den nedladdade uppdateringen är inte längre tillgänglig. Ladda ner den igen</string>
     <string name="download_manager_failed">Det gick inte att ladda ned uppdateringen: %s</string>
     <string name="failed_to_check_updates">Det gick inte att söka efter uppdateringar: %s</string>
     <string name="failed_to_download_update">Det gick inte att ladda ned uppdateringen: %s</string>
-    <string name="resume_download">Återuppta nedladdning</string>
     <string name="download_confirmation_metered">"Du använder för närvarande en anslutning med datapriser, och dataavgifter från din internetleverantör kan tillkomma.
 
 Vill du fortsätta ändå?"</string>

@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">Versiunile de pre-lansare sunt încă în dezvoltare. Patch-urile pot eșua sau pot strica aplicația, iar funcțiile se pot schimba fără avertisment.</string>
     <string name="expert_mode_prerelease_notice">Această sursă utilizează patch-uri de pre-lansare. Patch-uirea poate eșua sau se poate comporta neașteptat.</string>
     <string name="sources_management_experimental_versions_toggle">Versiuni experimentale ale aplicației</string>
-    <string name="sources_management_experimental_versions_toggle_description">Patch-uiește aplicații experimentale dacă e disponibil</string>
+    <string name="sources_management_experimental_versions_toggle_description">Afișează și corectează țintele experimentale ale aplicației</string>
     <string name="sources_management_already_exists">Sursă deja adăugată</string>
     <string name="sources_management_invalid_url">URL sursă invalidă. Vă rugăm să verificați adresa și încercați din nou</string>
     <string name="sources_management_blocked">Această sursă de patch este blocată și nu poate fi adăugată</string>
@@ -457,7 +457,27 @@ Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păs
     <string name="patcher_error_copied">Eroare copiată în clipboard</string>
     <string name="patcher_error_log">Jurnal erori</string>
     <string name="patcher_error_technical">Detalii tehnice</string>
-    <string name="patcher_error_dialog_app_info">Informații aplicație</string>
+    <string name="patcher_error_dialog_diagnostics">Diagnostic</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">Aplicație</string>
+    <string name="patcher_field_package">Pachet</string>
+    <string name="patcher_field_source">Sursă</string>
+    <string name="patcher_field_split">APK împărțit</string>
+    <string name="patcher_field_manager">Manager</string>
+    <string name="patcher_field_patcher">Patcher</string>
+    <string name="patcher_field_runtime">Runtime</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Biblioteci</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Dispozitiv</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Memorie</string>
+    <string name="patcher_field_storage">Stocare</string>
+    <string name="patcher_field_value_unknown">necunoscut</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">eliminate</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">păstrate</string>
     <string name="patcher_tab_logs">Jurnale de patch-uri</string>
     <string name="patcher_tab_game">Jocuri</string>
     <string name="patcher_logs_waiting">Se éteptarea ieşirii jurnalului…</string>
@@ -468,7 +488,7 @@ Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păs
     <string name="patcher_success_subtitle">Aplicația dvs. este modificată și instalată!</string>
     <string name="patcher_complete_title">Aplicarea patch-ului s-a finalizat! ✨</string>
     <string name="patcher_failed_title">Ups! Ceva nu a mers bine</string>
-    <string name="patcher_failed_subtitle">Verifică detaliile erorii de mai jos</string>
+    <string name="patcher_failed_hint">Atingeți %s pentru a vedea ce a mers greșit.</string>
     <string name="patcher_failed_dialog_title">Aplicarea patch-ului a eșuat</string>
     <string name="patcher_unknown_error">A apărut o eroare necunoscută</string>
     <string name="patcher_split_step_extracting">Extragerea fișierelor APK divizate</string>
@@ -1173,6 +1193,9 @@ Detalii: %2$s"</string>
     <string name="importing_ellipsis">Importare în curs…</string>
     <string name="imported_successfully">Importate cu succes</string>
     <string name="changelog">Vizualizează jurnalele modificărilor</string>
+    <string name="changelog_for_app">Modificări pentru %s</string>
+    <string name="changelog_general_changes">Modificări generale</string>
+    <string name="whats_new">Ce este nou</string>
     <string name="changelog_description">Explorează ultimele schimbări din această actualizare</string>
     <string name="changelog_download_fail">Nu s-a putut descărca jurnalul de modificări: %s</string>
     <string name="changelog_empty">Nu există jurnale disponibile</string>
@@ -1185,14 +1208,13 @@ Detalii: %2$s"</string>
     <string name="install_update_manager_failed">Eroare la instalarea actualizării</string>
     <string name="installing_manager_update">Se instalează actualizarea...</string>
     <string name="downloading_manager_update">Se descarcă actualizarea...</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB descărcat</string>
     <string name="manager_update_not_ready">Această versiune este încă în curs de publicare. Încearcă din nou în câteva minute</string>
     <string name="update_download_missing">Actualizarea descărcată nu mai este disponibilă. Descarc-o din nou.</string>
     <string name="download_manager_failed">Descărcarea actualizării a eșuat: %s</string>
     <string name="failed_to_check_updates">Nu s-a putut verifica existența actualizărilor: %s</string>
     <string name="failed_to_download_update">Nu s-a putut descărca actualizarea: %s</string>
-    <string name="resume_download">Reluare descărcare</string>
     <string name="download_confirmation_metered">"Sunteți conectat la o conexiune cu tarif limitat și se pot aplica costuri de date de la furnizorul dvs. de servicii.
 
 Doriți totuși să continuați?"</string>

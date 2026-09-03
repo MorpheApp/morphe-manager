@@ -137,7 +137,7 @@ Please note: The translation is complete. The arrow is for clarity and not part 
     <string name="sources_prerelease_warning_message">Ang mga pre-release na build ay nasa development pa. Maaaring mabigo o makasira ng app ang mga patch, at maaaring magbago ang mga feature nang walang babala.</string>
     <string name="expert_mode_prerelease_notice">Ang source na ito ay nasa pre-release na mga patch. Maaaring mabigo o kumilos nang hindi inaasahan ang pag-patch.</string>
     <string name="sources_management_experimental_versions_toggle">Mga bersyon ng app na pang-eksperimento</string>
-    <string name="sources_management_experimental_versions_toggle_description">Naglalagay ng mga target na app na pang-eksperimento kung mayroon</string>
+    <string name="sources_management_experimental_versions_toggle_description">Nagpapakita at nag-aayos ng mga eksperimentong target ng app</string>
     <string name="sources_management_already_exists">Ang pinagmulang ito ay naidagdag na.</string>
     <string name="sources_management_invalid_url">Hindi balido ang source URL. Pakisuri ang address at subukang muli.</string>
     <string name="sources_management_blocked">Ang source ng patch na ito ay naka-block at hindi maaaring idagdag</string>
@@ -458,7 +458,27 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <string name="patcher_error_copied">Isang pagkakamali na nakopya sa clipboard</string>
     <string name="patcher_error_log">Tala ng pagkakamali</string>
     <string name="patcher_error_technical">Teknikal na detalye</string>
-    <string name="patcher_error_dialog_app_info">Impormasyon ng app</string>
+    <string name="patcher_error_dialog_diagnostics">Diagnostics</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">App</string>
+    <string name="patcher_field_package">Package</string>
+    <string name="patcher_field_source">Pinagmulan</string>
+    <string name="patcher_field_split">Hating APK</string>
+    <string name="patcher_field_manager">Manager</string>
+    <string name="patcher_field_patcher">Patcher</string>
+    <string name="patcher_field_runtime">Runtime</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Mga library</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Device</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Memorya</string>
+    <string name="patcher_field_storage">Imbakan</string>
+    <string name="patcher_field_value_unknown">hindi alam</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">tinanggal</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">pinanatili</string>
     <string name="patcher_tab_logs">Mga log ng Patcher</string>
     <string name="patcher_tab_game">Mga Laro</string>
     <string name="patcher_logs_waiting">Naghihintay ng log output…</string>
@@ -469,7 +489,7 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <string name="patcher_success_subtitle">Na-patch at na-install na ang iyong aplikasyon!</string>
     <string name="patcher_complete_title">Nakumpleto na ang pag-patch! ✨</string>
     <string name="patcher_failed_title">Oops! Nagkaproblema</string>
-    <string name="patcher_failed_subtitle">Suriin ang detalye ng pagkakamali sa ibaba.</string>
+    <string name="patcher_failed_hint">I-tap ang %s upang makita kung ano ang naging mali.</string>
     <string name="patcher_failed_dialog_title">Nabigo ang pag-patch</string>
     <string name="patcher_unknown_error">May hindi kilalang pagkakamali na naganap</string>
     <string name="patcher_split_step_extracting">Kinukuha ang mga hati-hati na APK</string>
@@ -1175,6 +1195,9 @@ Mga Detalye: %2$s"</string>
     <string name="importing_ellipsis">Ini-import…</string>
     <string name="imported_successfully">Matagumpay na na-import</string>
     <string name="changelog">Tingnan ang mga changelog</string>
+    <string name="changelog_for_app">Mga pagbabago para sa %s</string>
+    <string name="changelog_general_changes">Mga pangkalahatang pagbabago</string>
+    <string name="whats_new">Ano ang bago</string>
     <string name="changelog_description">Tingnan ang mga pinakabagong pagbabago sa update na ito</string>
     <string name="changelog_download_fail">Nabigong mag-download ang changelog: %s</string>
     <string name="changelog_empty">Walang magagamit na changelog</string>
@@ -1187,14 +1210,13 @@ Mga Detalye: %2$s"</string>
     <string name="install_update_manager_failed">Nabigong ma-install ang update</string>
     <string name="installing_manager_update">Ini-install ang update…</string>
     <string name="downloading_manager_update">Dina-download ang update…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB ang na-download</string>
     <string name="manager_update_not_ready">Ang paglalabas na ito ay kasalukuyang pinoproseso. Subukan muli sa loob ng ilang minuto</string>
     <string name="update_download_missing">Ang na-download na update ay hindi na magagamit. I-download muli ito.</string>
     <string name="download_manager_failed">Nabigong mai-download ang update: %s</string>
     <string name="failed_to_check_updates">Nabigong suriin ang mga update: %s</string>
     <string name="failed_to_download_update">Nabigong mai-download ang update: %s</string>
-    <string name="resume_download">Ipagpatuloy ang pag-download</string>
     <string name="download_confirmation_metered">"Kasalukuyan kang nasa isang metered na koneksyon, at maaaring malapat ang mga singil sa data mula sa iyong service provider.
 
 Gusto mo pa bang ituloy?"</string>

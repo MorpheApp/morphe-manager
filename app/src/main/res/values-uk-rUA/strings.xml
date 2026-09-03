@@ -136,8 +136,7 @@
     <string name="sources_prerelease_warning_message">Передрелізні збірки ще перебувають у розробці. Патчі можуть не спрацювати або пошкодити застосунок, а функції можуть змінюватися без попередження</string>
     <string name="expert_mode_prerelease_notice">Це джерело використовує передрелізні патчі. Патчинг може не спрацювати або поводитися непередбачувано</string>
     <string name="sources_management_experimental_versions_toggle">Експериментальні версії застосунків</string>
-    <string name="sources_management_experimental_versions_toggle_description">Патчить експериментальні версії застосунків, якщо доступні
-</string>
+    <string name="sources_management_experimental_versions_toggle_description">Показує та патчить експериментальні версії застосунків</string>
     <string name="sources_management_already_exists">Це джерело вже додано</string>
     <string name="sources_management_invalid_url">Недійсна URL-адреса джерела. Перевірте адресу та спробуйте ще раз</string>
     <string name="sources_management_blocked">Це джерело патчів заблоковано і не може бути додано</string>
@@ -458,7 +457,27 @@
     <string name="patcher_error_copied">Помилку скопійовано у буфер обміну</string>
     <string name="patcher_error_log">Журнал помилок</string>
     <string name="patcher_error_technical">Технічні деталі</string>
-    <string name="patcher_error_dialog_app_info">Інформація про застосунок</string>
+    <string name="patcher_error_dialog_diagnostics">Діагностика</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">Додаток</string>
+    <string name="patcher_field_package">Пакет</string>
+    <string name="patcher_field_source">Джерело</string>
+    <string name="patcher_field_split">Split APK</string>
+    <string name="patcher_field_manager">Менеджер</string>
+    <string name="patcher_field_patcher">Патчер</string>
+    <string name="patcher_field_runtime">Середовище</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Бібліотеки</string>
+    <string name="patcher_field_android">Андроїд</string>
+    <string name="patcher_field_device">Пристрій</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Пам\'ять</string>
+    <string name="patcher_field_storage">Сховище</string>
+    <string name="patcher_field_value_unknown">невідомо</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">видалено</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">збережено</string>
     <string name="patcher_tab_logs">Журнали патчера</string>
     <string name="patcher_tab_game">Ігри</string>
     <string name="patcher_logs_waiting">Очікування виводу журналу…</string>
@@ -469,7 +488,7 @@
     <string name="patcher_success_subtitle">Ваш застосунок пропатчено та встановлено!</string>
     <string name="patcher_complete_title">Патчинг завершено! ✨</string>
     <string name="patcher_failed_title">Ой! Щось пішло не так</string>
-    <string name="patcher_failed_subtitle">Перевірте деталі помилки нижче</string>
+    <string name="patcher_failed_hint">Натисніть %s, щоб побачити, що пішло не так</string>
     <string name="patcher_failed_dialog_title">Помилка патчингу</string>
     <string name="patcher_unknown_error">Сталася невідома помилка</string>
     <string name="patcher_split_step_extracting">Видобування split APK файлів</string>
@@ -1190,14 +1209,13 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">Не вдалося встановити оновлення</string>
     <string name="installing_manager_update">Встановлення оновлення…</string>
     <string name="downloading_manager_update">Завантаження оновлення…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">Завантажено %1$.1f МБ</string>
     <string name="manager_update_not_ready">Цей реліз ще публікується. Спробуйте знову за кілька хвилин</string>
     <string name="update_download_missing">Завантажене оновлення більше недоступне. Завантажте його знову</string>
     <string name="download_manager_failed">Помилка завантаження оновлення: %s</string>
     <string name="failed_to_check_updates">Не вдалося перевірити наявність оновлень: %s</string>
     <string name="failed_to_download_update">Помилка завантаження оновлення: %s</string>
-    <string name="resume_download">Продовжити завантаження</string>
     <string name="download_confirmation_metered">"Ви зараз користуєтеся лімітним з’єднанням, і ваш постачальник послуг може стягувати плату за передачу даних.
 
 Ви все ще хочете продовжити?"</string>

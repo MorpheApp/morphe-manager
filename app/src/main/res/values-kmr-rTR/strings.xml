@@ -134,7 +134,6 @@
     <string name="sources_prerelease_warning_message">Nusxeyên pêş-berdanê hê jî di pêşveçûnê de ne. Patch dibe ku têk biçin an sepanê bişkînin, û taybetmendî dikarin bê hişyarî biguherin.</string>
     <string name="expert_mode_prerelease_notice">Ev çavkanî li ser patchên pêş-berdanê ye. Patchkirin dibe ku têk biçe an bi awayekî neçaverêkirî tevbigere.</string>
     <string name="sources_management_experimental_versions_toggle">Werzîyonên sepanê yên eksperîmental</string>
-    <string name="sources_management_experimental_versions_toggle_description">Daxwazên sepanê yên ceribandinê yên hewce ne heger hebin</string>
     <string name="sources_management_already_exists">Evîn pêştirîye, berê zêdekirine.</string>
     <string name="sources_management_invalid_url">URL-a çavkaniyê nebaş e. Ji kerema xwe navnîşanê kontrol bikin û dîsa biceribîn</string>
     <string name="sources_management_blocked">Çavkaniya vê pelikê blok kirî ye û nikare were zêdekirin</string>
@@ -450,7 +449,11 @@ Herêma derveyî (qutkirî): dikare ji aliyê maskeya launcher'ê ve were qutkir
     <string name="patcher_error_copied">Xetalî bi mêjiyê kopî kirin</string>
     <string name="patcher_error_log">Log xistina</string>
     <string name="patcher_error_technical">Agahî teknîk</string>
-    <string name="patcher_error_dialog_app_info">Agahdariya sepanê</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <!-- Free and total RAM of the device, never its storage -->
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_tab_logs">Tovêrên patcherê</string>
     <string name="patcher_tab_game">Lîstik</string>
     <string name="patcher_logs_waiting">Li bendê ne ku derketina logê bê nivîsîn…</string>
@@ -461,7 +464,6 @@ Herêma derveyî (qutkirî): dikare ji aliyê maskeya launcher'ê ve were qutkir
     <string name="patcher_success_subtitle">Sepîka we tê saxkirin û saz bike!</string>
     <string name="patcher_complete_title">Patchkirin temam bû! ✨</string>
     <string name="patcher_failed_title">Ooops! Tiştek çêû.</string>
-    <string name="patcher_failed_subtitle">Hêsanî xetalî di binê vê de binêre</string>
     <string name="patcher_failed_dialog_title">Patchkirin têk çû</string>
     <string name="patcher_unknown_error">Xetalî nenas çê bû</string>
     <string name="patcher_split_step_extracting">Derxistina APKyên parvekirî</string>
@@ -1177,14 +1179,13 @@ Detay: %2$s"</string>
     <string name="install_update_manager_failed">Sazkirina nûvekirinê serket</string>
     <string name="installing_manager_update">Sazkirina nûvekirinê…</string>
     <string name="downloading_manager_update">Bar kirina nûvekirinê…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB hat dakêşkirin</string>
     <string name="manager_update_not_ready">Ev weşan hîn tê weşandin. Çend hûrdan piştî din bicirêbin</string>
     <string name="update_download_missing">Nûvekirina dakêşandî êdî ne berdest e. Dîsa dakêşin.</string>
     <string name="download_manager_failed">Bar kirina nûvekirinê serket: %s</string>
     <string name="failed_to_check_updates">Serketina kontrolkirina nûvekirinê: %s</string>
     <string name="failed_to_download_update">Bar kirina nûvekirinê serket: %s</string>
-    <string name="resume_download">Downloadê vegerîne</string>
     <string name="download_confirmation_metered">"Hûn niha bi komek xercxwedanê ve girêdayî ne, û xeberçewaniya xebatkarê xizmetê we bi navê we kontrol bike. 
 
 Ma hûn hê jî dixwazin dom bikevin?"</string>

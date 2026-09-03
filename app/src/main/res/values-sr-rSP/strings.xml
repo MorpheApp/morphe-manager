@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">Пре-издање верзије су још увек у развоју. Закрпе могу да не успеју или да оштете апликацију, а функције се могу променити без упозорења.</string>
     <string name="expert_mode_prerelease_notice">Овај извор користи пре-издање закрпе. Примена закрпа може да не успе или да се понаша неочекивано.</string>
     <string name="sources_management_experimental_versions_toggle">Експерименталне верзије апликације</string>
-    <string name="sources_management_experimental_versions_toggle_description">Пачује експерименталне циљеве апликација ако су доступни</string>
+    <string name="sources_management_experimental_versions_toggle_description">Приказује и исправља експерименталне циљеве апликација</string>
     <string name="sources_management_already_exists">Ovaj izvor je već dodan</string>
     <string name="sources_management_invalid_url">Невалидна УРЛ адреса извора. Молимо проверите адресу и покушајте поново</string>
     <string name="sources_management_blocked">Овај извор за надоградњу је блокиран и не може бити додат</string>
@@ -457,7 +457,27 @@
     <string name="patcher_error_copied">Грешка је копирана у привремену меморију</string>
     <string name="patcher_error_log">Лог грешaka</string>
     <string name="patcher_error_technical">Техничке информације</string>
-    <string name="patcher_error_dialog_app_info">Информације о апликацији</string>
+    <string name="patcher_error_dialog_diagnostics">Дијагностика</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">Апликација</string>
+    <string name="patcher_field_package">Пакет</string>
+    <string name="patcher_field_source">Извор</string>
+    <string name="patcher_field_split">Подељени АПК</string>
+    <string name="patcher_field_manager">Менаџер</string>
+    <string name="patcher_field_patcher">Пачер</string>
+    <string name="patcher_field_runtime">Рантим</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Библиотеке</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Уређај</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Меморија</string>
+    <string name="patcher_field_storage">Складиште</string>
+    <string name="patcher_field_value_unknown">непознато</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">уклоњене</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">задржане</string>
     <string name="patcher_tab_logs">Евиденција закрпа</string>
     <string name="patcher_tab_game">Игре</string>
     <string name="patcher_logs_waiting">Чека се излаз дневника…</string>
@@ -468,7 +488,7 @@
     <string name="patcher_success_subtitle">Ваша апликација је печована и инсталирана!</string>
     <string name="patcher_complete_title">Закрапа завршено! ✨</string>
     <string name="patcher_failed_title">Упс! Дошло је до грешке</string>
-    <string name="patcher_failed_subtitle">Проверите детаље грешке испод</string>
+    <string name="patcher_failed_hint">Додирните %s да бисте видели шта је пошло по злу</string>
     <string name="patcher_failed_dialog_title">Закрапа није успела</string>
     <string name="patcher_unknown_error">Дошло је до непознате грешке</string>
     <string name="patcher_split_step_extracting">Екстракција подељених APK-ова</string>
@@ -1174,6 +1194,9 @@ morphe_header_custom_dark.png
     <string name="importing_ellipsis">Увоз…</string>
     <string name="imported_successfully">Успјешно импортирано</string>
     <string name="changelog">Прегледајте дневнике промена</string>
+    <string name="changelog_for_app">Измене за %s</string>
+    <string name="changelog_general_changes">Опште измене</string>
+    <string name="whats_new">Шта је ново</string>
     <string name="changelog_description">Pogledajte najnovije promene u ovom ažuriranju</string>
     <string name="changelog_download_fail">Није успело преузимање дневника промена: %s</string>
     <string name="changelog_empty">Нема доступних промена</string>
@@ -1186,14 +1209,13 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">Неуспешно инсталирање ажурирања</string>
     <string name="installing_manager_update">Инсталирање ажурирања…</string>
     <string name="downloading_manager_update">Преузимање ажурирања…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">Преузето %1$.1f MB</string>
     <string name="manager_update_not_ready">Овај издање је и даље у процесу објављивања. Покушајте поново за неколико минута</string>
     <string name="update_download_missing">Преузето ажурирање више није доступно. Преузмите га поново.</string>
     <string name="download_manager_failed">Није успело преузимање ажурирања: %s</string>
     <string name="failed_to_check_updates">Није успело провера ажурирања: %s</string>
     <string name="failed_to_download_update">Није успело преузимање ажурирања: %s</string>
-    <string name="resume_download">Настави преузимање</string>
     <string name="download_confirmation_metered">"Тренутно сте на вези са ограниченим подацима, а могу се примењивати трошкови за пренос података вашег оператера.
 
 Да ли и даље желите да наставите?"</string>

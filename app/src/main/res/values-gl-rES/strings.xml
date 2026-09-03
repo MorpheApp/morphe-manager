@@ -64,7 +64,6 @@
     <string name="sources_management_prerelease_toggle">Parche pre-lanzamento</string>
     <string name="sources_management_prerelease_toggle_description">Recibe acceso anticipado a novas versións experimentais dos parches</string>
     <string name="sources_management_experimental_versions_toggle">Versións experimentais da aplicación</string>
-    <string name="sources_management_experimental_versions_toggle_description">Parches experimentais de aplicación, cando estean dispoñibles</string>
     <string name="sources_management_already_exists">Esta fonte xa foi engadida</string>
     <string name="sources_management_invalid_url">URL de orixe inválido. Por favor, comprprobe o enderezo e tente de novo</string>
     <string name="sources_management_metadata_unavailable">Metadatos N/A</string>
@@ -226,6 +225,11 @@ Elixe outro APK</string>
     <string name="patcher_error_copied">Error copiado ao portapapeis</string>
     <string name="patcher_error_log">Rexistro de erros</string>
     <string name="patcher_error_technical">Detalles técnicos</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <!-- Free and total RAM of the device, never its storage -->
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_long_step_warning">Este paso poderá tardar un tempo. Por favor, agarde…</string>
     <string name="patcher_installing_subtitle">Case listo para arrasar! 🎸</string>
     <string name="patcher_success_subtitle">A súa aplicación foi parcheada e instalada!</string>
@@ -315,7 +319,7 @@ Elixe outro APK</string>
     <string name="patching">Parcheando</string>
     <string name="patched">Parcheado</string>
     <string name="allow">Permitir</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <!-- Onboarding coach marks -->
     <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <!-- Translate "System" the same way as the System settings tab -->

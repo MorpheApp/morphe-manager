@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">Ön sürüm yapıları hâlâ geliştirme aşamasındadır. Yamalar başarısız olabilir veya uygulamayı bozabilir ve özellikler uyarı vermeden değişebilir.</string>
     <string name="expert_mode_prerelease_notice">Bu kaynak ön sürüm yamalarındadır. Yama yapma başarısız olabilir veya beklenmedik davranabilir.</string>
     <string name="sources_management_experimental_versions_toggle">Deneysel uygulama sürümleri</string>
-    <string name="sources_management_experimental_versions_toggle_description">Mevcutsa deneysel uygulama hedeflerini yamala</string>
+    <string name="sources_management_experimental_versions_toggle_description">Deneysel uygulama hedeflerini gösterir ve yamalar</string>
     <string name="sources_management_already_exists">Bu kaynak zaten eklenmiş</string>
     <string name="sources_management_invalid_url">Geçersiz kaynak URL\'si. Lütfen adresi kontrol edin ve tekrar deneyin</string>
     <string name="sources_management_blocked">Bu yama kaynağı engellenmiş ve eklenemiyor</string>
@@ -457,7 +457,27 @@ Dış bölge (kesikli): launcher maskesi tarafından kırpılabilir - önemli ay
     <string name="patcher_error_copied">Hata panoya kopyalandı</string>
     <string name="patcher_error_log">Hata günlüğü</string>
     <string name="patcher_error_technical">Teknik ayrıntılar</string>
-    <string name="patcher_error_dialog_app_info">Uygulama bilgisi</string>
+    <string name="patcher_error_dialog_diagnostics">Tanılama</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">Uygulama</string>
+    <string name="patcher_field_package">Paket</string>
+    <string name="patcher_field_source">Kaynak</string>
+    <string name="patcher_field_split">Bölünmüş APK</string>
+    <string name="patcher_field_manager">Yönetici</string>
+    <string name="patcher_field_patcher">Yamalayıcı</string>
+    <string name="patcher_field_runtime">Çalışma zamanı</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Kütüphaneler</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Cihaz</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Bellek</string>
+    <string name="patcher_field_storage">Depolama</string>
+    <string name="patcher_field_value_unknown">bilinmiyor</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">kaldırıldı</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">korundu</string>
     <string name="patcher_tab_logs">Patcher günlükleri</string>
     <string name="patcher_tab_game">Oyunlar</string>
     <string name="patcher_logs_waiting">Log çıktısı bekleniyor…</string>
@@ -468,7 +488,7 @@ Dış bölge (kesikli): launcher maskesi tarafından kırpılabilir - önemli ay
     <string name="patcher_success_subtitle">Uygulamanız yamalandı ve yüklendi!</string>
     <string name="patcher_complete_title">Yamalama tamamlandı! ✨</string>
     <string name="patcher_failed_title">Eyvah! Bir şeyler ters gitti</string>
-    <string name="patcher_failed_subtitle">Aşağıdaki hata ayrıntılarını kontrol edin</string>
+    <string name="patcher_failed_hint">Ne yanlış gittiğini görmek için %s\'ye dokunun</string>
     <string name="patcher_failed_dialog_title">Yamalama başarısız oldu</string>
     <string name="patcher_unknown_error">Bilinmeyen bir hata oluştu</string>
     <string name="patcher_split_step_extracting">Bölünmüş APK\'ler ayıklanıyor</string>
@@ -1172,6 +1192,9 @@ Ayrıntılar: %2$s"</string>
     <string name="importing_ellipsis">İçe aktarılıyor…</string>
     <string name="imported_successfully">Başarıyla içe aktarıldı</string>
     <string name="changelog">Değişiklik günlüklerini görüntüle</string>
+    <string name="changelog_for_app">%s için değişiklikler</string>
+    <string name="changelog_general_changes">Genel değişiklikler</string>
+    <string name="whats_new">Yenilikler</string>
     <string name="changelog_description">Bu güncellemede yapılmış son değişiklikleri inceleyin</string>
     <string name="changelog_download_fail">Değişiklik günlüğü indirilemedi: %s</string>
     <string name="changelog_empty">Değişiklik günlüğü yok</string>
@@ -1184,14 +1207,13 @@ Ayrıntılar: %2$s"</string>
     <string name="install_update_manager_failed">Güncelleme yüklenemedi</string>
     <string name="installing_manager_update">Güncelleme yükleniyor…</string>
     <string name="downloading_manager_update">Güncelleme indiriliyor…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB indirildi</string>
     <string name="manager_update_not_ready">Bu sürüm hala yayınlanıyor. Birkaç dakika sonra tekrar deneyin.</string>
     <string name="update_download_missing">İndirilen güncelleme artık kullanılamıyor. Tekrar indirin.</string>
     <string name="download_manager_failed">Güncelleme indirilemedi: %s</string>
     <string name="failed_to_check_updates">Güncellemeler kontrol edilemedi: %s</string>
     <string name="failed_to_download_update">Güncelleme indirilemedi: %s</string>
-    <string name="resume_download">İndirmeyi sürdür</string>
     <string name="download_confirmation_metered">"Şu anda kotalı bir bağlantıdasınız ve servis sağlayıcınızdan veri ücretleri uygulanabilir.
 
 Devam etmek istiyor musunuz?"</string>

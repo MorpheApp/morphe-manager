@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">Pre-release builds zijn nog in ontwikkeling. Patches kunnen falen of de app breken, en functies kunnen zonder waarschuwing veranderen.</string>
     <string name="expert_mode_prerelease_notice">Deze bron heeft pre-release patches. Patchen kan falen of onverwacht gedrag vertonen.</string>
     <string name="sources_management_experimental_versions_toggle">Experimentele app-versies</string>
-    <string name="sources_management_experimental_versions_toggle_description">Patches experimentele app targets indien beschikbaar</string>
+    <string name="sources_management_experimental_versions_toggle_description">Toont en patcht experimentele app-targets</string>
     <string name="sources_management_already_exists">Deze bron is al toegevoegd</string>
     <string name="sources_management_invalid_url">Ongeldige bron-URL. Controleer het adres en probeer het opnieuw</string>
     <string name="sources_management_blocked">Deze patchbron is geblokkeerd en kan niet worden toegevoegd</string>
@@ -457,7 +457,23 @@ Buitenste zone (gestippeld): kan worden afgesneden door het launcher-masker - ho
     <string name="patcher_error_copied">Fout gekopieerd naar klembord</string>
     <string name="patcher_error_log">Foutlogboek</string>
     <string name="patcher_error_technical">Technische details</string>
-    <string name="patcher_error_dialog_app_info">App-info</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_split">Gesplitste APK</string>
+    <string name="patcher_field_manager">Beheerder</string>
+    <string name="patcher_field_patcher">Patcher</string>
+    <string name="patcher_field_runtime">Runtime</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Bibliotheken</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Apparaat</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Geheugen</string>
+    <string name="patcher_field_storage">Opslag</string>
+    <string name="patcher_field_value_unknown">onbekend</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">verwijderd</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">behouden</string>
     <string name="patcher_tab_logs">Patchlogboeken</string>
     <string name="patcher_tab_game">Spellen</string>
     <string name="patcher_logs_waiting">Wacht op logboekuitvoer…</string>
@@ -468,7 +484,7 @@ Buitenste zone (gestippeld): kan worden afgesneden door het launcher-masker - ho
     <string name="patcher_success_subtitle">Je app is gepatcht en geïnstalleerd!</string>
     <string name="patcher_complete_title">Patchen voltooid! ✨</string>
     <string name="patcher_failed_title">Oeps! Er ging iets mis</string>
-    <string name="patcher_failed_subtitle">Controleer de onderstaande foutdetails</string>
+    <string name="patcher_failed_hint">Tik op %s om te zien wat er misging</string>
     <string name="patcher_failed_dialog_title">Patchen mislukt</string>
     <string name="patcher_unknown_error">Onbekende fout opgetreden</string>
     <string name="patcher_split_step_extracting">Het uitpakken van split APKs</string>
@@ -1174,6 +1190,9 @@ Details: %2$s"</string>
     <string name="importing_ellipsis">Importeren…</string>
     <string name="imported_successfully">Geïmporteerd succesvol</string>
     <string name="changelog">Wijzigingslogboeken bekijken</string>
+    <string name="changelog_for_app">Wijzigingen voor %s</string>
+    <string name="changelog_general_changes">Algemene wijzigingen</string>
+    <string name="whats_new">Wat is er nieuw</string>
     <string name="changelog_description">Bekijk de laatste wijzigingen in deze update</string>
     <string name="changelog_download_fail">Fout bij het downloaden van de wijzigingslogboek: %s</string>
     <string name="changelog_empty">Geen changelog beschikbaar</string>
@@ -1186,14 +1205,13 @@ Details: %2$s"</string>
     <string name="install_update_manager_failed">Fout bij het installeren van update</string>
     <string name="installing_manager_update">Update installeren…</string>
     <string name="downloading_manager_update">Update downloaden…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB gedownload</string>
     <string name="manager_update_not_ready">Deze release wordt nog gepubliceerd. Probeer het over enkele minuten opnieuw</string>
     <string name="update_download_missing">De gedownloade update is niet meer beschikbaar. Download deze opnieuw.</string>
     <string name="download_manager_failed">Downloaden van update mislukt: %s</string>
     <string name="failed_to_check_updates">Controleren op updates mislukt: %s</string>
     <string name="failed_to_download_update">Download van update mislukt: %s</string>
-    <string name="resume_download">Download hervatten</string>
     <string name="download_confirmation_metered">"U maakt momenteel gebruik van een datalimietverbinding en er kunnen kosten van uw serviceprovider van toepassing zijn.
 
 Wilt u toch doorgaan?"</string>

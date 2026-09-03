@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">Các bản dựng trước khi phát hành vẫn đang trong quá trình phát triển. Các bản vá có thể thất bại hoặc làm hỏng ứng dụng, và các tính năng có thể thay đổi mà không có cảnh báo</string>
     <string name="expert_mode_prerelease_notice">Nguồn này đang sử dụng các bản vá trước khi phát hành. Việc vá có thể thất bại hoặc hoạt động không như mong đợi</string>
     <string name="sources_management_experimental_versions_toggle">Phiên bản ứng dụng thử nghiệm</string>
-    <string name="sources_management_experimental_versions_toggle_description">Vá phiên bản thử nghiệm (nếu có)</string>
+    <string name="sources_management_experimental_versions_toggle_description">Hiển thị và vá các mục tiêu ứng dụng thử nghiệm</string>
     <string name="sources_management_already_exists">Nguồn này đã được thêm vào rồi</string>
     <string name="sources_management_invalid_url">URL nguồn không hợp lệ. Vui lòng kiểm tra địa chỉ và thử lại</string>
     <string name="sources_management_blocked">Không thể thêm nguồn vá này vì nó bị chặn</string>
@@ -459,7 +459,27 @@ Nếu không, APK đã vá và được gắn có thể sẽ không hoạt độ
     <string name="patcher_error_copied">Đã sao chép lỗi vào bảng nhớ tạm</string>
     <string name="patcher_error_log">Nhật ký lỗi</string>
     <string name="patcher_error_technical">Chi tiết kỹ thuật</string>
-    <string name="patcher_error_dialog_app_info">Thông tin ứng dụng</string>
+    <string name="patcher_error_dialog_diagnostics">Chẩn đoán</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">Ứng dụng</string>
+    <string name="patcher_field_package">Gói</string>
+    <string name="patcher_field_source">Nguồn</string>
+    <string name="patcher_field_split">Tách APK</string>
+    <string name="patcher_field_manager">Trình quản lý</string>
+    <string name="patcher_field_patcher">Trình vá</string>
+    <string name="patcher_field_runtime">Thời gian chạy</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Thư viện</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Thiết bị</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Bộ nhớ</string>
+    <string name="patcher_field_storage">Bộ nhớ</string>
+    <string name="patcher_field_value_unknown">không xác định</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">đã loại bỏ</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">giữ lại</string>
     <string name="patcher_tab_logs">Nhật ký trình vá</string>
     <string name="patcher_tab_game">Trò chơi</string>
     <string name="patcher_logs_waiting">Đang chờ đầu ra nhật ký…</string>
@@ -470,7 +490,7 @@ Nếu không, APK đã vá và được gắn có thể sẽ không hoạt độ
     <string name="patcher_success_subtitle">Đã vá và cài đặt ứng dụng thành công!</string>
     <string name="patcher_complete_title">Tèn ten! ✨</string>
     <string name="patcher_failed_title">Ui, có lỗi xảy ra rồi!</string>
-    <string name="patcher_failed_subtitle">Xem chi tiết lỗi bên dưới</string>
+    <string name="patcher_failed_hint">Chạm vào %s để xem điều gì đã sai</string>
     <string name="patcher_failed_dialog_title">Không thể vá</string>
     <string name="patcher_unknown_error">Đã xảy ra lỗi không xác định</string>
     <string name="patcher_split_step_extracting">Đang giải nén các APK chia nhỏ</string>
@@ -1179,6 +1199,9 @@ Chi tiết: %2$s"</string>
     <string name="importing_ellipsis">Đang nhập…</string>
     <string name="imported_successfully">Đã nhập thành công</string>
     <string name="changelog">Lịch sử cập nhật</string>
+    <string name="changelog_for_app">Thay đổi cho %s</string>
+    <string name="changelog_general_changes">Các thay đổi chung</string>
+    <string name="whats_new">Có gì mới</string>
     <string name="changelog_description">Xem những thay đổi mới nhất trong bản cập nhật này</string>
     <string name="changelog_download_fail">Không thể tải lịch sử cập nhật: %s</string>
     <string name="changelog_empty">Không có lịch sử cập nhật</string>
@@ -1191,14 +1214,13 @@ Chi tiết: %2$s"</string>
     <string name="install_update_manager_failed">Không thể cài đặt bản cập nhật</string>
     <string name="installing_manager_update">Đang cài đặt bản cập nhật…</string>
     <string name="downloading_manager_update">Đang tải bản cập nhật…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB đã tải xuống</string>
     <string name="manager_update_not_ready">Bản phát hành này vẫn đang được đăng tải. Vui lòng thử lại sau vài phút</string>
     <string name="update_download_missing">Bản cập nhật đã tải không còn khả dụng. Hãy tải lại</string>
     <string name="download_manager_failed">Không thể tải bản cập nhật: %s</string>
     <string name="failed_to_check_updates">Không thể kiểm tra cập nhật: %s</string>
     <string name="failed_to_download_update">Không tải được bản cập nhật: %s</string>
-    <string name="resume_download">Tiếp tục tải</string>
     <string name="download_confirmation_metered">"Bạn đang dùng 4G/5G, tiếp tục có thể phát sinh cước dữ liệu.\n\nBạn vẫn muốn tiếp tục?"</string>
     <string name="download_update_confirmation">Tải bản cập nhật?</string>
     <!-- Onboarding coach marks -->

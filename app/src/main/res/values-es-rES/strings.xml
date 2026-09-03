@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">Las compilaciones pre-lanzamiento aún están en desarrollo. Los parches pueden fallar o romper la aplicación, y las funciones pueden cambiar sin previo aviso</string>
     <string name="expert_mode_prerelease_notice">Esta fuente utiliza parches pre-lanzamiento. El parcheo puede fallar o comportarse de forma inesperada</string>
     <string name="sources_management_experimental_versions_toggle">Versiones experimentales de la aplicación</string>
-    <string name="sources_management_experimental_versions_toggle_description">Parchea las versiones experimentales de la aplicación, si están disponibles</string>
+    <string name="sources_management_experimental_versions_toggle_description">Muestra y parchea versiones experimentales de la aplicación</string>
     <string name="sources_management_already_exists">Esta fuente ya ha sido añadida</string>
     <string name="sources_management_invalid_url">La URL de la fuente no es válida. Comprueba la dirección e inténtalo de nuevo</string>
     <string name="sources_management_blocked">Esta fuente de parches está bloqueada y no se puede agregar</string>
@@ -457,7 +457,27 @@ Zona exterior (discontinua): puede quedar recortada por la máscara del launcher
     <string name="patcher_error_copied">Error copiado al portapapeles</string>
     <string name="patcher_error_log">Registro de errores</string>
     <string name="patcher_error_technical">Detalles técnicos</string>
-    <string name="patcher_error_dialog_app_info">Información de la aplicación</string>
+    <string name="patcher_error_dialog_diagnostics">Diagnósticos</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">Aplicación</string>
+    <string name="patcher_field_package">Paquete</string>
+    <string name="patcher_field_source">Fuente</string>
+    <string name="patcher_field_split">APK dividido</string>
+    <string name="patcher_field_manager">Gestor</string>
+    <string name="patcher_field_patcher">Parcheador</string>
+    <string name="patcher_field_runtime">Tiempo de ejecución</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Librerías</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Dispositivo</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Memoria</string>
+    <string name="patcher_field_storage">Almacenamiento</string>
+    <string name="patcher_field_value_unknown">desconocido</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">desmontadas</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">conservadas</string>
     <string name="patcher_tab_logs">Registro del parcheador</string>
     <string name="patcher_tab_game">Juegos</string>
     <string name="patcher_logs_waiting">Esperando la salida del registro...</string>
@@ -468,7 +488,7 @@ Zona exterior (discontinua): puede quedar recortada por la máscara del launcher
     <string name="patcher_success_subtitle">¡Tu aplicación está parcheada e instalada!</string>
     <string name="patcher_complete_title">¡Parcheo completado! ✨</string>
     <string name="patcher_failed_title">¡Ups! Algo salió mal</string>
-    <string name="patcher_failed_subtitle">Consulta los detalles del error a continuación</string>
+    <string name="patcher_failed_hint">Pulsa %s para ver qué ha fallado</string>
     <string name="patcher_failed_dialog_title">Error al aplicar el parche</string>
     <string name="patcher_unknown_error">Ocurrió un error desconocido</string>
     <string name="patcher_split_step_extracting">Extrayendo APKs divididos</string>
@@ -1174,6 +1194,9 @@ Detalles: %2$s"</string>
     <string name="importing_ellipsis">Importando…</string>
     <string name="imported_successfully">Importados correctamente</string>
     <string name="changelog">Ver registros de cambios</string>
+    <string name="changelog_for_app">Cambios para %s</string>
+    <string name="changelog_general_changes">Cambios generales</string>
+    <string name="whats_new">Novedades</string>
     <string name="changelog_description">Revisa los últimos cambios en esta actualización</string>
     <string name="changelog_download_fail">Error al descargar el registro de cambios: %s</string>
     <string name="changelog_empty">No hay registro de cambios disponible</string>
@@ -1186,14 +1209,13 @@ Detalles: %2$s"</string>
     <string name="install_update_manager_failed">Error al instalar la actualización</string>
     <string name="installing_manager_update">Instalando actualización…</string>
     <string name="downloading_manager_update">Descargando actualización…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB descargados</string>
     <string name="manager_update_not_ready">Esta versión aún se está publicando. Vuelve a intentarlo en unos minutos</string>
     <string name="update_download_missing">La actualización descargada ya no está disponible. Descárgala de nuevo</string>
     <string name="download_manager_failed">Error al descargar la actualización: %s</string>
     <string name="failed_to_check_updates">Error al buscar actualizaciones: %s</string>
     <string name="failed_to_download_update">Error al descargar la actualización: %s</string>
-    <string name="resume_download">Reanudar descarga</string>
     <string name="download_confirmation_metered">"Actualmente estás en una conexión de uso medido y podrían aplicarse cargos por datos de tu proveedor de servicios.
 
 ¿Deseas continuar de todos modos?"</string>

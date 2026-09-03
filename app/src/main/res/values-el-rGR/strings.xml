@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">Οι εκδόσεις προ-έκδοσης είναι ακόμη υπό ανάπτυξη. Οι επιδιορθώσεις ενδέχεται να αποτύχουν ή να χαλάσουν την εφαρμογή, και οι λειτουργίες μπορεί να αλλάξουν χωρίς προειδοποίηση</string>
     <string name="expert_mode_prerelease_notice">Αυτή η πηγή είναι σε επιδιορθώσεις προ-έκδοσης. Η επιδιόρθωση μπορεί να αποτύχει ή να συμπεριφερθεί απροσδόκητα</string>
     <string name="sources_management_experimental_versions_toggle">Πειραματικές εκδόσεις εφαρμογών</string>
-    <string name="sources_management_experimental_versions_toggle_description">Τροποποιήστε πειραματικές εκδόσεις εφαρμογών εάν υπάρχουν</string>
+    <string name="sources_management_experimental_versions_toggle_description">Εμφανίζει και επιδιορθώνει πειραματικούς στόχους εφαρμογής</string>
     <string name="sources_management_already_exists">Αυτή η πηγή έχει ήδη προστεθεί</string>
     <string name="sources_management_invalid_url">Μη έγκυρη διεύθυνση URL πηγής. Παρακαλώ ελέγξτε τη διεύθυνση και προσπαθήστε ξανά</string>
     <string name="sources_management_blocked">Η πηγή ενημερώσεων είναι αποκλεισμένη και δεν μπορεί να προστεθεί</string>
@@ -457,7 +457,27 @@
     <string name="patcher_error_copied">Το σφάλμα αντιγράφηκε στο πρόχειρο</string>
     <string name="patcher_error_log">Αρχείο καταγραφής σφαλμάτων</string>
     <string name="patcher_error_technical">Τεχνικές λεπτομέρειες</string>
-    <string name="patcher_error_dialog_app_info">Πληροφορίες εφαρμογής</string>
+    <string name="patcher_error_dialog_diagnostics">Διαγνωστικά</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">Εφαρμογή</string>
+    <string name="patcher_field_package">Πακέτο</string>
+    <string name="patcher_field_source">Πηγή</string>
+    <string name="patcher_field_split">Διαχωρισμένο APK</string>
+    <string name="patcher_field_manager">Διαχειριστής</string>
+    <string name="patcher_field_patcher">Επιδιορθωτής</string>
+    <string name="patcher_field_runtime">Χρόνος εκτέλεσης</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Βιβλιοθήκες</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Συσκευή</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Μνήμη</string>
+    <string name="patcher_field_storage">Αποθήκευση</string>
+    <string name="patcher_field_value_unknown">άγνωστο</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">αφαιρέθηκαν</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">διατηρήθηκαν</string>
     <string name="patcher_tab_logs">Καταγραφές Patcher</string>
     <string name="patcher_tab_game">Παιχνίδια</string>
     <string name="patcher_logs_waiting">Αναμονή για έξοδο καταγραφής…</string>
@@ -468,7 +488,7 @@
     <string name="patcher_success_subtitle">Η εφαρμογή σας έχει τροποποιηθεί και εγκατασταθεί!</string>
     <string name="patcher_complete_title">Η τροποποίηση ολοκληρώθηκε! ✨</string>
     <string name="patcher_failed_title">Ωχ! Κάτι πήγε στραβά</string>
-    <string name="patcher_failed_subtitle">Ελέγξτε τις λεπτομέρειες του σφάλματος παρακάτω</string>
+    <string name="patcher_failed_hint">Πατήστε %s για να δείτε τι πήγε στραβά</string>
     <string name="patcher_failed_dialog_title">Απέτυχε η τροποποίηση</string>
     <string name="patcher_unknown_error">Παρουσιάστηκε άγνωστο σφάλμα</string>
     <string name="patcher_split_step_extracting">Εξαγωγή διαχωρισμένων APK</string>
@@ -1175,6 +1195,9 @@ morphe_header_custom_dark.png
     <string name="importing_ellipsis">Εισαγωγή…</string>
     <string name="imported_successfully">Εισαγωγές επιτυχώς</string>
     <string name="changelog">Προβολή αρχείων καταγραφής αλλαγών</string>
+    <string name="changelog_for_app">Αλλαγές για %s</string>
+    <string name="changelog_general_changes">Γενικές αλλαγές</string>
+    <string name="whats_new">Τι νέο</string>
     <string name="changelog_description">Έλεγξε τις τελευταίες αλλαγές σε αυτή την ενημέρωση</string>
     <string name="changelog_download_fail">Αποτυχία λήψης αρχείου καταγραφής αλλαγών: %s</string>
     <string name="changelog_empty">Δεν υπάρχει διαθέσιμο αρχείο καταγραφών αλλαγών </string>
@@ -1187,14 +1210,13 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">Η εγκατάσταση της ενημέρωσης απέτυχε</string>
     <string name="installing_manager_update">Εγκατάσταση ενημέρωσης…</string>
     <string name="downloading_manager_update">Λήψη ενημέρωσης…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB κατεβάζονται</string>
     <string name="manager_update_not_ready">Αυτή η έκδοση δημοσιεύεται ακόμα. Επαναλάβετε σε λίγα λεπτά</string>
     <string name="update_download_missing">Η ληφθείσα ενημέρωση δεν είναι πλέον διαθέσιμη. Κατεβάστε την ξανά</string>
     <string name="download_manager_failed">Αποτυχία λήψης ενημέρωσης: %s</string>
     <string name="failed_to_check_updates">Ο έλεγχος για ενημερώσεις απέτυχε: %s</string>
     <string name="failed_to_download_update">Η λήψη ενημέρωσης απέτυχε: %s</string>
-    <string name="resume_download">Συνέχιση λήψης</string>
     <string name="download_confirmation_metered">"Είστε συνδεδεμένοι σε σύνδεση με ογκοχρέωση και ενδέχεται να ισχύουν χρεώσεις δεδομένων από τον πάροχο υπηρεσιών σας.
 
 Θέλετε ακόμα να συνεχίσετε;"</string>

@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">Præ-release-versioner er stadig under udvikling. Patcher kan mislykkes eller ødelægge appen, og funktioner kan ændres uden advarsel</string>
     <string name="expert_mode_prerelease_notice">Denne kilde er på præ-release-patcher. Patchning kan mislykkes eller opføre sig uventet</string>
     <string name="sources_management_experimental_versions_toggle">Eksperimentelle app-versioner</string>
-    <string name="sources_management_experimental_versions_toggle_description">Patch eksperimentelle app-targets, hvis de er tilgængelige</string>
+    <string name="sources_management_experimental_versions_toggle_description">Viser og retter eksperimentelle app-mål</string>
     <string name="sources_management_already_exists">Denne kilde er allerede tilføjet</string>
     <string name="sources_management_invalid_url">Ugyldig kilde-URL. Kontroller venligst adressen og prøv igen</string>
     <string name="sources_management_blocked">Denne patchkilde er blokeret og kan ikke tilføjes</string>
@@ -457,7 +457,27 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="patcher_error_copied">Fejl kopieret til udklipsholder</string>
     <string name="patcher_error_log">Fejllog</string>
     <string name="patcher_error_technical">Tekniske oplysninger</string>
-    <string name="patcher_error_dialog_app_info">App-oplysninger</string>
+    <string name="patcher_error_dialog_diagnostics">Diagnostik</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">App</string>
+    <string name="patcher_field_package">Pakke</string>
+    <string name="patcher_field_source">Kilde</string>
+    <string name="patcher_field_split">Opdelt APK</string>
+    <string name="patcher_field_manager">Manager</string>
+    <string name="patcher_field_patcher">Patcher</string>
+    <string name="patcher_field_runtime">Runtime</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Biblioteker</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Enhed</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Hukommelse</string>
+    <string name="patcher_field_storage">Lagring</string>
+    <string name="patcher_field_value_unknown">ukendt</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">strippet</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">beholdt</string>
     <string name="patcher_tab_logs">Patch-logfiler</string>
     <string name="patcher_tab_game">Spil</string>
     <string name="patcher_logs_waiting">Vent på log output…</string>
@@ -468,7 +488,7 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="patcher_success_subtitle">Din app er patchet og installeret!</string>
     <string name="patcher_complete_title">Patch fuldført! ✨</string>
     <string name="patcher_failed_title">Ups! Noget gik galt</string>
-    <string name="patcher_failed_subtitle">Se fejldetaljerne nedenfor</string>
+    <string name="patcher_failed_hint">Tryk på %s for at se, hvad der gik galt</string>
     <string name="patcher_failed_dialog_title">Patch mislykkedes</string>
     <string name="patcher_unknown_error">Ukendt fejl opstod</string>
     <string name="patcher_split_step_extracting">Udpakker split-APK\'er</string>
@@ -1172,6 +1192,9 @@ Detaljer: %2$s"</string>
     <string name="importing_ellipsis">Importerer…</string>
     <string name="imported_successfully">Importeret med succes</string>
     <string name="changelog">Se ændringslogge</string>
+    <string name="changelog_for_app">Ændringer for %s</string>
+    <string name="changelog_general_changes">Generelle ændringer</string>
+    <string name="whats_new">Hvad er nyt</string>
     <string name="changelog_description">Se de seneste ændringer i denne opdatering</string>
     <string name="changelog_download_fail">Kunne ikke downloade ændringslog: %s</string>
     <string name="changelog_empty">Ingen ændringslog tilgængelig</string>
@@ -1184,14 +1207,13 @@ Detaljer: %2$s"</string>
     <string name="install_update_manager_failed">Kunne ikke installere opdatering</string>
     <string name="installing_manager_update">Installerer opdatering…</string>
     <string name="downloading_manager_update">Downloader opdatering…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB downloadet</string>
     <string name="manager_update_not_ready">Denne udgivelse er stadig ved at blive publiceret. Prøv igen om et par minutter</string>
     <string name="update_download_missing">Den downloadede opdatering er ikke længere tilgængelig. Download den igen</string>
     <string name="download_manager_failed">Kunne ikke downloade opdatering: %s</string>
     <string name="failed_to_check_updates">Kunne ikke søge efter opdateringer: %s</string>
     <string name="failed_to_download_update">Kunne ikke downloade opdatering: %s</string>
-    <string name="resume_download">Genoptag download</string>
     <string name="download_confirmation_metered">"Du er i øjeblikket på en begrænset forbindelse, og der kan opkræves datagebyrer fra din udbyder.
 
 Vil du stadig fortsætte?"</string>

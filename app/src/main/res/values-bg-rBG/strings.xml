@@ -137,7 +137,7 @@
     <string name="sources_prerelease_warning_message">Предварителните версии все още са в разработка. Пачовете може да се провалят или да счупят приложението, а функциите може да се променят без предупреждение.</string>
     <string name="expert_mode_prerelease_notice">Този източник е на предварителни пачове. Пачването може да се провали или да се държи неочаквано.</string>
     <string name="sources_management_experimental_versions_toggle">Експериментални версии на приложението</string>
-    <string name="sources_management_experimental_versions_toggle_description">Пачове експериментални цели на приложението, ако са налични</string>
+    <string name="sources_management_experimental_versions_toggle_description">Показва и поправя експериментални цели на приложението</string>
     <string name="sources_management_already_exists">Този източник вече е добавен</string>
     <string name="sources_management_invalid_url">Невалиден URL адрес на източника. Моля, проверете адреса и опитайте отново</string>
     <string name="sources_management_blocked">Този източник на корекции е блокиран и не може да бъде добавен</string>
@@ -457,7 +457,22 @@
     <string name="patcher_error_copied">Грешка е копирана в клипборда</string>
     <string name="patcher_error_log">Дневник на грешки</string>
     <string name="patcher_error_technical">Технически детайли</string>
-    <string name="patcher_error_dialog_app_info">Информация за приложението</string>
+    <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_split">Разделяне на APK</string>
+    <string name="patcher_field_manager">Мениджър</string>
+    <string name="patcher_field_patcher">Пачър</string>
+    <string name="patcher_field_runtime">Среда за изпълнение</string>
+    <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Устройство</string>
+    <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Памет</string>
+    <string name="patcher_field_storage">Съхранение</string>
+    <string name="patcher_field_value_unknown">неизвестен</string>
+    <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">премахнати</string>
+    <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">запазени</string>
     <string name="patcher_tab_logs">Дневници на пакетора</string>
     <string name="patcher_tab_game">Игри</string>
     <string name="patcher_logs_waiting">Изчаквам изход от логовете…</string>
@@ -468,7 +483,7 @@
     <string name="patcher_success_subtitle">Вашата приложение е патчена и инсталирана!</string>
     <string name="patcher_complete_title">Пачването завърши! ✨</string>
     <string name="patcher_failed_title">Опа! Нещо се обърка</string>
-    <string name="patcher_failed_subtitle">Прегледайте детайлите на грешката по-долу</string>
+    <string name="patcher_failed_hint">Докоснете %s, за да видите какво се обърка</string>
     <string name="patcher_failed_dialog_title">Пачването не успя</string>
     <string name="patcher_unknown_error">Грешка: Неизвестна грешка</string>
     <string name="patcher_split_step_extracting">Извличане на разделени APK файлове</string>
@@ -1174,6 +1189,9 @@ morphe_header_custom_dark.png
     <string name="importing_ellipsis">Импортиране…</string>
     <string name="imported_successfully">Успешно импортирано</string>
     <string name="changelog">Вижте дневниците на промените</string>
+    <string name="changelog_for_app">Промени за %s</string>
+    <string name="changelog_general_changes">Общи промени</string>
+    <string name="whats_new">Какво ново</string>
     <string name="changelog_description">Погледете последното обновяване</string>
     <string name="changelog_download_fail">Неуспешно сваляне на дневника на промените: %s</string>
     <string name="changelog_empty">Няма налични промени</string>
@@ -1186,14 +1204,13 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">Неуспешно инсталиране на актуализиране</string>
     <string name="installing_manager_update">Инсталиране на актуализиране…</string>
     <string name="downloading_manager_update">Сваляне на актуализиране…</string>
-    <!-- Shown while resuming a download, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known -->
     <string name="manager_update_progress_downloaded">%1$.1f MB изтеглени</string>
     <string name="manager_update_not_ready">Този релиз все още се публикува. Опитайте отново след няколко минути</string>
     <string name="update_download_missing">Изтеглената актуализация вече не е налична. Изтеглете я отново.</string>
     <string name="download_manager_failed">Неуспешно сваляне на актуализиране: %s</string>
     <string name="failed_to_check_updates">Неуспешна проверка за обновления: %s</string>
     <string name="failed_to_download_update">Неуспешно сваляне на обновление: %s</string>
-    <string name="resume_download">Продължи сваляне</string>
     <string name="download_confirmation_metered">"В момента сте свързани с ограничена връзка и такси за данни от доставчика ви може да се начислят.
 
 Искате ли да продължите още?"</string>
