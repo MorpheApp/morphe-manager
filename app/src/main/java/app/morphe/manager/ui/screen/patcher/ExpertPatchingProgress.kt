@@ -49,15 +49,20 @@ import app.morphe.manager.patcher.runtime.process.PatcherProcess.Companion.LOG_P
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_PROCESS_PREFIX_COROUTINE_HEAP
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_ANDROID
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_API
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_DEVICE
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_ELAPSED
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_MANAGER
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_MEMORY_LIMIT
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_MODEL
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_NAME
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_NATIVE_LIBS
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_PACKAGE
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_PATCHER
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_PATCHES
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_RAM_AVAIL
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_RAM_TOTAL
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_SIZE
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_SPLIT
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_STORAGE_AVAIL
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_STORAGE_TOTAL
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_VERSION
@@ -65,6 +70,7 @@ import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREF
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_DEVICE
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_RUNTIME
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_SOURCE
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_STARTED
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_SUCCEEDED
 import app.morphe.manager.ui.model.PatchProgressSource
 import app.morphe.manager.ui.model.State
@@ -72,6 +78,7 @@ import app.morphe.manager.ui.screen.patcher.game.MiniGameContent
 import app.morphe.manager.ui.screen.patcher.game.MiniGameState
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.screen.shared.Animations
+import app.morphe.manager.util.formatBytes
 import app.morphe.manager.util.isRtl
 import app.morphe.manager.util.startToEndGradient
 import kotlinx.coroutines.delay
@@ -96,7 +103,7 @@ sealed interface LogItem {
         val managerVersion: String?,
         val patcherVersion: String?,
         val stripsNativeLibs: Boolean?,
-        val apkSizeMb: String,
+        val apkSize: String,
         val patchCount: Int,
         val isSplit: Boolean,
         // null when using CoroutineRuntime
@@ -116,7 +123,7 @@ sealed interface LogItem {
      * Aggregates data from "Patching succeeded: …" and "Process heap after patching: …" log lines.
      */
     data class SuccessSummary(
-        val outputSizeMb: String,
+        val outputSize: String,
         val elapsedSec: String,
         // null when using CoroutineRuntime (no separate process)
         val processHeapAverageMb: String?,
@@ -128,6 +135,10 @@ sealed interface LogItem {
     /** Standard single-line log entry. */
     data class Entry(val level: LogLevel, val message: String) : LogItem
 }
+
+/** Reads a byte count out of a log line, formatted the way the rest of the app shows sizes. */
+private fun String.logBytes(field: String): String =
+    formatBytes(logField(field)?.toLongOrNull() ?: 0L)
 
 private fun formatElapsed(ms: Long?): String {
     if (ms == null || ms < 0) return "?"
@@ -214,23 +225,21 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
         when {
             skipPrefixes.any { message.startsWith(it) } -> { /* consumed above */ }
 
-            message.startsWith("Patching started at ") -> {
-                val pkg = message.logField("pkg")
-                deviceManufacturer = message.logField("device")
-                deviceModel = message.logField("model")
+            message.startsWith(LOG_WORKER_PREFIX_STARTED) -> {
+                val pkg = message.logField(LOG_WORKER_FIELD_PACKAGE)
+                deviceManufacturer = message.logField(LOG_WORKER_FIELD_DEVICE)
+                deviceModel = message.logField(LOG_WORKER_FIELD_MODEL)
                 if (pkg != null) {
                     result += LogItem.StartBanner(
                         packageName = pkg,
-                        version = message.logField("version") ?: "?",
+                        version = message.logField(LOG_WORKER_FIELD_VERSION) ?: "?",
                         sources = sources,
                         managerVersion = managerVersion,
                         patcherVersion = patcherVersion,
                         stripsNativeLibs = stripsNativeLibs,
-                        apkSizeMb = "%.1f MB".format(
-                            (message.logField("size")?.toLongOrNull() ?: 0L) / 1_048_576.0
-                        ),
-                        patchCount = message.logField("patches")?.toIntOrNull() ?: 0,
-                        isSplit = message.logField("split") == "true",
+                        apkSize = message.logBytes(LOG_WORKER_FIELD_SIZE),
+                        patchCount = message.logField(LOG_WORKER_FIELD_PATCHES)?.toIntOrNull() ?: 0,
+                        isSplit = message.logField(LOG_WORKER_FIELD_SPLIT) == "true",
                         runtimeMemoryLimitMb = runtimeMemoryLimitMb,
                         androidVersion = androidVersion,
                         ramAvailable = ramAvailable,
@@ -247,9 +256,7 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
 
             message.startsWith(LOG_WORKER_PREFIX_SUCCEEDED) -> {
                 result += LogItem.SuccessSummary(
-                    outputSizeMb = "%.1f MB".format(
-                        (message.logField(LOG_WORKER_FIELD_SIZE)?.toLongOrNull() ?: 0L) / 1_048_576.0
-                    ),
+                    outputSize = message.logBytes(LOG_WORKER_FIELD_SIZE),
                     elapsedSec = formatElapsed(
                         message.logField(LOG_WORKER_FIELD_ELAPSED)?.filter { it.isDigit() }?.toLongOrNull()
                     ),
@@ -305,13 +312,57 @@ fun ExpertPatchingInProgress(
         }
     }
 
+    val landscape = isLandscape()
+
+    // The same bar in both orientations: only where it hangs and its padding differ, so it is
+    // written once rather than kept in step across two branches
+    val actionBar: @Composable (Dp) -> Unit = { horizontalPadding ->
+        PatcherBottomActionBar(
+            horizontalPadding = horizontalPadding,
+            showCancelButton = patcherSucceeded == null,
+            showHomeButton = patcherSucceeded == true,
+            showInstallButton = patcherSucceeded == true,
+            showSaveButton = false,
+            showErrorButton = false,
+            showCopyLogsButton = true,
+            onCancelClick = onCancelClick,
+            onHomeClick = onHomeClick,
+            onInstallClick = onInstallClick,
+            onSaveClick = {},
+            onErrorClick = {},
+            onCopyLogsClick = {
+                clipboardManager.setText(AnnotatedString(buildLogsText()))
+            }
+        )
+    }
+
+    // Header and log panel carry the same data either way, side by side or stacked
+    val header: @Composable () -> Unit = {
+        ExpertProgressHeader(
+            progress = progress,
+            completed = completed,
+            total = total,
+            patchProgress = patchProgress,
+            patcherSucceeded = patcherSucceeded
+        )
+    }
+    val logPanel: @Composable (Modifier) -> Unit = { panelModifier ->
+        ExpertLogPanel(
+            patchProgress = patchProgress,
+            listState = listState,
+            patcherSucceeded = patcherSucceeded,
+            miniGameState = miniGameState,
+            modifier = panelModifier
+        )
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .navigationBarsPadding()
     ) {
         // Content area
-        if (isLandscape()) {
+        if (landscape) {
             // Landscape: header + action bar left, log right
             Row(
                 modifier = Modifier
@@ -336,44 +387,18 @@ fun ExpertPatchingInProgress(
                     ) {
                         queueHeader?.invoke()
 
-                        ExpertProgressHeader(
-                            progress = progress,
-                            completed = completed,
-                            total = total,
-                            patchProgress = patchProgress,
-                            patcherSucceeded = patcherSucceeded
-                        )
+                        header()
 
                         Spacer(Modifier.height(12.dp))
                     }
 
                     // Action bar inside left column
-                    PatcherBottomActionBar(
-                        horizontalPadding = 0.dp,
-                        showCancelButton = patcherSucceeded == null,
-                        showHomeButton = patcherSucceeded == true,
-                        showInstallButton = patcherSucceeded == true,
-                        showSaveButton = false,
-                        showErrorButton = false,
-                        showCopyLogsButton = true,
-                        onCancelClick = onCancelClick,
-                        onHomeClick = onHomeClick,
-                        onInstallClick = onInstallClick,
-                        onSaveClick = {},
-                        onErrorClick = {},
-                        onCopyLogsClick = {
-                            clipboardManager.setText(AnnotatedString(buildLogsText()))
-                        }
-                    )
+                    actionBar(0.dp)
                 }
 
                 // Right column: log panel
-                ExpertLogPanel(
-                    patchProgress = patchProgress,
-                    listState = listState,
-                    patcherSucceeded = patcherSucceeded,
-                    miniGameState = miniGameState,
-                    modifier = Modifier
+                logPanel(
+                    Modifier
                         .weight(0.58f)
                         .fillMaxHeight()
                 )
@@ -392,20 +417,10 @@ fun ExpertPatchingInProgress(
             ) {
                 queueHeader?.invoke()
 
-                ExpertProgressHeader(
-                    progress = progress,
-                    completed = completed,
-                    total = total,
-                    patchProgress = patchProgress,
-                    patcherSucceeded = patcherSucceeded
-                )
+                header()
 
-                ExpertLogPanel(
-                    patchProgress = patchProgress,
-                    listState = listState,
-                    patcherSucceeded = patcherSucceeded,
-                    miniGameState = miniGameState,
-                    modifier = Modifier
+                logPanel(
+                    Modifier
                         .weight(1f)
                         .fillMaxWidth()
                 )
@@ -413,25 +428,10 @@ fun ExpertPatchingInProgress(
         }
 
         // Portrait-only: action bar below content
-        if (!isLandscape()) {
+        if (!landscape) {
             Spacer(Modifier.height(12.dp))
 
-            PatcherBottomActionBar(
-                showCancelButton = patcherSucceeded == null,
-                showHomeButton = patcherSucceeded == true,
-                showInstallButton = patcherSucceeded == true,
-                showSaveButton = false,
-                showErrorButton = false,
-                showCopyLogsButton = true,
-                onCancelClick = onCancelClick,
-                onHomeClick = onHomeClick,
-                onInstallClick = onInstallClick,
-                onSaveClick = {},
-                onErrorClick = {},
-                onCopyLogsClick = {
-                    clipboardManager.setText(AnnotatedString(buildLogsText()))
-                }
-            )
+            actionBar(Defaults.ContentPadding)
         }
     }
 }
@@ -478,7 +478,7 @@ private fun ExpertProgressHeader(
             )
 
             StatusBadge(
-                text = "${(progress * 100).toInt()}%",
+                text = stringResource(R.string.patcher_percentage, (progress * 100).toInt()),
                 tone = SemanticTone.Primary
             )
         }
@@ -511,7 +511,7 @@ private fun ExpertProgressHeader(
             if (total > 0) {
                 // A finished run wears the same teal the success card and the progress bar end on
                 StatusBadge(
-                    text = "$completed / $total",
+                    text = stringResource(R.string.patcher_patches_progress_format, completed, total),
                     containerColor = if (patcherSucceeded == true) {
                         PatcherProgressTealColor.copy(alpha = 0.18f)
                     } else {
@@ -833,24 +833,18 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
             modifier = Modifier.weight(1f)
         )
 
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
+        BannerFieldRow {
             BannerFieldCell(
                 label = stringResource(R.string.version),
                 value = item.version,
                 modifier = Modifier.weight(1f))
             BannerFieldCell(
                 label = stringResource(R.string.home_app_info_apk_size),
-                value = item.apkSizeMb,
+                value = item.apkSize,
                 modifier = Modifier.weight(1f))
         }
 
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
+        BannerFieldRow {
             BannerFieldCell(
                 label = stringResource(R.string.patches),
                 value = item.patchCount.toString(),
@@ -873,10 +867,7 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
             )
         } else {
             item.sources.chunked(2).forEach { pair ->
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
+                BannerFieldRow {
                     pair.forEach { source ->
                         BannerFieldCell(
                             label = source.name,
@@ -894,10 +885,7 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
             thickness = 1.dp
         )
 
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
+        BannerFieldRow {
             BannerFieldCell(
                 label = stringResource(R.string.patcher_field_manager),
                 value = item.managerVersion ?: "?",
@@ -908,10 +896,7 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
                 modifier = Modifier.weight(1f))
         }
 
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
+        BannerFieldRow {
             // The heap limit only exists for the process runtime, so it rides along with the
             // runtime name rather than taking a cell that is empty half the time
             BannerFieldCell(
@@ -937,10 +922,7 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
 
         // Device environment only shown when data is available
         if (item.androidVersion != null || item.ramTotal != null || item.deviceManufacturer != null) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
+            BannerFieldRow {
                 item.androidVersion?.let {
                     BannerFieldCell(
                         label = stringResource(R.string.patcher_field_android),
@@ -959,10 +941,7 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
             }
 
             if (item.ramTotal != null) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
+                BannerFieldRow {
                     BannerFieldCell(
                         label = stringResource(R.string.patcher_field_memory),
                         value = "${item.ramAvailable ?: "?"} / ${item.ramTotal}",
@@ -991,13 +970,10 @@ private fun SuccessSummaryCard(item: LogItem.SuccessSummary) {
         variant = CardVariant.Success,
         badge = "✓"
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
+        BannerFieldRow {
             BannerFieldCell(
                 label = stringResource(R.string.patcher_field_output_size),
-                value = item.outputSizeMb,
+                value = item.outputSize,
                 modifier = Modifier.weight(1f))
             BannerFieldCell(
                 label = stringResource(R.string.patcher_field_time),
@@ -1006,10 +982,7 @@ private fun SuccessSummaryCard(item: LogItem.SuccessSummary) {
         }
 
         if (item.processHeapAverageMb != null) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
+            BannerFieldRow {
                 BannerFieldCell(
                     label = stringResource(R.string.patcher_field_memory_average),
                     value = item.processHeapAverageMb,
@@ -1022,10 +995,7 @@ private fun SuccessSummaryCard(item: LogItem.SuccessSummary) {
         }
 
         if (item.ioPeakRate != null) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
+            BannerFieldRow {
                 BannerFieldCell(
                     label = stringResource(R.string.patcher_field_io_peak),
                     value = item.ioPeakRate,
@@ -1033,6 +1003,19 @@ private fun SuccessSummaryCard(item: LogItem.SuccessSummary) {
             }
         }
     }
+}
+
+/**
+ * Row of two banner cells. Every field pair in the cards is laid out the same way, so the
+ * spacing lives here instead of being restated at each pair.
+ */
+@Composable
+private fun BannerFieldRow(content: @Composable RowScope.() -> Unit) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        content = content
+    )
 }
 
 /**

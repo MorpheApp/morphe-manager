@@ -353,11 +353,16 @@ class PatcherWorker(
             )
 
             args.logger.info(
-                "Patching started at ${System.currentTimeMillis()} " +
-                        "pkg=${args.packageName} version=${args.input.version} " +
-                        "input=${inputFile.absolutePath} size=${inputFile.length()} " +
-                        "split=$inputIsSplitArchive arch=$apkArchitecture patches=$selectedCount " +
-                        "device=${Build.MANUFACTURER} model=${Build.MODEL}"
+                "$LOG_WORKER_PREFIX_STARTED ${System.currentTimeMillis()} " +
+                        "$LOG_WORKER_FIELD_PACKAGE=${args.packageName} " +
+                        "$LOG_WORKER_FIELD_VERSION=${args.input.version} " +
+                        "$LOG_WORKER_FIELD_INPUT=${inputFile.absolutePath} " +
+                        "$LOG_WORKER_FIELD_SIZE=${inputFile.length()} " +
+                        "$LOG_WORKER_FIELD_SPLIT=$inputIsSplitArchive " +
+                        "$LOG_WORKER_FIELD_ARCH=$apkArchitecture " +
+                        "$LOG_WORKER_FIELD_PATCHES=$selectedCount " +
+                        "$LOG_WORKER_FIELD_DEVICE=${Build.MANUFACTURER} " +
+                        "$LOG_WORKER_FIELD_MODEL=${Build.MODEL}"
             )
 
             // One line per source rather than a joined list, so a name and its version stay
@@ -452,7 +457,7 @@ class PatcherWorker(
             val elapsed = System.currentTimeMillis() - startTime
 
             args.logger.info(
-                "$LOG_WORKER_PREFIX_SUCCEEDED output=${args.output} " +
+                "$LOG_WORKER_PREFIX_SUCCEEDED $LOG_WORKER_FIELD_OUTPUT=${args.output} " +
                         "$LOG_WORKER_FIELD_SIZE=${File(args.output).length()} " +
                         "$LOG_WORKER_FIELD_ELAPSED=${elapsed}ms"
             )
@@ -550,12 +555,21 @@ class PatcherWorker(
         const val PROCESS_PREVIOUS_LIMIT_KEY = "process_previous_limit"
         const val PROCESS_FAILURE_MESSAGE_KEY = "process_failure_message"
 
+        const val LOG_WORKER_PREFIX_STARTED = "Patching started at"
         const val LOG_WORKER_PREFIX_SUCCEEDED = "Patching succeeded:"
         const val LOG_WORKER_PREFIX_DEVICE = "Device:"
         const val LOG_WORKER_PREFIX_RUNTIME = "Runtime:"
         const val LOG_WORKER_PREFIX_SOURCE = "Source:"
         const val LOG_WORKER_PREFIX_BUILD = "Build:"
 
+        const val LOG_WORKER_FIELD_PACKAGE = "pkg"
+        const val LOG_WORKER_FIELD_INPUT = "input"
+        const val LOG_WORKER_FIELD_SPLIT = "split"
+        const val LOG_WORKER_FIELD_ARCH = "arch"
+        const val LOG_WORKER_FIELD_PATCHES = "patches"
+        const val LOG_WORKER_FIELD_DEVICE = "device"
+        const val LOG_WORKER_FIELD_MODEL = "model"
+        const val LOG_WORKER_FIELD_OUTPUT = "output"
         const val LOG_WORKER_FIELD_NAME = "name"
         const val LOG_WORKER_FIELD_VERSION = "version"
         const val LOG_WORKER_FIELD_MANAGER = "manager"
