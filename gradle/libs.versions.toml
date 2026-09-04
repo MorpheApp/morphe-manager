@@ -29,7 +29,7 @@ markdown-renderer = "0.45.0"
 # Remove when released stable 1.5.0 in Compose BOM. Fix for https://github.com/MorpheApp/morphe-manager/issues/74
 material3 = "1.5.0-alpha27" # 1.5.0-alpha09 API Changes: Remove deprecated experimental ModalBottomSheet
 morphe-library = "1.4.0"
-morphe-patcher = "1.12.0"
+morphe-patcher = "1.12.1-dev.1" # Change to stable
 navigation = "2.10.0"
 placeholder = "2.0.0"
 play-services-base = "18.10.1"
