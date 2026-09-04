@@ -346,10 +346,10 @@ class PatcherWorker(
                 "$LOG_WORKER_PREFIX_DEVICE " +
                         "$LOG_WORKER_FIELD_ANDROID=${Build.VERSION.RELEASE} " +
                         "$LOG_WORKER_FIELD_API=${Build.VERSION.SDK_INT} " +
-                        "$LOG_WORKER_FIELD_RAM_AVAIL=\"${formatBytes(deviceStats?.ramAvailable ?: 0L)}\" " +
-                        "$LOG_WORKER_FIELD_RAM_TOTAL=\"${formatBytes(deviceStats?.ramTotal ?: 0L)}\" " +
-                        "$LOG_WORKER_FIELD_STORAGE_AVAIL=\"${formatBytes(deviceStats?.storageAvailable ?: 0L)}\" " +
-                        "$LOG_WORKER_FIELD_STORAGE_TOTAL=\"${formatBytes(deviceStats?.storageTotal ?: 0L)}\""
+                        "$LOG_WORKER_FIELD_RAM_AVAIL=\"${formatBytesForReport(deviceStats?.ramAvailable ?: 0L)}\" " +
+                        "$LOG_WORKER_FIELD_RAM_TOTAL=\"${formatBytesForReport(deviceStats?.ramTotal ?: 0L)}\" " +
+                        "$LOG_WORKER_FIELD_STORAGE_AVAIL=\"${formatBytesForReport(deviceStats?.storageAvailable ?: 0L)}\" " +
+                        "$LOG_WORKER_FIELD_STORAGE_TOTAL=\"${formatBytesForReport(deviceStats?.storageTotal ?: 0L)}\""
             )
 
             args.logger.info(
@@ -380,7 +380,7 @@ class PatcherWorker(
                 args.logger.info("$LOG_WORKER_PREFIX_RUNTIME process $LOG_WORKER_FIELD_MEMORY_LIMIT=$memLimit")
             } else {
                 // CoroutineRuntime starts memory polling internally; only log the heap size here
-                args.logger.info("$LOG_PROCESS_PREFIX_COROUTINE_HEAP ${Runtime.getRuntime().maxMemory() / (1024 * 1024)}MB")
+                args.logger.info("$LOG_PROCESS_PREFIX_COROUTINE_HEAP ${bytesToMebibytes(Runtime.getRuntime().maxMemory())}MB")
                 args.logger.info("$LOG_WORKER_PREFIX_RUNTIME coroutine")
             }
 

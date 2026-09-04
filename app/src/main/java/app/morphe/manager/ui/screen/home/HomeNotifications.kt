@@ -30,6 +30,7 @@ import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.shared.Animations
 import app.morphe.manager.ui.screen.shared.ThemedIcon
 import app.morphe.manager.ui.viewmodel.BundleUpdateStatus
+import app.morphe.manager.util.formatMegabytes
 
 /** Visibility flag paired with the tap callback for a single [AlertSnackbar] slot. */
 @Immutable
@@ -414,8 +415,8 @@ private fun BundleUpdateSnackbarContent(
                     }
 
                     if (status == BundleUpdateStatus.Updating && progress != null) {
-                        val totalMb = (progress.bytesTotal ?: 0L).toFloat() / (1024 * 1024)
-                        val readMb = progress.bytesRead.toFloat() / (1024 * 1024)
+                        val totalMb = formatMegabytes(progress.bytesTotal ?: 0L)
+                        val readMb = formatMegabytes(progress.bytesRead)
                         val percent = (downloadFraction * 100).toInt()
                         val (subtitleKey, subtitle) = when {
                             progress.total > 1 && isDownloading -> 1 to stringResource(

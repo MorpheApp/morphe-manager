@@ -78,7 +78,7 @@ import app.morphe.manager.ui.screen.patcher.game.MiniGameContent
 import app.morphe.manager.ui.screen.patcher.game.MiniGameState
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.screen.shared.Animations
-import app.morphe.manager.util.formatBytes
+import app.morphe.manager.util.formatBytesForReport
 import app.morphe.manager.util.isRtl
 import app.morphe.manager.util.startToEndGradient
 import kotlinx.coroutines.delay
@@ -138,7 +138,7 @@ sealed interface LogItem {
 
 /** Reads a byte count out of a log line, formatted the way the rest of the app shows sizes. */
 private fun String.logBytes(field: String): String =
-    formatBytes(logField(field)?.toLongOrNull() ?: 0L)
+    formatBytesForReport(logField(field)?.toLongOrNull() ?: 0L)
 
 private fun formatElapsed(ms: Long?): String {
     if (ms == null || ms < 0) return "?"

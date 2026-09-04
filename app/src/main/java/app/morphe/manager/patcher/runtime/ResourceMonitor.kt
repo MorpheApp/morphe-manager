@@ -4,6 +4,7 @@ import android.os.Process
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.runtime.usage.CpuUsageSampler
 import app.morphe.manager.patcher.runtime.usage.IoUsageSampler
+import app.morphe.manager.util.bytesToMebibytes
 import java.lang.Runtime
 import kotlin.also
 import kotlin.collections.buildList
@@ -75,7 +76,7 @@ object ResourceMonitor {
             // lets the run fail through the patcher, which knows how to retry on less memory
             try {
                 while (polling) {
-                    val used = (rt.totalMemory() - rt.freeMemory()) / (1024 * 1024)
+                    val used = bytesToMebibytes(rt.totalMemory() - rt.freeMemory())
                     memoryUsedMax = max(memoryUsedMax, used)
 
                     memoryUsedAverage =

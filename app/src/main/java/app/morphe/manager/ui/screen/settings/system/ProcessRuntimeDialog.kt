@@ -6,14 +6,16 @@
 package app.morphe.manager.ui.screen.settings.system
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Memory
 import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -22,6 +24,7 @@ import androidx.compose.ui.res.stringResource
 import app.morphe.manager.R
 import app.morphe.manager.patcher.runtime.*
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.util.formatMebibytes
 import kotlin.math.roundToInt
 
 /**
@@ -86,7 +89,7 @@ fun ProcessRuntimeDialog(
                 // Current value display
                 InfoStatBox(
                     modifier = Modifier.padding(bottom = Defaults.ContentPadding),
-                    value = "$selectedLimit MB",
+                    value = context.formatMebibytes(selectedLimit),
                     subtitle = stringResource(R.string.settings_system_memory_limit_subtitle),
                     containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
                     valueColor = LocalDialogTextColor.current
@@ -113,8 +116,8 @@ fun ProcessRuntimeDialog(
                     )
 
                     SliderScaleLabels(
-                        start = "$PROCESS_RUNTIME_MEMORY_MINIMUM MB",
-                        end = "$maxLimit MB"
+                        start = context.formatMebibytes(PROCESS_RUNTIME_MEMORY_MINIMUM),
+                        end = context.formatMebibytes(maxLimit)
                     )
                 }
 

@@ -48,6 +48,7 @@ import app.morphe.manager.ui.screen.shared.Animations
 import app.morphe.manager.ui.screen.shared.WindowHeightSizeClass
 import app.morphe.manager.ui.screen.shared.WindowWidthSizeClass
 import app.morphe.manager.ui.screen.shared.rememberWindowSize
+import app.morphe.manager.util.bytesToMebibytes
 
 /** Slots a history graph spans, which fixes the time axis so readings scroll in from the right. */
 private const val HISTORY_SLOTS = 60
@@ -132,7 +133,7 @@ fun PatchingUsageGraphs(
 
     // The runtime reports its limit over the log, which the app's own heap stands in for until then
     val heapLimitMb = patchProgress.heapLimitMb.takeIf { it > 0 }
-        ?: (Runtime.getRuntime().maxMemory() / (1024 * 1024)).toInt()
+        ?: bytesToMebibytes(Runtime.getRuntime().maxMemory()).toInt()
 
     val metrics = usageMetrics(compact)
 

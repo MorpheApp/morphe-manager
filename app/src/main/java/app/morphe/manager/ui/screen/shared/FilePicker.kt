@@ -668,7 +668,7 @@ fun FilePicker(
                                     else -> Icons.AutoMirrored.Outlined.InsertDriveFile
                                 }
                                 val detail = if (!isDir) {
-                                    "${formatBytes(file.length())} · ${formatModDate(file.lastModified())}"
+                                    "${context.formatBytes(file.length())} · ${formatModDate(file.lastModified())}"
                                 } else null
 
                                 FilePickerRow(

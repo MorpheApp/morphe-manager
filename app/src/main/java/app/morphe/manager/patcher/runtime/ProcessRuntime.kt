@@ -18,6 +18,7 @@ import app.morphe.manager.ui.model.State
 import app.morphe.manager.util.Options
 import app.morphe.manager.util.PM
 import app.morphe.manager.util.PatchSelection
+import app.morphe.manager.util.bytesToMebibytes
 import app.morphe.manager.util.tag
 import com.github.pgreze.process.Redirect
 import com.github.pgreze.process.process
@@ -63,7 +64,7 @@ fun calculateAdaptiveMemoryLimit(context: Context): Int {
     val memInfo = android.app.ActivityManager.MemoryInfo()
     activityManager.getMemoryInfo(memInfo)
 
-    val totalRamMb = (memInfo.totalMem / (1024 * 1024)).toInt()
+    val totalRamMb = bytesToMebibytes(memInfo.totalMem).toInt()
     val adaptive = ((totalRamMb * 0.25).toInt() / PROCESS_RUNTIME_MEMORY_STEP) * PROCESS_RUNTIME_MEMORY_STEP
 
     return adaptive.coerceIn(PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM, PROCESS_RUNTIME_MEMORY_MAX_LIMIT)

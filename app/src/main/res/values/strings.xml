@@ -36,9 +36,13 @@
     <string name="home_update_skipped_metered">Updates skipped</string>
     <string name="home_update_skipped_metered_subtitle">Mobile data is active</string>
     <string name="home_updating_sources">Updating sources…</string>
-    <string name="home_update_download_progress" translatable="false">%1$.1f MB / %2$.1f MB (%3$s%%)</string>
+    <!-- Download progress. "%1$s" and "%2$s" are the megabytes read and expected, "%3$s" is the
+         percentage; the doubled "%%" after it is how a literal percent sign is written here. -->
+    <string name="home_update_download_progress">%1$s MB / %2$s MB (%3$s%%)</string>
     <string name="home_update_bundle_count" translatable="false">%1$d / %2$d</string>
-    <string name="home_update_bundle_count_with_bytes" translatable="false">%1$d / %2$d  ·  %3$.1f / %4$.1f MB (%5$d%%)</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d / %2$d  ·  %3$s / %4$s MB (%5$d%%)</string>
     <string name="home_update_success">Update sources complete</string>
     <string name="home_update_success_subtitle">Your sources are up to date</string>
     <string name="home_sources_are_loading">Sources are loading, please wait…</string>
@@ -329,7 +333,8 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="home_outdated_patches_dialog_warning">Patching with outdated patches may result in a broken app</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Update &amp; patch</string>
     <string name="home_low_disk_space_dialog_title">Low disk space</string>
-    <string name="home_low_disk_space_dialog_message">Only %1$.2f GB of free storage available. Patching requires at least %2$.2f GB of free space to work correctly</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">Only %1$s GB of free storage available. Patching requires at least %2$s GB of free space to work correctly</string>
     <string name="home_low_disk_space_dialog_warning">Proceeding may result in a \"file not found\" error or a corrupt output APK</string>
     <string name="home_simple_bundle_select_title">Select patch source</string>
 
@@ -1167,7 +1172,7 @@ Details: %2$s"</string>
     <string name="credits_prior_development">Prior development</string>
     <string name="opensource_licenses">Open-source licenses</string>
 
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">A choice</string>
     <string name="easter_egg_pill_message">Take the blue pill and the ads stay exactly where they are. Take the red one and see how deep the bytecode goes</string>
     <string name="easter_egg_pill_red">Red pill</string>
@@ -1306,9 +1311,10 @@ Details: %2$s"</string>
     <string name="install_update_manager_failed">Failed to install update</string>
     <string name="installing_manager_update">Installing update…</string>
     <string name="downloading_manager_update">Downloading update…</string>
-    <string name="manager_update_progress_detail" translatable="false">%1$.1f MB / %2$.1f MB (%3$d%%)</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">%1$.1f MB downloaded</string>
+    <!-- Download progress of the manager update. "%1$s" and "%2$s" are the megabytes downloaded, "%3$d" is the percentage. -->
+    <string name="manager_update_progress_detail">%1$s MB / %2$s MB (%3$d%%)</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">%1$s MB downloaded</string>
     <string name="manager_update_not_ready">This release is still being published. Try again in a few minutes</string>
     <string name="update_download_missing">The downloaded update is no longer available. Download it again</string>
     <string name="download_manager_failed">Failed to download update: %s</string>

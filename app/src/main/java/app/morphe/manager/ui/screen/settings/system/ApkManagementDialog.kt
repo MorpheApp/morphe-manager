@@ -808,7 +808,7 @@ private fun ApkManagementDialogContent(
                         totalCount = filteredItems.size,
                         subtitle = stringResource(
                             R.string.settings_system_apks_size,
-                            formatBytes(selectedTotalSize)
+                            context.formatBytes(selectedTotalSize)
                         ),
                         onSelectAll = { selection.setAll(filteredItems.map { it.selectionKey }) },
                         onDeselectAll = { selection.clear() },
@@ -956,7 +956,7 @@ private fun ApkManagementDialogContent(
                                 titleColor = meta.accentColor,
                                 subtitle = {
                                     AnimatedContent(
-                                        targetState = stringResource(R.string.settings_system_apks_size, formatBytes(meta.totalSize)),
+                                        targetState = stringResource(R.string.settings_system_apks_size, context.formatBytes(meta.totalSize)),
                                         transitionSpec = Animations.counterTransitionSpec,
                                         label = "heroSize"
                                     ) { sizeText ->
@@ -1148,7 +1148,7 @@ private fun ApkItemCard(
                                 text = stringResource(
                                     R.string.settings_system_apk_item_info,
                                     data.version,
-                                    formatBytes(data.fileSize)
+                                    LocalContext.current.formatBytes(data.fileSize)
                                 ),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = LocalDialogSecondaryTextColor.current
@@ -1292,7 +1292,7 @@ private fun DeleteAllConfirmationDialog(
                 )
                 DeleteListItem(
                     icon = Icons.Outlined.Storage,
-                    text = stringResource(R.string.settings_system_apks_size, formatBytes(totalSize))
+                    text = stringResource(R.string.settings_system_apks_size, LocalContext.current.formatBytes(totalSize))
                 )
             }
         }
