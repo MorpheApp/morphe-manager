@@ -291,11 +291,16 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="patcher_error_copied">Ralat disalin ke papan keratan</string>
     <string name="patcher_error_log">Log ralat</string>
     <string name="patcher_error_technical">Perincian teknikal</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_patcher">Penampal</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_storage">Storan</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <!-- How long patching took -->
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <!-- Fastest read or write rate reached while patching, in data per second -->
     <string name="patcher_field_value_unknown">tidak diketahui</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <!-- Value of "Libraries": every library was left in the patched APK -->

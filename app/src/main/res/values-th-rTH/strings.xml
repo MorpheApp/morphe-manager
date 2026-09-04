@@ -2,7 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">แอปอื่น ๆ</string>
-    <string name="home_other_apps_action">เลือกแอปอื่น</string>
+    <string name="home_other_apps_action">Select other apps</string>
     <string name="home_not_patched_yet">ยังไม่ได้รับการแพตช์</string>
     <string name="home_unpatched_version_installed">ติดตั้งเวอร์ชันที่ไม่ได้รับการแพตช์แล้ว</string>
     <string name="home_unpatched_badge">ไม่ได้รับการแพตช์</string>
@@ -136,7 +136,7 @@
     <string name="sources_prerelease_warning_message">บิลด์ก่อนเผยแพร่ยังอยู่ระหว่างการพัฒนา แพตช์อาจล้มเหลวหรือทำให้แอปเสียหาย และฟีเจอร์อาจเปลี่ยนแปลงได้โดยไม่มีการแจ้งเตือน</string>
     <string name="expert_mode_prerelease_notice">แหล่งที่มานี้อยู่ในแพตช์ก่อนเผยแพร่ การแพตช์อาจล้มเหลวหรือทำงานผิดปกติ</string>
     <string name="sources_management_experimental_versions_toggle">ใช้แอปเวอร์ชันทดลอง</string>
-    <string name="sources_management_experimental_versions_toggle_description">แสดงและแก้ไขเป้าหมายแอปทดลอง</string>
+    <string name="sources_management_experimental_versions_toggle_description">แสดงและแพตช์เป้าหมายแอปทดลอง</string>
     <string name="sources_management_already_exists">แหล่งที่มานี้ได้ถูกเพิ่มไปแล้ว</string>
     <string name="sources_management_invalid_url">URL ต้นทางไม่ถูกต้อง โปรดตรวจสอบที่อยู่และลองอีกครั้ง</string>
     <string name="sources_management_blocked">แหล่งแพตช์นี้ถูกบล็อกและไม่สามารถเพิ่มได้</string>
@@ -457,11 +457,14 @@
     <string name="patcher_error_copied">คัดลอกข้อผิดพลาดไปยังคลิปบอร์ดแล้ว</string>
     <string name="patcher_error_log">บันทึกข้อผิดพลาด</string>
     <string name="patcher_error_technical">รายละเอียดทางเทคนิค</string>
-    <string name="patcher_error_dialog_diagnostics">การวินิจฉัย</string>
+    <string name="patcher_error_dialog_diagnostics">Diagnostics</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">Patching started</string>
+    <string name="patcher_card_succeeded">Patching succeeded</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
-    <string name="patcher_field_app">แอป</string>
-    <string name="patcher_field_package">แพ็กเกจ</string>
-    <string name="patcher_field_source">แหล่งที่มา</string>
+    <string name="patcher_field_app">App</string>
+    <string name="patcher_field_package">Package</string>
+    <string name="patcher_field_source">Source</string>
     <string name="patcher_field_split">แยก APK</string>
     <string name="patcher_field_manager">ผู้จัดการ</string>
     <string name="patcher_field_patcher">ตัวแพตช์</string>
@@ -473,6 +476,15 @@
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">หน่วยความจำ</string>
     <string name="patcher_field_storage">พื้นที่เก็บข้อมูล</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">ขนาดผลลัพธ์</string>
+    <!-- How long patching took -->
+    <string name="patcher_field_time">เวลา</string>
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">หน่วยความจำเฉลี่ย</string>
+    <string name="patcher_field_memory_max">หน่วยความจำสูงสุด</string>
+    <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">จุดสูงสุดของ I/O พื้นที่จัดเก็บข้อมูล</string>
     <string name="patcher_field_value_unknown">ไม่ทราบ</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">ถูกตัดออก</string>

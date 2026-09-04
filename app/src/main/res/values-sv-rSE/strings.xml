@@ -458,6 +458,9 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="patcher_error_log">Fellogg</string>
     <string name="patcher_error_technical">Teknisk information</string>
     <string name="patcher_error_dialog_diagnostics">Diagnostik</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">Patchning startad</string>
+    <string name="patcher_card_succeeded">Patchning lyckades</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">App</string>
     <string name="patcher_field_package">Paket</string>
@@ -473,6 +476,15 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">Minne</string>
     <string name="patcher_field_storage">Lagring</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">Utdata storlek</string>
+    <!-- How long patching took -->
+    <string name="patcher_field_time">Tid</string>
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">Genomsnittligt minne</string>
+    <string name="patcher_field_memory_max">Maximalt minne</string>
+    <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">Lagrings-I/O-topp</string>
     <string name="patcher_field_value_unknown">okänd</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">borttagna</string>

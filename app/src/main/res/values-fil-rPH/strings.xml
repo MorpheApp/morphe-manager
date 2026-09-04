@@ -459,6 +459,7 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <string name="patcher_error_log">Tala ng pagkakamali</string>
     <string name="patcher_error_technical">Teknikal na detalye</string>
     <string name="patcher_error_dialog_diagnostics">Diagnostics</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">App</string>
     <string name="patcher_field_package">Package</string>
@@ -474,6 +475,13 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">Memorya</string>
     <string name="patcher_field_storage">Imbakan</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <!-- How long patching took -->
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">Average ng memorya</string>
+    <string name="patcher_field_memory_max">Pinakamataas na memorya</string>
+    <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">Pinakamataas na I/O ng storage</string>
     <string name="patcher_field_value_unknown">hindi alam</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">tinanggal</string>

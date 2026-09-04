@@ -460,6 +460,7 @@ Nếu không, APK đã vá và được gắn có thể sẽ không hoạt độ
     <string name="patcher_error_log">Nhật ký lỗi</string>
     <string name="patcher_error_technical">Chi tiết kỹ thuật</string>
     <string name="patcher_error_dialog_diagnostics">Chẩn đoán</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Ứng dụng</string>
     <string name="patcher_field_package">Gói</string>
@@ -475,6 +476,13 @@ Nếu không, APK đã vá và được gắn có thể sẽ không hoạt độ
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">Bộ nhớ</string>
     <string name="patcher_field_storage">Bộ nhớ</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <!-- How long patching took -->
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">Bộ nhớ trung bình</string>
+    <string name="patcher_field_memory_max">Bộ nhớ tối đa</string>
+    <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">I/O lưu trữ cao nhất</string>
     <string name="patcher_field_value_unknown">không xác định</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">đã loại bỏ</string>

@@ -458,6 +458,7 @@ Outerlike sone (gestippel): kan deur die lanseerder masker afgesny word - hou be
     <string name="patcher_error_log">Foutlog</string>
     <string name="patcher_error_technical">Tegniese besonderhede</string>
     <string name="patcher_error_dialog_diagnostics">Diagnostiek</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">App</string>
     <string name="patcher_field_package">Pakket</string>
@@ -473,6 +474,10 @@ Outerlike sone (gestippel): kan deur die lanseerder masker afgesny word - hou be
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">Geheue</string>
     <string name="patcher_field_storage">Berging</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <!-- How long patching took -->
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <!-- Fastest read or write rate reached while patching, in data per second -->
     <string name="patcher_field_value_unknown">onbekend</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">gestroop</string>

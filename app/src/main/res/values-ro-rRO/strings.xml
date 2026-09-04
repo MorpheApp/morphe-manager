@@ -458,6 +458,7 @@ Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păs
     <string name="patcher_error_log">Jurnal erori</string>
     <string name="patcher_error_technical">Detalii tehnice</string>
     <string name="patcher_error_dialog_diagnostics">Diagnostic</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Aplicație</string>
     <string name="patcher_field_package">Pachet</string>
@@ -473,6 +474,13 @@ Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păs
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">Memorie</string>
     <string name="patcher_field_storage">Stocare</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <!-- How long patching took -->
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">Memorie medie</string>
+    <string name="patcher_field_memory_max">Memorie maximă</string>
+    <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">Vârf I/O stocare</string>
     <string name="patcher_field_value_unknown">necunoscut</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">eliminate</string>

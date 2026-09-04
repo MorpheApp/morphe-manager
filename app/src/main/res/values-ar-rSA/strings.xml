@@ -458,6 +458,9 @@
     <string name="patcher_error_log">سجل الأخطاء</string>
     <string name="patcher_error_technical">التفاصيل التقنية</string>
     <string name="patcher_error_dialog_diagnostics">التشخيص</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">بدأَ التعديل</string>
+    <string name="patcher_card_succeeded">نجح التعديل</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">التطبيق</string>
     <string name="patcher_field_package">الحزمة</string>
@@ -473,6 +476,15 @@
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">الذاكرة</string>
     <string name="patcher_field_storage">التخزين</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">حجم الناتج</string>
+    <!-- How long patching took -->
+    <string name="patcher_field_time">الوقت</string>
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">متوسط الذاكرة</string>
+    <string name="patcher_field_memory_max">أقصى ذاكرة</string>
+    <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">ذروة التخزين</string>
     <string name="patcher_field_value_unknown">غير معروف</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">مستبعدة</string>

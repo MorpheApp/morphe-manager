@@ -459,6 +459,9 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="patcher_error_log">Catatan kesalahan</string>
     <string name="patcher_error_technical">Rincian teknis</string>
     <string name="patcher_error_dialog_diagnostics">Diagnostik</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">Penambalan dimulai</string>
+    <string name="patcher_card_succeeded">Penambalan berhasil</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Aplikasi</string>
     <string name="patcher_field_package">Paket</string>
@@ -474,6 +477,15 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">Memori</string>
     <string name="patcher_field_storage">Penyimpanan</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">Ukuran keluaran</string>
+    <!-- How long patching took -->
+    <string name="patcher_field_time">Waktu</string>
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">Rata-rata memori</string>
+    <string name="patcher_field_memory_max">Memori maksimum</string>
+    <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">Puncak I/O penyimpanan</string>
     <string name="patcher_field_value_unknown">tidak diketahui</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">dihilangkan</string>

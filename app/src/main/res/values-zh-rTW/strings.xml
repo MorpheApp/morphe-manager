@@ -457,6 +457,7 @@
     <string name="patcher_error_log">錯誤記錄檔</string>
     <string name="patcher_error_technical">技術細節</string>
     <string name="patcher_error_dialog_diagnostics">診斷</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">應用程式</string>
     <string name="patcher_field_package">套件</string>
@@ -472,6 +473,10 @@
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">記憶體</string>
     <string name="patcher_field_storage">儲存空間</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <!-- How long patching took -->
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <!-- Fastest read or write rate reached while patching, in data per second -->
     <string name="patcher_field_value_unknown">未知</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">已移除</string>

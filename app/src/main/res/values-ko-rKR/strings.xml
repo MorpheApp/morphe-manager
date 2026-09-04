@@ -458,6 +458,9 @@
     <string name="patcher_error_log">오류 로그</string>
     <string name="patcher_error_technical">기술 세부 정보</string>
     <string name="patcher_error_dialog_diagnostics">진단</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">패치 시작됨</string>
+    <string name="patcher_card_succeeded">패치 성공</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">앱</string>
     <string name="patcher_field_package">패키지</string>
@@ -473,6 +476,15 @@
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">메모리</string>
     <string name="patcher_field_storage">기기 저장소</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">출력 크기</string>
+    <!-- How long patching took -->
+    <string name="patcher_field_time">시간</string>
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">평균 메모리</string>
+    <string name="patcher_field_memory_max">최대 메모리</string>
+    <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">저장소 I/O 최대치</string>
     <string name="patcher_field_value_unknown">알 수 없음</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">제거됨</string>

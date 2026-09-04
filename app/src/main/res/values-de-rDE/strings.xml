@@ -456,6 +456,9 @@ Für optimale Ergebnisse empfiehlt diese App, eine &lt;b&gt;vollständige APK&lt
     <string name="patcher_error_log">Fehlerprotokoll</string>
     <string name="patcher_error_technical">Technische Details</string>
     <string name="patcher_error_dialog_diagnostics">Diagnose</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">Patchvorgang gestartet</string>
+    <string name="patcher_card_succeeded">Patchvorgang erfolgreich</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">App</string>
     <string name="patcher_field_package">Paket</string>
@@ -471,6 +474,15 @@ Für optimale Ergebnisse empfiehlt diese App, eine &lt;b&gt;vollständige APK&lt
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">Arbeitsspeicher</string>
     <string name="patcher_field_storage">Speicher</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">Ausgabegröße</string>
+    <!-- How long patching took -->
+    <string name="patcher_field_time">Zeit</string>
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">Durchschnittlicher Speicher</string>
+    <string name="patcher_field_memory_max">Maximaler Speicher</string>
+    <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">Speicher-I/O-Spitzenwert</string>
     <string name="patcher_field_value_unknown">unbekannt</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">entfernt</string>

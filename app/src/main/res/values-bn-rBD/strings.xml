@@ -458,6 +458,7 @@
     <string name="patcher_error_log">ত্রুটি রিপোর্ট</string>
     <string name="patcher_error_technical">প্রযুক্তি বিবরণ</string>
     <string name="patcher_error_dialog_diagnostics">ডায়াগনস্টিকস</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">অ্যাপ</string>
     <string name="patcher_field_package">প্যাকেজ</string>
@@ -473,6 +474,13 @@
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">মেমোরি</string>
     <string name="patcher_field_storage">স্টোরেজ</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <!-- How long patching took -->
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">গড় মেমরি</string>
+    <string name="patcher_field_memory_max">সর্বোচ্চ মেমরি</string>
+    <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">স্টোরেজ I/O সর্বোচ্চ</string>
     <string name="patcher_field_value_unknown">অজানা</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">বাদ দেওয়া হয়েছে</string>

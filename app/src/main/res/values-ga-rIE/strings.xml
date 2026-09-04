@@ -458,6 +458,9 @@ Crios seachtrach (daite): féadfaidh masc an lainseálaí é a bhearradh - coinn
     <string name="patcher_error_log">Log earráide</string>
     <string name="patcher_error_technical">Sonraí teicniúla</string>
     <string name="patcher_error_dialog_diagnostics">Diagnóisic</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">Tosaíodh paisteáil</string>
+    <string name="patcher_card_succeeded">D\'éirigh le paisteáil</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Aip</string>
     <string name="patcher_field_package">Pacáiste</string>
@@ -473,6 +476,12 @@ Crios seachtrach (daite): féadfaidh masc an lainseálaí é a bhearradh - coinn
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">Cuimhne</string>
     <string name="patcher_field_storage">Stóras</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">Méid aschuir</string>
+    <!-- How long patching took -->
+    <string name="patcher_field_time">Am</string>
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <!-- Fastest read or write rate reached while patching, in data per second -->
     <string name="patcher_field_value_unknown">anaithnid</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">stróicthe</string>

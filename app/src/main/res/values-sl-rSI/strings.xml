@@ -458,6 +458,9 @@ Zunanje območje (črtkano): maska zaganjalnika ga lahko obreže – pomembne po
     <string name="patcher_error_log">Dnevnik napak</string>
     <string name="patcher_error_technical">Tehnične podrobnosti</string>
     <string name="patcher_error_dialog_diagnostics">Diagnostika</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">Krpanje se je začelo</string>
+    <string name="patcher_card_succeeded">Popravljanje je uspelo</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Aplikacija</string>
     <string name="patcher_field_package">Paket</string>
@@ -473,6 +476,15 @@ Zunanje območje (črtkano): maska zaganjalnika ga lahko obreže – pomembne po
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">Pomnilnik</string>
     <string name="patcher_field_storage">Shramba</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">Velikost izhoda</string>
+    <!-- How long patching took -->
+    <string name="patcher_field_time">Čas</string>
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">Povprečje pomnilnika</string>
+    <string name="patcher_field_memory_max">Maksimum pomnilnika</string>
+    <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">Največja vhodno-izhodna hitrost shranjevanja</string>
     <string name="patcher_field_value_unknown">neznano</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">odstranjene</string>

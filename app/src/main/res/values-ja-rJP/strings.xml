@@ -458,6 +458,9 @@
     <string name="patcher_error_log">エラーログ</string>
     <string name="patcher_error_technical">技術的な詳細</string>
     <string name="patcher_error_dialog_diagnostics">診断</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">パッチ適用を開始しました</string>
+    <string name="patcher_card_succeeded">パッチ適用に成功しました</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">アプリ</string>
     <string name="patcher_field_package">パッケージ</string>
@@ -473,6 +476,12 @@
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">メモリ</string>
     <string name="patcher_field_storage">ストレージ</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">出力サイズ</string>
+    <!-- How long patching took -->
+    <string name="patcher_field_time">所要時間</string>
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <!-- Fastest read or write rate reached while patching, in data per second -->
     <string name="patcher_field_value_unknown">不明</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">削除済み</string>
