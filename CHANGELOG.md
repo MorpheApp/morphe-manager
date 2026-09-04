@@ -1,3 +1,13 @@
+## [1.29.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.29.0...v1.29.1-dev.1) (2026-09-04)
+
+
+### Bug Fixes
+
+* Align the batch installed-APK offer with the single-app flow ([86fc085](https://github.com/MorpheApp/morphe-manager/commit/86fc085aeec23c2848e908897c4412dbe68088ff))
+* Deduplicate the expert patching log screen ([b95f934](https://github.com/MorpheApp/morphe-manager/commit/b95f934a519fc8a568cd05788a67770a7d618f68))
+* Hide the installed APK in batch patching when the patches do not target it ([3736866](https://github.com/MorpheApp/morphe-manager/commit/3736866bcb099f377cca01cb7f51cc710a937388))
+* Translate the titles and labels of the patching log cards ([b405026](https://github.com/MorpheApp/morphe-manager/commit/b4050264dd9848055451d5ccf2df18824a42a453))
+
 # [1.29.0](https://github.com/MorpheApp/morphe-manager/compare/v1.28.0...v1.29.0) (2026-09-03)
 
 
