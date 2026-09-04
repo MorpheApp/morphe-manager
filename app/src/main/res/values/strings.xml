@@ -36,9 +36,6 @@
     <string name="home_update_skipped_metered">Updates skipped</string>
     <string name="home_update_skipped_metered_subtitle">Mobile data is active</string>
     <string name="home_updating_sources">Updating sources…</string>
-    <!-- Download progress. "%1$s" and "%2$s" are the megabytes read and expected, "%3$s" is the
-         percentage; the doubled "%%" after it is how a literal percent sign is written here. -->
-    <string name="home_update_download_progress">%1$s MB / %2$s MB (%3$s%%)</string>
     <string name="home_update_bundle_count" translatable="false">%1$d / %2$d</string>
     <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
          "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
@@ -1184,6 +1181,11 @@ Details: %2$s"</string>
     <string name="easter_egg_pill_blue_toast_again">Unplugged. The way back is where it always was</string>
 
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s MB / %2$s MB (%3$s%%)</string>
+
     <string name="app_name" translatable="false">Morphe</string>
     <string name="select_file">Select file</string>
     <string name="select_folder">Select folder</string>
@@ -1311,8 +1313,6 @@ Details: %2$s"</string>
     <string name="install_update_manager_failed">Failed to install update</string>
     <string name="installing_manager_update">Installing update…</string>
     <string name="downloading_manager_update">Downloading update…</string>
-    <!-- Download progress of the manager update. "%1$s" and "%2$s" are the megabytes downloaded, "%3$d" is the percentage. -->
-    <string name="manager_update_progress_detail">%1$s MB / %2$s MB (%3$d%%)</string>
     <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
     <string name="manager_update_progress_downloaded">%1$s MB downloaded</string>
     <string name="manager_update_not_ready">This release is still being published. Try again in a few minutes</string>

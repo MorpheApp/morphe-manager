@@ -428,7 +428,7 @@ private fun BundleUpdateSnackbarContent(
                                 progress.completed, progress.total
                             )
                             isDownloading -> 3 to stringResource(
-                                R.string.home_update_download_progress,
+                                R.string.download_progress,
                                 readMb, totalMb, percent.toString()
                             )
                             progress.currentBundleName != null -> 4 to progress.currentBundleName
