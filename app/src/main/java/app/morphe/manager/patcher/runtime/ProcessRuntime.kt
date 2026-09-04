@@ -33,7 +33,7 @@ import kotlin.time.Duration.Companion.seconds
 // If too much memory is requested then some devices become extremely slow
 // for unknown reason (using flash memory as swap file?)
 const val PROCESS_RUNTIME_MEMORY_MINIMUM = 512
-const val PROCESS_RUNTIME_MEMORY_MAX_LIMIT = 1280
+const val PROCESS_RUNTIME_MEMORY_MAX_LIMIT = 2560
 const val PROCESS_RUNTIME_MEMORY_MAX_LIMIT_INITIALIZATION = 1024
 private const val PROCESS_RUNTIME_MEMORY_DEFAULT_MINIMUM = 640
 const val PROCESS_RUNTIME_MEMORY_LOW_WARNING = 640
