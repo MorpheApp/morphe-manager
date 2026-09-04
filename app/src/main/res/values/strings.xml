@@ -604,7 +604,7 @@ Uninstalling will permanently erase all app data"</string>
     <string name="patcher_message_15">All systems nominal… patching trajectory is stable… 🚀</string>
     <string name="patcher_message_16">Squeezing out extra power, like juice from a digital lemon… 🍋</string>
     <string name="patcher_message_17">Encouraging the app to accept its new, better self… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">Changing the app superposition from unpatched to patched… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Your app has a fever, and the only prescription is more patches… 🩺🔔</string>
@@ -613,6 +613,8 @@ Uninstalling will permanently erase all app data"</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Patching app</string>
     <string name="memory_usage">Memory usage</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%1$s of %2$s MB</string>
     <string name="cpu_usage">CPU usage</string>
     <string name="storage_io_usage">Storage I/O</string>
 

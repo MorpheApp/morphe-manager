@@ -32,6 +32,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -226,7 +227,11 @@ private fun HeapUsagePanel(
     UsagePanel(
         label = stringResource(R.string.memory_usage),
         headline = "${samples.lastOrNull() ?: 0} MB",
-        detail = "${current.asPercent()} of $limitMb MB",
+        detail = stringResource(
+            R.string.memory_usage_detail,
+            current.asPercent(),
+            limitMb.toString()
+        ),
         // The dot reads the same average as the bars, so the two cannot disagree on the tint
         accentColor = lerp(accentColor, warnColor, warnRamp(colorFractions.lastOrNull() ?: 0f)),
         compact = compact,
@@ -264,7 +269,7 @@ private fun CpuUsagePanel(
     UsagePanel(
         label = stringResource(R.string.cpu_usage),
         headline = "$average%",
-        detail = "${coreLoads.size} cores",
+        detail = pluralStringResource(R.plurals.core_count, coreLoads.size, coreLoads.size.toString()),
         accentColor = lerp(accentColor, warnColor, warnRamp(average / 100f)),
         compact = compact,
         metrics = metrics,
@@ -475,14 +480,11 @@ private fun CoreLoadBars(
     compact: Boolean,
     height: Dp
 ) {
-    // Sorted ascending so a pinned core always lands in the same slot: raw core order jumps a
-    // bar from one side of the row to the other as the scheduler moves load between cores, even
-    // when the overall picture has not changed at all
-    val sortedLoads = loads.sorted()
-
-    // Polling is slow enough that stepping straight to each sample reads as noise
-    val fractions = sortedLoads.mapIndexed { rank, load ->
-        key(rank) {
+    // Cores keep their own slot rather than being ranked by load: the clusters of a big.LITTLE
+    // machine are laid out by index, and which of them the run is riding is what the row shows
+    val fractions = loads.mapIndexed { core, load ->
+        // Polling is slow enough that stepping straight to each sample reads as noise
+        key(core) {
             animateFloatAsState(
                 targetValue = (load / 100f).coerceIn(0f, 1f),
                 animationSpec = tween(600, easing = FastOutSlowInEasing),
