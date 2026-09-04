@@ -84,7 +84,7 @@ fun ExpertModeDialog(
     proceedText: String = stringResource(R.string.expert_mode_proceed),
     /** Off where mixing sources is the norm rather than something the user just did. */
     warnOnMultipleBundles: Boolean = true,
-    /** Bundle uids currently receiving pre-release patch versions, shown as a warning header. */
+    /** Bundle UIDs currently receiving pre-release patch versions, shown as a warning header. */
     prereleaseBundleUids: Set<Int> = emptySet(),
     onDismiss: () -> Unit,
     onProceed: () -> Unit
@@ -108,7 +108,7 @@ fun ExpertModeDialog(
         }
     }
 
-    val expandedUniversal = rememberUniversalSectionState()
+    val patchSections = rememberPatchSectionState()
 
     // The pre-release warning is worth a glance, not a permanent strip on top of the list. It
     // retires per source, so a source the user has not opened yet still gets its turn, and the
@@ -286,7 +286,7 @@ fun ExpertModeDialog(
                     savedPatches = savedPatches,
                     lockStateOf = lockStateOf,
                     holdsUniversalPatches = holdsUniversalPatches,
-                    onExpandUniversal = { expandedUniversal.setExpanded(it, true) }
+                    onExpandUniversal = { patchSections.setExpanded(it, UNIVERSAL_GROUP_KEY, true) }
                 )
 
                 RetirePrereleaseNotice(
@@ -308,8 +308,7 @@ fun ExpertModeDialog(
                         listState = singleBundleList,
                         markers = markers,
                         isFiltering = isFiltering,
-                        isUniversalExpanded = bundle.uid in expandedUniversal,
-                        onUniversalExpandedChange = { expandedUniversal.setExpanded(bundle.uid, it) },
+                        sectionState = patchSections,
                         lockStateOf = lockStateOf,
                         patchActions = patchActions,
                         onConfigureOptions = { selectedPatchForOptions.value = bundle.uid to it }
@@ -414,7 +413,7 @@ fun ExpertModeDialog(
                     )
 
                     // Kept in place on a tab the filters emptied, so the pager height holds and
-                    // the bulk actions grey out instead of the whole row snapping away
+                    // the bulk actions gray out instead of the whole row snapping away
                     BundleControls(
                         bundle = currentBundle,
                         patches = currentFiltered.orEmpty(),
@@ -422,7 +421,7 @@ fun ExpertModeDialog(
                         savedPatches = savedPatches,
                         lockStateOf = lockStateOf,
                         holdsUniversalPatches = holdsUniversalPatches,
-                        onExpandUniversal = { expandedUniversal.setExpanded(it, true) },
+                        onExpandUniversal = { patchSections.setExpanded(it, UNIVERSAL_GROUP_KEY, true) },
                         modifier = Modifier.padding(vertical = Defaults.ContentPaddingSmall)
                     )
 
@@ -446,8 +445,7 @@ fun ExpertModeDialog(
                                     listState = pageListStates[pageIndex],
                                     markers = markers,
                                     isFiltering = isFiltering,
-                                    isUniversalExpanded = bundle.uid in expandedUniversal,
-                                    onUniversalExpandedChange = { expandedUniversal.setExpanded(bundle.uid, it) },
+                                    sectionState = patchSections,
                                     lockStateOf = lockStateOf,
                                     patchActions = patchActions,
                                     onConfigureOptions = { selectedPatchForOptions.value = bundle.uid to it }
@@ -548,16 +546,6 @@ private fun PatchesListEmptyOverlay(visible: Boolean) {
     }
 }
 
-/** One bundle's patches, split into the ones written for this app and the universal ones. */
-@Immutable
-private data class PatchSections(
-    val specific: List<Pair<PatchInfo, Boolean>>,
-    val universal: List<Pair<PatchInfo, Boolean>>
-) {
-    /** Enabled universal patches, the ones a folded section would otherwise hide. */
-    val selectedUniversalCount = universal.count { (_, isEnabled) -> isEnabled }
-}
-
 /** Everything the rows of a bundle badge or warn about, all keyed by bundle uid. */
 @Immutable
 private data class PatchMarkers(
@@ -566,26 +554,6 @@ private data class PatchMarkers(
     val customOptions: Map<Int, Set<String>>,
     val prereleaseNotices: Set<Int>
 )
-
-/**
- * Splits and orders one bundle's patches for display. New patches float to the top of each
- * group; within a group the order is alphabetical.
- */
-@Composable
-private fun rememberPatchSections(
-    patches: List<Pair<PatchInfo, Boolean>>,
-    newPatchNames: Set<String>
-): PatchSections = remember(patches, newPatchNames) {
-    val displayOrder = compareByDescending<Pair<PatchInfo, Boolean>> { (patch, _) ->
-        patch.name in newPatchNames
-    }.thenBy { (patch, _) -> patch.name }
-
-    val (universal, specific) = patches.partition { (patch, _) -> patch.isUniversal }
-    PatchSections(
-        specific = specific.sortedWith(displayOrder),
-        universal = universal.sortedWith(displayOrder)
-    )
-}
 
 /** How long a pre-release warning holds its place, long enough to read it once. */
 private val PrereleaseNoticeDuration = 8.seconds
@@ -675,9 +643,9 @@ private fun BundleControls(
 }
 
 /**
- * One bundle's scrolling list: its pre-release warning, the patches written for this app, then
- * the universal ones behind a collapsible header. Every row animates its own placement, so
- * search results and the fold settle instead of jumping.
+ * One bundle's scrolling list: its pre-release warning, then the patches block by block, each
+ * behind a collapsible header of its own. Every row animates its own placement, so search
+ * results and the fold settle instead of jumping.
  *
  * The scrollbar stays with the caller, since the tabbed layout draws a single overlay for the
  * whole pager rather than one per page.
@@ -689,8 +657,7 @@ private fun BundlePatchList(
     listState: LazyListState,
     markers: PatchMarkers,
     isFiltering: Boolean,
-    isUniversalExpanded: Boolean,
-    onUniversalExpandedChange: (Boolean) -> Unit,
+    sectionState: PatchSectionState,
     lockStateOf: (PatchInfo) -> PatchLockState,
     patchActions: ExpertPatchActions,
     onConfigureOptions: (PatchInfo) -> Unit,
@@ -699,7 +666,19 @@ private fun BundlePatchList(
     val newPatchNames = markers.newPatches[bundle.uid].orEmpty()
     val missingRequiredOptions = markers.missingRequiredOptions[bundle.uid].orEmpty()
     val customOptions = markers.customOptions[bundle.uid].orEmpty()
-    val sections = rememberPatchSections(patches = patches, newPatchNames = newPatchNames)
+    // New patches float to the top of each block; within a block the order is alphabetical
+    val ordered = remember(patches, newPatchNames) {
+        val displayOrder = compareByDescending<Pair<PatchInfo, Boolean>> { (patch, _) ->
+            patch.name in newPatchNames
+        }.thenBy { (patch, _) -> patch.name }
+        patches.sortedWith(displayOrder)
+    }
+    val groups = rememberPatchGroups(
+        patches = ordered,
+        infoOf = { (patch, _) -> patch },
+        isEnabled = { (_, isEnabled) -> isEnabled }
+    )
+    val folds = sectionState.folds
 
     LazyColumn(
         state = listState,
@@ -710,15 +689,13 @@ private fun BundlePatchList(
 
         // Availability is resolved per patch, so a universal patch the installer requires or
         // rules out carries the same lock as an app-specific one
-        patchSectionRows(
+        patchGroupRows(
             sectionKey = bundle.uid,
-            specific = sections.specific,
-            universal = sections.universal,
+            groups = groups,
             key = { (patch, _): Pair<PatchInfo, Boolean> -> "${bundle.uid}:${patch.name}" },
             isFiltering = isFiltering,
-            isUniversalExpanded = isUniversalExpanded,
-            onUniversalExpandedChange = onUniversalExpandedChange,
-            universalSelectedCount = sections.selectedUniversalCount
+            folds = folds,
+            onToggle = { group -> sectionState.toggle(bundle.uid, group) }
         ) { (patch, isEnabled) ->
             PatchCard(
                 patch = patch,

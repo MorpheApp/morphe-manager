@@ -87,7 +87,8 @@ fun AppPatchesDialog(
     val selectedBundle = remember { mutableStateOf<Int?>(null) }
     val showFilterSheet = remember { mutableStateOf(false) }
     val collapsedBundles = remember { mutableStateOf(emptySet<Int>()) }
-    val expandedUniversal = rememberUniversalSectionState()
+    val patchSections = rememberPatchSectionState()
+    val patchFolds = patchSections.folds
 
     val filteredPatches = remember(allPatches, searchQuery.value, selectedBundle.value) {
         allPatches.filter { (uid, patch) ->
@@ -116,6 +117,20 @@ fun AppPatchesDialog(
         }
         result.map { it.first to it.second.toList() }
     }
+
+    // Every bundle's rows are grouped up front, so the list builder below stays free of the
+    // preference read and the resource lookup that grouping needs
+    val groupingOptions = rememberPatchGroupingOptions()
+    val bundleGroups: List<Pair<Int, List<PatchGroup<PatchInfo>>>> =
+        remember(groupedFilteredPatches, groupingOptions) {
+            groupedFilteredPatches.map { (uid, bundlePatches) ->
+                uid to buildPatchGroups(
+                    patches = bundlePatches,
+                    options = groupingOptions,
+                    infoOf = { patch -> patch }
+                )
+            }
+        }
 
     AppDialog(
         onDismissRequest = onDismiss,
@@ -220,58 +235,39 @@ fun AppPatchesDialog(
                         }
 
                         // Patch cards grouped by bundle
-                        groupedFilteredPatches.forEach { (uid, bundlePatches) ->
+                        bundleGroups.forEach { (uid, groups) ->
                             // Bundle section header (collapsible) - only for multi-bundle
                             if (isMultiBundle) {
                                 item(key = "header_$uid") {
                                     val isCollapsed = uid in collapsedBundles.value
-                                    val expandLabel = stringResource(R.string.expand)
-                                    val collapseLabel = stringResource(R.string.collapse)
-                                    HomeGlassCategoryRow(
+                                    PatchGroupHeader(
                                         title = bundleNames[uid] ?: uid.toString(),
-                                        leading = {
-                                            Icon(
-                                                imageVector = Icons.Outlined.Layers,
-                                                contentDescription = null,
-                                                modifier = Modifier.size(24.dp),
-                                                tint = MaterialTheme.colorScheme.primary
-                                            )
-                                        },
-                                        color = rememberAccentCardColor(bundleAccentColors[uid]),
-                                        trailing = {
-                                            Icon(
-                                                imageVector = if (isCollapsed) Icons.Outlined.ExpandMore else Icons.Outlined.ExpandLess,
-                                                contentDescription = if (isCollapsed) expandLabel else collapseLabel,
-                                                modifier = Modifier.size(24.dp),
-                                                tint = MaterialTheme.colorScheme.onSurfaceVariant
-                                            )
-                                        },
-                                        onClick = {
+                                        count = groups.sumOf { it.items.size },
+                                        isExpanded = !isCollapsed,
+                                        onToggle = {
                                             collapsedBundles.value = if (isCollapsed) {
                                                 collapsedBundles.value - uid
                                             } else {
                                                 collapsedBundles.value + uid
                                             }
                                         },
-                                        cornerRadius = Defaults.SettingsCornerRadius,
+                                        icon = Icons.Outlined.Layers,
+                                        accentColor = bundleAccentColors[uid],
                                         modifier = Modifier.animatedListItem(this)
                                     )
                                 }
                             }
 
                             if (uid !in collapsedBundles.value) {
-                                val (specificPatches, universalPatches) = bundlePatches.partition { !it.isUniversal }
-
-                                patchSectionRows(
+                                patchGroupRows(
                                     sectionKey = uid,
-                                    specific = specificPatches,
-                                    universal = universalPatches,
+                                    groups = groups,
                                     key = { patch: PatchInfo ->
                                         "$uid:${patch.name}:${patch.compatiblePackages?.joinToString { it.packageName.orEmpty() }.orEmpty()}"
                                     },
                                     isFiltering = isFiltering,
-                                    isUniversalExpanded = uid in expandedUniversal,
-                                    onUniversalExpandedChange = { expandedUniversal.setExpanded(uid, it) },
+                                    folds = patchFolds,
+                                    onToggle = { group -> patchSections.toggle(uid, group) },
                                     accentColor = bundleAccentColors[uid]
                                 ) { patch ->
                                     PatchItemCard(

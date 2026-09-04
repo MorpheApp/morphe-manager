@@ -17,6 +17,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -35,6 +36,8 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.screen.shared.Animations
 import app.morphe.manager.ui.screen.shared.AppDialogTextField
 import app.morphe.manager.ui.screen.shared.Defaults
@@ -44,6 +47,7 @@ import app.morphe.manager.ui.screen.shared.SemanticTone
 import app.morphe.manager.ui.screen.shared.StatusBadge
 import app.morphe.manager.ui.screen.shared.animatedListItem
 import app.morphe.manager.util.toHsv
+import org.koin.compose.koinInject
 
 /**
  * Header card shown at the top of patches-list dialogs.
@@ -110,23 +114,148 @@ internal fun rememberAccentCardColor(accentColor: Color?): Color? =
     }
 
 /**
- * Collapsible section header for the universal patches of one bundle.
+ * One collapsible block of a patch list.
  *
- * A null [onToggle] drops the chevron and the click, for the cases where the section has
- * nothing left to fold away.
+ * A null [title] is the ungrouped remainder: it carries no header and is always drawn, which is
+ * how a bundle that declares no categories keeps the plain list it has today. [key] is what the
+ * fold state is stored under, so a block holds its fold while a search reorders the list around it.
+ */
+@Immutable
+internal data class PatchGroup<T>(
+    val key: String,
+    val title: String?,
+    val items: List<T>,
+    val icon: ImageVector = Icons.Outlined.Category,
+    /** Enabled patches, the ones a folded block would otherwise hide. */
+    val selectedCount: Int = 0,
+    val defaultExpanded: Boolean = true
+)
+
+/** Fold key of the universal block, for the callers that have to open it from the outside. */
+internal const val UNIVERSAL_GROUP_KEY = "universal"
+
+private const val UNGROUPED_GROUP_KEY = "ungrouped"
+
+/**
+ * Splits [patches] into the blocks a list is drawn as: whatever the bundle left uncategorized,
+ * then one block per declared category, then the universal patches it did not categorize.
  *
- * [accentColor] is the color the bundle marks its own patches with, so the header stays part of
- * the block it opens when several bundles each contribute a universal section.
+ * A category is what the bundle asked for, so it wins over the universal split: a universal patch
+ * that declares one joins that block rather than the tail. Bundles written entirely against
+ * universal targets are the ones with the most patches to sort through, and folding all of them
+ * into a single tail would leave them exactly as unsorted as before.
  *
- * [selectedCount] is badged on the header itself, since a folded section is the one place a
- * patch can be enabled without being visible.
+ * The tail keeps the universal patches with no category of their own. Those apply to every app and
+ * would otherwise bury the handful written for this one, so they stay last and folded. Categories
+ * start out open instead, since folding a block that hides an enabled patch is only worth it for
+ * the one the user is least likely to have picked from. With grouping off the categories are
+ * ignored and only that tail is split off, which is also what a bundle that declares no categories
+ * at all comes out as.
+ *
+ * Order within a block is the order [patches] came in, so callers keep the sorting they want.
+ */
+internal fun <T> buildPatchGroups(
+    patches: List<T>,
+    options: PatchGroupingOptions,
+    infoOf: (T) -> PatchInfo,
+    isEnabled: (T) -> Boolean = { false }
+): List<PatchGroup<T>> {
+    val byCategory = patches.groupBy { if (options.groupByCategory) infoOf(it).category else null }
+    val (universal, ungrouped) = byCategory[null].orEmpty().partition { infoOf(it).isUniversal }
+
+    return buildList {
+        if (ungrouped.isNotEmpty()) {
+            add(PatchGroup(key = UNGROUPED_GROUP_KEY, title = null, items = ungrouped))
+        }
+
+        byCategory.keys.filterNotNull().sortedBy { it.lowercase() }.forEach { category ->
+            val items = byCategory.getValue(category)
+            add(
+                PatchGroup(
+                    key = "category:$category",
+                    title = category,
+                    items = items,
+                    selectedCount = items.count(isEnabled)
+                )
+            )
+        }
+
+        if (universal.isNotEmpty()) {
+            add(
+                PatchGroup(
+                    key = UNIVERSAL_GROUP_KEY,
+                    title = options.universalTitle,
+                    items = universal,
+                    icon = Icons.Outlined.Public,
+                    selectedCount = universal.count(isEnabled),
+                    defaultExpanded = false
+                )
+            )
+        }
+    }
+}
+
+/**
+ * Everything [buildPatchGroups] needs beyond the patches themselves, read once per list rather
+ * than per bundle, so a screen that groups several lists does not call into composition per item.
+ */
+@Immutable
+internal data class PatchGroupingOptions(
+    val universalTitle: String,
+    val groupByCategory: Boolean
+)
+
+@Composable
+internal fun rememberPatchGroupingOptions(
+    prefs: PreferencesManager = koinInject()
+): PatchGroupingOptions {
+    val universalTitle = stringResource(R.string.expert_mode_universal_patches)
+    val groupByCategory by prefs.groupPatchesByCategory.getAsState()
+
+    return remember(universalTitle, groupByCategory) {
+        PatchGroupingOptions(universalTitle, groupByCategory)
+    }
+}
+
+/**
+ * The blocks [patches] is drawn as, following the user's grouping preference.
+ *
+ * Categories are whatever the bundle declares, so a bundle that declares none, and a user who
+ * turned grouping off, both end up with the plain list plus its universal tail.
  */
 @Composable
-internal fun UniversalPatchesHeader(
+internal fun <T> rememberPatchGroups(
+    patches: List<T>,
+    infoOf: (T) -> PatchInfo,
+    isEnabled: (T) -> Boolean = { false }
+): List<PatchGroup<T>> {
+    val options = rememberPatchGroupingOptions()
+
+    return remember(patches, options) {
+        buildPatchGroups(patches, options, infoOf, isEnabled)
+    }
+}
+
+/**
+ * Collapsible header of one block of a patch list.
+ *
+ * A null [onToggle] drops the chevron and the click, for the cases where the block has nothing
+ * left to fold away.
+ *
+ * [accentColor] is the color the bundle marks its own patches with, so the header stays part of
+ * the block it opens when several bundles each contribute one.
+ *
+ * [selectedCount] is badged on the header itself, since a folded block is the one place a patch
+ * can be enabled without being visible.
+ */
+@Composable
+internal fun PatchGroupHeader(
+    title: String,
     count: Int,
     isExpanded: Boolean,
     onToggle: (() -> Unit)?,
     modifier: Modifier = Modifier,
+    icon: ImageVector = Icons.Outlined.Category,
     accentColor: Color? = null,
     selectedCount: Int = 0
 ) {
@@ -134,7 +263,7 @@ internal fun UniversalPatchesHeader(
     val chevronRotation by animateFloatAsState(
         targetValue = if (isExpanded) 180f else 0f,
         animationSpec = tween(Defaults.ANIMATION_DURATION),
-        label = "universal_patches_chevron"
+        label = "patch_group_chevron"
     )
 
     // Held while the badge fades out, so the count does not blink to zero on its way off
@@ -143,12 +272,12 @@ internal fun UniversalPatchesHeader(
     val shownSelectedCount = lastSelectedCount.intValue
 
     HomeGlassCategoryRow(
-        title = stringResource(R.string.expert_mode_universal_patches),
+        title = title,
         count = pluralStringResource(R.plurals.patch_count, count, count.toString()),
         onClick = onToggle,
         leading = {
             Icon(
-                imageVector = Icons.Outlined.Public,
+                imageVector = icon,
                 contentDescription = null,
                 modifier = Modifier.size(24.dp),
                 tint = MaterialTheme.colorScheme.onSurfaceVariant
@@ -202,49 +331,52 @@ internal fun UniversalPatchesHeader(
 }
 
 /**
- * Rows of one bundle: the patches written for the app at hand first, then the universal ones
- * behind a collapsible header.
+ * Rows of one patch list, block by block, each behind a collapsible header of its own.
  *
- * Universal patches apply to every app and would otherwise bury the handful written for this one.
- * There is nothing worth folding away when they are the whole list, or when a filter already
- * narrows it, so [isFiltering] and an empty [specific] both keep the section open.
+ * There is nothing worth folding away when the list is a single block, and a filter already
+ * narrows it far enough that a fold would only hide results, so both keep every block open.
  *
  * [row] draws one patch and stays with the caller, since the lists differ in what a row carries
  * and in what it can be toggled into.
+ *
+ * [folds] is a plain snapshot rather than the state holder itself: this builder runs while the
+ * lazy list assembles its items, so a fold has to reach it as a value the screen already read.
  */
-internal fun <T> LazyListScope.patchSectionRows(
+internal fun <T> LazyListScope.patchGroupRows(
     sectionKey: Any,
-    specific: List<T>,
-    universal: List<T>,
+    groups: List<PatchGroup<T>>,
     key: (T) -> Any,
     isFiltering: Boolean,
-    isUniversalExpanded: Boolean,
-    onUniversalExpandedChange: (Boolean) -> Unit,
+    folds: PatchFolds,
+    onToggle: (PatchGroup<T>) -> Unit,
     accentColor: Color? = null,
-    universalSelectedCount: Int = 0,
     row: @Composable LazyItemScope.(T) -> Unit
 ) {
-    items(specific, key = key, itemContent = row)
+    val alwaysOpen = isFiltering || groups.size == 1
 
-    if (universal.isEmpty()) return
+    groups.forEach { group ->
+        if (group.title == null) {
+            items(group.items, key = key, itemContent = row)
+            return@forEach
+        }
 
-    val alwaysOpen = isFiltering || specific.isEmpty()
-    val isExpanded = alwaysOpen || isUniversalExpanded
+        val isExpanded = alwaysOpen || folds.isExpanded(sectionKey, group)
 
-    item(key = "universal_header_$sectionKey") {
-        UniversalPatchesHeader(
-            count = universal.size,
-            isExpanded = isExpanded,
-            onToggle = if (alwaysOpen) null else { { onUniversalExpandedChange(!isUniversalExpanded) } },
-            accentColor = accentColor,
-            selectedCount = universalSelectedCount,
-            modifier = Modifier.animatedListItem(this)
-        )
+        item(key = "group_${sectionKey}_${group.key}") {
+            PatchGroupHeader(
+                title = group.title,
+                count = group.items.size,
+                isExpanded = isExpanded,
+                onToggle = if (alwaysOpen) null else ({ onToggle(group) }),
+                icon = group.icon,
+                accentColor = accentColor,
+                selectedCount = group.selectedCount,
+                modifier = Modifier.animatedListItem(this)
+            )
+        }
+
+        if (isExpanded) items(group.items, key = key, itemContent = row)
     }
-
-    if (!isExpanded) return
-
-    items(universal, key = key, itemContent = row)
 }
 
 /**
@@ -321,21 +453,42 @@ internal fun PatchesListEmptyState(modifier: Modifier = Modifier) {
 }
 
 /**
- * Which bundles have their universal section unfolded.
+ * The folds of a patch list, as a value a screen can read and hand to the list builder.
  *
- * The state belongs to the screen rather than to the section, since "enable all" has to open a
- * section on the tap that finally reaches its universal patches.
+ * Only explicit toggles are stored, so a block the user never touched follows its own default.
+ */
+@Immutable
+internal data class PatchFolds(private val overrides: Map<String, Boolean>) {
+    fun isExpanded(sectionKey: Any, group: PatchGroup<*>) =
+        overrides[foldKey(sectionKey, group.key)] ?: group.defaultExpanded
+
+    internal fun with(sectionKey: Any, groupKey: String, expanded: Boolean) =
+        PatchFolds(overrides + (foldKey(sectionKey, groupKey) to expanded))
+}
+
+private fun foldKey(sectionKey: Any, groupKey: String) = "$sectionKey:$groupKey"
+
+/**
+ * Which blocks of a patch list the user has folded open or shut.
+ *
+ * The state belongs to the screen rather than to the block, since "enable all" has to open a
+ * block on the tap that finally reaches its universal patches. Screens read [folds] in
+ * composition, so a toggle rebuilds the list the ordinary way instead of relying on the lazy
+ * list to observe a read made while it was assembling its items.
  */
 @Stable
-internal class UniversalSectionState {
-    private var expandedUids by mutableStateOf(emptySet<Int>())
+internal class PatchSectionState {
+    var folds by mutableStateOf(PatchFolds(emptyMap()))
+        private set
 
-    operator fun contains(bundleUid: Int) = bundleUid in expandedUids
+    fun toggle(sectionKey: Any, group: PatchGroup<*>) {
+        setExpanded(sectionKey, group.key, !folds.isExpanded(sectionKey, group))
+    }
 
-    fun setExpanded(bundleUid: Int, expanded: Boolean) {
-        expandedUids = if (expanded) expandedUids + bundleUid else expandedUids - bundleUid
+    fun setExpanded(sectionKey: Any, groupKey: String, expanded: Boolean) {
+        folds = folds.with(sectionKey, groupKey, expanded)
     }
 }
 
 @Composable
-internal fun rememberUniversalSectionState() = remember { UniversalSectionState() }
+internal fun rememberPatchSectionState() = remember { PatchSectionState() }

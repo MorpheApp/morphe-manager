@@ -89,6 +89,9 @@ class PreferencesManager(
 
     val useExpertMode = booleanPreference("use_expert_mode", false)
 
+    /** Whether patch lists are sectioned by the categories their bundle declares. */
+    val groupPatchesByCategory = booleanPreference("group_patches_by_category", true)
+
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
 
     /** Bytecode processing mode for the patcher. Defaults to [BytecodeMode.STRIP_FAST]. */
@@ -108,7 +111,7 @@ class PreferencesManager(
     val useProcessRuntime = booleanPreference(
         "process_runtime", // Old key was 'use_process_runtime' and may have the wrong default for some devices.
         // Process runtime fails for Android 10 and lower.
-        // Armv7 silently fails and nobody has researched why.
+        // ARMv7 silently fails and nobody has researched why.
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !isArmV7()
     )
     val patcherProcessMemoryLimit = IntPreference(dataStore, "use_process_runtime_memory_limit", PROCESS_RUNTIME_MEMORY_NOT_SET)
@@ -249,6 +252,7 @@ class PreferencesManager(
         val randomBackgroundInterval: RandomInterval? = null,
         val matrixBackgroundUnlocked: Boolean? = null,
         val useExpertMode: Boolean? = null,
+        val groupPatchesByCategory: Boolean? = null,
         val updateCheckInterval: UpdateCheckInterval? = null,
         val externalBatchPatchEnabled: Boolean? = null,
         val externalBatchPatchAllowlist: Set<String>? = null,
@@ -302,6 +306,7 @@ class PreferencesManager(
         randomBackgroundInterval = randomBackgroundInterval.get(),
         matrixBackgroundUnlocked = matrixBackgroundUnlocked.get(),
         useExpertMode = useExpertMode.get(),
+        groupPatchesByCategory = groupPatchesByCategory.get(),
         updateCheckInterval = updateCheckInterval.get(),
         externalBatchPatchEnabled = externalBatchPatchEnabled.get(),
         externalBatchPatchAllowlist = externalBatchPatchAllowlist.get(),
@@ -372,6 +377,7 @@ class PreferencesManager(
         snapshot.randomBackgroundInterval?.let { randomBackgroundInterval.value = it }
         snapshot.matrixBackgroundUnlocked?.let { matrixBackgroundUnlocked.value = it }
         snapshot.useExpertMode?.let { useExpertMode.value = it }
+        snapshot.groupPatchesByCategory?.let { groupPatchesByCategory.value = it }
         snapshot.updateCheckInterval?.let { updateCheckInterval.value = it }
         snapshot.externalBatchPatchEnabled?.let { externalBatchPatchEnabled.value = it }
         snapshot.externalBatchPatchAllowlist?.let { externalBatchPatchAllowlist.value = it }

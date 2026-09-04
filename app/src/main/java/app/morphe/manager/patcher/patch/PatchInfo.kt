@@ -25,6 +25,8 @@ data class PatchInfo(
     val availabilityResolver: AvailabilityResolver? = null,
     /** The name as declared by the bundle, for anything the user reads. */
     val displayName: String = name,
+    /** Group declared by the bundle, or null when the bundle does not categorize its patches. */
+    val category: String? = null
 ) {
     @Suppress("DEPRECATION")
     constructor(patch: Patch<*>) : this(
@@ -87,6 +89,7 @@ data class PatchInfo(
             }?.toImmutableList(),
         options = patch.options.map { (_, option) -> Option(option) }.ifEmpty { null }?.toImmutableList(),
         availabilityResolver = patch.availability,
+        category = patch.category?.takeIf { it.isNotBlank() }
     )
 
     /**
