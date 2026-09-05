@@ -74,6 +74,7 @@ fun AppearanceTabContent(
     val customAppCardColors by themeViewModel.prefs.customAppCardColors.getAsState()
     val showAppGroupingSwitcher by homeAppButtonPrefs.showCategoryViewSwitcher.collectAsStateWithLifecycle()
     val showSortButton by homeAppButtonPrefs.showSortButton.collectAsStateWithLifecycle()
+    val groupPatchesByCategory by themeViewModel.prefs.groupPatchesByCategory.getAsState()
     val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
     val enableParallax by themeViewModel.prefs.enableBackgroundParallax.getAsState()
     val randomInterval by themeViewModel.prefs.randomBackgroundInterval.getAsState()
@@ -147,6 +148,13 @@ fun AppearanceTabContent(
             onRepatchNoticeToggle = { themeViewModel.toggleShowRepatchNotice(showRepatchNotice) },
             onSortButtonToggle = { homeAppButtonPrefs.setShowSortButton(!showSortButton) },
             onAppGroupingToggle = { homeAppButtonPrefs.setShowCategoryViewSwitcher(!showAppGroupingSwitcher) }
+        )
+
+        PatchListSection(
+            groupByCategory = groupPatchesByCategory,
+            onGroupByCategoryToggle = {
+                themeViewModel.toggleGroupPatchesByCategory(groupPatchesByCategory)
+            }
         )
 
         BackgroundSection(
@@ -461,6 +469,30 @@ private fun HomeScreenSection(
             icon = Icons.Outlined.ViewAgenda,
             checked = showAppGrouping,
             onToggle = onAppGroupingToggle
+        )
+    }
+}
+
+/**
+ * Toggles for how patch lists are laid out.
+ */
+@Composable
+private fun PatchListSection(
+    groupByCategory: Boolean,
+    onGroupByCategoryToggle: () -> Unit
+) {
+    SectionHeader(
+        text = stringResource(R.string.settings_appearance_patch_list),
+        icon = Icons.Outlined.Extension
+    )
+
+    SettingsGroup(modifier = Modifier.padding(bottom = Defaults.ContentPadding)) {
+        SettingsSwitchItem(
+            title = stringResource(R.string.settings_appearance_patch_categories),
+            subtitle = stringResource(R.string.settings_appearance_patch_categories_description),
+            icon = Icons.Outlined.Category,
+            checked = groupByCategory,
+            onToggle = onGroupByCategoryToggle
         )
     }
 }
