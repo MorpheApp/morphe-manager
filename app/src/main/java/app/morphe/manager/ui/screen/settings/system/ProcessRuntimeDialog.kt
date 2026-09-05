@@ -39,12 +39,12 @@ fun ProcessRuntimeDialog(
     onLimitChange: (Int) -> Unit,
 ) {
     val context = LocalContext.current
-    // Adaptive upper bound: use device-RAM-based limit, capped at the hard maximum
-    val maxLimit: Int = calculateAdaptiveMemoryLimit(context).coerceIn(
-        PROCESS_RUNTIME_MEMORY_MAX_LIMIT_INITIALIZATION, PROCESS_RUNTIME_MEMORY_MAX_LIMIT
-    )
+    val maxLimit: Int = maxMemoryLimit(context)
     var enabled by remember { mutableStateOf(currentEnabled) }
-    var sliderValue by remember { mutableFloatStateOf(currentLimit.toFloat()) }
+    // Clamped because the stored limit may come from an import made on a roomier device
+    var sliderValue by remember {
+        mutableFloatStateOf(coerceMemoryLimit(context, currentLimit).toFloat())
+    }
     val selectedLimit = sliderValue.roundToInt()
 
     AppDialog(
@@ -128,18 +128,33 @@ fun ProcessRuntimeDialog(
                     icon = Icons.Outlined.Info
                 )
 
-                // Warning for low values
+                // Both ends of the range have something to say, and never at the same time
+                val warning = when {
+                    selectedLimit < PROCESS_RUNTIME_MEMORY_LOW_WARNING ->
+                        R.string.settings_system_memory_limit_warning to SemanticTone.Error
+
+                    isExtendedMemoryLimit(selectedLimit) ->
+                        R.string.settings_system_memory_limit_high_warning to SemanticTone.Warning
+
+                    else -> null
+                }
+                // Held on to so the notice keeps its text and tone while it animates out
+                var lastWarning by remember { mutableStateOf(warning) }
+                warning?.let { lastWarning = it }
+
                 AnimatedVisibility(
-                    visible = enabled && selectedLimit < PROCESS_RUNTIME_MEMORY_LOW_WARNING,
+                    visible = enabled && warning != null,
                     enter = Animations.expandFadeEnter,
                     exit = Animations.shrinkFadeExit
                 ) {
-                    Notice(
-                        modifier = Modifier.padding(top = Defaults.ContentPadding),
-                        text = stringResource(R.string.settings_system_memory_limit_warning),
-                        tone = SemanticTone.Error,
-                        icon = Icons.Outlined.Warning
-                    )
+                    lastWarning?.let { (text, tone) ->
+                        Notice(
+                            modifier = Modifier.padding(top = Defaults.ContentPadding),
+                            text = stringResource(text),
+                            tone = tone,
+                            icon = Icons.Outlined.Warning
+                        )
+                    }
                 }
             }
         }

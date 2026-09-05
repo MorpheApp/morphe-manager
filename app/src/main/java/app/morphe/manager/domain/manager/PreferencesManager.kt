@@ -9,9 +9,9 @@ import app.morphe.manager.domain.manager.base.BasePreferencesManager
 import app.morphe.manager.domain.manager.base.IntPreference
 import app.morphe.manager.domain.manager.base.LongPreference
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
-import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_MAX_LIMIT_INITIALIZATION
 import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_NOT_SET
-import app.morphe.manager.patcher.runtime.calculateAdaptiveMemoryLimit
+import app.morphe.manager.patcher.runtime.coerceMemoryLimit
+import app.morphe.manager.patcher.runtime.initialMemoryLimit
 import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.theme.ThemeStyle
@@ -29,7 +29,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 
 class PreferencesManager(
-    context: Context
+    private val context: Context
 ) : BasePreferencesManager(context, "settings") {
 
     // Appearance tab
@@ -182,9 +182,7 @@ class PreferencesManager(
 
             // Initialize process memory limit adaptively on first launch
             if (patcherProcessMemoryLimit.get() == PROCESS_RUNTIME_MEMORY_NOT_SET) {
-                val adaptive = calculateAdaptiveMemoryLimit(context).coerceAtMost(
-                    PROCESS_RUNTIME_MEMORY_MAX_LIMIT_INITIALIZATION
-                )
+                val adaptive = initialMemoryLimit(context)
                 Log.d(tag, "Initializing process memory limit to $adaptive MB (device RAM-based)")
                 patcherProcessMemoryLimit.update(adaptive)
             }
@@ -338,7 +336,10 @@ class PreferencesManager(
         snapshot.gitHubPat?.let { gitHubPat.value = it }
         snapshot.includeGitHubPatInExports?.let { includeGitHubPatInExports.value = it }
         snapshot.useProcessRuntime?.let { useProcessRuntime.value = it }
-        snapshot.patcherProcessMemoryLimit?.let { patcherProcessMemoryLimit.value = it }
+        // Clamped rather than taken as-is, so a limit exported from a roomier device still fits
+        snapshot.patcherProcessMemoryLimit?.let {
+            patcherProcessMemoryLimit.value = coerceMemoryLimit(context, it)
+        }
         snapshot.allowMeteredUpdates?.let { allowMeteredUpdates.value = it }
         snapshot.installerPrimary?.let { installerPrimary.value = it }
         snapshot.installerCustomComponents?.let { installerCustomComponents.value = it }

@@ -33,6 +33,7 @@ import app.morphe.manager.patcher.patch.ApkArchitectureResolver
 import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.patcher.runtime.CoroutineRuntime
 import app.morphe.manager.patcher.runtime.ProcessRuntime
+import app.morphe.manager.patcher.runtime.coerceMemoryLimit
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.util.NativeLibStripper
 import app.morphe.manager.ui.model.SelectedApp
@@ -376,7 +377,8 @@ class PatcherWorker(
 
             // Log runtime mode info
             if (useProcessRuntime) {
-                val memLimit = prefs.patcherProcessMemoryLimit.get()
+                // The limit the runtime will actually start with, not the raw setting
+                val memLimit = coerceMemoryLimit(applicationContext, prefs.patcherProcessMemoryLimit.get())
                 args.logger.info("$LOG_WORKER_PREFIX_RUNTIME process $LOG_WORKER_FIELD_MEMORY_LIMIT=$memLimit")
             } else {
                 // CoroutineRuntime starts memory polling internally; only log the heap size here
