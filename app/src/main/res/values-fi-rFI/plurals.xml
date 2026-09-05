@@ -76,4 +76,8 @@
         <item quantity="one">Kopioitiin %s korjaustiedosto valitusta paketista</item>
         <item quantity="other">Kopioitiin %s korjaustiedostoa valitusta paketista</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s ydin</item>
+        <item quantity="other">%s ydintä</item>
+    </plurals>
 </resources>

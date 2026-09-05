@@ -57,4 +57,7 @@
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="other">選択したバンドルから %s 個のパッチをコピーしました</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="other">%sコア</item>
+    </plurals>
 </resources>

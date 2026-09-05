@@ -76,4 +76,8 @@
         <item quantity="one">Se copió el parche %s del paquete seleccionado</item>
         <item quantity="other">Se copiaron %s parches del paquete seleccionado</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s núcleo</item>
+        <item quantity="other">%s núcleos</item>
+    </plurals>
 </resources>

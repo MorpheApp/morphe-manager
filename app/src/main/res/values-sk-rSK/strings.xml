@@ -35,6 +35,9 @@
     <string name="home_update_skipped_metered">Aktualizácia preskočená</string>
     <string name="home_update_skipped_metered_subtitle">Mobilné dáta sú aktívne</string>
     <string name="home_updating_sources">Aktualizácia zdrojov…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d / %2$d  ·  %3$s / %4$s MB (%5$d%%)</string>
     <string name="home_update_success">Aktualizácia zdrojov dokončená</string>
     <string name="home_update_success_subtitle">Vaše zdroje sú aktuálne</string>
     <string name="home_sources_are_loading">Zdroje sa načítavajú, prosím počkajte…</string>
@@ -317,7 +320,8 @@ Pre najlepšie výsledky sa odporúča záplatovať &lt;b&gt;úplný APK&lt;/b&g
     <string name="home_outdated_patches_dialog_warning">Používanie zastaraných záplat môže spôsobiť nefunkčnosť aplikácie</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Aktualizovať &amp; záplatu</string>
     <string name="home_low_disk_space_dialog_title">Nedostatok miesta na disku</string>
-    <string name="home_low_disk_space_dialog_message">Dostupných je iba %1$.2f GB voľného úložiska. Záplatovanie vyžaduje na správnu funkciu aspoň %2$.2f GB voľného miesta</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">K dispozícii je iba %1$s GB voľného úložiska. Oprava vyžaduje aspoň %2$s GB voľného miesta, aby správne fungovala.</string>
     <string name="home_low_disk_space_dialog_warning">Pokračovanie môže viesť k chybe \"súbor sa nenašiel\" alebo poškodenému výstupnému APK</string>
     <string name="home_simple_bundle_select_title">Vyber zdrojový súbor záplaty</string>
     <!-- Color picker -->
@@ -576,7 +580,7 @@ Odinštalovanie trvalo vymaže všetky údaje aplikácie."</string>
     <string name="patcher_message_15">Všetky systémy v norme... trajektória plátania stabilná... 🚀</string>
     <string name="patcher_message_16">Vyšťavím z tvojej aplikácie všetku šťavu ako keby to bol digitálny citrón... 🍋</string>
     <string name="patcher_message_17">Povzbudzujeme aplikáciu, aby prijala svoje nové, lepšie ja… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">Meníme superpozíciu aplikácie z nezaplátanej na zaplátanú... 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Tvoja aplikácia má horúčku a jediným liekom je veľa záplat… 🩺🔔</string>
@@ -584,6 +588,8 @@ Odinštalovanie trvalo vymaže všetky údaje aplikácie."</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Plátam aplikáciu</string>
     <string name="memory_usage">Využitie pamäte</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%1$s z %2$s MB</string>
     <string name="cpu_usage">Využitie CPU</string>
     <string name="storage_io_usage">I/O úložiska</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -1086,7 +1092,7 @@ Podrobnosti: %2$s"</string>
     <string name="credits_current_development">Aktuálny vývoj</string>
     <string name="credits_prior_development">Predchádzajúci vývoj</string>
     <string name="opensource_licenses">Licencie otvoreného zdroja</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Voľba</string>
     <string name="easter_egg_pill_message">Vezmi si modrú tabletku a reklamy zostanú presne tam, kde sú. Vezmi si červenú a uvidíš, ako hlboko siaha bytecode.</string>
     <string name="easter_egg_pill_red">Červená tabletka</string>
@@ -1097,6 +1103,10 @@ Podrobnosti: %2$s"</string>
     <string name="easter_egg_pill_red_toast_again">Späť v daždi.</string>
     <string name="easter_egg_pill_blue_toast_again">Odpojený. Cesta späť je tam, kde vždy bola.</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s MB / %2$s MB (%3$s%%)</string>
     <string name="select_file">Vybrať súbor</string>
     <string name="select_folder">Vybrať priečinok</string>
     <string name="patches">Záplaty</string>
@@ -1221,8 +1231,8 @@ Podrobnosti: %2$s"</string>
     <string name="install_update_manager_failed">Nepodarilo sa nainštalovať aktualizáciu</string>
     <string name="installing_manager_update">Inštalácia aktualizácie…</string>
     <string name="downloading_manager_update">Sťahovanie aktualizácie…</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">Stiahnuté %1$.1f MB</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">Stiahnutých %1$s MB</string>
     <string name="manager_update_not_ready">Toto vydanie sa stále publikuje. Skúste to znova o niekoľko minút</string>
     <string name="update_download_missing">Stiahnutá aktualizácia už nie je k dispozícii. Stiahnite si ju znova.</string>
     <string name="download_manager_failed">Nepodarilo sa stiahnuť aktualizáciu: %s</string>

@@ -35,6 +35,9 @@
     <string name="home_update_skipped_metered">Ažuriranja su preskočena</string>
     <string name="home_update_skipped_metered_subtitle">Mobilni podaci su aktivni</string>
     <string name="home_updating_sources">Ažuriranje izvora…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d / %2$d  ·  %3$s / %4$s MB (%5$d%%)</string>
     <string name="home_update_success">Ažuriranje izvora završeno</string>
     <string name="home_update_success_subtitle">Vaši izvori su ažurirani</string>
     <string name="home_sources_are_loading">Izvori se učitavaju, molimo sačekajte…</string>
@@ -317,7 +320,8 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="home_outdated_patches_dialog_warning">Ažuriranje sa zastarelima patch-ovima može dovesti do pokvarenog aplikacije</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Ažuriraj &amp; patchiraj</string>
     <string name="home_low_disk_space_dialog_title">Nedostatak prostora na disku</string>
-    <string name="home_low_disk_space_dialog_message">Samo %1$.2f GB besplatne memorije je dostupno. Popravljanje zahteva najmanje %2$.2f GB besplatnog prostora da bi ispravno radilo</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">Samo %1$s GB slobodne memorije je dostupno. Za ispravan rad, zakrpanje zahteva najmanje %2$s GB slobodnog prostora.</string>
     <string name="home_low_disk_space_dialog_warning">Nastavak može dovesti do greške „datoteka nije pronađena“ ili oštećenog APK-a za izlaz</string>
     <string name="home_simple_bundle_select_title">Izaberi izvor zakrpe</string>
     <!-- Color picker -->
@@ -576,7 +580,7 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="patcher_message_15">Svi sistemi su normalni… putanja zakrpe je stabilna… 🚀</string>
     <string name="patcher_message_16">Iscedimo dodatnu snagu, poput soka iz digitalnog limuna… 🍋</string>
     <string name="patcher_message_17">Podstičemo aplikaciju da prihvati sebe, novu i bolju… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">Menjamo superpoziciju aplikacije iz nezakrpljene u zakrpljenu… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Vaša aplikacija ima temperaturu, a jedini lek je više zakrpa… 🩺🔔</string>
@@ -584,6 +588,8 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Uređivanje aplikacija</string>
     <string name="memory_usage">Upotreba memorije</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%1$s od %2$s MB</string>
     <string name="cpu_usage">Iskorišćenost CPU-a</string>
     <string name="storage_io_usage">I/O skladišta</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -1070,7 +1076,7 @@ Detalji: %2$s"</string>
     <string name="credits_current_development">Тренутни развој</string>
     <string name="credits_prior_development">Претходни развој</string>
     <string name="opensource_licenses">Open-source licence</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Izbor</string>
     <string name="easter_egg_pill_message">Uzmi plavu pilulu i oglasi ostaju tačno gde jesu. Uzmi crvenu i vidi koliko duboko ide bajtkod.</string>
     <string name="easter_egg_pill_red">Crvena pilula</string>
@@ -1081,6 +1087,10 @@ Detalji: %2$s"</string>
     <string name="easter_egg_pill_red_toast_again">Nazad na kiši</string>
     <string name="easter_egg_pill_blue_toast_again">Isključen. Put nazad je tamo gde je oduvek bio.</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s MB / %2$s MB (%3$s%%)</string>
     <string name="select_file">Izaberi datoteku</string>
     <string name="select_folder">Izaberi folder</string>
     <string name="patches">Zakrpe</string>
@@ -1205,8 +1215,8 @@ Detalji: %2$s"</string>
     <string name="install_update_manager_failed">Neuspešno instaliranje ažuriranja</string>
     <string name="installing_manager_update">Instaliranje ažuriranja…</string>
     <string name="downloading_manager_update">Preuzimanje ažuriranja…</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">%1$.1f MB preuzeto</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">%1$s MB preuzeto</string>
     <string name="manager_update_not_ready">Ovo izdanje je i dalje u objavljivanju. Pokušajte ponovo za nekoliko minuta</string>
     <string name="update_download_missing">Preuzeto ažuriranje više nije dostupno. Preuzmite ga ponovo.</string>
     <string name="download_manager_failed">Nije uspelo preuzimanje ažuriranja: %s</string>

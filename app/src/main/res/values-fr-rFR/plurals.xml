@@ -76,4 +76,8 @@
         <item quantity="one">%s patch copié depuis le bundle sélectionné</item>
         <item quantity="other">%s patchs copiés depuis le bundle sélectionné</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s cœur</item>
+        <item quantity="other">%s cœurs</item>
+    </plurals>
 </resources>

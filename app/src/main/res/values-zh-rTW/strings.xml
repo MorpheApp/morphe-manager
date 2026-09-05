@@ -35,6 +35,9 @@
     <string name="home_update_skipped_metered">已略過更新</string>
     <string name="home_update_skipped_metered_subtitle">已啟用行動數據</string>
     <string name="home_updating_sources">正在更新來源…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d / %2$d  ·  %3$s / %4$s MB（%5$d%%）</string>
     <string name="home_update_success">更新來源完成</string>
     <string name="home_update_success_subtitle">來源已是最新狀態</string>
     <string name="home_sources_are_loading">正在載入來源，請稍候…</string>
@@ -316,7 +319,8 @@
     <string name="home_outdated_patches_dialog_warning">使用過時的修補程式進行修補可能會導致應用程式損壞</string>
     <string name="home_outdated_patches_dialog_update_and_patch">更新並修補</string>
     <string name="home_low_disk_space_dialog_title">磁碟空間不足</string>
-    <string name="home_low_disk_space_dialog_message">僅有 %1$.2f GB 的可用儲存空間。修補需要至少 %2$.2f GB 的可用空間才能正常運作</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">僅有 %1$s GB 的可用儲存空間。修補需要至少 %2$s GB 的可用空間才能正常運作</string>
     <string name="home_low_disk_space_dialog_warning">繼續操作可能會導致「找不到檔案」錯誤或損壞的輸出 APK</string>
     <string name="home_simple_bundle_select_title">選取修補來源</string>
     <!-- Color picker -->
@@ -568,7 +572,7 @@
     <string name="patcher_message_15">所有系統正常……修補軌跡穩定…… 🚀</string>
     <string name="patcher_message_16">榨出額外的力量，就像從數位檸檬中擠出汁一樣… 🍋</string>
     <string name="patcher_message_17">正在引導應用程式擁抱全新、更好的自己…… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">將應用程式的疊加狀態從未修補變更為已修補… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">您的應用程式發燒了，唯一的處方是更多修補程式… 🩺🔔</string>
@@ -576,6 +580,8 @@
     <!-- Expert patcher Screen -->
     <string name="patching_app">正在修補應用程式</string>
     <string name="memory_usage">記憶體使用量</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%1$s / %2$s MB</string>
     <string name="cpu_usage">CPU 使用率</string>
     <string name="storage_io_usage">儲存體 I/O</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -1075,7 +1081,7 @@ morphe_header_custom_dark.png
     <string name="credits_current_development">目前開發</string>
     <string name="credits_prior_development">先前開發</string>
     <string name="opensource_licenses">開源授權</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">選擇</string>
     <string name="easter_egg_pill_message">吃下藍色藥丸，廣告留在原來的地方。吃下紅色藥丸，看看位元組碼能深入到什麼程度。</string>
     <string name="easter_egg_pill_red">紅色藥丸</string>
@@ -1086,6 +1092,10 @@ morphe_header_custom_dark.png
     <string name="easter_egg_pill_red_toast_again">回到雨中</string>
     <string name="easter_egg_pill_blue_toast_again">已拔除。回去的路一直在原處。</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s MB / %2$s MB（%3$s%%）</string>
     <string name="select_file">選擇檔案</string>
     <string name="select_folder">選取資料夾</string>
     <string name="patches">修補</string>
@@ -1210,8 +1220,8 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">無法安裝更新</string>
     <string name="installing_manager_update">正在安裝更新……</string>
     <string name="downloading_manager_update">正在下載更新……</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">已下載 %1$.1f MB</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">%1$s MB 已下載</string>
     <string name="manager_update_not_ready">此版本仍在發布中。請幾分鐘後再試</string>
     <string name="update_download_missing">下載的更新已不再可用。請重新下載</string>
     <string name="download_manager_failed">無法下載更新：%s</string>

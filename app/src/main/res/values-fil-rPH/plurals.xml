@@ -76,4 +76,8 @@
         <item quantity="one">Kopyado ang %s patch mula sa napiling bundle</item>
         <item quantity="other">Kopyado ang %s patches mula sa napiling bundle</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s core</item>
+        <item quantity="other">%s core</item>
+    </plurals>
 </resources>

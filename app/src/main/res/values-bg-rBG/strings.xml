@@ -35,6 +35,8 @@
     <string name="home_update_skipped_metered">Пропуснати актуализации</string>
     <string name="home_update_skipped_metered_subtitle">Мобилен дан е активен</string>
     <string name="home_updating_sources">Обновяне на източници…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
     <string name="home_update_success">Обновяне на източниците завършено</string>
     <string name="home_update_success_subtitle">Вашите източници са актуални</string>
     <string name="home_sources_are_loading">Зареждане на източниците, моля изчакайте…</string>
@@ -317,7 +319,7 @@
     <string name="home_outdated_patches_dialog_warning">Патчване с остарели патчове може да доведе до счупване на приложението</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Обновяване и патчване</string>
     <string name="home_low_disk_space_dialog_title">Малко място на диска</string>
-    <string name="home_low_disk_space_dialog_message">Само %1$.2f GB свободно място за съхранение. За да работи правилно, обновяването изисква поне %2$.2f GB свободно място</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
     <string name="home_low_disk_space_dialog_warning">Продължаването може да доведе до грешка \"файлът не е намерен\" или повреден изходен APK</string>
     <string name="home_simple_bundle_select_title">Изберете източник на пач</string>
     <!-- Color picker -->
@@ -571,7 +573,7 @@
     <string name="patcher_message_15">Всички системи номинални… траекторията на пачване е стабилна… 🚀</string>
     <string name="patcher_message_16">Изстисквам допълнителна мощност, като сок от дигитален лимон… 🍋</string>
     <string name="patcher_message_17">Убеждавам приложението да приеме новото си, по-добро аз… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">Променям суперпозицията на приложението от непачнато към пачнато… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Вашият апарат има температура, а единствената рецепта е повече патчи… 🩺🔔</string>
@@ -579,6 +581,7 @@
     <!-- Expert patcher Screen -->
     <string name="patching_app">Патчване на приложението</string>
     <string name="memory_usage">Използване на памет</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
     <string name="cpu_usage">Използване на процесора</string>
     <string name="storage_io_usage">Дисков I/O</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -1081,7 +1084,7 @@ morphe_header_custom_dark.png
     <string name="credits_current_development">Текущо развитие</string>
     <string name="credits_prior_development">Предишно развитие</string>
     <string name="opensource_licenses">Лицензи с отворен код</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Избор</string>
     <string name="easter_egg_pill_message">Вземи синьото хапче и рекламите си остават точно където са. Вземи червеното и виж колко дълбоко отива байткодът.</string>
     <string name="easter_egg_pill_red">Червено хапче</string>
@@ -1092,6 +1095,9 @@ morphe_header_custom_dark.png
     <string name="easter_egg_pill_red_toast_again">Обратно в дъжда</string>
     <string name="easter_egg_pill_blue_toast_again">Изключен. Пътят назад е там, където винаги е бил.</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
     <string name="select_file">Избери файл</string>
     <string name="select_folder">Избери папка</string>
     <string name="patches">Пачове</string>
@@ -1216,8 +1222,7 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">Неуспешно инсталиране на актуализиране</string>
     <string name="installing_manager_update">Инсталиране на актуализиране…</string>
     <string name="downloading_manager_update">Сваляне на актуализиране…</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">%1$.1f MB изтеглени</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
     <string name="manager_update_not_ready">Този релиз все още се публикува. Опитайте отново след няколко минути</string>
     <string name="update_download_missing">Изтеглената актуализация вече не е налична. Изтеглете я отново.</string>
     <string name="download_manager_failed">Неуспешно сваляне на актуализиране: %s</string>

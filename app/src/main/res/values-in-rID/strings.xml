@@ -35,6 +35,9 @@
     <string name="home_update_skipped_metered">Pembaruan dilewati</string>
     <string name="home_update_skipped_metered_subtitle">Data seluler aktif</string>
     <string name="home_updating_sources">Memperbarui sumber…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d / %2$d  ·  %3$s / %4$s MB (%5$d%%)</string>
     <string name="home_update_success">Pembaruan sumber selesai</string>
     <string name="home_update_success_subtitle">Sumber Anda sudah yang terbaru</string>
     <string name="home_sources_are_loading">Sumber sedang dimuat, harap tunggu…</string>
@@ -318,7 +321,8 @@ Bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum teridentifi
     <string name="home_outdated_patches_dialog_warning">Menambal dengan tambalan yang sudah usang mungkin menghasilkan aplikasi yang rusak</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Perbarui &amp; tambalan</string>
     <string name="home_low_disk_space_dialog_title">Ruang penyimpanan sedikit</string>
-    <string name="home_low_disk_space_dialog_message">Hanya %1$.2f GB ruang penyimpanan yang tersedia. Penambalan memerlukan setidaknya %2$.2f GB ruang kosong untuk berfungsi dengan baik</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">Hanya tersedia %1$s GB ruang penyimpanan gratis. Penambalan memerlukan setidaknya %2$s GB ruang kosong agar dapat berfungsi dengan benar.</string>
     <string name="home_low_disk_space_dialog_warning">Melanjutkan dapat mengakibatkan kesalahan \"berkas tidak ditemukan\" atau menghasilkan APK yang rusak</string>
     <string name="home_simple_bundle_select_title">Pilih sumber tambalan</string>
     <!-- Color picker -->
@@ -577,7 +581,7 @@ Menghapus pemasangannya akan menghapus semua data aplikasi secara permanen"</str
     <string name="patcher_message_15">Semua sistem nominal… lintasan penambalan stabil… 🚀</string>
     <string name="patcher_message_16">Memeras daya ekstra, seperti sari dari lemon digital… 🍋</string>
     <string name="patcher_message_17">Mendorong aplikasi untuk menerima dirinya yang baru dan lebih baik… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">Mengubah superposisi aplikasi dari belum ditambal menjadi ditambal… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Aplikasi Anda demam, dan satu-satunya resepnya adalah lebih banyak tambalan… 🩺🔔</string>
@@ -585,6 +589,8 @@ Menghapus pemasangannya akan menghapus semua data aplikasi secara permanen"</str
     <!-- Expert patcher Screen -->
     <string name="patching_app">Menambal aplikasi</string>
     <string name="memory_usage">Pemakaian memori</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%1$s dari %2$s MB</string>
     <string name="cpu_usage">Penggunaan CPU</string>
     <string name="storage_io_usage">I/O penyimpanan</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -1087,7 +1093,7 @@ Rincian: %2$s"</string>
     <string name="credits_current_development">Pengembangan saat ini</string>
     <string name="credits_prior_development">Pengembangan sebelumnya</string>
     <string name="opensource_licenses">Lisensi sumber terbuka</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Sebuah pilihan</string>
     <string name="easter_egg_pill_message">Ambil pil biru dan iklan tetap di tempatnya. Ambil pil merah dan lihat seberapa dalam bytecode itu</string>
     <string name="easter_egg_pill_red">Pil merah</string>
@@ -1098,6 +1104,10 @@ Rincian: %2$s"</string>
     <string name="easter_egg_pill_red_toast_again">Kembali ke dalam hujan</string>
     <string name="easter_egg_pill_blue_toast_again">Terputus. Jalan kembali selalu ada di sana</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s MB / %2$s MB (%3$s%%)</string>
     <string name="select_file">Pilih berkas</string>
     <string name="select_folder">Pilih folder</string>
     <string name="patches">Tambalan</string>
@@ -1222,8 +1232,8 @@ Rincian: %2$s"</string>
     <string name="install_update_manager_failed">Gagal memasang pembaruan</string>
     <string name="installing_manager_update">Memasang pembaruan…</string>
     <string name="downloading_manager_update">Mengunduh pembaruan…</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">%1$.1f MB diunduh</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">%1$s MB diunduh</string>
     <string name="manager_update_not_ready">Rilis ini masih dalam proses penerbitan. Coba lagi dalam beberapa menit</string>
     <string name="update_download_missing">Pembaruan yang diunduh sudah tidak tersedia lagi. Unduh ulang</string>
     <string name="download_manager_failed">Gagal mengunduh pembaruan: %s</string>

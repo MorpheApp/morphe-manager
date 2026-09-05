@@ -76,4 +76,8 @@
         <item quantity="one">Copiata patch %s dal bundle selezionato</item>
         <item quantity="other">Copia patch %s dal bundle selezionato</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s nucleo</item>
+        <item quantity="other">%s nuclei</item>
+    </plurals>
 </resources>
