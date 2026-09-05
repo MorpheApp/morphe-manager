@@ -1,3 +1,16 @@
+# [1.30.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.29.1-dev.1...v1.30.0-dev.1) (2026-09-05)
+
+
+### Bug Fixes
+
+* Count file sizes in SI and localize their units ([4cb733e](https://github.com/MorpheApp/morphe-manager/commit/4cb733e1b48f9ffd7f2eb9a5e65bfcb9eb1d967a))
+
+
+### Features
+
+* Allow a higher patcher memory limit on capable devices ([bd98d05](https://github.com/MorpheApp/morphe-manager/commit/bd98d0585d89646d8bc3dd33b1de00a89f5ed45f))
+* Show the real per-core CPU load while patching ([dcdce54](https://github.com/MorpheApp/morphe-manager/commit/dcdce54ba920532f90204617fe7710c9b68d1dd9))
+
 ## [1.29.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.29.0...v1.29.1-dev.1) (2026-09-04)
 
 
