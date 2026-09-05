@@ -76,4 +76,8 @@
         <item quantity="one">Kopierade %s tillägg från det valda paketet</item>
         <item quantity="other">Kopierade %s tillägg från det valda paketet</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s kärna</item>
+        <item quantity="other">%s kärnor</item>
+    </plurals>
 </resources>

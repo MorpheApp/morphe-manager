@@ -35,6 +35,9 @@
     <string name="home_update_skipped_metered">更新をスキップしました</string>
     <string name="home_update_skipped_metered_subtitle">モバイルデータ通信が有効です</string>
     <string name="home_updating_sources">ソースを更新中…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d / %2$d ・ %3$s / %4$s MB (%5$d%%)</string>
     <string name="home_update_success">ソースの更新が完了しました</string>
     <string name="home_update_success_subtitle">ソースは最新の状態です</string>
     <string name="home_sources_are_loading">ソースを読み込んでいます。しばらくお待ちください…</string>
@@ -317,7 +320,8 @@
     <string name="home_outdated_patches_dialog_warning">古いパッチを適用すると、アプリが壊れる可能性があります</string>
     <string name="home_outdated_patches_dialog_update_and_patch">更新してパッチを適用</string>
     <string name="home_low_disk_space_dialog_title">ストレージの空き容量が不足しています</string>
-    <string name="home_low_disk_space_dialog_message">利用可能なストレージの空き容量は %1$.2f GB です。正常なパッチ処理には少なくとも %2$.2f GB の空き容量が必要です</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">利用可能な空き容量は%1$s GBしかありません。パッチが正しく動作するには、少なくとも%2$s GBの空き容量が必要です。</string>
     <string name="home_low_disk_space_dialog_warning">このまま続行すると、「ファイルが見つかりません」のエラーが発生したり、出力した APK が破損する可能性があります</string>
     <string name="home_simple_bundle_select_title">パッチソースを選択</string>
     <!-- Color picker -->
@@ -573,7 +577,7 @@
     <string name="patcher_message_15">全システム正常。パッチは順調です… 🚀</string>
     <string name="patcher_message_16">デジタルのレモンから果汁を絞るように、性能を引き出しています… 🍋</string>
     <string name="patcher_message_17">アプリの成長を見守り中… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">アプリの状態を未パッチからパッチ済みに変更中… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">アプリが発熱中。唯一の処方箋は、パッチ増量のみ… 🩺🔔</string>
@@ -581,6 +585,8 @@
     <!-- Expert patcher Screen -->
     <string name="patching_app">アプリにパッチを適用中</string>
     <string name="memory_usage">メモリ使用量</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%2$s MB 中 %1$s</string>
     <string name="cpu_usage">CPU使用率</string>
     <string name="storage_io_usage">ストレージI/O</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -1081,7 +1087,7 @@ morphe_header_custom_dark.png
     <string name="credits_current_development">現在の開発</string>
     <string name="credits_prior_development">過去の開発</string>
     <string name="opensource_licenses">オープンソースライセンス</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">選択肢</string>
     <string name="easter_egg_pill_message">青い錠剤を飲めば、広告は現在の場所に留まる。赤い錠剤を飲めば、バイトコードの深さがわかる。</string>
     <string name="easter_egg_pill_red">赤い錠剤</string>
@@ -1092,6 +1098,10 @@ morphe_header_custom_dark.png
     <string name="easter_egg_pill_red_toast_again">雨の中に戻る</string>
     <string name="easter_egg_pill_blue_toast_again">接続が解除されました。戻る道はいつもそこにありました</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s MB / %2$s MB (%3$s%%)</string>
     <string name="select_file">ファイルを選択</string>
     <string name="select_folder">フォルダーを選択</string>
     <string name="patches">パッチ</string>
@@ -1216,8 +1226,8 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">アップデートのインストールに失敗しました</string>
     <string name="installing_manager_update">アップデートをインストールしています…</string>
     <string name="downloading_manager_update">アップデートをダウンロードしています…</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">%1$.1f MB ダウンロード済み</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">%1$s MB ダウンロード済み</string>
     <string name="manager_update_not_ready">このリリースはまだ公開中です。しばらくしてから再度お試しください</string>
     <string name="update_download_missing">ダウンロードしたアップデートは利用できなくなりました。再度ダウンロードしてください。</string>
     <string name="download_manager_failed">アップデートのダウンロードに失敗しました: %s</string>

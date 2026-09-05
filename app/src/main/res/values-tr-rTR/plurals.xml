@@ -76,4 +76,8 @@
         <item quantity="one">Seçili bundle\'dan %s yama kopyalandı</item>
         <item quantity="other">Seçili bundle\'dan %s yama kopyalandı</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s çekirdek</item>
+        <item quantity="other">%s çekirdek</item>
+    </plurals>
 </resources>

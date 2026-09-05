@@ -35,6 +35,9 @@
     <string name="home_update_skipped_metered">Actualizaciones omitidas</string>
     <string name="home_update_skipped_metered_subtitle">Los datos móviles están activos</string>
     <string name="home_updating_sources">Actualizando fuentes…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d / %2$d  ·  %3$s / %4$s MB (%5$d%%)</string>
     <string name="home_update_success">Actualización de fuentes completada</string>
     <string name="home_update_success_subtitle">Tus fuentes están al día</string>
     <string name="home_sources_are_loading">Cargando fuentes, por favor espera…</string>
@@ -317,7 +320,8 @@ Para un mejor resultado, esta aplicación te recomienda parchear un &lt;b&gt;APK
     <string name="home_outdated_patches_dialog_warning">Usar parches desactualizados puede provocar que la aplicación deje de funcionar correctamente</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Actualizar y parchear</string>
     <string name="home_low_disk_space_dialog_title">Poco espacio de almacenamiento</string>
-    <string name="home_low_disk_space_dialog_message">Solo hay %1$.2f GB de almacenamiento libre. El parcheo requiere al menos %2$.2f GB de espacio libre para funcionar correctamente</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">Solo hay %1$s GB de almacenamiento libre. El parcheo requiere al menos %2$s GB de espacio libre para funcionar correctamente</string>
     <string name="home_low_disk_space_dialog_warning">Continuar puede provocar un error de \"archivo no encontrado\" o un APK final corrupto</string>
     <string name="home_simple_bundle_select_title">Selecciona la fuente de parcheo</string>
     <!-- Color picker -->
@@ -468,9 +472,9 @@ Zona exterior (discontinua): puede quedar recortada por la máscara del launcher
     <string name="patcher_field_split">APK dividido</string>
     <string name="patcher_field_manager">Gestor</string>
     <string name="patcher_field_patcher">Parcheador</string>
-    <string name="patcher_field_runtime">Tiempo de ejecución</string>
+    <string name="patcher_field_runtime">Ejecución</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
-    <string name="patcher_field_libraries">Librerías</string>
+    <string name="patcher_field_libraries">Bibliotecas</string>
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Dispositivo</string>
     <!-- Free and total RAM of the device, never its storage -->
@@ -487,7 +491,7 @@ Zona exterior (discontinua): puede quedar recortada por la máscara del launcher
     <string name="patcher_field_io_peak">Pico de E/S de almacenamiento</string>
     <string name="patcher_field_value_unknown">desconocido</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
-    <string name="patcher_field_value_stripped">desmontadas</string>
+    <string name="patcher_field_value_stripped">eliminadas</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">conservadas</string>
     <string name="patcher_tab_logs">Registro del parcheador</string>
@@ -576,7 +580,7 @@ Al desinstalarla se borrarán permanentemente todos los datos de la aplicación"
     <string name="patcher_message_15">Todos los sistemas en orden… la misión de parcheo sigue estable… 🚀</string>
     <string name="patcher_message_16">Exprimiendo potencia extra, como zumo de un limón digital… 🍋</string>
     <string name="patcher_message_17">Ayudando a la aplicación a aceptar su nueva y mejor versión… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">Cambiando la superposición de la aplicación de sin parchear a parcheada… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Tu app tiene fiebre, y el único remedio son más parches… 🩺🔔</string>
@@ -584,6 +588,8 @@ Al desinstalarla se borrarán permanentemente todos los datos de la aplicación"
     <!-- Expert patcher Screen -->
     <string name="patching_app">Parcheando la aplicación</string>
     <string name="memory_usage">Uso de memoria</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%1$s de %2$s MB</string>
     <string name="cpu_usage">Uso de CPU</string>
     <string name="storage_io_usage">E/S de almacenamiento</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -714,9 +720,9 @@ Al desinstalarla se borrarán permanentemente todos los datos de la aplicación"
     <string name="settings_advanced_updates_manager_prereleases_description">Acceso anticipado a nuevas versiones de Morphe</string>
     <string name="settings_advanced_updates_prerelease_warning_title">¿Activar actualizaciones pre-lanzamiento?</string>
     <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
-    <string name="settings_advanced_updates_prerelease_warning_message">"Las versiones preliminares de Morphe todavía están en desarrollo y pueden ser inestables.
+    <string name="settings_advanced_updates_prerelease_warning_message">"Las versiones pre-lanzamiento de Morphe todavía están en desarrollo y pueden ser inestables.
 
-Los parches no se ven afectados: habilite los parches preliminares para cada fuente en la lista de fuentes de parches"</string>
+Los parches no se ven afectados: habilita los parches preliminares para cada fuente en la lista de fuentes de parches"</string>
     <string name="settings_advanced_updates_allow_metered">Actualizaciones con datos móviles</string>
     <string name="settings_advanced_updates_allow_metered_description">Permite que Morphe y las actualizaciones de los parches se descarguen a través de datos móviles</string>
     <string name="settings_advanced_updates_background_notifications">Notificaciones de actualización en segundo plano</string>
@@ -1086,7 +1092,7 @@ Detalles: %2$s"</string>
     <string name="credits_current_development">Desarrollo actual</string>
     <string name="credits_prior_development">Desarrollo anterior</string>
     <string name="opensource_licenses">Licencias de código abierto</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Una elección</string>
     <string name="easter_egg_pill_message">Toma la pastilla azul y los anuncios se quedan exactamente donde están. Toma la roja y descubre hasta dónde llega el bytecode</string>
     <string name="easter_egg_pill_red">Pastilla roja</string>
@@ -1097,6 +1103,10 @@ Detalles: %2$s"</string>
     <string name="easter_egg_pill_red_toast_again">De nuevo bajo la lluvia</string>
     <string name="easter_egg_pill_blue_toast_again">Desconectado. El camino de regreso sigue donde estaba</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s MB / %2$s MB (%3$s%%)</string>
     <string name="select_file">Seleccionar archivo</string>
     <string name="select_folder">Seleccionar carpeta</string>
     <string name="patches">Parches</string>
@@ -1221,8 +1231,8 @@ Detalles: %2$s"</string>
     <string name="install_update_manager_failed">Error al instalar la actualización</string>
     <string name="installing_manager_update">Instalando actualización…</string>
     <string name="downloading_manager_update">Descargando actualización…</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">%1$.1f MB descargados</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">%1$s MB descargados</string>
     <string name="manager_update_not_ready">Esta versión aún se está publicando. Vuelve a intentarlo en unos minutos</string>
     <string name="update_download_missing">La actualización descargada ya no está disponible. Descárgala de nuevo</string>
     <string name="download_manager_failed">Error al descargar la actualización: %s</string>
@@ -1241,7 +1251,7 @@ Detalles: %2$s"</string>
     <string name="onboarding_settings_desc">Personaliza Morphe: apariencia, opciones avanzadas y herramientas del sistema.</string>
     <string name="onboarding_sources_patches_desc">Tocar para ver todos los parches disponibles de esta fuente.</string>
     <string name="onboarding_sources_version_desc">Tocar la versión para ver el registro de cambios completo de esta fuente.</string>
-    <string name="onboarding_sources_prerelease_desc">Activa esta opción para recibir versiones de parches pre-lanzamiento de esta fuente.</string>
+    <string name="onboarding_sources_prerelease_desc">Activa esta opción para recibir versiones pre-lanzamiento de parches de esta fuente</string>
     <string name="onboarding_appearance_tab_desc">Personaliza el aspecto de la aplicación: tema, color de acento y fondo.</string>
     <string name="onboarding_appearance_theme_desc">Elige entre tema claro, oscuro o del sistema. También puedes elegir un color de acento personalizado o activar Color dinámico.</string>
     <string name="onboarding_expert_mode_desc">Activa el Modo Experto para desbloquear la selección de parches, opciones personalizadas y otras funciones avanzadas.</string>

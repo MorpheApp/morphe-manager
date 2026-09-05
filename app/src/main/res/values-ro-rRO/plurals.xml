@@ -95,4 +95,9 @@
         <item quantity="few">Patch-uri %s copiate din pachetul selectat</item>
         <item quantity="other">Patch-uri %s copiate din pachetul selectat</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s nucleu</item>
+        <item quantity="few">%s nuclee</item>
+        <item quantity="other">%s de nuclee</item>
+    </plurals>
 </resources>

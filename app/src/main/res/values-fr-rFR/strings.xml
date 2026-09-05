@@ -35,6 +35,9 @@
     <string name="home_update_skipped_metered">Mises à jour passées</string>
     <string name="home_update_skipped_metered_subtitle">Données mobiles activées</string>
     <string name="home_updating_sources">Mise à jour des sources…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d / %2$d · %3$s / %4$s Mo (%5$d%%)</string>
     <string name="home_update_success">Mise à jour des sources complète</string>
     <string name="home_update_success_subtitle">Vos sources sont à jour</string>
     <string name="home_sources_are_loading">Les sources sont en cours de chargement, veuillez patienter…</string>
@@ -319,7 +322,8 @@ Pour de meilleurs résultats, cette application recommande d'effectuer le patchi
     <string name="home_outdated_patches_dialog_warning">Le patching avec des patchs obsolètes peut rendre l\'application inutilisable</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Mise à jour &amp; patchs</string>
     <string name="home_low_disk_space_dialog_title">Espace libre faible</string>
-    <string name="home_low_disk_space_dialog_message">Seulement %1$.2f Go d\'espace de stockage libre disponible. Le patching nécessite au moins %2$.2f Go d\'espace libre pour fonctionner correctement</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">Seulement %1$s Go d\'espace de stockage libre sont disponibles. Le patching nécessite au moins %2$s Go d\'espace libre pour fonctionner correctement</string>
     <string name="home_low_disk_space_dialog_warning">Continuer peut entraîner une erreur \"fichier introuvable\" ou un APK corrompu</string>
     <string name="home_simple_bundle_select_title">Sélectionner une source de patchs</string>
     <!-- Color picker -->
@@ -579,7 +583,7 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="patcher_message_15">Tous les systèmes sont nominaux… trajectoire de patching stable… 🚀</string>
     <string name="patcher_message_16">Pressage d\'un maximum de puissance, comme le jus d\'un citron numérique… 🍋</string>
     <string name="patcher_message_17">Encouragez l\'application à accepter sa nouvelle version améliorée… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">Modification de la superposition de l\'application, de non patchée à patchée… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Votre application a de la fièvre, et la seule prescription, c\'est plus de patchs… 🩺🔔</string>
@@ -587,6 +591,8 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <!-- Expert patcher Screen -->
     <string name="patching_app">Patching de l\'application</string>
     <string name="memory_usage">Utilisation de la mémoire</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%1$s sur %2$s Mo</string>
     <string name="cpu_usage">Utilisation du CPU</string>
     <string name="storage_io_usage">E/S du stockage</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -1093,7 +1099,7 @@ Détails : %2$s"</string>
     <string name="credits_current_development">Développement en cours</string>
     <string name="credits_prior_development">Développements antérieurs</string>
     <string name="opensource_licenses">Licences open-source</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Un choix</string>
     <string name="easter_egg_pill_message">Prenez la pilule bleue et les publicités resteront exactement là où elles sont. Prenez la rouge et découvrez jusqu\'où va le bytecode</string>
     <string name="easter_egg_pill_red">Pilule rouge</string>
@@ -1104,6 +1110,10 @@ Détails : %2$s"</string>
     <string name="easter_egg_pill_red_toast_again">De retour sous la pluie</string>
     <string name="easter_egg_pill_blue_toast_again">Débranché. Le chemin du retour est là où il a toujours été</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s Mo / %2$s Mo (%3$s%%)</string>
     <string name="select_file">Sélectionner un fichier</string>
     <string name="select_folder">Sélectionner un dossier</string>
     <string name="patches">Patchs</string>
@@ -1228,8 +1238,8 @@ Détails : %2$s"</string>
     <string name="install_update_manager_failed">Échec de l\'installation de la mise à jour</string>
     <string name="installing_manager_update">Installation de la mise à jour…</string>
     <string name="downloading_manager_update">Téléchargement de la mise à jour…</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">%1$.1f Mo téléchargés</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">%1$s Mo téléchargés</string>
     <string name="manager_update_not_ready">Cette version est toujours en cours de publication. Réessayez dans quelques minutes</string>
     <string name="update_download_missing">La mise à jour téléchargée n\'est plus disponible. Téléchargez-la à nouveau</string>
     <string name="download_manager_failed">Échec du téléchargement de la mise à jour : %s</string>

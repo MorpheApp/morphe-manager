@@ -95,4 +95,9 @@
         <item quantity="few">Копирана %s патча из одабраног пакета</item>
         <item quantity="other">Копирано %s патчева из одабраног пакета</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s језгро</item>
+        <item quantity="few">%s језгра</item>
+        <item quantity="other">%s језгара</item>
+    </plurals>
 </resources>

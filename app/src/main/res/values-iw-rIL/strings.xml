@@ -36,6 +36,9 @@
     <string name="home_update_skipped_metered">עדכונים שדולגו</string>
     <string name="home_update_skipped_metered_subtitle">הנתונים הניידים פעילים</string>
     <string name="home_updating_sources">מעדכן מקורות…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d / %2$d  ·  %3$s / %4$s MB (%5$d%%)</string>
     <string name="home_update_success">עדכון המקורות הושלם</string>
     <string name="home_update_success_subtitle">המקורות שלך מעודכנים</string>
     <string name="home_sources_are_loading">המקורות נטענים, נא להמתין…</string>
@@ -318,7 +321,8 @@
     <string name="home_outdated_patches_dialog_warning">התקנה עם טיקים מיושנים עשויה להוביל לאפליקציה שבורה</string>
     <string name="home_outdated_patches_dialog_update_and_patch">עדכן &amp; תקן</string>
     <string name="home_low_disk_space_dialog_title">שטח דיסק נמוך</string>
-    <string name="home_low_disk_space_dialog_message">רק %1$.2f GB של שטח אחסון פנוי זמין. התקנת עדכונים דורשת לפחות %2$.2f GB של שטח פנוי כדי לעבוד כראוי.</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">נותרו רק %1$s GB של שטח אחסון פנוי. התקנת התיקון דורשת לפחות %2$s GB של שטח פנוי כדי לפעול כראוי.</string>
     <string name="home_low_disk_space_dialog_warning">המשך עלול לגרום לשגיאת \"קובץ לא נמצא\" או APK פלט פגום</string>
     <string name="home_simple_bundle_select_title">בחר מקור תיקון</string>
     <!-- Color picker -->
@@ -574,7 +578,7 @@
     <string name="patcher_message_15">כל המערכות תקינות… מסלול התיקון יציב… 🚀</string>
     <string name="patcher_message_16">סוחט כוח נוסף, כמו מיץ מלימון דיגיטלי… 🍋</string>
     <string name="patcher_message_17">מעודד את האפליקציה לקבל את עצמה החדשה והטובה יותר… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">משנה את הסופרפוזיציה של האפליקציה מלא מתוקנת למתוקנת… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">לאפליקציה שלך יש חום, והמרשם היחיד הוא יותר תיקונים… 🩺🔔</string>
@@ -582,6 +586,8 @@
     <!-- Expert patcher Screen -->
     <string name="patching_app">מילוי אפליקציה</string>
     <string name="memory_usage">שימוש בזיכרון</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%1$s מתוך %2$s MB</string>
     <string name="cpu_usage">שימוש במעבד</string>
     <string name="storage_io_usage">קלט/פלט של אחסון</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -1094,7 +1100,7 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="credits_current_development">פיתוח נוכחי</string>
     <string name="credits_prior_development">פיתוח קודם</string>
     <string name="opensource_licenses">רישיונות קוד פתוח</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">בחירה</string>
     <string name="easter_egg_pill_message">קח את הגלולה הכחולה והמודעות יישארו בדיוק במקומן. קח את האדומה וראה עד כמה עמוק מגיע הבייט קוד.</string>
     <string name="easter_egg_pill_red">גלולה אדומה</string>
@@ -1105,6 +1111,10 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="easter_egg_pill_red_toast_again">חזרה בגשם</string>
     <string name="easter_egg_pill_blue_toast_again">מנותק. הדרך חזרה היא במקום שבו תמיד הייתה.</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s MB / %2$s MB (%3$s%%)</string>
     <string name="select_file">בחר קובץ</string>
     <string name="select_folder">בחר תיקייה</string>
     <string name="patches">תיקונים</string>
@@ -1229,8 +1239,8 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="install_update_manager_failed">שגיאה בהתקנת עדכון</string>
     <string name="installing_manager_update">מתקין עדכון…</string>
     <string name="downloading_manager_update">מוריד עדכון…</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">%1$.1f MB הורדו</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">הורדו %1$s MB</string>
     <string name="manager_update_not_ready">גרסה זו עדיין מפורסמת. נסה שוב בעוד מספר דקות</string>
     <string name="update_download_missing">העדכון שהורד כבר אינו זמין. הורד אותו שוב</string>
     <string name="download_manager_failed">שגיאה בהורדת עדכון: %s</string>

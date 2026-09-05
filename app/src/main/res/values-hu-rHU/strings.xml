@@ -35,6 +35,9 @@
     <string name="home_update_skipped_metered">Frissítések kihagyva</string>
     <string name="home_update_skipped_metered_subtitle">A mobiladat-forgalom aktív</string>
     <string name="home_updating_sources">Források frissítése…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d / %2$d  ·  %3$s / %4$s MB (%5$d%%)</string>
     <string name="home_update_success">A források frissítése befejeződött</string>
     <string name="home_update_success_subtitle">A forrásaid naprakészek</string>
     <string name="home_sources_are_loading">Források betöltése...</string>
@@ -317,7 +320,8 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="home_outdated_patches_dialog_warning">Az elavult módosítások használata hibás alkalmazást eredményezhet</string>
     <string name="home_outdated_patches_dialog_update_and_patch">&amp; módosítás frissítése</string>
     <string name="home_low_disk_space_dialog_title">Kevés a szabad tárhely</string>
-    <string name="home_low_disk_space_dialog_message">Csak %1$.2f GB szabad tárhely áll rendelkezésre. A javítás helyes működéséhez legalább %2$.2f GB szabad helyre van szükség</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">Csak %1$s GB szabad tárhely áll rendelkezésre. A javítás legalább %2$s GB szabad helyet igényel a megfelelő működéshez.</string>
     <string name="home_low_disk_space_dialog_warning">A folytatás \"fájl nem található\" hibához vagy sérült APK-hoz vezethet</string>
     <string name="home_simple_bundle_select_title">Módosításforrás kiválasztása</string>
     <!-- Color picker -->
@@ -573,7 +577,7 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="patcher_message_15">Minden rendszer nominális… a módosítási pálya stabil… 🚀</string>
     <string name="patcher_message_16">Extra teljesítmény kipréselése, mint a digitális citromból a lé… 🍋</string>
     <string name="patcher_message_17">Az alkalmazás ösztönzése, hogy elfogadja az új, jobb énjét… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">Az alkalmazás szuperpozíciójának megváltoztatása módosítás nélküliről módosítottra… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Az alkalmazásod lázas, és az egyetlen gyógyír rá a mégtöbb módosítás… 🩺🔔</string>
@@ -581,6 +585,8 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Alkalmazás módosítása</string>
     <string name="memory_usage">Memóriahasználat</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%2$s MB %1$s-a</string>
     <string name="cpu_usage">CPU-használat</string>
     <string name="storage_io_usage">Tárhely I/O</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -1082,7 +1088,7 @@ Részletek: %2$s"</string>
     <string name="credits_current_development">Jelenlegi fejlesztők</string>
     <string name="credits_prior_development">Korábbi fejlesztők</string>
     <string name="opensource_licenses">Nyílt forráskódú licencek</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Egy választás</string>
     <string name="easter_egg_pill_message">Take the blue pill and the ads stay exactly where they are. Take the red one and see how deep the bytecode goes</string>
     <string name="easter_egg_pill_red">Piros pirula</string>
@@ -1093,6 +1099,10 @@ Részletek: %2$s"</string>
     <string name="easter_egg_pill_red_toast_again">Vissza az esőbe</string>
     <string name="easter_egg_pill_blue_toast_again">Kihúzva. A visszaút ott van, ahol mindig is volt.</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s MB / %2$s MB (%3$s%%)</string>
     <string name="select_file">Fájl kiválasztása</string>
     <string name="select_folder">Mappa kiválasztása</string>
     <string name="patches">Módosítások</string>
@@ -1217,8 +1227,8 @@ Részletek: %2$s"</string>
     <string name="install_update_manager_failed">Nem sikerült telepíteni a frissítést</string>
     <string name="installing_manager_update">Frissítés telepítése…</string>
     <string name="downloading_manager_update">Frissítés letöltése…</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">Letöltve: %1$.1f MB</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">%1$s MB letöltve</string>
     <string name="manager_update_not_ready">A kiadás még folyamatban van. Próbálkozz néhány perc múlva újra.</string>
     <string name="update_download_missing">A letöltött frissítés már nem elérhető. Töltsd le újra.</string>
     <string name="download_manager_failed">A frissítés letöltése sikertelen: %s</string>

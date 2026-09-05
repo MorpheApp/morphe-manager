@@ -76,4 +76,8 @@
         <item quantity="one">নির্বাচিত বান্ডেল থেকে %s প্যাচ কপি করা হয়েছে</item>
         <item quantity="other">নির্বাচিত বান্ডেল থেকে %s প্যাচ কপি করা হয়েছে</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s কোর</item>
+        <item quantity="other">%s কোর</item>
+    </plurals>
 </resources>

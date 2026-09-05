@@ -95,4 +95,9 @@
         <item quantity="two">הועתקו %s תיקונים מהחבילה הנבחרת</item>
         <item quantity="other">הועתקו %s תיקונים מהחבילה הנבחרת</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s ליבה</item>
+        <item quantity="two">%s ליבות</item>
+        <item quantity="other">%s ליבות</item>
+    </plurals>
 </resources>

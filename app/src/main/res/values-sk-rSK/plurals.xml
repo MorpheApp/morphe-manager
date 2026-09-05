@@ -114,4 +114,10 @@
         <item quantity="many">Skopírované %s záplat z vybraného balíka</item>
         <item quantity="other">Skopírované %s záplat z vybraného balíka</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s jadro</item>
+        <item quantity="few">%s jadrá</item>
+        <item quantity="many">%s jadier</item>
+        <item quantity="other">%s jadier</item>
+    </plurals>
 </resources>
