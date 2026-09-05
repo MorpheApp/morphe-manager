@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-09-04T08:58:33",
-  "description": "## [1.29.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.29.0...v1.29.1-dev.1) (2026-09-04)\n\n\n### Bug Fixes\n\n* Align the batch installed-APK offer with the single-app flow ([86fc085](https://github.com/MorpheApp/morphe-manager/commit/86fc085aeec23c2848e908897c4412dbe68088ff))\n* Deduplicate the expert patching log screen ([b95f934](https://github.com/MorpheApp/morphe-manager/commit/b95f934a519fc8a568cd05788a67770a7d618f68))\n* Hide the installed APK in batch patching when the patches do not target it ([3736866](https://github.com/MorpheApp/morphe-manager/commit/3736866bcb099f377cca01cb7f51cc710a937388))\n* Translate the titles and labels of the patching log cards ([b405026](https://github.com/MorpheApp/morphe-manager/commit/b4050264dd9848055451d5ccf2df18824a42a453))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.29.1-dev.1/morphe-manager-1.29.1-dev.1.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.29.1-dev.1/morphe-manager-1.29.1-dev.1.apk.asc",
-  "version": "1.29.1-dev.1"
+  "created_at": "2026-09-05T14:37:49",
+  "description": "# [1.30.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.29.1-dev.1...v1.30.0-dev.1) (2026-09-05)\n\n\n### Bug Fixes\n\n* Count file sizes in SI and localize their units ([4cb733e](https://github.com/MorpheApp/morphe-manager/commit/4cb733e1b48f9ffd7f2eb9a5e65bfcb9eb1d967a))\n\n\n### Features\n\n* Allow a higher patcher memory limit on capable devices ([bd98d05](https://github.com/MorpheApp/morphe-manager/commit/bd98d0585d89646d8bc3dd33b1de00a89f5ed45f))\n* Show the real per-core CPU load while patching ([dcdce54](https://github.com/MorpheApp/morphe-manager/commit/dcdce54ba920532f90204617fe7710c9b68d1dd9))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.30.0-dev.1/morphe-manager-1.30.0-dev.1.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.30.0-dev.1/morphe-manager-1.30.0-dev.1.apk.asc",
+  "version": "1.30.0-dev.1"
 }
