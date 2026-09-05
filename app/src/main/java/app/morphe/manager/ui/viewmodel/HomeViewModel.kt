@@ -355,6 +355,9 @@ class HomeViewModel(
     var pendingSelectedDownloadVersion by mutableStateOf<AppTarget?>(null)
     var pendingSelectedApp by mutableStateOf<SelectedApp?>(null)
     var resolvedDownloadUrl by mutableStateOf<String?>(null)
+    // Official site of the pending app, from the carried bundle. Surfaces instead of a plain
+    // web search when the API does not know of a download page for the app
+    var pendingWebsiteUrl by mutableStateOf<String?>(null)
     var pendingSavedApkInfo by mutableStateOf<SavedApkInfo?>(null)
     var pendingInstalledApkInfo by mutableStateOf<InstalledApkInfo?>(null)
     // null = not yet loaded, true/false = loaded result
@@ -1701,6 +1704,20 @@ class HomeViewModel(
                     if (patches.isNotEmpty()) put(uid, patches)
                 }
         }
+    }
+
+    /**
+     * Official site the bundle(s) covering [packageName] declare, or null when none does.
+     * With several covering bundles the one the user picked previously is tried first.
+     */
+    private suspend fun websiteUrlFor(packageName: String): String? {
+        val coveringUids = getPatchesForPackage(packageName).keys
+        if (coveringUids.isEmpty()) return null
+        val ordered = pendingSelectedBundleUid
+            ?.takeIf { it in coveringUids }
+            ?.let { listOf(it) + (coveringUids - it) }
+            ?: coveringUids
+        return patchBundleRepository.websiteFor(ordered)
     }
 
     /**
@@ -3225,8 +3242,10 @@ class HomeViewModel(
         resolvedDownloadUrl = downloadUrlResolver.apiSearchUrl(packageName, version)
 
         viewModelScope.launch {
+            val officialUrl = withContext(Dispatchers.IO) { websiteUrlFor(packageName) }
+            pendingWebsiteUrl = officialUrl
             val resolved = withContext(Dispatchers.IO) {
-                downloadUrlResolver.resolve(packageName, version)
+                downloadUrlResolver.resolve(packageName, version, officialUrl)
             }
             resolvedDownloadUrl = resolved
         }
@@ -3273,7 +3292,8 @@ class HomeViewModel(
             // Mirrors processSelectedApp - only a required plain APK rules split archives out
             allowSplitArchive = !(apkFileType?.isApk == true && apkFileType.isRequired),
             stockInstallRequired = usingMountInstall && pendingTargetAppInstalled != true,
-            fallbackWebUrl = downloadUrlResolver.webSearchUrl(packageName, requestedVersion?.version)
+            fallbackWebUrl = pendingWebsiteUrl
+                ?: downloadUrlResolver.webSearchUrl(packageName, requestedVersion?.version)
         )
     }
 
@@ -3321,6 +3341,7 @@ class HomeViewModel(
         pendingSelectedDownloadVersion = null
         if (!keepBundleUid) pendingSelectedBundleUid = null
         resolvedDownloadUrl = null
+        pendingWebsiteUrl = null
         pendingSavedApkInfo = null
         pendingInstalledApkInfo = null
         pendingTargetAppInstalled = null

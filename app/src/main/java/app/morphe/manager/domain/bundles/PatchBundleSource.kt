@@ -48,6 +48,10 @@ sealed class PatchBundleSource(
     }
 
     val version get() = manifestAttributes?.version
+
+    /** Official site the bundle publishes its app from, declared in the bundle manifest. */
+    val website get() = manifestAttributes?.website
+
     val isNameOutOfDate get() = manifestAttributes?.name?.let { it != name } == true
     val error get() = (state as? State.Failed)?.throwable
     val displayTitle get() = displayName?.takeUnless { it.isBlank() } ?: name

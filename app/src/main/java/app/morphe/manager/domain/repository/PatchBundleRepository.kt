@@ -78,6 +78,16 @@ class PatchBundleRepository(
     val allBundlesInfoFlow = store.state.map { (it as? BundleState.Ready)?.info ?: persistentMapOf() }
 
     /**
+     * Official site declared by the first bundle in [uids] that declares one, in the order given.
+     * Null when none of the sources are loaded yet or no bundle declares a website, in which case
+     * the caller keeps its usual web-search fallback.
+     */
+    suspend fun websiteFor(uids: Collection<Int>): String? {
+        val byUid = sources.first().associateBy { it.uid }
+        return uids.asSequence().mapNotNull { byUid[it]?.website }.firstOrNull()
+    }
+
+    /**
      * Sources that appear on the remote blocklist, keyed by source uid.
      * Combines the current source list with [BlocklistRepository.entries] so the map stays in
      * sync as either side changes. Blocked sources are removed from [enabledBundlesInfoFlow] and
