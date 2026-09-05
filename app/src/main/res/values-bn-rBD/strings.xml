@@ -35,6 +35,9 @@
     <string name="home_update_skipped_metered">আপডেটগুলি ছাড়া রাখা হয়েছে</string>
     <string name="home_update_skipped_metered_subtitle">মোবাইল ডেটা সক্রিয়</string>
     <string name="home_updating_sources">সোর্স আপডেট হচ্ছে...</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d / %2$d  ·  %3$s / %4$s এমবি (%5$d%%)</string>
     <string name="home_update_success">সোর্স আপডেট সম্পূর্ণ হয়েছে</string>
     <string name="home_update_success_subtitle">আপনার সোর্সগুলি আপ-টু-ডেট আছে</string>
     <string name="home_sources_are_loading">সোর্স লোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন…</string>
@@ -317,7 +320,8 @@
     <string name="home_outdated_patches_dialog_warning">পুরানো প্যাচগুলি ব্যবহার করে অ্যাপটি ভেঙে যেতে পারে</string>
     <string name="home_outdated_patches_dialog_update_and_patch">আপডেট ও প্যাচ করুন</string>
     <string name="home_low_disk_space_dialog_title">কম ডিস্ক স্পেস</string>
-    <string name="home_low_disk_space_dialog_message">উপलब्ধ মুক্ত স্থান %1$.2f GB। প্যাচিং করার জন্য সঠিকভাবে কাজ করার জন্য কমপক্ষে %2$.2f GB মুক্ত স্থান প্রয়োজন।</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">কেবলমাত্র %1$s GB ফ্রি স্টোরেজ উপলব্ধ। সঠিকভাবে কাজ করতে প্যাচিংয়ের জন্য কমপক্ষে %2$s GB ফ্রি স্পেস প্রয়োজন।</string>
     <string name="home_low_disk_space_dialog_warning">जारी করলে \"ফাইল খুঁজে পাওয়া যায়নি\" ত্রুটি বা একটি भ्रष्ट আউটপুট APK হতে পারে</string>
     <string name="home_simple_bundle_select_title">প্যাচ উৎস নির্বাচন করুন</string>
     <!-- Color picker -->
@@ -458,6 +462,7 @@
     <string name="patcher_error_log">ত্রুটি রিপোর্ট</string>
     <string name="patcher_error_technical">প্রযুক্তি বিবরণ</string>
     <string name="patcher_error_dialog_diagnostics">ডায়াগনস্টিকস</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">অ্যাপ</string>
     <string name="patcher_field_package">প্যাকেজ</string>
@@ -473,6 +478,13 @@
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">মেমোরি</string>
     <string name="patcher_field_storage">স্টোরেজ</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <!-- How long patching took -->
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">গড় মেমরি</string>
+    <string name="patcher_field_memory_max">সর্বোচ্চ মেমরি</string>
+    <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">স্টোরেজ I/O সর্বোচ্চ</string>
     <string name="patcher_field_value_unknown">অজানা</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">বাদ দেওয়া হয়েছে</string>
@@ -564,7 +576,7 @@
     <string name="patcher_message_15">সমস্ত সিস্টেম স্বাভাবিক… প্যাচিং ট্র্যাজেক্টরি স্থিতিশীল… 🚀</string>
     <string name="patcher_message_16">অতিরিক্ত শক্তি নিংড়ে বের করছি, ডিজিটাল লেবু থেকে রস নিংড়ানোর মতো… 🍋</string>
     <string name="patcher_message_17">অ্যাপটিকে তার নতুন, উন্নততর সত্তা গ্রহণ করতে উৎসাহিত করছি… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">অ্যাপ সুপারপজিশন আনপ্যাচড থেকে প্যাচড-এ পরিবর্তন করছি… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">আপনার অ্যাপের জ্বর হয়েছে, এবং এর একমাত্র প্রতিকার হল আরও প্যাচ… 🩺🔔</string>
@@ -572,6 +584,8 @@
     <!-- Expert patcher Screen -->
     <string name="patching_app">অ্যাপটি প্যাচিং করছি</string>
     <string name="memory_usage">মেমরি ব্যবহার</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%2$s MB এর %1$s</string>
     <string name="cpu_usage">CPU ব্যবহার</string>
     <string name="storage_io_usage">স্টোরেজ I/O</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -904,6 +918,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_process_runtime_enable">প্রক্রিয় রান্টাইম সক্রিয় করুন</string>
     <string name="settings_system_memory_limit_subtitle">মেমরি সীমিত</string>
     <string name="settings_system_memory_limit_warning">পুরাতন মেমরি সীমিত উচ্চ মেমরি সীমিতগুলি পুরাতন ডিভাইসের জন্য অকার্যকার হতে পারে</string>
+    <string name="settings_system_memory_limit_high_warning">উচ্চ মেমরি সীমা কিছু ডিভাইসে প্যাচিং অনেক ধীর করে দিতে পারে। কম সীমায় প্যাচিং ব্যর্থ হতে থাকলেই কেবল এটি বাড়ান।</string>
     <string name="settings_system_process_runtime_enabled_description">%s এমবি সীমা</string>
     <string name="settings_system_process_runtime_disabled_description">ক্লিক করুন</string>
     <string name="settings_system_process_runtime_description_not_available">এই বৈশিষ্ট্যটি অ্যান্ড্রয়েড 11 বা তার চেয়ে বেশি সংস্করণের প্রয়োজন।</string>
@@ -1065,7 +1080,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="credits_current_development">চলমান উন্নয়ন</string>
     <string name="credits_prior_development">পূর্ববর্তী উন্নয়ন</string>
     <string name="opensource_licenses">ওপেন-সোর্স লাইসেন্স।</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">একটি পছন্দ</string>
     <string name="easter_egg_pill_message">নীল পিলটি নিন এবং বিজ্ঞাপনগুলো ঠিক যেখানে আছে সেখানেই থাকবে। লালটি নিন এবং দেখুন বাইটকোড কত গভীরে যায়।</string>
     <string name="easter_egg_pill_red">লাল পিল</string>
@@ -1076,6 +1091,10 @@ morphe_adaptive_monochrome_custom.xml
     <string name="easter_egg_pill_red_toast_again">আবার বৃষ্টিতে</string>
     <string name="easter_egg_pill_blue_toast_again">আনপ্লাগড। ফিরে যাওয়ার পথ সবসময় যেখানে ছিল সেখানেই।</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s MB / %2$s MB (%3$s%%)</string>
     <string name="select_file">ফাইল নির্বাচন করুন</string>
     <string name="select_folder">ফোল্ডার নির্বাচন করুন</string>
     <string name="patches">প্যাচ</string>
@@ -1200,8 +1219,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="install_update_manager_failed">আপডেট ইনস্টল করতে ব্যর্থ</string>
     <string name="installing_manager_update">আপডেট ইনস্টল করা হচ্ছে…</string>
     <string name="downloading_manager_update">আপডেট ডাউনলোড হচ্ছে…</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">%1$.1f এমবি ডাউনলোড করা হয়েছে</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">%1$s MB ডাউনলোড হয়েছে</string>
     <string name="manager_update_not_ready">এই রিলিজটি এখনও প্রকাশ করা হচ্ছে। কয়েক মিনিট পর আবার চেষ্টা করুন।</string>
     <string name="update_download_missing">ডাউনলোড করা আপডেটটি আর উপলব্ধ নেই। আবার ডাউনলোড করুন।</string>
     <string name="download_manager_failed">আপডেট ডাউনলোড করা যায়নি: %s</string>

@@ -76,4 +76,8 @@
         <item quantity="one">Cópia do patch %s do pacote selecionado efetuada</item>
         <item quantity="other">Cópias dos patches %s do pacote selecionado efetuadas</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s núcleo</item>
+        <item quantity="other">%s núcleos</item>
+    </plurals>
 </resources>

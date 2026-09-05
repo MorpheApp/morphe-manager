@@ -35,6 +35,9 @@
     <string name="home_update_skipped_metered">Actualizări omise</string>
     <string name="home_update_skipped_metered_subtitle">Date mobile sunt activate</string>
     <string name="home_updating_sources">Se actualizează sursele…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d / %2$d  ·  %3$s / %4$s MB (%5$d%%)</string>
     <string name="home_update_success">Actualizare surse finalizată</string>
     <string name="home_update_success_subtitle">Sursele tale sunt actualizate</string>
     <string name="home_sources_are_loading">Se încarcă sursele…</string>
@@ -317,7 +320,8 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="home_outdated_patches_dialog_warning">Folosirea patch-urilor învechite poate duce la o aplicație defectuoasă</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Actualizează și patch-uiește</string>
     <string name="home_low_disk_space_dialog_title">Spațiu pe disc insuficient</string>
-    <string name="home_low_disk_space_dialog_message">Doar %1$.2f GB spațiu de stocare liber disponibil. Repararea necesită cel puțin %2$.2f GB spațiu liber pentru a funcționa corect</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">Doar %1$s GB de stocare liberă disponibilă. Aplicarea patch-urilor necesită cel puțin %2$s GB de spațiu liber pentru a funcționa corect</string>
     <string name="home_low_disk_space_dialog_warning">Continuarea ar putea duce la o eroare \"fișierul nu a fost găsit\" sau la un APK de ieșire corupt</string>
     <string name="home_simple_bundle_select_title">Selectează fișierul cu patch-uri</string>
     <!-- Color picker -->
@@ -458,6 +462,7 @@ Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păs
     <string name="patcher_error_log">Jurnal erori</string>
     <string name="patcher_error_technical">Detalii tehnice</string>
     <string name="patcher_error_dialog_diagnostics">Diagnostic</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Aplicație</string>
     <string name="patcher_field_package">Pachet</string>
@@ -473,6 +478,13 @@ Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păs
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">Memorie</string>
     <string name="patcher_field_storage">Stocare</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <!-- How long patching took -->
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">Memorie medie</string>
+    <string name="patcher_field_memory_max">Memorie maximă</string>
+    <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">Vârf I/O stocare</string>
     <string name="patcher_field_value_unknown">necunoscut</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">eliminate</string>
@@ -564,7 +576,7 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="patcher_message_15">Toate sistemele nominale… traiectoria de patch-uri este stabilă… 🚀</string>
     <string name="patcher_message_16">Stoarcem putere suplimentară, ca suc dintr-o lămâie digitală… 🍋</string>
     <string name="patcher_message_17">Încurajăm aplicația să-și accepte noul eu, mai bun… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">Schimbăm superpoziția aplicației de la nestergere la ștergere… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Aplicația ta are febră, iar singura prescripție sunt mai multe patch-uri… 🩺🔔</string>
@@ -572,6 +584,8 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Se patch-uiește aplicația</string>
     <string name="memory_usage">Utilizare memorie</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%1$s din %2$s MB</string>
     <string name="cpu_usage">Utilizare CPU</string>
     <string name="storage_io_usage">I/O stocare</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -1073,7 +1087,7 @@ Detalii: %2$s"</string>
     <string name="credits_current_development">Dezvoltare curentă</string>
     <string name="credits_prior_development">Dezvoltare anterioară</string>
     <string name="opensource_licenses">Licențe open-source</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">O alegere</string>
     <string name="easter_egg_pill_message">Take the blue pill and the ads stay exactly where they are. Take the red one and see how deep the bytecode goes</string>
     <string name="easter_egg_pill_red">Pastila roșie</string>
@@ -1084,6 +1098,10 @@ Detalii: %2$s"</string>
     <string name="easter_egg_pill_red_toast_again">Înapoi în ploaie</string>
     <string name="easter_egg_pill_blue_toast_again">Deconectat. Calea de întoarcere este acolo unde a fost întotdeauna.</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s MB / %2$s MB (%3$s%%)</string>
     <string name="select_file">Selectează fișierul</string>
     <string name="select_folder">Selecteazã folderul</string>
     <string name="patches">Patch-uri</string>
@@ -1208,8 +1226,8 @@ Detalii: %2$s"</string>
     <string name="install_update_manager_failed">Eroare la instalarea actualizării</string>
     <string name="installing_manager_update">Se instalează actualizarea...</string>
     <string name="downloading_manager_update">Se descarcă actualizarea...</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">%1$.1f MB descărcat</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">%1$s MB descărcați</string>
     <string name="manager_update_not_ready">Această versiune este încă în curs de publicare. Încearcă din nou în câteva minute</string>
     <string name="update_download_missing">Actualizarea descărcată nu mai este disponibilă. Descarc-o din nou.</string>
     <string name="download_manager_failed">Descărcarea actualizării a eșuat: %s</string>

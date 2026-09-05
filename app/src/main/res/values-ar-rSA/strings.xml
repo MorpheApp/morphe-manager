@@ -35,6 +35,9 @@
     <string name="home_update_skipped_metered">التحديثات تم تخطيها</string>
     <string name="home_update_skipped_metered_subtitle">بيانات الجوّال نشطة</string>
     <string name="home_updating_sources">جارٍ تحديث المصادر…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d / %2$d  ·  %3$s / %4$s م.ب (%5$d%%)</string>
     <string name="home_update_success">اكتمل تحديث المصادر</string>
     <string name="home_update_success_subtitle">مصادرك محدثة</string>
     <string name="home_sources_are_loading">جارٍ تحميل المصادر، يرجى الانتظار…</string>
@@ -317,7 +320,8 @@
     <string name="home_outdated_patches_dialog_warning">قد يؤدي التعديل باستخدام تعديلات قديمة إلى حدوث عطل في التطبيق</string>
     <string name="home_outdated_patches_dialog_update_and_patch">تحديث &amp; تعديل</string>
     <string name="home_low_disk_space_dialog_title">مساحة تخزين منخفضة</string>
-    <string name="home_low_disk_space_dialog_message">يتوفر فقط %1$.2f جيجابايت من مساحة التخزين الخالية. تتطلب عملية التعديل مساحة فارغة لا تقل عن %2$.2f جيجابايت لتعمل بشكل صحيح</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">يتوفر فقط %1$s ج.ب من مساحة التخزين الخالية. تتطلب عملية التعديل مساحة فارغة لا تقل عن %2$s ج.ب لتعمل بشكل صحيح</string>
     <string name="home_low_disk_space_dialog_warning">قد تؤدي المتابعة إلى حدوث خطأ \"ملف غير موجود\" أو ملف APK تالف</string>
     <string name="home_simple_bundle_select_title">تحديد مصدر التعديل</string>
     <!-- Color picker -->
@@ -458,6 +462,9 @@
     <string name="patcher_error_log">سجل الأخطاء</string>
     <string name="patcher_error_technical">التفاصيل التقنية</string>
     <string name="patcher_error_dialog_diagnostics">التشخيص</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">بدأَ التعديل</string>
+    <string name="patcher_card_succeeded">نجح التعديل</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">التطبيق</string>
     <string name="patcher_field_package">الحزمة</string>
@@ -473,6 +480,15 @@
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">الذاكرة</string>
     <string name="patcher_field_storage">التخزين</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">حجم الناتج</string>
+    <!-- How long patching took -->
+    <string name="patcher_field_time">الوقت</string>
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">متوسط الذاكرة</string>
+    <string name="patcher_field_memory_max">أقصى ذاكرة</string>
+    <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">ذروة التخزين</string>
     <string name="patcher_field_value_unknown">غير معروف</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">مستبعدة</string>
@@ -566,7 +582,7 @@
     <string name="patcher_message_15">جميع الأنظمة تعمل بشكل طبيعي… مسار التعديل مستقر… 🚀</string>
     <string name="patcher_message_16">استخلاص طاقة إضافية، مثل العصير من ليمونة رقمية… 🍋</string>
     <string name="patcher_message_17">تشجيع التطبيق على قبول ذاته الجديدة والأفضل… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">تغيير وضع التطبيق من غير معدل إلى معدل… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">تطبيقك يعاني من الحمى، والوصفة الطبية الوحيدة هي المزيد من التعديل… 🩺🔔</string>
@@ -574,6 +590,8 @@
     <!-- Expert patcher Screen -->
     <string name="patching_app">تعديل التطبيق</string>
     <string name="memory_usage">استخدام الذاكرة</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%1$s من %2$s م.ب</string>
     <string name="cpu_usage">استخدام المعالج</string>
     <string name="storage_io_usage">قراءة/كتابة التخزين</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -921,6 +939,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_process_runtime_enable">تمكين وقت تشغيل العملية</string>
     <string name="settings_system_memory_limit_subtitle">الذاكرة المتاحة للتعديل</string>
     <string name="settings_system_memory_limit_warning">الحد الأدنى للذاكرة قد يتسبب في فشل عند تعديل التطبيقات الأكبر حجمًا</string>
+    <string name="settings_system_memory_limit_high_warning">قد يؤدي حد الذاكرة المرتفع إلى جعل عملية الترقيع أبطأ بكثير على بعض الأجهزة. ارفعه فقط إذا استمرت عملية الترقيع في الفشل عند الحدود الأقل.</string>
     <string name="settings_system_process_runtime_enabled_description">حد %s ميجابايت</string>
     <string name="settings_system_process_runtime_disabled_description">انقر هنا للتهيئة</string>
     <string name="settings_system_process_runtime_description_not_available">تتطلب هذه الميزة Android 11 أو أحدث</string>
@@ -1080,7 +1099,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="credits_current_development">التطوير الحالي</string>
     <string name="credits_prior_development">التطوير المسبق</string>
     <string name="opensource_licenses">تراخيص مفتوحة المصدر</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">خيار واحد</string>
     <string name="easter_egg_pill_message">تناول الحبة الزرقاء وستبقى الإعلانات في مكانها تمامًا. تناول الحبة الحمراء وشاهد مدى عمق الكود</string>
     <string name="easter_egg_pill_red">الحبة الحمراء</string>
@@ -1091,6 +1110,10 @@ morphe_adaptive_monochrome_custom.xml
     <string name="easter_egg_pill_red_toast_again">العودة إلى المطر</string>
     <string name="easter_egg_pill_blue_toast_again">غير متصل. الطريق للعودة هو حيث كان دائمًا</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s م.ب / %2$s م.ب (%3$s%%)</string>
     <string name="select_file">اختر ملف</string>
     <string name="select_folder">اختر مجلد</string>
     <string name="patches">التعديلات</string>
@@ -1215,8 +1238,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="install_update_manager_failed">فشل تثبيت التحديث</string>
     <string name="installing_manager_update">جارٍ تثبيت التحديث...</string>
     <string name="downloading_manager_update">جارٍ تنزيل التحديث...</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">%1$.1f م.ب تم تنزيلها</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">%1$s م.ب تم تنزيلها</string>
     <string name="manager_update_not_ready">هذا الإصدار لا يزال قيد النشر. حاول مرة أخرى بعد بضع دقائق</string>
     <string name="update_download_missing">التحديث الذي تم تنزيله لم يعد متاحًا. يرجى تنزيله مرة أخرى</string>
     <string name="download_manager_failed">فشل تنزيل التحديث: %s</string>

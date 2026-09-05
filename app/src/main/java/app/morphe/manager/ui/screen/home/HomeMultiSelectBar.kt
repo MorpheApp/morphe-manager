@@ -26,7 +26,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.util.toast
+import app.morphe.manager.util.withToast
 
 /**
  * Everything [MultiSelectBar] renders from state its own actions clear, kept together so it
@@ -85,10 +85,6 @@ internal fun MultiSelectBar(
     onPatchSelected: (() -> Unit)? = null
 ) {
     val context = LocalContext.current
-    fun withToast(doneMessage: String, action: () -> Unit): () -> Unit = {
-        context.toast(doneMessage)
-        action()
-    }
 
     val cancelLabel = stringResource(android.R.string.cancel)
     val reorderListLabel = stringResource(R.string.reorder_list)
@@ -143,7 +139,7 @@ internal fun MultiSelectBar(
                     )
                     ActionPillRow {
                         ActionPillButton(
-                            onClick = withToast(resetOrderDone, onResetOrder),
+                            onClick = context.withToast(resetOrderDone, onResetOrder),
                             icon = Icons.Outlined.Restore,
                             contentDescription = resetOrderLabel,
                             tooltip = resetOrderLabel
@@ -155,7 +151,7 @@ internal fun MultiSelectBar(
                             tooltip = cancelLabel
                         )
                         ActionPillButton(
-                            onClick = withToast(reorderDone, onSaveOrder),
+                            onClick = context.withToast(reorderDone, onSaveOrder),
                             icon = Icons.Outlined.Check,
                             contentDescription = doneLabel,
                             tooltip = doneLabel
@@ -183,7 +179,7 @@ internal fun MultiSelectBar(
                     }
                     ActionPillRow {
                         ActionPillButton(
-                            onClick = withToast(selectionToggleDone) {
+                            onClick = context.withToast(selectionToggleDone) {
                                 if (allSelected) onDeselectAll() else onSelectAll()
                             },
                             icon = if (allSelected) Icons.Outlined.RemoveDone else Icons.Outlined.DoneAll,
@@ -227,7 +223,7 @@ internal fun MultiSelectBar(
                             )
                         }
                         ActionPillButton(
-                            onClick = withToast(actionDoneMessage, onAction),
+                            onClick = context.withToast(actionDoneMessage, onAction),
                             icon = actionIcon,
                             contentDescription = actionContentDescription,
                             tooltip = actionContentDescription,

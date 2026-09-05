@@ -114,4 +114,10 @@
         <item quantity="many">Скопійовано %s патчів із вибраного пакета</item>
         <item quantity="other">Скопійовано %s патчів із вибраного пакета</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s ядро</item>
+        <item quantity="few">%s ядра</item>
+        <item quantity="many">%s ядер</item>
+        <item quantity="other">%s ядер</item>
+    </plurals>
 </resources>

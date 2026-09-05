@@ -35,6 +35,8 @@
     <string name="home_update_skipped_metered">Uppfærslur höfðu</string>
     <string name="home_update_skipped_metered_subtitle">Fólgabil eru virkir</string>
     <string name="home_updating_sources">Uppfæra heimildir…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
     <string name="home_update_success">Heimildauppfærsla lokið</string>
     <string name="home_update_success_subtitle">Heimildir þínar eru upp til daglegt</string>
     <string name="home_sources_are_loading">Heimildir eru að hlaða, vinsamlegast bíðu…</string>
@@ -316,7 +318,8 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="home_outdated_patches_dialog_warning">Pökkun með útgáfuna má skert áhrif á app</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Uppfæra &amp; pakka</string>
     <string name="home_low_disk_space_dialog_title">Lítill diskur pláss</string>
-    <string name="home_low_disk_space_dialog_message">Aðeins %1$.2f GB af fríu geymslu í boði. Breyting þarf að minnst %2$.2f GB af fríu plássi til að virka rétt</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">Åðeins %1$s GB af lausu geymslurými. Plástrun krefst að minnsta kosti %2$s GB af lausu plássi til að virka rétt.</string>
     <string name="home_low_disk_space_dialog_warning">Að halda áfram gæti leitt til \"skrá finnst ekki\" villu eða skemmdra APK</string>
     <string name="home_simple_bundle_select_title">Veldu breytilega uppspretta</string>
     <!-- Color picker -->
@@ -456,6 +459,9 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="patcher_error_log">Villulog</string>
     <string name="patcher_error_technical">Tæknilegar upplýsingar</string>
     <string name="patcher_error_dialog_diagnostics">Villugreining</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">Plástrun hafin</string>
+    <string name="patcher_card_succeeded">Plástrun tókst</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Forrit</string>
     <string name="patcher_field_package">Pakki</string>
@@ -471,6 +477,12 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">Minni</string>
     <string name="patcher_field_storage">Geymsla</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">Úttaksstærð</string>
+    <!-- How long patching took -->
+    <string name="patcher_field_time">Tími</string>
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <!-- Fastest read or write rate reached while patching, in data per second -->
     <string name="patcher_field_value_unknown">óþekkt</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">fjarlægð</string>
@@ -562,7 +574,7 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="patcher_message_15">Öll kerfi eru í lagi… breytistilstraður er stöðugur… 🚀</string>
     <string name="patcher_message_16">Kreistum út auka kraft, eins og safa úr digital sítrónu… 🍋</string>
     <string name="patcher_message_17">Hvetjum appið til að samþykkja sjálf sitt nýja, betra sjálf… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">Breytum appstillingum úr óbreyttu yfir í breytt… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Appið þitt er með hita, og eina lyfið er meiri breytistilling… 🩺🔔</string>
@@ -570,6 +582,8 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Pakkning app</string>
     <string name="memory_usage">Minniskot</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%1$s af %2$s MB</string>
     <string name="cpu_usage">CPU notkun</string>
     <string name="storage_io_usage">Geymslu I/O</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -1069,7 +1083,7 @@ Nánari upplýsingar: %2$s"</string>
     <string name="credits_current_development">Núverandi þróun</string>
     <string name="credits_prior_development">Fyrri þróun</string>
     <string name="opensource_licenses">Open-source leyfisveitingar</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Val</string>
     <string name="easter_egg_pill_message">Taktu bláu pilluna og auglýsingarnar haldast nákvæmlega þar sem þær eru. Taktu rauðu pilluna og sjáðu hversu djúpt bytecode-ið fer.</string>
     <string name="easter_egg_pill_red">Rauð pilla</string>
@@ -1080,6 +1094,10 @@ Nánari upplýsingar: %2$s"</string>
     <string name="easter_egg_pill_red_toast_again">Aftur í rigningunni</string>
     <string name="easter_egg_pill_blue_toast_again">Aftengdur. Leiðin til baka er þar sem hún var alltaf</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s MB / %2$s MB (%3$s%%)</string>
     <string name="select_file">Velja skrá</string>
     <string name="select_folder">Velja möppu</string>
     <string name="patches">Breytistillingar</string>
@@ -1204,8 +1222,8 @@ Nánari upplýsingar: %2$s"</string>
     <string name="install_update_manager_failed">Ekki tókst að setja upp uppfærslu</string>
     <string name="installing_manager_update">Sæti uppfærslu…</string>
     <string name="downloading_manager_update">Sæki uppfærslu…</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">%1$.1f MB niðurhalin</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">%1$s MB niðurhalað</string>
     <string name="manager_update_not_ready">Þessi útgáfa er enn í útgáfuferlinu. Reyndu aftur á nokkrum mínútum</string>
     <string name="update_download_missing">Sótta uppfærslan er ekki lengur tiltæk. Sæktu hana aftur.</string>
     <string name="download_manager_failed">Ekki tókst að sækja uppfærslu: %s</string>

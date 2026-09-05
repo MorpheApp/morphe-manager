@@ -19,6 +19,8 @@
     <string name="home_update_skipped_metered">અદ્યતન છોડ્યાં</string>
     <string name="home_update_skipped_metered_subtitle">મોબાઇલ ડેટા સક્રિય છે</string>
     <string name="home_updating_sources">સ્ત્રોતો અધ્યતન કરી રહ્યાં છીએ...</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
     <string name="home_update_success">સ્ત્રોતો અધ્યતન કરવાનું પૂર્ણ થયું</string>
     <string name="home_update_success_subtitle">તમારા સ્ત્રોતો અધ્યતન જ છે</string>
     <!-- Home Screen - Home Greetings -->
@@ -80,6 +82,7 @@
     <string name="home_dialog_wrong_package_title">ખોટું પેકેજ પસંદ કર્યું</string>
     <string name="home_dialog_expected_package">અપેક્ષિત પેકેજ:</string>
     <string name="home_dialog_selected_package">પસંદ કરેલ પેકેજ:</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
     <!-- Color picker -->
     <string name="custom_color">કસ્ટમ રંગ</string>
     <string name="hex_color">હેક્સ રંગ</string>
@@ -93,10 +96,15 @@
     <!-- Home Screen - Root Mode -->
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">ભૂલ ક્લિપબોર્ડ પર કૉપિ કરવામાં આવેલ છે</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_patcher">પેચર</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <!-- Free and total RAM of the device, never its storage -->
+    <!-- Size of the patched APK, once patching finished -->
+    <!-- How long patching took -->
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <!-- Fastest read or write rate reached while patching, in data per second -->
     <string name="patcher_field_value_unknown">અજ્ઞાત</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <!-- Value of "Libraries": every library was left in the patched APK -->
@@ -135,12 +143,13 @@
     <string name="patcher_message_15">બધા સિસ્ટમ સરસ રીતે ચાલી રહ્યા છે… પેચિંગનો માર્ગ સ્થિર છે… 🚀</string>
     <string name="patcher_message_16">વધારે શક્તિથી દબાવી રહ્યા છીએ, જેમ કે ડિજિટલ લીંબુમાંથી રસ... 🍋</string>
     <string name="patcher_message_17">એપને તેની નવી અને વધુ સારી જાતને સ્વીકારવા પ્રોત્સાહિત કરી રહ્યા છીએ… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">એપની સુપરપોઝિશન ‘અનપેચડ’ માંથી ‘પેચડ’ તરફ બદલી રહ્યા છીએ… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">તમારી ઍપને થોડો તાવ આવ્યો છે, અને એની એક જ દવા છે, ઢગલાબંધ પેચિસ... 🩺🔔</string>
     <string name="patcher_message_20">થોડો કચરો સાફ કરું છું... બસ બે મિનિટ હો! 🗑️</string>
     <!-- Expert patcher Screen -->
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
     <!-- Patcher Screen - Other hidden strings -->
     <!-- Patcher Screen - Mini-games -->
     <!-- Settings -->
@@ -229,13 +238,16 @@ morphe_header_custom_dark.png
     <!-- File Picker -->
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_share_website">વેબસાઇટ બાટો </string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
     <string name="patches">પેચો</string>
     <string name="settings">સેટિંગ્સ</string>
     <string name="search">શોધો</string>
     <string name="search_no_results">કોઈ પરિણામ મળ્યું નથી.</string>
-    <!-- Shown while downloading, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
     <!-- Onboarding coach marks -->
     <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <!-- Translate "System" the same way as the System settings tab -->

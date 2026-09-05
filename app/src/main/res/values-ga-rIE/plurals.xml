@@ -133,4 +133,11 @@
         <item quantity="many">Cóipeáladh %s paistí ón bpacáiste roghnaithe</item>
         <item quantity="other">Cóipeáladh %s paistí ón bpacáiste roghnaithe</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s croí</item>
+        <item quantity="two">%s chroílár</item>
+        <item quantity="few">%s chroílár</item>
+        <item quantity="many">%s chroílár</item>
+        <item quantity="other">%s chroílár</item>
+    </plurals>
 </resources>

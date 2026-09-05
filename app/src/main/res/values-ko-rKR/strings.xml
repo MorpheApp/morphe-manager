@@ -35,6 +35,9 @@
     <string name="home_update_skipped_metered">업데이트를 건너뜁니다</string>
     <string name="home_update_skipped_metered_subtitle">모바일 데이터가 활성화되어 있습니다</string>
     <string name="home_updating_sources">소스를 업데이트하는 중…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d / %2$d  ·  %3$s / %4$s MB (%5$d%%)</string>
     <string name="home_update_success">소스 업데이트 완료</string>
     <string name="home_update_success_subtitle">소스가 최신 상태입니다</string>
     <string name="home_sources_are_loading">소스를 불러오는 중, 잠시만 기다려 주세요…</string>
@@ -317,7 +320,8 @@
     <string name="home_outdated_patches_dialog_warning">오래된 패치를 사용하면 앱이 손상될 수 있습니다</string>
     <string name="home_outdated_patches_dialog_update_and_patch">업데이트 &amp; 패치</string>
     <string name="home_low_disk_space_dialog_title">디스크 공간 부족</string>
-    <string name="home_low_disk_space_dialog_message">사용 가능한 저장 공간이 %1$.2f GB뿐입니다. 패치가 정상적으로 작동하려면 최소 %2$.2f GB이상의 여유 공간이 필요합니다</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">사용 가능한 저장 공간이 %1$s GB밖에 없습니다. 패치를 정상적으로 사용하려면 최소 %2$s GB의 여유 공간이 필요합니다</string>
     <string name="home_low_disk_space_dialog_warning">계속 진행하면 “파일을 찾을 수 없습니다” 오류가 발생하거나 손상된 APK 파일이 생성될 수 있습니다</string>
     <string name="home_simple_bundle_select_title">패치 소스 선택</string>
     <!-- Color picker -->
@@ -458,6 +462,9 @@
     <string name="patcher_error_log">오류 로그</string>
     <string name="patcher_error_technical">기술 세부 정보</string>
     <string name="patcher_error_dialog_diagnostics">진단</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">패치 시작됨</string>
+    <string name="patcher_card_succeeded">패치 성공</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">앱</string>
     <string name="patcher_field_package">패키지</string>
@@ -473,6 +480,15 @@
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">메모리</string>
     <string name="patcher_field_storage">기기 저장소</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">출력 크기</string>
+    <!-- How long patching took -->
+    <string name="patcher_field_time">시간</string>
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">평균 메모리</string>
+    <string name="patcher_field_memory_max">최대 메모리</string>
+    <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">저장소 I/O 최대치</string>
     <string name="patcher_field_value_unknown">알 수 없음</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">제거됨</string>
@@ -564,7 +580,7 @@
     <string name="patcher_message_15">모든 시스템 정상… 패치 궤도 안정… 🚀</string>
     <string name="patcher_message_16">디지털 레몬에서 즙을 짜내듯 추가 전력을 짜내고 있습니다… 🍋</string>
     <string name="patcher_message_17">앱이 새롭고 더 나은 자신을 받아들이도록 격려하고 있습니다… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">앱의 중첩 상태를 패치되지 않음에서 패치됨으로 변경 중… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">앱에서 열이 좀 나네요, 유일한 처방은 더 많은 패치뿐입니다… 🩺🔔</string>
@@ -572,6 +588,8 @@
     <!-- Expert patcher Screen -->
     <string name="patching_app">앱 패치</string>
     <string name="memory_usage">메모리 사용량</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%1$s / %2$s MB</string>
     <string name="cpu_usage">CPU 사용량</string>
     <string name="storage_io_usage">저장소 I/O</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -1072,7 +1090,7 @@ morphe_header_custom_dark.png
     <string name="credits_current_development">현재 개발</string>
     <string name="credits_prior_development">이전 개발</string>
     <string name="opensource_licenses">오픈 소스 라이선스</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">알약 선택</string>
     <string name="easter_egg_pill_message">파란 알약을 먹으면 광고가 지금 있는 그대로 남아 있습니다. 빨간 알약을 먹으면 바이트코드가 얼마나 깊이 들어가는지 볼 수 있습니다</string>
     <string name="easter_egg_pill_red">빨간 알약</string>
@@ -1083,6 +1101,10 @@ morphe_header_custom_dark.png
     <string name="easter_egg_pill_red_toast_again">다시 비 속으로</string>
     <string name="easter_egg_pill_blue_toast_again">플러그를 뽑았습니다. 돌아가는 길은 언제나 그곳에 있었습니다</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s MB / %2$s MB (%3$s%%)</string>
     <string name="select_file">파일 선택</string>
     <string name="select_folder">폴더 선택</string>
     <string name="patches">패치</string>
@@ -1207,8 +1229,8 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">업데이트를 할 수 없습니다</string>
     <string name="installing_manager_update">업데이트를 설치하는 중…</string>
     <string name="downloading_manager_update">업데이트를 다운로드하는 중…</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">%1$.1f MB 다운로드됨</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">%1$s MB 다운로드됨</string>
     <string name="manager_update_not_ready">이 릴리스를 게시하는 중입니다. 몇 분 후 다시 시도해 주세요</string>
     <string name="update_download_missing">다운로드한 업데이트를 더 이상 사용할 수 없습니다. 다시 다운로드하세요</string>
     <string name="download_manager_failed">업데이트를 다운로드할 수 없습니다: %s</string>

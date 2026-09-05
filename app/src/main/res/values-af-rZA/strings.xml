@@ -35,6 +35,9 @@
     <string name="home_update_skipped_metered">Opdaterings oorgeslaan</string>
     <string name="home_update_skipped_metered_subtitle">Selfoon data is aktief</string>
     <string name="home_updating_sources">Opdatering van oorspronge…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d / %2$d  ·  %3$s / %4$s MB (%5$d%%)</string>
     <string name="home_update_success">Opdatering van oorspronge voltooi</string>
     <string name="home_update_success_subtitle">Jou oorspronge is opgedateer</string>
     <string name="home_sources_are_loading">Oorsprong word gelaai, wag asseblief…</string>
@@ -317,7 +320,8 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="home_outdated_patches_dialog_warning">Pleister met verouderde pleisters kan \'n gebroke app tot gevolg hê</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Opdateer &amp; pleister</string>
     <string name="home_low_disk_space_dialog_title">Lae skyfspasie</string>
-    <string name="home_low_disk_space_dialog_message">Slegs %1$.2f GB vrye stoorplek beskikbaar. Pleister benodig ten minste %2$.2f GB vrye ruimte om behoorlik te werk</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">Slegs %1$s GB vrye bergingspasie is beskikbaar. Om te patch vereis ten minste %2$s GB vrye spasie om korrek te werk.</string>
     <string name="home_low_disk_space_dialog_warning">Voortgaan kan \'n \"lêer nie gevind\"-fout of \'n beskadigde APK tot gevolg hê</string>
     <string name="home_simple_bundle_select_title">Kies verandering oorsprong bylaag</string>
     <!-- Color picker -->
@@ -458,6 +462,7 @@ Outerlike sone (gestippel): kan deur die lanseerder masker afgesny word - hou be
     <string name="patcher_error_log">Foutlog</string>
     <string name="patcher_error_technical">Tegniese besonderhede</string>
     <string name="patcher_error_dialog_diagnostics">Diagnostiek</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">App</string>
     <string name="patcher_field_package">Pakket</string>
@@ -473,6 +478,10 @@ Outerlike sone (gestippel): kan deur die lanseerder masker afgesny word - hou be
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">Geheue</string>
     <string name="patcher_field_storage">Berging</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <!-- How long patching took -->
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <!-- Fastest read or write rate reached while patching, in data per second -->
     <string name="patcher_field_value_unknown">onbekend</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">gestroop</string>
@@ -564,7 +573,7 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="patcher_message_15">Alle stelsels nominaal… patchings trajek is stabiel… 🚀</string>
     <string name="patcher_message_16">Pers ekstra krag uit, soos sap uit \'n digitale lemoen… 🍋</string>
     <string name="patcher_message_17">Moedig die app aan om sy nuwe, beter self te aanvaar… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">Verander die toepassing superposisie van ongepatch na gepatch… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Jou app het koors, en die enigste voorskrif is meer patchings… 🩺🔔</string>
@@ -572,6 +581,8 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">App word gepleister</string>
     <string name="memory_usage">Geheiebruik</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%1$s van %2$s MB</string>
     <string name="cpu_usage">SVE-gebruik</string>
     <string name="storage_io_usage">Berging I/O</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -915,6 +926,7 @@ Besonderhede: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Aktiveer proses tydloop</string>
     <string name="settings_system_memory_limit_subtitle">Geheue beskikbaar vir patching</string>
     <string name="settings_system_memory_limit_warning">\'n Lae geheugelimiet kan mislukking veroorsaak wanneer groter apps gepatched word</string>
+    <string name="settings_system_memory_limit_high_warning">\' n Hoë geheue-limiet kan patching op sommige toestelle baie stadiger maak. Verhoog dit net as patching steeds by laer limiete misluk.</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB limiet</string>
     <string name="settings_system_process_runtime_disabled_description">Klik om te konfigureer</string>
     <string name="settings_system_process_runtime_description_not_available">Hierdie kenmerk vereis Android 11 of later</string>
@@ -1074,7 +1086,7 @@ Besonderhede: %2$s"</string>
     <string name="credits_current_development">Huidige ontwikkeling</string>
     <string name="credits_prior_development">Vorige ontwikkeling</string>
     <string name="opensource_licenses">Open-source lisensies</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">\'n Keuse</string>
     <string name="easter_egg_pill_message">Neem die blou pil en die advertensies bly presies waar hulle is. Neem die rooi een en kyk hoe diep die bytekode gaan.</string>
     <string name="easter_egg_pill_red">Rooi pil</string>
@@ -1085,6 +1097,10 @@ Besonderhede: %2$s"</string>
     <string name="easter_egg_pill_red_toast_again">Terug in die reën</string>
     <string name="easter_egg_pill_blue_toast_again">Ontkoppel. Die pad terug is waar dit altyd was</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s MB / %2$s MB (%3$s%%)</string>
     <string name="select_file">Kies lêer</string>
     <string name="select_folder">Kies vouer</string>
     <string name="patches">Veranderinge</string>
@@ -1209,8 +1225,8 @@ Besonderhede: %2$s"</string>
     <string name="install_update_manager_failed">Kon nie opdatering installeer nie</string>
     <string name="installing_manager_update">Installeer opdatering…</string>
     <string name="downloading_manager_update">Laai opdatering af…</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">%1$.1f MB afgelaai</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">%1$s MB afgelaai</string>
     <string name="manager_update_not_ready">Hierdie weergawe word nog steeds gepubliseer. Probeer weer oor \'n paar minute</string>
     <string name="update_download_missing">Die afgelaaide opdatering is nie meer beskikbaar nie. Laai dit weer af.</string>
     <string name="download_manager_failed">Kon nie opdatering aflaai nie: %s</string>

@@ -33,6 +33,7 @@ import app.morphe.manager.patcher.patch.ApkArchitectureResolver
 import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.patcher.runtime.CoroutineRuntime
 import app.morphe.manager.patcher.runtime.ProcessRuntime
+import app.morphe.manager.patcher.runtime.coerceMemoryLimit
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.util.NativeLibStripper
 import app.morphe.manager.ui.model.SelectedApp
@@ -346,18 +347,23 @@ class PatcherWorker(
                 "$LOG_WORKER_PREFIX_DEVICE " +
                         "$LOG_WORKER_FIELD_ANDROID=${Build.VERSION.RELEASE} " +
                         "$LOG_WORKER_FIELD_API=${Build.VERSION.SDK_INT} " +
-                        "$LOG_WORKER_FIELD_RAM_AVAIL=\"${formatBytes(deviceStats?.ramAvailable ?: 0L)}\" " +
-                        "$LOG_WORKER_FIELD_RAM_TOTAL=\"${formatBytes(deviceStats?.ramTotal ?: 0L)}\" " +
-                        "$LOG_WORKER_FIELD_STORAGE_AVAIL=\"${formatBytes(deviceStats?.storageAvailable ?: 0L)}\" " +
-                        "$LOG_WORKER_FIELD_STORAGE_TOTAL=\"${formatBytes(deviceStats?.storageTotal ?: 0L)}\""
+                        "$LOG_WORKER_FIELD_RAM_AVAIL=\"${formatBytesForReport(deviceStats?.ramAvailable ?: 0L)}\" " +
+                        "$LOG_WORKER_FIELD_RAM_TOTAL=\"${formatBytesForReport(deviceStats?.ramTotal ?: 0L)}\" " +
+                        "$LOG_WORKER_FIELD_STORAGE_AVAIL=\"${formatBytesForReport(deviceStats?.storageAvailable ?: 0L)}\" " +
+                        "$LOG_WORKER_FIELD_STORAGE_TOTAL=\"${formatBytesForReport(deviceStats?.storageTotal ?: 0L)}\""
             )
 
             args.logger.info(
-                "Patching started at ${System.currentTimeMillis()} " +
-                        "pkg=${args.packageName} version=${args.input.version} " +
-                        "input=${inputFile.absolutePath} size=${inputFile.length()} " +
-                        "split=$inputIsSplitArchive arch=$apkArchitecture patches=$selectedCount " +
-                        "device=${Build.MANUFACTURER} model=${Build.MODEL}"
+                "$LOG_WORKER_PREFIX_STARTED ${System.currentTimeMillis()} " +
+                        "$LOG_WORKER_FIELD_PACKAGE=${args.packageName} " +
+                        "$LOG_WORKER_FIELD_VERSION=${args.input.version} " +
+                        "$LOG_WORKER_FIELD_INPUT=${inputFile.absolutePath} " +
+                        "$LOG_WORKER_FIELD_SIZE=${inputFile.length()} " +
+                        "$LOG_WORKER_FIELD_SPLIT=$inputIsSplitArchive " +
+                        "$LOG_WORKER_FIELD_ARCH=$apkArchitecture " +
+                        "$LOG_WORKER_FIELD_PATCHES=$selectedCount " +
+                        "$LOG_WORKER_FIELD_DEVICE=${Build.MANUFACTURER} " +
+                        "$LOG_WORKER_FIELD_MODEL=${Build.MODEL}"
             )
 
             // One line per source rather than a joined list, so a name and its version stay
@@ -371,11 +377,12 @@ class PatcherWorker(
 
             // Log runtime mode info
             if (useProcessRuntime) {
-                val memLimit = prefs.patcherProcessMemoryLimit.get()
+                // The limit the runtime will actually start with, not the raw setting
+                val memLimit = coerceMemoryLimit(applicationContext, prefs.patcherProcessMemoryLimit.get())
                 args.logger.info("$LOG_WORKER_PREFIX_RUNTIME process $LOG_WORKER_FIELD_MEMORY_LIMIT=$memLimit")
             } else {
                 // CoroutineRuntime starts memory polling internally; only log the heap size here
-                args.logger.info("$LOG_PROCESS_PREFIX_COROUTINE_HEAP ${Runtime.getRuntime().maxMemory() / (1024 * 1024)}MB")
+                args.logger.info("$LOG_PROCESS_PREFIX_COROUTINE_HEAP ${bytesToMebibytes(Runtime.getRuntime().maxMemory())}MB")
                 args.logger.info("$LOG_WORKER_PREFIX_RUNTIME coroutine")
             }
 
@@ -452,7 +459,7 @@ class PatcherWorker(
             val elapsed = System.currentTimeMillis() - startTime
 
             args.logger.info(
-                "$LOG_WORKER_PREFIX_SUCCEEDED output=${args.output} " +
+                "$LOG_WORKER_PREFIX_SUCCEEDED $LOG_WORKER_FIELD_OUTPUT=${args.output} " +
                         "$LOG_WORKER_FIELD_SIZE=${File(args.output).length()} " +
                         "$LOG_WORKER_FIELD_ELAPSED=${elapsed}ms"
             )
@@ -550,12 +557,21 @@ class PatcherWorker(
         const val PROCESS_PREVIOUS_LIMIT_KEY = "process_previous_limit"
         const val PROCESS_FAILURE_MESSAGE_KEY = "process_failure_message"
 
+        const val LOG_WORKER_PREFIX_STARTED = "Patching started at"
         const val LOG_WORKER_PREFIX_SUCCEEDED = "Patching succeeded:"
         const val LOG_WORKER_PREFIX_DEVICE = "Device:"
         const val LOG_WORKER_PREFIX_RUNTIME = "Runtime:"
         const val LOG_WORKER_PREFIX_SOURCE = "Source:"
         const val LOG_WORKER_PREFIX_BUILD = "Build:"
 
+        const val LOG_WORKER_FIELD_PACKAGE = "pkg"
+        const val LOG_WORKER_FIELD_INPUT = "input"
+        const val LOG_WORKER_FIELD_SPLIT = "split"
+        const val LOG_WORKER_FIELD_ARCH = "arch"
+        const val LOG_WORKER_FIELD_PATCHES = "patches"
+        const val LOG_WORKER_FIELD_DEVICE = "device"
+        const val LOG_WORKER_FIELD_MODEL = "model"
+        const val LOG_WORKER_FIELD_OUTPUT = "output"
         const val LOG_WORKER_FIELD_NAME = "name"
         const val LOG_WORKER_FIELD_VERSION = "version"
         const val LOG_WORKER_FIELD_MANAGER = "manager"

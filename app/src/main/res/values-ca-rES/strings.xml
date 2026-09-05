@@ -16,6 +16,8 @@
     <string name="home_update_skipped_metered">Actualització ignorada</string>
     <string name="home_update_skipped_metered_subtitle">Les dades mòbils estan actives</string>
     <string name="home_updating_sources">Actualitzant fonts…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
     <string name="home_update_success">Actualització completada</string>
     <string name="home_update_success_subtitle">Les teves fonts estan actualitzades</string>
     <string name="home_sources_are_loading">S\'estan carregant les fonts, si us plau espereu…</string>
@@ -66,6 +68,7 @@
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <!-- Home Screen - Home Sub-Dialogs -->
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
     <!-- Color picker -->
     <!-- Patch Options -->
     <string name="patch_option_instructions">Instruccions</string>
@@ -75,9 +78,14 @@
     <!-- Home Screen - App Info Screen -->
     <!-- Home Screen - Root Mode -->
     <!-- Patcher Screen -->
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <!-- Native code libraries (.so files) packed inside the APK -->
     <!-- Free and total RAM of the device, never its storage -->
+    <!-- Size of the patched APK, once patching finished -->
+    <!-- How long patching took -->
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <!-- Fastest read or write rate reached while patching, in data per second -->
     <string name="patcher_field_value_unknown">desconegut</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <!-- Value of "Libraries": every library was left in the patched APK -->
@@ -89,9 +97,10 @@
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <!-- "bytecode" can be translated from "the app code" -->
     <!-- Space flight communications callout. -->
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <!-- Expert patcher Screen -->
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
     <!-- Patcher Screen - Other hidden strings -->
     <!-- Patcher Screen - Mini-games -->
     <!-- Settings -->
@@ -127,9 +136,12 @@
     <!-- File Picker -->
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Quant a</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <!-- Shared strings -->
-    <!-- Shown while downloading, before the total size is known -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
     <!-- Onboarding coach marks -->
     <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <!-- Translate "System" the same way as the System settings tab -->

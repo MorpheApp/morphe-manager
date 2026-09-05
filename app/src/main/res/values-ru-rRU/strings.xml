@@ -35,6 +35,9 @@
     <string name="home_update_skipped_metered">Обновления пропущены</string>
     <string name="home_update_skipped_metered_subtitle">Мобильные данные активны</string>
     <string name="home_updating_sources">Обновление источников…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d / %2$d  ·  %3$s / %4$s МБ (%5$d%%)</string>
     <string name="home_update_success">Обновление источников завершено</string>
     <string name="home_update_success_subtitle">Ваши источники обновлены</string>
     <string name="home_sources_are_loading">Загрузка источников, пожалуйста, подождите…</string>
@@ -317,7 +320,8 @@
     <string name="home_outdated_patches_dialog_warning">Патчинг устаревшими патчами может привести к неисправности программы</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Обновить и патчить</string>
     <string name="home_low_disk_space_dialog_title">Недостаточно места на диске</string>
-    <string name="home_low_disk_space_dialog_message">Доступно только %1$.2f GB свободного хранилища. Для патчинга требуется как минимум %2$.2f GB свободного места для корректной работы</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">Доступно только %1$s GB свободного хранилища. Для патчинга требуется как минимум %2$s GB свободного места для корректной работы</string>
     <string name="home_low_disk_space_dialog_warning">Дальнейшие действия могут привести к ошибке \"файл не найден\" или к повреждению выходного APK-файла</string>
     <string name="home_simple_bundle_select_title">Выберите источник патчей</string>
     <!-- Color picker -->
@@ -458,6 +462,9 @@
     <string name="patcher_error_log">Журнал ошибок</string>
     <string name="patcher_error_technical">Технические детали</string>
     <string name="patcher_error_dialog_diagnostics">Диагностика</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">Начато применение патча</string>
+    <string name="patcher_card_succeeded">Применение патча успешно</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Приложение</string>
     <string name="patcher_field_package">Пакет</string>
@@ -473,6 +480,15 @@
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">Память</string>
     <string name="patcher_field_storage">Хранилище</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">Размер вывода</string>
+    <!-- How long patching took -->
+    <string name="patcher_field_time">Время</string>
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">Средний объем памяти</string>
+    <string name="patcher_field_memory_max">Максимальный объем памяти</string>
+    <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">Пиковая скорость ввода-вывода</string>
     <string name="patcher_field_value_unknown">неизвестно</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">Удалены</string>
@@ -564,7 +580,7 @@
     <string name="patcher_message_15">Все системы в норме… траектория патчинга стабильна… 🚀</string>
     <string name="patcher_message_16">Выжимаем дополнительную мощность, как сок из цифрового лимона… 🍋</string>
     <string name="patcher_message_17">Поощряем приложение принять свою новую, улучшенную версию… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">Изменяем суперпозицию приложения с «не пропатчено» на «пропатчено»… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">У вашего приложения жар, и единственное лекарство — больше патчей… 🩺🔔</string>
@@ -572,6 +588,8 @@
     <!-- Expert patcher Screen -->
     <string name="patching_app">Патчинг приложения</string>
     <string name="memory_usage">Использование памяти</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%1$s из %2$s МБ</string>
     <string name="cpu_usage">Использование ЦП</string>
     <string name="storage_io_usage">Ввод-вывод хранилища</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -1072,7 +1090,7 @@ morphe_header_custom_dark.png
     <string name="credits_current_development">Текущая разработка</string>
     <string name="credits_prior_development">Предыдущая разработка</string>
     <string name="opensource_licenses">Лицензии открытого кода</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Выбор</string>
     <string name="easter_egg_pill_message">Прими синюю таблетку — и реклама останется на месте. Прими красную — и узнаешь, насколько глубоко уходит байткод.</string>
     <string name="easter_egg_pill_red">Красная таблетка</string>
@@ -1083,6 +1101,10 @@ morphe_header_custom_dark.png
     <string name="easter_egg_pill_red_toast_again">Обратно в дождь</string>
     <string name="easter_egg_pill_blue_toast_again">Отключено. Путь назад там, где он всегда был.</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s МБ / %2$s МБ (%3$s%%)</string>
     <string name="select_file">Выберите файл</string>
     <string name="select_folder">Выбрать папку</string>
     <string name="patches">Патчи</string>
@@ -1207,8 +1229,8 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">Не удалось установить обновление</string>
     <string name="installing_manager_update">Установка обновления…</string>
     <string name="downloading_manager_update">Загрузка обновления…</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">Загружено %1$.1f МБ</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">Загружено %1$s МБ</string>
     <string name="manager_update_not_ready">Этот релиз еще публикуется. Попробуйте снова через несколько минут</string>
     <string name="update_download_missing">Загруженное обновление больше недоступно. Загрузите его снова</string>
     <string name="download_manager_failed">Не удалось загрузить обновление: %s</string>

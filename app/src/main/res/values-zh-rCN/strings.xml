@@ -35,6 +35,9 @@
     <string name="home_update_skipped_metered">更新已跳过</string>
     <string name="home_update_skipped_metered_subtitle">移动数据已激活</string>
     <string name="home_updating_sources">正在更新源…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d / %2$d · %3$s / %4$s MB (%5$d%%)</string>
     <string name="home_update_success">源更新完成</string>
     <string name="home_update_success_subtitle">您的源已是最新的</string>
     <string name="home_sources_are_loading">源正在加载，请稍等…</string>
@@ -317,7 +320,8 @@
     <string name="home_outdated_patches_dialog_warning">使用过期补丁可能会导致应用程序无法使用</string>
     <string name="home_outdated_patches_dialog_update_and_patch">更新&amp;修补</string>
     <string name="home_low_disk_space_dialog_title">磁盘空间不足</string>
-    <string name="home_low_disk_space_dialog_message">只有 %1$.2f GB 的可用存储空间。修复至少需要 %2$.2f GB 的可用空间才能正常工作</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">可用存储空间仅剩 %1$s GB。打补丁需要至少 %2$s GB 的可用空间才能正常工作。</string>
     <string name="home_low_disk_space_dialog_warning">继续可能会导致“文件未找到”错误或损坏的输出 APK</string>
     <string name="home_simple_bundle_select_title">选择补丁来源</string>
     <!-- Color picker -->
@@ -457,6 +461,9 @@
     <string name="patcher_error_copied">错误已复制到剪贴板</string>
     <string name="patcher_error_log">错误日志</string>
     <string name="patcher_error_technical">技术细节</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">修补已开始</string>
+    <string name="patcher_card_succeeded">修补成功</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_split">拆分APK</string>
     <string name="patcher_field_manager">管理器</string>
@@ -469,6 +476,15 @@
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">内存</string>
     <string name="patcher_field_storage">存储</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">输出大小</string>
+    <!-- How long patching took -->
+    <string name="patcher_field_time">时间</string>
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">平均内存</string>
+    <string name="patcher_field_memory_max">最大内存</string>
+    <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">存储I/O峰值</string>
     <string name="patcher_field_value_unknown">未知</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">已移除</string>
@@ -560,7 +576,7 @@
     <string name="patcher_message_15">所有系统正常……打补丁轨迹稳定…… 🚀</string>
     <string name="patcher_message_16">榨取额外动力，就像从数字柠檬中榨取果汁一样…… 🍋</string>
     <string name="patcher_message_17">鼓励应用接受其全新、更好的自我…… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">将应用叠加从未打补丁更改为已打补丁…… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">您的应用发烧了，唯一的治疗方法是更多的补丁…… 🩺🔔</string>
@@ -568,6 +584,8 @@
     <!-- Expert patcher Screen -->
     <string name="patching_app">修补应用</string>
     <string name="memory_usage">内存使用</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">已用 %2$s MB 的 %1$s</string>
     <string name="cpu_usage">CPU 使用率</string>
     <string name="storage_io_usage">存储 I/O</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -1070,7 +1088,7 @@ morphe_header_custom_dark.png
     <string name="credits_current_development">当前开发</string>
     <string name="credits_prior_development">先前开发</string>
     <string name="opensource_licenses">开源许可证</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">一个选择</string>
     <string name="easter_egg_pill_message">服用蓝色药丸，广告就会保持原样。服用红色药丸，看看字节码究竟有多深。</string>
     <string name="easter_egg_pill_red">红色药丸</string>
@@ -1081,6 +1099,10 @@ morphe_header_custom_dark.png
     <string name="easter_egg_pill_red_toast_again">回到雨中</string>
     <string name="easter_egg_pill_blue_toast_again">已断开。回去的路始终在那里。</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s MB / %2$s MB (%3$s%%)</string>
     <string name="select_file">选择文件</string>
     <string name="select_folder">选择文件夹</string>
     <string name="patches">补丁</string>
@@ -1205,8 +1227,8 @@ morphe_header_custom_dark.png
     <string name="install_update_manager_failed">安装更新失败</string>
     <string name="installing_manager_update">正在安装更新…</string>
     <string name="downloading_manager_update">正在下载更新…</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">已下载 %1$.1f MB</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">已下载 %1$s MB</string>
     <string name="manager_update_not_ready">此版本仍在发布中。几分钟后重试</string>
     <string name="update_download_missing">下载的更新不再可用。请重新下载。</string>
     <string name="download_manager_failed">下载更新失败：%s</string>

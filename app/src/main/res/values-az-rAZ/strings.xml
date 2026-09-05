@@ -35,6 +35,9 @@
     <string name="home_update_skipped_metered">Yenilənmələr ötürüldü</string>
     <string name="home_update_skipped_metered_subtitle">Mobil data işləkdir</string>
     <string name="home_updating_sources">Mənbələr yenilənir…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d / %2$d  ·  %3$s / %4$s MB (%5$d%%)</string>
     <string name="home_update_success">Mənbələri yeniləmə tamamlandı</string>
     <string name="home_update_success_subtitle">Mənbələriniz yenilənib</string>
     <string name="home_sources_are_loading">Mənbələr yüklənilir, xahiş olunur gözləyin...</string>
@@ -317,7 +320,8 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="home_outdated_patches_dialog_warning">Köhnə yamaqlarla yamaqlanma tətbiq pozulmasına səbəb ola bilər</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Yenilənmə &amp; yamaq</string>
     <string name="home_low_disk_space_dialog_title">Az disk yaddaşı</string>
-    <string name="home_low_disk_space_dialog_message">Yalnız %1$.2f GB boş yaddaş var. Yamaqlanmanın düzgün işləməsinə ən azı %2$.2f GB boş yer tələb olunur</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">Yalnız %1$s GB boş yaddaş var. Yamaqlanmanın düzgün işləməsinə ən azı %2$s GB boş yer tələb olunur</string>
     <string name="home_low_disk_space_dialog_warning">Əməl edilməsi \"fayl tapılmadı\" xətasına və ya hasilat APK korlanmasına səbəb ola bilər</string>
     <string name="home_simple_bundle_select_title">Yamaq mənbəsi seç</string>
     <!-- Color picker -->
@@ -458,6 +462,9 @@ Xarici sahə (ştrixli): başladıcı örtüyündən kəsilə bilər - mühüm h
     <string name="patcher_error_log">Xəta jurnalı</string>
     <string name="patcher_error_technical">Texniki təfsilatlar</string>
     <string name="patcher_error_dialog_diagnostics">Diaqnostika</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">Yamaqlama başladı</string>
+    <string name="patcher_card_succeeded">Yamaqlama uğurlu oldu</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Tətbiq</string>
     <string name="patcher_field_package">Paket</string>
@@ -473,6 +480,15 @@ Xarici sahə (ştrixli): başladıcı örtüyündən kəsilə bilər - mühüm h
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">Yaddaş</string>
     <string name="patcher_field_storage">Saxlanc</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">Çıxarış həcmi</string>
+    <!-- How long patching took -->
+    <string name="patcher_field_time">Müddət</string>
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">Orta yaddaş</string>
+    <string name="patcher_field_memory_max">Maksimal yaddaş</string>
+    <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">Saxlanc I/O pik dəyər</string>
     <string name="patcher_field_value_unknown">naməlum</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">təmizlənmiş</string>
@@ -564,7 +580,7 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="patcher_message_15">Bütün sistemlər nominaldır... yamaqlanma işi cizgisi sabitdir... 🚀 </string>
     <string name="patcher_message_16">Rəqəmsal limondan çıxan şirə kimi əlavə gücü sıxır... 🍋 </string>
     <string name="patcher_message_17">Tətbiqi yeni, daha yaxşı özünü təqdir etməyə həvəsləndirir... 🌱 </string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">Tətbiqin üstün mövqeyin yamaqlanmayandan yamaqlanana dəyişdirir... 📦⚛️ </string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Tətbiqinizin hərarəti var və yeganə resept daha çox yamaqdır... 🩺🔔 </string>
@@ -572,6 +588,8 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Tətbiqi yamaqlayır</string>
     <string name="memory_usage">Yaddaş istifadəsi</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%1$s of %2$s MB</string>
     <string name="cpu_usage">CPU istifadəsi</string>
     <string name="storage_io_usage">Saxlanc Giriş/Çıxış</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -1071,7 +1089,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="credits_current_development">Hazırkı inkişaf</string>
     <string name="credits_prior_development">Əvvəlki inkişaf</string>
     <string name="opensource_licenses">Açıq mənbə lisenziyaları</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Seçim</string>
     <string name="easter_egg_pill_message">Mavi həbi seçsəniz, reklamlar olduğu kimi qalacaq. Qırmızı həbi seçin və baytkodun nə qədər dərinə getdiyini görün</string>
     <string name="easter_egg_pill_red">Qırmızı həb</string>
@@ -1082,6 +1100,10 @@ Təfərrüatlar: %2$s"</string>
     <string name="easter_egg_pill_red_toast_again">Yenidən yağışda</string>
     <string name="easter_egg_pill_blue_toast_again">Şəbəkədən ayrıldı. Geriyə yol həmişə olduğu yerdədir</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s MB / %2$s MB (%3$s%%)</string>
     <string name="select_file">Faylı seç</string>
     <string name="select_folder">Qovluq seç</string>
     <string name="patches">Yamaqlar</string>
@@ -1206,8 +1228,8 @@ Təfərrüatlar: %2$s"</string>
     <string name="install_update_manager_failed">Yeniləməni quraşdırmaq olmadı</string>
     <string name="installing_manager_update">Yeniləmə quraşdırılır…</string>
     <string name="downloading_manager_update">Yenilənmə yüklənilir…</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">%1$.1f MB yüklənildi</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">%1$s MB yüklənildi</string>
     <string name="manager_update_not_ready">Bu buraxılış hələ də dərc olunur. Bir neçə dəqiqə sonra təkrar cəhd et</string>
     <string name="update_download_missing">Yüklənilmiş yeniləmə artıq əlçatan deyil. Onu təkrar yüklə</string>
     <string name="download_manager_failed">Yeniləməni yükləmək olmadı: %s</string>

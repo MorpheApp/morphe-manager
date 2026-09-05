@@ -35,6 +35,9 @@
     <string name="home_update_skipped_metered">Opdateringer oversprunget</string>
     <string name="home_update_skipped_metered_subtitle">Mobildata er aktiv</string>
     <string name="home_updating_sources">Opdaterer kilder…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d / %2$d  ·  %3$s / %4$s (%5$d%%)</string>
     <string name="home_update_success">Opdatering af kilder fuldført</string>
     <string name="home_update_success_subtitle">Dine kilder er opdaterede</string>
     <string name="home_sources_are_loading">Kilder hentes, vent venligst…</string>
@@ -317,7 +320,8 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="home_outdated_patches_dialog_warning">At patche med forældede patches kan resultere i en defekt app</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Opdater &amp; patch</string>
     <string name="home_low_disk_space_dialog_title">Lav diskplads</string>
-    <string name="home_low_disk_space_dialog_message">Kun %1$.2f GB ledig lagerplads. Patching kræver mindst %2$.2f GB ledig plads for at fungere korrekt</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">Kun %1$s GB ledig lagerplads. Patchning kræver mindst %2$s GB fri plads for at fungere korrekt.</string>
     <string name="home_low_disk_space_dialog_warning">Fortsættelse kan resultere i en \"fil ikke fundet\"-fejl eller en korrupt output APK</string>
     <string name="home_simple_bundle_select_title">Vælg patch kildefil</string>
     <!-- Color picker -->
@@ -458,6 +462,9 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="patcher_error_log">Fejllog</string>
     <string name="patcher_error_technical">Tekniske oplysninger</string>
     <string name="patcher_error_dialog_diagnostics">Diagnostik</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">Patchning startet</string>
+    <string name="patcher_card_succeeded">Patchning lykkedes</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">App</string>
     <string name="patcher_field_package">Pakke</string>
@@ -473,6 +480,12 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">Hukommelse</string>
     <string name="patcher_field_storage">Lagring</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">Outputstørrelse</string>
+    <!-- How long patching took -->
+    <string name="patcher_field_time">Tid</string>
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <!-- Fastest read or write rate reached while patching, in data per second -->
     <string name="patcher_field_value_unknown">ukendt</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">strippet</string>
@@ -564,7 +577,7 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="patcher_message_15">Alle systemer er nominelle… patche-bane er stabil… 🚀</string>
     <string name="patcher_message_16">Presser ekstra kraft ud som saft af en digital citron… 🍋</string>
     <string name="patcher_message_17">Opfordrer appen til at acceptere sit nye, bedre jeg… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">Ændrer appens superposition fra upatchet til patchet… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Din app har feber, og den eneste recept er flere patches… 🩺🔔</string>
@@ -572,6 +585,8 @@ Afinstallation sletter permanent alle appdata."</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Patcher app</string>
     <string name="memory_usage">Hukommelsesforbrug</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%1$s af %2$s MB</string>
     <string name="cpu_usage">CPU-forbrug</string>
     <string name="storage_io_usage">Lagring I/O</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -1072,7 +1087,7 @@ Detaljer: %2$s"</string>
     <string name="credits_current_development">Current development</string>
     <string name="credits_prior_development">Prior development</string>
     <string name="opensource_licenses">Open-source licenser</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Et valg</string>
     <string name="easter_egg_pill_message">Tag den blå pille, og reklamerne forbliver præcis, hvor de er. Tag den røde, og se, hvor dybt bytekoden går.</string>
     <string name="easter_egg_pill_red">Rød pille</string>
@@ -1083,6 +1098,10 @@ Detaljer: %2$s"</string>
     <string name="easter_egg_pill_red_toast_again">Tilbage i regnen</string>
     <string name="easter_egg_pill_blue_toast_again">Frakoblet. Vejen tilbage er, hvor den altid var</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s MB / %2$s MB (%3$s%%)</string>
     <string name="select_file">Vælg fil</string>
     <string name="select_folder">Vælg mappe</string>
     <string name="patches">Patches</string>
@@ -1207,8 +1226,8 @@ Detaljer: %2$s"</string>
     <string name="install_update_manager_failed">Kunne ikke installere opdatering</string>
     <string name="installing_manager_update">Installerer opdatering…</string>
     <string name="downloading_manager_update">Downloader opdatering…</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">%1$.1f MB downloadet</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">%1$s MB downloadet</string>
     <string name="manager_update_not_ready">Denne udgivelse er stadig ved at blive publiceret. Prøv igen om et par minutter</string>
     <string name="update_download_missing">Den downloadede opdatering er ikke længere tilgængelig. Download den igen</string>
     <string name="download_manager_failed">Kunne ikke downloade opdatering: %s</string>

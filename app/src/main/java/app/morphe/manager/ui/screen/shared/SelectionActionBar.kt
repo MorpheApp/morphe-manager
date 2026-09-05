@@ -25,7 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.theme.MonochromeThemeDefaults
-import app.morphe.manager.util.toast
+import app.morphe.manager.util.withToast
 
 /**
  * Metrics of the [MultiSelectShell] surface. The bar floats over the content it belongs to, so
@@ -111,10 +111,6 @@ fun SelectionActionBar(
     actions: @Composable () -> Unit = {}
 ) {
     val context = LocalContext.current
-    fun withToast(doneMessage: String, action: () -> Unit): () -> Unit = {
-        context.toast(doneMessage)
-        action()
-    }
 
     val selectAllLabel = stringResource(R.string.select_all)
     val selectAllDone = stringResource(R.string.select_all_done)
@@ -160,7 +156,7 @@ fun SelectionActionBar(
 
         ActionPillRow {
             ActionPillButton(
-                onClick = withToast(selectionToggleDone) {
+                onClick = context.withToast(selectionToggleDone) {
                     if (canToggleToDeselect) onDeselectAll() else onSelectAll()
                 },
                 icon = if (canToggleToDeselect) Icons.Outlined.RemoveDone else Icons.Outlined.DoneAll,

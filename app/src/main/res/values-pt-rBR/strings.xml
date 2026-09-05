@@ -35,6 +35,9 @@
     <string name="home_update_skipped_metered">Atualizações ignoradas</string>
     <string name="home_update_skipped_metered_subtitle">Dados móveis estão ativos</string>
     <string name="home_updating_sources">Atualizando fontes…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d / %2$d  ·  %3$s / %4$s MB (%5$d%%)</string>
     <string name="home_update_success">Atualização de fontes concluída</string>
     <string name="home_update_success_subtitle">Suas fontes estão atualizadas</string>
     <string name="home_sources_are_loading">Carregando fontes, por favor aguarde…</string>
@@ -317,7 +320,8 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;
     <string name="home_outdated_patches_dialog_warning">Usar patches desatualizados pode resultar em um app quebrado</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Atualizar &amp; patch</string>
     <string name="home_low_disk_space_dialog_title">Pouco espaço em disco</string>
-    <string name="home_low_disk_space_dialog_message">Apenas %1$.2f GB de espaço de armazenamento livre disponível. A aplicação de patches requer pelo menos %2$.2f GB de espaço livre para funcionar corretamente.</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">Apenas %1$s GB de espaço de armazenamento livre disponível. A aplicação de patches requer pelo menos %2$s GB de espaço livre para funcionar corretamente.</string>
     <string name="home_low_disk_space_dialog_warning">Prosseguir pode resultar em um erro de \"arquivo não encontrado\" ou um APK de saída corrompido</string>
     <string name="home_simple_bundle_select_title">Selecionar fonte de patches</string>
     <!-- Color picker -->
@@ -458,6 +462,7 @@ Zona externa (tracejada): pode ser recortada pela máscara do launcher - mantenh
     <string name="patcher_error_log">Log de erros</string>
     <string name="patcher_error_technical">Detalhes técnicos</string>
     <string name="patcher_error_dialog_diagnostics">Diagnósticos</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Aplicativo</string>
     <string name="patcher_field_package">Pacote</string>
@@ -473,6 +478,13 @@ Zona externa (tracejada): pode ser recortada pela máscara do launcher - mantenh
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">Memória</string>
     <string name="patcher_field_storage">Armazenamento</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <!-- How long patching took -->
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">Memória média</string>
+    <string name="patcher_field_memory_max">Memória máxima</string>
+    <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">Pico de E/S de armazenamento</string>
     <string name="patcher_field_value_unknown">desconhecido</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">Removidas</string>
@@ -565,7 +577,7 @@ A desinstalação apagará permanentemente todos os dados do aplicativo"</string
     <string name="patcher_message_15">Todos os sistemas nominais… trajetória de patch estável… 🚀</string>
     <string name="patcher_message_16">Extraindo energia extra, como suco de um limão digital… 🍋</string>
     <string name="patcher_message_17">Incentivando o aplicativo a aceitar seu novo e melhor eu… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">Mudando a superposição do aplicativo de não patcheado para patcheado… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Seu aplicativo está com febre e a única prescrição são mais patches… 🩺🔔</string>
@@ -573,6 +585,8 @@ A desinstalação apagará permanentemente todos os dados do aplicativo"</string
     <!-- Expert patcher Screen -->
     <string name="patching_app">Patcheando aplicativo</string>
     <string name="memory_usage">Uso de memória</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%1$s de %2$s MB</string>
     <string name="cpu_usage">Uso da CPU</string>
     <string name="storage_io_usage">E/S de armazenamento</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -1075,7 +1089,7 @@ Detalhes: %2$s"</string>
     <string name="credits_current_development">Desenvolvimento atual</string>
     <string name="credits_prior_development">Desenvolvimento anterior</string>
     <string name="opensource_licenses">Licenças de código aberto</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Uma escolha</string>
     <string name="easter_egg_pill_message">Tome a pílula azul e os anúncios permanecem exatamente onde estão. Tome a pílula vermelha e veja até onde o bytecode vai.</string>
     <string name="easter_egg_pill_red">Pílula vermelha</string>
@@ -1086,6 +1100,10 @@ Detalhes: %2$s"</string>
     <string name="easter_egg_pill_red_toast_again">De volta na chuva</string>
     <string name="easter_egg_pill_blue_toast_again">Desconectado. O caminho de volta é onde sempre esteve.</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s MB / %2$s MB (%3$s%%)</string>
     <string name="select_file">Selecionar arquivo</string>
     <string name="select_folder">Selecionar pasta</string>
     <string name="patches">Patches</string>
@@ -1210,8 +1228,8 @@ Detalhes: %2$s"</string>
     <string name="install_update_manager_failed">Falha ao instalar a atualização</string>
     <string name="installing_manager_update">Instalando atualização…</string>
     <string name="downloading_manager_update">Baixando atualização…</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">%1$.1f MB do download concluído</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">%1$s MB do download concluído</string>
     <string name="manager_update_not_ready">Esta versão ainda está sendo publicada. Tente novamente em alguns minutos</string>
     <string name="update_download_missing">A atualização baixada não está mais disponível. Baixe-a novamente</string>
     <string name="download_manager_failed">Falha ao baixar atualização: %s</string>
