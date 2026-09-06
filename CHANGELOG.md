@@ -1,3 +1,10 @@
+# [1.30.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.30.0-dev.1...v1.30.0-dev.2) (2026-09-06)
+
+
+### Bug Fixes
+
+* Keep the bundle changelog from reloading under a background update ([952e861](https://github.com/MorpheApp/morphe-manager/commit/952e86154ff0c25032c95b1383c4c7eade88a228))
+
 # [1.30.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.29.1-dev.1...v1.30.0-dev.1) (2026-09-05)
 
 
