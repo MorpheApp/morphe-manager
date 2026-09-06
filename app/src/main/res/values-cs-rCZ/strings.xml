@@ -929,6 +929,7 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Povolit běhové prostředí procesů</string>
     <string name="settings_system_memory_limit_subtitle">Paměť k dispozici pro záplatování</string>
     <string name="settings_system_memory_limit_warning">Nízký limit paměti může způsobit selhání při záplatování větších aplikací</string>
+    <string name="settings_system_memory_limit_high_warning">Vysoký limit paměti může na některých zařízeních výrazně zpomalit patchování. Zvyšte jej pouze v případě, že patchování při nižších limitech stále selhává.</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB limit</string>
     <string name="settings_system_process_runtime_disabled_description">Klikněte pro konfiguraci</string>
     <string name="settings_system_process_runtime_description_not_available">Tato funkce vyžaduje Android 11 nebo vyšší</string>

@@ -930,6 +930,7 @@ Detalhes: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Habilitar processo de runtime</string>
     <string name="settings_system_memory_limit_subtitle">Memória disponível para patching</string>
     <string name="settings_system_memory_limit_warning">Um limite de memória baixo pode causar falhas ao patchear aplicativos maiores</string>
+    <string name="settings_system_memory_limit_high_warning">Um limite de memória alto pode tornar a aplicação de patch muito mais lenta em alguns dispositivos. Aumente-o somente se a aplicação de patch continuar falhando em limites mais baixos.</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB limite</string>
     <string name="settings_system_process_runtime_disabled_description">Clique para configurar</string>
     <string name="settings_system_process_runtime_description_not_available">Este recurso requer Android 11 ou superior</string>

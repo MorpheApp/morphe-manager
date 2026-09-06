@@ -932,6 +932,7 @@ Details: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Prozesslaufzeit aktivieren</string>
     <string name="settings_system_memory_limit_subtitle">Verfügbarer Speicher für das Patchen</string>
     <string name="settings_system_memory_limit_warning">Ein niedrigeres Speicherlimit kann zu Fehlern beim Patchen größerer Apps führen</string>
+    <string name="settings_system_memory_limit_high_warning">Ein hohes Speicherlimit kann das Patchen auf einigen Geräten viel langsamer machen. Erhöhen Sie es nur, wenn das Patchen bei niedrigeren Limits weiterhin fehlschlägt.</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB Begrenzung</string>
     <string name="settings_system_process_runtime_disabled_description">Klicken Sie, um zu konfigurieren</string>
     <string name="settings_system_process_runtime_description_not_available">Diese Funktion erfordert Android 11 oder höher</string>

@@ -928,6 +928,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">別プロセスでの実行を有効化</string>
     <string name="settings_system_memory_limit_subtitle">パッチに使用できるメモリ</string>
     <string name="settings_system_memory_limit_warning">メモリ制限が低い場合、大規模なアプリをパッチする際に失敗する可能性があります</string>
+    <string name="settings_system_memory_limit_high_warning">メモリ上限を高く設定すると、一部の端末ではパッチ適用が大幅に遅くなることがあります。低い上限値でパッチ適用が失敗し続ける場合のみ、上限を上げてください。</string>
     <string name="settings_system_process_runtime_enabled_description">上限 %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">タップして構成</string>
     <string name="settings_system_process_runtime_description_not_available">本機能は Android 11 以上で利用できます</string>

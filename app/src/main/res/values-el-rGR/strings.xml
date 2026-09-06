@@ -934,6 +934,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">Ενεργοποίηση χρόνου εκτέλεσης διεργασίας</string>
     <string name="settings_system_memory_limit_subtitle">Διαθέσιμη μνήμη για τροποποίηση</string>
     <string name="settings_system_memory_limit_warning">Ένα μικρό όριο μνήμης μπορεί να δημιουργήσει αποτυχία όταν τροποποιούνται μεγαλύτερες εφαρμογές</string>
+    <string name="settings_system_memory_limit_high_warning">Ένα υψηλό όριο μνήμης μπορεί να κάνει την επιδιόρθωση πολύ πιο αργή σε ορισμένες συσκευές. Αυξήστε το μόνο αν η επιδιόρθωση συνεχίζει να αποτυγχάνει σε χαμηλότερα όρια.</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB όριο</string>
     <string name="settings_system_process_runtime_disabled_description">Κλικ για διαμόρφωση</string>
     <string name="settings_system_process_runtime_description_not_available">Αυτή η λειτουργία απαιτεί Android 11 ή νεότερη έκδοση</string>

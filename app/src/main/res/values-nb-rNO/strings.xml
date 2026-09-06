@@ -930,6 +930,7 @@ Detaljer: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Aktiver prosesskjøretid</string>
     <string name="settings_system_memory_limit_subtitle">Minne tilgjengelig for patching</string>
     <string name="settings_system_memory_limit_warning">En lav minnebegrensning kan føre til feil ved patching av større apper</string>
+    <string name="settings_system_memory_limit_high_warning">En høy minnegrense kan gjøre patching mye tregere på noen enheter. Øk den bare hvis patching fortsetter å mislykkes ved lavere grenser.</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB grense</string>
     <string name="settings_system_process_runtime_disabled_description">Klikk for å konfigurere</string>
     <string name="settings_system_process_runtime_description_not_available">Denne funksjonen krever Android 11 eller nyere</string>

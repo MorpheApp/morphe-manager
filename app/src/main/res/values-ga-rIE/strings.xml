@@ -931,6 +931,7 @@ Sonraí: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Cumasaigh am rith an phróisis</string>
     <string name="settings_system_memory_limit_subtitle">Cuimhne ar fáil le haghaidh paisteála</string>
     <string name="settings_system_memory_limit_warning">D’fhéadfadh teorainn íseal chuimhne teipeanna a chur faoi deara agus aipeanna níos mó á bpaisteáil</string>
+    <string name="settings_system_memory_limit_high_warning">Is féidir le teorainn ard chuimhne moill mhór a chur ar phaisteáil ar roinnt gléasanna. Ná hardaigh í ach amháin má leanann an phaisteáil de bheith ag teipeadh ag teorainneacha níos ísle.</string>
     <string name="settings_system_process_runtime_enabled_description">Teorainn %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Cliceáil chun cumrú</string>
     <string name="settings_system_process_runtime_description_not_available">Éilíonn an ghné seo Android 11 nó níos déanaí</string>

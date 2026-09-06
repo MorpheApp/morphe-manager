@@ -917,6 +917,7 @@ Detalji: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Memorija dostupna za patchiranje</string>
     <string name="settings_system_memory_limit_subtitle">Upozorenje: Niska memorija ograničenja može dovesti neuspeh u patchiranju većih aplikacija</string>
     <string name="settings_system_memory_limit_warning">%d MB ograničenje</string>
+    <string name="settings_system_memory_limit_high_warning">Veliko ograničenje memorije može znatno usporiti primenu zakrpa na nekim uređajima. Povećajte ga samo ako primena zakrpa stalno ne uspeva pri nižim ograničenjima.</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB ograničenje</string>
     <string name="settings_system_process_runtime_disabled_description">Dodirni za konfigurisanje</string>
     <string name="settings_system_process_runtime_description_not_available">Ova funkcionalnost zahteva Android 11 ili noviji</string>

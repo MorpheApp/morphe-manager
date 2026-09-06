@@ -931,6 +931,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">Включить время выполнения процесса</string>
     <string name="settings_system_memory_limit_subtitle">Доступная память для патчинга</string>
     <string name="settings_system_memory_limit_warning">Низкий лимит памяти может вызвать сбой при патчинге больших приложений</string>
+    <string name="settings_system_memory_limit_high_warning">Высокий лимит памяти может значительно замедлить патчинг на некоторых устройствах. Повышайте его, только если патчинг продолжает завершаться сбоем при более низких лимитах.</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB лимит</string>
     <string name="settings_system_process_runtime_disabled_description">Нажмите, чтобы настроить</string>
     <string name="settings_system_process_runtime_description_not_available">Эта функция требует Android 11 или выше</string>

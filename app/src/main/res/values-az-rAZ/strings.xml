@@ -930,6 +930,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Emal icra olunma müddətin aktivləşdir</string>
     <string name="settings_system_memory_limit_subtitle">Yamaqlanma üçün əlçatan yaddaş</string>
     <string name="settings_system_memory_limit_warning">Daha həcmli tətbiqlər yamaqlananda aşağı yaddaş həddi, uğursuzluqlara səbəb ola bilər</string>
+    <string name="settings_system_memory_limit_high_warning">Yüksək yaddaş həddi bəzi cihazlarda yamaqlamanı xeyli ləngidə bilər. Limiti yalnız daha aşağı hədlərdə yamaqlama uğursuz olduqda artır</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB hədd</string>
     <string name="settings_system_process_runtime_disabled_description">Qurmaq üçün kliklə</string>
     <string name="settings_system_process_runtime_description_not_available">Bu xüsusiyyət Android 11 yaxud daha böyük istəyir</string>

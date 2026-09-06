@@ -930,6 +930,7 @@ Mga Detalye: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Paganahin ang runtime ng proseso</string>
     <string name="settings_system_memory_limit_subtitle">Magagamit ang memorya para sa pagpa-patch</string>
     <string name="settings_system_memory_limit_warning">Ang mababang limitasyon ng memorya ay maaaring magdulot ng mga pagkabigo kapag nag-patch ng mas malalaking aplikasyon</string>
+    <string name="settings_system_memory_limit_high_warning">Ang mataas na limitasyon ng memorya ay maaaring gawing mas mabagal ang pag-patch sa ilang mga device. Itaas lamang ito kung patuloy na nabibigo ang pag-patch sa mas mababang mga limitasyon.</string>
     <string name="settings_system_process_runtime_enabled_description">%s limitasyon sa MB</string>
     <string name="settings_system_process_runtime_disabled_description">Pindutin upang ikonpigura</string>
     <string name="settings_system_process_runtime_description_not_available">Kailangan ng feature na ito ang Android 11 o mas mataas</string>

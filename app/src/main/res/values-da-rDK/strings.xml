@@ -928,6 +928,7 @@ Detaljer: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Aktiver proces runtime</string>
     <string name="settings_system_memory_limit_subtitle">Hukommelse tilgængelig til patching</string>
     <string name="settings_system_memory_limit_warning">En lav hukommelsesbegrænsning kan medføre at patching af store apps fejler</string>
+    <string name="settings_system_memory_limit_high_warning">En høj hukommelsesgrænse kan gøre patching meget langsommere på nogle enheder. Hæv den kun, hvis patching fortsat fejler ved lavere grænser.</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB grænse</string>
     <string name="settings_system_process_runtime_disabled_description">Tryk for at konfigurere</string>
     <string name="settings_system_process_runtime_description_not_available">Denne funktion kræver Android 11 eller nyere</string>

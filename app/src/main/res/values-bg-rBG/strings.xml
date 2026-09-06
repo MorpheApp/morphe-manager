@@ -925,6 +925,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">Включване на изпълнение на различни процеси</string>
     <string name="settings_system_memory_limit_subtitle">Памет, достъпен за заместителния процес</string>
     <string name="settings_system_memory_limit_warning">Нисък памет може да доведе до неуспехи при заместителния на по-големи приложения</string>
+    <string name="settings_system_memory_limit_high_warning">Високата граница на паметта може да направи кърпенето много по-бавно на някои устройства. Увеличете я само ако кърпенето продължава да се проваля при по-ниски граници.</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB лимит</string>
     <string name="settings_system_process_runtime_disabled_description">Натиснете за конфигуриране</string>
     <string name="settings_system_process_runtime_description_not_available">Това функционално възможност изисква Android 11 или по-нова версия.</string>

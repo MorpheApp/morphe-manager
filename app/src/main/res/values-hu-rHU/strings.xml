@@ -929,6 +929,7 @@ Részletek: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Folyamatfutási környezet engedélyezése</string>
     <string name="settings_system_memory_limit_subtitle">Módosításhoz rendelkezésre álló memória</string>
     <string name="settings_system_memory_limit_warning">Alacsony memóriakorlát esetén a nagyobb alkalmazások módosításakor hiba léphet fel</string>
+    <string name="settings_system_memory_limit_high_warning">Egy magas memóriakorlát egyes eszközökön sokkal lassabbá teheti a javítást. Csak akkor emeld meg, ha a javítás alacsonyabb korlátoknál is folyamatosan meghiúsul.</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB korlát</string>
     <string name="settings_system_process_runtime_disabled_description">Koppints a konfigurálásához</string>
     <string name="settings_system_process_runtime_description_not_available">Ez a funkció Android 11 vagy újabb verziót igényel</string>

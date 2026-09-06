@@ -463,7 +463,7 @@
     <string name="patcher_error_technical">기술 세부 정보</string>
     <string name="patcher_error_dialog_diagnostics">진단</string>
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
-    <string name="patcher_card_started">패치 시작됨</string>
+    <string name="patcher_card_started">패치 시작</string>
     <string name="patcher_card_succeeded">패치 성공</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">앱</string>
@@ -931,6 +931,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">프로세스 런타임 활성화</string>
     <string name="settings_system_memory_limit_subtitle">패치에 사용 가능한 메모리</string>
     <string name="settings_system_memory_limit_warning">메모리 제한이 낮으면 대용랑 앱을 패치할 경우에 오류가 발생할 수 있습니다</string>
+    <string name="settings_system_memory_limit_high_warning">메모리 제한이 높으면 일부 기기에서 패치 속도가 훨씬 느려질 수 있습니다. 더 낮은 제한에서 패치가 계속 실패하는 경우에만 메모리 제한을 높이세요</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB 제한</string>
     <string name="settings_system_process_runtime_disabled_description">설정하려면 탭하세요</string>
     <string name="settings_system_process_runtime_description_not_available">이 기능은 Android 11 이상이 필요합니다</string>

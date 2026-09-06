@@ -933,6 +933,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">Омогући меморије</string>
     <string name="settings_system_memory_limit_subtitle">Кликните да конфигуришете</string>
     <string name="settings_system_memory_limit_warning">Mala ograniÄena memorija može uzrokovati greške pri nadogradnji veÄih aplikacija</string>
+    <string name="settings_system_memory_limit_high_warning">Високо ограничење меморије може учинити закрпање много споријим на неким уређајима. Подигните га само ако закрпање стално не успева при нижим ограничењима.</string>
     <string name="settings_system_process_runtime_enabled_description">%s МБ лимит</string>
     <string name="settings_system_process_runtime_disabled_description">Упозорење: ниско ограничење меморије може довести до греша при патчирању веће апликације</string>
     <string name="settings_system_process_runtime_description_not_available">Ова карактеристика захтева Android 11 или новији</string>

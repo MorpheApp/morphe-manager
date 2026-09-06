@@ -929,6 +929,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_enable">प्रोसेस रनटाइम सक्षम करें</string>
     <string name="settings_system_memory_limit_subtitle">पैचिंग के लिए उपलब्ध मेमोरी</string>
     <string name="settings_system_memory_limit_warning">बड़े एप्लिकेशन के पैचिंग के लिए निम्न मेमोरी लिमिट फेल हो सकती है</string>
+    <string name="settings_system_memory_limit_high_warning">उच्च मेमोरी सीमा कुछ डिवाइसों पर पैचिंग को बहुत धीमा कर सकती है। इसे केवल तभी बढ़ाएं जब कम सीमाओं पर पैचिंग लगातार विफल हो रही हो।</string>
     <string name="settings_system_process_runtime_enabled_description">%s एमबी सीमा</string>
     <string name="settings_system_process_runtime_disabled_description">कन्फ़िगरेशन के लिए क्लिक करें</string>
     <string name="settings_system_process_runtime_description_not_available">यह सुविधा Android 11 या उसके बाद के संस्करण की आवश्यकता है</string>

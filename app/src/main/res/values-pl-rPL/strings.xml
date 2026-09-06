@@ -934,6 +934,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_process_runtime_enable">Włącz osobny proces</string>
     <string name="settings_system_memory_limit_subtitle">Pamięć dostępna dla procesu modyfikowania</string>
     <string name="settings_system_memory_limit_warning">Niski limit pamięci może powodować błędy podczas modyfikowania większych aplikacji</string>
+    <string name="settings_system_memory_limit_high_warning">Wysoki limit pamięci może znacznie spowolnić modyfikowanie na niektórych urządzeniach. Zwiększ go tylko, jeśli modyfikowanie stale kończy się błędem przy niższych limitach</string>
     <string name="settings_system_process_runtime_enabled_description">Limit: %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Dotknij, aby skonfigurować</string>
     <string name="settings_system_process_runtime_description_not_available">Ta funkcja wymaga systemu Android 11 lub nowszego</string>

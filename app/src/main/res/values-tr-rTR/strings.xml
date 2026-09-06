@@ -931,6 +931,7 @@ Ayrıntılar: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Çalışma sürecini etkinleştir</string>
     <string name="settings_system_memory_limit_subtitle">Yamalama için kullanılabilir bellek</string>
     <string name="settings_system_memory_limit_warning">Düşük bellek limiti, daha büyük uygulamaları yamalarken hatalara neden olabilir</string>
+    <string name="settings_system_memory_limit_high_warning">Yüksek bir bellek sınırı, bazı cihazlarda yamalamayı çok daha yavaşlatabilir. Yalnızca düşük sınırlarda yamalama başarısız olmaya devam ediyorsa bu sınırı yükseltin.</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB limit</string>
     <string name="settings_system_process_runtime_disabled_description">Yapılandırmak için tıklayın</string>
     <string name="settings_system_process_runtime_description_not_available">Bu özellik Android 11 veya daha yüksek bir sürüm gerektirir</string>

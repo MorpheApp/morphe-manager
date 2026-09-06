@@ -4,17 +4,17 @@
     <string name="home_other_apps">Andere apps</string>
     <string name="home_other_apps_action">Andere apps selecteren</string>
     <string name="home_not_patched_yet">Nog niet gepatcht</string>
-    <string name="home_unpatched_version_installed">Niet-gepatchte versie geïnstalleerd</string>
-    <string name="home_unpatched_badge">Niet gepatcht</string>
+    <string name="home_unpatched_version_installed">Ongepatchte versie geïnstalleerd</string>
+    <string name="home_unpatched_badge">Ongepatcht</string>
     <string name="home_no_patches_available">Geen patches beschikbaar</string>
     <string name="home_app_hide_title">Deze app verbergen?</string>
-    <string name="home_app_hide_message">Deze app wordt verborgen op het startscherm. Je kunt hem later weer zichtbaar maken met de knop \'\' onderaan de lijst.</string>
+    <string name="home_app_hide_message">Deze app zal worden verborgen op het startscherm. Je kunt hem later weer zichtbaar maken met de knop onderaan de lijst.</string>
     <string name="home_app_will_be_hidden">Deze app wordt verborgen</string>
     <string name="home_app_no_hidden">Geen verborgen apps</string>
     <string name="home_app_hidden_apps_title">Verborgen apps</string>
-    <string name="home_app_hidden_apps_hint">Tik om te tonen</string>
+    <string name="home_app_hidden_apps_hint">Tik om terug te brengen</string>
     <string name="android_11_bug_dialog_title">Android 11-bug</string>
-    <string name="android_11_bug_dialog_description">De toestemming voor het installeren van de app moet vooraf worden verleend om een bug in Android 11 te voorkomen die de gebruikerservaring negatief zou beïnvloeden</string>
+    <string name="android_11_bug_dialog_description">De toestemming voor het installeren van de app moet vooraf worden verleend om een bug in Android 11 te voorkomen die de gebruikerservaring negatief zal beïnvloeden</string>
     <string name="deep_link_add_source_title">Bron toevoegen</string>
     <string name="deep_link_add_source_message">Wilt u deze patchbron toevoegen aan Morphe?</string>
     <string name="deep_link_add_source_warning">Voeg alleen bronnen toe die u vertrouwt</string>
@@ -34,13 +34,13 @@
     <string name="home_update_error_subtitle">Er is iets misgegaan tijdens het bijwerken van bronnen</string>
     <string name="home_update_skipped_metered">Updates overgeslagen</string>
     <string name="home_update_skipped_metered_subtitle">Mobiele gegevens zijn actief</string>
-    <string name="home_updating_sources">Bronnen worden geüpdatet…</string>
+    <string name="home_updating_sources">Bronnen worden bijgewerkt…</string>
     <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
          "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
     <string name="home_update_bundle_count_with_bytes">%1$d / %2$d  ·  %3$s / %4$s MB (%5$d%%)</string>
-    <string name="home_update_success">Bronnen geüpdatet</string>
+    <string name="home_update_success">Bronnen zijn bijgewerkt</string>
     <string name="home_update_success_subtitle">Uw bronnen zijn up-to-date</string>
-    <string name="home_sources_are_loading">Bronnen worden geladen, even geduld…</string>
+    <string name="home_sources_are_loading">Bronnen worden ingeladen, even geduld…</string>
     <string name="home_search_apps">Apps zoeken</string>
     <string name="home_app_list_options_title">Sorteren en filteren</string>
     <string name="home_app_list_options_state_description">Gesorteerd op %1$s, gefilterd op %2$s</string>
@@ -92,7 +92,7 @@
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="home_greeting_6">Laten we ervoor zorgen dat uw apps zich goed gedragen</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">De voorspelling voor vandaag: 100% kans op reparaties</string>
+    <string name="home_greeting_7" formatted="false">De voorspelling voor vandaag: 100% kans op patchen</string>
     <!-- From mediocrity to amazing -->
     <string name="home_greeting_8">Ben je klaar om van een teleurstellende ervaring iets geweldigs te maken?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
@@ -104,10 +104,10 @@
     <string name="home_greeting_morning_2">Goedemorgen! Apps patchen zichzelf niet</string>
     <!-- Afternoon greetings (12:00–16:59) -->
     <string name="home_greeting_afternoon_1">Middagdipje? Patch iets</string>
-    <string name="home_greeting_afternoon_2">Patching na de lunch is anders</string>
+    <string name="home_greeting_afternoon_2">Patchen na de lunch raakt anders</string>
     <string name="home_greeting_afternoon_3">De middagdienst: patch-editie</string>
     <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Goede avond! Avondpatches zijn anders</string>
+    <string name="home_greeting_evening_1">Goede avond! Avondpatches raken anders</string>
     <string name="home_greeting_evening_2">Even tot rust komen? Patch eerst een app</string>
     <string name="home_greeting_evening_3">Klok je uit? Patch eerst iets</string>
     <!-- Late night greetings (22:00–23:59) -->
@@ -232,7 +232,7 @@ Alles wat u van deze website toevoegt, gebruikt u op eigen risico"</string>
     <string name="home_download_instructions_step3_search_any">Download op die website de APK van de app. &lt;b&gt;Elke versie&lt;/b&gt; kan worden gepatcht</string>
     <string name="home_download_instructions_download_button_toast">Druk op de download op de website, en niet hier 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Geweldig! Klik nu op doorgaan en ga naar de website 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Oefening baart kunst en je bent op de goede weg 💪</string>
+    <string name="home_download_instructions_download_button_toast_3">Oefening baart kunst en jij bent zeker op het goede pad 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Nog steeds niet hier… nog steeds niet hier… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">OK, ik respecteer de toewijding 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Je bent nu een officiële Morphe knop tester 🏅</string>
@@ -461,8 +461,14 @@ Buitenste zone (gestippeld): kan worden afgesneden door het launcher-masker - ho
     <string name="patcher_error_copied">Fout gekopieerd naar klembord</string>
     <string name="patcher_error_log">Foutlogboek</string>
     <string name="patcher_error_technical">Technische details</string>
+    <string name="patcher_error_dialog_diagnostics">Foutrapportage</string>
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">Patchen begonnen</string>
+    <string name="patcher_card_succeeded">Patchen geslaagd</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">App</string>
+    <string name="patcher_field_package">Pakket</string>
+    <string name="patcher_field_source">Bron</string>
     <string name="patcher_field_split">Gesplitste APK</string>
     <string name="patcher_field_manager">Beheerder</string>
     <string name="patcher_field_patcher">Patcher</string>
@@ -475,7 +481,9 @@ Buitenste zone (gestippeld): kan worden afgesneden door het launcher-masker - ho
     <string name="patcher_field_memory">Geheugen</string>
     <string name="patcher_field_storage">Opslag</string>
     <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">Bestandsgrootte</string>
     <!-- How long patching took -->
+    <string name="patcher_field_time">Tijd</string>
     <!-- Average and peak memory the patcher process held while it ran -->
     <string name="patcher_field_memory_average">Gemiddeld geheugen</string>
     <string name="patcher_field_memory_max">Maximaal geheugen</string>
@@ -564,19 +572,19 @@ Deïnstalleren wist alle app-gegevens permanent."</string>
     <string name="patcher_message_9">Bugs in de ongepatchte app worden opgelost… 🪲</string>
     <string name="patcher_message_10">Geweldige patches zijn het wachten waard… ⏳</string>
     <string name="patcher_message_11">Pixels aan het polijsten tot ze glimmen… 💎</string>
-    <string name="patcher_message_12">Blijf zitten totdat de kapitein het \"Patching in progress\"-teken uitschakelt... 💺✈️</string>
+    <string name="patcher_message_12">Blijf zitten totdat de kapitein het \"Patchen-in-behandeling\" teken uitschakelt... 💺✈️</string>
     <string name="patcher_message_13">Je gepatchte app aan het bereiden, heet en vers… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Beleefd onderhandelen met bytecode… 🤝</string>
+    <string name="patcher_message_14">Beleefd aan het onderhandelen met bytecode… 🤝</string>
     <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Alle systemen nominaal… patchtraject is stabiel… 🚀</string>
+    <string name="patcher_message_15">Alle systemen binnen de normen… patchtraject is stabiel… 🚀</string>
     <string name="patcher_message_16">Extra stroom persen, als sap uit een digitale citroen… 🍋</string>
     <string name="patcher_message_17">De app aanmoedigen om zijn nieuwe, betere zelf te accepteren… 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">De app-superpositie veranderen van ongepatcht naar gepatcht… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Uw app heeft koorts, en de enige remedie zijn meer patches… 🩺🔔</string>
-    <string name="patcher_message_20">Verwijder onzin. Even geduld… 🗑️</string>
+    <string name="patcher_message_19">Uw app heeft koorts, en de enige remedie is meer patches… 🩺🔔</string>
+    <string name="patcher_message_20">Onzin aan het verwijderen. Even geduld… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">App aanpassen</string>
     <string name="memory_usage">Geheugengebruik</string>
@@ -925,6 +933,7 @@ Details: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Schakel processruntime in</string>
     <string name="settings_system_memory_limit_subtitle">Geheugen beschikbaar voor patching</string>
     <string name="settings_system_memory_limit_warning">Laag geheugenlimiet kan mislukken bij patching van grotere apps</string>
+    <string name="settings_system_memory_limit_high_warning">Een hoge geheugenlimiet kan patchen op sommige apparaten veel langzamer maken. Verhoog deze alleen als patchen blijft mislukken bij lagere limieten.</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB limiet</string>
     <string name="settings_system_process_runtime_disabled_description">Klik om te configureren</string>
     <string name="settings_system_process_runtime_description_not_available">Deze functie vereist Android 11 of hoger</string>

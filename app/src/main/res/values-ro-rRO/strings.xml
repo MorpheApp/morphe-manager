@@ -928,6 +928,7 @@ Detalii: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Activează proces runtime</string>
     <string name="settings_system_memory_limit_subtitle">Memorie disponibilă pentru patachizare</string>
     <string name="settings_system_memory_limit_warning">O limită memorie joasă poate cauza eșecuri când patachizați aplicații mai mari</string>
+    <string name="settings_system_memory_limit_high_warning">O limită mare de memorie poate face aplicarea de patch-uri mult mai lentă pe unele dispozitive. Măriți-o doar dacă aplicarea de patch-uri continuă să eșueze la limite mici.</string>
     <string name="settings_system_process_runtime_enabled_description">Limită %s MO</string>
     <string name="settings_system_process_runtime_disabled_description">Clic pentru a configura</string>
     <string name="settings_system_process_runtime_description_not_available">Această funcție necesită Android 11 sau o versiune mai recentă</string>

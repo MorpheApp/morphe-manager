@@ -924,6 +924,7 @@ Nánari upplýsingar: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Virkja vinnslutíma</string>
     <string name="settings_system_memory_limit_subtitle">Minni í boði fyrir breytingar</string>
     <string name="settings_system_memory_limit_warning">Lítil minnistakmörk geta valdið bilum þegar breytingar eru gerðar á stærri forritum</string>
+    <string name="settings_system_memory_limit_high_warning">Hátt minnismark getur gert plástrun miklu hægari á sumum tækjum. Hækkaðu það aðeins ef plástrun heldur áfram að mistakast við lægri mörk.</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB takmörk</string>
     <string name="settings_system_process_runtime_disabled_description">Smelltu til að stilla</string>
     <string name="settings_system_process_runtime_description_not_available">Þessi staðsetning þarf Android 11 eða meira</string>

@@ -931,6 +931,7 @@ Information: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Aktivera processexekvering</string>
     <string name="settings_system_memory_limit_subtitle">Tillgängligt minne för modifieringen</string>
     <string name="settings_system_memory_limit_warning">En låg minnesgräns kan leda till fel när du modifierar större appar</string>
+    <string name="settings_system_memory_limit_high_warning">En hög minnesgräns kan göra patchningen mycket långsammare på vissa enheter. Höj den bara om patchningen fortsätter att misslyckas vid lägre gränser.</string>
     <string name="settings_system_process_runtime_enabled_description">Gräns på %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Tryck för att konfigurera</string>
     <string name="settings_system_process_runtime_description_not_available">Den här funktionen kräver Android 11 eller senare</string>

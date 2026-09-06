@@ -933,6 +933,7 @@ Detalles: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Activar ejecución del proceso</string>
     <string name="settings_system_memory_limit_subtitle">Memoria disponible para parches</string>
     <string name="settings_system_memory_limit_warning">Un límite de memoria bajo puede causar errores al parchear aplicaciones más grandes</string>
+    <string name="settings_system_memory_limit_high_warning">Un límite de memoria alto puede ralentizar mucho el parcheo en algunos dispositivos. Auméntalo solo si el parcheo sigue fallando con límites más bajos</string>
     <string name="settings_system_process_runtime_enabled_description">Límite de %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Pulsa para configurar</string>
     <string name="settings_system_process_runtime_description_not_available">Esta función requiere Android 11 o superior</string>

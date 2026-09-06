@@ -939,7 +939,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_process_runtime_enable">تمكين وقت تشغيل العملية</string>
     <string name="settings_system_memory_limit_subtitle">الذاكرة المتاحة للتعديل</string>
     <string name="settings_system_memory_limit_warning">الحد الأدنى للذاكرة قد يتسبب في فشل عند تعديل التطبيقات الأكبر حجمًا</string>
-    <string name="settings_system_memory_limit_high_warning">قد يؤدي حد الذاكرة المرتفع إلى جعل عملية الترقيع أبطأ بكثير على بعض الأجهزة. ارفعه فقط إذا استمرت عملية الترقيع في الفشل عند الحدود الأقل.</string>
+    <string name="settings_system_memory_limit_high_warning">قد يؤدي حد الذاكرة المرتفع إلى جعل عملية التعديل أبطأ بكثير على بعض الأجهزة. ارفعه فقط إذا استمرت عملية التعديل في الفشل عند الحدود الأقل.</string>
     <string name="settings_system_process_runtime_enabled_description">حد %s ميجابايت</string>
     <string name="settings_system_process_runtime_disabled_description">انقر هنا للتهيئة</string>
     <string name="settings_system_process_runtime_description_not_available">تتطلب هذه الميزة Android 11 أو أحدث</string>

@@ -934,6 +934,7 @@ Chi tiết: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Bật tiến trình riêng</string>
     <string name="settings_system_memory_limit_subtitle">Bộ nhớ cho quá trình vá</string>
     <string name="settings_system_memory_limit_warning">Nếu bộ nhớ quá thấp có thể khiến bạn gặp lỗi trong quá trình vá ứng dụng lớn</string>
+    <string name="settings_system_memory_limit_high_warning">Giới hạn bộ nhớ cao có thể khiến việc vá chậm hơn nhiều trên một số thiết bị. Chỉ tăng giới hạn này nếu việc vá liên tục thất bại ở các mức giới hạn thấp hơn.</string>
     <string name="settings_system_process_runtime_enabled_description">Giới hạn %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Bấm để cấu hình</string>
     <string name="settings_system_process_runtime_description_not_available">Tính năng này yêu cầu Android 11 trở lên</string>

@@ -933,6 +933,7 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Omogoči izvajanje procesa</string>
     <string name="settings_system_memory_limit_subtitle">Razpoložljiv pomnilnik za popravilo</string>
     <string name="settings_system_memory_limit_warning">Nizka omejitev pomnilnika lahko povzroči napake pri popravilu večjih aplikacij</string>
+    <string name="settings_system_memory_limit_high_warning">Visoka omejitev pomnilnika lahko na nekaterih napravah močno upočasni krpanje. Zvišajte jo le, če krpanje pri nižjih omejitvah še vedno ne uspe.</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB omejitev</string>
     <string name="settings_system_process_runtime_disabled_description">Kliknite za konfiguracijo</string>
     <string name="settings_system_process_runtime_description_not_available">Ta funkcija zahteva Android 11 ali višji</string>

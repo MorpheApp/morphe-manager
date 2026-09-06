@@ -931,6 +931,7 @@ Yksityiskohdat: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Ota prosessin suoritus käyttöön</string>
     <string name="settings_system_memory_limit_subtitle">Muokkaamiseen käytettävissä oleva muisti</string>
     <string name="settings_system_memory_limit_warning">Pieni muistirajoitus voi aiheuttaa virheitä suuria sovelluksia muokattaessa</string>
+    <string name="settings_system_memory_limit_high_warning">Suuri muistiraja voi tehdä paikkaamisesta paljon hitaampaa joissakin laitteissa. Nosta rajaa vain, jos paikkaaminen epäonnistuu edelleen pienemmillä rajoilla.</string>
     <string name="settings_system_process_runtime_enabled_description">%s Mt:n rajoitus</string>
     <string name="settings_system_process_runtime_disabled_description">Napauta määrittääksesi</string>
     <string name="settings_system_process_runtime_description_not_available">Tämä ominaisuus vaatii Android-version 11 tai uudemman </string>

@@ -941,6 +941,7 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="settings_system_process_runtime_enable">הפעלת זמן ריצה של תהליך</string>
     <string name="settings_system_memory_limit_subtitle">זיכרון זמין לתיקון </string>
     <string name="settings_system_memory_limit_warning">מגבלת זיכרון נמוכה עלולה לגרום לכשלים בעת תיקון אפליקציות גדולות יותר</string>
+    <string name="settings_system_memory_limit_high_warning">מגבלת זיכרון גבוהה עלולה להאבט משמעותית את תהליך התיקון בחלק מהמכשירים. הגדל אותה רק אם התיקון ממשיך להיכשל במגבלות נמוכות יותר.</string>
     <string name="settings_system_process_runtime_enabled_description">מגבלת MB של %s</string>
     <string name="settings_system_process_runtime_disabled_description">לחץ כדי להגדיר</string>
     <string name="settings_system_process_runtime_description_not_available">תכונה זו דורשת אנדרואיד 11 ומעלה</string>

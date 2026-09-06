@@ -930,6 +930,7 @@ Detalhes: %2$s"</string>
     <string name="settings_system_process_runtime_enable">Ativar tempo de execução</string>
     <string name="settings_system_memory_limit_subtitle">Memória disponível para modificação</string>
     <string name="settings_system_memory_limit_warning">Um limite de memória baixo pode causar erros ao modificar aplicações maiores</string>
+    <string name="settings_system_memory_limit_high_warning">Um limite de memória alto pode tornar a aplicação de patches muito mais lenta em alguns dispositivos. Aumente-o somente se a aplicação de patches continuar falhando em limites mais baixos</string>
     <string name="settings_system_process_runtime_enabled_description">Limite de %s MB</string>
     <string name="settings_system_process_runtime_disabled_description">Tocar para configurar</string>
     <string name="settings_system_process_runtime_description_not_available">Esta função requer o Android 11 ou superior</string>
