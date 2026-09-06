@@ -980,8 +980,9 @@ fun BundleChangelogHost(
     val bundle = sources.filterIsInstance<RemotePatchBundle>()
         .find { it.uid == request.bundleUid } ?: return
 
-    // A different request, source version or channel has to start the fetch over
-    key(request, bundle.installedVersionSignature, bundle.usesPrerelease) {
+    // The notes are read against the version installed when the dialog opened, so only another
+    // request starts the fetch over: an update landing underneath must not reset it
+    key(request) {
         BundleChangelogDialog(
             src = bundle,
             onDismissRequest = onDismissRequest,
