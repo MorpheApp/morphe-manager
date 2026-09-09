@@ -1,3 +1,10 @@
+# [1.30.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.30.0-dev.2...v1.30.0-dev.3) (2026-09-09)
+
+
+### Features
+
+* Group the patch list by category ([#941](https://github.com/MorpheApp/morphe-manager/issues/941)) ([9183638](https://github.com/MorpheApp/morphe-manager/commit/9183638361c1fb9e33a06ca80e750dc8582c7148))
+
 # [1.30.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.30.0-dev.1...v1.30.0-dev.2) (2026-09-06)
 
 
