@@ -2,12 +2,11 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Altre app</string>
-    <string name="home_other_apps_action">Seleziona altre app</string>
-    <string name="home_not_patched_yet">Non ancora patchato</string>
-    <string name="home_unpatched_version_installed">Versione non patchata installata</string>
+    <string name="home_other_apps_action">Seleziona altre applicazioni</string>
+    <string name="home_not_patched_yet">Non ancora modificato</string>
+    <string name="home_unpatched_version_installed">Versione non modificata installata</string>
     <string name="home_unpatched_badge">Non modificato</string>
-    <string name="home_no_patches_available">
-Nessuna patch disponibile</string>
+    <string name="home_no_patches_available">Nessuna modifica disponibile</string>
     <string name="home_app_hide_title">Nascondere questa app?</string>
     <string name="home_app_hide_message">Questa app verrà nascosta dalla schermata iniziale. Puoi ripristinarla in seguito dalle app nascoste utilizzando il pulsante in fondo all\'elenco</string>
     <string name="home_app_will_be_hidden">Questa app verrà nascosta</string>
@@ -17,14 +16,14 @@ Nessuna patch disponibile</string>
     <string name="android_11_bug_dialog_title">Bug di Android 11</string>
     <string name="android_11_bug_dialog_description">È necessario concedere in anticipo il permesso per l\'installazione dell\'app per evitare un bug con il sistema operativo Android 11 che potrebbe influire negativamente sull\'esperienza dell\'utente.</string>
     <string name="deep_link_add_source_title">Aggiungi fonte</string>
-    <string name="deep_link_add_source_message">Vuoi aggiungere questa fonte delle patch a Morphe?</string>
+    <string name="deep_link_add_source_message">Vuoi aggiungere questa fonte di modifiche a Morphe</string>
     <string name="deep_link_add_source_warning">Aggiungi solo fonti di cui ti fidi</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Aggiornamento di Morphe disponibile</string>
     <string name="home_update_available_subtitle">Nuova versione pronta per l\'installazione</string>
-    <string name="home_blocked_source_title">Rilevata una fonte di patch bloccata</string>
+    <string name="home_blocked_source_title">Rilevata una fonte di modifiche bloccata</string>
     <string name="home_blocked_source_subtitle">Tocca per visualizzare e rimuovere</string>
-    <string name="home_metadata_errors_title">Alcune fonti di patch non sono disponibili</string>
+    <string name="home_metadata_errors_title">Alcune fonti di modifiche non sono disponibili</string>
     <string name="home_metadata_errors_subtitle">Tocca per visualizzare le fonti</string>
     <string name="home_outdated_manager_title">Morphe non è aggiornato</string>
     <string name="home_outdated_manager_subtitle">Alcune sorgenti di patch richiedono una versione più recente</string>
