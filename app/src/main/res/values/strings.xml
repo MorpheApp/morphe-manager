@@ -731,6 +731,9 @@ Uninstalling will permanently erase all app data"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Show a greeting message on the home screen</string>
     <string name="settings_appearance_app_grouping">App grouping</string>
     <string name="settings_appearance_app_grouping_description">Show a home screen switcher to group apps by source or your own categories, keeping the selection when off</string>
+    <string name="settings_appearance_patch_list">Patch list</string>
+    <string name="settings_appearance_patch_categories">Group by category</string>
+    <string name="settings_appearance_patch_categories_description">Section patch lists by the categories a source declares, leaving sources that declare none as a plain list</string>
     <string name="settings_appearance_repatch_notice">Re-patch notice</string>
     <string name="settings_appearance_repatch_notice_description">Show a banner on the home screen when patched apps can be re-patched</string>
     <string name="settings_appearance_sort_button">Sort and filter button</string>

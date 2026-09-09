@@ -114,6 +114,10 @@ class ThemeSettingsViewModel(
         prefs.showRepatchNotice.update(!current)
     }
 
+    fun toggleGroupPatchesByCategory(current: Boolean) = viewModelScope.launch {
+        prefs.groupPatchesByCategory.update(!current)
+    }
+
     fun setPureBlackTheme(enabled: Boolean) = viewModelScope.launch {
         prefs.pureBlackTheme.update(enabled)
     }
