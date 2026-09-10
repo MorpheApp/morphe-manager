@@ -683,6 +683,9 @@ A desinstalação apagará permanentemente todos os dados do aplicativo"</string
     <string name="settings_appearance_greeting_phrases_subtitle">Mostrar uma mensagem de saudação na tela inicial</string>
     <string name="settings_appearance_app_grouping">Agrupamento de aplicativos</string>
     <string name="settings_appearance_app_grouping_description">Mostrar um alternador de tela inicial para agrupar aplicativos por origem ou suas próprias categorias, mantendo a seleção quando desativado</string>
+    <string name="settings_appearance_patch_list">Lista de patches</string>
+    <string name="settings_appearance_patch_categories">Agrupar por categoria</string>
+    <string name="settings_appearance_patch_categories_description">Divide as listas de patches pelas categorias que uma fonte declara, deixando as fontes que não declaram nenhuma como uma lista simples.</string>
     <string name="settings_appearance_repatch_notice">Aviso de reaplicação de patch</string>
     <string name="settings_appearance_repatch_notice_description">Exibir um banner na tela inicial quando aplicativos corrigidos puderem ser reaplicados</string>
     <string name="settings_appearance_sort_button">Botão ordenar e filtrar</string>

@@ -681,6 +681,9 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Показывать приветственное сообщение на главном экране</string>
     <string name="settings_appearance_app_grouping">Группировка приложений</string>
     <string name="settings_appearance_app_grouping_description">Отображать переключатель на главном экране для группировки приложений по источнику или вашим категориям, сохраняя выбор при отключении</string>
+    <string name="settings_appearance_patch_list">Список патчей</string>
+    <string name="settings_appearance_patch_categories">Группировать по категориям</string>
+    <string name="settings_appearance_patch_categories_description">Разбивать списки патчей по категориям, указанным источником, а источники без категорий оставлять в виде простого списка</string>
     <string name="settings_appearance_repatch_notice">Уведомление о перепатчивании</string>
     <string name="settings_appearance_repatch_notice_description">Показывать баннер на главном экране, когда пропатченные приложения можно повторно пропатчить</string>
     <string name="settings_appearance_sort_button">Кнопка сортировки и фильтрации</string>

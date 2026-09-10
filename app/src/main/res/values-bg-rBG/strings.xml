@@ -37,6 +37,7 @@
     <string name="home_updating_sources">Обновяне на източници…</string>
     <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
          "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d / %2$d  ·  %3$s / %4$s МБ (%5$d%%)</string>
     <string name="home_update_success">Обновяне на източниците завършено</string>
     <string name="home_update_success_subtitle">Вашите източници са актуални</string>
     <string name="home_sources_are_loading">Зареждане на източниците, моля изчакайте…</string>
@@ -320,6 +321,7 @@
     <string name="home_outdated_patches_dialog_update_and_patch">Обновяване и патчване</string>
     <string name="home_low_disk_space_dialog_title">Малко място на диска</string>
     <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">Налично е само %1$s ГБ свободно място. Прилагането на кръпката изисква поне %2$s ГБ свободно място, за да работи правилно</string>
     <string name="home_low_disk_space_dialog_warning">Продължаването може да доведе до грешка \"файлът не е намерен\" или повреден изходен APK</string>
     <string name="home_simple_bundle_select_title">Изберете източник на пач</string>
     <!-- Color picker -->
@@ -459,15 +461,20 @@
     <string name="patcher_error_copied">Грешка е копирана в клипборда</string>
     <string name="patcher_error_log">Дневник на грешки</string>
     <string name="patcher_error_technical">Технически детайли</string>
+    <string name="patcher_error_dialog_diagnostics">Диагностика</string>
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <string name="patcher_card_started">Прилагането на кръпката започна</string>
     <string name="patcher_card_succeeded">Прилагането на кръпката завърши успешно</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">Приложение</string>
+    <string name="patcher_field_package">Пакет</string>
+    <string name="patcher_field_source">Източник</string>
     <string name="patcher_field_split">Разделяне на APK</string>
     <string name="patcher_field_manager">Мениджър</string>
     <string name="patcher_field_patcher">Пачър</string>
     <string name="patcher_field_runtime">Среда за изпълнение</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Библиотеки</string>
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Устройство</string>
     <!-- Free and total RAM of the device, never its storage -->
@@ -582,6 +589,7 @@
     <string name="patching_app">Патчване на приложението</string>
     <string name="memory_usage">Използване на памет</string>
     <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%1$s от %2$s MB</string>
     <string name="cpu_usage">Използване на процесора</string>
     <string name="storage_io_usage">Дисков I/O</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -674,6 +682,9 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Показване на поздравително съобщение на началния екран</string>
     <string name="settings_appearance_app_grouping">Групиране на приложения</string>
     <string name="settings_appearance_app_grouping_description">Покажи превключвател на началния екран за групиране на приложения по източник или по твои категории, запазвайки селекцията, когато е изключено</string>
+    <string name="settings_appearance_patch_list">Списък с пачове</string>
+    <string name="settings_appearance_patch_categories">Групиране по категория</string>
+    <string name="settings_appearance_patch_categories_description">Разделя списъците с пачове по категориите, които даден източник декларира, като оставя източниците без декларирани категории като обикновен списък.</string>
     <string name="settings_appearance_repatch_notice">Известие за повторно кръпване</string>
     <string name="settings_appearance_repatch_notice_description">Показване на банер на началния екран, когато приложенията с кръпки могат да бъдат кръпнати отново</string>
     <string name="settings_appearance_sort_button">Бутон за сортиране и филтриране</string>
@@ -1099,6 +1110,7 @@ morphe_header_custom_dark.png
     <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
          megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
          how a literal percent sign is written here. -->
+    <string name="download_progress">%1$s МБ / %2$s МБ (%3$s%%)</string>
     <string name="select_file">Избери файл</string>
     <string name="select_folder">Избери папка</string>
     <string name="patches">Пачове</string>
@@ -1224,6 +1236,7 @@ morphe_header_custom_dark.png
     <string name="installing_manager_update">Инсталиране на актуализиране…</string>
     <string name="downloading_manager_update">Сваляне на актуализиране…</string>
     <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">Изтеглено: %1$s MB</string>
     <string name="manager_update_not_ready">Този релиз все още се публикува. Опитайте отново след няколко минути</string>
     <string name="update_download_missing">Изтеглената актуализация вече не е налична. Изтеглете я отново.</string>
     <string name="download_manager_failed">Неуспешно сваляне на актуализиране: %s</string>

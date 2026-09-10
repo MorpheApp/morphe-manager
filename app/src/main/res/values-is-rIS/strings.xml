@@ -37,6 +37,7 @@
     <string name="home_updating_sources">Uppfæra heimildir…</string>
     <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
          "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
+    <string name="home_update_bundle_count_with_bytes">%1$d af %2$d  ·  %3$s af %4$s MB (%5$d%%)</string>
     <string name="home_update_success">Heimildauppfærsla lokið</string>
     <string name="home_update_success_subtitle">Heimildir þínar eru upp til daglegt</string>
     <string name="home_sources_are_loading">Heimildir eru að hlaða, vinsamlegast bíðu…</string>
@@ -482,7 +483,10 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <!-- How long patching took -->
     <string name="patcher_field_time">Tími</string>
     <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">Meðalminni</string>
+    <string name="patcher_field_memory_max">Hámarksminni</string>
     <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">Geymslu I/O-hámark</string>
     <string name="patcher_field_value_unknown">óþekkt</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">fjarlægð</string>
@@ -676,6 +680,9 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Sýna kveðju skilaboð á heimaskjá</string>
     <string name="settings_appearance_app_grouping">Forritaflokkun</string>
     <string name="settings_appearance_app_grouping_description">Sýna rofasa á heimaskjá til að flokka forrit eftir uppruna eða eigin flokkum, halda vali þegar slökkt er á rofanum</string>
+    <string name="settings_appearance_patch_list">Plástralisti</string>
+    <string name="settings_appearance_patch_categories">Flokka eftir flokkum</string>
+    <string name="settings_appearance_patch_categories_description">Skiptir plástralistum eftir flokkum sem uppruni tilgreinir, en upprunar sem tilgreina enga flokka verða eftir sem venjulegur listi</string>
     <string name="settings_appearance_repatch_notice">Tilkynning um endurplástrun</string>
     <string name="settings_appearance_repatch_notice_description">Sýna borða á heimaskjánum þegar hægt er að plástra forritin aftur</string>
     <string name="settings_appearance_sort_button">Röðunar- og síunarhnappur</string>

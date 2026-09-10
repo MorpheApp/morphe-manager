@@ -680,6 +680,9 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="settings_appearance_greeting_phrases_subtitle">Visa ett hälsningsmeddelande på startskärmen</string>
     <string name="settings_appearance_app_grouping">Appgruppering</string>
     <string name="settings_appearance_app_grouping_description">Visa en uppsättning knappar på startskärmen för att gruppera appar efter källa eller egna kategorier. Valet behålls när du stänger appen</string>
+    <string name="settings_appearance_patch_list">Patchlista</string>
+    <string name="settings_appearance_patch_categories">Gruppera efter kategori</string>
+    <string name="settings_appearance_patch_categories_description">Indela patchlistor efter de kategorier som en källa deklarerar, och lämna källor som inte deklarerar några som en vanlig lista</string>
     <string name="settings_appearance_repatch_notice">Meddelande om om-patchning</string>
     <string name="settings_appearance_repatch_notice_description">Visa en banner på hemskärmen när patchade appar kan om-patchas</string>
     <string name="settings_appearance_sort_button">Sortera och filtrera-knapp</string>

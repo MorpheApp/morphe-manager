@@ -683,6 +683,9 @@ Menghapus pemasangannya akan menghapus semua data aplikasi secara permanen"</str
     <string name="settings_appearance_greeting_phrases_subtitle">Tampilkan pesan sapaan di layar beranda</string>
     <string name="settings_appearance_app_grouping">Pengelompokan aplikasi</string>
     <string name="settings_appearance_app_grouping_description">Tampilkan pengalih layar beranda untuk mengelompokkan aplikasi berdasarkan sumber atau kategori Anda sendiri, mempertahankan pilihan saat dinonaktifkan</string>
+    <string name="settings_appearance_patch_list">Daftar tambalan</string>
+    <string name="settings_appearance_patch_categories">Grup berdasarkan kategori</string>
+    <string name="settings_appearance_patch_categories_description">Kelompokkan daftar tambalan berdasarkan kategori yang ditetapkan oleh sumber, dan tampilkan sumber yang tidak menetapkan kategori sebagai daftar biasa.</string>
     <string name="settings_appearance_repatch_notice">Pemberitahuan penambalan ulang</string>
     <string name="settings_appearance_repatch_notice_description">Tampilkan banner di layar beranda saat aplikasi yang telah ditambal dapat ditambal ulang.</string>
     <string name="settings_appearance_sort_button">Tombol urutkan dan saring</string>

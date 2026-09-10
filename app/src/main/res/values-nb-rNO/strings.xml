@@ -485,7 +485,10 @@ Ytre sone (stiplet): kan bli beskåret av launcher-masken – hold viktig inform
     <!-- How long patching took -->
     <string name="patcher_field_time">Tid</string>
     <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">Gjennomsnittlig minne</string>
+    <string name="patcher_field_memory_max">Maksimalt minne</string>
     <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">Lagrings-I/O-topp</string>
     <string name="patcher_field_value_unknown">ukjent</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">fjernet</string>
@@ -679,6 +682,9 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Vis en hilsenmelding på startskjermen</string>
     <string name="settings_appearance_app_grouping">Appgruppering</string>
     <string name="settings_appearance_app_grouping_description">Vis en startskjermbryter for å gruppere apper etter kilde eller egne kategorier, og behold valget når den er slått av</string>
+    <string name="settings_appearance_patch_list">Patchliste</string>
+    <string name="settings_appearance_patch_categories">Grupper etter kategori</string>
+    <string name="settings_appearance_patch_categories_description">Del inn patchlistene etter kategoriene en kilde oppgir. Kilder som ikke oppgir noen kategori, vises som en vanlig liste.</string>
     <string name="settings_appearance_repatch_notice">Varsel om å lappe på nytt</string>
     <string name="settings_appearance_repatch_notice_description">Vis et banner på startskjermen når lappede apper kan lappes på nytt</string>
     <string name="settings_appearance_sort_button">Sorterings- og filterknapp</string>

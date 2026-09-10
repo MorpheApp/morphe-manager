@@ -682,6 +682,9 @@ La disinstallazione cancellerà definitivamente tutti i dati dell'app."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Mostra un messaggio di saluto nella schermata principale</string>
     <string name="settings_appearance_app_grouping">Raggruppamento app</string>
     <string name="settings_appearance_app_grouping_description">Mostra un selettore schermata Home per raggruppare le app per origine o per le tue categorie, mantenendo la selezione quando disattivato</string>
+    <string name="settings_appearance_patch_list">Lista delle patch</string>
+    <string name="settings_appearance_patch_categories">Gruppi per categoria</string>
+    <string name="settings_appearance_patch_categories_description">Seziona gli elenchi di patch in base alle categorie dichiarate da una fonte, lasciando le fonti che non dichiarano alcuna categoria come un semplice elenco.?</string>
     <string name="settings_appearance_repatch_notice">Avviso di re-patch</string>
     <string name="settings_appearance_repatch_notice_description">Mostra un banner nella schermata principale quando le app con patch possono essere ri-patchate</string>
     <string name="settings_appearance_sort_button">Pulsante per ordinare e filtrare</string>

@@ -682,6 +682,9 @@ Deïnstalleren wist alle app-gegevens permanent."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Toon een begroetingsbericht op de startscherm</string>
     <string name="settings_appearance_app_grouping">App-groepering</string>
     <string name="settings_appearance_app_grouping_description">Toon een schakelaar op het startscherm om apps te groeperen op bron of eigen categorieën, en selecteer deze instelling wanneer deze uit staat</string>
+    <string name="settings_appearance_patch_list">Patchlijst</string>
+    <string name="settings_appearance_patch_categories">Groeperen op categorie</string>
+    <string name="settings_appearance_patch_categories_description">Sectie patchlijsten op basis van de categorieën die een bron declareert; bronnen die geen categorieën declareren blijven als een gewone lijst.</string>
     <string name="settings_appearance_repatch_notice">Melding over opnieuw patchen</string>
     <string name="settings_appearance_repatch_notice_description">Toon een banner op het startscherm wanneer gepatchte apps opnieuw kunnen worden gepatcht</string>
     <string name="settings_appearance_sort_button">Sorteer- en filterknop</string>

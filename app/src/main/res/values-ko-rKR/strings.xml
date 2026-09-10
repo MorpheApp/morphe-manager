@@ -681,6 +681,9 @@
     <string name="settings_appearance_greeting_phrases_subtitle">홈 화면에 인사말을 표시합니다</string>
     <string name="settings_appearance_app_grouping">앱 그룹화</string>
     <string name="settings_appearance_app_grouping_description">앱 출처 또는 사용자 정의 카테고리별로 앱을 그룹화하는 홈 화면 전환기를 표시하며, 비활성화할 경우에는 선택 사항을 유지합니다</string>
+    <string name="settings_appearance_patch_list">패치 목록</string>
+    <string name="settings_appearance_patch_categories">카테고리별 그룹화</string>
+    <string name="settings_appearance_patch_categories_description">소스에서 지정한 카테고리를 기준으로 섹션의 패치 목록을 그룹화하고, 카테고리를 지정하지 않은 소스는 일반 목록으로 표시합니다</string>
     <string name="settings_appearance_repatch_notice">다시 패치 알림</string>
     <string name="settings_appearance_repatch_notice_description">패치된 앱을 다시 패치할 수 있을 경우에 홈 화면에 배너를 표시합니다</string>
     <string name="settings_appearance_sort_button">정렬 및 필터 버튼</string>

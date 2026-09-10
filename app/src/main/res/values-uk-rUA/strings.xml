@@ -682,6 +682,9 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Показувати вітальне повідомлення на головному екрані</string>
     <string name="settings_appearance_app_grouping">Групування застосунків</string>
     <string name="settings_appearance_app_grouping_description">Показує перемикач на головному екрані для групування застосунків за джерелом або власними категоріями, зберігаючи вибір при вимкненні</string>
+    <string name="settings_appearance_patch_list">Список патчів</string>
+    <string name="settings_appearance_patch_categories">Групувати за категоріями</string>
+    <string name="settings_appearance_patch_categories_description">Розділяє списки патчів за категоріями, які оголошує джерело, а джерела, які не оголошують жодної, залишає звичайним списком</string>
     <string name="settings_appearance_repatch_notice">Сповіщення про перепатчинг</string>
     <string name="settings_appearance_repatch_notice_description">Показувати банер на головному екрані, коли пропатчені застосунки можна перепатчити</string>
     <string name="settings_appearance_sort_button">Кнопка сортування та фільтрування</string>

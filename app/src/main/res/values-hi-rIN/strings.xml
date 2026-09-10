@@ -463,6 +463,8 @@
     <string name="patcher_error_technical">तकनीकी विवरण</string>
     <string name="patcher_error_dialog_diagnostics">निदान</string>
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">पैचिंग शुरू हुई</string>
+    <string name="patcher_card_succeeded">पैचिंग सफल हुई</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">ऐप</string>
     <string name="patcher_field_package">पैकेज</string>
@@ -479,7 +481,9 @@
     <string name="patcher_field_memory">मेमोरी</string>
     <string name="patcher_field_storage">स्टोरेज</string>
     <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">आउटपुट आकार</string>
     <!-- How long patching took -->
+    <string name="patcher_field_time">समय</string>
     <!-- Average and peak memory the patcher process held while it ran -->
     <string name="patcher_field_memory_average">मेमोरी औसत</string>
     <string name="patcher_field_memory_max">अधिकतम मेमोरी</string>
@@ -678,6 +682,9 @@
     <string name="settings_appearance_greeting_phrases_subtitle">मुखपृष्ठ पर अभिवादन संदेश दिखाएँ</string>
     <string name="settings_appearance_app_grouping">ऐप समूहीकरण</string>
     <string name="settings_appearance_app_grouping_description">स्रोत या अपनी श्रेणियों द्वारा ऐप्स को समूहित करने के लिए होम स्क्रीन स्विचर दिखाएं, बंद होने पर चयन को बनाए रखें</string>
+    <string name="settings_appearance_patch_list">पैच सूची</string>
+    <string name="settings_appearance_patch_categories">श्रेणी के अनुसार समूहित करें</string>
+    <string name="settings_appearance_patch_categories_description">स्रोत द्वारा घोषित श्रेणियों के अनुसार पैच सूचियों को अनुभागों में विभाजित करें, और जो स्रोत कोई श्रेणी घोषित नहीं करते, उन्हें सादा सूची के रूप में छोड़ दें।</string>
     <string name="settings_appearance_repatch_notice">पुनः पैच सूचना</string>
     <string name="settings_appearance_repatch_notice_description">जब पैच किए गए ऐप्स को फिर से पैच किया जा सके, तो होम स्क्रीन पर एक बैनर दिखाएँ</string>
     <string name="settings_appearance_sort_button">सॉर्ट और फ़िल्टर बटन</string>

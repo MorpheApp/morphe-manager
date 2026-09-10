@@ -464,6 +464,8 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <string name="patcher_error_technical">Teknikal na detalye</string>
     <string name="patcher_error_dialog_diagnostics">Diagnostics</string>
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">Nagsimula ang pag-patch</string>
+    <string name="patcher_card_succeeded">Nagtagumpay ang pag-patch</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">App</string>
     <string name="patcher_field_package">Package</string>
@@ -480,7 +482,9 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <string name="patcher_field_memory">Memorya</string>
     <string name="patcher_field_storage">Imbakan</string>
     <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">Laki ng output</string>
     <!-- How long patching took -->
+    <string name="patcher_field_time">Tagal</string>
     <!-- Average and peak memory the patcher process held while it ran -->
     <string name="patcher_field_memory_average">Average ng memorya</string>
     <string name="patcher_field_memory_max">Pinakamataas na memorya</string>
@@ -679,6 +683,9 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Ipakita ang mensahe ng pagbati sa pangunahing iskrin</string>
     <string name="settings_appearance_app_grouping">Pagpapangkat ng app</string>
     <string name="settings_appearance_app_grouping_description">Magpakita ng home screen switcher upang pangkatin ang mga app ayon sa pinagmulan o iyong sariling mga kategorya, pinapanatili ang pagpili kapag naka-off</string>
+    <string name="settings_appearance_patch_list">Listahan ng patch</string>
+    <string name="settings_appearance_patch_categories">Pangkatin ayon sa kategorya</string>
+    <string name="settings_appearance_patch_categories_description">Hatiin ang mga listahan ng patch ayon sa mga kategoryang idinideklara ng isang source, at iwan ang mga source na walang idinideklarang kategorya bilang isang simpleng listahan.</string>
     <string name="settings_appearance_repatch_notice">Paunawa sa muling pag-patch</string>
     <string name="settings_appearance_repatch_notice_description">Magpakita ng banner sa home screen kapag ang mga na-patch na app ay maaaring i-patch muli</string>
     <string name="settings_appearance_sort_button">Button ng pag-uuri at pagsala</string>

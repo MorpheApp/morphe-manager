@@ -681,6 +681,9 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Ana ekranda bir selamlama mesajı göster</string>
     <string name="settings_appearance_app_grouping">Uygulama gruplandırma</string>
     <string name="settings_appearance_app_grouping_description">Uygulamaları kaynaklarına veya kendi kategorilerinize göre gruplamak için bir ana ekran değiştirici göster. Kapalıyken seçimi korur</string>
+    <string name="settings_appearance_patch_list">Yama listesi</string>
+    <string name="settings_appearance_patch_categories">Kategoriye göre grupla</string>
+    <string name="settings_appearance_patch_categories_description">Yama listelerini, kaynakların bildirdiği kategorilere göre bölümlere ayırır; hiçbir kategori bildirmeyen kaynakları düz liste olarak bırakır.</string>
     <string name="settings_appearance_repatch_notice">Yeniden yama bildirimi</string>
     <string name="settings_appearance_repatch_notice_description">Yamalı uygulamalar yeniden yamalanabildiğinde ana ekranda bir afiş göster</string>
     <string name="settings_appearance_sort_button">Sıralama ve filtreleme düğmesi</string>

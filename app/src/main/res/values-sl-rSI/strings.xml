@@ -682,6 +682,9 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Prikaži pozdravno sporočilo na začetnem zaslonu</string>
     <string name="settings_appearance_app_grouping">Grupiranje aplikacij</string>
     <string name="settings_appearance_app_grouping_description">Prikaži stikalo na začetnem zaslonu za grupiranje aplikacij po izvoru ali lastnih kategorijah, obdrži izbor, ko je izklopljeno</string>
+    <string name="settings_appearance_patch_list">Seznam popravkov</string>
+    <string name="settings_appearance_patch_categories">Združi po kategorijah</string>
+    <string name="settings_appearance_patch_categories_description">Razvrsti sezname popravkov po kategorijah, ki jih vir navaja, vire, ki ne navajajo nobene, pa pusti kot navaden seznam</string>
     <string name="settings_appearance_repatch_notice">Obvestilo o ponovnem krpanju</string>
     <string name="settings_appearance_repatch_notice_description">Prikaži pasico na domačem zaslonu, ko je mogoče ponovno krpati aplikacije</string>
     <string name="settings_appearance_sort_button">Gumb za razvrščanje in filtriranje</string>

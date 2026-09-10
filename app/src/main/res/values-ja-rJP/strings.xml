@@ -681,6 +681,9 @@
     <string name="settings_appearance_greeting_phrases_subtitle">ホーム画面に挨拶メッセージを表示します</string>
     <string name="settings_appearance_app_grouping">アプリのグループ化</string>
     <string name="settings_appearance_app_grouping_description">ホーム画面スイッチャーを表示して、ソース別または独自のカテゴリでアプリをグループ化します。オフにしたときも選択内容は保持されます</string>
+    <string name="settings_appearance_patch_list">パッチリスト</string>
+    <string name="settings_appearance_patch_categories">カテゴリごとにグループ化</string>
+    <string name="settings_appearance_patch_categories_description">ソースが宣言するカテゴリに基づいてパッチリストをセクション分けします。カテゴリを宣言しないソースは、プレーンリストのまま表示されます。</string>
     <string name="settings_appearance_repatch_notice">再パッチ通知</string>
     <string name="settings_appearance_repatch_notice_description">パッチ適用済みアプリが再パッチ可能な場合、ホーム画面にバナーを表示する</string>
     <string name="settings_appearance_sort_button">並べ替えとフィルターボタン</string>

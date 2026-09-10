@@ -682,6 +682,9 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Прикажи поруку на почетном екрану</string>
     <string name="settings_appearance_app_grouping">Груписање апликација</string>
     <string name="settings_appearance_app_grouping_description">Прикажи прекидач почетног екрана за груписање апликација по извору или властитим категоријама, задржавајући селекцију када је искључено</string>
+    <string name="settings_appearance_patch_list">Листа закрпа</string>
+    <string name="settings_appearance_patch_categories">Групиши по категорији</string>
+    <string name="settings_appearance_patch_categories_description">Разврстај листе закрпа по категоријама које извор декларише, остављајући изворе који не декларишу ниједну као обичну листу.</string>
     <string name="settings_appearance_repatch_notice">Обавештење о поновном закрпавању</string>
     <string name="settings_appearance_repatch_notice_description">Прикажи банер на почетном екрану када закрпане апликације могу бити поново закрпане</string>
     <string name="settings_appearance_sort_button">Дугме за сортирање и филтрирање</string>

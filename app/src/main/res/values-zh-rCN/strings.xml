@@ -461,10 +461,14 @@
     <string name="patcher_error_copied">错误已复制到剪贴板</string>
     <string name="patcher_error_log">错误日志</string>
     <string name="patcher_error_technical">技术细节</string>
+    <string name="patcher_error_dialog_diagnostics">诊断</string>
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <string name="patcher_card_started">修补已开始</string>
     <string name="patcher_card_succeeded">修补成功</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">应用</string>
+    <string name="patcher_field_package">软件包</string>
+    <string name="patcher_field_source">来源</string>
     <string name="patcher_field_split">拆分APK</string>
     <string name="patcher_field_manager">管理器</string>
     <string name="patcher_field_patcher">修补程序</string>
@@ -678,6 +682,9 @@
     <string name="settings_appearance_greeting_phrases_subtitle">在主屏幕上显示问候消息</string>
     <string name="settings_appearance_app_grouping">应用分组</string>
     <string name="settings_appearance_app_grouping_description">显示主屏幕切换器，按来源或您自己的分类对应用进行分组，并在关闭时保持选择</string>
+    <string name="settings_appearance_patch_list">补丁列表</string>
+    <string name="settings_appearance_patch_categories">按类别分组</string>
+    <string name="settings_appearance_patch_categories_description">按源声明的类别对补丁列表进行分区，未声明任何类别的源则保留为普通列表。</string>
     <string name="settings_appearance_repatch_notice">重新打补丁通知</string>
     <string name="settings_appearance_repatch_notice_description">在主页面上显示可重新打补丁的应用的横幅</string>
     <string name="settings_appearance_sort_button">排序和筛选按钮</string>

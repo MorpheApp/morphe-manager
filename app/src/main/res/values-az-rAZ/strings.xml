@@ -681,6 +681,9 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Əsas ekranda salamlaşma mesajı göstər</string>
     <string name="settings_appearance_app_grouping">Tətbiq qruplaşdırılması</string>
     <string name="settings_appearance_app_grouping_description">Tətbiqləri mənbəyə və ya öz kateqoriyalarınıza görə qruplaşdırmaq üçün əsas ekran keçiricisini göstər, qapalı olduqda seçimi qoruyur</string>
+    <string name="settings_appearance_patch_list">Yamaq siyahısı</string>
+    <string name="settings_appearance_patch_categories">Kateqoriyaya görə qruplaşdır</string>
+    <string name="settings_appearance_patch_categories_description">Yamaq siyahılarını mənbənin elan etdiyi kateqoriyalara görə bölür, heç birini elan etməyən mənbələri sadə siyahı kimi saxlayır</string>
     <string name="settings_appearance_repatch_notice">Yenidən yamaqlama bildirişi</string>
     <string name="settings_appearance_repatch_notice_description">Yamaqlanmış tətbiqlər yenidən yamaqlana bildikdə əsas ekranda etiket göstər</string>
     <string name="settings_appearance_sort_button">Sıralama və filtrləmə düyməsi</string>

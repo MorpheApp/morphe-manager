@@ -682,6 +682,9 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Taispeáin teachtaireacht beannachta ar an scáileán baile</string>
     <string name="settings_appearance_app_grouping">Grúpáil aipeanna</string>
     <string name="settings_appearance_app_grouping_description">Taispeáin an roghchlár scáileáin bhaile chun aipeanna a ghrúpáil de réir foinse nó do chatagóirí féin, agus an rogha a choinneáil nuair a bhíonn sé múchta</string>
+    <string name="settings_appearance_patch_list">Liosta paistí</string>
+    <string name="settings_appearance_patch_categories">Grúpáil de réir catagóire</string>
+    <string name="settings_appearance_patch_categories_description">Liostaíonn paistí rannóga de réir na gcatagóirí a dhearbhaíonn foinse, ag fágáil foinsí nach ndearbhaíonn aon cheann mar liosta simplí</string>
     <string name="settings_appearance_repatch_notice">Fógra athphaisteála</string>
     <string name="settings_appearance_repatch_notice_description">Taispeáin meirge ar an scáileán baile nuair is féidir aipeanna paisteáilte a athphaisteáil</string>
     <string name="settings_appearance_sort_button">Cnaipe sórtála agus scagaire</string>

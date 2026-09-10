@@ -485,7 +485,10 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <!-- How long patching took -->
     <string name="patcher_field_time">Tid</string>
     <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">Gennemsnitligt hukommelsesforbrug</string>
+    <string name="patcher_field_memory_max">Maksimalt hukommelsesforbrug</string>
     <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">Lager-I/O-spidsværdi</string>
     <string name="patcher_field_value_unknown">ukendt</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">strippet</string>
@@ -678,6 +681,9 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Vis en hilsenbesked på startskærmen</string>
     <string name="settings_appearance_app_grouping">App-gruppering</string>
     <string name="settings_appearance_app_grouping_description">Vis en hjemmeskærms-skifter til at gruppere apps efter kilde eller dine egne kategorier, og bevar udvælgelsen, når den er slået fra</string>
+    <string name="settings_appearance_patch_list">Patchliste</string>
+    <string name="settings_appearance_patch_categories">Gruppér efter kategori</string>
+    <string name="settings_appearance_patch_categories_description">Inddel patchlister efter de kategorier, som en kilde angiver, og lad kilder uden angivne kategorier fremstå som en almindelig liste.</string>
     <string name="settings_appearance_repatch_notice">Meddelelse om gen-patch</string>
     <string name="settings_appearance_repatch_notice_description">Vis et banner på startskærmen, når patchede apps kan gen-patches</string>
     <string name="settings_appearance_sort_button">Sorterings- og filterknap</string>

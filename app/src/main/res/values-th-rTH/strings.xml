@@ -682,6 +682,9 @@
     <string name="settings_appearance_greeting_phrases_subtitle">แสดงข้อความทักทายบนหน้าจอหลัก</string>
     <string name="settings_appearance_app_grouping">การจัดกลุ่มแอป</string>
     <string name="settings_appearance_app_grouping_description">แสดงตัวสลับหน้าจอหลักเพื่อจัดกลุ่มแอปตามแหล่งที่มาหรือตามหมวดหมู่ของคุณเอง โดยจะเก็บการเลือกไว้เมื่อปิด</string>
+    <string name="settings_appearance_patch_list">รายการแพตช์</string>
+    <string name="settings_appearance_patch_categories">จัดกลุ่มตามหมวดหมู่</string>
+    <string name="settings_appearance_patch_categories_description">แบ่งรายการแพตช์ตามหมวดหมู่ที่แหล่งข้อมูลประกาศไว้ โดยแหล่งข้อมูลที่ไม่ประกาศหมวดหมู่จะแสดงเป็นรายการธรรมดา</string>
     <string name="settings_appearance_repatch_notice">ประกาศการแพตช์ซ้ำ</string>
     <string name="settings_appearance_repatch_notice_description">แสดงแบนเนอร์บนหน้าจอหลักเมื่อแอปที่แพตช์แล้วสามารถแพตช์ซ้ำได้</string>
     <string name="settings_appearance_sort_button">ปุ่มเรียงลำดับและกรอง</string>

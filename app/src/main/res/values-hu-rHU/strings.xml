@@ -485,7 +485,10 @@ Külső zóna (szaggatott): az indító maszk levághatja – tartsa a fontos r�
     <!-- How long patching took -->
     <string name="patcher_field_time">Idő</string>
     <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">Memória átlaga</string>
+    <string name="patcher_field_memory_max">Memória maximuma</string>
     <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">Tárolási I/O csúcsa</string>
     <string name="patcher_field_value_unknown">ismeretlen</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">eltávolítva</string>
@@ -678,6 +681,9 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Üdvözlő üzenet megjelenítése a kezdőképernyőn</string>
     <string name="settings_appearance_app_grouping">Alkalmazáscsoportosítás</string>
     <string name="settings_appearance_app_grouping_description">Mutasson egy főképernyő váltót az alkalmazások forrás vagy saját kategóriák szerinti csoportosításához, a kiválasztást megőrizve, ha ki van kapcsolva</string>
+    <string name="settings_appearance_patch_list">Javításlista</string>
+    <string name="settings_appearance_patch_categories">Csoportosítás kategóriánként</string>
+    <string name="settings_appearance_patch_categories_description">Szakaszokra bontja a javításlistákat a forrás által meghatározott kategóriák szerint, a kategóriával nem rendelkező forrásokat pedig egyszerű listaként hagyja.</string>
     <string name="settings_appearance_repatch_notice">Újrajavítási értesítés</string>
     <string name="settings_appearance_repatch_notice_description">Jelenítsen meg egy szalagot a kezdőképernyőn, amikor a javított alkalmazások újra javíthatók</string>
     <string name="settings_appearance_sort_button">Rendezés és szűrés gomb</string>

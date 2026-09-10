@@ -682,6 +682,9 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Εμφάνιση μηνύματος υποδοχής στην αρχική οθόνη</string>
     <string name="settings_appearance_app_grouping">Ομαδοποίηση εφαρμογών</string>
     <string name="settings_appearance_app_grouping_description">Εμφάνιση διακόπτη στην αρχική οθόνη για ομαδοποίηση εφαρμογών κατά πηγή ή δικές σας κατηγορίες, διατηρώντας την επιλογή όταν είναι απενεργοποιημένη</string>
+    <string name="settings_appearance_patch_list">Λίστα επιδιορθώσεων</string>
+    <string name="settings_appearance_patch_categories">Ομαδοποίηση ανά κατηγορία</string>
+    <string name="settings_appearance_patch_categories_description">Ομαδοποίηση των λιστών επιδιορθώσεων ανά κατηγορίες που δηλώνει μια πηγή, ενώ οι πηγές χωρίς κατηγορία παραμένουν ως απλή λίστα.</string>
     <string name="settings_appearance_repatch_notice">Ειδοποίηση επανάληψης τροποποιήσεων</string>
     <string name="settings_appearance_repatch_notice_description">Εμφάνιση banner στην αρχική οθόνη όταν οι εφαρμογές μπορούν να επαναδιορθωθούν
 </string>

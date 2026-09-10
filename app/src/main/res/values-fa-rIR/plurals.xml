@@ -12,6 +12,14 @@
         <item quantity="one">%s منبع</item>
         <item quantity="other">%s منبع</item>
     </plurals>
+    <plurals name="package_count">
+        <item quantity="one">%s بسته</item>
+        <item quantity="other">%s بسته</item>
+    </plurals>
+    <plurals name="patches_executed">
+        <item quantity="one">%s پچ اجرا شد</item>
+        <item quantity="other">%s پچ اجرا شد</item>
+    </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s فایل APK</item>
         <item quantity="other">%s فایل APK</item>
@@ -19,6 +27,30 @@
     <plurals name="batch_install_summary">
         <item quantity="one">برنامه %s نصب شد</item>
         <item quantity="other">برنامه‌های %s نصب شدند</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">%s برنامه دوباره نصب شد</item>
+        <item quantity="other">%s برنامه دوباره نصب شد</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">%s برنامه حذف شد</item>
+        <item quantity="other">%s برنامه حذف شد</item>
+    </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">%s برنامه حذف شود؟</item>
+        <item quantity="other">%s برنامه حذف شود؟</item>
+    </plurals>
+    <plurals name="batch_patch_ready_count">
+        <item quantity="one">%s برنامه آمادهٔ پچ است</item>
+        <item quantity="other">%s برنامه آمادهٔ پچ است</item>
+    </plurals>
+    <plurals name="repatch_available_count">
+        <item quantity="one">%s برنامه را می‌توان دوباره پچ کرد</item>
+        <item quantity="other">%s برنامه را می‌توان دوباره پچ کرد</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">%s برنامه رد شد</item>
+        <item quantity="other">%s برنامه رد شد</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">%s وصله قدیمی از انتخاب ذخیره شده حذف شد</item>
@@ -28,8 +60,24 @@
         <item quantity="one">%s منبع نصب شده</item>
         <item quantity="other">%s منبع نصب شده</item>
     </plurals>
+    <plurals name="home_app_show_hidden_count">
+        <item quantity="one">%s برنامهٔ پنهان</item>
+        <item quantity="other">%s برنامهٔ پنهان</item>
+    </plurals>
     <plurals name="home_category_app_count">
         <item quantity="one">%s برنامه</item>
         <item quantity="other">%s برنامه</item>
+    </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="one">%s مورد انتخاب شد</item>
+        <item quantity="other">%s مورد انتخاب شد</item>
+    </plurals>
+    <plurals name="expert_mode_copy_from_bundle_done">
+        <item quantity="one">%s پچ از بستهٔ انتخاب‌شده کپی شد</item>
+        <item quantity="other">%s پچ از بستهٔ انتخاب‌شده کپی شد</item>
+    </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s هسته</item>
+        <item quantity="other">%s هسته</item>
     </plurals>
 </resources>

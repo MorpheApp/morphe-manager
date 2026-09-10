@@ -464,6 +464,7 @@ Zona externa (tracejada): pode ser cortada pela máscara do iniciador - mantenha
     <string name="patcher_error_dialog_diagnostics">Diagnósticos</string>
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <string name="patcher_card_started">Patch iniciado</string>
+    <string name="patcher_card_succeeded">Patch aplicado com sucesso</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Aplicativo</string>
     <string name="patcher_field_package">Pacote</string>
@@ -480,7 +481,9 @@ Zona externa (tracejada): pode ser cortada pela máscara do iniciador - mantenha
     <string name="patcher_field_memory">Memória</string>
     <string name="patcher_field_storage">Armazenamento</string>
     <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">Tamanho de saída</string>
     <!-- How long patching took -->
+    <string name="patcher_field_time">Duração</string>
     <!-- Average and peak memory the patcher process held while it ran -->
     <string name="patcher_field_memory_average">Média de memória</string>
     <string name="patcher_field_memory_max">Memória máxima</string>
@@ -679,6 +682,9 @@ Desinstalar apagará permanentemente todos os dados do aplicativo."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Mostrar uma mensagem de boas-vindas no ecrã principal</string>
     <string name="settings_appearance_app_grouping">Agrupamento de aplicativos</string>
     <string name="settings_appearance_app_grouping_description">Mostrar um seletor de tela inicial para agrupar aplicativos por origem ou suas próprias categorias, mantendo a seleção quando desativado</string>
+    <string name="settings_appearance_patch_list">Lista de patches</string>
+    <string name="settings_appearance_patch_categories">Agrupar por categoria</string>
+    <string name="settings_appearance_patch_categories_description">Secciona as listas de patches pelas categorias que uma fonte declara, deixando as fontes que não declaram nenhuma como uma lista simples.</string>
     <string name="settings_appearance_repatch_notice">Aviso de reaplicação de patch</string>
     <string name="settings_appearance_repatch_notice_description">Mostrar um banner na tela inicial quando aplicativos com patch puderem ser reaplicados</string>
     <string name="settings_appearance_sort_button">Botão de ordenar e filtrar</string>

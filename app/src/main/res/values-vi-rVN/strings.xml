@@ -465,6 +465,8 @@ Nếu không, APK đã vá và được gắn có thể sẽ không hoạt độ
     <string name="patcher_error_technical">Chi tiết kỹ thuật</string>
     <string name="patcher_error_dialog_diagnostics">Chẩn đoán</string>
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">Đã bắt đầu vá</string>
+    <string name="patcher_card_succeeded">Đã vá thành công</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Ứng dụng</string>
     <string name="patcher_field_package">Gói</string>
@@ -481,7 +483,9 @@ Nếu không, APK đã vá và được gắn có thể sẽ không hoạt độ
     <string name="patcher_field_memory">Bộ nhớ</string>
     <string name="patcher_field_storage">Bộ nhớ</string>
     <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">Kích thước đầu ra</string>
     <!-- How long patching took -->
+    <string name="patcher_field_time">Thời gian</string>
     <!-- Average and peak memory the patcher process held while it ran -->
     <string name="patcher_field_memory_average">Bộ nhớ trung bình</string>
     <string name="patcher_field_memory_max">Bộ nhớ tối đa</string>
@@ -680,6 +684,9 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_appearance_greeting_phrases_subtitle">Hiện thông điệp trên trang chủ</string>
     <string name="settings_appearance_app_grouping">Nhóm ứng dụng</string>
     <string name="settings_appearance_app_grouping_description">Hiển thị tùy chọn trên màn hình chính để nhóm ứng dụng theo nguồn hoặc danh mục của bạn, đồng thời giữ nguyên lựa chọn khi tắt</string>
+    <string name="settings_appearance_patch_list">Danh sách bản vá</string>
+    <string name="settings_appearance_patch_categories">Nhóm theo danh mục</string>
+    <string name="settings_appearance_patch_categories_description">Chia danh sách bản vá theo các danh mục mà nguồn khai báo, để các nguồn không khai báo danh mục nào thành một danh sách thường.</string>
     <string name="settings_appearance_repatch_notice">Thông báo vá lại</string>
     <string name="settings_appearance_repatch_notice_description">Hiển thị biểu ngữ trên màn hình chính khi các ứng dụng đã vá có thể được vá lại</string>
     <string name="settings_appearance_sort_button">Nút sắp xếp và lọc</string>

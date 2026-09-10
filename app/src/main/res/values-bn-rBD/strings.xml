@@ -463,6 +463,8 @@
     <string name="patcher_error_technical">প্রযুক্তি বিবরণ</string>
     <string name="patcher_error_dialog_diagnostics">ডায়াগনস্টিকস</string>
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">প্যাচিং শুরু হয়েছে</string>
+    <string name="patcher_card_succeeded">প্যাচিং সফল হয়েছে</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">অ্যাপ</string>
     <string name="patcher_field_package">প্যাকেজ</string>
@@ -479,7 +481,9 @@
     <string name="patcher_field_memory">মেমোরি</string>
     <string name="patcher_field_storage">স্টোরেজ</string>
     <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">আউটপুট আকার</string>
     <!-- How long patching took -->
+    <string name="patcher_field_time">সময়</string>
     <!-- Average and peak memory the patcher process held while it ran -->
     <string name="patcher_field_memory_average">গড় মেমরি</string>
     <string name="patcher_field_memory_max">সর্বোচ্চ মেমরি</string>
@@ -678,6 +682,9 @@
     <string name="settings_appearance_greeting_phrases_subtitle">হোম স্ক্রিনে একটি শুভেচ্ছা বার্তা দেখান</string>
     <string name="settings_appearance_app_grouping">অ্যাপ grouping</string>
     <string name="settings_appearance_app_grouping_description">উৎস অথবা আপনার নিজের বিভাগ অনুসারে অ্যাপ grouping করার জন্য একটি হোম স্ক্রিন সুইচ দেখান, বন্ধ থাকা অবস্থায় নির্বাচন ধরে রাখুন।</string>
+    <string name="settings_appearance_patch_list">প্যাচ তালিকা</string>
+    <string name="settings_appearance_patch_categories">বিভাগ অনুযায়ী গ্রুপ করুন</string>
+    <string name="settings_appearance_patch_categories_description">উৎস ঘোষিত বিভাগ অনুযায়ী প্যাচ তালিকাগুলি সেকশন করুন, যেসব উৎস কোনো বিভাগ ঘোষণা করে না সেগুলোকে একটি সাধারণ তালিকা হিসেবে রেখে দিন।</string>
     <string name="settings_appearance_repatch_notice">পুনরায় প্যাচ বিজ্ঞপ্তি</string>
     <string name="settings_appearance_repatch_notice_description">হোম স্ক্রিনে একটি ব্যানার দেখান যখন প্যাচ করা অ্যাপগুলি পুনরায় প্যাচ করা যেতে পারে</string>
     <string name="settings_appearance_sort_button">সাজানো ও ফিল্টার বাটন</string>

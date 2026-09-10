@@ -685,6 +685,9 @@ Deinstaliranje će trajno izbrisati sve podatke aplikacije"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Pokaži poruku dobrodošlice na početnom zaslonu</string>
     <string name="settings_appearance_app_grouping">Grupiranje aplikacija</string>
     <string name="settings_appearance_app_grouping_description">Prikaži prekidač početnog zaslona za grupiranje aplikacija prema izvoru ili vlastitim kategorijama, zadržavajući odabir kada je isključen</string>
+    <string name="settings_appearance_patch_list">Popis zakrpa</string>
+    <string name="settings_appearance_patch_categories">Grupiraj po kategoriji</string>
+    <string name="settings_appearance_patch_categories_description">Razvrstaj popise zakrpa prema kategorijama koje izvor deklarira, ostavljajući izvore koji ne deklariraju nijednu kao običan popis.</string>
     <string name="settings_appearance_repatch_notice">Obavijest o ponovnom patchanju</string>
     <string name="settings_appearance_repatch_notice_description">Prikaži banner na početnom zaslonu kada se patchane aplikacije mogu ponovno patchati</string>
     <string name="settings_appearance_sort_button">Tipka za sortiranje i filtriranje</string>

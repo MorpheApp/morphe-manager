@@ -485,7 +485,10 @@ Vnějní zóna (přerušovaná): může být ořezaná maskou spouštěčé - ud
     <!-- How long patching took -->
     <string name="patcher_field_time">Čas</string>
     <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">Průměrná paměť</string>
+    <string name="patcher_field_memory_max">Špička I/O úložiště</string>
     <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">Špička I/O úložiště</string>
     <string name="patcher_field_value_unknown">neznámé</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">odstraněno</string>
@@ -678,6 +681,9 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Zobrazit pozdravný vzkaz na domovské obrazovce</string>
     <string name="settings_appearance_app_grouping">Kreslení aplikací</string>
     <string name="settings_appearance_app_grouping_description">Zobrazit přepínač domovské obrazovky pro seskupení aplikací podle zdroje nebo vlastních kategorií, s ponecháním výběru při vypnutí</string>
+    <string name="settings_appearance_patch_list">Seznam záplat</string>
+    <string name="settings_appearance_patch_categories">Seskupit podle kategorií</string>
+    <string name="settings_appearance_patch_categories_description">Rozdělit seznamy záplat podle kategorií, které zdroj deklaruje; zdroje, které nedeklarují žádnou kategorii, ponechat jako prostý seznam</string>
     <string name="settings_appearance_repatch_notice">Oznámení o opětovné záplatě</string>
     <string name="settings_appearance_repatch_notice_description">Zobrazit banner na domovské obrazovce, když lze znovu záplatovat aplikace</string>
     <string name="settings_appearance_sort_button">Tlačítko pro řazení a filtrování</string>

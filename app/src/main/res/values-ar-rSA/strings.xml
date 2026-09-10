@@ -686,6 +686,9 @@
     <string name="settings_appearance_greeting_phrases_subtitle">عرض رسالة ترحيب على الشاشة الرئيسية</string>
     <string name="settings_appearance_app_grouping">تجميع التطبيقات</string>
     <string name="settings_appearance_app_grouping_description">عرض مُبدِّل الشاشة الرئيسية لتجميع التطبيقات حسب المصدر أو فئاتك الخاصة، مع الاحتفاظ بالتحديد عند إيقاف تشغيلها</string>
+    <string name="settings_appearance_patch_list">قائمة التعديل</string>
+    <string name="settings_appearance_patch_categories">تجميع حسب الفئة</string>
+    <string name="settings_appearance_patch_categories_description">تصنيف قوائم التعديلات حسب الفئات التي يعلن عنها المصدر، وترك المصادر التي لا تعلن عن أي فئة على شكل قائمة بسيطة</string>
     <string name="settings_appearance_repatch_notice">إشعار إعادة التعديل</string>
     <string name="settings_appearance_repatch_notice_description">عرض لافتة على الشاشة الرئيسية عندما يمكن إعادة تعديل التطبيقات المعدلة</string>
     <string name="settings_appearance_sort_button">زر الفرز والتصفية</string>

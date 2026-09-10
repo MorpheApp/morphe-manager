@@ -683,6 +683,9 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Wyświetlaj powitanie na ekranie głównym</string>
     <string name="settings_appearance_app_grouping">Grupowanie aplikacji</string>
     <string name="settings_appearance_app_grouping_description">Wyświetl na ekranie głównym przełącznik do grupowania aplikacji według źródła lub własnych kategorii, zachowując wybór po wyłączeniu</string>
+    <string name="settings_appearance_patch_list">Lista modyfikacji</string>
+    <string name="settings_appearance_patch_categories">Grupuj według kategorii</string>
+    <string name="settings_appearance_patch_categories_description">Dzieli listy modyfikacji na sekcje według kategorii deklarowanych przez źródło, pozostawiając źródła bez kategorii w formie zwykłej listy</string>
     <string name="settings_appearance_repatch_notice">Powiadomienie o ponownym modyfikowaniu</string>
     <string name="settings_appearance_repatch_notice_description">Pokazuj baner na ekranie głównym, gdy można ponownie zmodyfikować aplikacje</string>
     <string name="settings_appearance_sort_button">Przycisk sortowania i filtrowania</string>

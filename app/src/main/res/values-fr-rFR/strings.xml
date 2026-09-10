@@ -685,6 +685,9 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="settings_appearance_greeting_phrases_subtitle">Afficher un message de salutation sur l\'écran d\'accueil</string>
     <string name="settings_appearance_app_grouping">Regroupement d\'applications</string>
     <string name="settings_appearance_app_grouping_description">Afficher un sélecteur sur l\'écran d\'accueil pour regrouper les applications par source ou selon vos propres catégories, en conservant la sélection lorsqu\'il est désactivé</string>
+    <string name="settings_appearance_patch_list">Liste de patchs</string>
+    <string name="settings_appearance_patch_categories">Grouper par catégorie</string>
+    <string name="settings_appearance_patch_categories_description">Organisez les listes de patchs par catégories indiquées par chaque source, en laissant les sources qui n\'en indiquent aucune sous forme de liste simple.</string>
     <string name="settings_appearance_repatch_notice">Avis de re-patch</string>
     <string name="settings_appearance_repatch_notice_description">Afficher une bannière sur l\'écran d\'accueil lorsque les applications patchées peuvent être re-patchées</string>
     <string name="settings_appearance_sort_button">Bouton trier et filtrer</string>

@@ -139,6 +139,7 @@
     <string name="sources_prerelease_warning_message">預發佈版本仍在開發中。修補程式可能失敗或導致應用程式損壞，功能也可能在未經警告的情況下變更</string>
     <string name="expert_mode_prerelease_notice">此來源使用預發佈修補程式。修補可能失敗或產生非預期行為</string>
     <string name="sources_management_experimental_versions_toggle">實驗性應用程式版本</string>
+    <string name="sources_management_experimental_versions_toggle_description">顯示和修補實驗性應用程式目標</string>
     <string name="sources_management_already_exists">已新增此來源</string>
     <string name="sources_management_invalid_url">來源 URL 無效。請檢查位址並重試</string>
     <string name="sources_management_blocked">此修補程式來源已封鎖，無法新增</string>
@@ -462,6 +463,8 @@
     <string name="patcher_error_technical">技術細節</string>
     <string name="patcher_error_dialog_diagnostics">診斷</string>
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">已開始修補</string>
+    <string name="patcher_card_succeeded">已成功修補</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">應用程式</string>
     <string name="patcher_field_package">套件</string>
@@ -478,9 +481,14 @@
     <string name="patcher_field_memory">記憶體</string>
     <string name="patcher_field_storage">儲存空間</string>
     <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">輸出大小</string>
     <!-- How long patching took -->
+    <string name="patcher_field_time">時間</string>
     <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">平均記憶體使用量</string>
+    <string name="patcher_field_memory_max">最大記憶體使用量</string>
     <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">儲存 I/O 尖峰</string>
     <string name="patcher_field_value_unknown">未知</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">已移除</string>
@@ -673,6 +681,9 @@
     <string name="settings_appearance_greeting_phrases_subtitle">在主螢幕上顯示問候訊息</string>
     <string name="settings_appearance_app_grouping">應用程式分組</string>
     <string name="settings_appearance_app_grouping_description">顯示主畫面切換器，以依來源或您自己的類別分組應用程式，並在關閉時保留選取內容</string>
+    <string name="settings_appearance_patch_list">修補程式清單</string>
+    <string name="settings_appearance_patch_categories">依類別分組</string>
+    <string name="settings_appearance_patch_categories_description">將修補程式清單按照來源宣告的類別分區，未宣告任何類別的來源則保留為一般清單。</string>
     <string name="settings_appearance_repatch_notice">重新修補通知</string>
     <string name="settings_appearance_repatch_notice_description">當已修補的應用程式可重新修補時，在主畫面上顯示橫幅</string>
     <string name="settings_appearance_sort_button">排序與篩選按鈕</string>

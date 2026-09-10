@@ -139,6 +139,7 @@
     <string name="sources_prerelease_warning_message">Vorabversionen befinden sich noch in der Entwicklung. Patches können fehlschlagen oder die App beschädigen, und Funktionen können sich ohne Vorwarnung ändern.</string>
     <string name="expert_mode_prerelease_notice">Diese Quelle ist in der Vorabversion. Das Patchen kann fehlschlagen oder unerwartetes Verhalten verursachen.</string>
     <string name="sources_management_experimental_versions_toggle">Experimentelle App-Versionen</string>
+    <string name="sources_management_experimental_versions_toggle_description">Zeigt experimentelle App-Ziele an und patcht sie</string>
     <string name="sources_management_already_exists">Diese Quelle wurde bereits hinzugefügt</string>
     <string name="sources_management_invalid_url">Ungültige Quell-URL. Bitte überprüfen Sie die Adresse und versuchen Sie es erneut</string>
     <string name="sources_management_blocked">Diese Patchquelle ist blockiert und kann nicht hinzugefügt werden</string>
@@ -681,6 +682,9 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Zeige auf dem Startbildschirm eine Begrüßung an</string>
     <string name="settings_appearance_app_grouping">App-Gruppierung</string>
     <string name="settings_appearance_app_grouping_description">Zeigt einen Home-Bildschirm-Wechsler an, um Apps nach Quelle oder Ihren eigenen Kategorien zu gruppieren und die Auswahl bei Deaktivierung beizubehalten</string>
+    <string name="settings_appearance_patch_list">Patchliste</string>
+    <string name="settings_appearance_patch_categories">Nach Kategorie gruppieren</string>
+    <string name="settings_appearance_patch_categories_description">Patchlisten nach den von einer Quelle deklarierten Kategorien aufteilen; Quellen ohne Kategorie bleiben als einfache Liste.</string>
     <string name="settings_appearance_repatch_notice">Hinweis zum erneuten Patchen</string>
     <string name="settings_appearance_repatch_notice_description">Auf dem Startbildschirm ein Banner anzeigen, wenn gepatchte Apps erneut gepatcht werden können</string>
     <string name="settings_appearance_sort_button">Schaltfläche zum Sortieren und Filtern</string>
