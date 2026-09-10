@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-09-09T08:08:58",
-  "description": "# [1.30.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.30.0-dev.2...v1.30.0-dev.3) (2026-09-09)\n\n\n### Features\n\n* Group the patch list by category ([#941](https://github.com/MorpheApp/morphe-manager/issues/941)) ([9183638](https://github.com/MorpheApp/morphe-manager/commit/9183638361c1fb9e33a06ca80e750dc8582c7148))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.30.0-dev.3/morphe-manager-1.30.0-dev.3.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.30.0-dev.3/morphe-manager-1.30.0-dev.3.apk.asc",
-  "version": "1.30.0-dev.3"
+  "created_at": "2026-09-10T08:28:11",
+  "description": "# [1.30.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.30.0-dev.3...v1.30.0-dev.4) (2026-09-10)\n\n\n### Bug Fixes\n\n* Keep the input DEX files when no bytecode was patched ([#201](https://github.com/MorpheApp/morphe-manager/issues/201)) ([8682b78](https://github.com/MorpheApp/morphe-manager/commit/8682b783778b7385d2ba3ef05190d1c3cdee621c))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.30.0-dev.4/morphe-manager-1.30.0-dev.4.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.30.0-dev.4/morphe-manager-1.30.0-dev.4.apk.asc",
+  "version": "1.30.0-dev.4"
 }
