@@ -9,9 +9,9 @@ import app.morphe.manager.domain.manager.base.BasePreferencesManager
 import app.morphe.manager.domain.manager.base.IntPreference
 import app.morphe.manager.domain.manager.base.LongPreference
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
-import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_MAX_LIMIT_INITIALIZATION
 import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_NOT_SET
-import app.morphe.manager.patcher.runtime.calculateAdaptiveMemoryLimit
+import app.morphe.manager.patcher.runtime.coerceMemoryLimit
+import app.morphe.manager.patcher.runtime.initialMemoryLimit
 import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.theme.ThemeStyle
@@ -29,7 +29,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 
 class PreferencesManager(
-    context: Context
+    private val context: Context
 ) : BasePreferencesManager(context, "settings") {
 
     // Appearance tab
@@ -89,6 +89,9 @@ class PreferencesManager(
 
     val useExpertMode = booleanPreference("use_expert_mode", false)
 
+    /** Whether patch lists are sectioned by the categories their bundle declares. */
+    val groupPatchesByCategory = booleanPreference("group_patches_by_category", true)
+
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
 
     /** Bytecode processing mode for the patcher. Defaults to [BytecodeMode.STRIP_FAST]. */
@@ -108,7 +111,7 @@ class PreferencesManager(
     val useProcessRuntime = booleanPreference(
         "process_runtime", // Old key was 'use_process_runtime' and may have the wrong default for some devices.
         // Process runtime fails for Android 10 and lower.
-        // Armv7 silently fails and nobody has researched why.
+        // ARMv7 silently fails and nobody has researched why.
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !isArmV7()
     )
     val patcherProcessMemoryLimit = IntPreference(dataStore, "use_process_runtime_memory_limit", PROCESS_RUNTIME_MEMORY_NOT_SET)
@@ -182,9 +185,7 @@ class PreferencesManager(
 
             // Initialize process memory limit adaptively on first launch
             if (patcherProcessMemoryLimit.get() == PROCESS_RUNTIME_MEMORY_NOT_SET) {
-                val adaptive = calculateAdaptiveMemoryLimit(context).coerceAtMost(
-                    PROCESS_RUNTIME_MEMORY_MAX_LIMIT_INITIALIZATION
-                )
+                val adaptive = initialMemoryLimit(context)
                 Log.d(tag, "Initializing process memory limit to $adaptive MB (device RAM-based)")
                 patcherProcessMemoryLimit.update(adaptive)
             }
@@ -249,6 +250,7 @@ class PreferencesManager(
         val randomBackgroundInterval: RandomInterval? = null,
         val matrixBackgroundUnlocked: Boolean? = null,
         val useExpertMode: Boolean? = null,
+        val groupPatchesByCategory: Boolean? = null,
         val updateCheckInterval: UpdateCheckInterval? = null,
         val externalBatchPatchEnabled: Boolean? = null,
         val externalBatchPatchAllowlist: Set<String>? = null,
@@ -302,6 +304,7 @@ class PreferencesManager(
         randomBackgroundInterval = randomBackgroundInterval.get(),
         matrixBackgroundUnlocked = matrixBackgroundUnlocked.get(),
         useExpertMode = useExpertMode.get(),
+        groupPatchesByCategory = groupPatchesByCategory.get(),
         updateCheckInterval = updateCheckInterval.get(),
         externalBatchPatchEnabled = externalBatchPatchEnabled.get(),
         externalBatchPatchAllowlist = externalBatchPatchAllowlist.get(),
@@ -338,7 +341,10 @@ class PreferencesManager(
         snapshot.gitHubPat?.let { gitHubPat.value = it }
         snapshot.includeGitHubPatInExports?.let { includeGitHubPatInExports.value = it }
         snapshot.useProcessRuntime?.let { useProcessRuntime.value = it }
-        snapshot.patcherProcessMemoryLimit?.let { patcherProcessMemoryLimit.value = it }
+        // Clamped rather than taken as-is, so a limit exported from a roomier device still fits
+        snapshot.patcherProcessMemoryLimit?.let {
+            patcherProcessMemoryLimit.value = coerceMemoryLimit(context, it)
+        }
         snapshot.allowMeteredUpdates?.let { allowMeteredUpdates.value = it }
         snapshot.installerPrimary?.let { installerPrimary.value = it }
         snapshot.installerCustomComponents?.let { installerCustomComponents.value = it }
@@ -372,6 +378,7 @@ class PreferencesManager(
         snapshot.randomBackgroundInterval?.let { randomBackgroundInterval.value = it }
         snapshot.matrixBackgroundUnlocked?.let { matrixBackgroundUnlocked.value = it }
         snapshot.useExpertMode?.let { useExpertMode.value = it }
+        snapshot.groupPatchesByCategory?.let { groupPatchesByCategory.value = it }
         snapshot.updateCheckInterval?.let { updateCheckInterval.value = it }
         snapshot.externalBatchPatchEnabled?.let { externalBatchPatchEnabled.value = it }
         snapshot.externalBatchPatchAllowlist?.let { externalBatchPatchAllowlist.value = it }

@@ -12,7 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.util.FilenameUtils
 import app.morphe.manager.util.RequestManageStorageContract
-import app.morphe.manager.util.formatBytes
+import app.morphe.manager.util.formatBytesForReport
 import java.io.File
 
 private const val TAG = "Morphe Filesystem"
@@ -115,14 +115,14 @@ class Filesystem(private val app: Application) {
 
     private fun logDir(label: String, dir: File, indent: String = "") {
         val totalSize = dir.walkBottomUp().filter { it.isFile }.sumOf { it.length() }
-        Log.i(TAG, "$indent[$label] ${dir.absolutePath} (total: ${formatBytes(totalSize)})")
+        Log.i(TAG, "$indent[$label] ${dir.absolutePath} (total: ${formatBytesForReport(totalSize)})")
         dir.listFiles()
             ?.sortedWith(compareBy({ it.isFile }, { it.name }))
             ?.forEach { entry ->
                 if (entry.isDirectory) {
                     logDir(entry.name, entry, "$indent  ")
                 } else {
-                    Log.i(TAG, "$indent  ${entry.name} (${formatBytes(entry.length())})")
+                    Log.i(TAG, "$indent  ${entry.name} (${formatBytesForReport(entry.length())})")
                 }
             }
             ?: Log.i(TAG, "$indent  (empty or unreadable)")

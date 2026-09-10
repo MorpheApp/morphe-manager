@@ -57,4 +57,7 @@
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="other">已复制来自选定包的 %s 个补丁</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="other">%s 个核心</item>
+    </plurals>
 </resources>

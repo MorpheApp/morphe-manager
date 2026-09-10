@@ -76,4 +76,8 @@
         <item quantity="one">Kopierte %s patch fra valgt pakke</item>
         <item quantity="other">Kopierte %s patcher fra valgt pakke</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s kjerne</item>
+        <item quantity="other">%s kjerner</item>
+    </plurals>
 </resources>

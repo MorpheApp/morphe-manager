@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Constraints
@@ -68,7 +69,7 @@ fun StorageHistogram(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         Text(
-            text = formatUsedFree(used = used, free = deviceFreeBytes),
+            text = LocalContext.current.formatUsedFree(used = used, free = deviceFreeBytes),
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
             color = LocalDialogTextColor.current
@@ -234,7 +235,7 @@ private fun LegendItem(segment: StorageSegment) {
                 fontWeight = FontWeight.Medium
             )
             Text(
-                text = formatBytes(segment.bytes),
+                text = LocalContext.current.formatBytes(segment.bytes),
                 style = MaterialTheme.typography.bodySmall,
                 color = LocalDialogSecondaryTextColor.current
             )

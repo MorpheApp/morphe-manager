@@ -57,4 +57,7 @@
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="other">คัดลอกแพตช์ %s จากชุดที่เลือกแล้ว</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="other">%s คอร์</item>
+    </plurals>
 </resources>

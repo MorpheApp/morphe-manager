@@ -76,4 +76,8 @@
         <item quantity="one">%s Patch von ausgewähltem Paket kopiert</item>
         <item quantity="other">%s Patches von ausgewähltem Paket kopiert</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s Kern</item>
+        <item quantity="other">%s Kerne</item>
+    </plurals>
 </resources>

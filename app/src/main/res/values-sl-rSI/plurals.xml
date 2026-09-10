@@ -114,4 +114,10 @@
         <item quantity="few">Kopirani %s popravki iz izbranega paketa</item>
         <item quantity="other">Kopirano %s popravkov iz izbranega paketa</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s jedro</item>
+        <item quantity="two">%s jedri</item>
+        <item quantity="few">%s jedra</item>
+        <item quantity="other">%s jeder</item>
+    </plurals>
 </resources>

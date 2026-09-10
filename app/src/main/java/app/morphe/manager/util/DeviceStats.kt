@@ -21,10 +21,10 @@ data class DeviceStats(
     val storageTotal: Long
 ) {
     /** Free against total, the form the patch log and the error dialog both report. */
-    val ram get() = "${formatBytes(ramAvailable)} / ${formatBytes(ramTotal)}"
+    val ram get() = "${formatBytesForReport(ramAvailable)} / ${formatBytesForReport(ramTotal)}"
 
     /** Storage is measured on the volume patching stages its APKs on. */
-    val storage get() = "${formatBytes(storageAvailable)} / ${formatBytes(storageTotal)}"
+    val storage get() = "${formatBytesForReport(storageAvailable)} / ${formatBytesForReport(storageTotal)}"
 }
 
 /** Reads the device stats, or null on a platform that refuses to report them. */

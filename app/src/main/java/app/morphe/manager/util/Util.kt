@@ -53,6 +53,12 @@ fun Context.toast(string: String, duration: Int = Toast.LENGTH_SHORT) {
     toastHandle(string, duration)
 }
 
+/** Wraps [action] so it confirms itself with a toast, the feedback every selection gives. */
+fun Context.withToast(doneMessage: String, action: () -> Unit): () -> Unit = {
+    toast(doneMessage)
+    action()
+}
+
 /**
  * Safely perform an operation that may fail to avoid crashing the app.
  * If [block] fails, the error will be logged and a toast will be shown to the user to inform them that the action failed.

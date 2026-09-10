@@ -114,4 +114,10 @@
         <item quantity="many">Skopiowano %s modyfikacji z wybranego pakietu</item>
         <item quantity="other">Skopiowano %s modyfikacji z wybranego pakietu</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s rdzeń</item>
+        <item quantity="few">%s rdzenie</item>
+        <item quantity="many">%s rdzeni</item>
+        <item quantity="other">%s rdzeni</item>
+    </plurals>
 </resources>

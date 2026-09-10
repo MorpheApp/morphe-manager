@@ -616,10 +616,6 @@ private fun BundleManagementCard(
     val reportIssue = stringResource(R.string.sources_management_report_issue)
 
     val context = LocalContext.current
-    fun withToast(doneMessage: String, action: () -> Unit): () -> Unit = {
-        context.toast(doneMessage)
-        action()
-    }
 
     val isBlocked = blockedInfo != null
     val isEnabled = bundle.enabled && !isBlocked
@@ -929,7 +925,7 @@ private fun BundleManagementCard(
                                 ) { icon ->
                                     // Disable button
                                     ActionPillButton(
-                                        onClick = withToast(disableToast, onDisable),
+                                        onClick = context.withToast(disableToast, onDisable),
                                         icon = icon,
                                         contentDescription = disableEnableDesc,
                                         tooltip = disableEnableVerb,
@@ -946,7 +942,7 @@ private fun BundleManagementCard(
                                 // Update button. A local source has nothing to fetch from, so it asks
                                 // for a replacement file instead and reports progress once one is picked
                                 ActionPillButton(
-                                    onClick = if (isLocal) onUpdate else withToast(updateToast, onUpdate),
+                                    onClick = if (isLocal) onUpdate else context.withToast(updateToast, onUpdate),
                                     icon = Icons.Outlined.Refresh,
                                     contentDescription = updateDesc,
                                     tooltip = updateVerb,

@@ -76,4 +76,8 @@
         <item quantity="one">चयनित बंडल से %s पैच कॉपी किया गया</item>
         <item quantity="other">चयनित बंडल से %s पैच कॉपी किए गए</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s कोर</item>
+        <item quantity="other">%s कोर</item>
+    </plurals>
 </resources>

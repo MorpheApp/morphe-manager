@@ -95,4 +95,9 @@
         <item quantity="few">Kopirano je %s patcheva iz odabranog paketa</item>
         <item quantity="other">Kopirano je %s patcheva iz odabranog paketa</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s jezgra</item>
+        <item quantity="few">%s jezgre</item>
+        <item quantity="other">%s jezgri</item>
+    </plurals>
 </resources>

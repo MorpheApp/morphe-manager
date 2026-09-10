@@ -342,8 +342,8 @@ fun HomeDialogs(
     // Low Disk Space warning dialog
     if (homeViewModel.showLowDiskSpaceDialog) {
         LowDiskSpaceDialog(
-            freeGb = homeViewModel.lowDiskSpaceFreeGb,
-            thresholdGb = homeViewModel.lowDiskSpaceThresholdGb,
+            freeBytes = homeViewModel.lowDiskSpaceFreeBytes,
+            thresholdBytes = homeViewModel.lowDiskSpaceThresholdBytes,
             onDismiss = { homeViewModel.dismissLowDiskSpaceDialog() },
             onPatchAnyway = { homeViewModel.dismissLowDiskSpaceDialogAndProceed() }
         )
@@ -1616,12 +1616,13 @@ private fun VersionListCard(
 }
 
 /**
- * Warning dialog shown before patching starts when the device has less than [thresholdGb] GB of free storage.
+ * Warning dialog shown before patching starts when the device has less free storage than
+ * [thresholdBytes].
  */
 @Composable
 fun LowDiskSpaceDialog(
-    freeGb: Float,
-    thresholdGb: Float,
+    freeBytes: Long,
+    thresholdBytes: Long,
     onDismiss: () -> Unit,
     onPatchAnyway: () -> Unit
 ) {
@@ -1651,7 +1652,11 @@ fun LowDiskSpaceDialog(
             )
 
             Text(
-                text = stringResource(R.string.home_low_disk_space_dialog_message, freeGb, thresholdGb),
+                text = stringResource(
+                    R.string.home_low_disk_space_dialog_message,
+                    formatGigabytes(freeBytes),
+                    formatGigabytes(thresholdBytes)
+                ),
                 style = MaterialTheme.typography.bodyLarge,
                 color = LocalDialogSecondaryTextColor.current,
                 textAlign = TextAlign.Center,

@@ -152,4 +152,12 @@
         <item quantity="many">تم نسخ %s من التعديلات من الحزمة المحددة</item>
         <item quantity="other">تم نسخ %s من التعديلات من الحزمة المحددة</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="zero">%s أنوية</item>
+        <item quantity="one">%s نواة</item>
+        <item quantity="two">%s نواتان</item>
+        <item quantity="few">%s أنوية</item>
+        <item quantity="many">%s نواة</item>
+        <item quantity="other">%s نواة</item>
+    </plurals>
 </resources>

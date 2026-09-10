@@ -76,4 +76,8 @@
         <item quantity="one">Másolta a kiválasztott csomagból a(z) %s javítást</item>
         <item quantity="other">Másolta a kiválasztott csomagból a(z) %s javításokat</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s mag</item>
+        <item quantity="other">%s mag</item>
+    </plurals>
 </resources>

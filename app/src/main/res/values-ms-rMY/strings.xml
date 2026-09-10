@@ -22,6 +22,8 @@
     <string name="home_update_skipped_metered">Kemas kini taraf dilangkau</string>
     <string name="home_update_skipped_metered_subtitle">Data mudah alih aktif</string>
     <string name="home_updating_sources">Kemas kini sumber-sumber… </string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
     <string name="home_update_success">Kemas kini sumber selesai</string>
     <string name="home_update_success_subtitle">Sumber-sumbee anda adalah yang terkini</string>
     <string name="home_sources_are_loading">Sumber sedang di muat naik, sila tunggu… </string>
@@ -216,7 +218,8 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="home_outdated_patches_dialog_warning">Menampal dengan tampalan ketinggalan zaman mungkin boleh menyebabkan aplikasi rosak</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Kemas kini tampalan \'&amp;\'</string>
     <string name="home_low_disk_space_dialog_title">Ruang storan sedikit</string>
-    <string name="home_low_disk_space_dialog_message">Hanya %1$.2f GB storan bebas yang tersedia. Tampalan memerlukan sekurang-kurangnya %2$.2f GB ruang kosong untuk berfungsi dengan baik</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">Hanya %1$s GB storan bebas yang tersedia. Tampalan memerlukan sekurang-kurangnya %2$s GB ruang kosong untuk berfungsi dengan baik</string>
     <string name="home_low_disk_space_dialog_warning">Teruskan mungkin boleh mengakibatkan ralat \"Fail tidak dijumpai\" atau memcemarkan keluaran APK</string>
     <string name="home_simple_bundle_select_title">Pilih sumber tampalan</string>
     <!-- Color picker -->
@@ -291,11 +294,16 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="patcher_error_copied">Ralat disalin ke papan keratan</string>
     <string name="patcher_error_log">Log ralat</string>
     <string name="patcher_error_technical">Perincian teknikal</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_patcher">Penampal</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_storage">Storan</string>
+    <!-- Size of the patched APK, once patching finished -->
+    <!-- How long patching took -->
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <!-- Fastest read or write rate reached while patching, in data per second -->
     <string name="patcher_field_value_unknown">tidak diketahui</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <!-- Value of "Libraries": every library was left in the patched APK -->
@@ -362,7 +370,7 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="patcher_message_15">Semua sistem nominal… Trajektori tampalan stabil… 🚀</string>
     <string name="patcher_message_16">Memerah kuasa tambahan, seperti jus daripada lemon digital… 🍋</string>
     <string name="patcher_message_17">Menggalakkan aplikasi untuk menerima diri baharu yang lebih baik… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">Menukar superposisi aplikasi daripada tidak ditampal kepada ditampal… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Aplikasi anda mengalami demam, dan salah satu rawatan ialah dengan lebih banyak tampalan…  🩺🔔</string>
@@ -370,6 +378,7 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Menampal aplikasi</string>
     <string name="memory_usage">Penggunaan memori</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Memasang tampalan</string>
     <string name="failed_to_execute_patch">Gagal untuk memasang %s</string>
@@ -639,8 +648,11 @@ Dimensi gambar mestilah seperti berikut:
     <string name="credits_current_development">Pembangunan semasa</string>
     <string name="credits_prior_development">Pembangunan sebelumnya</string>
     <string name="opensource_licenses">Lesen sumber terbuka</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
     <string name="patches">Tampalan</string>
     <string name="home">Rumah</string>
     <string name="settings">Pengaturan</string>
@@ -717,7 +729,7 @@ Dimensi gambar mestilah seperti berikut:
     <string name="install_update_manager_failed">Gagal memasang kemas kini</string>
     <string name="installing_manager_update">Memasang kemas kini…</string>
     <string name="downloading_manager_update">Memukim kemas kini…</string>
-    <!-- Shown while downloading, before the total size is known -->
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
     <string name="download_manager_failed">Gagal memukim kemas kini: %s</string>
     <string name="failed_to_check_updates">Gagal menyemak kemas kini: %s</string>
     <string name="failed_to_download_update">Gagal memukim kemas kini: %s</string>

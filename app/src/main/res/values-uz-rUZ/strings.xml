@@ -34,6 +34,8 @@
     <string name="home_update_skipped_metered">Yangilanish o\'tkazib yuborildi</string>
     <string name="home_update_skipped_metered_subtitle">Mobil internet faol</string>
     <string name="home_updating_sources">Manbalar yangilanmoqda…</string>
+    <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
+         "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
     <string name="home_update_success">Manbalar yangilanishi yakunlandi</string>
     <string name="home_update_success_subtitle">Sizning manbalaringiz yangilandi</string>
     <string name="home_sources_are_loading">Manbalar yuklanayapti, iltimos kuting…</string>
@@ -313,7 +315,7 @@ Eng yaxshi natijalar uchun ushbu ilova to‘liq &lt;b&gt;APK&lt;/b&gt;ni patchla
     <string name="home_outdated_patches_dialog_warning">O\'rnatuvchini tanlang</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Yangilash va patchlash</string>
     <string name="home_low_disk_space_dialog_title">Kam disk joyi</string>
-    <string name="home_low_disk_space_dialog_message">Erkin xotira %1$.2f GB, patchlash uchun kamida %2$.2f GB erkin joy kerak</string>
+    <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
     <string name="home_low_disk_space_dialog_warning">Davom etish \"fayl topilmadi\" xatoligiga yoki buzilgan APK natijasiga olib kelishi mumkin</string>
     <string name="home_simple_bundle_select_title">Patch manbai tanlang</string>
     <!-- Color picker -->
@@ -453,9 +455,14 @@ Chekka hudud (chizikli): launcher niqobi tomonidan kesilishi mumkin - muhim tafs
     <string name="patcher_error_copied">Xatolik buferga kopyalandi</string>
     <string name="patcher_error_log">Xatolik jurnali</string>
     <string name="patcher_error_technical">Texnik tafsilotlar</string>
+    <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <!-- Native code libraries (.so files) packed inside the APK -->
     <!-- Free and total RAM of the device, never its storage -->
+    <!-- Size of the patched APK, once patching finished -->
+    <!-- How long patching took -->
+    <!-- Average and peak memory the patcher process held while it ran -->
+    <!-- Fastest read or write rate reached while patching, in data per second -->
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_tab_logs">Patcher jurnallari</string>
@@ -542,7 +549,7 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="patcher_message_15">Barcha tizimlar normal… patch trayektoriyasi barqaror… 🚀</string>
     <string name="patcher_message_16">Raqamli limon sharbatidan quvvatni siqib chiqaryapmiz… 🍋</string>
     <string name="patcher_message_17">Ilovingizni yangi, yaxshiroq o‘ziga moslashishga undayapmiz… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrodinger's cat). -->
+    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">Ilovning superpozitsiyasini yamoqlanmagandan patchlanganiga o‘zgartiryapmiz… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Ilovingizda isitma bor, yagona dori – ko‘proq patchlar… 🩺🔔</string>
@@ -550,6 +557,7 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">O\'rnatish muvaffaqiyatsiz yakunlandi. Yana urinib ko\'ring yoki boshqa o\'rnatuvchiga o\'ting</string>
     <string name="memory_usage">Xotira ishlatilishi</string>
+    <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
     <string name="cpu_usage">CPU ishlatilishi</string>
     <string name="storage_io_usage">Saqlash kiritish/chiqishi</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -1050,7 +1058,7 @@ Ma’lumotlar: %2$s"</string>
     <string name="credits_current_development">Hozirgi rivojlanish</string>
     <string name="credits_prior_development">Oldingi rivojlanish</string>
     <string name="opensource_licenses">Ochiq kodli litsenziyalar</string>
-    <!-- Easter egg offered after seven taps on the version in the about dialog -->
+    <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Tanlov</string>
     <string name="easter_egg_pill_message">Ko\'k tabletkani oling va reklamalar aynan shu joyda qoladi. Qizil tabletkani oling va bayt-kod qanchalik chuqur ekanini ko\'ring.</string>
     <string name="easter_egg_pill_red">Qizil tabletka</string>
@@ -1061,6 +1069,9 @@ Ma’lumotlar: %2$s"</string>
     <string name="easter_egg_pill_red_toast_again">Yana yomg\'irda</string>
     <string name="easter_egg_pill_blue_toast_again">Uzilgan. Orqaga yo\'l har doim bo\'lgan joyda.</string>
     <!-- Shared strings -->
+    <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the
+         megabytes read and expected, "%3$s" is the percentage; the doubled "%%" after it is
+         how a literal percent sign is written here. -->
     <string name="select_file">Faylni tanlang</string>
     <string name="select_folder">Sana o‘zgarishini almashtirish protokolini saqlash</string>
     <string name="patches">Patchlar</string>
@@ -1182,8 +1193,7 @@ Ma’lumotlar: %2$s"</string>
     <string name="install_update_manager_failed">Yangilanishni o‘rnatishda xatolik</string>
     <string name="installing_manager_update">Yangilanish o‘rnatilmoqda…</string>
     <string name="downloading_manager_update">Yangilanish yuklanmoqda…</string>
-    <!-- Shown while downloading, before the total size is known -->
-    <string name="manager_update_progress_downloaded">%1$.1f MB yuklab olindi</string>
+    <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
     <string name="manager_update_not_ready">Ushbu nashr hali e\'lon qilinmoqda. Bir necha daqiqadan keyin qayta urinib ko\'ring</string>
     <string name="update_download_missing">Yuklab olingan yangilanish endi mavjud emas. Uni qayta yuklab oling.</string>
     <string name="download_manager_failed">Yangilanishni yuklab olishda xatolik: %s</string>

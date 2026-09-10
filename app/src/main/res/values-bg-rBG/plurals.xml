@@ -76,4 +76,8 @@
         <item quantity="one">Копиран е %s кръпен файл от избрания пакет</item>
         <item quantity="other">Копирани са %s кръпени файла от избрания пакет</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s ядро</item>
+        <item quantity="other">%s ядра</item>
+    </plurals>
 </resources>

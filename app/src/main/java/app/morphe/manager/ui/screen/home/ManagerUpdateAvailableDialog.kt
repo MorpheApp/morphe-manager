@@ -363,10 +363,10 @@ private fun DownloadProgressCard(
             Text(
                 text = if (hasKnownSize) {
                     stringResource(
-                        R.string.manager_update_progress_detail,
+                        R.string.download_progress,
                         formatMegabytes(downloadedSize),
                         formatMegabytes(totalSize),
-                        (progress * 100).toInt()
+                        (progress * 100).toInt().toString()
                     )
                 } else {
                     stringResource(

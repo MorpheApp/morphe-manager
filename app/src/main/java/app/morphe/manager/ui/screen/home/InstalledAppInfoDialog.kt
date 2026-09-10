@@ -1120,7 +1120,7 @@ private fun InfoSection(
                 info.applicationInfo?.sourceDir ?: return@remember null
             ).length()
 
-            formatBytes(bytes)
+            context.formatBytes(bytes)
         } catch (_: Exception) { null }
     }
 

@@ -34,9 +34,8 @@ import app.morphe.manager.patcher.patch.ApkArchitectureResolver
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchLockState
 import app.morphe.manager.patcher.patch.PatchSourceRef
-import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_MINIMUM
-import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_STEP
 import app.morphe.manager.patcher.runtime.ProcessRuntime
+import app.morphe.manager.patcher.runtime.lowerMemoryLimit
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.PatcherWorker
 import app.morphe.manager.ui.model.*
@@ -1072,10 +1071,9 @@ class PatcherViewModel(
                     -1
                 )
                 val currentLimit = if (previousFromWorker > 0) previousFromWorker else prefs.patcherProcessMemoryLimit.get()
-                // One step down, on the same scale the setting and the memory retries use, so
-                // accepting this lands on a value the slider can represent and the runtime honors
-                val suggestedLimit = (currentLimit - PROCESS_RUNTIME_MEMORY_STEP)
-                    .coerceAtLeast(PROCESS_RUNTIME_MEMORY_MINIMUM)
+                // The same step down the memory retries take, so accepting this lands on a
+                // value the slider can represent and the runtime honors
+                val suggestedLimit = lowerMemoryLimit(currentLimit)
                 // The setting is left alone until the user accepts the suggestion: silently
                 // lowering it made the configured limit drift down across failed runs
                 memoryAdjustmentDialog = MemoryAdjustmentDialogState(

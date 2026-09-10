@@ -76,4 +76,8 @@
         <item quantity="one">Kopierede %s patch fra det valgte bundle</item>
         <item quantity="other">Kopierede %s patches fra det valgte bundle</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s kerne</item>
+        <item quantity="other">%s kerner</item>
+    </plurals>
 </resources>

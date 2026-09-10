@@ -76,4 +76,8 @@
         <item quantity="one">Afritað %s breytingu úr völdum pakka</item>
         <item quantity="other">Afritaðar %s breytingar úr völdum pakka</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s kjarni</item>
+        <item quantity="other">%s kjarnar</item>
+    </plurals>
 </resources>

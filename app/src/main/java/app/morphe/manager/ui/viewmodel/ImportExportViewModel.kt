@@ -497,7 +497,7 @@ class ImportExportViewModel(
         writer.write("Locale     : ${Locale.getDefault().toLanguageTag()}\n")
 
         val stats = app.deviceStats()
-        val toMb = { bytes: Long -> bytes / 1024 / 1024 }
+        val toMb = ::bytesToMebibytes
 
         writer.write("\n--- Memory ---\n")
         if (stats == null) {
@@ -510,14 +510,14 @@ class ImportExportViewModel(
 
         writer.write("\n--- Storage ---\n")
         if (stats != null) {
-            writer.write("Internal   : ${toMb(stats.storageAvailable)} MB free / ${toMb(stats.storageTotal)} MB total\n")
+            writer.write("Internal   : ${formatBytesForReport(stats.storageAvailable)} free / ${formatBytesForReport(stats.storageTotal)} total\n")
         }
         var sdCardIndex = 1
         app.externalStorageVolumes().forEach { (isPrimary, root) ->
             if (isPrimary) {
-                writer.write("External   : ${toMb(root.freeSpace)} MB free / ${toMb(root.totalSpace)} MB total\n")
+                writer.write("External   : ${formatBytesForReport(root.freeSpace)} free / ${formatBytesForReport(root.totalSpace)} total\n")
             } else {
-                writer.write("SD Card $sdCardIndex  : ${toMb(root.freeSpace)} MB free / ${toMb(root.totalSpace)} MB total\n")
+                writer.write("SD Card $sdCardIndex  : ${formatBytesForReport(root.freeSpace)} free / ${formatBytesForReport(root.totalSpace)} total\n")
                 sdCardIndex++
             }
         }

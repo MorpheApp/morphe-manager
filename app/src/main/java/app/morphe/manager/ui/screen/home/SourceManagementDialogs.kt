@@ -16,7 +16,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
@@ -543,6 +542,13 @@ fun BundlePatchesDialog(
 
     val isFiltering = searchQuery.isNotBlank() || selectedPackages.isNotEmpty()
 
+    val patchSections = rememberPatchSectionState()
+    val patchFolds = patchSections.folds
+    val patchGroups = rememberPatchGroups(
+        patches = filteredPatches,
+        infoOf = { (_, patch) -> patch }
+    )
+
     AppDialog(
         onDismissRequest = {
             when {
@@ -649,9 +655,13 @@ fun BundlePatchesDialog(
                         }
 
                         // Filtered patches list
-                        items(
-                            filteredPatches,
-                            key = { (index, _) -> index }
+                        patchGroupRows(
+                            sectionKey = src.uid,
+                            groups = patchGroups,
+                            key = { (index, _): IndexedValue<PatchInfo> -> index },
+                            isFiltering = isFiltering,
+                            folds = patchFolds,
+                            onToggle = { group -> patchSections.toggle(src.uid, group) }
                         ) { (_, patch) ->
                             val context = LocalContext.current
                             val expertBadgeTooltip = stringResource(R.string.sources_patch_expert_badge_tooltip)
@@ -980,8 +990,9 @@ fun BundleChangelogHost(
     val bundle = sources.filterIsInstance<RemotePatchBundle>()
         .find { it.uid == request.bundleUid } ?: return
 
-    // A different request, source version or channel has to start the fetch over
-    key(request, bundle.installedVersionSignature, bundle.usesPrerelease) {
+    // The notes are read against the version installed when the dialog opened, so only another
+    // request starts the fetch over: an update landing underneath must not reset it
+    key(request) {
         BundleChangelogDialog(
             src = bundle,
             onDismissRequest = onDismissRequest,

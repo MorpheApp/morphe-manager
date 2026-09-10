@@ -76,4 +76,8 @@
         <item quantity="one">%s patch van geselekteerde bundel gekopieer</item>
         <item quantity="other">%s patches van geselekteerde bundel gekopieer</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s kern</item>
+        <item quantity="other">%s kerne</item>
+    </plurals>
 </resources>

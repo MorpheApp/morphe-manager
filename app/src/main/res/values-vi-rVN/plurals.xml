@@ -57,4 +57,7 @@
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="other">Đã sao chép %s bản vá từ gói được chọn</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="other">%s lõi</item>
+    </plurals>
 </resources>

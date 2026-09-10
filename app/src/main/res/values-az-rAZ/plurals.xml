@@ -76,4 +76,8 @@
         <item quantity="one">Seçilmiş paketdən %s yamaq köçürüldü</item>
         <item quantity="other">Seçilmiş paketdən %s yamaq köçürüldü</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s nüvə</item>
+        <item quantity="other">%s nüvə</item>
+    </plurals>
 </resources>

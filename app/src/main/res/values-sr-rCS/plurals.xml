@@ -95,4 +95,9 @@
         <item quantity="few">Kopirano %s zakrpa iz odabranog paketa</item>
         <item quantity="other">Kopirano %s zakrpa iz odabranog paketa</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s jezgro</item>
+        <item quantity="few">%s jezgra</item>
+        <item quantity="other">%s jezgara</item>
+    </plurals>
 </resources>

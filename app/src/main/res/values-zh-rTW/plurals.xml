@@ -57,4 +57,7 @@
     <plurals name="expert_mode_copy_from_bundle_done">
         <item quantity="other">已從選取套件複製 %s 個修補程式</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="other">%s 個核心</item>
+    </plurals>
 </resources>

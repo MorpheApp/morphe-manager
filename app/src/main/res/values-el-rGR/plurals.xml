@@ -76,4 +76,8 @@
         <item quantity="one">Αντιγράφηκε %s επιλογή από την επιλεγμένη δέσμη</item>
         <item quantity="other">Αντιγράφηκαν %s επιλογές από την επιλεγμένη δέσμη</item>
     </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s πυρήνας</item>
+        <item quantity="other">%s πυρήνες</item>
+    </plurals>
 </resources>

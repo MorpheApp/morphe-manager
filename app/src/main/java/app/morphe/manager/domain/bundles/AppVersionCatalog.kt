@@ -6,6 +6,7 @@
 package app.morphe.manager.domain.bundles
 
 import android.os.Build
+import app.morphe.manager.domain.apk.InstalledApkInfo
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
@@ -44,6 +45,14 @@ fun List<BundledAppTarget>.patchableAt(version: String, versionCode: Long?): Boo
             (entry.buildCodes == null || versionCode == null || versionCode.toInt() in entry.buildCodes)
     }
 }
+
+/**
+ * The installed APK as a source these targets accept, or null when they do not: the version it
+ * carries has to be one the patches name. Asked here rather than at each call site so the
+ * installed app cannot be offered by one flow and withheld by another.
+ */
+fun InstalledApkInfo?.patchableBy(targets: List<BundledAppTarget>): InstalledApkInfo? =
+    this?.takeIf { targets.patchableAt(it.version, it.versionCode) }
 
 /**
  * Versions any source marks experimental. The single definition every experimental badge and

@@ -31,6 +31,7 @@ import app.morphe.manager.patcher.patch.PatchLockState
 import app.morphe.manager.patcher.patch.blocksToggle
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.toast
+import app.morphe.manager.util.withToast
 
 /**
  * Bundle controls: pill row with per-bundle bulk actions.
@@ -54,12 +55,6 @@ internal fun BundlePatchControls(
     warnOnUniversalAll: Boolean = false
 ) {
     val context = LocalContext.current
-
-    // Shows a confirmation toast with [doneMessage] and then executes [action]
-    fun withToast(doneMessage: String, action: () -> Unit): () -> Unit = {
-        context.toast(doneMessage)
-        action()
-    }
 
     val selectAllLabel = stringResource(R.string.expert_mode_enable_all)
     val defaultLabel = stringResource(R.string.expert_mode_reset_to_default)
@@ -86,7 +81,7 @@ internal fun BundlePatchControls(
                 if (warnOnUniversalAll) {
                     showUniversalAllWarning = true
                 } else {
-                    withToast(enabledDone, onSelectAll)()
+                    context.withToast(enabledDone, onSelectAll)()
                 }
             },
             icon = Icons.Outlined.DoneAll,
@@ -99,7 +94,7 @@ internal fun BundlePatchControls(
             )
         )
         ActionPillButton(
-            onClick = withToast(resetDone, onResetToDefault),
+            onClick = context.withToast(resetDone, onResetToDefault),
             icon = Icons.Outlined.Recommend,
             contentDescription = defaultLabel,
             tooltip = defaultLabel,
@@ -109,7 +104,7 @@ internal fun BundlePatchControls(
             )
         )
         ActionPillButton(
-            onClick = withToast(restoredDone, onRestoreSaved),
+            onClick = context.withToast(restoredDone, onRestoreSaved),
             icon = Icons.Outlined.History,
             contentDescription = restoreLabel,
             tooltip = restoreLabel,
@@ -133,7 +128,7 @@ internal fun BundlePatchControls(
             )
         }
         ActionPillButton(
-            onClick = withToast(disabledDone, onDeselectAll),
+            onClick = context.withToast(disabledDone, onDeselectAll),
             icon = Icons.Outlined.ClearAll,
             contentDescription = deselectAllLabel,
             tooltip = deselectAllLabel,
@@ -154,7 +149,7 @@ internal fun BundlePatchControls(
             onDismiss = { showUniversalAllWarning = false },
             onConfirm = {
                 showUniversalAllWarning = false
-                withToast(enabledDone, onSelectAll)()
+                context.withToast(enabledDone, onSelectAll)()
             }
         )
     }
