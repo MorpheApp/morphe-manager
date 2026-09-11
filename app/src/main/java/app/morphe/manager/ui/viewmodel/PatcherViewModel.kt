@@ -24,7 +24,7 @@ import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
-import app.morphe.manager.domain.manager.InstallerPreferenceTokens
+import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.*
@@ -56,6 +56,7 @@ import org.koin.core.component.inject
 import java.io.File
 import java.io.IOException
 import java.util.UUID
+import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
@@ -74,6 +75,7 @@ class PatcherViewModel(
     private val prefs: PreferencesManager by inject()
     private val patchOptionsPrefs: PatchOptionsPreferencesManager by inject()
     private val originalApkRepository: OriginalApkRepository by inject()
+    private val installerManager: InstallerManager by inject()
     private val savedStateHandle: SavedStateHandle = get()
 
     private var savedPatchedApp by savedStateHandle.saveableVar { false }
@@ -108,6 +110,10 @@ class PatcherViewModel(
 
     private val _autoInstallChannel = Channel<Unit>(Channel.CONFLATED)
     val autoInstallEvent: Flow<Unit> = _autoInstallChannel.receiveAsFlow()
+
+    /** Whether this run installs on its own, set before the event so the screen shows it coming. */
+    var autoInstallPending by mutableStateOf(false)
+        private set
 
     var patchingCompletedAt: Long? = null
         private set
@@ -1014,8 +1020,8 @@ class PatcherViewModel(
                                     patchingCompletedInForeground = _patcherSucceeded.hasActiveObservers()
                                     isPatching = false
                                     _patcherSucceeded.value = true
-                                    scheduleAutoInstallIfNeeded()
                                     scheduleSuccessScreen()
+                                    scheduleAutoInstallIfNeeded()
                                 }
                             }
                         }
@@ -1041,19 +1047,32 @@ class PatcherViewModel(
         }
     }
 
+    /** What is left of the beat the progress screen holds a finished run for. */
+    private val successScreenDelay: Duration
+        get() {
+            val elapsed = patchingCompletedAt?.let { System.currentTimeMillis() - it } ?: 0L
+            return (2000L - elapsed).coerceAtLeast(0L).milliseconds
+        }
+
     private fun scheduleSuccessScreen() = viewModelScope.launch {
-        val elapsed = patchingCompletedAt?.let { System.currentTimeMillis() - it } ?: 0L
-        delay((2000L - elapsed).coerceAtLeast(0L).milliseconds)
+        delay(successScreenDelay)
         if (successScreenDeferred) successScreenHeldBack = true else showSuccessScreen = true
     }
 
+    /** Called once the installer has taken the auto-install over. */
+    fun autoInstallHandedOff() {
+        autoInstallPending = false
+    }
+
     private fun scheduleAutoInstallIfNeeded() = viewModelScope.launch {
-        if (!prefs.autoInstallWithShizuku.get()) return@launch
-        val installerPrimary = prefs.installerPrimary.get()
-        if (installerPrimary != InstallerPreferenceTokens.SHIZUKU &&
-            installerPrimary != InstallerPreferenceTokens.SHIZUKU_PLAY_STORE
-        ) return@launch
-        if (prefs.promptInstallerOnInstall.get()) return@launch
+        // A patch is free to rename the app, and the name it built under is the one being replaced
+        val target = withContext(Dispatchers.IO) { pm.getPackageInfo(outputFile)?.packageName }
+            ?: packageName
+        if (!installerManager.autoInstallAllowed(target)) return@launch
+        autoInstallPending = true
+        // Held for the same beat as the success screen: an install starting sooner puts the
+        // system dialog over a run the progress screen is still drawing as unfinished
+        delay(successScreenDelay)
         _autoInstallChannel.trySend(Unit)
     }
 

@@ -20,8 +20,8 @@ import app.morphe.manager.ManagerApplication
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
+import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
-import app.morphe.manager.domain.manager.InstallerPreferenceTokens
 import app.morphe.manager.domain.manager.KeystoreManager
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
@@ -58,6 +58,7 @@ class PatcherWorker(
     private val installedAppRepository: InstalledAppRepository by inject()
     private val originalApkRepository: OriginalApkRepository by inject()
     private val rootInstaller: RootInstaller by inject()
+    private val installerManager: InstallerManager by inject()
 
     class Args(
         val input: SelectedApp,
@@ -164,7 +165,8 @@ class PatcherWorker(
             successSoundUri,
             errorSoundUri
         )
-        // Don't show "patching complete" when Shizuku auto-install will immediately follow
+        // Don't show "patching complete" when an auto-install will immediately follow: it
+        // either needs nothing from the user or asks for it in a notification of its own
         if (succeeded && autoInstallPending) return
         // Don't notify when the app is in the foreground - user sees the result on screen
         if (ManagerApplication.isInForeground) return
@@ -465,11 +467,8 @@ class PatcherWorker(
             )
 
             Log.i(tag, "Patching succeeded".logFmt())
-            val installerPrimary = prefs.installerPrimary.get()
-            autoInstallPending = prefs.autoInstallWithShizuku.get() &&
-                    (installerPrimary == InstallerPreferenceTokens.SHIZUKU ||
-                            installerPrimary == InstallerPreferenceTokens.SHIZUKU_PLAY_STORE) &&
-                    !prefs.promptInstallerOnInstall.get()
+            val outputPackageName = pm.getPackageInfo(File(args.output))?.packageName ?: args.packageName
+            autoInstallPending = installerManager.autoInstallAllowed(outputPackageName)
             succeeded = true
             Result.success()
         } catch (e: ProcessRuntime.ProcessExitException) {

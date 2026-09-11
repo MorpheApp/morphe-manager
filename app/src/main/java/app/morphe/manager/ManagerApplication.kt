@@ -54,6 +54,12 @@ class ManagerApplication : Application() {
         /** True while a Morphe screen is in focus, so a result needs no notification. */
         val isInForeground: Boolean get() = resumedActivityCount > 0
 
+        /**
+         * Run once the next time a Morphe screen comes into focus, for work that Android only
+         * allows from the foreground. Cleared before it runs, so it never fires twice.
+         */
+        @Volatile var onReturnToForeground: (() -> Unit)? = null
+
         /** Launcher shortcut that opens the batch queue with everything worth re-patching. */
         private const val SHORTCUT_ID_REPATCH = "repatch_outdated"
         private const val SHORTCUT_ID_UPDATES = "check_updates"
@@ -200,7 +206,13 @@ class ManagerApplication : Application() {
             }
 
             override fun onActivityStarted(activity: Activity) {}
-            override fun onActivityResumed(activity: Activity) { resumedActivityCount++ }
+            override fun onActivityResumed(activity: Activity) {
+                resumedActivityCount++
+                onReturnToForeground?.let {
+                    onReturnToForeground = null
+                    it()
+                }
+            }
             override fun onActivityPaused(activity: Activity) { resumedActivityCount-- }
             override fun onActivityStopped(activity: Activity) {}
             override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}

@@ -105,7 +105,12 @@ class PreferencesManager(
     val promptInstallerOnInstall = booleanPreference("prompt_installer_on_install", false)
     val installerCustomComponents = stringSetPreference("installer_custom_components", emptySet())
     val installerHiddenComponents = stringSetPreference("installer_hidden_components", emptySet())
-    val autoInstallWithShizuku = booleanPreference("auto_install_with_shizuku", false)
+
+    /** Installs the patched APK as soon as patching completes. */
+    val autoInstallAfterPatching = booleanPreference(
+        "auto_install_with_shizuku", // Old key from when Shizuku was the only installer that could
+        false
+    )
     val autoUninstallWithShizuku = booleanPreference("auto_uninstall_with_shizuku", false)
 
     val useProcessRuntime = booleanPreference(

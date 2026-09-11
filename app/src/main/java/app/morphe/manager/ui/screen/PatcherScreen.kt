@@ -39,7 +39,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.installer.InstallerManager
-import app.morphe.manager.domain.manager.InstallerPreferenceTokens
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.patcher.patch.installerTypeFor
 import app.morphe.manager.ui.model.RenameWarning
@@ -168,9 +167,8 @@ fun PatcherScreen(
     // Get output file from viewModel
     val outputFile = patcherViewModel.outputFile
 
-    val autoInstallWithShizuku by prefs.autoInstallWithShizuku.getAsState()
+    val autoInstallAfterPatching by prefs.autoInstallAfterPatching.getAsState()
     val autoUninstallWithShizuku by prefs.autoUninstallWithShizuku.getAsState()
-    val primaryInstallerPref by prefs.installerPrimary.getAsState()
     val promptInstallerOnInstall by prefs.promptInstallerOnInstall.getAsState()
 
     // A build that answers to a package name of its own installs beside the app instead of
@@ -207,6 +205,9 @@ fun PatcherScreen(
                     autoUninstallOnConflict = true
                 )
             }
+            // The installer owns the state from here, and an attempt that ends in nothing must
+            // not leave the screen claiming an install forever
+            patcherViewModel.autoInstallHandedOff()
         }
     }
 
@@ -596,9 +597,9 @@ fun PatcherScreen(
                 installerManager.shizukuStatus(InstallerManager.InstallTarget.PATCHER)
             },
             onRequestShizukuPermission = installerManager::requestShizukuPermission,
-            autoInstallEnabled = autoInstallWithShizuku,
+            autoInstallEnabled = autoInstallAfterPatching,
             onAutoInstallToggle = { enabled ->
-                scope.launch { prefs.autoInstallWithShizuku.update(enabled) }
+                scope.launch { prefs.autoInstallAfterPatching.update(enabled) }
             },
             autoUninstallEnabled = autoUninstallWithShizuku,
             onAutoUninstallToggle = { enabled ->
@@ -656,15 +657,12 @@ fun PatcherScreen(
 
                 PatcherState.SUCCESS -> {
                     val effectiveIsInstalling = isInstalling || (
-                            autoInstallWithShizuku &&
-                                    (primaryInstallerPref == InstallerPreferenceTokens.SHIZUKU ||
-                                            primaryInstallerPref == InstallerPreferenceTokens.SHIZUKU_PLAY_STORE) &&
+                            patcherViewModel.autoInstallPending &&
                                     patcherSucceeded == true &&
                                     !usingMountInstall &&
-                                    !promptInstallerOnInstall &&
                                     installState is InstallViewModel.InstallState.Ready &&
                                     // Auto-install stops at the rename warning, so the screen must
-                                    // not go on claiming an install the user has yet to allow
+                                    // not go on claiming install the user has yet to allow
                                     heldInstall == null && !renameDeclined
                             )
                     // The state the screen is drawn from answers two things the installer's own

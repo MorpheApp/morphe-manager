@@ -215,8 +215,8 @@ class SettingsViewModel(
         prefs.promptInstallerOnInstall.update(enabled)
     }
 
-    fun setAutoInstallWithShizuku(enabled: Boolean) = viewModelScope.launch {
-        prefs.autoInstallWithShizuku.update(enabled)
+    fun setAutoInstallAfterPatching(enabled: Boolean) = viewModelScope.launch {
+        prefs.autoInstallAfterPatching.update(enabled)
     }
 
     fun setAutoUninstallWithShizuku(enabled: Boolean) = viewModelScope.launch {

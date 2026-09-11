@@ -14,6 +14,7 @@ import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.domain.installer.InstallCancelledException
 import app.morphe.manager.domain.installer.InstallResult
 import app.morphe.manager.domain.installer.InstallerManager
+import app.morphe.manager.domain.installer.SessionDeadException
 import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.ManagerUpdateRepository
@@ -208,11 +209,12 @@ class UpdateViewModel : ViewModel(), KoinComponent {
         )
 
         when (plan) {
+            // The only path Android can complete without its confirmation dialog
+            is InstallerManager.InstallPlan.Internal ->
+                awaitInstall { sessionInstaller.installInternal(location) }
+
             // Completion is handled by installBroadcastReceiver;
             // cancellation by resetIfInstallCancelled() in the dialog
-            is InstallerManager.InstallPlan.Internal ->
-                launchSystemInstall { sessionInstaller.launchIntentInstall(location) }
-
             is InstallerManager.InstallPlan.PlayStore ->
                 launchSystemInstall { sessionInstaller.launchPlayStoreInstall(location) }
 
@@ -221,18 +223,25 @@ class UpdateViewModel : ViewModel(), KoinComponent {
             is InstallerManager.InstallPlan.Mount ->
                 failInstall(app.getString(R.string.installer_status_not_supported))
 
-            is InstallerManager.InstallPlan.Shizuku -> {
-                state = State.INSTALLING
-                try {
-                    handleInstallResult(sessionInstaller.installShizuku(location, app.packageName))
-                } catch (_: InstallCancelledException) {
-                    state = State.CAN_INSTALL
-                } catch (error: Exception) {
-                    failInstall(error.simpleMessage().orEmpty())
-                }
-            }
+            is InstallerManager.InstallPlan.Shizuku ->
+                awaitInstall { sessionInstaller.installShizuku(location, app.packageName) }
 
             is InstallerManager.InstallPlan.External -> launchExternalInstaller(plan)
+        }
+    }
+
+    /** Runs an installer that reports its own outcome, leaving the dialog on a state the user can act on. */
+    private suspend fun awaitInstall(install: suspend () -> InstallResult) {
+        state = State.INSTALLING
+        try {
+            handleInstallResult(install())
+        } catch (_: InstallCancelledException) {
+            state = State.CAN_INSTALL
+        } catch (_: SessionDeadException) {
+            // A killed session leaves the intent installer as the only way through
+            launchSystemInstall { sessionInstaller.launchIntentInstall(location) }
+        } catch (error: Exception) {
+            failInstall(error.simpleMessage().orEmpty())
         }
     }
 

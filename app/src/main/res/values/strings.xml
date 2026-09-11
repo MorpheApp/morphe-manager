@@ -947,6 +947,8 @@ The image dimensions must be as follows:
     <string name="installer_action_open_shizuku">Open Shizuku</string>
     <string name="installer_hint_generic">The installation failed. Try again or switch to a different installer</string>
     <string name="installer_hint_conflict">Another app with this package name is already installed. Uninstall it before continuing</string>
+    <string name="installer_confirm_notification_title">Confirm the installation</string>
+    <string name="installer_confirm_notification_text">Tap to finish installing the patched app</string>
     <string name="installer_external_launched">Opening %s…</string>
     <string name="installer_external_timeout">%s did not confirm the installation. Check the other app and try again</string>
     <string name="installer_external_success">%s reported a successful installation</string>
@@ -963,7 +965,7 @@ The image dimensions must be as follows:
     <string name="settings_prompt_installer_on_install">Installer selection prompt</string>
     <string name="settings_prompt_installer_on_install_description">Shows installer selection dialog each time a patched app is installed</string>
     <string name="settings_auto_install_with_shizuku">Auto-install after patching</string>
-    <string name="settings_auto_install_with_shizuku_description">Silently installs the patched APK as soon as patching completes</string>
+    <string name="settings_auto_install_with_shizuku_description">Installs the patched APK as soon as patching completes</string>
     <string name="settings_auto_uninstall_with_shizuku">Auto-uninstall on conflict</string>
     <string name="settings_auto_uninstall_with_shizuku_description">When auto-installing with Shizuku, uninstall the existing app first if Android reports a signature conflict. This can remove app data</string>
     <string name="settings_auto_uninstall_warning_title">Enable auto-uninstall?</string>
