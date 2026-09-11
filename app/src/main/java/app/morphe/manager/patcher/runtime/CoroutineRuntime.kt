@@ -34,12 +34,16 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
         try {
             val selectedBundles = selectedPatches.keys
             val bundles = bundles()
-            val uids = bundles.entries.associate { (key, value) -> value to key }
 
-            val allPatches =
-                PatchBundle.Loader.patches(bundles.values, packageName)
-                    .mapKeys { (b, _) -> uids[b]!! }
-                    .filterKeys { it in selectedBundles }
+            // Only the selected bundles are read, one at a time, so a native death inside any of
+            // them is attributed to it instead of leaving the next launch to crash the same way
+            val allPatches = bundles
+                .filterKeys { it in selectedBundles }
+                .mapValues { (uid, bundle) ->
+                    bundleLoadGuard.read(uid, File(bundle.patchesJar)) {
+                        PatchBundle.Loader.patches(setOf(bundle), packageName).getValue(bundle)
+                    }
+                }
 
             val patchList = selectedPatches.flatMap { (bundle, selected) ->
                 allPatches[bundle]?.filterKeys { it in selected }?.values

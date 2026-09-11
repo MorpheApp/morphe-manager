@@ -2,6 +2,7 @@ package app.morphe.manager.domain.bundles
 
 import androidx.compose.runtime.Stable
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.gitlabAvatarUrl
+import app.morphe.manager.domain.repository.PatchBundleHeldBackException
 import app.morphe.manager.patcher.patch.PatchBundle
 import app.morphe.manager.util.hasZipHeader
 import app.morphe.manager.util.isPatcherOutdated
@@ -137,6 +138,13 @@ sealed class PatchBundleSource(
         val PatchBundleSource.usesPrerelease: Boolean
             get() = (this as? JsonPatchBundle)?.usePrerelease == true ||
                     (this as? APIPatchBundle)?.usePrerelease == true
+
+        /**
+         * True while the source is skipped because reading it took the process down with it.
+         * Distinct from every other failure in that nothing about the source itself is wrong
+         * yet: it is held back until the file changes.
+         */
+        val PatchBundleSource.isHeldBack: Boolean get() = error is PatchBundleHeldBackException
 
         /** Classifies a [PatchBundleSource] into its user-visible type. */
         val PatchBundleSource.sourceType: BundleSourceType get() = when {

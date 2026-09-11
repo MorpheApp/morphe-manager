@@ -24,6 +24,9 @@ sealed class Runtime(context: Context) : KoinComponent {
 
     protected suspend fun bundles() = patchBundlesRepo.bundles.first()
 
+    /** Only of use to a runtime that reads bundles in this process, see [CoroutineRuntime]. */
+    protected val bundleLoadGuard get() = patchBundlesRepo.loadGuard
+
     /**
      * Patches [inputFile] into [outputFile].
      *
