@@ -322,7 +322,8 @@ class ManagerApplication : Application() {
         .setLongLabel(longLabel)
         .setIcon(icon)
         .setRank(rank)
-        .setIntent(intent)
+        // Stamped here rather than at each call site so no shortcut can arrive unnamed
+        .setIntent(intent.putExtra(MainActivity.EXTRA_SHORTCUT_ID, id))
         .build()
 
     /**
