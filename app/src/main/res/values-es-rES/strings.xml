@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">Pulsa para revisar las fuentes</string>
     <string name="home_outdated_manager_title">Morphe está desactualizado</string>
     <string name="home_outdated_manager_subtitle">Algunas fuentes de parches necesitan una versión más reciente</string>
+    <string name="home_held_back_title">Una fuente de parches hizo que Morphe fallara</string>
+    <string name="home_held_back_subtitle">Se omitió para que la aplicación pudiera iniciarse. Pulsa para revisar</string>
     <string name="home_metered_skipped_title">Actualizaciones pausadas con datos móviles</string>
     <string name="home_metered_skipped_subtitle">Pulsa para permitir actualizaciones con datos móviles</string>
     <string name="home_repatch_available_subtitle">Pulsa para ponerlas todas en cola</string>
@@ -149,6 +151,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">No se ha podido descargar el paquete de parches. Es posible que la URL de la fuente sea incorrecta o que el archivo no exista</string>
     <string name="sources_management_outdated_manager_badge">Actualizar Morphe</string>
     <string name="sources_management_outdated_manager_hint">Esta fuente está creada para el parcheador %1$s, pero Morphe %2$s incluye el parcheador %3$s. Actualiza Morphe para usarlo</string>
+    <string name="sources_management_held_back_badge">Falló</string>
+    <string name="sources_management_held_back_hint">Esta fuente hizo que Morphe fallara al cargarse, por lo que se omite. Actualízala o vuelve a importarla para intentarlo de nuevo</string>
     <string name="sources_management_source_enabled">Fuente activada</string>
     <string name="sources_management_source_disabled">Fuente desactivada</string>
     <string name="sources_management_source_updating">Actualizando fuente</string>
@@ -898,7 +902,6 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_prompt_installer_on_install">Solicitud de selección del instalador</string>
     <string name="settings_prompt_installer_on_install_description">Muestra el diálogo de selección del instalador cada vez que se instala una aplicación parcheada</string>
     <string name="settings_auto_install_with_shizuku">Instalación automática después del parcheo</string>
-    <string name="settings_auto_install_with_shizuku_description">Instala silenciosamente el APK parcheado en cuanto se completa el parcheo</string>
     <string name="settings_auto_uninstall_with_shizuku">Desinstalación automática en caso de conflicto</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Cuando se instala automáticamente con Shizuku, desinstala primero la aplicación existente si Android informa de un conflicto de firma. Esto puede eliminar los datos de la aplicación</string>
     <string name="settings_auto_uninstall_warning_title">¿Activar desinstalación automática?</string>

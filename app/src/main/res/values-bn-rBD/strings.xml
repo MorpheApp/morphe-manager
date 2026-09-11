@@ -887,7 +887,6 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_prompt_installer_on_install">ইনস্টলার নির্বাচন প্রম্পট।</string>
     <string name="settings_prompt_installer_on_install_description">প্যাচ করা অ্যাপ ইনস্টল করার সময়마다 ইনস্টলার নির্বাচন ডায়ালগ দেখায়।</string>
     <string name="settings_auto_install_with_shizuku">প্যাচিং করার পরে স্বয়ংক্রিয়ভাবে ইনস্টল করুন</string>
-    <string name="settings_auto_install_with_shizuku_description">প্যাচিং সম্পন্ন হওয়ার সাথে সাথেই প্যাচ করা APK নিঃশব্দে ইনস্টল করে</string>
     <string name="settings_auto_uninstall_with_shizuku">সংঘাত হলে স্বয়ংক্রিয়ভাবে আনইনস্টল করুন</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Shizuku দিয়ে স্বয়ংক্রিয়ভাবে ইনস্টল করার সময়, যদি Android সিগনেচার কনফ্লিক্ট রিপোর্ট করে তবে প্রথমে বিদ্যমান অ্যাপটি আনইনস্টল করুন। এটি অ্যাপের ডেটা মুছে ফেলতে পারে।</string>
     <string name="settings_auto_uninstall_warning_title">স্বয়ংক্রিয়ভাবে আনইনস্টল করা কি সক্রিয় করবেন?</string>

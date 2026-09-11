@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">Appuyez pour consulter les sources</string>
     <string name="home_outdated_manager_title">Morphe n\'est plus à jour</string>
     <string name="home_outdated_manager_subtitle">Certaines sources de patchs nécessitent une version plus récente</string>
+    <string name="home_held_back_title">Une source de correctifs a fait planter Morphe</string>
+    <string name="home_held_back_subtitle">Elle a été ignorée pour que l\'application puisse démarrer. Appuyez pour consulter</string>
     <string name="home_metered_skipped_title">Mises à jour suspendues sur les données mobiles</string>
     <string name="home_metered_skipped_subtitle">Appuyez pour autoriser les mises à jour via les données mobiles</string>
     <string name="home_repatch_available_subtitle">Appuyez pour toutes les mettre dans la file d\'attente</string>
@@ -150,6 +152,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">Le bundle de patchs n\'a pas pu être téléchargé. L\'URL de la source est peut-être incorrecte ou le fichier n\'existe pas</string>
     <string name="sources_management_outdated_manager_badge">Mettre à jour Morphe</string>
     <string name="sources_management_outdated_manager_hint">Cette source est conçue pour le patcheur %1$s, mais Morphe %2$s inclut le patcher %3$s. Mettez Morphe à jour pour l\'utiliser</string>
+    <string name="sources_management_held_back_badge">A planté</string>
+    <string name="sources_management_held_back_hint">Cette source a fait planter Morphe pendant le chargement. Elle est donc ignorée. Mettez-la à jour ou réimportez-la pour réessayer</string>
     <string name="sources_management_source_enabled">Source activée</string>
     <string name="sources_management_source_disabled">Source désactivée</string>
     <string name="sources_management_source_updating">Mise à jour de la source</string>
@@ -903,7 +907,6 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="settings_prompt_installer_on_install">Invite de sélection de l\'installateur</string>
     <string name="settings_prompt_installer_on_install_description">Affiche la boîte de dialogue de sélection de l\'installateur à chaque installation d\'une application patchée</string>
     <string name="settings_auto_install_with_shizuku">Installer automatiquement après le patching</string>
-    <string name="settings_auto_install_with_shizuku_description">Installe silencieusement l\'APK patché dès que le patching est terminé</string>
     <string name="settings_auto_uninstall_with_shizuku">Désinstallation automatique en cas de conflit</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Lors de l\'installation automatique avec Shizuku, désinstaller d\'abord l\'application existante si Android signale un conflit de signature. Cela peut supprimer les données de l\'application</string>
     <string name="settings_auto_uninstall_warning_title">Activer la désinstallation automatique ?</string>

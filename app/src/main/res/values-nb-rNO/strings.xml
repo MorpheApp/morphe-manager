@@ -898,7 +898,6 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install">Installeringsvalg-melding</string>
     <string name="settings_prompt_installer_on_install_description">Viser installasjonsvalgdialogen hver gang en patchet app installeres</string>
     <string name="settings_auto_install_with_shizuku">Automatisk installasjon etter patching</string>
-    <string name="settings_auto_install_with_shizuku_description">Installerer APK-en stille og rolig så snart patching er fullført</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatisk avinstallasjon ved konflikt</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Når du installerer automatisk med Shizuku, avinstaller den eksisterende appen først hvis Android rapporterer en signaturkonflikt. Dette kan fjerne appdata</string>
     <string name="settings_auto_uninstall_warning_title">Aktiver automatisk avinstallasjon?</string>

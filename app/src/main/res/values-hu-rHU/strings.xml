@@ -27,6 +27,7 @@
     <string name="home_metadata_errors_subtitle">Koppints a források áttekintéséhez</string>
     <string name="home_outdated_manager_title">A Morphe elavult</string>
     <string name="home_outdated_manager_subtitle">Néhány módosítási forráshoz újabb verzió szükséges</string>
+    <string name="home_held_back_title">Egy patch-forrás miatt összeomlott a Morphe.</string>
     <string name="home_metered_skipped_title">A frissítések szünetelnek mobiladáton</string>
     <string name="home_metered_skipped_subtitle">Érintse meg a frissítések engedélyezéséhez mobiladatokon keresztül</string>
     <string name="home_repatch_available_subtitle">Koppintson az összes sorba állításához</string>
@@ -897,7 +898,6 @@ A képek méreteinek a következőknek kell lennie:
     <string name="settings_prompt_installer_on_install">Telepítőválasztó ablak</string>
     <string name="settings_prompt_installer_on_install_description">Telepítőválasztó ablak megjelenítése minden alkalommal, amikor módosított alkalmazást telepítesz.</string>
     <string name="settings_auto_install_with_shizuku">Automatikus telepítés a javítás után</string>
-    <string name="settings_auto_install_with_shizuku_description">A javított APK automatikusan települ, amint a javítás befejeződik</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatikus eltávolítás ütközés esetén</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Az automatikus telepítés során a Shizukuval először eltávolítsa a meglévő alkalmazást, ha az Android aláírási konfliktát jelent. Ez eltávolíthatja az alkalmazás adatait.</string>
     <string name="settings_auto_uninstall_warning_title">Engedélyezze az automatikus eltávolítást?</string>

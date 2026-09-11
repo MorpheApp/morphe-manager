@@ -898,7 +898,6 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install">درخواست انتخاب نصب‌کننده</string>
     <string name="settings_prompt_installer_on_install_description">هر بار که برنامهٔ پچ‌شده نصب می‌شود، گفت‌وگوی انتخاب نصب‌کننده را نشان می‌دهد</string>
     <string name="settings_auto_install_with_shizuku">نصب خودکار پس از پچ‌کردن</string>
-    <string name="settings_auto_install_with_shizuku_description">به‌محض پایان پچ‌کردن، APK پچ‌شده را بی‌صدا نصب می‌کند</string>
     <string name="settings_auto_uninstall_with_shizuku">حذف خودکار هنگام تداخل</string>
     <string name="settings_auto_uninstall_with_shizuku_description">هنگام نصب خودکار با Shizuku، اگر Android تداخل امضا گزارش کند، ابتدا برنامهٔ موجود را حذف می‌کند. این کار ممکن است داده‌های برنامه را پاک کند</string>
     <string name="settings_auto_uninstall_warning_title">حذف خودکار فعال شود؟</string>

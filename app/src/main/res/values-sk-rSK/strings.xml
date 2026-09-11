@@ -898,7 +898,6 @@ Rozmery obrázka musia byť nasledovné:
     <string name="settings_prompt_installer_on_install">Výber inštalátora</string>
     <string name="settings_prompt_installer_on_install_description">Zobraziť výber inštalátora pri každej inštalácii zaplátanej aplikácie</string>
     <string name="settings_auto_install_with_shizuku">Automatická inštalácia po záplatovaní</string>
-    <string name="settings_auto_install_with_shizuku_description">Automaticky nainštaluje záplatovaný APK ihneď po dokončení záplatovania</string>
     <string name="settings_auto_uninstall_with_shizuku">Automaticky odinštalovať v prípade konfliktu</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Pri automatickej inštalácii pomocou Shizuku najprv odinštalujte existujúcu aplikáciu, ak Android nahlási konflikt podpisu. Týmto sa môžu odstrániť údaje aplikácie</string>
     <string name="settings_auto_uninstall_warning_title">Povoliť automatické odinštalovanie?</string>

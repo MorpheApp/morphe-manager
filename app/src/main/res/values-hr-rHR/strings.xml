@@ -27,6 +27,7 @@
     <string name="home_metadata_errors_subtitle">Dodirnite za pregled izvora</string>
     <string name="home_outdated_manager_title">Morphe je zastario</string>
     <string name="home_outdated_manager_subtitle">Neki izvori patcha trebaju noviju verziju</string>
+    <string name="home_held_back_title">Izvor zakrpa je srušio Morphe</string>
     <string name="home_metered_skipped_title">Ažuriranja su pauzirana putem mobilnih podataka</string>
     <string name="home_metered_skipped_subtitle">Dodirnite za dopuštanje ažuriranja putem mobilnih podataka</string>
     <string name="home_repatch_available_subtitle">Dodirnite da biste ih sve postavili u red čekanja</string>
@@ -901,7 +902,6 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_prompt_installer_on_install">Izbor instalatora</string>
     <string name="settings_prompt_installer_on_install_description">Prikazuje dijaloške okvire za odabir instalacijskog programa svaki put kada je patchana aplikacija instalirana</string>
     <string name="settings_auto_install_with_shizuku">Automatska instalacija nakon \"patchanja\"</string>
-    <string name="settings_auto_install_with_shizuku_description">Tiho instalira patchanu APK odmah nakon dovršetka patchanja</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatska deinstalacija u slučaju sukoba</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Prilikom automatske instalacije sa Shizukuom, prvo deinstalirajte postojeću aplikaciju ako Android prijavi sukob potpisa. To može ukloniti podatke aplikacije.</string>
     <string name="settings_auto_uninstall_warning_title">Omogućiti automatsku deinstalaciju?</string>

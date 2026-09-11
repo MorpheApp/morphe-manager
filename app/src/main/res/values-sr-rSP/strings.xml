@@ -898,7 +898,6 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install">Упит за избор инсталатера</string>
     <string name="settings_prompt_installer_on_install_description">Приказује дијалог за избор инсталатера сваки пут када се инсталира закрпљена апликација</string>
     <string name="settings_auto_install_with_shizuku">Аутоматска инсталација након закрпе</string>
-    <string name="settings_auto_install_with_shizuku_description">Тихо инсталира закрпљени APK чим је закрпљивање завршено</string>
     <string name="settings_auto_uninstall_with_shizuku">Аутоматско деинсталирање у случају конфликта</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Када се аутоматски инсталира преко Shizuku-а, прво деинсталирајте постојећу апликацију ако Android извештава о конфликту потписа. Ово може уклонити податке апликације.</string>
     <string name="settings_auto_uninstall_warning_title">Омогућите аутоматско деинсталирање?</string>

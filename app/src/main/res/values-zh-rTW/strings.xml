@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">點擊以檢視來源</string>
     <string name="home_outdated_manager_title">Morphe 要更新</string>
     <string name="home_outdated_manager_subtitle">有些修補來源需要較新的版本</string>
+    <string name="home_held_back_title">\??</string>
+    <string name="home_held_back_subtitle">該項目已略過，以便應用程式能啟動。點按以檢視</string>
     <string name="home_metered_skipped_title">已暫停行動數據上的更新</string>
     <string name="home_metered_skipped_subtitle">點擊以允許在行動數據上更新</string>
     <string name="home_repatch_available_subtitle">點擊以將其全部加入佇列</string>
@@ -149,6 +151,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">無法下載修補套件。來源 URL 可能不正確，或檔案不存在</string>
     <string name="sources_management_outdated_manager_badge">更新 Morphe</string>
     <string name="sources_management_outdated_manager_hint">这个源来股如踪户 %1$s。例如 Morphe %2$s包含踪户 %3$s。更新 Morphe對可使用</string>
+    <string name="sources_management_held_back_badge">已當機</string>
+    <string name="sources_management_held_back_hint">此來源在載入時導致 Morphe 當機，因此已被略過。請更新或重新匯入再試一次。</string>
     <string name="sources_management_source_enabled">來源已啟用</string>
     <string name="sources_management_source_disabled">來源已停用</string>
     <string name="sources_management_source_updating">正在更新來源…</string>
@@ -897,7 +901,6 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install">安裝程式選擇提示</string>
     <string name="settings_prompt_installer_on_install_description">每次安裝修補後的應用程式時顯示安裝程式選取對話方塊</string>
     <string name="settings_auto_install_with_shizuku">修補完成後自動安裝</string>
-    <string name="settings_auto_install_with_shizuku_description">修補完成後會立即自動安裝 APK</string>
     <string name="settings_auto_uninstall_with_shizuku">衝突時自動解除安裝</string>
     <string name="settings_auto_uninstall_with_shizuku_description">使用 Shizuku 自動安裝時，若 Android 回報簽名衝突，則先解除安裝現有的應用程式。這可能會刪除應用程式資料</string>
     <string name="settings_auto_uninstall_warning_title">要啟用自動解除安裝嗎？</string>

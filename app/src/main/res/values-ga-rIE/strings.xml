@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">Tapáil chun foinsí a athbhreithniú</string>
     <string name="home_outdated_manager_title">Tá Morphe as dáta</string>
     <string name="home_outdated_manager_subtitle">Teastaíonn leagan níos nuaí ó roinnt foinsí paiste</string>
+    <string name="home_held_back_title">Thuar foinse paiste Morphe</string>
+    <string name="home_held_back_subtitle">Léiríodh é ionas go bhféadfaí an aip a thosú. Tapáil chun athbhreithniú a dhéanamh</string>
     <string name="home_metered_skipped_title">Nuashonruithe curtha ar sos ar shonraí soghluaiste</string>
     <string name="home_metered_skipped_subtitle">Tapáil chun nuashonruithe ar shonraí soghluaiste a cheadú</string>
     <string name="home_repatch_available_subtitle">Tapáil chun iad uile a chur i scuaine</string>
@@ -149,6 +151,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">Níorbh fhéidir an pacáiste paiste a íoslódáil. B’fhéidir go bhfuil an URL foinse mícheart nó nach bhfuil an comhad ann.</string>
     <string name="sources_management_outdated_manager_badge">Nuashonraigh Morphe</string>
     <string name="sources_management_outdated_manager_hint">Tá an foinse seo tógtha don phaisteoir %1$s, ach tá an paisteoir %3$s san áireamh i Morphe %2$s. Nuashonraigh Morphe chun é a úsáid.</string>
+    <string name="sources_management_held_back_badge">Tuairteála</string>
+    <string name="sources_management_held_back_hint">Bhuail an fhoinse seo le Morphe agus é á luchtú, mar sin tá sé á scipeáil. Nuashonraigh nó athiompórtáil é chun triail eile a bhaint as</string>
     <string name="sources_management_source_enabled">Foinse cumasaithe</string>
     <string name="sources_management_source_disabled">Foinse díchumasaithe</string>
     <string name="sources_management_source_updating">Foinse á nuashonrú</string>
@@ -896,7 +900,6 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings_prompt_installer_on_install">Leid roghnúcháin suiteálaí</string>
     <string name="settings_prompt_installer_on_install_description">Taispeánann sé dialóg roghnúcháin suiteálaí gach uair a shuiteáiltear aip phaisteáilte</string>
     <string name="settings_auto_install_with_shizuku">Suiteáil uathoibríoch tar éis paisteála</string>
-    <string name="settings_auto_install_with_shizuku_description">Suiteálann sé an APK paisteáilte go ciúin a luaithe a bheidh an paisteáil críochnaithe</string>
     <string name="settings_auto_uninstall_with_shizuku">Díshuiteáil uathoibríoch i gcás coimhlinte</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Agus suiteáil uathoibríoch á déanamh le Shizuku, díshuiteáil an aip atá ann cheana féin ar dtús má thuairiscíonn Android coimhlint sínithe. Is féidir leis seo sonraí an aip a bhaint.</string>
     <string name="settings_auto_uninstall_warning_title">Cumasaigh díshuiteáil uathoibríoch?</string>

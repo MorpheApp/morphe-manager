@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">Dotknij, aby przejrzeć źródła</string>
     <string name="home_outdated_manager_title">Morphe jest nieaktualny</string>
     <string name="home_outdated_manager_subtitle">Niektóre źródła modyfikacji wymagają nowszej wersji</string>
+    <string name="home_held_back_title">Źródło modyfikacji spowodowało awarię Morphe</string>
+    <string name="home_held_back_subtitle">Zostało pominięte, aby aplikacja mogła się uruchomić. Dotknij, aby sprawdzić</string>
     <string name="home_metered_skipped_title">Aktualizacje wstrzymane na danych mobilnych</string>
     <string name="home_metered_skipped_subtitle">Dotknij, aby zezwolić na aktualizacje przez dane mobilne</string>
     <string name="home_repatch_available_subtitle">Dotknij, aby zakolejkować wszystkie</string>
@@ -150,6 +152,8 @@
     <string name="sources_management_outdated_manager_badge">Zaktualizuj Morphe</string>
     <string name="sources_management_outdated_manager_hint">To źródło zostało przygotowane dla modyfikatora %1$s, ale Morphe %2$s zawiera modyfikator %3$s. Zaktualizuj Morphe, aby go użyć
 </string>
+    <string name="sources_management_held_back_badge">Awaria</string>
+    <string name="sources_management_held_back_hint">To źródło spowodowało awarię Morphe podczas wczytywania, dlatego jest pomijane. Zaktualizuj lub zaimportuj je ponownie, aby spróbować jeszcze raz</string>
     <string name="sources_management_source_enabled">Źródło włączone</string>
     <string name="sources_management_source_disabled">Źródło wyłączone</string>
     <string name="sources_management_source_updating">Aktualizowanie źródła</string>
@@ -899,7 +903,6 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_prompt_installer_on_install">Monit o wybór instalatora</string>
     <string name="settings_prompt_installer_on_install_description">Wyświetla okno wyboru instalatora przy każdej instalacji zmodyfikowanej aplikacji</string>
     <string name="settings_auto_install_with_shizuku">Autoinstalacja po modyfikacji</string>
-    <string name="settings_auto_install_with_shizuku_description">Automatycznie instaluje plik APK po zakończeniu modyfikacji</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatyczne usuwanie przy konflikcie</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Podczas automatycznej instalacji przez Shizuku, najpierw odinstaluj istniejącą aplikację, jeśli Android zgłosi konflikt podpisów. Może to usunąć dane aplikacji</string>
     <string name="settings_auto_uninstall_warning_title">Włączyć automatyczne usuwanie?</string>

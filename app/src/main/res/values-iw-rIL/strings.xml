@@ -909,7 +909,6 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="settings_prompt_installer_on_install">בקשת בחירת מתקין</string>
     <string name="settings_prompt_installer_on_install_description">מציג תיבת דו-שיח לבחירת המתקין בכל פעם שאפליקציה מתוקנת מותקנת</string>
     <string name="settings_auto_install_with_shizuku">התקנה אוטומטית לאחר תיקון</string>
-    <string name="settings_auto_install_with_shizuku_description">מתקין בשקט את קובץ ה-APK המתוקן ברגע שהתיקון הושלם</string>
     <string name="settings_auto_uninstall_with_shizuku">הסרה אוטומטית במקרה של התנגשות</string>
     <string name="settings_auto_uninstall_with_shizuku_description">בעת התקנה אוטומטית עם Shizuku, הסר את האפליקציה הקיימת תחילה אם Android מדווח על התנגשות חתימות. פעולה זו עשויה להסיר נתוני אפליקציה</string>
     <string name="settings_auto_uninstall_warning_title">הפעל הסרה אוטומטית?</string>

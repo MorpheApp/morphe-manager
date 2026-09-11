@@ -896,7 +896,6 @@ Bildernas mått ska vara följande:
     <string name="settings_prompt_installer_on_install">Uppmaning om val av installerare</string>
     <string name="settings_prompt_installer_on_install_description">Visar en dialogruta för att välja en installerare varje gång en modifierad app installeras</string>
     <string name="settings_auto_install_with_shizuku">Installera automatiskt efter modifiering</string>
-    <string name="settings_auto_install_with_shizuku_description">Installerar den modifierade APK-filen tyst så snart modifieringen är klar</string>
     <string name="settings_auto_uninstall_with_shizuku">Avinstallera automatiskt vid konflikt</string>
     <string name="settings_auto_uninstall_with_shizuku_description">När du installerar automatiskt med Shizuku avinstallerar du den befintliga appen först om Android rapporterar en signaturkonflikt. Det här kan ta bort appdata</string>
     <string name="settings_auto_uninstall_warning_title">Aktivera automatisk avinstallation?</string>

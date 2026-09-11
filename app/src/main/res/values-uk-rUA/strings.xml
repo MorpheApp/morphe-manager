@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">Натисніть, щоб переглянути джерела</string>
     <string name="home_outdated_manager_title">Morphe застарів</string>
     <string name="home_outdated_manager_subtitle">Деякі джерела патчів потребують новішої версії</string>
+    <string name="home_held_back_title">Джерело патчів спричинило збій Morphe</string>
+    <string name="home_held_back_subtitle">Було пропущено, щоб застосунок міг запуститися. Натисніть для перегляду</string>
     <string name="home_metered_skipped_title">Оновлення призупинено в мобільній мережі</string>
     <string name="home_metered_skipped_subtitle">Натисніть, щоб дозволити оновлення в мобільній мережі</string>
     <string name="home_repatch_available_subtitle">Натисніть, щоб додати їх усі в чергу</string>
@@ -149,6 +151,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">Не вдалося завантажити пакет патчів. Можливо, URL-адреса джерела неправильна або файл не існує</string>
     <string name="sources_management_outdated_manager_badge">Оновити Morphe</string>
     <string name="sources_management_outdated_manager_hint">Це джерело створено для патчера %1$s, але Morphe %2$s містить патчер %3$s. Оновіть Morphe, щоб використовувати його</string>
+    <string name="sources_management_held_back_badge">Збій</string>
+    <string name="sources_management_held_back_hint">Це джерело спричинило збій Morphe під час завантаження, тому воно пропускається. Оновіть або повторно імпортуйте його, щоб спробувати знову</string>
     <string name="sources_management_source_enabled">Джерело увімкнено</string>
     <string name="sources_management_source_disabled">Джерело вимкнено</string>
     <string name="sources_management_source_updating">Оновлення джерела</string>
@@ -683,8 +687,8 @@
     <string name="settings_appearance_app_grouping">Групування застосунків</string>
     <string name="settings_appearance_app_grouping_description">Показує перемикач на головному екрані для групування застосунків за джерелом або власними категоріями, зберігаючи вибір при вимкненні</string>
     <string name="settings_appearance_patch_list">Список патчів</string>
-    <string name="settings_appearance_patch_categories">Групувати за категоріями</string>
-    <string name="settings_appearance_patch_categories_description">Розділяє списки патчів за категоріями, які оголошує джерело, а джерела, які не оголошують жодної, залишає звичайним списком</string>
+    <string name="settings_appearance_patch_categories">Групувати за категорією</string>
+    <string name="settings_appearance_patch_categories_description">Розділяти списки патчів на секції за категоріями, оголошеними джерелом, залишаючи джерела без категорій у вигляді звичайного списку</string>
     <string name="settings_appearance_repatch_notice">Сповіщення про перепатчинг</string>
     <string name="settings_appearance_repatch_notice_description">Показувати банер на головному екрані, коли пропатчені застосунки можна перепатчити</string>
     <string name="settings_appearance_sort_button">Кнопка сортування та фільтрування</string>
@@ -882,6 +886,8 @@ morphe_header_custom_dark.png
     <string name="installer_action_open_shizuku">Відкрити Shizuku</string>
     <string name="installer_hint_generic">Не вдалося встановити. Спробуйте ще раз або перемкніть на інший інсталятор</string>
     <string name="installer_hint_conflict">Інший застосунок із цим іменем пакета вже встановлений. Видаліть його, перш ніж продовжити</string>
+    <string name="installer_confirm_notification_title">Підтвердьте встановлення</string>
+    <string name="installer_confirm_notification_text">Натисніть, щоб завершити встановлення пропатченого застосунку</string>
     <string name="installer_external_launched">Відкривається %s…</string>
     <string name="installer_external_timeout">%s не підтвердив встановлення. Перевірте інший застосунок і спробуйте знову</string>
     <string name="installer_external_success">%s повідомив про успішне встановлення</string>
@@ -898,7 +904,7 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install">Запит на вибір інсталятора</string>
     <string name="settings_prompt_installer_on_install_description">Показує діалог вибору інсталятора щоразу при встановленні патченого застосунку</string>
     <string name="settings_auto_install_with_shizuku">Автоматична інсталяція після патчингу</string>
-    <string name="settings_auto_install_with_shizuku_description">Автоматично встановлює пропатчений APK одразу після завершення патчингу</string>
+    <string name="settings_auto_install_with_shizuku_description">Встановлює пропатчений APK одразу після завершення патчингу</string>
     <string name="settings_auto_uninstall_with_shizuku">Автоматичне видалення при конфлікті</string>
     <string name="settings_auto_uninstall_with_shizuku_description">При автоматичному встановленні через Shizuku спочатку видаляти наявний застосунок, якщо Android повідомляє про конфлікт підпису. Це може видалити дані застосунку</string>
     <string name="settings_auto_uninstall_warning_title">Увімкнути автоматичне видалення?</string>

@@ -896,7 +896,6 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_prompt_installer_on_install">Yükleyici seçimi istemi</string>
     <string name="settings_prompt_installer_on_install_description">Yamalanmış bir uygulama her yüklendiğinde yükleyici seçim penceresini gösterir</string>
     <string name="settings_auto_install_with_shizuku">Yamalama sonrası otomatik yükle</string>
-    <string name="settings_auto_install_with_shizuku_description">Yamalama tamamlanır tamamlanmaz yamalanmış APK\'yi sessizce yükler</string>
     <string name="settings_auto_uninstall_with_shizuku">Çakışma durumunda otomatik olarak kaldır</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Shizuku ile otomatik yükleme yaparken, Android bir imza çakışması bildirirse mevcut uygulamayı önce kaldırın. Bu, uygulama verilerini kaldırabilir.</string>
     <string name="settings_auto_uninstall_warning_title">Otomatik kaldırmayı etkinleştir?</string>

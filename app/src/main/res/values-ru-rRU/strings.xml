@@ -896,7 +896,6 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install">Окно выбора установщика</string>
     <string name="settings_prompt_installer_on_install_description">Показывать диалоговое окно выбора установщика каждый раз, когда вы устанавливаете патченное приложение</string>
     <string name="settings_auto_install_with_shizuku">Автоматическая установка после патча</string>
-    <string name="settings_auto_install_with_shizuku_description">Бесшумно устанавливает пропатченный APK сразу после завершения патчинга</string>
     <string name="settings_auto_uninstall_with_shizuku">Автоматически удалять при конфликте</string>
     <string name="settings_auto_uninstall_with_shizuku_description">При автоматической установке с помощью Shizuku сначала удалите существующее приложение, если Android сообщает о конфликте подписей. Это может удалить данные приложения.</string>
     <string name="settings_auto_uninstall_warning_title">Включить автоматическое удаление?</string>

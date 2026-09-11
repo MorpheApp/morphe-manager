@@ -903,7 +903,6 @@ Kết quả thực tế có thể khác nhau tùy theo phiên bản Android, ROM
     <string name="settings_prompt_installer_on_install">Hỏi chọn trình cài đặt</string>
     <string name="settings_prompt_installer_on_install_description">Luôn hiện hộp thoại chọn trình cài đặt khi cài ứng dụng đã vá</string>
     <string name="settings_auto_install_with_shizuku">Tự động cài đặt sau khi vá</string>
-    <string name="settings_auto_install_with_shizuku_description">Tự động cài đặt APK đã vá ngay sau khi quá trình vá hoàn tất</string>
     <string name="settings_auto_uninstall_with_shizuku">Tự động gỡ cài đặt khi có xung đột</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Khi tự động cài đặt bằng Shizuku, ứng dụng hiện có sẽ được gỡ ra trước nếu Android phát hiện xung đột chữ ký. Thao tác này có thể làm mất dữ liệu ứng dụng</string>
     <string name="settings_auto_uninstall_warning_title">Bật tính năng gỡ cài đặt tự động?</string>

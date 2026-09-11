@@ -898,7 +898,6 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_prompt_installer_on_install">Keuze van installer</string>
     <string name="settings_prompt_installer_on_install_description">Toont het dialoogvenster voor het selecteren van de installer bij elke geïnstalleerde gepatchte app</string>
     <string name="settings_auto_install_with_shizuku">Automatisch installeren na patchen</string>
-    <string name="settings_auto_install_with_shizuku_description">Installeert de gepatchte APK stilzwijgend zodra het patchen is voltooid</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatisch verwijderen bij conflicten</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Wanneer automatisch installeren met Shizuku, verwijder eerst de bestaande app als Android een signature conflict meldt. Dit kan app-gegevens verwijderen.</string>
     <string name="settings_auto_uninstall_warning_title">Automatisch verwijderen inschakelen?</string>

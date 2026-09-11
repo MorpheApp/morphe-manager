@@ -898,7 +898,6 @@ Dimenzije slike morajo biti naslednje:
     <string name="settings_prompt_installer_on_install">Poziv izbire namestitvenega programa</string>
     <string name="settings_prompt_installer_on_install_description">Prikaže pogovorno okno za izbiro namestitvenega programa vsakokrat, ko je nameščena popravljena aplikacija</string>
     <string name="settings_auto_install_with_shizuku">Samodejna namestitev po popravku</string>
-    <string name="settings_auto_install_with_shizuku_description">Tiho namesti popravljeni APK takoj po končanem popravljanju</string>
     <string name="settings_auto_uninstall_with_shizuku">Samodejno odstranitev ob konfliktu</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Pri samodejni namestitvi s Shizuku najprej odstranite obstoječo aplikacijo, če Android poroča o konfliktu podpisov. To lahko odstrani podatke aplikacije.</string>
     <string name="settings_auto_uninstall_warning_title">Omogoči samodejno odstranitev?</string>

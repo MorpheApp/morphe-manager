@@ -882,7 +882,6 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="settings_prompt_installer_on_install">Prompt za izbor instalera</string>
     <string name="settings_prompt_installer_on_install_description">Prikazuje dijalog za izbor instalera svaki put kada se instalira patchovana aplikacija</string>
     <string name="settings_auto_install_with_shizuku">Automatska instalacija nakon zakrpljivanja</string>
-    <string name="settings_auto_install_with_shizuku_description">Tiho instalira zakrpljeni APK čim se zakrpljivanje završi</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatska deinstalacija u slučaju konflikta</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Kada se automatski instalira sa Shizuku, prvo deinstaliraj postojeću aplikaciju ako Android prijavljuje konflikt potpisa. Ovo može ukloniti podatke aplikacije</string>
     <string name="settings_auto_uninstall_warning_title">Omogući automatsku deinstalaciju?</string>

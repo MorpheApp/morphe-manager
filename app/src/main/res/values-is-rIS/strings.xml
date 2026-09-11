@@ -893,7 +893,6 @@ Myndastærðin verður að vera sem hér segir:
     <string name="settings_prompt_installer_on_install">Bestaður heimildurum í hverjum breyttu app installu</string>
     <string name="settings_prompt_installer_on_install_description">Mælt er með því að nota heimildir sem þú treystir</string>
     <string name="settings_auto_install_with_shizuku">Sjálfvirkt uppsetning eftir breytingar</string>
-    <string name="settings_auto_install_with_shizuku_description">Setur upp breytta APK sjálfkrafa strax þegar breytingum er lokið</string>
     <string name="settings_auto_uninstall_with_shizuku">Sjálfvirk upphæfing við átök</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Þegar sjálfvirkt uppsetning er í gangi með Shizuku, afhæfðu fyrst núverandi appið ef Android tilkynnir um signature átök. Þetta getur fjarlægt app gögn.</string>
     <string name="settings_auto_uninstall_warning_title">Vilkja þú að virkja sjálfvirka upphæfingu?</string>

@@ -898,7 +898,6 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install">安装程序选择提示</string>
     <string name="settings_prompt_installer_on_install_description">每次安装已修补的应用时，都会显示安装程序选择对话框</string>
     <string name="settings_auto_install_with_shizuku">补丁应用后自动安装</string>
-    <string name="settings_auto_install_with_shizuku_description">在补丁完成安装后，静默安装补丁后的 APK</string>
     <string name="settings_auto_uninstall_with_shizuku">冲突时自动卸载</string>
     <string name="settings_auto_uninstall_with_shizuku_description">使用 Shizuku 自动安装时，如果 Android 报告签名冲突，则先卸载现有的应用。这可能会删除应用数据</string>
     <string name="settings_auto_uninstall_warning_title">启用自动卸载？</string>

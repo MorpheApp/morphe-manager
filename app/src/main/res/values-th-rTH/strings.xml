@@ -898,7 +898,6 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install">แจ้งเตือนการเลือกตัวติดตั้ง</string>
     <string name="settings_prompt_installer_on_install_description">แสดงกล่องโต้ตอบการเลือกตัวติดตั้งทุกครั้งที่มีการติดตั้งแอปที่แพตช์แล้ว</string>
     <string name="settings_auto_install_with_shizuku">ติดตั้งอัตโนมัติหลังจากการแพตช์</string>
-    <string name="settings_auto_install_with_shizuku_description">ติดตั้ง APK ที่ผ่านการแพตช์โดยอัตโนมัติเมื่อการแพตช์เสร็จสิ้น</string>
     <string name="settings_auto_uninstall_with_shizuku">ถอนการติดตั้งอัตโนมัติเมื่อเกิดข้อขัดแย้ง</string>
     <string name="settings_auto_uninstall_with_shizuku_description">เมื่อติดตั้งอัตโนมัติด้วย Shizuku ให้ถอนการติดตั้งแอปที่มีอยู่ก่อนหาก Android รายงานว่ามีข้อขัดแย้งของลายเซ็น ซึ่งอาจลบข้อมูลแอปได้</string>
     <string name="settings_auto_uninstall_warning_title">เปิดใช้งานการถอนการติดตั้งอัตโนมัติหรือไม่</string>

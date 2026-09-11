@@ -899,7 +899,6 @@ Dimensi gambar harus sebagai berikut:
     <string name="settings_prompt_installer_on_install">Permintaan pemilihan pemasang</string>
     <string name="settings_prompt_installer_on_install_description">Menampilkan dialog pemilihan pemasang setiap kali Anda memasang aplikasi yang ditambal</string>
     <string name="settings_auto_install_with_shizuku">Pasang otomatis setelah menambal</string>
-    <string name="settings_auto_install_with_shizuku_description">Secara senyap memasang APK yang telah ditambal segera setelah proses penambalan selesai</string>
     <string name="settings_auto_uninstall_with_shizuku">Hapus pemasangan otomatis jika terjadi konflik</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Saat memasang otomatis dengan Shizuku, hapus aplikasi yang ada terlebih dahulu jika Android melaporkan konflik tanda tangan. Ini dapat menghapus data aplikasi</string>
     <string name="settings_auto_uninstall_warning_title">Aktifkan penghapusan pemasangan otomatis?</string>

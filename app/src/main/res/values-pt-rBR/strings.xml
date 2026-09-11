@@ -899,7 +899,6 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_prompt_installer_on_install">Prompt de seleção do instalador</string>
     <string name="settings_prompt_installer_on_install_description">Smotra a caixa de seleção de instalador toda vez que um aplicativo com patch for instalado</string>
     <string name="settings_auto_install_with_shizuku">Instalação automática após a aplicação do patch</string>
-    <string name="settings_auto_install_with_shizuku_description">Instala silenciosamente o APK patcheado assim que a aplicação de patches for concluída</string>
     <string name="settings_auto_uninstall_with_shizuku">Desinstalação automática em caso de conflito</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Ao instalar automaticamente com o Shizuku, desinstale o app existente primeiro se o Android relatar um conflito de assinatura. Isso pode remover dados do app.</string>
     <string name="settings_auto_uninstall_warning_title">Ativar desinstalação automática?</string>

@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">Tippe, um die Quellen zu überprüfen</string>
     <string name="home_outdated_manager_title">Morphe ist veraltet</string>
     <string name="home_outdated_manager_subtitle">Einige Patch-Quellen benötigen eine neuere Version</string>
+    <string name="home_held_back_title">Eine Patch-Quelle hat Morphe zum Absturz gebracht</string>
+    <string name="home_held_back_subtitle">Es wurde übersprungen, damit die App starten konnte. Zum Überprüfen tippen. \"test\" </string>
     <string name="home_metered_skipped_title">Updates über mobile Daten wurden pausiert</string>
     <string name="home_metered_skipped_subtitle">Tippe, um Updates über mobile Daten zu erlauben</string>
     <string name="home_repatch_available_subtitle">Tippen, um alle in die Warteschlange zu stellen</string>
@@ -898,7 +900,6 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_prompt_installer_on_install">Auswahlaufforderung für den Installer</string>
     <string name="settings_prompt_installer_on_install_description">Zeigt jedes Mal ein Dialogfenster zur Installerauswahl an, wenn eine gepatchte App installiert wird</string>
     <string name="settings_auto_install_with_shizuku">Automatische Installation nach dem Patchen</string>
-    <string name="settings_auto_install_with_shizuku_description">Installiert die gepatchte APK automatisch, sobald das Patchen abgeschlossen ist</string>
     <string name="settings_auto_uninstall_with_shizuku">Bei Konflikten automatisch deinstallieren</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Wenn Sie mit Shizuku automatisch installieren, deinstallieren Sie zuerst die vorhandene App, wenn Android einen Signaturkonflikt meldet. Dies kann App-Daten entfernen.</string>
     <string name="settings_auto_uninstall_warning_title">Automatische Deinstallation aktivieren?</string>

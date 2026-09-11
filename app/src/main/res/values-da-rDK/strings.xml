@@ -896,7 +896,6 @@ Størrelsesformatet skal være som følger:
     <string name="settings_prompt_installer_on_install">Installatørvalgsmeddelelse</string>
     <string name="settings_prompt_installer_on_install_description">Vis installer-valgdialog hver gang du installerer en patchet app</string>
     <string name="settings_auto_install_with_shizuku">Automatisk installation efter patching</string>
-    <string name="settings_auto_install_with_shizuku_description">Installerer automatisk den patched APK, så snart patching er fuldført</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatisk afinstallation ved konflikt</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Når du automatisk installerer med Shizuku, skal du først afinstallere den eksisterende app, hvis Android rapporterer en signaturkonflikt. Dette kan fjerne app-data</string>
     <string name="settings_auto_uninstall_warning_title">Aktiver automatisk afinstallation?</string>
