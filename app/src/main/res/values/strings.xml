@@ -501,7 +501,7 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Device</string>
     <!-- Free and total RAM of the device, never its storage -->
-    <string name="patcher_field_memory">Memory</string>
+    <string name="patcher_field_memory">Pairs</string>
     <string name="patcher_field_storage">Storage</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Output size</string>
@@ -673,6 +673,21 @@ Uninstalling will permanently erase all app data"</string>
     <string name="mini_game_dino" translatable="false">Dino</string>
     <string name="mini_game_dino_picker_subtitle">Tap to jump over cacti</string>
     <string name="mini_game_dino_tap_to_start">Tap to run</string>
+
+    <string name="mini_game_blocks" translatable="false">Blocks</string>
+    <string name="mini_game_blocks_picker_subtitle">Fit the shapes, clear lines</string>
+    <string name="mini_game_blocks_tap_to_start">Tap to rotate, swipe to move\nSwipe down to drop</string>
+
+    <string name="mini_game_bricks" translatable="false">Bricks</string>
+    <string name="mini_game_bricks_picker_subtitle">Bounce the ball, clear the wall</string>
+    <string name="mini_game_bricks_tap_to_start">Drag to aim, tap to launch</string>
+
+    <string name="mini_game_miner" translatable="false">Miner</string>
+    <string name="mini_game_miner_picker_subtitle">Tap to open, hold to flag</string>
+    <string name="mini_game_miner_flags" translatable="false">%1$s/%2$s</string>
+
+    <string name="mini_game_pairs" translatable="false">Pairs</string>
+    <string name="mini_game_pairs_picker_subtitle">Flip cards, find the match</string>
 
     <!-- Settings -->
     <string name="appearance">Appearance</string>
