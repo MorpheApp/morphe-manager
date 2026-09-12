@@ -426,11 +426,15 @@ class PatcherWorker(
                     onRestart
                 )
             } catch (e: Exception) {
-                if (!useProcessRuntime || Build.VERSION.SDK_INT > Build.VERSION_CODES.Q || !isOomRelated(e)) {
-                    throw e
-                }
+                val fallbackReason = when {
+                    !useProcessRuntime -> null
+                    isBlockedSyscall(e) -> "Patcher process was killed for a system call the device forbids"
+                    isOomRelated(e) && Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q ->
+                        "Process runtime OOM on Android ${Build.VERSION.RELEASE}"
+                    else -> null
+                } ?: throw e
 
-                args.logger.warn("Process runtime OOM on Android ${Build.VERSION.RELEASE}, falling back to coroutine runtime")
+                args.logger.warn("$fallbackReason, falling back to coroutine runtime")
 
                 // The fallback is a fresh run of the whole pipeline, same as a memory retry
                 onRestart()
@@ -532,6 +536,14 @@ class PatcherWorker(
             )
         }
     }
+
+    /**
+     * Whether seccomp killed the patcher process. Firmware can load a vendor library from a
+     * framework class initializer, which only runs where the zygote did not get there first,
+     * so the same run survives in the app's own process.
+     */
+    private fun isBlockedSyscall(e: Exception) =
+        e is ProcessRuntime.ProcessExitException && e.exitCode == ProcessRuntime.SIGSYS_EXIT_CODE
 
     private fun isOomRelated(e: Exception) = when (e) {
         is ProcessRuntime.ProcessExitException ->
