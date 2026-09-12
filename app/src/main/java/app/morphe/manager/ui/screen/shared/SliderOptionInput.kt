@@ -14,8 +14,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.RangeSlider
+import androidx.compose.material3.RangeSliderState
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.SliderState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -103,8 +105,17 @@ fun SliderOptionInput(
             )
         }
     ) {
+        val sliderState = remember(min, max, step) {
+            SliderState(
+                value = position,
+                steps = tickCount(min, max, step),
+                trackRange = min..max
+            )
+        }
+        // A drag stays on the finger, every other source of a value glides in
+        sliderState.value = if (dragging) position else glidingPosition
         Slider(
-            value = if (dragging) position else glidingPosition,
+            state = sliderState,
             onValueChange = { raw ->
                 dragging = true
                 val snapped = snapSliderValue(raw, min, max, step)
@@ -117,8 +128,6 @@ fun SliderOptionInput(
                 dragging = false
                 onValueChange(position)
             },
-            valueRange = min..max,
-            steps = tickCount(min, max, step),
             colors = SliderDefaults.colors(),
             modifier = Modifier.fillMaxWidth()
         )
@@ -215,8 +224,19 @@ fun RangeSliderOptionInput(
             }
         }
     ) {
+        val rangeState = remember(min, max, step) {
+            RangeSliderState(
+                startValue = position.start,
+                endValue = position.endInclusive,
+                steps = tickCount(min, max, step),
+                trackRange = min..max
+            )
+        }
+        // Both thumbs are driven by `position`, which the text inputs and the caller also move
+        rangeState.startValue = position.start
+        rangeState.endValue = position.endInclusive
         RangeSlider(
-            value = position,
+            state = rangeState,
             onValueChange = { raw ->
                 dragging = true
                 val snapped = snapSliderRange(raw, min, max, step)
@@ -229,8 +249,6 @@ fun RangeSliderOptionInput(
                 dragging = false
                 onValueChange(position)
             },
-            valueRange = min..max,
-            steps = tickCount(min, max, step),
             colors = SliderDefaults.colors(),
             modifier = Modifier.fillMaxWidth()
         )
@@ -282,7 +300,7 @@ private fun SliderOptionFrame(
 
 /**
  * Exact value input for a slider. What is typed is only reported once the field is left or
- * the keyboard action is confirmed, so a half typed number is never clamped away mid keystroke.
+ * the keyboard action is confirmed, so a half typed number is never clamped away mid-keystroke.
  * While the field is not focused it keeps following the thumb.
  */
 @Composable
