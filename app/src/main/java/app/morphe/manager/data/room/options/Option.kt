@@ -4,22 +4,19 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import app.morphe.manager.patcher.patch.Option
+import app.morphe.manager.patcher.patch.coerceOptionValue
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.add
-import kotlinx.serialization.json.boolean
+import kotlinx.serialization.json.booleanOrNull
 import kotlinx.serialization.json.buildJsonArray
-import kotlinx.serialization.json.float
-import kotlinx.serialization.json.int
-import kotlinx.serialization.json.jsonArray
-import kotlinx.serialization.json.jsonPrimitive
-import kotlinx.serialization.json.long
+import kotlinx.serialization.json.doubleOrNull
+import kotlinx.serialization.json.longOrNull
 import kotlin.reflect.KClass
-import kotlin.reflect.KType
-import kotlin.reflect.typeOf
 
 @Entity(
     tableName = "options",
@@ -40,24 +37,13 @@ data class Option(
     @Serializable
     data class SerializedValue(val raw: JsonElement) {
         fun toJsonString() = json.encodeToString(raw)
+
+        /** A stored value outlives its bundle, so it is read back as the type declared today. */
         fun deserializeFor(option: Option<*>): Any? {
             if (raw is JsonNull) return null
 
-            val errorMessage = "Cannot deserialize value as ${option.type}"
-            try {
-                if (option.type.classifier == List::class) {
-                    val elementType = option.type.arguments.first().type!!
-                    return raw.jsonArray.map { deserializeBasicType(elementType, it.jsonPrimitive) }
-                }
-
-                return deserializeBasicType(option.type, raw.jsonPrimitive)
-            } catch (e: IllegalArgumentException) {
-                throw SerializationException(errorMessage, e)
-            } catch (e: IllegalStateException) {
-                throw SerializationException(errorMessage, e)
-            } catch (e: kotlinx.serialization.SerializationException) {
-                throw SerializationException(errorMessage, e)
-            }
+            return coerceOptionValue(option.type, raw.decode())
+                ?: throw SerializationException("Cannot deserialize $raw as ${option.type}")
         }
 
         companion object {
@@ -66,18 +52,14 @@ data class Option(
                 allowSpecialFloatingPointValues = true
             }
 
-            private fun deserializeBasicType(type: KType, value: JsonPrimitive) = when (type) {
-                typeOf<Boolean>() -> value.boolean
-                typeOf<Int>() -> value.int
-                typeOf<Long>() -> value.long
-                typeOf<Float>() -> value.float
-                typeOf<String>() -> value.content.also {
-                    if (!value.isString) throw SerializationException(
-                        "Expected value to be a string: $value"
-                    )
-                }
+            /** The plain value behind a JSON element, or null for one we never store. */
+            private fun JsonElement.decode(): Any? = when (this) {
+                is JsonArray -> map { element -> element.decode() ?: return null }
+                is JsonPrimitive ->
+                    if (isString) content
+                    else booleanOrNull ?: longOrNull ?: doubleOrNull
 
-                else -> throw SerializationException("Unknown type: $type")
+                else -> null
             }
 
             fun fromJsonString(value: String) = SerializedValue(json.decodeFromString(value))
