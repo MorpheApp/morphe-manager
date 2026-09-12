@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">แตะเพื่อตรวจสอบแหล่งที่มา</string>
     <string name="home_outdated_manager_title">Morphe ล้าสมัย</string>
     <string name="home_outdated_manager_subtitle">แหล่งแพตช์บางแหล่งจำเป็นต้องใช้เวอร์ชันที่ใหม่กว่า</string>
+    <string name="home_held_back_title">แหล่งแพตช์หนึ่งทำให้ Morphe เกิดข้อขัดข้อง</string>
+    <string name="home_held_back_subtitle">แหล่งนี้ถูกข้ามไปเพื่อให้แอปเริ่มทำงานได้ แตะเพื่อตรวจสอบ</string>
     <string name="home_metered_skipped_title">การอัปเดตถูกหยุดเมื่อใช้ข้อมูลมือถือ</string>
     <string name="home_metered_skipped_subtitle">แตะเพื่ออนุญาตการอัปเดตผ่านข้อมูลมือถือ</string>
     <string name="home_repatch_available_subtitle">แตะเพื่อจัดคิวทั้งหมด</string>
@@ -149,6 +151,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">ไม่สามารถดาวน์โหลดชุดแพตช์ได้ URL แหล่งที่มาอาจไม่ถูกต้อง หรือไฟล์ไม่มีอยู่</string>
     <string name="sources_management_outdated_manager_badge">อัปเดต Morphe</string>
     <string name="sources_management_outdated_manager_hint">แหล่งที่มานี้สร้างขึ้นสำหรับตัวแพตช์ %1$s แต่ Morphe %2$s มีตัวแพตช์ %3$s อัปเดต Morphe เพื่อใช้งาน</string>
+    <string name="sources_management_held_back_badge">ขัดข้อง</string>
+    <string name="sources_management_held_back_hint">แหล่งนี้ทำให้ Morphe เกิดข้อขัดข้องระหว่างการโหลด จึงถูกข้ามไป อัปเดตหรือนำเข้าแหล่งนี้ใหม่เพื่อลองอีกครั้ง</string>
     <string name="sources_management_source_enabled">แหล่งที่มาเปิดใช้งานแล้ว</string>
     <string name="sources_management_source_disabled">แหล่งที่มาปิดใช้งานแล้ว</string>
     <string name="sources_management_source_updating">กำลังอัปเดตแหล่งที่มา</string>
@@ -478,7 +482,6 @@
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">อุปกรณ์</string>
     <!-- Free and total RAM of the device, never its storage -->
-    <string name="patcher_field_memory">หน่วยความจำ</string>
     <string name="patcher_field_storage">พื้นที่เก็บข้อมูล</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">ขนาดผลลัพธ์</string>
@@ -882,6 +885,8 @@ morphe_header_custom_dark.png
     <string name="installer_action_open_shizuku">เปิด Shizuku</string>
     <string name="installer_hint_generic">การติดตั้งล้มเหลว ลองอีกครั้งหรือเปลี่ยนไปใช้ตัวติดตั้งอื่น</string>
     <string name="installer_hint_conflict">มีแอปที่มีชื่อแพ็คเกจเดียวกันติดตั้งอยู่แล้ว. ลบแอปนั้นก่อนดำเนินการต่อไป</string>
+    <string name="installer_confirm_notification_title">ยืนยันการติดตั้ง</string>
+    <string name="installer_confirm_notification_text">แตะเพื่อเสร็จสิ้นการติดตั้งแอปที่ผ่านการแพตช์</string>
     <string name="installer_external_launched">กำลังเปิด %s…</string>
     <string name="installer_external_timeout">%s ไม่ได้ยืนยันการติดตั้ง โปรดตรวจสอบแอปอื่นและลองอีกครั้ง</string>
     <string name="installer_external_success">%s รายงานว่าการติดตั้งสำเร็จ</string>
@@ -898,6 +903,7 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install">แจ้งเตือนการเลือกตัวติดตั้ง</string>
     <string name="settings_prompt_installer_on_install_description">แสดงกล่องโต้ตอบการเลือกตัวติดตั้งทุกครั้งที่มีการติดตั้งแอปที่แพตช์แล้ว</string>
     <string name="settings_auto_install_with_shizuku">ติดตั้งอัตโนมัติหลังจากการแพตช์</string>
+    <string name="settings_auto_install_with_shizuku_description">ติดตั้ง APK ที่ผ่านการแพตช์ทันทีที่การแพตช์เสร็จสิ้น</string>
     <string name="settings_auto_uninstall_with_shizuku">ถอนการติดตั้งอัตโนมัติเมื่อเกิดข้อขัดแย้ง</string>
     <string name="settings_auto_uninstall_with_shizuku_description">เมื่อติดตั้งอัตโนมัติด้วย Shizuku ให้ถอนการติดตั้งแอปที่มีอยู่ก่อนหาก Android รายงานว่ามีข้อขัดแย้งของลายเซ็น ซึ่งอาจลบข้อมูลแอปได้</string>
     <string name="settings_auto_uninstall_warning_title">เปิดใช้งานการถอนการติดตั้งอัตโนมัติหรือไม่</string>

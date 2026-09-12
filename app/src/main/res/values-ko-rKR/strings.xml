@@ -28,7 +28,7 @@
     <string name="home_outdated_manager_title">Morphe가 구버전입니다</string>
     <string name="home_outdated_manager_subtitle">일부 패치 소스는 최신 버전이 필요합니다</string>
     <string name="home_held_back_title">패치 소스로 인해 Morphe가 충돌함</string>
-    <string name="home_held_back_subtitle">앱이 실행될 수 있도록 해당 소스를 건너뛰었습니다. 검토하려면 탭하세요</string>
+    <string name="home_held_back_subtitle">앱 시작을 위해 건너뛰었습니다. 검토하려면 탭하세요</string>
     <string name="home_metered_skipped_title">모바일 데이터에서 업데이트가 일시 중지됨</string>
     <string name="home_metered_skipped_subtitle">모바일 데이터에서 업데이트를 허용하려면 탭하세요</string>
     <string name="home_repatch_available_subtitle">모두 패치 목록에 추가하려면 탭하세요</string>
@@ -633,6 +633,11 @@
     <string name="mini_game_snake_swipe_to_start">시작하려면 스와이프하세요</string>
     <string name="mini_game_dino_picker_subtitle">탭하여 선인장 뛰어넘기</string>
     <string name="mini_game_dino_tap_to_start">달리려면 탭하세요</string>
+    <string name="mini_game_blocks_picker_subtitle">도형을 맞춰 선을 없애기</string>
+    <string name="mini_game_bricks_picker_subtitle">공을 튕겨 벽을 없애기</string>
+    <string name="mini_game_bricks_tap_to_start">드래그하여 조준하고, 탭하여 발사하기</string>
+    <string name="mini_game_miner_picker_subtitle">탭하여 열고, 길게 눌러 깃발을 표시하기</string>
+    <string name="mini_game_pairs_picker_subtitle">카드를 뒤집어 같은 짝을 찾기</string>
     <!-- Settings -->
     <string name="appearance">디자인</string>
     <string name="advanced">고급</string>

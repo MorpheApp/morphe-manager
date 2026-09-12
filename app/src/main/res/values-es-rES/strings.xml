@@ -633,6 +633,11 @@ Al desinstalarla se borrarán permanentemente todos los datos de la aplicación"
     <string name="mini_game_snake_swipe_to_start">Desliza para empezar</string>
     <string name="mini_game_dino_picker_subtitle">Pulsa para saltar sobre los cactus</string>
     <string name="mini_game_dino_tap_to_start">Pulsa para correr</string>
+    <string name="mini_game_blocks_picker_subtitle">Ajusta las formas, despeja las líneas</string>
+    <string name="mini_game_bricks_picker_subtitle">Rebota la pelota, despeja la pared</string>
+    <string name="mini_game_bricks_tap_to_start">Arrastra para apuntar, toca para lanzar</string>
+    <string name="mini_game_miner_picker_subtitle">Pulsa para abrir, mantén pulsado para marcar</string>
+    <string name="mini_game_pairs_picker_subtitle">Voltea las cartas, encuentra la pareja</string>
     <!-- Settings -->
     <string name="appearance">Apariencia</string>
     <string name="advanced">Avanzado</string>
@@ -886,6 +891,8 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="installer_action_open_shizuku">Abrir Shizuku</string>
     <string name="installer_hint_generic">La instalación falló. Vuelve a intentarlo o cambia a un instalador diferente.</string>
     <string name="installer_hint_conflict">Ya existe una aplicación instalada con este nombre de paquete. Desinstálala antes de continuar</string>
+    <string name="installer_confirm_notification_title">Confirmar la instalación</string>
+    <string name="installer_confirm_notification_text">Pulsa para terminar de instalar la aplicación parcheada</string>
     <string name="installer_external_launched">Abriendo %s…</string>
     <string name="installer_external_timeout">%s no confirmó la instalación. Comprueba la otra aplicación e inténtalo de nuevo</string>
     <string name="installer_external_success">%s informó de una instalación correcta</string>
@@ -902,6 +909,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_prompt_installer_on_install">Solicitud de selección del instalador</string>
     <string name="settings_prompt_installer_on_install_description">Muestra el diálogo de selección del instalador cada vez que se instala una aplicación parcheada</string>
     <string name="settings_auto_install_with_shizuku">Instalación automática después del parcheo</string>
+    <string name="settings_auto_install_with_shizuku_description">Instala el APK parcheado tan pronto como se completa el parcheo</string>
     <string name="settings_auto_uninstall_with_shizuku">Desinstalación automática en caso de conflicto</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Cuando se instala automáticamente con Shizuku, desinstala primero la aplicación existente si Android informa de un conflicto de firma. Esto puede eliminar los datos de la aplicación</string>
     <string name="settings_auto_uninstall_warning_title">¿Activar desinstalación automática?</string>

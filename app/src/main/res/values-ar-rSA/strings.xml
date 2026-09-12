@@ -637,6 +637,9 @@
     <string name="mini_game_snake_swipe_to_start">اسحب للبدء</string>
     <string name="mini_game_dino_picker_subtitle">انقر للقفز فوق الصبار</string>
     <string name="mini_game_dino_tap_to_start">انقر للركض</string>
+    <string name="mini_game_blocks_picker_subtitle">طابق الأشكال، امسح الخطوط</string>
+    <string name="mini_game_bricks_picker_subtitle">اجعل الكرة ترتد، امسح الجدار</string>
+    <string name="mini_game_bricks_tap_to_start">اسحب للتصويب، اضغط للإطلاق</string>
     <!-- Settings -->
     <string name="appearance">المظهر</string>
     <string name="advanced">الإعدادات المتقدمة</string>
@@ -891,6 +894,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_action_open_shizuku">فتح Shizuku</string>
     <string name="installer_hint_generic">فشل التثبيت. حاول مرة أخرى أو قم بالتبديل إلى أداة تثبيت أخرى</string>
     <string name="installer_hint_conflict">يوجد تطبيق آخر بنفس اسم الحزمة مثبت بالفعل. قم بإلغاء تثبيته قبل المتابعة</string>
+    <string name="installer_confirm_notification_title">تأكيد التثبيت</string>
+    <string name="installer_confirm_notification_text">انقر لإنهاء تثبيت التطبيق المعدّل</string>
     <string name="installer_external_launched">جارٍ فتح %s…</string>
     <string name="installer_external_timeout">لم يؤكد %s التثبيت. تحقق من التطبيق الآخر وحاول مرة أخرى</string>
     <string name="installer_external_success">أفاد %s عن نجاح التثبيت</string>
@@ -908,6 +913,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_prompt_installer_on_install">نافذة اختيار أداة التثبيت</string>
     <string name="settings_prompt_installer_on_install_description">يعرض نافذة اختيار أداة التثبيت في كل مرة تقوم فيها بتثبيت تطبيق معدل</string>
     <string name="settings_auto_install_with_shizuku">التثبيت التلقائي بعد التعديل</string>
+    <string name="settings_auto_install_with_shizuku_description">يقوم بتثبيت ملف APK المُعدّل تلقائيًا بمجرد اكتمال عملية التعديل</string>
     <string name="settings_auto_uninstall_with_shizuku">إلغاء التثبيت التلقائي في حالة وجود تعارض</string>
     <string name="settings_auto_uninstall_with_shizuku_description">عند التثبيت التلقائي باستخدام Shizuku، قم بإلغاء تثبيت التطبيق الحالي أولًا إذا أبلغ Android عن تعارض في التوقيع. يمكن أن يؤدي ذلك إلى إزالة بيانات التطبيق</string>
     <string name="settings_auto_uninstall_warning_title">تمكين إلغاء التثبيت التلقائي؟</string>

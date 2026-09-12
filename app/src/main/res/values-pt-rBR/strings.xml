@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">Toque para revisar as fontes</string>
     <string name="home_outdated_manager_title">O Morphe está desatualizado</string>
     <string name="home_outdated_manager_subtitle">Algumas fontes de patches precisam de uma nova versão</string>
+    <string name="home_held_back_title">Uma fonte de patches causou a falha do Morphe</string>
+    <string name="home_held_back_subtitle">Ela foi ignorada para que o aplicativo pudesse iniciar. Toque para revisar</string>
     <string name="home_metered_skipped_title">Atualizações pausadas em dados móveis</string>
     <string name="home_metered_skipped_subtitle">Toque para permitir atualizações usando dados móveis</string>
     <string name="home_repatch_available_subtitle">Toque para colocar todos na fila</string>
@@ -149,6 +151,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">O pacote de patches não pôde ser baixado. A URL de origem pode estar incorreta ou o arquivo não existir.</string>
     <string name="sources_management_outdated_manager_badge">Atualize o Morphe</string>
     <string name="sources_management_outdated_manager_hint">Esta fonte foi criada para o patcher %1$s, mas o Morphe %2$s já inclui o patcher %3$s. Atualize o Morphe para usá-la</string>
+    <string name="sources_management_held_back_badge">Falhou</string>
+    <string name="sources_management_held_back_hint">Esta fonte causou a falha do Morphe durante o carregamento, por isso está sendo ignorada. Atualize ou reimporte para tentar novamente</string>
     <string name="sources_management_source_enabled">Fonte ativada</string>
     <string name="sources_management_source_disabled">Fonte desativada</string>
     <string name="sources_management_source_updating">Atualizando fonte</string>
@@ -478,7 +482,6 @@ Zona externa (tracejada): pode ser recortada pela máscara do launcher - mantenh
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Dispositivo</string>
     <!-- Free and total RAM of the device, never its storage -->
-    <string name="patcher_field_memory">Memória</string>
     <string name="patcher_field_storage">Armazenamento</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Tamanho de saída</string>
@@ -883,6 +886,8 @@ As dimensões das imagens devem ser as seguintes:
     <string name="installer_action_open_shizuku">Abrir o Shizuku</string>
     <string name="installer_hint_generic">A instalação falhou. Tente novamente ou mude para um instalador diferente</string>
     <string name="installer_hint_conflict">Outro aplicativo com este nome de pacote já está instalado. Desinstale-o antes de continuar</string>
+    <string name="installer_confirm_notification_title">Confirme a instalação</string>
+    <string name="installer_confirm_notification_text">Toque para concluir a instalação do aplicativo patcheado</string>
     <string name="installer_external_launched">Abrindo %s…</string>
     <string name="installer_external_timeout">%s não confirmou a instalação. Verifique o outro aplicativo e tente novamente</string>
     <string name="installer_external_success">%s informou uma instalação bem-sucedida</string>
@@ -899,6 +904,7 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_prompt_installer_on_install">Prompt de seleção do instalador</string>
     <string name="settings_prompt_installer_on_install_description">Smotra a caixa de seleção de instalador toda vez que um aplicativo com patch for instalado</string>
     <string name="settings_auto_install_with_shizuku">Instalação automática após a aplicação do patch</string>
+    <string name="settings_auto_install_with_shizuku_description">Instala o APK patcheado assim que a aplicação de patches for concluída</string>
     <string name="settings_auto_uninstall_with_shizuku">Desinstalação automática em caso de conflito</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Ao instalar automaticamente com o Shizuku, desinstale o app existente primeiro se o Android relatar um conflito de assinatura. Isso pode remover dados do app.</string>
     <string name="settings_auto_uninstall_warning_title">Ativar desinstalação automática?</string>

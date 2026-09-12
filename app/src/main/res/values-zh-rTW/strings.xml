@@ -482,7 +482,6 @@
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">裝置</string>
     <!-- Free and total RAM of the device, never its storage -->
-    <string name="patcher_field_memory">記憶體</string>
     <string name="patcher_field_storage">儲存空間</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">輸出大小</string>
@@ -633,6 +632,9 @@
     <string name="mini_game_snake_swipe_to_start">滑動開始</string>
     <string name="mini_game_dino_picker_subtitle">點擊跳過仙人掌</string>
     <string name="mini_game_dino_tap_to_start">點擊跑步</string>
+    <string name="mini_game_blocks_picker_subtitle">拼合形狀，消除線條</string>
+    <string name="mini_game_bricks_picker_subtitle">彈跳球，消除牆壁</string>
+    <string name="mini_game_bricks_tap_to_start">拖動瞄準，點擊發射</string>
     <!-- Settings -->
     <string name="appearance">外觀</string>
     <string name="advanced">進階</string>
@@ -885,6 +887,8 @@ morphe_header_custom_dark.png
     <string name="installer_action_open_shizuku">開啟 Shizuku</string>
     <string name="installer_hint_generic">安裝失敗。請重試或切換至其他安裝程式</string>
     <string name="installer_hint_conflict">已安裝另一個具有此套件名稱的應用程式。繼續之前請先將其解除安裝</string>
+    <string name="installer_confirm_notification_title">確認安裝</string>
+    <string name="installer_confirm_notification_text">輕觸以完成安裝已修補的應用程式</string>
     <string name="installer_external_launched">正在開啟 %s…</string>
     <string name="installer_external_timeout">%s 未確認安裝。請檢查另一個應用程式並重試</string>
     <string name="installer_external_success">%s 報告安裝成功</string>
@@ -901,6 +905,7 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install">安裝程式選擇提示</string>
     <string name="settings_prompt_installer_on_install_description">每次安裝修補後的應用程式時顯示安裝程式選取對話方塊</string>
     <string name="settings_auto_install_with_shizuku">修補完成後自動安裝</string>
+    <string name="settings_auto_install_with_shizuku_description">修補完成後立即安裝已修補的 APK</string>
     <string name="settings_auto_uninstall_with_shizuku">衝突時自動解除安裝</string>
     <string name="settings_auto_uninstall_with_shizuku_description">使用 Shizuku 自動安裝時，若 Android 回報簽名衝突，則先解除安裝現有的應用程式。這可能會刪除應用程式資料</string>
     <string name="settings_auto_uninstall_warning_title">要啟用自動解除安裝嗎？</string>

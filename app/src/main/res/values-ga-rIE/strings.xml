@@ -884,6 +884,8 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="installer_action_open_shizuku">Oscail Shizuku</string>
     <string name="installer_hint_generic">Theip ar an suiteáil. Bain triail eile as nó aistrigh go suiteálaí eile</string>
     <string name="installer_hint_conflict">Tá aip eile leis an ainm pacáiste seo suiteáilte cheana féin. Díchumasaigh é sula leanann tú ar aghaidh</string>
+    <string name="installer_confirm_notification_title">Deimhnigh an tsuiteáil</string>
+    <string name="installer_confirm_notification_text">Tapáil chun suiteáil an aip phaisteáilte a chríochnú</string>
     <string name="installer_external_launched">Ag oscailt %s…</string>
     <string name="installer_external_timeout">Níor dheimhnigh %s an suiteáil. Seiceáil an aip eile agus déan iarracht arís.</string>
     <string name="installer_external_success">Thuairisc %s suiteáil rathúil</string>
@@ -900,6 +902,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings_prompt_installer_on_install">Leid roghnúcháin suiteálaí</string>
     <string name="settings_prompt_installer_on_install_description">Taispeánann sé dialóg roghnúcháin suiteálaí gach uair a shuiteáiltear aip phaisteáilte</string>
     <string name="settings_auto_install_with_shizuku">Suiteáil uathoibríoch tar éis paisteála</string>
+    <string name="settings_auto_install_with_shizuku_description">Suiteáiltear an t-APK paisteáilte chomh luath agus a bhíonn an phaisteáil críochnaithe</string>
     <string name="settings_auto_uninstall_with_shizuku">Díshuiteáil uathoibríoch i gcás coimhlinte</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Agus suiteáil uathoibríoch á déanamh le Shizuku, díshuiteáil an aip atá ann cheana féin ar dtús má thuairiscíonn Android coimhlint sínithe. Is féidir leis seo sonraí an aip a bhaint.</string>
     <string name="settings_auto_uninstall_warning_title">Cumasaigh díshuiteáil uathoibríoch?</string>

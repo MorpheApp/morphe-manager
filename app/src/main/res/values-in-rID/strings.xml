@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">Ketuk untuk meninjau sumber</string>
     <string name="home_outdated_manager_title">Morphe sudah tidak terbaru</string>
     <string name="home_outdated_manager_subtitle">Beberapa sumber tambalan memerlukan versi terbaru</string>
+    <string name="home_held_back_title">Sumber patch membuat Morphe crash</string>
+    <string name="home_held_back_subtitle">Sumber patch tersebut dilewati agar aplikasi dapat dimulai. Ketuk untuk meninjau</string>
     <string name="home_metered_skipped_title">Pembaruan dijeda pada data seluler</string>
     <string name="home_metered_skipped_subtitle">Ketuk untuk mengizinkan pembaruan pada data seluler</string>
     <string name="home_repatch_available_subtitle">Ketuk untuk mengantrekan semuanya</string>
@@ -149,6 +151,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">Bundel tambalan tidak dapat diunduh. Sumber URL mungkin salah atau berkas tidak ada</string>
     <string name="sources_management_outdated_manager_badge">Perbarui Morphe</string>
     <string name="sources_management_outdated_manager_hint">Sumber ini dibuat untuk patcher %1$s, tetapi Morphe %2$s menyertakan patcher %3$s. Perbarui Morphe untuk menggunakannya</string>
+    <string name="sources_management_held_back_badge">Crash</string>
+    <string name="sources_management_held_back_hint">Sumber ini menyebabkan Morphe crash saat sedang dimuat, sehingga dilewati. Perbarui atau impor ulang sumber ini untuk mencoba lagi</string>
     <string name="sources_management_source_enabled">Sumber diaktifkan</string>
     <string name="sources_management_source_disabled">Sumber dinonaktifkan</string>
     <string name="sources_management_source_updating">Memperbarui sumber</string>
@@ -479,7 +483,6 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Perangkat</string>
     <!-- Free and total RAM of the device, never its storage -->
-    <string name="patcher_field_memory">Memori</string>
     <string name="patcher_field_storage">Penyimpanan</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Ukuran keluaran</string>
@@ -883,6 +886,8 @@ Dimensi gambar harus sebagai berikut:
     <string name="installer_action_open_shizuku">Buka Shizuku</string>
     <string name="installer_hint_generic">Pemasangan gagal. Coba lagi atau ganti pemasang</string>
     <string name="installer_hint_conflict">Aplikasi lain dengan nama paket ini sudah terpasang. Hapus pemasangannya terlebih dahulu sebelum melanjutkan</string>
+    <string name="installer_confirm_notification_title">Konfirmasi instalasi</string>
+    <string name="installer_confirm_notification_text">Ketuk untuk menyelesaikan instalasi aplikasi hasil patch</string>
     <string name="installer_external_launched">Membuka %s…</string>
     <string name="installer_external_timeout">%s tidak mengonfirmasi pemasangan. Periksa aplikasi lain dan coba lagi</string>
     <string name="installer_external_success">%s melaporkan pemasangan berhasil</string>
@@ -899,6 +904,7 @@ Dimensi gambar harus sebagai berikut:
     <string name="settings_prompt_installer_on_install">Permintaan pemilihan pemasang</string>
     <string name="settings_prompt_installer_on_install_description">Menampilkan dialog pemilihan pemasang setiap kali Anda memasang aplikasi yang ditambal</string>
     <string name="settings_auto_install_with_shizuku">Pasang otomatis setelah menambal</string>
+    <string name="settings_auto_install_with_shizuku_description">Menginstal APK hasil patch segera setelah proses patch selesai</string>
     <string name="settings_auto_uninstall_with_shizuku">Hapus pemasangan otomatis jika terjadi konflik</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Saat memasang otomatis dengan Shizuku, hapus aplikasi yang ada terlebih dahulu jika Android melaporkan konflik tanda tangan. Ini dapat menghapus data aplikasi</string>
     <string name="settings_auto_uninstall_warning_title">Aktifkan penghapusan pemasangan otomatis?</string>

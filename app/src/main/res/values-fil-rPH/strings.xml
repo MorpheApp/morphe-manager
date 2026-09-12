@@ -483,7 +483,6 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Device</string>
     <!-- Free and total RAM of the device, never its storage -->
-    <string name="patcher_field_memory">Memorya</string>
     <string name="patcher_field_storage">Imbakan</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Laki ng output</string>
@@ -634,6 +633,9 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="mini_game_snake_swipe_to_start">I-swipe para magsimula</string>
     <string name="mini_game_dino_picker_subtitle">I-tap para tumalon sa mga cactus</string>
     <string name="mini_game_dino_tap_to_start">I-tap para tumakbo</string>
+    <string name="mini_game_blocks_picker_subtitle">Pagkasyahin ang mga hugis, alisin ang mga linya</string>
+    <string name="mini_game_bricks_picker_subtitle">Patalbogin ang bola, alisin ang pader</string>
+    <string name="mini_game_bricks_tap_to_start">I-drag para mag-aim, pindutin para ilunsad</string>
     <!-- Settings -->
     <string name="appearance">Hitsura</string>
     <string name="advanced">Pagsulong</string>
@@ -887,6 +889,8 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="installer_action_open_shizuku">Buksan ang Shizuku</string>
     <string name="installer_hint_generic">Nabigo ang pag-install. Subukan muli o lumipat sa ibang installer</string>
     <string name="installer_hint_conflict">Naka-install na ang isa pang aplikasyon na may ganitong pangalan ng pakete. Burahin muna bago magpatuloy</string>
+    <string name="installer_confirm_notification_title">Kumpirmahin ang pag-install</string>
+    <string name="installer_confirm_notification_text">I-tap para tapusin ang pag-install ng na-patch na app</string>
     <string name="installer_external_launched">Binubuksan ang %s…</string>
     <string name="installer_external_timeout">Hindi nakumpirma ng %s ang pag-install. Tingnan ang ibang aplikasyon at subukan muli</string>
     <string name="installer_external_success">Iniulat ng %s ang matagumpay na pag-install</string>
@@ -903,6 +907,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_prompt_installer_on_install">Prompt ng pagpili ng installer</string>
     <string name="settings_prompt_installer_on_install_description">Ipinapakita ang diyalogo ng pagpili ng installer sa tuwing mag-i-install ka ng naka-patch na aplikasyon</string>
     <string name="settings_auto_install_with_shizuku">Awtomatikong i-install pagkatapos ng pag-patch</string>
+    <string name="settings_auto_install_with_shizuku_description">Ini-install ang na-patch na APK sa sandaling matapos ang pag-patch</string>
     <string name="settings_auto_uninstall_with_shizuku">Awtomatikong i-uninstall sa pagkakasalungatan</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Kapag awtomatikong nag-i-install gamit ang Shizuku, i-uninstall muna ang kasalukuyang app kung nag-uulat ang Android ng salungatan sa lagda. Maaari nitong alisin ang data ng app</string>
     <string name="settings_auto_uninstall_warning_title">Paganahin ang auto-uninstall?</string>

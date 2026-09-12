@@ -482,7 +482,6 @@
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">デバイス</string>
     <!-- Free and total RAM of the device, never its storage -->
-    <string name="patcher_field_memory">メモリ</string>
     <string name="patcher_field_storage">ストレージ</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">出力サイズ</string>
@@ -884,6 +883,8 @@ morphe_header_custom_dark.png
     <string name="installer_action_open_shizuku">Shizuku を開く</string>
     <string name="installer_hint_generic">インストールに失敗しました。もう一度試すか、別のインストーラーを使用してください</string>
     <string name="installer_hint_conflict">同じパッケージ名を持つ別のアプリが既にインストールされています。続行するには、アプリをアンインストールしてください</string>
+    <string name="installer_confirm_notification_title">インストールを確認</string>
+    <string name="installer_confirm_notification_text">タップしてパッチ適用済みアプリのインストールを完了</string>
     <string name="installer_external_launched">%s を開いています…</string>
     <string name="installer_external_timeout">%s がインストールを確認できませんでした。別のアプリを確認して、もう一度お試しください</string>
     <string name="installer_external_success">%s でインストールが正常に完了しました</string>
@@ -900,6 +901,7 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install">インストーラー選択ダイアログ</string>
     <string name="settings_prompt_installer_on_install_description">パッチ適用済みアプリをインストールする際に、毎回インストーラー選択ダイアログを表示します</string>
     <string name="settings_auto_install_with_shizuku">パッチ適用後の自動インストール</string>
+    <string name="settings_auto_install_with_shizuku_description">パッチ適用が完了次第、パッチ適用済みAPKをインストールします</string>
     <string name="settings_auto_uninstall_with_shizuku">競合時に自動でアンインストール</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Shizuku を使用して自動インストールを行う際、署名の競合が検出された場合は、既存のアプリをアンインストールします。これにより、アプリのデータが消去される場合があります</string>
     <string name="settings_auto_uninstall_warning_title">自動アンインストールを有効にしますか？</string>

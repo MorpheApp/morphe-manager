@@ -633,6 +633,12 @@
     <string name="mini_game_snake_swipe_to_start">Проведіть, щоб почати</string>
     <string name="mini_game_dino_picker_subtitle">Натискайте, щоб перестрибнути кактуси</string>
     <string name="mini_game_dino_tap_to_start">Натисніть, щоб бігти</string>
+    <string name="mini_game_blocks_picker_subtitle">Підганяйте фігури, очищуйте лінії</string>
+    <string name="mini_game_blocks_tap_to_start">Натискайте для повороту, свайп для переміщення, свайп вниз для скидання</string>
+    <string name="mini_game_bricks_picker_subtitle">Відбивайте м\'яч, руйнуйте стіну</string>
+    <string name="mini_game_bricks_tap_to_start">Перетягуйте для прицілювання, натискайте для запуску</string>
+    <string name="mini_game_miner_picker_subtitle">Натискайте, щоб відкрити, утримуйте, щоб позначити</string>
+    <string name="mini_game_pairs_picker_subtitle">Перевертайте картки, знаходьте пари</string>
     <!-- Settings -->
     <string name="appearance">Вигляд</string>
     <string name="advanced">Розширені</string>

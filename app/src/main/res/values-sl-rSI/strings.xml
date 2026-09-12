@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">Tapnite za pregled virov</string>
     <string name="home_outdated_manager_title">Morphe je zastarel</string>
     <string name="home_outdated_manager_subtitle">Nekateri viri popravkov potrebujejo novejšo različico Morphe</string>
+    <string name="home_held_back_title">Vir popravkov je zrušil aplikacijo Morphe</string>
+    <string name="home_held_back_subtitle">Preskočen je bil, da bi se aplikacija lahko zagnala. Dotaknite se za pregled</string>
     <string name="home_metered_skipped_title">Prenos posodobitev je prekinjen pri uporabi mobilnih podatkov</string>
     <string name="home_metered_skipped_subtitle">Tapnite, da omogočite posodabljanje prek mobilnih podatkov</string>
     <string name="home_repatch_available_subtitle">Tapnite, da dodate vse v čakalno vrsto</string>
@@ -149,6 +151,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">Paketa s popravki ni bilo mogoče prenesti. Izvorni URL naslov je lahko napačen ali pa datoteka ne obstaja.</string>
     <string name="sources_management_outdated_manager_badge">Posodobite Morphe</string>
     <string name="sources_management_outdated_manager_hint">Ta vir je izdelan za popravek %1$s, vendar Morphe %2$s vključuje popravek %3$s. Posodobite Morphe za uporabo</string>
+    <string name="sources_management_held_back_badge">Zrušen</string>
+    <string name="sources_management_held_back_hint">Ta vir je med nalaganjem zrušil aplikacijo Morphe, zato je preskočen. Posodobite ga ali ga znova uvozite, da poskusite znova</string>
     <string name="sources_management_source_enabled">Vir omogočen</string>
     <string name="sources_management_source_disabled">Vir onemogočen</string>
     <string name="sources_management_source_updating">Posodabljanje vira</string>
@@ -478,7 +482,6 @@ Zunanje območje (črtkano): maska zaganjalnika ga lahko obreže – pomembne po
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Naprava</string>
     <!-- Free and total RAM of the device, never its storage -->
-    <string name="patcher_field_memory">Pomnilnik</string>
     <string name="patcher_field_storage">Shramba</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Velikost izhoda</string>
@@ -882,6 +885,8 @@ Dimenzije slike morajo biti naslednje:
     <string name="installer_action_open_shizuku">Odprite Shizuku</string>
     <string name="installer_hint_generic">Namestitev je zatajila. Poskusite znova ali preklopite na drug namestitveni program.</string>
     <string name="installer_hint_conflict">Aplikacija z istim imenom paketa je že nameščena. Preden nadaljujete, jo odstranite.</string>
+    <string name="installer_confirm_notification_title">Potrdi namestitev</string>
+    <string name="installer_confirm_notification_text">Tapnite za dokončanje namestitve popravljene aplikacije</string>
     <string name="installer_external_launched">Odpiranje %s…</string>
     <string name="installer_external_timeout">%s ni potrdil namestitve. Preverite drugo aplikacijo in poskusite znova</string>
     <string name="installer_external_success">%s je sporočil o uspešni namestitvi</string>
@@ -898,6 +903,7 @@ Dimenzije slike morajo biti naslednje:
     <string name="settings_prompt_installer_on_install">Poziv izbire namestitvenega programa</string>
     <string name="settings_prompt_installer_on_install_description">Prikaže pogovorno okno za izbiro namestitvenega programa vsakokrat, ko je nameščena popravljena aplikacija</string>
     <string name="settings_auto_install_with_shizuku">Samodejna namestitev po popravku</string>
+    <string name="settings_auto_install_with_shizuku_description">Namesti popravljeni APK takoj, ko je krpanje končano</string>
     <string name="settings_auto_uninstall_with_shizuku">Samodejno odstranitev ob konfliktu</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Pri samodejni namestitvi s Shizuku najprej odstranite obstoječo aplikacijo, če Android poroča o konfliktu podpisov. To lahko odstrani podatke aplikacije.</string>
     <string name="settings_auto_uninstall_warning_title">Omogoči samodejno odstranitev?</string>

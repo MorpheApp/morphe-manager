@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">Tik om bronnen te bekijken</string>
     <string name="home_outdated_manager_title">Morphe is verouderd</string>
     <string name="home_outdated_manager_subtitle">Sommige patchbronnen vereisen een nieuwere versie</string>
+    <string name="home_held_back_title">Een patchbron heeft Morphe laten crashen.}</string>
+    <string name="home_held_back_subtitle">Empty</string>
     <string name="home_metered_skipped_title">Updates gepauzeerd op mobiele data</string>
     <string name="home_metered_skipped_subtitle">Tik om updates via mobiele data toe te staan</string>
     <string name="home_repatch_available_subtitle">Tik om ze allemaal in de wachtrij te zetten</string>
@@ -149,6 +151,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">De patch-bundel kon niet worden gedownload. De bron-URL is mogelijk onjuist of het bestand bestaat niet</string>
     <string name="sources_management_outdated_manager_badge">Update Morphe</string>
     <string name="sources_management_outdated_manager_hint">Deze bron is gebouwd voor patcher %1$s, maar Morphe %2$s bevat patcher %3$s. Update Morphe om deze te gebruiken</string>
+    <string name="sources_management_held_back_badge">Gecrasht</string>
+    <string name="sources_management_held_back_hint">Deze bron heeft Morphe laten crashen tijdens het laden en wordt daarom overgeslagen. Werk deze bij of importeer deze opnieuw om het opnieuw te proberen.</string>
     <string name="sources_management_source_enabled">Bron ingeschakeld</string>
     <string name="sources_management_source_disabled">Bron uitgeschakeld</string>
     <string name="sources_management_source_updating">Bron bijwerken</string>
@@ -478,7 +482,6 @@ Buitenste zone (gestippeld): kan worden afgesneden door het launcher-masker - ho
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Apparaat</string>
     <!-- Free and total RAM of the device, never its storage -->
-    <string name="patcher_field_memory">Geheugen</string>
     <string name="patcher_field_storage">Opslag</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Bestandsgrootte</string>
@@ -629,6 +632,9 @@ Deïnstalleren wist alle app-gegevens permanent."</string>
     <string name="mini_game_snake_swipe_to_start">Swipe om te starten</string>
     <string name="mini_game_dino_picker_subtitle">Tik om over cactussen te springen</string>
     <string name="mini_game_dino_tap_to_start">Tik om te rennen</string>
+    <string name="mini_game_blocks_picker_subtitle">Plaats de vormen, maak lijnen vrij</string>
+    <string name="mini_game_bricks_picker_subtitle">Laat de bal stuiteren, breek de muur</string>
+    <string name="mini_game_bricks_tap_to_start">Sleep om te richten, tik om te lanceren</string>
     <!-- Settings -->
     <string name="appearance">Uiterlijk</string>
     <string name="advanced">Geavanceerd</string>
@@ -882,6 +888,8 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="installer_action_open_shizuku">Shizuku openen</string>
     <string name="installer_hint_generic">De installatie is mislukt. Probeer het opnieuw of schakel over naar een ander installatieprogramma</string>
     <string name="installer_hint_conflict">Een andere app met hetzelfde pakketnaam is al geïnstalleerd. Verwijder deze voordat u doorgaat</string>
+    <string name="installer_confirm_notification_title">Bevestig de installatie</string>
+    <string name="installer_confirm_notification_text">Tik om de installatie van de gepatchte app te voltooien</string>
     <string name="installer_external_launched">%s wordt geopend…</string>
     <string name="installer_external_timeout">%s heeft de installatie niet bevestigd. Controleer de andere app en probeer het opnieuw</string>
     <string name="installer_external_success">%s heeft een succesvolle installatie gemeld</string>
@@ -898,6 +906,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="settings_prompt_installer_on_install">Keuze van installer</string>
     <string name="settings_prompt_installer_on_install_description">Toont het dialoogvenster voor het selecteren van de installer bij elke geïnstalleerde gepatchte app</string>
     <string name="settings_auto_install_with_shizuku">Automatisch installeren na patchen</string>
+    <string name="settings_auto_install_with_shizuku_description">Installeert de gepatchte APK zodra het patchen voltooid is</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatisch verwijderen bij conflicten</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Wanneer automatisch installeren met Shizuku, verwijder eerst de bestaande app als Android een signature conflict meldt. Dit kan app-gegevens verwijderen.</string>
     <string name="settings_auto_uninstall_warning_title">Automatisch verwijderen inschakelen?</string>

@@ -883,6 +883,8 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="installer_action_open_shizuku">Shizuku-nu Aç</string>
     <string name="installer_hint_generic">Quraşdırma uğursuz oldu. Təkrar sına yaxud fərqli quraşdırıcıya keç</string>
     <string name="installer_hint_conflict">Başqa tətbiq bu paket adıyla artıq quraşdırılıb. Davam etməzdən əvvəl onu sil</string>
+    <string name="installer_confirm_notification_title">Quraşdırmanı təsdiqlə</string>
+    <string name="installer_confirm_notification_text">Yamaqlanmış tətbiqin quraşdırılmasını tamamlamaq üçün toxun</string>
     <string name="installer_external_launched">%s açılır…</string>
     <string name="installer_external_timeout">%s quraşdırmanı təsdiqləmədi. Digər tətbiqi yoxla və təkrar sına</string>
     <string name="installer_external_success">%s uğurlu quraşdırmanı bildirdi</string>
@@ -899,6 +901,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install">Quraşdırıcı seçimi müraciəti</string>
     <string name="settings_prompt_installer_on_install_description">Yamaqlanan tətbiqi quraşdırdığınız hər vaxt quraşdırıcı seçimi dialoqunu göstərir</string>
     <string name="settings_auto_install_with_shizuku">Yamaqlamadan sonra birbaşa quraşdır</string>
+    <string name="settings_auto_install_with_shizuku_description">Yamaqlama tamamlanan kimi yamaqlanmış APK-nı quraşdırır</string>
     <string name="settings_auto_uninstall_with_shizuku">Ziddiyyət zamanı avtomatik sil</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Shizuku ilə avtomatik quraşdırarkən, Android imza ziddiyyəti bildirərsə, əvvəlcə mövcud tətbiqi sil. Bu, tətbiq məlumatlarını təmizləyə bilər</string>
     <string name="settings_auto_uninstall_warning_title">Avtomatik silmə aktivləşdirilsin?</string>

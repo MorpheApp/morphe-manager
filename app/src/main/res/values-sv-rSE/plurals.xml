@@ -45,8 +45,8 @@
         <item quantity="other">%s appar redo att modifieras</item>
     </plurals>
     <plurals name="repatch_available_count">
-        <item quantity="one">%s app kan lappas om</item>
-        <item quantity="other">%s appar kan lappas om</item>
+        <item quantity="one">%s app kan modifieras igen</item>
+        <item quantity="other">%s appar kan modifieras igen</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="one">Hoppade över %s app</item>

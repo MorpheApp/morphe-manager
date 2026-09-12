@@ -482,7 +482,6 @@
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Συσκευή</string>
     <!-- Free and total RAM of the device, never its storage -->
-    <string name="patcher_field_memory">Μνήμη</string>
     <string name="patcher_field_storage">Αποθήκευση</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Μέγεθος εξόδου</string>
@@ -633,6 +632,9 @@
     <string name="mini_game_snake_swipe_to_start">Σύρετε για να ξεκινήσετε</string>
     <string name="mini_game_dino_picker_subtitle">Πατήστε για να πηδήξετε πάνω από τους κάκτους</string>
     <string name="mini_game_dino_tap_to_start">Πατήστε για να τρέξετε</string>
+    <string name="mini_game_blocks_picker_subtitle">Ταίριαξε τα σχήματα, καθάρισε τις γραμμές</string>
+    <string name="mini_game_bricks_picker_subtitle">Χτύπα την μπάλα, καθάρισε τον τοίχο</string>
+    <string name="mini_game_bricks_tap_to_start">Σύρε για να στοχεύσεις, πάτησε για να εκτοξεύσεις</string>
     <!-- Settings -->
     <string name="appearance">Εμφάνιση</string>
     <string name="advanced">Για προχωρημένους</string>
@@ -887,6 +889,8 @@ morphe_header_custom_dark.png
     <string name="installer_action_open_shizuku">Άνοιγμα Shizuku</string>
     <string name="installer_hint_generic">Η εγκατάσταση απέτυχε. Προσπαθήστε ξανά ή χρησιμοποιήστε διαφορετικό εγκαταστάτη.</string>
     <string name="installer_hint_conflict">Άλλη εφαρμογή με το ίδιο όνομα πακέτου είναι ήδη εγκατεστημένη. Απεγκαταστήσετε την πριν συνεχίσετε.</string>
+    <string name="installer_confirm_notification_title">Επιβεβαιώστε την εγκατάσταση</string>
+    <string name="installer_confirm_notification_text">Πατήστε για να ολοκληρώσετε την εγκατάσταση της τροποποιημένης εφαρμογής</string>
     <string name="installer_external_launched">Άνοιγμα του %s…</string>
     <string name="installer_external_timeout">Το %s δεν επιβεβαίωσε την εγκατάσταση. Ελέγξτε την άλλη εφαρμογή και προσπαθήστε ξανά</string>
     <string name="installer_external_success">Το %s ανέφερε μια επιτυχή εγκατάσταση</string>
@@ -903,6 +907,7 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install">Εμφάνιση προτροπής επιλογής εγκαταστάτη</string>
     <string name="settings_prompt_installer_on_install_description">Εμφανίζει το διάλογο επιλογής εγκαταστάτη κάθε φορά που εγκαταστήσετε μια τροποποιημένη εφαρμογή</string>
     <string name="settings_auto_install_with_shizuku">Αυτόματη εγκατάσταση μετά την επιδιόρθωση</string>
+    <string name="settings_auto_install_with_shizuku_description">Εγκαθιστά το τροποποιημένο APK μόλις ολοκληρωθεί η τροποποίηση</string>
     <string name="settings_auto_uninstall_with_shizuku">Αυτόματη απεγκατάσταση σε περίπτωση σύγκρουσης</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Όταν γίνεται αυτόματη εγκατάσταση με το Shizuku, απεγκαταστήστε πρώτα την υπάρχουσα εφαρμογή εάν το Android αναφέρει μια σύγκρουση υπογραφών. Αυτό μπορεί να αφαιρέσει δεδομένα της εφαρμογής.</string>
     <string name="settings_auto_uninstall_warning_title">Ενεργοποίηση αυτόματης απεγκατάστασης;</string>

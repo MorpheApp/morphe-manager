@@ -483,7 +483,6 @@ Ulkopuolinen alue (katkoviiva): käynnistimen maski saattaa leikata osia siitä 
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Laite</string>
     <!-- Free and total RAM of the device, never its storage -->
-    <string name="patcher_field_memory">Muisti</string>
     <string name="patcher_field_storage">Tallennustila</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Tulosteen koko</string>
@@ -634,6 +633,9 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="mini_game_snake_swipe_to_start">Pyyhkäise aloittaaksesi</string>
     <string name="mini_game_dino_picker_subtitle">Napauta hypätäksesi kaktusten yli</string>
     <string name="mini_game_dino_tap_to_start">Napauta juostaaksesi</string>
+    <string name="mini_game_blocks_picker_subtitle">Sovita muodot, selkeät linjat</string>
+    <string name="mini_game_bricks_picker_subtitle">Pomputa palloa, raivaa seinä</string>
+    <string name="mini_game_bricks_tap_to_start">Vedä tähdätäksesi, napauta laukaistaksesi</string>
     <!-- Settings -->
     <string name="appearance">Ulkoasu</string>
     <string name="advanced">Lisäasetukset</string>
@@ -885,6 +887,8 @@ Kuvien mittojen on oltava seuraavat:
     <string name="installer_action_open_shizuku">Avaa Shizuku</string>
     <string name="installer_hint_generic">Asennus epäonnistui. Yritä uudelleen tai vaihda toiseen asennukseen.</string>
     <string name="installer_hint_conflict">Toinen sovellus samalla pakettinimellä on jo asennettu. Poista se ennen jatkamista.</string>
+    <string name="installer_confirm_notification_title">Vahvista asennus</string>
+    <string name="installer_confirm_notification_text">Napauta viimeistelläksesi paikatun sovelluksen asennuksen</string>
     <string name="installer_external_launched">Avataan %s…</string>
     <string name="installer_external_timeout">%s ei vahvistanut asennusta. Tarkista toinen sovellus ja yritä uudelleen</string>
     <string name="installer_external_success">%s ilmoitti onnistuneesta asennuksesta</string>
@@ -901,6 +905,7 @@ Kuvien mittojen on oltava seuraavat:
     <string name="settings_prompt_installer_on_install">Asennusohjelman valintakehote</string>
     <string name="settings_prompt_installer_on_install_description">Näytä asennusohjelman valintaikkuna aina, kun asennat paikatun sovelluksen.</string>
     <string name="settings_auto_install_with_shizuku">Asenna automaattisesti korjauksen jälkeen</string>
+    <string name="settings_auto_install_with_shizuku_description">Asentaa paikatun APK:n heti, kun paikkaus on valmis</string>
     <string name="settings_auto_uninstall_with_shizuku">Automaattinen poisto ristiriitatilanteissa</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Kun asennat automaattisesti Shizukun avulla, poista ensin olemassa oleva sovellus, jos Android raportoi allekirjoitusristiriidasta. Tämä voi poistaa sovelluksen tiedot</string>
     <string name="settings_auto_uninstall_warning_title">Ota automaattinen poisto käyttöön?</string>

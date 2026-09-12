@@ -482,7 +482,6 @@
     <string name="patcher_field_android">एंड्रॉइड</string>
     <string name="patcher_field_device">डिवाइस</string>
     <!-- Free and total RAM of the device, never its storage -->
-    <string name="patcher_field_memory">मेमोरी</string>
     <string name="patcher_field_storage">स्टोरेज</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">आउटपुट आकार</string>
@@ -633,6 +632,9 @@
     <string name="mini_game_snake_swipe_to_start">शुरू करने के लिए स्वाइप करें</string>
     <string name="mini_game_dino_picker_subtitle">कैक्टस के ऊपर कूदने के लिए टैप करें</string>
     <string name="mini_game_dino_tap_to_start">दौड़ने के लिए टैप करें</string>
+    <string name="mini_game_blocks_picker_subtitle">आकृतियों को मिलाएं, रेखाएँ साफ़ करें</string>
+    <string name="mini_game_bricks_picker_subtitle">गेंद को उछालें, दीवार साफ़ करें</string>
+    <string name="mini_game_bricks_tap_to_start">लक्ष्य के लिए खींचें, लॉन्च करने के लिए टैप करें</string>
     <!-- Settings -->
     <string name="appearance">स्वरूप</string>
     <string name="advanced">उन्नत</string>
@@ -886,6 +888,8 @@ morphe_header_custom_dark.png
     <string name="installer_action_open_shizuku">Open Shizuku</string>
     <string name="installer_hint_generic">इंस्टॉलेशन विफल रही. पुन: प्रयास करें या अलग इंस्टॉलर का उपयोग करें।</string>
     <string name="installer_hint_conflict">इस पैकेज नाम के साथ अन्य ऐप पहले से ही इंस्टॉल किया गया है. आगे बढ़ने से पहले इसे अनइंस्टॉल करें।</string>
+    <string name="installer_confirm_notification_title">इंस्टॉलेशन की पुष्टि करें</string>
+    <string name="installer_confirm_notification_text">पैच किए गए ऐप की इंस्टॉलेशन पूरी करने के लिए टैप करें</string>
     <string name="installer_external_launched">%s खोला जा रहा है</string>
     <string name="installer_external_timeout">%s ने स्थापना की पुष्टि नहीं की। दूसरे ऐप की जांच करें और फिर से प्रयास करें।</string>
     <string name="installer_external_success">%s ने सफल स्थापना की सूचना दी।</string>
@@ -902,6 +906,7 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install">इंस्टॉलर चयन संकेत</string>
     <string name="settings_prompt_installer_on_install_description">जब भी पैच किए गए ऐप को इंस्टॉल किया जाता है, तो इंस्टॉलर चयन संवाद दिखाता है।</string>
     <string name="settings_auto_install_with_shizuku">पैचिंग के बाद स्वतः इंस्टॉल करें</string>
+    <string name="settings_auto_install_with_shizuku_description">पैचिंग पूरी होते ही पैच किए गए APK को इंस्टॉल करता है</string>
     <string name="settings_auto_uninstall_with_shizuku">विवाद होने पर स्वतः अनइंस्टॉल करें</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Shizuku के साथ स्वतः इंस्टॉल करते समय, यदि Android हस्ताक्षर संघर्ष की रिपोर्ट करता है तो पहले मौजूदा ऐप को अनइंस्टॉल करें। यह ऐप डेटा को हटा सकता है</string>
     <string name="settings_auto_uninstall_warning_title">स्वतः अनइंस्टॉल सक्षम करें?</string>

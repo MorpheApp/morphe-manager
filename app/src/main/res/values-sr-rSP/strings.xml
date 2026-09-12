@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">Додирните да прегледате изворе</string>
     <string name="home_outdated_manager_title">Morphe je zastareo</string>
     <string name="home_outdated_manager_subtitle">Неки извори закрпа захтевају новију верзију</string>
+    <string name="home_held_back_title">Закрпљени извор је срушио Morphe</string>
+    <string name="home_held_back_subtitle">...</string>
     <string name="home_metered_skipped_title">Ажурирања су паузирана на мобилним подацима</string>
     <string name="home_metered_skipped_subtitle">Додирните да бисте дозволили ажурирања преко мобилних података</string>
     <string name="home_repatch_available_subtitle">Додирните да их све ставите у ред чекања</string>
@@ -149,6 +151,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">Пакест за поправку није могао да се преузме. УРЛ адреса извора може бити неисправна или датотека не постоји</string>
     <string name="sources_management_outdated_manager_badge">Ажурирај Морфе</string>
     <string name="sources_management_outdated_manager_hint">Овај извор је направљен за закрпљивач %1$s, али Морфе %2$s укључује закрпљивач %3$s. Ажурирај Морфе да би га користио</string>
+    <string name="sources_management_held_back_badge">Пао</string>
+    <string name="sources_management_held_back_hint">Овај извор је срушио Morphe током учитавања, па се прескаче. Ажурирајте га или поново увезите да бисте покушали поново</string>
     <string name="sources_management_source_enabled">Извор омогућен</string>
     <string name="sources_management_source_disabled">Извор онемогућен</string>
     <string name="sources_management_source_updating">Ажурирање извора</string>
@@ -478,7 +482,6 @@
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Уређај</string>
     <!-- Free and total RAM of the device, never its storage -->
-    <string name="patcher_field_memory">Меморија</string>
     <string name="patcher_field_storage">Складиште</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Величина излаза</string>
@@ -882,6 +885,8 @@ morphe_header_custom_dark.png
     <string name="installer_action_open_shizuku">Отвори Схизуку</string>
     <string name="installer_hint_generic">Инсталација је неуспела. Покушајте поново или пребаците на други инсталатор.</string>
     <string name="installer_hint_conflict">Друга апликација са истим именом пакета је већ инсталирана. Деинсталирајте је пре наставка.</string>
+    <string name="installer_confirm_notification_title">Потврдите инсталацију</string>
+    <string name="installer_confirm_notification_text">Додирните да бисте довршили инсталацију закрпљене апликације</string>
     <string name="installer_external_launched">Отварање %s…</string>
     <string name="installer_external_timeout">%s није потврдио инсталацију. Проверите другу апликацију и покушајте поново</string>
     <string name="installer_external_success">%s је пријавио успешну инсталацију</string>
@@ -898,6 +903,7 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install">Упит за избор инсталатера</string>
     <string name="settings_prompt_installer_on_install_description">Приказује дијалог за избор инсталатера сваки пут када се инсталира закрпљена апликација</string>
     <string name="settings_auto_install_with_shizuku">Аутоматска инсталација након закрпе</string>
+    <string name="settings_auto_install_with_shizuku_description">Инсталира закрпљени APK чим се закрпљивање заврши</string>
     <string name="settings_auto_uninstall_with_shizuku">Аутоматско деинсталирање у случају конфликта</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Када се аутоматски инсталира преко Shizuku-а, прво деинсталирајте постојећу апликацију ако Android извештава о конфликту потписа. Ово може уклонити податке апликације.</string>
     <string name="settings_auto_uninstall_warning_title">Омогућите аутоматско деинсталирање?</string>

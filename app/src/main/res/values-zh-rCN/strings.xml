@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">点击查看源</string>
     <string name="home_outdated_manager_title">Morphe 管理器需要更新</string>
     <string name="home_outdated_manager_subtitle">部分补丁需要更新管理器版本</string>
+    <string name="home_held_back_title">一个补丁源导致 Morphe 崩溃</string>
+    <string name="home_held_back_subtitle">它已被跳过，以便应用能够启动。点按以查看</string>
     <string name="home_metered_skipped_title">在移动数据上暂停更新</string>
     <string name="home_metered_skipped_subtitle">点击允许在移动数据上更新</string>
     <string name="home_repatch_available_subtitle">点击以全部排队</string>
@@ -149,6 +151,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">无法下载补丁包。源URL可能不正确或文件不存在</string>
     <string name="sources_management_outdated_manager_badge">更新 Morphe</string>
     <string name="sources_management_outdated_manager_hint">此补丁源需要修补器版本 %1$s，而 Morphe %2$s 内置修补器版本为 %3$s 。需要更新 Morphe 才能应用该补丁</string>
+    <string name="sources_management_held_back_badge">已崩溃</string>
+    <string name="sources_management_held_back_hint">此来源在加载时导致 Morphe 崩溃，因此已将其跳过。更新或重新导入该来源以重试</string>
     <string name="sources_management_source_enabled">源已启用</string>
     <string name="sources_management_source_disabled">源已禁用</string>
     <string name="sources_management_source_updating">正在更新源</string>
@@ -478,7 +482,6 @@
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">设备</string>
     <!-- Free and total RAM of the device, never its storage -->
-    <string name="patcher_field_memory">内存</string>
     <string name="patcher_field_storage">存储</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">输出大小</string>
@@ -882,6 +885,8 @@ morphe_header_custom_dark.png
     <string name="installer_action_open_shizuku">打开 Shizuku</string>
     <string name="installer_hint_generic">安装失败。请重试或切换到其他安装程序</string>
     <string name="installer_hint_conflict">已安装具有相同包名的其他应用。请在继续之前卸载它</string>
+    <string name="installer_confirm_notification_title">确认安装</string>
+    <string name="installer_confirm_notification_text">点按以完成安装修补后的应用</string>
     <string name="installer_external_launched">正在打开 %s…</string>
     <string name="installer_external_timeout">%s 未确认安装。请检查其他应用并重试。</string>
     <string name="installer_external_success">%s 报告安装成功。</string>
@@ -898,6 +903,7 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install">安装程序选择提示</string>
     <string name="settings_prompt_installer_on_install_description">每次安装已修补的应用时，都会显示安装程序选择对话框</string>
     <string name="settings_auto_install_with_shizuku">补丁应用后自动安装</string>
+    <string name="settings_auto_install_with_shizuku_description">修补完成后立即安装修补后的 APK</string>
     <string name="settings_auto_uninstall_with_shizuku">冲突时自动卸载</string>
     <string name="settings_auto_uninstall_with_shizuku_description">使用 Shizuku 自动安装时，如果 Android 报告签名冲突，则先卸载现有的应用。这可能会删除应用数据</string>
     <string name="settings_auto_uninstall_warning_title">启用自动卸载？</string>
