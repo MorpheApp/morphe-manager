@@ -402,6 +402,10 @@ class ProcessRuntime(
         const val SIGKILL_EXIT_CODE = 137
         const val SIGSEGV_EXIT_CODE = 139
 
+        // The kernel kills a process over a system call the seccomp policy for apps forbids,
+        // which firmware can drag in on its own, so such a run belongs in the app's own process
+        const val SIGSYS_EXIT_CODE = 159
+
         const val CONNECT_TO_APP_ACTION = "CONNECT_TO_APP_ACTION"
         const val INTENT_BUNDLE_KEY = "BUNDLE"
         const val BUNDLE_BINDER_KEY = "BINDER"

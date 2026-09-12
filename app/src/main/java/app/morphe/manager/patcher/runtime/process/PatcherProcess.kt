@@ -13,6 +13,7 @@ import app.morphe.manager.patcher.Session
 import app.morphe.manager.patcher.logger.LogLevel
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.patch.PatchBundle
+import app.morphe.manager.patcher.patch.applyPatchOptions
 import app.morphe.manager.patcher.runtime.ProcessRuntime
 import app.morphe.manager.patcher.runtime.ResourceMonitor
 import app.morphe.manager.patcher.split.SplitApkPreparer
@@ -65,19 +66,11 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
 
             val allPatches = PatchBundle.Loader.patches(parameters.configurations.map { it.bundle }, parameters.packageName)
             val patchList = parameters.configurations.flatMap { config ->
-                val patches = (allPatches[config.bundle] ?: return@flatMap emptyList())
-                    .filterKeys { it in config.patches }
+                val bundlePatches = allPatches[config.bundle] ?: return@flatMap emptyList()
 
-                config.options.forEach { (patchName, opts) ->
-                    // Morphe: Skip if patch doesn't exist in this bundle
-                    val patchOptions = patches[patchName]?.options ?: return@forEach
+                bundlePatches.applyPatchOptions(config.options, logger)
 
-                    opts.forEach { (key, value) ->
-                        patchOptions[key] = value
-                    }
-                }
-
-                patches.values
+                bundlePatches.filterKeys { it in config.patches }.values
             }
 
             events.progress(null, State.COMPLETED.name, null) // Loading patches

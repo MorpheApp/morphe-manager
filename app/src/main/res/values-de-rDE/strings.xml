@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">Tippe, um die Quellen zu überprüfen</string>
     <string name="home_outdated_manager_title">Morphe ist veraltet</string>
     <string name="home_outdated_manager_subtitle">Einige Patch-Quellen benötigen eine neuere Version</string>
+    <string name="home_held_back_title">Eine Patch-Quelle hat Morphe zum Absturz gebracht</string>
+    <string name="home_held_back_subtitle">Es wurde übersprungen, damit die App starten konnte. Zum Überprüfen tippen. \"test\" </string>
     <string name="home_metered_skipped_title">Updates über mobile Daten wurden pausiert</string>
     <string name="home_metered_skipped_subtitle">Tippe, um Updates über mobile Daten zu erlauben</string>
     <string name="home_repatch_available_subtitle">Tippen, um alle in die Warteschlange zu stellen</string>
@@ -149,6 +151,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">Das Patch-Bundle konnte nicht heruntergeladen werden. Die Quell-URL ist möglicherweise falsch oder die Datei existiert nicht.</string>
     <string name="sources_management_outdated_manager_badge">Morphe aktualisieren</string>
     <string name="sources_management_outdated_manager_hint">Diese Quelle ist für Patcher %1$s erstellt, aber Morphe %2$s enthält Patcher %3$s. Aktualisieren Sie Morphe, um diese zu verwenden.</string>
+    <string name="sources_management_held_back_badge">Abgestürzt</string>
+    <string name="sources_management_held_back_hint">Diese Quelle hat Morphe beim Laden zum Absturz gebracht und wird daher übersprungen. Aktualisiere sie oder importiere sie erneut, um es noch einmal zu versuchen.    </string>
     <string name="sources_management_source_enabled">Quelle aktiviert</string>
     <string name="sources_management_source_disabled">Quelle deaktiviert</string>
     <string name="sources_management_source_updating">Quellen werden aktualisiert</string>
@@ -477,7 +481,7 @@ Für optimale Ergebnisse empfiehlt diese App, eine &lt;b&gt;vollständige APK&lt
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Gerät</string>
     <!-- Free and total RAM of the device, never its storage -->
-    <string name="patcher_field_memory">Arbeitsspeicher</string>
+    <string name="patcher_field_memory">Speicher</string>
     <string name="patcher_field_storage">Speicher</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Ausgabegröße</string>
@@ -629,6 +633,12 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="mini_game_snake_swipe_to_start">Wischen, um zu starten</string>
     <string name="mini_game_dino_picker_subtitle">Tippen, um über Kakteen zu springen</string>
     <string name="mini_game_dino_tap_to_start">Tippen zum Rennen</string>
+    <string name="mini_game_blocks_picker_subtitle">Passe die Formen an, beseitige Linien</string>
+    <string name="mini_game_blocks_tap_to_start">Zum Drehen tippen, zum Bewegen wischen, nach unten wischen zum Ablegen</string>
+    <string name="mini_game_bricks_picker_subtitle">Lass den Ball hüpfen, zerstöre die Wand</string>
+    <string name="mini_game_bricks_tap_to_start">Ziehe zum Zielen, tippe zum Starten</string>
+    <string name="mini_game_miner_picker_subtitle">Tippen zum Öffnen, gedrückt halten zum Flaggen</string>
+    <string name="mini_game_pairs_picker_subtitle">Karten umdrehen, das passende Paar finden</string>
     <!-- Settings -->
     <string name="appearance">Darstellung</string>
     <string name="advanced">Erweitert</string>
@@ -882,6 +892,8 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="installer_action_open_shizuku">Shizuku öffnen</string>
     <string name="installer_hint_generic">Die Installation ist fehlgeschlagen. Versuchen Sie es erneut oder wechslen Sie zu einem anderen Installer</string>
     <string name="installer_hint_conflict">Eine andere App mit diesem Paketnamen ist bereits installiert. Deinstalliere Sie sie bevor Sie fortfahren</string>
+    <string name="installer_confirm_notification_title">Installation bestätigen</string>
+    <string name="installer_confirm_notification_text">Tippen, um die Installation der gepatchten App abzuschließen</string>
     <string name="installer_external_launched">Öffne %s…</string>
     <string name="installer_external_timeout">%s hat die Installation nicht bestätigt. Überprüfen Sie die andere App und versuchen Sie es erneut</string>
     <string name="installer_external_success">%s hat eine erfolgreiche Installation gemeldet</string>
@@ -898,7 +910,7 @@ Die Bildgrößen müssen wie folgt sein:
     <string name="settings_prompt_installer_on_install">Auswahlaufforderung für den Installer</string>
     <string name="settings_prompt_installer_on_install_description">Zeigt jedes Mal ein Dialogfenster zur Installerauswahl an, wenn eine gepatchte App installiert wird</string>
     <string name="settings_auto_install_with_shizuku">Automatische Installation nach dem Patchen</string>
-    <string name="settings_auto_install_with_shizuku_description">Installiert die gepatchte APK automatisch, sobald das Patchen abgeschlossen ist</string>
+    <string name="settings_auto_install_with_shizuku_description">Installiert die gepatchte APK, sobald das Patchen abgeschlossen ist</string>
     <string name="settings_auto_uninstall_with_shizuku">Bei Konflikten automatisch deinstallieren</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Wenn Sie mit Shizuku automatisch installieren, deinstallieren Sie zuerst die vorhandene App, wenn Android einen Signaturkonflikt meldet. Dies kann App-Daten entfernen.</string>
     <string name="settings_auto_uninstall_warning_title">Automatische Deinstallation aktivieren?</string>

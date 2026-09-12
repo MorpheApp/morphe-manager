@@ -18,6 +18,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberSliderState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -196,8 +197,12 @@ internal fun UpdateCheckIntervalDialog(
     val title = stringResource(R.string.settings_advanced_update_interval_dialog_title)
     val chipSubtitle = stringResource(R.string.settings_advanced_update_interval_chip_subtitle)
     val entries = UpdateCheckInterval.entries
-    var sliderIndex by remember { mutableFloatStateOf(entries.indexOf(currentInterval).toFloat()) }
-    val selectedInterval = entries[sliderIndex.roundToInt().coerceIn(entries.indices)]
+    val sliderState = rememberSliderState(
+        value = entries.indexOf(currentInterval).toFloat(),
+        steps = entries.size - 2, // n entries → n-2 internal steps
+        trackRange = 0f..(entries.size - 1).toFloat()
+    )
+    val selectedInterval = entries[sliderState.value.roundToInt().coerceIn(entries.indices)]
 
     AppDialog(
         onDismissRequest = onDismiss,
@@ -247,10 +252,7 @@ internal fun UpdateCheckIntervalDialog(
             // Slider
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Slider(
-                    value = sliderIndex,
-                    onValueChange = { sliderIndex = it },
-                    valueRange = 0f..(entries.size - 1).toFloat(),
-                    steps = entries.size - 2, // n entries → n-2 internal steps
+                    state = sliderState,
                     modifier = Modifier.fillMaxWidth()
                 )
 

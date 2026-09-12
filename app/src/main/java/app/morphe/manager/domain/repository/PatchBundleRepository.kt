@@ -60,6 +60,9 @@ class PatchBundleRepository(
     private val dao = db.patchBundleDao()
     private val bundlesDir = app.getDir("patch_bundles", Context.MODE_PRIVATE)
 
+    /** Crash attribution for every in-process bundle read, the patcher runtime's included. */
+    val loadGuard = PatchBundleLoadGuard(app, bundlesDir)
+
     private val scope = CoroutineScope(Dispatchers.Default)
     private val store = Store<BundleState>(scope, BundleState.Loading)
 
@@ -378,6 +381,8 @@ class PatchBundleRepository(
      * Performs a reload. Do not call this outside of a store action.
      */
     private suspend fun doReload(): BundleState.Ready {
+        loadGuard.prepare()
+
         val entities = loadEntitiesEnforcingOfficialOrder()
 
         val sources = entities.associate { it.uid to it.load() }.toMutableMap()
@@ -456,13 +461,19 @@ class PatchBundleRepository(
                     version = bundle.manifestAttributes?.version,
                     uid = src.uid,
                     enabled = src.enabled,
-                    patches = PatchBundle.Loader.metadata(bundle),
+                    patches = loadGuard.read(src.uid, src.patchesJarFile) {
+                        PatchBundle.Loader.metadata(bundle)
+                    },
                     patcherVersion = bundle.manifestAttributes?.patcherVersion,
                 )
             } catch (error: Throwable) {
                 failures += src.uid to error
                 val requiredPatcher = bundle.manifestAttributes?.patcherVersion
-                if (requiredPatcher != null && isPatcherOutdated(requiredPatcher)) {
+                if (error is PatchBundleHeldBackException) {
+                    // The bundle took the process down with it, so the launch it would break is
+                    // worth more than the patches it carries
+                    Log.e(tag, "Held back bundle ${src.name}", error)
+                } else if (requiredPatcher != null && isPatcherOutdated(requiredPatcher)) {
                     // Loading fails with linkage errors when the bundle uses patcher APIs this
                     // manager does not have. Spell it out so logs are not just a NoSuchMethodError
                     Log.e(
@@ -664,7 +675,10 @@ class PatchBundleRepository(
 
     suspend fun reset() = dispatchAction("Reset") { state ->
         dao.reset()
-        (state as? BundleState.Ready)?.sources?.keys?.forEach { directoryOf(it).deleteRecursively() }
+        (state as? BundleState.Ready)?.sources?.keys?.forEach {
+            directoryOf(it).deleteRecursively()
+            loadGuard.forget(it)
+        }
         doReload()
     }
 
@@ -829,6 +843,7 @@ class PatchBundleRepository(
             bundles.forEach {
                 dao.remove(it.uid)
                 directoryOf(it.uid).deleteRecursively()
+                loadGuard.forget(it.uid)
                 sources.remove(it.uid)
                 info.remove(it.uid)
             }

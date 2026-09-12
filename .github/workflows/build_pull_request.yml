@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       # Fork PRs cannot access repository secrets by design, so we detect them
       # here and fall back to an unsigned debug build instead of a signed release.
@@ -45,10 +45,10 @@ jobs:
           ls -la app/keystore.jks
 
       - name: Setup Java
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v6
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
 
       - name: Cache Gradle
         uses: burrunan/gradle-cache-action@v3
@@ -62,6 +62,16 @@ jobs:
         run: |
           chmod +x ./gradlew
           ./gradlew :app:testDebugUnitTest --stacktrace
+
+      # lintVital is disabled in the app build script, so release builds run no
+      # checks of their own; this step is the only place lint gates a change
+      - name: Run lint
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          _JAVA_OPTIONS: "-Djava.awt.headless=true"
+        run: |
+          chmod +x ./gradlew
+          ./gradlew :app:lint --stacktrace
 
       - name: Build APK
         env:

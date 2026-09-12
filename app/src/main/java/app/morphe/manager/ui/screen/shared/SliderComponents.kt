@@ -24,10 +24,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -236,10 +238,12 @@ fun ScaleSliderRow(
             tint = LocalDialogSecondaryTextColor.current
         )
         Spacer(Modifier.width(8.dp))
+        val sliderState = remember(valueRange) { SliderState(value = value, trackRange = valueRange) }
+        // The caller owns the value, so anything that moves it elsewhere has to reach the state
+        sliderState.value = value
         Slider(
-            value = value,
+            state = sliderState,
             onValueChange = { onValueChange(it.coerceIn(valueRange.start, valueRange.endInclusive)) },
-            valueRange = valueRange,
             modifier = Modifier.weight(1f)
         )
         Spacer(Modifier.width(8.dp))

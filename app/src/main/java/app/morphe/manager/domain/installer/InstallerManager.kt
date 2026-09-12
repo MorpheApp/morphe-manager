@@ -126,6 +126,21 @@ class InstallerManager(
 
     fun getPrimaryToken(): Token = parseToken(prefs.installerPrimary.getBlocking())
 
+    /**
+     * Whether an install started right after patching reaches the user on its own, either
+     * silently or through a confirmation the installer knows how to put in front of them.
+     */
+    suspend fun autoInstallAllowed(targetPackageName: String): Boolean {
+        if (!prefs.autoInstallAfterPatching.get()) return false
+        if (prefs.promptInstallerOnInstall.get()) return false
+
+        return when (parseToken(prefs.installerPrimary.get())) {
+            Token.Shizuku, Token.ShizukuPlayStore -> true
+            Token.Internal -> sessionInstaller.canUpdateSilently(targetPackageName)
+            else -> false
+        }
+    }
+
     suspend fun updatePrimaryToken(token: Token) {
         Log.d(TAG, "updatePrimaryToken -> ${token.describe()}")
         prefs.installerPrimary.update(tokenToPreference(token))

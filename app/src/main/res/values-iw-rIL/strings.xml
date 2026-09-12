@@ -28,6 +28,8 @@
     <string name="home_metadata_errors_subtitle">הקש כדי לעיין במקורות</string>
     <string name="home_outdated_manager_title">Morphe מיושן</string>
     <string name="home_outdated_manager_subtitle">חלק ממקורות הטלאים דורשים גרסה חדשה יותר</string>
+    <string name="home_held_back_title">מקור תיקונים הפיל את Morphe</string>
+    <string name="home_held_back_subtitle">המקור דולג כדי שהאפליקציה תוכל להתחיל לפעול. הקש לסקירה.‏</string>
     <string name="home_metered_skipped_title">עדכונים הופסקו בזמן שימוש בנתונים סלולריים</string>
     <string name="home_metered_skipped_subtitle">הקש כדי לאפשר עדכונים בנתונים סלולריים</string>
     <string name="home_repatch_available_subtitle">הקש כדי להוסיף את כולם לתור</string>
@@ -150,6 +152,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">לא ניתן להוריד את חבילת התיקון. כתובת ה-URL של המקור עשויה להיות שגויה או שהקובץ אינו קיים</string>
     <string name="sources_management_outdated_manager_badge">עדכן Morphe</string>
     <string name="sources_management_outdated_manager_hint">מקור זה נבנה עבור patcher %1$s, אך Morphe %2$s כוללת את patcher %3$s. עדכן את Morphe כדי להשתמש בו</string>
+    <string name="sources_management_held_back_badge">קרס</string>
+    <string name="sources_management_held_back_hint">המקור הזה גרם ל-Morphe לקרוס בזמן הטעינה, ולכן מדלגים עליו. עדכן או ייבא אותו מחדש כדי לנסות שוב</string>
     <string name="sources_management_source_enabled">מקור מופעל</string>
     <string name="sources_management_source_disabled">מקור מושבת</string>
     <string name="sources_management_source_updating">עדכון מקור</string>
@@ -630,6 +634,12 @@
     <string name="mini_game_snake_swipe_to_start">החלק כדי להתחיל</string>
     <string name="mini_game_dino_picker_subtitle">הקש כדי לקפוץ מעל קקטוסים</string>
     <string name="mini_game_dino_tap_to_start">הקש כדי לרוץ</string>
+    <string name="mini_game_blocks_picker_subtitle">התאימו את הצורות, נקו שורות</string>
+    <string name="mini_game_blocks_tap_to_start">הקש כדי לסובב, החלק כדי להזיז, החלק למטה כדי להוריד</string>
+    <string name="mini_game_bricks_picker_subtitle">הקפיצו את הכדור, נקו את הקיר</string>
+    <string name="mini_game_bricks_tap_to_start">גררו לכוון, הקישו לשגר</string>
+    <string name="mini_game_miner_picker_subtitle">הקש כדי לפתוח, החזק כדי לסמן</string>
+    <string name="mini_game_pairs_picker_subtitle">הפוך קלפים, מצא את הזוג</string>
     <!-- Settings -->
     <string name="appearance">מראה</string>
     <string name="advanced">מתקדם</string>
@@ -893,6 +903,8 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="installer_action_open_shizuku">פתח את Shizuku</string>
     <string name="installer_hint_generic">ההתקנה נכשלה. נסה שוב או שנה להתקן אחר</string>
     <string name="installer_hint_conflict">אפליקציה אחרת עם שם חבילה זה כבר מותקנת. הסר אותה לפני המשך</string>
+    <string name="installer_confirm_notification_title">אשר את ההתקנה</string>
+    <string name="installer_confirm_notification_text">הקש כדי לסיים את התקנת האפליקציה המתוקנת</string>
     <string name="installer_external_launched">פענוח %s…</string>
     <string name="installer_external_timeout">%s לא אישר את ההתקנה. בדוק את האפליקציה האחרת ונסה שוב</string>
     <string name="installer_external_success">%s דיווח על התקנה מוצלחת</string>
@@ -909,7 +921,7 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="settings_prompt_installer_on_install">בקשת בחירת מתקין</string>
     <string name="settings_prompt_installer_on_install_description">מציג תיבת דו-שיח לבחירת המתקין בכל פעם שאפליקציה מתוקנת מותקנת</string>
     <string name="settings_auto_install_with_shizuku">התקנה אוטומטית לאחר תיקון</string>
-    <string name="settings_auto_install_with_shizuku_description">מתקין בשקט את קובץ ה-APK המתוקן ברגע שהתיקון הושלם</string>
+    <string name="settings_auto_install_with_shizuku_description">מתקין את ה-APK המתוקן מיד עם סיום התיקון</string>
     <string name="settings_auto_uninstall_with_shizuku">הסרה אוטומטית במקרה של התנגשות</string>
     <string name="settings_auto_uninstall_with_shizuku_description">בעת התקנה אוטומטית עם Shizuku, הסר את האפליקציה הקיימת תחילה אם Android מדווח על התנגשות חתימות. פעולה זו עשויה להסיר נתוני אפליקציה</string>
     <string name="settings_auto_uninstall_warning_title">הפעל הסרה אוטומטית?</string>

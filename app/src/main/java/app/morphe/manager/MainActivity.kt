@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.setContent
@@ -24,6 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.window.DialogWindowProvider
+import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -155,11 +157,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
+     * Tells the launcher a shortcut was used, so it can rank the list by use. The id is dropped
+     * once reported, or the same activation counts again when the activity is recreated.
+     */
+    private fun reportShortcutUsage(intent: Intent?) {
+        val shortcutId = intent?.getStringExtra(EXTRA_SHORTCUT_ID) ?: return
+        intent.removeExtra(EXTRA_SHORTCUT_ID)
+        runCatching { ShortcutManagerCompat.reportShortcutUsed(this, shortcutId) }
+            .onFailure { Log.w(tag, "Failed to report shortcut usage", it) }
+    }
+
+    /**
      * Handles add-source deep links from an explicit-package `intent://` fired by the website.
      * Format: https://morphe.software/add-source?<github|gitlab>=owner/repo(&name=…)
      * Only GitHub and GitLab URLs are accepted.
      */
     private fun handleDeepLinkIntent(intent: Intent?, vm: MainViewModel) {
+        reportShortcutUsage(intent)
+
         // Handled here rather than in onNewIntent so a cold start from a notification or a
         // launcher shortcut triggers the check as well
         if (intent?.getBooleanExtra(UpdateNotificationManager.EXTRA_TRIGGER_UPDATE_CHECK, false) == true) {
@@ -278,6 +293,9 @@ class MainActivity : AppCompatActivity() {
 
         /** Package names to patch, either a string array or a comma-separated string. */
         const val EXTRA_BATCH_PACKAGES = "packages"
+
+        /** Identifies the launcher shortcut an intent came from, for usage reporting. */
+        const val EXTRA_SHORTCUT_ID = "shortcut_id"
 
         /** Action behind the per-app launcher shortcuts. */
         const val ACTION_PATCH_APP = "app.morphe.manager.action.PATCH_APP"

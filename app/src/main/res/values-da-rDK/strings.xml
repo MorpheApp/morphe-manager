@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">Tryk for at gennemgå kilder</string>
     <string name="home_outdated_manager_title">Morphe er forældet</string>
     <string name="home_outdated_manager_subtitle">Nogle kilde-feeds kræver en nyere version</string>
+    <string name="home_held_back_title">En patchkilde fik Morphe til at crashe</string>
+    <string name="home_held_back_subtitle">Den blev sprunget over, så appen kunne starte. Tryk for at se nærmere</string>
     <string name="home_metered_skipped_title">Opdateringer pauset på mobildata</string>
     <string name="home_metered_skipped_subtitle">Tryk for at tillade opdateringer over mobildata</string>
     <string name="home_repatch_available_subtitle">Tryk for at kø dem alle</string>
@@ -149,6 +151,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">Opdateringspakken kunne ikke hentes. Kilde-URL\'en kan være forkert, eller filen findes ikke</string>
     <string name="sources_management_outdated_manager_badge">Opdater Morphe</string>
     <string name="sources_management_outdated_manager_hint">Denne kilde er bygget til patcher %1$s, men Morphe %2$s indeholder patcher %3$s. Opdater Morphe for at bruge den</string>
+    <string name="sources_management_held_back_badge">Crashet</string>
+    <string name="sources_management_held_back_hint">Denne kilde fik Morphe til at crashe under indlæsningen, så den bliver sprunget over. Opdater den, eller importer den igen for at prøve igen</string>
     <string name="sources_management_source_enabled">Kilde aktiveret</string>
     <string name="sources_management_source_disabled">Kilde deaktiveret</string>
     <string name="sources_management_source_updating">Opdaterer kilde</string>
@@ -629,6 +633,12 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="mini_game_snake_swipe_to_start">Stryk for at starte</string>
     <string name="mini_game_dino_picker_subtitle">Tryk for at hoppe over kaktusser</string>
     <string name="mini_game_dino_tap_to_start">Tryk for at løbe</string>
+    <string name="mini_game_blocks_picker_subtitle">Tilpas formerne, klare linjer</string>
+    <string name="mini_game_blocks_tap_to_start">Tryk for at rotere, stryg for at flytte, stryg ned for at slippe</string>
+    <string name="mini_game_bricks_picker_subtitle">Få bolden til at hoppe, fjern muren</string>
+    <string name="mini_game_bricks_tap_to_start">Træk for at sigte, tryk for at affyre</string>
+    <string name="mini_game_miner_picker_subtitle">Tryk for at åbne, hold for at markere</string>
+    <string name="mini_game_pairs_picker_subtitle">Vend kortene, find parret</string>
     <!-- Settings -->
     <string name="appearance">Udseende</string>
     <string name="advanced">Avanceret</string>
@@ -880,6 +890,8 @@ Størrelsesformatet skal være som følger:
     <string name="installer_action_open_shizuku">Åbn Shizuku</string>
     <string name="installer_hint_generic">Installationen mislykkedes. Prøv igen eller skift til en anden installer</string>
     <string name="installer_hint_conflict">En anden app med dette pakkenavn er allerede installeret. Fjern den før du fortsætter</string>
+    <string name="installer_confirm_notification_title">Bekræft installationen</string>
+    <string name="installer_confirm_notification_text">Tryk for at afslutte installationen af den patchede app</string>
     <string name="installer_external_launched">Åbner %s…</string>
     <string name="installer_external_timeout">%s bekræftede ikke installationen. Tjek den anden app og prøv igen</string>
     <string name="installer_external_success">%s meldte om en succesfuld installation</string>
@@ -896,7 +908,7 @@ Størrelsesformatet skal være som følger:
     <string name="settings_prompt_installer_on_install">Installatørvalgsmeddelelse</string>
     <string name="settings_prompt_installer_on_install_description">Vis installer-valgdialog hver gang du installerer en patchet app</string>
     <string name="settings_auto_install_with_shizuku">Automatisk installation efter patching</string>
-    <string name="settings_auto_install_with_shizuku_description">Installerer automatisk den patched APK, så snart patching er fuldført</string>
+    <string name="settings_auto_install_with_shizuku_description">Installerer den patchede APK, så snart patching er færdig</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatisk afinstallation ved konflikt</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Når du automatisk installerer med Shizuku, skal du først afinstallere den eksisterende app, hvis Android rapporterer en signaturkonflikt. Dette kan fjerne app-data</string>
     <string name="settings_auto_uninstall_warning_title">Aktiver automatisk afinstallation?</string>

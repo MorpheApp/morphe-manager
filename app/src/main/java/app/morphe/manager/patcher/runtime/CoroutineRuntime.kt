@@ -4,6 +4,7 @@ import android.content.Context
 import app.morphe.manager.patcher.Session
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.patch.PatchBundle
+import app.morphe.manager.patcher.patch.applyPatchOptions
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.ProgressEventHandler
 import app.morphe.manager.ui.model.State
@@ -34,30 +35,27 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
         try {
             val selectedBundles = selectedPatches.keys
             val bundles = bundles()
-            val uids = bundles.entries.associate { (key, value) -> value to key }
 
-            val allPatches =
-                PatchBundle.Loader.patches(bundles.values, packageName)
-                    .mapKeys { (b, _) -> uids[b]!! }
-                    .filterKeys { it in selectedBundles }
+            // Only the selected bundles are read, one at a time, so a native death inside any of
+            // them is attributed to it instead of leaving the next launch to crash the same way
+            val allPatches = bundles
+                .filterKeys { it in selectedBundles }
+                .mapValues { (uid, bundle) ->
+                    bundleLoadGuard.read(uid, File(bundle.patchesJar)) {
+                        PatchBundle.Loader.patches(setOf(bundle), packageName).getValue(bundle)
+                    }
+                }
 
             val patchList = selectedPatches.flatMap { (bundle, selected) ->
                 allPatches[bundle]?.filterKeys { it in selected }?.values
                     ?: throw IllegalArgumentException("Patch bundle $bundle does not exist")
             }
 
-            // Set all patch options.
+            // Set all patch options
             options.forEach { (bundle, bundlePatchOptions) ->
                 val patchesByName = allPatches[bundle] ?: return@forEach
 
-                bundlePatchOptions.forEach { (patchName, configuredPatchOptions) ->
-                    // Morphe: Skip if patch doesn't exist in this bundle
-                    val patch = patchesByName[patchName] ?: return@forEach
-
-                    configuredPatchOptions.forEach { (key, value) ->
-                        patch.options[key] = value
-                    }
-                }
+                patchesByName.applyPatchOptions(bundlePatchOptions, logger)
             }
 
             onProgress(null, State.COMPLETED, null) // Loading patches

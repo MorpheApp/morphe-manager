@@ -1,3 +1,44 @@
+# [1.31.0-dev.4](https://github.com/[secure]App/morphe-manager/compare/v1.31.0-dev.3...v1.31.0-dev.4) (2026-09-12)
+
+
+### Bug Fixes
+
+* Apply patch options only to the patches the run selected ([7c176a8](https://github.com/[secure]App/morphe-manager/commit/7c176a8be641241d3689e65b508f79662ac5e569))
+
+# [1.31.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.31.0-dev.2...v1.31.0-dev.3) (2026-09-12)
+
+
+### Bug Fixes
+
+* Keep patching working when firmware makes a system call the device forbids ([ecd4c43](https://github.com/MorpheApp/morphe-manager/commit/ecd4c431777a665efb8d17668e41456de95b4417))
+
+
+### Features
+
+* Add Blocks, Bricks, Miner and Pairs mini-games ([8e5961c](https://github.com/MorpheApp/morphe-manager/commit/8e5961c0ed0142b99c53a130f00b090a974668aa))
+
+# [1.31.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.31.0-dev.1...v1.31.0-dev.2) (2026-09-12)
+
+
+### Bug Fixes
+
+* Set patch options as the type each option declares ([a18b93e](https://github.com/MorpheApp/morphe-manager/commit/a18b93ed2e5601e152fb17a9f10e71b06be6b43d))
+
+# [1.31.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.30.1-dev.1...v1.31.0-dev.1) (2026-09-11)
+
+
+### Features
+
+* Report launcher shortcut usage so launchers can rank them ([c076d4a](https://github.com/MorpheApp/morphe-manager/commit/c076d4a66d5e99f20b68615ae0b44f30bc32bf53))
+* Update patched apps without the system confirmation dialog ([a609bee](https://github.com/MorpheApp/morphe-manager/commit/a609beeb34be84a6670dabf60492b78d6b46e752))
+
+## [1.30.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.30.0...v1.30.1-dev.1) (2026-09-11)
+
+
+### Bug Fixes
+
+* Survive a patch bundle that crashes the process while loading ([c048cce](https://github.com/MorpheApp/morphe-manager/commit/c048cce7312d2988e51420a1793610d09c8a30da))
+
 # [1.30.0](https://github.com/MorpheApp/morphe-manager/compare/v1.29.0...v1.30.0) (2026-09-10)
 
 

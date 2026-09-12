@@ -250,6 +250,13 @@ internal fun PatchOptionsDialog(
                     }
                 }
 
+                // The patcher rejects a Long where an Int is declared, so the text is read as the
+                // option's own type. A cleared field drops the value back to the patch default
+                fun onNumberInput(text: String) {
+                    if (text.isBlank()) return onValueChange(key, null)
+                    coerceOptionValue(option.type, text)?.let { onValueChange(key, it) }
+                }
+
                 when (val kind = resolveOptionKind(option, value)) {
                     OptionKind.StringList -> ListStringInputOption(
                         title = option.title,
@@ -381,7 +388,7 @@ internal fun PatchOptionsDialog(
                         value = (value as? Number)?.toLong()?.toString() ?: "",
                         required = option.required,
                         keyboardType = KeyboardType.Number,
-                        onValueChange = { it.toLongOrNull()?.let { num -> onValueChange(key, num) } }
+                        onValueChange = ::onNumberInput
                     )
 
                     OptionKind.FloatDouble -> TextInputOption(
@@ -390,7 +397,7 @@ internal fun PatchOptionsDialog(
                         value = (value as? Number)?.toFloat()?.toString() ?: "",
                         required = option.required,
                         keyboardType = KeyboardType.Decimal,
-                        onValueChange = { it.toFloatOrNull()?.let { num -> onValueChange(key, num) } }
+                        onValueChange = ::onNumberInput
                     )
 
                     OptionKind.ArrayDropdown -> DropdownOptionItem(

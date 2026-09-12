@@ -55,6 +55,7 @@ import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.avatarUrls
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isHeldBack
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.sourceType
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.usesPrerelease
 import app.morphe.manager.domain.manager.PreferencesManager
@@ -756,6 +757,20 @@ private fun BundleManagementCard(
                                 )
                             }
 
+                            // Held back hint (shown when reading the source killed the process)
+                            AnimatedVisibility(
+                                visible = bundle.isHeldBack,
+                                enter = Animations.expandFadeEnter,
+                                exit = Animations.shrinkFadeExit
+                            ) {
+                                Notice(
+                                    text = stringResource(R.string.sources_management_held_back_hint),
+                                    icon = Icons.Outlined.ErrorOutline,
+                                    tone = SemanticTone.Error,
+                                    density = NoticeDensity.Compact
+                                )
+                            }
+
                             // Outdated manager hint
                             AnimatedVisibility(
                                 visible = bundle.requiresManagerUpdate,
@@ -1107,6 +1122,18 @@ private fun BundleCardHeader(
                 ) {
                     StatusBadge(
                         text = stringResource(R.string.sources_management_outdated_manager_badge),
+                        tone = SemanticTone.Error
+                    )
+                }
+
+                // Held back badge
+                AnimatedVisibility(
+                    visible = bundle.isHeldBack,
+                    enter = Animations.expandHorizFadeIn,
+                    exit = Animations.shrinkHorizFadeOut
+                ) {
+                    StatusBadge(
+                        text = stringResource(R.string.sources_management_held_back_badge),
                         tone = SemanticTone.Error
                     )
                 }

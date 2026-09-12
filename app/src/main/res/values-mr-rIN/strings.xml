@@ -856,7 +856,6 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install">इंस्टॉलर निवड प्रॉम्प्ट</string>
     <string name="settings_prompt_installer_on_install_description">पॅच केलेले ॲप इंस्टॉल करताना प्रत्येक वेळी इंस्टॉलर निवड संवाद दर्शवितो</string>
     <string name="settings_auto_install_with_shizuku">पॅचिंग केल्यानंतर स्वयंचलितपणे स्थापित करा</string>
-    <string name="settings_auto_install_with_shizuku_description">पॅचिंग पूर्ण झाल्यावर पॅच केलेले APK शांतपणे स्थापित करते</string>
     <string name="settings_auto_uninstall_with_shizuku">संघर्ष झाल्यास ऑटो-अनइंस्टॉल करा</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Shizuku सह ऑटो-इंस्टॉल करताना, Android ने सिग्नेचर संघर्ष नोंदवल्यास, विद्यमान ॲप प्रथम अनइंस्टॉल करा. यामुळे ॲप डेटा काढला जाऊ शकतो.</string>
     <string name="settings_auto_uninstall_warning_title">ऑटो-अनइंस्टॉल सक्षम करायचे?</string>

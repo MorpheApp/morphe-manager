@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen.settings.system
 
+import android.os.Build
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -104,7 +105,7 @@ fun InstallerSelectionDialogContainer(
         settingsViewModel.getInstallerEntries(installTarget, primaryToken)
     }
 
-    val autoInstallEnabled by settingsViewModel.prefs.autoInstallWithShizuku.getAsState()
+    val autoInstallEnabled by settingsViewModel.prefs.autoInstallAfterPatching.getAsState()
     val autoUninstallEnabled by settingsViewModel.prefs.autoUninstallWithShizuku.getAsState()
     val promptEnabled by settingsViewModel.prefs.promptInstallerOnInstall.getAsState()
 
@@ -121,7 +122,7 @@ fun InstallerSelectionDialogContainer(
         shizukuStatusProvider = settingsViewModel::getShizukuStatus,
         onRequestShizukuPermission = settingsViewModel::requestShizukuPermission,
         autoInstallEnabled = autoInstallEnabled,
-        onAutoInstallToggle = settingsViewModel::setAutoInstallWithShizuku,
+        onAutoInstallToggle = settingsViewModel::setAutoInstallAfterPatching,
         autoUninstallEnabled = autoUninstallEnabled,
         onAutoUninstallToggle = settingsViewModel::setAutoUninstallWithShizuku,
         installerPromptEnabled = promptEnabled,
@@ -328,8 +329,14 @@ fun InstallerSelectionDialog(
 
             val showPlayStoreToggle = selectedToken.supportsPlayStoreMode() &&
                     options.any { it.token == selectedToken.withPlayStoreMode(true) }
-            val showAutoInstallToggle = selectedToken.isShizukuToken() && onAutoInstallToggle != null
             val showPromptToggle = onInstallerPromptToggle != null
+            // Offered only where the install can reach the user on its own: Shizuku always, the
+            // system installer through a silent session, which needs Android 12+
+            val showAutoInstallToggle = onAutoInstallToggle != null &&
+                    (selectedToken.isShizukuToken() ||
+                            (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
+                                    selectedToken == InstallerManager.Token.Internal &&
+                                    !installAsPlayStore))
 
             AnimatedVisibility(
                 visible = currentSelection.value == InstallerManager.Token.AutoSaved,
@@ -343,7 +350,15 @@ fun InstallerSelectionDialog(
                 )
             }
 
-            if (showPlayStoreToggle || showAutoInstallToggle || showPromptToggle) {
+            // A divider belongs only between rows that are actually on screen
+            val toggleRows = listOf(
+                showPlayStoreToggle,
+                showAutoInstallToggle,
+                showPromptToggle
+            )
+            fun dividerBefore(row: Int) = toggleRows.take(row).any { it }
+
+            if (toggleRows.any { it }) {
                 SettingsDivider(fullWidth = true)
 
                 SettingsGroup {
@@ -373,7 +388,7 @@ fun InstallerSelectionDialog(
                         exit = Animations.shrinkFadeExit
                     ) {
                         Column {
-                            if (showPlayStoreToggle) SettingsDivider()
+                            if (dividerBefore(1)) SettingsDivider()
                             SettingsSwitchItem(
                                 checked = autoInstallEnabled,
                                 onToggle = {
@@ -389,7 +404,8 @@ fun InstallerSelectionDialog(
                             )
 
                             AnimatedVisibility(
-                                visible = autoInstallEnabled && onAutoUninstallToggle != null,
+                                visible = autoInstallEnabled && onAutoUninstallToggle != null &&
+                                        selectedToken.isShizukuToken(),
                                 enter = Animations.expandFadeEnter,
                                 exit = Animations.shrinkFadeExit
                             ) {
@@ -414,7 +430,7 @@ fun InstallerSelectionDialog(
                     }
 
                     if (showPromptToggle) {
-                        if (showPlayStoreToggle || showAutoInstallToggle) SettingsDivider()
+                        if (dividerBefore(2)) SettingsDivider()
                         SettingsSwitchItem(
                             checked = installerPromptEnabled,
                             onToggle = {

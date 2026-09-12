@@ -858,7 +858,6 @@ Qasîyên wêneyan divê wiha bin:
     <string name="settings_prompt_installer_on_install">Dîyaloga hilbijartina sazkirî</string>
     <string name="settings_prompt_installer_on_install_description">Hîşyarî her carî dema ku app’a girêtî hatî sazkirin, dîyaloga hilbijartina sazkirî nîşan bide</string>
     <string name="settings_auto_install_with_shizuku">Têxînekî otomatîkî piştî paqijkirinê</string>
-    <string name="settings_auto_install_with_shizuku_description">Bi hesînî APK-ya paqijkirî piştî qedandina paqijkirinê saz dike</string>
     <string name="settings_auto_uninstall_with_shizuku">Lêgerîna otomatîkî li ser derengî</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Dema ku bi Shizuku saz kirin, eger Android rapor bide ku kêşekê qebûl kir, berê aplikasyona heyî ya ku heye rake. Ew dikare daneyên aplikasyonê jê der bike.</string>
     <string name="settings_auto_uninstall_warning_title">Destûrê dayî lêgerîna otomatîkî?</string>

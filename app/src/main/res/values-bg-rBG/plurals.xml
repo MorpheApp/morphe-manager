@@ -73,8 +73,8 @@
         <item quantity="other">%s избран</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
-        <item quantity="one">Копиран е %s кръпен файл от избрания пакет</item>
-        <item quantity="other">Копирани са %s кръпени файла от избрания пакет</item>
+        <item quantity="one">Копиран е %s пач от избрания пакет</item>
+        <item quantity="other">Копирани са %s пачове от избрания пакет</item>
     </plurals>
     <plurals name="core_count">
         <item quantity="one">%s ядро</item>

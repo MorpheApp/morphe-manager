@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">Trykk for å se kildene</string>
     <string name="home_outdated_manager_title">Morphe er utdatert</string>
     <string name="home_outdated_manager_subtitle">Noen patch-kilder trenger en nyere versjon</string>
+    <string name="home_held_back_title">En patch-kilde fikk Morphe til å krasje</string>
+    <string name="home_held_back_subtitle">Den ble hoppet over slik at appen kunne starte. Trykk for å se gjennom</string>
     <string name="home_metered_skipped_title">Oppdateringer satt på pause over mobildata</string>
     <string name="home_metered_skipped_subtitle">Trykk for å tillate oppdateringer over mobildata</string>
     <string name="home_repatch_available_subtitle">Trykk for å legge alle i kø</string>
@@ -149,6 +151,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">Patch-pakken kunne ikke lastes ned. Kilde-URL-en kan være feil eller filen finnes ikke</string>
     <string name="sources_management_outdated_manager_badge">Oppdater Morphe</string>
     <string name="sources_management_outdated_manager_hint">Denne kilden er bygget for patcher %1$s, men Morphe %2$s inkluderer patcher %3$s. Oppdater Morphe for å bruke den</string>
+    <string name="sources_management_held_back_badge">Krasjet</string>
+    <string name="sources_management_held_back_hint">Denne kilden fikk Morphe til å krasje under innlasting, så den blir hoppet over. Oppdater eller importer den på nytt for å prøve igjen</string>
     <string name="sources_management_source_enabled">Kilde aktivert</string>
     <string name="sources_management_source_disabled">Kilde deaktivert</string>
     <string name="sources_management_source_updating">Oppdaterer kilde</string>
@@ -629,6 +633,12 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="mini_game_snake_swipe_to_start">Sveip for å starte</string>
     <string name="mini_game_dino_picker_subtitle">Trykk for å hoppe over kaktusene</string>
     <string name="mini_game_dino_tap_to_start">Trykk for å løpe</string>
+    <string name="mini_game_blocks_picker_subtitle">Passe formene, fjern linjer</string>
+    <string name="mini_game_blocks_tap_to_start">Trykk for å rotere, sveip for å flytte, sveip ned for å slippe</string>
+    <string name="mini_game_bricks_picker_subtitle">Sprett ballen, fjern veggen</string>
+    <string name="mini_game_bricks_tap_to_start">Dra for å sikte, trykk for å skyte</string>
+    <string name="mini_game_miner_picker_subtitle">Trykk for å åpne, hold inne for å flagge</string>
+    <string name="mini_game_pairs_picker_subtitle">Vend kortene, finn paret</string>
     <!-- Settings -->
     <string name="appearance">Utseende</string>
     <string name="advanced">Avansert</string>
@@ -882,6 +892,8 @@ morphe_header_custom_dark.png
     <string name="installer_action_open_shizuku">Åpne Shizuku</string>
     <string name="installer_hint_generic">Installeringen mislyktes. Prøv igjen eller bytt til en annen installasjonsprogram</string>
     <string name="installer_hint_conflict">Flere patch-kilder valgt</string>
+    <string name="installer_confirm_notification_title">Bekreft installasjonen</string>
+    <string name="installer_confirm_notification_text">Trykk for å fullføre installasjonen av den patchede appen</string>
     <string name="installer_external_launched">Åpner %s…</string>
     <string name="installer_external_timeout">%s bekreftet ikke installasjonen. Sjekk den andre appen og prøv igjen</string>
     <string name="installer_external_success">%s rapporterte en vellykket installasjon</string>
@@ -898,7 +910,7 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install">Installeringsvalg-melding</string>
     <string name="settings_prompt_installer_on_install_description">Viser installasjonsvalgdialogen hver gang en patchet app installeres</string>
     <string name="settings_auto_install_with_shizuku">Automatisk installasjon etter patching</string>
-    <string name="settings_auto_install_with_shizuku_description">Installerer APK-en stille og rolig så snart patching er fullført</string>
+    <string name="settings_auto_install_with_shizuku_description">Installerer den patchede APK-en så snart patchingen er fullført</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatisk avinstallasjon ved konflikt</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Når du installerer automatisk med Shizuku, avinstaller den eksisterende appen først hvis Android rapporterer en signaturkonflikt. Dette kan fjerne appdata</string>
     <string name="settings_auto_uninstall_warning_title">Aktiver automatisk avinstallasjon?</string>

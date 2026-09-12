@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">Bấm để xem nguồn</string>
     <string name="home_outdated_manager_title">Morphe đã quá cũ</string>
     <string name="home_outdated_manager_subtitle">Một số nguồn vá yêu cầu phiên bản Morphe mới hơn</string>
+    <string name="home_held_back_title">Một nguồn bản vá đã làm Morphe bị sập</string>
+    <string name="home_held_back_subtitle">Nguồn này đã bị bỏ qua để ứng dụng có thể khởi động. Nhấn để xem lại</string>
     <string name="home_metered_skipped_title">Tạm dừng cập nhật qua dữ liệu di động</string>
     <string name="home_metered_skipped_subtitle">Bấm để tiếp tục cập nhật qua dữ liệu di động</string>
     <string name="home_repatch_available_subtitle">Nhấn để xếp tất cả vào hàng đợi</string>
@@ -149,6 +151,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">Không thể tải gói vá. URL nguồn có thể không đúng hoặc file không tồn tại</string>
     <string name="sources_management_outdated_manager_badge">Cập nhật Morphe</string>
     <string name="sources_management_outdated_manager_hint">Nguồn vá này được xây dựng cho trình vá %1$s, nhưng Morphe %2$s chỉ có trình vá %3$s. Hãy cập nhật Morphe để sử dụng nguồn vá này</string>
+    <string name="sources_management_held_back_badge">Đã sập</string>
+    <string name="sources_management_held_back_hint">Nguồn này đã làm Morphe sập khi đang tải nên đang bị bỏ qua. Cập nhật hoặc nhập lại nguồn này để thử lại</string>
     <string name="sources_management_source_enabled">Nguồn đã bật</string>
     <string name="sources_management_source_disabled">Nguồn đã tắt</string>
     <string name="sources_management_source_updating">Đang cập nhật nguồn</string>
@@ -631,6 +635,12 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="mini_game_snake_swipe_to_start">Vuốt để bắt đầu</string>
     <string name="mini_game_dino_picker_subtitle">Chạm để nhảy qua xương rồng</string>
     <string name="mini_game_dino_tap_to_start">Chạm để chạy</string>
+    <string name="mini_game_blocks_picker_subtitle">Ghép hình, xóa dòng</string>
+    <string name="mini_game_blocks_tap_to_start">Chạm để xoay, vuốt để di chuyển, vuốt xuống để thả</string>
+    <string name="mini_game_bricks_picker_subtitle">Bật bóng, phá tường</string>
+    <string name="mini_game_bricks_tap_to_start">Kéo để ngắm, chạm để bắn</string>
+    <string name="mini_game_miner_picker_subtitle">Chạm để mở, giữ để gắn cờ</string>
+    <string name="mini_game_pairs_picker_subtitle">Lật bài, tìm cặp giống nhau</string>
     <!-- Settings -->
     <string name="appearance">Giao diện</string>
     <string name="advanced">Nâng cao</string>
@@ -885,6 +895,8 @@ Kích thước hình ảnh yêu cầu:
     <string name="installer_action_open_shizuku">Mở Shizuku</string>
     <string name="installer_hint_generic">Không thể cài đặt. Thử lại hoặc đổi sang trình cài đặt khác</string>
     <string name="installer_hint_conflict">Đã cài đặt ứng dụng khác với cùng tên gói. Hãy gỡ cài ứng dụng đó trước khi tiếp tục</string>
+    <string name="installer_confirm_notification_title">Xác nhận cài đặt</string>
+    <string name="installer_confirm_notification_text">Chạm để hoàn tất cài đặt ứng dụng đã vá</string>
     <string name="installer_external_launched">Đang mở %s…</string>
     <string name="installer_external_timeout">%s không xác nhận cài đặt. Kiểm tra ứng dụng khác và thử lại</string>
     <string name="installer_external_success">%s báo đã cài đặt thành công</string>
@@ -903,7 +915,7 @@ Kết quả thực tế có thể khác nhau tùy theo phiên bản Android, ROM
     <string name="settings_prompt_installer_on_install">Hỏi chọn trình cài đặt</string>
     <string name="settings_prompt_installer_on_install_description">Luôn hiện hộp thoại chọn trình cài đặt khi cài ứng dụng đã vá</string>
     <string name="settings_auto_install_with_shizuku">Tự động cài đặt sau khi vá</string>
-    <string name="settings_auto_install_with_shizuku_description">Tự động cài đặt APK đã vá ngay sau khi quá trình vá hoàn tất</string>
+    <string name="settings_auto_install_with_shizuku_description">Cài đặt APK đã vá ngay khi quá trình vá hoàn tất</string>
     <string name="settings_auto_uninstall_with_shizuku">Tự động gỡ cài đặt khi có xung đột</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Khi tự động cài đặt bằng Shizuku, ứng dụng hiện có sẽ được gỡ ra trước nếu Android phát hiện xung đột chữ ký. Thao tác này có thể làm mất dữ liệu ứng dụng</string>
     <string name="settings_auto_uninstall_warning_title">Bật tính năng gỡ cài đặt tự động?</string>

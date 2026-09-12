@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">Klepnutím zkontrolujete zdroje</string>
     <string name="home_outdated_manager_title">Morphe je zastaralý</string>
     <string name="home_outdated_manager_subtitle">Některé zdroje záplat vyžadují novější verzi</string>
+    <string name="home_held_back_title">Zdroj patchů způsobil pád Morphe</string>
+    <string name="home_held_back_subtitle">Byl přeskočen, aby se aplikace mohla spustit. Klepnutím zobrazíte podrobnosti</string>
     <string name="home_metered_skipped_title">Aktualizace pozastaveny na mobilních datech</string>
     <string name="home_metered_skipped_subtitle">Klepnutím povolíte aktualizace přes mobilní data</string>
     <string name="home_repatch_available_subtitle">Klepněte pro zařazení všech do fronty</string>
@@ -149,6 +151,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">Balíček oprav nemohl být stažen. Adresa URL zdroje může být neplatná nebo soubor nemusí existovat</string>
     <string name="sources_management_outdated_manager_badge">Aktualizovat Morphe</string>
     <string name="sources_management_outdated_manager_hint">Tento zdroj je vytvořen pro patcher %1$s, ale Morphe %2$s obsahuje patcher %3$s. Aktualizujte Morphe pro jeho použití</string>
+    <string name="sources_management_held_back_badge">Pád</string>
+    <string name="sources_management_held_back_hint">Tento zdroj při načítání způsobil pád Morphe, proto je přeskočen. Aktualizujte jej nebo jej znovu importujte a zkuste to znovu</string>
     <string name="sources_management_source_enabled">Zdroj aktivován</string>
     <string name="sources_management_source_disabled">Zdroj deaktivován</string>
     <string name="sources_management_source_updating">Aktualizace zdroje</string>
@@ -478,7 +482,6 @@ Vnějní zóna (přerušovaná): může být ořezaná maskou spouštěčé - ud
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Zařízení</string>
     <!-- Free and total RAM of the device, never its storage -->
-    <string name="patcher_field_memory">Paměť</string>
     <string name="patcher_field_storage">Úložiště</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Velikost výstupu</string>
@@ -629,6 +632,9 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="mini_game_snake_swipe_to_start">Přejeďte prstem a začněte</string>
     <string name="mini_game_dino_picker_subtitle">Klepnutím přeskočte kaktusy</string>
     <string name="mini_game_dino_tap_to_start">Klepnutím pro běh</string>
+    <string name="mini_game_blocks_picker_subtitle">Sestav tvary, vyčisti řady</string>
+    <string name="mini_game_bricks_picker_subtitle">Odrážej míč, zboř zeď</string>
+    <string name="mini_game_bricks_tap_to_start">Táhni pro zamíření, klepni pro odpálení</string>
     <!-- Settings -->
     <string name="appearance">Vzhled</string>
     <string name="advanced">Pokročilé</string>
@@ -881,6 +887,8 @@ Rozměry obrázků musí být následující:
     <string name="installer_action_open_shizuku">Otevřít Shizuku</string>
     <string name="installer_hint_generic">Instalace selhala. Zkuste to znovu nebo přepněte na jiný instalátor</string>
     <string name="installer_hint_conflict">Jiná aplikace s tímto jménem balíku je již nainstalována. Odinstalujte ji před pokračováním</string>
+    <string name="installer_confirm_notification_title">Potvrďte instalaci</string>
+    <string name="installer_confirm_notification_text">Klepnutím dokončíte instalaci opravené aplikace</string>
     <string name="installer_external_launched">Otevírám %s…</string>
     <string name="installer_external_timeout">%s nepotvrdil instalaci. Zkontrolujte druhou aplikaci a zkuste to znovu</string>
     <string name="installer_external_success">%s nahlásil úspěšnou instalaci</string>
@@ -897,7 +905,7 @@ Rozměry obrázků musí být následující:
     <string name="settings_prompt_installer_on_install">Výběr instalátoru</string>
     <string name="settings_prompt_installer_on_install_description">Zobrazí dialog pro výběr instalátoru pokaždé, když se nainstaluje záplatovaná aplikace</string>
     <string name="settings_auto_install_with_shizuku">Automatická instalace po záplatování</string>
-    <string name="settings_auto_install_with_shizuku_description">Potichu nainstaluje záplatovaný APK, jakmile se záplatování dokončí</string>
+    <string name="settings_auto_install_with_shizuku_description">Nainstaluje opravený APK, jakmile se oprava dokončí</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatické odinstalování v případě konfliktu</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Při automatické instalaci pomocí Shizuku nejprve odinstalujte existující aplikaci, pokud Android nahlásí konflikt podpisů. Tímto může dojít ke smazání dat aplikace.</string>
     <string name="settings_auto_uninstall_warning_title">Povolit automatické odinstalování?</string>

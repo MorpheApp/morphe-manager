@@ -144,17 +144,14 @@ fun ManagerTheme(
 
     val view = LocalView.current
     if (!view.isInEditMode) {
-        @Suppress("DEPRECATION")
+        // The edge to edge layout and the transparent bars come from enableEdgeToEdge() in
+        // MainActivity, so only the icon tint is left to follow the theme
         SideEffect {
             val activity = view.context as Activity
+            val insetsController = WindowCompat.getInsetsController(activity.window, view)
 
-            WindowCompat.setDecorFitsSystemWindows(activity.window, false)
-
-            activity.window.statusBarColor = Color.Transparent.toArgb()
-            activity.window.navigationBarColor = Color.Transparent.toArgb()
-
-            WindowCompat.getInsetsController(activity.window, view).isAppearanceLightStatusBars = !darkTheme
-            WindowCompat.getInsetsController(activity.window, view).isAppearanceLightNavigationBars = !darkTheme
+            insetsController.isAppearanceLightStatusBars = !darkTheme
+            insetsController.isAppearanceLightNavigationBars = !darkTheme
         }
     }
 

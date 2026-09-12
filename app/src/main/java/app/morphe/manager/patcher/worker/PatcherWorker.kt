@@ -20,8 +20,8 @@ import app.morphe.manager.ManagerApplication
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
+import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
-import app.morphe.manager.domain.manager.InstallerPreferenceTokens
 import app.morphe.manager.domain.manager.KeystoreManager
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
@@ -39,6 +39,7 @@ import app.morphe.manager.patcher.util.NativeLibStripper
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.util.*
+import app.morphe.manager.util.PatchSelectionUtils.restrictTo
 import com.topjohnwu.superuser.Shell
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -58,6 +59,7 @@ class PatcherWorker(
     private val installedAppRepository: InstalledAppRepository by inject()
     private val originalApkRepository: OriginalApkRepository by inject()
     private val rootInstaller: RootInstaller by inject()
+    private val installerManager: InstallerManager by inject()
 
     class Args(
         val input: SelectedApp,
@@ -164,7 +166,8 @@ class PatcherWorker(
             successSoundUri,
             errorSoundUri
         )
-        // Don't show "patching complete" when Shizuku auto-install will immediately follow
+        // Don't show "patching complete" when an auto-install will immediately follow: it
+        // either needs nothing from the user or asks for it in a notification of its own
         if (succeeded && autoInstallPending) return
         // Don't notify when the app is in the foreground - user sees the result on screen
         if (ManagerApplication.isInForeground) return
@@ -394,6 +397,8 @@ class PatcherWorker(
                 CoroutineRuntime(applicationContext)
             }
 
+            val options = args.options.restrictTo(args.selectedPatches)
+
             // After merging a split archive (in either runtime), save the resulting mono-APK
             // directly to originalApksDir so it is used for repatching instead of the archive
             val onMergedApkReady: suspend (File) -> Unit = { mergedFile ->
@@ -415,7 +420,7 @@ class PatcherWorker(
                     patchedApk.absolutePath,
                     args.packageName,
                     args.selectedPatches,
-                    args.options,
+                    options,
                     args.logger,
                     onPatchCompleted,
                     ::updateProgress,
@@ -424,11 +429,15 @@ class PatcherWorker(
                     onRestart
                 )
             } catch (e: Exception) {
-                if (!useProcessRuntime || Build.VERSION.SDK_INT > Build.VERSION_CODES.Q || !isOomRelated(e)) {
-                    throw e
-                }
+                val fallbackReason = when {
+                    !useProcessRuntime -> null
+                    isBlockedSyscall(e) -> "Patcher process was killed for a system call the device forbids"
+                    isOomRelated(e) && Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q ->
+                        "Process runtime OOM on Android ${Build.VERSION.RELEASE}"
+                    else -> null
+                } ?: throw e
 
-                args.logger.warn("Process runtime OOM on Android ${Build.VERSION.RELEASE}, falling back to coroutine runtime")
+                args.logger.warn("$fallbackReason, falling back to coroutine runtime")
 
                 // The fallback is a fresh run of the whole pipeline, same as a memory retry
                 onRestart()
@@ -438,7 +447,7 @@ class PatcherWorker(
                     patchedApk.absolutePath,
                     args.packageName,
                     args.selectedPatches,
-                    args.options,
+                    options,
                     args.logger,
                     onPatchCompleted,
                     ::updateProgress,
@@ -465,11 +474,8 @@ class PatcherWorker(
             )
 
             Log.i(tag, "Patching succeeded".logFmt())
-            val installerPrimary = prefs.installerPrimary.get()
-            autoInstallPending = prefs.autoInstallWithShizuku.get() &&
-                    (installerPrimary == InstallerPreferenceTokens.SHIZUKU ||
-                            installerPrimary == InstallerPreferenceTokens.SHIZUKU_PLAY_STORE) &&
-                    !prefs.promptInstallerOnInstall.get()
+            val outputPackageName = pm.getPackageInfo(File(args.output))?.packageName ?: args.packageName
+            autoInstallPending = installerManager.autoInstallAllowed(outputPackageName)
             succeeded = true
             Result.success()
         } catch (e: ProcessRuntime.ProcessExitException) {
@@ -533,6 +539,14 @@ class PatcherWorker(
             )
         }
     }
+
+    /**
+     * Whether seccomp killed the patcher process. Firmware can load a vendor library from a
+     * framework class initializer, which only runs where the zygote did not get there first,
+     * so the same run survives in the app's own process.
+     */
+    private fun isBlockedSyscall(e: Exception) =
+        e is ProcessRuntime.ProcessExitException && e.exitCode == ProcessRuntime.SIGSYS_EXIT_CODE
 
     private fun isOomRelated(e: Exception) = when (e) {
         is ProcessRuntime.ProcessExitException ->

@@ -93,19 +93,6 @@ class PatchOptionsRepository(db: AppDatabase) {
     }
 
     /**
-     * Get options for a package - returns combined data from all bundles
-     * @deprecated Use getOptionsForBundle or getAllOptionsForPackage instead
-     */
-    @Deprecated(
-        "Use getOptionsForBundle for bundle-specific options or getAllOptionsForPackage for all bundles",
-        ReplaceWith("getAllOptionsForPackage(packageName, bundlePatches)")
-    )
-    suspend fun getOptions(
-        packageName: String,
-        bundlePatches: Map<Int, Map<String, PatchInfo>>
-    ): Options = getAllOptionsForPackage(packageName, bundlePatches)
-
-    /**
      * Save options for multiple bundles for a package
      */
     suspend fun saveOptions(packageName: String, options: Options) =

@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">Napauta tarkistaaksesi lähteet</string>
     <string name="home_outdated_manager_title">Morphe on vanhentunut</string>
     <string name="home_outdated_manager_subtitle">Jotkin päivityslähteet vaativat uudemman version</string>
+    <string name="home_held_back_title">Korjauslähde kaatoi Morphen</string>
+    <string name="home_held_back_subtitle">Se ohitettiin, jotta sovellus voisi käynnistyä. Napauta tarkistaaksesi. It was skipped so the app could start. Tap to review</string>
     <string name="home_metered_skipped_title">Päivitykset keskeytetty mobiilidatalla</string>
     <string name="home_metered_skipped_subtitle">Napauta salliaksesi päivitykset mobiilidatalla</string>
     <string name="home_repatch_available_subtitle">Napauta lisätäksesi kaikki jonoon</string>
@@ -149,6 +151,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">Lisäosapaketin lataaminen epäonnistui. Lähteen URL-osoite saattaa olla virheellinen tai tiedostoa ei ole olemassa</string>
     <string name="sources_management_outdated_manager_badge">Päivitä Morphe</string>
     <string name="sources_management_outdated_manager_hint">Tämä lähde on rakennettu päivitysohjelmalle %1$s, mutta Morphe %2$s sisältää päivitysohjelman %3$s. Päivitä Morphe käyttämään sitä.</string>
+    <string name="sources_management_held_back_badge">Kaatui</string>
+    <string name="sources_management_held_back_hint">Tämä lähde kaatoi Morphen latauksen aikana, joten se ohitetaan. Päivitä tai tuo se uudelleen, niin voit yrittää uudelleen.</string>
     <string name="sources_management_source_enabled">Lähde käytössä</string>
     <string name="sources_management_source_disabled">Lähde poistettu käytöstä</string>
     <string name="sources_management_source_updating">Päivitetään lähdettä</string>
@@ -630,6 +634,12 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="mini_game_snake_swipe_to_start">Pyyhkäise aloittaaksesi</string>
     <string name="mini_game_dino_picker_subtitle">Napauta hypätäksesi kaktusten yli</string>
     <string name="mini_game_dino_tap_to_start">Napauta juostaaksesi</string>
+    <string name="mini_game_blocks_picker_subtitle">Sovita muodot, selkeät linjat</string>
+    <string name="mini_game_blocks_tap_to_start">Napauta kääntääksesi, pyyhkäise liikuttaaksesi, pyyhkäise alas pudottaaksesi</string>
+    <string name="mini_game_bricks_picker_subtitle">Pomputa palloa, raivaa seinä</string>
+    <string name="mini_game_bricks_tap_to_start">Vedä tähdätäksesi, napauta laukaistaksesi</string>
+    <string name="mini_game_miner_picker_subtitle">Napauta avataksesi, pidä painettuna merkitäksesi</string>
+    <string name="mini_game_pairs_picker_subtitle">Käännä kortit, löydä pari</string>
     <!-- Settings -->
     <string name="appearance">Ulkoasu</string>
     <string name="advanced">Lisäasetukset</string>
@@ -881,6 +891,8 @@ Kuvien mittojen on oltava seuraavat:
     <string name="installer_action_open_shizuku">Avaa Shizuku</string>
     <string name="installer_hint_generic">Asennus epäonnistui. Yritä uudelleen tai vaihda toiseen asennukseen.</string>
     <string name="installer_hint_conflict">Toinen sovellus samalla pakettinimellä on jo asennettu. Poista se ennen jatkamista.</string>
+    <string name="installer_confirm_notification_title">Vahvista asennus</string>
+    <string name="installer_confirm_notification_text">Napauta viimeistelläksesi paikatun sovelluksen asennuksen</string>
     <string name="installer_external_launched">Avataan %s…</string>
     <string name="installer_external_timeout">%s ei vahvistanut asennusta. Tarkista toinen sovellus ja yritä uudelleen</string>
     <string name="installer_external_success">%s ilmoitti onnistuneesta asennuksesta</string>
@@ -897,7 +909,7 @@ Kuvien mittojen on oltava seuraavat:
     <string name="settings_prompt_installer_on_install">Asennusohjelman valintakehote</string>
     <string name="settings_prompt_installer_on_install_description">Näytä asennusohjelman valintaikkuna aina, kun asennat paikatun sovelluksen.</string>
     <string name="settings_auto_install_with_shizuku">Asenna automaattisesti korjauksen jälkeen</string>
-    <string name="settings_auto_install_with_shizuku_description">Asentaa korjatun APK:n hiljaa heti korjauksen valmistuttua</string>
+    <string name="settings_auto_install_with_shizuku_description">Asentaa paikatun APK:n heti, kun paikkaus on valmis</string>
     <string name="settings_auto_uninstall_with_shizuku">Automaattinen poisto ristiriitatilanteissa</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Kun asennat automaattisesti Shizukun avulla, poista ensin olemassa oleva sovellus, jos Android raportoi allekirjoitusristiriidasta. Tämä voi poistaa sovelluksen tiedot</string>
     <string name="settings_auto_uninstall_warning_title">Ota automaattinen poisto käyttöön?</string>

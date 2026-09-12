@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">Dodirnite da biste pregledali izvore</string>
     <string name="home_outdated_manager_title">Morphe je zastareo</string>
     <string name="home_outdated_manager_subtitle">Neki izvori zakrpa zahtevaju noviju verziju</string>
+    <string name="home_held_back_title">Jedan izvor zakrpa je srušio Morphe</string>
+    <string name="home_held_back_subtitle">Preskočen je da bi se aplikacija pokrenula. Dodirnite da biste pregledali.</string>
     <string name="home_metered_skipped_title">Ažuriranja su pauzirana na mobilnim podacima</string>
     <string name="home_metered_skipped_subtitle">Dodirnite da biste dozvolili ažuriranja putem mobilnih podataka</string>
     <string name="home_repatch_available_subtitle">Dodirni da ih sve dodaš u red čekanja</string>
@@ -149,6 +151,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">Paket zakrpa nije uspeo da se preuzme. URL adresa izvora može biti netačna ili datoteka ne postoji.</string>
     <string name="sources_management_outdated_manager_badge">Ažuriraj Morphe</string>
     <string name="sources_management_outdated_manager_hint">Ovaj izvor je napravljen za patcher %1$s, ali Morphe %2$s uključuje patcher %3$s. Ažuriraj Morphe da bi ga koristio</string>
+    <string name="sources_management_held_back_badge">Srušio se</string>
+    <string name="sources_management_held_back_hint">Ovaj izvor je srušio Morphe tokom učitavanja, pa se preskače. Ažurirajte ga ili ponovo uvezite da biste pokušali ponovo.</string>
     <string name="sources_management_source_enabled">Izvor je uključen</string>
     <string name="sources_management_source_disabled">Izvor je isključen</string>
     <string name="sources_management_source_updating">Ažuriranje izvora</string>
@@ -478,7 +482,6 @@ Spoljna zona (isprekidana): može biti isečena maskom pokretača – držite va
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Uređaj</string>
     <!-- Free and total RAM of the device, never its storage -->
-    <string name="patcher_field_memory">Memorija</string>
     <string name="patcher_field_storage">Skladište</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Output size</string>
@@ -629,6 +632,9 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="mini_game_snake_swipe_to_start">Prevucite prstom da biste počeli</string>
     <string name="mini_game_dino_picker_subtitle">Dodirnite da preskočite kaktuse</string>
     <string name="mini_game_dino_tap_to_start">Dodirnite da trčite</string>
+    <string name="mini_game_blocks_picker_subtitle">Uklopi oblike, očisti linije</string>
+    <string name="mini_game_bricks_picker_subtitle">Odbij loptu, sruši zid</string>
+    <string name="mini_game_bricks_tap_to_start">Povuci za nišanjenje, dodirni za lansiranje</string>
     <!-- Settings -->
     <string name="appearance">Izgled</string>
     <string name="advanced">Napredno</string>
@@ -866,6 +872,8 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="installer_action_open_shizuku">Otvori Shizuku</string>
     <string name="installer_hint_generic">Instalacija nije uspjela. Pokušajte ponovo ili prebacite na različitog instalera</string>
     <string name="installer_hint_conflict">Druga aplikacija sa istim imenom paketa je već instalirana. Deinstalirajte je prije nastavka</string>
+    <string name="installer_confirm_notification_title">Potvrdite instalaciju</string>
+    <string name="installer_confirm_notification_text">Dodirnite da biste završili instalaciju zakrpljene aplikacije.</string>
     <string name="installer_external_launched">Otvaranje %s…</string>
     <string name="installer_external_timeout">%s nije potvrdio instalaciju. Proverite drugu aplikaciju i pokušajte ponovo</string>
     <string name="installer_external_success">%s je prijavio uspešnu instalaciju</string>
@@ -882,7 +890,7 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <string name="settings_prompt_installer_on_install">Prompt za izbor instalera</string>
     <string name="settings_prompt_installer_on_install_description">Prikazuje dijalog za izbor instalera svaki put kada se instalira patchovana aplikacija</string>
     <string name="settings_auto_install_with_shizuku">Automatska instalacija nakon zakrpljivanja</string>
-    <string name="settings_auto_install_with_shizuku_description">Tiho instalira zakrpljeni APK čim se zakrpljivanje završi</string>
+    <string name="settings_auto_install_with_shizuku_description">Instalira zakrpljeni APK čim se zakrpljivanje završi.</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatska deinstalacija u slučaju konflikta</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Kada se automatski instalira sa Shizuku, prvo deinstaliraj postojeću aplikaciju ako Android prijavljuje konflikt potpisa. Ovo može ukloniti podatke aplikacije</string>
     <string name="settings_auto_uninstall_warning_title">Omogući automatsku deinstalaciju?</string>

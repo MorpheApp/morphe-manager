@@ -27,13 +27,15 @@
     <string name="home_metadata_errors_subtitle">Докоснете, за да прегледате източниците</string>
     <string name="home_outdated_manager_title">Morphe е остарял</string>
     <string name="home_outdated_manager_subtitle">Някои източници на пачове изискват по-нова версия</string>
+    <string name="home_held_back_title">Един източник на пачове предизвика срив на Morphe</string>
+    <string name="home_held_back_subtitle">Срив</string>
     <string name="home_metered_skipped_title">Актуализациите са спрени при използване на мобилни данни</string>
     <string name="home_metered_skipped_subtitle">Докоснете, за да разрешите актуализации през мобилни данни</string>
     <string name="home_repatch_available_subtitle">Докоснете, за да ги добавите всички в опашката</string>
     <string name="home_update_error">Неуспешно актуализиране</string>
     <string name="home_update_error_subtitle">Възникна грешка при обновяването на източниците</string>
     <string name="home_update_skipped_metered">Пропуснати актуализации</string>
-    <string name="home_update_skipped_metered_subtitle">Мобилен дан е активен</string>
+    <string name="home_update_skipped_metered_subtitle">Мобилни данни активни</string>
     <string name="home_updating_sources">Обновяне на източници…</string>
     <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
          "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
@@ -59,9 +61,9 @@
     <string name="home_app_sort_updates_first">Първо актуализации за поправки</string>
     <string name="home_app_sort_updates_first_description">Приложения с икони за актуализация първо, след това в препоръчителен ред</string>
     <string name="home_app_sort_recently_patched">Наскоро пачвани</string>
-    <string name="home_app_sort_recently_patched_description">Приложения, пачвани най-скоро, първо</string>
+    <string name="home_app_sort_recently_patched_description">Най-скоро пачваните приложения първо</string>
     <string name="home_no_apps_title">Няма налични приложения</string>
-    <string name="home_no_apps_subtitle">Добавете източник на корекция или активирайте съществуващ в %s</string>
+    <string name="home_no_apps_subtitle">Добавете източник на пачове или активирайте съществуващ в %s</string>
     <string name="home_no_apps_search_subtitle">Няма приложения, които отговарят на \"%s\"</string>
     <string name="home_all_apps_hidden_title">Всички приложения са скрити</string>
     <string name="home_all_apps_hidden_subtitle">Скрили сте всички приложения от началния екран</string>
@@ -150,6 +152,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">Пакетът за корекции не може да бъде свален. URL адресът на източника може да е неверен или файлът не съществува</string>
     <string name="sources_management_outdated_manager_badge">Актуализиране на Morphe</string>
     <string name="sources_management_outdated_manager_hint">Този източник е създаден за пачър %1$s, но Morphe %2$s включва пачър %3$s. Актуализирайте Morphe, за да го използвате.</string>
+    <string name="sources_management_held_back_badge">Срив</string>
+    <string name="sources_management_held_back_hint">Този източник предизвика срив на Morphe по време на зареждане, затова той се пропуска. Обновете го или го импортирайте отново, за да опитате отново.</string>
     <string name="sources_management_source_enabled">Източникът е активиран</string>
     <string name="sources_management_source_disabled">Източникът е деактивиран</string>
     <string name="sources_management_source_updating">Актуализиране на източник</string>
@@ -629,6 +633,12 @@
     <string name="mini_game_snake_swipe_to_start">Плъзнете, за да започнете</string>
     <string name="mini_game_dino_picker_subtitle">Докоснете, за да прескочите кактусите</string>
     <string name="mini_game_dino_tap_to_start">Докоснете, за да бягате</string>
+    <string name="mini_game_blocks_picker_subtitle">Съчетайте формите, изчистете редовете</string>
+    <string name="mini_game_blocks_tap_to_start">Докоснете, за да завъртите, плъзнете, за да преместите, плъзнете надолу, за да пуснете</string>
+    <string name="mini_game_bricks_picker_subtitle">Отскачайте топката, изчистете стената</string>
+    <string name="mini_game_bricks_tap_to_start">Плъзнете, за да прицелите, докоснете, за да изстреляте</string>
+    <string name="mini_game_miner_picker_subtitle">Докоснете, за да отворите, задръжте, за да поставите флаг</string>
+    <string name="mini_game_pairs_picker_subtitle">Обърнете картите, намерете съвпадението</string>
     <!-- Settings -->
     <string name="appearance">Външен вид</string>
     <string name="advanced">Разширено</string>
@@ -882,6 +892,8 @@ morphe_header_custom_dark.png
     <string name="installer_action_open_shizuku">Not selected</string>
     <string name="installer_hint_generic">Инсталирането провалило. Опитайте отново или превключете на различен инсталатор.</string>
     <string name="installer_hint_conflict">Друго приложение с това име вече е инсталирано. Деинсталирайте го преди да продължите.</string>
+    <string name="installer_confirm_notification_title">Потвърдете инсталацията</string>
+    <string name="installer_confirm_notification_text">Докоснете, за да завършите инсталирането на патчваното приложение.اگر فیلڈ غلط ہو تو صارف کو اطلاع دیں۔</string>
     <string name="installer_external_launched">Отваряне на %s…</string>
     <string name="installer_external_timeout">%s не потвърди инсталацията. Проверете другата приложение и опитайте отново</string>
     <string name="installer_external_success">%s докладва за успешно инсталиране</string>
@@ -898,7 +910,7 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install">Показва се прозорец за избор на инсталатор</string>
     <string name="settings_prompt_installer_on_install_description">Показва диалогов прозорец за избор на инсталатор всеки път, когато се инсталира приложение с пач.</string>
     <string name="settings_auto_install_with_shizuku">Автоматична инсталация след поправяне</string>
-    <string name="settings_auto_install_with_shizuku_description">Инсталира поправения APK тихо веднага след завършване на поправянето</string>
+    <string name="settings_auto_install_with_shizuku_description">Инсталира коригирания APK веднага щом корекцията приключи</string>
     <string name="settings_auto_uninstall_with_shizuku">Автоматично деинсталиране при конфликт</string>
     <string name="settings_auto_uninstall_with_shizuku_description">При автоматично инсталиране със Shizuku, първо деинсталирайте съществуващото приложение, ако Android съобщи за конфликт в подписите. Това може да премахне данните на приложението.</string>
     <string name="settings_auto_uninstall_warning_title">Активиране на автоматично деинсталиране?</string>

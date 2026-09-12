@@ -7,6 +7,8 @@ package app.morphe.manager.domain.installer
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.app.Notification
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -14,14 +16,19 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
+import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.Process
 import android.util.Log
+import app.morphe.manager.ManagerApplication
 import app.morphe.manager.R
 import app.morphe.manager.util.APK_MIMETYPE
 import app.morphe.manager.util.PLAY_STORE_INSTALLER_PACKAGE
+import app.morphe.manager.util.UpdateNotificationManager
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withContext
 import rikka.shizuku.Shizuku
 import java.io.File
 import java.util.concurrent.atomic.AtomicInteger
@@ -33,6 +40,7 @@ private const val ACTION_INSTALL_STATUS = "app.morphe.manager.INSTALL_STATUS"
 private const val ACTION_UNINSTALL_STATUS = "app.morphe.manager.UNINSTALL_STATUS"
 private const val EXTRA_SESSION_ID = "session_id"
 private const val EXTRA_UNINSTALL_REQUEST_ID = "uninstall_request_id"
+private const val CONFIRM_NOTIFICATION_ID = 2006
 
 /**
  * PackageInstaller-based installer.
@@ -46,21 +54,55 @@ private const val EXTRA_UNINSTALL_REQUEST_ID = "uninstall_request_id"
 @Suppress("RedundantSuppression")
 class SessionInstaller(private val app: Application) {
 
+    private val notificationManager = app.getSystemService(NotificationManager::class.java)
     private val shizuku = ShizukuEnvironment(app)
     private val shizukuInstaller = ShizukuInstaller(app)
     private val uninstallRequestIds = AtomicInteger()
+
+    /** Set once the platform has refused a silent session, so the next install stops asking. */
+    @Volatile
+    private var silentUpdatesRefused = false
 
     /**
      * Installs an APK using the PackageInstaller session API.
      * Suspends until the system confirms or the user cancels.
      *
+     * Android 12+ can apply an update of an app this manager installed without asking the user.
+     * OEM builds that refuse one destroy the session instead of falling back, so the install is
+     * repeated with the dialog and silent updates are dropped for the rest of the process.
+     *
      * @throws InstallCancelledException if the user dismissed the dialog or install was aborted.
      * @throws SessionDeadException if the session was killed before completion.
      */
-    @SuppressLint("RequestInstallPackagesPolicy")
     suspend fun installInternal(apkFile: File): InstallResult {
         requireApkPresent(apkFile)
-        Log.d(TAG, "installInternal: ${apkFile.name} (${apkFile.length()} bytes)")
+        val silentUpdate = !silentUpdatesRefused
+        Log.d(TAG, "installInternal: ${apkFile.name} (${apkFile.length()} bytes), silentUpdate=$silentUpdate")
+        return try {
+            awaitSession(apkFile, silentUpdate)
+        } finally {
+            // However it ended, a confirmation nobody answered must not outlive the session
+            ManagerApplication.onReturnToForeground = null
+            notificationManager.cancel(CONFIRM_NOTIFICATION_ID)
+        }
+    }
+
+    private suspend fun awaitSession(apkFile: File, silentUpdate: Boolean): InstallResult {
+        if (!silentUpdate) return commitSession(apkFile, requireUserAction = true)
+
+        return try {
+            commitSession(apkFile, requireUserAction = false)
+        } catch (e: SilentInstallRefusedException) {
+            silentUpdatesRefused = true
+            Log.w(TAG, "Silent update refused by the platform (${e.message}), asking the user instead")
+            commitSession(apkFile, requireUserAction = true)
+        }
+    }
+
+    @SuppressLint("RequestInstallPackagesPolicy")
+    private suspend fun commitSession(apkFile: File, requireUserAction: Boolean): InstallResult {
+        // With the dialog asked for up front, an abort can only be the user dismissing it
+        var userActionShown = requireUserAction
         return suspendCancellableCoroutine { cont ->
             val installer = app.packageManager.packageInstaller
             val params = PackageInstaller.SessionParams(
@@ -74,7 +116,13 @@ class SessionInstaller(private val app: Application) {
                     setPackageSource(PackageInstaller.PACKAGE_SOURCE_LOCAL_FILE)
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    setRequireUserAction(PackageInstaller.SessionParams.USER_ACTION_REQUIRED)
+                    setRequireUserAction(
+                        if (requireUserAction) {
+                            PackageInstaller.SessionParams.USER_ACTION_REQUIRED
+                        } else {
+                            PackageInstaller.SessionParams.USER_ACTION_NOT_REQUIRED
+                        }
+                    )
                 }
             }
 
@@ -88,15 +136,7 @@ class SessionInstaller(private val app: Application) {
                         session.fsync(out)
                     }
 
-                    val broadcastIntent = Intent(ACTION_INSTALL_STATUS).apply {
-                        `package` = app.packageName
-                        putExtra(EXTRA_SESSION_ID, sessionId)
-                    }
-                    @Suppress("WrongConstant")
-                    val pi = PendingIntent.getBroadcast(
-                        app, sessionId, broadcastIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
-                    )
+                    val pi = statusPendingIntent(ACTION_INSTALL_STATUS, EXTRA_SESSION_ID, sessionId)
 
                     val receiver = object : BroadcastReceiver() {
                         override fun onReceive(context: Context, intent: Intent) {
@@ -118,21 +158,19 @@ class SessionInstaller(private val app: Application) {
                                 PackageInstaller.STATUS_PENDING_USER_ACTION -> {
                                     // The session may be killed by a system component after this
                                     // broadcast, so the receiver is kept alive intentionally.
-                                    @Suppress("DEPRECATION", "UnsafeIntentLaunch")
-                                    val confirmIntent = if (Build.VERSION.SDK_INT >= 33) {
-                                        intent.getParcelableExtra(Intent.EXTRA_INTENT, Intent::class.java)
-                                    } else {
-                                        intent.getParcelableExtra(Intent.EXTRA_INTENT)
-                                    }
-                                    // Safe to launch: intent originates from the system PackageInstaller.
-                                    @Suppress("UnsafeIntentLaunch")
-                                    confirmIntent?.also { it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) }
-                                        ?.let { app.startActivity(it) }
+                                    userActionShown = true
+                                    launchUserConfirmation(intent)
                                 }
 
                                 PackageInstaller.STATUS_FAILURE_ABORTED -> {
                                     app.unregisterReceiver(this)
-                                    cont.resumeWithException(InstallCancelledException())
+                                    cont.resumeWithException(
+                                        if (userActionShown) {
+                                            InstallCancelledException()
+                                        } else {
+                                            SilentInstallRefusedException(message)
+                                        }
+                                    )
                                 }
 
                                 PackageInstaller.STATUS_FAILURE_CONFLICT -> {
@@ -168,6 +206,37 @@ class SessionInstaller(private val app: Application) {
                 throw e
             }
         }
+    }
+
+    /**
+     * Whether Android would update [packageName] without its dialog. Worth asking only before an
+     * install the user did not start, since nobody is there to answer one.
+     */
+    suspend fun canUpdateSilently(packageName: String): Boolean =
+        withContext(Dispatchers.IO) { isSilentUpdateTarget(packageName) }
+
+    private fun isSilentUpdateTarget(packageName: String): Boolean {
+        // Guarded here rather than in the rule: the reads below need Android 12 themselves
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) return false
+
+        val installed = runCatching {
+            app.packageManager.getPackageInfo(packageName, 0)
+        }.getOrNull()
+        val source = installed?.let {
+            runCatching { app.packageManager.getInstallSourceInfo(packageName) }.getOrNull()
+        }
+
+        return allowsSilentUpdate(
+            sdkInt = Build.VERSION.SDK_INT,
+            installedTargetSdk = installed?.applicationInfo?.targetSdkVersion,
+            installerPackageName = source?.installingPackageName,
+            updateOwnerPackageName = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                source?.updateOwnerPackageName
+            } else {
+                null
+            },
+            selfPackageName = app.packageName
+        )
     }
 
     /**
@@ -285,17 +354,7 @@ class SessionInstaller(private val app: Application) {
     suspend fun uninstall(packageName: String) = suspendCancellableCoroutine { cont ->
         val installer = app.packageManager.packageInstaller
         val requestId = uninstallRequestIds.incrementAndGet()
-        val broadcastIntent = Intent(ACTION_UNINSTALL_STATUS).apply {
-            `package` = app.packageName
-            putExtra(EXTRA_UNINSTALL_REQUEST_ID, requestId)
-        }
-        @Suppress("WrongConstant")
-        val pi = PendingIntent.getBroadcast(
-            app,
-            requestId,
-            broadcastIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
-        )
+        val pi = statusPendingIntent(ACTION_UNINSTALL_STATUS, EXTRA_UNINSTALL_REQUEST_ID, requestId)
 
         val receiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
@@ -314,17 +373,7 @@ class SessionInstaller(private val app: Application) {
                         cont.resume(Unit)
                     }
 
-                    PackageInstaller.STATUS_PENDING_USER_ACTION -> {
-                        @Suppress("DEPRECATION", "UnsafeIntentLaunch")
-                        val confirmIntent = if (Build.VERSION.SDK_INT >= 33) {
-                            intent.getParcelableExtra(Intent.EXTRA_INTENT, Intent::class.java)
-                        } else {
-                            intent.getParcelableExtra(Intent.EXTRA_INTENT)
-                        }
-                        @Suppress("UnsafeIntentLaunch")
-                        confirmIntent?.also { it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) }
-                            ?.let { app.startActivity(it) }
-                    }
+                    PackageInstaller.STATUS_PENDING_USER_ACTION -> launchUserConfirmation(intent)
 
                     PackageInstaller.STATUS_FAILURE_ABORTED -> {
                         runCatching { app.unregisterReceiver(this) }
@@ -426,6 +475,71 @@ class SessionInstaller(private val app: Application) {
         if (!apkFile.exists()) throw MissingApkException(apkFile.path)
     }
 
+    /** Builds the [PendingIntent] the system reports progress to, tagged to tell concurrent sessions apart. */
+    private fun statusPendingIntent(action: String, requestExtra: String, requestId: Int): PendingIntent {
+        val broadcastIntent = Intent(action).apply {
+            `package` = app.packageName
+            putExtra(requestExtra, requestId)
+        }
+        @Suppress("WrongConstant")
+        return PendingIntent.getBroadcast(
+            app,
+            requestId,
+            broadcastIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
+        )
+    }
+
+    /** Shows the system dialog carried by a [PackageInstaller.STATUS_PENDING_USER_ACTION] broadcast. */
+    private fun launchUserConfirmation(statusIntent: Intent) {
+        @Suppress("DEPRECATION", "UnsafeIntentLaunch")
+        val confirmIntent = if (Build.VERSION.SDK_INT >= 33) {
+            statusIntent.getParcelableExtra(Intent.EXTRA_INTENT, Intent::class.java)
+        } else {
+            statusIntent.getParcelableExtra(Intent.EXTRA_INTENT)
+        }
+        // Safe to launch: intent originates from the system PackageInstaller.
+        @Suppress("UnsafeIntentLaunch")
+        confirmIntent?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) ?: return
+
+        // Android drops an activity started from the background, which is where an install that
+        // began on its own usually ends up, so the dialog is handed over as a notification
+        if (ManagerApplication.isInForeground) {
+            app.startActivity(confirmIntent)
+        } else {
+            Log.w(TAG, "Confirmation needed while in the background, offering it as a notification")
+            notifyPendingConfirmation(confirmIntent)
+        }
+    }
+
+    /** Posts [confirmIntent] so a tap opens the install dialog the session is waiting on. */
+    private fun notifyPendingConfirmation(confirmIntent: Intent) {
+        @Suppress("WrongConstant")
+        val pendingIntent = PendingIntent.getActivity(
+            app,
+            CONFIRM_NOTIFICATION_ID,
+            confirmIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val notification = Notification.Builder(app, UpdateNotificationManager.CHANNEL_PATCHER)
+            .setContentTitle(app.getString(R.string.installer_confirm_notification_title))
+            .setContentText(app.getString(R.string.installer_confirm_notification_text))
+            .setSmallIcon(Icon.createWithResource(app, R.drawable.ic_notification))
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+            .build()
+
+        notificationManager.notify(CONFIRM_NOTIFICATION_ID, notification)
+
+        // Tapping the notification is one way back to the dialog; opening the manager is the
+        // other, and a session waiting on it must not look like an install that stalled
+        ManagerApplication.onReturnToForeground = {
+            notificationManager.cancel(CONFIRM_NOTIFICATION_ID)
+            runCatching { app.startActivity(confirmIntent) }
+        }
+    }
+
     /** Registers [receiver] with [filter], applying [Context.RECEIVER_NOT_EXPORTED] on API 33+. */
     private fun registerReceiverCompat(receiver: BroadcastReceiver, filter: IntentFilter) {
         if (Build.VERSION.SDK_INT >= 33) {
@@ -452,6 +566,29 @@ class SessionInstaller(private val app: Application) {
     }
 }
 
+/**
+ * The conditions Android puts on updating a package without its dialog. [installedTargetSdk] is
+ * null when nothing is installed under that name, and [updateOwnerPackageName] when nothing has
+ * claimed the update or the platform is too old to track it.
+ *
+ * Kept free of Android APIs so the order between installer and update owner can be tested.
+ */
+internal fun allowsSilentUpdate(
+    sdkInt: Int,
+    installedTargetSdk: Int?,
+    installerPackageName: String?,
+    updateOwnerPackageName: String?,
+    selfPackageName: String
+): Boolean {
+    // The waiver arrived in Android 12, and only for apps built against it
+    if (sdkInt < Build.VERSION_CODES.S) return false
+    if (installedTargetSdk == null || installedTargetSdk < Build.VERSION_CODES.S) return false
+
+    // An update owner, once claimed, outranks whoever installed the app
+    return updateOwnerPackageName?.let { it == selfPackageName }
+        ?: (installerPackageName == selfPackageName)
+}
+
 sealed class InstallResult {
     data object Success : InstallResult()
     data class Conflict(val message: String?) : InstallResult()
@@ -468,6 +605,12 @@ class InstallCancelledException : Exception("Installation cancelled")
 
 /** Thrown when the APK handed to an installer no longer exists. */
 class MissingApkException(path: String) : Exception("APK does not exist: $path")
+
+/**
+ * Thrown when a session that asked for no user action was destroyed without one being shown,
+ * which is how OEM builds such as HyperOS turn down a silent update.
+ */
+private class SilentInstallRefusedException(message: String?) : Exception(message)
 
 /** Thrown when the PackageInstaller session was killed before completion. */
 class SessionDeadException(message: String?) : Exception(message)

@@ -861,7 +861,6 @@ Rasm o'lchamlari quyidagicha bo'lishi kerak:
     <string name="settings_prompt_installer_on_install">O‘rnatishni tanlash bosqichi</string>
     <string name="settings_prompt_installer_on_install_description">Har bir patchlangan ilova o‘rnatilgandan so‘ng o‘rnatishni tanlash dialogini ko‘rsatish</string>
     <string name="settings_auto_install_with_shizuku">Patchlashdan keyin avtomatik o\'rnatish</string>
-    <string name="settings_auto_install_with_shizuku_description">Patchlash tugagandan so\'ng APK avtomatik ravishda o\'rnatiladi</string>
     <string name="settings_auto_uninstall_with_shizuku">Ziddiyat yuzaga kelganda avtomatik ravishda o‘chirib tashlash</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Shizuku bilan avtomatik o‘rnatishda, agar Android imzo ziddiyati haqida xabar berarsa, mavjud ilovani avval o‘chirib tashlang. Bu ilova ma’lumotlarini o‘chirib tashlashi mumkin</string>
     <string name="settings_auto_uninstall_warning_title">Avtomatik o‘chirib tashlashni yoqish kerakmi?</string>

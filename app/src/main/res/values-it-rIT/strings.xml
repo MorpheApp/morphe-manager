@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">Tocca per visualizzare le fonti</string>
     <string name="home_outdated_manager_title">Morphe non è aggiornato</string>
     <string name="home_outdated_manager_subtitle">Alcune sorgenti di patch richiedono una versione più recente</string>
+    <string name="home_held_back_title">Una sorgente di patch ha causato l\'arresto anomalo di Morphe</string>
+    <string name="home_held_back_subtitle">È stata saltata per consentire l\'avvio dell\'app. Tocca per rivedere</string>
     <string name="home_metered_skipped_title">Aggiornamenti in pausa sulla rete dati mobile</string>
     <string name="home_metered_skipped_subtitle">Tocca per consentire gli aggiornamenti sulla rete mobile</string>
     <string name="home_repatch_available_subtitle">Tocca per accodarli tutti</string>
@@ -149,6 +151,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">Impossibile scaricare il bundle di patch. L\'URL di origine potrebbe essere errato oppure il file inesistente </string>
     <string name="sources_management_outdated_manager_badge">Aggiorna Morphe</string>
     <string name="sources_management_outdated_manager_hint">Questa sorgente è stata creata per patcher %1$s, ma Morphe %2$s include patcher %3$s. Aggiorna Morphe per utilizzarlo</string>
+    <string name="sources_management_held_back_badge">Arresto anomalo</string>
+    <string name="sources_management_held_back_hint">Questa sorgente ha causato l\'arresto anomalo di Morphe durante il caricamento, quindi viene saltata. Aggiornala o reimportala per riprovare.</string>
     <string name="sources_management_source_enabled">Sorgente abilitata</string>
     <string name="sources_management_source_disabled">Sorgente disabilitata</string>
     <string name="sources_management_source_updating">Aggiornamento sorgente</string>
@@ -629,6 +633,9 @@ La disinstallazione cancellerà definitivamente tutti i dati dell'app."</string>
     <string name="mini_game_snake_swipe_to_start">Scorri per iniziare</string>
     <string name="mini_game_dino_picker_subtitle">Tocca per saltare sopra i cactus</string>
     <string name="mini_game_dino_tap_to_start">Tocca per correre</string>
+    <string name="mini_game_blocks_tap_to_start">Tocca per ruotare, scorri per muovere, scorri in basso per lasciar cadere</string>
+    <string name="mini_game_miner_picker_subtitle">Tocca per aprire, tieni premuto per segnalare</string>
+    <string name="mini_game_pairs_picker_subtitle">Gira le carte, trova la coppia</string>
     <!-- Settings -->
     <string name="appearance">Aspetto</string>
     <string name="advanced">Avanzate</string>
@@ -882,6 +889,8 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="installer_action_open_shizuku">Apri Shizuku</string>
     <string name="installer_hint_generic">L\'installazione è fallita. Riprova o passa a un installer diverso.</string>
     <string name="installer_hint_conflict">Un\'altra app con questo nome del pacchetto è già installata. Disinstallala prima di continuare</string>
+    <string name="installer_confirm_notification_title">Conferma l\'installazione</string>
+    <string name="installer_confirm_notification_text">Toccare per completare l\'installazione dell\'app modificata </string>
     <string name="installer_external_launched">Apertura di %s…</string>
     <string name="installer_external_timeout">%s non ha confermato l\'installazione. Controlla l\'altra app e riprova</string>
     <string name="installer_external_success">%s ha segnalato un\'installazione riuscita</string>
@@ -898,7 +907,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="settings_prompt_installer_on_install">Richiesta di selezione dell\'installer</string>
     <string name="settings_prompt_installer_on_install_description">Mostra la finestra di dialogo di selezione dell\'installer ogni volta che un\'app patchata viene installata</string>
     <string name="settings_auto_install_with_shizuku">Installa automaticamente dopo l\'applicazione della patch</string>
-    <string name="settings_auto_install_with_shizuku_description">Installa silenziosamente l\'APK modificato appena completata l\'applicazione della patch</string>
+    <string name="settings_auto_install_with_shizuku_description">Installa l\'\APK patchato non appena il patching viene completato</string>
     <string name="settings_auto_uninstall_with_shizuku">Disinstalla automaticamente in caso di conflitto</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Quando installi automaticamente con Shizuku, disinstalla prima l\'app esistente se Android segnala un conflitto di firma. Questo può rimuovere i dati dell\'app.</string>
     <string name="settings_auto_uninstall_warning_title">Abilita la disinstallazione automatica?</string>

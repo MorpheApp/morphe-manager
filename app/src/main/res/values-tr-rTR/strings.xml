@@ -27,6 +27,8 @@
     <string name="home_metadata_errors_subtitle">Kaynakları incelemek için dokunun</string>
     <string name="home_outdated_manager_title">Morphe güncel değil</string>
     <string name="home_outdated_manager_subtitle">Bazı yama kaynaklarının daha yeni bir sürümü gerekiyor</string>
+    <string name="home_held_back_title">Bir yama kaynağı Morphe\'nin çökmesine neden oldu</string>
+    <string name="home_held_back_subtitle">Uygulamanın başlatılabilmesi için atlandı. İncelemek için dokunun</string>
     <string name="home_metered_skipped_title">Mobil veride güncellemeler duraklatıldı</string>
     <string name="home_metered_skipped_subtitle">Mobil veride güncellemeleri etkinleştirmek için dokunun</string>
     <string name="home_repatch_available_subtitle">Hepsini kuyruğa eklemek için dokunun</string>
@@ -149,6 +151,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">Yama paketi indirilemedi. Kaynak URL\'si yanlış olabilir veya dosya mevcut olmayabilir</string>
     <string name="sources_management_outdated_manager_badge">Morphe\'yi güncelleyin</string>
     <string name="sources_management_outdated_manager_hint">Bu kaynak, %1$s yama programı için oluşturulmuş, ancak Morphe %2$s, %3$s yama programını içeriyor. Bunu kullanmak için Morphe\'yi güncelleyin</string>
+    <string name="sources_management_held_back_badge">Çöktü</string>
+    <string name="sources_management_held_back_hint">Bu kaynak, yüklenirken Morphe\'nin çökmesine neden oldu; bu yüzden atlanıyor. Tekrar denemek için kaynağı güncelleyin veya yeniden içe aktarın.</string>
     <string name="sources_management_source_enabled">Kaynak etkin</string>
     <string name="sources_management_source_disabled">Kaynak devre dışı</string>
     <string name="sources_management_source_updating">Kaynak güncelleniyor</string>
@@ -629,6 +633,12 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="mini_game_snake_swipe_to_start">Başlamak için kaydırın</string>
     <string name="mini_game_dino_picker_subtitle">Kaktüslerin üzerinden atlamak için dokun</string>
     <string name="mini_game_dino_tap_to_start">Koşmak için dokunun</string>
+    <string name="mini_game_blocks_picker_subtitle">Şekilleri yerleştir, çizgileri temizle</string>
+    <string name="mini_game_blocks_tap_to_start">Döndürmek için dokunun, taşımak için kaydırın, düşürmek için aşağı kaydırın</string>
+    <string name="mini_game_bricks_picker_subtitle">Topu sektir, duvarı yok et</string>
+    <string name="mini_game_bricks_tap_to_start">Nişan almak için sürükle, fırlatmak için dokun</string>
+    <string name="mini_game_miner_picker_subtitle">Açmak için dokunun, işaretlemek için basılı tutun</string>
+    <string name="mini_game_pairs_picker_subtitle">Kartları çevirin, eşleşeni bulun</string>
     <!-- Settings -->
     <string name="appearance">Görünüm</string>
     <string name="advanced">Gelişmiş</string>
@@ -880,6 +890,8 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="installer_action_open_shizuku">Shizuku\'yu Aç</string>
     <string name="installer_hint_generic">Yükleme başarısız oldu. Tekrar deneyin veya farklı bir yükleyiciye geçin</string>
     <string name="installer_hint_conflict">Bu paket adıyla başka bir uygulama zaten yüklü. Devam etmeden önce onu kaldırın</string>
+    <string name="installer_confirm_notification_title">Yüklemeyi onaylayın</string>
+    <string name="installer_confirm_notification_text">Yamalı uygulamanın yüklenmesini tamamlamak için dokunun</string>
     <string name="installer_external_launched">%s açılıyor…</string>
     <string name="installer_external_timeout">%s yüklemeyi onaylamadı. Diğer uygulamayı kontrol edin ve tekrar deneyin</string>
     <string name="installer_external_success">%s yüklemenin başarılı olduğunu bildirdi</string>
@@ -896,7 +908,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_prompt_installer_on_install">Yükleyici seçimi istemi</string>
     <string name="settings_prompt_installer_on_install_description">Yamalanmış bir uygulama her yüklendiğinde yükleyici seçim penceresini gösterir</string>
     <string name="settings_auto_install_with_shizuku">Yamalama sonrası otomatik yükle</string>
-    <string name="settings_auto_install_with_shizuku_description">Yamalama tamamlanır tamamlanmaz yamalanmış APK\'yi sessizce yükler</string>
+    <string name="settings_auto_install_with_shizuku_description">Yamalama tamamlanır tamamlanmaz yamalı APK\'yı yükler.</string>
     <string name="settings_auto_uninstall_with_shizuku">Çakışma durumunda otomatik olarak kaldır</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Shizuku ile otomatik yükleme yaparken, Android bir imza çakışması bildirirse mevcut uygulamayı önce kaldırın. Bu, uygulama verilerini kaldırabilir.</string>
     <string name="settings_auto_uninstall_warning_title">Otomatik kaldırmayı etkinleştir?</string>

@@ -16,6 +16,7 @@ import androidx.compose.material.icons.outlined.Memory
 import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
+import androidx.compose.material3.rememberSliderState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -42,10 +43,13 @@ fun ProcessRuntimeDialog(
     val maxLimit: Int = maxMemoryLimit(context)
     var enabled by remember { mutableStateOf(currentEnabled) }
     // Clamped because the stored limit may come from an import made on a roomier device
-    var sliderValue by remember {
-        mutableFloatStateOf(coerceMemoryLimit(context, currentLimit).toFloat())
-    }
-    val selectedLimit = sliderValue.roundToInt()
+    val sliderState = rememberSliderState(
+        value = coerceMemoryLimit(context, currentLimit).toFloat(),
+        steps = (((maxLimit.toDouble() - PROCESS_RUNTIME_MEMORY_MINIMUM)
+                / PROCESS_RUNTIME_MEMORY_STEP - 1)).toInt(),
+        trackRange = PROCESS_RUNTIME_MEMORY_MINIMUM.toFloat()..maxLimit.toFloat()
+    )
+    val selectedLimit = sliderState.value.roundToInt()
 
     AppDialog(
         onDismissRequest = onDismiss,
@@ -101,16 +105,15 @@ fun ProcessRuntimeDialog(
                     verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
                 ) {
                     Slider(
-                        value = sliderValue,
-                        // Saved here rather than from `onValueChangeFinished`, which a track tap
-                        // fires in the same pointer event and would persist the pre-tap value
+                        state = sliderState,
+                        // Passing `onValueChange` makes the slider fully controlled, so the
+                        // thumb only moves once the new value is written back to the state
                         onValueChange = {
-                            sliderValue = it
+                            sliderState.value = it
+                            // Saved here rather than from `onValueChangeFinished`, which a track
+                            // tap fires in the same pointer event and would persist the pre-tap value
                             onLimitChange(it.roundToInt())
                         },
-                        valueRange = PROCESS_RUNTIME_MEMORY_MINIMUM.toFloat()..maxLimit.toFloat(),
-                        steps = (((maxLimit.toDouble() - PROCESS_RUNTIME_MEMORY_MINIMUM)
-                                / PROCESS_RUNTIME_MEMORY_STEP - 1)).toInt(),
                         enabled = enabled,
                         modifier = Modifier.fillMaxWidth()
                     )

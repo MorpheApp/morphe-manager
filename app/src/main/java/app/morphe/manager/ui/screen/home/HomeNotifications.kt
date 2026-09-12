@@ -56,6 +56,7 @@ data class BundleUpdateState(
 data class HomeNotificationsUi(
     val managerUpdate: AlertState,
     val outdatedManager: AlertState,
+    val heldBackSources: AlertState,
     val blockedSources: AlertState,
     val metadataErrors: AlertState,
     val meteredSkipped: AlertState,
@@ -89,6 +90,18 @@ fun NotificationsOverlay(
                 subtitle = stringResource(R.string.home_blocked_source_subtitle),
                 onShowDetails = notifications.blockedSources.onShow,
                 swipeEnabled = false,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            // The one alert raised by something that already went wrong rather than something
+            // that might, so it sits above the rest
+            AlertSnackbar(
+                visible = notifications.heldBackSources.visible,
+                level = AlertLevel.Error,
+                icon = Icons.Outlined.ErrorOutline,
+                title = stringResource(R.string.home_held_back_title),
+                subtitle = stringResource(R.string.home_held_back_subtitle),
+                onShowDetails = notifications.heldBackSources.onShow,
                 modifier = Modifier.fillMaxWidth()
             )
 
