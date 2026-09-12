@@ -42,6 +42,7 @@ import app.morphe.manager.ui.model.*
 import app.morphe.manager.ui.model.navigation.Patcher
 import app.morphe.manager.ui.screen.patcher.PatcherErrorInfo
 import app.morphe.manager.util.*
+import app.morphe.manager.util.PatchSelectionUtils.restrictTo
 import app.morphe.manager.worker.UpdateCheckWorker
 import app.morphe.patcher.patch.ApkArchitecture
 import app.morphe.patcher.patch.InstallerType
@@ -576,7 +577,7 @@ class PatcherViewModel(
             input.options
         } else {
             patchOptionsPrefs.exportPatchOptions(packageName)
-        }
+        }.restrictTo(input.selectedPatches)
 
         val pathFailures = withContext(Dispatchers.IO) { validateOptionPaths(optionsToValidate) }
         if (pathFailures.isNotEmpty()) {

@@ -52,7 +52,7 @@ fun coerceOptionValue(type: KType, value: Any?): Any? {
 
 /**
  * Applies [options] to the patches of one bundle, each value converted to the type its option
- * declares. Covers the whole bundle, since a patch pulled in as a dependency is configured too.
+ * declares. Which patches [options] covers is decided before the run, not here.
  */
 fun Map<String, Patch<*>>.applyPatchOptions(
     options: Map<String, Map<String, Any?>>,

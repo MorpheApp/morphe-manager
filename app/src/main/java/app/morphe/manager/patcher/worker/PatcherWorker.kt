@@ -39,6 +39,7 @@ import app.morphe.manager.patcher.util.NativeLibStripper
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.util.*
+import app.morphe.manager.util.PatchSelectionUtils.restrictTo
 import com.topjohnwu.superuser.Shell
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -396,6 +397,8 @@ class PatcherWorker(
                 CoroutineRuntime(applicationContext)
             }
 
+            val options = args.options.restrictTo(args.selectedPatches)
+
             // After merging a split archive (in either runtime), save the resulting mono-APK
             // directly to originalApksDir so it is used for repatching instead of the archive
             val onMergedApkReady: suspend (File) -> Unit = { mergedFile ->
@@ -417,7 +420,7 @@ class PatcherWorker(
                     patchedApk.absolutePath,
                     args.packageName,
                     args.selectedPatches,
-                    args.options,
+                    options,
                     args.logger,
                     onPatchCompleted,
                     ::updateProgress,
@@ -444,7 +447,7 @@ class PatcherWorker(
                     patchedApk.absolutePath,
                     args.packageName,
                     args.selectedPatches,
-                    args.options,
+                    options,
                     args.logger,
                     onPatchCompleted,
                     ::updateProgress,
