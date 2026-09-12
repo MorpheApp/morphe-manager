@@ -482,6 +482,7 @@ Zunanje območje (črtkano): maska zaganjalnika ga lahko obreže – pomembne po
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Naprava</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Pomnilnik</string>
     <string name="patcher_field_storage">Shramba</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Velikost izhoda</string>
@@ -632,6 +633,9 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="mini_game_snake_swipe_to_start">Podrsajte za začetek</string>
     <string name="mini_game_dino_picker_subtitle">Tapnite, da preskočite kaktuse</string>
     <string name="mini_game_dino_tap_to_start">Tapnite za začetek teka</string>
+    <string name="mini_game_blocks_tap_to_start">Dotakni se za vrtenje, povleci za premikanje, povleci navzdol za spust</string>
+    <string name="mini_game_miner_picker_subtitle">Dotakni se za odpiranje, drži za zastavico</string>
+    <string name="mini_game_pairs_picker_subtitle">Obrni kartice, poišči pare</string>
     <!-- Settings -->
     <string name="appearance">Izgled</string>
     <string name="advanced">Napredno</string>

@@ -482,6 +482,7 @@ Külső zóna (szaggatott): az indító maszk levághatja – tartsa a fontos r�
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Eszköz</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Memória</string>
     <string name="patcher_field_storage">Tárhely</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Kimeneti méret</string>
@@ -633,8 +634,11 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="mini_game_dino_picker_subtitle">Érintsd meg a kaktuszok átugrásához</string>
     <string name="mini_game_dino_tap_to_start">Érintsd meg a futáshoz</string>
     <string name="mini_game_blocks_picker_subtitle">Illeszd a formákat, tiszta vonalak</string>
+    <string name="mini_game_blocks_tap_to_start">Koppints a forgatáshoz, húzd el a mozgatáshoz, húzd le az ejtéshez</string>
     <string name="mini_game_bricks_picker_subtitle">Pattintsd a labdát, törd le a falat</string>
     <string name="mini_game_bricks_tap_to_start">Húzd a célzáshoz, koppints az indításhoz</string>
+    <string name="mini_game_miner_picker_subtitle">Koppints a megnyitáshoz, tartsd lenyomva a megjelöléshez</string>
+    <string name="mini_game_pairs_picker_subtitle">Fordíts kártyákat, találd meg a párokat</string>
     <!-- Settings -->
     <string name="appearance">Megjelenés</string>
     <string name="advanced">Haladó</string>

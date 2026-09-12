@@ -482,6 +482,7 @@
     <string name="patcher_field_android">एंड्रॉइड</string>
     <string name="patcher_field_device">डिवाइस</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">मेमोरी</string>
     <string name="patcher_field_storage">स्टोरेज</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">आउटपुट आकार</string>
@@ -633,8 +634,11 @@
     <string name="mini_game_dino_picker_subtitle">कैक्टस के ऊपर कूदने के लिए टैप करें</string>
     <string name="mini_game_dino_tap_to_start">दौड़ने के लिए टैप करें</string>
     <string name="mini_game_blocks_picker_subtitle">आकृतियों को मिलाएं, रेखाएँ साफ़ करें</string>
+    <string name="mini_game_blocks_tap_to_start">घुमाने के लिए टैप करें, स्थानांतरित करने के लिए स्वाइप करें, छोड़ने के लिए नीचे स्वाइप करें</string>
     <string name="mini_game_bricks_picker_subtitle">गेंद को उछालें, दीवार साफ़ करें</string>
     <string name="mini_game_bricks_tap_to_start">लक्ष्य के लिए खींचें, लॉन्च करने के लिए टैप करें</string>
+    <string name="mini_game_miner_picker_subtitle">खोलने के लिए टैप करें, झंडा लगाने के लिए दबाकर रखें</string>
+    <string name="mini_game_pairs_picker_subtitle">कार्ड पलटें, मिलान खोजें</string>
     <!-- Settings -->
     <string name="appearance">स्वरूप</string>
     <string name="advanced">उन्नत</string>

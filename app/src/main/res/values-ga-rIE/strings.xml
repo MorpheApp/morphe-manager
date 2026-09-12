@@ -633,6 +633,12 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="mini_game_snake_swipe_to_start">Svaidhpeáil le tosú</string>
     <string name="mini_game_dino_picker_subtitle">Tapáil chun léim thar cacti</string>
     <string name="mini_game_dino_tap_to_start">Tapáil le rith</string>
+    <string name="mini_game_blocks_picker_subtitle">Feistigh na cruthanna, glan na línte</string>
+    <string name="mini_game_blocks_tap_to_start">Tapáil chun rothlú, svaidhp chun bogadh, svaidhp síos chun titim</string>
+    <string name="mini_game_bricks_picker_subtitle">Preab an liathróid, glan an balla</string>
+    <string name="mini_game_bricks_tap_to_start">Tarraing chun díriú, cnag le seoladh</string>
+    <string name="mini_game_miner_picker_subtitle">Tapáil chun oscailt, coinnigh chun bratach</string>
+    <string name="mini_game_pairs_picker_subtitle">Cas na cártaí, aimsigh an meaitse</string>
     <!-- Settings -->
     <string name="appearance">Dealramh</string>
     <string name="advanced">Ardleibhéil</string>

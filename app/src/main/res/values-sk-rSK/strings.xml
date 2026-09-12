@@ -632,6 +632,9 @@ Odinštalovanie trvalo vymaže všetky údaje aplikácie."</string>
     <string name="mini_game_snake_swipe_to_start">Potiahnite prstom, aby ste začali</string>
     <string name="mini_game_dino_picker_subtitle">Ťuknite a preskočte kaktusy</string>
     <string name="mini_game_dino_tap_to_start">Ťuknite a bežte</string>
+    <string name="mini_game_blocks_picker_subtitle">Zlož tvary, vyčisti riadky</string>
+    <string name="mini_game_bricks_picker_subtitle">Odrážaj loptu, vyčisti stenu</string>
+    <string name="mini_game_bricks_tap_to_start">Potiahni na mierenie, klepni na spustenie</string>
     <!-- Settings -->
     <string name="appearance">Vzhľad</string>
     <string name="advanced">Pokročilé</string>

@@ -480,6 +480,7 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Tæki</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Minni</string>
     <string name="patcher_field_storage">Geymsla</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Úttaksstærð</string>
@@ -630,6 +631,9 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="mini_game_snake_swipe_to_start">Stryndu til að byrja</string>
     <string name="mini_game_dino_picker_subtitle">Smelltu til að hoppa yfir kaktusa</string>
     <string name="mini_game_dino_tap_to_start">Smelltu til að hlaupa</string>
+    <string name="mini_game_blocks_tap_to_start">Pikkaðu til að snúa, strjúktu til að færa, strjúktu niður til að sleppa</string>
+    <string name="mini_game_miner_picker_subtitle">Pikkaðu til að opna, haltu til að merkja</string>
+    <string name="mini_game_pairs_picker_subtitle">Snúðu við spilunum, finndu samsvörun</string>
     <!-- Settings -->
     <string name="appearance">Útliti</string>
     <string name="advanced">Advanced</string>

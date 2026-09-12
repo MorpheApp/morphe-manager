@@ -482,6 +482,7 @@ Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păs
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Dispozitiv</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Memorie</string>
     <string name="patcher_field_storage">Stocare</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Dimensiunea fișierului de ieșire</string>
@@ -632,6 +633,10 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="mini_game_snake_swipe_to_start">Glisează pentru a începe</string>
     <string name="mini_game_dino_picker_subtitle">Atinge pentru a sări peste cactuși</string>
     <string name="mini_game_dino_tap_to_start">Atinge pentru a alerga</string>
+    <string name="mini_game_blocks_picker_subtitle">Potrivește formele, elimină liniile</string>
+    <string name="mini_game_blocks_tap_to_start">Atingeți pentru a roti, glisați pentru a muta, glisați în jos pentru a arunca</string>
+    <string name="mini_game_miner_picker_subtitle">Atingeți pentru a deschide, țineți apăsat pentru a marca</string>
+    <string name="mini_game_pairs_picker_subtitle">Întoarceți cărțile, găsiți perechea</string>
     <!-- Settings -->
     <string name="appearance">Aspect</string>
     <string name="advanced">Avansat</string>

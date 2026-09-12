@@ -482,6 +482,7 @@
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Устройство</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Память</string>
     <string name="patcher_field_storage">Хранилище</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Размер вывода</string>
@@ -633,6 +634,7 @@
     <string name="mini_game_dino_picker_subtitle">Касайтесь экрана, чтобы перепрыгивать кактусы</string>
     <string name="mini_game_dino_tap_to_start">Касайтесь экрана, чтобы бежать</string>
     <string name="mini_game_blocks_picker_subtitle">Подгонка форм, четкие линии</string>
+    <string name="mini_game_blocks_tap_to_start">Коснитесь, чтобы повернуть, свайп, чтобы переместить, свайп вниз, чтобы опустить</string>
     <string name="mini_game_bricks_picker_subtitle">Отбей мяч, расчисти стену</string>
     <string name="mini_game_bricks_tap_to_start">Перетащите, чтобы прицелиться, коснитесь, чтобы запустить</string>
     <string name="mini_game_miner_picker_subtitle">Нажмите, чтобы открыть, удерживайте для отметки</string>

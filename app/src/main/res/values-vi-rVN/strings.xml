@@ -484,6 +484,7 @@ Nếu không, APK đã vá và được gắn có thể sẽ không hoạt độ
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Thiết bị</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Bộ nhớ</string>
     <string name="patcher_field_storage">Bộ nhớ</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Kích thước đầu ra</string>
@@ -634,6 +635,12 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="mini_game_snake_swipe_to_start">Vuốt để bắt đầu</string>
     <string name="mini_game_dino_picker_subtitle">Chạm để nhảy qua xương rồng</string>
     <string name="mini_game_dino_tap_to_start">Chạm để chạy</string>
+    <string name="mini_game_blocks_picker_subtitle">Ghép hình, xóa dòng</string>
+    <string name="mini_game_blocks_tap_to_start">Chạm để xoay, vuốt để di chuyển, vuốt xuống để thả</string>
+    <string name="mini_game_bricks_picker_subtitle">Bật bóng, phá tường</string>
+    <string name="mini_game_bricks_tap_to_start">Kéo để ngắm, chạm để bắn</string>
+    <string name="mini_game_miner_picker_subtitle">Chạm để mở, giữ để gắn cờ</string>
+    <string name="mini_game_pairs_picker_subtitle">Lật bài, tìm cặp giống nhau</string>
     <!-- Settings -->
     <string name="appearance">Giao diện</string>
     <string name="advanced">Nâng cao</string>

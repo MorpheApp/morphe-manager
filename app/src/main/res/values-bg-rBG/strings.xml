@@ -482,6 +482,7 @@
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Устройство</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Памет</string>
     <string name="patcher_field_storage">Съхранение</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Размер на изхода</string>
@@ -633,8 +634,11 @@
     <string name="mini_game_dino_picker_subtitle">Докоснете, за да прескочите кактусите</string>
     <string name="mini_game_dino_tap_to_start">Докоснете, за да бягате</string>
     <string name="mini_game_blocks_picker_subtitle">Съчетайте формите, изчистете редовете</string>
+    <string name="mini_game_blocks_tap_to_start">Докоснете, за да завъртите, плъзнете, за да преместите, плъзнете надолу, за да пуснете</string>
     <string name="mini_game_bricks_picker_subtitle">Отскачайте топката, изчистете стената</string>
     <string name="mini_game_bricks_tap_to_start">Плъзнете, за да прицелите, докоснете, за да изстреляте</string>
+    <string name="mini_game_miner_picker_subtitle">Докоснете, за да отворите, задръжте, за да поставите флаг</string>
+    <string name="mini_game_pairs_picker_subtitle">Обърнете картите, намерете съвпадението</string>
     <!-- Settings -->
     <string name="appearance">Външен вид</string>
     <string name="advanced">Разширено</string>

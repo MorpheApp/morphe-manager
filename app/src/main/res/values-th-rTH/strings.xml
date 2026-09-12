@@ -632,6 +632,9 @@
     <string name="mini_game_snake_swipe_to_start">ปัดเพื่อเริ่มเกม</string>
     <string name="mini_game_dino_picker_subtitle">แตะเพื่อกระโดดข้ามกระบองเพชร</string>
     <string name="mini_game_dino_tap_to_start">แตะเพื่อวิ่ง</string>
+    <string name="mini_game_blocks_picker_subtitle">วางชิ้นส่วนให้พอดี ลบเส้น</string>
+    <string name="mini_game_bricks_picker_subtitle">ตีลูกบอลให้เด้ง ทำลายกำแพง</string>
+    <string name="mini_game_bricks_tap_to_start">ลากเพื่อเล็ง แตะเพื่อยิง</string>
     <!-- Settings -->
     <string name="appearance">หน้าตา</string>
     <string name="advanced">ขั้นสูง</string>

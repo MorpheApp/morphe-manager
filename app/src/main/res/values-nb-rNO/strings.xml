@@ -482,6 +482,7 @@ Ytre sone (stiplet): kan bli beskåret av launcher-masken – hold viktig inform
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Enhet</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Minne</string>
     <string name="patcher_field_storage">Lagring</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Utdatastørrelse</string>
@@ -632,6 +633,12 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="mini_game_snake_swipe_to_start">Sveip for å starte</string>
     <string name="mini_game_dino_picker_subtitle">Trykk for å hoppe over kaktusene</string>
     <string name="mini_game_dino_tap_to_start">Trykk for å løpe</string>
+    <string name="mini_game_blocks_picker_subtitle">Passe formene, fjern linjer</string>
+    <string name="mini_game_blocks_tap_to_start">Trykk for å rotere, sveip for å flytte, sveip ned for å slippe</string>
+    <string name="mini_game_bricks_picker_subtitle">Sprett ballen, fjern veggen</string>
+    <string name="mini_game_bricks_tap_to_start">Dra for å sikte, trykk for å skyte</string>
+    <string name="mini_game_miner_picker_subtitle">Trykk for å åpne, hold inne for å flagge</string>
+    <string name="mini_game_pairs_picker_subtitle">Vend kortene, finn paret</string>
     <!-- Settings -->
     <string name="appearance">Utseende</string>
     <string name="advanced">Avansert</string>

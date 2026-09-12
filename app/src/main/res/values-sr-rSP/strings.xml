@@ -28,7 +28,6 @@
     <string name="home_outdated_manager_title">Morphe je zastareo</string>
     <string name="home_outdated_manager_subtitle">Неки извори закрпа захтевају новију верзију</string>
     <string name="home_held_back_title">Закрпљени извор је срушио Morphe</string>
-    <string name="home_held_back_subtitle">...</string>
     <string name="home_metered_skipped_title">Ажурирања су паузирана на мобилним подацима</string>
     <string name="home_metered_skipped_subtitle">Додирните да бисте дозволили ажурирања преко мобилних података</string>
     <string name="home_repatch_available_subtitle">Додирните да их све ставите у ред чекања</string>
@@ -482,6 +481,7 @@
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Уређај</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Меморија</string>
     <string name="patcher_field_storage">Складиште</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Величина излаза</string>
@@ -632,6 +632,12 @@
     <string name="mini_game_snake_swipe_to_start">Превуците прстом да почнете</string>
     <string name="mini_game_dino_picker_subtitle">Додирните да прескочите кактусе</string>
     <string name="mini_game_dino_tap_to_start">Додирните да трчите</string>
+    <string name="mini_game_blocks_picker_subtitle">Уклопи облике, очисти линије</string>
+    <string name="mini_game_blocks_tap_to_start">Тапни да ротираш, превуци да помериш, превуци надоле да спустиш</string>
+    <string name="mini_game_bricks_picker_subtitle">Одбиј лопту, обори зид</string>
+    <string name="mini_game_bricks_tap_to_start">Превуци да нишаниш, тапни да лансираш</string>
+    <string name="mini_game_miner_picker_subtitle">Тапни да отвориш, држи да означиш</string>
+    <string name="mini_game_pairs_picker_subtitle">Окрени карте, пронађи пар</string>
     <!-- Settings -->
     <string name="appearance">Изглед</string>
     <string name="advanced">Напредно</string>

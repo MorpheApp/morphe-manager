@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
-    <string name="home_other_apps">Övriga appar</string>
+    <string name="home_other_apps">Andra appar</string>
     <string name="home_other_apps_action">Välj andra appar</string>
     <string name="home_not_patched_yet">Inte modifierad än</string>
     <string name="home_unpatched_version_installed">Omodifierad version installerad</string>
@@ -200,8 +200,8 @@ Allt du lägger till från den här webbplatsen använder du på egen risk"</str
     <string name="home_apk_availability_yes">Ja, hjälp mig att hitta en APK-fil</string>
     <string name="home_apk_availability_no">Nej, jag har redan en APK-fil</string>
     <string name="home_apk_helper_download">Använd en hjälpapp</string>
-    <string name="home_apk_helper_title">Ladda ner med en hjälpapp</string>
-    <string name="home_apk_helper_description">Morphe ber hjälpappen nedan att ladda ner den ursprungliga APK-filen och lämna tillbaka filen</string>
+    <string name="home_apk_helper_title">Ladda ned med en hjälpapp</string>
+    <string name="home_apk_helper_description">Morphe ber hjälpappen nedan att ladda ned den ursprungliga APK-filen och lämna tillbaka filen</string>
     <string name="home_apk_helper_continue">Öppna hjälpappen</string>
     <string name="home_apk_helper_warning">Fortsätt endast om du litar på den här hjälpappen. Morphe kontrollerar paketet, versionen och signaturen för det den tar emot innan modifiering.</string>
     <string name="home_apk_helper_warning_unverified">Fortsätt endast om du litar på den här hjälpappen. Morphe kan inte verifiera signaturen för denna APK, så en modifierad fil skulle inte upptäckas.</string>
@@ -232,8 +232,8 @@ Allt du lägger till från den här webbplatsen använder du på egen risk"</str
     <string name="home_download_instructions_step2_variant">Skrolla ned på webbsidan och tryck på nedladdningsknappen för den översta &lt;b&gt;APK-varianten&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_search">Öppna ett sökresultat från en webbplats du litar på</string>
     <string name="home_download_instructions_step2_search_note">Morphe kan inte gå i god för dessa webbplatser. Hoppa över de som erbjuder sin egen appbutik istället för en APK-fil.</string>
-    <string name="home_download_instructions_step3_search">På den webbplatsen, ladda ner APK-filen för version &lt;b&gt;%s&lt;/b&gt;, inte den nyaste</string>
-    <string name="home_download_instructions_step3_search_any">På den webbplatsen, ladda ner APK-filen för appen. &lt;b&gt;Vilken version som helst&lt;/b&gt; kan modifieras</string>
+    <string name="home_download_instructions_step3_search">På den webbplatsen, ladda ned APK-filen för version &lt;b&gt;%s&lt;/b&gt;, inte den nyaste</string>
+    <string name="home_download_instructions_step3_search_any">På den webbplatsen, ladda ned APK-filen för appen. &lt;b&gt;Vilken version som helst&lt;/b&gt; kan modifieras</string>
     <string name="home_download_instructions_download_button_toast">Tryck på nedladdningsknappen på webbplatsen, inte här 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Toppen! Tryck nu på knappen för att fortsätta till webbplatsen 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Övning ger färdighet, och du är på god väg 💪</string>
@@ -482,6 +482,7 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Enhet</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Minne</string>
     <string name="patcher_field_storage">Lagring</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Utdata storlek</string>
@@ -630,6 +631,12 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="mini_game_snake_swipe_to_start">Svep för att starta</string>
     <string name="mini_game_dino_picker_subtitle">Tryck för att hoppa över kaktusarna</string>
     <string name="mini_game_dino_tap_to_start">Tryck för att springa</string>
+    <string name="mini_game_blocks_picker_subtitle">Passa formerna, rensa linjerna</string>
+    <string name="mini_game_blocks_tap_to_start">Tryck för att rotera, svep för att flytta, svep nedåt för att släppa</string>
+    <string name="mini_game_bricks_picker_subtitle">Studsa bollen, slå sönder väggen</string>
+    <string name="mini_game_bricks_tap_to_start">Dra för att sikta, tryck för att skjuta</string>
+    <string name="mini_game_miner_picker_subtitle">Tryck för att öppna, håll för att flagga</string>
+    <string name="mini_game_pairs_picker_subtitle">Vänd korten, hitta paret</string>
     <!-- Settings -->
     <string name="appearance">Utseende</string>
     <string name="advanced">Avancerat</string>
@@ -787,7 +794,7 @@ Tillägg påverkas inte: Aktivera förhandsversioner av tillägg för varje käl
     <string name="settings_advanced_github_pat_export_warning">Dela inte din personliga åtkomsttoken. Om du inkluderar den i en inställningsexport ska du hålla filen privat eftersom den innehåller din token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Tilläggsalternativ</string>
-    <string name="settings_advanced_patch_options_youtube_description">Varumärkes- och rubrikinställningar</string>
+    <string name="settings_advanced_patch_options_youtube_description">Alternativ för varumärkesanpassning och sidhuvud</string>
     <string name="settings_advanced_patch_options_restart_message">Om du ändrar tilläggsalternativen måste du modifiera appen igen för att ändringarna ska träda i kraft</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">I expertläget blir tilläggsalternativ tillgängliga under modifieringsprocessen</string>
     <string name="settings_advanced_patch_options_loading">Läser in tilläggsalternativ …</string>
@@ -933,10 +940,10 @@ Information: %2$s"</string>
     <string name="settings_system_battery_optimization">Batterioptimering</string>
     <string name="settings_system_battery_optimization_description">Låter modifieringsverktyget fortsätta köras när appen minimeras</string>
     <string name="settings_system_background">Bakgrund</string>
-    <string name="settings_system_process_runtime">Processexekvering</string>
+    <string name="settings_system_process_runtime">Processkörning</string>
     <string name="settings_system_process_runtime_description">Kör modifieringen i en separat process för bättre stabilitet</string>
     <string name="settings_system_process_runtime_memory_limit_description">Högre gränser gör modifieringen snabbare på kompatibla enheter</string>
-    <string name="settings_system_process_runtime_enable">Aktivera processexekvering</string>
+    <string name="settings_system_process_runtime_enable">Aktivera processkörning</string>
     <string name="settings_system_memory_limit_subtitle">Tillgängligt minne för modifieringen</string>
     <string name="settings_system_memory_limit_warning">En låg minnesgräns kan leda till fel när du modifierar större appar</string>
     <string name="settings_system_memory_limit_high_warning">En hög minnesgräns kan göra modifieringen mycket långsammare på vissa enheter. Höj den bara om modifieringen fortsätter att misslyckas vid lägre gränser</string>
@@ -1012,8 +1019,8 @@ Information: %2$s"</string>
     <string name="settings_system_storage_http_cache_description">HTTP-svar som cachelagras för att snabba upp uppdateringar</string>
     <string name="settings_system_storage_installer_cache_title">Cacheminne för externa installerare</string>
     <string name="settings_system_storage_installer_cache_description">Kopior av APK-filer som skickas till installerare från tredje part</string>
-    <string name="settings_system_storage_patcher_workspace_title">Exekvering av modifieringsverktyget</string>
-    <string name="settings_system_storage_patcher_workspace_description">Exekveringsfiler för modifieringsverktyget och överblivna tillfälliga data</string>
+    <string name="settings_system_storage_patcher_workspace_title">Körning av modifieringsverktyg</string>
+    <string name="settings_system_storage_patcher_workspace_description">Filer för körning av modifieringsverktyget och överblivna tillfälliga data</string>
     <string name="settings_system_storage_temporary_title">Tillfälliga filer</string>
     <string name="settings_system_storage_temporary_description">Arbetsfiler som skapas under modifiering</string>
     <string name="settings_system_storage_clear_all">Rensa alla cacheminnen</string>
@@ -1239,9 +1246,9 @@ Information: %2$s"</string>
     <string name="installing_manager_update">Installerar uppdateringen …</string>
     <string name="downloading_manager_update">Laddar ned uppdateringen …</string>
     <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
-    <string name="manager_update_progress_downloaded">Nedladdat %1$s MB</string>
+    <string name="manager_update_progress_downloaded">%1$s MB har laddats ned</string>
     <string name="manager_update_not_ready">Den här utgåvan publiceras fortfarande. Försök igen om några minuter.</string>
-    <string name="update_download_missing">Den nedladdade uppdateringen är inte längre tillgänglig. Ladda ner den igen</string>
+    <string name="update_download_missing">Den nedladdade uppdateringen är inte längre tillgänglig. Ladda ned den igen</string>
     <string name="download_manager_failed">Det gick inte att ladda ned uppdateringen: %s</string>
     <string name="failed_to_check_updates">Det gick inte att söka efter uppdateringar: %s</string>
     <string name="failed_to_download_update">Det gick inte att ladda ned uppdateringen: %s</string>

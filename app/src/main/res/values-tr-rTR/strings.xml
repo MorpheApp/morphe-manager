@@ -482,6 +482,7 @@ Dış bölge (kesikli): launcher maskesi tarafından kırpılabilir - önemli ay
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Cihaz</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Bellek</string>
     <string name="patcher_field_storage">Depolama</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Çıktı boyutu</string>
@@ -632,6 +633,12 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="mini_game_snake_swipe_to_start">Başlamak için kaydırın</string>
     <string name="mini_game_dino_picker_subtitle">Kaktüslerin üzerinden atlamak için dokun</string>
     <string name="mini_game_dino_tap_to_start">Koşmak için dokunun</string>
+    <string name="mini_game_blocks_picker_subtitle">Şekilleri yerleştir, çizgileri temizle</string>
+    <string name="mini_game_blocks_tap_to_start">Döndürmek için dokunun, taşımak için kaydırın, düşürmek için aşağı kaydırın</string>
+    <string name="mini_game_bricks_picker_subtitle">Topu sektir, duvarı yok et</string>
+    <string name="mini_game_bricks_tap_to_start">Nişan almak için sürükle, fırlatmak için dokun</string>
+    <string name="mini_game_miner_picker_subtitle">Açmak için dokunun, işaretlemek için basılı tutun</string>
+    <string name="mini_game_pairs_picker_subtitle">Kartları çevirin, eşleşeni bulun</string>
     <!-- Settings -->
     <string name="appearance">Görünüm</string>
     <string name="advanced">Gelişmiş</string>

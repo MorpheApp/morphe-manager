@@ -482,6 +482,7 @@
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">裝置</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">記憶體</string>
     <string name="patcher_field_storage">儲存空間</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">輸出大小</string>
@@ -633,8 +634,11 @@
     <string name="mini_game_dino_picker_subtitle">點擊跳過仙人掌</string>
     <string name="mini_game_dino_tap_to_start">點擊跑步</string>
     <string name="mini_game_blocks_picker_subtitle">拼合形狀，消除線條</string>
+    <string name="mini_game_blocks_tap_to_start">點擊旋轉，滑動移動，向下滑動落下</string>
     <string name="mini_game_bricks_picker_subtitle">彈跳球，消除牆壁</string>
     <string name="mini_game_bricks_tap_to_start">拖動瞄準，點擊發射</string>
+    <string name="mini_game_miner_picker_subtitle">點擊開啟，長按標記旗幟</string>
+    <string name="mini_game_pairs_picker_subtitle">翻開卡片，找出配對</string>
     <!-- Settings -->
     <string name="appearance">外觀</string>
     <string name="advanced">進階</string>
