@@ -13,14 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout dev
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: dev
           fetch-depth: 0
           clean: true
 
       - name: Pull strings from Crowdin
-        uses: crowdin/github-action@v2
+        uses: crowdin/github-action@v3
         with:
           config: crowdin.yml
           upload_sources: false
@@ -43,7 +43,7 @@ jobs:
     steps:
       # Step 1: Checkout crowdin branch to run checks on it
       - name: Checkout crowdin branch
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: crowdin
           fetch-depth: 0
@@ -63,7 +63,7 @@ jobs:
 
       # Step 3: Checkout dev branch to prepare for merging
       - name: Checkout dev branch for merge
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: dev
           fetch-depth: 0
