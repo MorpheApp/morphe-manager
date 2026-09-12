@@ -1,3 +1,10 @@
+# [1.31.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.31.0-dev.1...v1.31.0-dev.2) (2026-09-12)
+
+
+### Bug Fixes
+
+* Set patch options as the type each option declares ([a18b93e](https://github.com/MorpheApp/morphe-manager/commit/a18b93ed2e5601e152fb17a9f10e71b06be6b43d))
+
 # [1.31.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.30.1-dev.1...v1.31.0-dev.1) (2026-09-11)
 
 
