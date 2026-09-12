@@ -633,6 +633,9 @@ Menghapus pemasangannya akan menghapus semua data aplikasi secara permanen"</str
     <string name="mini_game_snake_swipe_to_start">Usap untuk memulai</string>
     <string name="mini_game_dino_picker_subtitle">Ketuk untuk melompati kaktus</string>
     <string name="mini_game_dino_tap_to_start">Ketuk untuk berlari</string>
+    <string name="mini_game_blocks_picker_subtitle">Cocokkan bentuk, bersihkan garis</string>
+    <string name="mini_game_bricks_picker_subtitle">Pantulkan bola, hancurkan dinding</string>
+    <string name="mini_game_bricks_tap_to_start">Seret untuk membidik, ketuk untuk meluncurkan</string>
     <!-- Settings -->
     <string name="appearance">Tampilan</string>
     <string name="advanced">Lanjutan</string>

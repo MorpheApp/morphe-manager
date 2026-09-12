@@ -633,6 +633,12 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="mini_game_snake_swipe_to_start">Başlamaq üçün sürüşdür</string>
     <string name="mini_game_dino_picker_subtitle">Kaktusların üstündən hoppanmaq üçün toxun</string>
     <string name="mini_game_dino_tap_to_start">Qaçmaq üçün toxun</string>
+    <string name="mini_game_blocks_picker_subtitle">Fiqurları uyğunlaşdır, cərgələri təmizlə</string>
+    <string name="mini_game_blocks_tap_to_start">Döndərmək üçün toxun, köçürmək üçün sürüşdür, endirmək üçün aşağı sürüşdür</string>
+    <string name="mini_game_bricks_picker_subtitle">Topu sıçrat, divarı təmizlə</string>
+    <string name="mini_game_bricks_tap_to_start">Nişan almaq üçün dart, buraxmaq üçün toxun</string>
+    <string name="mini_game_miner_picker_subtitle">Açmaq üçün toxun, nişanlamaq üçün basıb saxla</string>
+    <string name="mini_game_pairs_picker_subtitle">Kartları çevir, cütünü tap</string>
     <!-- Settings -->
     <string name="appearance">Görünüş</string>
     <string name="advanced">Qabaqcıl</string>

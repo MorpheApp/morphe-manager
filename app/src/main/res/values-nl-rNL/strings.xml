@@ -482,6 +482,7 @@ Buitenste zone (gestippeld): kan worden afgesneden door het launcher-masker - ho
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Apparaat</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Geheugen</string>
     <string name="patcher_field_storage">Opslag</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Bestandsgrootte</string>
@@ -633,8 +634,11 @@ Deïnstalleren wist alle app-gegevens permanent."</string>
     <string name="mini_game_dino_picker_subtitle">Tik om over cactussen te springen</string>
     <string name="mini_game_dino_tap_to_start">Tik om te rennen</string>
     <string name="mini_game_blocks_picker_subtitle">Plaats de vormen, maak lijnen vrij</string>
+    <string name="mini_game_blocks_tap_to_start">Tik om te draaien, veeg om te bewegen, veeg omlaag om te laten vallen</string>
     <string name="mini_game_bricks_picker_subtitle">Laat de bal stuiteren, breek de muur</string>
     <string name="mini_game_bricks_tap_to_start">Sleep om te richten, tik om te lanceren</string>
+    <string name="mini_game_miner_picker_subtitle">Tik om te openen, houd vast om te vlaggen</string>
+    <string name="mini_game_pairs_picker_subtitle">Draai kaarten om, vind het paar</string>
     <!-- Settings -->
     <string name="appearance">Uiterlijk</string>
     <string name="advanced">Geavanceerd</string>

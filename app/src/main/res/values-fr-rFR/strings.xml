@@ -636,9 +636,12 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="mini_game_snake_swipe_to_start">Balayez pour commencer</string>
     <string name="mini_game_dino_picker_subtitle">Touchez pour sauter par-dessus les cactus</string>
     <string name="mini_game_dino_tap_to_start">Touchez pour courir</string>
-    <string name="mini_game_blocks_picker_subtitle">Emboîtez les formes, lignes nettes</string>
+    <string name="mini_game_blocks_picker_subtitle">Emboîtez les formes, effacez les lignes</string>
+    <string name="mini_game_blocks_tap_to_start">Touchez pour faire pivoter, faites glisser pour déplacer, faites glisser vers le bas pour déposer</string>
     <string name="mini_game_bricks_picker_subtitle">Faites rebondir la balle, détruisez le mur</string>
     <string name="mini_game_bricks_tap_to_start">Glissez pour viser, touchez pour lancer</string>
+    <string name="mini_game_miner_picker_subtitle">Touchez pour ouvrir, maintenez appuyé pour marquer</string>
+    <string name="mini_game_pairs_picker_subtitle">Retournez les cartes, trouvez la paire correspondante</string>
     <!-- Settings -->
     <string name="appearance">Apparence</string>
     <string name="advanced">Avancé</string>

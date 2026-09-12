@@ -483,6 +483,7 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Device</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Memorya</string>
     <string name="patcher_field_storage">Imbakan</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Laki ng output</string>
@@ -634,8 +635,11 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="mini_game_dino_picker_subtitle">I-tap para tumalon sa mga cactus</string>
     <string name="mini_game_dino_tap_to_start">I-tap para tumakbo</string>
     <string name="mini_game_blocks_picker_subtitle">Pagkasyahin ang mga hugis, alisin ang mga linya</string>
+    <string name="mini_game_blocks_tap_to_start">I-tap upang paikutin, i-swipe upang ilipat, i-swipe pababa upang ihulog</string>
     <string name="mini_game_bricks_picker_subtitle">Patalbogin ang bola, alisin ang pader</string>
     <string name="mini_game_bricks_tap_to_start">I-drag para mag-aim, pindutin para ilunsad</string>
+    <string name="mini_game_miner_picker_subtitle">I-tap upang buksan, pindutin nang matagal upang i-flag</string>
+    <string name="mini_game_pairs_picker_subtitle">I-flip ang mga kard, hanapin ang magkapares</string>
     <!-- Settings -->
     <string name="appearance">Hitsura</string>
     <string name="advanced">Pagsulong</string>

@@ -482,6 +482,7 @@ Zona esterna (tratteggiata): potrebbe essere ritagliata dalla maschera di avvio:
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Dispositivo</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Memoria</string>
     <string name="patcher_field_storage">Archiviazione</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Dimensione output</string>
@@ -632,6 +633,9 @@ La disinstallazione cancellerà definitivamente tutti i dati dell'app."</string>
     <string name="mini_game_snake_swipe_to_start">Scorri per iniziare</string>
     <string name="mini_game_dino_picker_subtitle">Tocca per saltare sopra i cactus</string>
     <string name="mini_game_dino_tap_to_start">Tocca per correre</string>
+    <string name="mini_game_blocks_tap_to_start">Tocca per ruotare, scorri per muovere, scorri in basso per lasciar cadere</string>
+    <string name="mini_game_miner_picker_subtitle">Tocca per aprire, tieni premuto per segnalare</string>
+    <string name="mini_game_pairs_picker_subtitle">Gira le carte, trova la coppia</string>
     <!-- Settings -->
     <string name="appearance">Aspetto</string>
     <string name="advanced">Avanzate</string>

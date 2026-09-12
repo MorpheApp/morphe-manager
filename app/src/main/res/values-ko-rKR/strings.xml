@@ -634,6 +634,7 @@
     <string name="mini_game_dino_picker_subtitle">탭하여 선인장 뛰어넘기</string>
     <string name="mini_game_dino_tap_to_start">달리려면 탭하세요</string>
     <string name="mini_game_blocks_picker_subtitle">도형을 맞춰 선을 없애기</string>
+    <string name="mini_game_blocks_tap_to_start">탭하여 회전, 스와이프하여 이동, 아래로 스와이프하여 놓기</string>
     <string name="mini_game_bricks_picker_subtitle">공을 튕겨 벽을 없애기</string>
     <string name="mini_game_bricks_tap_to_start">드래그하여 조준하고, 탭하여 발사하기</string>
     <string name="mini_game_miner_picker_subtitle">탭하여 열고, 길게 눌러 깃발을 표시하기</string>

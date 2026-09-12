@@ -633,11 +633,12 @@ Al desinstalarla se borrarán permanentemente todos los datos de la aplicación"
     <string name="mini_game_snake_swipe_to_start">Desliza para empezar</string>
     <string name="mini_game_dino_picker_subtitle">Pulsa para saltar sobre los cactus</string>
     <string name="mini_game_dino_tap_to_start">Pulsa para correr</string>
-    <string name="mini_game_blocks_picker_subtitle">Ajusta las formas, despeja las líneas</string>
-    <string name="mini_game_bricks_picker_subtitle">Rebota la pelota, despeja la pared</string>
-    <string name="mini_game_bricks_tap_to_start">Arrastra para apuntar, toca para lanzar</string>
+    <string name="mini_game_blocks_picker_subtitle">Encaja las formas, elimina líneas</string>
+    <string name="mini_game_blocks_tap_to_start">Pulsa para girar, desliza para mover, desliza hacia abajo para soltar</string>
+    <string name="mini_game_bricks_picker_subtitle">Rebota la pelota, derriba la pared</string>
+    <string name="mini_game_bricks_tap_to_start">Arrastra para apuntar, pulsa para lanzar</string>
     <string name="mini_game_miner_picker_subtitle">Pulsa para abrir, mantén pulsado para marcar</string>
-    <string name="mini_game_pairs_picker_subtitle">Voltea las cartas, encuentra la pareja</string>
+    <string name="mini_game_pairs_picker_subtitle">Voltea cartas, encuentra la pareja</string>
     <!-- Settings -->
     <string name="appearance">Apariencia</string>
     <string name="advanced">Avanzado</string>

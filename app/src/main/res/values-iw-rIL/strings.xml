@@ -483,6 +483,7 @@
     <string name="patcher_field_android">אנדרואיד</string>
     <string name="patcher_field_device">מכשיר</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">זיכרון</string>
     <string name="patcher_field_storage">אחסון</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">גודל הפלט</string>
@@ -634,8 +635,11 @@
     <string name="mini_game_dino_picker_subtitle">הקש כדי לקפוץ מעל קקטוסים</string>
     <string name="mini_game_dino_tap_to_start">הקש כדי לרוץ</string>
     <string name="mini_game_blocks_picker_subtitle">התאימו את הצורות, נקו שורות</string>
+    <string name="mini_game_blocks_tap_to_start">הקש כדי לסובב, החלק כדי להזיז, החלק למטה כדי להוריד</string>
     <string name="mini_game_bricks_picker_subtitle">הקפיצו את הכדור, נקו את הקיר</string>
     <string name="mini_game_bricks_tap_to_start">גררו לכוון, הקישו לשגר</string>
+    <string name="mini_game_miner_picker_subtitle">הקש כדי לפתוח, החזק כדי לסמן</string>
+    <string name="mini_game_pairs_picker_subtitle">הפוך קלפים, מצא את הזוג</string>
     <!-- Settings -->
     <string name="appearance">מראה</string>
     <string name="advanced">מתקדם</string>

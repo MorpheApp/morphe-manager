@@ -632,6 +632,9 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="mini_game_snake_swipe_to_start">Prevucite prstom da biste počeli</string>
     <string name="mini_game_dino_picker_subtitle">Dodirnite da preskočite kaktuse</string>
     <string name="mini_game_dino_tap_to_start">Dodirnite da trčite</string>
+    <string name="mini_game_blocks_picker_subtitle">Uklopi oblike, očisti linije</string>
+    <string name="mini_game_bricks_picker_subtitle">Odbij loptu, sruši zid</string>
+    <string name="mini_game_bricks_tap_to_start">Povuci za nišanjenje, dodirni za lansiranje</string>
     <!-- Settings -->
     <string name="appearance">Izgled</string>
     <string name="advanced">Napredno</string>

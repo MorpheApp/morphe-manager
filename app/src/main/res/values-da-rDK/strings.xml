@@ -482,6 +482,7 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Enhed</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Hukommelse</string>
     <string name="patcher_field_storage">Lagring</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Outputstørrelse</string>
@@ -633,8 +634,11 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="mini_game_dino_picker_subtitle">Tryk for at hoppe over kaktusser</string>
     <string name="mini_game_dino_tap_to_start">Tryk for at løbe</string>
     <string name="mini_game_blocks_picker_subtitle">Tilpas formerne, klare linjer</string>
+    <string name="mini_game_blocks_tap_to_start">Tryk for at rotere, stryg for at flytte, stryg ned for at slippe</string>
     <string name="mini_game_bricks_picker_subtitle">Få bolden til at hoppe, fjern muren</string>
     <string name="mini_game_bricks_tap_to_start">Træk for at sigte, tryk for at affyre</string>
+    <string name="mini_game_miner_picker_subtitle">Tryk for at åbne, hold for at markere</string>
+    <string name="mini_game_pairs_picker_subtitle">Vend kortene, find parret</string>
     <!-- Settings -->
     <string name="appearance">Udseende</string>
     <string name="advanced">Avanceret</string>

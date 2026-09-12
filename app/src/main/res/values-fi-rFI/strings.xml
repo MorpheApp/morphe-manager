@@ -483,6 +483,7 @@ Ulkopuolinen alue (katkoviiva): käynnistimen maski saattaa leikata osia siitä 
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Laite</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Muisti</string>
     <string name="patcher_field_storage">Tallennustila</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Tulosteen koko</string>
@@ -634,8 +635,11 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="mini_game_dino_picker_subtitle">Napauta hypätäksesi kaktusten yli</string>
     <string name="mini_game_dino_tap_to_start">Napauta juostaaksesi</string>
     <string name="mini_game_blocks_picker_subtitle">Sovita muodot, selkeät linjat</string>
+    <string name="mini_game_blocks_tap_to_start">Napauta kääntääksesi, pyyhkäise liikuttaaksesi, pyyhkäise alas pudottaaksesi</string>
     <string name="mini_game_bricks_picker_subtitle">Pomputa palloa, raivaa seinä</string>
     <string name="mini_game_bricks_tap_to_start">Vedä tähdätäksesi, napauta laukaistaksesi</string>
+    <string name="mini_game_miner_picker_subtitle">Napauta avataksesi, pidä painettuna merkitäksesi</string>
+    <string name="mini_game_pairs_picker_subtitle">Käännä kortit, löydä pari</string>
     <!-- Settings -->
     <string name="appearance">Ulkoasu</string>
     <string name="advanced">Lisäasetukset</string>

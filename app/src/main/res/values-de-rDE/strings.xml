@@ -481,6 +481,7 @@ Für optimale Ergebnisse empfiehlt diese App, eine &lt;b&gt;vollständige APK&lt
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Gerät</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Speicher</string>
     <string name="patcher_field_storage">Speicher</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Ausgabegröße</string>
@@ -633,8 +634,11 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="mini_game_dino_picker_subtitle">Tippen, um über Kakteen zu springen</string>
     <string name="mini_game_dino_tap_to_start">Tippen zum Rennen</string>
     <string name="mini_game_blocks_picker_subtitle">Passe die Formen an, beseitige Linien</string>
+    <string name="mini_game_blocks_tap_to_start">Zum Drehen tippen, zum Bewegen wischen, nach unten wischen zum Ablegen</string>
     <string name="mini_game_bricks_picker_subtitle">Lass den Ball hüpfen, zerstöre die Wand</string>
     <string name="mini_game_bricks_tap_to_start">Ziehe zum Zielen, tippe zum Starten</string>
+    <string name="mini_game_miner_picker_subtitle">Tippen zum Öffnen, gedrückt halten zum Flaggen</string>
+    <string name="mini_game_pairs_picker_subtitle">Karten umdrehen, das passende Paar finden</string>
     <!-- Settings -->
     <string name="appearance">Darstellung</string>
     <string name="advanced">Erweitert</string>

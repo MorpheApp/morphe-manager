@@ -481,6 +481,7 @@
     <string name="patcher_field_android">অ্যান্ড্রয়েড</string>
     <string name="patcher_field_device">ডিভাইস</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">মেমোরি</string>
     <string name="patcher_field_storage">স্টোরেজ</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">আউটপুট আকার</string>
@@ -632,8 +633,11 @@
     <string name="mini_game_dino_picker_subtitle">ক্যাকটাসের উপর দিয়ে লাফ দিতে ট্যাপ করুন</string>
     <string name="mini_game_dino_tap_to_start">দৌড়াতে ট্যাপ করুন</string>
     <string name="mini_game_blocks_picker_subtitle">আকৃতি মিলান, লাইন পরিষ্কার করুন</string>
+    <string name="mini_game_blocks_tap_to_start">ঘোরাতে ট্যাপ করুন, সরাতে সোয়াইপ করুন, ফেলতে নিচে সোয়াইপ করুন</string>
     <string name="mini_game_bricks_picker_subtitle">বলটি বাউন্স করুন, প্রাচীর পরিষ্কার করুন</string>
     <string name="mini_game_bricks_tap_to_start">লক্ষ্য করতে টেনে আনুন, ছুড়তে ট্যাপ করুন</string>
+    <string name="mini_game_miner_picker_subtitle">খুলতে ট্যাপ করুন, ফ্ল্যাগ করতে ধরে রাখুন</string>
+    <string name="mini_game_pairs_picker_subtitle">কার্ড উল্টান, মিল খুঁজুন</string>
     <!-- Settings -->
     <string name="appearance">রূপ</string>
     <string name="advanced">উন্নত</string>

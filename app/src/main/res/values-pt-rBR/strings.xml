@@ -482,6 +482,7 @@ Zona externa (tracejada): pode ser recortada pela máscara do launcher - mantenh
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Dispositivo</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Memória</string>
     <string name="patcher_field_storage">Armazenamento</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Tamanho de saída</string>
@@ -633,6 +634,9 @@ A desinstalação apagará permanentemente todos os dados do aplicativo"</string
     <string name="mini_game_snake_swipe_to_start">Deslize para começar</string>
     <string name="mini_game_dino_picker_subtitle">Toque para pular sobre os cactos</string>
     <string name="mini_game_dino_tap_to_start">Toque para correr</string>
+    <string name="mini_game_blocks_tap_to_start">Toque para girar, deslize para mover, deslize para baixo para soltar</string>
+    <string name="mini_game_miner_picker_subtitle">Toque para abrir, segure para marcar</string>
+    <string name="mini_game_pairs_picker_subtitle">Vire as cartas, encontre o par</string>
     <!-- Settings -->
     <string name="appearance">Aparência</string>
     <string name="advanced">Avançado</string>
