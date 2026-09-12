@@ -315,6 +315,11 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent, ApkDownloadHelperHost 
         val version: String?,
         val url: String,
         /**
+         * Official site declared by one of the covering bundles, used instead of a plain search
+         * when the API knows nothing of the app. Null when no bundle declares one.
+         */
+        val officialUrl: String? = null,
+        /**
          * Versions the sources cover, carried so a download helper can be told what else is
          * acceptable when the requested version is no longer offered anywhere.
          */
@@ -336,10 +341,14 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent, ApkDownloadHelperHost 
             compatible = compatible
         )
         viewModelScope.launch {
-            val resolved = withContext(Dispatchers.IO) {
-                downloadUrlResolver.resolve(item.packageName, version)
+            val officialUrl = withContext(Dispatchers.IO) {
+                patchBundleRepository.websiteFor(item.bundles.map { it.uid })
             }
-            apkSearch = apkSearch?.takeIf { it.item.packageName == item.packageName }?.copy(url = resolved)
+            val resolved = withContext(Dispatchers.IO) {
+                downloadUrlResolver.resolve(item.packageName, version, officialUrl)
+            }
+            apkSearch = apkSearch?.takeIf { it.item.packageName == item.packageName }
+                ?.copy(url = resolved, officialUrl = officialUrl)
         }
     }
 
@@ -413,7 +422,8 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent, ApkDownloadHelperHost 
             allowSplitArchive = !(apkFileType?.isApk == true && apkFileType.isRequired),
             stockInstallRequired = state.value?.useMount == true &&
                     search.item.source !is BatchApkSource.Installed,
-            fallbackWebUrl = downloadUrlResolver.webSearchUrl(packageName, search.version)
+            fallbackWebUrl = search.officialUrl
+                ?: downloadUrlResolver.webSearchUrl(packageName, search.version)
         )
     }
 

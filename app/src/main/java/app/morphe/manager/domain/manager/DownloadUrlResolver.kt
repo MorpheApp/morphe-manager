@@ -23,38 +23,42 @@ import kotlin.time.Duration.Companion.seconds
 class DownloadUrlResolver(private val morpheAPI: MorpheAPI) {
 
     /**
-     * Resolves the download page for [packageName] at [version], falling back to a plain web
-     * search when the API cannot point anywhere useful.
+     * Resolves the download page for [packageName] at [version], falling back to the bundle's own
+     * website when it declared one, or to a plain web search otherwise, whenever the API cannot
+     * point anywhere useful.
+     *
+     * @param officialUrl The app's official site from the covering patch bundle, or null when the
+     *   bundle does not declare one.
      *
      * Every redirect along the way is followed: the API sometimes points at itself once more,
      * and the download sites redirect for reasons of their own, so only the end of the chain
      * says what the user will actually get.
      */
-    suspend fun resolve(packageName: String, version: String?): String =
+    suspend fun resolve(packageName: String, version: String?, officialUrl: String? = null): String =
         // The instructions wait on this, so a host that never answers has to end the wait itself
-        withTimeoutOrNull(RESOLVE_TIMEOUT) { follow(packageName, version) } ?: run {
+        withTimeoutOrNull(RESOLVE_TIMEOUT) { follow(packageName, version, officialUrl) } ?: run {
             Log.w(tag, "Timed out resolving the download page")
-            webSearchUrl(packageName, version)
+            fallback(packageName, version, officialUrl)
         }
 
-    private suspend fun follow(packageName: String, version: String?): String {
+    private suspend fun follow(packageName: String, version: String?, officialUrl: String?): String {
         val searchUrl = apiSearchUrl(packageName, version)
         Log.d(tag, "Using search url: $searchUrl")
 
         var resolved = morpheAPI.resolveRedirect(searchUrl) ?: run {
             Log.w(tag, "No redirect location for: $searchUrl")
-            return webSearchUrl(packageName, version)
+            return fallback(packageName, version, officialUrl)
         }
 
         repeat(MAX_REDIRECTS) {
             // A URL that redirects nowhere is the end of the chain
-            val next = morpheAPI.resolveRedirect(resolved) ?: return finalUrl(resolved, packageName, version)
+            val next = morpheAPI.resolveRedirect(resolved) ?: return finalUrl(resolved, packageName, version, officialUrl)
             Log.i(tag, "Following redirect to: $next")
             resolved = next
         }
 
         Log.w(tag, "Gave up after $MAX_REDIRECTS redirects")
-        return webSearchUrl(packageName, version)
+        return fallback(packageName, version, officialUrl)
     }
 
     /** The unfollowed API URL, standing in for the destination until [resolve] has one. */
@@ -76,18 +80,34 @@ class DownloadUrlResolver(private val morpheAPI: MorpheAPI) {
         return "https://google.com/search?q=${URLEncoder.encode(query, "UTF-8")}"
     }
 
-    /** Hands back [url], or a web search when it cannot lead to the version that was asked for. */
-    private fun finalUrl(url: String, packageName: String, version: String?): String {
+    /** Hands back [url], or the best fallback when it cannot lead to the version that was asked for. */
+    private fun finalUrl(
+        url: String,
+        packageName: String,
+        version: String?,
+        officialUrl: String?
+    ): String {
         // Uptodown answers a retired download id with its "latest version" page, which is not
         // the build the patches need. Only its per-build pages end in "-x"
         val uri = runCatching { URI(url) }.getOrNull() ?: return url
-        val onUptodown = uri.host?.lowercase()?.endsWith("uptodown.com") == true
+        val host = uri.host?.lowercase()
+        val onUptodown = host?.endsWith("uptodown.com") == true
         if (onUptodown && !uri.path.orEmpty().trimEnd('/').endsWith("-x")) {
             Log.w(tag, "Uptodown link lost its build, searching instead: $url")
-            return webSearchUrl(packageName, version)
+            return fallback(packageName, version, officialUrl)
+        }
+        // The API points at a plain search page when it knows nothing of the app. A bundle that
+        // declared its own site beats that, so the user lands on the one place that really has it
+        if (host?.endsWith("google.com") == true) {
+            Log.i(tag, "Resolution ended in a search page, preferring the bundle's website: $url")
+            return fallback(packageName, version, officialUrl)
         }
         return url
     }
+
+    /** The bundle's own site when one was declared, or a plain web search query at the mirrors. */
+    private fun fallback(packageName: String, version: String?, officialUrl: String?): String =
+        officialUrl ?: webSearchUrl(packageName, version)
 
     private companion object {
         // Enough for the API pointing at itself and a site or two moving the page, while still
