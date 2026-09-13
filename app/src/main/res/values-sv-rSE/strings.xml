@@ -406,7 +406,7 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="batch_patch_state_no_apk">Ingen APK-fil</string>
     <string name="batch_patch_state_no_patches">Inga tillägg</string>
     <string name="batch_patch_policy_install">Installera när modifieringen är klar</string>
-    <string name="batch_patch_policy_install_description">Installerar alla modifierade appar direkt när kön är klar. Om alternativet är inaktiverat sparas APK-filerna till senare.</string>
+    <string name="batch_patch_policy_install_description">Installerar alla modifierade appar direkt efter att kön är klar. Om det här alternativet är inaktiverat sparas APK-filerna till senare.</string>
     <string name="batch_patch_start">Starta modifiering</string>
     <string name="batch_patch_stop_title">Stoppa gruppmodifieringen?</string>
     <string name="batch_patch_stop_description">Den app som modifieras just nu och allt som fortfarande står i kön avbryts</string>
@@ -672,7 +672,7 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="settings_appearance_pure_black">Rent svart</string>
     <string name="settings_appearance_pure_black_description">Använder rent svarta bakgrunder</string>
     <!-- Settings - Appearance Tab - Language Selector -->
-    <string name="settings_appearance_language_and_display">Språk &amp; visning</string>
+    <string name="settings_appearance_language_and_display">Språk och visning</string>
     <string name="settings_appearance_app_language">Appspråk</string>
     <string name="settings_appearance_app_language_current">Aktuellt språk</string>
     <string name="settings_appearance_translations_info_title">Översättningar till vissa språk kan saknas eller vara ofullständiga</string>
@@ -680,10 +680,10 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
 %s"</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Gränssnittsskala</string>
-    <string name="settings_appearance_ui_scale_current">Nuvarande skala</string>
+    <string name="settings_appearance_ui_scale_current">Aktuell skala</string>
     <string name="settings_appearance_ui_scale_description">Skalar allt i appen, utöver systemets skärmzoom och teckenstorlek</string>
-    <string name="settings_appearance_ui_scale_preview_title">Exempelinställning</string>
-    <string name="settings_appearance_ui_scale_preview_subtitle">Text och kontroller i denna skala</string>
+    <string name="settings_appearance_ui_scale_preview_title">Exempel på inställning</string>
+    <string name="settings_appearance_ui_scale_preview_subtitle">Text och kontroller i den här skalan</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Startskärm</string>
     <string name="settings_appearance_greeting_phrases">Hälsningsfraser</string>
@@ -695,8 +695,8 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="settings_appearance_patch_categories_description">Indela tilläggslistor efter de kategorier som källor deklarerar, och lämna källor som inte deklarerar några kategorier som en vanlig lista</string>
     <string name="settings_appearance_repatch_notice">Meddelande om att modifiera igen</string>
     <string name="settings_appearance_repatch_notice_description">Visa en banner på startskärmen när modifierade appar kan modifieras igen</string>
-    <string name="settings_appearance_sort_button">Sortera och filtrera-knapp</string>
-    <string name="settings_appearance_sort_button_description">Visa sorterings- och filtreringsknappen på startskärmen</string>
+    <string name="settings_appearance_sort_button">Knapp för att sortera och filtrera</string>
+    <string name="settings_appearance_sort_button_description">Visa knappen för att sortera och filtrera på startskärmen</string>
     <string name="settings_appearance_app_card_colors">Färger för appkort</string>
     <string name="settings_appearance_app_card_colors_default">Standard</string>
     <string name="settings_appearance_app_card_colors_default_description">Ge varje app färgen från sitt eget paket</string>

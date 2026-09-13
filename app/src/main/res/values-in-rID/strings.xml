@@ -483,6 +483,7 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Perangkat</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Memori</string>
     <string name="patcher_field_storage">Penyimpanan</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Ukuran keluaran</string>
@@ -634,8 +635,11 @@ Menghapus pemasangannya akan menghapus semua data aplikasi secara permanen"</str
     <string name="mini_game_dino_picker_subtitle">Ketuk untuk melompati kaktus</string>
     <string name="mini_game_dino_tap_to_start">Ketuk untuk berlari</string>
     <string name="mini_game_blocks_picker_subtitle">Cocokkan bentuk, bersihkan garis</string>
+    <string name="mini_game_blocks_tap_to_start">Ketuk untuk memutar, usap untuk memindahkan, usap ke bawah untuk menjatuhkan</string>
     <string name="mini_game_bricks_picker_subtitle">Pantulkan bola, hancurkan dinding</string>
     <string name="mini_game_bricks_tap_to_start">Seret untuk membidik, ketuk untuk meluncurkan</string>
+    <string name="mini_game_miner_picker_subtitle">Ketuk untuk membuka, tahan untuk menandai</string>
+    <string name="mini_game_pairs_picker_subtitle">Balik kartu, temukan pasangannya</string>
     <!-- Settings -->
     <string name="appearance">Tampilan</string>
     <string name="advanced">Lanjutan</string>
