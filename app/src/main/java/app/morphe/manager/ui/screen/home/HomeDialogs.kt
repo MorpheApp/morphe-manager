@@ -104,7 +104,7 @@ fun HomeDialogs(
         val savedApkInfo = homeViewModel.pendingSavedApkInfo
         val installedApkInfo = homeViewModel.pendingInstalledApkInfo
         val installedAppVersion = homeViewModel.pendingInstalledAppVersion
-        val targetAppInstalled = homeViewModel.pendingTargetAppInstalled == true
+        val stockAppInstalled = homeViewModel.pendingStockAppInstalled == true
 
         ApkAvailabilityDialog(
             appName = appName,
@@ -113,7 +113,7 @@ fun HomeDialogs(
             selectedDownloadVersion = selectedDownloadVersion,
             onVersionSelect = { homeViewModel.pendingSelectedDownloadVersion = it },
             usingMountInstall = usingMountInstall,
-            targetAppInstalled = targetAppInstalled,
+            stockAppInstalled = stockAppInstalled,
             isExpertMode = isExpertMode,
             savedApkInfo = savedApkInfo,
             installedApkInfo = installedApkInfo,
@@ -175,7 +175,7 @@ fun HomeDialogs(
             downloadUrl = homeViewModel.resolvedDownloadUrl,
             requestedVersion = requestedVersion,
             usingMountInstall = usingMountInstall,
-            targetAppInstalled = homeViewModel.pendingTargetAppInstalled == true,
+            stockAppInstalled = homeViewModel.pendingStockAppInstalled == true,
             downloadColor = downloadColor,
             isApkBundle = isApkBundle,
             onDismiss = {
@@ -680,7 +680,7 @@ internal fun ApkAvailabilityDialog(
     selectedDownloadVersion: AppTarget?,
     onVersionSelect: (AppTarget) -> Unit,
     usingMountInstall: Boolean,
-    targetAppInstalled: Boolean,
+    stockAppInstalled: Boolean,
     isExpertMode: Boolean,
     savedApkInfo: SavedApkInfo?,
     installedApkInfo: InstalledApkInfo?,
@@ -891,8 +891,8 @@ internal fun ApkAvailabilityDialog(
                 )
             }
 
-            // Root mode warning - only when app is not yet installed
-            if (usingMountInstall && !targetAppInstalled) {
+            // Root mode warning - only when there is no app on the device to mount over
+            if (usingMountInstall && !stockAppInstalled) {
                 Notice(
                     text = stringResource(R.string.root_install_apk_required),
                     tone = SemanticTone.Warning,

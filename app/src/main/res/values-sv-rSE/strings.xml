@@ -13,10 +13,10 @@
     <string name="home_app_no_hidden">Inga dolda appar</string>
     <string name="home_app_hidden_apps_title">Dolda appar</string>
     <string name="home_app_hidden_apps_hint">Tryck för att visa</string>
-    <string name="home_app_patch_sources_description">Källor som lämnas omarkerade erbjuds inte när dessa appar patchas, och deras patchar ingår aldrig i ett urval på egen hand. Varje källa förblir aktiverad för alla andra appar. \"key\":\"home_app_patch_sources_description\",\"context\":\"home_app_patch_sources_description\",\"maxLength\":null,\"terms\":[]},{\"id\":32254,\"prualForm\":\"\",\"text\":\"Erbjuds till %1$s av %2$s\",\"key\":\"home_app_patch_sources_mixed\",\"context\":\"home_app_patch_sources_mixed\",\"maxLength\":null,\"terms\":[]},{\"id\":32256,\"prualForm\":\"\",\"text\":\"Har patchar för %1$s av %2$s\",\"key\":\"home_app_patch_sources_covers\",\"context\":\"home_app_patch_sources_covers\",\"maxLength\":null,\"terms\":[]},{\"id\":32258,\"prualForm\":\"\",\"text\":\"Varje app behöver en källa kvar att hämta patchar från\",\"key\":\"home_app_patch_sources_last\",\"context\":\"home_app_patch_sources_last\",\"maxLength\":null,\"terms\":[]},{\"id\":32260,\"prualForm\":\"\",\"text\":\"Dold för\",\"key\":\"sources_hidden_apps\",\"context\":\"sources_hidden_apps\",\"maxLength\":null,\"terms\":[]},{\"id\":32262,\"prualForm\":\"\",\"text\":\"Appar dolda för %1$s\",\"key\":\"sources_hidden_apps_title\",\"context\":\"sources_hidden_apps_title\",\"maxLength\":null,\"terms\":[]},{\"id\":32264,\"prualForm\":\"\",\"text\":\"Dessa appar erbjuds inte den här källan när de patchas. Själva källan förblir aktiverad för allt annat.\",\"key\":\"sources_hidden_apps_description\",\"context\":\"sources_hidden_apps_description\",\"maxLength\":null,\"terms\":[]},{\"id\":32266,\"prualForm\":\"\",\"text\":\"Tryck för att erbjuda den här källan igen\",\"key\":\"sources_hidden_apps_hint\",\"context\":\"sources_hidden_apps_hint\",\"maxLength\":null,\"terms\":[]},{\"id\":32268,\"prualForm\":\"\",\"text\":\"Använd alltid den här källan för den här appen\",\"key\":\"home_simple_bundle_select_remember\",\"context\":\"home_simple_bundle_select_remember\",\"maxLength\":null,\"terms\":[]},{\"id\":32274,\"prualForm\":\"\",\"text\":\"Patchalternativfiler saknas och kommer att hoppas över: %1$s\",\"key\":\"batch_patch_option_paths_skipped\",\"context\":\"batch_patch_option_paths_skipped\",\"maxLength\":null,\"terms\":[]},{\"id\":32276,\"prualForm\":\"\",\"text\":\"Vissa patchar är borta\",\"key\":\"patcher_missing_patches_title\",\"context\":\"patcher_missing_patches_title\",\"maxLength\":null,\"terms\":[]},{\"id\":32278,\"prualForm\":\"\",\"text\":\"Det sparade urvalet för den här appen anger patchar som ingen aktiverad källa längre erbjuder. Om du fortsätter kommer appen att patchas utan dem.\",\"key\":\"patcher_missing_patches_description\",\"context\":\"patcher_missing_patches_description\",\"maxLength\":null,\"terms\":[]},{\"id\":32280,\"prualForm\":\"\",\"text\":\"Erbjuds inte längre\",\"key\":\"patcher_missing_patches_label\",\"context\":\"patcher_missing_patches_label\",\"maxLength\":null,\"terms\":[]},{\"id\":32282,\"prualForm\":\"\",\"text\":\"Patchalternativfiler saknas\",\"key\":\"patcher_option_paths_gone_title\",\"context\":\"patcher_option_paths_gone_title\",\"maxLength\":null,\"terms\":[]},{\"id\":32284,\"prualForm\":\"\",\"text\":\"Ett eller flera patchalternativ pekar på filer som inte längre finns. Ta bort sökvägarna för att patcha utan dem, eller lägg tillbaka filerna och försök igen.\",\"key\":\"patcher_option_paths_gone_description\",\"context\":\"patcher_option_paths_gone_description\",\"maxLength\":null,\"terms\":[]},{\"id\":32286,\"prualForm\":\"\",\"text\":\"Ta bort sökvägarna och fortsätt\",\"key\":\"patcher_option_paths_clear\",\"context\":\"patcher_option_paths_clear\",\"maxLength\":null,\"terms\":[]},{\"id\":32288,\"prualForm\":\"\",\"text\":\"Den här mappen kan inte längre läsas. Välj den igen eller rensa den, annars kommer patchningen att stanna och fråga om det\",\"key\":\"settings_advanced_patch_options_path_gone\",\"context\":\"settings_advanced_patch_options_path_gone\",\"maxLength\":null,\"terms\":[]},{\"id\":32292,\"prualForm\":\"\",\"text\":\"Ikonen som appen patchas med. Den används också där appen inte kan ändra den senare, såsom Android Auto och applistan i systeminställningarna.\",\"key\":\"settings_advanced_patch_options_custom_branding_app_icon_description\",\"context\":\"settings_advanced_patch_options_custom_branding_app_icon_description\",\"maxLength\":null,\"terms\":[{\"source\":\"Auto\",\"translatable\":true,\"partOfSpeech\":\"ADJ\"}]},{\"id\":32294,\"prualForm\":\"\",\"text\":\"Den anpassade appikonen behöver en mapp med ikonbilder\",\"key\":\"settings_advanced_patch_options_custom_branding_app_icon_needs_folder\",\"context\":\"settings_advanced_patch_options_custom_branding_app_icon_needs_folder\",\"maxLength\":null,\"terms\":[]}]}</string>
+    <string name="home_app_patch_sources_description">Källor som du lämnar omarkerade erbjuds inte när de här apparna modifieras, och deras tillägg läggs aldrig till i något urval på egen hand. Alla källor förblir aktiverade för alla andra appar</string>
     <string name="home_app_patch_sources_mixed">Erbjuds till %1$s av %2$s</string>
-    <string name="home_app_patch_sources_covers">Har patcher för %1$s av %2$s</string>
-    <string name="home_app_patch_sources_last">Varje app behöver en källa kvar att patcha från</string>
+    <string name="home_app_patch_sources_covers">Har tillägg för %1$s av %2$s</string>
+    <string name="home_app_patch_sources_last">Varje app måste ha en källa kvar att modifieras med</string>
     <string name="android_11_bug_dialog_title">Fel i Android 11</string>
     <string name="android_11_bug_dialog_description">Behörigheten för appinstallation måste beviljas i förväg för att undvika ett fel i Android 11-systemet som negativt påverkar användarupplevelsen</string>
     <string name="deep_link_add_source_title">Lägg till källa</string>
@@ -140,9 +140,9 @@
     <string name="sources_management_open_in_browser">Öppna i webbläsaren</string>
     <string name="sources_management_report_issue">Rapportera ett problem</string>
     <string name="sources_management_failed_to_open_url">Det gick inte att öppna webbadressen</string>
-    <string name="sources_hidden_apps">Dold för</string>
-    <string name="sources_hidden_apps_title">Appar dolda för %1$s</string>
-    <string name="sources_hidden_apps_description">Dessa appar erbjuds inte den här källan när de patchas. Själva källan förblir på för allt annat.</string>
+    <string name="sources_hidden_apps">Döljs för</string>
+    <string name="sources_hidden_apps_title">Appar som döljs för %1$s</string>
+    <string name="sources_hidden_apps_description">De här apparna erbjuds inte den här källan när de modifieras. Själva källan förblir aktiverad för allt annat</string>
     <string name="sources_hidden_apps_hint">Tryck för att erbjuda den här källan igen</string>
     <string name="sources_management_prerelease_toggle">Förhandsversioner av tillägg</string>
     <string name="sources_management_prerelease_toggle_description">Får tidig åtkomst till nya experimentella tilläggsversioner</string>
@@ -552,12 +552,12 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="patcher_storage_permission_open_settings">Öppna lagringsinställningar</string>
     <string name="patcher_storage_badge_denied">Behörighet nekades</string>
     <string name="patcher_storage_badge_missing">Hittades inte</string>
-    <string name="batch_patch_option_paths_skipped">Filer för patchalternativ saknas och kommer att hoppas över: %1$s</string>
-    <string name="patcher_missing_patches_title">Vissa patcher är borta</string>
-    <string name="patcher_missing_patches_description">Det sparade valet för den här appen anger patcher som ingen aktiverad källa längre erbjuder. Om du fortsätter kommer appen att patchas utan dem.</string>
+    <string name="batch_patch_option_paths_skipped">Filer för tilläggsalternativ saknas och hoppas över: %1$s</string>
+    <string name="patcher_missing_patches_title">Vissa tillägg är borta</string>
+    <string name="patcher_missing_patches_description">Det sparade urvalet för den här appen nämner tillägg som ingen aktiverad källa längre erbjuder. Om du fortsätter modifieras appen utan dem</string>
     <string name="patcher_missing_patches_label">Erbjuds inte längre</string>
-    <string name="patcher_option_paths_gone_title">Filer för patchalternativ saknas</string>
-    <string name="patcher_option_paths_gone_description">Ett eller flera patchalternativ pekar på filer som inte längre finns. Ta bort sökvägarna för att patcha utan dem, eller lägg tillbaka filerna och försök igen.</string>
+    <string name="patcher_option_paths_gone_title">Filer för tilläggsalternativ saknas</string>
+    <string name="patcher_option_paths_gone_description">Ett eller flera tilläggsalternativ pekar på filer som inte längre finns kvar. Ta bort sökvägarna för att modifiera utan dem, eller lägg tillbaka filerna och försök igen</string>
     <string name="patcher_option_paths_clear">Ta bort sökvägarna och fortsätt</string>
     <string name="patcher_storage_permission_hint">Tips: Flytta filerna till /Android/data/app.morphe.manager/files/ – inga extra behörigheter behövs</string>
     <!-- Patcher Screen - Patcher Steps -->
@@ -828,9 +828,9 @@ Tillägg påverkas inte: Aktivera förhandsversioner av tillägg för varje käl
     <string name="settings_advanced_patch_options_custom_branding_description">Ändrar appens visningsnamn</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Appnamn</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Ange anpassat namn</string>
-    <string name="settings_advanced_patch_options_path_gone">Den här mappen kan inte längre läsas. Välj den igen eller rensa den, annars kommer patchningen att stanna och fråga om den.</string>
+    <string name="settings_advanced_patch_options_path_gone">Det går inte längre att läsa den här mappen. Välj den igen eller rensa den, annars avbryts modifieringen för att fråga dig om den</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Appikon</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Ikonen som appen patchas med. Den används också där appen inte kan ändra den senare, till exempel i Android Auto och i applistan i systeminställningarna.</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Ikonen som appen modifieras med. Den används även på ställen där appen inte kan ändra den senare, som i Android Auto och i applistan i systeminställningarna</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Den anpassade appikonen behöver en mapp med ikonbilder</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Anpassad ikon</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Mapp med bilder som ska användas som anpassad ikon.

@@ -21,6 +21,13 @@
         <item quantity="many">Foinsí paiste le haghaidh %s n-aip</item>
         <item quantity="other">Foinsí paiste le haghaidh %s aip</item>
     </plurals>
+    <plurals name="expert_mode_hidden_sources_notice">
+        <item quantity="one">%s fhoinse i bhfolach. Tapáil chun taispeáint.</item>
+        <item quantity="two">%s fhoinse i bhfolach. Tapáil chun taispeáint.</item>
+        <item quantity="few">%s fhoinse i bhfolach. Tapáil chun taispeáint.</item>
+        <item quantity="many">%s bhfoinsí i bhfolach. Tapáil chun taispeáint.</item>
+        <item quantity="other">%s foinsí i bhfolach. Tapáil chun taispeáint.</item>
+    </plurals>
     <plurals name="sources_search_patch_matches">
         <item quantity="one">%s phaiste meaitseála</item>
         <item quantity="two">%s phaiste meaitseála</item>

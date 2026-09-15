@@ -140,7 +140,7 @@
     <string name="sources_management_open_in_browser">Abrir en el navegador</string>
     <string name="sources_management_report_issue">Informar de un problema</string>
     <string name="sources_management_failed_to_open_url">No se pudo abrir la URL</string>
-    <string name="sources_hidden_apps">Oculta para</string>
+    <string name="sources_hidden_apps">Oculto para</string>
     <string name="sources_hidden_apps_title">Aplicaciones ocultas de %1$s</string>
     <string name="sources_hidden_apps_description">Estas aplicaciones no reciben esta fuente al parchearlas. La fuente en sí permanece activada para todo lo demás</string>
     <string name="sources_hidden_apps_hint">Pulsa para ofrecer esta fuente de nuevo</string>
@@ -790,9 +790,9 @@ Los parches no se ven afectados: habilita los parches preliminares para cada fue
     <string name="notification_channel_patcher">Parcheando</string>
     <string name="notification_channel_patcher_description">Se muestra mientras Morphe está parcheando una aplicación en segundo plano</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Ajustes Expertos</string>
+    <string name="settings_advanced_expert">Ajustes avanzados</string>
     <string name="settings_advanced_expert_mode">Modo Experto</string>
-    <string name="settings_advanced_expert_mode_description">Activa ajustes complejos de parcheo de Morphe y opciones de personalización</string>
+    <string name="settings_advanced_expert_mode_description">Activa ajustes avanzados de parcheo de Morphe y opciones de personalización</string>
     <string name="settings_advanced_expert_mode_dialog_title">¿Activar el modo Experto?</string>
     <string name="settings_advanced_expert_mode_dialog_message">El modo Experto ofrece más control sobre cómo se aplican los parches, pero configurar incorrectamente estos ajustes puede resultar en una aplicación no funcional</string>
     <string name="settings_advanced_strip_unused_libs">Optimizar para la arquitectura del dispositivo</string>
@@ -1298,7 +1298,7 @@ Detalles: %2$s"</string>
     <string name="onboarding_sources_prerelease_desc">Activa esta opción para recibir versiones pre-lanzamiento de parches de esta fuente</string>
     <string name="onboarding_appearance_tab_desc">Personaliza el aspecto de la aplicación: tema, color de acento y fondo.</string>
     <string name="onboarding_appearance_theme_desc">Elige entre tema claro, oscuro o del sistema. También puedes elegir un color de acento personalizado o activar Color dinámico.</string>
-    <string name="onboarding_expert_mode_desc">Activa el Modo Experto para desbloquear la selección de parches, opciones personalizadas y otras funciones avanzadas</string>
+    <string name="onboarding_expert_mode_desc">Activa el modo Experto para desbloquear la selección de parches, opciones personalizadas y otras funciones avanzadas</string>
     <!-- Translate "System" the same way as the System settings tab -->
     <string name="onboarding_system_tab_title">Pestaña del sistema</string>
     <string name="onboarding_system_tab_desc">Administración de almacenes de claves, herramientas de importación/exportación e información de la aplicación.</string>

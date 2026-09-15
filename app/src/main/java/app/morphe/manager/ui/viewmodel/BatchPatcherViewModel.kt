@@ -259,9 +259,9 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent, ApkDownloadHelperHost 
         val compatible: List<BundledAppTarget>,
         val saved: SavedApkInfo?,
         val installed: InstalledApkInfo?,
-        /** What the device has right now, even where [installed] is no source to patch from. */
+        /** The unpatched version on the device, even where [installed] is no source to patch from. */
         val installedVersion: String?,
-        val installedOnDevice: Boolean,
+        val hasStockInstall: Boolean,
         val selectedVersion: AppTarget?
     )
 
@@ -273,11 +273,8 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent, ApkDownloadHelperHost 
             val recommended = versionCatalog.recommendedVersions.first()[item.packageName]
             val compatible = versionCatalog.compatibleVersions.first()[item.packageName].orEmpty()
             val expertMode = prefs.useExpertMode.get()
-            val (onDevice, installed) = withContext(Dispatchers.IO) {
+            val device = withContext(Dispatchers.IO) {
                 localApkSources.installed(item.packageName)
-            }
-            val installedVersion = withContext(Dispatchers.IO) {
-                localApkSources.installedVersion(item.packageName)
             }
 
             apkChoice = ApkChoice(
@@ -287,9 +284,9 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent, ApkDownloadHelperHost 
                 saved = withContext(Dispatchers.IO) { localApkSources.saved(item.packageName) },
                 // The installed source is an expert-mode offer, and only for a version the
                 // patches target: the two conditions the single-app flow puts on the button
-                installed = installed.takeIf { expertMode }.patchableBy(compatible),
-                installedVersion = installedVersion,
-                installedOnDevice = onDevice,
+                installed = device.apk.takeIf { expertMode }.patchableBy(compatible),
+                installedVersion = device.version,
+                hasStockInstall = device.hasStockInstall,
                 selectedVersion = recommended
             )
         }

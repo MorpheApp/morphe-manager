@@ -229,7 +229,7 @@ internal fun DownloadInstructionsDialog(
     downloadUrl: String?,
     requestedVersion: String?,
     usingMountInstall: Boolean,
-    targetAppInstalled: Boolean,
+    stockAppInstalled: Boolean,
     downloadColor: Color,
     isApkBundle: Boolean,
     onDismiss: () -> Unit,
@@ -311,7 +311,7 @@ internal fun DownloadInstructionsDialog(
                 return@Crossfade
             }
 
-            val mountInstallRequired = usingMountInstall && !targetAppInstalled
+            val mountInstallRequired = usingMountInstall && !stockAppInstalled
             val steps = currentSource.instructionSteps(
                 requestedVersion = requestedVersion,
                 mountInstallRequired = mountInstallRequired
