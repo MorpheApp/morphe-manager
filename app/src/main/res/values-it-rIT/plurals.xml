@@ -9,7 +9,7 @@
         <item quantity="other">%s opzioni modifiche</item>
     </plurals>
     <plurals name="home_app_patch_sources_title">
-        <item quantity="one">Sorgenti patch per %s app</item>
+        <item quantity="one">Fonti delle modifiche per %s applicazione</item>
         <item quantity="other">Sorgenti patch per %s app</item>
     </plurals>
     <plurals name="expert_mode_hidden_sources_notice">
@@ -17,8 +17,8 @@
         <item quantity="other">%s sorgenti nascoste. Tocca per mostrare</item>
     </plurals>
     <plurals name="sources_search_patch_matches">
-        <item quantity="one">%s patch corrispondente</item>
-        <item quantity="other">%s patch corrispondenti</item>
+        <item quantity="one">%s modifica corrispondente</item>
+        <item quantity="other">%s modifiche corrispondenti</item>
     </plurals>
     <plurals name="source_count">
         <item quantity="one">%s fonte</item>

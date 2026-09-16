@@ -141,6 +141,9 @@
     <string name="sources_management_report_issue">Sorun bildir</string>
     <string name="sources_management_failed_to_open_url">URL açılamadı</string>
     <string name="sources_hidden_apps">Gizli olduğu uygulamalar</string>
+    <string name="sources_hidden_apps_title">%1$s kaynağından gizlenen uygulamalar</string>
+    <string name="sources_hidden_apps_description">Bu uygulamalar yamalanırken bu kaynak sunulmaz. Kaynak, diğer her şey için etkin kalmaya devam eder.</string>
+    <string name="sources_hidden_apps_hint">Bu kaynağı tekrar sunmak için dokun</string>
     <string name="sources_management_prerelease_toggle">Ön sürüm yamalar</string>
     <string name="sources_management_prerelease_toggle_description">Yeni deneysel sürüm yamalarına erken erişim sağlar</string>
     <string name="sources_prerelease_warning_title">Ön sürüm yamalarını etkinleştir?</string>
@@ -335,6 +338,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="home_low_disk_space_dialog_message">Sadece %1$s GB boş depolama alanı mevcut. Yamalamanın doğru çalışması için en az %2$s GB boş alan gerekir.</string>
     <string name="home_low_disk_space_dialog_warning">İşleme devam etmek, bir \"dosya bulunamadı\" hatası veya bozuk bir çıktı APK\'si ile sonuçlanabilir</string>
     <string name="home_simple_bundle_select_title">Yama kaynağı seç</string>
+    <string name="home_simple_bundle_select_remember">Bu uygulama için her zaman bu kaynağı kullan</string>
     <!-- Color picker -->
     <string name="custom_color">Özel renk</string>
     <string name="hex_color">Hex rengi</string>
@@ -550,6 +554,13 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="patcher_storage_permission_open_settings">Depolama ayarlarını aç</string>
     <string name="patcher_storage_badge_denied">İzin reddedildi</string>
     <string name="patcher_storage_badge_missing">Bulunamadı</string>
+    <string name="batch_patch_option_paths_skipped">Yama seçenek dosyaları eksik ve atlanacak: %1$s</string>
+    <string name="patcher_missing_patches_title">Bazı yamalar eksik</string>
+    <string name="patcher_missing_patches_description">Bu uygulama için kaydedilen seçim, artık hiçbir etkin kaynağın sunmadığı yamaları içeriyor. Devam ederseniz uygulama bu yamalar olmadan yamalanacak</string>
+    <string name="patcher_missing_patches_label">Artık sunulmuyor</string>
+    <string name="patcher_option_paths_gone_title">Yama seçenek dosyaları eksik</string>
+    <string name="patcher_option_paths_gone_description">Bir veya daha fazla yama seçeneği, artık bulunmayan dosyalara işaret ediyor. Bu dosyalar olmadan yamalamak için dosya yollarını kaldırın veya dosyaları geri koyup tekrar deneyin</string>
+    <string name="patcher_option_paths_clear">Dosya yollarını kaldır ve devam et</string>
     <string name="patcher_storage_permission_hint">İpucu: Dosyaları /Android/data/app.morphe.manager/files/ dizinine taşıyın - ekstra izin gerektirmez</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Hazırlanıyor</string>
@@ -817,7 +828,10 @@ Yamalar etkilenmez: yamalama kaynakları listesindeki her kaynak için ön sür�
     <string name="settings_advanced_patch_options_custom_branding_description">Görüntülenen uygulama adını değiştirir</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Uygulama adı</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Özel ad girin</string>
+    <string name="settings_advanced_patch_options_path_gone">Bu klasör artık okunamıyor. Klasörü tekrar seçin veya temizleyin; aksi takdirde yamalama işlemi durup ne yapılacağını soracaktır</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Uygulama simgesi</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Uygulamanın yamalandığı simge. Ayrıca Android Auto ve sistem ayarlarındaki uygulama listesi gibi, uygulamanın sonradan değiştiremediği yerlerde de bu simge kullanılır</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Özel uygulama simgesi için simge görselleri içeren bir klasör gerekli</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Özel filtre</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Özel bir simge olarak kullanılacak görüntüleri içeren klasör.
 

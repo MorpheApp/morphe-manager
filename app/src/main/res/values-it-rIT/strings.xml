@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
-    <string name="home_other_apps">Altre app</string>
+    <string name="home_other_apps">Altre applicazioni</string>
     <string name="home_other_apps_action">Seleziona altre applicazioni</string>
     <string name="home_not_patched_yet">Non ancora modificato</string>
     <string name="home_unpatched_version_installed">Versione non modificata installata</string>
@@ -9,9 +9,9 @@
     <string name="home_no_patches_available">Nessuna modifica disponibile</string>
     <string name="home_app_hide_title">Nascondere questa app?</string>
     <string name="home_app_hide_message">Questa app verrà nascosta dalla schermata iniziale. Puoi ripristinarla in seguito dalle app nascoste utilizzando il pulsante in fondo all\'elenco</string>
-    <string name="home_app_will_be_hidden">Questa app verrà nascosta</string>
-    <string name="home_app_no_hidden">Nessuna app nascosta</string>
-    <string name="home_app_hidden_apps_title">App nascoste</string>
+    <string name="home_app_will_be_hidden">Questa applicazione verrà nascosta</string>
+    <string name="home_app_no_hidden">Nessuna applicazione nascosta</string>
+    <string name="home_app_hidden_apps_title">Applicazioni nascoste</string>
     <string name="home_app_hidden_apps_hint">Tocca per mostrare</string>
     <string name="home_app_patch_sources_description">Le fonti non selezionate non vengono proposte quando queste applicazioni vengono modificate, e le relative modifiche non vengono mai aggiunte automaticamente a una selezione. Ogni fonte rimane attiva per tutte le altre applicazioni</string>
     <string name="home_app_patch_sources_mixed">Offerto %1$s di %2$s</string>
@@ -30,8 +30,8 @@
     <string name="home_metadata_errors_title">Alcune fonti di modifiche non sono disponibili</string>
     <string name="home_metadata_errors_subtitle">Tocca per visualizzare le fonti</string>
     <string name="home_outdated_manager_title">Morphe non è aggiornato</string>
-    <string name="home_outdated_manager_subtitle">Alcune sorgenti di patch richiedono una versione più recente</string>
-    <string name="home_held_back_title">Una sorgente di patch ha causato l\'arresto anomalo di Morphe</string>
+    <string name="home_outdated_manager_subtitle">Alcune sorgenti di modifiche richiedono una versione più recente</string>
+    <string name="home_held_back_title">Una sorgente di modifiche ha causato l\'arresto anomalo di Morphe</string>
     <string name="home_held_back_subtitle">È stata saltata per consentire l\'avvio dell\'app. Tocca per rivedere</string>
     <string name="home_metered_skipped_title">Aggiornamenti in pausa sulla rete dati mobile</string>
     <string name="home_metered_skipped_subtitle">Tocca per consentire gli aggiornamenti sulla rete mobile</string>
@@ -47,13 +47,13 @@
     <string name="home_update_success">Aggiornamento delle fonti completato</string>
     <string name="home_update_success_subtitle">Le tue fonti sono aggiornate</string>
     <string name="home_sources_are_loading">Le fonti si stanno caricando, si prega di attendere…</string>
-    <string name="home_search_apps">Cerca app</string>
+    <string name="home_search_apps">Cerca applicazioni</string>
     <string name="home_app_list_options_title">Ordina e filtra</string>
     <string name="home_app_list_options_state_description">Ordinate per %1$s, filtrate per %2$s</string>
-    <string name="home_app_filter_all_description">Tutte le app nella schermata Home</string>
-    <string name="home_app_filter_patched_description">App che hai patchato o salvato con Morphe</string>
-    <string name="home_app_filter_not_patched_description">App che non hai ancora patchato in Morphe</string>
-    <string name="home_app_filter_installed_description">App attualmente installate su questo dispositivo</string>
+    <string name="home_app_filter_all_description">Tutte le applicazioni nella schermata Home</string>
+    <string name="home_app_filter_patched_description">Applicazioni che hai modificato o salvato con Morphe</string>
+    <string name="home_app_filter_not_patched_description">Applicazioni che non hai ancora modificato in Morphe</string>
+    <string name="home_app_filter_installed_description">Applicazioni attualmente installate su questo dispositivo</string>
     <string name="home_app_filter_uninstalled_description">App patchate con Morphe che non sono più presenti su questo dispositivo</string>
     <string name="home_app_filter_clones">Cloni</string>
     <string name="home_app_filter_clones_description">App create con un nome pacchetto proprio, installate accanto all\'originale</string>
@@ -196,7 +196,7 @@ Tutto ciò che aggiungi da questo sito viene utilizzato a tuo rischio."</string>
     <string name="sources_update_unavailable">Nessun aggiornamento disponibile</string>
     <string name="sources_download_fail">Impossibile scaricare le fonti: %s</string>
     <string name="sources_download_fail_named">\"%s\" non è stato possibile aggiornarlo. Controlla la tua connessione internet e riprova</string>
-    <string name="sources_download_endpoint_not_found">\"%s\": metadati patch non trovati</string>
+    <string name="sources_download_endpoint_not_found">\"%s\": metadati modifiche non trovati</string>
     <string name="sources_patch_expert_badge">Esperto</string>
     <string name="sources_patch_expert_badge_tooltip">Abilita la modalità Esperto in Impostazioni per includere questa patch manualmente</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -209,7 +209,7 @@ Tutto ciò che aggiungi da questo sito viene utilizzato a tuo rischio."</string>
     <string name="home_apk_availability_installed_version">Installato su questo dispositivo: %s</string>
     <string name="home_apk_availability_yes">Sì, aiutami a trovare un APK</string>
     <string name="home_apk_availability_no">No, ho già un APK</string>
-    <string name="home_apk_helper_download">Usa un\'app di supporto</string>
+    <string name="home_apk_helper_download">Usa un\'applicazione di supporto</string>
     <string name="home_apk_helper_title">Scarica con un\'app di supporto</string>
     <string name="home_apk_helper_description">Morphe chiederà all\'app di supporto sottostante di scaricare l\'APK originale e restituire il file</string>
     <string name="home_apk_helper_continue">Apri l\'app di supporto</string>

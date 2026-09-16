@@ -13,6 +13,10 @@
     <string name="home_app_no_hidden">Gan aon aipeanna i bhfolach</string>
     <string name="home_app_hidden_apps_title">Aipeanna i bhfolach</string>
     <string name="home_app_hidden_apps_hint">Tapáil chun é a nochtadh</string>
+    <string name="home_app_patch_sources_description">Ní thairgtear foinsí nach bhfuil marcáilte nuair a chuirtear paistí i bhfeidhm ar na haipeanna seo, agus ní chuirtear a gcuid paistí féin leis an roghnú ina n-aonar riamh. Fanann gach foinse gníomhach do gach aip eile.</string>
+    <string name="home_app_patch_sources_mixed">Á thairiscint do %1$s de %2$s</string>
+    <string name="home_app_patch_sources_covers">Tá paistí ann do %1$s de %2$s</string>
+    <string name="home_app_patch_sources_last">Ní mór foinse amháin fágtha a bheith ag teastáil ó gach aip le paisteáil uaidh</string>
     <string name="android_11_bug_dialog_title">Fabht Android 11</string>
     <string name="android_11_bug_dialog_description">Ní mór cead suiteála na haipe a ghéilleadh roimh ré chun seachaint ar earráid i gcóras Android 11 a dhéanfaidh dochar d\'eispéireas an úsáideora</string>
     <string name="deep_link_add_source_title">Add foinse</string>
@@ -136,6 +140,10 @@
     <string name="sources_management_open_in_browser">Oscail sa bhrabhsálaí</string>
     <string name="sources_management_report_issue">Tuairiscigh fadhb</string>
     <string name="sources_management_failed_to_open_url">Teip ar URL a oscailt</string>
+    <string name="sources_hidden_apps">Faoi cheilt ar feadh</string>
+    <string name="sources_hidden_apps_title">Aipeanna i bhfolach ó %1$s</string>
+    <string name="sources_hidden_apps_description">Ní chuirtear an fhoinse seo ar fáil do na haipeanna seo nuair a bhíonn paiste curtha orthu. Fanann an fhoinse féin gníomhach i gcás gach rud eile.</string>
+    <string name="sources_hidden_apps_hint">Tapáil chun an fhoinse seo a thairiscint arís</string>
     <string name="sources_management_prerelease_toggle">Paistí réamh-eisiúna</string>
     <string name="sources_management_prerelease_toggle_description">Faigheann sé rochtain luath ar leaganacha nua paiste turgnamhacha</string>
     <string name="sources_prerelease_warning_title">Paistí réamh-eisiúna a chumasú?</string>
@@ -330,6 +338,7 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="home_low_disk_space_dialog_message">Níl ach %1$s GB de spás saor in aisce ar fáil. Éilíonn paisteáil ar a laghad %2$s GB de spás saor in aisce le go n-oibreoidh sé i gceart.</string>
     <string name="home_low_disk_space_dialog_warning">D’fhéadfadh earráid \"comhad gan aimsiú\" nó APK aschuir truaillithe a bheith mar thoradh ar dhul ar aghaidh.</string>
     <string name="home_simple_bundle_select_title">Roghnaigh foinse paiste</string>
+    <string name="home_simple_bundle_select_remember">Bain úsáid as an bhfoinse seo i gcónaí don aip seo</string>
     <!-- Color picker -->
     <string name="custom_color">Dath saincheaptha</string>
     <string name="hex_color">Dath heicsidheachúlach</string>
@@ -545,6 +554,13 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="patcher_storage_permission_open_settings">Oscail socruithe stórála</string>
     <string name="patcher_storage_badge_denied">Cead diúltaithe</string>
     <string name="patcher_storage_badge_missing">Níor aimsíodh</string>
+    <string name="batch_patch_option_paths_skipped">Tá comhaid roghanna an phaiste ar iarraidh agus sárófar iad: %1$s</string>
+    <string name="patcher_missing_patches_title">Tá roinnt paistí imithe</string>
+    <string name="patcher_missing_patches_description">Luaitear sa roghnú sábháilte don aip seo paistí nach gcuireann aon fhoinse ghníomhach ar fáil a thuilleadh. Leanann an aip ar aghaidh leis na paistí sin in ainneoin a n-easpa</string>
+    <string name="patcher_missing_patches_label">Ní chuirtear ar fáil a thuilleadh é</string>
+    <string name="patcher_option_paths_gone_title">Tá comhaid roghanna an phaiste ar iarraidh</string>
+    <string name="patcher_option_paths_gone_description">Tá rogha paiste amháin nó níos mó ag tagairt do chomhaid nach bhfuil ann a thuilleadh. Bain na cosáin chun an paiste a chur i bhfeidhm gan iad, nó cuir na comhaid ar ais agus déan iarracht arís</string>
+    <string name="patcher_option_paths_clear">Bain na cosáin agus lean ar aghaidh</string>
     <string name="patcher_storage_permission_hint">Leid: Bog comhaid go /Android/data/app.morphe.manager/files/ - níl aon cheadanna breise ag teastáil</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Ag ullmhú</string>
@@ -814,7 +830,10 @@ Níl tionchar ar phaistí: cumasaigh paistí réamh-eisiúna do gach foinse sa l
     <string name="settings_advanced_patch_options_custom_branding_description">Athraíonn sé ainm taispeána an aip</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Ainm an aip</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Cuir isteach ainm saincheaptha</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon">Deilbhín aip</string>
+    <string name="settings_advanced_patch_options_path_gone">Ní féidir an fillteán seo a léamh a thuilleadh. Roghnaigh arís é nó glan é; murach sin, stopfaidh an próiseas paisteála agus iarrfar ort cinneadh a dhéanamh ina leith</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon">Deilbhín aipe</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">An deilbhín a úsáidtear chun an aip a mhodhnú (a \'phatcháil\'). Úsáidtear é freisin i gcásanna nach féidir leis an aip é a athrú níos déanaí, mar shampla in Android Auto agus i liosta na n-aipeanna i socruithe an chórais</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Teastaíonn fillteán ina bhfuil íomhánna deilbhín ón deilbhín saincheaptha aip</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Deilbhín saincheaptha</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Fillteán le híomhánna le húsáid mar dheilbhín saincheaptha. Caithfidh ceann amháin nó níos mó de na fillteáin seo a leanas a bheith sa fhillteán, ag brath ar DPI an fheiste:
 - mipmap-mdpi
