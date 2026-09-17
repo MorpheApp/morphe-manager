@@ -364,7 +364,7 @@ fun ExpertModeDialog(
                 }
             } else {
                 // Multiple bundles tab layout
-                val pagerState = rememberPagerState { allPatchesInfo.size }
+                val pagerState = rememberPagerState { displayedBundles.size }
                 val coroutineScope = rememberCoroutineScope()
 
                 // A filter that empties the open bundle has narrowed every list but the one on
@@ -372,12 +372,19 @@ fun ExpertModeDialog(
                 // watched, which leaves a bundle opened by hand alone. One collector outlives
                 // every change too: an effect keyed on the filter would be torn down by the next
                 // keystroke, leaving the pager halfway between two bundles
-                val currentBundles = rememberUpdatedState(allPatchesInfo)
+                val currentBundles = rememberUpdatedState(displayedBundles)
                 val currentFilter = rememberUpdatedState(filteredPatchesByUid)
                 LaunchedEffect(pagerState) {
                     snapshotFlow { currentFilter.value }.collect { filter ->
                         val bundles = currentBundles.value
-                        val openBundle = bundles.getOrNull(pagerState.currentPage)?.first ?: return@collect
+                        if (bundles.isEmpty()) return@collect
+                        
+                        val safeCurrentPage = kotlin.math.min(pagerState.currentPage, bundles.size - 1)
+                        if (pagerState.currentPage >= bundles.size) {
+                            pagerState.scrollToPage(safeCurrentPage)
+                        }
+
+                        val openBundle = bundles.getOrNull(safeCurrentPage)?.first ?: return@collect
                         if (openBundle.uid in filter) return@collect
 
                         val firstWithResults = filter.keys.firstOrNull() ?: return@collect
@@ -390,19 +397,14 @@ fun ExpertModeDialog(
                 // Created up front, outside the pager, so the scrollbar overlay below can track
                 // whichever page is current. HorizontalPager clips each page to its own bounds, so
                 // a scrollbar drawn inside a page can never bleed out to the true dialog edge.
-                // Keyed on the bundle count so pages never inherit a stale sibling's position
-                val pageListStates = rememberSaveable(
-                    allPatchesInfo.size,
-                    saver = listSaver(
-                        save = { states ->
-                            states.flatMap { listOf(it.firstVisibleItemIndex, it.firstVisibleItemScrollOffset) }
-                        },
-                        restore = { saved ->
-                            saved.chunked(2).map { (index, offset) -> LazyListState(index, offset) }
+                // Keyed by bundle UID so pages never inherit a stale sibling's position when
+                // displayedBundles reorders or filters the list dynamically.
+                val pageListStates = remember {
+                    mutableMapOf<Int, LazyListState>().apply {
+                        allPatchesInfo.forEach { (bundle, _) ->
+                            put(bundle.uid, LazyListState())
                         }
-                    )
-                ) {
-                    List(allPatchesInfo.size) { LazyListState() }
+                    }
                 }
 
                 Column(
