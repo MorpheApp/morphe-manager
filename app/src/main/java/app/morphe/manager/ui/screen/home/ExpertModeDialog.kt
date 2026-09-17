@@ -159,6 +159,23 @@ fun ExpertModeDialog(
     // Both narrow the list far enough that a folded universal section would only hide results
     val isFiltering = search.isFiltering || isSelectedOnly
 
+    // Dynamic Bundle Reordering (Global Search & Selected Patches Traversal)
+    // When filtering (search or selected only), hide bundles with 0 matches and sort the rest
+    // by the number of matched patches descending, so matching bundles "move forward".
+    val displayedBundles = remember(allPatchesInfo, filteredPatchesByUid, isFiltering) {
+        if (!isFiltering) {
+            allPatchesInfo
+        } else {
+            allPatchesInfo
+                .mapNotNull { pair ->
+                    val count = filteredPatchesByUid[pair.first.uid]?.size ?: 0
+                    if (count == 0) null else pair to count
+                }
+                .sortedByDescending { it.second }
+                .map { it.first }
+        }
+    }
+
     val markers = remember(
         newPatches,
         patchesWithMissingRequired,
