@@ -467,8 +467,8 @@ fun ExpertModeDialog(
                     )
 
                     // Controls fixed below the tab row
-                    val currentIndex = pagerState.currentPage
-                    val (currentBundle, _) = allPatchesInfo.getOrNull(currentIndex) ?: return@Column
+                    val safeCurrentIndex = if (displayedBundles.isEmpty()) 0 else kotlin.math.min(pagerState.currentPage, displayedBundles.size - 1)
+                    val (currentBundle, _) = displayedBundles.getOrNull(safeCurrentIndex) ?: return@Column
                     val currentFiltered = filteredPatchesByUid[currentBundle.uid]
 
                     RetirePrereleaseNotice(
@@ -499,13 +499,14 @@ fun ExpertModeDialog(
                             state = pagerState,
                             modifier = Modifier.fillMaxSize()
                         ) { pageIndex ->
-                            val (bundle, _) = allPatchesInfo.getOrNull(pageIndex) ?: return@HorizontalPager
+                            val (bundle, _) = displayedBundles.getOrNull(pageIndex) ?: return@HorizontalPager
                             val patches = filteredPatchesByUid[bundle.uid]
+                            val listState = pageListStates.getOrPut(bundle.uid) { LazyListState() }
 
                             BundlePatchList(
                                 bundle = bundle,
                                 patches = patches.orEmpty(),
-                                listState = pageListStates[pageIndex],
+                                listState = listState,
                                 markers = markers,
                                 isFiltering = isFiltering,
                                 sectionState = patchSections,
@@ -519,9 +520,9 @@ fun ExpertModeDialog(
                         // instead of one per page - a page-local scrollbar would be clipped by the
                         // pager before it could reach the true dialog edge. Pages filtered down to
                         // an empty state have nothing to scroll, so they get no overlay
-                        val currentPageList = allPatchesInfo.getOrNull(pagerState.currentPage)
+                        val currentPageList = displayedBundles.getOrNull(pagerState.currentPage)
                             ?.takeIf { (bundle, _) -> bundle.uid in filteredPatchesByUid }
-                            ?.let { pageListStates.getOrNull(pagerState.currentPage) }
+                            ?.let { (bundle, _) -> pageListStates[bundle.uid] }
                         if (currentPageList != null) {
                             ListScrollbar(
                                 listState = currentPageList,
