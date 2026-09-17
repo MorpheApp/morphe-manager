@@ -159,6 +159,23 @@ fun ExpertModeDialog(
     // Both narrow the list far enough that a folded universal section would only hide results
     val isFiltering = search.isFiltering || isSelectedOnly
 
+    // Dynamic Bundle Reordering (Global Search & Selected Patches Traversal)
+    // When filtering (search or selected only), hide bundles with 0 matches and sort the rest
+    // by the number of matched patches descending, so matching bundles "move forward".
+    val displayedBundles = remember(allPatchesInfo, filteredPatchesByUid, isFiltering) {
+        if (!isFiltering) {
+            allPatchesInfo
+        } else {
+            allPatchesInfo
+                .mapNotNull { pair ->
+                    val count = filteredPatchesByUid[pair.first.uid]?.size ?: 0
+                    if (count == 0) null else pair to count
+                }
+                .sortedByDescending { it.second }
+                .map { it.first }
+        }
+    }
+
     val markers = remember(
         newPatches,
         patchesWithMissingRequired,
@@ -196,9 +213,19 @@ fun ExpertModeDialog(
                 // control it is instead of only announcing itself once tapped
                 icon = Icons.Outlined.FilterAlt.takeIf { canFilter },
                 tone = badgeTone,
-                // Filled rather than tonal while filtering, so the narrowed list has a visible cause
-                containerColor = if (isSelectedOnly) MaterialTheme.colorScheme.primary else badgeTone.container,
-                contentColor = if (isSelectedOnly) MaterialTheme.colorScheme.onPrimary else badgeTone.content,
+                // Filled rather than tonal while the selection filter is on, so the narrowed
+                // list has a visible cause; while searching, a raised surface keeps the pill
+                // from blending into the dialog background
+                containerColor = when {
+                    isSelectedOnly -> MaterialTheme.colorScheme.primary
+                    search.isFiltering -> MaterialTheme.colorScheme.surfaceContainerHighest
+                    else -> badgeTone.container
+                },
+                contentColor = when {
+                    isSelectedOnly -> MaterialTheme.colorScheme.onPrimary
+                    search.isFiltering -> MaterialTheme.colorScheme.onSurfaceVariant
+                    else -> badgeTone.content
+                },
                 onClick = if (canFilter) {
                     { toggleSelectedOnly() }
                 } else {
@@ -347,7 +374,7 @@ fun ExpertModeDialog(
                 }
             } else {
                 // Multiple bundles tab layout
-                val pagerState = rememberPagerState { allPatchesInfo.size }
+                val pagerState = rememberPagerState { displayedBundles.size }
                 val coroutineScope = rememberCoroutineScope()
 
                 // A filter that empties the open bundle has narrowed every list but the one on
@@ -355,37 +382,36 @@ fun ExpertModeDialog(
                 // watched, which leaves a bundle opened by hand alone. One collector outlives
                 // every change too: an effect keyed on the filter would be torn down by the next
                 // keystroke, leaving the pager halfway between two bundles
-                val currentBundles = rememberUpdatedState(allPatchesInfo)
-                val currentFilter = rememberUpdatedState(filteredPatchesByUid)
+                // The pager follows the bundle the user had open across reorders and filters:
+                // displayedBundles can move it to a new index or drop it entirely, and a raw
+                // page index would strand the user on whatever source sits at that index now
+                val currentBundles = rememberUpdatedState(displayedBundles)
+                val openBundleUid = remember { mutableStateOf<Int?>(null) }
                 LaunchedEffect(pagerState) {
-                    snapshotFlow { currentFilter.value }.collect { filter ->
-                        val bundles = currentBundles.value
-                        val openBundle = bundles.getOrNull(pagerState.currentPage)?.first ?: return@collect
-                        if (openBundle.uid in filter) return@collect
-
-                        val firstWithResults = filter.keys.firstOrNull() ?: return@collect
-                        bundles.indexOfFirst { it.first.uid == firstWithResults }
-                            .takeIf { it >= 0 }
-                            ?.let { pagerState.animateScrollToPage(it) }
+                    snapshotFlow { pagerState.currentPage }.collect { page ->
+                        openBundleUid.value =
+                            currentBundles.value.getOrNull(page)?.first?.uid ?: openBundleUid.value
                     }
+                }
+                LaunchedEffect(displayedBundles) {
+                    if (displayedBundles.isEmpty()) return@LaunchedEffect
+                    val target = displayedBundles
+                        .indexOfFirst { it.first.uid == openBundleUid.value }
+                        .takeIf { it >= 0 } ?: 0
+                    if (target != pagerState.currentPage) pagerState.scrollToPage(target)
                 }
 
                 // Created up front, outside the pager, so the scrollbar overlay below can track
                 // whichever page is current. HorizontalPager clips each page to its own bounds, so
                 // a scrollbar drawn inside a page can never bleed out to the true dialog edge.
-                // Keyed on the bundle count so pages never inherit a stale sibling's position
-                val pageListStates = rememberSaveable(
-                    allPatchesInfo.size,
-                    saver = listSaver(
-                        save = { states ->
-                            states.flatMap { listOf(it.firstVisibleItemIndex, it.firstVisibleItemScrollOffset) }
-                        },
-                        restore = { saved ->
-                            saved.chunked(2).map { (index, offset) -> LazyListState(index, offset) }
+                // Keyed by bundle UID so pages never inherit a stale sibling's position when
+                // displayedBundles reorders or filters the list dynamically.
+                val pageListStates = remember {
+                    mutableMapOf<Int, LazyListState>().apply {
+                        allPatchesInfo.forEach { (bundle, _) ->
+                            put(bundle.uid, LazyListState())
                         }
-                    )
-                ) {
-                    List(allPatchesInfo.size) { LazyListState() }
+                    }
                 }
 
                 Column(
@@ -393,15 +419,30 @@ fun ExpertModeDialog(
                         .fillMaxWidth()
                         .weight(1f)
                 ) {
+                    // Every source filtered out: a ScrollableTabRow measuring zero tabs crashes
+                    // on tabPositions[selectedTabIndex], and there is nothing to page through
+                    if (displayedBundles.isEmpty()) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .weight(1f),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            PatchesListEmptyState()
+                        }
+                        return@Column
+                    }
+
                     // Tab row
+                    val safeTabIndex = kotlin.math.min(pagerState.currentPage, displayedBundles.size - 1)
                     SecondaryScrollableTabRow(
-                        selectedTabIndex = pagerState.currentPage,
+                        selectedTabIndex = safeTabIndex,
                         edgePadding = 0.dp,
                         divider = {},
                         containerColor = Color.Transparent,
                         contentColor = MaterialTheme.colorScheme.primary
                     ) {
-                        allPatchesInfo.forEachIndexed { index, (bundle, patches) ->
+                        displayedBundles.forEachIndexed { index, (bundle, patches) ->
                             val hasResults = bundle.uid in filteredPatchesByUid
                             val enabledCount = patches.count { it.second }
                             val totalCount = patches.size
@@ -446,8 +487,8 @@ fun ExpertModeDialog(
                     )
 
                     // Controls fixed below the tab row
-                    val currentIndex = pagerState.currentPage
-                    val (currentBundle, _) = allPatchesInfo.getOrNull(currentIndex) ?: return@Column
+                    val safeCurrentIndex = kotlin.math.min(pagerState.currentPage, displayedBundles.size - 1)
+                    val (currentBundle, _) = displayedBundles.getOrNull(safeCurrentIndex) ?: return@Column
                     val currentFiltered = filteredPatchesByUid[currentBundle.uid]
 
                     RetirePrereleaseNotice(
@@ -478,13 +519,14 @@ fun ExpertModeDialog(
                             state = pagerState,
                             modifier = Modifier.fillMaxSize()
                         ) { pageIndex ->
-                            val (bundle, _) = allPatchesInfo.getOrNull(pageIndex) ?: return@HorizontalPager
+                            val (bundle, _) = displayedBundles.getOrNull(pageIndex) ?: return@HorizontalPager
                             val patches = filteredPatchesByUid[bundle.uid]
+                            val listState = pageListStates.getOrPut(bundle.uid) { LazyListState() }
 
                             BundlePatchList(
                                 bundle = bundle,
                                 patches = patches.orEmpty(),
-                                listState = pageListStates[pageIndex],
+                                listState = listState,
                                 markers = markers,
                                 isFiltering = isFiltering,
                                 sectionState = patchSections,
@@ -498,9 +540,9 @@ fun ExpertModeDialog(
                         // instead of one per page - a page-local scrollbar would be clipped by the
                         // pager before it could reach the true dialog edge. Pages filtered down to
                         // an empty state have nothing to scroll, so they get no overlay
-                        val currentPageList = allPatchesInfo.getOrNull(pagerState.currentPage)
+                        val currentPageList = displayedBundles.getOrNull(pagerState.currentPage)
                             ?.takeIf { (bundle, _) -> bundle.uid in filteredPatchesByUid }
-                            ?.let { pageListStates.getOrNull(pagerState.currentPage) }
+                            ?.let { (bundle, _) -> pageListStates[bundle.uid] }
                         if (currentPageList != null) {
                             ListScrollbar(
                                 listState = currentPageList,
