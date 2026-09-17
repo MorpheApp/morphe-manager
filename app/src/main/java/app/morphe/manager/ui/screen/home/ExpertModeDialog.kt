@@ -213,9 +213,19 @@ fun ExpertModeDialog(
                 // control it is instead of only announcing itself once tapped
                 icon = Icons.Outlined.FilterAlt.takeIf { canFilter },
                 tone = badgeTone,
-                // Filled rather than tonal while filtering, so the narrowed list has a visible cause
-                containerColor = if (isSelectedOnly) MaterialTheme.colorScheme.primary else badgeTone.container,
-                contentColor = if (isSelectedOnly) MaterialTheme.colorScheme.onPrimary else badgeTone.content,
+                // Filled rather than tonal while the selection filter is on, so the narrowed
+                // list has a visible cause; while searching, a raised surface keeps the pill
+                // from blending into the dialog background
+                containerColor = when {
+                    isSelectedOnly -> MaterialTheme.colorScheme.primary
+                    search.isFiltering -> MaterialTheme.colorScheme.surfaceContainerHighest
+                    else -> badgeTone.container
+                },
+                contentColor = when {
+                    isSelectedOnly -> MaterialTheme.colorScheme.onPrimary
+                    search.isFiltering -> MaterialTheme.colorScheme.onSurfaceVariant
+                    else -> badgeTone.content
+                },
                 onClick = if (canFilter) {
                     { toggleSelectedOnly() }
                 } else {
@@ -420,7 +430,6 @@ fun ExpertModeDialog(
                     ) {
                         displayedBundles.forEachIndexed { index, (bundle, patches) ->
                             val hasResults = bundle.uid in filteredPatchesByUid
-                            val matchedCount = filteredPatchesByUid[bundle.uid]?.size ?: 0
                             val enabledCount = patches.count { it.second }
                             val totalCount = patches.size
                             val isSelected = pagerState.currentPage == index
@@ -450,7 +459,7 @@ fun ExpertModeDialog(
 
                                     // Patch count badge
                                     StatusBadge(
-                                        text = if (isFiltering) "$matchedCount" else "$enabledCount/$totalCount",
+                                        text = "$enabledCount/$totalCount",
                                         tone = if (isSelected && hasResults) SemanticTone.Primary else SemanticTone.Neutral
                                     )
                                 }
