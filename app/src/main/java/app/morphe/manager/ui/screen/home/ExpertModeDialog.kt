@@ -372,26 +372,23 @@ fun ExpertModeDialog(
                 // watched, which leaves a bundle opened by hand alone. One collector outlives
                 // every change too: an effect keyed on the filter would be torn down by the next
                 // keystroke, leaving the pager halfway between two bundles
+                // The pager follows the bundle the user had open across reorders and filters:
+                // displayedBundles can move it to a new index or drop it entirely, and a raw
+                // page index would strand the user on whatever source sits at that index now
                 val currentBundles = rememberUpdatedState(displayedBundles)
-                val currentFilter = rememberUpdatedState(filteredPatchesByUid)
+                val openBundleUid = remember { mutableStateOf<Int?>(null) }
                 LaunchedEffect(pagerState) {
-                    snapshotFlow { currentFilter.value }.collect { filter ->
-                        val bundles = currentBundles.value
-                        if (bundles.isEmpty()) return@collect
-                        
-                        val safeCurrentPage = kotlin.math.min(pagerState.currentPage, bundles.size - 1)
-                        if (pagerState.currentPage >= bundles.size) {
-                            pagerState.scrollToPage(safeCurrentPage)
-                        }
-
-                        val openBundle = bundles.getOrNull(safeCurrentPage)?.first ?: return@collect
-                        if (openBundle.uid in filter) return@collect
-
-                        val firstWithResults = filter.keys.firstOrNull() ?: return@collect
-                        bundles.indexOfFirst { it.first.uid == firstWithResults }
-                            .takeIf { it >= 0 }
-                            ?.let { pagerState.animateScrollToPage(it) }
+                    snapshotFlow { pagerState.currentPage }.collect { page ->
+                        openBundleUid.value =
+                            currentBundles.value.getOrNull(page)?.first?.uid ?: openBundleUid.value
                     }
+                }
+                LaunchedEffect(displayedBundles) {
+                    if (displayedBundles.isEmpty()) return@LaunchedEffect
+                    val target = displayedBundles
+                        .indexOfFirst { it.first.uid == openBundleUid.value }
+                        .takeIf { it >= 0 } ?: 0
+                    if (target != pagerState.currentPage) pagerState.scrollToPage(target)
                 }
 
                 // Created up front, outside the pager, so the scrollbar overlay below can track
