@@ -413,15 +413,17 @@ fun ExpertModeDialog(
                         .weight(1f)
                 ) {
                     // Tab row
+                    val safeTabIndex = if (displayedBundles.isEmpty()) 0 else kotlin.math.min(pagerState.currentPage, displayedBundles.size - 1)
                     SecondaryScrollableTabRow(
-                        selectedTabIndex = pagerState.currentPage,
+                        selectedTabIndex = safeTabIndex,
                         edgePadding = 0.dp,
                         divider = {},
                         containerColor = Color.Transparent,
                         contentColor = MaterialTheme.colorScheme.primary
                     ) {
-                        allPatchesInfo.forEachIndexed { index, (bundle, patches) ->
+                        displayedBundles.forEachIndexed { index, (bundle, patches) ->
                             val hasResults = bundle.uid in filteredPatchesByUid
+                            val matchedCount = filteredPatchesByUid[bundle.uid]?.size ?: 0
                             val enabledCount = patches.count { it.second }
                             val totalCount = patches.size
                             val isSelected = pagerState.currentPage == index
@@ -451,7 +453,7 @@ fun ExpertModeDialog(
 
                                     // Patch count badge
                                     StatusBadge(
-                                        text = "$enabledCount/$totalCount",
+                                        text = if (isFiltering) "$matchedCount" else "$enabledCount/$totalCount",
                                         tone = if (isSelected && hasResults) SemanticTone.Primary else SemanticTone.Neutral
                                     )
                                 }
