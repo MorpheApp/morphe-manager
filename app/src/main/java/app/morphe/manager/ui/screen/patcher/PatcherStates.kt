@@ -490,7 +490,8 @@ private fun SuccessErrorMessage(installState: InstallState) {
             Surface(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(Defaults.CompactCornerRadius),
-                color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f)
+                color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f),
+                border = CardBorder.tinted(MaterialTheme.colorScheme.error)
             ) {
                 Text(
                     text = message,
@@ -571,7 +572,8 @@ private fun SuccessHint(
         Surface(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(Defaults.CompactCornerRadius),
-            color = containerColor
+            color = containerColor,
+            border = CardBorder.tinted(iconTint)
         ) {
             Row(
                 modifier = Modifier.padding(16.dp),

@@ -15,6 +15,7 @@ import androidx.core.app.NotificationCompat
 import app.morphe.manager.MainActivity
 import app.morphe.manager.R
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.patcher.worker.PatcherWorker
 import app.morphe.manager.util.UpdateNotificationManager.Companion.CHANNEL_FCM_UPDATES
 import app.morphe.manager.util.UpdateNotificationManager.Companion.EXTRA_TRIGGER_UPDATE_CHECK
 
@@ -77,7 +78,14 @@ class UpdateNotificationManager(private val context: Context) {
     fun showBatchCompletionNotification(patched: Int, failed: Int, skipped: Int) {
         val succeeded = patched > 0
         val notification = NotificationCompat.Builder(context, CHANNEL_PATCHER)
-            .setSmallIcon(R.drawable.ic_notification)
+            .setSmallIcon(
+                if (succeeded) R.drawable.ic_notification_done else R.drawable.ic_notification_failed
+            )
+            .setColor(
+                context.getColor(
+                    if (succeeded) R.color.notification_success else R.color.notification_failure
+                )
+            )
             .setContentTitle(
                 context.getString(
                     if (succeeded) R.string.patcher_complete_title else R.string.patcher_failed_title
@@ -98,6 +106,16 @@ class UpdateNotificationManager(private val context: Context) {
 
         val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         manager.notify(NOTIFICATION_ID_BATCH_RESULT, notification)
+    }
+
+    /**
+     * Clear patching results once the user is back in the manager, where the result is already
+     * on screen. Tapping one is not the only way back, recents and the launcher are too.
+     */
+    fun cancelPatchingResultNotifications() {
+        val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        manager.cancel(PatcherWorker.COMPLETION_NOTIFICATION_ID)
+        manager.cancel(NOTIFICATION_ID_BATCH_RESULT)
     }
 
     /** Opens the batch queue on the run these notifications report about. */

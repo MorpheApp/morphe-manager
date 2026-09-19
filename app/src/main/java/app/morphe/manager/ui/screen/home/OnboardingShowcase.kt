@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.Animations
+import app.morphe.manager.ui.screen.shared.CardBorder
 import kotlin.math.roundToInt
 
 /** One coach-mark step: resource IDs for text, a lambda that returns the current target bounds,
@@ -249,7 +250,8 @@ private fun OnboardingCard(
         shape = RoundedCornerShape(20.dp),
         color = MaterialTheme.colorScheme.surfaceContainerHighest,
         tonalElevation = 8.dp,
-        shadowElevation = 12.dp
+        shadowElevation = 12.dp,
+        border = CardBorder.neutral
     ) {
         Column(
             modifier = Modifier.padding(20.dp),

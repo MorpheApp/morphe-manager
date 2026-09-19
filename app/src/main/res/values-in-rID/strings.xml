@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">Buka di peramban</string>
     <string name="sources_management_report_issue">Laporkan masalah</string>
     <string name="sources_management_failed_to_open_url">Gagal membuka URL</string>
-    <string name="sources_hidden_apps">Disembunyikan untuk</string>
-    <string name="sources_hidden_apps_title">Aplikasi disembunyikan dari %1$s</string>
-    <string name="sources_hidden_apps_description">Sumber ini tidak akan disediakan saat aplikasi ini ditambal. Sumbernya sendiri akan tetap aktif untuk aplikasi lainnya</string>
-    <string name="sources_hidden_apps_hint">Ketuk untuk menyediakan sumber ini lagi</string>
+    <string name="sources_apps">Aplikasi</string>
     <string name="sources_management_prerelease_toggle">Tambalan pra-rilis</string>
     <string name="sources_management_prerelease_toggle_description">Menerima akses dini ke versi eksperimental tambalan baru</string>
     <string name="sources_prerelease_warning_title">Aktifkan tambalan pra-rilis?</string>
@@ -156,8 +153,8 @@
     <string name="sources_management_blocked">Sumber tambalan ini diblokir dan tidak dapat ditambahkan</string>
     <string name="sources_management_source_blocked_badge">Diblokir</string>
     <string name="sources_management_metadata_unavailable">Metadata Tidak Tersedia</string>
-    <string name="sources_management_metadata_unavailable_hint">Berkas metadata jarak jauh tidak tersedia. Penambalan dengan bundel terpasang masih berfungsi, tetapi pembaruan otomatis dinonaktifkan untuk sumber ini</string>
-    <string name="sources_management_metadata_unavailable_hint_missing">Bundel tambalan tidak dapat diunduh. Sumber URL mungkin salah atau berkas tidak ada</string>
+    <string name="sources_management_metadata_unavailable_hint">Berkas metadata jarak jauh tidak tersedia. Penambalan dengan paket terpasang masih berfungsi, tetapi pembaruan otomatis dinonaktifkan untuk sumber ini</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Paket tambalan tidak dapat diunduh. Sumber URL mungkin salah atau berkas tidak ada</string>
     <string name="sources_management_outdated_manager_badge">Perbarui Morphe</string>
     <string name="sources_management_outdated_manager_hint">Sumber ini dibuat untuk penambal %1$s, tetapi Morphe %2$s menyertakan penambal %3$s. Perbarui Morphe untuk menggunakannya</string>
     <string name="sources_management_held_back_badge">Crash</string>
@@ -290,7 +287,7 @@ Segala sesuatu yang Anda tambahkan dari situs web ini digunakan atas risiko Anda
     <string name="expert_mode_restore_saved">Kembalikan pilihan yang disimpan</string>
     <string name="expert_mode_restore_saved_done">Pilihan yang disimpan dikembalikan</string>
     <string name="expert_mode_copy_from_bundle">Salin pilihan dari paket lain</string>
-    <string name="expert_mode_copy_from_bundle_no_patches">Tidak ada tambalan yang cocok dalam bundel ini</string>
+    <string name="expert_mode_copy_from_bundle_no_patches">Tidak ada tambalan yang cocok dalam paket ini</string>
     <string name="expert_mode_no_results">Tambalan tidak ditemukan</string>
     <string name="expert_mode_selected_only_on">Hanya menampilkan tambalan yang dipilih</string>
     <string name="expert_mode_selected_only_off">Menampilkan semua tambalan</string>
@@ -308,7 +305,7 @@ Apakah Anda yakin ingin melanjutkan?"</string>
     <string name="home_invalid_signature_message">APK yang Anda pilih untuk &lt;b&gt;%s&lt;/b&gt; tidak sesuai dengan sertifikat yang diharapkan. Ini mungkin telah dimodifikasi atau berasal dari sumber yang tidak terpercaya</string>
     <string name="home_invalid_signature_badge">APK ini mungkin bukan versi aslinya</string>
     <string name="home_split_apk_warning_title">APK terpisah terdeteksi</string>
-    <string name="home_split_apk_warning_message">"Berkas ini adalah bundel APK
+    <string name="home_split_apk_warning_message">"Berkas ini adalah paket APK
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
 
 Untuk hasil terbaik, aplikasi ini merekomendasikan untuk menambal &lt;b&gt;APK lengkap&lt;/b&gt;"</string>
@@ -376,11 +373,11 @@ Bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum teridentifi
     <string name="adaptive_icon_guide_safe_zones_title">Zona aman</string>
     <string name="adaptive_icon_guide_safe_zones_body">"Zona dalam (solid): konten selalu terlihat sepenuhnya pada semua bentuk peluncur.
 Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail penting di dalam zona dalam."</string>
-    <string name="adaptive_icon_guide_notification_title">Ikon pemberitahuan</string>
-    <string name="adaptive_icon_guide_notification_body">Dibuat secara otomatis dari gambar latar depan. Sesuaikan ukurannya menggunakan penggeser Pemberitahuan. Semua konten yang terlihat akan ditampilkan berwarna putih di bilah status.</string>
+    <string name="adaptive_icon_guide_notification_title">Ikon notifikasi</string>
+    <string name="adaptive_icon_guide_notification_body">Dibuat secara otomatis dari gambar latar depan. Sesuaikan ukurannya menggunakan penggeser Notifikasi. Semua konten yang terlihat akan ditampilkan berwarna putih di bilah status.</string>
     <string name="adaptive_icon_guide_monochrome_title">Ikon monokrom</string>
     <string name="adaptive_icon_guide_monochrome_body">Dibuat secara otomatis dari gambar latar depan menggunakan transformasi ikon adaptif yang sama. Ikon ini tampak diberi warna aksen sesuai dengan warna wallpaper pada Android 13 dan yang lebih baru.</string>
-    <string name="notification_icon_preview">Pemberitahuan</string>
+    <string name="notification_icon_preview">Notifikasi</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Buat header khusus</string>
     <string name="header_creator_light_theme">Header tema terang</string>
@@ -439,7 +436,7 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="home_app_info_delete_item_patched_apk">Berkas APK yang ditambal</string>
     <string name="home_app_info_delete_item_original_apk">Berkas APK asli</string>
     <string name="home_app_info_delete_preservation_note">Pemilihan tambalan dan opsi Anda akan disimpan untuk proses penambalan di masa mendatang</string>
-    <string name="home_app_info_patches_name_default">Tambalan</string>
+    <string name="home_app_info_patches_name_default">Penambalan</string>
     <string name="home_app_info_patches_name_fallback">Tanpa nama</string>
     <string name="home_app_info_patches_source_removed">Sumber tambalan yang telah dihapus</string>
     <string name="home_app_info_patches_replace_fail">Gagal mengimpor tambalan: %s</string>
@@ -724,7 +721,7 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="settings_appearance_sort_button_description">Tampilkan tombol urutkan dan saring di layar beranda</string>
     <string name="settings_appearance_app_card_colors">Warna kartu aplikasi</string>
     <string name="settings_appearance_app_card_colors_default">Bawaan</string>
-    <string name="settings_appearance_app_card_colors_default_description">Beri setiap aplikasi warna dari bundelnya sendiri</string>
+    <string name="settings_appearance_app_card_colors_default_description">Beri setiap aplikasi warna dari paketnya sendiri</string>
     <string name="settings_appearance_app_card_colors_accent">Aksen</string>
     <string name="settings_appearance_app_card_colors_accent_description">Gunakan warna aksen aplikasi untuk kartu aplikasi beranda</string>
     <string name="settings_appearance_app_card_colors_gradient">Gradien</string>
@@ -761,7 +758,7 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
 Tambalan tidak terpengaruh: aktifkan tambalan pra-rilis untuk setiap sumber dalam daftar sumber tambalan"</string>
     <string name="settings_advanced_updates_allow_metered">Pembaruan data seluler</string>
     <string name="settings_advanced_updates_allow_metered_description">Mengizinkan Morphe dan pembaruan tambalan untuk diunduh melalui data seluler</string>
-    <string name="settings_advanced_updates_background_notifications">Pemberitahuan pembaruan latar belakang</string>
+    <string name="settings_advanced_updates_background_notifications">Notifikasi pembaruan latar belakang</string>
     <string name="settings_advanced_updates_background_notifications_description">Periksa pembaruan secara berkala di latar belakang dan beri tahu saat tersedia</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Notifikasi dorong untuk rilis terbaru, bahkan saat aplikasi ditutup</string>
     <string name="settings_advanced_update_interval">Interval pemeriksaan</string>
@@ -782,12 +779,12 @@ Tambalan tidak terpengaruh: aktifkan tambalan pra-rilis untuk setiap sumber dala
     <string name="notification_manager_update_title">Pembaruan Morphe tersedia</string>
     <string name="notification_bundle_update_title">Tambalan baru tersedia</string>
     <string name="notification_update_text">Versi %s siap untuk diunduh</string>
-    <string name="notification_bundle_update_text_unversioned">Ketuk untuk membuka Morphe dan memperbarui</string>
-    <string name="notification_permission_dialog_title">Izinkan pemberitahuan</string>
-    <string name="notification_permission_dialog_description">Morphe memerlukan izin pemberitahuan untuk memberi tahu Anda saat pembaruan tersedia di latar belakang</string>
-    <string name="notification_post_patch_dialog_title">Apakah Anda ingin menerima pemberitahuan ketika pembaruan tersedia?</string>
-    <string name="notification_channel_fcm_updates">Pemberitahuan pembaruan</string>
-    <string name="notification_channel_fcm_updates_description">Pemberitahuan tentang rilis Morphe dan tambalan baru</string>
+    <string name="notification_bundle_update_text_unversioned">Ketuk untuk buka Morphe dan perbarui</string>
+    <string name="notification_permission_dialog_title">Izinkan notifikasi</string>
+    <string name="notification_permission_dialog_description">Morphe memerlukan izin notifikasi untuk memberi tahu Anda saat pembaruan tersedia di latar belakang</string>
+    <string name="notification_post_patch_dialog_title">Apakah Anda ingin menerima notifikasi ketika pembaruan tersedia?</string>
+    <string name="notification_channel_fcm_updates">Notifikasi pembaruan</string>
+    <string name="notification_channel_fcm_updates_description">Notifikasi tentang rilis Morphe dan tambalan baru</string>
     <string name="notification_channel_patcher">Penambalan</string>
     <string name="notification_channel_patcher_description">Ditampilkan saat Morphe menambal aplikasi di latar belakang</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
@@ -990,7 +987,7 @@ Rincian: %2$s"</string>
     <string name="settings_system_notifications_sound_picker_title">Pilih sumber suara</string>
     <string name="settings_system_notifications_sound_pick_ringtone">Suara sistem</string>
     <string name="settings_system_notifications_sound_pick_file">Pilih dari berkas</string>
-    <string name="settings_system_notifications_sound_reset">Kembalikan ke bawaan</string>
+    <string name="settings_system_notifications_sound_reset">Atur ulang ke bawaan</string>
     <string name="settings_system_notifications_ringtone_picker_title">Pilih nada dering</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Impor &amp; ekspor</string>

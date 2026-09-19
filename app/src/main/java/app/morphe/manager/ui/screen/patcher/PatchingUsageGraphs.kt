@@ -45,8 +45,11 @@ import app.morphe.manager.R
 import app.morphe.manager.ui.model.IoSample
 import app.morphe.manager.ui.model.PatchProgressSource
 import app.morphe.manager.ui.screen.shared.Animations
+import app.morphe.manager.ui.screen.shared.CardBorder
+import app.morphe.manager.ui.screen.shared.Defaults
 import app.morphe.manager.ui.screen.shared.WindowHeightSizeClass
 import app.morphe.manager.ui.screen.shared.WindowWidthSizeClass
+import app.morphe.manager.ui.screen.shared.itemSpacing
 import app.morphe.manager.ui.screen.shared.rememberWindowSize
 import app.morphe.manager.util.bytesToMebibytes
 
@@ -85,9 +88,7 @@ private const val CORE_TRACK_ALPHA = 0.3f
 private data class UsageMetrics(
     val graphHeight: Dp,
     val headlineSize: TextUnit,
-    val contentPadding: Dp,
-    val itemSpacing: Dp,
-    val panelSpacing: Dp
+    val itemSpacing: Dp
 )
 
 /**
@@ -101,17 +102,17 @@ private fun usageMetrics(compact: Boolean): UsageMetrics {
     // Side by side, where the panels are as wide as a third of the window lets them be
     if (compact) {
         return if (windowSize.widthSizeClass == WindowWidthSizeClass.Compact) {
-            UsageMetrics(28.dp, 12.sp, 10.dp, 3.dp, 8.dp)
+            UsageMetrics(28.dp, 12.sp, 3.dp)
         } else {
-            UsageMetrics(40.dp, 15.sp, 14.dp, 4.dp, 10.dp)
+            UsageMetrics(40.dp, 15.sp, 4.dp)
         }
     }
 
     // Stacked, where the height of the column is what has to be shared
     return when (windowSize.heightSizeClass) {
-        WindowHeightSizeClass.Compact -> UsageMetrics(22.dp, 13.sp, 10.dp, 2.dp, 6.dp)
-        WindowHeightSizeClass.Medium -> UsageMetrics(36.dp, 15.sp, 12.dp, 4.dp, 8.dp)
-        WindowHeightSizeClass.Expanded -> UsageMetrics(48.dp, 16.sp, 14.dp, 5.dp, 10.dp)
+        WindowHeightSizeClass.Compact -> UsageMetrics(22.dp, 13.sp, 2.dp)
+        WindowHeightSizeClass.Medium -> UsageMetrics(36.dp, 15.sp, 4.dp)
+        WindowHeightSizeClass.Expanded -> UsageMetrics(48.dp, 16.sp, 5.dp)
     }
 }
 
@@ -150,7 +151,7 @@ fun PatchingUsageGraphs(
         modifier = modifier
     ) {
         // Both histories sit together, and the per-core bars close the group rather than split it
-        UsagePanelLayout(compact = compact, metrics = metrics) { panelModifier ->
+        UsagePanelLayout(compact = compact) { panelModifier ->
             HeapUsagePanel(
                 heapSamples, heapLimitMb, compact, metrics, reserveTwoLines, onLabelWraps, panelModifier
             )
@@ -176,20 +177,22 @@ fun PatchingUsageGraphs(
 @Composable
 private fun UsagePanelLayout(
     compact: Boolean,
-    metrics: UsageMetrics,
     content: @Composable (panelModifier: Modifier) -> Unit
 ) {
+    // The panels stand as far apart as the surrounding blocks, so the group reads as one of them
+    val spacing = rememberWindowSize().itemSpacing
+
     if (compact) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(metrics.panelSpacing)
+            horizontalArrangement = Arrangement.spacedBy(spacing)
         ) {
             content(Modifier.weight(1f))
         }
     } else {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(metrics.panelSpacing)
+            verticalArrangement = Arrangement.spacedBy(spacing)
         ) {
             content(Modifier.fillMaxWidth())
         }
@@ -348,17 +351,15 @@ private fun UsagePanel(
 
     Surface(
         modifier = modifier,
-        shape = RoundedCornerShape(14.dp),
+        shape = RoundedCornerShape(Defaults.CardCornerRadius),
         color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
-        tonalElevation = 0.dp
+        tonalElevation = 0.dp,
+        border = CardBorder.neutral
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(
-                    horizontal = metrics.contentPadding,
-                    vertical = metrics.contentPadding - 2.dp
-                ),
+                .padding(PatcherCardPadding),
             verticalArrangement = Arrangement.spacedBy(metrics.itemSpacing)
         ) {
             Row(

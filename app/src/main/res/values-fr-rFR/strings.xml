@@ -140,10 +140,14 @@
     <string name="sources_management_open_in_browser">Ouvrir dans le navigateur</string>
     <string name="sources_management_report_issue">Signaler un problème</string>
     <string name="sources_management_failed_to_open_url">Échec de l\'ouverture de l\'URL</string>
-    <string name="sources_hidden_apps">Masquée pour</string>
-    <string name="sources_hidden_apps_title">Applications masquées de %1$s</string>
-    <string name="sources_hidden_apps_description">Ces applications ne se voient pas proposer cette source lorsqu\'elles sont patchées. La source elle-même reste activée pour tout le reste</string>
-    <string name="sources_hidden_apps_hint">Appuyez pour proposer à nouveau cette source</string>
+    <string name="sources_apps">Applications</string>
+    <string name="sources_apps_title">Applications de %1$s</string>
+    <string name="sources_apps_description">Touchez une application pour l\'exclure de cette source ou la réintégrer, ou appuyez longuement pour en sélectionner plusieurs. Une application quitte l\'écran d\'accueil dès qu\'aucune source ne la fournit.</string>
+    <string name="sources_apps_brought">Fournies par cette source</string>
+    <string name="sources_apps_left_out">Exclues de cette source</string>
+    <string name="sources_apps_leave_out">Exclure</string>
+    <string name="sources_apps_leave_out_done">Exclue</string>
+    <string name="sources_apps_bring_back">Réintégrer</string>
     <string name="sources_management_prerelease_toggle">Patchs en préversion</string>
     <string name="sources_management_prerelease_toggle_description">Reçoit un accès anticipé aux nouvelles versions expérimentales des patchs</string>
     <string name="sources_prerelease_warning_title">Activer les patchs en préversion ?</string>
@@ -178,7 +182,7 @@
     <string name="sources_dialog_remote">Distante</string>
     <string name="sources_dialog_remote_url">URL de la source</string>
     <string name="sources_dialog_remote_url_formats_title">Exemples :</string>
-    <string name="sources_dialog_local">Local</string>
+    <string name="sources_dialog_local">Locale</string>
     <string name="sources_dialog_local_file">Sélectionner un fichier de source de patchs</string>
     <string name="sources_dialog_local_file_tap_hint">Appuyez pour parcourir le stockage</string>
     <string name="sources_dialog_local_file_description">Sélectionnez un fichier de source de patchs .mpp depuis le stockage</string>
@@ -188,6 +192,8 @@
     <string name="sources_dialog_local_change_file">Changer de fichier</string>
     <string name="sources_dialog_preinstalled">Préinstallée</string>
     <string name="sources_dialog_community">Patchs communautaires</string>
+    <string name="sources_dialog_choose_apps">Choisir des applications</string>
+    <string name="sources_dialog_choose_apps_description">Choisissez parmi ses applications celles à conserver une fois la source chargée.</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Sources de patchs tierces</string>
     <string name="sources_dialog_community_notice_message">"Les sources de patchs communautaires sont créées et maintenues par leurs propres auteurs. Morphe ne vérifie ni n'examine les patchs tiers et n'est pas responsable de leur contenu ni de leurs actions sur votre appareil.
@@ -230,7 +236,7 @@ Tout ce que vous ajoutez depuis ce site web est utilisé à vos propres risques"
     <string name="home_apk_use_installed_unverified">Impossible de vérifier la signature de l\'application installée, il est donc possible qu\'elle soit déjà patchée</string>
     <string name="home_unverified">Non vérifiée</string>
     <string name="home_install_verification_pending">Vérification de l\'installation…</string>
-    <string name="home_app_info_install_unverified">Morphe ne peut pas confirmer que l\'application installée correspond bien à la version qu\'il a patchée. Re-patchez ou réinstallez l\'application à partir de l\'APK enregistré afin de rétablir ses actions</string>
+    <string name="home_app_info_install_unverified">Morphe ne peut pas confirmer que l\'application installée est le build qu\'il a patché. Re-pachez-la ou réinstallez-la depuis l\'APK enregistré pour restaurer ses actions</string>
     <string name="home_app_info_no_saved_apk">Aucun APK enregistré. Le patching nécessitera de sélectionner à nouveau le fichier APK</string>
     <string name="home_version_requires_android">Nécessite Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Non pris en charge sur cet appareil</string>
@@ -248,7 +254,7 @@ Tout ce que vous ajoutez depuis ce site web est utilisé à vos propres risques"
     <string name="home_download_instructions_step3_search">Sur ce site web, téléchargez l\'APK de la version &lt;b&gt;%s&lt;/b&gt;, et non la plus récente</string>
     <string name="home_download_instructions_step3_search_any">Sur ce site web, téléchargez l\'APK de l\'application. &lt;b&gt;N\'importe quelle version&lt;/b&gt; peut être patchée</string>
     <string name="home_download_instructions_download_button_toast">Appuyez sur télécharger sur le site Web, et non ici 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Parfait ! Maintenant, appuyez sur \'Continuer\' et rendez-vous sur le site web 👆</string>
+    <string name="home_download_instructions_download_button_toast_2">Parfait ! Maintenant, cliquez sur \'Continuer\' et rendez-vous sur le site web 👆</string>
     <string name="home_download_instructions_download_button_toast_3">C\'est en pratiquant qu\'on devient meilleur, et tu es sur la bonne voie 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Toujours pas là… toujours pas là… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">OK, je respecte le dévouement 🫡</string>
@@ -486,7 +492,7 @@ Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - g
     <string name="patcher_error_dialog_diagnostics">Diagnostics</string>
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <string name="patcher_card_started">Le patching a commencé</string>
-    <string name="patcher_card_succeeded">Le patching a réussi</string>
+    <string name="patcher_card_succeeded">Patching réussi</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Application</string>
     <string name="patcher_field_package">Paquet</string>
@@ -633,8 +639,8 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="install_ignore_signature">Installer quand même</string>
     <string name="install_ignore_signature_description">Conserve les données de l\'application, mais ne fonctionne que si un module root désactive la vérification de signature d\'Android</string>
     <string name="uninstall_app_fail">Échec de la désinstallation de l\'application : %s</string>
-    <string name="uninstall_app_unverified">Laissé en place : Morphe n\'a pas pu vérifier que l\'application installée correspond à la version qu\'il a patchée</string>
-    <string name="launch_app_unverified">Morphe n\'a pas pu vérifier que l\'application installée correspond bien à la version qu\'il a patchée</string>
+    <string name="uninstall_app_unverified">Laissé en place : Morphe n\'a pas pu vérifier que l\'application installée est le build qu\'il a patché</string>
+    <string name="launch_app_unverified">Morphe n\'a pas pu vérifier que l\'application installée est le build qu\'il a patché.</string>
     <string name="uninstall_timeout">Délai d\'attente de la désinstallation dépassé</string>
     <string name="save_apk_success">APK enregistré</string>
     <string name="saved_app_export_failed">Échec de l\'exportation de l\'application patchée</string>
@@ -981,7 +987,7 @@ Détails : %2$s"</string>
     <string name="settings_system_memory_limit_warning">Une limite de mémoire faible peut entraîner des échecs lors du patching des applications plus volumineuses</string>
     <string name="settings_system_memory_limit_high_warning">Une limite de mémoire élevée peut rendre le patching beaucoup plus lent sur certains appareils. Augmentez-la uniquement si le patching continue d\'échouer avec des limites plus faibles</string>
     <string name="settings_system_process_runtime_enabled_description">Limite de %s Mo</string>
-    <string name="settings_system_process_runtime_disabled_description">Appuyez pour configurer</string>
+    <string name="settings_system_process_runtime_disabled_description">Cliquez pour configurer</string>
     <string name="settings_system_process_runtime_description_not_available">Cette fonctionnalité nécessite Android 11 ou une version ultérieure</string>
     <string name="settings_system_patcher_completion_sound">Son de fin</string>
     <string name="settings_system_patcher_completion_sound_description">Joue un son distinct pour indiquer la réussite ou l\'échec lorsque le patching est terminé</string>

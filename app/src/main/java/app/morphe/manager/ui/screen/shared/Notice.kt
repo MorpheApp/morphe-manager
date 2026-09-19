@@ -91,7 +91,8 @@ fun Notice(
     Surface(
         modifier = if (isCentered) modifier.wrapContentWidth() else modifier.fillMaxWidth(),
         shape = RoundedCornerShape(Defaults.CompactCornerRadius),
-        color = tone.container
+        color = tone.container,
+        border = CardBorder.tinted(tone.accent)
     ) {
         Row(
             modifier = Modifier.padding(

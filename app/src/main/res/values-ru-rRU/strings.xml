@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">Открыть в браузере</string>
     <string name="sources_management_report_issue">Сообщить о проблеме</string>
     <string name="sources_management_failed_to_open_url">Не удалось открыть URL</string>
-    <string name="sources_hidden_apps">Скрыто для</string>
-    <string name="sources_hidden_apps_title">Приложения, скрытые от %1$s</string>
-    <string name="sources_hidden_apps_description">Этим приложениям этот источник не предлагается при патчинге. Сам источник остаётся включённым для всего остального</string>
-    <string name="sources_hidden_apps_hint">Нажмите, чтобы снова предложить этот источник</string>
+    <string name="sources_apps">Приложения</string>
     <string name="sources_management_prerelease_toggle">Предрелизные патчи</string>
     <string name="sources_management_prerelease_toggle_description">Получает ранний доступ к новым экспериментальным версиям патча</string>
     <string name="sources_prerelease_warning_title">Включить предварительные патчи?</string>

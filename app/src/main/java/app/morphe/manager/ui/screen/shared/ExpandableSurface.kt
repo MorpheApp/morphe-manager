@@ -52,7 +52,8 @@ fun ExpandableSurface(
             .fillMaxWidth()
             .clip(RoundedCornerShape(Defaults.CompactCornerRadius)),
         shape = RoundedCornerShape(Defaults.CompactCornerRadius),
-        color = headerTint.copy(alpha = 0.05f)
+        color = headerTint.copy(alpha = 0.05f),
+        border = CardBorder.tinted(headerTint)
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
             // Click target only on the header so expanded content stays independently focusable for screen readers

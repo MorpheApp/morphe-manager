@@ -15,6 +15,7 @@
     <string name="home_app_hidden_apps_hint">Pindutin para ipakita</string>
     <string name="home_app_patch_sources_description">Ang mga source na iniwang hindi naka-check ay hindi inaalok kapag na-patch ang mga app na ito, at ang kanilang mga patch ay hindi kailanman kusang naisasama sa isang seleksyon. Nananatiling naka-on ang bawat source para sa bawat iba pang app. The output is cut off? Need complete json array? I accidentally started with object? Let\'s reassess. I must not send incomplete. I attempted final with </string>
     <string name="home_app_patch_sources_mixed">Inaalok sa %1$s sa %2$s</string>
+    <string name="home_app_patch_sources_covers">May mga patch para sa %1$s sa %2$s</string>
     <string name="home_app_patch_sources_last">Bawat app ay nangangailangan ng isang source na natitira upang ma-patch.</string>
     <string name="android_11_bug_dialog_title">Isang pagkakamali sa Android 11</string>
     <string name="android_11_bug_dialog_description">Dapat pahintulutan nang maaga ang pag-install ng app para maiwasan ang isang pagkakamali sa sistema ng Android 11 na negatibong makakaapekto sa karanasan ng tagagamit</string>
@@ -139,9 +140,14 @@
     <string name="sources_management_open_in_browser">Buksan sa browser</string>
     <string name="sources_management_report_issue">Mag-ulat ng isyu</string>
     <string name="sources_management_failed_to_open_url">Nabigong buksan ang URL</string>
-    <string name="sources_hidden_apps">Nakatago para sa</string>
-    <string name="sources_hidden_apps_description">Ang mga app na ito ay hindi inaalukan ng source na ito kapag pina-patch ang mga ito. Ang source mismo ay nananatiling naka-on para sa lahat ng iba pa.</string>
-    <string name="sources_hidden_apps_hint">I-tap para i-alok muli ang source na ito.</string>
+    <string name="sources_apps">Mga app</string>
+    <string name="sources_apps_title">Mga app mula sa %1$s</string>
+    <string name="sources_apps_description">I-tap ang isang app para alisin ito sa source na ito o ibalik, o pindutin nang matagal para pumili ng ilan. Aalis ang isang app sa home screen kapag wala nang source na nagdadala nito.</string>
+    <string name="sources_apps_brought">Dala ng source na ito</string>
+    <string name="sources_apps_left_out">Hindi kasama sa source na ito</string>
+    <string name="sources_apps_leave_out">Huwag isama</string>
+    <string name="sources_apps_leave_out_done">Hindi kasama</string>
+    <string name="sources_apps_bring_back">Ibalik</string>
     <string name="sources_management_prerelease_toggle">Mga patch na pre-release</string>
     <string name="sources_management_prerelease_toggle_description">Tumatanggap ng maagang pag-access sa mga bagong bersyon ng patch na pang-eksperimento</string>
     <string name="sources_prerelease_warning_title">Paganahin ang mga pre-release na patch?</string>
@@ -185,6 +191,8 @@
     <string name="sources_dialog_local_change_file">Baguhin ang file</string>
     <string name="sources_dialog_preinstalled">Naka-install</string>
     <string name="sources_dialog_community">Mga patch ng komunidad</string>
+    <string name="sources_dialog_choose_apps">Pumili ng mga app</string>
+    <string name="sources_dialog_choose_apps_description">Piliin kung alin sa mga app nito ang pananatilihin kapag na-load na ang source.</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Mga pinagmulan ng third-party patch</string>
     <string name="sources_dialog_community_notice_message">"Ang mga pinagmulan ng community patch ay ginawa at pinapanatili ng kanilang mga sariling may-akda. Hindi nire-review o bine-verify ng Morphe ang mga third-party patches, at hindi ito responsable sa kanilang nilalaman o sa mga ginagawa nito sa iyong device.

@@ -84,6 +84,12 @@ import app.morphe.manager.util.startToEndGradient
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.milliseconds
 
+/** Inset every element inside a patcher card keeps from the edge of the card carrying it. */
+internal val PatcherCardPadding = 10.dp
+
+/** What a card's own margin and the surrounding list each contribute to that same inset. */
+internal val PatcherCardMargin = PatcherCardPadding / 2
+
 /** Brand blue - start of the progress gradient. */
 private val PatcherProgressBlueColor = Color(0xFF1E5AA8)
 
@@ -283,6 +289,7 @@ fun ExpertPatchingInProgress(
     progress: Float,
     patchesProgress: Pair<Int, Int>,
     patchProgress: PatchProgressSource,
+    packageName: String? = null,
     patcherSucceeded: Boolean? = null,
     miniGameState: MiniGameState,
     queueHeader: (@Composable () -> Unit)? = null,
@@ -343,7 +350,9 @@ fun ExpertPatchingInProgress(
             completed = completed,
             total = total,
             patchProgress = patchProgress,
-            patcherSucceeded = patcherSucceeded
+            packageName = packageName,
+            patcherSucceeded = patcherSucceeded,
+            showScreenLabel = queueHeader == null
         )
     }
     val logPanel: @Composable (Modifier) -> Unit = { panelModifier ->
@@ -445,7 +454,9 @@ private fun ExpertProgressHeader(
     completed: Int,
     total: Int,
     patchProgress: PatchProgressSource,
-    patcherSucceeded: Boolean? = null
+    packageName: String? = null,
+    patcherSucceeded: Boolean? = null,
+    showScreenLabel: Boolean = true
 ) {
     // Keyed on the run: a queue swaps in a new source without leaving composition
     val currentStep by remember(patchProgress) {
@@ -454,76 +465,72 @@ private fun ExpertProgressHeader(
         }
     }
 
-    // A phone on its side has barely more height than the header itself asks for
-    val shortWindow = rememberWindowSize().heightSizeClass == WindowHeightSizeClass.Compact
-
     Column(
         modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(if (shortWindow) 12.dp else 18.dp)
+        verticalArrangement = Arrangement.spacedBy(rememberWindowSize().itemSpacing)
     ) {
-        // Title + percentage badge
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = stringResource(R.string.patching_app),
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.weight(1f, fill = false)
-            )
+        // Screen name, live step and both counters read as one block, with the bar closing it
+        Column(verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)) {
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                if (showScreenLabel) {
+                    // Names what is being patched, and falls back to the screen's own name for a
+                    // package no source can put a label to
+                    AppLabel(
+                        packageName = packageName,
+                        style = MaterialTheme.typography.titleMedium.copy(
+                            color = MaterialTheme.colorScheme.onSurface,
+                            fontWeight = FontWeight.SemiBold
+                        ),
+                        defaultText = stringResource(R.string.patching_app)
+                    )
+                }
 
-            StatusBadge(
-                text = stringResource(R.string.patcher_percentage, (progress * 100).toInt()),
-                tone = SemanticTone.Primary
-            )
-        }
-
-        // Progress bar
-        ExpertLinearProgressBar(progress = progress)
-
-        // Current step name + patch counter
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            AnimatedContent(
-                targetState = currentStep?.name,
-                transitionSpec = Animations.fadeCrossfade(300),
-                label = "expert_step_name",
-                modifier = Modifier.weight(1f)
-            ) { stepName ->
-                Text(
-                    text = stepName ?: stringResource(R.string.patcher_success_title),
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Medium,
-                    color = MaterialTheme.colorScheme.primary,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
-
-            if (total > 0) {
-                // A finished run wears the same teal the success card and the progress bar end on
-                StatusBadge(
-                    text = stringResource(R.string.patcher_patches_progress_format, completed, total),
-                    containerColor = if (patcherSucceeded == true) {
-                        PatcherProgressTealColor.copy(alpha = 0.18f)
-                    } else {
-                        SemanticTone.Primary.container
-                    },
-                    contentColor = if (patcherSucceeded == true) {
-                        PatcherProgressTealColor
-                    } else {
-                        SemanticTone.Primary.content
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    AnimatedContent(
+                        targetState = currentStep?.name,
+                        transitionSpec = Animations.fadeCrossfade(300),
+                        label = "expert_step_name",
+                        modifier = Modifier.weight(1f)
+                    ) { stepName ->
+                        Text(
+                            text = stepName ?: stringResource(R.string.patcher_success_title),
+                            style = MaterialTheme.typography.labelLarge,
+                            fontWeight = FontWeight.SemiBold,
+                            color = MaterialTheme.colorScheme.primary,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
                     }
-                )
+
+                    if (total > 0) {
+                        // A finished run wears the same teal the success card and the progress bar end on
+                        StatusBadge(
+                            text = stringResource(R.string.patcher_patches_progress_format, completed, total),
+                            containerColor = if (patcherSucceeded == true) {
+                                PatcherProgressTealColor.copy(alpha = 0.18f)
+                            } else {
+                                SemanticTone.Primary.container
+                            },
+                            contentColor = if (patcherSucceeded == true) {
+                                PatcherProgressTealColor
+                            } else {
+                                SemanticTone.Primary.content
+                            }
+                        )
+                    }
+
+                    StatusBadge(
+                        text = stringResource(R.string.patcher_percentage, (progress * 100).toInt()),
+                        tone = SemanticTone.Primary
+                    )
+                }
             }
+
+            ExpertLinearProgressBar(progress = progress)
         }
 
         // Heap, CPU and storage graphs
@@ -592,9 +599,10 @@ private fun ExpertLogPanel(
 
     Surface(
         modifier = modifier,
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(Defaults.CardCornerRadius),
         color = MaterialTheme.colorScheme.surface,
-        tonalElevation = 2.dp
+        tonalElevation = 2.dp,
+        border = CardBorder.neutral
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             LogPanelTabHeader(
@@ -603,9 +611,7 @@ private fun ExpertLogPanel(
                 onTabSelect = { activeTab = it }
             )
 
-            HorizontalDivider(
-                color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)
-            )
+            HorizontalDivider(color = GlassButtonDefaults.borderColor())
 
             AnimatedContent(
                 targetState = activeTab,
@@ -620,7 +626,7 @@ private fun ExpertLogPanel(
                             state = listState,
                             modifier = Modifier
                                 .fillMaxSize()
-                                .padding(vertical = 6.dp),
+                                .padding(vertical = PatcherCardMargin),
                         ) {
                             if (rawLogs.isEmpty()) {
                                 item {
@@ -658,9 +664,6 @@ private fun ExpertLogPanel(
                             ) { index ->
                                 LogItemContent(logItems[index])
                             }
-
-                            // Bottom padding so last item isn't clipped by rounded corners
-                            item { Spacer(Modifier.height(8.dp)) }
                         }
                     }
                 }
@@ -681,7 +684,7 @@ private fun LogPanelTabHeader(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 12.dp, vertical = 4.dp),
+            .padding(horizontal = 12.dp, vertical = 2.dp),
         horizontalArrangement = Arrangement.spacedBy(6.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -770,15 +773,16 @@ private fun PatcherInfoCard(
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 10.dp, vertical = 6.dp),
+            .padding(horizontal = PatcherCardPadding, vertical = PatcherCardMargin),
         shape = RoundedCornerShape(Defaults.CompactCornerRadius),
         color = bgColor,
-        tonalElevation = 0.dp
+        tonalElevation = 0.dp,
+        border = CardBorder.tinted(accentColor)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 14.dp, vertical = 10.dp),
+                .padding(PatcherCardPadding),
             // Tight, because these cards carry a lot of short fields and are read at a glance
             verticalArrangement = Arrangement.spacedBy(7.dp)
         ) {
@@ -1061,7 +1065,7 @@ private fun LogEntryRow(level: LogLevel, message: String) {
         modifier = Modifier
             .fillMaxWidth()
             .then(if (colors.rowBg != Color.Unspecified) Modifier.background(colors.rowBg) else Modifier)
-            .padding(horizontal = 14.dp, vertical = 5.dp),
+            .padding(horizontal = PatcherCardPadding, vertical = PatcherCardMargin),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalAlignment = Alignment.Top
     ) {

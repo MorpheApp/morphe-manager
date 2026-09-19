@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">Tarayıcıda aç</string>
     <string name="sources_management_report_issue">Sorun bildir</string>
     <string name="sources_management_failed_to_open_url">URL açılamadı</string>
-    <string name="sources_hidden_apps">Gizli olduğu uygulamalar</string>
-    <string name="sources_hidden_apps_title">%1$s kaynağından gizlenen uygulamalar</string>
-    <string name="sources_hidden_apps_description">Bu uygulamalar yamalanırken bu kaynak sunulmaz. Kaynak, diğer her şey için etkin kalmaya devam eder.</string>
-    <string name="sources_hidden_apps_hint">Bu kaynağı tekrar sunmak için dokun</string>
+    <string name="sources_apps">Uygulamalar</string>
     <string name="sources_management_prerelease_toggle">Ön sürüm yamalar</string>
     <string name="sources_management_prerelease_toggle_description">Yeni deneysel sürüm yamalarına erken erişim sağlar</string>
     <string name="sources_prerelease_warning_title">Ön sürüm yamalarını etkinleştir?</string>

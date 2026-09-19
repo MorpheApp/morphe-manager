@@ -337,7 +337,6 @@ private fun PatchSelectionManagementDialogContent(
             if (multiSelect.isSelectionMode) {
                 MultiSelectShell(visible = true) {
                     SelectionActionBar(
-                        modifier = Modifier.padding(horizontal = Defaults.ContentPadding, vertical = Defaults.ItemSpacing),
                         selectedCount = multiSelect.selectedPackages.size,
                         totalCount = selections.size,
                         onSelectAll = onSelectAll,

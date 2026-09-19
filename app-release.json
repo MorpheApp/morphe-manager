@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-09-16T15:22:19",
-  "description": "## [1.31.1](https://github.com/MorpheApp/morphe-manager/compare/v1.31.0...v1.31.1) (2026-09-16)\n\n\n### Bug Fixes\n\n* Ask whether the stock app is there before requiring it for mount ([90730a1](https://github.com/MorpheApp/morphe-manager/commit/90730a156a43d9cf51a054f61778005278e2b2fa))\n* Stop reporting a patched install as the version on the device ([4c6436c](https://github.com/MorpheApp/morphe-manager/commit/4c6436c6ab3f56cb0bd0c502c1848cb4c9c357e0))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.31.1/morphe-manager-1.31.1.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.31.1/morphe-manager-1.31.1.apk.asc",
-  "version": "1.31.1"
+  "created_at": "2026-09-19T19:06:37",
+  "description": "# [1.32.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.32.0-dev.2...v1.32.0-dev.3) (2026-09-19)\n\n\n### Bug Fixes\n\n* Cancel the leftover automatic re-patching schedule ([ddcecb3](https://github.com/MorpheApp/morphe-manager/commit/ddcecb3b5d3539cdb90fa354573a3ca251bd98b9))\n\n\n### Features\n\n* Choose which apps a patch source brings ([c1d8299](https://github.com/MorpheApp/morphe-manager/commit/c1d829925f79a667288e10d9dfed3abffb613f6f))\n* Clear patching result notifications when returning to the manager ([69b1023](https://github.com/MorpheApp/morphe-manager/commit/69b1023d3245713d7c15dd7a472658bda522e25e))\n* Confirm pill actions in place instead of with a toast ([b867cd9](https://github.com/MorpheApp/morphe-manager/commit/b867cd98442ab21438f6523f7858a605f6147d05))\n* Mark patching results with a distinct notification icon and color ([42eae15](https://github.com/MorpheApp/morphe-manager/commit/42eae150f864f347361d494df2b6d507642493c2))\n* Show a running or finished batch queue on the home screen ([78ba144](https://github.com/MorpheApp/morphe-manager/commit/78ba144c00874222923d8e2447fe0716d6460e38))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.32.0-dev.3/morphe-manager-1.32.0-dev.3.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.32.0-dev.3/morphe-manager-1.32.0-dev.3.apk.asc",
+  "version": "1.32.0-dev.3"
 }

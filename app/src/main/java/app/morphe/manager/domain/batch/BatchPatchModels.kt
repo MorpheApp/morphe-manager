@@ -222,6 +222,9 @@ data class BatchRunState(
 ) {
     val activeItem get() = activeIndex?.let(items::getOrNull)
     val runnable get() = items.filter { it.state.isRunnable }
+
+    /** The apps this run was planned for, which is what reopening the batch screen on it takes. */
+    val targets get() = items.map { it.target }
     val succeeded get() = items.count { it.state == BatchItemState.SUCCEEDED }
     val failed get() = items.count { it.state == BatchItemState.FAILED }
     val skipped get() = items.count { it.state.needsAttention || it.state == BatchItemState.EXCLUDED }
@@ -233,6 +236,9 @@ data class BatchRunState(
     val total get() = items.count { it.state.isRunnable || it.state.isTerminal || it.state == BatchItemState.RUNNING }
 
     val isActive get() = phase == BatchPhase.RUNNING
+
+    /** A finished run that patched or failed anything. One canceled before its first app did neither. */
+    val hasOutcome get() = phase == BatchPhase.FINISHED && (succeeded > 0 || failed > 0)
 
     /** Successful items that still have their patched APK on disk, in queue order. */
     val patchedItems get() = items.filter { it.state == BatchItemState.SUCCEEDED && it.patchedFile != null }

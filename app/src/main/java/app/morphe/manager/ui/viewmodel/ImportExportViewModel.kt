@@ -480,7 +480,7 @@ class ImportExportViewModel(
                                 )
                             }
                             exportFile.mutedPackages?.let {
-                                sourceMuteRepository.mergeForBundle(bundleUid, it)
+                                sourceMuteRepository.muteApps(bundleUid, it)
                             }
                         }
                     }

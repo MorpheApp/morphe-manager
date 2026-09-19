@@ -1,3 +1,33 @@
+# [1.32.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.32.0-dev.2...v1.32.0-dev.3) (2026-09-19)
+
+
+### Bug Fixes
+
+* Cancel the leftover automatic re-patching schedule ([ddcecb3](https://github.com/MorpheApp/morphe-manager/commit/ddcecb3b5d3539cdb90fa354573a3ca251bd98b9))
+
+
+### Features
+
+* Choose which apps a patch source brings ([c1d8299](https://github.com/MorpheApp/morphe-manager/commit/c1d829925f79a667288e10d9dfed3abffb613f6f))
+* Clear patching result notifications when returning to the manager ([69b1023](https://github.com/MorpheApp/morphe-manager/commit/69b1023d3245713d7c15dd7a472658bda522e25e))
+* Confirm pill actions in place instead of with a toast ([b867cd9](https://github.com/MorpheApp/morphe-manager/commit/b867cd98442ab21438f6523f7858a605f6147d05))
+* Mark patching results with a distinct notification icon and color ([42eae15](https://github.com/MorpheApp/morphe-manager/commit/42eae150f864f347361d494df2b6d507642493c2))
+* Show a running or finished batch queue on the home screen ([78ba144](https://github.com/MorpheApp/morphe-manager/commit/78ba144c00874222923d8e2447fe0716d6460e38))
+
+# [1.32.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.32.0-dev.1...v1.32.0-dev.2) (2026-09-17)
+
+
+### Features
+
+* Outline cards and unify patching screen spacing ([3e93c3f](https://github.com/MorpheApp/morphe-manager/commit/3e93c3f38b00f3f794dff324031fd09ae7128690))
+
+# [1.32.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.31.1...v1.32.0-dev.1) (2026-09-17)
+
+
+### Features
+
+* Hide patch sources the filter left without results ([3fc2178](https://github.com/MorpheApp/morphe-manager/commit/3fc2178ff85dc652539724652c67b6cfffaea1b0))
+
 ## [1.31.1](https://github.com/MorpheApp/morphe-manager/compare/v1.31.0...v1.31.1) (2026-09-16)
 
 

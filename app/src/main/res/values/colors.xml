@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="shortcut_icon_tint">#FF1E5AA8</color>
+    <color name="notification_success">#FF00AFAE</color>
+    <color name="notification_failure">#FFE53935</color>
 </resources>

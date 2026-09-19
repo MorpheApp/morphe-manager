@@ -95,11 +95,6 @@ internal fun MultiSelectBar(
     val resetOrderDone = stringResource(R.string.reset_order_done)
     val doneLabel = stringResource(R.string.done)
     val moveToCategoryLabel = stringResource(R.string.home_category_move_to)
-    val selectAllLabel = stringResource(R.string.select_all)
-    val selectAllDone = stringResource(R.string.select_all_done)
-    val deselectAllLabel = stringResource(R.string.deselect_all)
-    val deselectAllDone = stringResource(R.string.deselect_all_done)
-    val selectedLabel = stringResource(R.string.selected).lowercase()
     val patchSelectedLabel = stringResource(R.string.batch_patch_action)
     val patchSourcesLabel = stringResource(R.string.sources_management_title)
 
@@ -115,10 +110,6 @@ internal fun MultiSelectBar(
             onContextAction = onContextAction
         )
     )
-
-    val allSelected = selection.total in 1..selection.count
-    val selectionToggleLabel = if (allSelected) deselectAllLabel else selectAllLabel
-    val selectionToggleDone = if (allSelected) deselectAllDone else selectAllDone
 
     MultiSelectShell(visible = visible, modifier = modifier) {
         AnimatedContent(
@@ -141,10 +132,11 @@ internal fun MultiSelectBar(
                     )
                     ActionPillRow {
                         ActionPillButton(
-                            onClick = context.withToast(resetOrderDone, onResetOrder),
+                            onClick = onResetOrder,
                             icon = Icons.Outlined.Restore,
                             contentDescription = resetOrderLabel,
-                            tooltip = resetOrderLabel
+                            tooltip = resetOrderLabel,
+                            confirmation = resetOrderDone
                         )
                         ActionPillButton(
                             onClick = onCancelReorder,
@@ -161,106 +153,78 @@ internal fun MultiSelectBar(
                     }
                 }
             } else {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 12.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                SelectionActionBar(
+                    selectedCount = selection.count,
+                    totalCount = selection.total,
+                    onSelectAll = onSelectAll,
+                    onDeselectAll = onDeselectAll,
+                    onCancel = onCancel
                 ) {
-                    AnimatedContent(
-                        targetState = selection.count,
-                        transitionSpec = Animations.compactCounterTransitionSpec,
-                        label = "multibar_count"
-                    ) { count ->
-                        Text(
-                            text = "$count $selectedLabel",
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                    if (onPatchSelected != null) {
+                        ActionPillButton(
+                            onClick = onPatchSelected,
+                            icon = Icons.Outlined.AutoFixHigh,
+                            contentDescription = patchSelectedLabel,
+                            tooltip = patchSelectedLabel,
+                            enabled = selection.count > 0,
+                            colors = IconButtonDefaults.filledTonalIconButtonColors(
+                                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                            )
                         )
                     }
-                    ActionPillRow {
+                    if (onPatchSources != null) {
+                        // Next to "Patch selected" rather than next to "Hide": both answer
+                        // what patching these apps does, while "Hide" is about this screen
                         ActionPillButton(
-                            onClick = context.withToast(selectionToggleDone) {
-                                if (allSelected) onDeselectAll() else onSelectAll()
-                            },
-                            icon = if (allSelected) Icons.Outlined.RemoveDone else Icons.Outlined.DoneAll,
-                            contentDescription = selectionToggleLabel,
-                            tooltip = selectionToggleLabel,
-                            enabled = selection.total > 0
-                        )
-                        if (onPatchSelected != null) {
-                            ActionPillButton(
-                                onClick = onPatchSelected,
-                                icon = Icons.Outlined.AutoFixHigh,
-                                contentDescription = patchSelectedLabel,
-                                tooltip = patchSelectedLabel,
-                                enabled = selection.count > 0,
-                                colors = IconButtonDefaults.filledTonalIconButtonColors(
-                                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                                )
-                            )
-                        }
-                        if (onPatchSources != null) {
-                            // Next to "Patch selected" rather than next to "Hide": both answer
-                            // what patching these apps does, while "Hide" is about this screen
-                            ActionPillButton(
-                                onClick = onPatchSources,
-                                icon = Icons.Outlined.Source,
-                                contentDescription = patchSourcesLabel,
-                                tooltip = patchSourcesLabel,
-                                enabled = selection.count > 0,
-                                colors = IconButtonDefaults.filledTonalIconButtonColors(
-                                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer
-                                )
-                            )
-                        }
-                        if (onMoveToCategory != null) {
-                            ActionPillButton(
-                                onClick = onMoveToCategory,
-                                icon = Icons.Outlined.FolderOpen,
-                                contentDescription = moveToCategoryLabel,
-                                tooltip = moveToCategoryLabel,
-                                enabled = selection.count > 0
-                            )
-                        }
-                        val contextIcon = selection.contextIcon
-                        val contextDescription = selection.contextDescription
-                        val contextAction = selection.onContextAction
-                        if (contextIcon != null && contextDescription != null && contextAction != null) {
-                            ActionPillButton(
-                                onClick = contextAction,
-                                icon = contextIcon,
-                                contentDescription = contextDescription,
-                                tooltip = contextDescription,
-                                enabled = selection.count > 0,
-                                colors = selection.contextColors
-                            )
-                        }
-                        ActionPillButton(
-                            onClick = context.withToast(actionDoneMessage, onAction),
-                            icon = actionIcon,
-                            contentDescription = actionContentDescription,
-                            tooltip = actionContentDescription,
+                            onClick = onPatchSources,
+                            icon = Icons.Outlined.Source,
+                            contentDescription = patchSourcesLabel,
+                            tooltip = patchSourcesLabel,
                             enabled = selection.count > 0,
-                            colors = actionColors
-                        )
-                        if (showReorderButton) {
-                            ActionPillButton(
-                                onClick = onEnterReorder,
-                                icon = Icons.Outlined.Reorder,
-                                contentDescription = reorderListLabel,
-                                tooltip = reorderListLabel,
-                                enabled = selection.count > 0
+                            colors = IconButtonDefaults.filledTonalIconButtonColors(
+                                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                                contentColor = MaterialTheme.colorScheme.onSecondaryContainer
                             )
-                        }
+                        )
+                    }
+                    if (onMoveToCategory != null) {
                         ActionPillButton(
-                            onClick = onCancel,
-                            icon = Icons.Outlined.Close,
-                            contentDescription = cancelLabel,
-                            tooltip = cancelLabel
+                            onClick = onMoveToCategory,
+                            icon = Icons.Outlined.FolderOpen,
+                            contentDescription = moveToCategoryLabel,
+                            tooltip = moveToCategoryLabel,
+                            enabled = selection.count > 0
+                        )
+                    }
+                    val contextIcon = selection.contextIcon
+                    val contextDescription = selection.contextDescription
+                    val contextAction = selection.onContextAction
+                    if (contextIcon != null && contextDescription != null && contextAction != null) {
+                        ActionPillButton(
+                            onClick = contextAction,
+                            icon = contextIcon,
+                            contentDescription = contextDescription,
+                            tooltip = contextDescription,
+                            enabled = selection.count > 0,
+                            colors = selection.contextColors
+                        )
+                    }
+                    ActionPillButton(
+                        onClick = context.withToast(actionDoneMessage, onAction),
+                        icon = actionIcon,
+                        contentDescription = actionContentDescription,
+                        tooltip = actionContentDescription,
+                        enabled = selection.count > 0,
+                        colors = actionColors
+                    )
+                    if (showReorderButton) {
+                        ActionPillButton(
+                            onClick = onEnterReorder,
+                            icon = Icons.Outlined.Reorder,
+                            contentDescription = reorderListLabel,
+                            tooltip = reorderListLabel,
+                            enabled = selection.count > 0
                         )
                     }
                 }

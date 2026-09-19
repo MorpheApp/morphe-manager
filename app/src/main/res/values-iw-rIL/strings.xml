@@ -141,10 +141,7 @@
     <string name="sources_management_open_in_browser">פתח בדפדפן</string>
     <string name="sources_management_report_issue">דווח על בעיה</string>
     <string name="sources_management_failed_to_open_url">כישלון בפתיחת כתובת אינטרנט</string>
-    <string name="sources_hidden_apps">מוסתר עבור</string>
-    <string name="sources_hidden_apps_title">אפליקציות מוסתרות מ-%1$s</string>
-    <string name="sources_hidden_apps_description">המקור הזה לא מוצע לאפליקציות האלה כשהן מתוקנות. המקור עצמו נשאר דלוק עבור כל השאר</string>
-    <string name="sources_hidden_apps_hint">הקש כדי להציע את המקור הזה שוב</string>
+    <string name="sources_apps">אפליקציות</string>
     <string name="sources_management_prerelease_toggle">תיקונים לפני הפצה</string>
     <string name="sources_management_prerelease_toggle_description">מקבל גישה מוקדמת לגרסאות תיקונים ניסיוניות חדשות</string>
     <string name="sources_prerelease_warning_title">להפעיל תיקונים לגרסאות מוקדמות?</string>

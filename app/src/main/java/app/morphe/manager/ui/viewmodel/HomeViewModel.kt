@@ -28,6 +28,7 @@ import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.apk.*
 import app.morphe.manager.domain.batch.BatchPatchCoordinator
+import app.morphe.manager.domain.batch.BatchRunState
 import app.morphe.manager.domain.batch.mergeNewlyAdded
 import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
@@ -74,7 +75,11 @@ import java.util.zip.CRC32
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
+
+/** How long an added source is waited on before its app list is no longer opened for it. */
+private val NEW_SOURCE_LOAD_TIMEOUT = 10.minutes
 
 /** Bundle update status for snackbar display. */
 enum class BundleUpdateStatus {
@@ -246,6 +251,9 @@ class HomeViewModel(
     var bundleToRename by mutableStateOf<PatchBundleSource?>(null)
     var showRenameBundleDialog by mutableStateOf(false)
 
+    /** Source whose app list is open, after it was added with its apps to be chosen. */
+    var sourceAppsDialogUid by mutableStateOf<Int?>(null)
+
     // Installed App Info dialog state
     var showInstalledAppInfoDialog: String? by mutableStateOf(null)
         private set
@@ -282,12 +290,12 @@ class HomeViewModel(
         }
     }
 
-    fun confirmMppImport() {
+    fun confirmMppImport(chooseApps: Boolean) {
         val uri = pendingMppUri ?: return
         pendingMppUri = null
         pendingMppFileName = null
         pendingMppManifest = null
-        createLocalSource(uri)
+        createLocalSource(uri, chooseApps)
     }
 
     fun dismissMppImport() {
@@ -993,6 +1001,12 @@ class HomeViewModel(
     val batchPatchRunning: Boolean get() = batchPatchCoordinator.isRunning
 
     /**
+     * The batch queue, which outlives its screen: a deep link or shortcut returns to home while
+     * it keeps patching, and home is then the only way back to it.
+     */
+    val batchRun: StateFlow<BatchRunState?> = batchPatchCoordinator.state
+
+    /**
      * Guard entry-point for all patching flows.
      * Shows MeteredPatchingDialog when on metered network with updates disabled,
      * so the user can choose to update patches first or patch anyway.
@@ -1229,7 +1243,37 @@ class HomeViewModel(
         }
     }
 
-    fun createLocalSource(patchBundle: Uri) = importLocalSource(patchBundle, replacingUid = null)
+    fun createLocalSource(patchBundle: Uri, chooseApps: Boolean = false): Job {
+        watchForAddedSource(chooseApps)
+        return importLocalSource(patchBundle, replacingUid = null)
+    }
+
+    private var addedSourceWatch: Job? = null
+
+    /**
+     * Opens the app list of the source about to be added, once its patches have loaded.
+     *
+     * The sources are read before the add starts, so the next one to load is the one being added.
+     * A source only appears among the loaded ones once its patches are in, which is also what the
+     * list is built from. An add that is refused or never loads opens nothing, and every later add
+     * drops the wait, so a refused one cannot open the list of whatever is added after it.
+     */
+    private fun watchForAddedSource(chooseApps: Boolean) {
+        addedSourceWatch?.cancel()
+        addedSourceWatch = null
+        if (!chooseApps) return
+
+        val known = patchBundleRepository.sources.value.mapTo(mutableSetOf()) { it.uid }
+        addedSourceWatch = viewModelScope.launch {
+            val added = withTimeoutOrNull(NEW_SOURCE_LOAD_TIMEOUT) {
+                patchBundleRepository.allBundlesInfoFlow
+                    .mapNotNull { info -> info.values.firstOrNull { it.uid !in known } }
+                    .first()
+            } ?: return@launch
+            // Universal patches put no app on the home screen, so there would be nothing to list
+            if (added.listedApps().isNotEmpty()) sourceAppsDialogUid = added.uid
+        }
+    }
 
     /**
      * Points an existing local source at a newly picked file. Adding the updated file instead
@@ -1291,7 +1335,8 @@ class HomeViewModel(
         }
     }
 
-    fun createRemoteSource(apiUrl: String, autoUpdate: Boolean) = viewModelScope.launch {
+    fun createRemoteSource(apiUrl: String, autoUpdate: Boolean, chooseApps: Boolean = false) = viewModelScope.launch {
+        watchForAddedSource(chooseApps)
         withContext(NonCancellable) {
             patchBundleRepository.createRemote(apiUrl, autoUpdate)
         }
@@ -1312,10 +1357,10 @@ class HomeViewModel(
     }
 
     /** User confirmed adding the bundle from the deep link confirmation dialog. */
-    fun confirmDeepLinkBundle() {
+    fun confirmDeepLinkBundle(chooseApps: Boolean) {
         val bundle = deepLinkPendingBundle ?: return
         deepLinkPendingBundle = null
-        createRemoteSource(bundle.url, autoUpdate = true)
+        createRemoteSource(bundle.url, autoUpdate = true, chooseApps = chooseApps)
     }
 
     /** User dismissed the deep link confirmation dialog. */
@@ -1345,6 +1390,7 @@ class HomeViewModel(
         showRenameBundleDialog = false
         bundleToRename = null
         showAddSourceDialog = false
+        sourceAppsDialogUid = null
         selectedBundleUri = null
         selectedBundlePath = null
         cleanupPendingData()
@@ -1398,20 +1444,23 @@ class HomeViewModel(
     }
 
     /**
-     * The bundle state, the versions derived from it and the ones the user turned down, so a card
-     * is built against one reading of them rather than against several arriving a frame apart.
+     * The bundle state, the versions derived from it, the ones the user turned down and the
+     * sources each app is kept from. A card is built against one reading of them, not against
+     * several arriving a frame apart.
      */
-    private data class HomeVersionState(
+    private data class HomeBundleState(
         val bundleState: PatchBundleRepository.BundleState,
         val supportedVersions: Map<String, AppTarget>,
-        val ignoredVersions: Map<String, String>
+        val ignoredVersions: Map<String, String>,
+        val keptFrom: Map<String, Set<Int>>
     )
 
-    private val _bundleVersionsFlow = combine(
+    private val _homeBundleStateFlow = combine(
         patchBundleRepository.bundleState,
         versionCatalog.recommendedVersions,
         homeAppButtonPrefs.ignoredVersions,
-        ::HomeVersionState
+        sourceMuteRepository.mutedSources,
+        ::HomeBundleState
     )
 
     /** The supported version each app was told to stop offering, keyed by its original package. */
@@ -1433,7 +1482,7 @@ class HomeViewModel(
     * Hidden apps are excluded from [HomeAppState.visible].
     */
     val homeAppState: StateFlow<HomeAppState?> = combine(
-        _bundleVersionsFlow,
+        _homeBundleStateFlow,
         _homePrefsFlow,
         installedAppRepository.getAll().onEach { apps ->
             trackedPackageNames = apps.flatMapTo(mutableSetOf()) {
@@ -1448,7 +1497,7 @@ class HomeViewModel(
         },
         _appUpdatesAvailable,
         appStateSignal,
-    ) { (bundleState, supportedVersions, ignoredVersions), homePrefs, installedApps, updatesMap, (_, trackedSnapshots) ->
+    ) { (bundleState, supportedVersions, ignoredVersions, keptFrom), homePrefs, installedApps, updatesMap, (_, trackedSnapshots) ->
         val ready = bundleState as? PatchBundleRepository.BundleState.Ready
             ?: return@combine null
 
@@ -1456,9 +1505,11 @@ class HomeViewModel(
         val metadata = BundleAppMetadata.buildFrom(enabledInfo)
         // Names only, for records whose bundle the user has since disabled
         val allMetadata = BundleAppMetadata.buildFrom(ready.info)
-        val packages = metadata.keys
+        val appsBySource = enabledInfo.mapValues { (_, info) -> info.appsBrought(keptFrom) }
+        val packages = appsBySource.values.flatMapTo(mutableSetOf()) { it }
         val sourceGroups = buildHomeAppSourceGroups(
             enabledInfo = enabledInfo,
+            appsBySource = appsBySource,
             sources = ready.sources,
             sortMode = homePrefs.sortMode,
             sourceOrders = homePrefs.sourceOrders,
@@ -1552,8 +1603,9 @@ class HomeViewModel(
             )
         }
 
-        // Include apps patched with universal patches through "Other apps": they have no bundle
-        // metadata but must still appear as cards so users can reinstall/uninstall/see updates
+        // Include apps patched with universal patches through "Other apps", and patched apps no
+        // source brings anymore: they are not in the list but must still appear as cards so users
+        // can reinstall/uninstall/see updates
         val universalOnlyPackages = recordsByApp.keys.filter { it !in packages }.toSet()
         val allPackages = packages + universalOnlyPackages
 
@@ -1616,6 +1668,7 @@ class HomeViewModel(
 
     private fun buildHomeAppSourceGroups(
         enabledInfo: Map<Int, PatchBundleInfo.Global>,
+        appsBySource: Map<Int, Set<String>>,
         sources: Map<Int, PatchBundleSource>,
         sortMode: HomeAppSortMode,
         sourceOrders: Map<Int, List<String>>,
@@ -1633,12 +1686,8 @@ class HomeViewModel(
                 )
             )
             .mapNotNull { info ->
-                val packageNames = info.patches
-                    .asSequence()
-                    .flatMap { patch -> patch.compatiblePackages.orEmpty().asSequence() }
-                    .mapNotNull { compatiblePackage -> compatiblePackage.packageName }
-                    .distinct()
-                    .toSet()
+                // A source kept from an app does not list it, even while another source does
+                val packageNames = appsBySource[info.uid].orEmpty()
 
                 if (packageNames.isEmpty()) {
                     null

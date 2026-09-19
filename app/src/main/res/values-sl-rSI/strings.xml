@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">Odpri v brskalniku</string>
     <string name="sources_management_report_issue">Prijavi težavo</string>
     <string name="sources_management_failed_to_open_url">Ni mogoče odpreti URL</string>
-    <string name="sources_hidden_apps">Skrito za</string>
-    <string name="sources_hidden_apps_title">Aplikacije, skrite pred %1$s</string>
-    <string name="sources_hidden_apps_description">Tem aplikacijam ta vir ni na voljo, ko so popravljene. Vir sam ostane vklopljen za vse drugo.</string>
-    <string name="sources_hidden_apps_hint">Tapnite, da ta vir znova ponudite.</string>
+    <string name="sources_apps">Aplikacije</string>
     <string name="sources_management_prerelease_toggle">Pred-popravki</string>
     <string name="sources_management_prerelease_toggle_description">Prejmite zgodnji dostop do novih eksperimentalnih različic popravkov</string>
     <string name="sources_prerelease_warning_title">Omogoči pred-popravke?</string>

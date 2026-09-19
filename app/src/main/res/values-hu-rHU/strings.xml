@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">Megnyitás böngészőben</string>
     <string name="sources_management_report_issue">Hiba jelentése</string>
     <string name="sources_management_failed_to_open_url">Hiba történt az URL megnyitásakor</string>
-    <string name="sources_hidden_apps">Elrejtve:</string>
-    <string name="sources_hidden_apps_title">A(z) %1$s elől elrejtett alkalmazások</string>
-    <string name="sources_hidden_apps_description">Ezeknek az alkalmazásoknak nem ajánlják fel ezt a forrást, amikor javítják őket. Maga a forrás minden másnál bekapcsolva marad.</string>
-    <string name="sources_hidden_apps_hint">Koppintson ide, hogy újra felajánlja ezt a forrást.</string>
+    <string name="sources_apps">Alkalmazások</string>
     <string name="sources_management_prerelease_toggle">Kiadás előtti javítások</string>
     <string name="sources_management_prerelease_toggle_description">Korai hozzáférés kísérleti új javításverziókhoz</string>
     <string name="sources_prerelease_warning_title">Előzetes javítások engedélyezése?</string>

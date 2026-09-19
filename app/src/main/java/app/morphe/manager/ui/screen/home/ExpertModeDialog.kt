@@ -159,6 +159,12 @@ fun ExpertModeDialog(
     // Both narrow the list far enough that a folded universal section would only hide results
     val isFiltering = search.isFiltering || isSelectedOnly
 
+    // A source the filter left without rows is only an empty page to swipe past. Order is kept,
+    // since a tab that moved mid-keystroke carries off the one thing the user navigates by
+    val displayedBundles = remember(filteredPatchesByUid) {
+        allPatchesInfo.filter { (bundle, _) -> bundle.uid in filteredPatchesByUid }
+    }
+
     val markers = remember(
         newPatches,
         patchesWithMissingRequired,
@@ -347,45 +353,59 @@ fun ExpertModeDialog(
                 }
             } else {
                 // Multiple bundles tab layout
-                val pagerState = rememberPagerState { allPatchesInfo.size }
+                val pagerState = rememberPagerState { displayedBundles.size }
                 val coroutineScope = rememberCoroutineScope()
 
-                // A filter that empties the open bundle has narrowed every list but the one on
-                // screen, so the pager follows it to a bundle that kept rows. Only the filter is
-                // watched, which leaves a bundle opened by hand alone. One collector outlives
-                // every change too: an effect keyed on the filter would be torn down by the next
-                // keystroke, leaving the pager halfway between two bundles
-                val currentBundles = rememberUpdatedState(allPatchesInfo)
-                val currentFilter = rememberUpdatedState(filteredPatchesByUid)
+                // Held to a source rather than to a page index, which a dropped source reassigns.
+                // Only the settled page counts, so pages a swipe passes over are not a choice
+                val currentBundles = rememberUpdatedState(displayedBundles)
+                val openBundleUid = remember { mutableStateOf<Int?>(null) }
+                // One collector outlives every change: an effect keyed on the filter would be torn
+                // down by the next keystroke, leaving the pager halfway between two bundles
                 LaunchedEffect(pagerState) {
-                    snapshotFlow { currentFilter.value }.collect { filter ->
-                        val bundles = currentBundles.value
-                        val openBundle = bundles.getOrNull(pagerState.currentPage)?.first ?: return@collect
-                        if (openBundle.uid in filter) return@collect
-
-                        val firstWithResults = filter.keys.firstOrNull() ?: return@collect
-                        bundles.indexOfFirst { it.first.uid == firstWithResults }
-                            .takeIf { it >= 0 }
-                            ?.let { pagerState.animateScrollToPage(it) }
+                    launch {
+                        snapshotFlow { pagerState.settledPage }.collect { page ->
+                            currentBundles.value.getOrNull(page)?.let { (bundle, _) ->
+                                openBundleUid.value = bundle.uid
+                            }
+                        }
+                    }
+                    snapshotFlow { currentBundles.value }.collect { bundles ->
+                        val openUid = openBundleUid.value ?: return@collect
+                        val target = bundles.indexOfFirst { (bundle, _) -> bundle.uid == openUid }
+                        if (target == pagerState.currentPage) return@collect
+                        if (target >= 0) {
+                            // The same source at a new index, so it must not appear to move
+                            pagerState.scrollToPage(target)
+                        } else if (bundles.isNotEmpty()) {
+                            // The open source lost every row: follow to one that kept some
+                            pagerState.animateScrollToPage(0)
+                        }
                     }
                 }
 
                 // Created up front, outside the pager, so the scrollbar overlay below can track
                 // whichever page is current. HorizontalPager clips each page to its own bounds, so
                 // a scrollbar drawn inside a page can never bleed out to the true dialog edge.
-                // Keyed on the bundle count so pages never inherit a stale sibling's position
+                // Keyed by source, not by the page index a filter reassigns, so no page inherits
+                // the position of whichever sibling held that slot
+                val bundleUids = remember(allPatchesInfo) { allPatchesInfo.map { (bundle, _) -> bundle.uid } }
                 val pageListStates = rememberSaveable(
-                    allPatchesInfo.size,
+                    bundleUids,
                     saver = listSaver(
                         save = { states ->
-                            states.flatMap { listOf(it.firstVisibleItemIndex, it.firstVisibleItemScrollOffset) }
+                            states.entries.flatMap { (uid, state) ->
+                                listOf(uid, state.firstVisibleItemIndex, state.firstVisibleItemScrollOffset)
+                            }
                         },
                         restore = { saved ->
-                            saved.chunked(2).map { (index, offset) -> LazyListState(index, offset) }
+                            saved.chunked(3).associate { (uid, index, offset) ->
+                                uid to LazyListState(index, offset)
+                            }
                         }
                     )
                 ) {
-                    List(allPatchesInfo.size) { LazyListState() }
+                    bundleUids.associateWith { LazyListState() }
                 }
 
                 Column(
@@ -393,28 +413,35 @@ fun ExpertModeDialog(
                         .fillMaxWidth()
                         .weight(1f)
                 ) {
+                    if (displayedBundles.isEmpty()) {
+                        // Nothing matched anywhere, so there is no tab to draw. The pager state
+                        // outlives this, so clearing the filter hands the open source back
+                        PatchesListEmptyState()
+                        return@Column
+                    }
+
+                    // The pager settles its own page as the count changes, so a frame can arrive
+                    // holding an index past the list the filter just narrowed
+                    val currentIndex = pagerState.currentPage.coerceAtMost(displayedBundles.lastIndex)
+
                     // Tab row
                     SecondaryScrollableTabRow(
-                        selectedTabIndex = pagerState.currentPage,
+                        selectedTabIndex = currentIndex,
                         edgePadding = 0.dp,
                         divider = {},
                         containerColor = Color.Transparent,
                         contentColor = MaterialTheme.colorScheme.primary
                     ) {
-                        allPatchesInfo.forEachIndexed { index, (bundle, patches) ->
-                            val hasResults = bundle.uid in filteredPatchesByUid
+                        displayedBundles.forEachIndexed { index, (bundle, patches) ->
                             val enabledCount = patches.count { it.second }
                             val totalCount = patches.size
-                            val isSelected = pagerState.currentPage == index
+                            val isSelected = currentIndex == index
 
                             Tab(
                                 selected = isSelected,
                                 onClick = { coroutineScope.launch { pagerState.animateScrollToPage(index) } },
                                 selectedContentColor = MaterialTheme.colorScheme.primary,
-                                unselectedContentColor = if (hasResults)
-                                    MaterialTheme.colorScheme.onSurfaceVariant
-                                else
-                                    MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
+                                unselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
                             ) {
                                 Column(
                                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -433,7 +460,7 @@ fun ExpertModeDialog(
                                     // Patch count badge
                                     StatusBadge(
                                         text = "$enabledCount/$totalCount",
-                                        tone = if (isSelected && hasResults) SemanticTone.Primary else SemanticTone.Neutral
+                                        tone = if (isSelected) SemanticTone.Primary else SemanticTone.Neutral
                                     )
                                 }
                             }
@@ -446,8 +473,7 @@ fun ExpertModeDialog(
                     )
 
                     // Controls fixed below the tab row
-                    val currentIndex = pagerState.currentPage
-                    val (currentBundle, _) = allPatchesInfo.getOrNull(currentIndex) ?: return@Column
+                    val (currentBundle, _) = displayedBundles[currentIndex]
                     val currentFiltered = filteredPatchesByUid[currentBundle.uid]
 
                     RetirePrereleaseNotice(
@@ -478,13 +504,14 @@ fun ExpertModeDialog(
                             state = pagerState,
                             modifier = Modifier.fillMaxSize()
                         ) { pageIndex ->
-                            val (bundle, _) = allPatchesInfo.getOrNull(pageIndex) ?: return@HorizontalPager
+                            val (bundle, _) = displayedBundles.getOrNull(pageIndex) ?: return@HorizontalPager
                             val patches = filteredPatchesByUid[bundle.uid]
+                            val listState = pageListStates[bundle.uid] ?: return@HorizontalPager
 
                             BundlePatchList(
                                 bundle = bundle,
                                 patches = patches.orEmpty(),
-                                listState = pageListStates[pageIndex],
+                                listState = listState,
                                 markers = markers,
                                 isFiltering = isFiltering,
                                 sectionState = patchSections,
@@ -496,11 +523,8 @@ fun ExpertModeDialog(
 
                         // Single overlay for the whole pager, tracking whichever page is current,
                         // instead of one per page - a page-local scrollbar would be clipped by the
-                        // pager before it could reach the true dialog edge. Pages filtered down to
-                        // an empty state have nothing to scroll, so they get no overlay
-                        val currentPageList = allPatchesInfo.getOrNull(pagerState.currentPage)
-                            ?.takeIf { (bundle, _) -> bundle.uid in filteredPatchesByUid }
-                            ?.let { pageListStates.getOrNull(pagerState.currentPage) }
+                        // pager before it could reach the true dialog edge
+                        val currentPageList = pageListStates[currentBundle.uid]
                         if (currentPageList != null) {
                             ListScrollbar(
                                 listState = currentPageList,

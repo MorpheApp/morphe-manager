@@ -239,7 +239,7 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent, ApkDownloadHelperHost 
         val current = state.value
         if (current != null) {
             if (current.phase == BatchPhase.PLANNING || current.phase == BatchPhase.RUNNING) return
-            if (current.items.map { it.target } == targets) return
+            if (current.targets == targets) return
             coordinator.clear()
         }
         coordinator.plan(targets, useMount, BatchInstallPolicy.SAVE_ONLY)

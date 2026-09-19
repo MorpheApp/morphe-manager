@@ -108,6 +108,7 @@ fun HomeScreen(
     val bundlePipelineLoading = homeAppState == null
     val showOtherAppsButton by homeViewModel.showOtherAppsButton.collectAsStateWithLifecycle()
     val showSearchButton by homeViewModel.showSearchButton.collectAsStateWithLifecycle()
+    val batchRun by homeViewModel.batchRun.collectAsStateWithLifecycle()
     val showSortButtonPref by homeAppButtonPrefs.showSortButton.collectAsStateWithLifecycle()
     val useExpertMode by prefs.useExpertMode.getAsState()
 
@@ -296,6 +297,11 @@ fun HomeScreen(
                         visible = showRepatchNotice,
                         onShow = { startBatchPatch(repatchableApps) }
                     ),
+                    // Reopened on its own apps, so the batch screen keeps the run instead of
+                    // planning a new one
+                    batchQueue = BatchQueueAlertState(batchRun) {
+                        batchRun?.let { onStartBatchPatch(it.targets, it.useMount) }
+                    },
                     bundleUpdate = BundleUpdateState(
                         visible = homeViewModel.showBundleUpdateSnackbar,
                         status = homeViewModel.snackbarStatus,

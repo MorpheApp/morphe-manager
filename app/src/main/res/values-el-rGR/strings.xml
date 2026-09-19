@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">Άνοιγμα σε πρόγραμμα περιήγησης</string>
     <string name="sources_management_report_issue">Αναφορά προβλήματος</string>
     <string name="sources_management_failed_to_open_url">Απέτυχε το άνοιγμα της διεύθυνσης URL</string>
-    <string name="sources_hidden_apps">Κρυμμένες για</string>
-    <string name="sources_hidden_apps_title">Εφαρμογές για τις οποίες έχει κρυφτεί η πηγή %1$s</string>
-    <string name="sources_hidden_apps_description">Σε αυτές τις εφαρμογές δεν προσφέρεται αυτή η πηγή όταν τροποποιούνται. Η ίδια η πηγή παραμένει ενεργή για όλα τα υπόλοιπα.</string>
-    <string name="sources_hidden_apps_hint">Πατήστε για να προσφερθεί ξανά αυτή η πηγή.</string>
+    <string name="sources_apps">Εφαρμογές</string>
     <string name="sources_management_prerelease_toggle">Ενημερώσεις πριν την κυκλοφορία</string>
     <string name="sources_management_prerelease_toggle_description">Λάβετε πρόωρη πρόσβαση σε νέες πειραματικές εκδόσεις τροποποιήσεων</string>
     <string name="sources_prerelease_warning_title">Ενεργοποίηση επιδιορθώσεων προ-έκδοσης;</string>

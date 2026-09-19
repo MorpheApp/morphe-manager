@@ -4,11 +4,11 @@
     <string name="home_other_apps">Alte aplicații</string>
     <string name="home_other_apps_action">Selectează alte aplicații</string>
     <string name="home_not_patched_yet">Nepatch-uit încă</string>
-    <string name="home_unpatched_version_installed">Versiune necorectată instalată</string>
+    <string name="home_unpatched_version_installed">Versiune nepatch-uită instalată</string>
     <string name="home_unpatched_badge">Nepatch-uit</string>
     <string name="home_no_patches_available">Niciun patch disponibil</string>
-    <string name="home_app_hide_title">Ascunzi aplicația?</string>
-    <string name="home_app_hide_message">Aplicația va fi ascunsă de pe ecranul principal. O vei putea restaura mai târziu folosind butonul de la capătul listei.</string>
+    <string name="home_app_hide_title">Ascunzi această aplicație?</string>
+    <string name="home_app_hide_message">Această aplicație va fi ascunsă de pe ecranul de pornire. O poți restaura mai târziu din secțiunea aplicațiilor ascunse, folosind butonul din partea de jos a listei.</string>
     <string name="home_app_will_be_hidden">Aplicația va fi ascunsă</string>
     <string name="home_app_no_hidden">Nicio aplicație ascunsă</string>
     <string name="home_app_hidden_apps_title">Aplicații ascunse</string>
@@ -28,8 +28,8 @@
     <string name="home_blocked_source_title">Sursă de patch blocată detectată</string>
     <string name="home_blocked_source_subtitle">Atingeți pentru a revizui și elimina</string>
     <string name="home_metadata_errors_title">Unele surse de patch-uri sunt indisponibile</string>
-    <string name="home_metadata_errors_subtitle">Atingeți pentru a revizui sursele</string>
-    <string name="home_outdated_manager_title">Morphe este depășit(ă)</string>
+    <string name="home_metadata_errors_subtitle">Atinge pentru a revizui sursele</string>
+    <string name="home_outdated_manager_title">Morphe este învechit</string>
     <string name="home_outdated_manager_subtitle">Unele surse de patch-uri necesită o versiune mai nouă</string>
     <string name="home_held_back_title">O sursă de patch-uri a cauzat prăbușirea Morphe</string>
     <string name="home_held_back_subtitle">A fost omisă pentru ca aplicația să poată porni. Atingeți pentru a examina.</string>
@@ -44,15 +44,15 @@
     <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
          "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
     <string name="home_update_bundle_count_with_bytes">%1$d / %2$d  ·  %3$s / %4$s MB (%5$d%%)</string>
-    <string name="home_update_success">Actualizare surse finalizată</string>
-    <string name="home_update_success_subtitle">Sursele tale sunt actualizate</string>
-    <string name="home_sources_are_loading">Se încarcă sursele…</string>
+    <string name="home_update_success">Actualizarea surselor finalizată</string>
+    <string name="home_update_success_subtitle">Sursele tale sunt la zi</string>
+    <string name="home_sources_are_loading">Sursele se încarcă, te rugăm să aștepți…</string>
     <string name="home_search_apps">Caută aplicații</string>
-    <string name="home_app_list_options_title">Sortare și filtrare</string>
+    <string name="home_app_list_options_title">Sortează și filtrează</string>
     <string name="home_app_list_options_state_description">Sortate după %1$s, filtrate după %2$s</string>
-    <string name="home_app_filter_all_description">Fiecare aplicație de pe ecranul principal</string>
-    <string name="home_app_filter_patched_description">Aplicațiile pe care le-ai modificat sau salvat cu Morphe</string>
-    <string name="home_app_filter_not_patched_description">Aplicațiile pe care nu le-ai modificat încă în Morphe</string>
+    <string name="home_app_filter_all_description">Fiecare aplicație de pe ecranul de pornire</string>
+    <string name="home_app_filter_patched_description">Aplicațiile pe care le-ai patch-uit sau salvat cu Morphe</string>
+    <string name="home_app_filter_not_patched_description">Aplicațiile pe care nu le-ai patch-uit încă în Morphe</string>
     <string name="home_app_filter_installed_description">Aplicații instalate în prezent pe acest dispozitiv</string>
     <string name="home_app_filter_uninstalled_description">Aplicații patch-uite cu Morphe care nu mai sunt pe acest dispozitiv</string>
     <string name="home_app_filter_clones">Clone</string>
@@ -70,7 +70,7 @@
     <string name="home_no_apps_subtitle">Adaugă o sursă de patch sau activează una existentă în %s</string>
     <string name="home_no_apps_search_subtitle">Nici o aplicație nu corespunde cu \"%s\"</string>
     <string name="home_all_apps_hidden_title">Toate aplicațiile sunt ascunse</string>
-    <string name="home_all_apps_hidden_subtitle">Ați ascuns toate aplicațiile de pe ecranul principal</string>
+    <string name="home_all_apps_hidden_subtitle">Ai ascuns toate aplicațiile de pe ecranul de pornire</string>
     <string name="home_no_apps_filter_title">Nicio aplicație nu corespunde acestui filtru</string>
     <string name="home_no_apps_filter_subtitle">Nimic nu corespunde cu %s</string>
     <string name="home_category_add">Adaugă categorie</string>
@@ -140,7 +140,7 @@
     <string name="sources_management_open_in_browser">Deschide în browser</string>
     <string name="sources_management_report_issue">Raportează o problemă</string>
     <string name="sources_management_failed_to_open_url">Eroarea la deschiderea URL-ului</string>
-    <string name="sources_hidden_apps">Ascuns pentru</string>
+    <string name="sources_apps">Aplicații</string>
     <string name="sources_management_prerelease_toggle">Patch-uri pre-lansare</string>
     <string name="sources_management_prerelease_toggle_description">Primești acces anticipat la versiuni noi experimentale de patch-uri</string>
     <string name="sources_prerelease_warning_title">Activezi patch-urile de pre-lansare?</string>
@@ -335,6 +335,7 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="home_low_disk_space_dialog_message">Doar %1$s GB de stocare liberă disponibilă. Aplicarea patch-urilor necesită cel puțin %2$s GB de spațiu liber pentru a funcționa corect</string>
     <string name="home_low_disk_space_dialog_warning">Continuarea ar putea duce la o eroare \"fișierul nu a fost găsit\" sau la un APK de ieșire corupt</string>
     <string name="home_simple_bundle_select_title">Selectează fișierul cu patch-uri</string>
+    <string name="home_simple_bundle_select_remember">Folosiți întotdeauna această sursă pentru această aplicație</string>
     <!-- Color picker -->
     <string name="custom_color">Culoare personalizată</string>
     <string name="hex_color">Culoare hexazecimală</string>
@@ -427,7 +428,7 @@ Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păs
     <string name="shortcut_check_updates_long">Verifică actualizările patch-ului</string>
     <string name="shortcut_patch_app">Aplică patch la %s</string>
     <!-- Home Screen - App Info Screen -->
-    <string name="home_app_info_uninstall_app_confirmation">Sigur doriți să ștergeți această aplicație?</string>
+    <string name="home_app_info_uninstall_app_confirmation">Sigur vrei să dezinstalezi această aplicație?</string>
     <string name="batch_uninstall_confirm_body">Aplicațiile selectate vor fi eliminate permanent de pe dispozitivul dumneavoastră</string>
     <string name="home_app_info_remove_app_warning">Aceasta va șterge permanent:</string>
     <string name="home_app_info_delete_item_database">Intrare în bază de date</string>
@@ -463,7 +464,7 @@ Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păs
     <string name="home_app_info_apk_size">Dimensiunea APK</string>
     <string name="home_app_info_cpu_arch">Arhitectura procesorului</string>
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">Modul radical necesită instalarea APK-ului original pe dispozitivul dvs. înainte de a pata</string>
+    <string name="root_install_apk_required">Modul de root necesită instalarea APK-ului original pe dispozitiv înainte de patch-uire</string>
     <string name="root_pre_patch_installer_title">Alege modul de aplicare a patch-ului</string>
     <string name="root_pre_patch_installer_description">Dispozitivul tău are acces root. Alege dacă această aplicație ar trebui să fie patch-uită pentru montare root sau instalare standard</string>
     <string name="root_pre_patch_installer_mount_title">Mod de montare root</string>
@@ -550,6 +551,13 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="patcher_storage_permission_open_settings">Deschide setările de stocare</string>
     <string name="patcher_storage_badge_denied">Permisiune refuzată</string>
     <string name="patcher_storage_badge_missing">Nu s-a găsit</string>
+    <string name="batch_patch_option_paths_skipped">Fișierele de opțiuni pentru patch lipsesc și vor fi omise: %1$s</string>
+    <string name="patcher_missing_patches_title">Unele patch-uri au dispărut</string>
+    <string name="patcher_missing_patches_description">Selecția salvată pentru această aplicație se referă la patch-uri pe care nicio sursă activată nu le mai oferă. Continuarea va aplica patch-uri aplicației fără ele</string>
+    <string name="patcher_missing_patches_label">Nu mai sunt oferite</string>
+    <string name="patcher_option_paths_gone_title">Fișierele de opțiuni pentru patch lipsesc</string>
+    <string name="patcher_option_paths_gone_description">Una sau mai multe opțiuni de patch indică fișiere care nu mai există. Eliminați căile pentru a aplica patch-uri fără ele sau puneți la loc fișierele și încercați din nou</string>
+    <string name="patcher_option_paths_clear">Eliminați căile și continuați</string>
     <string name="patcher_storage_permission_hint">Sugestie: Mută fișierul în /Android/data/app.morphe.manager/files/ - nu sunt necesare alte permisiuni</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Pregătire</string>
@@ -697,9 +705,9 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="settings_appearance_ui_scale_preview_title">Setare exemplu</string>
     <string name="settings_appearance_ui_scale_preview_subtitle">Textul și controalele la această scară</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
-    <string name="settings_appearance_home_screen">Ecranul principal</string>
+    <string name="settings_appearance_home_screen">Ecran de pornire</string>
     <string name="settings_appearance_greeting_phrases">Fraze de salut</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Afișează un mesaj de salut pe ecranul principal</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Afișează un mesaj de întâmpinare pe ecranul de pornire</string>
     <string name="settings_appearance_app_grouping">Gruparea aplicațiilor</string>
     <string name="settings_appearance_app_grouping_description">Afișează un comutator al ecranului principal pentru a grupa aplicațiile după sursă sau după propriile categorii, menținând selecția când este dezactivat</string>
     <string name="settings_appearance_patch_list">Listă de patch-uri</string>
@@ -818,7 +826,10 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="settings_advanced_patch_options_custom_branding_description">Schimbă numele afișat al aplicației</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Numele aplicației</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Introduceți numele personalizat</string>
+    <string name="settings_advanced_patch_options_path_gone">Acest folder nu mai poate fi citit. Alegeți-l din nou sau goliți-l, altfel aplicarea de patch-uri se va opri și va întreba despre el</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Pictogramă aplicație</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Icoana cu care este patch-uită aplicația. Este utilizată și acolo unde aplicația nu o poate schimba ulterior, cum ar fi Android Auto și lista de aplicații din setările de sistem</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Icoana personalizată a aplicației necesită un folder cu imagini de icoane</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Pictogramă personalizată</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Folder cu imagini care să fie utilizate ca pictogramă personalizată.
 
@@ -948,7 +959,7 @@ Detalii: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">Android a blocat această acțiune deoarece ar face o retrogradare a aplicației instalate.</string>
     <string name="installer_shizuku_error_signature">Android a blocat această acțiune deoarece aplicația instalată are o semnătură diferită.</string>
     <string name="installer_shizuku_error_invalid_apk">Android nu a putut citi acest fișier APK.</string>
-    <string name="installer_shizuku_error_user_profile">Sistemul a blocat această instalare. Pe Xiaomi și dispozitive similare, activează \"Instalează prin USB\" în opțiunile pentru dezvoltatori. Pe un profil de lucru, instalările pot fi restricționate de politică</string>
+    <string name="installer_shizuku_error_user_profile">Sistemul a blocat această instalare. Pe dispozitivele Xiaomi și pe cele similare, activează opțiunea „Instalează prin USB” din setările pentru dezvoltatori. În cazul unui profil de serviciu, instalările pot fi restricționate prin politici</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimizarea bateriei</string>
     <string name="settings_system_battery_optimization_description">Menține patcherul în funcțiune când aplicația este minimizată</string>

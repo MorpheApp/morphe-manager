@@ -19,13 +19,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
-import androidx.compose.foundation.selection.triStateToggleable
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -653,13 +647,13 @@ fun AppPatchSourcesDialog(
     }
 
     // Read the other way round for the list, and named the way the source list names them
-    val titles = remember(sources) { sources.associate { it.uid to it.displayTitle } }
-    val rows = remember(coveredBy, keptFrom, titles, packages) {
+    val sourcesByUid = remember(sources) { sources.associateBy { it.uid } }
+    val rows = remember(coveredBy, keptFrom, sourcesByUid, packages) {
         coveredBy.values.flatten().distinct()
             .map { uid ->
                 val reaches = packages.filter { uid in coveredBy[it].orEmpty() }
                 val held = reaches.count { uid in keptFrom[it].orEmpty() }
-                Triple(uid, titles[uid] ?: uid.toString(), held to reaches.size)
+                Triple(uid, sourcesByUid[uid]?.displayTitle ?: uid.toString(), held to reaches.size)
             }
             .sortedBy { (_, title, _) -> title.lowercase(Locale.ROOT) }
     }
@@ -724,31 +718,39 @@ fun AppPatchSourcesDialog(
                             }
                         }
                     },
-                    title = title,
-                    // Two things the box alone cannot say: that the selected apps disagree, and
-                    // that a source only has patches for some of them, which is what decides how
-                    // far a tap on it reaches
-                    description = when {
-                        state == ToggleableState.Indeterminate -> stringResource(
-                            R.string.home_app_patch_sources_mixed,
-                            (reaches - held).toString(),
-                            reaches.toString()
-                        )
-
-                        reaches < packages.size -> stringResource(
-                            R.string.home_app_patch_sources_covers,
-                            reaches.toString(),
-                            packages.size.toString()
-                        )
-
-                        else -> null
-                    },
                     role = Role.Checkbox,
                     leadingContent = { SelectionCheckIndicator(state) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .animatedListItem(this)
-                )
+                ) {
+                    IconTextRow(
+                        modifier = Modifier.weight(1f),
+                        // Drawn the way the source list draws it, so a source is recognized at a glance
+                        leadingContent = sourcesByUid[uid]?.let { source ->
+                            { BundleIcon(bundle = source, modifier = Modifier.size(40.dp)) }
+                        },
+                        title = title,
+                        // Two things the box alone cannot say: that the selected apps disagree, and
+                        // that a source only has patches for some of them, which is what decides how
+                        // far a tap on it reaches
+                        description = when {
+                            state == ToggleableState.Indeterminate -> stringResource(
+                                R.string.home_app_patch_sources_mixed,
+                                (reaches - held).toString(),
+                                reaches.toString()
+                            )
+
+                            reaches < packages.size -> stringResource(
+                                R.string.home_app_patch_sources_covers,
+                                reaches.toString(),
+                                packages.size.toString()
+                            )
+
+                            else -> null
+                        }
+                    )
+                }
             }
         }
     }

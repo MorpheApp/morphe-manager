@@ -140,10 +140,8 @@
     <string name="sources_management_open_in_browser">Abrir en el navegador</string>
     <string name="sources_management_report_issue">Informar de un problema</string>
     <string name="sources_management_failed_to_open_url">No se pudo abrir la URL</string>
-    <string name="sources_hidden_apps">Oculto para</string>
-    <string name="sources_hidden_apps_title">Aplicaciones ocultas de %1$s</string>
-    <string name="sources_hidden_apps_description">Estas aplicaciones no reciben esta fuente al parchearlas. La fuente en sí permanece activada para todo lo demás</string>
-    <string name="sources_hidden_apps_hint">Pulsa para ofrecer esta fuente de nuevo</string>
+    <string name="sources_apps">Aplicaciones</string>
+    <string name="sources_apps_title">Apps de %1$s</string>
     <string name="sources_management_prerelease_toggle">Parches pre-lanzamiento</string>
     <string name="sources_management_prerelease_toggle_description">Recibe acceso anticipado a nuevas versiones experimentales de parches</string>
     <string name="sources_prerelease_warning_title">¿Activar parches pre-lanzamiento?</string>
@@ -173,7 +171,7 @@
     <string name="sources_dialog_view_any_version">Cualquier versión</string>
     <string name="sources_dialog_view_any_package">Cualquier paquete</string>
     <string name="sources_dialog_add_source">Añadir fuente de parches</string>
-    <string name="sources_dialog_delete_confirm_message">¿Eliminar la fuente \"%s\"? Esto no se puede deshacer.</string>
+    <string name="sources_dialog_delete_confirm_message">¿Eliminar la fuente \"%s\"? Esto no se puede deshacer</string>
     <string name="sources_dialog_remote">Remota</string>
     <string name="sources_dialog_remote_url">URL de la fuente</string>
     <string name="sources_dialog_remote_url_formats_title">Ejemplos:</string>
@@ -228,15 +226,15 @@ Todo lo que añadas desde este sitio web lo haces bajo tu propia responsabilidad
     <string name="home_unverified">No verificado</string>
     <string name="home_install_verification_pending">Comprobando instalación…</string>
     <string name="home_app_info_install_unverified">Morphe no puede confirmar que la aplicación instalada corresponda a la compilación que parcheó. Vuelve a parchearla o reinstálala desde el APK guardado para restaurar su funcionalidad</string>
-    <string name="home_app_info_no_saved_apk">No hay APK guardado. Para aplicar los parches será necesario seleccionar el archivo APK nuevamente.</string>
+    <string name="home_app_info_no_saved_apk">No hay APK guardado. Para parchear será necesario volver a seleccionar el archivo APK</string>
     <string name="home_version_requires_android">Requiere Android %s o superior</string>
     <string name="home_apk_no_compatible_versions_title">Incompatible con este dispositivo</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; no tiene versiones compatibles con Android %2$s (API %3$s). Todas las versiones declaradas requieren una versión de Android superior</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Descargar el APK original</string>
     <string name="home_download_instructions_steps_title">Instrucciones:</string>
-    <string name="home_download_instructions_finding">Buscando la página de descarga...</string>
-    <string name="home_download_instructions_step1">Pulsa el botón \"%s\" de abajo</string>
+    <string name="home_download_instructions_finding">Buscando la página de descarga…</string>
+    <string name="home_download_instructions_step1">Pulsa el botón \'%s\' de abajo</string>
     <string name="home_download_instructions_step2_part1">Desplázate hacia abajo en la página web y pulsa</string>
     <string name="home_download_instructions_step2_generic">Desplázate hacia abajo en la página web y pulsa el botón de descarga</string>
     <string name="home_download_instructions_step2_variant">Desplázate hacia abajo en la página web y pulsa el botón de descarga de la &lt;b&gt;variante APK&lt;/b&gt; principal</string>
@@ -245,7 +243,7 @@ Todo lo que añadas desde este sitio web lo haces bajo tu propia responsabilidad
     <string name="home_download_instructions_step3_search">En ese sitio web, descarga el APK de la versión &lt;b&gt;%s&lt;/b&gt;, no de la más reciente</string>
     <string name="home_download_instructions_step3_search_any">En ese sitio web, descarga el APK de la aplicación. Se puede parchear &lt;b&gt;cualquier versión&lt;/b&gt;</string>
     <string name="home_download_instructions_download_button_toast">Pulsa descargar en el sitio web, no aquí 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">¡Genial! Ahora pulsa en \"Continuar\" y ve al sitio web 👆</string>
+    <string name="home_download_instructions_download_button_toast_2">¡Genial! Ahora pulsa en Continuar y ve al sitio web 👆</string>
     <string name="home_download_instructions_download_button_toast_3">La práctica hace al maestro y estás en camino 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Aún no llega… aún no llega… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Muy bien, respeto la dedicación 🫡</string>
@@ -515,7 +513,7 @@ Zona exterior (discontinua): puede quedar recortada por la máscara del launcher
     <string name="patcher_field_value_kept">conservadas</string>
     <string name="patcher_tab_logs">Registro del parcheador</string>
     <string name="patcher_tab_game">Juegos</string>
-    <string name="patcher_logs_waiting">Esperando la salida del registro...</string>
+    <string name="patcher_logs_waiting">Esperando la salida del registro…</string>
     <string name="patcher_logs_lost">La salida del registro no se conserva al reiniciar la aplicación</string>
     <string name="patcher_long_step_warning">Este paso puede tardar un tiempo. Por favor, espera…</string>
     <string name="patcher_installing_subtitle">¡A punto de despegar! 🚀</string>
@@ -581,7 +579,7 @@ Al desinstalarla se borrarán permanentemente todos los datos de la aplicación"
     <string name="patcher_memory_adjustment_description_at_minimum">El sistema detuvo el parcheador mientras se ejecutaba con un límite de memoria de %1$d MB, que ya es el más bajo disponible. Intenta parchear con menos fuentes de parches o selecciona menos parches</string>
     <string name="patcher_memory_adjustment_apply">Reducir a %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
-    <string name="patcher_notification_title">Aplicando parches...</string>
+    <string name="patcher_notification_title">Aplicando parches…</string>
     <string name="patcher_notification_text">Pulsa para volver al parcheador</string>
     <string name="patcher_stop_confirm_title">Detener parcheador</string>
     <string name="patcher_stop_confirm_description">¿Realmente quieres detener el proceso de parcheo?</string>
@@ -802,7 +800,7 @@ Los parches no se ven afectados: habilita los parches preliminares para cada fue
     <string name="settings_advanced_bytecode_mode_dialog_description">Controla cómo se procesa el bytecode durante el parcheo. Afecta a la velocidad de parcheo, el uso de memoria y el tamaño del APK de salida</string>
     <string name="settings_advanced_bytecode_mode_strip_fast_label">Rápido (Recomendado)</string>
     <string name="settings_advanced_bytecode_mode_strip_fast">Rápido</string>
-    <string name="settings_advanced_bytecode_mode_strip_fast_description">Parcheo más rápido y menor uso de memoria, a costa de un APK más grande. Recomendado para dispositivos con poca memoria RAM o más antiguos.</string>
+    <string name="settings_advanced_bytecode_mode_strip_fast_description">Parcheo más rápido y menor uso de memoria, a costa de un APK más grande. Recomendado para dispositivos con poca memoria RAM o más antiguos</string>
     <string name="settings_advanced_bytecode_mode_full">Completo</string>
     <string name="settings_advanced_bytecode_mode_full_description">Parcheo más lento, replica el comportamiento antiguo. Se recomienda solo si el modo rápido causa problemas</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -896,7 +894,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalador</string>
     <string name="installer_settings_title">Instalador predeterminado</string>
-    <string name="installer_title">Seleccionar instalador.</string>
+    <string name="installer_title">Seleccionar instalador</string>
     <string name="installer_internal_description">Utiliza el instalador de paquetes de Android</string>
     <string name="installer_play_store_description">Utiliza el instalador del sistema y establece Google Play Store como fuente de instalación</string>
     <string name="installer_root_play_store_description">Instala silenciosamente con root y establece Google Play Store como fuente de instalación</string>
@@ -907,16 +905,16 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="installer_option_none">Sin opción de recuperación</string>
     <string name="installer_none_description">No hay instalador de recuperación configurado</string>
     <string name="installer_status_requires_root">Requiere acceso root</string>
-    <string name="installer_status_not_supported">No compatible con esta acción.</string>
-    <string name="installer_status_shizuku_not_installed">Instala Shizuku o Sui para usar esta opción.</string>
-    <string name="installer_status_shizuku_not_running">Inicia Shizuku o Sui y vuelve a intentarlo.</string>
+    <string name="installer_status_not_supported">No compatible con esta acción</string>
+    <string name="installer_status_shizuku_not_installed">Instala Shizuku o Sui para usar esta opción</string>
+    <string name="installer_status_shizuku_not_running">Inicia Shizuku o Sui y vuelve a intentarlo</string>
     <string name="installer_status_shizuku_permission">Otorgar permiso a Morphe desde la aplicación Shizuku</string>
     <string name="installer_mount_warning_install">Tu instalador principal está configurado como el instalador de montaje root. Esta aplicación guardada no se instaló con montaje</string>
     <string name="mount_version_mismatch_message">La versión de la aplicación original (%2$s) no coincide con la versión de la aplicación parcheada (%1$s). Monta la versión original que coincida, luego vuelve a intentarlo</string>
     <string name="mount_stock_restore_failed_message">Android rechazó el APK original guardado. Instala la versión original correspondiente y luego intenta Montar nuevamente</string>
-    <string name="installer_status_shizuku_unsupported">La versión de Shizuku instalada no es compatible.</string>
+    <string name="installer_status_shizuku_unsupported">La versión de Shizuku instalada no es compatible</string>
     <string name="installer_action_open_shizuku">Abrir Shizuku</string>
-    <string name="installer_hint_generic">La instalación falló. Vuelve a intentarlo o cambia a un instalador diferente.</string>
+    <string name="installer_hint_generic">La instalación falló. Vuelve a intentarlo o cambia a un instalador diferente</string>
     <string name="installer_hint_conflict">Ya existe una aplicación instalada con este nombre de paquete. Desinstálala antes de continuar</string>
     <string name="installer_confirm_notification_title">Confirmar la instalación</string>
     <string name="installer_confirm_notification_text">Pulsa para terminar de instalar la aplicación parcheada</string>
@@ -925,7 +923,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="installer_external_success">%s informó de una instalación correcta</string>
     <string name="installer_unavailable_title">%s no disponible</string>
     <string name="installer_unavailable_message">Tu instalador preferido (%s) no está disponible actualmente. Puedes solucionar el problema y volver a intentarlo o utilizar el instalador estándar en su lugar</string>
-    <string name="installer_unavailable_shizuku_hint">Asegúrate de que Shizuku esté en ejecución y se haya concedido el permiso a esta aplicación.</string>
+    <string name="installer_unavailable_shizuku_hint">Asegúrate de que Shizuku esté en ejecución y se haya concedido el permiso a esta aplicación</string>
     <string name="installer_use_standard">Usar estándar</string>
     <string name="installer_play_store_warning_title">¿Instalar como Play Store?</string>
     <string name="installer_play_store_warning_message">La aplicación parcheada se registrará como instalada desde Google Play Store. Esto puede ayudar a servicios como Android Auto a reconocerla como una aplicación de Play Store, pero no está garantizado para cada aplicación o dispositivo. El comportamiento puede variar según la versión de Android, la ROM, la marca del dispositivo y las comprobaciones específicas de la aplicación.</string>
@@ -1088,7 +1086,7 @@ Detalles: %2$s"</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s a través de %2$s</string>
     <string name="settings_system_patch_selection_patches_in_sources_format">%1$s en %2$s</string>
     <string name="settings_system_patch_selection_source_format">Fuente #%s</string>
-    <string name="settings_system_patch_selection_reset_all_warning">Esto eliminará permanentemente todas las selecciones de parches guardadas para todos los paquetes y fuentes.</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Esto eliminará permanentemente todas las selecciones de parches guardadas para todos los paquetes y fuentes</string>
     <string name="settings_system_patch_selection_reset_package_warning">Esto eliminará permanentemente todas las selecciones de parches guardadas para &lt;b&gt;%s&lt;/b&gt; en todas las fuentes</string>
     <string name="settings_system_patch_selection_reset_source_warning">Esto eliminará permanentemente todas las selecciones de parches guardadas para &lt;b&gt;%1$s&lt;/b&gt; en &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Esto eliminará permanentemente todas las selecciones de parches guardadas para los paquetes seleccionados</string>
@@ -1126,7 +1124,7 @@ Detalles: %2$s"</string>
     <string name="file_picker_sort_date_asc">Fecha (más antiguo primero)</string>
     <string name="file_picker_show_hidden_files">Mostrar archivos ocultos</string>
     <!-- Settings - System Tab - About Section -->
-    <string name="settings_system_about">Acerca de Morphe</string>
+    <string name="settings_system_about">Acerca de</string>
     <string name="settings_system_share_website">Compartir sitio web</string>
     <string name="settings_system_share_website_description">Comparte el sitio web oficial de Morphe</string>
     <string name="settings_system_manager_description">Un proyecto de código abierto para parchear aplicaciones populares de Android de forma moderna y eficiente, impulsado por la comunidad con sus comentarios y contribuciones</string>
@@ -1289,26 +1287,26 @@ Detalles: %2$s"</string>
     <!-- Onboarding coach marks -->
     <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <string name="onboarding_step_of">%1$s de %2$s</string>
-    <string name="onboarding_sources_desc">Administra tus fuentes de parches. Cada fuente proporciona parches que se pueden aplicar a tus aplicaciones.</string>
+    <string name="onboarding_sources_desc">Administra tus fuentes de parches. Cada fuente proporciona parches que se pueden aplicar a tus aplicaciones</string>
     <string name="onboarding_swipe_title">Gestos de deslizamiento</string>
-    <string name="onboarding_swipe_desc">Desliza el dedo hacia la derecha en una tarjeta de aplicación para ver los parches disponibles. Desliza el dedo hacia la izquierda para ocultar la tarjeta de la pantalla de inicio.</string>
-    <string name="onboarding_settings_desc">Personaliza Morphe: apariencia, opciones avanzadas y herramientas del sistema.</string>
-    <string name="onboarding_sources_patches_desc">Tocar para ver todos los parches disponibles de esta fuente.</string>
-    <string name="onboarding_sources_version_desc">Tocar la versión para ver el registro de cambios completo de esta fuente.</string>
+    <string name="onboarding_swipe_desc">Desliza el dedo hacia la derecha en una tarjeta de aplicación para ver los parches disponibles. Desliza el dedo hacia la izquierda para ocultar la tarjeta de la pantalla de inicio</string>
+    <string name="onboarding_settings_desc">Personaliza Morphe: apariencia, opciones avanzadas y herramientas del sistema</string>
+    <string name="onboarding_sources_patches_desc">Pulsa para ver todos los parches disponibles de esta fuente</string>
+    <string name="onboarding_sources_version_desc">Pulsa la versión para ver el registro de cambios completo de esta fuente</string>
     <string name="onboarding_sources_prerelease_desc">Activa esta opción para recibir versiones pre-lanzamiento de parches de esta fuente</string>
-    <string name="onboarding_appearance_tab_desc">Personaliza el aspecto de la aplicación: tema, color de acento y fondo.</string>
-    <string name="onboarding_appearance_theme_desc">Elige entre tema claro, oscuro o del sistema. También puedes elegir un color de acento personalizado o activar Color dinámico.</string>
+    <string name="onboarding_appearance_tab_desc">Personaliza el aspecto de la aplicación: tema, color de acento y fondo</string>
+    <string name="onboarding_appearance_theme_desc">Elige entre tema claro, oscuro o del sistema. También puedes elegir un color de acento personalizado o activar Color dinámico</string>
     <string name="onboarding_expert_mode_desc">Activa el modo Experto para desbloquear la selección de parches, opciones personalizadas y otras funciones avanzadas</string>
     <!-- Translate "System" the same way as the System settings tab -->
     <string name="onboarding_system_tab_title">Pestaña del sistema</string>
-    <string name="onboarding_system_tab_desc">Administración de almacenes de claves, herramientas de importación/exportación e información de la aplicación.</string>
-    <string name="onboarding_system_installer_desc">Elige cómo se instalan las aplicaciones parcheadas: estándar, montaje root o Shizuku.</string>
+    <string name="onboarding_system_tab_desc">Administración de almacenes de claves, herramientas de importación/exportación e información de la aplicación</string>
+    <string name="onboarding_system_installer_desc">Elige cómo se instalan las aplicaciones parcheadas: estándar, montaje root o Shizuku</string>
     <string name="onboarding_system_process_runtime_desc">Ejecuta el parcheo en un proceso separado para mejorar la estabilidad y controlar el uso de la memoria. Recomendado para aplicaciones grandes</string>
-    <string name="onboarding_system_file_picker_desc">Activa esta opción para usar el explorador de archivos integrado en lugar del selector del sistema al seleccionar archivos APK o almacenes de claves.</string>
+    <string name="onboarding_system_file_picker_desc">Activa esta opción para usar el explorador de archivos integrado en lugar del selector del sistema al seleccionar archivos APK o almacenes de claves</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
     <string name="tour_prompt_title">Tour rápido de funciones</string>
     <string name="tour_prompt_desc">¿Quieres un tour rápido de las funciones clave de Morphe?</string>
     <string name="tour_prompt_confirm">Muéstrame</string>
     <string name="onboarding_restart_title">Tour de funciones</string>
-    <string name="onboarding_restart_desc">Realiza un tour guiado de las funciones clave de Morphe.</string>
+    <string name="onboarding_restart_desc">Realiza un tour guiado de las funciones clave de Morphe</string>
 </resources>

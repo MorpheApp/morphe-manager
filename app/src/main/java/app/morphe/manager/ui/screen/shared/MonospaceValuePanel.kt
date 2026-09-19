@@ -57,7 +57,8 @@ fun MonospaceValuePanel(
             shape = RoundedCornerShape(PanelCorner),
             // Softened so the panel reads as a container for the value rather than as a banner
             color = tone.container.copy(alpha = 0.3f),
-            tonalElevation = 1.dp
+            tonalElevation = 1.dp,
+            border = CardBorder.tinted(tone.accent)
         ) {
             Text(
                 text = value,

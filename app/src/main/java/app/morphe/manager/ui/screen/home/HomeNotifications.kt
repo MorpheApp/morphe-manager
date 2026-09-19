@@ -26,8 +26,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.domain.batch.BatchRunState
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.shared.Animations
+import app.morphe.manager.ui.screen.shared.CardBorder
 import app.morphe.manager.ui.screen.shared.ThemedIcon
 import app.morphe.manager.ui.viewmodel.BundleUpdateStatus
 import app.morphe.manager.util.formatMegabytes
@@ -42,6 +44,10 @@ data class AlertState(val visible: Boolean, val onShow: () -> Unit)
  */
 @Immutable
 data class RepatchAlertState(val count: Int, val visible: Boolean, val onShow: () -> Unit)
+
+/** The batch queue while it patches or holds results nobody closed yet, and the tap back to it. */
+@Immutable
+data class BatchQueueAlertState(val run: BatchRunState?, val onShow: () -> Unit)
 
 /** Transient state driving the bundle-update progress snackbar. */
 @Immutable
@@ -61,6 +67,7 @@ data class HomeNotificationsUi(
     val metadataErrors: AlertState,
     val meteredSkipped: AlertState,
     val repatchAvailable: RepatchAlertState,
+    val batchQueue: BatchQueueAlertState,
     val bundleUpdate: BundleUpdateState
 )
 
@@ -146,11 +153,54 @@ fun NotificationsOverlay(
                 modifier = Modifier.fillMaxWidth()
             )
 
+            val batchRun = notifications.batchQueue.run
+            val batchRunning = batchRun?.isActive == true
+            val batchFinished = batchRun?.hasOutcome == true
+
+            // Once its screen is gone this is the only way back to a running queue, which holds
+            // single-app patching back meanwhile, so it cannot be swiped away
+            AlertSnackbar(
+                visible = batchRunning,
+                level = AlertLevel.Info,
+                icon = Icons.Outlined.AutoFixHigh,
+                loading = true,
+                title = stringResource(R.string.batch_patch_title),
+                subtitle = stringResource(
+                    R.string.batch_patch_progress_counter,
+                    (batchRun?.processed ?: 0).toString(),
+                    (batchRun?.total ?: 0).toString()
+                ),
+                onShowDetails = notifications.batchQueue.onShow,
+                swipeEnabled = false,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            // The patched APKs of a finished run are only installable from its summary
+            val batchSucceeded = (batchRun?.succeeded ?: 0) > 0
+            AlertSnackbar(
+                visible = batchFinished,
+                level = if (batchSucceeded) AlertLevel.Success else AlertLevel.Error,
+                icon = if (batchSucceeded) Icons.Outlined.CheckCircle else Icons.Outlined.ErrorOutline,
+                title = stringResource(
+                    if (batchSucceeded) R.string.patcher_complete_title else R.string.patcher_failed_title
+                ),
+                subtitle = stringResource(
+                    R.string.batch_patch_summary,
+                    (batchRun?.succeeded ?: 0).toString(),
+                    (batchRun?.failed ?: 0).toString(),
+                    (batchRun?.skipped ?: 0).toString()
+                ),
+                onShowDetails = notifications.batchQueue.onShow,
+                modifier = Modifier.fillMaxWidth()
+            )
+
             // The badges on the cards say the same thing one app at a time. This says it once
-            // and queues every one of them, which is the part that is otherwise several taps
+            // and queues every one of them, which is the part that is otherwise several taps.
+            // While a queue is patching or awaiting review, its own alert stands in for this one
             AlertSnackbar(
                 visible = notifications.repatchAvailable.visible &&
-                        notifications.repatchAvailable.count > 0,
+                        notifications.repatchAvailable.count > 0 &&
+                        !batchRunning && !batchFinished,
                 level = AlertLevel.Info,
                 icon = Icons.Outlined.AutoFixHigh,
                 title = pluralStringResource(
@@ -201,6 +251,8 @@ private fun alertColorsFor(level: AlertLevel): AlertColorPair = when (level) {
 /**
  * Dismissible card-style alert used for the home-screen notification strip. Swipe-dismiss clears
  * the alert for the current session; it reappears next launch while [visible] stays true.
+ *
+ * @param loading Shows a spinner in place of [icon], for work that is still in progress.
  */
 @Composable
 fun AlertSnackbar(
@@ -211,7 +263,8 @@ fun AlertSnackbar(
     subtitle: String,
     onShowDetails: () -> Unit,
     modifier: Modifier = Modifier,
-    swipeEnabled: Boolean = true
+    swipeEnabled: Boolean = true,
+    loading: Boolean = false
 ) {
     val colors = alertColorsFor(level)
     val dismissed = remember { mutableStateOf(false) }
@@ -245,7 +298,8 @@ fun AlertSnackbar(
                 onClick = onShowDetails,
                 colors = CardDefaults.cardColors(containerColor = colors.container),
                 elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-                shape = RoundedCornerShape(16.dp)
+                shape = RoundedCornerShape(16.dp),
+                border = CardBorder.tinted(colors.content)
             ) {
                 Row(
                     modifier = Modifier
@@ -254,7 +308,11 @@ fun AlertSnackbar(
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    ThemedIcon(icon = icon, tint = colors.content)
+                    if (loading) {
+                        AlertSpinner(color = colors.content)
+                    } else {
+                        ThemedIcon(icon = icon, tint = colors.content)
+                    }
 
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
@@ -273,6 +331,16 @@ fun AlertSnackbar(
             }
         }
     }
+}
+
+/** Stands in for an alert's icon while the work it reports on is still running. */
+@Composable
+private fun AlertSpinner(color: Color) {
+    CircularProgressIndicator(
+        modifier = Modifier.size(24.dp),
+        strokeWidth = 2.5.dp,
+        color = color
+    )
 }
 
 /**
@@ -368,7 +436,8 @@ private fun BundleUpdateSnackbarContent(
             .padding(horizontal = 16.dp),
         colors = CardDefaults.cardColors(containerColor = containerColor),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-        shape = RoundedCornerShape(16.dp)
+        shape = RoundedCornerShape(16.dp),
+        border = CardBorder.tinted(contentColor)
     ) {
         Column {
             Row(
@@ -393,11 +462,7 @@ private fun BundleUpdateSnackbarContent(
                             icon = Icons.Outlined.Warning,
                             tint = contentColor
                         )
-                        BundleUpdateStatus.Updating -> CircularProgressIndicator(
-                            modifier = Modifier.size(24.dp),
-                            strokeWidth = 2.5.dp,
-                            color = contentColor
-                        )
+                        BundleUpdateStatus.Updating -> AlertSpinner(color = contentColor)
                     }
                 }
 

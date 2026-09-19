@@ -652,6 +652,7 @@ fun PatcherScreen(
                             progress = displayProgressAnimate,
                             patchesProgress = patchesProgress,
                             patchProgress = patcherViewModel.patchRun,
+                            packageName = patcherViewModel.packageName,
                             patcherSucceeded = patcherSucceeded,
                             miniGameState = miniGameState,
                             onCancelClick = { state.showCancelDialog = true },

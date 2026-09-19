@@ -14,6 +14,9 @@
     <string name="home_app_hidden_apps_title">Falin app</string>
     <string name="home_app_hidden_apps_hint">Banka til að fela</string>
     <string name="home_app_patch_sources_description">Óvaldar uppsprettur eru ekki boðnar þegar þessi forrit eru plöstuð, og plástrar þeirra bætast aldrei við val af sjálfu sér. Hver uppspretta er áfram valin fyrir öll önnur forrit.</string>
+    <string name="home_app_patch_sources_mixed">Í boði fyrir %1$s af %2$s</string>
+    <string name="home_app_patch_sources_covers">Hefur plástra fyrir %1$s af %2$s</string>
+    <string name="home_app_patch_sources_last">Forrit falin fyrir %1$s</string>
     <string name="android_11_bug_dialog_title">Android 11 galla</string>
     <string name="android_11_bug_dialog_description">Það er þörf á samningi um app uppsetningarheimildir til að forðast villu í Android 11 kerfinu sem mun hafa neikvæð áhrif á notendaupplifunina</string>
     <string name="deep_link_add_source_title">Bæta við gjafa</string>
@@ -137,6 +140,7 @@
     <string name="sources_management_open_in_browser">Opna í vafra</string>
     <string name="sources_management_report_issue">Nýlega uppfærð forrit fyrst</string>
     <string name="sources_management_failed_to_open_url">Ekki tókst að opna vefslóð</string>
+    <string name="sources_apps">Forrit</string>
     <string name="sources_management_prerelease_toggle">For úgáfur</string>
     <string name="sources_management_prerelease_toggle_description">Fáðu snemma aðgang að nýjum tilraunabreytingar útgáfum</string>
     <string name="sources_prerelease_warning_title">Tilkynna vandamál</string>
@@ -330,6 +334,7 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="home_low_disk_space_dialog_message">Åðeins %1$s GB af lausu geymslurými. Plástrun krefst að minnsta kosti %2$s GB af lausu plássi til að virka rétt.</string>
     <string name="home_low_disk_space_dialog_warning">Að halda áfram gæti leitt til \"skrá finnst ekki\" villu eða skemmdra APK</string>
     <string name="home_simple_bundle_select_title">Veldu breytilega uppspretta</string>
+    <string name="home_simple_bundle_select_remember">Fjarlægðu slóðirnar og haltu áfram</string>
     <!-- Color picker -->
     <string name="custom_color">Sérstakur litur</string>
     <string name="hex_color">Hex litur</string>
@@ -544,6 +549,13 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="patcher_storage_permission_open_settings">Opna geymslustillingar</string>
     <string name="patcher_storage_badge_denied">Umsókn afneitt</string>
     <string name="patcher_storage_badge_missing">Ekki fundist</string>
+    <string name="batch_patch_option_paths_skipped">Skrár fyrir plástursvalkosti vantar og þeim verður sleppt: %1$s</string>
+    <string name="patcher_missing_patches_title">Sumir plástrar eru horfnir</string>
+    <string name="patcher_missing_patches_description">Vistaða valið fyrir þetta forrit tilgreinir plástra sem engin virk uppspretta býður upp á lengur. Ef haldið er áfram verður forritið plástrað án þeirra.</string>
+    <string name="patcher_missing_patches_label">Skrár plásturvalkosta vantar.</string>
+    <string name="patcher_option_paths_gone_title">Fjarlægðu slóðirnar og haltu áfram.</string>
+    <string name="patcher_option_paths_gone_description">Forritstákn.</string>
+    <string name="patcher_option_paths_clear">Fjarlægja slóðirnar og halda áfram</string>
     <string name="patcher_storage_permission_hint">Ábending: Hreyfðu skráar til /Android/data/app.morphe.manager/files/ - þurfir ekki auka heimildir</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Búðu</string>
@@ -813,6 +825,10 @@ Plástrar verða ekki fyrir áhrifum: virkjaðu forútgáfuplástra fyrir hverja
     <string name="settings_advanced_patch_options_custom_branding_description">Breytir app sýnileikanum</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">App nafn</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Slá í sérstakt nafn</string>
+    <string name="settings_advanced_patch_options_path_gone">Ekki er lengur hægt að lesa þessa möppu. Veldu hana aftur eða hreinsaðu hana, annars stöðvast plástrunin og spyr um hana.</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon">Forritatákn</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Táknið sem forritið er plástrað með. Það er einnig notað þar sem forritið getur ekki breytt því síðar, eins og í Android Auto og forritalistanum í kerfisstillingunum.</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Sérsniðna forritatáknið þarf möppu með táknmyndum.</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Sérstakt tákn</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Mappa með myndum til að nota sem sérsniðna tákn.
 

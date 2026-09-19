@@ -144,10 +144,14 @@
     <string name="sources_management_open_in_browser">Open in browser</string>
     <string name="sources_management_report_issue">Report an issue</string>
     <string name="sources_management_failed_to_open_url">Failed to open URL</string>
-    <string name="sources_hidden_apps">Hidden for</string>
-    <string name="sources_hidden_apps_title">Apps hidden from %1$s</string>
-    <string name="sources_hidden_apps_description">These apps are not offered this source when they are patched. The source itself stays on for everything else</string>
-    <string name="sources_hidden_apps_hint">Tap to offer this source again</string>
+    <string name="sources_apps">Apps</string>
+    <string name="sources_apps_title">Apps from %1$s</string>
+    <string name="sources_apps_description">Tap an app to leave it out of this source or bring it back, or long-press to pick several. An app leaves the home screen once no source brings it</string>
+    <string name="sources_apps_brought">Brought by this source</string>
+    <string name="sources_apps_left_out">Left out of this source</string>
+    <string name="sources_apps_leave_out">Leave out</string>
+    <string name="sources_apps_leave_out_done">Left out</string>
+    <string name="sources_apps_bring_back">Bring back</string>
     <string name="sources_management_prerelease_toggle">Pre-release patches</string>
     <string name="sources_management_prerelease_toggle_description">Receives early access to new experimental patch versions</string>
     <string name="sources_prerelease_warning_title">Enable pre-release patches?</string>
@@ -192,6 +196,8 @@
     <string name="sources_dialog_local_change_file">Change file</string>
     <string name="sources_dialog_preinstalled">Pre-installed</string>
     <string name="sources_dialog_community">Community patches</string>
+    <string name="sources_dialog_choose_apps">Choose apps</string>
+    <string name="sources_dialog_choose_apps_description">Pick which of its apps to keep once the source has loaded</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Third-party patch sources</string>
     <string name="sources_dialog_community_notice_message">"Community patch sources are made and maintained by their own authors. Morphe does not review or verify third-party patches, and is not responsible for their content or for what they do on your device.

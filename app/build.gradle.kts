@@ -210,6 +210,7 @@ android {
                 // Specific META-INF junk
                 "/META-INF/DEPENDENCIES",
                 "/META-INF/INDEX.LIST",
+                "/META-INF/LICENSE.md", // TODO: remove after the next version of the patcher
 
                 // Crypto optional metadata
                 "/org/bouncycastle/pqc/**.properties",

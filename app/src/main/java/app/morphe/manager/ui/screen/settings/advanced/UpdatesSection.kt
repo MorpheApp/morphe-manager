@@ -227,7 +227,8 @@ internal fun UpdateCheckIntervalDialog(
             Surface(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(Defaults.CompactCornerRadius),
-                color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
+                color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+                border = CardBorder.tinted(MaterialTheme.colorScheme.primary)
             ) {
                 Column(
                     modifier = Modifier.padding(16.dp),

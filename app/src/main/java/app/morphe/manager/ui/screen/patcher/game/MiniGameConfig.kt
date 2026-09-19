@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.ui.screen.patcher.PatcherCardPadding
 import app.morphe.manager.ui.screen.shared.GradientCircleIcon
 import app.morphe.manager.ui.screen.shared.Animations
 import app.morphe.manager.ui.screen.shared.SurfaceCard
@@ -234,9 +235,9 @@ internal fun GamePickerContent(
     LazyVerticalGrid(
         columns = GridCells.Adaptive(GamePickerMinCardWidth),
         modifier = modifier,
-        contentPadding = PaddingValues(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        contentPadding = PaddingValues(PatcherCardPadding),
+        horizontalArrangement = Arrangement.spacedBy(PatcherCardPadding),
+        verticalArrangement = Arrangement.spacedBy(PatcherCardPadding)
     ) {
         items(MiniGame.entries, key = { it.name }) { game ->
             GamePickerGridCard(
@@ -260,13 +261,14 @@ private fun GamePickerGridCard(
 ) {
     SurfaceCard(
         onClick = onClick,
-        cornerRadius = Defaults.SectionCornerRadius,
+        cornerRadius = Defaults.CompactCornerRadius,
+        borderWidth = 1.dp,
         modifier = modifier
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 8.dp, vertical = 14.dp),
+                .padding(PatcherCardPadding),
             horizontalAlignment = Alignment.CenterHorizontally,
             // Anchored to the top rather than centered, so the icons line up across a row
             // whether a card's subtitle takes one line or two
@@ -315,9 +317,9 @@ internal fun MiniGameContent(
             else -> {
                 val activeState = state.stateOf(selected)
                 Column(
-                    modifier = Modifier.fillMaxSize().padding(8.dp),
+                    modifier = Modifier.fillMaxSize().padding(PatcherCardPadding),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    verticalArrangement = Arrangement.spacedBy(PatcherCardPadding)
                 ) {
                     GameScoreRow(
                         score = activeState.score,

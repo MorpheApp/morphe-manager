@@ -140,7 +140,7 @@
     <string name="sources_management_open_in_browser">Отвори у прегледачу</string>
     <string name="sources_management_report_issue">Пријави проблем</string>
     <string name="sources_management_failed_to_open_url">Неуспешно отварање URL адресе</string>
-    <string name="sources_hidden_apps">Скривено за</string>
+    <string name="sources_apps">Апликације</string>
     <string name="sources_management_prerelease_toggle">Предвершајуће закрпе</string>
     <string name="sources_management_prerelease_toggle_description">Примање ране приступности новим експерименталним верзијама пача</string>
     <string name="sources_prerelease_warning_title">Омогући пре-издање закрпе?</string>
@@ -335,6 +335,7 @@
     <string name="home_low_disk_space_dialog_message">Доступно је само %1$s GB слободног простора. Патчирање захтева најмање %2$s GB слободног простора да би исправно функционисало.</string>
     <string name="home_low_disk_space_dialog_warning">Настављање може довести до грешке \"фајл није пронађен\" или до неисправног APK излаза</string>
     <string name="home_simple_bundle_select_title">Изаберите извор закрпе</string>
+    <string name="home_simple_bundle_select_remember">Недостају датотеке са опцијама закрпе</string>
     <!-- Color picker -->
     <string name="custom_color">Prilagođena boja</string>
     <string name="hex_color">Boja u heksadecimalnom formatu</string>
@@ -550,6 +551,13 @@
     <string name="patcher_storage_permission_open_settings">Отворите поставке складиштења</string>
     <string name="patcher_storage_badge_denied">Дозвола одбијена</string>
     <string name="patcher_storage_badge_missing">Непознато</string>
+    <string name="batch_patch_option_paths_skipped">Датотеке са опцијама закрпе недостају и биће прескочене: %1$s</string>
+    <string name="patcher_missing_patches_title">Неки пачеви су нестали</string>
+    <string name="patcher_missing_patches_description">Сачувани избор за ову апликацију наводи закрпе које ниједан укључени извор више не нуди. Ако се настави, апликација ће бити закрпљена без њих.</string>
+    <string name="patcher_missing_patches_label">Више се не нуде</string>
+    <string name="patcher_option_paths_gone_title">Недостају датотеке са опцијама закрпе.</string>
+    <string name="patcher_option_paths_gone_description">Једна или више опција закрпе указује на датотеке којих више нема. Уклоните путање да бисте закрпили без њих, или вратите датотеке и покушајте поново.</string>
+    <string name="patcher_option_paths_clear">Уклоните путање и наставите.</string>
     <string name="patcher_storage_permission_hint">Совет: Преместите датотеке у /Android/data/app.morphe.manager/files/ - није потребна додатна дозвола</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Припрема</string>
@@ -819,7 +827,10 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="settings_advanced_patch_options_custom_branding_description">Мења назив апликације</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Назив апликације</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Унесите прилагођени назив</string>
+    <string name="settings_advanced_patch_options_path_gone">Ова фасцикла се више не може читати. Поново је изаберите или је обришите, у супротном ће се закрпљивање зауставити и поставиће питање о томе.</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Иконица апликације</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Икона којом се апликација закрпљује. Такође се користи тамо где је апликација касније не може да промени, као што су Android Auto и списак апликација у системским подешавањима.</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Прилагођена икона апликације захтева фасциклу са сликама икона.</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Прилагођени икон</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Фајл са сликама које ће се користити као прилагођена икона.
 

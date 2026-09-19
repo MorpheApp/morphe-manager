@@ -396,7 +396,7 @@ class BatchPatchCoordinator(
      */
     private suspend fun announceCompletion() {
         val state = _state.value ?: return
-        if (state.succeeded == 0 && state.failed == 0) return
+        if (!state.hasOutcome) return
 
         // The summary screen already says all of this when the user is watching it, the same
         // rule a single run follows. The tone still plays, it is what draws them back

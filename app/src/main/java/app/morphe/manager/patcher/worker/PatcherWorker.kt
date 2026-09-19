@@ -178,7 +178,17 @@ class PatcherWorker(
                 )
             )
             .setContentText(applicationContext.getText(R.string.patcher_notification_text))
-            .setSmallIcon(Icon.createWithResource(applicationContext, R.drawable.ic_notification))
+            .setSmallIcon(
+                Icon.createWithResource(
+                    applicationContext,
+                    if (succeeded) R.drawable.ic_notification_done else R.drawable.ic_notification_failed
+                )
+            )
+            .setColor(
+                applicationContext.getColor(
+                    if (succeeded) R.color.notification_success else R.color.notification_failure
+                )
+            )
             .setContentIntent(mainActivityPendingIntent())
             .setAutoCancel(true)
             .build()

@@ -22,6 +22,15 @@ sealed class PatchBundleInfo {
     abstract val patches: List<PatchInfo>
 
     /**
+     * The apps named by this bundle's own patches, which are the ones it puts on the home screen.
+     * Universal patches name none and put nothing there.
+     */
+    fun listedApps(): Set<String> =
+        patches.flatMapTo(mutableSetOf()) { patch ->
+            patch.compatiblePackages.orEmpty().mapNotNull { it.packageName }
+        }
+
+    /**
      * Information about a bundle and all the patches it contains.
      *
      * @see [PatchBundleInfo]

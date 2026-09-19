@@ -55,6 +55,7 @@ fun BundleInfoCard(
         },
         shape = RoundedCornerShape(Defaults.CompactCornerRadius),
         color = containerColor,
+        border = CardBorder.neutral,
         onClick = onClick,
         enabled = enabled
     ) {

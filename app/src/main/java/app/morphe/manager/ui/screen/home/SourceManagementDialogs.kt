@@ -32,6 +32,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -61,6 +62,7 @@ import compose.icons.fontawesomeicons.Brands
 import compose.icons.fontawesomeicons.brands.Github
 import compose.icons.fontawesomeicons.brands.Gitlab
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -76,8 +78,8 @@ private val ColorValid = Color(0xFF4CAF50)
 @Composable
 fun AddSourceDialog(
     onDismiss: () -> Unit,
-    onLocalSubmit: () -> Unit,
-    onRemoteSubmit: (url: String) -> Unit,
+    onLocalSubmit: (chooseApps: Boolean) -> Unit,
+    onRemoteSubmit: (url: String, chooseApps: Boolean) -> Unit,
     onLocalPick: () -> Unit,
     selectedLocalPath: String?,
     selectedLocalUri: Uri?,
@@ -85,6 +87,7 @@ fun AddSourceDialog(
 ) {
     var remoteUrl by rememberSaveable { mutableStateOf("") }
     var selectedTab by rememberSaveable { mutableIntStateOf(0) } // 0 = Remote, 1 = Local
+    var chooseApps by rememberSaveable { mutableStateOf(false) }
 
     val urlValidation = rememberUrlValidation(remoteUrl, onValidateUrl)
     val isRemoteValid = remoteUrl.isNotBlank() && urlValidation != FieldValidation.Invalid
@@ -134,8 +137,8 @@ fun AddSourceDialog(
                     primaryText = stringResource(R.string.add),
                     onPrimaryClick = {
                         when (selectedTab) {
-                            0 -> if (isRemoteValid) onRemoteSubmit(normalizeUrl(remoteUrl))
-                            1 -> if (isLocalValid) onLocalSubmit()
+                            0 -> if (isRemoteValid) onRemoteSubmit(normalizeUrl(remoteUrl), chooseApps)
+                            1 -> if (isLocalValid) onLocalSubmit(chooseApps)
                         }
                     },
                     primaryEnabled = if (selectedTab == 0) isRemoteValid else isLocalValid,
@@ -184,8 +187,35 @@ fun AddSourceDialog(
                     )
                 }
             }
+
+            // What a source holds is only known once it has loaded, so this asks now and the
+            // list opens then
+            ChooseAppsToggle(
+                checked = chooseApps,
+                onCheckedChange = { chooseApps = it }
+            )
         }
     }
+}
+
+/**
+ * Asks, while a source is being added, whether to open [SourceAppsDialog] once it has loaded.
+ */
+@Composable
+internal fun ChooseAppsToggle(
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    SettingsSwitchItem(
+        checked = checked,
+        onToggle = { onCheckedChange(!checked) },
+        icon = Icons.Outlined.Apps,
+        title = stringResource(R.string.sources_dialog_choose_apps),
+        subtitle = stringResource(R.string.sources_dialog_choose_apps_description),
+        showBorder = true,
+        modifier = modifier
+    )
 }
 
 private enum class FieldValidation { Empty, Valid, Invalid }
@@ -1371,60 +1401,126 @@ private fun normalizeUrl(url: String): String {
 }
 
 /**
- * The apps kept from one source, and the way back for each of them.
+ * Which of the apps a source brings the user wants from it.
  *
- * An app is kept from a source from wherever that app is being patched, which is a place only one
- * of the two modes reaches. This is the other end of the same decision: it belongs to the source
- * and reads the same in either mode. It is also where an exclusion made in simple mode can be
- * lifted, without resetting everything else the app was configured with.
+ * A source with hundreds of apps is usually added for one or two of them. An app left out here is
+ * kept from this source, the same exclusion the per-app source choice records: the source is no
+ * longer offered when the app is patched, and no longer brings it to the home screen. An app
+ * another source still brings stays there.
+ *
+ * Laid out like the hidden apps list: a tap answers for one app, and a long press picks several
+ * for the bar to answer at once, so the few wanted out of hundreds take a select all and a few taps.
  */
 @Composable
-fun BundleHiddenAppsDialog(
+fun SourceAppsDialog(
     onDismissRequest: () -> Unit,
     src: PatchBundleSource
 ) {
     val patchBundleRepository: PatchBundleRepository = koinInject()
     val sourceMuteRepository: SourceMuteRepository = koinInject()
     val scope = rememberCoroutineScope()
+    val itemSpacing = rememberWindowSize().itemSpacing
 
-    val mutedApps by sourceMuteRepository.mutedApps.collectAsStateWithLifecycle(emptyMap())
+    // Every source, so a disabled one still lists what it would bring once switched back on
+    val bundleInfo by patchBundleRepository.allBundlesInfoFlow.collectAsStateWithLifecycle(emptyMap())
     val appMetadata by patchBundleRepository.allAppMetadata.collectAsStateWithLifecycle()
+    val keptFrom by sourceMuteRepository.mutedSources.collectAsStateWithLifecycle(emptyMap())
 
-    // Sorted by what the user reads rather than by package name, and resolved against every
-    // source's metadata: the app is kept from this one, so its name is known to the others
-    val hiddenApps = remember(mutedApps, appMetadata, src.uid) {
-        mutedApps[src.uid].orEmpty()
+    val apps = remember(bundleInfo, appMetadata, src.uid) {
+        bundleInfo[src.uid]?.listedApps().orEmpty()
             .map { packageName -> packageName to (appMetadata[packageName]?.displayName ?: packageName) }
             .sortedBy { (_, label) -> label.lowercase(Locale.ROOT) }
     }
 
-    // The last one taken back closes this, since a source nothing is kept from has nothing to
-    // list. Armed only once the list has actually arrived: the flow starts empty, and an empty
-    // first frame is what loading looks like rather than what an emptied list looks like
-    var listArrived by remember { mutableStateOf(false) }
-    LaunchedEffect(hiddenApps.isEmpty()) {
-        if (hiddenApps.isNotEmpty()) {
-            listArrived = true
-        } else if (listArrived) {
-            onDismissRequest()
+    val search = rememberSearchFieldState(searchable = apps.size > 1)
+    val filtered = remember(apps, search.query) {
+        if (search.query.isBlank()) apps
+        else apps.filter { (packageName, label) ->
+            label.contains(search.query, ignoreCase = true) ||
+                    packageName.contains(search.query, ignoreCase = true)
+        }
+    }
+
+    var isMultiSelectMode by remember { mutableStateOf(false) }
+    val selection = rememberSelectionState<String>()
+    fun exitMultiSelect() {
+        isMultiSelectMode = false
+        selection.clear()
+    }
+
+    // Written in full even if the dialog is gone before it finishes, so a list never lands half
+    // applied
+    fun bring(packageNames: Collection<String>, brought: Boolean) {
+        scope.launch {
+            withContext(NonCancellable) {
+                if (brought) sourceMuteRepository.unmuteApps(src.uid, packageNames)
+                else sourceMuteRepository.muteApps(src.uid, packageNames)
+            }
         }
     }
 
     AppDialog(
-        onDismissRequest = onDismissRequest,
-        title = stringResource(R.string.sources_hidden_apps_title, src.displayTitle),
-        footer = {
-            AppDialogOutlinedButton(
-                text = stringResource(R.string.close),
-                onClick = onDismissRequest,
-                modifier = Modifier.fillMaxWidth()
+        onDismissRequest = { if (isMultiSelectMode) exitMultiSelect() else onDismissRequest() },
+        dismissOnClickOutside = !isMultiSelectMode,
+        title = stringResource(R.string.sources_apps_title, src.displayTitle),
+        titleTrailingContent = {
+            TitleAction(
+                icon = if (search.visible) Icons.Outlined.SearchOff else Icons.Outlined.Search,
+                contentDescription = stringResource(R.string.search),
+                onClick = { search.toggle() },
+                style = TitleActionStyle.Toggle,
+                active = search.visible,
+                enabled = apps.size > 1
             )
+        },
+        footer = {
+            if (isMultiSelectMode) {
+                MultiSelectBar(
+                    selectedCount = selection.size,
+                    // Scoped to the search so "select all" never reaches apps out of view
+                    totalCount = filtered.size,
+                    visible = true,
+                    showReorderButton = false,
+                    onSelectAll = { selection.setAll(filtered.map { (packageName, _) -> packageName }) },
+                    onDeselectAll = { selection.clear() },
+                    onAction = {
+                        bring(selection.keys.toList(), brought = false)
+                        exitMultiSelect()
+                    },
+                    actionIcon = Icons.Outlined.VisibilityOff,
+                    actionContentDescription = stringResource(R.string.sources_apps_leave_out),
+                    actionDoneMessage = stringResource(R.string.sources_apps_leave_out_done),
+                    onContextAction = {
+                        bring(selection.keys.toList(), brought = true)
+                        exitMultiSelect()
+                    },
+                    contextActionIcon = Icons.Outlined.Visibility,
+                    contextActionContentDescription = stringResource(R.string.sources_apps_bring_back),
+                    contextActionColors = IconButtonDefaults.filledTonalIconButtonColors(
+                        containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onTertiaryContainer
+                    ),
+                    onCancel = ::exitMultiSelect,
+                    onEnterReorder = {},
+                    onSaveOrder = {},
+                    onResetOrder = {},
+                    onCancelReorder = {}
+                )
+            } else {
+                AppDialogOutlinedButton(
+                    text = stringResource(R.string.close),
+                    onClick = onDismissRequest,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         },
         padding = DialogPadding.Compact,
         scrollable = false
     ) {
+        SearchFieldBackHandler(search)
+
         Text(
-            text = stringResource(R.string.sources_hidden_apps_description),
+            text = stringResource(R.string.sources_apps_description),
             style = MaterialTheme.typography.bodyMedium,
             color = LocalDialogSecondaryTextColor.current,
             textAlign = TextAlign.Center,
@@ -1434,33 +1530,81 @@ fun BundleHiddenAppsDialog(
         )
 
         val listState = rememberLazyListState()
-        LazyColumn(
-            state = listState,
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
-        ) {
-            items(items = hiddenApps, key = { (packageName, _) -> packageName }) { (packageName, label) ->
-                val gradientColors = appMetadata[packageName]?.gradientColors
-                    ?: AppCardColorDefaults.defaultGradientColors
-
-                AppCardLayout(
-                    gradientColors = gradientColors,
-                    onClick = {
-                        scope.launch { sourceMuteRepository.unmute(packageName, src.uid) }
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .animatedListItem(this)
-                ) {
-                    AppCardContent(
-                        packageName = packageName,
-                        packageInfo = null,
-                        displayName = label,
-                        subtitle = stringResource(R.string.sources_hidden_apps_hint),
-                        gradientColors = gradientColors
+        Box(modifier = Modifier.fillMaxWidth()) {
+            LazyColumn(
+                state = listState,
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(itemSpacing)
+            ) {
+                stickyHeader(key = "search") {
+                    AppDialogSearchHeader(
+                        visible = search.visible,
+                        value = search.query,
+                        onValueChange = { search.query = it },
+                        label = stringResource(R.string.home_search_apps)
                     )
                 }
+
+                if (filtered.isEmpty() && search.query.isNotBlank()) {
+                    item(key = "empty_state") {
+                        EmptyState(
+                            message = stringResource(R.string.search_no_results),
+                            icon = Icons.Outlined.SearchOff,
+                            modifier = Modifier.animateItem()
+                        )
+                    }
+                }
+
+                items(items = filtered, key = { (packageName, _) -> packageName }) { (packageName, label) ->
+                    val brought = src.uid !in keptFrom[packageName].orEmpty()
+                    val gradientColors = appMetadata[packageName]?.gradientColors
+                        ?: AppCardColorDefaults.defaultGradientColors
+
+                    SelectableCard(
+                        modifier = Modifier
+                            .animatedListItem(this)
+                            // An app left out reads as one this source no longer brings, the
+                            // same way the selection dims what it leaves unpicked
+                            .alpha(if (brought || isMultiSelectMode) 1f else 0.55f),
+                        isSelected = selection.contains(packageName),
+                        isSelectionMode = isMultiSelectMode
+                    ) {
+                        AppCardLayout(
+                            gradientColors = gradientColors,
+                            onClick = {
+                                if (isMultiSelectMode) selection.toggle(packageName)
+                                else bring(listOf(packageName), brought = !brought)
+                            },
+                            onLongClick = {
+                                isMultiSelectMode = true
+                                selection.toggle(packageName)
+                            },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            AppCardContent(
+                                packageName = packageName,
+                                packageInfo = null,
+                                displayName = label,
+                                subtitle = stringResource(
+                                    if (brought) R.string.sources_apps_brought
+                                    else R.string.sources_apps_left_out
+                                ),
+                                gradientColors = gradientColors
+                            )
+                        }
+                    }
+                }
             }
+
+            ListScrollbar(
+                listState = listState,
+                modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+            )
+
+            ScrollToTopButton(
+                listState = listState,
+                modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
+            )
         }
     }
 }

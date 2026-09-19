@@ -140,7 +140,14 @@
     <string name="sources_management_open_in_browser">Maak oop in blaaier</string>
     <string name="sources_management_report_issue">Rapporteer \'n probleem</string>
     <string name="sources_management_failed_to_open_url">Mislukking om URL oop te maak</string>
-    <string name="sources_hidden_apps">Versteek vir</string>
+    <string name="sources_apps">Toepassings</string>
+    <string name="sources_apps_title">Toepassings van %1$s</string>
+    <string name="sources_apps_description">Raak \'n toepassing aan om dit uit hierdie bron te los of terug te bring, of druk lank om verskeie te kies. \'n Toepassing verlaat die tuisskerm sodra geen bron dit bring nie.</string>
+    <string name="sources_apps_brought">Deur hierdie bron gebring</string>
+    <string name="sources_apps_left_out">Uitgelaat uit hierdie bron</string>
+    <string name="sources_apps_leave_out">Los uit</string>
+    <string name="sources_apps_leave_out_done">Uitgelaat</string>
+    <string name="sources_apps_bring_back">Bring terug</string>
     <string name="sources_management_prerelease_toggle">Voorvrystellings-veranderinge</string>
     <string name="sources_management_prerelease_toggle_description">Ontvang vroegtydige toegang tot nuwe eksperimentele weergawe-opdaterings</string>
     <string name="sources_prerelease_warning_title">Aktiveer pre-release patches?</string>
@@ -184,6 +191,8 @@
     <string name="sources_dialog_local_change_file">Verander vyl</string>
     <string name="sources_dialog_preinstalled">Voor geïnstalleer</string>
     <string name="sources_dialog_community">Gemeenskapspleisters</string>
+    <string name="sources_dialog_choose_apps">Kies toepassings</string>
+    <string name="sources_dialog_choose_apps_description">Kies watter van sy toepassings om te hou sodra die bron gelaai is.</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Derdeparty-pleisterbronne</string>
     <string name="sources_dialog_community_notice_message">"Gemeenskapspleisterbronne word gemaak en onderhou deur hul eie outeurs. Morphe beoordeel of verifieer nie derdeparty-pleisters nie, en is nie verantwoordelik vir hul inhoud of vir wat hulle op jou toestel doen nie.
@@ -335,6 +344,7 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="home_low_disk_space_dialog_message">Slegs %1$s GB vrye bergingspasie is beskikbaar. Om te patch vereis ten minste %2$s GB vrye spasie om korrek te werk.</string>
     <string name="home_low_disk_space_dialog_warning">Voortgaan kan \'n \"lêer nie gevind\"-fout of \'n beskadigde APK tot gevolg hê</string>
     <string name="home_simple_bundle_select_title">Kies verandering oorsprong bylaag</string>
+    <string name="home_simple_bundle_select_remember">Gebruik altyd hierdie bron vir hierdie app</string>
     <!-- Color picker -->
     <string name="custom_color">Pasgemaakte kleur</string>
     <string name="hex_color">Seshoekskleur</string>
@@ -550,6 +560,13 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="patcher_storage_permission_open_settings">Open berginginstellings</string>
     <string name="patcher_storage_badge_denied">Toestemming geweier</string>
     <string name="patcher_storage_badge_missing">Nie gevind nie</string>
+    <string name="batch_patch_option_paths_skipped">Patch-opsielêers ontbreek en sal oorgeslaan word: %1$s</string>
+    <string name="patcher_missing_patches_title">Sommige patches is weg</string>
+    <string name="patcher_missing_patches_description">Die gestoorde keuse vir hierdie app noem patches wat nie meer deur enige geaktiveerde bron aangebied word nie. Deur voort te gaan, word die app sonder hulle gepatch</string>
+    <string name="patcher_missing_patches_label">Nie meer aangebied nie</string>
+    <string name="patcher_option_paths_gone_title">Patch-opsielêers ontbreek</string>
+    <string name="patcher_option_paths_gone_description">Een of meer patch-opsies wys na lêers wat nie meer bestaan nie. Verwyder die paaie om sonder hulle te patch, of sit die lêers terug en probeer weer.</string>
+    <string name="patcher_option_paths_clear">Verwyder die paaie en gaan voort</string>
     <string name="patcher_storage_permission_hint">Wenke: Skuif lêers na /Android/data/app.morphe.manager/files/ - geen ekstra toestemmings benodig nie</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Voorbereiding</string>
@@ -819,7 +836,10 @@ Patches word nie beïnvloed nie: aktiveer voorafvrystelling-patches vir elke bro
     <string name="settings_advanced_patch_options_custom_branding_description">Verander die vertoonnaam van die toepassing</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">App naam</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Gee pasgemaakte naam in</string>
+    <string name="settings_advanced_patch_options_path_gone">Hierdie vouer kan nie meer gelees word nie. Kies dit weer of maak dit skoon, anders sal die patchproses stop en daaroor vra.</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Program ikoon</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Die ikoon waarmee die app gepatch word. Dit word ook gebruik waar die app dit later nie kan verander nie, soos in Android Auto en in die app-lys van die stelselinstellings.</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Die pasgemaakte app-ikoon benodig \'n vouer met ikoonbeelde.</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Pasgemaakte ikoon</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"'N vouer met beelde om as 'n persoonlike ikoon te gebruik.
 

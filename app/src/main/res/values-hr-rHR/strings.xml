@@ -14,6 +14,9 @@
     <string name="home_app_hidden_apps_title">Skrivene aplikacije</string>
     <string name="home_app_hidden_apps_hint">Dodirnite za otkrivanje</string>
     <string name="home_app_patch_sources_description">Izvori koji ostanu neoznačeni ne nude se kada se ove aplikacije zakrpaju, a njihove zakrpe nikada same ne ulaze u odabir. Svaki izvor ostaje uključen za sve ostale aplikacije</string>
+    <string name="home_app_patch_sources_mixed">Ponuđeno za %1$s od %2$s</string>
+    <string name="home_app_patch_sources_covers">Ima zakrpa za %1$s od %2$s</string>
+    <string name="home_app_patch_sources_last">Svakoj aplikaciji je preostao jedan izvor za zakrpljivanje</string>
     <string name="android_11_bug_dialog_title">Android 11 bug</string>
     <string name="android_11_bug_dialog_description">Dopuštenje za instalaciju aplikacije mora se dati unaprijed kako bi se izbjegla greška u sustavu Android 11 koja će negativno utjecati na korisničko iskustvo</string>
     <string name="deep_link_add_source_title">Dodajte izvor</string>
@@ -137,6 +140,14 @@
     <string name="sources_management_open_in_browser">Otvori u pregledniku</string>
     <string name="sources_management_report_issue">Prijavite problem</string>
     <string name="sources_management_failed_to_open_url">Nije moguće otvoriti poveznicu</string>
+    <string name="sources_apps">Aplikacije</string>
+    <string name="sources_apps_title">Aplikacije iz %1$s</string>
+    <string name="sources_apps_description">Dodirnite aplikaciju da biste je izuzeli iz ovog izvora ili vratili, ili je dugo pritisnite da biste odabrali nekoliko njih. Aplikacija napušta početni zaslon kada ju nijedan izvor više ne donosi.</string>
+    <string name="sources_apps_brought">Donesene iz ovog izvora</string>
+    <string name="sources_apps_left_out">Izuzete iz ovog izvora</string>
+    <string name="sources_apps_leave_out">Izuzmi</string>
+    <string name="sources_apps_leave_out_done">Izuzeto</string>
+    <string name="sources_apps_bring_back">Vrati</string>
     <string name="sources_management_prerelease_toggle">Pre-release patchevi</string>
     <string name="sources_management_prerelease_toggle_description">Primite rani pristup novoj verziji eksperimentalnih patcheva</string>
     <string name="sources_prerelease_warning_title">Omogućiti predizdanja patcheva?</string>
@@ -181,6 +192,8 @@ Ovaj izvor se nalazi na predizdanjima patcheva. Patchanje može propasti ili se 
     <string name="sources_dialog_local_change_file">Promijeni datoteku</string>
     <string name="sources_dialog_preinstalled">Unaprijed instalirano</string>
     <string name="sources_dialog_community">Patchevi zajednice</string>
+    <string name="sources_dialog_choose_apps">Odabir aplikacija</string>
+    <string name="sources_dialog_choose_apps_description">Odaberite koje od njegovih aplikacija želite zadržati nakon što se izvor učita.</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Izvori patcheva trećih strana</string>
     <string name="sources_dialog_community_notice_message">"Izvorne kodove patcheva zajednice izrađuju i održavaju njihovi vlastiti autori. Morphe ne pregledava niti provjerava patcheve trećih strana te nije odgovoran za njihov sadržaj ili za ono što rade na vašem uređaju.
@@ -334,6 +347,7 @@ Za najbolje rezultate,  patchanje ove aplikacija preporučuje &lt;b&gt;cijeli AP
     <string name="home_low_disk_space_dialog_message">Dostupno je samo %1$s GB slobodnog prostora. Za ispravan rad patchanja potrebno je najmanje %2$s GB slobodnog prostora</string>
     <string name="home_low_disk_space_dialog_warning">Nastavak može rezultirati greškom \"datoteka nije pronađena\" ili oštećenom izlaznom aplikacijom</string>
     <string name="home_simple_bundle_select_title">Odaberite izvor patcha</string>
+    <string name="home_simple_bundle_select_remember">Uvijek koristi ovaj izvor za ovu aplikaciju</string>
     <!-- Color picker -->
     <string name="custom_color">Prilagođena boja</string>
     <string name="hex_color">Hex boja</string>
@@ -550,6 +564,13 @@ Deinstaliranje će trajno izbrisati sve podatke aplikacije"</string>
     <string name="patcher_storage_permission_open_settings">Otvori postavke pohrane</string>
     <string name="patcher_storage_badge_denied">Dozvola odbijena</string>
     <string name="patcher_storage_badge_missing">Nije pronađeno</string>
+    <string name="batch_patch_option_paths_skipped">Datoteke opcija zakrpljivanja nedostaju i bit će preskočene: %1$s</string>
+    <string name="patcher_missing_patches_title">Neke zakrpe nedostaju</string>
+    <string name="patcher_missing_patches_description">Spremljeni odabir za ovu aplikaciju navodi zakrpe koje nijedan omogućen izvor više ne nudi. Nastavkom se aplikacija zakrpljuje bez njih</string>
+    <string name="patcher_missing_patches_label">Više nije ponuđeno</string>
+    <string name="patcher_option_paths_gone_title">Datoteke opcija zakrpljivanja nedostaju</string>
+    <string name="patcher_option_paths_gone_description">Jedna ili više opcija zakrpljivanja upućuju na datoteke koje više nisu tu. Uklonite putanje kako biste zakrplili bez njih ili vratite datoteke i pokušajte ponovno</string>
+    <string name="patcher_option_paths_clear">Uklonite putanje i nastavite</string>
     <string name="patcher_storage_permission_hint">Savjet: Premjestite datoteke u /Android/data/app.morphe.manager/files/ - nisu potrebna dodatna dopuštenja</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Priprema</string>
@@ -818,7 +839,10 @@ Patchevi nisu pogođeni: omogućite predizdanja patcheva za svaki izvor na popis
     <string name="settings_advanced_patch_options_custom_branding_description">Promijeni naziv aplikacije</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Naziv aplikacije</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Unesite prilagođeni naziv</string>
+    <string name="settings_advanced_patch_options_path_gone">Ovaj se folder više ne može pročitati. Odaberite ga ponovno ili ga očistite, inače će se zakrpljivanje zaustaviti i tražiti informacije o tome</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Ikona aplikacije</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Ikona kojom je aplikacija zakrpljena. Koristi se i tamo gdje aplikacija kasnije ne može promijeniti ikonu, kao što su Android Auto i popis aplikacija u sistemskim postavkama</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Prilagođena ikona aplikacije zahtijeva mapu s slikama ikona</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Prilagođena ikona</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Mapa sa slikama koje će se koristiti kao prilagođena ikona.
 

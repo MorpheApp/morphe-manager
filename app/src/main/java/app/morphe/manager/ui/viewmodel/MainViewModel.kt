@@ -146,7 +146,7 @@ class MainViewModel(
      */
     fun onShowBatchResult() {
         pendingBatchResult = false
-        val targets = batchPatchCoordinator.state.value?.items?.map { it.target }
+        val targets = batchPatchCoordinator.state.value?.targets
         if (targets.isNullOrEmpty()) return
         approvedBatchPatch = BatchPatchRequest(targets, callerPackage = null)
     }

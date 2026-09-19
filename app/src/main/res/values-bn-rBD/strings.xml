@@ -140,10 +140,14 @@
     <string name="sources_management_open_in_browser">ব্রাউজারে ওপেন করুন</string>
     <string name="sources_management_report_issue">একটি সমস্যা রিপোর্ট করুন</string>
     <string name="sources_management_failed_to_open_url">URL খুলতে ব্যর্থ হয়েছে</string>
-    <string name="sources_hidden_apps">এর জন্য লুকানো</string>
-    <string name="sources_hidden_apps_title">%1$s থেকে লুকানো অ্যাপগুলো</string>
-    <string name="sources_hidden_apps_description">এই অ্যাপগুলো প্যাচ করা হলে এই সোর্স থেকে অফার করা হয় না। সোর্সটি নিজে বাকি সবকিছুর জন্য চালু থাকে</string>
-    <string name="sources_hidden_apps_hint">এই সোর্সটি আবার অফার করতে ট্যাপ করুন</string>
+    <string name="sources_apps">অ্যাপস</string>
+    <string name="sources_apps_title">%1$s থেকে অ্যাপসমূহ</string>
+    <string name="sources_apps_description">কোনো অ্যাপকে এই সোর্স থেকে বাদ দিতে বা ফিরিয়ে আনতে এটিতে আলতো চাপুন, বা একাধিক বাছতে দীর্ঘ চাপ দিন। কোনো সোর্স আর অ্যাপটি না আনলে অ্যাপটি হোম স্ক্রিন থেকে চলে যায়।</string>
+    <string name="sources_apps_brought">এই সোর্স থেকে আনা</string>
+    <string name="sources_apps_left_out">এই সোর্স থেকে বাদ দেওয়া</string>
+    <string name="sources_apps_leave_out">বাদ দিন</string>
+    <string name="sources_apps_leave_out_done">বাদ দেওয়া হয়েছে</string>
+    <string name="sources_apps_bring_back">ফিরিয়ে আনুন</string>
     <string name="sources_management_prerelease_toggle">প্রি-রিলিজ প্যাচ</string>
     <string name="sources_management_prerelease_toggle_description">নতুন পরীক্ষামূলক প্যাচ সংস্করণে প্রাথমিক অ্যাক্সেস গ্রহণ করে</string>
     <string name="sources_prerelease_warning_title">প্রি-রিলিজ প্যাচ সক্রিয় করবেন?</string>
@@ -187,6 +191,8 @@
     <string name="sources_dialog_local_change_file">ফাইল পরিবর্তন করুন</string>
     <string name="sources_dialog_preinstalled">প্র-ইনস্টল করা হয়েছে</string>
     <string name="sources_dialog_community">কমিউনিটি প্যাচ</string>
+    <string name="sources_dialog_choose_apps">অ্যাপ নির্বাচন করুন</string>
+    <string name="sources_dialog_choose_apps_description">সোর্স লোড হয়ে গেলে তার কোন অ্যাপগুলো রাখতে চান তা বেছে নিন।</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">তৃতীয় পক্ষের প্যাচ উৎস</string>
     <string name="sources_dialog_community_notice_message">"কমিউনিটি প্যাচ সোর্স তাদের নিজ নিজ লেখকগণ দ্বারা তৈরি ও রক্ষণাবেক্ষণ করা হয়। Morphe তৃতীয় পক্ষের প্যাচগুলো পর্যালোচনা বা যাচাই করে না, এবং তাদের বিষয়বস্তু বা আপনার ডিভাইসে যা করে তার জন্য দায়ী নয়।

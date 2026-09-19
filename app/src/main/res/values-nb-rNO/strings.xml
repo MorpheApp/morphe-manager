@@ -14,6 +14,9 @@
     <string name="home_app_hidden_apps_title">Skjulte apper</string>
     <string name="home_app_hidden_apps_hint">Trykk for å vise</string>
     <string name="home_app_patch_sources_description">Kilder som ikke er avmerket tilbys ikke når disse appene blir patchet, og patchene deres blir aldri med i et utvalg på egen hånd. Hver kilde forblir påslått for alle andre apper.</string>
+    <string name="home_app_patch_sources_mixed">Tilbys til %1$s av %2$s</string>
+    <string name="home_app_patch_sources_covers">Har patcher for %1$s av %2$s</string>
+    <string name="home_app_patch_sources_last">Hver app trenger én kilde igjen å patche fra</string>
     <string name="android_11_bug_dialog_title">Android 11-feil</string>
     <string name="android_11_bug_dialog_description">Tillatelse for appinstallasjon må gis på forhånd for å unngå en feil i Android 11-systemet som vil påvirke brukeropplevelsen negativt</string>
     <string name="deep_link_add_source_title">Legg til kilde</string>
@@ -137,9 +140,7 @@
     <string name="sources_management_open_in_browser">Åpne i nettleser</string>
     <string name="sources_management_report_issue">Rapporter et problem</string>
     <string name="sources_management_failed_to_open_url">Kunne ikke åpne linken</string>
-    <string name="sources_hidden_apps_title">Apper skjult fra %1$s</string>
-    <string name="sources_hidden_apps_description">Disse appene tilbys ikke av denne kilden når de blir patchet. Selve kilden forblir på for alt annet.</string>
-    <string name="sources_hidden_apps_hint">Trykk for å tilby denne kilden igjen.</string>
+    <string name="sources_apps">Apper</string>
     <string name="sources_management_prerelease_toggle">Forhåndsutgitte patcher</string>
     <string name="sources_management_prerelease_toggle_description">Mottar tidlig tilgang til nye eksperimentelle patchversjoner</string>
     <string name="sources_prerelease_warning_title">Aktiver forhåndsutgitte patcher?</string>

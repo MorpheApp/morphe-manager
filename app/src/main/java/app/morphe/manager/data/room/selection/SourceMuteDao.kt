@@ -39,6 +39,9 @@ abstract class SourceMuteDao {
     @Query("DELETE FROM app_source_mutes WHERE patch_bundle = :bundleUid")
     abstract suspend fun clearForBundle(bundleUid: Int)
 
+    @Query("DELETE FROM app_source_mutes WHERE patch_bundle = :bundleUid AND package_name IN (:packageNames)")
+    abstract suspend fun clearForBundle(bundleUid: Int, packageNames: List<String>)
+
     @Query("DELETE FROM app_source_mutes")
     abstract suspend fun clear()
 

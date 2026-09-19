@@ -7,7 +7,6 @@ package app.morphe.manager.ui.screen.home
 
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.Crossfade
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
@@ -63,6 +62,7 @@ import app.morphe.manager.domain.manager.SourceBundleSortMode
 import app.morphe.manager.domain.repository.BlocklistRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.SourceMuteRepository
+import app.morphe.manager.domain.repository.appsBrought
 import app.morphe.manager.ui.screen.patcher.IncompatiblePatcherVersionDialog
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.*
@@ -111,7 +111,11 @@ fun BundleManagementSheet(
     // and still declares whether it carries experimental targets
     val bundleInfo by patchBundleRepository.allBundlesInfoFlow.collectAsStateWithLifecycle(emptyMap())
     val blockedSources by patchBundleRepository.blockedSources.collectAsStateWithLifecycle(emptyMap())
-    val hiddenApps by sourceMuteRepository.mutedApps.collectAsStateWithLifecycle(emptyMap())
+    val keptFrom by sourceMuteRepository.mutedSources.collectAsStateWithLifecycle(emptyMap())
+    // How many of its apps each source still brings, out of all it names
+    val appCounts = remember(bundleInfo, keptFrom) {
+        bundleInfo.mapValues { (_, info) -> info.appsBrought(keptFrom).size to info.listedApps().size }
+    }
 
     val showSheetOnboarding = globalOnboardingState?.sheetOnboardingActive == true
 
@@ -204,7 +208,7 @@ fun BundleManagementSheet(
     }
 
     val bundleToShowPatches = remember { mutableStateOf<PatchBundleSource?>(null) }
-    val bundleToShowHiddenApps = remember { mutableStateOf<PatchBundleSource?>(null) }
+    val bundleToShowApps = remember { mutableStateOf<PatchBundleSource?>(null) }
     var bundleRequiringManagerUpdate by remember { mutableStateOf<PatchBundleSource?>(null) }
     var bundleToShowChangelogUid by remember { mutableStateOf<Int?>(null) }
 
@@ -387,7 +391,7 @@ fun BundleManagementSheet(
                                     bundle = bundle,
                                     patchCount = patchCounts[bundle.uid] ?: 0,
                                     patchMatchCount = patchMatchCounts[bundle.uid],
-                                    hiddenAppCount = hiddenApps[bundle.uid]?.size ?: 0,
+                                    appCount = appCounts[bundle.uid] ?: (0 to 0),
                                     updateInfo = manualUpdateInfo[bundle.uid],
                                     isUpdating = bundle.uid in activeUpdateUids,
                                     metadataFetchError = metadataFetchErrors[bundle.uid],
@@ -431,7 +435,7 @@ fun BundleManagementSheet(
                                     hasExperimentalVersions = hasExperimentalVersions,
                                     useExperimentalVersions = useExperimentalVersions,
                                     onPatchesClick = { bundleToShowPatches.value = bundle },
-                                    onHiddenAppsClick = { bundleToShowHiddenApps.value = bundle },
+                                    onAppsClick = { bundleToShowApps.value = bundle },
                                     onOutdatedManagerClick = { bundleRequiringManagerUpdate = bundle },
                                     onVersionClick = {
                                         if (bundle is RemotePatchBundle) {
@@ -551,9 +555,9 @@ fun BundleManagementSheet(
         )
     }
 
-    bundleToShowHiddenApps.value?.let { src ->
-        BundleHiddenAppsDialog(
-            onDismissRequest = { bundleToShowHiddenApps.value = null },
+    bundleToShowApps.value?.let { src ->
+        SourceAppsDialog(
+            onDismissRequest = { bundleToShowApps.value = null },
             src = src
         )
     }
@@ -627,8 +631,8 @@ private fun BundleManagementCard(
     patchCount: Int,
     /** Patches in this source matching the sheet's search, or null while nothing is searched. */
     patchMatchCount: Int? = null,
-    /** Apps kept from this source. Zero drops the row, since there is nothing to take back. */
-    hiddenAppCount: Int = 0,
+    /** Apps this source still brings, out of all it names. None named drops the row. */
+    appCount: Pair<Int, Int> = 0 to 0,
     updateInfo: PatchBundleRepository.ManualBundleUpdateInfo?,
     isUpdating: Boolean = false,
     isDragging: Boolean = false,
@@ -649,7 +653,7 @@ private fun BundleManagementCard(
     hasExperimentalVersions: Boolean,
     useExperimentalVersions: Boolean,
     onPatchesClick: () -> Unit,
-    onHiddenAppsClick: () -> Unit = {},
+    onAppsClick: () -> Unit = {},
     onVersionClick: () -> Unit,
     onOpenInBrowser: () -> Unit,
     onReportIssue: () -> Unit,
@@ -664,8 +668,6 @@ private fun BundleManagementCard(
     val openInBrowser = stringResource(R.string.sources_management_open_in_browser)
     val reportIssue = stringResource(R.string.sources_management_report_issue)
     val patchesLabel = stringResource(R.string.patches)
-
-    val context = LocalContext.current
 
     val isBlocked = blockedInfo != null
     val isEnabled = bundle.enabled && !isBlocked
@@ -888,19 +890,21 @@ private fun BundleManagementCard(
                             enabled = !isUpdating
                         )
 
-                        // Only where something is actually being kept from the source. The row is
-                        // the one way back that does not depend on which mode the user patches in
-                        if (hiddenAppCount > 0) {
+                        // Apps, for any source naming some. It is also the one way back from an
+                        // app kept from the source that does not depend on which mode the user
+                        // patches in
+                        val (offeredApps, listedApps) = appCount
+                        if (listedApps > 0) {
                             BundleInfoCard(
                                 modifier = Modifier.fillMaxWidth(),
-                                icon = Icons.Outlined.VisibilityOff,
-                                title = stringResource(R.string.sources_hidden_apps),
-                                value = pluralStringResource(
-                                    R.plurals.home_category_app_count,
-                                    hiddenAppCount,
-                                    hiddenAppCount.toString()
-                                ),
-                                onClick = onHiddenAppsClick,
+                                icon = Icons.Outlined.Apps,
+                                title = stringResource(R.string.sources_apps),
+                                value = if (offeredApps < listedApps) {
+                                    "$offeredApps/$listedApps"
+                                } else {
+                                    listedApps.toString()
+                                },
+                                onClick = onAppsClick,
                                 enabled = !isUpdating
                             )
                         }
@@ -1005,43 +1009,35 @@ private fun BundleManagementCard(
                                     if (bundle.enabled) R.string.disable else R.string.enable
                                 )
                                 val disableEnableDesc = disableEnableVerb + " " + bundle.displayTitle
-                                val disableToast = stringResource(
+                                val disableDone = stringResource(
                                     if (bundle.enabled) R.string.sources_management_source_disabled
                                     else R.string.sources_management_source_enabled
                                 )
 
-                                val disableIcon = if (bundle.enabled)
-                                    Icons.Outlined.Block
-                                else
-                                    Icons.Outlined.CheckCircle
-
-                                Crossfade(
-                                    targetState = disableIcon,
-                                    label = "disable_icon"
-                                ) { icon ->
-                                    // Disable button
-                                    ActionPillButton(
-                                        onClick = context.withToast(disableToast, onDisable),
-                                        icon = icon,
-                                        contentDescription = disableEnableDesc,
-                                        tooltip = disableEnableVerb,
-                                        enabled = !isBlocked
-                                    )
-                                }
+                                // Disable button
+                                ActionPillButton(
+                                    onClick = onDisable,
+                                    icon = if (bundle.enabled) Icons.Outlined.Block else Icons.Outlined.CheckCircle,
+                                    contentDescription = disableEnableDesc,
+                                    tooltip = disableEnableVerb,
+                                    confirmation = disableDone,
+                                    enabled = !isBlocked
+                                )
                             }
 
                             val isLocal = bundle is LocalPatchBundle
                             if (bundle is RemotePatchBundle || isLocal) {
                                 val updateVerb = stringResource(R.string.update)
                                 val updateDesc = updateVerb + " " + bundle.displayTitle
-                                val updateToast = stringResource(R.string.sources_management_source_updating)
+                                val updateStarted = stringResource(R.string.sources_management_source_updating)
                                 // Update button. A local source has nothing to fetch from, so it asks
                                 // for a replacement file instead and reports progress once one is picked
                                 ActionPillButton(
-                                    onClick = if (isLocal) onUpdate else context.withToast(updateToast, onUpdate),
+                                    onClick = onUpdate,
                                     icon = Icons.Outlined.Refresh,
                                     contentDescription = updateDesc,
                                     tooltip = updateVerb,
+                                    confirmation = updateStarted.takeUnless { isLocal },
                                     enabled = !isBlocked
                                 )
                             }

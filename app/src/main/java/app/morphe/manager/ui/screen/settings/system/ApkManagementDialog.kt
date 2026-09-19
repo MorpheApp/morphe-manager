@@ -802,7 +802,6 @@ private fun ApkManagementDialogContent(
             if (isMultiSelectMode) {
                 MultiSelectShell(visible = true) {
                     SelectionActionBar(
-                        modifier = Modifier.padding(horizontal = Defaults.ContentPadding, vertical = Defaults.ItemSpacing),
                         selectedCount = selectedItems.size,
                         // Scoped to the filtered list so "select all" never reaches hidden entries
                         totalCount = filteredItems.size,

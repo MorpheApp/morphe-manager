@@ -20,12 +20,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.theme.MonochromeThemeDefaults
-import app.morphe.manager.util.withToast
 
 /**
  * Metrics of the [MultiSelectShell] surface. The bar floats over the content it belongs to, so
@@ -79,7 +77,7 @@ fun MultiSelectShell(
 private class LastVisibleValue<T>(var value: T)
 
 /**
- * Returns [value] while [visible] is true, and the last value seen before that afterwards.
+ * Returns [value] while [visible] is true, and the last value seen before that afterward.
  *
  * Action handlers clear the selection in the same pass that hides the bar, so a row rendered
  * from live state loses buttons and zeroes its counter while it is still sliding out.
@@ -97,7 +95,7 @@ fun <T> rememberWhileVisible(visible: Boolean, value: T): T {
 /**
  * Counter label ("N selected") followed by an [ActionPillRow] with SelectAll,
  * optional DeselectAll and Cancel, and caller-provided [actions]. Meant to be placed
- * inside a [MultiSelectShell].
+ * inside a [MultiSelectShell], and padded to sit in one.
  */
 @Composable
 fun SelectionActionBar(
@@ -110,8 +108,6 @@ fun SelectionActionBar(
     onCancel: (() -> Unit)? = null,
     actions: @Composable () -> Unit = {}
 ) {
-    val context = LocalContext.current
-
     val selectAllLabel = stringResource(R.string.select_all)
     val selectAllDone = stringResource(R.string.select_all_done)
     val deselectAllLabel = stringResource(R.string.deselect_all)
@@ -124,7 +120,9 @@ fun SelectionActionBar(
     val selectionToggleDone = if (canToggleToDeselect) deselectAllDone else selectAllDone
 
     Column(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = Defaults.ContentPadding, vertical = Defaults.ItemSpacing),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
@@ -156,12 +154,11 @@ fun SelectionActionBar(
 
         ActionPillRow {
             ActionPillButton(
-                onClick = context.withToast(selectionToggleDone) {
-                    if (canToggleToDeselect) onDeselectAll() else onSelectAll()
-                },
+                onClick = { if (canToggleToDeselect) onDeselectAll() else onSelectAll() },
                 icon = if (canToggleToDeselect) Icons.Outlined.RemoveDone else Icons.Outlined.DoneAll,
                 contentDescription = selectionToggleLabel,
                 tooltip = selectionToggleLabel,
+                confirmation = selectionToggleDone,
                 enabled = canToggleToDeselect || selectedCount < totalCount
             )
             actions()

@@ -389,7 +389,8 @@ fun UnusableOptionPathsDialog(
                             modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(14.dp),
                             color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f),
-                            tonalElevation = 1.dp
+                            tonalElevation = 1.dp,
+                            border = CardBorder.tinted(MaterialTheme.colorScheme.error)
                         ) {
                             Row(
                                 modifier = Modifier
@@ -637,7 +638,7 @@ private fun ErrorInfoCard(
     errorBadge: String? = null,
     content: @Composable ColumnScope.() -> Unit
 ) {
-    SurfaceCard(modifier = modifier.fillMaxWidth()) {
+    SurfaceCard(modifier = modifier.fillMaxWidth(), borderWidth = 1.dp) {
         Column {
             Surface(
                 modifier = Modifier.fillMaxWidth(),

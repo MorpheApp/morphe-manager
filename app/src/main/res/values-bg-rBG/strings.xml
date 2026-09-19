@@ -141,10 +141,14 @@
     <string name="sources_management_open_in_browser">Отваряне в браузър</string>
     <string name="sources_management_report_issue">Докладвай за проблем</string>
     <string name="sources_management_failed_to_open_url">Неуспешно отваряне на URL</string>
-    <string name="sources_hidden_apps">Скрит за</string>
-    <string name="sources_hidden_apps_title">Приложения, скрити от %1$s</string>
-    <string name="sources_hidden_apps_description">На тези приложения не се предлага този източник, когато върху тях се прилагат кръпки. Самият източник остава включен за всичко останало</string>
-    <string name="sources_hidden_apps_hint">Докоснете, за да предложите отново този източник</string>
+    <string name="sources_apps">Приложения</string>
+    <string name="sources_apps_title">Приложения от %1$s</string>
+    <string name="sources_apps_description">Докоснете приложение, за да го изключите от този източник или да го върнете, или докоснете продължително, за да изберете няколко. Приложението напуска началния екран, след като нито един източник не го включва.</string>
+    <string name="sources_apps_brought">Включени от този източник</string>
+    <string name="sources_apps_left_out">Изключени от този източник</string>
+    <string name="sources_apps_leave_out">Изключете</string>
+    <string name="sources_apps_leave_out_done">Изключено</string>
+    <string name="sources_apps_bring_back">Върнете</string>
     <string name="sources_management_prerelease_toggle">Предварителни пачове</string>
     <string name="sources_management_prerelease_toggle_description">Получава ранен достъп до нови експериментални версии на пачове</string>
     <string name="sources_prerelease_warning_title">Активиране на предварителни пачове ли?</string>
@@ -188,6 +192,8 @@
     <string name="sources_dialog_local_change_file">Промяна на файл</string>
     <string name="sources_dialog_preinstalled">Предварително инсталиран</string>
     <string name="sources_dialog_community">Общностни пачове</string>
+    <string name="sources_dialog_choose_apps">Избор на приложения</string>
+    <string name="sources_dialog_choose_apps_description">Изберете кои от неговите приложения да запазите, след като източникът се зареди.</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Източници на пачове от трети страни</string>
     <string name="sources_dialog_community_notice_message">"Общностните източници на пачове се създават и поддържат от техните автори. Morphe не преглежда и не проверява пачове от трети страни и не носи отговорност за тяхното съдържание или за това какво правят на вашето устройство.

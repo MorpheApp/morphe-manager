@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">Otvoriť v prehliadači</string>
     <string name="sources_management_report_issue">Nahlásiť problém</string>
     <string name="sources_management_failed_to_open_url">Nepodarilo sa otvoriť URL</string>
-    <string name="sources_hidden_apps">Skryté pre</string>
-    <string name="sources_hidden_apps_title">Aplikácie skryté pred %1$s</string>
-    <string name="sources_hidden_apps_description">Týmto aplikáciám sa pri záplatovaní neponúka tento zdroj. Zdroj samotný zostáva zapnutý pre všetko ostatné.</string>
-    <string name="sources_hidden_apps_hint">Klepnutím opäť ponúknete tento zdroj.</string>
+    <string name="sources_apps">Aplikácie</string>
     <string name="sources_management_prerelease_toggle">Použiť predbežne vydané záplaty</string>
     <string name="sources_management_prerelease_toggle_description">Získajte skorší prístup k novým experimentálnym verziám záplat</string>
     <string name="sources_prerelease_warning_title">Povoliť predbežné opravy?</string>

@@ -16,7 +16,7 @@
     <string name="home_app_patch_sources_description">Källor som du lämnar omarkerade erbjuds inte när de här apparna modifieras, och deras tillägg läggs aldrig till i något urval på egen hand. Alla källor förblir aktiverade för alla andra appar</string>
     <string name="home_app_patch_sources_mixed">Erbjuds till %1$s av %2$s</string>
     <string name="home_app_patch_sources_covers">Har tillägg för %1$s av %2$s</string>
-    <string name="home_app_patch_sources_last">Varje app måste ha en källa kvar att modifieras med</string>
+    <string name="home_app_patch_sources_last">Alla appar måste ha en källa kvar att modifieras med</string>
     <string name="android_11_bug_dialog_title">Fel i Android 11</string>
     <string name="android_11_bug_dialog_description">Behörigheten för appinstallation måste beviljas i förväg för att undvika ett fel i Android 11-systemet som negativt påverkar användarupplevelsen</string>
     <string name="deep_link_add_source_title">Lägg till källa</string>
@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">Öppna i webbläsaren</string>
     <string name="sources_management_report_issue">Rapportera ett problem</string>
     <string name="sources_management_failed_to_open_url">Det gick inte att öppna webbadressen</string>
-    <string name="sources_hidden_apps">Döljs för</string>
-    <string name="sources_hidden_apps_title">Appar som döljs för %1$s</string>
-    <string name="sources_hidden_apps_description">De här apparna erbjuds inte den här källan när de modifieras. Själva källan förblir aktiverad för allt annat</string>
-    <string name="sources_hidden_apps_hint">Tryck för att erbjuda den här källan igen</string>
+    <string name="sources_apps">Appar</string>
     <string name="sources_management_prerelease_toggle">Förhandsversioner av tillägg</string>
     <string name="sources_management_prerelease_toggle_description">Får tidig åtkomst till nya experimentella tilläggsversioner</string>
     <string name="sources_prerelease_warning_title">Aktivera förhandsversioner av tillägg?</string>
@@ -235,7 +232,7 @@ Allt du lägger till från den här webbplatsen används på egen risk"</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Ladda ned den ursprungliga APK-filen</string>
     <string name="home_download_instructions_steps_title">Anvisningar:</string>
-    <string name="home_download_instructions_finding">Hittar nedladdningssidan…</string>
+    <string name="home_download_instructions_finding">Söker efter nedladdningssidan …</string>
     <string name="home_download_instructions_step1">Tryck på knappen %s nedan</string>
     <string name="home_download_instructions_step2_part1">Skrolla ned på webbsidan och tryck på</string>
     <string name="home_download_instructions_step2_generic">Skrolla ned på webbsidan och tryck på dess nedladdningsknapp</string>
@@ -455,8 +452,8 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="home_app_info_patch_update_available_description">En nyare version av tilläggen är tillgänglig. Modifiera appen igen för att få de senaste förbättringarna och felkorrigeringarna</string>
     <string name="home_app_info_app_update_available">Appuppdatering är tillgänglig</string>
     <string name="home_app_info_app_update_available_description">Tilläggskällorna stöder en nyare version av den här appen. Modifiera den igen för att övergå till den versionen.</string>
-    <string name="home_app_info_newest_supported_version">Senaste stödda</string>
-    <string name="home_app_info_version_move">Installerad %1$s, senaste stödda %2$s</string>
+    <string name="home_app_info_newest_supported_version">Senaste som stöds</string>
+    <string name="home_app_info_version_move">Installerad %1$s, senaste som stöds %2$s</string>
     <string name="home_app_info_app_deleted_warning">Appen har avinstallerats</string>
     <string name="home_app_info_app_deleted_description">Den här appen avinstallerades utanför Morphe. Modifiera den igen för att återställa funktionaliteten</string>
     <string name="home_app_info_not_patched_description">En omodifierad version av den här appen är installerad. Morphe har fortfarande sin tidigare modifieringspost.</string>
@@ -482,7 +479,7 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="patcher_error_technical">Teknisk information</string>
     <string name="patcher_error_dialog_diagnostics">Diagnostik</string>
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
-    <string name="patcher_card_started">Modifieringen har startats</string>
+    <string name="patcher_card_started">Modifieringen startade</string>
     <string name="patcher_card_succeeded">Modifieringen lyckades</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">App</string>
@@ -540,7 +537,7 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="patcher_ready_to_install_subtitle">Tryck på knappen nedan för att installera</string>
     <string name="patcher_ready_to_mount_subtitle">Tryck på knappen nedan för att montera</string>
     <string name="patcher_patches_excluded_for_installer">Inte tillgänglig för denna installationsmetod och utesluten: %s</string>
-    <string name="patcher_back_to_game_hint">Tryck på %1$s för att gå tillbaka till ditt spel</string>
+    <string name="patcher_back_to_game_hint">Tryck på %1$s för att gå tillbaka till spelet</string>
     <string name="patcher_storage_permission_dialog_title">Det går inte att komma åt lagringssökväg</string>
     <string name="patcher_incompatible_patcher_title">Uppdatering krävs</string>
     <string name="patcher_incompatible_patcher_description">Arkivet &lt;b&gt;%1$s&lt;/b&gt; kräver version &lt;b&gt;%2$s&lt;/b&gt; eller senare av modifieringsverktyget. Uppdatera Morphe för att modifiera den här appen</string>
@@ -653,12 +650,12 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="mini_game_snake_swipe_to_start">Svep för att starta</string>
     <string name="mini_game_dino_picker_subtitle">Tryck för att hoppa över kaktusarna</string>
     <string name="mini_game_dino_tap_to_start">Tryck för att springa</string>
-    <string name="mini_game_blocks_picker_subtitle">Passa formerna, rensa linjerna</string>
+    <string name="mini_game_blocks_picker_subtitle">Passa ihop formerna och ta bort raderna</string>
     <string name="mini_game_blocks_tap_to_start">Tryck för att rotera, svep för att flytta, svep nedåt för att släppa</string>
-    <string name="mini_game_bricks_picker_subtitle">Studsa bollen, slå sönder väggen</string>
-    <string name="mini_game_bricks_tap_to_start">Dra för att sikta, tryck för att skjuta</string>
-    <string name="mini_game_miner_picker_subtitle">Tryck för att öppna, håll för att flagga</string>
-    <string name="mini_game_pairs_picker_subtitle">Vänd korten, hitta paret</string>
+    <string name="mini_game_bricks_picker_subtitle">Studsa bollen och slå sönder muren</string>
+    <string name="mini_game_bricks_tap_to_start">Dra för att sikta, tryck för att skjuta iväg</string>
+    <string name="mini_game_miner_picker_subtitle">Tryck för att öppna, tryck länge för att flagga</string>
+    <string name="mini_game_pairs_picker_subtitle">Vänd korten och hitta paren</string>
     <!-- Settings -->
     <string name="appearance">Utseende</string>
     <string name="advanced">Avancerat</string>
@@ -755,7 +752,7 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
     <string name="settings_advanced_updates_prerelease_warning_message">"Förhandsversioner av Morphe är fortfarande under utveckling och kan vara instabila.
 
-Tillägg påverkas inte: Aktivera förhandsversioner av tillägg för varje källa i listan över tilläggskällor"</string>
+Tillägg påverkas inte: aktivera förhandsversioner av tillägg för varje källa i listan över tilläggskällor"</string>
     <string name="settings_advanced_updates_allow_metered">Uppdateringar via mobildata</string>
     <string name="settings_advanced_updates_allow_metered_description">Tillåter att uppdateringar för Morphe och tillägg laddas ned via mobildata</string>
     <string name="settings_advanced_updates_background_notifications">Aviseringar om uppdateringar i bakgrunden</string>
@@ -1150,7 +1147,7 @@ Information: %2$s"</string>
     <string name="select_file">Välj fil</string>
     <string name="select_folder">Välj mapp</string>
     <string name="patches">Tillägg</string>
-    <string name="home">Hem</string>
+    <string name="home">Start</string>
     <string name="settings">Inställningar</string>
     <string name="yes">Ja</string>
     <string name="no">Nej</string>

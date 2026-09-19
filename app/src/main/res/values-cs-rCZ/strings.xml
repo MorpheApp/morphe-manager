@@ -140,10 +140,14 @@
     <string name="sources_management_open_in_browser">Otevřít v prohlížeči</string>
     <string name="sources_management_report_issue">Nahlásit problém</string>
     <string name="sources_management_failed_to_open_url">Nepodařilo se otevřít URL</string>
-    <string name="sources_hidden_apps">Skryto pro</string>
-    <string name="sources_hidden_apps_title">Aplikace skryté před zdrojem %1$s</string>
-    <string name="sources_hidden_apps_description">Tyto aplikace nejsou nabízeny tímto zdrojem, když se patchují. Zdroj samotný zůstává zapnutý pro vše ostatní.</string>
-    <string name="sources_hidden_apps_hint">Klepnutím znovu nabídnete tento zdroj</string>
+    <string name="sources_apps">Aplikace</string>
+    <string name="sources_apps_title">Aplikace z %1$s</string>
+    <string name="sources_apps_description">Klepnutím na aplikaci ji vyřadíte z tohoto zdroje nebo ji vrátíte zpět, nebo dlouhým stisknutím vyberete několik aplikací. Aplikace zmizí z domovské obrazovky, jakmile ji nepřináší žádný zdroj.</string>
+    <string name="sources_apps_brought">Přinášené tímto zdrojem</string>
+    <string name="sources_apps_left_out">Vyřazené z tohoto zdroje</string>
+    <string name="sources_apps_leave_out">Vyřadit</string>
+    <string name="sources_apps_leave_out_done">Vyřazeno</string>
+    <string name="sources_apps_bring_back">Vrátit zpět</string>
     <string name="sources_management_prerelease_toggle">Předběžné záplaty</string>
     <string name="sources_management_prerelease_toggle_description">Získáte předběžný přístup k novým experimentálním verzím záplat</string>
     <string name="sources_prerelease_warning_title">Povolit předběžné záplaty?</string>
@@ -187,6 +191,8 @@
     <string name="sources_dialog_local_change_file">Změnit soubor</string>
     <string name="sources_dialog_preinstalled">Předinstalované</string>
     <string name="sources_dialog_community">Komunitní opravy</string>
+    <string name="sources_dialog_choose_apps">Vybrat aplikace</string>
+    <string name="sources_dialog_choose_apps_description">Vyberte, které z jeho aplikací si chcete ponechat, až se zdroj načte.</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Zdroje oprav třetích stran</string>
     <string name="sources_dialog_community_notice_message">"Zdroje komunitních oprav jsou vytvářeny a spravovány jejich vlastními autory. Morphe nekontroluje ani neověřuje opravy třetích stran a nenese odpovědnost za jejich obsah ani za to, co s vaším zařízením dělají.
