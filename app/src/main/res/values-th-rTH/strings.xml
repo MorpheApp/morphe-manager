@@ -2,7 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">แอปอื่น ๆ</string>
-    <string name="home_other_apps_action">Select other app</string>
+    <string name="home_other_apps_action">เลือกแอปอื่น</string>
     <string name="home_not_patched_yet">ยังไม่ได้รับการแพตช์</string>
     <string name="home_unpatched_version_installed">ติดตั้งเวอร์ชันที่ไม่ได้รับการแพตช์แล้ว</string>
     <string name="home_unpatched_badge">ไม่ได้รับการแพตช์</string>
@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">เปิดในเบราว์เซอร์</string>
     <string name="sources_management_report_issue">รายงานปัญหา</string>
     <string name="sources_management_failed_to_open_url">ไม่สามารถเปิด URL ได้</string>
-    <string name="sources_hidden_apps">ซ่อนไว้สำหรับ</string>
-    <string name="sources_hidden_apps_title">แอปที่ถูกซ่อนจาก %1$s</string>
-    <string name="sources_hidden_apps_description">แอปเหล่านี้จะไม่ได้รับแหล่งที่มานี้เมื่อถูกแพตช์ แต่ตัวแหล่งที่มาเองยังคงเปิดใช้สำหรับสิ่งอื่นทั้งหมด</string>
-    <string name="sources_hidden_apps_hint">แตะเพื่อเสนอแหล่งที่มานี้อีกครั้ง</string>
+    <string name="sources_apps">แอป</string>
     <string name="sources_management_prerelease_toggle">แพตช์ก่อนเปิดตัว</string>
     <string name="sources_management_prerelease_toggle_description">รับสิทธิ์เข้าถึงแพทช์ใหม่เวอร์ชันทดลองแต่เนิ่นๆ</string>
     <string name="sources_prerelease_warning_title">เปิดใช้แพตช์ก่อนเผยแพร่หรือไม่?</string>
@@ -480,14 +477,14 @@
     <string name="patcher_error_copied">คัดลอกข้อผิดพลาดไปยังคลิปบอร์ดแล้ว</string>
     <string name="patcher_error_log">บันทึกข้อผิดพลาด</string>
     <string name="patcher_error_technical">รายละเอียดทางเทคนิค</string>
-    <string name="patcher_error_dialog_diagnostics">Diagnostics</string>
+    <string name="patcher_error_dialog_diagnostics">การวินิจฉัย</string>
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
-    <string name="patcher_card_started">Patching started</string>
-    <string name="patcher_card_succeeded">Patching succeeded</string>
+    <string name="patcher_card_started">เริ่มการแพตช์แล้ว</string>
+    <string name="patcher_card_succeeded">การแพตช์สำเร็จ</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
-    <string name="patcher_field_app">App</string>
-    <string name="patcher_field_package">Package</string>
-    <string name="patcher_field_source">Source</string>
+    <string name="patcher_field_app">แอป</string>
+    <string name="patcher_field_package">แพ็กเกจ</string>
+    <string name="patcher_field_source">แหล่งที่มา</string>
     <string name="patcher_field_split">แยก APK</string>
     <string name="patcher_field_manager">ผู้จัดการ</string>
     <string name="patcher_field_patcher">ตัวแพตช์</string>

@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">खोल में खोल करना</string>
     <string name="sources_management_report_issue">समस्या की रिपोर्ट करें</string>
     <string name="sources_management_failed_to_open_url">URL खोलने में विफल रहा</string>
-    <string name="sources_hidden_apps">इनके लिए छिपाया गया</string>
-    <string name="sources_hidden_apps_title">%1$s से छिपाए गए ऐप्स</string>
-    <string name="sources_hidden_apps_description">ये ऐप्स पैच किए जाने पर इस स्रोत से ऑफ़र नहीं किए जाते। बाकी सबके लिए स्रोत खुद चालू रहता है।</string>
-    <string name="sources_hidden_apps_hint">इस स्रोत को फिर से उपलब्ध कराने के लिए टैप करें</string>
+    <string name="sources_apps">ऐप्स</string>
     <string name="sources_management_prerelease_toggle">प्री-रिलीज़ पैच</string>
     <string name="sources_management_prerelease_toggle_description">नए प्रायोगिक पैच संस्करणों तक जल्दी पहुँच प्राप्त करता है</string>
     <string name="sources_prerelease_warning_title">क्या प्री-रिलीज़ पैच सक्षम करें?</string>

@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">Åpne i nettleser</string>
     <string name="sources_management_report_issue">Rapporter et problem</string>
     <string name="sources_management_failed_to_open_url">Kunne ikke åpne linken</string>
-    <string name="sources_hidden_apps">Skjult for</string>
-    <string name="sources_hidden_apps_title">Apper skjult fra %1$s</string>
-    <string name="sources_hidden_apps_description">Disse appene tilbys ikke av denne kilden når de blir patchet. Selve kilden forblir på for alt annet.</string>
-    <string name="sources_hidden_apps_hint">Trykk for å tilby denne kilden igjen.</string>
+    <string name="sources_apps">Apper</string>
     <string name="sources_management_prerelease_toggle">Forhåndsutgitte patcher</string>
     <string name="sources_management_prerelease_toggle_description">Mottar tidlig tilgang til nye eksperimentelle patchversjoner</string>
     <string name="sources_prerelease_warning_title">Aktiver forhåndsutgitte patcher?</string>

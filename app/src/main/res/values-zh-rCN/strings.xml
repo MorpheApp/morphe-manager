@@ -140,10 +140,14 @@
     <string name="sources_management_open_in_browser">在浏览器中打开链接</string>
     <string name="sources_management_report_issue">报告问题</string>
     <string name="sources_management_failed_to_open_url">无法打开URL</string>
-    <string name="sources_hidden_apps">隐藏于</string>
-    <string name="sources_hidden_apps_title">对 %1$s 隐藏的应用</string>
-    <string name="sources_hidden_apps_description">修补这些应用时，不会提供此来源。该来源本身对其它所有内容仍保持开启。</string>
-    <string name="sources_hidden_apps_hint">Tap to offer this source again</string>
+    <string name="sources_apps">应用</string>
+    <string name="sources_apps_title">来自 %1$s 的应用</string>
+    <string name="sources_apps_description">点按应用可将其从该来源中排除或恢复，长按可选择多个应用。当没有来源提供某个应用时，该应用将从主屏幕移除。</string>
+    <string name="sources_apps_brought">由该来源提供</string>
+    <string name="sources_apps_left_out">已从该来源中排除</string>
+    <string name="sources_apps_leave_out">排除</string>
+    <string name="sources_apps_leave_out_done">已排除</string>
+    <string name="sources_apps_bring_back">恢复</string>
     <string name="sources_management_prerelease_toggle">预发布补丁</string>
     <string name="sources_management_prerelease_toggle_description">接收新实验性补丁版本的早期访问权限</string>
     <string name="sources_prerelease_warning_title">启用预发布补丁？</string>
@@ -187,6 +191,8 @@
     <string name="sources_dialog_local_change_file">更改文件</string>
     <string name="sources_dialog_preinstalled">预安装</string>
     <string name="sources_dialog_community">社区补丁</string>
+    <string name="sources_dialog_choose_apps">选择应用</string>
+    <string name="sources_dialog_choose_apps_description">在来源加载后，选择要保留该来源中的哪些应用。</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">第三方补丁来源</string>
     <string name="sources_dialog_community_notice_message">"社区补丁源由其作者自行制作和维护。Morphe 不审查或验证第三方补丁，也不对其内容或对您设备造成的影响负责。

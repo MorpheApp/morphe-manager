@@ -140,10 +140,8 @@
     <string name="sources_management_open_in_browser">Відкрити в браузері</string>
     <string name="sources_management_report_issue">Повідомити про проблему</string>
     <string name="sources_management_failed_to_open_url">Не вдалося відкрити URL</string>
-    <string name="sources_hidden_apps">Приховано для</string>
-    <string name="sources_hidden_apps_title">Застосунки, приховані від %1$s</string>
-    <string name="sources_hidden_apps_description">Цим застосункам не пропонується це джерело під час патчингу. Саме джерело залишається увімкненим для всього іншого</string>
-    <string name="sources_hidden_apps_hint">Натисніть, щоб знову пропонувати це джерело</string>
+    <string name="sources_apps">Застосунки</string>
+    <string name="sources_apps_title">Застосунки з %1$s</string>
     <string name="sources_management_prerelease_toggle">Передрелізні версії патчів</string>
     <string name="sources_management_prerelease_toggle_description">Отримує ранній доступ до нових експериментальних версій патчів</string>
     <string name="sources_prerelease_warning_title">Увімкнути передрелізні патчі?</string>

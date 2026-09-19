@@ -140,10 +140,6 @@
     <string name="sources_management_open_in_browser">Brauzerdə açın</string>
     <string name="sources_management_report_issue">Problemi bildir</string>
     <string name="sources_management_failed_to_open_url">URL açmaq uğursuzdu</string>
-    <string name="sources_hidden_apps">Gizlədilib</string>
-    <string name="sources_hidden_apps_title">Tətbiqlər %1$s-dən gizlədilib</string>
-    <string name="sources_hidden_apps_description">Bu tətbiqlər yamaqlanarkən onlara bu mənbə təklif olunmur. Mənbənin özü digər bütün hallar üçün aktiv qalır</string>
-    <string name="sources_hidden_apps_hint">Bu mənbəni təkrar təklif etmək üçün toxun</string>
     <string name="sources_management_prerelease_toggle">İlkin buraxılış yamaqları</string>
     <string name="sources_management_prerelease_toggle_description">Yeni təcrübi yamaq versiyalarına erkən keçid əldə edilir</string>
     <string name="sources_prerelease_warning_title">İlkin buraxılış yamaqlarını aktivləşdirsin?</string>

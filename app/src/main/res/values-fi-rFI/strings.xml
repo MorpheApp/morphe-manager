@@ -140,10 +140,14 @@
     <string name="sources_management_open_in_browser">Avaa selaimessa</string>
     <string name="sources_management_report_issue">Ilmoita ongelmasta</string>
     <string name="sources_management_failed_to_open_url">URL-osoitteen avaaminen epäonnistui</string>
-    <string name="sources_hidden_apps">Piilotettu sovelluksilta</string>
-    <string name="sources_hidden_apps_title">Lähteestä %1$s piilotetut sovellukset</string>
-    <string name="sources_hidden_apps_description">Näille sovelluksille ei tarjota tätä lähdettä, kun niitä paikataan. Lähde itse pysyy päällä kaiken muun kohdalla</string>
-    <string name="sources_hidden_apps_hint">Napauta tarjotaksesi tämän lähteen uudelleen</string>
+    <string name="sources_apps">Sovellukset</string>
+    <string name="sources_apps_title">Sovellukset lähteestä %1$s</string>
+    <string name="sources_apps_description">Napauta sovellusta jättääksesi sen pois tästä lähteestä tai palauttaaksesi sen takaisin, tai paina pitkään valitaksesi useita. Sovellus poistuu aloitusnäytöltä, kun mikään lähde ei tuo sitä.</string>
+    <string name="sources_apps_brought">Tämän lähteen tuomat</string>
+    <string name="sources_apps_left_out">Tästä lähteestä pois jätetyt</string>
+    <string name="sources_apps_leave_out">Jätä pois</string>
+    <string name="sources_apps_leave_out_done">Jätetty pois</string>
+    <string name="sources_apps_bring_back">Palauta</string>
     <string name="sources_management_prerelease_toggle">Ennakkojulkaisupäivitykset</string>
     <string name="sources_management_prerelease_toggle_description">Saat uusien kokeellisten lisäosaversioiden ennakkopääsyn</string>
     <string name="sources_prerelease_warning_title">Ota käyttöön esijulkaisupatchit?</string>
@@ -187,6 +191,8 @@
     <string name="sources_dialog_local_change_file">Vaihda tiedosto</string>
     <string name="sources_dialog_preinstalled">Esivalmis</string>
     <string name="sources_dialog_community">Yhteisön korjaukset</string>
+    <string name="sources_dialog_choose_apps">Valitse sovellukset</string>
+    <string name="sources_dialog_choose_apps_description">Valitse, mitkä sen sovelluksista pidät, kun lähde on latautunut.</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Kolmannen osapuolen korjauslähteet</string>
     <string name="sources_dialog_community_notice_message">"Yhteisön korjauslähteet ovat omien tekijöidensä luomia ja ylläpitämiä. Morphe ei tarkasta tai vahvista kolmannen osapuolen korjauksia, eikä ole vastuussa niiden sisällöstä tai siitä, mitä ne tekevät laitteellasi.

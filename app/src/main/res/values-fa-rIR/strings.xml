@@ -545,6 +545,8 @@
     <string name="patcher_storage_permission_open_settings">باز کردن تنظیمات ذخیره‌سازی</string>
     <string name="patcher_storage_badge_denied">مجوز رد شد</string>
     <string name="patcher_storage_badge_missing">پیدا نشد</string>
+    <string name="patcher_missing_patches_title">بعضی از وصله‌ها از بین رفته‌اند</string>
+    <string name="patcher_missing_patches_label">دیگر پیشنهاد نمی‌شود</string>
     <string name="patcher_storage_permission_hint">نکته: فایل‌ها را به /Android/data/app.morphe.manager/files/ منتقل کنید؛ مجوز اضافی لازم نیست</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">در حال آماده‌سازی</string>

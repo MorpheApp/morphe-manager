@@ -140,10 +140,14 @@
     <string name="sources_management_open_in_browser">Openen in browser</string>
     <string name="sources_management_report_issue">Een probleem melden</string>
     <string name="sources_management_failed_to_open_url">Kan URL niet openen</string>
-    <string name="sources_hidden_apps">Verborgen voor</string>
-    <string name="sources_hidden_apps_title">Apps verborgen voor %1$s</string>
-    <string name="sources_hidden_apps_description">Voor deze apps wordt deze bron niet aangeboden wanneer ze worden gepatcht. De bron zelf blijft voor al het andere ingeschakeld</string>
-    <string name="sources_hidden_apps_hint">Tik om deze bron opnieuw aan te bieden</string>
+    <string name="sources_apps">Apps</string>
+    <string name="sources_apps_title">Apps van %1$s</string>
+    <string name="sources_apps_description">Tik op een app om deze uit deze bron te sluiten of terug te brengen, of houd lang ingedrukt om er meerdere te selecteren. Een app verlaat het startscherm zodra geen bron deze meer aanlevert.</string>
+    <string name="sources_apps_brought">Aangeleverd door deze bron</string>
+    <string name="sources_apps_left_out">Uitgesloten van deze bron</string>
+    <string name="sources_apps_leave_out">Uitsluiten</string>
+    <string name="sources_apps_leave_out_done">Uitgesloten</string>
+    <string name="sources_apps_bring_back">Terugbrengen</string>
     <string name="sources_management_prerelease_toggle">Patches van vóór de release</string>
     <string name="sources_management_prerelease_toggle_description">Krijg vroegtijdige toegang tot nieuwe experimentele patchversies</string>
     <string name="sources_prerelease_warning_title">Pre-release patches inschakelen?</string>
@@ -187,6 +191,8 @@
     <string name="sources_dialog_local_change_file">Bestand wijzigen</string>
     <string name="sources_dialog_preinstalled">Voorgeïnstalleerd</string>
     <string name="sources_dialog_community">Community-patches</string>
+    <string name="sources_dialog_choose_apps">Apps kiezen</string>
+    <string name="sources_dialog_choose_apps_description">Kies welke van de apps je wilt behouden zodra de bron is geladen.</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Bronnen voor patches van derden</string>
     <string name="sources_dialog_community_notice_message">"Community-patchbronnen worden gemaakt en onderhouden door hun eigen auteurs. Morphe beoordeelt of verifieert patches van derden niet en is niet verantwoordelijk voor hun inhoud of voor wat ze op uw apparaat doen.

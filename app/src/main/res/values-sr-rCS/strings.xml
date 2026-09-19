@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">Otvori u pregledaču</string>
     <string name="sources_management_report_issue">Prijavi problem</string>
     <string name="sources_management_failed_to_open_url">Otvaranje URL-a nije uspelo</string>
-    <string name="sources_hidden_apps">Sakriveno za</string>
-    <string name="sources_hidden_apps_title">Aplikacije skrivene od %1$s</string>
-    <string name="sources_hidden_apps_description">Ovaj izvor ne nudi ove aplikacije prilikom zakrpljivanja. Sam izvor ostaje uključen za sve ostalo.</string>
-    <string name="sources_hidden_apps_hint">Dodirni da ponovo omogućiš ovaj izvor.</string>
+    <string name="sources_apps">Aplikacije</string>
     <string name="sources_management_prerelease_toggle">Zakrpe u predprodukciji</string>
     <string name="sources_management_prerelease_toggle_description">Dobija rani pristup novim eksperimentalnim verzijama zakrpa</string>
     <string name="sources_prerelease_warning_title">Omogući zakrpe za predizdanje?</string>

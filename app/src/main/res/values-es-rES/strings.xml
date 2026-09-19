@@ -140,10 +140,8 @@
     <string name="sources_management_open_in_browser">Abrir en el navegador</string>
     <string name="sources_management_report_issue">Informar de un problema</string>
     <string name="sources_management_failed_to_open_url">No se pudo abrir la URL</string>
-    <string name="sources_hidden_apps">Oculto para</string>
-    <string name="sources_hidden_apps_title">Aplicaciones ocultas de %1$s</string>
-    <string name="sources_hidden_apps_description">Estas aplicaciones no reciben esta fuente al parchearlas. La fuente en sí permanece activada para todo lo demás</string>
-    <string name="sources_hidden_apps_hint">Pulsa para ofrecer esta fuente de nuevo</string>
+    <string name="sources_apps">Aplicaciones</string>
+    <string name="sources_apps_title">Apps de %1$s</string>
     <string name="sources_management_prerelease_toggle">Parches pre-lanzamiento</string>
     <string name="sources_management_prerelease_toggle_description">Recibe acceso anticipado a nuevas versiones experimentales de parches</string>
     <string name="sources_prerelease_warning_title">¿Activar parches pre-lanzamiento?</string>
@@ -245,7 +243,7 @@ Todo lo que añadas desde este sitio web lo haces bajo tu propia responsabilidad
     <string name="home_download_instructions_step3_search">En ese sitio web, descarga el APK de la versión &lt;b&gt;%s&lt;/b&gt;, no de la más reciente</string>
     <string name="home_download_instructions_step3_search_any">En ese sitio web, descarga el APK de la aplicación. Se puede parchear &lt;b&gt;cualquier versión&lt;/b&gt;</string>
     <string name="home_download_instructions_download_button_toast">Pulsa descargar en el sitio web, no aquí 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">¡Genial! Ahora pulsa en \"Continuar\" y ve al sitio web 👆</string>
+    <string name="home_download_instructions_download_button_toast_2">¡Genial! Ahora pulsa en Continuar y ve al sitio web 👆</string>
     <string name="home_download_instructions_download_button_toast_3">La práctica hace al maestro y estás en camino 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Aún no llega… aún no llega… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Muy bien, respeto la dedicación 🫡</string>
@@ -1126,7 +1124,7 @@ Detalles: %2$s"</string>
     <string name="file_picker_sort_date_asc">Fecha (más antiguo primero)</string>
     <string name="file_picker_show_hidden_files">Mostrar archivos ocultos</string>
     <!-- Settings - System Tab - About Section -->
-    <string name="settings_system_about">Acerca de Morphe</string>
+    <string name="settings_system_about">Acerca de</string>
     <string name="settings_system_share_website">Compartir sitio web</string>
     <string name="settings_system_share_website_description">Comparte el sitio web oficial de Morphe</string>
     <string name="settings_system_manager_description">Un proyecto de código abierto para parchear aplicaciones populares de Android de forma moderna y eficiente, impulsado por la comunidad con sus comentarios y contribuciones</string>

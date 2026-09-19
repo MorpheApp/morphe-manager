@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">Mở trong trình duyệt</string>
     <string name="sources_management_report_issue">Báo cáo sự cố</string>
     <string name="sources_management_failed_to_open_url">Không thể mở URL</string>
-    <string name="sources_hidden_apps">Đã ẩn cho</string>
-    <string name="sources_hidden_apps_title">Các ứng dụng bị ẩn khỏi %1$s</string>
-    <string name="sources_hidden_apps_description">Các ứng dụng này không được cung cấp nguồn này khi chúng được vá. Bản thân nguồn vẫn bật cho mọi thứ khác.</string>
-    <string name="sources_hidden_apps_hint">Chạm để cung cấp lại nguồn này</string>
+    <string name="sources_apps">Ứng dụng</string>
     <string name="sources_management_prerelease_toggle">Bản vá phát hành trước</string>
     <string name="sources_management_prerelease_toggle_description">Trải nghiệm sớm các bản vá thử nghiệm mới</string>
     <string name="sources_prerelease_warning_title">Bật các bản vá trước khi phát hành?</string>
@@ -835,6 +832,7 @@ Các bản vá không bị ảnh hưởng: bật các bản vá trước khi ph�
     <string name="settings_advanced_patch_options_path_gone">Biểu tượng ứng dụng tùy chỉnh cần một thư mục chứa hình ảnh biểu tượng.</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Biểu tượng</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Vietnamese</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Biểu tượng ứng dụng tùy chỉnh cần một thư mục chứa hình ảnh biểu tượng.</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Biểu tượng tùy chỉnh</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Thư mục chứa ảnh dùng làm biểu tượng tuỳ chỉnh.
 

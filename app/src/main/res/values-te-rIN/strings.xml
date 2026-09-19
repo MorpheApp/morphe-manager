@@ -2,12 +2,19 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">మిగతా ఆప్స్</string>
+    <string name="home_other_apps_action">మరో యాప్ ఎంచుకోండి</string>
     <string name="home_not_patched_yet">ఇంకా పాచ్‌ చేయలేదు</string>
+    <string name="home_unpatched_version_installed">ప్యాచ్ చేయని వర్షన్ ఇన్స్టాల్ చేయబడింది</string>
+    <string name="home_unpatched_badge">ప్యాచ్ చెయ్యలేదు </string>
     <string name="home_no_patches_available">ఏ పాచ్లు లేవు</string>
     <string name="home_app_hide_title">ఈ ఆప్ దాయాలి?</string>
+    <string name="home_app_hide_message">ఈ యాప్ హోమ్ స్క్రీన్ లో దాచి పడుతుంది. 
+మీరు దీన్ని ఇదేనా ఆప్స్ మిర్చి రీస్టోర్ చేయొచ్చు క్రింది లిస్ట్ లో ఉంది బటన్ ఉపయోగించి</string>
     <string name="home_app_will_be_hidden">ఈ‌ ఆప్ దాచబడుతుంది</string>
     <string name="home_app_no_hidden">ఏ ఆప్ దాచబడలేదు</string>
     <string name="home_app_hidden_apps_title">దాచబడిన ఆప్ లు</string>
+    <string name="home_app_hidden_apps_hint">మళ్లీ కనిపించడానికి నొక్కండి</string>
+    <string name="android_11_bug_dialog_title">ఆండ్రాయిడ్ 11 బగ్</string>
     <!-- Home Screen - Update Notifications -->
     <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
          "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->

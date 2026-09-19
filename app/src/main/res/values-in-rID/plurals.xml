@@ -64,7 +64,7 @@
         <item quantity="other">%s dipilih</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
-        <item quantity="other">%s tambalan disalin dari bundel yang dipilih</item>
+        <item quantity="other">%s tambalan disalin dari paket yang dipilih</item>
     </plurals>
     <plurals name="core_count">
         <item quantity="other">%s inti</item>

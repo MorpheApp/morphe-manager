@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">Im Browser öffnen</string>
     <string name="sources_management_report_issue">Problem melden</string>
     <string name="sources_management_failed_to_open_url">Fehler beim Öffnen der URL</string>
-    <string name="sources_hidden_apps">Ausgeblendet für</string>
-    <string name="sources_hidden_apps_title">Von %1$s ausgeblendete Apps</string>
-    <string name="sources_hidden_apps_description">Für diese Apps wird diese Quelle beim Patchen nicht angeboten. Die Quelle selbst bleibt für alles andere aktiv</string>
-    <string name="sources_hidden_apps_hint">Tippen Sie, um diese Quelle erneut anzubieten.0Tap to offer this source again1home_simple_bundle_select_remember2Always use this source for this app3Patch option files are missing and will be skipped: %1$s4Some patches are gone5The saved selection for this app names patches that no enabled source offers any more. Continuing patches the app without them6No longer offered7Patch option files are missing8One or more patch options point to files that are no longer there. Remove the paths to patch without them, or put the files back and try again9Remove the paths and continue10This folder cannot be read anymore. Pick it again or clear it, otherwise patching will stop and ask about it11The icon the app is patched with. It is also used where the app cannot change it later, such as Android Auto and the app list of the system settings12The custom app icon needs a folder with icon images</string>
+    <string name="sources_apps">Apps</string>
     <string name="sources_management_prerelease_toggle">Vorab-Patches</string>
     <string name="sources_management_prerelease_toggle_description">Erhalten Sie frühzeitigen Zugriff auf neue experimentelle Patch-Versionen</string>
     <string name="sources_prerelease_warning_title">Vorab-Patches aktivieren?</string>

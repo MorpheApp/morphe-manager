@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">Отвори у прегледачу</string>
     <string name="sources_management_report_issue">Пријави проблем</string>
     <string name="sources_management_failed_to_open_url">Неуспешно отварање URL адресе</string>
-    <string name="sources_hidden_apps">Скривено за</string>
-    <string name="sources_hidden_apps_title">Апликације сакривене са извора %1$s</string>
-    <string name="sources_hidden_apps_description">Овим апликацијама се не нуди овај извор када су закрпљене. Сам извор остаје укључен за све остало</string>
-    <string name="sources_hidden_apps_hint">Увек користите овај извор за ову апликацију</string>
+    <string name="sources_apps">Апликације</string>
     <string name="sources_management_prerelease_toggle">Предвершајуће закрпе</string>
     <string name="sources_management_prerelease_toggle_description">Примање ране приступности новим експерименталним верзијама пача</string>
     <string name="sources_prerelease_warning_title">Омогући пре-издање закрпе?</string>

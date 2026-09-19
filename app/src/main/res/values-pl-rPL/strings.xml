@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">Otwórz w przeglądarce</string>
     <string name="sources_management_report_issue">Zgłoś problem</string>
     <string name="sources_management_failed_to_open_url">Nie udało się otworzyć strony</string>
-    <string name="sources_hidden_apps">Ukryte dla</string>
-    <string name="sources_hidden_apps_title">Aplikacje ukryte przed %1$s</string>
-    <string name="sources_hidden_apps_description">Tym aplikacjom nie proponuje się tego źródła podczas modyfikowania. Samo źródło pozostaje włączone dla wszystkich innych</string>
-    <string name="sources_hidden_apps_hint">Dotknij, aby ponownie zaproponować to źródło</string>
+    <string name="sources_apps">Aplikacje</string>
     <string name="sources_management_prerelease_toggle">Przedpremierowe modyfikacje</string>
     <string name="sources_management_prerelease_toggle_description">Zapewnia wczesny dostęp do nowych, eksperymentalnych wersji modyfikacji</string>
     <string name="sources_prerelease_warning_title">Włączyć przedpremierowe modyfikacje?</string>
@@ -511,7 +508,7 @@ Strefa zewnętrzna (linia przerywana): może zostać przycięta - najważniejsze
     <string name="patcher_field_io_peak">Szczytowe I/O przestrzeni</string>
     <string name="patcher_field_value_unknown">nieznany</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
-    <string name="patcher_field_value_stripped">okrojone</string>
+    <string name="patcher_field_value_stripped">usunięte</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">zachowane</string>
     <string name="patcher_tab_logs">Logi modyfikatora</string>

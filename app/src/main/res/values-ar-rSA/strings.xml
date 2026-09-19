@@ -140,10 +140,14 @@
     <string name="sources_management_open_in_browser">فتح في المتصفح</string>
     <string name="sources_management_report_issue">الإبلاغ عن مشكلة</string>
     <string name="sources_management_failed_to_open_url">فشل في فتح الرابط</string>
-    <string name="sources_hidden_apps">مخفي لـ</string>
-    <string name="sources_hidden_apps_title">تطبيقات مخفية من %1$s</string>
-    <string name="sources_hidden_apps_description">هذه التطبيقات لا تُقدّم هذا المصدر عند تعديلها. يبقى المصدر نفسه مفعلًا لكل شيء آخر</string>
-    <string name="sources_hidden_apps_hint">انقر لتقديم هذا المصدر مرة أخرى</string>
+    <string name="sources_apps">التطبيقات</string>
+    <string name="sources_apps_title">تطبيقات من %1$s</string>
+    <string name="sources_apps_description">اضغط على تطبيق لاستبعاده من هذا المصدر أو لإعادته، أو اضغط مطولاً لتحديد عدة تطبيقات. تتم إزالته من الشاشة الرئيسية عندما لا يجلبه أي مصدر.</string>
+    <string name="sources_apps_brought">ما يجلبه هذا المصدر</string>
+    <string name="sources_apps_left_out">المستبعدة من هذا المصدر</string>
+    <string name="sources_apps_leave_out">استبعاد</string>
+    <string name="sources_apps_leave_out_done">مستبعد</string>
+    <string name="sources_apps_bring_back">إعادة</string>
     <string name="sources_management_prerelease_toggle">إصدارات ما قبل الإطلاق</string>
     <string name="sources_management_prerelease_toggle_description">احصل على وصول مبكر إلى إصدارات التعديل التجريبية الجديدة</string>
     <string name="sources_prerelease_warning_title">تمكين إصدارات تعديلات ما قبل الإطلاق؟</string>
@@ -187,6 +191,8 @@
     <string name="sources_dialog_local_change_file">تغيير الملف</string>
     <string name="sources_dialog_preinstalled">مثبتة مسبقًا</string>
     <string name="sources_dialog_community">تعديلات المجتمع</string>
+    <string name="sources_dialog_choose_apps">اختيار التطبيقات</string>
+    <string name="sources_dialog_choose_apps_description">اختر أي تطبيقاته تريد الاحتفاظ بها بعد تحميل المصدر.</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">مصادر التعديل من طرف ثالث</string>
     <string name="sources_dialog_community_notice_message">"يتم إنشاء وصيانة مصادر تعديلات المجتمع بواسطة مؤلفيها أنفسهم. لا يقوم Morphe بمراجعة أو التحقق من التعديلات التي يقدمها طرف ثالث، ولا يتحمل أي مسؤولية عن محتواها أو عن تأثيرها على جهازك.
@@ -504,8 +510,8 @@
     <!-- How long patching took -->
     <string name="patcher_field_time">الوقت</string>
     <!-- Average and peak memory the patcher process held while it ran -->
-    <string name="patcher_field_memory_average">متوسط الذاكرة</string>
-    <string name="patcher_field_memory_max">أقصى ذاكرة</string>
+    <string name="patcher_field_memory_average">متوسط استخدام الذاكرة</string>
+    <string name="patcher_field_memory_max">أقصى استخدام للذاكرة</string>
     <!-- Fastest read or write rate reached while patching, in data per second -->
     <string name="patcher_field_io_peak">ذروة التخزين</string>
     <string name="patcher_field_value_unknown">غير معروف</string>

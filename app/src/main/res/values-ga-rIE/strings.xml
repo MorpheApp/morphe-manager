@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">Oscail sa bhrabhsálaí</string>
     <string name="sources_management_report_issue">Tuairiscigh fadhb</string>
     <string name="sources_management_failed_to_open_url">Teip ar URL a oscailt</string>
-    <string name="sources_hidden_apps">Faoi cheilt ar feadh</string>
-    <string name="sources_hidden_apps_title">Aipeanna i bhfolach ó %1$s</string>
-    <string name="sources_hidden_apps_description">Ní chuirtear an fhoinse seo ar fáil do na haipeanna seo nuair a bhíonn paiste curtha orthu. Fanann an fhoinse féin gníomhach i gcás gach rud eile.</string>
-    <string name="sources_hidden_apps_hint">Tapáil chun an fhoinse seo a thairiscint arís</string>
+    <string name="sources_apps">Aipeanna</string>
     <string name="sources_management_prerelease_toggle">Paistí réamh-eisiúna</string>
     <string name="sources_management_prerelease_toggle_description">Faigheann sé rochtain luath ar leaganacha nua paiste turgnamhacha</string>
     <string name="sources_prerelease_warning_title">Paistí réamh-eisiúna a chumasú?</string>

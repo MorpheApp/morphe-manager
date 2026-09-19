@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">Abrir links no navegador</string>
     <string name="sources_management_report_issue">Relatar um problema</string>
     <string name="sources_management_failed_to_open_url">Erro ao abrir URL</string>
-    <string name="sources_hidden_apps">Oculta para</string>
-    <string name="sources_hidden_apps_title">Aplicações ocultas de %1$s</string>
-    <string name="sources_hidden_apps_description">Esta fonte não é oferecida a estas aplicações quando recebem patches. A fonte em si permanece ativa para tudo o resto.</string>
-    <string name="sources_hidden_apps_hint">Toque para oferecer esta fonte novamente</string>
+    <string name="sources_apps">Aplicativos</string>
     <string name="sources_management_prerelease_toggle">Modificações pré-lançamento</string>
     <string name="sources_management_prerelease_toggle_description">Recebe acesso antecipado às novas versões experimentais de modificações</string>
     <string name="sources_prerelease_warning_title">Ativar correções de pré-lançamento?</string>

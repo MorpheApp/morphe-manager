@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">브라우저에서 열기</string>
     <string name="sources_management_report_issue">문제 보고</string>
     <string name="sources_management_failed_to_open_url">URL을 열 수 없습니다</string>
-    <string name="sources_hidden_apps">숨김 대상</string>
-    <string name="sources_hidden_apps_title">%1$s에서 숨겨진 앱</string>
-    <string name="sources_hidden_apps_description">이러한 앱은 패치될 때 이 소스를 제공받지 않습니다. 소스 자체는 다른 모든 앱에 대해 계속 활성화됩니다</string>
-    <string name="sources_hidden_apps_hint">이 소스를 다시 제공하려면 탭하세요</string>
+    <string name="sources_apps">앱</string>
     <string name="sources_management_prerelease_toggle">Pre-release 패치</string>
     <string name="sources_management_prerelease_toggle_description">새 실험 패치 버전을 미리 받아보세요</string>
     <string name="sources_prerelease_warning_title">Pre-release 패치 활성화</string>

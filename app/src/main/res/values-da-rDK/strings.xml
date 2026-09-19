@@ -140,10 +140,14 @@
     <string name="sources_management_open_in_browser">Åbn links i browser</string>
     <string name="sources_management_report_issue">Rapportér et problem</string>
     <string name="sources_management_failed_to_open_url">Kunne ikke åbne URL</string>
-    <string name="sources_hidden_apps">Skjult for</string>
-    <string name="sources_hidden_apps_title">Apps skjult for %1$s</string>
-    <string name="sources_hidden_apps_description">Disse apps får ikke tilbudt denne kilde, når de bliver patchet. Selve kilden forbliver aktiveret for alt andet</string>
-    <string name="sources_hidden_apps_hint">Tryk for at tilbyde denne kilde igen</string>
+    <string name="sources_apps">Apps</string>
+    <string name="sources_apps_title">Apps fra %1$s</string>
+    <string name="sources_apps_description">Tryk på en app for at udelade den fra denne kilde eller tage den tilbage, eller tryk og hold for at vælge flere. En app forlader startskærmen, når ingen kilde bringer den.</string>
+    <string name="sources_apps_brought">Leveret af denne kilde</string>
+    <string name="sources_apps_left_out">Udeladt fra denne kilde</string>
+    <string name="sources_apps_leave_out">Udelad</string>
+    <string name="sources_apps_leave_out_done">Udeladt</string>
+    <string name="sources_apps_bring_back">Bring tilbage</string>
     <string name="sources_management_prerelease_toggle">Pre-release patches</string>
     <string name="sources_management_prerelease_toggle_description">Få tidlig adgang til nye eksperimentelle patch versioner</string>
     <string name="sources_prerelease_warning_title">Aktivér præ-release-patcher?</string>
@@ -187,6 +191,8 @@
     <string name="sources_dialog_local_change_file">Ændre fil</string>
     <string name="sources_dialog_preinstalled">Forhåndsinstalleret</string>
     <string name="sources_dialog_community">Fællesskabets patches</string>
+    <string name="sources_dialog_choose_apps">Vælg apps</string>
+    <string name="sources_dialog_choose_apps_description">Vælg, hvilke af dens apps der skal beholdes, når kilden er indlæst.</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Tredjeparts patch-kilder</string>
     <string name="sources_dialog_community_notice_message">"Fællesskabets patch-kilder er lavet og vedligeholdt af deres egne forfattere. Morphe gennemgår eller verificerer ikke tredjeparts patches og er ikke ansvarlig for deres indhold eller for hvad de gør på din enhed.

@@ -140,10 +140,14 @@
     <string name="sources_management_open_in_browser">Maak oop in blaaier</string>
     <string name="sources_management_report_issue">Rapporteer \'n probleem</string>
     <string name="sources_management_failed_to_open_url">Mislukking om URL oop te maak</string>
-    <string name="sources_hidden_apps">Versteek vir</string>
-    <string name="sources_hidden_apps_title">Toepassings wat van %1$s weggesteek is</string>
-    <string name="sources_hidden_apps_description">Patch-opsielêers ontbreek en sal oorgeslaan word: %1$s</string>
-    <string name="sources_hidden_apps_hint">Tik om hierdie bron weer aan te bied</string>
+    <string name="sources_apps">Toepassings</string>
+    <string name="sources_apps_title">Toepassings van %1$s</string>
+    <string name="sources_apps_description">Raak \'n toepassing aan om dit uit hierdie bron te los of terug te bring, of druk lank om verskeie te kies. \'n Toepassing verlaat die tuisskerm sodra geen bron dit bring nie.</string>
+    <string name="sources_apps_brought">Deur hierdie bron gebring</string>
+    <string name="sources_apps_left_out">Uitgelaat uit hierdie bron</string>
+    <string name="sources_apps_leave_out">Los uit</string>
+    <string name="sources_apps_leave_out_done">Uitgelaat</string>
+    <string name="sources_apps_bring_back">Bring terug</string>
     <string name="sources_management_prerelease_toggle">Voorvrystellings-veranderinge</string>
     <string name="sources_management_prerelease_toggle_description">Ontvang vroegtydige toegang tot nuwe eksperimentele weergawe-opdaterings</string>
     <string name="sources_prerelease_warning_title">Aktiveer pre-release patches?</string>
@@ -187,6 +191,8 @@
     <string name="sources_dialog_local_change_file">Verander vyl</string>
     <string name="sources_dialog_preinstalled">Voor geïnstalleer</string>
     <string name="sources_dialog_community">Gemeenskapspleisters</string>
+    <string name="sources_dialog_choose_apps">Kies toepassings</string>
+    <string name="sources_dialog_choose_apps_description">Kies watter van sy toepassings om te hou sodra die bron gelaai is.</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Derdeparty-pleisterbronne</string>
     <string name="sources_dialog_community_notice_message">"Gemeenskapspleisterbronne word gemaak en onderhou deur hul eie outeurs. Morphe beoordeel of verifieer nie derdeparty-pleisters nie, en is nie verantwoordelik vir hul inhoud of vir wat hulle op jou toestel doen nie.

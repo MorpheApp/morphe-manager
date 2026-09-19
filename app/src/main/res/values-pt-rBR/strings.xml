@@ -51,8 +51,8 @@
     <string name="home_app_list_options_title">Ordenar e filtrar</string>
     <string name="home_app_list_options_state_description">Ordenado por %1$s, filtrado por %2$s</string>
     <string name="home_app_filter_all_description">Todos os aplicativos na tela inicial</string>
-    <string name="home_app_filter_patched_description">Aplicativos em que você aplicou patch ou salvou com o Morphe</string>
-    <string name="home_app_filter_not_patched_description">Aplicativos em que você ainda não aplicou patch no Morphe</string>
+    <string name="home_app_filter_patched_description">Aplicativos cujos você aplicou um patch ou salvou com o Morphe</string>
+    <string name="home_app_filter_not_patched_description">Aplicativos cujos você ainda não aplicou um patch no Morphe</string>
     <string name="home_app_filter_installed_description">Aplicativos atualmente instalados neste dispositivo</string>
     <string name="home_app_filter_uninstalled_description">Aplicativos com patch do Morphe que não estão mais neste dispositivo</string>
     <string name="home_app_filter_clones">Clones</string>
@@ -107,7 +107,7 @@
     <string name="home_greeting_10">Movido a cafeína e bons patches</string>
     <!-- Morning greetings (5:00–11:59) -->
     <string name="home_greeting_morning_1">Levante e patcheie</string>
-    <string name="home_greeting_morning_2">Bom dia! Aplicativos não se atualizam sozinhos</string>
+    <string name="home_greeting_morning_2">Bom dia! Aplicativos não se patcheam sozinhos</string>
     <!-- Afternoon greetings (12:00–16:59) -->
     <string name="home_greeting_afternoon_1">Bateu a preguiça da tarde? Patcheie alguma coisa</string>
     <string name="home_greeting_afternoon_2">Patchear depois do almoço bate diferente.</string>
@@ -117,7 +117,7 @@
     <string name="home_greeting_evening_2">Hora de relaxar? Aplique um patch num aplicativo antes</string>
     <string name="home_greeting_evening_3">Fim do expediente? Patcheie alguma coisa primeiro</string>
     <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Ainda acordado? Os aplicativos precisam ser patcheados também</string>
+    <string name="home_greeting_late_night_1">Ainda acordado? Os aplicativos que precisam ser patcheados também</string>
     <string name="home_greeting_late_night_2">Sessão de patches tarde da noite? Respeito</string>
     <string name="home_greeting_late_night_3">Modo coruja noturna: ativado</string>
     <!-- Super late night greetings (0:00–4:59) -->
@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">Abrir links no navegador</string>
     <string name="sources_management_report_issue">Relatar um problema</string>
     <string name="sources_management_failed_to_open_url">Falha ao abrir URL</string>
-    <string name="sources_hidden_apps">Oculto para</string>
-    <string name="sources_hidden_apps_title">Apps ocultos de %1$s</string>
-    <string name="sources_hidden_apps_description">Esses apps não recebem essa fonte quando são patcheados. A fonte em si permanece ativa para todo o restante</string>
-    <string name="sources_hidden_apps_hint">Toque para oferecer esta fonte novamente</string>
+    <string name="sources_apps">Aplicativos</string>
     <string name="sources_management_prerelease_toggle">Patches de pré-lançamento</string>
     <string name="sources_management_prerelease_toggle_description">Recebe acesso antecipado a novas versões experimentais de patches</string>
     <string name="sources_prerelease_warning_title">Ativar patches de pré-lançamento?</string>
@@ -204,7 +201,7 @@ Tudo o que você adicionar a partir deste site é por sua conta e risco"</string
     <string name="home_apk_availability_dialog_simple">Para aplicar os patches no aplicativo &lt;b&gt;%s&lt;/b&gt;, você precisa do APK sem patches na versão:</string>
     <string name="home_apk_availability_dialog_expert">Para aplicar os patches no app &lt;b&gt;%s&lt;/b&gt;, você precisa de um APK sem patches na versão:</string>
     <string name="home_apk_availability_recommended_label">Recomendado</string>
-    <string name="home_apk_availability_unpatched_label">Original</string>
+    <string name="home_apk_availability_unpatched_label">Não patcheado</string>
     <string name="home_apk_availability_incompatible_label">Incompatível</string>
     <string name="home_apk_availability_installed_version">Instalado neste dispositivo: %s</string>
     <string name="home_apk_availability_yes">Sim, me ajude a encontrar um APK</string>
@@ -218,7 +215,7 @@ Tudo o que você adicionar a partir deste site é por sua conta e risco"</string
     <string name="home_apk_helper_no_result">O app auxiliar não devolveu um APK</string>
     <string name="home_apk_helper_no_access">O app auxiliar não concedeu acesso ao APK que devolveu</string>
     <string name="home_apk_helper_no_package">O aplicativo auxiliar não informou qual aplicativo instalado usar</string>
-    <string name="home_apk_helper_wrong_package">O aplicativo auxiliar retornou um aplicativo diferente daquele que está recebendo a aplicação de patch</string>
+    <string name="home_apk_helper_wrong_package">O aplicativo auxiliar retornou um aplicativo diferente daquele que está sendo patcheado</string>
     <string name="home_apk_helper_installed_unavailable">O Morphe não conseguiu usar o aplicativo instalado</string>
     <string name="home_apk_helper_installed_incompatible">Não é possível aplicar o patch na versão instalada</string>
     <string name="home_apk_use_saved">Usar APK salvo</string>

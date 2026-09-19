@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">Opna í vafra</string>
     <string name="sources_management_report_issue">Nýlega uppfærð forrit fyrst</string>
     <string name="sources_management_failed_to_open_url">Ekki tókst að opna vefslóð</string>
-    <string name="sources_hidden_apps">Snertu til að bjóða aftur upp á þessa uppsprettu</string>
-    <string name="sources_hidden_apps_title">Skrár með plástravalkostum vantar og þeim verður sleppt: %1$s</string>
-    <string name="sources_hidden_apps_description">Vistað val fyrir þetta forrit nefnir plástra sem engin virk uppspretta býður lengur upp á. Ef haldið er áfram verður forritið plástrað án þeirra</string>
-    <string name="sources_hidden_apps_hint">Skrár með plástravalkostum vantar</string>
+    <string name="sources_apps">Forrit</string>
     <string name="sources_management_prerelease_toggle">For úgáfur</string>
     <string name="sources_management_prerelease_toggle_description">Fáðu snemma aðgang að nýjum tilraunabreytingar útgáfum</string>
     <string name="sources_prerelease_warning_title">Tilkynna vandamál</string>

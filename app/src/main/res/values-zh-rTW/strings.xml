@@ -140,10 +140,14 @@
     <string name="sources_management_open_in_browser">在瀏覽器中開啟</string>
     <string name="sources_management_report_issue">回報問題</string>
     <string name="sources_management_failed_to_open_url">無法開啟網址</string>
-    <string name="sources_hidden_apps">已隱藏</string>
-    <string name="sources_hidden_apps_title">已從 %1$s 隱藏的應用程式</string>
-    <string name="sources_hidden_apps_description">當這些應用程式被修補時，不會向它們提供此來源。此來源本身對其他所有項目仍會保持開啟</string>
-    <string name="sources_hidden_apps_hint">輕觸以再次提供此來源</string>
+    <string name="sources_apps">應用程式</string>
+    <string name="sources_apps_title">來自 %1$s 的應用程式</string>
+    <string name="sources_apps_description">輕觸應用程式可將其從此來源排除或重新加入，長按則可選取多個。當沒有來源提供它時，該應用程式就會從主畫面移除。</string>
+    <string name="sources_apps_brought">由此來源提供</string>
+    <string name="sources_apps_left_out">已從此來源排除</string>
+    <string name="sources_apps_leave_out">排除</string>
+    <string name="sources_apps_leave_out_done">已排除</string>
+    <string name="sources_apps_bring_back">重新加入</string>
     <string name="sources_management_prerelease_toggle">預先發布版修補程式</string>
     <string name="sources_management_prerelease_toggle_description">搶先取得新實驗性修補程式版本</string>
     <string name="sources_prerelease_warning_title">啟用預發佈修補程式？</string>
@@ -187,6 +191,8 @@
     <string name="sources_dialog_local_change_file">變更檔案</string>
     <string name="sources_dialog_preinstalled">預先安裝</string>
     <string name="sources_dialog_community">社群修補程式</string>
+    <string name="sources_dialog_choose_apps">選擇應用程式</string>
+    <string name="sources_dialog_choose_apps_description">在來源載入後，選擇要保留其中的哪些應用程式。</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">第三方修補程式來源</string>
     <string name="sources_dialog_community_notice_message">"社群修補程式來源由其各自的作者製作和維護。Morphe 不會審查或驗證第三方修補程式，亦不對其內容或它們在您裝置上的行為負責。

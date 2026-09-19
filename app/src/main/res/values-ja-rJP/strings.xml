@@ -140,10 +140,7 @@
     <string name="sources_management_open_in_browser">ブラウザで開く</string>
     <string name="sources_management_report_issue">問題を報告</string>
     <string name="sources_management_failed_to_open_url">URL を開けませんでした</string>
-    <string name="sources_hidden_apps">非表示</string>
-    <string name="sources_hidden_apps_title">%1$s から非表示にされたアプリ</string>
-    <string name="sources_hidden_apps_description">これらのアプリはパッチ適用時にこのソースを提供されません。ソース自体は他のすべてに対して有効のままです</string>
-    <string name="sources_hidden_apps_hint">このソースを再度提供するにはタップしてください</string>
+    <string name="sources_apps">アプリ</string>
     <string name="sources_management_prerelease_toggle">プレリリース版のパッチを使用</string>
     <string name="sources_management_prerelease_toggle_description">実験的なバージョンのパッチを取得します</string>
     <string name="sources_prerelease_warning_title">プレリリース版パッチを有効にしますか？</string>
