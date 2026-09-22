@@ -95,6 +95,9 @@ class PreferencesManager(
 
     val stripUnusedNativeLibs = booleanPreference("strip_unused_native_libs", false)
 
+    /** Leave patched APKs unsigned; the original META-INF signature files stay in the output. */
+    val skipApkSigning = booleanPreference("skip_apk_signing", false)
+
     // System tab
     val installerPrimary = stringPreference("installer_primary", InstallerPreferenceTokens.INTERNAL)
     val promptInstallerOnInstall = booleanPreference("prompt_installer_on_install", false)
@@ -115,9 +118,6 @@ class PreferencesManager(
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !isArmV7()
     )
     val patcherProcessMemoryLimit = IntPreference(dataStore, "use_process_runtime_memory_limit", PROCESS_RUNTIME_MEMORY_NOT_SET)
-
-    /** Whether the last patcher process came up without the heap limit it asked for. Tied to the device, so never exported. */
-    val patcherHeapLimitIgnored = booleanPreference("patcher_heap_limit_ignored", false)
 
     val keystoreAlias = stringPreference("keystore_alias", KeystoreManager.DEFAULT)
     val keystorePass = stringPreference("keystore_pass", KeystoreManager.DEFAULT)
