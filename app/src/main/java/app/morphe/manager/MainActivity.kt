@@ -104,7 +104,22 @@ class MainActivity : AppCompatActivity() {
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
         enableEdgeToEdge()
-        installSplashScreen()
+        installSplashScreen().setOnExitAnimationListener { splash ->
+            val remaining = (splash.iconAnimationStartMillis + splash.iconAnimationDurationMillis -
+                    System.currentTimeMillis()).coerceAtLeast(0L)
+            // The icon sits on its own surface that applies alpha a few frames late,
+            // so it fades out before the background uncovers the app
+            splash.iconView.animate()
+                .alpha(0f)
+                .setStartDelay(remaining)
+                .setDuration(SPLASH_ICON_FADE_OUT_MS)
+                .withEndAction {
+                    splash.view.animate()
+                        .alpha(0f)
+                        .setDuration(SPLASH_FADE_OUT_MS)
+                        .withEndAction(splash::remove)
+                }
+        }
 
         val vm: MainViewModel = getActivityViewModel()
 
@@ -288,6 +303,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
+        /** How long the splash screen logo takes to fade out. */
+        private const val SPLASH_ICON_FADE_OUT_MS = 150L
+
+        /** How long the splash screen background takes to fade into the app. */
+        private const val SPLASH_FADE_OUT_MS = 200L
+
         /** Action other apps use to queue a batch patch run. */
         const val ACTION_BATCH_PATCH = "app.morphe.manager.action.BATCH_PATCH"
 

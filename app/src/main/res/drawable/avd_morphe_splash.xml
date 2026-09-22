@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025 Morphe. This is copyrighted content, and not licensed under open source terms.
+     See https://github.com/MorpheApp/morphe-branding -->
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:width="108dp"
+            android:height="108dp"
+            android:viewportWidth="512"
+            android:viewportHeight="512">
+            <group
+                android:scaleX="0.6"
+                android:scaleY="0.6"
+                android:translateX="102.4"
+                android:translateY="102.4">
+                <group
+                    android:name="logo"
+                    android:pivotX="256"
+                    android:pivotY="256"
+                    android:scaleX="0.9"
+                    android:scaleY="0.9">
+                    <group
+                        android:name="pillar_left"
+                        android:pivotX="123"
+                        android:pivotY="408"
+                        android:scaleY="0">
+                        <path
+                            android:fillColor="#1E5AA8"
+                            android:pathData="M123,140c-21,0 -39,17 -40,38v192c1,21 19,38 40,38 21,0 39,-17 40,-38V178c-1,-21 -19,-38 -40,-38z" />
+                    </group>
+                    <group
+                        android:name="pillar_right"
+                        android:pivotX="389"
+                        android:pivotY="408"
+                        android:scaleY="0">
+                        <path
+                            android:fillColor="#00AFAE"
+                            android:pathData="M349,285v85c1,21 19,38 40,38 21,0 39,-17 40,-38V182c-11,-14 -74,63 -80,103z" />
+                    </group>
+                    <group
+                        android:name="wave"
+                        android:translateY="26">
+                        <clip-path
+                            android:name="wave_reveal"
+                            android:pathData="M20,60 L68,60 L-28,460 L20,460 Z" />
+                        <path android:pathData="M127,108c-34,0 -44,25 -44,40v54c30,-33 75,27 80,33 28,32 44,87 93,89 48,-2 67,-56 93,-89 0,0 45,-74 80,-80 0,-28 -11,-47 -44,-47 -34,0 -58,50 -75,72 -17,22 -25,46 -54,46 -29,0 -38,-25 -54,-46 -17,-22 -41,-72 -75,-72z">
+                            <aapt:attr name="android:fillColor">
+                                <gradient
+                                    android:endX="429"
+                                    android:endY="216"
+                                    android:startX="83"
+                                    android:startY="216"
+                                    android:type="linear">
+                                    <item
+                                        android:color="#1E5AA8"
+                                        android:offset="0" />
+                                    <item
+                                        android:color="#00AFAE"
+                                        android:offset="1" />
+                                </gradient>
+                            </aapt:attr>
+                        </path>
+                    </group>
+                </group>
+            </group>
+        </vector>
+    </aapt:attr>
+
+    <target android:name="logo">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="733"
+                    android:propertyName="scaleX"
+                    android:valueFrom="0.9"
+                    android:valueTo="1"
+                    android:valueType="floatType">
+                    <aapt:attr name="android:interpolator">
+                        <pathInterpolator
+                            android:controlX1="0.2"
+                            android:controlY1="0"
+                            android:controlX2="0.1"
+                            android:controlY2="1" />
+                    </aapt:attr>
+                </objectAnimator>
+                <objectAnimator
+                    android:duration="733"
+                    android:propertyName="scaleY"
+                    android:valueFrom="0.9"
+                    android:valueTo="1"
+                    android:valueType="floatType">
+                    <aapt:attr name="android:interpolator">
+                        <pathInterpolator
+                            android:controlX1="0.2"
+                            android:controlY1="0"
+                            android:controlX2="0.1"
+                            android:controlY2="1" />
+                    </aapt:attr>
+                </objectAnimator>
+            </set>
+        </aapt:attr>
+    </target>
+
+    <target android:name="pillar_left">
+        <aapt:attr name="android:animation">
+            <set android:ordering="sequentially">
+                <objectAnimator
+                    android:duration="267"
+                    android:propertyName="scaleY"
+                    android:valueFrom="0"
+                    android:valueTo="1.06"
+                    android:valueType="floatType">
+                    <aapt:attr name="android:interpolator">
+                        <pathInterpolator
+                            android:controlX1="0.2"
+                            android:controlY1="0"
+                            android:controlX2="0.1"
+                            android:controlY2="1" />
+                    </aapt:attr>
+                </objectAnimator>
+                <objectAnimator
+                    android:duration="133"
+                    android:propertyName="scaleY"
+                    android:valueFrom="1.06"
+                    android:valueTo="1"
+                    android:valueType="floatType">
+                    <aapt:attr name="android:interpolator">
+                        <pathInterpolator
+                            android:controlX1="0.33"
+                            android:controlY1="0"
+                            android:controlX2="0.67"
+                            android:controlY2="1" />
+                    </aapt:attr>
+                </objectAnimator>
+            </set>
+        </aapt:attr>
+    </target>
+
+    <target android:name="pillar_right">
+        <aapt:attr name="android:animation">
+            <set android:ordering="sequentially">
+                <objectAnimator
+                    android:duration="267"
+                    android:propertyName="scaleY"
+                    android:startOffset="100"
+                    android:valueFrom="0"
+                    android:valueTo="1.06"
+                    android:valueType="floatType">
+                    <aapt:attr name="android:interpolator">
+                        <pathInterpolator
+                            android:controlX1="0.2"
+                            android:controlY1="0"
+                            android:controlX2="0.1"
+                            android:controlY2="1" />
+                    </aapt:attr>
+                </objectAnimator>
+                <objectAnimator
+                    android:duration="133"
+                    android:propertyName="scaleY"
+                    android:valueFrom="1.06"
+                    android:valueTo="1"
+                    android:valueType="floatType">
+                    <aapt:attr name="android:interpolator">
+                        <pathInterpolator
+                            android:controlX1="0.33"
+                            android:controlY1="0"
+                            android:controlX2="0.67"
+                            android:controlY2="1" />
+                    </aapt:attr>
+                </objectAnimator>
+            </set>
+        </aapt:attr>
+    </target>
+
+    <target android:name="wave">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:duration="467"
+                android:propertyName="translateY"
+                android:startOffset="200"
+                android:valueFrom="26"
+                android:valueTo="0"
+                android:valueType="floatType">
+                <aapt:attr name="android:interpolator">
+                    <pathInterpolator
+                        android:controlX1="0.2"
+                        android:controlY1="0"
+                        android:controlX2="0.1"
+                        android:controlY2="1" />
+                </aapt:attr>
+            </objectAnimator>
+        </aapt:attr>
+    </target>
+
+    <target android:name="wave_reveal">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:duration="467"
+                android:propertyName="pathData"
+                android:startOffset="200"
+                android:valueFrom="M20,60 L68,60 L-28,460 L20,460 Z"
+                android:valueTo="M20,60 L568,60 L472,460 L20,460 Z"
+                android:valueType="pathType">
+                <aapt:attr name="android:interpolator">
+                    <pathInterpolator
+                        android:controlX1="0.45"
+                        android:controlY1="0"
+                        android:controlX2="0.2"
+                        android:controlY2="1" />
+                </aapt:attr>
+            </objectAnimator>
+        </aapt:attr>
+    </target>
+</animated-vector>

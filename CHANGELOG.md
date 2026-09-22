@@ -1,3 +1,10 @@
+# [1.32.0-dev.11](https://github.com/MorpheApp/morphe-manager/compare/v1.32.0-dev.10...v1.32.0-dev.11) (2026-09-22)
+
+
+### Features
+
+* Animate the logo on the splash screen ([5cc6c66](https://github.com/MorpheApp/morphe-manager/commit/5cc6c66b5b82e8600bee8f4317543a4bfbf58f35))
+
 # [1.32.0-dev.10](https://github.com/MorpheApp/morphe-manager/compare/v1.32.0-dev.9...v1.32.0-dev.10) (2026-09-22)
 
 
