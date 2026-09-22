@@ -202,6 +202,11 @@ class SettingsViewModel(
     fun setStripUnusedNativeLibs(enabled: Boolean) = viewModelScope.launch {
         prefs.stripUnusedNativeLibs.update(enabled)
     }
+    
+    /** Leaves patched APKs unsigned, keeping the original META-INF signature files. */
+    fun setSkipApkSigning(enabled: Boolean) = viewModelScope.launch {
+        prefs.skipApkSigning.update(enabled)
+    }
 
     fun setGitHubPat(pat: String, includeInExport: Boolean) = viewModelScope.launch {
         prefs.gitHubPat.update(pat)
