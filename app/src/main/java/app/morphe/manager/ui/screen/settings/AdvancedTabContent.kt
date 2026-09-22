@@ -50,6 +50,7 @@ fun AdvancedTabContent(
 ) {
     val prefs = settingsViewModel.prefs
     val useExpertMode by prefs.useExpertMode.getAsState()
+    val stripUnusedNativeLibs by prefs.stripUnusedNativeLibs.getAsState()
 
     // Notify VM on expert mode changes so it can derive showExpertModeNotice
     LaunchedEffect(useExpertMode) {
@@ -60,6 +61,7 @@ fun AdvancedTabContent(
     val showExpertModeDialog = remember { mutableStateOf(false) }
     val gitHubPat by prefs.gitHubPat.getAsState()
     val includeGitHubPatInExports by prefs.includeGitHubPatInExports.getAsState()
+    val skipApkSigning by prefs.skipApkSigning.getAsState()
 
     // Expert mode confirmation dialog
     if (showExpertModeDialog.value) {
@@ -134,6 +136,18 @@ fun AdvancedTabContent(
             if (expertMode) {
                 Column(verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)) {
                     SettingsGroup {
+                        // Skip APK signing
+                        SettingsSwitchItem(
+                            checked = skipApkSigning,
+                            onToggle = { settingsViewModel.setSkipApkSigning(!skipApkSigning) },
+                            icon = Icons.Outlined.LockOpen,
+                            title = stringResource(R.string.settings_advanced_skip_signing),
+                            subtitle = stringResource(R.string.settings_advanced_skip_signing_description)
+                        )
+
+                        SettingsDivider()
+
+                        // GitHub PAT
                         // GitHub PAT
                         GitHubPatSettingsItem(
                             currentPat = gitHubPat,
@@ -141,6 +155,19 @@ fun AdvancedTabContent(
                             onSave = { pat, include ->
                                 settingsViewModel.setGitHubPat(pat, include)
                             }
+                        )
+
+                        SettingsDivider()
+
+                        // Strip unused native libraries + filter split APKs for device
+                        SettingsSwitchItem(
+                            checked = stripUnusedNativeLibs,
+                            onToggle = {
+                                settingsViewModel.setStripUnusedNativeLibs(!stripUnusedNativeLibs)
+                            },
+                            icon = Icons.Outlined.LayersClear,
+                            title = stringResource(R.string.settings_advanced_strip_unused_libs),
+                            subtitle = stringResource(R.string.settings_advanced_strip_unused_libs_description)
                         )
                     }
 
