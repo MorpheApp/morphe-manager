@@ -34,9 +34,9 @@ import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.patcher.runtime.CoroutineRuntime
 import app.morphe.manager.patcher.runtime.ProcessRuntime
 import app.morphe.manager.patcher.runtime.coerceMemoryLimit
-import app.morphe.manager.patcher.runtime.heapLimitMebibytes
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.util.NativeLibStripper
+import app.morphe.manager.patcher.util.SignatureRestorer
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.util.*
@@ -336,6 +336,7 @@ class PatcherWorker(
 
             val useProcessRuntime = prefs.useProcessRuntime.get()
             val stripNativeLibs = prefs.stripUnusedNativeLibs.get()
+            val skipSigning = prefs.skipApkSigning.get()
             val inputIsSplitArchive = SplitApkPreparer.isSplitArchive(inputFile)
             // The architecture the patches were selected against, worth a line of its own now
             // that a patch can declare itself unavailable for the one the input carries. Read
@@ -395,7 +396,7 @@ class PatcherWorker(
                 args.logger.info("$LOG_WORKER_PREFIX_RUNTIME process $LOG_WORKER_FIELD_MEMORY_LIMIT=$memLimit")
             } else {
                 // CoroutineRuntime starts memory polling internally; only log the heap size here
-                args.logger.logCoroutineHeap()
+                args.logger.info("$LOG_PROCESS_PREFIX_COROUTINE_HEAP ${bytesToMebibytes(Runtime.getRuntime().maxMemory())}MB")
                 args.logger.info("$LOG_WORKER_PREFIX_RUNTIME coroutine")
             }
 
@@ -442,8 +443,6 @@ class PatcherWorker(
                 val fallbackReason = when {
                     !useProcessRuntime -> null
                     isBlockedSyscall(e) -> "Patcher process was killed for a system call the device forbids"
-                    e is ProcessRuntime.ProcessConnectTimeoutException -> e.message
-                    e is ProcessRuntime.HeapLimitIgnoredException -> e.message
                     isOomRelated(e) && Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q ->
                         "Process runtime OOM on Android ${Build.VERSION.RELEASE}"
                     else -> null
@@ -453,7 +452,6 @@ class PatcherWorker(
 
                 // The fallback is a fresh run of the whole pipeline, same as a memory retry
                 onRestart()
-                args.logger.logCoroutineHeap()
 
                 CoroutineRuntime(applicationContext).execute(
                     inputFile.absolutePath,
@@ -474,9 +472,23 @@ class PatcherWorker(
                 NativeLibStripper.strip(patchedApk, args.logger)
             }
 
-            updatePatcherNotification(stepName = signingApkLabel, patchProgress = null)
-            keystoreManager.sign(patchedApk, File(args.output))
-            updateProgress(state = State.COMPLETED) // Signing
+            if (skipSigning) {
+                // Skipping the sign alone leaves an APK that reads as "not signed": the write
+                // path drops the original v1 signature files. Rebuild the output as patched
+                // contents + original META-INF so signature-kill tools see the original cert.
+                if (inputIsSplitArchive) {
+                    args.logger.warn("Signing skipped, but the input was a split bundle: merging already cleared the original META-INF, so there is nothing to restore")
+                    patchedApk.copyTo(File(args.output), overwrite = true)
+                } else {
+                    args.logger.info("Signing skipped by user preference, restoring original META-INF")
+                    SignatureRestorer.restore(inputFile, patchedApk, File(args.output))
+                }
+                updateProgress(state = State.COMPLETED) // Signing (skipped)
+            } else {
+                updatePatcherNotification(stepName = signingApkLabel, patchProgress = null)
+                keystoreManager.sign(patchedApk, File(args.output))
+                updateProgress(state = State.COMPLETED) // Signing
+            }
 
             val elapsed = System.currentTimeMillis() - startTime
 
@@ -488,7 +500,7 @@ class PatcherWorker(
 
             Log.i(tag, "Patching succeeded".logFmt())
             val outputPackageName = pm.getPackageInfo(File(args.output))?.packageName ?: args.packageName
-            autoInstallPending = installerManager.autoInstallAllowed(outputPackageName)
+            autoInstallPending = !skipSigning && installerManager.autoInstallAllowed(outputPackageName)
             succeeded = true
             Result.success()
         } catch (e: ProcessRuntime.ProcessExitException) {
@@ -561,12 +573,12 @@ class PatcherWorker(
     private fun isBlockedSyscall(e: Exception) =
         e is ProcessRuntime.ProcessExitException && e.exitCode == ProcessRuntime.SIGSYS_EXIT_CODE
 
-    private fun Logger.logCoroutineHeap() = info("$LOG_PROCESS_PREFIX_COROUTINE_HEAP ${heapLimitMebibytes()}MB")
-
     private fun isOomRelated(e: Exception) = when (e) {
         is ProcessRuntime.ProcessExitException ->
             e.exitCode == ProcessRuntime.OOM_EXIT_CODE || e.exitCode == ProcessRuntime.SIGKILL_EXIT_CODE
         is ProcessRuntime.HeapExhaustedException -> true
+        is ProcessRuntime.RemoteFailureException ->
+            e.originalStackTrace.contains("OutOfMemoryError", ignoreCase = true)
         else -> false
     }
 
