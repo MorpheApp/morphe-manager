@@ -1,3 +1,10 @@
+# [1.32.0-dev.12](https://github.com/MorpheApp/morphe-manager/compare/v1.32.0-dev.11...v1.32.0-dev.12) (2026-09-22)
+
+
+### Bug Fixes
+
+* Stop the splash screen from covering the app ([91a44de](https://github.com/MorpheApp/morphe-manager/commit/91a44dec4ee79abd1f071e02210c713e51932a39))
+
 # [1.32.0-dev.11](https://github.com/MorpheApp/morphe-manager/compare/v1.32.0-dev.10...v1.32.0-dev.11) (2026-09-22)
 
 
