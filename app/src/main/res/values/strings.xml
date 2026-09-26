@@ -145,7 +145,6 @@
     <string name="sources_management_report_issue">Report an issue</string>
     <string name="sources_management_failed_to_open_url">Failed to open URL</string>
     <string name="sources_apps">Apps</string>
-    <string name="sources_apps_title">Apps from %1$s</string>
     <string name="sources_apps_description">Tap an app to leave it out of this source or bring it back, or long-press to pick several. An app leaves the home screen once no source brings it</string>
     <string name="sources_apps_brought">Brought by this source</string>
     <string name="sources_apps_left_out">Left out of this source</string>
@@ -179,8 +178,6 @@
     <string name="sources_dialog_rename">Rename patch source</string>
     <string name="sources_dialog_duplicate_name_error">A patch source with this name already exists</string>
     <string name="sources_dialog_missing_error">Could not update this patch source</string>
-    <string name="sources_dialog_view_any_version">Any version</string>
-    <string name="sources_dialog_view_any_package">Any package</string>
     <string name="sources_dialog_add_source">Add patch source</string>
     <string name="sources_dialog_delete_confirm_message">Delete source \"%s\"? This cannot be undone</string>
     <string name="sources_dialog_remote">Remote</string>
@@ -292,7 +289,6 @@ Anything you add from this website is used at your own risk"</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_title">Expert mode</string>
     <string name="expert_mode_search">Search patches</string>
-    <string name="expert_mode_proceed">Proceed to patching</string>
     <string name="expert_mode_disable_all">Disable all</string>
     <string name="expert_mode_disable_all_done">All patches disabled</string>
     <string name="expert_mode_enable_all">Enable all</string>
@@ -1290,7 +1286,6 @@ Details: %2$s"</string>
     <string name="disable">Disable</string>
     <string name="enable">Enable</string>
     <string name="loading">Loading…</string>
-    <string name="loading_older_releases">Loading older releases…</string>
     <string name="creating">Creating…</string>
     <string name="processing_apk">Processing APK…</string>
     <string name="exporting_apks">Exporting APKs…</string>
@@ -1333,6 +1328,7 @@ Details: %2$s"</string>
     <string name="continue_">Continue</string>
     <string name="version">Version</string>
     <string name="clone">Clone</string>
+    <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Patch</string>
     <string name="patching">Patching</string>
     <string name="patched">Patched</string>
@@ -1373,8 +1369,30 @@ Details: %2$s"</string>
     <string name="changelog_description">What\'s new in this version</string>
     <string name="changelog_download_fail">Failed to download changelog: %s</string>
     <string name="changelog_empty">No changelog available</string>
-    <string name="changelog_show_older">Show older releases</string>
+    <string name="changelog_earlier_releases">Earlier releases</string>
     <string name="changelog_older_empty">No older releases to show</string>
+    <string name="changelog_older_failed">Couldn\'t load older releases</string>
+    <string name="changelog_release_page">Release page</string>
+    <string name="changelog_host_github" translatable="false">GitHub</string>
+    <string name="changelog_host_gitlab" translatable="false">GitLab</string>
+    <string name="content_translate">Translate</string>
+    <string name="content_show_original">Show original</string>
+    <string name="content_translation_download_confirmation">Download translation model?</string>
+    <string name="content_translation_downloading">Downloading translation model…</string>
+    <string name="content_translation_failed">Failed to translate: %s</string>
+    <string name="changelog_section_new">New</string>
+    <string name="changelog_section_fixes">Fixes</string>
+    <string name="changelog_section_performance">Performance</string>
+    <string name="changelog_section_improvements">Improvements</string>
+    <string name="changelog_section_app_support">App support</string>
+    <string name="changelog_section_other">Changes</string>
+    <string name="changelog_badge_latest">Latest</string>
+    <!-- Marks the version of a patch source the manager patches with -->
+    <string name="changelog_badge_in_use">In use</string>
+    <string name="changelog_badge_prerelease">Pre-release</string>
+    <!-- "%s" is the number of changes in the section -->
+    <string name="changelog_show_all">Show all (%s)</string>
+    <string name="changelog_show_less">Show less</string>
     <string name="no_network_toast">No internet connection available</string>
 
     <string name="update_available">An update is available</string>

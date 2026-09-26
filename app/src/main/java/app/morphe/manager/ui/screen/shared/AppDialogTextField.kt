@@ -22,9 +22,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.node.ModifierNodeElement
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.relocation.BringIntoViewModifierNode
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -230,13 +234,20 @@ fun AppDialogSearchTextField(
  * Kept as its own composable so no layout scope is in scope at the [AnimatedVisibility] call:
  * inside `stickyHeader` the innermost receiver is `LazyItemScope`, and an enclosing `ColumnScope`
  * would otherwise pull in the scoped overload, which cannot be called there.
+ *
+ * The field never asks the list to scroll it into view. It sits at the top, stuck to the list or
+ * above it, so it is always in view, yet a list places a sticky row by its spot at its head: a
+ * field taking focus deep into the list would scroll the list all the way back up to it.
+ *
+ * @param modifier Applied to the field, so it comes and goes along with it.
  */
 @Composable
 fun AppDialogSearchHeader(
     visible: Boolean,
     value: String,
     onValueChange: (String) -> Unit,
-    label: String
+    label: String,
+    modifier: Modifier = Modifier
 ) {
     AnimatedVisibility(
         visible = visible,
@@ -247,9 +258,20 @@ fun AppDialogSearchHeader(
             value = value,
             onValueChange = onValueChange,
             label = label,
-            requestFocus = true
+            requestFocus = true,
+            modifier = modifier.then(StayInPlaceElement)
         )
     }
+}
+
+/** Takes in the requests to bring what it wraps into view, and passes none of them on. */
+private data object StayInPlaceElement : ModifierNodeElement<StayInPlaceNode>() {
+    override fun create() = StayInPlaceNode()
+    override fun update(node: StayInPlaceNode) = Unit
+}
+
+private class StayInPlaceNode : Modifier.Node(), BringIntoViewModifierNode {
+    override suspend fun bringIntoView(childCoordinates: LayoutCoordinates, boundsProvider: () -> Rect?) = Unit
 }
 
 /**

@@ -2,6 +2,7 @@ package app.morphe.manager.ui.viewmodel
 
 import android.app.Application
 import android.content.*
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.runtime.*
 import androidx.core.content.ContextCompat
@@ -74,23 +75,24 @@ class UpdateViewModel : ViewModel(), KoinComponent {
     var isCheckingForUpdate by mutableStateOf(true)
         private set
 
-    // Changelog entries for the current channel (shown in Settings → Changelog).
-    // Stable channel: single entry for the installed version.
-    // Prerelease channel: the installed dev version and every preceding dev entry down to
-    // (but not including) the last stable release; the "Show older" expander then continues
-    // from the stable baseline.
-    var currentChannelChangelogEntries: List<ChangelogEntry>? by mutableStateOf(null)
+    // Releases the changelog dialog opens with, newest first: those an available update brings,
+    // then the installed version with the rest of its pre-release cycle. Null until loaded
+    var changelogEntries: List<ChangelogEntry>? by mutableStateOf(null)
         private set
 
-    // All changelog entries newer than the currently installed version (shown in update dialog)
-    var missedChangelogEntries: List<ChangelogEntry>? by mutableStateOf(null)
+    // How many of the changelog entries lead the list as newer than the installed version
+    var newReleaseCount by mutableIntStateOf(0)
         private set
+    private var changelogJob: Job? = null
 
-    // Older changelog entries loaded on-demand by the "Show older releases" expander.
-    // Reset on dialog dismiss so the expander reopens in a collapsed state next time
+    // Older changelog entries, loaded once a changelog is scrolled to its end. Reset on
+    // dialog dismiss so the next opening starts from the releases it was opened for
     var olderManagerEntries: List<ChangelogEntry>? by mutableStateOf(null)
         private set
     var isLoadingOlderEntries by mutableStateOf(false)
+        private set
+    // Set when the last load failed, so the list offers a retry rather than loading again by itself
+    var olderEntriesFailed by mutableStateOf(false)
         private set
 
     // Parsed CHANGELOG.md per branch (false = main, true = dev). Shared across all loaders
@@ -119,7 +121,8 @@ class UpdateViewModel : ViewModel(), KoinComponent {
             return@launch
         }
 
-        loadMissedChangelog()
+        // A changelog opened before the check resolved gains the releases the update brings
+        loadChangelog()
 
         state = State.CAN_DOWNLOAD
     }
@@ -387,30 +390,54 @@ class UpdateViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Load all changelog entries newer than the currently installed version.
-     * Called automatically after a successful update check.
+     * Loads the releases the changelog dialog opens with: those newer than the installed version
+     * when an update is available, then the installed version itself. On a pre-release build the
+     * installed version brings along every dev entry down to, but not including, the last stable
+     * release, since no stable entry sums those up yet.
+     *
+     * Runs again once the update check resolves, so a dialog opened before then catches up.
      */
-    private fun loadMissedChangelog() = viewModelScope.launch {
-        uiSafe(app, R.string.download_manager_failed, "Failed to load changelog") {
-            val installedVersion = BuildConfig.VERSION_NAME.normalizeVersion()
+    fun loadChangelog() {
+        changelogJob?.cancel()
+        changelogJob = viewModelScope.launch {
+            uiSafe(app, R.string.download_manager_failed, "Failed to load changelog") {
+                val installedVersion = BuildConfig.VERSION_NAME.normalizeVersion()
+                val release = releaseInfo
 
-            // Use the dev branch if EITHER the installed version is a dev build OR the available
-            // update is a pre-release. Without this, a stable user who has "Use pre-releases"
-            // enabled would fetch CHANGELOG.md from main, which doesn't contain dev entries,
-            // causing entriesNewerThan() to return an empty list even though a newer dev version
-            // is available and its changelog lives on the dev branch
-            val targetIsPrerelease = releaseInfo?.version?.contains('-') == true
-            val forDevBranch = morpheAPI.isDevBuild || targetIsPrerelease
-            val entries = managerEntriesCache.getOrPut(forDevBranch) {
-                morpheAPI.fetchManagerChangelog(forDevBranch = forDevBranch)
+                // Use the dev branch if EITHER the installed version is a dev build OR the available
+                // update is a pre-release. Without this, a stable user who has "Use pre-releases"
+                // enabled would fetch CHANGELOG.md from main, which doesn't contain dev entries,
+                // causing entriesNewerThan() to return an empty list even though a newer dev version
+                // is available and its changelog lives on the dev branch
+                val targetIsPrerelease = release?.version?.contains('-') == true
+                val forDevBranch = morpheAPI.isDevBuild || targetIsPrerelease
+                val entries = managerEntriesCache.getOrPut(forDevBranch) {
+                    morpheAPI.fetchManagerChangelog(forDevBranch = forDevBranch)
+                }
+
+                val newer = if (release == null) emptyList() else {
+                    val newerThanInstalled = ChangelogParser.entriesNewerThan(entries, installedVersion)
+                    // Strip pre-release entries when on stable channel - main CHANGELOG.md
+                    // contains merged pre-release entries that stable users should not see
+                    val filtered = if (forDevBranch) newerThanInstalled else newerThanInstalled.filter { !it.isPrerelease }
+                    // Right after a release the raw CDN can still serve a CHANGELOG.md that predates
+                    // it, so fall back to the notes the release itself carries rather than show nothing
+                    filtered.ifEmpty { listOfNotNull(releaseNotesEntry()) }
+                }
+
+                val installedIndex = entries.indexOfFirst { it.version.normalizeVersion() == installedVersion }
+                val installed = when {
+                    installedIndex < 0 -> emptyList()
+                    entries[installedIndex].isPrerelease -> entries.drop(installedIndex).takeWhile { it.isPrerelease }
+                    else -> listOf(entries[installedIndex])
+                }
+
+                val shownVersions = newer.map { it.version.normalizeVersion() }.toSet()
+                changelogEntries = newer + installed.filter { it.version.normalizeVersion() !in shownVersions }
+                newReleaseCount = newer.size
             }
-            val newer = ChangelogParser.entriesNewerThan(entries, installedVersion)
-            // Strip pre-release entries when on stable channel - main CHANGELOG.md
-            // contains merged pre-release entries that stable users should not see
-            val filtered = if (forDevBranch) newer else newer.filter { !it.isPrerelease }
-            // Right after a release the raw CDN can still serve a CHANGELOG.md that predates
-            // it, so fall back to the notes the release itself carries rather than show nothing
-            missedChangelogEntries = filtered.ifEmpty { listOfNotNull(releaseNotesEntry()) }
+            // A failed first load still leaves the history below to fetch, rather than a list stuck loading
+            if (changelogEntries == null) changelogEntries = emptyList()
         }
     }
 
@@ -432,59 +459,43 @@ class UpdateViewModel : ViewModel(), KoinComponent {
     }
 
     /**
-     * Load changelog entries for the current channel from CHANGELOG.md.
-     *
-     * Stable channel: the installed version's entry only.
-     * Prerelease channel: the installed dev version and every preceding dev entry down to
-     * (but not including) the last stable release.
-     */
-    fun loadCurrentVersionChangelog() = viewModelScope.launch {
-        uiSafe(app, R.string.download_manager_failed, "Failed to load changelog") {
-            val currentVersion = BuildConfig.VERSION_NAME.normalizeVersion()
-            val forDevBranch = morpheAPI.isDevBuild
-            val entries = managerEntriesCache.getOrPut(forDevBranch) {
-                morpheAPI.fetchManagerChangelog(forDevBranch = forDevBranch)
-            }
-            currentChannelChangelogEntries = if (forDevBranch) {
-                val installedIdx = entries.indexOfFirst { it.version.normalizeVersion() == currentVersion }
-                // Fall back to the newest dev entry when the installed version is absent
-                val start = if (installedIdx >= 0) installedIdx else 0
-                entries.drop(start).takeWhile { it.isPrerelease }
-            } else {
-                listOfNotNull(ChangelogParser.findVersion(entries, currentVersion))
-            }
-        }
-    }
-
-    /**
      * Loads older stable changelog entries on demand. Always reads from main; older history
      * is the stable release timeline by definition, regardless of which channel the user is
-     * currently on. Versions already shown above (via [currentChannelChangelogEntries] or
-     * [missedChangelogEntries]) are filtered out so the expander lists new content only.
+     * currently on. Versions already shown above (via [changelogEntries]) are filtered out so
+     * the list gains new content only.
      * Idempotent: repeat calls while loading or after a successful load are a no-op.
      */
     fun loadOlderManagerEntries() {
         if (isLoadingOlderEntries || olderManagerEntries != null) return
         isLoadingOlderEntries = true
-        val exclude = (currentChannelChangelogEntries.orEmpty() + missedChangelogEntries.orEmpty())
+        olderEntriesFailed = false
+        val exclude = changelogEntries.orEmpty()
             .map { it.version.normalizeVersion() }
             .toSet()
         viewModelScope.launch(Dispatchers.Default) {
-            uiSafe(app, R.string.download_manager_failed, "Failed to load older releases") {
+            try {
                 val entries = managerEntriesCache.getOrPut(false) {
                     morpheAPI.fetchManagerChangelog(forDevBranch = false)
                 }
                 olderManagerEntries = entries.filter {
                     it.version.normalizeVersion() !in exclude && !it.isPrerelease
                 }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                // The list itself shows the failure next to its retry, so no toast on top
+                Log.e(tag, "Failed to load older releases", e)
+                olderEntriesFailed = true
+            } finally {
+                isLoadingOlderEntries = false
             }
-            isLoadingOlderEntries = false
         }
     }
 
     fun resetOlderManagerEntries() {
         olderManagerEntries = null
         isLoadingOlderEntries = false
+        olderEntriesFailed = false
     }
 
     companion object {

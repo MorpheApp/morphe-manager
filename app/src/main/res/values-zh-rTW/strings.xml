@@ -148,7 +148,7 @@
     <string name="sources_apps_leave_out">排除</string>
     <string name="sources_apps_leave_out_done">已排除</string>
     <string name="sources_apps_bring_back">重新加入</string>
-    <string name="sources_management_prerelease_toggle">預先發布版修補程式</string>
+    <string name="sources_management_prerelease_toggle">預先發佈版修補程式</string>
     <string name="sources_management_prerelease_toggle_description">搶先取得新實驗性修補程式版本</string>
     <string name="sources_prerelease_warning_title">啟用預發佈修補程式？</string>
     <string name="sources_prerelease_warning_message">預發佈版本仍在開發中。修補程式可能失敗或導致應用程式損壞，功能也可能在未經警告的情況下變更</string>
@@ -752,7 +752,7 @@
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates">更新</string>
     <string name="settings_advanced_patcher">修補程式</string>
-    <string name="settings_advanced_updates_manager_prereleases">預先發布版更新</string>
+    <string name="settings_advanced_updates_manager_prereleases">預先發佈版更新</string>
     <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
     <string name="settings_advanced_updates_manager_prereleases_description">搶先取得新版 Morphe</string>
     <string name="settings_advanced_updates_prerelease_warning_title">啟用預發佈更新？</string>
@@ -1291,7 +1291,7 @@ morphe_header_custom_dark.png
     <string name="downloading_manager_update">正在下載更新……</string>
     <!-- Shown while downloading, before the total size is known. "%1$s" is the megabytes so far. -->
     <string name="manager_update_progress_downloaded">%1$s MB 已下載</string>
-    <string name="manager_update_not_ready">此版本仍在發布中。請幾分鐘後再試</string>
+    <string name="manager_update_not_ready">此版本仍在發佈中。請幾分鐘後再試</string>
     <string name="update_download_missing">下載的更新已不再可用。請重新下載</string>
     <string name="download_manager_failed">無法下載更新：%s</string>
     <string name="failed_to_check_updates">無法檢查更新：%s</string>
@@ -1309,7 +1309,7 @@ morphe_header_custom_dark.png
     <string name="onboarding_settings_desc">自訂 Morphe：外觀、進階選項和系統工具</string>
     <string name="onboarding_sources_patches_desc">點擊以查看此來源提供的可用修補</string>
     <string name="onboarding_sources_version_desc">點擊版本以查看此來源的完整變更紀錄</string>
-    <string name="onboarding_sources_prerelease_desc">啟用此選項可從此來源接收預先發布版</string>
+    <string name="onboarding_sources_prerelease_desc">啟用此選項可從此來源接收預先發佈版</string>
     <string name="onboarding_appearance_tab_desc">自訂應用程式的外觀：主題、重點顏色和背景</string>
     <string name="onboarding_appearance_theme_desc">在淺色、深色或系統主題之間切換。您還可以選擇自訂重點顏色或啟用動態色彩</string>
     <string name="onboarding_expert_mode_desc">啟用專家模式以解鎖修補選擇、自訂選項和其他進階功能</string>

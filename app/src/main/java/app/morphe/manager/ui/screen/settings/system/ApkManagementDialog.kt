@@ -11,10 +11,8 @@ import android.net.Uri
 import android.view.HapticFeedbackConstants
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.Crossfade
-import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -778,24 +776,6 @@ private fun ApkManagementDialogContent(
         onDismissRequest = {
             if (!isExporting) onDismissRequest()
         },
-        title = meta.title,
-        titleTrailingContent = {
-            TitleAction(
-                icon = if (search.visible) Icons.Outlined.SearchOff else Icons.Outlined.Search,
-                contentDescription = stringResource(R.string.search),
-                onClick = { search.toggle() },
-                style = TitleActionStyle.Toggle,
-                active = search.visible,
-                enabled = isSearchable
-            )
-            TitleAction(
-                icon = Icons.Outlined.DeleteForever,
-                contentDescription = stringResource(R.string.delete_all),
-                onClick = { showDeleteAllConfirmation = true },
-                style = TitleActionStyle.Destructive,
-                enabled = canDeleteAll
-            )
-        },
         footer = {
             AppDialogOutlinedButton(
                 text = stringResource(R.string.close),
@@ -896,9 +876,36 @@ private fun ApkManagementDialogContent(
         scrollable = false,
         padding = DialogPadding.Compact,
         contentArrangement = Arrangement.Top,
-        fillContentHeight = true
+        fillContentHeight = true,
+        hideFooterWhileTyping = true
     ) {
         SearchFieldBackHandler(search)
+
+        ListDialogHeader(
+            icon = { modifier ->
+                ListDialogHeaderIcon(icon = meta.icon, color = meta.accentColor, modifier = modifier)
+            },
+            title = meta.title,
+            subtitle = listOf(
+                pluralStringResource(R.plurals.settings_system_apks_count, meta.count, meta.count.toString()),
+                // The bare size: the count before it already says what it is the size of
+                context.formatBytes(meta.totalSize)
+            ).joinToString(" · "),
+            // Sums the list up once the files are counted
+            subtitleLoading = meta.isLoading,
+            search = search,
+            searchLabel = stringResource(R.string.search),
+            searchEnabled = isSearchable,
+            accentColor = meta.accentColor
+        ) {
+            TitleAction(
+                icon = Icons.Outlined.DeleteForever,
+                contentDescription = stringResource(R.string.delete_all),
+                onClick = { showDeleteAllConfirmation = true },
+                style = TitleActionStyle.Destructive,
+                enabled = canDeleteAll
+            )
+        }
 
         val listState = rememberLazyListState()
         Box(modifier = Modifier.fillMaxWidth()) {
@@ -907,15 +914,19 @@ private fun ApkManagementDialogContent(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
             ) {
-                if (isSearchable) {
-                    stickyHeader(key = "search") {
-                        AppDialogSearchHeader(
-                            visible = search.visible,
-                            value = search.query,
-                            onValueChange = { search.query = it },
-                            label = stringResource(R.string.home_search_apps)
-                        )
-                    }
+                // Kept while the field is closed, so its share of the spacing makes the gap under
+                // the header
+                stickyHeader(key = "search") {
+                    AppDialogSearchHeader(
+                        visible = search.visible,
+                        value = search.query,
+                        onValueChange = { search.query = it },
+                        label = stringResource(R.string.home_search_apps),
+                        // Opaque, so rows scrolled under the gap stay hidden
+                        modifier = Modifier
+                            .background(MaterialTheme.colorScheme.background)
+                            .padding(top = Defaults.ItemSpacing)
+                    )
                 }
 
                 if (retentionToggle != null) {
@@ -930,45 +941,6 @@ private fun ApkManagementDialogContent(
                                 showBorder = true
                             )
                             SettingsDivider(fullWidth = true)
-                        }
-                    }
-                }
-
-                // Summary box
-                item(key = "summary") {
-                    Crossfade(
-                        targetState = meta.isLoading,
-                        animationSpec = tween(Defaults.ANIMATION_DURATION),
-                        label = "heroCard"
-                    ) { loading ->
-                        if (loading) {
-                            ShimmerHeroInfoCard(accentColor = meta.accentColor)
-                        } else {
-                            HeroInfoCard(
-                                icon = meta.icon,
-                                title = pluralStringResource(
-                                    R.plurals.settings_system_apks_count,
-                                    meta.count,
-                                    meta.count.toString()
-                                ),
-                                containerColor = meta.accentColor.copy(alpha = 0.15f),
-                                iconContainerColor = meta.accentColor.copy(alpha = 0.25f),
-                                iconTint = meta.accentColor,
-                                titleColor = meta.accentColor,
-                                subtitle = {
-                                    AnimatedContent(
-                                        targetState = stringResource(R.string.settings_system_apks_size, context.formatBytes(meta.totalSize)),
-                                        transitionSpec = Animations.counterTransitionSpec,
-                                        label = "heroSize"
-                                    ) { sizeText ->
-                                        Text(
-                                            text = sizeText,
-                                            style = MaterialTheme.typography.bodyMedium,
-                                            color = LocalDialogSecondaryTextColor.current
-                                        )
-                                    }
-                                }
-                            )
                         }
                     }
                 }

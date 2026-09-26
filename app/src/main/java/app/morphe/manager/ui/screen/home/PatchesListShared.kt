@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.home
 
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -37,57 +36,27 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.patcher.patch.PatchInfo
-import app.morphe.manager.ui.screen.shared.Animations
-import app.morphe.manager.ui.screen.shared.AppDialogTextField
-import app.morphe.manager.ui.screen.shared.Defaults
-import app.morphe.manager.ui.screen.shared.EmptyState
-import app.morphe.manager.ui.screen.shared.HeroInfoCard
-import app.morphe.manager.ui.screen.shared.SemanticTone
-import app.morphe.manager.ui.screen.shared.StatusBadge
-import app.morphe.manager.ui.screen.shared.animatedListItem
+import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.toHsv
+import org.koin.compose.koinInject
 
 /**
- * Header card shown at the top of patches-list dialogs.
+ * Matches patches against [query] by name, description and, while translation is on, translated
+ * description. The descriptions of [patches] translate in the background, so the search finds them
+ * without waiting for a scroll.
  */
 @Composable
-internal fun PatchesListHeaderCard(
-    title: String,
-    totalCount: Int,
-    filteredCount: Int,
-    isFiltering: Boolean,
-    modifier: Modifier = Modifier,
-    icon: ImageVector = Icons.Outlined.Extension
-) {
-    HeroInfoCard(
-        icon = icon,
-        title = title,
-        modifier = modifier
-    ) {
-        Icon(
-            imageVector = Icons.Outlined.Widgets,
-            contentDescription = null,
-            tint = LocalContentColor.current,
-            modifier = Modifier.size(16.dp)
-        )
-        val patchCountLabel = pluralStringResource(
-            R.plurals.patch_count,
-            totalCount,
-            totalCount.toString()
-        )
-        val countText = if (isFiltering) "$filteredCount/$patchCountLabel"
-        else patchCountLabel
-        AnimatedContent(
-            targetState = countText,
-            transitionSpec = Animations.counterTransitionSpec,
-            label = "patches_count"
-        ) { count ->
-            Text(
-                text = count,
-                style = MaterialTheme.typography.bodySmall,
-                color = LocalContentColor.current,
-                fontWeight = FontWeight.Medium
-            )
+internal fun rememberPatchMatcher(query: String, patches: List<PatchInfo>): (PatchInfo) -> Boolean {
+    val translation: ContentTranslation = koinInject()
+    val descriptions = remember(patches) { patches.mapNotNull { it.description }.distinct() }
+    PrefetchTranslations(descriptions)
+
+    // Read only while searching, so translations landing in the background leave the list alone
+    val revision = if (query.isBlank()) 0 else translation.revision
+    return remember(query, translation.isEnabled, revision) {
+        { patch ->
+            patch.matchesQuery(query) ||
+                    patch.description?.let(translation::cached)?.contains(query, ignoreCase = true) == true
         }
     }
 }
@@ -238,6 +207,8 @@ internal fun <T> rememberPatchGroups(
  *
  * [selectedCount] is badged on the header itself, since a folded block is the one place a patch
  * can be enabled without being visible.
+ *
+ * @param leading Drawn in place of [icon], for a block that stands for an app or a source.
  */
 @Composable
 internal fun PatchGroupHeader(
@@ -247,6 +218,7 @@ internal fun PatchGroupHeader(
     onToggle: (() -> Unit)?,
     modifier: Modifier = Modifier,
     icon: ImageVector = Icons.Outlined.Category,
+    leading: (@Composable () -> Unit)? = null,
     accentColor: Color? = null,
     selectedCount: Int = 0
 ) {
@@ -266,7 +238,7 @@ internal fun PatchGroupHeader(
         title = title,
         count = pluralStringResource(R.plurals.patch_count, count, count.toString()),
         onClick = onToggle,
-        leading = {
+        leading = leading ?: {
             Icon(
                 imageVector = icon,
                 contentDescription = null,
@@ -317,6 +289,7 @@ internal fun PatchGroupHeader(
         },
         cornerRadius = Defaults.SettingsCornerRadius,
         color = rememberAccentCardColor(accentColor),
+        borderColor = accentColor?.let { appAccentBorder(it) },
         modifier = modifier
     )
 }
@@ -360,7 +333,8 @@ internal fun <T> LazyListScope.patchGroupRows(
                 isExpanded = isExpanded,
                 onToggle = if (alwaysOpen) null else ({ onToggle(group) }),
                 icon = group.icon,
-                accentColor = accentColor,
+                // Universal patches are for no app in particular, so they do not wear its color
+                accentColor = accentColor.takeUnless { group.key == UNIVERSAL_GROUP_KEY },
                 selectedCount = group.selectedCount,
                 modifier = Modifier.animatedListItem(this)
             )
@@ -371,62 +345,45 @@ internal fun <T> LazyListScope.patchGroupRows(
 }
 
 /**
- * Search field + optional filter button row.
+ * Name and description of a patch, the part every patch card shares, so a patch reads the same in
+ * each list it shows up in. [badges] follow the name on its line.
+ *
+ * @param dimmed For a patch that is off, which fades back behind the ones that are on.
  */
 @Composable
-internal fun PatchesListSearchRow(
-    searchQuery: String,
-    onSearchQueryChange: (String) -> Unit,
-    showFilterButton: Boolean,
-    isFilterActive: Boolean,
-    onFilterClick: () -> Unit,
-    modifier: Modifier = Modifier
+internal fun PatchCardText(
+    name: String,
+    description: String?,
+    modifier: Modifier = Modifier,
+    dimmed: Boolean = false,
+    badges: @Composable RowScope.() -> Unit = {}
 ) {
-    Surface(
-        modifier = modifier.fillMaxWidth(),
-        color = MaterialTheme.colorScheme.background
+    val secondaryColor = LocalDialogSecondaryTextColor.current
+
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalAlignment = Alignment.Bottom
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            AppDialogTextField(
-                value = searchQuery,
-                onValueChange = onSearchQueryChange,
-                label = { Text(stringResource(R.string.expert_mode_search)) },
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Outlined.Search,
-                        contentDescription = null
-                    )
-                },
-                showClearButton = true,
-                modifier = Modifier.weight(1f)
+            Text(
+                text = name,
+                style = MaterialTheme.typography.titleSmall,
+                fontWeight = FontWeight.SemiBold,
+                color = if (dimmed) secondaryColor.copy(alpha = 0.5f) else LocalDialogTextColor.current,
+                modifier = Modifier.weight(1f, fill = false)
             )
+            badges()
+        }
 
-            if (showFilterButton) {
-                FilledTonalIconButton(
-                    onClick = onFilterClick,
-                    modifier = Modifier.padding(bottom = 4.dp),
-                    colors = IconButtonDefaults.filledTonalIconButtonColors(
-                        containerColor = if (isFilterActive)
-                            MaterialTheme.colorScheme.primaryContainer
-                        else
-                            MaterialTheme.colorScheme.surfaceVariant,
-                        contentColor = if (isFilterActive)
-                            MaterialTheme.colorScheme.onPrimaryContainer
-                        else
-                            MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.FilterList,
-                        contentDescription = stringResource(R.string.filter),
-                        modifier = Modifier.size(Defaults.IconSizeSmall)
-                    )
-                }
-            }
+        if (!description.isNullOrBlank()) {
+            Text(
+                text = rememberTranslated(description),
+                style = MaterialTheme.typography.bodySmall,
+                color = if (dimmed) secondaryColor.copy(alpha = 0.4f) else secondaryColor
+            )
         }
     }
 }

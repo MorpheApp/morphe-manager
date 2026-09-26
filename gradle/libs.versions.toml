@@ -25,11 +25,11 @@ kotlin-process = "1.5.1"
 ktor = "3.6.0"
 ktx = "1.19.1"
 libsu = "6.0.0"
-markdown-renderer = "0.45.0"
 # Remove when released stable 1.5.0 in Compose BOM. Fix for https://github.com/MorpheApp/morphe-manager/issues/74
 material3 = "1.5.0-alpha29" # 1.5.0-alpha09 API Changes: Remove deprecated experimental ModalBottomSheet
+mlkit-translate = "17.0.3"
 morphe-library = "1.4.0"
-morphe-patcher = "1.14.1"
+morphe-patcher = "1.15.0-dev.4"
 navigation = "2.10.2"
 placeholder = "2.0.0"
 play-services-base = "18.11.0"
@@ -108,8 +108,8 @@ ktor-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "k
 ktor-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-serialization = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
-# Markdown
-markdown-renderer = { group = "com.mikepenz", name = "multiplatform-markdown-renderer-m3", version.ref = "markdown-renderer" }
+# On-device translation
+mlkit-translate = { group = "com.google.mlkit", name = "translate", version.ref = "mlkit-translate" }
 
 # Fading Edges
 fading-edges = { group = "com.github.GIGAMOLE", name = "ComposeFadingEdges", version.ref = "fading-edges"}

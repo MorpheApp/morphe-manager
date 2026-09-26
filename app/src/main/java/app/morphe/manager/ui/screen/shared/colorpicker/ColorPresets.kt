@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.Defaults
+import app.morphe.manager.ui.screen.shared.horizontalScrollFade
 import app.morphe.manager.util.darken
 import app.morphe.manager.util.readableOn
 
@@ -119,11 +120,14 @@ fun ColorPresetRow(
     modifier: Modifier = Modifier
 ) {
     val selectedArgb = selected?.toArgb()
+    val scrollState = rememberScrollState()
 
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .horizontalScroll(rememberScrollState()),
+            // Fades out at an end the row runs past, so there are plainly more swatches to reach
+            .horizontalScrollFade(scrollState)
+            .horizontalScroll(scrollState),
         horizontalArrangement = Arrangement.spacedBy(SwatchSpacing)
     ) {
         colors.forEach { preset ->

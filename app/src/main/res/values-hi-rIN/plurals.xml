@@ -5,44 +5,44 @@
         <item quantity="other">%s पैच</item>
     </plurals>
     <plurals name="option_count">
-        <item quantity="one">%s पट्टी विकल्प</item>
-        <item quantity="other">%s पट्टियाँ विकल्प</item>
+        <item quantity="one">%s पैच विकल्प</item>
+        <item quantity="other">%s पैच विकल्प</item>
     </plurals>
     <plurals name="home_app_patch_sources_title">
-        <item quantity="one">%s ऐप के लिए पैच स्रोत</item>
-        <item quantity="other">%s ऐप्स के लिए पैच स्रोत</item>
+        <item quantity="one">%s ऐप के लिए पैच सोर्स</item>
+        <item quantity="other">%s ऐप्स के लिए पैच सोर्स</item>
     </plurals>
     <plurals name="expert_mode_hidden_sources_notice">
-        <item quantity="one">%s स्रोत छिपा हुआ है। दिखाने के लिए टैप करें</item>
-        <item quantity="other">%s स्रोत छिपे हुए हैं। दिखाने के लिए टैप करें</item>
+        <item quantity="one">%s सोर्स छिपा हुआ है। देखने के लिए टैप करें</item>
+        <item quantity="other">%s सोर्स छिपे हुए हैं। देखने के लिए टैप करें</item>
     </plurals>
     <plurals name="sources_search_patch_matches">
-        <item quantity="one">%s मेल खाता पैच</item>
-        <item quantity="other">%s मेल खाते पैच</item>
+        <item quantity="one">%s मिलता-जुलता पैच</item>
+        <item quantity="other">%s मिलते-जुलते पैच</item>
     </plurals>
     <plurals name="source_count">
-        <item quantity="one">%s स्रोत</item>
-        <item quantity="other">%s स्रोत</item>
+        <item quantity="one">%s सोर्स</item>
+        <item quantity="other">%s सोर्स</item>
     </plurals>
     <plurals name="package_count">
         <item quantity="one">%s पैकेज</item>
         <item quantity="other">%s पैकेज</item>
     </plurals>
     <plurals name="patches_executed">
-        <item quantity="one">%s पैच निष्पादित किया गया</item>
-        <item quantity="other">%s पैच निष्पादित किए गए</item>
+        <item quantity="one">%s पैच लागू किया गया</item>
+        <item quantity="other">%s पैच लागू किए गए</item>
     </plurals>
     <plurals name="settings_system_apks_count">
         <item quantity="one">%s एपीके फाइल</item>
         <item quantity="other">%s एपीके फाइलें</item>
     </plurals>
     <plurals name="batch_install_summary">
-        <item quantity="one">%s ऐप इंस्टॉल किया गया</item>
-        <item quantity="other">%s ऐप्स इंस्टॉल किए गए</item>
+        <item quantity="one">%s इंस्टॉल किया गया ऐप</item>
+        <item quantity="other">%s इंस्टॉल किए गए ऐप्स</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
-        <item quantity="one">%s ऐप पुनर्स्थापित किया गया</item>
-        <item quantity="other">%s ऐप्स पुनर्स्थापित किए गए</item>
+        <item quantity="one">%s ऐप फिर से इंस्टॉल किया गया</item>
+        <item quantity="other">%s ऐप्स फिर से इंस्टॉल किए गए</item>
     </plurals>
     <plurals name="batch_uninstall_summary">
         <item quantity="one">%s ऐप अनइंस्टॉल किया गया</item>
@@ -65,28 +65,28 @@
         <item quantity="other">%s ऐप्स छोड़ दिए गए</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
-        <item quantity="one">सохित चयन से %s पुरानी पटच को हटा दिया गया</item>
-        <item quantity="other">सохित चयन से %s पुरानी पटच को हटा दिया गया</item>
+        <item quantity="one">सेव किए गए चयन में से %s पुराना पैच हटा दिया गया</item>
+        <item quantity="other">सेव किए गए चयन में से %s पुराने पैच हटा दिए गए</item>
     </plurals>
     <plurals name="sources_management_subtitle">
-        <item quantity="one">%s स्रोत स्थापित</item>
-        <item quantity="other">%s स्रोत स्थापित</item>
+        <item quantity="one">%s सोर्स इंस्टॉल किया गया है</item>
+        <item quantity="other">%s सोर्स इंस्टॉल किए गए हैं</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
-        <item quantity="one">%s छिपा ऐप</item>
-        <item quantity="other">%s छिपे हुए ऐप</item>
+        <item quantity="one">%s छिपा हुआ ऐप</item>
+        <item quantity="other">%s छिपे हुए ऐप्स</item>
     </plurals>
     <plurals name="home_category_app_count">
         <item quantity="one">%s ऐप</item>
         <item quantity="other">%s ऐप्स</item>
     </plurals>
     <plurals name="expert_mode_selected_count">
-        <item quantity="one">%s चयनित</item>
-        <item quantity="other">%s चयनित</item>
+        <item quantity="one">%s चुना गया</item>
+        <item quantity="other">%s चुने गए</item>
     </plurals>
     <plurals name="expert_mode_copy_from_bundle_done">
-        <item quantity="one">चयनित बंडल से %s पैच कॉपी किया गया</item>
-        <item quantity="other">चयनित बंडल से %s पैच कॉपी किए गए</item>
+        <item quantity="one">चुने गए बंडल से %s पैच कॉपी किया गया</item>
+        <item quantity="other">चुने गए बंडल से %s पैच कॉपी किए गए</item>
     </plurals>
     <plurals name="core_count">
         <item quantity="one">%s कोर</item>

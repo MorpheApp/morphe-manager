@@ -6,18 +6,18 @@
 package app.morphe.manager.ui.screen.home
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AutoFixHigh
 import androidx.compose.material.icons.outlined.FilterAlt
-import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material.icons.outlined.SearchOff
-import androidx.compose.material.icons.outlined.Source
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material.icons.outlined.WarningAmber
 import androidx.compose.material3.*
@@ -26,11 +26,9 @@ import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
@@ -39,9 +37,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.patcher.patch.PatchLockState
+import app.morphe.manager.patcher.patch.appColorFor
 import app.morphe.manager.ui.model.renamesByDefault
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.Options
@@ -70,9 +70,14 @@ class ExpertPatchActions(
 /**
  * Advanced patch selection and configuration dialog.
  * Shown before patching when expert mode is enabled.
+ *
+ * @param packageName App being patched, which the header names and takes its color from.
+ * @param appName Name to head the dialog with, where the caller knows one better than the sources.
  */
 @Composable
 fun ExpertModeDialog(
+    packageName: String,
+    appName: String? = null,
     newPatches: Map<Int, Set<String>> = emptyMap(),
     options: Options,
     allPatchesInfo: List<Pair<PatchBundleInfo.Scoped, List<Pair<PatchInfo, Boolean>>>>,
@@ -84,7 +89,7 @@ fun ExpertModeDialog(
     lockStateOf: (PatchInfo) -> PatchLockState = { PatchLockState.NONE },
     /** True while "Enable all" still holds the universal patches of the given list back. */
     holdsUniversalPatches: (bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) -> Boolean = { _, _ -> false },
-    proceedText: String = stringResource(R.string.expert_mode_proceed),
+    proceedText: String = stringResource(R.string.patch),
     /** Off where mixing sources is the norm rather than something the user just did. */
     warnOnMultipleBundles: Boolean = true,
     /** Bundle UIDs currently receiving pre-release patch versions, shown as a warning header. */
@@ -136,10 +141,15 @@ fun ExpertModeDialog(
         }
     }
 
+    val allPatches = remember(allPatchesInfo) { allPatchesInfo.flatMap { (_, patches) -> patches.map { it.first } } }
+    val matchesPatch = rememberPatchMatcher(search.query, allPatches)
+    val appColor = remember(allPatches, packageName) { allPatches.asSequence().appColorFor(packageName) }
+    val sourcesByUid = rememberSourcesByUid()
+
     // The two filters stack: either can narrow what the other left. Keyed by bundle and in bundle
     // order, since every reader below already holds a bundle and asks only what it kept
     val filteredPatchesByUid: Map<Int, List<Pair<PatchInfo, Boolean>>> =
-        remember(allPatchesInfo, search.query, selectedOnly.value) {
+        remember(allPatchesInfo, search.query, matchesPatch, selectedOnly.value) {
             val query = search.query.takeIf { it.isNotBlank() }
             val onlySelected = selectedOnly.value
             if (query == null && onlySelected == null) {
@@ -149,7 +159,7 @@ fun ExpertModeDialog(
             allPatchesInfo.mapNotNull { (bundle, patches) ->
                 val kept = onlySelected?.get(bundle.uid).orEmpty()
                 val filtered = patches.filter { (patch, _) ->
-                    val matchesQuery = query == null || patch.matchesQuery(query)
+                    val matchesQuery = query == null || matchesPatch(patch)
                     matchesQuery && (onlySelected == null || patch.name in kept)
                 }
                 if (filtered.isEmpty()) null else bundle.uid to filtered
@@ -182,85 +192,101 @@ fun ExpertModeDialog(
 
     AppDialog(
         onDismissRequest = onDismiss,
-        title = stringResource(R.string.expert_mode_title),
-        titleTrailingContent = {
-            // The counter already stands for the selection, so it doubles as the way to filter
-            // the list down to it
-            val badgeTone = if (totalSelectedCount > 0) SemanticTone.Primary else SemanticTone.Neutral
-            // Still switchable off after the last patch is unticked under the filter
-            val canFilter = totalSelectedCount > 0 || isSelectedOnly
-            val filterState = stringResource(
-                if (isSelectedOnly) {
-                    R.string.expert_mode_selected_only_on
-                } else {
-                    R.string.expert_mode_selected_only_off
-                }
-            )
-            StatusBadge(
-                text = "$totalSelectedCount/$totalPatchesCount",
-                // Carried while the filter is merely available, so the counter reads as the
-                // control it is instead of only announcing itself once tapped
-                icon = Icons.Outlined.FilterAlt.takeIf { canFilter },
-                tone = badgeTone,
-                // Filled rather than tonal while filtering, so the narrowed list has a visible cause
-                containerColor = if (isSelectedOnly) MaterialTheme.colorScheme.primary else badgeTone.container,
-                contentColor = if (isSelectedOnly) MaterialTheme.colorScheme.onPrimary else badgeTone.content,
-                onClick = if (canFilter) {
-                    { toggleSelectedOnly() }
-                } else {
-                    null
-                },
-                modifier = Modifier.semantics { stateDescription = filterState }
-            )
-
-            TitleAction(
-                icon = if (search.visible) Icons.Outlined.SearchOff else Icons.Outlined.Search,
-                contentDescription = stringResource(R.string.expert_mode_search),
-                onClick = { search.toggle() },
-                style = TitleActionStyle.Toggle,
-                active = search.visible
+        title = null,
+        dismissOnClickOutside = false,
+        footer = {
+            AppDialogActions(
+                // A row lays its actions out from the right, so patching ends up there
+                actions = listOfNotNull(
+                    DialogAction(
+                        text = proceedText,
+                        onClick = {
+                            // Check if multiple bundles are selected
+                            if (hasMultipleBundles && warnOnMultipleBundles) {
+                                showMultipleSourcesWarning.value = true
+                            } else {
+                                onProceed()
+                            }
+                        },
+                        icon = Icons.Outlined.AutoFixHigh,
+                        enabled = totalSelectedCount > 0
+                    ),
+                    translateAction()
+                )
             )
         },
-        dismissOnClickOutside = false,
-        footer = null,
         padding = DialogPadding.Compact,
-        scrollable = false
+        scrollable = false,
+        hideFooterWhileTyping = true
     ) {
         SearchFieldBackHandler(search)
         // Back unwinds the filter before the dialog itself, the way the search field does
         BackHandler(enabled = isSelectedOnly) { selectedOnly.value = null }
 
+        // Layout mode is determined by total bundle count
+        val hasMultipleBundleLayout = allPatchesInfo.size > 1
+        val searchLabel = stringResource(R.string.expert_mode_search)
+
         Column(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
         ) {
-            // Search bar
-            AnimatedVisibility(
-                visible = search.visible,
-                enter = Animations.expandFadeEnter,
-                exit = Animations.shrinkFadeExit
-            ) {
-                val focusRequester = remember { FocusRequester() }
-                val keyboardController = LocalSoftwareKeyboardController.current
-                LaunchedEffect(Unit) {
-                    focusRequester.requestFocus()
-                    keyboardController?.show()
+            Column {
+                // Headed by the app, as its other dialogs are. A lone source joins the subtitle rather
+                // than taking a row of its own, while several get their tabs below
+                ListDialogHeader(
+                    icon = { modifier ->
+                        AppIcon(packageName = packageName, contentDescription = null, modifier = modifier)
+                    },
+                    title = appName
+                        ?: allPatchesInfo.firstNotNullOfOrNull { (bundle, _) -> bundle.displayName }
+                        ?: packageName,
+                    subtitle = listOfNotNull(
+                        stringResource(R.string.expert_mode_title),
+                        allPatchesInfo.singleOrNull()?.first?.name
+                    ).joinToString(" · "),
+                    search = search,
+                    searchLabel = searchLabel,
+                    accentColor = appColor
+                ) {
+                    // The counter already stands for the selection, so it doubles as the way to filter
+                    // the list down to it
+                    val badgeTone = if (totalSelectedCount > 0) SemanticTone.Primary else SemanticTone.Neutral
+                    // Still switchable off after the last patch is unticked under the filter
+                    val canFilter = totalSelectedCount > 0 || isSelectedOnly
+                    val filterState = stringResource(
+                        if (isSelectedOnly) {
+                            R.string.expert_mode_selected_only_on
+                        } else {
+                            R.string.expert_mode_selected_only_off
+                        }
+                    )
+                    StatusBadge(
+                        text = "$totalSelectedCount/$totalPatchesCount",
+                        // Carried while the filter is merely available, so the counter reads as the
+                        // control it is instead of only announcing itself once tapped
+                        icon = Icons.Outlined.FilterAlt.takeIf { canFilter },
+                        tone = badgeTone,
+                        // Filled rather than tonal while filtering, so the narrowed list has a visible cause
+                        containerColor = if (isSelectedOnly) MaterialTheme.colorScheme.primary else badgeTone.container,
+                        contentColor = if (isSelectedOnly) MaterialTheme.colorScheme.onPrimary else badgeTone.content,
+                        onClick = if (canFilter) {
+                            { toggleSelectedOnly() }
+                        } else {
+                            null
+                        },
+                        modifier = Modifier.semantics { stateDescription = filterState }
+                    )
                 }
-                AppDialogTextField(
+
+                // Its gap to the header is part of the field, so the list below settles as it
+                // comes and goes instead of snapping by the spacing the column adds after it
+                AppDialogSearchHeader(
+                    visible = search.visible,
                     value = search.query,
                     onValueChange = { search.query = it },
-                    label = {
-                        Text(stringResource(R.string.expert_mode_search))
-                    },
-                    leadingIcon = {
-                        // The label already announces the field, so the icon stays decorative
-                        Icon(
-                            imageVector = Icons.Outlined.Search,
-                            contentDescription = null
-                        )
-                    },
-                    showClearButton = true,
-                    modifier = Modifier.focusRequester(focusRequester)
+                    label = searchLabel,
+                    modifier = Modifier.padding(top = Defaults.ContentPaddingSmall)
                 )
             }
 
@@ -280,34 +306,10 @@ fun ExpertModeDialog(
                 )
             }
 
-            // Layout mode is determined by total bundle count
-            val hasMultipleBundleLayout = allPatchesInfo.size > 1
-
             if (!hasMultipleBundleLayout) {
                 val (bundle, _) = allPatchesInfo.firstOrNull() ?: return@Column
                 val filteredPatches = filteredPatchesByUid[bundle.uid]
                 val displayPatches = filteredPatches ?: emptyList()
-
-                // Bundle name header
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    StatusCircleIcon(
-                        icon = Icons.Outlined.Source,
-                        size = 32.dp,
-                        containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
-                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                    )
-                    Text(
-                        text = bundle.name,
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.SemiBold,
-                        color = LocalDialogTextColor.current,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
 
                 BundleControls(
                     bundle = bundle,
@@ -341,6 +343,7 @@ fun ExpertModeDialog(
                         sectionState = patchSections,
                         lockStateOf = lockStateOf,
                         patchActions = patchActions,
+                        accentColor = appColor,
                         onConfigureOptions = { selectedPatchForOptions.value = bundle.uid to it }
                     )
 
@@ -424,53 +427,28 @@ fun ExpertModeDialog(
                     // holding an index past the list the filter just narrowed
                     val currentIndex = pagerState.currentPage.coerceAtMost(displayedBundles.lastIndex)
 
-                    // Tab row
+                    // The open tab is marked by a fill of its own rather than a line under it, and
+                    // the row fades out at an end it runs past, so there is plainly more to scroll to
+                    val tabScroll = rememberScrollState()
                     SecondaryScrollableTabRow(
                         selectedTabIndex = currentIndex,
+                        modifier = Modifier.horizontalScrollFade(tabScroll),
+                        scrollState = tabScroll,
                         edgePadding = 0.dp,
+                        indicator = {},
                         divider = {},
-                        containerColor = Color.Transparent,
-                        contentColor = MaterialTheme.colorScheme.primary
+                        containerColor = Color.Transparent
                     ) {
                         displayedBundles.forEachIndexed { index, (bundle, patches) ->
-                            val enabledCount = patches.count { it.second }
-                            val totalCount = patches.size
-                            val isSelected = currentIndex == index
-
-                            Tab(
-                                selected = isSelected,
-                                onClick = { coroutineScope.launch { pagerState.animateScrollToPage(index) } },
-                                selectedContentColor = MaterialTheme.colorScheme.primary,
-                                unselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
-                            ) {
-                                Column(
-                                    horizontalAlignment = Alignment.CenterHorizontally,
-                                    modifier = Modifier.padding(horizontal = Defaults.ItemSpacing, vertical = 10.dp)
-                                ) {
-                                    Text(
-                                        text = bundle.name,
-                                        style = MaterialTheme.typography.labelLarge,
-                                        fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
-                                        maxLines = 1,
-                                        overflow = TextOverflow.Ellipsis
-                                    )
-
-                                    Spacer(modifier = Modifier.height(2.dp))
-
-                                    // Patch count badge
-                                    StatusBadge(
-                                        text = "$enabledCount/$totalCount",
-                                        tone = if (isSelected) SemanticTone.Primary else SemanticTone.Neutral
-                                    )
-                                }
-                            }
+                            SourceTab(
+                                source = sourcesByUid[bundle.uid],
+                                name = bundle.name,
+                                count = "${patches.count { it.second }}/${patches.size}",
+                                selected = currentIndex == index,
+                                onClick = { coroutineScope.launch { pagerState.animateScrollToPage(index) } }
+                            )
                         }
                     }
-
-                    HorizontalDivider(
-                        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f),
-                        thickness = 0.5.dp
-                    )
 
                     // Controls fixed below the tab row
                     val (currentBundle, _) = displayedBundles[currentIndex]
@@ -517,6 +495,7 @@ fun ExpertModeDialog(
                                 sectionState = patchSections,
                                 lockStateOf = lockStateOf,
                                 patchActions = patchActions,
+                                accentColor = appColor,
                                 onConfigureOptions = { selectedPatchForOptions.value = bundle.uid to it }
                             )
                         }
@@ -534,22 +513,6 @@ fun ExpertModeDialog(
                     }
                 }
             }
-
-            // Proceed to Patching button
-            AppDialogButton(
-                text = proceedText,
-                onClick = {
-                    // Check if multiple bundles are selected
-                    if (hasMultipleBundles && warnOnMultipleBundles) {
-                        showMultipleSourcesWarning.value = true
-                    } else {
-                        onProceed()
-                    }
-                },
-                enabled = totalSelectedCount > 0,
-                icon = Icons.Outlined.AutoFixHigh,
-                modifier = Modifier.fillMaxWidth(),
-            )
         }
     }
 
@@ -591,6 +554,75 @@ fun ExpertModeDialog(
                 selectedPatchForOptions.value = null
             }
         )
+    }
+
+    TranslationOverlays()
+}
+
+/**
+ * One source's tab: the icon the source wears everywhere else, beside its name over how much of it
+ * is picked. Stacked rather than in a line, so the row fits more sources before it scrolls. Each
+ * sits on a pill, the open one filled with the accent.
+ */
+@Composable
+private fun SourceTab(
+    source: PatchBundleSource?,
+    name: String,
+    count: String,
+    selected: Boolean,
+    onClick: () -> Unit
+) {
+    val fill by animateColorAsState(
+        // A faint pill of its own while closed, so every tab reads as the button it is
+        targetValue = if (selected) {
+            MaterialTheme.colorScheme.primaryContainer
+        } else {
+            MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
+        },
+        animationSpec = tween(Defaults.ANIMATION_DURATION),
+        label = "source_tab_fill"
+    )
+
+    // Shaped on the tab itself rather than inside it, so the ripple follows the pill too
+    Tab(
+        selected = selected,
+        onClick = onClick,
+        // The row lays tabs edge to edge, so the gap between the pills comes from each one's end,
+        // which leaves the first flush with the list below
+        modifier = Modifier
+            .padding(
+                top = Defaults.ContentPaddingSmall,
+                bottom = Defaults.ContentPaddingSmall,
+                end = Defaults.ContentPaddingSmall
+            )
+            .clip(Defaults.PillShape)
+            .background(fill),
+        selectedContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+        unselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = Defaults.ItemSpacing, vertical = Defaults.ContentPaddingSmall),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
+        ) {
+            if (source != null) {
+                BundleIcon(bundle = source, modifier = Modifier.size(24.dp), enabled = source.enabled)
+            }
+            Column {
+                Text(
+                    text = name,
+                    style = MaterialTheme.typography.labelLarge,
+                    fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Text(
+                    text = count,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = LocalContentColor.current.copy(alpha = 0.7f)
+                )
+            }
+        }
     }
 }
 
@@ -697,6 +729,8 @@ private fun BundleControls(
  *
  * The scrollbar stays with the caller, since the tabbed layout draws a single overlay for the
  * whole pager rather than one per page.
+ *
+ * @param accentColor Color of the app being patched, which the block headers take.
  */
 @Composable
 private fun BundlePatchList(
@@ -708,6 +742,7 @@ private fun BundlePatchList(
     sectionState: PatchSectionState,
     lockStateOf: (PatchInfo) -> PatchLockState,
     patchActions: ExpertPatchActions,
+    accentColor: Color?,
     onConfigureOptions: (PatchInfo) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -751,7 +786,8 @@ private fun BundlePatchList(
             key = { (patch, _): Pair<PatchInfo, Boolean> -> "${bundle.uid}:${patch.name}" },
             isFiltering = isFiltering,
             folds = folds,
-            onToggle = { group -> sectionState.toggle(bundle.uid, group) }
+            onToggle = { group -> sectionState.toggle(bundle.uid, group) },
+            accentColor = accentColor
         ) { (patch, isEnabled) ->
             PatchCard(
                 patch = patch,

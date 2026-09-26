@@ -9,7 +9,9 @@ import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.manager.*
+import app.morphe.manager.ui.screen.shared.ContentTranslation
 import app.morphe.manager.util.AppCoroutineScope
+import app.morphe.manager.util.ContentTranslator
 import app.morphe.manager.util.PM
 import app.morphe.manager.util.UpdateNotificationManager
 import org.koin.core.module.dsl.singleOf
@@ -32,4 +34,6 @@ val managerModule = module {
     singleOf(::AppCoroutineScope)
     singleOf(::BatchPlanResolver)
     singleOf(::BatchPatchCoordinator)
+    singleOf(::ContentTranslator)
+    singleOf(::ContentTranslation)
 }

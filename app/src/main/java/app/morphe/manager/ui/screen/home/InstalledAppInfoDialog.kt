@@ -44,7 +44,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
@@ -344,6 +343,8 @@ fun InstalledAppInfoDialog(
     if (showAppliedPatchesDialog.value && appliedPatches != null) {
         AppliedPatchesDialog(
             appLabel = appLabel,
+            appInfo = appInfo,
+            accentColor = appAccentColor,
             packageName = installedApp?.originalPackageName ?: packageName,
             bundles = appliedBundles,
             settingsViewModel = settingsViewModel,
@@ -999,10 +1000,6 @@ private fun AppHeroHeader(
     compact: Boolean = false
 ) {
     val onHero = MaterialTheme.colorScheme.onBackground
-    val chipBg = if (accentColor.isExtremeAccent()) onHero.copy(alpha = 0.12f) else accentColor.copy(alpha = 0.18f)
-
-    val iconSize = if (compact) 56.dp else 72.dp
-    val iconCorner = if (compact) 14.dp else 22.dp
 
     // Entrance animations (progress-based: 0f -> 1f).
     // One Float per visual group; alpha, offset and scale are derived via lerp
@@ -1034,14 +1031,10 @@ private fun AppHeroHeader(
 
     Box(modifier = modifier.fillMaxWidth()) {
         // Flat tinted background
-        val heroBg = if (accentColor.isExtremeAccent())
-            MaterialTheme.colorScheme.onBackground.copy(alpha = 0.06f)
-        else
-            accentColor.copy(alpha = 0.15f)
         Box(
             modifier = Modifier
                 .matchParentSize()
-                .background(heroBg)
+                .background(appAccentFill(accentColor))
         )
 
         Column(
@@ -1050,7 +1043,7 @@ private fun AppHeroHeader(
                 .statusBarsPadding()
                 .padding(
                     horizontal = Defaults.ContentPadding,
-                    vertical = Defaults.ContentPaddingSmall
+                    vertical = DialogHeaderDefaults.VerticalPadding
                 )
         ) {
             val (chipIcon, chipLabel) = when (installedApp.installType) {
@@ -1075,7 +1068,7 @@ private fun AppHeroHeader(
             }
 
             Row(
-                horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPadding),
+                horizontalArrangement = Arrangement.spacedBy(DialogHeaderDefaults.IconSpacing),
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -1088,10 +1081,10 @@ private fun AppHeroHeader(
                     // placeholder tinted to the app's accent is what the home card shows for it.
                     // The inset keeps its own rounding clear of the clip the real icons need.
                     placeholderGradientColors = listOf(accentColor),
-                    placeholderInnerPadding = 6.dp,
+                    placeholderInnerPadding = 4.dp,
                     modifier = Modifier
-                        .size(iconSize)
-                        .clip(RoundedCornerShape(iconCorner))
+                        .size(DialogHeaderDefaults.IconSize)
+                        .clip(RoundedCornerShape(DialogHeaderDefaults.IconCornerRadius))
                         .graphicsLayer {
                             val s = lerp(0.6f, 1f, iconProgress)
                             scaleX = s
@@ -1101,7 +1094,7 @@ private fun AppHeroHeader(
                 )
                 Column(
                     modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                    verticalArrangement = Arrangement.spacedBy(DialogHeaderDefaults.TextSpacing)
                 ) {
                     // Animated app name (leads textProgress)
                     Box(
@@ -1112,19 +1105,15 @@ private fun AppHeroHeader(
                     ) {
                         AppLabel(
                             packageInfo = appInfo,
-                            style = MaterialTheme.typography.headlineSmall.copy(
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 22.sp,
-                                color = onHero
-                            ),
+                            style = DialogHeaderDefaults.titleStyle.copy(color = onHero),
                             defaultText = appLabel
                         )
                     }
                     // Animated version (slightly behind name via sub-range)
                     Text(
                         text = (appInfo?.versionName ?: installedApp.version).withVersionPrefix(),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = onHero.copy(alpha = 0.50f),
+                        style = DialogHeaderDefaults.subtitleStyle,
+                        color = LocalDialogSecondaryTextColor.current,
                         modifier = Modifier.graphicsLayer {
                             val p = ((textProgress - 0.15f) / 0.85f).coerceIn(0f, 1f)
                             translationX = lerp(40f, 0f, p)
@@ -1143,12 +1132,7 @@ private fun AppHeroHeader(
                         horizontalAlignment = Alignment.End
                     ) {
                         heroChips.forEach { (icon, label) ->
-                            StatusBadge(
-                                text = label,
-                                icon = icon,
-                                containerColor = chipBg,
-                                contentColor = onHero
-                            )
+                            AppAccentBadge(text = label, accentColor = accentColor, icon = icon)
                         }
                     }
                 }
@@ -1171,12 +1155,7 @@ private fun AppHeroHeader(
                                 alpha = p
                             }
                         ) {
-                            StatusBadge(
-                                text = label,
-                                icon = icon,
-                                containerColor = chipBg,
-                                contentColor = onHero
-                            )
+                            AppAccentBadge(text = label, accentColor = accentColor, icon = icon)
                         }
                     }
                 }
@@ -1933,9 +1912,15 @@ private fun DeleteConfirmDialog(
     }
 }
 
+/**
+ * What went into an installed app: its patches and their options, source by source, under the
+ * same header the app's other dialogs carry.
+ */
 @Composable
 private fun AppliedPatchesDialog(
     appLabel: String,
+    appInfo: PackageInfo?,
+    accentColor: Color,
     packageName: String,
     bundles: List<AppliedPatchBundleUi>,
     settingsViewModel: SettingsViewModel,
@@ -1948,74 +1933,54 @@ private fun AppliedPatchesDialog(
         }
     }
 
-    AppDialog(
+    val patchCount = bundles.sumOf { it.patchInfos.size + it.fallbackNames.size }
+
+    DetailsDialog(
         onDismissRequest = onDismiss,
-        footer = {
-            AppDialogOutlinedButton(
-                text = stringResource(R.string.close),
-                onClick = onDismiss,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
+        icon = { modifier ->
+            AppIcon(packageInfo = appInfo, packageName = packageName, contentDescription = null, modifier = modifier)
+        },
+        title = appLabel,
+        subtitle = listOf(
+            pluralStringResource(R.plurals.patch_count, patchCount, patchCount.toString()),
+            bundles.singleOrNull()?.title
+                ?: pluralStringResource(R.plurals.source_count, bundles.size, bundles.size.toString())
+        ).joinToString(" · "),
+        accentColor = accentColor
     ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
-        ) {
-            HeroInfoCard(
-                icon = Icons.Outlined.Extension,
-                title = appLabel,
-                subtitle = {
-                    if (bundles.size == 1) {
-                        Text(
-                            text = bundles[0].title,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = LocalDialogSecondaryTextColor.current
-                        )
-                    } else {
-                        Text(
-                            text = pluralStringResource(R.plurals.source_count, bundles.size, bundles.size.toString()),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = LocalDialogSecondaryTextColor.current
-                        )
+        bundles.forEach { bundle ->
+            val bundleOptions = bundleOptionsMap[bundle.uid] ?: emptyMap()
+            // Options are stored under the selection key, which is suffixed on duplicate names
+            val patchDisplayNames = bundle.patchInfos.associate { it.name to it.displayName }
+            val bundlePatchCount = bundle.patchInfos.size + bundle.fallbackNames.size
+
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
+            ) {
+                LabeledSection(
+                    title = stringResource(R.string.home_app_info_applied_patches),
+                    version = if (bundles.size > 1) bundle.title else null,
+                    count = bundlePatchCount
+                ) {
+                    bundle.patchInfos.forEach { patch ->
+                        PatchNameRow(name = patch.displayName)
+                    }
+                    bundle.fallbackNames.forEach { patchName ->
+                        PatchNameRow(name = patchName, dimmed = true)
                     }
                 }
-            )
 
-            bundles.forEach { bundle ->
-                val bundleOptions = bundleOptionsMap[bundle.uid] ?: emptyMap()
-                // Options are stored under the selection key, which is suffixed on duplicate names
-                val patchDisplayNames = bundle.patchInfos.associate { it.name to it.displayName }
-                val patchCount = bundle.patchInfos.size + bundle.fallbackNames.size
-
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
-                ) {
+                if (bundleOptions.isNotEmpty()) {
                     LabeledSection(
-                        title = stringResource(R.string.home_app_info_applied_patches),
-                        version = if (bundles.size > 1) bundle.title else null,
-                        count = patchCount
+                        title = stringResource(R.string.settings_system_patch_options_section),
+                        count = bundleOptions.size
                     ) {
-                        bundle.patchInfos.forEach { patch ->
-                            PatchNameRow(name = patch.displayName)
-                        }
-                        bundle.fallbackNames.forEach { patchName ->
-                            PatchNameRow(name = patchName, dimmed = true)
-                        }
-                    }
-
-                    if (bundleOptions.isNotEmpty()) {
-                        LabeledSection(
-                            title = stringResource(R.string.settings_system_patch_options_section),
-                            count = bundleOptions.size
-                        ) {
-                            bundleOptions.entries.forEach { (patchName, options) ->
-                                PatchOptionsGroup(
-                                    patchName = patchDisplayNames[patchName] ?: patchName,
-                                    options = options
-                                )
-                            }
+                        bundleOptions.entries.forEach { (patchName, options) ->
+                            PatchOptionsGroup(
+                                patchName = patchDisplayNames[patchName] ?: patchName,
+                                options = options
+                            )
                         }
                     }
                 }

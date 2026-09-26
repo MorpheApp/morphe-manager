@@ -229,7 +229,7 @@ Allt du lägger till från den här webbplatsen används på egen risk"</string>
     <string name="home_apk_helper_installed_incompatible">Den installerade versionen kan inte modifieras</string>
     <string name="home_apk_use_saved">Använd den sparade APK-filen</string>
     <string name="home_apk_use_installed">Använd den installerade APK-filen</string>
-    <string name="home_apk_use_saved_unsupported">Tilläggen stöder inte den här sparade kopian. Om du modifierar den blir du ombedd att bekräfta, eller så väljer du en annan APK-fil</string>
+    <string name="home_apk_use_saved_unsupported">Tilläggen stöder inte den här sparade kopian. Om du modifierar den blir du ombedd att bekräfta den, eller så väljer du en annan APK-fil</string>
     <string name="home_apk_use_installed_unverified">Det gick inte att verifiera signaturen för den installerade appen, så den kan redan ha modifierats</string>
     <string name="home_unverified">Overifierad</string>
     <string name="home_install_verification_pending">Kontrollerar installation…</string>
@@ -425,7 +425,7 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="batch_patch_policy_install">Installera när modifieringen är klar</string>
     <string name="batch_patch_policy_install_description">Installerar alla modifierade appar direkt efter att kön är klar. Om det här alternativet är inaktiverat sparas APK-filerna till senare.</string>
     <string name="batch_patch_start">Starta modifiering</string>
-    <string name="batch_patch_stop_title">Stoppa gruppmodifieringen?</string>
+    <string name="batch_patch_stop_title">Stoppa gruppmodifiering?</string>
     <string name="batch_patch_stop_description">Den app som modifieras just nu och allt som fortfarande står i kön avbryts</string>
     <string name="batch_patch_install_all">Installera alla</string>
     <string name="batch_patch_install_failed">Installationen misslyckades</string>
@@ -494,17 +494,17 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="patcher_field_app">App</string>
     <string name="patcher_field_package">Paket</string>
     <string name="patcher_field_source">Källa</string>
-    <string name="patcher_field_split">Uppdelad APK</string>
-    <string name="patcher_field_manager">Hanterare</string>
+    <string name="patcher_field_split">Delad APK-fil</string>
+    <string name="patcher_field_manager">Manager</string>
     <string name="patcher_field_patcher">Modifieringsverktyg</string>
-    <string name="patcher_field_runtime">Körtid</string>
+    <string name="patcher_field_runtime">Körning</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Bibliotek</string>
     <string name="patcher_field_android">Android</string>
     <string name="patcher_field_device">Enhet</string>
     <!-- Free and total RAM of the device, never its storage -->
     <string name="patcher_field_memory">Minne</string>
-    <string name="patcher_field_storage">Lagring</string>
+    <string name="patcher_field_storage">Lagringsutrymme</string>
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Utdata storlek</string>
     <!-- How long patching took -->
@@ -519,7 +519,7 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="patcher_field_value_stripped">borttagna</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">behållna</string>
-    <string name="patcher_tab_logs">Modifieringsloggar</string>
+    <string name="patcher_tab_logs">Loggar för modifieringsverktyg</string>
     <string name="patcher_tab_game">Spel</string>
     <string name="patcher_logs_waiting">Väntar på loggutdata…</string>
     <string name="patcher_logs_lost">Loggutdata sparas inte mellan appstarter.</string>
@@ -587,7 +587,7 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Modifiering pågår …</string>
     <string name="patcher_notification_text">Tryck för att återgå till modifieringen</string>
-    <string name="patcher_stop_confirm_title">Stoppa modifieringen</string>
+    <string name="patcher_stop_confirm_title">Stoppa modifiering</string>
     <string name="patcher_stop_confirm_description">Är du säker på att du vill stoppa modifieringsprocessen?</string>
     <!-- Patcher Screen - Patcher Messages -->
     <string name="patcher_message_1">Omvandlar appen till något fantastiskt … 🏆</string>
@@ -775,7 +775,7 @@ Tillägg påverkas inte: aktivera förhandsversioner av tillägg för varje käl
     <string name="settings_advanced_update_interval_chip_subtitle">Sökningsfrekvens i bakgrunden</string>
     <string name="settings_advanced_update_interval_battery_warning">Kontroller i bakgrunden kanske inte fungerar tillförlitligt på vissa enheter. Tillverkare som Xiaomi, Huawei, Samsung och OnePlus begränsar ofta bakgrundsprocesser aggressivt för att spara batteri</string>
     <string name="settings_advanced_external_batch_patch">Tillåt externa utlösare</string>
-    <string name="settings_advanced_external_batch_patch_description">Låter automatiseringsappar starta batch-patchning via ett intent</string>
+    <string name="settings_advanced_external_batch_patch_description">Låter automatiseringsappar starta gruppmodifiering med ett intent</string>
     <string name="external_batch_patch_title">Starta gruppmodifiering?</string>
     <string name="external_batch_patch_description">%s vill att Morphe ska modifiera och installera appar</string>
     <string name="external_batch_patch_trust_caller">Tillåt alltid den här appen</string>
@@ -809,13 +809,13 @@ Tillägg påverkas inte: aktivera förhandsversioner av tillägg för varje käl
     <!-- "%s" is "GitHub Personal Access Token", kept in English because GitHub has no localized UI -->
     <string name="settings_advanced_github_pat_dialog_title">Ange %s</string>
     <!-- "%3$s" is "GitHub Personal Access Token", "%2$s" is the GitHub scope name and "%1$s" is the GitHub website. "PAT" is its abbreviation, keep it in English -->
-    <string name="settings_advanced_github_pat_dialog_description">"Ange en %3$s för att kunna lägga till pull requests som externa källor. Skapa en PAT med scope %2$s på
+    <string name="settings_advanced_github_pat_dialog_description">"Ange en %3$s (PAT) om du vill lägga till hämtningsbegäranden (pull requests) som externa källor. Skapa en PAT med omfattningen %2$s på
 %1$s"</string>
     <string name="settings_advanced_github_pat_export_include_label">Inkludera i inställningsexport</string>
     <!-- "PAT" is a GitHub Personal Access Token, keep it in English because GitHub has no localized UI -->
-    <string name="settings_advanced_github_pat_export_include_supporting">Lägger till denna personliga åtkomsttoken i exporterade Morphe-inställningar</string>
+    <string name="settings_advanced_github_pat_export_include_supporting">Lägger till denna PAT i exporterade Morphe-inställningar</string>
     <!-- "PAT" is a GitHub Personal Access Token, keep it in English because GitHub has no localized UI -->
-    <string name="settings_advanced_github_pat_export_warning">Dela inte din personliga åtkomsttoken. Om du inkluderar den i en inställningsexport ska du hålla filen privat eftersom den innehåller din token</string>
+    <string name="settings_advanced_github_pat_export_warning">Dela inte din PAT. Om du inkluderar den i en inställningsexport ska du hålla filen privat eftersom den innehåller din token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Tilläggsalternativ</string>
     <string name="settings_advanced_patch_options_youtube_description">Alternativ för varumärkesanpassning och sidhuvud</string>
@@ -1201,7 +1201,7 @@ Information: %2$s"</string>
     <string name="loading">Läser in …</string>
     <string name="loading_older_releases">Läser in äldre versioner …</string>
     <string name="creating">Skapar …</string>
-    <string name="processing_apk">Behandlar APK-fil …</string>
+    <string name="processing_apk">Bearbetar APK-fil …</string>
     <string name="exporting_apks">Exporterar APK-filer …</string>
     <string name="not_installed">Inte installerad</string>
     <string name="view">Visa</string>

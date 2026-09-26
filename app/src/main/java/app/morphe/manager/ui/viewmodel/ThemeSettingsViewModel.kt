@@ -1,5 +1,6 @@
 package app.morphe.manager.ui.viewmodel
 
+import android.app.Application
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,7 +12,7 @@ import app.morphe.manager.ui.theme.ThemeStyle
 import app.morphe.manager.ui.theme.coerceToUiScale
 import app.morphe.manager.util.AppCardColorDefaults
 import app.morphe.manager.util.AppCardColorMode
-import app.morphe.manager.util.applyAppLanguage
+import app.morphe.manager.util.AppLocale
 import app.morphe.manager.util.toHexString
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -32,6 +33,7 @@ enum class RandomInterval(val labelResId: Int) {
 }
 
 class ThemeSettingsViewModel(
+    private val app: Application,
     val prefs: PreferencesManager
 ) : ViewModel() {
     /**
@@ -99,12 +101,7 @@ class ThemeSettingsViewModel(
     /**
      * Change the app language.
      */
-    fun setAppLanguage(languageCode: String) = viewModelScope.launch {
-        prefs.appLanguage.update(languageCode)
-        // Apply immediately on the calling coroutine - setApplicationLocales posts
-        // internally to the main thread and is safe to call from any thread
-        applyAppLanguage(languageCode)
-    }
+    fun setAppLanguage(languageCode: String) = AppLocale.select(app, languageCode)
 
     fun toggleShowGreetingPhrases(current: Boolean) = viewModelScope.launch {
         prefs.showGreetingPhrases.update(!current)

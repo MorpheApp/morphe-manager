@@ -113,9 +113,12 @@ fun isNewerVersion(oldVersion: String?, newVersion: String?): Boolean {
  * [version] is normalized to include a `v` prefix if absent.
  */
 fun releasePageUrl(repoUrl: String, version: String): String {
-    val normalized = if (version.startsWith("v")) version else "v$version"
-    return if (repoUrl.contains("gitlab.com", ignoreCase = true))
+    val normalized = version.withVersionPrefix()
+    return if (isGitLabUrl(repoUrl))
         "$repoUrl/-/releases/$normalized"
     else
         "$repoUrl/releases/tag/$normalized"
 }
+
+/** Whether [url] points at GitLab, whose pages follow a layout of their own. */
+fun isGitLabUrl(url: String): Boolean = url.contains("gitlab.com", ignoreCase = true)

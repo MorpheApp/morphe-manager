@@ -3,8 +3,8 @@
     <!-- Home Screen -->
     <string name="home_other_apps">अन्य ऐप्स</string>
     <string name="home_other_apps_action">अन्य ऐप्स चुनें</string>
-    <string name="home_not_patched_yet">अभी तक पट्च नहीं किया गया है</string>
-    <string name="home_unpatched_version_installed">अनपैच्ड संस्करण स्थापित है</string>
+    <string name="home_not_patched_yet">अभी तक पैच नहीं किया गया</string>
+    <string name="home_unpatched_version_installed">​बिना पैच वाला वर्ज़न इंस्टॉल है</string>
     <string name="home_unpatched_badge">पैच नहीं किया गया</string>
     <string name="home_no_patches_available">कोई पैच उपलब्ध नहीं है</string>
     <string name="home_app_hide_title">इस ऐप को छुपाएं?</string>
@@ -12,20 +12,20 @@
     <string name="home_app_will_be_hidden">इस ऐप को छुपाया जाएगा</string>
     <string name="home_app_no_hidden">कोई छिपा ऐप नहीं</string>
     <string name="home_app_hidden_apps_title">छिपे हुए ऐप्स</string>
-    <string name="home_app_hidden_apps_hint">छुपाने के लिए टैप करें</string>
+    <string name="home_app_hidden_apps_hint">वापस दिखाने के लिए टैप करें</string>
     <string name="home_app_patch_sources_description">जिन स्रोतों को चुना नहीं गया है, वे इन ऐप्स को पैच करते समय उपलब्ध नहीं होंगे और उनके पैच अपने आप किसी चयन में शामिल नहीं होंगे। हर स्रोत बाकी सभी ऐप्स के लिए चालू रहेगा।</string>
     <string name="home_app_patch_sources_mixed">%2$s में से %1$s को पेश किया गया</string>
     <string name="home_app_patch_sources_covers">%2$s में से %1$s के लिए पैच हैं</string>
-    <string name="home_app_patch_sources_last">हर ऐप के पास पैच करने के लिए एक स्रोत शेष होना चाहिए।</string>
+    <string name="home_app_patch_sources_last">हर ऐप के लिए पैच करने का एक सोर्स बचा होना ज़रूरी है</string>
     <string name="android_11_bug_dialog_title">एंड्रॉइड 11 बग</string>
-    <string name="android_11_bug_dialog_description">एंड्रॉइड 11 सिस्टम में एक बग से बचने के लिए ऐप इंस्टॉलेशन की अनुमति समय से पहले दी जानी चाहिए जो उपयोगकर्ता अनुभव को नकारात्मक रूप से प्रभावित करेगी।</string>
+    <string name="android_11_bug_dialog_description">यूज़र एक्सपीरियंस को खराब करने वाले एंड्रॉइड 11 सिस्टम के एक बग से बचने के लिए, ऐप इंस्टॉलेशन की अनुमति पहले से दी जानी चाहिए</string>
     <string name="deep_link_add_source_title">स्रोत जोड़ें</string>
-    <string name="deep_link_add_source_message">क्या आप इस पैच स्रोत को मोर्फे में जोड़ना चाहेंगे?</string>
+    <string name="deep_link_add_source_message">क्या आप इस पैच सोर्स को Morphe में जोड़ना चाहते हैं?</string>
     <string name="deep_link_add_source_warning">सिर्फ़ उन स्रोतों को जोड़ें जिन पर आप भरोसा करते हैं</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">मोर्फे अपडेट उपलब्ध है</string>
-    <string name="home_update_available_subtitle">नई संस्करण तैयार है</string>
-    <string name="home_blocked_source_title">अवरुद्ध पैच स्रोत का पता चला</string>
+    <string name="home_update_available">Morphe अपडेट उपलब्ध है</string>
+    <string name="home_update_available_subtitle">नया वर्जन इंस्टॉल करने के लिए तैयार है</string>
+    <string name="home_blocked_source_title">ब्लॉक किया गया पैच सोर्स मिला है</string>
     <string name="home_blocked_source_subtitle">देखने और हटाने के लिए टैप करें</string>
     <string name="home_metadata_errors_title">कुछ पैच स्रोत अनुपलब्ध हैं</string>
     <string name="home_metadata_errors_subtitle">स्रोतों की समीक्षा करने के लिए टैप करें</string>
@@ -35,23 +35,23 @@
     <string name="home_held_back_subtitle">इसे छोड़ दिया गया ताकि ऐप शुरू हो सके। समीक्षा करने के लिए टैप करें</string>
     <string name="home_metered_skipped_title">मोबाइल डेटा पर अपडेट रोक दिए गए हैं</string>
     <string name="home_metered_skipped_subtitle">मोबाइल डेटा पर अपडेट की अनुमति देने के लिए टैप करें</string>
-    <string name="home_repatch_available_subtitle">उन सभी को कतार में लगाने के लिए टैप करें</string>
-    <string name="home_update_error">उपडेट विफल हुआ</string>
-    <string name="home_update_error_subtitle">स्रोत अद्यतन करते समय कुछ गड़बड़ हो गई</string>
+    <string name="home_repatch_available_subtitle">सभी को कतार में जोड़ने के लिए टैप करें</string>
+    <string name="home_update_error">अपडेट विफल रहा</string>
+    <string name="home_update_error_subtitle">सोर्स अपडेट करते समय कुछ गड़बड़ी हुई</string>
     <string name="home_update_skipped_metered">अपडेट छोड़ दिए गए</string>
-    <string name="home_update_skipped_metered_subtitle">मोबाइल डेटा सक्रिय है</string>
-    <string name="home_updating_sources">स्रोतों को अपडेट कर रहा हूँ…</string>
+    <string name="home_update_skipped_metered_subtitle">मोबाइल डेटा चालू है</string>
+    <string name="home_updating_sources">सोर्स अपडेट हो रहे हैं…</string>
     <!-- Download progress across several bundles. "%1$d" and "%2$d" count the bundles, "%3$s" and
          "%4$s" are the megabytes read and expected, "%5$d" is the percentage. -->
     <string name="home_update_bundle_count_with_bytes">%1$d / %2$d  ·  %3$s / %4$s MB (%5$d%%)</string>
-    <string name="home_update_success">स्रोत अपडेट पूर्ण हुआ</string>
+    <string name="home_update_success">सोर्स अपडेट पूरा हुआ</string>
     <string name="home_update_success_subtitle">आपके स्रोत अप टू डेट हैं</string>
     <string name="home_sources_are_loading">स्रोत लोड हो रहे हैं, कृपया प्रतीक्षा करें…</string>
     <string name="home_search_apps">ऐप्स खोजें</string>
     <string name="home_app_list_options_title">क्रमबद्ध करें और फ़िल्टर करें</string>
     <string name="home_app_list_options_state_description">%1$s के अनुसार क्रमबद्ध, %2$s के अनुसार फ़िल्टर किया गया</string>
     <string name="home_app_filter_all_description">होम स्क्रीन पर मौजूद हर ऐप</string>
-    <string name="home_app_filter_patched_description">वे ऐप जिन्हें आपने Morphe के साथ पैच किया है या सहेजा है</string>
+    <string name="home_app_filter_patched_description">Morphe के साथ आपके द्वारा पैच या सेव किए गए ऐप्स</string>
     <string name="home_app_filter_not_patched_description">वे ऐप जिन्हें आपने अभी तक Morphe में पैच नहीं किया है</string>
     <string name="home_app_filter_installed_description">इस डिवाइस पर वर्तमान में इंस्टॉल किए गए ऐप्स</string>
     <string name="home_app_filter_uninstalled_description">Morphe से पैच किए गए ऐप्स जो अब इस डिवाइस पर नहीं हैं</string>

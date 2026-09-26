@@ -134,7 +134,7 @@ class PatchBundleRepository(
      * every point that offers the user a choice reads.
      *
      * The unnarrowed flow stays the description of what exists, and a run reads that one. A
-     * selection is answered for by the sources it was made from, whether or not the app has since
+     * selection is answered for by the sources it was made from, whether the app has since
      * been kept from one.
      */
     fun offeredBundleInfoFlow(packageName: String, version: String?, versionCode: Long? = null) =
@@ -729,11 +729,11 @@ class PatchBundleRepository(
     }
 
     private data class UpdateRequest(
-        val force: Boolean,
-        val showToast: Boolean,
-        val allowUnsafeNetwork: Boolean,
-        val onPerBundleProgress: ((bundle: RemotePatchBundle, bytesRead: Long, bytesTotal: Long?) -> Unit)?,
         val target: UpdateTarget,
+        val force: Boolean = false,
+        val showToast: Boolean = false,
+        val allowUnsafeNetwork: Boolean = false,
+        val onPerBundleProgress: ((bundle: RemotePatchBundle, bytesRead: Long, bytesTotal: Long?) -> Unit)? = null,
     ) {
         /**
          * True when running this request already does everything [other] asks for. A request
@@ -836,10 +836,6 @@ class PatchBundleRepository(
                 Log.d(tag, "Triggering update for re-enabled bundles: $beingEnabledUids")
                 startRemoteUpdateJob(
                     UpdateRequest(
-                        force = false,
-                        showToast = false,
-                        allowUnsafeNetwork = false,
-                        onPerBundleProgress = null,
                         target = UpdateTarget(custom = { bundle ->
                             val matches = bundle.uid in beingEnabledUids && bundle.enabled
                             Log.d(tag, "  predicate check uid=${bundle.uid} inEnabled=${bundle.uid in beingEnabledUids} enabled=${bundle.enabled} → $matches")
@@ -972,11 +968,8 @@ class PatchBundleRepository(
         // Trigger update so the new channel takes effect immediately.
         startRemoteUpdateJob(
             UpdateRequest(
+                target = UpdateTarget(uids = setOf(uid)),
                 force = true,
-                showToast = false,
-                allowUnsafeNetwork = false,
-                onPerBundleProgress = null,
-                target = UpdateTarget(uids = setOf(uid))
             )
         )
     }
@@ -1525,8 +1518,13 @@ class PatchBundleRepository(
             }?.key
     }
 
+    /**
+     * Updates [sources] from their endpoints. With [force] the latest release is downloaded even
+     * when its version matches the installed one, which repairs a bundle that failed to load.
+     */
     suspend fun update(
         vararg sources: RemotePatchBundle,
+        force: Boolean = false,
         showToast: Boolean = false,
         allowUnsafeNetwork: Boolean = false,
         onPerBundleProgress: ((bundle: RemotePatchBundle, bytesRead: Long, bytesTotal: Long?) -> Unit)? = null,
@@ -1534,10 +1532,13 @@ class PatchBundleRepository(
         val uids = sources.map { it.uid }.toSet()
         store.dispatch(
             Update(
-                target = UpdateTarget(uids = uids),
-                showToast = showToast,
-                allowUnsafeNetwork = allowUnsafeNetwork,
-                onPerBundleProgress = onPerBundleProgress,
+                UpdateRequest(
+                    target = UpdateTarget(uids = uids),
+                    force = force,
+                    showToast = showToast,
+                    allowUnsafeNetwork = allowUnsafeNetwork,
+                    onPerBundleProgress = onPerBundleProgress,
+                )
             )
         )
     }
@@ -1558,11 +1559,8 @@ class PatchBundleRepository(
         awaitCurrentUpdateJob()
         performRemoteUpdateWithResult(
             UpdateRequest(
-                force = false,
-                showToast = false,
-                allowUnsafeNetwork = allowUnsafeNetwork,
-                onPerBundleProgress = null,
                 target = UpdateTarget(autoUpdatable = true),
+                allowUnsafeNetwork = allowUnsafeNetwork,
             )
         )
     }
@@ -1582,8 +1580,10 @@ class PatchBundleRepository(
     suspend fun updateCheck(allowUnsafeNetwork: Boolean = false) {
         store.dispatch(
             Update(
-                target = UpdateTarget(autoUpdatable = true),
-                allowUnsafeNetwork = allowUnsafeNetwork,
+                UpdateRequest(
+                    target = UpdateTarget(autoUpdatable = true),
+                    allowUnsafeNetwork = allowUnsafeNetwork,
+                )
             )
         )
         checkManualUpdates()
@@ -1648,27 +1648,13 @@ class PatchBundleRepository(
     suspend fun checkManualUpdates(vararg bundleUids: Int) =
         store.dispatch(ManualUpdateCheck(bundleUids.toSet().takeIf { it.isNotEmpty() }))
 
-    private inner class Update(
-        private val target: UpdateTarget,
-        private val force: Boolean = false,
-        private val showToast: Boolean = false,
-        private val allowUnsafeNetwork: Boolean = false,
-        private val onPerBundleProgress: ((bundle: RemotePatchBundle, bytesRead: Long, bytesTotal: Long?) -> Unit)? = null,
-    ) : Action<BundleState> {
-        override fun toString() = if (force) "Redownload remote bundles" else "Update check"
+    private inner class Update(private val request: UpdateRequest) : Action<BundleState> {
+        override fun toString() = if (request.force) "Redownload remote bundles" else "Update check"
 
         override suspend fun ActionContext.execute(
             current: BundleState
         ): BundleState {
-            startRemoteUpdateJob(
-                UpdateRequest(
-                    force = force,
-                    showToast = showToast,
-                    allowUnsafeNetwork = allowUnsafeNetwork,
-                    onPerBundleProgress = onPerBundleProgress,
-                    target = target,
-                )
-            )
+            startRemoteUpdateJob(request)
             return current
         }
 
@@ -2239,10 +2225,7 @@ class PatchBundleRepository(
 
             startRemoteUpdateJob(
                 UpdateRequest(
-                    force = false,
-                    showToast = false,
                     allowUnsafeNetwork = prefs.allowMeteredUpdates.get(),
-                    onPerBundleProgress = null,
                     target = UpdateTarget(custom = { bundle ->
                         bundle.uid != DEFAULT_SOURCE_UID &&
                                 // Disabled bundles are not refreshed, but ones that were never

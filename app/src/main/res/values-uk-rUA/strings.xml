@@ -1158,7 +1158,7 @@ morphe_header_custom_dark.png
     <string name="easter_egg_pill_red_toast">Розблоковано фон Matrix</string>
     <string name="easter_egg_pill_blue_toast">Реклама на вас чекатиме</string>
     <string name="easter_egg_pill_message_again">Ви вже в Матриці. Червона пігулка поверне вас у дощ, синя - розбудить вас</string>
-    <string name="easter_egg_pill_red_toast_again">Повернутись у дощ</string>
+    <string name="easter_egg_pill_red_toast_again">Повернулись у дощ</string>
     <string name="easter_egg_pill_blue_toast_again">Відключено. Шлях назад там, де він завжди був</string>
     <!-- Shared strings -->
     <!-- Download progress of a bundle or of the manager itself. "%1$s" and "%2$s" are the

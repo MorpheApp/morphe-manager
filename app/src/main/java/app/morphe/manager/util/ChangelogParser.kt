@@ -29,6 +29,39 @@ data class ChangelogEntry(
  */
 val ChangelogEntry.isPrerelease: Boolean get() = version.contains('-')
 
+/** The changes of one release under a single heading, such as its features or its fixes. */
+data class ChangelogSection(
+    val kind: Kind,
+    val title: String?,
+    val items: List<ChangelogItem>
+) {
+    /** Declared in the order a release lists its sections. */
+    enum class Kind { FEATURES, FIXES, IMPROVEMENTS, PERFORMANCE, APP_SUPPORT, OTHER }
+}
+
+/**
+ * One change, with the app or patch its bullet is scoped to when it names one.
+ *
+ * @param isBullet False for a line of prose between the bullets, which reads as a note on the
+ *   release rather than as a change of its own.
+ */
+data class ChangelogItem(
+    val scope: String?,
+    val text: String,
+    val isBullet: Boolean = true
+)
+
+/** Number of changes in the section, the notes between them left out. */
+val ChangelogSection.changeCount: Int get() = items.count { it.isBullet }
+
+/** Number of changes of [kind] across these sections. */
+fun List<ChangelogSection>.countOf(kind: ChangelogSection.Kind): Int =
+    sumOf { section -> if (section.kind == kind) section.changeCount else 0 }
+
+/** Copy of these sections with the text of every change passed through [transform]. */
+inline fun List<ChangelogSection>.mapItemTexts(transform: (String) -> String): List<ChangelogSection> =
+    map { section -> section.copy(items = section.items.map { it.copy(text = transform(it.text)) }) }
+
 /**
  * Parses the CHANGELOG.md formats used by Morphe repositories.
  *
@@ -90,6 +123,33 @@ object ChangelogParser {
     private fun String.sanitizeContent(): String = this
         .replace(COMMIT_LINK_REGEX, "")
         .trimEnd()
+
+    /** Section heading inside an entry, such as `### Bug Fixes`. */
+    private val SECTION_HEADING_RE = Regex("""^\s*#{1,6}\s+(.+?)\s*$""")
+
+    /** Emoji and symbols some changelogs lead a heading with, as in `### 🐛 Bug Fixes`. */
+    private val HEADING_DECORATION_RE = Regex("""^[^\p{L}\p{N}]+""")
+
+    /** List item of any Markdown style and depth, bulleted or numbered, capturing its body. */
+    private val LIST_ITEM_RE = Regex("""^\s*(?:[*+-]|\d+[.)])\s+(.+?)\s*$""")
+
+    /**
+     * Lines that carry nothing to read: rules, code fences, merge conflict markers left behind,
+     * bare HTML tags and commit trailers.
+     */
+    private val NOISE_LINE_RE = Regex(
+        """^\s*(?:[-=_*~]{3,}|[<=>]{7}.*|```.*|<[^>]+>|(?:signed-off-by|co-authored-by):.*)\s*$""",
+        RegexOption.IGNORE_CASE
+    )
+
+    /** Quote marker opening a line of release notes. */
+    private val QUOTE_PREFIX_RE = Regex("""^\s*>\s?""")
+
+    /** Images, which a list of changes has no room to show. */
+    private val IMAGE_RE = Regex("""!\[[^]]*]\([^)]*\)""")
+
+    /** Bullet body opening with a bold scope, `**Scope:** text`. */
+    private val SCOPED_BODY_RE = Regex("""^\*\*(.+?):\*\*\s*(.*)$""")
 
     /**
      * Extracts, per scope, the list of raw bullet bodies (the text following
@@ -276,6 +336,72 @@ object ChangelogParser {
             kept += general
         }
         return kept.joinToString("\n")
+    }
+
+    /**
+     * Splits the content of an entry into its sections. Changes ahead of the first heading form a
+     * section without a title.
+     *
+     * Changelogs are mostly flat lists, but handwritten ones mix in prose, nested lists and the
+     * odd leftover. The list is flattened, prose is kept as notes and the leftovers are dropped,
+     * so any entry reads as sections of changes.
+     *
+     * Sections come in the order of [ChangelogSection.Kind], features first, whatever order the
+     * changelog wrote them in, so every release reads the same way.
+     */
+    fun sections(content: String): List<ChangelogSection> {
+        val sections = mutableListOf<ChangelogSection>()
+        var title: String? = null
+        var items = mutableListOf<ChangelogItem>()
+
+        fun flush() {
+            if (items.isEmpty()) return
+            sections += ChangelogSection(sectionKindOf(title), title, items)
+            items = mutableListOf()
+        }
+
+        // Release notes taken straight from GitHub still carry their commit links
+        val cleaned = content.replace(COMMIT_LINK_REGEX, "").replace(IMAGE_RE, "")
+        for (rawLine in cleaned.lines()) {
+            val line = rawLine.replace(QUOTE_PREFIX_RE, "")
+            if (line.isBlank() || NOISE_LINE_RE.matches(line)) continue
+
+            val heading = SECTION_HEADING_RE.matchEntire(line)
+            if (heading != null) {
+                flush()
+                // The section draws an icon of its own, so a decoration would only repeat it
+                title = heading.groupValues[1].replace(HEADING_DECORATION_RE, "").ifEmpty { heading.groupValues[1] }
+                continue
+            }
+
+            val body = LIST_ITEM_RE.matchEntire(line)?.groupValues?.get(1)
+            if (body == null) {
+                items += ChangelogItem(scope = null, text = line.trim(), isBullet = false)
+                continue
+            }
+            val scoped = SCOPED_BODY_RE.matchEntire(body)
+            items += if (scoped != null) {
+                ChangelogItem(scope = scoped.groupValues[1], text = scoped.groupValues[2])
+            } else {
+                ChangelogItem(scope = null, text = body)
+            }
+        }
+        flush()
+
+        return sections.sortedBy { it.kind.ordinal }
+    }
+
+    /**
+     * The headings conventional-changelog emits, in its plain and its emoji presets alike.
+     * The rest keep the title they were given.
+     */
+    private fun sectionKindOf(title: String?): ChangelogSection.Kind = when (title?.lowercase()) {
+        "features", "new features" -> ChangelogSection.Kind.FEATURES
+        "bug fixes" -> ChangelogSection.Kind.FIXES
+        "improvements" -> ChangelogSection.Kind.IMPROVEMENTS
+        "performance improvements" -> ChangelogSection.Kind.PERFORMANCE
+        "updated app support" -> ChangelogSection.Kind.APP_SUPPORT
+        else -> ChangelogSection.Kind.OTHER
     }
 
     /**

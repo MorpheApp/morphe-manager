@@ -254,14 +254,9 @@ class ImportExportViewModel(
             val settings = exportFile.settings.restrictedTo(sections)
             preferencesManager.importSettings(settings)
 
-            // Apply the imported language immediately and persist it for the next cold start
-            settings.appLanguage?.let {
-                saveLanguageToPrefs(app, it)
-                applyAppLanguage(it)
-            }
-
-            // Home app buttons (categories, hidden apps, sort mode, etc.) live outside
-            // PreferencesManager, so they're applied here rather than in importSettings
+            // The app language and the home app buttons (categories, hidden apps, sort mode, etc.)
+            // live outside PreferencesManager, so they're applied here rather than in importSettings
+            settings.appLanguage?.let { AppLocale.select(app, it) }
             settings.homeAppButtons?.let(homeAppButtonPreferences::importState)
 
             // Called whenever sources are taken, so Replace can clear existing custom sources even
@@ -288,6 +283,7 @@ class ImportExportViewModel(
         val homeAppButtons = homeAppButtonPreferences.exportState()
         return ManagerSettingsExportFile(
             settings = snapshot.copy(
+                appLanguage = AppLocale.selected.value,
                 customBundles = bundles.ifEmpty { null },
                 homeAppButtons = homeAppButtons
             ).restrictedTo(sections),

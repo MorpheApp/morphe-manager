@@ -7,6 +7,8 @@ package app.morphe.manager.ui.screen.shared
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
@@ -93,6 +95,9 @@ enum class DialogPadding {
  * to the bottom of the dialog. Set to true for list dialogs, where the buttons belong at the
  * bottom however short the list is. Compact dialogs leave it false so their content and buttons
  * stay together as one centered block. Default is false.
+ * @param hideFooterWhileTyping Folds the [footer] away while the keyboard is up, for a list dialog
+ * whose search wants every row of room it can get. A dialog whose buttons act on what is typed
+ * leaves it off, so they stay above the keyboard. Default is false.
  * @param content Dialog content.
  */
 @Composable
@@ -107,6 +112,7 @@ fun AppDialog(
     padding: DialogPadding = DialogPadding.Normal,
     contentArrangement: Arrangement.Vertical = Arrangement.Center,
     fillContentHeight: Boolean = false,
+    hideFooterWhileTyping: Boolean = false,
     backdrop: (@Composable BoxScope.() -> Unit)? = null,
     onEntered: (() -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit
@@ -172,6 +178,7 @@ fun AppDialog(
                     padding = padding,
                     contentArrangement = contentArrangement,
                     fillContentHeight = fillContentHeight,
+                    hideFooterWhileTyping = hideFooterWhileTyping,
                     content = content
                 )
             }
@@ -281,6 +288,7 @@ fun BoxScope.ContentOverlay(
 /**
  * Main dialog content area.
  */
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun DialogContent(
     title: String?,
@@ -292,6 +300,7 @@ private fun DialogContent(
     padding: DialogPadding,
     contentArrangement: Arrangement.Vertical,
     fillContentHeight: Boolean,
+    hideFooterWhileTyping: Boolean,
     content: @Composable ColumnScope.() -> Unit
 ) {
     val isLandscape = isLandscape()
@@ -332,12 +341,18 @@ private fun DialogContent(
         DialogPadding.Compact -> if (title != null) Defaults.ContentPadding else 0.dp
         else -> Defaults.ContentPaddingExpanded
     }
-    // A docked bar takes the bottom edge, so the content stops right above it
-    val bottomPadding = when {
-        bottomBar != null -> 0.dp
-        padding == DialogPadding.Compact -> Defaults.ContentPadding
-        else -> Defaults.ContentPaddingExpanded
-    }
+    val footerFolded = hideFooterWhileTyping && WindowInsets.isImeVisible
+    // A docked bar takes the bottom edge, so the content stops right above it. A folded footer
+    // takes its margin along, so the list runs right down to the keyboard, easing there with it
+    val bottomPadding by animateDpAsState(
+        targetValue = when {
+            bottomBar != null || footerFolded -> 0.dp
+            padding == DialogPadding.Compact -> Defaults.ContentPadding
+            else -> Defaults.ContentPaddingExpanded
+        },
+        animationSpec = tween(Defaults.ANIMATION_DURATION),
+        label = "dialog_bottom_padding"
+    )
     // The keyboard is one more thing the dialog has to fit above, and its inset already spans the
     // navigation bar, so the two are taken together rather than stacked. A docked bar clears both
     // itself, from the edge it sits on
@@ -376,12 +391,13 @@ private fun DialogContent(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = contentArrangement
                 ) {
-                    // Title section
+                    // Title section. The headline's tall line box already adds space below the
+                    // text, so a small gap reads as much as the one above the footer
                     if (title != null) {
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(start = horizontalPadding, end = horizontalPadding, bottom = Defaults.ContentPadding),
+                                .padding(start = horizontalPadding, end = horizontalPadding, bottom = Defaults.ContentPaddingSmall),
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
@@ -442,12 +458,22 @@ private fun DialogContent(
 
                     // Footer section, which a bottom bar stands in for while there is one
                     if (footer != null && bottomBar == null) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = horizontalPadding, end = horizontalPadding, top = Defaults.ContentPadding)
+                        AnimatedVisibility(
+                            visible = !footerFolded,
+                            enter = Animations.expandFadeEnter,
+                            exit = Animations.shrinkFadeExit
                         ) {
-                            footer()
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(
+                                        start = horizontalPadding,
+                                        end = horizontalPadding,
+                                        top = Defaults.ContentPadding
+                                    )
+                            ) {
+                                footer()
+                            }
                         }
                     }
                 }

@@ -71,6 +71,7 @@ fun InstalledAppPickerDialog(
         title = stringResource(R.string.home_installed_app_picker_title),
         padding = DialogPadding.Compact,
         scrollable = false,
+        hideFooterWhileTyping = true,
         titleTrailingContent = {
             TitleAction(
                 icon = if (search.visible) Icons.Outlined.SearchOff else Icons.Outlined.Search,

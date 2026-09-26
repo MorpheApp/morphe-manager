@@ -23,7 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.patcher.patch.PatchInfo
@@ -254,53 +254,36 @@ internal fun PatchCard(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Patch info
-                Column(
+                // Dimming alone leaves the state easy to miss. The card is what toggles, and it
+                // already reads the state out, so the indicator only shows it
+                SelectionCheckIndicator(
+                    state = if (isEnabled) ToggleableState.On else ToggleableState.Off,
+                    enabled = !lockState.blocksToggle(isEnabled),
+                    modifier = Modifier.padding(end = Defaults.ItemSpacing)
+                )
+
+                // Patch info, with the "New" badge inline
+                PatchCardText(
+                    name = patch.displayName,
+                    description = patch.description,
+                    dimmed = !isEnabled,
                     modifier = Modifier
                         .weight(1f)
-                        .padding(end = if (hasOptions) 8.dp else 0.dp),
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                        .padding(end = if (hasOptions) 8.dp else 0.dp)
                 ) {
-                    // Name row: patch name + "New" badge inline
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(6.dp)
-                    ) {
-                        Text(
-                            text = patch.displayName,
-                            style = MaterialTheme.typography.titleSmall,
-                            fontWeight = FontWeight.SemiBold,
-                            color = if (isEnabled)
-                                LocalDialogTextColor.current
-                            else
-                                LocalDialogSecondaryTextColor.current.copy(alpha = 0.5f),
-                            modifier = Modifier.weight(1f, fill = false)
+                    if (isNew) {
+                        StatusBadge(
+                            text = newLabel,
+                            tone = SemanticTone.Primary
                         )
-                        if (isNew) {
-                            StatusBadge(
-                                text = newLabel,
-                                tone = SemanticTone.Primary
-                            )
-                        }
-                        // Read from how the patch declares its option, so it warns early without
-                        // being relied on: the run itself is checked against the APK it produced
-                        if (buildsClone) {
-                            StatusBadge(
-                                text = cloneLabel,
-                                icon = Icons.Outlined.ContentCopy,
-                                tone = SemanticTone.Warning
-                            )
-                        }
                     }
-
-                    if (!patch.description.isNullOrBlank()) {
-                        Text(
-                            text = patch.description,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = if (isEnabled)
-                                LocalDialogSecondaryTextColor.current
-                            else
-                                LocalDialogSecondaryTextColor.current.copy(alpha = 0.4f)
+                    // Read from how the patch declares its option, so it warns early without
+                    // being relied on: the run itself is checked against the APK it produced
+                    if (buildsClone) {
+                        StatusBadge(
+                            text = cloneLabel,
+                            icon = Icons.Outlined.ContentCopy,
+                            tone = SemanticTone.Warning
                         )
                     }
                 }

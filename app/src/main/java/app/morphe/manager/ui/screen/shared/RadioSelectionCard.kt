@@ -184,16 +184,21 @@ fun SelectionLeadingBox(
  * can be on at once needs. A dash stands for "some of them", which neither circle can say.
  */
 @Composable
-fun SelectionCheckIndicator(state: ToggleableState, enabled: Boolean = true) {
+fun SelectionCheckIndicator(
+    state: ToggleableState,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true
+) {
     val colors = MaterialTheme.colorScheme
     val icon = when (state) {
         ToggleableState.On -> Icons.Outlined.Check
         ToggleableState.Indeterminate -> Icons.Outlined.Remove
-        ToggleableState.Off -> return StatusCirclePlaceholder()
+        ToggleableState.Off -> return StatusCirclePlaceholder(modifier = modifier)
     }
 
     StatusCircleIcon(
         icon = icon,
+        modifier = modifier,
         containerColor = if (enabled) colors.primaryContainer
         else colors.primaryContainer.copy(alpha = 0.38f),
         contentColor = if (enabled) colors.onPrimaryContainer

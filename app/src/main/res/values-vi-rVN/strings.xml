@@ -2,7 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Các ứng dụng khác</string>
-    <string name="home_other_apps_action">Chọn ứng dụng khác</string>
+    <string name="home_other_apps_action">Select other apps</string>
     <string name="home_not_patched_yet">Chưa vá</string>
     <string name="home_unpatched_version_installed">Đã cài đặt phiên bản chưa được vá</string>
     <string name="home_unpatched_badge">Chưa vá</string>

@@ -33,7 +33,6 @@ import app.morphe.manager.R
 import app.morphe.manager.domain.manager.HomeAppButtonPreferences
 import app.morphe.manager.ui.screen.settings.appearance.*
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.ui.screen.shared.LanguageRepository.getLanguageDisplayName
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.theme.ThemeStyle
 import app.morphe.manager.ui.theme.resolveThemeStyle
@@ -42,8 +41,8 @@ import app.morphe.manager.ui.viewmodel.RandomInterval
 import app.morphe.manager.ui.viewmodel.ThemeSettingsViewModel
 import app.morphe.manager.util.AppCardColorDefaults
 import app.morphe.manager.util.AppCardColorMode
+import app.morphe.manager.util.AppLocale
 import app.morphe.manager.util.MORPHE_WEBSITE_URL
-import app.morphe.manager.util.saveLanguageToPrefs
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
@@ -68,7 +67,7 @@ fun AppearanceTabContent(
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
-    val appLanguage by themeViewModel.prefs.appLanguage.getAsState()
+    val appLanguage by AppLocale.selected.collectAsStateWithLifecycle()
     val showGreetingPhrases by themeViewModel.prefs.showGreetingPhrases.getAsState()
     val showRepatchNotice by themeViewModel.prefs.showRepatchNotice.getAsState()
     val appCardColorMode by themeViewModel.prefs.appCardColorMode.getAsState()
@@ -239,10 +238,8 @@ fun AppearanceTabContent(
         LanguagePickerDialog(
             currentLanguage = appLanguage,
             onLanguageSelected = { languageCode ->
-                saveLanguageToPrefs(context, languageCode)
                 themeViewModel.setAppLanguage(languageCode)
                 showLanguageDialog.value = false
-                (context as? Activity)?.recreate()
             },
             onDismiss = { showLanguageDialog.value = false }
         )
@@ -262,12 +259,7 @@ private fun LanguageAndDisplaySection(
 ) {
     val context = LocalContext.current
     val currentLanguage = remember(appLanguage, context) {
-        getLanguageDisplayName(appLanguage, context)
-    }
-
-    val currentLanguageOption = remember(appLanguage, context) {
-        LanguageRepository.getSupportedLanguages(context)
-            .find { it.code == appLanguage }
+        LanguageRepository.getLanguage(appLanguage, context)
     }
 
     Column(verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)) {
@@ -280,14 +272,14 @@ private fun LanguageAndDisplaySection(
             SettingsItem(
                 onClick = onLanguageClick,
                 title = stringResource(R.string.settings_appearance_app_language_current),
-                subtitle = currentLanguage,
+                subtitle = currentLanguage.displayName,
                 leadingContent = {
                     Box(
                         modifier = Modifier.size(Defaults.IconSize),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = currentLanguageOption?.flag ?: "🌐",
+                            text = currentLanguage.flag,
                             fontSize = 20.sp,
                             lineHeight = 20.sp
                         )

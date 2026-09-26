@@ -18,16 +18,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clipToBounds
-import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.BlendMode
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.CompositingStrategy
-import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.IntrinsicMeasurable
 import androidx.compose.ui.layout.IntrinsicMeasureScope
@@ -50,7 +41,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import app.morphe.manager.util.readableOn
@@ -67,7 +57,6 @@ private val PillShape = Defaults.PillShape
 private val PillTextPadding = 16.dp
 
 /** Width of the fade on an edge of an [ActionPillRow] its pills have been slid past. */
-private val RowFadeWidth = 24.dp
 
 /** Pace a confirmation too long for its pill scrolls at, slow enough to read along. */
 private val ConfirmationScrollVelocity = 32.dp
@@ -485,7 +474,7 @@ private fun ScrollingLabel(text: String, style: TextStyle, playback: Confirmatio
     Layout(
         content = { Text(text = text, style = style, maxLines = 1, softWrap = false) },
         modifier = Modifier.edgeFade(
-            width = ConfirmationFadeWidth,
+            length = ConfirmationFadeWidth,
             hiddenAtStart = { playback.overflowPx * playback.scroll.value },
             hiddenAtEnd = { playback.overflowPx * (1f - playback.scroll.value) }
         )
@@ -498,46 +487,6 @@ private fun ScrollingLabel(text: String, style: TextStyle, playback: Confirmatio
             placeable.placeRelative(-(hidden * playback.scroll.value).roundToInt(), 0)
         }
     }
-}
-
-/**
- * Clips to bounds and fades the start and end edges, each in step with how many pixels of content
- * it hides, so an edge only fades while something is actually cut off behind it.
- */
-private fun Modifier.edgeFade(
-    width: Dp,
-    hiddenAtStart: () -> Float,
-    hiddenAtEnd: () -> Float
-): Modifier = clipToBounds()
-    .graphicsLayer {
-        // The fade masks what is already drawn, which takes a layer of its own
-        compositingStrategy = if (hiddenAtStart() > 0f || hiddenAtEnd() > 0f) {
-            CompositingStrategy.Offscreen
-        } else {
-            CompositingStrategy.Auto
-        }
-    }
-    .drawWithContent {
-        drawContent()
-        val fadeWidth = width.toPx().coerceAtMost(size.width / 2)
-        if (fadeWidth <= 0f) return@drawWithContent
-        val rtl = layoutDirection == LayoutDirection.Rtl
-        fadeEdge(onLeft = !rtl, strength = hiddenAtStart() / fadeWidth, width = fadeWidth)
-        fadeEdge(onLeft = rtl, strength = hiddenAtEnd() / fadeWidth, width = fadeWidth)
-    }
-
-private fun DrawScope.fadeEdge(onLeft: Boolean, strength: Float, width: Float) {
-    val fraction = strength.coerceIn(0f, 1f)
-    if (fraction == 0f) return
-    val edge = Color.Black.copy(alpha = 1f - fraction)
-    val left = if (onLeft) 0f else size.width - width
-    val colors = if (onLeft) listOf(edge, Color.Black) else listOf(Color.Black, edge)
-    drawRect(
-        brush = Brush.horizontalGradient(colors, startX = left, endX = left + width),
-        topLeft = Offset(left, 0f),
-        size = Size(width, size.height),
-        blendMode = BlendMode.DstIn
-    )
 }
 
 /** Tells the enclosing [ActionPillRow] how far a pill's confirmation is open. */
@@ -639,7 +588,7 @@ fun ActionPillRow(
         modifier = modifier
             .fillMaxWidth()
             .edgeFade(
-                width = RowFadeWidth,
+                length = EdgeFadeWidth,
                 hiddenAtStart = { overflow.start.toFloat() },
                 hiddenAtEnd = { overflow.end.toFloat() }
             )

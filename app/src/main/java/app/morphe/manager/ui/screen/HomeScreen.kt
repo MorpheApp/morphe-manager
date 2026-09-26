@@ -237,9 +237,10 @@ fun HomeScreen(
         val updateViewModel: UpdateViewModel = koinViewModel(
             viewModelStoreOwner = LocalActivity.current as ComponentActivity
         )
-        ManagerUpdateDetailsDialog(
+        ManagerChangelogDialog(
             onDismiss = { showUpdateDetailsDialog.value = false },
-            updateViewModel = updateViewModel
+            updateViewModel = updateViewModel,
+            expectsUpdate = true
         )
     }
 

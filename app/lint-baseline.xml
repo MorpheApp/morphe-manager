@@ -1499,28 +1499,6 @@
     </issue>
 
     <issue
-        id="UnusedTranslation"
-        message="The language `in (Indonesian)` is present in this project, but not declared in the `localeConfig` resource"
-        errorLine1="        android:localeConfig=&quot;@xml/locales_config&quot;"
-        errorLine2="                              ~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/AndroidManifest.xml"
-            line="61"
-            column="31"/>
-    </issue>
-
-    <issue
-        id="UnusedTranslation"
-        message="The language `iw (Hebrew)` is present in this project, but not declared in the `localeConfig` resource"
-        errorLine1="        android:localeConfig=&quot;@xml/locales_config&quot;"
-        errorLine2="                              ~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/AndroidManifest.xml"
-            line="61"
-            column="31"/>
-    </issue>
-
-    <issue
         id="TrustAllX509TrustManager"
         message="`checkServerTrusted` is empty, which could cause insecure network traffic due to trusting arbitrary TLS/SSL certificates presented by peers">
         <location

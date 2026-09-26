@@ -69,6 +69,8 @@ class BatchPatchEdit(
     val itemId: String,
     /** Key this item saves its patches and options under, and the one a copy excludes itself by. */
     val configurationKey: String,
+    /** The app's own package, which a clone's [configurationKey] is not. */
+    val packageName: String,
     val appName: String,
     val bundles: List<PatchBundleInfo.Scoped>,
     val savedSelection: PatchSelection,
@@ -464,6 +466,7 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent, ApkDownloadHelperHost 
             edit = BatchPatchEdit(
                 itemId = item.id,
                 configurationKey = item.configurationKey,
+                packageName = item.packageName,
                 appName = item.appName,
                 bundles = bundles,
                 savedSelection = item.selection,

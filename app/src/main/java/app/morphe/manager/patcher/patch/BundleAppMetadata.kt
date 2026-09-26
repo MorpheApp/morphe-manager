@@ -10,6 +10,16 @@ import app.morphe.manager.util.KnownApps
 import app.morphe.patcher.patch.ApkFileType
 
 /**
+ * Color of a bundle's `appIconColor`. The value is 0xRRGGBB with a zero alpha per the
+ * Compatibility spec, so full opacity is forced.
+ */
+fun appIconColorOf(rgb: Int): Color = Color(rgb or (0xFF shl 24))
+
+/** Color of [packageName] as the first of these patches to declare one gives it, if any does. */
+fun Sequence<PatchInfo>.appColorFor(packageName: String): Color? =
+    firstNotNullOfOrNull { it.appIconColorFor(packageName) }?.let(::appIconColorOf)
+
+/**
  * Aggregated metadata about an app as declared in one or more patch bundles.
  * Priority for conflicting values across bundles: first non-null value wins.
  *
@@ -29,15 +39,11 @@ data class BundleAppMetadata(
 ) {
     /** Derived gradient color list for home screen buttons. Null means use fallback. */
     val gradientColors: List<Color>? = appIconColor?.let { rgb ->
-        // appIconColor is 0xRRGGBB (alpha=0x00 per Compatibility spec) - force full opacity
-        listOf(Color(rgb or (0xFF shl 24)), KnownApps.GRADIENT_MID, KnownApps.GRADIENT_END)
+        listOf(appIconColorOf(rgb), KnownApps.GRADIENT_MID, KnownApps.GRADIENT_END)
     }
 
     /** Derived download button color. Null means use fallback. */
-    val downloadColor: Color? = appIconColor?.let { rgb ->
-        // appIconColor is 0xRRGGBB (alpha=0x00 per Compatibility spec) - force full opacity
-        Color(rgb or (0xFF shl 24))
-    }
+    val downloadColor: Color? = appIconColor?.let(::appIconColorOf)
 
     companion object {
         /**

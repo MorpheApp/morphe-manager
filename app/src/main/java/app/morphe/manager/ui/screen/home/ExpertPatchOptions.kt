@@ -214,7 +214,7 @@ internal fun PatchOptionsDialog(
             // Patch description
             if (!patch.description.isNullOrBlank()) {
                 Text(
-                    text = patch.description,
+                    text = rememberTranslated(patch.description),
                     style = MaterialTheme.typography.bodyMedium,
                     color = LocalDialogSecondaryTextColor.current
                 )
@@ -231,6 +231,8 @@ internal fun PatchOptionsDialog(
             patch.options.forEachIndexed { index, option ->
                 val key   = option.key
                 val value = if (values == null || key !in values) option.default else values[key]
+                // Only shown translated, the option kind is still told from the original
+                val optionDescription = rememberTranslated(option.description)
 
                 if (index > 0) {
                     val prevOption = patch.options[index - 1]
@@ -260,7 +262,7 @@ internal fun PatchOptionsDialog(
                 when (val kind = resolveOptionKind(option, value)) {
                     OptionKind.StringList -> ListStringInputOption(
                         title = option.title,
-                        description = option.description,
+                        description = optionDescription,
                         value = when (value) {
                             is List<*> -> value.filterIsInstance<String>()
                             is String  -> value.split(",").map { it.trim() }.filter { it.isNotEmpty() }
@@ -279,7 +281,7 @@ internal fun PatchOptionsDialog(
 
                     OptionKind.Color -> ColorOptionWithPresets(
                         title = option.title,
-                        description = option.description,
+                        description = optionDescription,
                         value = value as? String ?: "#000000",
                         presets = option.presets,
                         onPresetSelect = { onValueChange(key, it) },
@@ -292,7 +294,7 @@ internal fun PatchOptionsDialog(
                         val presets = option.presets as Map<String, Any?>
                         PathWithPresetsOption(
                             title = option.title,
-                            description = option.description,
+                            description = optionDescription,
                             value = value?.toString() ?: "",
                             presets = presets,
                             packageName = packageName,
@@ -306,7 +308,7 @@ internal fun PatchOptionsDialog(
                         val presets = option.presets as Map<String, Any?>
                         DropdownOptionItem(
                             title = option.title,
-                            description = option.description,
+                            description = optionDescription,
                             value = value?.toString() ?: "",
                             presets = presets,
                             onValueChange = { onValueChange(key, it) }
@@ -315,7 +317,7 @@ internal fun PatchOptionsDialog(
 
                     OptionKind.Path -> PathInputOption(
                         title = option.title,
-                        description = option.description,
+                        description = optionDescription,
                         value = value?.toString() ?: "",
                         packageName = packageName,
                         isDefaultBundle = isDefaultBundle,
@@ -325,7 +327,7 @@ internal fun PatchOptionsDialog(
 
                     OptionKind.FilePath -> FilePathInputOption(
                         title = option.title,
-                        description = option.description,
+                        description = optionDescription,
                         value = value?.toString() ?: "",
                         required = option.required,
                         onValueChange = { onValueChange(key, it) }
@@ -333,7 +335,7 @@ internal fun PatchOptionsDialog(
 
                     OptionKind.FolderPicker -> FolderPickerOption(
                         title = option.title,
-                        description = option.description,
+                        description = optionDescription,
                         value = value?.toString() ?: "",
                         packageName = packageName,
                         isDefaultBundle = isDefaultBundle,
@@ -343,7 +345,7 @@ internal fun PatchOptionsDialog(
 
                     OptionKind.FilePicker -> FilePickerOption(
                         title = option.title,
-                        description = option.description,
+                        description = optionDescription,
                         value = value?.toString() ?: "",
                         required = option.required,
                         allowedExtensions = option.allowedExtensions,
@@ -352,7 +354,7 @@ internal fun PatchOptionsDialog(
 
                     OptionKind.Image -> ImageInputOption(
                         title = option.title,
-                        description = option.description,
+                        description = optionDescription,
                         value = value?.toString() ?: "",
                         required = option.required,
                         allowedExtensions = option.allowedExtensions,
@@ -362,7 +364,7 @@ internal fun PatchOptionsDialog(
 
                     OptionKind.StringText -> TextInputOption(
                         title = option.title,
-                        description = option.description,
+                        description = optionDescription,
                         value = value?.toString() ?: "",
                         required = option.required,
                         keyboardType = KeyboardType.Text,
@@ -377,14 +379,14 @@ internal fun PatchOptionsDialog(
 
                     OptionKind.BooleanToggle -> BooleanOptionItem(
                         title = option.title,
-                        description = option.description,
+                        description = optionDescription,
                         value = value as? Boolean == true,
                         onValueChange = { onValueChange(key, it) }
                     )
 
                     OptionKind.IntLong -> TextInputOption(
                         title = option.title,
-                        description = option.description,
+                        description = optionDescription,
                         value = (value as? Number)?.toLong()?.toString() ?: "",
                         required = option.required,
                         keyboardType = KeyboardType.Number,
@@ -393,7 +395,7 @@ internal fun PatchOptionsDialog(
 
                     OptionKind.FloatDouble -> TextInputOption(
                         title = option.title,
-                        description = option.description,
+                        description = optionDescription,
                         value = (value as? Number)?.toFloat()?.toString() ?: "",
                         required = option.required,
                         keyboardType = KeyboardType.Decimal,
@@ -402,7 +404,7 @@ internal fun PatchOptionsDialog(
 
                     OptionKind.ArrayDropdown -> DropdownOptionItem(
                         title = option.title,
-                        description = option.description,
+                        description = optionDescription,
                         value = value?.toString() ?: "",
                         presets = option.presets ?: emptyMap(),
                         onValueChange = { onValueChange(key, it) }
@@ -410,7 +412,7 @@ internal fun PatchOptionsDialog(
 
                     is OptionKind.IntSlider -> SliderOptionInput(
                         title = option.title,
-                        description = option.description,
+                        description = optionDescription,
                         value = (value as? Number)?.toFloat() ?: kind.bounds.min,
                         min = kind.bounds.min,
                         max = kind.bounds.max,
@@ -422,7 +424,7 @@ internal fun PatchOptionsDialog(
 
                     is OptionKind.FloatSlider -> SliderOptionInput(
                         title = option.title,
-                        description = option.description,
+                        description = optionDescription,
                         value = (value as? Number)?.toFloat() ?: kind.bounds.min,
                         min = kind.bounds.min,
                         max = kind.bounds.max,
@@ -434,7 +436,7 @@ internal fun PatchOptionsDialog(
 
                     is OptionKind.IntRangeSlider -> RangeSliderOptionInput(
                         title = option.title,
-                        description = option.description,
+                        description = optionDescription,
                         value = value.asFloatRange() ?: (kind.bounds.min..kind.bounds.max),
                         min = kind.bounds.min,
                         max = kind.bounds.max,
@@ -448,7 +450,7 @@ internal fun PatchOptionsDialog(
 
                     is OptionKind.FloatRangeSlider -> RangeSliderOptionInput(
                         title = option.title,
-                        description = option.description,
+                        description = optionDescription,
                         value = value.asFloatRange() ?: (kind.bounds.min..kind.bounds.max),
                         min = kind.bounds.min,
                         max = kind.bounds.max,

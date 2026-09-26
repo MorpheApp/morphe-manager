@@ -721,8 +721,8 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Tampilkan pesan sapaan di layar beranda</string>
     <string name="settings_appearance_app_grouping">Pengelompokan aplikasi</string>
     <string name="settings_appearance_app_grouping_description">Menampilkan pengalih untuk mengelompokkan aplikasi berdasarkan sumber atau kategori</string>
-    <string name="settings_appearance_repatch_notice">Pemberitahuan penambalan ulang</string>
-    <string name="settings_appearance_repatch_notice_description">Menampilkan spanduk ketika aplikasi yang telah di-patch dapat di-patch ulang</string>
+    <string name="settings_appearance_repatch_notice">Notifikasi penambalan ulang</string>
+    <string name="settings_appearance_repatch_notice_description">Menampilkan spanduk ketika aplikasi yang telah ditambal dapat ditambal ulang</string>
     <string name="settings_appearance_sort_button">Tombol urutkan dan saring</string>
     <string name="settings_appearance_sort_button_description">Tampilkan tombol urutkan dan saring di layar beranda</string>
     <string name="settings_appearance_app_card_colors">Warna kartu aplikasi</string>
@@ -998,7 +998,7 @@ Rincian: %2$s"</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Impor &amp; ekspor</string>
     <string name="settings_system_signing_key">Kunci penandatanganan</string>
-    <string name="settings_system_signing_key_description">Mencadangkan dan memulihkan kunci yang digunakan untuk menandatangani aplikasi yang di-patch</string>
+    <string name="settings_system_signing_key_description">Mencadangkan dan memulihkan kunci yang digunakan untuk menandatangani aplikasi yang ditambal</string>
     <string name="settings_system_signing_key_dialog_description">Setiap aplikasi yang di-patch oleh Morphe ditandatangani dengan kunci ini. Simpan salinannya: tanpa kunci ini, aplikasi yang di-patch hanya dapat diperbarui setelah menghapus instalasinya.</string>
     <string name="settings_system_signing_key_missing">Morphe membuatnya dengan patch pertama Anda.</string>
     <string name="settings_system_signing_key_created">Dibuat %s</string>
@@ -1065,7 +1065,7 @@ Rincian: %2$s"</string>
     <string name="settings_system_storage_patcher_workspace_title">Ruang kerja penambal</string>
     <string name="settings_system_storage_patcher_workspace_description">Berkas runtime penambal dan data sampah yang tidak terpakai</string>
     <string name="settings_system_storage_temporary_title">Berkas sementara</string>
-    <string name="settings_system_storage_temporary_description">Berkas yang masih dapat digunakan dibuat selama patching</string>
+    <string name="settings_system_storage_temporary_description">Berkas yang masih dapat digunakan dibuat selama penambalan</string>
     <string name="settings_system_storage_clear_all">Hapus semua cache</string>
     <string name="settings_system_storage_clear_all_description">Mengosongkan semua ruang cache yang dapat digunakan kembali sekaligus</string>
     <string name="settings_system_storage_clear_all_confirm">Ini akan menghapus respons jaringan yang di-cache, salinan pemasang yang disimpan, dan berkas sementara. APK asli dan yang telah ditambal tetap disimpan</string>

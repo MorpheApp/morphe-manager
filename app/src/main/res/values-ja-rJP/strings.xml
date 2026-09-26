@@ -57,13 +57,13 @@
     <string name="home_app_filter_uninstalled_description">Morphe でパッチを適用した後、このデバイスから削除されたアプリ</string>
     <string name="home_app_filter_clones">クローン</string>
     <string name="home_app_filter_clones_description">独自のパッケージ名でビルドされ、オリジナルのアプリと一緒にインストールできるアプリ</string>
-    <string name="home_app_sort_manual_description">並べ替えるにはアプリを長押しして、並べ替えボタンをタップ</string>
+    <string name="home_app_sort_manual_description">並べ替えるには、アプリを長押しして並べ替えボタンをタップ</string>
     <string name="home_app_sort_recommended">推奨順</string>
     <string name="home_app_sort_recommended_description">インストール済みのアプリとピン留め済みのアプリを優先</string>
     <string name="home_app_sort_name_asc_description">アルファベット順（A-Z）</string>
     <string name="home_app_sort_name_desc_description">アルファベット順（Z-A）</string>
     <string name="home_app_sort_updates_first">パッチの更新を優先</string>
-    <string name="home_app_sort_updates_first_description">新しいパッチがあるアプリを優先し、その後は推奨順</string>
+    <string name="home_app_sort_updates_first_description">新しいパッチがあるアプリを優先、その後は推奨順</string>
     <string name="home_app_sort_recently_patched">最近パッチされた</string>
     <string name="home_app_sort_recently_patched_description">最近パッチされたアプリを優先</string>
     <string name="home_no_apps_title">利用可能なアプリはありません</string>
@@ -719,11 +719,11 @@
     <string name="settings_appearance_greeting_phrases">挨拶メッセージ</string>
     <string name="settings_appearance_greeting_phrases_subtitle">ホーム画面に挨拶メッセージを表示します</string>
     <string name="settings_appearance_app_grouping">アプリのグループ化</string>
-    <string name="settings_appearance_app_grouping_description">ソースまたはカテゴリでアプリをグループ化するスイッチャーを表示</string>
+    <string name="settings_appearance_app_grouping_description">ソースやカテゴリごとにアプリをまとめるスイッチャーを表示します</string>
     <string name="settings_appearance_repatch_notice">再パッチ通知</string>
-    <string name="settings_appearance_repatch_notice_description">パッチ適用済みアプリを再パッチできる場合にバナーを表示</string>
-    <string name="settings_appearance_sort_button">並べ替えとフィルター ボタン</string>
-    <string name="settings_appearance_sort_button_description">ホーム画面に並べ替えとフィルター ボタンを表示します</string>
+    <string name="settings_appearance_repatch_notice_description">再パッチ可能なアプリがある場合バナーを表示します</string>
+    <string name="settings_appearance_sort_button">並べ替えとフィルターボタン</string>
+    <string name="settings_appearance_sort_button_description">ホーム画面に並べ替えとフィルターボタンを表示します</string>
     <string name="settings_appearance_app_card_colors">アプリカードの色</string>
     <string name="settings_appearance_app_card_colors_default">デフォルト</string>
     <string name="settings_appearance_app_card_colors_default_description">ホーム画面のアプリカードに各アプリのバンドルカラーを使用します</string>
@@ -998,9 +998,10 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_export">インポートとエクスポート</string>
     <string name="settings_system_signing_key">署名キー</string>
     <string name="settings_system_signing_key_description">パッチ適用済みアプリの署名に使用するキーをバックアップおよび復元します</string>
-    <string name="settings_system_signing_key_dialog_description">Morphe でパッチを適用したアプリは、すべてこのキーで署名されます。必ずバックアップしてください。このキーがないと、パッチ適用済みアプリを更新するには、一度アンインストールする必要があります</string>
+    <string name="settings_system_signing_key_dialog_description">Morphe でパッチを適用したアプリは、すべてこのキーで署名されます。必ずバックアップしてください。このキーがないと、パッチ適用済みアプリを更新するにはアンインストールする必要があります
+</string>
     <string name="settings_system_signing_key_missing">最初のパッチ適用時に Morphe が作成します</string>
-    <string name="settings_system_signing_key_created">%s を作成しました</string>
+    <string name="settings_system_signing_key_created">作成日: %s</string>
     <string name="settings_system_signing_key_fingerprint">SHA-256 フィンガープリント</string>
     <string name="settings_system_backup_appearance_description">テーマ、カラー、言語</string>
     <string name="settings_system_backup_home_description">グループ、非表示のアプリ、並べ替え、トグル</string>
@@ -1008,7 +1009,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_backup_patching_description">インストーラー、パッチャー、保存済み APK</string>
     <string name="settings_system_backup_updates_description">プレリリース版とアップデートの確認</string>
     <string name="settings_system_backup_sources_description">カスタム ソースと GitHub トークン</string>
-    <string name="settings_system_backup_patch_selections_description">すべてのアプリで選択したパッチ</string>
+    <string name="settings_system_backup_patch_selections_description">すべてのアプリの選択したパッチ</string>
     <string name="settings_system_backup_signing_key_note">署名キーは別途バックアップされます</string>
     <string name="settings_system_import_keystore_dialog_title">キーストアの資格情報を入力</string>
     <string name="settings_system_import_keystore_dialog_description">キーストアをインポートするには、認証情報の入力が必要です</string>
@@ -1327,5 +1328,5 @@ morphe_header_custom_dark.png
     <string name="tour_prompt_desc">Morphe の主な機能を簡単に見てみませんか？</string>
     <string name="tour_prompt_confirm">ガイドを開始</string>
     <string name="onboarding_restart_title">機能ガイド</string>
-    <string name="onboarding_restart_desc">主な機能を紹介するガイド</string>
+    <string name="onboarding_restart_desc">主な機能をガイド付きでご紹介します</string>
 </resources>

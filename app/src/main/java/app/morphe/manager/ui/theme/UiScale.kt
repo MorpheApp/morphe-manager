@@ -1,6 +1,5 @@
 package app.morphe.manager.ui.theme
 
-import android.content.Context
 import android.content.res.Configuration
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
@@ -27,18 +26,16 @@ fun Float.coerceToUiScale(): Float {
 fun Float.toUiScalePercent(): Int = (this * 100).roundToInt()
 
 /**
- * Wraps this context in [scale] the way the system screen zoom does, so every window the activity
- * opens later - dialogs, menus, sheets - resolves dp and sp against the same density.
+ * Scales [baseDensityDpi] into these context overrides the way the system screen zoom does, so
+ * every window the activity opens later - dialogs, menus, sheets - resolves dp and sp against the
+ * same density.
  *
  * Only the density is overridden. A full configuration would pin orientation and screen size to
  * their values at attach time, and this activity handles rotation without being recreated.
  */
-fun Context.withUiScale(scale: Float): Context {
-    val baseDensityDpi = resources.configuration.densityDpi
+fun Configuration.applyUiScale(baseDensityDpi: Int, scale: Float) {
     val scaledDensityDpi = (baseDensityDpi * scale.coerceToUiScale()).roundToInt()
-    if (scaledDensityDpi == baseDensityDpi) return this
-
-    return createConfigurationContext(Configuration().apply { densityDpi = scaledDensityDpi })
+    if (scaledDensityDpi != baseDensityDpi) densityDpi = scaledDensityDpi
 }
 
 /**

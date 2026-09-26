@@ -36,6 +36,7 @@ import app.morphe.manager.domain.batch.*
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.usesPrerelease
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.ui.model.PatchRunProgress
 import app.morphe.manager.ui.screen.home.*
 import app.morphe.manager.ui.screen.patcher.ExpertPatchingInProgress
 import app.morphe.manager.ui.screen.patcher.PatcherErrorDialog
@@ -126,8 +127,28 @@ fun BatchPatcherScreen(
     }
     val installRequests: List<InstallQueueRequest> = installRequestsByItem.values.toList()
 
-    LaunchedEffect(current?.phase, current?.policy) {
+    val useExpertMode by prefs.useExpertMode.getAsState()
+
+    // Outlives its item so a round in play survives the gap between apps and the end of the queue
+    var lastRun by remember { mutableStateOf<PatchRunProgress?>(null) }
+    LaunchedEffect(current?.activeRun) {
+        current?.activeRun?.let { lastRun = it }
+    }
+    val heldRun = lastRun?.takeIf { useExpertMode && miniGameState.isPlaying }
+
+    // A queue that drains mid-round waits for the player, as a single run does. Keyed on the
+    // phase so a retried queue waits again
+    var summaryReleased by remember(current?.phase) { mutableStateOf(false) }
+    val holdSummary = current?.phase == BatchPhase.FINISHED &&
+            !summaryReleased &&
+            heldRun != null
+    LaunchedEffect(holdSummary) {
+        if (!holdSummary) summaryReleased = true
+    }
+
+    LaunchedEffect(current?.phase, current?.policy, holdSummary) {
         if (current?.phase == BatchPhase.FINISHED &&
+            !holdSummary &&
             current.policy == BatchInstallPolicy.INSTALL_AFTER &&
             installRequests.isNotEmpty()
         ) {
@@ -149,13 +170,13 @@ fun BatchPatcherScreen(
             secondaryText = stringResource(R.string.no),
             onConfirm = {
                 showCancelDialog = false
+                // A stopped queue must not wait for the round
+                miniGameState.pauseActiveGame()
                 viewModel.cancel()
             },
             onDismiss = { showCancelDialog = false }
         )
     }
-
-    val useExpertMode by prefs.useExpertMode.getAsState()
 
     // Kept outside the dialog so the picker state survives the download dialog's exit animation
     val openApkDownloadHelper = rememberApkDownloadHelperAction(
@@ -178,6 +199,8 @@ fun BatchPatcherScreen(
         val sources by patchBundleRepository.sources.collectAsStateWithLifecycle()
         val sourcesByUid = remember(sources) { sources.associateBy { it.uid } }
         ExpertModeDialog(
+            packageName = edit.packageName,
+            appName = edit.appName,
             newPatches = edit.newPatches,
             options = edit.options,
             allPatchesInfo = allPatchesInfo,
@@ -362,10 +385,10 @@ fun BatchPatcherScreen(
     }
 
     val listState = rememberLazyListState()
-    val activeRun = current?.activeRun
+    val shownRun = current?.activeRun ?: heldRun
 
     // Patching an app looks exactly like a single run, with a queue counter on top
-    if (current != null && current.phase == BatchPhase.RUNNING) {
+    if (current != null && (current.phase == BatchPhase.RUNNING || holdSummary)) {
         // The preflight dialog is a separate window and cannot animate into this one, so the
         // patcher fades in on its own to soften the switch
         val appear = remember { MutableTransitionState(false).apply { targetState = true } }
@@ -376,7 +399,7 @@ fun BatchPatcherScreen(
                     .fillMaxSize()
                     .statusBarsPadding()
             ) {
-                if (activeRun == null) {
+                if (shownRun == null) {
                     BatchRunHeader(state = current)
 
                     // Between apps: the previous run is over and the next has not started, so
@@ -388,20 +411,22 @@ fun BatchPatcherScreen(
                     }
                 } else if (useExpertMode) {
                     ExpertPatchingInProgress(
-                        progress = activeRun.progress,
-                        patchesProgress = activeRun.patchesProgress,
-                        patchProgress = activeRun,
+                        progress = shownRun.progress,
+                        patchesProgress = shownRun.patchesProgress,
+                        patchProgress = shownRun,
+                        patcherSucceeded = if (holdSummary) true else null,
                         miniGameState = miniGameState,
                         queueHeader = { BatchRunHeader(state = current) },
                         onCancelClick = { showCancelDialog = true },
+                        onInstallClick = { summaryReleased = true },
                         onHomeClick = onBackClick
                     )
                 } else {
-                    val longStepWarning by activeRun.showLongStepWarning.collectAsStateWithLifecycle()
+                    val longStepWarning by shownRun.showLongStepWarning.collectAsStateWithLifecycle()
                     SimplePatchingInProgress(
-                        progress = activeRun.progress,
-                        patchesProgress = activeRun.patchesProgress,
-                        patchProgress = activeRun,
+                        progress = shownRun.progress,
+                        patchesProgress = shownRun.patchesProgress,
+                        patchProgress = shownRun,
                         showLongStepWarning = longStepWarning,
                         queueHeader = { BatchRunHeader(state = current) },
                         onCancelClick = { showCancelDialog = true },
@@ -589,16 +614,19 @@ private fun BatchRunHeader(state: BatchRunState) {
             )
         }
 
-        state.activeItem?.let { item ->
-            Text(
-                text = item.appName,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.onSurface,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-        }
+        // Between apps there is no active item, and dropping the line would shift everything below
+        var lastAppName by remember { mutableStateOf("") }
+        val appName = state.activeItem?.appName ?: lastAppName
+        SideEffect { lastAppName = appName }
+
+        Text(
+            text = appName,
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.onSurface,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
+        )
     }
 }
 

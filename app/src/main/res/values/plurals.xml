@@ -92,4 +92,20 @@
         <item quantity="one">%s core</item>
         <item quantity="other">%s cores</item>
     </plurals>
+    <plurals name="changelog_new_count">
+        <item quantity="one">%s new</item>
+        <item quantity="other">%s new</item>
+    </plurals>
+    <plurals name="changelog_fix_count">
+        <item quantity="one">%s fix</item>
+        <item quantity="other">%s fixes</item>
+    </plurals>
+    <plurals name="changelog_change_count">
+        <item quantity="one">%s change</item>
+        <item quantity="other">%s changes</item>
+    </plurals>
+    <plurals name="changelog_new_releases">
+        <item quantity="one">%s new release</item>
+        <item quantity="other">%s new releases</item>
+    </plurals>
 </resources>

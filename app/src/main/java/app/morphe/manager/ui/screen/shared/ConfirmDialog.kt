@@ -6,6 +6,8 @@
 package app.morphe.manager.ui.screen.shared
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -13,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
+import app.morphe.manager.R
 
 @Composable
 fun ConfirmDialog(
@@ -65,3 +68,32 @@ fun ConfirmDialog(
     isPrimaryDestructive = isPrimaryDestructive,
     secondaryText = secondaryText
 )
+
+/**
+ * Asks before a download over a metered connection, where the provider may charge for the data.
+ */
+@Composable
+fun MeteredDownloadDialog(
+    title: String,
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    AppDialog(
+        onDismissRequest = onDismiss,
+        title = title,
+        footer = {
+            AppDialogButtonRow(
+                primaryText = stringResource(R.string.download),
+                onPrimaryClick = onConfirm,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss
+            )
+        }
+    ) {
+        Notice(
+            icon = Icons.Outlined.Warning,
+            text = stringResource(R.string.download_confirmation_metered),
+            tone = SemanticTone.Warning
+        )
+    }
+}

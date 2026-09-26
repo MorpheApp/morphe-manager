@@ -407,6 +407,7 @@ fun HomeDialogs(
         // Reading the property re-walks and re-sorts every bundle's patches, so it is taken once
         val allPatchesInfo = homeViewModel.expertModeAllPatchesInfo
         ExpertModeDialog(
+            packageName = homeViewModel.expertModeSelectedApp?.packageName.orEmpty(),
             newPatches = homeViewModel.expertModeNewPatches,
             options = homeViewModel.expertModeOptions,
             allPatchesInfo = allPatchesInfo,
@@ -520,7 +521,13 @@ fun HomeDialogs(
             onUpdate = { bundle ->
                 if (bundle is RemotePatchBundle) {
                     scope.launch {
-                        homeViewModel.patchBundleRepository.update(bundle, showToast = true)
+                        // A source that failed to load may hold a broken jar of the current version,
+                        // which a plain version check would keep
+                        homeViewModel.patchBundleRepository.update(
+                            bundle,
+                            force = bundle.state is PatchBundleSource.State.Failed,
+                            showToast = true
+                        )
                     }
                 } else {
                     homeViewModel.localBundleUpdateUid = bundle.uid

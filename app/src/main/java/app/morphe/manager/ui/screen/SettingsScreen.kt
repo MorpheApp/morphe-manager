@@ -44,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.SettingsSection
 import app.morphe.manager.ui.screen.home.GlobalOnboardingState
+import app.morphe.manager.ui.screen.home.ManagerChangelogDialog
 import app.morphe.manager.ui.screen.settings.AdvancedTabContent
 import app.morphe.manager.ui.screen.settings.AppearanceTabContent
 import app.morphe.manager.ui.screen.settings.LocalSettingsTabBottomPadding
@@ -259,7 +260,7 @@ fun SettingsScreen(
         val updateViewModel: UpdateViewModel = koinViewModel(
             viewModelStoreOwner = LocalActivity.current as ComponentActivity
         )
-        ChangelogDialog(
+        ManagerChangelogDialog(
             onDismiss = { showChangelogDialog.value = false },
             updateViewModel = updateViewModel
         )

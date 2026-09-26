@@ -18,6 +18,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
@@ -128,12 +129,18 @@ fun PatchingUsageGraphs(
     compact: Boolean,
     modifier: Modifier = Modifier
 ) {
-    val heapSamples = patchProgress.heapSamples
-    val coreLoads = patchProgress.cpuCoreLoads
-    val ioSamples = patchProgress.ioSamples
+    // Every queued app starts with an empty history, so the previous one stays drawn until the
+    // new one has its own and the panels never collapse in between
+    var drawnSource by remember { mutableStateOf(patchProgress) }
+    val source = if (patchProgress.heapSamples.size > 1) patchProgress else drawnSource
+    SideEffect { drawnSource = source }
+
+    val heapSamples = source.heapSamples
+    val coreLoads = source.cpuCoreLoads
+    val ioSamples = source.ioSamples
 
     // The runtime reports its limit over the log, which the app's own heap stands in for until then
-    val heapLimitMb = patchProgress.heapLimitMb.takeIf { it > 0 }
+    val heapLimitMb = source.heapLimitMb.takeIf { it > 0 }
         ?: heapLimitMebibytes()
 
     val metrics = usageMetrics(compact)
