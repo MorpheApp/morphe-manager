@@ -720,11 +720,11 @@ Deinstaliranje će trajno izbrisati sve podatke aplikacije"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Početni zaslon</string>
     <string name="settings_appearance_greeting_phrases">Pozdravne fraze</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Pokaži poruku dobrodošlice na početnom zaslonu</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Prikaži poruku dobrodošlice na početnom zaslonu</string>
     <string name="settings_appearance_app_grouping">Grupiranje aplikacija</string>
     <string name="settings_appearance_app_grouping_description">Prikaži prekidač za grupiranje aplikacija po izvoru ili kategoriji</string>
     <string name="settings_appearance_repatch_notice">Obavijest o ponovnom patchanju</string>
-    <string name="settings_appearance_repatch_notice_description">Prikaži banner kada zakrpane aplikacije mogu biti ponovno zakrpane</string>
+    <string name="settings_appearance_repatch_notice_description">Prikaži obavijest kada se patchane aplikacije mogu ponovno patchati</string>
     <string name="settings_appearance_sort_button">Tipka za sortiranje i filtriranje</string>
     <string name="settings_appearance_sort_button_description">Prikaži tipku za sortiranje i filtriranje na početnom zaslonu</string>
     <string name="settings_appearance_app_card_colors">Boje kartica aplikacije</string>
@@ -780,7 +780,7 @@ Patchevi nisu pogođeni: omogućite predizdanja patcheva za svaki izvor na popis
     <string name="settings_advanced_update_interval_chip_subtitle">Učestalost provjere u pozadini</string>
     <string name="settings_advanced_update_interval_battery_warning">Provjere u pozadini možda neće pouzdano funkcionirati na nekim uređajima. Proizvođači poput Xiaomija, Huaweija, Samsunga i OnePlusa često agresivno ograničavaju pozadinske procese kako bi uštedjeli bateriju.</string>
     <string name="settings_advanced_external_batch_patch">Dopusti vanjske okidače</string>
-    <string name="settings_advanced_external_batch_patch_description">Dopušta aplikacijama za automatizaciju pokretanje grupnog zakrpanja putem intencije</string>
+    <string name="settings_advanced_external_batch_patch_description">Omogućuje aplikacijama automatizaciju pokretanja skupnog patchanja putem namjere</string>
     <string name="external_batch_patch_title">Pokrenuti grupno patchanje?</string>
     <string name="external_batch_patch_description">%s želi da Morphe patcha i instalira aplikacije</string>
     <string name="external_batch_patch_trust_caller">Uvijek dopusti ovu aplikaciju</string>
@@ -940,9 +940,9 @@ Dimenzije slike moraju biti sljedeće:
     <string name="installer_play_store_mode_description">Zabilježite Trgovinu Google Play kao izvor instalacije za ovu metodu instalacije</string>
     <string name="settings_prompt_installer_on_install">Izbor instalatora</string>
     <string name="settings_prompt_installer_on_install_description">Prikazuje dijaloške okvire za odabir instalacijskog programa svaki put kada je patchana aplikacija instalirana</string>
-    <string name="settings_auto_install_with_shizuku">Automatska instalacija nakon \"patchanja\"</string>
-    <string name="settings_auto_install_with_shizuku_description">Instalira zakrpani APK čim završi zakrpavanje</string>
-    <string name="settings_auto_uninstall_with_shizuku">Automatska deinstalacija u slučaju sukoba</string>
+    <string name="settings_auto_install_with_shizuku">Automatska instalacija nakon patchanja</string>
+    <string name="settings_auto_install_with_shizuku_description">Instalira patchanu APK odmah nakon dovršetka patchanja</string>
+    <string name="settings_auto_uninstall_with_shizuku">Automatski deinstaliraj u slučaju sukoba</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Prilikom automatske instalacije sa Shizukuom, prvo deinstalirajte postojeću aplikaciju ako Android prijavi sukob potpisa. To može ukloniti podatke aplikacije.</string>
     <string name="settings_auto_uninstall_warning_title">Omogućiti automatsku deinstalaciju?</string>
     <string name="settings_auto_uninstall_warning_message">Ako Android prijavi sukob potpisa tijekom automatske instalacije Shizukua, Morphe će deinstalirati postojeću aplikaciju prije instaliranja patchane APK.</string>
@@ -1016,15 +1016,15 @@ Detalji: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_title">Unesite vjerodajnice za pohranu ključeva</string>
     <string name="settings_system_import_keystore_dialog_description">Morat ćete unijeti vjerodajnice za pohranu ključeva da biste ga uvezli</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Korisničko ime (Alias)</string>
-    <string name="settings_system_import_keystore_dialog_password_field">Lozinka</string>
+    <string name="settings_system_import_keystore_dialog_password_field">Zaporka</string>
     <string name="settings_system_import_keystore_dialog_format_field">Format pohrane ključeva</string>
     <string name="settings_system_import_keystore_wrong_credentials">Netočne vjerodajnice za pohranu ključeva</string>
     <string name="settings_system_import_keystore_success">Uvezeno spremište ključeva</string>
     <string name="settings_system_import_keystore_failed">Uvoz spremišta ključeva nije uspio</string>
     <string name="settings_system_export_keystore_success">Spremište ključeva je izvezeno</string>
     <string name="settings_system_export_keystore_failed">Uvoz spremišta ključeva nije uspio</string>
-    <string name="settings_system_show_password_field">Pokaži lozinku</string>
-    <string name="settings_system_hide_password_field">Sakrij lozinku</string>
+    <string name="settings_system_show_password_field">Prikaži zaporku</string>
+    <string name="settings_system_hide_password_field">Sakrij zaporku</string>
     <string name="settings_system_morphe_settings">Morphe postavke</string>
     <string name="settings_system_import_manager_settings_description">Izrađuje sigurnosne kopije i vraća Morphe postavke</string>
     <string name="settings_system_import_manager_settings_fail">Uvoz postavki Morphea nije uspio: %s</string>
@@ -1286,7 +1286,7 @@ Detalji: %2$s"</string>
     <string name="changelog_description">Što je novo u ovoj verziji</string>
     <string name="changelog_download_fail">Neuspjelo preuzimanje zapisa promjena: %s</string>
     <string name="changelog_empty">Nema dostupnog zapisa o promjenama</string>
-    <string name="changelog_show_older">Pokaži starije verzije</string>
+    <string name="changelog_show_older">Prikaži starije verzije</string>
     <string name="changelog_older_empty">Nema starijih verzija za prikaz</string>
     <string name="no_network_toast">Nema dostupne internet veze</string>
     <string name="update_available">Dostupno je ažuriranje</string>
@@ -1329,7 +1329,7 @@ Detalji: %2$s"</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
     <string name="tour_prompt_title">Brzi obilazak značajki</string>
     <string name="tour_prompt_desc">Želite li brzi obilazak ključnih značajki Morphea?</string>
-    <string name="tour_prompt_confirm">Pokaži mi okolo</string>
+    <string name="tour_prompt_confirm">Pokaži mi</string>
     <string name="onboarding_restart_title">Obilazak značajki</string>
     <string name="onboarding_restart_desc">Vođeni obilazak ključnih značajki</string>
 </resources>

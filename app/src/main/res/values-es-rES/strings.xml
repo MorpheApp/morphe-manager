@@ -1005,7 +1005,7 @@ Detalles: %2$s"</string>
     <string name="settings_system_backup_appearance_description">Tema, colores e idioma</string>
     <string name="settings_system_backup_home_description">Grupos, aplicaciones ocultas, ordenación e interruptores</string>
     <string name="settings_system_backup_patching">Parcheo e instalación</string>
-    <string name="settings_system_backup_patching_description">Instalador, parcheador y APK guardados</string>
+    <string name="settings_system_backup_patching_description">Instalador, parcheador y APKs guardados</string>
     <string name="settings_system_backup_updates_description">Versiones pre-lanzamiento y comprobaciones de actualizaciones</string>
     <string name="settings_system_backup_sources_description">Fuentes personalizadas y token de GitHub</string>
     <string name="settings_system_backup_patch_selections_description">Parches elegidos para cada aplicación</string>
@@ -1023,7 +1023,7 @@ Detalles: %2$s"</string>
     <string name="settings_system_show_password_field">Mostrar contraseña</string>
     <string name="settings_system_hide_password_field">Ocultar contraseña</string>
     <string name="settings_system_morphe_settings">Ajustes de Morphe</string>
-    <string name="settings_system_import_manager_settings_description">Copia de seguridad y restauración de tus ajustes de Morphe</string>
+    <string name="settings_system_import_manager_settings_description">Respalda y restaura tus ajustes de Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Error al importar ajustes de Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Ajustes de Morphe importados</string>
     <string name="settings_system_import_manager_settings_mode_title">Importar ajustes de Morphe</string>
@@ -1053,7 +1053,7 @@ Detalles: %2$s"</string>
     <string name="settings_system_apks_export_zip_failed">Error al exportar los APKs seleccionados</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">Administración del almacenamiento</string>
-    <string name="settings_system_storage_management_description">Revisar el uso del disco y borrar los archivos en caché</string>
+    <string name="settings_system_storage_management_description">Revisa el uso del disco y borra los archivos en caché</string>
     <string name="settings_system_storage_keystore_title">Almacén de claves de firma</string>
     <string name="settings_system_storage_app_data_title">Datos de la aplicación</string>
     <string name="settings_system_storage_patch_bundles_title">Paquetes de parches</string>
@@ -1071,7 +1071,7 @@ Detalles: %2$s"</string>
     <string name="settings_system_storage_cleared">Liberado %s</string>
     <string name="settings_system_storage_nothing_to_clear">Nada que borrar</string>
     <string name="settings_system_storage_open_app_info_title">Abrir almacenamiento de la aplicación Android</string>
-    <string name="settings_system_storage_open_app_info_description">Administrar o borrar todos los datos de Morphe a través de la configuración del sistema</string>
+    <string name="settings_system_storage_open_app_info_description">Administra o borra todos los datos de Morphe a través de los ajustes del sistema</string>
     <string name="settings_system_save_original_apks_title">Conservar los APK originales</string>
     <string name="settings_system_save_original_apks_description">Guardar el APK previo al parche para reutilizarlo al volver a parchear sin tener que seleccionar el archivo nuevamente</string>
     <string name="settings_system_save_patched_apks_title">Conservar los APK parcheados</string>
@@ -1086,7 +1086,7 @@ Detalles: %2$s"</string>
     <string name="settings_system_patched_apks_delete_all_title">¿Eliminar todos los APKs parcheados?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">APKs originales</string>
-    <string name="settings_system_original_apks_description">Guardado para volver a parchear. Se conserva una versión por aplicación</string>
+    <string name="settings_system_original_apks_description">Guardados para volver a parchear. Se conserva una versión por aplicación</string>
     <string name="settings_system_original_apks_empty">No hay APKs originales almacenados</string>
     <string name="settings_system_original_apks_deleted">APK original eliminado correctamente</string>
     <string name="settings_system_original_apks_delete_title">¿Eliminar APK original?</string>
@@ -1121,7 +1121,7 @@ Detalles: %2$s"</string>
     <string name="copy_selection_same_source">Misma fuente</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Selector de archivos personalizado</string>
-    <string name="settings_system_custom_file_picker_description">Explorar el almacenamiento con el selector de archivos integrado de Morphe en lugar del predeterminado del sistema</string>
+    <string name="settings_system_custom_file_picker_description">Explora el almacenamiento con el selector de archivos integrado de Morphe en lugar del predeterminado del sistema</string>
     <!-- Settings - System Tab - APK download helper -->
     <string name="settings_system_apk_download_helper">Aplicación auxiliar para descargar APK</string>
     <string name="settings_system_apk_download_helper_trusted_count">De confianza: %1$d de %2$d</string>
