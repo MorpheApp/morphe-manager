@@ -73,7 +73,7 @@ import org.koin.compose.koinInject
 fun AddSourceDialog(
     onDismiss: () -> Unit,
     onLocalSubmit: (chooseApps: Boolean) -> Unit,
-    onRemoteSubmit: (url: String, chooseApps: Boolean) -> Unit,
+    onRemoteSubmit: (urls: List<String>, chooseApps: Boolean) -> Unit,
     onLocalPick: () -> Unit,
     selectedLocalPath: String?,
     selectedLocalUri: Uri?,
@@ -83,8 +83,15 @@ fun AddSourceDialog(
     var selectedTab by rememberSaveable { mutableIntStateOf(0) } // 0 = Remote, 1 = Local
     var chooseApps by rememberSaveable { mutableStateOf(false) }
 
-    val urlValidation = rememberUrlValidation(remoteUrl, onValidateUrl)
-    val isRemoteValid = remoteUrl.isNotBlank() && urlValidation != FieldValidation.Invalid
+    // One link per line: every non-blank line is imported as its own source, one by one
+    val remoteUrls = remember(remoteUrl) {
+        remoteUrl.lines()
+            .map { it.trim() }
+            .filter { it.isNotBlank() }
+            .map { normalizeUrl(it) }
+    }
+    val urlValidation = rememberUrlsValidation(remoteUrls, onValidateUrl)
+    val isRemoteValid = remoteUrls.isNotEmpty() && urlValidation == FieldValidation.Valid
     val localFileValidation = rememberLocalFileValidation(selectedLocalPath)
     val isLocalValid = localFileValidation == FieldValidation.Valid
 
@@ -131,7 +138,7 @@ fun AddSourceDialog(
                     primaryText = stringResource(R.string.add),
                     onPrimaryClick = {
                         when (selectedTab) {
-                            0 -> if (isRemoteValid) onRemoteSubmit(normalizeUrl(remoteUrl), chooseApps)
+                            0 -> if (isRemoteValid) onRemoteSubmit(remoteUrls, chooseApps)
                             1 -> if (isLocalValid) onLocalSubmit(chooseApps)
                         }
                     },
@@ -171,6 +178,7 @@ fun AddSourceDialog(
                     0 -> RemoteTabContent(
                         remoteUrl = remoteUrl,
                         onUrlChange = { remoteUrl = it },
+                        urls = remoteUrls,
                         urlValidation = urlValidation
                     )
                     1 -> LocalTabContent(
@@ -215,11 +223,11 @@ internal fun ChooseAppsToggle(
 private enum class FieldValidation { Empty, Valid, Invalid }
 
 @Composable
-private fun rememberUrlValidation(url: String, validate: (String) -> Boolean): FieldValidation =
-    remember(url) {
+private fun rememberUrlsValidation(urls: List<String>, validate: (String) -> Boolean): FieldValidation =
+    remember(urls) {
         when {
-            url.isBlank() -> FieldValidation.Empty
-            validate(normalizeUrl(url)) -> FieldValidation.Valid
+            urls.isEmpty() -> FieldValidation.Empty
+            urls.all { validate(it) } -> FieldValidation.Valid
             else -> FieldValidation.Invalid
         }
     }
@@ -254,8 +262,10 @@ private fun UrlFormatRow(
 private fun RemoteTabContent(
     remoteUrl: String,
     onUrlChange: (String) -> Unit,
+    urls: List<String>,
     urlValidation: FieldValidation,
 ) {
+    val context = LocalContext.current
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         AppDialogTextField(
             value = remoteUrl,
@@ -264,10 +274,19 @@ private fun RemoteTabContent(
             placeholder = { Text("https://github.com/owner/repo") },
             showClearButton = true,
             isError = urlValidation == FieldValidation.Invalid,
+            singleLine = false,
+            minLines = 3,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Uri,
-                imeAction = ImeAction.Done
+                imeAction = ImeAction.Default
             )
+        )
+
+        // One link per line hint
+        Text(
+            text = stringResource(R.string.sources_dialog_remote_url_multiline_hint),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
 
         // Live validation feedback
@@ -280,7 +299,11 @@ private fun RemoteTabContent(
                     FieldValidation.Valid -> Triple(
                         Icons.Outlined.CheckCircle,
                         SemanticTone.Success.accent,
-                        stringResource(R.string.sources_dialog_url_valid)
+                        context.resources.getQuantityString(
+                            R.plurals.sources_dialog_urls_valid,
+                            urls.size,
+                            urls.size
+                        )
                     )
                     FieldValidation.Invalid -> Triple(
                         Icons.Outlined.ErrorOutline,

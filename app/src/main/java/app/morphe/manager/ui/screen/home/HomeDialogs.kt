@@ -562,9 +562,9 @@ fun HomeDialogs(
                 homeViewModel.selectedBundleUri = null
                 homeViewModel.selectedBundlePath = null
             },
-            onRemoteSubmit = { url, chooseApps ->
+            onRemoteSubmit = { urls, chooseApps ->
                 homeViewModel.showAddSourceDialog = false
-                homeViewModel.createRemoteSource(url, autoUpdate = true, chooseApps = chooseApps)
+                homeViewModel.createRemoteSources(urls, autoUpdate = true, chooseApps = chooseApps)
             },
             onLocalPick = {
                 openBundlePicker()

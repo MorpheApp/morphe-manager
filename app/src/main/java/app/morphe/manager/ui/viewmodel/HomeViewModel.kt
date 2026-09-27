@@ -1348,6 +1348,39 @@ class HomeViewModel(
     }
 
     /**
+     * Imports several remote sources one by one, in the order they were pasted.
+     *
+     * A single URL keeps the exact single-source behavior (including "Choose apps" opening the
+     * app list of the added source). With several URLs the app list opens for the last
+     * successfully added source instead, so the "Choose apps" toggle stays useful without
+     * stacking a dialog per source.
+     */
+    fun createRemoteSources(urls: List<String>, autoUpdate: Boolean, chooseApps: Boolean = false) = viewModelScope.launch {
+        if (urls.isEmpty()) return@launch
+        if (urls.size == 1) {
+            createRemoteSource(urls.single(), autoUpdate, chooseApps)
+            return@launch
+        }
+
+        val knownUids = patchBundleRepository.sources.value.mapTo(mutableSetOf()) { it.uid }
+        for (url in urls) {
+            withContext(NonCancellable) {
+                patchBundleRepository.createRemote(url, autoUpdate)
+            }
+            patchBundleRepository.bundleUpdateProgress
+                .dropWhile { it == null }
+                .first { it == null }
+        }
+        if (chooseApps) {
+            val added = patchBundleRepository.allBundlesInfoFlow.first().values
+                .filter { it.uid !in knownUids && it.listedApps().isNotEmpty() }
+            added.lastOrNull()?.let { sourceAppsDialogUid = it.uid }
+        }
+        delay(1.5.seconds)
+        showSwipeGestureHint.value = true
+    }
+
+    /**
      * Called when the app is opened via a deep link containing a bundle URL.
      * Shows a confirmation dialog instead of adding silently.
      */
