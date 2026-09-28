@@ -167,6 +167,7 @@ internal fun RowScope.AppCardContent(
     packageInfo: PackageInfo?,
     displayName: String,
     subtitle: String?,
+    packageLabel: String? = null,
     gradientColors: List<Color>
 ) {
     val cardStyle = homeAppCardStyle().onCard(gradientColors)
@@ -193,6 +194,8 @@ internal fun RowScope.AppCardContent(
             overflow = TextOverflow.Ellipsis
         )
 
+        packageLabel?.let { PackageNameLabel(it, cardStyle.subtitleColor) }
+
         if (subtitle != null) {
             Text(
                 // Matches the badge-height subtitle row of the installed cards, so names line up
@@ -209,6 +212,17 @@ internal fun RowScope.AppCardContent(
             )
         }
     }
+}
+
+@Composable
+private fun PackageNameLabel(packageName: String, color: Color) {
+    Text(
+        text = packageName,
+        style = MaterialTheme.typography.bodySmall,
+        color = color,
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis
+    )
 }
 
 /**
@@ -314,6 +328,7 @@ private fun InstalledAppCard(
     ) {
         buildString {
             append(item.displayName)
+            append(", ${item.packageName}")
             if (item.isClone) append(", $cloneLabel")
             if (version.isNotEmpty()) {
                 append(", $versionLabel $version")
@@ -363,7 +378,7 @@ private fun InstalledAppCard(
         // App info
         Column(
             modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+            verticalArrangement = Arrangement.spacedBy(2.dp)
         ) {
             // App name
             Text(
@@ -373,6 +388,8 @@ private fun InstalledAppCard(
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
+
+            PackageNameLabel(item.packageName, cardStyle.subtitleColor)
 
             // Version + deleted status + update chip, both pinned to the card edge
             Row(
@@ -486,8 +503,8 @@ private fun NotPatchedAppCard(
         version?.let { "${it.withVersionPrefix()} • $notPatchedText" } ?: notPatchedText
     }
 
-    val contentDesc = remember(item.displayName, subtitle) {
-        "${item.displayName}, $subtitle"
+    val contentDesc = remember(item.displayName, item.packageName, subtitle) {
+        "${item.displayName}, ${item.packageName}, $subtitle"
     }
 
     AppCardLayout(
@@ -504,6 +521,7 @@ private fun NotPatchedAppCard(
             packageInfo = item.packageInfo,
             displayName = item.displayName,
             subtitle = subtitle,
+            packageLabel = item.packageName,
             gradientColors = item.gradientColors,
         )
     }

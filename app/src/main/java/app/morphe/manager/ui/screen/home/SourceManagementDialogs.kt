@@ -1578,6 +1578,7 @@ fun SourceAppsDialog(
                                 packageName = packageName,
                                 packageInfo = null,
                                 displayName = label,
+                                packageLabel = packageName,
                                 subtitle = stringResource(
                                     if (brought) R.string.sources_apps_brought
                                     else R.string.sources_apps_left_out

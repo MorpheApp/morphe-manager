@@ -229,7 +229,8 @@ fun AppPatchesDialog(
                                 title = item.displayName,
                                 totalCount = totalCount,
                                 filteredCount = filteredPatches.size,
-                                isFiltering = isFiltering
+                                isFiltering = isFiltering,
+                                packageName = item.packageName
                             )
                         }
 
@@ -381,6 +382,7 @@ internal fun HideAppDialog(
                     packageName = item.id,
                     packageInfo = item.packageInfo,
                     displayName = item.displayName,
+                    packageLabel = item.packageName,
                     subtitle = stringResource(R.string.home_app_will_be_hidden),
                     gradientColors = item.gradientColors,
                 )
@@ -574,6 +576,7 @@ internal fun HiddenAppsDialog(
                                         packageName = item.id,
                                         packageInfo = item.packageInfo,
                                         displayName = item.displayName,
+                                        packageLabel = item.packageName,
                                         subtitle = if (isMultiSelectMode.value) null
                                         else stringResource(R.string.home_app_hidden_apps_hint),
                                         gradientColors = item.gradientColors,

@@ -93,6 +93,7 @@ fun HomeDialogs(
         exit = Animations.fadeOut(if (homeViewModel.showDownloadInstructionsDialog) 0 else Defaults.ANIMATION_DURATION)
     ) {
         val appName = homeViewModel.pendingAppName ?: return@AnimatedVisibility
+        val packageName = homeViewModel.pendingPackageName ?: return@AnimatedVisibility
         val recommendedVersion = homeViewModel.pendingRecommendedVersion
         val compatibleVersions = homeViewModel.pendingCompatibleVersions
         val selectedDownloadVersion = homeViewModel.pendingSelectedDownloadVersion
@@ -105,6 +106,7 @@ fun HomeDialogs(
 
         ApkAvailabilityDialog(
             appName = appName,
+            packageName = packageName,
             recommendedVersion = recommendedVersion,
             compatibleVersions = compatibleVersions,
             selectedDownloadVersion = selectedDownloadVersion,
@@ -684,6 +686,7 @@ fun HomeDialogs(
 @Composable
 internal fun ApkAvailabilityDialog(
     appName: String,
+    packageName: String,
     recommendedVersion: AppTarget?,
     compatibleVersions: List<BundledAppTarget>,
     selectedDownloadVersion: AppTarget?,
@@ -814,12 +817,22 @@ internal fun ApkAvailabilityDialog(
     ) {
         val secondaryColor = LocalDialogSecondaryTextColor.current
         val anyString = stringResource(R.string.any_version)
+        val packageNameLabel = stringResource(R.string.package_name)
 
         Column(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            if (packageName != appName) {
+                Text(
+                    text = "$packageNameLabel: $packageName",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = secondaryColor,
+                    textAlign = TextAlign.Center
+                )
+            }
+
             if (isExpertMode && offeredVersions.isNotEmpty()) {
                 // Expert mode: selectable version list
                 Text(
