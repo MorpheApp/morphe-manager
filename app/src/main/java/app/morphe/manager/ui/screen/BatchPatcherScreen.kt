@@ -228,6 +228,7 @@ fun BatchPatcherScreen(
     viewModel.apkChoice?.let { choice ->
         ApkAvailabilityDialog(
             appName = choice.item.appName,
+            packageName = choice.item.packageName,
             recommendedVersion = choice.recommended,
             compatibleVersions = choice.compatible,
             selectedDownloadVersion = choice.selectedVersion,
@@ -1006,4 +1007,3 @@ private fun BatchStateBadge(state: BatchItemState) {
     }
     StatusBadge(text = stringResource(labelRes), tone = tone)
 }
-
