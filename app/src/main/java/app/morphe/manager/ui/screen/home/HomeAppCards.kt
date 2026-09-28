@@ -158,6 +158,7 @@ private fun homeAppCardStyle(subtitleAlpha: Float = 0.75f): HomeAppCardStyle {
  * @param packageInfo    Resolved [PackageInfo]; when non-null [packageName] is ignored for the icon.
  * @param displayName    Primary label shown in bold.
  * @param subtitle       Secondary line shown below [displayName]; null → not rendered.
+ * @param packageLabel   Optional package identifier shown below [displayName].
  * @param gradientColors Gradient palette forwarded to [AppIcon] placeholder, unless the user
  *   picked fixed card colors in the appearance settings.
  */
@@ -194,7 +195,9 @@ internal fun RowScope.AppCardContent(
             overflow = TextOverflow.Ellipsis
         )
 
-        packageLabel?.let { PackageNameLabel(it, cardStyle.subtitleColor) }
+        packageLabel
+            ?.takeIf { it.isNotBlank() && it != displayName }
+            ?.let { PackageNameLabel(it, cardStyle.subtitleColor) }
 
         if (subtitle != null) {
             Text(
@@ -219,9 +222,7 @@ private fun PackageNameLabel(packageName: String, color: Color) {
     Text(
         text = packageName,
         style = MaterialTheme.typography.bodySmall,
-        color = color,
-        maxLines = 1,
-        overflow = TextOverflow.Ellipsis
+        color = color
     )
 }
 
@@ -328,7 +329,9 @@ private fun InstalledAppCard(
     ) {
         buildString {
             append(item.displayName)
-            append(", ${item.packageName}")
+            item.packageName
+                .takeIf { it.isNotBlank() && it != item.displayName }
+                ?.let { append(", $it") }
             if (item.isClone) append(", $cloneLabel")
             if (version.isNotEmpty()) {
                 append(", $versionLabel $version")
@@ -378,7 +381,7 @@ private fun InstalledAppCard(
         // App info
         Column(
             modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(2.dp)
+            verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             // App name
             Text(
@@ -389,7 +392,9 @@ private fun InstalledAppCard(
                 overflow = TextOverflow.Ellipsis
             )
 
-            PackageNameLabel(item.packageName, cardStyle.subtitleColor)
+            item.packageName
+                .takeIf { it.isNotBlank() && it != item.displayName }
+                ?.let { PackageNameLabel(it, cardStyle.subtitleColor) }
 
             // Version + deleted status + update chip, both pinned to the card edge
             Row(
@@ -504,7 +509,11 @@ private fun NotPatchedAppCard(
     }
 
     val contentDesc = remember(item.displayName, item.packageName, subtitle) {
-        "${item.displayName}, ${item.packageName}, $subtitle"
+        listOfNotNull(
+            item.displayName,
+            item.packageName.takeIf { it.isNotBlank() && it != item.displayName },
+            subtitle
+        ).joinToString(", ")
     }
 
     AppCardLayout(
@@ -562,7 +571,7 @@ internal fun AppCardLayout(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(cardStyle.cardHeight)
+            .heightIn(min = cardStyle.cardHeight)
             .pressScale(
                 interactionSource = interactionSource,
                 label = "card_press_scale"
@@ -639,11 +648,12 @@ internal fun AppCardLayout(
                         onLongClick()
                     }
                 } else null
-            )
+            ),
+        contentAlignment = Alignment.CenterStart
     ) {
         Row(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .padding(horizontal = cardStyle.contentPadding),
             horizontalArrangement = Arrangement.spacedBy(cardStyle.contentSpacing),
             verticalAlignment = Alignment.CenterVertically,
@@ -691,6 +701,9 @@ fun AppLoadingCard(
     // Skeleton rows carry the height of the text they stand in for, so the card does not
     // re-lay-out its content the moment the real app resolves
     val titleRowHeight = with(LocalDensity.current) { cardStyle.titleStyle.lineHeight.toDp() }
+    val packageRowHeight = with(LocalDensity.current) {
+        MaterialTheme.typography.bodySmall.lineHeight.toDp()
+    }
 
     // Follows the content the card settled on, so the skeleton stays visible on a light gradient
     val skeletonColor = cardStyle.titleColor
@@ -698,12 +711,13 @@ fun AppLoadingCard(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(cardStyle.cardHeight)
+            .heightIn(min = cardStyle.cardHeight),
+        contentAlignment = Alignment.CenterStart
     ) {
         // Base gradient background
         Box(
             modifier = Modifier
-                .fillMaxSize()
+                .matchParentSize()
                 .clip(shape)
                 .then(
                     if (cardStyle.monochrome) {
@@ -724,7 +738,7 @@ fun AppLoadingCard(
         // Shimmer overlay
         Box(
             modifier = Modifier
-                .fillMaxSize()
+                .matchParentSize()
                 .clip(shape)
                 .drawBehind {
                     drawDiagonalShimmer(
@@ -737,7 +751,7 @@ fun AppLoadingCard(
         // Content skeleton
         Row(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .padding(horizontal = cardStyle.contentPadding),
             horizontalArrangement = Arrangement.spacedBy(cardStyle.contentSpacing),
             verticalAlignment = Alignment.CenterVertically
@@ -766,6 +780,18 @@ fun AppLoadingCard(
                             .height(20.dp),
                         shape = RoundedCornerShape(4.dp),
                         baseColor = skeletonColor.copy(alpha = 0.25f)
+                    )
+                }
+                Box(
+                    modifier = Modifier.height(packageRowHeight),
+                    contentAlignment = Alignment.CenterStart
+                ) {
+                    ShimmerBox(
+                        modifier = Modifier
+                            .fillMaxWidth(0.45f)
+                            .height(12.dp),
+                        shape = RoundedCornerShape(4.dp),
+                        baseColor = skeletonColor.copy(alpha = 0.15f)
                     )
                 }
                 Box(

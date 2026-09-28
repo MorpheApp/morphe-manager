@@ -34,7 +34,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.patcher.patch.PatchInfo
@@ -65,17 +64,17 @@ internal fun PatchesListHeaderCard(
         icon = icon,
         title = title,
         modifier = modifier,
-        footer = packageName?.let { name ->
-            {
-                Text(
-                    text = name,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
+        footer = packageName
+            ?.takeIf { it.isNotBlank() && it != title }
+            ?.let { name ->
+                {
+                    Text(
+                        text = name,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             }
-        }
     ) {
         Icon(
             imageVector = Icons.Outlined.Widgets,
