@@ -58,7 +58,7 @@ include(":app")
 mapOf(
     "morphe-patcher" to "app.morphe:morphe-patcher",
 //    "morphe-library" to "app.morphe:morphe-library", // FIXME: Must upgrade library gradle to use this
-//    "ARSCLib" to "com.github.REAndroid:arsclib"
+//    "ARSCLib" to "com.github.MorpheApp:ARSCLib"
 ).forEach { (libraryPath, libraryName) ->
     val libDir = file("../$libraryPath")
     if (libDir.exists()) {
