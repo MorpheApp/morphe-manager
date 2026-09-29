@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.pm.PackageInfo
 import android.graphics.BitmapFactory
 import android.os.Environment
+import android.text.format.DateFormat
 import android.util.LruCache
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
@@ -197,12 +198,18 @@ private fun applySort(files: List<File>, mode: SortMode): List<File> {
     return dirs.sortedBy { it.name.lowercase() } + sortedFiles
 }
 
-private val modDateFormatter = ThreadLocal.withInitial {
+private val modDateFormatter24h = ThreadLocal.withInitial {
     SimpleDateFormat("dd.MM.yyyy, HH:mm", Locale.getDefault())
 }
 
-private fun formatModDate(timestamp: Long): String =
-    modDateFormatter.get()!!.format(Date(timestamp))
+private val modDateFormatter12h = ThreadLocal.withInitial {
+    SimpleDateFormat("dd.MM.yyyy, hh:mm a", Locale.getDefault())
+}
+
+private fun formatModDate(context: Context, timestamp: Long): String {
+    val formatter = if (DateFormat.is24HourFormat(context)) modDateFormatter24h else modDateFormatter12h
+    return formatter.get()!!.format(Date(timestamp))
+}
 
 /**
  * Fullscreen file browser dialog, headed and laid out like the app's other list dialogs.
@@ -688,7 +695,7 @@ private fun FileEntryRow(
     val detail = if (isDir) {
         itemCount?.let { pluralStringResource(R.plurals.file_picker_item_count, it, it.toString()) }
     } else {
-        "${context.formatBytes(file.length())} · ${formatModDate(file.lastModified())}"
+        "${context.formatBytes(file.length())} · ${formatModDate(context, file.lastModified())}"
     }
 
     FilePickerRow(
