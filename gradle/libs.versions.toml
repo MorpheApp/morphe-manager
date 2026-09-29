@@ -4,6 +4,7 @@ activity = "1.13.0"
 android-gradle-plugin = "9.4.1"
 app-icon-loader-coil = "1.5.0"
 appcompat = "1.8.0"
+# MorpheApp fork until its changes (MorpheApp/ARSCLib#1) land in REAndroid/ARSCLib
 arsclib = "88d5e0811f"
 coil = "2.7.0"
 collection = "0.5.2"
