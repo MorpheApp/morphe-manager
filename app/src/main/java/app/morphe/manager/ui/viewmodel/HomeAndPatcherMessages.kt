@@ -82,6 +82,7 @@ object HomeAndPatcherMessages {
                     R.string.home_greeting_10,
                     R.string.home_greeting_morning_1,
                     R.string.home_greeting_morning_2,
+                    R.string.home_greeting_morning_3,
                 )
                 in 12..16 -> listOf(
                     R.string.home_greeting_2,
@@ -89,6 +90,7 @@ object HomeAndPatcherMessages {
                     R.string.home_greeting_afternoon_1,
                     R.string.home_greeting_afternoon_2,
                     R.string.home_greeting_afternoon_3,
+                    R.string.home_greeting_afternoon_4,
                 )
                 in 17..21 -> listOf(
                     R.string.home_greeting_3,
@@ -96,6 +98,7 @@ object HomeAndPatcherMessages {
                     R.string.home_greeting_evening_1,
                     R.string.home_greeting_evening_2,
                     R.string.home_greeting_evening_3,
+                    R.string.home_greeting_evening_4,
                 )
                 in 22..23 -> listOf(
                     R.string.home_greeting_5,
@@ -149,6 +152,9 @@ object HomeAndPatcherMessages {
                 R.string.patcher_message_18,
                 R.string.patcher_message_19,
                 R.string.patcher_message_20,
+                R.string.patcher_message_21,
+                R.string.patcher_message_22,
+                R.string.patcher_message_23,
             )
         )
     }

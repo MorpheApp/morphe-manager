@@ -108,14 +108,20 @@
     <!-- Morning greetings (5:00–11:59) -->
     <string name="home_greeting_morning_1">Rise and patch</string>
     <string name="home_greeting_morning_2">Good morning! Apps won\'t patch themselves</string>
+    <!-- Wordplay on "the early bird gets the worm" -->
+    <string name="home_greeting_morning_3">The early bird patches the apps</string>
     <!-- Afternoon greetings (12:00–16:59) -->
     <string name="home_greeting_afternoon_1">Afternoon slump? Patch something</string>
     <string name="home_greeting_afternoon_2">Post-lunch patching hits different</string>
     <string name="home_greeting_afternoon_3">The afternoon shift: patch edition</string>
+    <!-- Rhyming play on "break" -->
+    <string name="home_greeting_afternoon_4">Lunch break over? Time for a patch break</string>
     <!-- Evening greetings (17:00–21:59) -->
     <string name="home_greeting_evening_1">Good evening! Evening patches hit different</string>
     <string name="home_greeting_evening_2">Winding down? Patch an app first</string>
     <string name="home_greeting_evening_3">Clocking out? Patch something first</string>
+    <!-- Play on sunset versus patching that keeps going -->
+    <string name="home_greeting_evening_4">The sun is setting, but the patches aren\'t</string>
     <!-- Late night greetings (22:00–23:59) -->
     <string name="home_greeting_late_night_1">Still up? So are the apps that need patching</string>
     <string name="home_greeting_late_night_2">Late night patch session? Respect</string>
@@ -650,6 +656,12 @@ Uninstalling will permanently erase all app data"</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Your app has a fever, and the only prescription is more patches… 🩺🔔</string>
     <string name="patcher_message_20">Removing nonsense. Please stand by… 🗑️</string>
+    <!-- Idiom referring to a hard-to-control task, like herding actual cats -->
+    <string name="patcher_message_21">Herding digital cats into their pens… 🐈⬛</string>
+    <!-- As if the app were a star walking the red carpet -->
+    <string name="patcher_message_22">Rolling out the red carpet for your app… 🎬</string>
+    <!-- Tongue-in-cheek reference to performing an impossible feat -->
+    <string name="patcher_message_23">Teaching your app to walk on water… 🌊</string>
 
     <!-- Expert patcher Screen -->
     <string name="patching_app">Patching app</string>
