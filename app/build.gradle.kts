@@ -282,6 +282,8 @@ android {
 
     lint {
         disable += setOf("MissingTranslation")
+        // Crowdin drops a removed string from the translations only on its next sync
+        warning += setOf("ExtraTranslation")
         baseline = file("lint-baseline.xml")
     }
 }
