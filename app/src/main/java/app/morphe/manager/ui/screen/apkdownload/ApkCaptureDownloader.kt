@@ -12,8 +12,6 @@ import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.domain.installer.InstallerFileProvider
 import app.morphe.manager.network.service.HttpService
 import app.morphe.manager.util.APK_EXTENSIONS
-import app.morphe.manager.util.APK_MIMETYPE
-import app.morphe.manager.util.BIN_MIMETYPE
 import io.ktor.client.request.header
 import io.ktor.http.HttpHeaders
 import kotlinx.coroutines.Dispatchers
@@ -41,36 +39,63 @@ object ApkCaptureDownloader : KoinComponent {
     private val filesystem: Filesystem by inject()
 
     /**
+     * Why the last download failed, in the words of the exception that ended it.
+     *
+     * Kept for the caller to report. A failure here is answered by a site the app does not
+     * control, so the reason is the only thing that says whether the capture was wrong, the
+     * session had expired, or the file simply is not there any more.
+     */
+    @Volatile
+    var lastError: String? = null
+        private set
+
+    /**
      * Downloads [capture] and returns the URI to hand to the APK picker, or null when nothing
      * usable came back.
      */
     suspend fun download(context: Context, capture: ApkDownloadCapture, appName: String): Uri? =
         withContext(Dispatchers.IO) {
+            lastError = null
             val target = filesystem.uiTempDir.resolve(fileNameFor(capture, appName))
             // A previous attempt at the same app is replaced rather than appended to
             target.delete()
+
+            Log.i(
+                TAG,
+                "Downloading captured APK for $appName from ${capture.url} " +
+                    "(referer=${capture.referer != null}, userAgent=${capture.userAgent != null}, " +
+                    "cookie=${capture.cookie != null})"
+            )
 
             try {
                 http.downloadToFile(
                     saveLocation = target,
                     builder = {
-                        header(HttpHeaders.Referrer, capture.referer)
-                        header(HttpHeaders.UserAgent, capture.userAgent)
-                        header(HttpHeaders.Cookie, capture.cookie)
-                        header(HttpHeaders.Accept, "$APK_MIMETYPE, $BIN_MIMETYPE, */*")
+                        // Only the headers a capture actually carries. A header is rejected for a
+                        // null value, and a page reached by navigations alone has no cookie to
+                        // give, so setting these unconditionally fails the whole download.
+                        capture.referer?.takeIf { it.isNotBlank() }
+                            ?.let { header(HttpHeaders.Referrer, it) }
+                        capture.userAgent?.takeIf { it.isNotBlank() }
+                            ?.let { header(HttpHeaders.UserAgent, it) }
+                        capture.cookie?.takeIf { it.isNotBlank() }
+                            ?.let { header(HttpHeaders.Cookie, it) }
                     }
                 )
             } catch (t: Throwable) {
-                Log.e(TAG, "Captured APK download failed for $appName", t)
+                lastError = "${t.javaClass.simpleName}: ${t.message}"
+                Log.e(TAG, "Captured APK download failed for $appName: ${t.javaClass.name}: ${t.message}", t)
                 target.delete()
-                null
+                return@withContext null
             }
 
             if (!target.exists() || target.length() == 0L) {
+                lastError = "empty response"
                 Log.w(TAG, "Captured APK download produced no bytes for $appName")
                 target.delete()
                 null
             } else {
+                Log.i(TAG, "Captured APK downloaded: ${target.name} (${target.length()} bytes)")
                 // Through the provider the installers already use, so the picker reads it the
                 // same way it reads any other content URI and gets the name from there
                 InstallerFileProvider.getUriForFile(context, target)

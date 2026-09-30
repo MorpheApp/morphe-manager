@@ -1466,5 +1466,6 @@ Do you still want to continue?"</string>
     <string name="apk_capture_cancel">Cancel download</string>
     <string name="apk_capture_cancelled">No APK was taken from that page</string>
     <string name="apk_capture_download_failed">The APK could not be downloaded</string>
+    <string name="apk_capture_download_failed_reason">Download failed: %s</string>
     <string name="home_download_instructions_in_app">Download in Morphe</string>
 </resources>

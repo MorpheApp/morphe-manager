@@ -86,10 +86,16 @@ fun HomeDialogs(
                 appName = homeViewModel.pendingAppName.orEmpty(),
             )
             if (uri == null) {
-                context.toast(context.getString(R.string.apk_capture_download_failed))
+                // Names the reason while this is being tested. The exception's own message says
+                // more than "it failed" ever could, and reaching an adb console is not something
+                // to ask of whoever is holding the phone
+                val reason = ApkCaptureDownloader.lastError
+                context.toast(
+                    if (reason.isNullOrBlank()) context.getString(R.string.apk_capture_download_failed)
+                    else context.getString(R.string.apk_capture_download_failed_reason, reason)
+                )
                 return@launch
-            }
-            // Through the ordinary intake, so every check that guards a hand-picked APK applies
+            }            // Through the ordinary intake, so every check that guards a hand-picked APK applies
             homeViewModel.showDownloadInstructionsDialog = false
             homeViewModel.handleApkSelection(uri)
         }
