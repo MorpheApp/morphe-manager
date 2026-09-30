@@ -239,6 +239,7 @@ internal fun DownloadInstructionsDialog(
     isApkBundle: Boolean,
     onDismiss: () -> Unit,
     onOpenApkDownloadHelper: (() -> Unit)? = null,
+    onCaptureApkInApp: (() -> Unit)? = null,
     onContinue: () -> Unit
 ) {
     // Never falls back to unresolved once the destination is known, so the instructions stay
@@ -273,27 +274,48 @@ internal fun DownloadInstructionsDialog(
         // What the steps fetch, since the dialog before this one named it and is gone by now
         description = listOfNotNull(appName, requestedVersion?.withVersionPrefix()).joinToString(" · "),
         footer = {
-            if (offersHelper) {
-                AppDialogButtonRow(
-                    primaryText = continueText,
-                    onPrimaryClick = onContinue,
-                    primaryIcon = Icons.AutoMirrored.Outlined.OpenInNew,
-                    primaryEnabled = !resolving,
-                    secondaryText = stringResource(R.string.home_apk_helper_download),
-                    // Nothing to open once the action is withdrawn, which is only the case
-                    // while the dialog is on its way out
-                    onSecondaryClick = { onOpenApkDownloadHelper?.invoke() },
-                    secondaryIcon = Icons.Outlined.Download
-                )
-            } else {
-                AppDialogButton(
-                    text = continueText,
-                    onClick = onContinue,
-                    icon = Icons.AutoMirrored.Outlined.OpenInNew,
-                    enabled = !resolving,
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
+            AppDialogActions(
+                actions = buildList {
+                    // Leading, because it is the one that finishes the job inside Morphe: the
+                    // other two hand the user off to a browser or to another app
+                    if (onCaptureApkInApp != null) {
+                        add(
+                            DialogAction(
+                                text = stringResource(R.string.home_download_instructions_in_app),
+                                onClick = { onCaptureApkInApp.invoke() },
+                                icon = Icons.Outlined.Download,
+                                enabled = !resolving,
+                                emphasis = DialogActionEmphasis.Filled
+                            )
+                        )
+                    }
+
+                    add(
+                        DialogAction(
+                            text = continueText,
+                            onClick = onContinue,
+                            icon = Icons.AutoMirrored.Outlined.OpenInNew,
+                            enabled = !resolving,
+                            // The in-app action owns the filled slot when it is on offer
+                            emphasis = if (onCaptureApkInApp == null) DialogActionEmphasis.Auto
+                            else DialogActionEmphasis.Outlined
+                        )
+                    )
+
+                    if (offersHelper) {
+                        add(
+                            DialogAction(
+                                text = stringResource(R.string.home_apk_helper_download),
+                                // Nothing to open once the action is withdrawn, which is only
+                                // the case while the dialog is on its way out
+                                onClick = { onOpenApkDownloadHelper?.invoke() },
+                                icon = Icons.Outlined.Download,
+                                emphasis = DialogActionEmphasis.Outlined
+                            )
+                        )
+                    }
+                }
+            )
         }
     ) {
         // Waiting shows as waiting rather than as instructions that rewrite themselves once

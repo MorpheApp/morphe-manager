@@ -38,6 +38,8 @@ import app.morphe.manager.domain.bundles.recommended
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.model.HomeAppItem
+import app.morphe.manager.ui.screen.apkdownload.ApkCaptureDownloader
+import app.morphe.manager.ui.screen.apkdownload.rememberApkDownloadCaptureAction
 import app.morphe.manager.ui.screen.patcher.UnusableOptionPathsDialog
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeViewModel
@@ -69,6 +71,29 @@ fun HomeDialogs(
         host = homeViewModel,
         enabled = homeViewModel.showDownloadInstructionsDialog
     )
+
+    // Opens the resolved download page in the capture WebView. The file it takes is then fed
+    // back through the same intake a hand-picked APK goes through, so every check that guards a
+    // manual selection still applies to one this app fetched itself.
+    val captureApkInApp = rememberApkDownloadCaptureAction(
+        downloadUrl = homeViewModel.resolvedDownloadUrl,
+        appName = homeViewModel.pendingAppName.orEmpty(),
+    ) { capture ->
+        scope.launch {
+            val uri = ApkCaptureDownloader.download(
+                context = context,
+                capture = capture,
+                appName = homeViewModel.pendingAppName.orEmpty(),
+            )
+            if (uri == null) {
+                context.toast(context.getString(R.string.apk_capture_download_failed))
+                return@launch
+            }
+            // Through the ordinary intake, so every check that guards a hand-picked APK applies
+            homeViewModel.showDownloadInstructionsDialog = false
+            homeViewModel.handleApkSelection(uri)
+        }
+    }
 
     // APK selection processing overlay - blocks interaction while APK is loaded/validated in background
     Overlay(visible = homeViewModel.processingApkSelection) {
@@ -177,7 +202,8 @@ fun HomeDialogs(
                 homeViewModel.showDownloadInstructionsDialog = false
                 homeViewModel.cleanupPendingData()
             },
-            onOpenApkDownloadHelper = openApkDownloadHelper
+            onOpenApkDownloadHelper = openApkDownloadHelper,
+            onCaptureApkInApp = captureApkInApp
         ) {
             homeViewModel.handleDownloadInstructionsContinue { url ->
                 try {
