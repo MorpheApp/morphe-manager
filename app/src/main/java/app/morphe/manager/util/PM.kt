@@ -18,6 +18,7 @@ import android.util.Log
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.core.content.pm.PackageInfoCompat
 import app.morphe.manager.domain.apk.ApkSignatureCache
+import com.android.apksig.ApkVerifier
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
@@ -228,21 +229,73 @@ class PM(
      * Uses full signing history to handle apps with certificate rotation.
      */
     fun getApkFileSignatureHashes(file: File): Set<String> {
-        val stamp = signatureCache.stamp(file) ?: return emptySet()
-        signatureCache.get(stamp)?.let { return it }
+        val stamp = signatureCache.stamp(file) ?: run {
+            Log.w(TAG, "Signatures of ${file.absolutePath}: no stamp (exists=${file.exists()}, ${file.length()} bytes)")
+            return emptySet()
+        }
+        signatureCache.get(stamp)?.let { cached ->
+            if (cached.isEmpty()) {
+                Log.w(TAG, "Signatures of ${file.absolutePath}: cached as unsigned")
+                logApksigVerification(file)
+            }
+            return cached
+        }
 
         return try {
             val info = app.packageManager.getPackageArchiveInfo(file.absolutePath, signingFlags())
-                ?: return emptySet()
+            if (info == null) {
+                Log.w(TAG, "Signatures of ${file.absolutePath}: archive not parsed with signing flags (API ${Build.VERSION.SDK_INT})")
+                logApksigVerification(file)
+                return emptySet()
+            }
             info.applicationInfo?.apply {
                 sourceDir = file.absolutePath
                 publicSourceDir = file.absolutePath
             }
-            signatureHashes(info).also { signatureCache.putIfUnchanged(file, stamp, it) }
+            val hashes = signatureHashes(info)
+            if (hashes.isEmpty()) {
+                Log.w(TAG, "Signatures of ${file.absolutePath}: none from the package manager (${info.signingSummary()})")
+                logApksigVerification(file)
+            }
+            hashes.also { signatureCache.putIfUnchanged(file, stamp, it) }
         } catch (e: Exception) {
             Log.e(TAG, "Failed to read APK file signatures", e)
+            logApksigVerification(file)
             emptySet()
         }
+    }
+
+    /** How the package manager reported the signers of a parsed archive. */
+    @Suppress("DEPRECATION")
+    private fun PackageInfo.signingSummary(): String = runCatching {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val info = signingInfo ?: return@runCatching "API ${Build.VERSION.SDK_INT}, signingInfo=null"
+            "API ${Build.VERSION.SDK_INT}, multipleSigners=${info.hasMultipleSigners()}, " +
+                    "contentsSigners=${info.apkContentsSigners?.size}, history=${info.signingCertificateHistory?.size}, " +
+                    "pastRotation=${info.hasPastSigningCertificates()}"
+        } else {
+            "API ${Build.VERSION.SDK_INT}, signatures=${signatures?.size}"
+        }
+    }.getOrElse { "unreadable: $it" }
+
+    /**
+     * Certificates of [file] as apksig reads them, apart from the platform, to tell an archive
+     * that is not signed from a package manager that does not report its signers.
+     */
+    private fun logApksigVerification(file: File) {
+        runCatching {
+            val result = ApkVerifier.Builder(file).build().verify()
+            val certificates = result.signerCertificates.map { certificate ->
+                MessageDigest.getInstance("SHA-256").digest(certificate.encoded)
+                    .joinToString("") { byte -> "%02x".format(byte) }
+            }
+            Log.w(
+                TAG,
+                "apksig on ${file.absolutePath}: verified=${result.isVerified}, v1=${result.isVerifiedUsingV1Scheme}, " +
+                        "v2=${result.isVerifiedUsingV2Scheme}, v3=${result.isVerifiedUsingV3Scheme}, " +
+                        "certificates=$certificates, errors=${result.errors.take(3)}"
+            )
+        }.onFailure { Log.e(TAG, "apksig could not read ${file.absolutePath}", it) }
     }
 
     /**
@@ -256,18 +309,33 @@ class PM(
      * artifact is rejected before its certificate is ever extracted.
      */
     fun readSavedApkInfo(file: File, version: String, vararg packageNames: String): PackageInfo? {
-        if (!file.isFile) return null
+        if (!file.isFile) {
+            Log.w(TAG, "Saved APK ${file.absolutePath}: not a file (exists=${file.exists()})")
+            return null
+        }
         return try {
-            val info = app.packageManager.getPackageArchiveInfo(file.absolutePath, 0) ?: return null
+            val info = app.packageManager.getPackageArchiveInfo(file.absolutePath, 0)
+            if (info == null) {
+                Log.w(TAG, "Saved APK ${file.absolutePath}: archive not parsed (${file.length()} bytes)")
+                return null
+            }
 
+            // Left null while an identity mismatch settles the answer before the certificate is read
+            var signed: Boolean? = null
             val matches = matchesSavedApkRecord(
                 archivePackageName = info.packageName,
                 archiveVersionName = info.versionName,
                 trackedPackageNames = packageNames.asList(),
                 trackedVersion = version,
-                isSigned = { getApkFileSignatureHashes(file).isNotEmpty() }
+                isSigned = { getApkFileSignatureHashes(file).isNotEmpty().also { signed = it } }
             )
-            if (!matches) return null
+            val summary = "archive ${info.packageName} ${info.versionName}, " +
+                    "record ${packageNames.joinToString("/")} $version, signed=${signed ?: "not checked"}"
+            if (!matches) {
+                Log.w(TAG, "Saved APK ${file.absolutePath} rejected: $summary")
+                return null
+            }
+            Log.d(TAG, "Saved APK ${file.absolutePath} accepted: $summary")
 
             // Needed by callers that read the label or icon straight off the archive
             info.applicationInfo?.apply {

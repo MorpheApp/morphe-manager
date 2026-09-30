@@ -261,6 +261,13 @@ class LocalApkSources(
         cachedSnapshot(app.currentPackageName, fingerprint)?.let { return@withContext it }
 
         val snapshot = resolveTrackedAppSnapshot(app, installedPackageInfo, installer, signingHashes, mounted)
+        Log.d(
+            tag,
+            "Snapshot of ${app.currentPackageName} (${app.installType}, record ${app.version}): " +
+                    "installed=${installedPackageInfo?.versionName}, installer=$installer, " +
+                    "saved=${snapshot.savedPatchedApk?.absolutePath}, state=${snapshot.patchState}, " +
+                    "morphe certificates=$signingHashes"
+        )
         cacheSnapshot(app.currentPackageName, fingerprint, snapshot)
         snapshot
     }
@@ -444,10 +451,19 @@ class LocalApkSources(
      * app must never fall back to an APK whose embedded id is the original package. The expected
      * file name is not on its own proof of what the file contains.
      */
-    private fun validatedPatchedApk(app: InstalledApp): Pair<File, PackageInfo>? =
-        savedPatchedApkCandidates(app).firstNotNullOfOrNull { file ->
-            pm.readSavedApkInfo(file, app.version, app.currentPackageName)?.let { file to it }
-        }
+    private fun validatedPatchedApk(app: InstalledApp): Pair<File, PackageInfo>? {
+        val candidates = savedPatchedApkCandidates(app)
+        Log.d(
+            tag,
+            "Saved APK candidates of ${app.currentPackageName} ${app.version}: " +
+                    candidates.joinToString { "${it.absolutePath} (file=${it.isFile}, ${it.length()} bytes)" }
+        )
+        return candidates
+            .firstNotNullOfOrNull { file ->
+                pm.readSavedApkInfo(file, app.version, app.currentPackageName)?.let { file to it }
+            }
+            .also { if (it == null) Log.w(tag, "No usable saved APK for ${app.currentPackageName} ${app.version}") }
+    }
 
     /** Certificates that identify the stock build: the retained original first, then the bundle. */
     private suspend fun referenceSignatureHashes(packageName: String): Set<String> {
