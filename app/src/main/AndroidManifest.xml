@@ -76,6 +76,21 @@
             android:multiprocess="false"
             android:permission="android.permission.INTERACT_ACROSS_USERS_FULL" />
 
+        <!--
+            In-app APK download capture. Not exported: it is only ever started by this app, and
+            it holds a live browser session that no other app should be able to reach.
+
+            The configChanges are the same set MainActivity declares. Without them a rotation
+            would recreate the host and throw away the page the user navigated to, which is the
+            whole state this screen exists to hold. It carries no timeout, so that navigation is
+            the only thing that decides when it ends.
+        -->
+        <activity
+            android:name="app.morphe.manager.ui.screen.apkdownload.ApkDownloadCaptureActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboard|keyboardHidden"
+            android:theme="@style/Theme.MorpheManager" />
+
         <!-- Main Activity without launcher -->
         <activity
             android:name="app.morphe.manager.MainActivity"

@@ -1,4 +1,4 @@
-﻿<resources>
+<resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Other apps</string>
     <string name="home_other_apps_action">Select other apps</string>
@@ -1457,4 +1457,11 @@ Do you still want to continue?"</string>
     <string name="tour_prompt_confirm">Show me around</string>
     <string name="onboarding_restart_title">Feature tour</string>
     <string name="onboarding_restart_desc">A guided tour of key features</string>
+
+    <!-- In-app APK download capture. The user navigates a download page and the file link is
+         taken from it automatically, so the title names the app being fetched. -->
+    <string name="apk_capture_title">Download %s</string>
+    <string name="apk_capture_title_generic">Download the original APK</string>
+    <string name="apk_capture_hint">Open the download page\'s APK link. Morphe takes it from there.</string>
+    <string name="apk_capture_cancel">Cancel download</string>
 </resources>
