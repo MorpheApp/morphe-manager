@@ -28,6 +28,8 @@ libsu = "6.0.0"
 # (rememberBottomSheetState). Drop the override once the BOM ships a stable 1.5.0
 material3 = "1.5.0-alpha29"
 morphe-library = "1.4.0"
+# Kept at morphe-patcher's version, which signs with it: raise the two together
+#noinspection GradleDependency
 apksig = "9.1.1"
 morphe-patcher = "1.15.0-dev.12"
 navigation = "2.10.2"

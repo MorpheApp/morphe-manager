@@ -234,35 +234,59 @@ class PM(
             return emptySet()
         }
         signatureCache.get(stamp)?.let { cached ->
-            if (cached.isEmpty()) {
-                Log.w(TAG, "Signatures of ${file.absolutePath}: cached as unsigned")
-                logApksigVerification(file)
-            }
+            if (cached.isEmpty()) Log.w(TAG, "Signatures of ${file.absolutePath}: cached as not verifying")
             return cached
         }
 
-        return try {
-            val info = app.packageManager.getPackageArchiveInfo(file.absolutePath, signingFlags())
-            if (info == null) {
-                Log.w(TAG, "Signatures of ${file.absolutePath}: archive not parsed with signing flags (API ${Build.VERSION.SDK_INT})")
-                logApksigVerification(file)
-                return emptySet()
-            }
-            info.applicationInfo?.apply {
-                sourceDir = file.absolutePath
-                publicSourceDir = file.absolutePath
-            }
-            val hashes = signatureHashes(info)
-            if (hashes.isEmpty()) {
-                Log.w(TAG, "Signatures of ${file.absolutePath}: none from the package manager (${info.signingSummary()})")
-                logApksigVerification(file)
-            }
-            hashes.also { signatureCache.putIfUnchanged(file, stamp, it) }
-        } catch (e: Exception) {
-            Log.e(TAG, "Failed to read APK file signatures", e)
-            logApksigVerification(file)
+        // Some builds report no signers for an archive they would install, so an empty answer is
+        // settled by verifying the archive itself rather than remembered as unsigned
+        val hashes = platformSignatureHashes(file).ifEmpty {
+            verifiedSignatureHashes(file) ?: return emptySet()
+        }
+        signatureCache.putIfUnchanged(file, stamp, hashes)
+        return hashes
+    }
+
+    /** Fingerprints the package manager reports for [file], empty where it reports none. */
+    private fun platformSignatureHashes(file: File): Set<String> = try {
+        val info = app.packageManager.getPackageArchiveInfo(file.absolutePath, signingFlags())
+        val hashes = info?.let(::signatureHashes).orEmpty()
+        if (hashes.isEmpty()) {
+            Log.w(TAG, "Signatures of ${file.absolutePath}: none from the package manager (${info?.signingSummary() ?: "archive not parsed"})")
+        }
+        hashes
+    } catch (e: Exception) {
+        Log.e(TAG, "Failed to read APK file signatures", e)
+        emptySet()
+    }
+
+    /**
+     * Fingerprints of [file] once it verifies as this device would check it, with the lineage a
+     * rotated key carries, as the package manager reports them. Empty for an archive that does
+     * not verify, and null for one that could not be read, which is not worth remembering.
+     */
+    private fun verifiedSignatureHashes(file: File): Set<String>? = try {
+        val result = ApkVerifier.Builder(file)
+            .setMinCheckedPlatformVersion(Build.VERSION.SDK_INT)
+            .setMaxCheckedPlatformVersion(Build.VERSION.SDK_INT)
+            .build()
+            .verify()
+        val hashes = if (result.isVerified) {
+            (result.signingCertificateLineage?.certificatesInLineage ?: result.signerCertificates)
+                .mapTo(mutableSetOf()) { it.encoded.sha256Fingerprint() }
+        } else {
             emptySet()
         }
+        Log.w(
+            TAG,
+            "apksig on ${file.absolutePath}: verified=${result.isVerified}, v1=${result.isVerifiedUsingV1Scheme}, " +
+                    "v2=${result.isVerifiedUsingV2Scheme}, v3=${result.isVerifiedUsingV3Scheme}, " +
+                    "certificates=$hashes, errors=${result.errors.take(3)}"
+        )
+        hashes
+    } catch (e: Exception) {
+        Log.e(TAG, "Failed to verify APK file: ${file.absolutePath}", e)
+        null
     }
 
     /** How the package manager reported the signers of a parsed archive. */
@@ -277,26 +301,6 @@ class PM(
             "API ${Build.VERSION.SDK_INT}, signatures=${signatures?.size}"
         }
     }.getOrElse { "unreadable: $it" }
-
-    /**
-     * Certificates of [file] as apksig reads them, apart from the platform, to tell an archive
-     * that is not signed from a package manager that does not report its signers.
-     */
-    private fun logApksigVerification(file: File) {
-        runCatching {
-            val result = ApkVerifier.Builder(file).build().verify()
-            val certificates = result.signerCertificates.map { certificate ->
-                MessageDigest.getInstance("SHA-256").digest(certificate.encoded)
-                    .joinToString("") { byte -> "%02x".format(byte) }
-            }
-            Log.w(
-                TAG,
-                "apksig on ${file.absolutePath}: verified=${result.isVerified}, v1=${result.isVerifiedUsingV1Scheme}, " +
-                        "v2=${result.isVerifiedUsingV2Scheme}, v3=${result.isVerifiedUsingV3Scheme}, " +
-                        "certificates=$certificates, errors=${result.errors.take(3)}"
-            )
-        }.onFailure { Log.e(TAG, "apksig could not read ${file.absolutePath}", it) }
-    }
 
     /**
      * Parsed [file] when it is the signed APK the record describes, or null otherwise.
@@ -370,13 +374,8 @@ class PM(
         }
     }
 
-    private fun Array<Signature>.toSha256Hashes(): Set<String> {
-        val digest = MessageDigest.getInstance("SHA-256")
-        return mapTo(mutableSetOf()) { sig ->
-            digest.reset()
-            digest.digest(sig.toByteArray()).joinToString("") { b -> "%02x".format(b) }
-        }
-    }
+    private fun Array<Signature>.toSha256Hashes(): Set<String> =
+        mapTo(mutableSetOf()) { it.toByteArray().sha256Fingerprint() }
 }
 
 /**
@@ -432,6 +431,12 @@ internal fun matchesSavedApkRecord(
             archiveVersionName == trackedVersion &&
             isSigned()
 
+/** Lowercase hex of these bytes, the form every digest and fingerprint here is compared in. */
+private fun ByteArray.toHex(): String = joinToString("") { byte -> "%02x".format(byte) }
+
+/** SHA-256 fingerprint of an encoded certificate, alike from the platform, apksig or a keystore. */
+fun ByteArray.sha256Fingerprint(): String = MessageDigest.getInstance("SHA-256").digest(this).toHex()
+
 fun File.sha256OrNull(): String? = runCatching {
     if (!isFile) return@runCatching null
     val digest = MessageDigest.getInstance("SHA-256")
@@ -444,7 +449,7 @@ fun File.sha256OrNull(): String? = runCatching {
         }
     }
     if (Thread.currentThread().isInterrupted) return@runCatching null
-    digest.digest().joinToString("") { byte -> "%02x".format(byte) }
+    digest.digest().toHex()
 }.getOrNull()
 
 /** Opens the system screen that lets the user grant the "install unknown apps" permission. */

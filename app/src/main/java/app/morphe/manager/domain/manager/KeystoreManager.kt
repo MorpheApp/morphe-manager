@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.util.Log
 import app.morphe.manager.domain.apk.apkFileStampOrNull
+import app.morphe.manager.util.sha256Fingerprint
 import app.morphe.patcher.apk.ApkSigner
 import app.morphe.patcher.apk.ApkUtils
 import kotlinx.coroutines.Dispatchers
@@ -11,7 +12,6 @@ import kotlinx.coroutines.withContext
 import java.io.*
 import java.nio.file.Files
 import java.security.KeyStore
-import java.security.MessageDigest
 import java.security.UnrecoverableKeyException
 import java.security.cert.Certificate
 import java.security.cert.X509Certificate
@@ -140,8 +140,7 @@ class KeystoreManager(app: Application, private val prefs: PreferencesManager) {
         return keystorePath.inputStream().use { ApkSigner.readKeyStore(it, keyStorePassword) }
     }
 
-    private fun Certificate.sha256(): String =
-        MessageDigest.getInstance("SHA-256").digest(encoded).joinToString("") { byte -> "%02x".format(byte) }
+    private fun Certificate.sha256(): String = encoded.sha256Fingerprint()
 
     suspend fun export(target: OutputStream) {
         withContext(Dispatchers.IO) {

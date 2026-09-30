@@ -54,7 +54,7 @@ dependencies {
     implementation(libs.arsclib)
     implementation(libs.morphe.patcher)
     implementation(libs.morphe.library)
-    // Already shipped with the patcher, declared to read certificates apart from the platform
+    // Already shipped with the patcher, declared to verify archives apart from the platform
     implementation(libs.apksig)
 
     implementation(libs.androidx.documentfile)
