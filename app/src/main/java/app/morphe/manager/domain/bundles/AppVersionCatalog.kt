@@ -57,6 +57,21 @@ fun InstalledApkInfo?.patchableBy(targets: List<BundledAppTarget>): InstalledApk
     this?.takeIf { targets.patchableAt(it.version, it.versionCode) }
 
 /**
+ * Folds [codes] into whatever this map already holds for [version]: unions build codes across
+ * every compatible package entry that names the version, instead of letting whichever one is
+ * processed last overwrite the rest. A null [codes] means that entry accepts any build, which
+ * wins over any codes already recorded, since narrowing an unconstrained version would wrongly
+ * turn away a build another entry accepts.
+ */
+internal fun MutableMap<String, Set<Int>?>.mergeVersionCodes(version: String, codes: Set<Int>?) {
+    if (codes == null) {
+        this[version] = null
+    } else if (getOrDefault(version, codes) != null) {
+        this[version] = this[version].orEmpty() + codes
+    }
+}
+
+/**
  * Versions any source marks experimental. The single definition every experimental badge and
  * warning is drawn from, so a version cannot read as stable in one place and not in another.
  */
@@ -191,8 +206,10 @@ class AppVersionCatalog(
     ): Map<String, List<BundledAppTarget>> {
         // packageName → bundleUid → version → AppTarget
         val targetsByPackage = mutableMapOf<String, MutableMap<Int, MutableMap<String, AppTarget>>>()
-        // packageName → bundleUid → version → build codes (parallel to targetsByPackage)
-        val codesByPackage = mutableMapOf<String, MutableMap<Int, MutableMap<String, Set<Int>>>>()
+        // packageName → bundleUid → version → build codes (parallel to targetsByPackage).
+        // A version explicitly mapped to null is unconstrained: some compatible package entry
+        // for it named no codes, so the version accepts any build.
+        val codesByPackage = mutableMapOf<String, MutableMap<Int, MutableMap<String, Set<Int>?>>>()
 
         bundleInfo.forEach { (bundleUid, info) ->
             if (enabledBundleUids.isNotEmpty() && bundleUid !in enabledBundleUids) return@forEach
@@ -217,10 +234,13 @@ class AppVersionCatalog(
                                 description = pkg.versionDescriptions?.get(version),
                                 minSdk = pkg.versionMinSdks?.get(version),
                             )
-                            pkg.versionCodes?.get(version)?.takeIf { it.isNotEmpty() }?.let {
-                                codesMap[version] = it.toSet()
-                            }
                         }
+
+                        // A bundle can declare this package and version through more than one
+                        // compatible package entry, one per accepted build, so every entry's
+                        // codes have to be folded in rather than letting the last one processed
+                        // overwrite the rest.
+                        codesMap.mergeVersionCodes(version, pkg.versionCodes?.get(version)?.takeIf { it.isNotEmpty() })
                     }
                 }
             }

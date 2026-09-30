@@ -75,12 +75,8 @@ data class PatchInfo(
                         .toImmutableMap()
                         .takeIf { it.isNotEmpty() },
                     versionCodes = compatibility.targets
-                        .mapNotNull { target ->
-                            val v = target.version ?: return@mapNotNull null
-                            val codes = target.buildCodesOrNull()?.toImmutableSet() ?: return@mapNotNull null
-                            v to codes
-                        }
-                        .toMap()
+                        .mergedVersionCodes()
+                        .mapValues { (_, codes) -> codes.toImmutableSet() }
                         .toImmutableMap()
                         .takeIf { it.isNotEmpty() },
                 )
@@ -250,6 +246,23 @@ data class CompatiblePackage(
 
 /** Returns the union of all ABI-specific version codes, or null if none are declared. */
 fun AppTarget.buildCodesOrNull(): Set<Int>? = versionCodes?.values?.toSet()?.ifEmpty { null }
+
+/**
+ * Unions [buildCodesOrNull] across every target that shares a [AppTarget.version], which is how a
+ * bundle names several accepted builds (e.g. several arm64-only releases) under one version
+ * string. A version is left out of the result when any of its targets declares no codes at all:
+ * that target accepts any build, so folding it into the union would wrongly narrow a version some
+ * target places no constraint on.
+ */
+internal fun List<AppTarget>.mergedVersionCodes(): Map<String, Set<Int>> =
+    filter { it.version != null }
+        .groupBy { it.version!! }
+        .mapNotNull { (version, targetsForVersion) ->
+            val codeSets = targetsForVersion.map { it.buildCodesOrNull() }
+            if (codeSets.any { it == null }) return@mapNotNull null
+            version to codeSets.flatMap { it!! }.toSet()
+        }
+        .toMap()
 
 /**
  * Semantic UI hint produced by a typed patcher [PatchOption] subclass
