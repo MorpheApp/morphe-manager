@@ -1468,4 +1468,16 @@ Do you still want to continue?"</string>
     <string name="apk_capture_download_failed">The APK could not be downloaded</string>
     <string name="apk_capture_download_failed_reason">Download failed: %s</string>
     <string name="home_download_instructions_in_app">Download in Morphe</string>
+
+    <!-- In-app APK download in progress. Drawn over whatever screen the user moved on to, so the
+         transfer stays visible after the dialog that started it is gone. "%1$s" is the received
+         amount and "%2$s" the total, both already formatted; "%3$s" is the rate. -->
+    <string name="apk_download_title">Downloading %s</string>
+    <string name="apk_download_in_progress">Downloading the original APK</string>
+    <string name="apk_download_of_total">%1$s of %2$s</string>
+    <string name="apk_download_of_total_with_speed">%1$s of %2$s · %3$s</string>
+    <string name="apk_download_remaining">About %s left</string>
+    <string name="apk_download_remaining_seconds">%d s</string>
+    <string name="apk_download_remaining_minutes">%d min</string>
+    <string name="apk_download_remaining_hours">%d h</string>
 </resources>

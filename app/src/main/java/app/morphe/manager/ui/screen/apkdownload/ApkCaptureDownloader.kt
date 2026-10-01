@@ -15,12 +15,44 @@ import app.morphe.manager.util.APK_EXTENSIONS
 import io.ktor.client.request.header
 import io.ktor.client.request.url
 import io.ktor.http.HttpHeaders
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 private const val TAG = "Morphe ApkCaptureDownload"
+
+/** How often the reported speed is recomputed. Smoother reads as a lie about the connection. */
+private const val SPEED_WINDOW_MS = 1000L
+
+/** One captured APK being fetched, as the progress sheet reads it. */
+data class ApkDownloadProgress(
+    val appName: String,
+    val bytesDownloaded: Long,
+    val totalBytes: Long?,
+    val bytesPerSecond: Long,
+) {
+    /**
+     * Fraction done, or null while the server has not said how large the file is. Null is not
+     * zero: an unknown total has no percentage, and drawing one would invent it.
+     */
+    val fraction: Float?
+        get() = totalBytes?.takeIf { it > 0 }?.let { (bytesDownloaded.toFloat() / it).coerceIn(0f, 1f) }
+
+    /** Seconds left at the current rate, or null while either side of the sum is unknown. */
+    val remainingSeconds: Long?
+        get() {
+            val total = totalBytes ?: return null
+            if (bytesPerSecond <= 0) return null
+            return ((total - bytesDownloaded).coerceAtLeast(0) / bytesPerSecond)
+        }
+}
 
 /**
  * Fetches a captured APK and hands it to the ordinary APK picker flow.
@@ -34,10 +66,21 @@ private const val TAG = "Morphe ApkCaptureDownload"
  * that guards a hand-picked APK — package name, split requirement, signature, version — then
  * applies to one this app fetched itself, and a capture that picked the wrong variant is caught
  * by the same code that would catch a wrong manual choice.
+ *
+ * Progress lives here rather than in a caller because the fetch outlives the dialog that starts
+ * it, and a second screen showing the same download reads the same flow.
  */
 object ApkCaptureDownloader : KoinComponent {
     private val http: HttpService by inject()
     private val filesystem: Filesystem by inject()
+
+    private val _progress = MutableStateFlow<ApkDownloadProgress?>(null)
+
+    /** The download in flight, or null when there is none. */
+    val progress: StateFlow<ApkDownloadProgress?> = _progress.asStateFlow()
+
+    /** The running fetch, kept so the progress sheet can stop it. */
+    private var running: Job? = null
 
     /**
      * Why the last download failed, in the words of the exception that ended it.
@@ -51,12 +94,40 @@ object ApkCaptureDownloader : KoinComponent {
         private set
 
     /**
-     * Downloads [capture] and returns the URI to hand to the APK picker, or null when nothing
-     * usable came back.
+     * Downloads [capture] and reports the URI to hand to the APK picker.
+     *
+     * Runs on [scope] so the fetch is not tied to the dialog that asked for it: navigating away,
+     * or the capture screen closing, must not abandon a download already under way.
+     *
+     * @param onFinished called with the URI on success, or null when the download failed or was
+     *     cancelled. A cancellation is not reported as an error.
      */
-    suspend fun download(context: Context, capture: ApkDownloadCapture, appName: String): Uri? =
+    fun start(
+        context: Context,
+        scope: CoroutineScope,
+        capture: ApkDownloadCapture,
+        appName: String,
+        onFinished: (Uri?) -> Unit,
+    ) {
+        running?.cancel()
+        lastError = null
+
+        running = scope.launch {
+            val uri = fetch(context, capture, appName)
+            _progress.value = null
+            onFinished(uri)
+        }
+    }
+
+    /** Stops the download in flight, if any. Nothing is reported as a failure for it. */
+    fun cancel() {
+        running?.cancel()
+        running = null
+        _progress.value = null
+    }
+
+    private suspend fun fetch(context: Context, capture: ApkDownloadCapture, appName: String): Uri? =
         withContext(Dispatchers.IO) {
-            lastError = null
             val target = filesystem.uiTempDir.resolve(fileNameFor(capture, appName))
             // A previous attempt at the same app is replaced rather than appended to
             target.delete()
@@ -66,6 +137,13 @@ object ApkCaptureDownloader : KoinComponent {
                 "Downloading captured APK for $appName from ${capture.url} " +
                     "(referer=${capture.referer != null}, userAgent=${capture.userAgent != null}, " +
                     "cookie=${capture.cookie != null})"
+            )
+
+            _progress.value = ApkDownloadProgress(
+                appName = appName,
+                bytesDownloaded = 0,
+                totalBytes = null,
+                bytesPerSecond = 0,
             )
 
             try {
@@ -85,9 +163,24 @@ object ApkCaptureDownloader : KoinComponent {
                             ?.let { header(HttpHeaders.UserAgent, it) }
                         capture.cookie?.takeIf { it.isNotBlank() }
                             ?.let { header(HttpHeaders.Cookie, it) }
+                    },
+                    onProgress = { bytes, total ->
+                        _progress.value = ApkDownloadProgress(
+                            appName = appName,
+                            bytesDownloaded = bytes,
+                            totalBytes = total,
+                            // Measured between reports rather than from the start, so a stall is
+                            // visible instead of being averaged away
+                            bytesPerSecond = speedOf(bytes),
+                        )
                     }
                 )
             } catch (t: Throwable) {
+                if (t is kotlinx.coroutines.CancellationException) {
+                    Log.i(TAG, "Captured APK download cancelled for $appName")
+                    target.delete()
+                    return@withContext null
+                }
                 lastError = "${t.javaClass.simpleName}: ${t.message}"
                 Log.e(TAG, "Captured APK download failed for $appName: ${t.javaClass.name}: ${t.message}", t)
                 target.delete()
@@ -106,6 +199,30 @@ object ApkCaptureDownloader : KoinComponent {
                 InstallerFileProvider.getUriForFile(context, target)
             }
         }
+
+    private var lastSampleAt = 0L
+    private var lastSampleBytes = 0L
+
+    /**
+     * Transfer rate over the last [SPEED_WINDOW_MS], or the previous reading while the window is
+     * still open. Reporting every callback would divide by a few milliseconds and swing wildly.
+     */
+    private fun speedOf(bytes: Long): Long {
+        val now = System.currentTimeMillis()
+        if (lastSampleAt == 0L) {
+            lastSampleAt = now
+            lastSampleBytes = bytes
+            return 0
+        }
+
+        val elapsed = now - lastSampleAt
+        if (elapsed < SPEED_WINDOW_MS) return _progress.value?.bytesPerSecond ?: 0
+
+        val rate = (bytes - lastSampleBytes) * 1000 / elapsed
+        lastSampleAt = now
+        lastSampleBytes = bytes
+        return rate.coerceAtLeast(0)
+    }
 
     /**
      * Name for the downloaded file, which is load-bearing: the APK picker takes the archive's

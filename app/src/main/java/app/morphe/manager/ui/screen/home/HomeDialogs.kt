@@ -39,6 +39,7 @@ import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.apkdownload.ApkCaptureDownloader
+import app.morphe.manager.ui.screen.apkdownload.ApkDownloadProgressOverlay
 import app.morphe.manager.ui.screen.apkdownload.rememberApkDownloadCaptureAction
 import app.morphe.manager.ui.screen.patcher.UnusableOptionPathsDialog
 import app.morphe.manager.ui.screen.shared.*
@@ -79,12 +80,13 @@ fun HomeDialogs(
         downloadUrl = homeViewModel.resolvedDownloadUrl,
         appName = homeViewModel.pendingAppName.orEmpty(),
     ) { capture ->
-        scope.launch {
-            val uri = ApkCaptureDownloader.download(
-                context = context,
-                capture = capture,
-                appName = homeViewModel.pendingAppName.orEmpty(),
-            )
+        val appName = homeViewModel.pendingAppName.orEmpty()
+        ApkCaptureDownloader.start(
+            context = context,
+            scope = scope,
+            capture = capture,
+            appName = appName,
+        ) { uri ->
             if (uri == null) {
                 // Names the reason while this is being tested. The exception's own message says
                 // more than "it failed" ever could, and reaching an adb console is not something
@@ -94,16 +96,20 @@ fun HomeDialogs(
                     if (reason.isNullOrBlank()) context.getString(R.string.apk_capture_download_failed)
                     else context.getString(R.string.apk_capture_download_failed_reason, reason)
                 )
-                return@launch
-            }            // Through the ordinary intake, so every check that guards a hand-picked APK applies
+                return@start
+            }
+            // Through the ordinary intake, so every check that guards a hand-picked APK applies
             homeViewModel.showDownloadInstructionsDialog = false
             homeViewModel.handleApkSelection(uri)
         }
     }
 
+    // Drawn over every screen in this tree, so a transfer started here stays visible after the
+    // dialog that began it is dismissed
+    ApkDownloadProgressOverlay(onCancel = { ApkCaptureDownloader.cancel() })
+
     // APK selection processing overlay - blocks interaction while APK is loaded/validated in background
-    Overlay(visible = homeViewModel.processingApkSelection) {
-        PulsingLogoWithCaption(caption = stringResource(R.string.processing_apk))
+    Overlay(visible = homeViewModel.processingApkSelection) {        PulsingLogoWithCaption(caption = stringResource(R.string.processing_apk))
     }
 
     // Dialog 1: APK availability
