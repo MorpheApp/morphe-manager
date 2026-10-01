@@ -27,6 +27,22 @@ import java.io.File
 
 private const val TAG = "Morphe ApkCaptureDownload"
 
+/**
+ * Headers a captured download is replayed with, out of everything a capture may carry.
+ *
+ * Only the ones actually present. A header is rejected for a null value, and a URL taken from a
+ * navigation is captured before any response exists, so the cookie manager has had nothing to
+ * store yet: setting these unconditionally fails the whole download before it starts.
+ *
+ * Separated from the request so the decision can be asserted without a server, which is the part
+ * a wrong answer here makes hard to see.
+ */
+internal fun replayHeadersOf(capture: ApkDownloadCapture): Map<String, String> = buildMap {
+    capture.referer?.takeIf { it.isNotBlank() }?.let { put(HttpHeaders.Referrer, it) }
+    capture.userAgent?.takeIf { it.isNotBlank() }?.let { put(HttpHeaders.UserAgent, it) }
+    capture.cookie?.takeIf { it.isNotBlank() }?.let { put(HttpHeaders.Cookie, it) }
+}
+
 /** How often the reported speed is recomputed. Smoother reads as a lie about the connection. */
 private const val SPEED_WINDOW_MS = 1000L
 
@@ -160,6 +176,7 @@ object ApkCaptureDownloader : KoinComponent {
             )
 
             try {
+                val replayHeaders = replayHeadersOf(capture)
                 http.downloadToFile(
                     saveLocation = target,
                     builder = {
@@ -167,15 +184,7 @@ object ApkCaptureDownloader : KoinComponent {
                         // answered as `http://localhost`, which the network security policy
                         // refuses before any of the headers below are ever looked at
                         url(capture.url)
-                        // Only the headers a capture actually carries. A header is rejected for a
-                        // null value, and a page reached by navigations alone has no cookie to
-                        // give, so setting these unconditionally fails the whole download.
-                        capture.referer?.takeIf { it.isNotBlank() }
-                            ?.let { header(HttpHeaders.Referrer, it) }
-                        capture.userAgent?.takeIf { it.isNotBlank() }
-                            ?.let { header(HttpHeaders.UserAgent, it) }
-                        capture.cookie?.takeIf { it.isNotBlank() }
-                            ?.let { header(HttpHeaders.Cookie, it) }
+                        replayHeaders.forEach { (name, value) -> header(name, value) }
                     },
                     onProgress = { bytes, total ->
                         _progress.value = ApkDownloadProgress(
@@ -213,7 +222,6 @@ object ApkCaptureDownloader : KoinComponent {
 
     private var lastSampleAt = 0L
     private var lastSampleBytes = 0L
-
     /**
      * Transfer rate over the last [SPEED_WINDOW_MS], or the previous reading while the window is
      * still open. Reporting every callback would divide by a few milliseconds and swing wildly.

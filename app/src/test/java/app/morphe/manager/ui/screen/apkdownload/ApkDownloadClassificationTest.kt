@@ -5,14 +5,18 @@
 
 package app.morphe.manager.ui.screen.apkdownload
 
+import io.ktor.http.HttpHeaders
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 /**
- * The capture rule decides which URL takes the user out of a download page. Getting it wrong in
- * one direction strands them on a page they cannot leave, and in the other starts a download of
- * the page itself, so both signals are pinned here.
+ * The capture rule decides which URL takes the user out of a download page, and the header rule
+ * decides whether the request for it is answered at all. Getting the first wrong in one direction
+ * strands the user on a page they cannot leave, and in the other starts a download of the page
+ * itself; getting the second wrong fails every download before it starts. Both are pure
+ * decisions, so both are pinned here rather than behind a server.
  */
 class ApkDownloadClassificationTest {
 
@@ -75,5 +79,54 @@ class ApkDownloadClassificationTest {
         assertTrue(isApkArchiveDownload("https://example.com/app.apk"))
         assertFalse(isApkArchiveDownload("https://abc.r2.cloudflarestorage.com/bucket/9f8c1e2d", "text/html"))
         assertFalse(isApkArchiveDownload("https://example.com/", "text/html"))
+    }
+
+    @Test
+    fun `a capture carrying every header replays all of them`() {
+        val headers = replayHeadersOf(
+            ApkDownloadCapture(
+                url = "https://example.com/app.apk",
+                referer = "https://www.apkmirror.com/apk/example/",
+                userAgent = "Mozilla/5.0 (Linux; Android 15)",
+                cookie = "cf_clearance=example-token",
+            )
+        )
+
+        assertEquals("https://www.apkmirror.com/apk/example/", headers[HttpHeaders.Referrer])
+        assertEquals("Mozilla/5.0 (Linux; Android 15)", headers[HttpHeaders.UserAgent])
+        assertEquals("cf_clearance=example-token", headers[HttpHeaders.Cookie])
+    }
+
+    @Test
+    fun `a capture with no cookie replays the rest`() {
+        // A page reached by navigations alone has no cookie to give: a URL taken from a
+        // navigation is captured before any response exists, so the cookie manager has had
+        // nothing to store. Sending a header for it anyway failed every download once.
+        val headers = replayHeadersOf(
+            ApkDownloadCapture(
+                url = "https://example.com/app.apk",
+                referer = "https://www.apkmirror.com/apk/example/",
+                userAgent = "Mozilla/5.0 (Linux; Android 15)",
+                cookie = null,
+            )
+        )
+
+        assertEquals(2, headers.size)
+        assertFalse(headers.containsKey(HttpHeaders.Cookie))
+        assertEquals("https://www.apkmirror.com/apk/example/", headers[HttpHeaders.Referrer])
+    }
+
+    @Test
+    fun `a blank header is treated as absent`() {
+        val headers = replayHeadersOf(
+            ApkDownloadCapture(
+                url = "https://example.com/app.apk",
+                referer = "",
+                userAgent = "   ",
+                cookie = null,
+            )
+        )
+
+        assertEquals(emptyMap(), headers)
     }
 }
