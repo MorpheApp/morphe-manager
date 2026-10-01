@@ -20,6 +20,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -78,6 +79,7 @@ fun ApkDownloadProgressOverlay(onCancel: () -> Unit) {
             Text(
                 text = stringResource(R.string.apk_download_title, current.appName),
                 style = MaterialTheme.typography.titleMedium,
+                color = Color.White,
                 textAlign = TextAlign.Center,
             )
 
@@ -107,7 +109,7 @@ fun ApkDownloadProgressOverlay(onCancel: () -> Unit) {
                     else -> downloaded
                 },
                 style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = Color.White,
                 textAlign = TextAlign.Center,
             )
 
@@ -115,7 +117,7 @@ fun ApkDownloadProgressOverlay(onCancel: () -> Unit) {
                 Text(
                     text = stringResource(R.string.apk_download_remaining, formatRemaining(seconds)),
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = Color.White,
                 )
             }
 
