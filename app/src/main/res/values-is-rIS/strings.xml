@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">Ekki hægt að framkvæma aðgerðir fyrir þennan flokk</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Hvaða app viltu breyta?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Tilbúin að gera app virkilega vel…</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Festu þig, það er breytistillingartími</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Önnur dagur, önnur meistaraflokkur án auglýsinga</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Viltu skoða auglýsingar? Ég held ekki</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Gerum þín app að haga sér</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Dagsins spá: 100% möguleiki á breytingum</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Tilbúinn að breyta undirframleiðslu yfir í frábært?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Hefur bjargað appum frá sjálfum sér frá þessu degi</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Knúin af koffeini og góðum breytistillingum</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Rísa og flíkja</string>
-    <string name="home_greeting_morning_2">Góðan daginn! Forrit flíkja sig ekki sjálf</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Hálfsvefn á eftir hádegi? Flíkja eitthvað</string>
-    <string name="home_greeting_afternoon_2">Eftir hádegi viðgerðir eru öðruvísi</string>
-    <string name="home_greeting_afternoon_3">Eftirmiðdagsvaktin: viðgerðarútgáfa</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Gott kvöld! Kvöldviðgerðir eru öðruvísi</string>
-    <string name="home_greeting_evening_2">Er búið að slappa af? Viðgerðu app fyrst</string>
-    <string name="home_greeting_evening_3">Hættir að vinna? Viðgerðu eitthvað fyrst</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Vaknar enn? Svo eru þau forrit sem þurfa að vera viðgerð</string>
-    <string name="home_greeting_late_night_2">Sein kvölds viðgerðarhlaup? Virkilega vel</string>
-    <string name="home_greeting_late_night_3">Náttúrufuglhamur: virkjaður</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Hámark viðgerðartími… sagt er</string>
-    <string name="home_greeting_super_late_2">Gat ekki sofnað? Viðgerðu eitthvað</string>
-    <string name="home_greeting_super_late_3">Á þessum tíma, bara vertu vökur og gerðu við</string>
-    <string name="home_greeting_super_late_4">Þú og netþjónarnir, báðir vakin</string>
-    <string name="home_greeting_super_late_5">Næturhægur og afkastamikill</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Heimildir breytistillinga</string>
     <string name="sources_search">Leita að uppsprettum og plástrum</string>
@@ -525,8 +486,6 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="patcher_field_value_stripped">fjarlægð</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">varðveitt</string>
-    <string name="patcher_tab_logs">Patcher skrá</string>
-    <string name="patcher_tab_game">Leikir</string>
     <string name="patcher_logs_waiting">Bíð eftir útgáfu skráa…</string>
     <string name="patcher_logs_lost">Útgáfa skráa er ekki geymd milli endurræsinga forrits</string>
     <string name="patcher_long_step_warning">Þessi skref gætu tekið ákveðinn tíma. Vinsamlegast bíðu…</string>
@@ -553,7 +512,6 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="patcher_install_error_subtitle">Reyndu að afinstallera og setja upp aftur</string>
     <string name="patcher_ready_to_mount_subtitle">Ýttu á hnappinn hér að neðan til að festa</string>
     <string name="patcher_patches_excluded_for_installer">Ekki í boði fyrir þessa uppsetningaraðferð og útilokuð: %s</string>
-    <string name="patcher_back_to_game_hint">Ýttu á %1$s til að fara aftur í leikinn</string>
     <string name="patcher_storage_permission_dialog_title">Ekki hægt að fá aðgang að geymslushörðu</string>
     <string name="patcher_incompatible_patcher_title">Uppfærsla krafist</string>
     <string name="patcher_incompatible_patcher_description">Pakkinn &lt;b&gt;%1$s&lt;/b&gt; krefst Morphe útgáfu &lt;b&gt;%2$s&lt;/b&gt; eða nýrri. Vinsamlegast uppfæra Morphe til að breyta þessari forrit</string>
@@ -596,32 +554,6 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="patcher_notification_text">Tappaðu til að snúa aftur á breytistillinguna</string>
     <string name="patcher_stop_confirm_title">Stöðva breytistillinguna</string>
     <string name="patcher_stop_confirm_description">Ertu viss um að þú viljir stöðva breytistillinguna?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Breytum appinu þínu yfir í eitthvað frábært… 🏆</string>
-    <string name="patcher_message_2">Kennum gömlum appum nýja trikki… 🎩</string>
-    <string name="patcher_message_3">Gerum appinu þínu digitalt þægilegt… 🔧</string>
-    <string name="patcher_message_4">Bruggum digitala töfrabrögð… ☕</string>
-    <string name="patcher_message_5">Kaffipásar mæltu með… ☕</string>
-    <string name="patcher_message_6">Lítu út um gluggann, það er gott veður úti… 🌤️</string>
-    <string name="patcher_message_7">Stilli 1ur og 0ur… 🤖</string>
-    <string name="patcher_message_8">Tengjum digital spaghetti… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Lækna bugga í óbreyttu appinu… 🪲</string>
-    <string name="patcher_message_10">Frábær breytistilling er þess virði að bíða… ⏳</string>
-    <string name="patcher_message_11">Pússum pixla þar til þau glansar… 💎</string>
-    <string name="patcher_message_12">Vinsamlegast sitjið kyrr þar til skipstjórinn slokknar á \"Breytistilling í gangi\" merkinu… 💺✈️</string>
-    <string name="patcher_message_13">Elbum breyttu appinu þínu, heitt og ferskt… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Semjum vel um bytecode… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Öll kerfi eru í lagi… breytistilstraður er stöðugur… 🚀</string>
-    <string name="patcher_message_16">Kreistum út auka kraft, eins og safa úr digital sítrónu… 🍋</string>
-    <string name="patcher_message_17">Hvetjum appið til að samþykkja sjálf sitt nýja, betra sjálf… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Breytum appstillingum úr óbreyttu yfir í breytt… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Appið þitt er með hita, og eina lyfið er meiri breytistilling… 🩺🔔</string>
-    <string name="patcher_message_20">Fjarlögum bull… vinsamlegast bíðið… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Pakkning app</string>
     <string name="memory_usage">Minniskot</string>
@@ -651,29 +583,6 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="package_name">Pakkannafn</string>
     <string name="failed_to_mount">Ekki tókst að festa: %s</string>
     <string name="failed_to_unmount">Ekki tókst að afmesta: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Stig %s</string>
-    <string name="mini_game_best">Best %s</string>
-    <string name="mini_game_new_record">Nýtt met!</string>
-    <string name="mini_game_game_over">Leikur er búinn</string>
-    <string name="mini_game_try_again">Reyna aftur</string>
-    <string name="mini_game_paused">Hætt</string>
-    <string name="mini_game_resume">Halda áfram</string>
-    <string name="mini_game_restart">Byrja upp á nýtt</string>
-    <string name="mini_game_change">Veldu annan leik</string>
-    <string name="mini_game_2048_picker_subtitle">Hreistu flísar til að sameina</string>
-    <string name="mini_game_flappy_picker_subtitle">Smelltu til að fljúga í gegnum rör</string>
-    <string name="mini_game_flappy_tap_to_start">Smelltu til að fljúga</string>
-    <string name="mini_game_snake_picker_subtitle">Borða mat, ekki slá þig</string>
-    <string name="mini_game_snake_swipe_to_start">Stryndu til að byrja</string>
-    <string name="mini_game_dino_picker_subtitle">Smelltu til að hoppa yfir kaktusa</string>
-    <string name="mini_game_dino_tap_to_start">Smelltu til að hlaupa</string>
-    <string name="mini_game_blocks_picker_subtitle">Fella lögun, hreinsa línur</string>
-    <string name="mini_game_blocks_tap_to_start">Pikkaðu til að snúa, strjúktu til að færa, strjúktu niður til að sleppa</string>
-    <string name="mini_game_bricks_picker_subtitle">Spretta boltann, hreinsa vegginn</string>
-    <string name="mini_game_bricks_tap_to_start">Dragðu til að miða, bankaðu til að skjóta</string>
-    <string name="mini_game_miner_picker_subtitle">Pikkaðu til að opna, haltu til að merkja</string>
-    <string name="mini_game_pairs_picker_subtitle">Snúðu við spilunum, finndu samsvörun</string>
     <!-- Settings -->
     <string name="appearance">Útliti</string>
     <string name="advanced">Advanced</string>
@@ -728,8 +637,6 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="settings_appearance_ui_scale_preview_subtitle">Texti og stýringar við þessa stærð</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Heimaskjár</string>
-    <string name="settings_appearance_greeting_phrases">Greeting frases</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Sýna kveðju skilaboð á heimaskjá</string>
     <string name="settings_appearance_app_grouping">Forritaflokkun</string>
     <string name="settings_appearance_app_grouping_description">Sýna skiptirofa til að flokka forrit eftir uppruna eða flokki</string>
     <string name="settings_appearance_repatch_notice">Tilkynning um endurplástrun</string>
@@ -1158,16 +1065,6 @@ Nánari upplýsingar: %2$s"</string>
     <string name="credits_current_development">Núverandi þróun</string>
     <string name="credits_prior_development">Fyrri þróun</string>
     <string name="opensource_licenses">Open-source leyfisveitingar</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">Val</string>
-    <string name="easter_egg_pill_message">Taktu bláu pilluna og auglýsingarnar haldast nákvæmlega þar sem þær eru. Taktu rauðu pilluna og sjáðu hversu djúpt bytecode-ið fer.</string>
-    <string name="easter_egg_pill_red">Rauð pilla</string>
-    <string name="easter_egg_pill_blue">Blá pilla</string>
-    <string name="easter_egg_pill_red_toast">Bakgrunnur Matrixs opnaður</string>
-    <string name="easter_egg_pill_blue_toast">Auglýsingarnar munu bíða eftir þér</string>
-    <string name="easter_egg_pill_message_again">Þú ert nú þegar í Matrix. Rauða pillan fleygir þér aftur í rigninguna, og sú bláa vekur þig upp</string>
-    <string name="easter_egg_pill_red_toast_again">Aftur í rigningunni</string>
-    <string name="easter_egg_pill_blue_toast_again">Aftengdur. Leiðin til baka er þar sem hún var alltaf</string>
     <!-- Shared strings -->
     <string name="select_file">Velja skrá</string>
     <string name="select_files">Veldu skrár</string>

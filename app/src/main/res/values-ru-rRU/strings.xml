@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">Действия недоступны для этой категории</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Какое приложение вы хотите пропатчить</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Готовы сделать приложения снова легендарными?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Пристегнитесь, время патчить</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Еще один день, еще один шедевр без рекламы</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Хотите смотреть рекламу? Я тоже нет</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Давайте сделаем ваши приложения послушными</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Прогноз на сегодня: 100% шансов на патчинг</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Готовы превратить неудовлетворительное в потрясающее?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Спасаем приложения от них самих с сегодняшнего дня</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Работаем на кофеине и хороших патчах</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Вставай и пропатчивай</string>
-    <string name="home_greeting_morning_2">Доброе утро! Приложения сами себя не пропатчат.</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Послеполуденный спад? Пора что-нибудь пропатчить</string>
-    <string name="home_greeting_afternoon_2">Патчи после обеда воспринимаются иначе</string>
-    <string name="home_greeting_afternoon_3">Смена после обеда: редакция патчей</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Добрый вечер! Вечерние патчи воспринимаются иначе</string>
-    <string name="home_greeting_evening_2">Развлекаетесь перед сном? Сначала пропатчите приложение</string>
-    <string name="home_greeting_evening_3">Собираетесь с работы? Сначала пропатчьте что-нибудь</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Ещё не спите? Так же, как приложения, которым нужны патчи</string>
-    <string name="home_greeting_late_night_2">Ночная сессия патчей? Уважение</string>
-    <string name="home_greeting_late_night_3">Режим совы: активирован</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Пик патчей... якобы</string>
-    <string name="home_greeting_super_late_2">Не можете уснуть? Пропатчите что-нибудь</string>
-    <string name="home_greeting_super_late_3">В этот момент просто не ложитесь спать и пропатчьте всё</string>
-    <string name="home_greeting_super_late_4">И вы, и серверы – оба в сети</string>
-    <string name="home_greeting_super_late_5">Ночной и продуктивный</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Источники патчей</string>
     <string name="sources_search">Поиск источников и патчей</string>
@@ -527,8 +488,6 @@
     <string name="patcher_field_value_stripped">Удалены</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">Оставлены</string>
-    <string name="patcher_tab_logs">Журналы патчера</string>
-    <string name="patcher_tab_game">Игры</string>
     <string name="patcher_logs_waiting">Ожидание вывода логов…</string>
     <string name="patcher_logs_lost">Вывод логов не сохраняется после перезапуска приложения</string>
     <string name="patcher_long_step_warning">Этот шаг может занять некоторое время. Пожалуйста, подождите…</string>
@@ -555,7 +514,6 @@
     <string name="patcher_install_error_subtitle">Попробуйте удалить и установить заново</string>
     <string name="patcher_ready_to_mount_subtitle">Нажмите кнопку ниже, чтобы смонтировать</string>
     <string name="patcher_patches_excluded_for_installer">Недоступно для данного метода установки и исключено: %s</string>
-    <string name="patcher_back_to_game_hint">Нажмите %1$s, чтобы вернуться в игру</string>
     <string name="patcher_storage_permission_dialog_title">Невозможно получить доступ к пути хранения</string>
     <string name="patcher_incompatible_patcher_title">Требуется обновление</string>
     <string name="patcher_incompatible_patcher_description">Для пакета &lt;b&gt;%1$s&lt;/b&gt; требуется версия патчера &lt;b&gt;%2$s&lt;/b&gt; или более поздняя. Пожалуйста, обновите Morphe, чтобы пропатчить это приложение</string>
@@ -598,32 +556,6 @@
     <string name="patcher_notification_text">Нажмите, чтобы вернуться к патчеру</string>
     <string name="patcher_stop_confirm_title">Остановить патчер</string>
     <string name="patcher_stop_confirm_description">Вы уверены, что хотите остановить процесс патчинга?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Превращаем ваше приложение во что-то потрясающее… 🏆</string>
-    <string name="patcher_message_2">Обучаем старые приложения новым трюкам… 🎩</string>
-    <string name="patcher_message_3">Делаем цифровой тюнинг вашего приложения… 🔧</string>
-    <string name="patcher_message_4">Варим цифровое зелье… ☕</string>
-    <string name="patcher_message_5">Рекомендуется перерыв на кофе… ☕</string>
-    <string name="patcher_message_6">Посмотрите в окно, там солнечно… 🌤️</string>
-    <string name="patcher_message_7">Настраиваем единицы и нули… 🤖</string>
-    <string name="patcher_message_8">Распутываем цифровые спагетти… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Исправляем ошибки в пропатченном приложении… 🪲</string>
-    <string name="patcher_message_10">Хорошие патчи стоят ожидания… ⏳</string>
-    <string name="patcher_message_11">Полируем пиксели до блеска… 💎</string>
-    <string name="patcher_message_12">Пожалуйста, оставайтесь на местах, пока капитан не выключит знак \'Выполняется исправление\'... 💺✈️</string>
-    <string name="patcher_message_13">Готовим ваше пропатченное приложение, горячее и свежее… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Вежливо договариваемся с байткодом… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Все системы в норме… траектория патчинга стабильна… 🚀</string>
-    <string name="patcher_message_16">Выжимаем дополнительную мощность, как сок из цифрового лимона… 🍋</string>
-    <string name="patcher_message_17">Поощряем приложение принять свою новую, улучшенную версию… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Изменяем суперпозицию приложения с «не пропатчено» на «пропатчено»… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">У вашего приложения жар, и единственное лекарство — больше патчей… 🩺🔔</string>
-    <string name="patcher_message_20">Убираем ерунду. Пожалуйста, подождите… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Патчинг приложения</string>
     <string name="memory_usage">Использование памяти</string>
@@ -653,29 +585,6 @@
     <string name="package_name">Имя пакета</string>
     <string name="failed_to_mount">Не удалось смонтировать: %s</string>
     <string name="failed_to_unmount">Не удалось размонтировать: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Счет %s</string>
-    <string name="mini_game_best">Лучший результат: %s</string>
-    <string name="mini_game_new_record">Новый рекорд!</string>
-    <string name="mini_game_game_over">Игра окончена</string>
-    <string name="mini_game_try_again">Попробовать снова</string>
-    <string name="mini_game_paused">Пауза</string>
-    <string name="mini_game_resume">Продолжить</string>
-    <string name="mini_game_restart">Начать заново</string>
-    <string name="mini_game_change">Выбрать другую игру</string>
-    <string name="mini_game_2048_picker_subtitle">Сдвигайте плитки, чтобы объединять их</string>
-    <string name="mini_game_flappy_picker_subtitle">Касайтесь экрана, чтобы пролетать сквозь трубы</string>
-    <string name="mini_game_flappy_tap_to_start">Касайтесь экрана, чтобы лететь</string>
-    <string name="mini_game_snake_picker_subtitle">Ешьте еду, не ударяйтесь о себя</string>
-    <string name="mini_game_snake_swipe_to_start">Смахните, чтобы начать</string>
-    <string name="mini_game_dino_picker_subtitle">Касайтесь экрана, чтобы перепрыгивать кактусы</string>
-    <string name="mini_game_dino_tap_to_start">Касайтесь экрана, чтобы бежать</string>
-    <string name="mini_game_blocks_picker_subtitle">Подгонка форм, четкие линии</string>
-    <string name="mini_game_blocks_tap_to_start">Коснитесь, чтобы повернуть, свайп, чтобы переместить, свайп вниз, чтобы опустить</string>
-    <string name="mini_game_bricks_picker_subtitle">Отбей мяч, расчисти стену</string>
-    <string name="mini_game_bricks_tap_to_start">Перетащите, чтобы прицелиться, коснитесь, чтобы запустить</string>
-    <string name="mini_game_miner_picker_subtitle">Нажмите, чтобы открыть, удерживайте для отметки</string>
-    <string name="mini_game_pairs_picker_subtitle">Переверните карты, найти соответствие</string>
     <!-- Settings -->
     <string name="appearance">Внешний вид</string>
     <string name="advanced">Дополнительно</string>
@@ -729,8 +638,6 @@
     <string name="settings_appearance_ui_scale_preview_subtitle">Текст и элементы управления при таком масштабе</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Главный экран</string>
-    <string name="settings_appearance_greeting_phrases">Приветственные фразы</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Показывать приветственное сообщение на главном экране</string>
     <string name="settings_appearance_app_grouping">Группировка приложений</string>
     <string name="settings_appearance_app_grouping_description">Показывать переключатель для группировки приложений по источнику или категории</string>
     <string name="settings_appearance_repatch_notice">Уведомление о перепатчивании</string>
@@ -1162,16 +1069,6 @@ morphe_header_custom_dark.png
     <string name="credits_current_development">Текущая разработка</string>
     <string name="credits_prior_development">Предыдущая разработка</string>
     <string name="opensource_licenses">Лицензии открытого кода</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">Выбор</string>
-    <string name="easter_egg_pill_message">Прими синюю таблетку — и реклама останется на месте. Прими красную — и узнаешь, насколько глубоко уходит байткод.</string>
-    <string name="easter_egg_pill_red">Красная таблетка</string>
-    <string name="easter_egg_pill_blue">Синяя таблетка</string>
-    <string name="easter_egg_pill_red_toast">Фон матрицы разблокирован</string>
-    <string name="easter_egg_pill_blue_toast">Реклама будет ждать вас</string>
-    <string name="easter_egg_pill_message_again">Вы уже в Матрице. Красная таблетка вернёт вас в дождь, синяя разбудит вас.</string>
-    <string name="easter_egg_pill_red_toast_again">Обратно в дождь</string>
-    <string name="easter_egg_pill_blue_toast_again">Отключено. Путь назад там, где он всегда был.</string>
     <!-- Shared strings -->
     <string name="select_file">Выберите файл</string>
     <string name="select_files">Выберите файлы</string>

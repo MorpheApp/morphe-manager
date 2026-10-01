@@ -76,45 +76,6 @@
     <string name="home_category_actions_unavailable">या श्रेणीसाठी क्रिया उपलब्ध नाहीत</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">तुम्हाला कोणत्या ॲपमध्ये सुधारणा करायची आहे?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">ॲप्सचा नाद घुमवायला तयार आहात का?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">कंबर कसा, सुधारणेची वेळ आली आहे!</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">नवा दिवस, जाहिरात-मुक्त आणखी एक महाकलाकृती!</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">जाहिराती बघायची इच्छा आहे? माझी पण नाही!</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">चला, आता तुमच्या ॲप्सना सरळ करण्याची वेळ आलीये!</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">आजचा अंदाज: 100% खात्री फक्त \'सुधारणा\' होण्याचीच!</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">साध्या सुध्या गोष्टींना जबरदस्त बनवायला तयार आहात का?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">आजपासून ॲप्सना त्यांच्याच दोषांपासून वाचवत आहे</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">कॉफी आणि उत्तम सुधारणांच्या जोरावर काम सुरू</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">उठून पॅच करा</string>
-    <string name="home_greeting_morning_2">शुभ सकाळ! ॲप्स स्वतःहून पॅच होणार नाहीत</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">दुपारच्या सुस्तीमुळे पॅच करण्याची इच्छा आहे?</string>
-    <string name="home_greeting_afternoon_2">दुपारच्या जेवणानंतर पॅचिंग करणं खूप वेगळं आहे</string>
-    <string name="home_greeting_afternoon_3">दुपारचा shift: पॅच एडिशन</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">शुभ संध्याकाळ! संध्याकाळचे पॅच वेगळे असतात</string>
-    <string name="home_greeting_evening_2">आराम करत आहात? आधी ॲप पॅच करा</string>
-    <string name="home_greeting_evening_3">काम संपवून जात आहात? आधी काहीतरी पॅच करा</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">अजून जागे आहात? पॅचिंगची गरज असलेले ॲप्स पण जागे आहेत</string>
-    <string name="home_greeting_late_night_2">मध्यरात्री पॅच सेशन? छान</string>
-    <string name="home_greeting_late_night_3">नाईट owl मोड: सक्रिय</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">पॅचिंगची वेळ…असे म्हणतात</string>
-    <string name="home_greeting_super_late_2">झोप येत नाहीये? काहीतरी पॅच करा</string>
-    <string name="home_greeting_super_late_3">आता तर फक्त जागे राहा आणि पॅचिंग करा</string>
-    <string name="home_greeting_super_late_4">तुम्ही आणि सर्व्हर, दोघेही जागे</string>
-    <string name="home_greeting_super_late_5">रात्रीचे आणि productive</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">सुधारणांची मुळे</string>
     <string name="sources_sort_title">सुधारणा स्रोत क्रमवारी लावा</string>
@@ -453,9 +414,6 @@
     <!-- Average and peak memory the patcher process held while it ran -->
     <!-- Fastest read or write rate reached while patching, in data per second -->
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
-    <!-- Value of "Libraries": every library was left in the patched APK -->
-    <string name="patcher_tab_logs">पॅचर लॉग</string>
-    <string name="patcher_tab_game">गेम</string>
     <string name="patcher_logs_waiting">लॉग आउटपुटची प्रतीक्षा करत आहे…</string>
     <string name="patcher_logs_lost">ॲप रीस्टार्ट झाल्यावर लॉग आउटपुट ठेवला जात नाही</string>
     <string name="patcher_long_step_warning">या स्टेपला थोडा वेळ लागू शकतो. कृपया प्रतीक्षा करा…</string>
@@ -481,7 +439,6 @@
     <string name="patcher_install_error_subtitle">अनइंस्टॉल करून पुन्हा इंस्टॉल करण्याचा प्रयत्न करा</string>
     <string name="patcher_ready_to_mount_subtitle">माउंट करण्यासाठी खालील बटण दाबा</string>
     <string name="patcher_patches_excluded_for_installer">या इन्स्टॉल पद्धतीसाठी उपलब्ध नाही आणि वगळण्यात आले आहे: %s</string>
-    <string name="patcher_back_to_game_hint">तुमच्या गेमवर परत जाण्यासाठी %1$s वर टॅप करा</string>
     <string name="patcher_storage_permission_dialog_title">स्टोरेज पाथ ॲक्सेस करू शकत नाही</string>
     <string name="patcher_incompatible_patcher_title">अद्यतन आवश्यक आहे</string>
     <string name="patcher_incompatible_patcher_description">बंडल &lt;b&gt;%1$s&lt;/b&gt; ला पॅचर व्हर्जन &lt;b&gt;%2$s&lt;/b&gt; किंवा नवीनची आवश्यकता आहे. कृपया हे ॲप पॅच करण्यासाठी Morphe अपडेट करा.</string>
@@ -517,31 +474,6 @@
     <string name="patcher_notification_text">पॅचरवर परत जाण्यासाठी टॅप करा</string>
     <string name="patcher_stop_confirm_title">पॅचर थांबवा</string>
     <string name="patcher_stop_confirm_description">तुम्ही पॅचिंग प्रक्रिया थांबवू इच्छिता आहात का?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">तुमचा ॲप अप्रतिम बनवत आहे… 🏆</string>
-    <string name="patcher_message_2">जुन्या ॲप्सना नवीन युक्त्या शिकवत आहे… 🎩</string>
-    <string name="patcher_message_3">तुमच्या ॲपला डिजिटल ट्यून-अप देत आहे… 🔧</string>
-    <string name="patcher_message_4">डिजिटल जादू तयार करत आहे… ☕</string>
-    <string name="patcher_message_5">कॉफी ब्रेकची शिफारस केली जाते… ☕</string>
-    <string name="patcher_message_6">बाहेर पहा, हवामान छान आहे… 🌤️</string>
-    <string name="patcher_message_8">डिजिटल स्पॅगेटी सोडवत आहे… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">नॉन-पॅच केलेल्या ॲपमधील बग फिक्स करत आहे… 🪲</string>
-    <string name="patcher_message_10">महान पॅचची वाट पाहणे योग्य आहे… ⏳</string>
-    <string name="patcher_message_11">पिक्सेल चमकत आहेत तोपर्यंत पॉलिश करत आहे… 💎</string>
-    <string name="patcher_message_12">‘पॅचिंग सुरू आहे’ साइन बंद होईपर्यंत कृपया जागेवर थांबा… 💺✈️</string>
-    <string name="patcher_message_13">तुमचा पॅच केलेला ॲप शिजवत आहे, गरम आणि ताज़ा… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">बाइटकोडशी आदराने वाटाघाटी करत आहे… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">सर्व सिस्टीम ठीक आहे… पॅचिंगचा मार्ग स्थिर आहे… 🚀</string>
-    <string name="patcher_message_16">डिजिटल लिंबातून ज्यूस काढण्यासारखी अतिरिक्त शक्ती निचोळत आहे… 🍋</string>
-    <string name="patcher_message_17">ॲपला त्याचे नवीन, चांगले स्वरूप स्वीकारण्यास प्रोत्साहित करत आहे… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">पॅच न केलेल्या ॲपचे सुपरपोजिशन बदलणे… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">तुमच्या ॲपला ताप आला आहे, आणि उपायासाठी अधिक पॅच आवश्यक आहेत… 🩺🔔</string>
-    <string name="patcher_message_20">निरर्थक गोष्टी काढून टाकणे. कृपया थांबा… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">ॲप पॅचिंग</string>
     <string name="memory_usage">मेमरी वापर</string>
@@ -570,21 +502,6 @@
     <string name="package_name">पॅकेजचे नाव</string>
     <string name="failed_to_mount">माउंट करण्यात अयशस्वी: %s</string>
     <string name="failed_to_unmount">अनमाउंट करण्यात अयशस्वी: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">स्कोअर %s</string>
-    <string name="mini_game_best">सर्वोत्तम %s</string>
-    <string name="mini_game_new_record">नवीन रेकॉर्ड!</string>
-    <string name="mini_game_game_over">गेम ओव्हर</string>
-    <string name="mini_game_try_again">पुन्हा प्रयत्न करा</string>
-    <string name="mini_game_paused">थांबवले</string>
-    <string name="mini_game_resume">सुरू ठेवा</string>
-    <string name="mini_game_2048_picker_subtitle">जुळवण्यासाठी टाइल्स सरकवा</string>
-    <string name="mini_game_flappy_picker_subtitle">पाईपमधून उडण्यासाठी टॅप करा</string>
-    <string name="mini_game_flappy_tap_to_start">उडण्यासाठी टॅप करा</string>
-    <string name="mini_game_snake_picker_subtitle">अन्न खा, स्वतःला मारू नका</string>
-    <string name="mini_game_snake_swipe_to_start">सुरू करण्यासाठी स्वाइप करा</string>
-    <string name="mini_game_dino_picker_subtitle">कॅक्टसवरून उडी मारण्यासाठी टॅप करा</string>
-    <string name="mini_game_dino_tap_to_start">धावण्यासाठी टॅप करा</string>
     <!-- Settings -->
     <string name="appearance">स्वरूप</string>
     <string name="advanced">प्रगत</string>
@@ -634,8 +551,6 @@
     <string name="settings_appearance_ui_scale_preview_subtitle">या स्केलवर मजकूर आणि नियंत्रणे</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">मुख्य स्क्रीन</string>
-    <string name="settings_appearance_greeting_phrases">शुभेच्छा संदेश</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">मुख्य स्क्रीनवर शुभेच्छा संदेश दर्शवा</string>
     <string name="settings_appearance_app_grouping">ॲप समूहीकरण</string>
     <string name="settings_appearance_sort_button">क्रमवारी आणि फिल्टर बटण</string>
     <string name="settings_appearance_sort_button_description">होम स्क्रीनवर क्रमवारी आणि फिल्टर बटण दाखवा</string>
@@ -1022,16 +937,6 @@ morphe_header_custom_dark.png
     <string name="credits_current_development">सध्याचे विकास</string>
     <string name="credits_prior_development">मागील विकास</string>
     <string name="opensource_licenses">मुक्त-स्रोत परवाने</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">एक पर्याय</string>
-    <string name="easter_egg_pill_message">निळी गोळी घ्या आणि जाहिराती तिथेच राहतील. लाल गोळी घ्या आणि बाइटकोड किती खोल जातो ते पहा.</string>
-    <string name="easter_egg_pill_red">लाल गोळी</string>
-    <string name="easter_egg_pill_blue">निळी गोळी</string>
-    <string name="easter_egg_pill_red_toast">मॅट्रिक्स पार्श्वभूमी अनलॉक झाली</string>
-    <string name="easter_egg_pill_blue_toast">जाहिराती तुमची वाट पाहत असतील</string>
-    <string name="easter_egg_pill_message_again">तुम्ही आधीच मॅट्रिक्समध्ये आहात. लाल गोळी तुम्हाला पुन्हा पावसात टाकते, आणि निळी गोळी तुम्हाला जागे करते.</string>
-    <string name="easter_egg_pill_red_toast_again">पुन्हा पावसात</string>
-    <string name="easter_egg_pill_blue_toast_again">अनप्लग केलेले. परत जाण्याचा मार्ग नेहमी तिथेच आहे.</string>
     <!-- Shared strings -->
     <string name="select_file">फाईल निवडा</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->

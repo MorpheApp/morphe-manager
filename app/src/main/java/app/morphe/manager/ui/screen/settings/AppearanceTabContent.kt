@@ -67,7 +67,6 @@ fun AppearanceTabContent(
     val context = LocalContext.current
     val supportsDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val appLanguage by AppLocale.selected.collectAsStateWithLifecycle()
-    val showGreetingPhrases by themeViewModel.prefs.showGreetingPhrases.getAsState()
     val showRepatchNotice by themeViewModel.prefs.showRepatchNotice.getAsState()
     val colorAccents by themeViewModel.prefs.colorAccents.getAsState()
     val outlines by themeViewModel.prefs.outlines.getAsState()
@@ -78,7 +77,6 @@ fun AppearanceTabContent(
     val backgroundType by themeViewModel.prefs.backgroundType.getAsState()
     val enableParallax by themeViewModel.prefs.enableBackgroundParallax.getAsState()
     val randomInterval by themeViewModel.prefs.randomBackgroundInterval.getAsState()
-    val matrixUnlocked by themeViewModel.prefs.matrixBackgroundUnlocked.getAsState()
     val resolvedRandomBackground by themeViewModel.resolvedRandomBackground.collectAsStateWithLifecycle()
     val effectiveThemeStyle = resolveThemeStyle(themeStyle, supportsDynamicColor)
     val showAppCardColorSetting = effectiveThemeStyle != ThemeStyle.MONOCHROME
@@ -150,11 +148,9 @@ fun AppearanceTabContent(
         )
 
         HomeScreenSection(
-            showGreetingPhrases = showGreetingPhrases,
             showRepatchNotice = showRepatchNotice,
             showSortButton = showSortButton,
             showAppGrouping = showAppGroupingSwitcher,
-            onGreetingPhrasesToggle = { themeViewModel.toggleShowGreetingPhrases(showGreetingPhrases) },
             onRepatchNoticeToggle = { themeViewModel.toggleShowRepatchNotice(showRepatchNotice) },
             onSortButtonToggle = { homeAppButtonPrefs.setShowSortButton(!showSortButton) },
             onAppGroupingToggle = { homeAppButtonPrefs.setShowCategoryViewSwitcher(!showAppGroupingSwitcher) }
@@ -170,8 +166,7 @@ fun AppearanceTabContent(
             onDismiss = { showBackgroundDialog.value = false },
             resolvedRandomBackground = resolvedRandomBackground,
             enableParallax = enableParallax,
-            onParallaxToggle = { themeViewModel.toggleBackgroundParallax(enableParallax) },
-            matrixUnlocked = matrixUnlocked
+            onParallaxToggle = { themeViewModel.toggleBackgroundParallax(enableParallax) }
         )
     }
 
@@ -468,11 +463,9 @@ private fun ColorsSection(
  */
 @Composable
 private fun HomeScreenSection(
-    showGreetingPhrases: Boolean,
     showRepatchNotice: Boolean,
     showSortButton: Boolean,
     showAppGrouping: Boolean,
-    onGreetingPhrasesToggle: () -> Unit,
     onRepatchNoticeToggle: () -> Unit,
     onSortButtonToggle: () -> Unit,
     onAppGroupingToggle: () -> Unit
@@ -483,14 +476,6 @@ private fun HomeScreenSection(
     )
 
     SettingsGroup {
-        SettingsSwitchItem(
-            title = stringResource(R.string.settings_appearance_greeting_phrases),
-            subtitle = stringResource(R.string.settings_appearance_greeting_phrases_subtitle),
-            icon = Icons.Outlined.ChatBubbleOutline,
-            checked = showGreetingPhrases,
-            onToggle = onGreetingPhrasesToggle
-        )
-        SettingsDivider()
         SettingsSwitchItem(
             title = stringResource(R.string.settings_appearance_repatch_notice),
             subtitle = stringResource(R.string.settings_appearance_repatch_notice_description),

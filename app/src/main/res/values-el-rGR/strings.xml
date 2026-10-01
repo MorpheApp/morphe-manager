@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">Δεν είναι διαθέσιμες ενέργειες για αυτήν την κατηγορία</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Ποια εφαρμογή θέλετε να τροποποιήσετε;</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Έτοιμοι να κάνετε τις εφαρμογές θρυλικές και πάλι;</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Προσδεθείτε, ώρα για τροποποίηση</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Aκόμα μια μέρα, ακόμα ένα αριστούργημα χωρίς διαφημίσεις</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Θέλετε να βλέπετε διαφημίσεις; Ούτε εγώ</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Ας συνετίσουμε τις εφαρμογές σας</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Σημερινή πρόγνωση: 100% πιθανότητα τροποποίησης</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Έτοιμοι να αλλάξετε το απογοητευτικό σε εκπληκτικό;</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Σώζουμε εφαρμογές από τον εαυτό τους από σήμερα</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Τροφοδοτούμενοι από καφεΐνη και καλές τροποποιήσεις</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Ανέβα και κάνε ενημέρωση</string>
-    <string name="home_greeting_morning_2">Καλημέρα! Οι εφαρμογές δεν θα κάνουν ενημερώσεις μόνες τους</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Απογευματινή υπνηλία; Κάνε μια ενημέρωση</string>
-    <string name="home_greeting_afternoon_2">Το μεσημεριανό σνακ και μετά οι ενημερώσεις είναι άλλο πράγμα</string>
-    <string name="home_greeting_afternoon_3">Η απογευματινή βάρδια: έκδοση ενημερώσεων</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Καλησπέρα! Οι ενημερώσεις το βράδυ είναι άλλο πράγμα</string>
-    <string name="home_greeting_evening_2">Χαλαρώνεις; Κάνε πρώτα μια ενημέρωση εφαρμογής</string>
-    <string name="home_greeting_evening_3">Τελειώνεις τη δουλειά; Κάνε μια ενημέρωση πρώτα</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Είσαι ακόμα ξύπνιος; Εξίσου ξύπνιες είναι και οι εφαρμογές που χρειάζονται ενημέρωση</string>
-    <string name="home_greeting_late_night_2">Βραδινή συνεδρία ενημερώσεων; Σεβασμός</string>
-    <string name="home_greeting_late_night_3">Λειτουργία νυχτοπούλιου: ενεργοποιημένη</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Ώρα αιχμής για ενημερώσεις… υποτίθεται</string>
-    <string name="home_greeting_super_late_2">Δεν μπορείς να κοιμηθείς; Κάνε μια ενημέρωση</string>
-    <string name="home_greeting_super_late_3">Σε αυτό το σημείο, καλύτερα να μείνεις ξύπνιος και να κάνεις ενημερώσεις</string>
-    <string name="home_greeting_super_late_4">Εσύ και οι servers, και οι δύο ξύπνιοι</string>
-    <string name="home_greeting_super_late_5">Νυχτερινός και παραγωγικός</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Πηγές τροποποιήσεων</string>
     <string name="sources_search">Αναζήτηση πηγών και επιδιορθώσεων</string>
@@ -527,8 +488,6 @@
     <string name="patcher_field_value_stripped">αφαιρέθηκαν</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">διατηρήθηκαν</string>
-    <string name="patcher_tab_logs">Καταγραφές Patcher</string>
-    <string name="patcher_tab_game">Παιχνίδια</string>
     <string name="patcher_logs_waiting">Αναμονή για έξοδο καταγραφής…</string>
     <string name="patcher_logs_lost">Η έξοδος καταγραφής δεν διατηρείται κατά την επανεκκίνηση της εφαρμογής</string>
     <string name="patcher_long_step_warning">Αυτό το βήμα μπορεί να διαρκέσει λίγο. Παρακαλώ περιμένετε…</string>
@@ -555,7 +514,6 @@
     <string name="patcher_install_error_subtitle">Δοκιμάστε να απεγκαταστήσετε και να εγκαταστήσετε ξανά</string>
     <string name="patcher_ready_to_mount_subtitle">Πατήστε το παρακάτω κουμπί για προσάρτηση</string>
     <string name="patcher_patches_excluded_for_installer">Δεν είναι διαθέσιμο για αυτήν τη μέθοδο εγκατάστασης και εξαιρέθηκε: %s</string>
-    <string name="patcher_back_to_game_hint">Πάτα %1$s για να επιστρέψεις στο παιχνίδι σου</string>
     <string name="patcher_storage_permission_dialog_title">Δεν είναι δυνατή η πρόσβαση στη διαδρομή αποθηκευτικού χώρου</string>
     <string name="patcher_incompatible_patcher_title">Απαιτείται ενημέρωση</string>
     <string name="patcher_incompatible_patcher_description">Το πακέτο &lt;b&gt;%1$s&lt;/b&gt; απαιτεί έκδοση επεξεργαστή &lt;b&gt;%2$s&lt;/b&gt; ή νεότερη. Παρακαλώ ενημερώστε το Morphe για να εφαρμόσετε αυτήν την εφαρμογή</string>
@@ -598,32 +556,6 @@
     <string name="patcher_notification_text">Πατήστε για να επιστρέψετε στο πρόγραμμα τροποποίησης</string>
     <string name="patcher_stop_confirm_title">Διακοπή τροποποιητή</string>
     <string name="patcher_stop_confirm_description">Είστε βέβαιοι ότι θέλετε να διακόψετε τη διαδικασία τροποποίησης;</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Μεταμορφώνοντας την εφαρμογή σας σε κάτι καταπληκτικό… 🏆</string>
-    <string name="patcher_message_2">Διδάσκοντας νέες συνήθειες σε παλιές εφαρμογές… 🎩</string>
-    <string name="patcher_message_3">Κάνοντας ψηφιακή βελτίωση στην εφαρμογή σας… 🔧</string>
-    <string name="patcher_message_4">Παρασκευάζοντας ψηφιακή μαγεία… ☕</string>
-    <string name="patcher_message_5">Συνιστάται διάλειμμα για καφέ… ☕</string>
-    <string name="patcher_message_6">Κοίτα έξω, ο καιρός είναι ωραίος… 🌤️</string>
-    <string name="patcher_message_7">Ρυθμίζοντας τα 1 και 0… 🤖</string>
-    <string name="patcher_message_8">Ξεμπέρδεμα ψηφιακών σπαγγέτι… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Διόρθωση σφαλμάτων στην μη τροποποιημένη εφαρμογή… 🪲</string>
-    <string name="patcher_message_10">Οι σπουδαίες τροποποιήσεις αξίζουν την αναμονή… ⏳</string>
-    <string name="patcher_message_11">Γυαλίζοντας τα πίξελ μέχρι να λάμψουν… 💎</string>
-    <string name="patcher_message_12">Παρακαλώ παραμείνετε καθιστοί μέχρι ο πιλότος να σβήσει την πινακίδα \"Τροποποίηση σε εξέλιξη\"... 💺✈️</string>
-    <string name="patcher_message_13">Ετοιμάζουμε την τροποποιημένη σας εφαρμογή, ζεστή και φρέσκια... 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Διαπραγματεύοντας ευγενικά με το bytecode… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Όλα τα συστήματα είναι λειτουργικά... η τροχιά τροποποίησης είναι σταθερή... 🚀</string>
-    <string name="patcher_message_16">Εξάγοντας επιπλέον ενέργεια, σαν χυμό από ψηφιακό λεμόνι... 🍋</string>
-    <string name="patcher_message_17">Ενθαρρύνοντας την εφαρμογή να αποδεχτεί τον νέο, καλύτερο εαυτό της... 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Αλλάζοντας την υπέρθεση της εφαρμογής από μη τροποποιημένη σε τροποποιημένη... 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Η εφαρμογή σας έχει πυρετό, και η μόνη συνταγή είναι περισσότερες τροποποιήσεις... 🩺🔔</string>
-    <string name="patcher_message_20">Αφαίρεση ανοησιών. Παρακαλούμε περιμένετε… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Τροποποίηση εφαρμογής</string>
     <string name="memory_usage">Χρήση μνήμης</string>
@@ -653,29 +585,6 @@
     <string name="package_name">Όνομα πακέτου</string>
     <string name="failed_to_mount">Αδυναμία προσάρτησης: %s</string>
     <string name="failed_to_unmount">Αποτυχία αποπροσάρτησης: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Βαθμολογία %s</string>
-    <string name="mini_game_best">Καλύτερη %s</string>
-    <string name="mini_game_new_record">Νέο ρεκόρ!</string>
-    <string name="mini_game_game_over">Τέλος παιχνιδιού</string>
-    <string name="mini_game_try_again">Δοκιμάστε ξανά</string>
-    <string name="mini_game_paused">Σε παύση</string>
-    <string name="mini_game_resume">Συνέχεια</string>
-    <string name="mini_game_restart">Ξεκινήστε από την αρχή</string>
-    <string name="mini_game_change">Επιλέξτε άλλο παιχνίδι</string>
-    <string name="mini_game_2048_picker_subtitle">Σύρετε τα πλακίδια για να τα συγχωνεύσετε</string>
-    <string name="mini_game_flappy_picker_subtitle">Πατήστε για να πετάξετε ανάμεσα από τους σωλήνες</string>
-    <string name="mini_game_flappy_tap_to_start">Πατήστε για να πετάξετε</string>
-    <string name="mini_game_snake_picker_subtitle">Φάτε φαγητό, μην χτυπήσετε τον εαυτό σας</string>
-    <string name="mini_game_snake_swipe_to_start">Σύρετε για να ξεκινήσετε</string>
-    <string name="mini_game_dino_picker_subtitle">Πατήστε για να πηδήξετε πάνω από τους κάκτους</string>
-    <string name="mini_game_dino_tap_to_start">Πατήστε για να τρέξετε</string>
-    <string name="mini_game_blocks_picker_subtitle">Ταίριαξε τα σχήματα, καθάρισε τις γραμμές</string>
-    <string name="mini_game_blocks_tap_to_start">Πατήστε για περιστροφή, σύρετε για μετακίνηση, σύρετε προς τα κάτω για να αφήσετε</string>
-    <string name="mini_game_bricks_picker_subtitle">Χτύπα την μπάλα, καθάρισε τον τοίχο</string>
-    <string name="mini_game_bricks_tap_to_start">Σύρε για να στοχεύσεις, πάτησε για να εκτοξεύσεις</string>
-    <string name="mini_game_miner_picker_subtitle">Πατήστε για άνοιγμα, κρατήστε για σήμανση</string>
-    <string name="mini_game_pairs_picker_subtitle">Αναποδογυρίστε τις κάρτες, βρείτε το ζευγάρι</string>
     <!-- Settings -->
     <string name="appearance">Εμφάνιση</string>
     <string name="advanced">Για προχωρημένους</string>
@@ -730,8 +639,6 @@
     <string name="settings_appearance_ui_scale_preview_subtitle">Κείμενο και στοιχεία ελέγχου σε αυτήν την κλίμακα</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Αρχική οθόνη</string>
-    <string name="settings_appearance_greeting_phrases">Φράσεις υποδοχής</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Εμφάνιση μηνύματος υποδοχής στην αρχική οθόνη</string>
     <string name="settings_appearance_app_grouping">Ομαδοποίηση εφαρμογών</string>
     <string name="settings_appearance_app_grouping_description">Εμφάνιση ενός διακόπτη για ομαδοποίηση εφαρμογών ανά πηγή ή κατηγορία</string>
     <string name="settings_appearance_repatch_notice">Ειδοποίηση επανάληψης τροποποιήσεων</string>
@@ -1163,16 +1070,6 @@ morphe_header_custom_dark.png
     <string name="credits_current_development">Τρέχουσα ανάπτυξη</string>
     <string name="credits_prior_development">Προηγούμενη ανάπτυξη</string>
     <string name="opensource_licenses">Άδειες ανοικτού κώδικα</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">Μια επιλογή</string>
-    <string name="easter_egg_pill_message">Πάρε το μπλε χάπι και οι διαφημίσεις παραμένουν ακριβώς εκεί που είναι. Πάρε το κόκκινο και δες πόσο βαθιά φτάνει ο bytecode.</string>
-    <string name="easter_egg_pill_red">Κόκκινο χάπι</string>
-    <string name="easter_egg_pill_blue">Μπλε χάπι</string>
-    <string name="easter_egg_pill_red_toast">Το φόντο του Matrix ξεκλειδώθηκε</string>
-    <string name="easter_egg_pill_blue_toast">Οι διαφημίσεις θα σε περιμένουν</string>
-    <string name="easter_egg_pill_message_again">Είσαι ήδη στο Matrix. Το κόκκινο χάπι σε ρίχνει πίσω στη βροχή, το μπλε σε ξυπνάει.</string>
-    <string name="easter_egg_pill_red_toast_again">Πίσω στη βροχή</string>
-    <string name="easter_egg_pill_blue_toast_again">Αποσυνδεδεμένος. Ο δρόμος επιστροφής είναι εκεί που ήταν πάντα.</string>
     <!-- Shared strings -->
     <string name="select_file">Επιλογή αρχείου</string>
     <string name="select_files">Επιλογή αρχείων</string>

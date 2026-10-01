@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">Pro tuto kategorii nejsou k dispozici žádné akce</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Kterou aplikaci chcete záplatovat?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Připraveni učinit aplikace znovu legendárními?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Připoutejte se, je čas na záplatování</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Další den, další mistrovské dílo bez reklam</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Chcete koukat na reklamy? My také ne</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Pojďme zkrotit vaše aplikace</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Dnešní předpověď: 100% šance na záplatování</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Připraveni změnit nudu v pecku?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Už od dneška zachraňujeme aplikace před nimi samotnými</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Běží na kofeinu a dobrých záplatách</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Vstaň a záplatuj</string>
-    <string name="home_greeting_morning_2">Dobré ráno! Aplikace se samy záplatovat nebudou</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Odpolední krize? Záplatuj něco</string>
-    <string name="home_greeting_afternoon_2">Poobědové záplaty mají jiné grády</string>
-    <string name="home_greeting_afternoon_3">Odpolední směna: edice záplat</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Dobrý večer! Večerní záplaty mají grády</string>
-    <string name="home_greeting_evening_2">Odpočíval jste? Nejdřív záplatujte aplikaci</string>
-    <string name="home_greeting_evening_3">Odcházíte? Nejdříve záplatujte něco</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Stále vzhůru? Aplikace, které potřebují záplatu, také.</string>
-    <string name="home_greeting_late_night_2">Pozdní noční záplata? Respekt</string>
-    <string name="home_greeting_late_night_3">Mód noční sovy: aktivován</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Špička pro instalaci záplat… </string>
-    <string name="home_greeting_super_late_2">Nemůžete spát? Záplatujte něco</string>
-    <string name="home_greeting_super_late_3">V tomto bodě se jen drž a záplatuj</string>
-    <string name="home_greeting_super_late_4">Ty a servery, oba vzhůru</string>
-    <string name="home_greeting_super_late_5">Noční a produktivní</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Zdroje záplat</string>
     <string name="sources_search">Hledat zdroje a záplaty</string>
@@ -527,8 +488,6 @@ Vnějní zóna (přerušovaná): může být ořezaná maskou spouštěčé - ud
     <string name="patcher_field_value_stripped">odstraněno</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">Zachováno</string>
-    <string name="patcher_tab_logs">Protokoly záplat</string>
-    <string name="patcher_tab_game">Hry</string>
     <string name="patcher_logs_waiting">Čekání na výstup logu…</string>
     <string name="patcher_logs_lost">Výstup logu není uchováván mezi restartováním aplikace</string>
     <string name="patcher_long_step_warning">Tento krok může chvíli trvat. Počkejte prosím…</string>
@@ -555,7 +514,6 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="patcher_install_error_subtitle">Zkuste odinstalovat a nainstalovat znovu</string>
     <string name="patcher_ready_to_mount_subtitle">Stiskněte tlačítko níže pro zavedení</string>
     <string name="patcher_patches_excluded_for_installer">Není k dispozici pro tuto metodu instalace a je vyloučeno: %s</string>
-    <string name="patcher_back_to_game_hint">Klepněte na %1$s pro návrat do hry</string>
     <string name="patcher_storage_permission_dialog_title">Nelze přistupovat k cestě úložiště</string>
     <string name="patcher_incompatible_patcher_title">Aktualizace požadována</string>
     <string name="patcher_incompatible_patcher_description">Balíček &lt;b&gt;%1$s&lt;/b&gt; vyžaduje verzi opravovače &lt;b&gt;%2$s&lt;/b&gt; nebo novější. Aktualizujte Morphe pro opravu této aplikace</string>
@@ -598,32 +556,6 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="patcher_notification_text">Klepněte pro návrat k patcheru</string>
     <string name="patcher_stop_confirm_title">Zastavit patcher</string>
     <string name="patcher_stop_confirm_description">Opravdu chcete zastavit proces záplatování?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Morphuji vaši aplikaci v něco úžasného… 🏆</string>
-    <string name="patcher_message_2">Učím staré aplikace novým kouskům… 🐕</string>
-    <string name="patcher_message_3">Dávám vaší aplikaci digitální tuning… 🔧</string>
-    <string name="patcher_message_4">Vařím digitální magii… ☕</string>
-    <string name="patcher_message_5">Pauza na kávu doporučena… ☕</string>
-    <string name="patcher_message_6">Podívejte se ven, je tam pěkně… 🌤️</string>
-    <string name="patcher_message_7">Upravuji jedničky a nuly… 🤖</string>
-    <string name="patcher_message_8">Rozmotávám digitální špagety… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Opravuji chyby v nezáplatované aplikaci… 🪲</string>
-    <string name="patcher_message_10">Skvělé záplaty stojí za počkání… ⏳</string>
-    <string name="patcher_message_11">Leštím pixely, dokud nezačnou zářit… 💎</string>
-    <string name="patcher_message_12">Prosím, zůstaňte na svých místech, než kapitán zhasne značku \"Probíhá záplatování\"… 💺✈️</string>
-    <string name="patcher_message_13">Vaše záplatovaná aplikace už se peče… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Zdvořile vyjednávám se zdrojovým kódem… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Všechny systémy v normě… kurz k záplatám stabilní… 🚀</string>
-    <string name="patcher_message_16">Ždímám z aplikace extra výkon, jako šťávu z digitálního citronu… 🍋</string>
-    <string name="patcher_message_17">Povzbuzuji aplikaci, aby přijala své nové, lepší já… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Měním superpozici aplikace z nezáplatované na záplatovanou… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Vaše aplikace má horečku a jediným lékem je více záplat… 🩺🔔</string>
-    <string name="patcher_message_20">Odstraňuji nesmysly. Počkejte, prosím… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Záplatování aplikace</string>
     <string name="memory_usage">Použití paměti</string>
@@ -653,29 +585,6 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="package_name">Název balíčku</string>
     <string name="failed_to_mount">Selhalo připojení: %s</string>
     <string name="failed_to_unmount">Selhalo odejmutí: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Skóre %s</string>
-    <string name="mini_game_best">Nejlepší %s</string>
-    <string name="mini_game_new_record">Nový rekord!</string>
-    <string name="mini_game_game_over">Konec hry</string>
-    <string name="mini_game_try_again">Zkusit znovu</string>
-    <string name="mini_game_paused">Pozastaveno</string>
-    <string name="mini_game_resume">Pokračovat</string>
-    <string name="mini_game_restart">Začít znovu</string>
-    <string name="mini_game_change">Vybrat jinou hru</string>
-    <string name="mini_game_2048_picker_subtitle">Skládejte dlaždice, abyste je spojili</string>
-    <string name="mini_game_flappy_picker_subtitle">Klepnutím proleťte trubkami</string>
-    <string name="mini_game_flappy_tap_to_start">Klepnutím pro létání</string>
-    <string name="mini_game_snake_picker_subtitle">Jezte jídlo, nenarážejte do sebe</string>
-    <string name="mini_game_snake_swipe_to_start">Přejeďte prstem a začněte</string>
-    <string name="mini_game_dino_picker_subtitle">Klepnutím přeskočte kaktusy</string>
-    <string name="mini_game_dino_tap_to_start">Klepnutím pro běh</string>
-    <string name="mini_game_blocks_picker_subtitle">Sestav tvary, vyčisti řady</string>
-    <string name="mini_game_blocks_tap_to_start">Klepnutím otočíte, tažením posunete, přejetím dolů shodíte</string>
-    <string name="mini_game_bricks_picker_subtitle">Odrážej míč, zboř zeď</string>
-    <string name="mini_game_bricks_tap_to_start">Táhni pro zamíření, klepni pro odpálení</string>
-    <string name="mini_game_miner_picker_subtitle">Klepnutím otevřete, podržením umístíte vlajku</string>
-    <string name="mini_game_pairs_picker_subtitle">Otočte karty, najděte shodu</string>
     <!-- Settings -->
     <string name="appearance">Vzhled</string>
     <string name="advanced">Pokročilé</string>
@@ -729,8 +638,6 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="settings_appearance_ui_scale_preview_subtitle">Text a ovládací prvky v tomto měřítku</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Domovská obrazovka</string>
-    <string name="settings_appearance_greeting_phrases">Pozdravné fráze</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Zobrazit pozdravný vzkaz na domovské obrazovce</string>
     <string name="settings_appearance_app_grouping">Kreslení aplikací</string>
     <string name="settings_appearance_app_grouping_description">Zobrazit přepínač pro seskupení aplikací podle zdroje nebo kategorie</string>
     <string name="settings_appearance_repatch_notice">Oznámení o opětovné záplatě</string>
@@ -1162,16 +1069,6 @@ Podrobnosti: %2$s"</string>
     <string name="credits_current_development">Současný vývoj</string>
     <string name="credits_prior_development">Předchozí vývoj</string>
     <string name="opensource_licenses">Open-source licence</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">Volba</string>
-    <string name="easter_egg_pill_message">Vezmi si modrou pilulku a reklamy zůstanou přesně tam, kde jsou. Vezmi si červenou a uvidíš, jak hluboko sahá bytecode.</string>
-    <string name="easter_egg_pill_red">Červená pilulka</string>
-    <string name="easter_egg_pill_blue">Modrá pilulka</string>
-    <string name="easter_egg_pill_red_toast">Pozadí Matrixu odemčeno</string>
-    <string name="easter_egg_pill_blue_toast">Budou na vás čekat reklamy.</string>
-    <string name="easter_egg_pill_message_again">Už jste v Matrixu. Červená pilulka vás vrátí zpět do deště, modrá vás probudí.</string>
-    <string name="easter_egg_pill_red_toast_again">Zpět v dešti</string>
-    <string name="easter_egg_pill_blue_toast_again">Odpojen. Cesta zpět je tam, kde vždy byla.</string>
     <!-- Shared strings -->
     <string name="select_file">Vyberte soubor</string>
     <string name="select_files">Vyberte soubory</string>

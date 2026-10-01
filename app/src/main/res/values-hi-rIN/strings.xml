@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">इस श्रेणी के लिए क्रियाएँ उपलब्ध नहीं हैं</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">आप किस ऐप को पैच करना चाहते हैं?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">लेजेंडरी बनाना फिर से तैयार हैं?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">तैयार हो जाइए, यह पैचिंग का समय है</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">एक और दिन, एक और विज्ञापन-ब्लॉक किया गया मास्टरपीस</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">विज्ञापन देखना चाहते हैं? मैं भी नहीं।</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">आइए आपके ऐप्स को ठीक से काम करने लायक बनाते हैं</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">आज का पूर्वानुमान: पैचिंग की 100% संभावना</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">साधारण चीज़ों को शानदार में बदलने के लिए तैयार हैं?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">आज से ऐप्स को खुद से बचा रहे हैं</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">कैफीन और अच्छे पैच द्वारा संचालित</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">उठो और पैच करो</string>
-    <string name="home_greeting_morning_2">शुभ प्रभात! ऐप्स खुद से पैच नहीं करेंगे</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">दोपहर में सुस्ती? कुछ पैच करो</string>
-    <string name="home_greeting_afternoon_2">दोपहर के भोजन के बाद पैचिंग अलग ही लगती है</string>
-    <string name="home_greeting_afternoon_3">दोपहर की शिफ्ट: पैच संस्करण</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">शुभ संध्या! शाम के पैच अलग ही लगते हैं</string>
-    <string name="home_greeting_evening_2">शांत हो रहे हैं? पहले किसी ऐप को पैच करें</string>
-    <string name="home_greeting_evening_3">काम खत्म हो गया? पहले कुछ पैच करें</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">अभी भी जागे हैं? वे ऐप भी हैं जिन्हें पैच करने की आवश्यकता है</string>
-    <string name="home_greeting_late_night_2">देर रात पैच सत्र? सम्मान</string>
-    <string name="home_greeting_late_night_3">नाइट उल्लू मोड: सक्रिय</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">पैचिंग का चरम समय… कथित तौर पर</string>
-    <string name="home_greeting_super_late_2">सो नहीं पा रहे? कुछ पैच करें</string>
-    <string name="home_greeting_super_late_3">इस बिंदु पर, बस जागते रहें और पैच करते रहें</string>
-    <string name="home_greeting_super_late_4">आप और सर्वर, दोनों जाग रहे हैं</string>
-    <string name="home_greeting_super_late_5">रात के समय और उत्पादक</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">पैच स्रोत</string>
     <string name="sources_search">स्रोत और पैच खोजें</string>
@@ -527,8 +488,6 @@
     <string name="patcher_field_value_stripped">हटाई गईं</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">रखी गईं</string>
-    <string name="patcher_tab_logs">पैचर लॉग</string>
-    <string name="patcher_tab_game">खेल</string>
     <string name="patcher_logs_waiting">लॉग आउटपुट की प्रतीक्षा की जा रही है…</string>
     <string name="patcher_logs_lost">ऐप रीस्टार्ट होने पर लॉग आउटपुट सहेजा नहीं जाता है</string>
     <string name="patcher_long_step_warning">This step may take a while. Please wait…</string>
@@ -555,7 +514,6 @@
     <string name="patcher_install_error_subtitle">Try uninstalling and installing again</string>
     <string name="patcher_ready_to_mount_subtitle">Press the button below to mount</string>
     <string name="patcher_patches_excluded_for_installer">यह इंस्टॉलेशन विधि के लिए उपलब्ध नहीं है और बहिष्कृत है: %s</string>
-    <string name="patcher_back_to_game_hint">अपने गेम पर वापस जाने के लिए %1$s टैप करें</string>
     <string name="patcher_storage_permission_dialog_title">स्तोरेज पथ तक पहुंच नहीं हो सकती है</string>
     <string name="patcher_incompatible_patcher_title">अपडेट आवश्यक है</string>
     <string name="patcher_incompatible_patcher_description">बंडल &lt;b&gt;%1$s&lt;/b&gt; को पैचर संस्करण &lt;b&gt;%2$s&lt;/b&gt; या नया संस्करण की आवश्यकता है। कृपया इस ऐप को पैच करने के लिए Morphe को अपडेट करें।</string>
@@ -598,32 +556,6 @@
     <string name="patcher_notification_text">Tap to return to the patcher</string>
     <string name="patcher_stop_confirm_title">Stop patcher</string>
     <string name="patcher_stop_confirm_description">Are you sure you want to stop the patching process?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Yes, I have it</string>
-    <string name="patcher_message_2">No, help me find it</string>
-    <string name="patcher_message_3">Teaching old apps new tricks… 🎩</string>
-    <string name="patcher_message_4">Giving your app a digital tune-up… 🔧</string>
-    <string name="patcher_message_5">Brewing digital magic… ☕</string>
-    <string name="patcher_message_6">Coffee break recommended… ☕</string>
-    <string name="patcher_message_7">1s और 0s समायोजित किए जा रहे हैं… 🤖</string>
-    <string name="patcher_message_8">Adjusting 1\'s and 0\'s… 🤖</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">अपैच किए गए ऐप में बग्स को ठीक कर रहा हूँ… 🪲</string>
-    <string name="patcher_message_10">Fixing bugs in the unpatched app… 🐞</string>
-    <string name="patcher_message_11">Great patches are worth the wait… ⏳</string>
-    <string name="patcher_message_12">Polishing pixels until they shine… 💎</string>
-    <string name="patcher_message_13">Please remain seated until the captain turns off the \"Patching in progress\" sign… 💺✈️</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Cooking up your patched app, hot and fresh… 🍳</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Negotiating politely with bytecode… 🤝</string>
-    <string name="patcher_message_16">All systems nominal… patching trajectory is stable… 🚀</string>
-    <string name="patcher_message_17">Squeezing out extra power, like juice from a digital lemon… 🍋</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Encouraging the app to accept its new, better self… 🌱</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">आपकी ऐप को एक बुखार है, और इसके लिए केवल एक मेडिकल रेफरेंस है... 🩺🔔</string>
-    <string name="patcher_message_20">अनावश्यक को हटाया जा रहा है। कृपया प्रतीक्षा करें… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">एप्लिकेशन को पैच करना</string>
     <string name="memory_usage">मेमोरी का उपयोग</string>
@@ -653,29 +585,6 @@
     <string name="package_name">Package name</string>
     <string name="failed_to_mount">%s को माउंट करने में विफल</string>
     <string name="failed_to_unmount">%s को अनमाउंट करने में विफल।</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">स्कोर %s</string>
-    <string name="mini_game_best">सर्वश्रेष्ठ %s</string>
-    <string name="mini_game_new_record">नया रिकॉर्ड!</string>
-    <string name="mini_game_game_over">खेल खत्म</string>
-    <string name="mini_game_try_again">फिर से प्रयास करें</string>
-    <string name="mini_game_paused">विराम</string>
-    <string name="mini_game_resume">जारी रखें</string>
-    <string name="mini_game_restart">शुरू से खेलें</string>
-    <string name="mini_game_change">कोई दूसरा गेम चुनें</string>
-    <string name="mini_game_2048_picker_subtitle">टाइल्स को मर्ज करने के लिए स्लाइड करें</string>
-    <string name="mini_game_flappy_picker_subtitle">पाइपों के बीच से उड़ने के लिए टैप करें</string>
-    <string name="mini_game_flappy_tap_to_start">उड़ने के लिए टैप करें</string>
-    <string name="mini_game_snake_picker_subtitle">भोजन खाएं, खुद को मत मारें</string>
-    <string name="mini_game_snake_swipe_to_start">शुरू करने के लिए स्वाइप करें</string>
-    <string name="mini_game_dino_picker_subtitle">कैक्टस के ऊपर कूदने के लिए टैप करें</string>
-    <string name="mini_game_dino_tap_to_start">दौड़ने के लिए टैप करें</string>
-    <string name="mini_game_blocks_picker_subtitle">आकृतियों को मिलाएं, रेखाएँ साफ़ करें</string>
-    <string name="mini_game_blocks_tap_to_start">घुमाने के लिए टैप करें, स्थानांतरित करने के लिए स्वाइप करें, छोड़ने के लिए नीचे स्वाइप करें</string>
-    <string name="mini_game_bricks_picker_subtitle">गेंद को उछालें, दीवार साफ़ करें</string>
-    <string name="mini_game_bricks_tap_to_start">लक्ष्य के लिए खींचें, लॉन्च करने के लिए टैप करें</string>
-    <string name="mini_game_miner_picker_subtitle">खोलने के लिए टैप करें, झंडा लगाने के लिए दबाकर रखें</string>
-    <string name="mini_game_pairs_picker_subtitle">कार्ड पलटें, मिलान खोजें</string>
     <!-- Settings -->
     <string name="appearance">स्वरूप</string>
     <string name="advanced">उन्नत</string>
@@ -730,8 +639,6 @@
     <string name="settings_appearance_ui_scale_preview_subtitle">इस स्केल पर पाठ और नियंत्रण</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">मुखपृष्ठ</string>
-    <string name="settings_appearance_greeting_phrases">अभिवादन वाक्यांश</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">मुखपृष्ठ पर अभिवादन संदेश दिखाएँ</string>
     <string name="settings_appearance_app_grouping">ऐप समूहीकरण</string>
     <string name="settings_appearance_app_grouping_description">स्रोत या श्रेणी के आधार पर ऐप्स को समूहित करने के लिए एक स्विचर दिखाएँ</string>
     <string name="settings_appearance_repatch_notice">पुनः पैच सूचना</string>
@@ -1163,16 +1070,6 @@ morphe_header_custom_dark.png
     <string name="credits_current_development">वर्तमान विकास</string>
     <string name="credits_prior_development">पिछला विकास</string>
     <string name="opensource_licenses">ओपन-सोर्स लाइसेंस</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">एक विकल्प</string>
-    <string name="easter_egg_pill_message">नीली गोली लो और विज्ञापन ठीक वहीं रहेंगे। लाल गोली लो और देखो कि बाइटकोड कितना गहरा है।</string>
-    <string name="easter_egg_pill_red">लाल गोली</string>
-    <string name="easter_egg_pill_blue">नीली गोली</string>
-    <string name="easter_egg_pill_red_toast">मैट्रिक्स बैकग्राउंड अनलॉक हो गया</string>
-    <string name="easter_egg_pill_blue_toast">विज्ञापन आपका इंतज़ार कर रहे होंगे</string>
-    <string name="easter_egg_pill_message_again">आप पहले से ही मैट्रिक्स में हैं। लाल गोली आपको वापस बारिश में गिरा देती है, नीली गोली आपको जगा देती है</string>
-    <string name="easter_egg_pill_red_toast_again">बारिश में वापस</string>
-    <string name="easter_egg_pill_blue_toast_again">अनप्लग किया गया। वापसी का रास्ता वही है जहाँ वह हमेशा था</string>
     <!-- Shared strings -->
     <string name="select_file">फ़ाइल चुनें</string>
     <string name="select_files">फ़ाइलें चुनें</string>

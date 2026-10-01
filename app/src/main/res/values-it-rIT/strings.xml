@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">Azioni non disponibili per questa categoria</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Quale app vuoi patchare?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Pronto a rendere le app nuovamente leggendarie?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Allaccia le cinture, è il momento di patchare</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Un altro giorno, un altro capolavoro senza pubblicità</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Vuoi guardare gli annunci? Neanch\'io</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Facciamo comportare le tue app come vuoi tu</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Previsioni per oggi: probabilità di patch del 100%</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Pronti a trasformare il deludente in eccezionale?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Salviamo le app da loro stesse sin da oggi</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Alimentato da caffeina e buone patch</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Svegliati e applica le patch</string>
-    <string name="home_greeting_morning_2">Buongiorno! Le app non si patchano da sole</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Calo di rendimento nel pomeriggio? Applica una patch</string>
-    <string name="home_greeting_afternoon_2">Patch post-pranzo, una sensazione diversa</string>
-    <string name="home_greeting_afternoon_3">Turno pomeridiano: edizione patch</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Buonasera! Le patch serali sono un\'altra cosa</string>
-    <string name="home_greeting_evening_2">Stai per rilassarti? Applica prima una patch</string>
-    <string name="home_greeting_evening_3">Stai per uscire? Applica prima una patch</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Ancora sveglio/a? Anche le app che devono essere patchate lo sono</string>
-    <string name="home_greeting_late_night_2">Sessione di patch notturna? Ottimo</string>
-    <string name="home_greeting_late_night_3">Modalità gufo notturno: attivata</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Ore di picco per le patch… si dice</string>
-    <string name="home_greeting_super_late_2">Non riesci a dormire? Applica una patch</string>
-    <string name="home_greeting_super_late_3">A questo punto, resta sveglio/a e applica le patch</string>
-    <string name="home_greeting_super_late_4">Tu e i server, entrambi svegli</string>
-    <string name="home_greeting_super_late_5">Notturno e produttivo/a</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Fonti delle patch</string>
     <string name="sources_search">Cerca fonti e patch</string>
@@ -527,8 +488,6 @@ Zona esterna (tratteggiata): potrebbe essere ritagliata dalla maschera di avvio:
     <string name="patcher_field_value_stripped">rimosse</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">mantenute</string>
-    <string name="patcher_tab_logs">Log del patcher</string>
-    <string name="patcher_tab_game">Giochi</string>
     <string name="patcher_logs_waiting">In attesa dell\'output del log…</string>
     <string name="patcher_logs_lost">L\'output del log non viene mantenuto tra un riavvio dell\'app e l\'altro</string>
     <string name="patcher_long_step_warning">Questo passaggio potrebbe richiedere un po\'  di tempo. Si prega di attendere…</string>
@@ -555,7 +514,6 @@ La disinstallazione cancellerà definitivamente tutti i dati dell'app."</string>
     <string name="patcher_install_error_subtitle">Prova a disinstallare e installare di nuovo</string>
     <string name="patcher_ready_to_mount_subtitle">Premi il pulsante qui sotto per montare</string>
     <string name="patcher_patches_excluded_for_installer">Non disponibile per questo metodo di installazione ed escluso: %s</string>
-    <string name="patcher_back_to_game_hint">Tocca %1$s per tornare al tuo gioco</string>
     <string name="patcher_storage_permission_dialog_title">Non è possibile accedere alla cartella di archiviazione</string>
     <string name="patcher_incompatible_patcher_title">Aggiornamento richiesto</string>
     <string name="patcher_incompatible_patcher_description">Il bundle &lt;b&gt;%1$s&lt;/b&gt; richiede la versione del patcher &lt;b&gt;%2$s&lt;/b&gt; o successiva. Aggiorna Morphe per poter patchare questa app</string>
@@ -598,32 +556,6 @@ La disinstallazione cancellerà definitivamente tutti i dati dell'app."</string>
     <string name="patcher_notification_text">Tocca per tornare al patcher</string>
     <string name="patcher_stop_confirm_title">Interrompi il patcher</string>
     <string name="patcher_stop_confirm_description">Sei sicuro di voler interrompere il processo di patching?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Trasformazione della tua app in qualcosa di fantastico… 🏆</string>
-    <string name="patcher_message_2">Insegnando alle app vecchie trucchi nuovi… 🎩</string>
-    <string name="patcher_message_3">Dando alla tua app una messa a punto digitale… 🔧</string>
-    <string name="patcher_message_4">Stiamo creando magia digitale… ☕</string>
-    <string name="patcher_message_5">Pausa caffè consigliata… ☕</string>
-    <string name="patcher_message_6">Guarda fuori, è bello là fuori… 🌤️</string>
-    <string name="patcher_message_7">Regolando 1 e 0… 🤖</string>
-    <string name="patcher_message_8">Districando gli spaghetti digitali… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Risolvendo i problemi nell\'app non patchata… 🪲</string>
-    <string name="patcher_message_10">Le grandi patch valgono l\'attesa… ⏳</string>
-    <string name="patcher_message_11">Lucidando i pixels finché non brillano… 💎</string>
-    <string name="patcher_message_12">Si prega di rimanere seduti fino a quando il capitano non spegne il cartello \"Patching in corso\"... 💺✈️</string>
-    <string name="patcher_message_13">Cucinando la tua app patchata, calda e fresca… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Negoziando cortesemente con il bytecode… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Tutti i sistemi nella norma… traiettoria di patching stabile… 🚀</string>
-    <string name="patcher_message_16">Spremendo potenza extra, come il succo da un limone digitale… 🍋</string>
-    <string name="patcher_message_17">Incoraggiando l\'app ad accettare il suo nuovo, migliore sé… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Cambiando la sovrapposizione dell\'app da non patchata a patchata… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">La tua app ha la febbre e l\'unica cura sono più patch… 🩺🔔</string>
-    <string name="patcher_message_20">Rimuovendo le sciocchezze. Attendere prego… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Applicazione delle patch</string>
     <string name="memory_usage">Uso della memoria</string>
@@ -653,29 +585,6 @@ La disinstallazione cancellerà definitivamente tutti i dati dell'app."</string>
     <string name="package_name">Nome pacchetto</string>
     <string name="failed_to_mount">Impossibile montare: %s</string>
     <string name="failed_to_unmount">Impossibile smontare: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Punteggio %s</string>
-    <string name="mini_game_best">Miglior %s</string>
-    <string name="mini_game_new_record">Nuovo record!</string>
-    <string name="mini_game_game_over">Game Over</string>
-    <string name="mini_game_try_again">Riprova</string>
-    <string name="mini_game_paused">In pausa</string>
-    <string name="mini_game_resume">Continua</string>
-    <string name="mini_game_restart">Ricomincia</string>
-    <string name="mini_game_change">Scegli un altro gioco</string>
-    <string name="mini_game_2048_picker_subtitle">Fai scorrere le tessere per unirle</string>
-    <string name="mini_game_flappy_picker_subtitle">Tocca per volare tra i tubi</string>
-    <string name="mini_game_flappy_tap_to_start">Tocca per volare</string>
-    <string name="mini_game_snake_picker_subtitle">Mangia il cibo, non colpire te stesso</string>
-    <string name="mini_game_snake_swipe_to_start">Scorri per iniziare</string>
-    <string name="mini_game_dino_picker_subtitle">Tocca per saltare sopra i cactus</string>
-    <string name="mini_game_dino_tap_to_start">Tocca per correre</string>
-    <string name="mini_game_blocks_picker_subtitle">Incastra le forme, elimina le linee</string>
-    <string name="mini_game_blocks_tap_to_start">Tocca per ruotare, scorri per muovere, scorri in basso per lasciar cadere</string>
-    <string name="mini_game_bricks_picker_subtitle">Fai rimbalzare la palla, distruggi il muro</string>
-    <string name="mini_game_bricks_tap_to_start">Trascina per mirare, tocca per lanciare</string>
-    <string name="mini_game_miner_picker_subtitle">Tocca per aprire, tieni premuto per segnalare</string>
-    <string name="mini_game_pairs_picker_subtitle">Gira le carte, trova la coppia</string>
     <!-- Settings -->
     <string name="appearance">Aspetto</string>
     <string name="advanced">Avanzate</string>
@@ -730,8 +639,6 @@ La disinstallazione cancellerà definitivamente tutti i dati dell'app."</string>
     <string name="settings_appearance_ui_scale_preview_subtitle">Testo e controlli a questa scala</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Schermata home</string>
-    <string name="settings_appearance_greeting_phrases">Frasi di saluto</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Mostra un messaggio di saluto nella schermata principale</string>
     <string name="settings_appearance_app_grouping">Raggruppamento app</string>
     <string name="settings_appearance_app_grouping_description">Mostra un interruttore per raggruppare le app per origine o categoria</string>
     <string name="settings_appearance_repatch_notice">Avviso di re-patch</string>
@@ -1163,16 +1070,6 @@ Dettagli: %2$s"</string>
     <string name="credits_current_development">Sviluppo attuale</string>
     <string name="credits_prior_development">Sviluppo precedente</string>
     <string name="opensource_licenses">Licenze open-source</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">Una scelta</string>
-    <string name="easter_egg_pill_message">Prendi la pillola blu e gli annunci restano esattamente dove sono. Prendi quella rossa e vedi quanto è profondo il bytecode</string>
-    <string name="easter_egg_pill_red">Pillola rossa</string>
-    <string name="easter_egg_pill_blue">Pillola blu</string>
-    <string name="easter_egg_pill_red_toast">Sfondo Matrix sbloccato</string>
-    <string name="easter_egg_pill_blue_toast">Gli annunci ti aspetteranno</string>
-    <string name="easter_egg_pill_message_again">Sei già nella Matrix. La pillola rossa ti riporta nella pioggia, quella blu ti sveglia</string>
-    <string name="easter_egg_pill_red_toast_again">Di nuovo nella pioggia</string>
-    <string name="easter_egg_pill_blue_toast_again">Scollegato. La via del ritorno è dove è sempre stata</string>
     <!-- Shared strings -->
     <string name="select_file">Seleziona file</string>
     <string name="select_files">Seleziona file</string>

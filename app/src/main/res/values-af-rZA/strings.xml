@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">Aksies nie beskikbaar vir hierdie kategorie nie</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Watter program wil jy verander?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Klaar om programme weer legendaries te maak?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Maak gereed, dit is verandering tyd</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Nog \'n dag, nog \'n ad-geblokkeerde meesterstuk</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Wil jy advertensies kyk? Ek ook nie</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Laat ons jou programme gehoorsaam maak</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Vandag se voorspelling: 100% kans op verandering</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Reg om onstellend in wonderlik te verander?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Besig om programme te red van hulself sedert vandag</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Aangedryf deur kafeeïen en goeie veranderinge</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Staan op en plak</string>
-    <string name="home_greeting_morning_2">Goeie môre! Programmeer self nie</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Middagmoeë? Plak iets</string>
-    <string name="home_greeting_afternoon_2">Nag-ete lappie-vlekke is anders</string>
-    <string name="home_greeting_afternoon_3">Die middagshift: lappie-uitgawe</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Goeienaand! Naglappies doen dit anders</string>
-    <string name="home_greeting_evening_2">Ontspan? Laai eerste \'n program by</string>
-    <string name="home_greeting_evening_3">Klok uit? Laai eers iets by</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Nog wakker? So ook die programme wat \'n lappie nodig het</string>
-    <string name="home_greeting_late_night_2">Nag lappie-sessie? Respek</string>
-    <string name="home_greeting_late_night_3">Nag-uilmodus: geaktiveer</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Piek lappie-ure… so beweer mense</string>
-    <string name="home_greeting_super_late_2">Kan nie slaap nie? Laai iets by</string>
-    <string name="home_greeting_super_late_3">Op hierdie stadium, bly net wakker en laai iets by</string>
-    <string name="home_greeting_super_late_4">Jy en die bedieners, albei wakker</string>
-    <string name="home_greeting_super_late_5">Nagtelike en produktief</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Verandering oorspronge</string>
     <string name="sources_search">Soek bronne en patches</string>
@@ -527,8 +488,6 @@ Outerlike sone (gestippel): kan deur die lanseerder masker afgesny word - hou be
     <string name="patcher_field_value_stripped">gestroop</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">behou</string>
-    <string name="patcher_tab_logs">Patcher-logboeke</string>
-    <string name="patcher_tab_game">Speletjies</string>
     <string name="patcher_logs_waiting">Wag vir log-uitvoer…</string>
     <string name="patcher_logs_lost">Log-uitvoer word nie tussen app-herstarte gehou nie</string>
     <string name="patcher_long_step_warning">Hierdie stap kan \'n rukkie neem. Wag asseblief…</string>
@@ -555,7 +514,6 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="patcher_install_error_subtitle">Probeer deïnstalleer en weer installeer</string>
     <string name="patcher_ready_to_mount_subtitle">Druk op die knoppie hieronder om te monteer</string>
     <string name="patcher_patches_excluded_for_installer">Nie beskikbaar vir hierdie installasiemethode en uitgesluit: %s</string>
-    <string name="patcher_back_to_game_hint">Tik op %1$s om terug te gaan na jou speletjie</string>
     <string name="patcher_storage_permission_dialog_title">Kan nie toegang tot stoorpad verkry nie</string>
     <string name="patcher_incompatible_patcher_title">Opdatering vereis</string>
     <string name="patcher_incompatible_patcher_description">Die bundel &lt;b&gt;%1$s&lt;/b&gt; vereis weergawe &lt;b&gt;%2$s&lt;/b&gt; of later van die patcher.  Dateer Morphe op om hierdie program te pleister</string>
@@ -598,32 +556,6 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="patcher_notification_text">Tik om terug te keer na die patcher</string>
     <string name="patcher_stop_confirm_title">Stop patcher</string>
     <string name="patcher_stop_confirm_description">Is jy seker jy wil die patching proses stop?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Verander jou app in iets wonderbaarliks… 🏆</string>
-    <string name="patcher_message_2">Leer ou apps nuwe truuks… 🎩</string>
-    <string name="patcher_message_3">Gee jou app \'n digitale opknapping… 🔧</string>
-    <string name="patcher_message_4">Braai digitale magie… ☕</string>
-    <string name="patcher_message_5">Koffiepouse aanbeveel… ☕</string>
-    <string name="patcher_message_6">Kyk buite, dit is lekker daarbuite… 🌤️</string>
-    <string name="patcher_message_7">Pas 1\'e en 0\'e aan… 🤖</string>
-    <string name="patcher_message_8">Ontwar digitale spaghetti… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Regmaak van foute in die ongepatchte app… 🪲</string>
-    <string name="patcher_message_10">Groterige patchings is die wag werd… ⏳</string>
-    <string name="patcher_message_11">Poets pixels totdat hulle skyn… 💎</string>
-    <string name="patcher_message_12">Bly asseblief op jou plek totdat die kaptein die \"Patching aan die gang\" teken afskakel… 💺✈️</string>
-    <string name="patcher_message_13">Kook jou gepatchte app, warm en vars… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Onderhandel beleefd met bytecode… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Alle stelsels nominaal… patchings trajek is stabiel… 🚀</string>
-    <string name="patcher_message_16">Pers ekstra krag uit, soos sap uit \'n digitale lemoen… 🍋</string>
-    <string name="patcher_message_17">Moedig die app aan om sy nuwe, beter self te aanvaar… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Verander die toepassing superposisie van ongepatch na gepatch… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Jou app het koors, en die enigste voorskrif is meer patchings… 🩺🔔</string>
-    <string name="patcher_message_20">Verwyder onsin. Wag asseblief… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">App word gepleister</string>
     <string name="memory_usage">Geheiebruik</string>
@@ -653,29 +585,6 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="package_name">Pakketnaam</string>
     <string name="failed_to_mount">Kon nie monteer nie: %s</string>
     <string name="failed_to_unmount">Kon nie dedemonteer nie: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Punt %s</string>
-    <string name="mini_game_best">Beste %s</string>
-    <string name="mini_game_new_record">Nuwe rekord!</string>
-    <string name="mini_game_game_over">Speletjie Einde</string>
-    <string name="mini_game_try_again">Probeer weer</string>
-    <string name="mini_game_paused">Pauze</string>
-    <string name="mini_game_resume">Gaan voort</string>
-    <string name="mini_game_restart">Begin oor</string>
-    <string name="mini_game_change">Kies \'n ander speletjie</string>
-    <string name="mini_game_2048_picker_subtitle">Skuif teëls om te saamsmelt</string>
-    <string name="mini_game_flappy_picker_subtitle">Tik om deur die pype te vlieg</string>
-    <string name="mini_game_flappy_tap_to_start">Tik om te vlieg</string>
-    <string name="mini_game_snake_picker_subtitle">Eet kos, moenie jouself tref nie</string>
-    <string name="mini_game_snake_swipe_to_start">Swipe om te begin</string>
-    <string name="mini_game_dino_picker_subtitle">Tik om oor kaktusse te spring</string>
-    <string name="mini_game_dino_tap_to_start">Tik om te hardloop</string>
-    <string name="mini_game_blocks_picker_subtitle">Pas die vorms, maak lyne skoon</string>
-    <string name="mini_game_blocks_tap_to_start">Tik om te draai, vee om te skuif, vee af om te laat val</string>
-    <string name="mini_game_bricks_picker_subtitle">Bons die bal, breek die muur</string>
-    <string name="mini_game_bricks_tap_to_start">Sleep om te mik, tik om te lanseer</string>
-    <string name="mini_game_miner_picker_subtitle">Tik om oop te maak, hou om te vlag</string>
-    <string name="mini_game_pairs_picker_subtitle">Draai kaarte om, vind die paar</string>
     <!-- Settings -->
     <string name="appearance">Voorkoms</string>
     <string name="advanced">Gevorderd</string>
@@ -730,8 +639,6 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="settings_appearance_ui_scale_preview_subtitle">Teks en kontroles op hierdie skaal</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Tuisskerm</string>
-    <string name="settings_appearance_greeting_phrases">Groetfrases</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Wys \'n groet-boodskap op die tuisskerm</string>
     <string name="settings_appearance_app_grouping">Toepassingsgroepering</string>
     <string name="settings_appearance_app_grouping_description">Wys \'n skakelaar om programme volgens bron of kategorie te groepeer</string>
     <string name="settings_appearance_repatch_notice">Re-patch-kennisgewing</string>
@@ -1163,16 +1070,6 @@ Besonderhede: %2$s"</string>
     <string name="credits_current_development">Huidige ontwikkeling</string>
     <string name="credits_prior_development">Vorige ontwikkeling</string>
     <string name="opensource_licenses">Open-source lisensies</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">\'n Keuse</string>
-    <string name="easter_egg_pill_message">Neem die blou pil en die advertensies bly presies waar hulle is. Neem die rooi een en kyk hoe diep die bytekode gaan.</string>
-    <string name="easter_egg_pill_red">Rooi pil</string>
-    <string name="easter_egg_pill_blue">Blou pil</string>
-    <string name="easter_egg_pill_red_toast">Matrix agtergrond ontsluit</string>
-    <string name="easter_egg_pill_blue_toast">Die advertensies sal op jou wag</string>
-    <string name="easter_egg_pill_message_again">Jy is reeds in die Matrix. Die rooi pil laat jou terugval in die reën, die blou een maak jou wakker</string>
-    <string name="easter_egg_pill_red_toast_again">Terug in die reën</string>
-    <string name="easter_egg_pill_blue_toast_again">Ontkoppel. Die pad terug is waar dit altyd was</string>
     <!-- Shared strings -->
     <string name="select_file">Kies lêer</string>
     <string name="select_files">Kies lêers</string>

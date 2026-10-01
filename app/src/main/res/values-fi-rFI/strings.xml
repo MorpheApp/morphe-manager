@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">Tämän luokan toimintoja ei ole saatavilla</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Minkä sovelluksen haluat muokata?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Valmiina tekemään sovelluksista jälleen legendaarisia?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Vyöt kiinni, nyt muokataan</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Uusi päivä, uusi mainokset estävä mestariteos</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Haluatko katsoa mainoksia? En minäkään</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Opetetaanpa sovelluksesi tavoille</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Päivän ennuste: 100 % todennäköisyys muokkaukselle</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Valmiina muuttamaan keskinkertainen mahtavaksi?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Pelastamme sovelluksia itseltään tästä päivästä lähtien</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Voimanlähteenä kofeiini ja hyvät lisäosat</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Nouse ja paikkaa</string>
-    <string name="home_greeting_morning_2">Hyvää huomenta! Sovellukset eivät paikkaannu itsekseen</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Iltapäivän väsymys? Paikkaa jotain</string>
-    <string name="home_greeting_afternoon_2">Lounastauon jälkeiset päivitykset tuntuvat erilaisilta</string>
-    <string name="home_greeting_afternoon_3">Iltavuoron päivitykset</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Hyvää iltaa! Illan päivitykset tuntuvat erilaisilta</string>
-    <string name="home_greeting_evening_2">Rentoudutko? Päivitä sovellus ensin</string>
-    <string name="home_greeting_evening_3">Lopetatko työt? Päivitä ensin jokin</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Oletko vielä hereillä? Sovelluksetkin, jotka tarvitsevat päivitystä, ovat</string>
-    <string name="home_greeting_late_night_2">Myöhäinen päivityssessio? Hyvä</string>
-    <string name="home_greeting_late_night_3">Yökyykkymoodi: aktivoitu</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Päivitysten huipputunnit… väitetysti</string>
-    <string name="home_greeting_super_late_2">Etkö saa unta? Päivitä jokin</string>
-    <string name="home_greeting_super_late_3">Tässä vaiheessa vain pysy hereillä ja päivitä</string>
-    <string name="home_greeting_super_late_4">Sinä ja palvelimet, molemmat hereillä</string>
-    <string name="home_greeting_super_late_5">Yökyykkymäinen ja tuottelias</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Lisäosien lähteet</string>
     <string name="sources_search">Hae lähteitä ja korjauksia</string>
@@ -528,8 +489,6 @@ Ulkopuolinen alue (katkoviiva): käynnistimen maski saattaa leikata osia siitä 
     <string name="patcher_field_value_stripped">poistettu</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">säilytetty</string>
-    <string name="patcher_tab_logs">Paikkauksien lokit</string>
-    <string name="patcher_tab_game">Pelit</string>
     <string name="patcher_logs_waiting">Odotetaan lokitulostetta…</string>
     <string name="patcher_logs_lost">Lokitulostetta ei tallenneta sovelluksen uudelleenkäynnistyksen yli</string>
     <string name="patcher_long_step_warning">Tämä vaihe voi kestää hetken. Odota...</string>
@@ -556,7 +515,6 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="patcher_install_error_subtitle">Kokeile poistaa sovelluksen asennus ja asentaa se uudelleen</string>
     <string name="patcher_ready_to_mount_subtitle">Liitä napauttamalla alla olevaa painiketta</string>
     <string name="patcher_patches_excluded_for_installer">Ei saatavilla tälle asennusmenetelmälle ja pois suljettu: %s</string>
-    <string name="patcher_back_to_game_hint">Napauta %1$s palataksesi peliisi</string>
     <string name="patcher_storage_permission_dialog_title">Tallennuspolkua ei voida käyttää</string>
     <string name="patcher_incompatible_patcher_title">Päivitys vaaditaan</string>
     <string name="patcher_incompatible_patcher_description">Paketti &lt;b&gt;%1$s&lt;/b&gt; vaatii muokkaustyökalun version &lt;b&gt;%2$s&lt;/b&gt; tai uudemman. Päivitä Morphe muokataksesi tätä sovellusta</string>
@@ -599,32 +557,6 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="patcher_notification_text">Palaa muokkaukseen napauttamalla</string>
     <string name="patcher_stop_confirm_title">Lopetetaanko muokkaus?</string>
     <string name="patcher_stop_confirm_description">Haluatko varmasti lopettaa muokkausprosessin?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Muunnetaan sovelluksesi mahtavaksi… 🏆</string>
-    <string name="patcher_message_2">Opetetaan vanhoille sovelluksille uusia temppuja… 🎩</string>
-    <string name="patcher_message_3">Viritetään sovellustasi digitaalisesti… 🔧</string>
-    <string name="patcher_message_4">Keitetään digitaalista taikaa… ☕</string>
-    <string name="patcher_message_5">Kahvitauko suositeltava… ☕</string>
-    <string name="patcher_message_6">Katso ulos, siellä on kaunista… 🌤️</string>
-    <string name="patcher_message_7">Säädetään ykkösiä ja nollia… 🤖</string>
-    <string name="patcher_message_8">Selvitetään digitaalista spagettia… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Korjataan virheitä muokkaamattomasta sovelluksesta… 🪲</string>
-    <string name="patcher_message_10">Hienot lisäosat ovat odotuksen arvoisia… ⏳</string>
-    <string name="patcher_message_11">Kiillotetaan pikseleitä, kunnes ne loistavat… 💎</string>
-    <string name="patcher_message_12">Pysy paikallasi, kunnes kapteeni sammuttaa \"Muokkaus käynnissä\" -valon... 💺✈️</string>
-    <string name="patcher_message_13">Valmistellaan muokattua sovellustasi, kuumana ja tuoreena… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Neuvotellaan kohteliaasti tavukoodin kanssa… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Kaikki järjestelmät toimivat… muokkausrata on vakaa… 🚀</string>
-    <string name="patcher_message_16">Puristetaan lisätehoja irti, kuin mehua digitaalisesta sitruunasta… 🍋</string>
-    <string name="patcher_message_17">Rohkaistaan sovellusta hyväksymään uusi, parempi itsensä… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Muutetaan sovelluksen superpositio muokkaamattomasta muokatuksi… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Sovelluksellasi on kuumetta, ja ainoa lääke on lisää lisäosia… 🩺🔔</string>
-    <string name="patcher_message_20">Poistetaan hölynpölyä. Odota hetki… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Muokataan sovellusta</string>
     <string name="memory_usage">Muistin käyttö</string>
@@ -654,29 +586,6 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="package_name">Paketin nimi</string>
     <string name="failed_to_mount">Liittäminen epäonnistui: %s</string>
     <string name="failed_to_unmount">Irrottaminen epäonnistui: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Pisteet %s</string>
-    <string name="mini_game_best">Paras %s</string>
-    <string name="mini_game_new_record">Uusi ennätys!</string>
-    <string name="mini_game_game_over">Peli ohi</string>
-    <string name="mini_game_try_again">Yritä uudelleen</string>
-    <string name="mini_game_paused">Tauolla</string>
-    <string name="mini_game_resume">Jatka</string>
-    <string name="mini_game_restart">Aloita alusta</string>
-    <string name="mini_game_change">Valitse toinen peli</string>
-    <string name="mini_game_2048_picker_subtitle">Liu\'uta laattoja yhdistääksesi ne</string>
-    <string name="mini_game_flappy_picker_subtitle">Napauta lentääksesi putkien läpi</string>
-    <string name="mini_game_flappy_tap_to_start">Napauta lentääksesi</string>
-    <string name="mini_game_snake_picker_subtitle">Syö ruokaa, älä osu itseesi</string>
-    <string name="mini_game_snake_swipe_to_start">Pyyhkäise aloittaaksesi</string>
-    <string name="mini_game_dino_picker_subtitle">Napauta hypätäksesi kaktusten yli</string>
-    <string name="mini_game_dino_tap_to_start">Napauta juostaaksesi</string>
-    <string name="mini_game_blocks_picker_subtitle">Sovita muodot, selkeät linjat</string>
-    <string name="mini_game_blocks_tap_to_start">Napauta kääntääksesi, pyyhkäise liikuttaaksesi, pyyhkäise alas pudottaaksesi</string>
-    <string name="mini_game_bricks_picker_subtitle">Pomputa palloa, raivaa seinä</string>
-    <string name="mini_game_bricks_tap_to_start">Vedä tähdätäksesi, napauta laukaistaksesi</string>
-    <string name="mini_game_miner_picker_subtitle">Napauta avataksesi, pidä painettuna merkitäksesi</string>
-    <string name="mini_game_pairs_picker_subtitle">Käännä kortit, löydä pari</string>
     <!-- Settings -->
     <string name="appearance">Ulkoasu</string>
     <string name="advanced">Lisäasetukset</string>
@@ -731,8 +640,6 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_appearance_ui_scale_preview_subtitle">Teksti ja säätimet tässä mittakaavassa</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Aloitusnäyttö</string>
-    <string name="settings_appearance_greeting_phrases">Tervehdysviestit</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Näytä tervehdysviesti aloitusnäytöllä</string>
     <string name="settings_appearance_app_grouping">Sovellusten ryhmittely</string>
     <string name="settings_appearance_app_grouping_description">Näytä kytkin, jolla sovellukset ryhmitellään lähteen tai luokan mukaan</string>
     <string name="settings_appearance_repatch_notice">Uudelleenkorjausilmoitus</string>
@@ -1162,16 +1069,6 @@ Yksityiskohdat: %2$s"</string>
     <string name="credits_current_development">Nykyinen kehitys</string>
     <string name="credits_prior_development">Aikaisempi kehitys</string>
     <string name="opensource_licenses">Avoimen lähdekoodin lisenssit</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">Valinta</string>
-    <string name="easter_egg_pill_message">Ota sininen pilleri ja mainokset pysyvät tarkalleen paikoillaan. Ota punainen ja katso kuinka syvälle tavukoodi menee.</string>
-    <string name="easter_egg_pill_red">Punainen pilleri</string>
-    <string name="easter_egg_pill_blue">Sininen pilleri</string>
-    <string name="easter_egg_pill_red_toast">Matrix-tausta avattu</string>
-    <string name="easter_egg_pill_blue_toast">Mainokset odottavat sinua</string>
-    <string name="easter_egg_pill_message_again">Olet jo Matrixissa. Punainen pilleri pudottaa sinut takaisin sateeseen, sininen pilleri herättää sinut.</string>
-    <string name="easter_egg_pill_red_toast_again">Takaisin sateessa</string>
-    <string name="easter_egg_pill_blue_toast_again">Irrotettu. Paluutie on siellä missä se aina oli.</string>
     <!-- Shared strings -->
     <string name="select_file">Valitse tiedosto</string>
     <string name="select_files">Valitse tiedostot</string>

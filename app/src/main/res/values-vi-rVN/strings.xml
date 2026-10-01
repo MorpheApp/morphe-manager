@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">Không khả dụng cho danh mục này</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Bạn muốn vá ứng dụng nào?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Sẵn sàng để đưa các ứng dụng trở lại thời hoàng kim chưa?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Hãy chuẩn bị sẵn sàng, đã đến lúc vá rồi</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Ngày mới, kiệt tác mới - nói không với quảng cáo</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Bạn thích xem quảng cáo không? Tôi thì không</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Hãy làm ứng dụng hoạt động theo cách bạn muốn</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Dự báo hôm nay: 100% tỉ lệ vá thành công</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Sẵn sàng thay đổi từ tầm thường lên đến đỉnh cao?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Cứu chúng khỏi chính chúng ngay từ hôm nay</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Nạp caffein có ngay bản vá xịn</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Dậy đi, vá thôi</string>
-    <string name="home_greeting_morning_2">Chào ngày mới! Ứng dụng không tự vá được đâu đấy</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Chiều nay hơi đuối? Thử vá một ứng dụng xem</string>
-    <string name="home_greeting_afternoon_2">Sau bữa trưa mà vá thì cuốn lắm</string>
-    <string name="home_greeting_afternoon_3">Nhiệm vụ ca chiều: vá ứng dụng</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Trời tối rồi! Thử vá đi, khác bọt lắm đấy</string>
-    <string name="home_greeting_evening_2">Đang thư giãn đấy ah? Hay là vá một ứng dụng đi</string>
-    <string name="home_greeting_evening_3">Sắp tan làm chưa? Về nhớ vá đấy</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Chưa vá mà cũng chưa ngủ nữa, trời ơi..</string>
-    <string name="home_greeting_late_night_2">Thức khuya để vá luôn? Respect</string>
-    <string name="home_greeting_late_night_3">Cú đêm đã vào vị trí</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Nghe giang hồ đồn đại, giờ này vá peak lắm</string>
-    <string name="home_greeting_super_late_2">Khó ngủ lắm hay sao? Thôi thì vá gì đấy giết thời gian cũng được</string>
-    <string name="home_greeting_super_late_3">Đến nước này rồi thì thức vá luôn, xem có gì mới hông~</string>
-    <string name="home_greeting_super_late_4">Đêm nay không chỉ mình bạn thức đâu ^^</string>
-    <string name="home_greeting_super_late_5">Cú đêm năng suất thật đấy</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Nguồn vá</string>
     <string name="sources_search">Tìm kiếm nguồn và bản vá</string>
@@ -529,8 +490,6 @@ Nếu không, APK đã vá và được gắn có thể sẽ không hoạt độ
     <string name="patcher_field_value_stripped">đã loại bỏ</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">giữ lại</string>
-    <string name="patcher_tab_logs">Nhật ký trình vá</string>
-    <string name="patcher_tab_game">Trò chơi</string>
     <string name="patcher_logs_waiting">Đang chờ nhật ký đầu ra…</string>
     <string name="patcher_logs_lost">Nhật ký đầu ra sẽ không được giữ lại sau khi khởi động lại ứng dụng</string>
     <string name="patcher_long_step_warning">Bước này có thể hơi lâu một chút. Vui lòng chờ…</string>
@@ -557,7 +516,6 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="patcher_install_error_subtitle">Hãy thử gỡ và cài đặt lại</string>
     <string name="patcher_ready_to_mount_subtitle">Bấm nút bên dưới để gắn kết</string>
     <string name="patcher_patches_excluded_for_installer">Không khả dụng với phương thức cài đặt này và đã bị loại trừ: %s</string>
-    <string name="patcher_back_to_game_hint">Chạm vào %1$s để quay lại trò chơi của bạn</string>
     <string name="patcher_storage_permission_dialog_title">Không thể truy cập đường dẫn bộ nhớ</string>
     <string name="patcher_incompatible_patcher_title">Cần phải cập nhật</string>
     <string name="patcher_incompatible_patcher_description">Gói &lt;b&gt;%1$s&lt;/b&gt; yêu cầu phiên bản trình vá &lt;b&gt;%2$s&lt;/b&gt; trở lên. Vui lòng cập nhật Morphe để vá ứng dụng này</string>
@@ -600,32 +558,6 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="patcher_notification_text">Bấm để quay trở lại trình vá</string>
     <string name="patcher_stop_confirm_title">Dừng vá</string>
     <string name="patcher_stop_confirm_description">Bạn có chắc chắn muốn dừng tiến trình vá không?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Biến ứng dụng của bạn trở nên xịn hơn… 🏆</string>
-    <string name="patcher_message_2">Dạy ứng dụng cũ chiêu mới… 🎩</string>
-    <string name="patcher_message_3">Đang tinh chỉnh ứng dụng của bạn… 🔧</string>
-    <string name="patcher_message_4">Đang pha chế phép màu kỹ thuật số… ☕</string>
-    <string name="patcher_message_5">Làm tách cà phê chill chill… ☕</string>
-    <string name="patcher_message_6">Nhìn ra ngoài trời đi, đẹp lắm… 🌤️</string>
-    <string name="patcher_message_7">Đang chỉnh mấy con số 1 và 0… 🤖</string>
-    <string name="patcher_message_8">Đoạn mã này rối phết… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Đang sửa lỗi trong ứng dụng chưa vá… 🪲</string>
-    <string name="patcher_message_10">Bản vá xịn chờ chút cũng đáng… ⏳</string>
-    <string name="patcher_message_11">Đánh bóng pixel cho đến khi chúng tỏa sáng… 💎</string>
-    <string name="patcher_message_12">Ngồi yên, đang vá, chưa hạ cánh đâu… 💺✈️</string>
-    <string name="patcher_message_13">Đang nấu ứng dụng đã vá, nóng hổi vừa thổi vừa ăn… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Đang thương lượng với mã nguồn… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Mọi hệ thống hoạt động tốt… quỹ đạo vá ổn định… 🚀</string>
-    <string name="patcher_message_16">Vắt năng lượng, như vắt khô quả chanh kỹ thuật số… 🍋</string>
-    <string name="patcher_message_17">Đang thuyết phục ứng dụng chấp nhận phiên bản mới hơn, tốt hơn… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Đang chuyển trạng thái ứng dụng từ chưa vá sang đã vá… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Ứng dụng bị sốt rồi, phương pháp điều trị bây giờ là vá thêm thôi… 🩺🔔</string>
-    <string name="patcher_message_20">Đang dọn dẹp mớ hỗn độn. Chờ tí… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Đang vá ứng dụng</string>
     <string name="memory_usage">Bộ nhớ đã dùng</string>
@@ -655,29 +587,6 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="package_name">Tên gói</string>
     <string name="failed_to_mount">Không thể gắn: %s</string>
     <string name="failed_to_unmount">Không thể gỡ gắn: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Điểm %s</string>
-    <string name="mini_game_best">Cao nhất %s</string>
-    <string name="mini_game_new_record">Kỷ lục mới!</string>
-    <string name="mini_game_game_over">Bạn đã thua</string>
-    <string name="mini_game_try_again">Thử lại</string>
-    <string name="mini_game_paused">Tạm dừng</string>
-    <string name="mini_game_resume">Tiếp tục</string>
-    <string name="mini_game_restart">Bắt đầu lại</string>
-    <string name="mini_game_change">Chọn một trò chơi khác</string>
-    <string name="mini_game_2048_picker_subtitle">Vuốt để ghép các ô lại với nhau</string>
-    <string name="mini_game_flappy_picker_subtitle">Chạm để bay lách qua các ống</string>
-    <string name="mini_game_flappy_tap_to_start">Chạm để bay</string>
-    <string name="mini_game_snake_picker_subtitle">Ăn thức ăn, đừng tự đâm vào mình</string>
-    <string name="mini_game_snake_swipe_to_start">Vuốt để bắt đầu</string>
-    <string name="mini_game_dino_picker_subtitle">Chạm để nhảy qua xương rồng</string>
-    <string name="mini_game_dino_tap_to_start">Chạm để chạy</string>
-    <string name="mini_game_blocks_picker_subtitle">Ghép hình, xóa dòng</string>
-    <string name="mini_game_blocks_tap_to_start">Chạm để xoay, vuốt để di chuyển, vuốt xuống để thả</string>
-    <string name="mini_game_bricks_picker_subtitle">Bật bóng, phá tường</string>
-    <string name="mini_game_bricks_tap_to_start">Kéo để ngắm, chạm để bắn</string>
-    <string name="mini_game_miner_picker_subtitle">Chạm để mở, giữ để gắn cờ</string>
-    <string name="mini_game_pairs_picker_subtitle">Lật bài, tìm cặp giống nhau</string>
     <!-- Settings -->
     <string name="appearance">Giao diện</string>
     <string name="advanced">Nâng cao</string>
@@ -732,8 +641,6 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_appearance_ui_scale_preview_subtitle">Xem thử văn bản và các nút điều khiển ở tỷ lệ này</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Trang chủ</string>
-    <string name="settings_appearance_greeting_phrases">Thông điệp</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Hiện thông điệp trên trang chủ</string>
     <string name="settings_appearance_app_grouping">Nhóm ứng dụng</string>
     <string name="settings_appearance_app_grouping_description">Hiển thị bộ chuyển đổi để nhóm ứng dụng theo nguồn hoặc danh mục</string>
     <string name="settings_appearance_repatch_notice">Thông báo vá lại</string>
@@ -1168,16 +1075,6 @@ Chi tiết: %2$s"</string>
     <string name="credits_current_development">Hiện tại</string>
     <string name="credits_prior_development">Trước đây</string>
     <string name="opensource_licenses">Giấy phép mã nguồn mở</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">Một lựa chọn</string>
-    <string name="easter_egg_pill_message">Hãy uống viên thuốc màu xanh và quảng cáo sẽ ở nguyên vị trí. Hãy uống viên thuốc màu đỏ và xem mã byte có thể đi sâu đến đâu.</string>
-    <string name="easter_egg_pill_red">Viên thuốc đỏ</string>
-    <string name="easter_egg_pill_blue">Viên thuốc xanh</string>
-    <string name="easter_egg_pill_red_toast">Đã mở khóa nền Matrix</string>
-    <string name="easter_egg_pill_blue_toast">Quảng cáo sẽ chờ bạn</string>
-    <string name="easter_egg_pill_message_again">Bạn đã ở trong Matrix. Viên thuốc đỏ đưa bạn trở lại trong mưa, viên thuốc xanh đánh thức bạn.</string>
-    <string name="easter_egg_pill_red_toast_again">Trở lại trong mưa</string>
-    <string name="easter_egg_pill_blue_toast_again">Ngắt kết nối. Con đường trở lại vẫn nằm ở nơi nó vốn có.</string>
     <!-- Shared strings -->
     <string name="select_file">Chọn tệp</string>
     <string name="select_files">Chọn tệp</string>

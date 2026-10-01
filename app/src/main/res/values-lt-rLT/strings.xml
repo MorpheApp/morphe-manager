@@ -35,44 +35,6 @@
     <string name="home_category_custom">Savo</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Kokią programėlę norėtumėte pataisyti?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Ar norite padaryti programas vėl legendinėmis?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Susisegėkite, metas pataisyti</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Dar viena diena, dar vienas šedevras be reklamų</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Norite žiūrėti reklamas? Aš irgi ne</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Priverskime programėles elgtis</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Šiandienos prognozė: 100 % tikimybė pataisų</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Ar esate pasiruošę nepribloškiančio paversti nuostabiu?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Saugome programas nuo pačių saves nuo šiandien</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Veikia nuo kofeino ir gerų pataisų</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Kylame ir taisome</string>
-    <string name="home_greeting_morning_2">Labas rytas! Programėlės pačios nepasitaisys</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Popietinis nuovargis? Pataisykite ką nors</string>
-    <string name="home_greeting_afternoon_2">Taisymas po pietų jaučiasi kitaip</string>
-    <string name="home_greeting_afternoon_3">Popietinė pamaina: taisymas</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Labas vakaras! Vakaro pataisymai jaučiasi kitaip</string>
-    <string name="home_greeting_evening_2">Raminatės? Pirma pataisykite programėlę</string>
-    <string name="home_greeting_evening_3">Baigiatė darbus? Pirma pataisykite kažką</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Vis dar atsibudę? Taip pat ir programėlės, kurias reikia pataisyti</string>
-    <string name="home_greeting_late_night_2">Vėlyvos nakties taisymo sesija? Pagarba</string>
-    <string name="home_greeting_late_night_3">Naktinės pėlėdos režimas: aktyvuotas</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Auksinės taisymo valandos… galimai</string>
-    <string name="home_greeting_super_late_2">Neužmiegate? Pataisykite kažką</string>
-    <string name="home_greeting_super_late_4">Jūs ir serveriai, abu atsibudę</string>
-    <string name="home_greeting_super_late_5">Naktinis ir produktyvus</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Pataisų šaltiniai</string>
     <string name="sources_sort_manual">Rankinis rikiavimas</string>
@@ -307,8 +269,6 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <!-- Fastest read or write rate reached while patching, in data per second -->
     <string name="patcher_field_value_unknown">nežinoma</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
-    <!-- Value of "Libraries": every library was left in the patched APK -->
-    <string name="patcher_tab_game">Žaidimai</string>
     <string name="patcher_long_step_warning">Šis žingsnis gali užtrukti. Palaukite…</string>
     <string name="patcher_installing_subtitle">Beveik laikas rokenrolui! 🎸</string>
     <string name="patcher_success_title">Baigta! 🎉</string>
@@ -361,31 +321,6 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <string name="patcher_notification_text">Paspauskite, kad grįžtumėte į taisytoją</string>
     <string name="patcher_stop_confirm_title">Sustabdyti taisytoją</string>
     <string name="patcher_stop_confirm_description">Ar jūs tikrai norite sustabdyti taisymą?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Jūsų programa transformuojama į kažką neįtikėtino… 🏆</string>
-    <string name="patcher_message_2">Senos programos mokinamos naujų triukų… 🎩</string>
-    <string name="patcher_message_3">Jūsų programai suteikiamas skaitmeninis tiuningas… 🔧</string>
-    <string name="patcher_message_4">Verdama skaitmeninė magija… ☕</string>
-    <string name="patcher_message_5">Rekomenduojama kavos pertraukėlė… ☕</string>
-    <string name="patcher_message_6">Pažiūrėkite į lauką, ten gražu… 🌤️</string>
-    <string name="patcher_message_8">Išpainiojami skaitmeniniai spagečiai… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Taisomi vabalai nepataisytoje programoje… 🪲</string>
-    <string name="patcher_message_10">Puikūs pataisymai verti laukimo… ⏳</string>
-    <string name="patcher_message_11">Pikseliai poliruojami iki žibėjimo… 💎</string>
-    <string name="patcher_message_12">Prašome nepalikti sėdynių, kol kapitonas neišjungs \"Vyksta taisymas\" ženklo… 💺✈️</string>
-    <string name="patcher_message_13">Jūsų pataisyta programėlė kepama, karšta ir šviežia… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Mandagiai tariamasi su baitų kodu… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Visos sistemos veikia… taisymo trajektorija stabili… 🚀</string>
-    <string name="patcher_message_16">Išspaudžiama papildoma galia, kaip sultys iš skaitmeninės citrinos… 🍋</string>
-    <string name="patcher_message_17">Programėlė skatinama priimti naują, geresnę save… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Keičiama programėlės superpozicija iš nepataisytos į pataisytą… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Jūsų programėlė karščiuoja ir vienintelis vaistas yra daugiau pataisymų… 🩺🔔</string>
-    <string name="patcher_message_20">Šalinamos nesąmonės, prašome palaukti… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Programėlė taisoma</string>
     <string name="memory_usage">Atminties naudojimas</string>
@@ -402,12 +337,6 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <string name="saved_app_removed_toast">Pašalinta išsaugota pataisyta programa</string>
     <string name="saved_app_launch_unavailable">Įdiekite programą prieš ją atidarydami</string>
     <string name="package_name">Pakuotės pavadinimas</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_new_record">Naujas rekordas!</string>
-    <string name="mini_game_game_over">Žaidimas baigtas</string>
-    <string name="mini_game_try_again">Bandyti dar kartą</string>
-    <string name="mini_game_paused">Pristabdyta</string>
-    <string name="mini_game_resume">Tęsti</string>
     <!-- Settings -->
     <string name="appearance">Išvaizda</string>
     <string name="advanced">Išplėstiniai</string>
@@ -443,8 +372,6 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Pagrindinis ekranas</string>
-    <string name="settings_appearance_greeting_phrases">Pasveikinimo frazės</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Rodyti pasveikinimo žinutę pagrindiniame ekrane</string>
     <string name="settings_appearance_app_card_colors_default">Numatytasis</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Programėlės piktograma</string>

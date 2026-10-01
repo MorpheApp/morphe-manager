@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">Gníomhartha nach bhfuil ar fáil don chatagóir seo</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Cén aip ar mhaith leat paiste a chur leis?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Tá tú réidh le appanna a dhéanamh leathnach arís?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Cuir ort do chriosanna, tá sé in am na paistí a dhéanamh.</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Lá eile, saothar ealaíne eile atá blocáilte le fógraí</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Ar mhaith leat fógraí a fheiceáil? Mise ach an oiread.</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Déanaimis do aipeanna iompar</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Réamhaisnéis an lae inniu: seans 100% go ndéanfar paisteáil</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Réidh le hathrú neamhshuimiúil go hiontach?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Aipeanna á sábháil uathu féin ó inniu</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Cumhachtaithe ag caiféin agus paistí maithe</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Ardaigh agus paiste</string>
-    <string name="home_greeting_morning_2">Maidin mhaith! Ní dhéanfaidh aipeanna paistí iad féin</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Droch-mhíshuaimhneas tráthnóna? Paisteáil rud éigin</string>
-    <string name="home_greeting_afternoon_2">Buaileann paisteáil iar-lón difriúil</string>
-    <string name="home_greeting_afternoon_3">An t-athrú tráthnóna: eagrán paiste</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Tráthnóna maith! Buaileann paistí tráthnóna go difriúil</string>
-    <string name="home_greeting_evening_2">Ag sosú? Paisteáil aip ar dtús</string>
-    <string name="home_greeting_evening_3">Ag clocáil amach? Paisteáil rud éigin ar dtús</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">An bhfuil paistí ag teastáil uathu fós?</string>
-    <string name="home_greeting_late_night_2">Seisiún paiste déanach san oíche? Meas?</string>
-    <string name="home_greeting_late_night_3">Mód ulchabhán oíche: gníomhachtaithe</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Uaireanta paisteála buaic… de réir dealraimh</string>
-    <string name="home_greeting_super_late_2">Nach féidir leat codladh? Paisteáil rud éigin</string>
-    <string name="home_greeting_super_late_3">Ag an bpointe seo, fan suas agus déan paiste.</string>
-    <string name="home_greeting_super_late_4">Tusa agus na freastalaithe, an bheirt agaibh ina ndúiseacht</string>
-    <string name="home_greeting_super_late_5">Oícheanta agus táirgiúil</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Foinsí paiste</string>
     <string name="sources_search">Cuardaigh foinsí agus paistí</string>
@@ -527,8 +488,6 @@ Crios seachtrach (daite): féadfaidh masc an lainseálaí é a bhearradh - coinn
     <string name="patcher_field_value_stripped">stróicthe</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">coimeádta</string>
-    <string name="patcher_tab_logs">Logaí paisteora</string>
-    <string name="patcher_tab_game">Cluichí</string>
     <string name="patcher_logs_waiting">Ag fanacht le haschur loga…</string>
     <string name="patcher_logs_lost">Ní choimeádtar aschur loga tar éis atosú aipeanna</string>
     <string name="patcher_long_step_warning">D’fhéadfadh sé go dtógfadh an chéim seo tamall. Fan le do thoil…</string>
@@ -555,7 +514,6 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="patcher_install_error_subtitle">Déan iarracht é a dhíshuiteáil agus a shuiteáil arís</string>
     <string name="patcher_ready_to_mount_subtitle">Brúigh an cnaipe thíos chun é a ghléasadh</string>
     <string name="patcher_patches_excluded_for_installer">Ní féidir é a shuiteáil agus níl sé ar fáil: %s</string>
-    <string name="patcher_back_to_game_hint">Tapáil %1$s chun filleadh ar do chluiche</string>
     <string name="patcher_storage_permission_dialog_title">Ní féidir rochtain a fháil ar an gcosán stórála</string>
     <string name="patcher_incompatible_patcher_title">Nuashonrú ag teastáil</string>
     <string name="patcher_incompatible_patcher_description">Éilíonn an pacáiste &lt;b&gt;%1$s&lt;/b&gt; leagan paisteora &lt;b&gt;%2$s&lt;/b&gt; nó níos nuaí. Nuashonraigh Morphe le do thoil chun an aip seo a phaisteáil.</string>
@@ -598,32 +556,6 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="patcher_notification_text">Tapáil chun filleadh ar an paisteálaí</string>
     <string name="patcher_stop_confirm_title">Stop an paisteálaí</string>
     <string name="patcher_stop_confirm_description">An bhfuil tú cinnte gur mian leat an próiseas paisteála a stopadh?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Ag athrú do aip go rud éigin iontach… 🏆</string>
-    <string name="patcher_message_2">Cleasanna nua á múineadh ag sean-aipeanna… 🎩</string>
-    <string name="patcher_message_3">Ag tabhairt socrúcháin dhigiteach do d’aipeanna… 🔧</string>
-    <string name="patcher_message_4">Ag grúdáil draíocht dhigiteach… ☕</string>
-    <string name="patcher_message_5">Sos caife molta… ☕</string>
-    <string name="patcher_message_6">Breathnaigh amach, tá sé go deas lasmuigh... 🌤️</string>
-    <string name="patcher_message_7">Ag coigeartú 1anna agus 0anna… 🤖</string>
-    <string name="patcher_message_8">Ag díthaclaíocht spagetti digiteach... 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Ag socrú fabhtanna san aip neamhphaisteáilte… 🪲</string>
-    <string name="patcher_message_10">Is fiú fanacht le paistí móra... ⏳</string>
-    <string name="patcher_message_11">Ag snasú picteilíní go dtí go lonraíonn siad… 💎</string>
-    <string name="patcher_message_12">Fan i do shuí go dtí go múchfaidh an captaen an comhartha \"Paisteáil ar siúl\"… 💺✈️</string>
-    <string name="patcher_message_13">Ag cócaireacht d\'aip phaiisteáilte, te agus úr... 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Ag idirbheartaíocht go béasach le cód-bheart… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Gach córas gnáth… tá an treocht paisteála cobhsaí… 🚀</string>
-    <string name="patcher_message_16">Ag brú amach cumhacht bhreise, cosúil le sú ó líomóid dhigiteach… 🍋</string>
-    <string name="patcher_message_17">Ag spreagadh na haipe glacadh lena féin nua, níos fearr… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Ag athrú forluí na haipe ó neamhpháistí go páistí… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Tá fiabhras ar d’aipe, agus is é an t-aon oideas atá ann ná níos mó paistí… 🩺🔔</string>
-    <string name="patcher_message_20">Ag baint na amaidí. Fan le do thoil… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Aip paisteála</string>
     <string name="memory_usage">Úsáid chuimhne</string>
@@ -653,29 +585,6 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="package_name">Ainm an phacáiste</string>
     <string name="failed_to_mount">Theip ar fheistiú: %s</string>
     <string name="failed_to_unmount">Theip ar dhíshuiteáil: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Scór %s</string>
-    <string name="mini_game_best">Is Fearr %s</string>
-    <string name="mini_game_new_record">Taifead nua!</string>
-    <string name="mini_game_game_over">Cluiche Thart</string>
-    <string name="mini_game_try_again">Bain Triail Arís</string>
-    <string name="mini_game_paused">Sosaithe</string>
-    <string name="mini_game_resume">Lean ar aghaidh</string>
-    <string name="mini_game_restart">Tosaigh arís</string>
-    <string name="mini_game_change">Roghnaigh cluiche eile</string>
-    <string name="mini_game_2048_picker_subtitle">Sleamhnaigh tíleanna le cumasc</string>
-    <string name="mini_game_flappy_picker_subtitle">Beartaigh chun eitilt trí phíopaí</string>
-    <string name="mini_game_flappy_tap_to_start">Beartaigh le heitilt</string>
-    <string name="mini_game_snake_picker_subtitle">Ith bia, ná buail tú féin</string>
-    <string name="mini_game_snake_swipe_to_start">Svaidhpeáil le tosú</string>
-    <string name="mini_game_dino_picker_subtitle">Tapáil chun léim thar cacti</string>
-    <string name="mini_game_dino_tap_to_start">Tapáil le rith</string>
-    <string name="mini_game_blocks_picker_subtitle">Fit na cruthanna, línte soiléire</string>
-    <string name="mini_game_blocks_tap_to_start">Tapáil chun rothlú, sleamhnú chun bogadh, sleamhnú síos le titim</string>
-    <string name="mini_game_bricks_picker_subtitle">Preab an liathróid, glan an balla</string>
-    <string name="mini_game_bricks_tap_to_start">Tarraing chun aidhm, tapáil chun seoladh</string>
-    <string name="mini_game_miner_picker_subtitle">Tapáil chun oscailt, coinnigh go bratach</string>
-    <string name="mini_game_pairs_picker_subtitle">Smeach cártaí, aimsigh an cluiche</string>
     <!-- Settings -->
     <string name="appearance">Dealramh</string>
     <string name="advanced">Ardleibhéil</string>
@@ -730,8 +639,6 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="settings_appearance_ui_scale_preview_subtitle">Téacs agus rialuithe ag an scála seo</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Home screen</string>
-    <string name="settings_appearance_greeting_phrases">Frásaí beannachta</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Taispeáin teachtaireacht beannachta ar an scáileán baile</string>
     <string name="settings_appearance_app_grouping">Grúpáil aipeanna</string>
     <string name="settings_appearance_app_grouping_description">Taispeáin lasc chun aipeanna a ghrúpáil de réir foinse nó catagóire</string>
     <string name="settings_appearance_repatch_notice">Fógra athphaisteála</string>
@@ -1161,16 +1068,6 @@ Sonraí: %2$s"</string>
     <string name="credits_current_development">Forbairt reatha</string>
     <string name="credits_prior_development">Forbairt roimhe seo</string>
     <string name="opensource_licenses">Ceadúnais foinse oscailte</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">Rogha</string>
-    <string name="easter_egg_pill_message">Glac an piolla gorm agus fanann na fógraí díreach mar a bhfuil siad. Glac an ceann dearg agus féach cé chomh domhain is a théann an cód beart.</string>
-    <string name="easter_egg_pill_red">Piolla dearg</string>
-    <string name="easter_egg_pill_blue">Piolla gorm</string>
-    <string name="easter_egg_pill_red_toast">Cúlra maitrís díghlasáilte</string>
-    <string name="easter_egg_pill_blue_toast">Beidh na fógraí ag fanacht leat</string>
-    <string name="easter_egg_pill_message_again">Tá tú sa Maitrís cheana féin. Scaoileann an piolla dearg ar ais sa bháisteach thú, dúisíonn an ceann gorm thú.</string>
-    <string name="easter_egg_pill_red_toast_again">Ar ais sa bháisteach</string>
-    <string name="easter_egg_pill_blue_toast_again">Díphlugáilte. Is é an bealach ar ais an áit a raibh sé i gcónaí.</string>
     <!-- Shared strings -->
     <string name="select_file">Roghnaigh comhad</string>
     <string name="select_files">Roghnaigh comhaid</string>

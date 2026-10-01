@@ -82,7 +82,7 @@ private val SwipeFlingVelocity = 400.dp
  * @param selectorPadding Room around the pill, for pages that run to the edges of their container.
  * @param contentColor Ink of the pill and its idle segments, the text color of the surface below.
  * @param pageSwipeEnabled Whether a swipe over the settled page turns it. A page that takes drags
- *   of its own, such as a game, turns it off, leaving the pill to switch it.
+ *   of its own turns it off, leaving the pill to switch it.
  * @param below Content every page shares, laid out under the pager rather than repeated in it.
  */
 @Composable

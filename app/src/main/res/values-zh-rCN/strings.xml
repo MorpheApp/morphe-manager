@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">此分类不可用操作</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">您想要修补哪个应用程序？</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">准备好再次让应用变得传奇吗？</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">系好安全带,开始修补了</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">又一天,又一件屏蔽广告的杰作</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">想看广告吗？我也不想</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">让你的应用程序更安分一点</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">今天的预报:100%的修补几率</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">准备把平庸变成出众吗？</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">从今天开始,拯救应用程序</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">本应用的动力来自咖啡因和优秀的补丁</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">起床并修补</string>
-    <string name="home_greeting_morning_2">早上好！应用不会自行修补</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">下午低迷？修补点什么</string>
-    <string name="home_greeting_afternoon_2">午饭后更新真香</string>
-    <string name="home_greeting_afternoon_3">下午班次：更新时刻</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">晚上好！晚间更新，别有一番风味</string>
-    <string name="home_greeting_evening_2">准备休息？先更新个应用吧</string>
-    <string name="home_greeting_evening_3">准备下班？先更新个应用再说</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">还在熬夜？应用们也在等待更新</string>
-    <string name="home_greeting_late_night_2">深夜更新会话？点赞</string>
-    <string name="home_greeting_late_night_3">夜猫模式：已启动</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">更新高峰时段…据说</string>
-    <string name="home_greeting_super_late_2">睡不着？更新个应用</string>
-    <string name="home_greeting_super_late_3">到这个点，干脆起来更新吧</string>
-    <string name="home_greeting_super_late_4">你和服务器，都在线上</string>
-    <string name="home_greeting_super_late_5">夜间且高效</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">补丁源</string>
     <string name="sources_search">搜索源和补丁</string>
@@ -527,8 +488,6 @@
     <string name="patcher_field_value_stripped">已移除</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">已保留</string>
-    <string name="patcher_tab_logs">补丁日志</string>
-    <string name="patcher_tab_game">游戏</string>
     <string name="patcher_logs_waiting">正在等待日志输出…</string>
     <string name="patcher_logs_lost">应用程序重启后，日志输出不会保留</string>
     <string name="patcher_long_step_warning">此步骤可能需要一段时间。请稍候…</string>
@@ -555,7 +514,6 @@
     <string name="patcher_install_error_subtitle">尝试重新卸载并安装</string>
     <string name="patcher_ready_to_mount_subtitle">按下方按钮挂载</string>
     <string name="patcher_patches_excluded_for_installer">不适用于此安装方法并已排除：%s</string>
-    <string name="patcher_back_to_game_hint">点击%1$s返回游戏</string>
     <string name="patcher_storage_permission_dialog_title">无法访问存储路径</string>
     <string name="patcher_incompatible_patcher_title">更新要求</string>
     <string name="patcher_incompatible_patcher_description">该补丁包&lt;b&gt;%1$s&lt;/b&gt;需要补丁程序版本&lt;b&gt;%2$s&lt;/b&gt;或更高版本。请更新 Morphe 以补丁此应用</string>
@@ -598,32 +556,6 @@
     <string name="patcher_notification_text">点击返回修补程序</string>
     <string name="patcher_stop_confirm_title">停止修补程序</string>
     <string name="patcher_stop_confirm_description">您确定要停止修补过程吗？</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">正在将您的应用塑造成令人赞叹的样子… 🏆</string>
-    <string name="patcher_message_2">教旧应用新技巧… 🎩</string>
-    <string name="patcher_message_3">正在为您的应用进行数字调优… 🔧</string>
-    <string name="patcher_message_4">正在醸造数字魔法… ☕</string>
-    <string name="patcher_message_5">建议休息一下… ☕</string>
-    <string name="patcher_message_6">看看外面，天气真好… 🌤️</string>
-    <string name="patcher_message_7">正在调整1和0… 🤖</string>
-    <string name="patcher_message_8">正在解开数字意大利面条… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">正在修复未修补应用中的错误… 🪲</string>
-    <string name="patcher_message_10">精彩的补丁值得等待… ⏳</string>
-    <string name="patcher_message_11">抛光像素直到它们闪耀… 💎</string>
-    <string name="patcher_message_12">在机长关掉\"正在进行补丁\"标识之前请保持座位…💺✈️</string>
-    <string name="patcher_message_13">正在为您烹饪打好补丁的应用，热腾腾…… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">正在与字节码礼貌地协商… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">所有系统正常……打补丁轨迹稳定…… 🚀</string>
-    <string name="patcher_message_16">榨取额外动力，就像从数字柠檬中榨取果汁一样…… 🍋</string>
-    <string name="patcher_message_17">鼓励应用接受其全新、更好的自我…… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">将应用叠加从未打补丁更改为已打补丁…… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">您的应用发烧了，唯一的治疗方法是更多的补丁…… 🩺🔔</string>
-    <string name="patcher_message_20">正在移除无意义的内容。请稍等… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">修补应用</string>
     <string name="memory_usage">内存使用</string>
@@ -653,29 +585,6 @@
     <string name="package_name">包名</string>
     <string name="failed_to_mount">挂载失败：%s</string>
     <string name="failed_to_unmount">取消挂载失败：%s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">得分 %s</string>
-    <string name="mini_game_best">最佳 %s</string>
-    <string name="mini_game_new_record">新的记录！</string>
-    <string name="mini_game_game_over">游戏结束</string>
-    <string name="mini_game_try_again">重试</string>
-    <string name="mini_game_paused">暂停</string>
-    <string name="mini_game_resume">继续</string>
-    <string name="mini_game_restart">重新开始</string>
-    <string name="mini_game_change">选择其他游戏</string>
-    <string name="mini_game_2048_picker_subtitle">滑动方块进行合并</string>
-    <string name="mini_game_flappy_picker_subtitle">点击穿过管道</string>
-    <string name="mini_game_flappy_tap_to_start">点击飞行</string>
-    <string name="mini_game_snake_picker_subtitle">吃食物，不要撞到自己</string>
-    <string name="mini_game_snake_swipe_to_start">滑动开始</string>
-    <string name="mini_game_dino_picker_subtitle">点击跳过仙人掌</string>
-    <string name="mini_game_dino_tap_to_start">点击奔跑</string>
-    <string name="mini_game_blocks_picker_subtitle">匹配形状，清除线条</string>
-    <string name="mini_game_blocks_tap_to_start">点击旋转，滑动移动，下滑落下</string>
-    <string name="mini_game_bricks_picker_subtitle">弹跳球，清除墙壁</string>
-    <string name="mini_game_bricks_tap_to_start">拖动瞄准，点击发射</string>
-    <string name="mini_game_miner_picker_subtitle">点击打开，长按标记</string>
-    <string name="mini_game_pairs_picker_subtitle">翻转卡片，找到配对</string>
     <!-- Settings -->
     <string name="appearance">外观</string>
     <string name="advanced">高级</string>
@@ -730,8 +639,6 @@
     <string name="settings_appearance_ui_scale_preview_subtitle">此比例下的文本和控件</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">主屏幕</string>
-    <string name="settings_appearance_greeting_phrases">问候语</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">在主屏幕上显示问候消息</string>
     <string name="settings_appearance_app_grouping">应用分组</string>
     <string name="settings_appearance_app_grouping_description">显示一个开关，用于按来源或类别对应用进行分组</string>
     <string name="settings_appearance_repatch_notice">重新打补丁通知</string>
@@ -1163,16 +1070,6 @@ morphe_header_custom_dark.png
     <string name="credits_current_development">当前开发</string>
     <string name="credits_prior_development">先前开发</string>
     <string name="opensource_licenses">开源许可证</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">一个选择</string>
-    <string name="easter_egg_pill_message">服用蓝色药丸，广告就会保持原样。服用红色药丸，看看字节码究竟有多深。</string>
-    <string name="easter_egg_pill_red">红色药丸</string>
-    <string name="easter_egg_pill_blue">蓝色药丸</string>
-    <string name="easter_egg_pill_red_toast">矩阵背景已解锁</string>
-    <string name="easter_egg_pill_blue_toast">广告在等着你</string>
-    <string name="easter_egg_pill_message_again">你已经在矩阵中。红色药丸让你回到雨中，蓝色药丸让你醒来。</string>
-    <string name="easter_egg_pill_red_toast_again">回到雨中</string>
-    <string name="easter_egg_pill_blue_toast_again">已断开。回去的路始终在那里。</string>
     <!-- Shared strings -->
     <string name="select_file">选择文件</string>
     <string name="select_files">选择文件</string>

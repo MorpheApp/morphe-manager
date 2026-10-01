@@ -85,47 +85,8 @@
     <string name="home_category_delete_confirm_message">Delete category &lt;b&gt;%1$s&lt;/b&gt;? Apps in it will move back to &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="home_category_actions_unavailable">Actions unavailable for this category</string>
 
-    <!-- Home Screen - Home Greetings -->
+    <!-- Home Screen - Home Greeting -->
     <string name="home_greeting_1">What app do you want to patch?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Ready to make apps legendary again?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Buckle up, it\'s patching time</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Another day, another ad-blocked masterpiece</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Want to watch ads? Me neither</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Let\'s make your apps behave</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Today\'s forecast: 100% chance of patching</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Ready to change underwhelming into awesome?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Saving apps from themselves since today</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Powered by caffeine and good patches</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Rise and patch</string>
-    <string name="home_greeting_morning_2">Good morning! Apps won\'t patch themselves</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Afternoon slump? Patch something</string>
-    <string name="home_greeting_afternoon_2">Post-lunch patching hits different</string>
-    <string name="home_greeting_afternoon_3">The afternoon shift: patch edition</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Good evening! Evening patches hit different</string>
-    <string name="home_greeting_evening_2">Winding down? Patch an app first</string>
-    <string name="home_greeting_evening_3">Clocking out? Patch something first</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Still up? So are the apps that need patching</string>
-    <string name="home_greeting_late_night_2">Late night patch session? Respect</string>
-    <string name="home_greeting_late_night_3">Night owl mode: activated</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Peak patching hours… allegedly</string>
-    <string name="home_greeting_super_late_2">Can\'t sleep? Patch something</string>
-    <string name="home_greeting_super_late_3">At this point, just stay up and patch</string>
-    <string name="home_greeting_super_late_4">You and the servers, both awake</string>
-    <string name="home_greeting_super_late_5">Nocturnal and productive</string>
 
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patch sources</string>
@@ -548,8 +509,6 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="patcher_field_value_kept">kept</string>
     <string name="patcher_patches_progress_format" translatable="false">%1$s / %2$s</string>
     <string name="patcher_percentage" translatable="false">%s%%</string>
-    <string name="patcher_tab_logs">Patcher logs</string>
-    <string name="patcher_tab_game">Games</string>
     <string name="patcher_logs_waiting">Waiting for log output…</string>
     <string name="patcher_logs_lost">Log output is not kept across app restarts</string>
     <string name="patcher_long_step_warning">This step may take a while. Please wait…</string>
@@ -576,7 +535,6 @@ Uninstalling will permanently erase all app data"</string>
     <string name="patcher_install_error_subtitle">Try uninstalling and installing again</string>
     <string name="patcher_ready_to_mount_subtitle">Press the button below to mount</string>
     <string name="patcher_patches_excluded_for_installer">Not available for this install method and excluded: %s</string>
-    <string name="patcher_back_to_game_hint">Tap %1$s to go back to your game</string>
     <string name="patcher_storage_permission_dialog_title">Cannot access storage path</string>
     <string name="patcher_incompatible_patcher_title">Update required</string>
     <string name="patcher_incompatible_patcher_description">The bundle &lt;b&gt;%1$s&lt;/b&gt; requires patcher version &lt;b&gt;%2$s&lt;/b&gt; or newer. Please update Morphe to patch this app</string>
@@ -624,32 +582,8 @@ Uninstalling will permanently erase all app data"</string>
     <string name="patcher_stop_confirm_title">Stop patcher</string>
     <string name="patcher_stop_confirm_description">Are you sure you want to stop the patching process?</string>
 
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Morphing your app into something awesome… 🏆</string>
-    <string name="patcher_message_2">Teaching old apps new tricks… 🎩</string>
-    <string name="patcher_message_3">Giving your app a digital tune-up… 🔧</string>
-    <string name="patcher_message_4">Brewing digital magic… ☕</string>
-    <string name="patcher_message_5">Coffee break recommended… ☕</string>
-    <string name="patcher_message_6">Look outside, it\'s nice out there… 🌤️</string>
-    <string name="patcher_message_7">Adjusting 1s and 0s… 🤖</string>
-    <string name="patcher_message_8">Untangling digital spaghetti… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Fixing bugs in the unpatched app… 🪲</string>
-    <string name="patcher_message_10">Great patches are worth the wait… ⏳</string>
-    <string name="patcher_message_11">Polishing pixels until they shine… 💎</string>
-    <string name="patcher_message_12">Please remain seated until the captain turns off the \"Patching in progress\" sign… 💺✈️</string>
-    <string name="patcher_message_13">Cooking up your patched app, hot and fresh… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Negotiating politely with bytecode… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">All systems nominal… patching trajectory is stable… 🚀</string>
-    <string name="patcher_message_16">Squeezing out extra power, like juice from a digital lemon… 🍋</string>
-    <string name="patcher_message_17">Encouraging the app to accept its new, better self… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Changing the app superposition from unpatched to patched… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Your app has a fever, and the only prescription is more patches… 🩺🔔</string>
-    <string name="patcher_message_20">Removing nonsense. Please stand by… 🗑️</string>
+    <!-- Patcher Screen - Patcher Message -->
+    <string name="patcher_message">Patching your app…</string>
 
     <!-- Expert patcher Screen -->
     <string name="patching_app">Patching app</string>
@@ -684,48 +618,6 @@ Uninstalling will permanently erase all app data"</string>
     <string name="failed_to_mount">Failed to mount: %s</string>
     <string name="failed_to_unmount">Failed to unmount: %s</string>
 
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Score %s</string>
-    <string name="mini_game_best">Best %s</string>
-    <string name="mini_game_new_record">New record!</string>
-    <string name="mini_game_game_over">Game Over</string>
-    <string name="mini_game_try_again">Try Again</string>
-    <string name="mini_game_paused">Paused</string>
-    <string name="mini_game_resume">Continue</string>
-    <string name="mini_game_restart">Start over</string>
-    <string name="mini_game_change">Choose another game</string>
-
-    <string name="mini_game_2048" translatable="false">2048</string>
-    <string name="mini_game_2048_picker_subtitle">Slide tiles to merge</string>
-    <string name="mini_game_2048_win" translatable="false">2048!</string>
-
-    <string name="mini_game_flappy" translatable="false">Flappy</string>
-    <string name="mini_game_flappy_picker_subtitle">Tap to fly through pipes</string>
-    <string name="mini_game_flappy_tap_to_start">Tap to fly</string>
-
-    <string name="mini_game_snake" translatable="false">Snake</string>
-    <string name="mini_game_snake_picker_subtitle">Eat food, don\'t hit yourself</string>
-    <string name="mini_game_snake_swipe_to_start">Swipe to start</string>
-
-    <string name="mini_game_dino" translatable="false">Dino</string>
-    <string name="mini_game_dino_picker_subtitle">Tap to jump over cacti</string>
-    <string name="mini_game_dino_tap_to_start">Tap to run</string>
-
-    <string name="mini_game_blocks" translatable="false">Blocks</string>
-    <string name="mini_game_blocks_picker_subtitle">Fit the shapes, clear lines</string>
-    <string name="mini_game_blocks_tap_to_start">Tap to rotate, swipe to move, swipe down to drop</string>
-
-    <string name="mini_game_bricks" translatable="false">Bricks</string>
-    <string name="mini_game_bricks_picker_subtitle">Bounce the ball, clear the wall</string>
-    <string name="mini_game_bricks_tap_to_start">Drag to aim, tap to launch</string>
-
-    <string name="mini_game_miner" translatable="false">Miner</string>
-    <string name="mini_game_miner_picker_subtitle">Tap to open, hold to flag</string>
-    <string name="mini_game_miner_flags" translatable="false">%1$s/%2$s</string>
-
-    <string name="mini_game_pairs" translatable="false">Pairs</string>
-    <string name="mini_game_pairs_picker_subtitle">Flip cards, find the match</string>
-
     <!-- Settings -->
     <string name="appearance">Appearance</string>
     <string name="advanced">Advanced</string>
@@ -742,7 +634,6 @@ Uninstalling will permanently erase all app data"</string>
     <string name="settings_appearance_background_snow">Snow</string>
     <string name="settings_appearance_background_grid">Grid</string>
     <string name="settings_appearance_background_particles">Particles</string>
-    <string name="settings_appearance_background_matrix" translatable="false">Matrix</string>
     <string name="settings_appearance_background_none">None</string>
     <string name="settings_appearance_background_random">Random</string>
     <string name="settings_appearance_background_random_interval_launch">On launch</string>
@@ -788,8 +679,6 @@ Uninstalling will permanently erase all app data"</string>
 
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Home screen</string>
-    <string name="settings_appearance_greeting_phrases">Greeting phrases</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Show a greeting message on the home screen</string>
     <string name="settings_appearance_app_grouping">App grouping</string>
     <string name="settings_appearance_app_grouping_description">Show a switcher to group apps by source or category</string>
     <string name="settings_appearance_repatch_notice">Re-patch notice</string>
@@ -1248,17 +1137,6 @@ Details: %2$s"</string>
     <string name="credits_current_development">Current development</string>
     <string name="credits_prior_development">Prior development</string>
     <string name="opensource_licenses">Open-source licenses</string>
-
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">A choice</string>
-    <string name="easter_egg_pill_message">Take the blue pill and the ads stay exactly where they are. Take the red one and see how deep the bytecode goes</string>
-    <string name="easter_egg_pill_red">Red pill</string>
-    <string name="easter_egg_pill_blue">Blue pill</string>
-    <string name="easter_egg_pill_red_toast">Matrix background unlocked</string>
-    <string name="easter_egg_pill_blue_toast">The ads will be waiting for you</string>
-    <string name="easter_egg_pill_message_again">You are already in the Matrix. The red pill drops you back into the rain, the blue one wakes you up</string>
-    <string name="easter_egg_pill_red_toast_again">Back in the rain</string>
-    <string name="easter_egg_pill_blue_toast_again">Unplugged. The way back is where it always was</string>
 
     <!-- Shared strings -->
     <string name="app_name" translatable="false">Morphe</string>

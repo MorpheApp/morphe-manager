@@ -34,24 +34,6 @@
     <string name="home_category_custom">Personalizado</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Qué aplicación desexa parchear?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Listo para facer as aplicacións lexendarias de novo?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Abroche o cinto, é a hora dos parches</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Outro día máis, outra obra mestra con bloqueo de anuncios</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Quere ver anuncios? Eu tampouco</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Faga que as súas aplicacións se comporten</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Previsión do día: 100% de probabilidade de parcheo</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Listo para transformar o mediocre en algo incrible?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Salvando as aplicacións de si mesmas dende hoxe</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Propulsado por cafeína e bos parches</string>
     <!-- Morning greetings (5:00–11:59) -->
     <!-- Afternoon greetings (12:00–16:59) -->
     <!-- Evening greetings (17:00–21:59) -->
@@ -251,13 +233,6 @@ Elixe outro APK</string>
     <string name="patcher_notification_title">Parcheado en progreso...</string>
     <string name="patcher_notification_text">Toque para volver ao parcheador</string>
     <string name="patcher_stop_confirm_title">Deter parcheador</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Transformando a túa aplicación en algo incrible... 🏆</string>
-    <string name="patcher_message_2">Ensinando trucos novos a aplicacións vellas… 🎩</string>
-    <string name="patcher_message_3">Dando uns axustes dixitais á súa aplicación… 🔧</string>
-    <string name="patcher_message_4">Preparando maxia dixital… ☕</string>
-    <string name="patcher_message_5">Pausa para o café recomendada… ☕</string>
-    <string name="patcher_message_6">Mira fóra, vai bo tempo... 🌤️</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <!-- "bytecode" can be translated from "the app code" -->
     <!-- Space flight communications callout. -->
@@ -266,8 +241,6 @@ Elixe outro APK</string>
     <!-- Expert patcher Screen -->
     <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
     <!-- Patcher Screen - Other hidden strings -->
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_resume">Continuar</string>
     <!-- Settings -->
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background_none">Ningún</string>

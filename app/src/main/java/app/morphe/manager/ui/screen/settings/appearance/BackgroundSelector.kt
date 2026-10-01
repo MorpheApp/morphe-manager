@@ -58,8 +58,7 @@ fun BackgroundPickerDialog(
     onDismiss: () -> Unit,
     resolvedRandomBackground: BackgroundType?,
     enableParallax: Boolean,
-    onParallaxToggle: () -> Unit,
-    matrixUnlocked: Boolean = false
+    onParallaxToggle: () -> Unit
 ) {
     val windowSize = rememberWindowSize()
     val columns = when (windowSize.widthSizeClass) {
@@ -68,8 +67,7 @@ fun BackgroundPickerDialog(
         WindowWidthSizeClass.Expanded -> 5
     }
 
-    // Every type, minus the hidden ones still to be found
-    val gridTypes = BackgroundType.entries.filter { matrixUnlocked || it !in BackgroundType.HIDDEN }
+    val gridTypes = BackgroundType.entries
 
     AppDialog(
         onDismissRequest = onDismiss,
@@ -163,7 +161,6 @@ private fun backgroundIcon(type: BackgroundType): ImageVector = when (type) {
     BackgroundType.SNOW      -> Icons.Outlined.AcUnit
     BackgroundType.GRID      -> Icons.Outlined.Apps
     BackgroundType.PARTICLES -> Icons.Outlined.BubbleChart
-    BackgroundType.MATRIX    -> Icons.Outlined.Code
     BackgroundType.NONE      -> Icons.Outlined.VisibilityOff
     BackgroundType.RANDOM    -> Icons.Outlined.Shuffle
 }

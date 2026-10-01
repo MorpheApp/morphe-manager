@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">ไม่มีการดำเนินการสำหรับหมวดหมู่นี้</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">คุณต้องการแพตช์แอปอะไร?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">พร้อมหรือยังที่จะทำให้แอปของคุณกลับมาเป็นตำนานอีกครั้ง</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">รัดเข็มขัดซ่ะ ได้เวลาแพตช์แล้ว</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">ก็อีกแค่วันนึงกับผลงานการบล็อกโฆษณาชิ้นโบว์แดง</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">อยากดูโฆษณาไหม? ผมก็ไม่อยาก</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">มาปรับตัวแอปของคุณให้มีพฤติกรรมดีขึ้นเถอะ</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">พยากรณ์วันนี้: การแพตช์แอปสำเร็จ 100%</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">พร้อมไหมที่จะเปลี่ยนแอปพลิเคชันดังเดิมที่แสนน่าเบื่อให้สุดยอดมากขึ้น</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">ช่วยแอปให้รอดตัวตั้งแต่วันนี้</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">สนับสนุนโดยกาแฟหนึ่งแก้วกับแพตช์ที่มีคุณภาพ</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">ตื่นเช้าแล้วก็แพตช์</string>
-    <string name="home_greeting_morning_2">อรุณสวัสดิ์! แอปจะไม่แพตช์ด้วยตัวเองหรอก</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">ช่วงบ่ายง่วงๆ? แพตช์อะไรสักอย่างหน่อยสิ</string>
-    <string name="home_greeting_afternoon_2">การแพตช์หลังอาหารกลางวันให้ความรู้สึกที่แตกต่าง</string>
-    <string name="home_greeting_afternoon_3">กะบ่าย: แพตช์อีดิชั่น</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">สวัสดีตอนเย็น! การแพตช์แอปตอนเย็นให้ความรู้สึกที่แตกต่าง</string>
-    <string name="home_greeting_evening_2">กำลังพักผ่อน? แพตช์แอปก่อนเลย</string>
-    <string name="home_greeting_evening_3">เลิกงานแล้ว? แพตช์อะไรก่อนก็ได้</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">ยังไม่นอนเหรอ? แอปที่ต้องแพตช์ก็ยังรออยู่</string>
-    <string name="home_greeting_late_night_2">ช่วงดึกมาแพตช์แอป? โคตรนับถือ</string>
-    <string name="home_greeting_late_night_3">โหมดนกกลางคืน: เปิดใช้งานแล้ว</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">ช่วงเวลาแพตช์แอปอย่างโหด… ว่ากันว่านะ</string>
-    <string name="home_greeting_super_late_2">นอนไม่หลับ? แพตช์อะไรสักอย่างสิ</string>
-    <string name="home_greeting_super_late_3">ถ้าจะขนาดนี้ ก็อยู่ตื่นแล้วแพตช์ไปเลยก็ได้</string>
-    <string name="home_greeting_super_late_4">คุณกับเซิร์ฟเวอร์ ต่างก็ยังตื่นอยู่</string>
-    <string name="home_greeting_super_late_5">ตื่นตอนกลางคืนและยังทำงานได้</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">จัดการแหล่งที่มา</string>
     <string name="sources_search">ค้นหาแหล่งที่มาและแพตช์</string>
@@ -527,8 +488,6 @@
     <string name="patcher_field_value_stripped">ถูกตัดออก</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">คงไว้</string>
-    <string name="patcher_tab_logs">บันทึกตัวแพตช์</string>
-    <string name="patcher_tab_game">เกม</string>
     <string name="patcher_logs_waiting">กำลังรอผลลัพธ์บันทึก…</string>
     <string name="patcher_logs_lost">ผลลัพธ์บันทึกจะไม่ถูกเก็บไว้เมื่อรีสตาร์ทแอป</string>
     <string name="patcher_long_step_warning">ขั้นตอนนี้อาจใช้เวลานาน โปรดรอสักครู่…</string>
@@ -555,7 +514,6 @@
     <string name="patcher_install_error_subtitle">ลองถอนการติดตั้งแล้วติดตั้งใหม่อีกครั้ง</string>
     <string name="patcher_ready_to_mount_subtitle">กดปุ่มด้านล่างเพื่อ Mount</string>
     <string name="patcher_patches_excluded_for_installer">ไม่สามารถใช้ได้กับวิธีการติดตั้งนี้ และไม่รวม: %s</string>
-    <string name="patcher_back_to_game_hint">แตะ %1$s เพื่อกลับไปยังเกมของคุณ</string>
     <string name="patcher_storage_permission_dialog_title">ไม่สามารถเข้าถึงเส้นทางเก็บข้อมูล</string>
     <string name="patcher_incompatible_patcher_title">จำเป็นต้องอัปเดต</string>
     <string name="patcher_incompatible_patcher_description">ชุดข้อมูล &lt;b&gt;%1$s&lt;/b&gt; จำเป็นต้องใช้ตัวแพตช์เวอร์ชัน &lt;b&gt;%2$s&lt;/b&gt; หรือใหม่กว่า โปรดอัปเดต Morphe เพื่อแพตช์แอปนี้</string>
@@ -598,32 +556,6 @@
     <string name="patcher_notification_text">แตะเพื่อกลับไปยังตัวแพตช์</string>
     <string name="patcher_stop_confirm_title">หยุดตัวแพตช์</string>
     <string name="patcher_stop_confirm_description">คุณแน่ใจหรือไม่ว่าต้องการหยุดกระบวนการแพตช์?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">กำลังแปลงแอปของคุณให้เป็นสิ่งที่ยอดเยี่ยม… 🏆</string>
-    <string name="patcher_message_2">กำลังสอนแอปเก่าให้ทำสิ่งใหม่ๆ… 🎩</string>
-    <string name="patcher_message_3">กำลังปรับปรุงแอปของคุณแบบดิจิทัล… 🔧</string>
-    <string name="patcher_message_4">กำลังร่ายเวทมนตร์ดิจิทัล… ☕</string>
-    <string name="patcher_message_5">แนะนำให้พักดื่มกาแฟ… ☕</string>
-    <string name="patcher_message_6">มองออกไปข้างนอกสิ อากาศดีนะ… 🌤️</string>
-    <string name="patcher_message_7">กำลังปรับบิต 1 และ 0… 🤖</string>
-    <string name="patcher_message_8">กำลังคลายปมสปาเก็ตตี้ดิจิทัล… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">กำลังแก้ไขปัญหาในแอปที่ไม่ถูกแพตช์… 🪲</string>
-    <string name="patcher_message_10">แพตช์ดีๆ กับคุ้มค่ากับที่รอคอย… ⏳</string>
-    <string name="patcher_message_11">กำลังขัดเกลาเม็ดพิกเซลให้เปล่งประกาย… 💎</string>
-    <string name="patcher_message_12">โปรดนั่งรอจนกว่ากัปตันจะปิดป้ายบอกว่า \'กำลังแพตช์\'… 💺✈️</string>
-    <string name="patcher_message_13">กำลังปรุงแอปที่แพตช์แล้วของคุณ สดๆ ร้อนๆ … 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">กำลังเจรจาอย่างสุภาพกับไบต์โค้ด… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">ระบบทั้งหมดทำงานปกติ... เส้นทางการแพตช์เสถียร... 🚀</string>
-    <string name="patcher_message_16">รีดพลังงานพิเศษออกมา เหมือนคั้นน้ำจากมะนาวดิจิทัล... 🍋</string>
-    <string name="patcher_message_17">ส่งเสริมให้แอปยอมรับตัวเองในเวอร์ชันใหม่ที่ดีกว่า... 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">เปลี่ยนสถานะซ้อนทับของแอปจากที่ยังไม่ได้แพตช์เป็นแพตช์แล้ว... 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">แอปของคุณมีไข้ และวิธีรักษาเดียวคือต้องใช้แพตช์เพิ่ม... 🩺🔔</string>
-    <string name="patcher_message_20">กำลังไล่เบา กรุณารอสักครู่… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">กำลังแพตช์แอป</string>
     <string name="memory_usage">การใช้พื้นที่ความจำ</string>
@@ -653,29 +585,6 @@
     <string name="package_name">ชื่อแพ็กเกจ</string>
     <string name="failed_to_mount">ไม่สามารถติดตั้งใช้งานได้: %s</string>
     <string name="failed_to_unmount">ไม่สามารถยกเลิกการติดตั้งใช้งานได้: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">คะแนน %s</string>
-    <string name="mini_game_best">ดีที่สุด %s</string>
-    <string name="mini_game_new_record">บันทึกใหม่!</string>
-    <string name="mini_game_game_over">เกมจบ</string>
-    <string name="mini_game_try_again">ลองอีกครั้ง</string>
-    <string name="mini_game_paused">หยุดชั่วคราว</string>
-    <string name="mini_game_resume">ดำเนินการต่อ</string>
-    <string name="mini_game_restart">เริ่มใหม่</string>
-    <string name="mini_game_change">เลือกเกมอื่น</string>
-    <string name="mini_game_2048_picker_subtitle">เลื่อนไทล์เพื่อรวมกัน</string>
-    <string name="mini_game_flappy_picker_subtitle">แตะเพื่อบินผ่านท่อ</string>
-    <string name="mini_game_flappy_tap_to_start">แตะเพื่อบิน</string>
-    <string name="mini_game_snake_picker_subtitle">กินอาหาร อย่าให้ชนตัวเอง</string>
-    <string name="mini_game_snake_swipe_to_start">ปัดเพื่อเริ่มเกม</string>
-    <string name="mini_game_dino_picker_subtitle">แตะเพื่อกระโดดข้ามกระบองเพชร</string>
-    <string name="mini_game_dino_tap_to_start">แตะเพื่อวิ่ง</string>
-    <string name="mini_game_blocks_picker_subtitle">วางชิ้นส่วนให้พอดี ลบเส้น</string>
-    <string name="mini_game_blocks_tap_to_start">แตะเพื่อหมุน ปัดเพื่อเลื่อน ปัดลงเพื่อวาง</string>
-    <string name="mini_game_bricks_picker_subtitle">ตีลูกบอลให้เด้ง ทำลายกำแพง</string>
-    <string name="mini_game_bricks_tap_to_start">ลากเพื่อเล็ง แตะเพื่อยิง</string>
-    <string name="mini_game_miner_picker_subtitle">แตะเพื่อเปิด กดค้างเพื่อวางธง</string>
-    <string name="mini_game_pairs_picker_subtitle">พลิกไพ่ หาคู่ที่ตรงกัน</string>
     <!-- Settings -->
     <string name="appearance">หน้าตา</string>
     <string name="advanced">ขั้นสูง</string>
@@ -730,8 +639,6 @@
     <string name="settings_appearance_ui_scale_preview_subtitle">ข้อความและการควบคุมในขนาดนี้</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">หน้าจอหลัก</string>
-    <string name="settings_appearance_greeting_phrases">วลีทักทาย</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">แสดงข้อความทักทายบนหน้าจอหลัก</string>
     <string name="settings_appearance_app_grouping">การจัดกลุ่มแอป</string>
     <string name="settings_appearance_app_grouping_description">แสดงสวิตช์เพื่อจัดกลุ่มแอปตามแหล่งที่มาหรือหมวดหมู่</string>
     <string name="settings_appearance_repatch_notice">ประกาศการแพตช์ซ้ำ</string>
@@ -1163,16 +1070,6 @@ morphe_header_custom_dark.png
     <string name="credits_current_development">การพัฒนาปัจจุบัน</string>
     <string name="credits_prior_development">การพัฒนาที่ผ่านมา</string>
     <string name="opensource_licenses">สัญญาอนุญาตโอเพนซอร์ส</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">ทางเลือก</string>
-    <string name="easter_egg_pill_message">กินยาเม็ดสีฟ้า โฆษณาก็จะยังคงอยู่ที่เดิม กินยาเม็ดสีแดง แล้วจะได้เห็นว่าไบต์โค้ดลึกแค่ไหน</string>
-    <string name="easter_egg_pill_red">ยาเม็ดสีแดง</string>
-    <string name="easter_egg_pill_blue">ยาเม็ดสีฟ้า</string>
-    <string name="easter_egg_pill_red_toast">ปลดล็อกพื้นหลังเมทริกซ์แล้ว</string>
-    <string name="easter_egg_pill_blue_toast">โฆษณาจะรอคุณอยู่</string>
-    <string name="easter_egg_pill_message_again">คุณอยู่ในเมทริกซ์แล้ว. ยาเม็ดแดงทำให้คุณกลับไปในสายฝน, ยาเม็ดสีฟ้าปลุกคุณให้ตื่น</string>
-    <string name="easter_egg_pill_red_toast_again">กลับไปในสายฝน</string>
-    <string name="easter_egg_pill_blue_toast_again">ถอดปลั๊กแล้ว. ทางกลับคือที่เดิม</string>
     <!-- Shared strings -->
     <string name="select_file">เลือกไฟล์</string>
     <string name="select_files">เลือกไฟล์</string>

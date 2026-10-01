@@ -60,45 +60,6 @@
     <string name="home_category_actions_unavailable">Дзеянні недаступны для гэтай катэгорыі</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Якую праграму вы хочаце абнавіць?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Гатовыя зноў зрабіць праграмы легендарнымі?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Прышпіліце рамяні, час латаць</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Яшчэ адзін дзень, яшчэ адзін шэдэўр з блакіроўкай рэкламы</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Хочаце глядзець рэкламу? Я таксама не хачу.</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Давайце зробім так, каб вашы праграмы паводзілі сябе добра</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Прагноз на сёння: 100% верагоднасць выпраўлення</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Гатовыя змяніць непрыемнае на цудоўнае?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Захоўванне праграм ад саміх сябе з сённяшняга дня</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Працуе на кафеіне і добрых патчах</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Прачніцеся і патчце</string>
-    <string name="home_greeting_morning_2">Добрай раніцы! Праграмы самі сабе не абнавяць</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Абрыдла? Прапатч нешта.</string>
-    <string name="home_greeting_afternoon_2">Пасляабедзенны патчынг — іншы вайб</string>
-    <string name="home_greeting_afternoon_3">Дзённая змена: патч-эдышн</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Добрага вечара! Вечаровыя патчы — зусім іншы вайб</string>
-    <string name="home_greeting_evening_2">Хочаш адпачыць? Спачатку запатчы праграму</string>
-    <string name="home_greeting_evening_3">Скончыў працоўны дзень? Спачатку запатчы што-небудзь</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Яшчэ не спіш? Праграмы, якім патрэбен патч, таксама</string>
-    <string name="home_greeting_late_night_2">Начны патчынг? Павага</string>
-    <string name="home_greeting_late_night_3">Рэжым савы: актываваны</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Самы час патчыць праграмы… нібыта</string>
-    <string name="home_greeting_super_late_2">Не спіцца? Прапатчы што-небудзь</string>
-    <string name="home_greeting_super_late_3">Раз ужо на тое пайшло, проста не спі і патч</string>
-    <string name="home_greeting_super_late_4">Ты і серверы: абое не спіце</string>
-    <string name="home_greeting_super_late_5">Начны і прадуктыўны</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Крыніцы патчаў</string>
     <string name="sources_sort_title">Сартаваць крыніцы патчаў</string>

@@ -34,24 +34,6 @@
     <string name="home_category_custom">باو</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">دەتەوێت چی ئەپێک پینە بکەیت؟</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">ئامادەیت بۆ ئەوەی جارێکی تر ئەپەکان بکەیتەوە ئەفسانەیی؟</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">پشتێنەکەت ببەستە، خەریکە پینە دەبێ</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">ڕۆژێکی تر، شاکارێکی تری ڕیکلام بلۆککراو</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">دەتەوێت سەیری ڕیکلام بکەیت؟ منیش نا</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">با وا لە ئەپەکانت بکەین ڕەفتار بکەن</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">پێشبینییەکانی ئەمڕۆ: ١٠٠٪ ئەگەری پینەکردن</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">ئامادەی بۆ گۆڕینی بێ هیوا بوون بۆ سەرسوڕهێنەر؟</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">پاشەکەوتکردنی ئەپەکان لە خۆیانەوە لە ئەمڕۆوە</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">بە کافایین و پینەی باش کاردەکات</string>
     <!-- Morning greetings (5:00–11:59) -->
     <!-- Afternoon greetings (12:00–16:59) -->
     <!-- Evening greetings (17:00–21:59) -->
@@ -298,31 +280,6 @@
     <string name="patcher_notification_text">کرتە بکە بۆ گەڕانەوە بۆ پینەکەرەکە</string>
     <string name="patcher_stop_confirm_title">ڕاگرتنی پینەکەر</string>
     <string name="patcher_stop_confirm_description">ئایا دڵنیایت کە دەتەوێت پرۆسەی پینەکردنەکە بوەستێنیت؟</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">گۆڕینی کاربەرنامەکەت بۆ شتێکی نایاب… 🏆</string>
-    <string name="patcher_message_2">فێرکردنی فێڵێکی نوێ بۆ ئەپە کۆنەکان… 🎩</string>
-    <string name="patcher_message_3">پێدانی دەستکاری دیجیتاڵی بە ئەپەکەت… 🔧</string>
-    <string name="patcher_message_4">دروستکردنی جادووی دیجیتاڵی… ☕</string>
-    <string name="patcher_message_5">پشووی قاوە پێشنیار کراوە… ☕</string>
-    <string name="patcher_message_6">سەیری دەرەوە بکە، دەرەوە خۆشە… 🌤️</string>
-    <string name="patcher_message_8">هەڵوەشاندنەوەی سپاگێتی دیجیتاڵی… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">چارەسەرکردنی کێشەکان لە ئەپە پینەنەکراوەکە… 🪲</string>
-    <string name="patcher_message_10">پینەی مەزن شایەنی چاوەڕوانکردنن… ⏳</string>
-    <string name="patcher_message_11">بریقەدار کردنی پیکسڵەکان تا دەدرەوشێنەوە… 💎</string>
-    <string name="patcher_message_12">تکایە بە دانیشتن بمێنەرەوە تاوەکو کاپتنەکە هێمای \"پینەکردن لە بەردەوامیدا\" دەکوژێنێتەوە… 💺✈️</string>
-    <string name="patcher_message_13">ئامادەکردنی ئەپی پینەکراوت، گەرم و تازە… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">گفتوگۆکردن بە بەڕێزانە لەگەڵ بایت کۆد… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">هەموو سیستەمەکان ئاسایین… ڕێڕەوەکە جێگیرە… 🚀</string>
-    <string name="patcher_message_16">گوشینی وزەی زیادە، وەک شەربەتی لیمۆی دیجیتاڵی… 🍋</string>
-    <string name="patcher_message_17">هاندانی ئەپەکە بۆ باوەشکردنی خودی نوێ و پێشکەوتووتربوە… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">گۆڕینی سەرهەڵدانی ئەپەکە لە پینەنەکراوەوە بۆ پینەکراو… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">ئەپەکەت تای هەیە، و تاکە ڕەچەتەیە پینەی زیاتری بدەینێ… 🩺🔔</string>
-    <string name="patcher_message_20">لابردنی قسەی بێمانا. تکایە ئامادە بە… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">پینەکردنی ئەپ</string>
     <string name="memory_usage">بەکارهێنانی بیرگە</string>
@@ -342,8 +299,6 @@
     <string name="package_name">ناوی پاکەت</string>
     <string name="failed_to_mount">سەرکەوتوو نەبوو لە جێگیرکردنی: %s</string>
     <string name="failed_to_unmount">سەرکەوتوو نەبوو لە لابردنی جێگیری: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_resume">بەردەوامبوون</string>
     <!-- Settings -->
     <string name="appearance">دەرکەوتن</string>
     <string name="advanced">پێشکەوتوو</string>
@@ -381,8 +336,6 @@
     <!-- Settings - Appearance Tab - Interface Scale -->
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">شاشەی ماڵەوە</string>
-    <string name="settings_appearance_greeting_phrases">دەستەواژەی بەخێرهاتن</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">پەیامێکی بەخێرهاتن پیشان بدە لەسەر شاشەی سەرەکی</string>
     <string name="settings_appearance_app_card_colors_default">بنەڕەت</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">وێنۆچکەی ئەپ</string>

@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">Handlinger ikke tilgængelige for denne kategori</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Hvilken app vil du have til at blive opgraderet?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Klar til at gøre apps legendariske igen?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Spænd sikkerhedsselen, det er tid til at opgradere</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Endnu en dag, endnu et ad-blokket mesterværk</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Vil du se reklamer? Det gør jeg heller ikke</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Lad os få dine apps til at opføre sig ordentligt</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Dagens vejrudsigt: 100% chance for patching</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Klar til at ændre det middelmådige til fantastisk?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Redder apps fra dem selv siden i dag</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Drevet af koffein og gode patches</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Stå op og patc</string>
-    <string name="home_greeting_morning_2">Godmorgen! Apps patcer ikke sig selv</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Eftermiddagstræthed? Patch noget</string>
-    <string name="home_greeting_afternoon_2">Eftermiddags-patchning rammer anderledes</string>
-    <string name="home_greeting_afternoon_3">Eftermiddagsskiftet: patch-udgaven</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">God aften! Aften-patchning rammer anderledes</string>
-    <string name="home_greeting_evening_2">Slapper af? Patch en app først</string>
-    <string name="home_greeting_evening_3">Klar til at gå? Patch noget først</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Stadig vågen? Det er appsene, der skal patche også</string>
-    <string name="home_greeting_late_night_2">Sen natte-patch-session? Respekt</string>
-    <string name="home_greeting_late_night_3">Natugle-tilstand: aktiveret</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Højtid for patchning… angiveligt</string>
-    <string name="home_greeting_super_late_2">Kan ikke sove? Patch noget</string>
-    <string name="home_greeting_super_late_3">På dette tidspunkt, bare bliv vågen og patch</string>
-    <string name="home_greeting_super_late_4">Dig og serverne, begge vågne</string>
-    <string name="home_greeting_super_late_5">Natlig og produktiv</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patchkilder</string>
     <string name="sources_search">Søg i kilder og patches</string>
@@ -527,8 +488,6 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="patcher_field_value_stripped">strippet</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">beholdt</string>
-    <string name="patcher_tab_logs">Patch-logfiler</string>
-    <string name="patcher_tab_game">Spil</string>
     <string name="patcher_logs_waiting">Vent på log output…</string>
     <string name="patcher_logs_lost">Log output gemmes ikke mellem app genstarter</string>
     <string name="patcher_long_step_warning">Dette trin kan tage et stykke tid. Vent venligst...</string>
@@ -555,7 +514,6 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="patcher_install_error_subtitle">Prøv at afinstallere og installere igen</string>
     <string name="patcher_ready_to_mount_subtitle">Tryk på knappen nedenfor for at montere</string>
     <string name="patcher_patches_excluded_for_installer">Ikke tilgængelig for denne installationsmetode og udeladt: %s</string>
-    <string name="patcher_back_to_game_hint">Tryk på %1$s for at gå tilbage til dit spil</string>
     <string name="patcher_storage_permission_dialog_title">Kan ikke tilgå lagringssti</string>
     <string name="patcher_incompatible_patcher_title">Opdatering påkrævet</string>
     <string name="patcher_incompatible_patcher_description">Bundtet &lt;b&gt;%1$s&lt;/b&gt; kræver patcher version &lt;b&gt;%2$s&lt;/b&gt; eller nyere. Opdater venligst Morphe for at patche denne app</string>
@@ -598,32 +556,6 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="patcher_notification_text">Tryk for at vende tilbage til patcheren</string>
     <string name="patcher_stop_confirm_title">Stop patcher</string>
     <string name="patcher_stop_confirm_description">Er du sikker på, at du vil stoppe patchprocessen?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Forvandler din app til noget fedt… 🏆</string>
-    <string name="patcher_message_2">Lærer gamle apps nye tricks… 🎩</string>
-    <string name="patcher_message_3">Giver din app en digital opgradering… 🔧</string>
-    <string name="patcher_message_4">Brygger digital magi… ☕</string>
-    <string name="patcher_message_5">Kaffepause anbefales… ☕</string>
-    <string name="patcher_message_6">Kig udenfor, det er dejligt derude… 🌤️</string>
-    <string name="patcher_message_7">Justerer 1-er og 0-er… 🤖</string>
-    <string name="patcher_message_8">Udreder digital spaghetti… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Retter fejl i den upatchede app… 🪲</string>
-    <string name="patcher_message_10">Gode patches er ventetiden værd… ⏳</string>
-    <string name="patcher_message_11">Pudser pixels, indtil de skinner… 💎</string>
-    <string name="patcher_message_12">Bliv venligst siddende, indtil kaptajnen slukker skiltet \"Patch i gang\"… 💺✈️</string>
-    <string name="patcher_message_13">Tilbereder din patchede app, varm og frisk… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Forhandler høfligt med bytekode… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Alle systemer er nominelle… patche-bane er stabil… 🚀</string>
-    <string name="patcher_message_16">Presser ekstra kraft ud som saft af en digital citron… 🍋</string>
-    <string name="patcher_message_17">Opfordrer appen til at acceptere sit nye, bedre jeg… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Ændrer appens superposition fra upatchet til patchet… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Din app har feber, og den eneste recept er flere patches… 🩺🔔</string>
-    <string name="patcher_message_20">Fjerner vrøvl. Vent venligst… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Patcher app</string>
     <string name="memory_usage">Hukommelsesforbrug</string>
@@ -653,29 +585,6 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="package_name">Pakkenavn</string>
     <string name="failed_to_mount">Kunne ikke montere: %s</string>
     <string name="failed_to_unmount">Kunne ikke afmontere: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Score %s</string>
-    <string name="mini_game_best">Bedste %s</string>
-    <string name="mini_game_new_record">Ny rekord!</string>
-    <string name="mini_game_game_over">Game Over</string>
-    <string name="mini_game_try_again">Prøv igen</string>
-    <string name="mini_game_paused">Pauset</string>
-    <string name="mini_game_resume">Fortsæt</string>
-    <string name="mini_game_restart">Start forfra</string>
-    <string name="mini_game_change">Vælg et andet spil</string>
-    <string name="mini_game_2048_picker_subtitle">Skub fliser for at sammenlægge</string>
-    <string name="mini_game_flappy_picker_subtitle">Tryk for at flyve gennem rør</string>
-    <string name="mini_game_flappy_tap_to_start">Tryk for at flyve</string>
-    <string name="mini_game_snake_picker_subtitle">Spis mad, ram ikke dig selv</string>
-    <string name="mini_game_snake_swipe_to_start">Stryk for at starte</string>
-    <string name="mini_game_dino_picker_subtitle">Tryk for at hoppe over kaktusser</string>
-    <string name="mini_game_dino_tap_to_start">Tryk for at løbe</string>
-    <string name="mini_game_blocks_picker_subtitle">Tilpas formerne, klare linjer</string>
-    <string name="mini_game_blocks_tap_to_start">Tryk for at rotere, stryg for at flytte, stryg ned for at slippe</string>
-    <string name="mini_game_bricks_picker_subtitle">Få bolden til at hoppe, fjern muren</string>
-    <string name="mini_game_bricks_tap_to_start">Træk for at sigte, tryk for at affyre</string>
-    <string name="mini_game_miner_picker_subtitle">Tryk for at åbne, hold for at markere</string>
-    <string name="mini_game_pairs_picker_subtitle">Vend kortene, find parret</string>
     <!-- Settings -->
     <string name="appearance">Udseende</string>
     <string name="advanced">Avanceret</string>
@@ -729,8 +638,6 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="settings_appearance_ui_scale_preview_subtitle">Tekst og kontrollementer i denne skala</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Startskærm</string>
-    <string name="settings_appearance_greeting_phrases">Hilsenfraser</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Vis en hilsenbesked på startskærmen</string>
     <string name="settings_appearance_app_grouping">App-gruppering</string>
     <string name="settings_appearance_app_grouping_description">Vis en vælger til at gruppere apps efter kilde eller kategori</string>
     <string name="settings_appearance_repatch_notice">Meddelelse om gen-patch</string>
@@ -1162,16 +1069,6 @@ Detaljer: %2$s"</string>
     <string name="credits_current_development">Current development</string>
     <string name="credits_prior_development">Prior development</string>
     <string name="opensource_licenses">Open-source licenser</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">Et valg</string>
-    <string name="easter_egg_pill_message">Tag den blå pille, og reklamerne forbliver præcis, hvor de er. Tag den røde, og se, hvor dybt bytekoden går.</string>
-    <string name="easter_egg_pill_red">Rød pille</string>
-    <string name="easter_egg_pill_blue">Blå pille</string>
-    <string name="easter_egg_pill_red_toast">Matrix-baggrunden er låst op</string>
-    <string name="easter_egg_pill_blue_toast">Annoncerne vil vente på dig</string>
-    <string name="easter_egg_pill_message_again">Du er allerede i Matrix. Den røde pille sender dig tilbage i regnen, den blå vækker dig</string>
-    <string name="easter_egg_pill_red_toast_again">Tilbage i regnen</string>
-    <string name="easter_egg_pill_blue_toast_again">Frakoblet. Vejen tilbage er, hvor den altid var</string>
     <!-- Shared strings -->
     <string name="select_file">Vælg fil</string>
     <string name="select_files">Vælg filer</string>

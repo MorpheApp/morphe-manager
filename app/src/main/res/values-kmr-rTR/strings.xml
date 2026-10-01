@@ -75,45 +75,6 @@
     <string name="home_category_actions_unavailable">Çalakiyên ji bo vê kategoriyê nayên destêrkirin</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Kudu ezîtekora kodê ji xwerêzê we yê çawa îdeal bike?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Hazîre ezaplikasyonên we ve çêbikin ji aliyê dîwarê maye?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Bi laşîş ve, dê dimeşîne!</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Rojek din, hevalê blokê reklamê din</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Xezê çavekan bînin? Ez ne!</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Ezaplikasyonên we çêbike.</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Îhtîmala 100% vê gotinê ji veşartinê heye</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Hazîre ji kêfê u serastiyê ve bigihîne?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Ez aplikasyonên ji wan dixihîne ji roja niha ve.</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Bi kofeyînê u bandorên baş girtîye.</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Rabe û çîçekê</string>
-    <string name="home_greeting_morning_2">Silav! Bername ne li ser xwe xêr dibin</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Naxweşiya dîroşê? Çîyekî çîçekê</string>
-    <string name="home_greeting_afternoon_2">Piştî nûçikan guherîn cuda ye</string>
-    <string name="home_greeting_afternoon_3">Şîfta êvarê: guhertoyek nû</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Êvarê xêr hat! Guherînên êvarê cuda ne</string>
-    <string name="home_greeting_evening_2">Li ser pêşê veguherî? Berê sepanek guhêrîne</string>
-    <string name="home_greeting_evening_3">Bi dawîkirinê? Berê tiştek guhêrîne</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Hêj serî li ser şînê yî? Sepanê jî hewce ne ku werin guhêrîn</string>
-    <string name="home_greeting_late_night_2">Sevisa guherîna şevê? Respekt</string>
-    <string name="home_greeting_late_night_3">Moda şevê: aktîv kirin</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Demên herî baş ên guherînê… têkbirin</string>
-    <string name="home_greeting_super_late_2">Naxewî? Tiştek guhêrîne</string>
-    <string name="home_greeting_super_late_3">Niha, tenê serî li ser şînê bimîne û guhêrîne</string>
-    <string name="home_greeting_super_late_4">Tu û serveran, her wekî hev serî li ser şînê</string>
-    <string name="home_greeting_super_late_5">Şevparêz û berdêl</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Kanalan saz bike</string>
     <string name="sources_sort_title">Sort kirina çavkaniyên patchê</string>
@@ -454,9 +415,6 @@ Herêma derveyî (qutkirî): dikare ji aliyê maskeya launcher'ê ve were qutkir
     <!-- Average and peak memory the patcher process held while it ran -->
     <!-- Fastest read or write rate reached while patching, in data per second -->
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
-    <!-- Value of "Libraries": every library was left in the patched APK -->
-    <string name="patcher_tab_logs">Tovêrên patcherê</string>
-    <string name="patcher_tab_game">Lîstik</string>
     <string name="patcher_logs_waiting">Li bendê ne ku derketina logê bê nivîsîn…</string>
     <string name="patcher_logs_lost">Derketina logê piştî demekê winda dibe</string>
     <string name="patcher_long_step_warning">Ev gav dikare hinekî dem bigire. Heke...</string>
@@ -482,7 +440,6 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <string name="patcher_install_error_subtitle">Heke hewce bike, saz bike û dîsa saz bike</string>
     <string name="patcher_ready_to_mount_subtitle">Ji bo avakirinê ser duxwe bikşînin</string>
     <string name="patcher_patches_excluded_for_installer">Ji bo rêbazê ku hatî hilbijartîn peyda nabe û tê derxistin: %s</string>
-    <string name="patcher_back_to_game_hint">Bikar bîne %1$s ji bo vegerîna lîstika te.    </string>
     <string name="patcher_storage_permission_dialog_title">Nabe sererît rêyê wergirtina separe</string>
     <string name="patcher_incompatible_patcher_title">Nûvekirin hewce ye</string>
     <string name="patcher_incompatible_patcher_description">Berhevok &lt;b&gt;%1$s&lt;/b&gt; hewiyeke guhertoyê &lt;b&gt;%2$s&lt;/b&gt; an nûtir hewiyaye. Ji kerem Morphe nûve bike da ku vê serlêdanê guhêrî</string>
@@ -518,32 +475,6 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <string name="patcher_notification_text">Hêla bimeşin ser patcher</string>
     <string name="patcher_stop_confirm_title">Patcher rawêstinê</string>
     <string name="patcher_stop_confirm_description">Ma hûn pê ewle bûne ku hûn pêvajoya patch kirinê rawêstîn?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Sepîka we çêtir dike... 🏆</string>
-    <string name="patcher_message_2">Xurekî kevnên sepanê veşartin... 🎩</string>
-    <string name="patcher_message_3">Hêzdarî sepanê veşartin... 🔧</string>
-    <string name="patcher_message_4">Birkek dîjîtal... ☕</string>
-    <string name="patcher_message_5">Heke hewce bike kêfa kafedê bixwe... ☕</string>
-    <string name="patcher_message_6">Li derve belavê, baş e... 🌤️</string>
-    <string name="patcher_message_7">Sererastkirina 1 û 0an… 🤖</string>
-    <string name="patcher_message_8">Diravên dîjîtalê paqij bike... 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Aplikasyonên ne paqejîna ji pimên ji Google kontrol nekirine gihîştin 🪲</string>
-    <string name="patcher_message_10">Saxkirinên mezin hezdarî bibin... ⏳</string>
-    <string name="patcher_message_11">Pikselan poş bikin heta ku heybet bikin... 💎</string>
-    <string name="patcher_message_12">Heke hewce bike serîşewitîyê heta ku komeyên \"Patching in progress\" veqêşin... 💺✈️</string>
-    <string name="patcher_message_13">Sepîka we gavîne, têr û navîn... 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Bi xweşî bi kodeyê qebûl bike... 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Hemû sistemên normal e... rêbaza sazkirinê ew asta stêr e... 🚀</string>
-    <string name="patcher_message_16">Hêzdarî derxistin, wek şêrçeyê lîmûna dîjîtal... 🍋</string>
-    <string name="patcher_message_17">Sepîka xwe teşvîq bike ku ji xwerêya xwe ya çêtir bibîne... 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Guherîna sepanê ji unpatched bo patched... 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Sepeka we guherîna re, û tenê pêşniyara sazbarîyê ji bêtir sazkirinê agahdarin... 🩺🔔</string>
-    <string name="patcher_message_20">Nonsens vedigere. Heke hewce bike bibînin... 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Dirûtîna sepanê</string>
     <string name="memory_usage">Baxê hevalê</string>
@@ -572,21 +503,6 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <string name="package_name">Navê pakêtê</string>
     <string name="failed_to_mount">Serketina çêkirinê: %s</string>
     <string name="failed_to_unmount">Serketina nebûyîna çêkirinê: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Puan %s</string>
-    <string name="mini_game_best">Herî baş %s</string>
-    <string name="mini_game_new_record">Rekord nû!</string>
-    <string name="mini_game_game_over">Dawî</string>
-    <string name="mini_game_try_again">Carek din bicûrbîne</string>
-    <string name="mini_game_paused">Seikin</string>
-    <string name="mini_game_resume">Berde dewam bike</string>
-    <string name="mini_game_2048_picker_subtitle">Tile\'an bişîne da ku bikevin hev</string>
-    <string name="mini_game_flappy_picker_subtitle">Têke da ku ji boriyên derbas bî</string>
-    <string name="mini_game_flappy_tap_to_start">Têke da ku firî</string>
-    <string name="mini_game_snake_picker_subtitle">Xwarin bixwe, xwe negre</string>
-    <string name="mini_game_snake_swipe_to_start">Destpêkirinê da ku destpêbikî</string>
-    <string name="mini_game_dino_picker_subtitle">Têke da ku ji kaktûsan derbas bî</string>
-    <string name="mini_game_dino_tap_to_start">Têke da ku bixwe</string>
     <!-- Settings -->
     <string name="appearance">Xwezî</string>
     <string name="advanced">Zor</string>
@@ -636,8 +552,6 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <string name="settings_appearance_ui_scale_preview_subtitle">Nivîs û kontrol li vê pîvanê</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Mîna malê</string>
-    <string name="settings_appearance_greeting_phrases">Frazey şahê</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Nîşanekê bi xêrhatinê li ser mîna malê nîşan bide</string>
     <string name="settings_appearance_app_grouping">Komkirina sepanan</string>
     <string name="settings_appearance_sort_button">Bişkoka rêzkirin û parzûnkirinê</string>
     <string name="settings_appearance_sort_button_description">Bişkoka rêzkirin û parzûnkirinê li ser ekrana malê nîşan bide</string>
@@ -1025,16 +939,6 @@ Detay: %2$s"</string>
     <string name="credits_current_development">Gelişîna heyî</string>
     <string name="credits_prior_development">Gelişîna berê</string>
     <string name="opensource_licenses">Lîsansên çavkaniyê vekirî</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">Vebijarkek</string>
-    <string name="easter_egg_pill_message">Heba şîn bixwe û reklam tam li cihê xwe dimînin. Heba sor bixwe û bibîne ka bytecode çiqas kûr diçe.</string>
-    <string name="easter_egg_pill_red">Heba sor</string>
-    <string name="easter_egg_pill_blue">Heba şîn</string>
-    <string name="easter_egg_pill_red_toast">Paşxana Matrixê vebû</string>
-    <string name="easter_egg_pill_blue_toast">Reklam dê li benda te bin</string>
-    <string name="easter_egg_pill_message_again">Tu jixwe di Matrixê de yî. Heba sor te vedigerîne baranê, heba şîn te hişyar dike.</string>
-    <string name="easter_egg_pill_red_toast_again">Dîsa di nav baranê de</string>
-    <string name="easter_egg_pill_blue_toast_again">Veqetandî. Riya vegerê li cihê ku her tim lê bû.</string>
     <!-- Shared strings -->
     <string name="select_file">Pelê hilbijêre</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->

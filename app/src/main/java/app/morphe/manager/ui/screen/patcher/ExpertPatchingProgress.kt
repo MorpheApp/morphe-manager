@@ -15,15 +15,11 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.SportsEsports
-import androidx.compose.material.icons.outlined.Terminal
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -36,8 +32,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.compose.LifecycleEventEffect
 import app.morphe.manager.R
 import app.morphe.manager.patcher.logger.LogLevel
 import app.morphe.manager.patcher.logger.logField
@@ -76,8 +70,6 @@ import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREF
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_SUCCEEDED
 import app.morphe.manager.ui.model.PatchProgressSource
 import app.morphe.manager.ui.model.State
-import app.morphe.manager.ui.screen.patcher.game.MiniGameContent
-import app.morphe.manager.ui.screen.patcher.game.MiniGameState
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.screen.shared.Animations
 import app.morphe.manager.ui.theme.MorpheBrandTeal
@@ -288,7 +280,6 @@ fun ExpertPatchingInProgress(
     patchProgress: PatchProgressSource,
     packageName: String? = null,
     patcherSucceeded: Boolean? = null,
-    miniGameState: MiniGameState,
     queueHeader: (@Composable () -> Unit)? = null,
     onCancelClick: () -> Unit,
     onInstallClick: () -> Unit = {},
@@ -354,7 +345,6 @@ fun ExpertPatchingInProgress(
         ExpertLogPanel(
             patchProgress = patchProgress,
             listState = listState,
-            miniGameState = miniGameState,
             accentColor = appColor,
             modifier = panelModifier
         )
@@ -537,19 +527,14 @@ private fun ExpertProgressHeader(
     }
 }
 
-private const val LOG_PANEL_TAB_LOGS = 0
-private const val LOG_PANEL_TAB_GAMES = 1
-
 /**
  * Scrollable log panel backed directly by [PatchProgressSource.logs].
- * Tabs over it switch between the logs and the mini-game, by a tap or a swipe.
  */
 @Composable
 private fun ExpertLogPanel(
     modifier: Modifier = Modifier,
     patchProgress: PatchProgressSource,
     listState: LazyListState,
-    miniGameState: MiniGameState,
     accentColor: Color? = null
 ) {
     val rawLogs = patchProgress.logs
@@ -558,18 +543,6 @@ private fun ExpertLogPanel(
     val dotColor = appAccent ?: MorpheBrandTeal
     // Convert the full list in one stateful pass so banner cards can aggregate metadata from auxiliary lines
     val logItems = remember(rawLogs, rawLogs.size) { rawLogs.toLogItems() }
-    var activeTab by rememberSaveable { mutableIntStateOf(LOG_PANEL_TAB_LOGS) }
-    LaunchedEffect(activeTab) {
-        if (activeTab != LOG_PANEL_TAB_GAMES) miniGameState.pauseActiveGame()
-    }
-    // Waits behind its pause overlay while the manager is away, rather than playing on the
-    // moment it is back, before the player has their eyes on it again
-    LifecycleEventEffect(Lifecycle.Event.ON_STOP) { miniGameState.pauseActiveGame() }
-    // Lines there were when the logs were last in view, so the tab can say the run moved on
-    var seenLogCount by rememberSaveable { mutableIntStateOf(rawLogs.size) }
-    LaunchedEffect(activeTab, rawLogs.size) {
-        if (activeTab == LOG_PANEL_TAB_LOGS) seenLogCount = rawLogs.size
-    }
 
     Surface(
         modifier = modifier,
@@ -580,84 +553,51 @@ private fun ExpertLogPanel(
     ) {
         // Handed to the log cards, which a queue renders without the screen's own accent around them
         ProvideAccent(appAccent) {
-            SegmentedTabs(
-                options = listOf(
-                    SegmentedTab(
-                        label = stringResource(R.string.patcher_tab_logs),
-                        icon = Icons.Outlined.Terminal,
-                        badge = activeTab != LOG_PANEL_TAB_LOGS && rawLogs.size > seenLogCount
-                    ),
-                    SegmentedTab(
-                        label = stringResource(R.string.patcher_tab_game),
-                        icon = Icons.Outlined.SportsEsports
-                    )
-                ),
-                selectedIndex = activeTab,
-                onSelect = { activeTab = it },
-                spacing = 0.dp,
-                compact = true,
-                fillHeight = true,
-                selectorPadding = PaddingValues(
-                    start = PatcherCardPadding,
-                    top = PatcherCardPadding,
-                    end = PatcherCardPadding
-                ),
-                contentColor = MaterialTheme.colorScheme.onSurface,
-                // A game in play takes the drags over it, the picker has none of its own
-                pageSwipeEnabled = { page -> page != LOG_PANEL_TAB_GAMES || !miniGameState.hasOpenGame },
-                modifier = Modifier.fillMaxSize()
-            ) { tab ->
-                when (tab) {
-                    LOG_PANEL_TAB_GAMES -> MiniGameContent(state = miniGameState)
-                    else -> {
-                        LazyColumn(
-                            state = listState,
+            LazyColumn(
+                state = listState,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScrollFade(listState),
+                contentPadding = PaddingValues(vertical = PatcherCardMargin)
+            ) {
+                if (rawLogs.isEmpty()) {
+                    item {
+                        Box(
                             modifier = Modifier
-                                .fillMaxSize()
-                                .verticalScrollFade(listState),
-                            contentPadding = PaddingValues(vertical = PatcherCardMargin)
+                                .fillMaxWidth()
+                                .padding(vertical = 48.dp),
+                            contentAlignment = Alignment.Center
                         ) {
-                            if (rawLogs.isEmpty()) {
-                                item {
-                                    Box(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(vertical = 48.dp),
-                                        contentAlignment = Alignment.Center
-                                    ) {
-                                        Column(
-                                            horizontalAlignment = Alignment.CenterHorizontally,
-                                            verticalArrangement = Arrangement.spacedBy(10.dp)
-                                        ) {
-                                            // Nothing is going to arrive for a run whose log died
-                                            // with its process, so the live dot would be a lie
-                                            if (!patchProgress.logsLost) {
-                                                LiveIndicatorDot(color = dotColor, size = 10.dp)
-                                            }
-                                            Text(
-                                                text = stringResource(
-                                                    if (patchProgress.logsLost) R.string.patcher_logs_lost
-                                                    else R.string.patcher_logs_waiting
-                                                ),
-                                                style = MaterialTheme.typography.bodySmall,
-                                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                                                    .copy(alpha = 0.45f),
-                                                fontFamily = FontFamily.Monospace,
-                                                textAlign = TextAlign.Center
-                                            )
-                                        }
-                                    }
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.spacedBy(10.dp)
+                            ) {
+                                // Nothing is going to arrive for a run whose log died
+                                // with its process, so the live dot would be a lie
+                                if (!patchProgress.logsLost) {
+                                    LiveIndicatorDot(color = dotColor, size = 10.dp)
                                 }
-                            }
-
-                            items(
-                                count = logItems.size,
-                                key = { index -> index }
-                            ) { index ->
-                                LogItemContent(logItems[index])
+                                Text(
+                                    text = stringResource(
+                                        if (patchProgress.logsLost) R.string.patcher_logs_lost
+                                        else R.string.patcher_logs_waiting
+                                    ),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                        .copy(alpha = 0.45f),
+                                    fontFamily = FontFamily.Monospace,
+                                    textAlign = TextAlign.Center
+                                )
                             }
                         }
                     }
+                }
+
+                items(
+                    count = logItems.size,
+                    key = { index -> index }
+                ) { index ->
+                    LogItemContent(logItems[index])
                 }
             }
         }

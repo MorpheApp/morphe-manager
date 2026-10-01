@@ -88,8 +88,7 @@ support for it.
 
 ## Personal touches
 
-- **Greeting** - the question above the list changes with the time of day. It can be turned
-  off in **Settings → Appearance**.
+- **Greeting** - the question above the list.
 - **App icons and colors** on the cards come from the app itself or from the patch source's
   metadata.
 

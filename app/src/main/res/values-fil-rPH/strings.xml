@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">Hindi magagamit ang mga aksyon para sa kategoryang ito</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Anong app ang gusto mong i-patch?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Handa nang gawing maalamat muli ang mga aplikasyon?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Kapit lang, oras na ng pag-patch!</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Panibagong araw, panibagong obra maestra na hinarangan ng patalastas</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Gusto mo ba manood ng patalastas? Ako rin</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Pakilusin natin ang iyong mga aplikasyon</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Pagtataya ngayong araw: 100% tsansa na mapa-patch</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Handa nang baguhin ang hindi magandang dating sa kahanga-hanga?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Nagliligtas ng mga aplikasyon mula sa kanilang sarili simula ngayon</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Pinapatakbo ng kape at magagandang patch</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Bumangon at mag-patch</string>
-    <string name="home_greeting_morning_2">Magandang umaga! Ang mga app ay hindi magpe-patch ng kusa</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Nababagot sa hapon? Mag-patch ng isang bagay</string>
-    <string name="home_greeting_afternoon_2">Iba ang dating ng pag-patch pagkatapos ng tanghalian</string>
-    <string name="home_greeting_afternoon_3">Ang shift sa hapon: edisyon ng pag-patch</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Magandang gabi! Iba ang dating ng pag-patch sa gabi</string>
-    <string name="home_greeting_evening_2">Nagpapahinga ka na ba? Mag-patch muna ng app</string>
-    <string name="home_greeting_evening_3">Nag-o-out ka na ba? Mag-patch muna</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Gising ka pa rin? Gising din ang mga app na kailangang i-patch</string>
-    <string name="home_greeting_late_night_2">Late night patch session? Respeto</string>
-    <string name="home_greeting_late_night_3">Night owl mode: naka-activate</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Pinakamataas na oras ng pag-patch… di umano</string>
-    <string name="home_greeting_super_late_2">Hindi makatulog? Mag-patch ka na lang</string>
-    <string name="home_greeting_super_late_3">Sa puntong ito, magising na lang at mag-patch na lang</string>
-    <string name="home_greeting_super_late_4">Ikaw at ang mga server, parehong gising</string>
-    <string name="home_greeting_super_late_5">Pang-gabi at produktibo</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">I-patch ang mapagkukunan</string>
     <string name="sources_search">Maghanap ng mga source at mga patch</string>
@@ -527,8 +488,6 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <string name="patcher_field_value_stripped">tinanggal</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">pinanatili</string>
-    <string name="patcher_tab_logs">Mga log ng Patcher</string>
-    <string name="patcher_tab_game">Mga Laro</string>
     <string name="patcher_logs_waiting">Naghihintay ng log output…</string>
     <string name="patcher_logs_lost">Ang log output ay hindi napananatili pagkatapos mag-restart ang app</string>
     <string name="patcher_long_step_warning">Maaaring magtagal ang hakbang ito. Mangyaring maghintay…</string>
@@ -555,7 +514,6 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="patcher_install_error_subtitle">Subukan mong burahin at i-install muli</string>
     <string name="patcher_ready_to_mount_subtitle">Pindutin ang button sa ibaba upang i-mount</string>
     <string name="patcher_patches_excluded_for_installer">Hindi magagamit para sa paraang ito ng pag-install at hindi kasama: %s</string>
-    <string name="patcher_back_to_game_hint">I-tap ang %1$s upang bumalik sa iyong laro</string>
     <string name="patcher_storage_permission_dialog_title">Hindi ma-access ang landas ng imbakan</string>
     <string name="patcher_incompatible_patcher_title">Kinakailangan ang pag-update</string>
     <string name="patcher_incompatible_patcher_description">Ang bundle &lt;b&gt;%1$s&lt;/b&gt; ay nangangailangan ng bersyon ng patcher na &lt;b&gt;%2$s&lt;/b&gt; o mas bago. Pakisuyong i-update ang Morphe upang i-patch ang app na ito</string>
@@ -598,32 +556,6 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="patcher_notification_text">Pindutin upang bumalik sa patcher</string>
     <string name="patcher_stop_confirm_title">Ihinto ang patcher</string>
     <string name="patcher_stop_confirm_description">Nais mo bang ihinto ang proseso sa pagpapa-patch?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Minomorph ang iyong aplikasyon sa isang kahanga-hangang bagay… 🏆</string>
-    <string name="patcher_message_2">Tinuturuan ang mga lumang aplikasyon ng mga bagong salamangka… 🎩</string>
-    <string name="patcher_message_3">Binibigyan ng iyong aplikasyon ang isang digital na tune-up… 🔧</string>
-    <string name="patcher_message_4">Tinitimpla ang digital na mahika… ☕</string>
-    <string name="patcher_message_5">Inirerekomenda ang coffee break… ☕</string>
-    <string name="patcher_message_6">Tumingin sa labas, ang ganda doon… 🌤️</string>
-    <string name="patcher_message_7">Ina-adjust ang 1\'s at 0\'s… 🤖</string>
-    <string name="patcher_message_8">Kinakalas ang digital spaghetti… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Inaayos ang mga pagkakamali sa hindi pa na-patch na aplikasyon… 🪲</string>
-    <string name="patcher_message_10">Mga mahuhusay na mga patch ay sulit ng paghihintay… ⏳</string>
-    <string name="patcher_message_11">Pinapakinis ang mga pixel hanggang sa ito\'y lumiwanag… 💎</string>
-    <string name="patcher_message_12">Mangyaring manatiling nakaupo hanggang sa patayin ng kapitan ang karatula na \"Kasalukuyang isinasagawa ang pag-patch.\"… 💺✈️</string>
-    <string name="patcher_message_13">Niluluto ang iyong naka-patch na app, mainit at sariwa… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Magalang na pakikipag-ayos gamit ang bytecode… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Nominal ang lahat ng mga sistema… matatag ang tilapon ng pagpa-patch… 🚀</string>
-    <string name="patcher_message_16">Pinipisil ang dinagdag na lakas, tulad ng juice mula sa digital lemon… 🍋</string>
-    <string name="patcher_message_17">Hinihikayat ang aplikasyon upang tanggapin ang kanyang bagong, mas mabuting sarili… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Pagbabago sa superposition ng app mula sa hindi naka-patch patungo sa naka-patch… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">May lagnat ang aplikasyon mo, at ang tanging reseta ay ang maraming patch… 🩺🔔</string>
-    <string name="patcher_message_20">Inaalis ang mga walang saysay. Mangyaring maghintay… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Pag-patch ng app</string>
     <string name="memory_usage">Paggamit ng memory</string>
@@ -653,29 +585,6 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="package_name">Pangalan ng pakete</string>
     <string name="failed_to_mount">Nabigong i-mount: %s</string>
     <string name="failed_to_unmount">Nabigong i-unmount: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Score %s</string>
-    <string name="mini_game_best">Pinakamahusay %s</string>
-    <string name="mini_game_new_record">Bagong rekord!</string>
-    <string name="mini_game_game_over">Tapos na ang laro</string>
-    <string name="mini_game_try_again">Subukan Muli</string>
-    <string name="mini_game_paused">Naka-pause</string>
-    <string name="mini_game_resume">Magpatuloy</string>
-    <string name="mini_game_restart">Magsimula muli</string>
-    <string name="mini_game_change">Pumili ng ibang laro</string>
-    <string name="mini_game_2048_picker_subtitle">I-slide ang mga tile para pagsamahin</string>
-    <string name="mini_game_flappy_picker_subtitle">I-tap para lumipad sa mga tubo</string>
-    <string name="mini_game_flappy_tap_to_start">I-tap para lumipad</string>
-    <string name="mini_game_snake_picker_subtitle">Kumain ng pagkain, huwag saktan ang sarili</string>
-    <string name="mini_game_snake_swipe_to_start">I-swipe para magsimula</string>
-    <string name="mini_game_dino_picker_subtitle">I-tap para tumalon sa mga cactus</string>
-    <string name="mini_game_dino_tap_to_start">I-tap para tumakbo</string>
-    <string name="mini_game_blocks_picker_subtitle">Pagkasyahin ang mga hugis, alisin ang mga linya</string>
-    <string name="mini_game_blocks_tap_to_start">I-tap upang paikutin, i-swipe upang ilipat, i-swipe pababa upang ihulog</string>
-    <string name="mini_game_bricks_picker_subtitle">Patalbogin ang bola, alisin ang pader</string>
-    <string name="mini_game_bricks_tap_to_start">I-drag para mag-aim, pindutin para ilunsad</string>
-    <string name="mini_game_miner_picker_subtitle">I-tap upang buksan, pindutin nang matagal upang i-flag</string>
-    <string name="mini_game_pairs_picker_subtitle">I-flip ang mga kard, hanapin ang magkapares</string>
     <!-- Settings -->
     <string name="appearance">Hitsura</string>
     <string name="advanced">Pagsulong</string>
@@ -730,8 +639,6 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="settings_appearance_ui_scale_preview_subtitle">Teksto at mga kontrol sa sukat na ito</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Pangunahing iskrin</string>
-    <string name="settings_appearance_greeting_phrases">Mga pagbati</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Ipakita ang mensahe ng pagbati sa pangunahing iskrin</string>
     <string name="settings_appearance_app_grouping">Pagpapangkat ng app</string>
     <string name="settings_appearance_app_grouping_description">Magpakita ng pampaglipat upang pangkatin ang mga app ayon sa pinagmulan o kategorya.</string>
     <string name="settings_appearance_repatch_notice">Paunawa sa muling pag-patch</string>
@@ -1163,16 +1070,6 @@ Mga Detalye: %2$s"</string>
     <string name="credits_current_development">Kasalukuyang pag-unlad</string>
     <string name="credits_prior_development">Naunang pag-unlad</string>
     <string name="opensource_licenses">Open-source licenses</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">Isang pagpipilian</string>
-    <string name="easter_egg_pill_message">Kunin ang asul na tableta at mananatili ang mga ad sa eksaktong lugar nila. Kunin ang pula at tingnan kung gaano kalalim ang bytecode.</string>
-    <string name="easter_egg_pill_red">Pulang tableta</string>
-    <string name="easter_egg_pill_blue">Asul na tableta</string>
-    <string name="easter_egg_pill_red_toast">Na-unlock ang background ng Matrix</string>
-    <string name="easter_egg_pill_blue_toast">Ang mga ad ay maghihintay sa iyo</string>
-    <string name="easter_egg_pill_message_again">Ikaw ay nasa Matrix na. Ang pulang tableta ay naghuhulog sa iyo pabalik sa ulan, ang asul na tableta ay gumigising sa iyo</string>
-    <string name="easter_egg_pill_red_toast_again">Bumalik sa ulan</string>
-    <string name="easter_egg_pill_blue_toast_again">Hindi na nakakonekta. Ang daan ay kung saan ito palaging naroroon</string>
     <!-- Shared strings -->
     <string name="select_file">Pumili ng file</string>
     <string name="select_files">Pumili ng mga file</string>

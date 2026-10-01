@@ -53,9 +53,6 @@ class PreferencesManager(
     val enableBackgroundParallax = booleanPreference("enable_background_parallax", true)
     val randomBackgroundInterval = enumPreference("random_background_interval", RandomInterval.ON_LAUNCH)
 
-    /** Whether the hidden Matrix background has been found and taken. */
-    val matrixBackgroundUnlocked = booleanPreference("matrix_background_unlocked", false)
-
     val pureBlackTheme = booleanPreference("pure_black_theme", false)
 
     /** Whether apps and sources wear their own colors, or the theme's accent in their place. */
@@ -63,7 +60,6 @@ class PreferencesManager(
 
     /** Whether cards, panels and buttons draw the hairline edge around them. */
     val outlines = booleanPreference("outlines", true)
-    val showGreetingPhrases = booleanPreference("show_greeting_phrases", true)
 
     /** The per-app badges carry the same news, so the banner is worth turning off. */
     val showRepatchNotice = booleanPreference("show_repatch_notice", true)
@@ -188,19 +184,6 @@ class PreferencesManager(
     /** Tracks whether the user has explicitly toggled the custom file picker preference. */
     val customFilePickerUserConfigured = booleanPreference("custom_file_picker_user_configured", false)
 
-    // Mini-game high scores
-    val miniGame2048HighScore   = intPreference("mini_game_2048_high_score", 0)
-    val miniGameFlappyHighScore = intPreference("mini_game_flappy_high_score", 0)
-    val miniGameSnakeHighScore  = intPreference("mini_game_snake_high_score", 0)
-    val miniGameDinoHighScore   = intPreference("mini_game_dino_high_score", 0)
-    val miniGameBlocksHighScore = intPreference("mini_game_blocks_high_score", 0)
-    val miniGameBricksHighScore = intPreference("mini_game_bricks_high_score", 0)
-    val miniGameMinerHighScore  = intPreference("mini_game_miner_high_score", 0)
-    val miniGamePairsHighScore  = intPreference("mini_game_pairs_high_score", 0)
-
-    /** Set once the user has found the way back to a mini-game, which retires the hint for it. */
-    val backToGameHintSeen = booleanPreference("back_to_game_hint_seen", false)
-
     /**  Hidden preference to track if prerelease was auto-enabled. */
     private val prereleaseAutoEnabled = booleanPreference("prerelease_auto_enabled", false)
 
@@ -282,11 +265,9 @@ class PreferencesManager(
         val bundlePrereleasesEnabled: Set<String>? = null,
         val bundleExperimentalVersionsEnabled: Set<String>? = null,
         val disablePatchVersionCompatCheck: Boolean? = null,
-        val showGreetingPhrases: Boolean? = null,
         val showRepatchNotice: Boolean? = null,
         val backgroundType: BackgroundType? = null,
         val randomBackgroundInterval: RandomInterval? = null,
-        val matrixBackgroundUnlocked: Boolean? = null,
         val useExpertMode: Boolean? = null,
         val updateCheckInterval: UpdateCheckInterval? = null,
         val externalBatchPatchEnabled: Boolean? = null,
@@ -350,11 +331,9 @@ class PreferencesManager(
                 bundlePrereleasesEnabled = bundlePrereleasesEnabled.takeIf { sources },
                 bundleExperimentalVersionsEnabled = bundleExperimentalVersionsEnabled.takeIf { sources },
                 disablePatchVersionCompatCheck = disablePatchVersionCompatCheck.takeIf { patching },
-                showGreetingPhrases = showGreetingPhrases.takeIf { home },
                 showRepatchNotice = showRepatchNotice.takeIf { home },
                 backgroundType = backgroundType.takeIf { appearance },
                 randomBackgroundInterval = randomBackgroundInterval.takeIf { appearance },
-                matrixBackgroundUnlocked = matrixBackgroundUnlocked.takeIf { appearance },
                 useExpertMode = useExpertMode.takeIf { patching },
                 updateCheckInterval = updateCheckInterval.takeIf { updates },
                 externalBatchPatchEnabled = externalBatchPatchEnabled.takeIf { patching },
@@ -406,11 +385,9 @@ class PreferencesManager(
         officialBundleExperimentalVersions =
             bundleExperimentalVersionsEnabled.get().contains(DEFAULT_SOURCE_UID.toString()),
         disablePatchVersionCompatCheck = disablePatchVersionCompatCheck.get(),
-        showGreetingPhrases = showGreetingPhrases.get(),
         showRepatchNotice = showRepatchNotice.get(),
         backgroundType = backgroundType.get(),
         randomBackgroundInterval = randomBackgroundInterval.get(),
-        matrixBackgroundUnlocked = matrixBackgroundUnlocked.get(),
         useExpertMode = useExpertMode.get(),
         updateCheckInterval = updateCheckInterval.get(),
         externalBatchPatchEnabled = externalBatchPatchEnabled.get(),
@@ -479,11 +456,9 @@ class PreferencesManager(
             bundleExperimentalVersionsEnabled.value = current
         }
         snapshot.disablePatchVersionCompatCheck?.let { disablePatchVersionCompatCheck.value = it }
-        snapshot.showGreetingPhrases?.let { showGreetingPhrases.value = it }
         snapshot.showRepatchNotice?.let { showRepatchNotice.value = it }
         snapshot.backgroundType?.let { backgroundType.value = it }
         snapshot.randomBackgroundInterval?.let { randomBackgroundInterval.value = it }
-        snapshot.matrixBackgroundUnlocked?.let { matrixBackgroundUnlocked.value = it }
         snapshot.useExpertMode?.let { useExpertMode.value = it }
         snapshot.updateCheckInterval?.let { updateCheckInterval.value = it }
         snapshot.externalBatchPatchEnabled?.let { externalBatchPatchEnabled.value = it }

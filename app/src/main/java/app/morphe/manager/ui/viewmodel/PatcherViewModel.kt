@@ -123,33 +123,16 @@ class PatcherViewModel(
     var showSuccessScreen: Boolean by mutableStateOf(false)
         private set
 
-    // A finished run that arrived while the user was playing, waiting for them to be done
-    private var successScreenHeldBack = false
-    private var successScreenDeferred = false
-
-    // An auto-install waits for the success screen, so it never starts over a game still in play
+    // The auto-install waits until the success screen has been shown, so the system dialog it
+    // triggers never lands over a run still drawn as unfinished
     private var autoInstallQueued = false
 
     fun showSuccess() {
-        successScreenHeldBack = false
         showSuccessScreen = true
         startQueuedAutoInstall()
     }
 
     fun hideSuccessScreen() { showSuccessScreen = false }
-
-    /**
-     * Holds the automatic switch to the success screen back while the user is busy with something
-     * the run has no right to interrupt, currently a mini-game, and releases it again afterward.
-     *
-     * A run that finishes meanwhile is not lost: the progress screen turns its own action bar into
-     * an install button, and the screen appears on its own once [defer] goes back to false,
-     * bringing an auto-install that was waiting for it along.
-     */
-    fun deferSuccessScreen(defer: Boolean) {
-        successScreenDeferred = defer
-        if (!defer && successScreenHeldBack) showSuccess()
-    }
 
     var isPatching: Boolean by mutableStateOf(true)
         private set
@@ -1039,7 +1022,7 @@ class PatcherViewModel(
 
     private fun scheduleSuccessScreen() = viewModelScope.launch {
         delay(successScreenDelay)
-        if (successScreenDeferred) successScreenHeldBack = true else showSuccess()
+        showSuccess()
     }
 
     /** Called once the installer has taken the auto-install over. */
@@ -1054,7 +1037,7 @@ class PatcherViewModel(
         if (!installerManager.autoInstallAllowed(target)) return@launch
         autoInstallPending = true
         // Started by the success screen rather than on a timer of its own: an install starting
-        // sooner puts the system dialog over a run still drawn as unfinished, or over a game
+        // sooner puts the system dialog over a run still drawn as unfinished
         autoInstallQueued = true
         if (showSuccessScreen) startQueuedAutoInstall()
     }

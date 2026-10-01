@@ -24,22 +24,6 @@
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">તમે કઈ એપ્લિકેશનને પેચ કરવા માંગો છો?</string>
     <!-- Humorous hype message with light nostalgia -->
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">બકલ અપ, પેચિંગનો સમય છે</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">બીજા દિવસે, બીજી જાહેરાત-અવરોધિત માસ્ટરપીસ</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">જાહેરાતો જોવા માંગો છો? હું પણ નહિ</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">ચાલો તમારી એપને જીવંત બનાવીએ</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">આજની આગાહી: પેચિંગની 100% તક</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">શું તમે અશાંતતાને અદ્ભુતતામાં બદલવા માટે તૈયાર છો?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">આજથી એપ્સને પોતાની પાસેથી સેવ કરી રહ્યા છીએ</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">કેફીન અને સારા પેચો દ્વારા સંચાલિત</string>
     <!-- Morning greetings (5:00–11:59) -->
     <!-- Afternoon greetings (12:00–16:59) -->
     <!-- Evening greetings (17:00–21:59) -->
@@ -127,31 +111,6 @@
     <!-- Battery optimization pre-flight dialog -->
     <!-- Memory limit dialog, shown after the patcher process was killed -->
     <!-- Patcher Screen - Patcher Worker -->
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">તમારી એપ્લિકેશનને કંઈક અદ્ભુત ઢાળ આપી રહ્યા છીએ… 🏆</string>
-    <string name="patcher_message_2">જૂની એપને નવી યુક્તિઓ શીખવીએ છીએ… 🎩</string>
-    <string name="patcher_message_3">તમારી એપને ડિજિટલ રીતે ઝગમગતી બનાવી રહ્યા છીએ… 🔧</string>
-    <string name="patcher_message_4">ડિજિટલ જાદૂ ઉકાળી રહ્યા છીએ… ☕</string>
-    <string name="patcher_message_5">કોફી બ્રેકની ભલામણ કરવામાં આવી રહી છે... ☕</string>
-    <string name="patcher_message_6">બહાર જુઓ, ત્યાં સરસ છે… 🌤️</string>
-    <string name="patcher_message_8">ડિજિટલ સ્પેગેટી ગૂંચવણ ઉકેલી રહ્યા છીએ… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">પેચ વગરની એપમાં બગ ફિક્સ કરી રહ્યા છીએ… 🪲</string>
-    <string name="patcher_message_10">મહાન પેચો માટે રાહ જોવી યોગ્ય છે… ⏳</string>
-    <string name="patcher_message_11">પિક્સેલ ચમકે ત્યાં સુધી પોલિશ કરી રહ્યાં છે… 💎</string>
-    <string name="patcher_message_12">કૃપા કરીને જ્યાં સુધી કેપ્ટન \"પેચિંગ ચાલુ છે\" ચિહ્ન બંધ ન કરે ત્યાં સુધી બેઠેલા રહો... 💺✈️</string>
-    <string name="patcher_message_13">તમારી પેચ થયેલી એપ્લિકેશનને રાંધી રહ્યા છીએ, ગરમ અને તાજી... 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">બાઇટકોડ સાથે નમ્રતાપૂર્વક વાટાઘાટો કરી રહ્યાં છીએ… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">બધા સિસ્ટમ સરસ રીતે ચાલી રહ્યા છે… પેચિંગનો માર્ગ સ્થિર છે… 🚀</string>
-    <string name="patcher_message_16">વધારે શક્તિથી દબાવી રહ્યા છીએ, જેમ કે ડિજિટલ લીંબુમાંથી રસ... 🍋</string>
-    <string name="patcher_message_17">એપને તેની નવી અને વધુ સારી જાતને સ્વીકારવા પ્રોત્સાહિત કરી રહ્યા છીએ… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">એપની સુપરપોઝિશન ‘અનપેચડ’ માંથી ‘પેચડ’ તરફ બદલી રહ્યા છીએ… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">તમારી ઍપને થોડો તાવ આવ્યો છે, અને એની એક જ દવા છે, ઢગલાબંધ પેચિસ... 🩺🔔</string>
-    <string name="patcher_message_20">થોડો કચરો સાફ કરું છું... બસ બે મિનિટ હો! 🗑️</string>
     <!-- Expert patcher Screen -->
     <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
     <!-- Patcher Screen - Other hidden strings -->

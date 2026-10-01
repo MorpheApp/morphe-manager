@@ -52,7 +52,7 @@ class ThemeSettingsViewModel(
      * - [RandomInterval.EVERY_3_DAYS]: uses epoch day ÷ 3 as a stable index.
      */
     suspend fun resolveRandomBackground(interval: RandomInterval) {
-        val pool = BackgroundType.randomizable(prefs.matrixBackgroundUnlocked.get())
+        val pool = BackgroundType.RANDOMIZABLE
         _resolvedRandomBackground.value = when (interval) {
             RandomInterval.ON_LAUNCH -> pool.random()
             RandomInterval.DAILY -> {
@@ -103,10 +103,6 @@ class ThemeSettingsViewModel(
      */
     fun setAppLanguage(languageCode: String) = AppLocale.select(app, languageCode)
 
-    fun toggleShowGreetingPhrases(current: Boolean) = viewModelScope.launch {
-        prefs.showGreetingPhrases.update(!current)
-    }
-
     fun toggleShowRepatchNotice(current: Boolean) = viewModelScope.launch {
         prefs.showRepatchNotice.update(!current)
     }
@@ -125,36 +121,6 @@ class ThemeSettingsViewModel(
 
     fun setBackgroundType(type: BackgroundType) = viewModelScope.launch {
         prefs.backgroundType.update(type)
-    }
-
-    /**
-     * Takes the red pill: reveals the Matrix background in the picker and switches to it at once,
-     * so the choice is answered by the screen itself rather than by a line in the settings.
-     */
-    fun unlockMatrixBackground() = viewModelScope.launch {
-        prefs.edit {
-            prefs.matrixBackgroundUnlocked.value = true
-            prefs.backgroundType.value = BackgroundType.MATRIX
-        }
-    }
-
-    /**
-     * Takes the blue pill: hides the Matrix background away again. A background picked since is
-     * left alone, and the gesture that revealed it in the first place still works.
-     */
-    fun forgetMatrixBackground() = viewModelScope.launch {
-        prefs.edit {
-            prefs.matrixBackgroundUnlocked.value = false
-            if (prefs.backgroundType.value == BackgroundType.MATRIX) {
-                prefs.backgroundType.value = BackgroundType.DEFAULT
-            }
-        }
-
-        // A random rotation that had already landed on Matrix would keep it on screen until the
-        // next resolve, so it is drawn again from the pool Matrix has just left
-        if (_resolvedRandomBackground.value == BackgroundType.MATRIX) {
-            resolveRandomBackground(prefs.randomBackgroundInterval.get())
-        }
     }
 
     fun toggleBackgroundParallax(current: Boolean) = viewModelScope.launch {

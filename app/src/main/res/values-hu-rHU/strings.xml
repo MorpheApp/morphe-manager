@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">Ebben a kategóriában nem érhetők el műveletek</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Melyik alkalmazást szeretnéd módosítani?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Készen állsz, hogy a YouTube újra legendássá váljon?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Öveket becsatolni, itt a módosítások ideje</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Egy újabb nap, egy újabb reklámmentes remekmű</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Szeretnél reklámokat nézni? Én sem</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Megfegyelmezzük az alkalmazásaidat</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Mai előrejelzés: 100% esély a módosításra</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Készen állsz a jelentéktelent fantasztikussá változtatni?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Alkalmazásmentés felsőfokon - mától élesben</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Koffein és jó módosítások által hajtva</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Ébredj és módosíts</string>
-    <string name="home_greeting_morning_2">Jó reggelt! Az alkalmazások nem módosítják magukat</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Délutáni holtpont? Módosíts valamit</string>
-    <string name="home_greeting_afternoon_2">Ebéd után más élmény a módosítás</string>
-    <string name="home_greeting_afternoon_3">Délutáni műszak: módosításra fel!</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Jó estét! Ilyenkor a legkellemesebb a módosítás</string>
-    <string name="home_greeting_evening_2">Lassítanál a nap végén? Egy módosítás még belefér</string>
-    <string name="home_greeting_evening_3">Lejárt a munkaidő? Egy módosítás még belefér!</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Még ébren? Az alkalmazások is, amiket módosítanod kell</string>
-    <string name="home_greeting_late_night_2">Éjszakai módosítási maraton? Le a kalappal</string>
-    <string name="home_greeting_late_night_3">Éjjeli bagoly mód: bekapcsolva</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">A módosítások csúcsideje… állítólag</string>
-    <string name="home_greeting_super_late_2">Nem tudsz aludni? Módosíts valamit</string>
-    <string name="home_greeting_super_late_3">Már megéri fent maradni egy módosításért</string>
-    <string name="home_greeting_super_late_4">Csak te és a szerverek vagytok ébren</string>
-    <string name="home_greeting_super_late_5">Éjszakai műszak, maximális pörgés</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Módosításforrások</string>
     <string name="sources_search">Források és javítások keresése</string>
@@ -527,8 +488,6 @@ Külső zóna (szaggatott): az indító maszk levághatja – tartsa a fontos r�
     <string name="patcher_field_value_stripped">eltávolítva</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">megtartva</string>
-    <string name="patcher_tab_logs">Javító naplók</string>
-    <string name="patcher_tab_game">Játékok</string>
     <string name="patcher_logs_waiting">Várja a napló kimenetét…</string>
     <string name="patcher_logs_lost">A napló kimenet nem kerül megőrzésre az alkalmazás újraindításakor</string>
     <string name="patcher_long_step_warning">Ez a lépés eltarthat egy ideig. Kérjük várj…</string>
@@ -555,7 +514,6 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="patcher_install_error_subtitle">Próbáld meg eltávolítani és újratelepíteni</string>
     <string name="patcher_ready_to_mount_subtitle">Nyomd meg az alábbi gombot a csatoláshoz</string>
     <string name="patcher_patches_excluded_for_installer">Nem érhető el a telepítési módszerhez és kizárt: %s</string>
-    <string name="patcher_back_to_game_hint">Koppints a(z) %1$s elemre a játékhoz való visszatéréshez</string>
     <string name="patcher_storage_permission_dialog_title">Az elérési útvonal nem hozzáférhető</string>
     <string name="patcher_incompatible_patcher_title">Frissítés szükséges</string>
     <string name="patcher_incompatible_patcher_description">A &lt;b&gt;%1$s&lt;/b&gt; csomag a &lt;b&gt;%2$s&lt;/b&gt; vagy újabb módosításverziót igényli. Kérjük, frissítsd a Morphe-t az alkalmazás módosításához.</string>
@@ -598,32 +556,6 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="patcher_notification_text">Koppints a módosítóhoz való visszatéréshez</string>
     <string name="patcher_stop_confirm_title">Módosító leállítása</string>
     <string name="patcher_stop_confirm_description">Biztosan le szeretnéd állítani a módosítási folyamatot?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Az alkalmazásod átalakítása valami nagyszerűvé… 🏆</string>
-    <string name="patcher_message_2">Régi alkalmazások tanítása új trükkökre… 🎩</string>
-    <string name="patcher_message_3">Digitális felturbózást végzünk az alkalmazáson… 🔧</string>
-    <string name="patcher_message_4">Digitális varázslat főzése… ☕</string>
-    <string name="patcher_message_5">Kávészünet ajánlott… ☕</string>
-    <string name="patcher_message_6">Nézz ki, szép idő van odakint… 🌤️</string>
-    <string name="patcher_message_7">1-esek és 0-k beállítása… 🤖</string>
-    <string name="patcher_message_8">Digitális spagetti kibogozása… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Hibák javítása a nem módosított alkalmazásban… 🪲</string>
-    <string name="patcher_message_10">A nagyszerű módosítások megérik a várakozást… ⏳</string>
-    <string name="patcher_message_11">Képpontok polírozása, amíg nem ragyognak… 💎</string>
-    <string name="patcher_message_12">Kérjük maradj ülve, amíg a kapitány kikapcsolja a \"Módosítás folyamatban\" feliratot... 💺✈️</string>
-    <string name="patcher_message_13">A módosított alkalmazásod elkészítése, forró és friss… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Udvarias tárgyalás a bájtkóddal… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Minden rendszer nominális… a módosítási pálya stabil… 🚀</string>
-    <string name="patcher_message_16">Extra teljesítmény kipréselése, mint a digitális citromból a lé… 🍋</string>
-    <string name="patcher_message_17">Az alkalmazás ösztönzése, hogy elfogadja az új, jobb énjét… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Az alkalmazás szuperpozíciójának megváltoztatása módosítás nélküliről módosítottra… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Az alkalmazásod lázas, és az egyetlen gyógyír rá a mégtöbb módosítás… 🩺🔔</string>
-    <string name="patcher_message_20">Felesleges adatok törlése. Kis türelmet… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Alkalmazás módosítása</string>
     <string name="memory_usage">Memóriahasználat</string>
@@ -653,29 +585,6 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="package_name">Csomagnév</string>
     <string name="failed_to_mount">Nem sikerült csatlakoztatni: %s</string>
     <string name="failed_to_unmount">Nem sikerült leválasztani: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Értékelés: %s</string>
-    <string name="mini_game_best">Legjobb %s</string>
-    <string name="mini_game_new_record">Új rekord!</string>
-    <string name="mini_game_game_over">Játék vége</string>
-    <string name="mini_game_try_again">Próbálja újra</string>
-    <string name="mini_game_paused">Szüneteltetve</string>
-    <string name="mini_game_resume">Folytatás</string>
-    <string name="mini_game_restart">Újrakezdés</string>
-    <string name="mini_game_change">Válassz másik játékot</string>
-    <string name="mini_game_2048_picker_subtitle">Húzd a lapkákat összevonáshoz</string>
-    <string name="mini_game_flappy_picker_subtitle">Érintsd meg, hogy átrepülj a csővázakon</string>
-    <string name="mini_game_flappy_tap_to_start">Érintsd meg a repüléshez</string>
-    <string name="mini_game_snake_picker_subtitle">Egyél, és ne ütközz magadba</string>
-    <string name="mini_game_snake_swipe_to_start">Húzd az ujjad a kezdéshez</string>
-    <string name="mini_game_dino_picker_subtitle">Érintsd meg a kaktuszok átugrásához</string>
-    <string name="mini_game_dino_tap_to_start">Érintsd meg a futáshoz</string>
-    <string name="mini_game_blocks_picker_subtitle">Illeszd a formákat, tiszta vonalak</string>
-    <string name="mini_game_blocks_tap_to_start">Koppints a forgatáshoz, húzd el a mozgatáshoz, húzd le az ejtéshez</string>
-    <string name="mini_game_bricks_picker_subtitle">Pattintsd a labdát, törd le a falat</string>
-    <string name="mini_game_bricks_tap_to_start">Húzd a célzáshoz, koppints az indításhoz</string>
-    <string name="mini_game_miner_picker_subtitle">Koppints a megnyitáshoz, tartsd lenyomva a megjelöléshez</string>
-    <string name="mini_game_pairs_picker_subtitle">Fordíts kártyákat, találd meg a párokat</string>
     <!-- Settings -->
     <string name="appearance">Megjelenés</string>
     <string name="advanced">Haladó</string>
@@ -729,8 +638,6 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="settings_appearance_ui_scale_preview_subtitle">Szövegek és vezérlők ezen a méretekben</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Kezdőképernyő</string>
-    <string name="settings_appearance_greeting_phrases">Üdvözlő szövegek</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Üdvözlő üzenet megjelenítése a kezdőképernyőn</string>
     <string name="settings_appearance_app_grouping">Alkalmazáscsoportosítás</string>
     <string name="settings_appearance_app_grouping_description">Kapcsoló megjelenítése az alkalmazások forrás vagy kategória szerinti csoportosításához</string>
     <string name="settings_appearance_repatch_notice">Újrajavítási értesítés</string>
@@ -1162,16 +1069,6 @@ Részletek: %2$s"</string>
     <string name="credits_current_development">Jelenlegi fejlesztők</string>
     <string name="credits_prior_development">Korábbi fejlesztők</string>
     <string name="opensource_licenses">Nyílt forráskódú licencek</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">Egy választás</string>
-    <string name="easter_egg_pill_message">Take the blue pill and the ads stay exactly where they are. Take the red one and see how deep the bytecode goes</string>
-    <string name="easter_egg_pill_red">Piros pirula</string>
-    <string name="easter_egg_pill_blue">Kék pirula</string>
-    <string name="easter_egg_pill_red_toast">Mátrix háttér feloldva</string>
-    <string name="easter_egg_pill_blue_toast">A reklámok várni fognak rád</string>
-    <string name="easter_egg_pill_message_again">Már a Mátrixban vagy. A piros pirula visszadob az esőbe, a kék pedig felébreszt.</string>
-    <string name="easter_egg_pill_red_toast_again">Vissza az esőbe</string>
-    <string name="easter_egg_pill_blue_toast_again">Kihúzva. A visszaút ott van, ahol mindig is volt.</string>
     <!-- Shared strings -->
     <string name="select_file">Fájl kiválasztása</string>
     <string name="select_files">Fájlok kiválasztása</string>

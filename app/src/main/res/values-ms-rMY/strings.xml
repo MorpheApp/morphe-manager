@@ -35,45 +35,6 @@
     <string name="home_category_custom">Tersuai</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Aplikasi apa yang hendak kamu tampal? </string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Sedia untuk wujudkan semula aplikasi lagenda?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Bersedia, waktunya untuk menampal</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Hari baru, satu lagi karya agung yang menyekat iklan</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Mahu menonton iklan? Saya juga</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Mari jadikan aplikasi kamu berkelakuan baik</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Cuaca hari ini: 100% peluang untuk menampal</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Bersedia untuk menukar ketidakpuasan kepada sesuatu yang hebat?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Menyimpan aplikasi daripada diri mereka sendiri sejak hari ini</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Dikuasakan oleh kafein dan tampalan yang bagus</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Bangun dan tampal</string>
-    <string name="home_greeting_morning_2">Selamat pagi! Aplikasi tidak akan melakukan tampalannya sendiri</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Rasa lemas di tengah hari? Buatlah tampalan</string>
-    <string name="home_greeting_afternoon_2">Membuat tampalan selepas makan tengah hari terasa berbeza</string>
-    <string name="home_greeting_afternoon_3">Syif petang: edisi tampalan</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Selamat petang! Tampalan petang terasa berbeza</string>
-    <string name="home_greeting_evening_2">Ingin bersantai? Buat tampalan aplikasi dahulu</string>
-    <string name="home_greeting_evening_3">Nak balik? Buat suatu tampalan dahulu</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Masih berjaga? Begitu juga dengan aplikasi yang memerlukan tampalan</string>
-    <string name="home_greeting_late_night_2">Sesi tampalan lewat malam? Hebat</string>
-    <string name="home_greeting_late_night_3">Mod burung hantu: diaktifkan</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Jam puncak untuk tampalan… katanyalah</string>
-    <string name="home_greeting_super_late_2">Tak boleh tidur? Tampallah sesuatu</string>
-    <string name="home_greeting_super_late_3">Pada ketika ini, teruskan sahaja bangun dan buat tampalan</string>
-    <string name="home_greeting_super_late_4">Anda dan pelayan, kedua-duanya berjaga</string>
-    <string name="home_greeting_super_late_5">Malaman dan produktif</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Tampalan sumber-sumber</string>
     <string name="sources_management_open_in_browser">Buka dalam pelayar web</string>
@@ -305,8 +266,6 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <!-- Fastest read or write rate reached while patching, in data per second -->
     <string name="patcher_field_value_unknown">tidak diketahui</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
-    <!-- Value of "Libraries": every library was left in the patched APK -->
-    <string name="patcher_tab_game">Permainan</string>
     <string name="patcher_long_step_warning">Langkah ini mungkin mengambil sedikit masa. Sila tunggu…</string>
     <string name="patcher_installing_subtitle">Hampir bersedia untuk beraksi! 🎸</string>
     <string name="patcher_success_subtitle">Aplikasi anda ditampal dan dipasang!</string>
@@ -348,31 +307,6 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="patcher_notification_text">Tekan untuk kembali ke penampal</string>
     <string name="patcher_stop_confirm_title">Berhenti menampal</string>
     <string name="patcher_stop_confirm_description">Anda pasti untuk memberhentikan proses tampalan?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Mengubah aplikasi kamu kepada sesuatu yang menakjubkan… 🏆</string>
-    <string name="patcher_message_2">Mengajar aplikasi lama helah baharu… 🎩</string>
-    <string name="patcher_message_3">Memberikan aplikasi kamu penalaan digital… 🔧</string>
-    <string name="patcher_message_4">Membancuh magik digital… ☕</string>
-    <string name="patcher_message_5">Rehat berserta kopi disyorkan… ☕</string>
-    <string name="patcher_message_6">Pandang ke luar, ia bagus di luar sana… 🌤️</string>
-    <string name="patcher_message_8">Menguraikan spageti digital… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Membetulkan pepijat dalam aplikasi yang belum ditampal… 🪲</string>
-    <string name="patcher_message_10">Tampalan yang hebat berbaloi untuk ditunggu… ⏳</string>
-    <string name="patcher_message_11">Menggilap piksel sehingga ia bersinar… 💎</string>
-    <string name="patcher_message_12">Sila kekal duduk sehingga kapten mematikan tanda \"Tampalan sedang dijalankan\"… 💺✈️</string>
-    <string name="patcher_message_13">Memasak aplikasi kamu yang telah ditampal, panas dan segar… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Berunding dengan sopan dengan kod bait… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Semua sistem nominal… Trajektori tampalan stabil… 🚀</string>
-    <string name="patcher_message_16">Memerah kuasa tambahan, seperti jus daripada lemon digital… 🍋</string>
-    <string name="patcher_message_17">Menggalakkan aplikasi untuk menerima diri baharu yang lebih baik… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Menukar superposisi aplikasi daripada tidak ditampal kepada ditampal… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Aplikasi anda mengalami demam, dan salah satu rawatan ialah dengan lebih banyak tampalan…  🩺🔔</string>
-    <string name="patcher_message_20">Membuang hal tidak penting. Tolong bersedia… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Menampal aplikasi</string>
     <string name="memory_usage">Penggunaan memori</string>
@@ -392,14 +326,6 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="package_name">Nama pakej</string>
     <string name="failed_to_mount">Gagal untuk ditunggang: %s</string>
     <string name="failed_to_unmount">Gagal untuk nyah-tunggang %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Markah %s</string>
-    <string name="mini_game_best">Terbaik %s</string>
-    <string name="mini_game_new_record">Rekod baharu!</string>
-    <string name="mini_game_game_over">Permainan Tamat</string>
-    <string name="mini_game_try_again">Cuba Lagi</string>
-    <string name="mini_game_paused">Dijedakan</string>
-    <string name="mini_game_resume">Teruskan</string>
     <!-- Settings -->
     <string name="appearance">Penampilan</string>
     <string name="advanced">Lebih mahir</string>

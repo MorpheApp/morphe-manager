@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">Tindakan tidak tersedia untuk kategori ini</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Aplikasi apa yang ingin Anda tambal?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Siap untuk membuat aplikasi legendaris lagi?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Bersiaplah, waktunya menambal</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Hari lain, mahakarya tanpa iklan lainnya</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Mau nonton iklan? Aku pun tidak</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Ayo buat aplikasimu berjalan dengan semestinya</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Prediksi cuaca hari ini: 100% kemungkinan tanpa iklan</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Siap mengubah yang biasa saja menjadi luar biasa?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Menyelamatkan aplikasi dari diri mereka sendiri sejak hari ini</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Didukung oleh kafein dan tambalan yang bagus</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Bangkit dan tambal</string>
-    <string name="home_greeting_morning_2">Selamat pagi! Aplikasi tidak akan menambal dirinya sendiri</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Lemas di siang hari? Tambal sesuatu</string>
-    <string name="home_greeting_afternoon_2">Menambal setelah makan siang terasa berbeda</string>
-    <string name="home_greeting_afternoon_3">Shift sore: edisi menambal</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Selamat malam! Menambal di malam hari terasa berbeda</string>
-    <string name="home_greeting_evening_2">Mau bersantai? Tambal dulu aplikasinya</string>
-    <string name="home_greeting_evening_3">Mau pulang? Tambal dulu aplikasinya</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Masih terjaga? Aplikasi yang perlu ditambal juga demikian</string>
-    <string name="home_greeting_late_night_2">Sesi penambalan larut malam? Salut!</string>
-    <string name="home_greeting_late_night_3">Mode burung hantu malam: diaktifkan</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Jam-jam sibuk untuk menambal… kata orang sih</string>
-    <string name="home_greeting_super_late_2">Tidak bisa tidur? Tambal sesuatu lah</string>
-    <string name="home_greeting_super_late_3">Saat ini, mending tetap bangun dan tambal</string>
-    <string name="home_greeting_super_late_4">Kamu dan server, sama-sama terjaga</string>
-    <string name="home_greeting_super_late_5">Aktif di malam hari dan produktif</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Sumber tambalan</string>
     <string name="sources_search">Cari sumber dan tambalan</string>
@@ -528,8 +489,6 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="patcher_field_value_stripped">dihilangkan</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">dipertahankan</string>
-    <string name="patcher_tab_logs">Catatan Penambal</string>
-    <string name="patcher_tab_game">Permainan</string>
     <string name="patcher_logs_waiting">Menunggu keluaran log…</string>
     <string name="patcher_logs_lost">Keluaran log tidak disimpan saat aplikasi dimulai ulang</string>
     <string name="patcher_long_step_warning">Langkah ini mungkin memerlukan waktu. Harap tunggu…</string>
@@ -556,7 +515,6 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="patcher_install_error_subtitle">Coba copot dan pasang lagi</string>
     <string name="patcher_ready_to_mount_subtitle">Tekan tombol di bawah untuk mount</string>
     <string name="patcher_patches_excluded_for_installer">Tidak tersedia untuk metode pemasangan ini dan dikecualikan: %s</string>
-    <string name="patcher_back_to_game_hint">Ketuk %1$s untuk kembali ke permainan Anda</string>
     <string name="patcher_storage_permission_dialog_title">Tidak dapat mengakses jalur penyimpanan</string>
     <string name="patcher_incompatible_patcher_title">Pembaruan diperlukan</string>
     <string name="patcher_incompatible_patcher_description">Bundle &lt;b&gt;%1$s&lt;/b&gt; memerlukan versi penambal &lt;b&gt;%2$s&lt;/b&gt; atau lebih baru. Silahkan perbarui Morphe untuk menambal aplikasi ini</string>
@@ -599,32 +557,6 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="patcher_notification_text">Ketuk untuk kembali ke penambal</string>
     <string name="patcher_stop_confirm_title">Hentikan penambal</string>
     <string name="patcher_stop_confirm_description">Apakah Anda yakin ingin menghentikan proses penyematan?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Menyulap aplikasi Anda menjadi sesuatu yang luar biasa… 🏆</string>
-    <string name="patcher_message_2">Mengajarkan trik baru pada aplikasi lama… 🎩</string>
-    <string name="patcher_message_3">Memberikan penyetelan digital pada aplikasi Anda… 🔧</string>
-    <string name="patcher_message_4">Meracik keajaiban digital… ☕</string>
-    <string name="patcher_message_5">Disarankan ngopi… ☕</string>
-    <string name="patcher_message_6">Lihatlah ke luar, indah sekali di sana… 🌤️</string>
-    <string name="patcher_message_7">Menyesuaikan 1 dan 0… 🤖</string>
-    <string name="patcher_message_8">Mengurai kekacauan digital… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Memperbaiki bug di aplikasi asli… 🪲</string>
-    <string name="patcher_message_10">Tambalan hebat pantas ditunggu… ⏳</string>
-    <string name="patcher_message_11">Memoles piksel hingga berkilau… 💎</string>
-    <string name="patcher_message_12">Harap tetap duduk hingga kapten mematikan tanda \"Sedang menambal\" ... 💺✈️</string>
-    <string name="patcher_message_13">Memasak aplikasi tambalan Anda, segar dan mantap… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Berunding dengan baik dengan bytecode... 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Semua sistem nominal… lintasan penambalan stabil… 🚀</string>
-    <string name="patcher_message_16">Memeras daya ekstra, seperti sari dari lemon digital… 🍋</string>
-    <string name="patcher_message_17">Mendorong aplikasi untuk menerima dirinya yang baru dan lebih baik… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Mengubah superposisi aplikasi dari belum ditambal menjadi ditambal… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Aplikasi Anda demam, dan satu-satunya resepnya adalah lebih banyak tambalan… 🩺🔔</string>
-    <string name="patcher_message_20">Menghapus omong kosong. Mohon tunggu sebentar… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Menambal aplikasi</string>
     <string name="memory_usage">Pemakaian memori</string>
@@ -654,29 +586,6 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="package_name">Nama paket</string>
     <string name="failed_to_mount">Gagal mount: %s</string>
     <string name="failed_to_unmount">Gagal unmount: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Skor %s</string>
-    <string name="mini_game_best">%s terbaik</string>
-    <string name="mini_game_new_record">Rekor baru!</string>
-    <string name="mini_game_game_over">Permainan Selesai</string>
-    <string name="mini_game_try_again">Coba Lagi</string>
-    <string name="mini_game_paused">Dijeda</string>
-    <string name="mini_game_resume">Lanjutkan</string>
-    <string name="mini_game_restart">Mulai dari Awal</string>
-    <string name="mini_game_change">Pilih permainan lain</string>
-    <string name="mini_game_2048_picker_subtitle">Geser balok untuk menggabungkan</string>
-    <string name="mini_game_flappy_picker_subtitle">Ketuk untuk terbang melewati pipa</string>
-    <string name="mini_game_flappy_tap_to_start">Ketuk untuk terbang</string>
-    <string name="mini_game_snake_picker_subtitle">Makan makanan, jangan menabrak diri sendiri</string>
-    <string name="mini_game_snake_swipe_to_start">Usap untuk memulai</string>
-    <string name="mini_game_dino_picker_subtitle">Ketuk untuk melompati kaktus</string>
-    <string name="mini_game_dino_tap_to_start">Ketuk untuk berlari</string>
-    <string name="mini_game_blocks_picker_subtitle">Cocokkan bentuk, bersihkan garis</string>
-    <string name="mini_game_blocks_tap_to_start">Ketuk untuk memutar, usap untuk memindahkan, usap ke bawah untuk menjatuhkan</string>
-    <string name="mini_game_bricks_picker_subtitle">Pantulkan bola, hancurkan dinding</string>
-    <string name="mini_game_bricks_tap_to_start">Seret untuk membidik, ketuk untuk meluncurkan</string>
-    <string name="mini_game_miner_picker_subtitle">Ketuk untuk membuka, tahan untuk menandai</string>
-    <string name="mini_game_pairs_picker_subtitle">Balik kartu, temukan pasangannya</string>
     <!-- Settings -->
     <string name="appearance">Tampilan</string>
     <string name="advanced">Lanjutan</string>
@@ -731,8 +640,6 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="settings_appearance_ui_scale_preview_subtitle">Teks dan kontrol dalam skala ini</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Layar beranda</string>
-    <string name="settings_appearance_greeting_phrases">Frasa sapaan</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Tampilkan pesan sapaan di layar beranda</string>
     <string name="settings_appearance_app_grouping">Pengelompokan aplikasi</string>
     <string name="settings_appearance_app_grouping_description">Menampilkan pengalih untuk mengelompokkan aplikasi berdasarkan sumber atau kategori</string>
     <string name="settings_appearance_repatch_notice">Notifikasi penambalan ulang</string>
@@ -1164,16 +1071,6 @@ Rincian: %2$s"</string>
     <string name="credits_current_development">Pengembangan saat ini</string>
     <string name="credits_prior_development">Pengembangan sebelumnya</string>
     <string name="opensource_licenses">Lisensi sumber terbuka</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">Sebuah pilihan</string>
-    <string name="easter_egg_pill_message">Ambil pil biru dan iklan tetap di tempatnya. Ambil pil merah dan lihat seberapa dalam bytecode itu</string>
-    <string name="easter_egg_pill_red">Pil merah</string>
-    <string name="easter_egg_pill_blue">Pil biru</string>
-    <string name="easter_egg_pill_red_toast">Latar belakang Matrix terbuka</string>
-    <string name="easter_egg_pill_blue_toast">Iklan akan menunggumu</string>
-    <string name="easter_egg_pill_message_again">Kamu sudah berada di dalam Matrix. Pil merah menjatuhkanmu kembali ke dalam hujan, pil biru membangunkanmu</string>
-    <string name="easter_egg_pill_red_toast_again">Kembali ke dalam hujan</string>
-    <string name="easter_egg_pill_blue_toast_again">Terputus. Jalan kembali selalu ada di sana</string>
     <!-- Shared strings -->
     <string name="select_file">Pilih berkas</string>
     <string name="select_files">Pilih file</string>

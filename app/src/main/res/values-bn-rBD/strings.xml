@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">এই বিভাগের জন্য কোনো পদক্ষেপ উপলব্ধ নেই</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">আপনি কোন অ্যাপ প্যাচ করতে চান?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">আপনি কি অ্যাপ আবার ঐতিহাসিক করতে প্রস্তুত?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">সিট বেল্ট বেঁধে নিন, এখন প্যাচিং এর সময়</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">আরেক দিন, আরেক অ্যাড-ব্লকড মাস্টারপিস</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">আপনি কি বিজ্ঞাপন দেখতে চান? আমিও চাইনা</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">চলুন আপনার অ্যাপগুলিকে ভদ্র হতে শেখাই</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">আজকের পূর্বাভাস: প্যাচিংয়ের 100% সম্ভাবনা</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">সাধারণ কে অসাধারণ করতে প্রস্তুত?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">অ্যাপ কে অ্যাপের থেকেই সাহায্য করছি আজ থেকে</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">ক্যাফেইন ও ভালো প্যাচ দিয়ে চালিত</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">জেগে উঠুন এবং প্যাচ করুন</string>
-    <string name="home_greeting_morning_2">শুভ সকাল! অ্যাপগুলো নিজে থেকে প্যাচ হবে না</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">দুপুরে ঝিমুনি আসছে? চলুন কিছু একটা প্যাচ করে নেওয়া যাক</string>
-    <string name="home_greeting_afternoon_2">দুপুরে লাঞ্চের পর প্যাচিং করার মজাই আলাদা, ট্রাই করে দেখুন</string>
-    <string name="home_greeting_afternoon_3">বিকেলের শিফট: প্যাচ এডিশন পরখ করে দেখুন</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">শুভ সন্ধ্যা! সন্ধ্যার প্যাচগুলো সত্যিই দারুণ কাজ করে</string>
-    <string name="home_greeting_evening_2">এবার বিশ্রামের পালা? তার আগে একটা অ্যাপ প্যাচ করে ফেলুন</string>
-    <string name="home_greeting_evening_3">ছুটি নিয়ে নিচ্ছেন? যাওয়ার আগে একটা কিছু প্যাচ করে ফেলুন</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">ঘুম আসলো না বুঝি? আপনার যে অ্যাপগুলোর প্যাচ দরকার, সেগুলোও কিন্তু জেগে আছে</string>
-    <string name="home_greeting_late_night_2">গভীর রাতে প্যাচ সেশন? আপনার ডেডিকেশনকে রেসপেক্ট জানাই</string>
-    <string name="home_greeting_late_night_3">নাইট আউল মোড: অ্যাক্টিভেট হয়ে গেছে</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">প্যাচ করার ব্যস্ততম সময়… অন্তত লোকে তো তাই বলে</string>
-    <string name="home_greeting_super_late_2">ঘুম উধাও? তার চেয়ে বরং একটা কিছু প্যাচ করে ফেলুন</string>
-    <string name="home_greeting_super_late_3">এখন আর ঘুমিয়ে কী হবে, বরং জেগেই থাকুন আর একটা কিছু প্যাচ করে ফেলুন</string>
-    <string name="home_greeting_super_late_4">আপনি এবং সার্ভার, দুজনেই কিন্তু এখনো জেগে আছেন</string>
-    <string name="home_greeting_super_late_5">রাতও জাগছেন, আবার কাজের কাজও করে ফেলছেন</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">প্যাচ সোর্সগুলো</string>
     <string name="sources_search">উৎস এবং প্যাচ অনুসন্ধান করুন</string>
@@ -527,8 +488,6 @@
     <string name="patcher_field_value_stripped">বাদ দেওয়া হয়েছে</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">রাখা হয়েছে</string>
-    <string name="patcher_tab_logs">প্যাচার লগ</string>
-    <string name="patcher_tab_game">গেমস</string>
     <string name="patcher_logs_waiting">লগ আউটপুটের জন্য অপেক্ষা করা হচ্ছে…</string>
     <string name="patcher_logs_lost">অ্যাপ পুনরায় চালু করলে লগ আউটপুট সংরক্ষণ করা হবে না</string>
     <string name="patcher_long_step_warning">এই ধাপটি সম্পন্ন হতে কিছু সময় লাগতে পারে। অনুগ্রহ করে অপেক্ষা করুন…</string>
@@ -555,7 +514,6 @@
     <string name="patcher_install_error_subtitle">আনইনস্টল করে আবার ইনস্টল করার চেষ্টা করুন</string>
     <string name="patcher_ready_to_mount_subtitle">মাউন্ট করতে নিচের বোতামটি টিপুন</string>
     <string name="patcher_patches_excluded_for_installer">এটি এই ইনস্টল পদ্ধতি এবং বাদ দেওয়ার জন্য পাওয়া যাচ্ছে না: %s</string>
-    <string name="patcher_back_to_game_hint">আপনার গেমে ফিরে যেতে %1$s ট্যাপ করুন</string>
     <string name="patcher_storage_permission_dialog_title">স্টোরেজ পথে অ্যাক্সেস করতে পারেনি</string>
     <string name="patcher_incompatible_patcher_title">আপডেট প্রয়োজন</string>
     <string name="patcher_incompatible_patcher_description">বান্ডেল &lt;b&gt;%1$s&lt;/b&gt;-এর জন্য প্যাচার সংস্করণ &lt;b&gt;%2$s&lt;/b&gt; অথবা তার চেয়ে নতুন সংস্করণ প্রয়োজন। এই অ্যাপটি প্যাচ করার জন্য অনুগ্রহ করে Morphe আপডেট করুন</string>
@@ -598,32 +556,6 @@
     <string name="patcher_notification_text">প্যাচার-এ ফিরে যেতে ট্যাপ করুন</string>
     <string name="patcher_stop_confirm_title">প্যাচার বন্ধ করুন</string>
     <string name="patcher_stop_confirm_description">আপনি কি প্যাচিং প্রক্রিয়া বন্ধ করতে চান?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">আপনার অ্যাপটিকে দুর্দান্ত কিছুতে পরিবর্তন করা হচ্ছে… 🏆</string>
-    <string name="patcher_message_2">পুরানো অ্যাপগুলিতে নতুন কৌশল শেখানো হচ্ছে… 🎩</string>
-    <string name="patcher_message_3">আপনার অ্যাপটিকে একটি ডিজিটাল টিউন-আপ দেওয়া হচ্ছে… 🔧</string>
-    <string name="patcher_message_4">ডিজিটাল জাদু তৈরি হচ্ছে… ☕</string>
-    <string name="patcher_message_5">কফি বিরতির পরামর্শ দেওয়া হচ্ছে… ☕</string>
-    <string name="patcher_message_6">বাইরে দেখুন, সেখানে সুন্দর… 🌤️</string>
-    <string name="patcher_message_7">1 এবং 0 সামঞ্জস্য করা হচ্ছে… 🤖</string>
-    <string name="patcher_message_8">ডিজিটাল স্প্যাগেটি খোলা হচ্ছে… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">অনপ্যাচ করা অ্যাপে বাগগুলি ঠিক করছি… 🪲</string>
-    <string name="patcher_message_10">অপেক্ষার যোগ্য দারুণ প্যাচ… ⏳</string>
-    <string name="patcher_message_11">পিক্সেল পালিশ করা হচ্ছে যতক্ষণ না সেগুলো চকচক করে… 💎</string>
-    <string name="patcher_message_12">প্যাচিং চলাকালীন \"পাইলট পার্চিং চালু\" চিহ্ন নেভে না যাওয়া পর্যন্ত দয়া করে আপনার আসন থেকে না নামাই... 💺✈️</string>
-    <string name="patcher_message_13">আপনার প্যাচ করা অ্যাপ রান্না হচ্ছে, গরম এবং তাজা… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">bytecode এর সাথে নম্রভাবে আলোচনা করা হচ্ছে... 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">সমস্ত সিস্টেম স্বাভাবিক… প্যাচিং ট্র্যাজেক্টরি স্থিতিশীল… 🚀</string>
-    <string name="patcher_message_16">অতিরিক্ত শক্তি নিংড়ে বের করছি, ডিজিটাল লেবু থেকে রস নিংড়ানোর মতো… 🍋</string>
-    <string name="patcher_message_17">অ্যাপটিকে তার নতুন, উন্নততর সত্তা গ্রহণ করতে উৎসাহিত করছি… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">অ্যাপ সুপারপজিশন আনপ্যাচড থেকে প্যাচড-এ পরিবর্তন করছি… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">আপনার অ্যাপের জ্বর হয়েছে, এবং এর একমাত্র প্রতিকার হল আরও প্যাচ… 🩺🔔</string>
-    <string name="patcher_message_20">অর্থহীন কথাগুলো সরিয়ে ফেলা হচ্ছে। অনুগ্রহ করে অপেক্ষা করুন… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">অ্যাপটি প্যাচিং করছি</string>
     <string name="memory_usage">মেমরি ব্যবহার</string>
@@ -653,29 +585,6 @@
     <string name="package_name">প্যাকেজের নাম</string>
     <string name="failed_to_mount">মাউন্ট করতে ব্যর্থ: %s</string>
     <string name="failed_to_unmount">আনমাউন্ট করতে ব্যর্থ: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">স্কোর %s</string>
-    <string name="mini_game_best">সেরা %s</string>
-    <string name="mini_game_new_record">নতুন রেকর্ড!</string>
-    <string name="mini_game_game_over">গেম ওভার</string>
-    <string name="mini_game_try_again">আবার চেষ্টা করুন</string>
-    <string name="mini_game_paused">বিরতি</string>
-    <string name="mini_game_resume">এগিয়ে যান</string>
-    <string name="mini_game_restart">নতুন করে শুরু করুন</string>
-    <string name="mini_game_change">অন্য একটি গেম বেছে নিন</string>
-    <string name="mini_game_2048_picker_subtitle">একসাথে মার্জ করার জন্য টাইলস স্লাইড করুন</string>
-    <string name="mini_game_flappy_picker_subtitle">পাইপের মধ্যে দিয়ে উড়তে ট্যাপ করুন</string>
-    <string name="mini_game_flappy_tap_to_start">উড়তে ট্যাপ করুন</string>
-    <string name="mini_game_snake_picker_subtitle">খাবার খান, নিজের সাথে আঘাত করবেন না</string>
-    <string name="mini_game_snake_swipe_to_start">শুরু করতে সোয়াইপ করুন</string>
-    <string name="mini_game_dino_picker_subtitle">ক্যাকটাসের উপর দিয়ে লাফ দিতে ট্যাপ করুন</string>
-    <string name="mini_game_dino_tap_to_start">দৌড়াতে ট্যাপ করুন</string>
-    <string name="mini_game_blocks_picker_subtitle">আকৃতি মিলান, লাইন পরিষ্কার করুন</string>
-    <string name="mini_game_blocks_tap_to_start">ঘোরাতে ট্যাপ করুন, সরাতে সোয়াইপ করুন, ফেলতে নিচে সোয়াইপ করুন</string>
-    <string name="mini_game_bricks_picker_subtitle">বলটি বাউন্স করুন, প্রাচীর পরিষ্কার করুন</string>
-    <string name="mini_game_bricks_tap_to_start">লক্ষ্য করতে টেনে আনুন, ছুড়তে ট্যাপ করুন</string>
-    <string name="mini_game_miner_picker_subtitle">খুলতে ট্যাপ করুন, ফ্ল্যাগ করতে ধরে রাখুন</string>
-    <string name="mini_game_pairs_picker_subtitle">কার্ড উল্টান, মিল খুঁজুন</string>
     <!-- Settings -->
     <string name="appearance">রূপ</string>
     <string name="advanced">উন্নত</string>
@@ -730,8 +639,6 @@
     <string name="settings_appearance_ui_scale_preview_subtitle">এই স্কেলে টেক্সট এবং কন্ট্রোল</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">হোম স্ক্রিন</string>
-    <string name="settings_appearance_greeting_phrases">শুভেচ্ছা বার্তা</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">হোম স্ক্রিনে একটি শুভেচ্ছা বার্তা দেখান</string>
     <string name="settings_appearance_app_grouping">অ্যাপ grouping</string>
     <string name="settings_appearance_app_grouping_description">উৎস বা বিভাগ অনুসারে অ্যাপগুলো গ্রুপ করতে একটি সুইচার দেখান</string>
     <string name="settings_appearance_repatch_notice">পুনরায় প্যাচ বিজ্ঞপ্তি</string>
@@ -1155,16 +1062,6 @@ morphe_adaptive_monochrome_custom.xml
     <string name="credits_current_development">চলমান উন্নয়ন</string>
     <string name="credits_prior_development">পূর্ববর্তী উন্নয়ন</string>
     <string name="opensource_licenses">ওপেন-সোর্স লাইসেন্স।</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">একটি পছন্দ</string>
-    <string name="easter_egg_pill_message">নীল পিলটি নিন এবং বিজ্ঞাপনগুলো ঠিক যেখানে আছে সেখানেই থাকবে। লালটি নিন এবং দেখুন বাইটকোড কত গভীরে যায়।</string>
-    <string name="easter_egg_pill_red">লাল পিল</string>
-    <string name="easter_egg_pill_blue">নীল পিল</string>
-    <string name="easter_egg_pill_red_toast">ম্যাট্রিক্স ব্যাকগ্রাউন্ড আনলক হয়েছে</string>
-    <string name="easter_egg_pill_blue_toast">বিজ্ঞাপনগুলো আপনার জন্য অপেক্ষা করবে</string>
-    <string name="easter_egg_pill_message_again">আপনি ইতিমধ্যে ম্যাট্রিক্সে আছেন। লাল বড়িটি আপনাকে আবার বৃষ্টিতে ফেলে দেয়, নীল বড়িটি আপনাকে জাগিয়ে তোলে।</string>
-    <string name="easter_egg_pill_red_toast_again">আবার বৃষ্টিতে</string>
-    <string name="easter_egg_pill_blue_toast_again">আনপ্লাগড। ফিরে যাওয়ার পথ সবসময় যেখানে ছিল সেখানেই।</string>
     <!-- Shared strings -->
     <string name="select_file">ফাইল নির্বাচন করুন</string>
     <string name="select_files">ফাইল নির্বাচন করুন</string>

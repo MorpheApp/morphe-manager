@@ -157,9 +157,7 @@ The log opens with a summary block worth checking if you ever report a problem: 
 patches version, APK size, patch count, whether the input was a split APK, the runtime and
 heap limit, your Android version and device, plus free RAM and storage.
 
-Below it, individual steps stream in as they happen. The **Games** tab next to **Patcher
-logs** passes the time while patching runs, with a picker for 2048, Flappy, Snake, Dino,
-Blocks, Bricks, Miner and Pairs.
+Below it, individual steps stream in as they happen.
 
 At the bottom, the red button cancels patching and the copy button puts the entire log on
 your clipboard.

@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">Åtgärder är inte tillgängliga för den här kategorin</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Vilken app vill du modifiera?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Redo att göra appar legendariska igen?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Spänn fast dig, det är dags för modifiering</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">En annan dag, ett annat mästerverk med annonsblockering</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Vill du se annonser? Inte jag heller</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Vi får dina appar att uppföra sig</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Dagens prognos: 100 % risk för modifiering</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Redo att göra det medelmåttiga fantastiskt?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Räddar appar från sig själva sedan i dag</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Drivs av koffein och bra tillägg</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Upp och modifiera</string>
-    <string name="home_greeting_morning_2">God morgon! Appar modifierar ju inte sig själva</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Eftermiddagssvacka? Modifiera något</string>
-    <string name="home_greeting_afternoon_2">Modifiering efter lunchen har en annan känsla</string>
-    <string name="home_greeting_afternoon_3">Eftermiddagsskiftet: modifieringsutgåvan</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">God kväll! Modifiering på kvällen har en annan känsla</string>
-    <string name="home_greeting_evening_2">Varvar du ned? Modifiera en app först</string>
-    <string name="home_greeting_evening_3">Stämplar du ut? Modifiera något först</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Fortfarande vaken? Det är också apparna som behöver modifieras</string>
-    <string name="home_greeting_late_night_2">Modifierar du sent på kvällen? Respekt</string>
-    <string name="home_greeting_late_night_3">Nattuggleläge: aktiverat</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Den bästa tiden för modifiering … sägs det</string>
-    <string name="home_greeting_super_late_2">Kan du inte sova? Modifiera något</string>
-    <string name="home_greeting_super_late_3">Vid det här laget, håll dig bara vaken och modifiera</string>
-    <string name="home_greeting_super_late_4">Du och servrarna – båda är vakna</string>
-    <string name="home_greeting_super_late_5">Nattaktiv och produktiv</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Tilläggskällor</string>
     <string name="sources_search">Sök efter källor och tillägg</string>
@@ -527,8 +488,6 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="patcher_field_value_stripped">borttagna</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">behållna</string>
-    <string name="patcher_tab_logs">Modifieringsloggar</string>
-    <string name="patcher_tab_game">Spel</string>
     <string name="patcher_logs_waiting">Väntar på loggutdata…</string>
     <string name="patcher_logs_lost">Loggutdata sparas inte mellan appstarter.</string>
     <string name="patcher_long_step_warning">Det här steget kan ta en stund. Vänta …</string>
@@ -555,7 +514,6 @@ Om du avinstallerar raderas alla appdata permanent"</string>
     <string name="patcher_install_error_subtitle">Försök att avinstallera och installera igen</string>
     <string name="patcher_ready_to_mount_subtitle">Tryck på knappen nedan för att montera</string>
     <string name="patcher_patches_excluded_for_installer">Inte tillgänglig för denna installationsmetod och utesluten: %s</string>
-    <string name="patcher_back_to_game_hint">Tryck på %1$s för att gå tillbaka till spelet</string>
     <string name="patcher_storage_permission_dialog_title">Det går inte att komma åt lagringssökväg</string>
     <string name="patcher_incompatible_patcher_title">Uppdatering krävs</string>
     <string name="patcher_incompatible_patcher_description">Arkivet &lt;b&gt;%1$s&lt;/b&gt; kräver version &lt;b&gt;%2$s&lt;/b&gt; eller senare av modifieringsverktyget. Uppdatera Morphe för att modifiera den här appen</string>
@@ -598,32 +556,6 @@ Om du avinstallerar raderas alla appdata permanent"</string>
     <string name="patcher_notification_text">Tryck för att återgå till modifieringen</string>
     <string name="patcher_stop_confirm_title">Stoppa modifiering</string>
     <string name="patcher_stop_confirm_description">Är du säker på att du vill stoppa modifieringsprocessen?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Omvandlar appen till något fantastiskt … 🏆</string>
-    <string name="patcher_message_2">Lär gamla appar att sitta … 🎩</string>
-    <string name="patcher_message_3">Trimmar appen digitalt … 🔧</string>
-    <string name="patcher_message_4">Brygger digital magi … ☕</string>
-    <string name="patcher_message_5">Kaffepaus rekommenderas … ☕</string>
-    <string name="patcher_message_6">Titta ut, det är fint där ute … 🌤️</string>
-    <string name="patcher_message_7">Justerar ettor och nollor … 🤖</string>
-    <string name="patcher_message_8">Reder ut digital spaghetti … 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Åtgärdar fel i den omodifierade appen … 🪲</string>
-    <string name="patcher_message_10">Bra tillägg är värda att vänta på … ⏳</string>
-    <string name="patcher_message_11">Polerar pixlarna tills de glänser … 💎</string>
-    <string name="patcher_message_12">Vänligen sitt kvar tills kaptenen har släckt skylten \"Modifiering pågår\" … 💺✈️</string>
-    <string name="patcher_message_13">Tillreder den modifierade appen, varm och färsk … 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Förhandlar artigt med bytekoden … 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Alla system är på … modifieringsbanan är stabil … 🚀</string>
-    <string name="patcher_message_16">Pressar ut extra kraft, som saft ur en digital citron … 🍋</string>
-    <string name="patcher_message_17">Uppmuntrar appen att acceptera sitt nya, bättre jag … 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Ändrar appens superposition från omodifierad till modifierad … 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Appen är sjuk, och det enda botemedlet är fler tillägg … 🩺🔔</string>
-    <string name="patcher_message_20">Tar bort nonsens. Vänligen vänta … 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Modifierar appen</string>
     <string name="memory_usage">Minnesanvändning</string>
@@ -653,29 +585,6 @@ Om du avinstallerar raderas alla appdata permanent"</string>
     <string name="package_name">Paketnamn</string>
     <string name="failed_to_mount">Det gick inte att montera: %s</string>
     <string name="failed_to_unmount">Det gick inte att avmontera: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Poäng %s</string>
-    <string name="mini_game_best">Rekord %s</string>
-    <string name="mini_game_new_record">Nytt rekord!</string>
-    <string name="mini_game_game_over">Spelet är slut</string>
-    <string name="mini_game_try_again">Försök igen</string>
-    <string name="mini_game_paused">Pausat</string>
-    <string name="mini_game_resume">Fortsätt</string>
-    <string name="mini_game_restart">Starta om</string>
-    <string name="mini_game_change">Välj ett annat spel</string>
-    <string name="mini_game_2048_picker_subtitle">Flytta brickorna och slå ihop dem</string>
-    <string name="mini_game_flappy_picker_subtitle">Tryck för att flyga mellan rören</string>
-    <string name="mini_game_flappy_tap_to_start">Tryck för att flyga</string>
-    <string name="mini_game_snake_picker_subtitle">Ät mat och träffa inte dig själv</string>
-    <string name="mini_game_snake_swipe_to_start">Svep för att starta</string>
-    <string name="mini_game_dino_picker_subtitle">Tryck för att hoppa över kaktusarna</string>
-    <string name="mini_game_dino_tap_to_start">Tryck för att springa</string>
-    <string name="mini_game_blocks_picker_subtitle">Passa ihop formerna och ta bort raderna</string>
-    <string name="mini_game_blocks_tap_to_start">Tryck för att rotera, svep för att flytta, svep nedåt för att släppa</string>
-    <string name="mini_game_bricks_picker_subtitle">Studsa bollen och slå sönder muren</string>
-    <string name="mini_game_bricks_tap_to_start">Dra för att sikta, tryck för att skjuta iväg</string>
-    <string name="mini_game_miner_picker_subtitle">Tryck för att öppna och tryck länge för att flagga</string>
-    <string name="mini_game_pairs_picker_subtitle">Vänd korten och hitta paren</string>
     <!-- Settings -->
     <string name="appearance">Utseende</string>
     <string name="advanced">Avancerat</string>
@@ -730,8 +639,6 @@ Om du avinstallerar raderas alla appdata permanent"</string>
     <string name="settings_appearance_ui_scale_preview_subtitle">Text och kontroller i den här skalan</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Startskärm</string>
-    <string name="settings_appearance_greeting_phrases">Hälsningsfraser</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Visa ett hälsningsmeddelande på startskärmen</string>
     <string name="settings_appearance_app_grouping">Appgruppering</string>
     <string name="settings_appearance_app_grouping_description">Visa en växlare för att gruppera appar efter källa eller kategori</string>
     <string name="settings_appearance_repatch_notice">Meddelande om att modifiera igen</string>
@@ -1163,16 +1070,6 @@ Information: %2$s"</string>
     <string name="credits_current_development">Nuvarande utveckling</string>
     <string name="credits_prior_development">Tidigare utveckling</string>
     <string name="opensource_licenses">Licenser för öppen källkod</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">Ett val</string>
-    <string name="easter_egg_pill_message">Ta det blå pillret så förblir annonserna precis där de är. Ta det röda och se hur djupt bytekoden går</string>
-    <string name="easter_egg_pill_red">Rött piller</string>
-    <string name="easter_egg_pill_blue">Blått piller</string>
-    <string name="easter_egg_pill_red_toast">Matrixbakgrund upplåst</string>
-    <string name="easter_egg_pill_blue_toast">Annonserna väntar på dig</string>
-    <string name="easter_egg_pill_message_again">Du är redan i Matrix. Det röda pillret släpper tillbaka dig i regnet, det blå väcker dig</string>
-    <string name="easter_egg_pill_red_toast_again">Tillbaka i regnet</string>
-    <string name="easter_egg_pill_blue_toast_again">Urkopplad. Vägen tillbaka är där den alltid var</string>
     <!-- Shared strings -->
     <string name="select_file">Välj fil</string>
     <string name="select_files">Välj filer</string>

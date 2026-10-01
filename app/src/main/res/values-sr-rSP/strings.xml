@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">Функције нису доступне за ову категорију</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Коју апликацију желите да печујете?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Готов да учини апликације легендарним поново?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Вежите се, време је за печовање</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Још један дан, још једно ремек-дело са блокираним огласима</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Желите ли да гледате рекламе? Ни ја</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Учинимо да ваше апликације буду добре</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Данашња прогноза: 100% шанси за печовање</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Спремни сте да из просечног створите невероватно?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Спасавамо апликације од њих самих од данас</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Покренуто кафеином и добрим печовима</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Устани и закажи</string>
-    <string name="home_greeting_morning_2">Добро јутро! Апликације се неће саме заказивати.</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Поподневна малаксалост? Закажи нешто</string>
-    <string name="home_greeting_afternoon_2">После ручка, паковање се другачије осећа</string>
-    <string name="home_greeting_afternoon_3">Поподневна смена: паковање у издању</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Добро вече! Вечерње паковање се другачије осећа</string>
-    <string name="home_greeting_evening_2">Успут? Прво запакујте апликацију</string>
-    <string name="home_greeting_evening_3">На крају радног времена? Прво запакујте нешто</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Још будан? Будне су и апликације којима је потребно паковање</string>
-    <string name="home_greeting_late_night_2">Касна ноћна сесија паковања? Поштовање</string>
-    <string name="home_greeting_late_night_3">Режим ноћне сове: активиран</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Врхунац паковања… наводно</string>
-    <string name="home_greeting_super_late_2">Нисте у стању да заспите? Запакујте нешто</string>
-    <string name="home_greeting_super_late_3">У овом тренутку, останите будни и запакујте</string>
-    <string name="home_greeting_super_late_4">Ти и сервери, обоје будни</string>
-    <string name="home_greeting_super_late_5">Ноћни и продуктивни</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Извор печовања</string>
     <string name="sources_search">Претражите изворе и закрпе</string>
@@ -527,8 +488,6 @@
     <string name="patcher_field_value_stripped">уклоњене</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">задржане</string>
-    <string name="patcher_tab_logs">Евиденција закрпа</string>
-    <string name="patcher_tab_game">Игре</string>
     <string name="patcher_logs_waiting">Чека се излаз дневника…</string>
     <string name="patcher_logs_lost">Излаз дневника се не чува током поновног покретања апликације</string>
     <string name="patcher_long_step_warning">Овај корак може потрајати. Молимо сачекајте…</string>
@@ -555,7 +514,6 @@
     <string name="patcher_install_error_subtitle">Покушајте деинсталирати па поново инсталирати</string>
     <string name="patcher_ready_to_mount_subtitle">Притисните дугме испод за монтирање</string>
     <string name="patcher_patches_excluded_for_installer">Није доступно за ову методу инсталације и искључено: %s</string>
-    <string name="patcher_back_to_game_hint">Додирните %1$s да се вратите на своју игру</string>
     <string name="patcher_storage_permission_dialog_title">Не могу приступити до пута складиштења</string>
     <string name="patcher_incompatible_patcher_title">Захтевано је ажурирање</string>
     <string name="patcher_incompatible_patcher_description">Пакетић &lt;b&gt;%1$s&lt;/b&gt; захтева верзију закрпе &lt;b&gt;%2$s&lt;/b&gt; или новију. Молимо вас да ажурирате Morphe како бисте применили ову апликацију</string>
@@ -598,32 +556,6 @@
     <string name="patcher_notification_text">Додирните да бисте се вратили на поправку</string>
     <string name="patcher_stop_confirm_title">Заустави поправку</string>
     <string name="patcher_stop_confirm_description">Да ли сте сигурни да желите да зауставите процес крпљења?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Преображавамо вашу апликацију у нешто невероватно… 🏆</string>
-    <string name="patcher_message_2">Учимо старе апликације новим триковима… 🎩</string>
-    <string name="patcher_message_3">Пружамо вашој апликацији дигитално подешавање… 🔧</string>
-    <string name="patcher_message_4">Кувамо дигиталну магију… ☕</string>
-    <string name="patcher_message_5">Препоручује се пауза за кафу… ☕</string>
-    <string name="patcher_message_6">Погледајте напоље, лепо је време… 🌤️</string>
-    <string name="patcher_message_7">Подешавање 1 и 0… 🤖</string>
-    <string name="patcher_message_8">Распетљавамо дигитални шпагети… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Поправљамо грешке у непечованој апликацији… 🪲</string>
-    <string name="patcher_message_10">Сјајне измене вредне су чекања… ⏳</string>
-    <string name="patcher_message_11">Полирање пиксела док не засијају… 💎</string>
-    <string name="patcher_message_12">Молимо останите седети док капетан не искључи знак „Печовање у току”… 💺✈️</string>
-    <string name="patcher_message_13">Кување ваше печоване апликације, вруће и свеже… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Љубазно преговарање са бајткодом… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Сви системи су у нормали… путања печовања је стабилна… 🚀</string>
-    <string name="patcher_message_16">Истискавање додатне снаге, попут сока из дигиталног лимуна… 🍋</string>
-    <string name="patcher_message_17">Подстицање апликације да прихвати своје ново, боље ја… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Промена суперпозиције апликације из непечоване у печовану… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Ваша апликација има повишену температуру, а једини лек су додатни печеви… 🩺🔔</string>
-    <string name="patcher_message_20">Уклањање глупости. Молимо сачекајте… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Пешање апликације</string>
     <string name="memory_usage">Коришћење меморије</string>
@@ -653,29 +585,6 @@
     <string name="package_name">Име пакета</string>
     <string name="failed_to_mount">Није успело монтирање: %s</string>
     <string name="failed_to_unmount">Није успело демонтирање: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Резултат %s</string>
-    <string name="mini_game_best">Најбољи %s</string>
-    <string name="mini_game_new_record">Нови рекорд!</string>
-    <string name="mini_game_game_over">Игра завршена</string>
-    <string name="mini_game_try_again">Покушај поново</string>
-    <string name="mini_game_paused">Пауза</string>
-    <string name="mini_game_resume">Настави</string>
-    <string name="mini_game_restart">Почни поново</string>
-    <string name="mini_game_change">Изабери другу игру</string>
-    <string name="mini_game_2048_picker_subtitle">Превлачите плочице да би их спојили</string>
-    <string name="mini_game_flappy_picker_subtitle">Додирните да прођете кроз цеви</string>
-    <string name="mini_game_flappy_tap_to_start">Додирните да летите</string>
-    <string name="mini_game_snake_picker_subtitle">Једи храну, не ударај се</string>
-    <string name="mini_game_snake_swipe_to_start">Превуците прстом да почнете</string>
-    <string name="mini_game_dino_picker_subtitle">Додирните да прескочите кактусе</string>
-    <string name="mini_game_dino_tap_to_start">Додирните да трчите</string>
-    <string name="mini_game_blocks_picker_subtitle">Уклопи облике, очисти линије</string>
-    <string name="mini_game_blocks_tap_to_start">Тапни да ротираш, превуци да помериш, превуци надоле да спустиш</string>
-    <string name="mini_game_bricks_picker_subtitle">Одбиј лопту, обори зид</string>
-    <string name="mini_game_bricks_tap_to_start">Превуци да нишаниш, тапни да лансираш</string>
-    <string name="mini_game_miner_picker_subtitle">Тапни да отвориш, држи да означиш</string>
-    <string name="mini_game_pairs_picker_subtitle">Окрени карте, пронађи пар</string>
     <!-- Settings -->
     <string name="appearance">Изглед</string>
     <string name="advanced">Напредно</string>
@@ -730,8 +639,6 @@
     <string name="settings_appearance_ui_scale_preview_subtitle">Текст и контроле у овој размери</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Почетни екран</string>
-    <string name="settings_appearance_greeting_phrases">Почетне фразе</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Прикажи поруку на почетном екрану</string>
     <string name="settings_appearance_app_grouping">Груписање апликација</string>
     <string name="settings_appearance_app_grouping_description">Прикажи прекидач за груписање апликација по извору или категорији</string>
     <string name="settings_appearance_repatch_notice">Обавештење о поновном закрпавању</string>
@@ -1163,16 +1070,6 @@ morphe_header_custom_dark.png
     <string name="credits_current_development">Тренутни развој</string>
     <string name="credits_prior_development">Претходни развој</string>
     <string name="opensource_licenses">Лиценце отвореног кода</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">Избор</string>
-    <string name="easter_egg_pill_message">Узми плаву пилулу и рекламе остају тачно где јесу. Узми црвену и види колико дубоко иде бајткод.</string>
-    <string name="easter_egg_pill_red">Црвена пилула</string>
-    <string name="easter_egg_pill_blue">Плава пилула</string>
-    <string name="easter_egg_pill_red_toast">Matrix позадина откључана</string>
-    <string name="easter_egg_pill_blue_toast">Огласи ће вас чекати</string>
-    <string name="easter_egg_pill_message_again">Већ сте у Matrix-у. Црвена пилула вас враћа назад у кишу, плава вас буди.</string>
-    <string name="easter_egg_pill_red_toast_again">Поново у киши</string>
-    <string name="easter_egg_pill_blue_toast_again">Искључен. Пут назад је тамо где је одувек био.</string>
     <!-- Shared strings -->
     <string name="select_file">Изаберите датотеку</string>
     <string name="select_files">Изаберите датотеке</string>

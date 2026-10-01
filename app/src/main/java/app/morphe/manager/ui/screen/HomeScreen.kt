@@ -75,22 +75,13 @@ fun HomeScreen(
     val isRefreshing by homeViewModel.isRefreshing.collectAsStateWithLifecycle()
 
     // Reactively observe the preference so the greeting updates immediately
-    val showGreetingPhrases by prefs.showGreetingPhrases.getAsState()
     val showRepatchNotice by prefs.showRepatchNotice.getAsState()
 
-    // Re-evaluated whenever showPatchingPhrases changes
-    var greetingResId by remember(showGreetingPhrases) {
-        mutableStateOf(if (showGreetingPhrases) HomeAndPatcherMessages.getHomeMessage(context) else null)
-    }
-    val greetingMessage = greetingResId?.let { stringResource(it) }
+    val greetingMessage = stringResource(R.string.home_greeting_1)
 
     // Handle refresh with haptic feedback.
-    // showPatchingPhrases is read from the reactive state captured in the
-    // outer scope so the lambda always uses the current value at invocation.
     val onRefresh: () -> Unit = {
         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-        HomeAndPatcherMessages.resetHomeMessage()
-        greetingResId = if (showGreetingPhrases) HomeAndPatcherMessages.getHomeMessage(context) else null
         homeViewModel.refresh()
     }
 

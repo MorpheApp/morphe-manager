@@ -16,7 +16,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -28,9 +27,6 @@ import app.morphe.manager.R
 import app.morphe.manager.ui.model.PatchProgressSource
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.ui.viewmodel.HomeAndPatcherMessages
-import kotlinx.coroutines.delay
-import kotlin.time.Duration.Companion.seconds
 
 private val ProgressRingWavelength = 40.dp
 
@@ -40,8 +36,8 @@ private const val PROGRESS_RING_AMPLITUDE = 0.6f
 /**
  * Simple mode patching screen.
  *
- * Shows an Animated message, circular progress indicator with percentage and patch count, and
- * progress message.
+ * Shows a progress message, circular progress indicator with percentage and patch count, and
+ * the current step.
  */
 @Composable
 fun SimplePatchingInProgress(
@@ -56,21 +52,6 @@ fun SimplePatchingInProgress(
     val windowSize = rememberWindowSize()
     val (completed, total) = patchesProgress
     val accentColor = packageName?.let { rememberAppColor(it) }
-    val context = LocalContext.current
-
-    val currentMessage = remember {
-        mutableIntStateOf(
-            HomeAndPatcherMessages.getPatcherMessage(context)
-        )
-    }
-
-    // Rotate messages every 10 seconds
-    LaunchedEffect(Unit) {
-        while (true) {
-            delay(10.seconds)
-            currentMessage.intValue = HomeAndPatcherMessages.getPatcherMessage(context)
-        }
-    }
 
     // Main content area
     Column(
@@ -87,7 +68,6 @@ fun SimplePatchingInProgress(
         ) {
             AdaptiveProgressContent(
                 windowSize = windowSize,
-                currentMessage = currentMessage.intValue,
                 progress = progress,
                 completed = completed,
                 total = total,
@@ -115,7 +95,6 @@ fun SimplePatchingInProgress(
 @Composable
 private fun AdaptiveProgressContent(
     windowSize: WindowSize,
-    currentMessage: Int,
     progress: Float,
     completed: Int,
     total: Int,
@@ -152,7 +131,7 @@ private fun AdaptiveProgressContent(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    ProgressMessageSection(currentMessage)
+                    ProgressMessageSection()
 
                     ProgressDetailsSection(
                         showLongStepWarning = showLongStepWarning,
@@ -196,7 +175,7 @@ private fun AdaptiveProgressContent(
         ) {
             queueHeader?.invoke()
 
-            ProgressMessageSection(currentMessage)
+            ProgressMessageSection()
 
             CircularProgressWithStats(
                 progress = progress,
@@ -219,14 +198,22 @@ private fun AdaptiveProgressContent(
  * Progress message section.
  */
 @Composable
-private fun ProgressMessageSection(currentMessage: Int) {
+private fun ProgressMessageSection() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(120.dp),
         contentAlignment = Alignment.Center
     ) {
-        AnimatedMessage(currentMessage)
+        Text(
+            text = stringResource(R.string.patcher_message),
+            style = MaterialTheme.typography.titleLarge,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier.fillMaxWidth(),
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis
+        )
     }
 }
 
@@ -266,42 +253,6 @@ private fun ProgressDetailsSection(
             patchProgress = patchProgress,
             windowSize = windowSize
         )
-    }
-}
-
-/**
- * Animated message with fade transitions.
- */
-@Composable
-private fun AnimatedMessage(messageResId: Int) {
-    val reduceMotion = rememberAccessibilityEnabled()
-    val message = stringResource(messageResId)
-    if (reduceMotion) {
-        Text(
-            text = message,
-            style = MaterialTheme.typography.titleLarge,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.fillMaxWidth(),
-            maxLines = 4,
-            overflow = TextOverflow.Ellipsis
-        )
-    } else {
-        AnimatedContent(
-            targetState = message,
-            transitionSpec = Animations.fadeCrossfade(1000),
-            label = "message_animation"
-        ) { rotatingMessage ->
-            Text(
-                text = rotatingMessage,
-                style = MaterialTheme.typography.titleLarge,
-                textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.fillMaxWidth(),
-                maxLines = 4,
-                overflow = TextOverflow.Ellipsis
-            )
-        }
     }
 }
 

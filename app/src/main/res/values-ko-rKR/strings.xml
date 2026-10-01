@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">이 카테고리에 사용할 수 있는 작업이 없습니다</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">어떤 앱을 패치하시겠습니까?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">앱을 다시 전설로 만들 준비가 되셨습니까?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">꽉 잡으세요, 패치할 시간입니다</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">또 다른 광고 차단된 걸작</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">광고를 보고 싶으세요? 저도 싫어요</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">앱의 동작을 개선해 보죠</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">오늘의 예보: 패치 확률 100%</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">아쉬움을 놀라움으로 바꿀 준비 되셨나요?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">오늘부터 앱을 스스로 구해드리겠습니다</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">카페인과 좋은 패치로 가동 중</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">일어나서 패치하세요</string>
-    <string name="home_greeting_morning_2">좋은 아침입니다! 앱은 스스로 패치되지 않아요</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">오후에 나른해지나요? 무언가를 패치해 보세요</string>
-    <string name="home_greeting_afternoon_2">점심 식사 후에 하는 패치는 느낌이 달라요</string>
-    <string name="home_greeting_afternoon_3">오후 시간에는 패치 모드 돌입</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">안녕하세요! 저녁 패치는 또 다른 느낌입니다</string>
-    <string name="home_greeting_evening_2">좀 쉬고 싶나요? 먼저 앱을 패치해 보세요</string>
-    <string name="home_greeting_evening_3">퇴근하시나요? 먼저 무언가 패치해 보세요</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">아직 안 주무시나요? 패치가 필요한 앱들도 깨어 있습니다</string>
-    <string name="home_greeting_late_night_2">늦은 밤까지 패치 작업 중이라고요? 존경합니다</string>
-    <string name="home_greeting_late_night_3">야행성 모드: ON</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">패치 최적 시간... 이라고 합니다</string>
-    <string name="home_greeting_super_late_2">잠이 안 오나요? 무언가 패치해 보세요</string>
-    <string name="home_greeting_super_late_3">이 정도면 그냥 안 자고 패치하는 게 낫겠네요</string>
-    <string name="home_greeting_super_late_4">당신과 서버, 둘 다 깨어있네요</string>
-    <string name="home_greeting_super_late_5">야행성이면서 생산적이네요</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">패치 소스</string>
     <string name="sources_search">소스 및 패치 검색</string>
@@ -527,8 +488,6 @@
     <string name="patcher_field_value_stripped">제거됨</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">유지됨</string>
-    <string name="patcher_tab_logs">패처 로그</string>
-    <string name="patcher_tab_game">게임</string>
     <string name="patcher_logs_waiting">로그 출력을 기다리는 중…</string>
     <string name="patcher_logs_lost">로그 출력은 앱을 다시 시작하면 유지되지 않습니다</string>
     <string name="patcher_long_step_warning">이 단계는 시간이 걸릴 수 있습니다. 잠시만 기다려 주세요…</string>
@@ -555,7 +514,6 @@
     <string name="patcher_install_error_subtitle">앱을 제거한 후에 다시 설치하세요</string>
     <string name="patcher_ready_to_mount_subtitle">마운트하려면 아래 버튼을 탭하세요</string>
     <string name="patcher_patches_excluded_for_installer">이 설치 방법에는 사용할 수 없으며 제외됩니다: %s</string>
-    <string name="patcher_back_to_game_hint">게임으로 돌아가려면 \'%1$s\'를 탭하세요</string>
     <string name="patcher_storage_permission_dialog_title">저장소 경로에 접근할 수 없음</string>
     <string name="patcher_incompatible_patcher_title">업데이트 필요</string>
     <string name="patcher_incompatible_patcher_description">번들 &lt;b&gt;%1$s&lt;/b&gt;는 패처 버전 &lt;b&gt;%2$s&lt;/b&gt; 이상이 필요합니다. 이 앱을 패치하려면 Morphe를 업데이트하세요</string>
@@ -598,32 +556,6 @@
     <string name="patcher_notification_text">패처로 돌아가려면 여기를 탭하세요</string>
     <string name="patcher_stop_confirm_title">패처 중지</string>
     <string name="patcher_stop_confirm_description">패치 프로세스를 중지하시겠습니까?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">앱을 멋지게 변환 중… 🏆</string>
-    <string name="patcher_message_2">오래된 앱에 새 기능 가르치는 중… 🎩</string>
-    <string name="patcher_message_3">앱에 디지털 튜닝 중… 🔧</string>
-    <string name="patcher_message_4">디지털 마법을 부리는 중… ☕</string>
-    <string name="patcher_message_5">커피 타임 추천… ☕</string>
-    <string name="patcher_message_6">밖을 보세요, 날씨가 좋아요… 🌤️</string>
-    <string name="patcher_message_7">1과 0을 조정 중… 🤖</string>
-    <string name="patcher_message_8">스파게티 코드를 푸는 중… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">패치되지 않은 앱의 버그 수정 중… 🪲</string>
-    <string name="patcher_message_10">훌륭한 패치는 기다릴 가치가 있습니다… ⏳</string>
-    <string name="patcher_message_11">픽셀이 반짝일 때까지 연마 중… 💎</string>
-    <string name="patcher_message_12">기장님이 \"패치를 진행하는 중\" 표시등을 끌 때까지 자리에서 대기해 주세요… 💺✈️</string>
-    <string name="patcher_message_13">패치된 앱을 뜨겁고 신선하게 요리 중… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">바이트코드와 정중하게 협상 중… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">모든 시스템 정상… 패치 궤도 안정… 🚀</string>
-    <string name="patcher_message_16">디지털 레몬에서 즙을 짜내듯 추가 전력을 짜내고 있습니다… 🍋</string>
-    <string name="patcher_message_17">앱이 새롭고 더 나은 자신을 받아들이도록 격려하고 있습니다… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">앱의 중첩 상태를 패치되지 않음에서 패치됨으로 변경 중… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">앱에서 열이 좀 나네요, 유일한 처방은 더 많은 패치뿐입니다… 🩺🔔</string>
-    <string name="patcher_message_20">잡소리를 삭제 중, 잠시만 기다려 주세요… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">앱 패치</string>
     <string name="memory_usage">메모리 사용량</string>
@@ -653,29 +585,6 @@
     <string name="package_name">앱 패키지명</string>
     <string name="failed_to_mount">마운트할 수 없습니다: %s</string>
     <string name="failed_to_unmount">마운트를 해제할 수 없습니다: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">점수 %s</string>
-    <string name="mini_game_best">최고 %s</string>
-    <string name="mini_game_new_record">신기록!</string>
-    <string name="mini_game_game_over">게임 종료</string>
-    <string name="mini_game_try_again">다시 시도</string>
-    <string name="mini_game_paused">일시 중지</string>
-    <string name="mini_game_resume">계속 진행</string>
-    <string name="mini_game_restart">다시 시작</string>
-    <string name="mini_game_change">다른 게임 선택</string>
-    <string name="mini_game_2048_picker_subtitle">타일 밀어서 합치기</string>
-    <string name="mini_game_flappy_picker_subtitle">탭하여 파이프 사이 날아가기</string>
-    <string name="mini_game_flappy_tap_to_start">날아보려면 탭하세요</string>
-    <string name="mini_game_snake_picker_subtitle">부딪히지 않고, 먹이 먹기</string>
-    <string name="mini_game_snake_swipe_to_start">시작하려면 스와이프하세요</string>
-    <string name="mini_game_dino_picker_subtitle">탭하여 선인장 뛰어넘기</string>
-    <string name="mini_game_dino_tap_to_start">달리려면 탭하세요</string>
-    <string name="mini_game_blocks_picker_subtitle">도형을 맞춰 줄 제거하기</string>
-    <string name="mini_game_blocks_tap_to_start">탭하여 회전, 좌우로 스와이프하여 이동, 아래로 스와이프하여 떨어뜨리세요</string>
-    <string name="mini_game_bricks_picker_subtitle">공을 튕겨 벽 제거하기</string>
-    <string name="mini_game_bricks_tap_to_start">드래그하여 조준하고, 탭하여 발사하세요</string>
-    <string name="mini_game_miner_picker_subtitle">탭하여 열고, 길게 눌러 깃발 꼽기</string>
-    <string name="mini_game_pairs_picker_subtitle">카드를 뒤집어 같은 짝 찾기</string>
     <!-- Settings -->
     <string name="appearance">디자인</string>
     <string name="advanced">고급</string>
@@ -729,8 +638,6 @@
     <string name="settings_appearance_ui_scale_preview_subtitle">이 배율에서의 텍스트 및 컨트롤</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">홈 화면</string>
-    <string name="settings_appearance_greeting_phrases">인사말</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">홈 화면에 인사말을 표시합니다</string>
     <string name="settings_appearance_app_grouping">앱 그룹화</string>
     <string name="settings_appearance_app_grouping_description">소스 또는 카테고리별로 앱을 그룹화하는 스위처를 표시합니다</string>
     <string name="settings_appearance_repatch_notice">다시 패치 알림</string>
@@ -1161,16 +1068,6 @@ morphe_header_custom_dark.png
     <string name="credits_current_development">현재 개발</string>
     <string name="credits_prior_development">이전 개발</string>
     <string name="opensource_licenses">오픈 소스 라이선스</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">알약 선택</string>
-    <string name="easter_egg_pill_message">파란 알약을 먹으면 광고가 지금 있는 그대로 남아 있습니다. 빨간 알약을 먹으면 바이트코드가 얼마나 깊이 들어가는지 볼 수 있습니다</string>
-    <string name="easter_egg_pill_red">빨간 알약</string>
-    <string name="easter_egg_pill_blue">파란 알약</string>
-    <string name="easter_egg_pill_red_toast">매트릭스 배경이 잠금 해제되었습니다</string>
-    <string name="easter_egg_pill_blue_toast">광고가 당신을 기다리고 있을 겁니다</string>
-    <string name="easter_egg_pill_message_again">당신은 이미 매트릭스 안에 있습니다. 빨간 알약은 당신을 다시 비 속으로 떨어뜨리고, 파란 알약은 당신을 깨웁니다</string>
-    <string name="easter_egg_pill_red_toast_again">다시 비 속으로</string>
-    <string name="easter_egg_pill_blue_toast_again">플러그를 뽑았습니다. 돌아가는 길은 언제나 그곳에 있었습니다</string>
     <!-- Shared strings -->
     <string name="select_file">파일 선택</string>
     <string name="select_files">파일 선택</string>

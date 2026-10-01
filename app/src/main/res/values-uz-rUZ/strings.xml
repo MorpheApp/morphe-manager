@@ -76,45 +76,6 @@
     <string name="home_category_actions_unavailable">Ushbu kategoriya uchun harakatlar mavjud emas</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Qaysi ilovani tuzatmoqchisiz?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Yana ilovalarni afsonaviy qilishga tayyormisiz?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Mahkamlang, tuzatish vaqti keldi</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Yana bir kun, yana bir reklamasiz asar</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Reklamalarni tomosha qilishni xohlaysizmi? Men ham yo\'q</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Keling, ilovalaringizni to\'g\'ri ishlatishga majbur qilaylik</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Bugungi prognoz: patchlash ehtimoli 100%</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Yaxshiroqqa o\'zgartirishga tayyormisiz?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Bugundan beri ilovalarni o\'zini o\'zi saqlab qolish</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Kofein va yaxshi tuzatishlar bilan quvvatlangan</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Patchlash vaqti</string>
-    <string name="home_greeting_morning_2">Xayrli tong! Ilovalar o\'zlarini patchlab olmaydi</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Tushdan keyin tushkunlik? Bir narsani patchlang</string>
-    <string name="home_greeting_afternoon_2">Tushdan keyingi patchlar boshqacha</string>
-    <string name="home_greeting_afternoon_3">Tushdan keyingi smena: patch nashri</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Xayrli kech! Kechki patchlar boshqacha</string>
-    <string name="home_greeting_evening_2">Dam olishingizmi? Avval ilovani patchlang</string>
-    <string name="home_greeting_evening_3">Ishni tugatish? Avval bir narsani patchlang</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Hali uyg\'oqsiz? Ilovalar ham uyg\'oq</string>
-    <string name="home_greeting_late_night_2">Kechki patch sessiyasi? Hurmat</string>
-    <string name="home_greeting_late_night_3">Tungi mavzu: faol</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Patchlashning eng yuqori soatlari... iddao qilisharicha</string>
-    <string name="home_greeting_super_late_2">Uxlay olmaysizmi? Bir narsani patchlang</string>
-    <string name="home_greeting_super_late_3">Bu vaqtga, faqat uyg\'oq bo\'lib patchlang</string>
-    <string name="home_greeting_super_late_4">Siz va serverlar, ikkalasi ham uyg\'oq</string>
-    <string name="home_greeting_super_late_5">Tunki va unumli</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Tuzatish manbalari</string>
     <string name="sources_sort_title">Aplikasi dengan lencana pembaruan terlebih dahulu, lalu urutan yang direkomendasikan</string>
@@ -457,9 +418,6 @@ Chekka hudud (chizikli): launcher niqobi tomonidan kesilishi mumkin - muhim tafs
     <!-- Average and peak memory the patcher process held while it ran -->
     <!-- Fastest read or write rate reached while patching, in data per second -->
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
-    <!-- Value of "Libraries": every library was left in the patched APK -->
-    <string name="patcher_tab_logs">Patcher jurnallari</string>
-    <string name="patcher_tab_game">Kechirdi</string>
     <string name="patcher_logs_waiting">Jurnal chiqishini kutish…</string>
     <string name="patcher_logs_lost">Jurnal chiqishi ilovani qayta ishga tushirgandan keyin saqlanmaydi</string>
     <string name="patcher_long_step_warning">Kutib o‘tiring, bu biroz vaqt olishi mumkin…</string>
@@ -484,7 +442,6 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="patcher_install_error_subtitle">Qayta o‘chirishni va o‘rnatishni urinib ko‘ring</string>
     <string name="patcher_ready_to_mount_subtitle">Ulanish uchun quyidagi tugmani bosing</string>
     <string name="patcher_patches_excluded_for_installer">Ushbu oʻrnatish usuli uchun mavjud emas va istisno qilingan: %s</string>
-    <string name="patcher_back_to_game_hint">O\'yiningizga qaytish uchun %1$s ni bosing</string>
     <string name="patcher_storage_permission_dialog_title">Haqida</string>
     <string name="patcher_incompatible_patcher_title">Yangilash talab qilinadi</string>
     <string name="patcher_incompatible_patcher_description">&lt;b&gt;%1$s&lt;/b&gt; to‘plami patcher versiyasi &lt;b&gt;%2$s&lt;/b&gt; yoki undan yangiroqni talab qiladi. Ushbu ilovani patchlash uchun Morphe ni yangilang</string>
@@ -520,32 +477,6 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="patcher_notification_text">Patcherni ko‘rish uchun bosish</string>
     <string name="patcher_stop_confirm_title">Patcherni to‘xtatishni tasdiqlash?</string>
     <string name="patcher_stop_confirm_description">Patchlash jarayonini to‘xtatishni xohlayapsizmi?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Ilovingizni ajoyib narsaga aylantiryapmiz… 🏆</string>
-    <string name="patcher_message_2">Eski ilovalarga yangi triklar o‘rgatyapmiz… 🎩</string>
-    <string name="patcher_message_3">Ilovingizga raqamli soz berayapmiz… 🔧</string>
-    <string name="patcher_message_4">Raqamli sehr yaratayapmiz… ☕</string>
-    <string name="patcher_message_5">Kofe tanaffusi tavsiya etiladi… ☕</string>
-    <string name="patcher_message_6">Tashqariga qarang, havoning ajoyibligi… 🌤️</string>
-    <string name="patcher_message_7">1 va 0 larni sozlash… 🤖</string>
-    <string name="patcher_message_8">Raqamli spagettini yechayapmiz… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Tuzatishlar patlayotgan ilovalardagi xatoliklarni tuzatmoqda 🐛</string>
-    <string name="patcher_message_10">Ajoyib patchlar kutishga arziydi… ⏳</string>
-    <string name="patcher_message_11">Piksellarni yorqinlik uchun sayqallayapmiz… 💎</string>
-    <string name="patcher_message_12">\"Qo‘shimcha tayyorlash\" belgisini o‘chirib qo‘yguncha o‘tirib qoling… 💺✈️</string>
-    <string name="patcher_message_13">Pishgan patchlangan ilovangizni pishiryapmiz… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Bajt kod bilan muloyimlik bilan muzokara olib boryapmiz… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Barcha tizimlar normal… patch trayektoriyasi barqaror… 🚀</string>
-    <string name="patcher_message_16">Raqamli limon sharbatidan quvvatni siqib chiqaryapmiz… 🍋</string>
-    <string name="patcher_message_17">Ilovingizni yangi, yaxshiroq o‘ziga moslashishga undayapmiz… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Ilovning superpozitsiyasini yamoqlanmagandan patchlanganiga o‘zgartiryapmiz… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Ilovingizda isitma bor, yagona dori – ko‘proq patchlar… 🩺🔔</string>
-    <string name="patcher_message_20">Keraksiz narsalarni olib tashlamoqdamiz. Iltimos, kuting… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">O\'rnatish muvaffaqiyatsiz yakunlandi. Yana urinib ko\'ring yoki boshqa o\'rnatuvchiga o\'ting</string>
     <string name="memory_usage">Xotira ishlatilishi</string>
@@ -574,21 +505,6 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="package_name">Paket nomi</string>
     <string name="failed_to_mount">Ulanishda xatolik: %s</string>
     <string name="failed_to_unmount">Ulanishi bekor qilinishida xatolik: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Hisob %s</string>
-    <string name="mini_game_best">Eng yaxshisi %s</string>
-    <string name="mini_game_new_record">Yangi rekord!</string>
-    <string name="mini_game_game_over">O‘yin tugadi</string>
-    <string name="mini_game_try_again">Qayta urinish</string>
-    <string name="mini_game_paused">To‘xtatildi</string>
-    <string name="mini_game_resume">Davom etish</string>
-    <string name="mini_game_2048_picker_subtitle">Agar ustiga siljitmang</string>
-    <string name="mini_game_flappy_picker_subtitle">Kaktusning ustidan o‘tish uchun bosing</string>
-    <string name="mini_game_flappy_tap_to_start">Yugurish uchun bosing</string>
-    <string name="mini_game_snake_picker_subtitle">Yangi rekord!</string>
-    <string name="mini_game_snake_swipe_to_start">O‘yinlar</string>
-    <string name="mini_game_dino_picker_subtitle">Kaktuslarning ustidan sakrab o‘tish uchun teging</string>
-    <string name="mini_game_dino_tap_to_start">O‘rnatilgan ilovalarni tanlang</string>
     <!-- Settings -->
     <string name="appearance">Ko‘rinish</string>
     <string name="advanced">Qo‘shimcha</string>
@@ -638,8 +554,6 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="settings_appearance_ui_scale_preview_subtitle">Ushbu masshtabdagi matnlar va boshqaruvlar</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Uy ekran</string>
-    <string name="settings_appearance_greeting_phrases">Salomlashish iborasi</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Bosh ekranda salomlashish xabarini ko‘rsatish</string>
     <string name="settings_appearance_app_grouping">Ilovalarni guruhlash</string>
     <string name="settings_appearance_sort_button">Saralash va filtrlash tugmasi</string>
     <string name="settings_appearance_sort_button_description">Bosh ekranda saralash va filtrlash tugmasini ko\'rsatish</string>
@@ -1027,16 +941,6 @@ Ma’lumotlar: %2$s"</string>
     <string name="credits_current_development">Hozirgi rivojlanish</string>
     <string name="credits_prior_development">Oldingi rivojlanish</string>
     <string name="opensource_licenses">Ochiq kodli litsenziyalar</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">Tanlov</string>
-    <string name="easter_egg_pill_message">Ko\'k tabletkani oling va reklamalar aynan shu joyda qoladi. Qizil tabletkani oling va bayt-kod qanchalik chuqur ekanini ko\'ring.</string>
-    <string name="easter_egg_pill_red">Qizil tabletka</string>
-    <string name="easter_egg_pill_blue">Ko\'k tabletka</string>
-    <string name="easter_egg_pill_red_toast">Matrix foni ochildi</string>
-    <string name="easter_egg_pill_blue_toast">Reklamalar sizni kutadi</string>
-    <string name="easter_egg_pill_message_again">Siz allaqachon Matrixdasiz. Qizil tabletka sizni yomg\'irga qaytaradi, ko\'k tabletka sizni uyg\'otadi.</string>
-    <string name="easter_egg_pill_red_toast_again">Yana yomg\'irda</string>
-    <string name="easter_egg_pill_blue_toast_again">Uzilgan. Orqaga yo\'l har doim bo\'lgan joyda.</string>
     <!-- Shared strings -->
     <string name="select_file">Faylni tanlang</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->

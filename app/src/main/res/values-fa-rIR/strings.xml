@@ -80,45 +80,6 @@
     <string name="home_category_actions_unavailable">عملیات برای این دسته در دسترس نیست</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">کدوم نرم‌افزار رو می‌خوای پچ کنی؟</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">آماده اید اپلیکیشن ها را دوباره افسانه ای کنید؟ </string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">محکم بشین، وقت پچ کردنه!</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">یه روز دیگه، یه شاهکار بدون تبلیغ دیگه</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">دوست داری تبلیغ تماشا کنی؟ منم نه</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">بیا کاری کنیم اپ‌هات درست رفتار کنن</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">پیش‌بینی امروز: ۱۰۰٪ احتمال اعمال پچ</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">آماده‌ای که معمولی رو به بی‌نظیر تبدیل کنی؟</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">نجات اپ‌ها از دست خودشون، از امروز!</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">قدرت گرفته از کافئین و پچ‌های خوب</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">بیدار شو و پچ کن</string>
-    <string name="home_greeting_morning_2">صبح بخیر! برنامه‌ها خودشان پچ نمی‌شوند</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">بعدازظهر کسل‌کننده است؟ چیزی را پچ کن</string>
-    <string name="home_greeting_afternoon_2">پچ‌کردن بعد از ناهار حال‌وهوای دیگری دارد</string>
-    <string name="home_greeting_afternoon_3">شیفت بعدازظهر: نسخهٔ پچ</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">عصر بخیر! پچ‌های عصر حال‌وهوای دیگری دارند</string>
-    <string name="home_greeting_evening_2">می‌خواهی روز را تمام کنی؟ اول یک برنامه را پچ کن</string>
-    <string name="home_greeting_evening_3">می‌خواهی از کار خارج شوی؟ اول چیزی را پچ کن</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">هنوز بیداری؟ برنامه‌هایی که باید پچ شوند هم بیدارند</string>
-    <string name="home_greeting_late_night_2">جلسهٔ پچ نیمه‌شب؟ قابل احترام است</string>
-    <string name="home_greeting_late_night_3">حالت شب‌زنده‌داری: فعال شد</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">اوج ساعت‌های پچ… ظاهراً</string>
-    <string name="home_greeting_super_late_2">خوابت نمی‌برد؟ چیزی را پچ کن</string>
-    <string name="home_greeting_super_late_3">حالا که این‌طور شد، بیدار بمان و پچ کن</string>
-    <string name="home_greeting_super_late_4">هم تو بیداری، هم سرورها</string>
-    <string name="home_greeting_super_late_5">شب‌زنده‌دار و کارآمد</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">منابع پچ </string>
     <string name="sources_search"> جستجوی منابع و اصلاحیه‌ها</string>
@@ -499,8 +460,6 @@
     <string name="patcher_field_value_stripped">حذف‌شده</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">نگه‌داشته‌شده</string>
-    <string name="patcher_tab_logs">گزارش‌های پچر</string>
-    <string name="patcher_tab_game">بازی‌ها</string>
     <string name="patcher_logs_waiting">در انتظار خروجی گزارش…</string>
     <string name="patcher_logs_lost">خروجی گزارش پس از راه‌اندازی دوبارهٔ برنامه حفظ نمی‌شود</string>
     <string name="patcher_long_step_warning">این مرحله ممکن است کمی طول بکشد. لطفاً منتظر بمانید…</string>
@@ -526,7 +485,6 @@
     <string name="patcher_install_error_subtitle">برنامه را حذف و دوباره نصب کنید</string>
     <string name="patcher_ready_to_mount_subtitle">برای مانت، دکمهٔ زیر را بزنید</string>
     <string name="patcher_patches_excluded_for_installer">برای این روش نصب در دسترس نیست و کنار گذاشته شد: %s</string>
-    <string name="patcher_back_to_game_hint">برای بازگشت به بازی، %1$s را بزنید</string>
     <string name="patcher_storage_permission_dialog_title">دسترسی به مسیر ذخیره‌سازی ممکن نیست</string>
     <string name="patcher_incompatible_patcher_title">به‌روزرسانی لازم است</string>
     <string name="patcher_incompatible_patcher_description">بستهٔ &lt;b&gt;%1$s&lt;/b&gt; به نسخهٔ پچر &lt;b&gt;%2$s&lt;/b&gt; یا جدیدتر نیاز دارد. برای پچ‌کردن این برنامه، Morphe را به‌روز کنید</string>
@@ -564,32 +522,6 @@
     <string name="patcher_notification_text">برای بازگشت به پچر ضربه بزنید</string>
     <string name="patcher_stop_confirm_title">پچر متوقف شود؟</string>
     <string name="patcher_stop_confirm_description">آیا مطمئنید می‌خواهید فرایند پچ‌کردن را متوقف کنید؟</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">در حال تبدیل برنامه‌تان به چیزی فوق‌العاده… 🏆</string>
-    <string name="patcher_message_2">در حال یاد دادن ترفندهای جدید به برنامه‌های قدیمی… 🎩</string>
-    <string name="patcher_message_3">در حال سرویس دیجیتال برنامه‌تان… 🔧</string>
-    <string name="patcher_message_4">در حال دم‌کردن جادوی دیجیتال… ☕</string>
-    <string name="patcher_message_5">استراحت قهوه پیشنهاد می‌شود… ☕</string>
-    <string name="patcher_message_6">بیرون را نگاه کنید؛ آنجا هوا خوب است… 🌤️</string>
-    <string name="patcher_message_7">در حال تنظیم صفر و یک‌ها… 🤖</string>
-    <string name="patcher_message_8">در حال باز کردن گره‌های اسپاگتی دیجیتال… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">در حال رفع اشکال‌های برنامهٔ پچ‌نشده… 🪲</string>
-    <string name="patcher_message_10">پچ‌های عالی ارزش انتظار را دارند… ⏳</string>
-    <string name="patcher_message_11">در حال صیقل دادن پیکسل‌ها تا بدرخشند… 💎</string>
-    <string name="patcher_message_12">لطفاً تا خاموش‌شدن تابلوی «پچ‌کردن در حال انجام است» توسط کاپیتان، سر جای خود بنشینید… 💺✈️</string>
-    <string name="patcher_message_13">در حال پختن برنامهٔ پچ‌شدهٔ شما، داغ و تازه… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">در حال مذاکرهٔ مؤدبانه با بایت‌کد… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">همهٔ سیستم‌ها عادی‌اند… مسیر پچ‌کردن پایدار است… 🚀</string>
-    <string name="patcher_message_16">در حال بیرون کشیدن توان بیشتر، مثل گرفتن آب از یک لیموی دیجیتال… 🍋</string>
-    <string name="patcher_message_17">در حال تشویق برنامه برای پذیرفتن نسخهٔ جدید و بهتر خودش… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">در حال تغییر برهم‌نهی برنامه از پچ‌نشده به پچ‌شده… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">برنامه‌تان تب دارد و تنها نسخهٔ درمانی، پچ بیشتر است… 🩺🔔</string>
-    <string name="patcher_message_20">در حال حذف مزخرفات. لطفاً منتظر بمانید… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">در حال پچ‌کردن برنامه</string>
     <string name="memory_usage">مصرف حافظه</string>
@@ -619,27 +551,6 @@
     <string name="package_name">نام بسته</string>
     <string name="failed_to_mount">مانت ناموفق بود: %s</string>
     <string name="failed_to_unmount">لغو مانت ناموفق بود: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">امتیاز %s</string>
-    <string name="mini_game_best">بهترین %s</string>
-    <string name="mini_game_new_record">رکورد جدید!</string>
-    <string name="mini_game_game_over">بازی تمام شد</string>
-    <string name="mini_game_try_again">دوباره تلاش کنید</string>
-    <string name="mini_game_paused">متوقف‌شده</string>
-    <string name="mini_game_resume">ادامه</string>
-    <string name="mini_game_2048_picker_subtitle">مهره‌ها را بلغزانید تا ادغام شوند</string>
-    <string name="mini_game_flappy_picker_subtitle">برای پرواز از میان لوله‌ها ضربه بزنید</string>
-    <string name="mini_game_flappy_tap_to_start">برای پرواز ضربه بزنید</string>
-    <string name="mini_game_snake_picker_subtitle">غذا بخورید و به خودتان نزنید</string>
-    <string name="mini_game_snake_swipe_to_start">برای شروع بکشید</string>
-    <string name="mini_game_dino_picker_subtitle">برای پریدن از روی کاکتوس‌ها ضربه بزنید</string>
-    <string name="mini_game_dino_tap_to_start">برای دویدن ضربه بزنید</string>
-    <string name="mini_game_blocks_picker_subtitle">شکل‌ها را جا بده، خطوط را پاک کن</string>
-    <string name="mini_game_blocks_tap_to_start">برای چرخاندن ضربه بزنید، برای حرکت بکشید، برای رها کردن به پایین بکشید</string>
-    <string name="mini_game_bricks_picker_subtitle">توپ را به حرکت درآور، دیوار را پاک کن</string>
-    <string name="mini_game_bricks_tap_to_start">برای نشانه‌گیری بکشید، برای پرتاب ضربه بزنید</string>
-    <string name="mini_game_miner_picker_subtitle">برای باز کردن ضربه بزنید، برای علامت‌گذاری نگه دارید</string>
-    <string name="mini_game_pairs_picker_subtitle">کارت‌ها را برگردانید، جفت را پیدا کنید</string>
     <!-- Settings -->
     <string name="appearance">ظاهر</string>
     <string name="advanced">پیشرفته</string>
@@ -689,8 +600,6 @@
     <string name="settings_appearance_ui_scale_preview_subtitle">متن و کنترل‌ها در این مقیاس</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">صفحهٔ اصلی</string>
-    <string name="settings_appearance_greeting_phrases">عبارت‌های خوشامدگویی</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">نمایش پیام خوشامدگویی در صفحهٔ اصلی</string>
     <string name="settings_appearance_app_grouping">گروه‌بندی برنامه‌ها</string>
     <string name="settings_appearance_repatch_notice">اعلان پچ دوباره</string>
     <string name="settings_appearance_sort_button">دکمهٔ مرتب‌سازی و فیلتر</string>
@@ -1085,16 +994,6 @@ morphe_header_custom_dark.png
     <string name="credits_current_development">توسعهٔ کنونی</string>
     <string name="credits_prior_development">توسعهٔ پیشین</string>
     <string name="opensource_licenses">مجوزهای متن‌باز</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">یک انتخاب</string>
-    <string name="easter_egg_pill_message">قرص آبی را بردارید تا تبلیغات دقیقاً سر جای خود بمانند. قرص قرمز را بردارید و ببینید بایت‌کد تا کجا پیش می‌رود</string>
-    <string name="easter_egg_pill_red">قرص قرمز</string>
-    <string name="easter_egg_pill_blue">قرص آبی</string>
-    <string name="easter_egg_pill_red_toast">پس‌زمینهٔ ماتریکس باز شد</string>
-    <string name="easter_egg_pill_blue_toast">تبلیغات منتظر شما خواهند بود</string>
-    <string name="easter_egg_pill_message_again">شما همین حالا در ماتریکس هستید. قرص قرمز شما را به باران برمی‌گرداند و قرص آبی بیدارتان می‌کند</string>
-    <string name="easter_egg_pill_red_toast_again">بازگشت به باران</string>
-    <string name="easter_egg_pill_blue_toast_again">از ماتریکس جدا شدید. راه برگشت همان‌جایی است که همیشه بود</string>
     <!-- Shared strings -->
     <string name="select_file">انتخاب فایل</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->

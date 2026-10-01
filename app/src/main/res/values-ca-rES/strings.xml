@@ -21,24 +21,6 @@
     <string name="home_sources_are_loading">S\'estan carregant les fonts, si us plau espereu…</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Quina aplicació vols aplicar els pedaços?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Esteu llestos per convertir les aplicacions en llegendàries de nou?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Aguanta\'t, és l\'hora dels pedaços</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Un dia més, una obra mestra més sense anuncis</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Vols veure anuncis? Ja, jo tampoc</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Fem que les teves aplicacions es comportin</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Pronòstic d\'avui: 100% de probabilitat de pedaços</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Llestos per canviar de decebedor a fantàstic?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Salvant aplicacions de si mateixes des d\'avui</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Funciona a base de cafeïna i bons pedaços</string>
     <!-- Morning greetings (5:00–11:59) -->
     <!-- Afternoon greetings (12:00–16:59) -->
     <!-- Evening greetings (17:00–21:59) -->

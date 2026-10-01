@@ -33,24 +33,6 @@
     <string name="home_category_custom">Custom</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">ನೀವು ಯಾವ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಪ್ಯಾಚ್ ಮಾಡಲು ಬಯಸುತ್ತೀರಿ?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">ಪುಸ್ತಕಗಳನ್ನು ಮತ್ತೆ ಚರಿತ್ರವಾಗಿಸಲು ಸಿದ್ಧರಾಗಿದೆಯೇ?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">ಸಿಟ್ ಬೆಲ್ಟ್ ಹಾಕ್ತಿಕೊಳ್ಳಿ, ಪ್ಯಾಚ್ ಮಾಡುವ ಸಮಯ ಇದು</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">ಮತ್ತೆ ಒಂದು ದಿನ, ಮತ್ತೊಂದು ಜಾಹೀರಾತು-ತಡೆಯಲ್ಪಟ್ಟ ಮೇರುಕೃತಿ</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">ಸ ಜಾಹೀರಾತುಗಳನ್ನು ವೀಕ್ಷಿಸಲು ಬಯಸುತ್ತೀರಾ? ನನಗೆ ಅಲ್ಲ.</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">ನಮ್ಮ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ನಿಮ್ಮ ರೀತಿಯಲ್ಲಿ ನಡೆಸಲು ಅವಕಾಶ ಮಾಡೋಣ</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">ಈ ದಿನದ ಮುನ್ಸೂಚನೆ: ಪ್ಯಾಚ್ ಮಾಡುವ ಸಾಧ್ಯತೆ 100%</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">ಸಾಧಾರಣವನ್ನು ಅದ್భుತವಾಗಿ ಬದಲಿಸಲು ಸಿದ್ಧರರಾ?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">ಇಂದು മുതൽ ತಮ್ಮ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ತಾವು ಉಳಿಸಿಕೊಳ್ಳುತ್ತೀರಿ</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">ಕ್ಯಾಫೀನ್ ಮತ್ತು ಉತ್ತಮ ಪ್ಯಾಚ್‌ಗಳಿಂದ ಚಾಲಿತ</string>
     <!-- Morning greetings (5:00–11:59) -->
     <!-- Afternoon greetings (12:00–16:59) -->
     <!-- Evening greetings (17:00–21:59) -->

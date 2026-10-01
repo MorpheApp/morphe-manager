@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">الإجراءات غير متوفرة لهذه الفئة</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">ما التطبيق الذي تريد تعديله؟</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">مستعد لإعطاء تطبيقاتك طابعًا أسطوريًا مرة أخرى؟</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">اربط حزام الأمان، إنه وقت التعديل</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">يوم آخر، وتحفة فنية أخرى محجوبة الإعلانات</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">هل ترغب في مشاهدة الإعلانات؟ أنا أيضًا لا أرغب بذلك</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">الآن نجعل تطبيقاتك تتصرف</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">توقعات اليوم: فرصة 100% للتعديل</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">هل أنت مستعد لتحويل الأداء غير المثير إلى رائع؟</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">إنقاذ التطبيقات من نفسها منذ اليوم</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">مدعوم بالكافيين والتعديلات الجيدة</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">استيقظ وقم بالتعديل</string>
-    <string name="home_greeting_morning_2">صباح الخير! التطبيقات لا تعدل نفسها</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">كسل بعد الظهر؟ قم بتعديل شيء ما</string>
-    <string name="home_greeting_afternoon_2">تعديل ما بعد الغداء له نكهة خاصة</string>
-    <string name="home_greeting_afternoon_3">نوبة ما بعد الظهر: نسخة معدلة</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">مساء الخير! تعديلات المساء لها نكهة خاصة</string>
-    <string name="home_greeting_evening_2">هل تسترخي؟ قم بتعديل تطبيق أولًا</string>
-    <string name="home_greeting_evening_3">هل تنهي عملك؟ قم بتعديل شيء أولًا</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">لا تزال مستيقظًا؟ التطبيقات التي تحتاج إلى تعديل كذلك</string>
-    <string name="home_greeting_late_night_2">جلسة تعديل ليلية متأخرة؟ كل الاحترام</string>
-    <string name="home_greeting_late_night_3">وضع البومة الليلية: قيد التفعيل</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">ذروة ساعات التعديل… على ما يبدو</string>
-    <string name="home_greeting_super_late_2">هل لا تستطيع النوم؟ قم بتعديل شيء ما</string>
-    <string name="home_greeting_super_late_3">في هذه المرحلة، ابق مستيقظًا وقم بالتعديل</string>
-    <string name="home_greeting_super_late_4">أنت والخوادم، كلاكما مستيقظان</string>
-    <string name="home_greeting_super_late_5">ليلي ومنتج</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">مصادر التعديل</string>
     <string name="sources_search">البحث في المصادر والتعديلات</string>
@@ -527,8 +488,6 @@
     <string name="patcher_field_value_stripped">مستبعدة</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">محتفظ بها</string>
-    <string name="patcher_tab_logs">سجلات أداة التعديل</string>
-    <string name="patcher_tab_game">ألعاب</string>
     <string name="patcher_logs_waiting">في انتظار مخرجات السجل…</string>
     <string name="patcher_logs_lost">لا يتم الاحتفاظ بمخرجات السجل بعد إعادة تشغيل التطبيق</string>
     <string name="patcher_long_step_warning">قد تستغرق هذه الخطوة بعض الوقت. يرجى الانتظار…</string>
@@ -555,7 +514,6 @@
     <string name="patcher_install_error_subtitle">جرب إلغاء التثبيت والتثبيت مرة أخرى</string>
     <string name="patcher_ready_to_mount_subtitle">اضغط على الزر أدناه للتركيب</string>
     <string name="patcher_patches_excluded_for_installer">غير متاح لطريقة التثبيت هذه وتم استبعاده: %s</string>
-    <string name="patcher_back_to_game_hint">انقر على %1$s للعودة إلى لعبتك</string>
     <string name="patcher_storage_permission_dialog_title">لا يمكن الوصول إلى مسار التخزين</string>
     <string name="patcher_incompatible_patcher_title">التحديث مطلوب</string>
     <string name="patcher_incompatible_patcher_description">تتطلب الحزمة &lt;b&gt;%1$s&lt;/b&gt; إصدار أداة التعديل &lt;b&gt;%2$s&lt;/b&gt; أو أحدث. يرجى تحديث Morphe لتعديل هذا التطبيق</string>
@@ -600,32 +558,6 @@
     <string name="patcher_notification_text">انقر للعودة إلى أداة التعديل</string>
     <string name="patcher_stop_confirm_title">إيقاف أداة التعديل</string>
     <string name="patcher_stop_confirm_description">هل أنت متأكد أنك تريد إيقاف عملية التعديل؟</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">تحويل تطبيقك إلى شيء رائع… 🏆</string>
-    <string name="patcher_message_2">تعليم التطبيقات القديمة حيلًا جديدة… 🎩</string>
-    <string name="patcher_message_3">إجراء تحسين رقمي لتطبيقك… 🔧</string>
-    <string name="patcher_message_4">جارٍ تحضير سحرًا رقميًا… ☕</string>
-    <string name="patcher_message_5">يوصى بأخذ استراحة قهوة… ☕</string>
-    <string name="patcher_message_6">انظر إلى الخارج، الجو جميل… 🌤️</string>
-    <string name="patcher_message_7">ضبط الأصفار والآحاد… 🤖</string>
-    <string name="patcher_message_8">فك تشابك السباغيتي رقميًا… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">إصلاح الأخطاء في التطبيق غير المعدل… 🪲</string>
-    <string name="patcher_message_10">التعديلات الرائعة تستحق الانتظار… ⏳</string>
-    <string name="patcher_message_11">تلميع البكسلات حتى تلمع… 💎</string>
-    <string name="patcher_message_12">يرجى البقاء في مقعدك حتى يطفئ القبطان علامة \"جارٍ الإصلاح\"... 💺✈️</string>
-    <string name="patcher_message_13">جارٍ طبخ تطبيقك المعدل، ساخن وطازج… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">نتفاوض بلطف مع شيفرة بايت… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">جميع الأنظمة تعمل بشكل طبيعي… مسار التعديل مستقر… 🚀</string>
-    <string name="patcher_message_16">استخلاص طاقة إضافية، مثل العصير من ليمونة رقمية… 🍋</string>
-    <string name="patcher_message_17">تشجيع التطبيق على قبول ذاته الجديدة والأفضل… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">تغيير وضع التطبيق من غير معدل إلى معدل… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">تطبيقك يعاني من الحمى، والوصفة الطبية الوحيدة هي المزيد من التعديل… 🩺🔔</string>
-    <string name="patcher_message_20">جارٍ إزالة العبث. يرجى الانتظار… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">تعديل التطبيق</string>
     <string name="memory_usage">استخدام الذاكرة</string>
@@ -657,29 +589,6 @@
     <string name="package_name">اسم الحزمة</string>
     <string name="failed_to_mount">فشل تركيب: %s</string>
     <string name="failed_to_unmount">فشل فك تركيب: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">النتيجة %s</string>
-    <string name="mini_game_best">الأفضل %s</string>
-    <string name="mini_game_new_record">رقم قياسي جديد!</string>
-    <string name="mini_game_game_over">انتهت اللعبة</string>
-    <string name="mini_game_try_again">حاول مرة أخرى</string>
-    <string name="mini_game_paused">متوقفة</string>
-    <string name="mini_game_resume">متابعة</string>
-    <string name="mini_game_restart">البدء من جديد</string>
-    <string name="mini_game_change">اختر لعبة أخرى</string>
-    <string name="mini_game_2048_picker_subtitle">حرك البلاطات لدمجها</string>
-    <string name="mini_game_flappy_picker_subtitle">انقر للطيران عبر الأنابيب</string>
-    <string name="mini_game_flappy_tap_to_start">انقر للطيران</string>
-    <string name="mini_game_snake_picker_subtitle">كل الطعام، لا تضرب نفسك</string>
-    <string name="mini_game_snake_swipe_to_start">اسحب للبدء</string>
-    <string name="mini_game_dino_picker_subtitle">انقر للقفز فوق الصبار</string>
-    <string name="mini_game_dino_tap_to_start">انقر للركض</string>
-    <string name="mini_game_blocks_picker_subtitle">طابق الأشكال، امسح الخطوط</string>
-    <string name="mini_game_blocks_tap_to_start">انقر للتدوير، اسحب للتحريك، اسحب لأسفل للإسقاط</string>
-    <string name="mini_game_bricks_picker_subtitle">اجعل الكرة ترتد، امسح الجدار</string>
-    <string name="mini_game_bricks_tap_to_start">اسحب للتصويب، انقر للإطلاق</string>
-    <string name="mini_game_miner_picker_subtitle">انقر للفتح، اضغط مطولًا لوضع علامة</string>
-    <string name="mini_game_pairs_picker_subtitle">اقلب البطاقات، وابحث عن التطابق</string>
     <!-- Settings -->
     <string name="appearance">المظهر</string>
     <string name="advanced">الإعدادات المتقدمة</string>
@@ -734,8 +643,6 @@
     <string name="settings_appearance_ui_scale_preview_subtitle">النص وعناصر التحكم بهذا المقياس</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">الشاشة الرئيسية</string>
-    <string name="settings_appearance_greeting_phrases">عبارات الترحيب</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">عرض رسالة ترحيب على الشاشة الرئيسية</string>
     <string name="settings_appearance_app_grouping">تجميع التطبيقات</string>
     <string name="settings_appearance_app_grouping_description">عرض مفتاح تبديل لتجميع التطبيقات حسب المصدر أو الفئة</string>
     <string name="settings_appearance_repatch_notice">إشعار إعادة التعديل</string>
@@ -1168,16 +1075,6 @@ morphe_adaptive_monochrome_custom.xml
     <string name="credits_current_development">التطوير الحالي</string>
     <string name="credits_prior_development">التطوير المسبق</string>
     <string name="opensource_licenses">تراخيص مفتوحة المصدر</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">خيار واحد</string>
-    <string name="easter_egg_pill_message">تناول الحبة الزرقاء وستبقى الإعلانات في مكانها تمامًا. تناول الحبة الحمراء وشاهد مدى عمق الكود</string>
-    <string name="easter_egg_pill_red">الحبة الحمراء</string>
-    <string name="easter_egg_pill_blue">الحبة الزرقاء</string>
-    <string name="easter_egg_pill_red_toast">تم فتح خلفية Matrix</string>
-    <string name="easter_egg_pill_blue_toast">الإعلانات ستكون في انتظارك</string>
-    <string name="easter_egg_pill_message_again">أنت بالفعل في Matrix. الحبة الحمراء تُعيدك إلى المطر، والحبة الزرقاء توقظك</string>
-    <string name="easter_egg_pill_red_toast_again">العودة إلى المطر</string>
-    <string name="easter_egg_pill_blue_toast_again">غير متصل. الطريق للعودة هو حيث كان دائمًا</string>
     <!-- Shared strings -->
     <string name="select_file">اختر ملف</string>
     <string name="select_files">اختر الملفات</string>

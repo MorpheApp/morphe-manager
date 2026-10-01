@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">このカテゴリで利用可能な操作はありません</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">どのアプリにパッチを適用しますか？</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">アプリを素晴らしくする準備はできましたか？</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">準備はできましたか？ パッチの時間です</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">今日もひとつ、広告をブロックした傑作を</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">広告を見たい？ 私は遠慮します</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">アプリを思いどおりに</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">本日の予報: パッチ確率 100%</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">イマイチを最高に変えてみませんか？</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">今日から、アプリの自己救済をお手伝いします</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">カフェインと良質なパッチで動作中</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">起きたら、まずパッチ</string>
-    <string name="home_greeting_morning_2">おはようございます！ アプリのパッチはお忘れなく</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">午後の眠気には、パッチをひとつ</string>
-    <string name="home_greeting_afternoon_2">ランチ後のパッチは格別です</string>
-    <string name="home_greeting_afternoon_3">午後の部、パッチ編</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">こんばんは！ 夜のパッチはひと味違いますよ</string>
-    <string name="home_greeting_evening_2">休憩ですか？ その前にアプリをひとつパッチしましょう</string>
-    <string name="home_greeting_evening_3">帰る前に、何かひとつパッチしませんか？</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">まだ起きてますか？パッチ待ちのアプリも起きてますよ</string>
-    <string name="home_greeting_late_night_2">深夜のパッチ作業ですか？ お疲れさまです</string>
-    <string name="home_greeting_late_night_3">夜更かしモード、起動中</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">今がパッチに絶好の時間……たぶん</string>
-    <string name="home_greeting_super_late_2">眠れませんか？ ではパッチでもしましょう</string>
-    <string name="home_greeting_super_late_3">ここまで来たら、もう寝ずにパッチしましょう</string>
-    <string name="home_greeting_super_late_4">あなたもサーバーも、夜更かし中</string>
-    <string name="home_greeting_super_late_5">夜型、絶好調</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">パッチソース</string>
     <string name="sources_search">ソースとパッチを検索</string>
@@ -527,8 +488,6 @@
     <string name="patcher_field_value_stripped">削除済み</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">保持済み</string>
-    <string name="patcher_tab_logs">パッチャーのログ</string>
-    <string name="patcher_tab_game">ゲーム</string>
     <string name="patcher_logs_waiting">ログの出力を待機中…</string>
     <string name="patcher_logs_lost">ログの出力はアプリを再起動すると消去されます</string>
     <string name="patcher_long_step_warning">この処理には時間がかかる場合があります。お待ちください…</string>
@@ -555,7 +514,6 @@
     <string name="patcher_install_error_subtitle">一度アンインストールしてから、再度インストールしてください</string>
     <string name="patcher_ready_to_mount_subtitle">マウントするには以下のボタンを押してください</string>
     <string name="patcher_patches_excluded_for_installer">このインストール方法では利用できません: %s</string>
-    <string name="patcher_back_to_game_hint">%1$s をタップしてゲームを再開</string>
     <string name="patcher_storage_permission_dialog_title">ストレージパスにアクセスできません</string>
     <string name="patcher_incompatible_patcher_title">アップデートが必要です</string>
     <string name="patcher_incompatible_patcher_description">バンドル &lt;b&gt;%1$s&lt;/b&gt; には、パッチャー バージョン &lt;b&gt;%2$s&lt;/b&gt; 以降が必要です。このアプリをパッチするには、Morphe をアップデートしてください</string>
@@ -598,32 +556,6 @@
     <string name="patcher_notification_text">パッチ画面に戻るにはタップ</string>
     <string name="patcher_stop_confirm_title">パッチ適用処理を停止</string>
     <string name="patcher_stop_confirm_description">パッチ適用処理を停止してもよろしいですか？</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">アプリを最高な姿に変身中…</string>
-    <string name="patcher_message_2">古いアプリに新技伝授中… 🎩</string>
-    <string name="patcher_message_3">アプリをデジタルチューンアップ中… 🔧</string>
-    <string name="patcher_message_4">デジタル魔法、抽出中… ☕</string>
-    <string name="patcher_message_5">コーヒーで休憩はいかが？ ☕</string>
-    <string name="patcher_message_6">外を見てみて。今日はいい天気… 🌤️</string>
-    <string name="patcher_message_7">1 と 0 をいじっています… 🤖</string>
-    <string name="patcher_message_8">スパゲッティコード解体中… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">元のアプリのバグを直しています… 🪲</string>
-    <string name="patcher_message_10">いいパッチは、待つ価値がある… ⏳</string>
-    <string name="patcher_message_11">ピクセルが輝くまで磨いています… 💎</string>
-    <string name="patcher_message_12">「パッチ中」 のサインが消えるまで、席にお座りのままでお待ちください… 💺✈️</string>
-    <string name="patcher_message_13">あなたのアプリをアツアツに調理中です… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">バイトコードと穏やかに交渉中… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">全システム正常。パッチは順調です… 🚀</string>
-    <string name="patcher_message_16">デジタルのレモンから果汁を絞るように、性能を引き出しています… 🍋</string>
-    <string name="patcher_message_17">アプリの成長を見守り中… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">アプリの状態を未パッチからパッチ済みに変更中… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">アプリが発熱中。唯一の処方箋は、パッチ増量のみ… 🩺🔔</string>
-    <string name="patcher_message_20">不要なものを片付け中。しばらくお待ちください… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">アプリにパッチを適用中</string>
     <string name="memory_usage">メモリ使用量</string>
@@ -654,29 +586,6 @@
     <string name="package_name">パッケージ名</string>
     <string name="failed_to_mount">マウントに失敗しました: %s</string>
     <string name="failed_to_unmount">アンマウントに失敗しました: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">スコア %s</string>
-    <string name="mini_game_best">最高記録 %s</string>
-    <string name="mini_game_new_record">新記録！</string>
-    <string name="mini_game_game_over">ゲームオーバー</string>
-    <string name="mini_game_try_again">リトライ</string>
-    <string name="mini_game_paused">ポーズ中</string>
-    <string name="mini_game_resume">続行</string>
-    <string name="mini_game_restart">やり直す</string>
-    <string name="mini_game_change">別のゲームを選ぶ</string>
-    <string name="mini_game_2048_picker_subtitle">タイルをスライドして合体させよう</string>
-    <string name="mini_game_flappy_picker_subtitle">タップしてパイプの間を飛び抜けよう</string>
-    <string name="mini_game_flappy_tap_to_start">タップして開始</string>
-    <string name="mini_game_snake_picker_subtitle">自分にぶつからずに食べ物を食べよう</string>
-    <string name="mini_game_snake_swipe_to_start">スワイプして開始</string>
-    <string name="mini_game_dino_picker_subtitle">タップしてサボテンを飛び越えよう</string>
-    <string name="mini_game_dino_tap_to_start">タップして開始</string>
-    <string name="mini_game_blocks_picker_subtitle">ブロックを組み合わせてラインを消そう</string>
-    <string name="mini_game_blocks_tap_to_start">タップして回転、スワイプして移動、下にスワイプしてドロップ</string>
-    <string name="mini_game_bricks_picker_subtitle">ボールを跳ね返して壁を壊そう</string>
-    <string name="mini_game_bricks_tap_to_start">ドラッグして狙いを定め、タップして発射</string>
-    <string name="mini_game_miner_picker_subtitle">タップして開き、長押しして旗を立てよう</string>
-    <string name="mini_game_pairs_picker_subtitle">カードをめくってペアを見つけよう</string>
     <!-- Settings -->
     <string name="appearance">外観</string>
     <string name="advanced">詳細設定</string>
@@ -730,8 +639,6 @@
     <string name="settings_appearance_ui_scale_preview_subtitle">このスケールで表示されるテキストとコントロール</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">ホーム画面</string>
-    <string name="settings_appearance_greeting_phrases">挨拶メッセージ</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">ホーム画面に挨拶メッセージを表示します</string>
     <string name="settings_appearance_app_grouping">アプリのグループ化</string>
     <string name="settings_appearance_app_grouping_description">ソースやカテゴリごとにアプリをまとめるスイッチャーを表示します</string>
     <string name="settings_appearance_repatch_notice">再パッチ通知</string>
@@ -1164,16 +1071,6 @@ morphe_header_custom_dark.png
     <string name="credits_current_development">現在の開発</string>
     <string name="credits_prior_development">過去の開発</string>
     <string name="opensource_licenses">オープンソースライセンス</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">選択肢</string>
-    <string name="easter_egg_pill_message">青い薬を選べば、何も変わらずそのまま。赤い薬を選べば、バイトコードの深淵へ</string>
-    <string name="easter_egg_pill_red">赤い薬</string>
-    <string name="easter_egg_pill_blue">青い薬</string>
-    <string name="easter_egg_pill_red_toast">マトリックスの世界へようこそ</string>
-    <string name="easter_egg_pill_blue_toast">いつもの世界があなたを待っています</string>
-    <string name="easter_egg_pill_message_again">あなたはもうマトリックスの中。赤い薬なら再びデータの雨の中へ、青い薬なら目覚めの世界へ</string>
-    <string name="easter_egg_pill_red_toast_again">また雨の中へ</string>
-    <string name="easter_egg_pill_blue_toast_again">接続を解除しました。戻る道は、いつでもそこにあります</string>
     <!-- Shared strings -->
     <string name="select_file">ファイルを選択</string>
     <string name="select_files">ファイルを選択</string>

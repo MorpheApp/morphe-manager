@@ -24,9 +24,9 @@
 </p>
 &nbsp;
 
-# 💊 Morphe
+# Morphe
 
-> Want to watch ads? Us neither.
+> A cleaner YouTube, YouTube Music, and Reddit - patched right on your device.
 
 Morphe is an Android app that patches YouTube, YouTube Music, and Reddit - stripping ads and giving you back control over your experience. No root required.
 
@@ -101,7 +101,7 @@ Step-by-step walkthroughs with screenshots, covering patching in both modes, ins
 - App icon selection
 
 **Home screen**
-- Friendly time-of-day greeting when you open the app
+- A short greeting when you open the app
 - Rearrange your app list into the order that suits you
 - Group your apps by patch source or your own categories
 - Hide apps you never patch, and bring them back whenever you like

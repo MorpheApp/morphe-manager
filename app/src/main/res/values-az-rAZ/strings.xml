@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">Bu kateqoriya üçün əlçatmaz fəaliyyətlər</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Hansı tətbiqi yamaqlamaq istəyirsiniz?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Tətbiqləri yenə əfsanəvi etməyə hazırsınız?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Hazır olun, yamaqlanma vaxtıdır</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Daha bir gün, daha bir reklamsız şah əsər!</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Reklamlara baxmaq istəyirsiniz? Mən də heç birinə</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Tətbiqlərinizin davranışını hazırlayaq</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Bugünkü proqnoz: yamaqlanma şansı 100%</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Məyusedici olanı mükəmmələ çevirməyə hazırsınız?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Bu gündən etibarən tətbiqlər özlərindən azad olunur</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Kofein və yaxşı yamaqlar ilə gücləndirilib</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Ayağa dur və yamaqla</string>
-    <string name="home_greeting_morning_2">Sabahınız xeyir! Tətbiqlər öz-özünə yamaqlanmayacaq</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Günortadan sonra yorğunluq? Bir şeyi yamaqla</string>
-    <string name="home_greeting_afternoon_2">Nahar sonrası yamaqlama başqa cür toxunur</string>
-    <string name="home_greeting_afternoon_3">Günorta növbəsi: yamaq buraxılışı</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Axşamınız xeyir! Axşam yamaqları başqa bir toxunuşdur</string>
-    <string name="home_greeting_evening_2">Dincəlirsən? Əvvəlcə tətbiqi yamaqla</string>
-    <string name="home_greeting_evening_3">Günü bitirirsən? Əvvəlcə nəyisə yamaqla</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Hələ oyaqsan? Yamaqlanmalı olan tətbiqlər də gözləyir</string>
-    <string name="home_greeting_late_night_2">Gecənin bu vaxtı yamaq sessiyası? Eşq olsun!</string>
-    <string name="home_greeting_late_night_3">Gecə bayquşu rejimi: işləkdir</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Yamaqlanma pik saatları... guya ki</string>
-    <string name="home_greeting_super_late_2">Yatanmırsan? Bir şey yamaqla</string>
-    <string name="home_greeting_super_late_3">Artıq bu yerdə, oyaq qal və yamaqla</string>
-    <string name="home_greeting_super_late_4">Sən və serverlər, ikiniz də oyaqsınız</string>
-    <string name="home_greeting_super_late_5">Gecəcil və səmərəli</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Yamaq mənbələri</string>
     <string name="sources_search">Mənbələri və yamaqları axtar</string>
@@ -527,8 +488,6 @@ Xarici sahə (ştrixli): başladıcı örtüyündən kəsilə bilər - mühüm h
     <string name="patcher_field_value_stripped">təmizlənmiş</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">saxlanıldı</string>
-    <string name="patcher_tab_logs">Yamaqlayıcı qeydləri</string>
-    <string name="patcher_tab_game">Oyunlar</string>
     <string name="patcher_logs_waiting">Qeyd çıxarışı gözlənilir…</string>
     <string name="patcher_logs_lost">Qeyd çıxarışı tətbiq yenidən başladıldıqda saxlanılmır</string>
     <string name="patcher_long_step_warning">Bu keçid bir müddət çəkə bilər. Zəhmət olmasa, gözləyin...</string>
@@ -555,7 +514,6 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="patcher_install_error_subtitle">Silməyə və təkrar quraşdırmağa çalış</string>
     <string name="patcher_ready_to_mount_subtitle">Montajlamaq üçün aşağıdakı düyməyə toxun</string>
     <string name="patcher_patches_excluded_for_installer">Bu quraşdırma üsulu üçün əlçatan deyil və xaric edilib: %s</string>
-    <string name="patcher_back_to_game_hint">Oyununuza qayıtmaq üçün %1$s toxunun</string>
     <string name="patcher_storage_permission_dialog_title">Saxlanc keçidinə keçmək olmur</string>
     <string name="patcher_incompatible_patcher_title">Yenilənmə tələb olundu</string>
     <string name="patcher_incompatible_patcher_description">&lt;b&gt;%1$s&lt;/b&gt; paketi &lt;b&gt;%2$s&lt;/b&gt; və ya daha yeni versiya yamaqlayıcı tələb edir. Xahiş olunur, bu tətbiqi yamaqlamaq üçün Morphe-ni yenilə</string>
@@ -598,32 +556,6 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="patcher_notification_text">Yamaqlayıcıya qayıtmaq üçün toxun</string>
     <string name="patcher_stop_confirm_title">Yamaqlayıcını dayandır</string>
     <string name="patcher_stop_confirm_description">Yamaqlanma emalın dayandırmaq istədiyinizə əminsiniz?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Tətbiqiniz mükəmməl bir şeyə döndərilir... 🏆</string>
-    <string name="patcher_message_2">Köhnə tətbiqlərə yeni fokuslar öyrədirik… 🎩</string>
-    <string name="patcher_message_3">Tətbiqinizə rəqəmsal qurulma imkanı veririk... 🔧</string>
-    <string name="patcher_message_4">Rəqəmsal sehr düzəldilir… ☕ </string>
-    <string name="patcher_message_5">Qəhvə fasiləsi tövsiyə olunur... ☕ </string>
-    <string name="patcher_message_6">Bayıra bax, orada hava çox gözəldir… 🌤️</string>
-    <string name="patcher_message_7">1 və 0-ların sazlanması… 🤖 </string>
-    <string name="patcher_message_8">Rəqəmsal makaron açılır... 🍝 </string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Yamaqlanmayan tətbiqdəki səhvləri bərpa edir...  🪲</string>
-    <string name="patcher_message_10">Əla yamaqlar, gözləməyə dəyər... ⏳ </string>
-    <string name="patcher_message_11">Piksellər parıldayana qədər cilalanır... 💎 </string>
-    <string name="patcher_message_12">Kapitan \"Yamaqlama irəliləyişdədir\" işarəsini söndürənə qədər yerinizdə qalın... 💺✈️ </string>
-    <string name="patcher_message_13">Yamaqlanan tətbiqinizi hazırlayırıq, isti və təzə... 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Bayt-kodla nəzakətlə şərtlər müzakirə olunur... 🤝 </string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Bütün sistemlər nominaldır... yamaqlanma işi cizgisi sabitdir... 🚀 </string>
-    <string name="patcher_message_16">Rəqəmsal limondan çıxan şirə kimi əlavə gücü sıxır... 🍋 </string>
-    <string name="patcher_message_17">Tətbiqi yeni, daha yaxşı özünü təqdir etməyə həvəsləndirir... 🌱 </string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Tətbiqin üstün mövqeyin yamaqlanmayandan yamaqlanana dəyişdirir... 📦⚛️ </string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Tətbiqinizin hərarəti var və yeganə resept daha çox yamaqdır... 🩺🔔 </string>
-    <string name="patcher_message_20">Lazımsız olanı silirəm. Zəhmət olmasa, gözləyin... 🗑️ </string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Tətbiqi yamaqlayır</string>
     <string name="memory_usage">Yaddaş istifadəsi</string>
@@ -653,27 +585,6 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="package_name">Paket adı</string>
     <string name="failed_to_mount">Montajlama uğursuzdu: %s</string>
     <string name="failed_to_unmount">Montajı silmək olmadı: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Hesab %s</string>
-    <string name="mini_game_best">Ən yaxşı %s</string>
-    <string name="mini_game_new_record">Yeni rekord!</string>
-    <string name="mini_game_game_over">Oyun Bitdi</string>
-    <string name="mini_game_try_again">Təkrar cəhd et</string>
-    <string name="mini_game_paused">Fasilə edildi</string>
-    <string name="mini_game_resume">Davam et</string>
-    <string name="mini_game_2048_picker_subtitle">Birləşdirmək üçün xanaları sürüşdür</string>
-    <string name="mini_game_flappy_picker_subtitle">Borular arasından uçmaq üçün toxun</string>
-    <string name="mini_game_flappy_tap_to_start">Uçmaq üçün toxun</string>
-    <string name="mini_game_snake_picker_subtitle">Qida ye, özünü toqquşdurma</string>
-    <string name="mini_game_snake_swipe_to_start">Başlamaq üçün sürüşdür</string>
-    <string name="mini_game_dino_picker_subtitle">Kaktusların üstündən hoppanmaq üçün toxun</string>
-    <string name="mini_game_dino_tap_to_start">Qaçmaq üçün toxun</string>
-    <string name="mini_game_blocks_picker_subtitle">Fiqurları uyğunlaşdır, cərgələri təmizlə</string>
-    <string name="mini_game_blocks_tap_to_start">Döndərmək üçün toxun, köçürmək üçün sürüşdür, endirmək üçün aşağı sürüşdür</string>
-    <string name="mini_game_bricks_picker_subtitle">Topu sıçrat, divarı təmizlə</string>
-    <string name="mini_game_bricks_tap_to_start">Nişan almaq üçün dart, buraxmaq üçün toxun</string>
-    <string name="mini_game_miner_picker_subtitle">Açmaq üçün toxun, nişanlamaq üçün basıb saxla</string>
-    <string name="mini_game_pairs_picker_subtitle">Kartları çevir, cütünü tap</string>
     <!-- Settings -->
     <string name="appearance">Görünüş</string>
     <string name="advanced">Qabaqcıl</string>
@@ -727,8 +638,6 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="settings_appearance_ui_scale_preview_subtitle">Bu miqyasda mətn və idarəetmələr</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Əsas ekran</string>
-    <string name="settings_appearance_greeting_phrases">Salamlaşma ifadələri</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Əsas ekranda salamlaşma mesajı göstər</string>
     <string name="settings_appearance_app_grouping">Tətbiq qruplaşdırılması</string>
     <string name="settings_appearance_app_grouping_description">Tətbiqləri mənbəyə və ya kateqoriyaya görə qruplaşdırmaq üçün keçirici göstər</string>
     <string name="settings_appearance_repatch_notice">Yenidən yamaqlama bildirişi</string>
@@ -1158,16 +1067,6 @@ Təfərrüatlar: %2$s"</string>
     <string name="credits_current_development">Hazırkı inkişaf</string>
     <string name="credits_prior_development">Əvvəlki inkişaf</string>
     <string name="opensource_licenses">Açıq mənbə lisenziyaları</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">Seçim</string>
-    <string name="easter_egg_pill_message">Mavi həbi seçsəniz, reklamlar olduğu kimi qalacaq. Qırmızı həbi seçin və baytkodun nə qədər dərinə getdiyini görün</string>
-    <string name="easter_egg_pill_red">Qırmızı həb</string>
-    <string name="easter_egg_pill_blue">Mavi həb</string>
-    <string name="easter_egg_pill_red_toast">Matrix fonu kiliddən açıldı</string>
-    <string name="easter_egg_pill_blue_toast">Reklamlar sizi gözləyəcək</string>
-    <string name="easter_egg_pill_message_again">Siz artıq Matrisdəsiniz. Qırmızı həb sizi yenidən yağışa qaytarır, mavi həb isə oyandırır</string>
-    <string name="easter_egg_pill_red_toast_again">Yenidən yağışda</string>
-    <string name="easter_egg_pill_blue_toast_again">Şəbəkədən ayrıldı. Geriyə yol həmişə olduğu yerdədir</string>
     <!-- Shared strings -->
     <string name="select_file">Faylı seç</string>
     <string name="select_files">Faylları seç</string>

@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">Acțiuni indisponibile pentru această categorie</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Ce aplicație dorești să patch-uiești?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Ești gata să facem aplicațiile legendare din nou?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Pune-ți centura, e timpul să patch-uim</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">O nouă zi, o altă capodoperă fără reclame</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Vrei să vezi reclame? Nici eu</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Hai să-ți educăm aplicațiile</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Prognoza de azi: 100% șanse de patch-uit</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Gata să transformi mediocritatea în ceva extraordinar?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Salvăm aplicațiile de azi</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Oferit de cafea și patch-uri bune</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Ridică-te și aplică patch-uri</string>
-    <string name="home_greeting_morning_2">Bună dimineața! Aplicațiile nu se vor aplica singure</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">După-amiază mohorâtă? Aplică un patch</string>
-    <string name="home_greeting_afternoon_2">Pachetele de după prânz par altfel</string>
-    <string name="home_greeting_afternoon_3">Schimbul de după-amiază: ediția pachetelor</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Bună seara! Pachetele de seară par altfel</string>
-    <string name="home_greeting_evening_2">Te relaxezi? Aplică un patch mai întâi</string>
-    <string name="home_greeting_evening_3">Te pregătești să pleci? Aplică un patch mai întâi</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Încă treaz? Și aplicațiile care au nevoie de patch-uri sunt</string>
-    <string name="home_greeting_late_night_2">Sesiune de patch-uri târzie în noapte? Respect</string>
-    <string name="home_greeting_late_night_3">Mod bufniță nocturnă: activat</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Orele de vârf pentru patch-uri… presupunerea</string>
-    <string name="home_greeting_super_late_2">Nu poți dormi? Aplică un patch</string>
-    <string name="home_greeting_super_late_3">La acest moment, rămâi treaz și aplică patch-uri</string>
-    <string name="home_greeting_super_late_4">Tu și serverele, ambele treze</string>
-    <string name="home_greeting_super_late_5">Nocturn și productiv</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Surse de patch-uri</string>
     <string name="sources_search">Caută surse și patch-uri</string>
@@ -527,8 +488,6 @@ Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păs
     <string name="patcher_field_value_stripped">eliminate</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">păstrate</string>
-    <string name="patcher_tab_logs">Jurnale de patch-uri</string>
-    <string name="patcher_tab_game">Jocuri</string>
     <string name="patcher_logs_waiting">Se éteptarea ieşirii jurnalului…</string>
     <string name="patcher_logs_lost">Ieşirile jurnalului nu sunt pãstrate la repornirea aplicaţiei</string>
     <string name="patcher_long_step_warning">Acest pas poate dura ceva timp. Vă rugăm să așteptați…</string>
@@ -555,7 +514,6 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="patcher_install_error_subtitle">Încearcă să dezinstalezi și să instalezi din nou</string>
     <string name="patcher_ready_to_mount_subtitle">Apăsați butonul de mai jos pentru a monta</string>
     <string name="patcher_patches_excluded_for_installer">Nu este disponibil pentru această metodă de instalare și exclus: %s</string>
-    <string name="patcher_back_to_game_hint">Atinge %1$s pentru a reveni la jocul tău</string>
     <string name="patcher_storage_permission_dialog_title">Nu se poate accesa calea de stocare</string>
     <string name="patcher_incompatible_patcher_title">Actualizare necesară</string>
     <string name="patcher_incompatible_patcher_description">Pachetul &lt;b&gt;%1$s&lt;/b&gt; necesită versiunea patcher-ului &lt;b&gt;%2$s&lt;/b&gt; sau mai nouă. Vă rugăm să actualizați Morphe pentru a aplica patch la această aplicație</string>
@@ -598,32 +556,6 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="patcher_notification_text">Atinge pentru a reveni la patcher</string>
     <string name="patcher_stop_confirm_title">Opriți instrumentul de modificare</string>
     <string name="patcher_stop_confirm_description">Sigur doriți să opriți procesul de modificare?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Transformăm aplicația ta în ceva grozav… 🏆</string>
-    <string name="patcher_message_2">Învățăm aplicațiile vechi trucuri noi… 🎩</string>
-    <string name="patcher_message_3">Oferim aplicației tale o revizie digitală… 🔧</string>
-    <string name="patcher_message_4">Preparare magică digitală… ☕</string>
-    <string name="patcher_message_5">Pauză de cafea recomandată… ☕</string>
-    <string name="patcher_message_6">Privește pe fereastră, e frumos afară… 🌤️</string>
-    <string name="patcher_message_7">Ajustez 1 și 0… 🤖</string>
-    <string name="patcher_message_8">Descurcarea spaghetti-ului digital… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Se încerca repararea bug-urilor din aplicația nepatcheată… 🪲</string>
-    <string name="patcher_message_10">Patch-urile grozave merită așteptarea… ⏳</string>
-    <string name="patcher_message_11">Șlefuirea pixelilor până strălucesc… 💎</string>
-    <string name="patcher_message_12">Vă rugăm să rămâneți așezați până când pilotul oprește semnul \"Repararea este în curs\"... 💺✈️</string>
-    <string name="patcher_message_13">Gătim aplicația patch-uită, fierbinte și proaspătă… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Negociind politicos cu bytecode… 🤝</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Toate sistemele nominale… traiectoria de patch-uri este stabilă… 🚀</string>
-    <string name="patcher_message_16">Stoarcem putere suplimentară, ca suc dintr-o lămâie digitală… 🍋</string>
-    <string name="patcher_message_17">Încurajăm aplicația să-și accepte noul eu, mai bun… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Schimbăm superpoziția aplicației de la nestergere la ștergere… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Aplicația ta are febră, iar singura prescripție sunt mai multe patch-uri… 🩺🔔</string>
-    <string name="patcher_message_20">Eliminăm prostii. Vă rugăm să așteptați… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Se patch-uiește aplicația</string>
     <string name="memory_usage">Utilizare memorie</string>
@@ -653,29 +585,6 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="package_name">Nume pachet</string>
     <string name="failed_to_mount">Montare eșuată: %s</string>
     <string name="failed_to_unmount">Demontare eșuată: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Scor %s</string>
-    <string name="mini_game_best">Cel mai bun %s</string>
-    <string name="mini_game_new_record">Record nou!</string>
-    <string name="mini_game_game_over">Game Over</string>
-    <string name="mini_game_try_again">Încearcă din nou</string>
-    <string name="mini_game_paused">Pauză</string>
-    <string name="mini_game_resume">Continuă</string>
-    <string name="mini_game_restart">Reîncepe</string>
-    <string name="mini_game_change">Alege alt joc</string>
-    <string name="mini_game_2048_picker_subtitle">Glisează plăcile pentru a le îmbina</string>
-    <string name="mini_game_flappy_picker_subtitle">Atinge pentru a zbura printre țevi</string>
-    <string name="mini_game_flappy_tap_to_start">Atinge pentru a zbura</string>
-    <string name="mini_game_snake_picker_subtitle">Mănâncă mâncare, nu te lovi de tine</string>
-    <string name="mini_game_snake_swipe_to_start">Glisează pentru a începe</string>
-    <string name="mini_game_dino_picker_subtitle">Atinge pentru a sări peste cactuși</string>
-    <string name="mini_game_dino_tap_to_start">Atinge pentru a alerga</string>
-    <string name="mini_game_blocks_picker_subtitle">Potrivește formele, elimină liniile</string>
-    <string name="mini_game_blocks_tap_to_start">Atingeți pentru a roti, glisați pentru a muta, glisați în jos pentru a arunca</string>
-    <string name="mini_game_bricks_picker_subtitle">Fă mingea să sară, dărâmă peretele</string>
-    <string name="mini_game_bricks_tap_to_start">Glisează pentru a ținti, atinge pentru a lansa</string>
-    <string name="mini_game_miner_picker_subtitle">Atingeți pentru a deschide, țineți apăsat pentru a marca</string>
-    <string name="mini_game_pairs_picker_subtitle">Întoarceți cărțile, găsiți perechea</string>
     <!-- Settings -->
     <string name="appearance">Aspect</string>
     <string name="advanced">Avansat</string>
@@ -729,8 +638,6 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="settings_appearance_ui_scale_preview_subtitle">Textul și controalele la această scară</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Ecran de pornire</string>
-    <string name="settings_appearance_greeting_phrases">Fraze de salut</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Afișează un mesaj de întâmpinare pe ecranul de pornire</string>
     <string name="settings_appearance_app_grouping">Gruparea aplicațiilor</string>
     <string name="settings_appearance_app_grouping_description">Afișează un comutator pentru a grupa aplicațiile după sursă sau categorie</string>
     <string name="settings_appearance_repatch_notice">Notificare privind repatch-uirea</string>
@@ -1162,16 +1069,6 @@ Detalii: %2$s"</string>
     <string name="credits_current_development">Dezvoltare curentă</string>
     <string name="credits_prior_development">Dezvoltare anterioară</string>
     <string name="opensource_licenses">Licențe open-source</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">O alegere</string>
-    <string name="easter_egg_pill_message">Take the blue pill and the ads stay exactly where they are. Take the red one and see how deep the bytecode goes</string>
-    <string name="easter_egg_pill_red">Pastila roșie</string>
-    <string name="easter_egg_pill_blue">Pastila albastră</string>
-    <string name="easter_egg_pill_red_toast">Fundal Matrix deblocat</string>
-    <string name="easter_egg_pill_blue_toast">Reclamele te vor aștepta</string>
-    <string name="easter_egg_pill_message_again">Ești deja în Matrix. Pastila roșie te aruncă înapoi în ploaie, cea albastră te trezește.</string>
-    <string name="easter_egg_pill_red_toast_again">Înapoi în ploaie</string>
-    <string name="easter_egg_pill_blue_toast_again">Deconectat. Calea de întoarcere este acolo unde a fost întotdeauna.</string>
     <!-- Shared strings -->
     <string name="select_file">Selectează fișierul</string>
     <string name="select_files">Selectează fișierele</string>

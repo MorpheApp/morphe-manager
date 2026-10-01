@@ -84,45 +84,6 @@
     <string name="home_category_actions_unavailable">Akcije nisu dostupne za ovu kategoriju</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Koju aplikaciju želite da zakrpite?</string>
-    <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Da li ste spremni da napravimo aplikacije legendarnim ponovo?</string>
-    <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Vežite se, vreme je za zakpljavanje</string>
-    <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
-    <string name="home_greeting_4">Još jedan dan, još jedno remek-delo bez reklama</string>
-    <!-- "Watch ads" refers to watching video ads in unpatched apps -->
-    <string name="home_greeting_5">Da li želiš da gledaš reklame? Ni ja</string>
-    <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Učinimo da tvoje aplikacije postanu besprekorne</string>
-    <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Današnja prognoza: 100% verovatno zakrpljavanje</string>
-    <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Spreman da pretvoriš obično u fantastično?</string>
-    <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Spašavamo aplikacije od njih samih od danas</string>
-    <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Pokrenut kofeinom i dobrim zakrpama</string>
-    <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Ustani i zakrpi</string>
-    <string name="home_greeting_morning_2">Dobro jutro! Aplikacije se same ne zakrpljuju</string>
-    <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Poslepodnevni pad koncentracije? Zakrpi nešto</string>
-    <string name="home_greeting_afternoon_2">Popravka nakon ručka ima drugačiji utisak</string>
-    <string name="home_greeting_afternoon_3">Popodnevna smena: izdanje za popravke</string>
-    <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Dobra večernja! Večernje popravke je drugačije raditi</string>
-    <string name="home_greeting_evening_2">Opustate se? Prvo popravite aplikaciju</string>
-    <string name="home_greeting_evening_3">Izlazite sa posla? Prvo popravite nešto</string>
-    <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Još budni? I aplikacije kojima je potrebna popravka su budne</string>
-    <string name="home_greeting_late_night_2">Kasno noćna sesija popravki? Respekt</string>
-    <string name="home_greeting_late_night_3">Noćni sovac mod: aktiviran</string>
-    <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Vrhunac sati za popravke… navodno</string>
-    <string name="home_greeting_super_late_2">Ne možete da zaspite? Popravite nešto</string>
-    <string name="home_greeting_super_late_3">U ovom trenutku, samo ostanite budni i popravite</string>
-    <string name="home_greeting_super_late_4">Ti i serveri, oboje budni</string>
-    <string name="home_greeting_super_late_5">Noćni i produktivan</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Izvori zakrpe</string>
     <string name="sources_search">Pretraži izvore i zakrpe</string>
@@ -527,8 +488,6 @@ Spoljna zona (isprekidana): može biti isečena maskom pokretača – držite va
     <string name="patcher_field_value_stripped">uklonjeno</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">zadržano</string>
-    <string name="patcher_tab_logs">Evidencije peča</string>
-    <string name="patcher_tab_game">Igre</string>
     <string name="patcher_logs_waiting">Čeka se izlaz loga…</string>
     <string name="patcher_logs_lost">Izlaz loga se ne čuva između ponovnih pokretanja aplikacije</string>
     <string name="patcher_long_step_warning">Ovaj korak može potrajati. Molimo sačekajte…</string>
@@ -555,7 +514,6 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="patcher_install_error_subtitle">Pokušajte deinstalirati pa ponovo instalirati</string>
     <string name="patcher_ready_to_mount_subtitle">Pritisnite dugme ispod za postavljanje</string>
     <string name="patcher_patches_excluded_for_installer">Nije dostupno za ovu metodu instalacije i isključeno: %s</string>
-    <string name="patcher_back_to_game_hint">Dodirni %1$s da se vratiš u svoju igru.}}</string>
     <string name="patcher_storage_permission_dialog_title">Ne mogu pristupiti putu za pohranu</string>
     <string name="patcher_incompatible_patcher_title">Ažuriranje je potrebno</string>
     <string name="patcher_incompatible_patcher_description">Paket &lt;b&gt;%1$s&lt;/b&gt; zahteva verziju zakrpe &lt;b&gt;%2$s&lt;/b&gt; ili noviju. Molimo ažurirajte Morphe da biste zakrpili ovu aplikaciju</string>
@@ -598,32 +556,6 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="patcher_notification_text">Dodirnite za povratak na zakrpu</string>
     <string name="patcher_stop_confirm_title">Zaustavi zakrpu</string>
     <string name="patcher_stop_confirm_description">Da li ste sigurni da želite da zaustavite proces zakrpa?</string>
-    <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Transformišemo vašu aplikaciju u nešto sjajno… 🏆</string>
-    <string name="patcher_message_2">Učenje starih aplikacija novim trikovima… 🎩</string>
-    <string name="patcher_message_3">Digitalno doterivanje vaše aplikacije… 🔧</string>
-    <string name="patcher_message_4">Priprema digitalne čarolije… ☕</string>
-    <string name="patcher_message_5">Preporučena pauza za kafu… ☕</string>
-    <string name="patcher_message_6">Pogledajte napolje, lepo je tamo… 🌤️</string>
-    <string name="patcher_message_7">Podešavam jedinice i nule… 🤖</string>
-    <string name="patcher_message_8">Odvajanje digitalnih špageta… 🍝</string>
-    <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Popravljam greške u nepatchiranoj aplikaciji… 🪲</string>
-    <string name="patcher_message_10">Vredi čekati sjajne zakrpe… ⏳</string>
-    <string name="patcher_message_11">Poliranje piksela dok ne zasijaju… 💎</string>
-    <string name="patcher_message_12">Molimo vas da ostanete u sedištima dok kapetan ne isključi znak \"Zakrpa u toku\"... 💺✈️</string>
-    <string name="patcher_message_13">Pripremamo vašu zakrpljenu aplikaciju, vruću i svežu… 🍳</string>
-    <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Ljubazno pregovaranje sa bajt-kodom</string>
-    <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Svi sistemi su normalni… putanja zakrpe je stabilna… 🚀</string>
-    <string name="patcher_message_16">Iscedimo dodatnu snagu, poput soka iz digitalnog limuna… 🍋</string>
-    <string name="patcher_message_17">Podstičemo aplikaciju da prihvati sebe, novu i bolju… 🌱</string>
-    <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Menjamo superpoziciju aplikacije iz nezakrpljene u zakrpljenu… 📦⚛️</string>
-    <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Vaša aplikacija ima temperaturu, a jedini lek je više zakrpa… 🩺🔔</string>
-    <string name="patcher_message_20">Uklanjanje besmislica. Molimo pričekajte… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Uređivanje aplikacija</string>
     <string name="memory_usage">Upotreba memorije</string>
@@ -653,29 +585,6 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="package_name">Naziv paketa</string>
     <string name="failed_to_mount">Nije moguće montirati: %s</string>
     <string name="failed_to_unmount">Nije moguće demontirati: %s</string>
-    <!-- Patcher Screen - Mini-games -->
-    <string name="mini_game_score">Rezultat %s</string>
-    <string name="mini_game_best">Najbolji %s</string>
-    <string name="mini_game_new_record">Novi rekord!</string>
-    <string name="mini_game_game_over">Igra je završena</string>
-    <string name="mini_game_try_again">Pokušaj ponovo</string>
-    <string name="mini_game_paused">Pauza</string>
-    <string name="mini_game_resume">Nastavi</string>
-    <string name="mini_game_restart">Počni ispočetka</string>
-    <string name="mini_game_change">Izaberi drugu igru</string>
-    <string name="mini_game_2048_picker_subtitle">Kliznite pločicama da biste ih spojili</string>
-    <string name="mini_game_flappy_picker_subtitle">Dodirnite da letite kroz cevi</string>
-    <string name="mini_game_flappy_tap_to_start">Dodirnite da letite</string>
-    <string name="mini_game_snake_picker_subtitle">Jedite hranu, nemojte se udarati</string>
-    <string name="mini_game_snake_swipe_to_start">Prevucite prstom da biste počeli</string>
-    <string name="mini_game_dino_picker_subtitle">Dodirnite da preskočite kaktuse</string>
-    <string name="mini_game_dino_tap_to_start">Dodirnite da trčite</string>
-    <string name="mini_game_blocks_picker_subtitle">Uklopi oblike, očisti linije</string>
-    <string name="mini_game_blocks_tap_to_start">Dodirni da rotiraš, prevuci da pomeriš, prevuci nadole da spustiš</string>
-    <string name="mini_game_bricks_picker_subtitle">Odbij loptu, sruši zid</string>
-    <string name="mini_game_bricks_tap_to_start">Povuci za nišanjenje, dodirni za lansiranje</string>
-    <string name="mini_game_miner_picker_subtitle">Dodirni da otvoriš, drži da postaviš zastavicu</string>
-    <string name="mini_game_pairs_picker_subtitle">Okreni kartice, pronađi par</string>
     <!-- Settings -->
     <string name="appearance">Izgled</string>
     <string name="advanced">Napredno</string>
@@ -730,8 +639,6 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="settings_appearance_ui_scale_preview_subtitle">Tekst i kontrole u ovoj razmeri</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Početni ekran</string>
-    <string name="settings_appearance_greeting_phrases">Pozdravne poruke</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Prikaži poruku dobrodošlice na početnom ekranu</string>
     <string name="settings_appearance_app_grouping">Grupisanje aplikacija</string>
     <string name="settings_appearance_app_grouping_description">Prikaži prekidač za grupisanje aplikacija po izvoru ili kategoriji</string>
     <string name="settings_appearance_repatch_notice">Obaveštenje o ponovnom zakrpavanju</string>
@@ -1147,16 +1054,6 @@ Detalji: %2$s"</string>
     <string name="credits_current_development">Тренутни развој</string>
     <string name="credits_prior_development">Претходни развој</string>
     <string name="opensource_licenses">Open-source licence</string>
-    <!-- Easter egg offered after seven taps on the version in the About dialog -->
-    <string name="easter_egg_pill_title">Izbor</string>
-    <string name="easter_egg_pill_message">Uzmi plavu pilulu i oglasi ostaju tačno gde jesu. Uzmi crvenu i vidi koliko duboko ide bajtkod.</string>
-    <string name="easter_egg_pill_red">Crvena pilula</string>
-    <string name="easter_egg_pill_blue">Plava pilula</string>
-    <string name="easter_egg_pill_red_toast">Pozadina Matrixa otključana</string>
-    <string name="easter_egg_pill_blue_toast">Reklame će vas čekati</string>
-    <string name="easter_egg_pill_message_again">Već ste u Matrixu. Crvena pilula vas vraća nazad u kišu, a plava vas budi.</string>
-    <string name="easter_egg_pill_red_toast_again">Nazad na kiši</string>
-    <string name="easter_egg_pill_blue_toast_again">Isključen. Put nazad je tamo gde je oduvek bio.</string>
     <!-- Shared strings -->
     <string name="select_file">Izaberi datoteku</string>
     <string name="select_files">Izaberite datoteke</string>

@@ -39,7 +39,6 @@ import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.usesPrerel
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.patcher.patch.PatchSourceRef
-import app.morphe.manager.ui.model.PatchRunProgress
 import app.morphe.manager.ui.screen.home.*
 import app.morphe.manager.ui.screen.patcher.ExpertPatchingInProgress
 import app.morphe.manager.ui.screen.patcher.PatcherErrorDialog
@@ -47,7 +46,6 @@ import app.morphe.manager.ui.screen.patcher.PatcherErrorInfo
 import app.morphe.manager.ui.screen.patcher.PatchingBackgroundSpeedEffect
 import app.morphe.manager.ui.screen.patcher.PostPatchPromptDialogs
 import app.morphe.manager.ui.screen.patcher.SimplePatchingInProgress
-import app.morphe.manager.ui.screen.patcher.game.MiniGameState
 import app.morphe.manager.ui.screen.patcher.rememberDisplayedPatchProgress
 import app.morphe.manager.ui.screen.settings.system.InstallerFlowDialogs
 import app.morphe.manager.ui.screen.shared.*
@@ -82,8 +80,6 @@ fun BatchPatcherScreen(
     onPatchingCompleted: () -> Unit = {}
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    val scope = rememberCoroutineScope()
-    val miniGameState = remember { MiniGameState(prefs, scope) }
 
     LaunchedEffect(targets, useMount) {
         viewModel.ensurePlan(targets, useMount)
@@ -138,13 +134,6 @@ fun BatchPatcherScreen(
 
     val useExpertMode by prefs.useExpertMode.getAsState()
 
-    // Outlives its item so a round in play survives the gap between apps and the end of the queue
-    var lastRun by remember { mutableStateOf<PatchRunProgress?>(null) }
-    LaunchedEffect(current?.activeRun) {
-        current?.activeRun?.let { lastRun = it }
-    }
-    val heldRun = lastRun?.takeIf { useExpertMode && miniGameState.isPlaying }
-
     // The app last patched keeps its name and color on the progress once the queue moves past it
     var lastPackageName by remember { mutableStateOf<String?>(null) }
     LaunchedEffect(current?.activeItem?.packageName) {
@@ -152,23 +141,13 @@ fun BatchPatcherScreen(
     }
     val shownPackageName = current?.activeItem?.packageName ?: lastPackageName
 
-    // A queue that drains mid-round waits for the player, as a single run does. Keyed on the
-    // phase so a retried queue waits again
-    var summaryReleased by remember(current?.phase) { mutableStateOf(false) }
-    val holdSummary = current?.phase == BatchPhase.FINISHED &&
-            !summaryReleased &&
-            heldRun != null
-    LaunchedEffect(holdSummary) {
-        if (!holdSummary) summaryReleased = true
-    }
-
     // The queue's end gets the same finish as a single run, once per queue and only for one the
     // user watched run out. Opening the summary of a queue that ended earlier stays quiet
     val view = LocalView.current
     var watchedRunning by rememberSaveable { mutableStateOf(false) }
-    LaunchedEffect(current?.phase, holdSummary) {
+    LaunchedEffect(current?.phase) {
         if (current?.phase == BatchPhase.RUNNING) watchedRunning = true
-        if (current?.phase == BatchPhase.FINISHED && !holdSummary && watchedRunning) {
+        if (current?.phase == BatchPhase.FINISHED && watchedRunning) {
             watchedRunning = false
             // A queue stopped before its end is nothing to celebrate, whatever it got through
             if (current.finishedInForeground && current.succeeded > 0 && !current.wasStopped) {
@@ -179,9 +158,8 @@ fun BatchPatcherScreen(
         }
     }
 
-    LaunchedEffect(current?.phase, current?.policy, holdSummary) {
+    LaunchedEffect(current?.phase, current?.policy) {
         if (current?.phase == BatchPhase.FINISHED &&
-            !holdSummary &&
             current.policy == BatchInstallPolicy.INSTALL_AFTER &&
             installRequests.isNotEmpty()
         ) {
@@ -203,8 +181,6 @@ fun BatchPatcherScreen(
             secondaryText = stringResource(R.string.no),
             onConfirm = {
                 showCancelDialog = false
-                // A stopped queue must not wait for the round
-                miniGameState.pauseActiveGame()
                 viewModel.cancel()
             },
             onDismiss = { showCancelDialog = false }
@@ -424,10 +400,10 @@ fun BatchPatcherScreen(
     }
 
     val listState = rememberLazyListState()
-    val shownRun = current?.activeRun ?: heldRun
+    val shownRun = current?.activeRun
 
     // Patching an app looks exactly like a single run, with a queue counter on top
-    if (current != null && (current.phase == BatchPhase.RUNNING || holdSummary)) {
+    if (current != null && current.phase == BatchPhase.RUNNING) {
         // The preflight dialog is a separate window and cannot animate into this one, so the
         // patcher fades in on its own to soften the switch
         val appear = remember { MutableTransitionState(false).apply { targetState = true } }
@@ -452,13 +428,12 @@ fun BatchPatcherScreen(
                     // Nudged ahead between the patcher's coarse steps and eased, as a single run is
                     val displayProgress = rememberDisplayedPatchProgress(
                         progress = { shownRun.progress },
-                        succeeded = if (holdSummary) true else null,
+                        succeeded = null,
                         run = shownRun
                     )
-                    // Each app ramps the background up from rest. A run held on screen past its
-                    // end, for a round in play, is over and leaves the background at rest
+                    // Each app ramps the background up from rest
                     PatchingBackgroundSpeedEffect(
-                        active = current.activeRun != null,
+                        active = true,
                         progress = { displayProgress.target },
                         onSpeedChange = onBackgroundSpeedChange,
                         run = shownRun
@@ -470,11 +445,8 @@ fun BatchPatcherScreen(
                             patchesProgress = shownRun.patchesProgress,
                             patchProgress = shownRun,
                             packageName = shownPackageName,
-                            patcherSucceeded = if (holdSummary) true else null,
-                            miniGameState = miniGameState,
                             queueHeader = { BatchRunHeader(state = current) },
                             onCancelClick = { showCancelDialog = true },
-                            onInstallClick = { summaryReleased = true },
                             onHomeClick = onBackClick
                         )
                     } else {
