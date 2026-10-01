@@ -13,6 +13,7 @@ import app.morphe.manager.domain.installer.InstallerFileProvider
 import app.morphe.manager.network.service.HttpService
 import app.morphe.manager.util.APK_EXTENSIONS
 import io.ktor.client.request.header
+import io.ktor.client.request.url
 import io.ktor.http.HttpHeaders
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -71,6 +72,10 @@ object ApkCaptureDownloader : KoinComponent {
                 http.downloadToFile(
                     saveLocation = target,
                     builder = {
+                        // The builder starts from an empty URL, and a request that carries none is
+                        // answered as `http://localhost`, which the network security policy
+                        // refuses before any of the headers below are ever looked at
+                        url(capture.url)
                         // Only the headers a capture actually carries. A header is rejected for a
                         // null value, and a page reached by navigations alone has no cookie to
                         // give, so setting these unconditionally fails the whole download.
