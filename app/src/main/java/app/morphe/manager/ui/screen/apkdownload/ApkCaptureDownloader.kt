@@ -6,10 +6,8 @@
 package app.morphe.manager.ui.screen.apkdownload
 
 import android.content.Context
-import android.net.Uri
 import android.util.Log
 import app.morphe.manager.data.platform.Filesystem
-import app.morphe.manager.domain.installer.InstallerFileProvider
 import app.morphe.manager.network.service.HttpService
 import app.morphe.manager.util.APK_EXTENSIONS
 import io.ktor.client.request.header
@@ -25,6 +23,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import java.io.File
 
 private const val TAG = "Morphe ApkCaptureDownload"
 
@@ -99,24 +98,38 @@ object ApkCaptureDownloader : KoinComponent {
      * Runs on [scope] so the fetch is not tied to the dialog that asked for it: navigating away,
      * or the capture screen closing, must not abandon a download already under way.
      *
-     * @param onFinished called with the URI on success, or null when the download failed or was
-     *     cancelled. A cancellation is not reported as an error.
+     * @param onFinished called with the downloaded file on success, or null when it failed or was
+     *     cancelled. A cancellation is not reported as an error. The caller owns that file from
+     *     here and is expected to [release] it: the APK picker reads it asynchronously, so it
+     *     cannot be dropped before the caller is done with it.
      */
     fun start(
         context: Context,
         scope: CoroutineScope,
         capture: ApkDownloadCapture,
         appName: String,
-        onFinished: (Uri?) -> Unit,
+        onFinished: (file: File?) -> Unit,
     ) {
         running?.cancel()
         lastError = null
 
         running = scope.launch {
-            val uri = fetch(context, capture, appName)
+            val file = fetch(context, capture, appName)
             _progress.value = null
-            onFinished(uri)
+            onFinished(file)
         }
+    }
+
+    /**
+     * Deletes a file this downloader handed over. Safe to call for one already gone.
+     *
+     * The picker copies its input into a file of its own before doing anything with it, which
+     * leaves what was downloaded here as a second copy of the same archive. Nothing refers to it
+     * after that copy, so the caller drops it rather than leaving it beside the one in use.
+     */
+    fun release(file: File) {
+        if (file.delete()) Log.i(TAG, "Released downloaded APK ${file.name}")
+        else Log.w(TAG, "Could not delete downloaded APK ${file.name}")
     }
 
     /** Stops the download in flight, if any. Nothing is reported as a failure for it. */
@@ -126,7 +139,7 @@ object ApkCaptureDownloader : KoinComponent {
         _progress.value = null
     }
 
-    private suspend fun fetch(context: Context, capture: ApkDownloadCapture, appName: String): Uri? =
+    private suspend fun fetch(context: Context, capture: ApkDownloadCapture, appName: String): File? =
         withContext(Dispatchers.IO) {
             val target = filesystem.uiTempDir.resolve(fileNameFor(capture, appName))
             // A previous attempt at the same app is replaced rather than appended to
@@ -194,9 +207,7 @@ object ApkCaptureDownloader : KoinComponent {
                 null
             } else {
                 Log.i(TAG, "Captured APK downloaded: ${target.name} (${target.length()} bytes)")
-                // Through the provider the installers already use, so the picker reads it the
-                // same way it reads any other content URI and gets the name from there
-                InstallerFileProvider.getUriForFile(context, target)
+                target
             }
         }
 

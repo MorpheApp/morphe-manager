@@ -36,6 +36,7 @@ import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.usesPrerel
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.bundles.recommended
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.domain.installer.InstallerFileProvider
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.apkdownload.ApkCaptureDownloader
@@ -86,8 +87,8 @@ fun HomeDialogs(
             scope = scope,
             capture = capture,
             appName = appName,
-        ) { uri ->
-            if (uri == null) {
+        ) { file ->
+            if (file == null) {
                 // Names the reason while this is being tested. The exception's own message says
                 // more than "it failed" ever could, and reaching an adb console is not something
                 // to ask of whoever is holding the phone
@@ -98,9 +99,13 @@ fun HomeDialogs(
                 )
                 return@start
             }
-            // Through the ordinary intake, so every check that guards a hand-picked APK applies
+            // Through the ordinary intake, so every check that guards a hand-picked APK applies.
+            // Handed over as a content URI through the provider the installers already use, and
+            // then dropped: the intake copies it into a file of its own, which would otherwise
+            // leave the download behind as a second copy of the same archive.
             homeViewModel.showDownloadInstructionsDialog = false
-            homeViewModel.handleApkSelection(uri)
+            homeViewModel.handleApkSelection(InstallerFileProvider.getUriForFile(context, file))
+            ApkCaptureDownloader.release(file)
         }
     }
 
