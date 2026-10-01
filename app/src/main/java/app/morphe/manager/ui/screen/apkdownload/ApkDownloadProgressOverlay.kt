@@ -58,7 +58,10 @@ fun ApkDownloadProgressOverlay(onCancel: () -> Unit) {
         current.bytesPerSecond.takeIf { it > 1024 }?.let { context.formatBytes(it) + "/s" }
     }
 
-    Overlay(visible = true) {
+    // Fully opaque: nothing of the screen behind shows through. `Overlay` defaults to a partial
+    // scrim, which leaves the app legible underneath and reads as a dialog over it; the download
+    // takes over instead, so the theme background is drawn solid.
+    Overlay(visible = true, backgroundAlpha = 1f) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
