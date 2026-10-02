@@ -91,6 +91,8 @@ internal val PatcherCardPadding = 10.dp
 /** What a card's own margin and the surrounding list each contribute to that same inset. */
 internal val PatcherCardMargin = PatcherCardPadding / 2
 
+private const val SCROLL_THROTTLE_MS = 150L
+
 
 
 sealed interface LogItem {
@@ -152,35 +154,53 @@ private fun formatElapsed(ms: Long?): String {
 }
 
 /**
- * Converts the full raw log list into display [LogItem]s in a single stateful pass.
+ * Incremental state machine that converts raw log lines into display [LogItem]s.
  *
- * Lines that carry metadata for the banner/summary cards (Runtime, heap limit,
- * heap-after-patching) are consumed and never emitted as plain [LogItem.Entry]s.
+ * Consumes auxiliary metadata lines for [LogItem.StartBanner] and [LogItem.SuccessSummary],
+ * updating banners in-place when metadata arrives before or after the banner marker.
  */
-internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
-    // Pre-scan for auxiliary lines so banner cards can be built in one pass
-    var runtimeMemoryLimitMb: String? = null
-    var processHeapAverageMb: String? = null
-    var processHeapMaxMb: String? = null
-    var ioPeakKbPerSec: Int? = null
-    var androidVersion: String? = null
-    var ramAvailable: String? = null
-    var ramTotal: String? = null
-    var storageAvailable: String? = null
-    var storageTotal: String? = null
-    var deviceManufacturer: String?
-    var deviceModel: String?
-    val sources = mutableListOf<PatchSourceRef>()
-    var managerVersion: String? = null
-    var patcherVersion: String? = null
-    var stripsNativeLibs: Boolean? = null
+internal class LogItemAccumulator(
+    private val targetList: MutableList<LogItem> = mutableListOf(),
+    private val maxItems: Int = Int.MAX_VALUE
+) {
+    val items: List<LogItem> get() = targetList
 
-    for ((_, message) in this) {
+    private var startBannerIndex = -1
+    private var successSummaryIndex = -1
+
+    // Metadata for StartBanner
+    private var managerVersion: String? = null
+    private var patcherVersion: String? = null
+    private var stripsNativeLibs: Boolean? = null
+    private val sources = mutableListOf<PatchSourceRef>()
+    private var runtimeMemoryLimitMb: String? = null
+    private var androidVersion: String? = null
+    private var ramAvailable: String? = null
+    private var ramTotal: String? = null
+    private var storageAvailable: String? = null
+    private var storageTotal: String? = null
+    private var startPackage: String? = null
+    private var startVersion: String? = null
+    private var startApkSize: String? = null
+    private var startPatchCount: Int = 0
+    private var startIsSplit: Boolean = false
+    private var deviceManufacturer: String? = null
+    private var deviceModel: String? = null
+
+    // Metadata for SuccessSummary
+    private var successOutputSize: String? = null
+    private var successElapsedSec: String? = null
+    private var processHeapAverageMb: String? = null
+    private var processHeapMaxMb: String? = null
+    private var ioPeakKbPerSec: Int? = null
+
+    fun append(level: LogLevel, message: String): List<LogItem> {
         when {
             message.startsWith(LOG_WORKER_PREFIX_BUILD) -> {
                 managerVersion = message.logField(LOG_WORKER_FIELD_MANAGER)
                 patcherVersion = message.logField(LOG_WORKER_FIELD_PATCHER)
                 stripsNativeLibs = message.logField(LOG_WORKER_FIELD_NATIVE_LIBS)?.toBooleanStrictOrNull()
+                updateStartBanner()
             }
             message.startsWith(LOG_WORKER_PREFIX_SOURCE) -> {
                 message.logField(LOG_WORKER_FIELD_NAME)?.let { name ->
@@ -188,10 +208,12 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
                         name = name,
                         version = message.logField(LOG_WORKER_FIELD_VERSION)?.takeIf { it != "?" }
                     )
+                    updateStartBanner()
                 }
             }
             message.startsWith(LOG_WORKER_PREFIX_RUNTIME) -> {
                 runtimeMemoryLimitMb = message.logField(LOG_WORKER_FIELD_MEMORY_LIMIT)?.let { "${it}MB" }
+                updateStartBanner()
             }
             message.startsWith(LOG_WORKER_PREFIX_DEVICE) -> {
                 androidVersion = message.logField(LOG_WORKER_FIELD_ANDROID)?.let { v ->
@@ -201,78 +223,150 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
                 ramTotal     = message.logField(LOG_WORKER_FIELD_RAM_TOTAL)
                 storageAvailable = message.logField(LOG_WORKER_FIELD_STORAGE_AVAIL)
                 storageTotal     = message.logField(LOG_WORKER_FIELD_STORAGE_TOTAL)
+                updateStartBanner()
             }
             message.startsWith(LOG_MEMORY_PREFIX_DONE) -> {
-                processHeapAverageMb  = message.logField(LOG_MEMORY_FIELD_AVERAGE)
-                processHeapMaxMb   = message.logField(LOG_MEMORY_FIELD_MAX)
+                processHeapAverageMb = message.logField(LOG_MEMORY_FIELD_AVERAGE)
+                processHeapMaxMb = message.logField(LOG_MEMORY_FIELD_MAX)
+                updateSuccessSummary()
             }
             message.startsWith(LOG_USAGE_PREFIX_DONE) -> {
                 ioPeakKbPerSec = message.logField(LOG_USAGE_FIELD_IO_PEAK)?.toIntOrNull()
+                updateSuccessSummary()
             }
-        }
-    }
-
-    val skipPrefixes = setOf(
-        LOG_PROCESS_PREFIX_PROCESS_HEAP,
-        LOG_PROCESS_PREFIX_COROUTINE_HEAP,
-        LOG_MEMORY_PREFIX_DONE,
-        LOG_USAGE_PREFIX_DONE,
-        LOG_WORKER_PREFIX_DEVICE,
-        LOG_WORKER_PREFIX_RUNTIME,
-        LOG_WORKER_PREFIX_SOURCE,
-        LOG_WORKER_PREFIX_BUILD
-    )
-
-    val result = mutableListOf<LogItem>()
-    for ((level, message) in this) {
-        when {
-            skipPrefixes.any { message.startsWith(it) } -> { /* consumed above */ }
-
+            message.startsWith(LOG_PROCESS_PREFIX_PROCESS_HEAP) ||
+                message.startsWith(LOG_PROCESS_PREFIX_COROUTINE_HEAP) -> {
+                // Auxiliary lines consumed without emitting a LogItem
+            }
             message.startsWith(LOG_WORKER_PREFIX_STARTED) -> {
                 val pkg = message.logField(LOG_WORKER_FIELD_PACKAGE)
                 deviceManufacturer = message.logField(LOG_WORKER_FIELD_DEVICE)
                 deviceModel = message.logField(LOG_WORKER_FIELD_MODEL)
                 if (pkg != null) {
-                    result += LogItem.StartBanner(
-                        packageName = pkg,
-                        version = message.logField(LOG_WORKER_FIELD_VERSION) ?: "?",
-                        sources = sources,
-                        managerVersion = managerVersion,
-                        patcherVersion = patcherVersion,
-                        stripsNativeLibs = stripsNativeLibs,
-                        apkSize = message.logBytes(LOG_WORKER_FIELD_SIZE),
-                        patchCount = message.logField(LOG_WORKER_FIELD_PATCHES)?.toIntOrNull() ?: 0,
-                        isSplit = message.logField(LOG_WORKER_FIELD_SPLIT) == "true",
-                        runtimeMemoryLimitMb = runtimeMemoryLimitMb,
-                        androidVersion = androidVersion,
-                        ramAvailable = ramAvailable,
-                        ramTotal = ramTotal,
-                        storageAvailable = storageAvailable,
-                        storageTotal = storageTotal,
-                        deviceManufacturer = deviceManufacturer,
-                        deviceModel = deviceModel,
-                    )
+                    startPackage = pkg
+                    startVersion = message.logField(LOG_WORKER_FIELD_VERSION) ?: "?"
+                    startApkSize = message.logBytes(LOG_WORKER_FIELD_SIZE)
+                    startPatchCount = message.logField(LOG_WORKER_FIELD_PATCHES)?.toIntOrNull() ?: 0
+                    startIsSplit = message.logField(LOG_WORKER_FIELD_SPLIT) == "true"
+                    startBannerIndex = targetList.size
+                    addItem(buildStartBanner())
                 } else {
-                    result += LogItem.Entry(level, message)
+                    addItem(LogItem.Entry(level, message))
                 }
             }
-
             message.startsWith(LOG_WORKER_PREFIX_SUCCEEDED) -> {
-                result += LogItem.SuccessSummary(
-                    outputSize = message.logBytes(LOG_WORKER_FIELD_SIZE),
-                    elapsedSec = formatElapsed(
-                        message.logField(LOG_WORKER_FIELD_ELAPSED)?.filter { it.isDigit() }?.toLongOrNull()
-                    ),
-                    processHeapAverageMb  = processHeapAverageMb,
-                    processHeapMaxMb   = processHeapMaxMb,
-                    ioPeakRate = ioPeakKbPerSec?.let(::formatRate),
+                successOutputSize = message.logBytes(LOG_WORKER_FIELD_SIZE)
+                successElapsedSec = formatElapsed(
+                    message.logField(LOG_WORKER_FIELD_ELAPSED)?.filter { it.isDigit() }?.toLongOrNull()
                 )
+                successSummaryIndex = targetList.size
+                addItem(buildSuccessSummary())
             }
+            else -> {
+                addItem(LogItem.Entry(level, message))
+            }
+        }
+        return targetList
+    }
 
-            else -> result += LogItem.Entry(level, message)
+    fun appendAll(entries: List<Pair<LogLevel, String>>): List<LogItem> {
+        for ((level, message) in entries) {
+            append(level, message)
+        }
+        return targetList
+    }
+
+    fun reset() {
+        targetList.clear()
+        startBannerIndex = -1
+        successSummaryIndex = -1
+        managerVersion = null
+        patcherVersion = null
+        stripsNativeLibs = null
+        sources.clear()
+        runtimeMemoryLimitMb = null
+        androidVersion = null
+        ramAvailable = null
+        ramTotal = null
+        storageAvailable = null
+        storageTotal = null
+        startPackage = null
+        startVersion = null
+        startApkSize = null
+        startPatchCount = 0
+        startIsSplit = false
+        deviceManufacturer = null
+        deviceModel = null
+        successOutputSize = null
+        successElapsedSec = null
+        processHeapAverageMb = null
+        processHeapMaxMb = null
+        ioPeakKbPerSec = null
+    }
+
+    private fun addItem(item: LogItem) {
+        if (targetList.size >= maxItems) {
+            val removeIndex = if (startBannerIndex == 0) 1 else 0
+            if (removeIndex < targetList.size) {
+                targetList.removeAt(removeIndex)
+                if (successSummaryIndex > removeIndex) {
+                    successSummaryIndex--
+                }
+            }
+        }
+        targetList.add(item)
+    }
+
+    private fun updateStartBanner() {
+        if (startBannerIndex in targetList.indices) {
+            targetList[startBannerIndex] = buildStartBanner()
         }
     }
-    return result
+
+    private fun buildStartBanner(): LogItem.StartBanner = LogItem.StartBanner(
+        packageName = startPackage.orEmpty(),
+        version = startVersion ?: "?",
+        sources = sources.toList(),
+        managerVersion = managerVersion,
+        patcherVersion = patcherVersion,
+        stripsNativeLibs = stripsNativeLibs,
+        apkSize = startApkSize.orEmpty(),
+        patchCount = startPatchCount,
+        isSplit = startIsSplit,
+        runtimeMemoryLimitMb = runtimeMemoryLimitMb,
+        androidVersion = androidVersion,
+        ramAvailable = ramAvailable,
+        ramTotal = ramTotal,
+        storageAvailable = storageAvailable,
+        storageTotal = storageTotal,
+        deviceManufacturer = deviceManufacturer,
+        deviceModel = deviceModel,
+    )
+
+    private fun updateSuccessSummary() {
+        if (successSummaryIndex in targetList.indices) {
+            targetList[successSummaryIndex] = buildSuccessSummary()
+        }
+    }
+
+    private fun buildSuccessSummary(): LogItem.SuccessSummary = LogItem.SuccessSummary(
+        outputSize = successOutputSize.orEmpty(),
+        elapsedSec = successElapsedSec ?: "?",
+        processHeapAverageMb = processHeapAverageMb,
+        processHeapMaxMb = processHeapMaxMb,
+        ioPeakRate = ioPeakKbPerSec?.let(::formatRate),
+    )
+}
+
+/**
+ * Converts the full raw log list into display [LogItem]s in a single stateful pass.
+ *
+ * Lines that carry metadata for the banner/summary cards (Runtime, heap limit,
+ * heap-after-patching) are consumed and never emitted as plain [LogItem.Entry]s.
+ */
+internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
+    val accumulator = LogItemAccumulator()
+    return accumulator.appendAll(this).toList()
 }
 
 /**
@@ -306,13 +400,23 @@ fun ExpertPatchingInProgress(
         "[${level.name}] $message"
     }
 
-    LaunchedEffect(rawLogs.size) {
-        if (rawLogs.isNotEmpty()) {
-            // Small delay so AnimatedVisibility places the new item in layout
-            // before we scroll to it - otherwise the item stays off-screen.
-            delay(50.milliseconds)
-            listState.animateScrollToItem(rawLogs.size - 1)
-        }
+    LaunchedEffect(patchProgress, patcherSucceeded) {
+        var lastScrollTime = 0L
+        snapshotFlow { patchProgress.totalLogCount }
+            .collect { count ->
+                if (count > 0 && patchProgress.logItems.isNotEmpty()) {
+                    val now = System.currentTimeMillis()
+                    val elapsed = now - lastScrollTime
+                    if (elapsed < SCROLL_THROTTLE_MS && patcherSucceeded == null) {
+                        delay(SCROLL_THROTTLE_MS - elapsed)
+                    } else if (lastScrollTime == 0L) {
+                        delay(50.milliseconds)
+                    }
+                    val targetIndex = (patchProgress.logItems.size - 1).coerceAtLeast(0)
+                    listState.animateScrollToItem(targetIndex)
+                    lastScrollTime = System.currentTimeMillis()
+                }
+            }
     }
 
     val landscape = isLandscape()
@@ -553,11 +657,12 @@ private fun ExpertLogPanel(
     accentColor: Color? = null
 ) {
     val rawLogs = patchProgress.logs
+    val logItems = patchProgress.logItems
     // Decoration only: the log's own colors keep telling warnings and errors apart
     val appAccent = usableAppAccent(accentColor)
     val dotColor = appAccent ?: MorpheBrandTeal
-    // Convert the full list in one stateful pass so banner cards can aggregate metadata from auxiliary lines
-    val logItems = remember(rawLogs, rawLogs.size) { rawLogs.toLogItems() }
+    val totalLogs = patchProgress.totalLogCount
+
     var activeTab by rememberSaveable { mutableIntStateOf(LOG_PANEL_TAB_LOGS) }
     LaunchedEffect(activeTab) {
         if (activeTab != LOG_PANEL_TAB_GAMES) miniGameState.pauseActiveGame()
@@ -566,9 +671,9 @@ private fun ExpertLogPanel(
     // moment it is back, before the player has their eyes on it again
     LifecycleEventEffect(Lifecycle.Event.ON_STOP) { miniGameState.pauseActiveGame() }
     // Lines there were when the logs were last in view, so the tab can say the run moved on
-    var seenLogCount by rememberSaveable { mutableIntStateOf(rawLogs.size) }
-    LaunchedEffect(activeTab, rawLogs.size) {
-        if (activeTab == LOG_PANEL_TAB_LOGS) seenLogCount = rawLogs.size
+    var seenLogCount by rememberSaveable { mutableIntStateOf(totalLogs) }
+    LaunchedEffect(activeTab, totalLogs) {
+        if (activeTab == LOG_PANEL_TAB_LOGS) seenLogCount = totalLogs
     }
 
     Surface(
@@ -585,7 +690,7 @@ private fun ExpertLogPanel(
                     SegmentedTab(
                         label = stringResource(R.string.patcher_tab_logs),
                         icon = Icons.Outlined.Terminal,
-                        badge = activeTab != LOG_PANEL_TAB_LOGS && rawLogs.size > seenLogCount
+                        badge = activeTab != LOG_PANEL_TAB_LOGS && totalLogs > seenLogCount
                     ),
                     SegmentedTab(
                         label = stringResource(R.string.patcher_tab_game),
@@ -617,7 +722,7 @@ private fun ExpertLogPanel(
                                 .verticalScrollFade(listState),
                             contentPadding = PaddingValues(vertical = PatcherCardMargin)
                         ) {
-                            if (rawLogs.isEmpty()) {
+                            if (logItems.isEmpty()) {
                                 item {
                                     Box(
                                         modifier = Modifier
