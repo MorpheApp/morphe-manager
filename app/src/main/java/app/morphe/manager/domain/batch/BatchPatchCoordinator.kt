@@ -700,7 +700,8 @@ class BatchPatchCoordinator(
             originalApkRepository.saveOriginalApk(
                 packageName = item.packageName,
                 version = version,
-                sourceFile = file
+                sourceFile = file,
+                moveSource = selectedApp.temporary
             )
         }.onFailure { Log.w(TAG, "Failed to save original APK for ${item.packageName}", it) }
     }
