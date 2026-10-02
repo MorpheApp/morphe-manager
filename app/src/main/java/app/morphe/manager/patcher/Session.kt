@@ -111,9 +111,10 @@ class Session(
             patcher.get()
         }
 
-        val patched = tempDir.resolve("result.apk")
-        withContext(Dispatchers.IO) {
-            Files.copy(input.toPath(), patched.toPath(), StandardCopyOption.REPLACE_EXISTING)
+        val patched = result.resources.resourcesApk ?: tempDir.resolve("result.apk").also { fallback ->
+            withContext(Dispatchers.IO) {
+                Files.copy(input.toPath(), fallback.toPath(), StandardCopyOption.REPLACE_EXISTING)
+            }
         }
 
         withContext(Dispatchers.Default) {
