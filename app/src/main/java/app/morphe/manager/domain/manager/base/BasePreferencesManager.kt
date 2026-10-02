@@ -3,7 +3,7 @@ package app.morphe.manager.domain.manager.base
 import android.content.Context
 import android.util.Log
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.State
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
@@ -101,12 +101,16 @@ abstract class Preference<T>(
         .distinctUntilChanged()
 
     suspend fun get() = flow.first()
+
+    @Deprecated(
+        message = "Blocks the calling thread. Use get() from coroutines or getAsState() in Compose.",
+        replaceWith = ReplaceWith("get()")
+    )
     fun getBlocking() = runBlocking { get() }
 
     @Composable
-    fun getAsState() = flow.collectAsStateWithLifecycle(initialValue = remember {
-        getBlocking()
-    })
+    fun getAsState(initial: T = default): State<T> =
+        flow.collectAsStateWithLifecycle(initialValue = initial)
 
     suspend fun update(value: T) = dataStore.editor {
         this@Preference.value = value

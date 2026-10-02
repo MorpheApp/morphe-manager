@@ -22,11 +22,14 @@ import app.morphe.manager.ui.viewmodel.BundleSnapshot
 import app.morphe.manager.ui.viewmodel.RandomInterval
 import app.morphe.manager.util.ApkDownloadHelperContract
 import app.morphe.manager.util.AppCardColorMode
+import app.morphe.manager.util.AppCoroutineScope
 import app.morphe.manager.util.isArmV7
 import app.morphe.manager.util.tag
 import app.morphe.manager.worker.UpdateCheckInterval
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 
 /**
@@ -45,7 +48,8 @@ enum class SettingsSection {
 }
 
 class PreferencesManager(
-    private val context: Context
+    private val context: Context,
+    applicationScope: AppCoroutineScope = AppCoroutineScope()
 ) : BasePreferencesManager(context, "settings") {
 
     // Appearance tab
@@ -205,46 +209,51 @@ class PreferencesManager(
     private val prereleaseAutoEnabled = booleanPreference("prerelease_auto_enabled", false)
 
     init {
-        runBlocking {
-            if (installationTime.get() == 0L) {
-                val now = System.currentTimeMillis()
-                installationTime.update(now)
-                Log.d(tag, "Installation time set to $now")
-            }
-
-            // Initialize process memory limit adaptively on first launch
-            if (patcherProcessMemoryLimit.get() == PROCESS_RUNTIME_MEMORY_NOT_SET) {
-                val adaptive = initialMemoryLimit(context)
-                Log.d(tag, "Initializing process memory limit to $adaptive MB (device RAM-based)")
-                patcherProcessMemoryLimit.update(adaptive)
-            }
-
-            // Existing installs stored their Material You preference in `dynamic_color`;
-            // fold it into [themeStyle] once so the new selector reflects the user's choice
-            if (!themeStyleMigrated.get()) {
-                val raw = dataStore.data.first()
-                val legacyDynamicColor = raw[booleanPreferencesKey("dynamic_color")] ?: true
-                if (legacyDynamicColor && themeStyle.get() == ThemeStyle.MORPHE) {
-                    themeStyle.update(ThemeStyle.MATERIAL_YOU)
+        applicationScope.launch(Dispatchers.IO) {
+            try {
+                if (installationTime.get() == 0L) {
+                    val now = System.currentTimeMillis()
+                    installationTime.update(now)
+                    Log.d(tag, "Installation time set to $now")
                 }
-                themeStyleMigrated.update(true)
-            }
 
-            // Helpers used to share a single switch; whoever had it on keeps every helper it let in
-            val legacyHelperKey = booleanPreferencesKey("use_apk_download_helper")
-            dataStore.data.first()[legacyHelperKey]?.let { legacyEnabled ->
-                if (legacyEnabled) trustedApkDownloadHelpers.update(installedApkDownloadHelpers())
-                dataStore.edit { it.remove(legacyHelperKey) }
-            }
-
-            // Auto-enable prereleases for dev versions
-            if (isDevVersion() && !prereleaseAutoEnabled.get()) {
-                Log.d(tag, "Dev version detected (${BuildConfig.VERSION_NAME}), auto-enabling prereleases")
-                edit {
-                    useManagerPrereleases.value = true
-                    bundlePrereleasesEnabled += DEFAULT_SOURCE_UID.toString()
-                    prereleaseAutoEnabled.value = true
+                // Initialize process memory limit adaptively on first launch
+                if (patcherProcessMemoryLimit.get() == PROCESS_RUNTIME_MEMORY_NOT_SET) {
+                    val adaptive = initialMemoryLimit(context)
+                    Log.d(tag, "Initializing process memory limit to $adaptive MB (device RAM-based)")
+                    patcherProcessMemoryLimit.update(adaptive)
                 }
+
+                // Existing installs stored their Material You preference in `dynamic_color`;
+                // fold it into [themeStyle] once so the new selector reflects the user's choice
+                if (!themeStyleMigrated.get()) {
+                    val raw = dataStore.data.first()
+                    val legacyDynamicColor = raw[booleanPreferencesKey("dynamic_color")] ?: true
+                    if (legacyDynamicColor && themeStyle.get() == ThemeStyle.MORPHE) {
+                        themeStyle.update(ThemeStyle.MATERIAL_YOU)
+                    }
+                    themeStyleMigrated.update(true)
+                }
+
+                // Helpers used to share a single switch; whoever had it on keeps every helper it let in
+                val legacyHelperKey = booleanPreferencesKey("use_apk_download_helper")
+                dataStore.data.first()[legacyHelperKey]?.let { legacyEnabled ->
+                    if (legacyEnabled) trustedApkDownloadHelpers.update(installedApkDownloadHelpers())
+                    dataStore.edit { it.remove(legacyHelperKey) }
+                }
+
+                // Auto-enable prereleases for dev versions
+                if (isDevVersion() && !prereleaseAutoEnabled.get()) {
+                    Log.d(tag, "Dev version detected (${BuildConfig.VERSION_NAME}), auto-enabling prereleases")
+                    edit {
+                        useManagerPrereleases.value = true
+                        bundlePrereleasesEnabled += DEFAULT_SOURCE_UID.toString()
+                        prereleaseAutoEnabled.value = true
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is CancellationException) throw e
+                Log.e(tag, "Failed to run preferences initialization", e)
             }
         }
     }
