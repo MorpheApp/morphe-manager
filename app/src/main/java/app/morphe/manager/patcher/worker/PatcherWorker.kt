@@ -44,6 +44,7 @@ import app.morphe.manager.ui.model.State
 import app.morphe.manager.util.*
 import app.morphe.manager.util.PatchSelectionUtils.restrictTo
 import com.topjohnwu.superuser.Shell
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
@@ -52,7 +53,6 @@ import java.io.File
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
 import kotlin.time.measureTime
-import kotlinx.coroutines.CancellationException
 
 typealias ProgressEventHandler = (name: String?, state: State?, message: String?) -> Unit
 
@@ -255,12 +255,7 @@ class PatcherWorker(
         lateinit var args: Args
         var patchingSucceeded = false
         val result = try {
-            val input = workerRepository.claimInputOrNull(this)
-            if (input == null) {
-                Log.w(tag, "Worker started without registered inputs (likely restarted after process death). Failing gracefully.".logFmt())
-                return Result.failure()
-            }
-            args = input
+            args = workerRepository.claimInput(this)
             queueLabel = args.queuePosition?.let { (done, total) ->
                 applicationContext.getString(
                     R.string.batch_patch_progress_counter,
@@ -563,7 +558,8 @@ class PatcherWorker(
                 workDataOf(PROCESS_FAILURE_MESSAGE_KEY to message)
             )
         } catch (e: CancellationException) {
-            Log.i(tag, "Patching was cancelled by user".logFmt())
+            // A stopped worker is not a failed patch, so it must not reach the catch-all below
+            Log.i(tag, "Patching was cancelled".logFmt())
             throw e
         } catch (e: ProcessRuntime.RemoteFailureException) {
             Log.e(
