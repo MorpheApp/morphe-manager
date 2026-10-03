@@ -259,6 +259,8 @@ Todo lo que añadas desde este sitio web lo haces bajo tu propia responsabilidad
     <string name="home_download_instructions_step4_mount">Después de instalar el APK original, vuelve a Morphe</string>
     <string name="home_download_instructions_continue_to">Continuar a %s</string>
     <string name="home_download_instructions_destination">la página de descarga</string>
+    <string name="home_download_instructions_copy_link">Copiar enlace</string>
+    <string name="home_download_instructions_link_copied">Enlace copiado</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Selecciona el APK descargado</string>
     <string name="home_file_picker_prompt_description">Selecciona el archivo APK de &lt;b&gt;%s&lt;/b&gt; que acabas de descargar</string>
@@ -275,6 +277,7 @@ Todo lo que añadas desde este sitio web lo haces bajo tu propia responsabilidad
     <string name="home_installed_app_picker_filter_system">Solo aplicaciones del sistema</string>
     <string name="home_invalid_apk_unreadable">No se pudo leer el archivo. Verifica que \'Almacenamiento externo\' no esté restringido por la batería</string>
     <string name="home_invalid_apk_not_an_apk">El archivo seleccionado no es un APK válido</string>
+    <string name="home_invalid_apk_already_patched">El APK seleccionado ya está parcheado. Selecciona la aplicación original en su lugar</string>
     <string name="home_invalid_apk_io_error">Error al abrir el archivo. Inténtalo de nuevo</string>
     <string name="home_external_apk_expert_mode_required">Esta función solo está disponible en el modo Experto</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -837,7 +840,7 @@ Los parches no se ven afectados: habilita los parches pre-lanzamiento para cada 
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Opciones de parches</string>
     <string name="settings_advanced_patch_options_youtube_description">Opciones de marca y encabezado</string>
-    <string name="settings_advanced_patch_options_restart_message">Para que los cambios en las opciones de parches surtan efecto, es necesario volver a parchear la aplicación</string>
+    <string name="settings_advanced_patch_options_restart_message">Cambiar las opciones de parches requiere volver a parchear la aplicación para que surtan efecto</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">En el modo Experto, las opciones de parches estarán disponibles durante el proceso de parcheo</string>
     <string name="settings_advanced_patch_options_loading">Cargando opciones de parches…</string>
     <string name="settings_advanced_patch_options_waiting_for_source">Esperar hasta que la fuente de parches se actualice</string>
@@ -1149,6 +1152,7 @@ Detalles: %2$s"</string>
     <string name="file_picker_internal_storage">Almacenamiento interno</string>
     <string name="file_picker_sd_card">Tarjeta SD</string>
     <string name="file_picker_root">Raíz (/)</string>
+    <string name="file_picker_storages">Almacenamientos</string>
     <string name="file_picker_sort_name_asc">Nombre (A–Z)</string>
     <string name="file_picker_sort_name_desc">Nombre (Z–A)</string>
     <string name="file_picker_sort_size_desc">Tamaño (más grande primero)</string>

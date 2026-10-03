@@ -259,6 +259,8 @@ Alt som legges til fra denne nettsiden brukes på egen risiko"</string>
     <string name="home_download_instructions_step4_mount">Etter installasjon av den originale APK-filen, gå tilbake til Morphe</string>
     <string name="home_download_instructions_continue_to">Fortsett til %s</string>
     <string name="home_download_instructions_destination">nedlastingssiden</string>
+    <string name="home_download_instructions_copy_link">Kopier lenke</string>
+    <string name="home_download_instructions_link_copied">Linken er kopiert</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Velg nedlastet APK-fil</string>
     <string name="home_file_picker_prompt_description">Velg den &lt;b&gt;%s&lt;/b&gt; APK-filen du nettopp lastet ned</string>
@@ -275,6 +277,7 @@ Alt som legges til fra denne nettsiden brukes på egen risiko"</string>
     <string name="home_installed_app_picker_filter_system">Kun systemapper</string>
     <string name="home_invalid_apk_unreadable">Kunne ikke lese filen. Sjekk at \'Ekstern lagring\' ikke er batteribegrenset</string>
     <string name="home_invalid_apk_not_an_apk">Den valgte filen er ikke en gyldig APK-fil</string>
+    <string name="home_invalid_apk_already_patched">Den valgte APK-en er allerede patchet. Velg den originale appen i stedet</string>
     <string name="home_invalid_apk_io_error">Kunne ikke åpne filen. Prøv igjen</string>
     <string name="home_external_apk_expert_mode_required">Denne funksjonen er bare tilgjengelig i ekspertmodus</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -1149,6 +1152,7 @@ Detaljer: %2$s"</string>
     <string name="file_picker_internal_storage">Intern lagringsplass</string>
     <string name="file_picker_sd_card">SD-kort</string>
     <string name="file_picker_root">Rot (/)</string>
+    <string name="file_picker_storages">Lagringer</string>
     <string name="file_picker_sort_name_asc">Navn (A–Å)</string>
     <string name="file_picker_sort_name_desc">Navn (Å–A)</string>
     <string name="file_picker_sort_size_desc">Størrelse (størst først)</string>

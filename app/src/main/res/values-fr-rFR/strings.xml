@@ -262,6 +262,8 @@ Tout ce que vous ajoutez depuis ce site web est utilisé à vos propres risques"
     <string name="home_download_instructions_step4_mount">Après avoir installé l\'APK d\'origine, revenez sur Morphe</string>
     <string name="home_download_instructions_continue_to">Continuer vers %s</string>
     <string name="home_download_instructions_destination">la page de téléchargement</string>
+    <string name="home_download_instructions_copy_link">Copier le lien</string>
+    <string name="home_download_instructions_link_copied">Lien copié</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Sélectionner l\'APK téléchargé</string>
     <string name="home_file_picker_prompt_description">Sélectionnez le fichier APK &lt;b&gt;%s&lt;/b&gt; que vous venez de télécharger</string>
@@ -278,6 +280,7 @@ Tout ce que vous ajoutez depuis ce site web est utilisé à vos propres risques"
     <string name="home_installed_app_picker_filter_system">Applications système uniquement</string>
     <string name="home_invalid_apk_unreadable">Impossible de lire le fichier. Vérifiez que le \'Stockage externe\' n\'est pas restreint par la batterie</string>
     <string name="home_invalid_apk_not_an_apk">Le fichier sélectionné n\'est pas un APK valide</string>
+    <string name="home_invalid_apk_already_patched">L\'APK sélectionné est déjà patché. Sélectionnez plutôt l\'application originale</string>
     <string name="home_invalid_apk_io_error">Échec de l\'ouverture du fichier. Veuillez réessayer</string>
     <string name="home_external_apk_expert_mode_required">Cette fonctionnalité est uniquement disponible en mode Expert</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -1154,6 +1157,7 @@ Détails : %2$s"</string>
     <string name="file_picker_internal_storage">Stockage interne</string>
     <string name="file_picker_sd_card">Carte SD</string>
     <string name="file_picker_root">Root (/)</string>
+    <string name="file_picker_storages">Stockages</string>
     <string name="file_picker_sort_name_asc">Nom (A–Z)</string>
     <string name="file_picker_sort_name_desc">Nom (Z–A)</string>
     <string name="file_picker_sort_size_desc">Taille (du plus grand au plus petit)</string>

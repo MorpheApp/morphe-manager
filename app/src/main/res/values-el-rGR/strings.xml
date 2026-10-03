@@ -259,6 +259,8 @@
     <string name="home_download_instructions_step4_mount">Μετά την εγκατάσταση του πρωτότυπου APK, επιστρέψτε στο Morphe</string>
     <string name="home_download_instructions_continue_to">Συνεχίστε στη %s</string>
     <string name="home_download_instructions_destination">σελίδα λήψης</string>
+    <string name="home_download_instructions_copy_link">Αντιγραφή συνδέσμου</string>
+    <string name="home_download_instructions_link_copied">Ο σύνδεσμος αντιγράφηκε</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Επιλογή ληφθέντος APK</string>
     <string name="home_file_picker_prompt_description">Επιλέξτε το &lt;b&gt;%s&lt;/b&gt; APK που μόλις ελήφθη</string>
@@ -1149,6 +1151,7 @@ morphe_header_custom_dark.png
     <string name="file_picker_internal_storage">Εσωτερική αποθήκευση</string>
     <string name="file_picker_sd_card">Κάρτα SD</string>
     <string name="file_picker_root">Ρίζα (/)</string>
+    <string name="file_picker_storages">Αποθηκεύσεις</string>
     <string name="file_picker_sort_name_asc">Όνομα (Α–Ω)</string>
     <string name="file_picker_sort_name_desc">Όνομα (Ω–Α)</string>
     <string name="file_picker_sort_size_desc">Μέγεθος (μεγαλύτερο πρώτο)</string>

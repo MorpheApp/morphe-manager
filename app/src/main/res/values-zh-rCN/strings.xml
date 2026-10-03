@@ -259,6 +259,8 @@
     <string name="home_download_instructions_step4_mount">安装原始APK后，返回Morphe</string>
     <string name="home_download_instructions_continue_to">继续前往 %s</string>
     <string name="home_download_instructions_destination">下载页面</string>
+    <string name="home_download_instructions_copy_link">复制链接</string>
+    <string name="home_download_instructions_link_copied">链接已复制</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">选择下载的 APK</string>
     <string name="home_file_picker_prompt_description">选择您刚刚下载的&lt;b&gt;%s&lt;/b&gt; APK 文件</string>
@@ -1149,6 +1151,7 @@ morphe_header_custom_dark.png
     <string name="file_picker_internal_storage">内部存储空间</string>
     <string name="file_picker_sd_card">SD卡</string>
     <string name="file_picker_root">根目录 (/)</string>
+    <string name="file_picker_storages">存储</string>
     <string name="file_picker_sort_name_asc">名称 (A–Z)</string>
     <string name="file_picker_sort_name_desc">名称 (Z–A)</string>
     <string name="file_picker_sort_size_desc">大小 (从大到小)</string>

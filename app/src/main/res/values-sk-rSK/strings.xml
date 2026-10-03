@@ -259,6 +259,8 @@
     <string name="home_download_instructions_step4_mount">Po nainštalovaní pôvodného APK súboru sa vráťte do Morphe</string>
     <string name="home_download_instructions_continue_to">Pokračovať na %s</string>
     <string name="home_download_instructions_destination">stránku na stiahnutie</string>
+    <string name="home_download_instructions_copy_link">Kopírovať odkaz</string>
+    <string name="home_download_instructions_link_copied">Odkaz skopírovaný</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Vyberte stiahnutý APK súbor</string>
     <string name="home_file_picker_prompt_description">Vyberte &lt;b&gt;%s&lt;/b&gt; APK súbor, ktorý ste práve stiahli</string>
@@ -275,6 +277,7 @@
     <string name="home_installed_app_picker_filter_system">Iba systémové aplikácie</string>
     <string name="home_invalid_apk_unreadable">Nepodarilo sa prečítať súbor. Skontrolujte, či \'Externé úložisko\' nie je obmedzené v spotrebe batérie</string>
     <string name="home_invalid_apk_not_an_apk">Vybraný súbor nie je platný APK</string>
+    <string name="home_invalid_apk_already_patched">Vybraný APK je už opatchovaný. Namiesto toho vyberte pôvodnú aplikáciu</string>
     <string name="home_invalid_apk_io_error">Nepodarilo sa otvoriť súbor. Skúste to znova</string>
     <string name="home_external_apk_expert_mode_required">Táto funkcia je dostupná iba v expert móde</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -1149,6 +1152,7 @@ Podrobnosti: %2$s"</string>
     <string name="file_picker_internal_storage">Interná pamäť</string>
     <string name="file_picker_sd_card">SD karta</string>
     <string name="file_picker_root">Koreň (/)</string>
+    <string name="file_picker_storages">Úložiská</string>
     <string name="file_picker_sort_name_asc">Názov (A–Z)</string>
     <string name="file_picker_sort_name_desc">Názov (Z–A)</string>
     <string name="file_picker_sort_size_desc">Veľkosť (najväčšie najprv)</string>

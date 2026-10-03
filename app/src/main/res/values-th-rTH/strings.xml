@@ -259,6 +259,8 @@
     <string name="home_download_instructions_step4_mount">หลังจากติดตั้ง APK ต้นฉบับเสร็จสิ้น กลับมาที่ Morphe</string>
     <string name="home_download_instructions_continue_to">ไปยัง %s</string>
     <string name="home_download_instructions_destination">หน้าดาวน์โหลด</string>
+    <string name="home_download_instructions_copy_link">คัดลอกลิงก์</string>
+    <string name="home_download_instructions_link_copied">คัดลอกลิงก์แล้ว</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">เลือก APK ที่ดาวน์โหลด</string>
     <string name="home_file_picker_prompt_description">เลือกไฟล์ APK &lt;b&gt;%s&lt;/b&gt; ที่คุณดาวน์โหลด</string>
@@ -275,6 +277,7 @@
     <string name="home_installed_app_picker_filter_system">เฉพาะแอปพลิเคชันของระบบ</string>
     <string name="home_invalid_apk_unreadable">ไม่สามารถอ่านไฟล์ได้ โปรดตรวจสอบว่า \'หน่วยความจำภายนอก\' ไม่ได้ถูกจำกัดการใช้แบตเตอรี่</string>
     <string name="home_invalid_apk_not_an_apk">ไฟล์ที่เลือกไม่ใช่ไฟล์ APK ที่ถูกต้อง</string>
+    <string name="home_invalid_apk_already_patched">APK ที่เลือกถูกแพตช์แล้ว โปรดเลือกแอปต้นฉบับแทน</string>
     <string name="home_invalid_apk_io_error">ไม่สามารถเปิดไฟล์ได้ โปรดลองอีกครั้ง</string>
     <string name="home_external_apk_expert_mode_required">คุณสมบัตินี้มีให้ใช้งานเฉพาะในโหมดผู้เชี่ยวชาญเท่านั้น</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -1149,6 +1152,7 @@ morphe_header_custom_dark.png
     <string name="file_picker_internal_storage">หน่วยความจำภายใน</string>
     <string name="file_picker_sd_card">การ์ด SD</string>
     <string name="file_picker_root">รูท (/)</string>
+    <string name="file_picker_storages">ที่เก็บข้อมูล</string>
     <string name="file_picker_sort_name_asc">ชื่อ (A–Z)</string>
     <string name="file_picker_sort_name_desc">ชื่อ (Z–A)</string>
     <string name="file_picker_sort_size_desc">ขนาด (ใหญ่ที่สุดก่อน)</string>

@@ -42,7 +42,7 @@
     <string name="home_update_skipped_metered_subtitle">بيانات الجوّال نشطة</string>
     <string name="home_updating_sources">جارٍ تحديث المصادر…</string>
     <string name="home_update_success">اكتمل تحديث المصادر</string>
-    <string name="home_update_success_subtitle">مصادرك محدثة</string>
+    <string name="home_update_success_subtitle">تم تحديث المصادر</string>
     <string name="home_sources_are_loading">جارٍ تحميل المصادر، يرجى الانتظار…</string>
     <string name="home_search_apps">البحث عن التطبيقات</string>
     <string name="home_app_list_options_title">فرز وتصفية</string>
@@ -259,6 +259,8 @@
     <string name="home_download_instructions_step4_mount">بعد تثبيت ملف APK الأصلي، ارجع إلى Morphe</string>
     <string name="home_download_instructions_continue_to">متابعة إلى %s</string>
     <string name="home_download_instructions_destination">صفحة التنزيل</string>
+    <string name="home_download_instructions_copy_link">نسخ الرابط</string>
+    <string name="home_download_instructions_link_copied">تم نسخ الرابط</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">تحديد ملف APK الذي تم تنزيله</string>
     <string name="home_file_picker_prompt_description">الآن حدد ملف APK &lt;b&gt;%s&lt;/b&gt; الذي قمت بتنزيله للتو</string>
@@ -275,6 +277,7 @@
     <string name="home_installed_app_picker_filter_system">تطبيقات النظام فقط</string>
     <string name="home_invalid_apk_unreadable">⁯لا يمكن قراءة الملف. تحقق من أن \'وحدة التخزين الخارجية\' غير مقيدة بالبطارية</string>
     <string name="home_invalid_apk_not_an_apk">الملف المحدد ليس ملف APK صالحًا</string>
+    <string name="home_invalid_apk_already_patched">ملف APK المحدد تم تعديله بالفعل. يرجى اختيار التطبيق الأصلي بدلًا منه</string>
     <string name="home_invalid_apk_io_error">فشل فتح الملف. الرجاء المحاولة مرة أخرى</string>
     <string name="home_external_apk_expert_mode_required">هذه الميزة متاحة فقط في وضع الخبير</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -1154,6 +1157,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="file_picker_internal_storage">التخزين الداخلي</string>
     <string name="file_picker_sd_card">الذاكرة الخارجية SD</string>
     <string name="file_picker_root">Root (/)</string>
+    <string name="file_picker_storages">التخزين</string>
     <string name="file_picker_sort_name_asc">الاسم (A–Z)</string>
     <string name="file_picker_sort_name_desc">الاسم (Z–A)</string>
     <string name="file_picker_sort_size_desc">الحجم (الأكبر أولًا)</string>

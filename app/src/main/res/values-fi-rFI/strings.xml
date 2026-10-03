@@ -259,6 +259,8 @@ Kaikki mitä lisäät tältä verkkosivustolta, on oma riskisi."</string>
     <string name="home_download_instructions_step4_mount">Kun olet asentanut alkuperäisen APK:n, palaa Morpheen</string>
     <string name="home_download_instructions_continue_to">Jatka %s</string>
     <string name="home_download_instructions_destination">lataussivulle</string>
+    <string name="home_download_instructions_copy_link">Kopioi linkki</string>
+    <string name="home_download_instructions_link_copied">Linkki kopioitu</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Valitse ladattu APK</string>
     <string name="home_file_picker_prompt_description">Valitse juuri lataamasi APK sovellukselle: &lt;b&gt;%s&lt;/b&gt;</string>

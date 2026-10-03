@@ -259,6 +259,8 @@
     <string name="home_download_instructions_step4_mount">원본 APK를 설치한 후에 Morphe로 돌아오세요</string>
     <string name="home_download_instructions_continue_to">%s으로 이동</string>
     <string name="home_download_instructions_destination">다운로드 페이지</string>
+    <string name="home_download_instructions_copy_link">링크 복사</string>
+    <string name="home_download_instructions_link_copied">링크 복사됨</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">다운로드된 APK 선택</string>
     <string name="home_file_picker_prompt_description">방금 다운로드한 &lt;b&gt;%s&lt;/b&gt; APK 파일을 선택하세요</string>
@@ -275,6 +277,7 @@
     <string name="home_installed_app_picker_filter_system">시스템 앱만</string>
     <string name="home_invalid_apk_unreadable">파일을 읽을 수 없습니다. \'외부 저장소\'가 배터리 제한되어 있는지 확인하세요</string>
     <string name="home_invalid_apk_not_an_apk">선택된 파일이 유효한 APK가 아닙니다</string>
+    <string name="home_invalid_apk_already_patched">선택한 APK는 이미 패치되었습니다. 원본 앱을 선택하세요</string>
     <string name="home_invalid_apk_io_error">파일을 열 수 없습니다. 다시 시도하세요</string>
     <string name="home_external_apk_expert_mode_required">이 기능은 전문가 모드에서만 사용할 수 있습니다</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -1147,6 +1150,7 @@ morphe_header_custom_dark.png
     <string name="file_picker_internal_storage">내부 저장소</string>
     <string name="file_picker_sd_card">SD 카드</string>
     <string name="file_picker_root">루트 (/)</string>
+    <string name="file_picker_storages">저장소</string>
     <string name="file_picker_sort_name_asc">이름 (오름차순)</string>
     <string name="file_picker_sort_name_desc">이름 (내림차순)</string>
     <string name="file_picker_sort_size_desc">크기 (큰 순)</string>

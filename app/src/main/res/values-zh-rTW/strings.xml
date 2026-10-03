@@ -259,6 +259,8 @@
     <string name="home_download_instructions_step4_mount">安裝原始 APK 後，回到 Morphe</string>
     <string name="home_download_instructions_continue_to">繼續前往%s</string>
     <string name="home_download_instructions_destination">下載頁面</string>
+    <string name="home_download_instructions_copy_link">複製連結</string>
+    <string name="home_download_instructions_link_copied">連結已複製</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">選取已下載的 APK</string>
     <string name="home_file_picker_prompt_description">選取您剛才下載的 <b>%s</b> APK 檔案</string>
@@ -275,6 +277,7 @@
     <string name="home_installed_app_picker_filter_system">僅限系統應用程式</string>
     <string name="home_invalid_apk_unreadable">無法讀取檔案。請檢查「外部儲存空間」不受電池限制</string>
     <string name="home_invalid_apk_not_an_apk">選取的檔案不是有效的 APK</string>
+    <string name="home_invalid_apk_already_patched">選取的 APK 已修補過。請改選原始應用程式。</string>
     <string name="home_invalid_apk_io_error">無法開啟檔案。請再試一次</string>
     <string name="home_external_apk_expert_mode_required">此功能僅在專家模式中提供</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -1146,6 +1149,7 @@ morphe_header_custom_dark.png
     <string name="file_picker_internal_storage">內部儲存空間</string>
     <string name="file_picker_sd_card">SD 卡</string>
     <string name="file_picker_root">根目錄 (/)</string>
+    <string name="file_picker_storages">儲存空間</string>
     <string name="file_picker_sort_name_asc">名稱 (A–Z)</string>
     <string name="file_picker_sort_name_desc">名稱 (Z–A)</string>
     <string name="file_picker_sort_size_desc">大小 (由大到小)</string>

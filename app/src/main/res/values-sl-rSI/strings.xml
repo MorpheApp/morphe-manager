@@ -259,6 +259,8 @@ Vse, kar dodate s tega spletišča, uporabljate na lastno odgovornost.  "</strin
     <string name="home_download_instructions_step4_mount">Po namestitvi izvirnega APK se vrnite v Morphe</string>
     <string name="home_download_instructions_continue_to">Nadaljujte na %s</string>
     <string name="home_download_instructions_destination">stran za prenos</string>
+    <string name="home_download_instructions_copy_link">Kopiraj povezavo</string>
+    <string name="home_download_instructions_link_copied">Povezava kopirana</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Izberite prenesen APK</string>
     <string name="home_file_picker_prompt_description">Izberite datoteko &lt;b&gt;%s&lt;/b&gt; APK, ki ste jo pravkar prenesli</string>
@@ -275,6 +277,7 @@ Vse, kar dodate s tega spletišča, uporabljate na lastno odgovornost.  "</strin
     <string name="home_installed_app_picker_filter_system">Samo sistemske aplikacije</string>
     <string name="home_invalid_apk_unreadable">Datoteke ni bilo mogoče prebrati. Preverite, ali \'Zunanji pomnilnik\' ni omejen zaradi porabe baterije</string>
     <string name="home_invalid_apk_not_an_apk">Izbrana datoteka ni veljavna datoteka APK</string>
+    <string name="home_invalid_apk_already_patched">Izbrani APK je že zakrpan. Namesto tega izberite originalno aplikacijo</string>
     <string name="home_invalid_apk_io_error">Ni bilo mogoče odpreti datoteke. Poskusite znova</string>
     <string name="home_external_apk_expert_mode_required">Ta funkcija je na voljo samo v strokovnem načinu</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -1149,6 +1152,7 @@ Podrobnosti: %2$s"</string>
     <string name="file_picker_internal_storage">Notranji pomnilnik</string>
     <string name="file_picker_sd_card">SD kartica</string>
     <string name="file_picker_root">Koren (/)</string>
+    <string name="file_picker_storages">Shrambe</string>
     <string name="file_picker_sort_name_asc">Ime (A–Ž)</string>
     <string name="file_picker_sort_name_desc">Ime (Ž–A)</string>
     <string name="file_picker_sort_size_desc">Velikost (največja naprej)</string>

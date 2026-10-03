@@ -259,6 +259,8 @@ Bu veb saytdan əlavə etdiyiniz hər şey öz riskinizlə istifadə olunur"</st
     <string name="home_download_instructions_step4_mount">Əsil APK-nı quraşdırandan sonra, Morphe-yə qayıt</string>
     <string name="home_download_instructions_continue_to">%s ilə davam et</string>
     <string name="home_download_instructions_destination">yükləmə səhifəsi</string>
+    <string name="home_download_instructions_copy_link">Linki köçür</string>
+    <string name="home_download_instructions_link_copied">Link köçürüldü</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Yüklənilmiş APK-nı seç</string>
     <string name="home_file_picker_prompt_description">İndicə yüklədiyiniz &lt;b&gt;%s&lt;/b&gt; APK faylını seçin</string>
@@ -275,6 +277,7 @@ Bu veb saytdan əlavə etdiyiniz hər şey öz riskinizlə istifadə olunur"</st
     <string name="home_installed_app_picker_filter_system">Ancaq sistem tətbiqləri</string>
     <string name="home_invalid_apk_unreadable">Faylı oxumaq mümkün olmadı. \'Xarici Saxlancın\' batareya məhdudiyyətli olmadığını yoxlayın</string>
     <string name="home_invalid_apk_not_an_apk">Seçilən fayl yararlı APK deyil</string>
+    <string name="home_invalid_apk_already_patched">Seçilmiş APK artıq yamaqlanıb. Əvəzinə orijinal tətbiqi seç</string>
     <string name="home_invalid_apk_io_error">Faylı açmaq olmadı. Xahiş olunur, təkrar cəhd et</string>
     <string name="home_external_apk_expert_mode_required">Bu xüsusiyyət yalnız mütəxəssis rejimində əlçatandır</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -1146,6 +1149,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="file_picker_internal_storage">Daxili yaddaş yeri</string>
     <string name="file_picker_sd_card">SD kart</string>
     <string name="file_picker_root">Root (/)</string>
+    <string name="file_picker_storages">Saxlanclar</string>
     <string name="file_picker_sort_name_asc">Ad (A–Z)</string>
     <string name="file_picker_sort_name_desc">Ad (Z–A)</string>
     <string name="file_picker_sort_size_desc">Həcm (əvvəlcə ən çox)</string>

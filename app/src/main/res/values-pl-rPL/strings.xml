@@ -260,6 +260,8 @@ Wszystko, co dodasz z tej strony, używasz na własne ryzyko"</string>
     <string name="home_download_instructions_step4_mount">Po zainstalowaniu oryginalnego pliku APK wróć do Morphe</string>
     <string name="home_download_instructions_continue_to">Przejdź do %s</string>
     <string name="home_download_instructions_destination">strony pobierania</string>
+    <string name="home_download_instructions_copy_link">Skopiuj link</string>
+    <string name="home_download_instructions_link_copied">Skopiowano link</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Wybierz pobrany plik APK</string>
     <string name="home_file_picker_prompt_description">Wybierz pobrany przed chwilą plik APK &lt;b&gt;%s&lt;/b&gt;</string>
@@ -276,6 +278,7 @@ Wszystko, co dodasz z tej strony, używasz na własne ryzyko"</string>
     <string name="home_installed_app_picker_filter_system">Tylko aplikacje systemowe</string>
     <string name="home_invalid_apk_unreadable">Nie udało się odczytać pliku. Sprawdź, czy \"Pamięć zewnętrzna\" nie ma włączonych ograniczeń baterii</string>
     <string name="home_invalid_apk_not_an_apk">Wybrany plik nie jest prawidłowym plikiem APK</string>
+    <string name="home_invalid_apk_already_patched">Wybrany plik APK został już zmodyfikowany. Zamiast tego wybierz oryginalną aplikację</string>
     <string name="home_invalid_apk_io_error">Nie udało się otworzyć pliku. Spróbuj ponownie</string>
     <string name="home_external_apk_expert_mode_required">Ta funkcja jest dostępna tylko w trybie eksperckim</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -1150,6 +1153,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="file_picker_internal_storage">Pamięć wewnętrzna</string>
     <string name="file_picker_sd_card">Karta SD</string>
     <string name="file_picker_root">Katalog główny (/)</string>
+    <string name="file_picker_storages">Nośniki pamięci</string>
     <string name="file_picker_sort_name_asc">Nazwa (A - Z)</string>
     <string name="file_picker_sort_name_desc">Nazwa (Z - A)</string>
     <string name="file_picker_sort_size_desc">Rozmiar (od największego)</string>

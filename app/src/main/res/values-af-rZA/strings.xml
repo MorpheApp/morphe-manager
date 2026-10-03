@@ -259,6 +259,8 @@ Enigiets wat jy van hierdie webwerf byvoeg, word op jou eie risiko gebruik."</st
     <string name="home_download_instructions_step4_mount">Nadat die oorspronklike APK geïnstalleer is, keer terug na Morphe</string>
     <string name="home_download_instructions_continue_to">Gaan voort na %s</string>
     <string name="home_download_instructions_destination">die aflaaibladsy</string>
+    <string name="home_download_instructions_copy_link">Kopieer skakel</string>
+    <string name="home_download_instructions_link_copied">Skakel gekopieer</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Kies afgelaaide APK</string>
     <string name="home_file_picker_prompt_description">Kies die &lt;b&gt;%s&lt;/b&gt; APK-vyl wat jy pas afgelaai het</string>
@@ -1150,6 +1152,7 @@ Besonderhede: %2$s"</string>
     <string name="file_picker_internal_storage">Interne stoorplek</string>
     <string name="file_picker_sd_card">SD-kaart</string>
     <string name="file_picker_root">Root (/)</string>
+    <string name="file_picker_storages">Bergings</string>
     <string name="file_picker_sort_name_asc">Naam (A–Z)</string>
     <string name="file_picker_sort_name_desc">Naam (Z–A)</string>
     <string name="file_picker_sort_size_desc">Grootte (grootste eerst)</string>

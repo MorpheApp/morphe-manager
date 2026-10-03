@@ -259,6 +259,8 @@ Alt, hvad du tilføjer fra denne hjemmeside, bruges på egen risiko."</string>
     <string name="home_download_instructions_step4_mount">Når det originale APK er installeret, vend tilbage til Morphe</string>
     <string name="home_download_instructions_continue_to">Fortsæt til %s</string>
     <string name="home_download_instructions_destination">downloadsiden</string>
+    <string name="home_download_instructions_copy_link">Kopier link</string>
+    <string name="home_download_instructions_link_copied">Link kopieret</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Vælg den downloadede APK</string>
     <string name="home_file_picker_prompt_description">Vælg det &lt;b&gt;%s&lt;/b&gt; APK-fil du lige har downloadet</string>
@@ -275,6 +277,7 @@ Alt, hvad du tilføjer fra denne hjemmeside, bruges på egen risiko."</string>
     <string name="home_installed_app_picker_filter_system">Kun systemapps</string>
     <string name="home_invalid_apk_unreadable">Kunne ikke læse filen. Tjek at \'Ekstern lagerplads\' ikke er batteribegrænset</string>
     <string name="home_invalid_apk_not_an_apk">Den valgte fil er ikke en gyldig APK</string>
+    <string name="home_invalid_apk_already_patched">Den valgte APK er allerede patchet. Vælg den originale app i stedet. Original app henviser til den uændrede applikation.</string>
     <string name="home_invalid_apk_io_error">Kunne ikke åbne filen. Prøv igen</string>
     <string name="home_external_apk_expert_mode_required">Denne funktion er kun tilgængelig i Eksperttilstand</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
