@@ -283,7 +283,7 @@ internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
  */
 @Composable
 fun ExpertPatchingInProgress(
-    progress: Float,
+    progress: () -> Float,
     patchesProgress: Pair<Int, Int>,
     patchProgress: PatchProgressSource,
     packageName: String? = null,
@@ -447,7 +447,7 @@ fun ExpertPatchingInProgress(
  */
 @Composable
 private fun ExpertProgressHeader(
-    progress: Float,
+    progress: () -> Float,
     completed: Int,
     total: Int,
     patchProgress: PatchProgressSource,
@@ -462,6 +462,9 @@ private fun ExpertProgressHeader(
             patchProgress.steps.firstOrNull { it.state == State.RUNNING }
         }
     }
+
+    // The eased progress moves every frame, so only the whole percent is read while composing
+    val percent by remember(progress) { derivedStateOf { (progress() * 100).toInt() } }
 
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -513,7 +516,7 @@ private fun ExpertProgressHeader(
                     }
 
                     StatusBadge(
-                        text = stringResource(R.string.patcher_percentage, (progress * 100).toInt()),
+                        text = stringResource(R.string.patcher_percentage, percent),
                         tone = SemanticTone.Primary
                     )
                 }
@@ -522,7 +525,7 @@ private fun ExpertProgressHeader(
             // The simple mode's wave laid flat, so both modes show progress alike. [progress]
             // arrives already eased by [rememberDisplayedPatchProgress], so it is drawn as is
             WavyProgressBar(
-                progress = { progress },
+                progress = progress,
                 accentColor = accentColor,
                 modifier = Modifier.fillMaxWidth()
             )

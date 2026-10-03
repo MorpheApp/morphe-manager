@@ -466,7 +466,7 @@ fun BatchPatcherScreen(
 
                     if (useExpertMode) {
                         ExpertPatchingInProgress(
-                            progress = displayProgress.value,
+                            progress = { displayProgress.value },
                             patchesProgress = shownRun.patchesProgress,
                             patchProgress = shownRun,
                             packageName = shownPackageName,
@@ -480,7 +480,7 @@ fun BatchPatcherScreen(
                     } else {
                         val longStepWarning by shownRun.showLongStepWarning.collectAsStateWithLifecycle()
                         SimplePatchingInProgress(
-                            progress = displayProgress.value,
+                            progress = { displayProgress.value },
                             patchesProgress = shownRun.patchesProgress,
                             patchProgress = shownRun,
                             packageName = shownPackageName,

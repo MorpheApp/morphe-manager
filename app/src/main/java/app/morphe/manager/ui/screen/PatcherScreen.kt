@@ -541,7 +541,7 @@ private fun PatcherScreenContent(
                 PatcherState.IN_PROGRESS -> {
                     if (useExpertMode) {
                         ExpertPatchingInProgress(
-                            progress = displayProgress.value,
+                            progress = { displayProgress.value },
                             patchesProgress = patchesProgress,
                             patchProgress = patcherViewModel.patchRun,
                             packageName = patcherViewModel.packageName,
@@ -553,7 +553,7 @@ private fun PatcherScreenContent(
                         )
                     } else {
                         SimplePatchingInProgress(
-                            progress = displayProgress.value,
+                            progress = { displayProgress.value },
                             patchesProgress = patchesProgress,
                             patchProgress = patcherViewModel.patchRun,
                             packageName = patcherViewModel.packageName,
