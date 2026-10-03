@@ -31,6 +31,7 @@ import app.morphe.manager.util.PM
 import app.morphe.manager.util.PatchSelection
 import app.morphe.manager.util.PatchSelectionUtils.sanitizeForPatcher
 import app.morphe.manager.util.UpdateNotificationManager
+import app.morphe.manager.util.toast
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -284,6 +285,14 @@ class BatchPatchCoordinator(
         if (current.phase != BatchPhase.PREFLIGHT) return
         if (current.runnable.isEmpty()) return
 
+        val singlePatchActive = runCatching {
+            workManager.getWorkInfosForUniqueWork("PatcherWorker").get().any { !it.state.isFinished }
+        }.getOrDefault(false)
+        if (singlePatchActive) {
+            app.toast(app.getString(R.string.batch_patch_in_progress))
+            return
+        }
+
         runJob?.cancel()
         runJob = scope.launch {
             _state.update { it.copy(phase = BatchPhase.RUNNING) }
@@ -498,7 +507,10 @@ class BatchPatchCoordinator(
             queuePosition = _state.value?.let { it.processed to it.total }
         )
 
-        val workId = workerRepository.launchExpedited<PatcherWorker, PatcherWorker.Args>(args)
+        val workId = workerRepository.launchExpedited<PatcherWorker, PatcherWorker.Args>(
+            input = args,
+            uniqueWorkName = "BatchPatcherWorker"
+        )
         activeWorkId = workId
 
         try {

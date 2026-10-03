@@ -52,6 +52,7 @@ import java.io.File
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
 import kotlin.time.measureTime
+import kotlinx.coroutines.CancellationException
 
 typealias ProgressEventHandler = (name: String?, state: State?, message: String?) -> Unit
 
@@ -254,7 +255,12 @@ class PatcherWorker(
         lateinit var args: Args
         var patchingSucceeded = false
         val result = try {
-            args = workerRepository.claimInput(this)
+            val input = workerRepository.claimInputOrNull(this)
+            if (input == null) {
+                Log.w(tag, "Worker started without registered inputs (likely restarted after process death). Failing gracefully.".logFmt())
+                return Result.failure()
+            }
+            args = input
             queueLabel = args.queuePosition?.let { (done, total) ->
                 applicationContext.getString(
                     R.string.batch_patch_progress_counter,
@@ -556,6 +562,9 @@ class PatcherWorker(
             Result.failure(
                 workDataOf(PROCESS_FAILURE_MESSAGE_KEY to message)
             )
+        } catch (e: CancellationException) {
+            Log.i(tag, "Patching was cancelled by user".logFmt())
+            throw e
         } catch (e: ProcessRuntime.RemoteFailureException) {
             Log.e(
                 tag,
