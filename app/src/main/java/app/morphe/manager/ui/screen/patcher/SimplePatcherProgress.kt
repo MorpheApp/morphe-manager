@@ -45,7 +45,7 @@ private const val PROGRESS_RING_AMPLITUDE = 0.6f
  */
 @Composable
 fun SimplePatchingInProgress(
-    progress: Float,
+    progress: () -> Float,
     patchesProgress: Pair<Int, Int>,
     patchProgress: PatchProgressSource,
     packageName: String? = null,
@@ -116,7 +116,7 @@ fun SimplePatchingInProgress(
 private fun AdaptiveProgressContent(
     windowSize: WindowSize,
     currentMessage: Int,
-    progress: Float,
+    progress: () -> Float,
     completed: Int,
     total: Int,
     accentColor: Color?,
@@ -310,18 +310,21 @@ private fun AnimatedMessage(messageResId: Int) {
  */
 @Composable
 private fun CircularProgressWithStats(
-    progress: Float,
+    progress: () -> Float,
     completed: Int,
     total: Int,
     accentColor: Color?,
     modifier: Modifier = Modifier
 ) {
+    // The eased progress moves every frame, so only the whole percent is read while composing
+    val percent by remember(progress) { derivedStateOf { (progress() * 100).toInt() } }
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
     ) {
         WavyProgressRing(
-            progress = { progress },
+            progress = progress,
             wavelength = ProgressRingWavelength,
             accentColor = accentColor,
             modifier = Modifier.fillMaxSize(),
@@ -335,10 +338,7 @@ private fun CircularProgressWithStats(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = stringResource(
-                    R.string.patcher_percentage,
-                    (progress * 100).toInt()
-                ),
+                text = stringResource(R.string.patcher_percentage, percent),
                 style = MaterialTheme.typography.displayLarge,
                 fontWeight = FontWeight.Bold,
                 fontSize = 56.sp,

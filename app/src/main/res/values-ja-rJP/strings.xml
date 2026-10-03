@@ -259,6 +259,8 @@
     <string name="home_download_instructions_step4_mount">オリジナルの APK をインストール後、 Morphe に戻る</string>
     <string name="home_download_instructions_continue_to">%s へ進む</string>
     <string name="home_download_instructions_destination">ダウンロードページ</string>
+    <string name="home_download_instructions_copy_link">リンクをコピー</string>
+    <string name="home_download_instructions_link_copied">リンクをコピーしました</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">ダウンロードした APK を選択</string>
     <string name="home_file_picker_prompt_description">先ほどダウンロードした &lt;b&gt;%s&lt;/b&gt; の APK ファイルを選択してください</string>
@@ -275,6 +277,7 @@
     <string name="home_installed_app_picker_filter_system">システムアプリのみ</string>
     <string name="home_invalid_apk_unreadable">ファイルを読み込めませんでした。「外部ストレージ」がバッテリー制限の対象になっていないか確認してください</string>
     <string name="home_invalid_apk_not_an_apk">選択されたファイルは有効な APK ではありません</string>
+    <string name="home_invalid_apk_already_patched">選択した APK はすでにパッチが適用されています。代わりに元のアプリを選択してください</string>
     <string name="home_invalid_apk_io_error">ファイルを開けませんでした。もう一度お試しください</string>
     <string name="home_external_apk_expert_mode_required">この機能は、エキスパート モードでのみ利用可能です</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -713,7 +716,7 @@
     <string name="settings_appearance_pure_black">ピュアブラック</string>
     <string name="settings_appearance_pure_black_description">真っ黒な背景を使用します</string>
     <string name="settings_appearance_color_accents">アプリとソースの色</string>
-    <string name="settings_appearance_color_accents_description">アクセントカラーの代わりに、各アプリやソース固有のカラーを使用します</string>
+    <string name="settings_appearance_color_accents_description">アクセント カラーの代わりに、各アプリやソース固有のカラーを使用します</string>
     <string name="settings_appearance_outlines">アウトライン</string>
     <string name="settings_appearance_outlines_description">カード、パネル、ボタンの周囲に細い枠線を描画します</string>
     <!-- Settings - Appearance Tab - Language Selector -->
@@ -1106,7 +1109,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_empty">オリジナルの APK は保存されていません</string>
     <string name="settings_system_original_apks_deleted">オリジナルの APK を削除しました</string>
     <string name="settings_system_original_apks_delete_title">オリジナルの APK を削除しますか？</string>
-    <string name="settings_system_original_apks_delete_notice">新しいAPKを提供しないと、再パッチできなくなります</string>
+    <string name="settings_system_original_apks_delete_notice">新しい APK を提供しない限り、再パッチできなくなります</string>
     <string name="settings_system_original_apks_delete_all_title">オリジナルの APK をすべて削除しますか？</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">パッチ セレクション</string>
@@ -1150,6 +1153,7 @@ morphe_header_custom_dark.png
     <string name="file_picker_internal_storage">内部ストレージ</string>
     <string name="file_picker_sd_card">SD カード</string>
     <string name="file_picker_root">ルート (/)</string>
+    <string name="file_picker_storages">ストレージ</string>
     <string name="file_picker_sort_name_asc">名前（A–Z）</string>
     <string name="file_picker_sort_name_desc">名前（Z–A）</string>
     <string name="file_picker_sort_size_desc">サイズ（大きい順）</string>
@@ -1324,7 +1328,7 @@ morphe_header_custom_dark.png
     <string name="update_completed">アップデートがインストールされました</string>
     <string name="install_update_manager_failed">アップデートのインストールに失敗しました</string>
     <string name="installing_manager_update">アップデートをインストールしています…</string>
-    <string name="installing_manager_update_hint">Morpheはアップデートを完了するために終了します。</string>
+    <string name="installing_manager_update_hint">Morphe はアップデートを完了するために終了します</string>
     <string name="downloading_manager_update">アップデートをダウンロードしています…</string>
     <!-- Shown while downloading when the server does not report the total size. "%1$s" is the megabytes so far. -->
     <string name="manager_update_progress_downloaded">%1$s MB ダウンロード済み</string>

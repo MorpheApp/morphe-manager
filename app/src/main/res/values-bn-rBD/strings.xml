@@ -259,6 +259,8 @@
     <string name="home_download_instructions_step4_mount">APK ইনস্টল করার পর, Morphe-তে ফিরে যান</string>
     <string name="home_download_instructions_continue_to">%s-এ এগিয়ে যান</string>
     <string name="home_download_instructions_destination">ডাউনলোড পেজ</string>
+    <string name="home_download_instructions_copy_link">লিংক কপি করুন</string>
+    <string name="home_download_instructions_link_copied">লিঙ্ক কপি করা হয়েছে</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">নির্বাচিত ডাউনলোডকৃত এপিকে</string>
     <string name="home_file_picker_prompt_description">নির্বাচন করুন যুয়ুশি &lt;b&gt;%s&lt;/b&gt; APK ফাইল, যা তুমি জুয়ুশি ডাউনলোড করেছো</string>

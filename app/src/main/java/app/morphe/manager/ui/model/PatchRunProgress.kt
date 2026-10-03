@@ -20,7 +20,10 @@ import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_USAGE_FIELD_IO_WRI
 import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_USAGE_PREFIX_CURRENT
 import app.morphe.manager.patcher.runtime.process.PatcherProcess.Companion.LOG_PROCESS_PREFIX_PROCESS_HEAP
 import app.morphe.manager.patcher.split.SplitApkPreparer
+import app.morphe.manager.ui.screen.patcher.LogItem
+import app.morphe.manager.ui.screen.patcher.LogItemAccumulator
 import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -40,6 +43,7 @@ data class IoSample(val readKbPerSec: Int, val writeKbPerSec: Int) {
 interface PatchProgressSource {
     val steps: List<Step>
     val logs: List<Pair<LogLevel, String>>
+    val logItems: List<LogItem>
     val heapSamples: List<Int>
     val heapLimitMb: Int
 
@@ -51,6 +55,9 @@ interface PatchProgressSource {
 
     /** Whether this run printed a log that is no longer available to show. */
     val logsLost: Boolean
+
+    /** Cumulative number of log entries recorded during this run. */
+    val totalLogCount: Int get() = logs.size
 }
 
 /**
@@ -68,14 +75,45 @@ class PatchRunProgress(
     splitStepActive: Boolean = false,
     restoredSteps: List<Step>? = null,
     restoredCompletedPatches: Int = 0
-) : PatchProgressSource {
+) : PatchProgressSource, AutoCloseable {
 
     private val appContext: Context = context.applicationContext
 
     override val steps = (restoredSteps ?: generatePatchSteps(context, splitStepActive)).toMutableStateList()
 
-    /** Real-time log entries, collected from the patcher worker. */
+    /** Real-time raw log entries, collected from the patcher worker. Kept intact for export/copying. */
     override val logs = mutableStateListOf<Pair<LogLevel, String>>()
+
+    /** Display log items rendered by the expert log panel. */
+    override val logItems = mutableStateListOf<LogItem>()
+
+    override var totalLogCount by mutableIntStateOf(0)
+        private set
+
+    private val accumulator = LogItemAccumulator(targetList = logItems, maxItems = DISPLAYED_LOG_ITEMS_LIMIT)
+    private val logChannel = Channel<Pair<LogLevel, String>>(Channel.UNLIMITED)
+    private var consumerJob: Job? = null
+
+    init {
+        consumerJob = scope.launch(Dispatchers.Main.immediate) {
+            val buffer = ArrayList<Pair<LogLevel, String>>()
+            try {
+                for (first in logChannel) {
+                    buffer.add(first)
+                    while (true) {
+                        val next = logChannel.tryReceive().getOrNull() ?: break
+                        buffer.add(next)
+                    }
+                    totalLogCount += buffer.size
+                    logs.addAll(buffer)
+                    accumulator.appendAll(buffer)
+                    buffer.clear()
+                }
+            } catch (_: CancellationException) {
+                // Cancelled when run finishes or closes
+            }
+        }
+    }
 
     /**
      * The log of a run that was interrupted by process death is gone: it only ever lived in
@@ -182,6 +220,9 @@ class PatchRunProgress(
             ioSamples.clear()
             cpuCoreLoads = emptyList()
             _showLongStepWarning.value = false
+            accumulator.reset()
+            totalLogCount = logs.size
+            accumulator.appendAll(logs)
         }
     }
 
@@ -319,7 +360,7 @@ class PatchRunProgress(
 
         if (level == LogLevel.TRACE) return
 
-        scope.launch(Dispatchers.Main) { logs.add(level to message) }
+        logChannel.trySend(level to message)
     }
 
     private fun addSplitStep() {
@@ -360,9 +401,19 @@ class PatchRunProgress(
         }
     }
 
+    /** Closes background log consuming coroutines and channels when the run finishes. */
+    fun finish() {
+        stopStallWatch()
+        logChannel.close()
+        consumerJob?.cancel()
+    }
+
+    override fun close() = finish()
+
     private companion object {
         const val SAMPLE_HISTORY_LIMIT = 60
         const val STALL_THRESHOLD_MS = 60_000L
+        const val DISPLAYED_LOG_ITEMS_LIMIT = 2000
 
         fun LogLevel.androidLog(msg: String) = when (this) {
             LogLevel.TRACE -> Log.v(TAG, msg)

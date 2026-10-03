@@ -260,6 +260,8 @@ Sve što dodate s ove web stranice koristite na vlastitu odgovornost."</string>
     <string name="home_download_instructions_step4_mount">Nakon instaliranja originalne aplikacije, vrati se u Morphe</string>
     <string name="home_download_instructions_continue_to">Nastavite na %s</string>
     <string name="home_download_instructions_destination">stranicu preuzimanja</string>
+    <string name="home_download_instructions_copy_link">Kopiraj poveznicu</string>
+    <string name="home_download_instructions_link_copied">Poveznica kopirana</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Odaberite preuzetu aplikaciju</string>
     <string name="home_file_picker_prompt_description">Odaberite &lt;b&gt;%s&lt;/b&gt; aplikaciju koju ste upravo preuzeli</string>
@@ -278,6 +280,7 @@ Sve što dodate s ove web stranice koristite na vlastitu odgovornost."</string>
     <string name="home_installed_app_picker_filter_system">Samo aplikacije sustava</string>
     <string name="home_invalid_apk_unreadable">Nije moguće pročitati datoteku. Provjerite je li \'Vanjska pohrana\' ograničena baterijom</string>
     <string name="home_invalid_apk_not_an_apk">Odabrana datoteka nije valjani APK</string>
+    <string name="home_invalid_apk_already_patched">Odabrani APK je već zakrpan. Odaberite originalnu aplikaciju umjesto toga</string>
     <string name="home_invalid_apk_io_error">Nije moguće otvoriti datoteku. Molimo pokušajte ponovo</string>
     <string name="home_external_apk_expert_mode_required">Ova je značajka dostupna samo u načinu rada za stručnjake</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->

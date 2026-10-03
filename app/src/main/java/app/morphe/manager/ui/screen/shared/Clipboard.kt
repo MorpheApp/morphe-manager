@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import app.morphe.manager.R
 import app.morphe.manager.util.toast
+import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.launch
 
 /**
@@ -35,7 +36,9 @@ fun rememberCopyToClipboard(
     val scope = rememberCoroutineScope()
     return remember(context, clipboard, scope, confirmation) {
         { text ->
-            scope.launch {
+            // Started in place, as the Android clipboard writes without suspending: a click that
+            // also closes the screen would otherwise cancel the scope before the copy is made
+            scope.launch(start = CoroutineStart.UNDISPATCHED) {
                 clipboard.setClipEntry(ClipEntry(ClipData.newPlainText(null, text)))
                 context.toast(confirmation)
             }

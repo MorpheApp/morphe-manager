@@ -259,6 +259,8 @@ Allt sem þú bætir við frá þessari vefsíðu er notað á eigin ábyrgð."<
     <string name="home_download_instructions_step4_mount">Eftir að setja upp upprunalega APK-skrána, farðu aftur til Morphe</string>
     <string name="home_download_instructions_continue_to">Halda áfram til %s</string>
     <string name="home_download_instructions_destination">niðurhalssíðan</string>
+    <string name="home_download_instructions_copy_link">Afrita tengil</string>
+    <string name="home_download_instructions_link_copied">Tengill afritaður</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Velja skrá</string>
     <string name="home_file_picker_prompt_description">Veldu &lt;b&gt;%s&lt;/b&gt; APK skrána sem þú hlaðið niður</string>
@@ -275,6 +277,7 @@ Allt sem þú bætir við frá þessari vefsíðu er notað á eigin ábyrgð."<
     <string name="home_installed_app_picker_filter_system">Aðeins kerfisforrit</string>
     <string name="home_invalid_apk_unreadable">Gat ekki lesið skrána. Athyglið að „Utanlandsgagnagáfa“ er ekki takmarkað af rafhlöðu</string>
     <string name="home_invalid_apk_not_an_apk">Valda skráin er ekki gilt APk</string>
+    <string name="home_invalid_apk_already_patched">Valið APK er þegar plástrað. Veldu upprunalega appið í staðinn</string>
     <string name="home_invalid_apk_io_error">Gat ekki opnað skrána. Reyndu aftur</string>
     <string name="home_external_apk_expert_mode_required">Þessi eiginleiki er eingöngu fáanlegur á sérfærnisstillingu</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -1144,6 +1147,7 @@ Nánari upplýsingar: %2$s"</string>
     <string name="file_picker_internal_storage">Innri geymsla</string>
     <string name="file_picker_sd_card">SD kort</string>
     <string name="file_picker_root">Root (/)</string>
+    <string name="file_picker_storages">Geymslur</string>
     <string name="file_picker_sort_name_asc">Nafn (A–Ö)</string>
     <string name="file_picker_sort_name_desc">Nafn (Ö–A)</string>
     <string name="file_picker_sort_size_desc">Stærð (störra fyrst)</string>

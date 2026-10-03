@@ -259,6 +259,8 @@
     <string name="home_download_instructions_step4_mount">Tar éis an APK bunaidh a shuiteáil, téigh ar ais chuig Morphe</string>
     <string name="home_download_instructions_continue_to">Lean ar aghaidh go %s</string>
     <string name="home_download_instructions_destination">an leathanach íoslódála</string>
+    <string name="home_download_instructions_copy_link">Cóipeáil nasc</string>
+    <string name="home_download_instructions_link_copied">Nasc cóipeáilte</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Roghnaigh APK íoslódáilte</string>
     <string name="home_file_picker_prompt_description">Roghnaigh an comhad &lt;b&gt;%s&lt;/b&gt; APK a d’íoslódálais tú díreach</string>
@@ -275,6 +277,7 @@
     <string name="home_installed_app_picker_filter_system">Aipeanna córais amháin</string>
     <string name="home_invalid_apk_unreadable">Níorbh fhéidir an comhad a léamh. Seiceáil nach bhfuil srian ceallraí ar \'Stóráil Sheachtrach\'</string>
     <string name="home_invalid_apk_not_an_apk">Ní APK bailí an comhad roghnaithe</string>
+    <string name="home_invalid_apk_already_patched">Tá an APK roghnaithe paisteáilte cheana féin. Roghnaigh an aip bhunaidh ina ionad</string>
     <string name="home_invalid_apk_io_error">Theip ar an gcomhad a oscailt. Déan iarracht arís.</string>
     <string name="home_external_apk_expert_mode_required">Níl an ghné seo ar fáil ach amháin i mód Saineolaí</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -1147,6 +1150,7 @@ Sonraí: %2$s"</string>
     <string name="file_picker_internal_storage">Stóráil inmheánach</string>
     <string name="file_picker_sd_card">Cárta SD</string>
     <string name="file_picker_root">Fréamh (/)</string>
+    <string name="file_picker_storages">Stórais</string>
     <string name="file_picker_sort_name_asc">Ainm (A–Z)</string>
     <string name="file_picker_sort_name_desc">Ainm (Z–A)</string>
     <string name="file_picker_sort_size_desc">Méid (an ceann is mó ar dtús)</string>

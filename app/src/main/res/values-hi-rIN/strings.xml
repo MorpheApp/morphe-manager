@@ -259,6 +259,8 @@
     <string name="home_download_instructions_step4_mount">अपने APK को इंस्टॉल करने के बाद, वापस मॉर्फ पर जाएं</string>
     <string name="home_download_instructions_continue_to">%s पर आगे बढ़ें</string>
     <string name="home_download_instructions_destination">डाउनलोड पेज</string>
+    <string name="home_download_instructions_copy_link">लिंक कॉपी करें</string>
+    <string name="home_download_instructions_link_copied">लिंक कॉपी हो गया</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">चयनित डाउनलोड एपीके</string>
     <string name="home_file_picker_prompt_description">अपना डाउनलोड की गई &lt;b&gt;b>%s&lt;b&gt;/b> APK फ़ाइल चुनें</string>
@@ -275,6 +277,7 @@
     <string name="home_installed_app_picker_filter_system">केवल सिस्टम ऐप</string>
     <string name="home_invalid_apk_unreadable">फ़ाइल पढ़ने में असमर्थ। जाँच करें कि \'External Storage\' बैटरी द्वारा प्रतिबंधित तो नहीं है</string>
     <string name="home_invalid_apk_not_an_apk">चयनित फ़ाइल एक वैध APK नहीं है</string>
+    <string name="home_invalid_apk_already_patched">चयनित APK पहले से ही पैच किया हुआ है। इसके बजाय मूल ऐप चुनें</string>
     <string name="home_invalid_apk_io_error">फ़ाइल खोलने में विफल। कृपया फिर से प्रयास करें</string>
     <string name="home_external_apk_expert_mode_required">यह सुविधा केवल विशेषज्ञ मोड में उपलब्ध है</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -1149,6 +1152,7 @@ morphe_header_custom_dark.png
     <string name="file_picker_internal_storage">आंतरिक संग्रहण</string>
     <string name="file_picker_sd_card">एसडी कार्ड</string>
     <string name="file_picker_root">रूट (/)</string>
+    <string name="file_picker_storages">स्टोरेज</string>
     <string name="file_picker_sort_name_asc">नाम (अ–ज़)</string>
     <string name="file_picker_sort_name_desc">नाम (ज़–अ)</string>
     <string name="file_picker_sort_size_desc">आकार (सबसे बड़ा पहले)</string>

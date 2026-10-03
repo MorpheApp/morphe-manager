@@ -259,6 +259,8 @@ Segala sesuatu yang Anda tambahkan dari situs web ini digunakan atas risiko Anda
     <string name="home_download_instructions_step4_mount">Setelah memasang APK asli, kembali ke Morphe</string>
     <string name="home_download_instructions_continue_to">Lanjutkan ke %s</string>
     <string name="home_download_instructions_destination">halaman unduh</string>
+    <string name="home_download_instructions_copy_link">Salin tautan</string>
+    <string name="home_download_instructions_link_copied">Tautan disalin</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Pilih APK yang telah diunduh</string>
     <string name="home_file_picker_prompt_description">Pilih berkas APK &lt;b&gt;%s&lt;/b&gt; yang baru saja Anda unduh</string>
@@ -275,6 +277,7 @@ Segala sesuatu yang Anda tambahkan dari situs web ini digunakan atas risiko Anda
     <string name="home_installed_app_picker_filter_system">Hanya aplikasi sistem</string>
     <string name="home_invalid_apk_unreadable">Tidak dapat membaca berkas. Periksa apakah \'Penyimpanan Eksternal\' tidak dibatasi baterai</string>
     <string name="home_invalid_apk_not_an_apk">Berkas yang dipilih bukan APK yang sah</string>
+    <string name="home_invalid_apk_already_patched">APK yang dipilih sudah di-patch. Pilih aplikasi asli sebagai gantinya</string>
     <string name="home_invalid_apk_io_error">Gagal membuka berkas. Silakan coba lagi</string>
     <string name="home_external_apk_expert_mode_required">Fitur ini hanya tersedia dalam Mode Ahli</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -1150,6 +1153,7 @@ Rincian: %2$s"</string>
     <string name="file_picker_internal_storage">Memori internal</string>
     <string name="file_picker_sd_card">Kartu SD</string>
     <string name="file_picker_root">Root (/)</string>
+    <string name="file_picker_storages">Penyimpanan</string>
     <string name="file_picker_sort_name_asc">Nama (A–Z)</string>
     <string name="file_picker_sort_name_desc">Nama (Z–A)</string>
     <string name="file_picker_sort_size_desc">Ukuran (terbesar dahulu)</string>

@@ -259,6 +259,8 @@
     <string name="home_download_instructions_step4_mount">Після встановлення оригінального APK, поверніться до Morphe</string>
     <string name="home_download_instructions_continue_to">Продовжити на %s</string>
     <string name="home_download_instructions_destination">сторінці завантаження</string>
+    <string name="home_download_instructions_copy_link">Копіювати посилання</string>
+    <string name="home_download_instructions_link_copied">Посилання скопійовано</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Вибрати завантажений APK файл</string>
     <string name="home_file_picker_prompt_description">Виберіть APK файл &lt;b&gt;%s&lt;/b&gt;, який ви щойно завантажили</string>
@@ -275,6 +277,7 @@
     <string name="home_installed_app_picker_filter_system">Лише системні застосунки</string>
     <string name="home_invalid_apk_unreadable">Не вдалося прочитати файл. Перевірте, чи не обмежено використання батареї для \"Зовнішньої пам’яті\"</string>
     <string name="home_invalid_apk_not_an_apk">Вибраний файл не є дійсним APK</string>
+    <string name="home_invalid_apk_already_patched">Вибраний APK уже пропатчено. Виберіть замість нього оригінальний застосунок</string>
     <string name="home_invalid_apk_io_error">Не вдалося відкрити файл. Будь ласка, спробуйте ще раз</string>
     <string name="home_external_apk_expert_mode_required">Ця функція доступна лише в режимі Експерта</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -1149,6 +1152,7 @@ morphe_header_custom_dark.png
     <string name="file_picker_internal_storage">Внутрішнє сховище</string>
     <string name="file_picker_sd_card">SD-карта</string>
     <string name="file_picker_root">Корінь (/)</string>
+    <string name="file_picker_storages">Сховища</string>
     <string name="file_picker_sort_name_asc">Назва (А–Я)</string>
     <string name="file_picker_sort_name_desc">Назва (Я–А)</string>
     <string name="file_picker_sort_size_desc">Розмір (спочатку більші)</string>

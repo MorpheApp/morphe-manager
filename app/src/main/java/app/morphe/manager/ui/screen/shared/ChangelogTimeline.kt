@@ -6,6 +6,7 @@
 package app.morphe.manager.ui.screen.shared
 
 import android.text.format.DateUtils
+import androidx.annotation.PluralsRes
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
@@ -384,8 +385,7 @@ fun ChangelogUpdateSummary(
     val sections = remember(entries) {
         entries.flatMap { ChangelogParser.sections(it.content) }
     }
-    val features = sections.countOf(ChangelogSection.Kind.FEATURES)
-    val fixes = sections.countOf(ChangelogSection.Kind.FIXES)
+    val counts = remember(sections) { changeCounts(sections) }
 
     SectionCard(modifier = modifier.fillMaxWidth()) {
         Column(
@@ -421,9 +421,9 @@ fun ChangelogUpdateSummary(
                 textAlign = TextAlign.Center
             )
 
-            if (features > 0 || fixes > 0) {
-                // Pills take the width their text needs, and a pair too wide for one line wraps
-                // instead of shortening either
+            if (counts.isNotEmpty()) {
+                // Pills take the width their text needs, and a row too wide for one line wraps
+                // instead of shortening any of them
                 FlowRow(
                     horizontalArrangement = Arrangement.spacedBy(
                         Defaults.ContentPaddingSmall,
@@ -431,16 +431,10 @@ fun ChangelogUpdateSummary(
                     ),
                     verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
                 ) {
-                    if (features > 0) {
+                    counts.forEach { count ->
                         SummaryPill(
-                            text = pluralStringResource(R.plurals.changelog_new_count, features, features.toString()),
-                            style = sectionStyleOf(ChangelogSection.Kind.FEATURES, title = null)
-                        )
-                    }
-                    if (fixes > 0) {
-                        SummaryPill(
-                            text = pluralStringResource(R.plurals.changelog_fix_count, fixes, fixes.toString()),
-                            style = sectionStyleOf(ChangelogSection.Kind.FIXES, title = null)
+                            text = count.label(),
+                            style = sectionStyleOf(count.kind, title = null)
                         )
                     }
                 }
@@ -717,27 +711,43 @@ private fun sectionStyleOf(kind: ChangelogSection.Kind, title: String?): Section
     )
 }
 
-/** When the release came out, then how many features and fixes it brought. */
+/** When the release came out, then how many changes of each counted kind it brought. */
 @Composable
 private fun releaseSummary(date: String?, sections: List<ChangelogSection>): String? {
     val locale = LocalConfiguration.current.locales[0]
     val released = remember(date, locale) { date?.let { formatReleaseDate(it, locale) } }
 
-    val features = sections.countOf(ChangelogSection.Kind.FEATURES)
-    val fixes = sections.countOf(ChangelogSection.Kind.FIXES)
+    val counts = remember(sections) { changeCounts(sections) }
     val total = sections.sumOf { it.changeCount }
 
-    val parts = listOfNotNull(
-        released,
-        if (features > 0) pluralStringResource(R.plurals.changelog_new_count, features, features.toString()) else null,
-        if (fixes > 0) pluralStringResource(R.plurals.changelog_fix_count, fixes, fixes.toString()) else null,
-        // Releases with neither still say how much they hold
-        if (features == 0 && fixes == 0 && total > 0) {
-            pluralStringResource(R.plurals.changelog_change_count, total, total.toString())
-        } else null
-    )
+    val parts = buildList {
+        released?.let(::add)
+        counts.forEach { add(it.label()) }
+        // Releases with none of the counted kinds still say how much they hold
+        if (counts.isEmpty() && total > 0) {
+            add(pluralStringResource(R.plurals.changelog_change_count, total, total.toString()))
+        }
+    }
     return parts.joinToString(" · ").ifEmpty { null }
 }
+
+/** Number of changes of a kind the summaries count, with the plural that names it. */
+private class ChangeCount(val kind: ChangelogSection.Kind, @param:PluralsRes val plural: Int, val count: Int)
+
+@Composable
+private fun ChangeCount.label(): String = pluralStringResource(plural, count, count.toString())
+
+/** The kinds worth a count of their own, in the order the summaries list them. */
+private val CountedKinds = listOf(
+    ChangelogSection.Kind.FEATURES to R.plurals.changelog_feature_count,
+    ChangelogSection.Kind.FIXES to R.plurals.changelog_fix_count,
+    ChangelogSection.Kind.PERFORMANCE to R.plurals.changelog_performance_count
+)
+
+private fun changeCounts(sections: List<ChangelogSection>): List<ChangeCount> =
+    CountedKinds.mapNotNull { (kind, plural) ->
+        sections.countOf(kind).takeIf { it > 0 }?.let { ChangeCount(kind, plural, it) }
+    }
 
 /** A recent release as "2 days ago", an older one as a date in the app language. */
 private fun formatReleaseDate(date: String, locale: Locale): String {

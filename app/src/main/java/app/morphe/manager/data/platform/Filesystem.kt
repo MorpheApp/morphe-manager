@@ -10,9 +10,11 @@ import android.util.Log
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import app.morphe.manager.BuildConfig
+import app.morphe.manager.util.AppCoroutineScope
 import app.morphe.manager.util.FilenameUtils
 import app.morphe.manager.util.RequestManageStorageContract
 import app.morphe.manager.util.formatBytesForReport
+import app.morphe.manager.util.purgeDirectoryAsync
 import java.io.File
 
 private const val TAG = "Morphe Filesystem"
@@ -20,7 +22,10 @@ private const val TAG = "Morphe Filesystem"
 // Name prefix of the directory the patcher extracts a bundle's DEX into under java.io.tmpdir
 private const val LEAKED_BUNDLE_DEX_PREFIX = "morphe-extracted-patches"
 
-class Filesystem(private val app: Application) {
+class Filesystem(
+    private val app: Application,
+    private val appScope: AppCoroutineScope
+) {
     /**
      * Kept in `noBackupFilesDir` so neither an OS cache wipe, nor the user-initiated
      * "Clear patcher workspace" action, nor a restored backup carries it along.
@@ -47,9 +52,8 @@ class Filesystem(private val app: Application) {
      * A directory that gets cleared when the app restarts.
      * Do not store paths to this directory in a parcel.
      */
-    val tempDir: File = app.getDir("ephemeral", Context.MODE_PRIVATE).apply {
-        deleteRecursively()
-        mkdirs()
+    val tempDir: File = app.getDir("ephemeral", Context.MODE_PRIVATE).also {
+        it.purgeDirectoryAsync(appScope)
     }
 
     /**

@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material.icons.filled.Download
+import androidx.compose.material.icons.outlined.ContentCopy
 import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material.icons.outlined.SaveAlt
 import androidx.compose.material.icons.outlined.Warning
@@ -29,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -226,6 +228,8 @@ private fun ApkDownloadSource.instructionSteps(
  * @param requestedVersion Version the APK has to be. Null when any version can be patched.
  * @param downloadColor App accent color, which APKMirror tints its download button with.
  * @param isApkBundle Whether the bundle requires a split archive, which APKMirror labels differently.
+ * @param onContinue Moves on to picking the downloaded file once the link is handed off, given how
+ * to hand it off. That returns false when the link could not be passed on.
  */
 @Composable
 internal fun DownloadInstructionsDialog(
@@ -239,8 +243,15 @@ internal fun DownloadInstructionsDialog(
     isApkBundle: Boolean,
     onDismiss: () -> Unit,
     onOpenApkDownloadHelper: (() -> Unit)? = null,
-    onContinue: () -> Unit
+    onContinue: (handOff: (String) -> Boolean) -> Unit
 ) {
+    val uriHandler = LocalUriHandler.current
+    val copyToClipboard = rememberCopyToClipboard(stringResource(R.string.home_download_instructions_link_copied))
+    val openLink = { onContinue { url -> runCatching { uriHandler.openUri(url) }.isSuccess } }
+    // A copied link is opened in another browser or a download manager, and the file it fetches
+    // comes back through the same picker an opened one leads to
+    val copyLink = { onContinue { url -> copyToClipboard(url); true } }
+
     // Never falls back to unresolved once the destination is known, so the instructions stay
     // put while the dialog animates out and the pending download data is already cleared
     var source by remember { mutableStateOf<ApkDownloadSource>(ApkDownloadSource.Unresolved) }
@@ -273,27 +284,32 @@ internal fun DownloadInstructionsDialog(
         // What the steps fetch, since the dialog before this one named it and is gone by now
         description = listOfNotNull(appName, requestedVersion?.withVersionPrefix()).joinToString(" · "),
         footer = {
-            if (offersHelper) {
-                AppDialogButtonRow(
-                    primaryText = continueText,
-                    onPrimaryClick = onContinue,
-                    primaryIcon = Icons.AutoMirrored.Outlined.OpenInNew,
-                    primaryEnabled = !resolving,
-                    secondaryText = stringResource(R.string.home_apk_helper_download),
-                    // Nothing to open once the action is withdrawn, which is only the case
-                    // while the dialog is on its way out
-                    onSecondaryClick = { onOpenApkDownloadHelper?.invoke() },
-                    secondaryIcon = Icons.Outlined.Download
+            AppDialogActions(
+                actions = listOfNotNull(
+                    DialogAction(
+                        text = continueText,
+                        onClick = openLink,
+                        icon = Icons.AutoMirrored.Outlined.OpenInNew,
+                        enabled = !resolving
+                    ),
+                    if (offersHelper) {
+                        DialogAction(
+                            text = stringResource(R.string.home_apk_helper_download),
+                            // Nothing to open once the action is withdrawn, which is only the case
+                            // while the dialog is on its way out
+                            onClick = { onOpenApkDownloadHelper?.invoke() },
+                            icon = Icons.Outlined.Download
+                        )
+                    } else null,
+                    DialogAction(
+                        text = stringResource(R.string.home_download_instructions_copy_link),
+                        onClick = copyLink,
+                        icon = Icons.Outlined.ContentCopy,
+                        // The unfollowed link is no more fit to copy than to open
+                        enabled = !resolving
+                    )
                 )
-            } else {
-                AppDialogButton(
-                    text = continueText,
-                    onClick = onContinue,
-                    icon = Icons.AutoMirrored.Outlined.OpenInNew,
-                    enabled = !resolving,
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
+            )
         }
     ) {
         // Waiting shows as waiting rather than as instructions that rewrite themselves once

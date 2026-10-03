@@ -74,9 +74,10 @@ internal data class CachedHome(
      */
     fun toState(installedApps: List<InstalledApp>, prefs: HomePrefs): HomeAppState {
         val records = installedApps.associateBy { it.currentPackageName }
+        // Cards are keyed by id on screen, and a file kept by an older build can repeat one
         return HomeAppState(
-            visible = visible.map { it.toItem(records) },
-            hidden = hidden.map { it.toItem(records) },
+            visible = visible.distinctBy { it.id }.map { it.toItem(records) },
+            hidden = hidden.distinctBy { it.id }.map { it.toItem(records) },
             sortMode = prefs.sortMode,
             categoryState = prefs.categoryState,
             categoryViewMode = prefs.categoryViewMode,

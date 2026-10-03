@@ -56,6 +56,18 @@ internal fun moveIntoPlace(source: File, target: File) {
     }
 }
 
+/**
+ * Retains [source] as the original APK at [target]. Ephemeral inputs are moved directly into
+ * place to avoid rewriting the file, while non-temporary inputs are copied through staging.
+ */
+internal fun retainOriginalApk(source: File, target: File, moveSource: Boolean) {
+    // Copy file if source is different, and move it into place only once written in full
+    if (source != target) {
+        if (moveSource) moveIntoPlace(source, target)
+        else copyThroughStaging(source, target)
+    }
+}
+
 class OriginalApkRepository(
     db: AppDatabase,
     fs: Filesystem,
@@ -91,16 +103,11 @@ class OriginalApkRepository(
         val safePackage = FilenameUtils.sanitize(packageName)
         val safeVersion = FilenameUtils.sanitize(version.ifBlank { "unspecified" })
         val targetFile = originalApksDir.resolve("${safePackage}_${safeVersion}_original.apk")
-        val copies = sourceFile != targetFile
 
         try {
             val existing = dao.get(packageName)
 
-            // Copy file if source is different, and move it into place only once written in full
-            if (copies) {
-                if (moveSource) moveIntoPlace(sourceFile, targetFile)
-                else copyThroughStaging(sourceFile, targetFile)
-            }
+            retainOriginalApk(sourceFile, targetFile, moveSource)
 
             // Save to database
             val originalApk = OriginalApk(

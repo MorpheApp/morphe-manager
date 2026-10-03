@@ -78,4 +78,37 @@ class OriginalApkStagingTest {
         assertTrue(!target.exists())
         assertTrue(stagedCopies().isEmpty())
     }
+
+    @Test
+    fun `temporary input moves the file into place and leaves no file at its old path`() {
+        val temporarySource = dir.resolve("temporary.apk").apply { writeText("temporary archive") }
+
+        retainOriginalApk(temporarySource, target, moveSource = true)
+
+        assertEquals("temporary archive", target.readText())
+        assertFalse(temporarySource.exists())
+        assertTrue(stagedCopies().isEmpty())
+    }
+
+    @Test
+    fun `non-temporary input copies through staging and preserves the source file intact`() {
+        val persistentSource = dir.resolve("user_picked.apk").apply { writeText("persistent archive") }
+
+        retainOriginalApk(persistentSource, target, moveSource = false)
+
+        assertEquals("persistent archive", target.readText())
+        assertTrue(persistentSource.exists())
+        assertEquals("persistent archive", persistentSource.readText())
+        assertTrue(stagedCopies().isEmpty())
+    }
+
+    @Test
+    fun `retention does nothing when source is already at target path`() {
+        target.writeText("existing archive")
+
+        retainOriginalApk(target, target, moveSource = true)
+
+        assertEquals("existing archive", target.readText())
+        assertTrue(stagedCopies().isEmpty())
+    }
 }

@@ -73,6 +73,11 @@ fun MeshBackground(
         }
     }
 
+    // One path and stroke for every triangle: a fresh pair per cell per frame is hundreds of
+    // native allocations a second
+    val trianglePath = remember { Path() }
+    val stroke = remember { Stroke(width = 3.5f) }
+
     Canvas(modifier = modifier.fillMaxSize()) {
         val width  = size.width
         val height = size.height
@@ -165,16 +170,16 @@ fun MeshBackground(
 
             val alpha = 0.14f + node.baseDepth * 0.05f
 
+            val drawColor = color.copy(alpha = alpha)
+
             // Draw first triangle
-            drawPath(
-                Path().apply { moveTo(p1.x, p1.y); lineTo(p2.x, p2.y); lineTo(p3.x, p3.y); close() },
-                color.copy(alpha = alpha), style = Stroke(width = 3.5f)
-            )
+            trianglePath.reset()
+            trianglePath.moveTo(p1.x, p1.y); trianglePath.lineTo(p2.x, p2.y); trianglePath.lineTo(p3.x, p3.y); trianglePath.close()
+            drawPath(trianglePath, drawColor, style = stroke)
             // Draw second triangle
-            drawPath(
-                Path().apply { moveTo(p2.x, p2.y); lineTo(p4.x, p4.y); lineTo(p3.x, p3.y); close() },
-                color.copy(alpha = alpha), style = Stroke(width = 3.5f)
-            )
+            trianglePath.reset()
+            trianglePath.moveTo(p2.x, p2.y); trianglePath.lineTo(p4.x, p4.y); trianglePath.lineTo(p3.x, p3.y); trianglePath.close()
+            drawPath(trianglePath, drawColor, style = stroke)
         }
     }
 }

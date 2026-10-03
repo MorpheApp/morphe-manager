@@ -266,6 +266,8 @@ Anything you add from this website is used at your own risk"</string>
     <string name="home_download_instructions_step4_mount">After installing the original APK, return to Morphe</string>
     <string name="home_download_instructions_continue_to">Continue to %s</string>
     <string name="home_download_instructions_destination">the download page</string>
+    <string name="home_download_instructions_copy_link">Copy link</string>
+    <string name="home_download_instructions_link_copied">Link copied</string>
 
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Select downloaded APK</string>
@@ -283,6 +285,7 @@ Anything you add from this website is used at your own risk"</string>
     <string name="home_installed_app_picker_filter_system">System apps only</string>
     <string name="home_invalid_apk_unreadable">Could not read the file. Check that \'External Storage\' is not battery restricted</string>
     <string name="home_invalid_apk_not_an_apk">The selected file is not a valid APK</string>
+    <string name="home_invalid_apk_already_patched">The selected APK is already patched. Select the original app instead</string>
     <string name="home_invalid_apk_io_error">Failed to open the file. Please try again</string>
     <string name="home_external_apk_expert_mode_required">This feature is only available in Expert mode</string>
 
@@ -381,6 +384,7 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="adaptive_icon_create">Create adaptive icon</string>
     <string name="adaptive_icon_select_image">Select image</string>
     <string name="adaptive_icon_change_image">Change image</string>
+    <string name="image_load_failed">Couldn\'t load this image</string>
     <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
     <string name="adaptive_icon_foreground">Foreground image</string>
     <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
@@ -1233,6 +1237,7 @@ Details: %2$s"</string>
     <string name="file_picker_internal_storage">Internal storage</string>
     <string name="file_picker_sd_card">SD card</string>
     <string name="file_picker_root">Root (/)</string>
+    <string name="file_picker_storages">Storages</string>
     <string name="file_picker_sort_name_asc">Name (A–Z)</string>
     <string name="file_picker_sort_name_desc">Name (Z–A)</string>
     <string name="file_picker_sort_size_desc">Size (largest first)</string>

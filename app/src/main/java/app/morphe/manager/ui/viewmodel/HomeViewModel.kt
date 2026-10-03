@@ -1562,7 +1562,7 @@ class HomeViewModel(
             try {
                 val items = withContext(Dispatchers.IO) {
                     try {
-                        pm.getInstalledPackages()
+                        val candidates = pm.getInstalledPackages()
                             .mapNotNull { pkgInfo ->
                                 if (pkgInfo.packageName == app.packageName) return@mapNotNull null
                                 val appInfo = pkgInfo.applicationInfo ?: return@mapNotNull null
@@ -1587,6 +1587,10 @@ class HomeViewModel(
                                     )
                                 )
                             }
+                        // A patched build is no app to patch, it is the app's own install
+                        val patched = localApkSources.patchedInstalls(candidates.map { it.packageInfo })
+                        candidates
+                            .filterNot { it.packageName in patched }
                             .sortedBy { it.label.lowercase() }
                     } catch (e: Exception) {
                         Log.e(tag, "Failed to load installed apps for picker", e)
@@ -1643,7 +1647,7 @@ class HomeViewModel(
                     }
                 }
                 if (selectedApp != null) {
-                    // Installed APK may be signed with our keystore - skip signature check.
+                    // The picker only offers unpatched installs - skip split and signature checks.
                     // Version/versionCode check still runs via processSelectedApp.
                     processSelectedApp(selectedApp, skipSplitCheck = true)
                 } else {
@@ -1731,6 +1735,7 @@ class HomeViewModel(
                     }
                     is ApkLoadResult.Unreadable -> app.toast(app.getString(R.string.home_invalid_apk_unreadable))
                     is ApkLoadResult.NotAnApk -> app.toast(app.getString(R.string.home_invalid_apk_not_an_apk))
+                    is ApkLoadResult.AlreadyPatched -> app.toast(app.getString(R.string.home_invalid_apk_already_patched))
                     is ApkLoadResult.IoError -> app.toast(app.getString(R.string.home_invalid_apk_io_error))
                 }
             } finally {
@@ -2702,10 +2707,10 @@ class HomeViewModel(
     /**
      * Handle download instructions continue.
      */
-    fun handleDownloadInstructionsContinue(onOpenUrl: (String) -> Boolean) {
+    fun handleDownloadInstructionsContinue(handOff: (String) -> Boolean) {
         val urlToOpen = resolvedDownloadUrl!!
 
-        if (onOpenUrl(urlToOpen)) {
+        if (handOff(urlToOpen)) {
             showDownloadInstructionsDialog = false
             showFilePickerPromptDialog = true
         } else {
@@ -2796,18 +2801,27 @@ class HomeViewModel(
             }
 
             // A split archive is read through its base module, deleted after the call, so the icon is read in it
-            val (packageInfo, icon) = SplitApkInspector.withRepresentativeApk(
+            val (packageInfo, icon, patched) = SplitApkInspector.withRepresentativeApk(
                 source = tempFile,
                 workspace = filesystem.uiTempDir
             ) { apk ->
                 val info = pm.getPackageInfo(apk)
-                info to info?.let(appDataResolver::detachedArchiveIcon)
+                Triple(
+                    info,
+                    info?.let(appDataResolver::detachedArchiveIcon),
+                    info != null && localApkSources.isPatchedApk(apk, info.packageName)
+                )
             }
 
             if (packageInfo == null) {
                 Log.w(tag, "Picked file $fileName could not be parsed as an APK")
                 tempFile.delete()
                 return@withContext ApkLoadResult.NotAnApk
+            }
+
+            if (patched) {
+                tempFile.delete()
+                return@withContext ApkLoadResult.AlreadyPatched
             }
 
             ApkLoadResult.Success(
@@ -2835,6 +2849,8 @@ private sealed interface ApkLoadResult {
     data object Unreadable : ApkLoadResult
     /** File was read but is not a valid APK/split archive. */
     data object NotAnApk : ApkLoadResult
+    /** File is a patched build, which is never patched again. */
+    data object AlreadyPatched : ApkLoadResult
     /** An unexpected IO or system exception occurred while copying or parsing. */
     data object IoError : ApkLoadResult
 }

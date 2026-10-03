@@ -101,6 +101,64 @@ class HomeAppSlotsTest {
     }
 
     @Test
+    fun `apps only records name get cards after the listed ones`() {
+        val other = InstalledApp(
+            currentPackageName = "com.example.other",
+            originalPackageName = "com.example.other",
+            version = "1.0",
+            installType = InstallType.DEFAULT
+        )
+        val own = record(YOUTUBE)
+
+        assertEquals(
+            listOf(
+                HomeAppSlot(YOUTUBE, YOUTUBE, own, isClone = false),
+                HomeAppSlot("com.example.other", "com.example.other", other, isClone = false)
+            ),
+            homeAppSlots(listOf(YOUTUBE), listOf(other, own))
+        )
+    }
+
+    @Test
+    fun `a build patched from a clone is shown without taking the clone's card`() {
+        val copy = clone("$YOUTUBE.morphe")
+        val repatched = InstalledApp(
+            currentPackageName = "$YOUTUBE.morphe.morphe",
+            originalPackageName = "$YOUTUBE.morphe",
+            version = "19.16.39",
+            installType = InstallType.DEFAULT,
+            isClone = true
+        )
+
+        val slots = homeAppSlots(listOf(YOUTUBE), listOf(repatched, copy))
+
+        assertEquals(
+            listOf(
+                HomeAppSlot(YOUTUBE, YOUTUBE, null, isClone = false),
+                HomeAppSlot("$YOUTUBE.morphe", YOUTUBE, copy, isClone = true),
+                HomeAppSlot("$YOUTUBE.morphe.morphe", "$YOUTUBE.morphe", repatched, isClone = true)
+            ),
+            slots
+        )
+        assertEquals(slots.size, slots.distinctBy { it.id }.size)
+    }
+
+    @Test
+    fun `a listed package an install was renamed to gets no card beside the install`() {
+        val renamed = clone("app.morphe.android.youtube")
+
+        val slots = homeAppSlots(listOf(YOUTUBE, "app.morphe.android.youtube"), listOf(renamed))
+
+        assertEquals(
+            listOf(
+                HomeAppSlot(YOUTUBE, YOUTUBE, null, isClone = false),
+                HomeAppSlot("app.morphe.android.youtube", YOUTUBE, renamed, isClone = true)
+            ),
+            slots
+        )
+    }
+
+    @Test
     fun `the app keeps a card to be cloned from again once only clones are left`() {
         val copy = clone("$YOUTUBE.morphe")
 

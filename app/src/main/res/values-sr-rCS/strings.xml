@@ -24,7 +24,7 @@
     <string name="deep_link_add_source_warning">Dodajte samo izvore kojima verujete</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Dostupno ažuriranje za Morphe</string>
-    <string name="home_update_available_subtitle">Nova verzija sprema za instalaciju</string>
+    <string name="home_update_available_subtitle">Novu verziju možete instalirati</string>
     <string name="home_blocked_source_title">Detektovan blokiran izvor zakrpe</string>
     <string name="home_blocked_source_subtitle">Dodirnite da biste pregledali i uklonili</string>
     <string name="home_metadata_errors_title">Neki izvori zakrpe nisu dostupni</string>
@@ -259,6 +259,8 @@ Sve što dodate sa ove veb stranice koristite na sopstvenu odgovornost."</string
     <string name="home_download_instructions_step4_mount">Nakon instaliranja originalnog APK-a, vratite se na Morphe</string>
     <string name="home_download_instructions_continue_to">Nastavite na %s</string>
     <string name="home_download_instructions_destination">stranicu za preuzimanje</string>
+    <string name="home_download_instructions_copy_link">Kopiraj link</string>
+    <string name="home_download_instructions_link_copied">Link kopiran</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Izaberite preuzete APK</string>
     <string name="home_file_picker_prompt_description">Odaberite &lt;b&gt;%s&lt;/b&gt; APK fajl koji ste nedavno preuzeli</string>
@@ -275,6 +277,7 @@ Sve što dodate sa ove veb stranice koristite na sopstvenu odgovornost."</string
     <string name="home_installed_app_picker_filter_system">Samo sistemske aplikacije</string>
     <string name="home_invalid_apk_unreadable">Nije moguće pročitati datoteku. Proverite da \'Eksternu memoriju\' ne ograničava baterija</string>
     <string name="home_invalid_apk_not_an_apk">Odabrana datoteka nije validan APK</string>
+    <string name="home_invalid_apk_already_patched">Izabrani APK je već zakrpljen. Izaberite originalnu aplikaciju umesto toga</string>
     <string name="home_invalid_apk_io_error">Nije uspelo otvaranje datoteke. Molimo pokušajte ponovo</string>
     <string name="home_external_apk_expert_mode_required">Ova funkcionalnost je dostupna samo u režimu stručnjaka.</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -1133,6 +1136,7 @@ Detalji: %2$s"</string>
     <string name="file_picker_internal_storage">Interna memorija</string>
     <string name="file_picker_sd_card">SD kartica</string>
     <string name="file_picker_root">Koren (/)</string>
+    <string name="file_picker_storages">Memorije</string>
     <string name="file_picker_sort_name_asc">Naziv (A–Š)</string>
     <string name="file_picker_sort_name_desc">Naziv (Š–A)</string>
     <string name="file_picker_sort_size_desc">Veličina (od najveće)</string>

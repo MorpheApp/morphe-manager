@@ -259,6 +259,8 @@ Bármit is ad hozzá erről a weboldalról, azt saját felelősségére teszi."<
     <string name="home_download_instructions_step4_mount">Az eredeti APK telepítése után térj vissza Morphe alkalmazásba</string>
     <string name="home_download_instructions_continue_to">Tovább: %s</string>
     <string name="home_download_instructions_destination">a letöltési oldalra</string>
+    <string name="home_download_instructions_copy_link">Link másolása</string>
+    <string name="home_download_instructions_link_copied">Link másolva</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Válaszd ki a letöltött APK-t</string>
     <string name="home_file_picker_prompt_description">Válaszd ki a most letöltött &lt;b&gt;%s&lt;/b&gt; APK fájlt</string>
@@ -275,6 +277,7 @@ Bármit is ad hozzá erről a weboldalról, azt saját felelősségére teszi."<
     <string name="home_installed_app_picker_filter_system">Csak rendszeralkalmazások</string>
     <string name="home_invalid_apk_unreadable">Nem sikerült olvasni a fájlt. Ellenőrizd, hogy a \'Külső tároló\' nincs-e akkumulátorkorlátozás alatt</string>
     <string name="home_invalid_apk_not_an_apk">A kiválasztott fájl nem egy érvényes APK</string>
+    <string name="home_invalid_apk_already_patched">A kiválasztott APK már patchelve van. Válaszd helyette az eredeti alkalmazást</string>
     <string name="home_invalid_apk_io_error">Nem sikerült megnyitni a fájlt. Kérjük, próbáld újra</string>
     <string name="home_external_apk_expert_mode_required">Ez a funkció csak szakértői módban érhető el</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -1148,6 +1151,7 @@ Részletek: %2$s"</string>
     <string name="file_picker_internal_storage">Belső tárhely</string>
     <string name="file_picker_sd_card">SD-kártya</string>
     <string name="file_picker_root">Gyökér (/)</string>
+    <string name="file_picker_storages">Tárolók</string>
     <string name="file_picker_sort_name_asc">Név (A–Z)</string>
     <string name="file_picker_sort_name_desc">Név (Z–A)</string>
     <string name="file_picker_sort_size_desc">Méret (a legnagyobbtól kezdve)</string>

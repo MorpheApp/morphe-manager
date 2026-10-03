@@ -260,6 +260,8 @@
     <string name="home_download_instructions_step4_mount">לאחר התקנת APK המקורית, חזרו ל-Morphe</string>
     <string name="home_download_instructions_continue_to">המשיכו אל %s</string>
     <string name="home_download_instructions_destination">דף ההורדה</string>
+    <string name="home_download_instructions_copy_link">העתק קישור</string>
+    <string name="home_download_instructions_link_copied">הקישור הועתק</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">בחרו קובץ APK שהורד</string>
     <string name="home_file_picker_prompt_description">בחר את קובץ ה-APK &lt;b&gt;%s&lt;/b&gt; שהורדת זה עתה</string>
@@ -276,6 +278,7 @@
     <string name="home_installed_app_picker_filter_system">אפליקציות מערכת בלבד</string>
     <string name="home_invalid_apk_unreadable">לא ניתן לקרוא את הקובץ. בדוק ש\'אחסון חיצוני\' אינו מוגבל על ידי הסוללה</string>
     <string name="home_invalid_apk_not_an_apk">הקובץ שנבחר אינו קובץ APK תקין</string>
+    <string name="home_invalid_apk_already_patched">ה-APK שנבחר כבר עבר טלאי. בחר באפליקציה המקורית במקום זאת</string>
     <string name="home_invalid_apk_io_error">נכשל בפתיחת הקובץ. אנא נסה שוב</string>
     <string name="home_external_apk_expert_mode_required">תכונה זו זמינה רק במצב מומחה</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->

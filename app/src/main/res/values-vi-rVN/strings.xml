@@ -259,6 +259,8 @@ Bất cứ thứ gì bạn thêm từ trang web này đều được sử dụng
     <string name="home_download_instructions_step4_mount">Sau khi cài xong, hãy quay lại Morphe</string>
     <string name="home_download_instructions_continue_to">Tiếp tục đến %s</string>
     <string name="home_download_instructions_destination">trang tải xuống</string>
+    <string name="home_download_instructions_copy_link">Sao chép liên kết</string>
+    <string name="home_download_instructions_link_copied">Đã sao chép liên kết</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Chọn APK đã tải</string>
     <string name="home_file_picker_prompt_description">Chọn tệp APK &lt;b&gt;%s&lt;/b&gt; bạn vừa tải</string>
@@ -275,6 +277,7 @@ Bất cứ thứ gì bạn thêm từ trang web này đều được sử dụng
     <string name="home_installed_app_picker_filter_system">Chỉ ứng dụng hệ thống</string>
     <string name="home_invalid_apk_unreadable">Không thể đọc tệp. Hãy kiểm tra xem \"Bộ nhớ ngoài\" có bị hạn chế pin hay không</string>
     <string name="home_invalid_apk_not_an_apk">Tệp đã chọn không phải là tệp APK hợp lệ</string>
+    <string name="home_invalid_apk_already_patched">APK đã chọn đã được vá. Thay vào đó, hãy chọn ứng dụng gốc</string>
     <string name="home_invalid_apk_io_error">Không thể mở tệp. Vui lòng thử lại</string>
     <string name="home_external_apk_expert_mode_required">Tính năng này chỉ có ở chế độ Chuyên gia</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -1154,6 +1157,7 @@ Chi tiết: %2$s"</string>
     <string name="file_picker_internal_storage">Bộ nhớ trong</string>
     <string name="file_picker_sd_card">Thẻ SD</string>
     <string name="file_picker_root">Root (/)</string>
+    <string name="file_picker_storages">Bộ nhớ</string>
     <string name="file_picker_sort_name_asc">Tên (A–Z)</string>
     <string name="file_picker_sort_name_desc">Tên (Z–A)</string>
     <string name="file_picker_sort_size_desc">Kích thước (lớn nhất trước)</string>

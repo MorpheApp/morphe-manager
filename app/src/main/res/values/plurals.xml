@@ -107,13 +107,17 @@
         <item quantity="one">%s core</item>
         <item quantity="other">%s cores</item>
     </plurals>
-    <plurals name="changelog_new_count">
-        <item quantity="one">%s new</item>
-        <item quantity="other">%s new</item>
+    <plurals name="changelog_feature_count">
+        <item quantity="one">%s feature</item>
+        <item quantity="other">%s features</item>
     </plurals>
     <plurals name="changelog_fix_count">
         <item quantity="one">%s fix</item>
         <item quantity="other">%s fixes</item>
+    </plurals>
+    <plurals name="changelog_performance_count">
+        <item quantity="one">%s optimization</item>
+        <item quantity="other">%s optimizations</item>
     </plurals>
     <plurals name="changelog_change_count">
         <item quantity="one">%s change</item>

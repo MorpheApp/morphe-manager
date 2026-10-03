@@ -20,7 +20,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
@@ -61,7 +60,6 @@ fun HomeDialogs(
     patchesItem: MutableState<HomeAppItem?>,
     globalOnboardingState: GlobalOnboardingState? = null
 ) {
-    val uriHandler = LocalUriHandler.current
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     // Kept outside the dialog so the picker state survives the download dialog's exit animation
@@ -177,17 +175,9 @@ fun HomeDialogs(
                 homeViewModel.showDownloadInstructionsDialog = false
                 homeViewModel.cleanupPendingData()
             },
-            onOpenApkDownloadHelper = openApkDownloadHelper
-        ) {
-            homeViewModel.handleDownloadInstructionsContinue { url ->
-                try {
-                    uriHandler.openUri(url)
-                    true
-                } catch (_: Exception) {
-                    false
-                }
-            }
-        }
+            onOpenApkDownloadHelper = openApkDownloadHelper,
+            onContinue = homeViewModel::handleDownloadInstructionsContinue
+        )
     }
 
     // Dialog 3: File picker prompt

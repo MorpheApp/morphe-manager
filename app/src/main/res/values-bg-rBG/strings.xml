@@ -259,6 +259,8 @@
     <string name="home_download_instructions_step4_mount">След инсталирането на оригиналния APK, върнете се в Morphe</string>
     <string name="home_download_instructions_continue_to">Продължете към %s</string>
     <string name="home_download_instructions_destination">страницата за изтегляне</string>
+    <string name="home_download_instructions_copy_link">Копирай връзка</string>
+    <string name="home_download_instructions_link_copied">Връзката е копирана</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Изберете сваления APK</string>
     <string name="home_file_picker_prompt_description">Изберете APK файла &lt;b&gt;%s&lt;/b&gt;, който току-що изтеглихте</string>
@@ -1149,6 +1151,7 @@ morphe_header_custom_dark.png
     <string name="file_picker_internal_storage">Вътрешна памет</string>
     <string name="file_picker_sd_card">SD карта</string>
     <string name="file_picker_root">Корен (/)</string>
+    <string name="file_picker_storages">Хранилища</string>
     <string name="file_picker_sort_name_asc">Име (А–Я)</string>
     <string name="file_picker_sort_name_desc">Име (Я–А)</string>
     <string name="file_picker_sort_size_desc">Размер (от най-голям към най-малък)</string>

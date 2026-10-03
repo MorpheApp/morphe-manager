@@ -384,10 +384,7 @@ class ManagerApplication : Application() {
     }
 
     private fun onFreshProcessStart() {
-        fs.uiTempDir.apply {
-            deleteRecursively()
-            mkdirs()
-        }
+        fs.uiTempDir.purgeDirectoryAsync(scope)
         // Logs all app-private directories and their contents with file sizes on fresh start
         scope.launch(Dispatchers.IO) {
             fs.logStorageContents()

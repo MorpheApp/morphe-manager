@@ -697,13 +697,18 @@ class PatcherViewModel(
             }
 
             // If we got here, we need to save the original
+            val moveSource = (input.selectedApp as? SelectedApp.Local)?.temporary == true
             val savedFile = originalApkRepository.saveOriginalApk(
                 packageName = packageName,
                 version = originalVersion,
-                sourceFile = fileToSave
+                sourceFile = fileToSave,
+                moveSource = moveSource
             )
 
             if (savedFile != null) {
+                if (moveSource && !fileToSave.exists()) {
+                    inputFile = null
+                }
                 Log.i(TAG, "Original APK/archive saved: ${savedFile.name}")
             }
         } catch (e: Exception) {
@@ -1172,6 +1177,7 @@ class PatcherViewModel(
         patcherWorkerId?.uuid?.let(workManager::cancelWorkById)
         cleanupTemporaryInput()
         stopCompletionSound()
+        patchRun.finish()
 
         // Clean up the installer temp directory (contains output.apk and any intermediate files).
         // This covers the case where the user navigates away before installing/exporting,

@@ -259,6 +259,8 @@
     <string name="home_download_instructions_step4_mount">Након инсталирања оригиналног АПК-а, вратите се у Морфе</string>
     <string name="home_download_instructions_continue_to">Наставите на %s</string>
     <string name="home_download_instructions_destination">страницу за преузимање</string>
+    <string name="home_download_instructions_copy_link">Копирај линк</string>
+    <string name="home_download_instructions_link_copied">Линк је копиран</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Odaberite preuzete APK</string>
     <string name="home_file_picker_prompt_description">Изаберите &lt;b&gt;%s&lt;/b&gt; APK фајл који сте управо преузели</string>
@@ -275,6 +277,7 @@
     <string name="home_installed_app_picker_filter_system">Само системске апликације</string>
     <string name="home_invalid_apk_unreadable">Није могуће прочитати датотеку. Проверите да \'Екстерна складишта\' није ограничено од стране батерије</string>
     <string name="home_invalid_apk_not_an_apk">Избрана датотека није валидан APK.</string>
+    <string name="home_invalid_apk_already_patched">Изабрани APK је већ закрпљен. Изаберите оригиналну апликацију уместо тога</string>
     <string name="home_invalid_apk_io_error">Није успело отварање датотеке. Поново покушајте.</string>
     <string name="home_external_apk_expert_mode_required">Ова функција је доступна само у режиму за напредне кориснике</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -1149,6 +1152,7 @@ morphe_header_custom_dark.png
     <string name="file_picker_internal_storage">Интерна складиште</string>
     <string name="file_picker_sd_card">SD картица</string>
     <string name="file_picker_root">Корен (/)</string>
+    <string name="file_picker_storages">Складишта</string>
     <string name="file_picker_sort_name_asc">Назив (А–Ш)</string>
     <string name="file_picker_sort_name_desc">Назив (Ш–А)</string>
     <string name="file_picker_sort_size_desc">Величина (највећа прва)</string>

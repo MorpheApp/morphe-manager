@@ -259,6 +259,8 @@ Anumang idagdag mo mula sa website na ito ay gagamitin sa iyong sariling pangani
     <string name="home_download_instructions_step4_mount">Pagkatapos ang pag-install ng orihinal na APK, bumalik sa Morphe</string>
     <string name="home_download_instructions_continue_to">Magpatuloy sa %s</string>
     <string name="home_download_instructions_destination">ang pahina ng pag-download</string>
+    <string name="home_download_instructions_copy_link">Kopyahin ang link</string>
+    <string name="home_download_instructions_link_copied">Nakopya ang link</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Piliin ang na-download na APK</string>
     <string name="home_file_picker_prompt_description">Piliin ang &lt;b&gt;%s&lt;/b&gt; APK file na kakadownload mo lang</string>
@@ -275,6 +277,7 @@ Anumang idagdag mo mula sa website na ito ay gagamitin sa iyong sariling pangani
     <string name="home_installed_app_picker_filter_system">Mga aplikasyon ng sistema lamang</string>
     <string name="home_invalid_apk_unreadable">Hindi mabasa ang file. Siguraduhing hindi pinagbabawalan ng baterya ang \'External Storage\'</string>
     <string name="home_invalid_apk_not_an_apk">Ang napiling file ay hindi isang valid na APK</string>
+    <string name="home_invalid_apk_already_patched">Ang napiling APK ay naka-patch na. Sa halip, piliin ang orihinal na app</string>
     <string name="home_invalid_apk_io_error">Hindi mabuksan ang file. Pakisubukan muli</string>
     <string name="home_external_apk_expert_mode_required">Ang tampok na ito ay available lamang sa Expert mode</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->

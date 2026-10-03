@@ -34,14 +34,18 @@ class Store<S>(private val coroutineScope: CoroutineScope, initialState: S) : Ac
     private val lock = Mutex()
 
     /** Enqueues [action] and starts the runner coroutine if it is not already running. */
-    suspend fun dispatch(action: Action<S>) = lock.withLock {
+    suspend fun dispatch(action: Action<S>) {
         Log.d(tag, "Dispatching $action")
+        // Sent before taking the lock: a full queue may suspend here, and the runner needs the
+        // lock to decide whether to stop, so holding it while suspended could stall both
         queueChannel.send(action)
 
-        if (isRunningActions) return@withLock
-        isRunningActions = true
-        coroutineScope.launch {
-            runActions()
+        lock.withLock {
+            if (isRunningActions) return
+            isRunningActions = true
+            coroutineScope.launch {
+                runActions()
+            }
         }
     }
 

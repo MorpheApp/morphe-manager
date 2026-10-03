@@ -259,6 +259,8 @@ Bu veb saytdan əlavə etdiyiniz hər şey öz riskinizlə istifadə olunur"</st
     <string name="home_download_instructions_step4_mount">Əsil APK-nı quraşdırandan sonra, Morphe-yə qayıt</string>
     <string name="home_download_instructions_continue_to">%s ilə davam et</string>
     <string name="home_download_instructions_destination">yükləmə səhifəsi</string>
+    <string name="home_download_instructions_copy_link">Linki köçür</string>
+    <string name="home_download_instructions_link_copied">Link köçürüldü</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Yüklənilmiş APK-nı seç</string>
     <string name="home_file_picker_prompt_description">İndicə yüklədiyiniz &lt;b&gt;%s&lt;/b&gt; APK faylını seçin</string>
@@ -275,6 +277,7 @@ Bu veb saytdan əlavə etdiyiniz hər şey öz riskinizlə istifadə olunur"</st
     <string name="home_installed_app_picker_filter_system">Ancaq sistem tətbiqləri</string>
     <string name="home_invalid_apk_unreadable">Faylı oxumaq mümkün olmadı. \'Xarici Saxlancın\' batareya məhdudiyyətli olmadığını yoxlayın</string>
     <string name="home_invalid_apk_not_an_apk">Seçilən fayl yararlı APK deyil</string>
+    <string name="home_invalid_apk_already_patched">Seçilmiş APK artıq yamaqlanıb. Əvəzinə orijinal tətbiqi seç</string>
     <string name="home_invalid_apk_io_error">Faylı açmaq olmadı. Xahiş olunur, təkrar cəhd et</string>
     <string name="home_external_apk_expert_mode_required">Bu xüsusiyyət yalnız mütəxəssis rejimində əlçatandır</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -555,7 +558,7 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="patcher_install_error_subtitle">Silməyə və təkrar quraşdırmağa çalış</string>
     <string name="patcher_ready_to_mount_subtitle">Montajlamaq üçün aşağıdakı düyməyə toxun</string>
     <string name="patcher_patches_excluded_for_installer">Bu quraşdırma üsulu üçün əlçatan deyil və xaric edilib: %s</string>
-    <string name="patcher_back_to_game_hint">Oyununuza qayıtmaq üçün %1$s toxunun</string>
+    <string name="patcher_back_to_game_hint">Oyununuza qayıtmaq üçün %1$s kliklə</string>
     <string name="patcher_storage_permission_dialog_title">Saxlanc keçidinə keçmək olmur</string>
     <string name="patcher_incompatible_patcher_title">Yenilənmə tələb olundu</string>
     <string name="patcher_incompatible_patcher_description">&lt;b&gt;%1$s&lt;/b&gt; paketi &lt;b&gt;%2$s&lt;/b&gt; və ya daha yeni versiya yamaqlayıcı tələb edir. Xahiş olunur, bu tətbiqi yamaqlamaq üçün Morphe-ni yenilə</string>
@@ -661,6 +664,8 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="mini_game_try_again">Təkrar cəhd et</string>
     <string name="mini_game_paused">Fasilə edildi</string>
     <string name="mini_game_resume">Davam et</string>
+    <string name="mini_game_restart">Yenidən başla</string>
+    <string name="mini_game_change">Başqa bir oyun seç</string>
     <string name="mini_game_2048_picker_subtitle">Birləşdirmək üçün xanaları sürüşdür</string>
     <string name="mini_game_flappy_picker_subtitle">Borular arasından uçmaq üçün toxun</string>
     <string name="mini_game_flappy_tap_to_start">Uçmaq üçün toxun</string>
@@ -1144,6 +1149,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="file_picker_internal_storage">Daxili yaddaş yeri</string>
     <string name="file_picker_sd_card">SD kart</string>
     <string name="file_picker_root">Root (/)</string>
+    <string name="file_picker_storages">Saxlanclar</string>
     <string name="file_picker_sort_name_asc">Ad (A–Z)</string>
     <string name="file_picker_sort_name_desc">Ad (Z–A)</string>
     <string name="file_picker_sort_size_desc">Həcm (əvvəlcə ən çox)</string>

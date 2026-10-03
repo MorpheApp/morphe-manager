@@ -462,7 +462,7 @@ class BatchPatchCoordinator(
 
         val selectedApp = withContext(Dispatchers.IO) { materialize(item) }
         if (selectedApp == null) {
-            runProgress.stopStallWatch()
+            runProgress.finish()
             updateItem(index) {
                 it.copy(
                     state = BatchItemState.FAILED,
@@ -529,7 +529,7 @@ class BatchPatchCoordinator(
             // the application scope, so it would otherwise poll forever
             withContext(NonCancellable) {
                 activeWorkId = null
-                runProgress.stopStallWatch()
+                runProgress.finish()
                 // Retaining the APKs takes seconds, and this run has nothing left to show but
                 // completed steps. The screen switches to its between-apps state instead
                 _state.update { it.copy(activeIndex = null, activeRun = null) }
@@ -700,7 +700,8 @@ class BatchPatchCoordinator(
             originalApkRepository.saveOriginalApk(
                 packageName = item.packageName,
                 version = version,
-                sourceFile = file
+                sourceFile = file,
+                moveSource = selectedApp.temporary
             )
         }.onFailure { Log.w(TAG, "Failed to save original APK for ${item.packageName}", it) }
     }

@@ -5,18 +5,23 @@
 
 package app.morphe.manager.ui.screen.shared
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.Done
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.offset
 import app.morphe.manager.R
 
 /**
@@ -61,6 +66,49 @@ fun AppFilterChip(
             selectedBorderWidth = 1.dp
         )
     )
+}
+
+/**
+ * [AppFilterChip] that shows only [icon], as square as the chip is tall. Drawn as a surface of its
+ * own, since a filter chip pads its label for text and leaves a lone icon in a wide pill. Takes up
+ * only the pill's width, its wider touch target reaching out over the gaps beside it.
+ */
+@Composable
+fun AppFilterChip(
+    selected: Boolean,
+    onClick: () -> Unit,
+    icon: ImageVector,
+    contentDescription: String,
+    modifier: Modifier = Modifier
+) {
+    val scheme = MaterialTheme.colorScheme
+    val touchMargin = (LocalMinimumInteractiveComponentSize.current - FilterChipDefaults.Height) / 2
+
+    Surface(
+        selected = selected,
+        onClick = onClick,
+        modifier = modifier.layout { measurable, constraints ->
+            val margin = touchMargin.coerceAtLeast(0.dp).roundToPx()
+            val placeable = measurable.measure(constraints.offset(horizontal = 2 * margin))
+            layout((placeable.width - 2 * margin).coerceAtLeast(0), placeable.height) {
+                placeable.place(-margin, 0)
+            }
+        },
+        shape = FilterChipDefaults.shape,
+        color = if (selected) scheme.primaryContainer else scheme.surfaceContainerLowest,
+        contentColor = if (selected) scheme.onPrimaryContainer else scheme.onSurfaceVariant,
+        border = BorderStroke(
+            1.dp,
+            if (selected) scheme.primary else scheme.outline.copy(alpha = 0.5f)
+        )
+    ) {
+        Box(
+            modifier = Modifier.size(FilterChipDefaults.Height),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(icon, contentDescription = contentDescription, Modifier.size(16.dp))
+        }
+    }
 }
 
 /**

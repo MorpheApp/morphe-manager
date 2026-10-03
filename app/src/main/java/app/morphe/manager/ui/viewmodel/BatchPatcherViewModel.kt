@@ -360,16 +360,16 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent, ApkDownloadHelperHost 
         private set
 
     /**
-     * Hands the download page to the browser and leaves a prompt behind.
+     * Hands the download page to the browser or the clipboard and leaves a prompt behind.
      *
      * The file picker deliberately waits for that prompt rather than opening straight away:
      * the browser is coming to the front at this moment, and Android does not let a
      * backgrounded app reliably start anything on top of it.
      */
-    fun confirmApkSearch(openUrl: (String) -> Boolean) {
+    fun confirmApkSearch(handOff: (String) -> Boolean) {
         val search = apkSearch ?: return
         apkSearch = null
-        if (openUrl(search.url)) {
+        if (handOff(search.url)) {
             attachPrompt = search.item
         } else {
             app.toast(app.getString(R.string.sources_management_failed_to_open_url))

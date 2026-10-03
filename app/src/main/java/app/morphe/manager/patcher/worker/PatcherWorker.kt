@@ -44,9 +44,15 @@ import app.morphe.manager.ui.model.State
 import app.morphe.manager.util.*
 import app.morphe.manager.util.PatchSelectionUtils.restrictTo
 import com.topjohnwu.superuser.Shell
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
+import kotlin.time.measureTime
 
 typealias ProgressEventHandler = (name: String?, state: State?, message: String?) -> Unit
 
@@ -357,7 +363,10 @@ class PatcherWorker(
                 }
             }
 
-            val useProcessRuntime = prefs.useProcessRuntime.get()
+            keystoreManager.preloadSigner()
+
+            // A value imported from a newer device must not enable it where it cannot run
+            val useProcessRuntime = prefs.useProcessRuntime.get() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
             val stripNativeLibs = prefs.stripUnusedNativeLibs.get()
             val inputIsSplitArchive = SplitApkPreparer.isSplitArchive(inputFile)
             // The architecture the patches were selected against, worth a line of its own now
@@ -423,7 +432,6 @@ class PatcherWorker(
             }
 
             // Execute patching. ProcessRuntime has its own retry loop that reduces memory on OOM
-            // If it still fails on Android <= Q, fall back to CoroutineRuntime
             val runtime = if (useProcessRuntime) {
                 ProcessRuntime(applicationContext)
             } else {
@@ -469,8 +477,6 @@ class PatcherWorker(
                     isBlockedSyscall(e) -> "Patcher process was killed for a system call the device forbids"
                     e is ProcessRuntime.ProcessConnectTimeoutException -> e.message
                     e is ProcessRuntime.HeapLimitIgnoredException -> e.message
-                    isOomRelated(e) && Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q ->
-                        "Process runtime OOM on Android ${Build.VERSION.RELEASE}"
                     else -> null
                 } ?: throw e
 
@@ -496,7 +502,13 @@ class PatcherWorker(
             }
 
             updatePatcherNotification(stepName = signingApkLabel, patchProgress = null)
-            keystoreManager.sign(patchedApk, File(args.output))
+            val signTime = measureTime {
+                keystoreManager.sign(patchedApk)
+                withContext(Dispatchers.IO) {
+                    Files.move(patchedApk.toPath(), File(args.output).toPath(), StandardCopyOption.REPLACE_EXISTING)
+                }
+            }
+            args.logger.info("Signed apk in ${signTime.inWholeMilliseconds}ms")
             updateProgress(state = State.COMPLETED) // Signing
 
             val elapsed = System.currentTimeMillis() - startTime
@@ -552,13 +564,19 @@ class PatcherWorker(
             )
             updateProgress(state = State.FAILED, message = e.originalStackTrace)
             Result.failure(
-                workDataOf(PROCESS_FAILURE_MESSAGE_KEY to e.originalStackTrace)
+                workDataOf(PROCESS_FAILURE_MESSAGE_KEY to e.originalStackTrace.truncateForWorkData())
             )
         } catch (e: Exception) {
+            // Stopping the worker closes the patcher process's streams, so a cancel usually
+            // surfaces as an interrupted read rather than a CancellationException
+            if (isStopped || e is CancellationException) {
+                Log.i(tag, "Patching was cancelled".logFmt())
+                throw e
+            }
             Log.e(tag, "An exception occurred while patching".logFmt(), e)
             updateProgress(state = State.FAILED, message = e.stackTraceToString())
             Result.failure(
-                workDataOf(PROCESS_FAILURE_MESSAGE_KEY to e.stackTraceToString())
+                workDataOf(PROCESS_FAILURE_MESSAGE_KEY to e.stackTraceToString().truncateForWorkData())
             )
         } finally {
             if (!patchedApk.delete() && patchedApk.exists()) {
@@ -583,13 +601,6 @@ class PatcherWorker(
         e is ProcessRuntime.ProcessExitException && e.exitCode == ProcessRuntime.SIGSYS_EXIT_CODE
 
     private fun Logger.logCoroutineHeap() = info("$LOG_PROCESS_PREFIX_COROUTINE_HEAP ${heapLimitMebibytes()}MB")
-
-    private fun isOomRelated(e: Exception) = when (e) {
-        is ProcessRuntime.ProcessExitException ->
-            e.exitCode == ProcessRuntime.OOM_EXIT_CODE || e.exitCode == ProcessRuntime.SIGKILL_EXIT_CODE
-        is ProcessRuntime.HeapExhaustedException -> true
-        else -> false
-    }
 
     companion object {
         private const val LOG_PREFIX = "[Worker]"

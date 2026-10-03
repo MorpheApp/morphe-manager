@@ -25,7 +25,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -307,9 +306,8 @@ fun BatchPatcherScreen(
     }
 
     // The same instructions the single-app flow shows before sending someone to download an
-    // APK, pointed at a queued app. Continuing opens the browser and then the file picker
+    // APK, pointed at a queued app. Continuing hands off the link and then opens the file picker
     viewModel.apkSearch?.let { search ->
-        val uriHandler = LocalUriHandler.current
         val bundleMetadata by patchBundleRepository.appMetadata.collectAsStateWithLifecycle()
         val metadata = bundleMetadata[search.item.packageName]
 
@@ -323,12 +321,9 @@ fun BatchPatcherScreen(
             downloadColor = metadata?.downloadColor ?: KnownApps.DEFAULT_DOWNLOAD_COLOR,
             isApkBundle = metadata?.apkFileType?.isApk == false,
             onDismiss = viewModel::cancelApkSearch,
-            onOpenApkDownloadHelper = openApkDownloadHelper
-        ) {
-            viewModel.confirmApkSearch { url ->
-                runCatching { uriHandler.openUri(url) }.isSuccess
-            }
-        }
+            onOpenApkDownloadHelper = openApkDownloadHelper,
+            onContinue = viewModel::confirmApkSearch
+        )
     }
 
     // Waits on screen while the user is in the browser, so the picker opens on their tap
@@ -466,7 +461,7 @@ fun BatchPatcherScreen(
 
                     if (useExpertMode) {
                         ExpertPatchingInProgress(
-                            progress = displayProgress.value,
+                            progress = { displayProgress.value },
                             patchesProgress = shownRun.patchesProgress,
                             patchProgress = shownRun,
                             packageName = shownPackageName,
@@ -480,7 +475,7 @@ fun BatchPatcherScreen(
                     } else {
                         val longStepWarning by shownRun.showLongStepWarning.collectAsStateWithLifecycle()
                         SimplePatchingInProgress(
-                            progress = displayProgress.value,
+                            progress = { displayProgress.value },
                             patchesProgress = shownRun.patchesProgress,
                             patchProgress = shownRun,
                             packageName = shownPackageName,

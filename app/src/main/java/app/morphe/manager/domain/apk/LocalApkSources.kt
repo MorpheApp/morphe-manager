@@ -5,6 +5,7 @@
 
 package app.morphe.manager.domain.apk
 
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.util.Log
 import app.morphe.manager.data.platform.Filesystem
@@ -17,6 +18,12 @@ import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.util.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.sync.Semaphore
+import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withContext
 import java.io.File
 
@@ -158,6 +165,7 @@ class LocalApkSources(
 ) {
     // Keyed by the tracked package, kept only while the evidence behind it is unchanged
     private val snapshotCache = mutableMapOf<String, CachedSnapshot>()
+    private val binderQuerySemaphore = Semaphore(4)
 
     private data class CachedSnapshot(val fingerprint: String, val snapshot: TrackedAppSnapshot)
 
@@ -229,6 +237,36 @@ class LocalApkSources(
     } catch (e: Exception) {
         Log.e(tag, "Failed to load installed app info", e)
         InstalledAppSource.None
+    }
+
+    /**
+     * The packages among [installed] that are patched builds rather than the apps themselves.
+     *
+     * Patching such a build again yields a broken APK, and the result would be tracked as an app
+     * of its own beside the install it came from. Meant for a sweep over every app on the device,
+     * so the archive on disk is only read for a tracked package, the only kind a mount overlays.
+     */
+    suspend fun patchedInstalls(installed: List<PackageInfo>): Set<String> = withContext(Dispatchers.IO) {
+        val records = installedAppRepository.getAll().first().associateBy { it.currentPackageName }
+        filterPatchedInstalls(
+            targets = installed.map { it.toInspectionTarget() },
+            records = records,
+            hasSourceApkSignatureMismatch = pm::hasSourceApkSignatureMismatch,
+            resolvePatchState = { pkg, version, mounted, record ->
+                patchState(pkg, version, mounted, record)
+            },
+            semaphore = binderQuerySemaphore
+        )
+    }
+
+    /**
+     * Whether [apk], a plain APK of [packageName], is a patched build: it carries Morphe's own
+     * signature, or a package name only a patch gives an app.
+     */
+    suspend fun isPatchedApk(apk: File, packageName: String): Boolean = withContext(Dispatchers.IO) {
+        if (installedAppRepository.get(packageName).isRenamedByPatch) return@withContext true
+        val signingHashes = keystoreManager.signingCertificateHashes()
+        pm.getApkFileSignatureHashes(apk).any { it in signingHashes }
     }
 
     /**
@@ -470,7 +508,8 @@ class LocalApkSources(
     private suspend fun patchState(
         packageName: String,
         installedVersion: String?,
-        mounted: Boolean
+        mounted: Boolean,
+        tracked: InstalledApp? = null
     ): InstalledPatchState {
         // Checked first because the certificates below describe the stock app while the file
         // that "Use installed APK" would copy is the patched one
@@ -493,8 +532,8 @@ class LocalApkSources(
             }
         }
 
-        val tracked = installedAppRepository.get(packageName)
-        if (tracked != null && installedVersion == tracked.version) return InstalledPatchState.Patched
+        val record = tracked ?: installedAppRepository.get(packageName)
+        if (record != null && installedVersion == record.version) return InstalledPatchState.Patched
         if (pm.isInstalledByPatchManager(packageName)) return InstalledPatchState.Patched
 
         // A comparison was possible in principle, so an unreadable certificate leaves the
@@ -505,4 +544,61 @@ class LocalApkSources(
             InstalledPatchState.NotPatched
         }
     }
+}
+
+// Nothing but a patch gives an app another package name, so whatever goes by it is patched
+internal val InstalledApp?.isRenamedByPatch: Boolean
+    get() = this != null && currentPackageName != originalPackageName
+
+internal data class AppInspectionTarget(
+    val packageName: String,
+    val versionName: String? = null,
+    val applicationFlags: Int? = null
+)
+
+internal fun PackageInfo.toInspectionTarget(): AppInspectionTarget =
+    AppInspectionTarget(
+        packageName = packageName,
+        versionName = versionName?.takeUnless { it.isBlank() },
+        applicationFlags = applicationInfo?.flags
+    )
+
+/**
+ * Whether package flags identify an unmodified preinstalled system image app.
+ * Such apps reside on read-only partitions and cannot be third-party patched APKs unless mounted.
+ */
+internal fun isUnmodifiedSystemApp(flags: Int?): Boolean {
+    if (flags == null) return false
+    return (flags and ApplicationInfo.FLAG_SYSTEM) != 0 &&
+            (flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) == 0
+}
+
+/**
+ * Filters installed packages to identify patched builds, using bounded concurrency and fast paths
+ * to avoid unnecessary Binder IPC transactions.
+ */
+internal suspend fun filterPatchedInstalls(
+    targets: List<AppInspectionTarget>,
+    records: Map<String, InstalledApp>,
+    hasSourceApkSignatureMismatch: (String) -> Boolean,
+    resolvePatchState: suspend (packageName: String, version: String?, mounted: Boolean, record: InstalledApp?) -> InstalledPatchState,
+    semaphore: Semaphore = Semaphore(4)
+): Set<String> = coroutineScope {
+    targets.map { target ->
+        async {
+            val packageName = target.packageName
+            val record = records[packageName]
+            if (record.isRenamedByPatch) return@async packageName
+
+            if (record == null && isUnmodifiedSystemApp(target.applicationFlags)) {
+                return@async null
+            }
+
+            semaphore.withPermit {
+                val mounted = record != null && hasSourceApkSignatureMismatch(packageName)
+                val patchState = resolvePatchState(packageName, target.versionName, mounted, record)
+                if (patchState == InstalledPatchState.Patched) packageName else null
+            }
+        }
+    }.awaitAll().filterNotNullTo(HashSet())
 }

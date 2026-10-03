@@ -3,6 +3,7 @@
     <!-- Home Screen -->
     <string name="home_other_apps">កម្មវិធីផ្សេង</string>
     <string name="home_not_patched_yet">មិនទាន់បានបំណេះនៅឡើយទេ</string>
+    <string name="home_app_hide_message">កម្មវិធីនេះនឹងត្រូវបានលាក់មិនបង្ហាញលើអេក្រង់មុខ។ អ្នកអាចបង្ហាញវាឡើងវិញដោយចុចប៊ូតុងនៅខាងក្រោមបំផុតនៃបញ្ជី</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available_subtitle">កំណែថ្មីត្រៀមជាស្រេច ដើម្បីដំឡើង</string>
     <string name="home_update_error">ការអាប់ដេតបានបរាជ័យ</string>

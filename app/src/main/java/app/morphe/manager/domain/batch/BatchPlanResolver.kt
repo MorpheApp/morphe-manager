@@ -10,6 +10,7 @@ import android.os.Build
 import android.util.Log
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.trackingKey
+import app.morphe.manager.domain.apk.LocalApkSources
 import app.morphe.manager.domain.bundles.AppVersionCatalog
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager
 import app.morphe.manager.domain.manager.PreferencesManager
@@ -147,6 +148,7 @@ class BatchPlanResolver(
     private val fs: Filesystem,
     private val appDataResolver: AppDataResolver,
     private val versionCatalog: AppVersionCatalog,
+    private val localApkSources: LocalApkSources,
     private val pm: PM
 ) {
     /**
@@ -614,34 +616,16 @@ class BatchPlanResolver(
     }
 
     /**
-     * Returns the installed APK only when it can be trusted to be the unpatched app.
-     * Anything that hints at a previous patch (mounted install, mismatching signature,
-     * a tracked patched record) disqualifies it, because patching an already patched APK
-     * silently produces a broken build.
+     * Returns the installed APK only when it can be trusted to be the unpatched app, because
+     * patching an already patched APK silently produces a broken build.
      */
     private suspend fun installedSource(packageName: String): BatchApkSource.Installed? {
-        val pkgInfo = pm.getPackageInfo(packageName) ?: return null
-        if (pm.hasSourceApkSignatureMismatch(packageName)) return null
-        if (pm.isInstalledByPatchManager(packageName)) return null
-
-        val version = pkgInfo.versionName?.takeUnless { it.isBlank() } ?: return null
-        val tracked = installedAppRepository.get(packageName)
-        if (tracked != null && tracked.version == version) return null
-
-        val referenceHashes = patchBundleRepository.appMetadata.value[packageName]?.signatures.orEmpty()
-        if (referenceHashes.isNotEmpty()) {
-            val installedHashes = pm.getInstalledSignatureHashes(packageName)
-            if (installedHashes.isNotEmpty() && installedHashes.none { it in referenceHashes }) return null
-        }
-
-        val appInfo = pkgInfo.applicationInfo ?: return null
-        val sourceDir = appInfo.sourceDir?.takeIf { File(it).exists() } ?: return null
-
+        val apk = localApkSources.installed(packageName).apk ?: return null
         return BatchApkSource.Installed(
-            apkPath = sourceDir,
-            splitPaths = appInfo.splitSourceDirs?.filter { File(it).exists() }.orEmpty(),
-            version = version,
-            versionCode = pm.getVersionCode(pkgInfo)
+            apkPath = apk.apkPath,
+            splitPaths = apk.splitPaths,
+            version = apk.version,
+            versionCode = apk.versionCode
         )
     }
 }

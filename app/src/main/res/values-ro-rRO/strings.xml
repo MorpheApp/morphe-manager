@@ -259,6 +259,8 @@ Orice adaugi de pe acest site este folosit pe propriul risc."</string>
     <string name="home_download_instructions_step4_mount">După instalarea APK-ului original, revino la Morphe</string>
     <string name="home_download_instructions_continue_to">Continuă la %s</string>
     <string name="home_download_instructions_destination">pagina de descărcare</string>
+    <string name="home_download_instructions_copy_link">Copiază linkul</string>
+    <string name="home_download_instructions_link_copied">Link copiat</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Selectează APK-ul descărcat</string>
     <string name="home_file_picker_prompt_description">Selectează fișierul APK &lt;b&gt;%s&lt;/b&gt; pe care tocmai l-ai descărcat</string>
@@ -275,6 +277,7 @@ Orice adaugi de pe acest site este folosit pe propriul risc."</string>
     <string name="home_installed_app_picker_filter_system">Doar aplicații de sistem</string>
     <string name="home_invalid_apk_unreadable">Nu s-a putut citi fișierul. Verificați dacă \'Stocare Externă\' nu este restricționată de baterie</string>
     <string name="home_invalid_apk_not_an_apk">Fișierul selectat nu este un APK valid</string>
+    <string name="home_invalid_apk_already_patched">APK-ul selectat este deja patchuit. Selectați în schimb aplicația originală</string>
     <string name="home_invalid_apk_io_error">Nu s-a putut deschide fișierul. Vă rugăm încercați din nou</string>
     <string name="home_external_apk_expert_mode_required">Această funcție este disponibilă doar în modul Expert</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -1148,6 +1151,7 @@ Detalii: %2$s"</string>
     <string name="file_picker_internal_storage">Stocare internă</string>
     <string name="file_picker_sd_card">Card SD</string>
     <string name="file_picker_root">Rădăcină (/)</string>
+    <string name="file_picker_storages">Stocări</string>
     <string name="file_picker_sort_name_asc">Nume (A–Z)</string>
     <string name="file_picker_sort_name_desc">Nume (Z–A)</string>
     <string name="file_picker_sort_size_desc">Dimensiune (cea mai mare prima)</string>

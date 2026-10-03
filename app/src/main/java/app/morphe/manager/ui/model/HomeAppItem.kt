@@ -118,6 +118,32 @@ data class HomeAppSlot(
 )
 
 /**
+ * The cards of every app in [packageNames], then of every app [records] were patched from that no
+ * source lists anymore, so its installs stay in reach.
+ *
+ * A record patched from a build that was itself patched names that build's package as its app,
+ * which is the package the build's own card already goes by. Such an app gets no card of its own
+ * and its installs are shown by their own packages, so no two cards share an id.
+ */
+fun homeAppSlots(packageNames: Collection<String>, records: List<InstalledApp>): List<HomeAppSlot> {
+    val recordsByApp = records.groupBy { it.originalPackageName }
+    val patchedPackages = records
+        .filter { it.currentPackageName != it.originalPackageName }
+        .mapTo(HashSet()) { it.currentPackageName }
+
+    return (packageNames + recordsByApp.keys).distinct().flatMap { packageName ->
+        val appRecords = recordsByApp[packageName].orEmpty()
+        if (packageName in patchedPackages) {
+            appRecords
+                .sortedBy { it.currentPackageName }
+                .map { HomeAppSlot(it.currentPackageName, packageName, it, it.isClone) }
+        } else {
+            homeAppSlots(packageName, appRecords)
+        }
+    }
+}
+
+/**
  * The cards one app is shown as: the app itself, followed by every further install of it, ordered
  * by package name so the list does not move around between reads.
  *

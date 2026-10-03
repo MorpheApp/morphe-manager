@@ -397,9 +397,12 @@ fun FilePicker(
             }
         }
 
-        if (breadcrumbs.isNotEmpty()) {
+        // With a single storage its list holds nothing the trail does not already lead to
+        val showStorages = roots.size > 1
+        if (showStorages || breadcrumbs.isNotEmpty()) {
             FolderTrail(
                 breadcrumbs = breadcrumbs,
+                showStorages = showStorages,
                 onOpen = { currentDir = it },
                 modifier = Modifier.padding(top = Defaults.ItemSpacing)
             )
@@ -461,12 +464,14 @@ fun FilePicker(
 
 /**
  * The folders from the storage root down to the open one, as chips to jump back up to any of
- * them. Scrolls to the open folder, the end a long trail runs off at.
+ * them, led by one for the list of storages when [showStorages]. Scrolls to the open folder, the
+ * end a long trail runs off at.
  */
 @Composable
 private fun FolderTrail(
     breadcrumbs: List<Pair<String, File>>,
-    onOpen: (File) -> Unit,
+    showStorages: Boolean,
+    onOpen: (File?) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val scrollState = rememberScrollState()
@@ -482,8 +487,17 @@ private fun FolderTrail(
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
+        if (showStorages) {
+            val isOpen = breadcrumbs.isEmpty()
+            AppFilterChip(
+                selected = isOpen,
+                onClick = { if (!isOpen) onOpen(null) },
+                icon = Icons.Outlined.Home,
+                contentDescription = stringResource(R.string.file_picker_storages)
+            )
+        }
         breadcrumbs.forEachIndexed { index, (label, dir) ->
-            if (index > 0) {
+            if (index > 0 || showStorages) {
                 ForwardChevronIcon(size = 16.dp, tint = LocalDialogSecondaryTextColor.current)
             }
             val isOpen = index == breadcrumbs.lastIndex
