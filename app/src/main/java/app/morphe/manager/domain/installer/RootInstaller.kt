@@ -398,7 +398,8 @@ class RootInstaller(
 
         private fun Shell.Result.failureDetail() = (err + out).joinToString("\n").trim()
 
-        private val PACKAGE_NAME = Regex("^[a-zA-Z0-9_.]+$")
+        // Two or more segments, each starting with a letter, as Android requires of a package name
+        private val PACKAGE_NAME = Regex("^[A-Za-z][A-Za-z0-9_]*(\\.[A-Za-z][A-Za-z0-9_]*)+$")
 
         internal fun isValidPackageName(packageName: String) = PACKAGE_NAME.matches(packageName)
 

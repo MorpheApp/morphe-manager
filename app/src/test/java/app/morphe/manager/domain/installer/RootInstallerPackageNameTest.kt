@@ -18,9 +18,15 @@ class RootInstallerPackageNameTest {
     }
 
     @Test
-    fun `names with shell or path characters are rejected`() {
+    fun `malformed names and names with shell or path characters are rejected`() {
         listOf(
             "",
+            ".",
+            "..",
+            "youtube",
+            "com..example",
+            "com.example.",
+            "1com.example",
             "test;rm -rf /",
             "com.example app",
             "com.example\$(id)",
