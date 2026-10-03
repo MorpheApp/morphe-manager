@@ -557,10 +557,6 @@ class PatcherWorker(
             Result.failure(
                 workDataOf(PROCESS_FAILURE_MESSAGE_KEY to message)
             )
-        } catch (e: CancellationException) {
-            // A stopped worker is not a failed patch, so it must not reach the catch-all below
-            Log.i(tag, "Patching was cancelled".logFmt())
-            throw e
         } catch (e: ProcessRuntime.RemoteFailureException) {
             Log.e(
                 tag,
@@ -571,6 +567,12 @@ class PatcherWorker(
                 workDataOf(PROCESS_FAILURE_MESSAGE_KEY to e.originalStackTrace.truncateForWorkData())
             )
         } catch (e: Exception) {
+            // Stopping the worker closes the patcher process's streams, so a cancel usually
+            // surfaces as an interrupted read rather than a CancellationException
+            if (isStopped || e is CancellationException) {
+                Log.i(tag, "Patching was cancelled".logFmt())
+                throw e
+            }
             Log.e(tag, "An exception occurred while patching".logFmt(), e)
             updateProgress(state = State.FAILED, message = e.stackTraceToString())
             Result.failure(
