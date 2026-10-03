@@ -103,39 +103,49 @@ class SessionInstaller(private val app: Application) {
     private suspend fun commitSession(apkFile: File, requireUserAction: Boolean): InstallResult {
         // With the dialog asked for up front, an abort can only be the user dismissing it
         var userActionShown = requireUserAction
-        return suspendCancellableCoroutine { cont ->
-            val installer = app.packageManager.packageInstaller
-            val params = PackageInstaller.SessionParams(
-                PackageInstaller.SessionParams.MODE_FULL_INSTALL
-            ).apply {
-                setOriginatingUid(Process.myUid())
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                    setRequestUpdateOwnership(true)
-                }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    setPackageSource(PackageInstaller.PACKAGE_SOURCE_LOCAL_FILE)
-                }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    setRequireUserAction(
-                        if (requireUserAction) {
-                            PackageInstaller.SessionParams.USER_ACTION_REQUIRED
-                        } else {
-                            PackageInstaller.SessionParams.USER_ACTION_NOT_REQUIRED
-                        }
-                    )
-                }
+        val installer = app.packageManager.packageInstaller
+        val params = PackageInstaller.SessionParams(
+            PackageInstaller.SessionParams.MODE_FULL_INSTALL
+        ).apply {
+            setOriginatingUid(Process.myUid())
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                setRequestUpdateOwnership(true)
             }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                setPackageSource(PackageInstaller.PACKAGE_SOURCE_LOCAL_FILE)
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                setRequireUserAction(
+                    if (requireUserAction) {
+                        PackageInstaller.SessionParams.USER_ACTION_REQUIRED
+                    } else {
+                        PackageInstaller.SessionParams.USER_ACTION_NOT_REQUIRED
+                    }
+                )
+            }
+        }
 
-            val sessionId = installer.createSession(params)
-            Log.d(TAG, "Created session $sessionId for ${apkFile.name}")
-
+        // The copy and fsync of a multi-hundred-megabyte archive must not run on the caller's thread
+        val sessionId = withContext(Dispatchers.IO) {
+            val id = installer.createSession(params)
+            Log.d(TAG, "Created session $id for ${apkFile.name}")
             try {
-                installer.openSession(sessionId).use { session ->
+                installer.openSession(id).use { session ->
                     session.openWrite("base.apk", 0, apkFile.length()).use { out ->
                         apkFile.inputStream().use { it.copyTo(out) }
                         session.fsync(out)
                     }
+                }
+            } catch (e: Exception) {
+                runCatching { installer.abandonSession(id) }
+                throw e
+            }
+            id
+        }
 
+        return suspendCancellableCoroutine { cont ->
+            try {
+                installer.openSession(sessionId).use { session ->
                     val pi = statusPendingIntent(ACTION_INSTALL_STATUS, EXTRA_SESSION_ID, sessionId)
 
                     val receiver = object : BroadcastReceiver() {
