@@ -209,6 +209,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
+    // Unit tests run on the JVM, where android.util.Log is only a stub
+    testOptions.unitTests.isReturnDefaultValues = true
+
     dependenciesInfo {
         includeInApk = false
         includeInBundle = false

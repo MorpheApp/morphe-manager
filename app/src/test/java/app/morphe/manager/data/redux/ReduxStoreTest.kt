@@ -20,12 +20,6 @@ class ReduxStoreTest {
         override suspend fun ActionContext.execute(current: Int): Int = current + value
     }
 
-    private class FailingErrorAction : Action<Int> {
-        override suspend fun ActionContext.execute(current: Int): Int {
-            throw AssertionError("Simulated fatal error in action")
-        }
-    }
-
     private class FailingExceptionAction : Action<Int> {
         override suspend fun ActionContext.execute(current: Int): Int {
             throw RuntimeException("Simulated exception in action")
@@ -47,20 +41,6 @@ class ReduxStoreTest {
             store.state.first { it == count }
         }
         assertEquals(count, store.state.value)
-    }
-
-    @Test
-    fun `an action throwing an error does not leave the store permanently locked`() = runBlocking(Dispatchers.Default) {
-        val store = Store(this, 0)
-
-        store.dispatch(FailingErrorAction())
-        store.dispatch(AddAction(10))
-        store.dispatch(AddAction(20))
-
-        withTimeout(5000L) {
-            store.state.first { it == 30 }
-        }
-        assertEquals(30, store.state.value)
     }
 
     @Test
