@@ -2,12 +2,18 @@ package app.morphe.manager.domain.manager
 
 import android.app.Application
 import android.content.Context
+import android.os.Build
 import android.util.Log
 import app.morphe.manager.domain.apk.apkFileStampOrNull
 import app.morphe.manager.util.sha256Fingerprint
 import app.morphe.patcher.apk.ApkSigner
 import app.morphe.patcher.apk.ApkUtils
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import java.io.*
 import java.nio.file.Files
@@ -46,6 +52,11 @@ class KeystoreManager(app: Application, private val prefs: PreferencesManager) {
     @Volatile
     private var cachedCertificateHashes: Pair<String, Set<String>>? = null
 
+    // The signer is kept for the same reason, until the keystore or its settings change
+    private var cachedSigner: Pair<List<Any?>, ApkSigner.Signer>? = null
+    private val signerLock = Mutex()
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+
     private suspend fun updatePrefs(alias: String, pass: String, keystorePw: String) = prefs.edit {
         prefs.keystoreAlias.value = alias
         prefs.keystorePass.value = pass
@@ -60,11 +71,31 @@ class KeystoreManager(app: Application, private val prefs: PreferencesManager) {
     )
 
     /**
-     * Signs [input] into [output]. Only ever handed what the patcher just wrote, whose headers it
-     * already rewrites where the signer would reject them.
+     * Signs [apk] in place for this device, which never needs a v1 signature. Only ever handed
+     * what the patcher just wrote, whose headers it already rewrites where the signer would reject them.
      */
-    suspend fun sign(input: File, output: File) = withContext(Dispatchers.Default) {
-        ApkUtils.signApk(input, output, prefs.keystoreAlias.get(), signingDetails())
+    suspend fun sign(apk: File) = withContext(Dispatchers.Default) {
+        signer()?.signApk(apk, apk, Build.VERSION.SDK_INT)
+            // Creates the keystore on the first patch
+            ?: ApkUtils.signApk(apk, apk, prefs.keystoreAlias.get(), signingDetails(), Build.VERSION.SDK_INT)
+    }
+
+    /** Starts loading the signing key, which takes BouncyCastle a while, so signing need not wait for it. */
+    fun preloadSigner() {
+        scope.launch { runCatching { signer() } }
+    }
+
+    private suspend fun signer(): ApkSigner.Signer? = signerLock.withLock {
+        withContext(Dispatchers.IO) {
+            val stamp = keystorePath.apkFileStampOrNull() ?: return@withContext null
+            val details = signingDetails()
+            val key = listOf(stamp.cacheKey, details.alias, details.password, details.keyStorePassword)
+            cachedSigner?.takeIf { it.first == key }?.second
+                ?: ApkSigner.newApkSigner(
+                    details.alias,
+                    ApkSigner.readPrivateKeyCertificatePair(readKeyStore(), details.alias, details.password)
+                ).also { cachedSigner = key to it }
+        }
     }
 
     suspend fun import(alias: String, pass: String, keystorePw: String = "", keystore: InputStream): Boolean {
