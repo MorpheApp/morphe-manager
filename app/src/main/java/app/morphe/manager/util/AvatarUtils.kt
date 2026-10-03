@@ -76,7 +76,7 @@ suspend fun loadRemoteAvatar(url: String): Bitmap? = withContext(Dispatchers.IO)
         val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
         BitmapFactory.decodeByteArray(bytes, 0, bytes.size, bounds)
         val options = BitmapFactory.Options().apply {
-            inSampleSize = avatarSampleSize(bounds.outWidth, bounds.outHeight)
+            inSampleSize = calculateSampleSize(bounds.outWidth, bounds.outHeight, AVATAR_MAX_SIDE)
         }
         BitmapFactory.decodeByteArray(bytes, 0, bytes.size, options)
             ?.also { AvatarCache[url] = it }
@@ -117,15 +117,6 @@ private val failedAvatars = FailedUrlCache(retryAfterMillis = 5 * 60_000L, clock
 
 /** Longest side an avatar is kept at, which covers its largest slot on a high density screen. */
 private const val AVATAR_MAX_SIDE = 256
-
-/** The power of two that brings an avatar of [width] by [height] to [AVATAR_MAX_SIDE] or under. */
-internal fun avatarSampleSize(width: Int, height: Int): Int {
-    var sampleSize = 1
-    while (width / sampleSize > AVATAR_MAX_SIDE || height / sampleSize > AVATAR_MAX_SIDE) {
-        sampleSize *= 2
-    }
-    return sampleSize
-}
 
 /**
  * The color a picture reads as: the hue most of its vivid pixels share, averaged over them. Null

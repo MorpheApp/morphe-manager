@@ -37,12 +37,4 @@ class AvatarUtilsTest {
         failed.add("https://example.com/a.png")
         assertTrue(failed.isRecent("https://example.com/a.png"))
     }
-
-    @Test
-    fun `avatar sample size keeps the longer side at 256 or under`() {
-        assertEquals(1, avatarSampleSize(256, 256))
-        assertEquals(2, avatarSampleSize(460, 460))
-        assertEquals(4, avatarSampleSize(1000, 600))
-        assertEquals(1, avatarSampleSize(-1, -1))
-    }
 }
