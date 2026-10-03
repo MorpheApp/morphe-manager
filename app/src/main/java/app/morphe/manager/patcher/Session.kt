@@ -18,6 +18,8 @@ import java.io.Closeable
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
+import kotlin.time.measureTime
+import kotlin.time.measureTimedValue
 
 internal typealias PatchList = List<Patch<*>>
 
@@ -97,39 +99,43 @@ class Session(
             addHandler(logger.handler)
         }
 
-        with(patcher) {
-            this += selectedPatches.toSet()
+        val patchTime = measureTime {
+            with(patcher) {
+                this += selectedPatches.toSet()
 
-            logger.info("Applying patches...")
-            applyPatchesVerbose(selectedPatches.sortedBy { it.name })
-        }
-
-        logger.info("Writing patched files...")
-        val result = withContext(Dispatchers.Default) {
-            // patcher.get() writes dex files, then encodes resources, so run on default pool
-            // instead of main thread.
-            patcher.get()
-        }
-
-        val patched = result.resources.resourcesApk ?: tempDir.resolve("result.apk").also { fallback ->
-            withContext(Dispatchers.IO) {
-                Files.copy(input.toPath(), fallback.toPath(), StandardCopyOption.REPLACE_EXISTING)
+                logger.info("Applying patches...")
+                applyPatchesVerbose(selectedPatches.sortedBy { it.name })
             }
         }
 
-        withContext(Dispatchers.Default) {
-            // Run on default pool instead of I/O since we're processing large files in our own code
-            // TODO: applyTo() aligns stored native libraries to 4 KB (ApkUtils.LIBRARY_ALIGNMENT in
-            //  the patcher) and the signer keeps that alignment, so a library can land off a 16 KB
-            //  boundary and fail to load from the APK on devices with 16 KB pages. Raise it to 16 KB
-            result.applyTo(patched)
+        logger.info("Writing patched files...")
+        val (result, compileTime) = withContext(Dispatchers.Default) {
+            // patcher.get() writes dex files, then encodes resources, so run on default pool
+            // instead of main thread.
+            measureTimedValue { patcher.get() }
         }
 
-        logger.info("Patched apk saved to $patched")
+        val writeTime = measureTime {
+            val patched = result.resources.resourcesApk ?: tempDir.resolve("result.apk").also { fallback ->
+                withContext(Dispatchers.IO) {
+                    Files.copy(input.toPath(), fallback.toPath(), StandardCopyOption.REPLACE_EXISTING)
+                }
+            }
 
-        withContext(Dispatchers.IO) {
-            Files.move(patched.toPath(), output.toPath(), StandardCopyOption.REPLACE_EXISTING)
+            withContext(Dispatchers.Default) {
+                // Run on default pool instead of I/O since we're processing large files in our own code
+                result.applyTo(patched)
+            }
+
+            withContext(Dispatchers.IO) {
+                Files.move(patched.toPath(), output.toPath(), StandardCopyOption.REPLACE_EXISTING)
+            }
         }
+
+        logger.info(
+            "Patched apk saved to $output (patch=${patchTime.inWholeMilliseconds}ms " +
+                "compile=${compileTime.inWholeMilliseconds}ms write=${writeTime.inWholeMilliseconds}ms)"
+        )
         updateProgress(state = State.COMPLETED) // Saving
     }
 
