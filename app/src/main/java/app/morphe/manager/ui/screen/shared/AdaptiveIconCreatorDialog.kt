@@ -170,9 +170,7 @@ fun AdaptiveIconCreatorDialog(
                 showTransparencyWarning = false
                 scope.launch(Dispatchers.IO) {
                     try {
-                        val inputStream = context.contentResolver.openInputStream(it)
-                        val bitmap = BitmapFactory.decodeStream(inputStream)
-                        inputStream?.close()
+                        val bitmap = context.contentResolver.decodeSampledBitmap(it)
                         foregroundBitmap = bitmap
                         val hasTransparency = bitmap?.hasTransparentPixels() == true
                         // Reset transform when new image is loaded
@@ -182,6 +180,8 @@ fun AdaptiveIconCreatorDialog(
                             showTransparencyWarning = !hasTransparency
                         }
                     } catch (e: Exception) {
+                        withContext(Dispatchers.Main) { context.toast("Failed to load image: ${e.message}") }
+                    } catch (e: OutOfMemoryError) {
                         withContext(Dispatchers.Main) { context.toast("Failed to load image: ${e.message}") }
                     }
                 }

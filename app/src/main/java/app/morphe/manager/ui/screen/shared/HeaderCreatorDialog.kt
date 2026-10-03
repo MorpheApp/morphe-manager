@@ -220,13 +220,17 @@ private fun HeaderVariantCard(
                 state.uri = it
                 scope.launch(Dispatchers.IO) {
                     try {
-                        val bitmap = context.contentResolver.openInputStream(it)?.use { stream -> BitmapFactory.decodeStream(stream) }
+                        val bitmap = context.contentResolver.decodeSampledBitmap(it)
                         withContext(Dispatchers.Main) {
                             state.bitmap = bitmap
                             // Reset transform when new image is loaded
                             state.resetTransform()
                         }
                     } catch (e: Exception) {
+                        withContext(Dispatchers.Main) {
+                            context.toast("Failed to load image: ${e.message}")
+                        }
+                    } catch (e: OutOfMemoryError) {
                         withContext(Dispatchers.Main) {
                             context.toast("Failed to load image: ${e.message}")
                         }
