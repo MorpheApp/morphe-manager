@@ -1326,26 +1326,28 @@ internal fun MainAppsSection(
                             val canScrollDown by remember(listState) {
                                 derivedStateOf { listState.canScrollForward }
                             }
-                            val topAlpha = animateFloatAsState(
+                            val topAlpha by animateFloatAsState(
                                 targetValue = if (canScrollUp) 1f else 0f,
                                 animationSpec = tween(150),
                                 label = "fade_top_alpha"
                             )
-                            val bottomAlpha = animateFloatAsState(
+                            val bottomAlpha by animateFloatAsState(
                                 targetValue = if (canScrollDown) 1f else 0f,
                                 animationSpec = tween(150),
                                 label = "fade_bottom_alpha"
                             )
                             if (showFadeOverlay) {
                                 val bgColor = MaterialTheme.colorScheme.background
-                                val fadePx = with(LocalDensity.current) { 8.dp.toPx() }
+                                val fadePx = with(LocalDensity.current) { 8.dp.toPx() } // Fade size
                                 Box(
                                     modifier = Modifier
                                         .matchParentSize()
                                         .drawWithContent {
                                             drawContent()
-                                            val currentTopAlpha = topAlpha.value
-                                            if (currentTopAlpha > 0f) {
+                                            // Each rect is bound to its own band. Left unbounded it
+                                            // covers the whole list, and the clamped tail of the
+                                            // gradient still costs a blend pass over every pixel
+                                            if (topAlpha > 0f) {
                                                 drawRect(
                                                     brush = Brush.verticalGradient(
                                                         colors = listOf(bgColor, Color.Transparent),
@@ -1353,11 +1355,10 @@ internal fun MainAppsSection(
                                                         endY = fadePx
                                                     ),
                                                     size = Size(size.width, fadePx),
-                                                    alpha = currentTopAlpha
+                                                    alpha = topAlpha
                                                 )
                                             }
-                                            val currentBottomAlpha = bottomAlpha.value
-                                            if (currentBottomAlpha > 0f) {
+                                            if (bottomAlpha > 0f) {
                                                 drawRect(
                                                     brush = Brush.verticalGradient(
                                                         colors = listOf(Color.Transparent, bgColor),
@@ -1366,7 +1367,7 @@ internal fun MainAppsSection(
                                                     ),
                                                     topLeft = Offset(0f, size.height - fadePx),
                                                     size = Size(size.width, fadePx),
-                                                    alpha = currentBottomAlpha
+                                                    alpha = bottomAlpha
                                                 )
                                             }
                                         }
