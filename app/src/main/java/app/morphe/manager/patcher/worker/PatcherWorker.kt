@@ -364,7 +364,8 @@ class PatcherWorker(
 
             keystoreManager.preloadSigner()
 
-            val useProcessRuntime = prefs.useProcessRuntime.get()
+            // A value imported from a newer device must not enable it where it cannot run
+            val useProcessRuntime = prefs.useProcessRuntime.get() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
             val stripNativeLibs = prefs.stripUnusedNativeLibs.get()
             val inputIsSplitArchive = SplitApkPreparer.isSplitArchive(inputFile)
             // The architecture the patches were selected against, worth a line of its own now
@@ -430,7 +431,6 @@ class PatcherWorker(
             }
 
             // Execute patching. ProcessRuntime has its own retry loop that reduces memory on OOM
-            // If it still fails on Android <= Q, fall back to CoroutineRuntime
             val runtime = if (useProcessRuntime) {
                 ProcessRuntime(applicationContext)
             } else {
@@ -476,8 +476,6 @@ class PatcherWorker(
                     isBlockedSyscall(e) -> "Patcher process was killed for a system call the device forbids"
                     e is ProcessRuntime.ProcessConnectTimeoutException -> e.message
                     e is ProcessRuntime.HeapLimitIgnoredException -> e.message
-                    isOomRelated(e) && Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q ->
-                        "Process runtime OOM on Android ${Build.VERSION.RELEASE}"
                     else -> null
                 } ?: throw e
 
@@ -596,13 +594,6 @@ class PatcherWorker(
         e is ProcessRuntime.ProcessExitException && e.exitCode == ProcessRuntime.SIGSYS_EXIT_CODE
 
     private fun Logger.logCoroutineHeap() = info("$LOG_PROCESS_PREFIX_COROUTINE_HEAP ${heapLimitMebibytes()}MB")
-
-    private fun isOomRelated(e: Exception) = when (e) {
-        is ProcessRuntime.ProcessExitException ->
-            e.exitCode == ProcessRuntime.OOM_EXIT_CODE || e.exitCode == ProcessRuntime.SIGKILL_EXIT_CODE
-        is ProcessRuntime.HeapExhaustedException -> true
-        else -> false
-    }
 
     companion object {
         private const val LOG_PREFIX = "[Worker]"
