@@ -9,19 +9,28 @@ import android.app.UiModeManager
 import android.content.ContentResolver
 import android.content.Context
 import android.content.res.Configuration
+import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.DocumentsContract
 import android.provider.OpenableColumns
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.screen.shared.FilePicker
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
 import java.io.File
 import java.util.zip.ZipInputStream
@@ -347,6 +356,40 @@ fun rememberAdaptiveMultiFilePicker(
     allowFolderSelection = false,
     onResult = onResult
 )
+
+/**
+ * [rememberAdaptiveFilePicker] for a single image, decoded off the main thread. [onLoaded] only
+ * hears of images that decoded, anything else is reported with a toast.
+ */
+@Composable
+fun rememberImagePicker(onLoaded: (Bitmap) -> Unit): () -> Unit {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val currentOnLoaded by rememberUpdatedState(onLoaded)
+    val loadFailedMessage = stringResource(R.string.image_load_failed)
+
+    return rememberAdaptiveFilePicker(
+        mimeTypes = arrayOf("image/*"),
+        onResult = { uri ->
+            if (uri == null) return@rememberAdaptiveFilePicker
+            scope.launch {
+                val bitmap = withContext(Dispatchers.IO) {
+                    try {
+                        context.contentResolver.decodeSampledBitmap(uri)
+                    } catch (e: Exception) {
+                        Log.e(tag, "Failed to decode image $uri", e)
+                        null
+                    } catch (e: OutOfMemoryError) {
+                        Log.e(tag, "Out of memory decoding image $uri", e)
+                        null
+                    }
+                }
+                if (bitmap != null) currentOnLoaded(bitmap)
+                else context.toast(loadFailedMessage)
+            }
+        }
+    )
+}
 
 @Composable
 private fun rememberAdaptivePicker(

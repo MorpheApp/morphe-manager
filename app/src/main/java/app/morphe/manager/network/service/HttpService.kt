@@ -12,6 +12,8 @@ import app.morphe.manager.network.utils.APIResponse
 import app.morphe.manager.util.tag
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.plugins.HttpTimeoutConfig
+import io.ktor.client.plugins.timeout
 import io.ktor.client.request.*
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
@@ -130,6 +132,10 @@ class HttpService(
             runWith429Retry("streamTo") {
                 http.prepareGet {
                     builder()
+                    // The client's request timeout covers the whole body, which a large download
+                    // on a slow link outlasts while bytes are still arriving. The socket timeout
+                    // still ends a stalled connection.
+                    timeout { requestTimeoutMillis = HttpTimeoutConfig.INFINITE_TIMEOUT_MS }
                     Log.i(tag, "HttpService.streamTo: ${url.buildString()}")
                 }.execute { response ->
                     when {

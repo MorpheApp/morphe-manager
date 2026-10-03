@@ -44,6 +44,7 @@ import app.morphe.manager.ui.model.State
 import app.morphe.manager.util.*
 import app.morphe.manager.util.PatchSelectionUtils.restrictTo
 import com.topjohnwu.superuser.Shell
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
@@ -566,6 +567,12 @@ class PatcherWorker(
                 workDataOf(PROCESS_FAILURE_MESSAGE_KEY to e.originalStackTrace.truncateForWorkData())
             )
         } catch (e: Exception) {
+            // Stopping the worker closes the patcher process's streams, so a cancel usually
+            // surfaces as an interrupted read rather than a CancellationException
+            if (isStopped || e is CancellationException) {
+                Log.i(tag, "Patching was cancelled".logFmt())
+                throw e
+            }
             Log.e(tag, "An exception occurred while patching".logFmt(), e)
             updateProgress(state = State.FAILED, message = e.stackTraceToString())
             Result.failure(

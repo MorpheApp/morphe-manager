@@ -141,7 +141,6 @@ fun AdaptiveIconCreatorDialog(
 ) {
     val scope = rememberCoroutineScope()
 
-    var foregroundUri by remember { mutableStateOf<Uri?>(null) }
     var foregroundBitmap by remember { mutableStateOf<Bitmap?>(null) }
     val primaryContainer = MaterialTheme.colorScheme.primaryContainer
     var backgroundColor by remember {
@@ -157,37 +156,19 @@ fun AdaptiveIconCreatorDialog(
     // Notification/monochrome icon transform state
     var notificationScale by remember { mutableFloatStateOf(1f) }
 
-    var showTransparencyWarning by remember { mutableStateOf(false) }
+    // Warns about a foreground without transparent pixels, sampled off the main thread
+    val showTransparencyWarning by produceState(false, foregroundBitmap) {
+        value = foregroundBitmap?.let { withContext(Dispatchers.Default) { !it.hasTransparentPixels() } } ?: false
+    }
 
     val context = LocalContext.current
 
     // Foreground image picker, resets all transforms when a new image is loaded
-    val openForegroundPicker = rememberAdaptiveFilePicker(
-        mimeTypes = arrayOf("image/*"),
-        onResult = { uri ->
-            uri?.let {
-                foregroundUri = it
-                showTransparencyWarning = false
-                scope.launch(Dispatchers.IO) {
-                    try {
-                        val bitmap = context.contentResolver.decodeSampledBitmap(it)
-                        foregroundBitmap = bitmap
-                        val hasTransparency = bitmap?.hasTransparentPixels() == true
-                        // Reset transform when new image is loaded
-                        withContext(Dispatchers.Main) {
-                            scale = 1f; offsetX = 0f; offsetY = 0f
-                            notificationScale = 1f
-                            showTransparencyWarning = !hasTransparency
-                        }
-                    } catch (e: Exception) {
-                        withContext(Dispatchers.Main) { context.toast("Failed to load image: ${e.message}") }
-                    } catch (e: OutOfMemoryError) {
-                        withContext(Dispatchers.Main) { context.toast("Failed to load image: ${e.message}") }
-                    }
-                }
-            }
-        }
-    )
+    val openForegroundPicker = rememberImagePicker { bitmap ->
+        foregroundBitmap = bitmap
+        scale = 1f; offsetX = 0f; offsetY = 0f
+        notificationScale = 1f
+    }
 
     val successMessage = stringResource(R.string.adaptive_icon_created_success)
     val failureMessage = stringResource(R.string.adaptive_icon_creation_failed)
@@ -247,7 +228,7 @@ fun AdaptiveIconCreatorDialog(
         // The picture every icon below is made from
         CreatorCard(title = stringResource(R.string.adaptive_icon_foreground)) {
             AppDialogOutlinedButton(
-                text = if (foregroundUri == null)
+                text = if (foregroundBitmap == null)
                     stringResource(R.string.adaptive_icon_select_image)
                 else
                     stringResource(R.string.adaptive_icon_change_image),
