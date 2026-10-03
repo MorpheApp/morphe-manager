@@ -24,7 +24,7 @@ private const val LEAKED_BUNDLE_DEX_PREFIX = "morphe-extracted-patches"
 
 class Filesystem(
     private val app: Application,
-    private val appScope: AppCoroutineScope = AppCoroutineScope()
+    private val appScope: AppCoroutineScope
 ) {
     /**
      * Kept in `noBackupFilesDir` so neither an OS cache wipe, nor the user-initiated

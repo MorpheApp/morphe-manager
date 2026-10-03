@@ -23,6 +23,7 @@ import java.util.UUID
  * 3. Launches a background coroutine on [dispatcher] to recursively delete the renamed
  *    trash directory (and any stale trash directories left behind by previous crashes or kills).
  *
+ * If the rename fails, the directory is deleted on the calling thread instead.
  * If the directory does not exist, simply ensures it exists via [File.mkdirs].
  */
 fun File.purgeDirectoryAsync(
@@ -39,6 +40,9 @@ fun File.purgeDirectoryAsync(
         if (renameTo(candidate)) {
             candidate
         } else {
+            // Without the rename the previous session's files would outlive the purge, so they
+            // are wiped in place instead
+            deleteRecursively()
             null
         }
     } else {
