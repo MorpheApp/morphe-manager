@@ -28,7 +28,7 @@ libsu = "6.0.0"
 # (rememberBottomSheetState). Drop the override once the BOM ships a stable 1.5.0
 material3 = "1.5.0-alpha29"
 morphe-library = "1.4.0"
-morphe-patcher = "1.15.1-dev.4"
+morphe-patcher = "1.15.1-dev.6"
 navigation = "2.10.2"
 play-services-base = "18.11.0"
 preferences-datastore = "1.2.1"

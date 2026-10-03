@@ -28,7 +28,9 @@ fun calculateSampleSize(width: Int, height: Int, maxDimension: Int): Int {
  */
 fun ContentResolver.decodeSampledBitmap(uri: Uri, maxDimension: Int = 2048): Bitmap? {
     val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
-    openInputStream(uri)?.use { BitmapFactory.decodeStream(it, null, bounds) } ?: return null
+    // A bounds-only decode always returns null, so only a missing stream or unreadable size fail here
+    (openInputStream(uri) ?: return null).use { BitmapFactory.decodeStream(it, null, bounds) }
+    if (bounds.outWidth <= 0 || bounds.outHeight <= 0) return null
 
     val options = BitmapFactory.Options().apply {
         inSampleSize = calculateSampleSize(bounds.outWidth, bounds.outHeight, maxDimension)

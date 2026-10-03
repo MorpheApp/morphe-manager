@@ -911,21 +911,34 @@ class HomeApps(
             return@withContext
         }
 
-        // Pre-fetch changelog entries for every remote bundle, keyed by uid.
-        // runCatching per bundle so a network failure in one doesn't block others.
-        val changelogByUid: Map<Int, List<ChangelogEntry>?> = sources.associate { source ->
-            source.uid to runCatching {
-                source.asRemoteOrNull?.fetchChangelogEntries(sinceVersion = null)
-            }.getOrNull()
+        val currentVersionByUid: Map<Int, String?> = sources.associate { it.uid to it.version }
+
+        val storedVersionsByApp = installedApps.associateWith { app ->
+            installedAppRepository.getBundleVersionsForApp(app.currentPackageName)
         }
 
-        val currentVersionByUid: Map<Int, String?> = sources.associate { it.uid to it.version }
+        // A changelog only refines the badge of an app whose bundle is newer than the one it was
+        // patched with, so no other bundle's changelog is worth downloading
+        val outdatedUids = outdatedBundleUids(storedVersionsByApp.values, currentVersionByUid)
+        if (outdatedUids.isEmpty()) {
+            _appUpdatesAvailable.value = emptyMap()
+            return@withContext
+        }
+
+        // Pre-fetch changelog entries for the remote bundles that have an outdated app, keyed by uid.
+        // runCatching per bundle so a network failure in one doesn't block others.
+        val changelogByUid: Map<Int, List<ChangelogEntry>?> = sources
+            .filter { it.uid in outdatedUids }
+            .associate { source ->
+                source.uid to runCatching {
+                    source.asRemoteOrNull?.fetchChangelogEntries(sinceVersion = null)
+                }.getOrNull()
+            }
 
         val updates = mutableMapOf<String, AppPatchUpdate>()
 
         installedApps.forEach { app ->
-            // Get stored bundle versions for this app
-            val storedVersions = installedAppRepository.getBundleVersionsForApp(app.currentPackageName)
+            val storedVersions = storedVersionsByApp.getValue(app)
             val appNames = resolveChangelogNames(app.originalPackageName)
 
             // Take the first bundle used for this app that has been updated
@@ -976,4 +989,15 @@ class HomeApps(
         pm.getPackageInfo(packageName)?.let { with(pm) { it.label() } }?.let { names += it }
         return names
     }
+}
+
+/** Uids of the bundles that are newer than the version at least one of [storedVersions] was patched with. */
+internal fun outdatedBundleUids(
+    storedVersions: Collection<Map<Int, String?>>,
+    currentVersionByUid: Map<Int, String?>
+): Set<Int> = storedVersions.flatMapTo(mutableSetOf()) { versions ->
+    versions.filter { (uid, storedVersion) ->
+        val currentVersion = currentVersionByUid[uid] ?: return@filter false
+        isNewerVersion(storedVersion, currentVersion)
+    }.keys
 }

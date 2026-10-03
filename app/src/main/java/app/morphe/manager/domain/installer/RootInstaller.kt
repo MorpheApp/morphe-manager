@@ -148,6 +148,8 @@ class RootInstaller(
         version: String,
         label: String
     ) = withContext(Dispatchers.IO) {
+        require(isValidPackageName(packageName)) { "Invalid package name: $packageName" }
+
         val remoteFS = awaitRemoteFS()
         val assets = app.assets
 
@@ -218,13 +220,7 @@ class RootInstaller(
         val stockSourcePath = stockSourceFile?.absolutePath ?: installedStockPath
         val stockModuleApkWritten = !stockSourcePath.isNullOrBlank() && stockMountPaths.isNotEmpty()
         if (stockModuleApkWritten) {
-            remoteFS.getFile(stockSourcePath)
-                .also { if (!it.exists()) throw Exception("Stock APK doesn't exist") }
-                .newInputStream().use { inputStream ->
-                    remoteFS.getFile(stockModuleApk).newOutputStream().use { outputStream ->
-                        inputStream.copyTo(outputStream)
-                    }
-                }
+            remoteFS.copyIntoPlace(stockSourcePath, stockModuleApk, "Stock APK doesn't exist")
 
             remoteFS.getFile("$modulePath/stock-paths.txt").newOutputStream().use { outputStream ->
                 outputStream.write(stockMountPaths.joinToString("\n", postfix = "\n").toByteArray())
@@ -232,14 +228,7 @@ class RootInstaller(
         }
 
         "$modulePath/$packageName.apk".let { apkPath ->
-
-            remoteFS.getFile(patchedAPK.absolutePath)
-                .also { if (!it.exists()) throw Exception("File doesn't exist") }
-                .newInputStream().use { inputStream ->
-                    remoteFS.getFile(apkPath).newOutputStream().use { outputStream ->
-                        inputStream.copyTo(outputStream)
-                    }
-                }
+            remoteFS.copyIntoPlace(patchedAPK.absolutePath, apkPath, "File doesn't exist")
 
             setModuleFilePermissions(
                 modulePath = modulePath,
@@ -249,7 +238,7 @@ class RootInstaller(
         }
 
         // Force-stop the app so it restarts with the newly mounted patched APK.
-        execute("am force-stop \"$packageName\"")
+        execute("am force-stop ${packageName.shellQuote()}")
     }
 
     suspend fun installAsPlayStore(apkFile: File) = withContext(Dispatchers.IO) {
@@ -408,6 +397,35 @@ class RootInstaller(
         }
 
         private fun Shell.Result.failureDetail() = (err + out).joinToString("\n").trim()
+
+        // Two or more segments, each starting with a letter, as Android requires of a package name
+        private val PACKAGE_NAME = Regex("^[A-Za-z][A-Za-z0-9_]*(\\.[A-Za-z][A-Za-z0-9_]*)+$")
+
+        internal fun isValidPackageName(packageName: String) = PACKAGE_NAME.matches(packageName)
+
+        /**
+         * Copies [sourcePath] to [targetPath] through a staging file in the same directory and
+         * moves it over the target once every byte is there. The module's APK is bind mounted
+         * over the app at boot, so a copy cut short by a full disk or a power loss must never
+         * be left under the name the mount script looks for.
+         */
+        private fun FileSystemManager.copyIntoPlace(sourcePath: String, targetPath: String, missingMessage: String) {
+            val source = getFile(sourcePath).also { if (!it.exists()) throw Exception(missingMessage) }
+            val staging = getFile("$targetPath.tmp")
+            try {
+                source.newInputStream().use { input ->
+                    staging.newOutputStream().use { output -> input.copyTo(output) }
+                }
+                if (staging.length() != source.length()) {
+                    throw IOException("Copied ${staging.length()} of ${source.length()} bytes to $targetPath")
+                }
+                if (!staging.renameTo(getFile(targetPath))) {
+                    throw IOException("Failed to move the copy into place at $targetPath")
+                }
+            } finally {
+                staging.delete()
+            }
+        }
 
         private fun String.shellQuote() = "'${replace("'", "'\"'\"'")}'"
 

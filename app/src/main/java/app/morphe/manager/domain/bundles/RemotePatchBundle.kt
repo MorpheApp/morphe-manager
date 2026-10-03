@@ -15,6 +15,8 @@ import app.morphe.manager.util.SOURCE_REPO_URL
 import app.morphe.manager.util.TimedCache
 import app.morphe.manager.util.compareVersions
 import app.morphe.manager.util.releasePageUrl
+import io.ktor.client.plugins.HttpTimeoutConfig
+import io.ktor.client.plugins.timeout
 import io.ktor.client.request.header
 import io.ktor.client.request.prepareGet
 import io.ktor.client.request.url
@@ -611,6 +613,10 @@ class GitHubPullRequestBundle(
                 prepareGet {
                     url(info.downloadUrl)
                     header("Authorization", "Bearer $gitHubPat")
+                    // The client's request timeout covers the whole body, which a large bundle on a
+                    // slow link outlasts while bytes are still arriving. The socket timeout still
+                    // ends a stalled connection.
+                    timeout { requestTimeoutMillis = HttpTimeoutConfig.INFINITE_TIMEOUT_MS }
                 }.execute { httpResponse ->
                     val contentType = httpResponse.contentType()?.toString() ?: ""
                     val contentLength = httpResponse.contentLength()
