@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.datastore.core.DataStore
+import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -17,8 +18,20 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
 import java.io.IOException
 
+internal fun preferencesCorruptionHandler(
+    name: String,
+    onCorrupt: (String, Throwable) -> Unit = { message, e -> Log.e(tag, message, e) }
+) = ReplaceFileCorruptionHandler { e ->
+    onCorrupt("Preferences file '$name' is corrupt, starting from defaults", e)
+    emptyPreferences()
+}
+
 abstract class BasePreferencesManager(private val context: Context, name: String) {
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = name)
+    // A file a power cut left unreadable would otherwise fail every read and write until the data is cleared
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
+        name = name,
+        corruptionHandler = preferencesCorruptionHandler(name)
+    )
     protected val dataStore get() = context.dataStore
 
     /** Warms the store so the first blocking read on the UI thread is already served from memory. */
