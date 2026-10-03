@@ -184,7 +184,6 @@ fun HeaderCreatorDialog(
 /** One theme's header: the picture picked for it and where it sits in the header's frame. */
 @Stable
 private class HeaderVariantState {
-    var uri by mutableStateOf<Uri?>(null)
     var bitmap by mutableStateOf<Bitmap?>(null)
     var scale by mutableFloatStateOf(1f)
     var offsetX by mutableFloatStateOf(0f)
@@ -210,40 +209,16 @@ private fun HeaderVariantCard(
     state: HeaderVariantState,
     isDarkTheme: Boolean
 ) {
-    val scope = rememberCoroutineScope()
-    val context = LocalContext.current
-
-    val openPicker = rememberAdaptiveFilePicker(
-        mimeTypes = arrayOf("image/*"),
-        onResult = { uri ->
-            uri?.let {
-                state.uri = it
-                scope.launch(Dispatchers.IO) {
-                    try {
-                        val bitmap = context.contentResolver.decodeSampledBitmap(it)
-                        withContext(Dispatchers.Main) {
-                            state.bitmap = bitmap
-                            // Reset transform when new image is loaded
-                            state.resetTransform()
-                        }
-                    } catch (e: Exception) {
-                        withContext(Dispatchers.Main) {
-                            context.toast("Failed to load image: ${e.message}")
-                        }
-                    } catch (e: OutOfMemoryError) {
-                        withContext(Dispatchers.Main) {
-                            context.toast("Failed to load image: ${e.message}")
-                        }
-                    }
-                }
-            }
-        }
-    )
+    val openPicker = rememberImagePicker { bitmap ->
+        state.bitmap = bitmap
+        // Reset transform when new image is loaded
+        state.resetTransform()
+    }
 
     CreatorCard(title = title) {
         AppDialogOutlinedButton(
             text = stringResource(
-                if (state.uri == null) R.string.adaptive_icon_select_image else R.string.adaptive_icon_change_image
+                if (state.bitmap == null) R.string.adaptive_icon_select_image else R.string.adaptive_icon_change_image
             ),
             onClick = { openPicker() },
             icon = icon,
