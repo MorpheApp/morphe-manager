@@ -8,6 +8,7 @@ package app.morphe.manager.util
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color as AndroidColor
+import android.os.SystemClock
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.foundation.Image
 import androidx.compose.runtime.*
@@ -65,17 +66,65 @@ private var launcherAccent: AvatarCache.Accent? = null
  */
 suspend fun loadRemoteAvatar(url: String): Bitmap? = withContext(Dispatchers.IO) {
     AvatarCache[url]?.let { return@withContext it }
+    if (failedAvatars.isRecent(url)) return@withContext null
     try {
         val connection = URL(url).openConnection()
         connection.connectTimeout = 5000
         connection.readTimeout = 5000
         connection.connect()
-        connection.getInputStream().use { input ->
-            BitmapFactory.decodeStream(input)
-        }?.also { AvatarCache[url] = it }
+        val bytes = connection.getInputStream().use { it.readBytes() }
+        val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
+        BitmapFactory.decodeByteArray(bytes, 0, bytes.size, bounds)
+        val options = BitmapFactory.Options().apply {
+            inSampleSize = avatarSampleSize(bounds.outWidth, bounds.outHeight)
+        }
+        BitmapFactory.decodeByteArray(bytes, 0, bytes.size, options)
+            ?.also { AvatarCache[url] = it }
+            ?: run {
+                failedAvatars.add(url)
+                null
+            }
     } catch (_: Exception) {
+        failedAvatars.add(url)
         null
     }
+}
+
+/**
+ * Avatars that failed to load lately. Rows show the same avatar again each time they scroll back
+ * into view, and a dead address would otherwise cost its full timeout on every pass. Entries
+ * expire, so an avatar missed while offline is tried again later in the same session.
+ */
+internal class FailedUrlCache(
+    private val retryAfterMillis: Long,
+    private val clock: () -> Long
+) {
+    private val failedAt = ConcurrentHashMap<String, Long>()
+
+    fun add(url: String) {
+        failedAt[url] = clock()
+    }
+
+    fun isRecent(url: String): Boolean {
+        val at = failedAt[url] ?: return false
+        if (clock() - at < retryAfterMillis) return true
+        failedAt.remove(url, at)
+        return false
+    }
+}
+
+private val failedAvatars = FailedUrlCache(retryAfterMillis = 5 * 60_000L, clock = SystemClock::elapsedRealtime)
+
+/** Longest side an avatar is kept at, which covers its largest slot on a high density screen. */
+private const val AVATAR_MAX_SIDE = 256
+
+/** The power of two that brings an avatar of [width] by [height] to [AVATAR_MAX_SIDE] or under. */
+internal fun avatarSampleSize(width: Int, height: Int): Int {
+    var sampleSize = 1
+    while (width / sampleSize > AVATAR_MAX_SIDE || height / sampleSize > AVATAR_MAX_SIDE) {
+        sampleSize *= 2
+    }
+    return sampleSize
 }
 
 /**
