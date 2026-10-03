@@ -5,12 +5,15 @@ import app.morphe.manager.util.tag
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -34,14 +37,16 @@ class Store<S>(private val coroutineScope: CoroutineScope, initialState: S) : Ac
     private val lock = Mutex()
 
     /** Enqueues [action] and starts the runner coroutine if it is not already running. */
-    suspend fun dispatch(action: Action<S>) = lock.withLock {
-        Log.d(tag, "Dispatching $action")
+    suspend fun dispatch(action: Action<S>) {
+        runCatching { Log.d(tag, "Dispatching $action") }
         queueChannel.send(action)
 
-        if (isRunningActions) return@withLock
-        isRunningActions = true
-        coroutineScope.launch {
-            runActions()
+        lock.withLock {
+            if (isRunningActions) return
+            isRunningActions = true
+            coroutineScope.launch {
+                runActions()
+            }
         }
     }
 
@@ -51,28 +56,44 @@ class Store<S>(private val coroutineScope: CoroutineScope, initialState: S) : Ac
      */
     @OptIn(ExperimentalCoroutinesApi::class)
     private suspend fun runActions() {
-        while (true) {
-            val action = withTimeoutOrNull(200L.milliseconds) { queueChannel.receive() }
-            if (action == null) {
-                Log.d(tag, "Stopping action runner")
-                lock.withLock {
-                    // A new dispatch may have arrived during the 200 ms timeout window
-                    isRunningActions = !queueChannel.isEmpty
-                    if (!isRunningActions) return
+        try {
+            while (true) {
+                val action = withTimeoutOrNull(200L.milliseconds) { queueChannel.receive() }
+                if (action == null) {
+                    runCatching { Log.d(tag, "Stopping action runner") }
+                    lock.withLock {
+                        // A new dispatch may have arrived during the 200 ms timeout window
+                        isRunningActions = !queueChannel.isEmpty
+                        if (!isRunningActions) return
+                    }
+                    continue
                 }
-                continue
-            }
 
-            Log.d(tag, "Running $action")
-            _state.value = try {
-                with(action) { this@Store.execute(_state.value) }
-            } catch (c: CancellationException) {
-                // Cancellation means the store's scope is gone - stop the runner without the lock
-                isRunningActions = false
-                throw c
-            } catch (e: Exception) {
-                action.catch(e)
-                continue
+                runCatching { Log.d(tag, "Running $action") }
+                _state.value = try {
+                    with(action) { this@Store.execute(_state.value) }
+                } catch (c: CancellationException) {
+                    throw c
+                } catch (e: Exception) {
+                    action.catch(e)
+                    continue
+                }
+            }
+        } catch (c: CancellationException) {
+            throw c
+        } catch (t: Throwable) {
+            runCatching { Log.e(tag, "Action runner terminated unexpectedly", t) }
+        } finally {
+            withContext(NonCancellable) {
+                lock.withLock {
+                    isRunningActions = false
+                    if (!queueChannel.isEmpty && coroutineScope.isActive) {
+                        isRunningActions = true
+                        coroutineScope.launch {
+                            runActions()
+                        }
+                    }
+                }
             }
         }
     }
@@ -90,6 +111,6 @@ interface ActionContext
 interface Action<S> {
     suspend fun ActionContext.execute(current: S): S
     suspend fun catch(exception: Exception) {
-        Log.e(tag, "Got exception while executing $this", exception)
+        runCatching { Log.e(tag, "Got exception while executing $this", exception) }
     }
 }
