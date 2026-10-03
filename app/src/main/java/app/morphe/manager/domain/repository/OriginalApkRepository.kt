@@ -61,6 +61,7 @@ internal fun moveIntoPlace(source: File, target: File) {
  * place to avoid rewriting the file, while non-temporary inputs are copied through staging.
  */
 internal fun retainOriginalApk(source: File, target: File, moveSource: Boolean) {
+    // Copy file if source is different, and move it into place only once written in full
     if (source != target) {
         if (moveSource) moveIntoPlace(source, target)
         else copyThroughStaging(source, target)
