@@ -250,14 +250,7 @@ fun SettingsScreen(
 
     // Manager changelog dialog
     if (showChangelogDialog.value) {
-        // Activity-scoped so this shares the update state and staged download with the home screen
-        val updateViewModel: UpdateViewModel = koinViewModel(
-            viewModelStoreOwner = LocalActivity.current as ComponentActivity
-        )
-        ManagerChangelogDialog(
-            onDismiss = { showChangelogDialog.value = false },
-            updateViewModel = updateViewModel
-        )
+        ManagerChangelogDialog(onDismiss = { showChangelogDialog.value = false })
     }
 
     // Import-mode dialog for manager settings: user picks Replace or Merge

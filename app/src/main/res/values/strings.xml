@@ -583,8 +583,7 @@ Uninstalling will permanently erase all app data"</string>
     <string name="patcher_back_to_game_hint">Tap %1$s to go back to your game</string>
     <string name="patcher_storage_permission_dialog_title">Cannot access storage path</string>
     <string name="patcher_incompatible_patcher_title">Update required</string>
-    <string name="patcher_incompatible_patcher_description">The bundle &lt;b&gt;%1$s&lt;/b&gt; requires patcher version &lt;b&gt;%2$s&lt;/b&gt; or newer. Please update Morphe to patch this app</string>
-    <string name="patcher_incompatible_patcher_update_button">Download and update Morphe</string>
+    <string name="patcher_incompatible_patcher_description">The source &lt;b&gt;%1$s&lt;/b&gt; requires patcher &lt;b&gt;%2$s&lt;/b&gt; or newer. Update Morphe to use it</string>
     <string name="patcher_storage_permission_description_api30">One or more patch options point to paths Morphe cannot read. Grant storage access and tap the button then patching will start automatically</string>
     <string name="patcher_storage_permission_description_legacy">One or more patch options point to paths that cannot be accessed. Update the paths in patch options and try again</string>
     <string name="patcher_storage_permission_grant">Grant storage permission</string>

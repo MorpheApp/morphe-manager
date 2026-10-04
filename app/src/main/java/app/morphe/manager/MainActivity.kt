@@ -53,7 +53,6 @@ import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.MainViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import app.morphe.manager.ui.viewmodel.ThemeSettingsViewModel
-import app.morphe.manager.ui.viewmodel.UpdateViewModel
 import app.morphe.manager.util.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
@@ -405,13 +404,8 @@ private fun MorpheManager(vm: MainViewModel) {
     // The manager has no changelog view of its own for a release it has not installed, so the
     // update dialog is the answer to "what's new": it lists exactly the entries being offered
     if (vm.pendingManagerChangelog) {
-        // Activity-scoped, so this shares the check and the download with the home screen
-        val updateViewModel: UpdateViewModel = koinViewModel(
-            viewModelStoreOwner = LocalActivity.current as ComponentActivity
-        )
         ManagerChangelogDialog(
             onDismiss = { vm.pendingManagerChangelog = false },
-            updateViewModel = updateViewModel,
             expectsUpdate = true
         )
     }

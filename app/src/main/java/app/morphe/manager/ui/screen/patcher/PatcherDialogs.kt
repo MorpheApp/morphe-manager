@@ -10,8 +10,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
@@ -46,12 +44,10 @@ import app.morphe.manager.R
 import app.morphe.manager.ui.model.RenameWarning
 import app.morphe.manager.ui.screen.home.ManagerChangelogDialog
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.ui.viewmodel.UpdateViewModel
 import app.morphe.manager.util.PathValidationResult
 import app.morphe.manager.util.deviceStats
 import app.morphe.manager.util.htmlAnnotatedString
 import app.morphe.manager.util.requestIgnoreBatteryOptimizations
-import org.koin.androidx.compose.koinViewModel
 
 /**
  * Ceiling for the label column, past which a translation that runs long would leave its value
@@ -73,15 +69,10 @@ fun IncompatiblePatcherVersionDialog(
     val showManagerUpdate = rememberSaveable { mutableStateOf(false) }
 
     if (showManagerUpdate.value) {
-        // Activity-scoped so this shares the update check and staged download with the home screen
-        val updateViewModel: UpdateViewModel = koinViewModel(
-            viewModelStoreOwner = LocalActivity.current as ComponentActivity
-        )
         // Takes this dialog's place rather than stacking on it, and closing it closes both,
         // since patching with this bundle stays blocked until the update is installed
         ManagerChangelogDialog(
             onDismiss = onDismiss,
-            updateViewModel = updateViewModel,
             expectsUpdate = true
         )
         return
@@ -97,7 +88,7 @@ fun IncompatiblePatcherVersionDialog(
         )),
         footer = {
             AppDialogButtonRow(
-                primaryText = stringResource(R.string.patcher_incompatible_patcher_update_button),
+                primaryText = stringResource(R.string.sources_management_outdated_manager_badge),
                 onPrimaryClick = { showManagerUpdate.value = true },
                 primaryIcon = Icons.Outlined.SystemUpdate,
                 secondaryText = stringResource(R.string.close),

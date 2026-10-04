@@ -5,6 +5,8 @@
 
 package app.morphe.manager.ui.screen.home
 
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
@@ -39,6 +41,7 @@ import app.morphe.manager.util.releasePageUrl
 import app.morphe.manager.util.rememberSourceAccent
 import app.morphe.manager.util.withVersionPrefix
 import kotlinx.coroutines.delay
+import org.koin.androidx.compose.koinViewModel
 import java.text.NumberFormat
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -87,6 +90,8 @@ private fun updateDialogContentOf(updateViewModel: UpdateViewModel): UpdateDialo
  * releases an available update brings, summed up above them, through the installed version to
  * the history below, and the footer downloads and installs the update while there is one.
  *
+ * @param updateViewModel Activity-scoped by default, so every entry point shares one update
+ *   check and one staged download.
  * @param expectsUpdate Whether the dialog was opened for an update, from the banner or its
  *   notification. It then keeps to the update even when the check comes back empty, saying the
  *   release is not ready yet and offering to check again.
@@ -94,7 +99,9 @@ private fun updateDialogContentOf(updateViewModel: UpdateViewModel): UpdateDialo
 @Composable
 fun ManagerChangelogDialog(
     onDismiss: () -> Unit,
-    updateViewModel: UpdateViewModel,
+    updateViewModel: UpdateViewModel = koinViewModel(
+        viewModelStoreOwner = LocalActivity.current as ComponentActivity
+    ),
     expectsUpdate: Boolean = false
 ) {
     val state = updateViewModel.state

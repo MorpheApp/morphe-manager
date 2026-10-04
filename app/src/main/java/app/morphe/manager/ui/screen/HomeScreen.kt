@@ -6,8 +6,6 @@
 package app.morphe.manager.ui.screen
 
 import android.view.HapticFeedbackConstants
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -226,13 +224,8 @@ fun HomeScreen(
 
     // Manager update details dialog
     if (showUpdateDetailsDialog.value) {
-        // Activity-scoped so the download this starts is the same one Settings sees
-        val updateViewModel: UpdateViewModel = koinViewModel(
-            viewModelStoreOwner = LocalActivity.current as ComponentActivity
-        )
         ManagerChangelogDialog(
             onDismiss = { showUpdateDetailsDialog.value = false },
-            updateViewModel = updateViewModel,
             expectsUpdate = true
         )
     }
