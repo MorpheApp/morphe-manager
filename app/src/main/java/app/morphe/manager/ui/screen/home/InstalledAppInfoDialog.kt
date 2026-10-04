@@ -48,6 +48,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.*
@@ -185,6 +187,11 @@ fun InstalledAppInfoDialog(
     val showDeleteDialog = remember { mutableStateOf(false) }
     val showAppliedPatchesDialog = remember { mutableStateOf(false) }
     val showAppLinksDialog = remember { mutableStateOf(false) }
+
+    // The link selection is only ever changed on a system screen, which is left by coming back here
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
+        viewModel.refreshAppLinks()
+    }
     val changelogRequest = remember { mutableStateOf<BundleChangelogRequest?>(null) }
     val showMountWarningDialog = remember { mutableStateOf(false) }
     val signatureConflict = remember { mutableStateOf<InstallViewModel.InstallState.Conflict?>(null) }
@@ -1058,7 +1065,7 @@ private val InstallType.badge: Pair<ImageVector, Int>
 /**
  * Wraps content with a staggered entrance animation.
  * Uses a single progress float (0 to 1); alpha, offsetY and scale are
- * derived via lerp - one Recomposition subscriber instead of three.
+ * derived via [lerp] - one Recomposition subscriber instead of three.
  * Each item appears [index] * [Animations.STAGGER_STEP] ms after [entered] becomes true.
  */
 @Composable
@@ -1123,7 +1130,7 @@ private fun InfoSection(
         try {
             val pm = context.packageManager
             val info = pm.getPackageInfo(installedApp.currentPackageName, 0)
-            val sourceDir = info.applicationInfo?.sourceDir ?: return@remember emptyList<String>()
+            val sourceDir = info.applicationInfo?.sourceDir ?: return@remember emptyList()
             NativeLibs.extractAbisFromApk(File(sourceDir))
         } catch (_: Exception) { emptyList() }
     }

@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
@@ -45,13 +46,14 @@ import org.koin.compose.koinInject
 fun AppLinksDialog(
     appLabel: String,
     appInfo: PackageInfo?,
-    accentColor: Color,
+    accentColor: Color?,
     packageName: String,
     status: AppLinksStatus,
     onRefresh: () -> Unit,
     onDismiss: () -> Unit
 ) {
     val context = LocalContext.current
+    val resources = LocalResources.current
     val scope = rememberCoroutineScope()
     val appLinksManager: AppLinksManager = koinInject()
     val repairCapability by produceState(RepairCapability.NONE) {
@@ -79,7 +81,7 @@ fun AppLinksDialog(
                             isRepairing = false
                             onRefresh()
                             context.toast(
-                                context.getString(
+                                resources.getString(
                                     if (success) R.string.app_links_repair_success
                                     else R.string.app_links_repair_failed
                                 )

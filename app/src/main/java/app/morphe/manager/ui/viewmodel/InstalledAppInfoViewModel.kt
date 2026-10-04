@@ -29,6 +29,7 @@ import app.morphe.manager.ui.screen.home.resolveAppliedBundleAttribution
 import app.morphe.manager.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -107,7 +108,8 @@ class InstalledAppInfoViewModel(
             installedAppRepository.getAsFlow(packageName).collect { app ->
                 installedApp = app
 
-                if (app != null) {
+                // Scoped to this emission, so a failed check cancels its siblings rather than the collection
+                if (app != null) coroutineScope {
                     // Run all checks in parallel
                     val deferredOriginalApk = async { originalApkRepository.get(app.originalPackageName) != null }
                     val deferredSiblings = async { installedAppRepository.hasSiblingRecords(app) }

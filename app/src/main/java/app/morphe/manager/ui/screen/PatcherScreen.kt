@@ -16,7 +16,6 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
@@ -285,7 +284,7 @@ private fun PatcherScreenContent(
         AppLinksDialog(
             appLabel = patcherViewModel.exportMetadata?.appName ?: targetInstalledPackage,
             appInfo = null,
-            accentColor = MaterialTheme.colorScheme.primary,
+            accentColor = LocalAccent.current,
             packageName = targetInstalledPackage,
             status = shownAppLinksStatus,
             onRefresh = { appLinksStatus = appLinksManager.getStatus(targetInstalledPackage) },
