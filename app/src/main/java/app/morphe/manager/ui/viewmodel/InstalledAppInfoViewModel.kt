@@ -16,6 +16,9 @@ import app.morphe.manager.domain.apk.canRemoveTrackedRecord
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.UninstallCancelledException
+import app.morphe.manager.domain.links.AppLinksManager
+import app.morphe.manager.domain.links.AppLinksStatus
+import app.morphe.manager.domain.links.RepairCapability
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
@@ -46,6 +49,7 @@ class InstalledAppInfoViewModel(
     private val originalApkRepository: OriginalApkRepository by inject()
     private val applicationScope: AppCoroutineScope by inject()
     private val localApkSources: LocalApkSources by inject()
+    private val appLinksManager: AppLinksManager by inject()
 
     lateinit var onBackClick: () -> Unit
     var onAppStateChanged: ((packageName: String) -> Unit)? = null
@@ -68,6 +72,13 @@ class InstalledAppInfoViewModel(
         private set
     var hasOriginalApk by mutableStateOf(false)
         private set
+
+    var appLinksStatus: AppLinksStatus? by mutableStateOf(null)
+        private set
+    var isRepairingLinks by mutableStateOf(false)
+        private set
+    val repairCapability: RepairCapability
+        get() = appLinksManager.getRepairCapability()
 
     /**
      * Whether removing this record is what takes the original APK archive with it, which is not
@@ -294,6 +305,35 @@ class InstalledAppInfoViewModel(
         // Update mounted state, which a mount install already read for its patch state
         isMounted = snapshot.mounted
             ?: (rootInstaller.isDeviceRooted() && rootInstaller.isAppMounted(app.currentPackageName))
+
+        if (app.installType != InstallType.SAVED) {
+            appLinksStatus = appLinksManager.getStatus(app.currentPackageName)
+        } else {
+            appLinksStatus = null
+        }
+    }
+
+    fun refreshAppLinks() {
+        val app = installedApp ?: return
+        if (app.installType != InstallType.SAVED) {
+            appLinksStatus = appLinksManager.getStatus(app.currentPackageName)
+        }
+    }
+
+    fun repairAppLinks(onComplete: (Boolean) -> Unit = {}) {
+        val app = installedApp ?: return
+        viewModelScope.launch {
+            isRepairingLinks = true
+            val success = appLinksManager.repairAppLinks(app.currentPackageName, appLinksStatus?.domains ?: emptyList())
+            refreshAppLinks()
+            isRepairingLinks = false
+            onComplete(success)
+        }
+    }
+
+    fun openAppLinksSettings() {
+        val app = installedApp ?: return
+        appLinksManager.openSettings(app.currentPackageName)
     }
 
     /** Manually refresh app state (e.g., after app installation/uninstallation) */

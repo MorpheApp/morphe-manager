@@ -10,6 +10,7 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.provider.Settings
 
 /** Opens the system app info screen for Morphe. */
@@ -40,6 +41,25 @@ fun Context.requestIgnoreBatteryOptimizations() {
     startSettings(
         Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.fromParts("package", packageName, null))
     )
+}
+
+/**
+ * Opens the system "Open by default" app links screen for [targetPackageName].
+ * On Android 12+, this directs the user straight to the domain verification screen.
+ * Falls back to application details settings on older Android versions or unsupported OEM builds.
+ */
+fun Context.openAppOpenByDefaultSettings(targetPackageName: String): Boolean {
+    val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        Intent(Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS, Uri.fromParts("package", targetPackageName, null))
+    } else {
+        Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", targetPackageName, null))
+    }
+    val opened = startSettings(intent)
+    return if (!opened && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        startSettings(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", targetPackageName, null)))
+    } else {
+        opened
+    }
 }
 
 private fun Context.startSettings(intent: Intent): Boolean = try {

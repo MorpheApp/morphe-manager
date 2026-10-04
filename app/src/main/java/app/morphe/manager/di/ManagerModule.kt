@@ -8,6 +8,7 @@ import app.morphe.manager.domain.bundles.AppVersionCatalog
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.SessionInstaller
+import app.morphe.manager.domain.links.AppLinksManager
 import app.morphe.manager.domain.manager.*
 import app.morphe.manager.ui.screen.shared.ContentTranslation
 import app.morphe.manager.util.AppCoroutineScope
@@ -36,4 +37,5 @@ val managerModule = module {
     singleOf(::BatchPatchCoordinator)
     singleOf(::ContentTranslator)
     singleOf(::ContentTranslation)
+    singleOf(::AppLinksManager)
 }

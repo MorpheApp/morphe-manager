@@ -10,6 +10,7 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -28,6 +29,7 @@ import androidx.compose.material.icons.outlined.ErrorOutline
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.InstallMobile
 import androidx.compose.material.icons.outlined.Link
+import androidx.compose.material.icons.outlined.LinkOff
 import androidx.compose.material.icons.outlined.Source
 import androidx.compose.material.icons.outlined.SportsEsports
 import androidx.compose.material.icons.outlined.Update
@@ -55,6 +57,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.domain.links.AppLinksStatus
 import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_BUILD
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_DEVICE
@@ -247,6 +250,8 @@ fun PatchingSuccess(
     excludedPatches: List<String> = emptyList(),
     isExpertMode: Boolean = false,
     showBackToGameHint: Boolean = false,
+    appLinksStatus: AppLinksStatus? = null,
+    onConfigureAppLinks: (() -> Unit)? = null,
     onInstall: () -> Unit,
     onUninstall: (String) -> Unit,
     onIgnoreSignatureMismatch: () -> Unit,
@@ -283,6 +288,14 @@ fun PatchingSuccess(
                     .takeIf { excludedPatches.isNotEmpty() && installState is InstallState.Ready },
                 tone = SemanticTone.Neutral,
                 icon = Icons.Outlined.Info
+            )
+            ResultNotice(
+                text = stringResource(R.string.app_links_unverified_banner_description).takeIf {
+                    installState is InstallState.Installed && appLinksStatus?.needsAttention == true
+                },
+                tone = SemanticTone.Warning,
+                icon = Icons.Outlined.LinkOff,
+                modifier = if (onConfigureAppLinks != null) Modifier.clickable(onClick = onConfigureAppLinks) else Modifier
             )
         },
         actions = {
@@ -672,7 +685,8 @@ private fun ResultNotice(
     tone: SemanticTone,
     icon: ImageVector,
     maxLines: Int = Int.MAX_VALUE,
-    overflowAction: NoticeAction? = null
+    overflowAction: NoticeAction? = null,
+    modifier: Modifier = Modifier
 ) {
     AnimatedVisibility(
         visible = text != null,
@@ -687,7 +701,8 @@ private fun ResultNotice(
             tone = tone,
             icon = icon,
             maxLines = maxLines,
-            overflowAction = overflowAction
+            overflowAction = overflowAction,
+            modifier = modifier
         )
     }
 }

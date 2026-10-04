@@ -127,4 +127,12 @@
         <item quantity="one">%s new release</item>
         <item quantity="other">%s new releases</item>
     </plurals>
+    <plurals name="app_links_count_enabled">
+        <item quantity="one">%d link enabled</item>
+        <item quantity="other">%d links enabled</item>
+    </plurals>
+    <plurals name="app_links_count_unverified">
+        <item quantity="one">%d unverified link</item>
+        <item quantity="other">%d unverified links</item>
+    </plurals>
 </resources>
