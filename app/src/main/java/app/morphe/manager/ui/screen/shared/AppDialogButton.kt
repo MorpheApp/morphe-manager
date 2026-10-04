@@ -401,7 +401,7 @@ private fun DialogActionButton(
 
 /** Whether every label fits the share of [availableWidth] its button would get in a single row. */
 @Composable
-private fun actionsFitInRow(actions: List<DialogAction>, availableWidth: Dp): Boolean {
+internal fun actionsFitInRow(actions: List<DialogAction>, availableWidth: Dp): Boolean {
     val measurer = rememberTextMeasurer()
     val style = MaterialTheme.typography.labelLarge
     val density = LocalDensity.current
