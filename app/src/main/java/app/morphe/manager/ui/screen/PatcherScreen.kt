@@ -20,7 +20,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -42,7 +41,6 @@ import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import app.morphe.manager.util.APK_MIMETYPE
 import app.morphe.manager.util.EventEffect
-import app.morphe.manager.util.toast
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -256,12 +254,13 @@ private fun PatcherScreenContent(
     val installedPackageName by remember { derivedStateOf { installViewModel.installedPackageName } }
     val targetInstalledPackage = installedPackageName ?: patcherViewModel.packageName
 
-    val context = LocalContext.current
+    // Re-signing drops the verified web links of the original publisher, worth a word once installed
     val appLinksManager: AppLinksManager = koinInject()
     var appLinksStatus by remember { mutableStateOf<AppLinksStatus?>(null) }
     var showAppLinksDialog by remember { mutableStateOf(false) }
-    var isRepairingLinks by remember { mutableStateOf(false) }
-    val repairCapability = remember { appLinksManager.getRepairCapability() }
+    val ignoredAppLinksPackages by prefs.ignoredAppLinksPackages.getAsState()
+    val linksOpenInBrowser = appLinksStatus?.opensInBrowser == true &&
+            targetInstalledPackage !in ignoredAppLinksPackages
 
     val showInstalledSourceConflictDialog = remember { mutableStateOf(false) }
 
@@ -281,35 +280,15 @@ private fun PatcherScreenContent(
         }
     }
 
-    if (showAppLinksDialog && appLinksStatus != null && appLinksStatus!!.hasSupportedLinks) {
+    val shownAppLinksStatus = appLinksStatus
+    if (showAppLinksDialog && shownAppLinksStatus?.hasSupportedLinks == true) {
         AppLinksDialog(
             appLabel = patcherViewModel.exportMetadata?.appName ?: targetInstalledPackage,
             appInfo = null,
             accentColor = MaterialTheme.colorScheme.primary,
             packageName = targetInstalledPackage,
-            status = appLinksStatus!!,
-            repairCapability = repairCapability,
-            isRepairing = isRepairingLinks,
-            onRepair = {
-                scope.launch {
-                    isRepairingLinks = true
-                    val success = appLinksManager.repairAppLinks(targetInstalledPackage, appLinksStatus!!.unhandledDomains)
-                    isRepairingLinks = false
-                    appLinksStatus = appLinksManager.getStatus(targetInstalledPackage)
-                    context.toast(
-                        context.getString(
-                            if (success) R.string.app_links_repair_success
-                            else R.string.app_links_repair_failed
-                        )
-                    )
-                }
-            },
-            onOpenSettings = {
-                appLinksManager.openSettings(targetInstalledPackage)
-            },
-            onRefresh = {
-                appLinksStatus = appLinksManager.getStatus(targetInstalledPackage)
-            },
+            status = shownAppLinksStatus,
+            onRefresh = { appLinksStatus = appLinksManager.getStatus(targetInstalledPackage) },
             onDismiss = { showAppLinksDialog = false }
         )
     }
@@ -642,8 +621,7 @@ private fun PatcherScreenContent(
                         excludedPatches = excludedPatches,
                         isExpertMode = useExpertMode,
                         showBackToGameHint = showBackToGameHint,
-                        appLinksStatus = appLinksStatus,
-                        onConfigureAppLinks = { showAppLinksDialog = true },
+                        onConfigureAppLinks = { showAppLinksDialog = true }.takeIf { linksOpenInBrowser },
                         onLogsClick = {
                             // Only the hint that was actually on screen counts as found
                             if (showBackToGameHint) {

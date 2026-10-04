@@ -44,22 +44,14 @@ fun Context.requestIgnoreBatteryOptimizations() {
 }
 
 /**
- * Opens the system "Open by default" app links screen for [targetPackageName].
- * On Android 12+, this directs the user straight to the domain verification screen.
- * Falls back to application details settings on older Android versions or unsupported OEM builds.
+ * Opens the system "Open by default" screen of [targetPackageName], where its web links are
+ * selected. Falls back to the app info screen on builds without it.
  */
 fun Context.openAppOpenByDefaultSettings(targetPackageName: String): Boolean {
-    val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-        Intent(Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS, Uri.fromParts("package", targetPackageName, null))
-    } else {
-        Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", targetPackageName, null))
-    }
-    val opened = startSettings(intent)
-    return if (!opened && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-        startSettings(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", targetPackageName, null)))
-    } else {
-        opened
-    }
+    val uri = Uri.fromParts("package", targetPackageName, null)
+    return (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
+            startSettings(Intent(Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS, uri))) ||
+            startSettings(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, uri))
 }
 
 private fun Context.startSettings(intent: Intent): Boolean = try {

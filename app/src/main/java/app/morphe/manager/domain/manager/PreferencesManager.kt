@@ -157,6 +157,9 @@ class PreferencesManager(
 
     val useCustomFilePicker = booleanPreference("use_custom_file_picker", false)
 
+    /** Packages whose unverified web links the user chose not to be warned about. Tied to the installs, so never exported. */
+    val ignoredAppLinksPackages = stringSetPreference("ignored_app_links_packages", emptySet())
+
     /** Packages of the third-party APK download helpers the user trusts to be offered. */
     val trustedApkDownloadHelpers = stringSetPreference("trusted_apk_download_helpers", emptySet())
 

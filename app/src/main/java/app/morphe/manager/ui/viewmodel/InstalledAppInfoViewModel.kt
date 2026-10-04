@@ -18,7 +18,7 @@ import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.UninstallCancelledException
 import app.morphe.manager.domain.links.AppLinksManager
 import app.morphe.manager.domain.links.AppLinksStatus
-import app.morphe.manager.domain.links.RepairCapability
+import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
@@ -50,6 +50,7 @@ class InstalledAppInfoViewModel(
     private val applicationScope: AppCoroutineScope by inject()
     private val localApkSources: LocalApkSources by inject()
     private val appLinksManager: AppLinksManager by inject()
+    private val prefs: PreferencesManager by inject()
 
     lateinit var onBackClick: () -> Unit
     var onAppStateChanged: ((packageName: String) -> Unit)? = null
@@ -73,12 +74,12 @@ class InstalledAppInfoViewModel(
     var hasOriginalApk by mutableStateOf(false)
         private set
 
+    /** Web links of the installed app, null while nothing is installed under its package. */
     var appLinksStatus: AppLinksStatus? by mutableStateOf(null)
         private set
-    var isRepairingLinks by mutableStateOf(false)
-        private set
-    val repairCapability: RepairCapability
-        get() = appLinksManager.getRepairCapability()
+
+    /** Packages whose unverified links banner the user turned down. */
+    val ignoredAppLinksPackages = prefs.ignoredAppLinksPackages.flow
 
     /**
      * Whether removing this record is what takes the original APK archive with it, which is not
@@ -306,34 +307,21 @@ class InstalledAppInfoViewModel(
         isMounted = snapshot.mounted
             ?: (rootInstaller.isDeviceRooted() && rootInstaller.isAppMounted(app.currentPackageName))
 
-        if (app.installType != InstallType.SAVED) {
-            appLinksStatus = appLinksManager.getStatus(app.currentPackageName)
-        } else {
-            appLinksStatus = null
-        }
+        appLinksStatus = installedInfo?.let { appLinksManager.getStatus(app.currentPackageName) }
     }
 
+    /** Reads the link selection again, which only the system screen changes. */
     fun refreshAppLinks() {
         val app = installedApp ?: return
-        if (app.installType != InstallType.SAVED) {
-            appLinksStatus = appLinksManager.getStatus(app.currentPackageName)
-        }
+        if (appLinksStatus != null) appLinksStatus = appLinksManager.getStatus(app.currentPackageName)
     }
 
-    fun repairAppLinks(onComplete: (Boolean) -> Unit = {}) {
+    /** Hides the unverified links banner of this app for good. The info row still reports them. */
+    fun ignoreAppLinks() {
         val app = installedApp ?: return
         viewModelScope.launch {
-            isRepairingLinks = true
-            val success = appLinksManager.repairAppLinks(app.currentPackageName, appLinksStatus?.domains ?: emptyList())
-            refreshAppLinks()
-            isRepairingLinks = false
-            onComplete(success)
+            prefs.ignoredAppLinksPackages.update(prefs.ignoredAppLinksPackages.get() + app.currentPackageName)
         }
-    }
-
-    fun openAppLinksSettings() {
-        val app = installedApp ?: return
-        appLinksManager.openSettings(app.currentPackageName)
     }
 
     /** Manually refresh app state (e.g., after app installation/uninstallation) */

@@ -1,4 +1,4 @@
-<resources>
+﻿<resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Other apps</string>
     <string name="home_other_apps_action">Select other apps</string>
@@ -495,7 +495,6 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="home_app_info_app_deleted_warning">App was uninstalled</string>
     <string name="home_app_info_app_deleted_description">This app was uninstalled outside the Morphe. Repatch it to restore functionality</string>
     <string name="home_app_info_not_patched_description">An unpatched version of this app is installed. Morphe still has its previous patch record</string>
-    <string name="home_app_info_app_links">Supported web links</string>
     <string name="app_links_title">Supported web links</string>
     <string name="app_links_description">On Android 12+, links to supported domains open in your browser by default unless approved</string>
     <string name="app_links_unverified_banner_title">Web links not verified</string>
@@ -506,7 +505,7 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="app_links_repair_success">App links enabled successfully</string>
     <string name="app_links_repair_failed">Failed to enable app links automatically</string>
     <string name="app_links_badge_enabled">Enabled</string>
-    <string name="app_links_badge_unverified">Unverified</string>
+    <string name="app_links_badge_disabled">Disabled</string>
     <string name="app_links_all_verified">All supported links are configured to open in this app</string>
     <string name="app_links_fix">Fix links</string>
     <string name="configure">Configure</string>

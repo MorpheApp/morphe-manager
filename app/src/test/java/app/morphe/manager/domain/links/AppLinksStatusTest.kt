@@ -5,91 +5,52 @@
 
 package app.morphe.manager.domain.links
 
-import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class AppLinksStatusTest {
 
+    private val youTubeDomains = listOf("youtu.be", "youtube.com", "m.youtube.com", "www.youtube.com")
+
     @Test
     fun `no supported domains reports no links and no attention needed`() {
-        val status = AppLinksStatus(
-            packageName = "app.test",
-            totalDomains = 0,
-            selectedDomains = 0,
-            domains = emptyList(),
-            unhandledDomains = emptyList(),
-            isLinkHandlingAllowed = true
-        )
+        val status = AppLinksStatus.None
 
         assertFalse(status.hasSupportedLinks)
         assertFalse(status.isFullyConfigured)
         assertFalse(status.needsAttention)
+        assertFalse(status.opensInBrowser)
     }
 
     @Test
-    fun `unhandled domains report attention needed`() {
-        val status = AppLinksStatus(
-            packageName = "com.google.android.youtube",
-            totalDomains = 4,
-            selectedDomains = 0,
-            domains = listOf("youtu.be", "youtube.com", "m.youtube.com", "www.youtube.com"),
-            unhandledDomains = listOf("youtu.be", "youtube.com", "m.youtube.com", "www.youtube.com"),
-            isLinkHandlingAllowed = true
-        )
+    fun `no selected domain opens every link in the browser`() {
+        val status = AppLinksStatus(domains = youTubeDomains, unhandledDomains = youTubeDomains)
 
         assertTrue(status.hasSupportedLinks)
         assertFalse(status.isFullyConfigured)
         assertTrue(status.needsAttention)
-        assertEquals(4, status.unhandledDomains.size)
+        assertTrue(status.opensInBrowser)
     }
 
     @Test
-    fun `partially selected domains report attention needed`() {
+    fun `partially selected domains need attention without opening every link in the browser`() {
         val status = AppLinksStatus(
-            packageName = "com.google.android.youtube",
-            totalDomains = 4,
-            selectedDomains = 2,
-            domains = listOf("youtu.be", "youtube.com", "m.youtube.com", "www.youtube.com"),
-            unhandledDomains = listOf("m.youtube.com", "www.youtube.com"),
-            isLinkHandlingAllowed = true
+            domains = youTubeDomains + "myaccount.google.com",
+            unhandledDomains = listOf("myaccount.google.com")
         )
 
-        assertTrue(status.hasSupportedLinks)
         assertFalse(status.isFullyConfigured)
         assertTrue(status.needsAttention)
+        assertFalse(status.opensInBrowser)
     }
 
     @Test
-    fun `all domains selected with link handling enabled reports fully configured`() {
-        val status = AppLinksStatus(
-            packageName = "com.google.android.youtube",
-            totalDomains = 4,
-            selectedDomains = 4,
-            domains = listOf("youtu.be", "youtube.com", "m.youtube.com", "www.youtube.com"),
-            unhandledDomains = emptyList(),
-            isLinkHandlingAllowed = true
-        )
+    fun `all domains selected reports fully configured`() {
+        val status = AppLinksStatus(domains = youTubeDomains, unhandledDomains = emptyList())
 
-        assertTrue(status.hasSupportedLinks)
         assertTrue(status.isFullyConfigured)
         assertFalse(status.needsAttention)
-    }
-
-    @Test
-    fun `all domains selected but link handling disabled reports attention needed`() {
-        val status = AppLinksStatus(
-            packageName = "com.google.android.youtube",
-            totalDomains = 4,
-            selectedDomains = 4,
-            domains = listOf("youtu.be", "youtube.com", "m.youtube.com", "www.youtube.com"),
-            unhandledDomains = emptyList(),
-            isLinkHandlingAllowed = false
-        )
-
-        assertTrue(status.hasSupportedLinks)
-        assertFalse(status.isFullyConfigured)
-        assertTrue(status.needsAttention)
+        assertFalse(status.opensInBrowser)
     }
 }

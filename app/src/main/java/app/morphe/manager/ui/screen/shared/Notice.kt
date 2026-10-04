@@ -64,7 +64,7 @@ private val CompactMetrics = NoticeMetrics(
     itemSpacing = 8.dp
 )
 
-/** Link under a [Notice] cut short, to where its whole message can be read. */
+/** Link under a [Notice], to where its message can be read in full or acted on. */
 class NoticeAction(
     val text: String,
     val onClick: () -> Unit
@@ -81,6 +81,7 @@ class NoticeAction(
  * @param maxLines Lines the message may take before it is cut short with an ellipsis
  * @param overflowAction Offered under the message only once [maxLines] cut it short, so a
  *        message that fits never points at a longer version of itself
+ * @param action Offered under the message whatever its length, ahead of [overflowAction]
  * @param modifier Modifier to be applied to the notice
  */
 @Composable
@@ -92,7 +93,8 @@ fun Notice(
     density: NoticeDensity = NoticeDensity.Comfortable,
     isCentered: Boolean = false,
     maxLines: Int = Int.MAX_VALUE,
-    overflowAction: NoticeAction? = null
+    overflowAction: NoticeAction? = null,
+    action: NoticeAction? = null
 ) {
     val metrics = when (density) {
         NoticeDensity.Comfortable -> ComfortableMetrics
@@ -144,12 +146,13 @@ fun Notice(
                 )
             }
 
-            if (overflowAction != null && cutShort) {
+            val shownAction = action ?: overflowAction?.takeIf { cutShort }
+            if (shownAction != null) {
                 HorizontalDivider(color = tone.accent.copy(alpha = 0.2f))
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable(role = Role.Button, onClick = overflowAction.onClick)
+                        .clickable(role = Role.Button, onClick = shownAction.onClick)
                         .heightIn(min = 44.dp)
                         // Lined up with the message rather than the icon, as the rest of its text
                         .padding(
@@ -161,7 +164,7 @@ fun Notice(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = overflowAction.text,
+                        text = shownAction.text,
                         style = textStyle,
                         fontWeight = FontWeight.Medium,
                         color = contentColor

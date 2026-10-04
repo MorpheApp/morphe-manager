@@ -369,27 +369,14 @@ fun InstalledAppInfoDialog(
         }
 
         val appLinksStatus = viewModel.appLinksStatus
-        if (showAppLinksDialog.value && appLinksStatus != null && appLinksStatus.hasSupportedLinks) {
+        if (showAppLinksDialog.value && appLinksStatus?.hasSupportedLinks == true) {
             AppLinksDialog(
                 appLabel = appLabel,
                 appInfo = appInfo,
                 accentColor = appAccentColor,
                 packageName = installedApp?.currentPackageName ?: packageName,
                 status = appLinksStatus,
-                repairCapability = viewModel.repairCapability,
-                isRepairing = viewModel.isRepairingLinks,
-                onRepair = {
-                    viewModel.repairAppLinks { success ->
-                        context.toast(
-                            context.getString(
-                                if (success) R.string.app_links_repair_success
-                                else R.string.app_links_repair_failed
-                            )
-                        )
-                    }
-                },
-                onOpenSettings = { viewModel.openAppLinksSettings() },
-                onRefresh = { viewModel.refreshAppLinks() },
+                onRefresh = viewModel::refreshAppLinks,
                 onDismiss = { showAppLinksDialog.value = false }
             )
         }
@@ -789,25 +776,11 @@ private fun InstalledAppBanners(
     onOpenAppLinks: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val appLinksStatus = viewModel.appLinksStatus
+    val ignoredAppLinksPackages by viewModel.ignoredAppLinksPackages.collectAsStateWithLifecycle(emptySet())
+    val showsAppLinksBanner = viewModel.appLinksStatus?.opensInBrowser == true &&
+            viewModel.installedApp?.currentPackageName !in ignoredAppLinksPackages
 
     Column(modifier = modifier) {
-        BannerSlot(
-            visible = appLinksStatus?.needsAttention == true && !viewModel.isAppDeleted,
-            entered = entered,
-            staggerIndex = staggerIndex
-        ) {
-            WarningBanner(
-                icon = Icons.Outlined.LinkOff,
-                title = stringResource(R.string.app_links_unverified_banner_title),
-                description = stringResource(R.string.app_links_unverified_banner_description),
-                buttonText = stringResource(R.string.app_links_fix),
-                buttonIcon = Icons.Outlined.Link,
-                onClick = onOpenAppLinks,
-                accentColor = accentColor,
-                isError = false
-            )
-        }
         BannerSlot(
             visible = viewModel.isAppDeleted && !viewModel.isInstallStateNotPatched,
             entered = entered,
@@ -891,6 +864,29 @@ private fun InstalledAppBanners(
                             onClick = it
                         )
                     }
+                )
+            )
+        }
+        // Last, since links opening in the browser is an inconvenience the app works fine with
+        BannerSlot(
+            visible = showsAppLinksBanner,
+            entered = entered,
+            staggerIndex = staggerIndex
+        ) {
+            WarningBanner(
+                icon = Icons.Outlined.LinkOff,
+                title = stringResource(R.string.app_links_unverified_banner_title),
+                description = stringResource(R.string.app_links_unverified_banner_description),
+                buttonText = stringResource(R.string.app_links_fix),
+                buttonIcon = Icons.Outlined.Link,
+                onClick = onOpenAppLinks,
+                accentColor = accentColor,
+                secondaryActions = listOf(
+                    ActionItem(
+                        text = stringResource(R.string.ignore),
+                        icon = Icons.Outlined.VisibilityOff,
+                        onClick = viewModel::ignoreAppLinks
+                    )
                 )
             )
         }
@@ -1217,13 +1213,13 @@ private fun InfoSection(
                 )
             }
 
-            if (appLinksStatus != null && appLinksStatus.hasSupportedLinks) {
+            if (appLinksStatus?.hasSupportedLinks == true) {
                 SettingsDivider()
                 val linksValue = if (appLinksStatus.isFullyConfigured) {
                     pluralStringResource(
                         R.plurals.app_links_count_enabled,
-                        appLinksStatus.totalDomains,
-                        appLinksStatus.totalDomains
+                        appLinksStatus.domains.size,
+                        appLinksStatus.domains.size
                     )
                 } else {
                     pluralStringResource(
@@ -1234,7 +1230,7 @@ private fun InfoSection(
                 }
                 InfoRowWithAction(
                     icon = if (appLinksStatus.isFullyConfigured) Icons.Outlined.Link else Icons.Outlined.LinkOff,
-                    label = stringResource(R.string.home_app_info_app_links),
+                    label = stringResource(R.string.app_links_title),
                     value = linksValue,
                     onAction = onOpenAppLinks,
                     actionIcon = Icons.Outlined.Settings,

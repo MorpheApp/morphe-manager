@@ -16,20 +16,31 @@ import androidx.compose.material.icons.outlined.CheckCircleOutline
 import androidx.compose.material.icons.outlined.LinkOff
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import app.morphe.manager.R
+import app.morphe.manager.domain.links.AppLinksManager
 import app.morphe.manager.domain.links.AppLinksStatus
 import app.morphe.manager.domain.links.RepairCapability
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.util.openAppOpenByDefaultSettings
+import app.morphe.manager.util.toast
+import kotlinx.coroutines.launch
+import org.koin.compose.koinInject
 
+/**
+ * Lists the web links [packageName] declares and where each one opens. [onRefresh] reads the
+ * status again, which happens on every return to the app since the system screen is where the
+ * user changes it.
+ */
 @Composable
 fun AppLinksDialog(
     appLabel: String,
@@ -37,13 +48,17 @@ fun AppLinksDialog(
     accentColor: Color,
     packageName: String,
     status: AppLinksStatus,
-    repairCapability: RepairCapability,
-    isRepairing: Boolean,
-    onRepair: () -> Unit,
-    onOpenSettings: () -> Unit,
     onRefresh: () -> Unit,
     onDismiss: () -> Unit
 ) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val appLinksManager: AppLinksManager = koinInject()
+    val repairCapability by produceState(RepairCapability.NONE) {
+        value = appLinksManager.getRepairCapability()
+    }
+    var isRepairing by remember { mutableStateOf(false) }
+
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
         onRefresh()
     }
@@ -52,13 +67,25 @@ fun AppLinksDialog(
         if (repairCapability != RepairCapability.NONE && status.needsAttention) {
             add(
                 DialogAction(
-                    text = if (isRepairing) {
-                        stringResource(R.string.app_links_enable_auto_in_progress)
-                    } else {
-                        stringResource(R.string.app_links_enable_auto)
-                    },
+                    text = stringResource(
+                        if (isRepairing) R.string.app_links_enable_auto_in_progress
+                        else R.string.app_links_enable_auto
+                    ),
                     icon = Icons.Outlined.AutoFixHigh,
-                    onClick = onRepair,
+                    onClick = {
+                        scope.launch {
+                            isRepairing = true
+                            val success = appLinksManager.repairAppLinks(packageName)
+                            isRepairing = false
+                            onRefresh()
+                            context.toast(
+                                context.getString(
+                                    if (success) R.string.app_links_repair_success
+                                    else R.string.app_links_repair_failed
+                                )
+                            )
+                        }
+                    },
                     enabled = !isRepairing,
                     emphasis = DialogActionEmphasis.Filled
                 )
@@ -68,7 +95,7 @@ fun AppLinksDialog(
             DialogAction(
                 text = stringResource(R.string.app_links_open_settings),
                 icon = Icons.AutoMirrored.Outlined.Launch,
-                onClick = onOpenSettings
+                onClick = { context.openAppOpenByDefaultSettings(packageName) }
             )
         )
     }
@@ -109,50 +136,40 @@ fun AppLinksDialog(
             Column {
                 status.domains.forEachIndexed { index, domain ->
                     if (index > 0) SettingsDivider()
-                    val isEnabled = domain !in status.unhandledDomains
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = Defaults.ContentPadding, vertical = Defaults.ItemSpacing),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = domain,
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurface,
-                            modifier = Modifier.weight(1f)
-                        )
-                        val badgeBg = if (isEnabled) {
-                            SemanticTone.Success.container
-                        } else {
-                            MaterialTheme.colorScheme.surfaceVariant
-                        }
-                        val badgeColor = if (isEnabled) {
-                            SemanticTone.Success.content
-                        } else {
-                            MaterialTheme.colorScheme.onSurfaceVariant
-                        }
-                        val badgeText = if (isEnabled) {
-                            stringResource(R.string.app_links_badge_enabled)
-                        } else {
-                            stringResource(R.string.app_links_badge_unverified)
-                        }
-                        Box(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(Defaults.CompactCornerRadius))
-                                .background(badgeBg)
-                                .padding(horizontal = 8.dp, vertical = 2.dp)
-                        ) {
-                            Text(
-                                text = badgeText,
-                                style = MaterialTheme.typography.labelSmall,
-                                color = badgeColor
-                            )
-                        }
-                    }
+                    DomainRow(domain = domain, isEnabled = domain !in status.unhandledDomains)
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun DomainRow(domain: String, isEnabled: Boolean) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = Defaults.ContentPadding, vertical = Defaults.ItemSpacing),
+        horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = domain,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier.weight(1f)
+        )
+        Text(
+            text = stringResource(
+                if (isEnabled) R.string.app_links_badge_enabled else R.string.app_links_badge_disabled
+            ),
+            style = MaterialTheme.typography.labelSmall,
+            color = if (isEnabled) SemanticTone.Success.content else MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier
+                .clip(RoundedCornerShape(Defaults.CompactCornerRadius))
+                .background(
+                    if (isEnabled) SemanticTone.Success.container else MaterialTheme.colorScheme.surfaceVariant
+                )
+                .padding(horizontal = 8.dp, vertical = 2.dp)
+        )
     }
 }
