@@ -137,12 +137,12 @@ private fun CreatorGuideDialog(
                         text = sectionTitle,
                         style = MaterialTheme.typography.bodyMedium,
                         fontWeight = FontWeight.SemiBold,
-                        color = LocalDialogTextColor.current
+                        color = dialogTextColor()
                     )
                     Text(
                         text = body,
                         style = MaterialTheme.typography.bodySmall,
-                        color = LocalDialogSecondaryTextColor.current
+                        color = dialogSecondaryTextColor()
                     )
                 }
             }

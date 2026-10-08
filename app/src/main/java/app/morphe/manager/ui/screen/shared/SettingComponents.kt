@@ -736,7 +736,7 @@ fun EmptyState(
     icon: ImageVector? = Icons.Outlined.FolderOff,
     subtitle: String? = null,
     action: CardAction? = null,
-    contentColor: Color = LocalDialogSecondaryTextColor.current
+    contentColor: Color = dialogSecondaryTextColor()
 ) {
     Column(
         modifier = modifier

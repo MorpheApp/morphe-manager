@@ -812,7 +812,7 @@ fun DeepLinkAddSourceDialog(
             Text(
                 text = stringResource(R.string.deep_link_add_source_message),
                 style = MaterialTheme.typography.bodyLarge,
-                color = LocalDialogSecondaryTextColor.current,
+                color = dialogSecondaryTextColor(),
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -823,7 +823,7 @@ fun DeepLinkAddSourceDialog(
                     text = url,
                     style = MaterialTheme.typography.bodySmall,
                     fontFamily = FontFamily.Monospace,
-                    color = LocalDialogSecondaryTextColor.current,
+                    color = dialogSecondaryTextColor(),
                     modifier = Modifier.padding(horizontal = Defaults.ContentPadding)
                 )
             }
@@ -892,7 +892,7 @@ fun MppImportDialog(
                             Text(
                                 text = it,
                                 style = MaterialTheme.typography.bodySmall,
-                                color = LocalDialogSecondaryTextColor.current,
+                                color = dialogSecondaryTextColor(),
                                 maxLines = 2,
                                 overflow = TextOverflow.Ellipsis
                             )
@@ -927,7 +927,7 @@ fun MppImportDialog(
                                 text = source,
                                 style = MaterialTheme.typography.bodySmall,
                                 fontFamily = FontFamily.Monospace,
-                                color = LocalDialogSecondaryTextColor.current,
+                                color = dialogSecondaryTextColor(),
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis
                             )
@@ -949,7 +949,7 @@ fun MppImportDialog(
                                     text = fileName,
                                     style = MaterialTheme.typography.bodySmall,
                                     fontFamily = FontFamily.Monospace,
-                                    color = LocalDialogSecondaryTextColor.current,
+                                    color = dialogSecondaryTextColor(),
                                     maxLines = 1,
                                     overflow = TextOverflow.Ellipsis
                                 )
@@ -1081,7 +1081,7 @@ fun SimpleBundleSelectDialog(
                             Text(
                                 text = candidate.displayTitle,
                                 style = MaterialTheme.typography.bodyLarge,
-                                color = LocalDialogTextColor.current,
+                                color = dialogTextColor(),
                                 modifier = Modifier.weight(1f, fill = false)
                             )
                             candidate.sourceType?.let { type ->
@@ -1091,20 +1091,20 @@ fun SimpleBundleSelectDialog(
                         Text(
                             text = patchCountText,
                             style = MaterialTheme.typography.bodySmall,
-                            color = LocalDialogSecondaryTextColor.current
+                            color = dialogSecondaryTextColor()
                         )
                         if (patchVersionText != null) {
                             Text(
                                 text = patchVersionText,
                                 style = MaterialTheme.typography.bodySmall,
-                                color = LocalDialogSecondaryTextColor.current
+                                color = dialogSecondaryTextColor()
                             )
                         }
                         if (recommendedVersionText != null) {
                             Text(
                                 text = recommendedVersionText,
                                 style = MaterialTheme.typography.bodySmall,
-                                color = LocalDialogSecondaryTextColor.current
+                                color = dialogSecondaryTextColor()
                             )
                         }
                     }

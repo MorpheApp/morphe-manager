@@ -293,7 +293,7 @@ fun SelectionCheckRow(
         Text(
             text = text,
             style = MaterialTheme.typography.bodyMedium,
-            color = LocalDialogSecondaryTextColor.current
+            color = dialogSecondaryTextColor()
         )
     }
 }

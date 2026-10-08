@@ -72,7 +72,7 @@ fun SignatureConflictDialog(
             Text(
                 text = stringResource(R.string.install_ignore_signature_description),
                 style = MaterialTheme.typography.bodyMedium,
-                color = LocalDialogSecondaryTextColor.current,
+                color = dialogSecondaryTextColor(),
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )

@@ -194,7 +194,7 @@ fun ListDialogHeader(
                 Text(
                     text = title,
                     style = DialogHeaderDefaults.titleStyle,
-                    color = LocalDialogTextColor.current,
+                    color = dialogTextColor(),
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.headerTitleEntrance(entrance)
@@ -219,7 +219,7 @@ fun ListDialogHeader(
                         Text(
                             text = text,
                             style = subtitleStyle,
-                            color = LocalDialogSecondaryTextColor.current
+                            color = dialogSecondaryTextColor()
                         )
                     }
                 }

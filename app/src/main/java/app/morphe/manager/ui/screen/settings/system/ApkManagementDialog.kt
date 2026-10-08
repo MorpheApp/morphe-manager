@@ -1116,13 +1116,13 @@ private fun ApkItemCard(
                             text = data.displayName,
                             style = MaterialTheme.typography.bodyLarge,
                             fontWeight = FontWeight.Medium,
-                            color = LocalDialogTextColor.current
+                            color = dialogTextColor()
                         )
                         Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                             Text(
                                 text = data.packageName,
                                 style = MaterialTheme.typography.bodySmall,
-                                color = LocalDialogSecondaryTextColor.current
+                                color = dialogSecondaryTextColor()
                             )
                             Text(
                                 text = stringResource(
@@ -1131,13 +1131,13 @@ private fun ApkItemCard(
                                     LocalContext.current.formatBytes(data.fileSize)
                                 ),
                                 style = MaterialTheme.typography.bodySmall,
-                                color = LocalDialogSecondaryTextColor.current
+                                color = dialogSecondaryTextColor()
                             )
                             if (data.abis.isNotEmpty()) {
                                 Text(
                                     text = data.abis.joinToString(" • "),
                                     style = MaterialTheme.typography.bodySmall,
-                                    color = LocalDialogSecondaryTextColor.current
+                                    color = dialogSecondaryTextColor()
                                 )
                             }
                         }

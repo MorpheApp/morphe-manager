@@ -58,8 +58,8 @@ private const val OPTION_KEY_MAX_FRACTION = 0.4f
 
 @Composable
 private fun PatchEntryRow(entry: PatchEntry) {
-    val textColor = LocalDialogTextColor.current
-    val secondaryColor = LocalDialogSecondaryTextColor.current
+    val textColor = dialogTextColor()
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -99,7 +99,7 @@ private fun PatchEntryRow(entry: PatchEntry) {
                                 Text(
                                     text = formatOptionValue(value),
                                     style = MaterialTheme.typography.bodySmall,
-                                    color = secondaryColor,
+                                    color = dialogSecondaryTextColor(),
                                     modifier = Modifier
                                         .alignByBaseline()
                                         .weight(1f)

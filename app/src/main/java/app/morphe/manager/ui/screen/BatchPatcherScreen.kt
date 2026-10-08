@@ -796,7 +796,7 @@ private fun BatchItemCard(
                         text = item.appName,
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Medium,
-                        color = LocalDialogTextColor.current,
+                        color = dialogTextColor(),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -829,7 +829,7 @@ private fun BatchItemCard(
                     Text(
                         text = item.id,
                         style = MaterialTheme.typography.bodySmall,
-                        color = LocalDialogSecondaryTextColor.current,
+                        color = dialogSecondaryTextColor(),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -845,7 +845,7 @@ private fun BatchItemCard(
                         ) {
                             MaterialTheme.colorScheme.error
                         } else {
-                            LocalDialogSecondaryTextColor.current
+                            dialogSecondaryTextColor()
                         },
                         // An install failure explains what to do about it, so it is shown in
                         // full. Patcher errors are raw stack traces and stay clamped

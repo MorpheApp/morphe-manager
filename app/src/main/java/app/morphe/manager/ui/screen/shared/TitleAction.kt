@@ -95,7 +95,7 @@ fun TitleAction(
                 imageVector = icon,
                 contentDescription = contentDescription,
                 modifier = Modifier.size(Defaults.IconSize),
-                tint = LocalDialogTextColor.current.copy(alpha = if (enabled) 1f else Defaults.DISABLED_ALPHA)
+                tint = dialogTextColor().copy(alpha = if (enabled) 1f else Defaults.DISABLED_ALPHA)
             )
         }
     } else {
@@ -115,7 +115,7 @@ fun TitleAction(
                 contentColor = contentColor,
                 // Scaled rather than set, so a tint that is already see-through fades further
                 disabledContainerColor = containerColor.copy(alpha = containerColor.alpha * Defaults.DISABLED_ALPHA),
-                disabledContentColor = LocalDialogTextColor.current.copy(alpha = Defaults.DISABLED_ALPHA)
+                disabledContentColor = dialogTextColor().copy(alpha = Defaults.DISABLED_ALPHA)
             )
         ) {
             Icon(

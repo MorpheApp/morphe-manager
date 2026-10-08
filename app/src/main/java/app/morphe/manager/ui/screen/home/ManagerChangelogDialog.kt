@@ -449,7 +449,7 @@ private fun DownloadProgress(
                     text = remember(locale) { NumberFormat.getPercentInstance(locale) }.format(progress),
                     style = MaterialTheme.typography.displaySmall,
                     fontWeight = FontWeight.Bold,
-                    color = LocalDialogTextColor.current
+                    color = dialogTextColor()
                 )
             }
             // Nothing to size up before the first callback, so the percentage stands alone
@@ -469,7 +469,7 @@ private fun DownloadProgress(
                     },
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Medium,
-                    color = LocalDialogSecondaryTextColor.current,
+                    color = dialogSecondaryTextColor(),
                     textAlign = TextAlign.Center
                 )
             }
@@ -529,7 +529,7 @@ private fun UpdateCompletedContent(version: String?) {
                 text = version.isolateLtr(),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                color = LocalDialogTextColor.current,
+                color = dialogTextColor(),
                 textAlign = TextAlign.Center
             )
         }

@@ -312,8 +312,6 @@ fun UnusableOptionPathsDialog(
             )
         }
     ) {
-        val secondaryColor = LocalDialogSecondaryTextColor.current
-
         Column(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
@@ -341,7 +339,7 @@ fun UnusableOptionPathsDialog(
                             text = failure.patchName,
                             style = MaterialTheme.typography.labelMedium,
                             fontWeight = FontWeight.SemiBold,
-                            color = secondaryColor
+                            color = dialogSecondaryTextColor()
                         )
 
                         Surface(
@@ -620,7 +618,7 @@ private fun ErrorInfoRow(
         Text(
             text = label,
             style = textStyle,
-            color = LocalDialogSecondaryTextColor.current,
+            color = dialogSecondaryTextColor(),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.width(labelWidth)

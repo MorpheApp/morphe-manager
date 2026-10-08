@@ -21,6 +21,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalView
@@ -35,11 +36,26 @@ import androidx.core.view.WindowCompat
 import app.morphe.manager.ui.theme.isDarkTheme
 import kotlin.time.Duration.Companion.milliseconds
 
-/** Provides the primary text color for dialog content. */
-val LocalDialogTextColor = compositionLocalOf { Color.White }
+/** The primary text color of dialog content, read through [dialogTextColor]. */
+val LocalDialogTextColor = compositionLocalOf { Color.Unspecified }
 
-/** Provides the secondary/hint text color for dialog content. */
-val LocalDialogSecondaryTextColor = compositionLocalOf { Color.White.copy(alpha = 0.7f) }
+/** The secondary/hint text color of dialog content, read through [dialogSecondaryTextColor]. */
+val LocalDialogSecondaryTextColor = compositionLocalOf { Color.Unspecified }
+
+/**
+ * Text color of the dialog or sheet this is drawn in, or of the theme's surfaces anywhere else,
+ * since the components dialogs use are shared with plain screens.
+ */
+@Composable
+@ReadOnlyComposable
+fun dialogTextColor(): Color =
+    LocalDialogTextColor.current.takeOrElse { MaterialTheme.colorScheme.onSurface }
+
+/** Secondary counterpart of [dialogTextColor], dimmed the way a dialog dims its own. */
+@Composable
+@ReadOnlyComposable
+fun dialogSecondaryTextColor(): Color =
+    LocalDialogSecondaryTextColor.current.takeOrElse { MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f) }
 
 /** Horizontal inset of the active [DialogPadding], for offsetting a caller-managed [ListScrollbar] out to the true dialog edge. */
 val LocalDialogHorizontalInset = compositionLocalOf { 0.dp }
@@ -302,7 +318,6 @@ fun BoxScope.ContentOverlay(
 /**
  * Main dialog content area.
  */
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun DialogContent(
     title: String?,

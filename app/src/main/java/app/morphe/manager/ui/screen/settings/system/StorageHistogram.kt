@@ -30,8 +30,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import app.morphe.manager.ui.screen.shared.LocalDialogSecondaryTextColor
-import app.morphe.manager.ui.screen.shared.LocalDialogTextColor
+import app.morphe.manager.ui.screen.shared.dialogSecondaryTextColor
+import app.morphe.manager.ui.screen.shared.dialogTextColor
 import app.morphe.manager.ui.screen.shared.ShimmerText
 import app.morphe.manager.util.formatBytes
 
@@ -140,8 +140,6 @@ private fun HistogramBar(
     safeTotal: Long,
     modifier: Modifier = Modifier
 ) {
-    val trackColor = LocalDialogSecondaryTextColor.current.copy(alpha = 0.12f)
-
     // Captures the height assigned by [HistogramLayout] so segments can use absolute Dp values
     var barHeightPx by remember { mutableIntStateOf(0) }
     val barHeightDp = with(LocalDensity.current) { barHeightPx.toDp() }
@@ -149,7 +147,7 @@ private fun HistogramBar(
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(percent = 50))
-            .background(trackColor)
+            .background(dialogSecondaryTextColor().copy(alpha = 0.12f))
             .onSizeChanged { barHeightPx = it.height }
     ) {
         Column(
@@ -231,7 +229,7 @@ private fun LegendItem(segment: StorageSegment, loading: Boolean) {
             Text(
                 text = segment.label,
                 style = MaterialTheme.typography.bodyMedium,
-                color = LocalDialogTextColor.current,
+                color = dialogTextColor(),
                 fontWeight = FontWeight.Medium
             )
             val sizeStyle = MaterialTheme.typography.bodySmall
@@ -245,7 +243,7 @@ private fun LegendItem(segment: StorageSegment, loading: Boolean) {
                 Text(
                     text = LocalContext.current.formatBytes(segment.bytes),
                     style = sizeStyle,
-                    color = LocalDialogSecondaryTextColor.current
+                    color = dialogSecondaryTextColor()
                 )
             }
         }

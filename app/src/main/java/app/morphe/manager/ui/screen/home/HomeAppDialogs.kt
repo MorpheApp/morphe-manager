@@ -175,7 +175,7 @@ internal fun HideAppDialog(
             Text(
                 text = stringResource(R.string.home_app_hide_message),
                 style = MaterialTheme.typography.bodyLarge,
-                color = LocalDialogSecondaryTextColor.current,
+                color = dialogSecondaryTextColor(),
                 textAlign = TextAlign.Center
             )
         }

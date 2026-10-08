@@ -144,7 +144,7 @@ private fun GitHubPatDialog(
                 leadingContent = {
                     ThemedIcon(
                         icon = Icons.Outlined.Upload,
-                        tint = LocalDialogTextColor.current
+                        tint = dialogTextColor()
                     )
                 },
                 title = stringResource(R.string.settings_advanced_github_pat_export_include_label),

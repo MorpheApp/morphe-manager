@@ -73,7 +73,7 @@ fun ImportExportSection(
                 Text(
                     text = stringResource(R.string.settings_system_signing_key_missing),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = LocalDialogSecondaryTextColor.current,
+                    color = dialogSecondaryTextColor(),
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth()
                 )

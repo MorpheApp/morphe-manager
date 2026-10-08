@@ -417,7 +417,7 @@ fun ChangelogUpdateSummary(
                 ),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                color = LocalDialogTextColor.current,
+                color = dialogTextColor(),
                 textAlign = TextAlign.Center
             )
 
@@ -506,7 +506,7 @@ private fun ReleaseHeader(
                     text = entry.version.withVersionPrefix(),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
-                    color = LocalDialogTextColor.current
+                    color = dialogTextColor()
                 )
                 if (badge != null) {
                     StatusBadge(text = stringResource(badge.label), tone = badge.tone)
@@ -781,13 +781,13 @@ private fun FormattedText(text: String, color: Color) {
             val result = layout ?: return@drawBehind
             val radius = CornerRadius(CodeChipRadius.toPx())
             val inset = CodeChipInset.toPx()
-            for (range in codeRanges) {
-                val firstLine = result.getLineForOffset(range.start)
-                val lastLine = result.getLineForOffset(range.end - 1)
+            for ((_, codeStart, codeEnd) in codeRanges) {
+                val firstLine = result.getLineForOffset(codeStart)
+                val lastLine = result.getLineForOffset(codeEnd - 1)
                 // Code broken across lines gets a chip on each line it covers
                 for (line in firstLine..lastLine) {
-                    val start = maxOf(range.start, result.getLineStart(line))
-                    val end = minOf(range.end, result.getLineEnd(line, visibleEnd = true))
+                    val start = maxOf(codeStart, result.getLineStart(line))
+                    val end = minOf(codeEnd, result.getLineEnd(line, visibleEnd = true))
                     if (start >= end) continue
                     val from = result.getHorizontalPosition(start, usePrimaryDirection = true)
                     val to = result.getHorizontalPosition(end, usePrimaryDirection = true)

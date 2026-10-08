@@ -79,7 +79,7 @@ fun RedPillDialog(
             Text(
                 text = message,
                 style = MaterialTheme.typography.bodyLarge,
-                color = LocalDialogSecondaryTextColor.current,
+                color = dialogSecondaryTextColor(),
                 textAlign = TextAlign.Center,
                 lineHeight = 24.sp
             )
@@ -159,7 +159,7 @@ private fun Pill(
             text = label,
             style = MaterialTheme.typography.labelLarge,
             fontWeight = FontWeight.Medium,
-            color = LocalDialogTextColor.current
+            color = dialogTextColor()
         )
     }
 }

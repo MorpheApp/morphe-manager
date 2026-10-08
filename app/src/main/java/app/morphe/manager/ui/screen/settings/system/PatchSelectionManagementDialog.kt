@@ -573,7 +573,7 @@ private fun PackageSelectionItem(
                             text = displayName,
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.SemiBold,
-                            color = LocalDialogTextColor.current
+                            color = dialogTextColor()
                         )
 
                         // Cloned copies of an app carry the same name, so the package is what
@@ -581,7 +581,7 @@ private fun PackageSelectionItem(
                         Text(
                             text = packageName,
                             style = MaterialTheme.typography.bodySmall,
-                            color = LocalDialogSecondaryTextColor.current,
+                            color = dialogSecondaryTextColor(),
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
                         )
@@ -620,7 +620,7 @@ private fun PackageSelectionItem(
                     ) {
                         ExpandChevron(
                             expanded = effectiveExpanded,
-                            tint = LocalDialogSecondaryTextColor.current,
+                            tint = dialogSecondaryTextColor(),
                             announced = true
                         )
                     }

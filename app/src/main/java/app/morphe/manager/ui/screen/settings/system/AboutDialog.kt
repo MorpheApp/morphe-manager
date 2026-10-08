@@ -114,8 +114,8 @@ fun AboutDialog(
             )
         }
     ) {
-        val textColor = LocalDialogTextColor.current
-        val secondaryColor = LocalDialogSecondaryTextColor.current
+        val textColor = dialogTextColor()
+        val secondaryColor = dialogSecondaryTextColor()
 
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -126,7 +126,7 @@ fun AboutDialog(
             Box(
                 modifier = Modifier
                     .size(100.dp)
-                    .background(neutralVeil(LocalDialogTextColor.current), RoundedCornerShape(24.dp)),
+                    .background(neutralVeil(dialogTextColor()), RoundedCornerShape(24.dp)),
                 contentAlignment = Alignment.Center
             ) {
                 val icon = rememberDrawablePainter(

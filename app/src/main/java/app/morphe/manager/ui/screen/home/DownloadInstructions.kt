@@ -357,7 +357,7 @@ internal fun DownloadInstructionsDialog(
                             Text(
                                 text = step.text,
                                 style = MaterialTheme.typography.bodyMedium,
-                                color = LocalDialogTextColor.current
+                                color = dialogTextColor()
                             )
 
                             step.button?.let { button ->

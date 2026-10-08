@@ -78,7 +78,7 @@ fun ChangelogError(
                 },
                 style = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.Bold,
-                color = LocalDialogTextColor.current,
+                color = dialogTextColor(),
                 textAlign = TextAlign.Center
             )
         }

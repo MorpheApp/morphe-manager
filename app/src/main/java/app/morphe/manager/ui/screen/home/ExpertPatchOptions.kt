@@ -280,7 +280,7 @@ internal fun PatchOptionsDialog(
                 Text(
                     text = rememberTranslated(patch.description),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = LocalDialogSecondaryTextColor.current
+                    color = dialogSecondaryTextColor()
                 )
             }
 
@@ -608,7 +608,7 @@ private fun ColorOptionWithPresets(
                         text = name,
                         style = MaterialTheme.typography.titleSmall,
                         fontWeight = FontWeight.SemiBold,
-                        color = LocalDialogTextColor.current,
+                        color = dialogTextColor(),
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -903,7 +903,7 @@ private fun ImageInputOption(
                     recommendedSize.height.toString()
                 ),
                 style = MaterialTheme.typography.bodySmall,
-                color = LocalDialogSecondaryTextColor.current
+                color = dialogSecondaryTextColor()
             )
         }
     }

@@ -499,7 +499,7 @@ private fun FolderTrail(
         }
         breadcrumbs.forEachIndexed { index, (label, dir) ->
             if (index > 0 || showStorages) {
-                ForwardChevronIcon(size = 16.dp, tint = LocalDialogSecondaryTextColor.current)
+                ForwardChevronIcon(size = 16.dp, tint = dialogSecondaryTextColor())
             }
             val isOpen = index == breadcrumbs.lastIndex
             AppFilterChip(

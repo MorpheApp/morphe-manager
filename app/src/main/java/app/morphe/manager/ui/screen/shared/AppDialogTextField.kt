@@ -80,7 +80,6 @@ fun AppDialogTextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default
 ) {
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
-    val textColor = LocalDialogTextColor.current
 
     OutlinedTextField(
         value = value,
@@ -170,7 +169,7 @@ fun AppDialogTextField(
         keyboardActions = keyboardActions,
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(Defaults.CompactCornerRadius),
-        colors = morpheDialogTextFieldColors(textColor)
+        colors = morpheDialogTextFieldColors(dialogTextColor())
     )
 }
 
@@ -312,7 +311,6 @@ fun AppDialogDropdownTextField(
     // Text typed while the field is focused, null otherwise
     var input by remember { mutableStateOf<String?>(null) }
     val focusManager = LocalFocusManager.current
-    val textColor = LocalDialogTextColor.current
 
     val presetName = dropdownItems.entries.find { it.value == value }?.key
     val typed = input
@@ -421,7 +419,7 @@ fun AppDialogDropdownTextField(
                     }
                 ),
             shape = RoundedCornerShape(Defaults.CompactCornerRadius),
-            colors = morpheDialogTextFieldColors(textColor)
+            colors = morpheDialogTextFieldColors(dialogTextColor())
         )
 
         AppExposedDropdownMenu(

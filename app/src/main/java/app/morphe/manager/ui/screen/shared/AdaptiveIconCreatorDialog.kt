@@ -392,7 +392,7 @@ private fun RowScope.PreviewColumn(label: String, preview: @Composable () -> Uni
         Text(
             text = label,
             style = MaterialTheme.typography.labelSmall,
-            color = LocalDialogSecondaryTextColor.current
+            color = dialogSecondaryTextColor()
         )
         preview()
     }
@@ -759,7 +759,7 @@ private fun SafeZoneLegendItem(
         Text(
             text = text,
             style = MaterialTheme.typography.bodySmall,
-            color = LocalDialogSecondaryTextColor.current
+            color = dialogSecondaryTextColor()
         )
     }
 }

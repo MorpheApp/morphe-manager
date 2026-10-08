@@ -393,9 +393,6 @@ internal fun PatchItemCard(
     onExpertBadgeClick: (() -> Unit)? = null,
     accentColor: Color? = null
 ) {
-    val textColor = LocalDialogTextColor.current
-    val secondaryColor = LocalDialogSecondaryTextColor.current
-
     var expandVersions by rememberSaveable(saveStateKey, patch.name, "versions") {
         mutableStateOf(false)
     }
@@ -483,12 +480,12 @@ internal fun PatchItemCard(
                                             text = option.title,
                                             style = MaterialTheme.typography.titleSmall,
                                             fontWeight = FontWeight.SemiBold,
-                                            color = textColor
+                                            color = dialogTextColor()
                                         )
                                         Text(
                                             text = rememberTranslated(option.description),
                                             style = MaterialTheme.typography.bodySmall,
-                                            color = secondaryColor
+                                            color = dialogSecondaryTextColor()
                                         )
                                     }
                                 }

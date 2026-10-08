@@ -418,13 +418,13 @@ private fun RemoteTabContent(state: RemoteLinksState) {
                     Icon(
                         imageVector = Icons.Outlined.Info,
                         contentDescription = null,
-                        tint = LocalDialogSecondaryTextColor.current,
+                        tint = dialogSecondaryTextColor(),
                         modifier = Modifier.padding(top = 1.dp).size(14.dp)
                     )
                     Text(
                         text = stringResource(R.string.sources_dialog_remote_url_hint),
                         style = MaterialTheme.typography.bodySmall,
-                        color = LocalDialogSecondaryTextColor.current
+                        color = dialogSecondaryTextColor()
                     )
                 }
                 UrlFormatRow(icon = FontAwesomeIcons.Brands.Github, text = "github.com/owner/repo")
@@ -461,13 +461,13 @@ private fun UrlFormatRow(
         Icon(
             imageVector = icon,
             contentDescription = null,
-            tint = LocalDialogSecondaryTextColor.current,
+            tint = dialogSecondaryTextColor(),
             modifier = Modifier.size(14.dp)
         )
         Text(
             text = text,
             style = MaterialTheme.typography.bodySmall,
-            color = LocalDialogSecondaryTextColor.current,
+            color = dialogSecondaryTextColor(),
             fontFamily = FontFamily.Monospace
         )
     }
@@ -479,7 +479,7 @@ private fun LocalTabContent(
     onPickFiles: () -> Unit,
     onRemove: (Uri) -> Unit
 ) {
-    val textColor = LocalDialogTextColor.current
+    val textColor = dialogTextColor()
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         if (entries.isEmpty()) {
             // Drop zone
@@ -572,7 +572,7 @@ private fun PendingSourceRow(
             Icon(
                 imageVector = Icons.Outlined.Close,
                 contentDescription = stringResource(R.string.remove),
-                tint = LocalDialogSecondaryTextColor.current
+                tint = dialogSecondaryTextColor()
             )
         }
     }
@@ -1213,7 +1213,7 @@ fun SourceAppsDialog(
                 Text(
                     text = stringResource(R.string.sources_apps_description),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = LocalDialogSecondaryTextColor.current,
+                    color = dialogSecondaryTextColor(),
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth()
                 )

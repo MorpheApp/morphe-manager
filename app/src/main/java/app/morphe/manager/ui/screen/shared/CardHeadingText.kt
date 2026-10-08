@@ -30,7 +30,7 @@ fun CardHeadingText(
     dimmed: Boolean = false,
     badges: @Composable RowScope.() -> Unit = {}
 ) {
-    val secondaryColor = LocalDialogSecondaryTextColor.current
+    val secondaryColor = dialogSecondaryTextColor()
     val nameStyle = MaterialTheme.typography.titleSmall
 
     Column(
@@ -47,7 +47,7 @@ fun CardHeadingText(
                 text = name,
                 style = nameStyle,
                 fontWeight = FontWeight.SemiBold,
-                color = if (dimmed) secondaryColor.copy(alpha = 0.5f) else LocalDialogTextColor.current
+                color = if (dimmed) secondaryColor.copy(alpha = 0.5f) else dialogTextColor()
             )
             NameLineBadges(lineHeight = nameStyle.lineHeight, badges = badges)
         }
