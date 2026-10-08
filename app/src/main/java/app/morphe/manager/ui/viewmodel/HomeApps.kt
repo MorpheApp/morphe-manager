@@ -83,15 +83,23 @@ data class HomeAppSourceGroup(
     val collapsible: Boolean get() = !isDefault
 }
 
+/** The preferences the cards themselves are built from: which are shown and in what order. */
 internal data class HomePrefs(
     val hiddenPackages: Set<String>,
     val customOrder: List<String>,
     val sourceOrders: Map<Int, List<String>>,
+    val sortMode: HomeAppSortMode
+)
+
+/**
+ * The cards of one build, before the view preferences arrange them into a [HomeAppState].
+ * Source groups come out expanded and are folded by what the user collapsed afterward.
+ */
+internal data class HomeCards(
+    val visible: List<HomeAppItem>,
+    val hidden: List<HomeAppItem>,
     val sortMode: HomeAppSortMode,
-    val categoryState: HomeAppCategoryState,
-    val categoryViewMode: HomeAppCategoryViewMode,
-    val showCategoryViewSwitcher: Boolean,
-    val expandedSourceGroups: Set<Int>
+    val sourceGroups: List<HomeAppSourceGroup>
 )
 
 private data class HomeCategoryPrefs(
@@ -343,19 +351,8 @@ class HomeApps(
         homeAppButtonPrefs.customOrder,
         homeAppButtonPrefs.sourceOrders,
         homeAppButtonPrefs.sortMode,
-        _homeCategoryPrefsFlow,
-    ) { hidden, order, sourceOrders, sortMode, categoryPrefs ->
-        HomePrefs(
-            hiddenPackages = hidden,
-            customOrder = order,
-            sourceOrders = sourceOrders,
-            sortMode = sortMode,
-            categoryState = categoryPrefs.categoryState,
-            categoryViewMode = categoryPrefs.categoryViewMode,
-            showCategoryViewSwitcher = categoryPrefs.showCategoryViewSwitcher,
-            expandedSourceGroups = categoryPrefs.expandedSourceGroups
-        )
-    }
+        ::HomePrefs
+    )
 
     /**
      * The bundle state, the versions derived from it, the ones the user turned down and the
@@ -411,9 +408,9 @@ class HomeApps(
     *
     * Sort mode is persisted with the home app button preferences. Custom mode applies
     * the user's saved manual order and falls back to Morphe ordering when no saved order exists.
-    * Hidden apps are excluded from [HomeAppState.visible].
+    * Hidden apps are excluded from [HomeCards.visible].
     */
-    val homeAppState: StateFlow<HomeAppState?> = combine(
+    private val homeCards: Flow<HomeCards?> = combine(
         _homeBundleStateFlow,
         _homePrefsFlow,
         installedAppRepository.getAll().onEach { apps ->
@@ -434,14 +431,35 @@ class HomeApps(
     }
         // Inputs arriving mid-build are coalesced, only the newest one is built
         .conflate()
-        .map(::buildHomeAppState)
+        .map(::buildHomeCards)
         .flowOn(Dispatchers.IO)
+
+    /**
+     * The cards arranged by the view preferences. Collapsing a group or switching the grouping
+     * only runs this step, so the cards are not built again for it.
+     */
+    val homeAppState: StateFlow<HomeAppState?> = combine(
+        homeCards,
+        _homeCategoryPrefsFlow
+    ) { cards, categoryPrefs -> cards?.arrangedBy(categoryPrefs) }
         .stateIn(scope, SharingStarted.Eagerly, null)
+
+    private fun HomeCards.arrangedBy(categoryPrefs: HomeCategoryPrefs) = HomeAppState(
+        visible = visible,
+        hidden = hidden,
+        sortMode = sortMode,
+        categoryState = categoryPrefs.categoryState,
+        categoryViewMode = categoryPrefs.categoryViewMode,
+        showCategoryViewSwitcher = categoryPrefs.showCategoryViewSwitcher,
+        sourceGroups = sourceGroups.map { group ->
+            group.copy(collapsed = group.collapsible && group.uid !in categoryPrefs.expandedSourceGroups)
+        }
+    )
 
     /**
      * What the enabled bundles say about each app, and what every bundle does. The cards are
      * rebuilt for every change to the apps and the preferences, while the bundles change far less
-     * often, so this is only walked again when they do. Read by [buildHomeAppState] alone, which
+     * often, so this is only walked again when they do. Read by [buildHomeCards] alone, which
      * runs one build at a time.
      */
     private var homeMetadata: Pair<Map<Int, PatchBundleInfo.Global>, HomeMetadata>? = null
@@ -464,11 +482,11 @@ class HomeApps(
     }
 
     /** The home cards for [inputs], or the cached ones while the bundles load. */
-    private suspend fun buildHomeAppState(inputs: HomeInputs): HomeAppState? {
+    private suspend fun buildHomeCards(inputs: HomeInputs): HomeCards? {
         val (homeBundle, homePrefs, installedApps, updatesMap, trackedSnapshots) = inputs
         val (bundleState, supportedVersions, ignoredVersions, keptFrom) = homeBundle
         val ready = bundleState as? PatchBundleRepository.BundleState.Ready
-            ?: return cachedHomeCards?.toState(installedApps, homePrefs)
+            ?: return cachedHomeCards?.toCards(installedApps, homePrefs)
 
         val enabledInfo = ready.info.filter { (_, info) -> info.enabled }
         val (metadata, allMetadata) = homeMetadataFor(ready.info, enabledInfo)
@@ -479,8 +497,7 @@ class HomeApps(
             appsBySource = appsBySource,
             sources = ready.sources,
             sortMode = homePrefs.sortMode,
-            sourceOrders = homePrefs.sourceOrders,
-            expandedSourceGroups = homePrefs.expandedSourceGroups
+            sourceOrders = homePrefs.sourceOrders
         )
 
         // One query for installed packages instead of one per card
@@ -601,17 +618,14 @@ class HomeApps(
             customOrder = homePrefs.customOrder
         )
 
-        val state = HomeAppState(
+        val cards = HomeCards(
             visible = visible,
             hidden = hidden,
             sortMode = homePrefs.sortMode,
-            categoryState = homePrefs.categoryState,
-            categoryViewMode = homePrefs.categoryViewMode,
-            showCategoryViewSwitcher = homePrefs.showCategoryViewSwitcher,
             sourceGroups = sourceGroups
         )
-        scope.launch(homeCardCacheWrites) { homeCardCache.write(state) }
-        return state
+        scope.launch(homeCardCacheWrites) { homeCardCache.write(cards) }
+        return cards
     }
 
     /**
@@ -635,8 +649,7 @@ class HomeApps(
         appsBySource: Map<Int, Set<String>>,
         sources: Map<Int, PatchBundleSource>,
         sortMode: HomeAppSortMode,
-        sourceOrders: Map<Int, List<String>>,
-        expandedSourceGroups: Set<Int>
+        sourceOrders: Map<Int, List<String>>
     ): List<HomeAppSourceGroup> {
         // enabledInfo is already filtered to enabled entries by the caller
         // Keep source sections in repository order. Home sorting should reorder app cards
@@ -674,7 +687,7 @@ class HomeApps(
                         name = sourceName,
                         packageNames = packageNames,
                         packageOrder = packageOrder,
-                        collapsed = info.uid != DEFAULT_SOURCE_UID && info.uid !in expandedSourceGroups,
+                        collapsed = false,
                         avatarUrl = avatarUrls?.primary,
                         fallbackAvatarUrl = avatarUrls?.fallback
                     )
