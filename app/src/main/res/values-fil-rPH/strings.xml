@@ -138,7 +138,11 @@
     <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
     <string name="home_greeting_winter_4">Nagpapa-patch sa niyebe</string>
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">Maligayang Bagong Taon!</string>
+    <string name="home_greeting_new_year_2">Nagbibilang pababa sa mga bagong patch</string>
+    <string name="home_greeting_new_year_3">Bagong taon, pareho pa ring walang ad ang mga app</string>
     <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Wala na ang mga lumang bersyon, narito na ang mga bago</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">I-patch ang mapagkukunan</string>
     <string name="sources_search">Maghanap ng mga source at mga patch</string>
@@ -288,7 +292,6 @@ Anumang idagdag mo mula sa website na ito ay gagamitin sa iyong sariling pangani
     <string name="home_use_installed_app">Gamitin ang naka-install na app</string>
     <string name="home_installed_app_picker_title">Mga naka-install na app</string>
     <string name="home_installed_app_picker_empty">Walang aplikasyon na natagpuan</string>
-    <string name="home_installed_app_picker_filter_all">Lahat ng aplikasyon</string>
     <string name="home_installed_app_picker_filter_user">Mga aplikasyon ng gumagamit lamang</string>
     <string name="home_installed_app_picker_filter_system">Mga aplikasyon ng sistema lamang</string>
     <string name="home_invalid_apk_unreadable">Hindi mabasa ang file. Siguraduhing hindi pinagbabawalan ng baterya ang \'External Storage\'</string>
@@ -297,7 +300,6 @@ Anumang idagdag mo mula sa website na ito ay gagamitin sa iyong sariling pangani
     <string name="home_invalid_apk_io_error">Hindi mabuksan ang file. Pakisubukan muli</string>
     <string name="home_external_apk_expert_mode_required">Ang tampok na ito ay available lamang sa Expert mode</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Expert mode</string>
     <string name="expert_mode_search">Maghanap ng mga patch</string>
     <string name="expert_mode_disable_all">Patayin lahat</string>
     <string name="expert_mode_disable_all_done">Lahat ng mga patch ay hindi pinagana</string>
@@ -503,8 +505,6 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <string name="app_links_open_settings">Buksan ang mga setting ng link</string>
     <string name="app_links_repair_success">Matagumpay na na-enable ang mga link ng app</string>
     <string name="app_links_repair_failed">Hindi nagawang paganahin ang mga link ng app nang awtomatiko</string>
-    <string name="app_links_badge_enabled">Pinagana</string>
-    <string name="app_links_badge_disabled">Nakapatay</string>
     <string name="app_links_all_verified">Lahat ng suportadong link ay naka-configure upang buksan sa app na ito</string>
     <string name="app_links_fix">Ayusin ang mga link</string>
     <string name="configure">I-configure</string>
@@ -538,7 +538,6 @@ Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang ma
     <string name="patcher_field_source">Pinagmulan</string>
     <string name="patcher_field_split">Hating APK</string>
     <string name="patcher_field_manager">Manager</string>
-    <string name="patcher_field_patcher">Patcher</string>
     <string name="patcher_field_runtime">Runtime</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Mga library</string>
@@ -614,7 +613,6 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="patcher_step_load_patches">Inilo-load ang mga patch</string>
     <string name="patcher_step_prepare_split_apk">Isinasama ang hiniwalay na APK</string>
     <string name="patcher_step_unpack">Basahin ang APK file</string>
-    <string name="patcher_step_group_patching">Nagpa-patch</string>
     <string name="patcher_step_group_saving">Iniimbak</string>
     <string name="patcher_step_write_patched">Isinusulat ang na-patch na APK file</string>
     <string name="patcher_step_sign_apk">Inilalagda ang na-patch na APK file</string>
@@ -725,6 +723,9 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="settings_appearance_background_snow">Niyebe</string>
     <string name="settings_appearance_background_grid">Griyá</string>
     <string name="settings_appearance_background_particles">Partikulo</string>
+    <string name="settings_appearance_background_lava">Lamparang lava</string>
+    <string name="settings_appearance_background_halloween">Undas</string>
+    <string name="settings_appearance_background_fireworks">Paputok</string>
     <string name="settings_appearance_background_none">Wala</string>
     <string name="settings_appearance_background_random">Random</string>
     <string name="settings_appearance_background_random_interval_launch">Sa paglunsad</string>
@@ -732,7 +733,10 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="settings_appearance_background_random_interval_3days">Bawat 3 araw</string>
     <string name="settings_appearance_parallax_effect">Epekto ng parallax</string>
     <string name="settings_appearance_parallax_effect_description">Maayos na paglilipat ng background kapag tinatagilid ang device</string>
+    <string name="settings_appearance_seasonal_themes">Mga temang pana-panahon</string>
+    <string name="settings_appearance_seasonal_themes_description">Mga pampistang background at mga pagbati sa mga pista opisyal</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">Ang background na %1$s ay naka-on hanggang %2$s habang naka-on ang mga temang pana-panahon</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
     <string name="settings_appearance_theme_mode">Tema</string>
@@ -794,8 +798,24 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="settings_appearance_app_icon_default">Panimula</string>
     <string name="settings_appearance_app_icon_light_2">Langit</string>
     <string name="settings_appearance_app_icon_light_3">Paglubog ng araw</string>
+    <string name="settings_appearance_app_icon_light_4">Lila</string>
+    <string name="settings_appearance_app_icon_light_5">Glasyer</string>
+    <string name="settings_appearance_app_icon_light_6">Hamog</string>
+    <string name="settings_appearance_app_icon_light_7">Buhangin</string>
+    <string name="settings_appearance_app_icon_dark_1">Asul-berde</string>
     <string name="settings_appearance_app_icon_dark_2">Void</string>
+    <string name="settings_appearance_app_icon_dark_3">Sirwelas</string>
+    <string name="settings_appearance_app_icon_dark_4">Hatinggabi</string>
+    <string name="settings_appearance_app_icon_dark_5">Abo-asul</string>
+    <string name="settings_appearance_app_icon_accent_1">Bukang-liwayway</string>
+    <string name="settings_appearance_app_icon_accent_2">Tinta</string>
+    <string name="settings_appearance_app_icon_accent_3">Papel</string>
+    <string name="settings_appearance_app_icon_accent_4">Takipsilim</string>
+    <string name="settings_appearance_app_icon_background">Likuran</string>
+    <string name="settings_appearance_app_icon_mark">Tatak</string>
     <string name="settings_appearance_app_icon_mark_color">Kulay</string>
+    <string name="settings_appearance_app_icon_mark_white">Puti</string>
+    <string name="settings_appearance_app_icon_mark_black">Itim</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Baguhin ang icon ng aplikasyon?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Baguhin sa &lt;b&gt;%s&lt;/b&gt; at i-restart?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -833,7 +853,6 @@ Hindi maaapektuhan ang mga patch: paganahin ang mga patch na pre-release para sa
     <string name="external_batch_patch_trust_caller">Payagan ang app na ito palagi</string>
     <string name="external_batch_patch_unknown_caller">Isang hindi kilalang app</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Magagamit ang update ng Morphe</string>
     <string name="notification_bundle_update_title">Magagamit ang mga bagong patch</string>
     <string name="notification_update_text">Handa mag-download ang bersyong %s</string>
     <string name="notification_bundle_update_text_unversioned">I-tap para buksan ang Morphe at i-update</string>
@@ -844,7 +863,6 @@ Hindi maaapektuhan ang mga patch: paganahin ang mga patch na pre-release para sa
     <string name="notification_channel_manager_updates_description">Mga notification tungkol sa mga bagong release ng Morphe</string>
     <string name="notification_channel_patch_updates">Mga update sa patch</string>
     <string name="notification_channel_patch_updates_description">Mga notification tungkol sa mga bagong patch release</string>
-    <string name="notification_channel_patcher">Nagpa-patch</string>
     <string name="notification_channel_patcher_description">Ipinapakita habang ina-patch ng Morphe ang isang app sa background</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expert settings</string>
@@ -1367,7 +1385,6 @@ Mga Detalye: %2$s"</string>
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">Ang paglalabas na ito ay kasalukuyang pinoproseso. Subukan muli sa loob ng ilang minuto</string>
     <string name="update_download_missing">Ang na-download na update ay hindi na magagamit. I-download muli ito.</string>
-    <string name="download_manager_failed">Nabigong mai-download ang update: %s</string>
     <string name="failed_to_check_updates">Nabigong suriin ang mga update: %s</string>
     <string name="failed_to_download_update">Nabigong mai-download ang update: %s</string>
     <string name="download_confirmation_metered">"Kasalukuyan kang nasa isang metered na koneksyon, at maaaring malapat ang mga singil sa data mula sa iyong service provider.

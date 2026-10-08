@@ -127,19 +127,23 @@
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
     <string name="home_greeting_halloween_1">תעלול או תיקון?</string>
-    <string name="home_greeting_halloween_2">אין רוחות רפאים ב-APK האלה, בדקנו</string>
-    <string name="home_greeting_halloween_3">עונה מפחידה, תיקונים טריים</string>
+    <string name="home_greeting_halloween_2">אין רוחות רפאים בקבצי APK אלה, בדקנו</string>
+    <string name="home_greeting_halloween_3">עונה מפחידה, תיקונים חדשים</string>
     <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
-    <string name="home_greeting_halloween_4">משהו מרושע מתקן בדרכו לכאן</string>
+    <string name="home_greeting_halloween_4">משהו מרושע בא לכאן עם תיקונים</string>
     <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
-    <string name="home_greeting_winter_1">חג שמח, תיקונים טריים</string>
+    <string name="home_greeting_winter_1">חג שמח, תיקונים חדשים</string>
     <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
-    <string name="home_greeting_winter_2">שירד שלג, שירד תיקון</string>
+    <string name="home_greeting_winter_2">שירד שלג, שירדו תיקונים</string>
     <string name="home_greeting_winter_3">שנה חדשה, תיקונים חדשים</string>
     <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
-    <string name="home_greeting_winter_4">מתקנים דרך השלג</string>
+    <string name="home_greeting_winter_4">מתקנים בשלג</string>
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">שנה אזרחית טובה!</string>
+    <string name="home_greeting_new_year_2">סופרים לאחור לתיקונים חדשים</string>
+    <string name="home_greeting_new_year_3">שנה חדשה, אותן אפליקציות ללא פרסומות</string>
     <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">החוצה עם הגרסאות הישנות, פנימה עם החדשות</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">מקורות תיקונים</string>
     <string name="sources_search">חפש מקורות ותיקונים</string>
@@ -289,7 +293,6 @@
     <string name="home_use_installed_app">השתמש באפליקציה מותקנת</string>
     <string name="home_installed_app_picker_title">אפליקציות מותקנות</string>
     <string name="home_installed_app_picker_empty">לא נמצאו אפליקציות</string>
-    <string name="home_installed_app_picker_filter_all">כל האפליקציות</string>
     <string name="home_installed_app_picker_filter_user">אפליקציות משתמש בלבד</string>
     <string name="home_installed_app_picker_filter_system">אפליקציות מערכת בלבד</string>
     <string name="home_invalid_apk_unreadable">לא ניתן לקרוא את הקובץ. בדוק ש\'אחסון חיצוני\' אינו מוגבל על ידי הסוללה</string>
@@ -298,7 +301,6 @@
     <string name="home_invalid_apk_io_error">נכשל בפתיחת הקובץ. אנא נסה שוב</string>
     <string name="home_external_apk_expert_mode_required">תכונה זו זמינה רק במצב מומחה</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">מצב מומחה</string>
     <string name="expert_mode_search">חפש תיקונים</string>
     <string name="expert_mode_disable_all">השבת את כולם</string>
     <string name="expert_mode_disable_all_done">כל התיקונים מושבתים</string>
@@ -504,8 +506,6 @@
     <string name="app_links_open_settings">פתח הגדרות קישורים</string>
     <string name="app_links_repair_success">קישורי אפליקציה הופעלו בהצלחה</string>
     <string name="app_links_repair_failed">הפעלת קישורי אפליקציות באופן אוטומטי נכשלה</string>
-    <string name="app_links_badge_enabled">מופעל</string>
-    <string name="app_links_badge_disabled">מושבת</string>
     <string name="app_links_all_verified">כל הקישורים הנתמכים מוגדרים להיפתח באפליקציה זו</string>
     <string name="app_links_fix">תקן קישורים</string>
     <string name="configure">הגדר</string>
@@ -539,7 +539,6 @@
     <string name="patcher_field_source">מקור</string>
     <string name="patcher_field_split">פיצול APK</string>
     <string name="patcher_field_manager">מנהל</string>
-    <string name="patcher_field_patcher">מתקן</string>
     <string name="patcher_field_runtime">זמן ריצה</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">ספריות</string>
@@ -615,7 +614,6 @@
     <string name="patcher_step_load_patches">טוען תיקונים</string>
     <string name="patcher_step_prepare_split_apk">מיזוג APK מפוצל</string>
     <string name="patcher_step_unpack">קרא קובץ APK</string>
-    <string name="patcher_step_group_patching">מתקן</string>
     <string name="patcher_step_group_saving">שומר</string>
     <string name="patcher_step_write_patched">כתיבת קובץ APK מתוקן</string>
     <string name="patcher_step_sign_apk">חתימה על קובץ APK מתוקן</string>
@@ -726,6 +724,9 @@
     <string name="settings_appearance_background_snow">שלג</string>
     <string name="settings_appearance_background_grid">רשת</string>
     <string name="settings_appearance_background_particles">חלקיקים</string>
+    <string name="settings_appearance_background_lava">מנורת לבה</string>
+    <string name="settings_appearance_background_halloween">ליל כל הקדושים</string>
+    <string name="settings_appearance_background_fireworks">זיקוקים</string>
     <string name="settings_appearance_background_none">אין</string>
     <string name="settings_appearance_background_random">אקראי</string>
     <string name="settings_appearance_background_random_interval_launch">בפתיחה</string>
@@ -733,7 +734,10 @@
     <string name="settings_appearance_background_random_interval_3days">כל 3 ימים</string>
     <string name="settings_appearance_parallax_effect">אפקט פארלקס</string>
     <string name="settings_appearance_parallax_effect_description">הדגמה חלקה של רקע בעת טיפוס של המכשיר</string>
+    <string name="settings_appearance_seasonal_themes">ערכות נושא עונתיות</string>
+    <string name="settings_appearance_seasonal_themes_description">רקעים וברכות חגיגיים במהלך החגים</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">הרקע %1$s מוצג עד %2$s כל עוד ערכות הנושא העונתיות פעילות</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">גרסה</string>
     <string name="settings_appearance_theme_mode">מצב עיצוב</string>
@@ -795,8 +799,24 @@
     <string name="settings_appearance_app_icon_default">ברירת מחדל</string>
     <string name="settings_appearance_app_icon_light_2">שמיים</string>
     <string name="settings_appearance_app_icon_light_3">שקיעה</string>
+    <string name="settings_appearance_app_icon_light_4">לבנדר</string>
+    <string name="settings_appearance_app_icon_light_5">קרחון</string>
+    <string name="settings_appearance_app_icon_light_6">ערפל</string>
+    <string name="settings_appearance_app_icon_light_7">חול</string>
+    <string name="settings_appearance_app_icon_dark_1">טיל</string>
     <string name="settings_appearance_app_icon_dark_2">חלל</string>
+    <string name="settings_appearance_app_icon_dark_3">שזיף</string>
+    <string name="settings_appearance_app_icon_dark_4">חצות</string>
+    <string name="settings_appearance_app_icon_dark_5">צפחה</string>
+    <string name="settings_appearance_app_icon_accent_1">אורורה</string>
+    <string name="settings_appearance_app_icon_accent_2">דיו</string>
+    <string name="settings_appearance_app_icon_accent_3">נייר</string>
+    <string name="settings_appearance_app_icon_accent_4">דמדומים</string>
+    <string name="settings_appearance_app_icon_background">רקע</string>
+    <string name="settings_appearance_app_icon_mark">לוגו</string>
     <string name="settings_appearance_app_icon_mark_color">צבע</string>
+    <string name="settings_appearance_app_icon_mark_white">לבן</string>
+    <string name="settings_appearance_app_icon_mark_black">שחור</string>
     <string name="settings_appearance_app_icon_change_dialog_title">שנה את סמל האפליקציה? </string>
     <string name="settings_appearance_app_icon_change_dialog_message">שנה ל-&lt;b&gt;%s&lt;/b&gt; והפעל מחדש?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -834,7 +854,6 @@
     <string name="external_batch_patch_trust_caller">אפשר תמיד לאפליקציה זו</string>
     <string name="external_batch_patch_unknown_caller">אפליקציה לא ידועה</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">עדכון Morphe זמין</string>
     <string name="notification_bundle_update_title">תיקונים חדשים זמינים</string>
     <string name="notification_update_text">גרסה %s מוכנה להורדה</string>
     <string name="notification_bundle_update_text_unversioned">לחץ כדי לפתוח את Morphe ולעדכן</string>
@@ -845,7 +864,6 @@
     <string name="notification_channel_manager_updates_description">התראות על מהדורות Morphe חדשות</string>
     <string name="notification_channel_patch_updates">עדכוני תיקונים</string>
     <string name="notification_channel_patch_updates_description">התראות על מהדורות תיקון חדשות</string>
-    <string name="notification_channel_patcher">תיקונים</string>
     <string name="notification_channel_patcher_description">מוצג בזמן ש-Morphe מתקן אפליקציה ברקע</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">הגדרות מומחה</string>
@@ -1378,7 +1396,6 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">גרסה זו עדיין מפורסמת. נסה שוב בעוד מספר דקות</string>
     <string name="update_download_missing">העדכון שהורד כבר אינו זמין. הורד אותו שוב</string>
-    <string name="download_manager_failed">שגיאה בהורדת עדכון: %s</string>
     <string name="failed_to_check_updates">בדיקת עדכונים נכשלה: %s</string>
     <string name="failed_to_download_update">כשל בהורדת העדכון: %s</string>
     <string name="download_confirmation_metered">"אתה מחובר כעת לחיבור מוגבל בנפח נתונים, וייתכן שיחולו חיובי נתונים מספק השירות שלך.

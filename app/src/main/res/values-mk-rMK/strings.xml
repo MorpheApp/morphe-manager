@@ -146,7 +146,6 @@
     <string name="home_select_any_apk_description">Изберете APK датотека на било која апликација или изберете апликација веќе инсталирана на оваа уредба</string>
     <string name="home_use_installed_app">Користете инсталирана апликација</string>
     <string name="home_installed_app_picker_empty">Не се пронајдени апликации</string>
-    <string name="home_installed_app_picker_filter_all">Сите апликации</string>
     <string name="home_installed_app_picker_filter_user">Само кориснички апликации</string>
     <string name="home_installed_app_picker_filter_system">Само системски апликации</string>
     <string name="home_invalid_apk_unreadable">Не можеше да се прочита датотеката. Проверете дали „Надворешна меморија“ не е ограничена од батеријата</string>
@@ -154,7 +153,6 @@
     <string name="home_invalid_apk_io_error">Неуспешно отворање на датотеката. Обидете се повторно</string>
     <string name="home_external_apk_expert_mode_required">Оваа функција е достапна само во експертски режим</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Експертски режим</string>
     <string name="expert_mode_search">Пребарувај поправки</string>
     <string name="expert_mode_disable_all">Исклучи ги сите</string>
     <string name="expert_mode_disable_all_done">Сите закрпи се деактивирани</string>
@@ -282,8 +280,6 @@
     <string name="home_app_info_patch_update_available_description">Достапна е нова верзија на закрпи. Закрпете ја вашата апликација за да ги добиете најновите подобрувања и поправки</string>
     <string name="home_app_info_app_deleted_warning">Апликацијата беше деинсталирана</string>
     <string name="home_app_info_app_deleted_description">Оваа апликација беше деинсталирана надвор од Morphe. Повторно закрпете ја за да ја вратите функционалноста</string>
-    <string name="app_links_badge_enabled">Овозможено</string>
-    <string name="app_links_badge_disabled">Оневозможено</string>
     <string name="home_app_info_apk_size">Големина на APK</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Оригиналниот APK не е пронајден. Не можете повторно да закрпите оваа апликација</string>
@@ -332,7 +328,6 @@
     <string name="patcher_step_load_patches">Вчитување поправки</string>
     <string name="patcher_step_prepare_split_apk">Спојување на поделена APK</string>
     <string name="patcher_step_unpack">Прочитај APK датотека</string>
-    <string name="patcher_step_group_patching">Поправување</string>
     <string name="patcher_step_group_saving">Зачувување</string>
     <string name="patcher_step_write_patched">Запишување на поправена APK датотека</string>
     <string name="patcher_step_sign_apk">Потпишување на поправена APK датотека</string>
@@ -473,14 +468,12 @@
     <string name="settings_advanced_update_interval_chip_subtitle">Фреквенција на проверка во позадина</string>
     <string name="settings_advanced_update_interval_battery_warning">Проверките во позадина можеби нема да работат доверливо на некои уреди. Производители како Xiaomi, Huawei, Samsung и OnePlus често агресивно ги ограничуваат процесите во позадина за да заштедат батерија</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Достапно е ажурирање на Morphe</string>
     <string name="notification_bundle_update_title">Достапни се нови закрпи</string>
     <string name="notification_update_text">Подготвена е верзијата %s за преземање</string>
     <string name="notification_bundle_update_text_unversioned">Допрете за да ја отворите Morphe и да ја ажурирате</string>
     <string name="notification_permission_dialog_title">Дозволи известувања</string>
     <string name="notification_permission_dialog_description">На Morphe му е потребна дозвола за известувања за да ве извести кога има достапни ажурирања во позадина</string>
     <string name="notification_post_patch_dialog_title">Дали сакате да бидете известени кога се достапни ажурирања?</string>
-    <string name="notification_channel_patcher">Закрпување</string>
     <string name="notification_channel_patcher_description">Се прикажува додека Morphe го закрпува апликацијата во позадина</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Напредни поставки</string>
@@ -793,7 +786,6 @@ morphe_header_custom_dark.png
     <string name="downloading_manager_update">Преземање ажурирање…</string>
     <!-- Shown while downloading when the server does not report the total size. "%1$s" is the megabytes so far. -->
     <!-- Shown under the download percentage. "%1$s" is the megabytes so far, "%2$s" the total. -->
-    <string name="download_manager_failed">Не успеа да се преземе ажурирање: %s</string>
     <string name="failed_to_check_updates">Не успеа да се провери за ажурирања: %s</string>
     <string name="failed_to_download_update">Не успеа да се преземе ажурирање: %s</string>
     <string name="download_confirmation_metered">"Во моментов сте на мерена врска, и може да се наплатат трошоци за податоци од вашиот провајдер.

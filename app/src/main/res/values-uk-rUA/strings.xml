@@ -292,7 +292,6 @@
     <string name="home_use_installed_app">Встановлений застосунок</string>
     <string name="home_installed_app_picker_title">Встановлені застосунки</string>
     <string name="home_installed_app_picker_empty">Не знайдено застосунків</string>
-    <string name="home_installed_app_picker_filter_all">Усі застосунки</string>
     <string name="home_installed_app_picker_filter_user">Лише користувацькі застосунки</string>
     <string name="home_installed_app_picker_filter_system">Лише системні застосунки</string>
     <string name="home_invalid_apk_unreadable">Не вдалося прочитати файл. Перевірте, чи не обмежено використання батареї для \"Зовнішньої пам’яті\"</string>
@@ -301,7 +300,6 @@
     <string name="home_invalid_apk_io_error">Не вдалося відкрити файл. Будь ласка, спробуйте ще раз</string>
     <string name="home_external_apk_expert_mode_required">Ця функція доступна лише в режимі Експерта</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Експертний режим</string>
     <string name="expert_mode_search">Пошук патчів</string>
     <string name="expert_mode_disable_all">Вимкнути всі</string>
     <string name="expert_mode_disable_all_done">Усі патчі вимкнено</string>
@@ -507,8 +505,6 @@
     <string name="app_links_open_settings">Відкрити налаштування посилань</string>
     <string name="app_links_repair_success">Посилання застосунку успішно увімкнено</string>
     <string name="app_links_repair_failed">Не вдалося автоматично увімкнути посилання застосунку</string>
-    <string name="app_links_badge_enabled">Увімкнено</string>
-    <string name="app_links_badge_disabled">Вимкнено</string>
     <string name="app_links_all_verified">Усі підтримувані посилання налаштовано на відкриття в цьому застосунку</string>
     <string name="app_links_fix">Виправити посилання</string>
     <string name="configure">Налаштувати</string>
@@ -542,7 +538,6 @@
     <string name="patcher_field_source">Джерело</string>
     <string name="patcher_field_split">Split APK</string>
     <string name="patcher_field_manager">Менеджер</string>
-    <string name="patcher_field_patcher">Патчер</string>
     <string name="patcher_field_runtime">Середовище</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Бібліотеки</string>
@@ -618,7 +613,6 @@
     <string name="patcher_step_load_patches">Завантаження патчів</string>
     <string name="patcher_step_prepare_split_apk">Об’єднання split APK файлу</string>
     <string name="patcher_step_unpack">Читання APK файлу</string>
-    <string name="patcher_step_group_patching">Патчинг</string>
     <string name="patcher_step_group_saving">Збереження</string>
     <string name="patcher_step_write_patched">Запис патченого APK файлу</string>
     <string name="patcher_step_sign_apk">Підпис патченого APK файлу</string>
@@ -723,7 +717,7 @@
     <string name="settings_appearance_background_description">Анімація, що відтворюється за екранами застосунку</string>
     <string name="settings_appearance_background_circles">Кола</string>
     <string name="settings_appearance_background_rings">Кільця</string>
-    <string name="settings_appearance_background_mesh">Сітка</string>
+    <string name="settings_appearance_background_mesh">Полігони</string>
     <string name="settings_appearance_background_space">Космос</string>
     <string name="settings_appearance_background_shapes">Фігури</string>
     <string name="settings_appearance_background_snow">Сніг</string>
@@ -859,7 +853,6 @@
     <string name="external_batch_patch_trust_caller">Завжди дозволяти цьому застосунку</string>
     <string name="external_batch_patch_unknown_caller">Невідомий застосунок</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Доступне оновлення Morphe</string>
     <string name="notification_bundle_update_title">Доступні нові патчі</string>
     <string name="notification_update_text">Версія %s готова до завантаження</string>
     <string name="notification_bundle_update_text_unversioned">Натисніть, щоб відкрити Morphe та оновити</string>
@@ -870,7 +863,6 @@
     <string name="notification_channel_manager_updates_description">Сповіщення про нові релізи Morphe</string>
     <string name="notification_channel_patch_updates">Оновлення патчів</string>
     <string name="notification_channel_patch_updates_description">Сповіщення про нові релізи патчів</string>
-    <string name="notification_channel_patcher">Патчинг</string>
     <string name="notification_channel_patcher_description">Показується, коли Morphe патчить застосунок у фоновому режимі</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Експертні налаштування</string>
@@ -1393,7 +1385,6 @@ morphe_header_custom_dark.png
     <string name="manager_update_progress_size">%1$s / %2$s МБ</string>
     <string name="manager_update_not_ready">Цей реліз ще публікується. Спробуйте знову за кілька хвилин</string>
     <string name="update_download_missing">Завантажене оновлення більше недоступне. Завантажте його знову</string>
-    <string name="download_manager_failed">Помилка завантаження оновлення: %s</string>
     <string name="failed_to_check_updates">Не вдалося перевірити наявність оновлень: %s</string>
     <string name="failed_to_download_update">Помилка завантаження оновлення: %s</string>
     <string name="download_confirmation_metered">"Ви зараз користуєтеся лімітним з’єднанням, і ваш постачальник послуг може стягувати плату за передачу даних.

@@ -52,8 +52,6 @@
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
     <!-- Label of a footer button beside "Done". Keep it short, a longer one moves the buttons onto two rows -->
     <!-- Home Screen - App Info Screen -->
-    <string name="app_links_badge_enabled">செயலில்பாட்டில் உள்ளது</string>
-    <string name="app_links_badge_disabled">முடக்கப்பட்டது</string>
     <!-- Home Screen - Root Mode -->
     <!-- Patcher Screen -->
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->

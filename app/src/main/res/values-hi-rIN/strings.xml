@@ -125,20 +125,24 @@
     <string name="home_greeting_super_late_5">रात के समय और उत्पादक</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
-    <string name="home_greeting_halloween_1">चाल या पैच?</string>
-    <string name="home_greeting_halloween_2">इन APK में कोई भूत नहीं है, हमने जाँच की है</string>
-    <string name="home_greeting_halloween_3">डरावना सीज़न, नए पैच</string>
+    <string name="home_greeting_halloween_1">ट्रिक या पैच?</string>
+    <string name="home_greeting_halloween_2">इन APK फ़ाइलों में कोई भूत नहीं है, हमने जाँच की है</string>
+    <string name="home_greeting_halloween_3">डरावना सीज़न, ताज़े पैच</string>
     <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
-    <string name="home_greeting_halloween_4">कुछ शैतानी इस ओर पैच लेकर आ रही है</string>
+    <string name="home_greeting_halloween_4">कुछ बुरा इस तरफ़ पैच करता है</string>
     <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
-    <string name="home_greeting_winter_1">शुभ छुट्टियाँ, नए पैच</string>
+    <string name="home_greeting_winter_1">शुभ छुट्टियाँ, ताज़े पैच</string>
     <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
     <string name="home_greeting_winter_2">बर्फ़ गिरने दो, पैच होने दो</string>
     <string name="home_greeting_winter_3">नया साल, नए पैच</string>
     <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
-    <string name="home_greeting_winter_4">बर्फ़ में पैच लगाते हुए</string>
+    <string name="home_greeting_winter_4">बर्फ़ में पैच करते हुए</string>
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">नया साल मुबारक!</string>
+    <string name="home_greeting_new_year_2">ताज़े पैच की उल्टी गिनती</string>
+    <string name="home_greeting_new_year_3">नया साल, वही विज्ञापन-मुक्त ऐप्स</string>
     <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">पुराने वर्शन हटाओ, नए वर्शन लाओ</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">पैच स्रोत</string>
     <string name="sources_search">स्रोत और पैच खोजें</string>
@@ -288,7 +292,6 @@
     <string name="home_use_installed_app">इंस्टॉल किए गए ऐप का उपयोग करें</string>
     <string name="home_installed_app_picker_title">इंस्टॉल किए गए ऐप्स</string>
     <string name="home_installed_app_picker_empty">कोई ऐप नहीं मिला</string>
-    <string name="home_installed_app_picker_filter_all">सभी ऐप</string>
     <string name="home_installed_app_picker_filter_user">केवल उपयोगकर्ता ऐप</string>
     <string name="home_installed_app_picker_filter_system">केवल सिस्टम ऐप</string>
     <string name="home_invalid_apk_unreadable">फ़ाइल पढ़ने में असमर्थ। जाँच करें कि \'External Storage\' बैटरी द्वारा प्रतिबंधित तो नहीं है</string>
@@ -297,7 +300,6 @@
     <string name="home_invalid_apk_io_error">फ़ाइल खोलने में विफल। कृपया फिर से प्रयास करें</string>
     <string name="home_external_apk_expert_mode_required">यह सुविधा केवल विशेषज्ञ मोड में उपलब्ध है</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">एक्सपर्ट मोड</string>
     <string name="expert_mode_search">पैच खोजें</string>
     <string name="expert_mode_disable_all">सभी को असक्षम करें</string>
     <string name="expert_mode_disable_all_done">सभी पैच अक्षम किए गए</string>
@@ -503,8 +505,6 @@
     <string name="app_links_open_settings">लिंक सेटिंग खोलें</string>
     <string name="app_links_repair_success">ऐप लिंक सफलतापूर्वक चालू हो गए</string>
     <string name="app_links_repair_failed">ऐप लिंक अपने आप चालू नहीं हो सके</string>
-    <string name="app_links_badge_enabled">चालू किया गया</string>
-    <string name="app_links_badge_disabled">बंद किया गया</string>
     <string name="app_links_all_verified">सभी सपोर्टेड लिंक इस ऐप में खुलने के लिए सेट हैं</string>
     <string name="app_links_fix">लिंक ठीक करें</string>
     <string name="configure">सेट करें</string>
@@ -538,7 +538,6 @@
     <string name="patcher_field_source">स्रोत</string>
     <string name="patcher_field_split">विभाजित एपीके</string>
     <string name="patcher_field_manager">प्रबंधक</string>
-    <string name="patcher_field_patcher">पैचर</string>
     <string name="patcher_field_runtime">रनटाइम</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">लाइब्रेरीज़</string>
@@ -614,7 +613,6 @@
     <string name="patcher_step_load_patches">पैच लोड हो रहे हैं</string>
     <string name="patcher_step_prepare_split_apk">स्प्लिटेड APK को मर्ज कर रहा हूँ</string>
     <string name="patcher_step_unpack">APK फाइल पढ़ें</string>
-    <string name="patcher_step_group_patching">पैचिंग</string>
     <string name="patcher_step_group_saving">सेव हो रहा है</string>
     <string name="patcher_step_write_patched">पैच्ड एपीके फाइल लिखना</string>
     <string name="patcher_step_sign_apk">Signing patched APK file</string>
@@ -725,6 +723,9 @@
     <string name="settings_appearance_background_snow">बारिशक</string>
     <string name="settings_appearance_background_grid">ग्रिड</string>
     <string name="settings_appearance_background_particles">कण</string>
+    <string name="settings_appearance_background_lava">लावा लैंप</string>
+    <string name="settings_appearance_background_halloween">हैलोवीन</string>
+    <string name="settings_appearance_background_fireworks">आतिशबाज़ी</string>
     <string name="settings_appearance_background_none">कुछ</string>
     <string name="settings_appearance_background_random">यादृच्छिक</string>
     <string name="settings_appearance_background_random_interval_launch">लॉन्च पर</string>
@@ -732,7 +733,10 @@
     <string name="settings_appearance_background_random_interval_3days">हर 3 दिन में</string>
     <string name="settings_appearance_parallax_effect">परालैक्स प्रभाव</string>
     <string name="settings_appearance_parallax_effect_description">डिवाइस को झुकाने पर पृष्ठभूमि को मधयम गति से बदलना</string>
+    <string name="settings_appearance_seasonal_themes">मौसमी थीम</string>
+    <string name="settings_appearance_seasonal_themes_description">छुट्टियों के दौरान उत्सवी पृष्ठभूमियाँ और शुभकामनाएँ</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">जब मौसमी थीम चालू हों, %1$s पृष्ठभूमि %2$s तक चालू रहती है</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">थीम</string>
     <string name="settings_appearance_theme_mode">थीम मोड</string>
@@ -794,8 +798,24 @@
     <string name="settings_appearance_app_icon_default">डिफॉल्ट</string>
     <string name="settings_appearance_app_icon_light_2">खगोल</string>
     <string name="settings_appearance_app_icon_light_3">सेटमब्रेक</string>
+    <string name="settings_appearance_app_icon_light_4">लैवेंडर</string>
+    <string name="settings_appearance_app_icon_light_5">ग्लेशियर</string>
+    <string name="settings_appearance_app_icon_light_6">धुंध</string>
+    <string name="settings_appearance_app_icon_light_7">रेत</string>
+    <string name="settings_appearance_app_icon_dark_1">टील</string>
     <string name="settings_appearance_app_icon_dark_2">वॉयड</string>
+    <string name="settings_appearance_app_icon_dark_3">प्लम</string>
+    <string name="settings_appearance_app_icon_dark_4">मिडनाइट</string>
+    <string name="settings_appearance_app_icon_dark_5">स्लेट</string>
+    <string name="settings_appearance_app_icon_accent_1">ऑरोरा</string>
+    <string name="settings_appearance_app_icon_accent_2">स्याही</string>
+    <string name="settings_appearance_app_icon_accent_3">काग़ज़</string>
+    <string name="settings_appearance_app_icon_accent_4">संध्या</string>
+    <string name="settings_appearance_app_icon_background">पृष्ठभूमि</string>
+    <string name="settings_appearance_app_icon_mark">लोगो</string>
     <string name="settings_appearance_app_icon_mark_color">रंगीन</string>
+    <string name="settings_appearance_app_icon_mark_white">सफ़ेद</string>
+    <string name="settings_appearance_app_icon_mark_black">काला</string>
     <string name="settings_appearance_app_icon_change_dialog_title">एप्लिकेशन आइकॉन बदलें? फिर से स्टार्ट करना होगा।</string>
     <string name="settings_appearance_app_icon_change_dialog_message">&lt;b&gt;%s&lt;/b&gt; में बदलें और पुनरारंभ करें?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -833,7 +853,6 @@
     <string name="external_batch_patch_trust_caller">हमेशा इस ऐप की अनुमति दें</string>
     <string name="external_batch_patch_unknown_caller">एक अज्ञात ऐप</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">मोर्फ़ अपडेट उपलब्ध है</string>
     <string name="notification_bundle_update_title">नई पैच उपलब्ध हैं</string>
     <string name="notification_update_text">संस्करण %s डाउनलोड करने के लिए तैयार है।</string>
     <string name="notification_bundle_update_text_unversioned">मोर्फ़ और अपडेट करने के लिए टैप करें</string>
@@ -844,7 +863,6 @@
     <string name="notification_channel_manager_updates_description">नए Morphe रिलीज़ के बारे में सूचनाएँ</string>
     <string name="notification_channel_patch_updates">पैच अपडेट</string>
     <string name="notification_channel_patch_updates_description">नए पैच रिलीज़ के बारे में सूचनाएँ</string>
-    <string name="notification_channel_patcher">पैचिंग</string>
     <string name="notification_channel_patcher_description">जब मोर्फ़ पृष्ठभूमि में किसी ऐप को पैच कर रहा हो तो दिखाया गया</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">एक्सपर्ट सेटिंग्स</string>
@@ -1367,7 +1385,6 @@ morphe_header_custom_dark.png
     <string name="manager_update_progress_size">%1$s / %2$s एमबी</string>
     <string name="manager_update_not_ready">यह रिलीज़ अभी भी प्रकाशित की जा रही है। कुछ मिनटों में फिर प्रयास करें</string>
     <string name="update_download_missing">डाउनलोड किया गया अपडेट अब उपलब्ध नहीं है। इसे फिर से डाउनलोड करें</string>
-    <string name="download_manager_failed">अपडेट डाउनलोड करने में विफल: %s</string>
     <string name="failed_to_check_updates">अपडेट के लिए जाँच करने में विफल: %s</string>
     <string name="failed_to_download_update">अपडेट डाउनलोड करने में विफल: %s</string>
     <string name="download_confirmation_metered">"आप मापित कनेक्शन पर हैं, और आपके सेवा प्रदाता से डेटा चार्ज लागू हो सकते हैं.

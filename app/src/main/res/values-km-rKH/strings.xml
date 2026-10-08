@@ -70,8 +70,6 @@
     <!-- Label of a footer button beside "Done". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="shortcut_check_updates_short">ពិនិត្យបច្ចុប្បន្នភាព</string>
     <!-- Home Screen - App Info Screen -->
-    <string name="app_links_badge_enabled">បានបើក</string>
-    <string name="app_links_badge_disabled">បានផ្ដាច់</string>
     <!-- Home Screen - Root Mode -->
     <!-- Patcher Screen -->
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->

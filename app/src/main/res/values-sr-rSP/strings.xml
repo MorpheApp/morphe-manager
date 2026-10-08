@@ -125,12 +125,24 @@
     <string name="home_greeting_super_late_5">Ноћни и продуктивни</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_1">Трик или закрпа?</string>
+    <string name="home_greeting_halloween_2">Нема духова у овим APK-овима, проверили смо</string>
+    <string name="home_greeting_halloween_3">Језива сезона, свеже закрпе</string>
     <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
+    <string name="home_greeting_halloween_4">Нешто опако овамо крпи</string>
     <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
+    <string name="home_greeting_winter_1">Срећни празници, свеже закрпе</string>
     <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
+    <string name="home_greeting_winter_2">Нека пада снег, нека падају закрпе</string>
+    <string name="home_greeting_winter_3">Нова година, нове закрпе</string>
     <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
+    <string name="home_greeting_winter_4">Крпећи кроз снег</string>
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">Срећна Нова година!</string>
+    <string name="home_greeting_new_year_2">Одбројавамо до свежих закрпа</string>
+    <string name="home_greeting_new_year_3">Нова година, исте апликације без реклама</string>
     <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Напоље са старим верзијама, унутра с новим</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Извор печовања</string>
     <string name="sources_search">Претражите изворе и закрпе</string>
@@ -280,7 +292,6 @@
     <string name="home_use_installed_app">Користи инсталирану апликацију</string>
     <string name="home_installed_app_picker_title">Инсталиране апликације</string>
     <string name="home_installed_app_picker_empty">Нема пронађених апликација</string>
-    <string name="home_installed_app_picker_filter_all">Све апликације</string>
     <string name="home_installed_app_picker_filter_user">Само корисничке апликације</string>
     <string name="home_installed_app_picker_filter_system">Само системске апликације</string>
     <string name="home_invalid_apk_unreadable">Није могуће прочитати датотеку. Проверите да \'Екстерна складишта\' није ограничено од стране батерије</string>
@@ -289,7 +300,6 @@
     <string name="home_invalid_apk_io_error">Није успело отварање датотеке. Поново покушајте.</string>
     <string name="home_external_apk_expert_mode_required">Ова функција је доступна само у режиму за напредне кориснике</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Експерт мод</string>
     <string name="expert_mode_search">Претражи печеве</string>
     <string name="expert_mode_disable_all">Онемогући све</string>
     <string name="expert_mode_disable_all_done">Сви закрпе су деактивиране</string>
@@ -495,8 +505,6 @@
     <string name="app_links_open_settings">Отвори подешавања линкова</string>
     <string name="app_links_repair_success">Апликациони линкови су успешно омогућени</string>
     <string name="app_links_repair_failed">Аутоматско омогућавање апликационих линкова није успело</string>
-    <string name="app_links_badge_enabled">Омогућено</string>
-    <string name="app_links_badge_disabled">Онемогућен</string>
     <string name="app_links_all_verified">Сви подржани линкови су подешени да се отварају у овој апликацији</string>
     <string name="app_links_fix">Поправи линкове</string>
     <string name="configure">Подеси</string>
@@ -530,7 +538,6 @@
     <string name="patcher_field_source">Извор</string>
     <string name="patcher_field_split">Подељени АПК</string>
     <string name="patcher_field_manager">Менаџер</string>
-    <string name="patcher_field_patcher">Пачер</string>
     <string name="patcher_field_runtime">Рантим</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Библиотеке</string>
@@ -606,7 +613,6 @@
     <string name="patcher_step_load_patches">Учитавање закрпа</string>
     <string name="patcher_step_prepare_split_apk">Спајање подељених APK</string>
     <string name="patcher_step_unpack">Прочитај APK-файл</string>
-    <string name="patcher_step_group_patching">Закрпљавање</string>
     <string name="patcher_step_group_saving">Чување</string>
     <string name="patcher_step_write_patched">Писање закрпљене АПК датотеке</string>
     <string name="patcher_step_sign_apk">Потписивање закрпљене АПК датотеке</string>
@@ -717,6 +723,9 @@
     <string name="settings_appearance_background_snow">Снег</string>
     <string name="settings_appearance_background_grid">Мрежа</string>
     <string name="settings_appearance_background_particles">Партикле</string>
+    <string name="settings_appearance_background_lava">Лава лампа</string>
+    <string name="settings_appearance_background_halloween">Ноћ вештица</string>
+    <string name="settings_appearance_background_fireworks">Ватромет</string>
     <string name="settings_appearance_background_none">Ништа</string>
     <string name="settings_appearance_background_random">Насумично</string>
     <string name="settings_appearance_background_random_interval_launch">При покретању</string>
@@ -724,7 +733,10 @@
     <string name="settings_appearance_background_random_interval_3days">Свака 3 дана</string>
     <string name="settings_appearance_parallax_effect">Efekt paralaksa</string>
     <string name="settings_appearance_parallax_effect_description">Umiranje pozadine pri kretanju ugao naprijed nazad</string>
+    <string name="settings_appearance_seasonal_themes">Сезонске теме</string>
+    <string name="settings_appearance_seasonal_themes_description">Свечане позадине и поздрави током празника</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">Позадина %1$s се приказује до %2$s док су сезонске теме укључене</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Начин</string>
     <string name="settings_appearance_theme_mode">Режим теме</string>
@@ -786,8 +798,24 @@
     <string name="settings_appearance_app_icon_default">Подразумеван</string>
     <string name="settings_appearance_app_icon_light_2">Небо</string>
     <string name="settings_appearance_app_icon_light_3">Залаз сунца</string>
+    <string name="settings_appearance_app_icon_light_4">Лаванда</string>
+    <string name="settings_appearance_app_icon_light_5">Глечер</string>
+    <string name="settings_appearance_app_icon_light_6">Измаглица</string>
+    <string name="settings_appearance_app_icon_light_7">Песак</string>
+    <string name="settings_appearance_app_icon_dark_1">Тиркизна</string>
     <string name="settings_appearance_app_icon_dark_2">Празност</string>
+    <string name="settings_appearance_app_icon_dark_3">Шљива</string>
+    <string name="settings_appearance_app_icon_dark_4">Поноћ</string>
+    <string name="settings_appearance_app_icon_dark_5">Шкриљац</string>
+    <string name="settings_appearance_app_icon_accent_1">Аурора</string>
+    <string name="settings_appearance_app_icon_accent_2">Мастило</string>
+    <string name="settings_appearance_app_icon_accent_3">Папир</string>
+    <string name="settings_appearance_app_icon_accent_4">Сумрак</string>
+    <string name="settings_appearance_app_icon_background">Позадина</string>
+    <string name="settings_appearance_app_icon_mark">Лого</string>
     <string name="settings_appearance_app_icon_mark_color">Боја</string>
+    <string name="settings_appearance_app_icon_mark_white">Бела</string>
+    <string name="settings_appearance_app_icon_mark_black">Црна</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Променити икону</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Промените у &lt;b&gt;%s&lt;/b&gt; и поново покрените?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -825,7 +853,6 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="external_batch_patch_trust_caller">Увек дозволи ову апликацију</string>
     <string name="external_batch_patch_unknown_caller">Непозната апликација</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Доступно ажурирање Morphe-а</string>
     <string name="notification_bundle_update_title">Доступна су нова патчеа</string>
     <string name="notification_update_text">Верзија %s је спремна за преузимање</string>
     <string name="notification_bundle_update_text_unversioned">Додирните да бисте отворили Morphe и ажурирали</string>
@@ -836,7 +863,6 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="notification_channel_manager_updates_description">Обавештења о новим Morphe издањима</string>
     <string name="notification_channel_patch_updates">Ажурирања закрпа</string>
     <string name="notification_channel_patch_updates_description">Обавештења о новим издањима закрпа</string>
-    <string name="notification_channel_patcher">Патчинг</string>
     <string name="notification_channel_patcher_description">Приказано док Morphe патчи апликацију у позадини</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Навише подешавања</string>
@@ -1359,7 +1385,6 @@ morphe_header_custom_dark.png
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">Овај издање је и даље у процесу објављивања. Покушајте поново за неколико минута</string>
     <string name="update_download_missing">Преузето ажурирање више није доступно. Преузмите га поново.</string>
-    <string name="download_manager_failed">Није успело преузимање ажурирања: %s</string>
     <string name="failed_to_check_updates">Није успело провера ажурирања: %s</string>
     <string name="failed_to_download_update">Није успело преузимање ажурирања: %s</string>
     <string name="download_confirmation_metered">"Тренутно сте на вези са ограниченим подацима, а могу се примењивати трошкови за пренос података вашег оператера.

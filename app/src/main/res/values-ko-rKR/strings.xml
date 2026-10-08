@@ -292,7 +292,6 @@
     <string name="home_use_installed_app">설치된 앱 사용</string>
     <string name="home_installed_app_picker_title">설치된 앱</string>
     <string name="home_installed_app_picker_empty">앱을 찾을 수 없습니다</string>
-    <string name="home_installed_app_picker_filter_all">모든 앱</string>
     <string name="home_installed_app_picker_filter_user">사용자 앱만</string>
     <string name="home_installed_app_picker_filter_system">시스템 앱만</string>
     <string name="home_invalid_apk_unreadable">파일을 읽을 수 없습니다. \'외부 저장소\'가 배터리 제한되어 있는지 확인하세요</string>
@@ -301,7 +300,6 @@
     <string name="home_invalid_apk_io_error">파일을 열 수 없습니다. 다시 시도하세요</string>
     <string name="home_external_apk_expert_mode_required">이 기능은 전문가 모드에서만 사용할 수 있습니다</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">전문가 모드</string>
     <string name="expert_mode_search">패치 검색</string>
     <string name="expert_mode_disable_all">모두 비활성화</string>
     <string name="expert_mode_disable_all_done">모든 패치 비활성화됨</string>
@@ -507,8 +505,6 @@
     <string name="app_links_open_settings">링크 설정 열기</string>
     <string name="app_links_repair_success">앱 링크 활성화 성공</string>
     <string name="app_links_repair_failed">앱 링크 자동 활성화 실패</string>
-    <string name="app_links_badge_enabled">활성화됨</string>
-    <string name="app_links_badge_disabled">비활성화됨</string>
     <string name="app_links_all_verified">지원되는 모든 링크가 이 앱에서 열리도록 설정되었습니다</string>
     <string name="app_links_fix">링크 수정</string>
     <string name="configure">설정</string>
@@ -542,7 +538,6 @@
     <string name="patcher_field_source">소스</string>
     <string name="patcher_field_split">분할 APK</string>
     <string name="patcher_field_manager">매니저</string>
-    <string name="patcher_field_patcher">패처</string>
     <string name="patcher_field_runtime">런타임</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">라이브러리</string>
@@ -618,7 +613,6 @@
     <string name="patcher_step_load_patches">패치를 불러오는 중</string>
     <string name="patcher_step_prepare_split_apk">분할 APK를 병합하는 중</string>
     <string name="patcher_step_unpack">APK 파일을 읽어오는 중</string>
-    <string name="patcher_step_group_patching">패치하는 중</string>
     <string name="patcher_step_group_saving">저장하는 중</string>
     <string name="patcher_step_write_patched">패치된 APK 파일을 작성하는 중</string>
     <string name="patcher_step_sign_apk">패치된 APK 파일에 서명하는 중</string>
@@ -807,9 +801,9 @@
     <string name="settings_appearance_app_icon_light_5">빙하</string>
     <string name="settings_appearance_app_icon_light_6">안개</string>
     <string name="settings_appearance_app_icon_light_7">모래</string>
-    <string name="settings_appearance_app_icon_dark_1">청록색</string>
+    <string name="settings_appearance_app_icon_dark_1">청록</string>
     <string name="settings_appearance_app_icon_dark_2">공허</string>
-    <string name="settings_appearance_app_icon_dark_3">자두색</string>
+    <string name="settings_appearance_app_icon_dark_3">자두</string>
     <string name="settings_appearance_app_icon_dark_4">자정</string>
     <string name="settings_appearance_app_icon_dark_5">슬레이트</string>
     <string name="settings_appearance_app_icon_accent_1">오로라</string>
@@ -819,8 +813,8 @@
     <string name="settings_appearance_app_icon_background">배경</string>
     <string name="settings_appearance_app_icon_mark">로고</string>
     <string name="settings_appearance_app_icon_mark_color">컬러</string>
-    <string name="settings_appearance_app_icon_mark_white">하얀색</string>
-    <string name="settings_appearance_app_icon_mark_black">검정색</string>
+    <string name="settings_appearance_app_icon_mark_white">하얀</string>
+    <string name="settings_appearance_app_icon_mark_black">검정</string>
     <string name="settings_appearance_app_icon_change_dialog_title">앱 아이콘을 변경할까요?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">&lt;b&gt;%s&lt;/b&gt;으로 변경하고 다시 시작하시겠습니까?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -858,7 +852,6 @@
     <string name="external_batch_patch_trust_caller">이 앱을 항상 허용</string>
     <string name="external_batch_patch_unknown_caller">알 수 없는 앱</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Morphe 업데이트 사용 가능</string>
     <string name="notification_bundle_update_title">새 패치 사용 가능</string>
     <string name="notification_update_text">%s 버전 다운로드 준비 완료</string>
     <string name="notification_bundle_update_text_unversioned">Morphe를 열고 업데이트하려면 탭하세요</string>
@@ -869,7 +862,6 @@
     <string name="notification_channel_manager_updates_description">새 Morphe 릴리스에 대한 알림</string>
     <string name="notification_channel_patch_updates">패치 업데이트</string>
     <string name="notification_channel_patch_updates_description">새 패치 릴리스에 대한 알림</string>
-    <string name="notification_channel_patcher">패치</string>
     <string name="notification_channel_patcher_description">Morphe가 백그라운드에서 앱을 패치하는 동안에 표시되는 알림</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">전문가 설정</string>
@@ -1391,7 +1383,6 @@ morphe_header_custom_dark.png
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">이 릴리스를 게시하는 중입니다. 몇 분 후 다시 시도해 주세요</string>
     <string name="update_download_missing">다운로드한 업데이트를 더 이상 사용할 수 없습니다. 다시 다운로드하세요</string>
-    <string name="download_manager_failed">업데이트를 다운로드할 수 없습니다: %s</string>
     <string name="failed_to_check_updates">업데이트를 확인할 수 없습니다: %s</string>
     <string name="failed_to_download_update">업데이트를 다운로드할 수 없습니다: %s</string>
     <string name="download_confirmation_metered">"현재 모바일 데이터를 사용하고 있습니다. 통신사 데이터 요금이 부과될 수 있습니다

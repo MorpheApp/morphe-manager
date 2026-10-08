@@ -125,20 +125,24 @@
     <string name="home_greeting_super_late_5">Νυχτερινός και παραγωγικός</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
-    <string name="home_greeting_halloween_1">Φάρσα ή μπάλωμα;</string>
+    <string name="home_greeting_halloween_1">Κόλπο ή ενημέρωση;</string>
     <string name="home_greeting_halloween_2">Κανένα φάντασμα σε αυτά τα APK, το ελέγξαμε</string>
-    <string name="home_greeting_halloween_3">Ανατριχιαστική σεζόν, φρέσκα μπαλώματα</string>
+    <string name="home_greeting_halloween_3">Τρομακτική σεζόν, φρέσκες ενημερώσεις</string>
     <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
-    <string name="home_greeting_halloween_4">Κάτι κακό μπαλώνει από δω</string>
+    <string name="home_greeting_halloween_4">Κάτι τρομερό έρχεται με ενημερώσεις</string>
     <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
-    <string name="home_greeting_winter_1">Καλές γιορτές, φρέσκα μπαλώματα</string>
+    <string name="home_greeting_winter_1">Καλές γιορτές, φρέσκες ενημερώσεις</string>
     <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
-    <string name="home_greeting_winter_2">Ας χιονίζει, ας μπαλώνει</string>
-    <string name="home_greeting_winter_3">Νέα χρονιά, νέα μπαλώματα</string>
+    <string name="home_greeting_winter_2">Ας χιονίσει, ας ενημερώσει</string>
+    <string name="home_greeting_winter_3">Νέα χρονιά, νέες ενημερώσεις</string>
     <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
-    <string name="home_greeting_winter_4">Μπαλώνοντας μέσα στο χιόνι</string>
+    <string name="home_greeting_winter_4">Με ενημερώσεις μέσα στο χιόνι</string>
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">Καλή χρονιά!</string>
+    <string name="home_greeting_new_year_2">Αντίστροφη μέτρηση για φρέσκες ενημερώσεις</string>
+    <string name="home_greeting_new_year_3">Νέα χρονιά, ίδιες εφαρμογές χωρίς διαφημίσεις</string>
     <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Έξω οι παλιές εκδόσεις, μέσα οι νέες</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Πηγές τροποποιήσεων</string>
     <string name="sources_search">Αναζήτηση πηγών και επιδιορθώσεων</string>
@@ -288,7 +292,6 @@
     <string name="home_use_installed_app">Χρήση εγκατεστημένης εφαρμογής</string>
     <string name="home_installed_app_picker_title">Εγκατεστημένες εφαρμογές</string>
     <string name="home_installed_app_picker_empty">Δεν βρέθηκαν εφαρμογές</string>
-    <string name="home_installed_app_picker_filter_all">Όλες οι εφαρμογές</string>
     <string name="home_installed_app_picker_filter_user">Μόνο εφαρμογές χρήστη</string>
     <string name="home_installed_app_picker_filter_system">Μόνο εφαρμογές συστήματος</string>
     <string name="home_invalid_apk_unreadable">Δεν ήταν δυνατή η ανάγνωση του αρχείου. Ελέγξτε ότι ο \'Εξωτερικός χώρος αποθήκευσης\' δεν περιορίζεται από την μπαταρία</string>
@@ -297,7 +300,6 @@
     <string name="home_invalid_apk_io_error">Απέτυχε το άνοιγμα του αρχείου. Παρακαλώ προσπαθήστε ξανά</string>
     <string name="home_external_apk_expert_mode_required">Αυτή η λειτουργία είναι διαθέσιμη μόνο στην Εξειδικευμένη λειτουργία</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Εξειδικευμένη λειτουργία</string>
     <string name="expert_mode_search">Αναζήτηση τροποποιήσεων</string>
     <string name="expert_mode_disable_all">Απενεργοποίηση όλων</string>
     <string name="expert_mode_disable_all_done">Όλες οι διορθώσεις απενεργοποιήθηκαν</string>
@@ -503,8 +505,6 @@
     <string name="app_links_open_settings">Άνοιγμα ρυθμίσεων συνδέσμων</string>
     <string name="app_links_repair_success">Οι σύνδεσμοι εφαρμογής ενεργοποιήθηκαν με επιτυχία</string>
     <string name="app_links_repair_failed">Αποτυχία αυτόματης ενεργοποίησης των συνδέσμων εφαρμογής</string>
-    <string name="app_links_badge_enabled">Ενεργοποιημένο</string>
-    <string name="app_links_badge_disabled">Απενεργοποιημένο</string>
     <string name="app_links_all_verified">Όλοι οι υποστηριζόμενοι σύνδεσμοι έχουν ρυθμιστεί να ανοίγουν σε αυτήν την εφαρμογή</string>
     <string name="app_links_fix">Διόρθωση συνδέσμων</string>
     <string name="configure">Διαμόρφωση</string>
@@ -538,7 +538,6 @@
     <string name="patcher_field_source">Πηγή</string>
     <string name="patcher_field_split">Διαχωρισμένο APK</string>
     <string name="patcher_field_manager">Διαχειριστής</string>
-    <string name="patcher_field_patcher">Επιδιορθωτής</string>
     <string name="patcher_field_runtime">Χρόνος εκτέλεσης</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Βιβλιοθήκες</string>
@@ -614,7 +613,6 @@
     <string name="patcher_step_load_patches">Φόρτωση τροποποιήσεων</string>
     <string name="patcher_step_prepare_split_apk">Συγχώνευση διαχωρισμένου APK</string>
     <string name="patcher_step_unpack">Ανάγνωση αρχείου APK</string>
-    <string name="patcher_step_group_patching">Τροποποίηση</string>
     <string name="patcher_step_group_saving">Αποθήκευση</string>
     <string name="patcher_step_write_patched">Εγγραφή τροποποιημένου αρχείου APK</string>
     <string name="patcher_step_sign_apk">Υπογραφή τροποποιημένου αρχείου APK</string>
@@ -725,6 +723,9 @@
     <string name="settings_appearance_background_snow">Χιόνι</string>
     <string name="settings_appearance_background_grid">Στίγματα</string>
     <string name="settings_appearance_background_particles">Σωματίδια</string>
+    <string name="settings_appearance_background_lava">Λάμπα λάβας</string>
+    <string name="settings_appearance_background_halloween">Χαλοουίν</string>
+    <string name="settings_appearance_background_fireworks">Πυροτεχνήματα</string>
     <string name="settings_appearance_background_none">Κανένα</string>
     <string name="settings_appearance_background_random">Τυχαίο</string>
     <string name="settings_appearance_background_random_interval_launch">Κατά την εκκίνηση</string>
@@ -732,7 +733,10 @@
     <string name="settings_appearance_background_random_interval_3days">Κάθε 3 ημέρες</string>
     <string name="settings_appearance_parallax_effect">Εφέ παράλλαξης</string>
     <string name="settings_appearance_parallax_effect_description">Ομαλή μετατόπιση φόντου όταν αλλάξει κλίση η συσκευή</string>
+    <string name="settings_appearance_seasonal_themes">Εποχιακά θέματα</string>
+    <string name="settings_appearance_seasonal_themes_description">Γιορτινά φόντα και χαιρετισμοί στις γιορτές</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">Το φόντο %1$s είναι ενεργό έως τις %2$s όσο τα εποχιακά θέματα είναι ενεργά</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Θέμα</string>
     <string name="settings_appearance_theme_mode">Λειτουργία θέματος</string>
@@ -794,8 +798,24 @@
     <string name="settings_appearance_app_icon_default">Προεπιλογή</string>
     <string name="settings_appearance_app_icon_light_2">Ουρανός</string>
     <string name="settings_appearance_app_icon_light_3">Δύση ηλίου </string>
+    <string name="settings_appearance_app_icon_light_4">Λεβάντα</string>
+    <string name="settings_appearance_app_icon_light_5">Παγετώνας</string>
+    <string name="settings_appearance_app_icon_light_6">Ομίχλη</string>
+    <string name="settings_appearance_app_icon_light_7">Άμμος</string>
+    <string name="settings_appearance_app_icon_dark_1">Θαλασσί</string>
     <string name="settings_appearance_app_icon_dark_2">Κενό</string>
+    <string name="settings_appearance_app_icon_dark_3">Δαμασκηνί</string>
+    <string name="settings_appearance_app_icon_dark_4">Μεσάνυχτα</string>
+    <string name="settings_appearance_app_icon_dark_5">Σχιστόλιθος</string>
+    <string name="settings_appearance_app_icon_accent_1">Σέλας</string>
+    <string name="settings_appearance_app_icon_accent_2">Μελάνι</string>
+    <string name="settings_appearance_app_icon_accent_3">Χαρτί</string>
+    <string name="settings_appearance_app_icon_accent_4">Σούρουπο</string>
+    <string name="settings_appearance_app_icon_background">Φόντο</string>
+    <string name="settings_appearance_app_icon_mark">Λογότυπο</string>
     <string name="settings_appearance_app_icon_mark_color">Χρωματιστή</string>
+    <string name="settings_appearance_app_icon_mark_white">Λευκό</string>
+    <string name="settings_appearance_app_icon_mark_black">Μαύρο</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Αλλαγή εικονιδίου της εφαρμογής;</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Αλλαγή σε &lt;b&gt;%s&lt;/b&gt; και επανεκκίνηση;</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -833,7 +853,6 @@
     <string name="external_batch_patch_trust_caller">Να επιτρέπεται πάντα αυτήν την εφαρμογή</string>
     <string name="external_batch_patch_unknown_caller">Μια άγνωστη εφαρμογή</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Διαθέσιμη ενημέρωση του Morphe</string>
     <string name="notification_bundle_update_title">Νέες τροποποιήσεις διαθέσιμες</string>
     <string name="notification_update_text">Η έκδοση %s είναι έτοιμη για λήψη</string>
     <string name="notification_bundle_update_text_unversioned">Πατήστε για να ανοίξετε το Morphe και να ενημερώσετε</string>
@@ -844,7 +863,6 @@
     <string name="notification_channel_manager_updates_description">Ειδοποιήσεις για νέες εκδόσεις του Morphe</string>
     <string name="notification_channel_patch_updates">Ενημερώσεις επιδιόρθωσης</string>
     <string name="notification_channel_patch_updates_description">Ειδοποιήσεις για νέες εκδόσεις επιδιόρθωσης</string>
-    <string name="notification_channel_patcher">Τροποποίηση</string>
     <string name="notification_channel_patcher_description">Εμφανίζεται όταν το Morphe ενημερώνει μια εφαρμογή στο παρασκήνιο</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Εξειδικευμένες ρυθμίσεις</string>
@@ -1367,7 +1385,6 @@ morphe_header_custom_dark.png
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">Αυτή η έκδοση δημοσιεύεται ακόμα. Επαναλάβετε σε λίγα λεπτά</string>
     <string name="update_download_missing">Η ληφθείσα ενημέρωση δεν είναι πλέον διαθέσιμη. Κατεβάστε την ξανά</string>
-    <string name="download_manager_failed">Αποτυχία λήψης ενημέρωσης: %s</string>
     <string name="failed_to_check_updates">Ο έλεγχος για ενημερώσεις απέτυχε: %s</string>
     <string name="failed_to_download_update">Η λήψη ενημέρωσης απέτυχε: %s</string>
     <string name="download_confirmation_metered">"Είστε συνδεδεμένοι σε σύνδεση με ογκοχρέωση και ενδέχεται να ισχύουν χρεώσεις δεδομένων από τον πάροχο υπηρεσιών σας.

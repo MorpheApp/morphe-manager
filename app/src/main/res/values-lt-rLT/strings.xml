@@ -163,7 +163,6 @@
     <string name="home_select_any_apk_description">Pasirinkite bet kurios programos APK failą arba pasirinkite įdiegtą programą šiame įrenginyje</string>
     <string name="home_use_installed_app">Naudoti įdiegtą programą</string>
     <string name="home_installed_app_picker_empty">Nėra rastų programų</string>
-    <string name="home_installed_app_picker_filter_all">Visos programos</string>
     <string name="home_installed_app_picker_filter_user">Tik naudotojo programos</string>
     <string name="home_installed_app_picker_filter_system">Tik sistemos programos</string>
     <string name="home_invalid_apk_unreadable">Nepavyko perskaityti failo. Patikrinkite, ar \'Išorinė atmintinė\' nėra apribota baterijos</string>
@@ -171,7 +170,6 @@
     <string name="home_invalid_apk_io_error">Nepavyko atverti failą. Pabandykite dar kartą</string>
     <string name="home_external_apk_expert_mode_required">Ši funkcija yra prieinama tik Ekspertų režime</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Eksperto rėžimas</string>
     <string name="expert_mode_search">Ieškoti modifikacijų</string>
     <string name="expert_mode_disable_all">Išjungti viską</string>
     <string name="expert_mode_disable_all_done">Visi pataisymai išjungti</string>
@@ -298,8 +296,6 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <string name="home_app_info_patch_update_available_description">Yra naujesnė pataisymų versija. Iš naujo įdiekite savo programėlę, kad gautumėte naujausius patobulinimus ir pataisymus</string>
     <string name="home_app_info_app_deleted_warning">Programėlė buvo pašalinta</string>
     <string name="home_app_info_app_deleted_description">Ši programa buvo pašalinta nenaudojant Morphe. Įdiekite ją iš naujo, kad atkurtumėte funkcionalumą</string>
-    <string name="app_links_badge_enabled">Įjungtas</string>
-    <string name="app_links_badge_disabled">Išjungtas</string>
     <string name="home_app_info_apk_size">APK dydis</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Norint naudoti root režimą, prieš diegiant pataisą įrenginyje turi būti įdiegtas originalus APK</string>
@@ -355,7 +351,6 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <string name="patcher_step_load_patches">Įkeliami pataisymai</string>
     <string name="patcher_step_prepare_split_apk">Apjungiamas padalintas APK</string>
     <string name="patcher_step_unpack">Atverti APK failą</string>
-    <string name="patcher_step_group_patching">Taisoma</string>
     <string name="patcher_step_group_saving">Išsaugoma</string>
     <string name="patcher_step_write_patched">Rašomas pataisytas APK failas</string>
     <string name="patcher_step_sign_apk">Pasirašomas pataisytas APK failas</string>
@@ -479,8 +474,6 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <string name="settings_advanced_update_interval_dialog_title">Patikrinti ar yra atnaujinimų</string>
     <string name="settings_advanced_update_interval_hourly">Kas valandą</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Morphe atnaujinimas prieinamas</string>
-    <string name="notification_channel_patcher">Taisoma</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert_mode">Eksperto rėžimas</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->

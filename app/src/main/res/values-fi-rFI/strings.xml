@@ -138,7 +138,11 @@
     <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
     <string name="home_greeting_winter_4">Korjaten halki hangen</string>
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">Hyvää uutta vuotta!</string>
+    <string name="home_greeting_new_year_2">Lasketaan aikoja uusiin päivityksiin</string>
+    <string name="home_greeting_new_year_3">Uusi vuosi, samat mainoksettomat sovellukset</string>
     <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Vanhat versiot pois, uudet tilalle</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Lisäosien lähteet</string>
     <string name="sources_search">Hae lähteitä ja korjauksia</string>
@@ -288,7 +292,6 @@ Kaikki mitä lisäät tältä verkkosivustolta, on oma riskisi."</string>
     <string name="home_use_installed_app">Käytä asennettua sovellusta</string>
     <string name="home_installed_app_picker_title">Asennetut sovellukset</string>
     <string name="home_installed_app_picker_empty">Sovelluksia ei löytynyt</string>
-    <string name="home_installed_app_picker_filter_all">Kaikki sovellukset</string>
     <string name="home_installed_app_picker_filter_user">Vain käyttäjän sovellukset</string>
     <string name="home_installed_app_picker_filter_system">Vain järjestelmäsovellukset</string>
     <string name="home_invalid_apk_unreadable">Tiedoston lukeminen epäonnistui. Tarkista, ettei ulkoisen tallennustilan akunkäyttöä ole rajoitettu.</string>
@@ -297,7 +300,6 @@ Kaikki mitä lisäät tältä verkkosivustolta, on oma riskisi."</string>
     <string name="home_invalid_apk_io_error">Tiedoston avaaminen epäonnistui. Yritä uudelleen</string>
     <string name="home_external_apk_expert_mode_required">Tämä ominaisuus on käytettävissä vain asiantuntijatilassa</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Asiantuntijatila</string>
     <string name="expert_mode_search">Hae lisäosia</string>
     <string name="expert_mode_disable_all">Poista kaikki käytöstä</string>
     <string name="expert_mode_disable_all_done">Kaikki korjaukset poistettu käytöstä</string>
@@ -504,8 +506,6 @@ Ulkopuolinen alue (katkoviiva): käynnistimen maski saattaa leikata osia siitä 
     <string name="app_links_open_settings">Avaa linkkien asetukset</string>
     <string name="app_links_repair_success">Sovelluslinkit on otettu käyttöön onnistuneesti</string>
     <string name="app_links_repair_failed">Sovelluslinkkien automaattinen käyttöönotto epäonnistui</string>
-    <string name="app_links_badge_enabled">Käytössä</string>
-    <string name="app_links_badge_disabled">Pois käytöstä</string>
     <string name="app_links_all_verified">Kaikki tuetut linkit on määritetty avautumaan tässä sovelluksessa</string>
     <string name="app_links_fix">Korjaa linkit</string>
     <string name="configure">Määritä</string>
@@ -539,7 +539,6 @@ Ulkopuolinen alue (katkoviiva): käynnistimen maski saattaa leikata osia siitä 
     <string name="patcher_field_source">Lähde</string>
     <string name="patcher_field_split">APK:n jakaminen</string>
     <string name="patcher_field_manager">Hallinta</string>
-    <string name="patcher_field_patcher">Paikkaaja</string>
     <string name="patcher_field_runtime">Suoritusaika</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Kirjastot</string>
@@ -615,7 +614,6 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="patcher_step_load_patches">Ladataan lisäosia</string>
     <string name="patcher_step_prepare_split_apk">Yhdistetään ositettua APK:ta</string>
     <string name="patcher_step_unpack">Luetaan APK-tiedostoa</string>
-    <string name="patcher_step_group_patching">Muokataan</string>
     <string name="patcher_step_group_saving">Tallennetaan</string>
     <string name="patcher_step_write_patched">Kirjoitetaan muokattua APK-tiedostoa</string>
     <string name="patcher_step_sign_apk">Allekirjoitetaan muokattua APK-tiedostoa</string>
@@ -726,6 +724,9 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_appearance_background_snow">Lumi</string>
     <string name="settings_appearance_background_grid">Ruudukko</string>
     <string name="settings_appearance_background_particles">Hiukkaset</string>
+    <string name="settings_appearance_background_lava">Lava-lamppu</string>
+    <string name="settings_appearance_background_halloween">Halloween</string>
+    <string name="settings_appearance_background_fireworks">Ilotulitus</string>
     <string name="settings_appearance_background_none">Ei mitään</string>
     <string name="settings_appearance_background_random">Satunnainen</string>
     <string name="settings_appearance_background_random_interval_launch">Käynnistys</string>
@@ -733,7 +734,10 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_appearance_background_random_interval_3days">Joka 3. päivä</string>
     <string name="settings_appearance_parallax_effect">Parallaksiefekti</string>
     <string name="settings_appearance_parallax_effect_description">Tausta liikkuu sulavasti, kun laitetta kallistetaan</string>
+    <string name="settings_appearance_seasonal_themes">Kausiteemat</string>
+    <string name="settings_appearance_seasonal_themes_description">Juhla-aiheiset taustat ja tervehdykset juhlapyhinä</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">%1$s-tausta on käytössä %2$s asti, kun kausiteemat ovat päällä</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Teema</string>
     <string name="settings_appearance_theme_mode">Teeman tila</string>
@@ -795,8 +799,24 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_appearance_app_icon_default">Oletus</string>
     <string name="settings_appearance_app_icon_light_2">Taivas</string>
     <string name="settings_appearance_app_icon_light_3">Auringonlasku</string>
+    <string name="settings_appearance_app_icon_light_4">Laventeli</string>
+    <string name="settings_appearance_app_icon_light_5">Jäätikkö</string>
+    <string name="settings_appearance_app_icon_light_6">Usva</string>
+    <string name="settings_appearance_app_icon_light_7">Hiekka</string>
+    <string name="settings_appearance_app_icon_dark_1">Sinivihreä</string>
     <string name="settings_appearance_app_icon_dark_2">Tyhjiö</string>
+    <string name="settings_appearance_app_icon_dark_3">Luumu</string>
+    <string name="settings_appearance_app_icon_dark_4">Keskiyö</string>
+    <string name="settings_appearance_app_icon_dark_5">Liuske</string>
+    <string name="settings_appearance_app_icon_accent_1">Revontulet</string>
+    <string name="settings_appearance_app_icon_accent_2">Muste</string>
+    <string name="settings_appearance_app_icon_accent_3">Paperi</string>
+    <string name="settings_appearance_app_icon_accent_4">Hämärä</string>
+    <string name="settings_appearance_app_icon_background">Tausta</string>
+    <string name="settings_appearance_app_icon_mark">Logo</string>
     <string name="settings_appearance_app_icon_mark_color">Väri</string>
+    <string name="settings_appearance_app_icon_mark_white">Valkoinen</string>
+    <string name="settings_appearance_app_icon_mark_black">Musta</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Vaihda sovelluksen kuvake?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Vaihda kuvakkeeksi: &lt;b&gt;%s&lt;/b&gt;. Käynnistä uudelleen?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -832,7 +852,6 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="external_batch_patch_trust_caller">Salli tämä sovellus aina</string>
     <string name="external_batch_patch_unknown_caller">Tuntematon sovellus</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Morphe-päivitys saatavilla</string>
     <string name="notification_bundle_update_title">Uusia lisäosia saatavilla</string>
     <string name="notification_update_text">Versio %s on valmis ladattavaksi</string>
     <string name="notification_bundle_update_text_unversioned">Avaa Morphe ja päivitä napauttamalla</string>
@@ -843,7 +862,6 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="notification_channel_manager_updates_description">Ilmoitukset uusista Morphe-julkaisuista</string>
     <string name="notification_channel_patch_updates">Korjauspäivitykset</string>
     <string name="notification_channel_patch_updates_description">Ilmoitukset uusista korjausjulkaisuista</string>
-    <string name="notification_channel_patcher">Muokkaaminen</string>
     <string name="notification_channel_patcher_description">Näytetään, kun Morphe paikkaa sovellusta taustalla</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Asiantuntijan asetukset</string>
@@ -1366,7 +1384,6 @@ Yksityiskohdat: %2$s"</string>
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">Tätä julkaisua julkaistaan vielä. Yritä uudelleen muutaman minuutin kuluttua</string>
     <string name="update_download_missing">Ladattu päivitys ei ole enää saatavilla. Lataa se uudelleen</string>
-    <string name="download_manager_failed">Päivityksen lataaminen epäonnistui: %s</string>
     <string name="failed_to_check_updates">Päivitysten tarkistaminen epäonnistui: %s</string>
     <string name="failed_to_download_update">Päivityksen lataaminen epäonnistui: %s</string>
     <string name="download_confirmation_metered">"Olet tällä hetkellä rajoitetussa yhteydessä, ja palveluntarjoajasi datamaksuja voidaan soveltaa.

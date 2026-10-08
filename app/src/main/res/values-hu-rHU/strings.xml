@@ -125,20 +125,24 @@
     <string name="home_greeting_super_late_5">Éjszakai műszak, maximális pörgés</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
-    <string name="home_greeting_halloween_1">Csokit vagy patch-et?</string>
-    <string name="home_greeting_halloween_2">Nincsenek kísértetek ezekben az APK-kban, megnéztük</string>
-    <string name="home_greeting_halloween_3">Kísérteties évad, friss javítások</string>
+    <string name="home_greeting_halloween_1">Cukorkát vagy patch-et?</string>
+    <string name="home_greeting_halloween_2">Ezekben az APK-kban nincsenek szellemek, ellenőriztük</string>
+    <string name="home_greeting_halloween_3">Hátborzongató időszak, friss patch-ek</string>
     <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
-    <string name="home_greeting_halloween_4">Valami gonosz közeleg és patch-el</string>
+    <string name="home_greeting_halloween_4">Valami gonosz erre patch-el</string>
     <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
-    <string name="home_greeting_winter_1">Kellemes ünnepeket, friss javítások</string>
+    <string name="home_greeting_winter_1">Boldog ünnepeket, friss patch-ek</string>
     <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
-    <string name="home_greeting_winter_2">Hulljon a hó, jöjjön a patch</string>
-    <string name="home_greeting_winter_3">Új év, új javítások</string>
+    <string name="home_greeting_winter_2">Ess, hó, ess, patch</string>
+    <string name="home_greeting_winter_3">Új év, új patch-ek</string>
     <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
     <string name="home_greeting_winter_4">Patch-elünk a hóban</string>
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">Boldog új évet!</string>
+    <string name="home_greeting_new_year_2">Visszaszámlálás a friss patch-ekig</string>
+    <string name="home_greeting_new_year_3">Új év, ugyanazok a reklámmentes alkalmazások</string>
     <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Ki a régi verziókkal, be az újjal</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Módosításforrások</string>
     <string name="sources_search">Források és javítások keresése</string>
@@ -288,7 +292,6 @@ Bármit is ad hozzá erről a weboldalról, azt saját felelősségére teszi."<
     <string name="home_use_installed_app">Telepített alkalmazás használata</string>
     <string name="home_installed_app_picker_title">Telepített alkalmazások</string>
     <string name="home_installed_app_picker_empty">Nincs alkalmazás található</string>
-    <string name="home_installed_app_picker_filter_all">Összes alkalmazás</string>
     <string name="home_installed_app_picker_filter_user">Csak felhasználói alkalmazások</string>
     <string name="home_installed_app_picker_filter_system">Csak rendszeralkalmazások</string>
     <string name="home_invalid_apk_unreadable">Nem sikerült olvasni a fájlt. Ellenőrizd, hogy a \'Külső tároló\' nincs-e akkumulátorkorlátozás alatt</string>
@@ -297,7 +300,6 @@ Bármit is ad hozzá erről a weboldalról, azt saját felelősségére teszi."<
     <string name="home_invalid_apk_io_error">Nem sikerült megnyitni a fájlt. Kérjük, próbáld újra</string>
     <string name="home_external_apk_expert_mode_required">Ez a funkció csak szakértői módban érhető el</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Szakértői mód</string>
     <string name="expert_mode_search">Módosítások keresése</string>
     <string name="expert_mode_disable_all">Minden módosítás letiltása</string>
     <string name="expert_mode_disable_all_done">Az összes patch le van tiltva</string>
@@ -503,8 +505,6 @@ Külső zóna (szaggatott): az indító maszk levághatja – tartsa a fontos r�
     <string name="app_links_open_settings">Hivatkozásbeállítások megnyitása</string>
     <string name="app_links_repair_success">Alkalmazáshivatkozások sikeresen engedélyezve</string>
     <string name="app_links_repair_failed">Nem sikerült automatikusan engedélyezni az alkalmazáshivatkozásokat</string>
-    <string name="app_links_badge_enabled">Engedélyezve</string>
-    <string name="app_links_badge_disabled">Kikapcsolva</string>
     <string name="app_links_all_verified">Minden támogatott hivatkozás úgy van beállítva, hogy ebben az alkalmazásban nyíljon meg</string>
     <string name="app_links_fix">Hivatkozások javítása</string>
     <string name="configure">Beállítás</string>
@@ -538,7 +538,6 @@ Külső zóna (szaggatott): az indító maszk levághatja – tartsa a fontos r�
     <string name="patcher_field_source">Forrás</string>
     <string name="patcher_field_split">APK felosztása</string>
     <string name="patcher_field_manager">Kezelő</string>
-    <string name="patcher_field_patcher">Patcher</string>
     <string name="patcher_field_runtime">Futtatókörnyezet</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Könyvtárak</string>
@@ -614,7 +613,6 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="patcher_step_load_patches">Módosítások betöltése</string>
     <string name="patcher_step_prepare_split_apk">Osztott APK egyesítése</string>
     <string name="patcher_step_unpack">APK fájl olvasása</string>
-    <string name="patcher_step_group_patching">Módosítás</string>
     <string name="patcher_step_group_saving">Mentés</string>
     <string name="patcher_step_write_patched">Módosított APK fájl írása</string>
     <string name="patcher_step_sign_apk">Módosított APK fájl aláírása</string>
@@ -725,6 +723,9 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="settings_appearance_background_snow">Hó</string>
     <string name="settings_appearance_background_grid">Rács</string>
     <string name="settings_appearance_background_particles">Részecskék</string>
+    <string name="settings_appearance_background_lava">Lávamlámpa</string>
+    <string name="settings_appearance_background_halloween">Halloween</string>
+    <string name="settings_appearance_background_fireworks">Tűzijáték</string>
     <string name="settings_appearance_background_none">Egyik sem</string>
     <string name="settings_appearance_background_random">Véletlenszerű</string>
     <string name="settings_appearance_background_random_interval_launch">Indításkor</string>
@@ -732,7 +733,10 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="settings_appearance_background_random_interval_3days">3 naponta</string>
     <string name="settings_appearance_parallax_effect">Parallax effektus</string>
     <string name="settings_appearance_parallax_effect_description">Sima háttérváltás a készülék döntésekor</string>
+    <string name="settings_appearance_seasonal_themes">Szezonális témák</string>
+    <string name="settings_appearance_seasonal_themes_description">Ünnepi hátterek és köszöntések az ünnepek idején</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">A %1$s háttér %2$s-ig aktív, amíg a szezonális témák be vannak kapcsolva</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Téma</string>
     <string name="settings_appearance_theme_mode">Téma mód</string>
@@ -793,8 +797,23 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="settings_appearance_app_icon_default">Alapértelmezett</string>
     <string name="settings_appearance_app_icon_light_2">Ég</string>
     <string name="settings_appearance_app_icon_light_3">Naplemente</string>
+    <string name="settings_appearance_app_icon_light_4">Levendula</string>
+    <string name="settings_appearance_app_icon_light_5">Gleccser</string>
+    <string name="settings_appearance_app_icon_light_6">Köd</string>
+    <string name="settings_appearance_app_icon_light_7">Homok</string>
+    <string name="settings_appearance_app_icon_dark_1">Kékeszöld</string>
     <string name="settings_appearance_app_icon_dark_2">Void</string>
+    <string name="settings_appearance_app_icon_dark_3">Szilva</string>
+    <string name="settings_appearance_app_icon_dark_4">Éjfél</string>
+    <string name="settings_appearance_app_icon_dark_5">Palaszürke</string>
+    <string name="settings_appearance_app_icon_accent_1">Auróra</string>
+    <string name="settings_appearance_app_icon_accent_2">Tinta</string>
+    <string name="settings_appearance_app_icon_accent_3">Papír</string>
+    <string name="settings_appearance_app_icon_accent_4">Alkonyat</string>
+    <string name="settings_appearance_app_icon_background">Háttér</string>
+    <string name="settings_appearance_app_icon_mark">Logó</string>
     <string name="settings_appearance_app_icon_mark_color">Színes</string>
+    <string name="settings_appearance_app_icon_mark_white">Fehér</string>
     <string name="settings_appearance_app_icon_mark_black">Fekete</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Megváltoztatod az alkalmazás ikonját?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Változtatás erre: &lt;b&gt;%s&lt;/b&gt; és újraindítás?</string>
@@ -833,7 +852,6 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="external_batch_patch_trust_caller">Mindig engedélyezze ezt az alkalmazást</string>
     <string name="external_batch_patch_unknown_caller">Egy ismeretlen alkalmazás</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Morphe frissítés elérhető</string>
     <string name="notification_bundle_update_title">Új módosítások érhetők el</string>
     <string name="notification_update_text">A(z) %s verzió letöltésre kész</string>
     <string name="notification_bundle_update_text_unversioned">Koppints a Morphe megnyitásához és a frissítéshez</string>
@@ -844,7 +862,6 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="notification_channel_manager_updates_description">Értesítések az új Morphe-kiadásokról</string>
     <string name="notification_channel_patch_updates">Patch-frissítések</string>
     <string name="notification_channel_patch_updates_description">Értesítések az új patch-kiadásokról</string>
-    <string name="notification_channel_patcher">Módosítás</string>
     <string name="notification_channel_patcher_description">Akkor jelenik meg, amikor a Morphe a háttérben módosít egy alkalmazást</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Szakértői beállítások</string>
@@ -1367,7 +1384,6 @@ Részletek: %2$s"</string>
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">A kiadás még folyamatban van. Próbálkozz néhány perc múlva újra.</string>
     <string name="update_download_missing">A letöltött frissítés már nem elérhető. Töltsd le újra.</string>
-    <string name="download_manager_failed">A frissítés letöltése sikertelen: %s</string>
     <string name="failed_to_check_updates">A frissítések ellenőrzése sikertelen: %s</string>
     <string name="failed_to_download_update">A frissítés letöltése sikertelen: %s</string>
     <string name="download_confirmation_metered">"Jelenleg korlátozott adatforgalmú kapcsolatot használsz, a szolgáltatód adatforgalmi díjakat számíthat fel.

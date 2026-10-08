@@ -292,7 +292,6 @@
     <string name="home_use_installed_app">Bain úsáid as aip suiteáilte</string>
     <string name="home_installed_app_picker_title">Aipeanna suiteáilte</string>
     <string name="home_installed_app_picker_empty">Níor aimsíodh aon aipeanna</string>
-    <string name="home_installed_app_picker_filter_all">Gach aip</string>
     <string name="home_installed_app_picker_filter_user">Aipeanna úsáideora amháin</string>
     <string name="home_installed_app_picker_filter_system">Aipeanna córais amháin</string>
     <string name="home_invalid_apk_unreadable">Níorbh fhéidir an comhad a léamh. Seiceáil nach bhfuil srian ceallraí ar \'Stóráil Sheachtrach\'</string>
@@ -301,7 +300,6 @@
     <string name="home_invalid_apk_io_error">Theip ar an gcomhad a oscailt. Déan iarracht arís.</string>
     <string name="home_external_apk_expert_mode_required">Níl an ghné seo ar fáil ach amháin i mód Saineolaí</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Mód saineolaithe</string>
     <string name="expert_mode_search">Paistí cuardaigh</string>
     <string name="expert_mode_disable_all">Díchumasaigh gach rud</string>
     <string name="expert_mode_disable_all_done">Gach paiste díchumasaithe</string>
@@ -507,8 +505,6 @@ Crios seachtrach (daite): féadfaidh masc an lainseálaí é a bhearradh - coinn
     <string name="app_links_open_settings">Oscail socruithe naisc</string>
     <string name="app_links_repair_success">Cumasaíodh naisc aip go rathúil</string>
     <string name="app_links_repair_failed">Theip ar naisc aipeanna a chumasú go huathoibríoch</string>
-    <string name="app_links_badge_enabled">Cumasaithe</string>
-    <string name="app_links_badge_disabled">Díchumasaithe</string>
     <string name="app_links_all_verified">Tá na naisc thacaithe go léir cumraithe le hoscailt san aip seo</string>
     <string name="app_links_fix">Deisigh naisc</string>
     <string name="configure">Cumraigh</string>
@@ -542,7 +538,6 @@ Crios seachtrach (daite): féadfaidh masc an lainseálaí é a bhearradh - coinn
     <string name="patcher_field_source">Foinse</string>
     <string name="patcher_field_split">APK Scoilte</string>
     <string name="patcher_field_manager">Bainisteoir</string>
-    <string name="patcher_field_patcher">Paisteoir</string>
     <string name="patcher_field_runtime">Am rith</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Leabharlanna</string>
@@ -618,7 +613,6 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="patcher_step_load_patches">Paistí á lódáil</string>
     <string name="patcher_step_prepare_split_apk">APK scoilte á chumasc</string>
     <string name="patcher_step_unpack">Léigh comhad APK</string>
-    <string name="patcher_step_group_patching">Paisteáil</string>
     <string name="patcher_step_group_saving">Sábháil</string>
     <string name="patcher_step_write_patched">Ag scríobh comhaid APK paistithe</string>
     <string name="patcher_step_sign_apk">Comhad APK paisteáilte á shíniú</string>
@@ -804,10 +798,24 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="settings_appearance_app_icon_default">Réamhshocrú</string>
     <string name="settings_appearance_app_icon_light_2">Spéir</string>
     <string name="settings_appearance_app_icon_light_3">Luí na gréine</string>
+    <string name="settings_appearance_app_icon_light_4">Labhandar</string>
+    <string name="settings_appearance_app_icon_light_5">Oighearshruth</string>
+    <string name="settings_appearance_app_icon_light_6">Ceo</string>
+    <string name="settings_appearance_app_icon_light_7">Gaineamh</string>
+    <string name="settings_appearance_app_icon_dark_1">Gormghlas</string>
     <string name="settings_appearance_app_icon_dark_2">Neamhní</string>
+    <string name="settings_appearance_app_icon_dark_3">Pluma</string>
+    <string name="settings_appearance_app_icon_dark_4">Meán oíche</string>
+    <string name="settings_appearance_app_icon_dark_5">Scláta</string>
+    <string name="settings_appearance_app_icon_accent_1">Gealán</string>
+    <string name="settings_appearance_app_icon_accent_2">Dúch</string>
+    <string name="settings_appearance_app_icon_accent_3">Páipéar</string>
+    <string name="settings_appearance_app_icon_accent_4">Clapsholas</string>
     <string name="settings_appearance_app_icon_background">Cúlra</string>
+    <string name="settings_appearance_app_icon_mark">Lógó</string>
     <string name="settings_appearance_app_icon_mark_color">Dath</string>
     <string name="settings_appearance_app_icon_mark_white">Bán</string>
+    <string name="settings_appearance_app_icon_mark_black">Dubh</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Deilbhín an aip a athrú?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Athraigh go &lt;b&gt;%s&lt;/b&gt; agus atosú?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -845,7 +853,6 @@ Níl tionchar ar phaistí: cumasaigh paistí réamh-eisiúna do gach foinse sa l
     <string name="external_batch_patch_trust_caller">Ceadaigh an aip seo i gcónaí</string>
     <string name="external_batch_patch_unknown_caller">Aip anaithnid</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Nuashonrú Morphe ar fáil</string>
     <string name="notification_bundle_update_title">Paistí nua ar fáil</string>
     <string name="notification_update_text">Tá leagan %s réidh le híoslódáil</string>
     <string name="notification_bundle_update_text_unversioned">Tapáil chun Morphe a oscailt agus a nuashonrú</string>
@@ -856,7 +863,6 @@ Níl tionchar ar phaistí: cumasaigh paistí réamh-eisiúna do gach foinse sa l
     <string name="notification_channel_manager_updates_description">Fógraí faoi eisiúintí nua Morphe</string>
     <string name="notification_channel_patch_updates">Nuashonruithe paiste</string>
     <string name="notification_channel_patch_updates_description">Fógraí faoi eisiúintí nua paiste</string>
-    <string name="notification_channel_patcher">Ag paisteáil</string>
     <string name="notification_channel_patcher_description">Taispeántar é agus Morphe ag paisteáil aip sa chúlra</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Socruithe saineolaithe</string>
@@ -1377,7 +1383,6 @@ Sonraí: %2$s"</string>
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">Tá an eisiúint seo fós á foilsiú. Déan iarracht arís i gceann cúpla nóiméad.</string>
     <string name="update_download_missing">Níl an nuashonrú íoslódáilte ar fáil a thuilleadh. Íoslódáil arís é.</string>
-    <string name="download_manager_failed">Theip ar an nuashonrú a íoslódáil: %s</string>
     <string name="failed_to_check_updates">Theip ar sheiceáil le haghaidh nuashonruithe: %s</string>
     <string name="failed_to_download_update">Theip ar an nuashonrú a íoslódáil: %s</string>
     <string name="download_confirmation_metered">"Tá tú ar nasc méadraithe faoi láthair, agus d’fhéadfadh táillí sonraí a bheith i bhfeidhm ó do sholáthraí seirbhíse.

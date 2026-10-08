@@ -139,7 +139,6 @@
     <string name="home_invalid_apk_io_error">Fallo ao abrir o arquivo. Por favor, inténtao de novo</string>
     <string name="home_external_apk_expert_mode_required">Esta funcionalidade só está dispoñible no modo Experto</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Modo Experto</string>
     <string name="expert_mode_search">Buscar parches</string>
     <string name="expert_mode_disable_all">Desactivar todo</string>
     <string name="expert_mode_disable_all_done">Todos os parches foron desactivados</string>
@@ -228,8 +227,6 @@ Elixe outro APK</string>
     <string name="home_app_info_patch_update_available">Actualización de parche dispoñible</string>
     <string name="home_app_info_app_deleted_warning">A aplicación foi desinstalada</string>
     <string name="home_app_info_app_deleted_description">Esta aplicación foi desinstalada fóra de Morphe. Volva a parchear para restaurar a súa funcionalidade</string>
-    <string name="app_links_badge_enabled">Activado</string>
-    <string name="app_links_badge_disabled">Desactivado</string>
     <string name="home_app_info_apk_size">Tamaño da APK</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">O modo raíz (root) require que o arquivo APK orixinal estea instalado no teu dispositivo antes de ser parcheado</string>
@@ -253,7 +250,6 @@ Elixe outro APK</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Preparando</string>
     <string name="patcher_step_load_patches">Cargando parches</string>
-    <string name="patcher_step_group_patching">Parcheando</string>
     <string name="patcher_step_group_saving">Gardando</string>
     <!-- Battery optimization pre-flight dialog -->
     <!-- Memory limit dialog, shown after the patcher process was killed -->
@@ -295,8 +291,6 @@ Elixe outro APK</string>
     <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
     <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Actualización de Morphe dispoñible</string>
-    <string name="notification_channel_patcher">Parcheando</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert_mode">Modo Experto</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->

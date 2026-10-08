@@ -125,20 +125,24 @@
     <string name="home_greeting_super_late_5">Nocny i produktywny</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
-    <string name="home_greeting_halloween_1">Psikus albo łatka?</string>
+    <string name="home_greeting_halloween_1">Cukierek albo modyfikacja?</string>
     <string name="home_greeting_halloween_2">W tych plikach APK nie ma duchów, sprawdziliśmy</string>
-    <string name="home_greeting_halloween_3">Sezon grozy, świeże łatki</string>
+    <string name="home_greeting_halloween_3">Upiorny sezon, świeże modyfikacje</string>
     <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
-    <string name="home_greeting_halloween_4">Coś złego tędy łata</string>
+    <string name="home_greeting_halloween_4">Coś mrocznego tu się modyfikuje</string>
     <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
-    <string name="home_greeting_winter_1">Wesołych Świąt, świeże łatki</string>
+    <string name="home_greeting_winter_1">Wesołych Świąt, świeże modyfikacje</string>
     <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
-    <string name="home_greeting_winter_2">Niech śnieży, niech łata</string>
-    <string name="home_greeting_winter_3">Nowy rok, nowe łatki</string>
+    <string name="home_greeting_winter_2">Niech sypie śnieg, niech sypią się modyfikacje</string>
+    <string name="home_greeting_winter_3">Nowy rok, nowe modyfikacje</string>
     <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
-    <string name="home_greeting_winter_4">Łatając przez śnieg</string>
+    <string name="home_greeting_winter_4">Modyfikacje pędzą przez śnieg</string>
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">Szczęśliwego Nowego Roku!</string>
+    <string name="home_greeting_new_year_2">Odliczamy do świeżych modyfikacji</string>
+    <string name="home_greeting_new_year_3">Nowy rok, te same aplikacje bez reklam</string>
     <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Żegnajcie stare wersje, witajcie nowe</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Źródła modyfikacji</string>
     <string name="sources_search">Szukaj źródeł i modyfikacji</string>
@@ -289,7 +293,6 @@ Wszystko, co dodasz z tej strony, używasz na własne ryzyko"</string>
     <string name="home_use_installed_app">Użyj zainstalowanej aplikacji</string>
     <string name="home_installed_app_picker_title">Zainstalowane aplikacje</string>
     <string name="home_installed_app_picker_empty">Nie znaleziono aplikacji</string>
-    <string name="home_installed_app_picker_filter_all">Wszystkie aplikacje</string>
     <string name="home_installed_app_picker_filter_user">Tylko aplikacje użytkownika</string>
     <string name="home_installed_app_picker_filter_system">Tylko aplikacje systemowe</string>
     <string name="home_invalid_apk_unreadable">Nie udało się odczytać pliku. Sprawdź, czy \"Pamięć zewnętrzna\" nie ma włączonych ograniczeń baterii</string>
@@ -298,7 +301,6 @@ Wszystko, co dodasz z tej strony, używasz na własne ryzyko"</string>
     <string name="home_invalid_apk_io_error">Nie udało się otworzyć pliku. Spróbuj ponownie</string>
     <string name="home_external_apk_expert_mode_required">Ta funkcja jest dostępna tylko w trybie eksperckim</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Tryb ekspercki</string>
     <string name="expert_mode_search">Szukaj modyfikacji</string>
     <string name="expert_mode_disable_all">Wyłącz wszystkie</string>
     <string name="expert_mode_disable_all_done">Wyłączono wszystkie modyfikacje</string>
@@ -504,8 +506,6 @@ Strefa zewnętrzna (linia przerywana): może zostać przycięta - najważniejsze
     <string name="app_links_open_settings">Otwórz ustawienia linków</string>
     <string name="app_links_repair_success">Pomyślnie włączono linki aplikacji</string>
     <string name="app_links_repair_failed">Nie udało się automatycznie włączyć linków aplikacji</string>
-    <string name="app_links_badge_enabled">Włączone</string>
-    <string name="app_links_badge_disabled">Wyłączone</string>
     <string name="app_links_all_verified">Wszystkie obsługiwane linki są skonfigurowane tak, aby otwierać się w tej aplikacji</string>
     <string name="app_links_fix">Napraw linki</string>
     <string name="configure">Konfiguruj</string>
@@ -539,7 +539,6 @@ Strefa zewnętrzna (linia przerywana): może zostać przycięta - najważniejsze
     <string name="patcher_field_source">Źródło</string>
     <string name="patcher_field_split">Podzielony plik APK</string>
     <string name="patcher_field_manager">Menedżer</string>
-    <string name="patcher_field_patcher">Modyfikator</string>
     <string name="patcher_field_runtime">Środowisko</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Biblioteki</string>
@@ -615,7 +614,6 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="patcher_step_load_patches">Wczytywanie modyfikacji</string>
     <string name="patcher_step_prepare_split_apk">Scalanie podzielonego pliku APK</string>
     <string name="patcher_step_unpack">Odczytywanie pliku APK</string>
-    <string name="patcher_step_group_patching">Modyfikowanie</string>
     <string name="patcher_step_group_saving">Zapisywanie</string>
     <string name="patcher_step_write_patched">Zapisywanie zmodyfikowanego pliku APK</string>
     <string name="patcher_step_sign_apk">Podpisywanie zmodyfikowanego pliku APK</string>
@@ -726,6 +724,9 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="settings_appearance_background_snow">Śnieg</string>
     <string name="settings_appearance_background_grid">Kratka</string>
     <string name="settings_appearance_background_particles">Cząsteczki</string>
+    <string name="settings_appearance_background_lava">Lampa lawa</string>
+    <string name="settings_appearance_background_halloween">Halloween</string>
+    <string name="settings_appearance_background_fireworks">Fajerwerki</string>
     <string name="settings_appearance_background_none">Brak</string>
     <string name="settings_appearance_background_random">Losowa</string>
     <string name="settings_appearance_background_random_interval_launch">Przy uruchomieniu</string>
@@ -733,7 +734,10 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="settings_appearance_background_random_interval_3days">Co 3 dni</string>
     <string name="settings_appearance_parallax_effect">Efekt paralaksy</string>
     <string name="settings_appearance_parallax_effect_description">Płynne przesuwanie tła przy nachyleniu urządzenia</string>
+    <string name="settings_appearance_seasonal_themes">Motywy sezonowe</string>
+    <string name="settings_appearance_seasonal_themes_description">Świąteczne tła i powitania w okresie świątecznym</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">Tło %1$s będzie aktywne do %2$s, dopóki włączone są motywy sezonowe</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Motyw</string>
     <string name="settings_appearance_theme_mode">Tryb motywu</string>
@@ -795,10 +799,24 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="settings_appearance_app_icon_default">Domyślna</string>
     <string name="settings_appearance_app_icon_light_2">Niebo</string>
     <string name="settings_appearance_app_icon_light_3">Zachód słońca</string>
+    <string name="settings_appearance_app_icon_light_4">Lawenda</string>
+    <string name="settings_appearance_app_icon_light_5">Lodowiec</string>
+    <string name="settings_appearance_app_icon_light_6">Mgła</string>
+    <string name="settings_appearance_app_icon_light_7">Piasek</string>
+    <string name="settings_appearance_app_icon_dark_1">Turkus</string>
     <string name="settings_appearance_app_icon_dark_2">Otchłań</string>
+    <string name="settings_appearance_app_icon_dark_3">Śliwka</string>
+    <string name="settings_appearance_app_icon_dark_4">Północ</string>
+    <string name="settings_appearance_app_icon_dark_5">Grafit</string>
+    <string name="settings_appearance_app_icon_accent_1">Zorza</string>
+    <string name="settings_appearance_app_icon_accent_2">Atrament</string>
+    <string name="settings_appearance_app_icon_accent_3">Papier</string>
+    <string name="settings_appearance_app_icon_accent_4">Zmierzch</string>
     <string name="settings_appearance_app_icon_background">Tło</string>
-    <string name="settings_appearance_app_icon_mark_color">Kolorowa</string>
+    <string name="settings_appearance_app_icon_mark">Logo</string>
+    <string name="settings_appearance_app_icon_mark_color">Kolorowe</string>
     <string name="settings_appearance_app_icon_mark_white">Białe</string>
+    <string name="settings_appearance_app_icon_mark_black">Czarne</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Zmienić ikonę aplikacji?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Zmienić na &lt;b&gt;%s&lt;/b&gt; i uruchomić ponownie?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -836,7 +854,6 @@ Modyfikacje nie są tym objęte: włącz przedpremierowe modyfikacje dla każdeg
     <string name="external_batch_patch_trust_caller">Zawsze zezwalaj tej aplikacji</string>
     <string name="external_batch_patch_unknown_caller">Nieznana aplikacja</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Dostępna aktualizacja Morphe</string>
     <string name="notification_bundle_update_title">Dostępne nowe modyfikacje</string>
     <string name="notification_update_text">Wersja %s jest gotowa do pobrania</string>
     <string name="notification_bundle_update_text_unversioned">Dotknij, aby otworzyć Morphe i zaktualizować</string>
@@ -847,7 +864,6 @@ Modyfikacje nie są tym objęte: włącz przedpremierowe modyfikacje dla każdeg
     <string name="notification_channel_manager_updates_description">Powiadomienia o nowych wydaniach Morphe</string>
     <string name="notification_channel_patch_updates">Aktualizacje modyfikacji</string>
     <string name="notification_channel_patch_updates_description">Powiadomienia o nowych wydaniach modyfikacji</string>
-    <string name="notification_channel_patcher">Modyfikowanie</string>
     <string name="notification_channel_patcher_description">Wyświetlane, gdy Morphe modyfikuje aplikację w tle</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Ustawienia eksperckie</string>
@@ -1370,7 +1386,6 @@ Wymagane są następujące wymiary obrazów:
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">To wydanie jest wciąż publikowane. Spróbuj ponownie za kilka minut</string>
     <string name="update_download_missing">Pobrana aktualizacja nie jest już dostępna. Pobierz ją ponownie.</string>
-    <string name="download_manager_failed">Nie udało się pobrać aktualizacji: %s</string>
     <string name="failed_to_check_updates">Nie udało się wyszukać aktualizacji: %s</string>
     <string name="failed_to_download_update">Nie udało się pobrać aktualizacji: %s</string>
     <string name="download_confirmation_metered">"Korzystasz obecnie z połączenia z limitem danych, co może wiązać się z dodatkowymi opłatami u operatora.

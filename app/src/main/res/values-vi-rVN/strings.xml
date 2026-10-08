@@ -125,12 +125,24 @@
     <string name="home_greeting_super_late_5">Cú đêm năng suất thật đấy</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_1">Bị ghẹo hay vá lỗi?</string>
+    <string name="home_greeting_halloween_2">Không có ma nào trong các APK này, chúng tôi đã kiểm tra</string>
+    <string name="home_greeting_halloween_3">Mùa ma quái, bản vá mới</string>
     <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
+    <string name="home_greeting_halloween_4">Có gì đó nham hiểm đang vá đến</string>
     <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
+    <string name="home_greeting_winter_1">Chúc mừng kỳ nghỉ lễ, những bản vá mới</string>
     <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
+    <string name="home_greeting_winter_2">Cứ tuyết rơi, cứ vá thôi</string>
+    <string name="home_greeting_winter_3">Năm mới, bản vá mới</string>
     <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
+    <string name="home_greeting_winter_4">Vá xuyên qua tuyết</string>
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">Chúc mừng năm mới!</string>
+    <string name="home_greeting_new_year_2">Đếm ngược đến những bản vá mới</string>
+    <string name="home_greeting_new_year_3">Năm mới, vẫn là những ứng dụng không quảng cáo</string>
     <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Tạm biệt phiên bản cũ, chào đón phiên bản mới</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Nguồn vá</string>
     <string name="sources_search">Tìm kiếm nguồn và bản vá</string>
@@ -280,7 +292,6 @@ Bất cứ thứ gì bạn thêm từ trang web này đều được sử dụng
     <string name="home_use_installed_app">Dùng ứng dụng đã cài</string>
     <string name="home_installed_app_picker_title">Ứng dụng đã cài</string>
     <string name="home_installed_app_picker_empty">Không tìm thấy ứng dụng nào</string>
-    <string name="home_installed_app_picker_filter_all">Tất cả ứng dụng</string>
     <string name="home_installed_app_picker_filter_user">Chỉ ứng dụng đã cài</string>
     <string name="home_installed_app_picker_filter_system">Chỉ ứng dụng hệ thống</string>
     <string name="home_invalid_apk_unreadable">Không thể đọc tệp. Hãy kiểm tra xem \"Bộ nhớ ngoài\" có bị hạn chế pin hay không</string>
@@ -289,7 +300,6 @@ Bất cứ thứ gì bạn thêm từ trang web này đều được sử dụng
     <string name="home_invalid_apk_io_error">Không thể mở tệp. Vui lòng thử lại</string>
     <string name="home_external_apk_expert_mode_required">Tính năng này chỉ có ở chế độ Chuyên gia</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Chế độ chuyên gia</string>
     <string name="expert_mode_search">Tìm kiếm</string>
     <string name="expert_mode_disable_all">Tắt tất cả</string>
     <string name="expert_mode_disable_all_done">Đã tắt tất cả bản vá</string>
@@ -495,8 +505,6 @@ Vùng ngoài (nét đứt): có thể bị cắt theo hình dạng biểu tượ
     <string name="app_links_open_settings">Mở cài đặt liên kết</string>
     <string name="app_links_repair_success">Đã bật liên kết ứng dụng thành công</string>
     <string name="app_links_repair_failed">Không thể tự động bật liên kết ứng dụng</string>
-    <string name="app_links_badge_enabled">Đang bật</string>
-    <string name="app_links_badge_disabled">Đang tắt</string>
     <string name="app_links_all_verified">Tất cả các liên kết được hỗ trợ đều được cấu hình để mở trong ứng dụng này</string>
     <string name="app_links_fix">Sửa liên kết</string>
     <string name="configure">Cấu hình</string>
@@ -532,7 +540,6 @@ Nếu không, APK đã vá và được gắn có thể sẽ không hoạt độ
     <string name="patcher_field_source">Nguồn</string>
     <string name="patcher_field_split">Tách APK</string>
     <string name="patcher_field_manager">Trình quản lý</string>
-    <string name="patcher_field_patcher">Trình vá</string>
     <string name="patcher_field_runtime">Thời gian chạy</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Thư viện</string>
@@ -608,7 +615,6 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="patcher_step_load_patches">Đang tải bản vá</string>
     <string name="patcher_step_prepare_split_apk">Đang gộp APK chia nhỏ</string>
     <string name="patcher_step_unpack">Đọc tệp APK</string>
-    <string name="patcher_step_group_patching">Đang vá</string>
     <string name="patcher_step_group_saving">Đang lưu</string>
     <string name="patcher_step_write_patched">Đang viết APK đã vá</string>
     <string name="patcher_step_sign_apk">Đang ký APK đã vá</string>
@@ -719,6 +725,9 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_appearance_background_snow">Tuyết</string>
     <string name="settings_appearance_background_grid">Lưới ô</string>
     <string name="settings_appearance_background_particles">Hạt</string>
+    <string name="settings_appearance_background_lava">Đèn dung nham</string>
+    <string name="settings_appearance_background_halloween">Halloween</string>
+    <string name="settings_appearance_background_fireworks">Pháo hoa</string>
     <string name="settings_appearance_background_none">Không</string>
     <string name="settings_appearance_background_random">Ngẫu nhiên</string>
     <string name="settings_appearance_background_random_interval_launch">Khi khởi động</string>
@@ -726,7 +735,10 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_appearance_background_random_interval_3days">Cứ 3 ngày một lần</string>
     <string name="settings_appearance_parallax_effect">Hiệu ứng thị sai</string>
     <string name="settings_appearance_parallax_effect_description">Nền chuyển động nhẹ nhàng khi nghiêng thiết bị</string>
+    <string name="settings_appearance_seasonal_themes">Chủ đề theo mùa</string>
+    <string name="settings_appearance_seasonal_themes_description">Hình nền lễ hội và lời chào trong các dịp lễ</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">Hình nền %1$s được bật cho đến %2$s khi chủ đề theo mùa đang bật</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Chủ đề</string>
     <string name="settings_appearance_theme_mode">Chế độ giao diện</string>
@@ -788,9 +800,23 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_appearance_app_icon_default">Mặc định</string>
     <string name="settings_appearance_app_icon_light_2">Bầu trời</string>
     <string name="settings_appearance_app_icon_light_3">Hoàng hôn</string>
+    <string name="settings_appearance_app_icon_light_4">Oải hương</string>
+    <string name="settings_appearance_app_icon_light_5">Sông băng</string>
+    <string name="settings_appearance_app_icon_light_6">Sương mù</string>
+    <string name="settings_appearance_app_icon_light_7">Cát</string>
+    <string name="settings_appearance_app_icon_dark_1">Xanh mòng két</string>
     <string name="settings_appearance_app_icon_dark_2">Hư không</string>
+    <string name="settings_appearance_app_icon_dark_3">Mận</string>
     <string name="settings_appearance_app_icon_dark_4">Đêm đen</string>
+    <string name="settings_appearance_app_icon_dark_5">Đá phiến</string>
+    <string name="settings_appearance_app_icon_accent_1">Cực quang</string>
+    <string name="settings_appearance_app_icon_accent_2">Mực</string>
+    <string name="settings_appearance_app_icon_accent_3">Giấy</string>
+    <string name="settings_appearance_app_icon_accent_4">Hoàng hôn</string>
+    <string name="settings_appearance_app_icon_background">Nền</string>
+    <string name="settings_appearance_app_icon_mark">Logo</string>
     <string name="settings_appearance_app_icon_mark_color">Màu</string>
+    <string name="settings_appearance_app_icon_mark_white">Trắng</string>
     <string name="settings_appearance_app_icon_mark_black">Đen</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Đổi biểu tượng?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Bạn có muốn đổi sang &lt;b&gt;%s&lt;/b&gt; và khởi động lại?</string>
@@ -829,7 +855,6 @@ Các bản vá không bị ảnh hưởng: bật các bản vá trước khi ph�
     <string name="external_batch_patch_trust_caller">Luôn cho phép ứng dụng này</string>
     <string name="external_batch_patch_unknown_caller">Ứng dụng không xác định</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Đã có bản cập nhật Morphe mới</string>
     <string name="notification_bundle_update_title">Đã có bản vá mới</string>
     <string name="notification_update_text">Phiên bản %s đã sẵn sàng để tải xuống</string>
     <string name="notification_bundle_update_text_unversioned">Bấm để mở Morphe và cập nhật</string>
@@ -840,7 +865,6 @@ Các bản vá không bị ảnh hưởng: bật các bản vá trước khi ph�
     <string name="notification_channel_manager_updates_description">Thông báo về các bản phát hành Morphe mới</string>
     <string name="notification_channel_patch_updates">Cập nhật bản vá</string>
     <string name="notification_channel_patch_updates_description">Thông báo về các bản phát hành bản vá mới</string>
-    <string name="notification_channel_patcher">Đang vá</string>
     <string name="notification_channel_patcher_description">Hiển thị khi Morphe đang vá ứng dụng trong nền</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Chuyên gia</string>
@@ -1366,7 +1390,6 @@ Chi tiết: %2$s"</string>
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">Bản phát hành này vẫn đang được triển khai. Hãy thử lại sau vài phút</string>
     <string name="update_download_missing">Bản cập nhật đã tải không còn khả dụng. Hãy tải lại</string>
-    <string name="download_manager_failed">Không thể tải bản cập nhật: %s</string>
     <string name="failed_to_check_updates">Không thể kiểm tra cập nhật: %s</string>
     <string name="failed_to_download_update">Không tải được bản cập nhật: %s</string>
     <string name="download_confirmation_metered">"Bạn đang dùng 4G/5G, tiếp tục có thể phát sinh cước dữ liệu.\n\nBạn vẫn muốn tiếp tục?"</string>

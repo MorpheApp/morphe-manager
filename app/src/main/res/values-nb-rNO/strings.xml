@@ -125,20 +125,24 @@
     <string name="home_greeting_super_late_5">Nattaktiv og produktiv</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
-    <string name="home_greeting_halloween_1">Triks eller patch?</string>
-    <string name="home_greeting_halloween_2">Ingen spøkelser i disse APK-ene, vi sjekket</string>
+    <string name="home_greeting_halloween_1">Spøk eller patch?</string>
+    <string name="home_greeting_halloween_2">Ingen spøkelser i disse APK-ene, vi har sjekket</string>
     <string name="home_greeting_halloween_3">Skummel sesong, ferske patcher</string>
     <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
-    <string name="home_greeting_halloween_4">Noe ondt denne veien patcher</string>
+    <string name="home_greeting_halloween_4">Noe ondt patcher denne veien</string>
     <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
-    <string name="home_greeting_winter_1">God høytid, ferske patcher</string>
+    <string name="home_greeting_winter_1">God jul, ferske patcher</string>
     <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
     <string name="home_greeting_winter_2">La det snø, la det patche</string>
     <string name="home_greeting_winter_3">Nytt år, nye patcher</string>
     <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
     <string name="home_greeting_winter_4">Patcher gjennom snøen</string>
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">Godt nyttår!</string>
+    <string name="home_greeting_new_year_2">Nedtelling til ferske patcher</string>
+    <string name="home_greeting_new_year_3">Nytt år, samme annonsefrie apper</string>
     <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Ut med de gamle versjonene, inn med de nye</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patch-kilder</string>
     <string name="sources_search">Søk etter kilder og patcher</string>
@@ -288,7 +292,6 @@ Alt som legges til fra denne nettsiden brukes på egen risiko"</string>
     <string name="home_use_installed_app">Bruk installert app</string>
     <string name="home_installed_app_picker_title">Installerte apper</string>
     <string name="home_installed_app_picker_empty">Ingen apper funnet</string>
-    <string name="home_installed_app_picker_filter_all">Alle apper</string>
     <string name="home_installed_app_picker_filter_user">Kun brukerapper</string>
     <string name="home_installed_app_picker_filter_system">Kun systemapper</string>
     <string name="home_invalid_apk_unreadable">Kunne ikke lese filen. Sjekk at \'Ekstern lagring\' ikke er batteribegrenset</string>
@@ -297,7 +300,6 @@ Alt som legges til fra denne nettsiden brukes på egen risiko"</string>
     <string name="home_invalid_apk_io_error">Kunne ikke åpne filen. Prøv igjen</string>
     <string name="home_external_apk_expert_mode_required">Denne funksjonen er bare tilgjengelig i ekspertmodus</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Ekspertmodus</string>
     <string name="expert_mode_search">Søk etter patcher</string>
     <string name="expert_mode_disable_all">Deaktiver alle</string>
     <string name="expert_mode_disable_all_done">Alle patcher deaktivert</string>
@@ -503,8 +505,6 @@ Ytre sone (stiplet): kan bli beskåret av launcher-masken – hold viktig inform
     <string name="app_links_open_settings">Åpne lenkeinnstillinger</string>
     <string name="app_links_repair_success">App-lenker ble aktivert</string>
     <string name="app_links_repair_failed">Kunne ikke aktivere app-lenker automatisk</string>
-    <string name="app_links_badge_enabled">Aktivert</string>
-    <string name="app_links_badge_disabled">Deaktivert</string>
     <string name="app_links_all_verified">Alle støttede lenker er konfigurert til å åpnes i denne appen</string>
     <string name="app_links_fix">Reparer lenker</string>
     <string name="configure">Konfigurer</string>
@@ -538,7 +538,6 @@ Ytre sone (stiplet): kan bli beskåret av launcher-masken – hold viktig inform
     <string name="patcher_field_source">Kilde</string>
     <string name="patcher_field_split">Delt APK</string>
     <string name="patcher_field_manager">Behandler</string>
-    <string name="patcher_field_patcher">Patcher</string>
     <string name="patcher_field_runtime">Kjøretid</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Biblioteker</string>
@@ -614,7 +613,6 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="patcher_step_load_patches">Laster patcher</string>
     <string name="patcher_step_prepare_split_apk">Slår sammen splittet APK</string>
     <string name="patcher_step_unpack">Les APK-fil</string>
-    <string name="patcher_step_group_patching">Patching</string>
     <string name="patcher_step_group_saving">Lagrer</string>
     <string name="patcher_step_write_patched">Skriver patchet APK-fil</string>
     <string name="patcher_step_sign_apk">Signerer patchet APK-fil</string>
@@ -725,6 +723,9 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="settings_appearance_background_snow">Snø</string>
     <string name="settings_appearance_background_grid">Rutenett</string>
     <string name="settings_appearance_background_particles">Partikler</string>
+    <string name="settings_appearance_background_lava">Lavalampe</string>
+    <string name="settings_appearance_background_halloween">Halloween</string>
+    <string name="settings_appearance_background_fireworks">Fyrverkeri</string>
     <string name="settings_appearance_background_none">Ingen</string>
     <string name="settings_appearance_background_random">Tilfeldig</string>
     <string name="settings_appearance_background_random_interval_launch">Daglig</string>
@@ -732,7 +733,10 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="settings_appearance_background_random_interval_3days">Hver 3. dag</string>
     <string name="settings_appearance_parallax_effect">Parallakse-effekt</string>
     <string name="settings_appearance_parallax_effect_description">Jevn bakgrunnsforskyvning når du heller enheten</string>
+    <string name="settings_appearance_seasonal_themes">Sesongtemaer</string>
+    <string name="settings_appearance_seasonal_themes_description">Festlige bakgrunner og hilsener i høytidene</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">Bakgrunnen %1$s er aktiv til %2$s mens sesongtemaer er på</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
     <string name="settings_appearance_theme_mode">Temamodus</string>
@@ -794,8 +798,24 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="settings_appearance_app_icon_default">Standard</string>
     <string name="settings_appearance_app_icon_light_2">Himmel</string>
     <string name="settings_appearance_app_icon_light_3">Solnedgang</string>
+    <string name="settings_appearance_app_icon_light_4">Lavendel</string>
+    <string name="settings_appearance_app_icon_light_5">Isbre</string>
+    <string name="settings_appearance_app_icon_light_6">Dis</string>
+    <string name="settings_appearance_app_icon_light_7">Sand</string>
+    <string name="settings_appearance_app_icon_dark_1">Blågrønn</string>
     <string name="settings_appearance_app_icon_dark_2">Tomhet</string>
+    <string name="settings_appearance_app_icon_dark_3">Plomme</string>
+    <string name="settings_appearance_app_icon_dark_4">Midnatt</string>
+    <string name="settings_appearance_app_icon_dark_5">Skifer</string>
+    <string name="settings_appearance_app_icon_accent_1">Aurora</string>
+    <string name="settings_appearance_app_icon_accent_2">Blekk</string>
+    <string name="settings_appearance_app_icon_accent_3">Papir</string>
+    <string name="settings_appearance_app_icon_accent_4">Skumring</string>
+    <string name="settings_appearance_app_icon_background">Bakgrunn</string>
+    <string name="settings_appearance_app_icon_mark">Logo</string>
     <string name="settings_appearance_app_icon_mark_color">Farge</string>
+    <string name="settings_appearance_app_icon_mark_white">Hvit</string>
+    <string name="settings_appearance_app_icon_mark_black">Svart</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Endre appikon?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Bytt til &lt;b&gt;%s&lt;/b&gt; og start på nytt?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -833,7 +853,6 @@ Patcher påvirkes ikke: aktiver pre-release-patcher for hver kilde i patch-kilde
     <string name="external_batch_patch_trust_caller">Tillat alltid denne appen</string>
     <string name="external_batch_patch_unknown_caller">En ukjent app</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Morphe-oppdatering er tilgjengelig</string>
     <string name="notification_bundle_update_title">Nye patcher tilgjengelig</string>
     <string name="notification_update_text">Versjon %s er klar for nedlasting</string>
     <string name="notification_bundle_update_text_unversioned">Trykk for å åpne Morphe og oppdatere</string>
@@ -844,7 +863,6 @@ Patcher påvirkes ikke: aktiver pre-release-patcher for hver kilde i patch-kilde
     <string name="notification_channel_manager_updates_description">Varsler om nye Morphe-utgivelser</string>
     <string name="notification_channel_patch_updates">Patch-oppdateringer</string>
     <string name="notification_channel_patch_updates_description">Varsler om nye patch-utgivelser</string>
-    <string name="notification_channel_patcher">Patching</string>
     <string name="notification_channel_patcher_description">Vises mens Morphe patcher en app i bakgrunnen</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Oppdateringer</string>
@@ -1367,7 +1385,6 @@ Detaljer: %2$s"</string>
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">Denne utgivelsen er fortsatt under publisering. Prøv igjen om noen minutter</string>
     <string name="update_download_missing">Den nedlastede oppdateringen er ikke lenger tilgjengelig. Last den ned igjen.</string>
-    <string name="download_manager_failed">Kunne ikke laste ned oppdatering: %s</string>
     <string name="failed_to_check_updates">Kunne ikke sjekke etter oppdateringer: %s</string>
     <string name="failed_to_download_update">Kunne ikke laste ned oppdatering: %s</string>
     <string name="download_confirmation_metered">"Du er for øyeblikket på en datamålt tilkobling, og datakostnader fra din tjenesteleverandør kan påløpe.

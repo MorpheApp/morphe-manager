@@ -138,7 +138,11 @@
     <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
     <string name="home_greeting_winter_4">Pleister deur die sneeu</string>
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">Gelukkige Nuwe Jaar!</string>
+    <string name="home_greeting_new_year_2">Tel af na vars regstellings</string>
+    <string name="home_greeting_new_year_3">Nuwe jaar, steeds advertensievrye apps</string>
     <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Uit met die ou weergawes, in met die nuwe</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Verandering oorspronge</string>
     <string name="sources_search">Soek bronne en patches</string>
@@ -288,7 +292,6 @@ Enigiets wat jy van hierdie webwerf byvoeg, word op jou eie risiko gebruik."</st
     <string name="home_use_installed_app">Gebruik geïnstalleerde toepassing</string>
     <string name="home_installed_app_picker_title">Geïnstalleerde apps</string>
     <string name="home_installed_app_picker_empty">Geen toepings gevind</string>
-    <string name="home_installed_app_picker_filter_all">Alle toepings</string>
     <string name="home_installed_app_picker_filter_user">Slegs gebruikerstoepings</string>
     <string name="home_installed_app_picker_filter_system">Slegs stelseltoepings</string>
     <string name="home_invalid_apk_unreadable">Kon nie die lêer lees nie. Gaan na of \'Eksterne stoorplek\' nie beperk is vir die battery nie</string>
@@ -297,7 +300,6 @@ Enigiets wat jy van hierdie webwerf byvoeg, word op jou eie risiko gebruik."</st
     <string name="home_invalid_apk_io_error">Kon die lêer nie oopmaak nie. Probeer weer</string>
     <string name="home_external_apk_expert_mode_required">Hierdie funksie is slegs beskikbaar in Ekspermodus</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Spesialismodus</string>
     <string name="expert_mode_search">Soek patchings</string>
     <string name="expert_mode_disable_all">Deaktiveer alles</string>
     <string name="expert_mode_disable_all_done">Alle pleisters gedeaktiveer</string>
@@ -503,8 +505,6 @@ Outerlike sone (gestippel): kan deur die lanseerder masker afgesny word - hou be
     <string name="app_links_open_settings">Maak skakelinstellings oop</string>
     <string name="app_links_repair_success">Toepskakels is suksesvol geaktiveer</string>
     <string name="app_links_repair_failed">Kon nie toepskakels outomaties aktiveer nie</string>
-    <string name="app_links_badge_enabled">Aangeskakel</string>
-    <string name="app_links_badge_disabled">Deaktiveer</string>
     <string name="app_links_all_verified">Alle ondersteunde skakels is ingestel om in hierdie toepassing oop te maak</string>
     <string name="app_links_fix">Herstel skakels</string>
     <string name="configure">Stel in</string>
@@ -538,7 +538,6 @@ Outerlike sone (gestippel): kan deur die lanseerder masker afgesny word - hou be
     <string name="patcher_field_source">Bron</string>
     <string name="patcher_field_split">Gesplete APK</string>
     <string name="patcher_field_manager">Bestuurder</string>
-    <string name="patcher_field_patcher">Patcher</string>
     <string name="patcher_field_runtime">Looptyd</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Biblioteke</string>
@@ -614,7 +613,6 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="patcher_step_load_patches">Laai patchings</string>
     <string name="patcher_step_prepare_split_apk">Saamvoeg van gesplete APK</string>
     <string name="patcher_step_unpack">Lees APK lêer</string>
-    <string name="patcher_step_group_patching">Patching</string>
     <string name="patcher_step_group_saving">Stoor</string>
     <string name="patcher_step_write_patched">Skryf gepatchte APK lêer</string>
     <string name="patcher_step_sign_apk">Teken gepatchte APK lêer</string>
@@ -725,6 +723,9 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="settings_appearance_background_snow">Sneeu</string>
     <string name="settings_appearance_background_grid">Rooster</string>
     <string name="settings_appearance_background_particles">Deeltjies</string>
+    <string name="settings_appearance_background_lava">Lava-lamp</string>
+    <string name="settings_appearance_background_halloween">Halloween</string>
+    <string name="settings_appearance_background_fireworks">Vuurwerke</string>
     <string name="settings_appearance_background_none">Geen</string>
     <string name="settings_appearance_background_random">Ewekansig</string>
     <string name="settings_appearance_background_random_interval_launch">Daagliks</string>
@@ -732,7 +733,10 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="settings_appearance_background_random_interval_3days">Elke 3 dae</string>
     <string name="settings_appearance_parallax_effect">Parallax effek</string>
     <string name="settings_appearance_parallax_effect_description">Glat agtergrondverskuiwing wanneer jy die toestel kantel</string>
+    <string name="settings_appearance_seasonal_themes">Seisoenale temas</string>
+    <string name="settings_appearance_seasonal_themes_description">Feestelike agtergronde en groete tydens vakansies</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">Die %1$s-agtergrond is aan tot %2$s terwyl seisoenale temas aan is</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
     <string name="settings_appearance_theme_mode">Tema-modus</string>
@@ -794,8 +798,24 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="settings_appearance_app_icon_default">Standaard</string>
     <string name="settings_appearance_app_icon_light_2">Lug</string>
     <string name="settings_appearance_app_icon_light_3">Sonsondergang</string>
+    <string name="settings_appearance_app_icon_light_4">Laventel</string>
+    <string name="settings_appearance_app_icon_light_5">Gletser</string>
+    <string name="settings_appearance_app_icon_light_6">Mis</string>
+    <string name="settings_appearance_app_icon_light_7">Sand</string>
+    <string name="settings_appearance_app_icon_dark_1">Teel</string>
     <string name="settings_appearance_app_icon_dark_2">Leegte</string>
+    <string name="settings_appearance_app_icon_dark_3">Pruim</string>
+    <string name="settings_appearance_app_icon_dark_4">Middernag</string>
+    <string name="settings_appearance_app_icon_dark_5">Lei</string>
+    <string name="settings_appearance_app_icon_accent_1">Aurora</string>
+    <string name="settings_appearance_app_icon_accent_2">Ink</string>
+    <string name="settings_appearance_app_icon_accent_3">Papier</string>
+    <string name="settings_appearance_app_icon_accent_4">Skemering</string>
+    <string name="settings_appearance_app_icon_background">Agtergrond</string>
+    <string name="settings_appearance_app_icon_mark">Logo</string>
     <string name="settings_appearance_app_icon_mark_color">Kleur</string>
+    <string name="settings_appearance_app_icon_mark_white">Wit</string>
+    <string name="settings_appearance_app_icon_mark_black">Swart</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Verander app ikoon?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Verander na &lt;b&gt;%s&lt;/b&gt; en herbegin?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -833,7 +853,6 @@ Patches word nie beïnvloed nie: aktiveer voorafvrystelling-patches vir elke bro
     <string name="external_batch_patch_trust_caller">Altyd hierdie program toelaat</string>
     <string name="external_batch_patch_unknown_caller">\'n Onbekende program</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Morphe-opdatering beskikbaar</string>
     <string name="notification_bundle_update_title">Nuwe kolle beskikbaar</string>
     <string name="notification_update_text">Weergawe %s is gereed om af te laai</string>
     <string name="notification_bundle_update_text_unversioned">Tik om Morphe oop te maak en op te dateer</string>
@@ -844,7 +863,6 @@ Patches word nie beïnvloed nie: aktiveer voorafvrystelling-patches vir elke bro
     <string name="notification_channel_manager_updates_description">Kennisgewings oor nuwe Morphe-vrystellings</string>
     <string name="notification_channel_patch_updates">Pleisteropdaterings</string>
     <string name="notification_channel_patch_updates_description">Kennisgewings oor nuwe pleistervrystellings</string>
-    <string name="notification_channel_patcher">Pleister</string>
     <string name="notification_channel_patcher_description">Word gewys terwyl Morphe \'n app in die agtergrond pleister</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Spesialisinstellings</string>
@@ -1367,7 +1385,6 @@ Besonderhede: %2$s"</string>
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">Hierdie weergawe word nog steeds gepubliseer. Probeer weer oor \'n paar minute</string>
     <string name="update_download_missing">Die afgelaaide opdatering is nie meer beskikbaar nie. Laai dit weer af.</string>
-    <string name="download_manager_failed">Kon nie opdatering aflaai nie: %s</string>
     <string name="failed_to_check_updates">Kon nie opdaterings nagaan nie: %s</string>
     <string name="failed_to_download_update">Kon nie opdatering aflaai nie: %s</string>
     <string name="download_confirmation_metered">"Jy is tans op 'n metered verbinding, en datafooie van jou diensverskaffer kan van toepassing wees.

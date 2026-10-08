@@ -125,12 +125,24 @@
     <string name="home_greeting_super_late_5">Nočni in produktivni</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_1">Trik ali popravek?</string>
+    <string name="home_greeting_halloween_2">V teh APK-jih ni duhov, smo preverili</string>
+    <string name="home_greeting_halloween_3">Srhljiva sezona, sveži popravki</string>
     <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
+    <string name="home_greeting_halloween_4">Nekaj zlobnega prihaja s popravki</string>
     <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
+    <string name="home_greeting_winter_1">Vesele praznike, sveži popravki</string>
     <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
+    <string name="home_greeting_winter_2">Naj sneži, naj popravlja</string>
+    <string name="home_greeting_winter_3">Novo leto, novi popravki</string>
     <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
+    <string name="home_greeting_winter_4">Krpamo skozi sneg</string>
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">Srečno novo leto!</string>
+    <string name="home_greeting_new_year_2">Odštevamo do svežih popravkov</string>
+    <string name="home_greeting_new_year_3">Novo leto, iste aplikacije brez oglasov</string>
     <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Dol s starimi različicami, gor z novimi</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Viri popravkov</string>
     <string name="sources_search">Išči vire in popravke</string>
@@ -280,7 +292,6 @@ Vse, kar dodate s tega spletišča, uporabljate na lastno odgovornost.  "</strin
     <string name="home_use_installed_app">Uporabi nameščeno aplikacijo</string>
     <string name="home_installed_app_picker_title">Nameščene aplikacije</string>
     <string name="home_installed_app_picker_empty">Ni najdenih aplikacij</string>
-    <string name="home_installed_app_picker_filter_all">Vse aplikacije</string>
     <string name="home_installed_app_picker_filter_user">Samo uporabniške aplikacije</string>
     <string name="home_installed_app_picker_filter_system">Samo sistemske aplikacije</string>
     <string name="home_invalid_apk_unreadable">Datoteke ni bilo mogoče prebrati. Preverite, ali \'Zunanji pomnilnik\' ni omejen zaradi porabe baterije</string>
@@ -289,7 +300,6 @@ Vse, kar dodate s tega spletišča, uporabljate na lastno odgovornost.  "</strin
     <string name="home_invalid_apk_io_error">Ni bilo mogoče odpreti datoteke. Poskusite znova</string>
     <string name="home_external_apk_expert_mode_required">Ta funkcija je na voljo samo v strokovnem načinu</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Strokovni način</string>
     <string name="expert_mode_search">Išči popravke</string>
     <string name="expert_mode_disable_all">Onemogoči vse</string>
     <string name="expert_mode_disable_all_done">Vsi popravke so onemogočeni</string>
@@ -495,8 +505,6 @@ Zunanje območje (črtkano): maska zaganjalnika ga lahko obreže – pomembne po
     <string name="app_links_open_settings">Odpri nastavitve povezav</string>
     <string name="app_links_repair_success">Povezave aplikacij so uspešno omogočene</string>
     <string name="app_links_repair_failed">Ni uspelo samodejno omogočiti povezav aplikacij</string>
-    <string name="app_links_badge_enabled">Omogočeno</string>
-    <string name="app_links_badge_disabled">Onemogočeno</string>
     <string name="app_links_all_verified">Vse podprte povezave so nastavljene tako, da se odpirajo v tej aplikaciji</string>
     <string name="app_links_fix">Popravite povezave</string>
     <string name="configure">Nastavite</string>
@@ -530,7 +538,6 @@ Zunanje območje (črtkano): maska zaganjalnika ga lahko obreže – pomembne po
     <string name="patcher_field_source">Vir</string>
     <string name="patcher_field_split">Razdeljen APK</string>
     <string name="patcher_field_manager">Upravitelj</string>
-    <string name="patcher_field_patcher">Patcher</string>
     <string name="patcher_field_runtime">Runtime</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Knjižnice</string>
@@ -606,7 +613,6 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="patcher_step_load_patches">Nalaganje popravkov</string>
     <string name="patcher_step_prepare_split_apk">Združevanje razdeljenih APK-jev</string>
     <string name="patcher_step_unpack">Preberi datoteko APK</string>
-    <string name="patcher_step_group_patching">Popravljanje</string>
     <string name="patcher_step_group_saving">Shranjevanje</string>
     <string name="patcher_step_write_patched">Shranjevanje popravljene datoteke APK</string>
     <string name="patcher_step_sign_apk">Podpisovanje popravljene datoteke APK</string>
@@ -717,6 +723,9 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="settings_appearance_background_snow">Sneg</string>
     <string name="settings_appearance_background_grid">Mreža</string>
     <string name="settings_appearance_background_particles">Delci</string>
+    <string name="settings_appearance_background_lava">Lava svetilka</string>
+    <string name="settings_appearance_background_halloween">Noč čarovnic</string>
+    <string name="settings_appearance_background_fireworks">Ognjemet</string>
     <string name="settings_appearance_background_none">Brez</string>
     <string name="settings_appearance_background_random">Naključno</string>
     <string name="settings_appearance_background_random_interval_launch">Ob zagonu</string>
@@ -724,7 +733,10 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="settings_appearance_background_random_interval_3days">Vsake 3 dni</string>
     <string name="settings_appearance_parallax_effect">Paralaksni učinek</string>
     <string name="settings_appearance_parallax_effect_description">Gladko premikanje ozadja med nagibanjem naprave.</string>
+    <string name="settings_appearance_seasonal_themes">Praznične teme</string>
+    <string name="settings_appearance_seasonal_themes_description">Praznična ozadja in voščila med prazniki</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">Ozadje %1$s je vklopljeno do %2$s, dokler so vklopljene praznične teme</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
     <string name="settings_appearance_theme_mode">Način teme</string>
@@ -786,8 +798,24 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="settings_appearance_app_icon_default">Privzeta</string>
     <string name="settings_appearance_app_icon_light_2">Nebo</string>
     <string name="settings_appearance_app_icon_light_3">Sončni zahod</string>
+    <string name="settings_appearance_app_icon_light_4">Lavanda</string>
+    <string name="settings_appearance_app_icon_light_5">Ledenik</string>
+    <string name="settings_appearance_app_icon_light_6">Meglica</string>
+    <string name="settings_appearance_app_icon_light_7">Pesek</string>
+    <string name="settings_appearance_app_icon_dark_1">Modrozelena</string>
     <string name="settings_appearance_app_icon_dark_2">Praznina</string>
+    <string name="settings_appearance_app_icon_dark_3">Sliva</string>
+    <string name="settings_appearance_app_icon_dark_4">Polnoč</string>
+    <string name="settings_appearance_app_icon_dark_5">Skrilavec</string>
+    <string name="settings_appearance_app_icon_accent_1">Aurora</string>
+    <string name="settings_appearance_app_icon_accent_2">Črnilo</string>
+    <string name="settings_appearance_app_icon_accent_3">Papir</string>
+    <string name="settings_appearance_app_icon_accent_4">Mrak</string>
+    <string name="settings_appearance_app_icon_background">Ozadje</string>
+    <string name="settings_appearance_app_icon_mark">Logotip</string>
     <string name="settings_appearance_app_icon_mark_color">Barva</string>
+    <string name="settings_appearance_app_icon_mark_white">Bela</string>
+    <string name="settings_appearance_app_icon_mark_black">Črna</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Spremeni ikono aplikacije?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Spremeni v &lt;b&gt;%s&lt;/b&gt; in ponovno zaženi?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -825,7 +853,6 @@ Ta nastavitev ne vpliva na popravke: omogočite predizdajne popravke za vsak vir
     <string name="external_batch_patch_trust_caller">Vedno dovolite to aplikacijo</string>
     <string name="external_batch_patch_unknown_caller">Neznana aplikacija</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Na voljo je posodobitev Morphe</string>
     <string name="notification_bundle_update_title">Na voljo so nove posodobitve</string>
     <string name="notification_update_text">Različica %s je pripravljena za prenos</string>
     <string name="notification_bundle_update_text_unversioned">Dotaknite se, da odprete Morphe in posodobite</string>
@@ -836,7 +863,6 @@ Ta nastavitev ne vpliva na popravke: omogočite predizdajne popravke za vsak vir
     <string name="notification_channel_manager_updates_description">Obvestila o novih izdajah Morphe</string>
     <string name="notification_channel_patch_updates">Posodobitve s popravki</string>
     <string name="notification_channel_patch_updates_description">Obvestila o novih izdajah s popravki</string>
-    <string name="notification_channel_patcher">Popravljanje</string>
     <string name="notification_channel_patcher_description">Prikazano medtem ko Morphe popravlja aplikacijo v ozadju</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Napredne nastavitve</string>
@@ -1359,7 +1385,6 @@ Podrobnosti: %2$s"</string>
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">Ta različica je še v objavljanju. Poskusite znova čez nekaj minut.</string>
     <string name="update_download_missing">Prenesena posodobitev ni več na voljo. Prenesi jo znova.</string>
-    <string name="download_manager_failed">Prenos posodobitve ni uspel: %s</string>
     <string name="failed_to_check_updates">Ni uspelo preveriti posodobitev: %s</string>
     <string name="failed_to_download_update">Prenos posodobitve ni uspel: %s</string>
     <string name="download_confirmation_metered">"Trenutno ste povezani z omejeno povezavo in se vam lahko zaračunajo stroški ponudnika storitev. Želite nadaljevati?"</string>

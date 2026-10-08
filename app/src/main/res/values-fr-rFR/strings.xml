@@ -295,7 +295,6 @@ Tout ce que vous ajoutez depuis ce site web est utilisé à vos propres risques"
     <string name="home_use_installed_app">Utiliser l\'application installée</string>
     <string name="home_installed_app_picker_title">Applications installées</string>
     <string name="home_installed_app_picker_empty">Aucune application trouvée</string>
-    <string name="home_installed_app_picker_filter_all">Toutes les applications</string>
     <string name="home_installed_app_picker_filter_user">Applications utilisateur uniquement</string>
     <string name="home_installed_app_picker_filter_system">Applications système uniquement</string>
     <string name="home_invalid_apk_unreadable">Impossible de lire le fichier. Vérifiez que le \'Stockage externe\' n\'est pas restreint par la batterie</string>
@@ -304,7 +303,6 @@ Tout ce que vous ajoutez depuis ce site web est utilisé à vos propres risques"
     <string name="home_invalid_apk_io_error">Échec de l\'ouverture du fichier. Veuillez réessayer</string>
     <string name="home_external_apk_expert_mode_required">Cette fonctionnalité est uniquement disponible en mode Expert</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Mode Expert</string>
     <string name="expert_mode_search">Rechercher des patchs</string>
     <string name="expert_mode_disable_all">Tout désactiver</string>
     <string name="expert_mode_disable_all_done">Tous les patchs sont désactivés</string>
@@ -510,8 +508,6 @@ Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - g
     <string name="app_links_open_settings">Ouvrir les paramètres des liens</string>
     <string name="app_links_repair_success">Liens d\'application activés avec succès</string>
     <string name="app_links_repair_failed">Échec de l\'activation automatique des liens d\'application</string>
-    <string name="app_links_badge_enabled">Activé</string>
-    <string name="app_links_badge_disabled">Désactivé</string>
     <string name="app_links_all_verified">Tous les liens pris en charge sont configurés pour s\'ouvrir dans cette application</string>
     <string name="app_links_fix">Corriger les liens</string>
     <string name="configure">Configurer</string>
@@ -545,7 +541,6 @@ Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - g
     <string name="patcher_field_source">Source</string>
     <string name="patcher_field_split">APK fractionné</string>
     <string name="patcher_field_manager">Gestionnaire</string>
-    <string name="patcher_field_patcher">Patcheur</string>
     <string name="patcher_field_runtime">Temps d\'exécution</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Bibliothèques</string>
@@ -621,7 +616,6 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="patcher_step_load_patches">Chargement des patchs</string>
     <string name="patcher_step_prepare_split_apk">Fusion de l\'APK fractionné</string>
     <string name="patcher_step_unpack">Lecture du fichier APK</string>
-    <string name="patcher_step_group_patching">Patching</string>
     <string name="patcher_step_group_saving">Enregistrement</string>
     <string name="patcher_step_write_patched">Écriture du fichier APK patché</string>
     <string name="patcher_step_sign_apk">Signature du fichier APK patché</string>
@@ -862,7 +856,6 @@ Les patchs ne sont pas affectés : activez les patchs en préversion pour chaque
     <string name="external_batch_patch_trust_caller">Toujours autoriser cette application</string>
     <string name="external_batch_patch_unknown_caller">Une application inconnue</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Mise à jour de Morphe disponible</string>
     <string name="notification_bundle_update_title">Nouveaux patchs disponibles</string>
     <string name="notification_update_text">La version %s est prête à être téléchargée</string>
     <string name="notification_bundle_update_text_unversioned">Appuyez pour ouvrir Morphe et mettre à jour</string>
@@ -873,7 +866,6 @@ Les patchs ne sont pas affectés : activez les patchs en préversion pour chaque
     <string name="notification_channel_manager_updates_description">Notifications concernant les nouvelles versions de Morphe</string>
     <string name="notification_channel_patch_updates">Mises à jour de patchs</string>
     <string name="notification_channel_patch_updates_description">Notifications concernant les nouvelles versions de patchs</string>
-    <string name="notification_channel_patcher">Patching</string>
     <string name="notification_channel_patcher_description">Affiché lorsque Morphe effectue le patching d\'une application en arrière-plan</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Paramètres Expert</string>
@@ -1398,7 +1390,6 @@ Détails : %2$s"</string>
     <string name="manager_update_progress_size">%1$s / %2$s Mo</string>
     <string name="manager_update_not_ready">Cette version est toujours en cours de publication. Réessayez dans quelques minutes</string>
     <string name="update_download_missing">La mise à jour téléchargée n\'est plus disponible. Téléchargez-la à nouveau</string>
-    <string name="download_manager_failed">Échec du téléchargement de la mise à jour : %s</string>
     <string name="failed_to_check_updates">Échec de la vérification des mises à jour : %s</string>
     <string name="failed_to_download_update">Échec du téléchargement de la mise à jour : %s</string>
     <string name="download_confirmation_metered">"Vous utilisez actuellement une connexion à débit limité et des frais de données peuvent vous être facturés par votre fournisseur d'accès.

@@ -125,12 +125,24 @@
     <string name="home_greeting_super_late_5">Ночной и продуктивный</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_1">Сладость или патч?</string>
+    <string name="home_greeting_halloween_2">В этих APK нет призраков, мы проверили</string>
+    <string name="home_greeting_halloween_3">Сезон жути, свежие патчи</string>
     <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
+    <string name="home_greeting_halloween_4">Что-то зловещее патчит</string>
     <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
+    <string name="home_greeting_winter_1">С праздниками, свежие патчи</string>
     <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
+    <string name="home_greeting_winter_2">Пусть снежит, пусть патчит</string>
+    <string name="home_greeting_winter_3">Новый год, новые патчи</string>
     <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
+    <string name="home_greeting_winter_4">Патчим по снегу</string>
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">С Новым годом!</string>
+    <string name="home_greeting_new_year_2">Обратный отсчёт до свежих патчей</string>
+    <string name="home_greeting_new_year_3">Новый год, приложения по-прежнему без рекламы</string>
     <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Долой старые версии, да здравствуют новые</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Источники патчей</string>
     <string name="sources_search">Поиск источников и патчей</string>
@@ -280,7 +292,6 @@
     <string name="home_use_installed_app">Использовать установленное приложение</string>
     <string name="home_installed_app_picker_title">Установленные приложения</string>
     <string name="home_installed_app_picker_empty">Приложения не найдены</string>
-    <string name="home_installed_app_picker_filter_all">Все приложения</string>
     <string name="home_installed_app_picker_filter_user">Только пользовательские приложения</string>
     <string name="home_installed_app_picker_filter_system">Только системные приложения</string>
     <string name="home_invalid_apk_unreadable">Не удалось прочитать файл. Убедитесь, что \'Внешнее хранилище\' не ограничено по энергопотреблению</string>
@@ -289,7 +300,6 @@
     <string name="home_invalid_apk_io_error">Не удалось открыть файл. Пожалуйста, попробуйте еще раз</string>
     <string name="home_external_apk_expert_mode_required">Эта функция доступна только в режиме эксперта</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Режим эксперта</string>
     <string name="expert_mode_search">Поиск патчей</string>
     <string name="expert_mode_disable_all">Отключить все</string>
     <string name="expert_mode_disable_all_done">Все патчи отключены</string>
@@ -495,8 +505,6 @@
     <string name="app_links_open_settings">Открыть настройки ссылок</string>
     <string name="app_links_repair_success">Ссылки на приложение успешно включены</string>
     <string name="app_links_repair_failed">Не удалось автоматически включить ссылки приложения</string>
-    <string name="app_links_badge_enabled">Включено</string>
-    <string name="app_links_badge_disabled">Выключено</string>
     <string name="app_links_all_verified">Все поддерживаемые ссылки настроены на открытие в этом приложении</string>
     <string name="app_links_fix">Исправить ссылки</string>
     <string name="configure">Настроить</string>
@@ -530,7 +538,6 @@
     <string name="patcher_field_source">Источник</string>
     <string name="patcher_field_split">Раздельный APK</string>
     <string name="patcher_field_manager">Менеджер</string>
-    <string name="patcher_field_patcher">Патчер</string>
     <string name="patcher_field_runtime">Среда выполнения</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Библиотеки</string>
@@ -606,7 +613,6 @@
     <string name="patcher_step_load_patches">Загрузка патчей</string>
     <string name="patcher_step_prepare_split_apk">Объединение разделенных APK</string>
     <string name="patcher_step_unpack">Чтение APK файла</string>
-    <string name="patcher_step_group_patching">Патчинг</string>
     <string name="patcher_step_group_saving">Сохранение</string>
     <string name="patcher_step_write_patched">Запись патченного APK файла</string>
     <string name="patcher_step_sign_apk">Подпись пропатченного APK-файла</string>
@@ -717,6 +723,9 @@
     <string name="settings_appearance_background_snow">Снег</string>
     <string name="settings_appearance_background_grid">Сетка</string>
     <string name="settings_appearance_background_particles">Частицы</string>
+    <string name="settings_appearance_background_lava">Лавовая лампа</string>
+    <string name="settings_appearance_background_halloween">Хэллоуин</string>
+    <string name="settings_appearance_background_fireworks">Фейерверки</string>
     <string name="settings_appearance_background_none">Нет</string>
     <string name="settings_appearance_background_random">Случайный</string>
     <string name="settings_appearance_background_random_interval_launch">При запуске</string>
@@ -724,7 +733,10 @@
     <string name="settings_appearance_background_random_interval_3days">Каждые 3 дня</string>
     <string name="settings_appearance_parallax_effect">Эффект параллакса</string>
     <string name="settings_appearance_parallax_effect_description">Плавное смещение фона при наклоне устройства</string>
+    <string name="settings_appearance_seasonal_themes">Сезонные темы</string>
+    <string name="settings_appearance_seasonal_themes_description">Праздничные фоны и приветствия во время праздников</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">Фон «%1$s» активен до %2$s, пока включены сезонные темы</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Тема</string>
     <string name="settings_appearance_theme_mode">Режим темы</string>
@@ -785,8 +797,23 @@
     <string name="settings_appearance_app_icon_default">По умолчанию</string>
     <string name="settings_appearance_app_icon_light_2">Небо</string>
     <string name="settings_appearance_app_icon_light_3">Закат</string>
+    <string name="settings_appearance_app_icon_light_4">Лаванда</string>
+    <string name="settings_appearance_app_icon_light_5">Ледник</string>
+    <string name="settings_appearance_app_icon_light_6">Туман</string>
+    <string name="settings_appearance_app_icon_light_7">Песок</string>
+    <string name="settings_appearance_app_icon_dark_1">Бирюза</string>
     <string name="settings_appearance_app_icon_dark_2">Пустота</string>
+    <string name="settings_appearance_app_icon_dark_3">Слива</string>
+    <string name="settings_appearance_app_icon_dark_4">Полночь</string>
+    <string name="settings_appearance_app_icon_dark_5">Сланец</string>
+    <string name="settings_appearance_app_icon_accent_1">Аврора</string>
+    <string name="settings_appearance_app_icon_accent_2">Чернила</string>
+    <string name="settings_appearance_app_icon_accent_3">Бумага</string>
+    <string name="settings_appearance_app_icon_accent_4">Сумерки</string>
+    <string name="settings_appearance_app_icon_background">Фон</string>
+    <string name="settings_appearance_app_icon_mark">Логотип</string>
     <string name="settings_appearance_app_icon_mark_color">Цветной</string>
+    <string name="settings_appearance_app_icon_mark_white">Белый</string>
     <string name="settings_appearance_app_icon_mark_black">Чёрная</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Изменить значок приложения?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Изменить на &lt;b&gt;%s&lt;/b&gt; и перезапустить?</string>
@@ -825,7 +852,6 @@
     <string name="external_batch_patch_trust_caller">Всегда разрешать это приложение</string>
     <string name="external_batch_patch_unknown_caller">Неизвестное приложение</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Доступно обновление Morphe</string>
     <string name="notification_bundle_update_title">Доступны новые патчи</string>
     <string name="notification_update_text">Версия %s готова к загрузке</string>
     <string name="notification_bundle_update_text_unversioned">Нажмите, чтобы открыть Morphe и обновить</string>
@@ -836,7 +862,6 @@
     <string name="notification_channel_manager_updates_description">Уведомления о новых релизах Morphe</string>
     <string name="notification_channel_patch_updates">Обновления патчей</string>
     <string name="notification_channel_patch_updates_description">Уведомления о новых релизах патчей</string>
-    <string name="notification_channel_patcher">Патчинг</string>
     <string name="notification_channel_patcher_description">Отображается во время установки Morphe патча для приложения в фоновом режиме</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Экспертные настройки</string>
@@ -1359,7 +1384,6 @@ morphe_header_custom_dark.png
     <string name="manager_update_progress_size">%1$s / %2$s МБ</string>
     <string name="manager_update_not_ready">Этот релиз еще публикуется. Попробуйте снова через несколько минут</string>
     <string name="update_download_missing">Загруженное обновление больше недоступно. Загрузите его снова</string>
-    <string name="download_manager_failed">Не удалось загрузить обновление: %s</string>
     <string name="failed_to_check_updates">Не удалось проверить наличие обновлений: %s</string>
     <string name="failed_to_download_update">Не удалось загрузить обновление: %s</string>
     <string name="download_confirmation_metered">"Вы находитесь в сети с лимитным трафиком, и могут взиматься дополнительные платежи от вашего поставщика услуг.

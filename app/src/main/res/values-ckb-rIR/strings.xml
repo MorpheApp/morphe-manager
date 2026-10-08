@@ -134,7 +134,6 @@
     <string name="home_invalid_apk_io_error">شکستی هێنا لە کردنەوەی فایلەکە. تکایە دووبارە هەوڵ بدە</string>
     <string name="home_external_apk_expert_mode_required">ئەم تایبەتمەندیە تەنها لە مۆدی شارەزا بەردەستە</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">مۆدی شارەزا</string>
     <string name="expert_mode_search">گەڕانی پینەکان</string>
     <string name="expert_mode_disable_all">هەموو لە کاربخە</string>
     <string name="expert_mode_disable_all_done">هەموو پینەکان لە کارخراون</string>
@@ -243,8 +242,6 @@
     <string name="home_app_info_patch_update_available_description">وەشانێکی نوێتری پینەکردن بەردەستە. دووبارە پینەکردنی ئەپەکەت بۆ بەدەستهێنانی نوێترین چاکسازی و چاککردنەوەکان</string>
     <string name="home_app_info_app_deleted_warning">App was uninstalled</string>
     <string name="home_app_info_app_deleted_description">ئەم کاربەرنامەیە لە دەرەوەی Morphe سڕاوەتەوە. دووبارە بیچەوە بۆ گەڕاندنەوەی ئەرکەکان</string>
-    <string name="app_links_badge_enabled">چالاککراو</string>
-    <string name="app_links_badge_disabled">لەکارخراو</string>
     <string name="home_app_info_apk_size">قەبارەی APK</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">دۆخی ڕۆت پێویستی بە دامەزراندنی APK ی ڕەسەن هەیە لەسەر ئامێرەکەت پێش پینەکردن</string>
@@ -292,7 +289,6 @@
     <string name="patcher_step_load_patches">بارکردنی پینەکان</string>
     <string name="patcher_step_prepare_split_apk">ئاوێتەکردنی APKی دابەشکراو</string>
     <string name="patcher_step_unpack">خوێندنەوەی پەڕگەی APK</string>
-    <string name="patcher_step_group_patching">پینەکردن</string>
     <string name="patcher_step_group_saving">هەڵگرتن</string>
     <string name="patcher_step_write_patched">نووسینی فایلی APK پینەکراو</string>
     <string name="patcher_step_sign_apk">واژۆکردنی فایلی APK پینەکراو</string>
@@ -419,10 +415,8 @@
     <string name="settings_advanced_update_interval_chip_subtitle">فریکوێنسی پشکنینی پاشخان</string>
     <string name="settings_advanced_update_interval_battery_warning">لەوانەیە پشکنینی پاشبنەما بە شێوەیەکی باوەڕپێکراو کار نەکات لەسەر هەندێک ئامێر. بەرهەمهێنەرانی وەک شیاومی، هواوی، سامسۆنگ و وەن پڵەس زۆرجار پرۆسەکانی پاشخان سنووردار دەکەن بۆ پاشەکەوت کردنی پاتری.</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">نوێکردنەوەی Morphe بەردەستە</string>
     <string name="notification_bundle_update_title">پینەی نوێ بەردەستە</string>
     <string name="notification_update_text">وەشانی %s ئامادەیە بۆ دابەزاندن</string>
-    <string name="notification_channel_patcher">پینەکردن</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert_mode">مۆدی شارەزا</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->

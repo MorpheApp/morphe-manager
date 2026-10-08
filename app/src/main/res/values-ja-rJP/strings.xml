@@ -126,19 +126,23 @@
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
     <string name="home_greeting_halloween_1">トリック・オア・パッチ？</string>
-    <string name="home_greeting_halloween_2">これらのAPKにはゴーストはいません。確認済みです</string>
+    <string name="home_greeting_halloween_2">これらの APK にはおばけはいません。確認済みです</string>
     <string name="home_greeting_halloween_3">不気味な季節、新しいパッチ</string>
     <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
-    <string name="home_greeting_halloween_4">邪悪なものがこちらへパッチしてくる</string>
+    <string name="home_greeting_halloween_4">邪悪なものがパッチを当てながらやってくる</string>
     <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
     <string name="home_greeting_winter_1">ハッピーホリデー、新しいパッチ</string>
     <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
-    <string name="home_greeting_winter_2">雪よ降れ、パッチよ降れ</string>
-    <string name="home_greeting_winter_3">新年、新パッチ</string>
+    <string name="home_greeting_winter_2">雪よ降れ、パッチを当てろ</string>
+    <string name="home_greeting_winter_3">新年、新しいパッチ</string>
     <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
-    <string name="home_greeting_winter_4">雪の中をパッチして</string>
+    <string name="home_greeting_winter_4">パッチを当てながら雪の中を駆け抜ける</string>
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">あけましておめでとうございます！</string>
+    <string name="home_greeting_new_year_2">新しいパッチへのカウントダウン</string>
+    <string name="home_greeting_new_year_3">新年も、変わらず広告なしのアプリです</string>
     <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">古いバージョンは退場、新しいバージョンは登場</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">パッチソース</string>
     <string name="sources_search">ソースとパッチを検索</string>
@@ -288,7 +292,6 @@
     <string name="home_use_installed_app">インストール済みアプリを使用</string>
     <string name="home_installed_app_picker_title">インストール済みアプリ</string>
     <string name="home_installed_app_picker_empty">アプリが見つかりません</string>
-    <string name="home_installed_app_picker_filter_all">すべてのアプリ</string>
     <string name="home_installed_app_picker_filter_user">ユーザーアプリのみ</string>
     <string name="home_installed_app_picker_filter_system">システムアプリのみ</string>
     <string name="home_invalid_apk_unreadable">ファイルを読み込めませんでした。「外部ストレージ」がバッテリー制限の対象になっていないか確認してください</string>
@@ -297,7 +300,6 @@
     <string name="home_invalid_apk_io_error">ファイルを開けませんでした。もう一度お試しください</string>
     <string name="home_external_apk_expert_mode_required">この機能は、エキスパート モードでのみ利用可能です</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">エキスパート モード</string>
     <string name="expert_mode_search">パッチを検索</string>
     <string name="expert_mode_disable_all">すべて無効化</string>
     <string name="expert_mode_disable_all_done">すべてのパッチが無効になりました</string>
@@ -503,8 +505,6 @@
     <string name="app_links_open_settings">リンク設定を開く</string>
     <string name="app_links_repair_success">アプリリンクが正常に有効化されました</string>
     <string name="app_links_repair_failed">アプリリンクを自動的に有効にできませんでした</string>
-    <string name="app_links_badge_enabled">有効</string>
-    <string name="app_links_badge_disabled">無効</string>
     <string name="app_links_all_verified">サポートされているすべてのリンクは、このアプリで開くように設定されています</string>
     <string name="app_links_fix">リンクを修正</string>
     <string name="configure">設定</string>
@@ -538,7 +538,6 @@
     <string name="patcher_field_source">ソース</string>
     <string name="patcher_field_split">分割 APK</string>
     <string name="patcher_field_manager">マネージャー</string>
-    <string name="patcher_field_patcher">パッチャー</string>
     <string name="patcher_field_runtime">ランタイム</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">ライブラリ</string>
@@ -614,7 +613,6 @@
     <string name="patcher_step_load_patches">パッチを読み込み中</string>
     <string name="patcher_step_prepare_split_apk">分割 APK を結合中</string>
     <string name="patcher_step_unpack">APK ファイルを読み込み中</string>
-    <string name="patcher_step_group_patching">パッチを適用中</string>
     <string name="patcher_step_group_saving">保存中</string>
     <string name="patcher_step_write_patched">パッチ済み APK ファイルを出力中</string>
     <string name="patcher_step_sign_apk">パッチ済み APK ファイルに署名中</string>
@@ -726,6 +724,9 @@
     <string name="settings_appearance_background_snow">雪</string>
     <string name="settings_appearance_background_grid">グリッド</string>
     <string name="settings_appearance_background_particles">パーティクル</string>
+    <string name="settings_appearance_background_lava">ラバランプ</string>
+    <string name="settings_appearance_background_halloween">ハロウィン</string>
+    <string name="settings_appearance_background_fireworks">花火</string>
     <string name="settings_appearance_background_none">なし</string>
     <string name="settings_appearance_background_random">ランダム</string>
     <string name="settings_appearance_background_random_interval_launch">起動時</string>
@@ -733,7 +734,10 @@
     <string name="settings_appearance_background_random_interval_3days">3日ごと</string>
     <string name="settings_appearance_parallax_effect">視差効果</string>
     <string name="settings_appearance_parallax_effect_description">デバイスを傾けた時に背景が滑らかに移動します</string>
+    <string name="settings_appearance_seasonal_themes">季節のテーマ</string>
+    <string name="settings_appearance_seasonal_themes_description">ホリデー期間中は、お祝いの背景と挨拶を表示します</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">季節限定のテーマが有効な間は、%1$s の背景が %2$s まで表示されます</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">テーマ</string>
     <string name="settings_appearance_theme_mode">テーマモード</string>
@@ -794,10 +798,24 @@
     <string name="settings_appearance_app_icon_default">デフォルト</string>
     <string name="settings_appearance_app_icon_light_2">スカイ</string>
     <string name="settings_appearance_app_icon_light_3">サンセット</string>
+    <string name="settings_appearance_app_icon_light_4">ラベンダー</string>
+    <string name="settings_appearance_app_icon_light_5">グレイシャー</string>
+    <string name="settings_appearance_app_icon_light_6">ミスト</string>
+    <string name="settings_appearance_app_icon_light_7">サンド</string>
+    <string name="settings_appearance_app_icon_dark_1">ティール</string>
     <string name="settings_appearance_app_icon_dark_2">ブラック</string>
+    <string name="settings_appearance_app_icon_dark_3">プラム</string>
+    <string name="settings_appearance_app_icon_dark_4">ミッドナイト</string>
+    <string name="settings_appearance_app_icon_dark_5">スレート</string>
+    <string name="settings_appearance_app_icon_accent_1">オーロラ</string>
+    <string name="settings_appearance_app_icon_accent_2">インク</string>
+    <string name="settings_appearance_app_icon_accent_3">ペーパー</string>
+    <string name="settings_appearance_app_icon_accent_4">ダスク</string>
     <string name="settings_appearance_app_icon_background">バックグラウンド</string>
+    <string name="settings_appearance_app_icon_mark">ロゴ</string>
     <string name="settings_appearance_app_icon_mark_color">カラー</string>
     <string name="settings_appearance_app_icon_mark_white">ホワイト</string>
+    <string name="settings_appearance_app_icon_mark_black">ブラック</string>
     <string name="settings_appearance_app_icon_change_dialog_title">アプリのアイコンを変更しますか？</string>
     <string name="settings_appearance_app_icon_change_dialog_message">&lt;b&gt;%s&lt;/b&gt; に変更して再起動しますか？</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -835,7 +853,6 @@
     <string name="external_batch_patch_trust_caller">このアプリを常に許可</string>
     <string name="external_batch_patch_unknown_caller">不明なアプリ</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Morphe の更新が利用可能です</string>
     <string name="notification_bundle_update_title">新しいパッチが利用可能です</string>
     <string name="notification_update_text">バージョン %s がダウンロード可能です</string>
     <string name="notification_bundle_update_text_unversioned">Morphe を開いて更新するには、タップしてください</string>
@@ -846,7 +863,6 @@
     <string name="notification_channel_manager_updates_description">Morphe の新しいリリースに関する通知</string>
     <string name="notification_channel_patch_updates">パッチの更新</string>
     <string name="notification_channel_patch_updates_description">パッチの新しいリリースに関する通知</string>
-    <string name="notification_channel_patcher">パッチ処理</string>
     <string name="notification_channel_patcher_description">バックグラウンドで Morphe がアプリにパッチを適用しているときに表示されます</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">高度な設定</string>
@@ -1370,7 +1386,6 @@ morphe_header_custom_dark.png
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">このリリースはまだ公開中です。しばらくしてから再度お試しください</string>
     <string name="update_download_missing">ダウンロードした更新は利用できなくなりました。再度ダウンロードしてください</string>
-    <string name="download_manager_failed">アップデートのダウンロードに失敗しました: %s</string>
     <string name="failed_to_check_updates">アップデートの確認に失敗しました: %s</string>
     <string name="failed_to_download_update">アップデートのダウンロードに失敗しました: %s</string>
     <string name="download_confirmation_metered">"現在、従量制接続を使用しています。通信事業者から追加料金が発生する場合があります。

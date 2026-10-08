@@ -125,12 +125,24 @@
     <string name="home_greeting_super_late_5">Nočný a produktívny</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_1">Trik alebo patch?</string>
+    <string name="home_greeting_halloween_2">V týchto APK nie sú žiadni duchovia, preverili sme ich</string>
+    <string name="home_greeting_halloween_3">Strašidelná sezóna, čerstvé patche</string>
     <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
+    <string name="home_greeting_halloween_4">Niečo zlovestné tadiaľto patchuje</string>
     <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
+    <string name="home_greeting_winter_1">Šťastné sviatky, čerstvé patche</string>
     <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
+    <string name="home_greeting_winter_2">Nech sneží, nech patchuje</string>
+    <string name="home_greeting_winter_3">Nový rok, nové patche</string>
     <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
+    <string name="home_greeting_winter_4">Patchujeme sa snehom</string>
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">Šťastný nový rok!</string>
+    <string name="home_greeting_new_year_2">Odpočítavame do čerstvých patchov</string>
+    <string name="home_greeting_new_year_3">Nový rok, stále tie isté aplikácie bez reklám</string>
     <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Preč so starými verziami, nech žijú nové</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Zdroje záplat</string>
     <string name="sources_search">Hľadať zdroje a záplaty</string>
@@ -280,7 +292,6 @@
     <string name="home_use_installed_app">Použiť nainštalovanú aplikáciu</string>
     <string name="home_installed_app_picker_title">Nainštalované aplikácie</string>
     <string name="home_installed_app_picker_empty">Nenašli sa žiadne aplikácie</string>
-    <string name="home_installed_app_picker_filter_all">Všetky aplikácie</string>
     <string name="home_installed_app_picker_filter_user">Iba používateľské aplikácie</string>
     <string name="home_installed_app_picker_filter_system">Iba systémové aplikácie</string>
     <string name="home_invalid_apk_unreadable">Nepodarilo sa prečítať súbor. Skontrolujte, či \'Externé úložisko\' nie je obmedzené v spotrebe batérie</string>
@@ -289,7 +300,6 @@
     <string name="home_invalid_apk_io_error">Nepodarilo sa otvoriť súbor. Skúste to znova</string>
     <string name="home_external_apk_expert_mode_required">Táto funkcia je dostupná iba v expert móde</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Režim pre skúsených</string>
     <string name="expert_mode_search">Vyhľadať záplaty</string>
     <string name="expert_mode_disable_all">Zakázať všetko</string>
     <string name="expert_mode_disable_all_done">Všetky záplaty sú vypnuté</string>
@@ -495,8 +505,6 @@ Vnútorná zóna (čiarkovaná): môže byť orezaná maskou spúšťača – uc
     <string name="app_links_open_settings">Otvoriť nastavenia odkazov</string>
     <string name="app_links_repair_success">Odkazy aplikácie boli úspešne povolené</string>
     <string name="app_links_repair_failed">Nepodarilo sa automaticky povoliť odkazy aplikácie</string>
-    <string name="app_links_badge_enabled">Povolené</string>
-    <string name="app_links_badge_disabled">Vypnutý</string>
     <string name="app_links_all_verified">Všetky podporované odkazy sú nakonfigurované tak, aby sa otvárali v tejto aplikácii</string>
     <string name="app_links_fix">Opraviť odkazy</string>
     <string name="configure">Konfigurovať</string>
@@ -530,7 +538,6 @@ Vnútorná zóna (čiarkovaná): môže byť orezaná maskou spúšťača – uc
     <string name="patcher_field_source">Zdroj</string>
     <string name="patcher_field_split">Rozdelený APK</string>
     <string name="patcher_field_manager">Správca</string>
-    <string name="patcher_field_patcher">Patcher</string>
     <string name="patcher_field_runtime">Runtime</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Knižnice</string>
@@ -606,7 +613,6 @@ Odinštalovanie trvalo vymaže všetky údaje aplikácie."</string>
     <string name="patcher_step_load_patches">Načítavam záplaty</string>
     <string name="patcher_step_prepare_split_apk">Spájam rozdelený APK súbor</string>
     <string name="patcher_step_unpack">Načítavam APK súbor</string>
-    <string name="patcher_step_group_patching">Aplikujem záplaty</string>
     <string name="patcher_step_group_saving">Ukládám</string>
     <string name="patcher_step_write_patched">Vytváram zaplátaný súbor APK</string>
     <string name="patcher_step_sign_apk">Podpisujem zaplátaný súbor APK</string>
@@ -717,6 +723,9 @@ Odinštalovanie trvalo vymaže všetky údaje aplikácie."</string>
     <string name="settings_appearance_background_snow">Sneh</string>
     <string name="settings_appearance_background_grid">Mriežka</string>
     <string name="settings_appearance_background_particles">Častice</string>
+    <string name="settings_appearance_background_lava">Lávová lampa</string>
+    <string name="settings_appearance_background_halloween">Halloween</string>
+    <string name="settings_appearance_background_fireworks">Ohňostroj</string>
     <string name="settings_appearance_background_none">Žiadna</string>
     <string name="settings_appearance_background_random">Náhodné</string>
     <string name="settings_appearance_background_random_interval_launch">Pri spustení</string>
@@ -724,7 +733,10 @@ Odinštalovanie trvalo vymaže všetky údaje aplikácie."</string>
     <string name="settings_appearance_background_random_interval_3days">Každé 3 dni</string>
     <string name="settings_appearance_parallax_effect">Paralaxový efekt</string>
     <string name="settings_appearance_parallax_effect_description">Plynulé posúvanie pozadia pri nakláňaní zariadenia</string>
+    <string name="settings_appearance_seasonal_themes">Sezónne témy</string>
+    <string name="settings_appearance_seasonal_themes_description">Sviatočné pozadia a pozdravy počas sviatkov</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">Pozadie %1$s je zapnuté až do %2$s, pokiaľ sú zapnuté sezónne témy</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Motív</string>
     <string name="settings_appearance_theme_mode">Režim témy</string>
@@ -786,8 +798,24 @@ Odinštalovanie trvalo vymaže všetky údaje aplikácie."</string>
     <string name="settings_appearance_app_icon_default">Predvolená</string>
     <string name="settings_appearance_app_icon_light_2">Obloha</string>
     <string name="settings_appearance_app_icon_light_3">Súmrak</string>
+    <string name="settings_appearance_app_icon_light_4">Levanduľa</string>
+    <string name="settings_appearance_app_icon_light_5">Ľadovec</string>
+    <string name="settings_appearance_app_icon_light_6">Hmla</string>
+    <string name="settings_appearance_app_icon_light_7">Piesok</string>
+    <string name="settings_appearance_app_icon_dark_1">Modrozelená</string>
     <string name="settings_appearance_app_icon_dark_2">Prázdnota</string>
+    <string name="settings_appearance_app_icon_dark_3">Slivka</string>
+    <string name="settings_appearance_app_icon_dark_4">Polnoc</string>
+    <string name="settings_appearance_app_icon_dark_5">Bridlica</string>
+    <string name="settings_appearance_app_icon_accent_1">Aurora</string>
+    <string name="settings_appearance_app_icon_accent_2">Atrament</string>
+    <string name="settings_appearance_app_icon_accent_3">Papier</string>
+    <string name="settings_appearance_app_icon_accent_4">Súmrak</string>
+    <string name="settings_appearance_app_icon_background">Pozadie</string>
+    <string name="settings_appearance_app_icon_mark">Logo</string>
     <string name="settings_appearance_app_icon_mark_color">Farebná</string>
+    <string name="settings_appearance_app_icon_mark_white">Biela</string>
+    <string name="settings_appearance_app_icon_mark_black">Čierna</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Zmeniť ikonu aplikácie?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Zmeniť na &lt;b&gt;%s&lt;/b&gt; a reštartovať?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -825,7 +853,6 @@ Záplaty tým nie sú ovplyvnené: povoľte predbežné záplaty pre každý zdr
     <string name="external_batch_patch_trust_caller">Vždy povoliť túto aplikáciu</string>
     <string name="external_batch_patch_unknown_caller">Neznáma aplikácia</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Je dostupná aktualizácia Morphe</string>
     <string name="notification_bundle_update_title">Sú dostupné nové záplaty</string>
     <string name="notification_update_text">Verzia %s je pripravená na stiahnutie</string>
     <string name="notification_bundle_update_text_unversioned">Ťuknite pre otvorenie Morphe a aktualizujte</string>
@@ -836,7 +863,6 @@ Záplaty tým nie sú ovplyvnené: povoľte predbežné záplaty pre každý zdr
     <string name="notification_channel_manager_updates_description">Oznámenia o nových verziách Morphe</string>
     <string name="notification_channel_patch_updates">Opravné aktualizácie</string>
     <string name="notification_channel_patch_updates_description">Oznámenia o nových opravných verziách</string>
-    <string name="notification_channel_patcher">Aplikujem záplaty</string>
     <string name="notification_channel_patcher_description">Zobrazuje sa, keď Morphe pláta aplikácie na pozadí</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Nastavenia pre skúsených</string>
@@ -1359,7 +1385,6 @@ Podrobnosti: %2$s"</string>
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">Toto vydanie sa stále publikuje. Skúste to znova o niekoľko minút</string>
     <string name="update_download_missing">Stiahnutá aktualizácia už nie je k dispozícii. Stiahnite si ju znova.</string>
-    <string name="download_manager_failed">Nepodarilo sa stiahnuť aktualizáciu: %s</string>
     <string name="failed_to_check_updates">Nepodarilo sa skontrolovať aktualizácie: %s</string>
     <string name="failed_to_download_update">Nepodarilo sa stiahnuť aktualizáciu: %s</string>
     <string name="download_confirmation_metered">"Aktuálne požívate dátové pripojenie s obmedzeným objemom a váš poskytovateľ služieb vám môže účtovať poplatky za prenos dát.

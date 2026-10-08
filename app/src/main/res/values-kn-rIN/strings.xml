@@ -97,14 +97,12 @@
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_use_installed_app">ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿದ ಅಪ್ಲಿಕೇಶನ್ ಬಳಸಿ</string>
     <string name="home_installed_app_picker_empty">ಆ್ಯಪ್‌ಗಳು ಕಂಡುಬರಲಿಲ್ಲ</string>
-    <string name="home_installed_app_picker_filter_all">ಎಲ್ಲಾ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು</string>
     <string name="home_installed_app_picker_filter_user">రಪರಸಲ್ి్ಕಾರ್సేరు಻స్వ్సై</string>
     <string name="home_installed_app_picker_filter_system">రಪರಸಲ್ి్ಕಾರ್సేరు಻స్వ్సై</string>
     <string name="home_invalid_apk_unreadable">\'External Storage\' ಬ್ಯಾಟರಿ ನಿರ್ಬಂಧಿತವಾಗಿಲ್ಲ ಎಂದು ಪರಿಶೀಲಿಸಿ.</string>
     <string name="home_invalid_apk_io_error">ಫೈಲ್ ತೆರೆಯಲು ವಿಫಲವಾಯಿತು. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ</string>
     <string name="home_external_apk_expert_mode_required">ಈ ವೈಶಿಷ್ಟ್ಯವು ತಜ್ಞ ಮೋಡ್‌ನಲ್ಲಿ ಮಾತ್ರ ಲಭ್ಯವಿದೆ</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">ಜ್ಞಾನಿ ಮೋಡ್</string>
     <string name="expert_mode_search">ಪ್ಯಾಚ್‌ಗಳನ್ನು ಹುಡುಕಿ</string>
     <string name="expert_mode_disable_all">ಎಲ್ಲವನ್ನೂ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ</string>
     <string name="expert_mode_disable_all_done">ಎಲ್ಲಾ ಪ್ಯಾಚ್‌ಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ</string>

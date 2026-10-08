@@ -13,6 +13,10 @@
     <string name="home_app_no_hidden">برنامه‌ی پنهانی ندارید</string>
     <string name="home_app_hidden_apps_title">برنامه های پنهان شده</string>
     <string name="home_app_hidden_apps_hint">برای پنهان کردن ضربه بزنید</string>
+    <string name="home_app_patch_sources_description">منابعی که تیک نخورده باشند هنگام وصله‌شدن این برنامه‌ها ارائه نمی‌شوند و وصله‌هایشان هرگز به‌تنهایی به یک انتخاب اضافه نمی‌شوند. هر منبع برای هر برنامه‌ی دیگر روشن می‌ماند</string>
+    <string name="home_app_patch_sources_mixed">ارائه‌شده به %1$s از %2$s</string>
+    <string name="home_app_patch_sources_covers">برای %1$s از %2$s وصله دارد</string>
+    <string name="home_app_patch_sources_last">هر برنامه برای وصله‌شدن به یک منبع باقی‌مانده نیاز دارد</string>
     <string name="android_11_bug_dialog_title">باگ اندروید 11</string>
     <string name="android_11_bug_dialog_description">مجوز نصب برنامه باید از قبل صادر شود تا از بروز باگ در سیستم اندروید ۱۱ که تجربه کاربری را تحت تأثیر منفی قرار می دهد، جلوگیری شود </string>
     <string name="deep_link_add_source_title">افزودن منبع</string>
@@ -121,12 +125,24 @@
     <string name="home_greeting_super_late_5">شب‌زنده‌دار و کارآمد</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_1">ترفند یا وصله؟</string>
+    <string name="home_greeting_halloween_2">در این APKها روحی نیست، بررسی کردیم</string>
+    <string name="home_greeting_halloween_3">فصل ترسناک، وصله‌های تازه</string>
     <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
+    <string name="home_greeting_halloween_4">چیز شومی از این راه وصله می‌زند</string>
     <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
+    <string name="home_greeting_winter_1">تعطیلات خوش، وصله‌های تازه</string>
     <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
+    <string name="home_greeting_winter_2">بگذار برف ببارد، بگذار وصله بزند</string>
+    <string name="home_greeting_winter_3">سال نو، وصله‌های نو</string>
     <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
+    <string name="home_greeting_winter_4">وصله زدن در میان برف</string>
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">سال نو مبارک!</string>
+    <string name="home_greeting_new_year_2">شمارش معکوس برای وصله‌های تازه</string>
+    <string name="home_greeting_new_year_3">سال نو، همان برنامه‌های بدون تبلیغ</string>
     <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">نسخه‌های قدیمی بیرون، نسخه‌های جدید داخل</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">منابع پچ </string>
     <string name="sources_search"> جستجوی منابع و اصلاحیه‌ها</string>
@@ -141,6 +157,13 @@
     <string name="sources_management_open_in_browser">باز کردن در مرورگر</string>
     <string name="sources_management_report_issue">گزارش مشکل</string>
     <string name="sources_management_failed_to_open_url">بازکردن نشانی اینترنتی ناموفق بود</string>
+    <string name="sources_apps">برنامه‌ها</string>
+    <string name="sources_apps_description">برای خارج کردن یک برنامه از این منبع یا بازگرداندن آن، روی آن ضربه بزنید؛ برای انتخاب چند مورد، فشار طولانی دهید. وقتی هیچ منبعی برنامه‌ای ارائه ندهد، آن برنامه از صفحه‌ی اصلی خارج می‌شود</string>
+    <string name="sources_apps_brought">ارائه‌شده توسط این منبع</string>
+    <string name="sources_apps_left_out">کنار گذاشته‌شده از این منبع</string>
+    <string name="sources_apps_leave_out">کنار بگذار</string>
+    <string name="sources_apps_leave_out_done">کنار گذاشته شد</string>
+    <string name="sources_apps_bring_back">بازگردان</string>
     <string name="sources_management_prerelease_toggle">پچ‌های پیش‌انتشار</string>
     <string name="sources_management_prerelease_toggle_description">دسترسی زودهنگام به نسخه‌های آزمایشی جدید پچ را فراهم می‌کند</string>
     <string name="sources_prerelease_warning_title">پچ‌های پیش‌انتشار فعال شوند؟</string>
@@ -168,17 +191,25 @@
     <string name="sources_dialog_duplicate_name_error">یک منبع پچ با این نام قبلا وجود دارد</string>
     <string name="sources_dialog_missing_error">نتوانستم منبع این پچ را به روزرسانی کنم</string>
     <string name="sources_dialog_add_source">افزودن منبع پچ</string>
+    <string name="sources_dialog_delete_confirm_body">این عمل قابل بازگشت نیست</string>
     <string name="sources_dialog_remote">از راه دور</string>
     <string name="sources_dialog_remote_url">آدرس منبع</string>
+    <string name="sources_dialog_remote_url_hint">یک مخزن یا پیوندی به باندل وصله‌ی .json. چند مورد را یکجا جایگذاری کنید تا همه اضافه شوند</string>
+    <string name="sources_dialog_paste_no_links">هیچ پیوندی در کلیپ‌بورد یافت نشد</string>
     <string name="sources_dialog_local">محلی</string>
+    <string name="sources_dialog_local_files">انتخاب فایل‌های منبع وصله</string>
     <!-- Button under the files already picked, which opens the picker again -->
+    <string name="sources_dialog_local_add_more">افزودن فایل‌های بیشتر</string>
     <string name="sources_dialog_local_file_tap_hint">برای مرور حافظه، ضربه بزنید</string>
     <string name="sources_dialog_local_invalid_extension">فایل باید پسوند .mpp داشته باشد</string>
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
+    <string name="sources_dialog_local_updates">به‌روزرسانی %s</string>
     <string name="sources_dialog_url_valid">نشانی اینترنتی معتبر مخزن یا JSON</string>
     <string name="sources_dialog_url_invalid">نشانی اینترنتی باید به یک مخزن GitHub/GitLab یا فایل .json اشاره کند</string>
     <string name="sources_dialog_preinstalled">پیش نصب شده</string>
     <string name="sources_dialog_community">پچ‌های جامعه</string>
+    <string name="sources_dialog_choose_apps">انتخاب برنامه‌ها</string>
+    <string name="sources_dialog_choose_apps_description">انتخاب کنید کدام‌یک از برنامه‌هایش پس از بارگذاری منبع نگه داشته شوند</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">منابع پچ شخص ثالث</string>
     <string name="sources_dialog_community_notice_message">"منابع پچ جامعه توسط سازندگان خودشان ایجاد و نگهداری می‌شوند. Morphe پچ‌های شخص ثالث را بررسی یا تأیید نمی‌کند و در قبال محتوای آن‌ها یا کاری که روی دستگاه شما انجام می‌دهند مسئول نیست.
@@ -205,6 +236,7 @@
     <string name="home_apk_helper_title">دانلود با برنامهٔ کمکی</string>
     <string name="home_apk_helper_description">Morphe از برنامهٔ کمکی زیر می‌خواهد APK اصلی را دانلود کرده و فایل را تحویل دهد</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
+    <string name="home_apk_helper_continue">باز کردن برنامه‌ی کمکی</string>
     <string name="home_apk_helper_warning">فقط در صورتی ادامه دهید که به این برنامهٔ کمکی اعتماد دارید. Morphe بسته، نسخه و امضای هر چیزی را که دریافت می‌کند پیش از پچ‌کردن بررسی می‌کند</string>
     <string name="home_apk_helper_warning_unverified">فقط در صورتی ادامه دهید که به این برنامهٔ کمکی اعتماد دارید. Morphe نمی‌تواند امضای این APK را تأیید کند؛ بنابراین فایل تغییریافته شناسایی نمی‌شود</string>
     <string name="home_apk_helper_no_result">برنامهٔ کمکی هیچ APKای برنگرداند</string>
@@ -247,6 +279,8 @@
     <string name="home_download_instructions_step4_mount">پس از نصب APK اصلی، به Morphe بازگردید</string>
     <string name="home_download_instructions_continue_to">ادامه به %s</string>
     <string name="home_download_instructions_destination">صفحهٔ دانلود</string>
+    <string name="home_download_instructions_copy_link">کپی پیوند</string>
+    <string name="home_download_instructions_link_copied">پیوند کپی شد</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">انتخاب APK دانلود شده</string>
     <string name="home_file_picker_prompt_description">فایل APK &lt;b&gt;%s&lt;/b&gt; را که همین حالا دانلود کرده‌اید انتخاب کنید</string>
@@ -258,15 +292,14 @@
     <string name="home_use_installed_app">استفاده از برنامهٔ نصب‌شده</string>
     <string name="home_installed_app_picker_title">برنامه‌های نصب‌شده</string>
     <string name="home_installed_app_picker_empty">برنامه‌ای پیدا نشد</string>
-    <string name="home_installed_app_picker_filter_all">همهٔ برنامه‌ها</string>
     <string name="home_installed_app_picker_filter_user">فقط برنامه‌های کاربر</string>
     <string name="home_installed_app_picker_filter_system">فقط برنامه‌های سیستمی</string>
     <string name="home_invalid_apk_unreadable">فایل خوانده نشد. بررسی کنید «حافظهٔ خارجی» مشمول محدودیت باتری نباشد</string>
     <string name="home_invalid_apk_not_an_apk">فایل انتخاب‌شده یک APK معتبر نیست</string>
+    <string name="home_invalid_apk_already_patched">APK انتخابی قبلاً وصله شده است. به‌جای آن برنامه‌ی اصلی را انتخاب کنید</string>
     <string name="home_invalid_apk_io_error">باز کردن فایل ناموفق بود. لطفاً دوباره تلاش کنید</string>
     <string name="home_external_apk_expert_mode_required">این ویژگی فقط در حالت حرفه‌ای در دسترس است</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">حالت متخصص</string>
     <string name="expert_mode_search">جستجوی پچ ها</string>
     <string name="expert_mode_disable_all">غیرفعال کردن همه</string>
     <string name="expert_mode_disable_all_done">همهٔ پچ‌ها غیرفعال شدند</string>
@@ -329,6 +362,7 @@
     <string name="home_low_disk_space_dialog_message">فقط %1$s گیگابایت فضای ذخیره‌سازی آزاد است. پچ‌کردن برای عملکرد صحیح دست‌کم به %2$s گیگابایت فضای آزاد نیاز دارد</string>
     <string name="home_low_disk_space_dialog_warning">ادامه ممکن است باعث ایجاد خطای «فایل پیدا نشد» یا تولید APK خراب شود</string>
     <string name="home_simple_bundle_select_title">انتخاب منبع پچ</string>
+    <string name="home_simple_bundle_select_remember">همیشه از این منبع برای این برنامه استفاده کنید</string>
     <!-- Color picker -->
     <string name="custom_color">رنگ سفارشی</string>
     <string name="hex_color">رنگ شش ضلعی </string>
@@ -346,14 +380,20 @@
     <string name="patch_option_list_empty">مقدار نمی‌تواند خالی باشد</string>
     <string name="patch_option_required_missing">%s: همهٔ گزینه‌های لازم را تکمیل کنید</string>
     <!-- Badge on a patch option whose value differs from the patch's own, which resets it when tapped -->
+    <string name="patch_option_changed">تغییر کرده</string>
     <!-- Badge on a patch option that has to be filled in before patching -->
+    <string name="patch_option_required">الزامی</string>
     <!-- Hint under an image patch option. "%1$s" is the width and "%2$s" the height in pixels -->
+    <string name="patch_option_recommended_size">پیشنهادی: %1$s×%2$s</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">ایجاد آیکون تطبیقی</string>
     <string name="adaptive_icon_select_image">یک تصویر انتخاب کنید</string>
     <string name="adaptive_icon_change_image">تغییر تصویر</string>
+    <string name="image_load_failed">امکان بارگذاری این تصویر وجود نداشت</string>
     <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
+    <string name="adaptive_icon_foreground">تصویر پیش‌زمینه</string>
     <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <string name="adaptive_icon_launcher">آیکون برنامه</string>
     <string name="adaptive_icon_background_color">رنگ پس‌زمینه</string>
     <string name="adaptive_icon_reset_transform">بازنشانی موقعیت و مقیاس</string>
     <string name="adaptive_icon_safe_zone_inner">ناحیه امن (همیشه قابل مشاهده)</string>
@@ -405,6 +445,8 @@
     <string name="batch_patch_source_file">فایل پیوست‌شده</string>
     <string name="batch_patch_source_unavailable">APK آماده نشد</string>
     <string name="batch_patch_force_version">به‌هرحال پچ کن</string>
+    <string name="batch_patch_force_version_done">به‌هرحال در صف قرار گرفت؛ ممکن است برنامه از کار بیفتد</string>
+    <string name="batch_patch_accept_signature_done">به‌هرحال در صف قرار گرفت؛ APK تأیید نشده است</string>
     <string name="batch_patch_edit_patches">انتخاب پچ‌ها</string>
     <string name="batch_patch_state_no_apk">بدون APK</string>
     <string name="batch_patch_state_no_patches">بدون پچ</string>
@@ -454,8 +496,18 @@
     <string name="home_app_info_app_deleted_warning">برنامه حذف شده است</string>
     <string name="home_app_info_app_deleted_description">این برنامه خارج از Morphe حذف شده است. برای بازگرداندن عملکرد، آن را دوباره پچ کنید</string>
     <string name="home_app_info_not_patched_description">نسخهٔ پچ‌نشدهٔ این برنامه نصب است. Morphe همچنان سابقهٔ پچ قبلی آن را دارد</string>
-    <string name="app_links_badge_enabled">فعال</string>
-    <string name="app_links_badge_disabled">غیرفعال</string>
+    <string name="app_links_title">پیوندهای وب پشتیبانی‌شده</string>
+    <string name="app_links_description">در اندروید ۱۲ به بعد، پیوندهای دامنه‌های پشتیبانی‌شده به‌طور پیش‌فرض در مرورگر شما باز می‌شوند، مگر اینکه تأیید شده باشند</string>
+    <string name="app_links_unverified_banner_title">پیوندهای وب تأییدنشده</string>
+    <string name="app_links_unverified_banner_description">پیوندهای وب پشتیبانی‌شده در حال حاضر به‌جای این برنامه در مرورگر شما باز می‌شوند</string>
+    <string name="app_links_enable_auto">فعال‌سازی خودکار</string>
+    <string name="app_links_enable_auto_in_progress">در حال فعال‌سازی پیوندها…</string>
+    <string name="app_links_open_settings">باز کردن تنظیمات پیوندها</string>
+    <string name="app_links_repair_success">پیوندهای برنامه با موفقیت فعال شدند</string>
+    <string name="app_links_repair_failed">فعال‌سازی خودکار پیوندهای برنامه ناموفق بود</string>
+    <string name="app_links_all_verified">همه پیوندهای پشتیبانی‌شده برای باز شدن در این برنامه تنظیم شده‌اند</string>
+    <string name="app_links_fix">اصلاح پیوندها</string>
+    <string name="configure">پیکربندی</string>
     <string name="patcher_rename_title">یک نسخهٔ کلون نصب می‌شود</string>
     <string name="patcher_rename_description">پچ‌ها این برنامه را با نام بستهٔ مخصوص خود ساخته‌اند؛ بنابراین نصب آن، نسخه‌ای کلون را در کنار &lt;b&gt;%s&lt;/b&gt; اضافه می‌کند، نه اینکه آن را به‌روزرسانی کند</string>
     <string name="patcher_rename_result_package">با این نام نصب می‌شود</string>
@@ -486,7 +538,6 @@
     <string name="patcher_field_source">منبع</string>
     <string name="patcher_field_split">APK تکه‌ای</string>
     <string name="patcher_field_manager">مدیر</string>
-    <string name="patcher_field_patcher">پچر</string>
     <string name="patcher_field_runtime">زمان اجرا</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">کتابخانه‌ها</string>
@@ -520,6 +571,8 @@
     <string name="patcher_complete_title">پچ‌کردن کامل شد! ✨</string>
     <string name="patcher_failed_title">اوه، مشکلی پیش آمد</string>
     <string name="patcher_failed_dialog_title">پچ‌کردن ناموفق بود</string>
+    <string name="patcher_error_details">جزئیات خطا</string>
+    <string name="patcher_change_patches">تغییر وصله‌ها</string>
     <string name="patcher_unknown_error">خطای ناشناخته‌ای رخ داد</string>
     <string name="patcher_split_step_extracting">در حال استخراج APKهای تکه‌ای</string>
     <string name="patcher_split_step_merging">در حال ادغام %s</string>
@@ -539,6 +592,7 @@
     <string name="patcher_back_to_game_hint">برای بازگشت به بازی، %1$s را بزنید</string>
     <string name="patcher_storage_permission_dialog_title">دسترسی به مسیر ذخیره‌سازی ممکن نیست</string>
     <string name="patcher_incompatible_patcher_title">به‌روزرسانی لازم است</string>
+    <string name="patcher_incompatible_patcher_description">منبع &lt;b&gt;%1$s&lt;/b&gt; به وصله‌کننده‌ی &lt;b&gt;%2$s&lt;/b&gt; یا جدیدتر نیاز دارد. برای استفاده از آن، Morphe را به‌روزرسانی کنید</string>
     <string name="patcher_storage_permission_description_api30">یک یا چند گزینهٔ پچ به مسیرهایی اشاره می‌کنند که Morphe نمی‌تواند بخواند. دسترسی ذخیره‌سازی را اعطا کنید و دکمه را بزنید؛ سپس پچ‌کردن خودکار شروع می‌شود</string>
     <string name="patcher_storage_permission_description_legacy">یک یا چند گزینهٔ پچ به مسیرهایی اشاره می‌کنند که قابل دسترسی نیستند. مسیرها را در گزینه‌های پچ به‌روز و دوباره تلاش کنید</string>
     <string name="patcher_storage_permission_grant">اعطای مجوز ذخیره‌سازی</string>
@@ -546,15 +600,19 @@
     <string name="patcher_storage_permission_open_settings">باز کردن تنظیمات ذخیره‌سازی</string>
     <string name="patcher_storage_badge_denied">مجوز رد شد</string>
     <string name="patcher_storage_badge_missing">پیدا نشد</string>
+    <string name="batch_patch_option_paths_skipped">فایل‌های گزینه‌های وصله موجود نیستند و نادیده گرفته می‌شوند: %1$s</string>
     <string name="patcher_missing_patches_title">بعضی از وصله‌ها از بین رفته‌اند</string>
+    <string name="patcher_missing_patches_description">انتخاب ذخیره‌شده برای این برنامه وصله‌هایی را فهرست می‌کند که هیچ منبع فعالی دیگر ارائه نمی‌دهد. ادامه دادن، برنامه را بدون آن‌ها وصله می‌کند</string>
     <string name="patcher_missing_patches_label">دیگر پیشنهاد نمی‌شود</string>
+    <string name="patcher_option_paths_gone_title">فایل‌های گزینه‌های وصله موجود نیستند</string>
+    <string name="patcher_option_paths_gone_description">یک یا چند گزینه‌ی وصله به فایل‌هایی اشاره می‌کنند که دیگر وجود ندارند. مسیرها را حذف کنید تا بدون آن‌ها وصله کنید، یا فایل‌ها را به جایشان برگردانید و دوباره تلاش کنید</string>
+    <string name="patcher_option_paths_clear">حذف مسیرها و ادامه</string>
     <string name="patcher_storage_permission_hint">نکته: فایل‌ها را به /Android/data/app.morphe.manager/files/ منتقل کنید؛ مجوز اضافی لازم نیست</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">در حال آماده‌سازی</string>
     <string name="patcher_step_load_patches">در حال بارگذاری پچ‌ها</string>
     <string name="patcher_step_prepare_split_apk">در حال ادغام APK تکه‌ای</string>
     <string name="patcher_step_unpack">در حال خواندن فایل APK</string>
-    <string name="patcher_step_group_patching">در حال پچ‌کردن</string>
     <string name="patcher_step_group_saving">در حال ذخیره‌سازی</string>
     <string name="patcher_step_write_patched">در حال نوشتن فایل APK پچ‌شده</string>
     <string name="patcher_step_sign_apk">در حال امضای فایل APK پچ‌شده</string>
@@ -635,6 +693,8 @@
     <string name="mini_game_try_again">دوباره تلاش کنید</string>
     <string name="mini_game_paused">متوقف‌شده</string>
     <string name="mini_game_resume">ادامه</string>
+    <string name="mini_game_restart">شروع دوباره</string>
+    <string name="mini_game_change">انتخاب بازی دیگر</string>
     <string name="mini_game_2048_picker_subtitle">مهره‌ها را بلغزانید تا ادغام شوند</string>
     <string name="mini_game_flappy_picker_subtitle">برای پرواز از میان لوله‌ها ضربه بزنید</string>
     <string name="mini_game_flappy_tap_to_start">برای پرواز ضربه بزنید</string>
@@ -654,6 +714,7 @@
     <string name="system">سیستم</string>
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background">انیمیشن پس‌زمینه</string>
+    <string name="settings_appearance_background_description">انیمیشنی که پشت صفحه‌های برنامه پخش می‌شود</string>
     <string name="settings_appearance_background_circles">دایره‌ها</string>
     <string name="settings_appearance_background_rings">حلقه‌ها</string>
     <string name="settings_appearance_background_mesh">توری</string>
@@ -662,6 +723,9 @@
     <string name="settings_appearance_background_snow">برف</string>
     <string name="settings_appearance_background_grid">شبکه</string>
     <string name="settings_appearance_background_particles">ذرات</string>
+    <string name="settings_appearance_background_lava">چراغ گدازه</string>
+    <string name="settings_appearance_background_halloween">هالووین</string>
+    <string name="settings_appearance_background_fireworks">آتش‌بازی</string>
     <string name="settings_appearance_background_none">هیچ‌کدام</string>
     <string name="settings_appearance_background_random">تصادفی</string>
     <string name="settings_appearance_background_random_interval_launch">هنگام اجرا</string>
@@ -669,7 +733,10 @@
     <string name="settings_appearance_background_random_interval_3days">هر ۳ روز</string>
     <string name="settings_appearance_parallax_effect">افکت پارالاکس</string>
     <string name="settings_appearance_parallax_effect_description">جابجایی نرم پس‌زمینه هنگام کج‌کردن دستگاه</string>
+    <string name="settings_appearance_seasonal_themes">تم‌های فصلی</string>
+    <string name="settings_appearance_seasonal_themes_description">پس‌زمینه‌های جشن و تبریک‌ها در ایام تعطیلات</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">هنگامی که تم‌های فصلی فعال باشند، پس‌زمینه‌ی %1$s تا %2$s روشن می‌ماند</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">پوسته</string>
     <string name="settings_appearance_theme_mode">حالت پوسته</string>
@@ -683,6 +750,10 @@
     <string name="settings_appearance_accent_color">رنگ تأکیدی</string>
     <string name="settings_appearance_pure_black">سیاه خالص</string>
     <string name="settings_appearance_pure_black_description">از پس‌زمینه‌های کاملاً سیاه استفاده می‌کند</string>
+    <string name="settings_appearance_color_accents">رنگ‌های برنامه و منبع</string>
+    <string name="settings_appearance_color_accents_description">به‌جای رنگ تأکیدی، از رنگ خودِ هر برنامه و منبع استفاده می‌کند</string>
+    <string name="settings_appearance_outlines">خطوط دور</string>
+    <string name="settings_appearance_outlines_description">یک لبه‌ی نازک دور کارت‌ها، پنل‌ها و دکمه‌ها می‌کشد</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_language_and_display">زبان و نمایش</string>
     <string name="settings_appearance_app_language">زبان برنامه</string>
@@ -701,7 +772,9 @@
     <string name="settings_appearance_greeting_phrases">عبارت‌های خوشامدگویی</string>
     <string name="settings_appearance_greeting_phrases_subtitle">نمایش پیام خوشامدگویی در صفحهٔ اصلی</string>
     <string name="settings_appearance_app_grouping">گروه‌بندی برنامه‌ها</string>
+    <string name="settings_appearance_app_grouping_description">نمایش سوئیچر برای گروه‌بندی برنامه‌ها بر اساس منبع یا دسته</string>
     <string name="settings_appearance_repatch_notice">اعلان پچ دوباره</string>
+    <string name="settings_appearance_repatch_notice_description">نمایش بنر هنگام قابل وصله‌شدن دوباره برنامه‌های وصله‌شده</string>
     <string name="settings_appearance_sort_button">دکمهٔ مرتب‌سازی و فیلتر</string>
     <string name="settings_appearance_sort_button_description">دکمهٔ مرتب‌سازی و فیلتر را در صفحهٔ اصلی نشان می‌دهد</string>
     <string name="settings_appearance_app_card_colors">رنگ کارت برنامه‌ها</string>
@@ -721,13 +794,28 @@
     <string name="settings_appearance_app_card_colors_bundle_description">رنگ ویژهٔ هر برنامه را اینجا استفاده می‌کند و برای هماهنگی، به‌طور خودکار سایه می‌دهد</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">آیکون برنامه</string>
+    <string name="settings_appearance_app_icon_selector_description">ظاهر Morphe در صفحه‌ی اصلی و کشوی برنامه‌ها</string>
     <string name="settings_appearance_app_icon_default">پیش‌فرض</string>
     <string name="settings_appearance_app_icon_light_2">آسمان</string>
     <string name="settings_appearance_app_icon_light_3">غروب</string>
+    <string name="settings_appearance_app_icon_light_4">اسطوخودوس</string>
+    <string name="settings_appearance_app_icon_light_5">یخچالی</string>
+    <string name="settings_appearance_app_icon_light_6">مه</string>
+    <string name="settings_appearance_app_icon_light_7">شنی</string>
+    <string name="settings_appearance_app_icon_dark_1">سبزآبی</string>
     <string name="settings_appearance_app_icon_dark_2">خلأ</string>
+    <string name="settings_appearance_app_icon_dark_3">آلویی</string>
+    <string name="settings_appearance_app_icon_dark_4">نیمه‌شب</string>
+    <string name="settings_appearance_app_icon_dark_5">سربی</string>
+    <string name="settings_appearance_app_icon_accent_1">شفق</string>
+    <string name="settings_appearance_app_icon_accent_2">جوهری</string>
+    <string name="settings_appearance_app_icon_accent_3">کاغذی</string>
+    <string name="settings_appearance_app_icon_accent_4">غروب</string>
     <string name="settings_appearance_app_icon_background">پس‌زمینه</string>
+    <string name="settings_appearance_app_icon_mark">لوگو</string>
     <string name="settings_appearance_app_icon_mark_color">رنگی</string>
     <string name="settings_appearance_app_icon_mark_white">سفید</string>
+    <string name="settings_appearance_app_icon_mark_black">سیاه</string>
     <string name="settings_appearance_app_icon_change_dialog_title">آیکون برنامه تغییر کند؟</string>
     <string name="settings_appearance_app_icon_change_dialog_message">به &lt;b&gt;%s&lt;/b&gt; تغییر کند و دوباره راه‌اندازی شود؟</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -748,6 +836,8 @@
     <string name="settings_advanced_updates_background_notifications">اعلان‌های به‌روزرسانی در پس‌زمینه</string>
     <string name="settings_advanced_updates_background_notifications_description">به‌طور دوره‌ای در پس‌زمینه به‌روزرسانی‌ها را بررسی و هنگام در دسترس بودن اعلان می‌دهد</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">اعلان‌های فشاری برای نسخه‌های جدید، حتی وقتی برنامه بسته است</string>
+    <string name="settings_system_notifications_categories">دسته‌های اعلان</string>
+    <string name="settings_system_notifications_categories_description">در تنظیمات سیستم انتخاب کنید کدام به‌روزرسانی‌ها به شما اعلان دهند</string>
     <string name="settings_advanced_update_interval">دفعات بررسی</string>
     <string name="settings_advanced_update_interval_dialog_title">بررسی به‌روزرسانی‌ها</string>
     <string name="settings_advanced_update_interval_hourly">هر ساعت یک‌بار</string>
@@ -757,19 +847,22 @@
     <string name="settings_advanced_update_interval_chip_subtitle">دفعات بررسی در پس‌زمینه</string>
     <string name="settings_advanced_update_interval_battery_warning">بررسی‌های پس‌زمینه ممکن است در بعضی دستگاه‌ها قابل اعتماد نباشند. سازندگانی مانند Xiaomi، Huawei، Samsung و OnePlus معمولاً برای صرفه‌جویی در باتری، فرایندهای پس‌زمینه را به‌شدت محدود می‌کنند</string>
     <string name="settings_advanced_external_batch_patch">اجازهٔ محرک‌های خارجی</string>
+    <string name="settings_advanced_external_batch_patch_description">به برنامه‌های اتوماسیون اجازه می‌دهد وصله‌ی دسته‌ای را از طریق یک intent شروع کنند</string>
     <string name="external_batch_patch_title">پچ‌کردن گروهی شروع شود؟</string>
     <string name="external_batch_patch_description">%s می‌خواهد برنامه‌ها را با Morphe پچ و نصب کند</string>
     <string name="external_batch_patch_trust_caller">همیشه به این برنامه اجازه بده</string>
     <string name="external_batch_patch_unknown_caller">یک برنامهٔ ناشناس</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">به‌روزرسانی Morphe در دسترس است</string>
     <string name="notification_bundle_update_title">پچ‌های جدید در دسترس‌اند</string>
     <string name="notification_update_text">نسخهٔ %s آمادهٔ دانلود است</string>
     <string name="notification_bundle_update_text_unversioned">برای بازکردن Morphe و به‌روزرسانی، ضربه بزنید</string>
     <string name="notification_permission_dialog_title">اجازهٔ اعلان‌ها</string>
     <string name="notification_permission_dialog_description">Morphe برای اطلاع‌دادن هنگام در دسترس بودن به‌روزرسانی‌ها در پس‌زمینه، به مجوز اعلان نیاز دارد</string>
     <string name="notification_post_patch_dialog_title">می‌خواهید هنگام در دسترس بودن به‌روزرسانی‌ها به شما اطلاع داده شود؟</string>
-    <string name="notification_channel_patcher">پچ‌کردن</string>
+    <string name="notification_channel_manager_updates">به‌روزرسانی‌های Morphe</string>
+    <string name="notification_channel_manager_updates_description">اعلان‌های مربوط به نسخه‌های جدید Morphe</string>
+    <string name="notification_channel_patch_updates">به‌روزرسانی وصله‌ها</string>
+    <string name="notification_channel_patch_updates_description">اعلان‌های مربوط به نسخه‌های جدید وصله</string>
     <string name="notification_channel_patcher_description">وقتی Morphe برنامه‌ای را در پس‌زمینه پچ می‌کند نمایش داده می‌شود</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">تنظیمات حرفه‌ای</string>
@@ -784,7 +877,10 @@
     <string name="settings_advanced_github_pat_configured">توکن پیکربندی شد</string>
     <string name="settings_advanced_github_pat_how_to_get">نحوهٔ دریافت توکن</string>
     <!-- "%s" is "GitHub Personal Access Token", kept in English because GitHub has no localized UI -->
+    <string name="settings_advanced_github_pat_dialog_title">تنظیم %s</string>
     <!-- "%3$s" is "GitHub Personal Access Token", "%2$s" is the GitHub scope name and "%1$s" is the GitHub website. "PAT" is its abbreviation, keep it in English -->
+    <string name="settings_advanced_github_pat_dialog_description">"برای اینکه بتوانید درخواست‌های کشش را به‌عنوان منابع خارجی اضافه کنید، یک %3$s تنظیم کنید. یک PAT با scope %2$s در
+%1$s ایجاد کنید"</string>
     <string name="settings_advanced_github_pat_export_include_label">گنجاندن در خروجی تنظیمات</string>
     <!-- "PAT" is a GitHub Personal Access Token, keep it in English because GitHub has no localized UI -->
     <string name="settings_advanced_github_pat_export_include_supporting">این PAT را به تنظیمات خروجی Morphe اضافه می‌کند</string>
@@ -804,7 +900,10 @@
     <string name="settings_advanced_patch_options_custom_branding_description">نام نمایشی برنامه را تغییر می‌دهد</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">نام برنامه</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">نام سفارشی را وارد کنید</string>
+    <string name="settings_advanced_patch_options_path_gone">این پوشه دیگر قابل خواندن نیست. دوباره آن را انتخاب کنید یا پاکش کنید، وگرنه وصله‌کردن متوقف می‌شود و درباره‌ی آن می‌پرسد</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">آیکون برنامه</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">آیکونی که برنامه با آن وصله می‌شود. همچنین در جاهایی استفاده می‌شود که برنامه نتواند بعداً آن را تغییر دهد، مانند Android Auto و فهرست برنامه‌ها در تنظیمات سیستم</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">آیکون سفارشی برنامه به پوشه‌ای شامل تصاویر آیکون نیاز دارد</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">آیکون سفارشی</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"پوشه‌ای با تصاویری که به‌عنوان آیکون سفارشی استفاده می‌شوند.
 
@@ -944,6 +1043,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_memory_limit_description">محدودیت‌های بالاتر، پچ‌کردن را در دستگاه‌های توانمند سریع‌تر می‌کنند</string>
     <string name="settings_system_process_runtime_enable">فعال‌کردن زمان اجرای فرایند</string>
     <string name="settings_system_memory_limit_subtitle">حافظهٔ در دسترس برای پچ‌کردن</string>
+    <string name="settings_system_process_runtime_heap_limit_ignored">این دستگاه در آخرین اجرا حد حافظه را نادیده گرفت، بنابراین وصله‌کردن ممکن است به اجرای داخل Morphe بازگردد</string>
     <string name="settings_system_memory_limit_warning">محدودیت کم حافظه ممکن است هنگام پچ‌کردن برنامه‌های بزرگ‌تر باعث شکست شود</string>
     <string name="settings_system_memory_limit_high_warning">محدودیت زیاد حافظه ممکن است در بعضی دستگاه‌ها پچ‌کردن را بسیار کند کند. فقط اگر پچ‌کردن با مقادیر کمتر همچنان شکست می‌خورد، آن را افزایش دهید</string>
     <string name="settings_system_process_runtime_enabled_description">محدودیت %s مگابایت</string>
@@ -964,6 +1064,20 @@ morphe_header_custom_dark.png
     <string name="settings_system_notifications_ringtone_picker_title">انتخاب آهنگ</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">واردکردن و خروجی‌گرفتن</string>
+    <string name="settings_system_signing_key">کلید امضا</string>
+    <string name="settings_system_signing_key_description">کلیدی را که برنامه‌های وصله‌شده‌ی شما با آن امضا می‌شوند، پشتیبان‌گیری و بازیابی می‌کند</string>
+    <string name="settings_system_signing_key_dialog_description">هر برنامه‌ای که Morphe وصله می‌کند با این کلید امضا می‌شود. یک کپی نگه دارید: بدون آن، برنامه‌های وصله‌شده فقط پس از حذف نصب می‌توانند به‌روزرسانی شوند</string>
+    <string name="settings_system_signing_key_missing">Morphe با اولین وصله‌ی شما یکی می‌سازد</string>
+    <string name="settings_system_signing_key_created">ایجادشده در %s</string>
+    <string name="settings_system_signing_key_fingerprint">اثر انگشت SHA-256</string>
+    <string name="settings_system_backup_appearance_description">پوسته، رنگ‌ها و زبان</string>
+    <string name="settings_system_backup_home_description">گروه‌ها، برنامه‌های مخفی، مرتب‌سازی و سوئیچ‌ها</string>
+    <string name="settings_system_backup_patching">وصله‌کردن و نصب</string>
+    <string name="settings_system_backup_patching_description">نصب‌کننده، وصله‌کننده و APKهای ذخیره‌شده</string>
+    <string name="settings_system_backup_updates_description">پیش‌انتشارها و بررسی‌های به‌روزرسانی</string>
+    <string name="settings_system_backup_sources_description">منابع سفارشی و توکن GitHub</string>
+    <string name="settings_system_backup_patch_selections_description">وصله‌های انتخاب‌شده برای هر برنامه</string>
+    <string name="settings_system_backup_signing_key_note">کلید امضا به‌طور جداگانه پشتیبان‌گیری می‌شود</string>
     <string name="settings_system_import_keystore_dialog_title">ورود اطلاعات مخزن کلید</string>
     <string name="settings_system_import_keystore_dialog_description">برای واردکردن مخزن کلید، باید اطلاعات آن را وارد کنید</string>
     <string name="settings_system_import_keystore_dialog_alias_field">نام کاربری (نام مستعار)</string>
@@ -1043,6 +1157,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_empty">هیچ APK اصلی ذخیره نشده است</string>
     <string name="settings_system_original_apks_deleted">APK اصلی با موفقیت حذف شد</string>
     <string name="settings_system_original_apks_delete_title">APK اصلی حذف شود؟</string>
+    <string name="settings_system_original_apks_delete_notice">بدون ارائه‌ی یک APK جدید نمی‌توانید دوباره وصله کنید</string>
     <string name="settings_system_original_apks_delete_all_title">همهٔ APKهای اصلی حذف شوند؟</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">انتخاب‌های پچ</string>
@@ -1075,12 +1190,18 @@ morphe_header_custom_dark.png
     <string name="settings_system_custom_file_picker_description">به‌جای انتخابگر پیش‌فرض سیستم، ذخیره‌سازی را با انتخابگر فایل داخلی Morphe مرور کنید</string>
     <!-- Settings - System Tab - APK download helper -->
     <string name="settings_system_apk_download_helper">برنامهٔ کمکی دانلود APK</string>
+    <string name="settings_system_apk_download_helper_trusted_count">مورد اعتماد: %1$d از %2$d</string>
+    <string name="settings_system_apk_download_helper_dialog_description">برنامه‌های کمکی می‌توانند APKهای اصلی را برای شما دانلود کنند. فقط آن‌هایی که در اینجا به آن‌ها اعتماد دارید در دستورالعمل‌های دانلود ارائه می‌شوند</string>
+    <string name="settings_system_apk_download_helper_warning">APK از برنامه‌ی کمکی می‌آید، پس فقط به برنامه‌هایی که می‌شناسید اعتماد کنید. Morphe همچنان بسته، نسخه و امضای هر فایل را قبل از وصله‌کردن بررسی می‌کند</string>
+    <string name="settings_system_apk_download_helper_installed_by">نصب‌شده توسط %s</string>
+    <string name="settings_system_apk_download_helper_installed_by_unknown">نصب‌کننده ناشناس</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">اینجا فایلی نیست</string>
     <string name="file_picker_read_error">خواندن این پوشه ممکن نیست</string>
     <string name="file_picker_internal_storage">حافظهٔ داخلی</string>
     <string name="file_picker_sd_card">کارت SD</string>
     <string name="file_picker_root">ریشه (/) </string>
+    <string name="file_picker_storages">حافظه‌ها</string>
     <string name="file_picker_sort_name_asc">نام (A–Z)</string>
     <string name="file_picker_sort_name_desc">نام (Z–A)</string>
     <string name="file_picker_sort_size_desc">اندازه (بزرگ‌ترین ابتدا)</string>
@@ -1107,6 +1228,7 @@ morphe_header_custom_dark.png
     <string name="easter_egg_pill_blue_toast_again">از ماتریکس جدا شدید. راه برگشت همان‌جایی است که همیشه بود</string>
     <!-- Shared strings -->
     <string name="select_file">انتخاب فایل</string>
+    <string name="select_files">انتخاب فایل‌ها</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="select_folder">انتخاب پوشه</string>
     <string name="patches">پچ‌ها</string>
@@ -1134,6 +1256,7 @@ morphe_header_custom_dark.png
     <string name="done">انجام شد</string>
     <string name="skip">رد کردن</string>
     <string name="clear">پاک‌کردن</string>
+    <string name="paste">جایگذاری</string>
     <string name="delete">حذف</string>
     <string name="delete_all">حذف همه</string>
     <string name="remove">حذف</string>
@@ -1222,29 +1345,46 @@ morphe_header_custom_dark.png
     <string name="changelog_for_app">تغییرات %s</string>
     <string name="changelog_general_changes">تغییرات کلی</string>
     <string name="whats_new">چه خبر؟</string>
+    <string name="changelog_description">تازه‌های این نسخه</string>
     <string name="changelog_download_fail">دانلود تغییرات نسخه ناموفق بود: %s</string>
     <string name="changelog_empty">تغییراتی در دسترس نیست</string>
+    <string name="changelog_earlier_releases">نسخه‌های قبلی</string>
+    <string name="changelog_patched_with">وصله‌شده با %s</string>
     <string name="changelog_older_empty">نسخهٔ قدیمی‌تری برای نمایش نیست</string>
+    <string name="changelog_older_failed">بارگذاری نسخه‌های قدیمی‌تر ممکن نشد</string>
     <!-- Label of a footer button beside "Translate". Keep it short, a longer one moves the buttons onto two rows -->
+    <string name="changelog_release_page">صفحه انتشار</string>
     <string name="content_translate">ترجمه</string>
     <!-- Label of a footer button beside other buttons, which reads "Translate" until pressed. Keep it as short as "Translate", a longer one moves the buttons onto two rows -->
     <string name="content_show_original">اصلی</string>
+    <string name="content_translation_failed">ترجمه انجام نشد: %s</string>
     <string name="changelog_section_new">جدید</string>
+    <string name="changelog_section_fixes">اصلاحات</string>
+    <string name="changelog_section_performance">عملکرد</string>
+    <string name="changelog_section_improvements">بهبودها</string>
+    <string name="changelog_section_app_support">پشتیبانی برنامه‌ها</string>
+    <string name="changelog_section_other">تغییرات</string>
+    <string name="changelog_badge_latest">جدیدترین</string>
     <!-- Marks the version of a patch source downloaded to the manager, which patches with it rather than the one an installed app was patched with -->
+    <string name="changelog_badge_downloaded">دانلودشده</string>
+    <string name="changelog_badge_prerelease">پیش‌انتشار</string>
     <!-- "%s" is the number of changes in the section -->
+    <string name="changelog_show_all">نمایش همه (%s)</string>
+    <string name="changelog_show_less">نمایش کمتر</string>
     <string name="no_network_toast">اتصال اینترنتی در دسترس نیست</string>
     <string name="update_available">به‌روزرسانی در دسترس است</string>
     <string name="ready_to_install_update">به‌روزرسانی آمادهٔ نصب است</string>
     <string name="update_completed">به‌روزرسانی نصب شد</string>
     <string name="install_update_manager_failed">نصب به‌روزرسانی ناموفق بود</string>
     <string name="installing_manager_update">در حال نصب به‌روزرسانی…</string>
+    <string name="installing_manager_update_hint">Morphe برای تکمیل به‌روزرسانی بسته خواهد شد</string>
     <string name="downloading_manager_update">در حال دانلود به‌روزرسانی…</string>
     <!-- Shown while downloading when the server does not report the total size. "%1$s" is the megabytes so far. -->
     <string name="manager_update_progress_downloaded">%1$s مگابایت دانلود شد</string>
     <!-- Shown under the download percentage. "%1$s" is the megabytes so far, "%2$s" the total. -->
+    <string name="manager_update_progress_size">%1$s / %2$s مگابایت</string>
     <string name="manager_update_not_ready">انتشار این نسخه هنوز در حال انجام است. چند دقیقهٔ دیگر دوباره تلاش کنید</string>
     <string name="update_download_missing">به‌روزرسانی دانلودشده دیگر در دسترس نیست. دوباره آن را دانلود کنید</string>
-    <string name="download_manager_failed">دانلود به‌روزرسانی ناموفق بود: %s</string>
     <string name="failed_to_check_updates">بررسی به‌روزرسانی‌ها ناموفق بود: %s</string>
     <string name="failed_to_download_update">دانلود به‌روزرسانی ناموفق بود: %s</string>
     <string name="download_confirmation_metered">"اکنون از اتصال حجمی استفاده می‌کنید و ممکن است ارائه‌دهندهٔ خدمات از شما هزینهٔ داده دریافت کند.
@@ -1276,4 +1416,5 @@ morphe_header_custom_dark.png
     <!-- Label of a footer button beside "Skip". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="tour_prompt_confirm">راهنما را نشانم بده</string>
     <string name="onboarding_restart_title">تور ویژگی‌ها</string>
+    <string name="onboarding_restart_desc">تور راهنمای ویژگی‌های اصلی</string>
 </resources>
