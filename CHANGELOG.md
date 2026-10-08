@@ -1,3 +1,29 @@
+# [1.35.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.35.0-dev.1...v1.35.0-dev.2) (2026-10-08)
+
+
+### Bug Fixes
+
+* Ease the home list when a card is hidden instead of jumping ([b6bce83](https://github.com/MorpheApp/morphe-manager/commit/b6bce834a089401a401cc5cbaf4400b15730de2a))
+* Return to the flat app list when the grouping switcher is hidden ([892c647](https://github.com/MorpheApp/morphe-manager/commit/892c6478300de4e333474c18a3d3c7d4a5b3e09b))
+* Unmount root mounted apps from every namespace and keep module installs intact ([a55375b](https://github.com/MorpheApp/morphe-manager/commit/a55375b27821c322e80ad9110d26788a37771c5f))
+
+
+### Features
+
+* Fade action labels between steps and simplify the app actions ([efc46c2](https://github.com/MorpheApp/morphe-manager/commit/efc46c23c07ef54610d2f27eb03b75bde3901fcd))
+* Keep the home app filter across launches ([5e1690e](https://github.com/MorpheApp/morphe-manager/commit/5e1690ea578607c901c43f7882245c9053c4773a))
+* Restore root mounts replaced by app updates and show why a mount is off ([02db454](https://github.com/MorpheApp/morphe-manager/commit/02db454fbc1b0a3fa863c150d9aa3b6fda38aa46))
+
+
+### Performance Improvements
+
+* Arrange the home cards without building them again ([2692908](https://github.com/MorpheApp/morphe-manager/commit/269290831cfdfa4f9bb0c8a997ccd9b574c2b86f))
+* Build mini-games on first use and share the split APK archive writer ([9982384](https://github.com/MorpheApp/morphe-manager/commit/99823847534dec22657d5a08cab1c481f4526c31))
+* Build only the home grouping on screen ([3edffbd](https://github.com/MorpheApp/morphe-manager/commit/3edffbdd3a93cec6c7cd64379a45ce616ab22916))
+* Compile the version patterns once and drop unused queries and helpers ([30fb202](https://github.com/MorpheApp/morphe-manager/commit/30fb202f5be32249bd4710282dcd3a70bc6dc7fa))
+* Keep unchanged home cards between builds ([50f39ab](https://github.com/MorpheApp/morphe-manager/commit/50f39abba011e2d4a2a235173a4caa59a607fa8a))
+* Mount through the root shell alone and start restores without waiting ([3d1d560](https://github.com/MorpheApp/morphe-manager/commit/3d1d56092c4f8cc6b3851ae1cf475616d31e7747))
+
 # [1.35.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.34.1-dev.1...v1.35.0-dev.1) (2026-10-07)
 
 
