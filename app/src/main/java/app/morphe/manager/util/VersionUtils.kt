@@ -29,6 +29,10 @@ fun String.normalizeVersion(): String = removePrefix("v").trim()
 /** Adds the conventional display prefix without duplicating one already supplied by the app. */
 fun String.withVersionPrefix(): String = if (startsWith("v")) this else "v$this"
 
+// Compiled once, since versions are compared for every app a source lists
+private val PreReleaseVersion = """^([\d.]+)[-._]?(dev|beta|rc|alpha|preview)""".toRegex(RegexOption.IGNORE_CASE)
+private val SuffixedVersion = """^([\d.]+)(.*)$""".toRegex()
+
 /**
  * Compare two version strings.
  * Returns: -1 if v1 < v2, 0 if v1 == v2, 1 if v1 > v2
@@ -50,15 +54,13 @@ fun compareVersions(v1: String?, v2: String?): Int {
     )
 
     fun extractParts(version: String): VersionParts {
-        val preReleasePattern = """^([\d.]+)[-._]?(dev|beta|rc|alpha|preview)""".toRegex(RegexOption.IGNORE_CASE)
-        val match = preReleasePattern.find(version)
+        val match = PreReleaseVersion.find(version)
 
         return if (match != null) {
             VersionParts(match.groupValues[1], match.groupValues[2])
         } else {
             // Check if version contains non-numeric suffixes without keywords
-            val numericPattern = """^([\d.]+)(.*)$""".toRegex()
-            val numMatch = numericPattern.find(version)
+            val numMatch = SuffixedVersion.find(version)
             if (numMatch != null && numMatch.groupValues[2].isNotEmpty()) {
                 VersionParts(numMatch.groupValues[1], numMatch.groupValues[2])
             } else {

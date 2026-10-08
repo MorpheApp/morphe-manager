@@ -81,12 +81,6 @@ abstract class SelectionDao {
     @Insert
     abstract suspend fun createSelection(selection: PatchSelection)
 
-    @Query(
-        "SELECT DISTINCT ps.package_name FROM patch_selections ps" +
-                " INNER JOIN selected_patches sp ON ps.uid = sp.selection"
-    )
-    abstract fun getPackagesWithSelection(): Flow<List<String>>
-
     @Query("SELECT DISTINCT patch_bundle FROM patch_selections")
     abstract suspend fun getAllBundleUids(): List<Int>
 

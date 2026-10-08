@@ -17,8 +17,6 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.domain.manager.base.BasePreferencesManager
-import app.morphe.manager.domain.manager.base.IntPreference
-import app.morphe.manager.domain.manager.base.LongPreference
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_NOT_SET
 import app.morphe.manager.patcher.runtime.coerceMemoryLimit
@@ -147,7 +145,7 @@ class PreferencesManager(
         // ARMv7 silently fails and nobody has researched why.
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !isArmV7()
     )
-    val patcherProcessMemoryLimit = IntPreference(dataStore, "use_process_runtime_memory_limit", PROCESS_RUNTIME_MEMORY_NOT_SET)
+    val patcherProcessMemoryLimit = intPreference("use_process_runtime_memory_limit", PROCESS_RUNTIME_MEMORY_NOT_SET)
 
     /** Whether the last patcher process came up without the heap limit it asked for. Tied to the device, so never exported. */
     val patcherHeapLimitIgnored = booleanPreference("patcher_heap_limit_ignored", false)
@@ -169,7 +167,7 @@ class PreferencesManager(
     val allowMeteredUpdates = booleanPreference("allow_metered_updates", true)
     val firstLaunch = booleanPreference("first_launch", true)
 
-    val installationTime = LongPreference(dataStore, "manager_installation_time", 0L)
+    val installationTime = longPreference("manager_installation_time", 0L)
     val disablePatchVersionCompatCheck = booleanPreference("disable_patch_version_compatibility_check", false)
 
     val useCustomFilePicker = booleanPreference("use_custom_file_picker", false)
