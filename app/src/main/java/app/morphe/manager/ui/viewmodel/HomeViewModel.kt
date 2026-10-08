@@ -64,13 +64,9 @@ import app.morphe.patcher.patch.InstallerType
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import java.io.File
-import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.io.InputStream
 import java.util.Locale
-import java.util.zip.CRC32
-import java.util.zip.ZipEntry
-import java.util.zip.ZipOutputStream
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
@@ -1419,7 +1415,7 @@ class HomeViewModel(
                     try {
                         if (installedInfo.isSplit) {
                             val archive = File(filesystem.uiTempDir, "${packageName}_installed.apks")
-                            createApksArchive(installedInfo, archive)
+                            SplitApkPreparer.writeApksArchive(installedInfo.apkPath, installedInfo.splitPaths, archive)
                             SelectedApp.Local(
                                 packageName = packageName,
                                 version = installedInfo.version,
@@ -1603,7 +1599,7 @@ class HomeViewModel(
                     try {
                         if (item.info.isSplit) {
                             val archive = File(filesystem.uiTempDir, "${item.packageName}_installed.apks")
-                            createApksArchive(item.info, archive)
+                            SplitApkPreparer.writeApksArchive(item.info.apkPath, item.info.splitPaths, archive)
                             SelectedApp.Local(
                                 packageName = item.packageName,
                                 version = item.info.version,
@@ -1642,38 +1638,6 @@ class HomeViewModel(
             } finally {
                 processingApkSelection = false
             }
-        }
-    }
-
-    /**
-     * Packs [info]'s base APK and all split APKs into an APKS archive (ZIP).
-     * Entry names preserve the original filenames so [SplitApkPreparer] can
-     * identify the base entry by the "base" substring and filter ABI/density splits.
-     */
-    private fun createApksArchive(info: InstalledApkInfo, output: File) {
-        output.parentFile?.mkdirs()
-        ZipOutputStream(output.outputStream().buffered()).use { zip ->
-            fun addEntry(file: File) {
-                // APKs are already compressed ZIPs - use STORED to avoid wasting CPU on deflate.
-                // STORED requires CRC32 and size known upfront, so we read the file twice.
-                val crc = CRC32()
-                val buf = ByteArray(65536)
-                FileInputStream(file).use { input ->
-                    var n: Int
-                    while (input.read(buf).also { n = it } >= 0) crc.update(buf, 0, n)
-                }
-                val entry = ZipEntry(file.name).apply {
-                    method = ZipEntry.STORED
-                    size = file.length()
-                    compressedSize = file.length()
-                    this.crc = crc.value
-                }
-                zip.putNextEntry(entry)
-                FileInputStream(file).use { it.copyTo(zip) }
-                zip.closeEntry()
-            }
-            addEntry(File(info.apkPath))
-            info.splitPaths.forEach { addEntry(File(it)) }
         }
     }
 

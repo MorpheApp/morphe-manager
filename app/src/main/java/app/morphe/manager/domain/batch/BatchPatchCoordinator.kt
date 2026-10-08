@@ -37,11 +37,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import java.io.File
-import java.io.FileInputStream
 import java.util.UUID
-import java.util.zip.CRC32
-import java.util.zip.ZipEntry
-import java.util.zip.ZipOutputStream
 
 private const val TAG = "Morphe BatchPatcher"
 
@@ -566,7 +562,7 @@ class BatchPatchCoordinator(
             is BatchApkSource.Installed -> try {
                 val target = if (source.isSplit) {
                     workspace.resolve("${item.packageName}_installed.apks")
-                        .also { createApksArchive(source, it) }
+                        .also { SplitApkPreparer.writeApksArchive(source.apkPath, source.splitPaths, it) }
                 } else {
                     workspace.resolve("${item.packageName}_installed.apk")
                         .also { File(source.apkPath).copyTo(it, overwrite = true) }
@@ -704,35 +700,6 @@ class BatchPatchCoordinator(
                 moveSource = selectedApp.temporary
             )
         }.onFailure { Log.w(TAG, "Failed to save original APK for ${item.packageName}", it) }
-    }
-
-    /**
-     * Packs a base APK and its splits into an APKS archive so the patcher can merge them.
-     * Entries are stored uncompressed because APKs are already compressed archives.
-     */
-    private fun createApksArchive(source: BatchApkSource.Installed, output: File) {
-        output.parentFile?.mkdirs()
-        ZipOutputStream(output.outputStream().buffered()).use { zip ->
-            fun addEntry(file: File) {
-                val crc = CRC32()
-                val buffer = ByteArray(65536)
-                FileInputStream(file).use { input ->
-                    var read: Int
-                    while (input.read(buffer).also { read = it } >= 0) crc.update(buffer, 0, read)
-                }
-                val entry = ZipEntry(file.name).apply {
-                    method = ZipEntry.STORED
-                    size = file.length()
-                    compressedSize = file.length()
-                    this.crc = crc.value
-                }
-                zip.putNextEntry(entry)
-                FileInputStream(file).use { it.copyTo(zip) }
-                zip.closeEntry()
-            }
-            addEntry(File(source.apkPath))
-            source.splitPaths.forEach { addEntry(File(it)) }
-        }
     }
 
     private fun markRemainingCancelled() {

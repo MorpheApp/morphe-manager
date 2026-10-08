@@ -213,38 +213,55 @@ class GameHaptics {
  */
 @Stable
 class MiniGameState(prefs: PreferencesManager, scope: CoroutineScope) {
-    val game2048 = Game2048State(
-        initialHighScore = prefs.miniGame2048HighScore.getBlocking(),
-        onHighScoreUpdated = { scope.launch { prefs.miniGame2048HighScore.update(it) } }
-    )
-    val flappy = FlappyGameState(
-        initialHighScore = prefs.miniGameFlappyHighScore.getBlocking(),
-        onHighScoreUpdated = { scope.launch { prefs.miniGameFlappyHighScore.update(it) } }
-    )
-    val snake = SnakeGameState(
-        initialHighScore = prefs.miniGameSnakeHighScore.getBlocking(),
-        onHighScoreUpdated = { scope.launch { prefs.miniGameSnakeHighScore.update(it) } }
-    )
-    val dino = DinoGameState(
-        initialHighScore = prefs.miniGameDinoHighScore.getBlocking(),
-        onHighScoreUpdated = { scope.launch { prefs.miniGameDinoHighScore.update(it) } }
-    )
-    val blocks = BlocksGameState(
-        initialHighScore = prefs.miniGameBlocksHighScore.getBlocking(),
-        onHighScoreUpdated = { scope.launch { prefs.miniGameBlocksHighScore.update(it) } }
-    )
-    val bricks = BricksGameState(
-        initialHighScore = prefs.miniGameBricksHighScore.getBlocking(),
-        onHighScoreUpdated = { scope.launch { prefs.miniGameBricksHighScore.update(it) } }
-    )
-    val miner = MinerGameState(
-        initialHighScore = prefs.miniGameMinerHighScore.getBlocking(),
-        onHighScoreUpdated = { scope.launch { prefs.miniGameMinerHighScore.update(it) } }
-    )
-    val pairs = PairsGameState(
-        initialHighScore = prefs.miniGamePairsHighScore.getBlocking(),
-        onHighScoreUpdated = { scope.launch { prefs.miniGamePairsHighScore.update(it) } }
-    )
+    // Built on first use, since most runs open no game and each reads its high score blocking
+    val game2048 by lazy {
+        Game2048State(
+            initialHighScore = prefs.miniGame2048HighScore.getBlocking(),
+            onHighScoreUpdated = { scope.launch { prefs.miniGame2048HighScore.update(it) } }
+        )
+    }
+    val flappy by lazy {
+        FlappyGameState(
+            initialHighScore = prefs.miniGameFlappyHighScore.getBlocking(),
+            onHighScoreUpdated = { scope.launch { prefs.miniGameFlappyHighScore.update(it) } }
+        )
+    }
+    val snake by lazy {
+        SnakeGameState(
+            initialHighScore = prefs.miniGameSnakeHighScore.getBlocking(),
+            onHighScoreUpdated = { scope.launch { prefs.miniGameSnakeHighScore.update(it) } }
+        )
+    }
+    val dino by lazy {
+        DinoGameState(
+            initialHighScore = prefs.miniGameDinoHighScore.getBlocking(),
+            onHighScoreUpdated = { scope.launch { prefs.miniGameDinoHighScore.update(it) } }
+        )
+    }
+    val blocks by lazy {
+        BlocksGameState(
+            initialHighScore = prefs.miniGameBlocksHighScore.getBlocking(),
+            onHighScoreUpdated = { scope.launch { prefs.miniGameBlocksHighScore.update(it) } }
+        )
+    }
+    val bricks by lazy {
+        BricksGameState(
+            initialHighScore = prefs.miniGameBricksHighScore.getBlocking(),
+            onHighScoreUpdated = { scope.launch { prefs.miniGameBricksHighScore.update(it) } }
+        )
+    }
+    val miner by lazy {
+        MinerGameState(
+            initialHighScore = prefs.miniGameMinerHighScore.getBlocking(),
+            onHighScoreUpdated = { scope.launch { prefs.miniGameMinerHighScore.update(it) } }
+        )
+    }
+    val pairs by lazy {
+        PairsGameState(
+            initialHighScore = prefs.miniGamePairsHighScore.getBlocking(),
+            onHighScoreUpdated = { scope.launch { prefs.miniGamePairsHighScore.update(it) } }
+        )
+    }
     var selectedGame by mutableStateOf<MiniGame?>(null)
 
     /** State backing [game], which is the one place a new game has to be wired in. */

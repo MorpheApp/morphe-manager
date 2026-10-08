@@ -1377,9 +1377,7 @@ Details: %2$s"</string>
     <string name="selected">Selected</string>
     <string name="not_selected">Not selected</string>
     <string name="select_all">Select all</string>
-    <string name="select_all_done">All selected</string>
     <string name="deselect_all">Deselect all</string>
-    <string name="deselect_all_done">All deselected</string>
     <string name="reorder_list">Reorder list</string>
     <string name="reorder_list_hint">Drag to reorder</string>
     <string name="reorder_done">Order saved</string>

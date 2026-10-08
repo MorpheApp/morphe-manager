@@ -22,12 +22,15 @@ import com.reandroid.arsc.chunk.xml.AndroidManifestBlock
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runInterruptible
 import java.io.File
+import java.io.FileInputStream
 import java.io.IOException
 import java.nio.file.Files
 import java.util.Locale
+import java.util.zip.CRC32
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 import java.util.zip.ZipInputStream
+import java.util.zip.ZipOutputStream
 
 sealed class SplitPreparationEvent {
     data object Extracting : SplitPreparationEvent()
@@ -61,6 +64,35 @@ sealed class SplitPreparationEvent {
  * by extracting and merging all constituent modules into a single monolithic APK.
  */
 object SplitApkPreparer {
+    /**
+     * Packs [baseApk] and its [splitApks] into an APKS archive at [output], each under its own
+     * file name so [prepareIfNeeded] can tell the base from the splits. APKs are compressed
+     * already, so they are stored rather than deflated, which needs each CRC up front.
+     */
+    fun writeApksArchive(baseApk: String, splitApks: List<String>, output: File) {
+        output.parentFile?.mkdirs()
+        ZipOutputStream(output.outputStream().buffered()).use { zip ->
+            (listOf(baseApk) + splitApks).map(::File).forEach { file ->
+                val crc = CRC32()
+                val buffer = ByteArray(65536)
+                FileInputStream(file).use { input ->
+                    var read: Int
+                    while (input.read(buffer).also { read = it } >= 0) crc.update(buffer, 0, read)
+                }
+                zip.putNextEntry(
+                    ZipEntry(file.name).apply {
+                        method = ZipEntry.STORED
+                        size = file.length()
+                        compressedSize = file.length()
+                        this.crc = crc.value
+                    }
+                )
+                FileInputStream(file).use { it.copyTo(zip) }
+                zip.closeEntry()
+            }
+        }
+    }
+
     // Recognized split archive container extensions
     private val SUPPORTED_EXTENSIONS = setOf("apks", "apkm", "xapk")
 
