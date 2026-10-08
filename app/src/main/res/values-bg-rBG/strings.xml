@@ -493,9 +493,12 @@
     <string name="home_app_info_app_update_available_description">Източниците на кръпката поддържат по-нова версия на това приложение. Приложете отново кръпката, за да преминете към тази версия</string>
     <string name="home_app_info_newest_supported_version">Най-нова поддържана</string>
     <string name="home_app_info_version_move">Инсталирана %1$s, най-нова поддържана %2$s</string>
+    <string name="home_app_info_version_restore">Инсталирана версия: %1$s, патчна версия: %2$s</string>
     <string name="home_app_info_app_deleted_warning">Приложението беше деинсталирано</string>
     <string name="home_app_info_app_deleted_description">Това приложение беше деинсталирано извън Morphe. Поправете го отново, за да възстановите функционалността</string>
     <string name="home_app_info_not_patched_description">Инсталирана е версия без пачове на това приложение. Morphe все още има своя предишен запис за пач</string>
+    <string name="home_app_info_mount_replaced_description">Друга версия замени монтираното приложение, така че кръпката вече не се прилага. Възстановяването връща патчната версия обратно</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play актуализира монтираното приложение, така че кръпката вече не се прилага. Възстановяването връща патчната версия. Изключете автоматичното актуализиране за него в Google Play, за да остане с кръпка</string>
     <string name="app_links_title">Поддържани уеб връзки</string>
     <string name="app_links_description">На Android 12+ връзките към поддържани домейни по подразбиране се отварят в браузъра, освен ако не са одобрени</string>
     <string name="app_links_unverified_banner_title">Непроверени уеб връзки</string>
@@ -624,6 +627,7 @@
     <string name="patcher_memory_adjustment_title">Недостатъчно памет</string>
     <string name="patcher_memory_adjustment_description">Патчерът беше спрян от системата, докато работеше с лимит на паметта от %1$d MB. Намаляването на лимита до %2$d MB прави патчера по-малка цел и може да позволи на изпълнението да завърши.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Патчерът беше спрян от системата, докато работеше с лимит на паметта от %1$d MB, който вече е най-ниският наличен. Опитайте се да патчвате с по-малко източници на пачове или изберете по-малко пачове.</string>
+    <string name="patcher_memory_adjustment_description_finished">Системата спря патчера при лимит на паметта от %1$d MB и той успя да завърши едва при %2$d MB. Стартирането от %2$d MB пропуска този неуспешен опит следващия път</string>
     <string name="patcher_memory_adjustment_apply">Намали до %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Morphe</string>
@@ -864,6 +868,7 @@
     <string name="notification_channel_patch_updates">Актуализации с корекции</string>
     <string name="notification_channel_patch_updates_description">Известия за нови корекции</string>
     <string name="notification_channel_patcher_description">Показва се, когато Morphe актуализира приложение във фона</string>
+    <string name="notification_channel_mounted_apps">Монтирани приложения</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Настройки за експерти</string>
     <string name="settings_advanced_expert_mode">Режим за експерти</string>
@@ -1280,9 +1285,7 @@ morphe_header_custom_dark.png
     <string name="selected">Избран</string>
     <string name="not_selected">Не е избран</string>
     <string name="select_all">Избери всички</string>
-    <string name="select_all_done">Всички избрани</string>
     <string name="deselect_all">Отмени избраното</string>
-    <string name="deselect_all_done">Всички са отменени</string>
     <string name="reorder_list">Пренареждане на списъка</string>
     <string name="reorder_list_hint">Влачете, за да пренаредите</string>
     <string name="reorder_done">Редът е запазен</string>

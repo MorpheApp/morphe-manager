@@ -87,6 +87,10 @@
         <item quantity="one">%s सोर्स इंस्टॉल किया गया है</item>
         <item quantity="other">%s सोर्स इंस्टॉल किए गए हैं</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="one">%1$s · %2$s फ़िल्टर किया गया</item>
+        <item quantity="other">%1$s · %2$s फ़िल्टर किए गए</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s छिपा हुआ ऐप</item>
         <item quantity="other">%s छिपे हुए ऐप्स</item>

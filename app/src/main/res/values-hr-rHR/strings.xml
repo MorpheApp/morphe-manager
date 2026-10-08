@@ -497,9 +497,12 @@ Vanjska zona (isprekidana): može biti odrezana maskom pokretača - važne detal
     <string name="home_app_info_app_update_available_description">Izvori zakrpa podržavaju noviju verziju ove aplikacije. Ponovno ju zakrpi da biste prešli na tu verziju.</string>
     <string name="home_app_info_newest_supported_version">Najnovija podržana</string>
     <string name="home_app_info_version_move">Instalirana %1$s, najnovija podržana %2$s</string>
+    <string name="home_app_info_version_restore">Instalirana %1$s, zakrpana %2$s</string>
     <string name="home_app_info_app_deleted_warning">Aplikacija je deinstalirana</string>
     <string name="home_app_info_app_deleted_description">Ova je aplikacija deinstalirana izvan Morphea. Ponovno je patchajte kako biste vratili funkcionalnost</string>
     <string name="home_app_info_not_patched_description">Instalirana je nepatchana verzija ove aplikacije. Morphe i dalje ima prethodni zapis patchanja</string>
+    <string name="home_app_info_mount_replaced_description">Druga je verzija zamijenila montiranu aplikaciju, pa se zakrpa više ne primjenjuje. Vraćanje vraća zakrpanu verziju</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play je ažurirao montiranu aplikaciju, pa se zakrpa više ne primjenjuje. Vraćanje vraća zakrpanu verziju. Isključite automatsko ažuriranje za nju u aplikaciji Google Play kako bi ostala zakrpana</string>
     <string name="app_links_title">Podržane web poveznice</string>
     <string name="app_links_description">Na Androidu 12+ poveznice na podržane domene otvaraju se u vašem pregledniku prema zadanim postavkama, osim ako nisu odobrene</string>
     <string name="app_links_unverified_banner_title">Web poveznice nisu provjerene</string>
@@ -628,6 +631,7 @@ Deinstaliranje će trajno izbrisati sve podatke aplikacije"</string>
     <string name="patcher_memory_adjustment_title">Nema dovoljno memorije</string>
     <string name="patcher_memory_adjustment_description">Sustav je zaustavio program za patchanje dok je radio s ograničenjem memorije od %1$d MB. Smanjenjem ograničenja na %2$d MB program za patchanje postaje manja meta i može se pustiti da se izvođenje završi.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Sustav je zaustavio program za patchanje dok je radio s ograničenjem memorije od %1$d MB, što je već najniža dostupna vrijednost. Pokušajte patchanje  s manje izvora patcheva ili odaberite manje patcheva</string>
+    <string name="patcher_memory_adjustment_description_finished">Sustav je zaustavio proces krpanja pri memorijskom ograničenju od %1$d MB, a dovršen je tek na %2$d MB. Pokretanje s %2$d MB sljedeći put preskače taj izgubljeni pokušaj</string>
     <string name="patcher_memory_adjustment_apply">Manje od %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patchanje u tijeku …</string>
@@ -867,6 +871,7 @@ Patchevi nisu pogođeni: omogućite predizdanja patcheva za svaki izvor na popis
     <string name="notification_channel_patch_updates">Ažuriranja zakrpa</string>
     <string name="notification_channel_patch_updates_description">Obavijesti o novim zakrpama</string>
     <string name="notification_channel_patcher_description">Prikazuje se dok Morphe patcha aplikaciju u pozadini</string>
+    <string name="notification_channel_mounted_apps">Montirane aplikacije</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Stručne postavke</string>
     <string name="settings_advanced_expert_mode">Napredni način</string>
@@ -1283,9 +1288,7 @@ Detalji: %2$s"</string>
     <string name="selected">Odabrano</string>
     <string name="not_selected">Nije odabrano</string>
     <string name="select_all">Odaberite sve</string>
-    <string name="select_all_done">Sve odabrano</string>
     <string name="deselect_all">Poništi odabir</string>
-    <string name="deselect_all_done">Sve odabrano poništeno</string>
     <string name="reorder_list">Promijeni redoslijed</string>
     <string name="reorder_list_hint">Povucite za promjenu redoslijeda</string>
     <string name="reorder_done">Redoslijed je spremljen</string>

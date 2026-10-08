@@ -493,9 +493,12 @@
     <string name="home_app_info_app_update_available_description">修補程式來源支援此應用程式的較新版本。再次修補以移至該版本。</string>
     <string name="home_app_info_newest_supported_version">最新支援的版本</string>
     <string name="home_app_info_version_move">已安裝 %1$s，最新支援版本 %2$s</string>
+    <string name="home_app_info_version_restore">已安裝 %1$s，已修補 %2$s</string>
     <string name="home_app_info_app_deleted_warning">應用程式已解除安裝</string>
     <string name="home_app_info_app_deleted_description">此應用程式已在 Morphe 外部被解除安裝。重新修補以還原功能</string>
     <string name="home_app_info_not_patched_description">已安裝此應用程式的未修補版本。Morphe 仍保留其先前的修補記錄。</string>
+    <string name="home_app_info_mount_replaced_description">另一個版本取代了已掛載的應用程式，因此修補程式不再適用。還原會把已修補的版本放回去</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play 更新了已掛載的應用程式，因此修補程式不再適用。還原會把已修補的版本放回去。請在 Google Play 中關閉該應用程式的自動更新，以保持其已修補狀態</string>
     <string name="app_links_title">支援的網頁連結</string>
     <string name="app_links_description">在 Android 12 以上版本，除非經過你同意，否則指向支援網域的連結預設會在瀏覽器中開啟</string>
     <string name="app_links_unverified_banner_title">網頁連結未經驗證</string>
@@ -624,6 +627,7 @@
     <string name="patcher_memory_adjustment_title">記憶體不足</string>
     <string name="patcher_memory_adjustment_description">修補程式在以 %1$d MB 記憶體限制執行時被系統停止。將限制降低至 %2$d MB 可讓修補程式成為較小的目標，並可能讓執行完成。</string>
     <string name="patcher_memory_adjustment_description_at_minimum">修補程式在以 %1$d MB 記憶體限制執行時被系統停止，而該限制已是最低可用值。請嘗試使用較少的修補來源，或選擇較少的修補項目。</string>
+    <string name="patcher_memory_adjustment_description_finished">系統在 %1$d MB 的記憶體限制下停止了修補程式，而它到 %2$d MB 才完成。下次從 %2$d MB 開始即可略過那次失敗的嘗試</string>
     <string name="patcher_memory_adjustment_apply">降至 %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">修補進行中…</string>
@@ -863,6 +867,10 @@
     <string name="notification_channel_patch_updates">修補程式更新</string>
     <string name="notification_channel_patch_updates_description">關於新修補程式版本的通知</string>
     <string name="notification_channel_patcher_description">在 Morphe 於背景修補應用程式時顯示</string>
+    <string name="notification_channel_mounted_apps">已掛載的應用程式</string>
+    <string name="notification_channel_mounted_apps_description">當另一個版本取代了已安裝的應用程式而且它的修補檔不再適用時</string>
+    <string name="notification_mount_replaced_title">不再修補 %1$s</string>
+    <string name="notification_mount_replaced_text">v%1$s 取代了已修補的 v%2$s。開啟 Morphe 去進行還原</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">專家設定</string>
     <string name="settings_advanced_expert_mode">專家模式</string>
@@ -1277,9 +1285,7 @@ morphe_header_custom_dark.png
     <string name="selected">已選取</string>
     <string name="not_selected">未選取</string>
     <string name="select_all">選取全部</string>
-    <string name="select_all_done">全部選取</string>
     <string name="deselect_all">取消全選</string>
-    <string name="deselect_all_done">全部取消選取</string>
     <string name="reorder_list">重新排序列表</string>
     <string name="reorder_list_hint">拖曳以重新排序</string>
     <string name="reorder_done">排序已儲存</string>
@@ -1315,6 +1321,7 @@ morphe_header_custom_dark.png
     <string name="unmount">解除掛載</string>
     <string name="unmounted">已解除掛載</string>
     <string name="remount">重新掛載</string>
+    <string name="restore">還原</string>
     <string name="share">分享</string>
     <string name="install">安裝</string>
     <string name="installed">已安裝</string>
@@ -1335,6 +1342,8 @@ morphe_header_custom_dark.png
     <string name="sources">來源</string>
     <string name="installing_ellipsis">安裝中……</string>
     <string name="mounting_ellipsis">掛載中……</string>
+    <string name="mount_stage_restoring_stock">正在還原原版…</string>
+    <string name="mount_stage_copying">正在複製…</string>
     <string name="unmounting_ellipsis">正在解除掛載……</string>
     <string name="importing_ellipsis">匯入……</string>
     <string name="imported_successfully">匯入成功</string>

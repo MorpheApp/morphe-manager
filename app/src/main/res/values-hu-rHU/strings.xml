@@ -493,9 +493,12 @@ Külső zóna (szaggatott): az indító maszk levághatja – tartsa a fontos r�
     <string name="home_app_info_app_update_available_description">A patch-források az alkalmazás újabb verzióját támogatják. Patcheld újra, hogy arra a verzióra válts.</string>
     <string name="home_app_info_newest_supported_version">Legújabb támogatott</string>
     <string name="home_app_info_version_move">Telepített: %1$s, legújabb támogatott: %2$s</string>
+    <string name="home_app_info_version_restore">Telepítve: %1$s, javítva: %2$s</string>
     <string name="home_app_info_app_deleted_warning">Az alkalmazást eltávolították</string>
     <string name="home_app_info_app_deleted_description">Ezt az alkalmazást a Morphén kívül távolították el. Alkalmazd újra a módosításokat a működés helyreállításához.</string>
     <string name="home_app_info_not_patched_description">Az alkalmazás nem javított verziója van telepítve. A Morphe még mindig tartalmazza a korábbi javítási rekordját.</string>
+    <string name="home_app_info_mount_replaced_description">Egy másik verzió váltotta fel a csatlakoztatott alkalmazást, így a javítás már nem érvényes. A visszaállítás visszahelyezi a javított verziót</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">A Google Play frissítette a csatlakoztatott alkalmazást, így a javítás már nem érvényes. A visszaállítás visszahelyezi a javított verziót. Kapcsold ki az automatikus frissítést a Google Playen, hogy javítva maradjon</string>
     <string name="app_links_title">Támogatott webes hivatkozások</string>
     <string name="app_links_description">Android 12+ rendszeren a támogatott domainekre mutató hivatkozások alapértelmezetten a böngésződben nyílnak meg, hacsak nem hagyod jóvá</string>
     <string name="app_links_unverified_banner_title">Nem ellenőrzött webes hivatkozások</string>
@@ -624,6 +627,7 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="patcher_memory_adjustment_title">Nincs elég memória</string>
     <string name="patcher_memory_adjustment_description">A rendszer leállította a patchert, miközben %1$d MB memóriakorláttal futott. A korlát %2$d MB-ra csökkentése kisebb célponttá teszi a patchert, és lehetővé teheti a futás befejezését.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">A rendszer leállította a patchert, miközben %1$d MB memóriakorláttal futott; ez a korlát már a legalacsonyabb elérhető. Próbáljon meg kevesebb patchforrással patchelni, vagy válasszon kevesebb patch-et.</string>
+    <string name="patcher_memory_adjustment_description_finished">A rendszer a javítóprogramot %1$d MB memóriakorlátnál állította le, és az csak %2$d MB-nál fejeződött be. A %2$d MB-nál történő indítás legközelebb kihagyja az elveszett próbálkozást</string>
     <string name="patcher_memory_adjustment_apply">Csökkentés %1$d MB-ra</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Módosítás folyamatban…</string>
@@ -863,6 +867,7 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="notification_channel_patch_updates">Patch-frissítések</string>
     <string name="notification_channel_patch_updates_description">Értesítések az új patch-kiadásokról</string>
     <string name="notification_channel_patcher_description">Akkor jelenik meg, amikor a Morphe a háttérben módosít egy alkalmazást</string>
+    <string name="notification_channel_mounted_apps">Csatlakoztatott alkalmazások</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Szakértői beállítások</string>
     <string name="settings_advanced_expert_mode">Szakértői mód</string>
@@ -1279,9 +1284,7 @@ Részletek: %2$s"</string>
     <string name="selected">Kiválasztott</string>
     <string name="not_selected">Nincs kiválasztva</string>
     <string name="select_all">Összes kiválasztása</string>
-    <string name="select_all_done">Mind kiválasztva</string>
     <string name="deselect_all">Összes kijelölés visszavonása</string>
-    <string name="deselect_all_done">Mind törölve</string>
     <string name="reorder_list">Lista átrendezése</string>
     <string name="reorder_list_hint">Húzza át a pozíciók módosításához</string>
     <string name="reorder_done">Rendezés mentve</string>

@@ -493,9 +493,12 @@ Crios seachtrach (daite): féadfaidh masc an lainseálaí é a bhearradh - coinn
     <string name="home_app_info_app_update_available_description">Tacaíonn foinsí an phaiste le leagan níos nuaí den aip seo. Cuir an paiste i bhfeidhm arís chun aistriú chuig an leagan sin.</string>
     <string name="home_app_info_newest_supported_version">An ceann is déanaí a dtacaítear leis</string>
     <string name="home_app_info_version_move">Suiteáilte: %1$s; an ceann is déanaí a dtacaítear leis: %2$s</string>
+    <string name="home_app_info_version_restore">Suiteáilte %1$s, paisteáilte %2$s</string>
     <string name="home_app_info_app_deleted_warning">Díshuiteáladh an aip</string>
     <string name="home_app_info_app_deleted_description">Díshuiteáladh an aip seo lasmuigh de Morphe. Athphaisteáil í chun feidhmiúlacht a athbhunú.</string>
     <string name="home_app_info_not_patched_description">Tá leagan neamhphaiste den aip seo suiteáilte. Tá taifead paiste roimhe seo Morphe fós.</string>
+    <string name="home_app_info_mount_replaced_description">Cuireadh leagan eile in ionad na haipe feistithe, mar sin níl an paiste infheidhme a thuilleadh. Cuireann an t-athchóiriú an leagan paisteáilte ar ais</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Nuashonraigh Google Play an aip fheistithe, mar sin níl an paiste infheidhme a thuilleadh. Cuireann an t-athchóiriú an leagan paisteáilte ar ais. Múch an nuashonrú uathoibríoch di in Google Play chun í a choinneáil paisteáilte</string>
     <string name="app_links_title">Naisc ghréasáin thacaithe</string>
     <string name="app_links_description">Ar Android 12+, osclaítear naisc chuig fearainn thacaithe i do bhrabhsálaí go réamhshocraithe mura gceadaítear iad</string>
     <string name="app_links_unverified_banner_title">Naisc ghréasáin gan fíorú</string>
@@ -624,6 +627,7 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="patcher_memory_adjustment_title">Gan dóthain cuimhne</string>
     <string name="patcher_memory_adjustment_description">Stopadh an paisteálaí ag an gcóras agus é ag rith le teorainn chuimhne %1$d MB. Má íslítear an teorainn go %2$d MB, is sprioc níos lú é an paisteálaí agus féadann sé ligean don rith críochnú.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Stopadh an paisteálaí ag an gcóras agus é ag rith le teorainn chuimhne %1$d MB, arb í an teorainn is ísle atá ar fáil cheana féin. Bain triail as paisteáil le níos lú foinsí paiste, nó roghnaigh níos lú paistí.</string>
+    <string name="patcher_memory_adjustment_description_finished">Chuir an córas stop leis an bpaisteálaí ag teorainn chuimhne %1$d MB, agus níor chríochnaigh sé ach ag %2$d MB. Seachnaíonn tosú ag %2$d MB an iarracht chaillte sin an chéad uair eile</string>
     <string name="patcher_memory_adjustment_apply">Ísligh go %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Paisteáil ar siúl…</string>
@@ -864,6 +868,7 @@ Níl tionchar ar phaistí: cumasaigh paistí réamh-eisiúna do gach foinse sa l
     <string name="notification_channel_patch_updates">Nuashonruithe paiste</string>
     <string name="notification_channel_patch_updates_description">Fógraí faoi eisiúintí nua paiste</string>
     <string name="notification_channel_patcher_description">Taispeántar é agus Morphe ag paisteáil aip sa chúlra</string>
+    <string name="notification_channel_mounted_apps">Aipeanna feistithe</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Socruithe saineolaithe</string>
     <string name="settings_advanced_expert_mode">Mód saineolaithe</string>
@@ -1278,9 +1283,7 @@ Sonraí: %2$s"</string>
     <string name="selected">Roghnaithe</string>
     <string name="not_selected">Níor roghnaíodh</string>
     <string name="select_all">Roghnaigh gach rud</string>
-    <string name="select_all_done">Gach ceann roghnaithe</string>
     <string name="deselect_all">Díroghnaigh gach rud</string>
-    <string name="deselect_all_done">Gach rud díroghnaithe</string>
     <string name="reorder_list">Athordú an liosta</string>
     <string name="reorder_list_hint">Tarraing chun athordú</string>
     <string name="reorder_done">Ordú sábháilte</string>
@@ -1316,6 +1319,7 @@ Sonraí: %2$s"</string>
     <string name="unmount">Dícheangal</string>
     <string name="unmounted">Dícheangailte</string>
     <string name="remount">Athcheangail</string>
+    <string name="restore">Athchóirigh</string>
     <string name="share">Comhroinn</string>
     <string name="install">Suiteáil</string>
     <string name="installed">Suiteáilte</string>

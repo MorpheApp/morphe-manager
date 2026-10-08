@@ -1279,9 +1279,7 @@ morphe_header_custom_dark.png
     <string name="selected">निवडलेले</string>
     <string name="not_selected">निवडलेले नाही</string>
     <string name="select_all">सर्व निवडा</string>
-    <string name="select_all_done">सर्व निवडले</string>
     <string name="deselect_all">सर्व निवड रद्द करा</string>
-    <string name="deselect_all_done">सर्व निवड रद्द केली</string>
     <string name="reorder_list">सूची पुन्हा क्रमवारी लावा</string>
     <string name="reorder_list_hint">पुन्हा क्रमवारी लावण्यासाठी ड्रॅग करा</string>
     <string name="reorder_done">क्रम जतन केला</string>

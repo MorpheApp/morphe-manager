@@ -492,9 +492,12 @@ Für optimale Ergebnisse empfiehlt diese App, eine &lt;b&gt;vollständige APK&lt
     <string name="home_app_info_app_update_available_description">Die Patch-Quellen unterstützen eine neuere Version dieser App. Patchen Sie die App erneut, um zu dieser Version zu wechseln.</string>
     <string name="home_app_info_newest_supported_version">Neueste unterstützte Version</string>
     <string name="home_app_info_version_move">Installiert: %1$s, neueste unterstützte Version: %2$s</string>
+    <string name="home_app_info_version_restore">Installiert %1$s, gepatcht %2$s</string>
     <string name="home_app_info_app_deleted_warning">App wurde deinstalliert</string>
     <string name="home_app_info_app_deleted_description">Diese App wurde außerhalb von Morphe deinstalliert. Repatchen Sie sie, um die Funktionalität wiederherzustellen</string>
     <string name="home_app_info_not_patched_description">Eine ungepatchte Version dieser App ist installiert. Morphe hat immer noch seinen vorherigen Patch-Datensatz</string>
+    <string name="home_app_info_mount_replaced_description">Eine andere Version hat die gemountete App ersetzt, daher ist der Patch nicht mehr anwendbar. Durch Wiederherstellen wird die gepatchte Version wiederhergestellt</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play hat die gemountete App aktualisiert, daher ist der Patch nicht mehr anwendbar. Durch Wiederherstellen wird die gepatchte Version wiederhergestellt. Deaktiviere automatische Updates für die App in Google Play, damit sie gepatcht bleibt</string>
     <string name="app_links_title">Unterstützte Weblinks</string>
     <string name="app_links_description">Unter Android 12+ werden Links zu unterstützten Domains standardmäßig in Ihrem Browser geöffnet, sofern sie nicht genehmigt wurden</string>
     <string name="app_links_unverified_banner_title">Weblinks nicht verifiziert</string>
@@ -624,6 +627,7 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="patcher_memory_adjustment_title">Nicht genügend Speicher</string>
     <string name="patcher_memory_adjustment_description">Der Patcher wurde vom System beendet, während er mit einem Speicherlimit von %1$d MB ausgeführt wurde. Das Senken des Limits auf %2$d MB macht den Patcher zu einem kleineren Ziel und kann dafür sorgen, dass der Lauf abgeschlossen wird.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Der Patcher wurde vom System beendet, während er mit einem Speicherlimit von %1$d MB ausgeführt wurde, was bereits das niedrigste verfügbare Limit ist. Versuche, mit weniger Patchquellen zu patchen, oder wähle weniger Patches aus.</string>
+    <string name="patcher_memory_adjustment_description_finished">Das System stoppte den Patcher bei einem Speicherlimit von %1$d MB, und er wurde erst bei %2$d MB fertig. Ein Start bei %2$d MB überspringt diesen verlorenen Versuch beim nächsten Mal</string>
     <string name="patcher_memory_adjustment_apply">Auf %1$d MB senken</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patch-Vorgang läuft…</string>
@@ -864,6 +868,7 @@ Patches sind nicht betroffen: Aktivieren Sie Vorab-Patches für jede Quelle in d
     <string name="notification_channel_patch_updates">Patch-Updates</string>
     <string name="notification_channel_patch_updates_description">Benachrichtigungen über neue Patch-Versionen</string>
     <string name="notification_channel_patcher_description">Wird angezeigt, während Morphe eine App im Hintergrund patcht</string>
+    <string name="notification_channel_mounted_apps">Gemountete Apps</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Experten-Einstellungen</string>
     <string name="settings_advanced_expert_mode">Experten-Modus</string>
@@ -1280,9 +1285,7 @@ Details: %2$s"</string>
     <string name="selected">Ausgewählt</string>
     <string name="not_selected">Nicht ausgewählt</string>
     <string name="select_all">Alle auswählen</string>
-    <string name="select_all_done">Alle ausgewählt</string>
     <string name="deselect_all">Alles abwählen</string>
-    <string name="deselect_all_done">Alle abgewählt</string>
     <string name="reorder_list">Liste neu ordnen</string>
     <string name="reorder_list_hint">Zum Neuordnen ziehen</string>
     <string name="reorder_done">Reihenfolge gespeichert</string>

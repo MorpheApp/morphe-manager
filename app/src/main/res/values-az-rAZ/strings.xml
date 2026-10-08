@@ -1277,9 +1277,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="selected">Seçildi</string>
     <string name="not_selected">Seçilməyib</string>
     <string name="select_all">Hamısını seç</string>
-    <string name="select_all_done">Hamısı seçilib</string>
     <string name="deselect_all">Hamısın seçməyin</string>
-    <string name="deselect_all_done">Hamısı seçilməyib</string>
     <string name="reorder_list">Siyahını yenidən sırala</string>
     <string name="reorder_list_hint">Yenidən sıralamaq üçün sürüklə</string>
     <string name="reorder_done">Düzülüş saxlanıldı</string>
@@ -1315,6 +1313,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="unmount">Montajı sil</string>
     <string name="unmounted">Montaj silinib</string>
     <string name="remount">Təkrar montajla</string>
+    <string name="restore">Bərpa et</string>
     <string name="share">Paylaş</string>
     <string name="install">Quraşdır</string>
     <string name="installed">Quraşdırılıb</string>

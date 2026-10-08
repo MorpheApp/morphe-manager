@@ -493,9 +493,12 @@
     <string name="home_app_info_app_update_available_description">Οι πηγές patch υποστηρίζουν νεότερη έκδοση αυτής της εφαρμογής. Εφάρμόστε ξανά τo patch γιάνά νά μετβείτε σ\' αυτήν τήν έκδοση.</string>
     <string name="home_app_info_newest_supported_version">Νεότερη υποστηριζόμενη</string>
     <string name="home_app_info_version_move">Εγκάτεστημέν η %1$s, νεότερη υποστηριζόμενη %2$s</string>
+    <string name="home_app_info_version_restore">Εγκατεστημένη %1$s, επιδιορθωμένη %2$s</string>
     <string name="home_app_info_app_deleted_warning">Η εφαρμογή έχει απεγκατασταθεί</string>
     <string name="home_app_info_app_deleted_description">Η εφαρμογή αυτή απεγκαταστάθηκε εκτός του Morphe. Τροποποιήστε την ξανά για την επαναφορά λειτουργικότητά της</string>
     <string name="home_app_info_not_patched_description">Μια μη ενημερωμένη έκδοση αυτής της εφαρμογής είναι εγκατεστημένη. Το Morphe εξακολουθεί να έχει το προηγούμενο αρχείο επιδιορθώσεων.</string>
+    <string name="home_app_info_mount_replaced_description">Μια άλλη έκδοση αντικατέστησε την προσαρτημένη εφαρμογή, οπότε το patch δεν ισχύει πλέον. Η επαναφορά επαναφέρει την επιδιορθωμένη έκδοση</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Το Google Play ενημέρωσε την προσαρτημένη εφαρμογή, οπότε το patch δεν ισχύει πλέον. Η επαναφορά επαναφέρει την επιδιορθωμένη έκδοση. Απενεργοποιήστε την αυτόματη ενημέρωση για αυτήν στο Google Play για να παραμείνει επιδιορθωμένη</string>
     <string name="app_links_title">Υποστηριζόμενοι σύνδεσμοι ιστού</string>
     <string name="app_links_description">Σε Android 12+, οι σύνδεσμοι προς υποστηριζόμενους τομείς ανοίγουν στο πρόγραμμα περιήγησης από προεπιλογή, εκτός εάν έχουν εγκριθεί</string>
     <string name="app_links_unverified_banner_title">Μη επαληθευμένοι σύνδεσμοι ιστού</string>
@@ -624,6 +627,7 @@
     <string name="patcher_memory_adjustment_title">Δεν υπάρχει αρκετή μνήμη</string>
     <string name="patcher_memory_adjustment_description">Το patcher σταμάτησε από το σύστημα ενώ εκτελούνταν με όριο μνήμης %1$d MB. Η μείωση του ορίου σε %2$d MB καθιστά το patcher μικρότερο στόχο και μπορεί να επιτρέψει την ολοκλήρωση της εκτέλεσης.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Το patcher σταμάτησε από το σύστημα ενώ εκτελούνταν με όριο μνήμης %1$d MB, το οποίο είναι ήδη το χαμηλότερο διαθέσιμο. Δοκιμάστε να επιδιορθώσετε με λιγότερες πηγές επιδιόρθωσης ή επιλέξτε λιγότερες επιδιορθώσεις.</string>
+    <string name="patcher_memory_adjustment_description_finished">Το σύστημα σταμάτησε το εργαλείο επιδιόρθωσης στο όριο μνήμης %1$d MB και ολοκληρώθηκε μόνο στα %2$d MB. Η εκκίνηση από %2$d MB παραλείπει αυτή τη χαμένη προσπάθεια την επόμενη φορά</string>
     <string name="patcher_memory_adjustment_apply">Μειώστε σε %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Τροποποίηση σε εξέλιξη…</string>
@@ -864,6 +868,7 @@
     <string name="notification_channel_patch_updates">Ενημερώσεις επιδιόρθωσης</string>
     <string name="notification_channel_patch_updates_description">Ειδοποιήσεις για νέες εκδόσεις επιδιόρθωσης</string>
     <string name="notification_channel_patcher_description">Εμφανίζεται όταν το Morphe ενημερώνει μια εφαρμογή στο παρασκήνιο</string>
+    <string name="notification_channel_mounted_apps">Προσαρτημένες εφαρμογές</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Εξειδικευμένες ρυθμίσεις</string>
     <string name="settings_advanced_expert_mode">Εξειδικευμένη λειτουργία</string>
@@ -1280,9 +1285,7 @@ morphe_header_custom_dark.png
     <string name="selected">Επιλεγμένη</string>
     <string name="not_selected">Μη επιλεγμένη</string>
     <string name="select_all">Επιλογή όλων</string>
-    <string name="select_all_done">Όλα επιλέχθηκαν</string>
     <string name="deselect_all">Κατάργηση επιλογής όλων</string>
-    <string name="deselect_all_done">Όλα αποεπιλέχθηκαν</string>
     <string name="reorder_list">Αναδιάταξη λίστας</string>
     <string name="reorder_list_hint">Σύρετε για να αναδιατάξετε</string>
     <string name="reorder_done">Η σειρά αποθηκεύτηκε</string>

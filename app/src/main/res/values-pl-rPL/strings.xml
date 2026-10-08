@@ -494,9 +494,12 @@ Strefa zewnętrzna (linia przerywana): może zostać przycięta - najważniejsze
     <string name="home_app_info_app_update_available_description">Źródła modyfikacji obsługują nowszą wersję tej aplikacji. Zmodyfikuj ją ponownie, aby zaktualizować</string>
     <string name="home_app_info_newest_supported_version">Najnowsza obsługiwana</string>
     <string name="home_app_info_version_move">Zainstalowana %1$s, najnowsza obsługiwana %2$s</string>
+    <string name="home_app_info_version_restore">Zainstalowano %1$s, zmodyfikowano %2$s</string>
     <string name="home_app_info_app_deleted_warning">Aplikacja została odinstalowana</string>
     <string name="home_app_info_app_deleted_description">Ta aplikacja została odinstalowana poza Morphe. Zmodyfikuj ją ponownie, aby przywrócić jej funkcjonalność</string>
     <string name="home_app_info_not_patched_description">Zainstalowano niezmodyfikowaną wersję tej aplikacji. Morphe wciąż posiada zapis jej poprzedniej modyfikacji</string>
+    <string name="home_app_info_mount_replaced_description">Inna wersja zastąpiła zamontowaną aplikację, dlatego modyfikacja przestała działać. Użycie opcji Przywróć przywraca zmodyfikowaną wersję</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Sklep Play zaktualizował zamontowaną aplikację, dlatego modyfikacja przestała działać. Użycie opcji Przywróć przywraca zmodyfikowaną wersję. Wyłącz dla niej automatyczne aktualizacje w Sklepie Play, aby zachować modyfikację</string>
     <string name="app_links_title">Obsługiwane linki internetowe</string>
     <string name="app_links_description">W systemie Android 12+ linki do obsługiwanych domen otwierają się domyślnie w przeglądarce, chyba że zostaną zatwierdzone</string>
     <string name="app_links_unverified_banner_title">Niezweryfikowane linki internetowe</string>
@@ -625,6 +628,7 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="patcher_memory_adjustment_title">Za mało pamięci</string>
     <string name="patcher_memory_adjustment_description">System zatrzymał modyfikator podczas działania z limitem pamięci %1$d MB. Obniżenie limitu do %2$d MB sprawia, że modyfikator staje się mniejszym celem dla systemu i może pozwolić na ukończenie procesu</string>
     <string name="patcher_memory_adjustment_description_at_minimum">System zatrzymał modyfikator podczas działania z limitem pamięci %1$d MB, który jest już najniższym z dostępnych. Spróbuj zmodyfikować z mniejszą liczbą źródeł modyfikacji lub wybierz mniej modyfikacji</string>
+    <string name="patcher_memory_adjustment_description_finished">System zatrzymał modyfikator przy limicie pamięci %1$d MB, a operacja powiodła się dopiero przy %2$d MB. Rozpoczęcie od %2$d MB pozwoli pominąć tę nieudaną próbę następnym razem</string>
     <string name="patcher_memory_adjustment_apply">Obniż do %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Modyfikowanie w toku…</string>
@@ -865,6 +869,10 @@ Modyfikacje nie są tym objęte: włącz przedpremierowe modyfikacje dla każdeg
     <string name="notification_channel_patch_updates">Aktualizacje modyfikacji</string>
     <string name="notification_channel_patch_updates_description">Powiadomienia o nowych wydaniach modyfikacji</string>
     <string name="notification_channel_patcher_description">Wyświetlane, gdy Morphe modyfikuje aplikację w tle</string>
+    <string name="notification_channel_mounted_apps">Zamontowane aplikacje</string>
+    <string name="notification_channel_mounted_apps_description">Gdy inna wersja zastąpi zamontowaną aplikację i jej modyfikacja przestanie działać</string>
+    <string name="notification_mount_replaced_title">%1$s nie jest już zmodyfikowana</string>
+    <string name="notification_mount_replaced_text">v%1$s zastąpiła zmodyfikowaną v%2$s. Otwórz Morphe, aby ją przywrócić</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Ustawienia eksperckie</string>
     <string name="settings_advanced_expert_mode">Tryb ekspercki</string>
@@ -1281,9 +1289,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="selected">Wybrano</string>
     <string name="not_selected">Nie wybrano</string>
     <string name="select_all">Zaznacz wszystko</string>
-    <string name="select_all_done">Zaznaczono wszystko</string>
     <string name="deselect_all">Odznacz wszystko</string>
-    <string name="deselect_all_done">Odznaczono wszystko</string>
     <string name="reorder_list">Zmień kolejność</string>
     <string name="reorder_list_hint">Przeciągnij, aby zmienić kolejność</string>
     <string name="reorder_done">Zapisano kolejność</string>
@@ -1319,6 +1325,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="unmount">Odmontuj</string>
     <string name="unmounted">Odmontowano</string>
     <string name="remount">Zamontuj ponownie</string>
+    <string name="restore">Przywróć</string>
     <string name="share">Udostępnij</string>
     <string name="install">Zainstaluj</string>
     <string name="installed">Zainstalowano</string>
@@ -1339,6 +1346,8 @@ Wymagane są następujące wymiary obrazów:
     <string name="sources">Źródła</string>
     <string name="installing_ellipsis">Instalowanie…</string>
     <string name="mounting_ellipsis">Montowanie…</string>
+    <string name="mount_stage_restoring_stock">Przywracanie oryginału…</string>
+    <string name="mount_stage_copying">Kopiowanie…</string>
     <string name="unmounting_ellipsis">Odmontowywanie…</string>
     <string name="importing_ellipsis">Importowanie…</string>
     <string name="imported_successfully">Zaimportowano pomyślnie</string>

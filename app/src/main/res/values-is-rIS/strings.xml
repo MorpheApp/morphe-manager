@@ -491,9 +491,12 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="home_app_info_app_update_available_description">Plásturuppspretturnar styðja nýrri útgáfu af þessu forriti. Plásturaðu forritið aftur til að fara yfir í þá útgáfu.</string>
     <string name="home_app_info_newest_supported_version">Nýjasta studda útgáfan</string>
     <string name="home_app_info_version_move">Uppsett útgáfa: %1$s, nýjasta studda útgáfan: %2$s</string>
+    <string name="home_app_info_version_restore">Uppsett %1$s, plástrað %2$s</string>
     <string name="home_app_info_app_deleted_warning">App var afhent</string>
     <string name="home_app_info_app_deleted_description">Þetta app var afhent utan Morphe. Endurpakkalaðu það til að endurheimta virkni</string>
     <string name="home_app_info_not_patched_description">Óplötuð útgáfa af þessu forriti er uppsett. Morphe hefur enn fyrri plástursskrá sína</string>
+    <string name="home_app_info_mount_replaced_description">Önnur útgáfa kom í stað tengda forritsins, svo plástrinn á ekki lengur við. Endurheimt setur plástruðu útgáfuna aftur</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play uppfærði tengda forritið, svo plástrinn á ekki lengur við. Endurheimt setur plástruðu útgáfuna aftur. Slökktu á sjálfvirkri uppfærslu á því í Google Play til að það haldist plástrað</string>
     <string name="app_links_title">Studdir veftenglar</string>
     <string name="app_links_description">Á Android 12+ opnast tenglar á studd lén sjálfgefið í vafranum þínum nema þeir séu samþykktir</string>
     <string name="app_links_unverified_banner_title">Veftenglar ekki staðfestir</string>
@@ -622,6 +625,7 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="patcher_memory_adjustment_title">Ekki nóg minni</string>
     <string name="patcher_memory_adjustment_description">Patcher var stöðvaður af kerfinu á meðan hann keyrði með %1$d MB minnismörk. Lækkun minnismarkanna í %2$d MB gerir hann að minna skotmarki og getur leyft keyrslunni að ljúka.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Patcher var stöðvaður af kerfinu á meðan hann keyrði með %1$d MB minnismörk, sem eru þegar þau lægstu sem í boði eru. Reyndu að plástra með færri uppsprettum, eða veldu færri plástra.</string>
+    <string name="patcher_memory_adjustment_description_finished">Kerfið stöðvaði plástrarann við %1$d MB minnismörk, og það kláraðist aðeins við %2$d MB. Að byrja við %2$d MB sleppir þeirri glötuðu tilraun næst</string>
     <string name="patcher_memory_adjustment_apply">Lækka í %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Breytistilling í gangi…</string>
@@ -862,6 +866,7 @@ Plástrar verða ekki fyrir áhrifum: virkjaðu forútgáfuplástra fyrir hverja
     <string name="notification_channel_patch_updates">Plástursuppfærslur</string>
     <string name="notification_channel_patch_updates_description">Tilkynningar um nýjar plástursútgáfur</string>
     <string name="notification_channel_patcher_description">Sýnt þegar Morphe breytir app í bakgrunninum</string>
+    <string name="notification_channel_mounted_apps">Tengd forrit</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Advanced</string>
     <string name="settings_advanced_expert_mode">Sérstakur háttur</string>
@@ -1275,9 +1280,7 @@ Nánari upplýsingar: %2$s"</string>
     <string name="selected">Valinn</string>
     <string name="not_selected">Ekki valinn</string>
     <string name="select_all">Velja allt</string>
-    <string name="select_all_done">Allt valið</string>
     <string name="deselect_all">Afvelja allt</string>
-    <string name="deselect_all_done">Allt afveldur</string>
     <string name="reorder_list">Endurreikning á lista</string>
     <string name="reorder_list_hint">Drag til að endurreikna</string>
     <string name="reorder_done">Röð vistuð</string>

@@ -493,9 +493,12 @@
     <string name="home_app_info_app_update_available_description">Извори закрпа подржавају новију верзију ове апликације. Поново закрпите апликацију да бисте прешли на ту верзију</string>
     <string name="home_app_info_newest_supported_version">Најновија подржана</string>
     <string name="home_app_info_version_move">Инсталирана %1$s, најновија подржана %2$s</string>
+    <string name="home_app_info_version_restore">Инсталирано %1$s, закрпљено %2$s</string>
     <string name="home_app_info_app_deleted_warning">Aplikacija je deinstalirana</string>
     <string name="home_app_info_app_deleted_description">Ova aplikacija je deinstalirana izvan Morphe. Ponovo je instalirajte da bi obnovili funkcionalnost</string>
     <string name="home_app_info_not_patched_description">Инсталирана је незакрпљена верзија ове апликације. Morphe и даље има свој претходни запис о закрпама</string>
+    <string name="home_app_info_mount_replaced_description">Друга верзија је заменила монтирану апликацију, па закрпа више не важи. Враћање враћа закрпљену верзију</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play је ажурирао монтирану апликацију, па закрпа више не важи. Враћање враћа закрпљену верзију. Искључите аутоматско ажурирање за њу у Google Play-у да би остала закрпљена</string>
     <string name="app_links_title">Подржани веб линкови</string>
     <string name="app_links_description">На Android 12+, линкови ка подржаним доменима се подразумевано отварају у вашем прегледачу, осим ако су одобрени</string>
     <string name="app_links_unverified_banner_title">Веб линкови нису верификовани</string>
@@ -624,6 +627,7 @@
     <string name="patcher_memory_adjustment_title">Нема довољно меморије</string>
     <string name="patcher_memory_adjustment_description">Систем је зауставио патчера док је радио са меморијским ограничењем од %1$d MB. Смањење ограничења на %2$d MB чини патчера мањом метом и може омогућити да се извршавање заврши.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Систем је зауставио патчера док је радио са меморијским ограничењем од %1$d MB, што је већ најниже доступно. Покушајте да покренете патчовање са мање извора патчева, или изаберите мање патчева.</string>
+    <string name="patcher_memory_adjustment_description_finished">Систем је зауставио пачер при меморијском ограничењу од %1$d MB, а завршио је тек при %2$d MB. Покретање од %2$d MB следећи пут прескаче тај изгубљени покушај</string>
     <string name="patcher_memory_adjustment_apply">Смањи на %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Закрпљавање је у току…</string>
@@ -864,6 +868,7 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="notification_channel_patch_updates">Ажурирања закрпа</string>
     <string name="notification_channel_patch_updates_description">Обавештења о новим издањима закрпа</string>
     <string name="notification_channel_patcher_description">Приказано док Morphe патчи апликацију у позадини</string>
+    <string name="notification_channel_mounted_apps">Монтиране апликације</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Навише подешавања</string>
     <string name="settings_advanced_expert_mode">Нави моћ</string>
@@ -1280,9 +1285,7 @@ morphe_header_custom_dark.png
     <string name="selected">Одабрано</string>
     <string name="not_selected">Није одбрано</string>
     <string name="select_all">Изаберите све</string>
-    <string name="select_all_done">Све изабрано</string>
     <string name="deselect_all">Поништи све изборе</string>
-    <string name="deselect_all_done">Све поништено</string>
     <string name="reorder_list">Преуреди листу</string>
     <string name="reorder_list_hint">Превуците да преуредите</string>
     <string name="reorder_done">Ред је сачуван</string>

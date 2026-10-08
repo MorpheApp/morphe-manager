@@ -1279,9 +1279,7 @@ Ma’lumotlar: %2$s"</string>
     <string name="selected">Tanlanmagan</string>
     <string name="not_selected">Kengaytirilgan</string>
     <string name="select_all">Tanlash</string>
-    <string name="select_all_done">Barchasi tanlandi</string>
     <string name="deselect_all">Tanlashni bekor qilish</string>
-    <string name="deselect_all_done">Barchasi tanlanmadi</string>
     <string name="reorder_list">Tartibni qayta tartibga solish</string>
     <string name="reorder_list_hint">Tartibni qayta tartibga solish uchun torting</string>
     <string name="reorder_done">Tartib saqlab qolindi</string>

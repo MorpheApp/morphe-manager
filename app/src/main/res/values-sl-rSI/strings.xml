@@ -1280,9 +1280,7 @@ Podrobnosti: %2$s"</string>
     <string name="selected">Izbrano</string>
     <string name="not_selected">Ni izbrano</string>
     <string name="select_all">Izberi vse</string>
-    <string name="select_all_done">Vse izbrano</string>
     <string name="deselect_all">Ne izberi nič</string>
-    <string name="deselect_all_done">Nič več izbrano</string>
     <string name="reorder_list">Ponovno uredi seznam</string>
     <string name="reorder_list_hint">Povlecite za ponovno ureditev</string>
     <string name="reorder_done">Vrstni red shranjen</string>

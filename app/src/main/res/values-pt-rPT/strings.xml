@@ -493,9 +493,12 @@ Zona externa (tracejada): pode ser cortada pela máscara do iniciador - mantenha
     <string name="home_app_info_app_update_available_description">As fontes de patches suportam uma versão mais recente deste aplicativo. Aplique o patch novamente para mudar para essa versão.</string>
     <string name="home_app_info_newest_supported_version">Versão mais recente suportada</string>
     <string name="home_app_info_version_move">Versão instalada %1$s, a mais recente suportada é %2$s</string>
+    <string name="home_app_info_version_restore">Instalado %1$s, corrigido %2$s</string>
     <string name="home_app_info_app_deleted_warning">A aplicação foi desinstalada</string>
     <string name="home_app_info_app_deleted_description">Esta aplicação foi desinstalada fora do Morphe. Modifica-a de novo para restaurar as funcionalidades</string>
     <string name="home_app_info_not_patched_description">Uma versão não corrigida deste aplicativo está instalada. O Morphe ainda tem seu registro de patch anterior</string>
+    <string name="home_app_info_mount_replaced_description">Outra versão substituiu o aplicativo montado, então o patch não se aplica mais. Restaurar repõe a versão corrigida</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">O Google Play atualizou o aplicativo montado, então o patch não se aplica mais. Restaurar repõe a versão corrigida. Desative a atualização automática dele no Google Play para mantê-lo corrigido</string>
     <string name="app_links_title">Links da web suportados</string>
     <string name="app_links_description">No Android 12+, links para domínios suportados abrem no seu navegador por padrão, a menos que sejam aprovados</string>
     <string name="app_links_unverified_banner_title">Links da web não verificados</string>
@@ -624,6 +627,7 @@ Desinstalar apagará permanentemente todos os dados do aplicativo."</string>
     <string name="patcher_memory_adjustment_title">Memória insuficiente</string>
     <string name="patcher_memory_adjustment_description">O patcher foi interrompido pelo sistema durante a execução com um limite de memória de %1$d MB. Reduzir o limite para %2$d MB torna o patcher um alvo menor e pode permitir que a execução seja concluída.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">O patcher foi interrompido pelo sistema durante a execução com um limite de memória de %1$d MB, que já é o menor disponível. Tente usar menos fontes de patch ou selecione menos patches.</string>
+    <string name="patcher_memory_adjustment_description_finished">O sistema interrompeu o patcher ao atingir o limite de memória de %1$d MB, e ele só foi concluído com %2$d MB. Começar com %2$d MB evita essa tentativa perdida na próxima vez</string>
     <string name="patcher_memory_adjustment_apply">Reduzir para %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Modificação em progresso…</string>
@@ -864,6 +868,7 @@ Os patches não são afetados: ative os patches de pré-lançamento para cada fo
     <string name="notification_channel_patch_updates">Atualizações de patch</string>
     <string name="notification_channel_patch_updates_description">Notificações sobre novas versões de patch</string>
     <string name="notification_channel_patcher_description">Mostrado enquanto o Morphe está a modificar uma aplicação em segundo plano</string>
+    <string name="notification_channel_mounted_apps">Aplicativos montados</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Definições avançadas</string>
     <string name="settings_advanced_expert_mode">Modo avançado</string>
@@ -1280,9 +1285,7 @@ Detalhes: %2$s"</string>
     <string name="selected">Selecionado</string>
     <string name="not_selected">Não selecionado</string>
     <string name="select_all">Selecionar tudo</string>
-    <string name="select_all_done">Todos selecionados</string>
     <string name="deselect_all">Desmarcar tudo</string>
-    <string name="deselect_all_done">Todos desmarcados</string>
     <string name="reorder_list">Reordenar lista</string>
     <string name="reorder_list_hint">Arrastar para reordenar</string>
     <string name="reorder_done">Ordem salva</string>

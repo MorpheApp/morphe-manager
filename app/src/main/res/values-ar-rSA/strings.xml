@@ -493,9 +493,12 @@
     <string name="home_app_info_app_update_available_description">مصادر التعديل تدعم إصدارًا أحدث من هذا التطبيق. قم بتعديله مرة أخرى للانتقال إلى هذا الإصدار</string>
     <string name="home_app_info_newest_supported_version">أحدث إصدار مدعوم</string>
     <string name="home_app_info_version_move">المثبَّت %1$s، أحدث إصدار مدعوم %2$s</string>
+    <string name="home_app_info_version_restore">الإصدار المثبّت %1$s، والإصدار المُصحَّح %2$s</string>
     <string name="home_app_info_app_deleted_warning">التطبيق غير مثبت</string>
     <string name="home_app_info_app_deleted_description">تم إلغاء تثبيت هذا التطبيق من خارج Morphe. اعد تعديله لاستعادة الوظائف</string>
     <string name="home_app_info_not_patched_description">تم تثبيت إصدار غير معدل من هذا التطبيق. لا يزال Morphe يحتفظ بسجل التعديل السابق</string>
+    <string name="home_app_info_mount_replaced_description">استبدل إصدار آخر التطبيق المُركَّب، لذلك لم يعد التصحيح ساريًا. تعمل الاستعادة على إعادة الإصدار المُصحَّح إلى مكانه</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">حدّث Google Play التطبيق المُركَّب، لذلك لم يعد التصحيح ساريًا. تعمل الاستعادة على إعادة الإصدار المُصحَّح إلى مكانه. أوقِف التحديث التلقائي له في Google Play لإبقائه مُصحَّحًا</string>
     <string name="app_links_title">روابط الويب المدعومة</string>
     <string name="app_links_description">على أندرويد 12+، تُفتح روابط النطاقات المدعومة في متصفحك افتراضيًا ما لم تتم الموافقة عليها</string>
     <string name="app_links_unverified_banner_title">روابط الويب غير الموثَّقة</string>
@@ -626,6 +629,7 @@
     <string name="patcher_memory_adjustment_description">أوقف النظام أداة التعديل أثناء تشغيلها بحد ذاكرة قدره %1$d ميجابايت. سيؤدي خفض الحد إلى %2$d ميجابايت إلى تقليل حجم أداة التعديل، مما يسمح بإكمال عملية التعديل</string>
     <string name="patcher_memory_adjustment_description_at_minimum">أوقف النظام أداة التعديل أثناء تشغيلها بحد ذاكرة يبلغ %1$d ميجابايت، وهو الحد الأدنى المتاح. حاول التعديل باستخدام عدد أقل من مصادر التعديل، أو حدد عددًا أقل من التعديلات
 </string>
+    <string name="patcher_memory_adjustment_description_finished">أوقف النظام أداة التصحيح عند حد ذاكرة يبلغ %1$d ميغابايت، ولم تكتمل إلا عند %2$d ميغابايت. سيؤدي البدء عند %2$d ميغابايت إلى تجنّب تكرار المحاولة الضائعة في المرة القادمة</string>
     <string name="patcher_memory_adjustment_apply">خفِّض الحد إلى %1$d ميغابايت</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">جارٍ التعديل…</string>
@@ -868,6 +872,7 @@
     <string name="notification_channel_patch_updates">تحديثات التعديل</string>
     <string name="notification_channel_patch_updates_description">إشعارات عن إصدارات تعديل جديدة</string>
     <string name="notification_channel_patcher_description">يتم عرضه أثناء قيام Morphe بتعديل تطبيق في الخلفية</string>
+    <string name="notification_channel_mounted_apps">التطبيقات المُركَّبة</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">إعدادات الخبير</string>
     <string name="settings_advanced_expert_mode">وضع الخبير</string>
@@ -1285,9 +1290,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="selected">محدد</string>
     <string name="not_selected">غير محدد</string>
     <string name="select_all">تحديد الكل</string>
-    <string name="select_all_done">تم تحديد الكل</string>
     <string name="deselect_all">إلغاء تحديد الكل</string>
-    <string name="deselect_all_done">تم إلغاء تحديد الكل</string>
     <string name="reorder_list">إعادة ترتيب القائمة</string>
     <string name="reorder_list_hint">اسحب لإعادة الترتيب</string>
     <string name="reorder_done">تم حفظ الترتيب</string>

@@ -1285,9 +1285,7 @@ Chi tiết: %2$s"</string>
     <string name="selected">Đã chọn</string>
     <string name="not_selected">Không chọn</string>
     <string name="select_all">Chọn tất cả</string>
-    <string name="select_all_done">Đã chọn tất cả</string>
     <string name="deselect_all">Bỏ chọn tất cả</string>
-    <string name="deselect_all_done">Đã bỏ chọn tất cả</string>
     <string name="reorder_list">Sắp xếp lại danh sách</string>
     <string name="reorder_list_hint">Kéo để sắp xếp lại</string>
     <string name="reorder_done">Đã lưu thứ tự</string>

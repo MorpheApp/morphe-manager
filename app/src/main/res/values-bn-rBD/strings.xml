@@ -493,9 +493,12 @@
     <string name="home_app_info_app_update_available_description">প্যাচ সোর্সসগুলো এই অ্যাপের একটি নতুন ভার্শন সমর্থন করে। সেই ভার্শনে যেতে আবার প্যাচ করুন।</string>
     <string name="home_app_info_newest_supported_version">নতুনতম সমর্থিত</string>
     <string name="home_app_info_version_move">ইনস্টল করা %1$s, নতুনতম সমর্থিত %2$s</string>
+    <string name="home_app_info_version_restore">ইনস্টল হয়েছে %1$s, প্যাচ করা হয়েছে %2$s</string>
     <string name="home_app_info_app_deleted_warning">অ্যাপটি বের করা হয়েছে</string>
     <string name="home_app_info_app_deleted_description">এই অ্যাপটি মরফে বাইরে বের করা হয়েছে। ফাংশনালিটি পুনরুদ্ধার করতে পুনরায় প্যাচ করুন</string>
     <string name="home_app_info_not_patched_description">এই অ্যাপের একটি অপ্যাচড সংস্করণ ইনস্টল করা আছে। Morphe এখনও তার পূর্ববর্তী প্যাচ রেকর্ড ধারণ করে।</string>
+    <string name="home_app_info_mount_replaced_description">অন্য একটি সংস্করণ মাউন্ট করা অ্যাপটি প্রতিস্থাপন করেছে, তাই প্যাচটি আর প্রযোজ্য নয়। পুনরুদ্ধার করলে প্যাচ করা সংস্করণটি ফিরে আসে</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play মাউন্ট করা অ্যাপটি আপডেট করেছে, তাই প্যাচটি আর প্রযোজ্য নয়। পুনরুদ্ধার করলে প্যাচ করা সংস্করণটি ফিরে আসে। এটি প্যাচ করা রাখতে Google Play-তে এর স্বয়ংক্রিয় আপডেট বন্ধ করুন</string>
     <string name="app_links_title">সমর্থিত ওয়েব লিঙ্ক</string>
     <string name="app_links_description">Android 12+ এ, সমর্থিত ডোমেইনের লিঙ্কগুলি অনুমোদিত না হলে ডিফল্টরূপে আপনার ব্রাউজারে খোলে</string>
     <string name="app_links_unverified_banner_title">ওয়েব লিঙ্ক যাচাই করা হয়নি</string>
@@ -624,6 +627,7 @@
     <string name="patcher_memory_adjustment_title">পর্যাপ্ত মেমোরি নেই</string>
     <string name="patcher_memory_adjustment_description">প্যাচারটি %1$d MB মেমোরি সীমা নিয়ে চলার সময় সিস্টেম এটি বন্ধ করে দিয়েছিল। সীমাটি %2$d MB-এ কমালে প্যাচারটি ছোট লক্ষ্য হয়ে যায় এবং রানটি শেষ হতে পারে।</string>
     <string name="patcher_memory_adjustment_description_at_minimum">প্যাচারটি %1$d MB মেমোরি সীমা নিয়ে চলার সময় সিস্টেম এটি বন্ধ করে দিয়েছিল, যা ইতিমধ্যে সর্বনিম্ন উপলব্ধ। কম প্যাচ উৎস দিয়ে প্যাচিং করার চেষ্টা করুন, অথবা কম প্যাচ নির্বাচন করুন।</string>
+    <string name="patcher_memory_adjustment_description_finished">সিস্টেমটি %1$d MB মেমরি সীমাতে প্যাচারটি বন্ধ করে দিয়েছে, এবং এটি কেবল %2$d MB-তে শেষ হয়েছে। পরের বার %2$d MB থেকে শুরু করলে সেই ব্যর্থ প্রচেষ্টাটি এড়িয়ে যাবে</string>
     <string name="patcher_memory_adjustment_apply">%1$d MB-এ নামান</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">প্যাচিং চলছে…</string>
@@ -864,6 +868,7 @@
     <string name="notification_channel_patch_updates">প্যাচ আপডেট</string>
     <string name="notification_channel_patch_updates_description">নতুন প্যাচ রিলিজ সম্পর্কে বিজ্ঞপ্তি</string>
     <string name="notification_channel_patcher_description">Morphe ব্যাকগ্রাউন্ডে কোনো অ্যাপ প্যাচ করার সময় দেখানো হয়</string>
+    <string name="notification_channel_mounted_apps">মাউন্ট করা অ্যাপগুলো</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">বিশেষ্ট সেটিংস</string>
     <string name="settings_advanced_expert_mode">বিশেষ্ট মোড</string>
@@ -1272,9 +1277,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="selected">নির্বাচিত</string>
     <string name="not_selected">নির্বাচিত নয়</string>
     <string name="select_all">সবগুলি নির্বাচন করুন</string>
-    <string name="select_all_done">সব নির্বাচন করা হয়েছে</string>
     <string name="deselect_all">সবগুলি নির্বাচন বাতিল করুন</string>
-    <string name="deselect_all_done">সব ডি-সিলেক্ট করা হয়েছে</string>
     <string name="reorder_list">তালিকাটি নতুন করে সাজান</string>
     <string name="reorder_list_hint">নতুন করে সাজাতে টেনে আনুন</string>
     <string name="reorder_done">নতুন ক্রমটি সেভ করা হয়েছে</string>

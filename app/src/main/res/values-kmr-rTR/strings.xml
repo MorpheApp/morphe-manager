@@ -1278,9 +1278,7 @@ Detay: %2$s"</string>
     <string name="selected">Hilbijartin</string>
     <string name="not_selected">Ne hilbijartin</string>
     <string name="select_all">Hemûyan hilbijêre</string>
-    <string name="select_all_done">Hemûyan hilbijartin</string>
     <string name="deselect_all">Hemûyan hilbijêre</string>
-    <string name="deselect_all_done">Hemûyan bêhilbijartin</string>
     <string name="reorder_list">Lîsteyê dîsa rêzekirin</string>
     <string name="reorder_list_hint">Bixistin da ku dîsa rêzekirin</string>
     <string name="reorder_done">Rêzê hat xêzkirin</string>

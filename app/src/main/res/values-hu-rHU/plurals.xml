@@ -87,6 +87,10 @@
         <item quantity="one">%s forrás telepítve</item>
         <item quantity="other">%s forrás telepítve</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="one">%1$s · %2$s szűrt</item>
+        <item quantity="other">%1$s · %2$s szűrt</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s rejtett alkalmazás</item>
         <item quantity="other">%s rejtett alkalmazás</item>

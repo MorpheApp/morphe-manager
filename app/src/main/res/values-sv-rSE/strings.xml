@@ -1280,9 +1280,7 @@ Information: %2$s"</string>
     <string name="selected">Vald</string>
     <string name="not_selected">Inte vald</string>
     <string name="select_all">Markera alla</string>
-    <string name="select_all_done">Alla markerades</string>
     <string name="deselect_all">Avmarkera alla</string>
-    <string name="deselect_all_done">Alla avmarkerades</string>
     <string name="reorder_list">Ordna om listan</string>
     <string name="reorder_list_hint">Dra för att ändra ordning</string>
     <string name="reorder_done">Ordningen har sparats</string>

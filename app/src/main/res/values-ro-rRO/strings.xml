@@ -493,9 +493,12 @@ Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păs
     <string name="home_app_info_app_update_available_description">Sursele de patch-uri suportă o versiune mai nouă a acestei aplicații. Aplică patch-ul din nou pentru a trece la acea versiune.</string>
     <string name="home_app_info_newest_supported_version">Cea mai nouă versiune suportată</string>
     <string name="home_app_info_version_move">Instalat: %1$s, cea mai nouă versiune suportată: %2$s</string>
+    <string name="home_app_info_version_restore">Instalat %1$s, patchuit %2$s</string>
     <string name="home_app_info_app_deleted_warning">Aplicația a fost dezinstalată</string>
     <string name="home_app_info_app_deleted_description">Această aplicație a fost dezinstalată în afara Morphe. Aplica-o din nou pentru a restabili funcționalitatea</string>
     <string name="home_app_info_not_patched_description">O versiune necorectată a acestei aplicații este instalată. Morphe încă are înregistrarea anterioară a corecțiilor sale.</string>
+    <string name="home_app_info_mount_replaced_description">O altă versiune a înlocuit aplicația montată, prin urmare patch-ul nu se mai aplică. Restaurarea repune versiunea cu patch-ul aplicat</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play a actualizat aplicația montată, prin urmare patch-ul nu se mai aplică. Restaurarea repune versiunea cu patch-ul aplicat. Dezactivează actualizarea automată pentru aplicație în Google Play ca să rămână cu patch-ul aplicat</string>
     <string name="app_links_title">Linkuri web acceptate</string>
     <string name="app_links_description">Pe Android 12+, linkurile către domeniile acceptate se deschid implicit în browserul dvs., cu excepția cazului în care acestea sunt aprobate</string>
     <string name="app_links_unverified_banner_title">Linkuri web neverificate</string>
@@ -624,6 +627,7 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="patcher_memory_adjustment_title">Memorie insuficientă</string>
     <string name="patcher_memory_adjustment_description">Patcher-ul a fost oprit de sistem în timp ce rula cu o limită de memorie de %1$d MB. Scăderea limitei la %2$d MB face din patcher o țintă mai mică și poate permite finalizarea rulării.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Patcher-ul a fost oprit de sistem în timp ce rula cu o limită de memorie de %1$d MB, care este deja cea mai mică disponibilă. Încearcă să aplici patch-uri cu mai puține surse de patch-uri sau selectează mai puține patch-uri.</string>
+    <string name="patcher_memory_adjustment_description_finished">Sistemul a oprit patcher-ul la o limită de memorie de %1$d MB, iar acesta a terminat doar la %2$d MB. Pornirea de la %2$d MB omite acea încercare eșuată data viitoare</string>
     <string name="patcher_memory_adjustment_apply">Scade la %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Se aplică modificările…</string>
@@ -863,6 +867,7 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="notification_channel_patch_updates">Actualizări de patch</string>
     <string name="notification_channel_patch_updates_description">Notificări despre noile lansări de patch</string>
     <string name="notification_channel_patcher_description">Afișate în timp ce Morphe aplică un patch unei aplicații în fundal</string>
+    <string name="notification_channel_mounted_apps">Aplicații montate</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Setări expert</string>
     <string name="settings_advanced_expert_mode">Mod expert</string>
@@ -1279,9 +1284,7 @@ Detalii: %2$s"</string>
     <string name="selected">Selectat</string>
     <string name="not_selected">Neselectat</string>
     <string name="select_all">Selectează tot</string>
-    <string name="select_all_done">Toate selectate</string>
     <string name="deselect_all">Deselecteazã totul</string>
-    <string name="deselect_all_done">Toate deselectorizate</string>
     <string name="reorder_list">Reordonare listă</string>
     <string name="reorder_list_hint">Glisați pentru a reordona</string>
     <string name="reorder_done">Ordine salvată</string>

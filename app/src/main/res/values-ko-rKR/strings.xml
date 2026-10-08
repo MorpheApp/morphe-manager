@@ -493,9 +493,12 @@
     <string name="home_app_info_app_update_available_description">패치 소스가 이 앱의 최신 버전을 지원합니다. 해당 버전으로 이동하려면 다시 패치하세요</string>
     <string name="home_app_info_newest_supported_version">지원되는 최신 버전</string>
     <string name="home_app_info_version_move">설치된 버전 %1$s, 지원되는 최신 버전 %2$s</string>
+    <string name="home_app_info_version_restore">%1$s 설치됨, %2$s 패치됨</string>
     <string name="home_app_info_app_deleted_warning">앱이 제거되었습니다</string>
     <string name="home_app_info_app_deleted_description">이 앱은 Morphe 외부에서 제거되었습니다. 기능을 복원하려면 다시 패치하세요</string>
     <string name="home_app_info_not_patched_description">이 앱의 패치되지 않은 버전이 설치되어 있습니다. Morphe는 여전히 이전 패치 기록을 보유하고 있습니다</string>
+    <string name="home_app_info_mount_replaced_description">다른 버전이 마운트된 앱을 교체하여 패치가 더 이상 적용되지 않습니다. 복원을 누르면 패치된 버전을 다시 적용할 수 있습니다</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play에서 마운트된 앱을 업데이트하여 패치가 더 이상 적용되지 않습니다. 복원을 누르면 패치된 버전을 다시 적용할 수 있습니다. 패치 상태를 유지하려면 Google Play에서 해당 앱의 자동 업데이트를 비활성화하세요</string>
     <string name="app_links_title">지원되는 웹 링크</string>
     <string name="app_links_description">Android 12 이상에서는 승인된 경우를 제외하고 지원되는 도메인 링크가 기본적으로 브라우저에서 열립니다</string>
     <string name="app_links_unverified_banner_title">웹 링크가 확인되지 않음</string>
@@ -624,6 +627,7 @@
     <string name="patcher_memory_adjustment_title">메모리가 부족합니다</string>
     <string name="patcher_memory_adjustment_description">패처가 %1$d MB 메모리 제한으로 실행되는 동안 시스템에 의해 중지되었습니다. 제한을 %2$d MB로 낮추면 패처가 사용하는 메모리가 줄어들어 작업이 완료될 수 있습니다</string>
     <string name="patcher_memory_adjustment_description_at_minimum">패처가 %1$d MB 메모리 제한으로 실행되는 동안 시스템에 의해 중지되었습니다. 이 제한은 이미 설정 가능한 가장 낮은 값입니다. 패치 소스를 더 적게 사용하거나 패치를 더 적게 선택한 후 다시 패치해 보세요</string>
+    <string name="patcher_memory_adjustment_description_finished">시스템이 패처를 %1$dMB 메모리 제한에서 중단했지만, 실제로는 %2$dMB까지 사용해야 작업이 완료되었습니다. 다음번에는 %2$dMB부터 시작하면 이전에 메모리 부족으로 실패했던 시도를 건너뛸 수 있습니다</string>
     <string name="patcher_memory_adjustment_apply">%1$d MB로 낮추기</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">패치를 진행하는 중…</string>
@@ -863,6 +867,10 @@
     <string name="notification_channel_patch_updates">패치 업데이트</string>
     <string name="notification_channel_patch_updates_description">새 패치 릴리스에 대한 알림</string>
     <string name="notification_channel_patcher_description">Morphe가 백그라운드에서 앱을 패치하는 동안에 표시되는 알림</string>
+    <string name="notification_channel_mounted_apps">마운트된 앱</string>
+    <string name="notification_channel_mounted_apps_description">다른 버전이 마운트된 앱을 교체하여 기존 패치가 더 이상 적용되지 않는 경우입니다</string>
+    <string name="notification_mount_replaced_title">%1$s는 더 이상 패치되지 않음</string>
+    <string name="notification_mount_replaced_text">v%1$s가 패치된 v%2$s를 교체했습니다. Morphe를 열어서 복원하세요</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">전문가 설정</string>
     <string name="settings_advanced_expert_mode">전문가 모드</string>
@@ -1278,9 +1286,7 @@ morphe_header_custom_dark.png
     <string name="selected">선택됨</string>
     <string name="not_selected">선택 안함</string>
     <string name="select_all">모두 선택</string>
-    <string name="select_all_done">모두 선택하였습니다</string>
     <string name="deselect_all">모두 선택 해제</string>
-    <string name="deselect_all_done">모두 선택 해제하였습니다</string>
     <string name="reorder_list">목록 다시 정렬</string>
     <string name="reorder_list_hint">드래그하여 순서를 변경하세요</string>
     <string name="reorder_done">순서를 저장하였습니다</string>
@@ -1316,6 +1322,7 @@ morphe_header_custom_dark.png
     <string name="unmount">마운트 해제</string>
     <string name="unmounted">마운트 해제됨</string>
     <string name="remount">다시 마운트</string>
+    <string name="restore">복원</string>
     <string name="share">공유</string>
     <string name="install">설치</string>
     <string name="installed">설치됨</string>
@@ -1336,6 +1343,8 @@ morphe_header_custom_dark.png
     <string name="sources">소스</string>
     <string name="installing_ellipsis">설치하는 중…</string>
     <string name="mounting_ellipsis">마운트하는 중…</string>
+    <string name="mount_stage_restoring_stock">원본을 복원하는 중…</string>
+    <string name="mount_stage_copying">복사하는 중…</string>
     <string name="unmounting_ellipsis">마운트 해제하는 중…</string>
     <string name="importing_ellipsis">가져오는 중…</string>
     <string name="imported_successfully">성공적으로 가져왔습니다</string>

@@ -66,6 +66,9 @@
     <plurals name="sources_management_subtitle">
         <item quantity="other">インストール済みのソース %s 件</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="other">%1$s · %2$sで絞り込み中</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="other">%s 個のアプリが非表示</item>
     </plurals>

@@ -494,9 +494,12 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="home_app_info_app_update_available_description">Sumber tambalan mendukung versi terbaru dari aplikasi ini. Tambal lagi untuk berpindah ke versi tersebut</string>
     <string name="home_app_info_newest_supported_version">Versi terbaru yang didukung</string>
     <string name="home_app_info_version_move">Versi terpasang %1$s, versi terbaru yang didukung %2$s</string>
+    <string name="home_app_info_version_restore">Terpasang %1$s, ditambal %2$s</string>
     <string name="home_app_info_app_deleted_warning">Aplikasi telah dicopot</string>
     <string name="home_app_info_app_deleted_description">Aplikasi ini telah dicopot di luar Morphe. Tambal ulang untuk mengembalikan fungsinya</string>
     <string name="home_app_info_not_patched_description">Versi tanpa tambalan dari aplikasi ini terpasang. Morphe masih memiliki catatan tambalan sebelumnya</string>
+    <string name="home_app_info_mount_replaced_description">Versi lain menggantikan aplikasi yang di-mount, sehingga patch tidak berlaku lagi. Pulihkan mengembalikan versi yang sudah ditambal</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play memperbarui aplikasi yang di-mount, sehingga patch tidak berlaku lagi. Pulihkan mengembalikan versi yang sudah ditambal. Nonaktifkan pembaruan otomatis untuk aplikasi tersebut di Google Play agar tetap ditambal</string>
     <string name="app_links_title">Tautan web yang didukung</string>
     <string name="app_links_description">Di Android 12+, tautan ke domain yang didukung terbuka di browser Anda secara default kecuali disetujui</string>
     <string name="app_links_unverified_banner_title">Tautan web tidak terverifikasi</string>
@@ -625,6 +628,7 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="patcher_memory_adjustment_title">Memori tidak cukup</string>
     <string name="patcher_memory_adjustment_description">Penambal dihentikan oleh sistem saat berjalan dengan batas memori %1$d MB. Menurunkan batas menjadi %2$d MB membuat penambal menjadi target yang lebih kecil dan dapat membuat prosesnya selesai</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Penambal dihentikan oleh sistem saat berjalan dengan batas memori %1$d MB, yang merupakan batas terendah yang tersedia. Coba lakukan penambalan dengan lebih sedikit sumber tambalan, atau pilih lebih sedikit tambalan</string>
+    <string name="patcher_memory_adjustment_description_finished">Sistem menghentikan patcher pada batas memori %1$d MB, dan baru selesai pada %2$d MB. Memulai dari %2$d MB akan melewati upaya yang gagal itu lain kali</string>
     <string name="patcher_memory_adjustment_apply">Turunkan ke %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Penyematan sedang berlangsung…</string>
@@ -865,6 +869,7 @@ Tambalan tidak terpengaruh: aktifkan tambalan pra-rilis untuk setiap sumber dala
     <string name="notification_channel_patch_updates">Pembaruan patch</string>
     <string name="notification_channel_patch_updates_description">Notifikasi tentang rilis patch baru</string>
     <string name="notification_channel_patcher_description">Ditampilkan saat Morphe menambal aplikasi di latar belakang</string>
+    <string name="notification_channel_mounted_apps">Aplikasi yang di-mount</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Setelan ahli</string>
     <string name="settings_advanced_expert_mode">Mode ahli</string>
@@ -1281,9 +1286,7 @@ Rincian: %2$s"</string>
     <string name="selected">Dipilih</string>
     <string name="not_selected">Tidak dipilih</string>
     <string name="select_all">Pilih semua</string>
-    <string name="select_all_done">Semua dipilih</string>
     <string name="deselect_all">Batal pilih semua</string>
-    <string name="deselect_all_done">Semua tidak dipilih</string>
     <string name="reorder_list">Urutkan ulang daftar</string>
     <string name="reorder_list_hint">Seret untuk mengurutkan ulang</string>
     <string name="reorder_done">Urutan disimpan</string>

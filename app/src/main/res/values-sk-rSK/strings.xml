@@ -493,9 +493,12 @@ Vnútorná zóna (čiarkovaná): môže byť orezaná maskou spúšťača – uc
     <string name="home_app_info_app_update_available_description">Zdroje záplat podporujú novejšiu verziu tejto aplikácie. Znovu ju záplatujte, aby ste prešli na túto verziu.</string>
     <string name="home_app_info_newest_supported_version">Najnovšia podporovaná</string>
     <string name="home_app_info_version_move">Nainštalovaná %1$s, najnovšia podporovaná %2$s</string>
+    <string name="home_app_info_version_restore">Nainštalovaná verzia: %1$s, upravená verzia: %2$s</string>
     <string name="home_app_info_app_deleted_warning">Aplikácia bola odinštalovaná</string>
     <string name="home_app_info_app_deleted_description">Táto aplikácia bola odinštalovaná mimo Morphe. Znovu ju zaplátajte aby ste obnovili jej funkčnosť</string>
     <string name="home_app_info_not_patched_description">Nainštalovaná je nezapatchovaná verzia tejto aplikácie. Morphe má stále svoj predchádzajúci záznam o oprave</string>
+    <string name="home_app_info_mount_replaced_description">Iná verzia nahradila pripojenú aplikáciu, takže oprava už neplatí. Obnovenie vráti upravenú verziu späť</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play aktualizoval pripojenú aplikáciu, takže oprava už neplatí. Obnovenie vráti upravenú verziu späť. Vypnite pre ňu automatické aktualizácie v Google Play, aby zostala upravená</string>
     <string name="app_links_title">Podporované webové odkazy</string>
     <string name="app_links_description">V systéme Android 12 a novšom sa odkazy na podporované domény štandardne otvárajú v prehliadači, pokiaľ ich neschválite</string>
     <string name="app_links_unverified_banner_title">Neoverené webové odkazy</string>
@@ -624,6 +627,7 @@ Odinštalovanie trvalo vymaže všetky údaje aplikácie."</string>
     <string name="patcher_memory_adjustment_title">Nedostatok pamäte</string>
     <string name="patcher_memory_adjustment_description">Patcher bol zastavený systémom počas behu s limitom pamäte %1$d MB. Zníženie limitu na %2$d MB z neho urobí menší cieľ a môže umožniť dokončenie behu.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Patcher bol zastavený systémom počas behu s limitom pamäte %1$d MB, ktorý je už najnižší dostupný. Skúste použiť menej zdrojov opráv alebo vyberte menej opráv.</string>
+    <string name="patcher_memory_adjustment_description_finished">Systém zastavil patcher pri pamäťovom limite %1$d MB a dokončil sa až pri %2$d MB. Spustenie s limitom %2$d MB nabudúce preskočí tento stratený pokus</string>
     <string name="patcher_memory_adjustment_apply">Znížiť na %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Prebieha plátanie...</string>
@@ -864,6 +868,7 @@ Záplaty tým nie sú ovplyvnené: povoľte predbežné záplaty pre každý zdr
     <string name="notification_channel_patch_updates">Opravné aktualizácie</string>
     <string name="notification_channel_patch_updates_description">Oznámenia o nových opravných verziách</string>
     <string name="notification_channel_patcher_description">Zobrazuje sa, keď Morphe pláta aplikácie na pozadí</string>
+    <string name="notification_channel_mounted_apps">Pripojené aplikácie</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Nastavenia pre skúsených</string>
     <string name="settings_advanced_expert_mode">Režim pre skúsených</string>
@@ -1280,9 +1285,7 @@ Podrobnosti: %2$s"</string>
     <string name="selected">Vybrané</string>
     <string name="not_selected">Nevybrané</string>
     <string name="select_all">Vybrať všetko</string>
-    <string name="select_all_done">Všetko vybrané</string>
     <string name="deselect_all">Zrušiť výber všetkých</string>
-    <string name="deselect_all_done">Všetko zrušené</string>
     <string name="reorder_list">Usporiadať zoznam</string>
     <string name="reorder_list_hint">Potiahni pre usporiadanie</string>
     <string name="reorder_done">Usporiadanie uložené</string>

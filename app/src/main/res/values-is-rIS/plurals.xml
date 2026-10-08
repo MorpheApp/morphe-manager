@@ -87,6 +87,10 @@
         <item quantity="one">%s uppspretta sett upp</item>
         <item quantity="other">%s uppsprettur settar upp</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="one">%1$s · %2$s síað</item>
+        <item quantity="other">%1$s · %2$s síuð</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s falinn app</item>
         <item quantity="other">%s falin app</item>

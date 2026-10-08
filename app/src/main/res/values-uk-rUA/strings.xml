@@ -493,9 +493,12 @@
     <string name="home_app_info_app_update_available_description">Джерела патчів підтримують новішу версію цього застосунку. Пропатчіть знову, щоб перейти на цю версію</string>
     <string name="home_app_info_newest_supported_version">Найновіша підтримувана</string>
     <string name="home_app_info_version_move">Встановлено %1$s, найновіша підтримувана %2$s</string>
+    <string name="home_app_info_version_restore">Встановлено %1$s, пропатчено %2$s</string>
     <string name="home_app_info_app_deleted_warning">Застосунок було видалено</string>
     <string name="home_app_info_app_deleted_description">Це застосунок було видалено поза менеджером Morphe. Перепатчіть його, щоб відновити функціональність</string>
     <string name="home_app_info_not_patched_description">Встановлено непропатчену версію цього застосунку. Morphe все ще має попередній запис про патчинг</string>
+    <string name="home_app_info_mount_replaced_description">Інша версія замінила змонтований застосунок, тому патч більше не застосовується. Відновлення поверне пропатчену версію</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play оновив змонтований застосунок, тому патч більше не застосовується. Відновлення поверне пропатчену версію. Вимкніть для нього автооновлення в Google Play, щоб він залишався пропатченим</string>
     <string name="app_links_title">Підтримувані вебпосилання</string>
     <string name="app_links_description">На Android 12+ посилання на підтримувані домени за замовчуванням відкриваються у браузері, якщо їх не схвалено</string>
     <string name="app_links_unverified_banner_title">Вебпосилання не підтверджено</string>
@@ -624,6 +627,7 @@
     <string name="patcher_memory_adjustment_title">Недостатньо пам\'яті</string>
     <string name="patcher_memory_adjustment_description">Патчер було зупинено системою під час виконання з обмеженням пам\'яті %1$d МБ. Зниження ліміту до %2$d МБ зменшує розмір цілі патчера та може дозволити завершити виконання</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Патчер було зупинено системою під час виконання з обмеженням пам\'яті %1$d МБ, яке вже є мінімально можливим. Спробуйте патчити з меншою кількістю джерел патчів або оберіть менше патчів</string>
+    <string name="patcher_memory_adjustment_description_finished">Систему зупинила патчер на ліміті пам\'яті %1$d МБ, а завершив він роботу лише на %2$d МБ. Початок із %2$d МБ дозволить наступного разу пропустити цю невдалу спробу</string>
     <string name="patcher_memory_adjustment_apply">Знизити до %1$d МБ</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Триває патчинг…</string>
@@ -864,6 +868,10 @@
     <string name="notification_channel_patch_updates">Оновлення патчів</string>
     <string name="notification_channel_patch_updates_description">Сповіщення про нові релізи патчів</string>
     <string name="notification_channel_patcher_description">Показується, коли Morphe патчить застосунок у фоновому режимі</string>
+    <string name="notification_channel_mounted_apps">Змонтовані застосунки</string>
+    <string name="notification_channel_mounted_apps_description">Коли змонтований застосунок замінила інша версія і його патч більше не застосовується</string>
+    <string name="notification_mount_replaced_title">%1$s більше не пропатчено</string>
+    <string name="notification_mount_replaced_text">v%1$s замінила пропатчену v%2$s. Відкрийте Morphe, щоб відновити її</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Експертні налаштування</string>
     <string name="settings_advanced_expert_mode">Режим експерта</string>
@@ -1280,9 +1288,7 @@ morphe_header_custom_dark.png
     <string name="selected">Вибрано</string>
     <string name="not_selected">Не вибрано</string>
     <string name="select_all">Вибрати все</string>
-    <string name="select_all_done">Всі вибрано</string>
     <string name="deselect_all">Скасувати вибір усіх</string>
-    <string name="deselect_all_done">Всі скасовано</string>
     <string name="reorder_list">Змінити порядок списку</string>
     <string name="reorder_list_hint">Перетягніть, щоб змінити порядок</string>
     <string name="reorder_done">Порядок збережено</string>
@@ -1318,6 +1324,7 @@ morphe_header_custom_dark.png
     <string name="unmount">Демонтувати</string>
     <string name="unmounted">Демонтовано</string>
     <string name="remount">Перемонтувати</string>
+    <string name="restore">Відновити</string>
     <string name="share">Поділитися</string>
     <string name="install">Встановити</string>
     <string name="installed">Встановлено</string>
@@ -1338,6 +1345,8 @@ morphe_header_custom_dark.png
     <string name="sources">Джерела</string>
     <string name="installing_ellipsis">Інсталяція…</string>
     <string name="mounting_ellipsis">Монтування…</string>
+    <string name="mount_stage_restoring_stock">Відновлення оригіналу…</string>
+    <string name="mount_stage_copying">Копіювання…</string>
     <string name="unmounting_ellipsis">Демонтування…</string>
     <string name="importing_ellipsis">Імпортування…</string>
     <string name="imported_successfully">Імпортовано успішно</string>

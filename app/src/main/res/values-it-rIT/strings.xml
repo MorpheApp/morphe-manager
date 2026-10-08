@@ -493,9 +493,12 @@ Zona esterna (tratteggiata): potrebbe essere ritagliata dalla maschera di avvio:
     <string name="home_app_info_app_update_available_description">Le sorgenti delle patch supportano una versione più recente di questa app. Applica di nuovo la patch per passare a quella versione.</string>
     <string name="home_app_info_newest_supported_version">Ultima versione supportata</string>
     <string name="home_app_info_version_move">Installata %1$s, ultima versione supportata %2$s</string>
+    <string name="home_app_info_version_restore">Installata %1$s, con patch %2$s</string>
     <string name="home_app_info_app_deleted_warning">L\'app è stata disinstallata</string>
     <string name="home_app_info_app_deleted_description">Questa app è stata disinstallata al di fuori di Morphe. Ripatchala per ripristinare la funzionalità</string>
     <string name="home_app_info_not_patched_description">Una versione non patchata di questa app è installata. Morphe ha ancora il suo record di patch precedente</string>
+    <string name="home_app_info_mount_replaced_description">Un\'altra versione ha sostituito l\'app montata, quindi la patch non si applica più. Il ripristino riporta la versione con patch</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play ha aggiornato l\'app montata, quindi la patch non si applica più. Il ripristino riporta la versione con patch. Disattiva l\'aggiornamento automatico per questa app in Google Play per mantenerla con patch</string>
     <string name="app_links_title">Collegamenti web supportati</string>
     <string name="app_links_description">Su Android 12+, i collegamenti ai domini supportati si aprono nel browser per impostazione predefinita, a meno che non siano approvati</string>
     <string name="app_links_unverified_banner_title">Collegamenti web non verificati</string>
@@ -624,6 +627,7 @@ La disinstallazione cancellerà definitivamente tutti i dati dell'app."</string>
     <string name="patcher_memory_adjustment_title">Memoria insufficiente</string>
     <string name="patcher_memory_adjustment_description">Il patcher è stato interrotto dal sistema mentre era in esecuzione con un limite di memoria di %1$d MB. Ridurre il limite a %2$d MB rende il patcher un bersaglio più piccolo e può consentire il completamento dell\'esecuzione.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Il patcher è stato interrotto dal sistema mentre era in esecuzione con un limite di memoria di %1$d MB, che è già il più basso disponibile. Prova a eseguire il patching con meno sorgenti di patch oppure seleziona meno patch.</string>
+    <string name="patcher_memory_adjustment_description_finished">Il sistema ha interrotto il patcher al limite di memoria di %1$d MB e quest\'ultimo è riuscito a terminare solo con %2$d MB. Partendo da %2$d MB si evita il tentativo fallito la prossima volta</string>
     <string name="patcher_memory_adjustment_apply">Riduci a %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patching in corso…</string>
@@ -864,6 +868,7 @@ Le patch non sono interessate: abilita le patch pre-release per ciascuna fonte n
     <string name="notification_channel_patch_updates">Aggiornamenti patch</string>
     <string name="notification_channel_patch_updates_description">Notifiche sui nuovi rilasci di patch</string>
     <string name="notification_channel_patcher_description">Visualizzate mentre Morphe sta patchando una app in background</string>
+    <string name="notification_channel_mounted_apps">App montate</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Impostazioni avanzate</string>
     <string name="settings_advanced_expert_mode">Modalità esperto</string>
@@ -1280,9 +1285,7 @@ Dettagli: %2$s"</string>
     <string name="selected">Selezionato</string>
     <string name="not_selected">Non selezionata</string>
     <string name="select_all">Seleziona tutto</string>
-    <string name="select_all_done">Tutto selezionato</string>
     <string name="deselect_all">Deseleziona tutto</string>
-    <string name="deselect_all_done">Tutto deselezionato</string>
     <string name="reorder_list">Riordina lista</string>
     <string name="reorder_list_hint">Trascina per riordinare</string>
     <string name="reorder_done">Ordine salvato</string>

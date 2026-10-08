@@ -1279,9 +1279,7 @@ Ayrıntılar: %2$s"</string>
     <string name="selected">Seçildi</string>
     <string name="not_selected">Seçilmedi</string>
     <string name="select_all">Tümünü seç</string>
-    <string name="select_all_done">Hepsi seçildi</string>
     <string name="deselect_all">Hepsini kaldır</string>
-    <string name="deselect_all_done">Hepsinin seçimi kaldırıldı</string>
     <string name="reorder_list">Listeyi yeniden sırala</string>
     <string name="reorder_list_hint">Yeniden sıralamak için sürükle</string>
     <string name="reorder_done">Sıra kaydedildi</string>

@@ -150,6 +150,13 @@
         <item quantity="many">%s foinsí suiteáilte</item>
         <item quantity="other">%s foinsí suiteáilte</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="one">%1$s · %2$s scagtha</item>
+        <item quantity="two">%1$s · %2$s scagtha</item>
+        <item quantity="few">%1$s · %2$s scagtha</item>
+        <item quantity="many">%1$s · %2$s scagtha</item>
+        <item quantity="other">%1$s · %2$s scagtha</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s aip i bhfolach</item>
         <item quantity="two">%s aipeanna i bhfolach</item>

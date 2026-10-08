@@ -494,9 +494,12 @@
     <string name="home_app_info_app_update_available_description">מקורות התיקון תומכים בגרסה חדשה יותר של אפליקציה זו. החל תיקון שוב כדי לעבור לגרסה זו.</string>
     <string name="home_app_info_newest_supported_version">החדשה ביותר שנתמכת</string>
     <string name="home_app_info_version_move">מותקנת %1$s, החדשה ביותר שנתמכת %2$s</string>
+    <string name="home_app_info_version_restore">גרסה מותקנת: %1$s, גרסה מתוקנת: %2$s</string>
     <string name="home_app_info_app_deleted_warning">האפליקציה הוסרה</string>
     <string name="home_app_info_app_deleted_description">האפליקציה הוסרה מחוץ ל-Morphe. התאם כדי לשחזר את הפונקציונליות</string>
     <string name="home_app_info_not_patched_description">מותקנת גרסה לא מתוקנת של אפליקציה זו. ל-Morphe עדיין יש רשומת תיקון קודמת.</string>
+    <string name="home_app_info_mount_replaced_description">גרסה אחרת החליפה את האפליקציה שהורכבה, ולכן התיקון כבר לא חל. השחזור מחזיר את הגרסה המתוקנת</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play עדכן את האפליקציה שהורכבה, ולכן התיקון כבר לא חל. השחזור מחזיר את הגרסה המתוקנת. כבה את העדכון האוטומטי עבורה ב-Google Play כדי לשמור עליה מתוקנת</string>
     <string name="app_links_title">קישורי אינטרנט נתמכים</string>
     <string name="app_links_description">באנדרואיד 12+, קישורים לדומיינים נתמכים נפתחים בדפדפן כברירת מחדל אלא אם כן אושרו</string>
     <string name="app_links_unverified_banner_title">קישורי אינטרנט לא מאומתים</string>
@@ -625,6 +628,7 @@
     <string name="patcher_memory_adjustment_title">אין מספיק זיכרון</string>
     <string name="patcher_memory_adjustment_description">המתקן הופסק על ידי המערכת בזמן שפעל עם מגבלת זיכרון של %1$d MB. הורדת המגבלה ל-%2$d MB הופכת את המתקן למטרה קטנה יותר ויכולה לאפשר להריצה להסתיים.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">המתקן הופסק על ידי המערכת בזמן שפעל עם מגבלת זיכרון של %1$d MB, שהיא כבר הנמוכה ביותר הזמינה. נסה לתקן עם פחות מקורות תיקון, או בחר פחות תיקונים.</string>
+    <string name="patcher_memory_adjustment_description_finished">המערכת עצרה את תהליך התיקון בגבול זיכרון של %1$d MB, והוא סיים רק ב-%2$d MB. בפעם הבאה, התחלה מ-%2$d MB תדלג על הניסיון המבוזבז</string>
     <string name="patcher_memory_adjustment_apply">הורד ל-%1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">התיקון מתבצע…</string>
@@ -865,6 +869,7 @@
     <string name="notification_channel_patch_updates">עדכוני תיקונים</string>
     <string name="notification_channel_patch_updates_description">התראות על מהדורות תיקון חדשות</string>
     <string name="notification_channel_patcher_description">מוצג בזמן ש-Morphe מתקן אפליקציה ברקע</string>
+    <string name="notification_channel_mounted_apps">אפליקציות שהורכבו</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">הגדרות מומחה</string>
     <string name="settings_advanced_expert_mode">מצב מומחה</string>
@@ -1291,9 +1296,7 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="selected">נבחר</string>
     <string name="not_selected">לא נבחר</string>
     <string name="select_all">בחר הכל</string>
-    <string name="select_all_done">הכל נבחר</string>
     <string name="deselect_all">בטל בחירה של הכל</string>
-    <string name="deselect_all_done">הכל בוטל</string>
     <string name="reorder_list">סדר מחדש רשימה</string>
     <string name="reorder_list_hint">גרור לסדר מחדש</string>
     <string name="reorder_done">הסדר נשמר</string>

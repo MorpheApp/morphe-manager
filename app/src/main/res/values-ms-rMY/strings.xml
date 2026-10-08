@@ -1281,9 +1281,7 @@ Butiran: %2$s"</string>
     <string name="selected">T dipilih</string>
     <string name="not_selected">Tidak dipilih</string>
     <string name="select_all">Pilih semua</string>
-    <string name="select_all_done">Semua dipilih</string>
     <string name="deselect_all">Nyahpilih semua</string>
-    <string name="deselect_all_done">Semua dinyahpilih</string>
     <string name="reorder_list">Susun semula senarai</string>
     <string name="reorder_list_hint">Seret untuk menyusun semula</string>
     <string name="reorder_done">Susunan disimpan</string>

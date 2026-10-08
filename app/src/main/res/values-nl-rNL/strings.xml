@@ -493,9 +493,12 @@ Buitenste zone (gestippeld): kan worden afgesneden door het launcher-masker - ho
     <string name="home_app_info_app_update_available_description">De patchbronnen ondersteunen een nieuwere versie van deze app. Pas de patch opnieuw toe om naar die versie over te stappen.</string>
     <string name="home_app_info_newest_supported_version">Nieuwste ondersteunde versie</string>
     <string name="home_app_info_version_move">Geïnstalleerd %1$s, nieuwste ondersteunde versie %2$s</string>
+    <string name="home_app_info_version_restore">Geïnstalleerd %1$s, gepatcht %2$s</string>
     <string name="home_app_info_app_deleted_warning">App was verwijderd</string>
     <string name="home_app_info_app_deleted_description">Deze app is buiten Morphe verwijderd. Installeer de patch om de functionaliteit te herstellen</string>
     <string name="home_app_info_not_patched_description">Er is een niet-gepatchte versie van deze app geïnstalleerd. Morphe heeft nog steeds zijn eerdere patchrecord.</string>
+    <string name="home_app_info_mount_replaced_description">Een andere versie heeft de gemounte app vervangen, dus de patch is niet meer van toepassing. Herstellen zet de gepatchte versie terug</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play heeft de gemounte app bijgewerkt, waardoor de patch niet meer van toepassing is. Herstellen zet de gepatchte versie terug. Schakel automatische updates voor de app uit in Google Play om deze gepatcht te houden</string>
     <string name="app_links_title">Ondersteunde weblinks</string>
     <string name="app_links_description">Op Android 12+ worden links naar ondersteunde domeinen standaard in je browser geopend, tenzij ze zijn goedgekeurd</string>
     <string name="app_links_unverified_banner_title">Weblinks niet geverifieerd</string>
@@ -624,6 +627,7 @@ Deïnstalleren wist alle app-gegevens permanent."</string>
     <string name="patcher_memory_adjustment_title">Onvoldoende geheugen</string>
     <string name="patcher_memory_adjustment_description">De patcher is door het systeem gestopt terwijl deze draaide met een geheugenlimiet van %1$d MB. Het verlagen van de limiet naar %2$d MB maakt de patcher een kleiner doelwit en kan de run laten voltooien.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">De patcher is door het systeem gestopt terwijl deze draaide met een geheugenlimiet van %1$d MB, wat al het laagst beschikbare is. Probeer te patchen met minder patchbronnen of selecteer minder patches.</string>
+    <string name="patcher_memory_adjustment_description_finished">Het systeem stopte de patcher bij een geheugenlimiet van %1$d MB, en deze werd pas voltooid bij %2$d MB. De volgende keer slaat het starten met %2$d MB die verloren poging over</string>
     <string name="patcher_memory_adjustment_apply">Verlaag naar %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patchen bezig…</string>
@@ -864,6 +868,7 @@ Patches worden niet beïnvloed: schakel pre-release-patches in voor elke bron in
     <string name="notification_channel_patch_updates">Patch-updates</string>
     <string name="notification_channel_patch_updates_description">Meldingen over nieuwe patch-releases.</string>
     <string name="notification_channel_patcher_description">Wordt weergegeven terwijl Morphe een app op de achtergrond patched</string>
+    <string name="notification_channel_mounted_apps">Gemounte apps</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertinstellingen</string>
     <string name="settings_advanced_expert_mode">Expertmodus</string>
@@ -1280,9 +1285,7 @@ Details: %2$s"</string>
     <string name="selected">Geselecteerd</string>
     <string name="not_selected">Niet geselecteerd</string>
     <string name="select_all">Alles selecteren</string>
-    <string name="select_all_done">Alles geselecteerd</string>
     <string name="deselect_all">Alles deselecteren</string>
-    <string name="deselect_all_done">Alles gedeselecteerd</string>
     <string name="reorder_list">Lijst herordenen</string>
     <string name="reorder_list_hint">Sleep om te herordenen</string>
     <string name="reorder_done">Volgorde opgeslagen</string>

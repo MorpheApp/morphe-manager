@@ -494,9 +494,12 @@ Ulkopuolinen alue (katkoviiva): käynnistimen maski saattaa leikata osia siitä 
     <string name="home_app_info_app_update_available_description">Patch-lähteet tukevat tämän sovelluksen uudempaa versiota. Paikkaa se uudelleen siirtyäksesi siihen versioon.</string>
     <string name="home_app_info_newest_supported_version">Uusin tuettu</string>
     <string name="home_app_info_version_move">Asennettu %1$s, uusin tuettu %2$s</string>
+    <string name="home_app_info_version_restore">Asennettu %1$s, paikattu %2$s</string>
     <string name="home_app_info_app_deleted_warning">Sovellus poistettiin</string>
     <string name="home_app_info_app_deleted_description">Tämä sovellus poistettiin Morphen ulkopuolelta. Muokkaa sitä uudelleen palauttaaksesi toiminnot</string>
     <string name="home_app_info_not_patched_description">Tästä sovelluksesta on asennettu korjaamaton versio. Morphella on edelleen aiempi korjaustietue.</string>
+    <string name="home_app_info_mount_replaced_description">Toinen versio korvasi mountatun sovelluksen, joten paikkaus ei enää päde. Palautus palauttaa paikatun version takaisin</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play päivitti mountatun sovelluksen, joten paikkaus ei enää päde. Palautus palauttaa paikatun version takaisin. Poista sen automaattipäivitys käytöstä Google Play -kaupassa, jotta se pysyy paikattuna</string>
     <string name="app_links_title">Tuetut verkkolinkit</string>
     <string name="app_links_description">Android 12+:ssa linkit tuettuihin verkkotunnuksiin avautuvat oletuksena selaimessasi, ellei niitä ole hyväksytty</string>
     <string name="app_links_unverified_banner_title">Vahvistamattomat verkkolinkit</string>
@@ -625,6 +628,7 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="patcher_memory_adjustment_title">Muisti ei riitä</string>
     <string name="patcher_memory_adjustment_description">Järjestelmä pysäytti patcherin, kun se toimi %1$d Mt:n muistirajalla. Laskemalla rajan arvoon %2$d Mt patcherista tulee pienempi kohde, ja suoritus voi päättyä.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Järjestelmä pysäytti patcherin, kun se toimi %1$d Mt:n muistirajalla, joka on jo alin käytettävissä oleva. Yritä paikkausta vähemmillä patch-lähteillä tai valitse vähemmän patcheja.</string>
+    <string name="patcher_memory_adjustment_description_finished">Järjestelmä pysäytti paikkaajan %1$d MB:n muistirajalla, ja se onnistui vasta %2$d MB:ssä. Aloittaminen %2$d MB:stä ohittaa tuon hukatun yrityksen seuraavalla kerralla</string>
     <string name="patcher_memory_adjustment_apply">Pienennä arvoon %1$d Mt</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Muokkaus käynnissä…</string>
@@ -863,6 +867,7 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="notification_channel_patch_updates">Korjauspäivitykset</string>
     <string name="notification_channel_patch_updates_description">Ilmoitukset uusista korjausjulkaisuista</string>
     <string name="notification_channel_patcher_description">Näytetään, kun Morphe paikkaa sovellusta taustalla</string>
+    <string name="notification_channel_mounted_apps">Mountatut sovellukset</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Asiantuntijan asetukset</string>
     <string name="settings_advanced_expert_mode">Asiantuntijatila</string>
@@ -1279,9 +1284,7 @@ Yksityiskohdat: %2$s"</string>
     <string name="selected">Valittu</string>
     <string name="not_selected">Ei valittu</string>
     <string name="select_all">Valitse kaikki</string>
-    <string name="select_all_done">Kaikki valittu</string>
     <string name="deselect_all">Poista kaikki valinnat</string>
-    <string name="deselect_all_done">Kaikki poistettu valinnasta</string>
     <string name="reorder_list">Järjestä lista uudelleen</string>
     <string name="reorder_list_hint">Vedä järjestääksesi uudelleen</string>
     <string name="reorder_done">Järjestys tallennettu</string>

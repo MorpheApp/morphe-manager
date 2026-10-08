@@ -493,9 +493,12 @@ Zona exterior (discontinua): puede quedar recortada por la máscara del lanzador
     <string name="home_app_info_app_update_available_description">Las fuentes de parches son compatibles con una versión más reciente de esta aplicación. Vuelve a parchearla para pasar a esa versión</string>
     <string name="home_app_info_newest_supported_version">Más reciente compatible</string>
     <string name="home_app_info_version_move">Instalada %1$s, más reciente compatible %2$s</string>
+    <string name="home_app_info_version_restore">Instalada %1$s, parcheada %2$s</string>
     <string name="home_app_info_app_deleted_warning">La aplicación fue desinstalada</string>
     <string name="home_app_info_app_deleted_description">Esta aplicación fue desinstalada fuera de Morphe. Vuelve a parchearla para restaurar su funcionalidad</string>
     <string name="home_app_info_not_patched_description">Una versión sin parchear de esta aplicación está instalada. Morphe aún conserva su registro de parches anterior</string>
+    <string name="home_app_info_mount_replaced_description">Otra versión ha reemplazado la aplicación montada, por lo que el parcheo ya no se aplica. La restauración vuelve a colocar la versión parcheada</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play ha actualizado la aplicación instalada, por lo que el parcheo ya no se aplica. La restauración vuelve a instalar la versión parcheada. Desactiva la actualización automática de la aplicación en Google Play para que siga parcheada</string>
     <string name="app_links_title">Enlaces web compatibles</string>
     <string name="app_links_description">En Android 12 o posterior, los enlaces a dominios compatibles se abren en el navegador de forma predeterminada a menos que se aprueben</string>
     <string name="app_links_unverified_banner_title">Enlaces web no verificados</string>
@@ -624,6 +627,7 @@ Al desinstalarla se borrarán permanentemente todos los datos de la aplicación"
     <string name="patcher_memory_adjustment_title">No hay suficiente memoria</string>
     <string name="patcher_memory_adjustment_description">El sistema detuvo el parcheador mientras se ejecutaba con un límite de memoria de %1$d MB. Reducir el límite a %2$d MB hace que el parcheador sea un objetivo más pequeño y puede permitir que la ejecución finalice</string>
     <string name="patcher_memory_adjustment_description_at_minimum">El sistema detuvo el parcheador mientras se ejecutaba con un límite de memoria de %1$d MB, que ya es el más bajo disponible. Intenta parchear con menos fuentes de parches o selecciona menos parches</string>
+    <string name="patcher_memory_adjustment_description_finished">El sistema detuvo el parcheador en un límite de memoria de %1$d MB y solo se completó con %2$d MB. Al empezar en %2$d MB, se omite ese intento fallido la próxima vez</string>
     <string name="patcher_memory_adjustment_apply">Reducir a %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Aplicando parches…</string>
@@ -864,6 +868,10 @@ Los parches no se ven afectados: habilita los parches pre-lanzamiento para cada 
     <string name="notification_channel_patch_updates">Actualizaciones de parches</string>
     <string name="notification_channel_patch_updates_description">Notificaciones sobre nuevas versiones de parches</string>
     <string name="notification_channel_patcher_description">Se muestra mientras Morphe está parcheando una aplicación en segundo plano</string>
+    <string name="notification_channel_mounted_apps">Apps montadas</string>
+    <string name="notification_channel_mounted_apps_description">Cuando otra versión ha sustituido a una aplicación montada y su parcheo ya no se aplica</string>
+    <string name="notification_mount_replaced_title">%1$s ya no está parcheada</string>
+    <string name="notification_mount_replaced_text">La v%1$s ha reemplazado a la v%2$s parcheada. Abre Morphe para restaurarla</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Ajustes avanzados</string>
     <string name="settings_advanced_expert_mode">Modo Experto</string>
@@ -1280,9 +1288,7 @@ Detalles: %2$s"</string>
     <string name="selected">Seleccionado</string>
     <string name="not_selected">No seleccionado</string>
     <string name="select_all">Seleccionar todo</string>
-    <string name="select_all_done">Todo seleccionado</string>
     <string name="deselect_all">Desmarcar todo</string>
-    <string name="deselect_all_done">Todo deseleccionado</string>
     <string name="reorder_list">Reordenar lista</string>
     <string name="reorder_list_hint">Arrastra para reordenar</string>
     <string name="reorder_done">Orden guardado</string>
@@ -1318,6 +1324,7 @@ Detalles: %2$s"</string>
     <string name="unmount">Desmontar</string>
     <string name="unmounted">Desmontado</string>
     <string name="remount">Volver a montar</string>
+    <string name="restore">Restaurar</string>
     <string name="share">Compartir</string>
     <string name="install">Instalar</string>
     <string name="installed">Instalado</string>
@@ -1338,6 +1345,8 @@ Detalles: %2$s"</string>
     <string name="sources">Fuentes</string>
     <string name="installing_ellipsis">Instalando…</string>
     <string name="mounting_ellipsis">Montando…</string>
+    <string name="mount_stage_restoring_stock">Restaurando la original…</string>
+    <string name="mount_stage_copying">Copiando...</string>
     <string name="unmounting_ellipsis">Desmontando…</string>
     <string name="importing_ellipsis">Importando…</string>
     <string name="imported_successfully">Importados correctamente</string>

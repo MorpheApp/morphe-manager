@@ -493,9 +493,12 @@
     <string name="home_app_info_app_update_available_description">Источники патчей поддерживают более новую версию этого приложения. Примените патч снова, чтобы перейти на эту версию.</string>
     <string name="home_app_info_newest_supported_version">Новейшая поддерживаемая версия</string>
     <string name="home_app_info_version_move">Установлено %1$s, новейшая поддерживаемая версия %2$s</string>
+    <string name="home_app_info_version_restore">Установлено %1$s, пропатчено %2$s</string>
     <string name="home_app_info_app_deleted_warning">Приложение было удалено.</string>
     <string name="home_app_info_app_deleted_description">Это приложение было удалено вне устройства Morphe. Переустановите его, чтобы восстановить работоспособность.</string>
     <string name="home_app_info_not_patched_description">Установлена непатченная версия этого приложения. Morphe по-прежнему имеет свою предыдущую запись о патче.</string>
+    <string name="home_app_info_mount_replaced_description">Другая версия заменила смонтированное приложение, поэтому патч больше не применяется. Восстановление возвращает пропатченную версию</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play обновил смонтированное приложение, поэтому патч больше не применяется. Восстановление возвращает пропатченную версию. Отключите для него автоматическое обновление в Google Play, чтобы оно оставалось пропатченным</string>
     <string name="app_links_title">Поддерживаемые веб-ссылки</string>
     <string name="app_links_description">На Android 12+ ссылки на поддерживаемые домены по умолчанию открываются в браузере, если они не одобрены</string>
     <string name="app_links_unverified_banner_title">Веб-ссылки не проверены</string>
@@ -624,6 +627,7 @@
     <string name="patcher_memory_adjustment_title">Недостаточно памяти</string>
     <string name="patcher_memory_adjustment_description">Патчер был остановлен системой при работе с лимитом памяти %1$d МБ. Снижение лимита до %2$d МБ делает патчер менее заметной целью и может позволить завершить процесс.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Патчер был остановлен системой при работе с лимитом памяти %1$d МБ, что уже является минимально возможным. Попробуйте выполнить патчинг с меньшим количеством источников патчей или выберите меньшее количество патчей.</string>
+    <string name="patcher_memory_adjustment_description_finished">Система остановила патчер на лимите памяти %1$d МБ, и он завершился только на %2$d МБ. Запуск с %2$d МБ позволит в следующий раз пропустить эту неудачную попытку</string>
     <string name="patcher_memory_adjustment_apply">Снизить до %1$d МБ</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Идет установка исправлений…</string>
@@ -863,6 +867,7 @@
     <string name="notification_channel_patch_updates">Обновления патчей</string>
     <string name="notification_channel_patch_updates_description">Уведомления о новых релизах патчей</string>
     <string name="notification_channel_patcher_description">Отображается во время установки Morphe патча для приложения в фоновом режиме</string>
+    <string name="notification_channel_mounted_apps">Смонтированные приложения</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Экспертные настройки</string>
     <string name="settings_advanced_expert_mode">Режим эксперта</string>
@@ -1279,9 +1284,7 @@ morphe_header_custom_dark.png
     <string name="selected">Выбрано</string>
     <string name="not_selected">Не выбрано</string>
     <string name="select_all">Выбрать все</string>
-    <string name="select_all_done">Все выбрано</string>
     <string name="deselect_all">Снять выделение со всех</string>
-    <string name="deselect_all_done">Все снято</string>
     <string name="reorder_list">Переупорядочить список</string>
     <string name="reorder_list_hint">Перетащите, чтобы изменить порядок</string>
     <string name="reorder_done">Порядок сохранен</string>

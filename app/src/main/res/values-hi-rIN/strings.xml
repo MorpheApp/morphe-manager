@@ -493,9 +493,12 @@
     <string name="home_app_info_app_update_available_description">पैच स्रोत इस ऐप के नए संस्करण का समर्थन करते हैं। उस संस्करण पर जाने के लिए इसे फिर से पैच करें।</string>
     <string name="home_app_info_newest_supported_version">नवीनतम समर्थित</string>
     <string name="home_app_info_version_move">इंस्टॉल किया गया %1$s, नवीनतम समर्थित %2$s</string>
+    <string name="home_app_info_version_restore">इंस्टॉल किया गया %1$s, पैच किया गया %2$s</string>
     <string name="home_app_info_app_deleted_warning">एप्लिकेशन उन्मोदन किया गया</string>
     <string name="home_app_info_app_deleted_description">इस ऐप को बाहर से उन्मोदन किया गया था। मॉर्फी में पुनः स्थापित करें कार्यक्षमता पुनः प्राप्त करने के लिए</string>
     <string name="home_app_info_not_patched_description">इस ऐप का एक अनपैच्ड संस्करण स्थापित है। Morphe के पास अभी भी उसका पिछला पैच रिकॉर्ड है</string>
+    <string name="home_app_info_mount_replaced_description">किसी अन्य संस्करण ने माउंटेड ऐप को बदल दिया, इसलिए पैच अब लागू नहीं होता। रिस्टोर पैच किए गए संस्करण को वापस ला देता है</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play ने माउंटेड ऐप को अपडेट कर दिया, इसलिए पैच अब लागू नहीं होता। रिस्टोर पैच किए गए संस्करण को वापस ला देता है। इसे पैच रखने के लिए Google Play में इसके लिए ऑटो-अपडेट बंद कर दें</string>
     <string name="app_links_title">सपोर्टेड वेब लिंक</string>
     <string name="app_links_description">Android 12+ पर, सपोर्टेड डोमेन के लिंक तब तक डिफ़ॉल्ट रूप से ब्राउज़र में खुलते हैं जब तक उन्हें अनुमति न दी जाए</string>
     <string name="app_links_unverified_banner_title">वेब लिंक सत्यापित नहीं हैं</string>
@@ -624,6 +627,7 @@
     <string name="patcher_memory_adjustment_title">पर्याप्त मेमोरी नहीं है</string>
     <string name="patcher_memory_adjustment_description">पैचर को %1$d MB मेमोरी सीमा के साथ चलाते समय सिस्टम ने रोक दिया। सीमा को घटाकर %2$d MB करने से पैचर छोटा लक्ष्य बन जाता है और प्रक्रिया पूरी हो सकती है।</string>
     <string name="patcher_memory_adjustment_description_at_minimum">पैचर को %1$d MB मेमोरी सीमा के साथ चलाते समय सिस्टम ने रोक दिया, जो पहले से ही उपलब्ध सबसे कम सीमा है। कम पैच स्रोतों के साथ पैच करने का प्रयास करें, या कम पैच चुनें।</string>
+    <string name="patcher_memory_adjustment_description_finished">सिस्टम ने पैचर को %1$d MB मेमोरी सीमा पर रोक दिया, और यह केवल %2$d MB पर पूरा हुआ। अगली बार %2$d MB से शुरू करने से वह विफल प्रयास छूट जाता है</string>
     <string name="patcher_memory_adjustment_apply">%1$d MB तक कम करें</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patching in progress…</string>
@@ -864,6 +868,7 @@
     <string name="notification_channel_patch_updates">पैच अपडेट</string>
     <string name="notification_channel_patch_updates_description">नए पैच रिलीज़ के बारे में सूचनाएँ</string>
     <string name="notification_channel_patcher_description">जब मोर्फ़ पृष्ठभूमि में किसी ऐप को पैच कर रहा हो तो दिखाया गया</string>
+    <string name="notification_channel_mounted_apps">माउंटेड ऐप्स</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">एक्सपर्ट सेटिंग्स</string>
     <string name="settings_advanced_expert_mode">एक्सपर्ट मोड</string>
@@ -1280,9 +1285,7 @@ morphe_header_custom_dark.png
     <string name="selected">चयनित</string>
     <string name="not_selected">चयनित नहीं</string>
     <string name="select_all">सब चुनें</string>
-    <string name="select_all_done">सभी चयनित</string>
     <string name="deselect_all">सभी का चयन रद्द करें</string>
-    <string name="deselect_all_done">सभी अचयनित</string>
     <string name="reorder_list">सूची को पुन: व्यवस्थित करें</string>
     <string name="reorder_list_hint">पुन: व्यवस्थित करने के लिए खींचें</string>
     <string name="reorder_done">क्रम सहेजा गया</string>

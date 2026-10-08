@@ -493,9 +493,12 @@
     <string name="home_app_info_app_update_available_description">このアプリの新しいバージョンに対応したパッチソースがあります。アプリを更新するには、再度パッチを適用してください</string>
     <string name="home_app_info_newest_supported_version">対応する最新バージョン</string>
     <string name="home_app_info_version_move">インストール済みバージョン %1$s、対応する最新バージョン %2$s</string>
+    <string name="home_app_info_version_restore">インストール済み %1$s、パッチ適用済み %2$s</string>
     <string name="home_app_info_app_deleted_warning">アプリがアンインストールされました</string>
     <string name="home_app_info_app_deleted_description">このアプリは Morphe の外でアンインストールされました。機能を復元するには、再度パッチを適用してください</string>
     <string name="home_app_info_not_patched_description">このアプリには未パッチ版がインストールされています。Morphe には以前のパッチ履歴が残っています</string>
+    <string name="home_app_info_mount_replaced_description">別のバージョンがマウントされたアプリを置き換えたため、パッチは適用されなくなりました。「復元」を実行すると、パッチが適用されたバージョンに戻ります</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play ストアによってマウントされたアプリが更新されたため、パッチは適用されなくなりました。「復元」を実行すると、パッチが適用されたバージョンに戻ります。パッチが適用された状態を維持するには、Google Play ストアで「アプリの自動更新」をオフにしてください</string>
     <string name="app_links_title">サポート対象のウェブリンク</string>
     <string name="app_links_description">Android 12 以降では、承認されていない限り、サポートされているドメインへのリンクはデフォルトのブラウザで開きます</string>
     <string name="app_links_unverified_banner_title">未検証のウェブリンク</string>
@@ -624,6 +627,7 @@
     <string name="patcher_memory_adjustment_title">メモリ不足</string>
     <string name="patcher_memory_adjustment_description">メモリ上限 %1$d MB で実行中に、パッチャーがシステムによって停止されました。上限を %2$d MB に引き下げると、パッチャーのメモリ使用量を抑えられ、処理を完了できる可能性があります</string>
     <string name="patcher_memory_adjustment_description_at_minimum">メモリ上限 %1$d MB（すでに利用可能な最低値）で実行中に、パッチャーがシステムによって停止されました。パッチソースまたはパッチを減らして再度お試しください</string>
+    <string name="patcher_memory_adjustment_description_finished">システムは、メモリ使用量が %1$d MB に達したためパッチ処理を停止しましたが、%2$d MB で完了しました。次回からは %2$d MB で開始することで、パッチ処理の失敗を回避できます</string>
     <string name="patcher_memory_adjustment_apply">%1$d MB に下げる</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">パッチを適用中…</string>
@@ -864,6 +868,10 @@
     <string name="notification_channel_patch_updates">パッチの更新</string>
     <string name="notification_channel_patch_updates_description">パッチの新しいリリースに関する通知</string>
     <string name="notification_channel_patcher_description">バックグラウンドで Morphe がアプリにパッチを適用しているときに表示されます</string>
+    <string name="notification_channel_mounted_apps">マウントされたアプリ</string>
+    <string name="notification_channel_mounted_apps_description">別のバージョンがマウントされたアプリを置き換え、そのパッチが適用されなくなった場合</string>
+    <string name="notification_mount_replaced_title">%1$s はパッチが適用されていません</string>
+    <string name="notification_mount_replaced_text">v%1$s はパッチ適用済みの v%2$s を置き換えました。Morphe を起動して復元してください</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">高度な設定</string>
     <string name="settings_advanced_expert_mode">エキスパート モード</string>
@@ -1281,9 +1289,7 @@ morphe_header_custom_dark.png
     <string name="selected">選択中</string>
     <string name="not_selected">選択されていません</string>
     <string name="select_all">すべて選択</string>
-    <string name="select_all_done">すべて選択</string>
     <string name="deselect_all">すべて選択解除</string>
-    <string name="deselect_all_done">すべて選択解除</string>
     <string name="reorder_list">リストの並べ替え</string>
     <string name="reorder_list_hint">並べ替えるにはドラッグしてください</string>
     <string name="reorder_done">並び順を保存しました</string>
@@ -1319,6 +1325,7 @@ morphe_header_custom_dark.png
     <string name="unmount">アンマウント</string>
     <string name="unmounted">マウント解除済み</string>
     <string name="remount">再マウント</string>
+    <string name="restore">復元</string>
     <string name="share">共有</string>
     <string name="install">インストール</string>
     <string name="installed">インストール済み</string>
@@ -1339,6 +1346,8 @@ morphe_header_custom_dark.png
     <string name="sources">ソース</string>
     <string name="installing_ellipsis">インストール中…</string>
     <string name="mounting_ellipsis">マウント中…</string>
+    <string name="mount_stage_restoring_stock">元のアプリを復元中…</string>
+    <string name="mount_stage_copying">コピー中…</string>
     <string name="unmounting_ellipsis">アンマウント中…</string>
     <string name="importing_ellipsis">インポート中…</string>
     <string name="imported_successfully">インポートに成功しました</string>

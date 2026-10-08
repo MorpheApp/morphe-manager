@@ -493,9 +493,12 @@ Outerlike sone (gestippel): kan deur die lanseerder masker afgesny word - hou be
     <string name="home_app_info_app_update_available_description">Die patchbronne ondersteun \'n nuwer weergawe van hierdie toepassing. Pas dit weer toe om na daardie weergawe oor te skakel.</string>
     <string name="home_app_info_newest_supported_version">Nuutste ondersteunde</string>
     <string name="home_app_info_version_move">Geïnstalleer %1$s, nuutste ondersteunde %2$s</string>
+    <string name="home_app_info_version_restore">Geïnstalleer %1$s, gepatch %2$s</string>
     <string name="home_app_info_app_deleted_warning">App is verwyder</string>
     <string name="home_app_info_app_deleted_description">Hierdie app is buite Morphe verwyder. Pleister dit weer om funksionaliteit te herstel</string>
     <string name="home_app_info_not_patched_description">\'n Ongepatchte weergawe van hierdie app is geïnstalleer. Morphe het steeds sy vorige pleisterrekord.</string>
+    <string name="home_app_info_mount_replaced_description">\'n Ander weergawe het die gemonteerde app vervang, sodat die patch nie meer van toepassing is nie. Herstel plaas die gepatchte weergawe terug</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play het die gemonteerde app opgedateer, sodat die patch nie meer van toepassing is nie. Herstel plaas die gepatchte weergawe terug. Skakel die outomatiese opdatering daarvoor in Google Play af om dit gepatch te hou</string>
     <string name="app_links_title">Ondersteunde webskakels</string>
     <string name="app_links_description">Op Android 12+ maak skakels na ondersteunde domeine by verstek in jou blaaier oop, tensy dit goedgekeur is</string>
     <string name="app_links_unverified_banner_title">Webskakels nie geverifieer nie</string>
@@ -624,6 +627,7 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="patcher_memory_adjustment_title">Nie genoeg geheue</string>
     <string name="patcher_memory_adjustment_description">Die patcher is deur die stelsel gestop terwyl dit met \'n %1$d MB geheueperk loop. Deur die perk na %2$d MB te verlaag, maak die patcher \'n kleiner teiken en kan die loop laat klaarmaak.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Die patcher is deur die stelsel gestop terwyl dit met \'n %1$d MB geheueperk loop, wat reeds die laagste beskikbare is. Probeer om met minder patchbronne te patch, of kies minder patches.</string>
+    <string name="patcher_memory_adjustment_description_finished">Die stelsel het die patcher teen \'n geheueperk van %1$d MB gestop, en dit het eers by %2$d MB klaargekom. Om by %2$d MB te begin, slaan daardie verlore poging volgende keer oor</string>
     <string name="patcher_memory_adjustment_apply">Verlaag na %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patching aan die gang…</string>
@@ -864,6 +868,7 @@ Patches word nie beïnvloed nie: aktiveer voorafvrystelling-patches vir elke bro
     <string name="notification_channel_patch_updates">Pleisteropdaterings</string>
     <string name="notification_channel_patch_updates_description">Kennisgewings oor nuwe pleistervrystellings</string>
     <string name="notification_channel_patcher_description">Word gewys terwyl Morphe \'n app in die agtergrond pleister</string>
+    <string name="notification_channel_mounted_apps">Gemonteerde apps</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Spesialisinstellings</string>
     <string name="settings_advanced_expert_mode">Spesialismodus</string>
@@ -1280,9 +1285,7 @@ Besonderhede: %2$s"</string>
     <string name="selected">Gekies</string>
     <string name="not_selected">Nie gekies nie</string>
     <string name="select_all">Kies alles</string>
-    <string name="select_all_done">Alles gekies</string>
     <string name="deselect_all">Deselekteer alles</string>
-    <string name="deselect_all_done">Alles ontkies</string>
     <string name="reorder_list">Lysordening</string>
     <string name="reorder_list_hint">Sleep om te herordeneer</string>
     <string name="reorder_done">Volgorde stoor</string>

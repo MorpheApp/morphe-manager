@@ -493,9 +493,12 @@ Vnějní zóna (přerušovaná): může být ořezaná maskou spouštěčé - ud
     <string name="home_app_info_app_update_available_description">Zdroje záplat podporují novější verzi této aplikace. Záplatujte ji znovu, abyste přešli na tuto verzi.</string>
     <string name="home_app_info_newest_supported_version">Nejnovější podporovaná</string>
     <string name="home_app_info_version_move">Nainstalováno %1$s, nejnovější podporovaná %2$s</string>
+    <string name="home_app_info_version_restore">Nainstalováno %1$s, opatchováno %2$s</string>
     <string name="home_app_info_app_deleted_warning">Aplikace byla odinstalována</string>
     <string name="home_app_info_app_deleted_description">Tuto aplikaci bylo odinstalováno mimo Morphe. Zápalte ji znovu, abyste obnovili funkčnost</string>
     <string name="home_app_info_not_patched_description">Je nainstalována neopatchovaná verze této aplikace. Morphe má stále svůj předchozí záznam o záplatě</string>
+    <string name="home_app_info_mount_replaced_description">Jiná verze nahradila namountovanou aplikaci, takže patch už neplatí. Obnovení vrátí opatchovanou verzi zpět</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play aktualizoval namountovanou aplikaci, takže patch už neplatí. Obnovení vrátí opatchovanou verzi zpět. Vypněte pro ni v Google Play automatickou aktualizaci, aby zůstala opatchovaná</string>
     <string name="app_links_title">Podporované webové odkazy</string>
     <string name="app_links_description">Na Androidu 12+ se odkazy na podporované domény ve výchozím nastavení otevírají ve vašem prohlížeči, pokud nejsou schváleny</string>
     <string name="app_links_unverified_banner_title">Neověřené webové odkazy</string>
@@ -624,6 +627,7 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="patcher_memory_adjustment_title">Nedostatek paměti</string>
     <string name="patcher_memory_adjustment_description">Proces patchování byl zastaven systémem při běhu s limitem paměti %1$d MB. Snížení limitu na %2$d MB zmenší jeho cíl a může umožnit dokončení běhu.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Proces patchování byl zastaven systémem při běhu s limitem paměti %1$d MB, což je již nejnižší dostupný limit. Zkuste patchovat s méně zdroji patchů nebo vyberte méně patchů.</string>
+    <string name="patcher_memory_adjustment_description_finished">Systém zastavil patchera při limitu paměti %1$d MB a ten se dokončil teprve při %2$d MB. Při spuštění s %2$d MB se tento ztracený pokus příště přeskočí</string>
     <string name="patcher_memory_adjustment_apply">Snížit na %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Záplatování probíhá…</string>
@@ -863,6 +867,7 @@ Záplaty tím nejsou ovlivněny: povolte předběžné záplaty pro každý zdro
     <string name="notification_channel_patch_updates">Opravné aktualizace</string>
     <string name="notification_channel_patch_updates_description">Oznámení o nových opravných verzích</string>
     <string name="notification_channel_patcher_description">Zobrazuje se během záplatování aplikace Morphe na pozadí</string>
+    <string name="notification_channel_mounted_apps">Namountované aplikace</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertní nastavení</string>
     <string name="settings_advanced_expert_mode">Režim expertů</string>
@@ -1279,9 +1284,7 @@ Podrobnosti: %2$s"</string>
     <string name="selected">Vybráno</string>
     <string name="not_selected">Nevybráno</string>
     <string name="select_all">Vybrat vše</string>
-    <string name="select_all_done">Vše vybráno</string>
     <string name="deselect_all">Zrušit výběr všech</string>
-    <string name="deselect_all_done">Vše zrušeno</string>
     <string name="reorder_list">Změnit pořadí seznamu</string>
     <string name="reorder_list_hint">Přetáhněte pro změnu pořadí</string>
     <string name="reorder_done">Pořadí uloženo</string>

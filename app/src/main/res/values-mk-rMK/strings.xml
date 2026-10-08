@@ -726,9 +726,7 @@ morphe_header_custom_dark.png
     <string name="selected">Избрано</string>
     <string name="not_selected">Неизбрано</string>
     <string name="select_all">Избери ги сите</string>
-    <string name="select_all_done">Сите избрани</string>
     <string name="deselect_all">Деселектирај ги сите</string>
-    <string name="deselect_all_done">Сите деселектирани</string>
     <string name="rename">Преименувај</string>
     <string name="import_">Увоз</string>
     <string name="export">Извези</string>

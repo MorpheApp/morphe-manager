@@ -495,10 +495,13 @@ Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - g
     <string name="home_app_info_app_update_available_description">Les sources de patchs prennent en charge une version plus récente de cette application. Patchez à nouveau pour passer à cette version</string>
     <string name="home_app_info_newest_supported_version">Dernière version prise en charge</string>
     <string name="home_app_info_version_move">Version installée %1$s, dernière version prise en charge %2$s</string>
+    <string name="home_app_info_version_restore">Version installée : %1$s, version patchée : %2$s</string>
     <string name="home_app_info_app_deleted_warning">L\'application a été désinstallée</string>
     <string name="home_app_info_app_deleted_description">Cette application a été désinstallée en dehors de Morphe. Re-patchez-la pour restaurer les fonctionnalités
 </string>
     <string name="home_app_info_not_patched_description">Une version non patchée de cette application est installée. Morphe conserve toujours son ancien patch</string>
+    <string name="home_app_info_mount_replaced_description">Une autre version a remplacé l\'application montée, le patch ne s\'applique donc plus. Restaurer remet la version patchée en place</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play a mis à jour l\'application montée, le patch ne s\'applique donc plus. Restaurer remet la version patchée en place. Désactivez la mise à jour automatique de cette application dans Google Play pour la garder patchée</string>
     <string name="app_links_title">Liens web pris en charge</string>
     <string name="app_links_description">Sur Android 12 et plus, les liens vers les domaines pris en charge s\'ouvrent par défaut dans votre navigateur, sauf s\'ils sont approuvés</string>
     <string name="app_links_unverified_banner_title">Liens web non vérifiés</string>
@@ -627,6 +630,7 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="patcher_memory_adjustment_title">Mémoire insuffisante</string>
     <string name="patcher_memory_adjustment_description">Le patcheur a été arrêté par le système alors qu\'il était exécuté avec une limite de mémoire de %1$d Mo. Réduire la limite à %2$d Mo rend le patcheur moins gourmand en mémoire et peut permettre à l\'exécution de se terminer</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Le patcheur a été arrêté par le système alors qu\'il était exécuté avec une limite de mémoire de %1$d Mo, qui est déjà la plus basse disponible. Essayez de patcher avec moins de sources de patchs, ou sélectionnez moins de patchs</string>
+    <string name="patcher_memory_adjustment_description_finished">Le système a arrêté le patcher à une limite de mémoire de %1$d Mo, et il n\'a abouti qu\'avec %2$d Mo. Démarrer avec %2$d Mo permet d\'éviter cette tentative perdue la prochaine fois</string>
     <string name="patcher_memory_adjustment_apply">Réduire à %1$d Mo</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patching en cours…</string>
@@ -867,6 +871,7 @@ Les patchs ne sont pas affectés : activez les patchs en préversion pour chaque
     <string name="notification_channel_patch_updates">Mises à jour de patchs</string>
     <string name="notification_channel_patch_updates_description">Notifications concernant les nouvelles versions de patchs</string>
     <string name="notification_channel_patcher_description">Affiché lorsque Morphe effectue le patching d\'une application en arrière-plan</string>
+    <string name="notification_channel_mounted_apps">Applications montées</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Paramètres Expert</string>
     <string name="settings_advanced_expert_mode">Mode Expert</string>
@@ -1285,9 +1290,7 @@ Détails : %2$s"</string>
     <string name="selected">Sélectionné</string>
     <string name="not_selected">Non sélectionnée</string>
     <string name="select_all">Tout sélectionner</string>
-    <string name="select_all_done">Tous sélectionnés</string>
     <string name="deselect_all">Tout désélectionner</string>
-    <string name="deselect_all_done">Tous désélectionnés</string>
     <string name="reorder_list">Réorganiser la liste</string>
     <string name="reorder_list_hint">Faites glisser pour réorganiser</string>
     <string name="reorder_done">Ordre enregistré</string>
@@ -1323,6 +1326,7 @@ Détails : %2$s"</string>
     <string name="unmount">Démonter</string>
     <string name="unmounted">Démonté</string>
     <string name="remount">Remonter</string>
+    <string name="restore">Restaurer</string>
     <string name="share">Partager</string>
     <string name="install">Installer</string>
     <string name="installed">Installée</string>

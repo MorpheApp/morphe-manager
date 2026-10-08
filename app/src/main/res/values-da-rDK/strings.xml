@@ -493,9 +493,12 @@ Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige det
     <string name="home_app_info_app_update_available_description">Patchkilderne understøtter en nyere version af denne app. Patch den igen for at skifte til den version.</string>
     <string name="home_app_info_newest_supported_version">Nyeste understøttede</string>
     <string name="home_app_info_version_move">Installeret %1$s, nyeste understøttede %2$s</string>
+    <string name="home_app_info_version_restore">Installeret %1$s, patchet %2$s</string>
     <string name="home_app_info_app_deleted_warning">Appen blev fjernet</string>
     <string name="home_app_info_app_deleted_description">Denne app blev fjernet udenfor Morphe. Repatch den for at gendanne funktionalitet</string>
     <string name="home_app_info_not_patched_description">En upatchet version af denne app er installeret. Morphe har stadig sin tidligere patch-registrering</string>
+    <string name="home_app_info_mount_replaced_description">En anden version erstattede den monterede app, så patchen ikke længere gælder. Gendannelse sætter den patchede version tilbage</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play opdaterede den monterede app, så patchen ikke længere gælder. Gendannelse sætter den patchede version tilbage. Slå auto-opdatering fra for den i Google Play for at holde den patchet</string>
     <string name="app_links_title">Understøttede weblinks</string>
     <string name="app_links_description">På Android 12+ åbnes links til understøttede domæner som standard i din browser, medmindre de er godkendt</string>
     <string name="app_links_unverified_banner_title">Weblinks ikke verificeret</string>
@@ -624,6 +627,7 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="patcher_memory_adjustment_title">Ikke nok hukommelse</string>
     <string name="patcher_memory_adjustment_description">Patcheren blev stoppet af systemet, mens den kørte med en hukommelsesgrænse på %1$d MB. En sænkning af grænsen til %2$d MB gør patcheren til et mindre mål og kan lade kørslen fuldføre.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Patcheren blev stoppet af systemet, mens den kørte med en hukommelsesgrænse på %1$d MB, hvilket allerede er den laveste tilgængelige. Prøv at patche med færre patchkilder, eller vælg færre patches.</string>
+    <string name="patcher_memory_adjustment_description_finished">Systemet stoppede patcheren ved en hukommelsesgrænse på %1$d MB, og den blev først færdig ved %2$d MB. Hvis du starter ved %2$d MB, springer du over det tabte forsøg næste gang</string>
     <string name="patcher_memory_adjustment_apply">Sænk til %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patching i gang…</string>
@@ -863,6 +867,7 @@ Patcher er ikke påvirket: aktivér præ-release-patcher for hver kilde i patch-
     <string name="notification_channel_patch_updates">Patch-opdateringer</string>
     <string name="notification_channel_patch_updates_description">Notifikationer om nye patch-udgivelser</string>
     <string name="notification_channel_patcher_description">Vises mens Morphe patcher en app i baggrunden</string>
+    <string name="notification_channel_mounted_apps">Monterede apps</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Avancerede indstillinger</string>
     <string name="settings_advanced_expert_mode">Eksperttilstand</string>
@@ -1279,9 +1284,7 @@ Detaljer: %2$s"</string>
     <string name="selected">Valgt</string>
     <string name="not_selected">Ikke valgt</string>
     <string name="select_all">Vælg alle</string>
-    <string name="select_all_done">Alle valgt</string>
     <string name="deselect_all">Fravælg alle</string>
-    <string name="deselect_all_done">Alle fjernet valget</string>
     <string name="reorder_list">Omarranger liste</string>
     <string name="reorder_list_hint">Træk for at omarrangere</string>
     <string name="reorder_done">Rækkefølge gemt</string>

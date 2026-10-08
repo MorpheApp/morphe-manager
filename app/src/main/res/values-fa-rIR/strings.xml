@@ -1280,9 +1280,7 @@ morphe_header_custom_dark.png
     <string name="selected">انتخاب‌شده</string>
     <string name="not_selected">انتخاب‌نشده</string>
     <string name="select_all">انتخاب همه</string>
-    <string name="select_all_done">همه انتخاب شدند</string>
     <string name="deselect_all">لغو انتخاب همه</string>
-    <string name="deselect_all_done">انتخاب همه لغو شد</string>
     <string name="reorder_list">مرتب‌سازی دوبارهٔ فهرست</string>
     <string name="reorder_list_hint">برای مرتب‌سازی دوباره بکشید</string>
     <string name="reorder_done">ترتیب ذخیره شد</string>

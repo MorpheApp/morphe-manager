@@ -493,9 +493,12 @@
     <string name="home_app_info_app_update_available_description">补丁源支持此应用的更新版本。重新打补丁即可更新到该版本。</string>
     <string name="home_app_info_newest_supported_version">最新支持的版本</string>
     <string name="home_app_info_version_move">已安装 %1$s，最新支持的版本为 %2$s</string>
+    <string name="home_app_info_version_restore">已安装 %1$s，已修补 %2$s</string>
     <string name="home_app_info_app_deleted_warning">应用已卸载</string>
     <string name="home_app_info_app_deleted_description">此应用已在 Morphe 外卸载。重新安装以恢复功能</string>
     <string name="home_app_info_not_patched_description">此应用安装的是未修补版本。Morphe仍保留其先前的补丁记录。</string>
+    <string name="home_app_info_mount_replaced_description">另一个版本替换了已挂载的应用，因此补丁不再生效。恢复会将已修补的版本还原</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play 更新了已挂载的应用，因此补丁不再生效。恢复会将已修补的版本还原。在 Google Play 中关闭该应用的自动更新，以保持其已修补状态</string>
     <string name="app_links_title">支持的网页链接</string>
     <string name="app_links_description">在 Android 12 及更高版本中，指向受支持域的链接默认会在浏览器中打开，除非已获得批准</string>
     <string name="app_links_unverified_banner_title">网页链接未经验证</string>
@@ -624,6 +627,7 @@
     <string name="patcher_memory_adjustment_title">内存不足</string>
     <string name="patcher_memory_adjustment_description">补丁程序在内存限制为 %1$d MB 的情况下运行时被系统停止。将限制降低到 %2$d MB 会使补丁程序成为更小的目标，并可能让运行完成。</string>
     <string name="patcher_memory_adjustment_description_at_minimum">补丁程序在内存限制为 %1$d MB 的情况下运行时被系统停止，这已经是可用的最低限制。请尝试使用更少的补丁源，或选择更少的补丁。</string>
+    <string name="patcher_memory_adjustment_description_finished">系统在 %1$d MB 内存限制下停止了修补程序，而只有在 %2$d MB 时才完成。下次从 %2$d MB 开始可跳过那次失败的尝试</string>
     <string name="patcher_memory_adjustment_apply">降低到 %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">正在修补…</string>
@@ -864,6 +868,7 @@
     <string name="notification_channel_patch_updates">补丁更新</string>
     <string name="notification_channel_patch_updates_description">有关新补丁版本的通知</string>
     <string name="notification_channel_patcher_description">当 Morphe 在后台为应用打补丁时显示</string>
+    <string name="notification_channel_mounted_apps">已挂载的应用</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">高级设置</string>
     <string name="settings_advanced_expert_mode">高级模式</string>
@@ -1280,9 +1285,7 @@ morphe_header_custom_dark.png
     <string name="selected">已选择</string>
     <string name="not_selected">未选择</string>
     <string name="select_all">全选</string>
-    <string name="select_all_done">全部已选</string>
     <string name="deselect_all">取消全选</string>
-    <string name="deselect_all_done">全部已取消</string>
     <string name="reorder_list">重新排序列表</string>
     <string name="reorder_list_hint">拖动以重新排序</string>
     <string name="reorder_done">排序已保存</string>

@@ -493,9 +493,12 @@ Spoljna zona (isprekidana): može biti isečena maskom pokretača – držite va
     <string name="home_app_info_app_update_available_description">Izvori zakrpe podržavaju noviju verziju ove aplikacije. Ponovo je zakrpite da biste prešli na tu verziju</string>
     <string name="home_app_info_newest_supported_version">Najnovija podržana</string>
     <string name="home_app_info_version_move">Instalirana %1$s, najnovija podržana %2$s</string>
+    <string name="home_app_info_version_restore">Instaliran %1$s, zakrpljen %2$s</string>
     <string name="home_app_info_app_deleted_warning">Aplikacija je deinstalirana</string>
     <string name="home_app_info_app_deleted_description">Ova aplikacija je deinstalirana izvan Morphe. Ponovo je instalirajte da bi obnovili funkcionalnost</string>
     <string name="home_app_info_not_patched_description">Instalirana je nezakrpana verzija ove aplikacije. Morphe i dalje ima svoj prethodni zapis o zakrpi</string>
+    <string name="home_app_info_mount_replaced_description">Druga verzija je zamenila montiranu aplikaciju, tako da zakrpa više ne važi. Vraćanje vraća zakrpljenu verziju</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play je ažurirao montiranu aplikaciju, tako da zakrpa više ne važi. Vraćanje vraća zakrpljenu verziju. Isključite automatsko ažuriranje za nju u Google Play-u da bi ostala zakrpljena</string>
     <string name="app_links_title">Podržani veb linkovi</string>
     <string name="app_links_description">Na Androidu 12+, linkovi ka podržanim domenima se podrazumevano otvaraju u vašem pregledaču, osim ako su odobreni</string>
     <string name="app_links_unverified_banner_title">Veb linkovi nisu verifikovani</string>
@@ -624,6 +627,7 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="patcher_memory_adjustment_title">Nema dovoljno memorije</string>
     <string name="patcher_memory_adjustment_description">Sistem je zaustavio patcher dok je radio sa ograničenjem memorije od %1$d MB. Smanjenje ograničenja na %2$d MB čini patcher manjom metom i može omogućiti da se proces završi.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Sistem je zaustavio patcher dok je radio sa ograničenjem memorije od %1$d MB, što je već najniže dostupno. Pokušajte sa manje izvora zakrpa ili izaberite manje zakrpa.</string>
+    <string name="patcher_memory_adjustment_description_finished">Sistem je zaustavio patcher na ograničenju memorije od %1$d MB, a završio je tek na %2$d MB. Počinjanje od %2$d MB preskače taj izgubljeni pokušaj sledeći put</string>
     <string name="patcher_memory_adjustment_apply">Smanji na %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Zakrpljivanje je u toku…</string>
@@ -864,6 +868,7 @@ Zakrpe nisu pogođene: omogućite prerelease zakrpe za svaki izvor na listi izvo
     <string name="notification_channel_patch_updates">Ažuriranja zakrpa</string>
     <string name="notification_channel_patch_updates_description">Obaveštenja o novim zakrpama</string>
     <string name="notification_channel_patcher_description">Prikazuje se dok Morphe zakrpava aplikaciju u pozadini</string>
+    <string name="notification_channel_mounted_apps">Montirane aplikacije</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Napredne postavke</string>
     <string name="settings_advanced_expert_mode">Napredni način</string>
@@ -1264,9 +1269,7 @@ Detalji: %2$s"</string>
     <string name="selected">Odabrano</string>
     <string name="not_selected">Nije odabrano</string>
     <string name="select_all">Izaberi sve</string>
-    <string name="select_all_done">Svi su izabrani</string>
     <string name="deselect_all">Poništi izbor svih</string>
-    <string name="deselect_all_done">Ništa nije izabrano</string>
     <string name="reorder_list">Ponovo sortiraj listu</string>
     <string name="reorder_list_hint">Povucite da biste ponovo sortiralii</string>
     <string name="reorder_done">Redosled je sačŪvan</string>
