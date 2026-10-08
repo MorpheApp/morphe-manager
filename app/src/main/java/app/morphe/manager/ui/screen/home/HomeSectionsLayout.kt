@@ -1509,7 +1509,7 @@ private fun HomeActiveFilterRow(
                 R.plurals.home_app_filter_active,
                 shownCount,
                 stringResource(shownMode.labelRes),
-                shownCount
+                shownCount.toString()
             ),
             selected = true,
             onClick = onClick,

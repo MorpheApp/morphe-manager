@@ -88,8 +88,8 @@
         <item quantity="other">%s sources installed</item>
     </plurals>
     <plurals name="home_app_filter_active">
-        <item quantity="one">%1$s · %2$d filtered</item>
-        <item quantity="other">%1$s · %2$d filtered</item>
+        <item quantity="one">%1$s · %2$s filtered</item>
+        <item quantity="other">%1$s · %2$s filtered</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s hidden app</item>
