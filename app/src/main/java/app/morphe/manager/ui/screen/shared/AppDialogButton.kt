@@ -200,7 +200,8 @@ private fun RowScope.DialogButtonContent(
         Spacer(Modifier.width(DialogButtonIconSpacing))
     }
 
-    Text(
+    // A label that follows its action's state, such as one turning to an "in progress" form
+    CrossfadeText(
         text = text,
         style = MaterialTheme.typography.labelLarge,
         maxLines = 1,

@@ -831,7 +831,8 @@ private fun ResultActionButton(
             ThemedIcon(icon = icon, tint = LocalContentColor.current)
         }
         Spacer(Modifier.width(12.dp))
-        Text(
+        // Follows a mount install through its steps with a fade rather than a jump
+        CrossfadeText(
             text = text,
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.SemiBold,

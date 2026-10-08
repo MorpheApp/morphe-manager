@@ -741,15 +741,15 @@ private fun ExpertLogPanel(
                                             if (!patchProgress.logsLost) {
                                                 LiveIndicatorDot(color = dotColor, size = 10.dp)
                                             }
-                                            Text(
+                                            CrossfadeText(
                                                 text = stringResource(
                                                     if (patchProgress.logsLost) R.string.patcher_logs_lost
                                                     else R.string.patcher_logs_waiting
                                                 ),
-                                                style = MaterialTheme.typography.bodySmall,
+                                                style = MaterialTheme.typography.bodySmall
+                                                    .copy(fontFamily = FontFamily.Monospace),
                                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                                                     .copy(alpha = 0.45f),
-                                                fontFamily = FontFamily.Monospace,
                                                 textAlign = TextAlign.Center
                                             )
                                         }
