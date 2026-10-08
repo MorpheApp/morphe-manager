@@ -280,6 +280,10 @@ class HomeAppButtonPreferences(context: Context) {
     fun setShowCategoryViewSwitcher(show: Boolean) {
         prefs.edit { putBoolean(KEY_SHOW_CATEGORY_VIEW_SWITCHER, show) }
         _showCategoryViewSwitcher.value = show
+        // Hiding the switcher leaves no way back from a grouped list, so the flat one returns with it.
+        // Showing it reads the saved grouping back, as the next launch would
+        if (!show) setCategoryViewMode(HomeAppCategoryViewMode.ALL_APPS)
+        else _categoryViewMode.value = loadCategoryViewMode()
     }
 
     fun setShowSortButton(show: Boolean) {
@@ -426,7 +430,8 @@ class HomeAppButtonPreferences(context: Context) {
         snapshot.hiddenPackages?.let { _hiddenPackages.value = it }
         snapshot.customOrder?.let { _customOrder.value = it }
         snapshot.sortMode?.let { _sortMode.value = HomeAppSortMode.fromPreference(it) }
-        snapshot.categoryViewMode?.let { _categoryViewMode.value = HomeAppCategoryViewMode.fromPreference(it) }
+        // Read back rather than parsed, so a backup with the switcher hidden lands on the flat list
+        _categoryViewMode.value = loadCategoryViewMode()
         snapshot.showCategoryViewSwitcher?.let { _showCategoryViewSwitcher.value = it }
         snapshot.showSortButton?.let { _showSortButton.value = it }
 
@@ -486,8 +491,13 @@ class HomeAppButtonPreferences(context: Context) {
         )
     }
 
+    // A grouping saved while the switcher was hidden has no way back on the home screen
     private fun loadCategoryViewMode(): HomeAppCategoryViewMode =
-        HomeAppCategoryViewMode.fromPreference(prefs.getString(KEY_CATEGORY_VIEW_MODE, null))
+        if (loadShowCategoryViewSwitcher()) {
+            HomeAppCategoryViewMode.fromPreference(prefs.getString(KEY_CATEGORY_VIEW_MODE, null))
+        } else {
+            HomeAppCategoryViewMode.ALL_APPS
+        }
 
     private fun loadShowCategoryViewSwitcher(): Boolean =
         prefs.getBoolean(KEY_SHOW_CATEGORY_VIEW_SWITCHER, false)
