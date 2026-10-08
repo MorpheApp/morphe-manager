@@ -919,11 +919,12 @@ class InstallViewModel : ViewModel(), KoinComponent {
                     label
                 )
 
-                // Persist app data
-                onPersistApp(packageInfo.packageName, InstallType.MOUNT)
-
                 // Mount
                 rootInstaller.mount(packageName)
+
+                // Persist app data once the mount is in place, since the saved record makes
+                // the home screen inspect the app and read whether it is mounted
+                onPersistApp(packageInfo.packageName, InstallType.MOUNT)
 
                 // Drop only caller-owned temporary inputs; persistent saved originals must survive
                 // for future root mount updates.

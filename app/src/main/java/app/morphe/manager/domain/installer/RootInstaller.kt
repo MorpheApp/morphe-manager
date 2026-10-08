@@ -16,6 +16,7 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.content.pm.PackageInfo
 import android.os.IBinder
+import android.os.Process
 import android.os.SystemClock
 import app.morphe.manager.IRootSystemService
 import app.morphe.manager.service.ManagerRootService
@@ -74,7 +75,9 @@ class RootInstaller(
         await()
     }
 
-    suspend fun execute(vararg commands: String) = getShell().newJob().add(*commands).exec()
+    // A job keeps no output unless it is given lists to fill, and callers read both streams
+    suspend fun execute(vararg commands: String) =
+        getShell().newJob().add(*commands).to(ArrayList(), ArrayList()).exec()
 
     fun hasRootAccess(): Boolean {
         Shell.isAppGrantedRoot()?.let { granted ->
@@ -144,10 +147,11 @@ class RootInstaller(
                 ?: return@withContext
             val stockPath = stockAPK.shellQuote()
 
-            execute(unmountBindCommands(stockPath)).assertSuccess("Failed to unmount APK")
-
             // Force-stop the app so it restarts clean without the unmounted patched APK.
-            execute("am force-stop ${packageName.shellQuote()}")
+            execute(
+                unmountBindCommands(stockPath) + "; " +
+                        "am force-stop ${packageName.shellQuote()}"
+            ).assertSuccess("Failed to unmount APK")
         }
     }
 
@@ -230,7 +234,7 @@ class RootInstaller(
         val stockSourcePath = stockSourceFile?.absolutePath ?: installedStockPath
         val stockModuleApkWritten = !stockSourcePath.isNullOrBlank() && stockMountPaths.isNotEmpty()
         if (stockModuleApkWritten) {
-            remoteFS.copyIntoPlace(stockSourcePath, stockModuleApk, "Stock APK doesn't exist")
+            copyIntoPlace(stockSourcePath, stockModuleApk, "Stock APK doesn't exist")
 
             remoteFS.getFile("$modulePath/stock-paths.txt").newOutputStream().use { outputStream ->
                 outputStream.write(stockMountPaths.joinToString("\n", postfix = "\n").toByteArray())
@@ -238,7 +242,7 @@ class RootInstaller(
         }
 
         "$modulePath/$packageName.apk".let { apkPath ->
-            remoteFS.copyIntoPlace(patchedAPK.absolutePath, apkPath, "File doesn't exist")
+            copyIntoPlace(patchedAPK.absolutePath, apkPath, "File doesn't exist")
 
             setModuleFilePermissions(
                 modulePath = modulePath,
@@ -246,9 +250,6 @@ class RootInstaller(
                 stockApkPath = stockModuleApk.takeIf { stockModuleApkWritten }
             )
         }
-
-        // Force-stop the app so it restarts with the newly mounted patched APK.
-        execute("am force-stop ${packageName.shellQuote()}")
     }
 
     suspend fun installAsPlayStore(apkFile: File) = withContext(Dispatchers.IO) {
@@ -290,19 +291,43 @@ class RootInstaller(
         throw Exception("Patched APK not found for mount")
     }
 
+    /**
+     * Copies [sourcePath] to [targetPath] through a staging file in the same directory and
+     * moves it over the target once every byte is there. The module's APK is bind mounted
+     * over the app at boot, so a copy cut short by a full disk or a power loss must never
+     * be left under the name the mount script looks for.
+     *
+     * The root shell copies it rather than the file service, which keeps writing after its
+     * stream is closed and so cannot tell when the staging file is complete.
+     */
+    private suspend fun copyIntoPlace(sourcePath: String, targetPath: String, missingMessage: String) {
+        val source = sourcePath.shellQuote()
+        val staging = "$targetPath.tmp".shellQuote()
+
+        if (!execute("test -f $source").isSuccess) throw Exception(missingMessage)
+
+        execute(
+            "cp $source $staging && mv -f $staging ${targetPath.shellQuote()} || { rm -f $staging; false; }"
+        ).assertSuccess("Failed to copy the APK into place at $targetPath")
+    }
+
     private suspend fun installStockApp(stockApp: File, packageName: String): Shell.Result {
         val tempPath = "/data/local/tmp/morphe-stock-$packageName.apk"
         val tempPathQuoted = tempPath.shellQuote()
 
+        // The subshell keeps exit from closing the shared root shell, which would leave the
+        // commands queued after this one reading nothing back
         return execute(
             $$"""
-                rm -f $$tempPathQuoted;
-                cp $${stockApp.absolutePath.shellQuote()} $$tempPathQuoted &&
-                chmod 644 $$tempPathQuoted &&
-                pm install -r -d $$tempPathQuoted;
-                result=$?;
-                rm -f $$tempPathQuoted;
-                exit $result
+                (
+                    rm -f $$tempPathQuoted;
+                    cp $${stockApp.absolutePath.shellQuote()} $$tempPathQuoted &&
+                    chmod 644 $$tempPathQuoted &&
+                    pm install -r -d $$tempPathQuoted;
+                    result=$?;
+                    rm -f $$tempPathQuoted;
+                    exit $result
+                )
             """.trimIndent()
         )
     }
@@ -374,19 +399,28 @@ class RootInstaller(
         }
     }
 
+    // The toybox nsenter reads every option up to the command as its own and rejects
+    // mount's -o, so the command is set apart with --
     private fun mountInZygoteNamespacesCommand(sourcePath: String, targetPath: String) =
         $$"""
             for zpid in $(pidof zygote64) $(pidof zygote); do
-                nsenter -t "$zpid" -m mount -o bind $$sourcePath $$targetPath 2>/dev/null || true;
+                nsenter -t "$zpid" -m -- mount -o bind $$sourcePath $$targetPath 2>/dev/null || true;
             done
         """.trimIndent()
 
+    // A namespace can hold the patched APK twice, once propagated from the root namespace and
+    // once mounted into it directly, and a single umount only lifts the top one. Morphe's own
+    // namespace was copied from zygote's, so it is cleared too or the APK it reads back for
+    // patching stays the patched one
     private fun unmountBindCommands(targetPath: String) =
         $$"""
-            for zpid in $(pidof zygote64) $(pidof zygote); do
-                nsenter -t "$zpid" -m umount -l $$targetPath 2>/dev/null || true;
+            for pid in $(pidof zygote64) $(pidof zygote) $${Process.myPid()}; do
+                while grep -qF " "$$targetPath" " "/proc/$pid/mountinfo" &&
+                    nsenter -t "$pid" -m -- umount -l $$targetPath 2>/dev/null; do :; done;
             done;
-            umount -l $$targetPath 2>/dev/null || true
+            while grep -qF " "$$targetPath" " /proc/self/mountinfo &&
+                umount -l $$targetPath 2>/dev/null; do :; done;
+            true
         """.trimIndent()
 
     companion object {
@@ -412,30 +446,6 @@ class RootInstaller(
         private val PACKAGE_NAME = Regex("^[A-Za-z][A-Za-z0-9_]*(\\.[A-Za-z][A-Za-z0-9_]*)+$")
 
         internal fun isValidPackageName(packageName: String) = PACKAGE_NAME.matches(packageName)
-
-        /**
-         * Copies [sourcePath] to [targetPath] through a staging file in the same directory and
-         * moves it over the target once every byte is there. The module's APK is bind mounted
-         * over the app at boot, so a copy cut short by a full disk or a power loss must never
-         * be left under the name the mount script looks for.
-         */
-        private fun FileSystemManager.copyIntoPlace(sourcePath: String, targetPath: String, missingMessage: String) {
-            val source = getFile(sourcePath).also { if (!it.exists()) throw Exception(missingMessage) }
-            val staging = getFile("$targetPath.tmp")
-            try {
-                source.newInputStream().use { input ->
-                    staging.newOutputStream().use { output -> input.copyTo(output) }
-                }
-                if (staging.length() != source.length()) {
-                    throw IOException("Copied ${staging.length()} of ${source.length()} bytes to $targetPath")
-                }
-                if (!staging.renameTo(getFile(targetPath))) {
-                    throw IOException("Failed to move the copy into place at $targetPath")
-                }
-            } finally {
-                staging.delete()
-            }
-        }
 
         private fun String.shellQuote() = "'${replace("'", "'\"'\"'")}'"
 

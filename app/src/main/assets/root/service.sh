@@ -44,9 +44,11 @@ resolve_apk_from_path() {
   fi
 }
 
+# The command is set apart with -- because toybox nsenter would otherwise take mount's
+# and umount's options as its own.
 mount_in_zygote_namespaces() {
   for zpid in $(pidof zygote64) $(pidof zygote); do
-    if nsenter -t "$zpid" -m mount -o bind "$base_path" "$stock_path" 2>/dev/null; then
+    if nsenter -t "$zpid" -m -- mount -o bind "$base_path" "$stock_path" 2>/dev/null; then
       log_msg "Mounted in zygote namespace: $zpid"
     else
       log_msg "Failed to mount in zygote namespace: $zpid"
@@ -54,9 +56,12 @@ mount_in_zygote_namespaces() {
   done
 }
 
+# A namespace can hold the patched APK more than once, so each one is unmounted until
+# the stock path no longer appears in its mount table.
 unmount_from_zygote_namespaces() {
   for zpid in $(pidof zygote64) $(pidof zygote); do
-    nsenter -t "$zpid" -m umount -l "$stock_path" 2>/dev/null || true
+    while grep -qF " $stock_path " "/proc/$zpid/mountinfo" &&
+      nsenter -t "$zpid" -m -- umount -l "$stock_path" 2>/dev/null; do :; done
   done
 }
 
@@ -162,7 +167,7 @@ if ! chcon u:object_r:apk_data_file:s0 "$base_path" 2>> "$log"; then
   log_msg "Failed to set SELinux context"
 fi
 unmount_from_zygote_namespaces
-umount -l "$stock_path" 2>/dev/null || true
+while grep -qF " $stock_path " /proc/self/mountinfo && umount -l "$stock_path" 2>/dev/null; do :; done
 if mount -o bind "$base_path" "$stock_path" 2>> "$log"; then
   log_msg "Mounted in root namespace"
 else
