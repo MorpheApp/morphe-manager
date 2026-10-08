@@ -214,7 +214,7 @@ fun InstalledAppInfoDialog(
             BundleChangelogRequest(
                 bundleUid = it.bundleUid,
                 sinceVersion = it.patchedWithVersion,
-                appNames = it.appNames
+                subject = it.subject
             )
         }
     val onShowUpdateChangelog: (() -> Unit)? = updateChangelogRequest?.let { request ->

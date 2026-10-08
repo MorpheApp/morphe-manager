@@ -41,12 +41,12 @@ internal fun <K, V> changedMapKeys(previous: Map<K, V>, current: Map<K, V>): Set
 
 /**
  * The patch update waiting for an installed app: the source carrying it and the version the
- * app was patched with. [appNames] is empty when no changelog narrowed the update down.
+ * app was patched with. [subject] is null when no changelog narrowed the update down.
  */
 data class AppPatchUpdate(
     val bundleUid: Int,
     val patchedWithVersion: String?,
-    val appNames: Set<String> = emptySet()
+    val subject: ChangelogSubject? = null
 )
 
 /**
@@ -987,7 +987,9 @@ class HomeApps(
             .associateBy { it.uid }
 
         // Third-party authors rarely scope their commits, which would hide a single-app bundle's updates
-        val soleApps = soleAppByUid(patchBundleRepository.allBundlesInfoFlow.first())
+        val bundlesInfo = patchBundleRepository.allBundlesInfoFlow.first()
+        val soleApps = soleAppByUid(bundlesInfo)
+        val appMetadata = patchBundleRepository.allAppMetadata.value
 
         val updates = mutableMapOf<String, AppPatchUpdate>()
 
@@ -1004,7 +1006,7 @@ class HomeApps(
                 // No changelog → show badge (network error or local bundle).
                 // No resolvable app name → show badge (can't match scopes).
                 // Bundle lists only this app → show badge (every change is for it).
-                // Known name, no matching scope → no badge.
+                // Known name, nothing in the changelog for the app → no badge.
                 val unscoped = AppPatchUpdate(bundleUid, storedVersion)
                 if (soleApps[bundleUid] == app.originalPackageName) return@firstNotNullOfOrNull unscoped
                 val source = readableByUid[bundleUid] ?: return@firstNotNullOfOrNull unscoped
@@ -1014,11 +1016,20 @@ class HomeApps(
                 val entries = runCatching { source.fetchChangelogSince(storedVersion) }.getOrNull()
                     ?: return@firstNotNullOfOrNull unscoped
 
-                AppPatchUpdate(bundleUid, storedVersion, appNames).takeIf {
+                val subject = ChangelogSubject(
+                    appNames = appNames,
+                    patchNames = app.selectionPayload?.bundles
+                        ?.find { it.bundleUid == bundleUid }?.patches.orEmpty().toSet(),
+                    packageName = app.originalPackageName,
+                    otherAppNames = bundlesInfo[bundleUid]?.listedApps().orEmpty()
+                        .minus(app.originalPackageName)
+                        .mapNotNullTo(mutableSetOf()) { appMetadata[it]?.displayName }
+                )
+                AppPatchUpdate(bundleUid, storedVersion, subject).takeIf {
                     ChangelogParser.hasChangesFor(
                         entries = entries,
                         installedVersion = storedVersion,
-                        appNames = appNames,
+                        subject = subject,
                     )
                 }
             }

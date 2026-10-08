@@ -15,16 +15,31 @@ import app.morphe.manager.util.ChangelogParser.hasChangesFor
  * [scopedBullets] preserves the individual bullet bodies per scope so that
  * [ChangelogParser.hasChangesFor] can distinguish substantive changes from
  * bookkeeping bullets (e.g. "Add experimental support for X.Y.Z").
+ * [unscopedBullets] are the remaining bullet bodies, matched by what their text mentions.
  */
 data class ChangelogEntry(
     val version: String,
     val date: String?,
     val content: String,
     val scopedBullets: Map<String, List<String>> = emptyMap(),
+    val unscopedBullets: List<String> = emptyList(),
 )
 
 /**
- * True when version carries a semver pre-release suffix (e.g. `1.2.3-dev.4`).
+ * What a changelog may call one app, to narrow it to that app: [appNames] in a bullet's scope or
+ * text, the distinctive segments of [packageName] in a scope, and [patchNames], the patches
+ * applied to it, quoted in backticks in an unscoped bullet. [otherAppNames], the rest of the
+ * apps the same bundle patches, keep their names from counting for this one.
+ */
+data class ChangelogSubject(
+    val appNames: Set<String>,
+    val patchNames: Set<String> = emptySet(),
+    val packageName: String? = null,
+    val otherAppNames: Set<String> = emptySet()
+)
+
+/**
+ * True when version carries a semantic versioning pre-release suffix (e.g. `1.2.3-dev.4`).
  * Stable releases have no dash in the version string.
  */
 val ChangelogEntry.isPrerelease: Boolean get() = version.contains('-')
@@ -92,14 +107,13 @@ object ChangelogParser {
      *   `* **YouTube - Hide ads:** text`  →  group 1 = `YouTube - Hide ads`
      *   `* **Reddit:** text`              →  group 1 = `Reddit`
      *
-     * The colon sits *inside* the bold span (`**scope:**`) as emitted by
-     * conventional-changelog. Lines without this pattern are unscoped (global)
-     * and are intentionally ignored to avoid false-positive update badges.
+     * The colon sits *inside* the bold span, as in `**scope:**`, which is how
+     * conventional-changelog emits it. Lines without this pattern are unscoped.
      */
-    private val BULLET_SCOPE_RE = Regex("""^\* \*\*(.+?):\*\*""")
+    private val BULLET_SCOPE_RE = Regex("""^[*+-] \*\*(.+?):\*\*""")
 
-    /** Any changelog bullet, scoped or not. */
-    private val BULLET_RE = Regex("""^\*\s""")
+    /** Any changelog bullet, scoped or not, whichever Markdown list marker it uses. */
+    private val BULLET_RE = Regex("""^[*+-]\s""")
 
     /**
      * Matches a bullet that *only* adds experimental support for a new app
@@ -151,20 +165,36 @@ object ChangelogParser {
     /** Bullet body opening with a bold scope, `**Scope:** text`. */
     private val SCOPED_BODY_RE = Regex("""^\*\*(.+?):\*\*\s*(.*)$""")
 
+    /** Target of a Markdown link, which names the repository rather than what changed. */
+    private val LINK_TARGET_RE = Regex("""]\([^)]*\)""")
+
+    /** Shorter app names, such as `X`, turn up in too many unrelated words to count as a mention. */
+    private const val MIN_MENTIONED_NAME_LENGTH = 3
+
+    /** Package name segments too common across apps to tell one apart in a scope. */
+    private val GENERIC_PACKAGE_SEGMENTS = setOf(
+        "com", "org", "net", "app", "apps", "android", "google", "mobile", "client", "free", "pro",
+        "lite", "plus", "beta", "dev", "release", "global", "official", "messenger", "music", "browser"
+    )
+
     /**
-     * Extracts, per scope, the list of raw bullet bodies (the text following
-     * the `**Scope:**` prefix) from one version entry's content.
+     * Extracts the raw bullet bodies of one version entry's content: per scope the text
+     * following the `**Scope:**` prefix, and the unscoped ones whole.
      */
-    private fun resolveScopedBullets(content: String): Map<String, List<String>> {
+    private fun resolveBullets(content: String): Pair<Map<String, List<String>>, List<String>> {
         val scoped = mutableMapOf<String, MutableList<String>>()
+        val unscoped = mutableListOf<String>()
         for (rawLine in content.lines()) {
             val line = rawLine.trim()
-            val match = BULLET_SCOPE_RE.find(line) ?: continue
-            val scope = match.groupValues[1]
-            val body = line.substring(match.value.length).trim()
-            scoped.getOrPut(scope) { mutableListOf() }.add(body)
+            val match = BULLET_SCOPE_RE.find(line)
+            if (match != null) {
+                val body = line.substring(match.value.length).trim()
+                scoped.getOrPut(match.groupValues[1]) { mutableListOf() }.add(body)
+            } else if (BULLET_RE.containsMatchIn(line)) {
+                unscoped += line.replaceFirst(BULLET_RE, "").trim()
+            }
         }
-        return scoped
+        return scoped to unscoped
     }
 
     /**
@@ -187,11 +217,13 @@ object ChangelogParser {
         fun flush() {
             val v = currentVersion ?: return
             val raw = currentContent.toString()
+            val (scoped, unscoped) = resolveBullets(raw)
             entries += ChangelogEntry(
                 version = v,
                 date = currentDate,
                 content = raw.sanitizeContent(),
-                scopedBullets = resolveScopedBullets(raw),
+                scopedBullets = scoped,
+                unscopedBullets = unscoped,
             )
         }
 
@@ -262,68 +294,118 @@ object ChangelogParser {
     }
 
     /**
-     * Returns true if any changelog entry newer than [installedVersion] has a
-     * scoped bullet whose scope exactly matches one of [appNames] or starts with
-     * `"$appName - "`, and that bullet is more than just adding support for a
-     * new experimental version. Comparison is case-insensitive.
+     * Returns true if any changelog entry newer than [installedVersion] has a bullet for
+     * [subject] that is more than just adding support for a new experimental version.
      *
-     * Multiple candidates are accepted because the same app can be referenced by
-     * different names across sources: the canonical Compatibility declaration name
-     * from the bundle, and the (localized) system PM label. Matching any one is
-     * enough to trigger the badge.
+     * Third-party changelogs rarely follow one convention, so a bullet is matched heuristically:
+     * - a scoped one by its scope, which names one of the app names or one of its sub-scopes
+     *   (`YouTube - Hide ads`), or a distinctive package name segment (`brave` for
+     *   `com.brave.browser`). Only letters and digits are compared, so `google-photos` is
+     *   Google Photos. Its text is not read, as the scope already says whose change it is
+     * - an unscoped one by its text, which names the app as a whole word outside a dotted
+     *   identifier, or quotes one of its patches in backticks. Plain patch names are too often
+     *   common words to count
+     *
+     * Several app names are accepted because the same app is called differently across sources:
+     * the bundle's Compatibility name and the (localized) system PM label.
      *
      * A bullet that purely adds experimental version support (see
      * [EXPERIMENTAL_VERSION_ADDITION_RE]) is ignored: it doesn't affect anyone
      * who isn't already on that experimental version, so it shouldn't by
-     * itself trigger an update badge (#622). A scope with at least one other,
-     * non-experimental-addition bullet still counts as changed.
+     * itself trigger an update badge (#622).
      */
     fun hasChangesFor(
         entries: List<ChangelogEntry>,
         installedVersion: String?,
-        appNames: Collection<String>,
-    ): Boolean = appNames.isNotEmpty() &&
-            entriesNewerThan(entries, installedVersion).any { it.hasChangesFor(appNames) }
+        subject: ChangelogSubject,
+    ): Boolean {
+        if (subject.appNames.isEmpty()) return false
+        val matcher = SubjectMatcher(subject)
+        return entriesNewerThan(entries, installedVersion).any { it.hasChangesFor(matcher) }
+    }
 
     /**
-     * Narrows [entries] to one app, dropping entries with no substantive bullet for it. Kept
-     * entries hold its bullets and, under [generalHeading], the ones scoped to no app at all.
+     * Narrows [entries] to [subject], dropping entries with no substantive bullet for it. Kept
+     * entries hold its bullets and, under [generalHeading], the ones for no app at all.
      */
     fun entriesFor(
         entries: List<ChangelogEntry>,
-        appNames: Collection<String>,
+        subject: ChangelogSubject?,
         generalHeading: String? = null,
     ): List<ChangelogEntry> {
-        if (appNames.isEmpty()) return entries
+        if (subject == null || subject.appNames.isEmpty()) return entries
+        val matcher = SubjectMatcher(subject)
         return entries
-            .filter { it.hasChangesFor(appNames) }
+            .filter { it.hasChangesFor(matcher) }
             .map { entry ->
                 entry.copy(
-                    content = entry.content.keepScopedLines(appNames, generalHeading),
-                    scopedBullets = entry.scopedBullets.filterKeys { it.matchesApp(appNames) }
+                    content = entry.content.keepScopedLines(matcher, generalHeading),
+                    scopedBullets = entry.scopedBullets.filterKeys(matcher::matchesScope),
+                    unscopedBullets = entry.unscopedBullets.filter(matcher::mentions)
                 )
             }
     }
 
-    /** True when the scope names the app, exactly or as one of its sub-scopes. */
-    private fun String.matchesApp(appNames: Collection<String>) = appNames.any { name ->
-        equals(name, ignoreCase = true) || startsWith("$name - ", ignoreCase = true)
-    }
+    /** Letters and digits only, lowercased. */
+    private fun String.compact() = filter(Char::isLetterOrDigit).lowercase()
 
-    /** True when the app has a bullet here that is more than bookkeeping. */
-    private fun ChangelogEntry.hasChangesFor(appNames: Collection<String>) =
-        scopedBullets.any { (scope, bullets) ->
-            scope.matchesApp(appNames) && bullets.any {
-                !EXPERIMENTAL_VERSION_ADDITION_RE.containsMatchIn(it)
+    /** [ChangelogSubject] prepared once, as a changelog runs to thousands of bullets. */
+    private class SubjectMatcher(subject: ChangelogSubject) {
+        private val names = subject.appNames.map { it.compact() }.filterTo(mutableSetOf(), String::isNotEmpty)
+        private val otherNames = subject.otherAppNames.mapTo(mutableSetOf()) { it.compact() }
+        private val segments = subject.packageName?.split('.').orEmpty()
+            .filter { it.length >= MIN_MENTIONED_NAME_LENGTH && it.lowercase() !in GENERIC_PACKAGE_SEGMENTS }
+            .mapTo(mutableSetOf()) { it.compact() }
+
+        // Neither a longer word nor a segment of a package name such as org.telegram.plus
+        private val nameRegex = subject.appNames
+            .filter { it.length >= MIN_MENTIONED_NAME_LENGTH }
+            .takeIf { it.isNotEmpty() }
+            ?.joinToString("|", prefix = "(?:", postfix = ")") { Regex.escape(it) }
+            ?.let { names ->
+                Regex(
+                    """(?<![\p{L}\p{N}])(?<![\p{L}\p{N}]\.)$names(?![\p{L}\p{N}])(?!\.[\p{L}\p{N}])""",
+                    RegexOption.IGNORE_CASE
+                )
             }
+
+        // Longer names of other apps that hold this one's, such as Telegram Web, are theirs
+        private val shadowingNames = subject.otherAppNames.filter { other ->
+            subject.appNames.any { other.length > it.length && other.contains(it, ignoreCase = true) }
+        }
+        private val quotedPatches = subject.patchNames.map { "`$it`" }
+
+        /** True when the scope names the app, exactly or as one of its sub-scopes. */
+        fun matchesScope(scope: String): Boolean {
+            val keys = setOf(scope.compact(), scope.substringBefore(" - ").compact())
+            // A segment can be the vendor's, as facebook is Messenger's, so another app's name wins
+            return names.any { it in keys } || keys.none { it in otherNames } && keys.any { it in segments }
         }
 
+        /** True when unscoped bullet text names the app or quotes one of its patches. */
+        fun mentions(bullet: String): Boolean {
+            val text = shadowingNames.fold(bullet.replace(LINK_TARGET_RE, "]")) { text, other ->
+                text.replace(other, " ", ignoreCase = true)
+            }
+            return nameRegex?.containsMatchIn(text) == true ||
+                    quotedPatches.any { text.contains(it, ignoreCase = true) }
+        }
+    }
+
+    /** True for a bullet that is more than bookkeeping. */
+    private fun String.isSubstantive() = !EXPERIMENTAL_VERSION_ADDITION_RE.containsMatchIn(this)
+
+    private fun ChangelogEntry.hasChangesFor(matcher: SubjectMatcher) =
+        scopedBullets.any { (scope, bullets) ->
+            matcher.matchesScope(scope) && bullets.any { it.isSubstantive() }
+        } || unscopedBullets.any { it.isSubstantive() && matcher.mentions(it) }
+
     /**
-     * Rebuilds the entry's markdown from the app's bullets, dropping emptied headings.
-     * Unscoped bullets follow under [generalHeading], and are left out when it is null.
+     * Rebuilds the entry's markdown from the bullets [matcher] accepts, dropping emptied headings.
+     * Other unscoped bullets follow under [generalHeading], and are left out when it is null.
      */
     private fun String.keepScopedLines(
-        appNames: Collection<String>,
+        matcher: SubjectMatcher,
         generalHeading: String?
     ): String {
         val kept = mutableListOf<String>()
@@ -338,11 +420,12 @@ object ChangelogParser {
             if (!BULLET_RE.containsMatchIn(line)) continue
 
             val scope = BULLET_SCOPE_RE.find(line)?.groupValues?.get(1)
-            if (scope == null) {
+            val forSubject = scope?.let(matcher::matchesScope) ?: matcher.mentions(line)
+            if (scope == null && !forSubject) {
                 if (generalHeading != null) general += rawLine
                 continue
             }
-            if (!scope.matchesApp(appNames)) continue
+            if (!forSubject) continue
 
             pendingHeading?.let {
                 if (kept.isNotEmpty()) kept += ""
