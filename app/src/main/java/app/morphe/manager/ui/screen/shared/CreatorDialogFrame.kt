@@ -60,42 +60,39 @@ fun CreatorDialogFrame(
         padding = DialogPadding.Compact,
         scrollable = false,
         contentArrangement = Arrangement.Top,
-        fillContentHeight = true
-    ) {
-        Box(modifier = Modifier.weight(1f)) {
-            Column(modifier = Modifier.fillMaxSize()) {
-                ListDialogHeader(
-                    icon = { modifier ->
-                        AppIcon(packageName = packageName, contentDescription = null, modifier = modifier)
-                    },
-                    title = title,
-                    subtitle = KnownApps.getAppName(packageName)
-                ) {
-                    TitleAction(
-                        icon = Icons.Outlined.Info,
-                        contentDescription = guideTitle,
-                        onClick = { showGuide = true },
-                        style = TitleActionStyle.Accent
-                    )
-                }
-
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f)
-                        .verticalScrollFade(scrollState)
-                        .verticalScroll(scrollState)
-                        .padding(vertical = Defaults.ItemSpacing),
-                    // Spaced as the option cards that open the creator
-                    verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
-                    content = content
-                )
-            }
-
+        fillContentHeight = true,
+        overlay = {
             ContentOverlay(visible = isCreating) {
                 PulsingLogoWithCaption(caption = stringResource(R.string.creating))
             }
         }
+    ) {
+        ListDialogHeader(
+            icon = { modifier ->
+                AppIcon(packageName = packageName, contentDescription = null, modifier = modifier)
+            },
+            title = title,
+            subtitle = KnownApps.getAppName(packageName)
+        ) {
+            TitleAction(
+                icon = Icons.Outlined.Info,
+                contentDescription = guideTitle,
+                onClick = { showGuide = true },
+                style = TitleActionStyle.Accent
+            )
+        }
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+                .verticalScrollFade(scrollState)
+                .verticalScroll(scrollState)
+                .padding(vertical = Defaults.ItemSpacing),
+            // Spaced as the option cards that open the creator
+            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
+            content = content
+        )
     }
 
     if (showGuide) {

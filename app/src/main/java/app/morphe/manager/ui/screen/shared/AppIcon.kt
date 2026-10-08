@@ -21,11 +21,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.Outline
+import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.asComposePath
 import androidx.compose.ui.graphics.drawOutline
@@ -277,8 +279,23 @@ const val AppIconPixels = 512
 /** Side of the square an unbounded [AdaptiveIconDrawable.getIconMask] is declared in. */
 private const val ICON_MASK_SIZE = 100f
 
+/** The system mask for app icons (circle, squircle, etc.), declared in a square of [ICON_MASK_SIZE]. */
+private val AppIconMask: AndroidPath by lazy { AdaptiveIconDrawable(null, null).iconMask }
+
 /** The system mask for app icons (circle, squircle, etc.), so placeholders match the icons. */
-val AppIconShape: Shape by lazy { IconMaskShape(AdaptiveIconDrawable(null, null).iconMask) }
+val AppIconShape: Shape = object : Shape {
+    override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline =
+        Outline.Generic(appIconOutline(Rect(Offset.Zero, size)))
+}
+
+/** The [AppIconShape] outline stretched over [bounds], for drawing it rather than clipping to it. */
+fun appIconOutline(bounds: Rect): Path {
+    val matrix = Matrix().apply {
+        setScale(bounds.width / ICON_MASK_SIZE, bounds.height / ICON_MASK_SIZE)
+        postTranslate(bounds.left, bounds.top)
+    }
+    return AndroidPath(AppIconMask).apply { transform(matrix) }.asComposePath()
+}
 
 /**
  * Share of its slot a loaded adaptive icon covers. Taken from the loader's own normalizer, since it
@@ -286,12 +303,4 @@ val AppIconShape: Shape by lazy { IconMaskShape(AdaptiveIconDrawable(null, null)
  */
 val AppIconContentFraction: Float by lazy {
     IconNormalizer.normalizeAdaptiveIcon(AdaptiveIconDrawable(null, null), AppIconPixels, null)
-}
-
-/** [mask] scaled to the outlined size. */
-private class IconMaskShape(private val mask: AndroidPath) : Shape {
-    override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline {
-        val scale = Matrix().apply { setScale(size.width / ICON_MASK_SIZE, size.height / ICON_MASK_SIZE) }
-        return Outline.Generic(AndroidPath(mask).apply { transform(scale) }.asComposePath())
-    }
 }

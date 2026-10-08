@@ -121,6 +121,8 @@ enum class DialogPadding {
  * @param hideFooterWhileTyping Folds the [footer] away while the keyboard is up, for a list dialog
  * whose search wants every row of room it can get. A dialog whose buttons act on what is typed
  * leaves it off, so they stay above the keyboard. Default is false.
+ * @param overlay Drawn over the whole dialog, header band, footer and system bars included, such
+ * as a [ContentOverlay] covering it while it is busy.
  * @param content Dialog content, left out by a dialog its [description] says everything for.
  */
 @Composable
@@ -139,6 +141,7 @@ fun AppDialog(
     fillContentHeight: Boolean = false,
     hideFooterWhileTyping: Boolean = false,
     backdrop: (@Composable BoxScope.() -> Unit)? = null,
+    overlay: (@Composable BoxScope.() -> Unit)? = null,
     onEntered: (() -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit = {}
 ) {
@@ -194,20 +197,23 @@ fun AppDialog(
                 modifier = Modifier.fillMaxSize()
             ) {
                 val dialogContent = @Composable {
-                    DialogContent(
-                        title = title,
-                        description = description,
-                        titleTrailingContent = titleTrailingContent,
-                        footer = footer,
-                        bottomBar = bottomBar,
-                        isDarkTheme = isDarkTheme,
-                        scrollable = scrollable,
-                        padding = padding,
-                        contentArrangement = contentArrangement,
-                        fillContentHeight = fillContentHeight,
-                        hideFooterWhileTyping = hideFooterWhileTyping,
-                        content = content
-                    )
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        DialogContent(
+                            title = title,
+                            description = description,
+                            titleTrailingContent = titleTrailingContent,
+                            footer = footer,
+                            bottomBar = bottomBar,
+                            isDarkTheme = isDarkTheme,
+                            scrollable = scrollable,
+                            padding = padding,
+                            contentArrangement = contentArrangement,
+                            fillContentHeight = fillContentHeight,
+                            hideFooterWhileTyping = hideFooterWhileTyping,
+                            content = content
+                        )
+                        overlay?.invoke(this)
+                    }
                 }
                 // Provided only when there is one, so a dialog opened from a colored one keeps its color
                 if (accentColor != null) ProvideAccent(accentColor, dialogContent) else dialogContent()

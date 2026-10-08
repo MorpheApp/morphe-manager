@@ -403,29 +403,29 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="adaptive_icon_select_image">Select image</string>
     <string name="adaptive_icon_change_image">Change image</string>
     <string name="image_load_failed">Couldn\'t load this image</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Foreground image</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Launcher icon</string>
+    <string name="adaptive_icon_gesture_hint">Drag to move, pinch to resize</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Preview</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Standard</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Themed</string>
     <string name="adaptive_icon_background_color">Background color</string>
     <string name="adaptive_icon_reset_transform">Reset position and scale</string>
-    <string name="adaptive_icon_safe_zone_inner">Safe zone (always visible)</string>
-    <string name="adaptive_icon_safe_zone_outer">Mask zone (may be clipped)</string>
-    <string name="adaptive_icon_no_transparency_warning">Image has no transparent pixels. The result may look incorrect</string>
+    <string name="adaptive_icon_no_transparency_warning">This image has no transparent pixels, so the themed and notification icons keep the Morphe logo</string>
     <string name="adaptive_icon_created_success">Adaptive icon created successfully</string>
     <string name="adaptive_icon_creation_failed">Failed to create adaptive icon</string>
-    <string name="adaptive_icon_label">Adaptive</string>
-    <string name="adaptive_icon_monochrome_label">Monochrome</string>
     <string name="adaptive_icon_guide">Icon creation guide</string>
     <string name="adaptive_icon_guide_png_title">Use a PNG with a transparent background</string>
-    <string name="adaptive_icon_guide_png_body">The foreground must be a PNG file with a transparent background. A solid-colored background will look incorrect - the background color should come from the background picker below.</string>
+    <string name="adaptive_icon_guide_png_body">A logo on a transparent background works best, with the background color picked below. A picture without transparency fills the whole icon instead, and the themed and notification icons then keep the Morphe logo.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Safe zones</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Inner zone (solid): content is always fully visible on all launcher shapes.
-Outer zone (dashed): may be clipped by the launcher mask - keep important details inside the inner zone."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">The outline shows the icon shape of your launcher, and everything outside it is cut away. Other launchers use other shapes, so keep important details inside the dashed circle, which every shape shows.</string>
     <string name="adaptive_icon_guide_notification_title">Notification icon</string>
-    <string name="adaptive_icon_guide_notification_body">Generated automatically from the foreground image. Adjust its size using the Notification slider. All visible content appears white in the status bar.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Monochrome icon</string>
-    <string name="adaptive_icon_guide_monochrome_body">Generated automatically from the foreground image using the same adaptive icon transforms. It appears tinted with the wallpaper accent color on Android 13 and later.</string>
+    <string name="adaptive_icon_guide_notification_body">Cut from the visible part of the image and sized like other status bar icons, whatever margin the file has. Adjust it with the slider under the preview. Android shows it in a single color.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Themed icon</string>
+    <string name="adaptive_icon_guide_monochrome_body">Cut from the image with the same position and size as the launcher icon. On Android 13 and later, launchers with themed icons turned on color it from the wallpaper.</string>
     <string name="notification_icon_preview">Notification</string>
 
     <!-- Header Creator -->

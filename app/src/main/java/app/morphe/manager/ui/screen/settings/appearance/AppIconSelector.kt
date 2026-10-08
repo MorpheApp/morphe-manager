@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.settings.appearance
 
-import android.graphics.drawable.AdaptiveIconDrawable
 import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.animation.AnimatedContent
@@ -24,8 +23,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.GenericShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -42,9 +39,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Matrix
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.asComposePath
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
@@ -126,7 +120,7 @@ fun AppIconSettingsItem() {
     }
 }
 
-/** A launcher icon drawn at [size] with the rounding the picker gives it. */
+/** A launcher icon drawn at [size] in the shape the launcher gives it. */
 @Composable
 private fun AppIconPreview(icon: AppIcon, size: Dp) {
     val context = LocalContext.current
@@ -138,7 +132,7 @@ private fun AppIconPreview(icon: AppIcon, size: Dp) {
         contentDescription = null,
         modifier = Modifier
             .size(size)
-            .clip(RoundedCornerShape(size * 0.2f))
+            .clip(AppIconShape)
     )
 }
 
@@ -292,7 +286,7 @@ private fun LayeredIconPreview(
     Box(
         modifier = modifier
             .size(size)
-            .clip(rememberLauncherIconShape()),
+            .clip(AppIconShape),
         contentAlignment = Alignment.Center
     ) {
         Crossfade(targetState = background, animationSpec = tween(350), label = "icon_background") { background ->
@@ -308,19 +302,6 @@ private fun LayeredIconPreview(
         ) { mark ->
             IconLayer(drawableResId = mark.drawableResId, size = size)
         }
-    }
-}
-
-/**
- * The shape the launcher cuts icons to, from the mask of an adaptive icon, which the system draws
- * in a 100 by 100 box.
- */
-@Composable
-private fun rememberLauncherIconShape(): Shape = remember {
-    val mask = AdaptiveIconDrawable(null, null).iconMask.asComposePath()
-    GenericShape { size, _ ->
-        addPath(mask)
-        transform(Matrix().apply { scale(size.width / 100f, size.height / 100f) })
     }
 }
 
