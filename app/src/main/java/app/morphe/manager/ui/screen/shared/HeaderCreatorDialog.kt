@@ -5,89 +5,150 @@
 
 package app.morphe.manager.ui.screen.shared
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.*
 import android.net.Uri
-import androidx.compose.foundation.Canvas
+import androidx.annotation.StringRes
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.gestures.detectTransformGestures
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.*
+import androidx.compose.material.icons.outlined.Image
+import androidx.compose.material.icons.outlined.Notifications
+import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
-import androidx.core.graphics.createBitmap
 import androidx.documentfile.provider.DocumentFile
 import app.morphe.manager.R
 import app.morphe.manager.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.math.abs
+
+private const val MIN_SCALE = 0.3f
+private const val MAX_SCALE = 3f
+
+/** A header starts at the left edge of the app's own logo, centered on it across. */
+private val HeaderAnchor = Offset(0f, 0.5f)
+
+/** One theme of a header: the file the patch reads it from, and how the app bar looks in it. */
+private enum class HeaderTheme(
+    val fileName: String,
+    @param:StringRes val titleResId: Int,
+    val bar: Color,
+    val content: Color,
+    val field: Color
+) {
+    Light(
+        fileName = "morphe_header_custom_light.png",
+        titleResId = R.string.header_creator_light_theme,
+        bar = Color.White,
+        content = Color(0xFF0F0F0F),
+        field = Color(0xFFF2F2F2)
+    ),
+    Dark(
+        fileName = "morphe_header_custom_dark.png",
+        titleResId = R.string.header_creator_dark_theme,
+        bar = Color(0xFF0F0F0F),
+        content = Color.White,
+        field = Color(0xFF272727)
+    )
+}
+
+/** Folder of one screen density, and the size of the header image in it. */
+private class HeaderDensity(val folderName: String, val width: Int, val height: Int)
 
 /**
- * Configuration constants for header creation.
+ * How an app lays out its header logo, measured from its own: the image slot, where the stock logo
+ * sits in it, and the gap the app bar leaves before it. The densities are the sizes the patch takes.
  */
-private object HeaderConfig {
-    // Folder structure
-    const val BRANDING_FOLDER_NAME = "morphe_branding"
-    const val YOUTUBE_HEADER_FOLDER_NAME = "morphe_header_youtube"
-    const val YTM_HEADER_FOLDER_NAME = "morphe_header_music"
+private enum class HeaderLayout(
+    val folderName: String,
+    val slot: DpSize,
+    /** The stock logo within [slot], in dp. */
+    val logoArea: Rect,
+    val startInset: Dp,
+    val themes: List<HeaderTheme>,
+    val densities: List<HeaderDensity>
+) {
+    YouTube(
+        folderName = "morphe_header_youtube",
+        slot = DpSize(129.dp, 48.dp),
+        logoArea = Rect(16f, 14f, 117f, 34f),
+        startInset = 0.dp,
+        themes = listOf(HeaderTheme.Light, HeaderTheme.Dark),
+        densities = listOf(
+            HeaderDensity("drawable-hdpi", 194, 72),
+            HeaderDensity("drawable-xhdpi", 258, 96),
+            HeaderDensity("drawable-xxhdpi", 387, 144),
+            HeaderDensity("drawable-xxxhdpi", 516, 192)
+        )
+    ),
 
-    // File names
-    const val LIGHT_HEADER_FILE_NAME = "morphe_header_custom_light"
-    const val DARK_HEADER_FILE_NAME = "morphe_header_custom_dark"
+    // YouTube Music has no light theme, and its logo fills its slot
+    Music(
+        folderName = "morphe_header_music",
+        slot = DpSize(80.dp, 24.dp),
+        logoArea = Rect(0f, 0f, 80f, 24f),
+        startInset = 16.dp,
+        themes = listOf(HeaderTheme.Dark),
+        densities = listOf(
+            HeaderDensity("drawable-hdpi", 121, 36),
+            HeaderDensity("drawable-xhdpi", 160, 48),
+            HeaderDensity("drawable-xxhdpi", 240, 72),
+            HeaderDensity("drawable-xxxhdpi", 320, 96)
+        )
+    );
 
-    fun headerFolderName(packageName: String) = when (packageName) {
-        KnownApps.YOUTUBE_MUSIC -> YTM_HEADER_FOLDER_NAME
-        else -> YOUTUBE_HEADER_FOLDER_NAME
+    val aspectRatio get() = slot.width / slot.height
+
+    /** [logoArea] stretched over a [frame] of the slot's proportions. */
+    fun logoBox(frame: Size): Rect {
+        val x = frame.width / slot.width.value
+        val y = frame.height / slot.height.value
+        return Rect(logoArea.left * x, logoArea.top * y, logoArea.right * x, logoArea.bottom * y)
     }
 
-    // Density folders and sizes (width x height)
-    val DENSITY_CONFIGS = mapOf(
-        240 to ("drawable-hdpi" to (194 to 72)),
-        320 to ("drawable-xhdpi" to (258 to 96)),
-        480 to ("drawable-xxhdpi" to (387 to 144)),
-        Int.MAX_VALUE to ("drawable-xxxhdpi" to (512 to 192))
-    )
+    companion object {
+        fun of(packageName: String) = if (packageName == KnownApps.YOUTUBE_MUSIC) Music else YouTube
+    }
+}
 
-    // Transform constraints
-    const val MIN_SCALE = 0.3f
-    const val MAX_SCALE = 5.0f
-    const val MAX_OFFSET = 300f
+/** Bounds of [picture] in a [frame] of the header slot, its visible part fitted to the stock logo. */
+private fun ImageTransform.placeInSlot(layout: HeaderLayout, frame: Size, picture: PickedImage): Rect =
+    place(frame, layout.logoBox(frame), picture.size, picture.content, HeaderAnchor)
 
-    // Snap to center thresholds (in pixels)
-    const val SNAP_THRESHOLD = 10f
-    const val SNAP_GUIDE_THRESHOLD = 15f
-
-    // Visual appearance
-    const val SNAP_GUIDE_ALPHA = 0.6f
-    const val SNAP_GUIDE_STROKE_WIDTH = 1.5f
-    const val BORDER_STROKE_WIDTH = 2f
+/** One theme's header: the picture picked for it and where it sits in the slot. */
+@Stable
+private class HeaderVariant(val theme: HeaderTheme) {
+    var picture by mutableStateOf<PickedImage?>(null)
+    var transform by mutableStateOf(ImageTransform())
 }
 
 /**
- * Dialog for creating custom headers with light and dark theme variants.
- * Generates header images in proper sizes for all screen densities.
+ * Dialog for creating custom headers, one per theme the app has. Each is placed in an editor of the
+ * header slot and shown in the app bar it lands in, then written for every density the patch takes.
  */
 @Composable
 fun HeaderCreatorDialog(
@@ -97,54 +158,25 @@ fun HeaderCreatorDialog(
 ) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
-
-    // YouTube Music has no light theme - show only the dark variant section
-    val showLightVariant = packageName != KnownApps.YOUTUBE_MUSIC
-
-    val light = remember { HeaderVariantState() }
-    val dark = remember { HeaderVariantState() }
+    val layout = remember(packageName) { HeaderLayout.of(packageName) }
+    val variants = remember(layout) { layout.themes.map(::HeaderVariant) }
 
     val successMessage = stringResource(R.string.header_creator_success)
     val failureMessage = stringResource(R.string.header_creator_failed)
-
-    // Whether all required images are provided
-    val canCreate = dark.bitmap != null && (!showLightVariant || light.bitmap != null)
-
-    var isCreating by remember { mutableStateOf(false) }
+    val isCreating = remember { mutableStateOf(false) }
 
     // Folder picker for saving
     val openFolderPicker = rememberFolderPicker { uri ->
-        scope.launch(Dispatchers.IO) {
-            withContext(Dispatchers.Main) { isCreating = true }
-            try {
-                val success = createHeaderFiles(
-                    context = context,
-                    baseUri = uri,
-                    packageName = packageName,
-                    lightHeaderBitmap = if (showLightVariant) light.bitmap else null,
-                    darkHeaderBitmap = dark.bitmap!!,
-                    lightScale = light.scale,
-                    lightOffsetX = light.offsetX,
-                    lightOffsetY = light.offsetY,
-                    darkScale = dark.scale,
-                    darkOffsetX = dark.offsetX,
-                    darkOffsetY = dark.offsetY
-                )
-                withContext(Dispatchers.Main) {
-                    isCreating = false
-                    if (success != null) {
-                        context.toast(successMessage)
-                        onHeaderCreated(success)
-                        onDismiss()
-                    } else {
-                        context.toast(failureMessage)
-                    }
-                }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    isCreating = false
-                    context.toast("Failed to create header: ${e.message}")
-                }
+        scope.launch {
+            isCreating.value = true
+            val result = createHeaderFiles(context, uri, layout, variants)
+            isCreating.value = false
+            if (result != null) {
+                context.toast(successMessage)
+                onHeaderCreated(result)
+                onDismiss()
+            } else {
+                context.toast(failureMessage)
             }
         }
     }
@@ -158,276 +190,221 @@ fun HeaderCreatorDialog(
             stringResource(R.string.header_creator_guide_themes_title) to stringResource(R.string.header_creator_guide_themes_body),
             stringResource(R.string.header_creator_guide_positioning_title) to stringResource(R.string.header_creator_guide_positioning_body)
         ),
-        createEnabled = canCreate,
-        isCreating = isCreating,
+        createEnabled = variants.all { it.picture != null },
+        isCreating = isCreating.value,
         onCreate = { openFolderPicker() },
         onDismiss = onDismiss
     ) {
-        if (showLightVariant) {
-            HeaderVariantCard(
-                title = stringResource(R.string.header_creator_light_theme),
-                icon = Icons.Outlined.LightMode,
-                state = light,
-                isDarkTheme = false
+        variants.forEach { variant -> HeaderVariantCard(layout, variant) }
+    }
+}
+
+/** Card of one theme's header: its editor, the app bar it lands in, and its size controls. */
+@Composable
+private fun HeaderVariantCard(layout: HeaderLayout, variant: HeaderVariant) {
+    val openPicker = rememberPickedImagePicker { picked ->
+        variant.picture = picked
+        // Reset transform when new image is loaded
+        variant.transform = ImageTransform()
+    }
+
+    CreatorCard(title = stringResource(variant.theme.titleResId)) {
+        HeaderEditor(
+            layout = layout,
+            theme = variant.theme,
+            picture = variant.picture,
+            transform = variant.transform,
+            onTransformChange = { variant.transform = it },
+            onSelectImage = { openPicker() }
+        )
+
+        if (variant.picture != null) {
+            Text(
+                text = stringResource(R.string.adaptive_icon_gesture_hint),
+                style = MaterialTheme.typography.bodySmall,
+                color = dialogSecondaryTextColor(),
+                modifier = Modifier.align(Alignment.CenterHorizontally)
             )
         }
 
-        HeaderVariantCard(
-            title = stringResource(R.string.header_creator_dark_theme),
-            icon = Icons.Outlined.DarkMode,
-            state = dark,
-            isDarkTheme = true
+        Text(
+            text = stringResource(R.string.adaptive_icon_preview),
+            style = MaterialTheme.typography.labelLarge,
+            color = dialogSecondaryTextColor()
         )
-    }
-}
+        AppBarPreview(layout, variant.theme, variant.picture, variant.transform)
 
-/** One theme's header: the picture picked for it and where it sits in the header's frame. */
-@Stable
-private class HeaderVariantState {
-    var bitmap by mutableStateOf<Bitmap?>(null)
-    var scale by mutableFloatStateOf(1f)
-    var offsetX by mutableFloatStateOf(0f)
-    var offsetY by mutableFloatStateOf(0f)
-
-    val isTransformed: Boolean get() = scale != 1f || offsetX != 0f || offsetY != 0f
-
-    fun resetTransform() {
-        scale = 1f
-        offsetX = 0f
-        offsetY = 0f
-    }
-}
-
-/**
- * Card of one theme's header: the picture to pick, its preview to pinch and drag into place, and
- * the scale slider once there is a picture to scale.
- */
-@Composable
-private fun HeaderVariantCard(
-    title: String,
-    icon: ImageVector,
-    state: HeaderVariantState,
-    isDarkTheme: Boolean
-) {
-    val openPicker = rememberImagePicker { bitmap ->
-        state.bitmap = bitmap
-        // Reset transform when new image is loaded
-        state.resetTransform()
-    }
-
-    CreatorCard(title = title) {
-        AppDialogOutlinedButton(
-            text = stringResource(
-                if (state.bitmap == null) R.string.adaptive_icon_select_image else R.string.adaptive_icon_change_image
-            ),
-            onClick = { openPicker() },
-            icon = icon,
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        HeaderPreview(
-            headerBitmap = state.bitmap,
-            scale = state.scale,
-            offsetX = state.offsetX,
-            offsetY = state.offsetY,
-            isDarkTheme = isDarkTheme,
-            onScaleChange = { newScale ->
-                state.scale = newScale.coerceIn(HeaderConfig.MIN_SCALE, HeaderConfig.MAX_SCALE)
-            },
-            onOffsetChange = { newOffsetX, newOffsetY ->
-                state.offsetX = newOffsetX.coerceIn(-HeaderConfig.MAX_OFFSET, HeaderConfig.MAX_OFFSET)
-                state.offsetY = newOffsetY.coerceIn(-HeaderConfig.MAX_OFFSET, HeaderConfig.MAX_OFFSET)
-            }
-        )
-
-        if (state.bitmap != null) {
+        if (variant.picture != null) {
             ScaleSliderRow(
-                value = state.scale,
-                onValueChange = { state.scale = it },
-                valueRange = HeaderConfig.MIN_SCALE..HeaderConfig.MAX_SCALE
+                value = variant.transform.scale,
+                onValueChange = { variant.transform = variant.transform.copy(scale = it) },
+                valueRange = MIN_SCALE..MAX_SCALE
             ) {
                 SliderResetAction(
-                    visible = state.isTransformed,
+                    visible = variant.transform != ImageTransform(),
                     contentDescription = stringResource(R.string.adaptive_icon_reset_transform),
-                    onReset = state::resetTransform
+                    onReset = { variant.transform = ImageTransform() }
                 )
             }
+
+            AppDialogOutlinedButton(
+                text = stringResource(R.string.adaptive_icon_change_image),
+                onClick = { openPicker() },
+                icon = Icons.Outlined.Image,
+                modifier = Modifier.fillMaxWidth()
+            )
         }
     }
 }
 
 /**
- * Preview component for header with transform gestures.
+ * The header slot enlarged to the card's width, over the app bar's color. The stock logo's place is
+ * outlined, and guides show while the picture is moved. Without a picture, a tap picks one.
  */
 @Composable
-private fun HeaderPreview(
-    headerBitmap: Bitmap?,
-    scale: Float,
-    offsetX: Float,
-    offsetY: Float,
-    isDarkTheme: Boolean,
-    onScaleChange: (Float) -> Unit,
-    onOffsetChange: (Float, Float) -> Unit
+private fun HeaderEditor(
+    layout: HeaderLayout,
+    theme: HeaderTheme,
+    picture: PickedImage?,
+    transform: ImageTransform,
+    onTransformChange: (ImageTransform) -> Unit,
+    onSelectImage: () -> Unit
 ) {
-    val density = LocalConfiguration.current.densityDpi
+    // Read through state in the draw below, so a gesture redraws without rebuilding its cache
+    val currentPicture by rememberUpdatedState(picture)
+    val currentTransform by rememberUpdatedState(transform)
+    val isGesturing = remember { mutableStateOf(false) }
+    val guideAlpha by animateFloatAsState(
+        targetValue = if (isGesturing.value || picture == null) 0.7f else 0.3f,
+        label = "header_guides"
+    )
+    val selectImage = stringResource(R.string.adaptive_icon_select_image)
+    val shape = RoundedCornerShape(Defaults.CompactCornerRadius)
 
-    // Determine which size to use based on density
-    val (_, targetSize) = HeaderConfig.DENSITY_CONFIGS
-        .entries
-        .firstOrNull { density <= it.key }
-        ?.value
-        ?: HeaderConfig.DENSITY_CONFIGS[Int.MAX_VALUE]!!
+    val input = if (picture != null) {
+        Modifier.imageTransformGestures(
+            transform = transform,
+            scaleRange = MIN_SCALE..MAX_SCALE,
+            onTransformChange = onTransformChange,
+            onGestureChange = { isGesturing.value = it }
+        )
+    } else {
+        Modifier.clickable(onClickLabel = selectImage, onClick = onSelectImage)
+    }
 
-    val (targetWidth, targetHeight) = targetSize
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(layout.aspectRatio)
+            .clip(shape)
+            .background(theme.bar)
+            .border(1.dp, MaterialTheme.colorScheme.outlineVariant, shape)
+            .then(input)
+            .drawWithCache {
+                val logoBox = layout.logoBox(size)
+                val anchor = logoBox.pointAt(HeaderAnchor)
+                val dashed = dashedGuideStroke()
+                onDrawBehind {
+                    val shown = currentTransform
+                    currentPicture?.let { drawPicture(it.image, shown.placeInSlot(layout, size, it)) }
 
-    // Convert target size to dp for preview
-    val previewWidth = targetWidth.dp
-    val previewHeight = targetHeight.dp
-
-    // Guide color
-    val guideColor = if (isDarkTheme)
-        Color.White.copy(alpha = HeaderConfig.SNAP_GUIDE_ALPHA)
-    else
-        Color.Black.copy(alpha = HeaderConfig.SNAP_GUIDE_ALPHA)
-
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    val guide = theme.content.copy(alpha = guideAlpha)
+                    drawRect(guide, logoBox.topLeft, logoBox.size, style = dashed)
+                    if (isGesturing.value) drawSnapGuides(shown, anchor, guide, dashed)
+                }
+            },
+        contentAlignment = Alignment.Center
     ) {
+        if (picture == null) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Image,
+                    contentDescription = null,
+                    tint = theme.content,
+                    modifier = Modifier.size(24.dp)
+                )
+                Text(
+                    text = selectImage,
+                    style = MaterialTheme.typography.titleSmall,
+                    color = theme.content
+                )
+            }
+        }
+    }
+}
+
+/** The app bar the header lands in, at its real size, with the controls the app puts beside it. */
+@Composable
+private fun AppBarPreview(
+    layout: HeaderLayout,
+    theme: HeaderTheme,
+    picture: PickedImage?,
+    transform: ImageTransform
+) {
+    val shape = RoundedCornerShape(Defaults.CompactCornerRadius)
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(48.dp)
+            .clip(shape)
+            .background(theme.bar)
+            .border(1.dp, MaterialTheme.colorScheme.outlineVariant, shape),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Spacer(Modifier.width(layout.startInset))
         Box(
             modifier = Modifier
-                .width(previewWidth)
-                .height(previewHeight)
-                .clip(RoundedCornerShape(Defaults.CompactCornerRadius))
-                .background(
-                    if (isDarkTheme)
-                        Color(0xFF1C1C1C)
-                    else
-                        Color(0xFFF5F5F5)
-                )
-                .border(
-                    HeaderConfig.BORDER_STROKE_WIDTH.dp,
-                    MaterialTheme.colorScheme.outline,
-                    RoundedCornerShape(Defaults.CompactCornerRadius)
-                ),
-            contentAlignment = Alignment.Center
-        ) {
-            if (headerBitmap != null) {
-                var currentScale by remember { mutableFloatStateOf(scale) }
-                var currentOffsetX by remember { mutableFloatStateOf(offsetX) }
-                var currentOffsetY by remember { mutableFloatStateOf(offsetY) }
-
-                // Sync with parent state
-                LaunchedEffect(scale, offsetX, offsetY) {
-                    currentScale = scale
-                    currentOffsetX = offsetX
-                    currentOffsetY = offsetY
+                .size(layout.slot)
+                .clipToBounds()
+                .drawBehind {
+                    picture?.let { drawPicture(it.image, transform.placeInSlot(layout, size, it)) }
                 }
+        )
 
-                Canvas(
+        when (layout) {
+            HeaderLayout.YouTube -> {
+                // The search field the app bar widens into beside the logo
+                Box(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .pointerInput(Unit) {
-                            detectTransformGestures { _, pan, zoom, _ ->
-                                // Apply zoom
-                                currentScale *= zoom
-
-                                // Apply pan
-                                var newOffsetX = currentOffsetX + pan.x
-                                var newOffsetY = currentOffsetY + pan.y
-
-                                // Snap to center when close
-                                if (abs(newOffsetX) < HeaderConfig.SNAP_THRESHOLD) newOffsetX = 0f
-                                if (abs(newOffsetY) < HeaderConfig.SNAP_THRESHOLD) newOffsetY = 0f
-
-                                currentOffsetX = newOffsetX
-                                currentOffsetY = newOffsetY
-
-                                // Update parent state
-                                onScaleChange(currentScale)
-                                onOffsetChange(currentOffsetX, currentOffsetY)
-                            }
-                        }
+                        .padding(start = 2.dp, end = 10.dp)
+                        .weight(1f)
+                        .height(32.dp)
+                        .drawBehind {
+                            drawRoundRect(theme.field, cornerRadius = CornerRadius(size.height / 2))
+                        },
+                    contentAlignment = Alignment.CenterEnd
                 ) {
-                    val centerX = size.width / 2
-                    val centerY = size.height / 2
-
-                    // Draw header image
-                    val imageBitmap = headerBitmap.asImageBitmap()
-
-                    // Fit image to canvas while maintaining aspect ratio
-                    val imageAspect = imageBitmap.width.toFloat() / imageBitmap.height.toFloat()
-                    val canvasAspect = size.width / size.height
-
-                    val (baseWidth, baseHeight) = if (imageAspect > canvasAspect) {
-                        // Image is wider - fit to width
-                        size.width to (size.width / imageAspect)
-                    } else {
-                        // Image is taller - fit to height
-                        (size.height * imageAspect) to size.height
-                    }
-
-                    // Apply user scale
-                    val displayWidth = baseWidth * currentScale
-                    val displayHeight = baseHeight * currentScale
-
-                    // Calculate position with offset
-                    val left = centerX - (displayWidth / 2) + currentOffsetX
-                    val top = centerY - (displayHeight / 2) + currentOffsetY
-
-                    // Draw the image at actual size (will be cropped by canvas bounds)
-                    drawImage(
-                        image = imageBitmap,
-                        dstOffset = IntOffset(left.toInt(), top.toInt()),
-                        dstSize = IntSize(displayWidth.toInt(), displayHeight.toInt())
+                    Icon(
+                        imageVector = Icons.Outlined.Search,
+                        contentDescription = null,
+                        tint = theme.content,
+                        modifier = Modifier
+                            .padding(end = 10.dp)
+                            .size(Defaults.IconSizeSmall)
                     )
-
-                    // Draw dashed snap guides when close to center
-                    if (abs(currentOffsetX) < HeaderConfig.SNAP_GUIDE_THRESHOLD ||
-                        abs(currentOffsetY) < HeaderConfig.SNAP_GUIDE_THRESHOLD) {
-
-                        val dashEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 6f), 0f)
-
-                        // Vertical center line
-                        if (abs(currentOffsetX) < HeaderConfig.SNAP_GUIDE_THRESHOLD) {
-                            drawLine(
-                                color = guideColor,
-                                start = Offset(centerX, 0f),
-                                end = Offset(centerX, size.height),
-                                strokeWidth = HeaderConfig.SNAP_GUIDE_STROKE_WIDTH,
-                                pathEffect = dashEffect
-                            )
-                        }
-
-                        // Horizontal center line
-                        if (abs(currentOffsetY) < HeaderConfig.SNAP_GUIDE_THRESHOLD) {
-                            drawLine(
-                                color = guideColor,
-                                start = Offset(0f, centerY),
-                                end = Offset(size.width, centerY),
-                                strokeWidth = HeaderConfig.SNAP_GUIDE_STROKE_WIDTH,
-                                pathEffect = dashEffect
-                            )
-                        }
-                    }
                 }
-            } else {
-                // Empty state
-                val placeholderColor = if (isDarkTheme) {
-                    Color.White.copy(alpha = 0.6f)
-                } else {
-                    Color.Black.copy(alpha = 0.6f)
-                }
+            }
 
-                Text(
-                    text = stringResource(R.string.header_creator_no_image),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = placeholderColor,
-                    textAlign = TextAlign.Center,
+            HeaderLayout.Music -> {
+                Spacer(Modifier.weight(1f))
+                Icon(
+                    imageVector = Icons.Outlined.Notifications,
+                    contentDescription = null,
+                    tint = theme.content,
                     modifier = Modifier
-                        .padding(16.dp)
-                        .align(Alignment.Center)
+                        .padding(12.dp)
+                        .size(Defaults.IconSize)
+                )
+                Box(
+                    modifier = Modifier
+                        .padding(start = 8.dp, end = 12.dp)
+                        .size(32.dp)
+                        .clip(CircleShape)
+                        .background(theme.field)
                 )
             }
         }
@@ -435,166 +412,36 @@ private fun HeaderPreview(
 }
 
 /**
- * Create header files in proper structure.
- * [lightHeaderBitmap] is null when the light variant is not needed (e.g. YouTube Music).
- * Returns the path to morphe_header folder or null if failed.
+ * Writes each theme's header for every density the patch takes. Returns the real file-system path
+ * to the header folder, for use as a patch option value, or null if creation failed.
  */
 private suspend fun createHeaderFiles(
     context: Context,
     baseUri: Uri,
-    packageName: String,
-    lightHeaderBitmap: Bitmap?,
-    darkHeaderBitmap: Bitmap,
-    lightScale: Float,
-    lightOffsetX: Float,
-    lightOffsetY: Float,
-    darkScale: Float,
-    darkOffsetX: Float,
-    darkOffsetY: Float
+    layout: HeaderLayout,
+    variants: List<HeaderVariant>
 ): String? = withContext(Dispatchers.IO) {
     try {
-        // Get current device density
-        val displayMetrics = context.resources.displayMetrics
-        val density = displayMetrics.densityDpi
-
-        // Determine which folder to create based on density
-        val (folderName, targetSize) = HeaderConfig.DENSITY_CONFIGS
-            .entries
-            .firstOrNull { density <= it.key }
-            ?.value
-            ?: HeaderConfig.DENSITY_CONFIGS[Int.MAX_VALUE]!!
-
-        val (targetWidth, targetHeight) = targetSize
-
-        val baseDocDir = DocumentFile.fromTreeUri(context, baseUri) ?: return@withContext null
-
-        val brandingDocDir = baseDocDir.findFile(HeaderConfig.BRANDING_FOLDER_NAME)
-            ?: baseDocDir.createDirectory(HeaderConfig.BRANDING_FOLDER_NAME)
+        val headerDocDir = DocumentFile.fromTreeUri(context, baseUri)
+            ?.brandingFolder()
+            ?.getOrCreateDir(layout.folderName)
             ?: return@withContext null
 
-        // Create .nomedia file to prevent icons from appearing in gallery
-        if (brandingDocDir.findFile(".nomedia") == null) {
-            brandingDocDir.createFile("application/octet-stream", ".nomedia")
-        }
-
-        val headerDocDir = brandingDocDir.findFile(HeaderConfig.headerFolderName(packageName))
-            ?: brandingDocDir.createDirectory(HeaderConfig.headerFolderName(packageName))
-            ?: return@withContext null
-
-        val drawableDocDir = headerDocDir.findFile(folderName)
-            ?: headerDocDir.createDirectory(folderName)
-            ?: return@withContext null
-
-        // Save light header (only for apps that support it)
-        if (lightHeaderBitmap != null) {
-            val lightScaled = createScaledHeader(
-                context = context,
-                sourceBitmap = lightHeaderBitmap,
-                targetWidth = targetWidth,
-                targetHeight = targetHeight,
-                scale = lightScale,
-                offsetX = lightOffsetX,
-                offsetY = lightOffsetY
-            )
-            val lightDocFile = drawableDocDir.findFile("${HeaderConfig.LIGHT_HEADER_FILE_NAME}.png")
-                ?: drawableDocDir.createFile("image/png", "${HeaderConfig.LIGHT_HEADER_FILE_NAME}.png")
-            lightDocFile?.let {
-                context.contentResolver.openOutputStream(it.uri)?.use { out ->
-                    lightScaled.compress(Bitmap.CompressFormat.PNG, 100, out)
-                }
-            }
-            lightScaled.recycle()
-        }
-
-        // Save dark header
-        val darkScaled = createScaledHeader(
-            context = context,
-            sourceBitmap = darkHeaderBitmap,
-            targetWidth = targetWidth,
-            targetHeight = targetHeight,
-            scale = darkScale,
-            offsetX = darkOffsetX,
-            offsetY = darkOffsetY
-        )
-        val darkDocFile = drawableDocDir.findFile("${HeaderConfig.DARK_HEADER_FILE_NAME}.png")
-            ?: drawableDocDir.createFile("image/png", "${HeaderConfig.DARK_HEADER_FILE_NAME}.png")
-        darkDocFile?.let {
-            context.contentResolver.openOutputStream(it.uri)?.use { out ->
-                darkScaled.compress(Bitmap.CompressFormat.PNG, 100, out)
+        layout.densities.forEach { density ->
+            val drawableDocDir = headerDocDir.getOrCreateDir(density.folderName) ?: return@forEach
+            val frame = Size(density.width.toFloat(), density.height.toFloat())
+            variants.forEach { variant ->
+                val picture = variant.picture ?: return@forEach
+                val bounds = variant.transform.placeInSlot(layout, frame, picture)
+                val header = renderPicture(picture.bitmap, density.width, density.height, bounds)
+                drawableDocDir.writePng(context, variant.theme.fileName, header)
             }
         }
-        darkScaled.recycle()
 
+        // Convert back to a real path so the patcher can reference it as a patch option value
         headerDocDir.uri.toFilePath()
     } catch (e: Exception) {
         e.printStackTrace()
         null
     }
-}
-
-/**
- * Helper function to create scaled and positioned header bitmap.
- * Uses the same logic as preview: fit image to canvas, then apply scale and offset.
- */
-@SuppressLint("UseKtx")
-private fun createScaledHeader(
-    context: Context,
-    sourceBitmap: Bitmap,
-    targetWidth: Int,
-    targetHeight: Int,
-    scale: Float,
-    offsetX: Float,
-    offsetY: Float
-): Bitmap {
-    // Create output bitmap
-    val outputBitmap = createBitmap(targetWidth, targetHeight)
-    val canvas = Canvas(outputBitmap)
-
-    // Get density to convert preview canvas offsets to target bitmap offsets
-    val density = context.resources.displayMetrics.density
-
-    // Preview canvas size in pixels
-    val previewCanvasWidth = targetWidth * density
-    val previewCanvasHeight = targetHeight * density
-
-    // Calculate base size by fitting image to canvas (same logic as preview)
-    val imageAspect = sourceBitmap.width.toFloat() / sourceBitmap.height.toFloat()
-    val canvasAspect = previewCanvasWidth / previewCanvasHeight
-
-    val (baseWidth, baseHeight) = if (imageAspect > canvasAspect) {
-        // Image is wider - fit to width
-        previewCanvasWidth to (previewCanvasWidth / imageAspect)
-    } else {
-        // Image is taller - fit to height
-        (previewCanvasHeight * imageAspect) to previewCanvasHeight
-    }
-
-    // Apply user scale (same as preview)
-    val scaledWidth = baseWidth * scale
-    val scaledHeight = baseHeight * scale
-
-    // Convert to target bitmap coordinates
-    val targetScaledWidth = scaledWidth / density
-    val targetScaledHeight = scaledHeight / density
-
-    // Convert offsets from preview canvas pixels to target bitmap pixels
-    val targetOffsetX = offsetX / density
-    val targetOffsetY = offsetY / density
-
-    // Calculate position (same logic as preview)
-    val left = (targetWidth - targetScaledWidth) / 2 + targetOffsetX
-    val top = (targetHeight - targetScaledHeight) / 2 + targetOffsetY
-
-    // Create Paint with antialiasing and bicubic filtering for high-quality scaling
-    val bitmapPaint = Paint().apply {
-        isAntiAlias = true
-        isFilterBitmap = true
-        isDither = true
-    }
-
-    // Draw the scaled and positioned image with antialiasing (will be cropped to canvas bounds)
-    val destRect = RectF(left, top, left + targetScaledWidth, top + targetScaledHeight)
-    canvas.drawBitmap(sourceBitmap, null, destRect, bitmapPaint)
-
-    return outputBitmap
 }

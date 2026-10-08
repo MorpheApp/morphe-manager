@@ -9,7 +9,6 @@ import android.annotation.SuppressLint
 import android.app.WallpaperManager
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
@@ -21,10 +20,6 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.awaitEachGesture
-import androidx.compose.foundation.gestures.awaitFirstDown
-import androidx.compose.foundation.gestures.calculatePan
-import androidx.compose.foundation.gestures.calculateZoom
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -41,33 +36,26 @@ import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.ClipOp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.toAndroidRectF
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.input.pointer.positionChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.toSize
 import androidx.core.graphics.createBitmap
 import androidx.core.graphics.get
-import androidx.core.graphics.scale
 import androidx.documentfile.provider.DocumentFile
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.colorpicker.ColorPresetGrid
@@ -76,15 +64,12 @@ import app.morphe.manager.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.math.abs
-import kotlin.math.roundToInt
 
 /**
  * Configuration constants for adaptive icon creation.
  */
 private object AdaptiveIconConfig {
     // Folder structure
-    const val BRANDING_FOLDER_NAME = "morphe_branding"
     const val YOUTUBE_ICONS_FOLDER_NAME = "morphe_icons_youtube"
     const val YTM_ICONS_FOLDER_NAME = "morphe_icons_music"
 
@@ -125,9 +110,6 @@ private object AdaptiveIconConfig {
     const val MAX_SCALE = 2.5f
     // How far past its starting size a picture can still be zoomed in
     const val ZOOM_HEADROOM = 1.5f
-    // Offsets are shares of the layer, so the picture can at most center on its edge
-    const val MAX_OFFSET = 0.5f
-    const val SNAP_THRESHOLD = 0.02f
 
     // A launcher shows the middle 72 dp of the 108 dp layer, and every icon shape keeps a
     // 66 dp circle, so the picture starts fitted into that circle
@@ -145,9 +127,6 @@ private object AdaptiveIconConfig {
     // the notification canvas and spans this share of the themed layer
     const val FALLBACK_THEMED_LOGO_FRACTION = 0.44f
 
-    // Alpha above which a pixel counts as part of the picture rather than its faint margin
-    const val CONTENT_ALPHA_THRESHOLD = 32
-
     // Leaves room around the editor to scroll the dialog without dragging the picture
     val EDITOR_MAX_WIDTH = 260.dp
     val LAUNCHER_ICON_SIZE = 56.dp
@@ -163,61 +142,40 @@ private object AdaptiveIconConfig {
  */
 private val BackgroundPresetColors = listOf(Color.White) + THEME_PRESET_COLORS
 
-/**
- * How the foreground sits on a square: scaled over its fitted size and moved by shares of the
- * square's side, so the preview and every exported density place it alike.
- */
-private data class ForegroundTransform(
-    val scale: Float = 1f,
-    val offsetX: Float = 0f,
-    val offsetY: Float = 0f
-) {
-    /**
-     * Bounds of a [width] by [height] picture on a square of [side]. Its [content], the whole
-     * picture when null, is fitted into [fill] of the side and centered on it.
-     */
-    fun placeOn(side: Float, width: Int, height: Int, fill: Float, content: Rect? = null): Rect {
-        val fitted = content ?: Rect(0f, 0f, width.toFloat(), height.toFloat())
-        val factor = side * fill * scale / maxOf(fitted.width, fitted.height)
-        val center = Offset(side * (0.5f + offsetX), side * (0.5f + offsetY))
-        return Rect(center - fitted.center * factor, Size(width * factor, height * factor))
-    }
-
-    /** This transform zoomed by [zoom] and moved to [offset], snapping onto the center near it. */
-    fun movedTo(offset: Offset, zoom: Float, maxScale: Float) = ForegroundTransform(
-        scale = (scale * zoom).coerceIn(AdaptiveIconConfig.MIN_SCALE, maxScale),
-        offsetX = offset.x.snappedToCenter(),
-        offsetY = offset.y.snappedToCenter()
-    )
-
-    private fun Float.snappedToCenter() =
-        if (abs(this) < AdaptiveIconConfig.SNAP_THRESHOLD) 0f else coerceInOffsetRange()
+/** A square in the middle of a square [side] across, spanning [fraction] of it. */
+private fun centeredSquare(side: Float, fraction: Float): Rect {
+    val inset = side * (1f - fraction) / 2
+    return Rect(inset, inset, side - inset, side - inset)
 }
 
-private fun Float.coerceInOffsetRange() =
-    coerceIn(-AdaptiveIconConfig.MAX_OFFSET, AdaptiveIconConfig.MAX_OFFSET)
+/** Bounds of a [picture] on an icon layer [side] across, the whole of it fitted into the safe zone. */
+private fun ImageTransform.placeOnLayer(side: Float, picture: IntSize): Rect = place(
+    frame = Size(side, side),
+    box = centeredSquare(side, AdaptiveIconConfig.SAFE_ZONE_FRACTION),
+    size = picture,
+    fitted = Rect(Offset.Zero, picture.toSize())
+)
 
-/** A picked foreground with what the creator needs to know about it, worked out once when picked. */
-private class Foreground(val bitmap: Bitmap) {
-    val image = bitmap.asImageBitmap()
-    val isOpaque = !bitmap.hasTransparentPixels()
-
-    /** The visible part, so margins baked into the file do not shrink the notification icon. */
-    val content = if (isOpaque) null else bitmap.contentBounds()
-
-    /** An opaque picture starts covering the whole layer, so the background never shows around it. */
-    val defaultTransform = if (isOpaque) {
-        val aspect = maxOf(bitmap.width, bitmap.height).toFloat() / minOf(bitmap.width, bitmap.height)
-        ForegroundTransform(scale = aspect / AdaptiveIconConfig.SAFE_ZONE_FRACTION)
-    } else {
-        ForegroundTransform()
-    }
-
-    val maxScale = maxOf(
-        AdaptiveIconConfig.MAX_SCALE,
-        defaultTransform.scale * AdaptiveIconConfig.ZOOM_HEADROOM
+/** Bounds of a [picture] on a notification icon [side] across, its [content] kept to the live area. */
+private fun notificationBounds(side: Float, picture: IntSize, content: Rect, scale: Float): Rect =
+    ImageTransform(scale = scale).place(
+        frame = Size(side, side),
+        box = centeredSquare(side, AdaptiveIconConfig.NOTIFICATION_LIVE_FRACTION),
+        size = picture,
+        fitted = content
     )
+
+/** An opaque picture starts covering the whole layer, so the background never shows around it. */
+private fun PickedImage.startingTransform(): ImageTransform = if (isOpaque) {
+    val aspect = maxOf(size.width, size.height).toFloat() / minOf(size.width, size.height)
+    ImageTransform(scale = aspect / AdaptiveIconConfig.SAFE_ZONE_FRACTION)
+} else {
+    ImageTransform()
 }
+
+/** How far the picture zooms, with room past where it starts. */
+private fun PickedImage.maxIconScale(): Float =
+    maxOf(AdaptiveIconConfig.MAX_SCALE, startingTransform().scale * AdaptiveIconConfig.ZOOM_HEADROOM)
 
 /**
  * Dialog for creating adaptive icons with foreground and background customization. Generates both
@@ -233,21 +191,18 @@ fun AdaptiveIconCreatorDialog(
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
 
-    val foreground = remember { mutableStateOf<Foreground?>(null) }
+    val foreground = remember { mutableStateOf<PickedImage?>(null) }
     val initialBackground = MaterialTheme.colorScheme.primaryContainer
     val background = remember { mutableStateOf(initialBackground) }
     val showColorPicker = remember { mutableStateOf(false) }
-    val transform = remember { mutableStateOf(ForegroundTransform()) }
+    val transform = remember { mutableStateOf(ImageTransform()) }
     val notificationScale = remember { mutableFloatStateOf(1f) }
 
     // Foreground image picker, resets all transforms when a new image is loaded
-    val openForegroundPicker = rememberImagePicker { bitmap ->
-        scope.launch {
-            val picked = withContext(Dispatchers.Default) { Foreground(bitmap) }
-            foreground.value = picked
-            transform.value = picked.defaultTransform
-            notificationScale.floatValue = 1f
-        }
+    val openForegroundPicker = rememberPickedImagePicker { picked ->
+        foreground.value = picked
+        transform.value = picked.startingTransform()
+        notificationScale.floatValue = 1f
     }
 
     val successMessage = stringResource(R.string.adaptive_icon_created_success)
@@ -271,12 +226,10 @@ fun AdaptiveIconCreatorDialog(
                 context = context,
                 baseUri = uri,
                 packageName = packageName,
-                foregroundBitmap = picked.bitmap,
+                picture = picked,
                 backgroundColor = background.value.toArgb(),
                 transform = transform.value,
-                notificationScale = notificationScale.floatValue,
-                notificationContent = picked.content,
-                cutOutIcons = !picked.isOpaque
+                notificationScale = notificationScale.floatValue
             )
             isCreating.value = false
             if (result != null) {
@@ -308,7 +261,7 @@ fun AdaptiveIconCreatorDialog(
         CreatorCard(title = stringResource(R.string.adaptive_icon_launcher)) {
             IconEditor(
                 foreground = foreground.value?.image,
-                maxScale = foreground.value?.maxScale ?: AdaptiveIconConfig.MAX_SCALE,
+                maxScale = foreground.value?.maxIconScale() ?: AdaptiveIconConfig.MAX_SCALE,
                 background = background.value,
                 transform = transform.value,
                 onTransformChange = { transform.value = it },
@@ -328,12 +281,12 @@ fun AdaptiveIconCreatorDialog(
                 ScaleSliderRow(
                     value = transform.value.scale,
                     onValueChange = { transform.value = transform.value.copy(scale = it) },
-                    valueRange = AdaptiveIconConfig.MIN_SCALE..picked.maxScale
+                    valueRange = AdaptiveIconConfig.MIN_SCALE..picked.maxIconScale()
                 ) {
                     SliderResetAction(
-                        visible = transform.value != picked.defaultTransform,
+                        visible = transform.value != picked.startingTransform(),
                         contentDescription = resetDescription,
-                        onReset = { transform.value = picked.defaultTransform }
+                        onReset = { transform.value = picked.startingTransform() }
                     )
                 }
 
@@ -386,8 +339,7 @@ fun AdaptiveIconCreatorDialog(
                 color = dialogSecondaryTextColor()
             )
             StatusBarPreview(
-                foreground = foreground.value?.image,
-                content = foreground.value?.content,
+                picture = foreground.value,
                 scale = notificationScale.floatValue,
                 fallback = logoFallback
             )
@@ -426,16 +378,6 @@ fun AdaptiveIconCreatorDialog(
     }
 }
 
-/** Draws [image] into [bounds], recolored to [tint] where it is not transparent. */
-private fun DrawScope.drawForeground(image: ImageBitmap, bounds: Rect, tint: Color? = null) {
-    drawImage(
-        image = image,
-        dstOffset = IntOffset(bounds.left.roundToInt(), bounds.top.roundToInt()),
-        dstSize = IntSize(bounds.width.roundToInt(), bounds.height.roundToInt()),
-        colorFilter = tint?.let { ColorFilter.tint(it, BlendMode.SrcIn) }
-    )
-}
-
 /** [logo] recolored to [tint], centered on a square [side] across and spanning [fraction] of it. */
 private fun DrawScope.drawCenteredLogo(logo: Painter, side: Float, fraction: Float, tint: Color) {
     val box = side * fraction
@@ -450,13 +392,12 @@ private fun DrawScope.drawIconLayers(
     side: Float,
     background: Color,
     foreground: ImageBitmap?,
-    transform: ForegroundTransform,
+    transform: ImageTransform,
     tint: Color? = null
 ) {
     drawRect(background, size = Size(side, side))
     if (foreground != null) {
-        val bounds = transform.placeOn(side, foreground.width, foreground.height, AdaptiveIconConfig.SAFE_ZONE_FRACTION)
-        drawForeground(foreground, bounds, tint)
+        drawPicture(foreground, transform.placeOnLayer(side, IntSize(foreground.width, foreground.height)), tint)
     }
 }
 
@@ -470,8 +411,8 @@ private fun IconEditor(
     foreground: ImageBitmap?,
     maxScale: Float,
     background: Color,
-    transform: ForegroundTransform,
-    onTransformChange: (ForegroundTransform) -> Unit,
+    transform: ImageTransform,
+    onTransformChange: (ImageTransform) -> Unit,
     onSelectImage: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -480,8 +421,6 @@ private fun IconEditor(
     val currentForeground by rememberUpdatedState(foreground)
     val currentBackground by rememberUpdatedState(background)
     val currentTransform by rememberUpdatedState(transform)
-    val currentOnTransformChange by rememberUpdatedState(onTransformChange)
-    val currentMaxScale by rememberUpdatedState(maxScale)
     val isGesturing = remember { mutableStateOf(false) }
     val guideAlpha by animateFloatAsState(
         targetValue = if (isGesturing.value || foreground == null) 1f else 0f,
@@ -490,29 +429,12 @@ private fun IconEditor(
     val selectImage = stringResource(R.string.adaptive_icon_select_image)
 
     val input = if (foreground != null) {
-        Modifier.pointerInput(Unit) {
-            awaitEachGesture {
-                awaitFirstDown(requireUnconsumed = false)
-                isGesturing.value = true
-                // Snapping applies to what is shown, so the gesture tracks the unsnapped offset
-                // and the picture can still be pulled off the center
-                var offset = Offset(currentTransform.offsetX, currentTransform.offsetY)
-                do {
-                    val event = awaitPointerEvent()
-                    val pan = event.calculatePan()
-                    val zoom = event.calculateZoom()
-                    if (pan != Offset.Zero || zoom != 1f) {
-                        offset = Offset(
-                            (offset.x + pan.x / size.width).coerceInOffsetRange(),
-                            (offset.y + pan.y / size.height).coerceInOffsetRange()
-                        )
-                        currentOnTransformChange(currentTransform.movedTo(offset, zoom, currentMaxScale))
-                        event.changes.forEach { if (it.positionChanged()) it.consume() }
-                    }
-                } while (event.changes.any { it.pressed })
-                isGesturing.value = false
-            }
-        }
+        Modifier.imageTransformGestures(
+            transform = transform,
+            scaleRange = AdaptiveIconConfig.MIN_SCALE..maxScale,
+            onTransformChange = onTransformChange,
+            onGestureChange = { isGesturing.value = it }
+        )
     } else {
         Modifier.clickable(onClickLabel = selectImage, onClick = onSelectImage)
     }
@@ -526,13 +448,9 @@ private fun IconEditor(
             .then(input)
             .drawWithCache {
                 val side = size.width
-                val inset = side * (1f - AdaptiveIconConfig.VISIBLE_FRACTION) / 2
-                val visibleShape = appIconOutline(Rect(inset, inset, side - inset, side - inset))
+                val visibleShape = appIconOutline(centeredSquare(side, AdaptiveIconConfig.VISIBLE_FRACTION))
                 val outline = Stroke(width = 2.dp.toPx())
-                val dashed = Stroke(
-                    width = 1.5.dp.toPx(),
-                    pathEffect = PathEffect.dashPathEffect(floatArrayOf(6.dp.toPx(), 5.dp.toPx()))
-                )
+                val dashed = dashedGuideStroke()
                 onDrawBehind {
                     val shown = currentTransform
                     drawIconLayers(side, currentBackground, currentForeground, shown)
@@ -542,12 +460,7 @@ private fun IconEditor(
                     if (guideAlpha > 0f) {
                         val guide = guideColor.copy(alpha = 0.7f * guideAlpha)
                         drawCircle(guide, radius = side * AdaptiveIconConfig.SAFE_ZONE_FRACTION / 2, style = dashed)
-                        if (currentForeground != null && shown.offsetX == 0f) {
-                            drawLine(guide, Offset(side / 2, 0f), Offset(side / 2, side), dashed.width, pathEffect = dashed.pathEffect)
-                        }
-                        if (currentForeground != null && shown.offsetY == 0f) {
-                            drawLine(guide, Offset(0f, side / 2), Offset(side, side / 2), dashed.width, pathEffect = dashed.pathEffect)
-                        }
+                        if (currentForeground != null) drawSnapGuides(shown, center, guide, dashed)
                     }
                 }
             },
@@ -613,7 +526,7 @@ private fun HomeScreenPreview(
     appName: String,
     foreground: ImageBitmap?,
     background: Color,
-    transform: ForegroundTransform,
+    transform: ImageTransform,
     themedFallback: Painter?
 ) {
     val backdrop = rememberBackdrop()
@@ -698,8 +611,7 @@ private fun LauncherIcon(
  */
 @Composable
 private fun StatusBarPreview(
-    foreground: ImageBitmap?,
-    content: Rect?,
+    picture: PickedImage?,
     scale: Float,
     fallback: Painter?
 ) {
@@ -737,9 +649,9 @@ private fun StatusBarPreview(
                     .drawBehind {
                         if (fallback != null) {
                             drawCenteredLogo(fallback, size.width, fraction = 1f, tint = contentColor)
-                        } else if (foreground != null) {
-                            val bounds = notificationBounds(size.width, foreground.width, foreground.height, content, scale)
-                            drawForeground(foreground, bounds, tint = contentColor)
+                        } else if (picture != null) {
+                            val bounds = notificationBounds(size.width, picture.size, picture.content, scale)
+                            drawPicture(picture.image, bounds, tint = contentColor)
                         }
                     }
             )
@@ -773,12 +685,6 @@ private fun StatusBarPreview(
     }
 }
 
-private fun DocumentFile.getOrCreateDir(name: String): DocumentFile? =
-    findFile(name) ?: createDirectory(name)
-
-private fun DocumentFile.getOrCreateFile(mimeType: String, name: String): DocumentFile? =
-    findFile(name) ?: createFile(mimeType, name)
-
 /**
  * Create adaptive icon files for all densities in proper structure.
  * Uses the SAF DocumentFile API so any folder the user picks is writable without MANAGE_EXTERNAL_STORAGE.
@@ -790,30 +696,20 @@ private suspend fun createAdaptiveIcons(
     context: Context,
     baseUri: Uri,
     packageName: String,
-    foregroundBitmap: Bitmap,
+    picture: PickedImage,
     backgroundColor: Int,
-    transform: ForegroundTransform,
-    notificationScale: Float,
-    notificationContent: Rect?,
-    cutOutIcons: Boolean
+    transform: ImageTransform,
+    notificationScale: Float
 ): String? = withContext(Dispatchers.IO) {
     try {
         val baseDocDir = DocumentFile.fromTreeUri(context, baseUri) ?: return@withContext null
 
-        // Create directory structure: BRANDING_FOLDER_NAME/YOUTUBE_ICONS_FOLDER_NAME or YTM_ICONS_FOLDER_NAME
-        val brandingDocDir = baseDocDir.getOrCreateDir(AdaptiveIconConfig.BRANDING_FOLDER_NAME)
-            ?: return@withContext null
-
-        // Create .nomedia file to prevent icons from appearing in gallery
-        if (brandingDocDir.findFile(".nomedia") == null) {
-            brandingDocDir.createFile("application/octet-stream", ".nomedia")
-        }
-
+        // Create directory structure: morphe_branding/YOUTUBE_ICONS_FOLDER_NAME or YTM_ICONS_FOLDER_NAME
+        val brandingDocDir = baseDocDir.brandingFolder() ?: return@withContext null
         val iconsDocDir = brandingDocDir.getOrCreateDir(AdaptiveIconConfig.iconFolderName(packageName))
             ?: return@withContext null
 
-        // Paint with antialiasing and bicubic filtering for high-quality scaling
-        val bitmapPaint = Paint().apply { isAntiAlias = true; isFilterBitmap = true; isDither = true }
+        val bitmapPaint = smoothBitmapPaint()
 
         // Generate adaptive icon PNGs (foreground + background) for all densities
         AdaptiveIconConfig.DENSITY_CONFIGS.forEach { densityConfig ->
@@ -821,17 +717,18 @@ private suspend fun createAdaptiveIcons(
             val size = densityConfig.size
 
             val backgroundBitmap = createBitmap(size, size).apply { eraseColor(backgroundColor) }
-            val foregroundScaled = renderOnSquare(
-                source = foregroundBitmap,
-                side = size,
-                bounds = transform.placeOnLayer(size, foregroundBitmap),
+            val foregroundScaled = renderPicture(
+                source = picture.bitmap,
+                width = size,
+                height = size,
+                bounds = transform.placeOnLayer(size.toFloat(), picture.size),
                 paint = bitmapPaint
             )
-            savePng(context, mipmapDocDir, AdaptiveIconConfig.BACKGROUND_FILE_NAME, backgroundBitmap)
-            savePng(context, mipmapDocDir, AdaptiveIconConfig.FOREGROUND_FILE_NAME, foregroundScaled)
+            mipmapDocDir.writePng(context, AdaptiveIconConfig.BACKGROUND_FILE_NAME, backgroundBitmap)
+            mipmapDocDir.writePng(context, AdaptiveIconConfig.FOREGROUND_FILE_NAME, foregroundScaled)
         }
 
-        if (cutOutIcons) {
+        if (!picture.isOpaque) {
             // Notification icons are white wherever the foreground is not transparent, per Material Design
             val whitePaint = Paint(bitmapPaint).apply {
                 colorFilter = PorterDuffColorFilter(android.graphics.Color.WHITE, PorterDuff.Mode.SRC_IN)
@@ -839,15 +736,9 @@ private suspend fun createAdaptiveIcons(
             AdaptiveIconConfig.NOTIFICATION_DENSITY_CONFIGS.forEach { densityConfig ->
                 val drawableDocDir = iconsDocDir.getOrCreateDir(densityConfig.folderName) ?: return@forEach
                 val size = densityConfig.size
-                val bounds = notificationBounds(
-                    side = size.toFloat(),
-                    width = foregroundBitmap.width,
-                    height = foregroundBitmap.height,
-                    content = notificationContent,
-                    scale = notificationScale
-                )
-                val notificationBitmap = renderOnSquare(foregroundBitmap, size, bounds, whitePaint)
-                savePng(context, drawableDocDir, AdaptiveIconConfig.NOTIFICATION_FILE_NAME, notificationBitmap)
+                val bounds = notificationBounds(size.toFloat(), picture.size, picture.content, notificationScale)
+                val notificationBitmap = renderPicture(picture.bitmap, size, size, bounds, whitePaint)
+                drawableDocDir.writePng(context, AdaptiveIconConfig.NOTIFICATION_FILE_NAME, notificationBitmap)
             }
 
             // Generate XML VectorDrawable files in a 'drawable' folder
@@ -857,10 +748,11 @@ private suspend fun createAdaptiveIcons(
                 // is 0.0625 viewport units tall, making stair-stepping sub-pixel on all densities.
                 val monoOversample = 16
                 val monoSize = AdaptiveIconConfig.MONOCHROME_ADAPTIVE_VIEWPORT * monoOversample
-                val adaptiveMonoBmp = renderOnSquare(
-                    source = foregroundBitmap,
-                    side = monoSize,
-                    bounds = transform.placeOnLayer(monoSize, foregroundBitmap),
+                val adaptiveMonoBmp = renderPicture(
+                    source = picture.bitmap,
+                    width = monoSize,
+                    height = monoSize,
+                    bounds = transform.placeOnLayer(monoSize.toFloat(), picture.size),
                     paint = bitmapPaint
                 )
                 val adaptiveMonoXml = createMonochromeVectorXml(
@@ -894,27 +786,6 @@ private fun removeCutOutIcons(iconsDocDir: DocumentFile) {
     iconsDocDir.findFile(AdaptiveIconConfig.DRAWABLE_FOLDER_NAME)
         ?.findFile(AdaptiveIconConfig.MONOCHROME_ADAPTIVE_FILE_NAME)
         ?.delete()
-}
-
-/** Bounds of [source] on an adaptive icon layer [side] pixels across. */
-private fun ForegroundTransform.placeOnLayer(side: Int, source: Bitmap): Rect =
-    placeOn(side.toFloat(), source.width, source.height, AdaptiveIconConfig.SAFE_ZONE_FRACTION)
-
-/** Bounds of the foreground on a notification icon [side] across, its [content] kept to the live area. */
-private fun notificationBounds(side: Float, width: Int, height: Int, content: Rect?, scale: Float): Rect =
-    ForegroundTransform(scale = scale)
-        .placeOn(side, width, height, AdaptiveIconConfig.NOTIFICATION_LIVE_FRACTION, content)
-
-/** A transparent [side] by [side] bitmap with [source] drawn into [bounds]. */
-private fun renderOnSquare(source: Bitmap, side: Int, bounds: Rect, paint: Paint): Bitmap =
-    createBitmap(side, side).also { Canvas(it).drawBitmap(source, null, bounds.toAndroidRectF(), paint) }
-
-/** Writes [bitmap] as a PNG into [dir], then frees it. */
-private fun savePng(context: Context, dir: DocumentFile, name: String, bitmap: Bitmap) {
-    dir.getOrCreateFile("image/png", name)
-        ?.let { context.contentResolver.openOutputStream(it.uri, "wt")?.use { out ->
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out) } }
-    bitmap.recycle()
 }
 
 /**
@@ -980,37 +851,4 @@ private fun saveXmlToDocFile(context: Context, dir: DocumentFile, content: Strin
     context.contentResolver.openOutputStream(file.uri, "wt")?.use { out ->
         out.write(content.toByteArray(Charsets.UTF_8))
     }
-}
-
-/** Bounds of the pixels that are not close to transparent, or null when there are none. */
-private fun Bitmap.contentBounds(): Rect? {
-    val row = IntArray(width)
-    var left = width
-    var top = -1
-    var right = -1
-    var bottom = -1
-    for (y in 0 until height) {
-        getPixels(row, 0, width, 0, y, width, 1)
-        for (x in 0 until width) {
-            if (android.graphics.Color.alpha(row[x]) > AdaptiveIconConfig.CONTENT_ALPHA_THRESHOLD) {
-                left = minOf(left, x)
-                right = maxOf(right, x)
-                if (top < 0) top = y
-                bottom = y
-            }
-        }
-    }
-    return if (top < 0) null else Rect(left.toFloat(), top.toFloat(), right + 1f, bottom + 1f)
-}
-
-// Checks a scaled-down sample of the bitmap to determine if any pixel has transparency
-private fun Bitmap.hasTransparentPixels(): Boolean {
-    if (!hasAlpha()) return false
-    val sampleWidth = minOf(width, 64)
-    val sampleHeight = minOf(height, 64)
-    val scaled = this.scale(sampleWidth, sampleHeight, false)
-    val pixels = IntArray(sampleWidth * sampleHeight)
-    scaled.getPixels(pixels, 0, sampleWidth, 0, 0, sampleWidth, sampleHeight)
-    if (scaled !== this) scaled.recycle()
-    return pixels.any { android.graphics.Color.alpha(it) < 255 }
 }
