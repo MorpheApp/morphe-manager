@@ -5,10 +5,12 @@
 
 package app.morphe.manager.ui.screen.shared
 
+import android.content.ContentResolver
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.net.Uri
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.calculatePan
@@ -45,6 +47,7 @@ import app.morphe.manager.util.rememberImagePicker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
@@ -180,18 +183,35 @@ fun DrawScope.drawPicture(image: ImageBitmap, bounds: Rect, tint: Color? = null)
     )
 }
 
+/**
+ * The folder at [uri], whether the system picker granted it or Morphe's own picker named it by
+ * path, which needs no grant once storage access is given.
+ */
+fun Context.pickedFolder(uri: Uri): DocumentFile? =
+    if (uri.scheme == ContentResolver.SCHEME_FILE) {
+        uri.path?.let { DocumentFile.fromFile(File(it)) }
+    } else {
+        DocumentFile.fromTreeUri(this, uri)
+    }
+
 fun DocumentFile.getOrCreateDir(name: String): DocumentFile? =
     findFile(name) ?: createDirectory(name)
 
 fun DocumentFile.getOrCreateFile(mimeType: String, name: String): DocumentFile? =
-    findFile(name) ?: createFile(mimeType, name)
-
-/** The branding folder in this one, made when missing and kept out of the gallery. */
-fun DocumentFile.brandingFolder(): DocumentFile? {
-    val folder = getOrCreateDir(BRANDING_FOLDER_NAME) ?: return null
-    if (folder.findFile(".nomedia") == null) {
-        folder.createFile("application/octet-stream", ".nomedia")
+    findFile(name) ?: if (uri.scheme == ContentResolver.SCHEME_FILE) {
+        // A plain file keeps its name as given, where createFile would add an extension for the type
+        uri.path?.let { File(it, name) }?.takeIf { it.createNewFile() }?.let(DocumentFile::fromFile)
+    } else {
+        createFile(mimeType, name)
     }
+
+/**
+ * The branding folder, kept out of the gallery. A picked folder already named so is used as it is,
+ * since storage roots such as Download cannot be picked to hold one.
+ */
+fun DocumentFile.brandingFolder(): DocumentFile? {
+    val folder = if (name == BRANDING_FOLDER_NAME) this else getOrCreateDir(BRANDING_FOLDER_NAME)
+    folder?.getOrCreateFile("application/octet-stream", ".nomedia")
     return folder
 }
 

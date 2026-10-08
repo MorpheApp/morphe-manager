@@ -218,8 +218,8 @@ fun AdaptiveIconCreatorDialog(
     val logoFallback = morpheLogo.takeIf { foreground.value?.isOpaque == true }
 
     // Folder picker for saving
-    val openFolderPicker = rememberFolderPicker { uri ->
-        val picked = foreground.value ?: return@rememberFolderPicker
+    val openFolderPicker = rememberFolderPickerWithPermission { uri ->
+        val picked = foreground.value ?: return@rememberFolderPickerWithPermission
         scope.launch {
             isCreating.value = true
             val result = createAdaptiveIcons(
@@ -687,7 +687,8 @@ private fun StatusBarPreview(
 
 /**
  * Create adaptive icon files for all densities in proper structure.
- * Uses the SAF DocumentFile API so any folder the user picks is writable without MANAGE_EXTERNAL_STORAGE.
+ * Writes through DocumentFile, which reaches a folder granted by the system picker and one named
+ * by path alike.
  * Returns the real file-system path to the morphe_icons folder (for use as a patch option value),
  * or null if creation failed.
  */
@@ -702,7 +703,7 @@ private suspend fun createAdaptiveIcons(
     notificationScale: Float
 ): String? = withContext(Dispatchers.IO) {
     try {
-        val baseDocDir = DocumentFile.fromTreeUri(context, baseUri) ?: return@withContext null
+        val baseDocDir = context.pickedFolder(baseUri) ?: return@withContext null
 
         // Create directory structure: morphe_branding/YOUTUBE_ICONS_FOLDER_NAME or YTM_ICONS_FOLDER_NAME
         val brandingDocDir = baseDocDir.brandingFolder() ?: return@withContext null

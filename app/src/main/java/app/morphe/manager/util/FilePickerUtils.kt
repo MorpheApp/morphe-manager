@@ -145,18 +145,6 @@ fun Uri.readMppManifest(contentResolver: ContentResolver): MppManifest? =
     }.getOrNull()
 
 /**
- * Plain SAF folder picker. Use this when writing files via [androidx.documentfile.provider.DocumentFile]/[ContentResolver].
- * No storage permission is required because the system grants temporary URI access.
- */
-@Composable
-fun rememberFolderPicker(onFolderPicked: (Uri) -> Unit): () -> Unit {
-    val launcher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.OpenDocumentTree()
-    ) { uri: Uri? -> uri?.let { onFolderPicked(it) } }
-    return remember { { launcher.launch(null) } }
-}
-
-/**
  * Folder picker launcher with automatic permission handling.
  * Use this when storing the picked folder PATH as a patch option value (the patcher will
  * later read files from it via the File API, which requires MANAGE_EXTERNAL_STORAGE).

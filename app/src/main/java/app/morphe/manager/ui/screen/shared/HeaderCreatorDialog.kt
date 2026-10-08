@@ -39,7 +39,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
-import androidx.documentfile.provider.DocumentFile
 import app.morphe.manager.R
 import app.morphe.manager.util.*
 import kotlinx.coroutines.Dispatchers
@@ -166,7 +165,7 @@ fun HeaderCreatorDialog(
     val isCreating = remember { mutableStateOf(false) }
 
     // Folder picker for saving
-    val openFolderPicker = rememberFolderPicker { uri ->
+    val openFolderPicker = rememberFolderPickerWithPermission { uri ->
         scope.launch {
             isCreating.value = true
             val result = createHeaderFiles(context, uri, layout, variants)
@@ -422,7 +421,7 @@ private suspend fun createHeaderFiles(
     variants: List<HeaderVariant>
 ): String? = withContext(Dispatchers.IO) {
     try {
-        val headerDocDir = DocumentFile.fromTreeUri(context, baseUri)
+        val headerDocDir = context.pickedFolder(baseUri)
             ?.brandingFolder()
             ?.getOrCreateDir(layout.folderName)
             ?: return@withContext null
