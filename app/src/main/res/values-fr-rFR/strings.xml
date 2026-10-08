@@ -872,6 +872,9 @@ Les patchs ne sont pas affectés : activez les patchs en préversion pour chaque
     <string name="notification_channel_patch_updates_description">Notifications concernant les nouvelles versions de patchs</string>
     <string name="notification_channel_patcher_description">Affiché lorsque Morphe effectue le patching d\'une application en arrière-plan</string>
     <string name="notification_channel_mounted_apps">Applications montées</string>
+    <string name="notification_channel_mounted_apps_description">Lorsqu\'une autre version a remplacé une application montée et que son patch ne s\'applique plus</string>
+    <string name="notification_mount_replaced_title">%1$s n\'est plus patchée</string>
+    <string name="notification_mount_replaced_text">La version v%1$s a remplacé la version v%2$s patchée. Ouvrez Morphe pour la restaurer</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Paramètres Expert</string>
     <string name="settings_advanced_expert_mode">Mode Expert</string>
@@ -1347,6 +1350,8 @@ Détails : %2$s"</string>
     <string name="sources">Sources</string>
     <string name="installing_ellipsis">Installation…</string>
     <string name="mounting_ellipsis">Montage…</string>
+    <string name="mount_stage_restoring_stock">Restauration de l\'originale…</string>
+    <string name="mount_stage_copying">Copie en cours…</string>
     <string name="unmounting_ellipsis">Démontage…</string>
     <string name="importing_ellipsis">Importation…</string>
     <string name="imported_successfully">Importé avec succès</string>

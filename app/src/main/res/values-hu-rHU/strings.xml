@@ -868,6 +868,9 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="notification_channel_patch_updates_description">Értesítések az új patch-kiadásokról</string>
     <string name="notification_channel_patcher_description">Akkor jelenik meg, amikor a Morphe a háttérben módosít egy alkalmazást</string>
     <string name="notification_channel_mounted_apps">Csatlakoztatott alkalmazások</string>
+    <string name="notification_channel_mounted_apps_description">Amikor egy másik verzió lecserélt egy mountolt alkalmazást, és a javítása már nem illeszkedik</string>
+    <string name="notification_mount_replaced_title">A %1$s már nincs javítva</string>
+    <string name="notification_mount_replaced_text">v%1$s lecserélte a javított v%2$s verziót. Nyissa meg a Morphe alkalmazást a visszaállításhoz</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Szakértői beállítások</string>
     <string name="settings_advanced_expert_mode">Szakértői mód</string>
@@ -1320,6 +1323,7 @@ Részletek: %2$s"</string>
     <string name="unmount">Leválasztás</string>
     <string name="unmounted">Leválasztva</string>
     <string name="remount">Újracsatolás</string>
+    <string name="restore">Visszaállítás</string>
     <string name="share">Megosztás</string>
     <string name="install">Telepítés</string>
     <string name="installed">Telepítve</string>
@@ -1340,6 +1344,8 @@ Részletek: %2$s"</string>
     <string name="sources">Források</string>
     <string name="installing_ellipsis">Telepítés…</string>
     <string name="mounting_ellipsis">Cs­atolás…</string>
+    <string name="mount_stage_restoring_stock">Az eredeti visszaállítása…</string>
+    <string name="mount_stage_copying">Másolás…</string>
     <string name="unmounting_ellipsis">Leválasztás…</string>
     <string name="importing_ellipsis">Importálás…</string>
     <string name="imported_successfully">Sikeresen importálva</string>

@@ -869,6 +869,9 @@
     <string name="notification_channel_patch_updates_description">Известия за нови корекции</string>
     <string name="notification_channel_patcher_description">Показва се, когато Morphe актуализира приложение във фона</string>
     <string name="notification_channel_mounted_apps">Монтирани приложения</string>
+    <string name="notification_channel_mounted_apps_description">Когато друга версия замени монтирано приложение и пачът му вече не се прилага</string>
+    <string name="notification_mount_replaced_title">%1$s вече не е с пач</string>
+    <string name="notification_mount_replaced_text">v%1$s замени v%2$s с приложен пач. Отворете Morphe, за да го възстановите</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Настройки за експерти</string>
     <string name="settings_advanced_expert_mode">Режим за експерти</string>
@@ -1321,6 +1324,7 @@ morphe_header_custom_dark.png
     <string name="unmount">B342 M542</string>
     <string name="unmounted">Размонтирано</string>
     <string name="remount">Повторно монтиране</string>
+    <string name="restore">Възстанови</string>
     <string name="share">Споделяне</string>
     <string name="install">Инсталиране</string>
     <string name="installed">Инсталирано</string>
@@ -1341,6 +1345,8 @@ morphe_header_custom_dark.png
     <string name="sources">Източници</string>
     <string name="installing_ellipsis">Инсталиране…</string>
     <string name="mounting_ellipsis">Монтиране…</string>
+    <string name="mount_stage_restoring_stock">Възстановяване на оригинала…</string>
+    <string name="mount_stage_copying">Копиране…</string>
     <string name="unmounting_ellipsis">Извличане…</string>
     <string name="importing_ellipsis">Импортиране…</string>
     <string name="imported_successfully">Успешно импортирано</string>

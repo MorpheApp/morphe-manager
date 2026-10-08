@@ -869,6 +869,9 @@ Patcher påvirkes ikke: aktiver pre-release-patcher for hver kilde i patch-kilde
     <string name="notification_channel_patch_updates_description">Varsler om nye patch-utgivelser</string>
     <string name="notification_channel_patcher_description">Vises mens Morphe patcher en app i bakgrunnen</string>
     <string name="notification_channel_mounted_apps">Monterte apper</string>
+    <string name="notification_channel_mounted_apps_description">Når en annen versjon har erstattet en montert app og patchen ikke lenger gjelder</string>
+    <string name="notification_mount_replaced_title">%1$s er ikke lenger patchet</string>
+    <string name="notification_mount_replaced_text">v%1$s erstattet den patchede v%2$s. Åpne Morphe for å gjenopprette den</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Oppdateringer</string>
     <string name="settings_advanced_expert_mode">Ekspertinnstillinger</string>
@@ -1321,6 +1324,7 @@ Detaljer: %2$s"</string>
     <string name="unmount">Demonter</string>
     <string name="unmounted">Demontert</string>
     <string name="remount">Monter på nytt</string>
+    <string name="restore">Gjenopprett</string>
     <string name="share">Del</string>
     <string name="install">Installer</string>
     <string name="installed">Installert</string>
@@ -1341,6 +1345,8 @@ Detaljer: %2$s"</string>
     <string name="sources">Kilder</string>
     <string name="installing_ellipsis">Installerer…</string>
     <string name="mounting_ellipsis">Monterer…</string>
+    <string name="mount_stage_restoring_stock">Gjenoppretter originalen…</string>
+    <string name="mount_stage_copying">Kopierer…</string>
     <string name="unmounting_ellipsis">Demontering…</string>
     <string name="importing_ellipsis">Importerer…</string>
     <string name="imported_successfully">Importert vellykket</string>

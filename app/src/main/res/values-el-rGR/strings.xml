@@ -869,6 +869,9 @@
     <string name="notification_channel_patch_updates_description">Ειδοποιήσεις για νέες εκδόσεις επιδιόρθωσης</string>
     <string name="notification_channel_patcher_description">Εμφανίζεται όταν το Morphe ενημερώνει μια εφαρμογή στο παρασκήνιο</string>
     <string name="notification_channel_mounted_apps">Προσαρτημένες εφαρμογές</string>
+    <string name="notification_channel_mounted_apps_description">Όταν μια άλλη έκδοση αντικατέστησε μια προσαρτημένη εφαρμογή και το patch της δεν εφαρμόζεται πλέον</string>
+    <string name="notification_mount_replaced_title">Το %1$s δεν είναι πλέον πατσαρισμένο</string>
+    <string name="notification_mount_replaced_text">v%1$s αντικατέστησε την πατσαρισμένη v%2$s. Ανοίξτε το Morphe για να την επαναφέρετε</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Εξειδικευμένες ρυθμίσεις</string>
     <string name="settings_advanced_expert_mode">Εξειδικευμένη λειτουργία</string>
@@ -1321,6 +1324,7 @@ morphe_header_custom_dark.png
     <string name="unmount">Αποπροσάρτηση</string>
     <string name="unmounted">Αποπροσαρτημένο</string>
     <string name="remount">Επαναπροσάρτηση</string>
+    <string name="restore">Επαναφορά</string>
     <string name="share">Κοινοποίηση</string>
     <string name="install">Εγκατάσταση</string>
     <string name="installed">Εγκατεστημένο</string>
@@ -1341,6 +1345,8 @@ morphe_header_custom_dark.png
     <string name="sources">Πηγές</string>
     <string name="installing_ellipsis">Εγκατάσταση…</string>
     <string name="mounting_ellipsis">Προσάρτηση…</string>
+    <string name="mount_stage_restoring_stock">Επαναφορά αρχικού…</string>
+    <string name="mount_stage_copying">Αντιγραφή…</string>
     <string name="unmounting_ellipsis">Αποπροσάρτηση...</string>
     <string name="importing_ellipsis">Εισαγωγή…</string>
     <string name="imported_successfully">Εισαγωγές επιτυχώς</string>

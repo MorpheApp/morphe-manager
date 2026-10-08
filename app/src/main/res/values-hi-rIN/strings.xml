@@ -869,6 +869,9 @@
     <string name="notification_channel_patch_updates_description">नए पैच रिलीज़ के बारे में सूचनाएँ</string>
     <string name="notification_channel_patcher_description">जब मोर्फ़ पृष्ठभूमि में किसी ऐप को पैच कर रहा हो तो दिखाया गया</string>
     <string name="notification_channel_mounted_apps">माउंटेड ऐप्स</string>
+    <string name="notification_channel_mounted_apps_description">जब किसी अन्य संस्करण ने माउंट किए गए ऐप को प्रतिस्थापित कर दिया और उसका पैच अब लागू नहीं होता</string>
+    <string name="notification_mount_replaced_title">%1$s अब पैच किया हुआ नहीं है</string>
+    <string name="notification_mount_replaced_text">v%1$s ने पैच किए गए v%2$s को प्रतिस्थापित कर दिया। इसे पुनर्स्थापित करने के लिए Morphe खोलें</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">एक्सपर्ट सेटिंग्स</string>
     <string name="settings_advanced_expert_mode">एक्सपर्ट मोड</string>
@@ -1321,6 +1324,7 @@ morphe_header_custom_dark.png
     <string name="unmount">अनमाउंट</string>
     <string name="unmounted">अनमाउंटेड</string>
     <string name="remount">पुनःसंयोजित करें</string>
+    <string name="restore">पुनर्स्थापित करें</string>
     <string name="share">शेयर करें</string>
     <string name="install">स्थापित करें</string>
     <string name="installed">Installed</string>
@@ -1341,6 +1345,8 @@ morphe_header_custom_dark.png
     <string name="sources">स्रोत</string>
     <string name="installing_ellipsis">इंस्टॉल हो रहा है…</string>
     <string name="mounting_ellipsis">माउंटिंग…</string>
+    <string name="mount_stage_restoring_stock">मूल को पुनर्स्थापित किया जा रहा है…</string>
+    <string name="mount_stage_copying">कॉपी की जा रही है…</string>
     <string name="unmounting_ellipsis">अनसंयोजन…</string>
     <string name="importing_ellipsis">आयम…</string>
     <string name="imported_successfully">सफलतापूर्वक आयात किया गया</string>

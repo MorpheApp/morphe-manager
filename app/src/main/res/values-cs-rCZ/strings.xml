@@ -868,6 +868,9 @@ Záplaty tím nejsou ovlivněny: povolte předběžné záplaty pro každý zdro
     <string name="notification_channel_patch_updates_description">Oznámení o nových opravných verzích</string>
     <string name="notification_channel_patcher_description">Zobrazuje se během záplatování aplikace Morphe na pozadí</string>
     <string name="notification_channel_mounted_apps">Namountované aplikace</string>
+    <string name="notification_channel_mounted_apps_description">Když jiná verze nahradila namountovanou aplikaci a její patch již nelze použít</string>
+    <string name="notification_mount_replaced_title">Aplikace %1$s již není opatchovaná</string>
+    <string name="notification_mount_replaced_text">v%1$s nahradila opatchovanou verzi v%2$s. Otevřete Morphe a obnovte ji</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertní nastavení</string>
     <string name="settings_advanced_expert_mode">Režim expertů</string>
@@ -1320,6 +1323,7 @@ Podrobnosti: %2$s"</string>
     <string name="unmount">Odpojit</string>
     <string name="unmounted">Odpojeno</string>
     <string name="remount">Přemontovat</string>
+    <string name="restore">Obnovit</string>
     <string name="share">Sdílet</string>
     <string name="install">Nainstalovat</string>
     <string name="installed">Nainstalováno</string>
@@ -1340,6 +1344,8 @@ Podrobnosti: %2$s"</string>
     <string name="sources">Zdroje</string>
     <string name="installing_ellipsis">Instaluje se…</string>
     <string name="mounting_ellipsis">Připojování…</string>
+    <string name="mount_stage_restoring_stock">Obnovuji původní…</string>
+    <string name="mount_stage_copying">Kopíruji…</string>
     <string name="unmounting_ellipsis">Odpojování…</string>
     <string name="importing_ellipsis">Importování…</string>
     <string name="imported_successfully">Importováno úspěšně</string>

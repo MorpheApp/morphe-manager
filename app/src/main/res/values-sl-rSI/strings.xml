@@ -493,9 +493,12 @@ Zunanje območje (črtkano): maska zaganjalnika ga lahko obreže – pomembne po
     <string name="home_app_info_app_update_available_description">Viri popravkov podpirajo novejšo različico te aplikacije. Znova zaženi popravek, da se premaknete na to različico.</string>
     <string name="home_app_info_newest_supported_version">Najnovejša podprta različica</string>
     <string name="home_app_info_version_move">Nameščena različica %1$s, najnovejša podprta različica %2$s</string>
+    <string name="home_app_info_version_restore">Nameščena %1$s, popravljena %2$s</string>
     <string name="home_app_info_app_deleted_warning">Aplikacija je bila odstranjena</string>
     <string name="home_app_info_app_deleted_description">Ta aplikacija je bila odstranjena izven aplikacije Morphe. Ponovno jo popravite, da obnovite funkcionalnost</string>
     <string name="home_app_info_not_patched_description">Nameščena je nepopravljena različica te aplikacije. Morphe še vedno ima svoj prejšnji zapis o popravku.</string>
+    <string name="home_app_info_mount_replaced_description">Druga različica je zamenjala priklopljeno aplikacijo, zato popravek ne velja več. Obnovitev vrne popravljeno različico.</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play je posodobil priklopljeno aplikacijo, zato popravek ne velja več. Obnovitev vrne popravljeno različico. Izklopite samodejno posodabljanje zanjo v Google Play, da ostane popravljena.</string>
     <string name="app_links_title">Podprte spletne povezave</string>
     <string name="app_links_description">V sistemu Android 12+ se povezave do podprtih domen privzeto odpirajo v vašem brskalniku, razen če so odobrene</string>
     <string name="app_links_unverified_banner_title">Spletne povezave niso preverjene</string>
@@ -624,6 +627,7 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="patcher_memory_adjustment_title">Ni dovolj pomnilnika</string>
     <string name="patcher_memory_adjustment_description">Sistem je ustavil patcher, ko je ta deloval z omejitvijo pomnilnika %1$d MB. Znižanje omejitve na %2$d MB naredi iz patcherja manjšo tarčo in lahko omogoči, da se izvajanje zaključi.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Sistem je ustavil patcher, ko je ta deloval z omejitvijo pomnilnika %1$d MB, kar je že najnižja razpoložljiva omejitev. Poskusite krpati z manj viri popravkov ali izberite manj popravkov.</string>
+    <string name="patcher_memory_adjustment_description_finished">Sistem je ustavil popravljalnik pri omejitvi pomnilnika %1$d MB, končal pa je šele pri %2$d MB. Začetek pri %2$d MB naslednjič preskoči tisti neuspešni poskus.</string>
     <string name="patcher_memory_adjustment_apply">Znižaj na %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Popravljanje v teku …</string>
@@ -864,6 +868,7 @@ Ta nastavitev ne vpliva na popravke: omogočite predizdajne popravke za vsak vir
     <string name="notification_channel_patch_updates">Posodobitve s popravki</string>
     <string name="notification_channel_patch_updates_description">Obvestila o novih izdajah s popravki</string>
     <string name="notification_channel_patcher_description">Prikazano medtem ko Morphe popravlja aplikacijo v ozadju</string>
+    <string name="notification_channel_mounted_apps">Priklopljene aplikacije</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Napredne nastavitve</string>
     <string name="settings_advanced_expert_mode">Način strokovnjaka</string>

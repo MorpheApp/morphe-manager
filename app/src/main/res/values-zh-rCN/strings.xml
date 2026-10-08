@@ -869,6 +869,9 @@
     <string name="notification_channel_patch_updates_description">有关新补丁版本的通知</string>
     <string name="notification_channel_patcher_description">当 Morphe 在后台为应用打补丁时显示</string>
     <string name="notification_channel_mounted_apps">已挂载的应用</string>
+    <string name="notification_channel_mounted_apps_description">当另一个版本替换了已挂载的应用且其补丁不再适用时</string>
+    <string name="notification_mount_replaced_title">%1$s 不再被修补</string>
+    <string name="notification_mount_replaced_text">v%1$s 已替换已修补的 v%2$s。打开 Morphe 以恢复它</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">高级设置</string>
     <string name="settings_advanced_expert_mode">高级模式</string>
@@ -1321,6 +1324,7 @@ morphe_header_custom_dark.png
     <string name="unmount">取消挂载</string>
     <string name="unmounted">已取消挂载</string>
     <string name="remount">重新挂载</string>
+    <string name="restore">恢复</string>
     <string name="share">分享</string>
     <string name="install">安装</string>
     <string name="installed">已安装</string>
@@ -1341,6 +1345,8 @@ morphe_header_custom_dark.png
     <string name="sources">来源</string>
     <string name="installing_ellipsis">正在安装…</string>
     <string name="mounting_ellipsis">正在挂载…</string>
+    <string name="mount_stage_restoring_stock">正在恢复原始版本……</string>
+    <string name="mount_stage_copying">正在复制……</string>
     <string name="unmounting_ellipsis">正在卸载…</string>
     <string name="importing_ellipsis">正在导入…</string>
     <string name="imported_successfully">设置导入成功</string>

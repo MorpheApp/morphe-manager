@@ -869,6 +869,9 @@ Os patches não são afetados: ative os patches de pré-lançamento para cada fo
     <string name="notification_channel_patch_updates_description">Notificações sobre novas versões de patch</string>
     <string name="notification_channel_patcher_description">Mostrado enquanto o Morphe está a modificar uma aplicação em segundo plano</string>
     <string name="notification_channel_mounted_apps">Aplicativos montados</string>
+    <string name="notification_channel_mounted_apps_description">Quando outra versão substituiu um app montado e o patch não se aplica mais</string>
+    <string name="notification_mount_replaced_title">%1$s não está mais com patch</string>
+    <string name="notification_mount_replaced_text">v%1$s substituiu a v%2$s com patch. Abra o Morphe para restaurá-la</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Definições avançadas</string>
     <string name="settings_advanced_expert_mode">Modo avançado</string>
@@ -1321,6 +1324,7 @@ Detalhes: %2$s"</string>
     <string name="unmount">Desmontar</string>
     <string name="unmounted">Desmontado</string>
     <string name="remount">Remontar</string>
+    <string name="restore">Restaurar</string>
     <string name="share">Compartilhar</string>
     <string name="install">Instalar</string>
     <string name="installed">Instalado</string>
@@ -1341,6 +1345,8 @@ Detalhes: %2$s"</string>
     <string name="sources">Fontes</string>
     <string name="installing_ellipsis">A Instalar…</string>
     <string name="mounting_ellipsis">A Montar…</string>
+    <string name="mount_stage_restoring_stock">Restaurando o original…</string>
+    <string name="mount_stage_copying">Copiando…</string>
     <string name="unmounting_ellipsis">A Desmontar…</string>
     <string name="importing_ellipsis">A Importar…</string>
     <string name="imported_successfully">Importado com sucesso</string>

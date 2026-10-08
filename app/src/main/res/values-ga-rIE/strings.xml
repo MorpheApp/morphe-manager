@@ -869,6 +869,9 @@ Níl tionchar ar phaistí: cumasaigh paistí réamh-eisiúna do gach foinse sa l
     <string name="notification_channel_patch_updates_description">Fógraí faoi eisiúintí nua paiste</string>
     <string name="notification_channel_patcher_description">Taispeántar é agus Morphe ag paisteáil aip sa chúlra</string>
     <string name="notification_channel_mounted_apps">Aipeanna feistithe</string>
+    <string name="notification_channel_mounted_apps_description">Nuair a tháinig leagan eile in ionad aip atá gléasta agus nach bhfuil a paiste i bhfeidhm a thuilleadh</string>
+    <string name="notification_mount_replaced_title">Níl %1$s paisteáilte a thuilleadh</string>
+    <string name="notification_mount_replaced_text">Tháinig v%1$s in ionad an v%2$s paisteáilte. Oscail Morphe chun é a chur ar ais</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Socruithe saineolaithe</string>
     <string name="settings_advanced_expert_mode">Mód saineolaithe</string>
@@ -1340,6 +1343,8 @@ Sonraí: %2$s"</string>
     <string name="sources">Foinsí</string>
     <string name="installing_ellipsis">Ag suiteáil…</string>
     <string name="mounting_ellipsis">Ag ceangal…</string>
+    <string name="mount_stage_restoring_stock">Ag athchóiriú an bhunleagain…</string>
+    <string name="mount_stage_copying">Ag cóipeáil…</string>
     <string name="unmounting_ellipsis">Ag dícheangal…</string>
     <string name="importing_ellipsis">Ag iompórtáil…</string>
     <string name="imported_successfully">Iompórtáladh go rathúil</string>

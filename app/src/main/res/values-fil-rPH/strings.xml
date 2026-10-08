@@ -869,6 +869,9 @@ Hindi maaapektuhan ang mga patch: paganahin ang mga patch na pre-release para sa
     <string name="notification_channel_patch_updates_description">Mga notification tungkol sa mga bagong patch release</string>
     <string name="notification_channel_patcher_description">Ipinapakita habang ina-patch ng Morphe ang isang app sa background</string>
     <string name="notification_channel_mounted_apps">Mga naka-mount na app</string>
+    <string name="notification_channel_mounted_apps_description">Kapag pinalitan ng ibang bersyon ang naka-mount na app at hindi na naaangkop ang patch nito</string>
+    <string name="notification_mount_replaced_title">Hindi na naka-patch ang %1$s</string>
+    <string name="notification_mount_replaced_text">Pinalitan ng v%1$s ang naka-patch na v%2$s. Buksan ang Morphe upang maibalik ito</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expert settings</string>
     <string name="settings_advanced_expert_mode">Expert mode</string>
@@ -1321,6 +1324,7 @@ Mga Detalye: %2$s"</string>
     <string name="unmount">Tanggalin</string>
     <string name="unmounted">Na-unmount</string>
     <string name="remount">Ire-mount</string>
+    <string name="restore">Ibalik</string>
     <string name="share">Ibahagi</string>
     <string name="install">I-install</string>
     <string name="installed">Na-install</string>
@@ -1341,6 +1345,8 @@ Mga Detalye: %2$s"</string>
     <string name="sources">Mga mapagkukunan</string>
     <string name="installing_ellipsis">Ini-install…</string>
     <string name="mounting_ellipsis">Nagma-mount…</string>
+    <string name="mount_stage_restoring_stock">Ibinabalik ang orihinal…</string>
+    <string name="mount_stage_copying">Kinokopya…</string>
     <string name="unmounting_ellipsis">Ina-unmount…</string>
     <string name="importing_ellipsis">Ini-import…</string>
     <string name="imported_successfully">Matagumpay na na-import</string>

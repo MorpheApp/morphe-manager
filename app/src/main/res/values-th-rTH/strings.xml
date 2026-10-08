@@ -493,9 +493,12 @@
     <string name="home_app_info_app_update_available_description">แหล่งแพตช์รองรับแอปเวอร์ชันที่ใหม่กว่า แพตช์อีกครั้งเพื่อย้ายไปยังเวอร์ชันนั้น</string>
     <string name="home_app_info_newest_supported_version">เวอร์ชันใหม่ล่าสุดที่รองรับ</string>
     <string name="home_app_info_version_move">ติดตั้ง %1$s แล้ว เวอร์ชันใหม่ล่าสุดที่รองรับคือ %2$s</string>
+    <string name="home_app_info_version_restore">ติดตั้ง %1$s แพตช์ %2$s แล้ว</string>
     <string name="home_app_info_app_deleted_warning">แอปถูกถอนการติดตั้ง</string>
     <string name="home_app_info_app_deleted_description">แอปนี้ถูกลบออกนอก Morphe. แพตช์อีกครั้งเพื่อฟื้นฟูฟังก์ชัน</string>
     <string name="home_app_info_not_patched_description">แอปเวอร์ชันที่ไม่ได้รับการแพตช์ถูกติดตั้งไว้ Morphe ยังคงมีบันทึกแพตช์ก่อนหน้า</string>
+    <string name="home_app_info_mount_replaced_description">แอปเวอร์ชันอื่นแทนที่แอปที่เมานต์แล้ว แพตช์จึงใช้ไม่ได้อีกต่อไป การคืนค่าจะนำเวอร์ชันที่แพตช์แล้วกลับมา</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play อัปเดตแอปที่เมานต์แล้ว แพตช์จึงใช้ไม่ได้อีกต่อไป การคืนค่าจะนำเวอร์ชันที่แพตช์แล้วกลับมา ปิดการอัปเดตอัตโนมัติสำหรับแอปนั้นใน Google Play เพื่อให้ยังคงแพตช์ไว้</string>
     <string name="app_links_title">ลิงก์เว็บที่รองรับ</string>
     <string name="app_links_description">บน Android 12+ ลิงก์ไปยังโดเมนที่รองรับจะเปิดในเบราว์เซอร์ของคุณโดยค่าเริ่มต้น เว้นแต่จะได้รับการอนุมัติ</string>
     <string name="app_links_unverified_banner_title">ลิงก์เว็บที่ไม่ได้รับการยืนยัน</string>
@@ -624,6 +627,7 @@
     <string name="patcher_memory_adjustment_title">หน่วยความจำไม่เพียงพอ</string>
     <string name="patcher_memory_adjustment_description">ตัวแพตช์ถูกหยุดโดยระบบขณะทำงานด้วยขีดจำกัดหน่วยความจำ %1$d MB การลดขีดจำกัดลงเป็น %2$d MB จะทำให้ตัวแพตช์เป็นเป้าหมายที่เล็กลงและอาจทำให้การทำงานเสร็จสมบูรณ์</string>
     <string name="patcher_memory_adjustment_description_at_minimum">ตัวแพตช์ถูกหยุดโดยระบบขณะทำงานด้วยขีดจำกัดหน่วยความจำ %1$d MB ซึ่งเป็นค่าต่ำสุดที่มีอยู่แล้ว ลองแพตช์โดยใช้แหล่งแพตช์น้อยลง หรือเลือกแพตช์น้อยลง</string>
+    <string name="patcher_memory_adjustment_description_finished">ระบบหยุดตัวแพตช์ที่ขีดจำกัดหน่วยความจำ %1$d MB และเสร็จสิ้นที่ %2$d MB เท่านั้น การเริ่มต้นที่ %2$d MB จะข้ามความพยายามที่สูญเสียนั้นในครั้งถัดไป</string>
     <string name="patcher_memory_adjustment_apply">ลดเป็น %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">กำลังดำเนินการแพตช์…</string>
@@ -864,6 +868,7 @@
     <string name="notification_channel_patch_updates">การอัปเดตแพตช์</string>
     <string name="notification_channel_patch_updates_description">การแจ้งเตือนเกี่ยวกับแพตช์เวอร์ชันใหม่</string>
     <string name="notification_channel_patcher_description">แสดงขณะที่ Morphe กำลังแพตช์แอปพลิเคชันในพื้นหลัง</string>
+    <string name="notification_channel_mounted_apps">แอปที่เมานต์</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">การตั้งค่าโหมดผู้เชี่ยวชาญ</string>
     <string name="settings_advanced_expert_mode">โหมดเชี่ยวชาญ</string>

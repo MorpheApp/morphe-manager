@@ -869,6 +869,9 @@ Patches worden niet beïnvloed: schakel pre-release-patches in voor elke bron in
     <string name="notification_channel_patch_updates_description">Meldingen over nieuwe patch-releases.</string>
     <string name="notification_channel_patcher_description">Wordt weergegeven terwijl Morphe een app op de achtergrond patched</string>
     <string name="notification_channel_mounted_apps">Gemounte apps</string>
+    <string name="notification_channel_mounted_apps_description">Wanneer een andere versie een gemounte app heeft vervangen en de patch niet langer van toepassing is</string>
+    <string name="notification_mount_replaced_title">%1$s is niet langer gepatcht</string>
+    <string name="notification_mount_replaced_text">v%1$s heeft de gepatchte v%2$s vervangen. Open Morphe om deze te herstellen</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertinstellingen</string>
     <string name="settings_advanced_expert_mode">Expertmodus</string>
@@ -1321,6 +1324,7 @@ Details: %2$s"</string>
     <string name="unmount">Ontkoppelen</string>
     <string name="unmounted">Niet gemount</string>
     <string name="remount">Herinstalleren</string>
+    <string name="restore">Herstellen</string>
     <string name="share">Delen</string>
     <string name="install">Installeren</string>
     <string name="installed">Geïnstalleerd</string>
@@ -1341,6 +1345,8 @@ Details: %2$s"</string>
     <string name="sources">Bron-URL</string>
     <string name="installing_ellipsis">Installeren…</string>
     <string name="mounting_ellipsis">Koppelen…</string>
+    <string name="mount_stage_restoring_stock">Het origineel herstellen…</string>
+    <string name="mount_stage_copying">Kopiëren…</string>
     <string name="unmounting_ellipsis">Verwijderen…</string>
     <string name="importing_ellipsis">Importeren…</string>
     <string name="imported_successfully">Geïmporteerd succesvol</string>

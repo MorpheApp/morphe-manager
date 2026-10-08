@@ -869,6 +869,9 @@
     <string name="notification_channel_patch_updates_description">নতুন প্যাচ রিলিজ সম্পর্কে বিজ্ঞপ্তি</string>
     <string name="notification_channel_patcher_description">Morphe ব্যাকগ্রাউন্ডে কোনো অ্যাপ প্যাচ করার সময় দেখানো হয়</string>
     <string name="notification_channel_mounted_apps">মাউন্ট করা অ্যাপগুলো</string>
+    <string name="notification_channel_mounted_apps_description">যখন অন্য কোনো সংস্করণ একটি মাউন্ট করা অ্যাপকে প্রতিস্থাপন করেছে এবং এর প্যাচটি আর প্রযোজ্য নয়</string>
+    <string name="notification_mount_replaced_title">%1$s আর প্যাচ করা নেই</string>
+    <string name="notification_mount_replaced_text">v%1$s প্যাচ করা v%2$s-কে প্রতিস্থাপন করেছে। এটি পুনরুদ্ধার করতে Morphe খুলুন</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">বিশেষ্ট সেটিংস</string>
     <string name="settings_advanced_expert_mode">বিশেষ্ট মোড</string>
@@ -1313,6 +1316,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="unmount">আনমাউন্ট</string>
     <string name="unmounted">আনমাউন্ট করা</string>
     <string name="remount">পুনঃস্থাপন</string>
+    <string name="restore">পুনরুদ্ধার করুন</string>
     <string name="share">শেয়ার করুন</string>
     <string name="install">ইনস্টল করুন</string>
     <string name="installed">ইনস্টল করা হয়েছে</string>
@@ -1333,6 +1337,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="sources">\"সোর্স\"</string>
     <string name="installing_ellipsis">ইনস্টল হচ্ছে…</string>
     <string name="mounting_ellipsis">মাউন্ট হচ্ছে…</string>
+    <string name="mount_stage_restoring_stock">মূল অ্যাপ পুনরুদ্ধার করা হচ্ছে…</string>
+    <string name="mount_stage_copying">কপি করা হচ্ছে…</string>
     <string name="unmounting_ellipsis">মুছে ফেলছেন…</string>
     <string name="importing_ellipsis">আমদানি করছেন…</string>
     <string name="imported_successfully">সফলভাবে আমদানি করা হয়েছে</string>

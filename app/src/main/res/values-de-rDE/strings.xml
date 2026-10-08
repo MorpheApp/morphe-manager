@@ -869,6 +869,9 @@ Patches sind nicht betroffen: Aktivieren Sie Vorab-Patches für jede Quelle in d
     <string name="notification_channel_patch_updates_description">Benachrichtigungen über neue Patch-Versionen</string>
     <string name="notification_channel_patcher_description">Wird angezeigt, während Morphe eine App im Hintergrund patcht</string>
     <string name="notification_channel_mounted_apps">Gemountete Apps</string>
+    <string name="notification_channel_mounted_apps_description">Wenn eine andere Version eine gemountete App ersetzt hat und ihr Patch nicht mehr angewendet wird</string>
+    <string name="notification_mount_replaced_title">%1$s ist nicht mehr gepatcht</string>
+    <string name="notification_mount_replaced_text">v%1$s hat die gepatchte v%2$s ersetzt. Öffne Morphe, um sie wiederherzustellen</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Experten-Einstellungen</string>
     <string name="settings_advanced_expert_mode">Experten-Modus</string>
@@ -1321,6 +1324,7 @@ Details: %2$s"</string>
     <string name="unmount">Unmount</string>
     <string name="unmounted">Geunmountet</string>
     <string name="remount">Erneut mounten</string>
+    <string name="restore">Wiederherstellen</string>
     <string name="share">Teilen</string>
     <string name="install">Installieren</string>
     <string name="installed">Installiert</string>
@@ -1341,6 +1345,8 @@ Details: %2$s"</string>
     <string name="sources">Quellen</string>
     <string name="installing_ellipsis">Wird installiert…</string>
     <string name="mounting_ellipsis">Wird gemountet…</string>
+    <string name="mount_stage_restoring_stock">Original wird wiederhergestellt…</string>
+    <string name="mount_stage_copying">Wird kopiert…</string>
     <string name="unmounting_ellipsis">Wird geunmountet…</string>
     <string name="importing_ellipsis">Importiere…</string>
     <string name="imported_successfully">Erfolgreich importiert</string>

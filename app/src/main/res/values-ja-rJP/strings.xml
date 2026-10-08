@@ -871,7 +871,7 @@
     <string name="notification_channel_mounted_apps">マウントされたアプリ</string>
     <string name="notification_channel_mounted_apps_description">別のバージョンがマウントされたアプリを置き換え、そのパッチが適用されなくなった場合</string>
     <string name="notification_mount_replaced_title">%1$s はパッチが適用されていません</string>
-    <string name="notification_mount_replaced_text">v%1$s はパッチ適用済みの v%2$s を置き換えました。Morphe を起動して復元してください</string>
+    <string name="notification_mount_replaced_text">パッチ適用済みの v%2$s が v%1$s に置き換えられました。Morphe を起動して復元してください</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">高度な設定</string>
     <string name="settings_advanced_expert_mode">エキスパート モード</string>

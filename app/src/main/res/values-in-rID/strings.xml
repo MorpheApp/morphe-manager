@@ -870,6 +870,9 @@ Tambalan tidak terpengaruh: aktifkan tambalan pra-rilis untuk setiap sumber dala
     <string name="notification_channel_patch_updates_description">Notifikasi tentang rilis patch baru</string>
     <string name="notification_channel_patcher_description">Ditampilkan saat Morphe menambal aplikasi di latar belakang</string>
     <string name="notification_channel_mounted_apps">Aplikasi yang di-mount</string>
+    <string name="notification_channel_mounted_apps_description">Saat versi lain menggantikan aplikasi yang terpasang dan tambalannya tidak lagi berlaku</string>
+    <string name="notification_mount_replaced_title">%1$s tidak lagi ditambal</string>
+    <string name="notification_mount_replaced_text">v%1$s menggantikan v%2$s yang ditambal. Buka Morphe untuk memulihkannya</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Setelan ahli</string>
     <string name="settings_advanced_expert_mode">Mode ahli</string>
@@ -1322,6 +1325,7 @@ Rincian: %2$s"</string>
     <string name="unmount">Unmount</string>
     <string name="unmounted">Belum di-mount</string>
     <string name="remount">Remount</string>
+    <string name="restore">Pulihkan</string>
     <string name="share">Bagikan</string>
     <string name="install">Pasang</string>
     <string name="installed">Terpasang</string>
@@ -1342,6 +1346,8 @@ Rincian: %2$s"</string>
     <string name="sources">Sumber</string>
     <string name="installing_ellipsis">Memasang…</string>
     <string name="mounting_ellipsis">Mounting…</string>
+    <string name="mount_stage_restoring_stock">Memulihkan asli…</string>
+    <string name="mount_stage_copying">Menyalin…</string>
     <string name="unmounting_ellipsis">Unmounting…</string>
     <string name="importing_ellipsis">Mengimpor…</string>
     <string name="imported_successfully">Berhasil diimpor</string>

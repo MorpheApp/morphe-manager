@@ -867,6 +867,9 @@ Plástrar verða ekki fyrir áhrifum: virkjaðu forútgáfuplástra fyrir hverja
     <string name="notification_channel_patch_updates_description">Tilkynningar um nýjar plástursútgáfur</string>
     <string name="notification_channel_patcher_description">Sýnt þegar Morphe breytir app í bakgrunninum</string>
     <string name="notification_channel_mounted_apps">Tengd forrit</string>
+    <string name="notification_channel_mounted_apps_description">Þegar önnur útgáfa kom í stað tengds forrits og plástur þess á ekki lengur við</string>
+    <string name="notification_mount_replaced_title">%1$s er ekki lengur plástrað</string>
+    <string name="notification_mount_replaced_text">v%1$s kom í stað hins plástraða v%2$s. Opnaðu Morphe til að endurheimta það</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Advanced</string>
     <string name="settings_advanced_expert_mode">Sérstakur háttur</string>
@@ -1316,6 +1319,7 @@ Nánari upplýsingar: %2$s"</string>
     <string name="unmount">Fjarlægja</string>
     <string name="unmounted">Ekki fest</string>
     <string name="remount">Endursetja</string>
+    <string name="restore">Endurheimta</string>
     <string name="share">Deila</string>
     <string name="install">Install</string>
     <string name="installed">Uppsett</string>
@@ -1336,6 +1340,8 @@ Nánari upplýsingar: %2$s"</string>
     <string name="sources">Heimildir</string>
     <string name="installing_ellipsis">Sæti…</string>
     <string name="mounting_ellipsis">Festa…</string>
+    <string name="mount_stage_restoring_stock">Endurheimti upprunalegt…</string>
+    <string name="mount_stage_copying">Afrita…</string>
     <string name="unmounting_ellipsis">Afmonta…</string>
     <string name="importing_ellipsis">Innflutningur…</string>
     <string name="imported_successfully">Flutt inn með árangri</string>

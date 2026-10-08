@@ -869,6 +869,9 @@ Le patch non sono interessate: abilita le patch pre-release per ciascuna fonte n
     <string name="notification_channel_patch_updates_description">Notifiche sui nuovi rilasci di patch</string>
     <string name="notification_channel_patcher_description">Visualizzate mentre Morphe sta patchando una app in background</string>
     <string name="notification_channel_mounted_apps">App montate</string>
+    <string name="notification_channel_mounted_apps_description">Quando un\'altra versione ha sostituito un\'app montata e la relativa patch non si applica più</string>
+    <string name="notification_mount_replaced_title">%1$s non è più patchato</string>
+    <string name="notification_mount_replaced_text">v%1$s ha sostituito la v%2$s patchata. Apri Morphe per ripristinarla</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Impostazioni avanzate</string>
     <string name="settings_advanced_expert_mode">Modalità esperto</string>
@@ -1321,6 +1324,7 @@ Dettagli: %2$s"</string>
     <string name="unmount">Smonta</string>
     <string name="unmounted">Smontato</string>
     <string name="remount">Rimonta</string>
+    <string name="restore">Ripristina</string>
     <string name="share">Condividi</string>
     <string name="install">Installa</string>
     <string name="installed">Installato</string>
@@ -1341,6 +1345,8 @@ Dettagli: %2$s"</string>
     <string name="sources">Fonti</string>
     <string name="installing_ellipsis">Installazione in corso…</string>
     <string name="mounting_ellipsis">Montaggio in corso…</string>
+    <string name="mount_stage_restoring_stock">Ripristino dell\'originale…</string>
+    <string name="mount_stage_copying">Copia in corso…</string>
     <string name="unmounting_ellipsis">Smontaggio in corso…</string>
     <string name="importing_ellipsis">Riprova</string>
     <string name="imported_successfully">Importati con successo</string>

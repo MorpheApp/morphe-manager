@@ -493,9 +493,12 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="home_app_info_app_update_available_description">Tilläggskällorna stöder en nyare version av den här appen. Modifiera den igen för att övergå till den versionen.</string>
     <string name="home_app_info_newest_supported_version">Senaste som stöds</string>
     <string name="home_app_info_version_move">Installerad %1$s, senaste som stöds %2$s</string>
+    <string name="home_app_info_version_restore">Installerad %1$s, patchad %2$s</string>
     <string name="home_app_info_app_deleted_warning">Appen har avinstallerats</string>
     <string name="home_app_info_app_deleted_description">Den här appen avinstallerades utanför Morphe. Modifiera den igen för att återställa funktionaliteten</string>
     <string name="home_app_info_not_patched_description">En omodifierad version av den här appen är installerad. Morphe har fortfarande sin tidigare modifieringspost.</string>
+    <string name="home_app_info_mount_replaced_description">En annan version ersatte den monterade appen, så gäller patchen inte längre. Återställning lägger tillbaka den patchade versionen</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play uppdaterade den monterade appen, så gäller patchen inte längre. Återställning lägger tillbaka den patchade versionen. Stäng av automatiska uppdateringar för den i Google Play för att hålla den patchad</string>
     <string name="app_links_title">Webblänkar som stöds</string>
     <string name="app_links_description">På Android 12 och senare öppnas länkar till stödda domäner i din webbläsare som standard om de inte har godkänts</string>
     <string name="app_links_unverified_banner_title">Webblänkar är inte verifierade</string>
@@ -624,6 +627,7 @@ Om du avinstallerar raderas alla appdata permanent"</string>
     <string name="patcher_memory_adjustment_title">Inte tillräckligt med minne</string>
     <string name="patcher_memory_adjustment_description">Modifieraren stoppades av systemet medan den kördes med en minnesgräns på %1$d MB. Att sänka gränsen till %2$d MB gör modifieraren till ett mindre mål och kan låta körningen slutföras.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Modifieraren stoppades av systemet medan den kördes med en minnesgräns på %1$d MB, vilket redan är den lägsta tillgängliga. Försök att modifiera med färre tilläggskällor, eller välj färre tillägg.</string>
+    <string name="patcher_memory_adjustment_description_finished">Systemet stoppade patcharen vid en minnesgräns på %1$d MB, och den blev klar först vid %2$d MB. Att starta vid %2$d MB hoppar över det förlorade försöket nästa gång</string>
     <string name="patcher_memory_adjustment_apply">Sänk till %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Modifiering pågår …</string>
@@ -864,6 +868,7 @@ Tillägg påverkas inte: aktivera förhandsversioner av tillägg för varje käl
     <string name="notification_channel_patch_updates">Tilläggsuppdateringar</string>
     <string name="notification_channel_patch_updates_description">Aviseringar om nya tilläggsversioner</string>
     <string name="notification_channel_patcher_description">Visas när Morphe modifierar en app i bakgrunden</string>
+    <string name="notification_channel_mounted_apps">Monterade appar</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertinställningar</string>
     <string name="settings_advanced_expert_mode">Expertläge</string>

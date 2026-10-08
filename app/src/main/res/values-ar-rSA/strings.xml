@@ -873,6 +873,9 @@
     <string name="notification_channel_patch_updates_description">إشعارات عن إصدارات تعديل جديدة</string>
     <string name="notification_channel_patcher_description">يتم عرضه أثناء قيام Morphe بتعديل تطبيق في الخلفية</string>
     <string name="notification_channel_mounted_apps">التطبيقات المُركَّبة</string>
+    <string name="notification_channel_mounted_apps_description">عندما يستبدل إصدار آخر تطبيقًا مثبّتًا ولم يعد تصحيحه قابلاً للتطبيق</string>
+    <string name="notification_mount_replaced_title">لم يعد %1$s مُصحَّحًا</string>
+    <string name="notification_mount_replaced_text">استبدل الإصدار v%1$s الإصدار المُصحَّح v%2$s. افتح Morphe لاستعادته</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">إعدادات الخبير</string>
     <string name="settings_advanced_expert_mode">وضع الخبير</string>
@@ -1326,6 +1329,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="unmount">Unmount</string>
     <string name="unmounted">Unmounted</string>
     <string name="remount">Remount</string>
+    <string name="restore">استعادة</string>
     <string name="share">مشاركة</string>
     <string name="install">تثبيت</string>
     <string name="installed">مثبت</string>
@@ -1346,6 +1350,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="sources">المصادر</string>
     <string name="installing_ellipsis">جارٍ التثبيت…</string>
     <string name="mounting_ellipsis">Mounting…</string>
+    <string name="mount_stage_restoring_stock">جارٍ استعادة النسخة الأصلية…</string>
+    <string name="mount_stage_copying">جارٍ النسخ…</string>
     <string name="unmounting_ellipsis">Unmounting…</string>
     <string name="importing_ellipsis">جارٍ استيراد…</string>
     <string name="imported_successfully">تم الاستيراد بنجاح</string>

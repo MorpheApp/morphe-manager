@@ -493,9 +493,12 @@ Vùng ngoài (nét đứt): có thể bị cắt theo hình dạng biểu tượ
     <string name="home_app_info_app_update_available_description">Các nguồn patch hỗ trợ phiên bản mới hơn của ứng dụng này. Hãy patch lại để chuyển sang phiên bản đó.</string>
     <string name="home_app_info_newest_supported_version">Mới nhất được hỗ trợ</string>
     <string name="home_app_info_version_move">Đã cài %1$s, mới nhất được hỗ trợ %2$s</string>
+    <string name="home_app_info_version_restore">Đã cài đặt %1$s, đã vá %2$s</string>
     <string name="home_app_info_app_deleted_warning">Ứng dụng đã bị gỡ cài đặt</string>
     <string name="home_app_info_app_deleted_description">Ứng dụng này đã bị gỡ bên ngoài Morphe. Hãy vá lại để khôi phục chức năng</string>
     <string name="home_app_info_not_patched_description">Bạn đang cài đặt phiên bản chưa vá của ứng dụng. Đừng lo, Morphe vẫn còn lưu bản đã vá trước đó</string>
+    <string name="home_app_info_mount_replaced_description">Một phiên bản khác đã thay thế ứng dụng đã gắn, do đó bản vá không còn tác dụng nữa. Khôi phục sẽ đưa phiên bản đã vá trở lại</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play đã cập nhật ứng dụng đã gắn, do đó bản vá không còn tác dụng nữa. Khôi phục sẽ đưa phiên bản đã vá trở lại. Tắt tính năng tự động cập nhật cho ứng dụng đó trong Google Play để giữ nó được vá</string>
     <string name="app_links_title">Liên kết web được hỗ trợ</string>
     <string name="app_links_description">Trên Android 12+, các liên kết đến miền được hỗ trợ sẽ mở trong trình duyệt của bạn theo mặc định trừ khi được chấp thuận</string>
     <string name="app_links_unverified_banner_title">Liên kết web chưa được xác minh</string>
@@ -626,6 +629,7 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="patcher_memory_adjustment_title">Không đủ bộ nhớ</string>
     <string name="patcher_memory_adjustment_description">Trình vá đã bị hệ thống dừng khi đang chạy với giới hạn bộ nhớ %1$d MB. Hãy thử giảm giới hạn xuống %2$d MB để có thể làm giảm khả năng trình vá bị hệ thống dừng và giúp quá trình vá hoàn tất</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Trình vá đã bị hệ thống dừng khi đang chạy với giới hạn bộ nhớ %1$d MB, vốn đã là mức thấp nhất hiện có. Hãy thử vá với ít nguồn vá hơn hoặc chọn ít bản vá hơn</string>
+    <string name="patcher_memory_adjustment_description_finished">Hệ thống đã dừng trình vá ở giới hạn bộ nhớ %1$d MB và chỉ hoàn thành ở %2$d MB. Bắt đầu ở %2$d MB sẽ bỏ qua lần thử thất bại đó vào lần tới</string>
     <string name="patcher_memory_adjustment_apply">Giảm xuống %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Đang vá…</string>
@@ -866,6 +870,7 @@ Các bản vá không bị ảnh hưởng: bật các bản vá trước khi ph�
     <string name="notification_channel_patch_updates">Cập nhật bản vá</string>
     <string name="notification_channel_patch_updates_description">Thông báo về các bản phát hành bản vá mới</string>
     <string name="notification_channel_patcher_description">Hiển thị khi Morphe đang vá ứng dụng trong nền</string>
+    <string name="notification_channel_mounted_apps">Ứng dụng đã gắn</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Chuyên gia</string>
     <string name="settings_advanced_expert_mode">Chế độ chuyên gia</string>

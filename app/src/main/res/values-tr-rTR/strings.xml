@@ -493,9 +493,12 @@ Dış bölge (kesikli): launcher maskesi tarafından kırpılabilir - önemli ay
     <string name="home_app_info_app_update_available_description">Yama kaynakları bu uygulamanın daha yeni bir sürümünü destekliyor. Bu sürüme geçmek için tekrar yama uygulayın</string>
     <string name="home_app_info_newest_supported_version">Desteklenen en yeni sürüm</string>
     <string name="home_app_info_version_move">Yüklü sürüm %1$s, desteklenen en yeni sürüm %2$s</string>
+    <string name="home_app_info_version_restore">Kurulan %1$s, yamalanan %2$s</string>
     <string name="home_app_info_app_deleted_warning">Uygulama kaldırıldı</string>
     <string name="home_app_info_app_deleted_description">Bu uygulama Morphe dışından kaldırıldı. İşlevselliği geri getirmek için yeniden yamalayın</string>
     <string name="home_app_info_not_patched_description">Bu uygulamanın yamalanmamış bir sürümü yüklü. Morphe hâlâ önceki yama kaydına sahiptir</string>
+    <string name="home_app_info_mount_replaced_description">Başka bir sürüm bağlı uygulamanın yerini aldı, bu nedenle yama artık uygulanmıyor. Geri yükleme, yamalı sürümü geri getirir</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play bağlı uygulamayı güncelledi, bu nedenle yama artık uygulanmıyor. Geri yükleme, yamalı sürümü geri getirir. Google Play\'de bu uygulama için otomatik güncellemeyi kapatın, böylece yamalı kalır</string>
     <string name="app_links_title">Desteklenen web bağlantıları</string>
     <string name="app_links_description">Android 12 ve sonraki sürümlerde, desteklenen alan adlarına ait bağlantılar, onay verilmediği sürece varsayılan olarak tarayıcınızda açılır.</string>
     <string name="app_links_unverified_banner_title">Web bağlantıları doğrulanmadı</string>
@@ -624,6 +627,7 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="patcher_memory_adjustment_title">Yetersiz bellek</string>
     <string name="patcher_memory_adjustment_description">Yamalayıcı, %1$d MB bellek sınırıyla çalışırken sistem tarafından durduruldu. Sınırı %2$d MB değerine düşürmek yamalayıcıyı daha küçük bir hedef haline getirir ve çalıştırmanın tamamlanmasını sağlayabilir.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Yamalayıcı, zaten mevcut en düşük değer olan %1$d MB bellek sınırıyla çalışırken sistem tarafından durduruldu. Daha az yama kaynağıyla yamalamayı deneyin veya daha az yama seçin.</string>
+    <string name="patcher_memory_adjustment_description_finished">Sistem, yamalayıcıyı %1$d MB bellek sınırında durdurdu ve ancak %2$d MB\'de tamamlandı. Bir dahaki sefere %2$d MB\'den başlamak, bu kaybedilen denemeyi atlar</string>
     <string name="patcher_memory_adjustment_apply">Sınırı %1$d MB değerine düşür</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Yamalama devam ediyor…</string>
@@ -863,6 +867,7 @@ Yamalar etkilenmez: yamalama kaynakları listesindeki her kaynak için ön sür�
     <string name="notification_channel_patch_updates">Yama güncellemeleri</string>
     <string name="notification_channel_patch_updates_description">Yeni yama sürümleri hakkında bildirimler</string>
     <string name="notification_channel_patcher_description">Morphe bir uygulamayı arka planda yamalarken gösterilir</string>
+    <string name="notification_channel_mounted_apps">Bağlı uygulamalar</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Uzman ayarları</string>
     <string name="settings_advanced_expert_mode">Uzman modu</string>

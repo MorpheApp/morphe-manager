@@ -870,6 +870,9 @@
     <string name="notification_channel_patch_updates_description">התראות על מהדורות תיקון חדשות</string>
     <string name="notification_channel_patcher_description">מוצג בזמן ש-Morphe מתקן אפליקציה ברקע</string>
     <string name="notification_channel_mounted_apps">אפליקציות שהורכבו</string>
+    <string name="notification_channel_mounted_apps_description">כאשר גרסה אחרת החליפה אפליקציה מותקנת והטלאי שלה כבר לא תקף</string>
+    <string name="notification_mount_replaced_title">%1$s כבר לא מתוקן</string>
+    <string name="notification_mount_replaced_text">v%1$s החליפה את v%2$s המתוקנת. פתח את Morphe כדי לשחזר אותה</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">הגדרות מומחה</string>
     <string name="settings_advanced_expert_mode">מצב מומחה</string>
@@ -1332,6 +1335,7 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="unmount">ניתוק</string>
     <string name="unmounted">לא מורכב</string>
     <string name="remount">טען מחדש</string>
+    <string name="restore">שחזור</string>
     <string name="share">שתף</string>
     <string name="install">התקן</string>
     <string name="installed">מותקן</string>
@@ -1352,6 +1356,8 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="sources">מקורות</string>
     <string name="installing_ellipsis">מתקין…</string>
     <string name="mounting_ellipsis">מצרף…</string>
+    <string name="mount_stage_restoring_stock">משחזר את המקור…</string>
+    <string name="mount_stage_copying">מעתיק…</string>
     <string name="unmounting_ellipsis">מתפרק... </string>
     <string name="importing_ellipsis">מוצא... </string>
     <string name="imported_successfully">יובא בהצלחה</string>
