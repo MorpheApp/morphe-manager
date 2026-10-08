@@ -9,6 +9,7 @@ import android.annotation.SuppressLint
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
@@ -1139,7 +1140,10 @@ internal fun MainAppsSection(
     }
 
     Box(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            // A wrapped list is centered, so its height eases with the cards rather than jumping
+            .then(if (fillHeight) Modifier else Modifier.animateContentSize()),
         contentAlignment = Alignment.Center
     ) {
         // Hidden polite live region used to announce the result of TalkBack Move up/down actions

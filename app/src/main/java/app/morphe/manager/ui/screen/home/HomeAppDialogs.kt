@@ -6,6 +6,7 @@
 package app.morphe.manager.ui.screen.home
 
 import android.view.HapticFeedbackConstants
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
@@ -273,7 +274,10 @@ internal fun HiddenAppsDialog(
             )
         } else {
             DialogLazyList(
-                modifier = Modifier.fillMaxWidth(),
+                // The dialog is centered, so its height eases with the cards rather than jumping
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .animateContentSize(),
                 verticalArrangement = Arrangement.spacedBy(itemSpacing)
             ) {
                 items(
