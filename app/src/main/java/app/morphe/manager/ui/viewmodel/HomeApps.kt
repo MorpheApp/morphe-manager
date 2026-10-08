@@ -464,6 +464,12 @@ class HomeApps(
      */
     private var homeMetadata: Pair<Map<Int, PatchBundleInfo.Global>, HomeMetadata>? = null
 
+    /**
+     * The cards of the last build by id. Read and replaced by [buildHomeCards] alone, like
+     * [homeMetadata].
+     */
+    private var lastBuiltItems: Map<String, HomeAppItem> = emptyMap()
+
     private data class HomeMetadata(
         val enabled: Map<String, BundleAppMetadata>,
         /** Names only, for records whose bundle the user has since disabled. */
@@ -602,7 +608,7 @@ class HomeApps(
             (visibleSlots + hiddenSlots)
                 .map { slot -> async { buildItem(slot) } }
                 .awaitAll()
-        }.withNameSuffixes()
+        }.withNameSuffixes().reusingUnchanged()
         val visibleItems = builtItems.subList(0, visibleSlots.size)
         val hiddenItems = builtItems.subList(visibleSlots.size, builtItems.size)
 
@@ -626,6 +632,17 @@ class HomeApps(
         )
         scope.launch(homeCardCacheWrites) { homeCardCache.write(cards) }
         return cards
+    }
+
+    /**
+     * Hands back the previous instance of every card the build left unchanged. A card holds a
+     * PackageInfo, so Compose tells cards apart by instance, and a fresh copy of an unchanged card
+     * would draw it again.
+     */
+    private fun List<HomeAppItem>.reusingUnchanged(): List<HomeAppItem> {
+        val previous = lastBuiltItems
+        return map { item -> previous[item.id]?.takeIf { it == item } ?: item }
+            .also { items -> lastBuiltItems = items.associateBy { it.id } }
     }
 
     /**
