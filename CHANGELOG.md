@@ -1,3 +1,12 @@
+# [1.35.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.35.0-dev.3...v1.35.0-dev.4) (2026-10-08)
+
+
+### Features
+
+* Rework the adaptive icon creator around the launcher's icon shape ([ffdf2af](https://github.com/MorpheApp/morphe-manager/commit/ffdf2afcdeff976ea61b17d22c0d4a0b214fec84))
+* Rework the header creator around the app bar it lands in ([ace7fda](https://github.com/MorpheApp/morphe-manager/commit/ace7fda5224d0870e46d629207c610215eec5904))
+* Save creator files through the custom picker and into a picked branding folder ([0a48a5a](https://github.com/MorpheApp/morphe-manager/commit/0a48a5aabb61cda6b18947738e100d243f44af16))
+
 # [1.35.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.35.0-dev.2...v1.35.0-dev.3) (2026-10-08)
 
 
