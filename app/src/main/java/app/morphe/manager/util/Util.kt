@@ -189,3 +189,7 @@ fun <T : Any> SavedStateHandle.saveableVar(init: () -> T): PropertyDelegateProvi
                 set(name, value)
         }
     }
+
+/** The [E] entry named [name], or null when nothing matches, as for a stale persisted value. */
+inline fun <reified E : Enum<E>> enumByNameOrNull(name: String?): E? =
+    enumValues<E>().firstOrNull { it.name == name }

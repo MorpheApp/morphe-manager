@@ -46,6 +46,7 @@ import app.morphe.manager.R
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.util.APK_EXTENSIONS
 import app.morphe.manager.util.PM
+import app.morphe.manager.util.enumByNameOrNull
 import app.morphe.manager.util.externalStorageVolumes
 import app.morphe.manager.util.formatBytes
 import com.topjohnwu.superuser.Shell
@@ -240,7 +241,7 @@ fun FilePicker(
     var currentDir by remember { mutableStateOf(downloadsDir) }
     var refreshKey by remember { mutableIntStateOf(0) }
     var sortMode by remember {
-        mutableStateOf(runCatching { SortMode.valueOf(prefs.filePickerSortMode.getBlocking()) }.getOrDefault(SortMode.NAME_ASC))
+        mutableStateOf(enumByNameOrNull<SortMode>(prefs.filePickerSortMode.getBlocking()) ?: SortMode.NAME_ASC)
     }
     var showHiddenFiles by remember { mutableStateOf(prefs.filePickerShowHiddenFiles.getBlocking()) }
     var showViewMenu by remember { mutableStateOf(false) }

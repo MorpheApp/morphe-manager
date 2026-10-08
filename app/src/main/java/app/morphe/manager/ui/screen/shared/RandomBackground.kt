@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.viewmodel.RandomInterval
+import app.morphe.manager.util.enumByNameOrNull
 import java.time.LocalDate
 import kotlin.random.Random
 
@@ -29,7 +30,7 @@ fun rememberRandomBackground(prefs: PreferencesManager): BackgroundType {
         RandomBackground.resolve(
             interval = interval,
             pool = pool,
-            previousLaunch = BackgroundType.entries.firstOrNull { it.name == prefs.lastRandomBackground.getBlocking() }
+            previousLaunch = enumByNameOrNull<BackgroundType>(prefs.lastRandomBackground.getBlocking())
         )
     }
 

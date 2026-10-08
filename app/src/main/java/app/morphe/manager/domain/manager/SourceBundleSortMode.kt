@@ -7,6 +7,7 @@ package app.morphe.manager.domain.manager
 
 import androidx.annotation.StringRes
 import app.morphe.manager.R
+import app.morphe.manager.util.enumByNameOrNull
 
 enum class SourceBundleSortMode(
     @param:StringRes override val labelRes: Int,
@@ -20,6 +21,6 @@ enum class SourceBundleSortMode(
 
     companion object {
         fun fromPreference(value: String?): SourceBundleSortMode =
-            entries.firstOrNull { it.name == value } ?: MANUAL
+            enumByNameOrNull(value) ?: MANUAL
     }
 }

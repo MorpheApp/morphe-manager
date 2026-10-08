@@ -7,6 +7,7 @@ package app.morphe.manager.domain.manager
 
 import androidx.annotation.StringRes
 import app.morphe.manager.R
+import app.morphe.manager.util.enumByNameOrNull
 
 enum class HomeAppSortMode(
     @param:StringRes override val labelRes: Int,
@@ -21,6 +22,6 @@ enum class HomeAppSortMode(
 
     companion object {
         fun fromPreference(value: String?): HomeAppSortMode =
-            entries.firstOrNull { it.name == value } ?: RECOMMENDED
+            enumByNameOrNull(value) ?: RECOMMENDED
     }
 }

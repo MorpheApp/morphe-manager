@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
+import app.morphe.manager.util.enumByNameOrNull
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -48,7 +49,7 @@ enum class HomeAppCategoryViewMode {
     companion object {
         /** Parse a persisted enum name; unknown values fall back to [ALL_APPS]. */
         fun fromPreference(value: String?): HomeAppCategoryViewMode =
-            entries.firstOrNull { it.name == value } ?: ALL_APPS
+            enumByNameOrNull(value) ?: ALL_APPS
     }
 }
 
