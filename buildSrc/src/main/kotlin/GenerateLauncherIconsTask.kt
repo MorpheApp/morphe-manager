@@ -69,11 +69,12 @@ abstract class GenerateLauncherIconsTask : DefaultTask() {
 
         manifestFile.get().asFile.writeText(buildString {
             appendLine("""<?xml version="1.0" encoding="utf-8"?>""")
-            // Lint checks this manifest on its own, without the main manifest's optional touchscreen
-            // feature and TV banner exemption, so both are repeated here
+            // Lint checks this manifest on its own, so the TV support the main manifest declares for
+            // the leanback launcher entries is repeated here
             appendLine("""<manifest xmlns:android="http://schemas.android.com/apk/res/android"""")
-            appendLine("""    xmlns:tools="http://schemas.android.com/tools"""")
-            appendLine("""    tools:ignore="ImpliedTouchscreenHardware">""")
+            appendLine("""    xmlns:tools="http://schemas.android.com/tools">""")
+            appendLine("""    <uses-feature android:name="android.software.leanback" android:required="false" />""")
+            appendLine("""    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />""")
             appendLine("""    <application tools:ignore="MissingTvBanner">""")
             icons.forEachIndexed { index, icon ->
                 val suffix = suffix(icon)
