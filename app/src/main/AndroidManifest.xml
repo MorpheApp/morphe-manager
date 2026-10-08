@@ -186,12 +186,5 @@
             android:name="app.morphe.manager.receiver.MountReplacedReceiver"
             android:exported="false" />
 
-        <!-- Root service for privileged file system operations via libsu -->
-        <service
-            android:name="app.morphe.manager.service.ManagerRootService"
-            android:exported="false"
-            android:process=":root"
-            tools:ignore="Instantiatable" />
-
     </application>
 </manifest>

@@ -39,6 +39,7 @@ import app.morphe.manager.patcher.worker.PatcherWorker
  * a device with a mounted app needs and gets with its first notification.
  */
 class UpdateNotificationManager(private val context: Context) {
+    private val notificationManager by lazy { context.getSystemService(NotificationManager::class.java) }
 
     /**
      * Creates the required notification channels.
@@ -71,9 +72,7 @@ class UpdateNotificationManager(private val context: Context) {
             NotificationManager.IMPORTANCE_LOW
         )
 
-        val systemNotificationManager =
-            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        systemNotificationManager.createNotificationChannels(listOf(managerChannel, patchChannel, patcherChannel))
+        notificationManager.createNotificationChannels(listOf(managerChannel, patchChannel, patcherChannel))
     }
 
     /** Lint cannot follow an importance constant through a parameter, hence the suppression. */
@@ -114,8 +113,7 @@ class UpdateNotificationManager(private val context: Context) {
             .setAutoCancel(true)
             .build()
 
-        val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        manager.notify(NOTIFICATION_ID_BATCH_RESULT, notification)
+        notificationManager.notify(NOTIFICATION_ID_BATCH_RESULT, notification)
     }
 
     /**
@@ -123,9 +121,8 @@ class UpdateNotificationManager(private val context: Context) {
      * on screen. Tapping one is not the only way back, recents and the launcher are too.
      */
     fun cancelPatchingResultNotifications() {
-        val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        manager.cancel(PatcherWorker.COMPLETION_NOTIFICATION_ID)
-        manager.cancel(NOTIFICATION_ID_BATCH_RESULT)
+        notificationManager.cancel(PatcherWorker.COMPLETION_NOTIFICATION_ID)
+        notificationManager.cancel(NOTIFICATION_ID_BATCH_RESULT)
     }
 
     /** Opens the batch queue on the run these notifications report about. */
@@ -197,8 +194,7 @@ class UpdateNotificationManager(private val context: Context) {
     ) {
         // Created on first use, so only a device that mounted an app lists it. Kept apart from
         // the update channels, since muting those must not silence a patch that stopped applying
-        val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        manager.createNotificationChannel(
+        notificationManager.createNotificationChannel(
             channel(
                 CHANNEL_MOUNTED_APPS,
                 R.string.notification_channel_mounted_apps,
@@ -246,8 +242,7 @@ class UpdateNotificationManager(private val context: Context) {
             .apply { action?.let { addAction(it) } }
             .build()
 
-        val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        manager.notify(tag, notificationId, notification)
+        notificationManager.notify(tag, notificationId, notification)
     }
 
     /**

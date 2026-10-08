@@ -70,8 +70,6 @@ dependencies {
 
     // LibSU
     implementation(libs.libsu.core)
-    implementation(libs.libsu.service)
-    implementation(libs.libsu.nio)
 
     // Koin
     implementation(libs.koin.android)

@@ -884,7 +884,14 @@ class InstallViewModel : ViewModel(), KoinComponent {
                 fun MountStockCandidate.matchesPatched() =
                     info.matchesPatched()
 
-                if (waitForStockInstall && stockInfo != null && !stockInfo.matchesPatched()) {
+                val restorableStock = listOfNotNull(
+                    inputs.inputCandidate,
+                    inputs.savedOriginalCandidate
+                ).firstOrNull { it.matchesPatched() }
+
+                // Only worth waiting for when nothing here can restore the stock app, since the
+                // install below reinstalls a matching one and waits for it on its own
+                if (waitForStockInstall && restorableStock == null && stockInfo != null && !stockInfo.matchesPatched()) {
                     stockInfo = waitForMatchingInstalledStock(
                         packageName = packageName,
                         versionName = patchedVersion
@@ -893,11 +900,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
                 val stockMatchesPatched = stockInfo?.matchesPatched() == true
 
-                val stockCandidate = listOfNotNull(
-                    inputs.inputCandidate,
-                    inputs.savedOriginalCandidate
-                ).takeUnless { stockMatchesPatched }
-                    ?.firstOrNull { it.matchesPatched() }
+                val stockCandidate = restorableStock.takeUnless { stockMatchesPatched }
 
                 // Check version mismatch for mount
                 val stockVersion = stockInfo?.versionName

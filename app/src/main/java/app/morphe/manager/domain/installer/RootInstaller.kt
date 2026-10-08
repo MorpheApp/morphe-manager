@@ -1,45 +1,30 @@
 /*
  * Copyright 2026 Morphe.
  * https://github.com/MorpheApp/morphe-manager
- *
- * Original hard forked code:
- * https://github.com/Jman-Github/Universal-ReVanced-Manager/blob/597b3173a004f5a9aae54326046dd7fd4c5b7777/app/src/main/java/app/revanced/manager/domain/installer/RootInstaller.kt
- *
- * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
  */
 
 package app.morphe.manager.domain.installer
 
 import android.app.Application
-import android.content.ComponentName
-import android.content.Intent
-import android.content.ServiceConnection
 import android.content.pm.PackageInfo
-import android.os.IBinder
 import android.os.Process
 import android.os.SystemClock
-import app.morphe.manager.IRootSystemService
-import app.morphe.manager.service.ManagerRootService
 import app.morphe.manager.util.PLAY_STORE_INSTALLER_PACKAGE
 import app.morphe.manager.util.PM
 import com.topjohnwu.superuser.Shell
-import com.topjohnwu.superuser.ipc.RootService
-import com.topjohnwu.superuser.nio.FileSystemManager
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.time.withTimeoutOrNull
 import kotlinx.coroutines.withContext
 import java.io.File
-import java.io.IOException
 import java.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 
 class RootInstaller(
     private val app: Application,
     private val pm: PM
-) : ServiceConnection {
-    private var remoteFS = CompletableDeferred<FileSystemManager>()
+) {
     @Volatile
     private var cachedHasRoot: Boolean? = null
     @Volatile
@@ -47,39 +32,17 @@ class RootInstaller(
     @Volatile
     private var cachedIsMagisk: Boolean? = null
 
-    override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-        val ipc = IRootSystemService.Stub.asInterface(service)
-        val binder = ipc.fileSystemService
-
-        remoteFS.complete(FileSystemManager.getRemote(binder))
-    }
-
-    override fun onServiceDisconnected(name: ComponentName?) {
-        remoteFS = CompletableDeferred()
-    }
-
-    private suspend fun awaitRemoteFS(): FileSystemManager {
-        if (remoteFS.isActive) {
-            withContext(Dispatchers.Main) {
-                val intent = Intent(app, ManagerRootService::class.java)
-                RootService.bind(intent, this@RootInstaller)
-            }
-        }
-
-        return withTimeoutOrNull(Duration.ofSeconds(20L)) {
-            remoteFS.await()
-        } ?: throw RootServiceException()
-    }
-
     private suspend fun getShell() = with(CompletableDeferred<Shell>()) {
         Shell.getShell(::complete)
 
         await()
     }
 
-    // A job keeps no output unless it is given lists to fill, and callers read both streams
-    suspend fun execute(vararg commands: String) =
+    // A job keeps no output unless it is given lists to fill, and callers read both streams.
+    // It blocks until the shell answers, so it never runs on the caller's thread
+    suspend fun execute(vararg commands: String): Shell.Result = withContext(Dispatchers.IO) {
         getShell().newJob().add(*commands).to(ArrayList(), ArrayList()).exec()
+    }
 
     fun hasRootAccess(): Boolean {
         Shell.isAppGrantedRoot()?.let { granted ->
@@ -124,7 +87,7 @@ class RootInstaller(
     suspend fun isMagisk(): Boolean {
         cachedIsMagisk?.let { return it }
         return Shell.isAppGrantedRoot() == true &&
-                withContext(Dispatchers.IO) { execute("magisk -V").isSuccess }.also { cachedIsMagisk = it }
+                execute("magisk -V").isSuccess.also { cachedIsMagisk = it }
     }
 
     suspend fun isAppMounted(packageName: String) = withContext(Dispatchers.IO) {
@@ -177,9 +140,6 @@ class RootInstaller(
     ) = withContext(Dispatchers.IO) {
         require(isValidPackageName(packageName)) { "Invalid package name: $packageName" }
 
-        val remoteFS = awaitRemoteFS()
-        val assets = app.assets
-
         // Use new path for new installations
         val moduleId = moduleId(packageName)
         val modulePath = "$MODULES_PATH/$moduleId"
@@ -196,7 +156,7 @@ class RootInstaller(
                 error("Stock APK package (${stockInfo.packageName}) does not match $packageName")
             }
 
-            val installedInfo = pm.getPackageInfo(packageName)
+            val installedInfo = installedStockInfo
             val stockAlreadyInstalled = installedInfo != null &&
                     pm.getVersionCode(installedInfo) == pm.getVersionCode(stockInfo) &&
                     installedInfo.versionName == stockInfo.versionName
@@ -216,56 +176,42 @@ class RootInstaller(
         }
 
         onStage(MountStage.COPYING)
-        val moduleDir = remoteFS.getFile(modulePath)
-        if (!moduleDir.exists() && !moduleDir.mkdirs()) {
-            throw IOException("Failed to create module directory: $modulePath")
-        }
-
-        listOf(
-            "service.sh",
-            "post-fs-data.sh",
-            "module.prop",
-        ).forEach { file ->
-            assets.open("root/$file").use { inputStream ->
-                remoteFS.getFile("$modulePath/$file").newOutputStream()
-                    .use { outputStream ->
-                        val content = String(inputStream.readBytes())
-                            .replace("\r\n", "\n")
-                            .replace("\r", "\n")
-                            .replace("__PKG_NAME__", packageName)
-                            .replace("__MANAGER_PKG__", app.packageName)
-                            .replace("__MODULE_ID__", moduleId)
-                            .replace("__VERSION__", version)
-                            .replace("__LABEL__", label)
-                            .toByteArray()
-
-                        outputStream.write(content)
-                    }
-            }
-        }
-
         val installedStockPath = installedStockInfo?.applicationInfo?.sourceDir
         val stockMountPaths = collectStockMountPaths(packageName, installedStockPath)
         val stockModuleApk = "$modulePath/$packageName-stock.apk"
         val stockSourcePath = stockSourceFile?.absolutePath ?: installedStockPath
         val stockModuleApkWritten = !stockSourcePath.isNullOrBlank() && stockMountPaths.isNotEmpty()
+
+        val placeholders = mapOf(
+            "__PKG_NAME__" to packageName,
+            "__MANAGER_PKG__" to app.packageName,
+            "__MODULE_ID__" to moduleId,
+            "__VERSION__" to version,
+            "__LABEL__" to label
+        )
+        val moduleFiles = MODULE_FILES.associateWith { file ->
+            app.assets.open("root/$file").use { String(it.readBytes()) }
+                .replace("\r\n", "\n")
+                .replace("\r", "\n")
+                .let { text -> placeholders.entries.fold(text) { acc, (key, value) -> acc.replace(key, value) } }
+        }
+        val stockPathsFile = if (stockModuleApkWritten) {
+            mapOf(STOCK_PATHS_FILE to stockMountPaths.joinToString("\n", postfix = "\n"))
+        } else {
+            emptyMap()
+        }
+        writeModuleFiles(modulePath, moduleFiles + stockPathsFile)
+
         if (stockModuleApkWritten) {
             copyIntoPlace(stockSourcePath, stockModuleApk, "Stock APK doesn't exist")
-
-            remoteFS.getFile("$modulePath/stock-paths.txt").newOutputStream().use { outputStream ->
-                outputStream.write(stockMountPaths.joinToString("\n", postfix = "\n").toByteArray())
-            }
         }
+        val patchedModuleApk = "$modulePath/$packageName.apk"
+        copyIntoPlace(patchedAPK.absolutePath, patchedModuleApk, "File doesn't exist")
 
-        "$modulePath/$packageName.apk".let { apkPath ->
-            copyIntoPlace(patchedAPK.absolutePath, apkPath, "File doesn't exist")
-
-            setModuleFilePermissions(
-                modulePath = modulePath,
-                patchedApkPath = apkPath,
-                stockApkPath = stockModuleApk.takeIf { stockModuleApkWritten }
-            )
-        }
+        setModuleFilePermissions(
+            modulePath = modulePath,
+            apkPaths = listOfNotNull(patchedModuleApk, stockModuleApk.takeIf { stockModuleApkWritten })
+        )
     }
 
     suspend fun installAsPlayStore(apkFile: File) = withContext(Dispatchers.IO) {
@@ -283,25 +229,17 @@ class RootInstaller(
     }
 
     suspend fun uninstall(packageName: String) {
-        val remoteFS = awaitRemoteFS()
         if (isAppMounted(packageName))
             unmount(packageName)
 
-        val moduleDir = remoteFS.getFile("$MODULES_PATH/${moduleId(packageName)}")
-
-        if (!moduleDir.exists()) return
-
-        moduleDir.deleteRecursively().also { deleted ->
-            if (!deleted) throw Exception("Failed to delete files")
-        }
+        execute("rm -rf ${"$MODULES_PATH/${moduleId(packageName)}".shellQuote()}")
+            .assertSuccess("Failed to delete files")
     }
 
     /**
      * Resolve the path of the patched APK stored in the Morphe module directory.
      */
     private suspend fun resolvePatchedApkPath(packageName: String): String {
-        // Asked of the shell already open, since the file service would first have to start a
-        // root process of its own, which takes seconds and is all a plain mount needs it for
         val moduleApk = "$MODULES_PATH/${moduleId(packageName)}/$packageName.apk"
         if (execute("test -f ${moduleApk.shellQuote()}").isSuccess) return moduleApk
 
@@ -313,9 +251,6 @@ class RootInstaller(
      * moves it over the target once every byte is there. The module's APK is bind mounted
      * over the app at boot, so a copy cut short by a full disk or a power loss must never
      * be left under the name the mount script looks for.
-     *
-     * The root shell copies it rather than the file service, which keeps writing after its
-     * stream is closed and so cannot tell when the staging file is complete.
      */
     private suspend fun copyIntoPlace(sourcePath: String, targetPath: String, missingMessage: String) {
         val source = sourcePath.shellQuote()
@@ -377,43 +312,23 @@ class RootInstaller(
         ).distinct()
     }
 
-    private suspend fun setModuleFilePermissions(
-        modulePath: String,
-        patchedApkPath: String,
-        stockApkPath: String?
-    ) {
-        var lastResult: Shell.Result? = null
-        val applied = withTimeoutOrNull(MODULE_PERMISSION_SETTLE_TIMEOUT) {
-            while (true) {
-                val modulePathQuoted = modulePath.shellQuote()
-                val patchedApkPathQuoted = patchedApkPath.shellQuote()
-                val stockApkPathQuoted = stockApkPath?.shellQuote()
-                val commands = buildList {
-                    add("test -f $patchedApkPathQuoted && test -f $modulePathQuoted/service.sh && test -f $modulePathQuoted/post-fs-data.sh")
-                    add("chmod 644 $patchedApkPathQuoted")
-                    add("chown system:system $patchedApkPathQuoted")
-                    add("chcon u:object_r:apk_data_file:s0 $patchedApkPathQuoted")
-                    stockApkPathQuoted?.let { path ->
-                        add("test -f $path")
-                        add("chmod 644 $path")
-                        add("chown system:system $path")
-                        add("chcon u:object_r:apk_data_file:s0 $path")
-                    }
-                    add("chmod +x $modulePathQuoted/service.sh")
-                    add("chmod +x $modulePathQuoted/post-fs-data.sh")
-                }
-                val result = execute(*commands.toTypedArray())
-                if (result.isSuccess) return@withTimeoutOrNull true
-
-                lastResult = result
-                delay(MODULE_PERMISSION_RETRY)
-            }
-        } == true
-
-        if (!applied) {
-            lastResult?.assertSuccess("Failed to set file permissions")
-                ?: throw Exception("Failed to set file permissions")
+    /** Writes each of [files] under its name into [modulePath], which is created first. */
+    private suspend fun writeModuleFiles(modulePath: String, files: Map<String, String>) {
+        val commands = listOf("mkdir -p ${modulePath.shellQuote()}") + files.map { (name, content) ->
+            "printf '%s' ${content.shellQuote()} > ${"$modulePath/$name".shellQuote()}"
         }
+        execute(commands.joinToString(" && ")).assertSuccess("Failed to write the module files")
+    }
+
+    private suspend fun setModuleFilePermissions(modulePath: String, apkPaths: List<String>) {
+        val commands = apkPaths.map { it.shellQuote() }.flatMap { path ->
+            listOf(
+                "chmod 644 $path",
+                "chown system:system $path",
+                "chcon u:object_r:apk_data_file:s0 $path"
+            )
+        } + MODULE_SCRIPTS.map { "chmod +x ${"$modulePath/$it".shellQuote()}" }
+        execute(commands.joinToString(" && ")).assertSuccess("Failed to set file permissions")
     }
 
     // The toybox nsenter reads every option up to the command as its own and rejects
@@ -469,8 +384,11 @@ class RootInstaller(
         private const val ROOT_CHECK_INTERVAL_MS = 1_000L
         private val STOCK_INSTALL_SETTLE_TIMEOUT = Duration.ofSeconds(30L)
         private val STOCK_INSTALL_SETTLE_POLL = 1_000.milliseconds
-        private val MODULE_PERMISSION_SETTLE_TIMEOUT = Duration.ofSeconds(10L)
-        private val MODULE_PERMISSION_RETRY = 500.milliseconds
+
+        /** The scripts the root manager runs, which have to be executable. */
+        private val MODULE_SCRIPTS = listOf("service.sh", "post-fs-data.sh")
+        private val MODULE_FILES = MODULE_SCRIPTS + "module.prop"
+        private const val STOCK_PATHS_FILE = "stock-paths.txt"
     }
 }
 
@@ -480,8 +398,6 @@ enum class MountStage {
     COPYING,
     MOUNTING
 }
-
-class RootServiceException : Exception("Root not available")
 
 class StockAppInstallException(detail: String) : Exception(
     if (detail.isBlank()) "Failed to install stock app" else "Failed to install stock app: $detail"
