@@ -1414,7 +1414,7 @@ Details: %2$s"</string>
     <string name="unmounted">Unmounted</string>
     <string name="remount">Remount</string>
     <string name="restore">Restore</string>
-    <string name="google_play">Google Play</string>
+    <string name="google_play" translatable="false">Google Play</string>
     <string name="share">Share</string>
     <string name="install">Install</string>
     <string name="installed">Installed</string>
