@@ -1,3 +1,12 @@
+# [1.35.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v1.35.0-dev.2...v1.35.0-dev.3) (2026-10-08)
+
+
+### Bug Fixes
+
+* Detect patch updates in loosely written third-party changelogs ([9c5d4bf](https://github.com/MorpheApp/morphe-manager/commit/9c5d4bf49a5377629ae4aede2773b51d1ceb69ed))
+* Show patch updates for single-app bundles regardless of changelog scopes ([176234d](https://github.com/MorpheApp/morphe-manager/commit/176234d611a3b5f3cbe1c6f740ef838773e79be2))
+* Take dialog text colors from the theme outside dialogs ([bfbf73b](https://github.com/MorpheApp/morphe-manager/commit/bfbf73b97c1e309b499485735d6f5482c8d379fc))
+
 # [1.35.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v1.35.0-dev.1...v1.35.0-dev.2) (2026-10-08)
 
 
