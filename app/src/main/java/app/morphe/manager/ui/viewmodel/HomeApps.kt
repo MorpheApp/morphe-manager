@@ -986,6 +986,9 @@ class HomeApps(
             .filter { runCatching { it.fetchChangelogEntries() }.isSuccess }
             .associateBy { it.uid }
 
+        // Third-party authors rarely scope their commits, which would hide a single-app bundle's updates
+        val soleApps = soleAppByUid(patchBundleRepository.allBundlesInfoFlow.first())
+
         val updates = mutableMapOf<String, AppPatchUpdate>()
 
         installedApps.forEach { app ->
@@ -1000,8 +1003,10 @@ class HomeApps(
                 // Bundle is newer - refine with changelog if available.
                 // No changelog → show badge (network error or local bundle).
                 // No resolvable app name → show badge (can't match scopes).
+                // Bundle lists only this app → show badge (every change is for it).
                 // Known name, no matching scope → no badge.
                 val unscoped = AppPatchUpdate(bundleUid, storedVersion)
+                if (soleApps[bundleUid] == app.originalPackageName) return@firstNotNullOfOrNull unscoped
                 val source = readableByUid[bundleUid] ?: return@firstNotNullOfOrNull unscoped
                 if (appNames.isEmpty()) return@firstNotNullOfOrNull unscoped
                 // The same releases the update's changelog lists, so the badge never promises
@@ -1056,3 +1061,7 @@ internal fun outdatedBundleUids(
         isNewerVersion(storedVersion, currentVersion)
     }.keys
 }
+
+/** The app each single-app bundle lists, by bundle uid. */
+internal fun soleAppByUid(bundles: Map<Int, PatchBundleInfo>): Map<Int, String> =
+    bundles.mapNotNull { (uid, info) -> info.listedApps().singleOrNull()?.let { uid to it } }.toMap()
