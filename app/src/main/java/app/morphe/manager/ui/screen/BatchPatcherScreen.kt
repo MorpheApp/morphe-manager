@@ -226,18 +226,20 @@ fun BatchPatcherScreen(
     // The same dialog the single-app flow uses, pointed at one queued app instead of the
     // patcher, so the queue never has to grow a second patch list
     viewModel.edit?.let { edit ->
-        // Reading the property re-walks and re-sorts every bundle's patches, so it is taken once
-        val allPatchesInfo = edit.allPatchesInfo
         val sources by patchBundleRepository.sources.collectAsStateWithLifecycle()
         val sourcesByUid = remember(sources) { sources.associateBy { it.uid } }
         ExpertModeDialog(
             packageName = edit.packageName,
             appName = edit.appName,
-            newPatches = edit.newPatches,
-            options = edit.options,
-            allPatchesInfo = allPatchesInfo,
-            totalSelectedCount = edit.totalSelectedCount,
-            totalPatchesCount = allPatchesInfo.sumOf { (_, patches) -> patches.size },
+            selection = ExpertPatchSelection(
+                allPatchesInfo = edit.allPatchesInfo,
+                options = edit.options,
+                totalSelectedCount = edit.totalSelectedCount,
+                newPatches = edit.newPatches,
+                savedPatches = edit.savedSelection,
+                lockStateOf = edit::lockStateOf,
+                holdsUniversalPatches = edit::selectAllHoldsUniversal
+            ),
             hasMultipleBundles = edit.hasMultipleBundles,
             patchActions = ExpertPatchActions(
                 onPatchToggle = edit::togglePatch,
@@ -249,12 +251,7 @@ fun BatchPatcherScreen(
                 onOptionChange = edit::updateOption,
                 onResetOptions = edit::resetOptions
             ),
-            savedPatches = edit.savedSelection,
-            lockStateOf = edit::lockStateOf,
-            holdsUniversalPatches = edit::selectAllHoldsUniversal,
-            prereleaseBundleUids = allPatchesInfo.mapNotNull { (bundle, _) ->
-                bundle.uid.takeIf { sourcesByUid[it]?.usesPrerelease == true }
-            }.toSet(),
+            usesPrerelease = { sourcesByUid[it]?.usesPrerelease == true },
             proceedText = stringResource(R.string.save),
             // The queue combines sources by design, and the tabs make it plain enough
             warnOnMultipleBundles = false,

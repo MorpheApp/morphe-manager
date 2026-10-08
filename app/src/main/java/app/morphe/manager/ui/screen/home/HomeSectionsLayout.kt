@@ -351,6 +351,28 @@ private fun AdaptiveContent(
         Modifier
     }
 
+    // Both layouts feed the list the same and only set it in their own padding
+    val appsSection = @Composable { horizontalPadding: Dp, showFadeOverlay: Boolean ->
+        MainAppsSection(
+            apps = apps,
+            appActions = appActions,
+            state = state,
+            searchState = searchState,
+            filterMode = filterMode,
+            onClearFilter = onClearFilter,
+            onFilterClick = onSortClick,
+            onBundlesClick = chromeActions.onBundlesClick,
+            itemSpacing = itemSpacing,
+            horizontalPadding = horizontalPadding,
+            maxCardWidth = maxCardWidth,
+            onboardingState = onboardingState,
+            footerBar = footerBar,
+            showFadeOverlay = showFadeOverlay,
+            fillHeight = isGroupedAppView,
+            modifier = if (isGroupedAppView) Modifier.fillMaxSize() else Modifier.fillMaxWidth()
+        )
+    }
+
     Column(modifier = Modifier.fillMaxSize()) {
         if (useTwoColumns) {
             // Sidebar layout for landscape
@@ -404,23 +426,7 @@ private fun AdaptiveContent(
                                 Spacer(modifier = Modifier.height(itemSpacing))
                             }
                             Box(modifier = Modifier.weight(1f, fill = isGroupedAppView)) {
-                                MainAppsSection(
-                                    apps = apps,
-                                    appActions = appActions,
-                                    state = state,
-                                    searchState = searchState,
-                                    filterMode = filterMode,
-                                    onClearFilter = onClearFilter,
-                                    onFilterClick = onSortClick,
-                                    onBundlesClick = chromeActions.onBundlesClick,
-                                    itemSpacing = itemSpacing,
-                                    maxCardWidth = maxCardWidth,
-                                    onboardingState = onboardingState,
-                                    footerBar = footerBar,
-                                    showFadeOverlay = false,
-                                    fillHeight = isGroupedAppView,
-                                    modifier = if (isGroupedAppView) Modifier.fillMaxSize() else Modifier.fillMaxWidth()
-                                )
+                                appsSection(0.dp, false)
                             }
                         }
                         // Footer stays pinned to the bottom of the pane regardless of view mode
@@ -471,23 +477,7 @@ private fun AdaptiveContent(
 
                 // Section 3: Scrollable app buttons
                 Box(modifier = Modifier.weight(1f, fill = isGroupedAppView)) {
-                    MainAppsSection(
-                        apps = apps,
-                        appActions = appActions,
-                        state = state,
-                        searchState = searchState,
-                        filterMode = filterMode,
-                        onClearFilter = onClearFilter,
-                        onFilterClick = onSortClick,
-                        onBundlesClick = chromeActions.onBundlesClick,
-                        itemSpacing = itemSpacing,
-                        horizontalPadding = contentPadding,
-                        maxCardWidth = maxCardWidth,
-                        onboardingState = onboardingState,
-                        footerBar = footerBar,
-                        fillHeight = isGroupedAppView,
-                        modifier = if (isGroupedAppView) Modifier.fillMaxSize() else Modifier.fillMaxWidth()
-                    )
+                    appsSection(contentPadding, true)
                 }
             }
             // Section 4: footer controls - pinned to the bottom of the screen,

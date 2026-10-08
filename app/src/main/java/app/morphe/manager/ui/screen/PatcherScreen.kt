@@ -545,6 +545,12 @@ private fun PatcherScreenContent(
     val patchSources by produceState(emptyList(), patcherViewModel) {
         value = patcherViewModel.collectSelectedBundleMetadata()
     }
+    val patchedAppSummary = PatchedAppSummary(
+        packageName = patcherViewModel.packageName,
+        version = patcherViewModel.version,
+        patchCount = patcherViewModel.patchCount,
+        sources = patchSources
+    )
 
     // Main content
     Column(
@@ -615,13 +621,25 @@ private fun PatcherScreenContent(
                     }
 
                     PatchingSuccess(
-                        packageName = patcherViewModel.packageName,
-                        version = patcherViewModel.version,
-                        patchCount = patcherViewModel.patchCount,
-                        sources = patchSources,
+                        summary = patchedAppSummary,
                         installState = shownInstallState,
                         installedPackageName = installedPackageName,
                         usingMountInstall = usingMountInstall,
+                        installActions = InstallResultActions(
+                            onInstall = ::installPatchedApp,
+                            onUninstall = { packageName ->
+                                installViewModel.requestUninstall(packageName, installAfterUninstall = true)
+                            },
+                            onIgnoreSignatureMismatch = installViewModel::installIgnoringSignatureMismatch,
+                            onOpen = installViewModel::openApp,
+                            onShowInstallError = {
+                                scope.launch {
+                                    // A run that patched fine has not collected these yet
+                                    if (state.errorInfo == null) state.errorInfo = patcherViewModel.buildErrorInfo()
+                                    state.shownFailure = PatcherFailure.INSTALL
+                                }
+                            }
+                        ),
                         excludedPatches = excludedPatches,
                         isExpertMode = useExpertMode,
                         showBackToGameHint = showBackToGameHint,
@@ -632,21 +650,6 @@ private fun PatcherScreenContent(
                                 scope.launch { prefs.backToGameHintSeen.update(true) }
                             }
                             patcherViewModel.hideSuccessScreen()
-                        },
-                        onInstall = ::installPatchedApp,
-                        onUninstall = { packageName ->
-                            installViewModel.requestUninstall(packageName, installAfterUninstall = true)
-                        },
-                        onIgnoreSignatureMismatch = installViewModel::installIgnoringSignatureMismatch,
-                        onOpen = {
-                            installViewModel.openApp()
-                        },
-                        onShowInstallError = {
-                            scope.launch {
-                                // A run that patched fine has not collected these yet
-                                if (state.errorInfo == null) state.errorInfo = patcherViewModel.buildErrorInfo()
-                                state.shownFailure = PatcherFailure.INSTALL
-                            }
                         },
                         onHomeClick = onBackClick,
                         onSaveClick = {
@@ -660,10 +663,7 @@ private fun PatcherScreenContent(
 
                 PatcherState.FAILED -> {
                     PatchingFailed(
-                        packageName = patcherViewModel.packageName,
-                        version = patcherViewModel.version,
-                        patchCount = patcherViewModel.patchCount,
-                        sources = patchSources,
+                        summary = patchedAppSummary,
                         errorMessage = state.errorMessage,
                         onHomeClick = onBackClick,
                         onErrorClick = { state.shownFailure = PatcherFailure.PATCHING },

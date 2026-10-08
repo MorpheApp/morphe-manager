@@ -234,27 +234,37 @@ private val ExceptionPackage = Regex("""^(?:[a-z_][\w$]*\.)+(?=[A-Z][\w$]*:)""")
  */
 private fun String.withShortExceptionName(): String = replaceFirst(ExceptionPackage, "")
 
+/** What a finished run patched, which the result screen heads itself with either way it ended. */
+data class PatchedAppSummary(
+    val packageName: String,
+    val version: String?,
+    val patchCount: Int,
+    val sources: List<PatchSourceRef>
+)
+
+/** What the success screen's install controls do with the patched app. */
+class InstallResultActions(
+    val onInstall: () -> Unit,
+    val onUninstall: (packageName: String) -> Unit,
+    val onIgnoreSignatureMismatch: () -> Unit,
+    val onOpen: () -> Unit,
+    val onShowInstallError: () -> Unit
+)
+
 /**
  * Patching success screen.
  */
 @Composable
 fun PatchingSuccess(
-    packageName: String,
-    version: String?,
-    patchCount: Int,
-    sources: List<PatchSourceRef>,
+    summary: PatchedAppSummary,
     installState: InstallState,
     installedPackageName: String?,
     usingMountInstall: Boolean,
+    installActions: InstallResultActions,
     excludedPatches: List<String> = emptyList(),
     isExpertMode: Boolean = false,
     showBackToGameHint: Boolean = false,
     onConfigureAppLinks: (() -> Unit)? = null,
-    onInstall: () -> Unit,
-    onUninstall: (String) -> Unit,
-    onIgnoreSignatureMismatch: () -> Unit,
-    onOpen: () -> Unit,
-    onShowInstallError: () -> Unit,
     onHomeClick: () -> Unit,
     onLogsClick: () -> Unit,
     onSaveClick: () -> Unit,
@@ -264,17 +274,14 @@ fun PatchingSuccess(
 
     ResultScreen(
         status = status,
-        packageName = packageName,
-        version = version,
-        patchCount = patchCount,
-        sources = sources,
+        summary = summary,
         notices = {
             ResultNotice(
                 text = (installState as? InstallState.Error)?.message,
                 tone = SemanticTone.Error,
                 icon = Icons.Outlined.ErrorOutline,
                 maxLines = ERROR_NOTICE_LINES,
-                overflowAction = NoticeAction(stringResource(R.string.patcher_error_details), onShowInstallError)
+                overflowAction = NoticeAction(stringResource(R.string.patcher_error_details), installActions.onShowInstallError)
             )
             ResultNotice(
                 text = stringResource(R.string.patcher_conflict_hint).takeIf { installState is InstallState.Conflict },
@@ -300,10 +307,7 @@ fun PatchingSuccess(
                 installState = installState,
                 failed = status.failed,
                 usingMountInstall = usingMountInstall,
-                onInstall = onInstall,
-                onUninstall = onUninstall,
-                onIgnoreSignatureMismatch = onIgnoreSignatureMismatch,
-                onOpen = onOpen
+                actions = installActions
             )
         },
         bottomBar = { horizontalPadding ->
@@ -328,10 +332,7 @@ fun PatchingSuccess(
  */
 @Composable
 fun PatchingFailed(
-    packageName: String,
-    version: String?,
-    patchCount: Int,
-    sources: List<PatchSourceRef>,
+    summary: PatchedAppSummary,
     errorMessage: String?,
     onHomeClick: () -> Unit,
     onErrorClick: () -> Unit,
@@ -339,10 +340,7 @@ fun PatchingFailed(
 ) {
     ResultScreen(
         status = PatchingFailedStatus,
-        packageName = packageName,
-        version = version,
-        patchCount = patchCount,
-        sources = sources,
+        summary = summary,
         notices = {
             // The button under it opens the whole error, so a long one is only cut short here
             ResultNotice(
@@ -391,10 +389,7 @@ fun PatchingFailed(
 @Composable
 private fun ResultScreen(
     status: ResultStatus,
-    packageName: String,
-    version: String?,
-    patchCount: Int,
-    sources: List<PatchSourceRef>,
+    summary: PatchedAppSummary,
     notices: @Composable ColumnScope.() -> Unit,
     actions: @Composable () -> Unit,
     bottomBar: @Composable ColumnScope.(horizontalPadding: Dp) -> Unit
@@ -403,9 +398,9 @@ private fun ResultScreen(
 
     ResultLayout(
         windowSize = windowSize,
-        header = { ResultHeader(status, packageName, windowSize) },
+        header = { ResultHeader(status, summary.packageName, windowSize) },
         details = {
-            ResultSummary(version, patchCount, sources)
+            ResultSummary(summary.version, summary.patchCount, summary.sources)
             notices()
         },
         actions = actions,
@@ -727,10 +722,7 @@ private fun InstallActions(
     installState: InstallState,
     failed: Boolean,
     usingMountInstall: Boolean,
-    onInstall: () -> Unit,
-    onUninstall: (String) -> Unit,
-    onIgnoreSignatureMismatch: () -> Unit,
-    onOpen: () -> Unit
+    actions: InstallResultActions
 ) {
     val isInstalling = installState is InstallState.Installing
     val isInstalled = installState is InstallState.Installed
@@ -767,9 +759,9 @@ private fun InstallActions(
             busy = isInstalling,
             onClick = {
                 when {
-                    isInstalled -> onOpen()
-                    conflictPackageName != null -> onUninstall(conflictPackageName)
-                    else -> onInstall()
+                    isInstalled -> actions.onOpen()
+                    conflictPackageName != null -> actions.onUninstall(conflictPackageName)
+                    else -> actions.onInstall()
                 }
             }
         )
@@ -781,7 +773,7 @@ private fun InstallActions(
         ) {
             AppDialogOutlinedButton(
                 text = stringResource(R.string.install_ignore_signature),
-                onClick = onIgnoreSignatureMismatch,
+                onClick = actions.onIgnoreSignatureMismatch,
                 modifier = Modifier.fillMaxWidth()
             )
         }
