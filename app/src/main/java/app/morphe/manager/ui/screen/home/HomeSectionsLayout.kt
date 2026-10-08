@@ -765,13 +765,16 @@ internal fun MainAppsSection(
         }
     }
 
+    // Only the grouping on screen is built, since the query rebuilds it on every keystroke
     val uncategorizedTitle = stringResource(R.string.home_category_uncategorized)
     val categoryGroups = remember(
+        isCustomCategoryView,
         filteredItems,
         apps.categoryState,
-        searchQuery,
+        isFilteringList,
         uncategorizedTitle
     ) {
+        if (!isCustomCategoryView) return@remember emptyList()
         buildHomeCategoryGroups(
             items = filteredItems,
             categoryState = apps.categoryState,
@@ -780,12 +783,14 @@ internal fun MainAppsSection(
         )
     }
     val sourceCategoryGroups = remember(
+        isSourceCategoryView,
         filteredItems,
         apps.sourceGroups,
         apps.categoryState.uncategorizedCollapsed,
-        searchQuery,
+        isFilteringList,
         uncategorizedTitle
     ) {
+        if (!isSourceCategoryView) return@remember emptyList()
         buildHomeSourceGroups(
             items = filteredItems,
             sourceGroups = apps.sourceGroups,
@@ -854,13 +859,20 @@ internal fun MainAppsSection(
             state.activeSourceUid = null
         }
     }
+    // Cheap key - the block only reads firstSelectedPackage, so passing the full keys
+    // list would allocate on every recomp
+    val firstSelectedPackage = selectedPackages.keys.firstOrNull()
+    val hasSelection = firstSelectedPackage != null
+    // Unfiltered groups, read only to find the group a selection belongs to
     val groupedReorderGroups = remember(
         appGrouping,
+        hasSelection,
         homeAppItems,
         apps.categoryState,
         apps.sourceGroups,
         uncategorizedTitle
     ) {
+        if (!hasSelection) return@remember emptyList()
         when (appGrouping) {
             HomeAppCategoryViewMode.SOURCES -> buildHomeSourceGroups(
                 items = homeAppItems,
@@ -880,9 +892,6 @@ internal fun MainAppsSection(
             HomeAppCategoryViewMode.ALL_APPS -> emptyList()
         }
     }
-    // Cheap key - the block only reads firstSelectedPackage, so passing the full keys
-    // list would allocate on every recomp
-    val firstSelectedPackage = selectedPackages.keys.firstOrNull()
     val groupedSelectionGroup = remember(
         appGrouping,
         firstSelectedPackage,
