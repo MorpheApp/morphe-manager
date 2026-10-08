@@ -7,8 +7,6 @@ package app.morphe.manager.ui.viewmodel
 
 import androidx.compose.ui.graphics.Color
 import app.morphe.manager.domain.bundles.AppVersionStatus
-import app.morphe.manager.domain.manager.HomeAppCategoryState
-import app.morphe.manager.domain.manager.HomeAppCategoryViewMode
 import app.morphe.manager.domain.manager.HomeAppSortMode
 import app.morphe.manager.ui.model.HomeAppItem
 import java.io.File
@@ -33,11 +31,7 @@ class HomeCardCacheTest {
         hiddenPackages = emptySet(),
         customOrder = emptyList(),
         sourceOrders = emptyMap(),
-        sortMode = HomeAppSortMode.entries.first(),
-        categoryState = HomeAppCategoryState(emptyList(), emptyMap()),
-        categoryViewMode = HomeAppCategoryViewMode.ALL_APPS,
-        showCategoryViewSwitcher = false,
-        expandedSourceGroups = emptySet()
+        sortMode = HomeAppSortMode.entries.first()
     )
 
     private fun item(packageName: String, savedApk: File? = null) = HomeAppItem(
@@ -62,23 +56,20 @@ class HomeCardCacheTest {
         nameSuffix = "web"
     )
 
-    private fun state(vararg items: HomeAppItem) = HomeAppState(
+    private fun cards(vararg items: HomeAppItem) = HomeCards(
         visible = items.toList(),
         hidden = emptyList(),
         sortMode = prefs.sortMode,
-        categoryState = prefs.categoryState,
-        categoryViewMode = prefs.categoryViewMode,
-        showCategoryViewSwitcher = prefs.showCategoryViewSwitcher,
         sourceGroups = listOf(HomeAppSourceGroup(0, "Morphe", setOf("a"), listOf("a"), false, null, null))
     )
 
     @Test
     fun `cards written by one run are read back by the next`() {
         val saved = dir.resolve("saved.apk").apply { writeText("apk") }
-        val written = state(item("a", saved))
+        val written = cards(item("a", saved))
         HomeCardCache(file).write(written)
 
-        val read = assertNotNull(HomeCardCache(file).read()).toState(emptyList(), prefs)
+        val read = assertNotNull(HomeCardCache(file).read()).toCards(emptyList(), prefs)
 
         assertEquals(written, read)
     }
@@ -86,11 +77,11 @@ class HomeCardCacheTest {
     @Test
     fun `a cache cleared while the app runs is written again by the next build`() {
         val cache = HomeCardCache(file)
-        val cards = state(item("a"))
-        cache.write(cards)
+        val written = cards(item("a"))
+        cache.write(written)
         file.delete()
 
-        cache.write(cards)
+        cache.write(written)
 
         assertTrue(file.exists())
     }
@@ -98,17 +89,17 @@ class HomeCardCacheTest {
     @Test
     fun `a saved APK removed since is not offered from the cache`() {
         val saved = dir.resolve("saved.apk").apply { writeText("apk") }
-        HomeCardCache(file).write(state(item("a", saved)))
+        HomeCardCache(file).write(cards(item("a", saved)))
         saved.delete()
 
-        val read = assertNotNull(HomeCardCache(file).read()).toState(emptyList(), prefs)
+        val read = assertNotNull(HomeCardCache(file).read()).toCards(emptyList(), prefs)
 
         assertNull(read.visible.single().savedApkFile)
     }
 
     @Test
     fun `cards of another format are dropped`() {
-        HomeCardCache(file).write(state(item("a")))
+        HomeCardCache(file).write(cards(item("a")))
         file.writeText(file.readText().replace("\"format\":1", "\"format\":0"))
 
         assertNull(HomeCardCache(file).read())
