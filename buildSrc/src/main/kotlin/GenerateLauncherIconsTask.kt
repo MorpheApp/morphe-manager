@@ -69,9 +69,11 @@ abstract class GenerateLauncherIconsTask : DefaultTask() {
 
         manifestFile.get().asFile.writeText(buildString {
             appendLine("""<?xml version="1.0" encoding="utf-8"?>""")
+            // Lint checks this manifest on its own, without the main manifest's optional touchscreen
+            // feature and TV banner exemption, so both are repeated here
             appendLine("""<manifest xmlns:android="http://schemas.android.com/apk/res/android"""")
-            appendLine("""    xmlns:tools="http://schemas.android.com/tools">""")
-            // Lint checks this manifest on its own, so it repeats the main manifest's TV banner exemption
+            appendLine("""    xmlns:tools="http://schemas.android.com/tools"""")
+            appendLine("""    tools:ignore="ImpliedTouchscreenHardware">""")
             appendLine("""    <application tools:ignore="MissingTvBanner">""")
             icons.forEachIndexed { index, icon ->
                 val suffix = suffix(icon)
