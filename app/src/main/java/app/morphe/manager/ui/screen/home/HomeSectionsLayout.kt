@@ -78,6 +78,7 @@ data class HomeAppListUi(
     val installedAppsLoading: Boolean,
     val showGestureHint: Boolean,
     val sortMode: HomeAppSortMode,
+    val filterMode: HomeAppFilterMode,
     val categoryState: HomeAppCategoryState,
     val categoryViewMode: HomeAppCategoryViewMode,
     val showCategoryViewSwitcher: Boolean,
@@ -102,6 +103,7 @@ class HomeAppActions(
     val onResetSourceOrder: (Int) -> Unit,
     val onSaveSourceGroupOrder: (List<Int>) -> Unit,
     val onSortModeChange: (HomeAppSortMode) -> Unit,
+    val onFilterModeChange: (HomeAppFilterMode) -> Unit,
     val onCategoryViewModeChange: (HomeAppCategoryViewMode) -> Unit,
     val onCreateCategory: (String) -> String,
     val onRenameCategory: (String, String) -> Unit,
@@ -180,7 +182,10 @@ fun SectionsLayout(
         onClose = { searchVisible.value = false }
     )
     var showListOptionsDialog by remember { mutableStateOf(false) }
-    var filterMode by rememberSaveable { mutableStateOf(HomeAppFilterMode.ALL) }
+    // The saved filter applies only while the sort button is there to undo it. Not written back
+    // when the button goes, since it is also absent while the list is still loading
+    val filterMode = if (chromeFlags.showSortButton) apps.filterMode else HomeAppFilterMode.ALL
+    val onClearFilter = { appActions.onFilterModeChange(HomeAppFilterMode.ALL) }
 
     // Held here rather than in the section, since the footer bar docks over the bottom action
     // bar, which hides while it is up
@@ -192,17 +197,12 @@ fun SectionsLayout(
     )
     val footerBar = remember { HomeFooterBarHost() }
 
-    // Drop the filter if the button disappears, otherwise the list stays trimmed with no way back
-    LaunchedEffect(chromeFlags.showSortButton) {
-        if (!chromeFlags.showSortButton) filterMode = HomeAppFilterMode.ALL
-    }
-
     if (showListOptionsDialog) {
         HomeAppListOptionsDialog(
             sortMode = apps.sortMode,
             filterMode = filterMode,
             onSortModeChange = appActions.onSortModeChange,
-            onFilterModeChange = { mode -> filterMode = mode },
+            onFilterModeChange = appActions.onFilterModeChange,
             onDismiss = { showListOptionsDialog = false }
         )
     }
@@ -229,7 +229,7 @@ fun SectionsLayout(
                     chromeActions = chromeActions,
                     chromeFlags = chromeFlags,
                     filterMode = filterMode,
-                    onClearFilter = { filterMode = HomeAppFilterMode.ALL },
+                    onClearFilter = onClearFilter,
                     onSortClick = { showListOptionsDialog = true },
                     state = sectionState,
                     footerBar = footerBar,
@@ -410,6 +410,7 @@ private fun AdaptiveContent(
                                     searchState = searchState,
                                     filterMode = filterMode,
                                     onClearFilter = onClearFilter,
+                                    onFilterClick = onSortClick,
                                     onBundlesClick = chromeActions.onBundlesClick,
                                     itemSpacing = itemSpacing,
                                     maxCardWidth = maxCardWidth,
@@ -476,6 +477,7 @@ private fun AdaptiveContent(
                         searchState = searchState,
                         filterMode = filterMode,
                         onClearFilter = onClearFilter,
+                        onFilterClick = onSortClick,
                         onBundlesClick = chromeActions.onBundlesClick,
                         itemSpacing = itemSpacing,
                         horizontalPadding = contentPadding,
@@ -638,6 +640,7 @@ internal fun MainAppsSection(
     searchState: HomeSearchState,
     filterMode: HomeAppFilterMode,
     onClearFilter: () -> Unit,
+    onFilterClick: () -> Unit,
     onBundlesClick: () -> Unit,
     footerBar: HomeFooterBarHost,
     modifier: Modifier = Modifier,
@@ -1121,6 +1124,10 @@ internal fun MainAppsSection(
     // An active filter takes the empty state, since clearing it is the way out the user needs
     val isFilterEmpty = isListEmpty && isFilterActive
     val isSearchEmpty = isListEmpty && !isFilterActive && searchQuery.isNotBlank()
+    // Counted apart from the query, so the filter row tells what the filter alone keeps out of view
+    val filterHiddenCount = remember(homeAppItems, filterMode) {
+        if (filterMode.isActive) homeAppItems.count { !filterMode.matches(it) } else 0
+    }
 
     Box(
         modifier = modifier.fillMaxWidth(),
@@ -1184,6 +1191,23 @@ internal fun MainAppsSection(
                                 value = searchQuery,
                                 onValueChange = searchState.onQueryChange,
                                 requestFocus = searchState.visible,
+                                modifier = Modifier
+                                    .padding(horizontal = horizontalPadding)
+                                    .padding(bottom = 8.dp)
+                            )
+                        }
+
+                        // Active filter, kept above the list so a trimmed list never reads as the full one
+                        AnimatedVisibility(
+                            visible = isFilterActive && !isFilterEmpty && !state.isLoading,
+                            enter = Animations.expandFadeEnter,
+                            exit = Animations.shrinkFadeExit
+                        ) {
+                            HomeActiveFilterRow(
+                                filterMode = filterMode,
+                                hiddenCount = filterHiddenCount,
+                                onClick = onFilterClick,
+                                onClear = onClearFilter,
                                 modifier = Modifier
                                     .padding(horizontal = horizontalPadding)
                                     .padding(bottom = 8.dp)
@@ -1450,6 +1474,65 @@ private fun Modifier.coveredByFooterBar(covered: Boolean): Modifier {
             Modifier
         }
     )
+}
+
+/**
+ * The filter in effect with how many apps it keeps out of view, in the glass of the home chrome.
+ * Tinted as the highlighted sort button is, so both read as the same state. Tapping it reopens
+ * the list options to change the filter; the close button beside it drops it.
+ */
+@Composable
+private fun HomeActiveFilterRow(
+    filterMode: HomeAppFilterMode,
+    hiddenCount: Int,
+    onClick: () -> Unit,
+    onClear: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    // Holds the last active filter through the exit animation, once the live one is back to ALL
+    var shownMode by remember { mutableStateOf(filterMode) }
+    var shownCount by remember { mutableIntStateOf(hiddenCount) }
+    if (filterMode.isActive) {
+        shownMode = filterMode
+        shownCount = hiddenCount
+    }
+
+    val highlight = BottomActionTone.Highlight.colors()
+
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        GlassButton(
+            label = pluralStringResource(
+                R.plurals.home_app_filter_active,
+                shownCount,
+                stringResource(shownMode.labelRes),
+                shownCount
+            ),
+            selected = true,
+            onClick = onClick,
+            modifier = Modifier.weight(1f),
+            icon = Icons.Outlined.FilterList,
+            containerColor = highlight.container,
+            contentColor = highlight.content,
+            border = CardBorder.of(highlight.border),
+            role = Role.Button,
+            pressScale = true,
+            hapticFeedback = true
+        )
+        GlassButton(
+            label = stringResource(R.string.clear),
+            selected = false,
+            onClick = onClear,
+            modifier = Modifier.width(48.dp),
+            icon = Icons.Outlined.Close,
+            role = Role.Button,
+            pressScale = true,
+            hapticFeedback = true
+        )
+    }
 }
 
 private fun LazyListScope.filterEmptyState(

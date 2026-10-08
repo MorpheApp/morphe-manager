@@ -112,6 +112,14 @@ class HomeAppButtonPreferences(context: Context) {
     private val _sortMode = MutableStateFlow(loadSortMode())
     val sortMode: StateFlow<HomeAppSortMode> = _sortMode.asStateFlow()
 
+    /**
+     * Name of the status filter last picked for the home list, kept as a raw name since the
+     * filter itself lives with the UI. Left out of [exportState], so a restored backup never
+     * opens on a trimmed list.
+     */
+    private val _filterMode = MutableStateFlow(prefs.getString(KEY_FILTER_MODE, null))
+    val filterMode: StateFlow<String?> = _filterMode.asStateFlow()
+
     private val _categoryState = MutableStateFlow(loadCategoryState())
     val categoryState: StateFlow<HomeAppCategoryState> = _categoryState.asStateFlow()
 
@@ -256,6 +264,14 @@ class HomeAppButtonPreferences(context: Context) {
         _sortMode.value = mode
     }
 
+    /** Persist the home list filter by its enum [name], or drop it when [name] is null. */
+    fun setFilterMode(name: String?) {
+        prefs.edit {
+            if (name == null) remove(KEY_FILTER_MODE) else putString(KEY_FILTER_MODE, name)
+        }
+        _filterMode.value = name
+    }
+
     fun setCategoryViewMode(mode: HomeAppCategoryViewMode) {
         prefs.edit { putString(KEY_CATEGORY_VIEW_MODE, mode.name) }
         _categoryViewMode.value = mode
@@ -269,6 +285,8 @@ class HomeAppButtonPreferences(context: Context) {
     fun setShowSortButton(show: Boolean) {
         prefs.edit { putBoolean(KEY_SHOW_SORT_BUTTON, show) }
         _showSortButton.value = show
+        // The filter is set from the sort button, so it goes with it rather than coming back unseen
+        if (!show) setFilterMode(null)
     }
 
     /**
@@ -559,6 +577,7 @@ class HomeAppButtonPreferences(context: Context) {
         private const val KEY_CUSTOM_ORDER = "custom_order"
         private const val KEY_SOURCE_ORDERS = "source_orders"
         private const val KEY_SORT_MODE = "sort_mode"
+        private const val KEY_FILTER_MODE = "filter_mode"
         private const val KEY_CATEGORIES = "categories"
         private const val KEY_CATEGORY_ASSIGNMENTS = "category_assignments"
         private const val KEY_CATEGORY_VIEW_MODE = "category_view_mode"

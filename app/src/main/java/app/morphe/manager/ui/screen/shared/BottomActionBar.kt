@@ -327,14 +327,14 @@ private fun labelsFit(labels: List<String>, barWidth: Dp, horizontalPadding: Dp)
 }
 
 @Immutable
-private data class BottomActionColors(
+internal data class BottomActionColors(
     val container: Color,
     val content: Color,
     val border: Color
 )
 
 @Composable
-private fun BottomActionTone.colors(): BottomActionColors {
+internal fun BottomActionTone.colors(): BottomActionColors {
     val scheme = MaterialTheme.colorScheme
     // Every tone but Neutral borrows the selected treatment of the tab bar, so an emphasized
     // action reads at the same weight as the active settings tab

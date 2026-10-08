@@ -47,6 +47,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import app.morphe.manager.domain.batch.BatchTarget
+import app.morphe.manager.domain.manager.HomeAppButtonPreferences
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.model.navigation.*
@@ -353,6 +354,7 @@ private fun MorpheManager(vm: MainViewModel) {
     val navController = rememberNavController()
     val scope = rememberCoroutineScope()
     val prefs: PreferencesManager = koinInject()
+    val homeAppButtonPrefs: HomeAppButtonPreferences = koinInject()
     val backgroundType by prefs.backgroundType.getAsState()
     val enableParallax by prefs.enableBackgroundParallax.getAsState()
     val resolvedRandomBackground =
@@ -589,6 +591,8 @@ private fun MorpheManager(vm: MainViewModel) {
 
     // Every entry point starts the tour from its first step on the home screen
     val startOnboardingTour: () -> Unit = {
+        // The tour points at app cards, which a saved filter could leave out of the list
+        homeAppButtonPrefs.setFilterMode(null)
         onboardingPhase = OnboardingPhase.HOME
         phaseInitialStep = 0
         showOnboardingOverlay = true

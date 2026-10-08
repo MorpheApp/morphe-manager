@@ -113,6 +113,7 @@ fun HomeScreen(
     val showSearchButton by homeViewModel.apps.showSearchButton.collectAsStateWithLifecycle()
     val batchRun by homeViewModel.batchRun.collectAsStateWithLifecycle()
     val showSortButtonPref by homeAppButtonPrefs.showSortButton.collectAsStateWithLifecycle()
+    val homeAppFilterModePref by homeAppButtonPrefs.filterMode.collectAsStateWithLifecycle()
     val useExpertMode by prefs.useExpertMode.getAsState()
 
     // Gesture hint: shown once per bundle addition, in-memory
@@ -306,6 +307,7 @@ fun HomeScreen(
                     installedAppsLoading = bundlePipelineLoading || homeViewModel.installedAppsLoading,
                     showGestureHint = showGestureHint,
                     sortMode = homeAppSortMode,
+                    filterMode = HomeAppFilterMode.fromPreference(homeAppFilterModePref),
                     categoryState = homeAppCategoryState,
                     categoryViewMode = homeAppCategoryViewMode,
                     showCategoryViewSwitcher = showCategoryViewSwitcher,
@@ -350,6 +352,9 @@ fun HomeScreen(
                         homeViewModel.apps.saveAppSourceGroupOrder(sourceUids)
                     },
                     onSortModeChange = { mode -> homeViewModel.apps.setAppSortMode(mode) },
+                    onFilterModeChange = { mode ->
+                        homeAppButtonPrefs.setFilterMode(mode.name.takeIf { mode.isActive })
+                    },
                     onCategoryViewModeChange = { mode -> homeViewModel.apps.setAppCategoryViewMode(mode) },
                     onCreateCategory = { name -> homeViewModel.apps.createAppCategory(name) },
                     onRenameCategory = { categoryId, name ->
