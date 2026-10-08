@@ -221,12 +221,14 @@ class PatcherViewModel(
 
     /**
      * Offered after the patcher process was killed, holding the lower limit that might get the
-     * run through. The limit is the user's setting, so it is only ever a suggestion.
+     * run through. The limit is the user's setting, so it is only ever a suggestion. [finished]
+     * marks a run that got through anyway once the limit was lowered on the way.
      */
     data class MemoryAdjustmentDialogState(
         val currentLimit: Int,
         val suggestedLimit: Int,
-        val canAdjust: Boolean
+        val canAdjust: Boolean,
+        val finished: Boolean = false
     )
 
     var memoryAdjustmentDialog by mutableStateOf<MemoryAdjustmentDialogState?>(null)
@@ -241,6 +243,15 @@ class PatcherViewModel(
 
     fun dismissMemoryAdjustment() {
         memoryAdjustmentDialog = null
+    }
+
+    private fun offerMemoryAdjustment(currentLimit: Int, suggestedLimit: Int, finished: Boolean) {
+        memoryAdjustmentDialog = MemoryAdjustmentDialogState(
+            currentLimit = currentLimit,
+            suggestedLimit = suggestedLimit,
+            canAdjust = suggestedLimit < currentLimit,
+            finished = finished
+        )
     }
 
     /**
@@ -470,8 +481,8 @@ class PatcherViewModel(
             val file = inputFile ?: return false
             // Files under originalApksDir back the repatch flow and outlive this VM.
             val savedOriginalsRoot = fs.originalApksDir.absolutePath + File.separator
-            if (file.absolutePath.startsWith(savedOriginalsRoot)) return false
-            return (selectedApp as? SelectedApp.Local)?.temporary == true
+            return !file.absolutePath.startsWith(savedOriginalsRoot) &&
+                    (selectedApp as? SelectedApp.Local)?.temporary == true
         }
 
     val outputFile = tempDir.resolve("output.apk")
@@ -929,7 +940,7 @@ class PatcherViewModel(
         val selectedForRun = when (val selected = input.selectedApp) {
             is SelectedApp.Local -> {
                 val reuseFile = inputFile ?: selected.file
-                val temporary = if (forceKeepLocalInput) false else selected.temporary
+                val temporary = !forceKeepLocalInput && selected.temporary
                 selected.copy(file = reuseFile, temporary = temporary)
             }
 
@@ -1002,6 +1013,16 @@ class PatcherViewModel(
                     WorkInfo.State.SUCCEEDED -> {
                         forceKeepLocalInput = false
                         patchRun.stopStallWatch()
+
+                        // Every later run would lose the same attempt to the same kill
+                        val loweredLimit = workInfo.outputData.getInt(PatcherWorker.PROCESS_LOWERED_LIMIT_KEY, -1)
+                        if (loweredLimit > 0) {
+                            offerMemoryAdjustment(
+                                currentLimit = workInfo.outputData.getInt(PatcherWorker.PROCESS_PREVIOUS_LIMIT_KEY, -1),
+                                suggestedLimit = loweredLimit,
+                                finished = true
+                            )
+                        }
 
                         // Save original APK before deleting temporary file (blocking).
                         // Launched independently so cancelling observeWorkerJob (new patch run)
@@ -1099,11 +1120,7 @@ class PatcherViewModel(
                 val suggestedLimit = lowerMemoryLimit(currentLimit)
                 // The setting is left alone until the user accepts the suggestion: silently
                 // lowering it made the configured limit drift down across failed runs
-                memoryAdjustmentDialog = MemoryAdjustmentDialogState(
-                    currentLimit = currentLimit,
-                    suggestedLimit = suggestedLimit,
-                    canAdjust = suggestedLimit < currentLimit
-                )
+                offerMemoryAdjustment(currentLimit, suggestedLimit, finished = false)
             }
         }
     }

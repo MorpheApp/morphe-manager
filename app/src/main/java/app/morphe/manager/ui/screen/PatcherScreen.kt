@@ -423,6 +423,7 @@ private fun PatcherScreenContent(
                 currentLimit = dialogState.currentLimit,
                 suggestedLimit = dialogState.suggestedLimit,
                 canAdjust = dialogState.canAdjust,
+                finished = dialogState.finished,
                 onApply = patcherViewModel::applyMemoryAdjustment,
                 onDismiss = patcherViewModel::dismissMemoryAdjustment
             )
@@ -606,7 +607,8 @@ private fun PatcherScreenContent(
                     // does not: an auto-install is under way before it is reported, and a conflict
                     // this run resolves by dialog is not a screen state at all
                     val shownInstallState = when {
-                        effectiveIsInstalling -> InstallViewModel.InstallState.Installing
+                        effectiveIsInstalling -> installState as? InstallViewModel.InstallState.Installing
+                            ?: InstallViewModel.InstallState.Installing()
                         installState is InstallViewModel.InstallState.Conflict && autoHandleConflict ->
                             InstallViewModel.InstallState.Ready
                         else -> installState

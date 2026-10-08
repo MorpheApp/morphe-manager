@@ -510,9 +510,12 @@ Outer zone (dashed): may be clipped by the launcher mask - keep important detail
     <string name="home_app_info_app_update_available_description">The patch sources support a newer version of this app. Patch it again to move to that version</string>
     <string name="home_app_info_newest_supported_version">Newest supported</string>
     <string name="home_app_info_version_move">Installed %1$s, newest supported %2$s</string>
+    <string name="home_app_info_version_restore">Installed %1$s, patched %2$s</string>
     <string name="home_app_info_app_deleted_warning">App was uninstalled</string>
     <string name="home_app_info_app_deleted_description">This app was uninstalled outside the Morphe. Repatch it to restore functionality</string>
     <string name="home_app_info_not_patched_description">An unpatched version of this app is installed. Morphe still has its previous patch record</string>
+    <string name="home_app_info_mount_replaced_description">Another version replaced the mounted app, so the patch no longer applies. Restore puts the patched version back</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play updated the mounted app, so the patch no longer applies. Restore puts the patched version back. Turn off auto-update for it in Google Play to keep it patched</string>
     <string name="app_links_title">Supported web links</string>
     <string name="app_links_description">On Android 12+, links to supported domains open in your browser by default unless approved</string>
     <string name="app_links_unverified_banner_title">Web links not verified</string>
@@ -648,6 +651,7 @@ Uninstalling will permanently erase all app data"</string>
     <string name="patcher_memory_adjustment_title">Not enough memory</string>
     <string name="patcher_memory_adjustment_description">The patcher was stopped by the system while running with a %1$d MB memory limit. Lowering the limit to %2$d MB makes the patcher a smaller target and can let the run finish</string>
     <string name="patcher_memory_adjustment_description_at_minimum">The patcher was stopped by the system while running with a %1$d MB memory limit, which is already the lowest available. Try patching with fewer patch sources, or select fewer patches</string>
+    <string name="patcher_memory_adjustment_description_finished">The system stopped the patcher at a %1$d MB memory limit, and it only finished at %2$d MB. Starting at %2$d MB skips that lost attempt next time</string>
     <string name="patcher_memory_adjustment_apply">Lower to %1$d MB</string>
 
     <!-- Patcher Screen - Patcher Worker -->
@@ -927,6 +931,10 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="notification_channel_patch_updates">Patch updates</string>
     <string name="notification_channel_patch_updates_description">Notifications about new patch releases</string>
     <string name="notification_channel_patcher_description">Shown while Morphe is patching an app in the background</string>
+    <string name="notification_channel_mounted_apps">Mounted apps</string>
+    <string name="notification_channel_mounted_apps_description">When another version replaced a mounted app and its patch no longer applies</string>
+    <string name="notification_mount_replaced_title">%1$s is no longer patched</string>
+    <string name="notification_mount_replaced_text">v%1$s replaced the patched v%2$s. Open Morphe to restore it</string>
 
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expert settings</string>
@@ -1407,6 +1415,8 @@ Details: %2$s"</string>
     <string name="unmount">Unmount</string>
     <string name="unmounted">Unmounted</string>
     <string name="remount">Remount</string>
+    <string name="restore">Restore</string>
+    <string name="google_play">Google Play</string>
     <string name="share">Share</string>
     <string name="install">Install</string>
     <string name="installed">Installed</string>
@@ -1427,6 +1437,8 @@ Details: %2$s"</string>
     <string name="sources">Sources</string>
     <string name="installing_ellipsis">Installing…</string>
     <string name="mounting_ellipsis">Mounting…</string>
+    <string name="mount_stage_restoring_stock">Restoring original…</string>
+    <string name="mount_stage_copying">Copying…</string>
     <string name="unmounting_ellipsis">Unmounting…</string>
     <string name="importing_ellipsis">Importing…</string>
     <string name="imported_successfully">Imported successfully</string>

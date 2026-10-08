@@ -102,6 +102,10 @@ class InstalledAppInfoViewModel(
         private set
     var isInstallStateNotPatched by mutableStateOf(false)
         private set
+
+    /** Whether the unpatched install that replaced the record came from Google Play. */
+    var isReplacedByPlayStore by mutableStateOf(false)
+        private set
     var isInstallStateUnknown by mutableStateOf(false)
         private set
     var canRemoveRecord by mutableStateOf(false)
@@ -311,6 +315,8 @@ class InstalledAppInfoViewModel(
         )
         isAppDeleted = trackedPresentation.isDeleted
         isInstallStateNotPatched = trackedPresentation.isNotPatched
+        isReplacedByPlayStore = isInstallStateNotPatched &&
+                pm.getInstallerPackageName(app.currentPackageName) == PLAY_STORE_INSTALLER_PACKAGE
         isInstallStateUnknown = trackedPresentation.isUnknown
 
         canRemoveRecord = canRemoveTrackedRecord(app.installType, trackedPatchState, hasSavedCopy)

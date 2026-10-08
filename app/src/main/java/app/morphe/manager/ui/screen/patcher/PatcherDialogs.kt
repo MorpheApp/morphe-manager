@@ -427,14 +427,15 @@ fun BatteryOptimizationDialog(
 
 /**
  * Shown after the system killed the patcher process, offering the lower memory limit that
- * might get the next run through. The limit is a user setting, so nothing changes until it
- * is accepted here.
+ * might get the next run through, or the one a [finished] run got through on. The limit is a
+ * user setting, so nothing changes until it is accepted here.
  */
 @Composable
 fun MemoryAdjustmentDialog(
     currentLimit: Int,
     suggestedLimit: Int,
     canAdjust: Boolean,
+    finished: Boolean,
     onApply: () -> Unit,
     onDismiss: () -> Unit,
 ) {
@@ -443,7 +444,8 @@ fun MemoryAdjustmentDialog(
         title = stringResource(R.string.patcher_memory_adjustment_title),
         description = if (canAdjust) {
             stringResource(
-                R.string.patcher_memory_adjustment_description,
+                if (finished) R.string.patcher_memory_adjustment_description_finished
+                else R.string.patcher_memory_adjustment_description,
                 currentLimit,
                 suggestedLimit
             )

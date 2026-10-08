@@ -44,6 +44,8 @@ class RootInstaller(
     private var cachedHasRoot: Boolean? = null
     @Volatile
     private var lastRootCheck = 0L
+    @Volatile
+    private var cachedIsMagisk: Boolean? = null
 
     override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
         val ipc = IRootSystemService.Stub.asInterface(service)
@@ -115,6 +117,16 @@ class RootInstaller(
         File(path, "su").canExecute()
     } ?: false
 
+    /**
+     * Whether root comes from Magisk, which never hides module mounts from apps as KernelSU and
+     * APatch can. Only asked once root is granted, so it never raises the root prompt itself.
+     */
+    suspend fun isMagisk(): Boolean {
+        cachedIsMagisk?.let { return it }
+        return Shell.isAppGrantedRoot() == true &&
+                withContext(Dispatchers.IO) { execute("magisk -V").isSuccess }.also { cachedIsMagisk = it }
+    }
+
     suspend fun isAppMounted(packageName: String) = withContext(Dispatchers.IO) {
         pm.getPackageInfo(packageName)?.applicationInfo?.sourceDir?.let {
             execute("mount | grep -F ${it.shellQuote()}").isSuccess
@@ -160,7 +172,8 @@ class RootInstaller(
         stockAPK: File?,
         packageName: String,
         version: String,
-        label: String
+        label: String,
+        onStage: (MountStage) -> Unit = {}
     ) = withContext(Dispatchers.IO) {
         require(isValidPackageName(packageName)) { "Invalid package name: $packageName" }
 
@@ -189,6 +202,7 @@ class RootInstaller(
                     installedInfo.versionName == stockInfo.versionName
 
             if (!stockAlreadyInstalled) {
+                onStage(MountStage.RESTORING_STOCK)
                 val result = installStockApp(stockApp, packageName)
                 val stockInstalled = waitForInstalledStock(packageName, stockInfo)
                 if (!stockInstalled) {
@@ -201,6 +215,7 @@ class RootInstaller(
             stockSourceFile = stockApp
         }
 
+        onStage(MountStage.COPYING)
         val moduleDir = remoteFS.getFile(modulePath)
         if (!moduleDir.exists() && !moduleDir.mkdirs()) {
             throw IOException("Failed to create module directory: $modulePath")
@@ -218,6 +233,7 @@ class RootInstaller(
                             .replace("\r\n", "\n")
                             .replace("\r", "\n")
                             .replace("__PKG_NAME__", packageName)
+                            .replace("__MANAGER_PKG__", app.packageName)
                             .replace("__MODULE_ID__", moduleId)
                             .replace("__VERSION__", version)
                             .replace("__LABEL__", label)
@@ -284,9 +300,10 @@ class RootInstaller(
      * Resolve the path of the patched APK stored in the Morphe module directory.
      */
     private suspend fun resolvePatchedApkPath(packageName: String): String {
-        val remoteFS = awaitRemoteFS()
+        // Asked of the shell already open, since the file service would first have to start a
+        // root process of its own, which takes seconds and is all a plain mount needs it for
         val moduleApk = "$MODULES_PATH/${moduleId(packageName)}/$packageName.apk"
-        if (remoteFS.getFile(moduleApk).exists()) return moduleApk
+        if (execute("test -f ${moduleApk.shellQuote()}").isSuccess) return moduleApk
 
         throw Exception("Patched APK not found for mount")
     }
@@ -455,6 +472,13 @@ class RootInstaller(
         private val MODULE_PERMISSION_SETTLE_TIMEOUT = Duration.ofSeconds(10L)
         private val MODULE_PERMISSION_RETRY = 500.milliseconds
     }
+}
+
+/** The steps of a mount install that take long enough to be named while they run. */
+enum class MountStage {
+    RESTORING_STOCK,
+    COPYING,
+    MOUNTING
 }
 
 class RootServiceException : Exception("Root not available")

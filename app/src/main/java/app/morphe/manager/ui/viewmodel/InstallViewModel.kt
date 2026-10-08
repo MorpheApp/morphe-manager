@@ -11,6 +11,7 @@ import android.content.pm.PackageInfo
 import android.net.Uri
 import android.os.SystemClock
 import android.util.Log
+import androidx.annotation.StringRes
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -29,6 +30,15 @@ import org.koin.core.component.inject
 import java.io.File
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
+
+/** What a running mount install is doing, in the words its button shows. */
+@get:StringRes
+val MountStage.labelRes: Int
+    get() = when (this) {
+        MountStage.RESTORING_STOCK -> R.string.mount_stage_restoring_stock
+        MountStage.COPYING -> R.string.mount_stage_copying
+        MountStage.MOUNTING -> R.string.mounting_ellipsis
+    }
 
 /**
  * Centralized view model for all installation operations, mounting/unmounting and exporting.
@@ -52,8 +62,8 @@ class InstallViewModel : ViewModel(), KoinComponent {
         /** Ready to install - shows Install button. */
         data object Ready : InstallState()
 
-        /** Currently installing - shows progress indicator. */
-        data object Installing : InstallState()
+        /** Currently installing - shows progress indicator, named by [stage] for a mount install. */
+        data class Installing(val stage: MountStage? = null) : InstallState()
 
         /** Successfully installed - shows Open button. */
         data class Installed(val packageName: String) : InstallState()
@@ -216,7 +226,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
                 return@launch
             }
 
-            installState = InstallState.Installing
+            installState = InstallState.Installing()
 
             try {
                 // APK metadata reads parse the archive on disk; keep them off the main thread
@@ -835,7 +845,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
 
         viewModelScope.launch {
             currentInstallType = InstallType.MOUNT
-            installState = InstallState.Installing
+            installState = InstallState.Installing()
 
             try {
                 val inputs = withContext(Dispatchers.IO) {
@@ -916,10 +926,12 @@ class InstallViewModel : ViewModel(), KoinComponent {
                     stockCandidate?.file,
                     packageName,
                     patchedVersion,
-                    label
+                    label,
+                    onStage = { installState = InstallState.Installing(it) }
                 )
 
                 // Mount
+                installState = InstallState.Installing(MountStage.MOUNTING)
                 rootInstaller.mount(packageName)
 
                 // Persist app data once the mount is in place, since the saved record makes
@@ -1111,7 +1123,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
         val callback = pendingPersistCallback ?: return
 
         viewModelScope.launch {
-            installState = InstallState.Installing
+            installState = InstallState.Installing()
             currentInstallType = InstallType.DEFAULT
             try {
                 performStandardInstall(file, originalPkg, callback)
@@ -1213,7 +1225,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
         installAfterUninstall: Boolean
     ) {
         if (installAfterUninstall && shouldUseShizukuUninstallForPendingInstall()) {
-            installState = InstallState.Installing
+            installState = InstallState.Installing()
             when (val result = sessionInstaller.uninstallShizuku(packageName)) {
                 UninstallResult.Success -> {
                     if (waitUntilPackageRemoved(packageName)) {

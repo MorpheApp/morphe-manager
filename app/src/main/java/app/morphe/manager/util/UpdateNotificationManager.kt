@@ -29,12 +29,14 @@ import app.morphe.manager.patcher.worker.PatcherWorker
  * |---------------------------------|--------------------|---------------------------|
  * | [showManagerUpdateNotification] | FCM / WorkManager  | New manager APK available |
  * | [showBundleUpdateNotification]  | FCM / WorkManager  | New patches available     |
+ * | [showMountReplacedNotification] | Mount module boot  | Mounted app was replaced  |
  *
  * On GMS devices, FCM is the primary delivery path (bypasses Doze).
  * On non-GMS devices, WorkManager uses the same methods as a fallback.
  *
  * Channels are created once in [createNotificationChannels], called from
- * [app.morphe.manager.ManagerApplication.onCreate].
+ * [app.morphe.manager.ManagerApplication.onCreate], except [CHANNEL_MOUNTED_APPS], which only
+ * a device with a mounted app needs and gets with its first notification.
  */
 class UpdateNotificationManager(private val context: Context) {
 
@@ -142,7 +144,7 @@ class UpdateNotificationManager(private val context: Context) {
     fun showManagerUpdateNotification(version: String? = null) {
         postNotification(
             channelId = CHANNEL_MANAGER_UPDATES,
-            titleRes = R.string.home_update_available,
+            title = context.getString(R.string.home_update_available),
             contentText = if (!version.isNullOrBlank())
                 context.getString(R.string.notification_update_text, version)
             else
@@ -169,7 +171,7 @@ class UpdateNotificationManager(private val context: Context) {
     ) {
         postNotification(
             channelId = CHANNEL_PATCH_UPDATES,
-            titleRes = R.string.notification_bundle_update_title,
+            title = context.getString(R.string.notification_bundle_update_title),
             contentText = if (!version.isNullOrBlank())
                 context.getString(R.string.notification_update_text, version)
             else
@@ -184,29 +186,68 @@ class UpdateNotificationManager(private val context: Context) {
     }
 
     /**
-     * Builds and posts a high-priority update notification on [channelId].
-     * Uses IMPORTANCE_HIGH so the device wakes from Doze. Tapping the notification
-     * opens [MainActivity] and triggers an update check via [EXTRA_TRIGGER_UPDATE_CHECK].
+     * Post that [installedVersion] replaced the mounted [patchedVersion] of [packageName], as found
+     * by [app.morphe.manager.receiver.MountReplacedReceiver]. Tagged per package.
+     */
+    fun showMountReplacedNotification(
+        packageName: String,
+        label: String,
+        installedVersion: String,
+        patchedVersion: String
+    ) {
+        // Created on first use, so only a device that mounted an app lists it. Kept apart from
+        // the update channels, since muting those must not silence a patch that stopped applying
+        val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        manager.createNotificationChannel(
+            channel(
+                CHANNEL_MOUNTED_APPS,
+                R.string.notification_channel_mounted_apps,
+                R.string.notification_channel_mounted_apps_description,
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+        )
+
+        postNotification(
+            channelId = CHANNEL_MOUNTED_APPS,
+            title = context.getString(R.string.notification_mount_replaced_title, label),
+            contentText = context.getString(
+                R.string.notification_mount_replaced_text,
+                installedVersion,
+                patchedVersion
+            ),
+            notificationId = NOTIFICATION_ID_MOUNT_REPLACED,
+            tag = packageName,
+            contentIntent = buildActivityIntent(REQUEST_CODE_MOUNT_REPLACED) {}
+        )
+    }
+
+    /**
+     * Builds and posts a high-priority notification on [channelId], which sets how loudly it
+     * actually arrives. Tapping it runs [contentIntent], by default opening [MainActivity] with
+     * an update check via [EXTRA_TRIGGER_UPDATE_CHECK].
      */
     private fun postNotification(
         channelId: String,
-        titleRes: Int,
+        title: String,
         contentText: String,
         notificationId: Int,
-        action: NotificationCompat.Action? = null
+        action: NotificationCompat.Action? = null,
+        tag: String? = null,
+        contentIntent: PendingIntent = buildOpenAppIntent()
     ) {
         val notification = NotificationCompat.Builder(context, channelId)
             .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle(context.getString(titleRes))
+            .setContentTitle(title)
             .setContentText(contentText)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(contentText))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setContentIntent(buildOpenAppIntent())
+            .setContentIntent(contentIntent)
             .setAutoCancel(true)
             .apply { action?.let { addAction(it) } }
             .build()
 
         val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        manager.notify(notificationId, notification)
+        manager.notify(tag, notificationId, notification)
     }
 
     /**
@@ -269,14 +310,19 @@ class UpdateNotificationManager(private val context: Context) {
         /** Owned by the patcher worker, reused so a queue result lands where patching does. */
         const val CHANNEL_PATCHER = "morphe-patcher-patching"
 
+        /** Notification channel ID for mounted apps whose patch stopped applying. */
+        const val CHANNEL_MOUNTED_APPS = "morphe_mounted_apps"
+
         private const val NOTIFICATION_ID_MANAGER_UPDATE = 2001
         private const val NOTIFICATION_ID_BUNDLE_UPDATE  = 2002
         private const val NOTIFICATION_ID_BATCH_RESULT   = 2005
+        private const val NOTIFICATION_ID_MOUNT_REPLACED = 2007
 
         private const val REQUEST_CODE_UPDATE_CHECK = 1
         private const val REQUEST_CODE_BATCH_RESULT = 2
         private const val REQUEST_CODE_BUNDLE_CHANGELOG = 3
         private const val REQUEST_CODE_MANAGER_CHANGELOG = 4
+        private const val REQUEST_CODE_MOUNT_REPLACED = 5
 
         /**
          * Intent extra key. When set to `true`, [MainActivity] triggers a bundle/manager

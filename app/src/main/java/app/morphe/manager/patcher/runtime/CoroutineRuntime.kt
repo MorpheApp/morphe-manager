@@ -39,7 +39,7 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
         onMergedApkReady: (suspend (File) -> Unit)?,
         // This runtime patches in the app's own process and gets one attempt at it
         onRestart: suspend () -> Unit
-    ) {
+    ): Int? {
         ResourceMonitor.startPolling(logger)
 
         try {
@@ -113,5 +113,8 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
         } finally {
             ResourceMonitor.stopPolling(logger)
         }
+
+        // Patching in the app's own process leaves no heap limit of its own to lower
+        return null
     }
 }

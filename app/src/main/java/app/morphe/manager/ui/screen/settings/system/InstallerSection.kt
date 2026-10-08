@@ -23,6 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.domain.installer.InstallerManager
+import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.installer.ShizukuEnvironment
 import app.morphe.manager.ui.screen.shared.*
@@ -32,6 +33,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.withContext
+import org.koin.compose.koinInject
 import kotlin.time.Duration.Companion.seconds
 
 /**
@@ -340,17 +342,7 @@ fun InstallerSelectionDialog(
                                     selectedToken == InstallerManager.Token.Internal &&
                                     !installAsPlayStore))
 
-            AnimatedVisibility(
-                visible = currentSelection.value == InstallerManager.Token.AutoSaved,
-                enter = Animations.expandFadeEnter,
-                exit = Animations.shrinkFadeExit
-            ) {
-                Notice(
-                    text = stringResource(R.string.root_mount_module_unmount_warning),
-                    tone = SemanticTone.Warning,
-                    icon = Icons.Outlined.Warning
-                )
-            }
+            ModuleUnmountNotice(visible = currentSelection.value == InstallerManager.Token.AutoSaved)
 
             // A divider belongs only between rows that are actually on screen
             val toggleRows = listOf(
@@ -508,6 +500,28 @@ private fun InstallerManager.Token.withPlayStoreMode(enabled: Boolean): Installe
 
 private fun InstallerManager.Token.isShizukuToken(): Boolean =
     baseInstallerToken() == InstallerManager.Token.Shizuku
+
+/**
+ * Warns that a root manager hiding module mounts from an app also hides the patched APK from it.
+ * Magisk never does, so the warning stays off there once root is known to come from it.
+ */
+@Composable
+private fun ModuleUnmountNotice(visible: Boolean = true) {
+    val rootInstaller: RootInstaller = koinInject()
+    val isMagisk by produceState<Boolean?>(null) { value = rootInstaller.isMagisk() }
+
+    AnimatedVisibility(
+        visible = visible && isMagisk == false,
+        enter = Animations.expandFadeEnter,
+        exit = Animations.shrinkFadeExit
+    ) {
+        Notice(
+            text = stringResource(R.string.root_mount_module_unmount_warning),
+            tone = SemanticTone.Warning,
+            icon = Icons.Outlined.Warning
+        )
+    }
+}
 
 @Composable
 private fun AutoUninstallWarningDialog(
@@ -983,11 +997,7 @@ fun PrePatchInstallerDialog(
                 showBorder = true
             )
 
-            Notice(
-                text = stringResource(R.string.root_mount_module_unmount_warning),
-                tone = SemanticTone.Warning,
-                icon = Icons.Outlined.Warning
-            )
+            ModuleUnmountNotice()
 
             // Standard Install option
             SettingsItem(

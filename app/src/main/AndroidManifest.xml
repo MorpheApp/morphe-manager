@@ -181,6 +181,11 @@
             android:name="firebase_analytics_collection_enabled"
             android:value="false" />
 
+        <!-- Told by a mount module at boot that the mounted app was replaced -->
+        <receiver
+            android:name="app.morphe.manager.receiver.MountReplacedReceiver"
+            android:exported="false" />
+
         <!-- Root service for privileged file system operations via libsu -->
         <service
             android:name="app.morphe.manager.service.ManagerRootService"

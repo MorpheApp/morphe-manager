@@ -63,6 +63,7 @@ import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREF
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.InstallViewModel.InstallState
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
+import app.morphe.manager.ui.viewmodel.labelRes
 import app.morphe.manager.util.contrastingContent
 import app.morphe.manager.util.withVersionPrefix
 
@@ -743,7 +744,11 @@ private fun InstallActions(
         ResultActionButton(
             text = stringResource(
                 when {
-                    isInstalling -> if (usingMountInstall) R.string.mounting_ellipsis else R.string.installing_ellipsis
+                    isInstalling -> if (usingMountInstall) {
+                        installState.stage?.labelRes ?: R.string.mounting_ellipsis
+                    } else {
+                        R.string.installing_ellipsis
+                    }
                     isInstalled -> R.string.open
                     conflictPackageName != null -> R.string.uninstall
                     isError -> R.string.retry

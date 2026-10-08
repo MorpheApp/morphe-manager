@@ -58,6 +58,8 @@ sealed class Runtime(context: Context) : KoinComponent {
      *                         The runtime has no further use for the file, so it may be moved.
      * @param onRestart        Called when the current attempt is abandoned and patching starts over,
      *                         so progress reported so far can be dropped instead of accumulating.
+     * @return The heap limit in MB the run only finished under after lowering it, null when the
+     *         limit it started with held.
      */
     abstract suspend fun execute(
         inputFile: String,
@@ -71,5 +73,5 @@ sealed class Runtime(context: Context) : KoinComponent {
         stripUnusedNativeLibs: Boolean,
         onMergedApkReady: (suspend (File) -> Unit)? = null,
         onRestart: suspend () -> Unit = {},
-    )
+    ): Int?
 }

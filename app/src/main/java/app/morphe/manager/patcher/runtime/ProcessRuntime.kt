@@ -199,7 +199,7 @@ class ProcessRuntime(
         stripUnusedNativeLibs: Boolean,
         onMergedApkReady: (suspend (File) -> Unit)?,
         onRestart: suspend () -> Unit
-    ) = coroutineScope {
+    ): Int? {
         var memoryMB = coerceMemoryLimit(context, prefs.patcherProcessMemoryLimit.get())
         var retries = 0
 
@@ -219,7 +219,7 @@ class ProcessRuntime(
                     onMergedApkReady
                 )
 
-                return@coroutineScope
+                return memoryMB.takeIf { retries > 0 }
             } catch (e: Exception) {
                 val nextMemoryMB = lowerMemoryLimit(memoryMB)
                 val retry = e.isReclaimableMemoryFailure() &&
