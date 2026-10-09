@@ -78,6 +78,20 @@ unmount_from_zygote_namespaces() {
   done
 }
 
+# Processes started before the mount, such as System UI, keep what their namespace held, and an
+# APK another root install left there makes them look up the app's resources in another version.
+replace_other_mounts() {
+  for mountinfo in $(grep -lF " $stock_path " /proc/[0-9]*/mountinfo 2>/dev/null); do
+    pid="$(echo "$mountinfo" | cut -d/ -f3)"
+    sources="$(grep -F " $stock_path " "$mountinfo" | cut -d' ' -f4 | grep -vF "${module_dir#/data}/")" ||
+      continue
+    log_msg "Replacing $(echo $sources) in namespace of pid: $pid"
+    while grep -qF " $stock_path " "$mountinfo" &&
+      nsenter -t "$pid" -m -- umount -l "$stock_path" 2>/dev/null; do :; done
+    nsenter -t "$pid" -m -- mount -o bind "$base_path" "$stock_path" 2>/dev/null
+  done
+}
+
 # Unmount any existing installation to prevent multiple mounts.
 # Matches the target field (2nd column) of /proc/mounts so unrelated mounts that happen
 # to contain the package name in another field are ignored, and only paths that end in
@@ -190,4 +204,5 @@ else
   not_mounted "mounting failed, see log.txt"
 fi
 mount_in_zygote_namespaces
+replace_other_mounts
 set_status "Mounted the patched v$version at boot"

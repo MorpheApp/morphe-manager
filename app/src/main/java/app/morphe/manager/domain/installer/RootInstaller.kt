@@ -9,6 +9,7 @@ import android.app.Application
 import android.content.pm.PackageInfo
 import android.os.Process
 import android.os.SystemClock
+import android.util.Log
 import app.morphe.manager.util.PLAY_STORE_INSTALLER_PACKAGE
 import app.morphe.manager.util.PM
 import com.topjohnwu.superuser.Shell
@@ -20,6 +21,8 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
+
+private const val TAG = "Morphe RootInstaller"
 
 class RootInstaller(
     private val app: Application,
@@ -104,13 +107,15 @@ class RootInstaller(
             val stockPath = stockAPK.shellQuote()
             val patchedPath = patchedAPK.shellQuote()
 
-            // Set SELinux context, bind-mount in the root and zygote namespaces, and restart
-            // the app so its next process inherits the patched APK view.
+            // Set SELinux context, bind-mount in the root and zygote namespaces, replace any other
+            // APK running processes still hold, and restart the app so its next process inherits
+            // the patched APK view.
             execute(
                 "chcon u:object_r:apk_data_file:s0 $patchedPath; " +
                         unmountBindCommands(stockPath) + "; " +
                         "mount -o bind $patchedPath $stockPath; " +
                         mountInZygoteNamespacesCommand(patchedPath, stockPath) + "; " +
+                        replaceOtherMountsCommand(packageName, patchedPath, stockPath) + "; " +
                         "am force-stop ${packageName.shellQuote()}"
             ).assertSuccess("Failed to mount APK")
         }
@@ -145,6 +150,7 @@ class RootInstaller(
         val modulePath = "$MODULES_PATH/$moduleId"
 
         unmount(packageName)
+        removeOtherRootInstalls(packageName)
 
         var installedStockInfo = pm.getPackageInfo(packageName)
         var stockSourceFile: File? = null
@@ -339,6 +345,48 @@ class RootInstaller(
                 nsenter -t "$zpid" -m -- mount -o bind $$sourcePath $$targetPath 2>/dev/null || true;
             done
         """.trimIndent()
+
+    // Processes started before the mount, such as System UI, keep what their namespace held, and an
+    // APK another root install left there makes them look up the app's resources in another version.
+    // Morphe's own namespace is skipped so the APK it reads back for patching stays the stock one
+    private fun replaceOtherMountsCommand(packageName: String, sourcePath: String, targetPath: String): String {
+        // Mount tables name a source by its path within the data partition
+        val moduleSource = "${MODULES_PATH.removePrefix("/data")}/${moduleId(packageName)}/".shellQuote()
+
+        return $$"""
+            own_ns=$(readlink /proc/$${Process.myPid()}/ns/mnt);
+            for mountinfo in $(grep -lF " "$$targetPath" " /proc/[0-9]*/mountinfo 2>/dev/null); do
+                pid=$(echo "$mountinfo" | cut -d/ -f3);
+                [ "$(readlink /proc/$pid/ns/mnt)" = "$own_ns" ] && continue;
+                grep -F " "$$targetPath" " "$mountinfo" | cut -d' ' -f4 | grep -qvF $$moduleSource || continue;
+                while grep -qF " "$$targetPath" " "$mountinfo" &&
+                    nsenter -t "$pid" -m -- umount -l $$targetPath 2>/dev/null; do :; done;
+                nsenter -t "$pid" -m -- mount -o bind $$sourcePath $$targetPath 2>/dev/null || true;
+            done
+        """.trimIndent()
+    }
+
+    /**
+     * Removes what other managers' root installs of the app leave behind. They mount their own APK
+     * over the same stock path at boot, racing the module, so only one of them can be kept.
+     */
+    private suspend fun removeOtherRootInstalls(packageName: String) {
+        val paths = listOf(
+            // ReVanced Manager before its rewrite, with a boot script outside the modules
+            "/data/adb/service.d/$packageName.sh",
+            "/data/adb/revanced/$packageName",
+            // ReVanced Manager
+            "$MODULES_PATH/$packageName-ReVanced",
+            // Universal ReVanced Manager, and Morphe before its modules were renamed
+            "$MODULES_PATH/$packageName-revanced"
+        )
+        val removed = execute(
+            paths.joinToString("; ") { path ->
+                "if [ -e ${path.shellQuote()} ]; then rm -rf ${path.shellQuote()} && echo ${path.shellQuote()}; fi"
+            } + "; true"
+        ).out
+        removed.forEach { Log.i(TAG, "Removed another root install: $it") }
+    }
 
     // A namespace can hold the patched APK twice, once propagated from the root namespace and
     // once mounted into it directly, and a single umount only lifts the top one. Morphe's own
