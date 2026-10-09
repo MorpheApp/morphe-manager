@@ -1,3 +1,15 @@
+# [1.35.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.35.0-dev.5...v1.35.0-dev.6) (2026-10-09)
+
+
+### Bug Fixes
+
+* Show the install status on the result button of the patcher logs ([d4885ec](https://github.com/MorpheApp/morphe-manager/commit/d4885ec3053a60d8ed323232a23e9dca85e0c0fd))
+
+
+### Features
+
+* Show only web results in the fallback Google search ([#1134](https://github.com/MorpheApp/morphe-manager/issues/1134)) ([a76ff96](https://github.com/MorpheApp/morphe-manager/commit/a76ff964ded1ac21e22727b96c1807aad1d309f5))
+
 # [1.35.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.35.0-dev.4...v1.35.0-dev.5) (2026-10-09)
 
 
