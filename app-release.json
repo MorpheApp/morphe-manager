@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-10-08T16:09:23",
-  "description": "# [1.35.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.35.0-dev.3...v1.35.0-dev.4) (2026-10-08)\n\n\n### Features\n\n* Rework the adaptive icon creator around the launcher's icon shape ([ffdf2af](https://github.com/MorpheApp/morphe-manager/commit/ffdf2afcdeff976ea61b17d22c0d4a0b214fec84))\n* Rework the header creator around the app bar it lands in ([ace7fda](https://github.com/MorpheApp/morphe-manager/commit/ace7fda5224d0870e46d629207c610215eec5904))\n* Save creator files through the custom picker and into a picked branding folder ([0a48a5a](https://github.com/MorpheApp/morphe-manager/commit/0a48a5aabb61cda6b18947738e100d243f44af16))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.35.0-dev.4/morphe-manager-1.35.0-dev.4.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.35.0-dev.4/morphe-manager-1.35.0-dev.4.apk.asc",
-  "version": "1.35.0-dev.4"
+  "created_at": "2026-10-09T07:00:26",
+  "description": "# [1.35.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.35.0-dev.4...v1.35.0-dev.5) (2026-10-09)\n\n\n### Bug Fixes\n\n* Remove other root installs of a mounted app and replace the APK they leave in running processes ([#1131](https://github.com/MorpheApp/morphe-manager/issues/1131)) ([b1daaa9](https://github.com/MorpheApp/morphe-manager/commit/b1daaa949012263c2fb2962a8fc76b2aeaf3384e))\n* Replace the previous patched APK running processes still hold after a remount ([cf5006e](https://github.com/MorpheApp/morphe-manager/commit/cf5006ed186c4ab886700479686eb918836a836a))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.35.0-dev.5/morphe-manager-1.35.0-dev.5.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.35.0-dev.5/morphe-manager-1.35.0-dev.5.apk.asc",
+  "version": "1.35.0-dev.5"
 }
