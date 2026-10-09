@@ -115,7 +115,7 @@ class RootInstaller(
                         unmountBindCommands(stockPath) + "; " +
                         "mount -o bind $patchedPath $stockPath; " +
                         mountInZygoteNamespacesCommand(patchedPath, stockPath) + "; " +
-                        replaceOtherMountsCommand(packageName, patchedPath, stockPath) + "; " +
+                        replaceOtherMountsCommand(patchedAPK, stockPath) + "; " +
                         "am force-stop ${packageName.shellQuote()}"
             ).assertSuccess("Failed to mount APK")
         }
@@ -348,17 +348,19 @@ class RootInstaller(
 
     // Processes started before the mount, such as System UI, keep what their namespace held, and an
     // APK another root install left there makes them look up the app's resources in another version.
+    // A previous patched APK counts too, it shows up marked deleted once a new one replaced it.
     // Morphe's own namespace is skipped so the APK it reads back for patching stays the stock one
-    private fun replaceOtherMountsCommand(packageName: String, sourcePath: String, targetPath: String): String {
+    private fun replaceOtherMountsCommand(patchedAPK: String, targetPath: String): String {
+        val sourcePath = patchedAPK.shellQuote()
         // Mount tables name a source by its path within the data partition
-        val moduleSource = "${MODULES_PATH.removePrefix("/data")}/${moduleId(packageName)}/".shellQuote()
+        val mountSource = patchedAPK.removePrefix("/data").shellQuote()
 
         return $$"""
             own_ns=$(readlink /proc/$${Process.myPid()}/ns/mnt);
             for mountinfo in $(grep -lF " "$$targetPath" " /proc/[0-9]*/mountinfo 2>/dev/null); do
                 pid=$(echo "$mountinfo" | cut -d/ -f3);
                 [ "$(readlink /proc/$pid/ns/mnt)" = "$own_ns" ] && continue;
-                grep -F " "$$targetPath" " "$mountinfo" | cut -d' ' -f4 | grep -qvF $$moduleSource || continue;
+                grep -F " "$$targetPath" " "$mountinfo" | cut -d' ' -f4 | grep -qvxF $$mountSource || continue;
                 while grep -qF " "$$targetPath" " "$mountinfo" &&
                     nsenter -t "$pid" -m -- umount -l $$targetPath 2>/dev/null; do :; done;
                 nsenter -t "$pid" -m -- mount -o bind $$sourcePath $$targetPath 2>/dev/null || true;

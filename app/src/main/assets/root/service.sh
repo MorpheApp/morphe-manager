@@ -80,10 +80,11 @@ unmount_from_zygote_namespaces() {
 
 # Processes started before the mount, such as System UI, keep what their namespace held, and an
 # APK another root install left there makes them look up the app's resources in another version.
+# A previous patched APK counts too, it shows up marked deleted once a new one replaced it.
 replace_other_mounts() {
   for mountinfo in $(grep -lF " $stock_path " /proc/[0-9]*/mountinfo 2>/dev/null); do
     pid="$(echo "$mountinfo" | cut -d/ -f3)"
-    sources="$(grep -F " $stock_path " "$mountinfo" | cut -d' ' -f4 | grep -vF "${module_dir#/data}/")" ||
+    sources="$(grep -F " $stock_path " "$mountinfo" | cut -d' ' -f4 | grep -vxF "${base_path#/data}")" ||
       continue
     log_msg "Replacing $(echo $sources) in namespace of pid: $pid"
     while grep -qF " $stock_path " "$mountinfo" &&
