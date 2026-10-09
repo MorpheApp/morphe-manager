@@ -570,6 +570,7 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
     <string name="patcher_installing_subtitle">Skoro hotovo! Připrav se na pořádnou jízdu! 🏎️</string>
     <string name="patcher_success_title">Hotovo! 🎉</string>
     <string name="patcher_success_subtitle">Vaše aplikace byla záplatována a nainstalována!</string>
+    <string name="patcher_mounted_subtitle">Vaše aplikace je opravena a připojena!</string>
     <string name="patcher_complete_title">Záplatování dokončeno! ✨</string>
     <string name="patcher_failed_title">Jejda! Něco se pokazilo</string>
     <string name="patcher_failed_dialog_title">Záplatování selhalo</string>
@@ -588,6 +589,7 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
 
 Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="patcher_install_error_title">Chyba instalace</string>
+    <string name="patcher_mount_error_title">Chyba připojení</string>
     <string name="patcher_install_error_subtitle">Zkuste odinstalovat a nainstalovat znovu</string>
     <string name="patcher_ready_to_mount_subtitle">Stiskněte tlačítko níže pro zavedení</string>
     <string name="patcher_patches_excluded_for_installer">Není k dispozici pro tuto metodu instalace a je vyloučeno: %s</string>

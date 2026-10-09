@@ -570,6 +570,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="patcher_installing_subtitle">Neredeyse hazırız! 🎸</string>
     <string name="patcher_success_title">Tamamlandı! 🎉</string>
     <string name="patcher_success_subtitle">Uygulamanız yamalandı ve yüklendi!</string>
+    <string name="patcher_mounted_subtitle">Uygulamanız yamalandı ve bağlandı!</string>
     <string name="patcher_complete_title">Yamalama tamamlandı! ✨</string>
     <string name="patcher_failed_title">Eyvah! Bir şeyler ters gitti</string>
     <string name="patcher_failed_dialog_title">Yamalama başarısız oldu</string>
@@ -588,6 +589,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
 
 Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="patcher_install_error_title">Yükleme hatası</string>
+    <string name="patcher_mount_error_title">Bağlama hatası</string>
     <string name="patcher_install_error_subtitle">Kaldırıp tekrar yüklemeyi deneyin</string>
     <string name="patcher_ready_to_mount_subtitle">Bağlamak için aşağıdaki düğmeye basın</string>
     <string name="patcher_patches_excluded_for_installer">Bu kurulum yöntemi için kullanılamıyor ve hariç tutuldu: %s</string>

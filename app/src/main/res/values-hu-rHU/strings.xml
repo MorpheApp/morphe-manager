@@ -570,6 +570,7 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="patcher_installing_subtitle">Majdnem készen állunk! 🎸</string>
     <string name="patcher_success_title">Kész! 🎉</string>
     <string name="patcher_success_subtitle">Az alkalmazás módosítva és telepítve!</string>
+    <string name="patcher_mounted_subtitle">Az alkalmazásod javítva és csatolva!</string>
     <string name="patcher_complete_title">A javítás befejeződött! ✨</string>
     <string name="patcher_failed_title">Hoppá! Valami hiba történt</string>
     <string name="patcher_failed_dialog_title">A javítás sikertelen</string>
@@ -588,6 +589,7 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
 
 Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="patcher_install_error_title">Telepítési hiba</string>
+    <string name="patcher_mount_error_title">Csatolási hiba</string>
     <string name="patcher_install_error_subtitle">Próbáld meg eltávolítani és újratelepíteni</string>
     <string name="patcher_ready_to_mount_subtitle">Nyomd meg az alábbi gombot a csatoláshoz</string>
     <string name="patcher_patches_excluded_for_installer">Nem érhető el a telepítési módszerhez és kizárt: %s</string>

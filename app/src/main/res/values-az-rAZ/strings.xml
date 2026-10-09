@@ -736,10 +736,10 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="settings_appearance_background_random_interval_3days">3 gün arası</string>
     <string name="settings_appearance_parallax_effect">Parallaks effekti</string>
     <string name="settings_appearance_parallax_effect_description">Cihazı çevirərkən fonu rəvan şəkildə tərpətmək</string>
-    <string name="settings_appearance_seasonal_themes">Mövsümi koloritlər</string>
+    <string name="settings_appearance_seasonal_themes">Mövsümi mövzular</string>
     <string name="settings_appearance_seasonal_themes_description">Bayramlar zamanı şənlik fonları və təbrikləri</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
-    <string name="settings_appearance_seasonal_background_notice">Mövsümi koloritlər aktiv olduğu halda %1$s fonu %2$s-ə qədər aktivdir</string>
+    <string name="settings_appearance_seasonal_background_notice">Mövsümi mövzular aktiv olduğu halda %1$s fonu %2$s-ə qədər aktivdir</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Kolorit</string>
     <string name="settings_appearance_theme_mode">Kolorit rejimi</string>

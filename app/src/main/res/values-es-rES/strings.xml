@@ -401,18 +401,18 @@ Para un mejor resultado, esta aplicación te recomienda parchear un &lt;b&gt;APK
     <string name="adaptive_icon_themed">Temático</string>
     <string name="adaptive_icon_background_color">Color de fondo</string>
     <string name="adaptive_icon_reset_transform">Restablecer posición y escala</string>
-    <string name="adaptive_icon_no_transparency_warning">Esta imagen no tiene píxeles transparentes, por lo que los iconos temáticos y de notificación mantienen el logo de Morphe</string>
+    <string name="adaptive_icon_no_transparency_warning">Esta imagen no tiene píxeles transparentes, por lo que los iconos temáticos y de notificación conservan el logo de Morphe</string>
     <string name="adaptive_icon_created_success">Icono adaptativo creado con éxito</string>
     <string name="adaptive_icon_creation_failed">Error al crear el icono adaptativo</string>
     <string name="adaptive_icon_guide">Guía de creación de iconos</string>
     <string name="adaptive_icon_guide_png_title">Usar un PNG con fondo transparente</string>
-    <string name="adaptive_icon_guide_png_body">Un logo sobre un fondo transparente funciona mejor, con el color de fondo elegido a continuación. En cambio, una imagen sin transparencia ocupa todo el icono, y los iconos temáticos y de notificación mantienen el logo de Morphe.</string>
+    <string name="adaptive_icon_guide_png_body">Un logo sobre un fondo transparente funciona mejor, con el color de fondo elegido abajo. En cambio, una imagen sin transparencia rellena todo el icono, y los iconos temáticos y de notificación conservan el logo de Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Zonas seguras</string>
-    <string name="adaptive_icon_guide_safe_zones_body">El contorno muestra la forma del icono de tu launcher, y todo lo que queda fuera de él se recorta. Otros launchers utilizan otras formas, así que mantén los detalles importantes dentro del círculo discontinuo, que aparece en todas las formas.</string>
+    <string name="adaptive_icon_guide_safe_zones_body">El contorno muestra la forma del icono de tu lanzador, y todo lo que queda fuera se recorta. Otros lanzadores usan otras formas, así que mantén los detalles importantes dentro del círculo discontinuo, que aparece en todas las formas</string>
     <string name="adaptive_icon_guide_notification_title">Icono de notificación</string>
-    <string name="adaptive_icon_guide_notification_body">Recórtalo de la parte visible de la imagen y ajústalo al tamaño de los demás iconos de la barra de estado, independientemente del margen que tenga el archivo. Ajústelo con el control deslizante situado debajo de la vista previa. Android lo muestra en un solo color.</string>
+    <string name="adaptive_icon_guide_notification_body">Recortado de la parte visible de la imagen y ajustado al tamaño de los demás iconos de la barra de estado, independientemente del margen que tenga el archivo. Ajusta su tamaño con el control deslizante bajo la vista previa. Android lo muestra en un solo color.</string>
     <string name="adaptive_icon_guide_monochrome_title">Icono temático</string>
-    <string name="adaptive_icon_guide_monochrome_body">Recorte de la imagen con la misma posición y tamaño que el icono del launcher. En Android 13 y versiones posteriores, los launchers con iconos temáticos activados lo colorean a partir del fondo de pantalla.</string>
+    <string name="adaptive_icon_guide_monochrome_body">Recortado de la imagen con la misma posición y tamaño que el icono del lanzador. En Android 13 o posterior, los lanzadores con iconos temáticos activados lo colorean a partir del fondo de pantalla.</string>
     <string name="notification_icon_preview">Notificación</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Crear encabezado personalizado</string>
@@ -422,11 +422,11 @@ Para un mejor resultado, esta aplicación te recomienda parchear un &lt;b&gt;APK
     <string name="header_creator_failed">Error al crear el encabezado</string>
     <string name="header_creator_guide">Guía de creación de encabezados</string>
     <string name="header_creator_guide_image_title">Requisitos de la imagen</string>
-    <string name="header_creator_guide_image_body">Un PNG con fondo transparente se integra en la barra de la aplicación. Los márgenes alrededor del logo en el archivo se ignoran, por lo que comienza con el tamaño y la ubicación del logo predeterminado.</string>
+    <string name="header_creator_guide_image_body">Un PNG con fondo transparente se integra en la barra de la aplicación. Los márgenes alrededor del logo en el archivo se ignoran, por lo que empieza con el tamaño y la posición del logo predeterminado.</string>
     <string name="header_creator_guide_themes_title">Temas claros y oscuros</string>
     <string name="header_creator_guide_themes_body">La mayoría de las aplicaciones requieren imágenes separadas para los temas claro y oscuro. Algunas aplicaciones (como YouTube Music) solo utilizan el tema oscuro, por lo que solo se muestra esa sección.</string>
     <string name="header_creator_guide_positioning_title">Posicionamiento y escalado</string>
-    <string name="header_creator_guide_positioning_body">Arrastra y pellizca la imagen en el editor o ajústala con el control deslizante. El recuadro discontinuo indica dónde se encuentra el logo de la biblioteca y aparecen guías cuando la imagen se alinea con él.</string>
+    <string name="header_creator_guide_positioning_body">Arrastra y pellizca la imagen en el editor, o ajusta su tamaño con el control deslizante. El recuadro discontinuo marca dónde está el logo predeterminado, y aparecen guías cuando la imagen se alinea con él.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Parchear seleccionados</string>
     <string name="batch_patch_title">Parcheo por lotes</string>
@@ -570,6 +570,7 @@ Para un mejor resultado, esta aplicación te recomienda parchear un &lt;b&gt;APK
     <string name="patcher_installing_subtitle">¡A punto de despegar! 🚀</string>
     <string name="patcher_success_title">¡Listo! 🎉</string>
     <string name="patcher_success_subtitle">¡Tu aplicación está parcheada e instalada!</string>
+    <string name="patcher_mounted_subtitle">¡Tu aplicación está parcheada y montada!</string>
     <string name="patcher_complete_title">¡Parcheo completado! ✨</string>
     <string name="patcher_failed_title">¡Ups! Algo salió mal</string>
     <string name="patcher_failed_dialog_title">Error al aplicar el parche</string>
@@ -588,6 +589,7 @@ Para un mejor resultado, esta aplicación te recomienda parchear un &lt;b&gt;APK
 
 Al desinstalarla se borrarán permanentemente todos los datos de la aplicación"</string>
     <string name="patcher_install_error_title">Error de instalación</string>
+    <string name="patcher_mount_error_title">Error de montaje</string>
     <string name="patcher_install_error_subtitle">Intenta desinstalar y volver a instalar</string>
     <string name="patcher_ready_to_mount_subtitle">Pulsa el botón más abajo para montar</string>
     <string name="patcher_patches_excluded_for_installer">No disponible para este método de instalación y excluido: %s</string>

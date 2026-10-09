@@ -570,6 +570,7 @@ Para obteres os melhores resultados, este ficheiro recomenda a modificação de 
     <string name="patcher_installing_subtitle">Quase pronto para arrasar! 🎸</string>
     <string name="patcher_success_title">Pronto! 🎉</string>
     <string name="patcher_success_subtitle">A tua aplicação foi modificada e instalada!</string>
+    <string name="patcher_mounted_subtitle">Seu app foi corrigido e montado!</string>
     <string name="patcher_complete_title">Modificação Concluída! ✨</string>
     <string name="patcher_failed_title">Ups! Algo correu mal</string>
     <string name="patcher_failed_dialog_title">Erro ao aplicar modificações</string>
@@ -588,6 +589,7 @@ Para obteres os melhores resultados, este ficheiro recomenda a modificação de 
 
 Desinstalar apagará permanentemente todos os dados do aplicativo."</string>
     <string name="patcher_install_error_title">Erro de instalação</string>
+    <string name="patcher_mount_error_title">Erro de montagem</string>
     <string name="patcher_install_error_subtitle">Tenta desinstalar e instalar de novo</string>
     <string name="patcher_ready_to_mount_subtitle">Pressiona o botão em baixo para montar</string>
     <string name="patcher_patches_excluded_for_installer">Não disponível para este método de instalação e excluído: %s</string>

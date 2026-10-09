@@ -401,18 +401,18 @@
     <string name="adaptive_icon_themed">テーマ</string>
     <string name="adaptive_icon_background_color">背景色</string>
     <string name="adaptive_icon_reset_transform">位置とスケールをリセット</string>
-    <string name="adaptive_icon_no_transparency_warning">この画像には透明なピクセルが含まれていないため、テーマアイコンと通知アイコンはMorpheのロゴのままです</string>
+    <string name="adaptive_icon_no_transparency_warning">この画像には透明なピクセルが含まれていないため、テーマアイコンや通知アイコンには Morphe のロゴが残ります</string>
     <string name="adaptive_icon_created_success">アダプティブ アイコンの作成に成功しました</string>
     <string name="adaptive_icon_creation_failed">アダプティブ アイコンの作成に失敗しました</string>
     <string name="adaptive_icon_guide">アイコン作成ガイド</string>
     <string name="adaptive_icon_guide_png_title">背景が透明な PNG を使用する</string>
-    <string name="adaptive_icon_guide_png_body">透明な背景のロゴが最適です。背景色は下で選択します。透明部分のない画像の場合は、アイコン全体がその画像で埋められ、テーマアイコンと通知アイコンはMorpheロゴのままになります。</string>
+    <string name="adaptive_icon_guide_png_body">透明な背景にロゴを配置するのが最適です。背景色は以下から選択してください。透明部分のない画像を使用すると、アイコン全体が画像で埋め尽くされます。その場合、テーマアイコンや通知アイコンには Morphe のロゴが表示されます。</string>
     <string name="adaptive_icon_guide_safe_zones_title">セーフゾーン</string>
-    <string name="adaptive_icon_guide_safe_zones_body">アウトラインは、お使いのランチャーのアイコン形状を示し、その外側はすべて切り取られます。他のランチャーは別の形状を使用するため、すべての形状で表示される点線の円の内側に重要な詳細を配置してください。</string>
+    <string name="adaptive_icon_guide_safe_zones_body">このアウトラインは、お使いのランチャーのアイコンの形状を示しており、その外側の部分はすべて切り取られます。他のランチャーでは異なる形状が使用されているため、各形状に表示されている破線の円の内側に、重要な詳細を配置してください。</string>
     <string name="adaptive_icon_guide_notification_title">通知アイコン</string>
-    <string name="adaptive_icon_guide_notification_body">画像の表示部分から切り取られ、ファイルに余白があっても、他のステータスバーアイコンと同じサイズに調整されます。プレビューの下のスライダーで調整します。Androidでは単色で表示されます。</string>
+    <string name="adaptive_icon_guide_notification_body">画像の表示範囲から切り抜きます。ファイルの余白の有無にかかわらず、他のステータス バー アイコンと同じサイズに調整されます。プレビューの下にあるスライダーでサイズを調整してください。Android では単色で表示されます。</string>
     <string name="adaptive_icon_guide_monochrome_title">テーマアイコン</string>
-    <string name="adaptive_icon_guide_monochrome_body">ランチャーアイコンと同じ位置とサイズで画像から切り取られます。Android 13以降では、テーマアイコンを有効にしたランチャーが壁紙から色を取得して着色します。</string>
+    <string name="adaptive_icon_guide_monochrome_body">ランチャー アイコンと同じ位置とサイズで画像を切り抜きます。Android 13 以降では、テーマアイコンが有効になっているランチャーでは、壁紙の色に合わせてアイコンの色が変化します。</string>
     <string name="notification_icon_preview">通知</string>
     <!-- Header Creator -->
     <string name="header_creator_create">カスタム ヘッダーを作成</string>
@@ -422,7 +422,7 @@
     <string name="header_creator_failed">ヘッダーの作成に失敗しました</string>
     <string name="header_creator_guide">ヘッダー作成ガイド</string>
     <string name="header_creator_guide_image_title">画像の要件</string>
-    <string name="header_creator_guide_image_body">背景が透明なPNGは、アプリバーに自然になじみます。ファイル内のロゴの周囲の余白は無視され、標準ロゴと同じサイズと位置で始まります。</string>
+    <string name="header_creator_guide_image_body">背景を透明にした PNG 画像を使用すると、アプリバーに自然に溶け込みます。ファイル内のロゴ周囲の余白は無視されるため、標準のロゴと同じサイズと位置から表示されます。</string>
     <string name="header_creator_guide_themes_title">ライトテーマとダークテーマ</string>
     <string name="header_creator_guide_themes_body">多くのアプリでは、ライトテーマ用とダークテーマ用にそれぞれ画像が必要です。一部のアプリ（YouTube Music など）はダークテーマのみを使用するため、該当するセクションのみ表示されます。</string>
     <string name="header_creator_guide_positioning_title">位置とサイズ調整</string>
@@ -570,6 +570,7 @@
     <string name="patcher_installing_subtitle">もうすぐ準備完了！🎸</string>
     <string name="patcher_success_title">完了しました！🎉</string>
     <string name="patcher_success_subtitle">アプリのパッチ適用とインストールが完了しました！</string>
+    <string name="patcher_mounted_subtitle">アプリはパッチ適用済みで、マウントされています！</string>
     <string name="patcher_complete_title">パッチが完了しました！✨</string>
     <string name="patcher_failed_title">おっと！何か問題が発生したようです</string>
     <string name="patcher_failed_dialog_title">パッチに失敗しました</string>
@@ -588,6 +589,7 @@
 
 アンインストールすると、アプリのデータは完全に消去されます"</string>
     <string name="patcher_install_error_title">インストールエラー</string>
+    <string name="patcher_mount_error_title">マウントエラー</string>
     <string name="patcher_install_error_subtitle">一度アンインストールしてから、再度インストールしてください</string>
     <string name="patcher_ready_to_mount_subtitle">マウントするには以下のボタンを押してください</string>
     <string name="patcher_patches_excluded_for_installer">このインストール方法では利用できません: %s</string>

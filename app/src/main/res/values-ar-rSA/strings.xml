@@ -570,6 +570,7 @@
     <string name="patcher_installing_subtitle">على وشك أن نكون جاهزين للانطلاق! 🎸</string>
     <string name="patcher_success_title">تم الانتهاء! 🎉</string>
     <string name="patcher_success_subtitle">تم تعديل تطبيقك وتثبيته!</string>
+    <string name="patcher_mounted_subtitle">تم ترقيع تطبيقك وتركيبه!</string>
     <string name="patcher_complete_title">اكتمل التعديل! ✨</string>
     <string name="patcher_failed_title">عفوًا! حدث خطأ ما</string>
     <string name="patcher_failed_dialog_title">فشل التعديل</string>
@@ -588,6 +589,7 @@
 
 سيؤدي إلغاء التثبيت إلى محو جميع بيانات التطبيق بشكل دائم"</string>
     <string name="patcher_install_error_title">خطأ في التثبيت</string>
+    <string name="patcher_mount_error_title">خطأ في التركيب</string>
     <string name="patcher_install_error_subtitle">جرب إلغاء التثبيت والتثبيت مرة أخرى</string>
     <string name="patcher_ready_to_mount_subtitle">اضغط على الزر أدناه للتركيب</string>
     <string name="patcher_patches_excluded_for_installer">غير متاح لطريقة التثبيت هذه وتم استبعاده: %s</string>

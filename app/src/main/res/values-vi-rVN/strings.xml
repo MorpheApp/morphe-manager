@@ -572,6 +572,7 @@ Nếu không, APK đã vá và được gắn có thể sẽ không hoạt độ
     <string name="patcher_installing_subtitle">Gần xong rồi, chuẩn bị quẩy thôi! 🎸</string>
     <string name="patcher_success_title">Hoàn tất! 🎉</string>
     <string name="patcher_success_subtitle">Đã vá và cài đặt ứng dụng thành công!</string>
+    <string name="patcher_mounted_subtitle">Ứng dụng của bạn đã được vá và gắn kết!</string>
     <string name="patcher_complete_title">Tèn ten! ✨</string>
     <string name="patcher_failed_title">Ui, có lỗi xảy ra rồi!</string>
     <string name="patcher_failed_dialog_title">Không thể vá</string>
@@ -590,6 +591,7 @@ Nếu không, APK đã vá và được gắn có thể sẽ không hoạt độ
 
 Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</string>
     <string name="patcher_install_error_title">Lỗi rồiii</string>
+    <string name="patcher_mount_error_title">Lỗi gắn kết</string>
     <string name="patcher_install_error_subtitle">Hãy thử gỡ và cài đặt lại</string>
     <string name="patcher_ready_to_mount_subtitle">Bấm nút bên dưới để gắn kết</string>
     <string name="patcher_patches_excluded_for_installer">Không khả dụng với phương thức cài đặt này và đã bị loại trừ: %s</string>

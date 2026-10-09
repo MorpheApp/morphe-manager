@@ -570,6 +570,7 @@
     <string name="patcher_installing_subtitle">প্রায় রক-এর জন্য প্রস্তুত! 🎸</string>
     <string name="patcher_success_title">সবকিছু সম্পন্ন! 🎉</string>
     <string name="patcher_success_subtitle">আপনার অ্যাপটি প্যাচ করা এবং ইনস্টল করা হয়েছে!</string>
+    <string name="patcher_mounted_subtitle">আপনার অ্যাপটি প্যাচ করা হয়েছে এবং মাউন্ট করা হয়েছে!</string>
     <string name="patcher_complete_title">প্যাচিং সম্পন্ন! ✨</string>
     <string name="patcher_failed_title">ওহ! কিছু একটা ভুল হয়েছে</string>
     <string name="patcher_failed_dialog_title">প্যাচিং ব্যর্থ হয়েছে</string>
@@ -588,6 +589,7 @@
 
 আনইনস্টল করলে সমস্ত অ্যাপের ডেটা স্থায়ীভাবে মুছে যাবে"</string>
     <string name="patcher_install_error_title">ইনস্টলেশন ত্রুটি</string>
+    <string name="patcher_mount_error_title">মাউন্ট ত্রুটি</string>
     <string name="patcher_install_error_subtitle">আনইনস্টল করে আবার ইনস্টল করার চেষ্টা করুন</string>
     <string name="patcher_ready_to_mount_subtitle">মাউন্ট করতে নিচের বোতামটি টিপুন</string>
     <string name="patcher_patches_excluded_for_installer">এটি এই ইনস্টল পদ্ধতি এবং বাদ দেওয়ার জন্য পাওয়া যাচ্ছে না: %s</string>

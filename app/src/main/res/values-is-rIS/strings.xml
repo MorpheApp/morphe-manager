@@ -557,6 +557,7 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="patcher_installing_subtitle">Næstum búið! 🎸</string>
     <string name="patcher_success_title">Allt klárað! 🎉</string>
     <string name="patcher_success_subtitle">Appið þitt er breytt og uppsett!</string>
+    <string name="patcher_mounted_subtitle">Forritið þitt er plástrað og tengt!</string>
     <string name="patcher_complete_title">Viðgerð lokið! ✨</string>
     <string name="patcher_failed_title">Afsakið! Eitthvað fór úrskeikur</string>
     <string name="patcher_failed_dialog_title">Viðgerðin mislukkaðist</string>
@@ -575,6 +576,7 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
 
 Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="patcher_install_error_title">Uppsetningarvilla</string>
+    <string name="patcher_mount_error_title">Tengingarvilla</string>
     <string name="patcher_install_error_subtitle">Reyndu að afinstallera og setja upp aftur</string>
     <string name="patcher_ready_to_mount_subtitle">Ýttu á hnappinn hér að neðan til að festa</string>
     <string name="patcher_patches_excluded_for_installer">Ekki í boði fyrir þessa uppsetningaraðferð og útilokuð: %s</string>
