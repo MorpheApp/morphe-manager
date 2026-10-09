@@ -73,7 +73,7 @@ class DownloadUrlResolver(private val morpheAPI: MorpheAPI) {
         val versionPart = version?.let { "\"$it\"" } ?: ""
         val query = "\"$packageName\" $versionPart $architecture $SEARCH_SITES"
         Log.d(tag, "Using search query: $query")
-        return "https://google.com/search?q=${URLEncoder.encode(query, "UTF-8")}"
+        return "https://google.com/search?q=${URLEncoder.encode(query, "UTF-8")}&udm=14"
     }
 
     /** Hands back [url], or a web search when it cannot lead to the version that was asked for. */
