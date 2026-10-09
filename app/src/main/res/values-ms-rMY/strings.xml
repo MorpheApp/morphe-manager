@@ -391,44 +391,31 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="adaptive_icon_select_image">Pilih imej</string>
     <string name="adaptive_icon_change_image">Tukar imej</string>
     <string name="image_load_failed">Tidak dapat memuatkan imej ini</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Imej latar depan</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Ikon pelancar</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <!-- Caption under the launcher icon in its own colors -->
+    <!-- Caption under the launcher icon recolored by the system theme -->
     <string name="adaptive_icon_background_color">Warna latar belakang</string>
     <string name="adaptive_icon_reset_transform">Balik ke kedudukan dan skala asal</string>
-    <string name="adaptive_icon_safe_zone_inner">Zon selamat (selalu dapat dilihat)</string>
-    <string name="adaptive_icon_safe_zone_outer">Zon topeng (mungkin dipotong)</string>
-    <string name="adaptive_icon_no_transparency_warning">Imej tidak mempunyai piksel lut sinar. Hasil mungkin kelihatan tidak tepat</string>
     <string name="adaptive_icon_created_success">Ikon adaptif telah dicipta dengan jayanya</string>
     <string name="adaptive_icon_creation_failed">Gagal untuk mencipta ikon adaptif</string>
-    <string name="adaptive_icon_label">Adaptif</string>
-    <string name="adaptive_icon_monochrome_label">Monokrom</string>
     <string name="adaptive_icon_guide">Panduan penciptaan ikon</string>
     <string name="adaptive_icon_guide_png_title">Gunakan PNG dengan latar belakang lut sinar</string>
-    <string name="adaptive_icon_guide_png_body">Latar depan hendaklah berupa fail PNG dengan latar belakang yang lut sinar. Latar belakang berwarna padu akan kelihatan tidak tepat - warna latar belakang hendaklah diambil daripada pemilih latar belakang di bawah.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Zon selamat</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Zon dalam (pepejal): kandungan sentiasa kelihatan sepenuhnya pada semua bentuk pelancar.
-Zon luar (putus-putus): mungkin dipotong oleh topeng pelancar - simpan butiran penting di dalam zon dalam."</string>
     <string name="adaptive_icon_guide_notification_title">Ikon pemberitahuan</string>
-    <string name="adaptive_icon_guide_notification_body">Dijana secara automatik daripada imej latar depan. Laraskan saiznya menggunakan peluncur Pemberitahuan. Semua kandungan yang kelihatan muncul putih dalam bar status.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Ikon monokrom</string>
-    <string name="adaptive_icon_guide_monochrome_body">Dijana secara automatik daripada imej latar depan menggunakan transform ikon adaptif yang sama. Ia muncul dengan warna aksen kertas dinding pada Android 13 dan lebih baharu.</string>
     <string name="notification_icon_preview">Pemberitahuan</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Cipta tajuk khusus</string>
     <string name="header_creator_light_theme">Tajuk tema terang</string>
     <string name="header_creator_dark_theme">Tajuk tema gelap</string>
-    <string name="header_creator_no_image">Tiada imej dipilih</string>
     <string name="header_creator_success">Tajuk telah dicipta dengan jayanya</string>
     <string name="header_creator_failed">Gagal untuk mencipta tajuk</string>
     <string name="header_creator_guide">Panduan penciptaan pengepala</string>
     <string name="header_creator_guide_image_title">Keperluan imej</string>
-    <string name="header_creator_guide_image_body">Gunakan mana-mana fail imej (PNG atau JPEG). Untuk hasil terbaik, gunakan imej format lebar dengan nisbah aspek lebih kurang 2.7:1. Fail PNG dengan latar belakang telus akan bergabung secara semula jadi dengan tema aplikasi.</string>
     <string name="header_creator_guide_themes_title">Tema cerah dan gelap</string>
     <string name="header_creator_guide_themes_body">Kebanyakan aplikasi memerlukan imej berasingan untuk tema cerah dan gelap. Sesetengah aplikasi (seperti YouTube Music) hanya menggunakan tema gelap, jadi hanya bahagian itu yang ditunjukkan.</string>
     <string name="header_creator_guide_positioning_title">Kedudukan dan penskalaan</string>
-    <string name="header_creator_guide_positioning_body">Gunakan gerak isyarat cubit-untuk-zoom dan seret terus dalam pratonton untuk meletakkan dan menskalakan imej anda. Panduan snap muncul apabila imej hampir di tengah. Anda juga boleh menggunakan peluncur di bawah pratonton.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Tampal pilihan</string>
     <string name="batch_patch_title">Tampalan kelompok</string>

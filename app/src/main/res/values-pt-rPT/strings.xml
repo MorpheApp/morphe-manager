@@ -390,44 +390,43 @@ Para obteres os melhores resultados, este ficheiro recomenda a modificação de 
     <string name="adaptive_icon_select_image">Selecionar imagem</string>
     <string name="adaptive_icon_change_image">Alterar imagem</string>
     <string name="image_load_failed">Não foi possível carregar esta imagem</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Imagem de primeiro plano</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Ícone do launcher</string>
+    <string name="adaptive_icon_gesture_hint">Arraste para mover, belisque para redimensionar</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Pré-visualização</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Padrão</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Temático</string>
     <string name="adaptive_icon_background_color">Cor de fundo</string>
     <string name="adaptive_icon_reset_transform">Redefinir posição e escala</string>
-    <string name="adaptive_icon_safe_zone_inner">Área segura (sempre visível)</string>
-    <string name="adaptive_icon_safe_zone_outer">Área de máscara (poderá ser recortada)</string>
-    <string name="adaptive_icon_no_transparency_warning">A imagem não possui pixels transparentes. O resultado pode parecer incorreto</string>
+    <string name="adaptive_icon_no_transparency_warning">Esta imagem não tem pixels transparentes, portanto os ícones temáticos e de notificação mantêm o logotipo da Morphe</string>
     <string name="adaptive_icon_created_success">Ícone adaptável criado com sucesso</string>
     <string name="adaptive_icon_creation_failed">Erro ao criar ícone adaptável</string>
-    <string name="adaptive_icon_label">Adaptável</string>
-    <string name="adaptive_icon_monochrome_label">Monocromático</string>
     <string name="adaptive_icon_guide">Guia de criação de ícones</string>
     <string name="adaptive_icon_guide_png_title">Use um PNG com fundo transparente</string>
-    <string name="adaptive_icon_guide_png_body">O primeiro plano deve ser um arquivo PNG com um fundo transparente. Um fundo de cor sólida ficará incorreto - a cor do fundo deve vir do seletor de fundo abaixo.</string>
+    <string name="adaptive_icon_guide_png_body">Um logotipo sobre um fundo transparente funciona melhor, com a cor de fundo escolhida abaixo. Por outro lado, uma imagem sem transparência preenche o ícone inteiro, e os ícones temáticos e de notificação mantêm o logotipo da Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Zonas de segurança</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Zona interna (sólida): o conteúdo é sempre totalmente visível em todas as formas de iniciador.
-Zona externa (tracejada): pode ser cortada pela máscara do iniciador - mantenha os detalhes importantes dentro da zona interna."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">O contorno mostra o formato do ícone do seu inicializador, e tudo o que estiver fora dele é cortado. Outros inicializadores usam outros formatos, portanto mantenha os detalhes importantes dentro do círculo tracejado, que todos os formatos mostram.</string>
     <string name="adaptive_icon_guide_notification_title">Ícone de notificação</string>
-    <string name="adaptive_icon_guide_notification_body">Gerado automaticamente a partir da imagem do primeiro plano. Ajuste seu tamanho usando o controle deslizante de notificações. Todo o conteúdo visível aparece em branco na barra de status.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Ícone monocromático</string>
-    <string name="adaptive_icon_guide_monochrome_body">Gerado automaticamente a partir da imagem do primeiro plano usando as mesmas transformações de ícone adaptável. Ele aparece tons com a cor de destaque do papel de parede no Android 13 e versões mais recentes.</string>
+    <string name="adaptive_icon_guide_notification_body">Recortado da parte visível da imagem e dimensionado como os outros ícones da barra de status, independentemente da margem do arquivo. Ajuste-o com o controle deslizante abaixo da pré-visualização. O Android o mostra em uma única cor.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Ícone temático</string>
+    <string name="adaptive_icon_guide_monochrome_body">Recortado da imagem com a mesma posição e o mesmo tamanho do ícone do inicializador. No Android 13 e versões posteriores, os inicializadores com ícones temáticos ativados o colorem com base no papel de parede.</string>
     <string name="notification_icon_preview">Notificação</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Criar cabeçalho personalizado</string>
     <string name="header_creator_light_theme">Cabeçalho do tema claro</string>
     <string name="header_creator_dark_theme">Cabeçalho do tema escuro</string>
-    <string name="header_creator_no_image">Nenhuma imagem selecionada</string>
     <string name="header_creator_success">Cabeçalho criado com sucesso</string>
     <string name="header_creator_failed">Erro ao criar cabeçalho</string>
     <string name="header_creator_guide">Guia de criação de cabeçalho</string>
     <string name="header_creator_guide_image_title">Requisitos de imagem</string>
-    <string name="header_creator_guide_image_body">Use qualquer arquivo de imagem (PNG ou JPEG). Para obter os melhores resultados, use uma imagem no formato largo com uma proporção de aproximadamente 2,7:1. Arquivos PNG com fundos transparentes se misturarão naturalmente com o tema do aplicativo.</string>
+    <string name="header_creator_guide_image_body">Um PNG com fundo transparente se integra à barra do aplicativo. As margens ao redor do logotipo no arquivo são ignoradas, então ele começa no tamanho e na posição do logotipo padrão.</string>
     <string name="header_creator_guide_themes_title">Temas claro e escuro</string>
     <string name="header_creator_guide_themes_body">A maioria dos aplicativos requer imagens separadas para os temas claro e escuro. Alguns aplicativos (como o YouTube Music) usam apenas o tema escuro, portanto, apenas essa seção é exibida.</string>
     <string name="header_creator_guide_positioning_title">Posicionamento e dimensionamento</string>
-    <string name="header_creator_guide_positioning_body">Use gestos de pinça para ampliar e arrastar diretamente na visualização para posicionar e dimensionar sua imagem. Guias de ajuste aparecem quando a imagem está perto do centro. Você também pode usar o controle deslizante abaixo da visualização.</string>
+    <string name="header_creator_guide_positioning_body">Arraste e belisque a imagem no editor, ou redimensione-a com o controle deslizante. A caixa tracejada marca onde o logotipo padrão fica, e guias aparecem quando a imagem se alinha com ela.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Modificações selecionadas</string>
     <string name="batch_patch_title">Aplicação em lote</string>

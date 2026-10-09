@@ -389,44 +389,31 @@
     <string name="adaptive_icon_select_image">प्रतिमा निवडा</string>
     <string name="adaptive_icon_change_image">प्रतिमा बदला</string>
     <string name="image_load_failed">ही प्रतिमा लोड करता आली नाही</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">अग्रभाग प्रतिमा</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">लाँचर चिन्ह</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <!-- Caption under the launcher icon in its own colors -->
+    <!-- Caption under the launcher icon recolored by the system theme -->
     <string name="adaptive_icon_background_color">पार्श्वभूमी रंग</string>
     <string name="adaptive_icon_reset_transform">पोझिशन आणि स्केल रीसेट करा</string>
-    <string name="adaptive_icon_safe_zone_inner">सुरक्षित क्षेत्र (नेहमी दृश्यमान)</string>
-    <string name="adaptive_icon_safe_zone_outer">मास्क क्षेत्र (क्लिप केले जाऊ शकते)</string>
-    <string name="adaptive_icon_no_transparency_warning">प्रतिमेत कोणताही पारदर्शक पिक्सेल नाही. परिणाम चुकीचा दिसू शकतो</string>
     <string name="adaptive_icon_created_success">अ‍ॅडॉप्टिव्ह आयकॉन यशस्वीरित्या तयार केला</string>
     <string name="adaptive_icon_creation_failed">अ‍ॅडॉप्टिव्ह आयकॉन तयार करण्यात अयशस्वी</string>
-    <string name="adaptive_icon_label">अनुकूलनीय</string>
-    <string name="adaptive_icon_monochrome_label">मोनोक्रोम</string>
     <string name="adaptive_icon_guide">आयकॉन निर्मिती मार्गदर्शक</string>
     <string name="adaptive_icon_guide_png_title">पारदर्शक पार्श्वभूमीसह PNG वापरा</string>
-    <string name="adaptive_icon_guide_png_body">फोरग्राउंडमध्ये पारदर्शक पार्श्वभूमीसह PNG फाइल असणे आवश्यक आहे. साध्या रंगाची पार्श्वभूमी चुकीची दिसेल - पार्श्वभूमीचा रंग खालील रंग निवडकातून घ्यावा.</string>
     <string name="adaptive_icon_guide_safe_zones_title">सुरक्षित क्षेत्रे</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"आतील क्षेत्र (ठोस): सामग्री नेहमी सर्व लॉन्चर आकारात पूर्णपणे दृश्य असते.
-बाह्य क्षेत्र (डॅश केलेले): लॉन्चर मास्कद्वारे क्लिप केले जाऊ शकते - महत्त्वाची माहिती आतील क्षेत्रात ठेवा."</string>
     <string name="adaptive_icon_guide_notification_title">सूचना आयकॉन</string>
-    <string name="adaptive_icon_guide_notification_body">फोरग्राउंड इमेजमधून आपोआप तयार केले जाते. सूचना स्लाइडर वापरून त्याचा आकार समायोजित करा. स्टेटस बारमधील सर्व दृश्य सामग्री पांढरी दिसते.</string>
-    <string name="adaptive_icon_guide_monochrome_title">मोनोक्रोम आयकॉन</string>
-    <string name="adaptive_icon_guide_monochrome_body">ॲडॉप्टिव्ह आयकॉन ट्रांसफॉर्म वापरून फोरग्राउंड इमेजमधून आपोआप तयार केले जाते. Android 13 आणि त्यावरील आवृत्त्यांवर हे वॉलपेपर ॲक्सेंट रंगाने रंगीत दिसते.</string>
     <string name="notification_icon_preview">सूचना</string>
     <!-- Header Creator -->
     <string name="header_creator_create">कस्टम हेडर तयार करा</string>
     <string name="header_creator_light_theme">लाइट थीम हेडर</string>
     <string name="header_creator_dark_theme">डार्क थीम हेडर</string>
-    <string name="header_creator_no_image">प्रतिमा निवडलेली नाही</string>
     <string name="header_creator_success">हेडर यशस्वीरित्या तयार केले</string>
     <string name="header_creator_failed">हेडर तयार करण्यात अयशस्वी</string>
     <string name="header_creator_guide">हेडर निर्मिती मार्गदर्शक</string>
     <string name="header_creator_guide_image_title">इमेज आवश्यकता</string>
-    <string name="header_creator_guide_image_body">तुम्ही कोणतीही इमेज फाइल (PNG किंवा JPEG) वापरू शकता. सर्वोत्तम परिणामांसाठी, अंदाजे 2.7:1 Aspect Ratio असलेली वाइड-फॉर्मेट इमेज वापरा. पारदर्शक पार्श्वभूमीसह PNG फाइल्स ॲप थीममध्ये नैसर्गिकरित्या मिसळतील.</string>
     <string name="header_creator_guide_themes_title">हलके आणि गडद थीम</string>
     <string name="header_creator_guide_themes_body">जवळपास ॲप्सना हलक्या आणि गडद थीमसाठी वेगवेगळ्या इमेजची आवश्यकता असते. काही ॲप्स (उदाहरणार्थ, YouTube Music) फक्त गडद थीम वापरतात, त्यामुळे फक्त तो विभाग दर्शविला जातो.</string>
     <string name="header_creator_guide_positioning_title">स्थिती आणि स्केलिंग</string>
-    <string name="header_creator_guide_positioning_body">तुमची इमेज स्थितीत ठेवण्यासाठी आणि स्केल करण्यासाठी पूर्वावलोकनामध्ये पिंच-टू-झूम आणि ड्रॅग जेस्चर वापरा. इमेज मध्यभागी जवळ असताना स्नॅप मार्गदर्शक दिसतात. तुम्ही पूर्वावलोकनाखालील स्लाइडर देखील वापरू शकता.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">सुधारणा निवडली</string>
     <string name="batch_patch_title">बॅच पॅचिंग</string>

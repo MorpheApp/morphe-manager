@@ -200,21 +200,19 @@
     <string name="adaptive_icon_create">دروستکردنی ئایکۆنی گونجاندن</string>
     <string name="adaptive_icon_select_image">وێنە دیاریبکە</string>
     <string name="adaptive_icon_change_image">گۆڕینی وێنە</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <!-- Caption under the launcher icon in its own colors -->
+    <!-- Caption under the launcher icon recolored by the system theme -->
     <string name="adaptive_icon_background_color">ڕەنگی پاشخان</string>
     <string name="adaptive_icon_reset_transform">ڕێکخستنەوەی شوێن و پێوانە</string>
-    <string name="adaptive_icon_safe_zone_inner">ناوچەی پارێزراو (هەمیشە بینراوە)</string>
-    <string name="adaptive_icon_safe_zone_outer">ناوچەی ماسک (لەوانەیە قرتێنرابێت)</string>
     <string name="adaptive_icon_created_success">وێنۆچکەی گونجاندن بە سەرکەوتوویی دروستکرا</string>
     <string name="adaptive_icon_creation_failed">شکستی هێنا لە دروستکردنی وێنۆچکەی گونجاندن</string>
-    <string name="adaptive_icon_monochrome_label">منۆكرۆم</string>
     <string name="adaptive_icon_guide_notification_title">وێنۆکەی ئاگانامە</string>
     <!-- Header Creator -->
     <string name="header_creator_create">دروستکردنی سەرپەڕی تایبەت</string>
     <string name="header_creator_light_theme">سەرپەڕەی ڕووکاری ڕووناک</string>
     <string name="header_creator_dark_theme">سەرپەڕەی ڕووکاری تاریک</string>
-    <string name="header_creator_no_image">هیچ وێنەیەک دیاری نەکراوە</string>
     <string name="header_creator_success">سەرپەڕە بە سەرکەوتوویی دروستکرا</string>
     <string name="header_creator_failed">شکستی هێنا لە دروستکردنی سەرپەڕە</string>
     <!-- Batch patching -->

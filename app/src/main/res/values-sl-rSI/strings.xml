@@ -390,44 +390,43 @@ Za najboljše rezultate ta aplikacija priporoča popravljanje &lt;b&gt;polnega A
     <string name="adaptive_icon_select_image">Izberite sliko</string>
     <string name="adaptive_icon_change_image">Spremenite sliko</string>
     <string name="image_load_failed">Te slike ni bilo mogoče naložiti</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Slika ospredja</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Ikona zaganjalnika</string>
+    <string name="adaptive_icon_gesture_hint">Povlecite za premik, stisnite za spreminjanje velikosti</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Predogled</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Standardna</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Tematska</string>
     <string name="adaptive_icon_background_color">Barva ozadja</string>
     <string name="adaptive_icon_reset_transform">Ponastavi položaj in merilo</string>
-    <string name="adaptive_icon_safe_zone_inner">Varno območje (vedno vidno)</string>
-    <string name="adaptive_icon_safe_zone_outer">Maskirno območje (lahko se bo odrezalo)</string>
-    <string name="adaptive_icon_no_transparency_warning">Slika nima preglednih slikovnih pik. Rezultat je lahko prikazan napačno</string>
+    <string name="adaptive_icon_no_transparency_warning">Ta slika nima prozornih slikovnih pik, zato tematska ikona in ikona za obvestila ohranita logotip Morphe</string>
     <string name="adaptive_icon_created_success">Ikona uspešno prilagojena</string>
     <string name="adaptive_icon_creation_failed">Pri ustvarjanju prilagojene ikone je prišlo do napake</string>
-    <string name="adaptive_icon_label">Prilagodljiv</string>
-    <string name="adaptive_icon_monochrome_label">Enobarvno</string>
     <string name="adaptive_icon_guide">Navodila za ustvarjanje ikon</string>
     <string name="adaptive_icon_guide_png_title">Uporabite PNG sliko s prosojnim ozadjem</string>
-    <string name="adaptive_icon_guide_png_body">Prednja stran mora biti datoteka PNG s prosojnim ozadjem. Enobarvno ozadje bo videti narobe – barva ozadja mora biti izbrana spodaj.</string>
+    <string name="adaptive_icon_guide_png_body">Najbolje deluje logotip na prozornem ozadju, barvo ozadja pa izberete spodaj. Slika brez prozornosti namesto tega zapolni celotno ikono, tematska ikona in ikona za obvestila pa nato ohranita logotip Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Varna območja</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Notranje območje (solidno): vsebina je vedno v celoti vidna na vseh oblikah zaganjalnika.
-Zunanje območje (črtkano): maska zaganjalnika ga lahko obreže – pomembne podrobnosti naj bodo v notranjem območju."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Obris prikazuje obliko ikone vašega zaganjalnika, vse zunaj njega pa se odreže. Drugi zaganjalniki uporabljajo druge oblike, zato pomembne podrobnosti ohranite znotraj črtkanega kroga, ki ga prikazujejo vse oblike.</string>
     <string name="adaptive_icon_guide_notification_title">Ikona obvestila</string>
-    <string name="adaptive_icon_guide_notification_body">Ustvarjeno samodejno iz prednje slike. Njeno velikost prilagodite s pomočjo drsnika za obvestila. Vsa vidna vsebina je v statusni vrstici bela.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Enobarvna ikona</string>
-    <string name="adaptive_icon_guide_monochrome_body">Ustvarjeno samodejno iz prednje slike z uporabo istih preoblikovanj prilagodljive ikone. Na napravah Android 13 in novejših je poudarjeno z barvo ozadja.</string>
+    <string name="adaptive_icon_guide_notification_body">Izrezana je iz vidnega dela slike in je enako velika kot druge ikone v statusni vrstici, ne glede na rob, ki ga ima datoteka. Prilagodite jo z drsnikom pod predogledom. Android jo prikazuje v eni sami barvi.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Tematska ikona</string>
+    <string name="adaptive_icon_guide_monochrome_body">Izrezana je iz slike z enako lego in velikostjo kot ikona zaganjalnika. V sistemu Android 13 in novejših jo zaganjalniki, ki imajo omogočene tematske ikone, pobarvajo z barvo iz ozadja.</string>
     <string name="notification_icon_preview">Obvestilo</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Ustvari prilagojeno glavo</string>
     <string name="header_creator_light_theme">Glava svetle teme</string>
     <string name="header_creator_dark_theme">Glava temne teme</string>
-    <string name="header_creator_no_image">Nobena slika ni izbrana</string>
     <string name="header_creator_success">Glava uspešno ustvarjena</string>
     <string name="header_creator_failed">Pri ustvarjanju glave je prišlo do napake</string>
     <string name="header_creator_guide">Navodila za ustvarjanje glave</string>
     <string name="header_creator_guide_image_title">Zahteve za sliko</string>
-    <string name="header_creator_guide_image_body">Uporabite poljubno sliko (PNG ali JPEG). Za najboljše rezultate uporabite sliko v širokem formatu z razmerjem stranic približno 2,7:1. Datoteke PNG s prosojnim ozadjem se bodo naravno zmešale s temo aplikacije.</string>
+    <string name="header_creator_guide_image_body">PNG s prozornim ozadjem se zlije z orodno vrstico. Robovi okoli logotipa v datoteki so prezrti, zato se začne v velikosti in na mestu privzetega logotipa.</string>
     <string name="header_creator_guide_themes_title">Svetle in temne teme</string>
     <string name="header_creator_guide_themes_body">Večina aplikacij zahteva ločene slike za svetlo in temno temo. Nekatere aplikacije (kot je YouTube Music) uporabljajo samo temno temo, zato je prikazan samo ta del.</string>
     <string name="header_creator_guide_positioning_title">Pozicioniranje in merila</string>
-    <string name="header_creator_guide_positioning_body">Uporabite geste stiskanja za povečavo in povlecite neposredno v predogledu, da pozicionirate in skalirate sliko. Vodila se pojavijo, ko je slika blizu sredine. Lahko uporabite tudi drsnik pod predogledom.</string>
+    <string name="header_creator_guide_positioning_body">V urejevalniku povlecite in stisnite sliko ali pa ji z drsnikom spremenite velikost. Črtkani okvir označuje, kje je privzeti logotip, vodila pa se prikažejo, ko se slika poravna z okvirjem.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Popravek je izbran</string>
     <string name="batch_patch_title">Serijsko popravljanje</string>
@@ -869,6 +868,9 @@ Ta nastavitev ne vpliva na popravke: omogočite predizdajne popravke za vsak vir
     <string name="notification_channel_patch_updates_description">Obvestila o novih izdajah s popravki</string>
     <string name="notification_channel_patcher_description">Prikazano medtem ko Morphe popravlja aplikacijo v ozadju</string>
     <string name="notification_channel_mounted_apps">Priklopljene aplikacije</string>
+    <string name="notification_channel_mounted_apps_description">Ko je druga različica zamenjala priklopljeno aplikacijo in njen popravek ne velja več</string>
+    <string name="notification_mount_replaced_title">Aplikacija %1$s ni več popravljena</string>
+    <string name="notification_mount_replaced_text">v%1$s je zamenjala popravljeno v%2$s. Odpri Morphe, da jo obnoviš</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Napredne nastavitve</string>
     <string name="settings_advanced_expert_mode">Način strokovnjaka</string>
@@ -1321,6 +1323,7 @@ Podrobnosti: %2$s"</string>
     <string name="unmount">Demontiraj</string>
     <string name="unmounted">Demontirano</string>
     <string name="remount">Ponovno montiraj</string>
+    <string name="restore">Obnovi</string>
     <string name="share">Deli</string>
     <string name="install">Namesti</string>
     <string name="installed">Nameščeno</string>
@@ -1341,6 +1344,8 @@ Podrobnosti: %2$s"</string>
     <string name="sources">Viri</string>
     <string name="installing_ellipsis">Nameščanje…</string>
     <string name="mounting_ellipsis">Montiranje…</string>
+    <string name="mount_stage_restoring_stock">Obnavljanje izvirnika…</string>
+    <string name="mount_stage_copying">Kopiranje…</string>
     <string name="unmounting_ellipsis">Odmontiranje…</string>
     <string name="importing_ellipsis">Uvažam…</string>
     <string name="imported_successfully">Uspešno uvoženo</string>

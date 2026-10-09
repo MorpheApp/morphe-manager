@@ -389,44 +389,43 @@ Für optimale Ergebnisse empfiehlt diese App, eine &lt;b&gt;vollständige APK&lt
     <string name="adaptive_icon_select_image">Bild auswählen</string>
     <string name="adaptive_icon_change_image">Bild ändern</string>
     <string name="image_load_failed">Dieses Bild konnte nicht geladen werden</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Vordergrundbild</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Startbildschirm-Symbol</string>
+    <string name="adaptive_icon_gesture_hint">Zum Bewegen ziehen, zum Skalieren zusammenziehen</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Vorschau</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Normal</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Design</string>
     <string name="adaptive_icon_background_color">Hintergrundfarbe</string>
     <string name="adaptive_icon_reset_transform">Position und Skalierung zurücksetzen</string>
-    <string name="adaptive_icon_safe_zone_inner">Sicherheitszone (immer sichtbar)</string>
-    <string name="adaptive_icon_safe_zone_outer">Maskenzone (kann abgeschnitten werden)</string>
-    <string name="adaptive_icon_no_transparency_warning">Das Bild hat keine transparenten Pixel. Das Ergebnis kann falsch aussehen</string>
+    <string name="adaptive_icon_no_transparency_warning">Dieses Bild hat keine transparenten Pixel, daher behalten die Design- und Benachrichtigungssymbole das Morphe-Logo</string>
     <string name="adaptive_icon_created_success">Adaptives Icon erfolgreich erstellt</string>
     <string name="adaptive_icon_creation_failed">Erstellen des adaptiven Icons fehlgeschlagen</string>
-    <string name="adaptive_icon_label">Adaptiv</string>
-    <string name="adaptive_icon_monochrome_label">Monochrom</string>
     <string name="adaptive_icon_guide">Anleitung zur Erstellung von Icons</string>
     <string name="adaptive_icon_guide_png_title">Verwenden Sie eine PNG-Datei mit transparentem Hintergrund</string>
-    <string name="adaptive_icon_guide_png_body">Der Vordergrund muss eine PNG-Datei mit transparentem Hintergrund sein. Ein einfarbiger Hintergrund sieht falsch aus – die Hintergrundfarbe sollte aus dem Hintergrundauswahlfeld unten übernommen werden.</string>
+    <string name="adaptive_icon_guide_png_body">Ein Logo auf transparentem Hintergrund funktioniert am besten, wobei die Hintergrundfarbe unten gewählt wird. Ein Bild ohne Transparenz füllt stattdessen das gesamte Symbol aus, und die Design- und Benachrichtigungssymbole behalten dann das Morphe-Logo.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Sichere Bereiche</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Innerer Bereich (durchgezogen): Der Inhalt ist auf allen Launcher-Formen immer vollständig sichtbar.
-Äußerer Bereich (gestrichelt): Kann von der Launcher-Maske abgeschnitten werden – halten Sie wichtige Details im inneren Bereich."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Der Umriss zeigt die Symbolform Ihres Launchers, und alles außerhalb davon wird abgeschnitten. Andere Launcher verwenden andere Formen. Halten Sie wichtige Details daher innerhalb des gestrichelten Kreises, der bei jeder Form sichtbar ist.</string>
     <string name="adaptive_icon_guide_notification_title">Benachrichtigungsicon</string>
-    <string name="adaptive_icon_guide_notification_body">Wird automatisch aus dem Vordergrundbild generiert. Passen Sie die Größe mit dem Schieberegler für Benachrichtigungen an. Alle sichtbaren Inhalte erscheinen weiß in der Statusleiste.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Monochromes Icon</string>
-    <string name="adaptive_icon_guide_monochrome_body">Wird automatisch aus dem Vordergrundbild generiert, wobei die gleichen adaptiven Icon-Transformationen verwendet werden. Es erscheint ab Android 13 und neuer mit der Wallpaper-Akzentfarbe eingefärbt.</string>
+    <string name="adaptive_icon_guide_notification_body">Wird aus dem sichtbaren Teil des Bildes ausgeschnitten und wie andere Statusleistensymbole skaliert, egal welchen Rand die Datei hat. Passen Sie es mit dem Schieberegler unter der Vorschau an. Android zeigt es einfarbig an.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Designsymbol</string>
+    <string name="adaptive_icon_guide_monochrome_body">Wird aus dem Bild mit derselben Position und Größe wie das Launcher-Symbol ausgeschnitten. Ab Android 13 färben Launcher mit aktivierten Designsymbolen das Symbol mit den Farben des Hintergrundbilds.</string>
     <string name="notification_icon_preview">Benachrichtigung</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Benutzerdefinierten Header erstellen</string>
     <string name="header_creator_light_theme">Header für helles Thema</string>
     <string name="header_creator_dark_theme">Header für dunkles Thema</string>
-    <string name="header_creator_no_image">Kein Bild ausgewählt</string>
     <string name="header_creator_success">Header erfolgreich erstellt</string>
     <string name="header_creator_failed">Erstellen des Headers fehlgeschlagen</string>
     <string name="header_creator_guide">Anleitung zum Header-Creator</string>
     <string name="header_creator_guide_image_title">Bildanforderungen</string>
-    <string name="header_creator_guide_image_body">Verwenden Sie eine beliebige Bilddatei (PNG oder JPEG). Für beste Ergebnisse verwenden Sie ein Breitformatbild mit einem Seitenverhältnis von ca. 2,7:1. PNG-Dateien mit transparenten Hintergründen fügen sich nahtlos in das App-Design ein.</string>
+    <string name="header_creator_guide_image_body">Ein PNG mit transparentem Hintergrund fügt sich nahtlos in die App-Leiste ein. Ränder um das Logo in der Datei werden ignoriert, sodass es in Größe und Position dem Standardlogo entspricht.</string>
     <string name="header_creator_guide_themes_title">Helle und dunkle Designs</string>
     <string name="header_creator_guide_themes_body">Die meisten Apps benötigen separate Bilder für die hellen und dunklen Designs. Einige Apps (wie YouTube Music) verwenden nur das dunkle Design, daher wird nur dieser Abschnitt angezeigt.</string>
     <string name="header_creator_guide_positioning_title">Positionierung und Skalierung</string>
-    <string name="header_creator_guide_positioning_body">Verwenden Sie Pinch-to-Zoom- und Drag-Gesten direkt in der Vorschau, um Ihr Bild zu positionieren und zu skalieren. Wenn das Bild in der Nähe der Mitte ist, erscheinen Führungslinien. Sie können auch den Schieberegler unterhalb der Vorschau verwenden.</string>
+    <string name="header_creator_guide_positioning_body">Ziehen Sie das Bild im Editor, skalieren Sie es durch Zusammenziehen oder passen Sie die Größe mit dem Schieberegler an. Das gestrichelte Feld markiert, wo sich das Standardlogo befindet, und Hilfslinien erscheinen, wenn das Bild damit ausgerichtet ist.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Ausgewählte Patches anwenden</string>
     <string name="batch_patch_title">Patches im Batch anwenden</string>

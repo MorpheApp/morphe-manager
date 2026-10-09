@@ -390,44 +390,31 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="adaptive_icon_select_image">Kies beeld</string>
     <string name="adaptive_icon_change_image">Verander beeld</string>
     <string name="image_load_failed">Kon nie hierdie beeld laai nie</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Voorgrondbeeld</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Lanseerderikoon</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <!-- Caption under the launcher icon in its own colors -->
+    <!-- Caption under the launcher icon recolored by the system theme -->
     <string name="adaptive_icon_background_color">Agtergrondkleur</string>
     <string name="adaptive_icon_reset_transform">Herstel posisie en skaal</string>
-    <string name="adaptive_icon_safe_zone_inner">Veilige sone (altyd sigbaar)</string>
-    <string name="adaptive_icon_safe_zone_outer">Masker sone (kan afgesny word)</string>
-    <string name="adaptive_icon_no_transparency_warning">Die beeld het geen deursigtige pixels nie. Die resultaat kan verkeerd lyk.</string>
     <string name="adaptive_icon_created_success">Adaptiewe ikoon suksesvol geskep</string>
     <string name="adaptive_icon_creation_failed">Kon nie adaptiewe ikoon skep nie</string>
-    <string name="adaptive_icon_label">Adaptief</string>
-    <string name="adaptive_icon_monochrome_label">Monochroom</string>
     <string name="adaptive_icon_guide">Ikoongids</string>
     <string name="adaptive_icon_guide_png_title">Gebruik \'n PNG met \'n deurskynende agtergrond</string>
-    <string name="adaptive_icon_guide_png_body">Die voorgrond moet \'n PNG-lêer wees met \'n deurskynende agtergrond. \'n Soliede kleur agtergrond sal verkeerd lyk - die agtergrond kleur moet van die agtergrond kieslys hieronder kom.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Veilige sones</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Innerlike sone (solied): inhoud is altyd ten volle sigbaar op alle lanseerder vorms.
-Outerlike sone (gestippel): kan deur die lanseerder masker afgesny word - hou belangrike besonderhede binne die innerlike sone."</string>
     <string name="adaptive_icon_guide_notification_title">Kennisgewingikoon</string>
-    <string name="adaptive_icon_guide_notification_body">Outomaties gegenereer uit die voorgrond beeld. Pas die grootte aan met behulp van die Kennisgewing skyfie. Alle sigbare inhoud verskyn wit in die statusbalk.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Monochroom ikoon</string>
-    <string name="adaptive_icon_guide_monochrome_body">Outomaties gegenereer uit die voorgrond beeld met behulp van dieselfde aanpassingsikoon transformasies. Dit verskyn getint met die muurpapier aksent kleur op Android 13 en later.</string>
     <string name="notification_icon_preview">Kennisgewingikoon</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Skep pasgemaakte kop</string>
     <string name="header_creator_light_theme">Ligtema kop</string>
     <string name="header_creator_dark_theme">Donker tema kop</string>
-    <string name="header_creator_no_image">Geen beeld gekies nie</string>
     <string name="header_creator_success">Kop suksesvol geskep</string>
     <string name="header_creator_failed">Kon nie kop skep nie</string>
     <string name="header_creator_guide">Header skeppingsgids</string>
     <string name="header_creator_guide_image_title">Beeldvereistes</string>
-    <string name="header_creator_guide_image_body">Gebruik enige beeldlêer (PNG of JPEG). Vir die beste resultate, gebruik \'n wyd-formaat beeld met \'n ongeveer 2.7:1 aspekverhouding. PNG-lêers met deurskynende agtergronde sal natuurlik meng met die app-tema.</string>
     <string name="header_creator_guide_themes_title">Ligte en donker temas</string>
     <string name="header_creator_guide_themes_body">Die meeste toepassings vereis aparte beelde vir die ligte en donker temas. Sommige toepassings (soos YouTube Music) gebruik slegs die donker tema, so slegs daardie afdeling word gewys.</string>
     <string name="header_creator_guide_positioning_title">Posisionering en skaal</string>
-    <string name="header_creator_guide_positioning_body">Gebruik knyp-om-zoem en sleep gebare direk in die voorskou om jou beeld te posisioneer en te skaal. Snap gidse verskyn wanneer die beeld naby die middel is. Jy kan ook die skyfie onder die voorskou gebruik.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Verandering gekies</string>
     <string name="batch_patch_title">Groepbedekking</string>

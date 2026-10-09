@@ -390,44 +390,43 @@
     <string name="adaptive_icon_select_image">চিত্র নির্বাচন করুন</string>
     <string name="adaptive_icon_change_image">চিত্র পরিবর্তন করুন</string>
     <string name="image_load_failed">এই ছবিটি লোড করা যায়নি</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">অগ্রভাগের চিত্র</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">লঞ্চার আইকন</string>
+    <string name="adaptive_icon_gesture_hint">সরাতে টেনে আনুন, আকার পরিবর্তন করতে চিমটি করুন</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">পূর্বরূপ</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">স্ট্যান্ডার্ড</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">থিমযুক্ত</string>
     <string name="adaptive_icon_background_color">ব্যাকগ্রাউন্ড রং</string>
     <string name="adaptive_icon_reset_transform">পজিশন এবং স্কেল রিসেট করুন</string>
-    <string name="adaptive_icon_safe_zone_inner">সেফ জোন (সময়কালে দৃশ্যমান)</string>
-    <string name="adaptive_icon_safe_zone_outer">মাস্ক জোন (মুছে ফেলা হতে পারে)</string>
-    <string name="adaptive_icon_no_transparency_warning">ছবিতে কোনো স্বচ্ছ পিক্সেল নেই। ফলাফল ভুল দেখাতে পারে</string>
+    <string name="adaptive_icon_no_transparency_warning">এই ছবিতে কোনো স্বচ্ছ পিক্সেল নেই, তাই থিমযুক্ত এবং বিজ্ঞপ্তি আইকনে Morphe লোগোই থাকে</string>
     <string name="adaptive_icon_created_success">অ্যাডাপ্টিভ আইকন সফলভাবে তৈরি হয়েছে</string>
     <string name="adaptive_icon_creation_failed">অ্যাডাপ্টিভ আইকন তৈরি করতে ব্যর্থ হয়েছে</string>
-    <string name="adaptive_icon_label">অভিযোজিত</string>
-    <string name="adaptive_icon_monochrome_label">একবর্ণ</string>
     <string name="adaptive_icon_guide">আইকন তৈরি করার নির্দেশিকা</string>
     <string name="adaptive_icon_guide_png_title">স্বচ্ছ পটভূমি সহ একটি PNG ব্যবহার করুন</string>
-    <string name="adaptive_icon_guide_png_body">foregroundView অবশ্যই একটি স্বচ্ছ পটভূমি সহ একটি PNG ফাইল হতে হবে। একটি সলিড রঙের পটভূমি ভুল দেখাবে - পটভূমির রঙটি নীচের ব্যাকগ্রাউন্ড পিকার থেকে আসা উচিত।</string>
+    <string name="adaptive_icon_guide_png_body">নিচে বেছে নেওয়া ব্যাকগ্রাউন্ডের রঙসহ স্বচ্ছ ব্যাকগ্রাউন্ডে থাকা লোগো সবচেয়ে ভালো কাজ করে। স্বচ্ছতা ছাড়া একটি ছবি পুরো আইকনটি ভরাট করে এবং তখন থিমযুক্ত ও বিজ্ঞপ্তি আইকনে Morphe লোগোই থাকে।</string>
     <string name="adaptive_icon_guide_safe_zones_title">নিরাপদ অঞ্চল</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"অভ্যন্তরীণ অঞ্চল (সলিড): বিষয়বস্তু সর্বদা সমস্ত লঞ্চার আকারে সম্পূর্ণরূপে দৃশ্যমান হবে।
-বাহ্য অঞ্চল (ড্যাশড): লঞ্চার মাস্ক দ্বারা ক্লিপ করা হতে পারে - গুরুত্বপূর্ণ বিবরণগুলি অভ্যন্তরীণ অঞ্চলে রাখুন।"</string>
+    <string name="adaptive_icon_guide_safe_zones_body">রূপরেখাটি আপনার লঞ্চারের আইকনের আকৃতি দেখায় এবং এর বাইরের সবকিছু কেটে যায়। অন্যান্য লঞ্চার অন্য আকৃতি ব্যবহার করে, তাই গুরুত্বপূর্ণ বিবরণ ড্যাশযুক্ত বৃত্তের ভিতরে রাখুন, যা প্রতিটি আকৃতিতে দেখা যায়।</string>
     <string name="adaptive_icon_guide_notification_title">নোটিফিকেশন আইকন</string>
-    <string name="adaptive_icon_guide_notification_body">foregroundView থেকে স্বয়ংক্রিয়ভাবে তৈরি করা হয়েছে। নোটিফিকেশন স্লাইডার ব্যবহার করে এর আকার সামঞ্জস্য করুন। স্ট্যাটাস বারে সমস্ত দৃশ্যমান বিষয়বস্তু সাদা দেখাবে।</string>
-    <string name="adaptive_icon_guide_monochrome_title">একবর্ণ আইকন</string>
-    <string name="adaptive_icon_guide_monochrome_body">foregroundView থেকে একই অভিযোজিত আইকন রূপান্তর ব্যবহার করে স্বয়ংক্রিয়ভাবে তৈরি করা হয়েছে। Android 13 এবং পরবর্তী সংস্করণে এটি ওয়ালপেপার অ্যাকসেন্ট রঙের সাথে টিন্টেড দেখা যাবে।</string>
+    <string name="adaptive_icon_guide_notification_body">ছবির দৃশ্যমান অংশ থেকে কাটা হয় এবং ফাইলের মার্জিন যাই হোক না কেন, অন্যান্য স্ট্যাটাস বার আইকনের মতো আকার দেওয়া হয়। প্রিভিউয়ের নিচের স্লাইডার দিয়ে এটি সামঞ্জস্য করুন। Android এটি একটি একক রঙে দেখায়।</string>
+    <string name="adaptive_icon_guide_monochrome_title">থিমযুক্ত আইকন</string>
+    <string name="adaptive_icon_guide_monochrome_body">লঞ্চার আইকনের মতো একই অবস্থান এবং আকারে ছবি থেকে কাটা হয়। Android 13 এবং পরবর্তী সংস্করণে, থিমযুক্ত আইকন চালু থাকা লঞ্চারগুলো ওয়ালপেপার থেকে এতে রঙ করে।</string>
     <string name="notification_icon_preview">নোটিফিকেশন</string>
     <!-- Header Creator -->
     <string name="header_creator_create">মুখপাতা তৈরি করুন</string>
     <string name="header_creator_light_theme">লাইট থিম হেডার</string>
     <string name="header_creator_dark_theme">ডার্ক থিম হেডার</string>
-    <string name="header_creator_no_image">কোন ছবি নির্বাচন করা হয়নি</string>
     <string name="header_creator_success">হেডার সফলভাবে তৈরি হয়েছে</string>
     <string name="header_creator_failed">হেডার তৈরি করতে ব্যর্থ হয়েছে</string>
     <string name="header_creator_guide">হেডার তৈরি করার নির্দেশিকা</string>
     <string name="header_creator_guide_image_title">ইমেজ প্রয়োজনীয়তা</string>
-    <string name="header_creator_guide_image_body">যেকোনো ইমেজ ফাইল (PNG বা JPEG) ব্যবহার করুন। সেরা ফলাফলের জন্য, প্রায় 2.7:1 এর দিক অনুপাত সহ একটি ওয়াইড-ফরম্যাট ইমেজ ব্যবহার করুন। স্বচ্ছ পটভূমি সহ PNG ফাইলগুলি অ্যাপের থিমের সাথে স্বাভাবিকভাবে মিশে যাবে।</string>
+    <string name="header_creator_guide_image_body">স্বচ্ছ ব্যাকগ্রাউন্ডযুক্ত একটি PNG অ্যাপ বারের সাথে মিশে যায়। ফাইলে লোগোর চারপাশের মার্জিন উপেক্ষা করা হয়, তাই এটি স্টক লোগোর আকার এবং অবস্থানে শুরু হয়।</string>
     <string name="header_creator_guide_themes_title">লাইট এবং ডার্ক থিম</string>
     <string name="header_creator_guide_themes_body">বেশিরভাগ অ্যাপের জন্য লাইট এবং ডার্ক থিমের জন্য আলাদা ইমেজ প্রয়োজন। কিছু অ্যাপ (যেমন YouTube Music) শুধুমাত্র ডার্ক থিম ব্যবহার করে, তাই শুধুমাত্র সেই অংশটি দেখানো হয়েছে।</string>
     <string name="header_creator_guide_positioning_title">অবস্থান এবং স্কেলিং</string>
-    <string name="header_creator_guide_positioning_body">অবস্থান এবং স্কেল করার জন্য সরাসরি প্রিভিউতে পিঞ্চ-টু-জুম এবং ড্র্যাগ অঙ্গভঙ্গি ব্যবহার করুন। ইমেজটি কেন্দ্রের কাছাকাছি এলে স্ন্যাপ গাইড প্রদর্শিত হবে। আপনি প্রিভিউর নীচে স্লাইডারটিও ব্যবহার করতে পারেন।</string>
+    <string name="header_creator_guide_positioning_body">এডিটরে ছবিটি টেনে আনুন বা চিমটি করুন, অথবা স্লাইডার দিয়ে এর আকার দিন। ড্যাশযুক্ত বাক্সটি স্টক লোগো যেখানে থাকে তা চিহ্নিত করে এবং ছবিটি এর সাথে সারিবদ্ধ হলে গাইড প্রদর্শিত হয়।</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">টি প্যাচ নির্বাচন করা হয়েছে</string>
     <string name="batch_patch_title">ব্যাচ প্যাচিং</string>

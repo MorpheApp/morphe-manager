@@ -59,8 +59,10 @@
     <!-- Badge on a patch option that has to be filled in before patching -->
     <!-- Hint under an image patch option. "%1$s" is the width and "%2$s" the height in pixels -->
     <!-- Adaptive Icon Creator -->
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <!-- Caption under the launcher icon in its own colors -->
+    <!-- Caption under the launcher icon recolored by the system theme -->
     <!-- Header Creator -->
     <!-- Batch patching -->
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->

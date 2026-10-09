@@ -392,44 +392,43 @@ Pour de meilleurs résultats, cette application recommande d'effectuer le patchi
     <string name="adaptive_icon_select_image">Sélectionner une image</string>
     <string name="adaptive_icon_change_image">Changer d\'image</string>
     <string name="image_load_failed">Impossible de charger cette image</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Image de premier plan</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Icône du lanceur</string>
+    <string name="adaptive_icon_gesture_hint">Faites glisser pour déplacer, pincez pour redimensionner</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Aperçu</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Standard</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Thématique</string>
     <string name="adaptive_icon_background_color">Couleur d\'arrière-plan</string>
     <string name="adaptive_icon_reset_transform">Réinitialiser la position et la taille</string>
-    <string name="adaptive_icon_safe_zone_inner">Zone de sécurité (toujours visible)</string>
-    <string name="adaptive_icon_safe_zone_outer">Zone de masquage (peut être rognée)</string>
-    <string name="adaptive_icon_no_transparency_warning">L\'image n\'a aucun pixel transparent. Le résultat risque d\'être incorrect</string>
+    <string name="adaptive_icon_no_transparency_warning">Cette image ne contient aucun pixel transparent, les icônes thématique et de notification conservent donc le logo Morphe</string>
     <string name="adaptive_icon_created_success">Icône adaptative créée avec succès</string>
     <string name="adaptive_icon_creation_failed">Échec de la création de l\'icône adaptative</string>
-    <string name="adaptive_icon_label">Adaptative</string>
-    <string name="adaptive_icon_monochrome_label">Monochrome</string>
     <string name="adaptive_icon_guide">Guide de création d\'icônes</string>
     <string name="adaptive_icon_guide_png_title">Utilisez un PNG avec un arrière-plan transparent</string>
-    <string name="adaptive_icon_guide_png_body">Le premier plan doit être un fichier PNG avec un arrière-plan transparent. Un arrière-plan uni donnera un résultat incorrect - la couleur de fond doit être choisie à l\'aide du sélecteur ci-dessous.</string>
+    <string name="adaptive_icon_guide_png_body">Un logo sur un fond transparent est préférable, avec la couleur d\'arrière-plan sélectionnée ci-dessous. Une image sans transparence remplit entièrement l\'icône à la place, et les icônes thématique et de notification conserveront alors le logo Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Zones de sécurité</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Zone intérieure (pleine) : le contenu est toujours entièrement visible sur toutes les formes de lanceur.
-Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - gardez les éléments importants à l'intérieur de la zone intérieure."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Le contour indique la forme de l\'icône de votre lanceur, et tout ce qui se trouve à l\'extérieur est rogné. D\'autres lanceurs utilisent d\'autres formes, alors gardez les détails importants à l\'intérieur du cercle en pointillés, que toutes les formes affichent.</string>
     <string name="adaptive_icon_guide_notification_title">Icône de notification</string>
-    <string name="adaptive_icon_guide_notification_body">Généré automatiquement à partir de l\'image du premier plan. Ajustez sa taille à l\'aide du curseur de notification. Tout le contenu visible apparaît en blanc dans la barre d\'état.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Icône monochrome</string>
-    <string name="adaptive_icon_guide_monochrome_body">Généré automatiquement à partir de l\'image de premier plan en utilisant les mêmes transformations que l\'icône adaptative. Il apparaît teinté avec la couleur d\'accent du fond d\'écran sur Android 13 et versions ultérieures.</string>
+    <string name="adaptive_icon_guide_notification_body">Rognée à partir de la partie visible de l\'image et redimensionnée comme les autres icônes de la barre d\'état, quelle que soit la marge du fichier. Ajustez-la avec le curseur sous l\'aperçu. Android l\'affiche dans une seule couleur.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Icône thématique</string>
+    <string name="adaptive_icon_guide_monochrome_body">Rognée à partir de l\'image avec la même position et la même taille que l\'icône du lanceur. Sur Android 13 et versions ultérieures, les lanceurs avec les icônes thématiques activées la colorent à partir du fond d\'écran.</string>
     <string name="notification_icon_preview">Notification</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Créer un en-tête personnalisé</string>
     <string name="header_creator_light_theme">En-tête du thème clair</string>
     <string name="header_creator_dark_theme">En-tête du thème sombre</string>
-    <string name="header_creator_no_image">Aucune image sélectionnée</string>
     <string name="header_creator_success">En-tête créé avec succès</string>
     <string name="header_creator_failed">Échec de la création de l\'en-tête</string>
     <string name="header_creator_guide">Guide de création d\'en-tête</string>
     <string name="header_creator_guide_image_title">Exigences relatives à l\'image</string>
-    <string name="header_creator_guide_image_body">Utilisez n\'importe quel fichier image (PNG ou JPEG). Pour de meilleurs résultats, utilisez une image au format large avec un ratio d\'aspect d\'environ 2.7:1. Les fichiers PNG avec un arrière-plan transparent s\'intègrent naturellement au thème de l\'application.</string>
+    <string name="header_creator_guide_image_body">Un PNG avec un arrière-plan transparent se fond dans la barre de l\'application. Les marges autour du logo dans le fichier sont ignorées, il commence donc à la taille et à l\'emplacement du logo d\'origine.</string>
     <string name="header_creator_guide_themes_title">Thèmes clair et sombre</string>
     <string name="header_creator_guide_themes_body">La plupart des applications nécessitent des images distinctes pour les thèmes clair et sombre. Certaines applications (comme YouTube Music) utilisent uniquement le thème sombre, donc seule cette section est affichée.</string>
     <string name="header_creator_guide_positioning_title">Positionnement et mise à l\'échelle</string>
-    <string name="header_creator_guide_positioning_body">Utilisez les gestes de pincement pour zoomer et de glissement directement dans l\'aperçu pour positionner et redimensionner votre image. Des guides d\'alignement apparaissent lorsque l\'image est proche du centre. Vous pouvez également utiliser le curseur sous l\'aperçu.</string>
+    <string name="header_creator_guide_positioning_body">Faites glisser et pincez l\'image dans l\'éditeur, ou redimensionnez-la avec le curseur. La boîte en pointillés indique où se trouve le logo d\'origine, et des repères apparaissent lorsque l\'image s\'aligne avec celui-ci.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Patcher les applications sélectionnées</string>
     <string name="batch_patch_title">Patching par lots</string>
@@ -495,13 +494,14 @@ Zone extérieure (pointillée) : peut être rognée par le masque du lanceur - g
     <string name="home_app_info_app_update_available_description">Les sources de patchs prennent en charge une version plus récente de cette application. Patchez à nouveau pour passer à cette version</string>
     <string name="home_app_info_newest_supported_version">Dernière version prise en charge</string>
     <string name="home_app_info_version_move">Version installée %1$s, dernière version prise en charge %2$s</string>
-    <string name="home_app_info_version_restore">Version installée : %1$s, version patchée : %2$s</string>
+    <string name="home_app_info_version_restore">Installée : %1$s, patchée : %2$s</string>
     <string name="home_app_info_app_deleted_warning">L\'application a été désinstallée</string>
     <string name="home_app_info_app_deleted_description">Cette application a été désinstallée en dehors de Morphe. Re-patchez-la pour restaurer les fonctionnalités
 </string>
     <string name="home_app_info_not_patched_description">Une version non patchée de cette application est installée. Morphe conserve toujours son ancien patch</string>
-    <string name="home_app_info_mount_replaced_description">Une autre version a remplacé l\'application montée, le patch ne s\'applique donc plus. Restaurer remet la version patchée en place</string>
-    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play a mis à jour l\'application montée, le patch ne s\'applique donc plus. Restaurer remet la version patchée en place. Désactivez la mise à jour automatique de cette application dans Google Play pour la garder patchée</string>
+    <string name="home_app_info_mount_replaced_description">Une autre version a remplacé l\'application montée, donc le patch ne s\'applique plus. Restaurer remet la version patchée</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play a mis à jour l\'application montée, donc le patch ne s\'applique plus.
+Restaurer remet la version patchée. Désactive les mises à jour automatiques pour cette application dans Google Play afin de la garder patchée</string>
     <string name="app_links_title">Liens web pris en charge</string>
     <string name="app_links_description">Sur Android 12 et plus, les liens vers les domaines pris en charge s\'ouvrent par défaut dans votre navigateur, sauf s\'ils sont approuvés</string>
     <string name="app_links_unverified_banner_title">Liens web non vérifiés</string>
@@ -630,7 +630,7 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="patcher_memory_adjustment_title">Mémoire insuffisante</string>
     <string name="patcher_memory_adjustment_description">Le patcheur a été arrêté par le système alors qu\'il était exécuté avec une limite de mémoire de %1$d Mo. Réduire la limite à %2$d Mo rend le patcheur moins gourmand en mémoire et peut permettre à l\'exécution de se terminer</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Le patcheur a été arrêté par le système alors qu\'il était exécuté avec une limite de mémoire de %1$d Mo, qui est déjà la plus basse disponible. Essayez de patcher avec moins de sources de patchs, ou sélectionnez moins de patchs</string>
-    <string name="patcher_memory_adjustment_description_finished">Le système a arrêté le patcher à une limite de mémoire de %1$d Mo, et il n\'a abouti qu\'avec %2$d Mo. Démarrer avec %2$d Mo permet d\'éviter cette tentative perdue la prochaine fois</string>
+    <string name="patcher_memory_adjustment_description_finished">Le système a arrêté le patcheur à une limite de mémoire de %1$d Mo, et il n\'a terminé qu\'à %2$d Mo. Commencer à %2$d Mo la prochaine fois permet d\'éviter cette tentative perdue</string>
     <string name="patcher_memory_adjustment_apply">Réduire à %1$d Mo</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patching en cours…</string>
@@ -712,7 +712,7 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="mini_game_blocks_picker_subtitle">Emboîtez les formes, effacez les lignes</string>
     <string name="mini_game_blocks_tap_to_start">Touchez pour faire pivoter, faites glisser pour déplacer, faites glisser vers le bas pour déposer</string>
     <string name="mini_game_bricks_picker_subtitle">Faites rebondir la balle, détruisez le mur</string>
-    <string name="mini_game_bricks_tap_to_start">Glissez pour viser, touchez pour lancer</string>
+    <string name="mini_game_bricks_tap_to_start">Faites glisser pour viser, touchez pour lancer</string>
     <string name="mini_game_miner_picker_subtitle">Touchez pour ouvrir, maintenez appuyé pour marquer</string>
     <string name="mini_game_pairs_picker_subtitle">Retournez les cartes, trouvez la paire correspondante</string>
     <!-- Settings -->

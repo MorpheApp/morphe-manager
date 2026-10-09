@@ -390,44 +390,43 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="adaptive_icon_select_image">Vælg billede</string>
     <string name="adaptive_icon_change_image">Ændre billede</string>
     <string name="image_load_failed">Kunne ikke indlæse dette billede</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Forgrundsbillede</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Launcher-ikon</string>
+    <string name="adaptive_icon_gesture_hint">Træk for at flytte, knib for at ændre størrelsen</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Forhåndsvisning</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Standard</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Tematiseret</string>
     <string name="adaptive_icon_background_color">Baggrundsfarve</string>
     <string name="adaptive_icon_reset_transform">Nulstil position og skala</string>
-    <string name="adaptive_icon_safe_zone_inner">Sikker zone (altid synlig)</string>
-    <string name="adaptive_icon_safe_zone_outer">Maskezone (kan blive beskåret)</string>
-    <string name="adaptive_icon_no_transparency_warning">Billedet har ingen transparente pixels. Resultatet kan se forkert ud</string>
+    <string name="adaptive_icon_no_transparency_warning">Dette billede har ingen gennemsigtige pixels, så de tematiserede ikoner og notifikationsikoner beholder Morphe-logoet</string>
     <string name="adaptive_icon_created_success">Adaptiv ikon oprettet med succes</string>
     <string name="adaptive_icon_creation_failed">Kunne ikke oprette adaptiv ikon</string>
-    <string name="adaptive_icon_label">Adaptiv</string>
-    <string name="adaptive_icon_monochrome_label">Monokrom</string>
     <string name="adaptive_icon_guide">Guide til ikondesign</string>
     <string name="adaptive_icon_guide_png_title">Brug en PNG-fil med en gennemsigtig baggrund</string>
-    <string name="adaptive_icon_guide_png_body">Forgrunden skal være en PNG-fil med en gennemsigtig baggrund. En baggrund med ens farve vil se forkert ud – baggrundsfarven skal komme fra farvevælgeren nedenfor.</string>
+    <string name="adaptive_icon_guide_png_body">Et logo på en gennemsigtig baggrund fungerer bedst, med baggrundsfarven valgt nedenfor. Et billede uden gennemsigtighed fylder i stedet hele ikonet, og de tematiserede ikoner og notifikationsikoner beholder så Morphe-logoet.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Sikkerhedszoner</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Indre zone (massiv): Indhold er altid fuldt synligt på alle launcher-former.
-Ydre zone (stiplet): Kan blive beskåret af launcher-masken – hold vigtige detaljer inde i den indre zone."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Omridset viser formen på din launcher, og alt uden for omridset klippes væk. Andre launchere bruger andre former, så hold vigtige detaljer inde i den stiplede cirkel, som alle former viser.</string>
     <string name="adaptive_icon_guide_notification_title">Notifikationsikon</string>
-    <string name="adaptive_icon_guide_notification_body">Genereres automatisk fra billedet i forgrunden. Juster størrelsen med skyderen for notifikationer. Alt synligt indhold vises i hvid i statuslinjen.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Monokromt ikon</string>
-    <string name="adaptive_icon_guide_monochrome_body">Genereres automatisk fra billedet i forgrunden ved hjælp af de samme adaptive ikontransformationer. Det vises tonet med tapetaccentfarven på Android 13 og nyere.</string>
+    <string name="adaptive_icon_guide_notification_body">Det klippes fra den synlige del af billedet og får samme størrelse som andre statuslinjeikoner, uanset hvilken margen filen har. Juster det med skyderen under forhåndsvisningen. Android viser det i en enkelt farve.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Tematiseret ikon</string>
+    <string name="adaptive_icon_guide_monochrome_body">Det klippes fra billedet med samme placering og størrelse som launcher-ikonet. På Android 13 og nyere farver launchere, der har tematiserede ikoner slået til, det ud fra tapetet.</string>
     <string name="notification_icon_preview">Notifikation</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Opret tilpasset sidehoved</string>
     <string name="header_creator_light_theme">Lys tema sidehoved</string>
     <string name="header_creator_dark_theme">Mørk tema sidehoved</string>
-    <string name="header_creator_no_image">Intet billede valgt</string>
     <string name="header_creator_success">Sidehoved oprettet med succes</string>
     <string name="header_creator_failed">Kunne ikke oprette sidehoved</string>
     <string name="header_creator_guide">Guide til header-oprettelse</string>
     <string name="header_creator_guide_image_title">Billedkrav</string>
-    <string name="header_creator_guide_image_body">Brug en hvilken som helst billedfil (PNG eller JPEG). For de bedste resultater skal du bruge et bredformatbillede med et aspektforhold på ca. 2,7:1. PNG-filer med gennemsigtige baggrunde vil blende naturligt med app-temaet.</string>
+    <string name="header_creator_guide_image_body">En PNG med en gennemsigtig baggrund smelter ind i app-linjen. Margener omkring logoet i filen ignoreres, så det starter med samme størrelse og placering som standardlogoet.</string>
     <string name="header_creator_guide_themes_title">Lyse og mørke temaer</string>
     <string name="header_creator_guide_themes_body">De fleste apps kræver separate billeder til de lyse og mørke temaer. Nogle apps (f.eks. YouTube Music) bruger kun det mørke tema, så kun det afsnit vises.</string>
     <string name="header_creator_guide_positioning_title">Positionering og skalering</string>
-    <string name="header_creator_guide_positioning_body">Brug knib-til-zoom og trækbevægelser direkte i forhåndsvisningen for at placere og skalere dit billede. Snappingsguider vises, når billedet er tæt på midten. Du kan også bruge skyderen under forhåndsvisningen.</string>
+    <string name="header_creator_guide_positioning_body">Træk og knib billedet i editoren, eller juster størrelsen med skyderen. Den stiplede boks markerer, hvor standardlogoet sidder, og der vises hjælpelinjer, når billedet flugter med det.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Valgt patch</string>
     <string name="batch_patch_title">Batch patching</string>

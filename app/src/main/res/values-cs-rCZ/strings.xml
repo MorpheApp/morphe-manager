@@ -390,44 +390,43 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
     <string name="adaptive_icon_select_image">Vybrat obrázek</string>
     <string name="adaptive_icon_change_image">Změnit obrázek</string>
     <string name="image_load_failed">Tento obrázek se nepodařilo načíst</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Obrázek v popředí</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Ikona spouštěče</string>
+    <string name="adaptive_icon_gesture_hint">Přetažením přesunete, sevřením prstů změníte velikost</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Náhled</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Standardní</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Motivová</string>
     <string name="adaptive_icon_background_color">Barva pozadí</string>
     <string name="adaptive_icon_reset_transform">Resetovat pozici a měřítko</string>
-    <string name="adaptive_icon_safe_zone_inner">Bezpečná zóna (vždy viditelná)</string>
-    <string name="adaptive_icon_safe_zone_outer">Maskovací zóna (může být skryta)</string>
-    <string name="adaptive_icon_no_transparency_warning">Obrázek neobsahuje průhledné pixely. Výsledek se může zobrazit nesprávně</string>
+    <string name="adaptive_icon_no_transparency_warning">Tento obrázek nemá žádné průhledné pixely, takže motivové ikony a ikony oznámení si ponechají logo Morphe</string>
     <string name="adaptive_icon_created_success">Adaptivní ikona byla úspěšně vytvořena</string>
     <string name="adaptive_icon_creation_failed">Adaptivní ikona se nepodařila vytvořit</string>
-    <string name="adaptive_icon_label">Adaptivní</string>
-    <string name="adaptive_icon_monochrome_label">Monochromá</string>
     <string name="adaptive_icon_guide">Návod k vytvoření ikon</string>
     <string name="adaptive_icon_guide_png_title">Použijte PNG s prühzím pozadím</string>
-    <string name="adaptive_icon_guide_png_body">Popřední pozadí musí být PNG soubor s prühzím pozadím. Jednobarevné pozadí bude vypadat nesprávně - barva pozadí by měla pocházet z názorníku pozadí uvedeného níže.</string>
+    <string name="adaptive_icon_guide_png_body">Nejlépe funguje logo na průhledném pozadí, s barvou pozadí zvolenou níže. Obrázek bez průhlednosti místo toho vyplní celou ikonu a motivové ikony a ikony oznámení si pak ponechají logo Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Bezpečné zóny</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Vnitřní zóna (plná): obsah je vždy plně viditelný ve všech tvarech spouštěč
-Vnějní zóna (přerušovaná): může být ořezaná maskou spouštěčé - udržujte důležité detaily uvnitř vnitřní zóny."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Obrys znázorňuje tvar ikony vašeho spouštěče a vše mimo něj je oříznuto. Jiné spouštěče používají jiné tvary, proto důležité detaily ponechte uvnitř přerušovaného kruhu, který je vidět u všech tvarů.</string>
     <string name="adaptive_icon_guide_notification_title">Ikona oznámení</string>
-    <string name="adaptive_icon_guide_notification_body">Automaticky generováno z popředního obrazu. Upravte jeí velikost pomocí přesuvníku Oznámení. Veškerý viditelný obsah se v horním panelu zobrazuje bíle.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Monochromá ikona</string>
-    <string name="adaptive_icon_guide_monochrome_body">Automaticky generováno z popředního obrazu pomocí stejných transformací adaptivních ikon. Zobrazuje se s odstínem barvy tapety v Androidu 13 a nověším.</string>
+    <string name="adaptive_icon_guide_notification_body">Ořízne se z viditelné části obrázku a bude mít velikost jako ostatní ikony stavového řádku, ať má soubor jakýkoli okraj. Nastavíte ji posuvníkem pod náhledem. Android ji zobrazuje v jedné barvě.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Motivová ikona</string>
+    <string name="adaptive_icon_guide_monochrome_body">Ořízne se z obrázku se stejnou pozicí a velikostí jako ikona spouštěče. V systému Android 13 a novějším ji spouštěče se zapnutými motivovými ikonami obarví podle tapety.</string>
     <string name="notification_icon_preview">Oznámení</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Vytvořit vlastní záhlaví</string>
     <string name="header_creator_light_theme">Záhlaví pro světlé téma</string>
     <string name="header_creator_dark_theme">Záhlaví pro tmavé téma</string>
-    <string name="header_creator_no_image">Není vybrán žádný obrázek</string>
     <string name="header_creator_success">Záhlaví vytvořeno úspěšně</string>
     <string name="header_creator_failed">Nepodařilo se vytvořit záhlaví</string>
     <string name="header_creator_guide">Návod k vytvoření hlavičky</string>
     <string name="header_creator_guide_image_title">Požadavky k obrazu</string>
-    <string name="header_creator_guide_image_body">Použijte jakýkoli obrazový soubor (PNG nebo JPEG). Pro dosažení nejlepších výsledků použijte obraz sširokého formátu s poměrem stran přibližně 2,7:1. PNG soubory s prühzím pozadím se budé přirozeně míchat s motivem aplikace.</string>
+    <string name="header_creator_guide_image_body">PNG s průhledným pozadím splyne s panelem aplikace. Okraje kolem loga v souboru se ignorují, takže začíná na velikosti a v místě výchozího loga.</string>
     <string name="header_creator_guide_themes_title">Světlý a tmavý motivy</string>
     <string name="header_creator_guide_themes_body">Většina aplikací vyžaduje samostatný obraz pro světlý a tmavý motiv. Nětkterý aplikace (například YouTube Music) používají pouze tmavý motiv, proto je zobrazena pouze tato sekce.</string>
     <string name="header_creator_guide_positioning_title">Pozicování a měřítko</string>
-    <string name="header_creator_guide_positioning_body">Pomocí gest klepnutím a roztáhnutím přímo v náhledu k pozicování a změnné velikosti obrazu. Vodící linky se zobrazí, když se obraz nachází blízko středu. Můžšte použít i posuvník pod náhledem.</string>
+    <string name="header_creator_guide_positioning_body">Obrázek v editoru můžete přetahovat a sevřením prstů měnit jeho velikost, nebo jeho velikost upravit posuvníkem. Přerušovaný rámeček označuje umístění výchozího loga a vodítka se zobrazí, když se s ním obrázek zarovná.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Záplata vybrána</string>
     <string name="batch_patch_title">Hromadné záplatování</string>

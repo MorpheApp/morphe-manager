@@ -197,7 +197,7 @@
     <string name="sources_dialog_remote_url_hint">リポジトリまたはパッチバンドル (.json) へのリンクです。複数まとめて貼り付けると、一度に追加できます</string>
     <string name="sources_dialog_paste_no_links">クリップボードにリンクが見つかりません</string>
     <string name="sources_dialog_local">ローカル</string>
-    <string name="sources_dialog_local_files">パッチソースファイルを選択</string>
+    <string name="sources_dialog_local_files">パッチ ソース ファイルを選択</string>
     <!-- Button under the files already picked, which opens the picker again -->
     <string name="sources_dialog_local_add_more">ファイルをさらに追加</string>
     <string name="sources_dialog_local_file_tap_hint">タップしてストレージを参照</string>
@@ -390,44 +390,43 @@
     <string name="adaptive_icon_select_image">画像を選択</string>
     <string name="adaptive_icon_change_image">画像を変更</string>
     <string name="image_load_failed">この画像を読み込めませんでした</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">前景画像</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">ランチャーアイコン</string>
+    <string name="adaptive_icon_gesture_hint">ドラッグで移動、ピンチでサイズ変更</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">プレビュー</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">標準</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">テーマ</string>
     <string name="adaptive_icon_background_color">背景色</string>
     <string name="adaptive_icon_reset_transform">位置とスケールをリセット</string>
-    <string name="adaptive_icon_safe_zone_inner">セーフゾーン（常に表示される）</string>
-    <string name="adaptive_icon_safe_zone_outer">マスクゾーン（切り取られる可能性あり）</string>
-    <string name="adaptive_icon_no_transparency_warning">画像に透明ピクセルが含まれていません。正しく表示されない可能性があります</string>
+    <string name="adaptive_icon_no_transparency_warning">この画像には透明なピクセルが含まれていないため、テーマアイコンと通知アイコンはMorpheのロゴのままです</string>
     <string name="adaptive_icon_created_success">アダプティブ アイコンの作成に成功しました</string>
     <string name="adaptive_icon_creation_failed">アダプティブ アイコンの作成に失敗しました</string>
-    <string name="adaptive_icon_label">アダプティブ</string>
-    <string name="adaptive_icon_monochrome_label">モノクロ</string>
     <string name="adaptive_icon_guide">アイコン作成ガイド</string>
     <string name="adaptive_icon_guide_png_title">背景が透明な PNG を使用する</string>
-    <string name="adaptive_icon_guide_png_body">前景画像には、背景が透明な PNG ファイルを使用してください。単色の背景を含む画像は正しく表示されない場合があります。背景色は下の背景色ピッカーから設定してください。</string>
+    <string name="adaptive_icon_guide_png_body">透明な背景のロゴが最適です。背景色は下で選択します。透明部分のない画像の場合は、アイコン全体がその画像で埋められ、テーマアイコンと通知アイコンはMorpheロゴのままになります。</string>
     <string name="adaptive_icon_guide_safe_zones_title">セーフゾーン</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"内側の領域（実線）：すべてのランチャー形状で確実に表示されます。
-外側の領域（破線）：ランチャーマスクによって一部が切り取られる場合があります。重要な部分は内側の領域に配置してください。"</string>
+    <string name="adaptive_icon_guide_safe_zones_body">アウトラインは、お使いのランチャーのアイコン形状を示し、その外側はすべて切り取られます。他のランチャーは別の形状を使用するため、すべての形状で表示される点線の円の内側に重要な詳細を配置してください。</string>
     <string name="adaptive_icon_guide_notification_title">通知アイコン</string>
-    <string name="adaptive_icon_guide_notification_body">前景画像から自動生成されます。サイズは「通知」スライダーで調整できます。表示される内容は、ステータスバーではすべて白色で表示されます。</string>
-    <string name="adaptive_icon_guide_monochrome_title">モノクロアイコン</string>
-    <string name="adaptive_icon_guide_monochrome_body">前景画像をもとに、同じアダプティブ アイコン変換を使用して自動的に生成されます。Android 13 以降では、壁紙のアクセント カラーが適用されます。</string>
+    <string name="adaptive_icon_guide_notification_body">画像の表示部分から切り取られ、ファイルに余白があっても、他のステータスバーアイコンと同じサイズに調整されます。プレビューの下のスライダーで調整します。Androidでは単色で表示されます。</string>
+    <string name="adaptive_icon_guide_monochrome_title">テーマアイコン</string>
+    <string name="adaptive_icon_guide_monochrome_body">ランチャーアイコンと同じ位置とサイズで画像から切り取られます。Android 13以降では、テーマアイコンを有効にしたランチャーが壁紙から色を取得して着色します。</string>
     <string name="notification_icon_preview">通知</string>
     <!-- Header Creator -->
     <string name="header_creator_create">カスタム ヘッダーを作成</string>
     <string name="header_creator_light_theme">ライトテーマのヘッダー</string>
     <string name="header_creator_dark_theme">ダークテーマのヘッダー</string>
-    <string name="header_creator_no_image">画像が選択されていません</string>
     <string name="header_creator_success">ヘッダーの作成に成功しました</string>
     <string name="header_creator_failed">ヘッダーの作成に失敗しました</string>
     <string name="header_creator_guide">ヘッダー作成ガイド</string>
     <string name="header_creator_guide_image_title">画像の要件</string>
-    <string name="header_creator_guide_image_body">PNG または JPEG の画像ファイルを使用できます。より良い結果を得るためには、アスペクト比が約 2.7:1 の横長画像を使用してください。背景が透明な PNG ファイルは、アプリのテーマに自然に溶け込みます。</string>
+    <string name="header_creator_guide_image_body">背景が透明なPNGは、アプリバーに自然になじみます。ファイル内のロゴの周囲の余白は無視され、標準ロゴと同じサイズと位置で始まります。</string>
     <string name="header_creator_guide_themes_title">ライトテーマとダークテーマ</string>
     <string name="header_creator_guide_themes_body">多くのアプリでは、ライトテーマ用とダークテーマ用にそれぞれ画像が必要です。一部のアプリ（YouTube Music など）はダークテーマのみを使用するため、該当するセクションのみ表示されます。</string>
     <string name="header_creator_guide_positioning_title">位置とサイズ調整</string>
-    <string name="header_creator_guide_positioning_body">プレビュー上でピンチズームやドラッグ操作を使用して、画像の位置やサイズを調整できます。画像が中央付近にあるときにスナップガイドが表示されます。プレビュー下のスライダーを使用して調整することもできます。</string>
+    <string name="header_creator_guide_positioning_body">エディターで画像をドラッグまたはピンチするか、スライダーでサイズを調整します。点線のボックスは標準ロゴの位置を示し、画像がその位置に揃うとガイドが表示されます。</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">選択したアプリにパッチを適用</string>
     <string name="batch_patch_title">一括パッチ</string>

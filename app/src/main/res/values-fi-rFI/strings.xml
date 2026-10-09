@@ -391,44 +391,43 @@ Sovelluksen &lt;b&gt;%s&lt;/b&gt; tässä versiossa on varhainen kokeellinen tuk
     <string name="adaptive_icon_select_image">Valitse kuva</string>
     <string name="adaptive_icon_change_image">Vaihda kuva</string>
     <string name="image_load_failed">Tätä kuvaa ei voitu ladata</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Etualan kuva</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Käynnistyskuvake</string>
+    <string name="adaptive_icon_gesture_hint">Siirrä vetämällä, muuta kokoa nipistämällä</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Esikatselu</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Vakio</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Teema</string>
     <string name="adaptive_icon_background_color">Taustaväri</string>
     <string name="adaptive_icon_reset_transform">Palauta sijainti ja mittakaava</string>
-    <string name="adaptive_icon_safe_zone_inner">Turva-alue (aina näkyvissä)</string>
-    <string name="adaptive_icon_safe_zone_outer">Maskialue (saattaa rajautua)</string>
-    <string name="adaptive_icon_no_transparency_warning">Kuvassa ei ole läpinäkyviä pikseleitä. Tulos saattaa näyttää virheelliseltä.</string>
+    <string name="adaptive_icon_no_transparency_warning">Tässä kuvassa ei ole läpinäkyviä pikseleitä, joten teema- ja ilmoituskuvakkeet säilyttävät Morphe-logon</string>
     <string name="adaptive_icon_created_success">Adaptiivinen kuvake on luotu</string>
     <string name="adaptive_icon_creation_failed">Adaptiivisen kuvakkeen luominen epäonnistui</string>
-    <string name="adaptive_icon_label">Mukautuva</string>
-    <string name="adaptive_icon_monochrome_label">Yksivärinen</string>
     <string name="adaptive_icon_guide">Mukautetun kuvakkeen opas</string>
     <string name="adaptive_icon_guide_png_title">Käytä PNG-tiedostoa, jossa on läpinäkyvä tausta</string>
-    <string name="adaptive_icon_guide_png_body">Etualan täytyy olla PNG-tiedosto, jossa on läpinäkyvä tausta. Yksivärinen tausta näyttää väärältä – taustaväri tulee valita alla olevasta taustavärivalitsimesta.</string>
+    <string name="adaptive_icon_guide_png_body">Läpinäkyvällä taustalla oleva logo toimii parhaiten, ja taustaväri valitaan alhaalta. Kuva ilman läpinäkyvyyttä täyttää sen sijaan koko kuvakkeen, jolloin teema- ja ilmoituskuvakkeet säilyttävät Morphe-logon.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Turva-alueet</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Sisäalue (yhtenäinen): sisältö on aina täysin näkyvissä kaikissa käynnistimen muodoissa.
-Ulkopuolinen alue (katkoviiva): käynnistimen maski saattaa leikata osia siitä – pidä tärkeät tiedot sisäalueella."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Ääriviiva näyttää käynnistimesi kuvakkeen muodon, ja kaikki sen ulkopuolelle jäävä leikataan pois. Muut käynnistimet käyttävät muita muotoja, joten pidä tärkeät yksityiskohdat katkoviivaympyrän sisällä, jonka kaikki muodot näyttävät.</string>
     <string name="adaptive_icon_guide_notification_title">Ilmoituskuvake</string>
-    <string name="adaptive_icon_guide_notification_body">Luodaan automaattisesti etuosan kuvasta. Säädä sen kokoa Ilmoitukset-liukusäätimellä. Kaikki näkyvä sisältö on valkoista tilarivillä.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Yksivärinen kuvake</string>
-    <string name="adaptive_icon_guide_monochrome_body">Luodaan automaattisesti etuosan kuvasta käyttäen samoja mukautettuja kuvakemuunnoksia. Se on sävytetty taustakuvan korostusvärillä Android 13:ssa ja uudemmissa versioissa.</string>
+    <string name="adaptive_icon_guide_notification_body">Se leikataan kuvan näkyvästä osasta ja skaalataan muiden tilapalkin kuvakkeiden kokoiseksi tiedoston marginaalista riippumatta. Säädä sitä esikatselun alla olevalla liukusäätimellä. Android näyttää sen yksivärisenä.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Teemakuvake</string>
+    <string name="adaptive_icon_guide_monochrome_body">Se leikataan kuvasta samassa kohdassa ja samankokoisena kuin käynnistinkuvake. Android 13:ssa ja sitä uudemmissa versioissa käynnistimet, joissa teemakuvakkeet on otettu käyttöön, värittävät sen taustakuvan väreillä.</string>
     <string name="notification_icon_preview">Ilmoitus</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Luo oma ylätunniste</string>
     <string name="header_creator_light_theme">Vaalean teeman ylätunniste</string>
     <string name="header_creator_dark_theme">Tumman teeman ylätunniste</string>
-    <string name="header_creator_no_image">Ei valittua kuvaa</string>
     <string name="header_creator_success">Ylätunniste on luotu</string>
     <string name="header_creator_failed">Ylätunnisteen luominen epäonnistui</string>
     <string name="header_creator_guide">Ylätunnuksen luontiopas</string>
     <string name="header_creator_guide_image_title">Kuvan vaatimukset</string>
-    <string name="header_creator_guide_image_body">Käytä mitä tahansa kuvatiedostoa (PNG tai JPEG). Parhaan tuloksen saat käyttämällä leveäkuvasuhdetta noin 2,7:1. PNG-tiedostot, joissa on läpinäkyvä tausta, sulautuvat luonnollisesti sovelluksen teemaan.</string>
+    <string name="header_creator_guide_image_body">Läpinäkyvällä taustalla oleva PNG-kuva sulautuu sovelluspalkkiin. Tiedoston logon ympärillä olevat marginaalit jätetään huomiotta, joten sen koko ja paikka ovat alun perin vakiologon mukaiset.</string>
     <string name="header_creator_guide_themes_title">Vaalea ja tumma teema</string>
     <string name="header_creator_guide_themes_body">Useimmat sovellukset vaativat erilliset kuvat vaaleaa ja tummaa teemaa varten. Jotkut sovellukset (kuten YouTube Music) käyttävät vain tummaa teemaa, joten vain tämä osio näytetään.</string>
     <string name="header_creator_guide_positioning_title">Sijainti ja skaalaus</string>
-    <string name="header_creator_guide_positioning_body">Käytä nipistyszoom- ja vedä-eleitä suoraan esikatselussa kuvan sijoittamiseen ja skaalaamiseen. Ohjaimet näkyvät, kun kuva on lähellä keskustaa. Voit käyttää myös esikatselun alla olevaa liukusäädintä.</string>
+    <string name="header_creator_guide_positioning_body">Vedä ja nipistä kuvaa editorissa tai säädä sen kokoa liukusäätimellä. Katkoviivalaatikko merkitsee vakiologon paikan, ja apulinjat tulevat näkyviin, kun kuva on kohdakkain sen kanssa.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Valittu lisäosa</string>
     <string name="batch_patch_title">Ryhmäkorjaus</string>

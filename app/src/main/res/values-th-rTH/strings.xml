@@ -390,44 +390,43 @@
     <string name="adaptive_icon_select_image">เลือกภาพ</string>
     <string name="adaptive_icon_change_image">เปลี่ยนภาพ</string>
     <string name="image_load_failed">ไม่สามารถโหลดรูปภาพนี้ได้</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">ภาพพื้นหน้า</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">ไอคอนตัวเรียกใช้</string>
+    <string name="adaptive_icon_gesture_hint">ลากเพื่อย้าย บีบเพื่อปรับขนาด</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">ตัวอย่าง</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">มาตรฐาน</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">ตามธีม</string>
     <string name="adaptive_icon_background_color">สีพื้นหลัง</string>
     <string name="adaptive_icon_reset_transform">รีเซ็ตตำแหน่งและขนาด</string>
-    <string name="adaptive_icon_safe_zone_inner">เขตปลอดภัย (ปรากฏเสมอ)</string>
-    <string name="adaptive_icon_safe_zone_outer">เขตมาสก์ (อาจถูกตัด)</string>
-    <string name="adaptive_icon_no_transparency_warning">รูปภาพไม่มีพิกเซลโปร่งใส ผลลัพธ์ที่ได้อาจไม่ถูกต้อง</string>
+    <string name="adaptive_icon_no_transparency_warning">รูปภาพนี้ไม่มีพิกเซลโปร่งใส ดังนั้นไอคอนตามธีมและไอคอนการแจ้งเตือนจึงคงโลโก้ Morphe ไว้</string>
     <string name="adaptive_icon_created_success">สร้างไอคอนปรับตัวได้สำเร็จ</string>
     <string name="adaptive_icon_creation_failed">ไม่สามารถสร้างไอคอนปรับตัวได้ได้</string>
-    <string name="adaptive_icon_label">ปรับเปลี่ยนได้</string>
-    <string name="adaptive_icon_monochrome_label">ขาวดำ</string>
     <string name="adaptive_icon_guide">คำแนะนำในการสร้างไอคอน</string>
     <string name="adaptive_icon_guide_png_title">ใช้ PNG ที่มีพื้นหลังโปร่งใส</string>
-    <string name="adaptive_icon_guide_png_body">ส่วนหน้าต้องเป็นไฟล์ PNG ที่มีพื้นหลังโปร่งใส พื้นหลังสีทึบจะดูไม่ถูกต้อง - สีพื้นหลังควรมาจากตัวเลือกสีพื้นหลังด้านล่าง</string>
+    <string name="adaptive_icon_guide_png_body">โลโก้บนพื้นหลังโปร่งใสจะดีที่สุด โดยเลือกสีพื้นหลังได้จากด้านล่าง รูปภาพที่ไม่มีความโปร่งใสจะเต็มทั้งไอคอนแทน และไอคอนตามธีมและไอคอนการแจ้งเตือนจึงคงโลโก้ Morphe ไว้</string>
     <string name="adaptive_icon_guide_safe_zones_title">พื้นที่ปลอดภัย</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"โซนด้านใน (สีทึบ): เนื้อหาจะแสดงผลอย่างสมบูรณ์เสมอในทุกรูปร่างของตัวเปิด
-โซนด้านนอก (เส้นประ): อาจถูกครอบตัดโดยมาสก์ของตัวเปิด - เก็บรายละเอียดสำคัญไว้ในโซนด้านใน"</string>
+    <string name="adaptive_icon_guide_safe_zones_body">เส้นโครงร่างแสดงรูปทรงไอคอนของตัวเรียกใช้แอปของคุณ และทุกอย่างที่อยู่นอกเส้นนั้นจะถูกตัดออก ตัวเรียกใช้แอปอื่นใช้รูปทรงอื่น ดังนั้นควรเก็บรายละเอียดสำคัญไว้ในวงกลมเส้นประ ซึ่งทุกรูปทรงแสดงให้เห็น</string>
     <string name="adaptive_icon_guide_notification_title">ไอคอนการแจ้งเตือน</string>
-    <string name="adaptive_icon_guide_notification_body">สร้างขึ้นโดยอัตโนมัติจากรูปภาพส่วนหน้า ปรับขนาดโดยใช้แถบเลื่อนการแจ้งเตือน เนื้อหาที่มองเห็นทั้งหมดจะปรากฏเป็นสีขาวในแถบสถานะ</string>
-    <string name="adaptive_icon_guide_monochrome_title">ไอคอนขาวดำ</string>
-    <string name="adaptive_icon_guide_monochrome_body">สร้างขึ้นโดยอัตโนมัติจากรูปภาพส่วนหน้าโดยใช้การแปลงไอคอนปรับเปลี่ยนแบบเดียวกัน จะปรากฏสีเดียวกับสีเน้นของวอลเปเปอร์บน Android 13 ขึ้นไป</string>
+    <string name="adaptive_icon_guide_notification_body">ตัดจากส่วนที่มองเห็นได้ของภาพ และปรับขนาดให้เหมือนไอคอนแถบสถานะอื่นๆ ไม่ว่าไฟล์จะมีระยะขอบเท่าใด ปรับได้ด้วยแถบเลื่อนใต้ตัวอย่าง Android จะแสดงเป็นสีเดียว</string>
+    <string name="adaptive_icon_guide_monochrome_title">ไอคอนตามธีม</string>
+    <string name="adaptive_icon_guide_monochrome_body">ตัดจากภาพโดยใช้ตำแหน่งและขนาดเดียวกันกับไอคอนของตัวเรียกใช้แอป บน Android 13 ขึ้นไป ตัวเรียกใช้แอปที่เปิดใช้ไอคอนตามธีมจะระบายสีจากวอลเปเปอร์</string>
     <string name="notification_icon_preview">การแจ้งเตือน</string>
     <!-- Header Creator -->
     <string name="header_creator_create">สร้างเฮดเดอร์กำหนดเอง</string>
     <string name="header_creator_light_theme">เฮดเดอร์ธีมสว่าง</string>
     <string name="header_creator_dark_theme">เฮดเดอร์ธีมมืด</string>
-    <string name="header_creator_no_image">ไม่ได้เลือกรูปภาพ</string>
     <string name="header_creator_success">สร้างเฮดเดอร์สำเร็จ</string>
     <string name="header_creator_failed">ไม่สามารถสร้างเฮดเดอร์ได้</string>
     <string name="header_creator_guide">คำแนะนำในการสร้างเฮดเดอร์</string>
     <string name="header_creator_guide_image_title">ข้อกำหนดของรูปภาพ</string>
-    <string name="header_creator_guide_image_body">ใช้ไฟล์รูปภาพใดก็ได้ (PNG หรือ JPEG) เพื่อให้ได้ผลลัพธ์ที่ดีที่สุด ให้ใช้รูปภาพรูปแบบกว้างที่มีอัตราส่วนภาพประมาณ 2.7:1 ไฟล์ PNG ที่มีพื้นหลังโปร่งใสจะผสมผสานกับธีมของแอปได้อย่างเป็นธรรมชาติ</string>
+    <string name="header_creator_guide_image_body">PNG ที่มีพื้นหลังโปร่งใสจะกลมกลืนไปกับแถบแอป ระยะขอบรอบโลโก้ในไฟล์จะไม่ถูกนำมาพิจารณา ดังนั้นจึงเริ่มต้นที่ขนาดและตำแหน่งของโลโก้เริ่มต้น</string>
     <string name="header_creator_guide_themes_title">ธีมสว่างและธีมมืด</string>
     <string name="header_creator_guide_themes_body">แอปส่วนใหญ่ต้องการรูปภาพที่แยกกันสำหรับธีมสว่างและธีมมืด บางแอป (เช่น YouTube Music) ใช้เฉพาะธีมมืดเท่านั้น ดังนั้นจึงแสดงเฉพาะส่วนนั้นเท่านั้น</string>
     <string name="header_creator_guide_positioning_title">ตำแหน่งและการปรับขนาด</string>
-    <string name="header_creator_guide_positioning_body">ใช้ท่าทางหนีบเพื่อซูมและลากโดยตรงในการแสดงตัวอย่างเพื่อวางตำแหน่งและปรับขนาดรูปภาพของคุณ แนวไกด์จะปรากฏขึ้นเมื่อรูปภาพอยู่ใกล้ศูนย์ คุณยังสามารถใช้แถบเลื่อนด้านล่างการแสดงตัวอย่างได้</string>
+    <string name="header_creator_guide_positioning_body">ลากและบีบภาพในตัวแก้ไข หรือปรับขนาดด้วยแถบเลื่อน กล่องเส้นประแสดงตำแหน่งของโลโก้เริ่มต้น และเส้นบอกแนวจะปรากฏขึ้นเมื่อภาพจัดแนวตรงกับกล่องนั้น</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">แพตช์ถูกเลือก</string>
     <string name="batch_patch_title">การแพตช์เป็นชุด</string>
@@ -869,6 +868,9 @@
     <string name="notification_channel_patch_updates_description">การแจ้งเตือนเกี่ยวกับแพตช์เวอร์ชันใหม่</string>
     <string name="notification_channel_patcher_description">แสดงขณะที่ Morphe กำลังแพตช์แอปพลิเคชันในพื้นหลัง</string>
     <string name="notification_channel_mounted_apps">แอปที่เมานต์</string>
+    <string name="notification_channel_mounted_apps_description">เมื่อเวอร์ชันอื่นเข้ามาแทนที่แอปที่เมานต์ไว้ และแพตช์ของแอปนั้นใช้ไม่ได้อีกต่อไป</string>
+    <string name="notification_mount_replaced_title">%1$s ไม่ได้ถูกแพตช์อีกต่อไป</string>
+    <string name="notification_mount_replaced_text">v%1$s แทนที่ v%2$s ที่ถูกแพตช์ เปิด Morphe เพื่อกู้คืน</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">การตั้งค่าโหมดผู้เชี่ยวชาญ</string>
     <string name="settings_advanced_expert_mode">โหมดเชี่ยวชาญ</string>
@@ -1321,6 +1323,7 @@ morphe_header_custom_dark.png
     <string name="unmount">เลิกเมานต์</string>
     <string name="unmounted">เลิกเมานต์แล้ว</string>
     <string name="remount">เมานต์ใหม่</string>
+    <string name="restore">กู้คืน</string>
     <string name="share">แชร์</string>
     <string name="install">ติดตั้ง</string>
     <string name="installed">ติดตั้งแล้ว</string>
@@ -1341,6 +1344,8 @@ morphe_header_custom_dark.png
     <string name="sources">แหล่งที่มา</string>
     <string name="installing_ellipsis">กำลังติดตั้ง…</string>
     <string name="mounting_ellipsis">กำลังเมานต์…</string>
+    <string name="mount_stage_restoring_stock">กำลังกู้คืนต้นฉบับ…</string>
+    <string name="mount_stage_copying">กำลังคัดลอก…</string>
     <string name="unmounting_ellipsis">กำลังยกเลิกการเมานต์…</string>
     <string name="importing_ellipsis">กำลังนำเข้า…</string>
     <string name="imported_successfully">การนำเข้าสำเร็จ</string>

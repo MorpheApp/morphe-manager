@@ -218,42 +218,30 @@
     <string name="adaptive_icon_create">Креирај адаптивна икона</string>
     <string name="adaptive_icon_select_image">Избери слика</string>
     <string name="adaptive_icon_change_image">Промени слика</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <!-- Caption under the launcher icon in its own colors -->
+    <!-- Caption under the launcher icon recolored by the system theme -->
     <string name="adaptive_icon_background_color">Боја на позадината</string>
     <string name="adaptive_icon_reset_transform">Ресетирај позиција и скала</string>
-    <string name="adaptive_icon_safe_zone_inner">Сигурна зона (секогаш видлива)</string>
-    <string name="adaptive_icon_safe_zone_outer">Маска зона (може да биде исечена)</string>
-    <string name="adaptive_icon_no_transparency_warning">Сликата нема транспарентни пиксели. Резултатот може да изгледа неточно</string>
     <string name="adaptive_icon_created_success">Адаптивна икона успешно креирана</string>
     <string name="adaptive_icon_creation_failed">Неуспешно креирање на адаптивна икона</string>
-    <string name="adaptive_icon_label">Адаптивен</string>
-    <string name="adaptive_icon_monochrome_label">Монохромен</string>
     <string name="adaptive_icon_guide">Прирачник за креирање икони</string>
     <string name="adaptive_icon_guide_png_title">Искористете PNG со транспарентна позадина</string>
-    <string name="adaptive_icon_guide_png_body">Предниот план мора да биде PNG датотека со транспарентна позадина. Цврста позадина ќе изгледа неточно – бојата на позадината треба да дојде од изборот на позадина подолу.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Безбедни зони</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Внатрешна зона (цврста): содржината е секогаш целосно видлива на сите облици на стартерот.
-Надворешна зона (испрекината): може да биде исечена од маската на стартерот – чувајте важни детали во внатрешната зона."</string>
     <string name="adaptive_icon_guide_notification_title">Икона за известување</string>
-    <string name="adaptive_icon_guide_notification_body">Генерирана автоматски од сликата во преден план. Прилагодете ја нејзината големина користејќи го лизгалката за известување. Целата видлива содржина се појавува бела во лентата за статус.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Монохроматска икона</string>
-    <string name="adaptive_icon_guide_monochrome_body">Генерирана автоматски од сликата во преден план со користење на истите трансформации на адаптивна икона. Се појавува нијансирана со бојата на позадината на вашиот телефон на Android 13 и подоцна.</string>
     <string name="notification_icon_preview">Известување</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Креирај прилагоден горни дел</string>
     <string name="header_creator_light_theme">Светла тема за горниот дел</string>
     <string name="header_creator_dark_theme">Темна тема за горниот дел</string>
-    <string name="header_creator_no_image">Не е избрана слика</string>
     <string name="header_creator_success">Горниот дел е успешно креиран</string>
     <string name="header_creator_failed">Неуспешно креирање на горниот дел</string>
     <string name="header_creator_guide">Прирачник за креирање на заглавие</string>
     <string name="header_creator_guide_image_title">Барања за слики</string>
-    <string name="header_creator_guide_image_body">Искористете било која датотека со слика (PNG или JPEG). За најдобри резултати, користете слика широк формат со приближен однос на страните од 2,7:1. PNG датотеките со транспарентни позадини природно ќе се спојат со темата на апликацијата.</string>
     <string name="header_creator_guide_themes_title">Светли и темни теми</string>
     <string name="header_creator_guide_themes_body">Повеќето апликации бараат посебни слики за светлата и темната тема. Некои апликации (како што е YouTube Music) користат само темна тема, па се прикажува само таа секција.</string>
     <string name="header_creator_guide_positioning_title">Поставување и скалирање</string>
-    <string name="header_creator_guide_positioning_body">Искористете гестови со пинцети за зумирање и превлекување директно во преглед за да ја позиционирате и скалирате вашата слика. Возилата за менување се појавуваат кога сликата е близу центарот. Можете исто така да ја користите лизгалката подолу од прегледот.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Поправка избрана</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->

@@ -390,44 +390,43 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="adaptive_icon_select_image">Kép kiválasztása</string>
     <string name="adaptive_icon_change_image">Kép megváltoztatása</string>
     <string name="image_load_failed">Nem sikerült betölteni ezt a képet</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Előtérkép</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Indítóikon</string>
+    <string name="adaptive_icon_gesture_hint">Mozgatáshoz húzza el, átméretezéshez csípje össze</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Előnézet</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Normál</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Témázott</string>
     <string name="adaptive_icon_background_color">Háttérszín</string>
     <string name="adaptive_icon_reset_transform">Pozíció és méret visszaállítása</string>
-    <string name="adaptive_icon_safe_zone_inner">Biztonságos zóna (mindig látható)</string>
-    <string name="adaptive_icon_safe_zone_outer">Maszkzóna (levágható)</string>
-    <string name="adaptive_icon_no_transparency_warning">A képen nincsenek átlátszó pixelek. Az eredmény helytelen lehet.</string>
+    <string name="adaptive_icon_no_transparency_warning">Ezen a képen nincsenek átlátszó pixelek, ezért a témázott és az értesítési ikonok a Morphe logót tartják meg</string>
     <string name="adaptive_icon_created_success">Az alkalmazkodó ikon elkészült</string>
     <string name="adaptive_icon_creation_failed">Nem sikerült az alkalmazkodó ikon létrehozása</string>
-    <string name="adaptive_icon_label">Adaptív</string>
-    <string name="adaptive_icon_monochrome_label">Monokróm</string>
     <string name="adaptive_icon_guide">Ikon létrehozási útmutató</string>
     <string name="adaptive_icon_guide_png_title">Átlátszó háttérrel rendelkező PNG használata</string>
-    <string name="adaptive_icon_guide_png_body">Az előlapnak PNG fájlnak kell lennie átlátszó háttérrel. A színes háttér helytelenül fog kinézni – a háttérszín a lent található háttérválasztóból származik.</string>
+    <string name="adaptive_icon_guide_png_body">Az átlátszó hátterű logó a legjobb, a háttérszínt pedig alul választhatja ki. Az átlátszóság nélküli kép ehelyett kitölti a teljes ikont, és a témázott és az értesítési ikonok ekkor a Morphe logót tartják meg.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Biztonságos zónák</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Belső zóna (szilárd): a tartalom mindig teljesen látható minden indítóalakon.
-Külső zóna (szaggatott): az indító maszk levághatja – tartsa a fontos részleteket a belső zónában."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">A körvonal az indító ikon alakját mutatja, és minden, ami rajta kívül van, levágásra kerül. Más indítók más alakzatokat használnak, ezért a fontos részleteket tartsa a szaggatott körön belül, amely minden alakzatnál látható.</string>
     <string name="adaptive_icon_guide_notification_title">Értesítési ikon</string>
-    <string name="adaptive_icon_guide_notification_body">Automatikus létrehozás az előlap képből. A méretét a Notification csúszkával állíthatja. Minden látható tartalom fehér színű a státuszsávban jelenik meg.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Monokróm ikon</string>
-    <string name="adaptive_icon_guide_monochrome_body">Automatikus létrehozás az előlap képből ugyanazokkal az adaptív ikon transzformációkkal. Android 13 és újabb verziókon a háttérszín kiegészítő színével jelenik meg hangszínezetten.</string>
+    <string name="adaptive_icon_guide_notification_body">A kép látható részéből van kivágva, és a fájl margójától függetlenül a többi állapotsor-ikonhoz hasonló méretű. Az előnézet alatti csúszkával állíthatja be. Az Android egyszínűként jeleníti meg.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Témázott ikon</string>
+    <string name="adaptive_icon_guide_monochrome_body">A képből az indítóikonnal azonos pozícióban és méretben van kivágva. Android 13 és újabb rendszereken a témázott ikonokat bekapcsoló indítók a háttérkép alapján színezik.</string>
     <string name="notification_icon_preview">Értesítés</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Egyéni fejléc létrehozása</string>
     <string name="header_creator_light_theme">Világos téma fejléc</string>
     <string name="header_creator_dark_theme">Sötét téma fejléc</string>
-    <string name="header_creator_no_image">Nincs kép kiválasztva</string>
     <string name="header_creator_success">A fejléc sikeresen létrehozva</string>
     <string name="header_creator_failed">Nem sikerült a fejléc létrehozása</string>
     <string name="header_creator_guide">Fejléc létrehozási útmutató</string>
     <string name="header_creator_guide_image_title">Képkövetelmények</string>
-    <string name="header_creator_guide_image_body">Használjon bármilyen képfájlt (PNG vagy JPEG). A legjobb eredmény elérése érdekében használjon széles formátumú képet körülbelül 2,7:1 képaránnyal. Az átlátszó háttérrel rendelkező PNG fájlok természetesen illeszkednek az alkalmazás témájába.</string>
+    <string name="header_creator_guide_image_body">Az átlátszó hátterű PNG beleolvad az alkalmazássávba. A fájlban a logó körüli margók figyelmen kívül maradnak, így a logó az alap logó méretében és helyén jelenik meg.</string>
     <string name="header_creator_guide_themes_title">Világos és sötét témák</string>
     <string name="header_creator_guide_themes_body">A legtöbb alkalmazás külön képeket igényel a világos és sötét témákhoz. Néhány alkalmazás (például a YouTube Music) csak a sötét témát használja, ezért csak ez a szakasz jelenik meg.</string>
     <string name="header_creator_guide_positioning_title">Pozicionálás és méretezés</string>
-    <string name="header_creator_guide_positioning_body">A pozicionáláshoz és a méretezéshez használja a csipet-zoom és a húzás gesztusokat közvetlenül az előnézetben. Rögzítővonalak jelennek meg, amikor a kép a középhez közel van. A képernyő alatti csúszkát is használhatja.</string>
+    <string name="header_creator_guide_positioning_body">Húzza el és csípje össze a képet a szerkesztőben, vagy méretezze a csúszkával. A szaggatott keret jelöli az alap logó helyét, és segédvonalak jelennek meg, amikor a kép igazodik hozzá.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Módosítás kiválasztva</string>
     <string name="batch_patch_title">Batch patching</string>

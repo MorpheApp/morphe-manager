@@ -390,44 +390,43 @@
     <string name="adaptive_icon_select_image">Επιλογή εικόνας</string>
     <string name="adaptive_icon_change_image">Αλλαγή εικόνας</string>
     <string name="image_load_failed">Δεν ήταν δυνατή η φόρτωση αυτής της εικόνας</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Εικόνα προσκηνίου</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Εικονίδιο εκκινητή</string>
+    <string name="adaptive_icon_gesture_hint">Σύρετε για μετακίνηση, τσιμπήστε για αλλαγή μεγέθους</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Προεπισκόπηση</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Κανονικό</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Θεματικό</string>
     <string name="adaptive_icon_background_color">Χρώμα φόντου</string>
     <string name="adaptive_icon_reset_transform">Επαναφορά θέσης και κλίμακας</string>
-    <string name="adaptive_icon_safe_zone_inner">Περιοχή ασφαλείας (πάντα ορατός)</string>
-    <string name="adaptive_icon_safe_zone_outer">Περιοχή μάσκας (μπορεί να κοπεί)</string>
-    <string name="adaptive_icon_no_transparency_warning">Η εικόνα δεν έχει διαφανή pixel. Το αποτέλεσμα ενδέχεται να μην είναι σωστό</string>
+    <string name="adaptive_icon_no_transparency_warning">Αυτή η εικόνα δεν έχει διαφανή pixel, οπότε τα θεματικά εικονίδια και τα εικονίδια ειδοποιήσεων διατηρούν το λογότυπο Morphe</string>
     <string name="adaptive_icon_created_success">Το προσαρμοστικό εικονίδιο δημιουργήθηκε με επιτυχία</string>
     <string name="adaptive_icon_creation_failed">Απέτυχε η δημιουργία του προσαρμοστικού εικονιδίου</string>
-    <string name="adaptive_icon_label">Προσαρμοστικό</string>
-    <string name="adaptive_icon_monochrome_label">Μονόχρωμο</string>
     <string name="adaptive_icon_guide">Οδηγός δημιουργίας εικονιδίου</string>
     <string name="adaptive_icon_guide_png_title">Χρησιμοποιήστε ένα PNG με διαφανές φόντο</string>
-    <string name="adaptive_icon_guide_png_body">Το προσκήνιο πρέπει να είναι ένα αρχείο PNG με διαφανές φόντο. Ένα φόντο με συμπαγές χρώμα θα φαίνεται λανθασμένο - το χρώμα φόντου θα πρέπει να προέρχεται από τον επιλογέα φόντου παρακάτω.</string>
+    <string name="adaptive_icon_guide_png_body">Ένα λογότυπο σε διαφανές φόντο λειτουργεί καλύτερα, με το χρώμα φόντου να επιλέγεται παρακάτω. Μια εικόνα χωρίς διαφάνεια γεμίζει αντί αυτού ολόκληρο το εικονίδιο και τότε τα θεματικά εικονίδια και τα εικονίδια ειδοποιήσεων διατηρούν το λογότυπο Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Ασφαλείς ζώνες</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Εσωτερική ζώνη (συμπαγής): το περιεχόμενο είναι πάντα πλήρως ορατό σε όλα τα σχήματα εκτοξευτή.
-Εξωτερική ζώνη (διακεκομμένη): μπορεί να αποκοπεί από τη μάσκα εκτοξευτή - κρατήστε σημαντικές λεπτομέρειες μέσα στην εσωτερική ζώνη."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Το περίγραμμα δείχνει το σχήμα του εικονιδίου του launcher σας και ό,τι βρίσκεται έξω από αυτό αποκόπτεται. Άλλα launcher χρησιμοποιούν άλλα σχήματα, γι\' αυτό κρατήστε τις σημαντικές λεπτομέρειες μέσα στον διακεκομμένο κύκλο, ο οποίος εμφανίζεται σε όλα τα σχήματα.</string>
     <string name="adaptive_icon_guide_notification_title">Εικονίδιο ειδοποίησης</string>
-    <string name="adaptive_icon_guide_notification_body">Δημιουργείται αυτόματα από την εικόνα προσκηνίου. Ρυθμίστε το μέγεθός του χρησιμοποιώντας το ρυθμιστικό ειδοποιήσεων. Όλο το ορατό περιεχόμενο εμφανίζεται λευκό στη γραμμή κατάστασης.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Μονόχρωμο εικονίδιο</string>
-    <string name="adaptive_icon_guide_monochrome_body">Δημιουργείται αυτόματα από την εικόνα προσκηνίου χρησιμοποιώντας τις ίδιες μετατροπές προσαρμοσμένου εικονιδίου. Εμφανίζεται με απόχρωση του χρώματος έμφασης της ταπετσαρίας στο Android 13 και νεότερες εκδόσεις.</string>
+    <string name="adaptive_icon_guide_notification_body">Κόβεται από το ορατό τμήμα της εικόνας και έχει το ίδιο μέγεθος με τα άλλα εικονίδια της γραμμής κατάστασης, όποιο περιθώριο κι αν έχει το αρχείο. Ρυθμίστε το με το ρυθμιστικό κάτω από την προεπισκόπηση. Το Android το εμφανίζει σε ένα μόνο χρώμα.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Θεματικό εικονίδιο</string>
+    <string name="adaptive_icon_guide_monochrome_body">Κόβεται από την εικόνα με την ίδια θέση και το ίδιο μέγεθος με το εικονίδιο του launcher. Σε Android 13 και νεότερες εκδόσεις, τα launcher που έχουν ενεργοποιημένα τα θεματικά εικονίδια το χρωματίζουν με βάση την ταπετσαρία.</string>
     <string name="notification_icon_preview">Ειδοποίηση</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Δημιουργία προσαρμοσμένης επικεφαλίδας</string>
     <string name="header_creator_light_theme">Επικεφαλίδα φωτεινού θέματος</string>
     <string name="header_creator_dark_theme">Επικεφαλίδα σκοτεινού θέματος</string>
-    <string name="header_creator_no_image">Δεν επιλέχθηκε εικόνα</string>
     <string name="header_creator_success">Η επικεφαλίδα δημιουργήθηκε επιτυχώς</string>
     <string name="header_creator_failed">Αποτυχία δημιουργίας της επικεφαλίδας</string>
     <string name="header_creator_guide">Οδηγός δημιουργίας κεφαλίδας</string>
     <string name="header_creator_guide_image_title">Απαιτήσεις εικόνας</string>
-    <string name="header_creator_guide_image_body">Χρησιμοποιήστε οποιοδήποτε αρχείο εικόνας (PNG ή JPEG). Για καλύτερα αποτελέσματα, χρησιμοποιήστε μια εικόνα ευρείας μορφής με λόγο διαστάσεων περίπου 2,7:1. Τα αρχεία PNG με διαφανές φόντο θα ενσωματωθούν φυσικά με το θέμα της εφαρμογής.</string>
+    <string name="header_creator_guide_image_body">Ένα PNG με διαφανές φόντο εναρμονίζεται με τη γραμμή εφαρμογής. Τα περιθώρια γύρω από το λογότυπο στο αρχείο αγνοούνται, οπότε ξεκινάει με το μέγεθος και τη θέση του βασικού λογότυπου.</string>
     <string name="header_creator_guide_themes_title">Φωτεινά και σκοτεινά θέματα</string>
     <string name="header_creator_guide_themes_body">Οι περισσότερες εφαρμογές απαιτούν ξεχωριστές εικόνες για τα θέματα φωτός και σκούρου. Ορισμένες εφαρμογές (όπως το YouTube Music) χρησιμοποιούν μόνο το σκούρο θέμα, επομένως εμφανίζεται μόνο αυτή η ενότητα.</string>
     <string name="header_creator_guide_positioning_title">Τοποθέτηση και κλιμάκωση</string>
-    <string name="header_creator_guide_positioning_body">Χρησιμοποιήστε χειρονομίες ζουμ και μεταφοράς απευθείας στην προεπισκόπηση για να τοποθετήσετε και να κλιμακώσετε την εικόνα σας. Εμφανίζονται καθοδηγητικοί οδηγοί όταν η εικόνα είναι κοντά στο κέντρο. Μπορείτε επίσης να χρησιμοποιήσετε το ρυθμιστικό κάτω από την προεπισκόπηση.</string>
+    <string name="header_creator_guide_positioning_body">Σύρετε και τσιμπήστε την εικόνα στον επεξεργαστή ή αλλάξτε το μέγεθός της με το ρυθμιστικό. Το διακεκομμένο πλαίσιο δείχνει πού βρίσκεται το βασικό λογότυπο και εμφανίζονται οδηγοί όταν η εικόνα ευθυγραμμίζεται με αυτό.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Τροποποίηση επιλέχθηκε</string>
     <string name="batch_patch_title">Μαζική τροποποίηση</string>

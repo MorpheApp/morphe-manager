@@ -390,44 +390,31 @@ Eng yaxshi natijalar uchun ushbu ilova to‘liq &lt;b&gt;APK&lt;/b&gt;ni patchla
     <string name="adaptive_icon_select_image">Rasm tanlang</string>
     <string name="adaptive_icon_change_image">Rasm o\'zgartirish</string>
     <string name="image_load_failed">Bu rasmni yuklab bo‘lmadi</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Old fon tasviri</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Ishga tushirish belgisi</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <!-- Caption under the launcher icon in its own colors -->
+    <!-- Caption under the launcher icon recolored by the system theme -->
     <string name="adaptive_icon_background_color">Fondo rangi</string>
     <string name="adaptive_icon_reset_transform">Harakatlanishni qayta o\'rnatish</string>
-    <string name="adaptive_icon_safe_zone_inner">Xavfsiz zona (har doim ko\'rinadi)</string>
-    <string name="adaptive_icon_safe_zone_outer">Niqob zonasining (kesilishi mumkin)</string>
-    <string name="adaptive_icon_no_transparency_warning">Patchlar qo‘llanilishini tasdiqlash</string>
     <string name="adaptive_icon_created_success">Maxsus ilona belgisi yaratildi</string>
     <string name="adaptive_icon_creation_failed">Maxsus ilona belgisi yaratishda xatolik</string>
-    <string name="adaptive_icon_label">Uyghotish</string>
-    <string name="adaptive_icon_monochrome_label">Monoxrom</string>
     <string name="adaptive_icon_guide">Ikon yaratish qo‘llanmasi</string>
     <string name="adaptive_icon_guide_png_title">Shovqin fonli PNGdan foydalaning</string>
-    <string name="adaptive_icon_guide_png_body">Oldingi fon shaffof bo‘lgan PNG fayli bo‘lishi kerak. Oddiy rangli fon noto‘g‘ri ko‘rinadi - fon rangi quyida ko‘rinadigan fon tanlashdan kelishi kerak.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Xavfsiz hududlar</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Ichki hudud (qattiq): mazmun barcha launcher shakllarida to‘liq ko‘rinadi.
-Chekka hudud (chizikli): launcher niqobi tomonidan kesilishi mumkin - muhim tafsilotlarni ichki hududda saqlang."</string>
     <string name="adaptive_icon_guide_notification_title">Bildirishnoma ikoni</string>
-    <string name="adaptive_icon_guide_notification_body">Tasvirga asoslangan avtomatik yaratilgan. O‘lchamini bildirishnoma slaydidan sozlang. Barcha ko‘rinadigan mazmun oq rangda bo‘ladi.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Monoxrom ikoni</string>
-    <string name="adaptive_icon_guide_monochrome_body">Android 13 va undan keyingi versiyalarda fon rangida ranglanadigan avtomatik yaratilgan baytkod transformatsiyasidan foydalanib yaratilgan.</string>
     <string name="notification_icon_preview">Bildirishnoma</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Maxsus sarlavha yaratish</string>
     <string name="header_creator_light_theme">Yorqin mavzu sarlavhasi</string>
     <string name="header_creator_dark_theme">Qorong\'i mavzu sarlavhasi</string>
-    <string name="header_creator_no_image">Rasm tanlanmadi</string>
     <string name="header_creator_success">Sarlavha muvaffaqiyatli yaratildi</string>
     <string name="header_creator_failed">Sarlavha yaratishda xatolik</string>
     <string name="header_creator_guide">Sarlavha yaratish qo‘llanmasi</string>
     <string name="header_creator_guide_image_title">Rasmiy talablar</string>
-    <string name="header_creator_guide_image_body">Har qanday rasmdan (PNG yoki JPEG) foydalaning. Eng yaxshi natijalar uchun, taxminan 2,7:1 nisbatdagi keng formatli rasmdan foydalaning. Shovqin fonli PNG fayllari ilova mavzusiga tabiiy ravishda uyg‘unlashadi.</string>
     <string name="header_creator_guide_themes_title">Yengil va qorong‘u mavzular</string>
     <string name="header_creator_guide_themes_body">Ko‘pgina ilovalarga yengil va qorong‘u mavzular uchun alohida rasmlar kerak. Ba\'zi ilovalar (YouTube kabi) faqat qorong‘u mavzudan foydalanadi, shuning uchun faqat shu bo‘lim ko‘rsatiladi.</string>
     <string name="header_creator_guide_positioning_title">Joylashish va miqyoslash</string>
-    <string name="header_creator_guide_positioning_body">Joylashish va miqyoslash uchun siqish va tortish harakatlaridan foydalaning. Rasm markazga yaqin bo‘lganda qo‘llanma chiziqlari paydo bo‘ladi. Ko‘rsatish ostidagi slaydardan ham foydalanishingiz mumkin.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Tanlangan rasmlar qo\'llanilmoqda</string>
     <string name="batch_patch_title">Rasmlarni ommaviy qo\'llash</string>

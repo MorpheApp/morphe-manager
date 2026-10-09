@@ -390,44 +390,43 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="adaptive_icon_select_image">Piliin ang larawan</string>
     <string name="adaptive_icon_change_image">Baguhin ang larawan</string>
     <string name="image_load_failed">Hindi ma-load ang larawang ito</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Larawang nasa harapan</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Icon ng launcher</string>
+    <string name="adaptive_icon_gesture_hint">I-drag upang ilipat, i-pinch upang baguhin ang laki</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Pasilip</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Karaniwan</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">May tema</string>
     <string name="adaptive_icon_background_color">Likurang kulay</string>
     <string name="adaptive_icon_reset_transform">Ipawalang-bisa ang posisyon at sukat</string>
-    <string name="adaptive_icon_safe_zone_inner">Ligtas na lugar (palaging nakikita)</string>
-    <string name="adaptive_icon_safe_zone_outer">Nakatakip na lugar (maaaring nakabit)</string>
-    <string name="adaptive_icon_no_transparency_warning">Walang transparent pixels ang imahe. Maaaring hindi tama ang resulta.</string>
+    <string name="adaptive_icon_no_transparency_warning">Ang larawang ito ay walang mga transparent na pixel, kaya pinapanatili ng mga icon na themed at notification ang logo ng Morphe</string>
     <string name="adaptive_icon_created_success">Matagumpay na nalikha ang naangkop na icon</string>
     <string name="adaptive_icon_creation_failed">Nabigong maglikha ng inaangkop na icon</string>
-    <string name="adaptive_icon_label">Adaptive</string>
-    <string name="adaptive_icon_monochrome_label">Monokrom</string>
     <string name="adaptive_icon_guide">Gabay sa paggawa ng icon</string>
     <string name="adaptive_icon_guide_png_title">Gumamit ng PNG na may transparent na background</string>
-    <string name="adaptive_icon_guide_png_body">Dapat PNG file ang foreground na may transparent na background. Ang solidong kulay ng background ay magmumukhang mali—ang kulay ng background ay dapat mula sa background picker sa ibaba.</string>
+    <string name="adaptive_icon_guide_png_body">Ang isang logo sa transparent na background ay pinakamahusay na gumagana, na ang kulay ng background ay pinili sa ibaba. Ang isang larawang walang transparency ay pumupuno sa buong icon sa halip, at pinapanatili ng mga icon na themed at notification ang logo ng Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Mga safe zone</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Panloob na zone (solid): ang content ay palaging ganap na nakikita sa lahat ng launcher shape.
-Panlabas na zone (dashed): maaaring i-clip ng launcher mask—panatilihin ang mahahalagang detalye sa loob ng panloob na zone."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Ipinapakita ng balangkas ang hugis ng icon ng iyong launcher, at lahat ng nasa labas nito ay pinuputol. Ang ibang mga launcher ay gumagamit ng ibang mga hugis, kaya panatilihin ang mahahalagang detalye sa loob ng tuldok-tuldok na bilog, na ipinapakita ng bawat hugis.</string>
     <string name="adaptive_icon_guide_notification_title">Pinayagan ang mga abiso</string>
-    <string name="adaptive_icon_guide_notification_body">Awtomatikong nabuo mula sa foreground image. Ayusin ang laki nito gamit ang Notification slider. Ang lahat ng nakikitang content ay lumalabas na puti sa status bar.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Monochrome icon</string>
-    <string name="adaptive_icon_guide_monochrome_body">Awtomatikong nabuo mula sa foreground image gamit ang parehong adaptive icon transforms. Ito ay lumalabas na may kulay mula sa wallpaper accent color sa Android 13 at mas bago.</string>
+    <string name="adaptive_icon_guide_notification_body">Pinutol mula sa nakikitang bahagi ng larawan at may sukat tulad ng ibang mga icon ng status bar, anuman ang margin ng file. Ayusin ito gamit ang slider sa ilalim ng preview. Ipinapakita ito ng Android sa iisang kulay.</string>
+    <string name="adaptive_icon_guide_monochrome_title">May temang icon</string>
+    <string name="adaptive_icon_guide_monochrome_body">Pinutol mula sa larawan na may kaparehong posisyon at sukat ng launcher icon. Sa Android 13 at mas bago, ang mga launcher na may naka-on na themed icon ay kinukulayan ito mula sa wallpaper.</string>
     <string name="notification_icon_preview">Itago ang Mga Abiso</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Gumawa ng isang pasadyang header</string>
     <string name="header_creator_light_theme">Header ng maliwanag na tema</string>
     <string name="header_creator_dark_theme">Header ng madilim na tema</string>
-    <string name="header_creator_no_image">Walang napiling larawan</string>
     <string name="header_creator_success">Matagumpay na nilikha ang header</string>
     <string name="header_creator_failed">Nabigong maglikha ng header</string>
     <string name="header_creator_guide">Gabay sa paggawa ng header</string>
     <string name="header_creator_guide_image_title">Mga kinakailangan sa imahe</string>
-    <string name="header_creator_guide_image_body">Gumamit ng anumang file ng imahe (PNG o JPEG). Para sa pinakamahusay na mga resulta, gumamit ng malawak na format na imahe na may humigit-kumulang 2.7:1 na aspect ratio. Ang mga PNG file na may transparent na background ay natural na magbe-blend sa tema ng app.</string>
+    <string name="header_creator_guide_image_body">Ang isang PNG na may transparent na background ay humahalo sa app bar. Ang mga margin sa paligid ng logo sa file ay binabalewala, kaya nagsisimula ito sa laki at lugar ng stock logo.</string>
     <string name="header_creator_guide_themes_title">Mga light at dark theme</string>
     <string name="header_creator_guide_themes_body">Karamihan sa mga app ay nangangailangan ng hiwalay na mga imahe para sa light at dark theme. Ang ilang app (tulad ng YouTube Music) ay gumagamit lamang ng dark theme, kaya ang seksyong iyon lamang ang ipinapakita.</string>
     <string name="header_creator_guide_positioning_title">Pagpoposisyon at pag-scale</string>
-    <string name="header_creator_guide_positioning_body">Gumamit ng pinch-to-zoom at drag gesture nang direkta sa preview para iposisyon at i-scale ang iyong imahe. Lumalabas ang mga snap guide kapag malapit na ang imahe sa gitna. Maaari mo ring gamitin ang slider sa ibaba ng preview.</string>
+    <string name="header_creator_guide_positioning_body">I-drag at i-pinch ang larawan sa editor, o ayusin ang laki nito gamit ang slider. Ang tuldok-tuldok na kahon ay nagmamarka kung saan nakalagay ang stock logo, at lalabas ang mga gabay kapag ang larawan ay nakahanay dito.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Napili na patch</string>
     <string name="batch_patch_title">Batch patching</string>

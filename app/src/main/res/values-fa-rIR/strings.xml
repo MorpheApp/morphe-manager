@@ -390,44 +390,31 @@
     <string name="adaptive_icon_select_image">یک تصویر انتخاب کنید</string>
     <string name="adaptive_icon_change_image">تغییر تصویر</string>
     <string name="image_load_failed">امکان بارگذاری این تصویر وجود نداشت</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">تصویر پیش‌زمینه</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">آیکون برنامه</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <!-- Caption under the launcher icon in its own colors -->
+    <!-- Caption under the launcher icon recolored by the system theme -->
     <string name="adaptive_icon_background_color">رنگ پس‌زمینه</string>
     <string name="adaptive_icon_reset_transform">بازنشانی موقعیت و مقیاس</string>
-    <string name="adaptive_icon_safe_zone_inner">ناحیه امن (همیشه قابل مشاهده)</string>
-    <string name="adaptive_icon_safe_zone_outer">ناحیه ماسک (ممکن است بریده شود)</string>
-    <string name="adaptive_icon_no_transparency_warning">تصویر هیچ پیکسل شفافی ندارد. ممکن است نتیجه نادرست به نظر برسد</string>
     <string name="adaptive_icon_created_success">آیکون تطبیقی با موفقیت ایجاد شد</string>
     <string name="adaptive_icon_creation_failed">ایجاد آیکون تطبیقی موفقیت‌آمیز نبود</string>
-    <string name="adaptive_icon_label">تطبیقی</string>
-    <string name="adaptive_icon_monochrome_label">تک‌رنگ</string>
     <string name="adaptive_icon_guide">راهنمای ساخت آیکون</string>
     <string name="adaptive_icon_guide_png_title">از PNG با پس‌زمینهٔ شفاف استفاده کنید</string>
-    <string name="adaptive_icon_guide_png_body">پیش‌زمینه باید یک فایل PNG با پس‌زمینهٔ شفاف باشد. پس‌زمینهٔ یک‌دست‌رنگ نادرست به نظر می‌رسد؛ رنگ پس‌زمینه باید از انتخابگر پس‌زمینهٔ زیر گرفته شود.</string>
     <string name="adaptive_icon_guide_safe_zones_title">ناحیه‌های امن</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"ناحیهٔ داخلی (یک‌دست): محتوا در همهٔ شکل‌های لانچر همیشه کاملاً قابل مشاهده است.
-ناحیهٔ بیرونی (خط‌چین): ممکن است با نقاب لانچر بریده شود؛ جزئیات مهم را داخل ناحیهٔ داخلی نگه دارید."</string>
     <string name="adaptive_icon_guide_notification_title">آیکون اعلان</string>
-    <string name="adaptive_icon_guide_notification_body">به‌طور خودکار از تصویر پیش‌زمینه ساخته می‌شود. اندازهٔ آن را با لغزندهٔ اعلان تنظیم کنید. همهٔ محتوای قابل مشاهده در نوار وضعیت سفید نمایش داده می‌شود.</string>
-    <string name="adaptive_icon_guide_monochrome_title">آیکون تک‌رنگ</string>
-    <string name="adaptive_icon_guide_monochrome_body">به‌طور خودکار از تصویر پیش‌زمینه و با همان تبدیل‌های آیکون تطبیقی ساخته می‌شود. در Android 13 و بالاتر، با رنگ تأکیدی تصویر زمینه رنگ‌آمیزی می‌شود.</string>
     <string name="notification_icon_preview">اعلان</string>
     <!-- Header Creator -->
     <string name="header_creator_create">ساخت سربرگ سفارشی</string>
     <string name="header_creator_light_theme">سربرگ پوستهٔ روشن</string>
     <string name="header_creator_dark_theme">سربرگ پوستهٔ تیره</string>
-    <string name="header_creator_no_image">تصویری انتخاب نشده است</string>
     <string name="header_creator_success">سربرگ با موفقیت ساخته شد</string>
     <string name="header_creator_failed">ساخت سربرگ ناموفق بود</string>
     <string name="header_creator_guide">راهنمای ساخت سربرگ</string>
     <string name="header_creator_guide_image_title">نیازمندی‌های تصویر</string>
-    <string name="header_creator_guide_image_body">از هر فایل تصویری (PNG یا JPEG) استفاده کنید. برای بهترین نتیجه، تصویری عریض با نسبت ابعاد تقریبی ۲٫۷ به ۱ انتخاب کنید. فایل‌های PNG با پس‌زمینهٔ شفاف به‌طور طبیعی با پوستهٔ برنامه ترکیب می‌شوند.</string>
     <string name="header_creator_guide_themes_title">پوسته‌های روشن و تیره</string>
     <string name="header_creator_guide_themes_body">بیشتر برنامه‌ها به تصاویر جداگانه برای پوسته‌های روشن و تیره نیاز دارند. بعضی برنامه‌ها (مثل YouTube Music) فقط از پوستهٔ تیره استفاده می‌کنند؛ بنابراین فقط همان بخش نمایش داده می‌شود.</string>
     <string name="header_creator_guide_positioning_title">موقعیت‌دهی و تغییر اندازه</string>
-    <string name="header_creator_guide_positioning_body">برای موقعیت‌دهی و تغییر اندازهٔ تصویر، مستقیماً در پیش‌نمایش دو انگشت را نزدیک یا دور کنید و تصویر را بکشید. وقتی تصویر نزدیک مرکز باشد، راهنماهای چسبان ظاهر می‌شوند. همچنین می‌توانید از لغزندهٔ زیر پیش‌نمایش استفاده کنید.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">پچ‌کردن موارد انتخاب‌شده</string>
     <string name="batch_patch_title">پچ‌کردن گروهی</string>

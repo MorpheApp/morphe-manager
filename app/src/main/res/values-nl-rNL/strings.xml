@@ -390,44 +390,43 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="adaptive_icon_select_image">Afbeelding selecteren</string>
     <string name="adaptive_icon_change_image">Afbeelding wijzigen</string>
     <string name="image_load_failed">Kan deze afbeelding niet laden</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Voorgrondafbeelding</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Startschermpictogram</string>
+    <string name="adaptive_icon_gesture_hint">Sleep om te verplaatsen, knijp om het formaat te wijzigen</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Voorbeeld</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Standaard</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Thema</string>
     <string name="adaptive_icon_background_color">Achtergrondkleur</string>
     <string name="adaptive_icon_reset_transform">Reset positie en schaal</string>
-    <string name="adaptive_icon_safe_zone_inner">Veilige zone (altijd zichtbaar)</string>
-    <string name="adaptive_icon_safe_zone_outer">Maskerzone (mag worden geknipt)</string>
-    <string name="adaptive_icon_no_transparency_warning">De afbeelding heeft geen transparante pixels. Het resultaat kan er onjuist uitzien</string>
+    <string name="adaptive_icon_no_transparency_warning">Deze afbeelding heeft geen transparante pixels, dus de thema- en meldingspictogrammen behouden het Morphe-logo</string>
     <string name="adaptive_icon_created_success">Adaptieve icoon succesvol gemaakt</string>
     <string name="adaptive_icon_creation_failed">Mislukt om adaptieve icoon te maken</string>
-    <string name="adaptive_icon_label">Adaptief</string>
-    <string name="adaptive_icon_monochrome_label">Monochroom</string>
     <string name="adaptive_icon_guide">Handleiding voor het maken van pictogrammen</string>
     <string name="adaptive_icon_guide_png_title">Gebruik een PNG met een transparante achtergrond</string>
-    <string name="adaptive_icon_guide_png_body">De voorgrond moet een PNG-bestand zijn met een transparante achtergrond. Een effen achtergrond ziet er verkeerd uit - de achtergrondkleur moet afkomstig zijn van de achtergrondkiezer hieronder.</string>
+    <string name="adaptive_icon_guide_png_body">Een logo op een transparante achtergrond werkt het beste, met de hieronder gekozen achtergrondkleur. Een afbeelding zonder transparantie vult in plaats daarvan het hele pictogram, en de thema- en meldingspictogrammen behouden dan het Morphe-logo.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Veilige zones</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Binnenste zone (effen): inhoud is altijd volledig zichtbaar op alle launcher-vormen.
-Buitenste zone (gestippeld): kan worden afgesneden door het launcher-masker - houd belangrijke details binnen de binnenste zone."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">De omtrek toont de pictogramvorm van je launcher en alles daarbuiten wordt weggesneden. Andere launchers gebruiken andere vormen, dus houd belangrijke details binnen de onderbroken cirkel, die in elke vorm zichtbaar is.</string>
     <string name="adaptive_icon_guide_notification_title">Meldingenpictogram</string>
-    <string name="adaptive_icon_guide_notification_body">Automatisch gegenereerd op basis van de voorgrondafbeelding. Pas de grootte aan met de schuifregelaar voor meldingen. Alle zichtbare inhoud verschijnt wit in de statusbalk.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Monochroom pictogram</string>
-    <string name="adaptive_icon_guide_monochrome_body">Automatisch gegenereerd op basis van de voorgrondafbeelding met behulp van dezelfde adaptieve pictogramtransformaties. Het wordt gekleurd weergegeven met de achtergrondkleur van het wallpaper op Android 13 en hoger.</string>
+    <string name="adaptive_icon_guide_notification_body">Bijgesneden uit het zichtbare deel van de afbeelding en qua formaat zoals andere statusbalkpictogrammen, ongeacht de marge die het bestand heeft. Pas dit aan met de schuifregelaar onder het voorbeeld. Android toont het in één kleur.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Themapictogram</string>
+    <string name="adaptive_icon_guide_monochrome_body">Uitgesneden uit de afbeelding met dezelfde positie en grootte als het launcher-pictogram. Op Android 13 en hoger kleuren launchers met ingeschakelde themapictogrammen het op basis van het behang.</string>
     <string name="notification_icon_preview">Melding</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Aangepaste koptekst maken</string>
     <string name="header_creator_light_theme">Lichte thema header</string>
     <string name="header_creator_dark_theme">Donkere thema header</string>
-    <string name="header_creator_no_image">Geen afbeelding geselecteerd</string>
     <string name="header_creator_success">Header succesvol gemaakt</string>
     <string name="header_creator_failed">Mislukt om header te maken</string>
     <string name="header_creator_guide">Handleiding voor header-maker</string>
     <string name="header_creator_guide_image_title">Afbeeldingseisen</string>
-    <string name="header_creator_guide_image_body">Gebruik elk afbeeldingsbestand (PNG of JPEG). Voor de beste resultaten gebruikt u een breedformaat afbeelding met een aspectratio van ongeveer 2,7:1. PNG-bestanden met transparante achtergronden passen naadloos bij het thema van de app.</string>
+    <string name="header_creator_guide_image_body">Een PNG met een transparante achtergrond gaat naadloos over in de appbalk. Marges rond het logo in het bestand worden genegeerd, dus het begint op het formaat en de plaats van het standaardlogo.</string>
     <string name="header_creator_guide_themes_title">Lichte en donkere thema\'s</string>
     <string name="header_creator_guide_themes_body">De meeste apps vereisen aparte afbeeldingen voor de lichte en donkere thema\'s. Sommige apps (zoals YouTube Music) gebruiken alleen het donkere thema, dus alleen dat gedeelte wordt weergegeven.</string>
     <string name="header_creator_guide_positioning_title">Positionering en schaling</string>
-    <string name="header_creator_guide_positioning_body">Gebruik knijp-om-zoomen en sleepgeesten direct in de preview om uw afbeelding te positioneren en te schalen. Snap-richtlijnen verschijnen wanneer de afbeelding zich dicht bij het midden bevindt. U kunt ook de schuifregelaar onder de preview gebruiken.</string>
+    <string name="header_creator_guide_positioning_body">Sleep en knijp de afbeelding in de editor, of wijzig het formaat met de schuifregelaar. Het onderbroken vak geeft aan waar het standaardlogo staat, en er verschijnen hulplijnen wanneer de afbeelding ermee uitgelijnd is.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Patches geselecteerd</string>
     <string name="batch_patch_title">Batch patching</string>

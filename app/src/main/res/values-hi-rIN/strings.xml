@@ -390,44 +390,43 @@
     <string name="adaptive_icon_select_image">छवि चयन करें</string>
     <string name="adaptive_icon_change_image">छवि बदलें</string>
     <string name="image_load_failed">यह छवि लोड नहीं की जा सकी</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">अग्रभूमि छवि</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">लॉन्चर आइकन</string>
+    <string name="adaptive_icon_gesture_hint">खींचकर स्थानांतरित करें, पिंच करके आकार बदलें</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">पूर्वावलोकन</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">मानक</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">थीम वाला</string>
     <string name="adaptive_icon_background_color">बैकग्राउंड रंग</string>
     <string name="adaptive_icon_reset_transform">पोजीशन और स्केल को रीसेट करें</string>
-    <string name="adaptive_icon_safe_zone_inner">सेफ ज़ोन (हमेशा दृश्य)</string>
-    <string name="adaptive_icon_safe_zone_outer">मास्क ज़ोन (क्लिप हो सकता है)</string>
-    <string name="adaptive_icon_no_transparency_warning">छवि में कोई पारदर्शी पिक्सेल नहीं है। परिणाम गलत दिख सकता है</string>
+    <string name="adaptive_icon_no_transparency_warning">इस छवि में कोई पारदर्शी पिक्सेल नहीं है, इसलिए थीम वाले और सूचना आइकन Morphe लोगो को बनाए रखते हैं</string>
     <string name="adaptive_icon_created_success">एडैप्टिव आइकॉन सफलतापूर्वक बनाया गया</string>
     <string name="adaptive_icon_creation_failed">एडैप्टिव आइकॉन को बनाना विफल रहा</string>
-    <string name="adaptive_icon_label">अनुकूली</string>
-    <string name="adaptive_icon_monochrome_label">मोनोक्रोम</string>
     <string name="adaptive_icon_guide">आइकन निर्माण गाइड</string>
     <string name="adaptive_icon_guide_png_title">पारदर्शी पृष्ठभूमि वाली PNG का उपयोग करें</string>
-    <string name="adaptive_icon_guide_png_body">पृष्ठभूमि को ठोस रंग का नहीं होना चाहिए - पृष्ठभूमि का रंग नीचे दिए गए पृष्ठभूमि पिकर से आना चाहिए। अग्रभूमि को एक PNG फ़ाइल के साथ पारदर्शी पृष्ठभूमि होनी चाहिए।</string>
+    <string name="adaptive_icon_guide_png_body">पारदर्शी पृष्ठभूमि पर लोगो सबसे अच्छा काम करता है, और पृष्ठभूमि का रंग नीचे चुना जाता है। बिना पारदर्शिता वाली तस्वीर इसके बजाय पूरे आइकन को भर देती है, और थीम वाले और सूचना आइकन तब Morphe लोगो को बनाए रखते हैं।</string>
     <string name="adaptive_icon_guide_safe_zones_title">सुरक्षित क्षेत्र</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"आंतरिक क्षेत्र (ठोस): सामग्री हमेशा सभी लॉन्चर आकृतियों पर पूरी तरह से दिखाई देती है।
-बाहरी क्षेत्र (डैश): लॉन्चर मास्क द्वारा क्लिप किया जा सकता है - महत्वपूर्ण विवरण को आंतरिक क्षेत्र के अंदर रखें।"</string>
+    <string name="adaptive_icon_guide_safe_zones_body">रूपरेखा आपके लॉन्चर के आइकन का आकार दिखाती है, और इसके बाहर की हर चीज़ काट दी जाती है। अन्य लॉन्चर अन्य आकारों का उपयोग करते हैं, इसलिए महत्वपूर्ण विवरणों को डैश वाले वृत्त के अंदर रखें, जो हर आकार में दिखता है।</string>
     <string name="adaptive_icon_guide_notification_title">अधिसूचना आइकन</string>
-    <string name="adaptive_icon_guide_notification_body">अग्रभूमि छवि से स्वचालित रूप से उत्पन्न। अधिसूचना स्लाइडर का उपयोग करके इसके आकार को समायोजित करें। स्टेटस बार में सभी दृश्यमान सामग्री सफेद दिखाई देती है।</string>
-    <string name="adaptive_icon_guide_monochrome_title">मोनोक्रोम आइकन</string>
-    <string name="adaptive_icon_guide_monochrome_body">एकाधिक अनुकूली आइकन परिवर्तनों का उपयोग करके अग्रभूमि छवि से स्वचालित रूप से उत्पन्न। यह Android 13 और उसके बाद के संस्करणों पर वॉलपेपर एक्सेंट रंग के साथ रंगीन दिखाई देगा।</string>
+    <string name="adaptive_icon_guide_notification_body">छवि के दृश्य भाग से काटा गया और अन्य स्टेटस बार आइकनों के समान आकार दिया गया, फ़ाइल में जो भी मार्जिन हो। इसे पूर्वावलोकन के नीचे स्लाइडर से समायोजित करें। Android इसे एक ही रंग में दिखाता है।</string>
+    <string name="adaptive_icon_guide_monochrome_title">थीम वाला आइकन</string>
+    <string name="adaptive_icon_guide_monochrome_body">लॉन्चर आइकन के समान स्थिति और आकार में छवि से काटा गया। Android 13 और बाद के संस्करणों में, थीम वाले आइकन चालू वाले लॉन्चर इसे वॉलपेपर से रंग देते हैं।</string>
     <string name="notification_icon_preview">अधिसूचना</string>
     <!-- Header Creator -->
     <string name="header_creator_create">कस्टम हेडर बनाएं</string>
     <string name="header_creator_light_theme">लाइट थीम हेडर</string>
     <string name="header_creator_dark_theme">डार्क थीम हेडर</string>
-    <string name="header_creator_no_image">कोई छवि चुनी गई नहीं</string>
     <string name="header_creator_success">हेडर सफलतापूर्वक बनाया गया</string>
     <string name="header_creator_failed">हेडर को बनाना विफल रहा</string>
     <string name="header_creator_guide">हेडर निर्माण गाइड</string>
     <string name="header_creator_guide_image_title">छवि आवश्यकताएँ</string>
-    <string name="header_creator_guide_image_body">सर्वोत्तम परिणामों के लिए, लगभग 2.7:1 के पहलू अनुपात वाली एक विस्तृत-प्रारूप छवि का उपयोग करें। PNG फ़ाइलें जो पारदर्शी पृष्ठभूमि के साथ हैं, वे ऐप थीम के साथ स्वाभाविक रूप से मिश्रित होंगी। कोई भी छवि फ़ाइल (PNG या JPEG) का उपयोग करें।</string>
+    <string name="header_creator_guide_image_body">पारदर्शी पृष्ठभूमि वाला PNG ऐप बार में मिल जाता है। फ़ाइल में लोगो के चारों ओर के मार्जिन को अनदेखा किया जाता है, इसलिए यह स्टॉक लोगो के आकार और स्थान से शुरू होता है।</string>
     <string name="header_creator_guide_themes_title">लाइट और डार्क थीम</string>
     <string name="header_creator_guide_themes_body">अधिकांश ऐप्स को लाइट और डार्क थीम के लिए अलग-अलग छवियों की आवश्यकता होती है। कुछ ऐप्स (जैसे YouTube Music) केवल डार्क थीम का उपयोग करते हैं, इसलिए केवल वह खंड दिखाया गया है।</string>
     <string name="header_creator_guide_positioning_title">स्थिति निर्धारण और स्केलिंग</string>
-    <string name="header_creator_guide_positioning_body">अपनी छवि को स्थिति और स्केल करने के लिए पूर्वावलोकन में सीधे पिंच-टू-ज़ूम और ड्रैग जेस्चर का उपयोग करें। जब छवि केंद्र के पास होती है तो स्नैप गाइड दिखाई देती हैं। आप पूर्वावलोकन के नीचे स्लाइडर का भी उपयोग कर सकते हैं।</string>
+    <string name="header_creator_guide_positioning_body">एडिटर में छवि को खींचें और पिंच करें, या स्लाइडर से उसका आकार बदलें। डैश वाला बॉक्स चिह्नित करता है कि स्टॉक लोगो कहाँ स्थित है, और जब छवि उसके साथ संरेखित होती है तो गाइड दिखाई देते हैं।</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">चयनित पैच लागू किया गया</string>
     <string name="batch_patch_title">बैच पैचिंग</string>

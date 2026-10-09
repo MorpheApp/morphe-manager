@@ -390,44 +390,43 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="adaptive_icon_select_image">Resim seç</string>
     <string name="adaptive_icon_change_image">Resmi değiştir</string>
     <string name="image_load_failed">Bu görsel yüklenemedi</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Ön plan görüntüsü</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Başlatıcı simgesi</string>
+    <string name="adaptive_icon_gesture_hint">Taşımak için sürükleyin, yeniden boyutlandırmak için kıstırın</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Önizleme</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Standart</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Temalı</string>
     <string name="adaptive_icon_background_color">Arka plan rengi</string>
     <string name="adaptive_icon_reset_transform">Pozisyon ve ölçeği sıfırla</string>
-    <string name="adaptive_icon_safe_zone_inner">Güvenli alan (her zaman görünür)</string>
-    <string name="adaptive_icon_safe_zone_outer">Maske alanı (kırpılabilir)</string>
-    <string name="adaptive_icon_no_transparency_warning">Görüntüde şeffaf piksel bulunmuyor. Sonuç doğru görünmeyebilir</string>
+    <string name="adaptive_icon_no_transparency_warning">Bu görüntüde şeffaf piksel bulunmadığından, temalı ve bildirim simgeleri Morphe logosunu korur</string>
     <string name="adaptive_icon_created_success">Adaptif simge başarıyla oluşturuldu</string>
     <string name="adaptive_icon_creation_failed">Adaptif simge oluşturulamadı</string>
-    <string name="adaptive_icon_label">Uyarlanabilir</string>
-    <string name="adaptive_icon_monochrome_label">Tek renk</string>
     <string name="adaptive_icon_guide">Simge oluşturma rehberi</string>
     <string name="adaptive_icon_guide_png_title">Şeffaf arka plana sahip bir PNG kullanın</string>
-    <string name="adaptive_icon_guide_png_body">Ön plan, şeffaf arka plana sahip bir PNG dosyası olmalıdır. Düz renkli bir arka plan yanlış görünecektir - arka plan rengi aşağıdaki arka plan seçiciden gelmelidir.</string>
+    <string name="adaptive_icon_guide_png_body">Şeffaf bir arka plan üzerindeki logo, aşağıda seçilen arka plan rengiyle birlikte en iyi sonucu verir. Şeffaflığı olmayan bir resim bunun yerine tüm simgeyi doldurur ve temalı ve bildirim simgeleri bu durumda Morphe logosunu korur.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Güvenli bölgeler</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"İç bölge (düz): içerik her zaman tüm launcher şekillerinde tamamen görünür.
-Dış bölge (kesikli): launcher maskesi tarafından kırpılabilir - önemli ayrıntıları iç bölgede tutun."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Anahat, başlatıcınızın simge şeklini gösterir ve bu anahattın dışındaki her şey kesilir. Diğer başlatıcılar farklı şekiller kullandığından, önemli ayrıntıları her şekilde görünen kesikli dairenin içinde tutun.</string>
     <string name="adaptive_icon_guide_notification_title">Bildirim simgesi</string>
-    <string name="adaptive_icon_guide_notification_body">Ön plan görüntüsünden otomatik olarak oluşturulur. Boyutunu Bildirim kaydırıcısını kullanarak ayarlayın. Durum çubuğunda görünen tüm içerik beyaz görünür.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Tek renkli simge</string>
-    <string name="adaptive_icon_guide_monochrome_body">Ön plan görüntüsünden aynı uyarlanabilir simge dönüşümleri kullanılarak otomatik olarak oluşturulur. Android 13 ve sonraki sürümlerde duvar kağıdının vurgu renginde görünür.</string>
+    <string name="adaptive_icon_guide_notification_body">Dosyanın kenar boşluğu ne olursa olsun, görüntünün görünür kısmından kesilir ve diğer durum çubuğu simgeleri gibi boyutlandırılır. Önizlemenin altındaki kaydırıcıyla ayarlayın. Android bunu tek renkte gösterir.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Temalı simge</string>
+    <string name="adaptive_icon_guide_monochrome_body">Görüntüden, başlatıcı simgesiyle aynı konumda ve boyutta kesilir. Android 13 ve sonrasında, temalı simgeleri açık olan başlatıcılar onu duvar kağıdından renklendirir.</string>
     <string name="notification_icon_preview">Bildirim</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Özel başlık oluştur</string>
     <string name="header_creator_light_theme">Açık tema başlığı</string>
     <string name="header_creator_dark_theme">Koyu tema başlığı</string>
-    <string name="header_creator_no_image">Seçilen görüntü yok</string>
     <string name="header_creator_success">Başlık başarıyla oluşturuldu</string>
     <string name="header_creator_failed">Başlık oluşturulamadı</string>
     <string name="header_creator_guide">Başlık oluşturma rehberi</string>
     <string name="header_creator_guide_image_title">Görüntü gereksinimleri</string>
-    <string name="header_creator_guide_image_body">Herhangi bir görüntü dosyası (PNG veya JPEG) kullanın. En iyi sonuçlar için yaklaşık 2.7:1 en boy oranına sahip geniş formatlı bir görüntü kullanın. Şeffaf arka plana sahip PNG dosyaları uygulama temasıyla doğal olarak bütünleşecektir.</string>
+    <string name="header_creator_guide_image_body">Şeffaf arka planlı bir PNG, uygulama çubuğuyla uyum sağlar. Dosyadaki logonun etrafındaki boşluklar yok sayılır; bu nedenle görsel, varsayılan logonun boyutunda ve konumunda başlar.</string>
     <string name="header_creator_guide_themes_title">Açık ve koyu temalar</string>
     <string name="header_creator_guide_themes_body">Çoğu uygulama, açık ve koyu temalar için ayrı görüntüler gerektirir. Bazı uygulamalar (YouTube Music gibi) yalnızca koyu temayı kullanır, bu nedenle yalnızca o bölüm gösterilir.</string>
     <string name="header_creator_guide_positioning_title">Konumlandırma ve ölçeklendirme</string>
-    <string name="header_creator_guide_positioning_body">Görüntünüzü konumlandırmak ve ölçeklendirmek için ön izlemede doğrudan yakınlaştırma ve sürükleme hareketlerini kullanın. Görüntü merkeze yaklaştığında hizalama kılavuzları görünür. Ön izlemenin altındaki kaydırıcıyı da kullanabilirsiniz.</string>
+    <string name="header_creator_guide_positioning_body">Görüntüyü düzenleyicide sürükleyerek taşıyın, kıstırarak yeniden boyutlandırın veya kaydırıcıyla boyutunu ayarlayın. Kesikli kutu, varsayılan logonun bulunduğu yeri işaretler ve görüntü onunla hizalandığında kılavuz çizgiler görünür.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Yama seçildi</string>
     <string name="batch_patch_title">Toplu yama</string>
@@ -868,6 +867,9 @@ Yamalar etkilenmez: yamalama kaynakları listesindeki her kaynak için ön sür�
     <string name="notification_channel_patch_updates_description">Yeni yama sürümleri hakkında bildirimler</string>
     <string name="notification_channel_patcher_description">Morphe bir uygulamayı arka planda yamalarken gösterilir</string>
     <string name="notification_channel_mounted_apps">Bağlı uygulamalar</string>
+    <string name="notification_channel_mounted_apps_description">Başka bir sürüm bağlı bir uygulamanın yerini aldığında ve yaması artık uygulanmadığında</string>
+    <string name="notification_mount_replaced_title">v%1$s artık yamalı değil</string>
+    <string name="notification_mount_replaced_text">v%1$s, yamalı v%2$s sürümünün yerini aldı. Geri yüklemek için Morphe\'yi açın.</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Uzman ayarları</string>
     <string name="settings_advanced_expert_mode">Uzman modu</string>
@@ -1320,6 +1322,7 @@ Ayrıntılar: %2$s"</string>
     <string name="unmount">Bağlamayı kaldır</string>
     <string name="unmounted">Bağlama kaldırıldı</string>
     <string name="remount">Yeniden bağla</string>
+    <string name="restore">Geri yükle</string>
     <string name="share">Paylaş</string>
     <string name="install">Yükle</string>
     <string name="installed">Yüklü</string>
@@ -1340,6 +1343,8 @@ Ayrıntılar: %2$s"</string>
     <string name="sources">Kaynaklar</string>
     <string name="installing_ellipsis">Yükleniyor…</string>
     <string name="mounting_ellipsis">Bağlanıyor…</string>
+    <string name="mount_stage_restoring_stock">Orijinal uygulama geri yükleniyor…</string>
+    <string name="mount_stage_copying">Kopyalanıyor…</string>
     <string name="unmounting_ellipsis">Bağlama kaldırılıyor…</string>
     <string name="importing_ellipsis">İçe aktarılıyor…</string>
     <string name="imported_successfully">Başarıyla içe aktarıldı</string>

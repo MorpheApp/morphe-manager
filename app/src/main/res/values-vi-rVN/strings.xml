@@ -390,44 +390,43 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="adaptive_icon_select_image">Chọn ảnh</string>
     <string name="adaptive_icon_change_image">Đổi ảnh</string>
     <string name="image_load_failed">Không thể tải hình ảnh này</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Hình ảnh tiền cảnh</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Biểu tượng trình khởi chạy</string>
+    <string name="adaptive_icon_gesture_hint">Kéo để di chuyển, chụm để thay đổi kích thước</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Xem trước</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Tiêu chuẩn</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Theo chủ đề</string>
     <string name="adaptive_icon_background_color">Màu nền</string>
     <string name="adaptive_icon_reset_transform">Đặt lại vị trí và tỷ lệ</string>
-    <string name="adaptive_icon_safe_zone_inner">Vùng an toàn (luôn hiển thị)</string>
-    <string name="adaptive_icon_safe_zone_outer">Vùng mặt nạ (có thể bị cắt)</string>
-    <string name="adaptive_icon_no_transparency_warning">Hình ảnh không có pixel trong suốt. Kết quả có thể không chính xác</string>
+    <string name="adaptive_icon_no_transparency_warning">Hình ảnh này không có pixel trong suốt, vì vậy biểu tượng theo chủ đề và biểu tượng thông báo sẽ giữ nguyên logo Morphe</string>
     <string name="adaptive_icon_created_success">Đã tạo biểu tượng thích ứng thành công</string>
     <string name="adaptive_icon_creation_failed">Không thể tạo biểu tượng thích ứng</string>
-    <string name="adaptive_icon_label">Thích ứng</string>
-    <string name="adaptive_icon_monochrome_label">Đơn sắc</string>
     <string name="adaptive_icon_guide">Hướng dẫn tạo biểu tượng</string>
     <string name="adaptive_icon_guide_png_title">Sử dụng tệp PNG có nền trong suốt</string>
-    <string name="adaptive_icon_guide_png_body">Tiền cảnh phải là tệp PNG có nền trong suốt. Nền màu đồng nhất sẽ hiển thị không chính xác - màu nền nên được chọn từ trình chọn nền bên dưới.</string>
+    <string name="adaptive_icon_guide_png_body">Logo trên nền trong suốt hoạt động tốt nhất, với màu nền được chọn bên dưới. Ngược lại, hình ảnh không có độ trong suốt sẽ lấp đầy toàn bộ biểu tượng, và khi đó biểu tượng theo chủ đề và biểu tượng thông báo sẽ giữ nguyên logo Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Vùng an toàn</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Vùng trong (nét liền): luôn hiển thị đầy đủ trên mọi hình dạng biểu tượng trình khởi chạy.
-Vùng ngoài (nét đứt): có thể bị cắt theo hình dạng biểu tượng trình khởi chạy, nên hãy đặt các chi tiết quan trọng bên trong nét liền."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Đường viền thể hiện hình dạng biểu tượng trình khởi chạy của bạn và mọi thứ bên ngoài đường viền sẽ bị cắt bỏ. Các trình khởi chạy khác sử dụng các hình dạng khác, vì vậy hãy giữ các chi tiết quan trọng bên trong vòng tròn nét đứt mà mọi hình dạng đều có.</string>
     <string name="adaptive_icon_guide_notification_title">Biểu tượng thông báo</string>
-    <string name="adaptive_icon_guide_notification_body">Được tạo tự động từ ảnh tiền cảnh. Điều chỉnh kích thước bằng thanh trượt Thông báo. Tất cả nội dung hiển thị trên thanh trạng thái sẽ có màu trắng.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Biểu tượng đơn sắc</string>
-    <string name="adaptive_icon_guide_monochrome_body">Được tạo tự động từ ảnh tiền cảnh bằng cách sử dụng các phép biến đổi biểu tượng thích ứng tương tự. Từ Android 13 trở đi, biểu tượng sẽ có màu sắc theo màu nổi bật của hình nền.</string>
+    <string name="adaptive_icon_guide_notification_body">Được cắt từ phần nhìn thấy được của hình ảnh và có kích thước giống các biểu tượng thanh trạng thái khác, bất kể lề của tệp là bao nhiêu. Điều chỉnh nó bằng thanh trượt bên dưới bản xem trước. Android hiển thị biểu tượng này bằng một màu duy nhất.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Biểu tượng theo chủ đề</string>
+    <string name="adaptive_icon_guide_monochrome_body">Được cắt từ hình ảnh ở cùng vị trí và kích thước với biểu tượng trình khởi chạy. Trên Android 13 trở lên, các trình khởi chạy đã bật biểu tượng theo chủ đề sẽ lấy màu từ hình nền để tô nó.</string>
     <string name="notification_icon_preview">Thông báo</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Tạo logo tùy chỉnh</string>
     <string name="header_creator_light_theme">Logo chủ đề sáng</string>
     <string name="header_creator_dark_theme">Logo chủ đề tối</string>
-    <string name="header_creator_no_image">Không có hình ảnh nào được chọn</string>
     <string name="header_creator_success">Đã tạo logo thành công</string>
     <string name="header_creator_failed">Không thể tạo logo</string>
     <string name="header_creator_guide">Hướng dẫn tạo logo đầu trang</string>
     <string name="header_creator_guide_image_title">Yêu cầu về hình ảnh</string>
-    <string name="header_creator_guide_image_body">Hỗ trợ bất kỳ ảnh PNG hoặc JPEG nào, nhưng để có kết quả tốt nhất bạn nên chọn những hình ảnh có định dạng ngang với tỷ lệ khoảng 2,7:1. Nếu chọn tệp PNG có nền trong suốt, logo trông sẽ tự nhiên với chủ đề ứng dụng.</string>
+    <string name="header_creator_guide_image_body">Tệp PNG có nền trong suốt sẽ hòa vào thanh ứng dụng. Các lề xung quanh logo trong tệp bị bỏ qua, vì vậy hình ảnh sẽ bắt đầu với kích thước và vị trí của logo mặc định.</string>
     <string name="header_creator_guide_themes_title">Chế độ sáng và tối</string>
     <string name="header_creator_guide_themes_body">Hầu hết các ứng dụng yêu cầu hình ảnh riêng cho chế độ sáng và tối. Một số ứng dụng (như YouTube Music) chỉ sử dụng chế độ tối, vì vậy chỉ phần đó mới được hiển thị.</string>
     <string name="header_creator_guide_positioning_title">Căn chỉnh và thu phóng</string>
-    <string name="header_creator_guide_positioning_body">Dùng cử chỉ chụm để thu phóng và kéo trực tiếp trong phần xem trước để căn chỉnh vị trí và kích thước hình ảnh. Các đường căn chỉnh sẽ xuất hiện khi hình ảnh ở gần trung tâm. Bạn cũng có thể dùng thanh trượt bên dưới phần xem trước.</string>
+    <string name="header_creator_guide_positioning_body">Kéo và chụm ảnh trong trình chỉnh sửa hoặc thay đổi kích thước ảnh bằng thanh trượt. Hộp nét đứt đánh dấu vị trí logo mặc định và các đường hướng dẫn sẽ xuất hiện khi ảnh thẳng hàng với vị trí đó.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Đã chọn bản vá</string>
     <string name="batch_patch_title">Đang vá hàng loạt</string>
@@ -871,6 +870,9 @@ Các bản vá không bị ảnh hưởng: bật các bản vá trước khi ph�
     <string name="notification_channel_patch_updates_description">Thông báo về các bản phát hành bản vá mới</string>
     <string name="notification_channel_patcher_description">Hiển thị khi Morphe đang vá ứng dụng trong nền</string>
     <string name="notification_channel_mounted_apps">Ứng dụng đã gắn</string>
+    <string name="notification_channel_mounted_apps_description">Khi một phiên bản khác thay thế một ứng dụng đã được gắn và bản vá của nó không còn áp dụng được nữa</string>
+    <string name="notification_mount_replaced_title">%1$s không còn được vá</string>
+    <string name="notification_mount_replaced_text">v%1$s đã thay thế v%2$s đã được vá. Mở Morphe để khôi phục lại</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Chuyên gia</string>
     <string name="settings_advanced_expert_mode">Chế độ chuyên gia</string>
@@ -1326,6 +1328,7 @@ Chi tiết: %2$s"</string>
     <string name="unmount">Gỡ gắn kết</string>
     <string name="unmounted">Đã gỡ gắn kết</string>
     <string name="remount">Gắn kết lại</string>
+    <string name="restore">Khôi phục</string>
     <string name="share">Chia sẻ</string>
     <string name="install">Cài đặt</string>
     <string name="installed">Đã cài đặt</string>
@@ -1346,6 +1349,8 @@ Chi tiết: %2$s"</string>
     <string name="sources">Nguồn</string>
     <string name="installing_ellipsis">Đang cài đặt…</string>
     <string name="mounting_ellipsis">Đang gắn kết…</string>
+    <string name="mount_stage_restoring_stock">Đang khôi phục bản gốc…</string>
+    <string name="mount_stage_copying">Đang sao chép…</string>
     <string name="unmounting_ellipsis">Đang gỡ gắn…</string>
     <string name="importing_ellipsis">Đang nhập…</string>
     <string name="imported_successfully">Đã nhập thành công</string>

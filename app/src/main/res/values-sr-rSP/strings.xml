@@ -390,44 +390,43 @@
     <string name="adaptive_icon_select_image">Изабери слику</string>
     <string name="adaptive_icon_change_image">Промени слику</string>
     <string name="image_load_failed">Не могу да учитам ову слику</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Слика у првом плану</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Икона покретача</string>
+    <string name="adaptive_icon_gesture_hint">Превуците да померите, штипните да промените величину</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Преглед</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Стандардна</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Тематска</string>
     <string name="adaptive_icon_background_color">Боја позадине</string>
     <string name="adaptive_icon_reset_transform">Ресетујте положај и скала</string>
-    <string name="adaptive_icon_safe_zone_inner">Зона безбедности (увек видљива)</string>
-    <string name="adaptive_icon_safe_zone_outer">Маска зона (може бити одсечена)</string>
-    <string name="adaptive_icon_no_transparency_warning">Слика нема пикселе са транспарентношћу. Резултат може изгледати некоректно</string>
+    <string name="adaptive_icon_no_transparency_warning">Ова слика нема провидних пиксела, па тематске и иконе за обавештења задржавају Morphe лого</string>
     <string name="adaptive_icon_created_success">Адаптивни иконика успјешно створен</string>
     <string name="adaptive_icon_creation_failed">Неуспјех у креирању адаптивног иконика</string>
-    <string name="adaptive_icon_label">Адаптивно</string>
-    <string name="adaptive_icon_monochrome_label">Монохромно</string>
     <string name="adaptive_icon_guide">Упутство за креирање икона</string>
     <string name="adaptive_icon_guide_png_title">Користите PNG слику са провидном позадином</string>
-    <string name="adaptive_icon_guide_png_body">Предњи план мора бити PNG датотека са провидном позадином. Пуна позадинска боја ће изгледати неправилно – боја позадине треба да дође са бирача позадине испод.</string>
+    <string name="adaptive_icon_guide_png_body">Лого на провидној позадини најбоље функционише, а боја позадине се бира испод. Слика без провидности уместо тога испуњава целу икону, па тематске и иконе за обавештења тада задржавају Morphe лого.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Сигурносне зоне</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Унутрашња зона (пуна): садржај је увек у потпуности видљив на свим облицима лансера.
-Спољашња зона (испрекидана): може бити исечена маском лансера – држите важне детаље унутар унутрашње зоне."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Обрис приказује облик иконе вашег покретача, а све што је изван њега се одсеца. Остали покретачи користе другачије облике, зато важне детаље држите унутар испрекиданог круга, који се приказује код сваког облика.</string>
     <string name="adaptive_icon_guide_notification_title">Икона обавештења</string>
-    <string name="adaptive_icon_guide_notification_body">Генерише се аутоматски из слике предњег плана. Подесите његову величину помоћу клизача Обавештења. Сав видљив садржај се појављује у белој боји на траци статуса.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Монохромна икона</string>
-    <string name="adaptive_icon_guide_monochrome_body">Генерише се аутоматски из слике предњег плана користећи исте трансформације адаптивне иконе. Појављује се затамњена акцентном бојом позадине на Android 13 и новијим верзијама.</string>
+    <string name="adaptive_icon_guide_notification_body">Икона за обавештења се сече из видљивог дела слике и исте је величине као и остале иконе статусне траке, без обзира на маргину коју датотека има. Подесите је клизачем испод прегледа. Android је приказује у једној боји.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Тематска икона</string>
+    <string name="adaptive_icon_guide_monochrome_body">Сече се из слике са истим положајем и величином као и икона покретача. На Android-у 13 и новијим верзијама, покретачи код којих су укључене тематске иконе приказују је у бојама са позадине.</string>
     <string name="notification_icon_preview">Обавештење</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Направи обични заглавље</string>
     <string name="header_creator_light_theme">Заглавље светле теме</string>
     <string name="header_creator_dark_theme">Заглавље тамне теме</string>
-    <string name="header_creator_no_image">Није одабрана слика</string>
     <string name="header_creator_success">Заглавље успјешно креирано</string>
     <string name="header_creator_failed">Неуспјех у креирању заглавља</string>
     <string name="header_creator_guide">Упутство за креирање заглавља</string>
     <string name="header_creator_guide_image_title">Захтеви за слику</string>
-    <string name="header_creator_guide_image_body">Користите било коју датотеку слике (PNG или JPEG). За најбоље резултате, користите слику широког формата са приближном резолуцијом 2,7:1. PNG датотеке са провидним позадинама ће се природно спојити са темом апликације.</string>
+    <string name="header_creator_guide_image_body">PNG са провидном позадином се стапа са траком апликације. Маргине око логоа у датотеци се занемарују, па су величина и положај исти као код подразумеваног логоа.</string>
     <string name="header_creator_guide_themes_title">Светле и тамне теме</string>
     <string name="header_creator_guide_themes_body">Већини апликација су потребне посебне слике за светле и тамне теме. Неке апликације (као што је YouTube Music) користе само тамну тему, па се приказује само та секција.</string>
     <string name="header_creator_guide_positioning_title">Позиционирање и скалирање</string>
-    <string name="header_creator_guide_positioning_body">Користите гестове пецкања за зумирање и превлачење директно у прегледу да бисте позиционирали и скалирали слику. Водичи се појављују када је слика близу центра. Такође можете користити клизач испод прегледа.</string>
+    <string name="header_creator_guide_positioning_body">Превуците и штипните слику у уређивачу или промените њену величину клизачем. Испрекидани оквир означава положај подразумеваног логоа, а помоћне линије се појављују када се слика поравна са њим.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Закрпи изабрано</string>
     <string name="batch_patch_title">Групно закрпљивање</string>
@@ -869,6 +868,9 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="notification_channel_patch_updates_description">Обавештења о новим издањима закрпа</string>
     <string name="notification_channel_patcher_description">Приказано док Morphe патчи апликацију у позадини</string>
     <string name="notification_channel_mounted_apps">Монтиране апликације</string>
+    <string name="notification_channel_mounted_apps_description">Када друга верзија замени монтирану апликацију и њена закрпа се више не примењује</string>
+    <string name="notification_mount_replaced_title">%1$s више није закрпљена</string>
+    <string name="notification_mount_replaced_text">v%1$s је заменила закрпљену v%2$s. Отворите Morphe да бисте је вратили</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Навише подешавања</string>
     <string name="settings_advanced_expert_mode">Нави моћ</string>
@@ -1321,6 +1323,7 @@ morphe_header_custom_dark.png
     <string name="unmount">Демонтирај</string>
     <string name="unmounted">Демонтирано</string>
     <string name="remount">Поново монтирати</string>
+    <string name="restore">Врати</string>
     <string name="share">Делите</string>
     <string name="install">Инсталирај</string>
     <string name="installed">Инсталирано</string>
@@ -1341,6 +1344,8 @@ morphe_header_custom_dark.png
     <string name="sources">Извори</string>
     <string name="installing_ellipsis">Инсталирање…</string>
     <string name="mounting_ellipsis">Монтирање…</string>
+    <string name="mount_stage_restoring_stock">Враћање оригинала…</string>
+    <string name="mount_stage_copying">Копирање…</string>
     <string name="unmounting_ellipsis">Демонтирање…</string>
     <string name="importing_ellipsis">Увоз…</string>
     <string name="imported_successfully">Успјешно импортирано</string>

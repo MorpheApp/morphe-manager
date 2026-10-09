@@ -390,44 +390,43 @@
     <string name="adaptive_icon_select_image">选择图像</string>
     <string name="adaptive_icon_change_image">更改图像</string>
     <string name="image_load_failed">无法加载此图片</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">前景图像</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">启动器图标</string>
+    <string name="adaptive_icon_gesture_hint">拖动以移动，双指缩放以调整大小</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">预览</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">标准</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">主题</string>
     <string name="adaptive_icon_background_color">背景颜色</string>
     <string name="adaptive_icon_reset_transform">重置位置和缩放</string>
-    <string name="adaptive_icon_safe_zone_inner">安全区域（始终可见）</string>
-    <string name="adaptive_icon_safe_zone_outer">遮罩区域（可能会被剪切）</string>
-    <string name="adaptive_icon_no_transparency_warning">图片没有透明像素。结果可能看起来不正确</string>
+    <string name="adaptive_icon_no_transparency_warning">此图片没有透明像素，因此主题图标和通知图标会保留 Morphe 标志</string>
     <string name="adaptive_icon_created_success">自适应图标创建成功</string>
     <string name="adaptive_icon_creation_failed">创建自适应图标失败</string>
-    <string name="adaptive_icon_label">自适应</string>
-    <string name="adaptive_icon_monochrome_label">单色</string>
     <string name="adaptive_icon_guide">图标创建指南</string>
     <string name="adaptive_icon_guide_png_title">使用带有透明背景的PNG</string>
-    <string name="adaptive_icon_guide_png_body">前景必须是带有透明背景的PNG文件。纯色背景看起来会不正确——背景颜色应来自下面的背景选择器。</string>
+    <string name="adaptive_icon_guide_png_body">透明背景上的标志效果最佳，背景颜色在下方选取。没有透明度的图片会填满整个图标，此时主题图标和通知图标会保留 Morphe 标志。</string>
     <string name="adaptive_icon_guide_safe_zones_title">安全区域</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"内区（实线）：内容在所有启动器形状上始终完全可见。
-外区（虚线）：可能会被启动器蒙版剪裁——将重要细节保留在内区内。"</string>
+    <string name="adaptive_icon_guide_safe_zones_body">轮廓显示启动器的图标形状，轮廓之外的一切都会被裁掉。其他启动器使用其他形状，因此请把重要细节放在虚线圆内，因为所有形状都会显示这个区域。</string>
     <string name="adaptive_icon_guide_notification_title">通知图标</string>
-    <string name="adaptive_icon_guide_notification_body">从前景色图像自动生成。使用通知滑块调整其大小。所有可见内容在状态栏中显示为白色。</string>
-    <string name="adaptive_icon_guide_monochrome_title">单色图标</string>
-    <string name="adaptive_icon_guide_monochrome_body">使用相同的自适应图标变换从前景色图像自动生成。在Android 13及更高版本上，它会以墙纸强调色进行着色。</string>
+    <string name="adaptive_icon_guide_notification_body">从图片的可见部分裁剪，并像其他状态栏图标一样调整大小，无论文件留白多少。使用预览下方的滑块进行调整。Android 会以单色显示。</string>
+    <string name="adaptive_icon_guide_monochrome_title">主题图标</string>
+    <string name="adaptive_icon_guide_monochrome_body">从图片中按与启动器图标相同的位置和大小裁剪。在 Android 13 及以上版本中，开启了主题图标功能的启动器会从壁纸中取色为其着色。</string>
     <string name="notification_icon_preview">通知</string>
     <!-- Header Creator -->
     <string name="header_creator_create">创建自定义标头</string>
     <string name="header_creator_light_theme">亮色主题标题</string>
     <string name="header_creator_dark_theme">暗色主题标题</string>
-    <string name="header_creator_no_image">未选择任何图像</string>
     <string name="header_creator_success">标题创建成功</string>
     <string name="header_creator_failed">创建标题失败</string>
     <string name="header_creator_guide">页眉创建指南</string>
     <string name="header_creator_guide_image_title">图像要求</string>
-    <string name="header_creator_guide_image_body">使用任何图像文件（PNG或JPEG）。为了获得最佳效果，请使用宽高比约为 2.7:1 的宽格式图像。带有透明背景的PNG文件将与应用程序主题自然融合。</string>
+    <string name="header_creator_guide_image_body">带有透明背景的 PNG 会与应用栏融为一体。文件中标志周围的留白会被忽略，因此它的起始大小和位置与默认标志相同。</string>
     <string name="header_creator_guide_themes_title">浅色和深色主题</string>
     <string name="header_creator_guide_themes_body">大多数应用程序需要浅色和深色主题的单独图像。一些应用程序（如YouTube Music）仅使用深色主题，因此仅显示该部分。</string>
     <string name="header_creator_guide_positioning_title">定位和缩放</string>
-    <string name="header_creator_guide_positioning_body">直接在预览中使用捏合缩放和平移手势来定位和缩放图像。当图像靠近中心时，会出现捕捉指南。您还可以使用预览下方的滑块。</string>
+    <string name="header_creator_guide_positioning_body">在编辑器中拖动或双指缩放图片，也可用滑块调整大小。虚线框标记默认标志的位置，图片与之对齐时会显示参考线。</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">已选择  个补丁</string>
     <string name="batch_patch_title">批量补丁</string>

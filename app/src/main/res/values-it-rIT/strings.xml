@@ -390,44 +390,43 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <string name="adaptive_icon_select_image">Seleziona immagine</string>
     <string name="adaptive_icon_change_image">Cambia immagine</string>
     <string name="image_load_failed">Impossibile caricare questa immagine</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Immagine in primo piano</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Icona di avvio</string>
+    <string name="adaptive_icon_gesture_hint">Trascina per spostare, pizzica per ridimensionare</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Anteprima</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Normale</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">A tema</string>
     <string name="adaptive_icon_background_color">Colore dello sfondo</string>
     <string name="adaptive_icon_reset_transform">Reimposta posizione e scala</string>
-    <string name="adaptive_icon_safe_zone_inner">Zona sicura (sempre visibile)</string>
-    <string name="adaptive_icon_safe_zone_outer">Zona di maschera (potrebbe venire tagliata)</string>
-    <string name="adaptive_icon_no_transparency_warning">L\'immagine non ha pixel trasparenti. Il risultato potrebbe non essere corretto</string>
+    <string name="adaptive_icon_no_transparency_warning">Questa immagine non ha pixel trasparenti, quindi le icone a tema e di notifica mantengono il logo Morphe</string>
     <string name="adaptive_icon_created_success">Icona adattiva creata con successo</string>
     <string name="adaptive_icon_creation_failed">Impossibile creare l\'icona adattiva</string>
-    <string name="adaptive_icon_label">Adattivo</string>
-    <string name="adaptive_icon_monochrome_label">Monocromatico</string>
     <string name="adaptive_icon_guide">Guida alla creazione delle icone</string>
     <string name="adaptive_icon_guide_png_title">Utilizza un PNG con sfondo trasparente</string>
-    <string name="adaptive_icon_guide_png_body">Il primo piano deve essere un file PNG con uno sfondo trasparente. Uno sfondo a tinta unita apparirà errato: il colore di sfondo deve essere scelto dal selettore di sfondo sottostante.</string>
+    <string name="adaptive_icon_guide_png_body">Un logo con sfondo trasparente funziona meglio, con il colore di sfondo scelto qui sotto. Un\'immagine senza trasparenza riempie invece l\'intera icona e le icone a tema e di notifica mantengono quindi il logo Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Zone di sicurezza</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Zona interna (solida): il contenuto è sempre completamente visibile su tutte le forme di avvio.
-Zona esterna (tratteggiata): potrebbe essere ritagliata dalla maschera di avvio: mantieni i dettagli importanti all'interno della zona interna."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Il contorno mostra la forma dell\'icona del tuo launcher e tutto ciò che è all\'esterno viene tagliato via. Altri launcher usano forme diverse, quindi tieni i dettagli importanti all\'interno del cerchio tratteggiato, che è presente in ogni forma.</string>
     <string name="adaptive_icon_guide_notification_title">Icona di notifica</string>
-    <string name="adaptive_icon_guide_notification_body">Generato automaticamente dall\'immagine di primo piano. Regola le dimensioni utilizzando il cursore delle notifiche. Tutto il contenuto visibile appare in bianco nella barra di stato.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Icona monocromatica</string>
-    <string name="adaptive_icon_guide_monochrome_body">Generata automaticamente dall\'immagine di primo piano utilizzando le stesse trasformazioni dell\'icona adattiva. Appare sfumata con il colore di accento della carta da parati su Android 13 e versioni successive.</string>
+    <string name="adaptive_icon_guide_notification_body">Ritagliata dalla parte visibile dell\'immagine e dimensionata come le altre icone della barra di stato, qualunque margine abbia il file. Regolala con il cursore sotto l\'anteprima. Android la mostra in un unico colore.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Icona a tema</string>
+    <string name="adaptive_icon_guide_monochrome_body">Ritagliata dall\'immagine con la stessa posizione e dimensioni dell\'icona del launcher. Su Android 13 e versioni successive, i launcher con le icone a tema attive la colorano in base allo sfondo.</string>
     <string name="notification_icon_preview">Notifiche</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Crea intestazione personalizzata</string>
     <string name="header_creator_light_theme">Intestazione con tema chiaro</string>
     <string name="header_creator_dark_theme">Intestazione con tema scuro</string>
-    <string name="header_creator_no_image">Nessuna immagine selezionata</string>
     <string name="header_creator_success">Intestazione creata con successo</string>
     <string name="header_creator_failed">Impossibile creare l\'intestazione</string>
     <string name="header_creator_guide">Guida alla creazione dell\'intestazione</string>
     <string name="header_creator_guide_image_title">Requisiti dell\'immagine</string>
-    <string name="header_creator_guide_image_body">Utilizza qualsiasi file immagine (PNG o JPEG). Per risultati ottimali, utilizza un\'immagine in formato panoramico con un rapporto di aspetto di circa 2,7:1. I file PNG con sfondi trasparenti si integreranno naturalmente con il tema dell\'app.</string>
+    <string name="header_creator_guide_image_body">Un PNG con sfondo trasparente si integra nella barra dell\'app. I margini attorno al logo nel file vengono ignorati, quindi inizia con le dimensioni e la posizione del logo predefinito.</string>
     <string name="header_creator_guide_themes_title">Temi chiaro e scuro</string>
     <string name="header_creator_guide_themes_body">La maggior parte delle app richiede immagini separate per i temi chiaro e scuro. Alcune app (come YouTube Music) utilizzano solo il tema scuro, quindi viene visualizzata solo quella sezione.</string>
     <string name="header_creator_guide_positioning_title">Posizionamento e ridimensionamento</string>
-    <string name="header_creator_guide_positioning_body">Utilizza i gesti di pizzicamento per zoomare e trascinare direttamente nell\'anteprima per posizionare e ridimensionare l\'immagine. Appaiono delle guide quando l\'immagine è vicino al centro. Puoi anche utilizzare il cursore sotto l\'anteprima.</string>
+    <string name="header_creator_guide_positioning_body">Trascina e pizzica l\'immagine nell\'editor oppure regolane le dimensioni con il cursore. Il riquadro tratteggiato indica la posizione del logo predefinito e le guide compaiono quando l\'immagine si allinea con il riquadro.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Patch selezionata</string>
     <string name="batch_patch_title">Patching di gruppo</string>

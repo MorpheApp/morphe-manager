@@ -390,44 +390,43 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="adaptive_icon_select_image">Selectează imagine</string>
     <string name="adaptive_icon_change_image">Schimbă imagine</string>
     <string name="image_load_failed">Nu s-a putut încărca această imagine</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Imagine de prim-plan</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Pictogramă de lansator</string>
+    <string name="adaptive_icon_gesture_hint">Trageți pentru a muta, ciupiți pentru a redimensiona</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Previzualizare</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Standard</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Tematică</string>
     <string name="adaptive_icon_background_color">Culoare de fundal</string>
     <string name="adaptive_icon_reset_transform">Reinitalizați poziția și scalarea</string>
-    <string name="adaptive_icon_safe_zone_inner">Zonă sigură (totdeauna vizibilă)</string>
-    <string name="adaptive_icon_safe_zone_outer">Zonă mascată (poate fi tăiată)</string>
-    <string name="adaptive_icon_no_transparency_warning">Imaginea nu conține pixeli transparenți. Rezultatul poate arăta incorect.</string>
+    <string name="adaptive_icon_no_transparency_warning">Această imagine nu are pixeli transparenți, așa că pictogramele tematice și cele de notificare păstrează logo-ul Morphe</string>
     <string name="adaptive_icon_created_success">Icoana adaptivă creată cu succes</string>
     <string name="adaptive_icon_creation_failed">Eroare la crearea icoanei adaptive</string>
-    <string name="adaptive_icon_label">Adaptiv</string>
-    <string name="adaptive_icon_monochrome_label">Monocrom</string>
     <string name="adaptive_icon_guide">Ghid de creare icoane</string>
     <string name="adaptive_icon_guide_png_title">Utilizați un PNG cu fundal transparent</string>
-    <string name="adaptive_icon_guide_png_body">Prim-planul trebuie să fie un fișier PNG cu un fundal transparent. Un fundal de culoare solidă va arăta incorect - culoarea fundalului ar trebui să provină din selectorul de fundal de mai jos.</string>
+    <string name="adaptive_icon_guide_png_body">Un logo pe fundal transparent funcționează cel mai bine, cu culoarea de fundal selectată mai jos. O imagine fără transparență umple în schimb întreaga pictogramă, iar pictogramele tematice și cele de notificare păstrează atunci logo-ul Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Zone de siguranță</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Zona interioară (solidă): conținutul este întotdeauna complet vizibil pe toate formele lansatorului.
-Zona exterioară (întreruptă): poate fi decupată de masca lansatorului - păstrați detaliile importante în zona interioară."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Conturul arată forma pictogramei din lansatorul dvs., iar tot ce se află în afara conturului este tăiat. Alte lansatoare folosesc alte forme, așa că păstrați detaliile importante în interiorul cercului cu linii întrerupte, pe care fiecare formă îl afișează.</string>
     <string name="adaptive_icon_guide_notification_title">Notificări</string>
-    <string name="adaptive_icon_guide_notification_body">Generat automat din imaginea de prim-plan. Ajustați dimensiunea folosind glisorul de notificare. Tot conținutul vizibil apare alb în bara de stare.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Icoană monocromă</string>
-    <string name="adaptive_icon_guide_monochrome_body">Generat automat din imaginea de prim-plan folosind aceleași transformări pentru icoane adaptive. Apare nuanțat cu culoarea de accent a tapetului pe Android 13 și versiunile ulterioare.</string>
+    <string name="adaptive_icon_guide_notification_body">Decupată din partea vizibilă a imaginii și dimensionată ca celelalte pictograme din bara de stare, indiferent de marginile din fișier. Reglați-o cu glisorul de sub previzualizare. Android o afișează într-o singură culoare.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Pictogramă tematică</string>
+    <string name="adaptive_icon_guide_monochrome_body">Decupată din imagine, cu aceeași poziție și dimensiune ca pictograma lansatorului. Pe Android 13 și versiunile ulterioare, lansatoarele cu pictograme tematice activate o colorează pe baza imaginii de fundal.</string>
     <string name="notification_icon_preview">Notificări</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Creează antet personalizat</string>
     <string name="header_creator_light_theme">Antet temă luminoasă</string>
     <string name="header_creator_dark_theme">Antet temă întunecată</string>
-    <string name="header_creator_no_image">Nicio imagine selectată</string>
     <string name="header_creator_success">Antet creat cu succes</string>
     <string name="header_creator_failed">Eroare la crearea antetului</string>
     <string name="header_creator_guide">Ghid de creare antet</string>
     <string name="header_creator_guide_image_title">Cerințe privind imaginile</string>
-    <string name="header_creator_guide_image_body">Utilizați orice fișier imagine (PNG sau JPEG). Pentru cele mai bune rezultate, utilizați o imagine de format larg cu un raport de aspect de aproximativ 2,7:1. Fișierele PNG cu fundaluri transparente se vor integra natural cu tema aplicației.</string>
+    <string name="header_creator_guide_image_body">Un PNG cu fundal transparent se îmbină cu bara aplicației. Marginile din jurul logo-ului din fișier sunt ignorate, astfel încât logo-ul pornește de la dimensiunea și poziția logo-ului standard.</string>
     <string name="header_creator_guide_themes_title">Teme deschise și întunecate</string>
     <string name="header_creator_guide_themes_body">Majoritatea aplicațiilor necesită imagini separate pentru temele deschise și întunecate. Unele aplicații (cum ar fi YouTube Music) utilizează doar tema întunecată, astfel încât doar acea secțiune este afișată.</string>
     <string name="header_creator_guide_positioning_title">Poziționare și scalare</string>
-    <string name="header_creator_guide_positioning_body">Utilizați gesturile pinch-to-zoom și glisare direct în previzualizare pentru a poziționa și scala imaginea. Ghiduri de ajustare apar când imaginea este aproape de centru. De asemenea, puteți utiliza glisorul de sub previzualizare.</string>
+    <string name="header_creator_guide_positioning_body">Trageți și ciupiți imaginea în editor, sau reglați-i dimensiunea cu glisorul. Caseta cu linii întrerupte marchează locul unde se află logo-ul standard, iar ghidajele apar când imaginea se aliniază cu poziția logo-ului standard.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Patch-uri selectate</string>
     <string name="batch_patch_title">Patch-uri în lot</string>
@@ -868,6 +867,9 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="notification_channel_patch_updates_description">Notificări despre noile lansări de patch</string>
     <string name="notification_channel_patcher_description">Afișate în timp ce Morphe aplică un patch unei aplicații în fundal</string>
     <string name="notification_channel_mounted_apps">Aplicații montate</string>
+    <string name="notification_channel_mounted_apps_description">Când o altă versiune a înlocuit o aplicație montată și patch-ul acesteia nu se mai aplică</string>
+    <string name="notification_mount_replaced_title">%1$s nu mai este patchuit</string>
+    <string name="notification_mount_replaced_text">v%1$s a înlocuit versiunea patchuită v%2$s. Deschide Morphe pentru a o restaura</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Setări expert</string>
     <string name="settings_advanced_expert_mode">Mod expert</string>
@@ -1320,6 +1322,7 @@ Detalii: %2$s"</string>
     <string name="unmount">De-montare</string>
     <string name="unmounted">Demontat</string>
     <string name="remount">Remontează</string>
+    <string name="restore">Restaurează</string>
     <string name="share">Distribuie</string>
     <string name="install">Instalează</string>
     <string name="installed">Instalat</string>
@@ -1340,6 +1343,8 @@ Detalii: %2$s"</string>
     <string name="sources">Surse</string>
     <string name="installing_ellipsis">Se instalează…</string>
     <string name="mounting_ellipsis">Se montează…</string>
+    <string name="mount_stage_restoring_stock">Se restaurează originalul…</string>
+    <string name="mount_stage_copying">Se copiază…</string>
     <string name="unmounting_ellipsis">Descarcare în curs…</string>
     <string name="importing_ellipsis">Importare în curs…</string>
     <string name="imported_successfully">Importate cu succes</string>

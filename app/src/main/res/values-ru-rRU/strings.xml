@@ -390,44 +390,43 @@
     <string name="adaptive_icon_select_image">Выбрать изображение</string>
     <string name="adaptive_icon_change_image">Изменить изображение</string>
     <string name="image_load_failed">Не удалось загрузить это изображение</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Изображение переднего плана</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Значок приложения</string>
+    <string name="adaptive_icon_gesture_hint">Перетащите, чтобы переместить, ущипните, чтобы изменить размер</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Предпросмотр</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Стандартный</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Тематический</string>
     <string name="adaptive_icon_background_color">Цвет фона</string>
     <string name="adaptive_icon_reset_transform">Сбросить положение и масштаб</string>
-    <string name="adaptive_icon_safe_zone_inner">Безопасная зона (всегда видна)</string>
-    <string name="adaptive_icon_safe_zone_outer">Зона маски (может быть обрезано)</string>
-    <string name="adaptive_icon_no_transparency_warning">В изображении нет прозрачных пикселей. Результат может выглядеть некорректно</string>
+    <string name="adaptive_icon_no_transparency_warning">В этом изображении нет прозрачных пикселей, поэтому тематический значок и значок уведомления сохраняют логотип Morphe</string>
     <string name="adaptive_icon_created_success">Адаптивный значок создан успешно</string>
     <string name="adaptive_icon_creation_failed">Не удалось создать адаптивный значок</string>
-    <string name="adaptive_icon_label">Адаптивный</string>
-    <string name="adaptive_icon_monochrome_label">Монохромный</string>
     <string name="adaptive_icon_guide">Руководство по созданию значка</string>
     <string name="adaptive_icon_guide_png_title">Используйте PNG с прозрачным фоном</string>
-    <string name="adaptive_icon_guide_png_body">Передний план должен быть PNG-файлом с прозрачным фоном. Сплошной цвет фона будет выглядеть некорректно — цвет фона должен быть выбран из палитры ниже.</string>
+    <string name="adaptive_icon_guide_png_body">Логотип на прозрачном фоне подходит лучше всего, а цвет фона выбирается ниже. Изображение без прозрачности заполняет весь значок, и тогда тематический значок и значок уведомления сохраняют логотип Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Безопасные зоны</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Внутренняя зона (сплошная): контент всегда полностью виден на всех формах лаунчера.
-Внешняя зона (пунктирная): может быть обрезана маской лаунчера — держите важные детали внутри внутренней зоны."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Контур показывает форму значка вашего лаунчера, а всё, что за его пределами, обрезается. В других лаунчерах используются другие формы, поэтому сохраняйте важные детали внутри пунктирного круга, который виден при любой форме.</string>
     <string name="adaptive_icon_guide_notification_title">Значок уведомления</string>
-    <string name="adaptive_icon_guide_notification_body">Генерируется автоматически из изображения переднего плана. Отрегулируйте его размер, используя ползунок «Уведомления». Весь видимый контент отображается белым цветом в строке состояния.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Монохромный значок</string>
-    <string name="adaptive_icon_guide_monochrome_body">Генерируется автоматически из изображения переднего плана с использованием тех же преобразований адаптивного значка. Он отображается с оттенком цвета акцента обоев на Android 13 и более поздних версиях.</string>
+    <string name="adaptive_icon_guide_notification_body">Вырезается из видимой части изображения и имеет такой же размер, как другие значки строки состояния, независимо от полей в файле. Настройте его с помощью ползунка под предпросмотром. Android отображает его в одном цвете.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Тематический значок</string>
+    <string name="adaptive_icon_guide_monochrome_body">Вырезается из изображения с тем же положением и размером, что и значок лаунчера. На Android 13 и новее лаунчеры с включёнными тематическими значками окрашивают его цветами обоев.</string>
     <string name="notification_icon_preview">Уведомление</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Создать собственный заголовок</string>
     <string name="header_creator_light_theme">Заголовок светлой темы</string>
     <string name="header_creator_dark_theme">Заголовок темной темы</string>
-    <string name="header_creator_no_image">Изображение не выбрано</string>
     <string name="header_creator_success">Заголовок успешно создан</string>
     <string name="header_creator_failed">Не удалось создать заголовок</string>
     <string name="header_creator_guide">Руководство по созданию заголовка</string>
     <string name="header_creator_guide_image_title">Требования к изображению</string>
-    <string name="header_creator_guide_image_body">Используйте любой файл изображения (PNG или JPEG). Для достижения наилучших результатов используйте широкоформатное изображение с соотношением сторон примерно 2,7:1. PNG-файлы с прозрачным фоном будут естественным образом сочетаться с темой приложения.</string>
+    <string name="header_creator_guide_image_body">PNG с прозрачным фоном сливается с панелью приложения. Поля вокруг логотипа в файле игнорируются, поэтому он занимает размер и место стандартного логотипа.</string>
     <string name="header_creator_guide_themes_title">Светлые и темные темы</string>
     <string name="header_creator_guide_themes_body">Большинству приложений требуются отдельные изображения для светлой и темной тем. Некоторые приложения (такие как YouTube Music) используют только темную тему, поэтому отображается только этот раздел.</string>
     <string name="header_creator_guide_positioning_title">Позиционирование и масштабирование</string>
-    <string name="header_creator_guide_positioning_body">Используйте жесты масштабирования и перетаскивания непосредственно в предварительном просмотре, чтобы позиционировать и масштабировать изображение. Направляющие появляются, когда изображение находится рядом с центром. Вы также можете использовать ползунок ниже предварительного просмотра.</string>
+    <string name="header_creator_guide_positioning_body">Перетаскивайте и масштабируйте изображение в редакторе или изменяйте его размер с помощью ползунка. Пунктирная рамка показывает, где находится стандартный логотип, и появляются направляющие, когда изображение выравнивается по ней.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Патч выбран</string>
     <string name="batch_patch_title">Пакетное применение патчей</string>
@@ -868,6 +867,9 @@
     <string name="notification_channel_patch_updates_description">Уведомления о новых релизах патчей</string>
     <string name="notification_channel_patcher_description">Отображается во время установки Morphe патча для приложения в фоновом режиме</string>
     <string name="notification_channel_mounted_apps">Смонтированные приложения</string>
+    <string name="notification_channel_mounted_apps_description">Когда другая версия заменила смонтированное приложение и его патч больше не применяется</string>
+    <string name="notification_mount_replaced_title">%1$s больше не пропатчено</string>
+    <string name="notification_mount_replaced_text">v%1$s заменила пропатченную v%2$s. Откройте Morphe, чтобы восстановить его</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Экспертные настройки</string>
     <string name="settings_advanced_expert_mode">Режим эксперта</string>
@@ -1320,6 +1322,7 @@ morphe_header_custom_dark.png
     <string name="unmount">Демонтировать</string>
     <string name="unmounted">Размонтировано</string>
     <string name="remount">Перемонтировать</string>
+    <string name="restore">Восстановить</string>
     <string name="share">Поделиться</string>
     <string name="install">Установить</string>
     <string name="installed">Установлено</string>
@@ -1340,6 +1343,8 @@ morphe_header_custom_dark.png
     <string name="sources">Источники</string>
     <string name="installing_ellipsis">Установка…</string>
     <string name="mounting_ellipsis">Монтаж…</string>
+    <string name="mount_stage_restoring_stock">Восстановление оригинала…</string>
+    <string name="mount_stage_copying">Копирование…</string>
     <string name="unmounting_ellipsis">Размонтирование…</string>
     <string name="importing_ellipsis">Импортирование…</string>
     <string name="imported_successfully">Импортировано успешно</string>

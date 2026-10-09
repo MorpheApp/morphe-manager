@@ -390,44 +390,43 @@ Pre najlepšie výsledky sa odporúča záplatovať &lt;b&gt;úplný APK&lt;/b&g
     <string name="adaptive_icon_select_image">Vybrať obrázok</string>
     <string name="adaptive_icon_change_image">Zmeniť obrázok</string>
     <string name="image_load_failed">Nepodarilo sa načítať tento obrázok</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Obrázok v popredí</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Ikona spúšťača</string>
+    <string name="adaptive_icon_gesture_hint">Potiahnutím presuniete, štipnutím zmeníte veľkosť</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Náhľad</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Štandardná</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Tematická</string>
     <string name="adaptive_icon_background_color">Farba pozadia</string>
     <string name="adaptive_icon_reset_transform">Obnovenie pozície a mierky</string>
-    <string name="adaptive_icon_safe_zone_inner">Bezpečná zóna (vždy viditeľná)</string>
-    <string name="adaptive_icon_safe_zone_outer">Zóna masky (môže byť orezaná)</string>
-    <string name="adaptive_icon_no_transparency_warning">Obrázok nemá žiadne priehľadné pixely. Výsledok sa môže zdať nesprávny</string>
+    <string name="adaptive_icon_no_transparency_warning">Tento obrázok nemá žiadne priehľadné pixely, takže tematické ikony a ikony upozornení si ponechajú logo Morphe</string>
     <string name="adaptive_icon_created_success">Adaptívna ikona bola úspešne vytvorená</string>
     <string name="adaptive_icon_creation_failed">Nepodarilo sa vytvoriť adaptívnu ikonu</string>
-    <string name="adaptive_icon_label">Adaptívny</string>
-    <string name="adaptive_icon_monochrome_label">Monochromatický</string>
     <string name="adaptive_icon_guide">Sprievodca vytváraním ikon</string>
     <string name="adaptive_icon_guide_png_title">Použite PNG so transparentným pozadím</string>
-    <string name="adaptive_icon_guide_png_body">Popredie musí byť PNG súbor s transparentným pozadím. Jednofarebné pozadie bude vyzerať nesprávne – farba pozadia by mala pochádzať z výberu pozadia nižšie.</string>
+    <string name="adaptive_icon_guide_png_body">Najlepšie funguje logo na priehľadnom pozadí, s farbou pozadia vybranou nižšie. Obrázok bez priehľadnosti namiesto toho vyplní celú ikonu a tematické ikony a ikony upozornení potom ponechajú logo Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Bezpečné zóny</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Vnútorná zóna (plná): obsah je vždy plne viditeľný vo všetkých tvaroch spúšťačov.
-Vnútorná zóna (čiarkovaná): môže byť orezaná maskou spúšťača – uchovávajte dôležité detaily vo vnútornej zóne."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Obrys zobrazuje tvar ikony vášho spúšťača a všetko mimo neho sa odreže. Iné spúšťače používajú iné tvary, preto dôležité detaily ponechajte vo vnútri prerušovaného kruhu, ktorý je súčasťou každého tvaru.</string>
     <string name="adaptive_icon_guide_notification_title">Ikona upozornenia</string>
-    <string name="adaptive_icon_guide_notification_body">Generované automaticky z popredného obrazu. Upravte jeho veľkosť pomocou posúvača upozornení. Všetok viditeľný obsah sa v stavovom riadku zobrazí ako biely.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Monochromatická ikona</string>
-    <string name="adaptive_icon_guide_monochrome_body">Generované automaticky z popredného obrazu pomocou rovnakých transformácií adaptívnej ikony. Na zariadeniach s Androidom 13 a novším sa zobrazí s odtieňom farby tapety.</string>
+    <string name="adaptive_icon_guide_notification_body">Vyrezáva sa z viditeľnej časti obrázka a má veľkosť ako ostatné ikony stavového riadku, nech už má súbor akékoľvek okraje. Upravte ho posuvníkom pod náhľadom. Android ho zobrazuje v jednej farbe.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Tematická ikona</string>
+    <string name="adaptive_icon_guide_monochrome_body">Vyrezaná z obrázka s rovnakou polohou a veľkosťou ako ikona spúšťača. V systéme Android 13 a novšom spúšťače so zapnutými tematickými ikonami ju vyfarbia podľa tapety.</string>
     <string name="notification_icon_preview">Upozornenia</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Vytvoriť vlastnú hlavičku</string>
     <string name="header_creator_light_theme">Hlavička svetlého motívu</string>
     <string name="header_creator_dark_theme">Hlavička tmavého motívu</string>
-    <string name="header_creator_no_image">Nie je vybraný žiadny obrázok</string>
     <string name="header_creator_success">Hlavička úspešne vytvorená</string>
     <string name="header_creator_failed">Hlavičku sa nepodarilo vytvoriť</string>
     <string name="header_creator_guide">Sprievodca vytváraním záhlavia</string>
     <string name="header_creator_guide_image_title">Požiadavky na obrázok</string>
-    <string name="header_creator_guide_image_body">Použite akýkoľvek obrázový súbor (PNG alebo JPEG). Na dosiahnutie najlepších výsledkov použite obrázok v širokom formáte s pomerom strán približne 2,7:1. PNG súbory s transparentným pozadím sa prirodzene zmiešajú s témou aplikácie.</string>
+    <string name="header_creator_guide_image_body">PNG s priehľadným pozadím splynie s panelom aplikácie. Okraje okolo loga v súbore sa ignorujú, takže má veľkosť a umiestnenie predvoleného loga.</string>
     <string name="header_creator_guide_themes_title">Svetlé a tmavé témy</string>
     <string name="header_creator_guide_themes_body">Väčšina aplikácií vyžaduje samostatné obrázky pre svetlú a tmavú tému. Niektoré aplikácie (napríklad YouTube Music) používajú iba tmavú tému, takže sa zobrazí iba táto časť.</string>
     <string name="header_creator_guide_positioning_title">Polohovanie a škálovanie</string>
-    <string name="header_creator_guide_positioning_body">Na polohovanie a škálovanie obrázka použite gestá štipnutia a ťahania priamo v náhľade. Ak sa obrázok priblíži k stredu, zobrazia sa snapy. Môžete tiež použiť posúvač pod náhľadom.</string>
+    <string name="header_creator_guide_positioning_body">Potiahnite a štipnite obrázok v editore alebo zmeňte jeho veľkosť posuvníkom. Prerušovaný rámček označuje miesto, kde sa nachádza predvolené logo, a vodidlá sa zobrazia, keď sa obrázok s ním zarovná.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Zvolená záplata</string>
     <string name="batch_patch_title">Hromadné záplatovanie</string>
@@ -869,6 +868,9 @@ Záplaty tým nie sú ovplyvnené: povoľte predbežné záplaty pre každý zdr
     <string name="notification_channel_patch_updates_description">Oznámenia o nových opravných verziách</string>
     <string name="notification_channel_patcher_description">Zobrazuje sa, keď Morphe pláta aplikácie na pozadí</string>
     <string name="notification_channel_mounted_apps">Pripojené aplikácie</string>
+    <string name="notification_channel_mounted_apps_description">Keď iná verzia nahradila pripojenú aplikáciu a jej záplata sa už neaplikuje</string>
+    <string name="notification_mount_replaced_title">Aplikácia %1$s už nie je záplatovaná</string>
+    <string name="notification_mount_replaced_text">v%1$s nahradila záplatovanú v%2$s. Otvorte Morphe a obnovte ju</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Nastavenia pre skúsených</string>
     <string name="settings_advanced_expert_mode">Režim pre skúsených</string>
@@ -1321,6 +1323,7 @@ Podrobnosti: %2$s"</string>
     <string name="unmount">Odpojiť</string>
     <string name="unmounted">Odpojené</string>
     <string name="remount">Znovu pripojiť</string>
+    <string name="restore">Obnoviť</string>
     <string name="share">Zdieľaž</string>
     <string name="install">Inštalovať</string>
     <string name="installed">Nainštalované</string>
@@ -1341,6 +1344,8 @@ Podrobnosti: %2$s"</string>
     <string name="sources">Zdroje</string>
     <string name="installing_ellipsis">Inštaluje sa…</string>
     <string name="mounting_ellipsis">Pripájanie...</string>
+    <string name="mount_stage_restoring_stock">Obnovovanie originálu…</string>
+    <string name="mount_stage_copying">Kopírovanie…</string>
     <string name="unmounting_ellipsis">Odpájanie...</string>
     <string name="importing_ellipsis">Importovanie…</string>
     <string name="imported_successfully">Úspešne importované</string>

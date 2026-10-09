@@ -390,44 +390,43 @@
     <string name="adaptive_icon_select_image">이미지 선택</string>
     <string name="adaptive_icon_change_image">이미지 변경</string>
     <string name="image_load_failed">이 이미지를 불러올 수 없습니다</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">전경 이미지</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">런처 아이콘</string>
+    <string name="adaptive_icon_gesture_hint">드래그하여 이동하고, 핀치하여 크기를 조정하세요</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">미리보기</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">표준</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">테마</string>
     <string name="adaptive_icon_background_color">배경 색상</string>
     <string name="adaptive_icon_reset_transform">위치 및 크기 초기화</string>
-    <string name="adaptive_icon_safe_zone_inner">안전한 영역 (항상 표시됨)</string>
-    <string name="adaptive_icon_safe_zone_outer">마스크 영역 (잘릴 수 있음)</string>
-    <string name="adaptive_icon_no_transparency_warning">이미지에 투명한 픽셀이 없습니다. 결과가 올바르지 않게 보일 수 있습니다</string>
+    <string name="adaptive_icon_no_transparency_warning">이 이미지에는 투명한 픽셀이 없기 때문에 테마 아이콘과 알림 아이콘에 Morphe 로고가 그대로 표시됩니다</string>
     <string name="adaptive_icon_created_success">적응형 아이콘을 성공적으로 만들었습니다</string>
     <string name="adaptive_icon_creation_failed">적응형 아이콘을 만들 수 없습니다</string>
-    <string name="adaptive_icon_label">적응형</string>
-    <string name="adaptive_icon_monochrome_label">흑백</string>
     <string name="adaptive_icon_guide">아이콘 생성 가이드</string>
     <string name="adaptive_icon_guide_png_title">투명한 배경의 PNG를 사용하세요</string>
-    <string name="adaptive_icon_guide_png_body">전경 이미지는 투명한 배경이 있는 PNG 파일이어야 합니다. 단색 배경을 사용하면 올바르게 표시되지 않을 수 있습니다. 배경 색상은 아래의 배경 색상 선택기에서 설정해야 합니다</string>
+    <string name="adaptive_icon_guide_png_body">투명한 배경의 로고를 사용하는 것이 가장 좋으며, 아래에서 배경 색상을 선택할 수 있습니다. 투명도가 없는 이미지는 아이콘 전체를 채우게 되며, 이 경우 테마 아이콘과 알림 아이콘에도 Morphe 로고가 그대로 표시됩니다</string>
     <string name="adaptive_icon_guide_safe_zones_title">안전한 영역</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"내부 영역 (실선): 모든 런처 모양에서 콘텐츠가 항상 완전히 표시됩니다.
-외부 영역 (점선): 런처 마스크에 의해 잘릴 수 있으므로 중요한 요소는 내부 영역 안에 배치하세요."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">윤곽선은 런처 아이콘 모양을 보여주고, 윤곽선 바깥쪽은 모두 잘려 나갑니다. 다른 런처는 다른 모양을 사용하므로 모든 모양에 표시되는 점선 원 안에 중요한 세부 정보를 유지하세요</string>
     <string name="adaptive_icon_guide_notification_title">알림 아이콘</string>
-    <string name="adaptive_icon_guide_notification_body">전경 이미지로부터 자동 생성됩니다. 알림 슬라이더를 사용하여 크기를 조정할 수 있습니다. 표시되는 모든 콘텐츠는 상태바에서 흰색으로 표시됩니다.</string>
-    <string name="adaptive_icon_guide_monochrome_title">흑백 아이콘</string>
-    <string name="adaptive_icon_guide_monochrome_body">동일한 적응형 아이콘 변형을 사용하여 전경 이미지로부터 자동 생성됩니다. Android 13 이상에서는 배경화면의 강조 색상으로 색이 표시됩니다.</string>
+    <string name="adaptive_icon_guide_notification_body">아이콘은 이미지에서 실제로 보이는 부분을 기준으로 잘라내고, 파일에 포함된 여백을 유지한 상태에서 상태 표시줄 아이콘과 비슷한 크기로 조정됩니다. 미리보기 아래의 슬라이더를 이용해 크기와 여백을 조절할 수 있습니다. Android에서는 이 아이콘이 단색으로 표시됩니다</string>
+    <string name="adaptive_icon_guide_monochrome_title">테마 아이콘</string>
+    <string name="adaptive_icon_guide_monochrome_body">런처 아이콘과 동일한 위치와 크기를 기준으로 이미지에서 잘라냅니다. Android 13 이상에서는 테마 아이콘이 활성화된 런처의 경우 배경화면 색상을 기반으로 아이콘 색상이 적용됩니다</string>
     <string name="notification_icon_preview">알림</string>
     <!-- Header Creator -->
     <string name="header_creator_create">커스텀 헤더 만들기</string>
     <string name="header_creator_light_theme">밝은 테마 헤더</string>
     <string name="header_creator_dark_theme">어두운 테마 헤더</string>
-    <string name="header_creator_no_image">선택된 이미지가 없습니다</string>
     <string name="header_creator_success">헤더를 성공적으로 만들었습니다</string>
     <string name="header_creator_failed">헤더를 만들 수 없습니다</string>
     <string name="header_creator_guide">헤더 생성 가이드</string>
     <string name="header_creator_guide_image_title">이미지 요구 사항</string>
-    <string name="header_creator_guide_image_body">PNG 또는 JPEG 이미지 파일을 사용할 수 있습니다. 최상의 결과를 얻으려면 약 2.7:1 비율의 와이드 형식 이미지를 사용하는 것이 좋습니다. 투명한 배경이 있는 PNG 파일은 앱 테마와 자연스럽게 어우러집니다.</string>
+    <string name="header_creator_guide_image_body">투명한 배경의 PNG를 사용하면 앱 바의 배경과 자연스럽게 어우러집니다. 파일에 로고 주변의 여백이 있더라도 무시되며, 기본 로고가 있는 위치와 크기를 기준으로 배치됩니다</string>
     <string name="header_creator_guide_themes_title">밝은 테마 및 어두운 테마</string>
     <string name="header_creator_guide_themes_body">대부분의 앱은 밝은 테마와 어두운 테마용 이미지를 각각 필요로 합니다. 일부 앱(예: YouTube Music)은 어두운 테마만 사용하므로 해당 섹션만 표시됩니다.</string>
     <string name="header_creator_guide_positioning_title">위치 및 크기 조정</string>
-    <string name="header_creator_guide_positioning_body">미리보기에서 핀치 확대/축소 및 드래그 제스처를 사용하여 이미지 위치와 크기를 조정할 수 있습니다. 이미지가 중앙에 가까워지면 스냅 가이드가 표시됩니다. 미리보기 아래의 슬라이더로도 조정할 수 있습니다.</string>
+    <string name="header_creator_guide_positioning_body">편집기에서 이미지를 드래그하거나 핀치하여 조정할 수 있으며, 슬라이더를 사용해 크기를 조절할 수도 있습니다. 점선으로 표시된 상자는 기본 로고가 위치하는 영역을 나타내며, 이미지가 기본 로고와 정확히 맞춰지면 안내선이 표시됩니다.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">패치 선택</string>
     <string name="batch_patch_title">일괄 패치</string>
@@ -497,7 +496,7 @@
     <string name="home_app_info_app_deleted_warning">앱이 제거되었습니다</string>
     <string name="home_app_info_app_deleted_description">이 앱은 Morphe 외부에서 제거되었습니다. 기능을 복원하려면 다시 패치하세요</string>
     <string name="home_app_info_not_patched_description">이 앱의 패치되지 않은 버전이 설치되어 있습니다. Morphe는 여전히 이전 패치 기록을 보유하고 있습니다</string>
-    <string name="home_app_info_mount_replaced_description">다른 버전이 마운트된 앱을 교체하여 패치가 더 이상 적용되지 않습니다. 복원을 누르면 패치된 버전을 다시 적용할 수 있습니다</string>
+    <string name="home_app_info_mount_replaced_description">다른 버전이 마운트된 앱을 교체하여 패치가 더 이상 적용되지 않습니다. 복원하면 패치된 버전을 다시 적용할 수 있습니다</string>
     <string name="home_app_info_mount_replaced_by_play_store_description">Google Play에서 마운트된 앱을 업데이트하여 패치가 더 이상 적용되지 않습니다. 복원을 누르면 패치된 버전을 다시 적용할 수 있습니다. 패치 상태를 유지하려면 Google Play에서 해당 앱의 자동 업데이트를 비활성화하세요</string>
     <string name="app_links_title">지원되는 웹 링크</string>
     <string name="app_links_description">Android 12 이상에서는 승인된 경우를 제외하고 지원되는 도메인 링크가 기본적으로 브라우저에서 열립니다</string>

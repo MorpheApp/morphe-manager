@@ -390,44 +390,43 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="adaptive_icon_select_image">Roghnaigh íomhá</string>
     <string name="adaptive_icon_change_image">Athraigh íomhá</string>
     <string name="image_load_failed">Níorbh fhéidir an íomhá seo a lódáil</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Íomhá sa tulra</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Deilbhín lainseálaí</string>
+    <string name="adaptive_icon_gesture_hint">Tarraing le bogadh, pinseáil le hathrú méide</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Réamhamharc</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Caighdeánach</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Téamaithe</string>
     <string name="adaptive_icon_background_color">Dath an chúlra</string>
     <string name="adaptive_icon_reset_transform">Athshocraigh suíomh agus scála</string>
-    <string name="adaptive_icon_safe_zone_inner">Crios sábháilte (le feiceáil i gcónaí)</string>
-    <string name="adaptive_icon_safe_zone_outer">Crios maisc (féadfar é a bhearradh)</string>
-    <string name="adaptive_icon_no_transparency_warning">Níl aon picteilíní trédhearcacha san íomhá. D’fhéadfadh cuma mhícheart a bheith ar an toradh.</string>
+    <string name="adaptive_icon_no_transparency_warning">Níl picteilíní trédhearcacha ar bith san íomhá seo, mar sin coinníonn na deilbhíní téamaithe agus na deilbhíní fógraí lógó Morphe</string>
     <string name="adaptive_icon_created_success">Cruthaíodh deilbhín oiriúnaitheach go rathúil</string>
     <string name="adaptive_icon_creation_failed">Theip ar dheilbhín oiriúnaitheach a chruthú</string>
-    <string name="adaptive_icon_label">Oiriúnaitheach</string>
-    <string name="adaptive_icon_monochrome_label">Monacrómach</string>
     <string name="adaptive_icon_guide">Treoir um chruthú deilbhíní</string>
     <string name="adaptive_icon_guide_png_title">Úsáid PNG le cúlra trédhearcach</string>
-    <string name="adaptive_icon_guide_png_body">Ní mór don tulra a bheith ina chomhad PNG le cúlra trédhearcach. Beidh cuma mhícheart ar chúlra daite soladach - ba chóir go dtiocfadh dath an chúlra ón roghnóir cúlra thíos.</string>
+    <string name="adaptive_icon_guide_png_body">Is fearr a oibríonn lógó ar chúlra trédhearcach, leis an dath cúlra roghnaithe thíos. Líonann íomhá gan trédhearcacht an deilbhín iomlán ina ionad sin, agus coinníonn na deilbhíní téamaithe agus na deilbhíní fógraí lógó Morphe ansin.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Criosanna sábháilte</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Crios istigh (soladach): bíonn an t-ábhar le feiceáil go hiomlán i gcónaí ar gach cruth lainseálaí.
-Crios seachtrach (daite): féadfaidh masc an lainseálaí é a bhearradh - coinnigh sonraí tábhachtacha taobh istigh den chrios istigh."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Taispeánann an imlíne cruth deilbhín do lainseálaí, agus gearrtar ar shiúl gach rud atá lasmuigh de. Úsáideann lainseálaithe eile cruthanna eile, mar sin coinnigh sonraí tábhachtacha laistigh den chiorcal bristeach, a thaispeánann gach cruth.</string>
     <string name="adaptive_icon_guide_notification_title">Deilbhín fógra</string>
-    <string name="adaptive_icon_guide_notification_body">Gineadh go huathoibríoch ón íomhá sa tulra. Coigeartaigh a mhéid ag baint úsáide as an sleamhnán Fógra. Feictear gach ábhar infheicthe bán sa bharra stádais.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Deilbhín monacrómach</string>
-    <string name="adaptive_icon_guide_monochrome_body">Ginte go huathoibríoch ón íomhá tulra ag baint úsáide as an deilbhín oiriúnaitheach céanna transforms. Dealraíonn sé go bhfuil dath blas an pháipéir balla air ar Android 13 agus níos déanaí.</string>
+    <string name="adaptive_icon_guide_notification_body">Gearrtar é ón gcuid infheicthe den íomhá agus é ar mhéid cosúil le deilbhíní eile an bharra stádais, is cuma cén t-imeall atá sa chomhad. Coigeartaigh é leis an sleamhnán faoin réamhamharc. Taispeánann Android é in aon dath amháin.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Deilbhín téamaithe</string>
+    <string name="adaptive_icon_guide_monochrome_body">Gearrtar é ón íomhá ag an suíomh céanna agus ar an méid céanna le deilbhín an lainseálaí. Ar Android 13 agus níos déanaí, dathaíonn lainseálaithe a bhfuil deilbhíní téamaithe curtha ar siúl acu an deilbhín le dathanna ón bpáipéar balla.</string>
     <string name="notification_icon_preview">Fógra</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Cruthaigh ceanntásc saincheaptha</string>
     <string name="header_creator_light_theme">Ceanntásc téama éadrom</string>
     <string name="header_creator_dark_theme">Ceanntásc téama dorcha</string>
-    <string name="header_creator_no_image">Níl aon íomhá roghnaithe</string>
     <string name="header_creator_success">Cruthaíodh ceanntásc go rathúil</string>
     <string name="header_creator_failed">Theip ar cheanntásc a chruthú</string>
     <string name="header_creator_guide">Treoir chruthaithe ceanntásca</string>
     <string name="header_creator_guide_image_title">Riachtanais íomhá</string>
-    <string name="header_creator_guide_image_body">Bain úsáid as aon chomhad íomhá (PNG nó JPEG). Chun na torthaí is fearr a fháil, bain úsáid as íomhá fhormáid leathan le cóimheas gné de thart ar 2.7:1. Cumaiscfidh comhaid PNG le cúlraí trédhearcacha go nádúrtha le téama an aip.</string>
+    <string name="header_creator_guide_image_body">Comhleánn PNG le cúlra trédhearcach isteach i mbarra na haipe. Déantar neamhaird de na himill atá timpeall an lógó sa chomhad, mar sin tosaíonn sé ar an méid céanna agus san áit chéanna leis an lógó réamhshocraithe.</string>
     <string name="header_creator_guide_themes_title">Téamaí geala agus dorcha</string>
     <string name="header_creator_guide_themes_body">Éilíonn formhór na n-aipeanna íomhánna ar leithligh don téama geal agus dorcha. Ní úsáideann roinnt aipeanna (amhail YouTube Music) ach an téama dorcha, mar sin ní thaispeántar ach an chuid sin.</string>
     <string name="header_creator_guide_positioning_title">Suíomh agus scálú</string>
-    <string name="header_creator_guide_positioning_body">Bain úsáid as gothaí pinch-to-zúmáil agus tarraing go díreach sa réamhamharc chun d’íomhá a shuíomh agus a scála. Feictear treoracha snap nuair a bhíonn an íomhá gar don lár. Is féidir leat an sleamhnán faoin réamhamharc a úsáid freisin.</string>
+    <string name="header_creator_guide_positioning_body">Tarraing agus pinseáil an íomhá san eagarthóir, nó coigeartaigh a méid leis an sleamhnán. Marcálann an bosca bristeach an áit a bhfuil an lógó réamhshocraithe, agus feictear treoracha nuair a ailíníonn an íomhá leis.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Paiste roghnaithe</string>
     <string name="batch_patch_title">Paisteáil bhaisc</string>
@@ -493,11 +492,11 @@ Crios seachtrach (daite): féadfaidh masc an lainseálaí é a bhearradh - coinn
     <string name="home_app_info_app_update_available_description">Tacaíonn foinsí an phaiste le leagan níos nuaí den aip seo. Cuir an paiste i bhfeidhm arís chun aistriú chuig an leagan sin.</string>
     <string name="home_app_info_newest_supported_version">An ceann is déanaí a dtacaítear leis</string>
     <string name="home_app_info_version_move">Suiteáilte: %1$s; an ceann is déanaí a dtacaítear leis: %2$s</string>
-    <string name="home_app_info_version_restore">Suiteáilte %1$s, paisteáilte %2$s</string>
+    <string name="home_app_info_version_restore">%1$s suiteáilte, %2$s paisteáilte</string>
     <string name="home_app_info_app_deleted_warning">Díshuiteáladh an aip</string>
     <string name="home_app_info_app_deleted_description">Díshuiteáladh an aip seo lasmuigh de Morphe. Athphaisteáil í chun feidhmiúlacht a athbhunú.</string>
     <string name="home_app_info_not_patched_description">Tá leagan neamhphaiste den aip seo suiteáilte. Tá taifead paiste roimhe seo Morphe fós.</string>
-    <string name="home_app_info_mount_replaced_description">Cuireadh leagan eile in ionad na haipe feistithe, mar sin níl an paiste infheidhme a thuilleadh. Cuireann an t-athchóiriú an leagan paisteáilte ar ais</string>
+    <string name="home_app_info_mount_replaced_description">Chuir leagan eile in áit an aip a bhí suiteáilte, mar sin níl feidhm a thuilleadh leis an paiste. Cuireann an fheidhm athchóirithe an leagan paistithe ar ais.</string>
     <string name="home_app_info_mount_replaced_by_play_store_description">Nuashonraigh Google Play an aip fheistithe, mar sin níl an paiste infheidhme a thuilleadh. Cuireann an t-athchóiriú an leagan paisteáilte ar ais. Múch an nuashonrú uathoibríoch di in Google Play chun í a choinneáil paisteáilte</string>
     <string name="app_links_title">Naisc ghréasáin thacaithe</string>
     <string name="app_links_description">Ar Android 12+, osclaítear naisc chuig fearainn thacaithe i do bhrabhsálaí go réamhshocraithe mura gceadaítear iad</string>
@@ -627,7 +626,7 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="patcher_memory_adjustment_title">Gan dóthain cuimhne</string>
     <string name="patcher_memory_adjustment_description">Stopadh an paisteálaí ag an gcóras agus é ag rith le teorainn chuimhne %1$d MB. Má íslítear an teorainn go %2$d MB, is sprioc níos lú é an paisteálaí agus féadann sé ligean don rith críochnú.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Stopadh an paisteálaí ag an gcóras agus é ag rith le teorainn chuimhne %1$d MB, arb í an teorainn is ísle atá ar fáil cheana féin. Bain triail as paisteáil le níos lú foinsí paiste, nó roghnaigh níos lú paistí.</string>
-    <string name="patcher_memory_adjustment_description_finished">Chuir an córas stop leis an bpaisteálaí ag teorainn chuimhne %1$d MB, agus níor chríochnaigh sé ach ag %2$d MB. Seachnaíonn tosú ag %2$d MB an iarracht chaillte sin an chéad uair eile</string>
+    <string name="patcher_memory_adjustment_description_finished">Chuir an córas stop leis an gclár paisteála ag teorainn cuimhne %1$d MB, agus níor chríochnaigh sé ach ag %2$d MB. Má thosaítear ag %2$d MB, seachnófar an iarracht sin a chuaigh amú an chéad uair eile.</string>
     <string name="patcher_memory_adjustment_apply">Ísligh go %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Paisteáil ar siúl…</string>
@@ -806,7 +805,7 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="settings_appearance_app_icon_light_5">Oighearshruth</string>
     <string name="settings_appearance_app_icon_light_6">Ceo</string>
     <string name="settings_appearance_app_icon_light_7">Gaineamh</string>
-    <string name="settings_appearance_app_icon_dark_1">Gormghlas</string>
+    <string name="settings_appearance_app_icon_dark_1">Téal</string>
     <string name="settings_appearance_app_icon_dark_2">Neamhní</string>
     <string name="settings_appearance_app_icon_dark_3">Pluma</string>
     <string name="settings_appearance_app_icon_dark_4">Meán oíche</string>

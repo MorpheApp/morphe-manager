@@ -391,44 +391,43 @@ Bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum teridentifi
     <string name="adaptive_icon_select_image">Pilih gambar</string>
     <string name="adaptive_icon_change_image">Ubah gambar</string>
     <string name="image_load_failed">Tidak dapat memuat gambar ini</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Gambar latar depan</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Ikon peluncur</string>
+    <string name="adaptive_icon_gesture_hint">Seret untuk memindahkan, cubit untuk mengubah ukuran</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Pratinjau</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Standar</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Bertema</string>
     <string name="adaptive_icon_background_color">Warna latar belakang</string>
     <string name="adaptive_icon_reset_transform">Atur ulang posisi dan skala</string>
-    <string name="adaptive_icon_safe_zone_inner">Zona aman (selalu terlihat)</string>
-    <string name="adaptive_icon_safe_zone_outer">Zona tertutup (mungkin dipotong)</string>
-    <string name="adaptive_icon_no_transparency_warning">Gambar tidak memiliki piksel transparan. Hasilnya mungkin terlihat tidak benar</string>
+    <string name="adaptive_icon_no_transparency_warning">Gambar ini tidak memiliki piksel transparan, sehingga ikon bertema dan notifikasi tetap menggunakan logo Morphe</string>
     <string name="adaptive_icon_created_success">Ikon adaptif berhasil dibuat</string>
     <string name="adaptive_icon_creation_failed">Gagal membuat ikon adaptif</string>
-    <string name="adaptive_icon_label">Adaptif</string>
-    <string name="adaptive_icon_monochrome_label">Monokrom</string>
     <string name="adaptive_icon_guide">Panduan pembuatan ikon</string>
     <string name="adaptive_icon_guide_png_title">Gunakan PNG dengan latar belakang transparan</string>
-    <string name="adaptive_icon_guide_png_body">Latar depan harus berupa berkas PNG dengan latar belakang transparan. Latar belakang berwarna solid akan terlihat tidak tepat - warna latar belakang harus dipilih dari alat pemilih warna di bawah ini.</string>
+    <string name="adaptive_icon_guide_png_body">Logo pada latar belakang transparan bekerja paling baik, dengan warna latar belakang yang dipilih di bawah. Gambar tanpa transparansi akan mengisi seluruh ikon, dan ikon bertema serta notifikasi kemudian tetap menggunakan logo Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Zona aman</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Zona dalam (solid): konten selalu terlihat sepenuhnya pada semua bentuk peluncur.
-Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail penting di dalam zona dalam."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Garis luar menunjukkan bentuk ikon peluncur Anda, dan semua yang berada di luarnya akan terpotong. Peluncur lain menggunakan bentuk lain, jadi pertahankan detail penting di dalam lingkaran putus-putus, yang ditampilkan oleh setiap bentuk.</string>
     <string name="adaptive_icon_guide_notification_title">Ikon notifikasi</string>
-    <string name="adaptive_icon_guide_notification_body">Dibuat secara otomatis dari gambar latar depan. Sesuaikan ukurannya menggunakan penggeser Notifikasi. Semua konten yang terlihat akan ditampilkan berwarna putih di bilah status.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Ikon monokrom</string>
-    <string name="adaptive_icon_guide_monochrome_body">Dibuat secara otomatis dari gambar latar depan menggunakan transformasi ikon adaptif yang sama. Ikon ini tampak diberi warna aksen sesuai dengan warna wallpaper pada Android 13 dan yang lebih baru.</string>
+    <string name="adaptive_icon_guide_notification_body">Dipotong dari bagian gambar yang terlihat dan berukuran seperti ikon bilah status lainnya, berapa pun margin pada file. Sesuaikan dengan penggeser di bawah pratinjau. Android menampilkannya dalam satu warna.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Ikon bertema</string>
+    <string name="adaptive_icon_guide_monochrome_body">Dipotong dari gambar dengan posisi dan ukuran yang sama dengan ikon peluncur. Pada Android 13 dan yang lebih baru, peluncur dengan ikon bertema yang diaktifkan akan mewarnainya dari wallpaper.</string>
     <string name="notification_icon_preview">Notifikasi</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Buat header kustom</string>
     <string name="header_creator_light_theme">Header tema terang</string>
     <string name="header_creator_dark_theme">Header tema gelap</string>
-    <string name="header_creator_no_image">Tidak ada gambar yang dipilih</string>
     <string name="header_creator_success">Header berhasil dibuat</string>
     <string name="header_creator_failed">Gagal membuat header</string>
     <string name="header_creator_guide">Panduan pembuatan header</string>
     <string name="header_creator_guide_image_title">Persyaratan gambar</string>
-    <string name="header_creator_guide_image_body">Gunakan berkas gambar apa pun (PNG atau JPEG). Untuk hasil terbaik, gunakan gambar berformat lebar dengan rasio aspek sekitar 2,7:1. Berkas PNG dengan latar belakang transparan akan menyatu secara alami dengan tema aplikasi.</string>
+    <string name="header_creator_guide_image_body">PNG dengan latar belakang transparan menyatu dengan bilah aplikasi. Margin di sekitar logo dalam file diabaikan, sehingga ukuran dan posisinya sama dengan logo bawaan.</string>
     <string name="header_creator_guide_themes_title">Tema terang dan gelap</string>
     <string name="header_creator_guide_themes_body">Sebagian besar aplikasi memerlukan gambar terpisah untuk tema terang dan gelap. Beberapa aplikasi (seperti YouTube Music) hanya menggunakan tema gelap, jadi hanya bagian itu yang ditampilkan.</string>
     <string name="header_creator_guide_positioning_title">Pemosisian dan penskalaan</string>
-    <string name="header_creator_guide_positioning_body">Gunakan gerakan mencubit dan menyeret langsung di jendela pratinjau untuk mengatur posisi dan memperbesar atau memperkecil gambar Anda. Garis panduan akan muncul saat gambar berada mendekati bagian tengah. Anda juga dapat menggunakan bilah geser di bawah jendela pratinjau.</string>
+    <string name="header_creator_guide_positioning_body">Seret dan cubit gambar di editor, atau atur ukurannya dengan penggeser. Kotak putus-putus menandai posisi logo bawaan, dan panduan muncul saat gambar sejajar dengannya.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Tambalan dipilih</string>
     <string name="batch_patch_title">Penambalan massal</string>

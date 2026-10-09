@@ -108,7 +108,7 @@
     <!-- Afternoon greetings (12:00–16:59) -->
     <string name="home_greeting_afternoon_1">Eftermiddagssvacka? Modifiera något</string>
     <string name="home_greeting_afternoon_2">Modifiering efter lunchen har en annan känsla</string>
-    <string name="home_greeting_afternoon_3">Eftermiddagsskiftet: tilläggsutgåvan</string>
+    <string name="home_greeting_afternoon_3">Eftermiddagsskiftet (tilläggsutgåva)</string>
     <!-- Evening greetings (17:00–21:59) -->
     <string name="home_greeting_evening_1">God kväll! Modifiering på kvällen har en annan känsla</string>
     <string name="home_greeting_evening_2">Varvar du ned? Modifiera en app först</string>
@@ -390,44 +390,43 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="adaptive_icon_select_image">Välj bild</string>
     <string name="adaptive_icon_change_image">Ändra bild</string>
     <string name="image_load_failed">Det gick inte att läsa in den här bilden</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Förgrundsbild</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Ikon i startprogrammet</string>
+    <string name="adaptive_icon_gesture_hint">Dra för att flytta, nyp för att ändra storlek</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Förhandsgranskning</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Standard</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Temaanpassad</string>
     <string name="adaptive_icon_background_color">Bakgrundsfärg</string>
     <string name="adaptive_icon_reset_transform">Återställ position och skala</string>
-    <string name="adaptive_icon_safe_zone_inner">Säker zon (alltid synlig)</string>
-    <string name="adaptive_icon_safe_zone_outer">Maskzon (kan beskäras)</string>
-    <string name="adaptive_icon_no_transparency_warning">Bilden har inga genomskinliga pixlar. Resultatet kan se felaktigt ut</string>
+    <string name="adaptive_icon_no_transparency_warning">Den här bilden har inga genomskinliga pixlar, så de temaanpassade ikonerna och aviseringsikonerna behåller Morphes logotyp</string>
     <string name="adaptive_icon_created_success">Adaptiv ikon har skapats</string>
     <string name="adaptive_icon_creation_failed">Det gick inte att skapa adaptiv ikon</string>
-    <string name="adaptive_icon_label">Adaptiv</string>
-    <string name="adaptive_icon_monochrome_label">Monokrom</string>
     <string name="adaptive_icon_guide">Guide för skapande av ikoner</string>
     <string name="adaptive_icon_guide_png_title">Använd en PNG-fil med genomskinlig bakgrund</string>
-    <string name="adaptive_icon_guide_png_body">Förgrunden måste vara en PNG-fil med en genomskinlig bakgrund. En bakgrund utan genomskinlighet ser felaktig ut – bakgrundsfärgen ska anges med bakgrundsväljaren nedan. </string>
+    <string name="adaptive_icon_guide_png_body">En logotyp på en genomskinlig bakgrund fungerar bäst, med bakgrundsfärgen som väljs nedan. En bild utan genomskinlighet fyller i stället hela ikonen, och då behåller de temaanpassade ikonerna och aviseringsikonerna Morphes logotyp.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Säkra zoner</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Inre zonen (heldragen): innehållet är alltid helt synligt på alla former i startprogrammet. 
-Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga detaljer inuti den inre zonen."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Konturen visar ikonformen för ditt startprogram, och allt utanför den beskärs. Andra startprogram använder andra former, så håll viktiga detaljer inuti den streckade cirkeln, som visas i alla former.</string>
     <string name="adaptive_icon_guide_notification_title">Aviseringsikon</string>
-    <string name="adaptive_icon_guide_notification_body">Genereras automatiskt utifrån förgrundsbilden. Justera storleken med skjutreglaget under Avisering. Allt synligt innehåll visas i vitt i statusfältet.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Monokrom ikon</string>
-    <string name="adaptive_icon_guide_monochrome_body">Genereras automatiskt utifrån förgrundsbilden med samma adaptiva ikonomvandlingar. Den visas i bakgrundsbildens accentfärg i Android 13 och senare.</string>
+    <string name="adaptive_icon_guide_notification_body">Klipps ut från den synliga delen av bilden och anpassas till samma storlek som andra ikoner i statusfältet, oavsett vilken marginal filen har. Justera den med reglaget under förhandsvisningen. Android visar den i en enda färg.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Temaanpassad ikon</string>
+    <string name="adaptive_icon_guide_monochrome_body">Klipps ut från bilden med samma position och storlek som ikonen i startprogrammet. På Android 13 och senare färgas den utifrån bakgrundsbilden i startprogram som har temaanpassade ikoner aktiverade.</string>
     <string name="notification_icon_preview">Avisering</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Skapa anpassat sidhuvud</string>
     <string name="header_creator_light_theme">Sidhuvud för ljust tema</string>
     <string name="header_creator_dark_theme">Sidhuvud för mörkt tema</string>
-    <string name="header_creator_no_image">Ingen bild har valts</string>
     <string name="header_creator_success">Sidhuvud har skapats</string>
     <string name="header_creator_failed">Det gick inte att skapa sidhuvud</string>
     <string name="header_creator_guide">Guide för skapande av sidhuvuden</string>
     <string name="header_creator_guide_image_title">Bildkrav</string>
-    <string name="header_creator_guide_image_body">Använd valfri bildfil (PNG eller JPEG). För att få bästa resultat bör du använda en bild i brett format med det ungefärliga bildformatet 2,7:1. PNG-filer med genomskinlig bakgrund smälter naturligt in i appens tema.</string>
+    <string name="header_creator_guide_image_body">En PNG-fil med genomskinlig bakgrund smälter in i appfältet. Marginaler runt logotypen i filen ignoreras, så den får samma storlek och placering som standardlogotypen.</string>
     <string name="header_creator_guide_themes_title">Ljusa och mörka teman</string>
     <string name="header_creator_guide_themes_body">De flesta appar kräver olika bilder för ljusa och mörka teman. Vissa appar (som YouTube Music) använder bara det mörka temat, så bara det avsnittet visas.</string>
     <string name="header_creator_guide_positioning_title">Position och skala</string>
-    <string name="header_creator_guide_positioning_body">Nyp och dra direkt i förhandsgranskningen för att flytta och skalförändra bilden. Hjälplinjer visas när bilden är nära mitten. Du kan även använda skjutreglaget under förhandsgranskningen.</string>
+    <string name="header_creator_guide_positioning_body">Dra och nyp bilden i redigeraren eller ändra storleken med reglaget. Den streckade rutan markerar var standardlogotypen ligger, och stödlinjer visas när bilden passar in i den.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Modifiera markerade</string>
     <string name="batch_patch_title">Gruppmodifiering</string>
@@ -493,12 +492,12 @@ Yttre zonen (streckad): kan beskäras av startprogrammets mask – håll viktiga
     <string name="home_app_info_app_update_available_description">Tilläggskällorna stöder en nyare version av den här appen. Modifiera den igen för att övergå till den versionen.</string>
     <string name="home_app_info_newest_supported_version">Senaste som stöds</string>
     <string name="home_app_info_version_move">Installerad %1$s, senaste som stöds %2$s</string>
-    <string name="home_app_info_version_restore">Installerad %1$s, patchad %2$s</string>
+    <string name="home_app_info_version_restore">Installerad %1$s, modifierad %2$s</string>
     <string name="home_app_info_app_deleted_warning">Appen har avinstallerats</string>
     <string name="home_app_info_app_deleted_description">Den här appen avinstallerades utanför Morphe. Modifiera den igen för att återställa funktionaliteten</string>
     <string name="home_app_info_not_patched_description">En omodifierad version av den här appen är installerad. Morphe har fortfarande sin tidigare modifieringspost.</string>
-    <string name="home_app_info_mount_replaced_description">En annan version ersatte den monterade appen, så gäller patchen inte längre. Återställning lägger tillbaka den patchade versionen</string>
-    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play uppdaterade den monterade appen, så gäller patchen inte längre. Återställning lägger tillbaka den patchade versionen. Stäng av automatiska uppdateringar för den i Google Play för att hålla den patchad</string>
+    <string name="home_app_info_mount_replaced_description">En annan version har ersatt den monterade appen, så modifieringen gäller inte längre. Knappen Återställ återställer den modifierade versionen</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play uppdaterade den monterade appen, så modifieringen gäller inte längre. Knappen Återställ återställer den modifierade versionen. Inaktivera automatiska uppdateringar för den i Google Play för att hålla den modifierad</string>
     <string name="app_links_title">Webblänkar som stöds</string>
     <string name="app_links_description">På Android 12 och senare öppnas länkar till stödda domäner i din webbläsare som standard om de inte har godkänts</string>
     <string name="app_links_unverified_banner_title">Webblänkar är inte verifierade</string>
@@ -625,9 +624,9 @@ Om du avinstallerar raderas alla appdata permanent"</string>
     <string name="battery_optimization_not_now">Inte nu</string>
     <!-- Memory limit dialog, shown after the patcher process was killed -->
     <string name="patcher_memory_adjustment_title">Inte tillräckligt med minne</string>
-    <string name="patcher_memory_adjustment_description">Modifieraren stoppades av systemet medan den kördes med en minnesgräns på %1$d MB. Att sänka gränsen till %2$d MB gör modifieraren till ett mindre mål och kan låta körningen slutföras.</string>
-    <string name="patcher_memory_adjustment_description_at_minimum">Modifieraren stoppades av systemet medan den kördes med en minnesgräns på %1$d MB, vilket redan är den lägsta tillgängliga. Försök att modifiera med färre tilläggskällor, eller välj färre tillägg.</string>
-    <string name="patcher_memory_adjustment_description_finished">Systemet stoppade patcharen vid en minnesgräns på %1$d MB, och den blev klar först vid %2$d MB. Att starta vid %2$d MB hoppar över det förlorade försöket nästa gång</string>
+    <string name="patcher_memory_adjustment_description">Modifieringsverktyget stoppades av systemet medan den kördes med en minnesgräns på %1$d MB. Om du sänker gränsen till %2$d MB blir modifieringsverktyget ett mindre mål, vilket kan låta körningen slutföras</string>
+    <string name="patcher_memory_adjustment_description_at_minimum">Modifieringsverktyget stoppades av systemet medan det kördes med en minnesgräns på %1$d MB, vilket redan är den lägsta tillgängliga. Försök att modifiera med färre tilläggskällor, eller välj färre tillägg</string>
+    <string name="patcher_memory_adjustment_description_finished">Systemet stoppade modifieringsverktyget vid en minnesgräns på %1$d MB, och det slutfördes först vid %2$d MB. Om du startar vid %2$d MB hoppar du över det misslyckade försöket nästa gång</string>
     <string name="patcher_memory_adjustment_apply">Sänk till %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Modifiering pågår …</string>
@@ -682,7 +681,7 @@ Om du avinstallerar raderas alla appdata permanent"</string>
     <string name="uninstall_app_unverified">Lämnad på plats: Morphe kunde inte verifiera att den installerade appen är den version den modifierade</string>
     <string name="launch_app_unverified">Morphe kunde inte verifiera att den installerade appen är den version den modifierade</string>
     <string name="uninstall_timeout">Avinstallationen nådde tidsgränsen </string>
-    <string name="save_apk_success">APK-fil sparades</string>
+    <string name="save_apk_success">APK-filen har sparats</string>
     <string name="saved_app_export_failed">Det gick inte att exportera den modifierade appen</string>
     <string name="saved_app_removed_toast">Tog bort den sparade modifierade appen</string>
     <string name="saved_app_launch_unavailable">Installera appen innan du öppnar den</string>
@@ -869,6 +868,9 @@ Tillägg påverkas inte: aktivera förhandsversioner av tillägg för varje käl
     <string name="notification_channel_patch_updates_description">Aviseringar om nya tilläggsversioner</string>
     <string name="notification_channel_patcher_description">Visas när Morphe modifierar en app i bakgrunden</string>
     <string name="notification_channel_mounted_apps">Monterade appar</string>
+    <string name="notification_channel_mounted_apps_description">När en annan version har ersatt en monterad app och dess modifiering inte längre gäller</string>
+    <string name="notification_mount_replaced_title">%1$s är inte längre modifierad</string>
+    <string name="notification_mount_replaced_text">v%1$s har ersatt den modifierade v%2$s. Öppna Morphe för att återställa den</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertinställningar</string>
     <string name="settings_advanced_expert_mode">Expertläge</string>
@@ -1321,6 +1323,7 @@ Information: %2$s"</string>
     <string name="unmount">Avmontera</string>
     <string name="unmounted">Avmonterad</string>
     <string name="remount">Montera igen</string>
+    <string name="restore">Återställ</string>
     <string name="share">Dela</string>
     <string name="install">Installera</string>
     <string name="installed">Installerad</string>
@@ -1341,6 +1344,8 @@ Information: %2$s"</string>
     <string name="sources">Källor</string>
     <string name="installing_ellipsis">Installerar …</string>
     <string name="mounting_ellipsis">Monterar …</string>
+    <string name="mount_stage_restoring_stock">Återställer original …</string>
+    <string name="mount_stage_copying">Kopierar …</string>
     <string name="unmounting_ellipsis">Avmonterar …</string>
     <string name="importing_ellipsis">Importerar …</string>
     <string name="imported_successfully">Importen lyckades</string>

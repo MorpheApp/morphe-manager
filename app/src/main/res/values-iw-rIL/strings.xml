@@ -391,44 +391,43 @@
     <string name="adaptive_icon_select_image">בחר תמונה</string>
     <string name="adaptive_icon_change_image">שנה תמונה</string>
     <string name="image_load_failed">לא ניתן היה לטעון את התמונה</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">תמונת חזית</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">סמל ההפעלה</string>
+    <string name="adaptive_icon_gesture_hint">גרור כדי להזיז, צבוט כדי לשנות גודל</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">תצוגה מקדימה</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">רגיל</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">מותאם לנושא</string>
     <string name="adaptive_icon_background_color">צבע רקע</string>
     <string name="adaptive_icon_reset_transform">אפס מיקום ומספר</string>
-    <string name="adaptive_icon_safe_zone_inner">אזור בטוח (תמיד מראה)</string>
-    <string name="adaptive_icon_safe_zone_outer">אזור מסכה (ייתכן שנחתך)</string>
-    <string name="adaptive_icon_no_transparency_warning">התמונה אינה מכילה פיקסלים שקופים. התוצאה עלולה להיראות שגויה</string>
+    <string name="adaptive_icon_no_transparency_warning">לתמונה זו אין פיקסלים שקופים, לכן סמלי הנושא וסמלי ההתראות שומרים על לוגו Morphe</string>
     <string name="adaptive_icon_created_success">סמל אדפטיבי נוצר בהצלחה</string>
     <string name="adaptive_icon_creation_failed">שגיאה ביצירת עיצוב סמל אדפטיבי</string>
-    <string name="adaptive_icon_label">מותאם</string>
-    <string name="adaptive_icon_monochrome_label">מונוכרום</string>
     <string name="adaptive_icon_guide">מדריך ליצירת אייקון</string>
     <string name="adaptive_icon_guide_png_title">השתמש בתמונה בפורמט PNG עם רקע שקוף</string>
-    <string name="adaptive_icon_guide_png_body">החלק הקדמי חייב להיות קובץ PNG עם רקע שקוף. רקע בצבע אחיד ייראה שגוי - צבע הרקע צריך להגיע מתוך בוחר הרקע למטה.</string>
+    <string name="adaptive_icon_guide_png_body">לוגו על רקע שקוף עובד הכי טוב, כשצבע הרקע נבחר למטה. תמונה ללא שקיפות ממלאת את כל הסמל במקום זאת, וסמלי הנושא וסמלי ההתראות שומרים אז על לוגו Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">אזורי בטיחות</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"האזור הפנימי (מוצק): התוכן תמיד גלוי במלואו בכל צורות השיגור.
-האזור החיצוני (מקווקו): עלול להיחתך על ידי מסכת השיגור - שמור פרטים חשובים בתוך האזור הפנימי."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">קו המתאר מציג את צורת הסמל של המשגר שלך, וכל מה שמחוץ לו נחתך. משגרים אחרים משתמשים בצורות אחרות, לכן שמור פרטים חשובים בתוך העיגול המקווקו, שכל צורה מציגה.</string>
     <string name="adaptive_icon_guide_notification_title">סמל עדכונים</string>
-    <string name="adaptive_icon_guide_notification_body">נוצר באופן אוטומטי מהתמונה הקדמית. התאם את גודלו באמצעות המחוון עדכון. כל התוכן הגלוי מופיע בלבן בשורת המצב.</string>
-    <string name="adaptive_icon_guide_monochrome_title">אייקון מונוכרום</string>
-    <string name="adaptive_icon_guide_monochrome_body">נוצר באופן אוטומטי מהתמונה הקדמית באמצעות אותם טרנספורמציות של אייקון אדפטיבי. הוא מופיע בגוון צבע האקסנט של הטפט באנדרואיד 13 ומעלה.</string>
+    <string name="adaptive_icon_guide_notification_body">נחתך מהחלק הנראה של התמונה ובגודל כמו סמלי שורת המצב האחרים, לא משנה אילו שוליים יש לקובץ. כוונן אותו עם המחוון מתחת לתצוגה המקדימה. Android מציג אותו בצבע אחד.</string>
+    <string name="adaptive_icon_guide_monochrome_title">סמל נושא</string>
+    <string name="adaptive_icon_guide_monochrome_body">נחתך מהתמונה באותו מיקום ובאותו גודל כמו סמל המשגר. ב-Android 13 ואילך, משגרים עם סמלי נושא מופעלים צובעים אותו לפי הטפט.</string>
     <string name="notification_icon_preview">עדכון</string>
     <!-- Header Creator -->
     <string name="header_creator_create">צור כותרת מותאמת</string>
     <string name="header_creator_light_theme">כותרת נושא בהירה</string>
     <string name="header_creator_dark_theme">כותרת נושא כהה</string>
-    <string name="header_creator_no_image">לא נבחרה תמונה</string>
     <string name="header_creator_success">עמודות ראשיות צורו בהצלחה</string>
     <string name="header_creator_failed">שגיאה ביצירת עמודות ראשיות</string>
     <string name="header_creator_guide">מדריך ליצירת כותרת</string>
     <string name="header_creator_guide_image_title">דרישות תמונה</string>
-    <string name="header_creator_guide_image_body">השתמש בכל קובץ תמונה (PNG או JPEG). לקבלת התוצאות הטובות ביותר, השתמש בתמונה בפורמט רחב עם יחס גובה-רוחב של כ-2.7:1. קבצי PNG עם רקע שקוף ישתלבו באופן טבעי עם ערכת הנושא של האפליקציה.</string>
+    <string name="header_creator_guide_image_body">תמונת PNG עם רקע שקוף משתלבת בסרגל האפליקציה. המרווחים סביב הלוגו בקובץ אינם נחשבים, ולכן היא מתחילה בגודל ובמקום של הלוגו המקורי.</string>
     <string name="header_creator_guide_themes_title">ערכות נושא בהירות וכהות</string>
     <string name="header_creator_guide_themes_body">רוב האפליקציות דורשות תמונות נפרדות עבור ערכות הנושא הבהירות והכהות. חלק מהאפליקציות (כמו YouTube Music) משתמשות רק בערכת הנושא הכהה, כך שרק אותו חלק מוצג.</string>
     <string name="header_creator_guide_positioning_title">מיקום ושינוי גודל</string>
-    <string name="header_creator_guide_positioning_body">השתמש במחוות צביטה-להתקרב וגרירה ישירות בתצוגה המקדימה כדי למקם ולשנות את גודל התמונה שלך. מדריכי הצמדה מופיעים כאשר התמונה קרובה למרכז. ניתן גם להשתמש במחוון מתחת לתצוגה המקדימה.</string>
+    <string name="header_creator_guide_positioning_body">גרור וצבוט את התמונה בעורך, או שנה את גודלה עם המחוון. התיבה המקווקוית מסמנת היכן ממוקם הלוגו המקורי, וקווי עזר מופיעים כשהתמונה מתיישרת איתו.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">תיקון נבחר</string>
     <string name="batch_patch_title">תיקון באצווה</string>

@@ -388,44 +388,31 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="adaptive_icon_select_image">Wêne hilbijartin</string>
     <string name="adaptive_icon_change_image">Wêne biguherîn</string>
     <string name="image_load_failed">Ev wêne nekarî were barkirin.</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Wêneyê pêş</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Îkona destpêker</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <!-- Caption under the launcher icon in its own colors -->
+    <!-- Caption under the launcher icon recolored by the system theme -->
     <string name="adaptive_icon_background_color">Reng paşîn</string>
     <string name="adaptive_icon_reset_transform">Pozisyon û qiyasê sererast bike</string>
-    <string name="adaptive_icon_safe_zone_inner">Zonaya ewle (her tim dîtbar e)</string>
-    <string name="adaptive_icon_safe_zone_outer">Zonaya maskê (dibe ku biqewimin)</string>
-    <string name="adaptive_icon_no_transparency_warning">Wêne pîkseleke şeffaf nîne. Dibe ku encam rasterast xuya neke</string>
     <string name="adaptive_icon_created_success">Îkona adaptîv bi serketinê sererast dibe</string>
     <string name="adaptive_icon_creation_failed">Ji sererastkirina îkonaya adaptîv neçîbe</string>
-    <string name="adaptive_icon_label">Adaptîf</string>
-    <string name="adaptive_icon_monochrome_label">Monokrom</string>
     <string name="adaptive_icon_guide">Rêbernameya çêkirina îkonê</string>
     <string name="adaptive_icon_guide_png_title">PNG-yek bi paşnaveya şeffaf bikar bîne</string>
-    <string name="adaptive_icon_guide_png_body">Pêşî çêker divê pelgeyek PNG ya bi paşnaveya şeffaf be. Paşnavê rengîn dê xirab xuya bike - rengê paşnavê divê ji hilbijêra rengan a jorîn were girtin.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Herêmên ewle</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Herêma hundurîn (hewşem): naverok her gav di hemû şeklên launcher'an de tê dîtin.
-Herêma derveyî (qutkirî): dikare ji aliyê maskeya launcher'ê ve were qutkirin - hûrguliyên girîng di herêma hundurîn de bihêlin."</string>
     <string name="adaptive_icon_guide_notification_title">Îkona notîfîkasyonê</string>
-    <string name="adaptive_icon_guide_notification_body">Otomatîkî ji wêneyê pêşîn hatî çêkirin. Mezinahiyê wê bi têkîlîya notîfîkasyonê tê guhertin. Hemû naveroka ku tê dîtin di bara rewşê de spî xuya dike.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Îkona monokrom</string>
-    <string name="adaptive_icon_guide_monochrome_body">Otomatîkî ji wêneyê pêşîn hatî çêkirin bi heman guhertoyên îkonê adapteyî. Di Android 13 û paşîn de bi rengê sînorê wallpaper\'ê ve tê kirin.</string>
     <string name="notification_icon_preview">Notîfîkasyon</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Serdestin xwerû çêkîn</string>
     <string name="header_creator_light_theme">Serê tema ronah</string>
     <string name="header_creator_dark_theme">Serê tema tarik</string>
-    <string name="header_creator_no_image">Wêne tune</string>
     <string name="header_creator_success">Serê bi serketinê sererast dibe</string>
     <string name="header_creator_failed">Serivsê serdestin çêkirin domaniya</string>
     <string name="header_creator_guide">Rêbernameya çêkirina sernihêrê</string>
     <string name="header_creator_guide_image_title">Pêdiviyên wêne</string>
-    <string name="header_creator_guide_image_body">Her wêneyek (PNG an JPEG) bikar bîne. Ji bo encamên çêtirîn, wîneyek bi rêjeya enspêr a nêzikî 2.7:1 bikar bîne. Pelgên PNG-yê bi paşnavên şeffaf dê bi xwezayî bi tema app-ê tevdî bin.</string>
     <string name="header_creator_guide_themes_title">Tema hêsîn û tarî</string>
     <string name="header_creator_guide_themes_body">Piraniya sepanan wêneyên cihêreng ji bo temayên hêsîn û tarî hewce ne. Hinek sepanan (wek YouTube Music) tenê tema tarî bikar tînin, ji ber vê yekê tenê wê beşa wê tê nîşandan.</string>
     <string name="header_creator_guide_positioning_title">Cîkirin û mezînkirin</string>
-    <string name="header_creator_guide_positioning_body">Ji bo cîkirin û mezînkirina wêneya we rasterast di pêşdîtinê de tevgerên dîtin û drag bikar bîne. Rêberên snap-ê dema ku wêne nêzî navendê dibe xuya dibin. Hûn dikarin her wiha ji slidera jorîn jî bikar bînin.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Hilbijartî pê ve girêdayî</string>
     <string name="batch_patch_title">Girêdayîna porê</string>

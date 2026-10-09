@@ -239,35 +239,27 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <string name="adaptive_icon_create">Sukurti pasikeiciama piktogramą</string>
     <string name="adaptive_icon_select_image">Pasirinkti vaizdą</string>
     <string name="adaptive_icon_change_image">Pakeisti vaizdą</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <!-- Caption under the launcher icon in its own colors -->
+    <!-- Caption under the launcher icon recolored by the system theme -->
     <string name="adaptive_icon_background_color">Fono spalva</string>
     <string name="adaptive_icon_reset_transform">Atkurti padėtį ir dydį</string>
-    <string name="adaptive_icon_safe_zone_inner">Saugioji zonoje (visada matoma)</string>
-    <string name="adaptive_icon_safe_zone_outer">Maskavimo zona (gali būti atkirpta)</string>
-    <string name="adaptive_icon_no_transparency_warning">Paveiksle nėra skaidrių pikselių. Rezultatas gali atrodyti neteisingai</string>
     <string name="adaptive_icon_created_success">Sėkmingai sukurtas pasikeiciantis piktogramos ženklas</string>
     <string name="adaptive_icon_creation_failed">Nepavyko sukurti pasikeiciancios piktogramos</string>
-    <string name="adaptive_icon_label">Prisitaikantis</string>
-    <string name="adaptive_icon_monochrome_label">Vienspalvis</string>
     <string name="adaptive_icon_guide">Piktogramos kūrimo vadovas</string>
     <string name="adaptive_icon_guide_png_title">Naudokite PNG failą su skaidria fonu</string>
-    <string name="adaptive_icon_guide_png_body">Paviršius turi būti PNG failas su skaidria spalva. Ne permatomos spalvos fone atrodys neteisingai - fono spalva turėtų būti pasirinkta iš parinkiklio apačioje.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Saugios zonos</string>
     <string name="adaptive_icon_guide_notification_title">Pranešimo piktograma</string>
-    <string name="adaptive_icon_guide_notification_body">Generuota automatiškai iš ekrano paveikslėlio. Reguliuokite jo dydį naudojant pranešimo slankiklį. Viskas matoma balta spalva statuso juostoje.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Monochromatinė ikona</string>
     <string name="notification_icon_preview">Pranešimas</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Sukurti savo antraštę</string>
     <string name="header_creator_light_theme">Šviesios temos antraštė</string>
     <string name="header_creator_dark_theme">Tamsi temos antraštė</string>
-    <string name="header_creator_no_image">Nepasirinktas joks vaizdas</string>
     <string name="header_creator_success">Sėkmingai sukurtas antraštės failas</string>
     <string name="header_creator_failed">Nepavyko sukurti antraštės</string>
     <string name="header_creator_guide">Vadovas, kaip sukurti antraštę</string>
     <string name="header_creator_guide_image_title">Vaizdo reikalavimai</string>
-    <string name="header_creator_guide_image_body">Naudokite bet kokį paveikslėlio failą (PNG arba JPEG). Geriausiam rezultatui pasiekiamas, naudokite plačio formato paveikslėlį, kurio santykis apytiksliai 2,7:1. PNG failai su skaidriais fanais natūraliai susisiekia su programos tema.</string>
     <string name="header_creator_guide_themes_title">Šviesios ir tamsios temos</string>
     <string name="header_creator_guide_positioning_title">Padėtis ir mastelis</string>
     <!-- Batch patching -->

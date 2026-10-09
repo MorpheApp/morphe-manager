@@ -389,43 +389,31 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="adaptive_icon_select_image">Velja mynd</string>
     <string name="adaptive_icon_change_image">Breyta mynd</string>
     <string name="image_load_failed">Ekki tókst að hlaða þessa mynd</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Forgrunnsmynd</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Heimaskjástákn</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <!-- Caption under the launcher icon in its own colors -->
+    <!-- Caption under the launcher icon recolored by the system theme -->
     <string name="adaptive_icon_background_color">Bakgrunnslit</string>
     <string name="adaptive_icon_reset_transform">Endurstilla stöðu og mál</string>
-    <string name="adaptive_icon_safe_zone_inner">Örugg svæði (alltaf sýnilegt)</string>
-    <string name="adaptive_icon_safe_zone_outer">Maska svæði (getur verið klippt)</string>
-    <string name="adaptive_icon_no_transparency_warning">Mynd hefur engar gagnsæja pixel. Niðurstaðan gæti verið rangur</string>
     <string name="adaptive_icon_created_success">Adaptive tákn búið til með árangri</string>
     <string name="adaptive_icon_creation_failed">Ekki tókst að búa til adaptive tákn</string>
-    <string name="adaptive_icon_label">Samhæfur</string>
-    <string name="adaptive_icon_monochrome_label">Monokromísk</string>
     <string name="adaptive_icon_guide">Tákn búa til leiðbeiningar</string>
     <string name="adaptive_icon_guide_png_title">Nota PNG með gagnsæja bakgrunn</string>
-    <string name="adaptive_icon_guide_png_body">Forgrunnurinn verður að vera PNG skrá með gagnsæja bakgrunn. Solid litur bakgrunnurinn mun líta rangur út - bakgrunnaliturinn á að koma frá bakgrunns vali hér að neðan.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Örugg svæði</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Innri svæði (solid): innihaldið er alltaf fullt sýnilegt á öllum launcher löðinim. Ytri svæði (dásömlum): gæti verið klippur af launcher maska - haltu mikilvægum smáatriðum inni í innra svæðinu."</string>
     <string name="adaptive_icon_guide_notification_title">Tilvísun</string>
-    <string name="adaptive_icon_guide_notification_body">Rafmagnetískt af forgrunnsmynd. Stilltu stærðina með tilvísuninni hér að neðan. Allar sýnar litir virðast hvít í status barrinu.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Monokromísk tákn</string>
-    <string name="adaptive_icon_guide_monochrome_body">Rafmagnetískur af forgrunnsmynd með sömu samhæfri táknar breytingar. Það birtist lituð með veður ræsi lit á Android 13 og síðar.</string>
     <string name="notification_icon_preview">Tilvísun</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Búa til sérsniðinn haus</string>
     <string name="header_creator_light_theme">Ljóst þema haus</string>
     <string name="header_creator_dark_theme">Dökk þema haus</string>
-    <string name="header_creator_no_image">Engin mynd valin</string>
     <string name="header_creator_success">Haus búið til með árangri</string>
     <string name="header_creator_failed">Ekki tókst að búa til haus</string>
     <string name="header_creator_guide">Haus búa til leiðbeiningar</string>
     <string name="header_creator_guide_image_title">Mynda kröfur</string>
-    <string name="header_creator_guide_image_body">Nota hvers konar myndskrá (PNG eða JPEG). Fyrir bestu skilmál er mælt með breiðsnoýri mynd með um 2.7:1 hlutfall. PNG skrár með transparent bakgrunni munu blanda náttúrulega með app litum.</string>
     <string name="header_creator_guide_themes_title">Ljóst og dökk litir</string>
     <string name="header_creator_guide_themes_body">Flest app krefjast sérstakara mynda fyrir ljósa og aðra lit. Sum app (slátt YouTube músik) nota eingöngu aðra litinn, svo að aðeins það deild er sýnið.</string>
     <string name="header_creator_guide_positioning_title">Staða og mál</string>
-    <string name="header_creator_guide_positioning_body">Nota pincu-til-zoom og dráttar hreyfingar beint í forsvísun til að staðsetja og stærð liti. Snappa leiðbeiningar birtast þegar myndin er nálæg miðju. Hægt er einnig að nota rennara hér að neðan.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Valdar patch</string>
     <string name="batch_patch_title">Batch patching</string>
