@@ -466,8 +466,7 @@ fun BatchPatcherScreen(
                             miniGameState = miniGameState,
                             queueHeader = { BatchRunHeader(state = current) },
                             onCancelClick = { showCancelDialog = true },
-                            onInstallClick = { summaryReleased = true },
-                            onHomeClick = onBackClick
+                            onResultClick = { summaryReleased = true }
                         )
                     } else {
                         val longStepWarning by shownRun.showLongStepWarning.collectAsStateWithLifecycle()

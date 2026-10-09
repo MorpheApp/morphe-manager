@@ -295,7 +295,7 @@ fun ActionGlassButton(
         contentDescription = accessibleLabel,
         containerColor = colors.container.dim(enabled),
         contentColor = colors.content.dim(enabled),
-        border = CardBorder.of(colors.border.dim(enabled)),
+        borderColor = colors.border.dim(enabled),
         role = Role.Button,
         pressScale = true,
         hapticFeedback = true,

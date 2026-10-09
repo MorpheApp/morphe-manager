@@ -5,12 +5,15 @@
 
 package app.morphe.manager.ui.screen.shared
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.BorderStroke
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,7 +44,7 @@ fun GlassButton(
     containerColor: Color = GlassButtonDefaults.containerColor(selected),
     contentColor: Color = GlassButtonDefaults.contentColor(selected),
     shape: Shape = GlassButtonDefaults.ButtonShape,
-    border: BorderStroke? = CardBorder.of(GlassButtonDefaults.borderColor(selected)),
+    borderColor: Color = GlassButtonDefaults.borderColor(selected),
     iconSize: Dp = GlassButtonDefaults.IconSize,
     height: Dp = Defaults.GlassButtonHeight,
     horizontalPadding: Dp = GlassButtonDefaults.HorizontalPadding,
@@ -62,8 +65,25 @@ fun GlassButton(
     // Selection is only meaningful for a tab; a plain button would be read as unselected
     val isSelectable = role == Role.Tab
 
+    // A selection or tone that follows a state blends into the next one rather than snapping
+    val containerColor by animateColorAsState(
+        targetValue = containerColor,
+        animationSpec = tween(Defaults.ANIMATION_DURATION),
+        label = "glass_button_container"
+    )
+    val animatedContentColor by animateColorAsState(
+        targetValue = contentColor,
+        animationSpec = tween(Defaults.ANIMATION_DURATION),
+        label = "glass_button_content"
+    )
+    val borderColor by animateColorAsState(
+        targetValue = borderColor,
+        animationSpec = tween(Defaults.ANIMATION_DURATION),
+        label = "glass_button_border"
+    )
+
     // The fill is translucent, so the caller's pairing describes a background that is never drawn
-    val contentColor = contentColor.readableOn(containerColor, MaterialTheme.colorScheme.surface)
+    val contentColor = animatedContentColor.readableOn(containerColor, MaterialTheme.colorScheme.surface)
 
     val interactionSource = remember { MutableInteractionSource() }
     val clickHandler = if (hapticFeedback) rememberHapticClick(onClick) else onClick
@@ -88,7 +108,7 @@ fun GlassButton(
         color = containerColor,
         contentColor = contentColor,
         shape = shape,
-        border = border,
+        border = CardBorder.of(borderColor),
         interactionSource = interactionSource,
         enabled = enabled
     ) {
@@ -99,20 +119,29 @@ fun GlassButton(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            if (showProgress) {
-                CircularProgressIndicator(
-                    modifier = Modifier.size(iconSize),
-                    color = contentColor,
-                    strokeWidth = 2.dp
-                )
-            } else if (icon != null) {
-                Icon(
-                    imageVector = icon,
-                    // The node itself carries the accessible label, see accessibleLabel above
-                    contentDescription = null,
-                    modifier = Modifier.size(iconSize),
-                    tint = contentColor
-                )
+            if (showProgress || icon != null) {
+                // The icon follows a state the same way the label does, a null one is the spinner
+                AnimatedContent(
+                    targetState = icon.takeUnless { showProgress },
+                    transitionSpec = Animations.fadeCrossfade(),
+                    label = "glass_button_icon"
+                ) { shownIcon ->
+                    if (shownIcon == null) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(iconSize),
+                            color = contentColor,
+                            strokeWidth = 2.dp
+                        )
+                    } else {
+                        Icon(
+                            imageVector = shownIcon,
+                            // The node itself carries the accessible label, see accessibleLabel above
+                            contentDescription = null,
+                            modifier = Modifier.size(iconSize),
+                            tint = contentColor
+                        )
+                    }
+                }
             }
             AnimatedVisibility(
                 visible = effectiveShowLabel,
@@ -123,7 +152,8 @@ fun GlassButton(
                     if (icon != null || showProgress) {
                         Spacer(modifier = Modifier.width(iconLabelSpacing))
                     }
-                    Text(
+                    // A label that follows a state fades from one value to the next instead of jumping
+                    CrossfadeText(
                         text = label,
                         style = textStyle,
                         color = contentColor,

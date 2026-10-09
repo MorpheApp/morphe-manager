@@ -385,8 +385,8 @@ fun ExpertPatchingInProgress(
     miniGameState: MiniGameState,
     queueHeader: (@Composable () -> Unit)? = null,
     onCancelClick: () -> Unit,
-    onInstallClick: () -> Unit = {},
-    onHomeClick: () -> Unit
+    resultButton: ResultButton = ResultButton.Install,
+    onResultClick: () -> Unit = {}
 ) {
     val (completed, total) = patchesProgress
     val rawLogs = patchProgress.logs
@@ -429,12 +429,11 @@ fun ExpertPatchingInProgress(
         PatcherBottomActionBar(
             horizontalPadding = horizontalPadding,
             showCancelButton = patcherSucceeded == null,
-            showHomeButton = patcherSucceeded == true,
-            showInstallButton = patcherSucceeded == true,
+            showHomeButton = false,
+            resultButton = resultButton.takeIf { patcherSucceeded == true },
             showCopyLogsButton = true,
             onCancelClick = onCancelClick,
-            onHomeClick = onHomeClick,
-            onInstallClick = onInstallClick,
+            onResultClick = onResultClick,
             onCopyLogsClick = {
                 copyToClipboard(buildLogsText())
             }

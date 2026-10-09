@@ -1520,7 +1520,7 @@ private fun HomeActiveFilterRow(
             icon = Icons.Outlined.FilterList,
             containerColor = highlight.container,
             contentColor = highlight.content,
-            border = CardBorder.of(highlight.border),
+            borderColor = highlight.border,
             role = Role.Button,
             pressScale = true,
             hapticFeedback = true
