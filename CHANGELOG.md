@@ -1,3 +1,11 @@
+# [1.35.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v1.35.0-dev.4...v1.35.0-dev.5) (2026-10-09)
+
+
+### Bug Fixes
+
+* Remove other root installs of a mounted app and replace the APK they leave in running processes ([#1131](https://github.com/MorpheApp/morphe-manager/issues/1131)) ([b1daaa9](https://github.com/MorpheApp/morphe-manager/commit/b1daaa949012263c2fb2962a8fc76b2aeaf3384e))
+* Replace the previous patched APK running processes still hold after a remount ([cf5006e](https://github.com/MorpheApp/morphe-manager/commit/cf5006ed186c4ab886700479686eb918836a836a))
+
 # [1.35.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v1.35.0-dev.3...v1.35.0-dev.4) (2026-10-08)
 
 
