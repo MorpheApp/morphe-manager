@@ -1,3 +1,16 @@
+## [1.35.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v1.35.0...v1.35.1-dev.1) (2026-10-10)
+
+
+### Bug Fixes
+
+* Drop the record a failed first mount created ([921f838](https://github.com/MorpheApp/morphe-manager/commit/921f8382eb1feba7c8b297b13eb24bd5da22a5b4))
+* Keep mount installs recorded when the process dies mid-mount ([8e82be8](https://github.com/MorpheApp/morphe-manager/commit/8e82be8f8b3576f1a5da7be7d3406e7591fa64da))
+
+
+### Performance Improvements
+
+* Find the namespaces to remount in single passes at boot ([8e81917](https://github.com/MorpheApp/morphe-manager/commit/8e819178f429a56608bb30fc7e4b7393a6f628b6))
+
 # [1.35.0](https://github.com/MorpheApp/morphe-manager/compare/v1.34.0...v1.35.0) (2026-10-10)
 
 

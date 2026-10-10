@@ -80,6 +80,13 @@ val InstalledApp.supportsMount: Boolean
     get() = currentPackageName == originalPackageName
 
 /**
+ * Whether the saved build of this app is put back by mounting it. A mount build only works
+ * mounted, so its record decides, while any other build follows the primary installer.
+ */
+fun InstalledApp.reinstallsByMount(primaryInstallerIsMount: Boolean): Boolean =
+    installType == InstallType.MOUNT || (primaryInstallerIsMount && supportsMount)
+
+/**
  * How the manager refers to this install everywhere the package name is not enough: home cards,
  * batch targets and the saved configuration a rebuild reads back.
  *

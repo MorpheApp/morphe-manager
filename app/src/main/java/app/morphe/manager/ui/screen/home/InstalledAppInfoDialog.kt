@@ -276,7 +276,6 @@ fun InstalledAppInfoDialog(
         } else if (hadMountOperation) {
             hadMountOperation = false
             viewModel.refreshCurrentAppState()
-            installedApp?.currentPackageName?.let(homeViewModel.apps::notifyAppStateChanged)
         }
     }
 
@@ -570,12 +569,12 @@ fun InstalledAppInfoDialog(
                     )
                 }
             }
-            // Installs the saved patched build the way the primary installer does, warning first
-            // when that installer and the record differ on mounting
+            // Installs the saved patched build. A mount build is always mounted, while any other
+            // one warns first when the primary installer is mount
             val installSavedCopy: () -> Unit = {
                 viewModel.savedApkFile()?.let { savedFile ->
                     val installAction = {
-                        if (viewModel.primaryInstallerIsMount && installedApp.supportsMount) {
+                        if (installedApp.reinstallsByMount(viewModel.primaryInstallerIsMount)) {
                             reinstallSavedMount()
                         } else {
                             // The install result handler records the install type once it lands
@@ -586,7 +585,7 @@ fun InstalledAppInfoDialog(
                             )
                         }
                     }
-                    if (viewModel.primaryInstallerIsMount != (installedApp.installType == InstallType.MOUNT)) {
+                    if (viewModel.primaryInstallerIsMount && installedApp.installType != InstallType.MOUNT) {
                         pendingMountWarningAction.value = installAction
                         showMountWarningDialog.value = true
                     } else {

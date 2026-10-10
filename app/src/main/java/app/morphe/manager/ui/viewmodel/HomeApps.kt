@@ -19,6 +19,7 @@ import app.morphe.manager.domain.apk.*
 import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.asRemoteOrNull
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.avatarUrls
+import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.*
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
@@ -128,7 +129,8 @@ class HomeApps(
     private val homeAppButtonPrefs: HomeAppButtonPreferences,
     private val appDataResolver: AppDataResolver,
     versionCatalog: AppVersionCatalog,
-    private val localApkSources: LocalApkSources
+    private val localApkSources: LocalApkSources,
+    private val rootInstaller: RootInstaller
 ) {
     // Updates available for installed apps, null until the first check lands
     private val _appUpdatesAvailable = MutableStateFlow<Map<String, AppPatchUpdate>?>(null)
@@ -218,22 +220,28 @@ class HomeApps(
             .filter { it.isNotEmpty() }
             .collectLatest { pending ->
                 delay(PACKAGE_CHANGE_DEBOUNCE_MS.milliseconds)
-                pending.forEach {
-                    appDataResolver.invalidate(it)
-                }
-                markTrackedPackagesPending(pending, invalidateCache = true)
-                _appStateTicker.update { it + 1 }
+                refreshPackages(pending)
                 pendingPackageChanges.value = emptySet()
             }
     }
 
     /** Rechecks only tracked evidence when storage management removes a retained patched APK. */
     private fun observeSavedPatchedApkChanges() = scope.launch {
-        installedAppRepository.savedPatchedApkChanges.collect { packageNames ->
-            packageNames.forEach(appDataResolver::invalidate)
-            markTrackedPackagesPending(packageNames, invalidateCache = true)
-            _appStateTicker.update { it + 1 }
+        installedAppRepository.savedPatchedApkChanges.collect(::refreshPackages)
+    }
+
+    /** A mount swaps the APK behind a package without a broadcast, so it joins the package changes. */
+    private fun observeMountChanges() = scope.launch {
+        rootInstaller.mountChanges.collect { packageName ->
+            pendingPackageChanges.update { it + packageName }
         }
+    }
+
+    /** Drops what is known about [packageNames] and rebuilds the home state around them. */
+    private fun refreshPackages(packageNames: Set<String>) {
+        packageNames.forEach(appDataResolver::invalidate)
+        markTrackedPackagesPending(packageNames, invalidateCache = true)
+        _appStateTicker.update { it + 1 }
     }
 
     /**
@@ -772,11 +780,7 @@ class HomeApps(
      * Invalidates AppDataResolver cache for [packageName] and forces homeAppState recomputation.
      * Call this after any install/uninstall operation that doesn't change the DB record.
      */
-    fun notifyAppStateChanged(packageName: String) {
-        appDataResolver.invalidate(packageName)
-        markTrackedPackagesPending(setOf(packageName), invalidateCache = true)
-        _appStateTicker.update { it + 1 }
-    }
+    fun notifyAppStateChanged(packageName: String) = refreshPackages(setOf(packageName))
 
     /** Triggers the swipe gesture hint whenever a custom bundle is added. */
     val showSwipeGestureHint = MutableStateFlow(false)
@@ -823,6 +827,7 @@ class HomeApps(
         )
         observePackageChanges()
         observeSavedPatchedApkChanges()
+        observeMountChanges()
         observeTrackedApps()
         observeInstalledAppUpdates()
     }
