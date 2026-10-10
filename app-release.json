@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-10-09T12:10:00",
-  "description": "# [1.35.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.35.0-dev.5...v1.35.0-dev.6) (2026-10-09)\n\n\n### Bug Fixes\n\n* Show the install status on the result button of the patcher logs ([d4885ec](https://github.com/MorpheApp/morphe-manager/commit/d4885ec3053a60d8ed323232a23e9dca85e0c0fd))\n\n\n### Features\n\n* Show only web results in the fallback Google search ([#1134](https://github.com/MorpheApp/morphe-manager/issues/1134)) ([a76ff96](https://github.com/MorpheApp/morphe-manager/commit/a76ff964ded1ac21e22727b96c1807aad1d309f5))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.35.0-dev.6/morphe-manager-1.35.0-dev.6.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.35.0-dev.6/morphe-manager-1.35.0-dev.6.apk.asc",
-  "version": "1.35.0-dev.6"
+  "created_at": "2026-10-10T05:26:25",
+  "description": "# [1.35.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.35.0-dev.6...v1.35.0-dev.7) (2026-10-10)\n\n\n### Features\n\n* Show which patch failed when patching fails ([5ddad1f](https://github.com/MorpheApp/morphe-manager/commit/5ddad1f037d4d2ad38f53560d6e1f4c3494ccbc8))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.35.0-dev.7/morphe-manager-1.35.0-dev.7.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v1.35.0-dev.7/morphe-manager-1.35.0-dev.7.apk.asc",
+  "version": "1.35.0-dev.7"
 }
