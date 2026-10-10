@@ -17,6 +17,7 @@ import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.util.*
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -311,9 +312,15 @@ class LocalApkSources(
     private suspend fun mountState(app: InstalledApp, installedPackageInfo: PackageInfo?): Boolean? {
         if (app.installType != InstallType.MOUNT || installedPackageInfo == null) return null
         if (!rootInstaller.hasRootAccess()) return null
-        return runCatching { rootInstaller.isAppMounted(app.currentPackageName) }
-            .onFailure { Log.e(tag, "Failed to read the mount table", it) }
-            .getOrNull()
+        return try {
+            rootInstaller.isAppMounted(app.currentPackageName)
+        } catch (e: CancellationException) {
+            // A superseded refresh is not a failure to read the table
+            throw e
+        } catch (e: Exception) {
+            Log.e(tag, "Failed to read the mount table", e)
+            null
+        }
     }
 
     /** Drops the remembered snapshot of [packageName] so the next read inspects the disk again. */
@@ -567,11 +574,10 @@ internal fun PackageInfo.toInspectionTarget(): AppInspectionTarget =
  * Whether package flags identify an unmodified preinstalled system image app.
  * Such apps reside on read-only partitions and cannot be third-party patched APKs unless mounted.
  */
-internal fun isUnmodifiedSystemApp(flags: Int?): Boolean {
-    if (flags == null) return false
-    return (flags and ApplicationInfo.FLAG_SYSTEM) != 0 &&
+internal fun isUnmodifiedSystemApp(flags: Int?): Boolean =
+    flags != null &&
+            (flags and ApplicationInfo.FLAG_SYSTEM) != 0 &&
             (flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) == 0
-}
 
 /**
  * Filters installed packages to identify patched builds, using bounded concurrency and fast paths

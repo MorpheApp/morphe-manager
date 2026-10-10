@@ -35,7 +35,6 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
-import app.morphe.manager.data.room.apps.installed.supportsMount
 import app.morphe.manager.data.room.apps.original.OriginalApk
 import app.morphe.manager.domain.apk.InstalledPatchState
 import app.morphe.manager.domain.apk.LocalApkSources
@@ -294,7 +293,7 @@ private fun PatchedApksContent(
         InstallQueueRequest(
             file = file,
             originalPackageName = installedApp.originalPackageName,
-            mountPackageName = installedApp.currentPackageName.takeIf { installedApp.supportsMount },
+            installedApp = installedApp,
             onPersistApp = { packageName, installType ->
                 val appliedPatches = repository.getAppliedPatches(installedApp.currentPackageName)
                 repository.addOrUpdate(

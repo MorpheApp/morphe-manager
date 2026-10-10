@@ -843,7 +843,9 @@ class InstallViewModel : ViewModel(), KoinComponent {
     ) {
         if (installState is InstallState.Installing) return
 
-        viewModelScope.launch {
+        // Detached from viewModelScope: leaving the screen must not stop the install between
+        // writing the module and recording it, or the app runs a build the record does not know
+        applicationScope.launch(Dispatchers.Main.immediate) {
             currentInstallType = InstallType.MOUNT
             installState = InstallState.Installing()
 
@@ -923,23 +925,21 @@ class InstallViewModel : ViewModel(), KoinComponent {
                     }
                 }
 
-                // Install as root
+                // Install as root. The build is recorded once the module is staged, and before it
+                // is switched in, so the record never trails what the module mounts at boot
                 rootInstaller.install(
                     outputFile,
                     stockCandidate?.file,
                     packageName,
                     patchedVersion,
                     label,
-                    onStage = { installState = InstallState.Installing(it) }
+                    onStage = { installState = InstallState.Installing(it) },
+                    onStaged = { onPersistApp(packageInfo.packageName, InstallType.MOUNT) }
                 )
 
                 // Mount
                 installState = InstallState.Installing(MountStage.MOUNTING)
                 rootInstaller.mount(packageName)
-
-                // Persist app data once the mount is in place, since the saved record makes
-                // the home screen inspect the app and read whether it is mounted
-                onPersistApp(packageInfo.packageName, InstallType.MOUNT)
 
                 // Drop only caller-owned temporary inputs; persistent saved originals must survive
                 // for future root mount updates.

@@ -160,7 +160,8 @@ class HomeViewModel(
         homeAppButtonPrefs = homeAppButtonPrefs,
         appDataResolver = appDataResolver,
         versionCatalog = versionCatalog,
-        localApkSources = localApkSources
+        localApkSources = localApkSources,
+        rootInstaller = rootInstaller
     )
 
     val availablePatches = patchBundleRepository.bundleInfoFlow.map { it.values.sumOf { bundle -> bundle.patches.size } }
