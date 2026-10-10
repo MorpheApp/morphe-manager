@@ -21,6 +21,7 @@ import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.domain.installer.*
+import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.util.*
@@ -53,6 +54,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
     private val prefs: PreferencesManager by inject()
     private val appDataResolver: AppDataResolver by inject()
     private val originalApkRepository: OriginalApkRepository by inject()
+    private val installedAppRepository: InstalledAppRepository by inject()
     private val applicationScope: AppCoroutineScope by inject()
 
     /**
@@ -848,6 +850,7 @@ class InstallViewModel : ViewModel(), KoinComponent {
         applicationScope.launch(Dispatchers.Main.immediate) {
             currentInstallType = InstallType.MOUNT
             installState = InstallState.Installing()
+            var recordCreated = false
 
             try {
                 val inputs = withContext(Dispatchers.IO) {
@@ -934,7 +937,11 @@ class InstallViewModel : ViewModel(), KoinComponent {
                     patchedVersion,
                     label,
                     onStage = { installState = InstallState.Installing(it) },
-                    onStaged = { onPersistApp(packageInfo.packageName, InstallType.MOUNT) }
+                    onStaged = {
+                        val hadRecord = installedAppRepository.get(packageName) != null
+                        onPersistApp(packageInfo.packageName, InstallType.MOUNT)
+                        recordCreated = !hadRecord
+                    }
                 )
 
                 // Mount
@@ -964,6 +971,16 @@ class InstallViewModel : ViewModel(), KoinComponent {
                 try {
                     rootInstaller.uninstall(packageName)
                 } catch (_: Exception) {}
+
+                // The module is gone, so a record this attempt created would describe nothing,
+                // while one that was already there keeps the saved build to install again
+                if (recordCreated) {
+                    try {
+                        installedAppRepository.get(packageName)?.let { installedAppRepository.delete(it) }
+                    } catch (e: Exception) {
+                        Log.e(TAG, "Failed to remove the record of the failed mount", e)
+                    }
+                }
             }
         }
     }
