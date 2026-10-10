@@ -2,6 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">इतर ॲप्स</string>
+    <string name="home_other_apps_action">इतर अॅप्स निवडा</string>
     <string name="home_not_patched_yet">अजून सुधारणा केलेली नाही</string>
     <string name="home_unpatched_version_installed">अनपॅच केलेली आवृत्ती स्थापित</string>
     <string name="home_unpatched_badge">सुधारणा केलेली नाही</string>
@@ -12,6 +13,10 @@
     <string name="home_app_no_hidden">कोणतेही लपवलेले ॲप नाही</string>
     <string name="home_app_hidden_apps_title">लपवलेली ॲप्स</string>
     <string name="home_app_hidden_apps_hint">\"Tap to unhide\"</string>
+    <string name="home_app_patch_sources_description">चेक केलेले नसलेले स्रोत या अॅप्सना पॅच करताना देऊ केले जात नाहीत, आणि त्यांचे पॅच स्वतःहून निवडीत सामील होत नाहीत. प्रत्येक स्रोत इतर प्रत्येक अॅपसाठी चालू राहतो</string>
+    <string name="home_app_patch_sources_mixed">%2$s पैकी %1$s ला देऊ केले</string>
+    <string name="home_app_patch_sources_covers">%2$s पैकी %1$s साठी पॅच आहेत</string>
+    <string name="home_app_patch_sources_last">प्रत्येक अॅपला पॅच करण्यासाठी एक स्रोत शिल्लक हवा</string>
     <string name="android_11_bug_dialog_title">अँड्रॉइड 11 दोष</string>
     <string name="android_11_bug_dialog_description">अँड्रॉइड 11 सिस्टिममधील एक दोष टाळण्यासाठी, ॲप स्थापनेची परवानगी आधीच देणे आवश्यक आहे; अन्यथा त्याचा वापरकर्त्याच्या अनुभवावर वाईट परिणाम होईल.</string>
     <string name="deep_link_add_source_title">मूळ जोडा</string>
@@ -26,6 +31,8 @@
     <string name="home_metadata_errors_subtitle">स्त्रोतांचे पुनरावलोकन करण्यासाठी टॅप करा</string>
     <string name="home_outdated_manager_title">Morphe जुने झाले आहे</string>
     <string name="home_outdated_manager_subtitle">काही पॅच स्त्रोतांना नवीन आवृत्ती आवश्यक आहे</string>
+    <string name="home_held_back_title">एका पॅच स्रोतामुळे Morphe क्रॅश झाले</string>
+    <string name="home_held_back_subtitle">अॅप सुरू होण्यासाठी ते वगळले गेले. पुनरावलोकन करण्यासाठी टॅप करा</string>
     <string name="home_metered_skipped_title">मोबाइल डेटावर अद्यतने थांबवली आहेत</string>
     <string name="home_metered_skipped_subtitle">मोबाईल डेटावर अपडेट्सला अनुमती देण्यासाठी टॅप करा</string>
     <string name="home_repatch_available_subtitle">सर्वांना रांगेत जोडण्यासाठी टॅप करा</string>
@@ -53,6 +60,7 @@
     <string name="home_app_sort_name_asc_description">वर्णक्रमानुसार, A ते Z</string>
     <string name="home_app_sort_name_desc_description">अक्षरांनुसार उतरत्या क्रमाने, Z ते A</string>
     <string name="home_app_sort_updates_first">पॅच अपडेट्स प्रथम</string>
+    <string name="home_app_sort_updates_first_description">नवीन पॅच असलेले अॅप्स आधी, नंतर शिफारस केलेला क्रम</string>
     <string name="home_app_sort_recently_patched">नुकतेच पॅच केलेले</string>
     <string name="home_app_sort_recently_patched_description">समस्या नोंदवा</string>
     <string name="home_no_apps_title">ॲप्स उपलब्ध नाहीत</string>
@@ -115,8 +123,29 @@
     <string name="home_greeting_super_late_3">आता तर फक्त जागे राहा आणि पॅचिंग करा</string>
     <string name="home_greeting_super_late_4">तुम्ही आणि सर्व्हर, दोघेही जागे</string>
     <string name="home_greeting_super_late_5">रात्रीचे आणि productive</string>
+    <!-- Halloween greetings, shown instead of the ones above around October 31 -->
+    <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_1">युक्ती की पॅच?</string>
+    <string name="home_greeting_halloween_2">या APK मध्ये भूते नाहीत, आम्ही तपासले आहे</string>
+    <string name="home_greeting_halloween_3">भुताटकीचा हंगाम, ताजे पॅच</string>
+    <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
+    <string name="home_greeting_halloween_4">काहीतरी दुष्ट या मार्गे पॅच करते</string>
+    <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
+    <string name="home_greeting_winter_1">शुभ सुट्ट्या, ताजे पॅच</string>
+    <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
+    <string name="home_greeting_winter_2">बर्फ पडू द्या, पॅच होऊ द्या</string>
+    <string name="home_greeting_winter_3">नवीन वर्ष, नवीन पॅच</string>
+    <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
+    <string name="home_greeting_winter_4">बर्फातून पॅचिंग</string>
+    <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">नवीन वर्षाच्या शुभेच्छा!</string>
+    <string name="home_greeting_new_year_2">ताज्या पॅचसाठी मोजणी करत आहे</string>
+    <string name="home_greeting_new_year_3">नवीन वर्ष, तेच जाहिरात-मुक्त अॅप्स</string>
+    <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">जुन्या आवृत्त्या बाहेर, नवीन आत</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">सुधारणांची मुळे</string>
+    <string name="sources_search">स्रोत आणि पॅच शोधा</string>
     <string name="sources_sort_title">सुधारणा स्रोत क्रमवारी लावा</string>
     <string name="sources_sort_manual">मॅन्युअल ऑर्डर</string>
     <string name="sources_sort_manual_hint">पुन्हा क्रमवारी लावण्यासाठी स्रोतावर दाबून ठेवा</string>
@@ -124,15 +153,24 @@
     <string name="sources_sort_last_updated_description">नवीनतम स्रोत अद्यतने प्रथम</string>
     <string name="sources_sort_enabled_first">सक्षम केलेले प्रथम</string>
     <string name="sources_sort_enabled_first_description">अक्षम स्त्रोतांपूर्वी सक्रिय स्रोत दर्शवा</string>
+    <string name="sources_patches_source_disabled_hint">हा स्रोत अक्षम आहे. त्याचे पॅच संदर्भासाठी सूचीबद्ध आहेत आणि लागू केले जात नाहीत</string>
     <string name="sources_management_open_in_browser">लिंक बाहेर नेटवर उघडा</string>
     <string name="sources_management_report_issue">प्री-रिलीझ बिल्ड अजून विकासाधीन आहेत. पॅच अयशस्वी होऊ शकतात किंवा अॅप खराब करू शकतात, आणि वैशिष्ट्ये सूचना न देता बदलू शकतात.</string>
     <string name="sources_management_failed_to_open_url">लिंक उघडता आली नाही</string>
+    <string name="sources_apps">अॅप्स</string>
+    <string name="sources_apps_description">एखादे अॅप या स्रोतातून वगळण्यासाठी किंवा परत आणण्यासाठी त्यावर टॅप करा, किंवा अनेक निवडण्यासाठी दाबून ठेवा. कोणताही स्रोत आणत नसल्यास अॅप मुख्य स्क्रीनवरून निघून जातो</string>
+    <string name="sources_apps_brought">या स्रोताने आणलेले</string>
+    <string name="sources_apps_left_out">या स्रोतातून वगळलेले</string>
+    <string name="sources_apps_leave_out">वगळा</string>
+    <string name="sources_apps_leave_out_done">वगळले</string>
+    <string name="sources_apps_bring_back">परत आणा</string>
     <string name="sources_management_prerelease_toggle">प्री-रिलीझ पॅचेस</string>
     <string name="sources_management_prerelease_toggle_description">नवीन प्रायोगिक सुधारणा सर्वांच्या आधी वापरा</string>
     <string name="sources_prerelease_warning_title">सर्व युनिव्हर्सल पॅच सक्षम करायचे का?</string>
     <string name="sources_prerelease_warning_message">डाउनलोड केलेले अपडेट यापुढे उपलब्ध नाही. ते पुन्हा डाउनलोड करा.</string>
     <string name="expert_mode_prerelease_notice">हे स्रोत पूर्व-प्रकाशन पॅचवर आहे. पॅचिंग अयशस्वी होऊ शकते किंवा अनपेक्षित वर्तन होऊ शकते.</string>
     <string name="sources_management_experimental_versions_toggle">प्रायोगिक ॲप आवृत्त्या</string>
+    <string name="sources_management_experimental_versions_toggle_description">प्रायोगिक अॅप लक्ष्ये दाखवते आणि पॅच करते</string>
     <string name="sources_management_already_exists">हे मूळ आधीच जोडले गेले आहे</string>
     <string name="sources_management_invalid_url">अवैध स्रोत URL. कृपया पत्ता तपासा आणि पुन्हा प्रयत्न करा</string>
     <string name="sources_management_blocked">हे पॅच स्रोत अवरोधित केले आहे आणि ते जोडले जाऊ शकत नाही</string>
@@ -142,6 +180,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">पॅच बंडल डाउनलोड करता आले नाही. स्रोत URL चुकीचा असू शकतो किंवा फाइल अस्तित्वात नाही</string>
     <string name="sources_management_outdated_manager_badge">Morphe अद्यतनित करा</string>
     <string name="sources_management_outdated_manager_hint">हा स्रोत पॅचर %1$s साठी तयार केला आहे, परंतु Morphe %2$s मध्ये पॅचर %3$s समाविष्ट आहे. ते वापरण्यासाठी Morphe अद्यतनित करा</string>
+    <string name="sources_management_held_back_badge">क्रॅश झाले</string>
+    <string name="sources_management_held_back_hint">हा स्रोत लोड करताना Morphe क्रॅश झाला, म्हणून तो वगळला जात आहे. पुन्हा प्रयत्न करण्यासाठी तो अद्ययावत करा किंवा पुन्हा आयात करा</string>
     <string name="sources_management_source_enabled">स्रोत सक्षम केले</string>
     <string name="sources_management_source_disabled">स्रोत अक्षम केले</string>
     <string name="sources_management_source_updating">स्रोत अद्यतनित करत आहे</string>
@@ -151,17 +191,25 @@
     <string name="sources_dialog_duplicate_name_error">या नावाचे सुधारणा मूळ आधीपासून उपलब्ध आहे</string>
     <string name="sources_dialog_missing_error">हे सुधारणा मूळ अपडेट करता आले नाही</string>
     <string name="sources_dialog_add_source">सुधारणा मूळ जोडा</string>
+    <string name="sources_dialog_delete_confirm_body">हे पूर्ववत करता येणार नाही</string>
     <string name="sources_dialog_remote">बाहेरून</string>
     <string name="sources_dialog_remote_url">मुळाची लिंक</string>
+    <string name="sources_dialog_remote_url_hint">एक रिपॉझिटरी किंवा पॅच बंडल .json ची लिंक. सर्व जोडण्यासाठी एकाच वेळी अनेक पेस्ट करा</string>
+    <string name="sources_dialog_paste_no_links">क्लिपबोर्डवर कोणत्याही लिंक आढळल्या नाहीत</string>
     <string name="sources_dialog_local">याच फोनमधील</string>
+    <string name="sources_dialog_local_files">पॅच स्रोत फाइल्स निवडा</string>
     <!-- Button under the files already picked, which opens the picker again -->
+    <string name="sources_dialog_local_add_more">अधिक फाइल्स जोडा</string>
     <string name="sources_dialog_local_file_tap_hint">फाईल ब्राउझ करण्यासाठी टॅप करा</string>
     <string name="sources_dialog_local_invalid_extension">फाईलमध्ये .mpp एक्स्टेंशन असणे आवश्यक आहे</string>
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
+    <string name="sources_dialog_local_updates">%s अपडेट करते</string>
     <string name="sources_dialog_url_valid">वैध रिपॉजिटरी किंवा JSON URL</string>
     <string name="sources_dialog_url_invalid">URL GitHub/GitLab रेपॉ किंवा .json फाइलकडे निर्देशित करणे आवश्यक आहे</string>
     <string name="sources_dialog_preinstalled">पूर्व-स्थापित</string>
     <string name="sources_dialog_community">समुदाय पॅचेस</string>
+    <string name="sources_dialog_choose_apps">अॅप्स निवडा</string>
+    <string name="sources_dialog_choose_apps_description">स्रोत लोड झाल्यावर त्यातील कोणते अॅप्स ठेवायचे ते निवडा</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">तृतीय-पक्ष पॅच स्रोत</string>
     <string name="sources_dialog_community_notice_message">"समुदाय पॅच स्रोत त्यांच्या स्वतःच्या लेखकांद्वारे बनविले जातात आणि देखरेख केले जातात. Morphe तृतीय-पक्ष पॅचेसचे पुनरावलोकन किंवा सत्यापन करत नाही, आणि त्यांच्या सामग्रीसाठी किंवा ते आपल्या डिव्हाइसवर काय करतात यासाठी जबाबदार नाही.
@@ -181,12 +229,14 @@
     <string name="home_apk_availability_recommended_label">सुचवलेले</string>
     <string name="home_apk_availability_unpatched_label"> बदल न केलेले</string>
     <string name="home_apk_availability_incompatible_label">असंगत</string>
+    <string name="home_apk_availability_installed_version">या डिव्हाइसवर स्थापित: %s</string>
     <string name="home_apk_availability_yes">हो, मला APK शोधण्यात मदत करा.</string>
     <string name="home_apk_availability_no">नाही, माझ्याकडे आधीपासूनच APK आहे.</string>
     <string name="home_apk_helper_download">एका हेल्पर ॲपचा वापर करा</string>
     <string name="home_apk_helper_title">हेल्पर ॲप वापरून डाउनलोड करा</string>
     <string name="home_apk_helper_description">मॉर्फे खालील हेल्पर ॲपला मूळ APK डाउनलोड करण्यास आणि फाइल परत देण्यास सांगेल</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
+    <string name="home_apk_helper_continue">हेल्पर उघडा</string>
     <string name="home_apk_helper_warning">तुम्ही या हेल्पर ॲपवर विश्वास ठेवल्यासच पुढे जा. मॉर्फे पॅच करण्यापूर्वी जे काही प्राप्त होते त्याची पॅकेज, आवृत्ती आणि स्वाक्षरी तपासते.</string>
     <string name="home_apk_helper_warning_unverified">तुम्ही या हेल्पर ॲपवर विश्वास ठेवल्यासच पुढे जा. मॉर्फे या APKची स्वाक्षरी सत्यापित करू शकत नाही, त्यामुळे सुधारित फाइल शोधली जाणार नाही.</string>
     <string name="home_apk_helper_no_result">हेल्पर ॲपने APK परत केले नाही</string>
@@ -229,6 +279,8 @@
     <string name="home_download_instructions_step4_mount">इन्स्टॉलेशन पूर्ण झाल्यावर Morphe कडे परत वळा.</string>
     <string name="home_download_instructions_continue_to">%s वर पुढे जा</string>
     <string name="home_download_instructions_destination">डाउनलोड पेज</string>
+    <string name="home_download_instructions_copy_link">लिंक कॉपी करा</string>
+    <string name="home_download_instructions_link_copied">लिंक कॉपी केली</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">डाउनलोड केलेली APK निवडा</string>
     <string name="home_file_picker_prompt_description">तुम्ही आत्ताच डाउनलोड केलेली &lt;b&gt;%s&lt;/b&gt; APK फाईल निवडा</string>
@@ -240,15 +292,14 @@
     <string name="home_use_installed_app">इंस्टॉल केलेले ॲप वापरा</string>
     <string name="home_installed_app_picker_title">स्थापित ॲप्स</string>
     <string name="home_installed_app_picker_empty">ॲप्स आढळले नाहीत</string>
-    <string name="home_installed_app_picker_filter_all">सर्व ॲप्स</string>
     <string name="home_installed_app_picker_filter_user">केवळ वापरकर्ता ॲप्स</string>
     <string name="home_installed_app_picker_filter_system">केवळ सिस्टम ॲप्स</string>
     <string name="home_invalid_apk_unreadable">फाईल वाचण्यात अयशस्वी. \'External Storage\' बॅटरी निर्बंधीत नसल्याची खात्री करा</string>
     <string name="home_invalid_apk_not_an_apk"> निवडलेली फाइल वैध APK नाही.</string>
+    <string name="home_invalid_apk_already_patched">निवडलेले APK आधीच पॅच केलेले आहे. त्याऐवजी मूळ अॅप निवडा</string>
     <string name="home_invalid_apk_io_error">फाईल उघडण्यात अयशस्वी. कृपया पुन्हा प्रयत्न करा</string>
     <string name="home_external_apk_expert_mode_required">हे वैशिष्ट्य फक्त तज्ञ मोडमध्ये उपलब्ध आहे</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">एक्सपर्ट मोड</string>
     <string name="expert_mode_search">पॅच शोधा</string>
     <string name="expert_mode_disable_all">सर्व अक्षम करा</string>
     <string name="expert_mode_disable_all_done">सर्व पॅच अक्षम केले</string>
@@ -264,6 +315,8 @@
     <string name="expert_mode_copy_from_bundle">\u0928\u093e\u0932\u093e\u0928\u093e \u092c\u0941\u0928\u093e\u0932\u093e\u0928\u093e \u0905\u0928\u093e\u0925 \u092c\u0941\u0928\u093e\u0932\u093e\u0928\u093e \u0926\u0941\u0928\u0941\u0928\u093e</string>
     <string name="expert_mode_copy_from_bundle_no_patches">\u0928\u093e\u0932\u093e \u092a\u093e\u0939\u093e\u0928\u093e \u092c\u0941\u0928\u093e\u0932\u093e\u0928\u093e \u0905\u0928\u093e\u0925 \u092a\u093e\u0939\u093e\u0928\u093e \u0926\u0941\u0928\u0941\u0928\u093e</string>
     <string name="expert_mode_no_results">पॅच आढळले नाहीत</string>
+    <string name="expert_mode_selected_only_on">फक्त निवडलेले पॅच दाखवत आहे</string>
+    <string name="expert_mode_selected_only_off">सर्व पॅच दाखवत आहे</string>
     <string name="expert_mode_universal_patches">युनिव्हर्सल पॅच</string>
     <string name="expert_mode_new_patches">नवीन</string>
     <string name="expert_mode_options_customized">सानुकूलित</string>
@@ -305,8 +358,10 @@
     <string name="home_outdated_patches_dialog_update_and_patch">अपडेट आणि पॅच करा</string>
     <string name="home_low_disk_space_dialog_title">कमी डिस्क जागा</string>
     <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">फक्त %1$s GB मोकळी स्टोरेज उपलब्ध आहे. पॅचिंग योग्यरित्या कार्य करण्यासाठी किमान %2$s GB मोकळी जागा आवश्यक आहे</string>
     <string name="home_low_disk_space_dialog_warning">पुढे गेल्यास “फाइल सापडली नाही” त्रुटी येऊ शकतो किंवा तयार झालेली APK खराब होऊ शकते</string>
     <string name="home_simple_bundle_select_title">सुधारणा मूळ स्त्रोत निवडा</string>
+    <string name="home_simple_bundle_select_remember">या अॅपसाठी हा स्रोत नेहमी वापरा</string>
     <!-- Color picker -->
     <string name="custom_color">कस्टम रंग</string>
     <string name="hex_color">हेक्स रंग</string>
@@ -324,48 +379,41 @@
     <string name="patch_option_list_empty">मूल्य रिक्त असू शकत नाही</string>
     <string name="patch_option_required_missing">%s: आवश्यक पर्याय भरा</string>
     <!-- Badge on a patch option whose value differs from the patch's own, which resets it when tapped -->
+    <string name="patch_option_changed">बदलले</string>
     <!-- Badge on a patch option that has to be filled in before patching -->
+    <string name="patch_option_required">आवश्यक</string>
     <!-- Hint under an image patch option. "%1$s" is the width and "%2$s" the height in pixels -->
+    <string name="patch_option_recommended_size">शिफारस केलेले: %1$s×%2$s</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">अ‍ॅडॉप्टिव्ह आयकॉन तयार करा</string>
     <string name="adaptive_icon_select_image">प्रतिमा निवडा</string>
     <string name="adaptive_icon_change_image">प्रतिमा बदला</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <string name="image_load_failed">ही प्रतिमा लोड करता आली नाही</string>
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
+    <string name="adaptive_icon_launcher">लाँचर चिन्ह</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <!-- Caption under the launcher icon in its own colors -->
+    <!-- Caption under the launcher icon recolored by the system theme -->
     <string name="adaptive_icon_background_color">पार्श्वभूमी रंग</string>
     <string name="adaptive_icon_reset_transform">पोझिशन आणि स्केल रीसेट करा</string>
-    <string name="adaptive_icon_safe_zone_inner">सुरक्षित क्षेत्र (नेहमी दृश्यमान)</string>
-    <string name="adaptive_icon_safe_zone_outer">मास्क क्षेत्र (क्लिप केले जाऊ शकते)</string>
-    <string name="adaptive_icon_no_transparency_warning">प्रतिमेत कोणताही पारदर्शक पिक्सेल नाही. परिणाम चुकीचा दिसू शकतो</string>
     <string name="adaptive_icon_created_success">अ‍ॅडॉप्टिव्ह आयकॉन यशस्वीरित्या तयार केला</string>
     <string name="adaptive_icon_creation_failed">अ‍ॅडॉप्टिव्ह आयकॉन तयार करण्यात अयशस्वी</string>
-    <string name="adaptive_icon_label">अनुकूलनीय</string>
-    <string name="adaptive_icon_monochrome_label">मोनोक्रोम</string>
     <string name="adaptive_icon_guide">आयकॉन निर्मिती मार्गदर्शक</string>
     <string name="adaptive_icon_guide_png_title">पारदर्शक पार्श्वभूमीसह PNG वापरा</string>
-    <string name="adaptive_icon_guide_png_body">फोरग्राउंडमध्ये पारदर्शक पार्श्वभूमीसह PNG फाइल असणे आवश्यक आहे. साध्या रंगाची पार्श्वभूमी चुकीची दिसेल - पार्श्वभूमीचा रंग खालील रंग निवडकातून घ्यावा.</string>
     <string name="adaptive_icon_guide_safe_zones_title">सुरक्षित क्षेत्रे</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"आतील क्षेत्र (ठोस): सामग्री नेहमी सर्व लॉन्चर आकारात पूर्णपणे दृश्य असते.
-बाह्य क्षेत्र (डॅश केलेले): लॉन्चर मास्कद्वारे क्लिप केले जाऊ शकते - महत्त्वाची माहिती आतील क्षेत्रात ठेवा."</string>
     <string name="adaptive_icon_guide_notification_title">सूचना आयकॉन</string>
-    <string name="adaptive_icon_guide_notification_body">फोरग्राउंड इमेजमधून आपोआप तयार केले जाते. सूचना स्लाइडर वापरून त्याचा आकार समायोजित करा. स्टेटस बारमधील सर्व दृश्य सामग्री पांढरी दिसते.</string>
-    <string name="adaptive_icon_guide_monochrome_title">मोनोक्रोम आयकॉन</string>
-    <string name="adaptive_icon_guide_monochrome_body">ॲडॉप्टिव्ह आयकॉन ट्रांसफॉर्म वापरून फोरग्राउंड इमेजमधून आपोआप तयार केले जाते. Android 13 आणि त्यावरील आवृत्त्यांवर हे वॉलपेपर ॲक्सेंट रंगाने रंगीत दिसते.</string>
     <string name="notification_icon_preview">सूचना</string>
     <!-- Header Creator -->
     <string name="header_creator_create">कस्टम हेडर तयार करा</string>
     <string name="header_creator_light_theme">लाइट थीम हेडर</string>
     <string name="header_creator_dark_theme">डार्क थीम हेडर</string>
-    <string name="header_creator_no_image">प्रतिमा निवडलेली नाही</string>
     <string name="header_creator_success">हेडर यशस्वीरित्या तयार केले</string>
     <string name="header_creator_failed">हेडर तयार करण्यात अयशस्वी</string>
     <string name="header_creator_guide">हेडर निर्मिती मार्गदर्शक</string>
     <string name="header_creator_guide_image_title">इमेज आवश्यकता</string>
-    <string name="header_creator_guide_image_body">तुम्ही कोणतीही इमेज फाइल (PNG किंवा JPEG) वापरू शकता. सर्वोत्तम परिणामांसाठी, अंदाजे 2.7:1 Aspect Ratio असलेली वाइड-फॉर्मेट इमेज वापरा. पारदर्शक पार्श्वभूमीसह PNG फाइल्स ॲप थीममध्ये नैसर्गिकरित्या मिसळतील.</string>
     <string name="header_creator_guide_themes_title">हलके आणि गडद थीम</string>
     <string name="header_creator_guide_themes_body">जवळपास ॲप्सना हलक्या आणि गडद थीमसाठी वेगवेगळ्या इमेजची आवश्यकता असते. काही ॲप्स (उदाहरणार्थ, YouTube Music) फक्त गडद थीम वापरतात, त्यामुळे फक्त तो विभाग दर्शविला जातो.</string>
     <string name="header_creator_guide_positioning_title">स्थिती आणि स्केलिंग</string>
-    <string name="header_creator_guide_positioning_body">तुमची इमेज स्थितीत ठेवण्यासाठी आणि स्केल करण्यासाठी पूर्वावलोकनामध्ये पिंच-टू-झूम आणि ड्रॅग जेस्चर वापरा. इमेज मध्यभागी जवळ असताना स्नॅप मार्गदर्शक दिसतात. तुम्ही पूर्वावलोकनाखालील स्लाइडर देखील वापरू शकता.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">सुधारणा निवडली</string>
     <string name="batch_patch_title">बॅच पॅचिंग</string>
@@ -383,12 +431,15 @@
     <string name="batch_patch_source_file">जोडलेली फाइल</string>
     <string name="batch_patch_source_unavailable">APK तयार होऊ शकले नाही.</string>
     <string name="batch_patch_force_version">तरीही पॅच करा</string>
+    <string name="batch_patch_force_version_done">तरीही रांगेत टाकले, अॅप बिघडू शकतो</string>
+    <string name="batch_patch_accept_signature_done">तरीही रांगेत टाकले, APK सत्यापित नाही</string>
     <string name="batch_patch_edit_patches">पॅच निवडा</string>
     <string name="batch_patch_state_no_apk">APK नाही</string>
     <string name="batch_patch_state_no_patches">पॅच नाहीत</string>
     <string name="batch_patch_policy_install">पूर्ण झाल्यावर इंस्टॉल करा</string>
     <string name="batch_patch_policy_install_description">क्यू समाप्त झाल्यावर लगेच प्रत्येक पॅच केलेले ॲप इंस्टॉल करते. बंद केल्यास APK नंतरसाठी जतन केले जातात.</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
+    <string name="batch_patch_start">सुरू करा</string>
     <string name="batch_patch_stop_title">बॅच पॅचिंग थांबवायचे?</string>
     <string name="batch_patch_stop_description">सध्या पॅच केलेले ॲप आणि रांगेत असलेली सर्व काही रद्द केली जाईल.</string>
     <!-- Label of a footer button beside "Done". Keep it short, a longer one moves the buttons onto two rows -->
@@ -424,9 +475,28 @@
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Store वर स्थापित करा</string>
     <string name="home_app_info_patch_update_available">पॅच अपडेट उपलब्ध आहे</string>
     <string name="home_app_info_patch_update_available_description">पॅचची नवीन आवृत्ती उपलब्ध आहे. नवीनतम सुधारणा आणि निराकरणे मिळवण्यासाठी तुमचे ॲप पुन्हा पॅच करा</string>
+    <string name="home_app_info_app_update_available">अॅप अपडेट उपलब्ध आहे</string>
+    <string name="home_app_info_app_update_available_description">पॅच स्रोत या अॅपच्या नवीन आवृत्तीस समर्थन देतात. त्या आवृत्तीवर जाण्यासाठी ते पुन्हा पॅच करा</string>
+    <string name="home_app_info_newest_supported_version">नवीनतम समर्थित</string>
+    <string name="home_app_info_version_move">स्थापित %1$s, नवीनतम समर्थित %2$s</string>
     <string name="home_app_info_app_deleted_warning">ॲप अनइंस्टॉल केले होते</string>
     <string name="home_app_info_app_deleted_description">हे ॲप Morphe बाहेर अनइंस्टॉल केले गेले होते. कार्यक्षमता पुनर्संचयित करण्यासाठी ते पुन्हा पॅच करा</string>
     <string name="home_app_info_not_patched_description">या अॅपची अनपॅच केलेली आवृत्ती स्थापित आहे. Morphe कडे अजूनही त्याचा मागील पॅच रेकॉर्ड आहे.</string>
+    <string name="app_links_title">समर्थित वेब लिंक</string>
+    <string name="app_links_description">अँड्रॉइड 12+ वर, समर्थित डोमेनच्या लिंक मंजूर न केल्यास डीफॉल्टनुसार तुमच्या ब्राउझरमध्ये उघडतात</string>
+    <string name="app_links_unverified_banner_title">वेब लिंक सत्यापित नाहीत</string>
+    <string name="app_links_unverified_banner_description">समर्थित वेब लिंक सध्या या अॅपऐवजी तुमच्या ब्राउझरमध्ये उघडतात</string>
+    <string name="app_links_enable_auto">आपोआप सक्षम करा</string>
+    <string name="app_links_enable_auto_in_progress">लिंक सक्षम करत आहे…</string>
+    <string name="app_links_open_settings">लिंक सेटिंग्ज उघडा</string>
+    <string name="app_links_repair_success">अॅप लिंक यशस्वीरित्या सक्षम केल्या</string>
+    <string name="app_links_repair_failed">अॅप लिंक आपोआप सक्षम करण्यात अपयश</string>
+    <string name="app_links_all_verified">सर्व समर्थित लिंक या अॅपमध्ये उघडण्यासाठी कॉन्फिगर केल्या आहेत</string>
+    <string name="app_links_fix">लिंक दुरुस्त करा</string>
+    <string name="configure">कॉन्फिगर करा</string>
+    <string name="patcher_rename_title">हे एक क्लोन स्थापित करेल</string>
+    <string name="patcher_rename_description">पॅचेसनी हे अॅप त्यांच्या स्वतःच्या पॅकेजच्या नावाने तयार केले आहे, म्हणून ते स्थापित केल्याने &lt;b&gt;%s&lt;/b&gt; अद्ययावत करण्याऐवजी त्याच्या शेजारी एक क्लोन जोडले जाते</string>
+    <string name="patcher_rename_result_package">स्थापित केले जाईल</string>
     <string name="patcher_rename_replaces">त्या नावाखाली एक अॅप आधीच स्थापित आहे आणि तो बदलला जाईल</string>
     <string name="home_app_info_apk_size">APK आकार</string>
     <string name="home_app_info_cpu_arch">CPU आर्किटेक्चर</string>
@@ -444,16 +514,38 @@
     <string name="patcher_error_copied">एरर क्लिपबोर्डवर कॉपी केला गेला</string>
     <string name="patcher_error_log">एरर लॉग</string>
     <string name="patcher_error_technical">तांत्रिक तपशील</string>
+    <string name="patcher_error_dialog_diagnostics">निदान</string>
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">पॅचिंग सुरू झाले</string>
+    <string name="patcher_card_succeeded">पॅचिंग यशस्वी झाले</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">अॅप</string>
+    <string name="patcher_field_package">पॅकेज</string>
+    <string name="patcher_field_source">स्रोत</string>
+    <string name="patcher_field_split">स्प्लिट APK</string>
+    <string name="patcher_field_manager">व्यवस्थापक</string>
+    <string name="patcher_field_runtime">रनटाइम</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">लायब्ररी</string>
+    <string name="patcher_field_android">अँड्रॉइड</string>
+    <string name="patcher_field_device">डिव्हाइस</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">मेमरी</string>
+    <string name="patcher_field_storage">स्टोरेज</string>
     <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">आउटपुट आकार</string>
     <!-- How long patching took -->
+    <string name="patcher_field_time">वेळ</string>
     <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">सरासरी मेमरी</string>
+    <string name="patcher_field_memory_max">कमाल मेमरी</string>
     <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">स्टोरेज I/O शिखर</string>
+    <string name="patcher_field_value_unknown">अज्ञात</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">वगळल्या</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">ठेवल्या</string>
     <string name="patcher_tab_logs">पॅचर लॉग</string>
     <string name="patcher_tab_game">गेम</string>
     <string name="patcher_logs_waiting">लॉग आउटपुटची प्रतीक्षा करत आहे…</string>
@@ -465,6 +557,8 @@
     <string name="patcher_complete_title">पॅचिंग पूर्ण झाले! ✨</string>
     <string name="patcher_failed_title">अरेरे! काहीतरी गडबड झाली</string>
     <string name="patcher_failed_dialog_title">पॅचिंग अयशस्वी झाले</string>
+    <string name="patcher_error_details">त्रुटी तपशील</string>
+    <string name="patcher_change_patches">पॅच बदला</string>
     <string name="patcher_unknown_error">अज्ञात एरर आली आहे</string>
     <string name="patcher_split_step_extracting">स्प्लिट APK काढत आहे</string>
     <string name="patcher_split_step_merging">%s विलीन करत आहे</string>
@@ -484,6 +578,7 @@
     <string name="patcher_back_to_game_hint">तुमच्या गेमवर परत जाण्यासाठी %1$s वर टॅप करा</string>
     <string name="patcher_storage_permission_dialog_title">स्टोरेज पाथ ॲक्सेस करू शकत नाही</string>
     <string name="patcher_incompatible_patcher_title">अद्यतन आवश्यक आहे</string>
+    <string name="patcher_incompatible_patcher_description">स्रोत &lt;b&gt;%1$s&lt;/b&gt; ला पॅचर &lt;b&gt;%2$s&lt;/b&gt; किंवा त्याहून नवीन आवश्यक आहे. ते वापरण्यासाठी Morphe अपडेट करा</string>
     <string name="patcher_storage_permission_description_api30">एक किंवा अधिक पॅच पर्याय अशा मार्गांकडे निर्देशित करतात जे Morphe वाचू शकत नाही. स्टोरेज प्रवेश द्या आणि नंतर पॅचिंग आपोआप सुरू होईल</string>
     <string name="patcher_storage_permission_description_legacy">एक किंवा अधिक पॅच पर्याय अशा मार्गांकडे निर्देशित करतात जे ॲक्सेस केले जाऊ शकत नाहीत. पॅच पर्यायामधील मार्ग अद्यतनित करा आणि पुन्हा प्रयत्न करा</string>
     <string name="patcher_storage_permission_grant">स्टोरेज परवानग्या द्या</string>
@@ -491,13 +586,19 @@
     <string name="patcher_storage_permission_open_settings">स्टोरेज सेटिंग्ज उघडा</string>
     <string name="patcher_storage_badge_denied">परवानगी नाकारली</string>
     <string name="patcher_storage_badge_missing">सापडले नाही</string>
+    <string name="batch_patch_option_paths_skipped">पॅच पर्याय फाइल्स गहाळ आहेत आणि वगळल्या जातील: %1$s</string>
+    <string name="patcher_missing_patches_title">काही पॅच नाहीसे झाले आहेत</string>
+    <string name="patcher_missing_patches_description">या अॅपसाठीच्या जतन केलेल्या निवडीत असे पॅच आहेत जे कोणताही सक्षम स्रोत आता देत नाही. सुरू ठेवल्यास अॅप त्यांच्याशिवाय पॅच होईल</string>
+    <string name="patcher_missing_patches_label">आता देऊ केले जात नाही</string>
+    <string name="patcher_option_paths_gone_title">पॅच पर्याय फाइल्स गहाळ आहेत</string>
+    <string name="patcher_option_paths_gone_description">एक किंवा अधिक पॅच पर्याय अशा फाइल्सकडे निर्देश करतात ज्या आता तिथे नाहीत. त्यांच्याशिवाय पॅच करण्यासाठी पथ काढून टाका, किंवा फाइल्स परत ठेवून पुन्हा प्रयत्न करा</string>
+    <string name="patcher_option_paths_clear">पथ काढून टाका आणि सुरू ठेवा</string>
     <string name="patcher_storage_permission_hint">टीप: फाइल्स /Android/data/app.morphe.manager/files/ मध्ये हलवा - अतिरिक्त परवानग्यांची आवश्यकता नाही</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">तयार करत आहे</string>
     <string name="patcher_step_load_patches">पॅच लोड करत आहे</string>
     <string name="patcher_step_prepare_split_apk">स्प्लिट APK मर्ज करत आहे</string>
     <string name="patcher_step_unpack">APK फाइल वाचा</string>
-    <string name="patcher_step_group_patching">पॅचिंग</string>
     <string name="patcher_step_group_saving">जतन करत आहे</string>
     <string name="patcher_step_write_patched">पॅच केलेला APK फाइल लिहित आहे</string>
     <string name="patcher_step_sign_apk">पॅच केलेला APK फाइल साइन करत आहे</string>
@@ -522,6 +623,7 @@
     <string name="patcher_message_4">डिजिटल जादू तयार करत आहे… ☕</string>
     <string name="patcher_message_5">कॉफी ब्रेकची शिफारस केली जाते… ☕</string>
     <string name="patcher_message_6">बाहेर पहा, हवामान छान आहे… 🌤️</string>
+    <string name="patcher_message_7">1 आणि 0 समायोजित करत आहे… 🤖</string>
     <string name="patcher_message_8">डिजिटल स्पॅगेटी सोडवत आहे… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="patcher_message_9">नॉन-पॅच केलेल्या ॲपमधील बग फिक्स करत आहे… 🪲</string>
@@ -544,6 +646,7 @@
     <string name="patching_app">ॲप पॅचिंग</string>
     <string name="memory_usage">मेमरी वापर</string>
     <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%2$s MB पैकी %1$s</string>
     <string name="cpu_usage">CPU वापर</string>
     <string name="storage_io_usage">स्टोरेज इनपुट/आउटपुट</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -576,6 +679,8 @@
     <string name="mini_game_try_again">पुन्हा प्रयत्न करा</string>
     <string name="mini_game_paused">थांबवले</string>
     <string name="mini_game_resume">सुरू ठेवा</string>
+    <string name="mini_game_restart">पुन्हा सुरू करा</string>
+    <string name="mini_game_change">दुसरा गेम निवडा</string>
     <string name="mini_game_2048_picker_subtitle">जुळवण्यासाठी टाइल्स सरकवा</string>
     <string name="mini_game_flappy_picker_subtitle">पाईपमधून उडण्यासाठी टॅप करा</string>
     <string name="mini_game_flappy_tap_to_start">उडण्यासाठी टॅप करा</string>
@@ -583,12 +688,19 @@
     <string name="mini_game_snake_swipe_to_start">सुरू करण्यासाठी स्वाइप करा</string>
     <string name="mini_game_dino_picker_subtitle">कॅक्टसवरून उडी मारण्यासाठी टॅप करा</string>
     <string name="mini_game_dino_tap_to_start">धावण्यासाठी टॅप करा</string>
+    <string name="mini_game_blocks_picker_subtitle">आकार जुळवा, रेषा साफ करा</string>
+    <string name="mini_game_blocks_tap_to_start">फिरवण्यासाठी टॅप करा, हलवण्यासाठी स्वाइप करा, खाली सोडण्यासाठी स्वाइप करा</string>
+    <string name="mini_game_bricks_picker_subtitle">चेंडू उडवा, भिंत साफ करा</string>
+    <string name="mini_game_bricks_tap_to_start">लक्ष्य ठेवण्यासाठी ड्रॅग करा, सोडण्यासाठी टॅप करा</string>
+    <string name="mini_game_miner_picker_subtitle">उघडण्यासाठी टॅप करा, फ्लॅग करण्यासाठी दाबून ठेवा</string>
+    <string name="mini_game_pairs_picker_subtitle">कार्डे उलटवा, जुळणी शोधा</string>
     <!-- Settings -->
     <string name="appearance">स्वरूप</string>
     <string name="advanced">प्रगत</string>
     <string name="system">सिस्टम</string>
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background">वर्तुळ</string>
+    <string name="settings_appearance_background_description">अॅपच्या स्क्रीन्सच्या मागे चालणारे अॅनिमेशन</string>
     <string name="settings_appearance_background_circles">वलय</string>
     <string name="settings_appearance_background_rings">अंतर</string>
     <string name="settings_appearance_background_mesh">मेश</string>
@@ -597,6 +709,9 @@
     <string name="settings_appearance_background_snow">काहीही नाही</string>
     <string name="settings_appearance_background_grid">ग्रीड</string>
     <string name="settings_appearance_background_particles">कण</string>
+    <string name="settings_appearance_background_lava">लावा लॅम्प</string>
+    <string name="settings_appearance_background_halloween">हॅलोविन</string>
+    <string name="settings_appearance_background_fireworks">फटाके</string>
     <string name="settings_appearance_background_none">थीम</string>
     <string name="settings_appearance_background_random"> randomly </string>
     <string name="settings_appearance_background_random_interval_launch"> चालू केल्यावर </string>
@@ -604,6 +719,10 @@
     <string name="settings_appearance_background_random_interval_3days">प्रत्येक 3 दिवसांनी</string>
     <string name="settings_appearance_parallax_effect"> parallex प्रभाव</string>
     <string name="settings_appearance_parallax_effect_description">डिव्हाइस झुकवताना पार्श्वभूमी सहजपणे सरकते</string>
+    <string name="settings_appearance_seasonal_themes">हंगामी थीम</string>
+    <string name="settings_appearance_seasonal_themes_description">सुट्टीच्या काळात सणासुदीच्या पार्श्वभूमी आणि शुभेच्छा</string>
+    <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">हंगामी थीम चालू असताना %1$s पार्श्वभूमी %2$s पर्यंत चालू असते</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">सिस्टम</string>
     <string name="settings_appearance_theme_mode">थीम मोड</string>
@@ -617,6 +736,10 @@
     <string name="settings_appearance_accent_color">ॲप भाषा</string>
     <string name="settings_appearance_pure_black">शुद्ध काळा</string>
     <string name="settings_appearance_pure_black_description">सत्य काळ्या रंगाचे बॅकग्राउंड वापरते</string>
+    <string name="settings_appearance_color_accents">अॅप आणि स्रोत रंग</string>
+    <string name="settings_appearance_color_accents_description">अॅक्सेंट रंगाऐवजी प्रत्येक अॅप आणि स्रोताचा स्वतःचा रंग वापरते</string>
+    <string name="settings_appearance_outlines">बाह्यरेखा</string>
+    <string name="settings_appearance_outlines_description">कार्डे, पॅनेल्स आणि बटणांभोवती पातळ बाह्यरेखा काढते</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_language_and_display">भाषा आणि प्रदर्शन</string>
     <string name="settings_appearance_app_language">वर्तमान भाषा</string>
@@ -635,6 +758,9 @@
     <string name="settings_appearance_greeting_phrases">शुभेच्छा संदेश</string>
     <string name="settings_appearance_greeting_phrases_subtitle">मुख्य स्क्रीनवर शुभेच्छा संदेश दर्शवा</string>
     <string name="settings_appearance_app_grouping">ॲप समूहीकरण</string>
+    <string name="settings_appearance_app_grouping_description">अॅप्स स्रोत किंवा श्रेणीनुसार गट करण्यासाठी स्विचर दाखवा</string>
+    <string name="settings_appearance_repatch_notice">री-पॅच सूचना</string>
+    <string name="settings_appearance_repatch_notice_description">पॅच केलेले अॅप्स पुन्हा पॅच करता येतात तेव्हा बॅनर दाखवा</string>
     <string name="settings_appearance_sort_button">क्रमवारी आणि फिल्टर बटण</string>
     <string name="settings_appearance_sort_button_description">होम स्क्रीनवर क्रमवारी आणि फिल्टर बटण दाखवा</string>
     <string name="settings_appearance_app_card_colors">ॲप कार्ड रंग</string>
@@ -654,12 +780,28 @@
     <string name="settings_appearance_app_card_colors_bundle_description">येथे प्रत्येक ॲपचा स्वतःचा रंग वापरा, जो आपोआप फिट होण्यासाठी शेड केलेला असेल</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">ॲप आयकॉन</string>
+    <string name="settings_appearance_app_icon_selector_description">तुमच्या होम स्क्रीनवर आणि अॅप ड्रॉवरमध्ये Morphe कसे दिसते</string>
     <string name="settings_appearance_app_icon_default">डिफॉल्ट</string>
     <string name="settings_appearance_app_icon_light_2">आकाश</string>
     <string name="settings_appearance_app_icon_light_3">सूर्यास्त</string>
-    <string name="settings_appearance_app_icon_dark_1">समुद्र</string>
+    <string name="settings_appearance_app_icon_light_4">लॅव्हेंडर</string>
+    <string name="settings_appearance_app_icon_light_5">ग्लेशियर</string>
+    <string name="settings_appearance_app_icon_light_6">मिस्ट</string>
+    <string name="settings_appearance_app_icon_light_7">वाळू</string>
+    <string name="settings_appearance_app_icon_dark_1">टील</string>
     <string name="settings_appearance_app_icon_dark_2">शून्य</string>
-    <string name="settings_appearance_app_icon_dark_3">इंडिगो</string>
+    <string name="settings_appearance_app_icon_dark_3">प्लम</string>
+    <string name="settings_appearance_app_icon_dark_4">मिडनाईट</string>
+    <string name="settings_appearance_app_icon_dark_5">स्लेट</string>
+    <string name="settings_appearance_app_icon_accent_1">ऑरोरा</string>
+    <string name="settings_appearance_app_icon_accent_2">शाई</string>
+    <string name="settings_appearance_app_icon_accent_3">कागद</string>
+    <string name="settings_appearance_app_icon_accent_4">संध्याकाळ</string>
+    <string name="settings_appearance_app_icon_background">पार्श्वभूमी</string>
+    <string name="settings_appearance_app_icon_mark">लोगो</string>
+    <string name="settings_appearance_app_icon_mark_color">रंग</string>
+    <string name="settings_appearance_app_icon_mark_white">पांढरा</string>
+    <string name="settings_appearance_app_icon_mark_black">काळा</string>
     <string name="settings_appearance_app_icon_change_dialog_title">ॲप आयकॉन बदला?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">&lt;b&gt;%s&lt;/b&gt; वर बदला आणि रीस्टार्ट करा?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -680,6 +822,8 @@
     <string name="settings_advanced_updates_background_notifications">पार्श्वभूमी अद्यतन सूचना</string>
     <string name="settings_advanced_updates_background_notifications_description">अद्यतने उपलब्ध झाल्यावर पार्श्वभूमीमध्ये वेळोवेळी तपासणी करा आणि सूचित करा</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">ॲप बंद असतानाही नवीन रिलीझसाठी पुश सूचना</string>
+    <string name="settings_system_notifications_categories">सूचना श्रेणी</string>
+    <string name="settings_system_notifications_categories_description">कोणते अपडेट्स तुम्हाला सूचित करतात ते सिस्टम सेटिंग्जमध्ये निवडा</string>
     <string name="settings_advanced_update_interval">तपासणी वारंवारता</string>
     <string name="settings_advanced_update_interval_dialog_title">अद्यतनांसाठी तपासा</string>
     <string name="settings_advanced_update_interval_hourly">दर तासाला एकदा</string>
@@ -689,19 +833,22 @@
     <string name="settings_advanced_update_interval_chip_subtitle">पार्श्वभूमी तपासणी वारंवारता</string>
     <string name="settings_advanced_update_interval_battery_warning">काही उपकरणांवर पार्श्वभूमी तपासणी विश्वसनीयपणे कार्य करू शकत नाही. Xiaomi, Huawei, Samsung आणि OnePlus सारख्या उत्पादकांकडून बॅटरी वाचवण्यासाठी पार्श्वभूमी प्रक्रियांवर जोरदार निर्बंध लादले जातात</string>
     <string name="settings_advanced_external_batch_patch">बाह्य ट्रिगरला अनुमती द्या</string>
+    <string name="settings_advanced_external_batch_patch_description">ऑटोमेशन अॅप्सना इंटेंटद्वारे बॅच पॅचिंग सुरू करू देते</string>
     <string name="external_batch_patch_title">बॅच पॅचिंग सुरू करायची?</string>
     <string name="external_batch_patch_description">%s ला ॲप्स पॅच आणि इंस्टॉल करण्यासाठी Morphe इच्छित आहे.</string>
     <string name="external_batch_patch_trust_caller">या ॲपला नेहमी अनुमती द्या</string>
     <string name="external_batch_patch_unknown_caller">अज्ञात ॲप</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Morphe अपडेट उपलब्ध आहे</string>
     <string name="notification_bundle_update_title">नवीन पॅच उपलब्ध आहेत</string>
     <string name="notification_update_text">Version %s डाउनलोडसाठी तयार आहे</string>
     <string name="notification_bundle_update_text_unversioned">Morphe उघडण्यासाठी टॅप करा आणि अपडेट करा</string>
     <string name="notification_permission_dialog_title">सूचनांना परवानगी द्या</string>
     <string name="notification_permission_dialog_description">Morphe ला अपडेट उपलब्ध असताना तुम्हाला सूचित करण्यासाठी सूचना परवानगीची आवश्यकता आहे</string>
     <string name="notification_post_patch_dialog_title">अद्यतने उपलब्ध झाल्यावर तुम्हाला सूचित केले जाऊ इच्छिते?</string>
-    <string name="notification_channel_patcher">पॅचिंग</string>
+    <string name="notification_channel_manager_updates">Morphe अपडेट्स</string>
+    <string name="notification_channel_manager_updates_description">नवीन Morphe रिलीझबद्दल सूचना</string>
+    <string name="notification_channel_patch_updates">पॅच अपडेट्स</string>
+    <string name="notification_channel_patch_updates_description">नवीन पॅच रिलीझबद्दल सूचना</string>
     <string name="notification_channel_patcher_description">Morphe पार्श्वभूमीमध्ये ॲप पॅच करत असताना दर्शविले जाते</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">तज्ञ सेटिंग्ज</string>
@@ -716,7 +863,10 @@
     <string name="settings_advanced_github_pat_configured">टोकन कॉन्फिगर केले</string>
     <string name="settings_advanced_github_pat_how_to_get">टोकन कसे मिळवायचे</string>
     <!-- "%s" is "GitHub Personal Access Token", kept in English because GitHub has no localized UI -->
+    <string name="settings_advanced_github_pat_dialog_title">%s सेट करा</string>
     <!-- "%3$s" is "GitHub Personal Access Token", "%2$s" is the GitHub scope name and "%1$s" is the GitHub website. "PAT" is its abbreviation, keep it in English -->
+    <string name="settings_advanced_github_pat_dialog_description">"पुल रिक्वेस्ट्स बाह्य स्रोत म्हणून जोडता यावेत म्हणून %3$s सेट करा. %2$s स्कोप असलेले PAT तयार करा
+%1$s वर"</string>
     <string name="settings_advanced_github_pat_export_include_label">सेटिंग्ज एक्सपोर्टमध्ये समाविष्ट करा</string>
     <!-- "PAT" is a GitHub Personal Access Token, keep it in English because GitHub has no localized UI -->
     <string name="settings_advanced_github_pat_export_include_supporting">निर्यात केलेल्या Morphe सेटिंग्जमध्ये हे PAT जोडते</string>
@@ -736,6 +886,10 @@
     <string name="settings_advanced_patch_options_custom_branding_description">ॲपचे प्रदर्शन नाव बदलतो</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">ॲपचे नाव</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">कस्टम नाव एंटर करा</string>
+    <string name="settings_advanced_patch_options_path_gone">हा फोल्डर आता वाचता येत नाही. तो पुन्हा निवडा किंवा साफ करा, अन्यथा पॅचिंग थांबेल आणि त्याबद्दल विचारेल</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon">अॅप चिन्ह</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">अॅप ज्या चिन्हासह पॅच केला जातो. हे असे ठिकाणी देखील वापरले जाते जेथे अॅप नंतर ते बदलू शकत नाही, जसे की Android Auto आणि सिस्टम सेटिंग्जमधील अॅप यादी</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">सानुकूल अॅप चिन्हासाठी चिन्ह प्रतिमा असलेला फोल्डर आवश्यक आहे</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">कस्टम आयकॉन</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"कस्टम आयकॉन म्हणून वापरण्यासाठी प्रतिमा असलेली फोल्डर.
 
@@ -820,6 +974,8 @@ morphe_header_custom_dark.png
     <string name="installer_action_open_shizuku">Shizuku उघडा</string>
     <string name="installer_hint_generic">स्थापना अयशस्वी झाली. पुन्हा प्रयत्न करा किंवा दुसरा इंस्टॉलर स्विच करा</string>
     <string name="installer_hint_conflict">या पॅकेज नावाचे दुसरे ॲप आधीपासून स्थापित केलेले आहे. पुढे जाण्यापूर्वी ते अनइंस्टॉल करा</string>
+    <string name="installer_confirm_notification_title">स्थापनेची पुष्टी करा</string>
+    <string name="installer_confirm_notification_text">पॅच केलेले अॅप स्थापित करणे पूर्ण करण्यासाठी टॅप करा</string>
     <string name="installer_external_launched">%s उघडत आहे…</string>
     <string name="installer_external_timeout">%s ने इंस्टॉलेशनची पुष्टी केली नाही. कृपया इतर ॲप तपासा आणि पुन्हा प्रयत्न करा</string>
     <string name="installer_external_success">%s ने यशस्वी इंस्टॉलेशनची नोंद केली</string>
@@ -836,6 +992,7 @@ morphe_header_custom_dark.png
     <string name="settings_prompt_installer_on_install">इंस्टॉलर निवड प्रॉम्प्ट</string>
     <string name="settings_prompt_installer_on_install_description">पॅच केलेले ॲप इंस्टॉल करताना प्रत्येक वेळी इंस्टॉलर निवड संवाद दर्शवितो</string>
     <string name="settings_auto_install_with_shizuku">पॅचिंग केल्यानंतर स्वयंचलितपणे स्थापित करा</string>
+    <string name="settings_auto_install_with_shizuku_description">पॅचिंग पूर्ण होताच पॅच केलेले APK स्थापित करते</string>
     <string name="settings_auto_uninstall_with_shizuku">संघर्ष झाल्यास ऑटो-अनइंस्टॉल करा</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Shizuku सह ऑटो-इंस्टॉल करताना, Android ने सिग्नेचर संघर्ष नोंदवल्यास, विद्यमान ॲप प्रथम अनइंस्टॉल करा. यामुळे ॲप डेटा काढला जाऊ शकतो.</string>
     <string name="settings_auto_uninstall_warning_title">ऑटो-अनइंस्टॉल सक्षम करायचे?</string>
@@ -872,7 +1029,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_memory_limit_description">उच्च मर्यादा सक्षम उपकरणांवर पॅचिंगला गती देते</string>
     <string name="settings_system_process_runtime_enable">प्रक्रिया रनटाइम सक्षम करा</string>
     <string name="settings_system_memory_limit_subtitle">पॅचिंगसाठी उपलब्ध मेमरी</string>
+    <string name="settings_system_process_runtime_heap_limit_ignored">या डिव्हाइसने शेवटच्या वेळी मेमरी मर्यादेकडे दुर्लक्ष केले, त्यामुळे पॅचिंग Morphe मध्ये चालवण्याकडे परत जाऊ शकते</string>
     <string name="settings_system_memory_limit_warning">कमी मेमरी मर्यादा मोठ्या ॲप्सला पॅच करताना अपयश आणू शकते</string>
+    <string name="settings_system_memory_limit_high_warning">उच्च मेमरी मर्यादा काही डिव्हाइसेसवर पॅचिंग खूप मंद करू शकते. कमी मर्यादांवर पॅचिंग सतत अपयशी ठरत असेल तरच ती वाढवा</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB मर्यादा</string>
     <string name="settings_system_process_runtime_disabled_description">क्लिक करून कॉन्फिगर करा</string>
     <string name="settings_system_process_runtime_description_not_available">या वैशिष्ट्यासाठी Android 11 किंवा त्यापेक्षा नवीन आवश्यक आहे</string>
@@ -891,6 +1050,20 @@ morphe_header_custom_dark.png
     <string name="settings_system_notifications_ringtone_picker_title">टोन निवडा</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">आयात आणि निर्यात</string>
+    <string name="settings_system_signing_key">स्वाक्षरी की</string>
+    <string name="settings_system_signing_key_description">तुमच्या पॅच केलेल्या अॅप्सवर स्वाक्षरी करण्यासाठी वापरल्या जाणाऱ्या कीचा बॅकअप घेते आणि ती पुनर्संचयित करते</string>
+    <string name="settings_system_signing_key_dialog_description">Morphe पॅच करत असलेल्या प्रत्येक अॅपवर या कीने स्वाक्षरी केली जाते. एक प्रत ठेवा: त्याशिवाय, पॅच केलेले अॅप्स अनइंस्टॉल केल्याशिवाय केवळ अपडेट करता येतात</string>
+    <string name="settings_system_signing_key_missing">Morphe तुमच्या पहिल्या पॅचसह एक तयार करते</string>
+    <string name="settings_system_signing_key_created">%s रोजी तयार केली</string>
+    <string name="settings_system_signing_key_fingerprint">SHA-256 फिंगरप्रिंट</string>
+    <string name="settings_system_backup_appearance_description">थीम, रंग आणि भाषा</string>
+    <string name="settings_system_backup_home_description">गट, लपवलेले अॅप्स, क्रमवारी आणि टॉगल</string>
+    <string name="settings_system_backup_patching">पॅचिंग आणि स्थापना</string>
+    <string name="settings_system_backup_patching_description">इंस्टॉलर, पॅचर आणि जतन केलेले APK</string>
+    <string name="settings_system_backup_updates_description">प्री-रिलीझ आणि अपडेट तपासण्या</string>
+    <string name="settings_system_backup_sources_description">सानुकूल स्रोत आणि GitHub टोकन</string>
+    <string name="settings_system_backup_patch_selections_description">प्रत्येक अॅपसाठी निवडलेले पॅच</string>
+    <string name="settings_system_backup_signing_key_note">स्वाक्षरी की स्वतंत्रपणे बॅकअप केली जाते</string>
     <string name="settings_system_import_keystore_dialog_title">कीस्टोर क्रेडेन्शियल्स एंटर करा</string>
     <string name="settings_system_import_keystore_dialog_description">कीस्टोअर क्रेडेन्शियल्स प्रविष्ट करण्याची आवश्यकता असेल</string>
     <string name="settings_system_import_keystore_dialog_alias_field">वापरकर्तानाव (Alias)</string>
@@ -917,6 +1090,7 @@ morphe_header_custom_dark.png
     <string name="import_mode_merge_description">बॅकअपमधील गहाळ आयटम जोडा. अस्तित्वात असलेले आयटम जैसे थे ठेवले जातील</string>
     <string name="settings_system_export_manager_settings_fail">Morphe सेटिंग्ज निर्यात करण्यात अयशस्वी: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe सेटिंग्ज निर्यात केली</string>
+    <string name="settings_system_export_debug_logs">डीबग लॉग निर्यात करा</string>
     <string name="settings_system_export_debug_logs_description">समस्यानिवारणासाठी सिस्टम लॉग जतन करते</string>
     <string name="settings_system_export_debug_logs_export_read_failed">लॉग वाचण्यात अयशस्वी (एक्झिट कोड %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">लॉग एक्सपोर्ट करण्यात अयशस्वी</string>
@@ -969,6 +1143,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_empty">मूळ APK साठवले नाहीत</string>
     <string name="settings_system_original_apks_deleted">मूळ APK यशस्वीरित्या डिलीट केले</string>
     <string name="settings_system_original_apks_delete_title">मूळ APK डिलीट करायचे?</string>
+    <string name="settings_system_original_apks_delete_notice">नवीन APK न देता तुम्ही पुन्हा पॅच करू शकणार नाही</string>
     <string name="settings_system_original_apks_delete_all_title">सर्व मूळ APKs हटवायचे?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">पॅच निवड</string>
@@ -992,6 +1167,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_no_patches_or_options">कोणतेही पॅच किंवा पर्याय जतन केलेले नाहीत</string>
     <!-- Copy selection from another bundle -->
     <string name="copy_selection_title">\u0928\u093e\u0932\u093e \u0926\u0941\u0928\u0941\u0928\u093e \u0928\u093e\u0932\u093e…</string>
+    <string name="copy_selection_confirm_with_count">कॉपी करा %s</string>
     <string name="copy_selection_empty">\u0928\u093e\u0932\u093e \u092c\u0941\u0928\u093e\u0932\u093e\u0928\u093e \u0926\u0941\u0928\u0941\u0928\u093e \u0926\u0941\u0928\u0941\u0928\u093e \u0928\u093e\u0932\u093e \u0926\u094d\u0926\u0947 \u0926\u0941\u0928\u0941\u0928\u093e</string>
     <string name="copy_selection_available_format">%1$s पैकी %2$s उपलब्ध</string>
     <string name="copy_selection_same_source">समान स्रोत</string>
@@ -1000,12 +1176,18 @@ morphe_header_custom_dark.png
     <string name="settings_system_custom_file_picker_description">सिस्टम डिफॉल्ट ऐवजी मोर्फच्या बिल्ट-इन फाइल पिकरने स्टोरेज ब्राउझ करा</string>
     <!-- Settings - System Tab - APK download helper -->
     <string name="settings_system_apk_download_helper">APK डाउनलोड हेल्पर</string>
+    <string name="settings_system_apk_download_helper_trusted_count">विश्वसनीय: %2$d पैकी %1$d</string>
+    <string name="settings_system_apk_download_helper_dialog_description">हेल्पर अॅप्स तुमच्यासाठी मूळ APK डाउनलोड करू शकतात. तुम्ही येथे ज्यांना विश्वास ठेवता फक्त तेच डाउनलोड सूचनांमध्ये देऊ केले जातात</string>
+    <string name="settings_system_apk_download_helper_warning">APK हेल्पर अॅपकडून येतो, म्हणून फक्त ओळखीच्या अॅप्सवर विश्वास ठेवा. Morphe पॅचिंग करण्यापूर्वी प्रत्येक फाइलचे पॅकेज, आवृत्ती आणि स्वाक्षरी तपासते</string>
+    <string name="settings_system_apk_download_helper_installed_by">%s द्वारे स्थापित</string>
+    <string name="settings_system_apk_download_helper_installed_by_unknown">इंस्टॉलर अज्ञात</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">येथे कोणतीही फाईल नाही</string>
     <string name="file_picker_read_error">या निर्देशिकेस वाचू शकत नाही</string>
     <string name="file_picker_internal_storage"> अंतर्गत स्टोरेज</string>
     <string name="file_picker_sd_card">एसडी कार्ड</string>
     <string name="file_picker_root">मुल (/)</string>
+    <string name="file_picker_storages">स्टोरेज</string>
     <string name="file_picker_sort_name_asc">नाव (A–Z)</string>
     <string name="file_picker_sort_name_desc">नाव (Z–A)</string>
     <string name="file_picker_sort_size_desc">आकार (सर्वात मोठे प्रथम)</string>
@@ -1032,6 +1214,7 @@ morphe_header_custom_dark.png
     <string name="easter_egg_pill_blue_toast_again">अनप्लग केलेले. परत जाण्याचा मार्ग नेहमी तिथेच आहे.</string>
     <!-- Shared strings -->
     <string name="select_file">फाईल निवडा</string>
+    <string name="select_files">फाइल्स निवडा</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="select_folder">फोल्डर निवडा</string>
     <string name="patches">अनेक सुधारणा</string>
@@ -1059,6 +1242,7 @@ morphe_header_custom_dark.png
     <string name="done">झाले</string>
     <string name="skip">वगळा</string>
     <string name="clear">क्लिअर करा</string>
+    <string name="paste">पेस्ट करा</string>
     <string name="delete">डिलीट करा</string>
     <string name="delete_all">सर्व हटवा</string>
     <string name="remove">काढून टाका</string>
@@ -1082,9 +1266,7 @@ morphe_header_custom_dark.png
     <string name="selected">निवडलेले</string>
     <string name="not_selected">निवडलेले नाही</string>
     <string name="select_all">सर्व निवडा</string>
-    <string name="select_all_done">सर्व निवडले</string>
     <string name="deselect_all">सर्व निवड रद्द करा</string>
-    <string name="deselect_all_done">सर्व निवड रद्द केली</string>
     <string name="reorder_list">सूची पुन्हा क्रमवारी लावा</string>
     <string name="reorder_list_hint">पुन्हा क्रमवारी लावण्यासाठी ड्रॅग करा</string>
     <string name="reorder_done">क्रम जतन केला</string>
@@ -1099,6 +1281,7 @@ morphe_header_custom_dark.png
     <string name="import_">आयात</string>
     <string name="export">एक्सपोर्ट करा</string>
     <string name="copy">कॉपी करा</string>
+    <string name="copied_to_clipboard">क्लिपबोर्डवर कॉपी केले</string>
     <string name="download">डाउनलोड करा</string>
     <string name="less">कमी</string>
     <string name="expand">विस्तार करा</string>
@@ -1133,6 +1316,8 @@ morphe_header_custom_dark.png
     <string name="hidden">लपलेले</string>
     <string name="unhide">उघड करा</string>
     <string name="unhide_done">दर्शविले</string>
+    <string name="ignore">दुर्लक्ष करा</string>
+    <string name="stop_ignoring">दुर्लक्ष करणे थांबवा</string>
     <string name="logs">लॉग</string>
     <string name="sources">स्त्रोत</string>
     <string name="installing_ellipsis">इंस्टॉल करत आहे…</string>
@@ -1141,25 +1326,49 @@ morphe_header_custom_dark.png
     <string name="importing_ellipsis">आयात करत आहे…</string>
     <string name="imported_successfully">यशस्वीरित्या आयात केले</string>
     <string name="changelog">बदल लॉग पहा</string>
+    <string name="changelog_for_app">%s साठी बदल</string>
+    <string name="changelog_general_changes">सामान्य बदल</string>
+    <string name="whats_new">काय नवीन आहे</string>
+    <string name="changelog_description">या आवृत्तीत काय नवीन आहे</string>
     <string name="changelog_download_fail">बदल लॉग डाउनलोड करण्यात अयशस्वी: %s</string>
     <string name="changelog_empty">बदल लॉग उपलब्ध नाही</string>
+    <string name="changelog_earlier_releases">आधीच्या रिलीझ</string>
+    <string name="changelog_patched_with">%s सह पॅच केले</string>
     <string name="changelog_older_empty">दर्शविण्यासाठी जुने रिलीझ नाहीत</string>
+    <string name="changelog_older_failed">जुन्या रिलीझ लोड करता आल्या नाहीत</string>
     <!-- Label of a footer button beside "Translate". Keep it short, a longer one moves the buttons onto two rows -->
+    <string name="changelog_release_page">रिलीझ पृष्ठ</string>
+    <string name="content_translate">भाषांतर करा</string>
     <!-- Label of a footer button beside other buttons, which reads "Translate" until pressed. Keep it as short as "Translate", a longer one moves the buttons onto two rows -->
+    <string name="content_show_original">मूळ</string>
+    <string name="content_translation_failed">भाषांतर अयशस्वी: %s</string>
+    <string name="changelog_section_new">नवीन</string>
+    <string name="changelog_section_fixes">निराकरणे</string>
+    <string name="changelog_section_performance">कार्यक्षमता</string>
+    <string name="changelog_section_improvements">सुधारणा</string>
+    <string name="changelog_section_app_support">अॅप समर्थन</string>
+    <string name="changelog_section_other">बदल</string>
+    <string name="changelog_badge_latest">नवीनतम</string>
     <!-- Marks the version of a patch source downloaded to the manager, which patches with it rather than the one an installed app was patched with -->
+    <string name="changelog_badge_downloaded">डाउनलोड केले</string>
+    <string name="changelog_badge_prerelease">प्री-रिलीझ</string>
     <!-- "%s" is the number of changes in the section -->
+    <string name="changelog_show_all">सर्व दाखवा (%s)</string>
+    <string name="changelog_show_less">कमी दाखवा</string>
     <string name="no_network_toast">इंटरनेट कनेक्शन उपलब्ध नाही</string>
     <string name="update_available">अपडेट उपलब्ध आहे</string>
     <string name="ready_to_install_update">अपडेट इंस्टॉल करण्यासाठी तयार</string>
     <string name="update_completed">अपडेट स्थापित झाले</string>
     <string name="install_update_manager_failed">अपडेट स्थापित करण्यात अयशस्वी</string>
     <string name="installing_manager_update">अपडेट स्थापित करत आहे…</string>
+    <string name="installing_manager_update_hint">अपडेट पूर्ण करण्यासाठी Morphe बंद होईल</string>
     <string name="downloading_manager_update">अपडेट डाउनलोड करत आहे…</string>
     <!-- Shown while downloading when the server does not report the total size. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">%1$s MB डाउनलोड केले</string>
     <!-- Shown under the download percentage. "%1$s" is the megabytes so far, "%2$s" the total. -->
+    <string name="manager_update_progress_size">%1$s / %2$s एमबी</string>
     <string name="manager_update_not_ready">हे प्रकाशन अजूनही जारी केले जात आहे. कृपया काही मिनिटांनी पुन्हा प्रयत्न करा.</string>
     <string name="update_download_missing">डाउनलोड केलेले अद्यतन आता उपलब्ध नाही. ते पुन्हा डाउनलोड करा.</string>
-    <string name="download_manager_failed">अपडेट डाउनलोड करण्यात अयशस्वी: %s</string>
     <string name="failed_to_check_updates">अपडेट तपासण्यात अयशस्वी: %s</string>
     <string name="failed_to_download_update">अपडेट डाउनलोड करण्यात अयशस्वी: %s</string>
     <string name="download_confirmation_metered">"तुम्ही सध्या मोजलेल्या कनेक्शनवर आहात, आणि तुमच्या सेवा प्रदात्याकडून डेटा शुल्क लागू होऊ शकते.
@@ -1191,4 +1400,5 @@ morphe_header_custom_dark.png
     <!-- Label of a footer button beside "Skip". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="tour_prompt_confirm">मला दाखवा</string>
     <string name="onboarding_restart_title">वैशिष्ट्य दौरा</string>
+    <string name="onboarding_restart_desc">मुख्य वैशिष्ट्यांचा मार्गदर्शित टूर</string>
 </resources>

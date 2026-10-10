@@ -123,6 +123,26 @@
     <string name="home_greeting_super_late_3">Na tym etapie po prostu nie idź spać i modyfikuj</string>
     <string name="home_greeting_super_late_4">Tylko ty i serwery nie śpicie</string>
     <string name="home_greeting_super_late_5">Nocny i produktywny</string>
+    <!-- Halloween greetings, shown instead of the ones above around October 31 -->
+    <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_1">Cukierek albo modyfikacja?</string>
+    <string name="home_greeting_halloween_2">W tych plikach APK nie ma duchów, sprawdziliśmy</string>
+    <string name="home_greeting_halloween_3">Upiorny sezon, świeże modyfikacje</string>
+    <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
+    <string name="home_greeting_halloween_4">Coś mrocznego tu się modyfikuje</string>
+    <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
+    <string name="home_greeting_winter_1">Wesołych Świąt, świeże modyfikacje</string>
+    <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
+    <string name="home_greeting_winter_2">Niech sypie śnieg, niech sypią się modyfikacje</string>
+    <string name="home_greeting_winter_3">Nowy rok, nowe modyfikacje</string>
+    <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
+    <string name="home_greeting_winter_4">Modyfikacje pędzą przez śnieg</string>
+    <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">Szczęśliwego Nowego Roku!</string>
+    <string name="home_greeting_new_year_2">Odliczamy do świeżych modyfikacji</string>
+    <string name="home_greeting_new_year_3">Nowy rok, te same aplikacje bez reklam</string>
+    <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Żegnajcie stare wersje, witajcie nowe</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Źródła modyfikacji</string>
     <string name="sources_search">Szukaj źródeł i modyfikacji</string>
@@ -273,7 +293,6 @@ Wszystko, co dodasz z tej strony, używasz na własne ryzyko"</string>
     <string name="home_use_installed_app">Użyj zainstalowanej aplikacji</string>
     <string name="home_installed_app_picker_title">Zainstalowane aplikacje</string>
     <string name="home_installed_app_picker_empty">Nie znaleziono aplikacji</string>
-    <string name="home_installed_app_picker_filter_all">Wszystkie aplikacje</string>
     <string name="home_installed_app_picker_filter_user">Tylko aplikacje użytkownika</string>
     <string name="home_installed_app_picker_filter_system">Tylko aplikacje systemowe</string>
     <string name="home_invalid_apk_unreadable">Nie udało się odczytać pliku. Sprawdź, czy \"Pamięć zewnętrzna\" nie ma włączonych ograniczeń baterii</string>
@@ -282,7 +301,6 @@ Wszystko, co dodasz z tej strony, używasz na własne ryzyko"</string>
     <string name="home_invalid_apk_io_error">Nie udało się otworzyć pliku. Spróbuj ponownie</string>
     <string name="home_external_apk_expert_mode_required">Ta funkcja jest dostępna tylko w trybie eksperckim</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Tryb ekspercki</string>
     <string name="expert_mode_search">Szukaj modyfikacji</string>
     <string name="expert_mode_disable_all">Wyłącz wszystkie</string>
     <string name="expert_mode_disable_all_done">Wyłączono wszystkie modyfikacje</string>
@@ -373,44 +391,43 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="adaptive_icon_select_image">Wybierz obraz</string>
     <string name="adaptive_icon_change_image">Zmień obraz</string>
     <string name="image_load_failed">Nie udało się wczytać tego obrazu</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Obraz pierwszoplanowy</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Ikona aplikacji</string>
+    <string name="adaptive_icon_gesture_hint">Przeciągnij, aby przesunąć, uszczypnij, aby zmienić rozmiar</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Podgląd</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Standardowa</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Z motywem</string>
     <string name="adaptive_icon_background_color">Kolor tła</string>
     <string name="adaptive_icon_reset_transform">Zresetuj pozycję i skalę</string>
-    <string name="adaptive_icon_safe_zone_inner">Strefa bezpieczna (zawsze widoczna)</string>
-    <string name="adaptive_icon_safe_zone_outer">Strefa maskowania (może być przycięta)</string>
-    <string name="adaptive_icon_no_transparency_warning">Obraz nie zawiera przezroczystych pikseli. Ikona może wyświetlać się nieprawidłowo</string>
+    <string name="adaptive_icon_no_transparency_warning">Ten obraz nie ma przezroczystych pikseli, dlatego ikony z motywem i powiadomień zachowają logo Morphe</string>
     <string name="adaptive_icon_created_success">Ikona adaptacyjna utworzona pomyślnie</string>
     <string name="adaptive_icon_creation_failed">Nie udało się utworzyć ikony adaptacyjnej</string>
-    <string name="adaptive_icon_label">Adaptacyjna</string>
-    <string name="adaptive_icon_monochrome_label">Monochromatyczna</string>
     <string name="adaptive_icon_guide">Poradnik tworzenia ikon</string>
     <string name="adaptive_icon_guide_png_title">Użyj pliku PNG z przezroczystym tłem</string>
-    <string name="adaptive_icon_guide_png_body">Warstwa przednia musi być plikiem PNG z przezroczystym tłem. Jednolite tło obrazu będzie wyglądać nieprawidłowo - kolor tła powinien pochodzić z poniższego selektora.</string>
+    <string name="adaptive_icon_guide_png_body">Najlepiej sprawdza się logo na przezroczystym tle, z kolorem tła wybranym poniżej. Obraz bez przezroczystości wypełni całą ikonę, a ikony z motywem i powiadomień zachowają wtedy logo Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Bezpieczne strefy</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Strefa wewnętrzna (linia ciągła): grafika jest zawsze w pełni widoczna, niezależnie od kształtu ikon w systemie.
-Strefa zewnętrzna (linia przerywana): może zostać przycięta - najważniejsze detale trzymaj w strefie wewnętrznej."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Kontur pokazuje kształt ikony w Twoim launcherze, a wszystko poza nim jest odcinane. Inne launchery używają innych kształtów, dlatego zachowaj ważne szczegóły wewnątrz przerywanego okręgu, który mieści się w każdym z nich.</string>
     <string name="adaptive_icon_guide_notification_title">Ikona powiadomień</string>
-    <string name="adaptive_icon_guide_notification_body">Generowana automatycznie z warstwy przedniej. Dostosuj jej rozmiar za pomocą suwaka powiadomienia. Cała widoczna grafika na pasku stanu będzie w kolorze białym.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Ikona monochromatyczna</string>
-    <string name="adaptive_icon_guide_monochrome_body">Generowana automatycznie z warstwy przedniej na tych samych zasadach co ikona adaptacyjna. Na Androidzie 13 i nowszych dopasowuje swój kolor do motywu tapety.</string>
+    <string name="adaptive_icon_guide_notification_body">Wycinana z widocznej części obrazu i dopasowana rozmiarem do innych ikon paska stanu, niezależnie od marginesów w pliku. Dostosuj ją za pomocą suwaka pod podglądem. Android wyświetla ją w jednym kolorze.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Ikona z motywem</string>
+    <string name="adaptive_icon_guide_monochrome_body">Wycinana z obrazu w tej samej pozycji i rozmiarze co ikona launchera. W systemie Android 13 i nowszych, launchery z włączonymi ikonami z motywem kolorują ją na podstawie tapety.</string>
     <string name="notification_icon_preview">Powiadomienie</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Utwórz własny nagłówek</string>
     <string name="header_creator_light_theme">Nagłówek jasnego motywu</string>
     <string name="header_creator_dark_theme">Nagłówek ciemnego motywu</string>
-    <string name="header_creator_no_image">Nie wybrano obrazu</string>
     <string name="header_creator_success">Nagłówek utworzony pomyślnie</string>
     <string name="header_creator_failed">Nie udało się utworzyć nagłówka</string>
     <string name="header_creator_guide">Poradnik tworzenia nagłówka</string>
     <string name="header_creator_guide_image_title">Wymagania obrazu</string>
-    <string name="header_creator_guide_image_body">Użyj dowolnego pliku obrazu (PNG lub JPEG). Dla najlepszego efektu wybierz szeroki format o proporcjach około 2,7:1. Pliki PNG z przezroczystym tłem naturalnie wtopią się w motyw aplikacji.</string>
+    <string name="header_creator_guide_image_body">Plik PNG z przezroczystym tłem wtapia się w pasek aplikacji. Marginesy wokół logo w pliku są ignorowane, dzięki czemu przyjmuje ono rozmiar i pozycję oryginalnego logo.</string>
     <string name="header_creator_guide_themes_title">Jasny i ciemny motyw</string>
     <string name="header_creator_guide_themes_body">Większość aplikacji wymaga oddzielnych obrazów dla jasnego i ciemnego motywu. Niektóre aplikacje (np. YouTube Music) używają tylko ciemnego motywu, dlatego wyświetlana jest tylko ta sekcja.</string>
     <string name="header_creator_guide_positioning_title">Pozycjonowanie i skalowanie</string>
-    <string name="header_creator_guide_positioning_body">Przesuwaj i powiększaj dwoma palcami bezpośrednio na podglądzie, aby dopasować i wykadrować obraz. Gdy obraz znajdzie się blisko środka, pojawią się linie pomocnicze. Możesz też użyć suwaka pod spodem.</string>
+    <string name="header_creator_guide_positioning_body">Przeciągnij i uszczypnij obraz w edytorze lub zmień jego rozmiar suwakiem. Przerywane pole wyznacza miejsce oryginalnego logo, a prowadnice pojawiają się, gdy obraz się z nim zrówna.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Wybrana modyfikacja</string>
     <string name="batch_patch_title">Modyfikowanie grupowe</string>
@@ -476,9 +493,12 @@ Strefa zewnętrzna (linia przerywana): może zostać przycięta - najważniejsze
     <string name="home_app_info_app_update_available_description">Źródła modyfikacji obsługują nowszą wersję tej aplikacji. Zmodyfikuj ją ponownie, aby zaktualizować</string>
     <string name="home_app_info_newest_supported_version">Najnowsza obsługiwana</string>
     <string name="home_app_info_version_move">Zainstalowana %1$s, najnowsza obsługiwana %2$s</string>
+    <string name="home_app_info_version_restore">Zainstalowano %1$s, zmodyfikowano %2$s</string>
     <string name="home_app_info_app_deleted_warning">Aplikacja została odinstalowana</string>
     <string name="home_app_info_app_deleted_description">Ta aplikacja została odinstalowana poza Morphe. Zmodyfikuj ją ponownie, aby przywrócić jej funkcjonalność</string>
     <string name="home_app_info_not_patched_description">Zainstalowano niezmodyfikowaną wersję tej aplikacji. Morphe wciąż posiada zapis jej poprzedniej modyfikacji</string>
+    <string name="home_app_info_mount_replaced_description">Inna wersja zastąpiła zamontowaną aplikację, dlatego modyfikacja przestała działać. Użycie opcji Przywróć przywraca zmodyfikowaną wersję</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Sklep Play zaktualizował zamontowaną aplikację, dlatego modyfikacja przestała działać. Użycie opcji Przywróć przywraca zmodyfikowaną wersję. Wyłącz dla niej automatyczne aktualizacje w Sklepie Play, aby zachować modyfikację</string>
     <string name="app_links_title">Obsługiwane linki internetowe</string>
     <string name="app_links_description">W systemie Android 12+ linki do obsługiwanych domen otwierają się domyślnie w przeglądarce, chyba że zostaną zatwierdzone</string>
     <string name="app_links_unverified_banner_title">Niezweryfikowane linki internetowe</string>
@@ -488,8 +508,6 @@ Strefa zewnętrzna (linia przerywana): może zostać przycięta - najważniejsze
     <string name="app_links_open_settings">Otwórz ustawienia linków</string>
     <string name="app_links_repair_success">Pomyślnie włączono linki aplikacji</string>
     <string name="app_links_repair_failed">Nie udało się automatycznie włączyć linków aplikacji</string>
-    <string name="app_links_badge_enabled">Włączone</string>
-    <string name="app_links_badge_disabled">Wyłączone</string>
     <string name="app_links_all_verified">Wszystkie obsługiwane linki są skonfigurowane tak, aby otwierać się w tej aplikacji</string>
     <string name="app_links_fix">Napraw linki</string>
     <string name="configure">Konfiguruj</string>
@@ -520,10 +538,10 @@ Strefa zewnętrzna (linia przerywana): może zostać przycięta - najważniejsze
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Aplikacja</string>
     <string name="patcher_field_package">Pakiet</string>
+    <string name="patcher_field_failed_patch">Nieudana poprawka</string>
     <string name="patcher_field_source">Źródło</string>
     <string name="patcher_field_split">Podzielony plik APK</string>
     <string name="patcher_field_manager">Menedżer</string>
-    <string name="patcher_field_patcher">Modyfikator</string>
     <string name="patcher_field_runtime">Środowisko</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Biblioteki</string>
@@ -554,6 +572,7 @@ Strefa zewnętrzna (linia przerywana): może zostać przycięta - najważniejsze
     <string name="patcher_installing_subtitle">Prawie gotowe do akcji! 🎸</string>
     <string name="patcher_success_title">Wszystko gotowe! 🎉</string>
     <string name="patcher_success_subtitle">Aplikacja została zmodyfikowana i zainstalowana!</string>
+    <string name="patcher_mounted_subtitle">Aplikacja została zmodyfikowana i zamontowana!</string>
     <string name="patcher_complete_title">Modyfikowanie zakończone! ✨</string>
     <string name="patcher_failed_title">Ups! Coś poszło nie tak</string>
     <string name="patcher_failed_dialog_title">Błąd modyfikacji</string>
@@ -572,6 +591,7 @@ Strefa zewnętrzna (linia przerywana): może zostać przycięta - najważniejsze
 
 Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="patcher_install_error_title">Błąd instalacji</string>
+    <string name="patcher_mount_error_title">Błąd montowania</string>
     <string name="patcher_install_error_subtitle">Spróbuj odinstalować aplikację i zainstalować ją ponownie</string>
     <string name="patcher_ready_to_mount_subtitle">Naciśnij przycisk poniżej, aby zamontować</string>
     <string name="patcher_patches_excluded_for_installer">Niedostępne dla tej metody instalacji i wykluczone: %s</string>
@@ -599,7 +619,6 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="patcher_step_load_patches">Wczytywanie modyfikacji</string>
     <string name="patcher_step_prepare_split_apk">Scalanie podzielonego pliku APK</string>
     <string name="patcher_step_unpack">Odczytywanie pliku APK</string>
-    <string name="patcher_step_group_patching">Modyfikowanie</string>
     <string name="patcher_step_group_saving">Zapisywanie</string>
     <string name="patcher_step_write_patched">Zapisywanie zmodyfikowanego pliku APK</string>
     <string name="patcher_step_sign_apk">Podpisywanie zmodyfikowanego pliku APK</string>
@@ -611,6 +630,7 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="patcher_memory_adjustment_title">Za mało pamięci</string>
     <string name="patcher_memory_adjustment_description">System zatrzymał modyfikator podczas działania z limitem pamięci %1$d MB. Obniżenie limitu do %2$d MB sprawia, że modyfikator staje się mniejszym celem dla systemu i może pozwolić na ukończenie procesu</string>
     <string name="patcher_memory_adjustment_description_at_minimum">System zatrzymał modyfikator podczas działania z limitem pamięci %1$d MB, który jest już najniższym z dostępnych. Spróbuj zmodyfikować z mniejszą liczbą źródeł modyfikacji lub wybierz mniej modyfikacji</string>
+    <string name="patcher_memory_adjustment_description_finished">System zatrzymał modyfikator przy limicie pamięci %1$d MB, a operacja powiodła się dopiero przy %2$d MB. Rozpoczęcie od %2$d MB pozwoli pominąć tę nieudaną próbę następnym razem</string>
     <string name="patcher_memory_adjustment_apply">Obniż do %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Modyfikowanie w toku…</string>
@@ -710,6 +730,9 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="settings_appearance_background_snow">Śnieg</string>
     <string name="settings_appearance_background_grid">Kratka</string>
     <string name="settings_appearance_background_particles">Cząsteczki</string>
+    <string name="settings_appearance_background_lava">Lampa lawa</string>
+    <string name="settings_appearance_background_halloween">Halloween</string>
+    <string name="settings_appearance_background_fireworks">Fajerwerki</string>
     <string name="settings_appearance_background_none">Brak</string>
     <string name="settings_appearance_background_random">Losowa</string>
     <string name="settings_appearance_background_random_interval_launch">Przy uruchomieniu</string>
@@ -717,6 +740,10 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="settings_appearance_background_random_interval_3days">Co 3 dni</string>
     <string name="settings_appearance_parallax_effect">Efekt paralaksy</string>
     <string name="settings_appearance_parallax_effect_description">Płynne przesuwanie tła przy nachyleniu urządzenia</string>
+    <string name="settings_appearance_seasonal_themes">Motywy sezonowe</string>
+    <string name="settings_appearance_seasonal_themes_description">Świąteczne tła i powitania w okresie świątecznym</string>
+    <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">Tło %1$s będzie aktywne do %2$s, dopóki włączone są motywy sezonowe</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Motyw</string>
     <string name="settings_appearance_theme_mode">Tryb motywu</string>
@@ -778,9 +805,24 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="settings_appearance_app_icon_default">Domyślna</string>
     <string name="settings_appearance_app_icon_light_2">Niebo</string>
     <string name="settings_appearance_app_icon_light_3">Zachód słońca</string>
-    <string name="settings_appearance_app_icon_dark_1">Ocean</string>
+    <string name="settings_appearance_app_icon_light_4">Lawenda</string>
+    <string name="settings_appearance_app_icon_light_5">Lodowiec</string>
+    <string name="settings_appearance_app_icon_light_6">Mgła</string>
+    <string name="settings_appearance_app_icon_light_7">Piasek</string>
+    <string name="settings_appearance_app_icon_dark_1">Turkus</string>
     <string name="settings_appearance_app_icon_dark_2">Otchłań</string>
-    <string name="settings_appearance_app_icon_dark_3">Indygo</string>
+    <string name="settings_appearance_app_icon_dark_3">Śliwka</string>
+    <string name="settings_appearance_app_icon_dark_4">Północ</string>
+    <string name="settings_appearance_app_icon_dark_5">Grafit</string>
+    <string name="settings_appearance_app_icon_accent_1">Zorza</string>
+    <string name="settings_appearance_app_icon_accent_2">Atrament</string>
+    <string name="settings_appearance_app_icon_accent_3">Papier</string>
+    <string name="settings_appearance_app_icon_accent_4">Zmierzch</string>
+    <string name="settings_appearance_app_icon_background">Tło</string>
+    <string name="settings_appearance_app_icon_mark">Logo</string>
+    <string name="settings_appearance_app_icon_mark_color">Kolorowe</string>
+    <string name="settings_appearance_app_icon_mark_white">Białe</string>
+    <string name="settings_appearance_app_icon_mark_black">Czarne</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Zmienić ikonę aplikacji?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Zmienić na &lt;b&gt;%s&lt;/b&gt; i uruchomić ponownie?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -818,7 +860,6 @@ Modyfikacje nie są tym objęte: włącz przedpremierowe modyfikacje dla każdeg
     <string name="external_batch_patch_trust_caller">Zawsze zezwalaj tej aplikacji</string>
     <string name="external_batch_patch_unknown_caller">Nieznana aplikacja</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Dostępna aktualizacja Morphe</string>
     <string name="notification_bundle_update_title">Dostępne nowe modyfikacje</string>
     <string name="notification_update_text">Wersja %s jest gotowa do pobrania</string>
     <string name="notification_bundle_update_text_unversioned">Dotknij, aby otworzyć Morphe i zaktualizować</string>
@@ -829,8 +870,11 @@ Modyfikacje nie są tym objęte: włącz przedpremierowe modyfikacje dla każdeg
     <string name="notification_channel_manager_updates_description">Powiadomienia o nowych wydaniach Morphe</string>
     <string name="notification_channel_patch_updates">Aktualizacje modyfikacji</string>
     <string name="notification_channel_patch_updates_description">Powiadomienia o nowych wydaniach modyfikacji</string>
-    <string name="notification_channel_patcher">Modyfikowanie</string>
     <string name="notification_channel_patcher_description">Wyświetlane, gdy Morphe modyfikuje aplikację w tle</string>
+    <string name="notification_channel_mounted_apps">Zamontowane aplikacje</string>
+    <string name="notification_channel_mounted_apps_description">Gdy inna wersja zastąpi zamontowaną aplikację i jej modyfikacja przestanie działać</string>
+    <string name="notification_mount_replaced_title">%1$s nie jest już zmodyfikowana</string>
+    <string name="notification_mount_replaced_text">v%1$s zastąpiła zmodyfikowaną v%2$s. Otwórz Morphe, aby ją przywrócić</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Ustawienia eksperckie</string>
     <string name="settings_advanced_expert_mode">Tryb ekspercki</string>
@@ -1247,9 +1291,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="selected">Wybrano</string>
     <string name="not_selected">Nie wybrano</string>
     <string name="select_all">Zaznacz wszystko</string>
-    <string name="select_all_done">Zaznaczono wszystko</string>
     <string name="deselect_all">Odznacz wszystko</string>
-    <string name="deselect_all_done">Odznaczono wszystko</string>
     <string name="reorder_list">Zmień kolejność</string>
     <string name="reorder_list_hint">Przeciągnij, aby zmienić kolejność</string>
     <string name="reorder_done">Zapisano kolejność</string>
@@ -1285,6 +1327,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="unmount">Odmontuj</string>
     <string name="unmounted">Odmontowano</string>
     <string name="remount">Zamontuj ponownie</string>
+    <string name="restore">Przywróć</string>
     <string name="share">Udostępnij</string>
     <string name="install">Zainstaluj</string>
     <string name="installed">Zainstalowano</string>
@@ -1305,6 +1348,8 @@ Wymagane są następujące wymiary obrazów:
     <string name="sources">Źródła</string>
     <string name="installing_ellipsis">Instalowanie…</string>
     <string name="mounting_ellipsis">Montowanie…</string>
+    <string name="mount_stage_restoring_stock">Przywracanie oryginału…</string>
+    <string name="mount_stage_copying">Kopiowanie…</string>
     <string name="unmounting_ellipsis">Odmontowywanie…</string>
     <string name="importing_ellipsis">Importowanie…</string>
     <string name="imported_successfully">Zaimportowano pomyślnie</string>
@@ -1352,7 +1397,6 @@ Wymagane są następujące wymiary obrazów:
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">To wydanie jest wciąż publikowane. Spróbuj ponownie za kilka minut</string>
     <string name="update_download_missing">Pobrana aktualizacja nie jest już dostępna. Pobierz ją ponownie.</string>
-    <string name="download_manager_failed">Nie udało się pobrać aktualizacji: %s</string>
     <string name="failed_to_check_updates">Nie udało się wyszukać aktualizacji: %s</string>
     <string name="failed_to_download_update">Nie udało się pobrać aktualizacji: %s</string>
     <string name="download_confirmation_metered">"Korzystasz obecnie z połączenia z limitem danych, co może wiązać się z dodatkowymi opłatami u operatora.

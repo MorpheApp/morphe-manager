@@ -1,3 +1,13 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ *
+ * Original hard forked code:
+ * https://github.com/Jman-Github/Universal-ReVanced-Manager/blob/597b3173a004f5a9aae54326046dd7fd4c5b7777/app/src/main/java/app/revanced/manager/domain/manager/PreferencesManager.kt
+ *
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
+ */
+
 package app.morphe.manager.domain.manager
 
 import android.content.Context
@@ -7,13 +17,12 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.domain.manager.base.BasePreferencesManager
-import app.morphe.manager.domain.manager.base.IntPreference
-import app.morphe.manager.domain.manager.base.LongPreference
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_NOT_SET
 import app.morphe.manager.patcher.runtime.coerceMemoryLimit
 import app.morphe.manager.patcher.runtime.initialMemoryLimit
 import app.morphe.manager.ui.screen.shared.BackgroundType
+import app.morphe.manager.ui.theme.SeasonalEvent
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.theme.ThemeStyle
 import app.morphe.manager.ui.theme.UI_SCALE_DEFAULT
@@ -53,8 +62,14 @@ class PreferencesManager(
     val enableBackgroundParallax = booleanPreference("enable_background_parallax", true)
     val randomBackgroundInterval = enumPreference("random_background_interval", RandomInterval.ON_LAUNCH)
 
+    /** The background the last launch drew for RANDOM, which the next launch steers clear of. */
+    val lastRandomBackground = stringPreference("last_random_background", "")
+
     /** Whether the hidden Matrix background has been found and taken. */
     val matrixBackgroundUnlocked = booleanPreference("matrix_background_unlocked", false)
+
+    /** Whether a running [SeasonalEvent] dresses up the background and the home greetings. */
+    val seasonalThemes = booleanPreference("seasonal_themes", true)
 
     val pureBlackTheme = booleanPreference("pure_black_theme", false)
 
@@ -130,7 +145,7 @@ class PreferencesManager(
         // ARMv7 silently fails and nobody has researched why.
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !isArmV7()
     )
-    val patcherProcessMemoryLimit = IntPreference(dataStore, "use_process_runtime_memory_limit", PROCESS_RUNTIME_MEMORY_NOT_SET)
+    val patcherProcessMemoryLimit = intPreference("use_process_runtime_memory_limit", PROCESS_RUNTIME_MEMORY_NOT_SET)
 
     /** Whether the last patcher process came up without the heap limit it asked for. Tied to the device, so never exported. */
     val patcherHeapLimitIgnored = booleanPreference("patcher_heap_limit_ignored", false)
@@ -152,7 +167,7 @@ class PreferencesManager(
     val allowMeteredUpdates = booleanPreference("allow_metered_updates", true)
     val firstLaunch = booleanPreference("first_launch", true)
 
-    val installationTime = LongPreference(dataStore, "manager_installation_time", 0L)
+    val installationTime = longPreference("manager_installation_time", 0L)
     val disablePatchVersionCompatCheck = booleanPreference("disable_patch_version_compatibility_check", false)
 
     val useCustomFilePicker = booleanPreference("use_custom_file_picker", false)
@@ -290,6 +305,7 @@ class PreferencesManager(
         val backgroundType: BackgroundType? = null,
         val randomBackgroundInterval: RandomInterval? = null,
         val matrixBackgroundUnlocked: Boolean? = null,
+        val seasonalThemes: Boolean? = null,
         val useExpertMode: Boolean? = null,
         val updateCheckInterval: UpdateCheckInterval? = null,
         val externalBatchPatchEnabled: Boolean? = null,
@@ -358,6 +374,7 @@ class PreferencesManager(
                 backgroundType = backgroundType.takeIf { appearance },
                 randomBackgroundInterval = randomBackgroundInterval.takeIf { appearance },
                 matrixBackgroundUnlocked = matrixBackgroundUnlocked.takeIf { appearance },
+                seasonalThemes = seasonalThemes.takeIf { appearance },
                 useExpertMode = useExpertMode.takeIf { patching },
                 updateCheckInterval = updateCheckInterval.takeIf { updates },
                 externalBatchPatchEnabled = externalBatchPatchEnabled.takeIf { patching },
@@ -414,6 +431,7 @@ class PreferencesManager(
         backgroundType = backgroundType.get(),
         randomBackgroundInterval = randomBackgroundInterval.get(),
         matrixBackgroundUnlocked = matrixBackgroundUnlocked.get(),
+        seasonalThemes = seasonalThemes.get(),
         useExpertMode = useExpertMode.get(),
         updateCheckInterval = updateCheckInterval.get(),
         externalBatchPatchEnabled = externalBatchPatchEnabled.get(),
@@ -487,6 +505,7 @@ class PreferencesManager(
         snapshot.backgroundType?.let { backgroundType.value = it }
         snapshot.randomBackgroundInterval?.let { randomBackgroundInterval.value = it }
         snapshot.matrixBackgroundUnlocked?.let { matrixBackgroundUnlocked.value = it }
+        snapshot.seasonalThemes?.let { seasonalThemes.value = it }
         snapshot.useExpertMode?.let { useExpertMode.value = it }
         snapshot.updateCheckInterval?.let { updateCheckInterval.value = it }
         snapshot.externalBatchPatchEnabled?.let { externalBatchPatchEnabled.value = it }

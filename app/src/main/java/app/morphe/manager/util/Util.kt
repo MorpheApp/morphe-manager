@@ -1,3 +1,13 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ *
+ * Original hard forked code:
+ * https://github.com/Jman-Github/Universal-ReVanced-Manager/blob/597b3173a004f5a9aae54326046dd7fd4c5b7777/app/src/main/java/app/revanced/manager/util/Util.kt
+ *
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
+ */
+
 package app.morphe.manager.util
 
 import android.content.Context
@@ -179,3 +189,7 @@ fun <T : Any> SavedStateHandle.saveableVar(init: () -> T): PropertyDelegateProvi
                 set(name, value)
         }
     }
+
+/** The [E] entry named [name], or null when nothing matches, as for a stale persisted value. */
+inline fun <reified E : Enum<E>> enumByNameOrNull(name: String?): E? =
+    enumValues<E>().firstOrNull { it.name == name }

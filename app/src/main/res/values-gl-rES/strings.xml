@@ -57,6 +57,14 @@
     <!-- Evening greetings (17:00–21:59) -->
     <!-- Late night greetings (22:00–23:59) -->
     <!-- Super late night greetings (0:00–4:59) -->
+    <!-- Halloween greetings, shown instead of the ones above around October 31 -->
+    <!-- Pun on "Trick or treat" -->
+    <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
+    <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
+    <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
+    <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
+    <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <!-- Pun on the saying "Out with the old, in with the new" -->
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Fonte de parches</string>
     <string name="sources_management_open_in_browser">Abrir no navegador</string>
@@ -131,7 +139,6 @@
     <string name="home_invalid_apk_io_error">Fallo ao abrir o arquivo. Por favor, inténtao de novo</string>
     <string name="home_external_apk_expert_mode_required">Esta funcionalidade só está dispoñible no modo Experto</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Modo Experto</string>
     <string name="expert_mode_search">Buscar parches</string>
     <string name="expert_mode_disable_all">Desactivar todo</string>
     <string name="expert_mode_disable_all_done">Todos os parches foron desactivados</string>
@@ -194,12 +201,13 @@ Elixe outro APK</string>
     <string name="adaptive_icon_create">Crear icona adaptable</string>
     <string name="adaptive_icon_select_image">Seleccionar imaxe</string>
     <string name="adaptive_icon_change_image">Cambiar imaxe</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Vista previa</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <!-- Caption under the launcher icon recolored by the system theme -->
     <string name="adaptive_icon_background_color">Cor do fondo</string>
     <string name="adaptive_icon_reset_transform">Restablecer posición e escala</string>
-    <string name="adaptive_icon_safe_zone_inner">Zona segura (sempre visible)</string>
-    <string name="adaptive_icon_safe_zone_outer">Zona de máscara (pode ser recortada)</string>
     <string name="adaptive_icon_created_success">Icona adaptable creada con éxito</string>
     <string name="adaptive_icon_creation_failed">Non se puido crear a icona adaptable</string>
     <!-- Header Creator -->
@@ -220,8 +228,6 @@ Elixe outro APK</string>
     <string name="home_app_info_patch_update_available">Actualización de parche dispoñible</string>
     <string name="home_app_info_app_deleted_warning">A aplicación foi desinstalada</string>
     <string name="home_app_info_app_deleted_description">Esta aplicación foi desinstalada fóra de Morphe. Volva a parchear para restaurar a súa funcionalidade</string>
-    <string name="app_links_badge_enabled">Activado</string>
-    <string name="app_links_badge_disabled">Desactivado</string>
     <string name="home_app_info_apk_size">Tamaño da APK</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">O modo raíz (root) require que o arquivo APK orixinal estea instalado no teu dispositivo antes de ser parcheado</string>
@@ -245,7 +251,6 @@ Elixe outro APK</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Preparando</string>
     <string name="patcher_step_load_patches">Cargando parches</string>
-    <string name="patcher_step_group_patching">Parcheando</string>
     <string name="patcher_step_group_saving">Gardando</string>
     <!-- Battery optimization pre-flight dialog -->
     <!-- Memory limit dialog, shown after the patcher process was killed -->
@@ -273,6 +278,7 @@ Elixe outro APK</string>
     <!-- Settings -->
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background_none">Ningún</string>
+    <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_system">Sistema</string>
     <!-- Settings - Appearance Tab - Language Selector -->
@@ -286,8 +292,6 @@ Elixe outro APK</string>
     <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
     <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Actualización de Morphe dispoñible</string>
-    <string name="notification_channel_patcher">Parcheando</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert_mode">Modo Experto</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->

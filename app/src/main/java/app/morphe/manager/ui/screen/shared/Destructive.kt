@@ -30,7 +30,7 @@ private const val DESTRUCTIVE_EDGE_ALPHA = 0.35f
  */
 @Composable
 fun dialogDestructiveColor(): Color =
-    if (LocalDialogTextColor.current.isDarkBackground()) DestructiveColorLight else DestructiveColorDark
+    if (dialogTextColor().isDarkBackground()) DestructiveColorLight else DestructiveColorDark
 
 /**
  * The same red on the theme's own surfaces. A dark scheme's error color is a pastel meant for its

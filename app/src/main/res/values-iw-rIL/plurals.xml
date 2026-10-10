@@ -108,6 +108,11 @@
         <item quantity="two">שני מקורות הותקנו</item>
         <item quantity="other">%s מקורות הותקנו</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="one">%1$s · %2$s מסונן</item>
+        <item quantity="two">%1$s · %2$s מסוננים</item>
+        <item quantity="other">%1$s · %2$s מסוננים</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s אפליקציה מוסתרת</item>
         <item quantity="two">%s אפליקציות מוסתרות</item>

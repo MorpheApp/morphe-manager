@@ -155,10 +155,10 @@ fun SliderValuePill(
     val accent = LocalAccent.current ?: MaterialTheme.colorScheme.primary
     val container by animateColorAsState(
         targetValue = if (active) accent.copy(alpha = AccentAlpha.STEP)
-        else LocalDialogTextColor.current.copy(alpha = 0.06f),
+        else dialogTextColor().copy(alpha = 0.06f),
         label = "pillContainer"
     )
-    val content = LocalDialogTextColor.current
+    val content = dialogTextColor()
 
     val shape = RoundedCornerShape(percent = 50)
 
@@ -233,7 +233,7 @@ fun ScaleSliderRow(
             imageVector = icon,
             contentDescription = null,
             modifier = Modifier.size(16.dp),
-            tint = LocalDialogSecondaryTextColor.current
+            tint = dialogSecondaryTextColor()
         )
         Spacer(Modifier.width(8.dp))
         val sliderState = remember(valueRange) { SliderState(value = value, trackRange = valueRange) }
@@ -249,7 +249,7 @@ fun ScaleSliderRow(
             imageVector = icon,
             contentDescription = null,
             modifier = Modifier.size(22.dp),
-            tint = LocalDialogSecondaryTextColor.current
+            tint = dialogSecondaryTextColor()
         )
         trailing()
     }
@@ -276,7 +276,7 @@ fun RowScope.SliderResetAction(
                     imageVector = Icons.Outlined.RestartAlt,
                     contentDescription = contentDescription,
                     modifier = Modifier.size(24.dp),
-                    tint = LocalDialogTextColor.current
+                    tint = dialogTextColor()
                 )
             }
         }
@@ -301,6 +301,6 @@ fun SliderScaleLabel(text: String) {
     Text(
         text = text,
         style = MaterialTheme.typography.labelSmall,
-        color = LocalDialogSecondaryTextColor.current
+        color = dialogSecondaryTextColor()
     )
 }

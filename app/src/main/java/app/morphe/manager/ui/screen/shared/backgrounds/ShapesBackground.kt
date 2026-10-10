@@ -5,26 +5,21 @@
 
 package app.morphe.manager.ui.screen.shared.backgrounds
 
-import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.lerp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.platform.LocalContext
-import kotlinx.coroutines.launch
 import kotlin.math.PI
+import kotlin.math.abs
 import kotlin.math.cos
+import kotlin.math.floor
 import kotlin.math.sin
 import kotlin.math.sqrt
 
@@ -33,8 +28,9 @@ import kotlin.math.sqrt
  *
  * Each solid is defined by vertices in 3D object space, a face list (for filled rendering),
  * and an edge list (for wireframe overlay).
- * Solids drift along Lissajous paths (two independent sine frequencies per axis) so no
- * two ever follow the same trajectory.
+ * Every solid moves in a way of its own: some wander along Lissajous paths, some circle an orbit,
+ * some drift across the whole screen and come back round the other side. On top of that each one
+ * spins faster and slower in turn and slowly comes closer and recedes, so no two ever move alike.
  *
  * On patching completion all solids burst outward and spin up, then drift smoothly back.
  */
@@ -49,7 +45,6 @@ fun ShapesBackground(
     val secondaryColor = MaterialTheme.colorScheme.secondary
     val tertiaryColor  = MaterialTheme.colorScheme.tertiary
     val context        = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
 
     val parallaxState = rememberParallaxState(
         enableParallax = enableParallax,
@@ -64,39 +59,44 @@ fun ShapesBackground(
     // rotSpeeds - per-axis rotation speed multipliers (X=nod, Y=yaw, Z=roll)
     // solidType - which polyhedron to render
     // depth   - parallax depth (0=none, 1=max)
-    // scale   - rendered size in pixels
+    // scale   - rendered size in dp
     // colorIdx - which theme color to use (0=primary, 1=secondary, 2=tertiary)
+    // motion  - how the solid travels, at its own period
     val configs = remember {
         listOf(
             // Top band
-            SolidConfig(0.15f, 0.13f, 1.00f, 1.35f, 0.85f, 1.20f, 0.090f, 0.060f, Vec3(0.30f, 0.80f, 0.50f), SolidType.CUBE,         0.80f, 138f, 0),
-            SolidConfig(0.50f, 0.18f, 1.45f, 0.75f, 1.10f, 0.65f, 0.075f, 0.055f, Vec3(0.70f, 0.25f, 1.00f), SolidType.TETRAHEDRON,  0.60f, 162f, 1),
-            SolidConfig(0.84f, 0.10f, 0.85f, 1.60f, 0.70f, 1.40f, 0.085f, 0.065f, Vec3(0.45f, 1.05f, 0.30f), SolidType.OCTAHEDRON,   0.55f, 144f, 2),
+            SolidConfig(0.15f, 0.13f, 1.00f, 1.35f, 0.85f, 1.20f, 0.090f, 0.060f, Vec3(0.30f, 0.80f, 0.50f), SolidType.CUBE,         0.80f, 46f, 0,
+                motion = SolidMotion.ORBIT_CLOCKWISE, motionPeriod = 46000f, spinPeriod = 17000f, depthPeriod = 31000f, phase = 0.0f),
+            SolidConfig(0.50f, 0.18f, 1.45f, 0.75f, 1.10f, 0.65f, 0.075f, 0.055f, Vec3(0.70f, 0.25f, 1.00f), SolidType.TETRAHEDRON,  0.60f, 54f, 1,
+                spinPeriod = 13000f, depthPeriod = 27000f, phase = 1.3f),
+            SolidConfig(0.84f, 0.10f, 0.85f, 1.60f, 0.70f, 1.40f, 0.085f, 0.065f, Vec3(0.45f, 1.05f, 0.30f), SolidType.OCTAHEDRON,   0.55f, 48f, 2,
+                motion = SolidMotion.DRIFT_LEFT, motionPeriod = 72000f, spinPeriod = 21000f, depthPeriod = 38000f, phase = 2.6f),
             // Middle band
-            SolidConfig(0.10f, 0.42f, 1.20f, 0.90f, 1.30f, 0.80f, 0.080f, 0.070f, Vec3(0.90f, 0.40f, 0.70f), SolidType.PRISM,        0.45f, 150f, 2),
-            SolidConfig(0.46f, 0.38f, 0.75f, 1.50f, 0.90f, 1.55f, 0.095f, 0.060f, Vec3(0.50f, 0.70f, 1.20f), SolidType.ICOSAHEDRON,  0.70f, 132f, 0),
-            SolidConfig(0.82f, 0.50f, 1.55f, 0.80f, 1.20f, 0.75f, 0.085f, 0.075f, Vec3(1.00f, 0.30f, 0.60f), SolidType.CUBE,         0.55f, 125f, 1),
+            SolidConfig(0.10f, 0.42f, 1.20f, 0.90f, 1.30f, 0.80f, 0.080f, 0.070f, Vec3(0.90f, 0.40f, 0.70f), SolidType.PRISM,        0.45f, 50f, 2,
+                spinPeriod = 19000f, depthPeriod = 24000f, phase = 3.9f),
+            SolidConfig(0.46f, 0.38f, 0.75f, 1.50f, 0.90f, 1.55f, 0.095f, 0.060f, Vec3(0.50f, 0.70f, 1.20f), SolidType.ICOSAHEDRON,  0.70f, 44f, 0,
+                motion = SolidMotion.ORBIT_COUNTERCLOCKWISE, motionPeriod = 58000f, spinPeriod = 23000f, depthPeriod = 35000f, phase = 5.2f),
+            SolidConfig(0.82f, 0.50f, 1.55f, 0.80f, 1.20f, 0.75f, 0.085f, 0.075f, Vec3(1.00f, 0.30f, 0.60f), SolidType.CUBE,         0.55f, 42f, 1,
+                spinPeriod = 15000f, depthPeriod = 29000f, phase = 0.7f),
             // Bottom band
-            SolidConfig(0.22f, 0.72f, 0.90f, 1.30f, 0.75f, 1.10f, 0.080f, 0.065f, Vec3(0.70f, 0.90f, 0.40f), SolidType.TETRAHEDRON,  0.50f, 156f, 2),
-            SolidConfig(0.58f, 0.68f, 1.30f, 0.70f, 1.50f, 0.90f, 0.075f, 0.070f, Vec3(0.25f, 0.60f, 0.90f), SolidType.OCTAHEDRON,   0.45f, 140f, 0),
-            SolidConfig(0.88f, 0.80f, 0.70f, 1.45f, 1.00f, 1.35f, 0.090f, 0.060f, Vec3(0.80f, 0.45f, 0.75f), SolidType.PRISM,        0.65f, 148f, 1),
+            SolidConfig(0.22f, 0.72f, 0.90f, 1.30f, 0.75f, 1.10f, 0.080f, 0.065f, Vec3(0.70f, 0.90f, 0.40f), SolidType.TETRAHEDRON,  0.50f, 52f, 2,
+                motion = SolidMotion.ORBIT_COUNTERCLOCKWISE, motionPeriod = 41000f, spinPeriod = 18000f, depthPeriod = 26000f, phase = 2.0f),
+            SolidConfig(0.58f, 0.68f, 1.30f, 0.70f, 1.50f, 0.90f, 0.075f, 0.070f, Vec3(0.25f, 0.60f, 0.90f), SolidType.OCTAHEDRON,   0.45f, 47f, 0,
+                motion = SolidMotion.DRIFT_RIGHT, motionPeriod = 86000f, spinPeriod = 20000f, depthPeriod = 33000f, phase = 4.4f),
+            SolidConfig(0.88f, 0.80f, 0.70f, 1.45f, 1.00f, 1.35f, 0.090f, 0.060f, Vec3(0.80f, 0.45f, 0.75f), SolidType.PRISM,        0.65f, 49f, 1,
+                spinPeriod = 16000f, depthPeriod = 37000f, phase = 3.1f),
         )
     }
 
     val time = rememberAnimatedTime(speedMultiplier)
 
-    val scatterProgress = remember { Animatable(0f) }
-    CompletionEffect(patchingCompleted) {
-        coroutineScope.launch {
-            scatterProgress.snapTo(0f)
-            scatterProgress.animateTo(1f, tween(1000, easing = FastOutSlowInEasing))
-            scatterProgress.animateTo(0f, tween(600,  easing = FastOutSlowInEasing))
-        }
-    }
+    val scatterProgress = rememberCompletionPulse(patchingCompleted, riseMillis = 1000, fallMillis = 600)
 
-    // Smoothed positions - lerped toward raw Lissajous targets each frame
-    val smoothedPositions = remember { mutableStateListOf<Offset>() }
-    if (smoothedPositions.isEmpty()) smoothedPositions.addAll(configs.map { Offset(it.cx, it.cy) })
+    // Smoothed positions - lerped toward raw Lissajous targets each frame. Plain arrays rather than
+    // state: they are written while drawing, where a state write would only schedule another frame
+    val smoothedX = remember { FloatArray(configs.size) { configs[it].cx } }
+    val smoothedY = remember { FloatArray(configs.size) { configs[it].cy } }
+    val scratch = remember { SolidScratch() }
 
     Canvas(modifier = modifier.fillMaxSize()) {
         val t        = time.value
@@ -109,23 +109,47 @@ fun ShapesBackground(
         val base     = 18000f
 
         // Step 1: update smoothed positions
-        // Compute Lissajous target and lerp in one pass - avoids allocating a
+        // Compute each solid's target and lerp in one pass - avoids allocating a
         // temporary rawPositions list each frame.
         configs.forEachIndexed { i, c ->
-            val px = c.cx + c.ampX * sin(t * twoPi * c.fx1 / base) +
-                    c.ampX * 0.25f * sin(t * twoPi * c.fx2 / base + 1.4f)
-            val py = c.cy + c.ampY * sin(t * twoPi * c.fy1 / base + 0.8f) +
-                    c.ampY * 0.20f * cos(t * twoPi * c.fy2 / base + 0.3f)
-            smoothedPositions[i] = lerp(smoothedPositions[i], Offset(px, py), 0.04f)
+            val px: Float
+            val py: Float
+            when (c.motion) {
+                SolidMotion.WANDER -> {
+                    px = c.cx + c.ampX * sin(t * twoPi * c.fx1 / base) +
+                            c.ampX * 0.25f * sin(t * twoPi * c.fx2 / base + 1.4f)
+                    py = c.cy + c.ampY * sin(t * twoPi * c.fy1 / base + 0.8f) +
+                            c.ampY * 0.20f * cos(t * twoPi * c.fy2 / base + 0.3f)
+                }
+                SolidMotion.ORBIT_CLOCKWISE, SolidMotion.ORBIT_COUNTERCLOCKWISE -> {
+                    val direction = if (c.motion == SolidMotion.ORBIT_CLOCKWISE) 1f else -1f
+                    val angle = direction * twoPi * t / c.motionPeriod + c.phase
+                    px = c.cx + c.ampX * 1.3f * cos(angle)
+                    py = c.cy + c.ampY * 1.6f * sin(angle)
+                }
+                SolidMotion.DRIFT_LEFT, SolidMotion.DRIFT_RIGHT -> {
+                    // Crosses the whole width and comes back round from the other edge, gently
+                    // bobbing on the way
+                    val direction = if (c.motion == SolidMotion.DRIFT_RIGHT) 1f else -1f
+                    val span = 1f + DRIFT_MARGIN * 2f
+                    val travel = c.cx + DRIFT_MARGIN + direction * t / c.motionPeriod * span
+                    px = travel - floor(travel / span) * span - DRIFT_MARGIN
+                    py = c.cy + c.ampY * sin(t * twoPi * c.fy1 / base + c.phase)
+                }
+            }
+            // Coming back round from the other edge is a jump, not a glide across the screen
+            if (abs(px - smoothedX[i]) > 0.5f) smoothedX[i] = px
+            smoothedX[i] += (px - smoothedX[i]) * 0.04f
+            smoothedY[i] += (py - smoothedY[i]) * 0.04f
         }
 
         // Step 2: draw each solid
         configs.forEachIndexed { index, config ->
-            val pos = smoothedPositions[index]
-
-            val parallaxStrength = config.depth * 45f
-            val baseCx = pos.x * size.width  + tiltX * parallaxStrength
-            val baseCy = pos.y * size.height + tiltY * parallaxStrength
+            // Slowly comes closer and recedes: larger, brighter and moving more with tilt up close
+            val nearness = sin(twoPi * t / config.depthPeriod + config.phase)
+            val parallaxStrength = config.depth * 45f * (1f + 0.4f * nearness)
+            val baseCx = smoothedX[index] * size.width  + tiltX * parallaxStrength
+            val baseCy = smoothedY[index] * size.height + tiltY * parallaxStrength
 
             // Scatter: fly outward from screen center
             val dirX  = baseCx - screenCx
@@ -134,13 +158,20 @@ fun ShapesBackground(
             val centerX = baseCx + dirX * eased * 1.4f
             val centerY = baseCy + dirY * eased * 1.4f
 
-            // Rotation angles - each axis at its own speed
+            // Rotation angles - each axis at its own speed, which swells and ebbs over spinPeriod
+            // between nearly still and almost twice as fast, never turning back
             val scatterBoost = sp * (4f + index * 0.3f)
-            val angleX = t * config.rotSpeeds.x * 0.0004f + scatterBoost * 1.2f
-            val angleY = t * config.rotSpeeds.y * 0.0003f + scatterBoost
-            val angleZ = t * config.rotSpeeds.z * 0.0002f + scatterBoost * 0.8f
+            val spinPhase = twoPi * t / config.spinPeriod + config.phase
+            val swell = 0.85f * config.spinPeriod / twoPi * sin(spinPhase)
+            val rateX = config.rotSpeeds.x * 0.0004f
+            val rateY = config.rotSpeeds.y * 0.0003f
+            val rateZ = config.rotSpeeds.z * 0.0002f
+            val angleX = rateX * (t + swell) + scatterBoost * 1.2f
+            val angleY = rateY * (t + swell) + scatterBoost
+            val angleZ = rateZ * (t + swell) + scatterBoost * 0.8f
 
-            val baseAlpha = if (sp > 0f) (1f - sp).coerceIn(0f, 1f) * 0.20f else 0.20f
+            val restingAlpha = 0.20f * (1f + 0.25f * nearness)
+            val baseAlpha = if (sp > 0f) (1f - sp).coerceIn(0f, 1f) * restingAlpha else restingAlpha
             val color = when (config.colorIdx) {
                 0    -> primaryColor
                 1    -> secondaryColor
@@ -148,13 +179,14 @@ fun ShapesBackground(
             }
 
             drawSolid(
+                scratch = scratch,
                 solid   = config.solidType.def,
                 angleX  = angleX,
                 angleY  = angleY,
                 angleZ  = angleZ,
                 cx      = centerX,
                 cy      = centerY,
-                scale   = config.scale,
+                scale   = config.scale * density * (1f + 0.18f * nearness),
                 color   = color,
                 alpha   = baseAlpha
             )
@@ -164,48 +196,49 @@ fun ShapesBackground(
 
 private data class Vec3(val x: Float, val y: Float, val z: Float) {
     operator fun minus(o: Vec3) = Vec3(x - o.x, y - o.y, z - o.z)
+    operator fun plus(o: Vec3)  = Vec3(x + o.x, y + o.y, z + o.z)
     fun cross(o: Vec3)          = Vec3(y * o.z - z * o.y, z * o.x - x * o.z, x * o.y - y * o.x)
-    fun normalized(): Vec3 {
-        val len = sqrt(x * x + y * y + z * z).coerceAtLeast(1e-6f)
-        return Vec3(x / len, y / len, z / len)
-    }
+    fun dot(o: Vec3)            = x * o.x + y * o.y + z * o.z
 }
 
-/** Rotates a vertex around X, Y, Z axes (intrinsic Tait-Bryan order). */
-private fun rotateVertex(v: Vec3, cosX: Float, sinX: Float,
-                         cosY: Float, sinY: Float,
-                         cosZ: Float, sinZ: Float): Vec3 {
-    // X axis (nod)
-    val x1 = v.x
-    val y1 = v.y * cosX - v.z * sinX
-    val z1 = v.y * sinX + v.z * cosX
-    // Y axis (yaw)
-    val x2 =  x1 * cosY + z1 * sinY
-    val z2 = -x1 * sinY + z1 * cosY
-    // Z axis (roll)
-    val x3 = x2 * cosZ - y1 * sinZ
-    val y3 = x2 * sinZ + y1 * cosZ
-    return Vec3(x3, y3, z2)
-}
+// Faces turned toward this direction catch the most light: up and to the left on screen, and
+// toward the viewer, who looks along +z
+private const val LIGHT_X = -0.45f
+private const val LIGHT_Y = -0.55f
+private const val LIGHT_Z = -0.70f
 
-/** Perspective-projects a rotated vertex to screen space. */
-private fun projectVertex(v: Vec3, cx: Float, cy: Float, scale: Float,
-                          focalLength: Float = 2000f, cameraZ: Float = 4f): Offset {
-    // Z contribution is fixed (not scaled by shape size) so perspective distortion
-    // stays constant regardless of scale - prevents large solids looking trapezoidal.
-    val perspective = focalLength / (focalLength + (cameraZ + v.z) * 70f)
-    return Offset(cx + v.x * scale * perspective, cy + v.y * scale * perspective)
+private const val PERSPECTIVE_FOCAL = 2000f
+private const val PERSPECTIVE_CAMERA_Z = 4f
+
+private const val MAX_VERTICES = 12
+private const val MAX_FACES = 20
+
+/**
+ * Buffers every solid is rotated, projected and sorted in, reused across solids and frames so
+ * drawing allocates nothing. Sized for the largest solid, the icosahedron.
+ */
+private class SolidScratch {
+    val rx = FloatArray(MAX_VERTICES)
+    val ry = FloatArray(MAX_VERTICES)
+    val rz = FloatArray(MAX_VERTICES)
+    val px = FloatArray(MAX_VERTICES)
+    val py = FloatArray(MAX_VERTICES)
+    val faceDepth = FloatArray(MAX_FACES)
+    val faceLight = FloatArray(MAX_FACES)
+    val order = IntArray(MAX_FACES)
+    val path = Path()
 }
 
 /**
  * Renders a polyhedron:
- * 1. Rotate all vertices.
- * 2. Compute face normals + depths, sort back-to-front.
- * 3. Fill visible faces (painter's order).
+ * 1. Rotate and perspective-project all vertices.
+ * 2. Find the faces turned toward the viewer, with their depth and how much light they catch.
+ * 3. Fill those faces back to front, brighter the more squarely they face the light.
  * 4. Draw ALL edges exactly once via the deduplicated edge list -
  *    front edges at full alpha, back edges at ghost alpha.
  */
 private fun DrawScope.drawSolid(
+    scratch: SolidScratch,
     solid: SolidDef,
     angleX: Float, angleY: Float, angleZ: Float,
     cx: Float, cy: Float,
@@ -216,48 +249,78 @@ private fun DrawScope.drawSolid(
     val cosX = cos(angleX); val sinX = sin(angleX)
     val cosY = cos(angleY); val sinY = sin(angleY)
     val cosZ = cos(angleZ); val sinZ = sin(angleZ)
+    val rx = scratch.rx; val ry = scratch.ry; val rz = scratch.rz
+    val px = scratch.px; val py = scratch.py
 
-    // Step 1 - rotate all vertices, project all to screen
-    val rotated   = solid.vertices.map { v -> rotateVertex(v, cosX, sinX, cosY, sinY, cosZ, sinZ) }
-    val projected = rotated.map { v -> projectVertex(v, cx, cy, scale) }
-
-    // Step 2 - compute face info
-    data class FaceInfo(val indices: List<Int>, val depth: Float, val normalZ: Float)
-    val faceInfos = solid.faces.map { idx ->
-        val v0 = rotated[idx[0]]; val v1 = rotated[idx[1]]; val v2 = rotated[idx[2]]
-        val normal = (v1 - v0).cross(v2 - v0).normalized()
-        val depth  = idx.sumOf { rotated[it].z.toDouble() }.toFloat() / idx.size
-        FaceInfo(idx, depth, normal.z)
+    // Step 1 - rotate around X (nod), Y (yaw), then Z (roll), and perspective-project
+    solid.vertices.forEachIndexed { i, v ->
+        val y1 = v.y * cosX - v.z * sinX
+        val z1 = v.y * sinX + v.z * cosX
+        val x2 =  v.x * cosY + z1 * sinY
+        val z2 = -v.x * sinY + z1 * cosY
+        rx[i] = x2 * cosZ - y1 * sinZ
+        ry[i] = x2 * sinZ + y1 * cosZ
+        rz[i] = z2
+        // Z contribution is fixed (not scaled by shape size) so perspective distortion
+        // stays constant regardless of scale - prevents large solids looking trapezoidal.
+        val perspective = PERSPECTIVE_FOCAL / (PERSPECTIVE_FOCAL + (PERSPECTIVE_CAMERA_Z + z2) * 70f)
+        px[i] = cx + rx[i] * scale * perspective
+        py[i] = cy + ry[i] * scale * perspective
     }
-    // Stable back-to-front sort
-    val sorted = faceInfos.sortedWith(compareByDescending { it.depth })
 
-    // Step 3 - fill visible faces only
-    sorted.forEach { face ->
-        if (face.normalZ >= 0f) return@forEach // back-face cull
-        val pts = face.indices.map { projected[it] }
-        val path = Path().apply {
-            moveTo(pts[0].x, pts[0].y)
-            for (i in 1 until pts.size) lineTo(pts[i].x, pts[i].y)
-            close()
+    // Step 2 - faces point their normals outward and the viewer looks along +z, so a face is
+    // visible when its normal has a negative z
+    var visible = 0
+    solid.faces.forEachIndexed { f, idx ->
+        val a = idx[0]; val b = idx[1]; val c = idx[2]
+        val e1x = rx[b] - rx[a]; val e1y = ry[b] - ry[a]; val e1z = rz[b] - rz[a]
+        val e2x = rx[c] - rx[a]; val e2y = ry[c] - ry[a]; val e2z = rz[c] - rz[a]
+        val nx = e1y * e2z - e1z * e2y
+        val ny = e1z * e2x - e1x * e2z
+        val nz = e1x * e2y - e1y * e2x
+        if (nz >= 0f) return@forEachIndexed // back-face cull
+        val len = sqrt(nx * nx + ny * ny + nz * nz).coerceAtLeast(1e-6f)
+        var depth = 0f
+        for (i in idx) depth += rz[i]
+        scratch.faceDepth[f] = depth / idx.size
+        scratch.faceLight[f] = ((nx * LIGHT_X + ny * LIGHT_Y + nz * LIGHT_Z) / len).coerceAtLeast(0f)
+        // Insertion sort into back-to-front order: never more than 20 faces
+        var j = visible
+        while (j > 0 && scratch.faceDepth[scratch.order[j - 1]] < scratch.faceDepth[f]) {
+            scratch.order[j] = scratch.order[j - 1]
+            j--
         }
-        drawPath(path, color.copy(alpha = alpha * 0.28f))
+        scratch.order[j] = f
+        visible++
+    }
+
+    // Step 3 - fill, the side turned to the light reading brighter than the side turned away
+    val path = scratch.path
+    for (k in 0 until visible) {
+        val f = scratch.order[k]
+        val idx = solid.faces[f]
+        path.rewind()
+        path.moveTo(px[idx[0]], py[idx[0]])
+        for (i in 1 until idx.size) path.lineTo(px[idx[i]], py[idx[i]])
+        path.close()
+        drawPath(path, color.copy(alpha = alpha * (0.12f + 0.42f * scratch.faceLight[f])))
     }
 
     // Step 4 - draw every edge exactly once with depth-based alpha.
     // Avoid any per-face visibility check here - that causes flickering when a face
     // crosses the horizon (normalZ flips sign) and adjacent edges change alpha abruptly.
     // Instead, derive alpha smoothly from the average Z of the two endpoint vertices:
-    //   z ranges roughly -1...+1 after rotation; map to [backAlpha...frontAlpha] linearly.
-    solid.edges.forEach { (a, b) ->
-        val avgZ      = (rotated[a].z + rotated[b].z) * 0.5f
-        // Remap [-1,+1] → [0,1] then blend between ghost and solid alpha
-        val t         = ((avgZ + 1f) * 0.5f).coerceIn(0f, 1f)
+    //   z ranges roughly -1...+1 after rotation, nearest at -1; map to [frontAlpha...backAlpha] linearly.
+    for (e in solid.edgeStarts.indices) {
+        val a = solid.edgeStarts[e]; val b = solid.edgeEnds[e]
+        val avgZ      = (rz[a] + rz[b]) * 0.5f
+        // Remap [+1,-1] → [0,1] then blend between ghost and solid alpha
+        val t         = ((1f - avgZ) * 0.5f).coerceIn(0f, 1f)
         val edgeAlpha = (alpha * 0.15f + t * alpha * 0.85f).coerceIn(0f, 1f)
         drawLine(
             color       = color.copy(alpha = edgeAlpha),
-            start       = projected[a],
-            end         = projected[b],
+            start       = Offset(px[a], py[a]),
+            end         = Offset(px[b], py[b]),
             strokeWidth = 2.0f
         )
     }
@@ -265,26 +328,42 @@ private fun DrawScope.drawSolid(
 
 /**
  * A polyhedron defined by:
- * - [vertices]  - positions in normalized [-1,1] object space
- * - [faces]     - vertex index lists, each wound CCW when viewed from outside
- * - [edges]     - deduplicated pairs (a,b) with a<b, for wireframe drawing
+ * - [vertices]  - positions in normalized [-1,1] object space, centered on the origin
+ * - [faces]     - vertex index lists, each wound so its normal points outward
+ * - [edgeStarts] / [edgeEnds] - deduplicated pairs with start < end, for wireframe drawing
  */
-private data class SolidDef(
+private class SolidDef(
     val vertices: List<Vec3>,
-    val faces: List<List<Int>>,
-    val edges: List<Pair<Int,Int>>
+    val faces: List<IntArray>,
+    val edgeStarts: IntArray,
+    val edgeEnds: IntArray
 ) {
     companion object {
-        /** Builds the deduplicated edge set automatically from a face list. */
+        /**
+         * Builds the solid from a face list and derives the deduplicated edges. A face wound inward
+         * is turned around, so culling and lighting hold however the list was written: on a convex
+         * solid around the origin, every face points away from it.
+         */
         fun build(vertices: List<Vec3>, faces: List<List<Int>>): SolidDef {
-            val edgeSet = LinkedHashSet<Pair<Int,Int>>()
-            for (face in faces) {
+            val oriented = faces.map { face ->
+                val v0 = vertices[face[0]]; val v1 = vertices[face[1]]; val v2 = vertices[face[2]]
+                val normal = (v1 - v0).cross(v2 - v0)
+                val centroid = face.map { vertices[it] }.reduce(Vec3::plus)
+                if (normal.dot(centroid) < 0f) face.reversed() else face
+            }
+            val edgeSet = LinkedHashSet<Pair<Int, Int>>()
+            for (face in oriented) {
                 for (i in face.indices) {
                     val a = face[i]; val b = face[(i + 1) % face.size]
                     edgeSet += if (a < b) Pair(a, b) else Pair(b, a)
                 }
             }
-            return SolidDef(vertices, faces, edgeSet.toList())
+            return SolidDef(
+                vertices = vertices,
+                faces = oriented.map { it.toIntArray() },
+                edgeStarts = edgeSet.map { it.first }.toIntArray(),
+                edgeEnds = edgeSet.map { it.second }.toIntArray()
+            )
         }
     }
 }
@@ -299,7 +378,6 @@ private enum class SolidType {
 
         // Vertices:  0=LBB  1=RBB  2=RTB  3=LTB  (B=back, F=front, L=left, R=right, T=top, Bo=bottom)
         //            4=LBF  5=RBF  6=RTF  7=LTF
-        // All faces wound CCW when viewed from outside.
         CUBE -> SolidDef.build(
             vertices = listOf(
                 Vec3(-1f, -1f, -1f), Vec3( 1f, -1f, -1f),
@@ -354,7 +432,7 @@ private enum class SolidType {
             )
         )
 
-        // Uses the standard golden-ratio construction. All 20 faces wound CCW from outside.
+        // Uses the standard golden-ratio construction.
         ICOSAHEDRON -> {
             val phi = (1f + sqrt(5f)) / 2f
             val n   = 1f / sqrt(1f + phi * phi)
@@ -382,7 +460,6 @@ private enum class SolidType {
         }
 
         // Bottom cap: v0,v1,v2 (y=-h). Top cap: v3,v4,v5 (y=+h).
-        // Side faces wound CCW from outside.
         PRISM -> {
             val r = 1f
             val h = 0.9f
@@ -394,8 +471,8 @@ private enum class SolidType {
             SolidDef.build(
                 vertices = verts,
                 faces = listOf(
-                    listOf(2, 1, 0),    // bottom cap (CCW from below)
-                    listOf(3, 4, 5),    // top cap    (CCW from above)
+                    listOf(2, 1, 0),    // bottom cap
+                    listOf(3, 4, 5),    // top cap
                     listOf(0, 1, 4, 3), // side A
                     listOf(1, 2, 5, 4), // side B
                     listOf(2, 0, 3, 5)  // side C
@@ -417,6 +494,26 @@ private data class SolidConfig(
     val rotSpeeds: Vec3,    // Per-axis rotation speed multipliers
     val solidType: SolidType,
     val depth: Float,       // Parallax depth
-    val scale: Float,       // Rendered size in pixels
-    val colorIdx: Int       // 0=primary, 1=secondary, 2=tertiary
+    val scale: Float,       // Rendered size in dp
+    val colorIdx: Int,      // 0=primary, 1=secondary, 2=tertiary
+    val motion: SolidMotion = SolidMotion.WANDER,
+    val motionPeriod: Float = 0f, // Milliseconds per orbit or per crossing of the screen
+    val spinPeriod: Float,  // Milliseconds for the spin to swell and ebb once
+    val depthPeriod: Float, // Milliseconds to come close and recede once
+    val phase: Float        // Offsets every cycle of the solid, so they never move in step
 )
+
+/** How a solid travels across the screen. */
+private enum class SolidMotion {
+    /** Wanders around its place along a Lissajous path. */
+    WANDER,
+    ORBIT_CLOCKWISE,
+    ORBIT_COUNTERCLOCKWISE,
+    /** Crosses the whole width, then comes back round from the other edge. */
+    DRIFT_LEFT,
+    DRIFT_RIGHT
+}
+
+// How far past either edge a drifting solid travels before it comes back round, as a fraction
+// of the width, so it leaves and enters fully out of view
+private const val DRIFT_MARGIN = 0.15f

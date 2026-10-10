@@ -8,6 +8,7 @@ package app.morphe.manager.ui.screen.home
 import android.content.pm.PackageInfo
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
+import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition
@@ -68,6 +69,7 @@ import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.InstalledAppInfoViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
+import app.morphe.manager.ui.viewmodel.labelRes
 import app.morphe.manager.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -133,6 +135,7 @@ fun InstalledAppInfoDialog(
     val installState = installViewModel.installState
     val isInstalling = installState is InstallViewModel.InstallState.Installing
     val mountOperation = installViewModel.mountOperation
+    val mountStageLabel = installState.stageLabel()
 
     // Get update status from the shared HomeViewModel instance
     val appUpdates by homeViewModel.apps.appUpdatesAvailable.collectAsStateWithLifecycle()
@@ -211,7 +214,7 @@ fun InstalledAppInfoDialog(
             BundleChangelogRequest(
                 bundleUid = it.bundleUid,
                 sinceVersion = it.patchedWithVersion,
-                appNames = it.appNames
+                subject = it.subject
             )
         }
     val onShowUpdateChangelog: (() -> Unit)? = updateChangelogRequest?.let { request ->
@@ -550,6 +553,67 @@ fun InstalledAppInfoDialog(
             }
             val compactHeader = landscape && windowSize.widthSizeClass == WindowWidthSizeClass.Expanded
 
+            // Writes the module again from the saved builds and mounts it, reinstalling the
+            // matching original first when another version replaced it
+            val reinstallSavedMount: () -> Unit = {
+                viewModel.savedApkFile()?.let { savedFile ->
+                    installViewModel.installSavedMount(
+                        outputFile = savedFile,
+                        packageName = installedApp.currentPackageName,
+                        onPersistApp = { _, _ ->
+                            viewModel.updateInstallType(
+                                packageName = installedApp.currentPackageName,
+                                newInstallType = InstallType.MOUNT
+                            )
+                            true
+                        }
+                    )
+                }
+            }
+            // Installs the saved patched build the way the primary installer does, warning first
+            // when that installer and the record differ on mounting
+            val installSavedCopy: () -> Unit = {
+                viewModel.savedApkFile()?.let { savedFile ->
+                    val installAction = {
+                        if (viewModel.primaryInstallerIsMount && installedApp.supportsMount) {
+                            reinstallSavedMount()
+                        } else {
+                            // The install result handler records the install type once it lands
+                            installViewModel.install(
+                                outputFile = savedFile,
+                                originalPackageName = installedApp.originalPackageName,
+                                onPersistApp = { _, _ -> true }
+                            )
+                        }
+                    }
+                    if (viewModel.primaryInstallerIsMount != (installedApp.installType == InstallType.MOUNT)) {
+                        pendingMountWarningAction.value = installAction
+                        showMountWarningDialog.value = true
+                    } else {
+                        installAction()
+                    }
+                }
+            }
+            // Offered only once another version, usually a store update, replaced the mount. An
+            // unmounted app still at its patched version is mounted again instead
+            val installedVersion = appInfo?.versionName
+            val mountRestore = if (
+                viewModel.isInstallStateNotPatched &&
+                installedApp.installType == InstallType.MOUNT &&
+                viewModel.hasSavedCopy && viewModel.hasOriginalApk &&
+                installedVersion != null && installedVersion != installedApp.version
+            ) {
+                MountRestore(
+                    versions = installedVersion.withVersionPrefix() to installedApp.version.withVersionPrefix(),
+                    label = mountStageLabel,
+                    isRunning = isInstalling,
+                    onRestore = reinstallSavedMount,
+                    onOpenPlayStore = if (viewModel.isReplacedByPlayStore) {
+                        { context.openPlayStorePage(installedApp.currentPackageName) }
+                    } else null
+                )
+            } else null
+
             // The app's header pinned over its information. The header inset sets its band in from
             // the panel's edges, which it otherwise reaches out to and up under the status bar
             val infoPanel = @Composable { modifier: Modifier, headerInset: Dp, content: LazyListScope.() -> Unit ->
@@ -600,21 +664,23 @@ fun InstalledAppInfoDialog(
             }
             val actions = @Composable { modifier: Modifier ->
                 ActionsSection(
-                    viewModel = viewModel,
-                    installViewModel = installViewModel,
-                    installedApp = installedApp,
-                    availablePatches = availablePatches,
-                    isInstalling = isInstalling,
-                    mountOperation = mountOperation,
-                    patchOfferedAbove = showsRebuildBanner,
-                    onPatchClick = { handlePatchClick() },
-                    onUninstall = { showUninstallConfirm.value = true },
-                    onDelete = { showDeleteDialog.value = true },
-                    onExport = { exportSavedLauncher.launch(exportFileName) },
-                    onShowMountWarning = { action ->
-                        pendingMountWarningAction.value = action
-                        showMountWarningDialog.value = true
-                    },
+                    // Left out where a banner above already carries it
+                    primary = ActionItem(
+                        text = stringResource(R.string.patch),
+                        icon = Icons.Outlined.AutoFixHigh,
+                        onClick = ::handlePatchClick,
+                        enabled = availablePatches > 0
+                    ).takeIf { !showsRebuildBanner && !viewModel.isAppDeleted },
+                    tiles = installedAppTiles(
+                        viewModel = viewModel,
+                        installViewModel = installViewModel,
+                        installedApp = installedApp,
+                        restoreOfferedAbove = mountRestore != null,
+                        onInstallSavedCopy = installSavedCopy,
+                        onExport = { exportSavedLauncher.launch(exportFileName) },
+                        onUninstall = { showUninstallConfirm.value = true },
+                        onDelete = { showDeleteDialog.value = true }
+                    ),
                     singleColumn = landscape,
                     modifier = modifier
                 )
@@ -648,6 +714,7 @@ fun InstalledAppInfoDialog(
                             entered = entered.value,
                             staggerIndex = 1,
                             accentColor = infoAccentColor,
+                            mountRestore = mountRestore,
                             onPatch = { onTriggerPatchFlow(installedApp.originalPackageName, installedApp.trackingKey) },
                             onShowUpdateChangelog = onShowUpdateChangelog,
                             onIgnoreVersion = onIgnoreVersion,
@@ -779,6 +846,7 @@ private fun InstalledAppBanners(
     entered: Boolean,
     staggerIndex: Int,
     accentColor: Color,
+    mountRestore: MountRestore?,
     onPatch: () -> Unit,
     onShowUpdateChangelog: (() -> Unit)?,
     onIgnoreVersion: (() -> Unit)?,
@@ -788,6 +856,11 @@ private fun InstalledAppBanners(
     val ignoredAppLinksPackages by viewModel.ignoredAppLinksPackages.collectAsStateWithLifecycle(emptySet())
     val showsAppLinksBanner = viewModel.appLinksStatus?.opensInBrowser == true &&
             viewModel.installedApp?.currentPackageName !in ignoredAppLinksPackages
+    val patchAction = ActionItem(
+        text = stringResource(R.string.patch),
+        icon = Icons.Outlined.AutoFixHigh,
+        onClick = onPatch
+    )
 
     Column(modifier = modifier) {
         BannerSlot(
@@ -799,9 +872,7 @@ private fun InstalledAppBanners(
                 icon = Icons.Outlined.Warning,
                 title = stringResource(R.string.home_app_info_app_deleted_warning),
                 description = stringResource(R.string.home_app_info_app_deleted_description),
-                buttonText = stringResource(R.string.patch),
-                buttonIcon = Icons.Outlined.AutoFixHigh,
-                onClick = onPatch,
+                action = patchAction,
                 accentColor = accentColor,
                 isError = true
             )
@@ -814,14 +885,41 @@ private fun InstalledAppBanners(
             WarningBanner(
                 icon = Icons.Outlined.AutoFixHigh,
                 title = stringResource(R.string.home_unpatched_version_installed),
-                description = stringResource(R.string.home_app_info_not_patched_description),
-                buttonText = stringResource(R.string.patch),
-                buttonIcon = Icons.Outlined.AutoFixHigh,
-                onClick = onPatch,
+                // Naming the store is what tells the user how to keep this from happening again
+                description = stringResource(
+                    when {
+                        mountRestore == null -> R.string.home_app_info_not_patched_description
+                        mountRestore.onOpenPlayStore != null -> R.string.home_app_info_mount_replaced_by_play_store_description
+                        else -> R.string.home_app_info_mount_replaced_description
+                    }
+                ),
+                action = mountRestore?.let {
+                    ActionItem(
+                        text = it.label ?: stringResource(R.string.restore),
+                        icon = Icons.Outlined.Restore,
+                        onClick = it.onRestore,
+                        isLoading = it.isRunning
+                    )
+                } ?: patchAction,
                 accentColor = accentColor,
-                // The version the app moved to and the one it can be rebuilt at, which is what
-                // patching this record again turns on
-                versions = versionAhead?.versions
+                // Back to the patched version for a restore, else the version patching again reaches
+                versions = mountRestore?.versions ?: versionAhead?.versions,
+                versionsReadOutRes = if (mountRestore != null) R.string.home_app_info_version_restore
+                else R.string.home_app_info_version_move,
+                secondaryActions = if (mountRestore != null) {
+                    listOfNotNull(
+                        patchAction,
+                        mountRestore.onOpenPlayStore?.let {
+                            ActionItem(
+                                text = stringResource(R.string.google_play),
+                                icon = Icons.Outlined.Shop,
+                                onClick = it
+                            )
+                        }
+                    )
+                } else {
+                    emptyList()
+                }
             )
         }
         BannerSlot(
@@ -853,9 +951,7 @@ private fun InstalledAppBanners(
                     else R.string.home_app_info_patch_update_available_description
                 ),
                 versions = versionBehind?.versions,
-                buttonText = stringResource(R.string.patch),
-                buttonIcon = Icons.Outlined.AutoFixHigh,
-                onClick = onPatch,
+                action = patchAction,
                 accentColor = accentColor,
                 isError = false,
                 secondaryActions = listOfNotNull(
@@ -886,9 +982,11 @@ private fun InstalledAppBanners(
                 icon = Icons.Outlined.LinkOff,
                 title = stringResource(R.string.app_links_unverified_banner_title),
                 description = stringResource(R.string.app_links_unverified_banner_description),
-                buttonText = stringResource(R.string.app_links_fix),
-                buttonIcon = Icons.Outlined.Link,
-                onClick = onOpenAppLinks,
+                action = ActionItem(
+                    text = stringResource(R.string.app_links_fix),
+                    icon = Icons.Outlined.Link,
+                    onClick = onOpenAppLinks
+                ),
                 accentColor = accentColor,
                 secondaryActions = listOf(
                     ActionItem(
@@ -901,6 +999,19 @@ private fun InstalledAppBanners(
         }
     }
 }
+
+/**
+ * Putting a replaced mount back from the saved builds. [versions] runs from the version installed
+ * to the patched one, [label] names the step while it runs, and [onOpenPlayStore] is set when
+ * Google Play did the replacing.
+ */
+private class MountRestore(
+    val versions: Pair<String, String>,
+    val label: String?,
+    val isRunning: Boolean,
+    val onRestore: () -> Unit,
+    val onOpenPlayStore: (() -> Unit)?
+)
 
 /** One banner's place in the group, animated in and out of it. */
 @Composable
@@ -934,12 +1045,13 @@ private val AppVersionStatus.versions: Pair<String, String>
 private fun VersionTransition(
     versions: Pair<String, String>,
     contentColor: Color,
+    @StringRes readOutRes: Int,
     modifier: Modifier = Modifier
 ) {
     val (from, to) = versions
     // Points the way the language runs, so the move reads forwards in Arabic and Hebrew too
     val arrow = if (LocalLayoutDirection.current == LayoutDirection.Rtl) "←" else "→"
-    val readOut = stringResource(R.string.home_app_info_version_move, from, to)
+    val readOut = stringResource(readOutRes, from, to)
 
     Text(
         text = buildAnnotatedString {
@@ -968,13 +1080,12 @@ private fun WarningBanner(
     icon: ImageVector,
     title: String,
     description: String,
-    buttonText: String,
-    buttonIcon: ImageVector,
-    onClick: () -> Unit,
+    action: ActionItem,
     accentColor: Color,
     modifier: Modifier = Modifier,
     isError: Boolean = false,
     versions: Pair<String, String>? = null,
+    @StringRes versionsReadOutRes: Int = R.string.home_app_info_version_move,
     secondaryActions: List<ActionItem> = emptyList()
 ) {
     val fill = cardFill()
@@ -1031,12 +1142,14 @@ private fun WarningBanner(
                 enter = Animations.expandFadeEnter,
                 exit = Animations.shrinkFadeExit
             ) {
-                shownVersions?.let { VersionTransition(versions = it, contentColor = contentColor) }
+                shownVersions?.let {
+                    VersionTransition(versions = it, contentColor = contentColor, readOutRes = versionsReadOutRes)
+                }
             }
 
             // Action button
             PrimaryActionButton(
-                action = ActionItem(text = buttonText, icon = buttonIcon, onClick = onClick),
+                action = action,
                 modifier = Modifier.fillMaxWidth()
             )
 
@@ -1326,233 +1439,133 @@ private fun InfoRowWithAction(
     )
 }
 
+/**
+ * The tiles under an installed app's information, in the order they are laid out: what can be
+ * done with it first, the destructive actions last.
+ */
 @Composable
-private fun ActionsSection(
+private fun installedAppTiles(
     viewModel: InstalledAppInfoViewModel,
     installViewModel: InstallViewModel,
     installedApp: InstalledApp,
-    availablePatches: Int,
-    isInstalling: Boolean,
-    mountOperation: InstallViewModel.MountOperation?,
-    patchOfferedAbove: Boolean,
-    onPatchClick: () -> Unit,
-    onUninstall: () -> Unit,
-    onDelete: () -> Unit,
+    restoreOfferedAbove: Boolean,
+    onInstallSavedCopy: () -> Unit,
     onExport: () -> Unit,
-    onShowMountWarning: (action: () -> Unit) -> Unit,
-    modifier: Modifier = Modifier,
-    singleColumn: Boolean = false
-) {
-    // Collect all available actions
-    val primaryActions = mutableListOf<ActionItem>()
-    val secondaryActions = mutableListOf<ActionItem>()
-    val destructiveActions = mutableListOf<ActionItem>()
+    onUninstall: () -> Unit,
+    onDelete: () -> Unit
+): List<ActionItem> {
+    val isInstalling = installViewModel.installState is InstallViewModel.InstallState.Installing
+    val isMountBusy = installViewModel.mountOperation != null
+    val stageLabel = installViewModel.installState.stageLabel()
+    val packageName = installedApp.currentPackageName
 
-    // Primary actions - Single Patch button that triggers APK selection dialog
-    // The dialog will show "Use saved APK" option if original APK exists
-    if (!patchOfferedAbove && !viewModel.isAppDeleted) {
-        primaryActions.add(
-            ActionItem(
-                text = stringResource(R.string.patch),
-                icon = Icons.Outlined.AutoFixHigh,
-                onClick = onPatchClick,
-                enabled = availablePatches > 0
-            )
-        )
-    }
+    return buildList {
+        if (installedApp.installType != InstallType.SAVED && viewModel.appInfo != null && viewModel.isInstalledOnDevice) {
+            add(ActionItem(stringResource(R.string.open), Icons.AutoMirrored.Outlined.Launch, viewModel::launch))
+        }
 
-    // Secondary actions
-    if (installedApp.installType != InstallType.SAVED && viewModel.appInfo != null && viewModel.isInstalledOnDevice) {
-        secondaryActions.add(
-            ActionItem(
-                text = stringResource(R.string.open),
-                icon = Icons.AutoMirrored.Outlined.Launch,
-                onClick = { viewModel.launch() }
-            )
-        )
-    }
-
-    if (viewModel.hasSavedCopy) {
-        secondaryActions.add(
-            ActionItem(
-                text = stringResource(R.string.export),
-                icon = Icons.Outlined.Save,
-                onClick = onExport
-            )
-        )
-    }
-
-    val installsThroughMount = viewModel.primaryInstallerIsMount && installedApp.supportsMount
-
-    val mountSavedApp: () -> Unit = {
-        val savedFile = viewModel.savedApkFile()
-        if (savedFile != null) {
-            installViewModel.installSavedMount(
-                outputFile = savedFile,
-                packageName = installedApp.currentPackageName,
-                onPersistApp = { _, _ ->
-                    viewModel.updateInstallType(
-                        packageName = installedApp.currentPackageName,
-                        newInstallType = InstallType.MOUNT
-                    )
-                    true
-                }
-            )
-        } else if (viewModel.isMounted) {
-            installViewModel.remount(
-                packageName = installedApp.currentPackageName,
-                version = installedApp.version
-            )
-        } else {
-            installViewModel.mount(
-                packageName = installedApp.currentPackageName,
-                version = installedApp.version
+        if (viewModel.hasSavedCopy) {
+            add(ActionItem(stringResource(R.string.export), Icons.Outlined.Save, onExport))
+            add(
+                ActionItem(
+                    text = stageLabel ?: stringResource(
+                        if (viewModel.isInstalledOnDevice) R.string.reinstall else R.string.install
+                    ),
+                    icon = Icons.Outlined.InstallMobile,
+                    onClick = onInstallSavedCopy,
+                    isLoading = isInstalling
+                )
             )
         }
-    }
 
-    // Show install/reinstall from saved copy whenever the patched APK is available
-    if (viewModel.hasSavedCopy) {
-        val installText = if (viewModel.isInstalledOnDevice) {
-            stringResource(R.string.reinstall)
-        } else {
-            stringResource(R.string.install)
-        }
-        secondaryActions.add(
-            ActionItem(
-                text = installText,
-                icon = Icons.Outlined.InstallMobile,
-                onClick = {
-                    val savedFile = viewModel.savedApkFile()
-                    if (savedFile != null) {
-                        val installAction = {
-                            if (installsThroughMount) {
-                                mountSavedApp()
-                            } else {
-                                installViewModel.install(
-                                    outputFile = savedFile,
-                                    originalPackageName = installedApp.originalPackageName,
-                                    onPersistApp = { _, _ ->
-                                        // Callback will be called after successful installation
-                                        // The LaunchedEffect handler will update the installation type
-                                        true
-                                    }
-                                )
-                            }
-                        }
-
-                        // Warned about either way the installer and the install differ on mounting
-                        if (viewModel.primaryInstallerIsMount != (installedApp.installType == InstallType.MOUNT)) {
-                            onShowMountWarning(installAction)
-                        } else {
-                            installAction()
-                        }
-                    }
-                },
-                isLoading = isInstalling
-            )
-        )
-    }
-
-    when (installedApp.installType) {
-        InstallType.MOUNT -> {
-            val isMountLoading = mountOperation != null
+        // A plain mount or remount, while reinstalling the saved build is the tile above
+        if (installedApp.installType == InstallType.MOUNT) {
             if (viewModel.isMounted) {
-                // Remount button
-                secondaryActions.add(
+                add(
                     ActionItem(
                         text = stringResource(R.string.remount),
                         icon = Icons.Outlined.Refresh,
-                        onClick = mountSavedApp,
-                        isLoading = isMountLoading || isInstalling
+                        onClick = { installViewModel.remount(packageName, installedApp.version) },
+                        isLoading = isMountBusy || isInstalling
                     )
                 )
-                // Unmount button
-                secondaryActions.add(
+                add(
                     ActionItem(
                         text = stringResource(R.string.unmount),
                         icon = Icons.Outlined.LinkOff,
-                        onClick = {
-                            installViewModel.unmount(
-                                packageName = installedApp.currentPackageName
-                            )
-                        },
-                        isLoading = isMountLoading
+                        onClick = { installViewModel.unmount(packageName) },
+                        isLoading = isMountBusy
                     )
                 )
-            } else {
-                // Mount button
-                secondaryActions.add(
+            } else if (!restoreOfferedAbove) {
+                add(
                     ActionItem(
                         text = stringResource(R.string.mount),
                         icon = Icons.Outlined.Link,
-                        onClick = mountSavedApp,
-                        isLoading = isMountLoading || isInstalling
+                        onClick = { installViewModel.mount(packageName, installedApp.version) },
+                        isLoading = isMountBusy || isInstalling
                     )
                 )
             }
         }
-        else -> Unit
-    }
 
-    // Destructive actions
-    if (viewModel.isInstalledOnDevice) {
-        destructiveActions.add(
-            ActionItem(
-                text = stringResource(R.string.uninstall),
-                icon = Icons.Outlined.DeleteForever,
-                onClick = onUninstall,
-                isDestructive = true
+        if (viewModel.isInstalledOnDevice) {
+            add(
+                ActionItem(
+                    text = stringResource(R.string.uninstall),
+                    icon = Icons.Outlined.DeleteForever,
+                    onClick = onUninstall,
+                    isDestructive = true
+                )
             )
-        )
-    }
-
-    if (viewModel.canRemoveRecord) {
-        destructiveActions.add(
-            ActionItem(
-                text = stringResource(R.string.delete),
-                icon = Icons.Outlined.DeleteOutline,
-                onClick = onDelete,
-                isDestructive = true
+        }
+        if (viewModel.canRemoveRecord) {
+            add(
+                ActionItem(
+                    text = stringResource(R.string.delete),
+                    icon = Icons.Outlined.DeleteOutline,
+                    onClick = onDelete,
+                    isDestructive = true
+                )
             )
-        )
+        }
     }
+}
 
-    Column(modifier = modifier.animateContentSize(animationSpec = tween(Defaults.ANIMATION_DURATION)), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        // Primary actions row
-        if (primaryActions.isNotEmpty()) {
-            primaryActions.forEach { action ->
-                PrimaryActionButton(
-                    action = action,
+/** The step a running mount install is on, in the words its buttons show. */
+@Composable
+private fun InstallViewModel.InstallState.stageLabel(): String? =
+    (this as? InstallViewModel.InstallState.Installing)?.stage?.let { stringResource(it.labelRes) }
+
+/** The [primary] button over the [tiles], which sit in pairs or, in a [singleColumn], one a row. */
+@Composable
+private fun ActionsSection(
+    primary: ActionItem?,
+    tiles: List<ActionItem>,
+    singleColumn: Boolean,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier.animateContentSize(animationSpec = tween(Defaults.ANIMATION_DURATION)),
+        verticalArrangement = Arrangement.spacedBy(10.dp)
+    ) {
+        primary?.let { PrimaryActionButton(action = it, modifier = Modifier.fillMaxWidth()) }
+
+        if (singleColumn) {
+            tiles.forEach { action ->
+                TileActionButton(action = action, horizontal = true, modifier = Modifier.fillMaxWidth())
+            }
+        } else {
+            tiles.chunked(2).forEach { rowActions ->
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
                     modifier = Modifier.fillMaxWidth()
-                )
-            }
-        }
-
-        // Secondary + destructive
-        val tileActions = secondaryActions + destructiveActions
-        if (tileActions.isNotEmpty()) {
-            if (singleColumn) {
-                tileActions.forEach { action ->
-                    TileActionButton(
-                        action = action,
-                        horizontal = true,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-            } else {
-                tileActions.chunked(2).forEach { rowActions ->
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(10.dp),
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        rowActions.forEach { action ->
-                            TileActionButton(
-                                action = action,
-                                modifier = if (rowActions.size == 1) Modifier.fillMaxWidth()
-                                else Modifier.weight(1f)
-                            )
-                        }
+                ) {
+                    rowActions.forEach { action ->
+                        TileActionButton(
+                            action = action,
+                            modifier = if (rowActions.size == 1) Modifier.fillMaxWidth() else Modifier.weight(1f)
+                        )
                     }
                 }
             }
@@ -1630,7 +1643,8 @@ private fun ActionButton(
             ) {
                 LoadingOrIcon(action.isLoading, action, content)
                 Spacer(Modifier.height(3.dp))
-                Text(
+                // Steps through a running mount install, which a fade carries from one to the next
+                CrossfadeText(
                     text = action.text,
                     style = MaterialTheme.typography.labelMedium,
                     fontWeight = FontWeight.SemiBold,
@@ -1648,7 +1662,7 @@ private fun ActionButton(
             ) {
                 LoadingOrIcon(action.isLoading, action, content)
                 Spacer(Modifier.width(Defaults.ContentPaddingSmall))
-                Text(
+                CrossfadeText(
                     text = action.text,
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold,

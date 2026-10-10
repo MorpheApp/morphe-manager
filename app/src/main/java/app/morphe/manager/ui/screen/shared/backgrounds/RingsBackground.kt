@@ -5,22 +5,20 @@
 
 package app.morphe.manager.ui.screen.shared.backgrounds
 
-import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalContext
-import kotlinx.coroutines.launch
 import kotlin.math.PI
 import kotlin.math.sin
 
 /**
- * Rings background - concentric stroke circles with parallax effect.
+ * Rings background - groups of concentric stroke circles that ripple outward like rings on water,
+ * each group at its own pace, with parallax effect.
  * Uses frame-based time so [speedMultiplier] changes smoothly without restarting animations.
  * On patching completion each ring group surges outward in radius and fades - staggered by
  * group index - then eases back to normal.
@@ -36,7 +34,6 @@ fun RingsBackground(
     val secondaryColor = MaterialTheme.colorScheme.secondary
     val tertiaryColor  = MaterialTheme.colorScheme.tertiary
     val context        = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
 
     val parallaxState = rememberParallaxState(
         enableParallax = enableParallax,
@@ -47,35 +44,20 @@ fun RingsBackground(
     // Ring configurations - defined once, positions oscillate via sin() each frame
     val ringConfigs = remember {
         listOf(
-            RingConfig(0.2f,  0.2f,  0.3f,  0.25f, 9000,  8000, listOf(140f, 190f, 240f), 0.8f),
-            RingConfig(0.85f, 0.15f, 0.8f,  0.2f,  10000, 7500, listOf(130f, 180f),       0.6f),
-            RingConfig(0.5f,  0.5f,  0.55f, 0.55f, 8500,  9500, listOf(110f, 160f, 210f), 0.5f),
-            RingConfig(0.15f, 0.75f, 0.2f,  0.8f,  7000,  8000, listOf(150f, 200f),       0.7f),
-            RingConfig(0.8f,  0.85f, 0.85f, 0.8f,  8800,  7600, listOf(120f, 170f, 220f), 0.6f),
-            RingConfig(0.75f, 0.4f,  0.8f,  0.45f, 9200,  8400, listOf(135f, 185f),       0.4f)
+            RingConfig(0.2f,  0.2f,  0.3f,  0.25f, 9000,  8000, listOf(47f, 63f, 80f), 0.8f),
+            RingConfig(0.85f, 0.15f, 0.8f,  0.2f,  10000, 7500, listOf(43f, 60f),      0.6f),
+            RingConfig(0.5f,  0.5f,  0.55f, 0.55f, 8500,  9500, listOf(37f, 53f, 70f), 0.5f),
+            RingConfig(0.15f, 0.75f, 0.2f,  0.8f,  7000,  8000, listOf(50f, 67f),      0.7f),
+            RingConfig(0.8f,  0.85f, 0.85f, 0.8f,  8800,  7600, listOf(40f, 57f, 73f), 0.6f),
+            RingConfig(0.75f, 0.4f,  0.8f,  0.45f, 9200,  8400, listOf(45f, 62f),      0.4f)
         )
     }
 
     val time = rememberAnimatedTime(speedMultiplier)
 
-    // burstProgress 0→1: each ring group expands radius and fades, staggered by group index.
-    // Snaps back to 0f after completion so rings return to normal state.
-    val burstProgress = remember { Animatable(0f) }
-
-    CompletionEffect(patchingCompleted) {
-        coroutineScope.launch {
-            burstProgress.snapTo(0f)
-            burstProgress.animateTo(
-                targetValue   = 1f,
-                animationSpec = tween(durationMillis = 1100, easing = FastOutSlowInEasing)
-            )
-            // Smooth return - rings ease back to normal radius and alpha
-            burstProgress.animateTo(
-                targetValue   = 0f,
-                animationSpec = tween(durationMillis = 450, easing = FastOutSlowInEasing)
-            )
-        }
-    }
+    // burstProgress 0→1: each ring group expands radius and fades, staggered by group index,
+    // then eases back so rings return to normal
+    val burstProgress = rememberCompletionPulse(patchingCompleted, riseMillis = 1100, fallMillis = 450)
 
     Canvas(modifier = modifier.fillMaxSize()) {
         val t     = time.value
@@ -111,22 +93,24 @@ fun RingsBackground(
             val radiusScale = if (bp > 0f) 1f + localBp * 1.8f else 1f
             val burstAlpha  = if (bp > 0f) (1f - localBp).coerceIn(0f, 1f) else 1f
 
-            // Draw multiple concentric rings per group
-            config.radii.forEachIndexed { ringIndex, radius ->
-                val alpha = when (ringIndex) {
-                    0    -> 0.14f
-                    1    -> 0.10f
-                    2    -> 0.07f
-                    else -> 0.06f
-                }
-                val strokeWidth = when (ringIndex) {
-                    0    -> 6f
-                    1    -> 5f
-                    else -> 4f
-                }
+            // The rings of a group ripple outward like rings on water: each one is born at the
+            // innermost radius, widens and thins out to the outermost, and fades as the next one
+            // takes its place. Every group ripples at a pace of its own
+            val inner   = config.radii.first()
+            val outer   = config.radii.last()
+            val count   = config.radii.size
+            val spacing = (outer - inner) / (count - 1)
+            val ripple  = (t / RIPPLE_PERIODS[index % RIPPLE_PERIODS.size]) % 1f
+            for (ringIndex in 0 until count) {
+                // 0 at the innermost radius, count - 1 at the outermost
+                val position = ringIndex + ripple
+                val travelled = position / count
+                val fadeIn = (position / 0.6f).coerceAtMost(1f)
+                val alpha = 0.15f * (1f - travelled) * fadeIn
+                val strokeWidth = (2.0f - 0.8f * travelled) * density
                 drawCircle(
                     color  = baseColor.copy(alpha = alpha * burstAlpha),
-                    radius = radius * radiusScale,
+                    radius = (inner + position * spacing) * density * radiusScale,
                     center = center,
                     style  = Stroke(width = strokeWidth)
                 )
@@ -135,6 +119,10 @@ fun RingsBackground(
     }
 }
 
+// Milliseconds for one ring to ripple from the innermost radius to the next, a little different for
+// every group so no two pulse together
+private val RIPPLE_PERIODS = floatArrayOf(2600f, 3400f, 2200f, 3000f, 3700f, 2800f)
+
 private data class RingConfig(
     val startX: Float,
     val startY: Float,
@@ -142,6 +130,6 @@ private data class RingConfig(
     val endY: Float,
     val durationX: Int,
     val durationY: Int,
-    val radii: List<Float>,
+    val radii: List<Float>, // In dp
     val depth: Float // Depth for parallax effect
 )

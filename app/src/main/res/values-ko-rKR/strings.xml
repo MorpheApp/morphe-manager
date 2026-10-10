@@ -123,6 +123,26 @@
     <string name="home_greeting_super_late_3">이 정도면 그냥 안 자고 패치하는 게 낫겠네요</string>
     <string name="home_greeting_super_late_4">당신과 서버, 둘 다 깨어있네요</string>
     <string name="home_greeting_super_late_5">야행성이면서 생산적이네요</string>
+    <!-- Halloween greetings, shown instead of the ones above around October 31 -->
+    <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_1">장난이 좋으신가요, 아니면 패치가 좋으신가요?</string>
+    <string name="home_greeting_halloween_2">APK에는 유령 같은 문제는 없어요. 저희가 꼼꼼히 확인했어요</string>
+    <string name="home_greeting_halloween_3">오싹한 할로윈 시즌, 새로운 패치가 찾아왔습니다</string>
+    <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
+    <string name="home_greeting_halloween_4">무시무시한 무언가가 패치되어 찾아옵니다</string>
+    <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
+    <string name="home_greeting_winter_1">즐거운 연말연시, 새로운 패치와 함께하세요</string>
+    <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
+    <string name="home_greeting_winter_2">눈이 내리고, 패치가 찾아옵니다</string>
+    <string name="home_greeting_winter_3">새해에는 새로운 패치와 함께하세요</string>
+    <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
+    <string name="home_greeting_winter_4">눈길을 헤치며 패치가 찾아옵니다</string>
+    <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">새해 복 많이 받으세요!</string>
+    <string name="home_greeting_new_year_2">새로운 패치를 손꼽아 기다려 주세요</string>
+    <string name="home_greeting_new_year_3">새해에도 변함없이 광고 없는 앱을 만나보세요</string>
+    <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">이전 버전은 보내고, 새로운 버전을 맞이하세요</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">패치 소스</string>
     <string name="sources_search">소스 및 패치 검색</string>
@@ -272,7 +292,6 @@
     <string name="home_use_installed_app">설치된 앱 사용</string>
     <string name="home_installed_app_picker_title">설치된 앱</string>
     <string name="home_installed_app_picker_empty">앱을 찾을 수 없습니다</string>
-    <string name="home_installed_app_picker_filter_all">모든 앱</string>
     <string name="home_installed_app_picker_filter_user">사용자 앱만</string>
     <string name="home_installed_app_picker_filter_system">시스템 앱만</string>
     <string name="home_invalid_apk_unreadable">파일을 읽을 수 없습니다. \'외부 저장소\'가 배터리 제한되어 있는지 확인하세요</string>
@@ -281,7 +300,6 @@
     <string name="home_invalid_apk_io_error">파일을 열 수 없습니다. 다시 시도하세요</string>
     <string name="home_external_apk_expert_mode_required">이 기능은 전문가 모드에서만 사용할 수 있습니다</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">전문가 모드</string>
     <string name="expert_mode_search">패치 검색</string>
     <string name="expert_mode_disable_all">모두 비활성화</string>
     <string name="expert_mode_disable_all_done">모든 패치 비활성화됨</string>
@@ -372,44 +390,43 @@
     <string name="adaptive_icon_select_image">이미지 선택</string>
     <string name="adaptive_icon_change_image">이미지 변경</string>
     <string name="image_load_failed">이 이미지를 불러올 수 없습니다</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">전경 이미지</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">런처 아이콘</string>
+    <string name="adaptive_icon_gesture_hint">드래그하여 이동하고, 핀치하여 크기를 조정하세요</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">미리보기</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">표준</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">테마</string>
     <string name="adaptive_icon_background_color">배경 색상</string>
     <string name="adaptive_icon_reset_transform">위치 및 크기 초기화</string>
-    <string name="adaptive_icon_safe_zone_inner">안전한 영역 (항상 표시됨)</string>
-    <string name="adaptive_icon_safe_zone_outer">마스크 영역 (잘릴 수 있음)</string>
-    <string name="adaptive_icon_no_transparency_warning">이미지에 투명한 픽셀이 없습니다. 결과가 올바르지 않게 보일 수 있습니다</string>
+    <string name="adaptive_icon_no_transparency_warning">이 이미지에는 투명한 픽셀이 없기 때문에 테마 아이콘과 알림 아이콘에 Morphe 로고가 그대로 표시됩니다</string>
     <string name="adaptive_icon_created_success">적응형 아이콘을 성공적으로 만들었습니다</string>
     <string name="adaptive_icon_creation_failed">적응형 아이콘을 만들 수 없습니다</string>
-    <string name="adaptive_icon_label">적응형</string>
-    <string name="adaptive_icon_monochrome_label">흑백</string>
     <string name="adaptive_icon_guide">아이콘 생성 가이드</string>
     <string name="adaptive_icon_guide_png_title">투명한 배경의 PNG를 사용하세요</string>
-    <string name="adaptive_icon_guide_png_body">전경 이미지는 투명한 배경이 있는 PNG 파일이어야 합니다. 단색 배경을 사용하면 올바르게 표시되지 않을 수 있습니다. 배경 색상은 아래의 배경 색상 선택기에서 설정해야 합니다</string>
+    <string name="adaptive_icon_guide_png_body">투명한 배경의 로고를 사용하는 것이 가장 좋으며, 아래에서 배경 색상을 선택할 수 있습니다. 투명도가 없는 이미지는 아이콘 전체를 채우게 되며, 이 경우 테마 아이콘과 알림 아이콘에도 Morphe 로고가 그대로 표시됩니다</string>
     <string name="adaptive_icon_guide_safe_zones_title">안전한 영역</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"내부 영역 (실선): 모든 런처 모양에서 콘텐츠가 항상 완전히 표시됩니다.
-외부 영역 (점선): 런처 마스크에 의해 잘릴 수 있으므로 중요한 요소는 내부 영역 안에 배치하세요."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">윤곽선은 런처 아이콘 모양을 보여주고, 윤곽선 바깥쪽은 모두 잘려 나갑니다. 다른 런처는 다른 모양을 사용하므로 모든 모양에 표시되는 점선 원 안에 중요한 세부 정보를 유지하세요</string>
     <string name="adaptive_icon_guide_notification_title">알림 아이콘</string>
-    <string name="adaptive_icon_guide_notification_body">전경 이미지로부터 자동 생성됩니다. 알림 슬라이더를 사용하여 크기를 조정할 수 있습니다. 표시되는 모든 콘텐츠는 상태바에서 흰색으로 표시됩니다.</string>
-    <string name="adaptive_icon_guide_monochrome_title">흑백 아이콘</string>
-    <string name="adaptive_icon_guide_monochrome_body">동일한 적응형 아이콘 변형을 사용하여 전경 이미지로부터 자동 생성됩니다. Android 13 이상에서는 배경화면의 강조 색상으로 색이 표시됩니다.</string>
+    <string name="adaptive_icon_guide_notification_body">아이콘은 이미지에서 실제로 보이는 부분을 기준으로 잘라내고, 파일에 포함된 여백을 유지한 상태에서 상태 표시줄 아이콘과 비슷한 크기로 조정됩니다. 미리보기 아래의 슬라이더를 이용해 크기와 여백을 조절할 수 있습니다. Android에서는 이 아이콘이 단색으로 표시됩니다</string>
+    <string name="adaptive_icon_guide_monochrome_title">테마 아이콘</string>
+    <string name="adaptive_icon_guide_monochrome_body">런처 아이콘과 동일한 위치와 크기를 기준으로 이미지에서 잘라냅니다. Android 13 이상에서는 테마 아이콘이 활성화된 런처의 경우 배경화면 색상을 기반으로 아이콘 색상이 적용됩니다</string>
     <string name="notification_icon_preview">알림</string>
     <!-- Header Creator -->
     <string name="header_creator_create">커스텀 헤더 만들기</string>
     <string name="header_creator_light_theme">밝은 테마 헤더</string>
     <string name="header_creator_dark_theme">어두운 테마 헤더</string>
-    <string name="header_creator_no_image">선택된 이미지가 없습니다</string>
     <string name="header_creator_success">헤더를 성공적으로 만들었습니다</string>
     <string name="header_creator_failed">헤더를 만들 수 없습니다</string>
     <string name="header_creator_guide">헤더 생성 가이드</string>
     <string name="header_creator_guide_image_title">이미지 요구 사항</string>
-    <string name="header_creator_guide_image_body">PNG 또는 JPEG 이미지 파일을 사용할 수 있습니다. 최상의 결과를 얻으려면 약 2.7:1 비율의 와이드 형식 이미지를 사용하는 것이 좋습니다. 투명한 배경이 있는 PNG 파일은 앱 테마와 자연스럽게 어우러집니다.</string>
+    <string name="header_creator_guide_image_body">투명한 배경의 PNG를 사용하면 앱 바의 배경과 자연스럽게 어우러집니다. 파일에 로고 주변의 여백이 있더라도 무시되며, 기본 로고가 있는 위치와 크기를 기준으로 배치됩니다</string>
     <string name="header_creator_guide_themes_title">밝은 테마 및 어두운 테마</string>
     <string name="header_creator_guide_themes_body">대부분의 앱은 밝은 테마와 어두운 테마용 이미지를 각각 필요로 합니다. 일부 앱(예: YouTube Music)은 어두운 테마만 사용하므로 해당 섹션만 표시됩니다.</string>
     <string name="header_creator_guide_positioning_title">위치 및 크기 조정</string>
-    <string name="header_creator_guide_positioning_body">미리보기에서 핀치 확대/축소 및 드래그 제스처를 사용하여 이미지 위치와 크기를 조정할 수 있습니다. 이미지가 중앙에 가까워지면 스냅 가이드가 표시됩니다. 미리보기 아래의 슬라이더로도 조정할 수 있습니다.</string>
+    <string name="header_creator_guide_positioning_body">편집기에서 이미지를 드래그하거나 핀치하여 조정할 수 있으며, 슬라이더를 사용해 크기를 조절할 수도 있습니다. 점선으로 표시된 상자는 기본 로고가 위치하는 영역을 나타내며, 이미지가 기본 로고와 정확히 맞춰지면 안내선이 표시됩니다.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">패치 선택</string>
     <string name="batch_patch_title">일괄 패치</string>
@@ -475,9 +492,12 @@
     <string name="home_app_info_app_update_available_description">패치 소스가 이 앱의 최신 버전을 지원합니다. 해당 버전으로 이동하려면 다시 패치하세요</string>
     <string name="home_app_info_newest_supported_version">지원되는 최신 버전</string>
     <string name="home_app_info_version_move">설치된 버전 %1$s, 지원되는 최신 버전 %2$s</string>
+    <string name="home_app_info_version_restore">%1$s 설치됨, %2$s 패치됨</string>
     <string name="home_app_info_app_deleted_warning">앱이 제거되었습니다</string>
     <string name="home_app_info_app_deleted_description">이 앱은 Morphe 외부에서 제거되었습니다. 기능을 복원하려면 다시 패치하세요</string>
     <string name="home_app_info_not_patched_description">이 앱의 패치되지 않은 버전이 설치되어 있습니다. Morphe는 여전히 이전 패치 기록을 보유하고 있습니다</string>
+    <string name="home_app_info_mount_replaced_description">다른 버전이 마운트된 앱을 교체하여 패치가 더 이상 적용되지 않습니다. 복원하면 패치된 버전을 다시 적용할 수 있습니다</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play에서 마운트된 앱을 업데이트하여 패치가 더 이상 적용되지 않습니다. 복원을 누르면 패치된 버전을 다시 적용할 수 있습니다. 패치 상태를 유지하려면 Google Play에서 해당 앱의 자동 업데이트를 비활성화하세요</string>
     <string name="app_links_title">지원되는 웹 링크</string>
     <string name="app_links_description">Android 12 이상에서는 승인된 경우를 제외하고 지원되는 도메인 링크가 기본적으로 브라우저에서 열립니다</string>
     <string name="app_links_unverified_banner_title">웹 링크가 확인되지 않음</string>
@@ -487,8 +507,6 @@
     <string name="app_links_open_settings">링크 설정 열기</string>
     <string name="app_links_repair_success">앱 링크 활성화 성공</string>
     <string name="app_links_repair_failed">앱 링크 자동 활성화 실패</string>
-    <string name="app_links_badge_enabled">활성화됨</string>
-    <string name="app_links_badge_disabled">비활성화됨</string>
     <string name="app_links_all_verified">지원되는 모든 링크가 이 앱에서 열리도록 설정되었습니다</string>
     <string name="app_links_fix">링크 수정</string>
     <string name="configure">설정</string>
@@ -519,10 +537,10 @@
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">앱</string>
     <string name="patcher_field_package">패키지</string>
+    <string name="patcher_field_failed_patch">실패한 패치</string>
     <string name="patcher_field_source">소스</string>
     <string name="patcher_field_split">분할 APK</string>
     <string name="patcher_field_manager">매니저</string>
-    <string name="patcher_field_patcher">패처</string>
     <string name="patcher_field_runtime">런타임</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">라이브러리</string>
@@ -553,6 +571,7 @@
     <string name="patcher_installing_subtitle">신나게 놀 준비가 거의 다 됐어요🎸</string>
     <string name="patcher_success_title">모두 완료! 🎉</string>
     <string name="patcher_success_subtitle">앱을 패치 및 설치하였습니다!</string>
+    <string name="patcher_mounted_subtitle">앱이 패치되고 마운트되었습니다!</string>
     <string name="patcher_complete_title">패치 완료! ✨</string>
     <string name="patcher_failed_title">이런! 오류가 발생하였습니다</string>
     <string name="patcher_failed_dialog_title">패치 실패</string>
@@ -571,6 +590,7 @@
 
 앱을 제거하면 모든 앱 데이터가 영구적으로 삭제됩니다"</string>
     <string name="patcher_install_error_title">설치 오류</string>
+    <string name="patcher_mount_error_title">마운트 오류</string>
     <string name="patcher_install_error_subtitle">앱을 제거한 후에 다시 설치하세요</string>
     <string name="patcher_ready_to_mount_subtitle">마운트하려면 아래 버튼을 탭하세요</string>
     <string name="patcher_patches_excluded_for_installer">이 설치 방법에는 사용할 수 없으며 제외됩니다: %s</string>
@@ -598,7 +618,6 @@
     <string name="patcher_step_load_patches">패치를 불러오는 중</string>
     <string name="patcher_step_prepare_split_apk">분할 APK를 병합하는 중</string>
     <string name="patcher_step_unpack">APK 파일을 읽어오는 중</string>
-    <string name="patcher_step_group_patching">패치하는 중</string>
     <string name="patcher_step_group_saving">저장하는 중</string>
     <string name="patcher_step_write_patched">패치된 APK 파일을 작성하는 중</string>
     <string name="patcher_step_sign_apk">패치된 APK 파일에 서명하는 중</string>
@@ -610,6 +629,7 @@
     <string name="patcher_memory_adjustment_title">메모리가 부족합니다</string>
     <string name="patcher_memory_adjustment_description">패처가 %1$d MB 메모리 제한으로 실행되는 동안 시스템에 의해 중지되었습니다. 제한을 %2$d MB로 낮추면 패처가 사용하는 메모리가 줄어들어 작업이 완료될 수 있습니다</string>
     <string name="patcher_memory_adjustment_description_at_minimum">패처가 %1$d MB 메모리 제한으로 실행되는 동안 시스템에 의해 중지되었습니다. 이 제한은 이미 설정 가능한 가장 낮은 값입니다. 패치 소스를 더 적게 사용하거나 패치를 더 적게 선택한 후 다시 패치해 보세요</string>
+    <string name="patcher_memory_adjustment_description_finished">시스템이 패처를 %1$dMB 메모리 제한에서 중단했지만, 실제로는 %2$dMB까지 사용해야 작업이 완료되었습니다. 다음번에는 %2$dMB부터 시작하면 이전에 메모리 부족으로 실패했던 시도를 건너뛸 수 있습니다</string>
     <string name="patcher_memory_adjustment_apply">%1$d MB로 낮추기</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">패치를 진행하는 중…</string>
@@ -709,6 +729,9 @@
     <string name="settings_appearance_background_snow">눈송이</string>
     <string name="settings_appearance_background_grid">격자</string>
     <string name="settings_appearance_background_particles">입자</string>
+    <string name="settings_appearance_background_lava">라바 램프</string>
+    <string name="settings_appearance_background_halloween">할로윈</string>
+    <string name="settings_appearance_background_fireworks">불꽃놀이</string>
     <string name="settings_appearance_background_none">없음</string>
     <string name="settings_appearance_background_random">무작위</string>
     <string name="settings_appearance_background_random_interval_launch">앱 실행 시</string>
@@ -716,6 +739,10 @@
     <string name="settings_appearance_background_random_interval_3days">3일마다</string>
     <string name="settings_appearance_parallax_effect">페럴랙스 효과</string>
     <string name="settings_appearance_parallax_effect_description">기기를 기울이면 배경이 부드럽게 이동합니다</string>
+    <string name="settings_appearance_seasonal_themes">시즌 테마</string>
+    <string name="settings_appearance_seasonal_themes_description">기념일 및 연휴 기간에 특별한 배경과 인사말을 표시합니다</string>
+    <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">시즌 테마가 활성화되어 있는 동안 %1$s 배경이 %2$s까지 표시됩니다</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">테마</string>
     <string name="settings_appearance_theme_mode">테마 모드</string>
@@ -776,9 +803,24 @@
     <string name="settings_appearance_app_icon_default">기본값</string>
     <string name="settings_appearance_app_icon_light_2">하늘</string>
     <string name="settings_appearance_app_icon_light_3">일몰</string>
-    <string name="settings_appearance_app_icon_dark_1">바다</string>
+    <string name="settings_appearance_app_icon_light_4">라벤더</string>
+    <string name="settings_appearance_app_icon_light_5">빙하</string>
+    <string name="settings_appearance_app_icon_light_6">안개</string>
+    <string name="settings_appearance_app_icon_light_7">모래</string>
+    <string name="settings_appearance_app_icon_dark_1">청록</string>
     <string name="settings_appearance_app_icon_dark_2">공허</string>
-    <string name="settings_appearance_app_icon_dark_3">남색</string>
+    <string name="settings_appearance_app_icon_dark_3">자두</string>
+    <string name="settings_appearance_app_icon_dark_4">자정</string>
+    <string name="settings_appearance_app_icon_dark_5">슬레이트</string>
+    <string name="settings_appearance_app_icon_accent_1">오로라</string>
+    <string name="settings_appearance_app_icon_accent_2">잉크</string>
+    <string name="settings_appearance_app_icon_accent_3">종이</string>
+    <string name="settings_appearance_app_icon_accent_4">황혼</string>
+    <string name="settings_appearance_app_icon_background">배경</string>
+    <string name="settings_appearance_app_icon_mark">로고</string>
+    <string name="settings_appearance_app_icon_mark_color">컬러</string>
+    <string name="settings_appearance_app_icon_mark_white">하얀</string>
+    <string name="settings_appearance_app_icon_mark_black">검정</string>
     <string name="settings_appearance_app_icon_change_dialog_title">앱 아이콘을 변경할까요?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">&lt;b&gt;%s&lt;/b&gt;으로 변경하고 다시 시작하시겠습니까?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -816,7 +858,6 @@
     <string name="external_batch_patch_trust_caller">이 앱을 항상 허용</string>
     <string name="external_batch_patch_unknown_caller">알 수 없는 앱</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Morphe 업데이트 사용 가능</string>
     <string name="notification_bundle_update_title">새 패치 사용 가능</string>
     <string name="notification_update_text">%s 버전 다운로드 준비 완료</string>
     <string name="notification_bundle_update_text_unversioned">Morphe를 열고 업데이트하려면 탭하세요</string>
@@ -827,8 +868,11 @@
     <string name="notification_channel_manager_updates_description">새 Morphe 릴리스에 대한 알림</string>
     <string name="notification_channel_patch_updates">패치 업데이트</string>
     <string name="notification_channel_patch_updates_description">새 패치 릴리스에 대한 알림</string>
-    <string name="notification_channel_patcher">패치</string>
     <string name="notification_channel_patcher_description">Morphe가 백그라운드에서 앱을 패치하는 동안에 표시되는 알림</string>
+    <string name="notification_channel_mounted_apps">마운트된 앱</string>
+    <string name="notification_channel_mounted_apps_description">다른 버전이 마운트된 앱을 교체하여 기존 패치가 더 이상 적용되지 않는 경우입니다</string>
+    <string name="notification_mount_replaced_title">%1$s는 더 이상 패치되지 않음</string>
+    <string name="notification_mount_replaced_text">v%1$s가 패치된 v%2$s를 교체했습니다. Morphe를 열어서 복원하세요</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">전문가 설정</string>
     <string name="settings_advanced_expert_mode">전문가 모드</string>
@@ -1244,9 +1288,7 @@ morphe_header_custom_dark.png
     <string name="selected">선택됨</string>
     <string name="not_selected">선택 안함</string>
     <string name="select_all">모두 선택</string>
-    <string name="select_all_done">모두 선택하였습니다</string>
     <string name="deselect_all">모두 선택 해제</string>
-    <string name="deselect_all_done">모두 선택 해제하였습니다</string>
     <string name="reorder_list">목록 다시 정렬</string>
     <string name="reorder_list_hint">드래그하여 순서를 변경하세요</string>
     <string name="reorder_done">순서를 저장하였습니다</string>
@@ -1282,6 +1324,7 @@ morphe_header_custom_dark.png
     <string name="unmount">마운트 해제</string>
     <string name="unmounted">마운트 해제됨</string>
     <string name="remount">다시 마운트</string>
+    <string name="restore">복원</string>
     <string name="share">공유</string>
     <string name="install">설치</string>
     <string name="installed">설치됨</string>
@@ -1302,12 +1345,14 @@ morphe_header_custom_dark.png
     <string name="sources">소스</string>
     <string name="installing_ellipsis">설치하는 중…</string>
     <string name="mounting_ellipsis">마운트하는 중…</string>
+    <string name="mount_stage_restoring_stock">원본을 복원하는 중…</string>
+    <string name="mount_stage_copying">복사하는 중…</string>
     <string name="unmounting_ellipsis">마운트 해제하는 중…</string>
     <string name="importing_ellipsis">가져오는 중…</string>
     <string name="imported_successfully">성공적으로 가져왔습니다</string>
     <string name="changelog">변경 사항 보기</string>
     <string name="changelog_for_app">\'%s\'에 대한 변경 사항</string>
-    <string name="changelog_general_changes">일반 변경 사항</string>
+    <string name="changelog_general_changes">일반 변경</string>
     <string name="whats_new">새로운 기능</string>
     <string name="changelog_description">이 버전의 새로운 기능</string>
     <string name="changelog_download_fail">변경 사항을 다운로드할 수 없습니다: %s</string>
@@ -1349,7 +1394,6 @@ morphe_header_custom_dark.png
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">이 릴리스를 게시하는 중입니다. 몇 분 후 다시 시도해 주세요</string>
     <string name="update_download_missing">다운로드한 업데이트를 더 이상 사용할 수 없습니다. 다시 다운로드하세요</string>
-    <string name="download_manager_failed">업데이트를 다운로드할 수 없습니다: %s</string>
     <string name="failed_to_check_updates">업데이트를 확인할 수 없습니다: %s</string>
     <string name="failed_to_download_update">업데이트를 다운로드할 수 없습니다: %s</string>
     <string name="download_confirmation_metered">"현재 모바일 데이터를 사용하고 있습니다. 통신사 데이터 요금이 부과될 수 있습니다

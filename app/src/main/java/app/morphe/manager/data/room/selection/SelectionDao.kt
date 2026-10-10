@@ -1,3 +1,13 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ *
+ * Original hard forked code:
+ * https://github.com/Jman-Github/Universal-ReVanced-Manager/blob/597b3173a004f5a9aae54326046dd7fd4c5b7777/app/src/main/java/app/revanced/manager/data/room/selection/SelectionDao.kt
+ *
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
+ */
+
 package app.morphe.manager.data.room.selection
 
 import androidx.room.ColumnInfo
@@ -70,12 +80,6 @@ abstract class SelectionDao {
 
     @Insert
     abstract suspend fun createSelection(selection: PatchSelection)
-
-    @Query(
-        "SELECT DISTINCT ps.package_name FROM patch_selections ps" +
-                " INNER JOIN selected_patches sp ON ps.uid = sp.selection"
-    )
-    abstract fun getPackagesWithSelection(): Flow<List<String>>
 
     @Query("SELECT DISTINCT patch_bundle FROM patch_selections")
     abstract suspend fun getAllBundleUids(): List<Int>

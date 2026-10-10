@@ -385,8 +385,8 @@ fun ExpertPatchingInProgress(
     miniGameState: MiniGameState,
     queueHeader: (@Composable () -> Unit)? = null,
     onCancelClick: () -> Unit,
-    onInstallClick: () -> Unit = {},
-    onHomeClick: () -> Unit
+    resultButton: ResultButton = ResultButton.Install,
+    onResultClick: () -> Unit = {}
 ) {
     val (completed, total) = patchesProgress
     val rawLogs = patchProgress.logs
@@ -408,7 +408,7 @@ fun ExpertPatchingInProgress(
                     val now = System.currentTimeMillis()
                     val elapsed = now - lastScrollTime
                     if (elapsed < SCROLL_THROTTLE_MS && patcherSucceeded == null) {
-                        delay(SCROLL_THROTTLE_MS - elapsed)
+                        delay((SCROLL_THROTTLE_MS - elapsed).milliseconds)
                     } else if (lastScrollTime == 0L) {
                         delay(50.milliseconds)
                     }
@@ -429,12 +429,11 @@ fun ExpertPatchingInProgress(
         PatcherBottomActionBar(
             horizontalPadding = horizontalPadding,
             showCancelButton = patcherSucceeded == null,
-            showHomeButton = patcherSucceeded == true,
-            showInstallButton = patcherSucceeded == true,
+            showHomeButton = false,
+            resultButton = resultButton.takeIf { patcherSucceeded == true },
             showCopyLogsButton = true,
             onCancelClick = onCancelClick,
-            onHomeClick = onHomeClick,
-            onInstallClick = onInstallClick,
+            onResultClick = onResultClick,
             onCopyLogsClick = {
                 copyToClipboard(buildLogsText())
             }
@@ -659,7 +658,6 @@ private fun ExpertLogPanel(
     miniGameState: MiniGameState,
     accentColor: Color? = null
 ) {
-    val rawLogs = patchProgress.logs
     val logItems = patchProgress.logItems
     // Decoration only: the log's own colors keep telling warnings and errors apart
     val appAccent = usableAppAccent(accentColor)
@@ -742,15 +740,15 @@ private fun ExpertLogPanel(
                                             if (!patchProgress.logsLost) {
                                                 LiveIndicatorDot(color = dotColor, size = 10.dp)
                                             }
-                                            Text(
+                                            CrossfadeText(
                                                 text = stringResource(
                                                     if (patchProgress.logsLost) R.string.patcher_logs_lost
                                                     else R.string.patcher_logs_waiting
                                                 ),
-                                                style = MaterialTheme.typography.bodySmall,
+                                                style = MaterialTheme.typography.bodySmall
+                                                    .copy(fontFamily = FontFamily.Monospace),
                                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                                                     .copy(alpha = 0.45f),
-                                                fontFamily = FontFamily.Monospace,
                                                 textAlign = TextAlign.Center
                                             )
                                         }
@@ -931,7 +929,7 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
                 value = item.managerVersion ?: "?",
                 modifier = Modifier.weight(1f))
             BannerFieldCell(
-                label = stringResource(R.string.patcher_field_patcher),
+                label = stringResource(R.string.settings_advanced_patcher),
                 value = item.patcherVersion ?: "?",
                 modifier = Modifier.weight(1f))
         }

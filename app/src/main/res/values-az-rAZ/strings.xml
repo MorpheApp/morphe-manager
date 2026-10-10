@@ -123,6 +123,26 @@
     <string name="home_greeting_super_late_3">Artıq bu yerdə, oyaq qal və yamaqla</string>
     <string name="home_greeting_super_late_4">Sən və serverlər, ikiniz də oyaqsınız</string>
     <string name="home_greeting_super_late_5">Gecəcil və səmərəli</string>
+    <!-- Halloween greetings, shown instead of the ones above around October 31 -->
+    <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_1">Hiylə yaxud yamaq?</string>
+    <string name="home_greeting_halloween_2">Bu APK-larda heç bir cin yoxdur, yoxladıq</string>
+    <string name="home_greeting_halloween_3">Sehrli mövsüm, yeni yamaqlar</string>
+    <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
+    <string name="home_greeting_halloween_4">Buralara dəhşətli yamaqlar gəlir</string>
+    <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
+    <string name="home_greeting_winter_1">Bayramınız mübarək, təzə yamaqlar</string>
+    <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
+    <string name="home_greeting_winter_2">Qar yağsın, yamaqlansın</string>
+    <string name="home_greeting_winter_3">Yeni il, yeni yamaqlar</string>
+    <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
+    <string name="home_greeting_winter_4">Qarların arasından yamaqlayaraq</string>
+    <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">Yeni İliniz Mübarək!</string>
+    <string name="home_greeting_new_year_2">Təzə yamaqlar üçün geri sayım</string>
+    <string name="home_greeting_new_year_3">Yeni il, eyni reklamsız tətbiqlər</string>
+    <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Köhnə versiyalara əlvida, yenilərə salam</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Yamaq mənbələri</string>
     <string name="sources_search">Mənbələri və yamaqları axtar</string>
@@ -272,7 +292,6 @@ Bu veb saytdan əlavə etdiyiniz hər şey öz riskinizlə istifadə olunur"</st
     <string name="home_use_installed_app">Quraşdırılan tətbiqi istifadə et</string>
     <string name="home_installed_app_picker_title">Quraşdırılmış tətbiqlər</string>
     <string name="home_installed_app_picker_empty">Tətbiq tapılmadı</string>
-    <string name="home_installed_app_picker_filter_all">Bütün tətbiqlər</string>
     <string name="home_installed_app_picker_filter_user">Ancaq istifadəçi tətbiqləri</string>
     <string name="home_installed_app_picker_filter_system">Ancaq sistem tətbiqləri</string>
     <string name="home_invalid_apk_unreadable">Faylı oxumaq mümkün olmadı. \'Xarici Saxlancın\' batareya məhdudiyyətli olmadığını yoxlayın</string>
@@ -281,7 +300,6 @@ Bu veb saytdan əlavə etdiyiniz hər şey öz riskinizlə istifadə olunur"</st
     <string name="home_invalid_apk_io_error">Faylı açmaq olmadı. Xahiş olunur, təkrar cəhd et</string>
     <string name="home_external_apk_expert_mode_required">Bu xüsusiyyət yalnız mütəxəssis rejimində əlçatandır</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Mütəxəssis rejimi</string>
     <string name="expert_mode_search">Yamaqları axtar</string>
     <string name="expert_mode_disable_all">Hamısını qapa</string>
     <string name="expert_mode_disable_all_done">Bütün yamaqlar qapadılıb</string>
@@ -372,44 +390,43 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="adaptive_icon_select_image">Şəkil seçin</string>
     <string name="adaptive_icon_change_image">Şəkli dəyişdir</string>
     <string name="image_load_failed">Bu şəkli yükləmək olmadı</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Ön plan şəkli</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Başlanğıc simvolu</string>
+    <string name="adaptive_icon_gesture_hint">Köçürmək üçün sürüklə, ölçüləndirmək üçün çimdiklə</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Önizləmə</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Standart</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Koloritə uyğun</string>
     <string name="adaptive_icon_background_color">Fon rəngi</string>
     <string name="adaptive_icon_reset_transform">Mövqeyi və miqyası standarta qaytar</string>
-    <string name="adaptive_icon_safe_zone_inner">Etibarlı yer (həmişə görünən)</string>
-    <string name="adaptive_icon_safe_zone_outer">Örtük yeri (kəsilmiş ola bilər)</string>
-    <string name="adaptive_icon_no_transparency_warning">Şəklin pikselləri şəffaf deyil. Nəticə səhv görünə bilər</string>
+    <string name="adaptive_icon_no_transparency_warning">Bu şəkilin şəffaf pikselləri yoxdur, buna görə də koloritə uyğun simvollar və bildiriş nişanları Morphe simvolunu saxlayır</string>
     <string name="adaptive_icon_created_success">Uyğun simvol uğurla yaradıldı</string>
     <string name="adaptive_icon_creation_failed">Uyğun simvol yaratmaq olmadı</string>
-    <string name="adaptive_icon_label">Uyuşan</string>
-    <string name="adaptive_icon_monochrome_label">Saya</string>
     <string name="adaptive_icon_guide">Simvol yaratma bələdçisi</string>
     <string name="adaptive_icon_guide_png_title">Şəffaf fonu olan PNG istifadə et</string>
-    <string name="adaptive_icon_guide_png_body">Ön plan şəffaf fonu olan PNG faylı olmalıdır. Bütöv rəngli fon səhv görünəcək - fon rəngi aşağıdakı fon seçicisindən gəlməlidir.</string>
+    <string name="adaptive_icon_guide_png_body">Ən yaxşı nəticə üçün şəffaf fonda simvol, fon rəngi aşağıda seçilir. Şəffaflığı olmayan şəkil isə bütün simvolu doldurur, bu halda koloritə uyğun simvollar və bildiriş simvolları Morphe simvolunu saxlayır.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Etibarlı sahələr</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Daxili sahə (bütöv): məzmun həmişə bütün başladıcı formalarında tam görünür.
-Xarici sahə (ştrixli): başladıcı örtüyündən kəsilə bilər - mühüm hissələri daxili zonanın içərisində saxla."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Çərçivə başladıcınızın simvol formasını göstərir və ondan kənar hər şey kəsilib atılır. Digər başladıcılar fərqli formalar istifadə edir, buna görə də vacib detalları hər bir formanın göstərdiyi kəsik xətli dairənin daxilində saxla.</string>
     <string name="adaptive_icon_guide_notification_title">Bildiriş simvolu</string>
-    <string name="adaptive_icon_guide_notification_body">Ön plan şəklindən birbaşa olaraq yaradılır. Bildiriş sürüşdürməsi istifadə edərək ölçüsünü tənzimlə. Bütün görünən məzmun status tabelində ağ görünür.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Saya simvol</string>
-    <string name="adaptive_icon_guide_monochrome_body">Eynilə uyuşan simvol dəyişmələrin istifadə edərək ön plan şəklindən birbaşa olaraq yaradılır. Bu, Android 13 və daha sonrakılarda divar kağızının cila rəngi ilə azca rənglənmiş görünür.</string>
+    <string name="adaptive_icon_guide_notification_body">Faylın kənarından asılı olmayaraq, şəklin görünən hissəsindən kəsilir və digər status cərgəsi simvolları ilə eyni ölçüyə gətirilir. Sürüşdürücü vasitəsilə önizləmənin altından onu tənzimləyin. Android bunu tək rəngdə göstərir.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Koloritə uyğun simvol</string>
+    <string name="adaptive_icon_guide_monochrome_body">Başladıcı simvolu ilə eyni mövqe və ölçüdə olmaqla şəkildən kəsilir. Android 13 və daha yuxarılarda koloritə uyğun simvolları aktiv olan başladıcılar onu divar kağızından rəngləyir.</string>
     <string name="notification_icon_preview">Bildiriş</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Xüsusi sərlövhə yarat</string>
     <string name="header_creator_light_theme">İşıqlı kolorit sərlövhəsi</string>
     <string name="header_creator_dark_theme">Qaranlıq kolorit sərlövhəsi</string>
-    <string name="header_creator_no_image">Seçilən şəkil yoxdur</string>
     <string name="header_creator_success">Sərlövhə uğurla yaradıldı</string>
     <string name="header_creator_failed">Sərlövhə yaratmaq olmadı</string>
     <string name="header_creator_guide">Sərlövhə yaratma bələdçisi</string>
     <string name="header_creator_guide_image_title">Şəkil tələbləri</string>
-    <string name="header_creator_guide_image_body">İstənilən şəkil faylın (PNG və ya JPEG) istifadə et. Ən yaxşı nəticələr üçün təqribən 2.7:1 tərəf nisbətinə malik geniş format şəklini istifadə edin. Şəffaf fonları olan PNG faylları tətbiq koloriti ilə təbii şəkildə qarışacaq.</string>
+    <string name="header_creator_guide_image_body">Şəffaf fonlu PNG tətbiq paneli ilə qarışır. Fayldakı simvolun ətrafındakı kənarlar nəzərə alınmır, buna görə də o, standart simvolun ölçüsündən və yerindən başlayır.</string>
     <string name="header_creator_guide_themes_title">İşıqlı və qaranlıq koloritlər</string>
     <string name="header_creator_guide_themes_body">Əksər tətbiqlər işıqlı və qaranlıq koloritlər üçün ayrı şəkillər tələb edir. Bəzi tətbiqlər (məsələn, YouTube Music) yalnız qaranlıq kolorit istifadə edir, belə ki yalnız həmin bölmə görünür.</string>
     <string name="header_creator_guide_positioning_title">Yerləşdirmə və ölçüləndirmə</string>
-    <string name="header_creator_guide_positioning_body">Şəklinizi yerləşdirmək və ölçüləndirmək məqsədilə önizləmədəki birbaşa yaxınlaşdırmaq üçün çimdikləmək və sürükləmək jestlərin istifadə edin. Şəkil mərkəzə yaxındırsa, dartma göstəriciləri görünür. Önizləmənin aşağısındakı sürüşdürməni də istifadə edə bilərsiniz.</string>
+    <string name="header_creator_guide_positioning_body">Şəkli redaktorda sürüklə və çimdiklə, yaxud sürüşdürücü vasitəsilə ölçüsünü dəyişin. Kəsik xətli qutu standart simvolun yerləşdiyi yeri göstərir və şəkil onunla eyni xəttə düşdükdə bələdçilər görünür.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Seçiləni yamaqla</string>
     <string name="batch_patch_title">Toplu yamaqlama</string>
@@ -475,9 +492,12 @@ Xarici sahə (ştrixli): başladıcı örtüyündən kəsilə bilər - mühüm h
     <string name="home_app_info_app_update_available_description">Yamaq mənbələri bu tətbiqin daha yeni versiyasını dəstəkləyir. Həmin versiyaya keçmək üçün onu təkrar yamaqla</string>
     <string name="home_app_info_newest_supported_version">Ən yeni dəstəklənən</string>
     <string name="home_app_info_version_move">%1$s quraşdırılıb, ən yeni dəstəklənən %2$s</string>
+    <string name="home_app_info_version_restore">%1$s quraşdırıldı, %2$s yamaqlandı</string>
     <string name="home_app_info_app_deleted_warning">Tətbiq quraşdırması silindi</string>
     <string name="home_app_info_app_deleted_description">Bu tətbiq Morphe xarici silindi. Funksionallığı qaytarmaq üçün onu təkrar quraşdır</string>
     <string name="home_app_info_not_patched_description">Bu tətbiqin yamaqlanmamış versiyası quraşdırılıb. Morphe-də hələ də əvvəlki yamaq qeydi qalır</string>
+    <string name="home_app_info_mount_replaced_description">Başqa versiya quraşdırılmış tətbiqi əvəzlədi, buna görə də yamaq artıq tətbiq olunmur. Bərpa yamaqlanmış versiyanı geri qaytarır</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play quraşdırılmış tətbiqi yenilədi, buna görə də yamaq artıq tətbiq olunmur. Bərpa yamaqlanmış versiyanı geri qaytarır. Yamaqlanmış qalması üçün Google Play-də onun avtomatik yenilənməsini qapat</string>
     <string name="app_links_title">Dəstəklənən veb linklər</string>
     <string name="app_links_description">Android 12+\'da, dəstəklənən domenlərin keçidləri təsdiqlənmədiyi təqdirdə standarta görə brauzerinizdə açılır</string>
     <string name="app_links_unverified_banner_title">Veb linklər təsdiqlənməyib</string>
@@ -487,8 +507,6 @@ Xarici sahə (ştrixli): başladıcı örtüyündən kəsilə bilər - mühüm h
     <string name="app_links_open_settings">Link tənzimləmələrini aç</string>
     <string name="app_links_repair_success">Tətbiq linkləri uğurla aktivləşdirildi</string>
     <string name="app_links_repair_failed">Tətbiq linklərini avtomatik aktivləşdirmək olmadı</string>
-    <string name="app_links_badge_enabled">Aktivdir</string>
-    <string name="app_links_badge_disabled">Qapalıdı</string>
     <string name="app_links_all_verified">Bütün dəstəklənən keçidlər bu tətbiqdə açılmaq üçün tənzimlənib</string>
     <string name="app_links_fix">Linkləri düzəlt</string>
     <string name="configure">Tənzimlə</string>
@@ -522,7 +540,6 @@ Xarici sahə (ştrixli): başladıcı örtüyündən kəsilə bilər - mühüm h
     <string name="patcher_field_source">Mənbə</string>
     <string name="patcher_field_split">Ayrılmış APK</string>
     <string name="patcher_field_manager">İdarəedici</string>
-    <string name="patcher_field_patcher">Yamaqlayıcı</string>
     <string name="patcher_field_runtime">İcra vaxtı</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Kitabxanalar</string>
@@ -553,10 +570,12 @@ Xarici sahə (ştrixli): başladıcı örtüyündən kəsilə bilər - mühüm h
     <string name="patcher_installing_subtitle">Təqribən rok-a hazırdır! 🎸</string>
     <string name="patcher_success_title">Hamısı bitdi! 🎉</string>
     <string name="patcher_success_subtitle">Tətbiqiniz yamaqlanıb və quraşdırılıb!</string>
+    <string name="patcher_mounted_subtitle">Tətbiqiniz yamaqlanıb və montajlanıb!</string>
     <string name="patcher_complete_title">Yamaqlanma tamamlandı! ✨</string>
     <string name="patcher_failed_title">Vay! Nəsə səhv baş verdi</string>
     <string name="patcher_failed_dialog_title">Yamaqlanma uğursuz oldu</string>
     <string name="patcher_error_details">Xəta təfərrüatları</string>
+    <string name="patcher_change_patches">Yamaqları dəyişdir</string>
     <string name="patcher_unknown_error">Bilinməyən xəta baş verdi</string>
     <string name="patcher_split_step_extracting">Ayrılmış APK-lar çıxarılır</string>
     <string name="patcher_split_step_merging">%s birləşdirilir</string>
@@ -570,6 +589,7 @@ Xarici sahə (ştrixli): başladıcı örtüyündən kəsilə bilər - mühüm h
 
 Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="patcher_install_error_title">Quraşdırma xətası</string>
+    <string name="patcher_mount_error_title">Montajlama xətası</string>
     <string name="patcher_install_error_subtitle">Silməyə və təkrar quraşdırmağa çalış</string>
     <string name="patcher_ready_to_mount_subtitle">Montajlamaq üçün aşağıdakı düyməyə toxun</string>
     <string name="patcher_patches_excluded_for_installer">Bu quraşdırma üsulu üçün əlçatan deyil və xaric edilib: %s</string>
@@ -597,7 +617,6 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="patcher_step_load_patches">Yamaqlar yüklənilir</string>
     <string name="patcher_step_prepare_split_apk">Ayrılan APK-nı birləşdirir</string>
     <string name="patcher_step_unpack">APK faylını oxuyur</string>
-    <string name="patcher_step_group_patching">Yamaqlanır</string>
     <string name="patcher_step_group_saving">Saxlanılır</string>
     <string name="patcher_step_write_patched">Yamaqlanan APK faylı qeyd olunur</string>
     <string name="patcher_step_sign_apk">Yamaqlanan APK faylı imzalanır</string>
@@ -609,6 +628,7 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="patcher_memory_adjustment_title">Kifayət qədər yaddaş yoxdur</string>
     <string name="patcher_memory_adjustment_description">Yamaqlayıcı %1$d MB yaddaş həddi ilə işləyərkən sistem tərəfindən dayandırıldı. Həddin %2$d MB-a endirilməsi yamaqlayıcını daha kiçik hədəfə çevirir və icranı tamamlamağa imkan verə bilər</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Yamaqlayıcı %1$d MB yaddaş həddi ilə işləyərkən sistem tərəfindən dayandırıldı ki, bu da artıq mövcud olan ən aşağı limitdir. Daha az yamaq mənbəyi ilə yamaqlamağa çalışın və ya daha az yamaq seç</string>
+    <string name="patcher_memory_adjustment_description_finished">Sistem yamaqlayıcını %1$d MB yaddaş həddində dayandırdı və o yalnız %2$d MB-da bitdi. %2$d MB-dan başlayaraq növbəti dəfə uğursuz cəhdi ötürür</string>
     <string name="patcher_memory_adjustment_apply">%1$d MB-a endir</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Yamaqlanma irəliləyişdədir...</string>
@@ -708,6 +728,9 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="settings_appearance_background_snow">Qar</string>
     <string name="settings_appearance_background_grid">Şəbəkə</string>
     <string name="settings_appearance_background_particles">Zərrəciklər</string>
+    <string name="settings_appearance_background_lava">Lava çırağı</string>
+    <string name="settings_appearance_background_halloween">Cadugərlər bayramı</string>
+    <string name="settings_appearance_background_fireworks">Fişənglər</string>
     <string name="settings_appearance_background_none">Heç biri</string>
     <string name="settings_appearance_background_random">Təsadüfi</string>
     <string name="settings_appearance_background_random_interval_launch">Açılışda</string>
@@ -715,6 +738,10 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="settings_appearance_background_random_interval_3days">3 gün arası</string>
     <string name="settings_appearance_parallax_effect">Parallaks effekti</string>
     <string name="settings_appearance_parallax_effect_description">Cihazı çevirərkən fonu rəvan şəkildə tərpətmək</string>
+    <string name="settings_appearance_seasonal_themes">Mövsümi mövzular</string>
+    <string name="settings_appearance_seasonal_themes_description">Bayramlar zamanı şənlik fonları və təbrikləri</string>
+    <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">Mövsümi mövzular aktiv olduğu halda %1$s fonu %2$s-ə qədər aktivdir</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Kolorit</string>
     <string name="settings_appearance_theme_mode">Kolorit rejimi</string>
@@ -775,9 +802,24 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="settings_appearance_app_icon_default">İlkin</string>
     <string name="settings_appearance_app_icon_light_2">Səma</string>
     <string name="settings_appearance_app_icon_light_3">Qürub</string>
-    <string name="settings_appearance_app_icon_dark_1">Okean</string>
+    <string name="settings_appearance_app_icon_light_4">Lavanda</string>
+    <string name="settings_appearance_app_icon_light_5">Buzlaq</string>
+    <string name="settings_appearance_app_icon_light_6">Duman</string>
+    <string name="settings_appearance_app_icon_light_7">Qum</string>
+    <string name="settings_appearance_app_icon_dark_1">Tünd-firuzəyi</string>
     <string name="settings_appearance_app_icon_dark_2">Sırf qara</string>
-    <string name="settings_appearance_app_icon_dark_3">Tünd göy</string>
+    <string name="settings_appearance_app_icon_dark_3">Gavalı</string>
+    <string name="settings_appearance_app_icon_dark_4">Gecəyarısı</string>
+    <string name="settings_appearance_app_icon_dark_5">Şifer</string>
+    <string name="settings_appearance_app_icon_accent_1">Şəfəq</string>
+    <string name="settings_appearance_app_icon_accent_2">Mürəkkəb</string>
+    <string name="settings_appearance_app_icon_accent_3">Kağız</string>
+    <string name="settings_appearance_app_icon_accent_4">Alaqaranlıq</string>
+    <string name="settings_appearance_app_icon_background">Arxa plan</string>
+    <string name="settings_appearance_app_icon_mark">Simvol</string>
+    <string name="settings_appearance_app_icon_mark_color">Rəng</string>
+    <string name="settings_appearance_app_icon_mark_white">Ağ</string>
+    <string name="settings_appearance_app_icon_mark_black">Qara</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Tətbiq simvolu dəyişdirilsin?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">&lt;b&gt;%s&lt;/b&gt; olaraq dəyişdirilib yenidən başladılsın?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -815,7 +857,6 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="external_batch_patch_trust_caller">Bu tətbiqə həmişə icazə ver</string>
     <string name="external_batch_patch_unknown_caller">Bilinməyən tətbiq</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Əlçatan Morphe yenilənməsi</string>
     <string name="notification_bundle_update_title">Yeni yamaqlar var</string>
     <string name="notification_update_text">%s versiyası yüklənilməyə hazırdır</string>
     <string name="notification_bundle_update_text_unversioned">Morphe-ni açmaq və yeniləmək üçün toxun</string>
@@ -826,8 +867,11 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="notification_channel_manager_updates_description">Yeni Morphe buraxılışları haqqında bildirişlər</string>
     <string name="notification_channel_patch_updates">Yamaq yeniləmələri</string>
     <string name="notification_channel_patch_updates_description">Yeni yamaq buraxılışları haqqında bildirişlər</string>
-    <string name="notification_channel_patcher">Yamaqlanır</string>
     <string name="notification_channel_patcher_description">Morphe tətbiqi fonda yamaqlayarkən görünür</string>
+    <string name="notification_channel_mounted_apps">Quraşdırılmış tətbiqlər</string>
+    <string name="notification_channel_mounted_apps_description">Başqa versiya quraşdırılmış tətbiqi əvəzlədikdə və onun yamağı artıq tətbiq olunmadıqda</string>
+    <string name="notification_mount_replaced_title">%1$s artıq yamaqlanmayıb</string>
+    <string name="notification_mount_replaced_text">v%1$s yamaqlanmış v%2$s ilə əvəzləndi. Onu bərpa etmək üçün Morphe-ni aç</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Mütəxəssis tənzimləmələri</string>
     <string name="settings_advanced_expert_mode">Mütəxəssis rejimi</string>
@@ -1242,9 +1286,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="selected">Seçildi</string>
     <string name="not_selected">Seçilməyib</string>
     <string name="select_all">Hamısını seç</string>
-    <string name="select_all_done">Hamısı seçilib</string>
     <string name="deselect_all">Hamısın seçməyin</string>
-    <string name="deselect_all_done">Hamısı seçilməyib</string>
     <string name="reorder_list">Siyahını yenidən sırala</string>
     <string name="reorder_list_hint">Yenidən sıralamaq üçün sürüklə</string>
     <string name="reorder_done">Düzülüş saxlanıldı</string>
@@ -1280,6 +1322,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="unmount">Montajı sil</string>
     <string name="unmounted">Montaj silinib</string>
     <string name="remount">Təkrar montajla</string>
+    <string name="restore">Bərpa et</string>
     <string name="share">Paylaş</string>
     <string name="install">Quraşdır</string>
     <string name="installed">Quraşdırılıb</string>
@@ -1300,6 +1343,8 @@ Təfərrüatlar: %2$s"</string>
     <string name="sources">Mənbələr</string>
     <string name="installing_ellipsis">Quraşdırılır…</string>
     <string name="mounting_ellipsis">Montajlanır...</string>
+    <string name="mount_stage_restoring_stock">Orijinalı bərpa edir…</string>
+    <string name="mount_stage_copying">Köçürülür...</string>
     <string name="unmounting_ellipsis">Montaj silinir…</string>
     <string name="importing_ellipsis">İdxal olunur…</string>
     <string name="imported_successfully">Uğurla idxal olundu</string>
@@ -1347,7 +1392,6 @@ Təfərrüatlar: %2$s"</string>
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">Bu buraxılış hələ də dərc olunur. Bir neçə dəqiqə sonra təkrar cəhd et</string>
     <string name="update_download_missing">Yüklənilmiş yeniləmə artıq əlçatan deyil. Onu təkrar yüklə</string>
-    <string name="download_manager_failed">Yeniləməni yükləmək olmadı: %s</string>
     <string name="failed_to_check_updates">Yeniləmələri yoxlamaq uğursuzdu: %s</string>
     <string name="failed_to_download_update">Yeniləməni yükləmək olmadı: %s</string>
     <string name="download_confirmation_metered">"Hazırda ölçülən əlaqədəsiniz və xidmət təminatçınızdan məlumat ödənişləri tətbiq oluna bilər.

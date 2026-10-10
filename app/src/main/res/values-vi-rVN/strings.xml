@@ -123,6 +123,26 @@
     <string name="home_greeting_super_late_3">Đến nước này rồi thì thức vá luôn, xem có gì mới hông~</string>
     <string name="home_greeting_super_late_4">Đêm nay không chỉ mình bạn thức đâu ^^</string>
     <string name="home_greeting_super_late_5">Cú đêm năng suất thật đấy</string>
+    <!-- Halloween greetings, shown instead of the ones above around October 31 -->
+    <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_1">Bị ghẹo hay vá lỗi?</string>
+    <string name="home_greeting_halloween_2">Không có ma nào trong các APK này, chúng tôi đã kiểm tra</string>
+    <string name="home_greeting_halloween_3">Mùa ma quái, bản vá mới</string>
+    <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
+    <string name="home_greeting_halloween_4">Có gì đó nham hiểm đang vá đến</string>
+    <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
+    <string name="home_greeting_winter_1">Chúc mừng kỳ nghỉ lễ, những bản vá mới</string>
+    <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
+    <string name="home_greeting_winter_2">Cứ tuyết rơi, cứ vá thôi</string>
+    <string name="home_greeting_winter_3">Năm mới, bản vá mới</string>
+    <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
+    <string name="home_greeting_winter_4">Vá xuyên qua tuyết</string>
+    <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">Chúc mừng năm mới!</string>
+    <string name="home_greeting_new_year_2">Đếm ngược đến những bản vá mới</string>
+    <string name="home_greeting_new_year_3">Năm mới, vẫn là những ứng dụng không quảng cáo</string>
+    <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Tạm biệt phiên bản cũ, chào đón phiên bản mới</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Nguồn vá</string>
     <string name="sources_search">Tìm kiếm nguồn và bản vá</string>
@@ -272,7 +292,6 @@ Bất cứ thứ gì bạn thêm từ trang web này đều được sử dụng
     <string name="home_use_installed_app">Dùng ứng dụng đã cài</string>
     <string name="home_installed_app_picker_title">Ứng dụng đã cài</string>
     <string name="home_installed_app_picker_empty">Không tìm thấy ứng dụng nào</string>
-    <string name="home_installed_app_picker_filter_all">Tất cả ứng dụng</string>
     <string name="home_installed_app_picker_filter_user">Chỉ ứng dụng đã cài</string>
     <string name="home_installed_app_picker_filter_system">Chỉ ứng dụng hệ thống</string>
     <string name="home_invalid_apk_unreadable">Không thể đọc tệp. Hãy kiểm tra xem \"Bộ nhớ ngoài\" có bị hạn chế pin hay không</string>
@@ -281,7 +300,6 @@ Bất cứ thứ gì bạn thêm từ trang web này đều được sử dụng
     <string name="home_invalid_apk_io_error">Không thể mở tệp. Vui lòng thử lại</string>
     <string name="home_external_apk_expert_mode_required">Tính năng này chỉ có ở chế độ Chuyên gia</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Chế độ chuyên gia</string>
     <string name="expert_mode_search">Tìm kiếm</string>
     <string name="expert_mode_disable_all">Tắt tất cả</string>
     <string name="expert_mode_disable_all_done">Đã tắt tất cả bản vá</string>
@@ -372,44 +390,43 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="adaptive_icon_select_image">Chọn ảnh</string>
     <string name="adaptive_icon_change_image">Đổi ảnh</string>
     <string name="image_load_failed">Không thể tải hình ảnh này</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Hình ảnh tiền cảnh</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Biểu tượng trình khởi chạy</string>
+    <string name="adaptive_icon_gesture_hint">Kéo để di chuyển, chụm để thay đổi kích thước</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Xem trước</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Tiêu chuẩn</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Theo chủ đề</string>
     <string name="adaptive_icon_background_color">Màu nền</string>
     <string name="adaptive_icon_reset_transform">Đặt lại vị trí và tỷ lệ</string>
-    <string name="adaptive_icon_safe_zone_inner">Vùng an toàn (luôn hiển thị)</string>
-    <string name="adaptive_icon_safe_zone_outer">Vùng mặt nạ (có thể bị cắt)</string>
-    <string name="adaptive_icon_no_transparency_warning">Hình ảnh không có pixel trong suốt. Kết quả có thể không chính xác</string>
+    <string name="adaptive_icon_no_transparency_warning">Hình ảnh này không có pixel trong suốt, vì vậy biểu tượng theo chủ đề và biểu tượng thông báo sẽ giữ nguyên logo Morphe</string>
     <string name="adaptive_icon_created_success">Đã tạo biểu tượng thích ứng thành công</string>
     <string name="adaptive_icon_creation_failed">Không thể tạo biểu tượng thích ứng</string>
-    <string name="adaptive_icon_label">Thích ứng</string>
-    <string name="adaptive_icon_monochrome_label">Đơn sắc</string>
     <string name="adaptive_icon_guide">Hướng dẫn tạo biểu tượng</string>
     <string name="adaptive_icon_guide_png_title">Sử dụng tệp PNG có nền trong suốt</string>
-    <string name="adaptive_icon_guide_png_body">Tiền cảnh phải là tệp PNG có nền trong suốt. Nền màu đồng nhất sẽ hiển thị không chính xác - màu nền nên được chọn từ trình chọn nền bên dưới.</string>
+    <string name="adaptive_icon_guide_png_body">Logo trên nền trong suốt hoạt động tốt nhất, với màu nền được chọn bên dưới. Ngược lại, hình ảnh không có độ trong suốt sẽ lấp đầy toàn bộ biểu tượng, và khi đó biểu tượng theo chủ đề và biểu tượng thông báo sẽ giữ nguyên logo Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Vùng an toàn</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Vùng trong (nét liền): luôn hiển thị đầy đủ trên mọi hình dạng biểu tượng trình khởi chạy.
-Vùng ngoài (nét đứt): có thể bị cắt theo hình dạng biểu tượng trình khởi chạy, nên hãy đặt các chi tiết quan trọng bên trong nét liền."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Đường viền thể hiện hình dạng biểu tượng trình khởi chạy của bạn và mọi thứ bên ngoài đường viền sẽ bị cắt bỏ. Các trình khởi chạy khác sử dụng các hình dạng khác, vì vậy hãy giữ các chi tiết quan trọng bên trong vòng tròn nét đứt mà mọi hình dạng đều có.</string>
     <string name="adaptive_icon_guide_notification_title">Biểu tượng thông báo</string>
-    <string name="adaptive_icon_guide_notification_body">Được tạo tự động từ ảnh tiền cảnh. Điều chỉnh kích thước bằng thanh trượt Thông báo. Tất cả nội dung hiển thị trên thanh trạng thái sẽ có màu trắng.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Biểu tượng đơn sắc</string>
-    <string name="adaptive_icon_guide_monochrome_body">Được tạo tự động từ ảnh tiền cảnh bằng cách sử dụng các phép biến đổi biểu tượng thích ứng tương tự. Từ Android 13 trở đi, biểu tượng sẽ có màu sắc theo màu nổi bật của hình nền.</string>
+    <string name="adaptive_icon_guide_notification_body">Được cắt từ phần nhìn thấy được của hình ảnh và có kích thước giống các biểu tượng thanh trạng thái khác, bất kể lề của tệp là bao nhiêu. Điều chỉnh nó bằng thanh trượt bên dưới bản xem trước. Android hiển thị biểu tượng này bằng một màu duy nhất.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Biểu tượng theo chủ đề</string>
+    <string name="adaptive_icon_guide_monochrome_body">Được cắt từ hình ảnh ở cùng vị trí và kích thước với biểu tượng trình khởi chạy. Trên Android 13 trở lên, các trình khởi chạy đã bật biểu tượng theo chủ đề sẽ lấy màu từ hình nền để tô nó.</string>
     <string name="notification_icon_preview">Thông báo</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Tạo logo tùy chỉnh</string>
     <string name="header_creator_light_theme">Logo chủ đề sáng</string>
     <string name="header_creator_dark_theme">Logo chủ đề tối</string>
-    <string name="header_creator_no_image">Không có hình ảnh nào được chọn</string>
     <string name="header_creator_success">Đã tạo logo thành công</string>
     <string name="header_creator_failed">Không thể tạo logo</string>
     <string name="header_creator_guide">Hướng dẫn tạo logo đầu trang</string>
     <string name="header_creator_guide_image_title">Yêu cầu về hình ảnh</string>
-    <string name="header_creator_guide_image_body">Hỗ trợ bất kỳ ảnh PNG hoặc JPEG nào, nhưng để có kết quả tốt nhất bạn nên chọn những hình ảnh có định dạng ngang với tỷ lệ khoảng 2,7:1. Nếu chọn tệp PNG có nền trong suốt, logo trông sẽ tự nhiên với chủ đề ứng dụng.</string>
+    <string name="header_creator_guide_image_body">Tệp PNG có nền trong suốt sẽ hòa vào thanh ứng dụng. Các lề xung quanh logo trong tệp bị bỏ qua, vì vậy hình ảnh sẽ bắt đầu với kích thước và vị trí của logo mặc định.</string>
     <string name="header_creator_guide_themes_title">Chế độ sáng và tối</string>
     <string name="header_creator_guide_themes_body">Hầu hết các ứng dụng yêu cầu hình ảnh riêng cho chế độ sáng và tối. Một số ứng dụng (như YouTube Music) chỉ sử dụng chế độ tối, vì vậy chỉ phần đó mới được hiển thị.</string>
     <string name="header_creator_guide_positioning_title">Căn chỉnh và thu phóng</string>
-    <string name="header_creator_guide_positioning_body">Dùng cử chỉ chụm để thu phóng và kéo trực tiếp trong phần xem trước để căn chỉnh vị trí và kích thước hình ảnh. Các đường căn chỉnh sẽ xuất hiện khi hình ảnh ở gần trung tâm. Bạn cũng có thể dùng thanh trượt bên dưới phần xem trước.</string>
+    <string name="header_creator_guide_positioning_body">Kéo và chụm ảnh trong trình chỉnh sửa hoặc thay đổi kích thước ảnh bằng thanh trượt. Hộp nét đứt đánh dấu vị trí logo mặc định và các đường hướng dẫn sẽ xuất hiện khi ảnh thẳng hàng với vị trí đó.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Đã chọn bản vá</string>
     <string name="batch_patch_title">Đang vá hàng loạt</string>
@@ -475,9 +492,12 @@ Vùng ngoài (nét đứt): có thể bị cắt theo hình dạng biểu tượ
     <string name="home_app_info_app_update_available_description">Các nguồn patch hỗ trợ phiên bản mới hơn của ứng dụng này. Hãy patch lại để chuyển sang phiên bản đó.</string>
     <string name="home_app_info_newest_supported_version">Mới nhất được hỗ trợ</string>
     <string name="home_app_info_version_move">Đã cài %1$s, mới nhất được hỗ trợ %2$s</string>
+    <string name="home_app_info_version_restore">Đã cài đặt %1$s, đã vá %2$s</string>
     <string name="home_app_info_app_deleted_warning">Ứng dụng đã bị gỡ cài đặt</string>
     <string name="home_app_info_app_deleted_description">Ứng dụng này đã bị gỡ bên ngoài Morphe. Hãy vá lại để khôi phục chức năng</string>
     <string name="home_app_info_not_patched_description">Bạn đang cài đặt phiên bản chưa vá của ứng dụng. Đừng lo, Morphe vẫn còn lưu bản đã vá trước đó</string>
+    <string name="home_app_info_mount_replaced_description">Một phiên bản khác đã thay thế ứng dụng đã gắn, do đó bản vá không còn tác dụng nữa. Khôi phục sẽ đưa phiên bản đã vá trở lại</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play đã cập nhật ứng dụng đã gắn, do đó bản vá không còn tác dụng nữa. Khôi phục sẽ đưa phiên bản đã vá trở lại. Tắt tính năng tự động cập nhật cho ứng dụng đó trong Google Play để giữ nó được vá</string>
     <string name="app_links_title">Liên kết web được hỗ trợ</string>
     <string name="app_links_description">Trên Android 12+, các liên kết đến miền được hỗ trợ sẽ mở trong trình duyệt của bạn theo mặc định trừ khi được chấp thuận</string>
     <string name="app_links_unverified_banner_title">Liên kết web chưa được xác minh</string>
@@ -487,8 +507,6 @@ Vùng ngoài (nét đứt): có thể bị cắt theo hình dạng biểu tượ
     <string name="app_links_open_settings">Mở cài đặt liên kết</string>
     <string name="app_links_repair_success">Đã bật liên kết ứng dụng thành công</string>
     <string name="app_links_repair_failed">Không thể tự động bật liên kết ứng dụng</string>
-    <string name="app_links_badge_enabled">Đang bật</string>
-    <string name="app_links_badge_disabled">Đang tắt</string>
     <string name="app_links_all_verified">Tất cả các liên kết được hỗ trợ đều được cấu hình để mở trong ứng dụng này</string>
     <string name="app_links_fix">Sửa liên kết</string>
     <string name="configure">Cấu hình</string>
@@ -521,10 +539,10 @@ Nếu không, APK đã vá và được gắn có thể sẽ không hoạt độ
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Ứng dụng</string>
     <string name="patcher_field_package">Gói</string>
+    <string name="patcher_field_failed_patch">Bản vá thất bại</string>
     <string name="patcher_field_source">Nguồn</string>
     <string name="patcher_field_split">Tách APK</string>
     <string name="patcher_field_manager">Trình quản lý</string>
-    <string name="patcher_field_patcher">Trình vá</string>
     <string name="patcher_field_runtime">Thời gian chạy</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Thư viện</string>
@@ -555,6 +573,7 @@ Nếu không, APK đã vá và được gắn có thể sẽ không hoạt độ
     <string name="patcher_installing_subtitle">Gần xong rồi, chuẩn bị quẩy thôi! 🎸</string>
     <string name="patcher_success_title">Hoàn tất! 🎉</string>
     <string name="patcher_success_subtitle">Đã vá và cài đặt ứng dụng thành công!</string>
+    <string name="patcher_mounted_subtitle">Ứng dụng của bạn đã được vá và gắn kết!</string>
     <string name="patcher_complete_title">Tèn ten! ✨</string>
     <string name="patcher_failed_title">Ui, có lỗi xảy ra rồi!</string>
     <string name="patcher_failed_dialog_title">Không thể vá</string>
@@ -573,6 +592,7 @@ Nếu không, APK đã vá và được gắn có thể sẽ không hoạt độ
 
 Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</string>
     <string name="patcher_install_error_title">Lỗi rồiii</string>
+    <string name="patcher_mount_error_title">Lỗi gắn kết</string>
     <string name="patcher_install_error_subtitle">Hãy thử gỡ và cài đặt lại</string>
     <string name="patcher_ready_to_mount_subtitle">Bấm nút bên dưới để gắn kết</string>
     <string name="patcher_patches_excluded_for_installer">Không khả dụng với phương thức cài đặt này và đã bị loại trừ: %s</string>
@@ -600,7 +620,6 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="patcher_step_load_patches">Đang tải bản vá</string>
     <string name="patcher_step_prepare_split_apk">Đang gộp APK chia nhỏ</string>
     <string name="patcher_step_unpack">Đọc tệp APK</string>
-    <string name="patcher_step_group_patching">Đang vá</string>
     <string name="patcher_step_group_saving">Đang lưu</string>
     <string name="patcher_step_write_patched">Đang viết APK đã vá</string>
     <string name="patcher_step_sign_apk">Đang ký APK đã vá</string>
@@ -612,6 +631,7 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="patcher_memory_adjustment_title">Không đủ bộ nhớ</string>
     <string name="patcher_memory_adjustment_description">Trình vá đã bị hệ thống dừng khi đang chạy với giới hạn bộ nhớ %1$d MB. Hãy thử giảm giới hạn xuống %2$d MB để có thể làm giảm khả năng trình vá bị hệ thống dừng và giúp quá trình vá hoàn tất</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Trình vá đã bị hệ thống dừng khi đang chạy với giới hạn bộ nhớ %1$d MB, vốn đã là mức thấp nhất hiện có. Hãy thử vá với ít nguồn vá hơn hoặc chọn ít bản vá hơn</string>
+    <string name="patcher_memory_adjustment_description_finished">Hệ thống đã dừng trình vá ở giới hạn bộ nhớ %1$d MB và chỉ hoàn thành ở %2$d MB. Bắt đầu ở %2$d MB sẽ bỏ qua lần thử thất bại đó vào lần tới</string>
     <string name="patcher_memory_adjustment_apply">Giảm xuống %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Đang vá…</string>
@@ -711,6 +731,9 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_appearance_background_snow">Tuyết</string>
     <string name="settings_appearance_background_grid">Lưới ô</string>
     <string name="settings_appearance_background_particles">Hạt</string>
+    <string name="settings_appearance_background_lava">Đèn dung nham</string>
+    <string name="settings_appearance_background_halloween">Halloween</string>
+    <string name="settings_appearance_background_fireworks">Pháo hoa</string>
     <string name="settings_appearance_background_none">Không</string>
     <string name="settings_appearance_background_random">Ngẫu nhiên</string>
     <string name="settings_appearance_background_random_interval_launch">Khi khởi động</string>
@@ -718,6 +741,10 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_appearance_background_random_interval_3days">Cứ 3 ngày một lần</string>
     <string name="settings_appearance_parallax_effect">Hiệu ứng thị sai</string>
     <string name="settings_appearance_parallax_effect_description">Nền chuyển động nhẹ nhàng khi nghiêng thiết bị</string>
+    <string name="settings_appearance_seasonal_themes">Chủ đề theo mùa</string>
+    <string name="settings_appearance_seasonal_themes_description">Hình nền lễ hội và lời chào trong các dịp lễ</string>
+    <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">Hình nền %1$s được bật cho đến %2$s khi chủ đề theo mùa đang bật</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Chủ đề</string>
     <string name="settings_appearance_theme_mode">Chế độ giao diện</string>
@@ -779,9 +806,24 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_appearance_app_icon_default">Mặc định</string>
     <string name="settings_appearance_app_icon_light_2">Bầu trời</string>
     <string name="settings_appearance_app_icon_light_3">Hoàng hôn</string>
-    <string name="settings_appearance_app_icon_dark_1">Đại dương</string>
+    <string name="settings_appearance_app_icon_light_4">Oải hương</string>
+    <string name="settings_appearance_app_icon_light_5">Sông băng</string>
+    <string name="settings_appearance_app_icon_light_6">Sương mù</string>
+    <string name="settings_appearance_app_icon_light_7">Cát</string>
+    <string name="settings_appearance_app_icon_dark_1">Xanh mòng két</string>
     <string name="settings_appearance_app_icon_dark_2">Hư không</string>
-    <string name="settings_appearance_app_icon_dark_3">Màu chàm</string>
+    <string name="settings_appearance_app_icon_dark_3">Mận</string>
+    <string name="settings_appearance_app_icon_dark_4">Đêm đen</string>
+    <string name="settings_appearance_app_icon_dark_5">Đá phiến</string>
+    <string name="settings_appearance_app_icon_accent_1">Cực quang</string>
+    <string name="settings_appearance_app_icon_accent_2">Mực</string>
+    <string name="settings_appearance_app_icon_accent_3">Giấy</string>
+    <string name="settings_appearance_app_icon_accent_4">Hoàng hôn</string>
+    <string name="settings_appearance_app_icon_background">Nền</string>
+    <string name="settings_appearance_app_icon_mark">Logo</string>
+    <string name="settings_appearance_app_icon_mark_color">Màu</string>
+    <string name="settings_appearance_app_icon_mark_white">Trắng</string>
+    <string name="settings_appearance_app_icon_mark_black">Đen</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Đổi biểu tượng?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Bạn có muốn đổi sang &lt;b&gt;%s&lt;/b&gt; và khởi động lại?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -819,7 +861,6 @@ Các bản vá không bị ảnh hưởng: bật các bản vá trước khi ph�
     <string name="external_batch_patch_trust_caller">Luôn cho phép ứng dụng này</string>
     <string name="external_batch_patch_unknown_caller">Ứng dụng không xác định</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Đã có bản cập nhật Morphe mới</string>
     <string name="notification_bundle_update_title">Đã có bản vá mới</string>
     <string name="notification_update_text">Phiên bản %s đã sẵn sàng để tải xuống</string>
     <string name="notification_bundle_update_text_unversioned">Bấm để mở Morphe và cập nhật</string>
@@ -830,8 +871,11 @@ Các bản vá không bị ảnh hưởng: bật các bản vá trước khi ph�
     <string name="notification_channel_manager_updates_description">Thông báo về các bản phát hành Morphe mới</string>
     <string name="notification_channel_patch_updates">Cập nhật bản vá</string>
     <string name="notification_channel_patch_updates_description">Thông báo về các bản phát hành bản vá mới</string>
-    <string name="notification_channel_patcher">Đang vá</string>
     <string name="notification_channel_patcher_description">Hiển thị khi Morphe đang vá ứng dụng trong nền</string>
+    <string name="notification_channel_mounted_apps">Ứng dụng đã gắn</string>
+    <string name="notification_channel_mounted_apps_description">Khi một phiên bản khác thay thế một ứng dụng đã được gắn và bản vá của nó không còn áp dụng được nữa</string>
+    <string name="notification_mount_replaced_title">%1$s không còn được vá</string>
+    <string name="notification_mount_replaced_text">v%1$s đã thay thế v%2$s đã được vá. Mở Morphe để khôi phục lại</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Chuyên gia</string>
     <string name="settings_advanced_expert_mode">Chế độ chuyên gia</string>
@@ -1251,9 +1295,7 @@ Chi tiết: %2$s"</string>
     <string name="selected">Đã chọn</string>
     <string name="not_selected">Không chọn</string>
     <string name="select_all">Chọn tất cả</string>
-    <string name="select_all_done">Đã chọn tất cả</string>
     <string name="deselect_all">Bỏ chọn tất cả</string>
-    <string name="deselect_all_done">Đã bỏ chọn tất cả</string>
     <string name="reorder_list">Sắp xếp lại danh sách</string>
     <string name="reorder_list_hint">Kéo để sắp xếp lại</string>
     <string name="reorder_done">Đã lưu thứ tự</string>
@@ -1289,6 +1331,7 @@ Chi tiết: %2$s"</string>
     <string name="unmount">Gỡ gắn kết</string>
     <string name="unmounted">Đã gỡ gắn kết</string>
     <string name="remount">Gắn kết lại</string>
+    <string name="restore">Khôi phục</string>
     <string name="share">Chia sẻ</string>
     <string name="install">Cài đặt</string>
     <string name="installed">Đã cài đặt</string>
@@ -1309,6 +1352,8 @@ Chi tiết: %2$s"</string>
     <string name="sources">Nguồn</string>
     <string name="installing_ellipsis">Đang cài đặt…</string>
     <string name="mounting_ellipsis">Đang gắn kết…</string>
+    <string name="mount_stage_restoring_stock">Đang khôi phục bản gốc…</string>
+    <string name="mount_stage_copying">Đang sao chép…</string>
     <string name="unmounting_ellipsis">Đang gỡ gắn…</string>
     <string name="importing_ellipsis">Đang nhập…</string>
     <string name="imported_successfully">Đã nhập thành công</string>
@@ -1356,7 +1401,6 @@ Chi tiết: %2$s"</string>
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">Bản phát hành này vẫn đang được triển khai. Hãy thử lại sau vài phút</string>
     <string name="update_download_missing">Bản cập nhật đã tải không còn khả dụng. Hãy tải lại</string>
-    <string name="download_manager_failed">Không thể tải bản cập nhật: %s</string>
     <string name="failed_to_check_updates">Không thể kiểm tra cập nhật: %s</string>
     <string name="failed_to_download_update">Không tải được bản cập nhật: %s</string>
     <string name="download_confirmation_metered">"Bạn đang dùng 4G/5G, tiếp tục có thể phát sinh cước dữ liệu.\n\nBạn vẫn muốn tiếp tục?"</string>

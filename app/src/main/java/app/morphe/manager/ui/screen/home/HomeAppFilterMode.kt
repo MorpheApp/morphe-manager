@@ -8,6 +8,7 @@ package app.morphe.manager.ui.screen.home
 import androidx.annotation.StringRes
 import app.morphe.manager.R
 import app.morphe.manager.ui.model.HomeAppItem
+import app.morphe.manager.util.enumByNameOrNull
 
 enum class HomeAppFilterMode(
     @param:StringRes val labelRes: Int,
@@ -29,5 +30,11 @@ enum class HomeAppFilterMode(
         INSTALLED -> item.isInstalledOnDevice && !item.isDeleted
         UNINSTALLED -> item.installedApp != null && (!item.isInstalledOnDevice || item.isDeleted)
         CLONES -> item.isClone
+    }
+
+    companion object {
+        /** Parse a persisted enum name; unknown or missing values fall back to [ALL]. */
+        fun fromPreference(value: String?): HomeAppFilterMode =
+            enumByNameOrNull(value) ?: ALL
     }
 }

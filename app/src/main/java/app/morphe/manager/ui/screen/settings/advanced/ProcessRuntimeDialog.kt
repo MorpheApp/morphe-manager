@@ -97,7 +97,7 @@ fun ProcessRuntimeDialog(
                     value = context.formatMebibytes(selectedLimit),
                     subtitle = stringResource(R.string.settings_system_memory_limit_subtitle),
                     containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                    valueColor = LocalDialogTextColor.current
+                    valueColor = dialogTextColor()
                 )
 
                 // Slider

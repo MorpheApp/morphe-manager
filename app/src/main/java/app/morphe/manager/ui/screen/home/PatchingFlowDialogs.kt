@@ -189,7 +189,7 @@ internal fun ApkAvailabilityDialog(
             }
         }
     ) {
-        val secondaryColor = LocalDialogSecondaryTextColor.current
+        val secondaryColor = dialogSecondaryTextColor()
         val anyString = stringResource(R.string.any_version)
 
         Column(
@@ -865,7 +865,7 @@ private fun VersionRow(
     selected: Boolean? = null,
     enabled: Boolean = true,
     emphasized: Boolean = selected == true,
-    versionColor: Color = LocalDialogTextColor.current,
+    versionColor: Color = dialogTextColor(),
     onClick: (() -> Unit)? = null,
     contentDescription: String? = null
 ) {
@@ -930,7 +930,7 @@ private fun VersionRow(
                 Text(
                     text = description,
                     style = MaterialTheme.typography.bodySmall,
-                    color = LocalDialogSecondaryTextColor.current
+                    color = dialogSecondaryTextColor()
                 )
             }
         }
@@ -943,7 +943,7 @@ private fun VersionRow(
  */
 @Composable
 private fun VersionDetailsLine(buildCode: Long?, onHandTags: List<VersionTag>) {
-    val color = LocalDialogSecondaryTextColor.current
+    val color = dialogSecondaryTextColor()
     val buildText = buildCode?.let { stringResource(R.string.home_dialog_unsupported_version_build, it) }
     val buildLabel = remember(buildText, buildCode) {
         buildText?.let { text ->

@@ -19,7 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.ui.screen.shared.LocalDialogSecondaryTextColor
+import app.morphe.manager.ui.screen.shared.dialogSecondaryTextColor
 import app.morphe.manager.ui.screen.shared.AppDialog
 import app.morphe.manager.ui.screen.shared.AppDialogButtonRow
 import app.morphe.manager.ui.screen.shared.SelectionCheckRow
@@ -65,7 +65,7 @@ fun ExternalBatchPatchDialog(
                     packageCount.toString()
                 ),
                 style = MaterialTheme.typography.bodyMedium,
-                color = LocalDialogSecondaryTextColor.current,
+                color = dialogSecondaryTextColor(),
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )

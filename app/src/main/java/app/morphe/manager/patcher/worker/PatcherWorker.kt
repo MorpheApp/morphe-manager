@@ -1,3 +1,13 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ *
+ * Original hard forked code:
+ * https://github.com/Jman-Github/Universal-ReVanced-Manager/blob/597b3173a004f5a9aae54326046dd7fd4c5b7777/app/src/main/java/app/revanced/manager/patcher/worker/PatcherWorker.kt
+ *
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
+ */
+
 package app.morphe.manager.patcher.worker
 
 import android.annotation.SuppressLint
@@ -14,6 +24,7 @@ import android.os.PowerManager
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import androidx.work.Data
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
@@ -77,6 +88,8 @@ class PatcherWorker(
         val options: Options,
         val logger: Logger,
         val onPatchCompleted: suspend () -> Unit,
+        /** Called with the name of the patch the run failed on. */
+        val onPatchFailed: (String) -> Unit,
         /**
          * Patching was abandoned and started over from the first step, so anything reported by
          * the previous attempt has to be discarded rather than counted twice.
@@ -420,10 +433,11 @@ class PatcherWorker(
                 )
             }
 
+            // The limit the process runtime will actually start with, not the raw setting
+            val memLimit = coerceMemoryLimit(applicationContext, prefs.patcherProcessMemoryLimit.get())
+
             // Log runtime mode info
             if (useProcessRuntime) {
-                // The limit the runtime will actually start with, not the raw setting
-                val memLimit = coerceMemoryLimit(applicationContext, prefs.patcherProcessMemoryLimit.get())
                 args.logger.info("$LOG_WORKER_PREFIX_RUNTIME process $LOG_WORKER_FIELD_MEMORY_LIMIT=$memLimit")
             } else {
                 // CoroutineRuntime starts memory polling internally; only log the heap size here
@@ -457,7 +471,7 @@ class PatcherWorker(
                 args.setInputFile(savedFile ?: mergedFile, true, true)
             }
 
-            try {
+            val loweredMemoryLimit = try {
                 runtime.execute(
                     inputFile.absolutePath,
                     patchedApk.absolutePath,
@@ -466,6 +480,7 @@ class PatcherWorker(
                     options,
                     args.logger,
                     onPatchCompleted,
+                    args.onPatchFailed,
                     ::updateProgress,
                     stripNativeLibs,
                     onMergedApkReady,
@@ -494,6 +509,7 @@ class PatcherWorker(
                     options,
                     args.logger,
                     onPatchCompleted,
+                    args.onPatchFailed,
                     ::updateProgress,
                     stripNativeLibs,
                     onMergedApkReady,
@@ -523,7 +539,13 @@ class PatcherWorker(
             val outputPackageName = pm.getPackageInfo(File(args.output))?.packageName ?: args.packageName
             autoInstallPending = installerManager.autoInstallAllowed(outputPackageName)
             succeeded = true
-            Result.success()
+            // A run that only got through on less memory is the same suggestion a killed one
+            // leads to, offered while the limit that worked is known
+            Result.success(
+                loweredMemoryLimit?.let {
+                    workDataOf(PROCESS_PREVIOUS_LIMIT_KEY to memLimit, PROCESS_LOWERED_LIMIT_KEY to it)
+                } ?: Data.EMPTY
+            )
         } catch (e: ProcessRuntime.ProcessExitException) {
             Log.e(
                 tag,
@@ -614,6 +636,7 @@ class PatcherWorker(
 
         const val PROCESS_EXIT_CODE_KEY = "process_exit_code"
         const val PROCESS_PREVIOUS_LIMIT_KEY = "process_previous_limit"
+        const val PROCESS_LOWERED_LIMIT_KEY = "process_lowered_limit"
         const val PROCESS_FAILURE_MESSAGE_KEY = "process_failure_message"
 
         const val LOG_WORKER_PREFIX_STARTED = "Patching started at"

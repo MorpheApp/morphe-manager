@@ -123,6 +123,26 @@
     <string name="home_greeting_super_late_3">Á þessum tíma, bara vertu vökur og gerðu við</string>
     <string name="home_greeting_super_late_4">Þú og netþjónarnir, báðir vakin</string>
     <string name="home_greeting_super_late_5">Næturhægur og afkastamikill</string>
+    <!-- Halloween greetings, shown instead of the ones above around October 31 -->
+    <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_1">Grikk eða plástur?</string>
+    <string name="home_greeting_halloween_2">Engir draugar í þessum APK-skrám, við athuguðum það</string>
+    <string name="home_greeting_halloween_3">Hrollvekjutíð, ferskir plástar</string>
+    <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
+    <string name="home_greeting_halloween_4">Eitthvað illt þessa leið plástrar</string>
+    <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
+    <string name="home_greeting_winter_1">Gleðileg hátíð, ferskir plástar</string>
+    <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
+    <string name="home_greeting_winter_2">Láttu það snjóa, láttu það plástra</string>
+    <string name="home_greeting_winter_3">Nýtt ár, nýir plástar</string>
+    <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
+    <string name="home_greeting_winter_4">Plástrandi í gegnum snjóinn</string>
+    <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">Gleðilegt nýtt ár!</string>
+    <string name="home_greeting_new_year_2">Niðurtalning að ferskum plástum</string>
+    <string name="home_greeting_new_year_3">Nýtt ár, sömu auglýsingalausu forritin</string>
+    <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Burt með gömlu útgáfurnar, inn með þær nýju</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Heimildir breytistillinga</string>
     <string name="sources_search">Leita að uppsprettum og plástrum</string>
@@ -272,7 +292,6 @@ Allt sem þú bætir við frá þessari vefsíðu er notað á eigin ábyrgð."<
     <string name="home_use_installed_app">Nota uppsett forrit</string>
     <string name="home_installed_app_picker_title">Uppsett forrit</string>
     <string name="home_installed_app_picker_empty">Engin forrit fundust</string>
-    <string name="home_installed_app_picker_filter_all">Öll forrit</string>
     <string name="home_installed_app_picker_filter_user">Aðeins notendaförrit</string>
     <string name="home_installed_app_picker_filter_system">Aðeins kerfisforrit</string>
     <string name="home_invalid_apk_unreadable">Gat ekki lesið skrána. Athyglið að „Utanlandsgagnagáfa“ er ekki takmarkað af rafhlöðu</string>
@@ -281,7 +300,6 @@ Allt sem þú bætir við frá þessari vefsíðu er notað á eigin ábyrgð."<
     <string name="home_invalid_apk_io_error">Gat ekki opnað skrána. Reyndu aftur</string>
     <string name="home_external_apk_expert_mode_required">Þessi eiginleiki er eingöngu fáanlegur á sérfærnisstillingu</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Sérstakur háttur</string>
     <string name="expert_mode_search">Leita breytistillinga</string>
     <string name="expert_mode_disable_all">Gerðu allt óvirkt</string>
     <string name="expert_mode_disable_all_done">Allar breytingar gerða óvirkar</string>
@@ -371,43 +389,43 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="adaptive_icon_select_image">Velja mynd</string>
     <string name="adaptive_icon_change_image">Breyta mynd</string>
     <string name="image_load_failed">Ekki tókst að hlaða þessa mynd</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Forgrunnsmynd</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Heimaskjástákn</string>
+    <string name="adaptive_icon_gesture_hint">Dragðu til að færa, klípdu til að breyta stærð</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Forskoðun</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Staðaltákn</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Þematákn</string>
     <string name="adaptive_icon_background_color">Bakgrunnslit</string>
     <string name="adaptive_icon_reset_transform">Endurstilla stöðu og mál</string>
-    <string name="adaptive_icon_safe_zone_inner">Örugg svæði (alltaf sýnilegt)</string>
-    <string name="adaptive_icon_safe_zone_outer">Maska svæði (getur verið klippt)</string>
-    <string name="adaptive_icon_no_transparency_warning">Mynd hefur engar gagnsæja pixel. Niðurstaðan gæti verið rangur</string>
+    <string name="adaptive_icon_no_transparency_warning">Þessi mynd hefur enga gagnsæja pixla, svo þema- og tilkynningatáknin halda Morphe-lógóinu</string>
     <string name="adaptive_icon_created_success">Adaptive tákn búið til með árangri</string>
     <string name="adaptive_icon_creation_failed">Ekki tókst að búa til adaptive tákn</string>
-    <string name="adaptive_icon_label">Samhæfur</string>
-    <string name="adaptive_icon_monochrome_label">Monokromísk</string>
     <string name="adaptive_icon_guide">Tákn búa til leiðbeiningar</string>
     <string name="adaptive_icon_guide_png_title">Nota PNG með gagnsæja bakgrunn</string>
-    <string name="adaptive_icon_guide_png_body">Forgrunnurinn verður að vera PNG skrá með gagnsæja bakgrunn. Solid litur bakgrunnurinn mun líta rangur út - bakgrunnaliturinn á að koma frá bakgrunns vali hér að neðan.</string>
+    <string name="adaptive_icon_guide_png_body">Lógó á gagnsæjum bakgrunni virkar best, með bakgrunnslitnum sem er valinn hér fyrir neðan. Mynd án gagnsæis fyllir allt táknið í staðinn, og þema- og tilkynningatáknin halda þá Morphe-lógóinu.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Örugg svæði</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Innri svæði (solid): innihaldið er alltaf fullt sýnilegt á öllum launcher löðinim. Ytri svæði (dásömlum): gæti verið klippur af launcher maska - haltu mikilvægum smáatriðum inni í innra svæðinu."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Útlínan sýnir táknform heimaskjásins þíns, og allt utan hennar er klippt burt. Aðrir heimaskjáir nota aðrar lögun, svo hafðu mikilvæg smáatriði inni í strikaða hringnum sem hver lögun sýnir.</string>
     <string name="adaptive_icon_guide_notification_title">Tilvísun</string>
-    <string name="adaptive_icon_guide_notification_body">Rafmagnetískt af forgrunnsmynd. Stilltu stærðina með tilvísuninni hér að neðan. Allar sýnar litir virðast hvít í status barrinu.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Monokromísk tákn</string>
-    <string name="adaptive_icon_guide_monochrome_body">Rafmagnetískur af forgrunnsmynd með sömu samhæfri táknar breytingar. Það birtist lituð með veður ræsi lit á Android 13 og síðar.</string>
+    <string name="adaptive_icon_guide_notification_body">Skorið úr sýnilega hlutanum af myndinni og í sömu stærð og önnur stöðustikutákn, hver sem spássía skráarinnar er. Stilltu það með rennistikunni undir forskoðuninni. Android sýnir það í einum lit.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Þematákn</string>
+    <string name="adaptive_icon_guide_monochrome_body">Skorið úr myndinni með sömu staðsetningu og stærð og heimaskjástáknið. Á Android 13 og nýrri lita heimaskjáir með virkjuðum þematáknum það með litum úr veggfóðrinu.</string>
     <string name="notification_icon_preview">Tilvísun</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Búa til sérsniðinn haus</string>
     <string name="header_creator_light_theme">Ljóst þema haus</string>
     <string name="header_creator_dark_theme">Dökk þema haus</string>
-    <string name="header_creator_no_image">Engin mynd valin</string>
     <string name="header_creator_success">Haus búið til með árangri</string>
     <string name="header_creator_failed">Ekki tókst að búa til haus</string>
     <string name="header_creator_guide">Haus búa til leiðbeiningar</string>
     <string name="header_creator_guide_image_title">Mynda kröfur</string>
-    <string name="header_creator_guide_image_body">Nota hvers konar myndskrá (PNG eða JPEG). Fyrir bestu skilmál er mælt með breiðsnoýri mynd með um 2.7:1 hlutfall. PNG skrár með transparent bakgrunni munu blanda náttúrulega með app litum.</string>
+    <string name="header_creator_guide_image_body">PNG með gagnsæjum bakgrunni blandast inn í forritsstikuna. Spássíur í kringum lógóið í skránni eru hunsaðar, svo það byrjar í sömu stærð og stöðu og staðlaða lógóið.</string>
     <string name="header_creator_guide_themes_title">Ljóst og dökk litir</string>
     <string name="header_creator_guide_themes_body">Flest app krefjast sérstakara mynda fyrir ljósa og aðra lit. Sum app (slátt YouTube músik) nota eingöngu aðra litinn, svo að aðeins það deild er sýnið.</string>
     <string name="header_creator_guide_positioning_title">Staða og mál</string>
-    <string name="header_creator_guide_positioning_body">Nota pincu-til-zoom og dráttar hreyfingar beint í forsvísun til að staðsetja og stærð liti. Snappa leiðbeiningar birtast þegar myndin er nálæg miðju. Hægt er einnig að nota rennara hér að neðan.</string>
+    <string name="header_creator_guide_positioning_body">Dragðu og klípdu myndina í ritlinum, eða stilltu stærðina með rennistikunni. Strikaði kassinn markar þar sem staðlaða lógóið er, og viðmiðunarlínur birtast þegar myndin er í takt við það.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Valdar patch</string>
     <string name="batch_patch_title">Batch patching</string>
@@ -473,9 +491,12 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="home_app_info_app_update_available_description">Plásturuppspretturnar styðja nýrri útgáfu af þessu forriti. Plásturaðu forritið aftur til að fara yfir í þá útgáfu.</string>
     <string name="home_app_info_newest_supported_version">Nýjasta studda útgáfan</string>
     <string name="home_app_info_version_move">Uppsett útgáfa: %1$s, nýjasta studda útgáfan: %2$s</string>
+    <string name="home_app_info_version_restore">Uppsett %1$s, plástrað %2$s</string>
     <string name="home_app_info_app_deleted_warning">App var afhent</string>
     <string name="home_app_info_app_deleted_description">Þetta app var afhent utan Morphe. Endurpakkalaðu það til að endurheimta virkni</string>
     <string name="home_app_info_not_patched_description">Óplötuð útgáfa af þessu forriti er uppsett. Morphe hefur enn fyrri plástursskrá sína</string>
+    <string name="home_app_info_mount_replaced_description">Önnur útgáfa kom í stað tengda forritsins, svo plástrinn á ekki lengur við. Endurheimt setur plástruðu útgáfuna aftur</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play uppfærði tengda forritið, svo plástrinn á ekki lengur við. Endurheimt setur plástruðu útgáfuna aftur. Slökktu á sjálfvirkri uppfærslu á því í Google Play til að það haldist plástrað</string>
     <string name="app_links_title">Studdir veftenglar</string>
     <string name="app_links_description">Á Android 12+ opnast tenglar á studd lén sjálfgefið í vafranum þínum nema þeir séu samþykktir</string>
     <string name="app_links_unverified_banner_title">Veftenglar ekki staðfestir</string>
@@ -485,8 +506,6 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="app_links_open_settings">Opna tenglastillingar</string>
     <string name="app_links_repair_success">Tókst að virkja forritstengla</string>
     <string name="app_links_repair_failed">Mistókst að virkja app-tengla sjálfkrafa</string>
-    <string name="app_links_badge_enabled">Virkt</string>
-    <string name="app_links_badge_disabled">Slökkt</string>
     <string name="app_links_all_verified">Allir studdir tenglar eru stilltir til að opnast í þessu appi</string>
     <string name="app_links_fix">Laga tengla</string>
     <string name="configure">Stilla</string>
@@ -517,10 +536,10 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Forrit</string>
     <string name="patcher_field_package">Pakki</string>
+    <string name="patcher_field_failed_patch">Mistekinn plástur</string>
     <string name="patcher_field_source">Uppruni</string>
     <string name="patcher_field_split">Skipt APK</string>
     <string name="patcher_field_manager">Stjórnandi</string>
-    <string name="patcher_field_patcher">Plástrari</string>
     <string name="patcher_field_runtime">Keyrslutími</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Söfn</string>
@@ -551,6 +570,7 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="patcher_installing_subtitle">Næstum búið! 🎸</string>
     <string name="patcher_success_title">Allt klárað! 🎉</string>
     <string name="patcher_success_subtitle">Appið þitt er breytt og uppsett!</string>
+    <string name="patcher_mounted_subtitle">Forritið þitt er plástrað og tengt!</string>
     <string name="patcher_complete_title">Viðgerð lokið! ✨</string>
     <string name="patcher_failed_title">Afsakið! Eitthvað fór úrskeikur</string>
     <string name="patcher_failed_dialog_title">Viðgerðin mislukkaðist</string>
@@ -569,6 +589,7 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
 
 Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="patcher_install_error_title">Uppsetningarvilla</string>
+    <string name="patcher_mount_error_title">Tengingarvilla</string>
     <string name="patcher_install_error_subtitle">Reyndu að afinstallera og setja upp aftur</string>
     <string name="patcher_ready_to_mount_subtitle">Ýttu á hnappinn hér að neðan til að festa</string>
     <string name="patcher_patches_excluded_for_installer">Ekki í boði fyrir þessa uppsetningaraðferð og útilokuð: %s</string>
@@ -596,7 +617,6 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="patcher_step_load_patches">Hlaða breytistillingar</string>
     <string name="patcher_step_prepare_split_apk">Samnaðar flikkar APK</string>
     <string name="patcher_step_unpack">Lesa APK skrá</string>
-    <string name="patcher_step_group_patching">Breytistilling</string>
     <string name="patcher_step_group_saving">Vista</string>
     <string name="patcher_step_write_patched">Skrifa breytta APK skrá</string>
     <string name="patcher_step_sign_apk">Undirskrifa breytta APK skrá</string>
@@ -608,6 +628,7 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="patcher_memory_adjustment_title">Ekki nóg minni</string>
     <string name="patcher_memory_adjustment_description">Patcher var stöðvaður af kerfinu á meðan hann keyrði með %1$d MB minnismörk. Lækkun minnismarkanna í %2$d MB gerir hann að minna skotmarki og getur leyft keyrslunni að ljúka.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Patcher var stöðvaður af kerfinu á meðan hann keyrði með %1$d MB minnismörk, sem eru þegar þau lægstu sem í boði eru. Reyndu að plástra með færri uppsprettum, eða veldu færri plástra.</string>
+    <string name="patcher_memory_adjustment_description_finished">Kerfið stöðvaði plástrarann við %1$d MB minnismörk, og það kláraðist aðeins við %2$d MB. Að byrja við %2$d MB sleppir þeirri glötuðu tilraun næst</string>
     <string name="patcher_memory_adjustment_apply">Lækka í %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Breytistilling í gangi…</string>
@@ -707,6 +728,9 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="settings_appearance_background_snow">Snjór</string>
     <string name="settings_appearance_background_grid">Rúta</string>
     <string name="settings_appearance_background_particles">Agnir</string>
+    <string name="settings_appearance_background_lava">Hraunlampi</string>
+    <string name="settings_appearance_background_halloween">Hrekkjavaka</string>
+    <string name="settings_appearance_background_fireworks">Flugeldar</string>
     <string name="settings_appearance_background_none">Engin</string>
     <string name="settings_appearance_background_random">Slembirað</string>
     <string name="settings_appearance_background_random_interval_launch">Við ræsinguna</string>
@@ -714,6 +738,10 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="settings_appearance_background_random_interval_3days">Á þremur dögum</string>
     <string name="settings_appearance_parallax_effect">Parallax áhrif</string>
     <string name="settings_appearance_parallax_effect_description">Slétt bakgrunnur breytist þegar tækið er hallað</string>
+    <string name="settings_appearance_seasonal_themes">Árstíðabundin þemu</string>
+    <string name="settings_appearance_seasonal_themes_description">Hátíðlegir bakgrunnar og kveðjur á hátíðum</string>
+    <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">Bakgrunnurinn %1$s er virkur til %2$s meðan árstíðabundin þemu eru virk</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Þema</string>
     <string name="settings_appearance_theme_mode">Þema stilla</string>
@@ -775,9 +803,24 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="settings_appearance_app_icon_default">Sjálfgefið</string>
     <string name="settings_appearance_app_icon_light_2">Himinn</string>
     <string name="settings_appearance_app_icon_light_3">Sólsetur</string>
-    <string name="settings_appearance_app_icon_dark_1">Haf</string>
+    <string name="settings_appearance_app_icon_light_4">Ljósfjólublár</string>
+    <string name="settings_appearance_app_icon_light_5">Jökull</string>
+    <string name="settings_appearance_app_icon_light_6">Þoka</string>
+    <string name="settings_appearance_app_icon_light_7">Sandur</string>
+    <string name="settings_appearance_app_icon_dark_1">Blágrænn</string>
     <string name="settings_appearance_app_icon_dark_2">Tómarúm</string>
-    <string name="settings_appearance_app_icon_dark_3">Indigo</string>
+    <string name="settings_appearance_app_icon_dark_3">Plóma</string>
+    <string name="settings_appearance_app_icon_dark_4">Miðnætti</string>
+    <string name="settings_appearance_app_icon_dark_5">Skifugrár</string>
+    <string name="settings_appearance_app_icon_accent_1">Norðurljós</string>
+    <string name="settings_appearance_app_icon_accent_2">Blek</string>
+    <string name="settings_appearance_app_icon_accent_3">Pappír</string>
+    <string name="settings_appearance_app_icon_accent_4">Rökkur</string>
+    <string name="settings_appearance_app_icon_background">Bakgrunnur</string>
+    <string name="settings_appearance_app_icon_mark">Lógó</string>
+    <string name="settings_appearance_app_icon_mark_color">Litur</string>
+    <string name="settings_appearance_app_icon_mark_white">Hvítur</string>
+    <string name="settings_appearance_app_icon_mark_black">Svartur</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Breyta tákn</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Breytir til &lt;b&gt;%s&lt;/b&gt; og endurræsir?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -815,7 +858,6 @@ Plástrar verða ekki fyrir áhrifum: virkjaðu forútgáfuplástra fyrir hverja
     <string name="external_batch_patch_trust_caller">Alltaf leyfa þessu appi</string>
     <string name="external_batch_patch_unknown_caller">Óþekkt app</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Morphe uppfærsla í boði</string>
     <string name="notification_bundle_update_title">Nýjar pakkningar í boði</string>
     <string name="notification_update_text">Útgáfa %s er tilbúin til að hlaða niður</string>
     <string name="notification_bundle_update_text_unversioned">Smelltu til að opna Morphe og uppfæra</string>
@@ -826,8 +868,11 @@ Plástrar verða ekki fyrir áhrifum: virkjaðu forútgáfuplástra fyrir hverja
     <string name="notification_channel_manager_updates_description">Tilkynningar um nýjar Morphe-útgáfur</string>
     <string name="notification_channel_patch_updates">Plástursuppfærslur</string>
     <string name="notification_channel_patch_updates_description">Tilkynningar um nýjar plástursútgáfur</string>
-    <string name="notification_channel_patcher">Breyting</string>
     <string name="notification_channel_patcher_description">Sýnt þegar Morphe breytir app í bakgrunninum</string>
+    <string name="notification_channel_mounted_apps">Tengd forrit</string>
+    <string name="notification_channel_mounted_apps_description">Þegar önnur útgáfa kom í stað tengds forrits og plástur þess á ekki lengur við</string>
+    <string name="notification_mount_replaced_title">%1$s er ekki lengur plástrað</string>
+    <string name="notification_mount_replaced_text">v%1$s kom í stað hins plástraða v%2$s. Opnaðu Morphe til að endurheimta það</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Advanced</string>
     <string name="settings_advanced_expert_mode">Sérstakur háttur</string>
@@ -1241,9 +1286,7 @@ Nánari upplýsingar: %2$s"</string>
     <string name="selected">Valinn</string>
     <string name="not_selected">Ekki valinn</string>
     <string name="select_all">Velja allt</string>
-    <string name="select_all_done">Allt valið</string>
     <string name="deselect_all">Afvelja allt</string>
-    <string name="deselect_all_done">Allt afveldur</string>
     <string name="reorder_list">Endurreikning á lista</string>
     <string name="reorder_list_hint">Drag til að endurreikna</string>
     <string name="reorder_done">Röð vistuð</string>
@@ -1279,6 +1322,7 @@ Nánari upplýsingar: %2$s"</string>
     <string name="unmount">Fjarlægja</string>
     <string name="unmounted">Ekki fest</string>
     <string name="remount">Endursetja</string>
+    <string name="restore">Endurheimta</string>
     <string name="share">Deila</string>
     <string name="install">Install</string>
     <string name="installed">Uppsett</string>
@@ -1299,6 +1343,8 @@ Nánari upplýsingar: %2$s"</string>
     <string name="sources">Heimildir</string>
     <string name="installing_ellipsis">Sæti…</string>
     <string name="mounting_ellipsis">Festa…</string>
+    <string name="mount_stage_restoring_stock">Endurheimti upprunalegt…</string>
+    <string name="mount_stage_copying">Afrita…</string>
     <string name="unmounting_ellipsis">Afmonta…</string>
     <string name="importing_ellipsis">Innflutningur…</string>
     <string name="imported_successfully">Flutt inn með árangri</string>
@@ -1346,7 +1392,6 @@ Nánari upplýsingar: %2$s"</string>
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">Þessi útgáfa er enn í útgáfuferlinu. Reyndu aftur á nokkrum mínútum</string>
     <string name="update_download_missing">Sótta uppfærslan er ekki lengur tiltæk. Sæktu hana aftur.</string>
-    <string name="download_manager_failed">Ekki tókst að sækja uppfærslu: %s</string>
     <string name="failed_to_check_updates">Ekki tókst að skoða uppfærslur: %s</string>
     <string name="failed_to_download_update">Ekki tókst að sækja uppfærslu: %s</string>
     <string name="download_confirmation_metered">"Þú ert núna á mældri tengingu og gjalda frá þjónustuaðilum þínum gætu átt við.

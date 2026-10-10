@@ -87,6 +87,10 @@
         <item quantity="one">%s asennettu lähde</item>
         <item quantity="other">%s asennettua lähdettä</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="one">%1$s · %2$s suodatettu</item>
+        <item quantity="other">%1$s · %2$s suodatettua</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s piilotettu sovellus</item>
         <item quantity="other">%s piilotettua sovellusta</item>

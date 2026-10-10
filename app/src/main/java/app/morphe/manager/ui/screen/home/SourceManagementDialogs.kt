@@ -418,13 +418,13 @@ private fun RemoteTabContent(state: RemoteLinksState) {
                     Icon(
                         imageVector = Icons.Outlined.Info,
                         contentDescription = null,
-                        tint = LocalDialogSecondaryTextColor.current,
+                        tint = dialogSecondaryTextColor(),
                         modifier = Modifier.padding(top = 1.dp).size(14.dp)
                     )
                     Text(
                         text = stringResource(R.string.sources_dialog_remote_url_hint),
                         style = MaterialTheme.typography.bodySmall,
-                        color = LocalDialogSecondaryTextColor.current
+                        color = dialogSecondaryTextColor()
                     )
                 }
                 UrlFormatRow(icon = FontAwesomeIcons.Brands.Github, text = "github.com/owner/repo")
@@ -461,13 +461,13 @@ private fun UrlFormatRow(
         Icon(
             imageVector = icon,
             contentDescription = null,
-            tint = LocalDialogSecondaryTextColor.current,
+            tint = dialogSecondaryTextColor(),
             modifier = Modifier.size(14.dp)
         )
         Text(
             text = text,
             style = MaterialTheme.typography.bodySmall,
-            color = LocalDialogSecondaryTextColor.current,
+            color = dialogSecondaryTextColor(),
             fontFamily = FontFamily.Monospace
         )
     }
@@ -479,7 +479,7 @@ private fun LocalTabContent(
     onPickFiles: () -> Unit,
     onRemove: (Uri) -> Unit
 ) {
-    val textColor = LocalDialogTextColor.current
+    val textColor = dialogTextColor()
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         if (entries.isEmpty()) {
             // Drop zone
@@ -572,7 +572,7 @@ private fun PendingSourceRow(
             Icon(
                 imageVector = Icons.Outlined.Close,
                 contentDescription = stringResource(R.string.remove),
-                tint = LocalDialogSecondaryTextColor.current
+                tint = dialogSecondaryTextColor()
             )
         }
     }
@@ -744,12 +744,12 @@ private fun patchesByApp(patches: List<PatchInfo>, universalTitle: String): List
 
 /**
  * What a changelog dialog shows: the source it reads, the version "new" is measured from,
- * and the scopes the entries are narrowed to.
+ * and the app the entries are narrowed to.
  */
 data class BundleChangelogRequest(
     val bundleUid: Int,
     val sinceVersion: String? = null,
-    val appNames: Set<String> = emptySet()
+    val subject: ChangelogSubject? = null
 )
 
 /**
@@ -773,7 +773,7 @@ fun BundleChangelogHost(
             src = bundle,
             onDismissRequest = onDismissRequest,
             sinceVersion = request.sinceVersion,
-            appNames = request.appNames
+            subject = request.subject
         )
     }
 }
@@ -785,8 +785,8 @@ fun BundleChangelogHost(
  * Stable: entries newer than the installed version, plus the installed version itself, with
  * no prerelease builds, as each release already sums up the builds that led to it.
  * A [sinceVersion] replaces both baselines with the caller's own, see
- * [RemotePatchBundle.fetchChangelogSince], and [appNames] narrows every entry to the bullets
- * scoped to one app.
+ * [RemotePatchBundle.fetchChangelogSince], and [subject] narrows every entry to the bullets
+ * for one app.
  *
  * Fetched once and cached; cache invalidated on channel switch.
  * Falls back to GitHub Release info if CHANGELOG.md is unavailable.
@@ -796,7 +796,7 @@ fun BundleChangelogDialog(
     src: RemotePatchBundle,
     onDismissRequest: () -> Unit,
     sinceVersion: String? = null,
-    appNames: Set<String> = emptySet()
+    subject: ChangelogSubject? = null
 ) {
     val generalChangesHeading = stringResource(R.string.changelog_general_changes)
     var state: BundleChangelogState by remember { mutableStateOf(BundleChangelogState.Loading) }
@@ -828,7 +828,7 @@ fun BundleChangelogDialog(
                                 listOfNotNull(installed?.let { ChangelogParser.findVersion(allEntries, it) })
                     }
                 }
-                val entries = ChangelogParser.entriesFor(shownEntries, appNames, generalChangesHeading)
+                val entries = ChangelogParser.entriesFor(shownEntries, subject, generalChangesHeading)
 
                 // APIPatchBundle has endpoint="api" - use SOURCE_REPO_URL directly
                 val repoUrl = when (src) {
@@ -839,7 +839,7 @@ fun BundleChangelogDialog(
                     repoUrl?.let { releasePageUrl(it, version) }
                 }
 
-                if (entries.isNotEmpty() || appNames.isNotEmpty()) {
+                if (entries.isNotEmpty() || subject != null) {
                     BundleChangelogState.Entries(
                         entries = entries,
                         latestPageUrl = latestPageUrl
@@ -887,7 +887,7 @@ fun BundleChangelogDialog(
                                 && (oldestShown == null || !isNewerVersion(oldestShown, it.version))
                     }
                     OlderBundleState.Loaded(
-                        ChangelogParser.entriesFor(filtered, appNames, generalChangesHeading)
+                        ChangelogParser.entriesFor(filtered, subject, generalChangesHeading)
                     )
                 }.getOrElse {
                     // Kept apart from Idle, so the list waits for a retry instead of loading again
@@ -966,7 +966,7 @@ fun BundleChangelogDialog(
         ListDialogHeader(
             icon = { modifier -> BundleIcon(bundle = src, modifier = modifier) },
             title = src.displayTitle,
-            subtitle = appNames.firstOrNull()?.let { stringResource(R.string.changelog_for_app, it) }
+            subtitle = subject?.appNames?.firstOrNull()?.let { stringResource(R.string.changelog_for_app, it) }
                 ?: src.installedVersionSignature?.withVersionPrefix()?.isolateLtr().orEmpty()
         )
 
@@ -1213,7 +1213,7 @@ fun SourceAppsDialog(
                 Text(
                     text = stringResource(R.string.sources_apps_description),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = LocalDialogSecondaryTextColor.current,
+                    color = dialogSecondaryTextColor(),
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth()
                 )

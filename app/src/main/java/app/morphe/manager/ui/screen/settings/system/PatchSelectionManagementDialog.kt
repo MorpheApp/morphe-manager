@@ -485,19 +485,11 @@ private fun SelectionList(
                     bundleMap = bundleMap,
                     bundleNames = data.bundleNames,
                     importExportViewModel = importExportViewModel,
-                    onResetPackage = {
-                        onSetResetTarget(ResetTarget.Package(packageName))
-                    },
-                    onResetPackageBundle = { bundleUid ->
-                        onSetResetTarget(ResetTarget.PackageBundle(packageName, bundleUid))
-                    },
+                    onSetResetTarget = onSetResetTarget,
                     onShowPatchDetails = onShowPatchDetails,
                     onOpenCopyFromBundle = onOpenCopyFromBundle,
                     onImport = onImport,
-                    isSelected = multiSelect.selectedPackages.contains(packageName),
-                    isSelectionMode = multiSelect.isSelectionMode,
-                    onEnterSelection = { multiSelect.onEnterSelection(packageName) },
-                    onToggleSelection = { multiSelect.onToggleSelection(packageName) },
+                    multiSelect = multiSelect,
                     expanded = packageName in expandedPackages.value,
                     onToggleExpanded = {
                         expandedPackages.value = if (packageName in expandedPackages.value) {
@@ -523,19 +515,17 @@ private fun PackageSelectionItem(
     bundleMap: Map<Int, Int>,
     bundleNames: Map<Int, String>,
     importExportViewModel: ImportExportViewModel,
-    onResetPackage: () -> Unit,
-    onResetPackageBundle: (Int) -> Unit,
+    onSetResetTarget: (ResetTarget) -> Unit,
     onShowPatchDetails: (PatchDetailsTarget) -> Unit,
     onOpenCopyFromBundle: (CopyTarget) -> Unit,
     onImport: () -> Unit,
-    isSelected: Boolean,
-    isSelectionMode: Boolean,
-    onEnterSelection: () -> Unit,
-    onToggleSelection: () -> Unit,
+    multiSelect: PatchSelectionMultiSelect,
     expanded: Boolean,
     onToggleExpanded: () -> Unit
 ) {
     val view = LocalView.current
+    val isSelected = multiSelect.selectedPackages.contains(packageName)
+    val isSelectionMode = multiSelect.isSelectionMode
 
     val totalPatches = remember(bundleMap) { bundleMap.values.sum() }
     // In selection mode force cards closed so nested bundle taps do not race with tap-to-toggle
@@ -555,11 +545,11 @@ private fun PackageSelectionItem(
                         .fillMaxWidth()
                         .combinedClickable(
                             onClick = {
-                                if (isSelectionMode) onToggleSelection() else onToggleExpanded()
+                                if (isSelectionMode) multiSelect.onToggleSelection(packageName) else onToggleExpanded()
                             },
                             onLongClick = {
                                 view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-                                onEnterSelection()
+                                multiSelect.onEnterSelection(packageName)
                             }
                         )
                         .padding(Defaults.ContentPadding),
@@ -583,7 +573,7 @@ private fun PackageSelectionItem(
                             text = displayName,
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.SemiBold,
-                            color = LocalDialogTextColor.current
+                            color = dialogTextColor()
                         )
 
                         // Cloned copies of an app carry the same name, so the package is what
@@ -591,7 +581,7 @@ private fun PackageSelectionItem(
                         Text(
                             text = packageName,
                             style = MaterialTheme.typography.bodySmall,
-                            color = LocalDialogSecondaryTextColor.current,
+                            color = dialogSecondaryTextColor(),
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
                         )
@@ -630,7 +620,7 @@ private fun PackageSelectionItem(
                     ) {
                         ExpandChevron(
                             expanded = effectiveExpanded,
-                            tint = LocalDialogSecondaryTextColor.current,
+                            tint = dialogSecondaryTextColor(),
                             announced = true
                         )
                     }
@@ -657,7 +647,7 @@ private fun PackageSelectionItem(
                                 bundleName = bundleNames[bundleUid],
                                 patchCount = patchCount,
                                 importExportViewModel = importExportViewModel,
-                                onReset = { onResetPackageBundle(bundleUid) },
+                                onReset = { onSetResetTarget(ResetTarget.PackageBundle(packageName, bundleUid)) },
                                 onShowDetails = {
                                     onShowPatchDetails(PatchDetailsTarget(packageName, bundleUid, displayName))
                                 },
@@ -676,7 +666,7 @@ private fun PackageSelectionItem(
                                 CardAction(
                                     icon = Icons.Outlined.Restore,
                                     label = stringResource(R.string.reset_all),
-                                    onClick = onResetPackage,
+                                    onClick = { onSetResetTarget(ResetTarget.Package(packageName)) },
                                     destructive = true
                                 )
                             )

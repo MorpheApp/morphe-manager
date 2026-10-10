@@ -63,6 +63,19 @@ if [ ! -f "$stock_paths" ]; then
   exit 0
 fi
 
+# A stock install that is gone was replaced, by an update or a reinstall, and the saved stock APK
+# no longer describes the app, so it stays off the system copy too.
+while IFS= read -r path; do
+  case "$path" in
+    /data/app/*)
+      if [ ! -e "$path" ]; then
+        log_msg "Skipping stock mount; $path was replaced"
+        exit 0
+      fi
+      ;;
+  esac
+done < "$stock_paths"
+
 while IFS= read -r path; do
   mount_stock_path "$path"
 done < "$stock_paths"

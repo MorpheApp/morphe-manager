@@ -123,6 +123,26 @@
     <string name="home_greeting_super_late_3">På dette tidspunktet, bare forbli våken og patch</string>
     <string name="home_greeting_super_late_4">Du og serverne, begge våkne</string>
     <string name="home_greeting_super_late_5">Nattaktiv og produktiv</string>
+    <!-- Halloween greetings, shown instead of the ones above around October 31 -->
+    <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_1">Spøk eller patch?</string>
+    <string name="home_greeting_halloween_2">Ingen spøkelser i disse APK-ene, vi har sjekket</string>
+    <string name="home_greeting_halloween_3">Skummel sesong, ferske patcher</string>
+    <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
+    <string name="home_greeting_halloween_4">Noe ondt patcher denne veien</string>
+    <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
+    <string name="home_greeting_winter_1">God jul, ferske patcher</string>
+    <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
+    <string name="home_greeting_winter_2">La det snø, la det patche</string>
+    <string name="home_greeting_winter_3">Nytt år, nye patcher</string>
+    <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
+    <string name="home_greeting_winter_4">Patcher gjennom snøen</string>
+    <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">Godt nyttår!</string>
+    <string name="home_greeting_new_year_2">Nedtelling til ferske patcher</string>
+    <string name="home_greeting_new_year_3">Nytt år, samme annonsefrie apper</string>
+    <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Ut med de gamle versjonene, inn med de nye</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patch-kilder</string>
     <string name="sources_search">Søk etter kilder og patcher</string>
@@ -272,7 +292,6 @@ Alt som legges til fra denne nettsiden brukes på egen risiko"</string>
     <string name="home_use_installed_app">Bruk installert app</string>
     <string name="home_installed_app_picker_title">Installerte apper</string>
     <string name="home_installed_app_picker_empty">Ingen apper funnet</string>
-    <string name="home_installed_app_picker_filter_all">Alle apper</string>
     <string name="home_installed_app_picker_filter_user">Kun brukerapper</string>
     <string name="home_installed_app_picker_filter_system">Kun systemapper</string>
     <string name="home_invalid_apk_unreadable">Kunne ikke lese filen. Sjekk at \'Ekstern lagring\' ikke er batteribegrenset</string>
@@ -281,7 +300,6 @@ Alt som legges til fra denne nettsiden brukes på egen risiko"</string>
     <string name="home_invalid_apk_io_error">Kunne ikke åpne filen. Prøv igjen</string>
     <string name="home_external_apk_expert_mode_required">Denne funksjonen er bare tilgjengelig i ekspertmodus</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Ekspertmodus</string>
     <string name="expert_mode_search">Søk etter patcher</string>
     <string name="expert_mode_disable_all">Deaktiver alle</string>
     <string name="expert_mode_disable_all_done">Alle patcher deaktivert</string>
@@ -372,44 +390,43 @@ For de beste resultatene anbefaler denne appen å patche en &lt;b&gt;full APK-fi
     <string name="adaptive_icon_select_image">Velg bilde</string>
     <string name="adaptive_icon_change_image">Endre bilde</string>
     <string name="image_load_failed">Kunne ikke laste dette bildet</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Forgrunnsbilde</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Startikon</string>
+    <string name="adaptive_icon_gesture_hint">Dra for å flytte, klyp for å endre størrelsen</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Forhåndsvisning</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Standard</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Tematisert</string>
     <string name="adaptive_icon_background_color">Bakgrunnsfarge</string>
     <string name="adaptive_icon_reset_transform">Tilbakestill posisjon og skala</string>
-    <string name="adaptive_icon_safe_zone_inner">Sikker sone (alltid synlig)</string>
-    <string name="adaptive_icon_safe_zone_outer">Maskesone (kan bli avkuttet)</string>
-    <string name="adaptive_icon_no_transparency_warning">Bildet har ingen transparente piksler. Resultatet kan se feil ut</string>
+    <string name="adaptive_icon_no_transparency_warning">Dette bildet har ingen gjennomsiktige piksler, så de tematiserte ikonene og varslingsikonene beholder Morphe-logoen</string>
     <string name="adaptive_icon_created_success">Adaptivt ikon opprettet</string>
     <string name="adaptive_icon_creation_failed">Kunne ikke opprette adaptivt ikon</string>
-    <string name="adaptive_icon_label">Adaptiv</string>
-    <string name="adaptive_icon_monochrome_label">Monokrom</string>
     <string name="adaptive_icon_guide">Veiledning for ikonoppretting</string>
     <string name="adaptive_icon_guide_png_title">Bruk en PNG med en gjennomsiktig bakgrunn</string>
-    <string name="adaptive_icon_guide_png_body">Forgrunnen må være en PNG-fil med en gjennomsiktig bakgrunn. En ensfarget bakgrunn vil se feil ut – bakgrunnsfargen skal hentes fra fargevelgeren nedenfor.</string>
+    <string name="adaptive_icon_guide_png_body">En logo på gjennomsiktig bakgrunn fungerer best, med bakgrunnsfargen valgt nedenfor. Et bilde uten gjennomsiktighet fyller hele ikonet i stedet, og de tematiserte ikonene og varslingsikonene beholder da Morphe-logoen.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Sikre soner</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Indre sone (solid): innholdet er alltid fullt synlig på alle launcherformer.
-Ytre sone (stiplet): kan bli beskåret av launcher-masken – hold viktig informasjon inne i den indre sonen."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Omrisset viser ikonformen til startprogrammet ditt, og alt utenfor blir kuttet bort. Andre startprogrammer bruker andre former, så hold viktige detaljer innenfor den stiplede sirkelen, som alle former viser.</string>
     <string name="adaptive_icon_guide_notification_title">Ikon for varsling</string>
-    <string name="adaptive_icon_guide_notification_body">Genereres automatisk fra forgrunnsbildet. Juster størrelsen med skyvebryteren for varsler. Alt synlig innhold vises i hvitt i statuslinjen.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Monokromatisk ikon</string>
-    <string name="adaptive_icon_guide_monochrome_body">Genereres automatisk fra forgrunnsbildet ved hjelp av de samme adaptive ikontransformasjonene. Det vises tonet med bakgrunnsfargen i Android 13 og nyere.</string>
+    <string name="adaptive_icon_guide_notification_body">Klippes fra den synlige delen av bildet og gis samme størrelse som andre statuslinjeikoner, uansett hvilken margin filen har. Juster det med glidebryteren under forhåndsvisningen. Android viser det i én farge.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Tematisert ikon</string>
+    <string name="adaptive_icon_guide_monochrome_body">Klippes fra bildet med samme plassering og størrelse som startprogramikonet. På Android 13 og nyere fargelegger startprogrammer med tematiserte ikoner aktivert det ut fra bakgrunnsbildet.</string>
     <string name="notification_icon_preview">Varsling</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Opprett egendefinert header</string>
     <string name="header_creator_light_theme">Lyst tema-hode</string>
     <string name="header_creator_dark_theme">Mørkt tema-hode</string>
-    <string name="header_creator_no_image">Ingen bilder valgt</string>
     <string name="header_creator_success">Hode opprettet</string>
     <string name="header_creator_failed">Kunne ikke opprette hode</string>
     <string name="header_creator_guide">Veiledning for header-oppretting</string>
     <string name="header_creator_guide_image_title">Bildekrav</string>
-    <string name="header_creator_guide_image_body">Bruk hvilken som helst bildefil (PNG eller JPEG). For best resultat, bruk et bredformatbilde med et aspektforhold på omtrent 2,7:1. PNG-filer med gjennomsiktig bakgrunn vil smelte naturlig sammen med app-temaet.</string>
+    <string name="header_creator_guide_image_body">En PNG med gjennomsiktig bakgrunn smelter inn i applinjen. Marginer rundt logoen i filen ignoreres, så den starter i samme størrelse og plassering som standardlogoen.</string>
     <string name="header_creator_guide_themes_title">Lyse og mørke temaer</string>
     <string name="header_creator_guide_themes_body">De fleste apper krever separate bilder for lyse og mørke temaer. Noen apper (som YouTube Music) bruker bare det mørke temaet, så bare den delen vises.</string>
     <string name="header_creator_guide_positioning_title">Posisjonering og skalering</string>
-    <string name="header_creator_guide_positioning_body">Bruk klype-for-zoom og dra-bevegelser direkte i forhåndsvisningen for å posisjonere og skalere bildet. Snap-guider vises når bildet er nær senteret. Du kan også bruke skyvebryteren under forhåndsvisningen.</string>
+    <string name="header_creator_guide_positioning_body">Dra og klyp bildet i editoren, eller endre størrelsen på det med glidebryteren. Den stiplede boksen markerer hvor standardlogoen ligger, og hjelpelinjer vises når bildet er på linje med den.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Valgt patch</string>
     <string name="batch_patch_title">Batch patching</string>
@@ -475,9 +492,12 @@ Ytre sone (stiplet): kan bli beskåret av launcher-masken – hold viktig inform
     <string name="home_app_info_app_update_available_description">Patch-kildene støtter en nyere versjon av denne appen. Patch den på nytt for å gå over til den versjonen.</string>
     <string name="home_app_info_newest_supported_version">Nyeste støttede</string>
     <string name="home_app_info_version_move">Installert %1$s, nyeste støttede %2$s</string>
+    <string name="home_app_info_version_restore">Installert %1$s, patchet %2$s</string>
     <string name="home_app_info_app_deleted_warning">Appen ble avinstallert</string>
     <string name="home_app_info_app_deleted_description">Denne appen ble avinstallert utenfor Morphe. Patch den på nytt for å gjenopprette funksjonaliteten</string>
     <string name="home_app_info_not_patched_description">En uoppdatert versjon av denne appen er installert. Morphe har fortsatt sin tidligere patchregistrering</string>
+    <string name="home_app_info_mount_replaced_description">En annen versjon erstattet den monterte appen, så patchen gjelder ikke lenger. Gjenoppretting setter den patchede versjonen tilbake</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play oppdaterte den monterte appen, så patchen gjelder ikke lenger. Gjenoppretting setter den patchede versjonen tilbake. Slå av automatisk oppdatering for den i Google Play for å holde den patchet</string>
     <string name="app_links_title">Støttede nettlenker</string>
     <string name="app_links_description">På Android 12+ åpnes lenker til støttede domener i nettleseren din som standard med mindre de er godkjent</string>
     <string name="app_links_unverified_banner_title">Nettlenker ikke verifisert</string>
@@ -487,8 +507,6 @@ Ytre sone (stiplet): kan bli beskåret av launcher-masken – hold viktig inform
     <string name="app_links_open_settings">Åpne lenkeinnstillinger</string>
     <string name="app_links_repair_success">App-lenker ble aktivert</string>
     <string name="app_links_repair_failed">Kunne ikke aktivere app-lenker automatisk</string>
-    <string name="app_links_badge_enabled">Aktivert</string>
-    <string name="app_links_badge_disabled">Deaktivert</string>
     <string name="app_links_all_verified">Alle støttede lenker er konfigurert til å åpnes i denne appen</string>
     <string name="app_links_fix">Reparer lenker</string>
     <string name="configure">Konfigurer</string>
@@ -519,10 +537,10 @@ Ytre sone (stiplet): kan bli beskåret av launcher-masken – hold viktig inform
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">App</string>
     <string name="patcher_field_package">Pakke</string>
+    <string name="patcher_field_failed_patch">Mislykket patch</string>
     <string name="patcher_field_source">Kilde</string>
     <string name="patcher_field_split">Delt APK</string>
     <string name="patcher_field_manager">Behandler</string>
-    <string name="patcher_field_patcher">Patcher</string>
     <string name="patcher_field_runtime">Kjøretid</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Biblioteker</string>
@@ -553,6 +571,7 @@ Ytre sone (stiplet): kan bli beskåret av launcher-masken – hold viktig inform
     <string name="patcher_installing_subtitle">Snart klar! 🎸</string>
     <string name="patcher_success_title">Ferdig! 🎉</string>
     <string name="patcher_success_subtitle">Appen din er patchet og installert!</string>
+    <string name="patcher_mounted_subtitle">Appen din er patchet og montert!</string>
     <string name="patcher_complete_title">Patchingen er fullført! ✨</string>
     <string name="patcher_failed_title">Oops! Noe gikk galt</string>
     <string name="patcher_failed_dialog_title">Patchingen mislyktes</string>
@@ -571,6 +590,7 @@ Ytre sone (stiplet): kan bli beskåret av launcher-masken – hold viktig inform
 
 Avinstallering vil permanent slette alle appdata"</string>
     <string name="patcher_install_error_title">Installeringsfeil</string>
+    <string name="patcher_mount_error_title">Monteringsfeil</string>
     <string name="patcher_install_error_subtitle">Prøv å avinstallere og installere på nytt</string>
     <string name="patcher_ready_to_mount_subtitle">Trykk på knappen nedenfor for å montere</string>
     <string name="patcher_patches_excluded_for_installer">Ikke tilgjengelig for denne installasjonsmetoden og ekskludert: %s</string>
@@ -598,7 +618,6 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="patcher_step_load_patches">Laster patcher</string>
     <string name="patcher_step_prepare_split_apk">Slår sammen splittet APK</string>
     <string name="patcher_step_unpack">Les APK-fil</string>
-    <string name="patcher_step_group_patching">Patching</string>
     <string name="patcher_step_group_saving">Lagrer</string>
     <string name="patcher_step_write_patched">Skriver patchet APK-fil</string>
     <string name="patcher_step_sign_apk">Signerer patchet APK-fil</string>
@@ -610,6 +629,7 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="patcher_memory_adjustment_title">Ikke nok minne</string>
     <string name="patcher_memory_adjustment_description">Patcheren ble stoppet av systemet mens den kjørte med en minnegrense på %1$d MB. Å senke grensen til %2$d MB gjør at patcheren blir et mindre mål, og kan gjøre at kjøringen fullføres.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Patcheren ble stoppet av systemet mens den kjørte med en minnegrense på %1$d MB, som allerede er den laveste tilgjengelige. Prøv å patche med færre patchkilder, eller velg færre patcher.</string>
+    <string name="patcher_memory_adjustment_description_finished">Systemet stoppet patcheren ved en minnegrense på %1$d MB, og den ble først ferdig ved %2$d MB. Å starte ved %2$d MB hopper over det mislykkede forsøket neste gang</string>
     <string name="patcher_memory_adjustment_apply">Senk til %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patching pågår…</string>
@@ -709,6 +729,9 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="settings_appearance_background_snow">Snø</string>
     <string name="settings_appearance_background_grid">Rutenett</string>
     <string name="settings_appearance_background_particles">Partikler</string>
+    <string name="settings_appearance_background_lava">Lavalampe</string>
+    <string name="settings_appearance_background_halloween">Halloween</string>
+    <string name="settings_appearance_background_fireworks">Fyrverkeri</string>
     <string name="settings_appearance_background_none">Ingen</string>
     <string name="settings_appearance_background_random">Tilfeldig</string>
     <string name="settings_appearance_background_random_interval_launch">Daglig</string>
@@ -716,6 +739,10 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="settings_appearance_background_random_interval_3days">Hver 3. dag</string>
     <string name="settings_appearance_parallax_effect">Parallakse-effekt</string>
     <string name="settings_appearance_parallax_effect_description">Jevn bakgrunnsforskyvning når du heller enheten</string>
+    <string name="settings_appearance_seasonal_themes">Sesongtemaer</string>
+    <string name="settings_appearance_seasonal_themes_description">Festlige bakgrunner og hilsener i høytidene</string>
+    <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">Bakgrunnen %1$s er aktiv til %2$s mens sesongtemaer er på</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
     <string name="settings_appearance_theme_mode">Temamodus</string>
@@ -777,9 +804,24 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="settings_appearance_app_icon_default">Standard</string>
     <string name="settings_appearance_app_icon_light_2">Himmel</string>
     <string name="settings_appearance_app_icon_light_3">Solnedgang</string>
-    <string name="settings_appearance_app_icon_dark_1">Hav</string>
+    <string name="settings_appearance_app_icon_light_4">Lavendel</string>
+    <string name="settings_appearance_app_icon_light_5">Isbre</string>
+    <string name="settings_appearance_app_icon_light_6">Dis</string>
+    <string name="settings_appearance_app_icon_light_7">Sand</string>
+    <string name="settings_appearance_app_icon_dark_1">Blågrønn</string>
     <string name="settings_appearance_app_icon_dark_2">Tomhet</string>
-    <string name="settings_appearance_app_icon_dark_3">Indigo</string>
+    <string name="settings_appearance_app_icon_dark_3">Plomme</string>
+    <string name="settings_appearance_app_icon_dark_4">Midnatt</string>
+    <string name="settings_appearance_app_icon_dark_5">Skifer</string>
+    <string name="settings_appearance_app_icon_accent_1">Aurora</string>
+    <string name="settings_appearance_app_icon_accent_2">Blekk</string>
+    <string name="settings_appearance_app_icon_accent_3">Papir</string>
+    <string name="settings_appearance_app_icon_accent_4">Skumring</string>
+    <string name="settings_appearance_app_icon_background">Bakgrunn</string>
+    <string name="settings_appearance_app_icon_mark">Logo</string>
+    <string name="settings_appearance_app_icon_mark_color">Farge</string>
+    <string name="settings_appearance_app_icon_mark_white">Hvit</string>
+    <string name="settings_appearance_app_icon_mark_black">Svart</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Endre appikon?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Bytt til &lt;b&gt;%s&lt;/b&gt; og start på nytt?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -817,7 +859,6 @@ Patcher påvirkes ikke: aktiver pre-release-patcher for hver kilde i patch-kilde
     <string name="external_batch_patch_trust_caller">Tillat alltid denne appen</string>
     <string name="external_batch_patch_unknown_caller">En ukjent app</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Morphe-oppdatering er tilgjengelig</string>
     <string name="notification_bundle_update_title">Nye patcher tilgjengelig</string>
     <string name="notification_update_text">Versjon %s er klar for nedlasting</string>
     <string name="notification_bundle_update_text_unversioned">Trykk for å åpne Morphe og oppdatere</string>
@@ -828,8 +869,11 @@ Patcher påvirkes ikke: aktiver pre-release-patcher for hver kilde i patch-kilde
     <string name="notification_channel_manager_updates_description">Varsler om nye Morphe-utgivelser</string>
     <string name="notification_channel_patch_updates">Patch-oppdateringer</string>
     <string name="notification_channel_patch_updates_description">Varsler om nye patch-utgivelser</string>
-    <string name="notification_channel_patcher">Patching</string>
     <string name="notification_channel_patcher_description">Vises mens Morphe patcher en app i bakgrunnen</string>
+    <string name="notification_channel_mounted_apps">Monterte apper</string>
+    <string name="notification_channel_mounted_apps_description">Når en annen versjon har erstattet en montert app og patchen ikke lenger gjelder</string>
+    <string name="notification_mount_replaced_title">%1$s er ikke lenger patchet</string>
+    <string name="notification_mount_replaced_text">v%1$s erstattet den patchede v%2$s. Åpne Morphe for å gjenopprette den</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Oppdateringer</string>
     <string name="settings_advanced_expert_mode">Ekspertinnstillinger</string>
@@ -1246,9 +1290,7 @@ Detaljer: %2$s"</string>
     <string name="selected">Valgt</string>
     <string name="not_selected">Ikke valgt</string>
     <string name="select_all">Velg alle</string>
-    <string name="select_all_done">Alle valgt</string>
     <string name="deselect_all">Fjern markeringen fra alle</string>
-    <string name="deselect_all_done">Alle bortvalgte</string>
     <string name="reorder_list">Omorganisér liste</string>
     <string name="reorder_list_hint">Dra for å omorganisere</string>
     <string name="reorder_done">Rekkefølge lagret</string>
@@ -1284,6 +1326,7 @@ Detaljer: %2$s"</string>
     <string name="unmount">Demonter</string>
     <string name="unmounted">Demontert</string>
     <string name="remount">Monter på nytt</string>
+    <string name="restore">Gjenopprett</string>
     <string name="share">Del</string>
     <string name="install">Installer</string>
     <string name="installed">Installert</string>
@@ -1304,6 +1347,8 @@ Detaljer: %2$s"</string>
     <string name="sources">Kilder</string>
     <string name="installing_ellipsis">Installerer…</string>
     <string name="mounting_ellipsis">Monterer…</string>
+    <string name="mount_stage_restoring_stock">Gjenoppretter originalen…</string>
+    <string name="mount_stage_copying">Kopierer…</string>
     <string name="unmounting_ellipsis">Demontering…</string>
     <string name="importing_ellipsis">Importerer…</string>
     <string name="imported_successfully">Importert vellykket</string>
@@ -1351,7 +1396,6 @@ Detaljer: %2$s"</string>
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">Denne utgivelsen er fortsatt under publisering. Prøv igjen om noen minutter</string>
     <string name="update_download_missing">Den nedlastede oppdateringen er ikke lenger tilgjengelig. Last den ned igjen.</string>
-    <string name="download_manager_failed">Kunne ikke laste ned oppdatering: %s</string>
     <string name="failed_to_check_updates">Kunne ikke sjekke etter oppdateringer: %s</string>
     <string name="failed_to_download_update">Kunne ikke laste ned oppdatering: %s</string>
     <string name="download_confirmation_metered">"Du er for øyeblikket på en datamålt tilkobling, og datakostnader fra din tjenesteleverandør kan påløpe.

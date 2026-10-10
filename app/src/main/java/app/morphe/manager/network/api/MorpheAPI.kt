@@ -1,3 +1,13 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ *
+ * Original hard forked code:
+ * https://github.com/Jman-Github/Universal-ReVanced-Manager/blob/597b3173a004f5a9aae54326046dd7fd4c5b7777/app/src/main/java/app/revanced/manager/network/api/ReVancedAPI.kt
+ *
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
+ */
+
 package app.morphe.manager.network.api
 
 import android.util.Log
@@ -367,7 +377,7 @@ class MorpheAPI(
         return Instant.parse(normalized).toLocalDateTime(TimeZone.UTC)
     }
 
-    /** Ensures a version string is prefixed with `v` (e.g. `1.2.3` → `v1.2.3`). */
+    /** Ensures a version string is prefixed with `v`, so `1.2.3` becomes `v1.2.3`. */
     private fun normalizeVersion(version: String): String =
         if (version.startsWith("v")) version else "v$version"
 
@@ -443,9 +453,12 @@ class MorpheAPI(
             getManagerFromGitHub()
         }.getOrNull()
 
-        // Return only if the remote version is strictly newer than what's installed
+        // Return only if the remote version is strictly newer than what's installed. The stable
+        // channel offers stable builds alone: merging dev into main carries the dev release file
+        // along, and it stays there until the stable release replaces it
         val update = candidate?.takeIf {
-            versionWeight(it.version.removePrefix("v")) > currentWeight
+            (usePrereleases || !it.version.contains('-')) &&
+                    versionWeight(it.version.removePrefix("v")) > currentWeight
         } ?: return null
 
         // Only a definitive "not there" hides the update: a check that could not run at all

@@ -157,14 +157,14 @@ private fun LanguageItem(
             Text(
                 text = language.displayName,
                 style = MaterialTheme.typography.bodyLarge,
-                color = LocalDialogTextColor.current,
+                color = dialogTextColor(),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
             Text(
                 text = language.nativeName,
                 style = MaterialTheme.typography.bodyMedium,
-                color = LocalDialogSecondaryTextColor.current,
+                color = dialogSecondaryTextColor(),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )

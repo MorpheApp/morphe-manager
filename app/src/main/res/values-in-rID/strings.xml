@@ -123,6 +123,26 @@
     <string name="home_greeting_super_late_3">Saat ini, mending tetap bangun dan tambal</string>
     <string name="home_greeting_super_late_4">Kamu dan server, sama-sama terjaga</string>
     <string name="home_greeting_super_late_5">Aktif di malam hari dan produktif</string>
+    <!-- Halloween greetings, shown instead of the ones above around October 31 -->
+    <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_1">Trik atau tambalan?</string>
+    <string name="home_greeting_halloween_2">Tidak ada hantu di dalam APK-APK ini, kami sudah memeriksanya</string>
+    <string name="home_greeting_halloween_3">Musim seram, tambalan baru</string>
+    <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
+    <string name="home_greeting_halloween_4">Sesuatu yang jahat menambal ke sini</string>
+    <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
+    <string name="home_greeting_winter_1">Selamat hari libur, tambalan baru</string>
+    <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
+    <string name="home_greeting_winter_2">Biarkan salju turun, biarkan menambal</string>
+    <string name="home_greeting_winter_3">Tahun baru, tambalan baru</string>
+    <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
+    <string name="home_greeting_winter_4">Menambal di tengah salju</string>
+    <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">Selamat Tahun Baru!</string>
+    <string name="home_greeting_new_year_2">Menghitung mundur menuju tambalan baru</string>
+    <string name="home_greeting_new_year_3">Tahun baru, aplikasi bebas iklan yang sama</string>
+    <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Versi lama pergi, versi baru datang</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Sumber tambalan</string>
     <string name="sources_search">Cari sumber dan tambalan</string>
@@ -272,7 +292,6 @@ Segala sesuatu yang Anda tambahkan dari situs web ini digunakan atas risiko Anda
     <string name="home_use_installed_app">Gunakan aplikasi yang terpasang</string>
     <string name="home_installed_app_picker_title">Aplikasi terpasang</string>
     <string name="home_installed_app_picker_empty">Tidak ditemukan aplikasi</string>
-    <string name="home_installed_app_picker_filter_all">Semua aplikasi</string>
     <string name="home_installed_app_picker_filter_user">Hanya aplikasi pengguna</string>
     <string name="home_installed_app_picker_filter_system">Hanya aplikasi sistem</string>
     <string name="home_invalid_apk_unreadable">Tidak dapat membaca berkas. Periksa apakah \'Penyimpanan Eksternal\' tidak dibatasi baterai</string>
@@ -281,7 +300,6 @@ Segala sesuatu yang Anda tambahkan dari situs web ini digunakan atas risiko Anda
     <string name="home_invalid_apk_io_error">Gagal membuka berkas. Silakan coba lagi</string>
     <string name="home_external_apk_expert_mode_required">Fitur ini hanya tersedia dalam Mode Ahli</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Mode ahli</string>
     <string name="expert_mode_search">Cari tambalan</string>
     <string name="expert_mode_disable_all">Nonaktifkan semua</string>
     <string name="expert_mode_disable_all_done">Semua tambalan dinonaktifkan</string>
@@ -373,44 +391,43 @@ Bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum teridentifi
     <string name="adaptive_icon_select_image">Pilih gambar</string>
     <string name="adaptive_icon_change_image">Ubah gambar</string>
     <string name="image_load_failed">Tidak dapat memuat gambar ini</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Gambar latar depan</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Ikon peluncur</string>
+    <string name="adaptive_icon_gesture_hint">Seret untuk memindahkan, cubit untuk mengubah ukuran</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Pratinjau</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Standar</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Bertema</string>
     <string name="adaptive_icon_background_color">Warna latar belakang</string>
     <string name="adaptive_icon_reset_transform">Atur ulang posisi dan skala</string>
-    <string name="adaptive_icon_safe_zone_inner">Zona aman (selalu terlihat)</string>
-    <string name="adaptive_icon_safe_zone_outer">Zona tertutup (mungkin dipotong)</string>
-    <string name="adaptive_icon_no_transparency_warning">Gambar tidak memiliki piksel transparan. Hasilnya mungkin terlihat tidak benar</string>
+    <string name="adaptive_icon_no_transparency_warning">Gambar ini tidak memiliki piksel transparan, sehingga ikon bertema dan notifikasi tetap menggunakan logo Morphe</string>
     <string name="adaptive_icon_created_success">Ikon adaptif berhasil dibuat</string>
     <string name="adaptive_icon_creation_failed">Gagal membuat ikon adaptif</string>
-    <string name="adaptive_icon_label">Adaptif</string>
-    <string name="adaptive_icon_monochrome_label">Monokrom</string>
     <string name="adaptive_icon_guide">Panduan pembuatan ikon</string>
     <string name="adaptive_icon_guide_png_title">Gunakan PNG dengan latar belakang transparan</string>
-    <string name="adaptive_icon_guide_png_body">Latar depan harus berupa berkas PNG dengan latar belakang transparan. Latar belakang berwarna solid akan terlihat tidak tepat - warna latar belakang harus dipilih dari alat pemilih warna di bawah ini.</string>
+    <string name="adaptive_icon_guide_png_body">Logo pada latar belakang transparan bekerja paling baik, dengan warna latar belakang yang dipilih di bawah. Gambar tanpa transparansi akan mengisi seluruh ikon, dan ikon bertema serta notifikasi kemudian tetap menggunakan logo Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Zona aman</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Zona dalam (solid): konten selalu terlihat sepenuhnya pada semua bentuk peluncur.
-Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail penting di dalam zona dalam."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Garis luar menunjukkan bentuk ikon peluncur Anda, dan semua yang berada di luarnya akan terpotong. Peluncur lain menggunakan bentuk lain, jadi pertahankan detail penting di dalam lingkaran putus-putus, yang ditampilkan oleh setiap bentuk.</string>
     <string name="adaptive_icon_guide_notification_title">Ikon notifikasi</string>
-    <string name="adaptive_icon_guide_notification_body">Dibuat secara otomatis dari gambar latar depan. Sesuaikan ukurannya menggunakan penggeser Notifikasi. Semua konten yang terlihat akan ditampilkan berwarna putih di bilah status.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Ikon monokrom</string>
-    <string name="adaptive_icon_guide_monochrome_body">Dibuat secara otomatis dari gambar latar depan menggunakan transformasi ikon adaptif yang sama. Ikon ini tampak diberi warna aksen sesuai dengan warna wallpaper pada Android 13 dan yang lebih baru.</string>
+    <string name="adaptive_icon_guide_notification_body">Dipotong dari bagian gambar yang terlihat dan berukuran seperti ikon bilah status lainnya, berapa pun margin pada file. Sesuaikan dengan penggeser di bawah pratinjau. Android menampilkannya dalam satu warna.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Ikon bertema</string>
+    <string name="adaptive_icon_guide_monochrome_body">Dipotong dari gambar dengan posisi dan ukuran yang sama dengan ikon peluncur. Pada Android 13 dan yang lebih baru, peluncur dengan ikon bertema yang diaktifkan akan mewarnainya dari wallpaper.</string>
     <string name="notification_icon_preview">Notifikasi</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Buat header kustom</string>
     <string name="header_creator_light_theme">Header tema terang</string>
     <string name="header_creator_dark_theme">Header tema gelap</string>
-    <string name="header_creator_no_image">Tidak ada gambar yang dipilih</string>
     <string name="header_creator_success">Header berhasil dibuat</string>
     <string name="header_creator_failed">Gagal membuat header</string>
     <string name="header_creator_guide">Panduan pembuatan header</string>
     <string name="header_creator_guide_image_title">Persyaratan gambar</string>
-    <string name="header_creator_guide_image_body">Gunakan berkas gambar apa pun (PNG atau JPEG). Untuk hasil terbaik, gunakan gambar berformat lebar dengan rasio aspek sekitar 2,7:1. Berkas PNG dengan latar belakang transparan akan menyatu secara alami dengan tema aplikasi.</string>
+    <string name="header_creator_guide_image_body">PNG dengan latar belakang transparan menyatu dengan bilah aplikasi. Margin di sekitar logo dalam file diabaikan, sehingga ukuran dan posisinya sama dengan logo bawaan.</string>
     <string name="header_creator_guide_themes_title">Tema terang dan gelap</string>
     <string name="header_creator_guide_themes_body">Sebagian besar aplikasi memerlukan gambar terpisah untuk tema terang dan gelap. Beberapa aplikasi (seperti YouTube Music) hanya menggunakan tema gelap, jadi hanya bagian itu yang ditampilkan.</string>
     <string name="header_creator_guide_positioning_title">Pemosisian dan penskalaan</string>
-    <string name="header_creator_guide_positioning_body">Gunakan gerakan mencubit dan menyeret langsung di jendela pratinjau untuk mengatur posisi dan memperbesar atau memperkecil gambar Anda. Garis panduan akan muncul saat gambar berada mendekati bagian tengah. Anda juga dapat menggunakan bilah geser di bawah jendela pratinjau.</string>
+    <string name="header_creator_guide_positioning_body">Seret dan cubit gambar di editor, atau atur ukurannya dengan penggeser. Kotak putus-putus menandai posisi logo bawaan, dan panduan muncul saat gambar sejajar dengannya.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Tambalan dipilih</string>
     <string name="batch_patch_title">Penambalan massal</string>
@@ -476,9 +493,12 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="home_app_info_app_update_available_description">Sumber tambalan mendukung versi terbaru dari aplikasi ini. Tambal lagi untuk berpindah ke versi tersebut</string>
     <string name="home_app_info_newest_supported_version">Versi terbaru yang didukung</string>
     <string name="home_app_info_version_move">Versi terpasang %1$s, versi terbaru yang didukung %2$s</string>
+    <string name="home_app_info_version_restore">Terpasang %1$s, ditambal %2$s</string>
     <string name="home_app_info_app_deleted_warning">Aplikasi telah dicopot</string>
     <string name="home_app_info_app_deleted_description">Aplikasi ini telah dicopot di luar Morphe. Tambal ulang untuk mengembalikan fungsinya</string>
     <string name="home_app_info_not_patched_description">Versi tanpa tambalan dari aplikasi ini terpasang. Morphe masih memiliki catatan tambalan sebelumnya</string>
+    <string name="home_app_info_mount_replaced_description">Versi lain menggantikan aplikasi yang di-mount, sehingga patch tidak berlaku lagi. Pulihkan mengembalikan versi yang sudah ditambal</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play memperbarui aplikasi yang di-mount, sehingga patch tidak berlaku lagi. Pulihkan mengembalikan versi yang sudah ditambal. Nonaktifkan pembaruan otomatis untuk aplikasi tersebut di Google Play agar tetap ditambal</string>
     <string name="app_links_title">Tautan web yang didukung</string>
     <string name="app_links_description">Di Android 12+, tautan ke domain yang didukung terbuka di browser Anda secara default kecuali disetujui</string>
     <string name="app_links_unverified_banner_title">Tautan web tidak terverifikasi</string>
@@ -488,8 +508,6 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="app_links_open_settings">Buka pengaturan tautan</string>
     <string name="app_links_repair_success">Tautan aplikasi berhasil diaktifkan</string>
     <string name="app_links_repair_failed">Gagal mengaktifkan tautan aplikasi secara otomatis</string>
-    <string name="app_links_badge_enabled">Aktif</string>
-    <string name="app_links_badge_disabled">Tidak aktif</string>
     <string name="app_links_all_verified">Semua tautan yang didukung dikonfigurasi untuk dibuka di aplikasi ini</string>
     <string name="app_links_fix">Perbaiki tautan</string>
     <string name="configure">Konfigurasi</string>
@@ -520,10 +538,10 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Aplikasi</string>
     <string name="patcher_field_package">Paket</string>
+    <string name="patcher_field_failed_patch">Patch gagal</string>
     <string name="patcher_field_source">Sumber</string>
     <string name="patcher_field_split">APK Terpisah</string>
     <string name="patcher_field_manager">Pengelola</string>
-    <string name="patcher_field_patcher">Penambal</string>
     <string name="patcher_field_runtime">Runtime</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Pustaka</string>
@@ -554,6 +572,7 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
     <string name="patcher_installing_subtitle">Hampir siap! 🎸</string>
     <string name="patcher_success_title">Selesai! 🎉</string>
     <string name="patcher_success_subtitle">Aplikasi Anda telah ditambal dan dipasang!</string>
+    <string name="patcher_mounted_subtitle">Aplikasi Anda telah di-patch dan di-mount!</string>
     <string name="patcher_complete_title">Penambalan selesai! ✨</string>
     <string name="patcher_failed_title">Oops! Terjadi kesalahan</string>
     <string name="patcher_failed_dialog_title">Gagal Menambal</string>
@@ -572,6 +591,7 @@ Zona luar (putus-putus): mungkin terpotong oleh masker launcher - jaga detail pe
 
 Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="patcher_install_error_title">Kesalahan pemasangan</string>
+    <string name="patcher_mount_error_title">Kesalahan Mount</string>
     <string name="patcher_install_error_subtitle">Coba copot dan pasang lagi</string>
     <string name="patcher_ready_to_mount_subtitle">Tekan tombol di bawah untuk mount</string>
     <string name="patcher_patches_excluded_for_installer">Tidak tersedia untuk metode pemasangan ini dan dikecualikan: %s</string>
@@ -599,7 +619,6 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="patcher_step_load_patches">Memuat tambalan</string>
     <string name="patcher_step_prepare_split_apk">Menggabungkan APK terpisah</string>
     <string name="patcher_step_unpack">Membaca berkas APK</string>
-    <string name="patcher_step_group_patching">Penyematan</string>
     <string name="patcher_step_group_saving">Penyimpanan</string>
     <string name="patcher_step_write_patched">Menulis berkas APK yang ditambal</string>
     <string name="patcher_step_sign_apk">Menandatangani berkas APK yang ditambal</string>
@@ -611,6 +630,7 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="patcher_memory_adjustment_title">Memori tidak cukup</string>
     <string name="patcher_memory_adjustment_description">Penambal dihentikan oleh sistem saat berjalan dengan batas memori %1$d MB. Menurunkan batas menjadi %2$d MB membuat penambal menjadi target yang lebih kecil dan dapat membuat prosesnya selesai</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Penambal dihentikan oleh sistem saat berjalan dengan batas memori %1$d MB, yang merupakan batas terendah yang tersedia. Coba lakukan penambalan dengan lebih sedikit sumber tambalan, atau pilih lebih sedikit tambalan</string>
+    <string name="patcher_memory_adjustment_description_finished">Sistem menghentikan patcher pada batas memori %1$d MB, dan baru selesai pada %2$d MB. Memulai dari %2$d MB akan melewati upaya yang gagal itu lain kali</string>
     <string name="patcher_memory_adjustment_apply">Turunkan ke %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Penyematan sedang berlangsung…</string>
@@ -710,6 +730,9 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="settings_appearance_background_snow">Salju</string>
     <string name="settings_appearance_background_grid">Kisi</string>
     <string name="settings_appearance_background_particles">Partikel</string>
+    <string name="settings_appearance_background_lava">Lampu lava</string>
+    <string name="settings_appearance_background_halloween">Halloween</string>
+    <string name="settings_appearance_background_fireworks">Kembang api</string>
     <string name="settings_appearance_background_none">Tidak ada</string>
     <string name="settings_appearance_background_random">Acak</string>
     <string name="settings_appearance_background_random_interval_launch">Saat diluncurkan</string>
@@ -717,6 +740,10 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="settings_appearance_background_random_interval_3days">Setiap 3 hari</string>
     <string name="settings_appearance_parallax_effect">Efek Paralaks</string>
     <string name="settings_appearance_parallax_effect_description">Perpindahan latar belakang yang halus saat menggeser perangkat</string>
+    <string name="settings_appearance_seasonal_themes">Tema musiman</string>
+    <string name="settings_appearance_seasonal_themes_description">Latar belakang dan ucapan meriah selama hari libur</string>
+    <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">Latar belakang %1$s aktif hingga %2$s selama tema musiman aktif</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
     <string name="settings_appearance_theme_mode">Mode tema</string>
@@ -778,9 +805,24 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="settings_appearance_app_icon_default">Bawaan</string>
     <string name="settings_appearance_app_icon_light_2">Langit</string>
     <string name="settings_appearance_app_icon_light_3">Senja</string>
-    <string name="settings_appearance_app_icon_dark_1">Samudra</string>
+    <string name="settings_appearance_app_icon_light_4">Lavender</string>
+    <string name="settings_appearance_app_icon_light_5">Gletser</string>
+    <string name="settings_appearance_app_icon_light_6">Kabut</string>
+    <string name="settings_appearance_app_icon_light_7">Pasir</string>
+    <string name="settings_appearance_app_icon_dark_1">Toska</string>
     <string name="settings_appearance_app_icon_dark_2">Hampa</string>
-    <string name="settings_appearance_app_icon_dark_3">Indigo</string>
+    <string name="settings_appearance_app_icon_dark_3">Prem</string>
+    <string name="settings_appearance_app_icon_dark_4">Tengah Malam</string>
+    <string name="settings_appearance_app_icon_dark_5">Batu Tulis</string>
+    <string name="settings_appearance_app_icon_accent_1">Aurora</string>
+    <string name="settings_appearance_app_icon_accent_2">Tinta</string>
+    <string name="settings_appearance_app_icon_accent_3">Kertas</string>
+    <string name="settings_appearance_app_icon_accent_4">Senja</string>
+    <string name="settings_appearance_app_icon_background">Latar Belakang</string>
+    <string name="settings_appearance_app_icon_mark">Logo</string>
+    <string name="settings_appearance_app_icon_mark_color">Berwarna</string>
+    <string name="settings_appearance_app_icon_mark_white">Putih</string>
+    <string name="settings_appearance_app_icon_mark_black">Hitam</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Ubah ikon aplikasi?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Ubah ke &lt;b&gt;%s&lt;/b&gt; dan mulai ulang?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -818,7 +860,6 @@ Tambalan tidak terpengaruh: aktifkan tambalan pra-rilis untuk setiap sumber dala
     <string name="external_batch_patch_trust_caller">Selalu izinkan aplikasi ini</string>
     <string name="external_batch_patch_unknown_caller">Aplikasi tidak dikenal</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Pembaruan Morphe tersedia</string>
     <string name="notification_bundle_update_title">Tambalan baru tersedia</string>
     <string name="notification_update_text">Versi %s siap untuk diunduh</string>
     <string name="notification_bundle_update_text_unversioned">Ketuk untuk buka Morphe dan perbarui</string>
@@ -829,8 +870,11 @@ Tambalan tidak terpengaruh: aktifkan tambalan pra-rilis untuk setiap sumber dala
     <string name="notification_channel_manager_updates_description">Notifikasi tentang rilis Morphe baru</string>
     <string name="notification_channel_patch_updates">Pembaruan patch</string>
     <string name="notification_channel_patch_updates_description">Notifikasi tentang rilis patch baru</string>
-    <string name="notification_channel_patcher">Penambalan</string>
     <string name="notification_channel_patcher_description">Ditampilkan saat Morphe menambal aplikasi di latar belakang</string>
+    <string name="notification_channel_mounted_apps">Aplikasi yang di-mount</string>
+    <string name="notification_channel_mounted_apps_description">Saat versi lain menggantikan aplikasi yang terpasang dan tambalannya tidak lagi berlaku</string>
+    <string name="notification_mount_replaced_title">%1$s tidak lagi ditambal</string>
+    <string name="notification_mount_replaced_text">v%1$s menggantikan v%2$s yang ditambal. Buka Morphe untuk memulihkannya</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Setelan ahli</string>
     <string name="settings_advanced_expert_mode">Mode ahli</string>
@@ -1247,9 +1291,7 @@ Rincian: %2$s"</string>
     <string name="selected">Dipilih</string>
     <string name="not_selected">Tidak dipilih</string>
     <string name="select_all">Pilih semua</string>
-    <string name="select_all_done">Semua dipilih</string>
     <string name="deselect_all">Batal pilih semua</string>
-    <string name="deselect_all_done">Semua tidak dipilih</string>
     <string name="reorder_list">Urutkan ulang daftar</string>
     <string name="reorder_list_hint">Seret untuk mengurutkan ulang</string>
     <string name="reorder_done">Urutan disimpan</string>
@@ -1285,6 +1327,7 @@ Rincian: %2$s"</string>
     <string name="unmount">Unmount</string>
     <string name="unmounted">Belum di-mount</string>
     <string name="remount">Remount</string>
+    <string name="restore">Pulihkan</string>
     <string name="share">Bagikan</string>
     <string name="install">Pasang</string>
     <string name="installed">Terpasang</string>
@@ -1305,6 +1348,8 @@ Rincian: %2$s"</string>
     <string name="sources">Sumber</string>
     <string name="installing_ellipsis">Memasang…</string>
     <string name="mounting_ellipsis">Mounting…</string>
+    <string name="mount_stage_restoring_stock">Memulihkan asli…</string>
+    <string name="mount_stage_copying">Menyalin…</string>
     <string name="unmounting_ellipsis">Unmounting…</string>
     <string name="importing_ellipsis">Mengimpor…</string>
     <string name="imported_successfully">Berhasil diimpor</string>
@@ -1352,7 +1397,6 @@ Rincian: %2$s"</string>
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">Rilis ini masih dalam proses penerbitan. Coba lagi dalam beberapa menit</string>
     <string name="update_download_missing">Pembaruan yang diunduh sudah tidak tersedia lagi. Unduh ulang</string>
-    <string name="download_manager_failed">Gagal mengunduh pembaruan: %s</string>
     <string name="failed_to_check_updates">Gagal memeriksa pembaruan: %s</string>
     <string name="failed_to_download_update">Gagal mengunduh pembaruan: %s</string>
     <string name="download_confirmation_metered">"Anda saat ini menggunakan koneksi berbayar per data, dan biaya data dari penyedia layanan Anda mungkin berlaku.

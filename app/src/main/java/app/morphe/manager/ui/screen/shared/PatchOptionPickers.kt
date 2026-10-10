@@ -55,7 +55,7 @@ fun PickerButtonRow(
                 Icon(
                     imageVector = Icons.Outlined.Clear,
                     contentDescription = stringResource(R.string.clear),
-                    tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
+                    tint = dialogTextColor().copy(alpha = 0.7f),
                 )
             }
         }

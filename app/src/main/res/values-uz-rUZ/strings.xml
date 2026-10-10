@@ -2,6 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Boshqa ilovalar</string>
+    <string name="home_other_apps_action">Boshqa ilovalarni tanlash</string>
     <string name="home_not_patched_yet">Hozircha patch qilinmagan</string>
     <string name="home_unpatched_version_installed">Patch qilinmagan versiya oʻrnatilgan</string>
     <string name="home_unpatched_badge">Patch qilinmagan</string>
@@ -12,6 +13,10 @@
     <string name="home_app_no_hidden">Yashirin ilovalar yoʻq</string>
     <string name="home_app_hidden_apps_title">Yashirin ilovalar</string>
     <string name="home_app_hidden_apps_hint">Ko‘rsatish uchun bosing</string>
+    <string name="home_app_patch_sources_description">Belgilanmagan manbalar ushbu ilovalar yamalayotganda taklif qilinmaydi va ularning yamoqlari hech qachon o‘z-o‘zidan tanlovga qo‘shilmaydi. Har bir manba boshqa barcha ilovalar uchun yoqilgan holda qoladi</string>
+    <string name="home_app_patch_sources_mixed">%2$s tadan %1$s tasiga taklif qilingan</string>
+    <string name="home_app_patch_sources_covers">%2$s tadan %1$s tasi uchun yamoqlari bor</string>
+    <string name="home_app_patch_sources_last">Har bir ilovani yamash uchun kamida bitta manba qolishi kerak</string>
     <string name="android_11_bug_dialog_title">Android 11 muammosi</string>
     <string name="android_11_bug_dialog_description">Android 11 tizimidagi xatoni oldini olish uchun ilova o‘rnatish ruxsatini oldindan bering</string>
     <string name="deep_link_add_source_title">Manba qo‘shish</string>
@@ -26,6 +31,8 @@
     <string name="home_metadata_errors_subtitle">Manbalarni ko‘rib chiqish uchun bosing</string>
     <string name="home_outdated_manager_title">Morphe eskirgan</string>
     <string name="home_outdated_manager_subtitle">Ba\'zi yamoq manbalari yangiroq versiyani talab qiladi</string>
+    <string name="home_held_back_title">Patch manbai Morphe’ni ishdan chiqardi</string>
+    <string name="home_held_back_subtitle">Ilova ishga tushishi uchun u o‘tkazib yuborildi. Ko‘rib chiqish uchun bosing</string>
     <string name="home_metered_skipped_title">Mobil internet yoqilganda yangilanish to\'xtatilgan</string>
     <string name="home_metered_skipped_subtitle">Mobil internet orqali yangilashga ruxsat berish uchun bosing</string>
     <string name="home_repatch_available_subtitle">Barchasini navbatga qo\'yish uchun bosing</string>
@@ -53,6 +60,7 @@
     <string name="home_app_sort_name_asc_description">Aplikasi yang diinstal dan disematkan terlebih dahulu</string>
     <string name="home_app_sort_name_desc_description">Abjad, A sampai Z</string>
     <string name="home_app_sort_updates_first">Abjad terbalik, Z sampai A</string>
+    <string name="home_app_sort_updates_first_description">Yangi yamoqlari bo‘lgan ilovalar birinchi, keyin tavsiya etilgan tartib</string>
     <string name="home_app_sort_recently_patched">Yaqinda yangilangan</string>
     <string name="home_app_sort_recently_patched_description">Yaqinda yangilangan ilovalar birinchi</string>
     <string name="home_no_apps_title">Qo‘llab-quvvatlanadigan ilovalar yo‘q</string>
@@ -115,8 +123,29 @@
     <string name="home_greeting_super_late_3">Bu vaqtga, faqat uyg\'oq bo\'lib patchlang</string>
     <string name="home_greeting_super_late_4">Siz va serverlar, ikkalasi ham uyg\'oq</string>
     <string name="home_greeting_super_late_5">Tunki va unumli</string>
+    <!-- Halloween greetings, shown instead of the ones above around October 31 -->
+    <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_1">Hiyla yoki yamoq?</string>
+    <string name="home_greeting_halloween_2">Bu APK’larda sharpalar yo‘q, biz tekshirdik</string>
+    <string name="home_greeting_halloween_3">Qo‘rqinchli mavsum, yangi yamoqlar</string>
+    <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
+    <string name="home_greeting_halloween_4">Bu yo‘ldan yovuz narsa yamoq keltiradi</string>
+    <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
+    <string name="home_greeting_winter_1">Bayram muborak, yangi yamoqlar</string>
+    <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
+    <string name="home_greeting_winter_2">Qor yog‘sin, yamash davom etsin</string>
+    <string name="home_greeting_winter_3">Yangi yil, yangi yamoqlar</string>
+    <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
+    <string name="home_greeting_winter_4">Qor bo‘ylab yamash</string>
+    <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">Yangi yilingiz bilan!</string>
+    <string name="home_greeting_new_year_2">Yangi yamoqlargacha orqaga hisob</string>
+    <string name="home_greeting_new_year_3">Yangi yil, baribir reklamasiz ilovalar</string>
+    <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Eski versiyalar ketdi, yangilari keldi</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Tuzatish manbalari</string>
+    <string name="sources_search">Manbalar va yamoqlarni qidirish</string>
     <string name="sources_sort_title">Aplikasi dengan lencana pembaruan terlebih dahulu, lalu urutan yang direkomendasikan</string>
     <string name="sources_sort_manual">Pesanan manual</string>
     <string name="sources_sort_manual_hint">Tekan lama sumber untuk mengatur ulang</string>
@@ -124,15 +153,24 @@
     <string name="sources_sort_last_updated_description">Urutkan sumber tambalan</string>
     <string name="sources_sort_enabled_first">Pembaruan sumber terbaru terlebih dahulu</string>
     <string name="sources_sort_enabled_first_description">Diaktifkan terlebih dahulu</string>
+    <string name="sources_patches_source_disabled_hint">Bu manba o‘chirilgan. Uning yamoqlari ma’lumot uchun ro‘yxatda ko‘rsatilgan va qo‘llanilmaydi</string>
     <string name="sources_management_open_in_browser">Brauzerda ochish</string>
     <string name="sources_management_report_issue">Muammo haqida xabar berish</string>
     <string name="sources_management_failed_to_open_url">URL ochishda xatolik</string>
+    <string name="sources_apps">Ilovalar</string>
+    <string name="sources_apps_description">Ilovani ushbu manbadan chiqarish yoki qaytarish uchun unga bosing yoki bir nechtasini tanlash uchun uzoq bosing. Hech qanday manba ilovani keltirmasa, u bosh ekrandan yo‘qoladi</string>
+    <string name="sources_apps_brought">Bu manba orqali kelgan</string>
+    <string name="sources_apps_left_out">Bu manbadan chiqarilgan</string>
+    <string name="sources_apps_leave_out">Chiqarish</string>
+    <string name="sources_apps_leave_out_done">Chiqarilgan</string>
+    <string name="sources_apps_bring_back">Qaytarish</string>
     <string name="sources_management_prerelease_toggle">Erta chiqarish patchlari</string>
     <string name="sources_management_prerelease_toggle_description">Yangi eksperimental patch versiyalariga erta kira olish</string>
     <string name="sources_prerelease_warning_title">Oldindan chiqarilgan yangilanishlarni yoqish?</string>
     <string name="sources_prerelease_warning_message">Oldindan chiqarilgan versiyalar hali ham ishlab chiqilmoqda. Yangilanishlar muvaffaqiyatsiz bo\'lishi yoki ilovani buzishi mumkin, va xususiyatlar ogohlantirishsiz o\'zgarishi mumkin.</string>
     <string name="expert_mode_prerelease_notice">Bu manba oldindan chiqarilgan yangilanishlarda. Yangilash muvaffaqiyatsiz bo\'lishi yoki kutilmagan xatti-harakatlarga olib kelishi mumkin.</string>
     <string name="sources_management_experimental_versions_toggle">Eksperimental ilova versiyalari</string>
+    <string name="sources_management_experimental_versions_toggle_description">Eksperimental ilova maqsadlarini ko‘rsatadi va yamaydi</string>
     <string name="sources_management_already_exists">Ushbu manba allaqachon qo\'shilgan</string>
     <string name="sources_management_invalid_url">Noto‘g‘ri manba URL. Iltimos, manzilni tekshiring va yana urinib ko‘ring</string>
     <string name="sources_management_blocked">Sumber tambalan ini diblokir dan tidak dapat ditambahkan</string>
@@ -142,6 +180,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing">Patch to‘plamini yuklab olish imkoniyati yo‘q. Manba URL noto‘g‘ri yoki fayl mavjud emas</string>
     <string name="sources_management_outdated_manager_badge">Morphe ni yangilang</string>
     <string name="sources_management_outdated_manager_hint">Ushbu manba %1$s yamoqchisi uchun yaratilgan, lekin Morphe %2$s %3$s yamoqchisini o\'z ichiga oladi. Undan foydalanish uchun Morphe ni yangilang</string>
+    <string name="sources_management_held_back_badge">Ishdan chiqdi</string>
+    <string name="sources_management_held_back_hint">Bu manba yuklash paytida Morphe’ni ishdan chiqardi, shuning uchun u o‘tkazib yuborilmoqda. Qayta urinish uchun uni yangilang yoki qayta import qiling</string>
     <string name="sources_management_source_enabled">Manba faol</string>
     <string name="sources_management_source_disabled">Manba faol emas</string>
     <string name="sources_management_source_updating">Manbani yangilash</string>
@@ -151,17 +191,25 @@
     <string name="sources_dialog_duplicate_name_error">Bunday nomdagi tuzatish manbai allaqachon mavjud</string>
     <string name="sources_dialog_missing_error">Ushbu patch manbasini yangilash mumkin emas</string>
     <string name="sources_dialog_add_source">Tuzatish manbai qo\'shish</string>
+    <string name="sources_dialog_delete_confirm_body">Buni bekor qilib bo‘lmaydi</string>
     <string name="sources_dialog_remote">Uzoq</string>
     <string name="sources_dialog_remote_url">Manba URL</string>
+    <string name="sources_dialog_remote_url_hint">Repozitoriy yoki patch to‘plami .json havolasi. Barchasini qo‘shish uchun bir nechtasini birdan joylashtiring</string>
+    <string name="sources_dialog_paste_no_links">Klipbordda havolalar topilmadi</string>
     <string name="sources_dialog_local">Mahalliy</string>
+    <string name="sources_dialog_local_files">Patch manba fayllarini tanlang</string>
     <!-- Button under the files already picked, which opens the picker again -->
+    <string name="sources_dialog_local_add_more">Ko‘proq fayl qo‘shish</string>
     <string name="sources_dialog_local_file_tap_hint">Saqlashni ko‘rib chiqish uchun bosing</string>
     <string name="sources_dialog_local_invalid_extension">Fayl .mpp kengaytmasiga ega bo‘lishi kerak</string>
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
+    <string name="sources_dialog_local_updates">%s ni yangilaydi</string>
     <string name="sources_dialog_url_valid">Amal qiluvchi repository yoki .json URL</string>
     <string name="sources_dialog_url_invalid">URL GitHub/GitLab repositori yoki .json fayliga ishara qilishi kerak</string>
     <string name="sources_dialog_preinstalled">O\'rnatilgan</string>
     <string name="sources_dialog_community">Jamiyat yamoqlari</string>
+    <string name="sources_dialog_choose_apps">Ilovalarni tanlash</string>
+    <string name="sources_dialog_choose_apps_description">Manba yuklangach, uning qaysi ilovalarini saqlashni tanlang</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Uchinchi tomon yamoq manbalari</string>
     <string name="sources_dialog_community_notice_message">"Jamiyat yamoq manbalari o'z mualliflari tomonidan yaratiladi va qo'llab-quvvatlanadi. Morphe uchinchi tomon yamoqlarini ko'rib chiqmaydi yoki tasdiqlamaydi va ularning tarkibi yoki sizning qurilmangizda nima qilishlari uchun javobgar emas.
@@ -181,12 +229,14 @@ Ushbu veb-saytdan qo'shadigan har qanday narsa o'z xavfingiz ostida qo'llaniladi
     <string name="home_apk_availability_recommended_label">Tavsiya etilgan</string>
     <string name="home_apk_availability_unpatched_label">Tuzatilmagan</string>
     <string name="home_apk_availability_incompatible_label">Uyushmaslik</string>
+    <string name="home_apk_availability_installed_version">Ushbu qurilmada o‘rnatilgan: %s</string>
     <string name="home_apk_availability_yes">Qayta urinish</string>
     <string name="home_apk_availability_no">Yo\'q, allaqachon APK bor</string>
     <string name="home_apk_helper_download">Yordamchi ilovadan foydalaning</string>
     <string name="home_apk_helper_title">Yordamchi ilova orqali yuklab olish</string>
     <string name="home_apk_helper_description">Morphe quyidagi yordamchi ilovadan asl APK ni yuklab olishni soʻraydi va faylni qaytarib beradi</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
+    <string name="home_apk_helper_continue">Yordamchini ochish</string>
     <string name="home_apk_helper_warning">Agar ushbu yordamchi ilovaga ishonmasangiz, davom etmang. Morphe patch yamoqni qoʻllashdan oldin olgan narsaning paketini, versiyasini va imzosini tekshiradi</string>
     <string name="home_apk_helper_warning_unverified">Agar ushbu yordamchi ilovaga ishonmasangiz, davom etmang. Morphe ushbu APK ning imzosini tasdiqlay olmaydi, shuning uchun oʻzgartirilgan fayl aniqlanmaydi</string>
     <string name="home_apk_helper_no_result">Yordamchi ilova APK ni qaytarib bermadi</string>
@@ -229,6 +279,8 @@ Ushbu veb-saytdan qo'shadigan har qanday narsa o'z xavfingiz ostida qo'llaniladi
     <string name="home_download_instructions_step4_mount">Asl APKni o\'rnatgandan so\'ng Morphe ga qayting</string>
     <string name="home_download_instructions_continue_to">%sga o\'ting</string>
     <string name="home_download_instructions_destination">yuklab olish sahifasi</string>
+    <string name="home_download_instructions_copy_link">Havolani nusxalash</string>
+    <string name="home_download_instructions_link_copied">Havola nusxalandi</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <string name="home_file_picker_prompt_title">Yuklab olingan APKni tanlang</string>
     <string name="home_file_picker_prompt_description">Yaqinda yuklab olingan &lt;b&gt;%s&lt;/b&gt; APK faylini tanlang</string>
@@ -240,15 +292,14 @@ Ushbu veb-saytdan qo'shadigan har qanday narsa o'z xavfingiz ostida qo'llaniladi
     <string name="home_use_installed_app">Jumal ayting</string>
     <string name="home_installed_app_picker_title">Oʻrnatilgan ilovalar</string>
     <string name="home_installed_app_picker_empty">Yuklab olishingiz mumkin</string>
-    <string name="home_installed_app_picker_filter_all">Garchi bu erda bo‘lsangiz ham katta vaqt o‘tkazib, ularni katta hajmdagina o‘zingiz kutib borasiz</string>
     <string name="home_installed_app_picker_filter_user">Hakamning birinchi kirishi bilan ko‘rish</string>
     <string name="home_installed_app_picker_filter_system">Bilamiz, bu mamlakatga qiyin, lekin ushbu hududdagi yangi boshqaruvda xavfsizroq. Yuto</string>
     <string name="home_invalid_apk_unreadable">Faylni o‘qib bo‘lmadi. \"Tashqi saqlash\" batareyaga cheklanmaganligini tekshiring</string>
     <string name="home_invalid_apk_not_an_apk">Tanlangan fayl valid APK emas</string>
+    <string name="home_invalid_apk_already_patched">Tanlangan APK allaqachon yamalgan. Buning o‘rniga original ilovani tanlang</string>
     <string name="home_invalid_apk_io_error">Faylni ochishda xatolik yuzaga keldi. Iltimos, yana urinib ko‘ring</string>
     <string name="home_external_apk_expert_mode_required">Bu funksiya faqat Ekspert rejimida mavjud</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Ekspert rejimi</string>
     <string name="expert_mode_search">Tuzatishlarni qidirish</string>
     <string name="expert_mode_disable_all">Hammasini o\'chirish</string>
     <string name="expert_mode_disable_all_done">Barcha patchlar o‘chirilgan</string>
@@ -264,6 +315,8 @@ Ushbu veb-saytdan qo'shadigan har qanday narsa o'z xavfingiz ostida qo'llaniladi
     <string name="expert_mode_copy_from_bundle">Boshqa paketdan tanlangan qismini nusxalash</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Ushbu paketda mos keladigan takrorlash yo‘q</string>
     <string name="expert_mode_no_results">Tuzatishlar topilmadi</string>
+    <string name="expert_mode_selected_only_on">Faqat tanlangan yamoqlar ko‘rsatilmoqda</string>
+    <string name="expert_mode_selected_only_off">Barcha yamoqlar ko‘rsatilmoqda</string>
     <string name="expert_mode_universal_patches">Universal patchlar</string>
     <string name="expert_mode_new_patches">Yangi</string>
     <string name="expert_mode_options_customized">Moslashtirilgan</string>
@@ -306,8 +359,10 @@ Eng yaxshi natijalar uchun ushbu ilova to‘liq &lt;b&gt;APK&lt;/b&gt;ni patchla
     <string name="home_outdated_patches_dialog_update_and_patch">Yangilash va patchlash</string>
     <string name="home_low_disk_space_dialog_title">Kam disk joyi</string>
     <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
+    <string name="home_low_disk_space_dialog_message">Faqat %1$s GB bo‘sh xotira mavjud. Yamash to‘g‘ri ishlashi uchun kamida %2$s GB bo‘sh joy kerak</string>
     <string name="home_low_disk_space_dialog_warning">Davom etish \"fayl topilmadi\" xatoligiga yoki buzilgan APK natijasiga olib kelishi mumkin</string>
     <string name="home_simple_bundle_select_title">Patch manbai tanlang</string>
+    <string name="home_simple_bundle_select_remember">Bu manbadan doim shu ilova uchun foydalanish</string>
     <!-- Color picker -->
     <string name="custom_color">Maxsus rang</string>
     <string name="hex_color">Hex rang</string>
@@ -325,48 +380,41 @@ Eng yaxshi natijalar uchun ushbu ilova to‘liq &lt;b&gt;APK&lt;/b&gt;ni patchla
     <string name="patch_option_list_empty">Qiymat bo\'sh bo\'lishi mumkin emas</string>
     <string name="patch_option_required_missing">%s: barcha zarur opsiyalarni to‘ldiring</string>
     <!-- Badge on a patch option whose value differs from the patch's own, which resets it when tapped -->
+    <string name="patch_option_changed">O‘zgartirilgan</string>
     <!-- Badge on a patch option that has to be filled in before patching -->
+    <string name="patch_option_required">Majburiy</string>
     <!-- Hint under an image patch option. "%1$s" is the width and "%2$s" the height in pixels -->
+    <string name="patch_option_recommended_size">Tavsiya etilgan: %1$s×%2$s</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">Maxsus ilona belgisi yaratish</string>
     <string name="adaptive_icon_select_image">Rasm tanlang</string>
     <string name="adaptive_icon_change_image">Rasm o\'zgartirish</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <string name="image_load_failed">Bu rasmni yuklab bo‘lmadi</string>
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
+    <string name="adaptive_icon_launcher">Ishga tushirish belgisi</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <!-- Caption under the launcher icon in its own colors -->
+    <!-- Caption under the launcher icon recolored by the system theme -->
     <string name="adaptive_icon_background_color">Fondo rangi</string>
     <string name="adaptive_icon_reset_transform">Harakatlanishni qayta o\'rnatish</string>
-    <string name="adaptive_icon_safe_zone_inner">Xavfsiz zona (har doim ko\'rinadi)</string>
-    <string name="adaptive_icon_safe_zone_outer">Niqob zonasining (kesilishi mumkin)</string>
-    <string name="adaptive_icon_no_transparency_warning">Patchlar qo‘llanilishini tasdiqlash</string>
     <string name="adaptive_icon_created_success">Maxsus ilona belgisi yaratildi</string>
     <string name="adaptive_icon_creation_failed">Maxsus ilona belgisi yaratishda xatolik</string>
-    <string name="adaptive_icon_label">Uyghotish</string>
-    <string name="adaptive_icon_monochrome_label">Monoxrom</string>
     <string name="adaptive_icon_guide">Ikon yaratish qo‘llanmasi</string>
     <string name="adaptive_icon_guide_png_title">Shovqin fonli PNGdan foydalaning</string>
-    <string name="adaptive_icon_guide_png_body">Oldingi fon shaffof bo‘lgan PNG fayli bo‘lishi kerak. Oddiy rangli fon noto‘g‘ri ko‘rinadi - fon rangi quyida ko‘rinadigan fon tanlashdan kelishi kerak.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Xavfsiz hududlar</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Ichki hudud (qattiq): mazmun barcha launcher shakllarida to‘liq ko‘rinadi.
-Chekka hudud (chizikli): launcher niqobi tomonidan kesilishi mumkin - muhim tafsilotlarni ichki hududda saqlang."</string>
     <string name="adaptive_icon_guide_notification_title">Bildirishnoma ikoni</string>
-    <string name="adaptive_icon_guide_notification_body">Tasvirga asoslangan avtomatik yaratilgan. O‘lchamini bildirishnoma slaydidan sozlang. Barcha ko‘rinadigan mazmun oq rangda bo‘ladi.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Monoxrom ikoni</string>
-    <string name="adaptive_icon_guide_monochrome_body">Android 13 va undan keyingi versiyalarda fon rangida ranglanadigan avtomatik yaratilgan baytkod transformatsiyasidan foydalanib yaratilgan.</string>
     <string name="notification_icon_preview">Bildirishnoma</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Maxsus sarlavha yaratish</string>
     <string name="header_creator_light_theme">Yorqin mavzu sarlavhasi</string>
     <string name="header_creator_dark_theme">Qorong\'i mavzu sarlavhasi</string>
-    <string name="header_creator_no_image">Rasm tanlanmadi</string>
     <string name="header_creator_success">Sarlavha muvaffaqiyatli yaratildi</string>
     <string name="header_creator_failed">Sarlavha yaratishda xatolik</string>
     <string name="header_creator_guide">Sarlavha yaratish qo‘llanmasi</string>
     <string name="header_creator_guide_image_title">Rasmiy talablar</string>
-    <string name="header_creator_guide_image_body">Har qanday rasmdan (PNG yoki JPEG) foydalaning. Eng yaxshi natijalar uchun, taxminan 2,7:1 nisbatdagi keng formatli rasmdan foydalaning. Shovqin fonli PNG fayllari ilova mavzusiga tabiiy ravishda uyg‘unlashadi.</string>
     <string name="header_creator_guide_themes_title">Yengil va qorong‘u mavzular</string>
     <string name="header_creator_guide_themes_body">Ko‘pgina ilovalarga yengil va qorong‘u mavzular uchun alohida rasmlar kerak. Ba\'zi ilovalar (YouTube kabi) faqat qorong‘u mavzudan foydalanadi, shuning uchun faqat shu bo‘lim ko‘rsatiladi.</string>
     <string name="header_creator_guide_positioning_title">Joylashish va miqyoslash</string>
-    <string name="header_creator_guide_positioning_body">Joylashish va miqyoslash uchun siqish va tortish harakatlaridan foydalaning. Rasm markazga yaqin bo‘lganda qo‘llanma chiziqlari paydo bo‘ladi. Ko‘rsatish ostidagi slaydardan ham foydalanishingiz mumkin.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Tanlangan rasmlar qo\'llanilmoqda</string>
     <string name="batch_patch_title">Rasmlarni ommaviy qo\'llash</string>
@@ -384,12 +432,15 @@ Chekka hudud (chizikli): launcher niqobi tomonidan kesilishi mumkin - muhim tafs
     <string name="batch_patch_source_file">Biriktirilgan fayl</string>
     <string name="batch_patch_source_unavailable">APK tayyorlanmadi</string>
     <string name="batch_patch_force_version">Hammasini ta’mirlash</string>
+    <string name="batch_patch_force_version_done">Baribir navbatga qo‘yildi, ilova buzilishi mumkin</string>
+    <string name="batch_patch_accept_signature_done">Baribir navbatga qo‘yildi, APK tekshirilmagan</string>
     <string name="batch_patch_edit_patches">Patchlarni tanlang</string>
     <string name="batch_patch_state_no_apk">APK yo‘q</string>
     <string name="batch_patch_state_no_patches">Hozircha patch qilinmagan</string>
     <string name="batch_patch_policy_install">Tugagandan so‘ng o‘rnating</string>
     <string name="batch_patch_policy_install_description">APK larimiz keyinroq uchun saqlanib qoladi, navbat tugagandan so‘ng har bir ta’mirlangan ilova to‘g‘ridan-to‘g‘ri o‘rnatiladi</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
+    <string name="batch_patch_start">Boshlash</string>
     <string name="batch_patch_stop_title">Ommaviy ta’mirlashni to‘xtatmoqchimisiz?</string>
     <string name="batch_patch_stop_description">Hozir ta’mirlanayotgan ilova va hamma navbatdagi barcha ilovalar bekor qilinadi</string>
     <!-- Label of a footer button beside "Done". Keep it short, a longer one moves the buttons onto two rows -->
@@ -425,9 +476,25 @@ Chekka hudud (chizikli): launcher niqobi tomonidan kesilishi mumkin - muhim tafs
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Store o\'rnatish</string>
     <string name="home_app_info_patch_update_available">Tuzatish yangilanishi mavjud</string>
     <string name="home_app_info_patch_update_available_description">Yangilashlar mavjud</string>
+    <string name="home_app_info_app_update_available">Ilova yangilanishi mavjud</string>
+    <string name="home_app_info_app_update_available_description">Patch manbalari ushbu ilovaning yangi versiyasini qo‘llab-quvvatlaydi. Unga o‘tish uchun yana yamang</string>
+    <string name="home_app_info_newest_supported_version">Eng so‘nggi qo‘llab-quvvatlanadigan</string>
+    <string name="home_app_info_version_move">O‘rnatilgan: %1$s, eng so‘nggi qo‘llab-quvvatlanadigan: %2$s</string>
     <string name="home_app_info_app_deleted_warning">Ilova o\'rnatilmagan</string>
     <string name="home_app_info_app_deleted_description">Ushbu ilova Morphe tashqarisida o\'rnatilmagan. Funksiyalarni qayta tiklash uchun patchlang</string>
     <string name="home_app_info_not_patched_description">Ushbu ilovaning patch qilinmagan versiyasi oʻrnatilgan. Morphe hali ham avvalgi patch yozuviga ega.</string>
+    <string name="app_links_title">Qo‘llab-quvvatlanadigan veb havolalar</string>
+    <string name="app_links_description">Android 12+ da qo‘llab-quvvatlanadigan domenlarga havolalar tasdiqlanmasa, sukut bo‘yicha brauzeringizda ochiladi</string>
+    <string name="app_links_unverified_banner_title">Veb havolalar tasdiqlanmagan</string>
+    <string name="app_links_unverified_banner_description">Qo‘llab-quvvatlanadigan veb havolalar hozirda ushbu ilova o‘rniga brauzeringizda ochiladi</string>
+    <string name="app_links_enable_auto">Avtomatik yoqish</string>
+    <string name="app_links_enable_auto_in_progress">Havolalar yoqilmoqda…</string>
+    <string name="app_links_open_settings">Havola sozlamalarini ochish</string>
+    <string name="app_links_repair_success">Ilova havolalari muvaffaqiyatli yoqildi</string>
+    <string name="app_links_repair_failed">Ilova havolalarini avtomatik yoqib bo‘lmadi</string>
+    <string name="app_links_all_verified">Barcha qo‘llab-quvvatlanadigan havolalar ushbu ilovada ochiladigan qilib sozlangan</string>
+    <string name="app_links_fix">Havolalarni tuzatish</string>
+    <string name="configure">Sozlash</string>
     <string name="patcher_rename_title">Bu klonni o\'rnatadi</string>
     <string name="patcher_rename_description">Patchlar bu ilovani o\'z paket nomi ostida qurgan, shuning uchun uni o\'rnatish &lt;b&gt;%s&lt;/b&gt; yoniga klon qo\'shadi, yangilash o\'rniga</string>
     <string name="patcher_rename_result_package">O\'rnatiladi</string>
@@ -448,16 +515,38 @@ Chekka hudud (chizikli): launcher niqobi tomonidan kesilishi mumkin - muhim tafs
     <string name="patcher_error_copied">Xatolik buferga kopyalandi</string>
     <string name="patcher_error_log">Xatolik jurnali</string>
     <string name="patcher_error_technical">Texnik tafsilotlar</string>
+    <string name="patcher_error_dialog_diagnostics">Diagnostika</string>
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
+    <string name="patcher_card_started">Yamash boshlandi</string>
+    <string name="patcher_card_succeeded">Yamash muvaffaqiyatli yakunlandi</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
+    <string name="patcher_field_app">Ilova</string>
+    <string name="patcher_field_package">Paket</string>
+    <string name="patcher_field_source">Manba</string>
+    <string name="patcher_field_split">Boʻlingan APK</string>
+    <string name="patcher_field_manager">Menejer</string>
+    <string name="patcher_field_runtime">Ish vaqti</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
+    <string name="patcher_field_libraries">Kutubxonalar</string>
+    <string name="patcher_field_android">Android</string>
+    <string name="patcher_field_device">Qurilma</string>
     <!-- Free and total RAM of the device, never its storage -->
+    <string name="patcher_field_memory">Xotira</string>
+    <string name="patcher_field_storage">Xotira</string>
     <!-- Size of the patched APK, once patching finished -->
+    <string name="patcher_field_output_size">Chiqish hajmi</string>
     <!-- How long patching took -->
+    <string name="patcher_field_time">Vaqt</string>
     <!-- Average and peak memory the patcher process held while it ran -->
+    <string name="patcher_field_memory_average">O‘rtacha xotira</string>
+    <string name="patcher_field_memory_max">Maksimal xotira</string>
     <!-- Fastest read or write rate reached while patching, in data per second -->
+    <string name="patcher_field_io_peak">Saqlash I/O cho‘qqisi</string>
+    <string name="patcher_field_value_unknown">noma’lum</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
+    <string name="patcher_field_value_stripped">olib tashlangan</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_field_value_kept">saqlangan</string>
     <string name="patcher_tab_logs">Patcher jurnallari</string>
     <string name="patcher_tab_game">Kechirdi</string>
     <string name="patcher_logs_waiting">Jurnal chiqishini kutish…</string>
@@ -469,6 +558,8 @@ Chekka hudud (chizikli): launcher niqobi tomonidan kesilishi mumkin - muhim tafs
     <string name="patcher_complete_title">Qo\'llash tugallandi! ✨</string>
     <string name="patcher_failed_title">Afsus! Biron bir narsa noto‘g‘ri ketdi</string>
     <string name="patcher_failed_dialog_title">Qo\'llash muvaffaqiyatsiz yakunlandi</string>
+    <string name="patcher_error_details">Xato tafsilotlari</string>
+    <string name="patcher_change_patches">Yamoqlarni o‘zgartirish</string>
     <string name="patcher_unknown_error">Noma’lum xatolik sodir bo‘ldi</string>
     <string name="patcher_split_step_extracting">Split APKlarni chiqarish</string>
     <string name="patcher_split_step_merging">%s ni birlashtirish</string>
@@ -487,6 +578,7 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="patcher_back_to_game_hint">O\'yiningizga qaytish uchun %1$s ni bosing</string>
     <string name="patcher_storage_permission_dialog_title">Haqida</string>
     <string name="patcher_incompatible_patcher_title">Yangilash talab qilinadi</string>
+    <string name="patcher_incompatible_patcher_description">&lt;b&gt;%1$s&lt;/b&gt; manbasi &lt;b&gt;%2$s&lt;/b&gt; yoki undan yangiroq patcher’ni talab qiladi. Undan foydalanish uchun Morphe’ni yangilang</string>
     <string name="patcher_storage_permission_description_api30">Bir nechta patch opsiyalari Morphe o\'qiy olmaydigan yo\'llarga ishorat qiladi. Xotira ruxsatini bering va keyin patchlash avtomatik ravishda boshlanadi</string>
     <string name="patcher_storage_permission_description_legacy">Bir nechta patch opsiyalari Morphe o\'qiy olmaydigan yo\'llarga ishorat qiladi. Xotira ruxsatini bering va tugmani bosing, keyin patchlash avtomatik ravishda boshlanadi</string>
     <string name="patcher_storage_permission_grant">Xotira ruxsatini bering</string>
@@ -494,13 +586,19 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="patcher_storage_permission_open_settings">Qidirish</string>
     <string name="patcher_storage_badge_denied">Ruxsat rad etildi</string>
     <string name="patcher_storage_badge_missing">Topilmadi</string>
+    <string name="batch_patch_option_paths_skipped">Patch opsiya fayllari topilmadi va o‘tkazib yuboriladi: %1$s</string>
+    <string name="patcher_missing_patches_title">Ba’zi yamoqlar yo‘qolgan</string>
+    <string name="patcher_missing_patches_description">Ushbu ilova uchun saqlangan tanlovda endi hech bir yoqilgan manba taklif qilmaydigan yamoqlar bor. Davom etish ilovani ularsiz yamaydi</string>
+    <string name="patcher_missing_patches_label">Endi taklif qilinmaydi</string>
+    <string name="patcher_option_paths_gone_title">Patch opsiya fayllari topilmadi</string>
+    <string name="patcher_option_paths_gone_description">Bir yoki bir nechta patch opsiyasi endi mavjud bo‘lmagan fayllarga ishora qilmoqda. Ularsiz yamash uchun yo‘llarni olib tashlang yoki fayllarni qaytarib qo‘yib, qayta urinib ko‘ring</string>
+    <string name="patcher_option_paths_clear">Yo‘llarni olib tashlash va davom etish</string>
     <string name="patcher_storage_permission_hint">Maslahat: Fayllarni /Android/data/app.morphe.manager/files/ ga ko\'chiring - qo\'shimcha ruxsatlar kerak emas</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Tayyorlanmoqda</string>
     <string name="patcher_step_load_patches">Patchlarni yuklamoqda</string>
     <string name="patcher_step_prepare_split_apk">Bo\'linib ketgan APK ni birlashtirish</string>
     <string name="patcher_step_unpack">APK faylini o\'qish</string>
-    <string name="patcher_step_group_patching">Patchlash</string>
     <string name="patcher_step_group_saving">Saqlash</string>
     <string name="patcher_step_write_patched">Patchlangan APK faylini yozish</string>
     <string name="patcher_step_sign_apk">Patchlangan APK faylini imzolash</string>
@@ -548,6 +646,7 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="patching_app">O\'rnatish muvaffaqiyatsiz yakunlandi. Yana urinib ko\'ring yoki boshqa o\'rnatuvchiga o\'ting</string>
     <string name="memory_usage">Xotira ishlatilishi</string>
     <!-- "%1$s" is the share of the memory limit the patcher is using, already formatted as a percentage. "%2$s" is that limit in megabytes. -->
+    <string name="memory_usage_detail">%1$s / %2$s MB</string>
     <string name="cpu_usage">CPU ishlatilishi</string>
     <string name="storage_io_usage">Saqlash kiritish/chiqishi</string>
     <!-- Patcher Screen - Other hidden strings -->
@@ -580,6 +679,8 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="mini_game_try_again">Qayta urinish</string>
     <string name="mini_game_paused">To‘xtatildi</string>
     <string name="mini_game_resume">Davom etish</string>
+    <string name="mini_game_restart">Qaytadan boshlash</string>
+    <string name="mini_game_change">Boshqa o‘yin tanlash</string>
     <string name="mini_game_2048_picker_subtitle">Agar ustiga siljitmang</string>
     <string name="mini_game_flappy_picker_subtitle">Kaktusning ustidan o‘tish uchun bosing</string>
     <string name="mini_game_flappy_tap_to_start">Yugurish uchun bosing</string>
@@ -587,12 +688,19 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="mini_game_snake_swipe_to_start">O‘yinlar</string>
     <string name="mini_game_dino_picker_subtitle">Kaktuslarning ustidan sakrab o‘tish uchun teging</string>
     <string name="mini_game_dino_tap_to_start">O‘rnatilgan ilovalarni tanlang</string>
+    <string name="mini_game_blocks_picker_subtitle">Shakllarni moslang, qatorlarni tozalang</string>
+    <string name="mini_game_blocks_tap_to_start">Aylantirish uchun bosing, harakatlantirish uchun suring, tushirish uchun pastga suring</string>
+    <string name="mini_game_bricks_picker_subtitle">To‘pni sakratib, devorni tozalang</string>
+    <string name="mini_game_bricks_tap_to_start">Nishonga olish uchun suring, uchirish uchun bosing</string>
+    <string name="mini_game_miner_picker_subtitle">Ochish uchun bosing, bayroq qo‘yish uchun ushlab turing</string>
+    <string name="mini_game_pairs_picker_subtitle">Kartalarni aylantiring, juftini toping</string>
     <!-- Settings -->
     <string name="appearance">Ko‘rinish</string>
     <string name="advanced">Qo‘shimcha</string>
     <string name="system">Tizim</string>
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background">Fondo animatsiyasi</string>
+    <string name="settings_appearance_background_description">Ilova ekranlari ortida o‘ynaydigan animatsiya</string>
     <string name="settings_appearance_background_circles">Doira</string>
     <string name="settings_appearance_background_rings">Halqalar</string>
     <string name="settings_appearance_background_mesh">Mesh</string>
@@ -601,6 +709,9 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="settings_appearance_background_snow">Qor</string>
     <string name="settings_appearance_background_grid">Toralash</string>
     <string name="settings_appearance_background_particles">Zarrachalar</string>
+    <string name="settings_appearance_background_lava">Lava chirog‘i</string>
+    <string name="settings_appearance_background_halloween">Xellouin</string>
+    <string name="settings_appearance_background_fireworks">Salyut</string>
     <string name="settings_appearance_background_none">Hech narsa</string>
     <string name="settings_appearance_background_random">Tasodifiy</string>
     <string name="settings_appearance_background_random_interval_launch">Ishga tushirishda</string>
@@ -608,6 +719,10 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="settings_appearance_background_random_interval_3days">Har 3 kunda</string>
     <string name="settings_appearance_parallax_effect">Parallax effekti</string>
     <string name="settings_appearance_parallax_effect_description">Qurilmani aylantirganda fon silliq siljish effekti</string>
+    <string name="settings_appearance_seasonal_themes">Mavsumiy mavzular</string>
+    <string name="settings_appearance_seasonal_themes_description">Bayramlarda tantanali fonlar va tabriklar</string>
+    <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">Mavsumiy mavzular yoqilgan bo‘lsa, %1$s foni %2$s gacha yoqilgan bo‘ladi</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Mavzu</string>
     <string name="settings_appearance_theme_mode">Mavzu rejim</string>
@@ -621,6 +736,10 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="settings_appearance_accent_color">Accent rangi</string>
     <string name="settings_appearance_pure_black">Toza qora</string>
     <string name="settings_appearance_pure_black_description">Qora fonni ishlatish</string>
+    <string name="settings_appearance_color_accents">Ilova va manba ranglari</string>
+    <string name="settings_appearance_color_accents_description">Aksent rangi o‘rniga har bir ilova va manbaning o‘z rangidan foydalanadi</string>
+    <string name="settings_appearance_outlines">Konturlar</string>
+    <string name="settings_appearance_outlines_description">Kartalar, panellar va tugmalar atrofida nozik chiziq chizadi</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_language_and_display">Til &amp; displey</string>
     <string name="settings_appearance_app_language">Ilova tili</string>
@@ -639,6 +758,9 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="settings_appearance_greeting_phrases">Salomlashish iborasi</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Bosh ekranda salomlashish xabarini ko‘rsatish</string>
     <string name="settings_appearance_app_grouping">Ilovalarni guruhlash</string>
+    <string name="settings_appearance_app_grouping_description">Ilovalarni manba yoki toifa bo‘yicha guruhlash uchun almashtirgichni ko‘rsatish</string>
+    <string name="settings_appearance_repatch_notice">Qayta yamash bildirishnomasi</string>
+    <string name="settings_appearance_repatch_notice_description">Yamalgan ilovalarni qayta yamash mumkin bo‘lganda banner ko‘rsatish</string>
     <string name="settings_appearance_sort_button">Saralash va filtrlash tugmasi</string>
     <string name="settings_appearance_sort_button_description">Bosh ekranda saralash va filtrlash tugmasini ko\'rsatish</string>
     <string name="settings_appearance_app_card_colors">Ilovalar kartasining ranglari</string>
@@ -658,12 +780,28 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="settings_appearance_app_card_colors_bundle_description">Bu yerda har bir ilovaning o\'z rangini ishlatib, avtomatik ravishda moslash uchun soyalanadi</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Ilona belgisi</string>
+    <string name="settings_appearance_app_icon_selector_description">Morphe bosh ekranda va ilovalar ro‘yxatida qanday ko‘rinishi</string>
     <string name="settings_appearance_app_icon_default">Standart</string>
     <string name="settings_appearance_app_icon_light_2">Osmon</string>
     <string name="settings_appearance_app_icon_light_3">Botqoq</string>
-    <string name="settings_appearance_app_icon_dark_1">Okean</string>
+    <string name="settings_appearance_app_icon_light_4">Lavanda</string>
+    <string name="settings_appearance_app_icon_light_5">Muzlik</string>
+    <string name="settings_appearance_app_icon_light_6">Tuman</string>
+    <string name="settings_appearance_app_icon_light_7">Qum</string>
+    <string name="settings_appearance_app_icon_dark_1">Yashil-ko‘k</string>
     <string name="settings_appearance_app_icon_dark_2">Bo\'shliq</string>
-    <string name="settings_appearance_app_icon_dark_3">Indigo</string>
+    <string name="settings_appearance_app_icon_dark_3">Olxo‘ri</string>
+    <string name="settings_appearance_app_icon_dark_4">Yarim tun</string>
+    <string name="settings_appearance_app_icon_dark_5">Shifer</string>
+    <string name="settings_appearance_app_icon_accent_1">Avrora</string>
+    <string name="settings_appearance_app_icon_accent_2">Siyoh</string>
+    <string name="settings_appearance_app_icon_accent_3">Qog‘oz</string>
+    <string name="settings_appearance_app_icon_accent_4">Shom</string>
+    <string name="settings_appearance_app_icon_background">Fon</string>
+    <string name="settings_appearance_app_icon_mark">Logotip</string>
+    <string name="settings_appearance_app_icon_mark_color">Rang</string>
+    <string name="settings_appearance_app_icon_mark_white">Oq</string>
+    <string name="settings_appearance_app_icon_mark_black">Qora</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Ilona belgisini o\'zgartirish?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">&lt;b&gt;%s&lt;/b&gt; ga o‘zgartirish va qayta ishga tushirish kerakmi?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -684,6 +822,8 @@ Patchlar ta'sirlanmaydi: patch manbalari ro'yxatidagi har bir manba uchun pre-re
     <string name="settings_advanced_updates_background_notifications">Orqa fonda yangilanish bildirishnomalari</string>
     <string name="settings_advanced_updates_background_notifications_description">Yangilanishlar mavjud bo\'lganda bildirishnomalar olish uchun</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Yangi chiqishlar uchun push-bildirishnoma olish</string>
+    <string name="settings_system_notifications_categories">Bildirishnoma toifalari</string>
+    <string name="settings_system_notifications_categories_description">Tizim sozlamalarida qaysi yangilanishlar sizga bildirishnoma yuborishini tanlang</string>
     <string name="settings_advanced_update_interval">Tekshirish chastotasi</string>
     <string name="settings_advanced_update_interval_dialog_title">Yangilanishlarni tekshirish</string>
     <string name="settings_advanced_update_interval_hourly">Loglarni eksport qilishda xatolik yuzaga keldi</string>
@@ -693,19 +833,22 @@ Patchlar ta'sirlanmaydi: patch manbalari ro'yxatidagi har bir manba uchun pre-re
     <string name="settings_advanced_update_interval_chip_subtitle">Orqa fonda tekshirish chastotasi</string>
     <string name="settings_advanced_update_interval_battery_warning">Orqa fonda tekshirish ba\'zi qurilmalarda ishonchli ishlamasligi mumkin. Xiaomi, Huawei, Samsung va OnePlus kabi ishlab chiqaruvchilar batareyani tejash uchun orqa plan chizuvlarini kuchli cheklab qo\'yaydi</string>
     <string name="settings_advanced_external_batch_patch">Tashqi hodisalarni ruxsat berish</string>
+    <string name="settings_advanced_external_batch_patch_description">Avtomatlashtirish ilovalariga intent orqali ommaviy yamashni boshlash imkonini beradi</string>
     <string name="external_batch_patch_title">Ommaviy ta’mirlashni boshlash kerakmi?</string>
     <string name="external_batch_patch_description">%s Morphe ga ilovalarni ta’mirlash va o‘rnatishni boshlashni xohlaydi</string>
     <string name="external_batch_patch_trust_caller">Ushbu ilovaga har doim ruxsat berish</string>
     <string name="external_batch_patch_unknown_caller">Noma’lum ilova</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Morphe yangilanishi mavjud</string>
     <string name="notification_bundle_update_title">Yangi patchlar mavjud</string>
     <string name="notification_update_text">Versiya %s yuklab olish uchun tayyor</string>
     <string name="notification_bundle_update_text_unversioned">Morphe ni ochish uchun tugmani bosing va yangilanishni o\'rnating</string>
     <string name="notification_permission_dialog_title">Bildirishnomalarga ruxsat bering</string>
     <string name="notification_permission_dialog_description">Morphe sizga yangilanishlar mavjud bo\'lganda bildirishnoma olish uchun bildirishnoma ruxsatini olishi kerak</string>
     <string name="notification_post_patch_dialog_title">Yangilanishlar mavjud bo\'lganda bildirishnoma olmoqchi edingizmi?</string>
-    <string name="notification_channel_patcher">Patchlash</string>
+    <string name="notification_channel_manager_updates">Morphe yangilanishlari</string>
+    <string name="notification_channel_manager_updates_description">Morphe’ning yangi versiyalari haqidagi bildirishnomalar</string>
+    <string name="notification_channel_patch_updates">Yamoq yangilanishlari</string>
+    <string name="notification_channel_patch_updates_description">Yangi yamoq versiyalari haqidagi bildirishnomalar</string>
     <string name="notification_channel_patcher_description">Morphe orqa fonda ilovani patchlayotganda ko\'rsatildi</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">O\'qish</string>
@@ -720,7 +863,10 @@ Patchlar ta'sirlanmaydi: patch manbalari ro'yxatidagi har bir manba uchun pre-re
     <string name="settings_advanced_github_pat_configured">Qanday token olish kerak</string>
     <string name="settings_advanced_github_pat_how_to_get">GitHub shaxsiy kirish tokenini sozlang</string>
     <!-- "%s" is "GitHub Personal Access Token", kept in English because GitHub has no localized UI -->
+    <string name="settings_advanced_github_pat_dialog_title">%s ni o‘rnating</string>
     <!-- "%3$s" is "GitHub Personal Access Token", "%2$s" is the GitHub scope name and "%1$s" is the GitHub website. "PAT" is its abbreviation, keep it in English -->
+    <string name="settings_advanced_github_pat_dialog_description">"Pull request’larni tashqi manba sifatida qo‘shish uchun %3$s ni o‘rnating. %2$s doirasi bilan PAT yarating,
+%1$s da"</string>
     <string name="settings_advanced_github_pat_export_include_label">Ushbu PATni eksport qilingan Morphe sozlamalariga kiritmang</string>
     <!-- "PAT" is a GitHub Personal Access Token, keep it in English because GitHub has no localized UI -->
     <string name="settings_advanced_github_pat_export_include_supporting">Ushbu PATni eksport qilingan Morphe sozlamalariga qo\'shadi</string>
@@ -740,6 +886,10 @@ Patchlar ta'sirlanmaydi: patch manbalari ro'yxatidagi har bir manba uchun pre-re
     <string name="settings_advanced_patch_options_custom_branding_description">Ilova nomini o‘zgartirish</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">O\'nlik kiriting</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Kengaytirish</string>
+    <string name="settings_advanced_patch_options_path_gone">Bu papkani endi o‘qib bo‘lmaydi. Uni qaytadan tanlang yoki tozalang, aks holda yamash to‘xtab, bu haqda so‘raydi</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon">Ilova belgisi</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Ilova shu belgi bilan yamaladi. U ilova keyinchalik o‘zgartira olmaydigan joylarda ham ishlatiladi, masalan, Android Auto va tizim sozlamalaridagi ilovalar ro‘yxatida</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Maxsus ilova belgisi uchun belgi tasvirlari solingan papka kerak</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Qisqartirish</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Maxsus ikon sifatida ishlatiladigan tasvirlar papkasi.
 
@@ -824,6 +974,8 @@ Rasm o'lchamlari quyidagicha bo'lishi kerak:
     <string name="installer_action_open_shizuku">Shizuku ochish</string>
     <string name="installer_hint_generic">O\'rnatish muvaffaqiyatsiz yakunlandi. Yana urinib ko\'ring yoki boshqa o\'rnatuvchiga o\'ting</string>
     <string name="installer_hint_conflict">Import va eksport</string>
+    <string name="installer_confirm_notification_title">O‘rnatishni tasdiqlang</string>
+    <string name="installer_confirm_notification_text">Yamalgan ilovani o‘rnatishni yakunlash uchun bosing</string>
     <string name="installer_external_launched">%s ochilmoqda…</string>
     <string name="installer_external_timeout">%s o‘rnatishni tasdiqlamadi. Iltimos, boshqa ilovani tekshiring va yana urinib ko‘ring</string>
     <string name="installer_external_success">%s muvaffaqiyatli o‘rnatilganini bildirdi</string>
@@ -840,6 +992,7 @@ Rasm o'lchamlari quyidagicha bo'lishi kerak:
     <string name="settings_prompt_installer_on_install">O‘rnatishni tanlash bosqichi</string>
     <string name="settings_prompt_installer_on_install_description">Har bir patchlangan ilova o‘rnatilgandan so‘ng o‘rnatishni tanlash dialogini ko‘rsatish</string>
     <string name="settings_auto_install_with_shizuku">Patchlashdan keyin avtomatik o\'rnatish</string>
+    <string name="settings_auto_install_with_shizuku_description">Yamash tugashi bilanoq yamalgan APK’ni o‘rnatadi</string>
     <string name="settings_auto_uninstall_with_shizuku">Ziddiyat yuzaga kelganda avtomatik ravishda o‘chirib tashlash</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Shizuku bilan avtomatik o‘rnatishda, agar Android imzo ziddiyati haqida xabar berarsa, mavjud ilovani avval o‘chirib tashlang. Bu ilova ma’lumotlarini o‘chirib tashlashi mumkin</string>
     <string name="settings_auto_uninstall_warning_title">Avtomatik o‘chirib tashlashni yoqish kerakmi?</string>
@@ -876,7 +1029,9 @@ Ma’lumotlar: %2$s"</string>
     <string name="settings_system_process_runtime_memory_limit_description">Yuqori limitlar imkoniyatli moslamalarda patchlash tezligini oshiradi</string>
     <string name="settings_system_process_runtime_enable">Jarayon ishlayotgan vaqtini yoqish</string>
     <string name="settings_system_memory_limit_subtitle">Patchlash uchun mavjud xotira</string>
+    <string name="settings_system_process_runtime_heap_limit_ignored">Bu qurilma oxirgi ishga tushirishda xotira chegarasini e’tiborsiz qoldirdi, shuning uchun yamash Morphe ichida ishlashga qaytishi mumkin</string>
     <string name="settings_system_memory_limit_warning">Xotira limiti kam bo\'lsa, katta ilovalarni patchlashda xatoliklar yuzaga kelishi mumkin</string>
+    <string name="settings_system_memory_limit_high_warning">Yuqori xotira chegarasi ba’zi qurilmalarda yamashni ancha sekinlashtirishi mumkin. Uni faqat past chegaralarda yamash muvaffaqiyatsiz tugab qolsa, oshiring</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB limit</string>
     <string name="settings_system_process_runtime_disabled_description">Konfiguratsiya qilish uchun bosing</string>
     <string name="settings_system_process_runtime_description_not_available">Bu funksiya Android 11 yoki undan yuqori versiyasini talab qiladi</string>
@@ -895,6 +1050,20 @@ Ma’lumotlar: %2$s"</string>
     <string name="settings_system_notifications_ringtone_picker_title">Ohang tanlang</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Import va eksport</string>
+    <string name="settings_system_signing_key">Imzolash kaliti</string>
+    <string name="settings_system_signing_key_description">Yamalgan ilovalaringiz imzolanadigan kalitni zaxiralaydi va tiklaydi</string>
+    <string name="settings_system_signing_key_dialog_description">Morphe yamaydigan har bir ilova shu kalit bilan imzolanadi. Nusxasini saqlang: usiz yamalgan ilovalarni faqat o‘chirib tashlagandan keyin yangilash mumkin</string>
+    <string name="settings_system_signing_key_missing">Morphe birinchi yamoqda uni yaratadi</string>
+    <string name="settings_system_signing_key_created">Yaratilgan: %s</string>
+    <string name="settings_system_signing_key_fingerprint">SHA-256 barmoq izi</string>
+    <string name="settings_system_backup_appearance_description">Mavzu, ranglar va til</string>
+    <string name="settings_system_backup_home_description">Guruhlar, yashirin ilovalar, saralash va almashtirgichlar</string>
+    <string name="settings_system_backup_patching">Yamash va o‘rnatish</string>
+    <string name="settings_system_backup_patching_description">O‘rnatuvchi, patcher va saqlangan APK’lar</string>
+    <string name="settings_system_backup_updates_description">Oldindan relizlar va yangilanish tekshiruvlari</string>
+    <string name="settings_system_backup_sources_description">Maxsus manbalar va GitHub tokeni</string>
+    <string name="settings_system_backup_patch_selections_description">Har bir ilova uchun tanlangan yamoqlar</string>
+    <string name="settings_system_backup_signing_key_note">Imzolash kaliti alohida zaxiralanadi</string>
     <string name="settings_system_import_keystore_dialog_title">Keystore ma\'lumotlarini kiriting</string>
     <string name="settings_system_import_keystore_dialog_description">Xatolik</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Foydalanuvchi nomi (Alias)</string>
@@ -921,6 +1090,7 @@ Ma’lumotlar: %2$s"</string>
     <string name="import_mode_merge_description">Zaxiradan o\'chirilgan elementlarni qo\'shish. Mavjud elementlar o\'zgarishsiz qoldiriladi</string>
     <string name="settings_system_export_manager_settings_fail">Morphe sozlamalarini eksport qilishda xatolik: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe sozlamalari eksport qilindi</string>
+    <string name="settings_system_export_debug_logs">Debug jurnallarini eksport qilish</string>
     <string name="settings_system_export_debug_logs_description">Aniqlash uchun tizim jurnalini saqlab qolish</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Jurnallarni o‘qishda xato (xato kodi %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Loglarni eksport qilishda xatolik yuzaga keldi</string>
@@ -973,6 +1143,7 @@ Ma’lumotlar: %2$s"</string>
     <string name="settings_system_original_apks_empty">Yangilash mavjud emas</string>
     <string name="settings_system_original_apks_deleted">Manbalarni yuklab olishda xatolik: %s</string>
     <string name="settings_system_original_apks_delete_title">Original APKni o‘chirib tashlash?</string>
+    <string name="settings_system_original_apks_delete_notice">Yangi APK taqdim etmasdan qayta yamay olmaysiz</string>
     <string name="settings_system_original_apks_delete_all_title">Hapus semua APK asli?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Tuzatish imkoniyatlari</string>
@@ -1005,12 +1176,18 @@ Ma’lumotlar: %2$s"</string>
     <string name="settings_system_custom_file_picker_description">Mobil batahot</string>
     <!-- Settings - System Tab - APK download helper -->
     <string name="settings_system_apk_download_helper">APK yuklab olish yordamchisi</string>
+    <string name="settings_system_apk_download_helper_trusted_count">Ishonchli: %1$d / %2$d</string>
+    <string name="settings_system_apk_download_helper_dialog_description">Yordamchi ilovalar siz uchun original APK’larni yuklab olishi mumkin. Yuklab olish ko‘rsatmalarida faqat siz ishonganlari taklif qilinadi</string>
+    <string name="settings_system_apk_download_helper_warning">APK yordamchi ilovadan keladi, shuning uchun faqat o‘zingiz bilgan ilovalarga ishoning. Morphe baribir yamashdan oldin har bir faylning paketi, versiyasi va imzosini tekshiradi</string>
+    <string name="settings_system_apk_download_helper_installed_by">%s tomonidan o‘rnatilgan</string>
+    <string name="settings_system_apk_download_helper_installed_by_unknown">O‘rnatuvchi noma’lum</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Ichki xotira</string>
     <string name="file_picker_read_error">Ushbu katalogdan o\'qib bo\'lmaydi</string>
     <string name="file_picker_internal_storage">Ichki saqlash</string>
     <string name="file_picker_sd_card">SD-karta</string>
     <string name="file_picker_root">Ildiz (/) </string>
+    <string name="file_picker_storages">Saqlash joylari</string>
     <string name="file_picker_sort_name_asc">Nom (Z–A)</string>
     <string name="file_picker_sort_name_desc">Hajm (eng katta birinchi)</string>
     <string name="file_picker_sort_size_desc">Hajm (eng kichigi birinchi)</string>
@@ -1037,7 +1214,9 @@ Ma’lumotlar: %2$s"</string>
     <string name="easter_egg_pill_blue_toast_again">Uzilgan. Orqaga yo\'l har doim bo\'lgan joyda.</string>
     <!-- Shared strings -->
     <string name="select_file">Faylni tanlang</string>
+    <string name="select_files">Fayllarni tanlash</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
+    <string name="select_folder">Papka tanlash</string>
     <string name="patches">Patchlar</string>
     <string name="home">Bosh sahifa</string>
     <string name="settings">Sozlamalar</string>
@@ -1063,6 +1242,7 @@ Ma’lumotlar: %2$s"</string>
     <string name="done">Bajarildi</string>
     <string name="skip">O\'tkazib yuborish</string>
     <string name="clear">O‘chirish</string>
+    <string name="paste">Joylashtirish</string>
     <string name="delete">O‘chirish</string>
     <string name="delete_all">Hapus semua</string>
     <string name="remove">O\'chirish</string>
@@ -1086,9 +1266,7 @@ Ma’lumotlar: %2$s"</string>
     <string name="selected">Tanlanmagan</string>
     <string name="not_selected">Kengaytirilgan</string>
     <string name="select_all">Tanlash</string>
-    <string name="select_all_done">Barchasi tanlandi</string>
     <string name="deselect_all">Tanlashni bekor qilish</string>
-    <string name="deselect_all_done">Barchasi tanlanmadi</string>
     <string name="reorder_list">Tartibni qayta tartibga solish</string>
     <string name="reorder_list_hint">Tartibni qayta tartibga solish uchun torting</string>
     <string name="reorder_done">Tartib saqlab qolindi</string>
@@ -1103,6 +1281,7 @@ Ma’lumotlar: %2$s"</string>
     <string name="import_">Import</string>
     <string name="export">Istisno</string>
     <string name="copy">Nusxalash</string>
+    <string name="copied_to_clipboard">Klipbordga nusxalandi</string>
     <string name="download">Yuklab olish</string>
     <string name="less">Kamroq</string>
     <string name="expand">Kengaytirish</string>
@@ -1117,6 +1296,7 @@ Ma’lumotlar: %2$s"</string>
     <string name="patch">Patch</string>
     <string name="patching">Ta’mirlash</string>
     <string name="patched">Yamalgan</string>
+    <string name="open">Ochish</string>
     <string name="mount">Ulanish</string>
     <string name="mounted">Ulanish</string>
     <string name="unmount">Demontaj qilish</string>
@@ -1136,6 +1316,8 @@ Ma’lumotlar: %2$s"</string>
     <string name="hidden">Yashirilgan</string>
     <string name="unhide">Ko‘rsatish</string>
     <string name="unhide_done">Ko\'rsatildi</string>
+    <string name="ignore">E’tiborsiz qoldirish</string>
+    <string name="stop_ignoring">E’tiborsiz qoldirishni to‘xtatish</string>
     <string name="logs">Jurnallar</string>
     <string name="sources">Manbalar</string>
     <string name="installing_ellipsis">O‘rnatilmoqda…</string>
@@ -1144,25 +1326,49 @@ Ma’lumotlar: %2$s"</string>
     <string name="importing_ellipsis">Hech qanday tuzatish mavjud emas</string>
     <string name="imported_successfully">Muaffaqiyatli import qilindi</string>
     <string name="changelog">O‘zgarishlar jurnalini ko‘rish</string>
+    <string name="changelog_for_app">%s uchun o‘zgarishlar</string>
+    <string name="changelog_general_changes">Umumiy o‘zgarishlar</string>
+    <string name="whats_new">Yangiliklar</string>
+    <string name="changelog_description">Bu versiyada nima yangi</string>
     <string name="changelog_download_fail">O‘zgarishlar jurnalini yuklab olishda xatolik: %s</string>
     <string name="changelog_empty">O\'zgarishlar logi mavjud emas</string>
+    <string name="changelog_earlier_releases">Oldingi relizlar</string>
+    <string name="changelog_patched_with">%s bilan yamalgan</string>
     <string name="changelog_older_empty">Ko\'rsatish uchun eski versiyalar yo\'q</string>
+    <string name="changelog_older_failed">Eski relizlarni yuklab bo‘lmadi</string>
     <!-- Label of a footer button beside "Translate". Keep it short, a longer one moves the buttons onto two rows -->
+    <string name="changelog_release_page">Reliz sahifasi</string>
+    <string name="content_translate">Tarjima</string>
     <!-- Label of a footer button beside other buttons, which reads "Translate" until pressed. Keep it as short as "Translate", a longer one moves the buttons onto two rows -->
+    <string name="content_show_original">Asl</string>
+    <string name="content_translation_failed">Tarjima qilib bo‘lmadi: %s</string>
+    <string name="changelog_section_new">Yangi</string>
+    <string name="changelog_section_fixes">Tuzatishlar</string>
+    <string name="changelog_section_performance">Samaradorlik</string>
+    <string name="changelog_section_improvements">Yaxshilanishlar</string>
+    <string name="changelog_section_app_support">Ilova qo‘llab-quvvatlashi</string>
+    <string name="changelog_section_other">O‘zgarishlar</string>
+    <string name="changelog_badge_latest">So‘nggi</string>
     <!-- Marks the version of a patch source downloaded to the manager, which patches with it rather than the one an installed app was patched with -->
+    <string name="changelog_badge_downloaded">Yuklab olingan</string>
+    <string name="changelog_badge_prerelease">Oldindan reliz</string>
     <!-- "%s" is the number of changes in the section -->
+    <string name="changelog_show_all">Barchasini ko‘rsatish (%s)</string>
+    <string name="changelog_show_less">Kamroq ko‘rsatish</string>
     <string name="no_network_toast">Internetga ulanish mavjud emas</string>
     <string name="update_available">Yangilanish mavjud</string>
     <string name="ready_to_install_update">Yangilanishni o‘rnatishga tayyor</string>
     <string name="update_completed">Yangilanish o‘rnatildi</string>
     <string name="install_update_manager_failed">Yangilanishni o‘rnatishda xatolik</string>
     <string name="installing_manager_update">Yangilanish o‘rnatilmoqda…</string>
+    <string name="installing_manager_update_hint">Yangilanishni yakunlash uchun Morphe yopiladi</string>
     <string name="downloading_manager_update">Yangilanish yuklanmoqda…</string>
     <!-- Shown while downloading when the server does not report the total size. "%1$s" is the megabytes so far. -->
+    <string name="manager_update_progress_downloaded">%1$s MB yuklab olindi</string>
     <!-- Shown under the download percentage. "%1$s" is the megabytes so far, "%2$s" the total. -->
+    <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">Ushbu nashr hali e\'lon qilinmoqda. Bir necha daqiqadan keyin qayta urinib ko\'ring</string>
     <string name="update_download_missing">Yuklab olingan yangilanish endi mavjud emas. Uni qayta yuklab oling.</string>
-    <string name="download_manager_failed">Yangilanishni yuklab olishda xatolik: %s</string>
     <string name="failed_to_check_updates">Yangilanishlarni tekshirishda xatolik: %s</string>
     <string name="failed_to_download_update">Yangilanishni yuklab olishda xatolik: %s</string>
     <string name="download_confirmation_metered">"Hozir siz o'lchangan ulanishdan foydalanmoqdasiz va sizning provayderingiz tomonidan ma'lumotlar uchun to'lovlar amalga oshirilishi mumkin.
@@ -1194,4 +1400,5 @@ Davom etmoqchimisiz?"</string>
     <!-- Label of a footer button beside "Skip". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="tour_prompt_confirm">Mengani ko\'rsat</string>
     <string name="onboarding_restart_title">Funksiyalar sayohati</string>
+    <string name="onboarding_restart_desc">Asosiy xususiyatlar bo‘yicha qo‘llanma</string>
 </resources>

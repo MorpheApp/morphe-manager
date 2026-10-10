@@ -108,6 +108,11 @@
         <item quantity="few">%s извора инсталирано</item>
         <item quantity="other">%s извора инсталирано</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="one">%1$s · %2$s филтрирана</item>
+        <item quantity="few">%1$s · %2$s филтриране</item>
+        <item quantity="other">%1$s · %2$s филтрираних</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s скривена апликација</item>
         <item quantity="few">%s скривене апликације</item>

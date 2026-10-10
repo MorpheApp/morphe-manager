@@ -124,6 +124,26 @@
     <string name="home_greeting_super_late_3">בנקודה הזאת, פשוט תישאר ער ותטפל</string>
     <string name="home_greeting_super_late_4">אתם והשרתים, שניהם ערים</string>
     <string name="home_greeting_super_late_5">ליליים ופרודוקטיביים</string>
+    <!-- Halloween greetings, shown instead of the ones above around October 31 -->
+    <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_1">תעלול או תיקון?</string>
+    <string name="home_greeting_halloween_2">אין רוחות רפאים בקבצי APK אלה, בדקנו</string>
+    <string name="home_greeting_halloween_3">עונה מפחידה, תיקונים חדשים</string>
+    <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
+    <string name="home_greeting_halloween_4">משהו מרושע בא לכאן עם תיקונים</string>
+    <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
+    <string name="home_greeting_winter_1">חג שמח, תיקונים חדשים</string>
+    <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
+    <string name="home_greeting_winter_2">שירד שלג, שירדו תיקונים</string>
+    <string name="home_greeting_winter_3">שנה חדשה, תיקונים חדשים</string>
+    <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
+    <string name="home_greeting_winter_4">מתקנים בשלג</string>
+    <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">שנה אזרחית טובה!</string>
+    <string name="home_greeting_new_year_2">סופרים לאחור לתיקונים חדשים</string>
+    <string name="home_greeting_new_year_3">שנה חדשה, אותן אפליקציות ללא פרסומות</string>
+    <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">החוצה עם הגרסאות הישנות, פנימה עם החדשות</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">מקורות תיקונים</string>
     <string name="sources_search">חפש מקורות ותיקונים</string>
@@ -273,7 +293,6 @@
     <string name="home_use_installed_app">השתמש באפליקציה מותקנת</string>
     <string name="home_installed_app_picker_title">אפליקציות מותקנות</string>
     <string name="home_installed_app_picker_empty">לא נמצאו אפליקציות</string>
-    <string name="home_installed_app_picker_filter_all">כל האפליקציות</string>
     <string name="home_installed_app_picker_filter_user">אפליקציות משתמש בלבד</string>
     <string name="home_installed_app_picker_filter_system">אפליקציות מערכת בלבד</string>
     <string name="home_invalid_apk_unreadable">לא ניתן לקרוא את הקובץ. בדוק ש\'אחסון חיצוני\' אינו מוגבל על ידי הסוללה</string>
@@ -282,7 +301,6 @@
     <string name="home_invalid_apk_io_error">נכשל בפתיחת הקובץ. אנא נסה שוב</string>
     <string name="home_external_apk_expert_mode_required">תכונה זו זמינה רק במצב מומחה</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">מצב מומחה</string>
     <string name="expert_mode_search">חפש תיקונים</string>
     <string name="expert_mode_disable_all">השבת את כולם</string>
     <string name="expert_mode_disable_all_done">כל התיקונים מושבתים</string>
@@ -373,44 +391,43 @@
     <string name="adaptive_icon_select_image">בחר תמונה</string>
     <string name="adaptive_icon_change_image">שנה תמונה</string>
     <string name="image_load_failed">לא ניתן היה לטעון את התמונה</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">תמונת חזית</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">סמל ההפעלה</string>
+    <string name="adaptive_icon_gesture_hint">גרור כדי להזיז, צבוט כדי לשנות גודל</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">תצוגה מקדימה</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">רגיל</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">מותאם לנושא</string>
     <string name="adaptive_icon_background_color">צבע רקע</string>
     <string name="adaptive_icon_reset_transform">אפס מיקום ומספר</string>
-    <string name="adaptive_icon_safe_zone_inner">אזור בטוח (תמיד מראה)</string>
-    <string name="adaptive_icon_safe_zone_outer">אזור מסכה (ייתכן שנחתך)</string>
-    <string name="adaptive_icon_no_transparency_warning">התמונה אינה מכילה פיקסלים שקופים. התוצאה עלולה להיראות שגויה</string>
+    <string name="adaptive_icon_no_transparency_warning">לתמונה זו אין פיקסלים שקופים, לכן סמלי הנושא וסמלי ההתראות שומרים על לוגו Morphe</string>
     <string name="adaptive_icon_created_success">סמל אדפטיבי נוצר בהצלחה</string>
     <string name="adaptive_icon_creation_failed">שגיאה ביצירת עיצוב סמל אדפטיבי</string>
-    <string name="adaptive_icon_label">מותאם</string>
-    <string name="adaptive_icon_monochrome_label">מונוכרום</string>
     <string name="adaptive_icon_guide">מדריך ליצירת אייקון</string>
     <string name="adaptive_icon_guide_png_title">השתמש בתמונה בפורמט PNG עם רקע שקוף</string>
-    <string name="adaptive_icon_guide_png_body">החלק הקדמי חייב להיות קובץ PNG עם רקע שקוף. רקע בצבע אחיד ייראה שגוי - צבע הרקע צריך להגיע מתוך בוחר הרקע למטה.</string>
+    <string name="adaptive_icon_guide_png_body">לוגו על רקע שקוף עובד הכי טוב, כשצבע הרקע נבחר למטה. תמונה ללא שקיפות ממלאת את כל הסמל במקום זאת, וסמלי הנושא וסמלי ההתראות שומרים אז על לוגו Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">אזורי בטיחות</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"האזור הפנימי (מוצק): התוכן תמיד גלוי במלואו בכל צורות השיגור.
-האזור החיצוני (מקווקו): עלול להיחתך על ידי מסכת השיגור - שמור פרטים חשובים בתוך האזור הפנימי."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">קו המתאר מציג את צורת הסמל של המשגר שלך, וכל מה שמחוץ לו נחתך. משגרים אחרים משתמשים בצורות אחרות, לכן שמור פרטים חשובים בתוך העיגול המקווקו, שכל צורה מציגה.</string>
     <string name="adaptive_icon_guide_notification_title">סמל עדכונים</string>
-    <string name="adaptive_icon_guide_notification_body">נוצר באופן אוטומטי מהתמונה הקדמית. התאם את גודלו באמצעות המחוון עדכון. כל התוכן הגלוי מופיע בלבן בשורת המצב.</string>
-    <string name="adaptive_icon_guide_monochrome_title">אייקון מונוכרום</string>
-    <string name="adaptive_icon_guide_monochrome_body">נוצר באופן אוטומטי מהתמונה הקדמית באמצעות אותם טרנספורמציות של אייקון אדפטיבי. הוא מופיע בגוון צבע האקסנט של הטפט באנדרואיד 13 ומעלה.</string>
+    <string name="adaptive_icon_guide_notification_body">נחתך מהחלק הנראה של התמונה ובגודל כמו סמלי שורת המצב האחרים, לא משנה אילו שוליים יש לקובץ. כוונן אותו עם המחוון מתחת לתצוגה המקדימה. Android מציג אותו בצבע אחד.</string>
+    <string name="adaptive_icon_guide_monochrome_title">סמל נושא</string>
+    <string name="adaptive_icon_guide_monochrome_body">נחתך מהתמונה באותו מיקום ובאותו גודל כמו סמל המשגר. ב-Android 13 ואילך, משגרים עם סמלי נושא מופעלים צובעים אותו לפי הטפט.</string>
     <string name="notification_icon_preview">עדכון</string>
     <!-- Header Creator -->
     <string name="header_creator_create">צור כותרת מותאמת</string>
     <string name="header_creator_light_theme">כותרת נושא בהירה</string>
     <string name="header_creator_dark_theme">כותרת נושא כהה</string>
-    <string name="header_creator_no_image">לא נבחרה תמונה</string>
     <string name="header_creator_success">עמודות ראשיות צורו בהצלחה</string>
     <string name="header_creator_failed">שגיאה ביצירת עמודות ראשיות</string>
     <string name="header_creator_guide">מדריך ליצירת כותרת</string>
     <string name="header_creator_guide_image_title">דרישות תמונה</string>
-    <string name="header_creator_guide_image_body">השתמש בכל קובץ תמונה (PNG או JPEG). לקבלת התוצאות הטובות ביותר, השתמש בתמונה בפורמט רחב עם יחס גובה-רוחב של כ-2.7:1. קבצי PNG עם רקע שקוף ישתלבו באופן טבעי עם ערכת הנושא של האפליקציה.</string>
+    <string name="header_creator_guide_image_body">תמונת PNG עם רקע שקוף משתלבת בסרגל האפליקציה. המרווחים סביב הלוגו בקובץ אינם נחשבים, ולכן היא מתחילה בגודל ובמקום של הלוגו המקורי.</string>
     <string name="header_creator_guide_themes_title">ערכות נושא בהירות וכהות</string>
     <string name="header_creator_guide_themes_body">רוב האפליקציות דורשות תמונות נפרדות עבור ערכות הנושא הבהירות והכהות. חלק מהאפליקציות (כמו YouTube Music) משתמשות רק בערכת הנושא הכהה, כך שרק אותו חלק מוצג.</string>
     <string name="header_creator_guide_positioning_title">מיקום ושינוי גודל</string>
-    <string name="header_creator_guide_positioning_body">השתמש במחוות צביטה-להתקרב וגרירה ישירות בתצוגה המקדימה כדי למקם ולשנות את גודל התמונה שלך. מדריכי הצמדה מופיעים כאשר התמונה קרובה למרכז. ניתן גם להשתמש במחוון מתחת לתצוגה המקדימה.</string>
+    <string name="header_creator_guide_positioning_body">גרור וצבוט את התמונה בעורך, או שנה את גודלה עם המחוון. התיבה המקווקוית מסמנת היכן ממוקם הלוגו המקורי, וקווי עזר מופיעים כשהתמונה מתיישרת איתו.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">תיקון נבחר</string>
     <string name="batch_patch_title">תיקון באצווה</string>
@@ -476,9 +493,12 @@
     <string name="home_app_info_app_update_available_description">מקורות התיקון תומכים בגרסה חדשה יותר של אפליקציה זו. החל תיקון שוב כדי לעבור לגרסה זו.</string>
     <string name="home_app_info_newest_supported_version">החדשה ביותר שנתמכת</string>
     <string name="home_app_info_version_move">מותקנת %1$s, החדשה ביותר שנתמכת %2$s</string>
+    <string name="home_app_info_version_restore">גרסה מותקנת: %1$s, גרסה מתוקנת: %2$s</string>
     <string name="home_app_info_app_deleted_warning">האפליקציה הוסרה</string>
     <string name="home_app_info_app_deleted_description">האפליקציה הוסרה מחוץ ל-Morphe. התאם כדי לשחזר את הפונקציונליות</string>
     <string name="home_app_info_not_patched_description">מותקנת גרסה לא מתוקנת של אפליקציה זו. ל-Morphe עדיין יש רשומת תיקון קודמת.</string>
+    <string name="home_app_info_mount_replaced_description">גרסה אחרת החליפה את האפליקציה שהורכבה, ולכן התיקון כבר לא חל. השחזור מחזיר את הגרסה המתוקנת</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play עדכן את האפליקציה שהורכבה, ולכן התיקון כבר לא חל. השחזור מחזיר את הגרסה המתוקנת. כבה את העדכון האוטומטי עבורה ב-Google Play כדי לשמור עליה מתוקנת</string>
     <string name="app_links_title">קישורי אינטרנט נתמכים</string>
     <string name="app_links_description">באנדרואיד 12+, קישורים לדומיינים נתמכים נפתחים בדפדפן כברירת מחדל אלא אם כן אושרו</string>
     <string name="app_links_unverified_banner_title">קישורי אינטרנט לא מאומתים</string>
@@ -488,8 +508,6 @@
     <string name="app_links_open_settings">פתח הגדרות קישורים</string>
     <string name="app_links_repair_success">קישורי אפליקציה הופעלו בהצלחה</string>
     <string name="app_links_repair_failed">הפעלת קישורי אפליקציות באופן אוטומטי נכשלה</string>
-    <string name="app_links_badge_enabled">מופעל</string>
-    <string name="app_links_badge_disabled">מושבת</string>
     <string name="app_links_all_verified">כל הקישורים הנתמכים מוגדרים להיפתח באפליקציה זו</string>
     <string name="app_links_fix">תקן קישורים</string>
     <string name="configure">הגדר</string>
@@ -520,10 +538,10 @@
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">אפליקציה</string>
     <string name="patcher_field_package">חבילה</string>
+    <string name="patcher_field_failed_patch">תיקון שנכשל</string>
     <string name="patcher_field_source">מקור</string>
     <string name="patcher_field_split">פיצול APK</string>
     <string name="patcher_field_manager">מנהל</string>
-    <string name="patcher_field_patcher">מתקן</string>
     <string name="patcher_field_runtime">זמן ריצה</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">ספריות</string>
@@ -554,6 +572,7 @@
     <string name="patcher_installing_subtitle">כמעט מוכן לרוק! 🎸</string>
     <string name="patcher_success_title">סיימנו! 🎉</string>
     <string name="patcher_success_subtitle">האפליקציה שלך מתוקנת ומותקנת!</string>
+    <string name="patcher_mounted_subtitle">האפליקציה שלך תוקנה והורכבה!</string>
     <string name="patcher_complete_title">התיקון הושלם! ✨</string>
     <string name="patcher_failed_title">אופס! משהו השתבש</string>
     <string name="patcher_failed_dialog_title">התיקון נכשל</string>
@@ -572,6 +591,7 @@
 
 הסרת ההתקנה תמחק לצמיתות את כל נתוני האפליקציה."</string>
     <string name="patcher_install_error_title">שגיאת התקנה</string>
+    <string name="patcher_mount_error_title">שגיאת הרכבה</string>
     <string name="patcher_install_error_subtitle">נסה להסיר ולהתקין שוב</string>
     <string name="patcher_ready_to_mount_subtitle">לחץ על הכפתור למטה כדי לאתחל</string>
     <string name="patcher_patches_excluded_for_installer">לא זמין עבור שיטת התקנה זו והוחרג: %s</string>
@@ -599,7 +619,6 @@
     <string name="patcher_step_load_patches">טוען תיקונים</string>
     <string name="patcher_step_prepare_split_apk">מיזוג APK מפוצל</string>
     <string name="patcher_step_unpack">קרא קובץ APK</string>
-    <string name="patcher_step_group_patching">מתקן</string>
     <string name="patcher_step_group_saving">שומר</string>
     <string name="patcher_step_write_patched">כתיבת קובץ APK מתוקן</string>
     <string name="patcher_step_sign_apk">חתימה על קובץ APK מתוקן</string>
@@ -611,6 +630,7 @@
     <string name="patcher_memory_adjustment_title">אין מספיק זיכרון</string>
     <string name="patcher_memory_adjustment_description">המתקן הופסק על ידי המערכת בזמן שפעל עם מגבלת זיכרון של %1$d MB. הורדת המגבלה ל-%2$d MB הופכת את המתקן למטרה קטנה יותר ויכולה לאפשר להריצה להסתיים.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">המתקן הופסק על ידי המערכת בזמן שפעל עם מגבלת זיכרון של %1$d MB, שהיא כבר הנמוכה ביותר הזמינה. נסה לתקן עם פחות מקורות תיקון, או בחר פחות תיקונים.</string>
+    <string name="patcher_memory_adjustment_description_finished">המערכת עצרה את תהליך התיקון בגבול זיכרון של %1$d MB, והוא סיים רק ב-%2$d MB. בפעם הבאה, התחלה מ-%2$d MB תדלג על הניסיון המבוזבז</string>
     <string name="patcher_memory_adjustment_apply">הורד ל-%1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">התיקון מתבצע…</string>
@@ -710,6 +730,9 @@
     <string name="settings_appearance_background_snow">שלג</string>
     <string name="settings_appearance_background_grid">רשת</string>
     <string name="settings_appearance_background_particles">חלקיקים</string>
+    <string name="settings_appearance_background_lava">מנורת לבה</string>
+    <string name="settings_appearance_background_halloween">ליל כל הקדושים</string>
+    <string name="settings_appearance_background_fireworks">זיקוקים</string>
     <string name="settings_appearance_background_none">אין</string>
     <string name="settings_appearance_background_random">אקראי</string>
     <string name="settings_appearance_background_random_interval_launch">בפתיחה</string>
@@ -717,6 +740,10 @@
     <string name="settings_appearance_background_random_interval_3days">כל 3 ימים</string>
     <string name="settings_appearance_parallax_effect">אפקט פארלקס</string>
     <string name="settings_appearance_parallax_effect_description">הדגמה חלקה של רקע בעת טיפוס של המכשיר</string>
+    <string name="settings_appearance_seasonal_themes">ערכות נושא עונתיות</string>
+    <string name="settings_appearance_seasonal_themes_description">רקעים וברכות חגיגיים במהלך החגים</string>
+    <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">הרקע %1$s מוצג עד %2$s כל עוד ערכות הנושא העונתיות פעילות</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">גרסה</string>
     <string name="settings_appearance_theme_mode">מצב עיצוב</string>
@@ -778,9 +805,24 @@
     <string name="settings_appearance_app_icon_default">ברירת מחדל</string>
     <string name="settings_appearance_app_icon_light_2">שמיים</string>
     <string name="settings_appearance_app_icon_light_3">שקיעה</string>
-    <string name="settings_appearance_app_icon_dark_1">ים</string>
+    <string name="settings_appearance_app_icon_light_4">לבנדר</string>
+    <string name="settings_appearance_app_icon_light_5">קרחון</string>
+    <string name="settings_appearance_app_icon_light_6">ערפל</string>
+    <string name="settings_appearance_app_icon_light_7">חול</string>
+    <string name="settings_appearance_app_icon_dark_1">טיל</string>
     <string name="settings_appearance_app_icon_dark_2">חלל</string>
-    <string name="settings_appearance_app_icon_dark_3">אינדיגו</string>
+    <string name="settings_appearance_app_icon_dark_3">שזיף</string>
+    <string name="settings_appearance_app_icon_dark_4">חצות</string>
+    <string name="settings_appearance_app_icon_dark_5">צפחה</string>
+    <string name="settings_appearance_app_icon_accent_1">אורורה</string>
+    <string name="settings_appearance_app_icon_accent_2">דיו</string>
+    <string name="settings_appearance_app_icon_accent_3">נייר</string>
+    <string name="settings_appearance_app_icon_accent_4">דמדומים</string>
+    <string name="settings_appearance_app_icon_background">רקע</string>
+    <string name="settings_appearance_app_icon_mark">לוגו</string>
+    <string name="settings_appearance_app_icon_mark_color">צבע</string>
+    <string name="settings_appearance_app_icon_mark_white">לבן</string>
+    <string name="settings_appearance_app_icon_mark_black">שחור</string>
     <string name="settings_appearance_app_icon_change_dialog_title">שנה את סמל האפליקציה? </string>
     <string name="settings_appearance_app_icon_change_dialog_message">שנה ל-&lt;b&gt;%s&lt;/b&gt; והפעל מחדש?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -818,7 +860,6 @@
     <string name="external_batch_patch_trust_caller">אפשר תמיד לאפליקציה זו</string>
     <string name="external_batch_patch_unknown_caller">אפליקציה לא ידועה</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">עדכון Morphe זמין</string>
     <string name="notification_bundle_update_title">תיקונים חדשים זמינים</string>
     <string name="notification_update_text">גרסה %s מוכנה להורדה</string>
     <string name="notification_bundle_update_text_unversioned">לחץ כדי לפתוח את Morphe ולעדכן</string>
@@ -829,8 +870,11 @@
     <string name="notification_channel_manager_updates_description">התראות על מהדורות Morphe חדשות</string>
     <string name="notification_channel_patch_updates">עדכוני תיקונים</string>
     <string name="notification_channel_patch_updates_description">התראות על מהדורות תיקון חדשות</string>
-    <string name="notification_channel_patcher">תיקונים</string>
     <string name="notification_channel_patcher_description">מוצג בזמן ש-Morphe מתקן אפליקציה ברקע</string>
+    <string name="notification_channel_mounted_apps">אפליקציות שהורכבו</string>
+    <string name="notification_channel_mounted_apps_description">כאשר גרסה אחרת החליפה אפליקציה מותקנת והטלאי שלה כבר לא תקף</string>
+    <string name="notification_mount_replaced_title">%1$s כבר לא מתוקן</string>
+    <string name="notification_mount_replaced_text">v%1$s החליפה את v%2$s המתוקנת. פתח את Morphe כדי לשחזר אותה</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">הגדרות מומחה</string>
     <string name="settings_advanced_expert_mode">מצב מומחה</string>
@@ -1257,9 +1301,7 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="selected">נבחר</string>
     <string name="not_selected">לא נבחר</string>
     <string name="select_all">בחר הכל</string>
-    <string name="select_all_done">הכל נבחר</string>
     <string name="deselect_all">בטל בחירה של הכל</string>
-    <string name="deselect_all_done">הכל בוטל</string>
     <string name="reorder_list">סדר מחדש רשימה</string>
     <string name="reorder_list_hint">גרור לסדר מחדש</string>
     <string name="reorder_done">הסדר נשמר</string>
@@ -1295,6 +1337,7 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="unmount">ניתוק</string>
     <string name="unmounted">לא מורכב</string>
     <string name="remount">טען מחדש</string>
+    <string name="restore">שחזור</string>
     <string name="share">שתף</string>
     <string name="install">התקן</string>
     <string name="installed">מותקן</string>
@@ -1315,6 +1358,8 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="sources">מקורות</string>
     <string name="installing_ellipsis">מתקין…</string>
     <string name="mounting_ellipsis">מצרף…</string>
+    <string name="mount_stage_restoring_stock">משחזר את המקור…</string>
+    <string name="mount_stage_copying">מעתיק…</string>
     <string name="unmounting_ellipsis">מתפרק... </string>
     <string name="importing_ellipsis">מוצא... </string>
     <string name="imported_successfully">יובא בהצלחה</string>
@@ -1362,7 +1407,6 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">גרסה זו עדיין מפורסמת. נסה שוב בעוד מספר דקות</string>
     <string name="update_download_missing">העדכון שהורד כבר אינו זמין. הורד אותו שוב</string>
-    <string name="download_manager_failed">שגיאה בהורדת עדכון: %s</string>
     <string name="failed_to_check_updates">בדיקת עדכונים נכשלה: %s</string>
     <string name="failed_to_download_update">כשל בהורדת העדכון: %s</string>
     <string name="download_confirmation_metered">"אתה מחובר כעת לחיבור מוגבל בנפח נתונים, וייתכן שיחולו חיובי נתונים מספק השירות שלך.

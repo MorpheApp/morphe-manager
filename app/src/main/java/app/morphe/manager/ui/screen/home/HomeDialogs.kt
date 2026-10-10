@@ -404,59 +404,34 @@ fun HomeDialogs(
     if (homeViewModel.showExpertModeDialog) {
         // The dialogs raised over the selection wear the app's color, as the selection does
         ProvideAccent(rememberAppColor(homeViewModel.expertModeSelectedApp?.packageName)) {
-            // Reading the property re-walks and re-sorts every bundle's patches, so it is taken once
-            val allPatchesInfo = homeViewModel.expertModeAllPatchesInfo
             ExpertModeDialog(
                 packageName = homeViewModel.expertModeSelectedApp?.packageName.orEmpty(),
                 appIcon = homeViewModel.expertModeAppIcon,
-                newPatches = homeViewModel.expertModeNewPatches,
-                options = homeViewModel.expertModeOptions,
-                allPatchesInfo = allPatchesInfo,
-                totalSelectedCount = homeViewModel.expertModeTotalSelectedCount,
-                totalPatchesCount = allPatchesInfo.sumOf { (_, patches) -> patches.size },
+                selection = ExpertPatchSelection(
+                    allPatchesInfo = homeViewModel.expertModeAllPatchesInfo,
+                    options = homeViewModel.expertModeOptions,
+                    totalSelectedCount = homeViewModel.expertModeTotalSelectedCount,
+                    newPatches = homeViewModel.expertModeNewPatches,
+                    savedPatches = homeViewModel.expertModeInitialPatches,
+                    lockStateOf = homeViewModel::expertModeLockState,
+                    holdsUniversalPatches = homeViewModel::expertModeSelectAllHoldsUniversal
+                ),
                 hasMultipleBundles = homeViewModel.expertModeHasMultipleBundles,
                 patchActions = ExpertPatchActions(
-                    onPatchToggle = { bundleUid, patchName ->
-                        homeViewModel.togglePatchInExpertMode(bundleUid, patchName)
-                    },
-                    onSelectAll = { bundleUid, patches ->
-                        homeViewModel.expertModeSelectAll(bundleUid, patches)
-                    },
-                    onDeselectAll = { bundleUid, patches ->
-                        homeViewModel.expertModeDeselectAll(bundleUid, patches)
-                    },
-                    onResetToDefault = { bundleUid ->
-                        homeViewModel.expertModeResetToDefault(bundleUid)
-                    },
-                    onRestoreSaved = { bundleUid ->
-                        homeViewModel.expertModeRestoreSaved(bundleUid)
-                    },
-                    onCopyFromBundle = { bundleUid ->
-                        homeViewModel.openExpertModeCopyDialog(bundleUid)
-                    },
-                    onOptionChange = { bundleUid, patchName, optionKey, value ->
-                        homeViewModel.updateOptionInExpertMode(bundleUid, patchName, optionKey, value)
-                    },
-                    onResetOptions = { bundleUid, patchName ->
-                        homeViewModel.resetOptionsInExpertMode(bundleUid, patchName)
-                    }
+                    onPatchToggle = homeViewModel::togglePatchInExpertMode,
+                    onSelectAll = homeViewModel::expertModeSelectAll,
+                    onDeselectAll = homeViewModel::expertModeDeselectAll,
+                    onResetToDefault = homeViewModel::expertModeResetToDefault,
+                    onRestoreSaved = homeViewModel::expertModeRestoreSaved,
+                    onCopyFromBundle = homeViewModel::openExpertModeCopyDialog,
+                    onOptionChange = homeViewModel::updateOptionInExpertMode,
+                    onResetOptions = homeViewModel::resetOptionsInExpertMode
                 ),
-                savedPatches = homeViewModel.expertModeInitialPatches,
-                lockStateOf = homeViewModel::expertModeLockState,
-                holdsUniversalPatches = homeViewModel::expertModeSelectAllHoldsUniversal,
-                prereleaseBundleUids = allPatchesInfo.mapNotNull { (bundle, _) ->
-                    bundle.uid.takeIf { homeViewModel.getPatchSource(it)?.usesPrerelease == true }
-                }.toSet(),
+                usesPrerelease = { homeViewModel.getPatchSource(it)?.usesPrerelease == true },
                 hiddenSourceCount = homeViewModel.expertModeHiddenSources,
-                onShowHiddenSources = {
-                    homeViewModel.revealHiddenExpertModeSources()
-                },
-                onDismiss = {
-                    homeViewModel.cleanupExpertModeData()
-                },
-                onProceed = {
-                    homeViewModel.proceedExpertMode()
-                }
+                onShowHiddenSources = homeViewModel::revealHiddenExpertModeSources,
+                onDismiss = homeViewModel::cleanupExpertModeData,
+                onProceed = homeViewModel::proceedExpertMode
             )
 
             // Raised over the selection, so closing it puts the user back in the dialog with the
@@ -837,7 +812,7 @@ fun DeepLinkAddSourceDialog(
             Text(
                 text = stringResource(R.string.deep_link_add_source_message),
                 style = MaterialTheme.typography.bodyLarge,
-                color = LocalDialogSecondaryTextColor.current,
+                color = dialogSecondaryTextColor(),
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -848,7 +823,7 @@ fun DeepLinkAddSourceDialog(
                     text = url,
                     style = MaterialTheme.typography.bodySmall,
                     fontFamily = FontFamily.Monospace,
-                    color = LocalDialogSecondaryTextColor.current,
+                    color = dialogSecondaryTextColor(),
                     modifier = Modifier.padding(horizontal = Defaults.ContentPadding)
                 )
             }
@@ -917,7 +892,7 @@ fun MppImportDialog(
                             Text(
                                 text = it,
                                 style = MaterialTheme.typography.bodySmall,
-                                color = LocalDialogSecondaryTextColor.current,
+                                color = dialogSecondaryTextColor(),
                                 maxLines = 2,
                                 overflow = TextOverflow.Ellipsis
                             )
@@ -952,7 +927,7 @@ fun MppImportDialog(
                                 text = source,
                                 style = MaterialTheme.typography.bodySmall,
                                 fontFamily = FontFamily.Monospace,
-                                color = LocalDialogSecondaryTextColor.current,
+                                color = dialogSecondaryTextColor(),
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis
                             )
@@ -974,7 +949,7 @@ fun MppImportDialog(
                                     text = fileName,
                                     style = MaterialTheme.typography.bodySmall,
                                     fontFamily = FontFamily.Monospace,
-                                    color = LocalDialogSecondaryTextColor.current,
+                                    color = dialogSecondaryTextColor(),
                                     maxLines = 1,
                                     overflow = TextOverflow.Ellipsis
                                 )
@@ -1106,7 +1081,7 @@ fun SimpleBundleSelectDialog(
                             Text(
                                 text = candidate.displayTitle,
                                 style = MaterialTheme.typography.bodyLarge,
-                                color = LocalDialogTextColor.current,
+                                color = dialogTextColor(),
                                 modifier = Modifier.weight(1f, fill = false)
                             )
                             candidate.sourceType?.let { type ->
@@ -1116,20 +1091,20 @@ fun SimpleBundleSelectDialog(
                         Text(
                             text = patchCountText,
                             style = MaterialTheme.typography.bodySmall,
-                            color = LocalDialogSecondaryTextColor.current
+                            color = dialogSecondaryTextColor()
                         )
                         if (patchVersionText != null) {
                             Text(
                                 text = patchVersionText,
                                 style = MaterialTheme.typography.bodySmall,
-                                color = LocalDialogSecondaryTextColor.current
+                                color = dialogSecondaryTextColor()
                             )
                         }
                         if (recommendedVersionText != null) {
                             Text(
                                 text = recommendedVersionText,
                                 style = MaterialTheme.typography.bodySmall,
-                                color = LocalDialogSecondaryTextColor.current
+                                color = dialogSecondaryTextColor()
                             )
                         }
                     }

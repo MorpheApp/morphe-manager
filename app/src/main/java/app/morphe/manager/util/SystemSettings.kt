@@ -12,6 +12,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import androidx.core.net.toUri
 
 /** Opens the system app info screen for Morphe. */
 fun Context.openAppDetailsSettings() {
@@ -52,6 +53,22 @@ fun Context.openAppOpenByDefaultSettings(targetPackageName: String): Boolean {
     return (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
             startSettings(Intent(Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS, uri))) ||
             startSettings(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, uri))
+}
+
+/**
+ * Opens the Google Play page of [targetPackageName], where its auto-updates are turned off.
+ * Falls back to the web page when no store app takes the link.
+ */
+fun Context.openPlayStorePage(targetPackageName: String) {
+    val opened = startSettings(
+        Intent(Intent.ACTION_VIEW, "market://details?id=$targetPackageName".toUri())
+            .setPackage(PLAY_STORE_INSTALLER_PACKAGE)
+    )
+    if (!opened) {
+        startSettings(
+            Intent(Intent.ACTION_VIEW, "https://play.google.com/store/apps/details?id=$targetPackageName".toUri())
+        )
+    }
 }
 
 private fun Context.startSettings(intent: Intent): Boolean = try {

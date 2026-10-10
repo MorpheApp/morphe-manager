@@ -1,3 +1,13 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ *
+ * Original hard forked code:
+ * https://github.com/Jman-Github/Universal-ReVanced-Manager/blob/597b3173a004f5a9aae54326046dd7fd4c5b7777/app/src/main/java/app/revanced/manager/MainActivity.kt
+ *
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
+ */
+
 package app.morphe.manager
 
 import android.content.Context
@@ -37,6 +47,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import app.morphe.manager.domain.batch.BatchTarget
+import app.morphe.manager.domain.manager.HomeAppButtonPreferences
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.model.navigation.*
@@ -48,11 +59,12 @@ import app.morphe.manager.ui.screen.home.*
 import app.morphe.manager.ui.screen.shared.AnimatedBackground
 import app.morphe.manager.ui.screen.shared.Animations
 import app.morphe.manager.ui.screen.shared.BackgroundType
+import app.morphe.manager.ui.screen.shared.RandomBackground
+import app.morphe.manager.ui.screen.shared.rememberRandomBackground
 import app.morphe.manager.ui.theme.*
 import app.morphe.manager.ui.viewmodel.HomeViewModel
 import app.morphe.manager.ui.viewmodel.MainViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
-import app.morphe.manager.ui.viewmodel.ThemeSettingsViewModel
 import app.morphe.manager.util.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
@@ -115,6 +127,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         val vm: MainViewModel = getActivityViewModel()
+
+        // A recreated activity keeps the background RANDOM drew, only a fresh launch draws again
+        if (savedInstanceState == null) RandomBackground.newLaunch()
 
         // Handle deep link on cold start. The task keeps the intent that started it, so a restore
         // after the process was reclaimed - or any recreate - would replay a link already acted on
@@ -339,18 +354,14 @@ private fun MorpheManager(vm: MainViewModel) {
     val navController = rememberNavController()
     val scope = rememberCoroutineScope()
     val prefs: PreferencesManager = koinInject()
-    val themeViewModel: ThemeSettingsViewModel = koinViewModel()
+    val homeAppButtonPrefs: HomeAppButtonPreferences = koinInject()
     val backgroundType by prefs.backgroundType.getAsState()
     val enableParallax by prefs.enableBackgroundParallax.getAsState()
-    val randomInterval by prefs.randomBackgroundInterval.getAsState()
-    val resolvedRandomBackground by themeViewModel.resolvedRandomBackground.collectAsStateWithLifecycle()
-
-    // Resolve which background to show whenever RANDOM mode is active or the interval changes
-    LaunchedEffect(backgroundType, randomInterval) {
-        if (backgroundType == BackgroundType.RANDOM) {
-            themeViewModel.resolveRandomBackground(randomInterval)
-        }
-    }
+    val resolvedRandomBackground =
+        if (backgroundType == BackgroundType.RANDOM) rememberRandomBackground(prefs) else null
+    val seasonalThemes by prefs.seasonalThemes.getAsState()
+    // Read once per launch, so an event that begins while the app is open waits for the next one
+    val seasonalEvent = remember { SeasonalEvent.on() }
 
     // Patcher background speed - driven by PatcherViewModel when on patcher screen.
     // Exposed as top-level mutable state so PatcherScreen can write into it
@@ -580,6 +591,8 @@ private fun MorpheManager(vm: MainViewModel) {
 
     // Every entry point starts the tour from its first step on the home screen
     val startOnboardingTour: () -> Unit = {
+        // The tour points at app cards, which a saved filter could leave out of the list
+        homeAppButtonPrefs.setFilterMode(null)
         onboardingPhase = OnboardingPhase.HOME
         phaseInitialStep = 0
         showOnboardingOverlay = true
@@ -597,7 +610,7 @@ private fun MorpheManager(vm: MainViewModel) {
     ) {
         // Show animated background
         AnimatedBackground(
-            type = backgroundType,
+            type = seasonalEvent.backgroundOver(backgroundType, seasonalThemes),
             resolvedType = resolvedRandomBackground,
             enableParallax = enableParallax,
             speedMultiplier = { patcherBackgroundSpeed.floatValue },

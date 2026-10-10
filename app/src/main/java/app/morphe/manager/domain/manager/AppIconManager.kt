@@ -1,79 +1,28 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.domain.manager
 
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
-import androidx.annotation.DrawableRes
-import app.morphe.manager.R
 
 /**
- * Manager for changing app launcher icons
+ * Switches the launcher icon between the [AppIcon]s generated from the catalog in
+ * build.gradle.kts, each shown by an activity-alias of its own.
  */
 class AppIconManager(private val context: Context) {
 
     private val packageManager: PackageManager = context.packageManager
 
     /**
-     * Available app icon variants
-     */
-    enum class AppIcon(
-        val aliasName: String,
-        val displayNameResId: Int,
-        @param:DrawableRes val previewIconResId: Int
-    ) {
-        DEFAULT(
-            aliasName = "app.morphe.manager.MainActivity_Default",
-            displayNameResId = R.string.settings_appearance_app_icon_default,
-            previewIconResId = R.mipmap.ic_launcher
-        ),
-
-        // Light variant 2 (Sky theme)
-        LIGHT_2(
-            aliasName = "app.morphe.manager.MainActivity_Light_2",
-            displayNameResId = R.string.settings_appearance_app_icon_light_2,
-            previewIconResId = R.mipmap.ic_launcher_light_2
-        ),
-
-        // Light variant 3 (Sunset theme)
-        LIGHT_3(
-            aliasName = "app.morphe.manager.MainActivity_Light_3",
-            displayNameResId = R.string.settings_appearance_app_icon_light_3,
-            previewIconResId = R.mipmap.ic_launcher_light_3
-        ),
-
-        // Dark variant 1 (Ocean theme)
-        DARK_1(
-            aliasName = "app.morphe.manager.MainActivity_Dark_1",
-            displayNameResId = R.string.settings_appearance_app_icon_dark_1,
-            previewIconResId = R.mipmap.ic_launcher_dark_1
-        ),
-
-        // Dark variant 2 (Void theme)
-        DARK_2(
-            aliasName = "app.morphe.manager.MainActivity_Dark_2",
-            displayNameResId = R.string.settings_appearance_app_icon_dark_2,
-            previewIconResId = R.mipmap.ic_launcher_dark_2
-        ),
-
-        // Dark variant 3 (Indigo theme)
-        DARK_3(
-            aliasName = "app.morphe.manager.MainActivity_Dark_3",
-            displayNameResId = R.string.settings_appearance_app_icon_dark_3,
-            previewIconResId = R.mipmap.ic_launcher_dark_3
-        );
-
-        fun getComponentName(context: Context): ComponentName {
-            return ComponentName(context.packageName, aliasName)
-        }
-    }
-
-    /**
      * Get currently active app icon
      */
     fun getCurrentIcon(): AppIcon {
         return AppIcon.entries.firstOrNull { icon ->
-            val componentName = icon.getComponentName(context)
-            val state = packageManager.getComponentEnabledSetting(componentName)
+            val state = packageManager.getComponentEnabledSetting(icon.componentName(context))
             state == PackageManager.COMPONENT_ENABLED_STATE_ENABLED
         } ?: AppIcon.DEFAULT
     }
@@ -86,7 +35,7 @@ class AppIconManager(private val context: Context) {
         // Disable all icons
         AppIcon.entries.forEach { otherIcon ->
             packageManager.setComponentEnabledSetting(
-                otherIcon.getComponentName(context),
+                otherIcon.componentName(context),
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP
             )
@@ -94,9 +43,15 @@ class AppIconManager(private val context: Context) {
 
         // Enable the selected icon
         packageManager.setComponentEnabledSetting(
-            icon.getComponentName(context),
+            icon.componentName(context),
             PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
             0
         )
     }
 }
+
+fun AppIcon.componentName(context: Context) = ComponentName(context.packageName, aliasName)
+
+/** The icon built from [background] and [mark], or null for a pair that does not read. */
+fun AppIcon.Companion.of(background: IconBackground, mark: IconMark): AppIcon? =
+    AppIcon.entries.firstOrNull { it.background == background && it.mark == mark }

@@ -448,12 +448,12 @@ private fun UpdateCheckIntervalDialog(
                         text = stringResource(selectedInterval.labelResId),
                         style = MaterialTheme.typography.headlineSmall,
                         fontWeight = FontWeight.Bold,
-                        color = LocalDialogTextColor.current
+                        color = dialogTextColor()
                     )
                     Text(
                         text = chipSubtitle,
                         style = MaterialTheme.typography.bodySmall,
-                        color = LocalDialogSecondaryTextColor.current,
+                        color = dialogSecondaryTextColor(),
                         textAlign = TextAlign.Center
                     )
                 }

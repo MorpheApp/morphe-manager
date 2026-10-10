@@ -23,6 +23,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.KeystoreInputFormat
+import app.morphe.manager.util.enumByNameOrNull
 
 /**
  * Keystore Credentials Dialog.
@@ -62,7 +63,7 @@ fun KeystoreCredentialsDialog(
             AppDialogDropdownTextField(
                 value = format.name,
                 onValueChange = { name ->
-                    format = KeystoreInputFormat.entries.firstOrNull { it.name == name } ?: format
+                    format = enumByNameOrNull<KeystoreInputFormat>(name) ?: format
                 },
                 dropdownItems = formatItems,
                 allowCustomValue = false,

@@ -1,3 +1,13 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ *
+ * Original hard forked code:
+ * https://github.com/Jman-Github/Universal-ReVanced-Manager/blob/597b3173a004f5a9aae54326046dd7fd4c5b7777/app/src/main/java/app/revanced/manager/data/room/options/OptionDao.kt
+ *
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
+ */
+
 package app.morphe.manager.data.room.options
 
 import androidx.room.ColumnInfo
@@ -100,26 +110,12 @@ abstract class OptionDao {
      * Get summary of options per package and bundle.
      * Returns raw data that will be processed in repository.
      */
-    @Query(
-        "SELECT og.package_name, og.patch_bundle, COUNT(o.`key`) as option_count " +
-                "FROM option_groups og " +
-                "LEFT JOIN options o ON og.uid = o.`group` " +
-                "GROUP BY og.package_name, og.patch_bundle " +
-                "HAVING option_count > 0"
-    )
-    abstract suspend fun getOptionsSummaryRaw(): List<OptionSummaryItem>
 
     @Query("SELECT uid FROM option_groups WHERE patch_bundle = :bundleUid AND package_name = :packageName")
     abstract suspend fun getGroupId(bundleUid: Int, packageName: String): Int?
 
     @Query("SELECT DISTINCT package_name FROM option_groups")
     abstract fun getPackagesWithOptions(): Flow<List<String>>
-
-    /**
-     * Get all packages that have saved options for a specific bundle.
-     */
-    @Query("SELECT DISTINCT package_name FROM option_groups WHERE patch_bundle = :bundleUid")
-    abstract fun getPackagesWithOptionsForBundle(bundleUid: Int): Flow<List<String>>
 
     @Insert
     abstract suspend fun createOptionGroup(group: OptionGroup)
@@ -157,27 +153,7 @@ abstract class OptionDao {
                 insertOptions(options)
             }
         }
-
-    /**
-     * Update options for a specific group.
-     */
-    @Transaction
-    open suspend fun updateOptionsForGroup(groupId: Int, options: List<Option>) {
-        clearGroup(groupId)
-        if (options.isNotEmpty()) {
-            insertOptions(options)
-        }
-    }
 }
-
-/**
- * Data class for options summary query result.
- */
-data class OptionSummaryItem(
-    @ColumnInfo(name = "package_name") val packageName: String,
-    @ColumnInfo(name = "patch_bundle") val patchBundle: Int,
-    @ColumnInfo(name = "option_count") val optionCount: Int
-)
 
 /**
  * Data class for raw option export (keeps serialized value).

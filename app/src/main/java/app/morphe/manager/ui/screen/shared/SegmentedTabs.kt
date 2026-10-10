@@ -95,7 +95,7 @@ fun SegmentedTabs(
     compact: Boolean = false,
     fillHeight: Boolean = false,
     selectorPadding: PaddingValues = PaddingValues(),
-    contentColor: Color = LocalDialogTextColor.current,
+    contentColor: Color = dialogTextColor(),
     pageSwipeEnabled: (page: Int) -> Boolean = { true },
     below: @Composable ColumnScope.() -> Unit = {},
     page: @Composable (index: Int) -> Unit

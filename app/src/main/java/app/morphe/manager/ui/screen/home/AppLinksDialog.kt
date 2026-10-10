@@ -160,7 +160,7 @@ private fun DomainRow(domain: String, isEnabled: Boolean) {
         )
         Text(
             text = stringResource(
-                if (isEnabled) R.string.app_links_badge_enabled else R.string.app_links_badge_disabled
+                if (isEnabled) R.string.enabled else R.string.disabled
             ),
             style = MaterialTheme.typography.labelSmall,
             color = if (isEnabled) SemanticTone.Success.content else MaterialTheme.colorScheme.onSurfaceVariant,

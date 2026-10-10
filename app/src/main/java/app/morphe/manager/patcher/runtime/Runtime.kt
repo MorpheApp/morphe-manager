@@ -1,3 +1,13 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ *
+ * Original hard forked code:
+ * https://github.com/Jman-Github/Universal-ReVanced-Manager/blob/597b3173a004f5a9aae54326046dd7fd4c5b7777/app/src/main/java/app/revanced/manager/patcher/runtime/Runtime.kt
+ *
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
+ */
+
 package app.morphe.manager.patcher.runtime
 
 import android.content.Context
@@ -41,6 +51,7 @@ sealed class Runtime(context: Context) : KoinComponent {
      * @param options          Patch option values, per bundle.
      * @param logger           Sink for everything the run reports.
      * @param onPatchCompleted Called with the name of each patch that finished.
+     * @param onPatchFailed    Called with the name of the patch the run failed on.
      * @param onProgress       Called as the run moves between steps.
      * @param stripUnusedNativeLibs Whether native libraries and split configurations the device
      *                         cannot use are dropped.
@@ -48,6 +59,8 @@ sealed class Runtime(context: Context) : KoinComponent {
      *                         The runtime has no further use for the file, so it may be moved.
      * @param onRestart        Called when the current attempt is abandoned and patching starts over,
      *                         so progress reported so far can be dropped instead of accumulating.
+     * @return The heap limit in MB the run only finished under after lowering it, null when the
+     *         limit it started with held.
      */
     abstract suspend fun execute(
         inputFile: String,
@@ -57,9 +70,10 @@ sealed class Runtime(context: Context) : KoinComponent {
         options: Options,
         logger: Logger,
         onPatchCompleted: suspend (String) -> Unit,
+        onPatchFailed: (String) -> Unit,
         onProgress: ProgressEventHandler,
         stripUnusedNativeLibs: Boolean,
         onMergedApkReady: (suspend (File) -> Unit)? = null,
         onRestart: suspend () -> Unit = {},
-    )
+    ): Int?
 }

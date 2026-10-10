@@ -87,6 +87,10 @@
         <item quantity="one">%s Quelle installiert</item>
         <item quantity="other">%s Quellen installiert</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="one">%1$s · %2$s gefiltert</item>
+        <item quantity="other">%1$s · %2$s gefiltert</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s ausgeblendete App</item>
         <item quantity="other">%s ausgeblendete Apps</item>

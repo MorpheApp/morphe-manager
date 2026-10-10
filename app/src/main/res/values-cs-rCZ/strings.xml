@@ -123,6 +123,26 @@
     <string name="home_greeting_super_late_3">V tomto bodě se jen drž a záplatuj</string>
     <string name="home_greeting_super_late_4">Ty a servery, oba vzhůru</string>
     <string name="home_greeting_super_late_5">Noční a produktivní</string>
+    <!-- Halloween greetings, shown instead of the ones above around October 31 -->
+    <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_1">Trik, nebo záplata?</string>
+    <string name="home_greeting_halloween_2">Žádní duchové v těchto APK, ověřili jsme to</string>
+    <string name="home_greeting_halloween_3">Strašidelná sezóna, čerstvé záplaty</string>
+    <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
+    <string name="home_greeting_halloween_4">Něco zlého tudy záplatuje</string>
+    <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
+    <string name="home_greeting_winter_1">Veselé svátky, čerstvé záplaty</string>
+    <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
+    <string name="home_greeting_winter_2">Ať sněží, ať záplatuje</string>
+    <string name="home_greeting_winter_3">Nový rok, nové záplaty</string>
+    <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
+    <string name="home_greeting_winter_4">Záplatujeme sněhem</string>
+    <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">Šťastný nový rok!</string>
+    <string name="home_greeting_new_year_2">Odpočítáváme do nových záplat</string>
+    <string name="home_greeting_new_year_3">Nový rok, pořád aplikace bez reklam</string>
+    <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Pryč se starými verzemi, ať žijí nové</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Zdroje záplat</string>
     <string name="sources_search">Hledat zdroje a záplaty</string>
@@ -272,7 +292,6 @@ Cokoli, co z této webové stránky přidáte, používáte na vlastní riziko."
     <string name="home_use_installed_app">Použít nainstalovanou aplikaci</string>
     <string name="home_installed_app_picker_title">Nainstalované aplikace</string>
     <string name="home_installed_app_picker_empty">Nebyly nalezeny žádné aplikace</string>
-    <string name="home_installed_app_picker_filter_all">Všechny aplikace</string>
     <string name="home_installed_app_picker_filter_user">Pouze uživatelské aplikace</string>
     <string name="home_installed_app_picker_filter_system">Pouze systémové aplikace</string>
     <string name="home_invalid_apk_unreadable">Nepodařilo se přečíst soubor. Zkontrolujte, zda \'Externí úložiště\' není omezeno z důvodu úspory baterie</string>
@@ -281,7 +300,6 @@ Cokoli, co z této webové stránky přidáte, používáte na vlastní riziko."
     <string name="home_invalid_apk_io_error">Nepodařilo se otevřít soubor. Zkuste to znovu</string>
     <string name="home_external_apk_expert_mode_required">Tato funkce je dostupná pouze v expertním režimu</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Expertní režim</string>
     <string name="expert_mode_search">Vyhledat záplaty</string>
     <string name="expert_mode_disable_all">Vypnout vše</string>
     <string name="expert_mode_disable_all_done">Všechny záplaty vypnuté</string>
@@ -372,44 +390,43 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
     <string name="adaptive_icon_select_image">Vybrat obrázek</string>
     <string name="adaptive_icon_change_image">Změnit obrázek</string>
     <string name="image_load_failed">Tento obrázek se nepodařilo načíst</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Obrázek v popředí</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Ikona spouštěče</string>
+    <string name="adaptive_icon_gesture_hint">Přetažením přesunete, sevřením prstů změníte velikost</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Náhled</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Standardní</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Motivová</string>
     <string name="adaptive_icon_background_color">Barva pozadí</string>
     <string name="adaptive_icon_reset_transform">Resetovat pozici a měřítko</string>
-    <string name="adaptive_icon_safe_zone_inner">Bezpečná zóna (vždy viditelná)</string>
-    <string name="adaptive_icon_safe_zone_outer">Maskovací zóna (může být skryta)</string>
-    <string name="adaptive_icon_no_transparency_warning">Obrázek neobsahuje průhledné pixely. Výsledek se může zobrazit nesprávně</string>
+    <string name="adaptive_icon_no_transparency_warning">Tento obrázek nemá žádné průhledné pixely, takže motivové ikony a ikony oznámení si ponechají logo Morphe</string>
     <string name="adaptive_icon_created_success">Adaptivní ikona byla úspěšně vytvořena</string>
     <string name="adaptive_icon_creation_failed">Adaptivní ikona se nepodařila vytvořit</string>
-    <string name="adaptive_icon_label">Adaptivní</string>
-    <string name="adaptive_icon_monochrome_label">Monochromá</string>
     <string name="adaptive_icon_guide">Návod k vytvoření ikon</string>
     <string name="adaptive_icon_guide_png_title">Použijte PNG s prühzím pozadím</string>
-    <string name="adaptive_icon_guide_png_body">Popřední pozadí musí být PNG soubor s prühzím pozadím. Jednobarevné pozadí bude vypadat nesprávně - barva pozadí by měla pocházet z názorníku pozadí uvedeného níže.</string>
+    <string name="adaptive_icon_guide_png_body">Nejlépe funguje logo na průhledném pozadí, s barvou pozadí zvolenou níže. Obrázek bez průhlednosti místo toho vyplní celou ikonu a motivové ikony a ikony oznámení si pak ponechají logo Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Bezpečné zóny</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Vnitřní zóna (plná): obsah je vždy plně viditelný ve všech tvarech spouštěč
-Vnějní zóna (přerušovaná): může být ořezaná maskou spouštěčé - udržujte důležité detaily uvnitř vnitřní zóny."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Obrys znázorňuje tvar ikony vašeho spouštěče a vše mimo něj je oříznuto. Jiné spouštěče používají jiné tvary, proto důležité detaily ponechte uvnitř přerušovaného kruhu, který je vidět u všech tvarů.</string>
     <string name="adaptive_icon_guide_notification_title">Ikona oznámení</string>
-    <string name="adaptive_icon_guide_notification_body">Automaticky generováno z popředního obrazu. Upravte jeí velikost pomocí přesuvníku Oznámení. Veškerý viditelný obsah se v horním panelu zobrazuje bíle.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Monochromá ikona</string>
-    <string name="adaptive_icon_guide_monochrome_body">Automaticky generováno z popředního obrazu pomocí stejných transformací adaptivních ikon. Zobrazuje se s odstínem barvy tapety v Androidu 13 a nověším.</string>
+    <string name="adaptive_icon_guide_notification_body">Ořízne se z viditelné části obrázku a bude mít velikost jako ostatní ikony stavového řádku, ať má soubor jakýkoli okraj. Nastavíte ji posuvníkem pod náhledem. Android ji zobrazuje v jedné barvě.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Motivová ikona</string>
+    <string name="adaptive_icon_guide_monochrome_body">Ořízne se z obrázku se stejnou pozicí a velikostí jako ikona spouštěče. V systému Android 13 a novějším ji spouštěče se zapnutými motivovými ikonami obarví podle tapety.</string>
     <string name="notification_icon_preview">Oznámení</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Vytvořit vlastní záhlaví</string>
     <string name="header_creator_light_theme">Záhlaví pro světlé téma</string>
     <string name="header_creator_dark_theme">Záhlaví pro tmavé téma</string>
-    <string name="header_creator_no_image">Není vybrán žádný obrázek</string>
     <string name="header_creator_success">Záhlaví vytvořeno úspěšně</string>
     <string name="header_creator_failed">Nepodařilo se vytvořit záhlaví</string>
     <string name="header_creator_guide">Návod k vytvoření hlavičky</string>
     <string name="header_creator_guide_image_title">Požadavky k obrazu</string>
-    <string name="header_creator_guide_image_body">Použijte jakýkoli obrazový soubor (PNG nebo JPEG). Pro dosažení nejlepších výsledků použijte obraz sširokého formátu s poměrem stran přibližně 2,7:1. PNG soubory s prühzím pozadím se budé přirozeně míchat s motivem aplikace.</string>
+    <string name="header_creator_guide_image_body">PNG s průhledným pozadím splyne s panelem aplikace. Okraje kolem loga v souboru se ignorují, takže začíná na velikosti a v místě výchozího loga.</string>
     <string name="header_creator_guide_themes_title">Světlý a tmavý motivy</string>
     <string name="header_creator_guide_themes_body">Většina aplikací vyžaduje samostatný obraz pro světlý a tmavý motiv. Nětkterý aplikace (například YouTube Music) používají pouze tmavý motiv, proto je zobrazena pouze tato sekce.</string>
     <string name="header_creator_guide_positioning_title">Pozicování a měřítko</string>
-    <string name="header_creator_guide_positioning_body">Pomocí gest klepnutím a roztáhnutím přímo v náhledu k pozicování a změnné velikosti obrazu. Vodící linky se zobrazí, když se obraz nachází blízko středu. Můžšte použít i posuvník pod náhledem.</string>
+    <string name="header_creator_guide_positioning_body">Obrázek v editoru můžete přetahovat a sevřením prstů měnit jeho velikost, nebo jeho velikost upravit posuvníkem. Přerušovaný rámeček označuje umístění výchozího loga a vodítka se zobrazí, když se s ním obrázek zarovná.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Záplata vybrána</string>
     <string name="batch_patch_title">Hromadné záplatování</string>
@@ -475,9 +492,12 @@ Vnějní zóna (přerušovaná): může být ořezaná maskou spouštěčé - ud
     <string name="home_app_info_app_update_available_description">Zdroje záplat podporují novější verzi této aplikace. Záplatujte ji znovu, abyste přešli na tuto verzi.</string>
     <string name="home_app_info_newest_supported_version">Nejnovější podporovaná</string>
     <string name="home_app_info_version_move">Nainstalováno %1$s, nejnovější podporovaná %2$s</string>
+    <string name="home_app_info_version_restore">Nainstalováno %1$s, opatchováno %2$s</string>
     <string name="home_app_info_app_deleted_warning">Aplikace byla odinstalována</string>
     <string name="home_app_info_app_deleted_description">Tuto aplikaci bylo odinstalováno mimo Morphe. Zápalte ji znovu, abyste obnovili funkčnost</string>
     <string name="home_app_info_not_patched_description">Je nainstalována neopatchovaná verze této aplikace. Morphe má stále svůj předchozí záznam o záplatě</string>
+    <string name="home_app_info_mount_replaced_description">Jiná verze nahradila namountovanou aplikaci, takže patch už neplatí. Obnovení vrátí opatchovanou verzi zpět</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play aktualizoval namountovanou aplikaci, takže patch už neplatí. Obnovení vrátí opatchovanou verzi zpět. Vypněte pro ni v Google Play automatickou aktualizaci, aby zůstala opatchovaná</string>
     <string name="app_links_title">Podporované webové odkazy</string>
     <string name="app_links_description">Na Androidu 12+ se odkazy na podporované domény ve výchozím nastavení otevírají ve vašem prohlížeči, pokud nejsou schváleny</string>
     <string name="app_links_unverified_banner_title">Neověřené webové odkazy</string>
@@ -487,8 +507,6 @@ Vnějní zóna (přerušovaná): může být ořezaná maskou spouštěčé - ud
     <string name="app_links_open_settings">Otevřít nastavení odkazů</string>
     <string name="app_links_repair_success">Odkazy aplikací byly úspěšně povoleny</string>
     <string name="app_links_repair_failed">Nepodařilo se automaticky povolit odkazy aplikací</string>
-    <string name="app_links_badge_enabled">Povoleno</string>
-    <string name="app_links_badge_disabled">Vypnuto</string>
     <string name="app_links_all_verified">Všechny podporované odkazy jsou nastaveny tak, aby se otevíraly v této aplikaci</string>
     <string name="app_links_fix">Opravit odkazy</string>
     <string name="configure">Nastavit</string>
@@ -519,10 +537,10 @@ Vnějní zóna (přerušovaná): může být ořezaná maskou spouštěčé - ud
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Aplikace</string>
     <string name="patcher_field_package">Balíček</string>
+    <string name="patcher_field_failed_patch">Neúspěšná oprava</string>
     <string name="patcher_field_source">Zdroj</string>
     <string name="patcher_field_split">Rozdělený APK</string>
     <string name="patcher_field_manager">Správce</string>
-    <string name="patcher_field_patcher">Záplatovač</string>
     <string name="patcher_field_runtime">Běhové prostředí</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Knihovny</string>
@@ -553,6 +571,7 @@ Vnějní zóna (přerušovaná): může být ořezaná maskou spouštěčé - ud
     <string name="patcher_installing_subtitle">Skoro hotovo! Připrav se na pořádnou jízdu! 🏎️</string>
     <string name="patcher_success_title">Hotovo! 🎉</string>
     <string name="patcher_success_subtitle">Vaše aplikace byla záplatována a nainstalována!</string>
+    <string name="patcher_mounted_subtitle">Vaše aplikace je opravena a připojena!</string>
     <string name="patcher_complete_title">Záplatování dokončeno! ✨</string>
     <string name="patcher_failed_title">Jejda! Něco se pokazilo</string>
     <string name="patcher_failed_dialog_title">Záplatování selhalo</string>
@@ -571,6 +590,7 @@ Vnějní zóna (přerušovaná): může být ořezaná maskou spouštěčé - ud
 
 Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="patcher_install_error_title">Chyba instalace</string>
+    <string name="patcher_mount_error_title">Chyba připojení</string>
     <string name="patcher_install_error_subtitle">Zkuste odinstalovat a nainstalovat znovu</string>
     <string name="patcher_ready_to_mount_subtitle">Stiskněte tlačítko níže pro zavedení</string>
     <string name="patcher_patches_excluded_for_installer">Není k dispozici pro tuto metodu instalace a je vyloučeno: %s</string>
@@ -598,7 +618,6 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="patcher_step_load_patches">Načítání oprav</string>
     <string name="patcher_step_prepare_split_apk">Spojování rozdělených souborů APK</string>
     <string name="patcher_step_unpack">Číst soubor APK</string>
-    <string name="patcher_step_group_patching">Záplatování</string>
     <string name="patcher_step_group_saving">Ukládání</string>
     <string name="patcher_step_write_patched">Zápis opraveného APK souboru</string>
     <string name="patcher_step_sign_apk">Podpis opraveného APK souboru</string>
@@ -610,6 +629,7 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="patcher_memory_adjustment_title">Nedostatek paměti</string>
     <string name="patcher_memory_adjustment_description">Proces patchování byl zastaven systémem při běhu s limitem paměti %1$d MB. Snížení limitu na %2$d MB zmenší jeho cíl a může umožnit dokončení běhu.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Proces patchování byl zastaven systémem při běhu s limitem paměti %1$d MB, což je již nejnižší dostupný limit. Zkuste patchovat s méně zdroji patchů nebo vyberte méně patchů.</string>
+    <string name="patcher_memory_adjustment_description_finished">Systém zastavil patchera při limitu paměti %1$d MB a ten se dokončil teprve při %2$d MB. Při spuštění s %2$d MB se tento ztracený pokus příště přeskočí</string>
     <string name="patcher_memory_adjustment_apply">Snížit na %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Záplatování probíhá…</string>
@@ -709,6 +729,9 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="settings_appearance_background_snow">Sníh</string>
     <string name="settings_appearance_background_grid">Mřížka</string>
     <string name="settings_appearance_background_particles">Částice</string>
+    <string name="settings_appearance_background_lava">Lávová lampa</string>
+    <string name="settings_appearance_background_halloween">Halloween</string>
+    <string name="settings_appearance_background_fireworks">Ohňostroj</string>
     <string name="settings_appearance_background_none">Žádné</string>
     <string name="settings_appearance_background_random">Náhodné</string>
     <string name="settings_appearance_background_random_interval_launch">Při spuštění</string>
@@ -716,6 +739,10 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="settings_appearance_background_random_interval_3days">Každé 3 dny</string>
     <string name="settings_appearance_parallax_effect">Paralaxový efekt</string>
     <string name="settings_appearance_parallax_effect_description">Plynulé posunování pozadí při naklánění zařízení</string>
+    <string name="settings_appearance_seasonal_themes">Sezónní motivy</string>
+    <string name="settings_appearance_seasonal_themes_description">Slavnostní pozadí a pozdravy během svátků</string>
+    <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">Pozadí %1$s je zapnuté do %2$s, dokud jsou sezónní motivy zapnuté</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Téma</string>
     <string name="settings_appearance_theme_mode">Režim tématu</string>
@@ -776,9 +803,24 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="settings_appearance_app_icon_default">Výchozí</string>
     <string name="settings_appearance_app_icon_light_2">Nebeský</string>
     <string name="settings_appearance_app_icon_light_3">Západ slunce</string>
-    <string name="settings_appearance_app_icon_dark_1">Oceán</string>
+    <string name="settings_appearance_app_icon_light_4">Levandulová</string>
+    <string name="settings_appearance_app_icon_light_5">Ledovcová</string>
+    <string name="settings_appearance_app_icon_light_6">Mlžná</string>
+    <string name="settings_appearance_app_icon_light_7">Písková</string>
+    <string name="settings_appearance_app_icon_dark_1">Tyrkysová</string>
     <string name="settings_appearance_app_icon_dark_2">Prázdnota</string>
-    <string name="settings_appearance_app_icon_dark_3">Indigo</string>
+    <string name="settings_appearance_app_icon_dark_3">Švestková</string>
+    <string name="settings_appearance_app_icon_dark_4">Půlnoční</string>
+    <string name="settings_appearance_app_icon_dark_5">Břidlicová</string>
+    <string name="settings_appearance_app_icon_accent_1">Aurora</string>
+    <string name="settings_appearance_app_icon_accent_2">Inkoustová</string>
+    <string name="settings_appearance_app_icon_accent_3">Papírová</string>
+    <string name="settings_appearance_app_icon_accent_4">Soumraková</string>
+    <string name="settings_appearance_app_icon_background">Pozadí</string>
+    <string name="settings_appearance_app_icon_mark">Logo</string>
+    <string name="settings_appearance_app_icon_mark_color">Barva</string>
+    <string name="settings_appearance_app_icon_mark_white">Bílá</string>
+    <string name="settings_appearance_app_icon_mark_black">Černá</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Změnit ikonu aplikace?</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Změnit na &lt;b&gt;%s&lt;/b&gt; a restartovat?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -816,7 +858,6 @@ Záplaty tím nejsou ovlivněny: povolte předběžné záplaty pro každý zdro
     <string name="external_batch_patch_trust_caller">Vždy povolit tuto aplikaci</string>
     <string name="external_batch_patch_unknown_caller">Neznámá aplikace</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Dostupná aktualizace Morphe</string>
     <string name="notification_bundle_update_title">Nové záplaty k dispozici</string>
     <string name="notification_update_text">Verze %s je připravena ke stažení</string>
     <string name="notification_bundle_update_text_unversioned">Klepněte pro otevření Morphe a aktualizaci</string>
@@ -827,8 +868,11 @@ Záplaty tím nejsou ovlivněny: povolte předběžné záplaty pro každý zdro
     <string name="notification_channel_manager_updates_description">Oznámení o nových verzích Morphe</string>
     <string name="notification_channel_patch_updates">Opravné aktualizace</string>
     <string name="notification_channel_patch_updates_description">Oznámení o nových opravných verzích</string>
-    <string name="notification_channel_patcher">Záplatování</string>
     <string name="notification_channel_patcher_description">Zobrazuje se během záplatování aplikace Morphe na pozadí</string>
+    <string name="notification_channel_mounted_apps">Namountované aplikace</string>
+    <string name="notification_channel_mounted_apps_description">Když jiná verze nahradila namountovanou aplikaci a její patch již nelze použít</string>
+    <string name="notification_mount_replaced_title">Aplikace %1$s již není opatchovaná</string>
+    <string name="notification_mount_replaced_text">v%1$s nahradila opatchovanou verzi v%2$s. Otevřete Morphe a obnovte ji</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertní nastavení</string>
     <string name="settings_advanced_expert_mode">Režim expertů</string>
@@ -1245,9 +1289,7 @@ Podrobnosti: %2$s"</string>
     <string name="selected">Vybráno</string>
     <string name="not_selected">Nevybráno</string>
     <string name="select_all">Vybrat vše</string>
-    <string name="select_all_done">Vše vybráno</string>
     <string name="deselect_all">Zrušit výběr všech</string>
-    <string name="deselect_all_done">Vše zrušeno</string>
     <string name="reorder_list">Změnit pořadí seznamu</string>
     <string name="reorder_list_hint">Přetáhněte pro změnu pořadí</string>
     <string name="reorder_done">Pořadí uloženo</string>
@@ -1283,6 +1325,7 @@ Podrobnosti: %2$s"</string>
     <string name="unmount">Odpojit</string>
     <string name="unmounted">Odpojeno</string>
     <string name="remount">Přemontovat</string>
+    <string name="restore">Obnovit</string>
     <string name="share">Sdílet</string>
     <string name="install">Nainstalovat</string>
     <string name="installed">Nainstalováno</string>
@@ -1303,6 +1346,8 @@ Podrobnosti: %2$s"</string>
     <string name="sources">Zdroje</string>
     <string name="installing_ellipsis">Instaluje se…</string>
     <string name="mounting_ellipsis">Připojování…</string>
+    <string name="mount_stage_restoring_stock">Obnovuji původní…</string>
+    <string name="mount_stage_copying">Kopíruji…</string>
     <string name="unmounting_ellipsis">Odpojování…</string>
     <string name="importing_ellipsis">Importování…</string>
     <string name="imported_successfully">Importováno úspěšně</string>
@@ -1350,7 +1395,6 @@ Podrobnosti: %2$s"</string>
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">Toto vydání se stále publikuje. Zkuste to znovu za pár minut</string>
     <string name="update_download_missing">Stažená aktualizace již není k dispozici. Stáhněte ji znovu.</string>
-    <string name="download_manager_failed">Selhání stahování aktualizace: %s</string>
     <string name="failed_to_check_updates">Selhání kontroly aktualizací: %s</string>
     <string name="failed_to_download_update">Selhání stahování aktualizace: %s</string>
     <string name="download_confirmation_metered">"Používáte měřené připojení a mohou se vztahovat poplatky za data od vašeho poskytovatele služeb.

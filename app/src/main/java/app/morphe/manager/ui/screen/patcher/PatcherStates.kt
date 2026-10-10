@@ -63,6 +63,7 @@ import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREF
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.InstallViewModel.InstallState
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
+import app.morphe.manager.ui.viewmodel.labelRes
 import app.morphe.manager.util.contrastingContent
 import app.morphe.manager.util.withVersionPrefix
 
@@ -74,6 +75,8 @@ data class PatcherErrorInfo(
     val packageName: String,
     val appVersion: String,
     val patchCount: Int,
+    /** The patch the run failed on, null when it failed outside of one. */
+    val failedPatch: String?,
     val bundles: List<PatchSourceRef>,
     /** Null where the setting the run used is no longer known, as in a batch run. */
     val stripsNativeLibs: Boolean?
@@ -184,15 +187,15 @@ private fun installStatus(
 ): ResultStatus = when {
     installState is InstallState.Installing -> ResultStatus(
         tone = SemanticTone.Neutral,
-        icon = Icons.Outlined.InstallMobile,
-        label = R.string.installing_ellipsis,
+        icon = if (usingMountInstall) Icons.Outlined.Link else Icons.Outlined.InstallMobile,
+        label = if (usingMountInstall) R.string.mounting_ellipsis else R.string.installing_ellipsis,
         subtitle = R.string.patcher_installing_subtitle
     )
     installedPackageName != null || installState is InstallState.Installed -> ResultStatus(
         tone = SemanticTone.Success,
         icon = Icons.Default.Check,
-        label = R.string.installed,
-        subtitle = R.string.patcher_success_subtitle
+        label = if (usingMountInstall) R.string.mounted else R.string.installed,
+        subtitle = if (usingMountInstall) R.string.patcher_mounted_subtitle else R.string.patcher_success_subtitle
     )
     installState is InstallState.Conflict -> ResultStatus(
         tone = SemanticTone.Error,
@@ -203,7 +206,7 @@ private fun installStatus(
     installState is InstallState.Error -> ResultStatus(
         tone = SemanticTone.Error,
         icon = Icons.Default.Close,
-        label = R.string.patcher_install_error_title,
+        label = if (usingMountInstall) R.string.patcher_mount_error_title else R.string.patcher_install_error_title,
         subtitle = R.string.patcher_install_error_subtitle
     )
     else -> ResultStatus(
@@ -212,6 +215,28 @@ private fun installStatus(
         label = R.string.patched,
         // The install button says as much, so only mounting, which works differently, is explained
         subtitle = R.string.patcher_ready_to_mount_subtitle.takeIf { usingMountInstall }
+    )
+}
+
+/**
+ * The way back to the result screen from the logs, told as that screen's own status and as briefly
+ * as the bar allows, so a failure reads as one word whatever went wrong.
+ */
+fun resultButton(
+    installState: InstallState,
+    installedPackageName: String?,
+    usingMountInstall: Boolean
+): ResultButton {
+    val status = installStatus(installState, installedPackageName, usingMountInstall)
+    return ResultButton(
+        label = if (status.failed) R.string.failed else status.label,
+        icon = status.icon,
+        tone = when (status.tone) {
+            SemanticTone.Neutral -> BottomActionTone.Neutral
+            SemanticTone.Error -> BottomActionTone.Destructive
+            else -> BottomActionTone.Accent
+        },
+        busy = installState is InstallState.Installing
     )
 }
 
@@ -233,27 +258,37 @@ private val ExceptionPackage = Regex("""^(?:[a-z_][\w$]*\.)+(?=[A-Z][\w$]*:)""")
  */
 private fun String.withShortExceptionName(): String = replaceFirst(ExceptionPackage, "")
 
+/** What a finished run patched, which the result screen heads itself with either way it ended. */
+data class PatchedAppSummary(
+    val packageName: String,
+    val version: String?,
+    val patchCount: Int,
+    val sources: List<PatchSourceRef>
+)
+
+/** What the success screen's install controls do with the patched app. */
+class InstallResultActions(
+    val onInstall: () -> Unit,
+    val onUninstall: (packageName: String) -> Unit,
+    val onIgnoreSignatureMismatch: () -> Unit,
+    val onOpen: () -> Unit,
+    val onShowInstallError: () -> Unit
+)
+
 /**
  * Patching success screen.
  */
 @Composable
 fun PatchingSuccess(
-    packageName: String,
-    version: String?,
-    patchCount: Int,
-    sources: List<PatchSourceRef>,
+    summary: PatchedAppSummary,
     installState: InstallState,
     installedPackageName: String?,
     usingMountInstall: Boolean,
+    installActions: InstallResultActions,
     excludedPatches: List<String> = emptyList(),
     isExpertMode: Boolean = false,
     showBackToGameHint: Boolean = false,
     onConfigureAppLinks: (() -> Unit)? = null,
-    onInstall: () -> Unit,
-    onUninstall: (String) -> Unit,
-    onIgnoreSignatureMismatch: () -> Unit,
-    onOpen: () -> Unit,
-    onShowInstallError: () -> Unit,
     onHomeClick: () -> Unit,
     onLogsClick: () -> Unit,
     onSaveClick: () -> Unit,
@@ -263,17 +298,14 @@ fun PatchingSuccess(
 
     ResultScreen(
         status = status,
-        packageName = packageName,
-        version = version,
-        patchCount = patchCount,
-        sources = sources,
+        summary = summary,
         notices = {
             ResultNotice(
                 text = (installState as? InstallState.Error)?.message,
                 tone = SemanticTone.Error,
                 icon = Icons.Outlined.ErrorOutline,
                 maxLines = ERROR_NOTICE_LINES,
-                overflowAction = NoticeAction(stringResource(R.string.patcher_error_details), onShowInstallError)
+                overflowAction = NoticeAction(stringResource(R.string.patcher_error_details), installActions.onShowInstallError)
             )
             ResultNotice(
                 text = stringResource(R.string.patcher_conflict_hint).takeIf { installState is InstallState.Conflict },
@@ -299,10 +331,7 @@ fun PatchingSuccess(
                 installState = installState,
                 failed = status.failed,
                 usingMountInstall = usingMountInstall,
-                onInstall = onInstall,
-                onUninstall = onUninstall,
-                onIgnoreSignatureMismatch = onIgnoreSignatureMismatch,
-                onOpen = onOpen
+                actions = installActions
             )
         },
         bottomBar = { horizontalPadding ->
@@ -327,25 +356,22 @@ fun PatchingSuccess(
  */
 @Composable
 fun PatchingFailed(
-    packageName: String,
-    version: String?,
-    patchCount: Int,
-    sources: List<PatchSourceRef>,
+    summary: PatchedAppSummary,
     errorMessage: String?,
+    failedPatch: String?,
     onHomeClick: () -> Unit,
     onErrorClick: () -> Unit,
     onChangePatchesClick: (() -> Unit)? = null
 ) {
     ResultScreen(
         status = PatchingFailedStatus,
-        packageName = packageName,
-        version = version,
-        patchCount = patchCount,
-        sources = sources,
+        summary = summary,
         notices = {
             // The button under it opens the whole error, so a long one is only cut short here
             ResultNotice(
                 text = errorMessage?.withShortExceptionName()?.takeIf { it.isNotBlank() },
+                // A stack trace rarely names the patch behind it, which is what the user can act on
+                title = failedPatch?.let { stringResource(R.string.failed_to_execute_patch, it) },
                 tone = SemanticTone.Error,
                 icon = Icons.Outlined.ErrorOutline,
                 maxLines = ERROR_NOTICE_LINES
@@ -390,10 +416,7 @@ fun PatchingFailed(
 @Composable
 private fun ResultScreen(
     status: ResultStatus,
-    packageName: String,
-    version: String?,
-    patchCount: Int,
-    sources: List<PatchSourceRef>,
+    summary: PatchedAppSummary,
     notices: @Composable ColumnScope.() -> Unit,
     actions: @Composable () -> Unit,
     bottomBar: @Composable ColumnScope.(horizontalPadding: Dp) -> Unit
@@ -402,9 +425,9 @@ private fun ResultScreen(
 
     ResultLayout(
         windowSize = windowSize,
-        header = { ResultHeader(status, packageName, windowSize) },
+        header = { ResultHeader(status, summary.packageName, windowSize) },
         details = {
-            ResultSummary(version, patchCount, sources)
+            ResultSummary(summary.version, summary.patchCount, summary.sources)
             notices()
         },
         actions = actions,
@@ -694,6 +717,7 @@ private fun BackToGameCallout(visible: Boolean) {
 private fun ResultNotice(
     text: String?,
     tone: SemanticTone,
+    title: String? = null,
     icon: ImageVector,
     maxLines: Int = Int.MAX_VALUE,
     overflowAction: NoticeAction? = null,
@@ -709,6 +733,7 @@ private fun ResultNotice(
         if (text != null) shown = text
         Notice(
             text = shown,
+            title = title,
             tone = tone,
             icon = icon,
             maxLines = maxLines,
@@ -726,10 +751,7 @@ private fun InstallActions(
     installState: InstallState,
     failed: Boolean,
     usingMountInstall: Boolean,
-    onInstall: () -> Unit,
-    onUninstall: (String) -> Unit,
-    onIgnoreSignatureMismatch: () -> Unit,
-    onOpen: () -> Unit
+    actions: InstallResultActions
 ) {
     val isInstalling = installState is InstallState.Installing
     val isInstalled = installState is InstallState.Installed
@@ -743,7 +765,11 @@ private fun InstallActions(
         ResultActionButton(
             text = stringResource(
                 when {
-                    isInstalling -> if (usingMountInstall) R.string.mounting_ellipsis else R.string.installing_ellipsis
+                    isInstalling -> if (usingMountInstall) {
+                        installState.stage?.labelRes ?: R.string.mounting_ellipsis
+                    } else {
+                        R.string.installing_ellipsis
+                    }
                     isInstalled -> R.string.open
                     conflictPackageName != null -> R.string.uninstall
                     isError -> R.string.retry
@@ -762,9 +788,9 @@ private fun InstallActions(
             busy = isInstalling,
             onClick = {
                 when {
-                    isInstalled -> onOpen()
-                    conflictPackageName != null -> onUninstall(conflictPackageName)
-                    else -> onInstall()
+                    isInstalled -> actions.onOpen()
+                    conflictPackageName != null -> actions.onUninstall(conflictPackageName)
+                    else -> actions.onInstall()
                 }
             }
         )
@@ -776,7 +802,7 @@ private fun InstallActions(
         ) {
             AppDialogOutlinedButton(
                 text = stringResource(R.string.install_ignore_signature),
-                onClick = onIgnoreSignatureMismatch,
+                onClick = actions.onIgnoreSignatureMismatch,
                 modifier = Modifier.fillMaxWidth()
             )
         }
@@ -826,7 +852,8 @@ private fun ResultActionButton(
             ThemedIcon(icon = icon, tint = LocalContentColor.current)
         }
         Spacer(Modifier.width(12.dp))
-        Text(
+        // Follows a mount install through its steps with a fade rather than a jump
+        CrossfadeText(
             text = text,
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.SemiBold,

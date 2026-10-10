@@ -1,3 +1,13 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ *
+ * Original hard forked code:
+ * https://github.com/Jman-Github/Universal-ReVanced-Manager/blob/597b3173a004f5a9aae54326046dd7fd4c5b7777/app/src/main/java/app/revanced/manager/ui/viewmodel/InstalledAppInfoViewModel.kt
+ *
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
+ */
+
 package app.morphe.manager.ui.viewmodel
 
 import android.app.Application
@@ -91,6 +101,10 @@ class InstalledAppInfoViewModel(
     var isAppDeleted by mutableStateOf(false)
         private set
     var isInstallStateNotPatched by mutableStateOf(false)
+        private set
+
+    /** Whether the unpatched install that replaced the record came from Google Play. */
+    var isReplacedByPlayStore by mutableStateOf(false)
         private set
     var isInstallStateUnknown by mutableStateOf(false)
         private set
@@ -301,6 +315,8 @@ class InstalledAppInfoViewModel(
         )
         isAppDeleted = trackedPresentation.isDeleted
         isInstallStateNotPatched = trackedPresentation.isNotPatched
+        isReplacedByPlayStore = isInstallStateNotPatched &&
+                pm.getInstallerPackageName(app.currentPackageName) == PLAY_STORE_INSTALLER_PACKAGE
         isInstallStateUnknown = trackedPresentation.isUnknown
 
         canRemoveRecord = canRemoveTrackedRecord(app.installType, trackedPatchState, hasSavedCopy)

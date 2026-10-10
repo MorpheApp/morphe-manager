@@ -39,8 +39,9 @@ import kotlin.math.min
 import kotlin.random.Random
 import kotlin.time.Duration.Companion.milliseconds
 
-private const val BLOCKS_COLS = 12
+private const val BLOCKS_COLS = 11
 private const val BLOCKS_ROWS = 18
+internal const val BLOCKS_ASPECT_RATIO = BLOCKS_COLS.toFloat() / BLOCKS_ROWS
 
 /** How long a completed row stays lit before the stack falls into it. */
 private val BLOCKS_CLEAR_FLASH = 180.milliseconds
@@ -298,14 +299,16 @@ private fun BlocksCanvas(state: BlocksGameState, modifier: Modifier) {
             }
             .pointerInput(Unit) {
                 // A drag walks the piece cell by cell, so the same swipe covers the same
-                // number of columns whatever the screen density
-                val step = min(size.width / BLOCKS_COLS, size.height / BLOCKS_ROWS).toFloat()
+                // number of columns whatever the screen density. Read per gesture, as the
+                // board rescales whenever the panels above it change height
+                var step = 0f
                 var drag = Offset.Zero
                 var total = Offset.Zero
                 var isVertical: Boolean? = null
                 var piece = 0
                 detectDragGestures(
                     onDragStart = {
+                        step = min(size.width / BLOCKS_COLS, size.height / BLOCKS_ROWS).toFloat()
                         drag = Offset.Zero
                         total = Offset.Zero
                         isVertical = null

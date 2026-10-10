@@ -66,6 +66,9 @@
     <plurals name="sources_management_subtitle">
         <item quantity="other">已安装 %s 个源</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="other">%1$s · %2$s 已筛选</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="other">%s 个隐藏的应用</item>
     </plurals>

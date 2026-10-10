@@ -46,11 +46,8 @@ data class MppManifest(
 )
 
 /**
- * Convert content:// URI to file path.
- * Uses [DocumentsContract] to extract the document ID, then maps known storage
- * prefixes to real paths. Only works for primary internal storage URIs and raw-path
- * Downloads URIs - returns the decoded URI string as a fallback for anything else.
- * Prefer using Uri directly with ContentResolver where possible.
+ * The file-system path behind a URI, for options the patcher reads by path. Only internal storage
+ * and raw Downloads URIs map to one; anything else comes back as the decoded URI.
  */
 fun Uri.toFilePath(): String {
     // file:// URIs from the custom file picker - extract the path directly
@@ -77,11 +74,7 @@ fun Uri.toFilePath(): String {
     }
 }
 
-/**
- * Resolves the display name of a URI using [ContentResolver].
- * For content:// URIs queries the provider via [OpenableColumns.DISPLAY_NAME].
- * Falls back to the last path segment for file:// URIs or if the provider does not expose a name.
- */
+/** The name a URI is shown under, or its last path segment where the provider gives none. */
 fun Uri.displayName(contentResolver: ContentResolver): String? =
     runCatching {
         contentResolver.query(this, arrayOf(OpenableColumns.DISPLAY_NAME), null, null, null)
@@ -91,25 +84,17 @@ fun Uri.displayName(contentResolver: ContentResolver): String? =
             }
     }.getOrNull() ?: lastPathSegment
 
-/**
- * Returns true if the URI refers to a .mpp patch bundle file.
- * Delegates entirely to [displayName] which already handles both file:// and content://
- * with a lastPathSegment fallback.
- */
+/** Whether the URI names a .mpp patch bundle. */
 fun Uri.hasMppExtension(contentResolver: ContentResolver): Boolean =
     displayName(contentResolver)?.endsWith(".mpp", ignoreCase = true) == true
 
-/**
- * Returns true if the URI refers to an APK-family file.
- * Used to filter generic octet-stream shares down to only recognized APK archives.
- */
+/** Whether the URI names an APK-family file, so generic octet-stream shares can be told apart. */
 fun Uri.hasApkExtension(contentResolver: ContentResolver): Boolean =
     displayName(contentResolver)?.substringAfterLast('.', "")?.lowercase() in APK_EXTENSIONS
 
 /**
- * Reads and parses the META-INF/MANIFEST.MF entry from a .mpp patch bundle URI.
- * Returns null if the entry is missing, the URI is unreadable, or any IO error occurs.
- * Values equal to "na" (case-insensitive) are treated as absent.
+ * The manifest of a .mpp patch bundle, or null when it cannot be read. Values of "na" in any case
+ * count as absent.
  */
 fun Uri.readMppManifest(contentResolver: ContentResolver): MppManifest? =
     runCatching {
@@ -145,24 +130,8 @@ fun Uri.readMppManifest(contentResolver: ContentResolver): MppManifest? =
     }.getOrNull()
 
 /**
- * Plain SAF folder picker. Use this when writing files via [androidx.documentfile.provider.DocumentFile]/[ContentResolver].
- * No storage permission is required because the system grants temporary URI access.
- */
-@Composable
-fun rememberFolderPicker(onFolderPicked: (Uri) -> Unit): () -> Unit {
-    val launcher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.OpenDocumentTree()
-    ) { uri: Uri? -> uri?.let { onFolderPicked(it) } }
-    return remember { { launcher.launch(null) } }
-}
-
-/**
- * Folder picker launcher with automatic permission handling.
- * Use this when storing the picked folder PATH as a patch option value (the patcher will
- * later read files from it via the File API, which requires MANAGE_EXTERNAL_STORAGE).
- * Uses Morphe's built-in [FilePicker] on TV and when [PreferencesManager.useCustomFilePicker] is enabled.
- * On phones/tablets without the custom picker, falls back to [ActivityResultContracts.OpenDocumentTree].
- * Storage permission is always required first; if denied, the picker is not shown.
+ * Folder picker for a folder used by path, as the patcher reads it through the File API. Storage
+ * access comes first, then Morphe's own [FilePicker] where it is chosen or on TV, else the system one.
  */
 @Composable
 fun rememberFolderPickerWithPermission(
@@ -237,14 +206,7 @@ data class PathValidationResult(
     }
 }
 
-/**
- * Scans all patch options for string values that look like absolute file-system paths
- * and verifies each one exists and is readable.
- *
- * @param options The full [Options] map (bundleUid → patchName → optionKey → value).
- * @return A list of [PathValidationResult] entries for every path that failed validation.
- *         An empty list means all paths are accessible.
- */
+/** Every option value that is an absolute path the app cannot use, empty when all of them can be. */
 fun validateOptionPaths(options: Map<Int, Map<String, Map<String, Any?>>>): List<PathValidationResult> {
     val failures = mutableListOf<PathValidationResult>()
     for ((_, patchOptions) in options) {
@@ -272,14 +234,8 @@ fun validateOptionPaths(options: Map<Int, Map<String, Map<String, Any?>>>): List
 }
 
 /**
- * [this] without the options [failures] names, so a path that cannot be read is never handed to
- * the patcher and the patch falls back to the default it declares instead of failing the run.
- *
- * The failures carry no bundle, because a path is just as unreadable whichever bundle asked for
- * it, so the option is dropped from every bundle that set it.
- *
- * What is left empty is kept rather than pruned: a saved configuration is written per bundle by
- * replacing all of it, so a bundle that loses its last option has to stay for that to reach it.
+ * [this] without the options [failures] names, from every bundle, so the patch falls back to its own
+ * default. Emptied bundles stay, as a saved configuration is replaced per bundle.
  */
 fun Options.withoutFailingPaths(failures: List<PathValidationResult>): Options {
     if (failures.isEmpty()) return this
@@ -293,38 +249,20 @@ fun Options.withoutFailingPaths(failures: List<PathValidationResult>): Options {
     }
 }
 
-/**
- * Whether [folder] is there but closed to the app, which is storage it is not allowed into.
- *
- * Only the folder a path sits in is asked, because a run fails over the folder it was pointed
- * at rather than over where that folder happens to live.
- */
-private fun isClosedToApp(folder: File?): Boolean {
-    if (folder == null) return false
+/** Whether [folder] is there but closed to the app, which is storage it is not allowed into. */
+private fun isClosedToApp(folder: File?): Boolean =
+    folder != null && folder.exists() && !folder.canRead()
 
-    return folder.exists() && !folder.canRead()
-}
-
-/**
- * Returns true if the device is an Android TV or Google TV.
- */
+/** Whether the device is an Android TV or Google TV. */
 fun Context.isAndroidTv(): Boolean {
     val uiModeManager = getSystemService(UiModeManager::class.java)
     return uiModeManager?.currentModeType == Configuration.UI_MODE_TYPE_TELEVISION
 }
 
 /**
- * Uses Morphe's built-in [FilePicker] on TV and when [PreferencesManager.useCustomFilePicker] is enabled.
- * Falls back to [ActivityResultContracts.GetContent] on phones/tablets.
- * Storage permission is requested automatically before showing the custom picker.
- *
- * [customPickerMimeTypes] overrides the MIME types passed to the custom picker only,
- * allowing tighter extension filtering without affecting the system picker.
- * Defaults to [mimeTypes] when not specified.
- *
- * [onResult] is called exactly once per launch, with null when the user backed out or denied
- * storage access. Callers keep track of what a pending pick is for, and a launch that never
- * reports back would leave that state pointing at a request that is already over.
+ * File picker that is Morphe's own [FilePicker] where it is chosen or on TV, else the system one.
+ * [customPickerMimeTypes] filters the own picker more tightly. [onResult] is called exactly once
+ * per launch, with null when nothing was picked, so callers never wait on a finished request.
  */
 @Composable
 fun rememberAdaptiveFilePicker(

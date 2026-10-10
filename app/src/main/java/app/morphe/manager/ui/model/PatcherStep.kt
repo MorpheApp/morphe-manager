@@ -1,3 +1,13 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ *
+ * Original hard forked code:
+ * https://github.com/Jman-Github/Universal-ReVanced-Manager/blob/597b3173a004f5a9aae54326046dd7fd4c5b7777/app/src/main/java/app/revanced/manager/ui/model/PatcherStep.kt
+ *
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
+ */
+
 package app.morphe.manager.ui.model
 
 import android.os.Parcelable
@@ -7,7 +17,7 @@ import kotlinx.parcelize.Parcelize
 
 enum class StepCategory(@param:StringRes val displayName: Int) {
     PREPARING(R.string.patcher_step_group_preparing),
-    PATCHING(R.string.patcher_step_group_patching),
+    PATCHING(R.string.patching),
     SAVING(R.string.patcher_step_group_saving)
 }
 

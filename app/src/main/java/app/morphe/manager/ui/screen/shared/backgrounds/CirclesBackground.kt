@@ -5,17 +5,14 @@
 
 package app.morphe.manager.ui.screen.shared.backgrounds
 
-import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalContext
-import kotlinx.coroutines.launch
 import kotlin.math.PI
 import kotlin.math.sin
 
@@ -36,7 +33,6 @@ fun CirclesBackground(
     val secondaryColor = MaterialTheme.colorScheme.secondary
     val tertiaryColor  = MaterialTheme.colorScheme.tertiary
     val context        = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
 
     val parallaxState = rememberParallaxState(
         enableParallax = enableParallax,
@@ -46,24 +42,9 @@ fun CirclesBackground(
 
     val time = rememberAnimatedTime(speedMultiplier)
 
-    // burstProgress 0→1 drives radius scale and alpha fade for each circle.
-    // Snaps back to 0f after completion so circles return to normal state.
-    val burstProgress = remember { Animatable(0f) }
-
-    CompletionEffect(patchingCompleted) {
-        coroutineScope.launch {
-            burstProgress.snapTo(0f)
-            burstProgress.animateTo(
-                targetValue   = 1f,
-                animationSpec = tween(durationMillis = 1100, easing = FastOutSlowInEasing)
-            )
-            // Smooth return - animateTo(0f) so radius and alpha ease back to normal
-            burstProgress.animateTo(
-                targetValue   = 0f,
-                animationSpec = tween(durationMillis = 450, easing = FastOutSlowInEasing)
-            )
-        }
-    }
+    // burstProgress 0→1 drives radius scale and alpha fade for each circle,
+    // then eases back so circles return to normal size
+    val burstProgress = rememberCompletionPulse(patchingCompleted, riseMillis = 1100, fallMillis = 450)
 
     Canvas(modifier = modifier.fillMaxSize()) {
         val t     = time.value
@@ -81,12 +62,12 @@ fun CirclesBackground(
         // Circle 5 - small bottom left
         // Circle 6 - bottom center
         val circles = listOf(
-            CircleData(0.20f  + 0.05f  * sin(t * twoPi / 8000f), 0.225f + 0.025f * sin(t * twoPi / 7000f), 400f, primaryColor,   0.05f,  0.8f),
-            CircleData(0.85f  + 0.03f  * sin(t * twoPi / 9000f), 0.185f + 0.035f * sin(t * twoPi / 6500f), 280f, tertiaryColor,  0.035f, 0.6f),
-            CircleData(0.715f + 0.035f * sin(t * twoPi / 7500f), 0.44f  + 0.04f  * sin(t * twoPi / 8500f), 200f, tertiaryColor,  0.04f,  0.4f),
-            CircleData(0.815f + 0.035f * sin(t * twoPi / 9500f), 0.785f + 0.035f * sin(t * twoPi / 7200f), 320f, secondaryColor, 0.035f, 0.7f),
-            CircleData(0.24f  + 0.04f  * sin(t * twoPi / 8200f), 0.765f + 0.035f * sin(t * twoPi / 6800f), 180f, primaryColor,   0.04f,  0.5f),
-            CircleData(0.525f + 0.025f * sin(t * twoPi / 8800f), 0.895f + 0.025f * sin(t * twoPi / 7800f), 220f, secondaryColor, 0.04f,  0.6f),
+            CircleData(0.20f  + 0.05f  * sin(t * twoPi / 8000f), 0.225f + 0.025f * sin(t * twoPi / 7000f), 133f, primaryColor,   0.05f,  0.8f),
+            CircleData(0.85f  + 0.03f  * sin(t * twoPi / 9000f), 0.185f + 0.035f * sin(t * twoPi / 6500f), 93f,  tertiaryColor,  0.035f, 0.6f),
+            CircleData(0.715f + 0.035f * sin(t * twoPi / 7500f), 0.44f  + 0.04f  * sin(t * twoPi / 8500f), 67f,  tertiaryColor,  0.04f,  0.4f),
+            CircleData(0.815f + 0.035f * sin(t * twoPi / 9500f), 0.785f + 0.035f * sin(t * twoPi / 7200f), 107f, secondaryColor, 0.035f, 0.7f),
+            CircleData(0.24f  + 0.04f  * sin(t * twoPi / 8200f), 0.765f + 0.035f * sin(t * twoPi / 6800f), 60f,  primaryColor,   0.04f,  0.5f),
+            CircleData(0.525f + 0.025f * sin(t * twoPi / 8800f), 0.895f + 0.025f * sin(t * twoPi / 7800f), 73f,  secondaryColor, 0.04f,  0.6f),
         )
 
         circles.forEachIndexed { index, circle ->
@@ -105,19 +86,19 @@ fun CirclesBackground(
             // Filled circle
             drawCircle(
                 color  = circle.color.copy(alpha = circle.alpha * burstAlpha),
-                radius = circle.radius * radiusScale,
+                radius = circle.radius * density * radiusScale,
                 center = center
             )
 
             // During burst: stroke ring that expands further for a layered depth look
             if (bp > 0f && localBp > 0f) {
-                val strokeRadius = circle.radius * (1f + localBp * 3.5f)
+                val strokeRadius = circle.radius * density * (1f + localBp * 3.5f)
                 val strokeAlpha  = ((1f - localBp) * 0.5f).coerceIn(0f, 1f)
                 drawCircle(
                     color  = circle.color.copy(alpha = strokeAlpha),
                     radius = strokeRadius,
                     center = center,
-                    style  = Stroke(width = 4f)
+                    style  = Stroke(width = 1.3f * density)
                 )
             }
         }
@@ -127,7 +108,7 @@ fun CirclesBackground(
 private data class CircleData(
     val x: Float,
     val y: Float,
-    val radius: Float,
+    val radius: Float, // In dp
     val color: androidx.compose.ui.graphics.Color,
     val alpha: Float,
     val depth: Float // Depth for parallax effect

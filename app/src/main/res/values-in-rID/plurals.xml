@@ -66,6 +66,9 @@
     <plurals name="sources_management_subtitle">
         <item quantity="other">%s sumber terpasang</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="other">%1$s · %2$s difilter</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="other">%s aplikasi disembunyikan</item>
     </plurals>

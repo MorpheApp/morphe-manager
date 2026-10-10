@@ -123,6 +123,26 @@
     <string name="home_greeting_super_late_3">Σε αυτό το σημείο, καλύτερα να μείνεις ξύπνιος και να κάνεις ενημερώσεις</string>
     <string name="home_greeting_super_late_4">Εσύ και οι servers, και οι δύο ξύπνιοι</string>
     <string name="home_greeting_super_late_5">Νυχτερινός και παραγωγικός</string>
+    <!-- Halloween greetings, shown instead of the ones above around October 31 -->
+    <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_1">Κόλπο ή ενημέρωση;</string>
+    <string name="home_greeting_halloween_2">Κανένα φάντασμα σε αυτά τα APK, το ελέγξαμε</string>
+    <string name="home_greeting_halloween_3">Τρομακτική σεζόν, φρέσκες ενημερώσεις</string>
+    <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
+    <string name="home_greeting_halloween_4">Κάτι τρομερό έρχεται με ενημερώσεις</string>
+    <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
+    <string name="home_greeting_winter_1">Καλές γιορτές, φρέσκες ενημερώσεις</string>
+    <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
+    <string name="home_greeting_winter_2">Ας χιονίσει, ας ενημερώσει</string>
+    <string name="home_greeting_winter_3">Νέα χρονιά, νέες ενημερώσεις</string>
+    <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
+    <string name="home_greeting_winter_4">Με ενημερώσεις μέσα στο χιόνι</string>
+    <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">Καλή χρονιά!</string>
+    <string name="home_greeting_new_year_2">Αντίστροφη μέτρηση για φρέσκες ενημερώσεις</string>
+    <string name="home_greeting_new_year_3">Νέα χρονιά, ίδιες εφαρμογές χωρίς διαφημίσεις</string>
+    <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Έξω οι παλιές εκδόσεις, μέσα οι νέες</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Πηγές τροποποιήσεων</string>
     <string name="sources_search">Αναζήτηση πηγών και επιδιορθώσεων</string>
@@ -272,7 +292,6 @@
     <string name="home_use_installed_app">Χρήση εγκατεστημένης εφαρμογής</string>
     <string name="home_installed_app_picker_title">Εγκατεστημένες εφαρμογές</string>
     <string name="home_installed_app_picker_empty">Δεν βρέθηκαν εφαρμογές</string>
-    <string name="home_installed_app_picker_filter_all">Όλες οι εφαρμογές</string>
     <string name="home_installed_app_picker_filter_user">Μόνο εφαρμογές χρήστη</string>
     <string name="home_installed_app_picker_filter_system">Μόνο εφαρμογές συστήματος</string>
     <string name="home_invalid_apk_unreadable">Δεν ήταν δυνατή η ανάγνωση του αρχείου. Ελέγξτε ότι ο \'Εξωτερικός χώρος αποθήκευσης\' δεν περιορίζεται από την μπαταρία</string>
@@ -281,7 +300,6 @@
     <string name="home_invalid_apk_io_error">Απέτυχε το άνοιγμα του αρχείου. Παρακαλώ προσπαθήστε ξανά</string>
     <string name="home_external_apk_expert_mode_required">Αυτή η λειτουργία είναι διαθέσιμη μόνο στην Εξειδικευμένη λειτουργία</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Εξειδικευμένη λειτουργία</string>
     <string name="expert_mode_search">Αναζήτηση τροποποιήσεων</string>
     <string name="expert_mode_disable_all">Απενεργοποίηση όλων</string>
     <string name="expert_mode_disable_all_done">Όλες οι διορθώσεις απενεργοποιήθηκαν</string>
@@ -372,44 +390,43 @@
     <string name="adaptive_icon_select_image">Επιλογή εικόνας</string>
     <string name="adaptive_icon_change_image">Αλλαγή εικόνας</string>
     <string name="image_load_failed">Δεν ήταν δυνατή η φόρτωση αυτής της εικόνας</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Εικόνα προσκηνίου</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Εικονίδιο εκκινητή</string>
+    <string name="adaptive_icon_gesture_hint">Σύρετε για μετακίνηση, τσιμπήστε για αλλαγή μεγέθους</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Προεπισκόπηση</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Κανονικό</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Θεματικό</string>
     <string name="adaptive_icon_background_color">Χρώμα φόντου</string>
     <string name="adaptive_icon_reset_transform">Επαναφορά θέσης και κλίμακας</string>
-    <string name="adaptive_icon_safe_zone_inner">Περιοχή ασφαλείας (πάντα ορατός)</string>
-    <string name="adaptive_icon_safe_zone_outer">Περιοχή μάσκας (μπορεί να κοπεί)</string>
-    <string name="adaptive_icon_no_transparency_warning">Η εικόνα δεν έχει διαφανή pixel. Το αποτέλεσμα ενδέχεται να μην είναι σωστό</string>
+    <string name="adaptive_icon_no_transparency_warning">Αυτή η εικόνα δεν έχει διαφανή pixel, οπότε τα θεματικά εικονίδια και τα εικονίδια ειδοποιήσεων διατηρούν το λογότυπο Morphe</string>
     <string name="adaptive_icon_created_success">Το προσαρμοστικό εικονίδιο δημιουργήθηκε με επιτυχία</string>
     <string name="adaptive_icon_creation_failed">Απέτυχε η δημιουργία του προσαρμοστικού εικονιδίου</string>
-    <string name="adaptive_icon_label">Προσαρμοστικό</string>
-    <string name="adaptive_icon_monochrome_label">Μονόχρωμο</string>
     <string name="adaptive_icon_guide">Οδηγός δημιουργίας εικονιδίου</string>
     <string name="adaptive_icon_guide_png_title">Χρησιμοποιήστε ένα PNG με διαφανές φόντο</string>
-    <string name="adaptive_icon_guide_png_body">Το προσκήνιο πρέπει να είναι ένα αρχείο PNG με διαφανές φόντο. Ένα φόντο με συμπαγές χρώμα θα φαίνεται λανθασμένο - το χρώμα φόντου θα πρέπει να προέρχεται από τον επιλογέα φόντου παρακάτω.</string>
+    <string name="adaptive_icon_guide_png_body">Ένα λογότυπο σε διαφανές φόντο λειτουργεί καλύτερα, με το χρώμα φόντου να επιλέγεται παρακάτω. Μια εικόνα χωρίς διαφάνεια γεμίζει αντί αυτού ολόκληρο το εικονίδιο και τότε τα θεματικά εικονίδια και τα εικονίδια ειδοποιήσεων διατηρούν το λογότυπο Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Ασφαλείς ζώνες</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Εσωτερική ζώνη (συμπαγής): το περιεχόμενο είναι πάντα πλήρως ορατό σε όλα τα σχήματα εκτοξευτή.
-Εξωτερική ζώνη (διακεκομμένη): μπορεί να αποκοπεί από τη μάσκα εκτοξευτή - κρατήστε σημαντικές λεπτομέρειες μέσα στην εσωτερική ζώνη."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Το περίγραμμα δείχνει το σχήμα του εικονιδίου του launcher σας και ό,τι βρίσκεται έξω από αυτό αποκόπτεται. Άλλα launcher χρησιμοποιούν άλλα σχήματα, γι\' αυτό κρατήστε τις σημαντικές λεπτομέρειες μέσα στον διακεκομμένο κύκλο, ο οποίος εμφανίζεται σε όλα τα σχήματα.</string>
     <string name="adaptive_icon_guide_notification_title">Εικονίδιο ειδοποίησης</string>
-    <string name="adaptive_icon_guide_notification_body">Δημιουργείται αυτόματα από την εικόνα προσκηνίου. Ρυθμίστε το μέγεθός του χρησιμοποιώντας το ρυθμιστικό ειδοποιήσεων. Όλο το ορατό περιεχόμενο εμφανίζεται λευκό στη γραμμή κατάστασης.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Μονόχρωμο εικονίδιο</string>
-    <string name="adaptive_icon_guide_monochrome_body">Δημιουργείται αυτόματα από την εικόνα προσκηνίου χρησιμοποιώντας τις ίδιες μετατροπές προσαρμοσμένου εικονιδίου. Εμφανίζεται με απόχρωση του χρώματος έμφασης της ταπετσαρίας στο Android 13 και νεότερες εκδόσεις.</string>
+    <string name="adaptive_icon_guide_notification_body">Κόβεται από το ορατό τμήμα της εικόνας και έχει το ίδιο μέγεθος με τα άλλα εικονίδια της γραμμής κατάστασης, όποιο περιθώριο κι αν έχει το αρχείο. Ρυθμίστε το με το ρυθμιστικό κάτω από την προεπισκόπηση. Το Android το εμφανίζει σε ένα μόνο χρώμα.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Θεματικό εικονίδιο</string>
+    <string name="adaptive_icon_guide_monochrome_body">Κόβεται από την εικόνα με την ίδια θέση και το ίδιο μέγεθος με το εικονίδιο του launcher. Σε Android 13 και νεότερες εκδόσεις, τα launcher που έχουν ενεργοποιημένα τα θεματικά εικονίδια το χρωματίζουν με βάση την ταπετσαρία.</string>
     <string name="notification_icon_preview">Ειδοποίηση</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Δημιουργία προσαρμοσμένης επικεφαλίδας</string>
     <string name="header_creator_light_theme">Επικεφαλίδα φωτεινού θέματος</string>
     <string name="header_creator_dark_theme">Επικεφαλίδα σκοτεινού θέματος</string>
-    <string name="header_creator_no_image">Δεν επιλέχθηκε εικόνα</string>
     <string name="header_creator_success">Η επικεφαλίδα δημιουργήθηκε επιτυχώς</string>
     <string name="header_creator_failed">Αποτυχία δημιουργίας της επικεφαλίδας</string>
     <string name="header_creator_guide">Οδηγός δημιουργίας κεφαλίδας</string>
     <string name="header_creator_guide_image_title">Απαιτήσεις εικόνας</string>
-    <string name="header_creator_guide_image_body">Χρησιμοποιήστε οποιοδήποτε αρχείο εικόνας (PNG ή JPEG). Για καλύτερα αποτελέσματα, χρησιμοποιήστε μια εικόνα ευρείας μορφής με λόγο διαστάσεων περίπου 2,7:1. Τα αρχεία PNG με διαφανές φόντο θα ενσωματωθούν φυσικά με το θέμα της εφαρμογής.</string>
+    <string name="header_creator_guide_image_body">Ένα PNG με διαφανές φόντο εναρμονίζεται με τη γραμμή εφαρμογής. Τα περιθώρια γύρω από το λογότυπο στο αρχείο αγνοούνται, οπότε ξεκινάει με το μέγεθος και τη θέση του βασικού λογότυπου.</string>
     <string name="header_creator_guide_themes_title">Φωτεινά και σκοτεινά θέματα</string>
     <string name="header_creator_guide_themes_body">Οι περισσότερες εφαρμογές απαιτούν ξεχωριστές εικόνες για τα θέματα φωτός και σκούρου. Ορισμένες εφαρμογές (όπως το YouTube Music) χρησιμοποιούν μόνο το σκούρο θέμα, επομένως εμφανίζεται μόνο αυτή η ενότητα.</string>
     <string name="header_creator_guide_positioning_title">Τοποθέτηση και κλιμάκωση</string>
-    <string name="header_creator_guide_positioning_body">Χρησιμοποιήστε χειρονομίες ζουμ και μεταφοράς απευθείας στην προεπισκόπηση για να τοποθετήσετε και να κλιμακώσετε την εικόνα σας. Εμφανίζονται καθοδηγητικοί οδηγοί όταν η εικόνα είναι κοντά στο κέντρο. Μπορείτε επίσης να χρησιμοποιήσετε το ρυθμιστικό κάτω από την προεπισκόπηση.</string>
+    <string name="header_creator_guide_positioning_body">Σύρετε και τσιμπήστε την εικόνα στον επεξεργαστή ή αλλάξτε το μέγεθός της με το ρυθμιστικό. Το διακεκομμένο πλαίσιο δείχνει πού βρίσκεται το βασικό λογότυπο και εμφανίζονται οδηγοί όταν η εικόνα ευθυγραμμίζεται με αυτό.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Τροποποίηση επιλέχθηκε</string>
     <string name="batch_patch_title">Μαζική τροποποίηση</string>
@@ -475,9 +492,12 @@
     <string name="home_app_info_app_update_available_description">Οι πηγές patch υποστηρίζουν νεότερη έκδοση αυτής της εφαρμογής. Εφάρμόστε ξανά τo patch γιάνά νά μετβείτε σ\' αυτήν τήν έκδοση.</string>
     <string name="home_app_info_newest_supported_version">Νεότερη υποστηριζόμενη</string>
     <string name="home_app_info_version_move">Εγκάτεστημέν η %1$s, νεότερη υποστηριζόμενη %2$s</string>
+    <string name="home_app_info_version_restore">Εγκατεστημένη %1$s, επιδιορθωμένη %2$s</string>
     <string name="home_app_info_app_deleted_warning">Η εφαρμογή έχει απεγκατασταθεί</string>
     <string name="home_app_info_app_deleted_description">Η εφαρμογή αυτή απεγκαταστάθηκε εκτός του Morphe. Τροποποιήστε την ξανά για την επαναφορά λειτουργικότητά της</string>
     <string name="home_app_info_not_patched_description">Μια μη ενημερωμένη έκδοση αυτής της εφαρμογής είναι εγκατεστημένη. Το Morphe εξακολουθεί να έχει το προηγούμενο αρχείο επιδιορθώσεων.</string>
+    <string name="home_app_info_mount_replaced_description">Μια άλλη έκδοση αντικατέστησε την προσαρτημένη εφαρμογή, οπότε το patch δεν ισχύει πλέον. Η επαναφορά επαναφέρει την επιδιορθωμένη έκδοση</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Το Google Play ενημέρωσε την προσαρτημένη εφαρμογή, οπότε το patch δεν ισχύει πλέον. Η επαναφορά επαναφέρει την επιδιορθωμένη έκδοση. Απενεργοποιήστε την αυτόματη ενημέρωση για αυτήν στο Google Play για να παραμείνει επιδιορθωμένη</string>
     <string name="app_links_title">Υποστηριζόμενοι σύνδεσμοι ιστού</string>
     <string name="app_links_description">Σε Android 12+, οι σύνδεσμοι προς υποστηριζόμενους τομείς ανοίγουν στο πρόγραμμα περιήγησης από προεπιλογή, εκτός εάν έχουν εγκριθεί</string>
     <string name="app_links_unverified_banner_title">Μη επαληθευμένοι σύνδεσμοι ιστού</string>
@@ -487,8 +507,6 @@
     <string name="app_links_open_settings">Άνοιγμα ρυθμίσεων συνδέσμων</string>
     <string name="app_links_repair_success">Οι σύνδεσμοι εφαρμογής ενεργοποιήθηκαν με επιτυχία</string>
     <string name="app_links_repair_failed">Αποτυχία αυτόματης ενεργοποίησης των συνδέσμων εφαρμογής</string>
-    <string name="app_links_badge_enabled">Ενεργοποιημένο</string>
-    <string name="app_links_badge_disabled">Απενεργοποιημένο</string>
     <string name="app_links_all_verified">Όλοι οι υποστηριζόμενοι σύνδεσμοι έχουν ρυθμιστεί να ανοίγουν σε αυτήν την εφαρμογή</string>
     <string name="app_links_fix">Διόρθωση συνδέσμων</string>
     <string name="configure">Διαμόρφωση</string>
@@ -519,10 +537,10 @@
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Εφαρμογή</string>
     <string name="patcher_field_package">Πακέτο</string>
+    <string name="patcher_field_failed_patch">Αποτυχημένο patch</string>
     <string name="patcher_field_source">Πηγή</string>
     <string name="patcher_field_split">Διαχωρισμένο APK</string>
     <string name="patcher_field_manager">Διαχειριστής</string>
-    <string name="patcher_field_patcher">Επιδιορθωτής</string>
     <string name="patcher_field_runtime">Χρόνος εκτέλεσης</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Βιβλιοθήκες</string>
@@ -553,6 +571,7 @@
     <string name="patcher_installing_subtitle">Σχεδόν έτοιμο για δράση! 🎸</string>
     <string name="patcher_success_title">Ολοκληρώθηκε! 🎉</string>
     <string name="patcher_success_subtitle">Η εφαρμογή σας έχει τροποποιηθεί και εγκατασταθεί!</string>
+    <string name="patcher_mounted_subtitle">Η εφαρμογή σας είναι πατσαρισμένη και προσαρτημένη!</string>
     <string name="patcher_complete_title">Η τροποποίηση ολοκληρώθηκε! ✨</string>
     <string name="patcher_failed_title">Ωχ! Κάτι πήγε στραβά</string>
     <string name="patcher_failed_dialog_title">Απέτυχε η τροποποίηση</string>
@@ -571,6 +590,7 @@
 
 Η απεγκατάσταση θα διαγράψει οριστικά όλα τα δεδομένα της εφαρμογής."</string>
     <string name="patcher_install_error_title">Σφάλμα εγκατάστασης</string>
+    <string name="patcher_mount_error_title">Σφάλμα προσάρτησης</string>
     <string name="patcher_install_error_subtitle">Δοκιμάστε να απεγκαταστήσετε και να εγκαταστήσετε ξανά</string>
     <string name="patcher_ready_to_mount_subtitle">Πατήστε το παρακάτω κουμπί για προσάρτηση</string>
     <string name="patcher_patches_excluded_for_installer">Δεν είναι διαθέσιμο για αυτήν τη μέθοδο εγκατάστασης και εξαιρέθηκε: %s</string>
@@ -598,7 +618,6 @@
     <string name="patcher_step_load_patches">Φόρτωση τροποποιήσεων</string>
     <string name="patcher_step_prepare_split_apk">Συγχώνευση διαχωρισμένου APK</string>
     <string name="patcher_step_unpack">Ανάγνωση αρχείου APK</string>
-    <string name="patcher_step_group_patching">Τροποποίηση</string>
     <string name="patcher_step_group_saving">Αποθήκευση</string>
     <string name="patcher_step_write_patched">Εγγραφή τροποποιημένου αρχείου APK</string>
     <string name="patcher_step_sign_apk">Υπογραφή τροποποιημένου αρχείου APK</string>
@@ -610,6 +629,7 @@
     <string name="patcher_memory_adjustment_title">Δεν υπάρχει αρκετή μνήμη</string>
     <string name="patcher_memory_adjustment_description">Το patcher σταμάτησε από το σύστημα ενώ εκτελούνταν με όριο μνήμης %1$d MB. Η μείωση του ορίου σε %2$d MB καθιστά το patcher μικρότερο στόχο και μπορεί να επιτρέψει την ολοκλήρωση της εκτέλεσης.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Το patcher σταμάτησε από το σύστημα ενώ εκτελούνταν με όριο μνήμης %1$d MB, το οποίο είναι ήδη το χαμηλότερο διαθέσιμο. Δοκιμάστε να επιδιορθώσετε με λιγότερες πηγές επιδιόρθωσης ή επιλέξτε λιγότερες επιδιορθώσεις.</string>
+    <string name="patcher_memory_adjustment_description_finished">Το σύστημα σταμάτησε το εργαλείο επιδιόρθωσης στο όριο μνήμης %1$d MB και ολοκληρώθηκε μόνο στα %2$d MB. Η εκκίνηση από %2$d MB παραλείπει αυτή τη χαμένη προσπάθεια την επόμενη φορά</string>
     <string name="patcher_memory_adjustment_apply">Μειώστε σε %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Τροποποίηση σε εξέλιξη…</string>
@@ -709,6 +729,9 @@
     <string name="settings_appearance_background_snow">Χιόνι</string>
     <string name="settings_appearance_background_grid">Στίγματα</string>
     <string name="settings_appearance_background_particles">Σωματίδια</string>
+    <string name="settings_appearance_background_lava">Λάμπα λάβας</string>
+    <string name="settings_appearance_background_halloween">Χαλοουίν</string>
+    <string name="settings_appearance_background_fireworks">Πυροτεχνήματα</string>
     <string name="settings_appearance_background_none">Κανένα</string>
     <string name="settings_appearance_background_random">Τυχαίο</string>
     <string name="settings_appearance_background_random_interval_launch">Κατά την εκκίνηση</string>
@@ -716,6 +739,10 @@
     <string name="settings_appearance_background_random_interval_3days">Κάθε 3 ημέρες</string>
     <string name="settings_appearance_parallax_effect">Εφέ παράλλαξης</string>
     <string name="settings_appearance_parallax_effect_description">Ομαλή μετατόπιση φόντου όταν αλλάξει κλίση η συσκευή</string>
+    <string name="settings_appearance_seasonal_themes">Εποχιακά θέματα</string>
+    <string name="settings_appearance_seasonal_themes_description">Γιορτινά φόντα και χαιρετισμοί στις γιορτές</string>
+    <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">Το φόντο %1$s είναι ενεργό έως τις %2$s όσο τα εποχιακά θέματα είναι ενεργά</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Θέμα</string>
     <string name="settings_appearance_theme_mode">Λειτουργία θέματος</string>
@@ -777,9 +804,24 @@
     <string name="settings_appearance_app_icon_default">Προεπιλογή</string>
     <string name="settings_appearance_app_icon_light_2">Ουρανός</string>
     <string name="settings_appearance_app_icon_light_3">Δύση ηλίου </string>
-    <string name="settings_appearance_app_icon_dark_1">Θάλασσα</string>
+    <string name="settings_appearance_app_icon_light_4">Λεβάντα</string>
+    <string name="settings_appearance_app_icon_light_5">Παγετώνας</string>
+    <string name="settings_appearance_app_icon_light_6">Ομίχλη</string>
+    <string name="settings_appearance_app_icon_light_7">Άμμος</string>
+    <string name="settings_appearance_app_icon_dark_1">Θαλασσί</string>
     <string name="settings_appearance_app_icon_dark_2">Κενό</string>
-    <string name="settings_appearance_app_icon_dark_3">Ίντιγκο</string>
+    <string name="settings_appearance_app_icon_dark_3">Δαμασκηνί</string>
+    <string name="settings_appearance_app_icon_dark_4">Μεσάνυχτα</string>
+    <string name="settings_appearance_app_icon_dark_5">Σχιστόλιθος</string>
+    <string name="settings_appearance_app_icon_accent_1">Σέλας</string>
+    <string name="settings_appearance_app_icon_accent_2">Μελάνι</string>
+    <string name="settings_appearance_app_icon_accent_3">Χαρτί</string>
+    <string name="settings_appearance_app_icon_accent_4">Σούρουπο</string>
+    <string name="settings_appearance_app_icon_background">Φόντο</string>
+    <string name="settings_appearance_app_icon_mark">Λογότυπο</string>
+    <string name="settings_appearance_app_icon_mark_color">Χρωματιστή</string>
+    <string name="settings_appearance_app_icon_mark_white">Λευκό</string>
+    <string name="settings_appearance_app_icon_mark_black">Μαύρο</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Αλλαγή εικονιδίου της εφαρμογής;</string>
     <string name="settings_appearance_app_icon_change_dialog_message">Αλλαγή σε &lt;b&gt;%s&lt;/b&gt; και επανεκκίνηση;</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -817,7 +859,6 @@
     <string name="external_batch_patch_trust_caller">Να επιτρέπεται πάντα αυτήν την εφαρμογή</string>
     <string name="external_batch_patch_unknown_caller">Μια άγνωστη εφαρμογή</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Διαθέσιμη ενημέρωση του Morphe</string>
     <string name="notification_bundle_update_title">Νέες τροποποιήσεις διαθέσιμες</string>
     <string name="notification_update_text">Η έκδοση %s είναι έτοιμη για λήψη</string>
     <string name="notification_bundle_update_text_unversioned">Πατήστε για να ανοίξετε το Morphe και να ενημερώσετε</string>
@@ -828,8 +869,11 @@
     <string name="notification_channel_manager_updates_description">Ειδοποιήσεις για νέες εκδόσεις του Morphe</string>
     <string name="notification_channel_patch_updates">Ενημερώσεις επιδιόρθωσης</string>
     <string name="notification_channel_patch_updates_description">Ειδοποιήσεις για νέες εκδόσεις επιδιόρθωσης</string>
-    <string name="notification_channel_patcher">Τροποποίηση</string>
     <string name="notification_channel_patcher_description">Εμφανίζεται όταν το Morphe ενημερώνει μια εφαρμογή στο παρασκήνιο</string>
+    <string name="notification_channel_mounted_apps">Προσαρτημένες εφαρμογές</string>
+    <string name="notification_channel_mounted_apps_description">Όταν μια άλλη έκδοση αντικατέστησε μια προσαρτημένη εφαρμογή και το patch της δεν εφαρμόζεται πλέον</string>
+    <string name="notification_mount_replaced_title">Το %1$s δεν είναι πλέον πατσαρισμένο</string>
+    <string name="notification_mount_replaced_text">v%1$s αντικατέστησε την πατσαρισμένη v%2$s. Ανοίξτε το Morphe για να την επαναφέρετε</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Εξειδικευμένες ρυθμίσεις</string>
     <string name="settings_advanced_expert_mode">Εξειδικευμένη λειτουργία</string>
@@ -1246,9 +1290,7 @@ morphe_header_custom_dark.png
     <string name="selected">Επιλεγμένη</string>
     <string name="not_selected">Μη επιλεγμένη</string>
     <string name="select_all">Επιλογή όλων</string>
-    <string name="select_all_done">Όλα επιλέχθηκαν</string>
     <string name="deselect_all">Κατάργηση επιλογής όλων</string>
-    <string name="deselect_all_done">Όλα αποεπιλέχθηκαν</string>
     <string name="reorder_list">Αναδιάταξη λίστας</string>
     <string name="reorder_list_hint">Σύρετε για να αναδιατάξετε</string>
     <string name="reorder_done">Η σειρά αποθηκεύτηκε</string>
@@ -1284,6 +1326,7 @@ morphe_header_custom_dark.png
     <string name="unmount">Αποπροσάρτηση</string>
     <string name="unmounted">Αποπροσαρτημένο</string>
     <string name="remount">Επαναπροσάρτηση</string>
+    <string name="restore">Επαναφορά</string>
     <string name="share">Κοινοποίηση</string>
     <string name="install">Εγκατάσταση</string>
     <string name="installed">Εγκατεστημένο</string>
@@ -1304,6 +1347,8 @@ morphe_header_custom_dark.png
     <string name="sources">Πηγές</string>
     <string name="installing_ellipsis">Εγκατάσταση…</string>
     <string name="mounting_ellipsis">Προσάρτηση…</string>
+    <string name="mount_stage_restoring_stock">Επαναφορά αρχικού…</string>
+    <string name="mount_stage_copying">Αντιγραφή…</string>
     <string name="unmounting_ellipsis">Αποπροσάρτηση...</string>
     <string name="importing_ellipsis">Εισαγωγή…</string>
     <string name="imported_successfully">Εισαγωγές επιτυχώς</string>
@@ -1351,7 +1396,6 @@ morphe_header_custom_dark.png
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">Αυτή η έκδοση δημοσιεύεται ακόμα. Επαναλάβετε σε λίγα λεπτά</string>
     <string name="update_download_missing">Η ληφθείσα ενημέρωση δεν είναι πλέον διαθέσιμη. Κατεβάστε την ξανά</string>
-    <string name="download_manager_failed">Αποτυχία λήψης ενημέρωσης: %s</string>
     <string name="failed_to_check_updates">Ο έλεγχος για ενημερώσεις απέτυχε: %s</string>
     <string name="failed_to_download_update">Η λήψη ενημέρωσης απέτυχε: %s</string>
     <string name="download_confirmation_metered">"Είστε συνδεδεμένοι σε σύνδεση με ογκοχρέωση και ενδέχεται να ισχύουν χρεώσεις δεδομένων από τον πάροχο υπηρεσιών σας.

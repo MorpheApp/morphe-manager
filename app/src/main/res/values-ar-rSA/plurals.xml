@@ -171,6 +171,14 @@
         <item quantity="many">%s مصادر تم تثبيتها</item>
         <item quantity="other">%s مصادر تم تثبيتها</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="zero">%1$s · لا توجد تطبيقات مفلترة (%2$s)</item>
+        <item quantity="one">%1$s · تطبيق واحد مفلتر (%2$s)</item>
+        <item quantity="two">%1$s · تطبيقان مفلتران (%2$s)</item>
+        <item quantity="few">%1$s · %2$s تطبيقات مفلترة</item>
+        <item quantity="many">%1$s · %2$s تطبيقًا مفلترًا</item>
+        <item quantity="other">%1$s · %2$s تطبيق مفلتر</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="zero">%s تطبيق مخفي</item>
         <item quantity="one">%s تطبيق مخفي</item>

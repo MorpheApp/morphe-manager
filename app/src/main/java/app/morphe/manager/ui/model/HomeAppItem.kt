@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.model
 
 import android.content.pm.PackageInfo
@@ -73,16 +78,16 @@ fun List<HomeAppItem>.withNameSuffixes(): List<HomeAppItem> {
     // One map of first packages finds the shared names, so a list with none builds nothing more
     val firstPackages = HashMap<String, String>(size * 2)
     val sharedNames = HashSet<String>()
-    for (item in this) {
-        val first = firstPackages.putIfAbsent(item.displayName, item.packageName)
-        if (first != null && first != item.packageName) sharedNames += item.displayName
+    for ((_, packageName, displayName) in this) {
+        val first = firstPackages.putIfAbsent(displayName, packageName)
+        if (first != null && first != packageName) sharedNames += displayName
     }
     if (sharedNames.isEmpty()) return this
 
     val packagesByName = HashMap<String, MutableSet<String>>()
-    for (item in this) {
-        if (item.displayName in sharedNames) {
-            packagesByName.getOrPut(item.displayName) { HashSet() } += item.packageName
+    for ((_, packageName, displayName) in this) {
+        if (displayName in sharedNames) {
+            packagesByName.getOrPut(displayName) { HashSet() } += packageName
         }
     }
 

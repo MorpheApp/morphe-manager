@@ -45,7 +45,7 @@ private data class DialogButtonColors(
 private fun resolveButtonColors(isDestructive: Boolean, filled: Boolean): DialogButtonColors {
     // A dialog in an app's own color hands it to its buttons, see [LocalAccent]
     val primaryColor = LocalAccent.current ?: MaterialTheme.colorScheme.primary
-    val textColor = LocalDialogTextColor.current
+    val textColor = dialogTextColor()
     val isDark = !textColor.isDarkBackground()
 
     return if (isDestructive) {
@@ -200,7 +200,8 @@ private fun RowScope.DialogButtonContent(
         Spacer(Modifier.width(DialogButtonIconSpacing))
     }
 
-    Text(
+    // A label that follows its action's state, such as one turning to an "in progress" form
+    CrossfadeText(
         text = text,
         style = MaterialTheme.typography.labelLarge,
         maxLines = 1,

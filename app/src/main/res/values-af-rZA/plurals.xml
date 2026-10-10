@@ -87,6 +87,10 @@
         <item quantity="one">%s oorsprong geïnstalleer</item>
         <item quantity="other">%s oorspronge geïnstalleer</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="one">%1$s · %2$s gefiltreer</item>
+        <item quantity="other">%1$s · %2$s gefiltreer</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s versteek program</item>
         <item quantity="other">%s versteek programme</item>

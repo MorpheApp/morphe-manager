@@ -70,7 +70,7 @@ fun InstalledAppPickerDialog(
         SearchFieldBackHandler(search)
 
         val (filterIcon, filterLabel) = when (appFilter) {
-            AppFilter.All -> Icons.Outlined.FilterList to stringResource(R.string.home_installed_app_picker_filter_all)
+            AppFilter.All -> Icons.Outlined.FilterList to stringResource(R.string.home_category_all_apps)
             AppFilter.UserOnly -> Icons.Outlined.Person to stringResource(R.string.home_installed_app_picker_filter_user)
             AppFilter.SystemOnly -> Icons.Outlined.Android to stringResource(R.string.home_installed_app_picker_filter_system)
         }

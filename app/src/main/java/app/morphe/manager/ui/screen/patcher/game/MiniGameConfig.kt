@@ -65,12 +65,15 @@ import kotlinx.coroutines.launch
  *
  * @param accent The color the game is known by, taken from its own palette, which its picker
  *   card wears the way an app card wears the app's.
+ * @param aspectRatio Width to height of the game's field, so the canvas slot hugs the field
+ *   instead of padding it out to a square.
  */
 enum class MiniGame(
     @StringRes val titleRes: Int,
     @StringRes val subtitleRes: Int,
     val icon: ImageVector,
-    val accent: Color
+    val accent: Color,
+    val aspectRatio: Float = 1f
 ) {
     GAME_2048(
         R.string.mini_game_2048,
@@ -100,7 +103,8 @@ enum class MiniGame(
         R.string.mini_game_blocks,
         R.string.mini_game_blocks_picker_subtitle,
         Icons.Outlined.Dashboard,
-        Color(0xFF7E57C2)
+        Color(0xFF7E57C2),
+        BLOCKS_ASPECT_RATIO
     ),
     BRICKS(
         R.string.mini_game_bricks,
@@ -209,38 +213,55 @@ class GameHaptics {
  */
 @Stable
 class MiniGameState(prefs: PreferencesManager, scope: CoroutineScope) {
-    val game2048 = Game2048State(
-        initialHighScore = prefs.miniGame2048HighScore.getBlocking(),
-        onHighScoreUpdated = { scope.launch { prefs.miniGame2048HighScore.update(it) } }
-    )
-    val flappy = FlappyGameState(
-        initialHighScore = prefs.miniGameFlappyHighScore.getBlocking(),
-        onHighScoreUpdated = { scope.launch { prefs.miniGameFlappyHighScore.update(it) } }
-    )
-    val snake = SnakeGameState(
-        initialHighScore = prefs.miniGameSnakeHighScore.getBlocking(),
-        onHighScoreUpdated = { scope.launch { prefs.miniGameSnakeHighScore.update(it) } }
-    )
-    val dino = DinoGameState(
-        initialHighScore = prefs.miniGameDinoHighScore.getBlocking(),
-        onHighScoreUpdated = { scope.launch { prefs.miniGameDinoHighScore.update(it) } }
-    )
-    val blocks = BlocksGameState(
-        initialHighScore = prefs.miniGameBlocksHighScore.getBlocking(),
-        onHighScoreUpdated = { scope.launch { prefs.miniGameBlocksHighScore.update(it) } }
-    )
-    val bricks = BricksGameState(
-        initialHighScore = prefs.miniGameBricksHighScore.getBlocking(),
-        onHighScoreUpdated = { scope.launch { prefs.miniGameBricksHighScore.update(it) } }
-    )
-    val miner = MinerGameState(
-        initialHighScore = prefs.miniGameMinerHighScore.getBlocking(),
-        onHighScoreUpdated = { scope.launch { prefs.miniGameMinerHighScore.update(it) } }
-    )
-    val pairs = PairsGameState(
-        initialHighScore = prefs.miniGamePairsHighScore.getBlocking(),
-        onHighScoreUpdated = { scope.launch { prefs.miniGamePairsHighScore.update(it) } }
-    )
+    // Built on first use, since most runs open no game and each reads its high score blocking
+    val game2048 by lazy {
+        Game2048State(
+            initialHighScore = prefs.miniGame2048HighScore.getBlocking(),
+            onHighScoreUpdated = { scope.launch { prefs.miniGame2048HighScore.update(it) } }
+        )
+    }
+    val flappy by lazy {
+        FlappyGameState(
+            initialHighScore = prefs.miniGameFlappyHighScore.getBlocking(),
+            onHighScoreUpdated = { scope.launch { prefs.miniGameFlappyHighScore.update(it) } }
+        )
+    }
+    val snake by lazy {
+        SnakeGameState(
+            initialHighScore = prefs.miniGameSnakeHighScore.getBlocking(),
+            onHighScoreUpdated = { scope.launch { prefs.miniGameSnakeHighScore.update(it) } }
+        )
+    }
+    val dino by lazy {
+        DinoGameState(
+            initialHighScore = prefs.miniGameDinoHighScore.getBlocking(),
+            onHighScoreUpdated = { scope.launch { prefs.miniGameDinoHighScore.update(it) } }
+        )
+    }
+    val blocks by lazy {
+        BlocksGameState(
+            initialHighScore = prefs.miniGameBlocksHighScore.getBlocking(),
+            onHighScoreUpdated = { scope.launch { prefs.miniGameBlocksHighScore.update(it) } }
+        )
+    }
+    val bricks by lazy {
+        BricksGameState(
+            initialHighScore = prefs.miniGameBricksHighScore.getBlocking(),
+            onHighScoreUpdated = { scope.launch { prefs.miniGameBricksHighScore.update(it) } }
+        )
+    }
+    val miner by lazy {
+        MinerGameState(
+            initialHighScore = prefs.miniGameMinerHighScore.getBlocking(),
+            onHighScoreUpdated = { scope.launch { prefs.miniGameMinerHighScore.update(it) } }
+        )
+    }
+    val pairs by lazy {
+        PairsGameState(
+            initialHighScore = prefs.miniGamePairsHighScore.getBlocking(),
+            onHighScoreUpdated = { scope.launch { prefs.miniGamePairsHighScore.update(it) } }
+        )
+    }
     var selectedGame by mutableStateOf<MiniGame?>(null)
 
     /** State backing [game], which is the one place a new game has to be wired in. */
@@ -402,10 +423,11 @@ internal fun MiniGameContent(state: MiniGameState) {
                     )
                     Box(modifier = Modifier.weight(1f).fillMaxWidth()) {
                         BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
-                            val size = minOf(maxWidth, maxHeight)
+                            val ratio = selected.aspectRatio
+                            val width = minOf(maxWidth, maxHeight * ratio)
                             Box(
                                 modifier = Modifier
-                                    .size(size)
+                                    .size(width, width / ratio)
                                     .align(Alignment.Center)
                                     // The canvases round their own corners, and the overlays
                                     // drawn over them have to stop at the same edge

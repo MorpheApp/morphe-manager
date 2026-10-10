@@ -126,7 +126,7 @@ fun ConfirmSubject(
             text = name,
             style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.SemiBold,
-            color = LocalDialogTextColor.current,
+            color = dialogTextColor(),
             textAlign = TextAlign.Center
         )
     }

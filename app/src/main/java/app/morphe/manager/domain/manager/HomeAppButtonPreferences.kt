@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
+import app.morphe.manager.util.enumByNameOrNull
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -48,7 +49,7 @@ enum class HomeAppCategoryViewMode {
     companion object {
         /** Parse a persisted enum name; unknown values fall back to [ALL_APPS]. */
         fun fromPreference(value: String?): HomeAppCategoryViewMode =
-            entries.firstOrNull { it.name == value } ?: ALL_APPS
+            enumByNameOrNull(value) ?: ALL_APPS
     }
 }
 
@@ -110,6 +111,14 @@ class HomeAppButtonPreferences(context: Context) {
 
     private val _sortMode = MutableStateFlow(loadSortMode())
     val sortMode: StateFlow<HomeAppSortMode> = _sortMode.asStateFlow()
+
+    /**
+     * Name of the status filter last picked for the home list, kept as a raw name since the
+     * filter itself lives with the UI. Left out of [exportState], so a restored backup never
+     * opens on a trimmed list.
+     */
+    private val _filterMode = MutableStateFlow(prefs.getString(KEY_FILTER_MODE, null))
+    val filterMode: StateFlow<String?> = _filterMode.asStateFlow()
 
     private val _categoryState = MutableStateFlow(loadCategoryState())
     val categoryState: StateFlow<HomeAppCategoryState> = _categoryState.asStateFlow()
@@ -255,6 +264,14 @@ class HomeAppButtonPreferences(context: Context) {
         _sortMode.value = mode
     }
 
+    /** Persist the home list filter by its enum [name], or drop it when [name] is null. */
+    fun setFilterMode(name: String?) {
+        prefs.edit {
+            if (name == null) remove(KEY_FILTER_MODE) else putString(KEY_FILTER_MODE, name)
+        }
+        _filterMode.value = name
+    }
+
     fun setCategoryViewMode(mode: HomeAppCategoryViewMode) {
         prefs.edit { putString(KEY_CATEGORY_VIEW_MODE, mode.name) }
         _categoryViewMode.value = mode
@@ -263,11 +280,17 @@ class HomeAppButtonPreferences(context: Context) {
     fun setShowCategoryViewSwitcher(show: Boolean) {
         prefs.edit { putBoolean(KEY_SHOW_CATEGORY_VIEW_SWITCHER, show) }
         _showCategoryViewSwitcher.value = show
+        // Hiding the switcher leaves no way back from a grouped list, so the flat one returns with it.
+        // Showing it reads the saved grouping back, as the next launch would
+        if (!show) setCategoryViewMode(HomeAppCategoryViewMode.ALL_APPS)
+        else _categoryViewMode.value = loadCategoryViewMode()
     }
 
     fun setShowSortButton(show: Boolean) {
         prefs.edit { putBoolean(KEY_SHOW_SORT_BUTTON, show) }
         _showSortButton.value = show
+        // The filter is set from the sort button, so it goes with it rather than coming back unseen
+        if (!show) setFilterMode(null)
     }
 
     /**
@@ -407,7 +430,8 @@ class HomeAppButtonPreferences(context: Context) {
         snapshot.hiddenPackages?.let { _hiddenPackages.value = it }
         snapshot.customOrder?.let { _customOrder.value = it }
         snapshot.sortMode?.let { _sortMode.value = HomeAppSortMode.fromPreference(it) }
-        snapshot.categoryViewMode?.let { _categoryViewMode.value = HomeAppCategoryViewMode.fromPreference(it) }
+        // Read back rather than parsed, so a backup with the switcher hidden lands on the flat list
+        _categoryViewMode.value = loadCategoryViewMode()
         snapshot.showCategoryViewSwitcher?.let { _showCategoryViewSwitcher.value = it }
         snapshot.showSortButton?.let { _showSortButton.value = it }
 
@@ -467,8 +491,13 @@ class HomeAppButtonPreferences(context: Context) {
         )
     }
 
+    // A grouping saved while the switcher was hidden has no way back on the home screen
     private fun loadCategoryViewMode(): HomeAppCategoryViewMode =
-        HomeAppCategoryViewMode.fromPreference(prefs.getString(KEY_CATEGORY_VIEW_MODE, null))
+        if (loadShowCategoryViewSwitcher()) {
+            HomeAppCategoryViewMode.fromPreference(prefs.getString(KEY_CATEGORY_VIEW_MODE, null))
+        } else {
+            HomeAppCategoryViewMode.ALL_APPS
+        }
 
     private fun loadShowCategoryViewSwitcher(): Boolean =
         prefs.getBoolean(KEY_SHOW_CATEGORY_VIEW_SWITCHER, false)
@@ -558,6 +587,7 @@ class HomeAppButtonPreferences(context: Context) {
         private const val KEY_CUSTOM_ORDER = "custom_order"
         private const val KEY_SOURCE_ORDERS = "source_orders"
         private const val KEY_SORT_MODE = "sort_mode"
+        private const val KEY_FILTER_MODE = "filter_mode"
         private const val KEY_CATEGORIES = "categories"
         private const val KEY_CATEGORY_ASSIGNMENTS = "category_assignments"
         private const val KEY_CATEGORY_VIEW_MODE = "category_view_mode"

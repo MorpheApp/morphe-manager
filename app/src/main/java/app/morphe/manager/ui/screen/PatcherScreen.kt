@@ -249,7 +249,6 @@ private fun PatcherScreenContent(
 
     // Post-patch prompts follow a successful install
     val installState = installViewModel.installState
-    val isInstalling by remember { derivedStateOf { installViewModel.installState is InstallViewModel.InstallState.Installing } }
     // Conflict is expected when patching from installed (non-root): handled via dialog instead of UI state
     val autoHandleConflict = patcherViewModel.patchedFromInstalledDevice && !usingMountInstall
     // The installer reports the app it installed even after the state has moved on
@@ -423,6 +422,7 @@ private fun PatcherScreenContent(
                 currentLimit = dialogState.currentLimit,
                 suggestedLimit = dialogState.suggestedLimit,
                 canAdjust = dialogState.canAdjust,
+                finished = dialogState.finished,
                 onApply = patcherViewModel::applyMemoryAdjustment,
                 onDismiss = patcherViewModel::dismissMemoryAdjustment
             )
@@ -544,6 +544,29 @@ private fun PatcherScreenContent(
     val patchSources by produceState(emptyList(), patcherViewModel) {
         value = patcherViewModel.collectSelectedBundleMetadata()
     }
+    val patchedAppSummary = PatchedAppSummary(
+        packageName = patcherViewModel.packageName,
+        version = patcherViewModel.version,
+        patchCount = patcherViewModel.patchCount,
+        sources = patchSources
+    )
+
+    val autoInstallUnderWay = patcherViewModel.autoInstallPending &&
+            patcherSucceeded == true &&
+            !usingMountInstall &&
+            installState is InstallViewModel.InstallState.Ready &&
+            // Auto-install stops at the rename warning, so the screen must
+            // not go on claiming install the user has yet to allow
+            heldInstall == null && !renameDeclined
+    // The state the result screen and the way back to it are drawn from answers two things the
+    // installer's own does not: an auto-install is under way before it is reported, and a
+    // conflict this run resolves by dialog is not a screen state at all
+    val shownInstallState = when {
+        autoInstallUnderWay -> InstallViewModel.InstallState.Installing()
+        installState is InstallViewModel.InstallState.Conflict && autoHandleConflict ->
+            InstallViewModel.InstallState.Ready
+        else -> installState
+    }
 
     // Main content
     Column(
@@ -577,8 +600,8 @@ private fun PatcherScreenContent(
                             patcherSucceeded = patcherSucceeded,
                             miniGameState = miniGameState,
                             onCancelClick = { state.showCancelDialog = true },
-                            onInstallClick = { patcherViewModel.showSuccess() },
-                            onHomeClick = onBackClick
+                            resultButton = resultButton(shownInstallState, installedPackageName, usingMountInstall),
+                            onResultClick = { patcherViewModel.showSuccess() }
                         )
                     } else {
                         SimplePatchingInProgress(
@@ -593,33 +616,26 @@ private fun PatcherScreenContent(
                 }
 
                 PatcherState.SUCCESS -> {
-                    val effectiveIsInstalling = isInstalling || (
-                            patcherViewModel.autoInstallPending &&
-                                    patcherSucceeded == true &&
-                                    !usingMountInstall &&
-                                    installState is InstallViewModel.InstallState.Ready &&
-                                    // Auto-install stops at the rename warning, so the screen must
-                                    // not go on claiming install the user has yet to allow
-                                    heldInstall == null && !renameDeclined
-                            )
-                    // The state the screen is drawn from answers two things the installer's own
-                    // does not: an auto-install is under way before it is reported, and a conflict
-                    // this run resolves by dialog is not a screen state at all
-                    val shownInstallState = when {
-                        effectiveIsInstalling -> InstallViewModel.InstallState.Installing
-                        installState is InstallViewModel.InstallState.Conflict && autoHandleConflict ->
-                            InstallViewModel.InstallState.Ready
-                        else -> installState
-                    }
-
                     PatchingSuccess(
-                        packageName = patcherViewModel.packageName,
-                        version = patcherViewModel.version,
-                        patchCount = patcherViewModel.patchCount,
-                        sources = patchSources,
+                        summary = patchedAppSummary,
                         installState = shownInstallState,
                         installedPackageName = installedPackageName,
                         usingMountInstall = usingMountInstall,
+                        installActions = InstallResultActions(
+                            onInstall = ::installPatchedApp,
+                            onUninstall = { packageName ->
+                                installViewModel.requestUninstall(packageName, installAfterUninstall = true)
+                            },
+                            onIgnoreSignatureMismatch = installViewModel::installIgnoringSignatureMismatch,
+                            onOpen = installViewModel::openApp,
+                            onShowInstallError = {
+                                scope.launch {
+                                    // A run that patched fine has not collected these yet
+                                    if (state.errorInfo == null) state.errorInfo = patcherViewModel.buildErrorInfo()
+                                    state.shownFailure = PatcherFailure.INSTALL
+                                }
+                            }
+                        ),
                         excludedPatches = excludedPatches,
                         isExpertMode = useExpertMode,
                         showBackToGameHint = showBackToGameHint,
@@ -630,21 +646,6 @@ private fun PatcherScreenContent(
                                 scope.launch { prefs.backToGameHintSeen.update(true) }
                             }
                             patcherViewModel.hideSuccessScreen()
-                        },
-                        onInstall = ::installPatchedApp,
-                        onUninstall = { packageName ->
-                            installViewModel.requestUninstall(packageName, installAfterUninstall = true)
-                        },
-                        onIgnoreSignatureMismatch = installViewModel::installIgnoringSignatureMismatch,
-                        onOpen = {
-                            installViewModel.openApp()
-                        },
-                        onShowInstallError = {
-                            scope.launch {
-                                // A run that patched fine has not collected these yet
-                                if (state.errorInfo == null) state.errorInfo = patcherViewModel.buildErrorInfo()
-                                state.shownFailure = PatcherFailure.INSTALL
-                            }
                         },
                         onHomeClick = onBackClick,
                         onSaveClick = {
@@ -658,11 +659,9 @@ private fun PatcherScreenContent(
 
                 PatcherState.FAILED -> {
                     PatchingFailed(
-                        packageName = patcherViewModel.packageName,
-                        version = patcherViewModel.version,
-                        patchCount = patcherViewModel.patchCount,
-                        sources = patchSources,
+                        summary = patchedAppSummary,
                         errorMessage = state.errorMessage,
+                        failedPatch = patcherViewModel.patchRun.failedPatch,
                         onHomeClick = onBackClick,
                         onErrorClick = { state.shownFailure = PatcherFailure.PATCHING },
                         // Simple mode keeps no selection of its own to return to

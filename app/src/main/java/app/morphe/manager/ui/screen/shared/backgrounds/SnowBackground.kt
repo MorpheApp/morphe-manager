@@ -5,13 +5,10 @@
 
 package app.morphe.manager.ui.screen.shared.backgrounds
 
-import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import kotlinx.coroutines.launch
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
@@ -21,12 +18,19 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import app.morphe.manager.ui.theme.isDarkTheme
 import kotlin.math.PI
+import kotlin.math.abs
 import kotlin.math.cos
+import kotlin.math.floor
+import kotlin.math.min
+import kotlin.math.pow
 import kotlin.math.sin
 import kotlin.random.Random
 
 /**
  * Snowfall background with layered depth and parallax effect.
+ * Near flakes are crisp and fast, far ones soft out-of-focus dots, and slow gusts of wind push
+ * the whole fall sideways, the near flakes further than the far ones. Flakes drift down slowly and
+ * melt away partway down, so the snow is thickest near the top and thins out toward the bottom.
  * Uses frame-based time so [speedMultiplier] changes smoothly without restarting animations.
  * On patching completion all snowflakes blast upward in a blizzard burst, then settle
  * back down into normal fall.
@@ -41,7 +45,6 @@ fun SnowBackground(
     val isDarkTheme = isDarkTheme()
     val snowColor = if (isDarkTheme) Color.White else Color(0xFF4A5F7A)
     val context = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
 
     val parallaxState = rememberParallaxState(
         enableParallax = enableParallax,
@@ -57,14 +60,18 @@ fun SnowBackground(
             createDetailedSnowflakeBitmap(20, snowColor, DetailLevel.LOW)      // Far - simple
         )
     }
+    // The far layer is out of focus, so it is drawn as soft dots rather than as flakes
+    val bokehBitmap = remember(snowColor) { createBokehBitmap(40, snowColor) }
 
-    // Generate snowflakes with depth layers
+    // Generate snowflakes with depth layers, sorted far to close once for proper layering
     val snowflakes = remember {
-        List(40) {
+        List(56) {
+            // Depth runs from far (0) to close (1), and alpha and parallax grow with it, so the
+            // layers that set size and speed have to follow the same direction
             val depth = Random.nextFloat()
             val layer = when {
-                depth < 0.33f -> 0  // Close layer
-                depth < 0.66f -> 1  // Middle layer
+                depth > 0.66f -> 0  // Close layer
+                depth > 0.33f -> 1  // Middle layer
                 else -> 2           // Far layer
             }
 
@@ -72,9 +79,9 @@ fun SnowBackground(
                 x = Random.nextFloat(),
                 initialProgress = Random.nextFloat(),
                 fallSpeed = when (layer) {
-                    0 -> 8000 + Random.nextInt(3000)     // Fast (close)
-                    1 -> 12000 + Random.nextInt(4000)    // Medium
-                    else -> 16000 + Random.nextInt(5000) // Slow (far)
+                    0 -> 15000 + Random.nextInt(5000)    // Fast (close)
+                    1 -> 22000 + Random.nextInt(6000)    // Medium
+                    else -> 30000 + Random.nextInt(8000) // Slow (far)
                 },
                 swayAmplitude = when (layer) {
                     0 -> 0.04f + Random.nextFloat() * 0.03f
@@ -83,40 +90,31 @@ fun SnowBackground(
                 },
                 swayFrequency = 1.2f + Random.nextFloat() * 1.0f,
                 size = when (layer) {
-                    0 -> 0.9f + Random.nextFloat() * 0.4f    // 0.9-1.3
-                    1 -> 0.7f + Random.nextFloat() * 0.3f    // 0.7-1.0
-                    else -> 0.5f + Random.nextFloat() * 0.2f // 0.5-0.7
+                    0 -> 0.75f + Random.nextFloat() * 0.35f  // 0.75-1.1
+                    1 -> 0.6f + Random.nextFloat() * 0.25f   // 0.6-0.85
+                    else -> 0.45f + Random.nextFloat() * 0.2f // 0.45-0.65
                 },
-                rotationSpeed = 15000 + Random.nextInt(10000),
+                rotationSpeed = 8000 + Random.nextInt(22000),
+                rotationDirection = if (Random.nextBoolean()) 1f else -1f,
                 initialRotation = Random.nextFloat() * 360f,
                 swayPhaseOffset = Random.nextFloat() * 2f * PI.toFloat(),
+                seed = Random.nextFloat() * 1000f,
                 depth = depth,
                 layer = layer
             )
-        }
+        }.sortedBy { it.depth }
     }
+
+    // One paint for every flake, its alpha set per draw, rather than a fresh one per flake per frame
+    val flakePaint = remember { Paint() }
 
     // Frame-based time - accumulates in ms at speed 1x, respects speedMultiplier smoothly.
     // Wraps at 120 000 ms to keep values manageable (same cycle as original)
     val animatedTime = rememberAnimatedTime(speedMultiplier)
 
-    // Blizzard burst: snowflakes suddenly fly upward and fade out on completion
-    val burstProgress = remember { Animatable(0f) }
-
-    CompletionEffect(patchingCompleted) {
-        coroutineScope.launch {
-            burstProgress.snapTo(0f)
-            burstProgress.animateTo(
-                targetValue   = 1f,
-                animationSpec = tween(durationMillis = 1400, easing = FastOutSlowInEasing)
-            )
-            // Smooth return - snowflakes settle back down and fade in gently
-            burstProgress.animateTo(
-                targetValue   = 0f,
-                animationSpec = tween(durationMillis = 600, easing = FastOutSlowInEasing)
-            )
-        }
-    }
+    // Blizzard burst: snowflakes suddenly fly upward and fade out on completion,
+    // then settle back down and fade in gently
+    val burstProgress = rememberCompletionPulse(patchingCompleted, riseMillis = 1400, fallMillis = 600)
 
     Canvas(modifier = modifier.fillMaxSize()) {
         val width = size.width
@@ -133,18 +131,35 @@ fun SnowBackground(
             else -> 1f
         }
 
-        // Sort snowflakes by depth (far to close) for proper layering
-        snowflakes.sortedBy { it.depth }.forEach { flake ->
+        // Wind: two slow waves, both whole fractions of the cycle, make gusts that come and go.
+        // Squaring keeps the calm stretches calm and lets the gusts stand out
+        val wave = 0.65f * sin(globalTime * 2f * PI.toFloat() / 24000f) +
+                0.35f * sin(globalTime * 2f * PI.toFloat() / 8000f + 1.3f)
+        val gust = wave * abs(wave)
+
+        snowflakes.forEach { flake ->
             // Calculate continuous fall progress
             val timeProgress = globalTime / flake.fallSpeed
-            val fallProgress = (flake.initialProgress + timeProgress) % 1f
+            val travel = flake.initialProgress + timeProgress
+            val fallProgress = travel % 1f
+
+            // Every pass down the screen starts from a fresh column and melts at its own height,
+            // so the fall never repeats the same tracks
+            val pass = floor(travel)
+            val column = fract(sin(pass * 12.9898f + flake.seed) * 43758.547f)
+            val meltAt = MELT_FROM + (1f - MELT_FROM) * fract(sin(pass * 78.233f + flake.seed) * 12543.123f).pow(1.4f)
+            val fadeIn = (fallProgress / FLAKE_FADE).coerceIn(0f, 1f)
+            val fadeOut = ((meltAt - fallProgress) / FLAKE_FADE).coerceIn(0f, 1f)
+            val life = min(fadeIn, fadeOut).let { it * it * (3f - 2f * it) }
+            if (life <= 0f) return@forEach
 
             // Calculate sway - continuous wave
             val swayPhase = timeProgress * 2f * PI.toFloat() * flake.swayFrequency + flake.swayPhaseOffset
             val sway = sin(swayPhase) * flake.swayAmplitude
 
-            // Calculate rotation - continuous
-            val rotation = (timeProgress * 360000f / flake.rotationSpeed + flake.initialRotation) % 360f
+            // Calculate rotation - continuous, each flake at its own pace and in its own direction
+            val rotation = (flake.rotationDirection * timeProgress * 360000f / flake.rotationSpeed +
+                    flake.initialRotation) % 360f
 
             // Apply parallax with depth-based strength
             val parallaxStrength = flake.depth * 40f
@@ -155,7 +170,8 @@ fun SnowBackground(
             // During burst: flakes fly upward (negative Y offset) proportional to speed
             val bp = burstProgress.value
             val burstLift = if (bp > 0f) bp * (height + 200f) * (1f + flake.depth * 0.5f) else 0f
-            val baseX = (flake.x + sway) * width + parallaxX
+            val wind = gust * (0.03f + 0.07f * flake.depth)
+            val baseX = (fract(flake.x + column) + sway + wind) * width + parallaxX
             val baseY = fallProgress * (height + 100f) - 50f + parallaxY - burstLift
 
             // Wrap X position for horizontal parallax
@@ -166,7 +182,7 @@ fun SnowBackground(
             }
 
             // Get bitmap for this layer
-            val bitmap = snowflakeBitmaps[flake.layer]
+            val bitmap = if (flake.layer == 2) bokehBitmap else snowflakeBitmaps[flake.layer]
             val drawSize = bitmap.width.toFloat() * flake.size
 
             // Calculate alpha with edge fade for seamless loop
@@ -179,7 +195,7 @@ fun SnowBackground(
 
             // Apply cycle fade + burst fade (flakes vanish as they fly up)
             val burstFade = if (burstProgress.value > 0f) (1f - burstProgress.value).coerceIn(0f, 1f) else 1f
-            val finalAlpha = depthAlpha * (0.7f + flake.size * 0.3f) * edgeFade * cycleFade * burstFade
+            val finalAlpha = depthAlpha * (0.7f + flake.size * 0.3f) * edgeFade * cycleFade * burstFade * life
 
             // Only draw if visible
             if (finalAlpha > 0.01f && baseY > -50f && baseY < height + 50f) {
@@ -194,9 +210,7 @@ fun SnowBackground(
                         srcSize = IntSize(bitmap.width, bitmap.height),
                         dstOffset = IntOffset((-drawSize / 2).toInt(), (-drawSize / 2).toInt()),
                         dstSize = IntSize(drawSize.toInt(), drawSize.toInt()),
-                        paint = Paint().apply {
-                            alpha = finalAlpha
-                        }
+                        paint = flakePaint.apply { alpha = finalAlpha }
                     )
 
                     canvas.restore()
@@ -205,6 +219,13 @@ fun SnowBackground(
         }
     }
 }
+
+// Shortest share of the fall a flake lives before it melts away, and how much of the fall its fade
+// in and out each take
+private const val MELT_FROM = 0.4f
+private const val FLAKE_FADE = 0.12f
+
+private fun fract(value: Float) = value - floor(value)
 
 /**
  * Detail level for snowflake rendering.
@@ -361,6 +382,27 @@ private fun createDetailedSnowflakeBitmap(size: Int, color: Color, detail: Detai
     return bitmap
 }
 
+/**
+ * A soft round dot fading out from its center, for flakes too far away to be in focus.
+ */
+private fun createBokehBitmap(size: Int, color: Color): ImageBitmap {
+    val bitmap = ImageBitmap(size, size)
+    val center = size / 2f
+    Canvas(bitmap).drawCircle(
+        center = Offset(center, center),
+        radius = center,
+        paint = Paint().apply {
+            shader = RadialGradientShader(
+                center = Offset(center, center),
+                radius = center,
+                colors = listOf(color, color.copy(alpha = 0.6f), Color.Transparent),
+                colorStops = listOf(0f, 0.45f, 1f)
+            )
+        }
+    )
+    return bitmap
+}
+
 private data class SnowflakeData(
     val x: Float,
     val initialProgress: Float,
@@ -369,8 +411,10 @@ private data class SnowflakeData(
     val swayFrequency: Float,
     val size: Float,
     val rotationSpeed: Int,
+    val rotationDirection: Float,
     val initialRotation: Float,
     val swayPhaseOffset: Float,
+    val seed: Float, // Varies where each pass of the flake starts and melts
     val depth: Float,
     val layer: Int // 0 = close, 1 = middle, 2 = far
 )

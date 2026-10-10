@@ -5,10 +5,6 @@
 
 package app.morphe.manager.ui.screen.shared.backgrounds
 
-import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.core.withInfiniteAnimationFrameMillis
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -16,7 +12,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalContext
-import kotlinx.coroutines.launch
 import kotlin.math.abs
 import kotlin.math.sqrt
 import kotlin.random.Random
@@ -24,7 +19,7 @@ import kotlin.random.Random
 /**
  * Particles background - small particles drift with velocity, friction and soft edge bounce.
  * Nearby particles connect with faint lines (same as constellation but more dynamic and dense).
- * Uses a dedicated frame loop so physics run at display rate regardless of [speedMultiplier].
+ * Physics run on the shared background step regardless of [speedMultiplier].
  * [speedMultiplier] controls the drift velocity scale.
  * On patching completion all particles explode outward from the screen center then drift back.
  */
@@ -39,7 +34,6 @@ fun ParticlesBackground(
     val secondaryColor = MaterialTheme.colorScheme.secondary
     val tertiaryColor  = MaterialTheme.colorScheme.tertiary
     val context        = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
 
     val parallaxState = rememberParallaxState(
         enableParallax = enableParallax,
@@ -47,9 +41,10 @@ fun ParticlesBackground(
         context = context
     )
 
-    // Particle state - mutable so physics loop can update positions each frame
+    // Particles are moved in place by the physics step, which bumps step once per pass so the
+    // canvas redraws once, rather than a snapshot write per particle per step
     val particles = remember {
-        mutableStateListOf<Particle>().apply {
+        ArrayList<Particle>(65).apply {
             repeat(65) {
 
                 // Create 3 particle size groups for more natural depth
@@ -73,78 +68,52 @@ fun ParticlesBackground(
         }
     }
 
-    // targetSpeedState updated via SideEffect so the physics loop stays reactive
-    val targetSpeedState = remember { mutableFloatStateOf(speedMultiplier) }
-    SideEffect { targetSpeedState.floatValue = speedMultiplier }
+    // explodeProgress 0→1: particles burst from center, then the push eases off
+    // and they drift back naturally
+    val explodeProgress = rememberCompletionPulse(patchingCompleted, riseMillis = 500, fallMillis = 800)
 
-    // explodeProgress 0→1: particles burst from center, then drift back naturally
-    val explodeProgress = remember { Animatable(0f) }
+    val step = remember { mutableIntStateOf(0) }
 
-    CompletionEffect(patchingCompleted) {
-        coroutineScope.launch {
-            explodeProgress.snapTo(0f)
-            // Burst outward
-            explodeProgress.animateTo(1f, tween(500, easing = FastOutSlowInEasing))
-            // Smooth return - ep goes 1→0 so push gradually decreases to zero
-            explodeProgress.animateTo(0f, tween(800, easing = FastOutSlowInEasing))
-        }
-    }
+    // Physics integrates the time it skipped, so a slower step moves particles the same
+    // distance in fewer, larger increments
+    BackgroundStepEffect(speedMultiplier) { scaledMs, _ ->
+        val speedScale = scaledMs / 16.67f
 
-    // Physics loop - runs every display frame independently of Compose animation clock
-    AnimationFrameEffect {
-        var lastFrameMs = withInfiniteAnimationFrameMillis { it }
-        var currentSpeed = targetSpeedState.floatValue
-        // Physics integrates the time it skipped, so a slower step moves particles the same
-        // distance in fewer, larger increments
-        var elapsedMs = 0f
-        var pendingDelta = 0f
-        while (true) {
-            withInfiniteAnimationFrameMillis { frameMs ->
-                val delta = (frameMs - lastFrameMs).coerceIn(0L, 64L).toFloat()
-                lastFrameMs = frameMs
+        particles.forEach { p ->
+            var nx  = p.x  + p.vx * speedScale
+            var ny  = p.y  + p.vy * speedScale
+            var nvx = p.vx
+            var nvy = p.vy
 
-                // Lerp speed for smooth transitions
-                currentSpeed += (targetSpeedState.floatValue - currentSpeed) * (delta / 1000f) * 2.5f
+            // Soft edge bounce - reverse velocity and nudge back inside
+            if (nx < 0.02f) { nvx = abs(nvx); nx = 0.02f }
+            if (nx > 0.98f) { nvx = -abs(nvx); nx = 0.98f }
+            if (ny < 0.02f) { nvy = abs(nvy); ny = 0.02f }
+            if (ny > 0.98f) { nvy = -abs(nvy); ny = 0.98f }
 
-                elapsedMs += delta
-                pendingDelta += delta
-                if (elapsedMs < BACKGROUND_STEP_INTERVAL_MS) return@withInfiniteAnimationFrameMillis
-                elapsedMs -= BACKGROUND_STEP_INTERVAL_MS
+            // Tiny random drift to avoid completely straight paths
+            nvx += (Random.nextFloat() - 0.5f) * 0.000004f
+            nvy += (Random.nextFloat() - 0.5f) * 0.000004f
 
-                val speedScale = currentSpeed * (pendingDelta / 16.67f)
-                pendingDelta = 0f
-
-                particles.forEachIndexed { index, p ->
-                    var nx  = p.x  + p.vx * speedScale
-                    var ny  = p.y  + p.vy * speedScale
-                    var nvx = p.vx
-                    var nvy = p.vy
-
-                    // Soft edge bounce - reverse velocity and nudge back inside
-                    if (nx < 0.02f) { nvx = abs(nvx); nx = 0.02f }
-                    if (nx > 0.98f) { nvx = -abs(nvx); nx = 0.98f }
-                    if (ny < 0.02f) { nvy = abs(nvy); ny = 0.02f }
-                    if (ny > 0.98f) { nvy = -abs(nvy); ny = 0.98f }
-
-                    // Tiny random drift to avoid completely straight paths
-                    nvx += (Random.nextFloat() - 0.5f) * 0.000004f
-                    nvy += (Random.nextFloat() - 0.5f) * 0.000004f
-
-                    // Speed cap so particles never rocket across the screen
-                    val speed = sqrt(nvx * nvx + nvy * nvy)
-                    val maxSpeed = 0.00025f
-                    if (speed > maxSpeed) {
-                        nvx = nvx / speed * maxSpeed
-                        nvy = nvy / speed * maxSpeed
-                    }
-
-                    particles[index] = p.copy(x = nx, y = ny, vx = nvx, vy = nvy)
-                }
+            // Speed cap so particles never rocket across the screen
+            val speed = sqrt(nvx * nvx + nvy * nvy)
+            val maxSpeed = 0.00025f
+            if (speed > maxSpeed) {
+                nvx = nvx / speed * maxSpeed
+                nvy = nvy / speed * maxSpeed
             }
+
+            p.x = nx
+            p.y = ny
+            p.vx = nvx
+            p.vy = nvy
         }
+        step.intValue++
     }
 
     Canvas(modifier = modifier.fillMaxSize()) {
+        // Read so every physics step invalidates the draw
+        step.intValue
         val tiltX = parallaxState.tiltX.value
         val tiltY = parallaxState.tiltY.value
         val ep    = explodeProgress.value
@@ -213,11 +182,11 @@ fun ParticlesBackground(
     }
 }
 
-private data class Particle(
-    val x: Float,
-    val y: Float,
-    val vx: Float,
-    val vy: Float,
+private class Particle(
+    var x: Float,
+    var y: Float,
+    var vx: Float,
+    var vy: Float,
     val radius: Float,
     val colorIndex: Int
 )

@@ -1,6 +1,7 @@
 #!/system/bin/sh
 package_name="__PKG_NAME__"
 version="__VERSION__"
+manager_package="__MANAGER_PKG__"
 
 # Resolve the module directory from the script's own path.
 # Falls back to the standard Magisk modules path if readlink is unavailable
@@ -21,6 +22,18 @@ log="$module_dir/log.txt"
 
 log_msg() {
   echo "$*" >> "$log"
+}
+
+# The root manager shows the description, so it carries the outcome of this boot.
+set_status() {
+  sed -i "s|^description=.*|description=$1|" "$module_dir/module.prop"
+}
+
+# Logs why the patched APK was not mounted, shows it on the module and stops.
+not_mounted() {
+  log_msg "Not mounting: $1"
+  set_status "Not mounted at boot: $1"
+  exit 1
 }
 
 base_path="$base_dir/$package_name.apk"
@@ -44,9 +57,11 @@ resolve_apk_from_path() {
   fi
 }
 
+# The command is set apart with -- because toybox nsenter would otherwise take mount's
+# and umount's options as its own.
 mount_in_zygote_namespaces() {
   for zpid in $(pidof zygote64) $(pidof zygote); do
-    if nsenter -t "$zpid" -m mount -o bind "$base_path" "$stock_path" 2>/dev/null; then
+    if nsenter -t "$zpid" -m -- mount -o bind "$base_path" "$stock_path" 2>/dev/null; then
       log_msg "Mounted in zygote namespace: $zpid"
     else
       log_msg "Failed to mount in zygote namespace: $zpid"
@@ -54,9 +69,27 @@ mount_in_zygote_namespaces() {
   done
 }
 
+# A namespace can hold the patched APK more than once, so each one is unmounted until
+# the stock path no longer appears in its mount table.
 unmount_from_zygote_namespaces() {
   for zpid in $(pidof zygote64) $(pidof zygote); do
-    nsenter -t "$zpid" -m umount -l "$stock_path" 2>/dev/null || true
+    while grep -qF " $stock_path " "/proc/$zpid/mountinfo" &&
+      nsenter -t "$zpid" -m -- umount -l "$stock_path" 2>/dev/null; do :; done
+  done
+}
+
+# Processes started before the mount, such as System UI, keep what their namespace held, and an
+# APK another root install left there makes them look up the app's resources in another version.
+# A previous patched APK counts too, it shows up marked deleted once a new one replaced it.
+replace_other_mounts() {
+  for mountinfo in $(grep -lF " $stock_path " /proc/[0-9]*/mountinfo 2>/dev/null); do
+    pid="$(echo "$mountinfo" | cut -d/ -f3)"
+    sources="$(grep -F " $stock_path " "$mountinfo" | cut -d' ' -f4 | grep -vxF "${base_path#/data}")" ||
+      continue
+    log_msg "Replacing $(echo $sources) in namespace of pid: $pid"
+    while grep -qF " $stock_path " "$mountinfo" &&
+      nsenter -t "$pid" -m -- umount -l "$stock_path" 2>/dev/null; do :; done
+    nsenter -t "$pid" -m -- mount -o bind "$base_path" "$stock_path" 2>/dev/null
   done
 }
 
@@ -88,14 +121,15 @@ while [ "$waited" -lt "$max_wait" ]; do
   # Extract all versionName entries for this package from dumpsys, stopping before
   # any hidden system package section to avoid picking up OEM preinstall metadata.
   package_dump="$(dumpsys package "$package_name" 2>/dev/null)"
+  # The hidden section repeats the package header, so it ends the read rather than pausing it.
   stock_versions="$(echo "$package_dump" | awk -v pkg="$package_name" '
     $0 ~ ("Package \\[" pkg "\\]") { in_pkg = 1 }
-    $0 ~ /Hidden system package/ { in_pkg = 0 }
+    $0 ~ /Hidden system package/ { exit }
     in_pkg && /versionName=/ { sub(/.*versionName=/, ""); print }
   ' | tr -d '\r')"
   stock_path_dumpsys="$(echo "$package_dump" | awk -v pkg="$package_name" '
     $0 ~ ("Package \\[" pkg "\\]") { in_pkg = 1 }
-    $0 ~ /Hidden system package/ { in_pkg = 0 }
+    $0 ~ /Hidden system package/ { exit }
     in_pkg && /resourcePath=/ { sub(/.*resourcePath=/, ""); print; exit }
     in_pkg && /codePath=/ { sub(/.*codePath=/, ""); print; exit }
   ' | tr -d '\r')"
@@ -143,18 +177,20 @@ log_msg "stock_versions: $(echo "$stock_versions" | tr '\n' ' ' | xargs)"
 # Abort if the patched APK version doesn't match the installed stock version.
 # Mounting a mismatched APK would cause a signature or version mismatch crash.
 if [ -n "$stock_versions" ] && ! echo "$stock_versions" | grep -Fxq "$version"; then
-  log_msg "Not mounting as versions don't match"
-  exit 1
+  # Usually a store update, which Morphe can restore. Root reaches the unexported receiver,
+  # -f 0x20 a Morphe not started since boot, and & keeps am from holding up the status.
+  am broadcast -f 0x20 -a app.morphe.manager.action.MOUNT_REPLACED \
+    -n "$manager_package/app.morphe.manager.receiver.MountReplacedReceiver" \
+    --es package "$package_name" >/dev/null 2>&1 &
+  not_mounted "v$stock_versions is installed but the patch is for v$version. Open Morphe to restore it"
 fi
 
 if [ -z "$stock_path" ] || [ -z "$stock_versions" ]; then
-  log_msg "Not mounting as app info could not be loaded"
-  exit 1
+  not_mounted "the app was not found"
 fi
 
 if [ ! -f "$base_path" ]; then
-  log_msg "Not mounting as patched APK is missing: $base_path"
-  exit 1
+  not_mounted "the patched APK is missing"
 fi
 
 # Set the correct SELinux context and bind-mount the patched APK over the stock one.
@@ -162,11 +198,12 @@ if ! chcon u:object_r:apk_data_file:s0 "$base_path" 2>> "$log"; then
   log_msg "Failed to set SELinux context"
 fi
 unmount_from_zygote_namespaces
-umount -l "$stock_path" 2>/dev/null || true
+while grep -qF " $stock_path " /proc/self/mountinfo && umount -l "$stock_path" 2>/dev/null; do :; done
 if mount -o bind "$base_path" "$stock_path" 2>> "$log"; then
   log_msg "Mounted in root namespace"
 else
-  log_msg "Failed to mount in root namespace"
-  exit 1
+  not_mounted "mounting failed, see log.txt"
 fi
 mount_in_zygote_namespaces
+replace_other_mounts
+set_status "Mounted the patched v$version at boot"

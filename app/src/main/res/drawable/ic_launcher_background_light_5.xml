@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Light variant 5 (Glacier theme) -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="315"
+        android:endColor="#A9D8F5"
+        android:startColor="#F4FAFF"
+        android:type="linear" />
+</shape>

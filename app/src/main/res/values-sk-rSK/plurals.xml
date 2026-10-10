@@ -129,6 +129,12 @@
         <item quantity="many">%s zdrojov nainštalovaných</item>
         <item quantity="other">%s zdrojov nainštalovaných</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="one">%1$s · %2$s filtrovaný</item>
+        <item quantity="few">%1$s · %2$s filtrované</item>
+        <item quantity="many">%1$s · %2$s filtrovaných</item>
+        <item quantity="other">%1$s · %2$s filtrovaných</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s skrytá aplikácia</item>
         <item quantity="few">%s skryté aplikácie</item>

@@ -129,6 +129,12 @@
         <item quantity="many">%s источников установлено</item>
         <item quantity="other">%s источников установлено</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="one">%1$s · отфильтровано: %2$s</item>
+        <item quantity="few">%1$s · отфильтровано: %2$s</item>
+        <item quantity="many">%1$s · отфильтровано: %2$s</item>
+        <item quantity="other">%1$s · отфильтровано: %2$s</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s скрытое приложение</item>
         <item quantity="few">%s скрытые приложения</item>

@@ -10,15 +10,11 @@ import android.graphics.PorterDuffColorFilter
 import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.Typeface
-import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
@@ -31,7 +27,6 @@ import androidx.core.graphics.createBitmap
 import app.morphe.manager.ui.theme.MorpheBrandBlue
 import app.morphe.manager.ui.theme.MorpheBrandTeal
 import app.morphe.manager.ui.theme.isDarkTheme
-import kotlinx.coroutines.launch
 import kotlin.math.ceil
 import kotlin.random.Random
 
@@ -105,7 +100,6 @@ fun MatrixBackground(
 ) {
     val isDarkTheme = isDarkTheme()
     val context = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
 
     val maxAlpha = if (isDarkTheme) 0.85f else 0.5f
 
@@ -130,21 +124,7 @@ fun MatrixBackground(
     val animatedTime = rememberAnimatedTime(speedMultiplier)
 
     // Completion surge: the rain jumps ahead and brightens before falling back into place
-    val burstProgress = remember { Animatable(0f) }
-
-    CompletionEffect(patchingCompleted) {
-        coroutineScope.launch {
-            burstProgress.snapTo(0f)
-            burstProgress.animateTo(
-                targetValue = 1f,
-                animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing)
-            )
-            burstProgress.animateTo(
-                targetValue = 0f,
-                animationSpec = tween(durationMillis = 1300, easing = FastOutSlowInEasing)
-            )
-        }
-    }
+    val burstProgress = rememberCompletionPulse(patchingCompleted, riseMillis = 500, fallMillis = 1300)
 
     BoxWithConstraints(modifier = modifier.fillMaxSize()) {
         val columnCount = (with(density) { maxWidth.toPx() } / columnStep).toInt().coerceAtLeast(1)

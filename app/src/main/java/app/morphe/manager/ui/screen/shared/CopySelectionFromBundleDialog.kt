@@ -109,7 +109,7 @@ fun CopySelectionFromBundleDialog(
                 text = stringResource(R.string.copy_selection_title),
                 style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight.SemiBold,
-                color = LocalDialogTextColor.current
+                color = dialogTextColor()
             )
 
             when {

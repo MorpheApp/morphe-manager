@@ -32,7 +32,7 @@ fun ExpandableSurface(
     modifier: Modifier = Modifier,
     icon: ImageVector = Icons.Outlined.Info,
     initialExpanded: Boolean = false,
-    headerTint: Color = LocalDialogTextColor.current
+    headerTint: Color = dialogTextColor()
 ) {
     var expanded by remember { mutableStateOf(initialExpanded) }
 
@@ -76,7 +76,7 @@ fun ExpandableSurface(
                 ExpandChevron(
                     expanded = expanded,
                     modifier = Modifier.size(Defaults.IconSizeSmall),
-                    tint = LocalDialogTextColor.current.copy(alpha = 0.7f),
+                    tint = dialogTextColor().copy(alpha = 0.7f),
                     announced = true
                 )
             }

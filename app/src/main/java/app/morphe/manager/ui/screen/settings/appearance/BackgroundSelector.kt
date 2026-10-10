@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen.settings.appearance
 
+import android.text.format.DateFormat
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -13,12 +14,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.screen.shared.backgrounds.LocalBackdropInDialog
+import app.morphe.manager.ui.theme.SeasonalEvent
+import app.morphe.manager.ui.theme.backgroundOver
 import app.morphe.manager.ui.viewmodel.RandomInterval
+import java.time.format.DateTimeFormatter
 
 /**
  * Settings row naming the current background, opening [BackgroundPickerDialog] on tap.
@@ -44,10 +49,13 @@ fun BackgroundSettingsItem(
  * Background animation picker. A pick applies at once and plays behind the dialog, so the dialog
  * stays open to try another.
  * RANDOM is one more tile. Below a divider sit the settings of the pick: how often RANDOM changes,
- * and the parallax every background but NONE can take.
+ * and the parallax every background but NONE can take. Last comes the switch for seasonal themes,
+ * which put an event's own background over the pick while the event runs.
  *
  * @param resolvedRandomBackground The background RANDOM currently stands for, previewed while it
  *        is the pick.
+ * @param seasonalEvent The event running today, whose background the dialog shows over the pick,
+ *        as the app does, with a notice of how long it stays.
  */
 @Composable
 fun BackgroundPickerDialog(
@@ -59,6 +67,9 @@ fun BackgroundPickerDialog(
     resolvedRandomBackground: BackgroundType?,
     enableParallax: Boolean,
     onParallaxToggle: () -> Unit,
+    seasonalThemes: Boolean,
+    seasonalEvent: SeasonalEvent?,
+    onSeasonalThemesToggle: () -> Unit,
     matrixUnlocked: Boolean = false
 ) {
     val windowSize = rememberWindowSize()
@@ -68,8 +79,21 @@ fun BackgroundPickerDialog(
         WindowWidthSizeClass.Expanded -> 5
     }
 
-    // Every type, minus the hidden ones still to be found
-    val gridTypes = BackgroundType.entries.filter { matrixUnlocked || it !in BackgroundType.HIDDEN }
+    val shownBackground = seasonalEvent.backgroundOver(selectedBackground, seasonalThemes)
+    val locale = LocalConfiguration.current.locales[0]
+    val seasonalNotice = seasonalEvent?.let { event ->
+        val pattern = DateFormat.getBestDateTimePattern(locale, "MMMMd")
+        stringResource(
+            R.string.settings_appearance_seasonal_background_notice,
+            stringResource(event.background.displayNameResId),
+            DateTimeFormatter.ofPattern(pattern, locale).format(event.endDate())
+        )
+    }
+
+    // Every type, minus the hidden ones still to be found and the ones only an event puts on
+    val gridTypes = BackgroundType.entries.filter {
+        it !in BackgroundType.SEASONAL && (matrixUnlocked || it !in BackgroundType.HIDDEN)
+    }
 
     AppDialog(
         onDismissRequest = onDismiss,
@@ -85,7 +109,7 @@ fun BackgroundPickerDialog(
         backdrop = {
             CompositionLocalProvider(LocalBackdropInDialog provides true) {
                 AnimatedBackground(
-                    type = selectedBackground,
+                    type = shownBackground,
                     resolvedType = resolvedRandomBackground,
                     enableParallax = enableParallax
                 )
@@ -95,13 +119,29 @@ fun BackgroundPickerDialog(
         // Spacing lives inside the blocks that come and go rather than between them, where a
         // spacedBy gap would vanish in one frame while the surrounding block is still shrinking
         Column {
+            // The dialog shows what the app shows, so a running event explains why that is not the pick
+            AnimatedVisibility(
+                visible = shownBackground != selectedBackground && seasonalNotice != null,
+                enter = Animations.expandFadeEnter,
+                exit = Animations.shrinkFadeExit
+            ) {
+                Notice(
+                    text = seasonalNotice.orEmpty(),
+                    icon = Icons.Outlined.Celebration,
+                    tone = SemanticTone.Primary,
+                    density = NoticeDensity.Compact,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+            }
+
             OptionGrid(items = gridTypes, columns = columns) { bgType, itemModifier ->
                 ModernIconOptionCard(
                     selected = selectedBackground == bgType,
                     onClick = { onBackgroundSelected(bgType) },
                     icon = backgroundIcon(bgType),
                     label = stringResource(bgType.displayNameResId),
-                    modifier = itemModifier
+                    modifier = itemModifier,
+                    compact = true
                 )
             }
 
@@ -134,7 +174,8 @@ fun BackgroundPickerDialog(
                                 onClick = { onIntervalSelected(interval) },
                                 icon = intervalIcon(interval),
                                 label = stringResource(interval.labelResId),
-                                modifier = itemModifier
+                                modifier = itemModifier,
+                                compact = true
                             )
                         }
                     }
@@ -150,6 +191,18 @@ fun BackgroundPickerDialog(
                     }
                 }
             }
+
+            // Kept out of the block above: an event also brings its own greetings, which a
+            // background of NONE does not switch off
+            SettingsGroup(modifier = Modifier.padding(top = 8.dp)) {
+                SettingsSwitchItem(
+                    title = stringResource(R.string.settings_appearance_seasonal_themes),
+                    subtitle = stringResource(R.string.settings_appearance_seasonal_themes_description),
+                    icon = Icons.Outlined.Celebration,
+                    checked = seasonalThemes,
+                    onToggle = onSeasonalThemesToggle
+                )
+            }
         }
     }
 }
@@ -161,8 +214,11 @@ private fun backgroundIcon(type: BackgroundType): ImageVector = when (type) {
     BackgroundType.SPACE     -> Icons.Outlined.AutoAwesome
     BackgroundType.SHAPES    -> Icons.Outlined.Pentagon
     BackgroundType.SNOW      -> Icons.Outlined.AcUnit
+    BackgroundType.HALLOWEEN -> Icons.Outlined.NightsStay
+    BackgroundType.FIREWORKS -> Icons.Outlined.Flare
     BackgroundType.GRID      -> Icons.Outlined.Apps
     BackgroundType.PARTICLES -> Icons.Outlined.BubbleChart
+    BackgroundType.LAVA      -> Icons.Outlined.WaterDrop
     BackgroundType.MATRIX    -> Icons.Outlined.Code
     BackgroundType.NONE      -> Icons.Outlined.VisibilityOff
     BackgroundType.RANDOM    -> Icons.Outlined.Shuffle

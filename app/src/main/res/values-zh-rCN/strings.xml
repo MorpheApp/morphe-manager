@@ -123,6 +123,26 @@
     <string name="home_greeting_super_late_3">到这个点，干脆起来更新吧</string>
     <string name="home_greeting_super_late_4">你和服务器，都在线上</string>
     <string name="home_greeting_super_late_5">夜间且高效</string>
+    <!-- Halloween greetings, shown instead of the ones above around October 31 -->
+    <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_1">不给补丁就捣蛋？</string>
+    <string name="home_greeting_halloween_2">这些 APK 中没有鬼魂，我们检查过了</string>
+    <string name="home_greeting_halloween_3">万圣节季，新补丁</string>
+    <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
+    <string name="home_greeting_halloween_4">有邪恶之物正打补丁而来</string>
+    <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
+    <string name="home_greeting_winter_1">节日快乐，新补丁</string>
+    <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
+    <string name="home_greeting_winter_2">下雪吧，打补丁吧</string>
+    <string name="home_greeting_winter_3">新年，新补丁</string>
+    <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
+    <string name="home_greeting_winter_4">冒着风雪打补丁</string>
+    <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">新年快乐！</string>
+    <string name="home_greeting_new_year_2">倒计时迎接全新补丁</string>
+    <string name="home_greeting_new_year_3">新的一年，一如既往的无广告应用</string>
+    <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">旧版本不去，新版本不来</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">补丁源</string>
     <string name="sources_search">搜索源和补丁</string>
@@ -272,7 +292,6 @@
     <string name="home_use_installed_app">使用已安装的应用程序</string>
     <string name="home_installed_app_picker_title">已安装的应用</string>
     <string name="home_installed_app_picker_empty">未找到应用</string>
-    <string name="home_installed_app_picker_filter_all">所有应用</string>
     <string name="home_installed_app_picker_filter_user">仅用户应用</string>
     <string name="home_installed_app_picker_filter_system">仅系统应用</string>
     <string name="home_invalid_apk_unreadable">无法读取文件。请检查“外部存储”是否被限制电池使用</string>
@@ -281,7 +300,6 @@
     <string name="home_invalid_apk_io_error">无法打开文件。请重试</string>
     <string name="home_external_apk_expert_mode_required">此功能仅在专家模式下可用</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">高级模式</string>
     <string name="expert_mode_search">搜索补丁</string>
     <string name="expert_mode_disable_all">禁用所有</string>
     <string name="expert_mode_disable_all_done">所有补丁已禁用</string>
@@ -372,44 +390,43 @@
     <string name="adaptive_icon_select_image">选择图像</string>
     <string name="adaptive_icon_change_image">更改图像</string>
     <string name="image_load_failed">无法加载此图片</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">前景图像</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">启动器图标</string>
+    <string name="adaptive_icon_gesture_hint">拖动以移动，双指缩放以调整大小</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">预览</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">标准</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">主题</string>
     <string name="adaptive_icon_background_color">背景颜色</string>
     <string name="adaptive_icon_reset_transform">重置位置和缩放</string>
-    <string name="adaptive_icon_safe_zone_inner">安全区域（始终可见）</string>
-    <string name="adaptive_icon_safe_zone_outer">遮罩区域（可能会被剪切）</string>
-    <string name="adaptive_icon_no_transparency_warning">图片没有透明像素。结果可能看起来不正确</string>
+    <string name="adaptive_icon_no_transparency_warning">此图片没有透明像素，因此主题图标和通知图标会保留 Morphe 标志</string>
     <string name="adaptive_icon_created_success">自适应图标创建成功</string>
     <string name="adaptive_icon_creation_failed">创建自适应图标失败</string>
-    <string name="adaptive_icon_label">自适应</string>
-    <string name="adaptive_icon_monochrome_label">单色</string>
     <string name="adaptive_icon_guide">图标创建指南</string>
     <string name="adaptive_icon_guide_png_title">使用带有透明背景的PNG</string>
-    <string name="adaptive_icon_guide_png_body">前景必须是带有透明背景的PNG文件。纯色背景看起来会不正确——背景颜色应来自下面的背景选择器。</string>
+    <string name="adaptive_icon_guide_png_body">透明背景上的标志效果最佳，背景颜色在下方选取。没有透明度的图片会填满整个图标，此时主题图标和通知图标会保留 Morphe 标志。</string>
     <string name="adaptive_icon_guide_safe_zones_title">安全区域</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"内区（实线）：内容在所有启动器形状上始终完全可见。
-外区（虚线）：可能会被启动器蒙版剪裁——将重要细节保留在内区内。"</string>
+    <string name="adaptive_icon_guide_safe_zones_body">轮廓显示启动器的图标形状，轮廓之外的一切都会被裁掉。其他启动器使用其他形状，因此请把重要细节放在虚线圆内，因为所有形状都会显示这个区域。</string>
     <string name="adaptive_icon_guide_notification_title">通知图标</string>
-    <string name="adaptive_icon_guide_notification_body">从前景色图像自动生成。使用通知滑块调整其大小。所有可见内容在状态栏中显示为白色。</string>
-    <string name="adaptive_icon_guide_monochrome_title">单色图标</string>
-    <string name="adaptive_icon_guide_monochrome_body">使用相同的自适应图标变换从前景色图像自动生成。在Android 13及更高版本上，它会以墙纸强调色进行着色。</string>
+    <string name="adaptive_icon_guide_notification_body">从图片的可见部分裁剪，并像其他状态栏图标一样调整大小，无论文件留白多少。使用预览下方的滑块进行调整。Android 会以单色显示。</string>
+    <string name="adaptive_icon_guide_monochrome_title">主题图标</string>
+    <string name="adaptive_icon_guide_monochrome_body">从图片中按与启动器图标相同的位置和大小裁剪。在 Android 13 及以上版本中，开启了主题图标功能的启动器会从壁纸中取色为其着色。</string>
     <string name="notification_icon_preview">通知</string>
     <!-- Header Creator -->
     <string name="header_creator_create">创建自定义标头</string>
     <string name="header_creator_light_theme">亮色主题标题</string>
     <string name="header_creator_dark_theme">暗色主题标题</string>
-    <string name="header_creator_no_image">未选择任何图像</string>
     <string name="header_creator_success">标题创建成功</string>
     <string name="header_creator_failed">创建标题失败</string>
     <string name="header_creator_guide">页眉创建指南</string>
     <string name="header_creator_guide_image_title">图像要求</string>
-    <string name="header_creator_guide_image_body">使用任何图像文件（PNG或JPEG）。为了获得最佳效果，请使用宽高比约为 2.7:1 的宽格式图像。带有透明背景的PNG文件将与应用程序主题自然融合。</string>
+    <string name="header_creator_guide_image_body">带有透明背景的 PNG 会与应用栏融为一体。文件中标志周围的留白会被忽略，因此它的起始大小和位置与默认标志相同。</string>
     <string name="header_creator_guide_themes_title">浅色和深色主题</string>
     <string name="header_creator_guide_themes_body">大多数应用程序需要浅色和深色主题的单独图像。一些应用程序（如YouTube Music）仅使用深色主题，因此仅显示该部分。</string>
     <string name="header_creator_guide_positioning_title">定位和缩放</string>
-    <string name="header_creator_guide_positioning_body">直接在预览中使用捏合缩放和平移手势来定位和缩放图像。当图像靠近中心时，会出现捕捉指南。您还可以使用预览下方的滑块。</string>
+    <string name="header_creator_guide_positioning_body">在编辑器中拖动或双指缩放图片，也可用滑块调整大小。虚线框标记默认标志的位置，图片与之对齐时会显示参考线。</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">已选择  个补丁</string>
     <string name="batch_patch_title">批量补丁</string>
@@ -475,9 +492,12 @@
     <string name="home_app_info_app_update_available_description">补丁源支持此应用的更新版本。重新打补丁即可更新到该版本。</string>
     <string name="home_app_info_newest_supported_version">最新支持的版本</string>
     <string name="home_app_info_version_move">已安装 %1$s，最新支持的版本为 %2$s</string>
+    <string name="home_app_info_version_restore">已安装 %1$s，已修补 %2$s</string>
     <string name="home_app_info_app_deleted_warning">应用已卸载</string>
     <string name="home_app_info_app_deleted_description">此应用已在 Morphe 外卸载。重新安装以恢复功能</string>
     <string name="home_app_info_not_patched_description">此应用安装的是未修补版本。Morphe仍保留其先前的补丁记录。</string>
+    <string name="home_app_info_mount_replaced_description">另一个版本替换了已挂载的应用，因此补丁不再生效。恢复会将已修补的版本还原</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play 更新了已挂载的应用，因此补丁不再生效。恢复会将已修补的版本还原。在 Google Play 中关闭该应用的自动更新，以保持其已修补状态</string>
     <string name="app_links_title">支持的网页链接</string>
     <string name="app_links_description">在 Android 12 及更高版本中，指向受支持域的链接默认会在浏览器中打开，除非已获得批准</string>
     <string name="app_links_unverified_banner_title">网页链接未经验证</string>
@@ -487,8 +507,6 @@
     <string name="app_links_open_settings">打开链接设置</string>
     <string name="app_links_repair_success">应用链接已成功启用</string>
     <string name="app_links_repair_failed">自动启用应用链接失败</string>
-    <string name="app_links_badge_enabled">已启用</string>
-    <string name="app_links_badge_disabled">已禁用</string>
     <string name="app_links_all_verified">所有受支持的链接均已配置为在此应用中打开</string>
     <string name="app_links_fix">修复链接</string>
     <string name="configure">配置</string>
@@ -519,10 +537,10 @@
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">应用</string>
     <string name="patcher_field_package">软件包</string>
+    <string name="patcher_field_failed_patch">修补失败</string>
     <string name="patcher_field_source">来源</string>
     <string name="patcher_field_split">拆分APK</string>
     <string name="patcher_field_manager">管理器</string>
-    <string name="patcher_field_patcher">修补程序</string>
     <string name="patcher_field_runtime">运行时</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">库</string>
@@ -553,6 +571,7 @@
     <string name="patcher_installing_subtitle">准备摇滚！ 🎸</string>
     <string name="patcher_success_title">完成！🎉</string>
     <string name="patcher_success_subtitle">您的应用已修补并安装！</string>
+    <string name="patcher_mounted_subtitle">你的应用已修补并挂载！</string>
     <string name="patcher_complete_title">补丁完成！✨</string>
     <string name="patcher_failed_title">哎呀！出现错误</string>
     <string name="patcher_failed_dialog_title">补丁失败</string>
@@ -571,6 +590,7 @@
 
 卸载将永久删除所有应用数据"</string>
     <string name="patcher_install_error_title">安装错误</string>
+    <string name="patcher_mount_error_title">挂载错误</string>
     <string name="patcher_install_error_subtitle">尝试重新卸载并安装</string>
     <string name="patcher_ready_to_mount_subtitle">按下方按钮挂载</string>
     <string name="patcher_patches_excluded_for_installer">不适用于此安装方法并已排除：%s</string>
@@ -598,7 +618,6 @@
     <string name="patcher_step_load_patches">加载补丁</string>
     <string name="patcher_step_prepare_split_apk">合并分割的APK</string>
     <string name="patcher_step_unpack">读取APK文件</string>
-    <string name="patcher_step_group_patching">修补中</string>
     <string name="patcher_step_group_saving">保存中</string>
     <string name="patcher_step_write_patched">写入修补后的 APK 文件</string>
     <string name="patcher_step_sign_apk">为修补后的 APK 文件签名</string>
@@ -610,6 +629,7 @@
     <string name="patcher_memory_adjustment_title">内存不足</string>
     <string name="patcher_memory_adjustment_description">补丁程序在内存限制为 %1$d MB 的情况下运行时被系统停止。将限制降低到 %2$d MB 会使补丁程序成为更小的目标，并可能让运行完成。</string>
     <string name="patcher_memory_adjustment_description_at_minimum">补丁程序在内存限制为 %1$d MB 的情况下运行时被系统停止，这已经是可用的最低限制。请尝试使用更少的补丁源，或选择更少的补丁。</string>
+    <string name="patcher_memory_adjustment_description_finished">系统在 %1$d MB 内存限制下停止了修补程序，而只有在 %2$d MB 时才完成。下次从 %2$d MB 开始可跳过那次失败的尝试</string>
     <string name="patcher_memory_adjustment_apply">降低到 %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">正在修补…</string>
@@ -709,6 +729,9 @@
     <string name="settings_appearance_background_snow">雪花</string>
     <string name="settings_appearance_background_grid">网格</string>
     <string name="settings_appearance_background_particles">粒子</string>
+    <string name="settings_appearance_background_lava">熔岩灯</string>
+    <string name="settings_appearance_background_halloween">万圣节</string>
+    <string name="settings_appearance_background_fireworks">烟花</string>
     <string name="settings_appearance_background_none">无</string>
     <string name="settings_appearance_background_random">随机</string>
     <string name="settings_appearance_background_random_interval_launch">启动时</string>
@@ -716,6 +739,10 @@
     <string name="settings_appearance_background_random_interval_3days">每3天</string>
     <string name="settings_appearance_parallax_effect">视差效果</string>
     <string name="settings_appearance_parallax_effect_description">倾斜设备时平滑背景过渡</string>
+    <string name="settings_appearance_seasonal_themes">节日主题</string>
+    <string name="settings_appearance_seasonal_themes_description">在节假日期间显示应景背景和问候</string>
+    <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">在节日主题开启期间，%1$s 背景将一直显示到 %2$s</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">主题</string>
     <string name="settings_appearance_theme_mode">主题模式</string>
@@ -777,9 +804,24 @@
     <string name="settings_appearance_app_icon_default">默认</string>
     <string name="settings_appearance_app_icon_light_2">天空</string>
     <string name="settings_appearance_app_icon_light_3">日落</string>
-    <string name="settings_appearance_app_icon_dark_1">大海</string>
+    <string name="settings_appearance_app_icon_light_4">薰衣草色</string>
+    <string name="settings_appearance_app_icon_light_5">冰川色</string>
+    <string name="settings_appearance_app_icon_light_6">薄雾色</string>
+    <string name="settings_appearance_app_icon_light_7">沙色</string>
+    <string name="settings_appearance_app_icon_dark_1">蓝绿色</string>
     <string name="settings_appearance_app_icon_dark_2">虚空</string>
-    <string name="settings_appearance_app_icon_dark_3">靛青</string>
+    <string name="settings_appearance_app_icon_dark_3">梅子色</string>
+    <string name="settings_appearance_app_icon_dark_4">午夜蓝</string>
+    <string name="settings_appearance_app_icon_dark_5">石板色</string>
+    <string name="settings_appearance_app_icon_accent_1">极光色</string>
+    <string name="settings_appearance_app_icon_accent_2">墨色</string>
+    <string name="settings_appearance_app_icon_accent_3">纸色</string>
+    <string name="settings_appearance_app_icon_accent_4">暮色</string>
+    <string name="settings_appearance_app_icon_background">背景</string>
+    <string name="settings_appearance_app_icon_mark">标志</string>
+    <string name="settings_appearance_app_icon_mark_color">颜色</string>
+    <string name="settings_appearance_app_icon_mark_white">白色</string>
+    <string name="settings_appearance_app_icon_mark_black">黑色</string>
     <string name="settings_appearance_app_icon_change_dialog_title">更改应用图标？</string>
     <string name="settings_appearance_app_icon_change_dialog_message">更改为&lt;b&gt;%s&lt;/b&gt;并重启？</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -817,7 +859,6 @@
     <string name="external_batch_patch_trust_caller">始终允许此应用程序</string>
     <string name="external_batch_patch_unknown_caller">一个未知应用程序</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Morphe update available</string>
     <string name="notification_bundle_update_title">有新的补丁可用</string>
     <string name="notification_update_text">版本 %s 已准备好下载。</string>
     <string name="notification_bundle_update_text_unversioned">点按打开 Morphe 并更新</string>
@@ -828,8 +869,11 @@
     <string name="notification_channel_manager_updates_description">有关新 Morphe 版本的通知</string>
     <string name="notification_channel_patch_updates">补丁更新</string>
     <string name="notification_channel_patch_updates_description">有关新补丁版本的通知</string>
-    <string name="notification_channel_patcher">修补中</string>
     <string name="notification_channel_patcher_description">当 Morphe 在后台为应用打补丁时显示</string>
+    <string name="notification_channel_mounted_apps">已挂载的应用</string>
+    <string name="notification_channel_mounted_apps_description">当另一个版本替换了已挂载的应用且其补丁不再适用时</string>
+    <string name="notification_mount_replaced_title">%1$s 不再被修补</string>
+    <string name="notification_mount_replaced_text">v%1$s 已替换已修补的 v%2$s。打开 Morphe 以恢复它</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">高级设置</string>
     <string name="settings_advanced_expert_mode">高级模式</string>
@@ -1246,9 +1290,7 @@ morphe_header_custom_dark.png
     <string name="selected">已选择</string>
     <string name="not_selected">未选择</string>
     <string name="select_all">全选</string>
-    <string name="select_all_done">全部已选</string>
     <string name="deselect_all">取消全选</string>
-    <string name="deselect_all_done">全部已取消</string>
     <string name="reorder_list">重新排序列表</string>
     <string name="reorder_list_hint">拖动以重新排序</string>
     <string name="reorder_done">排序已保存</string>
@@ -1284,6 +1326,7 @@ morphe_header_custom_dark.png
     <string name="unmount">取消挂载</string>
     <string name="unmounted">已取消挂载</string>
     <string name="remount">重新挂载</string>
+    <string name="restore">恢复</string>
     <string name="share">分享</string>
     <string name="install">安装</string>
     <string name="installed">已安装</string>
@@ -1304,6 +1347,8 @@ morphe_header_custom_dark.png
     <string name="sources">来源</string>
     <string name="installing_ellipsis">正在安装…</string>
     <string name="mounting_ellipsis">正在挂载…</string>
+    <string name="mount_stage_restoring_stock">正在恢复原始版本……</string>
+    <string name="mount_stage_copying">正在复制……</string>
     <string name="unmounting_ellipsis">正在卸载…</string>
     <string name="importing_ellipsis">正在导入…</string>
     <string name="imported_successfully">设置导入成功</string>
@@ -1351,7 +1396,6 @@ morphe_header_custom_dark.png
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">此版本仍在发布中。几分钟后重试</string>
     <string name="update_download_missing">下载的更新不再可用。请重新下载。</string>
-    <string name="download_manager_failed">下载更新失败：%s</string>
     <string name="failed_to_check_updates">检查更新失败：%s</string>
     <string name="failed_to_download_update">下载更新失败：%s</string>
     <string name="download_confirmation_metered">"您当前使用的是计量连接，可能会产生服务提供商的数据费用。\n\n您仍然要继续吗？"</string>

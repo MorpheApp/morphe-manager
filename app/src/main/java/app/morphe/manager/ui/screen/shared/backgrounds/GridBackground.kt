@@ -5,26 +5,22 @@
 
 package app.morphe.manager.ui.screen.shared.backgrounds
 
-import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalContext
-import kotlinx.coroutines.launch
 import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.roundToInt
 import kotlin.math.sin
 import kotlin.math.sqrt
 
 /**
- * Breathing Grid background - a grid of dots pulses in concentric sine waves
- * radiating from the screen center, like ripples on water.
+ * Breathing Grid background - a grid of dots pulses in the sine waves of two sources that
+ * wander slowly around the screen, their ripples crossing like those of two stones in water.
  * Uses frame-based time so [speedMultiplier] changes smoothly without restarting animations.
  * On patching completion a strong shockwave burst radiates from center, temporarily
  * expanding all dots before settling back.
@@ -40,7 +36,6 @@ fun GridBackground(
     val secondaryColor = MaterialTheme.colorScheme.secondary
     val tertiaryColor  = MaterialTheme.colorScheme.tertiary
     val context        = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
 
     val parallaxState = rememberParallaxState(
         enableParallax = enableParallax,
@@ -51,15 +46,7 @@ fun GridBackground(
     val time = rememberAnimatedTime(speedMultiplier)
 
     // shockwaveProgress 0→1: a burst pulse radiates from center on completion
-    val shockwaveProgress = remember { Animatable(0f) }
-
-    CompletionEffect(patchingCompleted) {
-        coroutineScope.launch {
-            shockwaveProgress.snapTo(0f)
-            shockwaveProgress.animateTo(1f, tween(1100, easing = FastOutSlowInEasing))
-            shockwaveProgress.animateTo(0f, tween(500, easing = FastOutSlowInEasing))
-        }
-    }
+    val shockwaveProgress = rememberCompletionPulse(patchingCompleted, riseMillis = 1100, fallMillis = 500)
 
     Canvas(modifier = modifier.fillMaxSize()) {
         val t     = time.value
@@ -68,11 +55,20 @@ fun GridBackground(
         val twoPi = 2f * PI.toFloat()
         val sw    = shockwaveProgress.value
 
-        val cols  = 11
-        val rows  = 20
+        // Columns and rows follow the screen, so cells stay square in landscape and on tablets
+        val spacing = GRID_SPACING_DP * density
+        val cols  = (size.width  / spacing).roundToInt().coerceAtLeast(2) + 1
+        val rows  = (size.height / spacing).roundToInt().coerceAtLeast(2) + 1
         val cellW = size.width  / (cols - 1).toFloat()
         val cellH = size.height / (rows - 1).toFloat()
         val maxDist = sqrt(size.width * size.width + size.height * size.height) * 0.5f
+
+        // Two wave sources wander slowly around the screen. Their ripples cross and interfere, so
+        // the pattern keeps reshaping instead of only ever spreading from the middle
+        val sourceAX = size.width  * (0.5f + 0.32f * sin(t * twoPi / 23000f))
+        val sourceAY = size.height * (0.5f + 0.30f * sin(t * twoPi / 31000f + 1.1f))
+        val sourceBX = size.width  * (0.5f + 0.32f * sin(t * twoPi / 27000f + 2.4f))
+        val sourceBY = size.height * (0.5f + 0.30f * cos(t * twoPi / 19000f + 0.4f))
 
         // Shockwave: a ring that expands outward - dots near the ring get a size boost
         val waveRadius   = sw * maxDist * 1.2f
@@ -83,26 +79,31 @@ fun GridBackground(
                 val baseX = col * cellW + tiltX * 12f
                 val baseY = row * cellH + tiltY * 12f
 
-                // Distance from screen center - drives the ripple phase offset
+                // Distance from screen center - drives the shockwave and the edge dimming
                 val dx = baseX - size.width  * 0.5f
                 val dy = baseY - size.height * 0.5f
                 val dist = sqrt(dx * dx + dy * dy)
 
-                // Continuous ripple wave: phase offset by distance so wave propagates outward
-                val ripplePhase = dist * 0.012f
-                val wave = sin(t * twoPi / 3800f - ripplePhase)
+                // Each source sends out its own continuous ripple, phase offset by distance so it
+                // propagates outward, and the dot follows their sum
+                val distA = sqrt((baseX - sourceAX) * (baseX - sourceAX) + (baseY - sourceAY) * (baseY - sourceAY))
+                val distB = sqrt((baseX - sourceBX) * (baseX - sourceBX) + (baseY - sourceBY) * (baseY - sourceBY))
+                val wave = 0.5f * (
+                    sin(t * twoPi / 3800f - distA / density * 0.036f) +
+                        sin(t * twoPi / 4300f - distB / density * 0.036f + 1.7f)
+                )
 
                 // Base dot radius oscillates with the wave
-                val baseRadius = 5.0f + wave * 2.5f
+                val baseRadius = (1.7f + wave * 0.85f) * density
 
                 // Shockwave: dots near the expanding ring get a strong size boost
                 val distFromWave = kotlin.math.abs(dist - waveRadius)
                 val shockBoost = if (sw > 0f && distFromWave < waveWidth) {
                     val localPhase = 1f - distFromWave / waveWidth
-                    localPhase * localPhase * 6f * (1f - sw * 0.5f)
+                    localPhase * localPhase * 2f * density * (1f - sw * 0.5f)
                 } else 0f
 
-                val finalRadius = (baseRadius + shockBoost).coerceAtLeast(0.8f)
+                val finalRadius = (baseRadius + shockBoost).coerceAtLeast(0.27f * density)
 
                 // Color cycles gently across the grid
                 val colorPhase = (col + row) % 3
@@ -129,3 +130,6 @@ fun GridBackground(
         }
     }
 }
+
+/** Distance between neighboring dots. */
+private const val GRID_SPACING_DP = 40f

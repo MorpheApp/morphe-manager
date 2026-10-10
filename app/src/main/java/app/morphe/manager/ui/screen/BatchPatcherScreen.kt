@@ -226,18 +226,20 @@ fun BatchPatcherScreen(
     // The same dialog the single-app flow uses, pointed at one queued app instead of the
     // patcher, so the queue never has to grow a second patch list
     viewModel.edit?.let { edit ->
-        // Reading the property re-walks and re-sorts every bundle's patches, so it is taken once
-        val allPatchesInfo = edit.allPatchesInfo
         val sources by patchBundleRepository.sources.collectAsStateWithLifecycle()
         val sourcesByUid = remember(sources) { sources.associateBy { it.uid } }
         ExpertModeDialog(
             packageName = edit.packageName,
             appName = edit.appName,
-            newPatches = edit.newPatches,
-            options = edit.options,
-            allPatchesInfo = allPatchesInfo,
-            totalSelectedCount = edit.totalSelectedCount,
-            totalPatchesCount = allPatchesInfo.sumOf { (_, patches) -> patches.size },
+            selection = ExpertPatchSelection(
+                allPatchesInfo = edit.allPatchesInfo,
+                options = edit.options,
+                totalSelectedCount = edit.totalSelectedCount,
+                newPatches = edit.newPatches,
+                savedPatches = edit.savedSelection,
+                lockStateOf = edit::lockStateOf,
+                holdsUniversalPatches = edit::selectAllHoldsUniversal
+            ),
             hasMultipleBundles = edit.hasMultipleBundles,
             patchActions = ExpertPatchActions(
                 onPatchToggle = edit::togglePatch,
@@ -249,12 +251,7 @@ fun BatchPatcherScreen(
                 onOptionChange = edit::updateOption,
                 onResetOptions = edit::resetOptions
             ),
-            savedPatches = edit.savedSelection,
-            lockStateOf = edit::lockStateOf,
-            holdsUniversalPatches = edit::selectAllHoldsUniversal,
-            prereleaseBundleUids = allPatchesInfo.mapNotNull { (bundle, _) ->
-                bundle.uid.takeIf { sourcesByUid[it]?.usesPrerelease == true }
-            }.toSet(),
+            usesPrerelease = { sourcesByUid[it]?.usesPrerelease == true },
             proceedText = stringResource(R.string.save),
             // The queue combines sources by design, and the tabs make it plain enough
             warnOnMultipleBundles = false,
@@ -409,6 +406,7 @@ fun BatchPatcherScreen(
                 packageName = item.packageName,
                 appVersion = item.version.orEmpty(),
                 patchCount = item.selection.values.sumOf { it.size },
+                failedPatch = item.failedPatch,
                 bundles = item.bundles.map {
                     PatchSourceRef(name = it.name, version = null)
                 },
@@ -469,8 +467,7 @@ fun BatchPatcherScreen(
                             miniGameState = miniGameState,
                             queueHeader = { BatchRunHeader(state = current) },
                             onCancelClick = { showCancelDialog = true },
-                            onInstallClick = { summaryReleased = true },
-                            onHomeClick = onBackClick
+                            onResultClick = { summaryReleased = true }
                         )
                     } else {
                         val longStepWarning by shownRun.showLongStepWarning.collectAsStateWithLifecycle()
@@ -799,7 +796,7 @@ private fun BatchItemCard(
                         text = item.appName,
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Medium,
-                        color = LocalDialogTextColor.current,
+                        color = dialogTextColor(),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -832,7 +829,7 @@ private fun BatchItemCard(
                     Text(
                         text = item.id,
                         style = MaterialTheme.typography.bodySmall,
-                        color = LocalDialogSecondaryTextColor.current,
+                        color = dialogSecondaryTextColor(),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -848,7 +845,7 @@ private fun BatchItemCard(
                         ) {
                             MaterialTheme.colorScheme.error
                         } else {
-                            LocalDialogSecondaryTextColor.current
+                            dialogSecondaryTextColor()
                         },
                         // An install failure explains what to do about it, so it is shown in
                         // full. Patcher errors are raw stack traces and stay clamped
@@ -1029,7 +1026,10 @@ private fun itemDetails(item: BatchPatchItem): String = when (item.state) {
 
     BatchItemState.UNVERIFIED_SIGNATURE -> stringResource(R.string.home_invalid_signature_badge)
 
-    BatchItemState.FAILED -> item.message ?: stringResource(R.string.patcher_unknown_error)
+    // The patch is what the user can deselect, while the error itself is left to the dialog
+    BatchItemState.FAILED -> item.failedPatch?.let { stringResource(R.string.failed_to_execute_patch, it) }
+        ?: item.message
+        ?: stringResource(R.string.patcher_unknown_error)
 
     else -> {
         val source = when (item.source) {

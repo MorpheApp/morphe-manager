@@ -1,3 +1,13 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ *
+ * Original hard forked code:
+ * https://github.com/Jman-Github/Universal-ReVanced-Manager/blob/597b3173a004f5a9aae54326046dd7fd4c5b7777/app/src/main/java/app/revanced/manager/patcher/runtime/CoroutineRuntime.kt
+ *
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
+ */
+
 package app.morphe.manager.patcher.runtime
 
 import android.content.Context
@@ -24,12 +34,13 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
         options: Options,
         logger: Logger,
         onPatchCompleted: suspend (String) -> Unit,
+        onPatchFailed: (String) -> Unit,
         onProgress: ProgressEventHandler,
         stripUnusedNativeLibs: Boolean,
         onMergedApkReady: (suspend (File) -> Unit)?,
         // This runtime patches in the app's own process and gets one attempt at it
         onRestart: suspend () -> Unit
-    ) {
+    ): Int? {
         ResourceMonitor.startPolling(logger)
 
         try {
@@ -85,6 +96,7 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
                     input = preparation.file,
                     stripUnusedNativeLibs = stripUnusedNativeLibs,
                     onPatchCompleted = onPatchCompleted,
+                    onPatchFailed = onPatchFailed,
                     onProgress = onProgress
                 ).use { session ->
                     session.run(
@@ -103,5 +115,8 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
         } finally {
             ResourceMonitor.stopPolling(logger)
         }
+
+        // Patching in the app's own process leaves no heap limit of its own to lower
+        return null
     }
 }

@@ -1,3 +1,13 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ *
+ * Original hard forked code:
+ * https://github.com/Jman-Github/Universal-ReVanced-Manager/blob/597b3173a004f5a9aae54326046dd7fd4c5b7777/app/src/main/java/app/revanced/manager/ui/viewmodel/PatcherViewModel.kt
+ *
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to Morphe contributions.
+ */
+
 package app.morphe.manager.ui.viewmodel
 
 import android.app.Application
@@ -211,12 +221,14 @@ class PatcherViewModel(
 
     /**
      * Offered after the patcher process was killed, holding the lower limit that might get the
-     * run through. The limit is the user's setting, so it is only ever a suggestion.
+     * run through. The limit is the user's setting, so it is only ever a suggestion. [finished]
+     * marks a run that got through anyway once the limit was lowered on the way.
      */
     data class MemoryAdjustmentDialogState(
         val currentLimit: Int,
         val suggestedLimit: Int,
-        val canAdjust: Boolean
+        val canAdjust: Boolean,
+        val finished: Boolean = false
     )
 
     var memoryAdjustmentDialog by mutableStateOf<MemoryAdjustmentDialogState?>(null)
@@ -231,6 +243,15 @@ class PatcherViewModel(
 
     fun dismissMemoryAdjustment() {
         memoryAdjustmentDialog = null
+    }
+
+    private fun offerMemoryAdjustment(currentLimit: Int, suggestedLimit: Int, finished: Boolean) {
+        memoryAdjustmentDialog = MemoryAdjustmentDialogState(
+            currentLimit = currentLimit,
+            suggestedLimit = suggestedLimit,
+            canAdjust = suggestedLimit < currentLimit,
+            finished = finished
+        )
     }
 
     /**
@@ -418,6 +439,7 @@ class PatcherViewModel(
             packageName = packageName,
             appVersion = version ?: "unspecified",
             patchCount = patchCount,
+            failedPatch = patchRun.failedPatch,
             bundles = bundles,
             stripsNativeLibs = prefs.stripUnusedNativeLibs.get()
         )
@@ -460,8 +482,8 @@ class PatcherViewModel(
             val file = inputFile ?: return false
             // Files under originalApksDir back the repatch flow and outlive this VM.
             val savedOriginalsRoot = fs.originalApksDir.absolutePath + File.separator
-            if (file.absolutePath.startsWith(savedOriginalsRoot)) return false
-            return (selectedApp as? SelectedApp.Local)?.temporary == true
+            return !file.absolutePath.startsWith(savedOriginalsRoot) &&
+                    (selectedApp as? SelectedApp.Local)?.temporary == true
         }
 
     val outputFile = tempDir.resolve("output.apk")
@@ -483,7 +505,8 @@ class PatcherViewModel(
         restoredSteps = restoredProgress?.let {
             BundleCompat.getParcelableArrayList(it, KEY_STEPS, Step::class.java)
         },
-        restoredCompletedPatches = restoredProgress?.getInt(KEY_COMPLETED_PATCHES) ?: 0
+        restoredCompletedPatches = restoredProgress?.getInt(KEY_COMPLETED_PATCHES) ?: 0,
+        restoredFailedPatch = restoredProgress?.getString(KEY_FAILED_PATCH)
     )
 
     val steps: List<Step> get() = patchRun.steps
@@ -525,6 +548,7 @@ class PatcherViewModel(
             Bundle().apply {
                 putParcelableArrayList(KEY_STEPS, ArrayList(patchRun.steps))
                 putInt(KEY_COMPLETED_PATCHES, patchRun.completedPatches)
+                putString(KEY_FAILED_PATCH, patchRun.failedPatch)
                 putBoolean(KEY_SUCCESS_SCREEN, showSuccessScreen)
                 _patcherSucceeded.value?.let { putBoolean(KEY_SUCCEEDED, it) }
             }
@@ -919,7 +943,7 @@ class PatcherViewModel(
         val selectedForRun = when (val selected = input.selectedApp) {
             is SelectedApp.Local -> {
                 val reuseFile = inputFile ?: selected.file
-                val temporary = if (forceKeepLocalInput) false else selected.temporary
+                val temporary = !forceKeepLocalInput && selected.temporary
                 selected.copy(file = reuseFile, temporary = temporary)
             }
 
@@ -949,6 +973,7 @@ class PatcherViewModel(
             mergedOptions,
             patchRun.logger,
             onPatchCompleted = { patchRun.onPatchCompleted() },
+            onPatchFailed = patchRun::onPatchFailed,
             onPatchingRestarted = { patchRun.onRestart() },
             setInputFile = { file, needsSplit, merged ->
                 val storedFile = if (shouldPreserveInput) {
@@ -992,6 +1017,16 @@ class PatcherViewModel(
                     WorkInfo.State.SUCCEEDED -> {
                         forceKeepLocalInput = false
                         patchRun.stopStallWatch()
+
+                        // Every later run would lose the same attempt to the same kill
+                        val loweredLimit = workInfo.outputData.getInt(PatcherWorker.PROCESS_LOWERED_LIMIT_KEY, -1)
+                        if (loweredLimit > 0) {
+                            offerMemoryAdjustment(
+                                currentLimit = workInfo.outputData.getInt(PatcherWorker.PROCESS_PREVIOUS_LIMIT_KEY, -1),
+                                suggestedLimit = loweredLimit,
+                                finished = true
+                            )
+                        }
 
                         // Save original APK before deleting temporary file (blocking).
                         // Launched independently so cancelling observeWorkerJob (new patch run)
@@ -1089,11 +1124,7 @@ class PatcherViewModel(
                 val suggestedLimit = lowerMemoryLimit(currentLimit)
                 // The setting is left alone until the user accepts the suggestion: silently
                 // lowering it made the configured limit drift down across failed runs
-                memoryAdjustmentDialog = MemoryAdjustmentDialogState(
-                    currentLimit = currentLimit,
-                    suggestedLimit = suggestedLimit,
-                    canAdjust = suggestedLimit < currentLimit
-                )
+                offerMemoryAdjustment(currentLimit, suggestedLimit, finished = false)
             }
         }
     }
@@ -1192,6 +1223,7 @@ class PatcherViewModel(
         private const val KEY_PROGRESS = "patch_progress"
         private const val KEY_STEPS = "steps"
         private const val KEY_COMPLETED_PATCHES = "completed_patches"
+        private const val KEY_FAILED_PATCH = "failed_patch"
         private const val KEY_SUCCEEDED = "succeeded"
         private const val KEY_SUCCESS_SCREEN = "success_screen"
     }

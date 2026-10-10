@@ -26,7 +26,7 @@ data class BatchTarget(
     val packageName: String,
     val repatchedPackageName: String? = null
 ) : Parcelable {
-    /** Identifies the queued app, which the package name alone cannot once clones exist. */
+    /** Identifies the queued app, which the package name alone cannot once clone exist. */
     val id get() = repatchedPackageName ?: packageName
 }
 
@@ -149,6 +149,8 @@ data class BatchPatchItem(
     val bundles: List<BatchBundleRef>,
     val state: BatchItemState,
     val message: String? = null,
+    /** The patch a failed run failed on, null when it failed outside of one. */
+    val failedPatch: String? = null,
     /** True when the sources mark this APK version as experimental. */
     val experimentalVersion: Boolean = false,
     /** Version the sources recommend, offered for download when the APK is missing or wrong. */

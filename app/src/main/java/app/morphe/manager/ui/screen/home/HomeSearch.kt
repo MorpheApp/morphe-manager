@@ -20,7 +20,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -61,22 +60,20 @@ internal fun HomeSearchTextField(
         }
     }
 
-    CompositionLocalProvider(LocalDialogTextColor provides MaterialTheme.colorScheme.onSurface) {
-        AppDialogTextField(
-            value = value,
-            onValueChange = onValueChange,
-            label = { Text(label) },
-            leadingIcon = {
-                // The label already announces the field, so the icon stays decorative
-                Icon(
-                    imageVector = Icons.Outlined.Search,
-                    contentDescription = null
-                )
-            },
-            showClearButton = true,
-            modifier = modifier.focusRequester(focusRequester)
-        )
-    }
+    AppDialogTextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(label) },
+        leadingIcon = {
+            // The label already announces the field, so the icon stays decorative
+            Icon(
+                imageVector = Icons.Outlined.Search,
+                contentDescription = null
+            )
+        },
+        showClearButton = true,
+        modifier = modifier.focusRequester(focusRequester)
+    )
 }
 
 /**

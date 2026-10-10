@@ -312,8 +312,6 @@ fun UnusableOptionPathsDialog(
             )
         }
     ) {
-        val secondaryColor = LocalDialogSecondaryTextColor.current
-
         Column(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
@@ -341,7 +339,7 @@ fun UnusableOptionPathsDialog(
                             text = failure.patchName,
                             style = MaterialTheme.typography.labelMedium,
                             fontWeight = FontWeight.SemiBold,
-                            color = secondaryColor
+                            color = dialogSecondaryTextColor()
                         )
 
                         Surface(
@@ -427,14 +425,15 @@ fun BatteryOptimizationDialog(
 
 /**
  * Shown after the system killed the patcher process, offering the lower memory limit that
- * might get the next run through. The limit is a user setting, so nothing changes until it
- * is accepted here.
+ * might get the next run through, or the one a [finished] run got through on. The limit is a
+ * user setting, so nothing changes until it is accepted here.
  */
 @Composable
 fun MemoryAdjustmentDialog(
     currentLimit: Int,
     suggestedLimit: Int,
     canAdjust: Boolean,
+    finished: Boolean,
     onApply: () -> Unit,
     onDismiss: () -> Unit,
 ) {
@@ -443,7 +442,8 @@ fun MemoryAdjustmentDialog(
         title = stringResource(R.string.patcher_memory_adjustment_title),
         description = if (canAdjust) {
             stringResource(
-                R.string.patcher_memory_adjustment_description,
+                if (finished) R.string.patcher_memory_adjustment_description_finished
+                else R.string.patcher_memory_adjustment_description,
                 currentLimit,
                 suggestedLimit
             )
@@ -618,7 +618,7 @@ private fun ErrorInfoRow(
         Text(
             text = label,
             style = textStyle,
-            color = LocalDialogSecondaryTextColor.current,
+            color = dialogSecondaryTextColor(),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.width(labelWidth)
@@ -645,9 +645,10 @@ private fun diagnosticSections(errorInfo: PatcherErrorInfo?): List<List<Pair<Str
     val packageLabel = stringResource(R.string.patcher_field_package)
     val versionLabel = stringResource(R.string.version)
     val patchesLabel = stringResource(R.string.patches)
+    val failedPatchLabel = stringResource(R.string.patcher_field_failed_patch)
     val sourceLabel = stringResource(R.string.patcher_field_source)
     val managerLabel = stringResource(R.string.patcher_field_manager)
-    val patcherLabel = stringResource(R.string.patcher_field_patcher)
+    val patcherLabel = stringResource(R.string.settings_advanced_patcher)
     val librariesLabel = stringResource(R.string.patcher_field_libraries)
     val androidLabel = stringResource(R.string.patcher_field_android)
     val deviceLabel = stringResource(R.string.patcher_field_device)
@@ -685,6 +686,7 @@ private fun diagnosticSections(errorInfo: PatcherErrorInfo?): List<List<Pair<Str
 
         val patches = errorInfo?.let { info ->
             listOf(patchesLabel to info.patchCount.toString()) +
+                    listOfNotNull(info.failedPatch?.let { failedPatchLabel to it }) +
                     info.bundles.map { bundle ->
                         sourceLabel to listOfNotNull(bundle.name, bundle.version).joinToString(" ")
                     }

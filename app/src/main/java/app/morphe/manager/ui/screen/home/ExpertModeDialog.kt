@@ -48,12 +48,27 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.Options
 import app.morphe.manager.util.PatchSelection
 import app.morphe.manager.util.PatchSelectionUtils.hasCustomizedOptions
-import app.morphe.manager.util.PatchSelectionUtils.hasEnablableUniversal
 import app.morphe.manager.util.PatchSelectionUtils.hasMissingRequiredOptions
+import app.morphe.manager.util.PatchSelectionUtils.hasUniversalToEnable
 import app.morphe.manager.util.toast
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.seconds
+
+/**
+ * The patches the expert-mode dialog chooses from: every source's patches with whether each is
+ * selected, their option values, and what the selection started from.
+ */
+data class ExpertPatchSelection(
+    val allPatchesInfo: List<Pair<PatchBundleInfo.Scoped, List<Pair<PatchInfo, Boolean>>>>,
+    val options: Options,
+    val totalSelectedCount: Int,
+    val newPatches: Map<Int, Set<String>> = emptyMap(),
+    val savedPatches: PatchSelection = emptyMap(),
+    val lockStateOf: (PatchInfo) -> PatchLockState = { PatchLockState.NONE },
+    /** True while "Enable all" still holds the universal patches of the given list back. */
+    val holdsUniversalPatches: (bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) -> Boolean = { _, _ -> false }
+)
 
 /** Callbacks the expert-mode dialog invokes on the underlying patch selection. */
 @Stable
@@ -81,28 +96,26 @@ fun ExpertModeDialog(
     packageName: String,
     appName: String? = null,
     appIcon: Drawable? = null,
-    newPatches: Map<Int, Set<String>> = emptyMap(),
-    options: Options,
-    allPatchesInfo: List<Pair<PatchBundleInfo.Scoped, List<Pair<PatchInfo, Boolean>>>>,
-    totalSelectedCount: Int,
-    totalPatchesCount: Int,
+    selection: ExpertPatchSelection,
     hasMultipleBundles: Boolean,
     patchActions: ExpertPatchActions,
-    savedPatches: PatchSelection = emptyMap(),
-    lockStateOf: (PatchInfo) -> PatchLockState = { PatchLockState.NONE },
-    /** True while "Enable all" still holds the universal patches of the given list back. */
-    holdsUniversalPatches: (bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) -> Boolean = { _, _ -> false },
     proceedText: String = stringResource(R.string.patch),
     /** Off where mixing sources is the norm rather than something the user just did. */
     warnOnMultipleBundles: Boolean = true,
-    /** Bundle UIDs currently receiving pre-release patch versions, shown as a warning header. */
-    prereleaseBundleUids: Set<Int> = emptySet(),
+    /** Whether a source receives pre-release patch versions, which its tab warns about. */
+    usesPrerelease: (bundleUid: Int) -> Boolean = { false },
     /** Sources this app is being kept from, which the notice above the list offers back. */
     hiddenSourceCount: Int = 0,
     onShowHiddenSources: () -> Unit = {},
     onDismiss: () -> Unit,
     onProceed: () -> Unit
 ) {
+    val (allPatchesInfo, options, totalSelectedCount, newPatches, savedPatches, lockStateOf, holdsUniversalPatches) =
+        selection
+    val totalPatchesCount = allPatchesInfo.sumOf { (_, patches) -> patches.size }
+    val prereleaseBundleUids = allPatchesInfo.mapNotNullTo(mutableSetOf()) { (bundle, _) ->
+        bundle.uid.takeIf(usesPrerelease)
+    }
     val selectedPatchForOptions = remember { mutableStateOf<Pair<Int, PatchInfo>?>(null) }
     val search = rememberSearchFieldState()
     val showMultipleSourcesWarning = remember { mutableStateOf(false) }
@@ -248,7 +261,7 @@ fun ExpertModeDialog(
                     },
                     title = headerTitle,
                     subtitle = listOfNotNull(
-                        stringResource(R.string.expert_mode_title),
+                        stringResource(R.string.settings_advanced_expert_mode),
                         allPatchesInfo.singleOrNull()?.first?.name
                     ).joinToString("\n"),
                     search = search,
@@ -735,7 +748,7 @@ private fun BundleControls(
         totalCount = patches.size,
         holdsUniversalPatches = holdsUniversal,
         // The second "Enable all" tap applies every universal patch at once; warn first
-        warnOnUniversalAll = !holdsUniversal && patches.hasEnablableUniversal(lockStateOf),
+        warnOnUniversalAll = !holdsUniversal && patches.hasUniversalToEnable(lockStateOf),
         onSelectAll = {
             // This tap enables the universal patches, so it has to show what it turned on
             if (!holdsUniversal) onExpandUniversal(bundle.uid)

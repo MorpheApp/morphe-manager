@@ -29,6 +29,10 @@ import sh.calvin.reorderable.ReorderableLazyListState
  * list builder captures one state object instead of the two dozen values these used to close over.
  */
 
+// Headers and cards are laid out differently, so the list only reuses a slot for its own kind
+private const val HEADER_CONTENT_TYPE = "header"
+private const val APP_CARD_CONTENT_TYPE = "app_card"
+
 /** Cards while reordering: only drag handles are live, taps just adjust the selection. */
 internal fun LazyListScope.reorderableAppCards(
     state: HomeAppsSectionState,
@@ -39,7 +43,8 @@ internal fun LazyListScope.reorderableAppCards(
     val selectedPackages = state.selectedPackages
     itemsIndexed(
         items = items,
-        key = { _, item -> item.id }
+        key = { _, item -> item.id },
+        contentType = { _, _ -> APP_CARD_CONTENT_TYPE }
     ) { _, item ->
         ReorderableItem(reorderableState, key = item.id) { itemIsDragging ->
             DynamicAppCard(
@@ -109,7 +114,7 @@ internal fun LazyListScope.groupedAppCards(
     val selectedPackages = state.selectedPackages
     groups.forEach { group ->
         val headerKey = "category_${group.id ?: "uncategorized"}"
-        item(key = headerKey) {
+        item(key = headerKey, contentType = HEADER_CONTENT_TYPE) {
             // Long-press is gated while any other footer mode is already using the slot
             val isFooterBusy = state.isMultiSelectMode ||
                     state.isReorderMode ||
@@ -163,7 +168,8 @@ internal fun LazyListScope.groupedAppCards(
         if (!group.collapsed) {
             items(
                 items = group.items,
-                key = { item -> "category_${group.id ?: "uncategorized"}_${item.id}" }
+                key = { item -> "category_${group.id ?: "uncategorized"}_${item.id}" },
+                contentType = { APP_CARD_CONTENT_TYPE }
             ) { item ->
                 val groupKey = group.selectionKey()
                 val isSelected = selectedPackages.contains(item.id) &&
@@ -212,7 +218,8 @@ internal fun LazyListScope.flatAppCards(
     val selectedPackages = state.selectedPackages
     itemsIndexed(
         items = items,
-        key = { _, item -> item.id }
+        key = { _, item -> item.id },
+        contentType = { _, _ -> APP_CARD_CONTENT_TYPE }
     ) { index, item ->
         // Moves the card one step and reports where it landed, so a screen reader user hears
         // the result of an action they cannot see

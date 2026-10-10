@@ -27,7 +27,7 @@ import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.DialogPadding
 import app.morphe.manager.ui.screen.shared.ListScrollbar
 import app.morphe.manager.ui.screen.shared.LocalDialogHorizontalInset
-import app.morphe.manager.ui.screen.shared.LocalDialogTextColor
+import app.morphe.manager.ui.screen.shared.dialogTextColor
 import app.morphe.manager.ui.screen.shared.AppDialog
 import app.morphe.manager.ui.screen.shared.AppDialogOutlinedButton
 import app.morphe.manager.ui.screen.shared.ScrollToTopButton
@@ -92,8 +92,6 @@ fun LicensesDialog(onDismiss: () -> Unit) {
         },
         padding = DialogPadding.Compact
     ) {
-        val textColor = LocalDialogTextColor.current
-
         // Libraries list
         val lazyListState = rememberLazyListState()
         val libraries by produceLibraries(R.raw.aboutlibraries)
@@ -107,7 +105,7 @@ fun LicensesDialog(onDismiss: () -> Unit) {
         )
         val colors = LibraryDefaults.libraryColors(
             libraryBackgroundColor = MaterialTheme.colorScheme.background,
-            libraryContentColor = textColor,
+            libraryContentColor = dialogTextColor(),
             versionChipColors = chipColors,
             licenseChipColors = chipColors,
             fundingChipColors = chipColors,

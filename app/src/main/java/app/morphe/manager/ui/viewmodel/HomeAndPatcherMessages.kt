@@ -1,9 +1,14 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.ui.viewmodel
 
 import android.content.Context
 import android.util.Log
 import app.morphe.manager.R
-import app.morphe.manager.ui.viewmodel.HomeAndPatcherMessages.getHomeMessage
+import app.morphe.manager.ui.theme.SeasonalEvent
 import app.morphe.manager.util.tag
 import java.util.Calendar
 import kotlin.random.Random
@@ -17,6 +22,7 @@ object HomeAndPatcherMessages {
      * Greeting message on the home screen. Same message shown for each app session.
      */
     private var homeGreetingMessage: Int? = null
+    private var homeGreetingEvent: SeasonalEvent? = null
     private val homeGreetingMessageIndex = PersistentValue("patching_home_message_index", 0)
     private val homeGreetingMessageSeed = PersistentValue("patching_home_message_seed", 0L)
 
@@ -68,14 +74,15 @@ object HomeAndPatcherMessages {
 
     /**
      * Witty greeting message. Picks from a time-of-day bucket so the tone matches
-     * when the user opens the app.
+     * when the user opens the app, or from the greetings of [event] while one runs.
      */
-    fun getHomeMessage(context: Context): Int {
-        return homeGreetingMessage ?: run {
+    fun getHomeMessage(context: Context, event: SeasonalEvent? = null): Int {
+        // An event starting or being switched off swaps the greeting, anything else keeps it
+        return homeGreetingMessage?.takeIf { homeGreetingEvent == event } ?: run {
             // home_greeting_1 is always shown first on a new installation.
             // All other strings in the active time bucket are randomly shown
             val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
-            val messages = listOf(R.string.home_greeting_1) + when (hour) {
+            val messages = event?.greetings ?: (listOf(R.string.home_greeting_1) + when (hour) {
                 in 5..11 -> listOf(
                     R.string.home_greeting_4,
                     R.string.home_greeting_7,
@@ -111,10 +118,11 @@ object HomeAndPatcherMessages {
                     R.string.home_greeting_super_late_4,
                     R.string.home_greeting_super_late_5,
                 )
-            }
+            })
             // Use different seed on each install, but keep the same seed across sessions
             updateValues(context, homeGreetingMessageIndex, homeGreetingMessageSeed, messages).also {
                 homeGreetingMessage = it
+                homeGreetingEvent = event
             }
         }
     }

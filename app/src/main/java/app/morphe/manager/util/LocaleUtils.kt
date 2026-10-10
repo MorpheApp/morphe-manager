@@ -1,3 +1,8 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.util
 
 private const val LEFT_TO_RIGHT_ISOLATE = '\u2066'

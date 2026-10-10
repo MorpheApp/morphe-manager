@@ -129,6 +129,12 @@
         <item quantity="many">%s zainstalowanych źródeł</item>
         <item quantity="other">%s zainstalowanych źródeł</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="one">%1$s · %2$s odfiltrowana</item>
+        <item quantity="few">%1$s · %2$s odfiltrowane</item>
+        <item quantity="many">%1$s · %2$s odfiltrowanych</item>
+        <item quantity="other">%1$s · %2$s odfiltrowanych</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s ukryta aplikacja</item>
         <item quantity="few">%s ukryte aplikacje</item>

@@ -123,6 +123,26 @@
     <string name="home_greeting_super_late_3">U ovom trenutku, samo ostanite budni i popravite</string>
     <string name="home_greeting_super_late_4">Ti i serveri, oboje budni</string>
     <string name="home_greeting_super_late_5">Noćni i produktivan</string>
+    <!-- Halloween greetings, shown instead of the ones above around October 31 -->
+    <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_1">Trik ili zakrpa?</string>
+    <string name="home_greeting_halloween_2">Nema duhova u ovim APK-ovima, proverili smo</string>
+    <string name="home_greeting_halloween_3">Jeziva sezona, sveže zakrpe</string>
+    <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
+    <string name="home_greeting_halloween_4">Nešto opako ovuda krpi</string>
+    <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
+    <string name="home_greeting_winter_1">Srećni praznici, sveže zakrpe</string>
+    <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
+    <string name="home_greeting_winter_2">Neka sneži, neka krpi</string>
+    <string name="home_greeting_winter_3">Nova godina, nove zakrpe</string>
+    <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
+    <string name="home_greeting_winter_4">Krpeći kroz sneg</string>
+    <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
+    <string name="home_greeting_new_year_1">Srećna Nova godina!</string>
+    <string name="home_greeting_new_year_2">Odbrojavamo do svežih zakrpa</string>
+    <string name="home_greeting_new_year_3">Nova godina, iste aplikacije bez reklama</string>
+    <!-- Pun on the saying "Out with the old, in with the new" -->
+    <string name="home_greeting_new_year_4">Napolje stare verzije, unutra nove</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Izvori zakrpe</string>
     <string name="sources_search">Pretraži izvore i zakrpe</string>
@@ -272,7 +292,6 @@ Sve što dodate sa ove veb stranice koristite na sopstvenu odgovornost."</string
     <string name="home_use_installed_app">Koristi instaliranu aplikaciju</string>
     <string name="home_installed_app_picker_title">Instalirane aplikacije</string>
     <string name="home_installed_app_picker_empty">Nema pronađenih aplikacija</string>
-    <string name="home_installed_app_picker_filter_all">Sve aplikacije</string>
     <string name="home_installed_app_picker_filter_user">Samo korisničke aplikacije</string>
     <string name="home_installed_app_picker_filter_system">Samo sistemske aplikacije</string>
     <string name="home_invalid_apk_unreadable">Nije moguće pročitati datoteku. Proverite da \'Eksternu memoriju\' ne ograničava baterija</string>
@@ -281,7 +300,6 @@ Sve što dodate sa ove veb stranice koristite na sopstvenu odgovornost."</string
     <string name="home_invalid_apk_io_error">Nije uspelo otvaranje datoteke. Molimo pokušajte ponovo</string>
     <string name="home_external_apk_expert_mode_required">Ova funkcionalnost je dostupna samo u režimu stručnjaka.</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
-    <string name="expert_mode_title">Režim eksperta</string>
     <string name="expert_mode_search">Pretraži patchove</string>
     <string name="expert_mode_disable_all">Onemogući sve</string>
     <string name="expert_mode_disable_all_done">Sve zakrpe su isključene</string>
@@ -372,44 +390,43 @@ Da li ste sigurni da želite nastaviti?"</string>
     <string name="adaptive_icon_select_image">Izaberi sliku</string>
     <string name="adaptive_icon_change_image">Promeni sliku</string>
     <string name="image_load_failed">Ne mogu da učitam ovu sliku</string>
-    <!-- Card of the adaptive icon creator holding the picture every icon is made from -->
-    <string name="adaptive_icon_foreground">Slika u prvom planu</string>
-    <!-- Card of the adaptive icon creator previewing the icon on the home screen -->
+    <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Ikona pokretača</string>
+    <string name="adaptive_icon_gesture_hint">Prevucite da pomerite, štipnite da promenite veličinu</string>
+    <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Pregled</string>
+    <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Standardna</string>
+    <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Tematska</string>
     <string name="adaptive_icon_background_color">Boja pozadine</string>
     <string name="adaptive_icon_reset_transform">Resetuj položaj i razmeru </string>
-    <string name="adaptive_icon_safe_zone_inner">Sigurna zona (uvek vidljiva)</string>
-    <string name="adaptive_icon_safe_zone_outer">Maskirana zona (može biti isečena)</string>
-    <string name="adaptive_icon_no_transparency_warning">Slika nema transparentne piksele. Rezultat može da izgleda netačno</string>
+    <string name="adaptive_icon_no_transparency_warning">Ova slika nema transparentnih piksela, pa tematske ikonice i ikonice obaveštenja zadržavaju Morphe logo</string>
     <string name="adaptive_icon_created_success">Adaptivni ikona uspešno kreirana</string>
     <string name="adaptive_icon_creation_failed">Neuspešno kreiranje adaptivne ikone</string>
-    <string name="adaptive_icon_label">Adaptivni</string>
-    <string name="adaptive_icon_monochrome_label">Monohrom</string>
     <string name="adaptive_icon_guide">Uputstvo za kreiranje ikone</string>
     <string name="adaptive_icon_guide_png_title">Koristite PNG sa transparentnom pozadinom</string>
-    <string name="adaptive_icon_guide_png_body">Prednji plan mora biti PNG datoteka sa transparentnom pozadinom. Jednobojna pozadina će izgledati pogrešno – boja pozadine bi trebalo da bude izabran iz birača pozadine ispod.</string>
+    <string name="adaptive_icon_guide_png_body">Najbolje funkcioniše logo na transparentnoj pozadini, sa bojom pozadine odabranom ispod. Slika bez transparentnosti umesto toga ispunjava celu ikonicu, a tematske ikonice i ikonice obaveštenja tada zadržavaju Morphe logo.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Sigurne zone</string>
-    <string name="adaptive_icon_guide_safe_zones_body">"Unutrašnja zona (puna): sadržaj je uvek potpuno vidljiv na svim oblicima pokretača.
-Spoljna zona (isprekidana): može biti isečena maskom pokretača – držite važne detalje unutar unutrašnje zone."</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Kontura prikazuje oblik ikonice vašeg pokretača, a sve izvan nje se odseca. Drugi pokretači koriste druge oblike, zato važne detalje držite unutar isprekidane kružnice, koju svaki oblik prikazuje.</string>
     <string name="adaptive_icon_guide_notification_title">Ikona obaveštenja</string>
-    <string name="adaptive_icon_guide_notification_body">Automatski generisana iz prednje slike. Prilagodite veličinu pomoću klizača obaveštenja. Savi vidljivi sadržaji se pojavljuju belo u statusnoj traci.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Monohromna ikona</string>
-    <string name="adaptive_icon_guide_monochrome_body">Automatski generisana iz prednje slike, koristeći iste transformacije adaptivne ikone. Prikazuje se sa nijansom boje akcenta pozadine na Android 13 i novijim verzijama.</string>
+    <string name="adaptive_icon_guide_notification_body">Izrezuje se iz vidljivog dela slike i ima veličinu poput ostalih ikonica statusne trake, bez obzira na marginu koju datoteka ima. Podesite je klizačem ispod pregleda. Android je prikazuje u jednoj boji.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Tematska ikonica</string>
+    <string name="adaptive_icon_guide_monochrome_body">Izrezuje se iz slike sa istim položajem i veličinom kao ikonica pokretača. Na Androidu 13 i novijim verzijama, pokretači koji imaju uključene tematske ikonice boje je na osnovu pozadine.</string>
     <string name="notification_icon_preview">Obaveštenje</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Napravi personalizovanu zaglavlje</string>
     <string name="header_creator_light_theme">Glavna tema za svetlo</string>
     <string name="header_creator_dark_theme">Glavna tema za tamno</string>
-    <string name="header_creator_no_image">Nema odabrane slike</string>
     <string name="header_creator_success">Glavna tema uspešno kreirana</string>
     <string name="header_creator_failed">Neuspešno kreiranje glavne teme</string>
     <string name="header_creator_guide">Uputstvo za kreiranje zaglavlja</string>
     <string name="header_creator_guide_image_title">Zahtevi za sliku</string>
-    <string name="header_creator_guide_image_body">Koristite bilo koju datoteku slike (PNG ili JPEG). Za najbolje rezultate, koristite širokoformatnu sliku sa pribličnim odnosom stranica 2.7:1. PNG datoteke sa transparentnom pozadinom će se prirodno uklopiti sa temom aplikacije.</string>
+    <string name="header_creator_guide_image_body">PNG sa transparentnom pozadinom se stapa sa trakom aplikacije. Margine oko loga u datoteci se zanemaruju, pa počinje od veličine i položaja podrazumevanog loga.</string>
     <string name="header_creator_guide_themes_title">Svetle i tamne teme</string>
     <string name="header_creator_guide_themes_body">Većini aplikacija su potrebne zasebne slike za svetlu i tamnu temu. Neke aplikacije (kao što je YouTube Music) koriste samo tamnu temu, pa se prikazuje samo taj deo.</string>
     <string name="header_creator_guide_positioning_title">Pozicioniranje i skaliranje</string>
-    <string name="header_creator_guide_positioning_body">Koristite geste zumiranja i povlačenja direktno u pregledu da biste pozicionirali i skalirali sliku. Vodeće linije se pojavljuju kada je slika blizu centra. Takođe možete koristiti klizač ispod pregleda.</string>
+    <string name="header_creator_guide_positioning_body">Prevucite i štipnite sliku u uređivaču ili joj podesite veličinu klizačem. Isprekidani okvir označava gde se nalazi podrazumevani logo, a vodiči se pojavljuju kada se slika poravna s njim.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Zakrpi odabrane</string>
     <string name="batch_patch_title">Masovno zakrpljivanje</string>
@@ -475,9 +492,12 @@ Spoljna zona (isprekidana): može biti isečena maskom pokretača – držite va
     <string name="home_app_info_app_update_available_description">Izvori zakrpe podržavaju noviju verziju ove aplikacije. Ponovo je zakrpite da biste prešli na tu verziju</string>
     <string name="home_app_info_newest_supported_version">Najnovija podržana</string>
     <string name="home_app_info_version_move">Instalirana %1$s, najnovija podržana %2$s</string>
+    <string name="home_app_info_version_restore">Instaliran %1$s, zakrpljen %2$s</string>
     <string name="home_app_info_app_deleted_warning">Aplikacija je deinstalirana</string>
     <string name="home_app_info_app_deleted_description">Ova aplikacija je deinstalirana izvan Morphe. Ponovo je instalirajte da bi obnovili funkcionalnost</string>
     <string name="home_app_info_not_patched_description">Instalirana je nezakrpana verzija ove aplikacije. Morphe i dalje ima svoj prethodni zapis o zakrpi</string>
+    <string name="home_app_info_mount_replaced_description">Druga verzija je zamenila montiranu aplikaciju, tako da zakrpa više ne važi. Vraćanje vraća zakrpljenu verziju</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play je ažurirao montiranu aplikaciju, tako da zakrpa više ne važi. Vraćanje vraća zakrpljenu verziju. Isključite automatsko ažuriranje za nju u Google Play-u da bi ostala zakrpljena</string>
     <string name="app_links_title">Podržani veb linkovi</string>
     <string name="app_links_description">Na Androidu 12+, linkovi ka podržanim domenima se podrazumevano otvaraju u vašem pregledaču, osim ako su odobreni</string>
     <string name="app_links_unverified_banner_title">Veb linkovi nisu verifikovani</string>
@@ -487,8 +507,6 @@ Spoljna zona (isprekidana): može biti isečena maskom pokretača – držite va
     <string name="app_links_open_settings">Otvori podešavanja linkova</string>
     <string name="app_links_repair_success">Linkovi aplikacije su uspešno omogućeni</string>
     <string name="app_links_repair_failed">Automatsko omogućavanje aplikacionih linkova nije uspelo</string>
-    <string name="app_links_badge_enabled">Omogućeno</string>
-    <string name="app_links_badge_disabled">Onemogućen</string>
     <string name="app_links_all_verified">Svi podržani linkovi su konfigurisani da se otvaraju u ovoj aplikaciji</string>
     <string name="app_links_fix">Popravite linkove</string>
     <string name="configure">Konfigurišite</string>
@@ -519,10 +537,10 @@ Spoljna zona (isprekidana): može biti isečena maskom pokretača – držite va
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Aplikacija</string>
     <string name="patcher_field_package">Paket</string>
+    <string name="patcher_field_failed_patch">Neuspešna zakrpa</string>
     <string name="patcher_field_source">Izvor</string>
     <string name="patcher_field_split">Razdvojeni APK</string>
     <string name="patcher_field_manager">Menadžer</string>
-    <string name="patcher_field_patcher">Zakrpač</string>
     <string name="patcher_field_runtime">Izvršno okruženje</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Biblioteke</string>
@@ -553,6 +571,7 @@ Spoljna zona (isprekidana): može biti isečena maskom pokretača – držite va
     <string name="patcher_installing_subtitle">Skoro spremni za akciju! 🎸</string>
     <string name="patcher_success_title">Završeno! 🎉</string>
     <string name="patcher_success_subtitle">Vaša aplikacija je zakrpljena i instalirana!</string>
+    <string name="patcher_mounted_subtitle">Vaša aplikacija je zakrpana i montirana!</string>
     <string name="patcher_complete_title">Pečanje je završeno! ✨</string>
     <string name="patcher_failed_title">Ups! Nešto je pošlo po zlu</string>
     <string name="patcher_failed_dialog_title">Pečanje je neuspešno</string>
@@ -571,6 +590,7 @@ Spoljna zona (isprekidana): može biti isečena maskom pokretača – držite va
 
 Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="patcher_install_error_title">Greška pri instalaciji</string>
+    <string name="patcher_mount_error_title">Greška pri montiranju</string>
     <string name="patcher_install_error_subtitle">Pokušajte deinstalirati pa ponovo instalirati</string>
     <string name="patcher_ready_to_mount_subtitle">Pritisnite dugme ispod za postavljanje</string>
     <string name="patcher_patches_excluded_for_installer">Nije dostupno za ovu metodu instalacije i isključeno: %s</string>
@@ -598,7 +618,6 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="patcher_step_load_patches">Učitavanje zakrpa</string>
     <string name="patcher_step_prepare_split_apk">Spojivanje APK-ova</string>
     <string name="patcher_step_unpack">Pročitajte datoteku APK</string>
-    <string name="patcher_step_group_patching">Zakrpljivanje</string>
     <string name="patcher_step_group_saving">Čuvanje</string>
     <string name="patcher_step_write_patched">Pisanje zakrpljene APK datoteke</string>
     <string name="patcher_step_sign_apk">Potpisivanje zakrpljene APK datoteke</string>
@@ -610,6 +629,7 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="patcher_memory_adjustment_title">Nema dovoljno memorije</string>
     <string name="patcher_memory_adjustment_description">Sistem je zaustavio patcher dok je radio sa ograničenjem memorije od %1$d MB. Smanjenje ograničenja na %2$d MB čini patcher manjom metom i može omogućiti da se proces završi.</string>
     <string name="patcher_memory_adjustment_description_at_minimum">Sistem je zaustavio patcher dok je radio sa ograničenjem memorije od %1$d MB, što je već najniže dostupno. Pokušajte sa manje izvora zakrpa ili izaberite manje zakrpa.</string>
+    <string name="patcher_memory_adjustment_description_finished">Sistem je zaustavio patcher na ograničenju memorije od %1$d MB, a završio je tek na %2$d MB. Počinjanje od %2$d MB preskače taj izgubljeni pokušaj sledeći put</string>
     <string name="patcher_memory_adjustment_apply">Smanji na %1$d MB</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Zakrpljivanje je u toku…</string>
@@ -709,6 +729,9 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="settings_appearance_background_snow">Sneg</string>
     <string name="settings_appearance_background_grid">Rešetka</string>
     <string name="settings_appearance_background_particles">Čestice</string>
+    <string name="settings_appearance_background_lava">Lava lampa</string>
+    <string name="settings_appearance_background_halloween">Noć veštica</string>
+    <string name="settings_appearance_background_fireworks">Vatromet</string>
     <string name="settings_appearance_background_none">Bez</string>
     <string name="settings_appearance_background_random">Nasumično</string>
     <string name="settings_appearance_background_random_interval_launch">Pokretanje</string>
@@ -716,6 +739,10 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="settings_appearance_background_random_interval_3days">Svaki 3 dana</string>
     <string name="settings_appearance_parallax_effect">Paralaksni efekat</string>
     <string name="settings_appearance_parallax_effect_description">Glatko pomeranje pozadine pri naginjanju uređaja</string>
+    <string name="settings_appearance_seasonal_themes">Sezonske teme</string>
+    <string name="settings_appearance_seasonal_themes_description">Praznične pozadine i pozdravi tokom praznika</string>
+    <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
+    <string name="settings_appearance_seasonal_background_notice">Pozadina %1$s je aktivna do %2$s dok su sezonske teme uključene</string>
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_theme">Tema</string>
     <string name="settings_appearance_theme_mode">Начин рада</string>
@@ -777,9 +804,24 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="settings_appearance_app_icon_default">Podrazumevana</string>
     <string name="settings_appearance_app_icon_light_2">Nebesno</string>
     <string name="settings_appearance_app_icon_light_3">Zalazni</string>
-    <string name="settings_appearance_app_icon_dark_1">Okean</string>
+    <string name="settings_appearance_app_icon_light_4">Lavanda</string>
+    <string name="settings_appearance_app_icon_light_5">Glečer</string>
+    <string name="settings_appearance_app_icon_light_6">Izmaglica</string>
+    <string name="settings_appearance_app_icon_light_7">Pesak</string>
+    <string name="settings_appearance_app_icon_dark_1">Tirkizna</string>
     <string name="settings_appearance_app_icon_dark_2">Praznina</string>
-    <string name="settings_appearance_app_icon_dark_3">Indigo</string>
+    <string name="settings_appearance_app_icon_dark_3">Šljiva</string>
+    <string name="settings_appearance_app_icon_dark_4">Ponoć</string>
+    <string name="settings_appearance_app_icon_dark_5">Škriljevac</string>
+    <string name="settings_appearance_app_icon_accent_1">Aurora</string>
+    <string name="settings_appearance_app_icon_accent_2">Mastilo</string>
+    <string name="settings_appearance_app_icon_accent_3">Papir</string>
+    <string name="settings_appearance_app_icon_accent_4">Sumrak</string>
+    <string name="settings_appearance_app_icon_background">Pozadina</string>
+    <string name="settings_appearance_app_icon_mark">Logotip</string>
+    <string name="settings_appearance_app_icon_mark_color">Boja</string>
+    <string name="settings_appearance_app_icon_mark_white">Bela</string>
+    <string name="settings_appearance_app_icon_mark_black">Crna</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Promeni ikonu aplikacije? </string>
     <string name="settings_appearance_app_icon_change_dialog_message">Prebaci na &lt;b&gt;%s&lt;/b&gt; i ponovo pokreni?</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -817,7 +859,6 @@ Zakrpe nisu pogođene: omogućite prerelease zakrpe za svaki izvor na listi izvo
     <string name="external_batch_patch_trust_caller">Uvek dozvoli ovu aplikaciju</string>
     <string name="external_batch_patch_unknown_caller">Nepoznata aplikacija</string>
     <!-- Notification content -->
-    <string name="notification_manager_update_title">Доступна је надоградња Morphe-а</string>
     <string name="notification_bundle_update_title">Dostupne ispravke</string>
     <string name="notification_update_text">Verzija %s je spremna za preuzimanje</string>
     <string name="notification_bundle_update_text_unversioned">Додирните да бисте отворили Morphe и надоградили</string>
@@ -828,8 +869,11 @@ Zakrpe nisu pogođene: omogućite prerelease zakrpe za svaki izvor na listi izvo
     <string name="notification_channel_manager_updates_description">Obaveštenja o novim Morphe izdanjima</string>
     <string name="notification_channel_patch_updates">Ažuriranja zakrpa</string>
     <string name="notification_channel_patch_updates_description">Obaveštenja o novim zakrpama</string>
-    <string name="notification_channel_patcher">Zakrpavanje</string>
     <string name="notification_channel_patcher_description">Prikazuje se dok Morphe zakrpava aplikaciju u pozadini</string>
+    <string name="notification_channel_mounted_apps">Montirane aplikacije</string>
+    <string name="notification_channel_mounted_apps_description">Kada druga verzija zameni montiranu aplikaciju i njena zakrpa više ne važi</string>
+    <string name="notification_mount_replaced_title">%1$s više nije zakrpljen</string>
+    <string name="notification_mount_replaced_text">v%1$s je zamenio zakrpljeni v%2$s. Otvori Morphe da ga vratiš</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Napredne postavke</string>
     <string name="settings_advanced_expert_mode">Napredni način</string>
@@ -1230,9 +1274,7 @@ Detalji: %2$s"</string>
     <string name="selected">Odabrano</string>
     <string name="not_selected">Nije odabrano</string>
     <string name="select_all">Izaberi sve</string>
-    <string name="select_all_done">Svi su izabrani</string>
     <string name="deselect_all">Poništi izbor svih</string>
-    <string name="deselect_all_done">Ništa nije izabrano</string>
     <string name="reorder_list">Ponovo sortiraj listu</string>
     <string name="reorder_list_hint">Povucite da biste ponovo sortiralii</string>
     <string name="reorder_done">Redosled je sačŪvan</string>
@@ -1268,6 +1310,7 @@ Detalji: %2$s"</string>
     <string name="unmount">Izbaci</string>
     <string name="unmounted">Demontirano</string>
     <string name="remount">Ponovo priključaj</string>
+    <string name="restore">Vrati</string>
     <string name="share">Podeli</string>
     <string name="install">Instaliraj</string>
     <string name="installed">Instalirano</string>
@@ -1288,6 +1331,8 @@ Detalji: %2$s"</string>
     <string name="sources">Izvori</string>
     <string name="installing_ellipsis">Instaliranje…</string>
     <string name="mounting_ellipsis">Montiranje…</string>
+    <string name="mount_stage_restoring_stock">Vraćanje originala…</string>
+    <string name="mount_stage_copying">Kopiranje…</string>
     <string name="unmounting_ellipsis">Ponovo priključaj…</string>
     <string name="importing_ellipsis">Uvozi…</string>
     <string name="imported_successfully">Uspelo uveženo</string>
@@ -1335,7 +1380,6 @@ Detalji: %2$s"</string>
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">Ovo izdanje je i dalje u objavljivanju. Pokušajte ponovo za nekoliko minuta</string>
     <string name="update_download_missing">Preuzeto ažuriranje više nije dostupno. Preuzmite ga ponovo.</string>
-    <string name="download_manager_failed">Nije uspelo preuzimanje ažuriranja: %s</string>
     <string name="failed_to_check_updates">Nije uspelo proveravanje ažuriranja: %s</string>
     <string name="failed_to_download_update">Neuspešno preuzimanje ažuriranja: %s</string>
     <string name="download_confirmation_metered">"Trenutno ste povezani na plaćenu vezu i mogu se primeniti troškovi prenosa podataka od vašeg provajdera usluga.

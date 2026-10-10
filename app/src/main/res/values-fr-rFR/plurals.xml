@@ -87,6 +87,10 @@
         <item quantity="one">%s source installée</item>
         <item quantity="other">%s sources installées</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="one">%1$s · %2$s filtré</item>
+        <item quantity="other">%1$s · %2$s filtrés</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s application masquée</item>
         <item quantity="other">%s applications masquées</item>

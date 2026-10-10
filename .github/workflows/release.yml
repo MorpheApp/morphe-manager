@@ -6,7 +6,7 @@ on:
       send_fcm:
         description: 'Send FCM push notification'
         type: boolean
-        default: true
+        default: false
   push:
     branches:
       - main

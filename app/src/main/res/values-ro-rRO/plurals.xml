@@ -108,6 +108,11 @@
         <item quantity="few">%s surse instalate</item>
         <item quantity="other">%s de surse instalate</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="one">%1$s · %2$s aplicație filtrată</item>
+        <item quantity="few">%1$s · %2$s aplicații filtrate</item>
+        <item quantity="other">%1$s · %2$s de aplicații filtrate</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s aplicație ascunsă</item>
         <item quantity="few">%s aplicații ascunse</item>

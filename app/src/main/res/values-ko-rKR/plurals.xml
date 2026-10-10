@@ -66,6 +66,9 @@
     <plurals name="sources_management_subtitle">
         <item quantity="other">%s 개의 소스 설치됨</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="other">%1$s · %2$s 필터링됨</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="other">%s 개의 숨겨진 앱</item>
     </plurals>

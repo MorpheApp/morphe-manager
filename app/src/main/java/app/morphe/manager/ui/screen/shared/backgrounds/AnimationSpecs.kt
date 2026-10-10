@@ -58,59 +58,104 @@ fun AnimationFrameEffect(frameLoop: suspend CoroutineScope.() -> Unit) {
     }
 }
 
+// How long the shared clock runs before it wraps. A Float of milliseconds this large still resolves
+// a quarter of a millisecond, where an unbounded one stops resolving the 16 ms step after a day.
+// It is a whole number of the cycles backgrounds wrap their own motion at, so those stay seamless
+private const val ANIMATED_TIME_WRAP_MS = 3_600_000f
+
 /**
- * Frame-based time accumulator that respects a [speedMultiplier].
- * Returns a [State<Float>] that increases every frame by (deltaMs * speedMultiplier).
- * This allows smooth speed changes without restarting animations.
- * The value only steps once per [BACKGROUND_STEP_INTERVAL_MS], so a high refresh rate display
- * does not repaint the backdrop more often than its slow drift can show.
+ * Steps a background once per [BACKGROUND_STEP_INTERVAL_MS], handing [onStep] the milliseconds of
+ * animation since the previous step: real time scaled by a speed that eases toward
+ * [speedMultiplier] instead of jumping to it, along with that eased speed itself. Shared by the
+ * clock most backgrounds read and by the ones that integrate their own physics.
+ * Named with uppercase as required by Compose convention for Unit-returning Composables.
+ *
+ * @param boost How much further than [speedMultiplier] this background leans into a speed-up,
+ *   where 1 follows it exactly.
+ * @param rampPerSecond How quickly the speed closes on its target.
  */
 @Composable
-fun rememberAnimatedTime(speedMultiplier: Float): State<Float> {
-    val time = remember { mutableFloatStateOf(0f) }
+fun BackgroundStepEffect(
+    speedMultiplier: Float,
+    boost: Float = 1f,
+    rampPerSecond: Float = 2.5f,
+    onStep: (scaledMs: Float, speed: Float) -> Unit
+) {
     // targetSpeed is updated every recomposition via SideEffect (composition thread, safe to read in frame callback)
     val targetSpeed = remember { mutableFloatStateOf(speedMultiplier) }
     SideEffect { targetSpeed.floatValue = speedMultiplier }
+    val currentOnStep by rememberUpdatedState(onStep)
 
     AnimationFrameEffect {
+        fun boostedTarget() = 1f + (targetSpeed.floatValue - 1f) * boost
+
         var lastFrameMs = withInfiniteAnimationFrameMillis { it }
-        var currentSpeed = targetSpeed.floatValue
-        // Real elapsed time gates the step, while the scaled time is what the backdrop reads,
+        var currentSpeed = boostedTarget()
+        // Real elapsed time gates the step, while the scaled time is what the background reads,
         // so changing the speed never changes how often the canvas is invalidated
         var elapsedMs = 0f
-        var pendingTime = 0f
+        var pendingMs = 0f
         while (true) {
             withInfiniteAnimationFrameMillis { frameMs ->
                 val delta = (frameMs - lastFrameMs).coerceIn(0L, 64L).toFloat()
                 lastFrameMs = frameMs
-                // Smooth lerp: 2.5/sec ramp, ~0.8s to reach target speed.
+                // Smooth lerp: at the default 2.5/sec ramp, ~0.8s to reach target speed.
                 // High enough to feel reactive, low enough to avoid jarring jumps.
-                currentSpeed += (targetSpeed.floatValue - currentSpeed) * (delta / 1000f) * 2.5f
+                currentSpeed += (boostedTarget() - currentSpeed) * (delta / 1000f) * rampPerSecond
 
                 elapsedMs += delta
-                pendingTime += delta * currentSpeed
+                pendingMs += delta * currentSpeed
                 if (elapsedMs >= BACKGROUND_STEP_INTERVAL_MS) {
-                    time.floatValue += pendingTime
+                    currentOnStep(pendingMs, currentSpeed)
                     // Carry the remainder so the step keeps its cadence on 90 Hz panels too
                     elapsedMs -= BACKGROUND_STEP_INTERVAL_MS
-                    pendingTime = 0f
+                    pendingMs = 0f
                 }
             }
         }
     }
+}
+
+/**
+ * Frame-based time accumulator that respects a [speedMultiplier].
+ * Returns a [State<Float>] of milliseconds that advances by (deltaMs * speedMultiplier) every
+ * [BACKGROUND_STEP_INTERVAL_MS], so a high refresh rate display does not repaint the backdrop more
+ * often than its slow drift can show. This allows smooth speed changes without restarting
+ * animations. The value wraps every hour of animation to keep its precision.
+ */
+@Composable
+fun rememberAnimatedTime(speedMultiplier: Float): State<Float> {
+    val time = remember { mutableFloatStateOf(0f) }
+    BackgroundStepEffect(speedMultiplier) { scaledMs, _ ->
+        time.floatValue = (time.floatValue + scaledMs) % ANIMATED_TIME_WRAP_MS
+    }
     return time
 }
 
-
 /**
- * Fires [onCompleted] exactly once when [patchingCompleted] flips to true.
- * Named with uppercase as required by Compose convention for Unit-returning Composables.
+ * A 0 → [peak] → 0 pulse played each time [patchingCompleted] flips to true, which every background
+ * reads to stage its own celebration. It runs in a scope of its own, so it plays out in full even if
+ * the flag drops back mid-way.
  */
 @Composable
-fun CompletionEffect(patchingCompleted: Boolean, onCompleted: () -> Unit) {
+fun rememberCompletionPulse(
+    patchingCompleted: Boolean,
+    riseMillis: Int,
+    fallMillis: Int,
+    peak: Float = 1f,
+    riseEasing: Easing = FastOutSlowInEasing
+): State<Float> {
+    val pulse = remember { Animatable(0f) }
+    val scope = rememberCoroutineScope()
     LaunchedEffect(patchingCompleted) {
-        if (patchingCompleted) onCompleted()
+        if (!patchingCompleted) return@LaunchedEffect
+        scope.launch {
+            pulse.snapTo(0f)
+            pulse.animateTo(peak, tween(riseMillis, easing = riseEasing))
+            pulse.animateTo(0f, tween(fallMillis, easing = FastOutSlowInEasing))
+        }
     }
+    return pulse.asState()
 }
 
 /**

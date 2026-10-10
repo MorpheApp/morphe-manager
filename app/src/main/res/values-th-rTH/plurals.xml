@@ -66,6 +66,9 @@
     <plurals name="sources_management_subtitle">
         <item quantity="other">ติดตั้ง %s ที่มาแล้ว</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="other">%1$s · %2$s รายการที่กรอง</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="other">แอปที่ซ่อนอยู่ %s แอป</item>
     </plurals>

@@ -1,12 +1,14 @@
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
+
 package app.morphe.manager.util
 
 import app.morphe.manager.data.room.apps.installed.SelectionPayload
 import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.patcher.patch.PatchLockState
-import app.morphe.manager.util.PatchSelectionUtils.bulkEnablePatches
-import app.morphe.manager.util.PatchSelectionUtils.sanitizeForPatcher
-import app.morphe.manager.util.PatchSelectionUtils.spansMultipleBundles
 import app.morphe.patcher.patch.ApkArchitecture
 import app.morphe.patcher.patch.InstallerType
 import app.morphe.patcher.patch.PatchAvailability
@@ -119,7 +121,7 @@ object PatchSelectionUtils {
      * True when a bulk enable of [this] would turn on at least one universal patch, i.e. the
      * locked off ones do not count because [bulkEnablePatches] leaves them alone.
      */
-    fun List<Pair<PatchInfo, Boolean>>.hasEnablableUniversal(
+    fun List<Pair<PatchInfo, Boolean>>.hasUniversalToEnable(
         lockStateOf: (PatchInfo) -> PatchLockState
     ) = selectable(lockStateOf).any { (patch, enabled) -> patch.isUniversal && !enabled }
 
@@ -216,15 +218,12 @@ object PatchSelectionUtils {
      * match the default, and blanks are the cleared fields [sanitizeForPatcher] drops before the
      * run, so neither counts as a customization.
      */
-    fun PatchInfo.hasCustomizedOptions(values: Map<String, Any?>?): Boolean {
-        if (values.isNullOrEmpty()) return false
-
-        return options?.any { option ->
+    fun PatchInfo.hasCustomizedOptions(values: Map<String, Any?>?): Boolean =
+        !values.isNullOrEmpty() && options?.any { option ->
             val value = values[option.key] ?: return@any false
             if (value is String && value.isBlank()) return@any false
             value != option.default
         } == true
-    }
 
     /**
      * True when a required option is left without a usable value: neither a stored one nor a

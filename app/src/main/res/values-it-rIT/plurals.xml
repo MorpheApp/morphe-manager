@@ -87,6 +87,10 @@
         <item quantity="one">%s fonte installata</item>
         <item quantity="other">%s fonti installate</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="one">%1$s · %2$s filtrato</item>
+        <item quantity="other">%1$s · %2$s filtrati</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s applicazione nascosta</item>
         <item quantity="other">%s app nascoste</item>

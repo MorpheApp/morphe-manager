@@ -39,13 +39,13 @@ internal class HomeCardCache(private val file: File) {
         .getOrNull()
 
     /**
-     * Keeps [state] for the next cold start unless already cached. A deleted file is written again.
+     * Keeps [cards] for the next cold start unless already cached. A deleted file is written again.
      */
-    fun write(state: HomeAppState) {
+    fun write(cards: HomeCards) {
         val cached = CachedHome(
-            visible = state.visible.map(::CachedCard),
-            hidden = state.hidden.map(::CachedCard),
-            sourceGroups = state.sourceGroups.map(::CachedSourceGroup)
+            visible = cards.visible.map(::CachedCard),
+            hidden = cards.hidden.map(::CachedCard),
+            sourceGroups = cards.sourceGroups.map(::CachedSourceGroup)
         )
         if (cached == lastWritten && file.exists()) return
         runCatching {
@@ -69,19 +69,14 @@ internal data class CachedHome(
     val sourceGroups: List<CachedSourceGroup>,
     val format: Int = CACHE_FORMAT
 ) {
-    /**
-     * The home state of these cards, with records from [installedApps] and settings from [prefs].
-     */
-    fun toState(installedApps: List<InstalledApp>, prefs: HomePrefs): HomeAppState {
+    /** These cards, with records from [installedApps] and the sort mode from [prefs]. */
+    fun toCards(installedApps: List<InstalledApp>, prefs: HomePrefs): HomeCards {
         val records = installedApps.associateBy { it.currentPackageName }
         // Cards are keyed by id on screen, and a file kept by an older build can repeat one
-        return HomeAppState(
+        return HomeCards(
             visible = visible.distinctBy { it.id }.map { it.toItem(records) },
             hidden = hidden.distinctBy { it.id }.map { it.toItem(records) },
             sortMode = prefs.sortMode,
-            categoryState = prefs.categoryState,
-            categoryViewMode = prefs.categoryViewMode,
-            showCategoryViewSwitcher = prefs.showCategoryViewSwitcher,
             sourceGroups = sourceGroups.map { it.toGroup() }
         )
     }

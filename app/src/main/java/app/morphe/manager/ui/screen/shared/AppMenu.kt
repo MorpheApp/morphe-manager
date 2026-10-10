@@ -95,7 +95,7 @@ fun AppDropdownMenuItem(
     trailing: (@Composable () -> Unit)? = null
 ) {
     val accent = LocalAccent.current ?: MaterialTheme.colorScheme.primary
-    val contentColor = LocalDialogTextColor.current
+    val contentColor = dialogTextColor()
 
     DropdownMenuItem(
         text = {

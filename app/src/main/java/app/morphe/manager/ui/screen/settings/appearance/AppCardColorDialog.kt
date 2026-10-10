@@ -161,7 +161,7 @@ fun AppCardColorDialog(
             Text(
                 text = stringResource(draftMode.descriptionResId),
                 style = MaterialTheme.typography.bodyMedium,
-                color = LocalDialogSecondaryTextColor.current
+                color = dialogSecondaryTextColor()
             )
 
             // A single crossfade keeps the dialog height from jumping twice when picker groups swap

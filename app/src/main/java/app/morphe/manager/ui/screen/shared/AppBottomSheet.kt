@@ -91,8 +91,7 @@ fun AppBottomSheet(
                     if (!sheetState.isVisible) onDismissRequest()
                 }
             }
-            // Shared with dialogs, and their default is white for want of anything better, which
-            // a sheet in the light theme would otherwise hand to everything it holds
+            // Shared with dialogs, so what the sheet holds is drawn in the sheet's own content color
             CompositionLocalProvider(
                 LocalDialogTextColor provides contentColor,
                 LocalDialogSecondaryTextColor provides contentColor.copy(alpha = 0.7f)
