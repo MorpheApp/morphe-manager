@@ -412,7 +412,7 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="adaptive_icon_guide_notification_title">Deilbhín fógra</string>
     <string name="adaptive_icon_guide_notification_body">Gearrtar é ón gcuid infheicthe den íomhá agus é ar mhéid cosúil le deilbhíní eile an bharra stádais, is cuma cén t-imeall atá sa chomhad. Coigeartaigh é leis an sleamhnán faoin réamhamharc. Taispeánann Android é in aon dath amháin.</string>
     <string name="adaptive_icon_guide_monochrome_title">Deilbhín téamaithe</string>
-    <string name="adaptive_icon_guide_monochrome_body">Gearrtar é ón íomhá ag an suíomh céanna agus ar an méid céanna le deilbhín an lainseálaí. Ar Android 13 agus níos déanaí, dathaíonn lainseálaithe a bhfuil deilbhíní téamaithe curtha ar siúl acu an deilbhín le dathanna ón bpáipéar balla.</string>
+    <string name="adaptive_icon_guide_monochrome_body">Gearrtar é ón íomhá agus bíonn an suíomh agus an méid céanna aige agus atá ag deilbhín an lainseálaí. Ar Android 13 agus leaganacha níos déanaí, déanann lainseálaithe a bhfuil deilbhíní téamaíocha cumasaithe acu dath a chur air bunaithe ar an cúlbhrat.</string>
     <string name="notification_icon_preview">Fógra</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Cruthaigh ceanntásc saincheaptha</string>
@@ -537,6 +537,7 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Aip</string>
     <string name="patcher_field_package">Pacáiste</string>
+    <string name="patcher_field_failed_patch">Paiste teipthe</string>
     <string name="patcher_field_source">Foinse</string>
     <string name="patcher_field_split">APK Scoilte</string>
     <string name="patcher_field_manager">Bainisteoir</string>
@@ -570,7 +571,7 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="patcher_installing_subtitle">Beagnach réidh le tosú! 🎸</string>
     <string name="patcher_success_title">Gach rud déanta! 🎉</string>
     <string name="patcher_success_subtitle">Tá do aip paisteáilte agus suiteáilte!</string>
-    <string name="patcher_mounted_subtitle">Tá d’aip paisteáilte agus gléasta!</string>
+    <string name="patcher_mounted_subtitle">Tá do aip paisteáilte agus feistithe!</string>
     <string name="patcher_complete_title">Paisteáil críochnaithe! ✨</string>
     <string name="patcher_failed_title">Úps! Chuaigh rud éigin mícheart.</string>
     <string name="patcher_failed_dialog_title">Theip ar phaisteáil</string>

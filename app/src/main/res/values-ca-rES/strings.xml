@@ -107,8 +107,10 @@
     <string name="patcher_field_value_unknown">desconegut</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <!-- Value of "Libraries": every library was left in the patched APK -->
+    <string name="patcher_mounted_subtitle">La teva aplicació està apedaçada i muntada!</string>
     <string name="patcher_error_details">Detalls de l\'error</string>
     <string name="patcher_change_patches">Canvia els pegats</string>
+    <string name="patcher_mount_error_title">Error de muntatge</string>
     <!-- Patcher Screen - Patcher Steps -->
     <!-- Battery optimization pre-flight dialog -->
     <!-- Memory limit dialog, shown after the patcher process was killed -->

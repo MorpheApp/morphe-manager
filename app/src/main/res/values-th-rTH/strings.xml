@@ -537,6 +537,7 @@
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">แอป</string>
     <string name="patcher_field_package">แพ็กเกจ</string>
+    <string name="patcher_field_failed_patch">แพตช์ที่ล้มเหลว</string>
     <string name="patcher_field_source">แหล่งที่มา</string>
     <string name="patcher_field_split">แยก APK</string>
     <string name="patcher_field_manager">ผู้จัดการ</string>

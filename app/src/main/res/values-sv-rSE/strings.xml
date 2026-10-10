@@ -537,6 +537,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">App</string>
     <string name="patcher_field_package">Paket</string>
+    <string name="patcher_field_failed_patch">Misslyckad patch</string>
     <string name="patcher_field_source">Källa</string>
     <string name="patcher_field_split">Delad APK-fil</string>
     <string name="patcher_field_manager">Manager</string>

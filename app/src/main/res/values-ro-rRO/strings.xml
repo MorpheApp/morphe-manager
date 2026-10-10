@@ -537,6 +537,7 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Aplicație</string>
     <string name="patcher_field_package">Pachet</string>
+    <string name="patcher_field_failed_patch">Patch eșuat</string>
     <string name="patcher_field_source">Sursă</string>
     <string name="patcher_field_split">APK împărțit</string>
     <string name="patcher_field_manager">Manager</string>

@@ -537,6 +537,7 @@
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">应用</string>
     <string name="patcher_field_package">软件包</string>
+    <string name="patcher_field_failed_patch">修补失败</string>
     <string name="patcher_field_source">来源</string>
     <string name="patcher_field_split">拆分APK</string>
     <string name="patcher_field_manager">管理器</string>

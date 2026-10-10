@@ -392,17 +392,27 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="image_load_failed">Kon nie hierdie beeld laai nie</string>
     <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Lanseerderikoon</string>
+    <string name="adaptive_icon_gesture_hint">Sleep om te skuif, knyp om die grootte te verander</string>
     <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Voorskou</string>
     <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Standaard</string>
     <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Tema</string>
     <string name="adaptive_icon_background_color">Agtergrondkleur</string>
     <string name="adaptive_icon_reset_transform">Herstel posisie en skaal</string>
+    <string name="adaptive_icon_no_transparency_warning">Hierdie beeld het geen deursigtige piksels nie, dus behou die tema- en kennisgewingikone die Morphe-logo</string>
     <string name="adaptive_icon_created_success">Adaptiewe ikoon suksesvol geskep</string>
     <string name="adaptive_icon_creation_failed">Kon nie adaptiewe ikoon skep nie</string>
     <string name="adaptive_icon_guide">Ikoongids</string>
     <string name="adaptive_icon_guide_png_title">Gebruik \'n PNG met \'n deurskynende agtergrond</string>
+    <string name="adaptive_icon_guide_png_body">’n Logo op ’n deursigtige agtergrond werk die beste, met die agtergrondkleur hieronder gekies. ’n Prent sonder deursigtigheid vul in plaas daarvan die hele ikoon, en die tema- en kennisgewingikone behou dan die Morphe-logo.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Veilige sones</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Die omtrek wys die ikoonvorm van jou lanseerder, en alles buite dit word weggesny. Ander lanseerders gebruik ander vorms, hou dus belangrike besonderhede binne die stippelsirkel, wat deur elke vorm gewys word.</string>
     <string name="adaptive_icon_guide_notification_title">Kennisgewingikoon</string>
+    <string name="adaptive_icon_guide_notification_body">Dit word uit die sigbare deel van die beeld gesny en geskaal soos ander statusbalk-ikone, ongeag die marge wat die lêer het. Stel dit aan met die skuifbalk onder die voorskou. Android wys dit in ’n enkele kleur.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Tema-ikoon</string>
+    <string name="adaptive_icon_guide_monochrome_body">Dit word uit die beeld gesny met dieselfde posisie en grootte as die lanseerder-ikoon. Op Android 13 en later kleur lanseerders met geaktiveerde tema-ikone dit uit die muurpapier.</string>
     <string name="notification_icon_preview">Kennisgewingikoon</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Skep pasgemaakte kop</string>
@@ -412,9 +422,11 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="header_creator_failed">Kon nie kop skep nie</string>
     <string name="header_creator_guide">Header skeppingsgids</string>
     <string name="header_creator_guide_image_title">Beeldvereistes</string>
+    <string name="header_creator_guide_image_body">’n PNG met ’n deursigtige agtergrond smelt in by die appbalk. Marges rondom die logo in die lêer word geïgnoreer, sodat dit op die grootte en plek van die standaardlogo begin.</string>
     <string name="header_creator_guide_themes_title">Ligte en donker temas</string>
     <string name="header_creator_guide_themes_body">Die meeste toepassings vereis aparte beelde vir die ligte en donker temas. Sommige toepassings (soos YouTube Music) gebruik slegs die donker tema, so slegs daardie afdeling word gewys.</string>
     <string name="header_creator_guide_positioning_title">Posisionering en skaal</string>
+    <string name="header_creator_guide_positioning_body">Sleep en knyp die beeld in die redigeerder, of skaal dit met die skuifbalk. Die stippelblokkie merk waar die standaardlogo sit, en gidslyne verskyn wanneer die beeld daarmee in lyn kom.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Verandering gekies</string>
     <string name="batch_patch_title">Groepbedekking</string>
@@ -525,6 +537,7 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">App</string>
     <string name="patcher_field_package">Pakket</string>
+    <string name="patcher_field_failed_patch">Mislukte patch</string>
     <string name="patcher_field_source">Bron</string>
     <string name="patcher_field_split">Gesplete APK</string>
     <string name="patcher_field_manager">Bestuurder</string>

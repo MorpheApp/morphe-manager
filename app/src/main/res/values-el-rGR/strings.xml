@@ -537,6 +537,7 @@
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Εφαρμογή</string>
     <string name="patcher_field_package">Πακέτο</string>
+    <string name="patcher_field_failed_patch">Αποτυχημένο patch</string>
     <string name="patcher_field_source">Πηγή</string>
     <string name="patcher_field_split">Διαχωρισμένο APK</string>
     <string name="patcher_field_manager">Διαχειριστής</string>

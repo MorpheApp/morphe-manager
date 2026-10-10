@@ -27,7 +27,7 @@
     <string name="home_update_available_subtitle">新版本已準備好安裝</string>
     <string name="home_blocked_source_title">偵測到已封鎖的修補程式來源</string>
     <string name="home_blocked_source_subtitle">點擊以檢視並移除</string>
-    <string name="home_metadata_errors_title">部分修補程式來源無法使用</string>
+    <string name="home_metadata_errors_title">部份修補程式來源無法使用</string>
     <string name="home_metadata_errors_subtitle">點擊以檢視來源</string>
     <string name="home_outdated_manager_title">Morphe 要更新</string>
     <string name="home_outdated_manager_subtitle">有些修補來源需要較新的版本</string>
@@ -408,9 +408,9 @@
     <string name="adaptive_icon_guide_png_title">使用具有透明背景的 PNG</string>
     <string name="adaptive_icon_guide_png_body">透明背景上的標誌效果最佳，背景顏色請在下方挑選。沒有透明度的圖片反而會填滿整個圖示，而主題與通知圖示就會保留 Morphe 標誌。</string>
     <string name="adaptive_icon_guide_safe_zones_title">安全區域</string>
-    <string name="adaptive_icon_guide_safe_zones_body">輪廓顯示您啟動器的圖示形狀，輪廓以外的部分都會被裁切。其他啟動器使用不同的形狀，因此請將重要細節保留在虛線圓圈內，所有形狀都會顯示虛線圓圈內的區域。</string>
+    <string name="adaptive_icon_guide_safe_zones_body">輪廓顯示您啟動器的圖示形狀，輪廓以外的部份都會被裁切。其他啟動器使用不同的形狀，因此請將重要細節保留在虛線圓圈內，所有形狀都會顯示虛線圓圈內的區域。</string>
     <string name="adaptive_icon_guide_notification_title">通知圖示</string>
-    <string name="adaptive_icon_guide_notification_body">從影像的可見部分裁切，並比照其他狀態列圖示調整大小，無論檔案有多少邊距。您可以使用預覽下方的滑桿調整。Android 會以單一顏色顯示。</string>
+    <string name="adaptive_icon_guide_notification_body">從影像的可見部份裁切，並比照其他狀態列圖示調整大小，無論檔案有多少邊距。您可以使用預覽下方的滑桿調整。Android 會以單一顏色顯示。</string>
     <string name="adaptive_icon_guide_monochrome_title">主題圖示</string>
     <string name="adaptive_icon_guide_monochrome_body">從影像中裁切，位置和大小與啟動器圖示相同。在 Android 13 及以上版本中，已開啟主題圖示的啟動器會根據桌布為其著色。</string>
     <string name="notification_icon_preview">通知</string>
@@ -424,7 +424,7 @@
     <string name="header_creator_guide_image_title">圖像要求</string>
     <string name="header_creator_guide_image_body">透明背景的 PNG 會融入應用程式列。檔案中標誌周圍的邊距會被忽略，因此會以原始標誌的大小和位置開始。</string>
     <string name="header_creator_guide_themes_title">淺色和深色主題</string>
-    <string name="header_creator_guide_themes_body">大多數應用程式需要淺色和深色主題的分開圖像。有些應用程式（例如 YouTube Music）僅使用深色主題，因此僅顯示該部分。</string>
+    <string name="header_creator_guide_themes_body">大多數應用程式需要淺色和深色主題的分開圖像。有些應用程式（例如 YouTube Music）僅使用深色主題，因此僅顯示該部份。</string>
     <string name="header_creator_guide_positioning_title">定位與縮放</string>
     <string name="header_creator_guide_positioning_body">在編輯器中拖曳和雙指縮放影像，或使用滑桿調整大小。虛線框標示原始標誌所在位置，當影像與其對齊時會顯示輔助線。</string>
     <!-- Batch patching -->
@@ -518,10 +518,10 @@
     <string name="home_app_info_cpu_arch">CPU 架构</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root 模式需要在修補之前將原始 APK 安裝在您的裝置上</string>
-    <string name="root_pre_patch_installer_title">選擇補丁模式</string>
-    <string name="root_pre_patch_installer_description">您的設備已獲得root權限。選擇此應用程序是否應為root掛載或標準安裝進行補丁</string>
+    <string name="root_pre_patch_installer_title">選擇修補模式</string>
+    <string name="root_pre_patch_installer_description">您的裝置已獲得root權限。選擇此應用程式是否應為root掛載或標準安裝進行修補</string>
     <string name="root_pre_patch_installer_mount_title">Root掛載模式</string>
-    <string name="root_pre_patch_installer_mount_description">為root掛載補丁，然後將APK覆蓋在匹配的庫存應用程序上。不需要GmsCore</string>
+    <string name="root_pre_patch_installer_mount_description">為root掛載修補，然後將APK覆蓋在匹配的庫存應用程式上。不需要GmsCore</string>
     <string name="root_mount_module_unmount_warning">若 KernelSU 已開啟「預設卸載模組」功能，請開啟 KernelSU &gt; 超級使用者  &gt; 找到您掛載的應用程式  &gt; 設定檔  &gt; 自訂，並將「卸載模組」關閉。否則，即使 Morphe 顯示已掛載，修補後的 APK 仍可能無法生效。</string>
     <string name="root_pre_patch_installer_standard_title">標準安裝模式</string>
     <string name="root_pre_patch_installer_standard_description">以支援 GmsCore 的一般 APK 形式修補。修補完成後，將使用您的安裝程式設定。</string>
@@ -537,6 +537,7 @@
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">應用程式</string>
     <string name="patcher_field_package">套件</string>
+    <string name="patcher_field_failed_patch">修補程式失敗</string>
     <string name="patcher_field_source">來源</string>
     <string name="patcher_field_split">分割 APK</string>
     <string name="patcher_field_manager">管理員</string>
@@ -605,7 +606,7 @@
     <string name="patcher_storage_badge_denied">存取權限不足</string>
     <string name="patcher_storage_badge_missing">找不到</string>
     <string name="batch_patch_option_paths_skipped">缺少修補選項檔案，將予以略過：%1$s</string>
-    <string name="patcher_missing_patches_title">部分修補程式已不存在</string>
+    <string name="patcher_missing_patches_title">部份修補程式已不存在</string>
     <string name="patcher_missing_patches_description">此應用程式的已儲存選取項目所列出的修補程式，已不再由任何已啟用的來源提供。若繼續，將在沒有這些修補程式的情況下修補此應用程式</string>
     <string name="patcher_missing_patches_label">不再提供</string>
     <string name="patcher_option_paths_gone_title">缺少修補選項檔案</string>
@@ -622,7 +623,7 @@
     <string name="patcher_step_sign_apk">簽署已修補的 APK 檔案</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">背景修補保護</string>
-    <string name="battery_optimization_dialog_description">部分裝置可能在應用程式縮小時停止修補程式。允許 Morphe 在沒有電池限制的情況下執行，以確保修補程式可靠完成。</string>
+    <string name="battery_optimization_dialog_description">部份裝置可能在應用程式縮小時停止修補程式。允許 Morphe 在沒有電池限制的情況下執行，以確保修補程式可靠完成。</string>
     <string name="battery_optimization_not_now">稍後再說</string>
     <!-- Memory limit dialog, shown after the patcher process was killed -->
     <string name="patcher_memory_adjustment_title">記憶體不足</string>
@@ -849,7 +850,7 @@
     <string name="settings_advanced_update_interval_weekly">每週一次</string>
     <string name="settings_advanced_update_interval_monthly">每月一次</string>
     <string name="settings_advanced_update_interval_chip_subtitle">背景檢查頻率</string>
-    <string name="settings_advanced_update_interval_battery_warning">在某些裝置上，背景檢查可能無法可靠運作。小米、華為、三星和 OnePlus 等製造商通常會積極限制背景程序以節省電池電量</string>
+    <string name="settings_advanced_update_interval_battery_warning">在某些裝置上，背景檢查可能無法可靠運作。小米、華為、三星和 OnePlus 等製造商通常會積極限制背景程式以節省電池電量</string>
     <string name="settings_advanced_external_batch_patch">允許外部觸發器</string>
     <string name="settings_advanced_external_batch_patch_description">讓自動化應用程式透過 Intent 開始批次修補</string>
     <string name="external_batch_patch_title">開始批次修補？</string>
@@ -1122,7 +1123,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_delete_selected_title">刪除選取的 APK？</string>
     <string name="settings_system_apks_delete_selected_confirm">這將永久刪除選取的 APK 檔案</string>
     <string name="settings_system_apks_deleted_all">APK 刪除成功</string>
-    <string name="settings_system_apks_delete_failed">部分APK檔案無法刪除</string>
+    <string name="settings_system_apks_delete_failed">部份APK檔案無法刪除</string>
     <string name="settings_system_apks_export_zip_success">已匯出的 APK</string>
     <string name="settings_system_apks_export_zip_failed">匯出選取的 APK 失敗</string>
     <!-- Settings - System Tab - Storage Management screen -->

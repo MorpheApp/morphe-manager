@@ -537,6 +537,7 @@ Da li ste sigurni da želite nastaviti?"</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Aplikacija</string>
     <string name="patcher_field_package">Paket</string>
+    <string name="patcher_field_failed_patch">Neuspešna zakrpa</string>
     <string name="patcher_field_source">Izvor</string>
     <string name="patcher_field_split">Razdvojeni APK</string>
     <string name="patcher_field_manager">Menadžer</string>

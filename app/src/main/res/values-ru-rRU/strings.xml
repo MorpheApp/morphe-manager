@@ -537,6 +537,7 @@
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Приложение</string>
     <string name="patcher_field_package">Пакет</string>
+    <string name="patcher_field_failed_patch">Неудачный патч</string>
     <string name="patcher_field_source">Источник</string>
     <string name="patcher_field_split">Раздельный APK</string>
     <string name="patcher_field_manager">Менеджер</string>

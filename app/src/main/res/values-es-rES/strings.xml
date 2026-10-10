@@ -537,6 +537,7 @@ Para un mejor resultado, esta aplicación te recomienda parchear un &lt;b&gt;APK
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Aplicación</string>
     <string name="patcher_field_package">Paquete</string>
+    <string name="patcher_field_failed_patch">Parche fallido</string>
     <string name="patcher_field_source">Fuente</string>
     <string name="patcher_field_split">APK dividido</string>
     <string name="patcher_field_manager">Gestor</string>

@@ -130,9 +130,9 @@
         <item quantity="other">%s viri so nameščeni</item>
     </plurals>
     <plurals name="home_app_filter_active">
-        <item quantity="one">%1$s · %2$s filtrirana</item>
-        <item quantity="two">%1$s · %2$s filtrirani</item>
-        <item quantity="few">%1$s · %2$s filtrirane</item>
+        <item quantity="one">%1$s · %2$s filtriran</item>
+        <item quantity="two">%1$s · %2$s filtrirana</item>
+        <item quantity="few">%1$s · %2$s filtrirani</item>
         <item quantity="other">%1$s · %2$s filtriranih</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
@@ -157,7 +157,7 @@
         <item quantity="one">Kopiran %s popravek iz izbranega paketa</item>
         <item quantity="two">Kopirana %s popravka iz izbranega paketa</item>
         <item quantity="few">Kopirani %s popravki iz izbranega paketa</item>
-        <item quantity="other">Kopirano %s popravkov iz izbranega paketa</item>
+        <item quantity="other">Kopiranih %s popravkov iz izbranega paketa</item>
     </plurals>
     <plurals name="core_count">
         <item quantity="one">%s jedro</item>

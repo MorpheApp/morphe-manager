@@ -537,6 +537,7 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Alkalmazás</string>
     <string name="patcher_field_package">Csomag</string>
+    <string name="patcher_field_failed_patch">Sikertelen javítás</string>
     <string name="patcher_field_source">Forrás</string>
     <string name="patcher_field_split">APK felosztása</string>
     <string name="patcher_field_manager">Kezelő</string>

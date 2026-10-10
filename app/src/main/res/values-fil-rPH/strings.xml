@@ -537,6 +537,7 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">App</string>
     <string name="patcher_field_package">Package</string>
+    <string name="patcher_field_failed_patch">Nabigong patch</string>
     <string name="patcher_field_source">Pinagmulan</string>
     <string name="patcher_field_split">Hating APK</string>
     <string name="patcher_field_manager">Manager</string>

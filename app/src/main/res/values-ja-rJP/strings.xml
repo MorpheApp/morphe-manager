@@ -127,22 +127,22 @@
     <!-- Pun on "Trick or treat" -->
     <string name="home_greeting_halloween_1">トリック・オア・パッチ？</string>
     <string name="home_greeting_halloween_2">これらの APK にはおばけはいません。確認済みです</string>
-    <string name="home_greeting_halloween_3">不気味な季節、新しいパッチ</string>
+    <string name="home_greeting_halloween_3">不気味な季節に、できたてのパッチを</string>
     <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
-    <string name="home_greeting_halloween_4">邪悪なものがパッチを当てながらやってくる</string>
+    <string name="home_greeting_halloween_4">不気味な何かが、パッチとともにやってくる</string>
     <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
-    <string name="home_greeting_winter_1">ハッピーホリデー、新しいパッチ</string>
+    <string name="home_greeting_winter_1">ハッピーホリデー！新しいパッチをどうぞ</string>
     <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
-    <string name="home_greeting_winter_2">雪よ降れ、パッチを当てろ</string>
-    <string name="home_greeting_winter_3">新年、新しいパッチ</string>
+    <string name="home_greeting_winter_2">雪よ降れ、パッチも降れ！</string>
+    <string name="home_greeting_winter_3">新年に、新しいパッチを</string>
     <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
-    <string name="home_greeting_winter_4">パッチを当てながら雪の中を駆け抜ける</string>
+    <string name="home_greeting_winter_4">雪の中でもパッチ中</string>
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
     <string name="home_greeting_new_year_1">あけましておめでとうございます！</string>
     <string name="home_greeting_new_year_2">新しいパッチへのカウントダウン</string>
     <string name="home_greeting_new_year_3">新年も、変わらず広告なしのアプリです</string>
     <!-- Pun on the saying "Out with the old, in with the new" -->
-    <string name="home_greeting_new_year_4">古いバージョンは退場、新しいバージョンは登場</string>
+    <string name="home_greeting_new_year_4">古いバージョンにさよなら、新しいバージョンにこんにちは</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">パッチソース</string>
     <string name="sources_search">ソースとパッチを検索</string>
@@ -401,18 +401,18 @@
     <string name="adaptive_icon_themed">テーマ</string>
     <string name="adaptive_icon_background_color">背景色</string>
     <string name="adaptive_icon_reset_transform">位置とスケールをリセット</string>
-    <string name="adaptive_icon_no_transparency_warning">この画像には透明なピクセルが含まれていないため、テーマアイコンや通知アイコンには Morphe のロゴが残ります</string>
+    <string name="adaptive_icon_no_transparency_warning">この画像には透明なピクセルが含まれていないため、テーマアイコンと通知アイコンには Morphe のロゴがそのまま表示されます</string>
     <string name="adaptive_icon_created_success">アダプティブ アイコンの作成に成功しました</string>
     <string name="adaptive_icon_creation_failed">アダプティブ アイコンの作成に失敗しました</string>
     <string name="adaptive_icon_guide">アイコン作成ガイド</string>
     <string name="adaptive_icon_guide_png_title">背景が透明な PNG を使用する</string>
-    <string name="adaptive_icon_guide_png_body">透明な背景にロゴを配置するのが最適です。背景色は以下から選択してください。透明部分のない画像を使用すると、アイコン全体が画像で埋め尽くされます。その場合、テーマアイコンや通知アイコンには Morphe のロゴが表示されます。</string>
+    <string name="adaptive_icon_guide_png_body">透明背景のロゴを使う場合、下で選択した背景色が適用されます。透明部分のない画像はアイコン全体に表示され、テーマアイコンと通知アイコンには Morphe のロゴがそのまま表示されます</string>
     <string name="adaptive_icon_guide_safe_zones_title">セーフゾーン</string>
-    <string name="adaptive_icon_guide_safe_zones_body">このアウトラインは、お使いのランチャーのアイコンの形状を示しており、その外側の部分はすべて切り取られます。他のランチャーでは異なる形状が使用されているため、各形状に表示されている破線の円の内側に、重要な詳細を配置してください。</string>
+    <string name="adaptive_icon_guide_safe_zones_body">アウトラインはお使いのランチャーのアイコンの形を示しており、その外側は切り取られます。ランチャーによってアイコンの形は異なるため、どの形のアイコンでも見切れないよう、重要な部分は破線の円の内側に収めてください</string>
     <string name="adaptive_icon_guide_notification_title">通知アイコン</string>
-    <string name="adaptive_icon_guide_notification_body">画像の表示範囲から切り抜きます。ファイルの余白の有無にかかわらず、他のステータス バー アイコンと同じサイズに調整されます。プレビューの下にあるスライダーでサイズを調整してください。Android では単色で表示されます。</string>
+    <string name="adaptive_icon_guide_notification_body">画像の表示範囲から切り抜きます。画像ファイルの余白に関係なく、ステータスバーの他のアイコンと同じ大きさに調整されます。プレビューの下にあるスライダーでサイズを調整してください。Android では単色で表示されます</string>
     <string name="adaptive_icon_guide_monochrome_title">テーマアイコン</string>
-    <string name="adaptive_icon_guide_monochrome_body">ランチャー アイコンと同じ位置とサイズで画像を切り抜きます。Android 13 以降では、テーマアイコンが有効になっているランチャーでは、壁紙の色に合わせてアイコンの色が変化します。</string>
+    <string name="adaptive_icon_guide_monochrome_body">ランチャーアイコンと同じ位置・サイズで画像を切り抜きます。Android 13 以降では、テーマアイコンが有効になっているランチャーでは、壁紙に合わせて色が変化します</string>
     <string name="notification_icon_preview">通知</string>
     <!-- Header Creator -->
     <string name="header_creator_create">カスタム ヘッダーを作成</string>
@@ -422,11 +422,11 @@
     <string name="header_creator_failed">ヘッダーの作成に失敗しました</string>
     <string name="header_creator_guide">ヘッダー作成ガイド</string>
     <string name="header_creator_guide_image_title">画像の要件</string>
-    <string name="header_creator_guide_image_body">背景を透明にした PNG 画像を使用すると、アプリバーに自然に溶け込みます。ファイル内のロゴ周囲の余白は無視されるため、標準のロゴと同じサイズと位置から表示されます。</string>
+    <string name="header_creator_guide_image_body">透明背景の PNG 画像を使うと、アプリバーの背景になじみます。画像ファイル内のロゴ周囲の余白は無視され、標準のロゴと同じ位置・サイズで表示されます</string>
     <string name="header_creator_guide_themes_title">ライトテーマとダークテーマ</string>
     <string name="header_creator_guide_themes_body">多くのアプリでは、ライトテーマ用とダークテーマ用にそれぞれ画像が必要です。一部のアプリ（YouTube Music など）はダークテーマのみを使用するため、該当するセクションのみ表示されます。</string>
     <string name="header_creator_guide_positioning_title">位置とサイズ調整</string>
-    <string name="header_creator_guide_positioning_body">エディターで画像をドラッグまたはピンチするか、スライダーでサイズを調整します。点線のボックスは標準ロゴの位置を示し、画像がその位置に揃うとガイドが表示されます。</string>
+    <string name="header_creator_guide_positioning_body">編集画面で画像をドラッグしたり、ピンチ操作で拡大・縮小したり、スライダーでサイズを調整できます。破線の枠は標準のロゴの位置を示しており、画像がその位置と重なるとガイドが表示されます</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">選択したアプリにパッチを適用</string>
     <string name="batch_patch_title">一括パッチ</string>
@@ -496,12 +496,12 @@
     <string name="home_app_info_app_deleted_warning">アプリがアンインストールされました</string>
     <string name="home_app_info_app_deleted_description">このアプリは Morphe の外でアンインストールされました。機能を復元するには、再度パッチを適用してください</string>
     <string name="home_app_info_not_patched_description">このアプリには未パッチ版がインストールされています。Morphe には以前のパッチ履歴が残っています</string>
-    <string name="home_app_info_mount_replaced_description">別のバージョンがマウントされたアプリを置き換えたため、パッチは適用されなくなりました。「復元」を実行すると、パッチが適用されたバージョンに戻ります</string>
-    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play ストアによってマウントされたアプリが更新されたため、パッチは適用されなくなりました。「復元」を実行すると、パッチが適用されたバージョンに戻ります。パッチが適用された状態を維持するには、Google Play ストアで「アプリの自動更新」をオフにしてください</string>
+    <string name="home_app_info_mount_replaced_description">別のバージョンによってマウント済みアプリが置き換えられたため、パッチが適用されなくなりました。「復元」を実行すると、パッチ適用済みのバージョンに戻せます</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play ストアによってマウント済みアプリが更新されたため、パッチが適用されなくなりました。「復元」を実行すると、パッチ適用済みのバージョンに戻せます。パッチが適用された状態を維持するには、Google Play ストアで「アプリの自動更新」をオフにしてください</string>
     <string name="app_links_title">サポート対象のウェブリンク</string>
-    <string name="app_links_description">Android 12 以降では、承認されていない限り、サポートされているドメインへのリンクはデフォルトのブラウザで開きます</string>
+    <string name="app_links_description">Android 12 以降では、許可されていない限り、サポートされているドメインへのリンクはデフォルトのブラウザで開きます</string>
     <string name="app_links_unverified_banner_title">未検証のウェブリンク</string>
-    <string name="app_links_unverified_banner_description">現在、サポート対象のウェブリンクはこのアプリではなくブラウザで開かれます</string>
+    <string name="app_links_unverified_banner_description">サポートされているウェブリンクは現在、このアプリではなくブラウザで開かれます</string>
     <string name="app_links_enable_auto">自動的に有効にする</string>
     <string name="app_links_enable_auto_in_progress">リンクを有効化しています…</string>
     <string name="app_links_open_settings">リンク設定を開く</string>
@@ -537,6 +537,7 @@
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">アプリ</string>
     <string name="patcher_field_package">パッケージ</string>
+    <string name="patcher_field_failed_patch">パッチ失敗</string>
     <string name="patcher_field_source">ソース</string>
     <string name="patcher_field_split">分割 APK</string>
     <string name="patcher_field_manager">マネージャー</string>
@@ -570,7 +571,7 @@
     <string name="patcher_installing_subtitle">もうすぐ準備完了！🎸</string>
     <string name="patcher_success_title">完了しました！🎉</string>
     <string name="patcher_success_subtitle">アプリのパッチ適用とインストールが完了しました！</string>
-    <string name="patcher_mounted_subtitle">アプリはパッチ適用済みで、マウントされています！</string>
+    <string name="patcher_mounted_subtitle">アプリのパッチ適用とマウントが完了しました！</string>
     <string name="patcher_complete_title">パッチが完了しました！✨</string>
     <string name="patcher_failed_title">おっと！何か問題が発生したようです</string>
     <string name="patcher_failed_dialog_title">パッチに失敗しました</string>
@@ -628,7 +629,7 @@
     <string name="patcher_memory_adjustment_title">メモリ不足</string>
     <string name="patcher_memory_adjustment_description">メモリ上限 %1$d MB で実行中に、パッチャーがシステムによって停止されました。上限を %2$d MB に引き下げると、パッチャーのメモリ使用量を抑えられ、処理を完了できる可能性があります</string>
     <string name="patcher_memory_adjustment_description_at_minimum">メモリ上限 %1$d MB（すでに利用可能な最低値）で実行中に、パッチャーがシステムによって停止されました。パッチソースまたはパッチを減らして再度お試しください</string>
-    <string name="patcher_memory_adjustment_description_finished">システムは、メモリ使用量が %1$d MB に達したためパッチ処理を停止しましたが、%2$d MB で完了しました。次回からは %2$d MB で開始することで、パッチ処理の失敗を回避できます</string>
+    <string name="patcher_memory_adjustment_description_finished">メモリ使用量が %1$d MB に達した時点でシステムによってパッチ処理が停止されましたが、実際には %2$d MB で完了しました。次回からは %2$d MB で開始することで、パッチ処理の失敗を回避できます</string>
     <string name="patcher_memory_adjustment_apply">%1$d MB に下げる</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">パッチを適用中…</string>
@@ -740,7 +741,7 @@
     <string name="settings_appearance_parallax_effect">視差効果</string>
     <string name="settings_appearance_parallax_effect_description">デバイスを傾けた時に背景が滑らかに移動します</string>
     <string name="settings_appearance_seasonal_themes">季節のテーマ</string>
-    <string name="settings_appearance_seasonal_themes_description">ホリデー期間中は、お祝いの背景と挨拶を表示します</string>
+    <string name="settings_appearance_seasonal_themes_description">ホリデーシーズンに特別な背景と挨拶メッセージを表示します</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
     <string name="settings_appearance_seasonal_background_notice">季節限定のテーマが有効な間は、%1$s の背景が %2$s まで表示されます</string>
     <!-- Settings - Appearance Tab - Theme -->
@@ -779,7 +780,7 @@
     <string name="settings_appearance_app_grouping">アプリのグループ化</string>
     <string name="settings_appearance_app_grouping_description">ソースやカテゴリごとにアプリをまとめるスイッチャーを表示します</string>
     <string name="settings_appearance_repatch_notice">再パッチ通知</string>
-    <string name="settings_appearance_repatch_notice_description">再パッチ可能なアプリがある場合バナーを表示します</string>
+    <string name="settings_appearance_repatch_notice_description">再パッチ可能なアプリがある場合、バナーを表示します</string>
     <string name="settings_appearance_sort_button">並べ替えとフィルターボタン</string>
     <string name="settings_appearance_sort_button_description">ホーム画面に並べ替えとフィルターボタンを表示します</string>
     <string name="settings_appearance_app_card_colors">アプリカードの色</string>
@@ -816,7 +817,7 @@
     <string name="settings_appearance_app_icon_accent_2">インク</string>
     <string name="settings_appearance_app_icon_accent_3">ペーパー</string>
     <string name="settings_appearance_app_icon_accent_4">ダスク</string>
-    <string name="settings_appearance_app_icon_background">バックグラウンド</string>
+    <string name="settings_appearance_app_icon_background">背景</string>
     <string name="settings_appearance_app_icon_mark">ロゴ</string>
     <string name="settings_appearance_app_icon_mark_color">カラー</string>
     <string name="settings_appearance_app_icon_mark_white">ホワイト</string>
@@ -869,9 +870,9 @@
     <string name="notification_channel_patch_updates">パッチの更新</string>
     <string name="notification_channel_patch_updates_description">パッチの新しいリリースに関する通知</string>
     <string name="notification_channel_patcher_description">バックグラウンドで Morphe がアプリにパッチを適用しているときに表示されます</string>
-    <string name="notification_channel_mounted_apps">マウントされたアプリ</string>
-    <string name="notification_channel_mounted_apps_description">別のバージョンがマウントされたアプリを置き換え、そのパッチが適用されなくなった場合</string>
-    <string name="notification_mount_replaced_title">%1$s はパッチが適用されていません</string>
+    <string name="notification_channel_mounted_apps">マウント済みアプリ</string>
+    <string name="notification_channel_mounted_apps_description">マウント済みアプリが別のバージョンに置き換えられ、パッチが適用されなくなった場合</string>
+    <string name="notification_mount_replaced_title">%1$s のパッチ適用が無効になりました</string>
     <string name="notification_mount_replaced_text">パッチ適用済みの v%2$s が v%1$s に置き換えられました。Morphe を起動して復元してください</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">高度な設定</string>
@@ -1371,7 +1372,7 @@ morphe_header_custom_dark.png
     <string name="content_translation_failed">翻訳に失敗しました：%s</string>
     <string name="changelog_section_new">新機能</string>
     <string name="changelog_section_fixes">修正</string>
-    <string name="changelog_section_performance">パフォーマンス</string>
+    <string name="changelog_section_performance">最適化</string>
     <string name="changelog_section_improvements">改善</string>
     <string name="changelog_section_app_support">アプリのサポート</string>
     <string name="changelog_section_other">変更</string>

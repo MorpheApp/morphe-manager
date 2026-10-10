@@ -537,6 +537,7 @@
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">앱</string>
     <string name="patcher_field_package">패키지</string>
+    <string name="patcher_field_failed_patch">실패한 패치</string>
     <string name="patcher_field_source">소스</string>
     <string name="patcher_field_split">분할 APK</string>
     <string name="patcher_field_manager">매니저</string>

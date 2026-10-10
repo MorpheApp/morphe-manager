@@ -538,6 +538,7 @@
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">אפליקציה</string>
     <string name="patcher_field_package">חבילה</string>
+    <string name="patcher_field_failed_patch">תיקון שנכשל</string>
     <string name="patcher_field_source">מקור</string>
     <string name="patcher_field_split">פיצול APK</string>
     <string name="patcher_field_manager">מנהל</string>

@@ -537,6 +537,7 @@
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">التطبيق</string>
     <string name="patcher_field_package">الحزمة</string>
+    <string name="patcher_field_failed_patch">فشل التعديل</string>
     <string name="patcher_field_source">المصدر</string>
     <string name="patcher_field_split">Split APK</string>
     <string name="patcher_field_manager">المدير</string>
@@ -570,7 +571,7 @@
     <string name="patcher_installing_subtitle">على وشك أن نكون جاهزين للانطلاق! 🎸</string>
     <string name="patcher_success_title">تم الانتهاء! 🎉</string>
     <string name="patcher_success_subtitle">تم تعديل تطبيقك وتثبيته!</string>
-    <string name="patcher_mounted_subtitle">تم ترقيع تطبيقك وتركيبه!</string>
+    <string name="patcher_mounted_subtitle">تم تعديل تطبيقك وتركيبه!</string>
     <string name="patcher_complete_title">اكتمل التعديل! ✨</string>
     <string name="patcher_failed_title">عفوًا! حدث خطأ ما</string>
     <string name="patcher_failed_dialog_title">فشل التعديل</string>

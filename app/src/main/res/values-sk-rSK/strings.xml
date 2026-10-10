@@ -537,6 +537,7 @@ Pre najlepšie výsledky sa odporúča záplatovať &lt;b&gt;úplný APK&lt;/b&g
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Aplikácia</string>
     <string name="patcher_field_package">Balík</string>
+    <string name="patcher_field_failed_patch">Neúspešná záplata</string>
     <string name="patcher_field_source">Zdroj</string>
     <string name="patcher_field_split">Rozdelený APK</string>
     <string name="patcher_field_manager">Správca</string>

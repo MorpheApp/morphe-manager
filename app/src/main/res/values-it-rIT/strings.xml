@@ -537,6 +537,7 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">App</string>
     <string name="patcher_field_package">Pacchetto</string>
+    <string name="patcher_field_failed_patch">Patch non riuscita</string>
     <string name="patcher_field_source">Origine</string>
     <string name="patcher_field_split">APK diviso</string>
     <string name="patcher_field_manager">Manager</string>

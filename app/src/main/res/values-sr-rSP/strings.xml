@@ -537,6 +537,7 @@
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Апликација</string>
     <string name="patcher_field_package">Пакет</string>
+    <string name="patcher_field_failed_patch">Неуспешна закрпа</string>
     <string name="patcher_field_source">Извор</string>
     <string name="patcher_field_split">Подељени АПК</string>
     <string name="patcher_field_manager">Менаџер</string>

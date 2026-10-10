@@ -539,6 +539,7 @@ Nếu không, APK đã vá và được gắn có thể sẽ không hoạt độ
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Ứng dụng</string>
     <string name="patcher_field_package">Gói</string>
+    <string name="patcher_field_failed_patch">Bản vá thất bại</string>
     <string name="patcher_field_source">Nguồn</string>
     <string name="patcher_field_split">Tách APK</string>
     <string name="patcher_field_manager">Trình quản lý</string>

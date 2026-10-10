@@ -537,6 +537,7 @@ Para obteres os melhores resultados, este ficheiro recomenda a modificação de 
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Aplicativo</string>
     <string name="patcher_field_package">Pacote</string>
+    <string name="patcher_field_failed_patch">Patch falhado</string>
     <string name="patcher_field_source">Fonte</string>
     <string name="patcher_field_split">APK dividido</string>
     <string name="patcher_field_manager">Gerenciador</string>

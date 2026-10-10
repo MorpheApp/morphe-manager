@@ -536,6 +536,7 @@ Für optimale Ergebnisse empfiehlt diese App, eine &lt;b&gt;vollständige APK&lt
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">App</string>
     <string name="patcher_field_package">Paket</string>
+    <string name="patcher_field_failed_patch">Fehlgeschlagener Patch</string>
     <string name="patcher_field_source">Quelle</string>
     <string name="patcher_field_split">Split-APK</string>
     <string name="patcher_field_manager">Manager</string>

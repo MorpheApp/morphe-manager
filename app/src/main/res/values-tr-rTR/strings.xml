@@ -537,6 +537,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Uygulama</string>
     <string name="patcher_field_package">Paket</string>
+    <string name="patcher_field_failed_patch">Başarısız yama</string>
     <string name="patcher_field_source">Kaynak</string>
     <string name="patcher_field_split">Bölünmüş APK</string>
     <string name="patcher_field_manager">Yönetici</string>

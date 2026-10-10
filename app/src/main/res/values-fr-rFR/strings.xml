@@ -541,6 +541,7 @@ Restaurer remet la version patchée. Désactive les mises à jour automatiques p
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Application</string>
     <string name="patcher_field_package">Paquet</string>
+    <string name="patcher_field_failed_patch">Échec du patch</string>
     <string name="patcher_field_source">Source</string>
     <string name="patcher_field_split">APK fractionné</string>
     <string name="patcher_field_manager">Gestionnaire</string>

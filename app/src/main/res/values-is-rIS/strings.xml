@@ -391,17 +391,27 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="image_load_failed">Ekki tókst að hlaða þessa mynd</string>
     <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
     <string name="adaptive_icon_launcher">Heimaskjástákn</string>
+    <string name="adaptive_icon_gesture_hint">Dragðu til að færa, klípdu til að breyta stærð</string>
     <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
+    <string name="adaptive_icon_preview">Forskoðun</string>
     <!-- Caption under the launcher icon in its own colors -->
+    <string name="adaptive_icon_standard">Staðaltákn</string>
     <!-- Caption under the launcher icon recolored by the system theme -->
+    <string name="adaptive_icon_themed">Þematákn</string>
     <string name="adaptive_icon_background_color">Bakgrunnslit</string>
     <string name="adaptive_icon_reset_transform">Endurstilla stöðu og mál</string>
+    <string name="adaptive_icon_no_transparency_warning">Þessi mynd hefur enga gagnsæja pixla, svo þema- og tilkynningatáknin halda Morphe-lógóinu</string>
     <string name="adaptive_icon_created_success">Adaptive tákn búið til með árangri</string>
     <string name="adaptive_icon_creation_failed">Ekki tókst að búa til adaptive tákn</string>
     <string name="adaptive_icon_guide">Tákn búa til leiðbeiningar</string>
     <string name="adaptive_icon_guide_png_title">Nota PNG með gagnsæja bakgrunn</string>
+    <string name="adaptive_icon_guide_png_body">Lógó á gagnsæjum bakgrunni virkar best, með bakgrunnslitnum sem er valinn hér fyrir neðan. Mynd án gagnsæis fyllir allt táknið í staðinn, og þema- og tilkynningatáknin halda þá Morphe-lógóinu.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Örugg svæði</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Útlínan sýnir táknform heimaskjásins þíns, og allt utan hennar er klippt burt. Aðrir heimaskjáir nota aðrar lögun, svo hafðu mikilvæg smáatriði inni í strikaða hringnum sem hver lögun sýnir.</string>
     <string name="adaptive_icon_guide_notification_title">Tilvísun</string>
+    <string name="adaptive_icon_guide_notification_body">Skorið úr sýnilega hlutanum af myndinni og í sömu stærð og önnur stöðustikutákn, hver sem spássía skráarinnar er. Stilltu það með rennistikunni undir forskoðuninni. Android sýnir það í einum lit.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Þematákn</string>
+    <string name="adaptive_icon_guide_monochrome_body">Skorið úr myndinni með sömu staðsetningu og stærð og heimaskjástáknið. Á Android 13 og nýrri lita heimaskjáir með virkjuðum þematáknum það með litum úr veggfóðrinu.</string>
     <string name="notification_icon_preview">Tilvísun</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Búa til sérsniðinn haus</string>
@@ -411,9 +421,11 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="header_creator_failed">Ekki tókst að búa til haus</string>
     <string name="header_creator_guide">Haus búa til leiðbeiningar</string>
     <string name="header_creator_guide_image_title">Mynda kröfur</string>
+    <string name="header_creator_guide_image_body">PNG með gagnsæjum bakgrunni blandast inn í forritsstikuna. Spássíur í kringum lógóið í skránni eru hunsaðar, svo það byrjar í sömu stærð og stöðu og staðlaða lógóið.</string>
     <string name="header_creator_guide_themes_title">Ljóst og dökk litir</string>
     <string name="header_creator_guide_themes_body">Flest app krefjast sérstakara mynda fyrir ljósa og aðra lit. Sum app (slátt YouTube músik) nota eingöngu aðra litinn, svo að aðeins það deild er sýnið.</string>
     <string name="header_creator_guide_positioning_title">Staða og mál</string>
+    <string name="header_creator_guide_positioning_body">Dragðu og klípdu myndina í ritlinum, eða stilltu stærðina með rennistikunni. Strikaði kassinn markar þar sem staðlaða lógóið er, og viðmiðunarlínur birtast þegar myndin er í takt við það.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Valdar patch</string>
     <string name="batch_patch_title">Batch patching</string>
@@ -524,6 +536,7 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Forrit</string>
     <string name="patcher_field_package">Pakki</string>
+    <string name="patcher_field_failed_patch">Mistekinn plástur</string>
     <string name="patcher_field_source">Uppruni</string>
     <string name="patcher_field_split">Skipt APK</string>
     <string name="patcher_field_manager">Stjórnandi</string>

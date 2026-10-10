@@ -538,6 +538,7 @@ Sovelluksen &lt;b&gt;%s&lt;/b&gt; tässä versiossa on varhainen kokeellinen tuk
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Sovellus</string>
     <string name="patcher_field_package">Paketti</string>
+    <string name="patcher_field_failed_patch">Epäonnistunut korjaus</string>
     <string name="patcher_field_source">Lähde</string>
     <string name="patcher_field_split">APK:n jakaminen</string>
     <string name="patcher_field_manager">Hallinta</string>

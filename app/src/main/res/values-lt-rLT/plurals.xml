@@ -13,8 +13,44 @@
         <item quantity="other">%s pataisų nustatymai</item>
     </plurals>
     <!-- How many files and folders a folder holds, under its name in the file picker -->
+    <plurals name="file_picker_item_count">
+        <item quantity="one">%s elementas</item>
+        <item quantity="few">%s elementai</item>
+        <item quantity="many">%s elementų</item>
+        <item quantity="other">%s elementų</item>
+    </plurals>
     <!-- Button that confirms the files checked in the file picker -->
+    <plurals name="file_picker_select_count">
+        <item quantity="one">Pasirinkti %s failą</item>
+        <item quantity="few">Pasirinkti %s failus</item>
+        <item quantity="many">Pasirinkti %s failų</item>
+        <item quantity="other">Pasirinkti %s failų</item>
+    </plurals>
     <!-- Button that adds every source waiting in the add source dialog -->
+    <plurals name="sources_dialog_add_count">
+        <item quantity="one">Pridėti %s šaltinį</item>
+        <item quantity="few">Pridėti %s šaltinius</item>
+        <item quantity="many">Pridėti %s šaltinių</item>
+        <item quantity="other">Pridėti %s šaltinių</item>
+    </plurals>
+    <plurals name="home_app_patch_sources_title">
+        <item quantity="one">Pataisos šaltiniai, skirti %s programai</item>
+        <item quantity="few">Pataisos šaltiniai, skirti %s programoms</item>
+        <item quantity="many">Pataisos šaltiniai, skirti %s programų</item>
+        <item quantity="other">Pataisos šaltiniai, skirti %s programų</item>
+    </plurals>
+    <plurals name="expert_mode_hidden_sources_notice">
+        <item quantity="one">%s šaltinis paslėptas. Bakstelėkite, kad parodytumėte</item>
+        <item quantity="few">%s šaltiniai paslėpti. Bakstelėkite, kad parodytumėte</item>
+        <item quantity="many">%s šaltinių paslėpta. Bakstelėkite, kad parodytumėte</item>
+        <item quantity="other">%s šaltinių paslėpta. Bakstelėkite, kad parodytumėte</item>
+    </plurals>
+    <plurals name="sources_search_patch_matches">
+        <item quantity="one">%s atitinkanti pataisa</item>
+        <item quantity="few">%s atitinkančios pataisos</item>
+        <item quantity="many">%s atitinkančių pataisų</item>
+        <item quantity="other">%s atitinkančių pataisų</item>
+    </plurals>
     <plurals name="source_count">
         <item quantity="one">%s šaltinis</item>
         <item quantity="few">%s šaltiniai</item>
@@ -39,6 +75,48 @@
         <item quantity="many">%s APK failai</item>
         <item quantity="other">%s APK failai</item>
     </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="one">Įdiegta %s programa</item>
+        <item quantity="few">Įdiegtos %s programos</item>
+        <item quantity="many">Įdiegta %s programų</item>
+        <item quantity="other">Įdiegta %s programų</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="one">Iš naujo įdiegta %s programa</item>
+        <item quantity="few">Iš naujo įdiegtos %s programos</item>
+        <item quantity="many">Iš naujo įdiegta %s programų</item>
+        <item quantity="other">Iš naujo įdiegta %s programų</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="one">Pašalinta %s programa</item>
+        <item quantity="few">Pašalintos %s programos</item>
+        <item quantity="many">Pašalinta %s programų</item>
+        <item quantity="other">Pašalinta %s programų</item>
+    </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="one">Pašalinti %s programą?</item>
+        <item quantity="few">Pašalinti %s programas?</item>
+        <item quantity="many">Pašalinti %s programų?</item>
+        <item quantity="other">Pašalinti %s programų?</item>
+    </plurals>
+    <plurals name="batch_patch_ready_count">
+        <item quantity="one">%s programa paruošta pataisymui</item>
+        <item quantity="few">%s programos paruoštos pataisymui</item>
+        <item quantity="many">%s programų paruošta pataisymui</item>
+        <item quantity="other">%s programų paruošta pataisymui</item>
+    </plurals>
+    <plurals name="repatch_available_count">
+        <item quantity="one">%s programa gali būti pataisyta iš naujo</item>
+        <item quantity="few">%s programos gali būti pataisytos iš naujo</item>
+        <item quantity="many">%s programų gali būti pataisyta iš naujo</item>
+        <item quantity="other">%s programų gali būti pataisyta iš naujo</item>
+    </plurals>
+    <plurals name="batch_skipped_summary">
+        <item quantity="one">Praleista %s programa</item>
+        <item quantity="few">Praleistos %s programos</item>
+        <item quantity="many">Praleista %s programų</item>
+        <item quantity="other">Praleista %s programų</item>
+    </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
         <item quantity="one">Pašalinta %s pasenusi pataisa iš išsaugotų pasirinkimų</item>
         <item quantity="few">Pašalintos %s pasenusios pataisos iš išsaugotų pasirinkimų</item>
@@ -51,10 +129,82 @@
         <item quantity="many">%s šaltiniai įdiegti</item>
         <item quantity="other">%s šaltiniai įdiegti</item>
     </plurals>
+    <plurals name="home_app_filter_active">
+        <item quantity="one">%1$s · %2$s filtruota</item>
+        <item quantity="few">%1$s · %2$s filtruota</item>
+        <item quantity="many">%1$s · %2$s filtruota</item>
+        <item quantity="other">%1$s · %2$s filtruota</item>
+    </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s paslėpta programėlė</item>
         <item quantity="few">%s paslėptos programos</item>
         <item quantity="many">%s paslėptos programos</item>
         <item quantity="other">%s paslėptos programos</item>
+    </plurals>
+    <plurals name="home_category_app_count">
+        <item quantity="one">%s programa</item>
+        <item quantity="few">%s programos</item>
+        <item quantity="many">%s programų</item>
+        <item quantity="other">%s programų</item>
+    </plurals>
+    <plurals name="expert_mode_selected_count">
+        <item quantity="one">%s pasirinkta</item>
+        <item quantity="few">%s pasirinkti</item>
+        <item quantity="many">%s pasirinkta</item>
+        <item quantity="other">%s pasirinkta</item>
+    </plurals>
+    <plurals name="expert_mode_copy_from_bundle_done">
+        <item quantity="one">Nukopijuota %s pataisa iš pasirinkto rinkinio</item>
+        <item quantity="few">Nukopijuotos %s pataisos iš pasirinkto rinkinio</item>
+        <item quantity="many">Nukopijuota %s pataisų iš pasirinkto rinkinio</item>
+        <item quantity="other">Nukopijuota %s pataisų iš pasirinkto rinkinio</item>
+    </plurals>
+    <plurals name="core_count">
+        <item quantity="one">%s branduolys</item>
+        <item quantity="few">%s branduoliai</item>
+        <item quantity="many">%s branduolių</item>
+        <item quantity="other">%s branduolių</item>
+    </plurals>
+    <plurals name="changelog_feature_count">
+        <item quantity="one">%s funkcija</item>
+        <item quantity="few">%s funkcijos</item>
+        <item quantity="many">%s funkcijų</item>
+        <item quantity="other">%s funkcijų</item>
+    </plurals>
+    <plurals name="changelog_fix_count">
+        <item quantity="one">%s pataisa</item>
+        <item quantity="few">%s pataisos</item>
+        <item quantity="many">%s pataisų</item>
+        <item quantity="other">%s pataisų</item>
+    </plurals>
+    <plurals name="changelog_performance_count">
+        <item quantity="one">%s optimizacija</item>
+        <item quantity="few">%s optimizacijos</item>
+        <item quantity="many">%s optimizacijų</item>
+        <item quantity="other">%s optimizacijų</item>
+    </plurals>
+    <plurals name="changelog_change_count">
+        <item quantity="one">%s pakeitimas</item>
+        <item quantity="few">%s pakeitimai</item>
+        <item quantity="many">%s pakeitimų</item>
+        <item quantity="other">%s pakeitimų</item>
+    </plurals>
+    <plurals name="changelog_new_releases">
+        <item quantity="one">%s naujas leidimas</item>
+        <item quantity="few">%s nauji leidimai</item>
+        <item quantity="many">%s naujų leidimų</item>
+        <item quantity="other">%s naujų leidimų</item>
+    </plurals>
+    <plurals name="app_links_count_enabled">
+        <item quantity="one">%d nuoroda įjungta</item>
+        <item quantity="few">%d nuorodos įjungtos</item>
+        <item quantity="many">%d nuorodų įjungta</item>
+        <item quantity="other">%d nuorodų įjungta</item>
+    </plurals>
+    <plurals name="app_links_count_unverified">
+        <item quantity="one">%d nepatvirtinta nuoroda</item>
+        <item quantity="few">%d nepatvirtintos nuorodos</item>
+        <item quantity="many">%d nepatvirtinta nuorodos</item>
+        <item quantity="other">%d nepatvirtintų nuorodų</item>
     </plurals>
 </resources>

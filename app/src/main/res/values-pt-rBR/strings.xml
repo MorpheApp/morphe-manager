@@ -537,6 +537,7 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Aplicativo</string>
     <string name="patcher_field_package">Pacote</string>
+    <string name="patcher_field_failed_patch">Falha no patch</string>
     <string name="patcher_field_source">Origem</string>
     <string name="patcher_field_split">APK dividido</string>
     <string name="patcher_field_manager">Gerenciador</string>
