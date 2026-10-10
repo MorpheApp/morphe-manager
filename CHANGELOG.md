@@ -1,3 +1,10 @@
+# [1.35.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v1.35.0-dev.6...v1.35.0-dev.7) (2026-10-10)
+
+
+### Features
+
+* Show which patch failed when patching fails ([5ddad1f](https://github.com/MorpheApp/morphe-manager/commit/5ddad1f037d4d2ad38f53560d6e1f4c3494ccbc8))
+
 # [1.35.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v1.35.0-dev.5...v1.35.0-dev.6) (2026-10-09)
 
 
