@@ -661,6 +661,7 @@ private fun PatcherScreenContent(
                     PatchingFailed(
                         summary = patchedAppSummary,
                         errorMessage = state.errorMessage,
+                        failedPatch = patcherViewModel.patchRun.failedPatch,
                         onHomeClick = onBackClick,
                         onErrorClick = { state.shownFailure = PatcherFailure.PATCHING },
                         // Simple mode keeps no selection of its own to return to

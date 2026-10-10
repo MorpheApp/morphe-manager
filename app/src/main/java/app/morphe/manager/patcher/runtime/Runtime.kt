@@ -51,6 +51,7 @@ sealed class Runtime(context: Context) : KoinComponent {
      * @param options          Patch option values, per bundle.
      * @param logger           Sink for everything the run reports.
      * @param onPatchCompleted Called with the name of each patch that finished.
+     * @param onPatchFailed    Called with the name of the patch the run failed on.
      * @param onProgress       Called as the run moves between steps.
      * @param stripUnusedNativeLibs Whether native libraries and split configurations the device
      *                         cannot use are dropped.
@@ -69,6 +70,7 @@ sealed class Runtime(context: Context) : KoinComponent {
         options: Options,
         logger: Logger,
         onPatchCompleted: suspend (String) -> Unit,
+        onPatchFailed: (String) -> Unit,
         onProgress: ProgressEventHandler,
         stripUnusedNativeLibs: Boolean,
         onMergedApkReady: (suspend (File) -> Unit)? = null,

@@ -88,6 +88,8 @@ class PatcherWorker(
         val options: Options,
         val logger: Logger,
         val onPatchCompleted: suspend () -> Unit,
+        /** Called with the name of the patch the run failed on. */
+        val onPatchFailed: (String) -> Unit,
         /**
          * Patching was abandoned and started over from the first step, so anything reported by
          * the previous attempt has to be discarded rather than counted twice.
@@ -478,6 +480,7 @@ class PatcherWorker(
                     options,
                     args.logger,
                     onPatchCompleted,
+                    args.onPatchFailed,
                     ::updateProgress,
                     stripNativeLibs,
                     onMergedApkReady,
@@ -506,6 +509,7 @@ class PatcherWorker(
                     options,
                     args.logger,
                     onPatchCompleted,
+                    args.onPatchFailed,
                     ::updateProgress,
                     stripNativeLibs,
                     onMergedApkReady,

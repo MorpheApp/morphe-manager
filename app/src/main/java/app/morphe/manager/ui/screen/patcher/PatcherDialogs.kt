@@ -645,6 +645,7 @@ private fun diagnosticSections(errorInfo: PatcherErrorInfo?): List<List<Pair<Str
     val packageLabel = stringResource(R.string.patcher_field_package)
     val versionLabel = stringResource(R.string.version)
     val patchesLabel = stringResource(R.string.patches)
+    val failedPatchLabel = stringResource(R.string.patcher_field_failed_patch)
     val sourceLabel = stringResource(R.string.patcher_field_source)
     val managerLabel = stringResource(R.string.patcher_field_manager)
     val patcherLabel = stringResource(R.string.settings_advanced_patcher)
@@ -685,6 +686,7 @@ private fun diagnosticSections(errorInfo: PatcherErrorInfo?): List<List<Pair<Str
 
         val patches = errorInfo?.let { info ->
             listOf(patchesLabel to info.patchCount.toString()) +
+                    listOfNotNull(info.failedPatch?.let { failedPatchLabel to it }) +
                     info.bundles.map { bundle ->
                         sourceLabel to listOfNotNull(bundle.name, bundle.version).joinToString(" ")
                     }

@@ -406,6 +406,7 @@ fun BatchPatcherScreen(
                 packageName = item.packageName,
                 appVersion = item.version.orEmpty(),
                 patchCount = item.selection.values.sumOf { it.size },
+                failedPatch = item.failedPatch,
                 bundles = item.bundles.map {
                     PatchSourceRef(name = it.name, version = null)
                 },
@@ -1025,7 +1026,10 @@ private fun itemDetails(item: BatchPatchItem): String = when (item.state) {
 
     BatchItemState.UNVERIFIED_SIGNATURE -> stringResource(R.string.home_invalid_signature_badge)
 
-    BatchItemState.FAILED -> item.message ?: stringResource(R.string.patcher_unknown_error)
+    // The patch is what the user can deselect, while the error itself is left to the dialog
+    BatchItemState.FAILED -> item.failedPatch?.let { stringResource(R.string.failed_to_execute_patch, it) }
+        ?: item.message
+        ?: stringResource(R.string.patcher_unknown_error)
 
     else -> {
         val source = when (item.source) {

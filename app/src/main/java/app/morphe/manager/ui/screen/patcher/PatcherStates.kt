@@ -75,6 +75,8 @@ data class PatcherErrorInfo(
     val packageName: String,
     val appVersion: String,
     val patchCount: Int,
+    /** The patch the run failed on, null when it failed outside of one. */
+    val failedPatch: String?,
     val bundles: List<PatchSourceRef>,
     /** Null where the setting the run used is no longer known, as in a batch run. */
     val stripsNativeLibs: Boolean?
@@ -356,6 +358,7 @@ fun PatchingSuccess(
 fun PatchingFailed(
     summary: PatchedAppSummary,
     errorMessage: String?,
+    failedPatch: String?,
     onHomeClick: () -> Unit,
     onErrorClick: () -> Unit,
     onChangePatchesClick: (() -> Unit)? = null
@@ -367,6 +370,8 @@ fun PatchingFailed(
             // The button under it opens the whole error, so a long one is only cut short here
             ResultNotice(
                 text = errorMessage?.withShortExceptionName()?.takeIf { it.isNotBlank() },
+                // A stack trace rarely names the patch behind it, which is what the user can act on
+                title = failedPatch?.let { stringResource(R.string.failed_to_execute_patch, it) },
                 tone = SemanticTone.Error,
                 icon = Icons.Outlined.ErrorOutline,
                 maxLines = ERROR_NOTICE_LINES
@@ -712,6 +717,7 @@ private fun BackToGameCallout(visible: Boolean) {
 private fun ResultNotice(
     text: String?,
     tone: SemanticTone,
+    title: String? = null,
     icon: ImageVector,
     maxLines: Int = Int.MAX_VALUE,
     overflowAction: NoticeAction? = null,
@@ -727,6 +733,7 @@ private fun ResultNotice(
         if (text != null) shown = text
         Notice(
             text = shown,
+            title = title,
             tone = tone,
             icon = icon,
             maxLines = maxLines,

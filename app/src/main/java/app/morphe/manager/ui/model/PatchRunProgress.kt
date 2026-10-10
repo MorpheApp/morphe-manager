@@ -74,7 +74,8 @@ class PatchRunProgress(
     private val totalPatches: Int,
     splitStepActive: Boolean = false,
     restoredSteps: List<Step>? = null,
-    restoredCompletedPatches: Int = 0
+    restoredCompletedPatches: Int = 0,
+    restoredFailedPatch: String? = null
 ) : PatchProgressSource, AutoCloseable {
 
     private val appContext: Context = context.applicationContext
@@ -141,6 +142,10 @@ class PatchRunProgress(
     var completedPatches by mutableIntStateOf(restoredCompletedPatches)
         private set
 
+    /** The patch the run failed on, null while none has. */
+    var failedPatch by mutableStateOf(restoredFailedPatch)
+        private set
+
     /** Share of the progress bar left for executing patches after the fixed steps. */
     private var patchesPercentage = max(0.0, 1.0 - steps.sumOf { it.progressPercentage })
 
@@ -200,6 +205,10 @@ class PatchRunProgress(
         scope.launch(Dispatchers.Main) { completedPatches += 1 }
     }
 
+    fun onPatchFailed(patchName: String) {
+        scope.launch(Dispatchers.Main) { failedPatch = patchName }
+    }
+
     /**
      * Drops everything the abandoned attempt reported and puts the pipeline back at its first
      * step, so the retry that follows counts from zero instead of on top of it.
@@ -210,6 +219,7 @@ class PatchRunProgress(
     fun onRestart() {
         scope.launch(Dispatchers.Main) {
             completedPatches = 0
+            failedPatch = null
             currentStepIndex = 0
             steps.clear()
             steps.addAll(generatePatchSteps(appContext, requiresSplitPreparation))

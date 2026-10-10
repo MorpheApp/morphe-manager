@@ -195,6 +195,7 @@ class ProcessRuntime(
         options: Options,
         logger: Logger,
         onPatchCompleted: suspend (String) -> Unit,
+        onPatchFailed: (String) -> Unit,
         onProgress: ProgressEventHandler,
         stripUnusedNativeLibs: Boolean,
         onMergedApkReady: (suspend (File) -> Unit)?,
@@ -215,6 +216,7 @@ class ProcessRuntime(
                     stripUnusedNativeLibs,
                     logger,
                     onPatchCompleted,
+                    onPatchFailed,
                     onProgress,
                     onMergedApkReady
                 )
@@ -271,6 +273,7 @@ class ProcessRuntime(
         stripUnusedNativeLibs: Boolean,
         logger: Logger,
         onPatchCompleted: suspend (String) -> Unit,
+        onPatchFailed: (String) -> Unit,
         onProgress: ProgressEventHandler,
         onMergedApkReady: (suspend (File) -> Unit)?,
     ) = coroutineScope {
@@ -351,6 +354,8 @@ class ProcessRuntime(
                 override fun patchSucceeded(patchName: String) {
                     scope.launch { onPatchCompleted(patchName) }
                 }
+
+                override fun patchFailed(patchName: String) = onPatchFailed(patchName)
 
                 override fun progress(name: String?, state: String?, msg: String?) =
                     onProgress(name, state?.let { enumValueOf<State>(it) }, msg)

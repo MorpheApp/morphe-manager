@@ -14,6 +14,8 @@ package app.morphe.manager.patcher.runtime.process;
 oneway interface IPatcherEvents {
     void log(String level, String msg);
     void patchSucceeded(String patchName);
+    // Sent right before the run fails on it, so the manager can name the patch to deselect
+    void patchFailed(String patchName);
     void progress(String name, String state, String msg);
     // Resolved in the main process so the label uses the app locale, not the system locale
     void splitProgress(String eventType, String apkName);

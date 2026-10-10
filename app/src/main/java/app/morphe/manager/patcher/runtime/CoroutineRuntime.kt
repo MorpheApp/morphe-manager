@@ -34,6 +34,7 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
         options: Options,
         logger: Logger,
         onPatchCompleted: suspend (String) -> Unit,
+        onPatchFailed: (String) -> Unit,
         onProgress: ProgressEventHandler,
         stripUnusedNativeLibs: Boolean,
         onMergedApkReady: (suspend (File) -> Unit)?,
@@ -95,6 +96,7 @@ class CoroutineRuntime(private val context: Context) : Runtime(context) {
                     input = preparation.file,
                     stripUnusedNativeLibs = stripUnusedNativeLibs,
                     onPatchCompleted = onPatchCompleted,
+                    onPatchFailed = onPatchFailed,
                     onProgress = onProgress
                 ).use { session ->
                     session.run(

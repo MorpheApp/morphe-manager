@@ -439,6 +439,7 @@ class PatcherViewModel(
             packageName = packageName,
             appVersion = version ?: "unspecified",
             patchCount = patchCount,
+            failedPatch = patchRun.failedPatch,
             bundles = bundles,
             stripsNativeLibs = prefs.stripUnusedNativeLibs.get()
         )
@@ -504,7 +505,8 @@ class PatcherViewModel(
         restoredSteps = restoredProgress?.let {
             BundleCompat.getParcelableArrayList(it, KEY_STEPS, Step::class.java)
         },
-        restoredCompletedPatches = restoredProgress?.getInt(KEY_COMPLETED_PATCHES) ?: 0
+        restoredCompletedPatches = restoredProgress?.getInt(KEY_COMPLETED_PATCHES) ?: 0,
+        restoredFailedPatch = restoredProgress?.getString(KEY_FAILED_PATCH)
     )
 
     val steps: List<Step> get() = patchRun.steps
@@ -546,6 +548,7 @@ class PatcherViewModel(
             Bundle().apply {
                 putParcelableArrayList(KEY_STEPS, ArrayList(patchRun.steps))
                 putInt(KEY_COMPLETED_PATCHES, patchRun.completedPatches)
+                putString(KEY_FAILED_PATCH, patchRun.failedPatch)
                 putBoolean(KEY_SUCCESS_SCREEN, showSuccessScreen)
                 _patcherSucceeded.value?.let { putBoolean(KEY_SUCCEEDED, it) }
             }
@@ -970,6 +973,7 @@ class PatcherViewModel(
             mergedOptions,
             patchRun.logger,
             onPatchCompleted = { patchRun.onPatchCompleted() },
+            onPatchFailed = patchRun::onPatchFailed,
             onPatchingRestarted = { patchRun.onRestart() },
             setInputFile = { file, needsSplit, merged ->
                 val storedFile = if (shouldPreserveInput) {
@@ -1219,6 +1223,7 @@ class PatcherViewModel(
         private const val KEY_PROGRESS = "patch_progress"
         private const val KEY_STEPS = "steps"
         private const val KEY_COMPLETED_PATCHES = "completed_patches"
+        private const val KEY_FAILED_PATCH = "failed_patch"
         private const val KEY_SUCCEEDED = "succeeded"
         private const val KEY_SUCCESS_SCREEN = "success_screen"
     }

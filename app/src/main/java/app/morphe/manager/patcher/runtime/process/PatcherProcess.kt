@@ -129,6 +129,7 @@ class PatcherProcess(private val context: Context) : IPatcherProcess.Stub() {
                     input = input,
                     stripUnusedNativeLibs = parameters.stripUnusedNativeLibs,
                     onPatchCompleted = { patchName -> events.patchSucceeded(patchName) },
+                    onPatchFailed = { patchName -> events.patchFailed(patchName) },
                     onProgress = { name, state, message ->
                         events.progress(name, state?.name, message)
                     }

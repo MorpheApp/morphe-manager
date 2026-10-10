@@ -484,6 +484,7 @@ class BatchPatchCoordinator(
             options = item.options.sanitizeForPatcher(),
             logger = runProgress.logger,
             onPatchCompleted = { runProgress.onPatchCompleted() },
+            onPatchFailed = runProgress::onPatchFailed,
             onPatchingRestarted = { runProgress.onRestart() },
             setInputFile = { file, needsSplit, merged ->
                 runProgress.updateSplitRequirement(file, needsSplit, merged)
@@ -517,7 +518,9 @@ class BatchPatchCoordinator(
                         ?.getString(PatcherWorker.PROCESS_FAILURE_MESSAGE_KEY)
                         ?.lineSequence()
                         ?.firstOrNull { it.isNotBlank() }
-                    updateItem(index) { it.copy(state = BatchItemState.FAILED, message = failure) }
+                    updateItem(index) {
+                        it.copy(state = BatchItemState.FAILED, message = failure, failedPatch = runProgress.failedPatch)
+                    }
                 }
             }
         } finally {
