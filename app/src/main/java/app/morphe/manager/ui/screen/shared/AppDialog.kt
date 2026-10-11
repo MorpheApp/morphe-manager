@@ -339,8 +339,6 @@ private fun DialogContent(
     hideFooterWhileTyping: Boolean,
     content: @Composable ColumnScope.() -> Unit
 ) {
-    val isLandscape = isLandscape()
-
     // Text colors based on theme
     val textColor = if (isDarkTheme) Color.White else Color.Black
     val secondaryTextColor =
@@ -399,7 +397,7 @@ private fun DialogContent(
     } else {
         WindowInsets.systemBars.union(WindowInsets.ime)
     }
-    val maxContentWidth = if (isLandscape) 600.dp else 450.dp
+    val maxContentWidth = 600.dp
 
     Column(
         modifier = Modifier.fillMaxSize(),
