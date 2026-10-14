@@ -150,6 +150,9 @@ class RootInstaller(
      * The module is staged beside the files it replaces and only switched in after [onStaged].
      * A process killed during the slow copies leaves the previous module in place, still
      * matching what was recorded about it.
+     *
+     * [stockAPK] is only installed when the matching stock app is missing. The stock copy the
+     * module mounts at boot always comes from the installed APK.
      */
     suspend fun install(
         patchedAPK: File,
@@ -200,12 +203,9 @@ class RootInstaller(
         val installedStockPath = installedStockInfo?.applicationInfo?.sourceDir
         val stockMountPaths = collectStockMountPaths(packageName, installedStockPath)
         val stockModuleApk = "$modulePath/$packageName-stock.apk"
-        // Copied from the installed APK, which stockAPK only matches when it was installed above.
-        // post-fs-data mounts the copy over the installed APK at boot, and one that differs, such as
-        // an original merged from a split bundle, fails PackageManager's certificate check there,
-        // which removes the app.
-        val stockSourcePath = installedStockPath
-        val stockModuleApkWritten = !stockSourcePath.isNullOrBlank() && stockMountPaths.isNotEmpty()
+        // post-fs-data mounts this copy over the installed APK at boot, where one that differs fails
+        // PackageManager's certificate check and the app is removed
+        val stockModuleApkWritten = !installedStockPath.isNullOrBlank() && stockMountPaths.isNotEmpty()
 
         val placeholders = mapOf(
             "__PKG_NAME__" to packageName,
@@ -230,7 +230,7 @@ class RootInstaller(
 
         val patchedModuleApk = "$modulePath/$packageName.apk"
         if (stockModuleApkWritten) {
-            stageCopy(stockSourcePath, stockModuleApk, "Stock APK doesn't exist")
+            stageCopy(installedStockPath, stockModuleApk, "Stock APK doesn't exist")
         }
         stageCopy(patchedAPK.absolutePath, patchedModuleApk, "File doesn't exist")
 
