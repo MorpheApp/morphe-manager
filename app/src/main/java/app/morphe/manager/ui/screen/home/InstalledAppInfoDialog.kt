@@ -790,9 +790,12 @@ fun InstalledAppInfoDialog(
                     )
                 }
             } else {
-                // Single-column layout for phones
-                Column(modifier = Modifier.fillMaxSize()) {
-                    infoPanel(Modifier.weight(1f).fillMaxWidth(), 0.dp) {
+                // Single-column layout for phones, held to the width other dialogs stop at
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    infoPanel(Modifier.weight(1f).widthIn(max = Defaults.ContentMaxWidth).fillMaxWidth(), 0.dp) {
                         infoItems()
 
                         item(key = "actions") {
@@ -821,6 +824,7 @@ fun InstalledAppInfoDialog(
                     StaggeredItem(entered = entered.value, index = 3) {
                         closeButton(
                             Modifier
+                                .widthIn(max = Defaults.ContentMaxWidth)
                                 .navigationBarsPadding()
                                 .padding(horizontal = Defaults.ContentPadding)
                                 .padding(vertical = Defaults.ItemSpacing)
