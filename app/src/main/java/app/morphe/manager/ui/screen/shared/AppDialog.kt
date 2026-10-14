@@ -397,7 +397,6 @@ private fun DialogContent(
     } else {
         WindowInsets.systemBars.union(WindowInsets.ime)
     }
-    val maxContentWidth = 600.dp
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -422,7 +421,7 @@ private fun DialogContent(
             ) {
                 Column(
                     modifier = Modifier
-                        .widthIn(max = maxContentWidth)
+                        .widthIn(max = Defaults.ContentMaxWidth)
                         .fillMaxHeight(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = contentArrangement
@@ -559,7 +558,7 @@ private fun DialogContent(
         if (bottomBar != null) {
             Box(
                 modifier = Modifier
-                    .widthIn(max = maxContentWidth)
+                    .widthIn(max = Defaults.ContentMaxWidth)
                     .fillMaxWidth()
                     .imePadding()
             ) {
