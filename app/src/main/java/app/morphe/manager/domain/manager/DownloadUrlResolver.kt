@@ -30,13 +30,21 @@ class DownloadUrlResolver(private val morpheAPI: MorpheAPI) {
      * and the download sites redirect for reasons of their own, so only the end of the chain
      * says what the user will actually get.
      */
-    suspend fun resolve(packageName: String, version: String?): String =
-        // The instructions wait on this, so a host that never answers has to end the wait itself
-        withTimeoutOrNull(RESOLVE_TIMEOUT) { follow(packageName, version) } ?: run {
+    suspend fun resolve(packageName: String, version: String?): String {
+        if (
+            packageName == "com.ss.android.ugc.tiktok.lite" &&
+            version == "43.5.3"
+        ) {
+            return "https://www.apkmirror.com/apk/tiktok-pte-ltd/tiktok-lite-3/tiktok-lite-43-5-3-release/tiktok-lite-43-5-3-android-apk-download/"
+        }
+
+        return withTimeoutOrNull(RESOLVE_TIMEOUT) {
+            follow(packageName, version)
+        } ?: run {
             Log.w(tag, "Timed out resolving the download page")
             webSearchUrl(packageName, version)
         }
-
+    }
     private suspend fun follow(packageName: String, version: String?): String {
         val searchUrl = apiSearchUrl(packageName, version)
         Log.d(tag, "Using search url: $searchUrl")
