@@ -170,7 +170,6 @@ class RootInstaller(
         removeOtherRootInstalls(packageName)
 
         var installedStockInfo = pm.getPackageInfo(packageName)
-        var stockSourceFile: File? = null
 
         stockAPK?.let { stockApp ->
             val stockInfo = pm.getPackageInfo(stockApp)
@@ -195,14 +194,17 @@ class RootInstaller(
             }
 
             installedStockInfo = pm.getPackageInfo(packageName)
-            stockSourceFile = stockApp
         }
 
         onStage(MountStage.COPYING)
         val installedStockPath = installedStockInfo?.applicationInfo?.sourceDir
         val stockMountPaths = collectStockMountPaths(packageName, installedStockPath)
         val stockModuleApk = "$modulePath/$packageName-stock.apk"
-        val stockSourcePath = stockSourceFile?.absolutePath ?: installedStockPath
+        // Copied from the installed APK, which stockAPK only matches when it was installed above.
+        // post-fs-data mounts the copy over the installed APK at boot, and one that differs, such as
+        // an original merged from a split bundle, fails PackageManager's certificate check there,
+        // which removes the app.
+        val stockSourcePath = installedStockPath
         val stockModuleApkWritten = !stockSourcePath.isNullOrBlank() && stockMountPaths.isNotEmpty()
 
         val placeholders = mapOf(
