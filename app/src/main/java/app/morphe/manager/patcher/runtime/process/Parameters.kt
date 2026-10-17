@@ -18,7 +18,6 @@ import kotlinx.parcelize.RawValue
 @Parcelize
 data class Parameters(
     val cacheDir: String,
-    val frameworkDir: String,
     val packageName: String,
     val inputFile: String,
     val outputFile: String,

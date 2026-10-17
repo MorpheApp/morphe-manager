@@ -97,7 +97,7 @@ private fun updateDialogContentOf(updateViewModel: UpdateViewModel): UpdateDialo
  *   release is not ready yet and offering to check again.
  */
 @Composable
-fun ManagerChangelogDialog(
+fun DialogHostScope.ManagerChangelogDialog(
     onDismiss: () -> Unit,
     updateViewModel: UpdateViewModel = koinViewModel(
         viewModelStoreOwner = LocalActivity.current as ComponentActivity
@@ -136,14 +136,32 @@ fun ManagerChangelogDialog(
         onDispose { updateViewModel.resetOlderManagerEntries() }
     }
 
-    AppDialog(
+    ListDialog(
         onDismissRequest = onDismiss,
-        scrollable = false,
         // The timeline gives up its leading edge to the rail, so the list takes the wider layout.
         // The header holds the top, and progress and results sit centered in the room below it
-        padding = DialogPadding.Compact,
-        contentArrangement = Arrangement.Top,
-        fillContentHeight = true,
+        header = {
+            // Headed by Morphe itself, as a source's changelog is by the source. The version is the
+            // one on its way where there is one, so a download names what it fetches
+            ListDialogHeader(
+                icon = { modifier ->
+                    Surface(modifier = modifier, shape = CircleShape, color = Color.White) {
+                        MorpheLauncherLogo(modifier = Modifier.fillMaxSize())
+                    }
+                },
+                // With no update on the way, this is just the changelog
+                title = if (state == UpdateViewModel.State.CAN_DOWNLOAD && !hasUpdate && !expectsUpdate) {
+                    stringResource(R.string.changelog)
+                } else {
+                    stringResource(state.title)
+                },
+                subtitle = listOf(
+                    stringResource(R.string.app_name),
+                    (updateViewModel.releaseInfo?.version ?: BuildConfig.VERSION_NAME).withVersionPrefix().isolateLtr()
+                ).joinToString(" · "),
+                accentColor = morpheAccent
+            )
+        },
         footer = {
             AnimatedContent(
                 targetState = state,
@@ -162,27 +180,6 @@ fun ManagerChangelogDialog(
             }
         }
     ) {
-        // Headed by Morphe itself, as a source's changelog is by the source. The version is the
-        // one on its way where there is one, so a download names what it fetches
-        ListDialogHeader(
-            icon = { modifier ->
-                Surface(modifier = modifier, shape = CircleShape, color = Color.White) {
-                    MorpheLauncherLogo(modifier = Modifier.fillMaxSize())
-                }
-            },
-            // With no update on the way, this is just the changelog
-            title = if (state == UpdateViewModel.State.CAN_DOWNLOAD && !hasUpdate && !expectsUpdate) {
-                stringResource(R.string.changelog)
-            } else {
-                stringResource(state.title)
-            },
-            subtitle = listOf(
-                stringResource(R.string.app_name),
-                (updateViewModel.releaseInfo?.version ?: BuildConfig.VERSION_NAME).withVersionPrefix().isolateLtr()
-            ).joinToString(" · "),
-            accentColor = morpheAccent
-        )
-
         AnimatedContent(
             targetState = content,
             transitionSpec = Animations.fadeCrossfade(),
@@ -194,7 +191,7 @@ fun ManagerChangelogDialog(
             when (content) {
                 UpdateDialogContent.DetailsLoading -> ChangelogListLoading(
                     withSummary = hasUpdate || expectsUpdate,
-                    modifier = Modifier.padding(top = Defaults.ItemSpacing)
+                    modifier = Modifier.padding(LocalDialogBarInsets.current)
                 )
 
                 UpdateDialogContent.DetailsFailed -> updateViewModel.changelogError?.let { ChangelogError(it) }
@@ -206,8 +203,6 @@ fun ManagerChangelogDialog(
                         entries = entries,
                         older = older,
                         badges = mapOf(BuildConfig.VERSION_NAME to ChangelogBadge.INSTALLED),
-                        // The gap under the header is the list's own, so releases scroll up to its edge
-                        contentPadding = PaddingValues(top = Defaults.ItemSpacing),
                         header = when {
                             // Everything the user is about to install, summed up above the releases themselves
                             newReleases.isNotEmpty() -> {
@@ -261,7 +256,7 @@ fun ManagerChangelogDialog(
     }
 
     // Internet check dialog
-    if (updateViewModel.showInternetCheckDialog) {
+    DialogHost(visible = updateViewModel.showInternetCheckDialog) {
         MeteredDownloadDialog(
             title = stringResource(R.string.download_update_confirmation),
             onConfirm = {
@@ -504,9 +499,9 @@ private fun UpdateCompletedContent(version: String?) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = Defaults.ContentPaddingExpanded),
+            .padding(vertical = Defaults.SpaceExtraExtraLarge),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingMedium)
+        verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraLarge)
     ) {
         Surface(
             shape = CircleShape,

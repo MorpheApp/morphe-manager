@@ -96,9 +96,9 @@ fun rememberWindowSize(): WindowSize {
  */
 val WindowSize.contentPadding: Dp
     get() = when (widthSizeClass) {
-        WindowWidthSizeClass.Compact -> Defaults.ContentPadding
-        WindowWidthSizeClass.Medium -> Defaults.ContentPaddingMedium
-        WindowWidthSizeClass.Expanded -> Defaults.ContentPaddingExpanded
+        WindowWidthSizeClass.Compact -> Defaults.SpaceLarge
+        WindowWidthSizeClass.Medium -> Defaults.SpaceExtraLarge
+        WindowWidthSizeClass.Expanded -> Defaults.SpaceExtraExtraLarge
     }
 
 /**

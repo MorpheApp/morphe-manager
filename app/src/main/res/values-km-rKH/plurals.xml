@@ -12,4 +12,5 @@
     <plurals name="expert_mode_selected_count">
         <item quantity="other">%s ដែលបានរើស</item>
     </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
 </resources>

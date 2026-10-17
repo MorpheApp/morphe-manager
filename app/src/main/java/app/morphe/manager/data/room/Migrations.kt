@@ -161,3 +161,20 @@ val MIGRATION_16_17 = object : Migration(16, 17) {
         db.execSQL("DELETE FROM apk_signatures WHERE hashes = ''")
     }
 }
+
+val MIGRATION_17_18 = object : Migration(17, 18) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        // Every source brought new apps until now, which is what a source without a row does
+        db.execSQL(
+            """
+            CREATE TABLE IF NOT EXISTS source_app_lists (
+                patch_bundle INTEGER NOT NULL,
+                known_apps TEXT NOT NULL,
+                unseen_apps TEXT NOT NULL,
+                PRIMARY KEY(patch_bundle),
+                FOREIGN KEY(patch_bundle) REFERENCES patch_bundles(uid) ON DELETE CASCADE
+            )
+            """.trimIndent()
+        )
+    }
+}

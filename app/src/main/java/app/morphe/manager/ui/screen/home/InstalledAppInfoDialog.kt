@@ -6,8 +6,7 @@
 package app.morphe.manager.ui.screen.home
 
 import android.content.pm.PackageInfo
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
+import androidx.activity.compose.BackHandler
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
@@ -21,32 +20,31 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.HelpOutline
 import androidx.compose.material.icons.automirrored.outlined.Launch
 import androidx.compose.material.icons.automirrored.outlined.List
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import androidx.lifecycle.Lifecycle
@@ -60,9 +58,9 @@ import app.morphe.manager.domain.bundles.versionStatus
 import app.morphe.manager.domain.links.AppLinksStatus
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.patcher.util.NativeLibs
-import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
-import app.morphe.manager.ui.screen.settings.system.InstallerUnavailableDialog
+import app.morphe.manager.ui.screen.settings.system.InstallerFlowDialogs
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.screen.sources.*
 import app.morphe.manager.ui.screen.shared.Animations
 import app.morphe.manager.ui.theme.ThemeTraitsDefaults
 import app.morphe.manager.ui.viewmodel.HomeViewModel
@@ -71,10 +69,13 @@ import app.morphe.manager.ui.viewmodel.InstalledAppInfoViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.manager.ui.viewmodel.labelRes
 import app.morphe.manager.util.*
+import app.morphe.manager.util.isRtl
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.androidx.compose.koinViewModel
 import java.io.File
+import org.koin.compose.koinInject
 
 data class AppliedPatchBundleUi(
     val uid: Int,
@@ -116,7 +117,7 @@ fun resolveAppliedBundleAttribution(
  * Dialog for installed app info and actions.
  */
 @Composable
-fun InstalledAppInfoDialog(
+fun DialogHostScope.InstalledAppInfoDialog(
     packageName: String,
     onDismiss: () -> Unit,
     onTriggerPatchFlow: (originalPackageName: String, repatchedPackageName: String?) -> Unit,
@@ -126,6 +127,7 @@ fun InstalledAppInfoDialog(
     settingsViewModel: SettingsViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
+    val messages = koinInject<UserMessages>()
     val installedApp = viewModel.installedApp
     val appInfo = viewModel.appInfo
     val appliedPatches = viewModel.appliedPatches
@@ -141,6 +143,7 @@ fun InstalledAppInfoDialog(
     val appUpdates by homeViewModel.apps.appUpdatesAvailable.collectAsStateWithLifecycle()
     val appUpdate = appUpdates?.get(packageName)
     val hasUpdate = appUpdate != null
+    val ignoredAppUpdates by homeViewModel.apps.ignoredAppUpdates.collectAsStateWithLifecycle()
     // What the install itself is in speaks louder than what is pending for it, so a record in one
     // of those states is described by that rather than by the work waiting on it
     val isSettledInstall = !viewModel.isAppDeleted &&
@@ -169,15 +172,21 @@ fun InstalledAppInfoDialog(
     // Both reasons to rebuild are answered by one banner, which then carries the patch button
     // the actions below would otherwise repeat
     val showsRebuildBanner = patchUpdatePending || versionBehind != null
-    // Spent on the version it names, so the banner comes back for whatever the sources support next
+    // Spent on what the banner names, the app version it offers or else the patch release, so the
+    // banner comes back for whatever the sources bring next
     val onIgnoreVersion = versionBehind?.let { status ->
         { homeViewModel.apps.ignoreSupportedVersion(catalogPackageName, status.supportedVersion) }
+    } ?: appUpdate?.takeIf { patchUpdatePending }?.let { update ->
+        { homeViewModel.apps.ignorePatchUpdate(packageName, update) }
     }
     // Offered only while the turned-down version is still the one on offer, since a newer one
     // brings the banner back on its own and leaves nothing to undo
     val onStopIgnoringVersion = ignoredVersion
         ?.takeIf { it == supportedVersion?.version }
         ?.let { { homeViewModel.apps.stopIgnoringSupportedVersion(catalogPackageName) } }
+    // An ignored patch update is only held while its release is the newest, so this lasts as long
+    val onStopIgnoringPatchUpdate = ignoredAppUpdates[packageName]
+        ?.let { { homeViewModel.apps.stopIgnoringPatchUpdate(packageName) } }
 
     // Accent color resolution order: bundle metadata (appIconColor) -> default. Read from every
     // source, a disabled one included, so the app keeps its color with nothing left to patch it.
@@ -190,8 +199,8 @@ fun InstalledAppInfoDialog(
     // Dialog states
     val showUninstallConfirm = remember { mutableStateOf(false) }
     val showDeleteDialog = remember { mutableStateOf(false) }
-    val showAppliedPatchesDialog = remember { mutableStateOf(false) }
-    val showAppLinksDialog = remember { mutableStateOf(false) }
+    // The applied patches and the web links open in place of the information, under its header
+    var page by rememberSaveable { mutableStateOf(InfoPage.Main) }
 
     // The link selection is only ever changed on a system screen, which is left by coming back here
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
@@ -235,10 +244,6 @@ fun InstalledAppInfoDialog(
             ?: KnownApps.getAppName(packageName)
     }
 
-    // Export strings
-    val exportSuccessMessage = stringResource(R.string.save_apk_success)
-    val exportFailedMessage = stringResource(R.string.saved_app_export_failed)
-
     // Export file name
     val exportFileName = remember(installedApp?.currentPackageName, appInfo?.versionName, appliedBundles) {
         val app = installedApp ?: return@remember "morphe_export.apk"
@@ -251,18 +256,15 @@ fun InstalledAppInfoDialog(
         ))
     }
 
-    val exportSavedLauncher = rememberLauncherForActivityResult(CreateDocument(APK_MIMETYPE)) { uri ->
-        val savedFile = viewModel.savedApkFile()
-        if (savedFile != null && uri != null) {
-            installViewModel.export(savedFile, uri) { success ->
-                if (success) {
-                    context.toast(exportSuccessMessage)
-                } else {
-                    context.toast(exportFailedMessage)
-                }
-            }
+    val scope = rememberCoroutineScope()
+    // Offered under the name an export would suggest, so the file lands the same either way
+    val shareSaved: () -> Unit = {
+        viewModel.savedApkFile()?.let { file ->
+            scope.launch { context.shareApks(listOf(file)) { exportFileName } }
         }
     }
+
+    val exporter = rememberApkExporter()
 
     // Refresh app state on every launch
     LaunchedEffect(Unit) {
@@ -276,7 +278,6 @@ fun InstalledAppInfoDialog(
         } else if (hadMountOperation) {
             hadMountOperation = false
             viewModel.refreshCurrentAppState()
-            installedApp?.currentPackageName?.let(homeViewModel.apps::notifyAppStateChanged)
         }
     }
 
@@ -316,8 +317,8 @@ fun InstalledAppInfoDialog(
                 signatureConflict.value = installState
             }
             is InstallViewModel.InstallState.Error -> {
-                // Show error toast
-                context.toast(installState.message)
+                // Show the error
+                messages.show(installState.message)
             }
             else -> {}
         }
@@ -339,59 +340,7 @@ fun InstalledAppInfoDialog(
 
     // Everything this dialog opens wears the app's color, as the dialog itself does
     ProvideAccent(infoAccentColor) {
-        // Installer unavailable dialog
-        installViewModel.installerUnavailableDialog?.let { dialogState ->
-            InstallerUnavailableDialog(
-                state = dialogState,
-                onOpenApp = installViewModel::openInstallerApp,
-                onRetry = installViewModel::retryWithPreferredInstaller,
-                onUseFallback = installViewModel::proceedWithFallbackInstaller,
-                onDismiss = installViewModel::dismissInstallerUnavailableDialog
-            )
-        }
-
-        // Installer selection dialog (shown when promptInstallerOnInstall is enabled)
-        if (installViewModel.showInstallerSelectionDialog) {
-            val options = remember { installViewModel.getInstallerOptions() }
-            val primaryToken = remember { installViewModel.getPrimaryInstallerToken() }
-            InstallerSelectionDialog(
-                options = options,
-                selected = primaryToken,
-                onDismiss = installViewModel::dismissInstallerSelectionDialog,
-                onConfirm = { token ->
-                    installViewModel.proceedWithSelectedInstaller(token)
-                },
-                onOpenShizuku = installViewModel::openShizukuApp,
-                shizukuStatusProvider = installViewModel::getShizukuStatus,
-                onRequestShizukuPermission = installViewModel::requestShizukuPermission
-            )
-        }
-
-        // Sub-dialogs
-        if (showAppliedPatchesDialog.value && appliedPatches != null) {
-            AppliedPatchesDialog(
-                appLabel = appLabel,
-                appInfo = appInfo,
-                accentColor = appAccentColor,
-                packageName = installedApp?.originalPackageName ?: packageName,
-                bundles = appliedBundles,
-                settingsViewModel = settingsViewModel,
-                onDismiss = { showAppliedPatchesDialog.value = false }
-            )
-        }
-
-        val appLinksStatus = viewModel.appLinksStatus
-        if (showAppLinksDialog.value && appLinksStatus?.hasSupportedLinks == true) {
-            AppLinksDialog(
-                appLabel = appLabel,
-                appInfo = appInfo,
-                accentColor = appAccentColor,
-                packageName = installedApp?.currentPackageName ?: packageName,
-                status = appLinksStatus,
-                onRefresh = viewModel::refreshAppLinks,
-                onDismiss = { showAppLinksDialog.value = false }
-            )
-        }
+        InstallerFlowDialogs(installViewModel)
 
         // What the pending patch update changed for this app
         BundleChangelogHost(
@@ -401,7 +350,7 @@ fun InstalledAppInfoDialog(
         )
 
         // Mount warning dialog
-        if (showMountWarningDialog.value) {
+        DialogHost(visible = showMountWarningDialog.value) {
             MountWarningDialog(
                 onConfirm = {
                     showMountWarningDialog.value = false
@@ -415,7 +364,7 @@ fun InstalledAppInfoDialog(
             )
         }
 
-        if (showUninstallConfirm.value) {
+        DialogHost(visible = showUninstallConfirm.value) {
             ConfirmDialog(
                 title = stringResource(R.string.uninstall),
                 message = stringResource(R.string.home_app_info_uninstall_app_confirmation),
@@ -429,7 +378,7 @@ fun InstalledAppInfoDialog(
             )
         }
 
-        signatureConflict.value?.let { conflict ->
+        DialogHost(target = signatureConflict.value) { conflict ->
             SignatureConflictDialog(
                 title = stringResource(R.string.patcher_conflict_title),
                 message = stringResource(R.string.patcher_conflict_subtitle),
@@ -452,7 +401,7 @@ fun InstalledAppInfoDialog(
             )
         }
 
-        if (showDeleteDialog.value) {
+        DialogHost(visible = showDeleteDialog.value) {
             val isSavedOnly = installedApp?.installType == InstallType.SAVED
             val items = buildList {
                 if (isSavedOnly) {
@@ -495,14 +444,71 @@ fun InstalledAppInfoDialog(
         onTriggerPatchFlow(app.originalPackageName, app.trackingKey)
     }
 
+    val subpage = when (page) {
+        InfoPage.Main -> null
+        InfoPage.AppliedPatches -> rememberAppliedPatchesPage(
+            appLabel = appLabel,
+            packageName = installedApp?.originalPackageName ?: packageName,
+            bundles = appliedBundles,
+            settingsViewModel = settingsViewModel
+        )
+        // Gone with the links, should the app drop them while the page is open
+        InfoPage.AppLinks -> viewModel.appLinksStatus?.takeIf { it.hasSupportedLinks }?.let { status ->
+            InfoSubpage(
+                page = page,
+                subtitle = stringResource(R.string.app_links_title),
+                actions = rememberAppLinksActions(
+                    packageName = installedApp?.currentPackageName ?: packageName,
+                    status = status,
+                    onRefresh = viewModel::refreshAppLinks
+                )
+            ) {
+                AppLinksContent(status = status, accentColor = infoAccentColor)
+            }
+        }
+    }
+
     // Main Dialog
-    AppDialog(
+    ListDialog(
         onDismissRequest = onDismiss,
-        title = null,
         dismissOnClickOutside = true,
-        padding = DialogPadding.None,
         accentColor = infoAccentColor,
-        footer = null
+        // Only once the app is known, so a slow load does not head an empty dialog
+        header = installedApp?.takeIf { !isLoading }?.let { app ->
+            {
+                InstalledAppHeader(
+                    installedApp = app,
+                    appInfo = appInfo,
+                    packageName = packageName,
+                    appLabel = appLabel,
+                    accentColor = infoAccentColor,
+                    pageSubtitle = subpage?.subtitle
+                )
+            }
+        },
+        footer = {
+            // A page's own actions, and the way back to the information, take the place of Close
+            AnimatedContent(
+                targetState = subpage,
+                contentKey = { it?.page },
+                transitionSpec = Animations.fadeCrossfade(),
+                label = "installedAppInfoFooter"
+            ) { shown ->
+                if (shown == null) {
+                    AppDialogOutlinedButton(
+                        text = stringResource(R.string.close),
+                        onClick = onDismiss,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                } else {
+                    DetailsFooter(
+                        dismissText = stringResource(R.string.back),
+                        onDismiss = { page = InfoPage.Main },
+                        actions = shown.actions
+                    )
+                }
+            }
+        }
     ) {
         AnimatedContent(
             targetState = isLoading || installedApp == null,
@@ -512,7 +518,9 @@ fun InstalledAppInfoDialog(
                 val enter = if (targetState) Animations.fadeIn else EnterTransition.None
                 enter togetherWith Animations.fadeOut
             },
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
             label = "installedAppInfo"
         ) { loading ->
             // installedApp is re-checked here so the body below keeps its non-null smart cast
@@ -531,28 +539,6 @@ fun InstalledAppInfoDialog(
             // animate, so a slow load does not skip the cascade
             LaunchedEffect(Unit) { entered.value = true }
 
-            val windowSize = rememberWindowSize()
-            val landscape = isLandscape()
-
-            // Both layouts show the same pieces and only place them differently
-            val relativeTime = remember(installedApp.patchedAt) { installedApp.patchedAt?.let { getRelativeTimeString(it) } }
-
-            // What the install is, then when it was made. The clone chip sits between them: it
-            // qualifies the install the same way its type does, rather than dating it
-            val installBadges = buildList {
-                add(installedApp.installType.badge.let { (icon, label) -> icon to stringResource(label) })
-                if (installedApp.isClone) {
-                    add(Icons.Outlined.ContentCopy to stringResource(R.string.clone))
-                }
-                relativeTime?.let { add(Icons.Outlined.Schedule to it) }
-            }
-            val badges = @Composable {
-                installBadges.forEach { (icon, label) ->
-                    AppAccentBadge(text = label, accentColor = infoAccentColor, icon = icon)
-                }
-            }
-            val compactHeader = landscape && windowSize.widthSizeClass == WindowWidthSizeClass.Expanded
-
             // Writes the module again from the saved builds and mounts it, reinstalling the
             // matching original first when another version replaced it
             val reinstallSavedMount: () -> Unit = {
@@ -570,12 +556,12 @@ fun InstalledAppInfoDialog(
                     )
                 }
             }
-            // Installs the saved patched build the way the primary installer does, warning first
-            // when that installer and the record differ on mounting
+            // Installs the saved patched build. A Mount build is always mounted, while any other
+            // one warns first when the primary installer is Mount
             val installSavedCopy: () -> Unit = {
                 viewModel.savedApkFile()?.let { savedFile ->
                     val installAction = {
-                        if (viewModel.primaryInstallerIsMount && installedApp.supportsMount) {
+                        if (installedApp.reinstallsByMount(viewModel.primaryInstallerIsMount)) {
                             reinstallSavedMount()
                         } else {
                             // The install result handler records the install type once it lands
@@ -586,7 +572,7 @@ fun InstalledAppInfoDialog(
                             )
                         }
                     }
-                    if (viewModel.primaryInstallerIsMount != (installedApp.installType == InstallType.MOUNT)) {
+                    if (viewModel.primaryInstallerIsMount && installedApp.installType != InstallType.MOUNT) {
                         pendingMountWarningAction.value = installAction
                         showMountWarningDialog.value = true
                     } else {
@@ -614,54 +600,6 @@ fun InstalledAppInfoDialog(
                 )
             } else null
 
-            // The app's header pinned over its information. The header inset sets its band in from
-            // the panel's edges, which it otherwise reaches out to and up under the status bar
-            val infoPanel = @Composable { modifier: Modifier, headerInset: Dp, content: LazyListScope.() -> Unit ->
-                Column(modifier = modifier) {
-                    CompositionLocalProvider(LocalDialogHorizontalInset provides Defaults.ContentPadding) {
-                        ListDialogHeader(
-                            icon = { iconModifier ->
-                                // Resolved by name when the record has no metadata to show. A record
-                                // whose artifacts are gone carries no icon either, and the glass
-                                // placeholder tinted to the app's accent is what the home card shows
-                                // for it
-                                AppIcon(
-                                    packageInfo = appInfo,
-                                    packageName = packageName,
-                                    contentDescription = null,
-                                    placeholderGradientColors = listOf(infoAccentColor),
-                                    modifier = iconModifier.clip(RoundedCornerShape(DialogHeaderDefaults.IconCornerRadius))
-                                )
-                            },
-                            title = appLabel,
-                            subtitle = (appInfo?.versionName ?: installedApp.version).withVersionPrefix(),
-                            accentColor = infoAccentColor,
-                            // Wraps rather than clips: a clone carries a chip more than other installs do
-                            badges = if (compactHeader) null else { { badges() } },
-                            // Compact mode: chips column on the right
-                            actions = if (compactHeader) {
-                                {
-                                    Column(
-                                        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
-                                        horizontalAlignment = Alignment.End
-                                    ) {
-                                        badges()
-                                    }
-                                }
-                            } else null,
-                            modifier = Modifier
-                                .statusBarsPadding()
-                                .padding(horizontal = Defaults.ContentPadding + headerInset)
-                        )
-                    }
-
-                    DialogLazyList(
-                        modifier = Modifier.weight(1f).fillMaxWidth(),
-                        contentPadding = PaddingValues(bottom = Defaults.ContentPaddingMedium),
-                        content = content
-                    )
-                }
-            }
             val actions = @Composable { modifier: Modifier ->
                 ActionsSection(
                     // Left out where a banner above already carries it
@@ -671,17 +609,17 @@ fun InstalledAppInfoDialog(
                         onClick = ::handlePatchClick,
                         enabled = availablePatches > 0
                     ).takeIf { !showsRebuildBanner && !viewModel.isAppDeleted },
-                    tiles = installedAppTiles(
+                    groups = installedAppActionGroups(
                         viewModel = viewModel,
                         installViewModel = installViewModel,
                         installedApp = installedApp,
                         restoreOfferedAbove = mountRestore != null,
                         onInstallSavedCopy = installSavedCopy,
-                        onExport = { exportSavedLauncher.launch(exportFileName) },
+                        onExport = { viewModel.savedApkFile()?.let { exporter.export(it, exportFileName) } },
+                        onShare = shareSaved,
                         onUninstall = { showUninstallConfirm.value = true },
                         onDelete = { showDeleteDialog.value = true }
                     ),
-                    singleColumn = landscape,
                     modifier = modifier
                 )
             }
@@ -691,13 +629,6 @@ fun InstalledAppInfoDialog(
                     tone = SemanticTone.Warning,
                     icon = Icons.Outlined.Info,
                     modifier = modifier
-                )
-            }
-            val closeButton = @Composable { modifier: Modifier ->
-                AppDialogOutlinedButton(
-                    text = stringResource(R.string.close),
-                    onClick = onDismiss,
-                    modifier = modifier.fillMaxWidth()
                 )
             }
             // Stagger index counter: hero header is index 0, the banners always 1, so later indices
@@ -718,114 +649,58 @@ fun InstalledAppInfoDialog(
                             onPatch = { onTriggerPatchFlow(installedApp.originalPackageName, installedApp.trackingKey) },
                             onShowUpdateChangelog = onShowUpdateChangelog,
                             onIgnoreVersion = onIgnoreVersion,
-                            onOpenAppLinks = { showAppLinksDialog.value = true },
-                            modifier = Modifier.padding(horizontal = Defaults.ContentPadding)
+                            onOpenAppLinks = { page = InfoPage.AppLinks }
                         )
                         StaggeredItem(entered = entered.value, index = 2) {
                             InfoSection(
                                 installedApp = installedApp,
                                 supportedVersion = supportedVersion?.version,
                                 onStopIgnoringVersion = onStopIgnoringVersion,
+                                onStopIgnoringPatchUpdate = onStopIgnoringPatchUpdate,
                                 appliedPatches = appliedPatches,
                                 bundlesUsedSummary = bundlesUsedSummary,
                                 appLinksStatus = viewModel.appLinksStatus,
-                                onShowPatches = { showAppliedPatchesDialog.value = true },
-                                onOpenAppLinks = { showAppLinksDialog.value = true },
-                                accentColor = infoAccentColor,
-                                modifier = Modifier
-                                    .padding(horizontal = Defaults.ContentPadding)
-                                    .padding(top = Defaults.ItemSpacing)
+                                onShowPatches = { page = InfoPage.AppliedPatches },
+                                onOpenAppLinks = { page = InfoPage.AppLinks },
+                                accentColor = infoAccentColor
                             )
                         }
                     }
                 }
             }
 
-            if (landscape) {
-                // Landscape layout: left sidebar has actions, right panel has header + info
-                Row(modifier = Modifier.fillMaxSize()) {
-                    // Left sidebar: centered buttons (scrollable when height is small)
-                    Column(
-                        modifier = Modifier
-                            .width(220.dp)
-                            .fillMaxHeight()
-                            .statusBarsPadding()
-                            .navigationBarsPadding()
-                            .padding(horizontal = Defaults.ContentPadding)
-                    ) {
-                        BoxWithConstraints(modifier = Modifier.fillMaxWidth().weight(1f)) {
-                            val availableHeight = maxHeight
-                            val sidebarScrollState = rememberScrollState()
-                            Column(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .heightIn(min = availableHeight)
-                                    .verticalScrollFade(sidebarScrollState)
-                                    .verticalScroll(sidebarScrollState),
-                                verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing, Alignment.CenterVertically)
-                            ) {
-                                StaggeredItem(entered = entered.value, index = 1) {
-                                    actions(Modifier.fillMaxWidth())
-                                }
-                                if (!viewModel.hasOriginalApk) {
-                                    StaggeredItem(entered = entered.value, index = 2) {
-                                        noSavedApkNotice(Modifier)
-                                    }
-                                }
-                                StaggeredItem(entered = entered.value, index = 1) {
-                                    closeButton(Modifier)
-                                }
-                            }
+            // Back leaves a page for the information rather than closing the dialog
+            BackHandler(enabled = subpage != null) { page = InfoPage.Main }
+
+            DialogPages(
+                page = subpage,
+                key = { it?.page ?: InfoPage.Main },
+                modifier = Modifier.fillMaxSize()
+            ) { shown ->
+                if (shown != null) {
+                    DetailsBody(modifier = Modifier.fillMaxSize(), content = shown.content)
+                    return@DialogPages
+                }
+
+                DialogLazyList(modifier = Modifier.fillMaxSize()) {
+                    infoItems()
+
+                    item(key = "actions") {
+                        StaggeredItem(entered = entered.value, index = 3) {
+                            actions(Modifier.padding(top = Defaults.SpaceMedium))
                         }
                     }
 
-                    VerticalDivider(modifier = Modifier.statusBarsPadding().navigationBarsPadding().padding(vertical = Defaults.ContentPadding))
-
-                    infoPanel(
-                        Modifier
-                            .weight(1f)
-                            .fillMaxHeight()
-                            .navigationBarsPadding(),
-                        Defaults.ContentPadding,
-                        infoItems
-                    )
-                }
-            } else {
-                // Single-column layout for phones
-                Column(modifier = Modifier.fillMaxSize()) {
-                    infoPanel(Modifier.weight(1f).fillMaxWidth(), 0.dp) {
-                        infoItems()
-
-                        item(key = "actions") {
-                            StaggeredItem(entered = entered.value, index = 3) {
-                                actions(
+                    if (!viewModel.hasOriginalApk) {
+                        item(key = "no_saved_apk") {
+                            StaggeredItem(entered = entered.value, index = 4) {
+                                noSavedApkNotice(
                                     Modifier
-                                        .padding(horizontal = Defaults.ContentPadding)
-                                        .padding(top = Defaults.ItemSpacing)
+                                        .fillMaxWidth()
+                                        .padding(top = Defaults.SpaceMedium)
                                 )
                             }
                         }
-
-                        if (!viewModel.hasOriginalApk) {
-                            item(key = "no_saved_apk") {
-                                StaggeredItem(entered = entered.value, index = 4) {
-                                    noSavedApkNotice(
-                                        Modifier
-                                            .fillMaxWidth()
-                                            .padding(horizontal = Defaults.ContentPadding)
-                                            .padding(top = Defaults.ItemSpacing)
-                                    )
-                                }
-                            }
-                        }
-                    }
-                    StaggeredItem(entered = entered.value, index = 3) {
-                        closeButton(
-                            Modifier
-                                .navigationBarsPadding()
-                                .padding(horizontal = Defaults.ContentPadding)
-                                .padding(vertical = Defaults.ItemSpacing)
-                        )
                     }
                 }
             }
@@ -834,7 +709,73 @@ fun InstalledAppInfoDialog(
 }
 
 /**
- * The banners above an installed app's information. Each carries the gap above it, so a hidden
+ * The head of an installed app's information: its icon, name and version over chips saying what
+ * the install is and when it was made, beside the name instead on a screen wide enough for both.
+ * A page opened in place of the information names itself by [pageSubtitle] instead.
+ */
+@Composable
+private fun InstalledAppHeader(
+    installedApp: InstalledApp,
+    appInfo: PackageInfo?,
+    packageName: String,
+    appLabel: String,
+    accentColor: Color,
+    pageSubtitle: String?
+) {
+    val relativeTime = remember(installedApp.patchedAt) { installedApp.patchedAt?.let { getRelativeTimeString(it) } }
+
+    // What the install is, then when it was made. The clone chip sits between them: it
+    // qualifies the install the same way its type does, rather than dating it
+    val installBadges = buildList {
+        add(installedApp.installType.badge.let { (icon, label) -> icon to stringResource(label) })
+        if (installedApp.isClone) {
+            add(AppStateIcons.Clone to stringResource(R.string.clone))
+        }
+        relativeTime?.let { add(Icons.Outlined.Schedule to it) }
+    }
+    val badges = @Composable {
+        installBadges.forEach { (icon, label) ->
+            AppAccentBadge(text = label, accentColor = accentColor, icon = icon)
+        }
+    }
+    val compactHeader = isLandscape() && rememberWindowSize().widthSizeClass == WindowWidthSizeClass.Expanded
+    val onPage = pageSubtitle != null
+
+    ListDialogHeader(
+        icon = { iconModifier ->
+            // Resolved by name when the record has no metadata to show. A record whose artifacts
+            // are gone carries no icon either, and the glass placeholder tinted to the app's accent
+            // is what the home card shows for it
+            AppIcon(
+                packageInfo = appInfo,
+                packageName = packageName,
+                contentDescription = null,
+                placeholderGradientColors = listOf(accentColor),
+                modifier = iconModifier.clip(RoundedCornerShape(DialogHeaderDefaults.IconCornerRadius))
+            )
+        },
+        title = appLabel,
+        subtitle = pageSubtitle ?: (appInfo?.versionName ?: installedApp.version).withVersionPrefix(),
+        accentColor = accentColor,
+        // Wraps rather than clips: a clone carries a chip more than other installs do
+        badges = if (compactHeader || onPage) null else { { badges() } },
+        alwaysShowBand = true,
+        // A wide screen sets the chips in a column beside the name
+        actions = if (compactHeader && !onPage) {
+            {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
+                    horizontalAlignment = Alignment.End
+                ) {
+                    badges()
+                }
+            }
+        } else null
+    )
+}
+
+/**
+ * The banners above an installed app's information. Each carries the gap below it, so a hidden
  * one leaves no space behind in a list that spaces nothing of its own.
  */
 @Composable
@@ -869,7 +810,7 @@ private fun InstalledAppBanners(
             staggerIndex = staggerIndex
         ) {
             WarningBanner(
-                icon = Icons.Outlined.Warning,
+                icon = AppStateIcons.Uninstalled,
                 title = stringResource(R.string.home_app_info_app_deleted_warning),
                 description = stringResource(R.string.home_app_info_app_deleted_description),
                 action = patchAction,
@@ -883,7 +824,7 @@ private fun InstalledAppBanners(
             staggerIndex = staggerIndex
         ) {
             WarningBanner(
-                icon = Icons.Outlined.AutoFixHigh,
+                icon = AppStateIcons.NotPatched,
                 title = stringResource(R.string.home_unpatched_version_installed),
                 // Naming the store is what tells the user how to keep this from happening again
                 description = stringResource(
@@ -930,7 +871,7 @@ private fun InstalledAppBanners(
             Notice(
                 text = stringResource(R.string.home_app_info_install_unverified),
                 tone = SemanticTone.Warning,
-                icon = Icons.AutoMirrored.Outlined.HelpOutline
+                icon = AppStateIcons.Unverified
             )
         }
         // Newer patches and a newer supported app version are both answered by rebuilding the
@@ -941,7 +882,11 @@ private fun InstalledAppBanners(
             staggerIndex = staggerIndex
         ) {
             WarningBanner(
-                icon = Icons.Outlined.Update,
+                icon = if (versionBehind != null) {
+                    AppStateIcons.NewerVersion
+                } else {
+                    AppStateIcons.NewerPatches
+                },
                 title = stringResource(
                     if (versionBehind != null) R.string.home_app_info_app_update_available
                     else R.string.home_app_info_patch_update_available
@@ -1021,14 +966,10 @@ private fun BannerSlot(
     staggerIndex: Int,
     content: @Composable () -> Unit
 ) {
-    AnimatedVisibility(
-        visible = visible,
-        enter = Animations.expandFadeEnter,
-        exit = Animations.shrinkFadeExit
-    ) {
+    FoldingVisibility(visible = visible) {
         Column {
-            Spacer(Modifier.height(Defaults.ItemSpacing))
             StaggeredItem(entered = entered, index = staggerIndex, content = content)
+            Spacer(Modifier.height(Defaults.SpaceMedium))
         }
     }
 }
@@ -1050,7 +991,7 @@ private fun VersionTransition(
 ) {
     val (from, to) = versions
     // Points the way the language runs, so the move reads forwards in Arabic and Hebrew too
-    val arrow = if (LocalLayoutDirection.current == LayoutDirection.Rtl) "←" else "→"
+    val arrow = if (isRtl()) "←" else "→"
     val readOut = stringResource(readOutRes, from, to)
 
     Text(
@@ -1059,7 +1000,7 @@ private fun VersionTransition(
             withStyle(SpanStyle(color = contentColor.copy(alpha = 0.5f))) { append("  $arrow  ") }
             withStyle(SpanStyle(color = contentColor, fontWeight = FontWeight.Medium)) { append(to) }
         },
-        style = MaterialTheme.typography.bodySmall,
+        style = MaterialTheme.typography.bodyMedium,
         textAlign = TextAlign.Center,
         modifier = modifier.semantics { contentDescription = readOut }
     )
@@ -1098,28 +1039,28 @@ private fun WarningBanner(
         Column(
             modifier = modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(Defaults.ItemSpacing))
-                .cardBorder(CardBorder.of(borderColor), RoundedCornerShape(Defaults.ItemSpacing))
+                .clip(RoundedCornerShape(Defaults.CornerMedium))
+                .cardBorder(CardBorder.of(borderColor), RoundedCornerShape(Defaults.CornerMedium))
                 .background(fill)
-                .padding(Defaults.ItemSpacing),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
+                .padding(Defaults.SpaceMedium),
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Header with icon
             Row(
                 modifier = Modifier.wrapContentWidth(),
-                horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
+                horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
                     imageVector = icon,
                     contentDescription = null,
                     tint = headingColor,
-                    modifier = Modifier.size(Defaults.ContentPadding)
+                    modifier = Modifier.size(Defaults.SpaceLarge)
                 )
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.titleSmall,
+                    style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     color = headingColor,
                     textAlign = TextAlign.Center
@@ -1129,7 +1070,7 @@ private fun WarningBanner(
             // Description
             Text(
                 text = description,
-                style = MaterialTheme.typography.bodySmall,
+                style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center
             )
@@ -1137,52 +1078,28 @@ private fun WarningBanner(
             // The versions and the extra actions depend on what the sources say, which can arrive
             // after the banner is already up
             val shownVersions = rememberLatest(versions)
-            AnimatedVisibility(
-                visible = versions != null,
-                enter = Animations.expandFadeEnter,
-                exit = Animations.shrinkFadeExit
-            ) {
+            FoldingVisibility(visible = versions != null) {
                 shownVersions?.let {
                     VersionTransition(versions = it, contentColor = contentColor, readOutRes = versionsReadOutRes)
                 }
             }
 
-            // Action button
-            PrimaryActionButton(
-                action = action,
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            // Side by side, because the banner's own button is the one meant to stand out and a
-            // column of full-width buttons under it reads as three offers of equal weight
-            val shownActions = rememberLatest(secondaryActions.takeIf { it.isNotEmpty() })
-            AnimatedVisibility(
-                visible = secondaryActions.isNotEmpty(),
-                enter = Animations.expandFadeEnter,
-                exit = Animations.shrinkFadeExit
+            // Buttons sit as far apart as the dialog's own, only the text over them sits closer
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
-                ) {
-                    shownActions?.forEach { action ->
-                        // One that joins a row already on screen fades in rather than popping up
-                        key(action.text) {
-                            val appeared = remember { MutableTransitionState(false) }
-                            appeared.targetState = true
-                            AnimatedVisibility(
-                                visibleState = appeared,
-                                enter = Animations.fadeIn,
-                                modifier = Modifier.weight(1f)
-                            ) {
-                                TileActionButton(
-                                    action = action,
-                                    horizontal = true,
-                                    modifier = Modifier.fillMaxWidth()
-                                )
-                            }
-                        }
-                    }
+                // Action button
+                PrimaryActionButton(
+                    action = action,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                // One joined group, because the banner's own button is the one meant to stand out
+                // and separate buttons under it would read as offers of equal weight
+                val shownActions = rememberLatest(secondaryActions.takeIf { it.isNotEmpty() })
+                FoldingVisibility(visible = secondaryActions.isNotEmpty()) {
+                    shownActions?.let { ActionGroup(actions = it) }
                 }
             }
         }
@@ -1241,6 +1158,7 @@ private fun InfoSection(
     installedApp: InstalledApp,
     supportedVersion: String?,
     onStopIgnoringVersion: (() -> Unit)?,
+    onStopIgnoringPatchUpdate: (() -> Unit)?,
     appliedPatches: Map<Int, Set<String>>?,
     bundlesUsedSummary: String,
     appLinksStatus: AppLinksStatus?,
@@ -1277,7 +1195,7 @@ private fun InfoSection(
 
     // Edged like the app's cards elsewhere, so the panel reads as part of the app's dialog
     SurfaceCard(
-        cornerRadius = Defaults.CardCornerRadius,
+        cornerRadius = Defaults.CornerLarge,
         showBorder = true,
         borderColor = appAccentBorder(accentColor),
         color = cardFill(),
@@ -1303,23 +1221,12 @@ private fun InfoSection(
             // sources cover can be looked up rather than only met as a warning. A version that
             // was turned down is where the offer is taken back up again
             InfoSlot(supportedVersion) { version ->
-                val supportedVersionLabel = stringResource(R.string.home_app_info_newest_supported_version)
-                if (onStopIgnoringVersion != null) {
-                    InfoRowWithAction(
-                        icon = Icons.Outlined.VisibilityOff,
-                        label = supportedVersionLabel,
-                        value = version.withVersionPrefix(),
-                        onAction = onStopIgnoringVersion,
-                        actionIcon = Icons.Outlined.Visibility,
-                        actionContentDescription = stringResource(R.string.stop_ignoring)
-                    )
-                } else {
-                    InfoRow(
-                        icon = Icons.Outlined.Update,
-                        label = supportedVersionLabel,
-                        value = version.withVersionPrefix()
-                    )
-                }
+                IgnorableInfoRow(
+                    icon = Icons.Outlined.Update,
+                    label = stringResource(R.string.home_app_info_newest_supported_version),
+                    value = version.withVersionPrefix(),
+                    onStopIgnoring = onStopIgnoringVersion
+                )
             }
 
             InfoSlot(apkSize) { size ->
@@ -1347,11 +1254,13 @@ private fun InfoSection(
                 )
             }
 
+            // Where a patch update that was turned down is taken back up again
             InfoSlot(bundlesUsedSummary.takeIf { it.isNotBlank() }) { summary ->
-                InfoRow(
+                IgnorableInfoRow(
                     icon = Icons.Outlined.Source,
                     label = stringResource(R.string.home_app_info_patch_source_used),
-                    value = summary
+                    value = summary,
+                    onStopIgnoring = onStopIgnoringPatchUpdate
                 )
             }
 
@@ -1383,17 +1292,38 @@ private fun InfoSection(
 }
 
 /**
+ * [InfoRow] for something whose offer can be turned down. While it is, [onStopIgnoring] is set and
+ * the row trades [icon] for a crossed out eye and takes the offer back up from its end.
+ */
+@Composable
+private fun IgnorableInfoRow(
+    icon: ImageVector,
+    label: String,
+    value: String,
+    onStopIgnoring: (() -> Unit)?
+) {
+    if (onStopIgnoring != null) {
+        InfoRowWithAction(
+            icon = Icons.Outlined.VisibilityOff,
+            label = label,
+            value = value,
+            onAction = onStopIgnoring,
+            actionIcon = Icons.Outlined.Visibility,
+            actionContentDescription = stringResource(R.string.stop_ignoring)
+        )
+    } else {
+        InfoRow(icon = icon, label = label, value = value)
+    }
+}
+
+/**
  * A row of the info card shown while [value] is there. Most of what the card lists is read after
  * the dialog opens, so rows slide in as it arrives instead of pushing the card apart.
  */
 @Composable
 private fun <T : Any> InfoSlot(value: T?, content: @Composable (T) -> Unit) {
     val shown = rememberLatest(value)
-    AnimatedVisibility(
-        visible = value != null,
-        enter = Animations.expandFadeEnter,
-        exit = Animations.shrinkFadeExit
-    ) {
+    FoldingVisibility(visible = value != null) {
         shown?.let {
             Column {
                 SettingsDivider()
@@ -1401,18 +1331,6 @@ private fun <T : Any> InfoSlot(value: T?, content: @Composable (T) -> Unit) {
             }
         }
     }
-}
-
-/** [value], or the last one it held once it is gone, so content animating out has something to show. */
-@Composable
-private fun <T : Any> rememberLatest(value: T?): T? {
-    val latest = remember { LatestValue<T>() }
-    if (value != null) latest.value = value
-    return value ?: latest.value
-}
-
-private class LatestValue<T : Any> {
-    var value: T? = null
 }
 
 @Composable
@@ -1440,45 +1358,54 @@ private fun InfoRowWithAction(
 }
 
 /**
- * The tiles under an installed app's information, in the order they are laid out: what can be
- * done with it first, the destructive actions last.
+ * The actions under an installed app's information, grouped by what they do: using the patched
+ * build, its mount and removing it, so the destructive ones stand together and last.
  */
 @Composable
-private fun installedAppTiles(
+private fun installedAppActionGroups(
     viewModel: InstalledAppInfoViewModel,
     installViewModel: InstallViewModel,
     installedApp: InstalledApp,
     restoreOfferedAbove: Boolean,
     onInstallSavedCopy: () -> Unit,
     onExport: () -> Unit,
+    onShare: () -> Unit,
     onUninstall: () -> Unit,
     onDelete: () -> Unit
-): List<ActionItem> {
+): List<List<ActionItem>> {
     val isInstalling = installViewModel.installState is InstallViewModel.InstallState.Installing
     val isMountBusy = installViewModel.mountOperation != null
     val stageLabel = installViewModel.installState.stageLabel()
     val packageName = installedApp.currentPackageName
 
-    return buildList {
-        if (installedApp.installType != InstallType.SAVED && viewModel.appInfo != null && viewModel.isInstalledOnDevice) {
+    val canOpen = installedApp.installType != InstallType.SAVED && viewModel.appInfo != null &&
+            viewModel.isInstalledOnDevice
+
+    // Led by opening the app, or by installing the saved build where it cannot be opened, with the
+    // rest beside it as icons and the file's own actions last, as the patcher's result sets them out
+    val use = buildList {
+        if (canOpen) {
             add(ActionItem(stringResource(R.string.open), Icons.AutoMirrored.Outlined.Launch, viewModel::launch))
         }
 
         if (viewModel.hasSavedCopy) {
-            add(ActionItem(stringResource(R.string.export), Icons.Outlined.Save, onExport))
-            add(
-                ActionItem(
-                    text = stageLabel ?: stringResource(
-                        if (viewModel.isInstalledOnDevice) R.string.reinstall else R.string.install
-                    ),
-                    icon = Icons.Outlined.InstallMobile,
-                    onClick = onInstallSavedCopy,
-                    isLoading = isInstalling
-                )
+            val install = ActionItem(
+                text = stageLabel ?: stringResource(
+                    if (viewModel.isInstalledOnDevice) R.string.reinstall else R.string.install
+                ),
+                icon = Icons.Outlined.InstallMobile,
+                onClick = onInstallSavedCopy,
+                isLoading = isInstalling,
+                iconOnly = canOpen
             )
+            add(install)
+            add(ActionItem(stringResource(R.string.export), Icons.Outlined.Save, onExport, iconOnly = true))
+            add(ActionItem(stringResource(R.string.share), Icons.Outlined.Share, onShare, iconOnly = true))
         }
+    }
 
-        // A plain mount or remount, while reinstalling the saved build is the tile above
+    // A plain mount or remount, while reinstalling the saved build is in the group above
+    val mount = buildList {
         if (installedApp.installType == InstallType.MOUNT) {
             if (viewModel.isMounted) {
                 add(
@@ -1508,7 +1435,9 @@ private fun installedAppTiles(
                 )
             }
         }
+    }
 
+    val remove = buildList {
         if (viewModel.isInstalledOnDevice) {
             add(
                 ActionItem(
@@ -1530,6 +1459,8 @@ private fun installedAppTiles(
             )
         }
     }
+
+    return listOf(use, mount, remove)
 }
 
 /** The step a running mount install is on, in the words its buttons show. */
@@ -1537,37 +1468,136 @@ private fun installedAppTiles(
 private fun InstallViewModel.InstallState.stageLabel(): String? =
     (this as? InstallViewModel.InstallState.Installing)?.stage?.let { stringResource(it.labelRes) }
 
-/** The [primary] button over the [tiles], which sit in pairs or, in a [singleColumn], one a row. */
+/** The [primary] button over the [groups] of the rest, see [ActionGroup]. */
 @Composable
 private fun ActionsSection(
     primary: ActionItem?,
-    tiles: List<ActionItem>,
-    singleColumn: Boolean,
+    groups: List<List<ActionItem>>,
     modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier = modifier.animateContentSize(animationSpec = tween(Defaults.ANIMATION_DURATION)),
-        verticalArrangement = Arrangement.spacedBy(10.dp)
-    ) {
-        primary?.let { PrimaryActionButton(action = it, modifier = Modifier.fillMaxWidth()) }
+    BoxWithConstraints(modifier = modifier.animateContentSize(animationSpec = tween(Defaults.ANIMATION_DURATION))) {
+        // The groups split evenly label their actions one way, so a pair with room beside its icons
+        // still sets its labels under them when another pair has to
+        val sideLabels = groups
+            .filter { group -> group.size > 1 && group.none { it.iconOnly } }
+            .all { group ->
+                labelsFitSlots(
+                    labels = group.map { it.text },
+                    style = SideLabelStyle,
+                    width = maxWidth,
+                    spacing = ButtonGroupDefaults.ConnectedSpaceBetween,
+                    inset = SideLabelInset
+                )
+            }
 
-        if (singleColumn) {
-            tiles.forEach { action ->
-                TileActionButton(action = action, horizontal = true, modifier = Modifier.fillMaxWidth())
+        Column(verticalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)) {
+            primary?.let { PrimaryActionButton(action = it, modifier = Modifier.fillMaxWidth()) }
+            // A fixed set of groups, so each keeps its place in composition as others empty out
+            groups.forEach { group ->
+                if (group.isNotEmpty()) ActionGroup(actions = group, sideLabels = sideLabels || group.any { it.iconOnly })
+            }
+        }
+    }
+}
+
+/**
+ * Actions that belong together, joined into one piece: a row with labels beside or under the icons,
+ * or a column of full-width buttons once a row would cut any translation short. In a row the
+ * [ActionItem.iconOnly] ones keep to squares and the rest share what is left.
+ *
+ * @param sideLabels Whether labels may sit beside their icons, given room for them.
+ */
+@Composable
+private fun ActionGroup(actions: List<ActionItem>, modifier: Modifier = Modifier, sideLabels: Boolean = true) {
+    // Actions there when the group appears are drawn in place; only later arrivals fade
+    val settled = remember { mutableStateOf(false) }
+    LaunchedEffect(Unit) { settled.value = true }
+
+    BoxWithConstraints(modifier = modifier.fillMaxWidth()) {
+        val labels = actions.filterNot { it.iconOnly }.map { it.text }
+        val spacing = ButtonGroupDefaults.ConnectedSpaceBetween
+        val labelWidth = maxWidth - (IconTileWidth + spacing) * actions.count { it.iconOnly }
+        val besideFits = sideLabels && labelsFitSlots(labels, SideLabelStyle, labelWidth, spacing, SideLabelInset)
+        val underFits = labelsFitSlots(labels, StackedLabelStyle, labelWidth, spacing, StackedLabelInset)
+        val inRow = actions.size > 1 && (besideFits || underFits)
+
+        if (inRow) {
+            ButtonGroupRow(spacing = spacing) {
+                actions.forEachIndexed { index, action ->
+                    GroupedAction(
+                        action = action,
+                        settled = settled.value,
+                        inRow = true,
+                        shape = ConnectedShapes.Pill.inRow(index, actions.size),
+                        stacked = !besideFits
+                    )
+                }
             }
         } else {
-            tiles.chunked(2).forEach { rowActions ->
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(10.dp),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    rowActions.forEach { action ->
-                        TileActionButton(
-                            action = action,
-                            modifier = if (rowActions.size == 1) Modifier.fillMaxWidth() else Modifier.weight(1f)
-                        )
-                    }
+            Column(verticalArrangement = Arrangement.spacedBy(spacing)) {
+                actions.forEachIndexed { index, action ->
+                    GroupedAction(
+                        action = action,
+                        settled = settled.value,
+                        inRow = false,
+                        shape = ConnectedShapes.Pill.inColumn(index, actions.size),
+                        stacked = false
+                    )
                 }
+            }
+        }
+    }
+}
+
+/** One action of an [ActionGroup], fading in unless the group was [settled] without it. */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun GroupedAction(
+    action: ActionItem,
+    settled: Boolean,
+    inRow: Boolean,
+    shape: Shape,
+    stacked: Boolean
+) {
+    // Keyed by the icon, which holds still while a running install steps its label through
+    key(action.icon) {
+        val interactionSource = remember { MutableInteractionSource() }
+        val appeared = remember { MutableTransitionState(!settled) }
+        appeared.targetState = true
+        AnimatedVisibility(
+            visibleState = appeared,
+            enter = Animations.fadeIn,
+            modifier = if (inRow) {
+                Modifier.buttonGroupItem(
+                    interactionSource,
+                    enabled = action.enabled && !action.isLoading,
+                    width = IconTileWidth.takeIf { action.iconOnly },
+                    minWidth = Defaults.MinTouchTarget.takeIf { action.iconOnly }
+                )
+            } else {
+                Modifier.fillMaxWidth()
+            }
+        ) {
+            val iconOnly = inRow && action.iconOnly
+            val button = @Composable {
+                TileActionButton(
+                    action = action,
+                    shape = shape,
+                    stacked = stacked,
+                    iconOnly = iconOnly,
+                    interactionSource = interactionSource
+                )
+            }
+            // Named by a tooltip once its label is left out, and only then, so the two never repeat
+            if (iconOnly) {
+                TooltipBox(
+                    positionProvider = TooltipDefaults.rememberTooltipPositionProvider(TooltipAnchorPosition.Above),
+                    tooltip = { PlainTooltip { Text(action.text) } },
+                    state = rememberTooltipState(),
+                    content = button
+                )
+            } else {
+                button()
             }
         }
     }
@@ -1579,7 +1609,9 @@ private data class ActionItem(
     val onClick: () -> Unit,
     val enabled: Boolean = true,
     val isDestructive: Boolean = false,
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    /** Shown as its icon alone beside the action leading its row, see [ActionGroup]. */
+    val iconOnly: Boolean = false
 )
 
 /** Shared loading/icon content used by action buttons. */
@@ -1587,14 +1619,31 @@ private data class ActionItem(
 private fun LoadingOrIcon(isLoading: Boolean, action: ActionItem, tint: Color) {
     if (isLoading) {
         CircularProgressIndicator(
-            modifier = Modifier.size(22.dp),
+            modifier = Modifier.size(ActionIconSize),
             strokeWidth = 2.dp,
             color = tint
         )
     } else {
-        Icon(action.icon, null, modifier = Modifier.size(22.dp))
+        Icon(action.icon, null, modifier = Modifier.size(ActionIconSize))
     }
 }
+
+private val ActionIconSize = 22.dp
+
+/** Width of an action shown as its icon alone, square with the buttons' height. */
+private val IconTileWidth = Defaults.TallTouchTarget
+
+private val StackedTilePadding = 8.dp
+
+/** Label of a tile that holds it under its icon, and what such a tile spends on the rest. */
+private val StackedLabelStyle: TextStyle
+    @Composable get() = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold)
+private val StackedLabelInset = StackedTilePadding * 2
+
+/** Label of a button that holds it beside its icon, and what such a button spends on the rest. */
+private val SideLabelStyle: TextStyle
+    @Composable get() = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold)
+private val SideLabelInset = Defaults.SpaceLarge * 2 + ActionIconSize + Defaults.SpaceSmall
 
 /**
  * Shared Surface shell for all action buttons. Callers pick the colors of a button in reach, and
@@ -1606,8 +1655,11 @@ private fun ActionButton(
     containerColor: Color,
     contentColor: Color,
     borderColor: Color,
+    shape: Shape,
     modifier: Modifier = Modifier,
-    vertical: Boolean = false
+    stacked: Boolean = false,
+    iconOnly: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 ) {
     val isEnabled = action.enabled && !action.isLoading
     // A button still loading is busy rather than unavailable, so only a disabled one is muted
@@ -1615,39 +1667,37 @@ private fun ActionButton(
     val container = if (action.enabled) containerColor else colors.surfaceVariant.copy(alpha = 0.4f)
     val content = if (action.enabled) contentColor else colors.onSurface.copy(alpha = 0.35f)
     val border = if (action.enabled) borderColor else colors.outlineVariant.copy(alpha = 0.2f)
-    val interactionSource = remember { MutableInteractionSource() }
 
     Surface(
         onClick = action.onClick,
         enabled = isEnabled,
         modifier = modifier
             .height(Defaults.TallTouchTarget)
-            .pressScale(
-                interactionSource = interactionSource,
-                enabled = isEnabled,
-                label = "info_action_press_scale"
-            ),
-        shape = RoundedCornerShape(Defaults.CardCornerRadius),
+            .then(if (iconOnly) Modifier.semantics { contentDescription = action.text } else Modifier),
+        shape = rememberPressShape(interactionSource, shape, isEnabled),
         color = container,
         contentColor = content,
         border = CardBorder.of(border),
         interactionSource = interactionSource
     ) {
-        if (vertical) {
+        if (iconOnly) {
+            Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
+                LoadingOrIcon(action.isLoading, action, content)
+            }
+        } else if (stacked) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(horizontal = 8.dp),
+                    .padding(horizontal = StackedTilePadding),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
                 LoadingOrIcon(action.isLoading, action, content)
-                Spacer(Modifier.height(3.dp))
+                Spacer(Modifier.height(Defaults.SpaceExtraSmall))
                 // Steps through a running mount install, which a fade carries from one to the next
                 CrossfadeText(
                     text = action.text,
-                    style = MaterialTheme.typography.labelMedium,
-                    fontWeight = FontWeight.SemiBold,
+                    style = StackedLabelStyle,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -1656,16 +1706,15 @@ private fun ActionButton(
             Row(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(horizontal = Defaults.ContentPadding),
+                    .padding(horizontal = Defaults.SpaceLarge),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 LoadingOrIcon(action.isLoading, action, content)
-                Spacer(Modifier.width(Defaults.ContentPaddingSmall))
+                Spacer(Modifier.width(Defaults.SpaceSmall))
                 CrossfadeText(
                     text = action.text,
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.Bold,
+                    style = SideLabelStyle,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -1689,16 +1738,22 @@ private fun PrimaryActionButton(
         containerColor = containerColor,
         contentColor = appAccentContent(containerColor),
         borderColor = accent?.copy(alpha = 0.35f) ?: MaterialTheme.colorScheme.onBackground.copy(alpha = 0.2f),
+        shape = Defaults.PillShape,
         modifier = modifier
     )
 }
 
-/** Tile button - vertical (icon+label) for grids, horizontal (icon+label) for lists. */
+/**
+ * A secondary action of an [ActionGroup], [stacked] with its label under the icon or beside it, or
+ * shown as the icon alone when [iconOnly].
+ */
 @Composable
 private fun TileActionButton(
     action: ActionItem,
-    modifier: Modifier = Modifier,
-    horizontal: Boolean = false
+    shape: Shape,
+    stacked: Boolean,
+    iconOnly: Boolean,
+    interactionSource: MutableInteractionSource
 ) {
     // One veil for every tile, so only the primary action wears a color and destructive ones their red
     ActionButton(
@@ -1712,13 +1767,16 @@ private fun TileActionButton(
             action.isDestructive -> destructiveEdgeColor()
             else -> MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
         },
-        modifier = modifier,
-        vertical = !horizontal
+        shape = shape,
+        modifier = Modifier.fillMaxWidth(),
+        stacked = stacked,
+        iconOnly = iconOnly,
+        interactionSource = interactionSource
     )
 }
 
 @Composable
-private fun MountWarningDialog(
+private fun DialogHostScope.MountWarningDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
@@ -1737,20 +1795,25 @@ private fun MountWarningDialog(
     )
 }
 
-/**
- * What went into an installed app: its patches and their options, source by source, under the
- * same header the app's other dialogs carry.
- */
+/** The pages of an installed app's information, each opened in place of the first under the same header. */
+private enum class InfoPage { Main, AppliedPatches, AppLinks }
+
+/** A page of an installed app's information besides the first: how the header names it, what it offers and holds. */
+private class InfoSubpage(
+    val page: InfoPage,
+    val subtitle: String,
+    val actions: List<DialogAction>,
+    val content: @Composable ColumnScope.() -> Unit
+)
+
+/** What went into an installed app: its patches and their options, source by source. */
 @Composable
-private fun AppliedPatchesDialog(
+private fun rememberAppliedPatchesPage(
     appLabel: String,
-    appInfo: PackageInfo?,
-    accentColor: Color,
     packageName: String,
     bundles: List<AppliedPatchBundleUi>,
-    settingsViewModel: SettingsViewModel,
-    onDismiss: () -> Unit
-) {
+    settingsViewModel: SettingsViewModel
+): InfoSubpage {
     var bundleOptionsMap by remember { mutableStateOf<Map<Int, Map<String, Map<String, Any?>>>>(emptyMap()) }
     LaunchedEffect(bundles) {
         bundleOptionsMap = bundles.associate { bundle ->
@@ -1775,18 +1838,13 @@ private fun AppliedPatchesDialog(
     val copyToClipboard = rememberCopyToClipboard()
     val sourcesByUid = rememberSourcesByUid()
 
-    DetailsDialog(
-        onDismissRequest = onDismiss,
-        icon = { modifier ->
-            AppIcon(packageInfo = appInfo, packageName = packageName, contentDescription = null, modifier = modifier)
-        },
-        title = appLabel,
+    return InfoSubpage(
+        page = InfoPage.AppliedPatches,
         subtitle = listOf(
             pluralStringResource(R.plurals.patch_count, patchCount, patchCount.toString()),
             bundles.singleOrNull()?.title
                 ?: pluralStringResource(R.plurals.source_count, bundles.size, bundles.size.toString())
         ).joinToString(" · "),
-        accentColor = accentColor,
         actions = listOf(
             DialogAction(
                 text = stringResource(R.string.copy),

@@ -310,7 +310,7 @@ class MiniGameState(prefs: PreferencesManager, scope: CoroutineScope) {
 private val GamePickerMinCardWidth = 150.dp
 private val GamePickerCardHeight = 140.dp
 private val GamePickerIconTileSize = 44.dp
-private val GamePickerIconTileShape = RoundedCornerShape(14.dp)
+private val GamePickerIconTileShape = RoundedCornerShape(Defaults.CornerMedium)
 
 /**
  * Game selection screen shown when no game is active yet.
@@ -351,7 +351,7 @@ private fun GamePickerGridCard(
 
     SurfaceCard(
         onClick = onClick,
-        cornerRadius = Defaults.CompactCornerRadius,
+        cornerRadius = Defaults.CornerMedium,
         showBorder = true,
         borderColor = appAccentBorder(game.accent),
         modifier = modifier
@@ -373,7 +373,7 @@ private fun GamePickerGridCard(
             ) {
                 ThemedIcon(icon = game.icon, tint = accent)
             }
-            Spacer(Modifier.height(10.dp))
+            Spacer(Modifier.height(Defaults.SpaceSmall))
             Text(
                 text = stringResource(game.titleRes),
                 style = MaterialTheme.typography.titleSmall,
@@ -381,7 +381,7 @@ private fun GamePickerGridCard(
                 color = MaterialTheme.colorScheme.onSurface,
                 textAlign = TextAlign.Center
             )
-            Spacer(Modifier.height(4.dp))
+            Spacer(Modifier.height(Defaults.SpaceExtraSmall))
             Text(
                 text = stringResource(game.subtitleRes),
                 style = MaterialTheme.typography.bodySmall,
@@ -431,7 +431,7 @@ internal fun MiniGameContent(state: MiniGameState) {
                                     .align(Alignment.Center)
                                     // The canvases round their own corners, and the overlays
                                     // drawn over them have to stop at the same edge
-                                    .clip(RoundedCornerShape(Defaults.CompactCornerRadius))
+                                    .clip(RoundedCornerShape(Defaults.CornerMedium))
                             ) {
                                 GameCanvasSlot(selected = selected, state = state)
 
@@ -486,7 +486,7 @@ internal fun GameScoreRow(
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
         verticalAlignment = Alignment.CenterVertically
     ) {
         AppAccentBadge(text = stringResource(R.string.mini_game_score, score))
@@ -522,7 +522,7 @@ internal fun GameOverOverlay(
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
         ) {
             Text(
                 text = stringResource(R.string.mini_game_game_over),
@@ -573,7 +573,7 @@ internal fun GamePauseOverlay(onResume: () -> Unit, modifier: Modifier = Modifie
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
         ) {
             Text(
                 text = stringResource(R.string.mini_game_paused),

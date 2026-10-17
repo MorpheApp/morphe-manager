@@ -105,6 +105,18 @@
         <item quantity="many">%s aplikace připraveny k opravě</item>
         <item quantity="other">%s aplikace připraveny k opravě</item>
     </plurals>
+    <plurals name="batch_queue_pending_count">
+        <item quantity="one">Aplikace %s čeká na aktualizaci</item>
+        <item quantity="few">Aplikace %s čekají na aktualizaci</item>
+        <item quantity="many">Aplikace %s čekají na aktualizaci</item>
+        <item quantity="other">Aplikace %s čeká na aktualizaci</item>
+    </plurals>
+    <plurals name="home_alerts_snoozed_count">
+        <item quantity="one">%s skryté upozornění, klepnutím zobrazit</item>
+        <item quantity="few">%s skrytá upozornění, klepnutím zobrazit</item>
+        <item quantity="many">%s skrytých upozornění, klepnutím zobrazit</item>
+        <item quantity="other">%s skrytých upozornění, klepnutím zobrazit</item>
+    </plurals>
     <plurals name="repatch_available_count">
         <item quantity="one">%s aplikace může být znovu opravena</item>
         <item quantity="few">%s aplikace mohou být znovu opraveny</item>
@@ -128,12 +140,6 @@
         <item quantity="few">%s zdroje nainstalovány</item>
         <item quantity="many">%s zdrojů nainstalováno</item>
         <item quantity="other">%s zdrojů nainstalováno</item>
-    </plurals>
-    <plurals name="home_app_filter_active">
-        <item quantity="one">%1$s · %2$s filtrováno</item>
-        <item quantity="few">%1$s · %2$s filtrováno</item>
-        <item quantity="many">%1$s · %2$s filtrováno</item>
-        <item quantity="other">%1$s · %2$s filtrováno</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s skrytá aplikace</item>
@@ -188,6 +194,13 @@
         <item quantity="few">%s změny</item>
         <item quantity="many">%s změn</item>
         <item quantity="other">%s změn</item>
+    </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
+    <plurals name="sources_apps_count_with_new">
+        <item quantity="one">%1$s · %2$d nový</item>
+        <item quantity="few">%1$s · %2$d nové</item>
+        <item quantity="many">%1$s · %2$d nových</item>
+        <item quantity="other">%1$s · %2$d nových</item>
     </plurals>
     <plurals name="changelog_new_releases">
         <item quantity="one">%s nová verze</item>

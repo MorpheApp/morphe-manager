@@ -54,6 +54,12 @@
     <plurals name="batch_patch_ready_count">
         <item quantity="other">%s 개의 앱을 패치할 준비 완료</item>
     </plurals>
+    <plurals name="batch_queue_pending_count">
+        <item quantity="other">%s 개의 앱이 패치 대기 중입니다</item>
+    </plurals>
+    <plurals name="home_alerts_snoozed_count">
+        <item quantity="other">%s 개의 알림이 숨겨져 있습니다, 표시하려면 탭하세요</item>
+    </plurals>
     <plurals name="repatch_available_count">
         <item quantity="other">%s 개의 앱을 다시 패치할 수 있음</item>
     </plurals>
@@ -65,9 +71,6 @@
     </plurals>
     <plurals name="sources_management_subtitle">
         <item quantity="other">%s 개의 소스 설치됨</item>
-    </plurals>
-    <plurals name="home_app_filter_active">
-        <item quantity="other">%1$s · %2$s 필터링됨</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="other">%s 개의 숨겨진 앱</item>
@@ -95,6 +98,10 @@
     </plurals>
     <plurals name="changelog_change_count">
         <item quantity="other">%s 개의 변경</item>
+    </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
+    <plurals name="sources_apps_count_with_new">
+        <item quantity="other">%1$s · %2$d 개의 신규</item>
     </plurals>
     <plurals name="changelog_new_releases">
         <item quantity="other">%s 개의 새 릴리스</item>

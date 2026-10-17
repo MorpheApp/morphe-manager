@@ -29,12 +29,10 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -55,13 +53,16 @@ import app.morphe.manager.util.requestIgnoreBatteryOptimizations
  */
 private const val ErrorInfoLabelMaxFraction = 0.45f
 
+/** Share of the error dialog's height the diagnostics may take before they scroll. */
+private const val DiagnosticsMaxHeightFraction = 0.5f
+
 /**
  * Shown when a patch bundle requires a newer version of morphe-patcher than the one
  * bundled in this version of the manager. The update button hands over to the in-app
  * update dialog, the same one the home banner opens.
  */
 @Composable
-fun IncompatiblePatcherVersionDialog(
+fun DialogHostScope.IncompatiblePatcherVersionDialog(
     bundleName: String,
     requiredVersion: String,
     onDismiss: () -> Unit,
@@ -104,7 +105,7 @@ fun IncompatiblePatcherVersionDialog(
  * intent. Offered before the install rather than the run, because only the output carries the name.
  */
 @Composable
-fun RenameWarningDialog(
+fun DialogHostScope.RenameWarningDialog(
     warning: RenameWarning,
     onContinue: () -> Unit,
     onDismiss: () -> Unit
@@ -118,7 +119,6 @@ fun RenameWarningDialog(
                 warning.targetPackageName
             )
         ),
-        padding = DialogPadding.Compact,
         footer = {
             AppDialogButtonRow(
                 primaryText = stringResource(R.string.continue_),
@@ -130,7 +130,7 @@ fun RenameWarningDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding),
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             MonospaceValuePanel(
@@ -157,7 +157,7 @@ fun RenameWarningDialog(
  * the whole point of a saved selection.
  */
 @Composable
-fun MissingPatchesDialog(
+fun DialogHostScope.MissingPatchesDialog(
     patchNames: List<String>,
     onContinue: () -> Unit,
     onDismiss: () -> Unit
@@ -166,7 +166,6 @@ fun MissingPatchesDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.patcher_missing_patches_title),
         description = stringResource(R.string.patcher_missing_patches_description),
-        padding = DialogPadding.Compact,
         footer = {
             AppDialogButtonRow(
                 primaryText = stringResource(R.string.continue_),
@@ -178,7 +177,7 @@ fun MissingPatchesDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding),
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             MonospaceValuePanel(
@@ -210,7 +209,7 @@ fun MissingPatchesDialog(
  * for, and [onClearPaths] drops the saved paths instead, where [canClearPaths] allows it.
  */
 @Composable
-fun UnusableOptionPathsDialog(
+fun DialogHostScope.UnusableOptionPathsDialog(
     failures: List<PathValidationResult>,
     onRetryAfterPermission: () -> Unit,
     onDismiss: () -> Unit,
@@ -314,7 +313,7 @@ fun UnusableOptionPathsDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)
         ) {
             // Shown on Android 10 and below after the user taps "Deny" on the
             // READ_EXTERNAL_STORAGE prompt. Explains they must either grant the
@@ -330,10 +329,10 @@ fun UnusableOptionPathsDialog(
             // One card per failing path
             Column(
                 modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
             ) {
                 failures.forEach { failure ->
-                    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Column(verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)) {
                         // Patch name label
                         Text(
                             text = failure.patchName,
@@ -344,7 +343,7 @@ fun UnusableOptionPathsDialog(
 
                         Surface(
                             modifier = Modifier.fillMaxWidth(),
-                            shape = RoundedCornerShape(14.dp),
+                            shape = RoundedCornerShape(Defaults.CornerMedium),
                             color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.3f),
                             tonalElevation = 1.dp,
                             border = CardBorder.tinted(MaterialTheme.colorScheme.error)
@@ -352,7 +351,7 @@ fun UnusableOptionPathsDialog(
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(horizontal = 16.dp, vertical = 12.dp),
+                                    .padding(horizontal = Defaults.SpaceLarge, vertical = Defaults.SpaceMedium),
                                 horizontalArrangement = Arrangement.SpaceBetween,
                             ) {
                                 Text(
@@ -363,7 +362,7 @@ fun UnusableOptionPathsDialog(
                                     modifier = Modifier.weight(1f)
                                 )
 
-                                Spacer(Modifier.width(8.dp))
+                                Spacer(Modifier.width(Defaults.SpaceSmall))
 
                                 StatusBadge(
                                     text = stringResource(
@@ -399,7 +398,7 @@ fun UnusableOptionPathsDialog(
  * Directs the user to the system dialog to grant the exclusion.
  */
 @Composable
-fun BatteryOptimizationDialog(
+fun DialogHostScope.BatteryOptimizationDialog(
     onResult: () -> Unit,
 ) {
     val context = LocalContext.current
@@ -429,7 +428,7 @@ fun BatteryOptimizationDialog(
  * user setting, so nothing changes until it is accepted here.
  */
 @Composable
-fun MemoryAdjustmentDialog(
+fun DialogHostScope.MemoryAdjustmentDialog(
     currentLimit: Int,
     suggestedLimit: Int,
     canAdjust: Boolean,
@@ -476,7 +475,7 @@ fun MemoryAdjustmentDialog(
  * Full-screen error dialog shown when patching or installing the patched app fails.
  */
 @Composable
-fun PatcherErrorDialog(
+fun DialogHostScope.PatcherErrorDialog(
     title: String,
     errorMessage: String,
     errorInfo: PatcherErrorInfo?,
@@ -498,7 +497,6 @@ fun PatcherErrorDialog(
         onDismissRequest = onDismiss,
         accentColor = rememberAppColor(errorInfo?.packageName),
         title = title,
-        padding = DialogPadding.Compact,
         scrollable = false,
         footer = {
             AppDialogButtonRow(
@@ -510,50 +508,64 @@ fun PatcherErrorDialog(
             )
         }
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
-        ) {
-            SectionCard(accentColor = LocalAccent.current) {
-                Column {
-                    CardHeader(
-                        title = stringResource(R.string.patcher_error_dialog_diagnostics),
-                        icon = Icons.Outlined.Info
-                    )
-                    DiagnosticsContent(diagnostics)
+        BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+            val diagnosticsMaxHeight = maxHeight * DiagnosticsMaxHeightFraction
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
+            ) {
+                // Held to part of the room and scrolled within it, so a large font cannot leave the
+                // log, which is what the dialog is opened for, a line or two under it
+                SectionCard(
+                    modifier = Modifier.heightIn(max = diagnosticsMaxHeight),
+                    accentColor = LocalAccent.current
+                ) {
+                    Column {
+                        CardHeader(
+                            title = stringResource(R.string.patcher_error_dialog_diagnostics),
+                            icon = Icons.Outlined.Info
+                        )
+                        val diagnosticsScrollState = rememberScrollState()
+                        Box(
+                            modifier = Modifier
+                                .verticalScrollFade(diagnosticsScrollState)
+                                .verticalScroll(diagnosticsScrollState)
+                        ) {
+                            DiagnosticsContent(diagnostics)
+                        }
+                    }
                 }
-            }
 
-            // Error log card
-            SectionCard(modifier = Modifier.weight(1f), accentColor = LocalAccent.current) {
-                Column {
-                    CardHeader(
-                        title = stringResource(R.string.patcher_error_log),
-                        icon = Icons.Outlined.BugReport,
-                        trailing = {
-                            StatusBadge(
-                                text = stringResource(R.string.patcher_error_technical),
-                                tone = SemanticTone.Error
+                // Error log card
+                SectionCard(modifier = Modifier.weight(1f), accentColor = LocalAccent.current) {
+                    Column {
+                        CardHeader(
+                            title = stringResource(R.string.patcher_error_log),
+                            icon = Icons.Outlined.BugReport,
+                            trailing = {
+                                StatusBadge(
+                                    text = stringResource(R.string.patcher_error_technical),
+                                    tone = SemanticTone.Error
+                                )
+                            },
+                            wrapTrailing = true
+                        )
+                        val errorScrollState = rememberScrollState()
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .verticalScrollFade(errorScrollState)
+                                .verticalScroll(errorScrollState)
+                                .padding(horizontal = Defaults.SpaceLarge, vertical = Defaults.SpaceExtraSmall),
+                        ) {
+                            Text(
+                                text = errorMessage,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                fontFamily = FontFamily.Monospace,
+                                lineHeight = 16.sp
                             )
                         }
-                    )
-                    val errorScrollState = rememberScrollState()
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .verticalScrollFade(errorScrollState)
-                            .verticalScroll(errorScrollState)
-                            .padding(horizontal = Defaults.ContentPadding, vertical = 4.dp),
-                    ) {
-                        Text(
-                            text = errorMessage,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            fontFamily = FontFamily.Monospace,
-                            lineHeight = 16.sp
-                        )
                     }
                 }
             }
@@ -569,23 +581,15 @@ fun PatcherErrorDialog(
 private fun DiagnosticsContent(sections: List<List<Pair<String, String>>>) {
     val bodySmall = MaterialTheme.typography.bodySmall
     val textStyle = remember(bodySmall) { bodySmall.copy(fontFamily = FontFamily.Monospace) }
-    val measurer = rememberTextMeasurer()
-    val density = LocalDensity.current
+    val widest = rememberLabelWidths(sections.flatten().map { it.first }, textStyle).maxOrNull() ?: 0.dp
 
     BoxWithConstraints {
-        val labelWidth = remember(sections, textStyle, density, maxWidth) {
-            val widest = sections.flatten().maxOfOrNull { (label, _) ->
-                measurer.measure(label, textStyle).size.width
-            } ?: 0
-            val available = maxWidth - Defaults.ContentPadding * 2 - Defaults.ContentPaddingSmall
-
-            with(density) { widest.toDp() }
-                .coerceAtMost(available * ErrorInfoLabelMaxFraction)
-        }
+        val available = maxWidth - Defaults.SpaceLarge * 2 - Defaults.SpaceSmall
+        val labelWidth = widest.coerceAtMost(available * ErrorInfoLabelMaxFraction)
 
         // The rows sit tight against each other, so the block keeps its distance from the
         // header above it and the card edge below rather than every row paying for it
-        Column(modifier = Modifier.padding(vertical = 4.dp)) {
+        Column(modifier = Modifier.padding(vertical = Defaults.SpaceExtraSmall)) {
             sections.forEachIndexed { index, section ->
                 if (index > 0) SettingsDivider()
 
@@ -612,8 +616,8 @@ private fun ErrorInfoRow(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = Defaults.ContentPadding, vertical = 1.dp),
-        horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
+            .padding(horizontal = Defaults.SpaceLarge, vertical = 1.dp),
+        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
     ) {
         Text(
             text = label,

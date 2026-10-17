@@ -6,8 +6,6 @@
 package app.morphe.manager.ui.screen.settings.advanced
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Tune
 import androidx.compose.material3.Text
@@ -34,7 +32,7 @@ import app.morphe.manager.util.KnownApps
  * creator for an icon of one's own.
  */
 @Composable
-fun CustomBrandingDialog(
+fun DialogHostScope.CustomBrandingDialog(
     patchOptionsPrefs: PatchOptionsPreferencesManager,
     patchOptionsViewModel: PatchOptionsViewModel,
     packageName: String,
@@ -155,7 +153,7 @@ fun CustomBrandingDialog(
  * one's own.
  */
 @Composable
-fun CustomHeaderDialog(
+fun DialogHostScope.CustomHeaderDialog(
     patchOptionsPrefs: PatchOptionsPreferencesManager,
     patchOptionsViewModel: PatchOptionsViewModel,
     packageName: String,
@@ -230,7 +228,7 @@ private fun folderHeading(option: OptionInfo, title: String, value: String, miss
  * @param hasOptions Whether the app's patches offer any of the options, which it says instead.
  */
 @Composable
-private fun SettingsOptionsDialog(
+private fun DialogHostScope.SettingsOptionsDialog(
     packageName: String,
     title: String,
     hasOptions: Boolean,
@@ -239,11 +237,19 @@ private fun SettingsOptionsDialog(
     saveEnabled: Boolean = true,
     content: @Composable ColumnScope.() -> Unit
 ) {
-    val scrollState = rememberScrollState()
-
-    AppDialog(
+    ListDialog(
         onDismissRequest = onDismiss,
         accentColor = rememberAppColor(packageName),
+        header = {
+            ListDialogHeader(
+                icon = { modifier ->
+                    AppIcon(packageName = packageName, contentDescription = null, modifier = modifier)
+                },
+                title = title,
+                subtitle = KnownApps.getAppName(packageName),
+                alwaysShowBand = true
+            )
+        },
         footer = {
             AppDialogButtonRow(
                 primaryText = stringResource(R.string.save),
@@ -253,29 +259,14 @@ private fun SettingsOptionsDialog(
                 onSecondaryClick = onDismiss
             )
         },
-        padding = DialogPadding.Compact,
-        scrollable = false,
-        contentArrangement = Arrangement.Top,
-        fillContentHeight = true,
         hideFooterWhileTyping = true
     ) {
-        ListDialogHeader(
-            icon = { modifier ->
-                AppIcon(packageName = packageName, contentDescription = null, modifier = modifier)
-            },
-            title = title,
-            subtitle = KnownApps.getAppName(packageName)
-        )
-
-        Column(
+        DialogScrollColumn(
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f)
-                .verticalScrollFade(scrollState)
-                .verticalScroll(scrollState)
-                .padding(vertical = Defaults.ItemSpacing),
+                .weight(1f),
             // Spaced as the options edited while patching
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
         ) {
             if (hasOptions) {
                 content()

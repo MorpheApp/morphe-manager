@@ -22,6 +22,10 @@
     <string name="deep_link_add_source_title">Додај извор</string>
     <string name="deep_link_add_source_message">Да ли желите да додати овај извор исправки у Morphe?</string>
     <string name="deep_link_add_source_warning">Додајте само изворе којима верујете</string>
+    <!-- Shown under the app a link was opened for -->
+    <string name="deep_link_add_source_only_app">Додата је само ова апликација. Можете додати друге апликације са листе апликација извора</string>
+    <!-- Asked when the link names an app of a source that is already added -->
+    <string name="deep_link_add_source_app_back">Овај извор је већ додат. Додати ову апликацију из постојећег извора?</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Доступно је ажурирање за Morphe</string>
     <string name="home_update_available_subtitle">Нова верзија спремна за инсталирање</string>
@@ -54,6 +58,9 @@
     <string name="home_app_filter_uninstalled_description">Апликације закрпљене помоћу Morphe-а које више нису на овом уређају</string>
     <string name="home_app_filter_clones">Клонови</string>
     <string name="home_app_filter_clones_description">Апликације направљене под сопственим именом пакета, инсталиране уз оригинал</string>
+    <string name="home_app_grouping_all_apps_description">Једна листе са свим апликацијама</string>
+    <string name="home_app_grouping_sources_description">Апликације испод извора за патче који их пружа</string>
+    <string name="home_app_grouping_custom_description">Апликације у категоријама које креирате</string>
     <string name="home_app_sort_manual_description">Притисните и задржите апликацију, затим додирните дугме за поредање</string>
     <string name="home_app_sort_recommended">Препоручени поредак</string>
     <string name="home_app_sort_recommended_description">Инсталиране и причвршћене апликације прво</string>
@@ -146,7 +153,6 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Извор печовања</string>
     <string name="sources_search">Претражите изворе и закрпе</string>
-    <string name="sources_sort_title">Сортирај изворе закрпа</string>
     <string name="sources_sort_manual">Ручно поређање</string>
     <string name="sources_sort_manual_hint">Притисните и задржите извор да бисте променили редослед</string>
     <string name="sources_sort_last_updated">Последње ажурирање</string>
@@ -158,12 +164,17 @@
     <string name="sources_management_report_issue">Пријави проблем</string>
     <string name="sources_management_failed_to_open_url">Неуспешно отварање URL адресе</string>
     <string name="sources_apps">Апликације</string>
-    <string name="sources_apps_description">Додирните апликацију да је изоставите из овог извора или да је вратите, или дуго притисните да изаберете неколико. Апликација нестаје са почетног екрана када је ниједан извор не доноси.</string>
+    <string name="sources_apps_description">Апликеције из овог извора су означене. Додирните апликацију да је искључите или вратите. Апликација нестаје са почетног екрана када ниједан извор више не доноси њену картицу, осим ако је нисте задржали</string>
     <string name="sources_apps_brought">Донето из овог извора</string>
     <string name="sources_apps_left_out">Изостављено из овог извора</string>
-    <string name="sources_apps_leave_out">Изостави</string>
-    <string name="sources_apps_leave_out_done">Изостављено</string>
     <string name="sources_apps_bring_back">Врати</string>
+    <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
+    <string name="sources_apps_stays_patched">Чува се као закрпљено</string>
+    <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
+    <string name="sources_apps_new">Ново</string>
+    <string name="sources_apps_new_apps">Доведи нове апликације</string>
+    <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
+    <string name="sources_apps_new_apps_description">Касније додане апликације појављују се на почетном екрану</string>
     <string name="sources_management_prerelease_toggle">Предвершајуће закрпе</string>
     <string name="sources_management_prerelease_toggle_description">Примање ране приступности новим експерименталним верзијама пача</string>
     <string name="sources_prerelease_warning_title">Омогући пре-издање закрпе?</string>
@@ -208,7 +219,6 @@
     <string name="sources_dialog_url_invalid">УРЛ мора да указује на GitHub/GitLab репозиторијум или .json датотеку</string>
     <string name="sources_dialog_preinstalled">Предпостављени</string>
     <string name="sources_dialog_community">Патчеви заједнице</string>
-    <string name="sources_dialog_choose_apps">Изаберите апликације</string>
     <string name="sources_dialog_choose_apps_description">Изаберите које од његових апликација да задржите када се извор учита.</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Извори патчева трећих страна</string>
@@ -451,7 +461,7 @@
     <string name="batch_patch_state_no_patches">Нема печева</string>
     <string name="batch_patch_policy_install">Инсталирај када се заврши</string>
     <string name="batch_patch_policy_install_description">Инсталира сваку печену апликацију одмах након што се заврши ред. Искључено задржава APK-ове за касније</string>
-    <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
+    <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_start">Početak</string>
     <string name="batch_patch_stop_title">Заустави групно печење?</string>
     <string name="batch_patch_stop_description">Апликација која се пече управо и све што је још у реду ће бити отказано</string>
@@ -460,6 +470,10 @@
     <string name="batch_patch_install_failed">Инсталација је неуспела</string>
     <string name="batch_patch_in_progress">Групно печење је већ у току</string>
     <string name="batch_patch_nothing_outdated">Све печене апликације су ажурне</string>
+    <string name="batch_queue_add_action">Додај на листу</string>
+    <string name="batch_queue_pending_subtitle">Додирните за преглед и почетак</string>
+    <string name="batch_queue_clear_title">Брисати ред?</string>
+    <string name="batch_queue_clear_description">Све апликације ће бити уклоните из реда</string>
     <string name="shortcut_repatch_short">Поново пеци</string>
     <string name="shortcut_repatch_long">Поново пеци застареле апликације</string>
     <string name="shortcut_check_updates_short">Провери ажурирања</string>
@@ -757,7 +771,7 @@
     <string name="settings_appearance_pure_black">Svetlo crno</string>
     <string name="settings_appearance_pure_black_description">Користи праву црну позадину</string>
     <string name="settings_appearance_color_accents">Боје апликација и извора</string>
-    <string name="settings_appearance_color_accents_description">Користи сопствену боју сваке апликације и сваког извора уместо акцентне боје</string>
+    <string name="settings_appearance_color_accents_description">Користи боју сваке апликације и извора уместо акцентну</string>
     <string name="settings_appearance_outlines">Контуре</string>
     <string name="settings_appearance_outlines_description">Црта танку ивицу око картица, панела и дугмади.</string>
     <!-- Settings - Appearance Tab - Language Selector -->
@@ -776,13 +790,11 @@
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Почетни екран</string>
     <string name="settings_appearance_greeting_phrases">Почетне фразе</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Прикажи поруку на почетном екрану</string>
-    <string name="settings_appearance_app_grouping">Груписање апликација</string>
-    <string name="settings_appearance_app_grouping_description">Прикажи прекидач за груписање апликација по извору или категорији</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Приказује поздравну поруку</string>
     <string name="settings_appearance_repatch_notice">Обавештење о поновном закрпавању</string>
-    <string name="settings_appearance_repatch_notice_description">Прикажи банер када се закрпљене апликације могу поново закрпити</string>
+    <string name="settings_appearance_repatch_notice_description">Приказује банер када се модификоване апликације могу поново модуфиковати</string>
     <string name="settings_appearance_sort_button">Дугме за сортирање и филтрирање</string>
-    <string name="settings_appearance_sort_button_description">Прикажи дугме за сортирање и филтрирање на почетном екрану</string>
+    <string name="settings_appearance_sort_button_description">Приказује дугме за сортирање и филтрирање апликација</string>
     <string name="settings_appearance_app_card_colors">Боје картица апликација</string>
     <string name="settings_appearance_app_card_colors_default">Подразумевано</string>
     <string name="settings_appearance_app_card_colors_default_description">Додели свакој апликацији боју њеног пакета</string>
@@ -838,7 +850,7 @@
 
 Patches are not affected: enable pre-release patches for each source in the patch sources list"</string>
     <string name="settings_advanced_updates_allow_metered">Ажурирања преко мобилних података</string>
-    <string name="settings_advanced_updates_allow_metered_description">Омогућава апликацији Morphe и ажурирањима закрпе да се преузму преко мобилних података</string>
+    <string name="settings_advanced_updates_allow_metered_description">Преузима ажурирања Морфеа и заплатова преко мобилних података</string>
     <string name="settings_advanced_updates_background_notifications">Opozori o pozadinskom ažuriranju</string>
     <string name="settings_advanced_updates_background_notifications_description">Povremeno proveravaj da li postoje ažuriranja u pozadini i obaveštavaj kada su dostupna</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Пуш обавештења за нове верзије, чак и када је апликација затворена</string>
@@ -853,7 +865,7 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="settings_advanced_update_interval_chip_subtitle">Фреквенција позадинских провере</string>
     <string name="settings_advanced_update_interval_battery_warning">Позадинске провере могу не радити на неким уређајима. Производитељи попут Xiaomi, Huawei, Samsung и OnePlus често агресивно ограничавају позадинске процесе да би сачували батерију</string>
     <string name="settings_advanced_external_batch_patch">Дозволи екстерне окидаче</string>
-    <string name="settings_advanced_external_batch_patch_description">Омогућава апликацијама за аутоматизацију да покрену групно закрпљење путем намере</string>
+    <string name="settings_advanced_external_batch_patch_description">Омогућава аутоматизацијским апликацијама да покрену групно означавање</string>
     <string name="external_batch_patch_title">Почните групно печење?</string>
     <string name="external_batch_patch_description">%s жели да Morphe пеци и инсталира апликације</string>
     <string name="external_batch_patch_trust_caller">Увек дозволи ову апликацију</string>
@@ -877,11 +889,11 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Навише подешавања</string>
     <string name="settings_advanced_expert_mode">Нави моћ</string>
-    <string name="settings_advanced_expert_mode_description">Омогућава комплексна подешавања закрпе за Morphe и опције прилагођавања</string>
+    <string name="settings_advanced_expert_mode_description">Откључа напредна подешавања означавања и опције означавања</string>
     <string name="settings_advanced_expert_mode_dialog_title">Omogući režim eksperta?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Režim eksperta omogućava veću kontrolu nad primenom patchova, ali pogrešno podešavanje postavki u režimu eksperta može da rezultuje nefunkcionalnom aplikacijom</string>
     <string name="settings_advanced_strip_unused_libs">Optimizujte za arhitekturu uređaja</string>
-    <string name="settings_advanced_strip_unused_libs_description">Уклања неискоришћене библиотеке ЦПУ архитектуре и подељене APK модуле</string>
+    <string name="settings_advanced_strip_unused_libs_description">Уклања неискоришћене библиотеке APK</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_description">Неопходно за изворе из GitHub pull request</string>
     <string name="settings_advanced_github_pat_configured">Токен конфигурисан</string>
@@ -1012,13 +1024,13 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_risk">Плаи Сторе може да понуди ажурирања за примењену апликацију. Инсталирање тог ажурирања ће преписати примењени APK оригиналном верзијом и уклонитити примењене поправке. Ако вас то пита, додирните мени са три тачке на страници апликације у Плаи Сторе и изаберите „Искључити ажурирања“</string>
     <string name="installer_play_store_warning_continue">Разумем, настави</string>
     <string name="installer_play_store_mode">Инсталирај као Play Store</string>
-    <string name="installer_play_store_mode_description">Забележите Google Play Store као извор инсталације за ову методу</string>
+    <string name="installer_play_store_mode_description">Означава Google Play продавницу као извор инсталације</string>
     <string name="settings_prompt_installer_on_install">Упит за избор инсталатера</string>
-    <string name="settings_prompt_installer_on_install_description">Приказује дијалог за избор инсталатера сваки пут када се инсталира закрпљена апликација</string>
+    <string name="settings_prompt_installer_on_install_description">Пита који инсталер користити за сваку инсталацију</string>
     <string name="settings_auto_install_with_shizuku">Аутоматска инсталација након закрпе</string>
     <string name="settings_auto_install_with_shizuku_description">Инсталира закрпљени APK чим се закрпљивање заврши</string>
     <string name="settings_auto_uninstall_with_shizuku">Аутоматско деинсталирање у случају конфликта</string>
-    <string name="settings_auto_uninstall_with_shizuku_description">Када се аутоматски инсталира преко Shizuku-а, прво деинсталирајте постојећу апликацију ако Android извештава о конфликту потписа. Ово може уклонити податке апликације.</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Деинсталира постојећу апликацију при сукобу потписа. Ово може уклонити податке апликације</string>
     <string name="settings_auto_uninstall_warning_title">Омогућите аутоматско деинсталирање?</string>
     <string name="settings_auto_uninstall_warning_message">Ако Android извештава о конфликту потписа током аутоматске инсталације преко Shizuku-а, Morphe ће деинсталирати постојећу апликацију пре инсталирања поправљеног APK-а.</string>
     <string name="settings_auto_uninstall_warning_risk">Ово може уклонити податке апликације. Ако поправљени APK не успе да се инсталира након деинсталирања, претходна апликација је можда већ нестала.</string>
@@ -1057,13 +1069,13 @@ morphe_header_custom_dark.png
     <string name="settings_system_memory_limit_warning">Mala ograniÄena memorija može uzrokovati greške pri nadogradnji veÄih aplikacija</string>
     <string name="settings_system_memory_limit_high_warning">Високо ограничење меморије може учинити закрпање много споријим на неким уређајима. Подигните га само ако закрпање стално не успева при нижим ограничењима.</string>
     <string name="settings_system_process_runtime_enabled_description">%s МБ лимит</string>
-    <string name="settings_system_process_runtime_disabled_description">Упозорење: ниско ограничење меморије може довести до греша при патчирању веће апликације</string>
+    <string name="settings_system_process_runtime_disabled_description">Притисните за конфигурацију</string>
     <string name="settings_system_process_runtime_description_not_available">Ова карактеристика захтева Android 11 или новији</string>
     <string name="settings_system_patcher_completion_sound">Звук завршетка</string>
     <string name="settings_system_patcher_completion_sound_description">Пушта посебан тон за успех или неуспех када се заврши закачивање</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">Обавештења</string>
-    <string name="settings_system_notifications_description">Конфигуришите обавештења у позадини и звукове завршетка</string>
+    <string name="settings_system_notifications_description">Конфигурише позадинске алерте и звукове завршетка</string>
     <string name="settings_system_notifications_success_sound">Звук успеха</string>
     <string name="settings_system_notifications_error_sound">Звук неуспеха</string>
     <string name="settings_system_notifications_sound_default">Подразумеван</string>
@@ -1075,7 +1087,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Увоз и извоз</string>
     <string name="settings_system_signing_key">Кључ за потписивање</string>
-    <string name="settings_system_signing_key_description">Прави резервну копију и враћа кључ којим су потписане ваше закрпљене апликације</string>
+    <string name="settings_system_signing_key_description">Резервише или враћа кључ којим се потписују означене апликације</string>
     <string name="settings_system_signing_key_dialog_description">Свака апликација коју Morphe закрпи потписана је овим кључем. Сачувајте копију: без њега, закрпљене апликације могу да се ажурирају само након што их деинсталирате</string>
     <string name="settings_system_signing_key_missing">Morphe га креира приликом ваше прве закрпе</string>
     <string name="settings_system_signing_key_created">Креирано %s</string>
@@ -1131,7 +1143,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_export_zip_failed">Извоз изабраних APK-ова није успео</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">Управљање складиштем</string>
-    <string name="settings_system_storage_management_description">Прегледајте коришћење диска и очистите кеширане фајлове</string>
+    <string name="settings_system_storage_management_description">Приказује употребу диска и брише кеширане датотеке</string>
     <string name="settings_system_storage_keystore_title">Складиште потписа</string>
     <string name="settings_system_storage_app_data_title">Подаци апликације</string>
     <string name="settings_system_storage_patch_bundles_title">Пакет печева</string>
@@ -1197,7 +1209,7 @@ morphe_header_custom_dark.png
     <string name="copy_selection_same_source">Исти извор</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Подешавач фајлова по мери</string>
-    <string name="settings_system_custom_file_picker_description">Прегледајте складиште користећи уграђени изабирач фајлова у Morphe-у уместо подразумеваног у систему</string>
+    <string name="settings_system_custom_file_picker_description">Користи уграђени бирач датотека Морфеа уместо системског</string>
     <!-- Settings - System Tab - APK download helper -->
     <string name="settings_system_apk_download_helper">Помоћник за преузимање APK-а</string>
     <string name="settings_system_apk_download_helper_trusted_count">Поуздано: %1$d од %2$d</string>
@@ -1248,6 +1260,7 @@ morphe_header_custom_dark.png
     <string name="no">Не</string>
     <string name="all">Сви</string>
     <string name="filter">Филтер</string>
+    <string name="group">Групирај</string>
     <string name="reset">Ресетуј</string>
     <string name="reset_all">Ресетуј све</string>
     <string name="apply">Примени</string>
@@ -1315,6 +1328,10 @@ morphe_header_custom_dark.png
     <string name="available">Доступно</string>
     <string name="continue_">Настави</string>
     <string name="version">Верзија</string>
+    <!-- Who made a patch source, as a field label -->
+    <string name="author">Аутор</string>
+    <!-- A file a patch source is added from, as a field label -->
+    <string name="file">Фајл</string>
     <string name="clone">Клон</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Печ</string>

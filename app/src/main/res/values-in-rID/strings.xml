@@ -22,6 +22,10 @@
     <string name="deep_link_add_source_title">Tambah sumber</string>
     <string name="deep_link_add_source_message">Apakah Anda ingin menambahkan sumber tambalan ini ke Morphe?</string>
     <string name="deep_link_add_source_warning">Hanya tambahkan sumber yang Anda percayai</string>
+    <!-- Shown under the app a link was opened for -->
+    <string name="deep_link_add_source_only_app">Hanya aplikasi ini yang ditambahkan. Anda dapat menambahkan aplikasi lain dari daftar aplikasi sumber</string>
+    <!-- Asked when the link names an app of a source that is already added -->
+    <string name="deep_link_add_source_app_back">Sumber ini sudah ditambahkan. Tambahkan aplikasi ini dari sumber yang sudah ada?</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Pembaruan Morphe tersedia</string>
     <string name="home_update_available_subtitle">Versi baru siap dipasang</string>
@@ -54,6 +58,9 @@
     <string name="home_app_filter_uninstalled_description">Aplikasi yang ditambal dengan Morphe dan tidak lagi berada di perangkat ini</string>
     <string name="home_app_filter_clones">Klon</string>
     <string name="home_app_filter_clones_description">Aplikasi yang dibuat dengan nama paket tersendiri, dipasang bersamaan dengan aslinya</string>
+    <string name="home_app_grouping_all_apps_description">Satu daftar berisi semua aplikasi</string>
+    <string name="home_app_grouping_sources_description">Aplikasi di bawah sumber penambalan yang menyediakan mereka</string>
+    <string name="home_app_grouping_custom_description">Aplikasi dalam kategori yang Anda buat</string>
     <string name="home_app_sort_manual_description">Tekan lama sebuah aplikasi, lalu ketuk tombol urutkan</string>
     <string name="home_app_sort_recommended">Urutan yang Direkomendasikan</string>
     <string name="home_app_sort_recommended_description">Aplikasi yang sudah dipasang dan disematkan terlebih dahulu</string>
@@ -146,7 +153,6 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Sumber tambalan</string>
     <string name="sources_search">Cari sumber dan tambalan</string>
-    <string name="sources_sort_title">Urutkan sumber tambalan</string>
     <string name="sources_sort_manual">Urutan manual</string>
     <string name="sources_sort_manual_hint">Tekan lama sumber untuk mengubah urutan</string>
     <string name="sources_sort_last_updated">Terakhir diperbarui</string>
@@ -158,12 +164,17 @@
     <string name="sources_management_report_issue">Laporkan masalah</string>
     <string name="sources_management_failed_to_open_url">Gagal membuka URL</string>
     <string name="sources_apps">Aplikasi</string>
-    <string name="sources_apps_description">Ketuk aplikasi untuk mengeluarkannya dari sumber ini atau mengembalikannya, atau tekan lama untuk memilih beberapa. Aplikasi akan keluar dari layar utama setelah tidak ada sumber yang menampilkannya.</string>
+    <string name="sources_apps_description">Aplikasi yang dicentang berasal dari sumber ini. Ketuk aplikasi untuk mengeluarkannya atau mengembalikannya. Aplikasi akan hilang dari layar beranda begitu tidak ada sumber yang memasukkannya, kecuali jika Anda telah menambalnya</string>
     <string name="sources_apps_brought">Dibawa oleh sumber ini</string>
     <string name="sources_apps_left_out">Dikecualikan dari sumber ini</string>
-    <string name="sources_apps_leave_out">Kecualikan</string>
-    <string name="sources_apps_leave_out_done">Dikecualikan</string>
     <string name="sources_apps_bring_back">Kembalikan</string>
+    <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
+    <string name="sources_apps_stays_patched">Disimpan sebagai tambalan</string>
+    <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
+    <string name="sources_apps_new">Baru</string>
+    <string name="sources_apps_new_apps">Bawa aplikasi baru</string>
+    <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
+    <string name="sources_apps_new_apps_description">Aplikasi baru yang ditambahkan nanti akan muncul di layar beranda</string>
     <string name="sources_management_prerelease_toggle">Tambalan pra-rilis</string>
     <string name="sources_management_prerelease_toggle_description">Menerima akses dini ke versi eksperimental tambalan baru</string>
     <string name="sources_prerelease_warning_title">Aktifkan tambalan pra-rilis?</string>
@@ -208,7 +219,6 @@
     <string name="sources_dialog_url_invalid">URL harus mengarah ke repositori GitHub/GitLab atau berkas .json</string>
     <string name="sources_dialog_preinstalled">Sudah dipasang sebelumnya</string>
     <string name="sources_dialog_community">Tambalan komunitas</string>
-    <string name="sources_dialog_choose_apps">Pilih aplikasi</string>
     <string name="sources_dialog_choose_apps_description">Pilih aplikasi mana yang ingin dipertahankan setelah sumber dimuat.</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Sumber tambalan pihak ketiga</string>
@@ -296,7 +306,7 @@ Segala sesuatu yang Anda tambahkan dari situs web ini digunakan atas risiko Anda
     <string name="home_installed_app_picker_filter_system">Hanya aplikasi sistem</string>
     <string name="home_invalid_apk_unreadable">Tidak dapat membaca berkas. Periksa apakah \'Penyimpanan Eksternal\' tidak dibatasi baterai</string>
     <string name="home_invalid_apk_not_an_apk">Berkas yang dipilih bukan APK yang sah</string>
-    <string name="home_invalid_apk_already_patched">APK yang dipilih sudah di-patch. Pilih aplikasi asli sebagai gantinya</string>
+    <string name="home_invalid_apk_already_patched">APK yang dipilih sudah ditambal. Pilih aplikasi asli sebagai gantinya</string>
     <string name="home_invalid_apk_io_error">Gagal membuka berkas. Silakan coba lagi</string>
     <string name="home_external_apk_expert_mode_required">Fitur ini hanya tersedia dalam Mode Ahli</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -452,7 +462,7 @@ Bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum teridentifi
     <string name="batch_patch_state_no_patches">Tidak ada tambalan</string>
     <string name="batch_patch_policy_install">Pasang setelah selesai</string>
     <string name="batch_patch_policy_install_description">Pasang setiap aplikasi yang ditambal segera setelah antrean selesai. Jika nonaktif, APK akan disimpan untuk nanti</string>
-    <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
+    <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_start">Mulai</string>
     <string name="batch_patch_stop_title">Hentikan penambalan massal?</string>
     <string name="batch_patch_stop_description">Aplikasi yang sedang ditambal saat ini dan semua yang masih dalam antrean akan dibatalkan</string>
@@ -461,6 +471,10 @@ Bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum teridentifi
     <string name="batch_patch_install_failed">Pemasangan gagal</string>
     <string name="batch_patch_in_progress">Penambalan massal sedang berjalan</string>
     <string name="batch_patch_nothing_outdated">Semua aplikasi yang ditambal sudah versi terbaru</string>
+    <string name="batch_queue_add_action">Tambahkan ke antrean</string>
+    <string name="batch_queue_pending_subtitle">Ketuk untuk meninjau dan memulai</string>
+    <string name="batch_queue_clear_title">Bersihkan antrean?</string>
+    <string name="batch_queue_clear_description">Semua aplikasi akan dihapus dari antrean</string>
     <string name="shortcut_repatch_short">Tambal ulang</string>
     <string name="shortcut_repatch_long">Tambal ulang aplikasi usang</string>
     <string name="shortcut_check_updates_short">Periksa pembaruan</string>
@@ -497,8 +511,8 @@ Bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum teridentifi
     <string name="home_app_info_app_deleted_warning">Aplikasi telah dicopot</string>
     <string name="home_app_info_app_deleted_description">Aplikasi ini telah dicopot di luar Morphe. Tambal ulang untuk mengembalikan fungsinya</string>
     <string name="home_app_info_not_patched_description">Versi tanpa tambalan dari aplikasi ini terpasang. Morphe masih memiliki catatan tambalan sebelumnya</string>
-    <string name="home_app_info_mount_replaced_description">Versi lain menggantikan aplikasi yang di-mount, sehingga patch tidak berlaku lagi. Pulihkan mengembalikan versi yang sudah ditambal</string>
-    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play memperbarui aplikasi yang di-mount, sehingga patch tidak berlaku lagi. Pulihkan mengembalikan versi yang sudah ditambal. Nonaktifkan pembaruan otomatis untuk aplikasi tersebut di Google Play agar tetap ditambal</string>
+    <string name="home_app_info_mount_replaced_description">Versi lain menggantikan aplikasi yang terpasang, sehingga tambalan tidak lagi berlaku. Pulihkan mengembalikan versi yang sudah ditambal</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play memperbarui aplikasi yang terpasang, sehingga tambalan tidak lagi berlaku. Pulihkan mengembalikan versi yang sudah ditambal. Matikan pembaruan otomatis untuk aplikasi tersebut di Google Play agar tetap ditambal</string>
     <string name="app_links_title">Tautan web yang didukung</string>
     <string name="app_links_description">Di Android 12+, tautan ke domain yang didukung terbuka di browser Anda secara default kecuali disetujui</string>
     <string name="app_links_unverified_banner_title">Tautan web tidak terverifikasi</string>
@@ -520,10 +534,10 @@ Bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum teridentifi
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Mode root memerlukan APK asli untuk dipasang di perangkat Anda sebelum menambal</string>
     <string name="root_pre_patch_installer_title">Pilih mode tambal</string>
-    <string name="root_pre_patch_installer_description">Perangkat Anda memiliki akses root. Pilih apakah aplikasi ini akan ditambal untuk mount root atau pemasangan standar</string>
-    <string name="root_pre_patch_installer_mount_title">Mode mount root</string>
-    <string name="root_pre_patch_installer_mount_description">Tambalan untuk mount root, lalu mount APK di atas aplikasi bawaan yang sesuai. Tidak memerlukan GmsCore</string>
-    <string name="root_mount_module_unmount_warning">Jika KernelSU memiliki module Unmount yang diaktifkan secara bawaan, buka KernelSU &gt; Superuser &gt; aplikasi yang Anda mount &gt; Profil &gt; Khusus dan nonaktifkan module Unmount. Jika tidak, APK yang ditambal dan di-mount mungkin tidak berfungsi, meskipun Morphe menampilkannya sebagai di-mount</string>
+    <string name="root_pre_patch_installer_description">Perangkat Anda memiliki akses root. Pilih apakah aplikasi ini akan ditambal untuk pemasangan root atau pemasangan standar</string>
+    <string name="root_pre_patch_installer_mount_title">Mode pemasang root</string>
+    <string name="root_pre_patch_installer_mount_description">Tambalan untuk pemasang root, lalu memasang APK di atas aplikasi bawaan yang sesuai. Tidak memerlukan GmsCore</string>
+    <string name="root_mount_module_unmount_warning">Jika KernelSU memiliki Umount modul secara bawaan yang diaktifkan, buka KernelSU &gt; Superuser &gt; aplikasi yang Anda pasang &gt; Profil &gt; Kustom dan nonaktifkan Umount modul. Jika tidak, APK yang ditambal dan dipasang mungkin tidak berfungsi, meskipun Morphe menampilkannya sebagai terpasang</string>
     <string name="root_pre_patch_installer_standard_title">Mode pasang standar</string>
     <string name="root_pre_patch_installer_standard_description">Tambalan sebagai APK normal dengan dukungan GmsCore. Setelan pemasang Anda digunakan setelah penambalan</string>
     <string name="root_pre_patch_installer_hint">Mode tambal ini terpisah dari Setelan &gt; Sistem &gt; Pemasang dan tidak dapat diubah setelah penambalan</string>
@@ -572,7 +586,7 @@ Bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum teridentifi
     <string name="patcher_installing_subtitle">Hampir siap! 🎸</string>
     <string name="patcher_success_title">Selesai! 🎉</string>
     <string name="patcher_success_subtitle">Aplikasi Anda telah ditambal dan dipasang!</string>
-    <string name="patcher_mounted_subtitle">Aplikasi Anda telah di-patch dan di-mount!</string>
+    <string name="patcher_mounted_subtitle">Aplikasi Anda telah ditambal dan terpasang!</string>
     <string name="patcher_complete_title">Penambalan selesai! ✨</string>
     <string name="patcher_failed_title">Oops! Terjadi kesalahan</string>
     <string name="patcher_failed_dialog_title">Gagal Menambal</string>
@@ -591,9 +605,9 @@ Bersiap untuk perilaku aplikasi yang tidak biasa atau bug yang belum teridentifi
 
 Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="patcher_install_error_title">Kesalahan pemasangan</string>
-    <string name="patcher_mount_error_title">Kesalahan Mount</string>
+    <string name="patcher_mount_error_title">Kesalahan pemasangan</string>
     <string name="patcher_install_error_subtitle">Coba copot dan pasang lagi</string>
-    <string name="patcher_ready_to_mount_subtitle">Tekan tombol di bawah untuk mount</string>
+    <string name="patcher_ready_to_mount_subtitle">Tekan tombol di bawah untuk memasang</string>
     <string name="patcher_patches_excluded_for_installer">Tidak tersedia untuk metode pemasangan ini dan dikecualikan: %s</string>
     <string name="patcher_back_to_game_hint">Ketuk %1$s untuk kembali ke permainan Anda</string>
     <string name="patcher_storage_permission_dialog_title">Tidak dapat mengakses jalur penyimpanan</string>
@@ -690,8 +704,8 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="saved_app_removed_toast">Entri aplikasi patch tersimpan dihapus</string>
     <string name="saved_app_launch_unavailable">Pasang aplikasi sebelum membukanya</string>
     <string name="package_name">Nama paket</string>
-    <string name="failed_to_mount">Gagal mount: %s</string>
-    <string name="failed_to_unmount">Gagal unmount: %s</string>
+    <string name="failed_to_mount">Gagal memasang: %s</string>
+    <string name="failed_to_unmount">Gagal melepas pemasangan: %s</string>
     <!-- Patcher Screen - Mini-games -->
     <string name="mini_game_score">Skor %s</string>
     <string name="mini_game_best">%s terbaik</string>
@@ -777,13 +791,11 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Layar beranda</string>
     <string name="settings_appearance_greeting_phrases">Frasa sapaan</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Tampilkan pesan sapaan di layar beranda</string>
-    <string name="settings_appearance_app_grouping">Pengelompokan aplikasi</string>
-    <string name="settings_appearance_app_grouping_description">Menampilkan pengalih untuk mengelompokkan aplikasi berdasarkan sumber atau kategori</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Menampilkan pesan sapaan</string>
     <string name="settings_appearance_repatch_notice">Notifikasi penambalan ulang</string>
     <string name="settings_appearance_repatch_notice_description">Menampilkan spanduk ketika aplikasi yang telah ditambal dapat ditambal ulang</string>
     <string name="settings_appearance_sort_button">Tombol urutkan dan saring</string>
-    <string name="settings_appearance_sort_button_description">Tampilkan tombol urutkan dan saring di layar beranda</string>
+    <string name="settings_appearance_sort_button_description">Menampilkan tombol untuk mengurutkan dan memfilter aplikasi</string>
     <string name="settings_appearance_app_card_colors">Warna kartu aplikasi</string>
     <string name="settings_appearance_app_card_colors_default">Bawaan</string>
     <string name="settings_appearance_app_card_colors_default_description">Beri setiap aplikasi warna dari paketnya sendiri</string>
@@ -839,7 +851,7 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
 
 Tambalan tidak terpengaruh: aktifkan tambalan pra-rilis untuk setiap sumber dalam daftar sumber tambalan"</string>
     <string name="settings_advanced_updates_allow_metered">Pembaruan data seluler</string>
-    <string name="settings_advanced_updates_allow_metered_description">Mengizinkan Morphe dan pembaruan tambalan untuk diunduh melalui data seluler</string>
+    <string name="settings_advanced_updates_allow_metered_description">Mengunduh pembaruan Morphe dan tambalan melalui data seluler</string>
     <string name="settings_advanced_updates_background_notifications">Notifikasi pembaruan latar belakang</string>
     <string name="settings_advanced_updates_background_notifications_description">Periksa pembaruan secara berkala di latar belakang dan beri tahu saat tersedia</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Notifikasi dorong untuk rilis terbaru, bahkan saat aplikasi ditutup</string>
@@ -854,7 +866,7 @@ Tambalan tidak terpengaruh: aktifkan tambalan pra-rilis untuk setiap sumber dala
     <string name="settings_advanced_update_interval_chip_subtitle">Interval pemeriksaan latar belakang</string>
     <string name="settings_advanced_update_interval_battery_warning">Periksa latar belakang mungkin tidak bekerja dengan baik pada beberapa perangkat. Produsen seperti Xiaomi, Huawei, Samsung, dan OnePlus sering membatasi proses latar belakang untuk menghemat baterai</string>
     <string name="settings_advanced_external_batch_patch">Izinkan pemicu eksternal</string>
-    <string name="settings_advanced_external_batch_patch_description">Memungkinkan aplikasi otomasi memulai penambalan batch melalui intent</string>
+    <string name="settings_advanced_external_batch_patch_description">Memungkinkan aplikasi otomatisasi memulai penambalan batch</string>
     <string name="external_batch_patch_title">Mulai penambalan massal?</string>
     <string name="external_batch_patch_description">%s ingin Morphe menambal dan memasang aplikasi</string>
     <string name="external_batch_patch_trust_caller">Selalu izinkan aplikasi ini</string>
@@ -871,18 +883,18 @@ Tambalan tidak terpengaruh: aktifkan tambalan pra-rilis untuk setiap sumber dala
     <string name="notification_channel_patch_updates">Pembaruan patch</string>
     <string name="notification_channel_patch_updates_description">Notifikasi tentang rilis patch baru</string>
     <string name="notification_channel_patcher_description">Ditampilkan saat Morphe menambal aplikasi di latar belakang</string>
-    <string name="notification_channel_mounted_apps">Aplikasi yang di-mount</string>
+    <string name="notification_channel_mounted_apps">Aplikasi terpasang</string>
     <string name="notification_channel_mounted_apps_description">Saat versi lain menggantikan aplikasi yang terpasang dan tambalannya tidak lagi berlaku</string>
     <string name="notification_mount_replaced_title">%1$s tidak lagi ditambal</string>
     <string name="notification_mount_replaced_text">v%1$s menggantikan v%2$s yang ditambal. Buka Morphe untuk memulihkannya</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Setelan ahli</string>
     <string name="settings_advanced_expert_mode">Mode ahli</string>
-    <string name="settings_advanced_expert_mode_description">Mengaktifkan setelan penambalan Morphe yang kompleks dan opsi kustomisasi</string>
+    <string name="settings_advanced_expert_mode_description">Membuka pengaturan penamblan lanjutan dan opsi tambalan</string>
     <string name="settings_advanced_expert_mode_dialog_title">Aktifkan mode Ahli?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Mode ahli memberikan kontrol lebih terhadap bagaimana tambalan diterapkan, tetapi salah mengonfigurasi setelan di mode ahli dapat menyebabkan aplikasi tidak berfungsi</string>
     <string name="settings_advanced_strip_unused_libs">Optimalkan untuk arsitektur perangkat</string>
-    <string name="settings_advanced_strip_unused_libs_description">Menghapus pustaka arsitektur CPU yang tidak digunakan dan modul APK terpisah</string>
+    <string name="settings_advanced_strip_unused_libs_description">Menghapus pustaka native dan bagian APK yang tidak digunakan</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_description">Diperlukan untuk sumber usulan perubahan</string>
     <string name="settings_advanced_github_pat_configured">Token dikonfigurasi</string>
@@ -981,8 +993,8 @@ Dimensi gambar harus sebagai berikut:
     <string name="installer_internal_description">Menggunakan pemasang paket Android</string>
     <string name="installer_play_store_description">Menggunakan pemasang sistem dan mengatur Google Play Store sebagai sumber pemasangan</string>
     <string name="installer_root_play_store_description">Pasang secara senyap dengan root dan mengatur Google Play Store sebagai sumber pemasangan</string>
-    <string name="installer_auto_saved_name">Mount root</string>
-    <string name="installer_auto_saved_description">Mount aplikasi yang ditambal dalam mode mount root. APK ditambal secara standar menggunakan pemasang lain</string>
+    <string name="installer_auto_saved_name">Pemasang root</string>
+    <string name="installer_auto_saved_description">Memasang aplikasi yang ditambal dalam mode pemasang root. APK ditambal secara standar menggunakan pemasang lain</string>
     <string name="installer_shizuku_description">Pasang secara senyap menggunakan Shizuku atau Sui</string>
     <string name="installer_shizuku_play_store_description">Pasang secara senyap melalui Shizuku atau Sui dan mengatur Google Play Store sebagai sumber pemasangan</string>
     <string name="installer_option_none">Tidak ada pengganti</string>
@@ -994,7 +1006,7 @@ Dimensi gambar harus sebagai berikut:
     <string name="installer_status_shizuku_permission">Berikan izin ke Morphe dari aplikasi Shizuku</string>
     <string name="installer_mount_warning_install">Pemasang utama Anda diatur ke pemasang mount root. Aplikasi tersimpan ini tidak dipasang menggunakan mount</string>
     <string name="mount_version_mismatch_message">Versi aplikasi bawaan (%2$s) tidak cocok dengan versi aplikasi dipatch (%1$s). Pasang versi bawaan yang cocok, lalu coba lagi</string>
-    <string name="mount_stock_restore_failed_message">Android menolak APK asli yang disimpan. Pasang versi bawaan yang sesuai, lalu coba Mount lagi</string>
+    <string name="mount_stock_restore_failed_message">Android menolak APK asli yang disimpan. Pasang versi bawaan yang sesuai, lalu coba Pasang lagi</string>
     <string name="installer_status_shizuku_unsupported">Versi Shizuku yang terpasang tidak didukung</string>
     <string name="installer_action_open_shizuku">Buka Shizuku</string>
     <string name="installer_hint_generic">Pemasangan gagal. Coba lagi atau ganti pemasang</string>
@@ -1013,13 +1025,13 @@ Dimensi gambar harus sebagai berikut:
     <string name="installer_play_store_warning_risk">Play Store mungkin menawarkan pembaruan untuk aplikasi yang ditambal. Memasang pembaruan tersebut akan menimpa APK yang ditambal dengan versi asli dan menghapus tambalan. Jika diminta untuk memperbarui, ketuk menu tiga titik di halaman Play Store aplikasi dan pilih \"Nonaktifkan pembaruan\"</string>
     <string name="installer_play_store_warning_continue">Saya mengerti, lanjutkan</string>
     <string name="installer_play_store_mode">Pasang sebagai Play Store</string>
-    <string name="installer_play_store_mode_description">Catat Google Play Store sebagai sumber pemasangan untuk metode pemasangan ini</string>
+    <string name="installer_play_store_mode_description">Menandai Google Play Store sebagai sumber instalasi</string>
     <string name="settings_prompt_installer_on_install">Konfirmasi pilihan pemasang</string>
-    <string name="settings_prompt_installer_on_install_description">Menampilkan dialog pilihan pemasang setiap kali aplikasi hasil tambalan dipasang</string>
+    <string name="settings_prompt_installer_on_install_description">Meminta pemilih instalasi yang akan digunakan untuk setiap instalasi</string>
     <string name="settings_auto_install_with_shizuku">Pasang otomatis setelah penambalan</string>
     <string name="settings_auto_install_with_shizuku_description">Pasang APK hasil tambalan segera setelah proses penambalan selesai</string>
     <string name="settings_auto_uninstall_with_shizuku">Copot otomatis jika terjadi konflik</string>
-    <string name="settings_auto_uninstall_with_shizuku_description">Saat memasang otomatis dengan Shizuku, copot aplikasi yang ada terlebih dahulu jika Android melaporkan konflik tanda tangan. Ini dapat menghapus data aplikasi</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Membubarkan aplikasi yang ada jika terjadi konflik tanda tangan. Hal ini dapat menghapus data aplikasi</string>
     <string name="settings_auto_uninstall_warning_title">Aktifkan copot otomatis?</string>
     <string name="settings_auto_uninstall_warning_message">Jika Android melaporkan konflik tanda tangan selama pemasangan otomatis Shizuku, Morphe akan mencopot aplikasi yang ada sebelum memasang APK hasil tambalan</string>
     <string name="settings_auto_uninstall_warning_risk">Ini dapat menghapus data aplikasi. Jika APK hasil tambalan gagal dipasang setelah pencopotan, aplikasi sebelumnya mungkin sudah hilang</string>
@@ -1058,13 +1070,13 @@ Rincian: %2$s"</string>
     <string name="settings_system_memory_limit_warning">Batas memori yang rendah mungkin menyebabkan kegagalan saat menambal aplikasi yang lebih besar</string>
     <string name="settings_system_memory_limit_high_warning">Batas memori yang tinggi dapat membuat proses patching jauh lebih lambat di beberapa perangkat. Naikkan hanya jika proses patching terus gagal pada batas yang lebih rendah.</string>
     <string name="settings_system_process_runtime_enabled_description">Batas %s MB</string>
-    <string name="settings_system_process_runtime_disabled_description">Klik untuk mengonfigurasinya</string>
+    <string name="settings_system_process_runtime_disabled_description">Ketuk untuk mengonfigurasi</string>
     <string name="settings_system_process_runtime_description_not_available">Fitur ini memerlukan Android 11 atau versi yang lebih baru</string>
     <string name="settings_system_patcher_completion_sound">Suara penyelesaian</string>
     <string name="settings_system_patcher_completion_sound_description">Memainkan nada berbeda untuk keberhasilan atau kegagalan saat penambalan selesai</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">Notifikasi</string>
-    <string name="settings_system_notifications_description">Konfigurasikan peringatan latar belakang dan suara penyelesaian</string>
+    <string name="settings_system_notifications_description">Mengonfigurasi notifikasi latar belakang dan suara penyelesaian</string>
     <string name="settings_system_notifications_success_sound">Suara keberhasilan</string>
     <string name="settings_system_notifications_error_sound">Suara kegagalan</string>
     <string name="settings_system_notifications_sound_default">Bawaan</string>
@@ -1076,8 +1088,8 @@ Rincian: %2$s"</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Impor &amp; ekspor</string>
     <string name="settings_system_signing_key">Kunci penandatanganan</string>
-    <string name="settings_system_signing_key_description">Mencadangkan dan memulihkan kunci yang digunakan untuk menandatangani aplikasi yang ditambal</string>
-    <string name="settings_system_signing_key_dialog_description">Setiap aplikasi yang di-patch oleh Morphe ditandatangani dengan kunci ini. Simpan salinannya: tanpa kunci ini, aplikasi yang di-patch hanya dapat diperbarui setelah menghapus instalasinya.</string>
+    <string name="settings_system_signing_key_description">Mencadangkan atau memulihkan kunci yang menandatangani aplikasi yang telah ditambal</string>
+    <string name="settings_system_signing_key_dialog_description">Setiap aplikasi yang ditambal oleh Morphe ditandatangani dengan kunci ini. Simpan salinannya: tanpa kunci ini, aplikasi yang ditambal hanya dapat diperbarui setelah mencopot nya.</string>
     <string name="settings_system_signing_key_missing">Morphe membuatnya dengan patch pertama Anda.</string>
     <string name="settings_system_signing_key_created">Dibuat %s</string>
     <string name="settings_system_signing_key_fingerprint">Sidik jari SHA-256</string>
@@ -1132,7 +1144,7 @@ Rincian: %2$s"</string>
     <string name="settings_system_apks_export_zip_failed">Gagal mengekspor APK yang dipilih</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">Pengelola penyimpanan</string>
-    <string name="settings_system_storage_management_description">Tinjau penggunaan penyimpanan dan bersihkan berkas cache</string>
+    <string name="settings_system_storage_management_description">Menampilkan penggunaan disk dan membersihkan berkas ter-cache</string>
     <string name="settings_system_storage_keystore_title">Keystore penandatanganan</string>
     <string name="settings_system_storage_app_data_title">Data aplikasi</string>
     <string name="settings_system_storage_patch_bundles_title">Paket Tambalan</string>
@@ -1198,7 +1210,7 @@ Rincian: %2$s"</string>
     <string name="copy_selection_same_source">Sumber sama</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Pemilih berkas khusus</string>
-    <string name="settings_system_custom_file_picker_description">Telusuri penyimpanan dengan pemilih berkas bawaan Morphe daripada pemilih berkas bawaan sistem</string>
+    <string name="settings_system_custom_file_picker_description">Menggunakan pemilih berkas bawaan Morphe daripada pemilih berkas sistem</string>
     <!-- Settings - System Tab - APK download helper -->
     <string name="settings_system_apk_download_helper">Pembantu unduhan APK</string>
     <string name="settings_system_apk_download_helper_trusted_count">Dipercaya: %1$d dari %2$d</string>
@@ -1249,6 +1261,7 @@ Rincian: %2$s"</string>
     <string name="no">Tidak</string>
     <string name="all">Semua</string>
     <string name="filter">Penyaring</string>
+    <string name="group">Kelompok</string>
     <string name="reset">Setel ulang</string>
     <string name="reset_all">Atur ulang Semua</string>
     <string name="apply">Terapkan</string>
@@ -1316,17 +1329,21 @@ Rincian: %2$s"</string>
     <string name="available">Tersedia</string>
     <string name="continue_">Lanjutkan</string>
     <string name="version">Versi</string>
+    <!-- Who made a patch source, as a field label -->
+    <string name="author">Penulis</string>
+    <!-- A file a patch source is added from, as a field label -->
+    <string name="file">Berkas</string>
     <string name="clone">Duplikat</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Tambalan</string>
     <string name="patching">Menambal</string>
     <string name="patched">Ditambal</string>
     <string name="open">Buka</string>
-    <string name="mount">Mount</string>
-    <string name="mounted">Di-mount</string>
-    <string name="unmount">Unmount</string>
-    <string name="unmounted">Belum di-mount</string>
-    <string name="remount">Remount</string>
+    <string name="mount">Pasang</string>
+    <string name="mounted">Terpasang</string>
+    <string name="unmount">Lepas pemasangan</string>
+    <string name="unmounted">Belum terpasang</string>
+    <string name="remount">Pasang ulang</string>
     <string name="restore">Pulihkan</string>
     <string name="share">Bagikan</string>
     <string name="install">Pasang</string>
@@ -1347,10 +1364,10 @@ Rincian: %2$s"</string>
     <string name="logs">Catatan</string>
     <string name="sources">Sumber</string>
     <string name="installing_ellipsis">Memasang…</string>
-    <string name="mounting_ellipsis">Mounting…</string>
+    <string name="mounting_ellipsis">Memasang…</string>
     <string name="mount_stage_restoring_stock">Memulihkan asli…</string>
     <string name="mount_stage_copying">Menyalin…</string>
-    <string name="unmounting_ellipsis">Unmounting…</string>
+    <string name="unmounting_ellipsis">Melepaskan…</string>
     <string name="importing_ellipsis">Mengimpor…</string>
     <string name="imported_successfully">Berhasil diimpor</string>
     <string name="changelog">Lihat catatan perubahan</string>
@@ -1419,7 +1436,7 @@ Apakah Anda masih ingin melanjutkan?"</string>
     <!-- Translate "System" the same way as the System settings tab -->
     <string name="onboarding_system_tab_title">Tab Sistem</string>
     <string name="onboarding_system_tab_desc">Pengelola Keystore, peralatan impor/ekspor, dan informasi aplikasi</string>
-    <string name="onboarding_system_installer_desc">Pilih cara aplikasi yang telah ditambal tersebut dipasang: standar, root mount, atau Shizuku</string>
+    <string name="onboarding_system_installer_desc">Pilih cara aplikasi yang telah ditambal tersebut dipasang: standar, pemasang root, atau Shizuku</string>
     <string name="onboarding_system_process_runtime_desc">Jalankan penambalan dalam proses terpisah untuk meningkatkan stabilitas dan mengontrol penggunaan memori. Disarankan untuk aplikasi ukuran besar</string>
     <string name="onboarding_system_file_picker_desc">Aktifkan untuk menggunakan penjelajah berkas bawaan daripada pemilih sistem saat memilih APK atau keystore</string>
     <!-- Tour prompt dialog shown after first successful patch install -->

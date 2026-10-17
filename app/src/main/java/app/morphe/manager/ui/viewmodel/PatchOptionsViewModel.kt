@@ -22,16 +22,14 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
 /**
  * Managing patch options dynamically loaded from bundle repository.
  */
-class PatchOptionsViewModel : ViewModel(), KoinComponent {
-    private val bundleRepository: PatchBundleRepository by inject()
-    val patchOptionsPrefs: PatchOptionsPreferencesManager by inject()
-
+class PatchOptionsViewModel(
+    private val bundleRepository: PatchBundleRepository,
+    val patchOptionsPrefs: PatchOptionsPreferencesManager
+) : ViewModel() {
     companion object {
         // Patch names to show options for
         private val ALLOWED_PATCHES = setOf(

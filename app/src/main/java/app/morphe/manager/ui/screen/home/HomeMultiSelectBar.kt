@@ -11,11 +11,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.util.withToast
+import org.koin.compose.koinInject
 
 /**
  * Reorder mode of a [MultiSelectBar]: whether it is on, and what its pills do. The mode is
@@ -57,7 +56,7 @@ internal fun MultiSelectBar(
     modifier: Modifier = Modifier,
     reorder: MultiSelectReorder? = null
 ) {
-    val context = LocalContext.current
+    val messages = koinInject<UserMessages>()
     val reorderDone = stringResource(R.string.reorder_done)
     val resetOrderDone = stringResource(R.string.reset_order_done)
 
@@ -71,7 +70,7 @@ internal fun MultiSelectBar(
         )
     )
 
-    MultiSelectShell(
+    DockedPanel(
         visible = visible,
         modifier = modifier,
         onBack = { if (reorder?.isActive == true) reorder.onCancel() else onCancel() }
@@ -84,8 +83,8 @@ internal fun MultiSelectBar(
             val activeReorder = selection.reorder
             if (inReorder && activeReorder != null) {
                 ReorderPanel(
-                    onDone = context.withToast(reorderDone, activeReorder.onSave),
-                    onReset = context.withToast(resetOrderDone, activeReorder.onReset),
+                    onDone = messages.confirming(reorderDone, activeReorder.onSave),
+                    onReset = messages.confirming(resetOrderDone, activeReorder.onReset),
                     onCancel = activeReorder.onCancel
                 )
             } else {
@@ -144,7 +143,7 @@ internal fun CategoryActionBar(
         )
     )
 
-    MultiSelectShell(visible = visible, modifier = modifier, onBack = onBack) {
+    DockedPanel(visible = visible, modifier = modifier, onBack = onBack) {
         AnimatedContent(
             targetState = category.inReorderMode,
             transitionSpec = Animations.fadeCrossfade(200),

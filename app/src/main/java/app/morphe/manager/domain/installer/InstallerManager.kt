@@ -22,6 +22,7 @@ import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Build
 import android.util.Log
 import androidx.annotation.StringRes
 import app.morphe.manager.R
@@ -139,15 +140,19 @@ class InstallerManager(
     /**
      * Whether an install started right after patching reaches the user on its own, either
      * silently or through a confirmation the installer knows how to put in front of them.
+     *
+     * @param mount Whether the build is mounted rather than installed, which root does without
+     *   any installer.
      */
-    suspend fun autoInstallAllowed(targetPackageName: String): Boolean {
+    suspend fun autoInstallAllowed(targetPackageName: String, mount: Boolean): Boolean {
         if (!prefs.autoInstallAfterPatching.get()) return false
+        if (mount) return true
         if (prefs.promptInstallerOnInstall.get()) return false
 
-        return when (parseToken(prefs.installerPrimary.get())) {
-            Token.Shizuku, Token.ShizukuPlayStore -> true
-            Token.Internal -> sessionInstaller.canUpdateSilently(targetPackageName)
-            else -> false
+        return when (val token = parseToken(prefs.installerPrimary.get())) {
+            // Both go through a system session, which only updates an app silently in some cases
+            Token.Internal, Token.AutoSaved -> sessionInstaller.canUpdateSilently(targetPackageName)
+            else -> token.supportsAutoInstall
         }
     }
 
@@ -253,19 +258,6 @@ class InstallerManager(
             primaryToken = primaryToken,
             unavailabilityReason = primaryAvailability.reason
         )
-    }
-
-    /**
-     * Original resolvePlan method for backward compatibility.
-     * Use [resolvePlanWithStatus] for more detailed information.
-     */
-    fun resolvePlan(
-        target: InstallTarget,
-        sourceFile: File,
-        expectedPackage: String,
-        sourceLabel: String?
-    ): InstallPlan {
-        return resolvePlanWithStatus(target, sourceFile, expectedPackage, sourceLabel).plan
     }
 
     fun cleanup(plan: InstallPlan.External) {
@@ -623,6 +615,22 @@ class InstallerManager(
     )
 
     sealed class Token {
+        /**
+         * Whether an install through it can go ahead right after patching, which is what the
+         * auto-install setting is offered for. Root mount mounts its own builds with root and hands
+         * the rest to the system installer, which needs Android 12+ to update silently.
+         */
+        val supportsAutoInstall: Boolean
+            get() = when (this) {
+                Shizuku, ShizukuPlayStore, AutoSaved, RootPlayStore -> true
+                Internal -> Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+                else -> false
+            }
+
+        /** Whether it is root mount, with or without Google Play as the install source. */
+        val isRootMount: Boolean
+            get() = this == AutoSaved || this == RootPlayStore
+
         object Internal : Token()
         object PlayStore : Token()
         object RootPlayStore : Token()

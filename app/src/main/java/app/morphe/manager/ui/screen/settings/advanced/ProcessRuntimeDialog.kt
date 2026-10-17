@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.settings.advanced
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,7 +31,7 @@ import kotlin.math.roundToInt
  * Dialog for configuring process runtime settings.
  */
 @Composable
-fun ProcessRuntimeDialog(
+fun DialogHostScope.ProcessRuntimeDialog(
     currentEnabled: Boolean,
     currentLimit: Int,
     heapLimitIgnored: Boolean,
@@ -66,8 +65,8 @@ fun ProcessRuntimeDialog(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = Defaults.ContentPadding),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
+                .padding(vertical = Defaults.SpaceLarge),
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)
         ) {
             // Enable/Disable toggle
             SettingsSwitchItem(
@@ -87,13 +86,13 @@ fun ProcessRuntimeDialog(
                 modifier = Modifier.alpha(if (enabled) 1f else 0.5f)
             ) {
                 SettingsDivider(
-                    modifier = Modifier.padding(bottom = Defaults.ContentPadding),
+                    modifier = Modifier.padding(bottom = Defaults.SpaceLarge),
                     fullWidth = true
                 )
 
                 // Current value display
                 InfoStatBox(
-                    modifier = Modifier.padding(bottom = Defaults.ContentPadding),
+                    modifier = Modifier.padding(bottom = Defaults.SpaceLarge),
                     value = context.formatMebibytes(selectedLimit),
                     subtitle = stringResource(R.string.settings_system_memory_limit_subtitle),
                     containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
@@ -102,8 +101,8 @@ fun ProcessRuntimeDialog(
 
                 // Slider
                 Column(
-                    modifier = Modifier.padding(bottom = Defaults.ContentPadding),
-                    verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
+                    modifier = Modifier.padding(bottom = Defaults.SpaceLarge),
+                    verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
                 ) {
                     Slider(
                         state = sliderState,
@@ -150,14 +149,10 @@ fun ProcessRuntimeDialog(
                 var lastWarning by remember { mutableStateOf(warning) }
                 warning?.let { lastWarning = it }
 
-                AnimatedVisibility(
-                    visible = enabled && warning != null,
-                    enter = Animations.expandFadeEnter,
-                    exit = Animations.shrinkFadeExit
-                ) {
+                FoldingVisibility(visible = enabled && warning != null) {
                     lastWarning?.let { (text, tone) ->
                         Notice(
-                            modifier = Modifier.padding(top = Defaults.ContentPadding),
+                            modifier = Modifier.padding(top = Defaults.SpaceLarge),
                             text = stringResource(text),
                             tone = tone,
                             icon = Icons.Outlined.Warning

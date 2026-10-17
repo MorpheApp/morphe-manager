@@ -1,5 +1,5 @@
 [versions]
-about-libraries = "15.2.0"
+about-libraries = "15.3.0"
 activity = "1.13.0"
 android-gradle-plugin = "9.4.1"
 app-icon-loader-coil = "1.5.0"
@@ -14,23 +14,24 @@ datetime = "0.8.0"
 dev-tools-gradle-plugin = "2.3.12"
 documentfile = "1.1.0"
 fading-edges = "1.0.4"
-firebase-bom = "34.19.0"
+firebase-bom = "35.0.1"
 google-services = "4.5.0"
+haze = "2.0.1"
 hidden-api-stub = "4.4.0"
-hiddenapibypass = "6.1"
+hiddenapibypass = "6.2"
 koin = "4.2.2"
-kotlin = "2.4.20"
+kotlin = "2.4.21"
 kotlin-process = "1.5.1"
 ktor = "3.6.0"
 ktx = "1.19.1"
 libsu = "6.0.0"
 # Ahead of the Compose BOM, which still ships 1.4.0: the sheets build on the 1.5 bottom sheet API
 # (rememberBottomSheetState). Drop the override once the BOM ships a stable 1.5.0
-material3 = "1.5.0-alpha29"
+material3 = "1.5.0-beta01"
 morphe-library = "1.4.0"
-morphe-patcher = "1.15.1"
+morphe-patcher = "2.0.0-dev.11"
 navigation = "2.10.2"
-play-services-base = "18.11.0"
+play-services-base = "18.11.1"
 preferences-datastore = "1.2.1"
 reorderable = "3.1.0"
 room-version = "2.8.5"
@@ -62,6 +63,10 @@ compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
 compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
+
+# Haze (blur of what scrolls under floating dialog chrome)
+haze = { group = "dev.chrisbanes.haze", name = "haze", version.ref = "haze" }
+haze-blur = { group = "dev.chrisbanes.haze", name = "haze-blur", version.ref = "haze" }
 
 # Coil
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }

@@ -6,8 +6,6 @@
 package app.morphe.manager.ui.screen.settings.system
 
 import android.os.PowerManager
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.MaterialTheme
@@ -19,19 +17,17 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.screen.settings.SettingsSubpage
+import app.morphe.manager.ui.screen.settings.SubpageItem
 import app.morphe.manager.util.requestIgnoreBatteryOptimizations
 
 /**
- * Background-execution settings: battery optimization exemption and the notifications hub.
- * Patcher-runtime tuning lives in the Advanced tab because it is only useful when troubleshooting
- * patching.
+ * What keeps the manager working in the background: the battery optimization exemption, and the
+ * notifications, which open a page of their own.
  */
 @Composable
-fun BackgroundSection(
-    onNotificationsClick: () -> Unit
-) {
+fun BackgroundSection(onOpenSubpage: (SettingsSubpage) -> Unit) {
     val context = LocalContext.current
-
     val lifecycleOwner = LocalLifecycleOwner.current
     val pm = remember { context.getSystemService(PowerManager::class.java) }
     var isIgnoringBatteryOptimizations by remember { mutableStateOf(pm.isIgnoringBatteryOptimizations(context.packageName)) }
@@ -41,12 +37,10 @@ fun BackgroundSection(
         }
     }
 
-    Column(verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)) {
-        SectionTitle(
-            text = stringResource(R.string.settings_system_background),
-            icon = Icons.Outlined.PhoneAndroid
-        )
-
+    SettingsSection(
+        title = stringResource(R.string.settings_system_background),
+        icon = Icons.Outlined.PhoneAndroid
+    ) {
         SettingsGroup {
             SettingsItem(
                 onClick = {
@@ -66,14 +60,7 @@ fun BackgroundSection(
                 }
             )
 
-            SettingsDivider()
-
-            SettingsItem(
-                onClick = onNotificationsClick,
-                title = stringResource(R.string.settings_system_notifications),
-                subtitle = stringResource(R.string.settings_system_notifications_description),
-                leadingContent = { ThemedIcon(icon = Icons.Outlined.NotificationsActive) }
-            )
+            SubpageItem(SettingsSubpage.NOTIFICATIONS, onOpenSubpage)
         }
     }
 }

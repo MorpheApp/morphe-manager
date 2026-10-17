@@ -24,7 +24,7 @@ import app.morphe.manager.R
  * wherever the signature verification is intact.
  */
 @Composable
-fun SignatureConflictDialog(
+fun DialogHostScope.SignatureConflictDialog(
     title: String,
     message: String,
     onUninstall: () -> Unit,
@@ -67,7 +67,7 @@ fun SignatureConflictDialog(
         }
     ) {
         if (onIgnore != null) {
-            Spacer(Modifier.height(Defaults.ContentPadding))
+            Spacer(Modifier.height(Defaults.SpaceLarge))
 
             Text(
                 text = stringResource(R.string.install_ignore_signature_description),

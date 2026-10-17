@@ -8,7 +8,12 @@ package app.morphe.manager.ui.screen.shared
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.AnimationVector1D
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -21,7 +26,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
@@ -29,22 +36,22 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.theme.ThemeTraitsDefaults
-
-/** Shape of the [MultiSelectShell] surface: rounded where it leaves the bottom edge, like a sheet. */
-private val ShellShape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp)
+import kotlinx.coroutines.launch
 
 /**
- * Slide-up surface hosting a selection panel or a reorder bar. It sits on the bottom edge of the
- * screen like a sheet, with its content kept clear of the navigation bar, so it is meant for the
- * home screen's footer dock and the [AppDialog] bottom bar. Keeps the surface, elevation and
- * enter/exit animations the same everywhere a selection is made.
+ * Slide-up surface docked over the bottom of a list: a selection panel, a reorder bar, or the
+ * options the list is arranged by. It sits on the bottom edge of the screen like a sheet, its
+ * content clear of the navigation bar. Unlike a sheet it leaves the list above it live.
  *
- * @param onBack Closes the panel on back, which then follows the predictive gesture down like
- * an [AppBottomSheet] does. Required so no panel is left to a back handler that cannot animate
- * it, such as the dismissal of the [AppDialog] it is docked to.
+ * Meant for the home screen's footer dock and the [ListDialog] bottom bar, so the surface, blur and
+ * enter/exit animations stay the same everywhere one is docked.
+ *
+ * @param onBack Closes the panel on back or once it is drawn down, which it follows down as it
+ * goes. Required so no panel is left to a back handler that cannot animate it, such as the
+ * dismissal of the [ListDialog] it is docked to.
  */
 @Composable
-fun MultiSelectShell(
+fun DockedPanel(
     visible: Boolean,
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
@@ -61,22 +68,79 @@ fun MultiSelectShell(
         exit = Animations.springSlideDownExit,
         modifier = modifier
     ) {
+        val surface = ThemeTraitsDefaults.surfaceColor(MaterialTheme.colorScheme.background)
         Surface(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = Defaults.SheetSideInset)
-                .predictiveBackSlide(backProgress),
-            shape = ShellShape,
-            // Drawn like an AppBottomSheet, on the dialogs' background with an edge of its own, so
-            // a panel docked over a list reads as the same kind of surface as a sheet
-            color = ThemeTraitsDefaults.surfaceColor(MaterialTheme.colorScheme.background),
-            border = CardBorder.neutral,
-            shadowElevation = 8.dp
+                .predictiveBackSlide(backProgress)
+                // A surface of its own with an edge of its own, blurring what scrolls under it
+                .glassFill(surface, SheetShape)
+                .sheetBorder(CardBorder.neutral, SheetShape),
+            shape = SheetShape,
+            color = Color.Transparent,
+            contentColor = contentColorFor(surface)
         ) {
-            Box(modifier = Modifier.navigationBarsPadding().padding(bottom = 4.dp)) { content() }
+            Column(
+                modifier = Modifier
+                    .drawnDownBy(backProgress, onDismiss = onBack)
+                    .navigationBarsPadding()
+                    .padding(bottom = Defaults.SpaceExtraSmall)
+            ) {
+                PanelHandle()
+                content()
+            }
         }
     }
 }
+
+/** Shape of a surface rising from the bottom edge, a panel docked there: Material's sheet corners. */
+val SheetShape: Shape = RoundedCornerShape(topStart = Defaults.CornerExtraLarge, topEnd = Defaults.CornerExtraLarge)
+
+/**
+ * Lets a [DockedPanel] be drawn down anywhere a list in it does not take the drag, through the same
+ * [progress] a back gesture moves it by, so letting go past halfway or with a flick closes it as
+ * letting go of the gesture does.
+ */
+@Composable
+private fun Modifier.drawnDownBy(progress: Animatable<Float, AnimationVector1D>, onDismiss: () -> Unit): Modifier {
+    val scope = rememberCoroutineScope()
+    val density = LocalDensity.current
+    val travel = with(density) { PredictiveBackSlide.toPx() }
+    val flick = with(density) { DismissVelocity.toPx() }
+    val dragState = rememberDraggableState { delta ->
+        scope.launch { progress.snapTo((progress.value + delta / travel).coerceIn(0f, 1f)) }
+    }
+    return draggable(
+        state = dragState,
+        orientation = Orientation.Vertical,
+        onDragStopped = { velocity ->
+            if (progress.value > 0.5f || velocity > flick) onDismiss() else progress.animateTo(0f)
+        }
+    )
+}
+
+/**
+ * The handle atop a [DockedPanel], saying it can be drawn down. Only drawn, as every panel closes
+ * from a control of its own and from back, which a screen reader reaches without it.
+ */
+@Composable
+private fun PanelHandle() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = Defaults.SpaceSmall),
+        contentAlignment = Alignment.Center
+    ) {
+        Box(
+            modifier = Modifier
+                .size(width = 32.dp, height = 4.dp)
+                .background(LocalContentColor.current.copy(alpha = 0.4f), Defaults.PillShape)
+        )
+    }
+}
+
+/** How fast a flick down a panel has to be to close it however little it has moved. */
+private val DismissVelocity = 600.dp
 
 private class LastVisibleValue<T>(var value: T)
 
@@ -97,7 +161,7 @@ fun <T> rememberWhileVisible(visible: Boolean, value: T): T {
 }
 
 /**
- * Top line of a panel in a [MultiSelectShell] or of an [AppBottomSheet]: what it is about at the
+ * Top line of a panel in a [DockedPanel]: what it is about at the
  * start, and its controls, if any, at the end, which are [TitleAction]s so they read like the
  * ones in a dialog's title row.
  */
@@ -110,7 +174,7 @@ fun PanelHeader(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = Defaults.ContentPadding, vertical = Defaults.ItemSpacing),
+            .padding(horizontal = Defaults.SpaceLarge, vertical = Defaults.SpaceMedium),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(modifier = Modifier.weight(1f)) { title() }
@@ -118,7 +182,7 @@ fun PanelHeader(
         // panel's own
         CompositionLocalProvider(LocalDialogTextColor provides LocalContentColor.current) {
             Row(
-                horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
+                horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
                 verticalAlignment = Alignment.CenterVertically,
                 content = actions
             )
@@ -149,9 +213,9 @@ fun PanelSubtitle(text: String) {
 }
 
 /** Gap between a panel's edge and the plate a pressed action row lights up. */
-private val PanelActionInset = Defaults.ContentPaddingSmall
+private val PanelActionInset = Defaults.SpaceSmall
 
-private val PanelActionShape = RoundedCornerShape(Defaults.CompactCornerRadius)
+private val PanelActionShape = RoundedCornerShape(Defaults.CornerMedium)
 
 /** What an action of a panel does, as far as its color goes. */
 enum class ActionTone { Neutral, Primary, Secondary, Tertiary, Destructive }
@@ -171,7 +235,7 @@ data class SelectionAction(
 
 /**
  * Selection panel: the "N selected" counter with SelectAll (or DeselectAll) and Cancel, over every
- * one of [actions] as a row under its full name. Meant to be placed inside a [MultiSelectShell].
+ * one of [actions] as a row under its full name. Meant to be placed inside a [DockedPanel].
  *
  * None of the actions has anything to act on until something is selected.
  */
@@ -241,7 +305,7 @@ fun SelectionActionBar(
 }
 
 /**
- * The actions of a panel in a [MultiSelectShell], one row each under its full name, so what every
+ * The actions of a panel in a [DockedPanel], one row each under its full name, so what every
  * one does reads without guessing from an icon. Nothing is folded away, and the rows are kept
  * short enough for the panel to leave the list above it usable. Destructive actions are kept
  * apart from the rest by a divider. [enabled] holds them all back at once, as an empty selection
@@ -253,7 +317,7 @@ fun PanelActions(actions: List<SelectionAction>, enabled: Boolean = true) {
         val startsDestructiveGroup = action.tone == ActionTone.Destructive &&
                 index > 0 && actions[index - 1].tone != ActionTone.Destructive
         if (startsDestructiveGroup) {
-            SettingsDivider(modifier = Modifier.padding(vertical = 4.dp))
+            SettingsDivider(modifier = Modifier.padding(vertical = Defaults.SpaceExtraSmall))
         }
         // Keyed so a row keeps its own state when an action ahead of it comes or goes
         key(action.label) {
@@ -264,37 +328,65 @@ fun PanelActions(actions: List<SelectionAction>, enabled: Boolean = true) {
 
 @Composable
 private fun PanelActionRow(action: SelectionAction, enabled: Boolean) {
-    val alpha = if (enabled) 1f else Defaults.DISABLED_ALPHA
     val accent = action.tone.accentColor()
     // The icon carries the tone; the label only takes it as a warning, so the list reads as one
     // piece with its destructive entries standing out
-    val textColor = if (action.tone == ActionTone.Destructive) accent else MaterialTheme.colorScheme.onSurface
+    PanelRow(
+        title = action.label,
+        onClick = action.onClick,
+        icon = action.icon,
+        iconTint = accent,
+        titleColor = if (action.tone == ActionTone.Destructive) accent else MaterialTheme.colorScheme.onSurface,
+        enabled = enabled
+    )
+}
+
+/**
+ * One row of a panel in a [DockedPanel]: [icon] and [title] at the
+ * start and [trailing] after it, such as the value the row opens, which takes what the title leaves
+ * of the row. Every row of a panel is one of these, so its actions and its settings read as one list.
+ */
+@Composable
+fun PanelRow(
+    title: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    icon: ImageVector? = null,
+    iconTint: Color = MaterialTheme.colorScheme.onSurfaceVariant,
+    titleColor: Color = MaterialTheme.colorScheme.onSurface,
+    enabled: Boolean = true,
+    trailing: (@Composable RowScope.() -> Unit)? = null
+) {
+    val alpha = if (enabled) 1f else Defaults.DISABLED_ALPHA
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             // Pressed like a menu item, on a rounded plate held off the panel's edge, so the
             // highlight does not run into the border and the corners the panel is drawn with
             .padding(horizontal = PanelActionInset)
             .clip(PanelActionShape)
             .heightIn(min = 48.dp)
-            .clickable(enabled = enabled, role = Role.Button, onClick = action.onClick)
-            .padding(horizontal = Defaults.ContentPadding - PanelActionInset),
+            .clickable(enabled = enabled, role = Role.Button, onClick = onClick)
+            .padding(horizontal = Defaults.SpaceLarge - PanelActionInset),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
+        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)
     ) {
-        Icon(
-            imageVector = action.icon,
-            contentDescription = null,
-            tint = accent.copy(alpha = accent.alpha * alpha),
-            modifier = Modifier.size(Defaults.IconSize)
-        )
+        if (icon != null) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = iconTint.copy(alpha = iconTint.alpha * alpha),
+                modifier = Modifier.size(Defaults.IconSize)
+            )
+        }
         // Set like the item rows across the app
         Text(
-            text = action.label,
+            text = title,
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Medium,
-            color = textColor.copy(alpha = textColor.alpha * alpha)
+            color = titleColor.copy(alpha = titleColor.alpha * alpha)
         )
+        trailing?.invoke(this)
     }
 }
 

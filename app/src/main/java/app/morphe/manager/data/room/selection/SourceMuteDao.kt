@@ -10,6 +10,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -56,4 +57,50 @@ abstract class SourceMuteDao {
     @Transaction
     open suspend fun addForBundle(bundleUid: Int, packageNames: Collection<String>) =
         insert(packageNames.map { AppSourceMute(bundleUid, it) })
+
+    @Query("SELECT * FROM source_app_lists")
+    abstract fun getAppLists(): Flow<List<SourceAppList>>
+
+    @Query("SELECT * FROM source_app_lists WHERE patch_bundle = :bundleUid")
+    abstract suspend fun getAppList(bundleUid: Int): SourceAppList?
+
+    @Query("SELECT patch_bundle FROM source_app_lists")
+    abstract suspend fun getAppListBundleUids(): List<Int>
+
+    @Upsert
+    abstract suspend fun upsertAppList(list: SourceAppList)
+
+    @Query("DELETE FROM source_app_lists WHERE patch_bundle = :bundleUid")
+    abstract suspend fun clearAppList(bundleUid: Int)
+
+    @Transaction
+    open suspend fun clearUnseenApps(bundleUid: Int) {
+        val list = getAppList(bundleUid)?.takeIf { it.unseenApps.isNotEmpty() } ?: return
+        upsertAppList(list.copy(unseenApps = emptySet()))
+    }
+
+    @Query("DELETE FROM source_app_lists")
+    abstract suspend fun clearAppLists()
+
+    /**
+     * Keeps the apps each source names for the first time from it, for the sources that leave
+     * new apps out, and records them as known. [listedApps] holds what each source names now.
+     *
+     * Known apps are only ever added to. A release that briefly drops an app, or fails to name
+     * any, would otherwise make every app it names again look new and take the user's own
+     * choices off the home screen.
+     */
+    @Transaction
+    open suspend fun leaveOutNewApps(listedApps: Map<Int, Set<String>>) {
+        listedApps.forEach { (bundleUid, listed) ->
+            val list = getAppList(bundleUid) ?: return@forEach
+            val arrived = listed - list.knownApps
+            if (arrived.isEmpty()) return@forEach
+
+            insert(arrived.map { AppSourceMute(bundleUid, it) })
+            upsertAppList(
+                list.copy(knownApps = list.knownApps + arrived, unseenApps = list.unseenApps + arrived)
+            )
+        }
+    }
 }

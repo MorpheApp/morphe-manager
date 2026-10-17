@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import app.morphe.manager.ui.theme.isDarkTheme
 import kotlin.math.PI
 import kotlin.math.min
@@ -150,7 +151,7 @@ fun HalloweenBackground(
             val parallaxStrength = lantern.depth * 30f
             val center = Offset(
                 lantern.x * width + tiltX * parallaxStrength,
-                height - radius * 2.2f + bob + tiltY * parallaxStrength
+                height - LanternGround.toPx() - radius * 1.4f + bob + tiltY * parallaxStrength
             )
             val flicker = 0.8f + 0.2f * sin(2f * PI.toFloat() * cycle * lantern.flickers)
             drawLantern(facePath, center, radius, lanternAlpha, flicker * (1f + burst * 1.5f))
@@ -256,6 +257,9 @@ private fun DrawScope.drawLantern(face: Path, center: Offset, r: Float, alpha: F
     }
     drawPath(face, LanternGlow.copy(alpha = faceAlpha))
 }
+
+/** How far above the screen's bottom the lanterns stand, clear of the navigation floating there. */
+private val LanternGround = 120.dp
 
 private val Pumpkin = Color(0xFFF57C00)
 private val PumpkinShade = Color(0xFFE65100)

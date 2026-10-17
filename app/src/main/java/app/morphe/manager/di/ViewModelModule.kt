@@ -11,6 +11,7 @@
 package app.morphe.manager.di
 
 import app.morphe.manager.ui.viewmodel.*
+import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
@@ -28,4 +29,6 @@ val viewModelModule = module {
     viewModelOf(::InstalledAppInfoViewModel)
     viewModelOf(::PatchOptionsViewModel)
     viewModelOf(::StorageManagementViewModel)
+    // One of its own for each screen that copies a selection, as it holds that screen's picker
+    factoryOf(::CopySelectionController)
 }

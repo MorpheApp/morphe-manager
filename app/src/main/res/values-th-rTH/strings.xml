@@ -22,6 +22,10 @@
     <string name="deep_link_add_source_title">เพิ่มแหล่งที่มา</string>
     <string name="deep_link_add_source_message">คุณต้องการเพิ่มแหล่งที่มาแพตช์นี้ไปยัง Morphe หรือไม่?</string>
     <string name="deep_link_add_source_warning">เพิ่มแหล่งที่มาที่คุณเชื่อถือเท่านั้น</string>
+    <!-- Shown under the app a link was opened for -->
+    <string name="deep_link_add_source_only_app">เพิ่มเฉพาะแอปนี้แล้ว คุณสามารถเพิ่มแอปอื่นจากบัญชีรายชื่อแอปของแหล่งข้อมูลได้</string>
+    <!-- Asked when the link names an app of a source that is already added -->
+    <string name="deep_link_add_source_app_back">แหล่งข้อมูลนี้ได้ถูกเพิ่มไว้แล้ว ต้องการเพิ่มแอปนี้จากแหล่งข้อมูลที่มีอยู่หรือไม่?</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">มีการอัปเดต Morphe พร้อมใช้งาน</string>
     <string name="home_update_available_subtitle">มีเวอร์ชันใหม่พร้อมติดตั้ง</string>
@@ -54,6 +58,9 @@
     <string name="home_app_filter_uninstalled_description">แอปที่แพตช์ด้วย Morphe ซึ่งไม่ได้อยู่บนอุปกรณ์นี้แล้ว</string>
     <string name="home_app_filter_clones">โคลน</string>
     <string name="home_app_filter_clones_description">แอปที่สร้างด้วยชื่อแพ็กเกจของตัวเอง ติดตั้งเคียงข้างแอปต้นฉบับ</string>
+    <string name="home_app_grouping_all_apps_description">รายการหนึ่งที่มีทุกแอป</string>
+    <string name="home_app_grouping_sources_description">แอปภายใต้แหล่งที่มาของแพทช์ที่ให้บริการ</string>
+    <string name="home_app_grouping_custom_description">แอปในหมวดหมู่ที่คุณสร้าง</string>
     <string name="home_app_sort_manual_description">แตะแอปค้างไว้ แล้วแตะปุ่มจัดเรียงใหม่</string>
     <string name="home_app_sort_recommended">เรียงตามที่แนะนำ</string>
     <string name="home_app_sort_recommended_description">แอปที่ติดตั้งและตรึงไว้ก่อน</string>
@@ -146,7 +153,6 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">จัดการแหล่งที่มา</string>
     <string name="sources_search">ค้นหาแหล่งที่มาและแพตช์</string>
-    <string name="sources_sort_title">เรียงลำดับแหล่งที่มาของแพตช์</string>
     <string name="sources_sort_manual">จัดเรียงด้วยตนเอง</string>
     <string name="sources_sort_manual_hint">แตะค้างที่แหล่งข้อมูลเพื่อจัดเรียงใหม่</string>
     <string name="sources_sort_last_updated">ปรับปรุงล่าสุด</string>
@@ -158,12 +164,17 @@
     <string name="sources_management_report_issue">รายงานปัญหา</string>
     <string name="sources_management_failed_to_open_url">ไม่สามารถเปิด URL ได้</string>
     <string name="sources_apps">แอป</string>
-    <string name="sources_apps_description">แตะที่แอปเพื่อแยกออกจากแหล่งข้อมูลนี้หรือนำกลับมา หรือกดค้างเพื่อเลือกหลายรายการ แอปจะออกจากหน้าจอหลักเมื่อไม่มีแหล่งข้อมูลใดนำแอปนั้นกลับมา</string>
+    <string name="sources_apps_description">แอปที่ติ๊กมาจากแหล่งนี้ แตะแอปเพื่อไม่ต้องนำเข้ามา หรือนำกลับเข้ามา แอปจะออกจากหน้าจอหลักเมื่อไม่มีแหล่งใดนำเข้ามา ยกเว้นว่าคุณได้แพตช์มัน</string>
     <string name="sources_apps_brought">นำมาโดยแหล่งข้อมูลนี้</string>
     <string name="sources_apps_left_out">ไม่รวมอยู่ในแหล่งข้อมูลนี้</string>
-    <string name="sources_apps_leave_out">แยกออก</string>
-    <string name="sources_apps_leave_out_done">แยกออกแล้ว</string>
     <string name="sources_apps_bring_back">นำกลับมา</string>
+    <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
+    <string name="sources_apps_stays_patched">เก็บไว้เนื่องจากมีการแพตช์</string>
+    <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
+    <string name="sources_apps_new">ใหม่</string>
+    <string name="sources_apps_new_apps">เพิ่มแอปใหม่</string>
+    <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
+    <string name="sources_apps_new_apps_description">แอปที่เพิ่มเข้ามาภายหลังจะปรากฏบนหน้าจอหลัก</string>
     <string name="sources_management_prerelease_toggle">แพตช์ก่อนเปิดตัว</string>
     <string name="sources_management_prerelease_toggle_description">รับสิทธิ์เข้าถึงแพตช์ใหม่เวอร์ชันทดลองแต่เนิ่นๆ</string>
     <string name="sources_prerelease_warning_title">เปิดใช้แพตช์ก่อนเผยแพร่หรือไม่?</string>
@@ -208,7 +219,6 @@
     <string name="sources_dialog_url_invalid">URL ต้องชี้ไปยัง GitHub/GitLab repo หรือไฟล์ .json</string>
     <string name="sources_dialog_preinstalled">ติดตั้งล่วงหน้าแล้ว</string>
     <string name="sources_dialog_community">แพตช์ชุมชน</string>
-    <string name="sources_dialog_choose_apps">เลือกแอป</string>
     <string name="sources_dialog_choose_apps_description">เลือกว่าจะเก็บแอปใดของแหล่งข้อมูลนี้ไว้เมื่อแหล่งข้อมูลโหลดเสร็จ</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">แหล่งแพตช์ของบุคคลที่สาม</string>
@@ -451,7 +461,7 @@
     <string name="batch_patch_state_no_patches">ไม่มีแพตช์</string>
     <string name="batch_patch_policy_install">ติดตั้งเมื่อเสร็จสิ้น</string>
     <string name="batch_patch_policy_install_description">ติดตั้งแอปที่แพตช์ทุกแอปทันทีที่คิวเสร็จสิ้น ปิดจะเก็บ APK ไว้ในภายหลัง</string>
-    <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
+    <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_start">เริ่มต้น</string>
     <string name="batch_patch_stop_title">หยุดแพตช์กลุ่ม?</string>
     <string name="batch_patch_stop_description">แอปที่กำลังแพตช์อยู่ตอนนี้และทุกอย่างที่อยู่ในคิวจะถูกยกเลิก</string>
@@ -460,6 +470,10 @@
     <string name="batch_patch_install_failed">ติดตั้งล้มเหลว</string>
     <string name="batch_patch_in_progress">กำลังแพตช์กลุ่มอยู่แล้ว</string>
     <string name="batch_patch_nothing_outdated">แอปที่แพตช์ทั้งหมดเป็นเวอร์ชันล่าสุดแล้ว</string>
+    <string name="batch_queue_add_action">เพิ่มลงในคิว</string>
+    <string name="batch_queue_pending_subtitle">แตะเพื่อตรวจสอบและเริ่ม</string>
+    <string name="batch_queue_clear_title">ล้างคิว?</string>
+    <string name="batch_queue_clear_description">แอปทั้งหมดจะถูกนำออกจากรคิว</string>
     <string name="shortcut_repatch_short">แพตช์ซ้ำ</string>
     <string name="shortcut_repatch_long">แพตช์แอปที่ล้าสมัยซ้ำ</string>
     <string name="shortcut_check_updates_short">ตรวจสอบการอัปเดต</string>
@@ -757,7 +771,7 @@
     <string name="settings_appearance_pure_black">ดำสีบริสุทธิ์</string>
     <string name="settings_appearance_pure_black_description">ใช้พื้นหลังสีดำสนิท</string>
     <string name="settings_appearance_color_accents">สีของแอปและแหล่งที่มา</string>
-    <string name="settings_appearance_color_accents_description">ใช้สีเฉพาะของแต่ละแอปและแหล่งที่มาแทนสีเน้น</string>
+    <string name="settings_appearance_color_accents_description">ใช้สีของแต่ละแอปและแหล่งที่มาแทนสีเน้น</string>
     <string name="settings_appearance_outlines">โครงร่าง</string>
     <string name="settings_appearance_outlines_description">วาดเส้นขอบบาง ๆ รอบการ์ด แผง และปุ่ม</string>
     <!-- Settings - Appearance Tab - Language Selector -->
@@ -776,13 +790,11 @@
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">หน้าจอหลัก</string>
     <string name="settings_appearance_greeting_phrases">วลีทักทาย</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">แสดงข้อความทักทายบนหน้าจอหลัก</string>
-    <string name="settings_appearance_app_grouping">การจัดกลุ่มแอป</string>
-    <string name="settings_appearance_app_grouping_description">แสดงสวิตช์เพื่อจัดกลุ่มแอปตามแหล่งที่มาหรือหมวดหมู่</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">แสดงข้อความทักทาย</string>
     <string name="settings_appearance_repatch_notice">ประกาศการแพตช์ซ้ำ</string>
-    <string name="settings_appearance_repatch_notice_description">แสดงแบนเนอร์เมื่อแอปที่แพตช์แล้วสามารถแพตช์ซ้ำได้</string>
+    <string name="settings_appearance_repatch_notice_description">แสดงแบนเนอร์เมื่อแอปที่แพทช์แล้วสามารถแพทช์ซ้ำได้</string>
     <string name="settings_appearance_sort_button">ปุ่มเรียงลำดับและกรอง</string>
-    <string name="settings_appearance_sort_button_description">แสดงปุ่มเรียงลำดับและกรองบนหน้าจอหลัก</string>
+    <string name="settings_appearance_sort_button_description">แสดงปุ่มเพื่อจัดเรียงและกรองแอป</string>
     <string name="settings_appearance_app_card_colors">สีการ์ดแอป</string>
     <string name="settings_appearance_app_card_colors_default">ค่าเริ่มต้น</string>
     <string name="settings_appearance_app_card_colors_default_description">กำหนดสีให้บันเดิลของแต่ละแอป</string>
@@ -838,7 +850,7 @@
 
 แพตช์ไม่ได้รับผลกระทบ: เปิดใช้งานแพตช์ก่อนเผยแพร่สำหรับแต่ละแหล่งที่มาในรายการแหล่งที่มาของแพตช์"</string>
     <string name="settings_advanced_updates_allow_metered">อัปเดตข้อมูลมือถือ</string>
-    <string name="settings_advanced_updates_allow_metered_description">อนุญาตให้ Morphe และการอัปเดตแพตช์ดาวน์โหลดผ่านข้อมูลมือถือได้</string>
+    <string name="settings_advanced_updates_allow_metered_description">ดาวน์โหลดการอัปเดต Morphe และการแพทช์ผ่านข้อมูลมือถือ</string>
     <string name="settings_advanced_updates_background_notifications">การแจ้งเตือนอัปเดตพื้นหลัง</string>
     <string name="settings_advanced_updates_background_notifications_description">ตรวจสอบการอัปเดตในพื้นหลังตามเวลาที่กำหนดและแจ้งให้ทราบเมื่อมีการอัปเดตใหม่</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">รับการแจ้งเตือนแบบพุชสำหรับการเปิดตัวใหม่ๆ แม้ว่าแอปจะถูกปิดไว้</string>
@@ -853,7 +865,7 @@
     <string name="settings_advanced_update_interval_chip_subtitle">ความถี่การตรวจสอบพื้นหลัง</string>
     <string name="settings_advanced_update_interval_battery_warning">การตรวจสอบพื้นหลังอาจไม่ทำงานได้อย่างมั่นคงบนบางอุปกรณ์. ผู้ผลิตเช่น Xiaomi, Huawei, Samsung, และ OnePlus บ่อยครั้งจำกัดขั้นตอนการทำงานพื้นหลังอย่างเข้มงวดเพื่อประหยัดแบตเตอรี่</string>
     <string name="settings_advanced_external_batch_patch">อนุญาตให้ทริกเกอร์ภายนอก</string>
-    <string name="settings_advanced_external_batch_patch_description">อนุญาตให้แอปอัตโนมัติเริ่มการแพตช์แบบกลุ่มผ่าน intent</string>
+    <string name="settings_advanced_external_batch_patch_description">อนุญาตให้แอปอัตโนมัติเริ่มการแพทช์แบบกลุ่ม</string>
     <string name="external_batch_patch_title">เริ่มแพตช์กลุ่ม?</string>
     <string name="external_batch_patch_description">%s ต้องการให้ Morphe แพตช์และติดตั้งแอป</string>
     <string name="external_batch_patch_trust_caller">อนุญาตแอปนี้เสมอ</string>
@@ -877,11 +889,11 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">การตั้งค่าโหมดผู้เชี่ยวชาญ</string>
     <string name="settings_advanced_expert_mode">โหมดเชี่ยวชาญ</string>
-    <string name="settings_advanced_expert_mode_description">เปิดใช้งานการตั้งค่าการแพตช์และการปรับแต่งขั้นสูงของ Morphe</string>
+    <string name="settings_advanced_expert_mode_description">เปิดใช้งานการตั้งค่าการแพทช์ขั้นสูงและตัวเลือกการแพทช์</string>
     <string name="settings_advanced_expert_mode_dialog_title">เปิดใช้งานโหมดเชี่ยวชาญ?</string>
     <string name="settings_advanced_expert_mode_dialog_message">โหมดเชี่ยวชาญให้ควบคุมการนำเข้าแปลงมากขึ้น แต่การตั้งค่าค่าไม่ถูกต้องในโหมดเชี่ยวชาญอาจทำให้แอปพลิเคชันไม่สามารถใช้งานได้</string>
     <string name="settings_advanced_strip_unused_libs">ปรับประสิทธิภาพสำหรับสถาปัตยกรรมของอุปกรณ์</string>
-    <string name="settings_advanced_strip_unused_libs_description">ลบไลบรารีสถาปัตยกรรม CPU ที่ไม่ได้ใช้งานและโมดูล APK ที่แยกออก</string>
+    <string name="settings_advanced_strip_unused_libs_description">ลบไลบรารีเนทีฟที่ไม่ได้ใช้และการแยก APK</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_description">จำเป็นสำหรับแหล่งขอร้องข้อมูล</string>
     <string name="settings_advanced_github_pat_configured">โทเค็นถูกกำหนดค่าแล้ว</string>
@@ -1012,13 +1024,13 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_risk">Play Store อาจมีอัปเดตสำหรับแอปที่ปรับแก้แล้ว การติดตั้งอัปเดตนั้นจะเขียนทับ APK ที่ปรับแก้แล้วด้วยเวอร์ชันเดิม และลบการปรับแก้ หากได้รับการแจ้งให้อัปเดต ให้แตะเมนูจุดสามจุดบนหน้าแอป Play Store แล้วเลือก \"ปิดการอัปเดต\"</string>
     <string name="installer_play_store_warning_continue">ฉันเข้าใจแล้ว ดำเนินการต่อ</string>
     <string name="installer_play_store_mode">ติดตั้งเป็น Play Store</string>
-    <string name="installer_play_store_mode_description">บันทึก Google Play Store เป็นแหล่งที่มาของการติดตั้งสำหรับวิธีการติดตั้งนี้</string>
+    <string name="installer_play_store_mode_description">กำหนด Google Play Store เป็นแหล่งติดตั้ง</string>
     <string name="settings_prompt_installer_on_install">แจ้งเตือนการเลือกตัวติดตั้ง</string>
-    <string name="settings_prompt_installer_on_install_description">แสดงกล่องโต้ตอบการเลือกตัวติดตั้งทุกครั้งที่มีการติดตั้งแอปที่แพตช์แล้ว</string>
+    <string name="settings_prompt_installer_on_install_description">ถามว่าจะใช้อะไรมาก่อตั้งสำหรับทุกการติดตั้ง</string>
     <string name="settings_auto_install_with_shizuku">ติดตั้งอัตโนมัติหลังจากการแพตช์</string>
     <string name="settings_auto_install_with_shizuku_description">ติดตั้ง APK ที่ผ่านการแพตช์ทันทีที่การแพตช์เสร็จสิ้น</string>
     <string name="settings_auto_uninstall_with_shizuku">ถอนการติดตั้งอัตโนมัติเมื่อเกิดข้อขัดแย้ง</string>
-    <string name="settings_auto_uninstall_with_shizuku_description">เมื่อติดตั้งอัตโนมัติด้วย Shizuku ให้ถอนการติดตั้งแอปที่มีอยู่ก่อนหาก Android รายงานว่ามีข้อขัดแย้งของลายเซ็น ซึ่งอาจลบข้อมูลแอปได้</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">ลบการติดตั้งแอปที่มีอยู่เมื่อมีการขัดแย้งของลายเซ็น สิ่งนี้อาจลบข้อมูลแอป</string>
     <string name="settings_auto_uninstall_warning_title">เปิดใช้งานการถอนการติดตั้งอัตโนมัติหรือไม่</string>
     <string name="settings_auto_uninstall_warning_message">หาก Android รายงานข้อขัดแย้งของลายเซ็นระหว่างการติดตั้งอัตโนมัติของ Shizuku, Morphe จะถอนการติดตั้งแอปที่มีอยู่ก่อนที่จะติดตั้ง APK ที่แพตช์แล้ว</string>
     <string name="settings_auto_uninstall_warning_risk">ซึ่งอาจลบข้อมูลแอปได้ หาก APK ที่แพตช์แล้วไม่สามารถติดตั้งได้หลังจากถอนการติดตั้ง แอปก่อนหน้านี้อาจหายไปแล้ว</string>
@@ -1057,13 +1069,13 @@ morphe_header_custom_dark.png
     <string name="settings_system_memory_limit_warning">ขีดจำกัดหน่วยความจำต่ำอาจทำให้เกิดความล้มเหลวเมื่อทำการแพตช์แอปขนาดใหญ่</string>
     <string name="settings_system_memory_limit_high_warning">ขีดจำกัดหน่วยความจำที่สูงอาจทำให้การแพตช์ช้าลงมากบนอุปกรณ์บางเครื่อง ให้เพิ่มเฉพาะเมื่อการแพตช์ล้มเหลวที่ขีดจำกัดต่ำกว่า</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB จำกัด</string>
-    <string name="settings_system_process_runtime_disabled_description">คลิกเพื่อตั้งค่า</string>
+    <string name="settings_system_process_runtime_disabled_description">แตะเพื่อค่าปรับ</string>
     <string name="settings_system_process_runtime_description_not_available">คุณสมบัติขั้นตอนนี้ต้องการ Android 11 หรือเวอร์ชันที่สูงกว่า</string>
     <string name="settings_system_patcher_completion_sound">เสียงเมื่อเสร็จสิ้น</string>
     <string name="settings_system_patcher_completion_sound_description">เล่นเสียงที่แตกต่างเมื่อการแพตช์เสร็จสมบูรณ์ ไม่ว่าจะเป็นความสำเร็จหรือความล้มเหลว</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">การแจ้งเตือน</string>
-    <string name="settings_system_notifications_description">กำหนดการแจ้งเตือนพื้นหลังและเสียงเมื่อเสร็จสิ้น</string>
+    <string name="settings_system_notifications_description">ตั้งค่าการแจ้งเตือนพื้นหลังและเสียงเสร็จสิ้น</string>
     <string name="settings_system_notifications_success_sound">เสียงเมื่อสำเร็จ</string>
     <string name="settings_system_notifications_error_sound">เสียงแจ้งเตือนความล้มเหลว</string>
     <string name="settings_system_notifications_sound_default">ค่าเริ่มต้น</string>
@@ -1075,7 +1087,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">นำเข้า &amp; ส่งออก</string>
     <string name="settings_system_signing_key">คีย์เซ็นชื่อ</string>
-    <string name="settings_system_signing_key_description">สำรองและกู้คืนคีย์ที่ใช้เซ็นชื่อแอปที่แพตช์แล้ว</string>
+    <string name="settings_system_signing_key_description">สำรองหรือเรียกคืนคีย์ที่ใช้เซ็นแอปที่แพทช์</string>
     <string name="settings_system_signing_key_dialog_description">แอปทุกตัวที่ Morphe แพตช์จะเซ็นชื่อด้วยคีย์นี้ เก็บสำเนาไว้ เพราะหากไม่มีคีย์นี้ แอปที่แพตช์แล้วจะอัปเดตได้ก็ต่อเมื่อถอนการติดตั้งออกก่อนเท่านั้น</string>
     <string name="settings_system_signing_key_missing">Morphe จะสร้างคีย์ขึ้นมาเมื่อคุณแพตช์ครั้งแรก</string>
     <string name="settings_system_signing_key_created">สร้างเมื่อ %s</string>
@@ -1131,7 +1143,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_export_zip_failed">ไม่สามารถส่งออก APK ที่เลือกได้</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">การจัดการพื้นที่เก็บข้อมูล</string>
-    <string name="settings_system_storage_management_description">ตรวจสอบการใช้งานดิสก์และล้างไฟล์ที่แคชไว้</string>
+    <string name="settings_system_storage_management_description">แสดงการใช้งานดิสก์และล้างไฟล์แคช</string>
     <string name="settings_system_storage_keystore_title">คีย์สโตร์การลงชื่อ</string>
     <string name="settings_system_storage_app_data_title">ข้อมูลแอป</string>
     <string name="settings_system_storage_patch_bundles_title">บันเดิลแพตช์</string>
@@ -1197,7 +1209,7 @@ morphe_header_custom_dark.png
     <string name="copy_selection_same_source">แหล่งที่มาเดียวกัน</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">ตัวเลือกไฟล์แบบกำหนดเอง</string>
-    <string name="settings_system_custom_file_picker_description">เรียกดูพื้นที่จัดเก็บด้วยตัวเลือกไฟล์ในตัวของ Morphe แทนค่าเริ่มต้นของระบบ</string>
+    <string name="settings_system_custom_file_picker_description">ใช้ตัวเลือกไฟล์ในตัวของ Morphe แทนระบบ</string>
     <!-- Settings - System Tab - APK download helper -->
     <string name="settings_system_apk_download_helper">ตัวช่วยดาวน์โหลด APK</string>
     <string name="settings_system_apk_download_helper_trusted_count">ไว้วางใจแล้ว: %1$d จาก %2$d</string>
@@ -1248,6 +1260,7 @@ morphe_header_custom_dark.png
     <string name="no">ไม่</string>
     <string name="all">ทั้งหมด</string>
     <string name="filter">ตัวกรอง</string>
+    <string name="group">กลุ่ม</string>
     <string name="reset">รีเซ็ต</string>
     <string name="reset_all">รีเซ็ตทั้งหมด</string>
     <string name="apply">นำไปใช้</string>
@@ -1315,6 +1328,10 @@ morphe_header_custom_dark.png
     <string name="available">พร้อมใช้งาน</string>
     <string name="continue_">ดำเนินการต่อ</string>
     <string name="version">เวอร์ชัน</string>
+    <!-- Who made a patch source, as a field label -->
+    <string name="author">ผู้สร้าง</string>
+    <!-- A file a patch source is added from, as a field label -->
+    <string name="file">ไฟล์</string>
     <string name="clone">โคลน</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">แพตช์</string>

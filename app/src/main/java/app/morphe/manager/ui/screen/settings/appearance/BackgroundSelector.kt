@@ -6,20 +6,16 @@
 package app.morphe.manager.ui.screen.settings.appearance
 
 import android.text.format.DateFormat
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.ui.screen.shared.backgrounds.LocalBackdropInDialog
 import app.morphe.manager.ui.theme.SeasonalEvent
 import app.morphe.manager.ui.theme.backgroundOver
 import app.morphe.manager.ui.viewmodel.RandomInterval
@@ -58,7 +54,7 @@ fun BackgroundSettingsItem(
  *        as the app does, with a notice of how long it stays.
  */
 @Composable
-fun BackgroundPickerDialog(
+fun DialogHostScope.BackgroundPickerDialog(
     selectedBackground: BackgroundType,
     onBackgroundSelected: (BackgroundType) -> Unit,
     selectedInterval: RandomInterval,
@@ -107,30 +103,24 @@ fun BackgroundPickerDialog(
             )
         },
         backdrop = {
-            CompositionLocalProvider(LocalBackdropInDialog provides true) {
-                AnimatedBackground(
-                    type = shownBackground,
-                    resolvedType = resolvedRandomBackground,
-                    enableParallax = enableParallax
-                )
-            }
+            AnimatedBackground(
+                type = shownBackground,
+                resolvedType = resolvedRandomBackground,
+                enableParallax = enableParallax
+            )
         }
     ) {
         // Spacing lives inside the blocks that come and go rather than between them, where a
         // spacedBy gap would vanish in one frame while the surrounding block is still shrinking
         Column {
             // The dialog shows what the app shows, so a running event explains why that is not the pick
-            AnimatedVisibility(
-                visible = shownBackground != selectedBackground && seasonalNotice != null,
-                enter = Animations.expandFadeEnter,
-                exit = Animations.shrinkFadeExit
-            ) {
+            FoldingVisibility(visible = shownBackground != selectedBackground && seasonalNotice != null) {
                 Notice(
                     text = seasonalNotice.orEmpty(),
                     icon = Icons.Outlined.Celebration,
                     tone = SemanticTone.Primary,
                     density = NoticeDensity.Compact,
-                    modifier = Modifier.padding(bottom = 8.dp)
+                    modifier = Modifier.padding(bottom = Defaults.SpaceSmall)
                 )
             }
 
@@ -146,41 +136,34 @@ fun BackgroundPickerDialog(
             }
 
             // Settings of the pick itself, so NONE, having none, leaves the divider out as well
-            AnimatedVisibility(
-                visible = selectedBackground != BackgroundType.NONE,
-                enter = Animations.expandFadeEnter,
-                exit = Animations.shrinkFadeExit
-            ) {
-                Column(modifier = Modifier.padding(top = 8.dp)) {
+            FoldingVisibility(visible = selectedBackground != BackgroundType.NONE) {
+                Column(modifier = Modifier.padding(top = Defaults.SpaceSmall)) {
                     SettingsDivider(
-                        modifier = Modifier.padding(vertical = 4.dp),
+                        modifier = Modifier.padding(vertical = Defaults.SpaceExtraSmall),
                         fullWidth = true
                     )
 
                     // How often RANDOM changes, shown only while it is the pick
-                    AnimatedVisibility(
-                        visible = selectedBackground == BackgroundType.RANDOM,
-                        enter = Animations.expandFadeEnter,
-                        exit = Animations.shrinkFadeExit
-                    ) {
+                    FoldingVisibility(visible = selectedBackground == BackgroundType.RANDOM) {
                         // Vertical tiles so the interval labels never truncate
-                        OptionGrid(
+                        OptionGroup(
                             items = RandomInterval.entries,
-                            columns = RandomInterval.entries.size,
-                            modifier = Modifier.padding(top = 8.dp)
-                        ) { interval, itemModifier ->
+                            modifier = Modifier.padding(top = Defaults.SpaceSmall)
+                        ) { interval, shape, interactionSource, itemModifier ->
                             ModernIconOptionCard(
                                 selected = selectedInterval == interval,
                                 onClick = { onIntervalSelected(interval) },
                                 icon = intervalIcon(interval),
                                 label = stringResource(interval.labelResId),
                                 modifier = itemModifier,
-                                compact = true
+                                compact = true,
+                                shape = shape,
+                                interactionSource = interactionSource
                             )
                         }
                     }
 
-                    SettingsGroup(modifier = Modifier.padding(top = 8.dp)) {
+                    SettingsGroup(modifier = Modifier.padding(top = Defaults.SpaceSmall)) {
                         SettingsSwitchItem(
                             title = stringResource(R.string.settings_appearance_parallax_effect),
                             subtitle = stringResource(R.string.settings_appearance_parallax_effect_description),
@@ -194,7 +177,7 @@ fun BackgroundPickerDialog(
 
             // Kept out of the block above: an event also brings its own greetings, which a
             // background of NONE does not switch off
-            SettingsGroup(modifier = Modifier.padding(top = 8.dp)) {
+            SettingsGroup(modifier = Modifier.padding(top = Defaults.SpaceSmall)) {
                 SettingsSwitchItem(
                     title = stringResource(R.string.settings_appearance_seasonal_themes),
                     subtitle = stringResource(R.string.settings_appearance_seasonal_themes_description),
@@ -209,7 +192,7 @@ fun BackgroundPickerDialog(
 
 private fun backgroundIcon(type: BackgroundType): ImageVector = when (type) {
     BackgroundType.CIRCLES   -> Icons.Outlined.Circle
-    BackgroundType.RINGS     -> Icons.Outlined.RadioButtonUnchecked
+    BackgroundType.RINGS     -> Icons.Outlined.Adjust
     BackgroundType.MESH      -> Icons.Outlined.Grid3x3
     BackgroundType.SPACE     -> Icons.Outlined.AutoAwesome
     BackgroundType.SHAPES    -> Icons.Outlined.Pentagon

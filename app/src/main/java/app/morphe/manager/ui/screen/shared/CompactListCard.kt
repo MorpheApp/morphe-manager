@@ -24,10 +24,10 @@ val CompactCardIconSize = 36.dp
 /** Size of a glyph drawn on a [CompactCardIconTile]. */
 val CompactCardGlyphSize = 20.dp
 
-/** Gap between the [CompactListCard]s of a list. */
-val CompactCardSpacing = 6.dp
+/** Gap between the [CompactListCard]s of a list, closer than full cards as they are short. */
+val CompactCardSpacing = Defaults.SpaceSmall
 
-private val CompactCardPadding = PaddingValues(horizontal = 12.dp, vertical = 10.dp)
+private val CompactCardPadding = PaddingValues(Defaults.SpaceMedium)
 
 /**
  * Card of a long list to pick one entry from, the one patch cards sit on, laying out a picture
@@ -52,7 +52,7 @@ fun CompactListCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(CompactCardPadding),
-            horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing),
+            horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium),
             verticalAlignment = Alignment.CenterVertically,
             content = content
         )
@@ -72,7 +72,7 @@ fun CompactCardIconTile(
     Box(
         modifier = Modifier
             .size(CompactCardIconSize)
-            .background(containerColor, RoundedCornerShape(Defaults.CompactCornerRadius)),
+            .background(containerColor, RoundedCornerShape(Defaults.CornerMedium)),
         contentAlignment = Alignment.Center
     ) {
         CompositionLocalProvider(LocalContentColor provides contentColor) {

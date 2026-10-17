@@ -17,6 +17,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
 import app.morphe.manager.ui.screen.shared.FullscreenDialogs
+import app.morphe.manager.ui.screen.shared.isInDialogWindow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,12 +33,6 @@ private const val TILT_TARGET_THRESHOLD = 0.02f
 internal const val BACKGROUND_STEP_INTERVAL_MS = 16f
 
 /**
- * True for a background drawn inside a full-screen dialog as its own backdrop, such as the preview
- * of the background picker. Nothing covers that one, so it keeps animating while the dialog is up.
- */
-val LocalBackdropInDialog = staticCompositionLocalOf { false }
-
-/**
  * Runs [frameLoop] for as long as the host stays resumed and nothing opaque covers it, cancelling
  * the moment either stops holding. A background left ticking behind the lock screen, another
  * activity or a full-screen dialog keeps the frame clock awake and repaints the canvas for nobody.
@@ -47,7 +42,8 @@ val LocalBackdropInDialog = staticCompositionLocalOf { false }
 @Composable
 fun AnimationFrameEffect(frameLoop: suspend CoroutineScope.() -> Unit) {
     val lifecycleOwner = LocalLifecycleOwner.current
-    val covered = FullscreenDialogs.anyOpen && !LocalBackdropInDialog.current
+    // A dialog's own backdrop, such as the background picker's preview, is what the dialog shows
+    val covered = FullscreenDialogs.anyOpen && !isInDialogWindow()
 
     LaunchedEffect(lifecycleOwner, covered) {
         if (covered) return@LaunchedEffect

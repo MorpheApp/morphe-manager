@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.patcher
 
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -86,7 +85,7 @@ import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.milliseconds
 
 /** Inset every element inside a patcher card keeps from the edge of the card carrying it. */
-internal val PatcherCardPadding = 10.dp
+internal val PatcherCardPadding = Defaults.SpaceMedium
 
 /** What a card's own margin and the surrounding list each contribute to that same inset. */
 internal val PatcherCardMargin = PatcherCardPadding / 2
@@ -498,7 +497,7 @@ fun ExpertPatchingInProgress(
 
                         header()
 
-                        Spacer(Modifier.height(12.dp))
+                        Spacer(Modifier.height(Defaults.SpaceMedium))
                     }
 
                     // Action bar inside left column
@@ -521,7 +520,7 @@ fun ExpertPatchingInProgress(
                     .padding(horizontal = windowSize.contentPadding)
                     // Only enough to clear the status bar: the screen starts at the very top and
                     // a queue header brings padding of its own
-                    .padding(top = Defaults.ContentPaddingSmall),
+                    .padding(top = Defaults.SpaceSmall),
                 verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing)
             ) {
                 queueHeader?.invoke()
@@ -538,9 +537,9 @@ fun ExpertPatchingInProgress(
 
         // Portrait-only: action bar below content
         if (!landscape) {
-            Spacer(Modifier.height(12.dp))
+            Spacer(Modifier.height(Defaults.SpaceMedium))
 
-            actionBar(Defaults.ContentPadding)
+            actionBar(Defaults.SpaceLarge)
         }
     }
 }
@@ -574,8 +573,8 @@ private fun ExpertProgressHeader(
         verticalArrangement = Arrangement.spacedBy(rememberWindowSize().itemSpacing)
     ) {
         // Screen name, live step and both counters read as one block, with the bar closing it
-        Column(verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)) {
-            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        Column(verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)) {
+            Column(verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)) {
                 if (showScreenLabel) {
                     // Names what is being patched, and falls back to the screen's own name for a
                     // package no source can put a label to
@@ -591,24 +590,20 @@ private fun ExpertProgressHeader(
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
+                    horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    AnimatedContent(
-                        targetState = currentStep?.name,
+                    CrossfadeText(
+                        text = currentStep?.name ?: stringResource(R.string.patcher_success_title),
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.SemiBold,
+                        color = usableAppAccent(accentColor) ?: MaterialTheme.colorScheme.primary,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.weight(1f),
                         transitionSpec = Animations.fadeCrossfade(300),
-                        label = "expert_step_name",
-                        modifier = Modifier.weight(1f)
-                    ) { stepName ->
-                        Text(
-                            text = stepName ?: stringResource(R.string.patcher_success_title),
-                            style = MaterialTheme.typography.labelLarge,
-                            fontWeight = FontWeight.SemiBold,
-                            color = usableAppAccent(accentColor) ?: MaterialTheme.colorScheme.primary,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
+                        label = "expert_step_name"
+                    )
 
                     if (total > 0) {
                         // A finished run wears the same success tone as the success card
@@ -679,7 +674,7 @@ private fun ExpertLogPanel(
 
     Surface(
         modifier = modifier,
-        shape = RoundedCornerShape(Defaults.CardCornerRadius),
+        shape = RoundedCornerShape(Defaults.CornerLarge),
         color = MaterialTheme.colorScheme.surface,
         tonalElevation = 2.dp,
         border = CardBorder.of(appAccentBorder(appAccent))
@@ -733,7 +728,7 @@ private fun ExpertLogPanel(
                                     ) {
                                         Column(
                                             horizontalAlignment = Alignment.CenterHorizontally,
-                                            verticalArrangement = Arrangement.spacedBy(10.dp)
+                                            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
                                         ) {
                                             // Nothing is going to arrive for a run whose log died
                                             // with its process, so the live dot would be a lie
@@ -808,7 +803,7 @@ private fun PatcherInfoCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = PatcherCardPadding, vertical = PatcherCardMargin),
-        shape = RoundedCornerShape(Defaults.CompactCornerRadius),
+        shape = RoundedCornerShape(Defaults.CornerMedium),
         color = bgColor,
         tonalElevation = 0.dp,
         border = CardBorder.tinted(accentColor)
@@ -818,7 +813,7 @@ private fun PatcherInfoCard(
                 .fillMaxWidth()
                 .padding(PatcherCardPadding),
             // Tight, because these cards carry a lot of short fields and are read at a glance
-            verticalArrangement = Arrangement.spacedBy(7.dp)
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
         ) {
             // Header row: title + optional badge
             Row(
@@ -834,7 +829,7 @@ private fun PatcherInfoCard(
                 )
                 if (badge != null) {
                     Surface(
-                        shape = RoundedCornerShape(4.dp),
+                        shape = RoundedCornerShape(Defaults.CornerExtraSmall),
                         color = accentColor.copy(alpha = 0.18f)
                     ) {
                         Text(
@@ -842,7 +837,7 @@ private fun PatcherInfoCard(
                             style = MaterialTheme.typography.labelSmall,
                             fontWeight = FontWeight.Bold,
                             color = accentColor,
-                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
+                            modifier = Modifier.padding(horizontal = Defaults.SpaceSmall, vertical = 2.dp)
                         )
                     }
                 }
@@ -1051,7 +1046,7 @@ private fun SuccessSummaryCard(item: LogItem.SuccessSummary) {
 private fun BannerFieldRow(content: @Composable RowScope.() -> Unit) {
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium),
         content = content
     )
 }
@@ -1100,17 +1095,17 @@ private fun LogEntryRow(level: LogLevel, message: String) {
             .fillMaxWidth()
             .then(if (colors.rowBg != Color.Unspecified) Modifier.background(colors.rowBg) else Modifier)
             .padding(horizontal = PatcherCardPadding, vertical = PatcherCardMargin),
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
         verticalAlignment = Alignment.Top
     ) {
-        Surface(shape = RoundedCornerShape(4.dp), color = colors.badgeBg) {
+        Surface(shape = RoundedCornerShape(Defaults.CornerExtraSmall), color = colors.badgeBg) {
             Text(
                 text = level.logBadge,
                 style = MaterialTheme.typography.labelSmall,
                 fontFamily = FontFamily.Monospace,
                 fontWeight = FontWeight.Bold,
                 color = colors.text,
-                modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+                modifier = Modifier.padding(horizontal = Defaults.SpaceExtraSmall, vertical = 2.dp),
                 fontSize = 10.sp
             )
         }

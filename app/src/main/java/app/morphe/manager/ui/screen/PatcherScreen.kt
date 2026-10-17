@@ -19,29 +19,27 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
-import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.links.AppLinksManager
 import app.morphe.manager.domain.links.AppLinksStatus
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.patcher.patch.installerTypeFor
 import app.morphe.manager.ui.model.RenameWarning
-import app.morphe.manager.ui.model.State
 import app.morphe.manager.ui.screen.home.AppLinksDialog
 import app.morphe.manager.ui.screen.patcher.*
 import app.morphe.manager.ui.screen.patcher.game.MiniGameState
-import app.morphe.manager.ui.screen.settings.system.InstallerSelectionDialog
-import app.morphe.manager.ui.screen.settings.system.InstallerUnavailableDialog
+import app.morphe.manager.ui.screen.settings.system.InstallerFlowDialogs
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import app.morphe.manager.util.APK_MIMETYPE
 import app.morphe.manager.util.EventEffect
+import app.morphe.manager.util.shareApks
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
@@ -61,7 +59,6 @@ private data class HeldInstall(
 fun PatcherScreen(
     onBackClick: () -> Unit,
     patcherViewModel: PatcherViewModel,
-    usingMountInstall: Boolean,
     installViewModel: InstallViewModel = koinViewModel(),
     prefs: PreferencesManager = koinInject(),
     onBackgroundSpeedChange: (Float) -> Unit = {},
@@ -75,7 +72,6 @@ fun PatcherScreen(
         PatcherScreenContent(
             onBackClick = onBackClick,
             patcherViewModel = patcherViewModel,
-            usingMountInstall = usingMountInstall,
             installViewModel = installViewModel,
             prefs = prefs,
             onBackgroundSpeedChange = onBackgroundSpeedChange,
@@ -91,7 +87,6 @@ fun PatcherScreen(
 private fun PatcherScreenContent(
     onBackClick: () -> Unit,
     patcherViewModel: PatcherViewModel,
-    usingMountInstall: Boolean,
     installViewModel: InstallViewModel,
     prefs: PreferencesManager,
     onBackgroundSpeedChange: (Float) -> Unit,
@@ -101,11 +96,15 @@ private fun PatcherScreenContent(
     onChangePatches: () -> Unit
 ) {
     val view = LocalView.current
+    val context = LocalContext.current
+    val usingMountInstall = patcherViewModel.usingMountInstall
 
     val patcherSucceeded by patcherViewModel.patcherSucceeded.collectAsStateWithLifecycle()
 
-    // Remember patcher state
-    val state = rememberPatcherScreenState(patcherViewModel)
+    // The error dialog open, if any, kept through a rotation or a font change
+    var shownFailure by rememberSaveable { mutableStateOf<PatcherFailure?>(null) }
+    var errorInfo by remember { mutableStateOf<PatcherErrorInfo?>(null) }
+    var showCancelDialog by rememberSaveable { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
     val miniGameState = remember { MiniGameState(prefs, scope) }
 
@@ -150,10 +149,6 @@ private fun PatcherScreenContent(
     // Get output file from viewModel
     val outputFile = patcherViewModel.outputFile
 
-    val autoInstallAfterPatching by prefs.autoInstallAfterPatching.getAsState()
-    val autoUninstallWithShizuku by prefs.autoUninstallWithShizuku.getAsState()
-    val promptInstallerOnInstall by prefs.promptInstallerOnInstall.getAsState()
-
     // A build that answers to a package name of its own installs beside the app instead of
     // updating it, so every install path waits here until the user has been told once
     var renameConfirmed by rememberSaveable { mutableStateOf(false) }
@@ -171,8 +166,9 @@ private fun PatcherScreenContent(
         }
     }
 
-    // What the success screen's button starts: a mount, or an install that checks for a rename first
-    fun installPatchedApp() {
+    // A mount, or an install that checks for a rename first. Started on its own after patching,
+    // an install clears a conflict by itself, since nobody is there to answer for it
+    suspend fun installPatchedApp(automatic: Boolean) {
         if (usingMountInstall) {
             installViewModel.installMount(
                 outputFile = outputFile,
@@ -182,14 +178,13 @@ private fun PatcherScreenContent(
                 onPersistApp = patcherViewModel::persistPatchedApp
             )
         } else {
-            scope.launch {
-                startInstall {
-                    installViewModel.install(
-                        outputFile = outputFile,
-                        originalPackageName = patcherViewModel.packageName,
-                        onPersistApp = patcherViewModel::persistPatchedApp
-                    )
-                }
+            startInstall {
+                installViewModel.install(
+                    outputFile = outputFile,
+                    originalPackageName = patcherViewModel.packageName,
+                    onPersistApp = patcherViewModel::persistPatchedApp,
+                    autoUninstallOnConflict = automatic
+                )
             }
         }
     }
@@ -198,16 +193,8 @@ private fun PatcherScreenContent(
     // in the foreground when patching completes. UI-only guards checked here.
     LaunchedEffect(Unit) {
         patcherViewModel.autoInstallEvent.collect {
-            if (usingMountInstall) return@collect
             if (installViewModel.installState !is InstallViewModel.InstallState.Ready) return@collect
-            startInstall {
-                installViewModel.install(
-                    outputFile = outputFile,
-                    originalPackageName = patcherViewModel.packageName,
-                    onPersistApp = patcherViewModel::persistPatchedApp,
-                    autoUninstallOnConflict = true
-                )
-            }
+            installPatchedApp(automatic = true)
             // The installer owns the state from here, and an attempt that ends in nothing must
             // not leave the screen claiming an install forever
             patcherViewModel.autoInstallHandedOff()
@@ -217,22 +204,22 @@ private fun PatcherScreenContent(
     val patchesProgress = patcherViewModel.patchesProgress
     val unknownErrorText = stringResource(R.string.patcher_unknown_error)
 
-    // Monitor for patching errors (not installation errors)
-    LaunchedEffect(patcherSucceeded) {
-        if (patcherSucceeded == false && !state.hasPatchingError) {
-            state.hasPatchingError = true
-            val steps = patcherViewModel.steps
-            val failedStep = steps.firstOrNull { it.state == State.FAILED }
-            state.errorMessage = failedStep?.message.orEmpty()
-            state.errorInfo = patcherViewModel.buildErrorInfo()
-            state.shownFailure = PatcherFailure.PATCHING
-        }
+    // A failed run opens the error dialog once. The event is not heard again by a recreated
+    // screen, so a rotation or a font change leaves a dismissed dialog closed
+    EventEffect(flow = patcherViewModel.patchingFailedEvent) {
+        errorInfo = patcherViewModel.buildErrorInfo()
+        shownFailure = PatcherFailure.PATCHING
+    }
+
+    // The diagnostics are not kept through a recreated screen, so a dialog left open reads them again
+    LaunchedEffect(shownFailure) {
+        if (shownFailure != null && errorInfo == null) errorInfo = patcherViewModel.buildErrorInfo()
     }
 
     BackHandler {
         if (patcherViewModel.isPatching) {
             // Show cancel dialog if patching is in progress
-            state.showCancelDialog = true
+            showCancelDialog = true
         } else {
             // Allow normal back navigation if patching is complete or failed
             onBackClick()
@@ -281,8 +268,7 @@ private fun PatcherScreenContent(
         }
     }
 
-    val shownAppLinksStatus = appLinksStatus
-    if (showAppLinksDialog && shownAppLinksStatus?.hasSupportedLinks == true) {
+    DialogHost(target = appLinksStatus?.takeIf { showAppLinksDialog && it.hasSupportedLinks }) { shownAppLinksStatus ->
         AppLinksDialog(
             appLabel = patcherViewModel.exportMetadata?.appName ?: targetInstalledPackage,
             appInfo = null,
@@ -294,7 +280,7 @@ private fun PatcherScreenContent(
         )
     }
 
-    if (showInstalledSourceConflictDialog.value) {
+    DialogHost(visible = showInstalledSourceConflictDialog.value) {
         val conflict = installState as? InstallViewModel.InstallState.Conflict
 
         SignatureConflictDialog(
@@ -338,7 +324,7 @@ private fun PatcherScreenContent(
     }
 
     // Activity prompt dialog
-    patcherViewModel.activityPromptDialog?.let { title ->
+    DialogHost(target = patcherViewModel.activityPromptDialog) { title ->
         ConfirmDialog(
             title = title,
             message = stringResource(R.string.plugin_activity_dialog_body),
@@ -350,24 +336,24 @@ private fun PatcherScreenContent(
     }
 
     // Cancel patching confirmation dialog
-    if (state.showCancelDialog) {
+    DialogHost(visible = showCancelDialog) {
         ConfirmDialog(
             title = stringResource(R.string.patcher_stop_confirm_title),
             message = stringResource(R.string.patcher_stop_confirm_description),
             primaryText = stringResource(R.string.yes),
             secondaryText = stringResource(R.string.no),
             onConfirm = {
-                state.showCancelDialog = false
+                showCancelDialog = false
                 patcherViewModel.cancelPatching()
                 onBackClick()
             },
-            onDismiss = { state.showCancelDialog = false }
+            onDismiss = { showCancelDialog = false }
         )
     }
 
     // Missing patches pre-flight dialog
     // Shown when the saved selection names patches the sources no longer offer
-    patcherViewModel.missingPatchWarning?.let { warning ->
+    DialogHost(target = patcherViewModel.missingPatchWarning) { warning ->
         MissingPatchesDialog(
             patchNames = warning.patchNames,
             onContinue = patcherViewModel::continueWithoutMissingPatches,
@@ -380,7 +366,7 @@ private fun PatcherScreenContent(
 
     // Option path pre-flight dialog
     // Shown when a patch option points at a path that is gone or cannot be read
-    patcherViewModel.inaccessibleOptionPaths?.let { errorState ->
+    DialogHost(target = patcherViewModel.inaccessibleOptionPaths) { errorState ->
         UnusableOptionPathsDialog(
             failures = errorState.failures,
             onRetryAfterPermission = patcherViewModel::retryAfterPermission,
@@ -395,7 +381,7 @@ private fun PatcherScreenContent(
 
     // Patcher version incompatibility pre-flight dialog.
     // Shown when a bundle's Patcher-Version is newer than what the manager ships
-    patcherViewModel.incompatiblePatcherVersion?.let { state ->
+    DialogHost(target = patcherViewModel.incompatiblePatcherVersion) { state ->
         IncompatiblePatcherVersionDialog(
             bundleName = state.bundleName,
             requiredVersion = state.requiredVersion,
@@ -408,7 +394,7 @@ private fun PatcherScreenContent(
 
     // Battery optimization pre-flight dialog.
     // Shown once when the app is not excluded from battery optimization
-    if (patcherViewModel.batteryOptimizationDialog) {
+    DialogHost(visible = patcherViewModel.batteryOptimizationDialog) {
         BatteryOptimizationDialog(
             onResult = patcherViewModel::onBatteryOptimizationDialogResult
         )
@@ -416,8 +402,8 @@ private fun PatcherScreenContent(
 
     // Memory limit dialog, shown after the system killed the patcher process.
     // Waits for the error dialog to close: that one explains the failure this one offers a fix for
-    if (state.shownFailure == null) {
-        patcherViewModel.memoryAdjustmentDialog?.let { dialogState ->
+    if (shownFailure == null) {
+        DialogHost(target = patcherViewModel.memoryAdjustmentDialog) { dialogState ->
             MemoryAdjustmentDialog(
                 currentLimit = dialogState.currentLimit,
                 suggestedLimit = dialogState.suggestedLimit,
@@ -430,7 +416,7 @@ private fun PatcherScreenContent(
     }
 
     // Where the finished APK will actually install, when that is not what the run was aimed at
-    heldInstall?.let { held ->
+    DialogHost(target = heldInstall) { held ->
         RenameWarningDialog(
             warning = held.warning,
             onContinue = {
@@ -446,9 +432,9 @@ private fun PatcherScreenContent(
     }
 
     // Error dialog, for a failed run and a failed install alike
-    state.shownFailure?.let { failure ->
+    DialogHost(target = shownFailure) { failure ->
         val errorMessage = when (failure) {
-            PatcherFailure.PATCHING -> state.effectiveErrorMessage
+            PatcherFailure.PATCHING -> patcherViewModel.failureDetails
             PatcherFailure.INSTALL -> (installState as? InstallViewModel.InstallState.Error)?.message.orEmpty()
         }
         PatcherErrorDialog(
@@ -459,86 +445,12 @@ private fun PatcherScreenContent(
                 }
             ),
             errorMessage = errorMessage.ifBlank { unknownErrorText },
-            errorInfo = state.errorInfo,
-            onDismiss = { state.shownFailure = null }
+            errorInfo = errorInfo,
+            onDismiss = { shownFailure = null }
         )
     }
 
-    installViewModel.installerUnavailableDialog?.let { unavailable ->
-        InstallerUnavailableDialog(
-            state = unavailable,
-            onOpenApp = installViewModel::openInstallerApp,
-            onRetry = installViewModel::retryWithPreferredInstaller,
-            onUseFallback = installViewModel::proceedWithFallbackInstaller,
-            onDismiss = installViewModel::dismissInstallerUnavailableDialog
-        )
-    }
-
-    // Installer selection dialog for patcher screen
-    if (installViewModel.showInstallerSelectionDialog) {
-        val installerManager: InstallerManager = koinInject()
-        val primaryPreference by prefs.installerPrimary.getAsState()
-        val primaryToken = remember(primaryPreference) {
-            installerManager.parseToken(primaryPreference)
-        }
-
-        val installTarget = InstallerManager.InstallTarget.PATCHER
-        val selectedInstallerToken = remember(primaryToken) {
-            if (primaryToken == InstallerManager.Token.AutoSaved) {
-                InstallerManager.Token.Internal
-            } else {
-                primaryToken
-            }
-        }
-
-        // Installer entries with periodic updates
-        var options by remember(selectedInstallerToken) {
-            mutableStateOf(
-                installerManager.ensureValidEntries(
-                    installerManager.listEntries(installTarget, includeNone = false)
-                        .filterNot { it.token == InstallerManager.Token.AutoSaved },
-                    selectedInstallerToken,
-                    installTarget
-                )
-            )
-        }
-
-        // Periodically update installer list for availability changes
-        LaunchedEffect(installTarget, selectedInstallerToken) {
-            while (isActive) {
-                options = installerManager.ensureValidEntries(
-                    installerManager.listEntries(installTarget, includeNone = false)
-                        .filterNot { it.token == InstallerManager.Token.AutoSaved },
-                    selectedInstallerToken,
-                    installTarget
-                )
-                delay(1_500.milliseconds)
-            }
-        }
-
-        InstallerSelectionDialog(
-            options = options,
-            selected = selectedInstallerToken,
-            onDismiss = installViewModel::dismissInstallerSelectionDialog,
-            onConfirm = { selectedToken ->
-                installViewModel.proceedWithSelectedInstaller(selectedToken)
-            },
-            onOpenShizuku = installerManager::openShizukuApp,
-            shizukuStatusProvider = {
-                installerManager.shizukuStatus(InstallerManager.InstallTarget.PATCHER)
-            },
-            onRequestShizukuPermission = installerManager::requestShizukuPermission,
-            autoInstallEnabled = autoInstallAfterPatching,
-            onAutoInstallToggle = { enabled ->
-                scope.launch { prefs.autoInstallAfterPatching.update(enabled) }
-            },
-            autoUninstallEnabled = autoUninstallWithShizuku,
-            onAutoUninstallToggle = { enabled ->
-                scope.launch { prefs.autoUninstallWithShizuku.update(enabled) }
-            },
-            installerPromptEnabled = promptInstallerOnInstall
-        )
-    }
+    InstallerFlowDialogs(installViewModel)
 
     // Named on the success screen, read once since the run's selection no longer changes
     val patchSources by produceState(emptyList(), patcherViewModel) {
@@ -553,7 +465,6 @@ private fun PatcherScreenContent(
 
     val autoInstallUnderWay = patcherViewModel.autoInstallPending &&
             patcherSucceeded == true &&
-            !usingMountInstall &&
             installState is InstallViewModel.InstallState.Ready &&
             // Auto-install stops at the rename warning, so the screen must
             // not go on claiming install the user has yet to allow
@@ -581,7 +492,7 @@ private fun PatcherScreenContent(
         val showBackToGameHint = useExpertMode && miniGameState.hasOpenGame && !backToGameHintSeen
 
         AnimatedContent(
-            targetState = if (showSuccessScreen) state.currentPatcherState else PatcherState.IN_PROGRESS,
+            targetState = if (showSuccessScreen) PatcherState.of(patcherSucceeded) else PatcherState.IN_PROGRESS,
             transitionSpec = if (reduceMotion) {
                 { EnterTransition.None togetherWith ExitTransition.None }
             } else {
@@ -599,7 +510,7 @@ private fun PatcherScreenContent(
                             packageName = patcherViewModel.packageName,
                             patcherSucceeded = patcherSucceeded,
                             miniGameState = miniGameState,
-                            onCancelClick = { state.showCancelDialog = true },
+                            onCancelClick = { showCancelDialog = true },
                             resultButton = resultButton(shownInstallState, installedPackageName, usingMountInstall),
                             onResultClick = { patcherViewModel.showSuccess() }
                         )
@@ -610,7 +521,7 @@ private fun PatcherScreenContent(
                             patchProgress = patcherViewModel.patchRun,
                             packageName = patcherViewModel.packageName,
                             showLongStepWarning = showLongStepWarning,
-                            onCancelClick = { state.showCancelDialog = true }
+                            onCancelClick = { showCancelDialog = true }
                         )
                     }
                 }
@@ -622,7 +533,7 @@ private fun PatcherScreenContent(
                         installedPackageName = installedPackageName,
                         usingMountInstall = usingMountInstall,
                         installActions = InstallResultActions(
-                            onInstall = ::installPatchedApp,
+                            onInstall = { scope.launch { installPatchedApp(automatic = false) } },
                             onUninstall = { packageName ->
                                 installViewModel.requestUninstall(packageName, installAfterUninstall = true)
                             },
@@ -631,8 +542,8 @@ private fun PatcherScreenContent(
                             onShowInstallError = {
                                 scope.launch {
                                     // A run that patched fine has not collected these yet
-                                    if (state.errorInfo == null) state.errorInfo = patcherViewModel.buildErrorInfo()
-                                    state.shownFailure = PatcherFailure.INSTALL
+                                    if (errorInfo == null) errorInfo = patcherViewModel.buildErrorInfo()
+                                    shownFailure = PatcherFailure.INSTALL
                                 }
                             }
                         ),
@@ -653,6 +564,13 @@ private fun PatcherScreenContent(
                                 exportApkLauncher.launch(patcherViewModel.exportFileName)
                             }
                         },
+                        onShareClick = {
+                            scope.launch {
+                                // Shared under the name a save would give it, not the working one
+                                val name = patcherViewModel.resolvedExportFileName()
+                                context.shareApks(listOf(outputFile)) { name }
+                            }
+                        },
                         isSaving = isSaving
                     )
                 }
@@ -660,10 +578,10 @@ private fun PatcherScreenContent(
                 PatcherState.FAILED -> {
                     PatchingFailed(
                         summary = patchedAppSummary,
-                        errorMessage = state.errorMessage,
+                        errorMessage = patcherViewModel.failureMessage,
                         failedPatch = patcherViewModel.patchRun.failedPatch,
                         onHomeClick = onBackClick,
-                        onErrorClick = { state.shownFailure = PatcherFailure.PATCHING },
+                        onErrorClick = { shownFailure = PatcherFailure.PATCHING },
                         // Simple mode keeps no selection of its own to return to
                         onChangePatchesClick = onChangePatches.takeIf { useExpertMode }
                     )

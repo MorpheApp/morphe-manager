@@ -7,6 +7,7 @@ package app.morphe.manager.ui.screen.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -18,7 +19,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -30,7 +30,7 @@ import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.patcher.patch.PatchLockState
 import app.morphe.manager.patcher.patch.blocksToggle
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.util.toast
+import org.koin.compose.koinInject
 
 /**
  * Bundle controls: pill row with per-bundle bulk actions.
@@ -125,7 +125,7 @@ internal fun BundlePatchControls(
         )
     }
 
-    if (showUniversalAllWarning) {
+    DialogHost(visible = showUniversalAllWarning) {
         ConfirmDialog(
             title = stringResource(R.string.expert_mode_universal_all_warning_title),
             message = stringResource(R.string.expert_mode_universal_all_warning_message),
@@ -158,6 +158,8 @@ private fun tonalIconColors(
 
 /**
  * Individual patch card with toggle and options button.
+ *
+ * @param shape Its place among the rows of its block, see [ListSegment].
  */
 @Composable
 internal fun PatchCard(
@@ -171,7 +173,8 @@ internal fun PatchCard(
     lockState: PatchLockState = PatchLockState.NONE,
     onToggle: () -> Unit,
     onConfigureOptions: () -> Unit,
-    hasOptions: Boolean
+    hasOptions: Boolean,
+    shape: CornerBasedShape? = null
 ) {
     // Localized strings for accessibility
     val settings = stringResource(R.string.settings)
@@ -187,14 +190,14 @@ internal fun PatchCard(
         (listOf(patch.displayName, patchState) + badges).joinToString(", ")
     }
 
-    val context = LocalContext.current
+    val messages = koinInject<UserMessages>()
     val lockedMessage = when (lockState) {
         PatchLockState.LOCKED_ON  -> stringResource(R.string.expert_mode_patch_required_by_installer)
         PatchLockState.LOCKED_OFF -> stringResource(R.string.expert_mode_patch_unavailable_for_installer)
         PatchLockState.NONE       -> null
     }
     val onCardClick: () -> Unit = if (lockState.blocksToggle(isEnabled) && lockedMessage != null) {
-        { context.toast(lockedMessage) }
+        { messages.show(lockedMessage) }
     } else onToggle
 
     val colors = MaterialTheme.colorScheme
@@ -217,6 +220,7 @@ internal fun PatchCard(
     SettingsItemCard(
         onClick = onCardClick,
         color = containerColor,
+        shape = shape,
         showBorder = true,
         borderColor = when {
             showMissingRequired -> colors.error.copy(alpha = 0.6f)
@@ -232,7 +236,7 @@ internal fun PatchCard(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(Defaults.ContentPadding),
+                    .padding(Defaults.SpaceLarge),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -241,7 +245,7 @@ internal fun PatchCard(
                 SelectionCheckIndicator(
                     state = if (isEnabled) ToggleableState.On else ToggleableState.Off,
                     enabled = !lockState.blocksToggle(isEnabled),
-                    modifier = Modifier.padding(end = Defaults.ItemSpacing)
+                    modifier = Modifier.padding(end = Defaults.SpaceMedium)
                 )
 
                 // Patch info, with the "New" badge inline
@@ -320,14 +324,14 @@ internal fun PatchCard(
                         .fillMaxWidth()
                         .background(colors.onSurface.copy(alpha = 0.06f))
                         .padding(
-                            horizontal = Defaults.ContentPadding,
-                            vertical = Defaults.ContentPaddingSmall,
+                            horizontal = Defaults.SpaceLarge,
+                            vertical = Defaults.SpaceSmall,
                         ),
                     contentAlignment = Alignment.Center,
                 ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
                     ) {
                         Icon(
                             imageVector = when (lockState) {

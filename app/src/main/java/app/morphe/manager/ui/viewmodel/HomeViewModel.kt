@@ -16,7 +16,6 @@ import android.os.StatFs
 import android.graphics.drawable.Drawable
 import android.provider.OpenableColumns
 import android.util.Log
-import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
@@ -29,6 +28,7 @@ import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.apk.*
 import app.morphe.manager.domain.batch.BatchPatchCoordinator
 import app.morphe.manager.domain.batch.BatchRunState
+import app.morphe.manager.domain.batch.SavedBatchQueue
 import app.morphe.manager.domain.batch.mergeNewlyAdded
 import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.domain.installer.InstallerManager
@@ -44,6 +44,7 @@ import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.ui.model.*
 import app.morphe.manager.ui.model.navigation.Patcher
 import app.morphe.manager.ui.screen.shared.CopySelectionCandidate
+import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.*
 import app.morphe.manager.util.PatchSelectionUtils.applyAvailability
 import app.morphe.manager.util.PatchSelectionUtils.bulkEnableHoldsUniversal
@@ -126,6 +127,7 @@ data class InstalledAppPickerItem(
  */
 class HomeViewModel(
     private val app: Application,
+    private val messages: UserMessages,
     val patchBundleRepository: PatchBundleRepository,
     private val installedAppRepository: InstalledAppRepository,
     private val originalApkRepository: OriginalApkRepository,
@@ -144,7 +146,9 @@ class HomeViewModel(
     private val batchPatchCoordinator: BatchPatchCoordinator,
     private val downloadUrlResolver: DownloadUrlResolver,
     versionCatalog: AppVersionCatalog,
-    private val localApkSources: LocalApkSources
+    private val localApkSources: LocalApkSources,
+    /** Picker behind the copy-from-another-bundle action of the expert-mode dialog. */
+    val expertModeCopy: CopySelectionController
 ) : ViewModel(), ApkDownloadHelperHost {
     /** The app list on the home screen. */
     val apps = HomeApps(
@@ -160,7 +164,8 @@ class HomeViewModel(
         homeAppButtonPrefs = homeAppButtonPrefs,
         appDataResolver = appDataResolver,
         versionCatalog = versionCatalog,
-        localApkSources = localApkSources
+        localApkSources = localApkSources,
+        rootInstaller = rootInstaller
     )
 
     val availablePatches = patchBundleRepository.bundleInfoFlow.map { it.values.sumOf { bundle -> bundle.patches.size } }
@@ -176,7 +181,6 @@ class HomeViewModel(
 
     // Dialog visibility states
     var showAndroid11Dialog by mutableStateOf(false)
-    var showBundleManagementSheet by mutableStateOf(false)
     var showAddSourceDialog by mutableStateOf(false)
     var bundleToRename by mutableStateOf<PatchBundleSource?>(null)
     var showRenameBundleDialog by mutableStateOf(false)
@@ -207,11 +211,9 @@ class HomeViewModel(
         showInstalledAppInfoDialog = null
     }
 
-    // Deep link: pending bundle to add via confirmation dialog
-    var deepLinkPendingBundle by mutableStateOf<DeepLinkBundle?>(null)
+    // Deep link: pending source to add via confirmation dialog
+    var deepLinkPendingSource by mutableStateOf<MainViewModel.DeepLinkSource?>(null)
         private set
-
-    data class DeepLinkBundle(val url: String, val name: String?)
 
     // .mpp file opened from file manager: pending confirmation dialog
     var pendingMppUri by mutableStateOf<Uri?>(null)
@@ -279,9 +281,6 @@ class HomeViewModel(
     // Whether the run this dialog configures reaches patches that declare other app versions,
     // so bulk actions offer the same set the selection was built from
     private var expertModeAllowIncompatible = false
-
-    /** Picker behind the copy-from-another-bundle action of the expert-mode dialog. */
-    val expertModeCopy = CopySelectionController()
 
     /**
      * A file picked in the add source dialog, with the bundle name its manifest declares and what
@@ -411,8 +410,8 @@ class HomeViewModel(
     var snackbarStatus by mutableStateOf(BundleUpdateStatus.Updating)
 
     // Latches when an update cycle was skipped due to metered network; cleared on the next
-    // successful/no-change update. Independent of the transient BundleUpdateSnackbar so the
-    // user still sees a persistent alert after the transient snackbar fades
+    // successful/no-change update. Independent of the transient bundle update alert so the
+    // user still sees a persistent alert after the transient one fades
     var updatesSkippedDueToMetered by mutableStateOf(false)
 
     // Simple mode bundle selection dialog: shown when 2+ bundles have patches for the same app
@@ -500,8 +499,12 @@ class HomeViewModel(
     /** Convenience accessor - reads expert mode preference without blocking. */
     private suspend fun isExpertMode() = prefs.useExpertMode.get()
 
-    // Using mount install (set externally)
+    // Patch mode of the run being set up, chosen before patching on a rooted device
     var usingMountInstall: Boolean = false
+        private set
+
+    // Whether the run picks its patches without the install target's rules, see startPatchingWithApp
+    private var installTargetRulesIgnored = false
 
     // Install target passed to patch availability resolvers
     val currentInstallerType: InstallerType
@@ -519,8 +522,9 @@ class HomeViewModel(
     private var pendingPatchAllowIncompatible: Boolean = false
 
     /**
-     * Called when a root-capable device triggers patching. Instead of starting immediately,
-     * opens the pre-patching mode dialog so the user can choose Root Mount vs Standard.
+     * Called when a rooted device triggers patching with the installer prompt on. Instead of
+     * starting immediately, opens the pre-patching mode dialog so the user can choose Root Mount
+     * vs Standard.
      */
     fun requestPrePatchInstallerSelection(
         selectedApp: SelectedApp,
@@ -599,12 +603,7 @@ class HomeViewModel(
         val app = pendingSelectedApp ?: return
         pendingSelectedApp = null
         viewModelScope.launch {
-            if (rootInstaller.isDeviceRooted()) {
-                requestPrePatchInstallerSelection(app, allowIncompatible = allowIncompatible)
-            } else {
-                usingMountInstall = false
-                startPatchingWithApp(app, allowIncompatible = allowIncompatible)
-            }
+            startPatchingInPatchMode(app, allowIncompatible = allowIncompatible)
         }
     }
 
@@ -774,6 +773,9 @@ class HomeViewModel(
      */
     val batchRun: StateFlow<BatchRunState?> = batchPatchCoordinator.state
 
+    /** The queue waiting to be started, which apps are added to from here. */
+    val savedBatchQueue: StateFlow<SavedBatchQueue?> = batchPatchCoordinator.savedQueue
+
     /**
      * Guard entry-point for all patching flows.
      * Shows MeteredPatchingDialog when on metered network with updates disabled,
@@ -784,7 +786,7 @@ class HomeViewModel(
         // A batch run owns the patcher worker for its whole duration, so starting a single
         // patch would replace the app the queue is currently working on
         if (batchPatchCoordinator.isRunning) {
-            app.toast(app.getString(R.string.batch_patch_in_progress))
+            messages.show(R.string.batch_patch_in_progress)
             return
         }
 
@@ -877,7 +879,7 @@ class HomeViewModel(
      * downloadable, so the banner can never point at an asset that is still uploading.
      */
     suspend fun checkForManagerUpdates() {
-        uiSafe(app, R.string.failed_to_check_updates, "Failed to check for updates") {
+        messages.reportingFailure(R.string.failed_to_check_updates, "Failed to check for updates") {
             managerUpdateRepository.refresh()
         }
     }
@@ -892,48 +894,25 @@ class HomeViewModel(
         }
     }
 
-    @SuppressLint("ShowToast")
-    private suspend fun <T> withPersistentImportToast(block: suspend () -> T): T = coroutineScope {
-        val progressToast = withContext(Dispatchers.Main) {
-            Toast.makeText(
-                app,
-                app.getString(R.string.importing_ellipsis),
-                Toast.LENGTH_SHORT
-            )
-        }
-        withContext(Dispatchers.Main) { progressToast.show() }
-
-        val toastRepeater = launch(Dispatchers.Main) {
-            try {
-                while (isActive) {
-                    delay(1_750.milliseconds)
-                    progressToast.show()
-                }
-            } catch (_: CancellationException) {
-                // Ignore cancellation
-            }
-        }
-
+    private suspend fun <T> withImportMessage(block: suspend () -> T): T {
+        val importing = messages.showUntilDismissed(R.string.importing_ellipsis)
         try {
             val result = block()
-            withContext(Dispatchers.Main) {
-                app.toast(app.getString(R.string.imported_successfully))
-            }
-            result
+            messages.show(R.string.imported_successfully)
+            return result
         } finally {
-            toastRepeater.cancel()
-            withContext(Dispatchers.Main) { progressToast.cancel() }
+            importing.dismiss()
         }
     }
 
     /**
      * Imports each file, as a new local source or into the one its uid names, one after another
-     * under one import toast. With [chooseApps] the app list of each new source opens once its
+     * under one import message. With [chooseApps] the app list of each new source opens once its
      * patches have loaded.
      */
     private fun importLocalSources(imports: List<Pair<Uri, Int?>>, chooseApps: Boolean) = viewModelScope.launch {
         val added = withContext(NonCancellable) {
-            withPersistentImportToast {
+            withImportMessage {
                 imports.mapNotNull { (uri, replacingUid) ->
                     importLocalFile(uri, replacingUid).takeIf { replacingUid == null }
                 }
@@ -945,13 +924,18 @@ class HomeViewModel(
 
     /**
      * Adds a remote source for each of [urls], downloaded together as one update. With
-     * [chooseApps] the app list of each added source opens once its patches have loaded.
+     * [chooseApps] the app list of each added source opens once its patches have loaded, and with
+     * [onlyApp] each one brings that app alone.
      */
-    fun createRemoteSources(urls: List<String>, chooseApps: Boolean = false) = viewModelScope.launch {
+    fun createRemoteSources(
+        urls: List<String>,
+        chooseApps: Boolean = false,
+        onlyApp: String? = null
+    ) = viewModelScope.launch {
         val added = withContext(NonCancellable) {
-            patchBundleRepository.createRemotes(urls, autoUpdate = true)
+            patchBundleRepository.createRemotes(urls, autoUpdate = true, onlyApp = onlyApp)
         }
-        onSourcesAdded(added, chooseApps)
+        onSourcesAdded(added, chooseApps, onlyApp)
     }
 
     /**
@@ -961,20 +945,32 @@ class HomeViewModel(
      * A source only appears among the loaded ones once its patches are in, which is also what the
      * list is built from. The sources load together, so they are taken as each one arrives rather
      * than in turn, and one that never loads holds back none of the others.
+     *
+     * A source added for [onlyApp] has left out its other apps as it loaded, see
+     * [PatchBundleRepository.createRemotes]. They were never offered, so none of them is new to the
+     * user, and a source that turns out not to patch that app at all is added as any other.
      */
-    private suspend fun onSourcesAdded(uids: List<Int>, chooseApps: Boolean) {
+    private suspend fun onSourcesAdded(uids: List<Int>, chooseApps: Boolean, onlyApp: String? = null) {
         if (uids.isEmpty()) return
 
         val pending = uids.toMutableList()
+        val loadedApps = mutableMapOf<Int, Set<String>>()
         withTimeoutOrNull(NEW_SOURCE_LOAD_TIMEOUT) {
             patchBundleRepository.allBundlesInfoFlow.first { info ->
                 pending.removeAll { uid ->
-                    val loaded = info[uid] ?: return@removeAll false
+                    val listed = info[uid]?.listedApps() ?: return@removeAll false
+                    loadedApps[uid] = listed
                     // Universal patches put no app on the home screen, so there would be nothing to list
-                    if (chooseApps && loaded.listedApps().isNotEmpty()) sourceAppsQueue += uid
+                    if (chooseApps && listed.isNotEmpty()) sourceAppsQueue += uid
                     true
                 }
                 pending.isEmpty()
+            }
+        }
+        if (onlyApp != null) withContext(NonCancellable) {
+            loadedApps.forEach { (uid, listed) ->
+                if (onlyApp in listed) sourceMuteRepository.markNewAppsSeen(uid)
+                else sourceMuteRepository.resetForBundle(uid)
             }
         }
         delay(1.5.seconds)
@@ -1039,24 +1035,35 @@ class HomeViewModel(
     }
 
     /**
-     * Called when the app is opened via a deep link containing a bundle URL.
+     * Called when the app is opened via a deep link containing a source URL.
      * Shows a confirmation dialog instead of adding silently.
      */
-    fun handleDeepLinkAddSource(url: String, name: String?) {
+    fun handleDeepLinkAddSource(source: MainViewModel.DeepLinkSource) {
         dismissOpenDialogs()
-        deepLinkPendingBundle = DeepLinkBundle(url = url, name = name)
+        deepLinkPendingSource = source
     }
 
-    /** User confirmed adding the bundle from the deep link confirmation dialog. */
-    fun confirmDeepLinkBundle(chooseApps: Boolean) {
-        val bundle = deepLinkPendingBundle ?: return
-        deepLinkPendingBundle = null
-        createRemoteSources(listOf(bundle.url), chooseApps)
+    /**
+     * User confirmed adding the source from the deep link confirmation dialog.
+     *
+     * A link for one app from a source that is already here only asks for that app, so it is
+     * brought back to the source rather than the source being refused as a duplicate.
+     */
+    fun confirmDeepLinkSource(chooseApps: Boolean) {
+        val source = deepLinkPendingSource ?: return
+        deepLinkPendingSource = null
+        val packageName = source.packageName
+        val existingUid = patchBundleRepository.existingSourceUid(source.url)
+        if (packageName != null && existingUid != null) {
+            viewModelScope.launch { sourceMuteRepository.unmuteApps(existingUid, listOf(packageName)) }
+        } else {
+            createRemoteSources(listOf(source.url), chooseApps, onlyApp = packageName)
+        }
     }
 
     /** User dismissed the deep link confirmation dialog. */
-    fun dismissDeepLinkBundle() {
-        deepLinkPendingBundle = null
+    fun dismissDeepLinkSource() {
+        deepLinkPendingSource = null
     }
 
     /**
@@ -1077,7 +1084,6 @@ class HomeViewModel(
         dismissInstalledAppInfo()
         showNoCompatibleVersionsDialog = null
         showAndroid11Dialog = false
-        showBundleManagementSheet = false
         showRenameBundleDialog = false
         bundleToRename = null
         showAddSourceDialog = false
@@ -1222,14 +1228,14 @@ class HomeViewModel(
                 }.onFailure { error ->
                     skipped++
                     if (error !is UninstallCancelledException) {
-                        app.toast(app.getString(R.string.uninstall_app_fail, error.simpleMessage()))
+                        messages.show(R.string.uninstall_app_fail, error.simpleMessage())
                     }
                 }
             }
 
-            if (unverified > 0) app.toast(app.getString(R.string.uninstall_app_unverified))
+            if (unverified > 0) messages.show(R.string.uninstall_app_unverified)
             app.batchActionSummary(R.plurals.batch_uninstall_summary, completed, skipped)
-                ?.let { app.toast(it) }
+                ?.let { messages.show(it) }
         }
     }
 
@@ -1250,7 +1256,7 @@ class HomeViewModel(
 
         // Check if patches are being fetched
         if (availablePatches <= 0 || bundleUpdateInProgress) {
-            app.toast(app.getString(R.string.home_sources_are_loading))
+            messages.show(R.string.home_sources_are_loading)
             return
         }
 
@@ -1448,7 +1454,7 @@ class HomeViewModel(
                     // Skip signature check: the installed APK may already be patched with our key
                     processSelectedAppIgnoringSignature(selectedApp)
                 } else {
-                    app.toast(app.getString(R.string.home_invalid_apk_io_error))
+                    messages.show(R.string.home_invalid_apk_io_error)
                     cleanupPendingData()
                 }
             } finally {
@@ -1477,7 +1483,7 @@ class HomeViewModel(
             // there is nothing left to check the installed build against
             if (pending == null) {
                 if (packageName !in compatibleVersions) {
-                    app.toast(app.getString(R.string.home_apk_helper_installed_unavailable))
+                    messages.show(R.string.home_apk_helper_installed_unavailable)
                     cleanupPendingData()
                     return@launch
                 }
@@ -1521,7 +1527,7 @@ class HomeViewModel(
      */
     private suspend fun stopHelperHandoff(packageName: String, @StringRes message: Int? = null) {
         processingApkSelection = false
-        message?.let { app.toast(app.getString(it)) }
+        message?.let { messages.show(it) }
 
         if (pendingSavedApkInfo == null) {
             pendingSavedApkInfo = withContext(Dispatchers.IO) { localApkSources.saved(packageName) }
@@ -1632,7 +1638,7 @@ class HomeViewModel(
                     // Version/versionCode check still runs via processSelectedApp.
                     processSelectedApp(selectedApp, skipSplitCheck = true)
                 } else {
-                    app.toast(app.getString(R.string.home_invalid_apk_io_error))
+                    messages.show(R.string.home_invalid_apk_io_error)
                     cleanupPendingData()
                 }
             } finally {
@@ -1643,13 +1649,13 @@ class HomeViewModel(
 
     /**
      * Called when an APK is shared to Morphe via the system share sheet.
-     * Shows a toast and returns early if expert mode is disabled.
+     * Shows a message and returns early if expert mode is disabled.
      * Otherwise, waits until [installedAppsLoading] is false before triggering [handleApkSelection].
      */
     fun handleExternalApkUri(uri: Uri) {
         viewModelScope.launch {
             if (!isExpertMode()) {
-                app.toast(app.getString(R.string.home_external_apk_expert_mode_required))
+                messages.show(R.string.home_external_apk_expert_mode_required)
                 return@launch
             }
             // Wait for patches to be ready. Cap at 30 s to avoid hanging forever when
@@ -1682,10 +1688,10 @@ class HomeViewModel(
                         pickedApkIcon = result.icon?.let { result.app.file to it }
                         processSelectedApp(result.app)
                     }
-                    is ApkLoadResult.Unreadable -> app.toast(app.getString(R.string.home_invalid_apk_unreadable))
-                    is ApkLoadResult.NotAnApk -> app.toast(app.getString(R.string.home_invalid_apk_not_an_apk))
-                    is ApkLoadResult.AlreadyPatched -> app.toast(app.getString(R.string.home_invalid_apk_already_patched))
-                    is ApkLoadResult.IoError -> app.toast(app.getString(R.string.home_invalid_apk_io_error))
+                    is ApkLoadResult.Unreadable -> messages.show(R.string.home_invalid_apk_unreadable)
+                    is ApkLoadResult.NotAnApk -> messages.show(R.string.home_invalid_apk_not_an_apk)
+                    is ApkLoadResult.AlreadyPatched -> messages.show(R.string.home_invalid_apk_already_patched)
+                    is ApkLoadResult.IoError -> messages.show(R.string.home_invalid_apk_io_error)
                 }
             } finally {
                 processingApkSelection = false
@@ -1701,7 +1707,7 @@ class HomeViewModel(
         val packageName = pendingPackageName
 
         if (savedInfo == null || packageName == null) {
-            app.toast(app.getString(R.string.home_app_info_repatch_no_original_apk))
+            messages.show(R.string.home_app_info_repatch_no_original_apk)
             cleanupPendingData()
             return
         }
@@ -1715,7 +1721,7 @@ class HomeViewModel(
                     try {
                         val file = File(savedInfo.filePath)
                         if (!file.exists()) {
-                            app.toast(app.getString(R.string.home_app_info_repatch_no_original_apk))
+                            messages.show(R.string.home_app_info_repatch_no_original_apk)
                             return@withContext null
                         }
 
@@ -1838,7 +1844,7 @@ class HomeViewModel(
 
         if (!hasAnything) {
             // Truly no patches exist for this package in any enabled bundle
-            app.toast(app.getString(R.string.home_no_patches_available))
+            messages.show(R.string.home_no_patches_available)
             if (selectedApp is SelectedApp.Local && selectedApp.temporary) {
                 selectedApp.file.delete()
             }
@@ -1931,12 +1937,22 @@ class HomeViewModel(
      */
     suspend fun processSelectedAppIgnoringSignature(selectedApp: SelectedApp) {
         val allowIncompatible = prefs.disablePatchVersionCompatCheck.getBlocking()
-        if (rootInstaller.isDeviceRooted()) {
+        startPatchingInPatchMode(selectedApp, allowIncompatible)
+    }
+
+    /**
+     * Starts patching in the mode the run is set up for. A rooted device asks for it first while
+     * the installer prompt is on, and otherwise mounts whenever root mount is the default
+     * installer. Anywhere else the build is a standard one, its installer asked for after patching.
+     */
+    private suspend fun startPatchingInPatchMode(selectedApp: SelectedApp, allowIncompatible: Boolean) {
+        val rooted = rootInstaller.isDeviceRooted()
+        if (rooted && prefs.promptInstallerOnInstall.get()) {
             requestPrePatchInstallerSelection(selectedApp, allowIncompatible)
-        } else {
-            usingMountInstall = false
-            startPatchingWithApp(selectedApp, allowIncompatible)
+            return
         }
+        usingMountInstall = rooted && installerManager.parseToken(prefs.installerPrimary.get()).isRootMount
+        startPatchingWithApp(selectedApp, allowIncompatible)
     }
 
     /**
@@ -1949,6 +1965,10 @@ class HomeViewModel(
         // Read before the first selection is resolved, so every rule below and every later edit
         // in the expert dialog is answered for the APK this run actually starts from
         currentApkArchitecture = ApkArchitectureResolver.resolve(selectedApp, pm)
+        // Only where the patches are shown, so nothing the rules would have kept out is built in unseen
+        installTargetRulesIgnored = isExpertMode() &&
+                rootInstaller.isDeviceRooted() &&
+                prefs.ignoreInstallTargetRules.get()
 
         // Everything this app has patches in, the sources it is kept from included: the expert
         // dialog offers those back, so it has to be told what it is hiding
@@ -1957,7 +1977,7 @@ class HomeViewModel(
             .first()
 
         if (availableBundles.isEmpty()) {
-            app.toast(app.getString(R.string.home_no_patches_available))
+            messages.show(R.string.home_no_patches_available)
             cleanupPendingData()
             return
         }
@@ -1980,10 +2000,11 @@ class HomeViewModel(
         val configurationKey = configurationKeyFor(selectedApp.packageName)
 
         // Whatever selection is reached below, the patches' own availability for the install
-        // target has the final say on what the run starts with. A hidden source sits it out and
-        // is put back untouched: it takes no part in a run, so it does not get to decide whether
-        // the run draws from one source or several
+        // target has the final say on what the run starts with, unless the run is set to ignore
+        // it. A hidden source sits it out and is put back untouched: it takes no part in a run,
+        // so it does not get to decide whether the run draws from one source or several
         fun PatchSelection.applyInstallerRules(): PatchSelection {
+            if (installTargetRulesIgnored) return this
             val heldBack = filterKeys { it in mutedSources }
             return filterKeys { it !in mutedSources }
                 .applyAvailability(currentInstallerType, currentApkArchitecture, bundlesMap) + heldBack
@@ -2016,10 +2037,10 @@ class HomeViewModel(
                 // Count patches after validation
                 val patchesAfterValidation = validatedPatches.values.sumOf { it.size }
 
-                // Show toast if patches were removed
+                // Tell the user if patches were removed
                 val removedCount = patchesBeforeValidation - patchesAfterValidation
                 if (removedCount > 0) {
-                    app.toast(app.resources.getQuantityString(
+                    messages.show(app.resources.getQuantityString(
                         R.plurals.home_app_info_repatch_cleaned_invalid_data,
                         removedCount,
                         removedCount.toString()
@@ -2228,7 +2249,8 @@ class HomeViewModel(
                 // Handed over before the state below is cleared, since the run has no other way
                 // to learn which install it was started for
                 targetPackageName = pendingRepatchPackageName,
-                allowIncompatible = allowIncompatible
+                allowIncompatible = allowIncompatible,
+                useMount = usingMountInstall
             )
         )
 
@@ -2252,10 +2274,11 @@ class HomeViewModel(
     fun reopenPatchSelection(run: Patcher.ViewModelParams) {
         // A failed run leaves its input in place, but storage cleanup may have taken it since
         if ((run.selectedApp as? SelectedApp.Local)?.file?.exists() == false) {
-            app.toast(app.getString(R.string.home_invalid_apk_io_error))
+            messages.show(R.string.home_invalid_apk_io_error)
             return
         }
         pendingRepatchPackageName = run.targetPackageName
+        usingMountInstall = run.useMount
         viewModelScope.launch {
             startPatchingWithApp(run.selectedApp, run.allowIncompatible)
         }
@@ -2359,7 +2382,11 @@ class HomeViewModel(
      * [PatchSelectionUtils.applyAvailability].
      */
     fun expertModeLockState(patch: PatchInfo) =
-        patch.lockState(currentInstallerType, currentApkArchitecture, !expertModeHasMultipleBundles)
+        if (installTargetRulesIgnored) {
+            PatchLockState.NONE
+        } else {
+            patch.lockState(currentInstallerType, currentApkArchitecture, !expertModeHasMultipleBundles)
+        }
 
     private fun expertModeUniversalArmed(bundleUid: Int, selected: Set<String>) =
         expertModeUniversalArmedFor == (bundleUid to selected)
@@ -2504,6 +2531,7 @@ class HomeViewModel(
      * source the run cannot reach is not one of them.
      */
     private fun PatchSelection.applyExpertModeAvailability(): PatchSelection {
+        if (installTargetRulesIgnored) return this
         val shown = expertModeBundles.mapTo(mutableSetOf()) { it.uid }
         val heldBack = filterKeys { it !in shown }
 
@@ -2682,7 +2710,7 @@ class HomeViewModel(
             showFilePickerPromptDialog = true
         } else {
             Log.w(tag, "Failed to open URL")
-            app.toast(app.getString(R.string.sources_management_failed_to_open_url))
+            messages.show(R.string.sources_management_failed_to_open_url)
             showDownloadInstructionsDialog = false
             cleanupPendingData()
         }

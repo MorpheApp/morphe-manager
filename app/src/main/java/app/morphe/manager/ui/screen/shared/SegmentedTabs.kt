@@ -31,14 +31,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import app.morphe.manager.util.isRtl
 import kotlinx.coroutines.launch
 import kotlin.math.ceil
 import kotlin.math.floor
@@ -91,7 +90,7 @@ fun SegmentedTabs(
     selectedIndex: Int,
     onSelect: (Int) -> Unit,
     modifier: Modifier = Modifier,
-    spacing: Dp = Defaults.ContentPadding,
+    spacing: Dp = Defaults.SpaceLarge,
     compact: Boolean = false,
     fillHeight: Boolean = false,
     selectorPadding: PaddingValues = PaddingValues(),
@@ -103,7 +102,7 @@ fun SegmentedTabs(
     val pagerState = rememberPagerState(initialPage = selectedIndex) { options.size }
     val scope = rememberCoroutineScope()
     val currentOnSelect by rememberUpdatedState(onSelect)
-    val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
+    val rtl = isRtl()
     val flingVelocity = with(LocalDensity.current) { SwipeFlingVelocity.toPx() }
 
     // Reported once settled rather than as the page changes hands mid-swipe, so the caller
@@ -119,14 +118,14 @@ fun SegmentedTabs(
     // Kept off the pages themselves, where a page that turned its own swipe off would still
     // hand its drags on to this
     val swipeState = rememberDraggableState { delta ->
-        pagerState.dispatchRawDelta(if (isRtl) delta else -delta)
+        pagerState.dispatchRawDelta(if (rtl) delta else -delta)
     }
     val swipeModifier = Modifier.draggable(
         state = swipeState,
         orientation = Orientation.Horizontal,
         onDragStopped = { velocity ->
             val position = pagerState.currentPage + pagerState.currentPageOffsetFraction
-            val forward = if (isRtl) velocity else -velocity
+            val forward = if (rtl) velocity else -velocity
             val target = when {
                 forward > flingVelocity -> floor(position).toInt() + 1
                 forward < -flingVelocity -> ceil(position).toInt() - 1
@@ -230,8 +229,8 @@ private fun SegmentedSelector(
                                 role = Role.Tab,
                                 onClick = { onSelect(index) }
                             )
-                            .padding(horizontal = Defaults.ContentPaddingSmall),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
+                            .padding(horizontal = Defaults.SpaceSmall),
+                        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall, Alignment.CenterHorizontally),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(

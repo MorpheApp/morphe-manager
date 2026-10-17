@@ -15,6 +15,8 @@
     <string name="deep_link_add_source_title">زیادکردنی سەرچاوە</string>
     <string name="deep_link_add_source_message">دەتەوێت ئەم سەرچاوەی پاچە زیاد بکەیت بۆ Morphe؟</string>
     <string name="deep_link_add_source_warning">تەنها ئەو سەرچاوانە زیاد بکە کە متمانەت پێیانە</string>
+    <!-- Shown under the app a link was opened for -->
+    <!-- Asked when the link names an app of a source that is already added -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe نوێکردنەوە بەردەستە</string>
     <string name="home_update_available_subtitle">وەشانی نوێ ئامادەیە بۆ دابەزاندن</string>
@@ -69,6 +71,10 @@
     <string name="sources_management_title">سەرچاوەکانی پینە</string>
     <string name="sources_management_open_in_browser">کردنەوە لە وێبگەڕ</string>
     <string name="sources_management_failed_to_open_url">شکستی هێنا لەکردنەوەی بەستەر</string>
+    <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
+    <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
+    <string name="sources_apps_new">نوێ</string>
+    <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
     <string name="sources_management_already_exists">ئەم سەرچاوەیە پێشتر زیاد کراوە</string>
     <string name="sources_management_invalid_url">بەستەری سەرچاوەی نادروستە. تکایە ناونیشانەکە بپشکنە و دووبارە هەوڵدەوە</string>
     <string name="sources_management_metadata_unavailable">مێتاداتا N/A</string>
@@ -217,7 +223,7 @@
     <string name="header_creator_failed">شکستی هێنا لە دروستکردنی سەرپەڕە</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">پینە دیاریکراوە</string>
-    <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
+    <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_start">دەستپێکردن</string>
     <!-- Label of a footer button beside "Done". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="shortcut_check_updates_short">پشکنینی نوێکردنەوەکان</string>
@@ -385,7 +391,6 @@
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">شاشەی ماڵەوە</string>
     <string name="settings_appearance_greeting_phrases">دەستەواژەی بەخێرهاتن</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">پەیامێکی بەخێرهاتن پیشان بدە لەسەر شاشەی سەرەکی</string>
     <string name="settings_appearance_app_card_colors_default">بنەڕەت</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">وێنۆچکەی ئەپ</string>
@@ -493,6 +498,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="copy">وێنەلەمەر</string>
     <string name="download">دابەزاندن</string>
     <string name="continue_">بەردەوامبوون</string>
+    <!-- Who made a patch source, as a field label -->
+    <!-- A file a patch source is added from, as a field label -->
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patching">پینەکردن</string>
     <string name="patched">پینەکراو</string>

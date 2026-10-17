@@ -88,6 +88,11 @@
         <item quantity="few">%s апликације спремне за закрпу</item>
         <item quantity="other">%s апликација спремних за закрпу</item>
     </plurals>
+    <plurals name="batch_queue_pending_count">
+        <item quantity="one">%s апликација је у реду за пацовање</item>
+        <item quantity="few">%s апликације су у реду за пацовање</item>
+        <item quantity="other">%s апликација је у реду за пацовање</item>
+    </plurals>
     <plurals name="repatch_available_count">
         <item quantity="one">%s апликација се може поново закрпити</item>
         <item quantity="few">%s апликације се могу поново закрпити</item>
@@ -107,11 +112,6 @@
         <item quantity="one">%s извор инсталиран</item>
         <item quantity="few">%s извора инсталирано</item>
         <item quantity="other">%s извора инсталирано</item>
-    </plurals>
-    <plurals name="home_app_filter_active">
-        <item quantity="one">%1$s · %2$s филтрирана</item>
-        <item quantity="few">%1$s · %2$s филтриране</item>
-        <item quantity="other">%1$s · %2$s филтрираних</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s скривена апликација</item>
@@ -157,6 +157,12 @@
         <item quantity="one">%s измена</item>
         <item quantity="few">%s измене</item>
         <item quantity="other">%s измена</item>
+    </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
+    <plurals name="sources_apps_count_with_new">
+        <item quantity="one">%1$s · %2$d ново</item>
+        <item quantity="few">%1$s · %2$d нова</item>
+        <item quantity="other">%1$s · %2$d нових</item>
     </plurals>
     <plurals name="changelog_new_releases">
         <item quantity="one">%s ново издање</item>

@@ -22,6 +22,10 @@
     <string name="deep_link_add_source_title">সোর্স যোগ করুন</string>
     <string name="deep_link_add_source_message">আপনি কি এই প্যাচ সোর্স Morphe-এ যোগ করতে চান?</string>
     <string name="deep_link_add_source_warning">আপনি শুধুমাত্র যে উৎসগুলির উপর বিশ্বাস করেন সেগুলিই যোগ করুন</string>
+    <!-- Shown under the app a link was opened for -->
+    <string name="deep_link_add_source_only_app">শুধুমাত্র এই অ্যাপটি যোগ করা হয়েছে। আপনি সোর্সের অ্যাপ তালিকা থেকে অন্যান্য অ্যাপ যোগ করতে পারেন</string>
+    <!-- Asked when the link names an app of a source that is already added -->
+    <string name="deep_link_add_source_app_back">এই সোর্সটি ইতিমধ্যে যোগ করা হয়েছে। বিদ্যমান সোর্স থেকে এই অ্যাপটি যোগ করবেন?</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe আপডেট উপলব্ধ</string>
     <string name="home_update_available_subtitle">নতুন সংস্করণ ইনস্টল করতে প্রস্তুত</string>
@@ -54,6 +58,9 @@
     <string name="home_app_filter_uninstalled_description">Morphe দিয়ে প্যাচ করা অ্যাপগুলো যেগুলো আর এই ডিভাইসে নেই</string>
     <string name="home_app_filter_clones">ক্লোন</string>
     <string name="home_app_filter_clones_description">নিজস্ব প্যাকেজ নামে তৈরি, মূল অ্যাপের পাশাপাশি ইনস্টল করা অ্যাপ</string>
+    <string name="home_app_grouping_all_apps_description">প্রতিটি অ্যাপসহ একটি তালিকা</string>
+    <string name="home_app_grouping_sources_description">যারা সেগুলো সরবরাহ করে সেই পেচ উৎসের অধীনে অ্যাপস</string>
+    <string name="home_app_grouping_custom_description">আপনি যে বিষয়শ্রেণীগুলো তৈরি করেন তাতে অ্যাপস</string>
     <string name="home_app_sort_manual_description">কোনো অ্যাপ দীর্ঘক্ষণ চাপুন, তারপর পুনর্বিন্যাস বোতামে আলতো চাপুন</string>
     <string name="home_app_sort_recommended">সুপারিশকৃত ক্রম</string>
     <string name="home_app_sort_recommended_description">ইনস্টল করা এবং পিন করা অ্যাপগুলি প্রথমে</string>
@@ -146,7 +153,6 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">প্যাচ সোর্সগুলো</string>
     <string name="sources_search">উৎস এবং প্যাচ অনুসন্ধান করুন</string>
-    <string name="sources_sort_title">প্যাচ সোর্স সাজান</string>
     <string name="sources_sort_manual">ম্যানুয়াল অর্ডার</string>
     <string name="sources_sort_manual_hint">পুনরায় সাজানোর জন্য একটি উৎসের উপর দীর্ঘক্ষণ চাপুন</string>
     <string name="sources_sort_last_updated">সর্বশেষ আপডেট করা হয়েছে</string>
@@ -158,12 +164,17 @@
     <string name="sources_management_report_issue">একটি সমস্যা রিপোর্ট করুন</string>
     <string name="sources_management_failed_to_open_url">URL খুলতে ব্যর্থ হয়েছে</string>
     <string name="sources_apps">অ্যাপস</string>
-    <string name="sources_apps_description">কোনো অ্যাপকে এই সোর্স থেকে বাদ দিতে বা ফিরিয়ে আনতে এটিতে আলতো চাপুন, বা একাধিক বাছতে দীর্ঘ চাপ দিন। কোনো সোর্স আর অ্যাপটি না আনলে অ্যাপটি হোম স্ক্রিন থেকে চলে যায়।</string>
+    <string name="sources_apps_description">এই উৎস থেকে টিক করা অ্যাপগুলি আসে। বাদ দিতে বা আবার আনতে একটি অ্যাপে ট্যাপ করুন। কোনো উৎস এটি আর নিয়ে না এলে হোম স্ক্রিন থেকে অ্যাপ চলে যায়, যতক্ষণ আপনি এটি প্যাচ করেন না</string>
     <string name="sources_apps_brought">এই সোর্স থেকে আনা</string>
     <string name="sources_apps_left_out">এই সোর্স থেকে বাদ দেওয়া</string>
-    <string name="sources_apps_leave_out">বাদ দিন</string>
-    <string name="sources_apps_leave_out_done">বাদ দেওয়া হয়েছে</string>
     <string name="sources_apps_bring_back">ফিরিয়ে আনুন</string>
+    <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
+    <string name="sources_apps_stays_patched">প্যাচ করা অবস্থায় রাখা হয়েছে</string>
+    <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
+    <string name="sources_apps_new">নতুন</string>
+    <string name="sources_apps_new_apps">নতুন অ্যাপ আনুন</string>
+    <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
+    <string name="sources_apps_new_apps_description">আগে যে অ্যাপগুলো যোগ করে সেগুলো হোম স্ক্রিনে দেখা যায়</string>
     <string name="sources_management_prerelease_toggle">প্রি-রিলিজ প্যাচ</string>
     <string name="sources_management_prerelease_toggle_description">নতুন পরীক্ষামূলক প্যাচ সংস্করণে প্রাথমিক অ্যাক্সেস গ্রহণ করে</string>
     <string name="sources_prerelease_warning_title">প্রি-রিলিজ প্যাচ সক্রিয় করবেন?</string>
@@ -208,7 +219,6 @@
     <string name="sources_dialog_url_invalid">URL টি অবশ্যই একটি GitHub/GitLab রেপো অথবা .json ফাইল নির্দেশ করতে হবে।</string>
     <string name="sources_dialog_preinstalled">প্র-ইনস্টল করা হয়েছে</string>
     <string name="sources_dialog_community">কমিউনিটি প্যাচ</string>
-    <string name="sources_dialog_choose_apps">অ্যাপ নির্বাচন করুন</string>
     <string name="sources_dialog_choose_apps_description">সোর্স লোড হয়ে গেলে তার কোন অ্যাপগুলো রাখতে চান তা বেছে নিন।</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">তৃতীয় পক্ষের প্যাচ উৎস</string>
@@ -451,7 +461,7 @@
     <string name="batch_patch_state_no_patches">কোনো প্যাচ নেই</string>
     <string name="batch_patch_policy_install">শেষ হলে ইনস্টল করুন</string>
     <string name="batch_patch_policy_install_description">সারিবদ্ধ শেষ হওয়ার সাথে সাথেই প্রতিটি প্যাচ করা অ্যাপ ইনস্টল করে। বন্ধ করলে APKগুলি পরে ব্যবহারের জন্য সেভ করা থাকবে</string>
-    <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
+    <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_start">শুরু</string>
     <string name="batch_patch_stop_title">ব্যাচ প্যাচিং বন্ধ করবেন?</string>
     <string name="batch_patch_stop_description">বর্তমানে প্যাচ করা অ্যাপ এবং সারিতে থাকা সবকিছু বাতিল করা হবে</string>
@@ -460,6 +470,10 @@
     <string name="batch_patch_install_failed">ইনস্টল করতে ব্যর্থ</string>
     <string name="batch_patch_in_progress">ব্যাচ প্যাচিং ইতিমধ্যে চলছে</string>
     <string name="batch_patch_nothing_outdated">প্রতিটি প্যাচ করা অ্যাপ আপ টু ডেট</string>
+    <string name="batch_queue_add_action">ভিডিও তালিকায় যুক্ত করুন</string>
+    <string name="batch_queue_pending_subtitle">সমীক্ষা করে শুরু করতে ট্যাপ করুন</string>
+    <string name="batch_queue_clear_title">কিউ পরিষ্কার করবেন?</string>
+    <string name="batch_queue_clear_description">সব অ্যাপ কিউ থেকে সরানো হবে</string>
     <string name="shortcut_repatch_short">পুনরায় প্যাচ করুন</string>
     <string name="shortcut_repatch_long">পুরানো অ্যাপগুলি পুনরায় প্যাচ করুন</string>
     <string name="shortcut_check_updates_short">আপডেটগুলি দেখুন</string>
@@ -757,7 +771,7 @@
     <string name="settings_appearance_pure_black">পুরো কালো</string>
     <string name="settings_appearance_pure_black_description">ব্যবহার করে খাঁটি কালো ব্যাকগ্রাউন্ড।</string>
     <string name="settings_appearance_color_accents">অ্যাপ এবং উৎসের রং</string>
-    <string name="settings_appearance_color_accents_description">অ্যাকসেন্ট রঙের পরিবর্তে প্রতিটি অ্যাপ ও উৎসের নিজস্ব রঙ ব্যবহার করা হয়</string>
+    <string name="settings_appearance_color_accents_description">এসেন্টের পরিবর্তে প্রতিটি অ্যাপ এবং সূত্রের রং ব্যবহার করে</string>
     <string name="settings_appearance_outlines">আউটলাইন</string>
     <string name="settings_appearance_outlines_description">কার্ড, প্যানেল এবং বাটনের চারপাশে একটি পাতলা কিনারা আঁকে।</string>
     <!-- Settings - Appearance Tab - Language Selector -->
@@ -776,13 +790,11 @@
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">হোম স্ক্রিন</string>
     <string name="settings_appearance_greeting_phrases">শুভেচ্ছা বার্তা</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">হোম স্ক্রিনে একটি শুভেচ্ছা বার্তা দেখান</string>
-    <string name="settings_appearance_app_grouping">অ্যাপ grouping</string>
-    <string name="settings_appearance_app_grouping_description">উৎস বা বিভাগ অনুসারে অ্যাপগুলো গ্রুপ করতে একটি সুইচার দেখান</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">একটি অভিবাদন বার্তা দেখায়</string>
     <string name="settings_appearance_repatch_notice">পুনরায় প্যাচ বিজ্ঞপ্তি</string>
-    <string name="settings_appearance_repatch_notice_description">প্যাচ করা অ্যাপগুলো পুনরায় প্যাচ করা গেলে একটি ব্যানার দেখান</string>
+    <string name="settings_appearance_repatch_notice_description">যখন প্যাচড অ্যাপগুলিকে পুনরায় প্যাচ করা যায় তখন একটি ব্যানার দেখায়</string>
     <string name="settings_appearance_sort_button">সাজানো ও ফিল্টার বাটন</string>
-    <string name="settings_appearance_sort_button_description">হোম স্ক্রিনে সাজানো ও ফিল্টার বাটন দেখান</string>
+    <string name="settings_appearance_sort_button_description">অ্যাপ সাজানো এবং ফিল্টার করার জন্য একটি বাটন দেখায়</string>
     <string name="settings_appearance_app_card_colors">অ্যাপ কার্ডের রং</string>
     <string name="settings_appearance_app_card_colors_default">ডিফল্ট</string>
     <string name="settings_appearance_app_card_colors_default_description">প্রতিটি অ্যাপকে তার নিজস্ব বান্ডেলের রং দিন</string>
@@ -838,7 +850,7 @@
 
 প্যাচগুলো প্রভাবিত হয় না: প্যাচ উৎস তালিকায় প্রতিটি উৎসের জন্য প্রাক-রিলিজ প্যাচ সক্রিয় করুন।"</string>
     <string name="settings_advanced_updates_allow_metered">মোবাইল ডেটা আপডেট।</string>
-    <string name="settings_advanced_updates_allow_metered_description">Morphe এবং প্যাচ আপডেট মোবাইল ডেটার মাধ্যমে ডাউনলোড করার অনুমতি দেয়।</string>
+    <string name="settings_advanced_updates_allow_metered_description">মোবাইল ডেটা দিয়ে Morphe এবং প্যাচ আপডেট ডাউনলোড করে</string>
     <string name="settings_advanced_updates_background_notifications">ব্যাকগ্রাউন্ড আপডেট নোটিফিকেশন</string>
     <string name="settings_advanced_updates_background_notifications_description">ব্যাকগ্রাউন্ডে আপডেটের জন্য পর্যায়ক্রমে চেক করুন এবং উপলব্ধ হলে বিজ্ঞপ্তি দিন।</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">অ্যাপটি বন্ধ থাকা অবস্থায়ও নতুন রিলিজের জন্য পুশ বিজ্ঞপ্তি।</string>
@@ -853,7 +865,7 @@
     <string name="settings_advanced_update_interval_chip_subtitle">ব্যাকগ্রাউন্ড চেকের সময়</string>
     <string name="settings_advanced_update_interval_battery_warning">কিছু ডিভাইসে ব্যাকগ্রাউন্ড চেকগুলি সঠিকভাবে কাজ করতে পারে না। ব্যাটারি সংরক্ষণের জন্য ম্যানুফ্যাকচারাররা যেমন এক্সিয়োমি, হুয়াওয়েই, স্যামসাং এবং অনেপ্লাস ব্যাকগ্রাউন্ড প্রসেসগুলি সীমিত করে।</string>
     <string name="settings_advanced_external_batch_patch">বাহ্যিক ট্রিগার করার অনুমতি দিন</string>
-    <string name="settings_advanced_external_batch_patch_description">অটোমেশন অ্যাপগুলোকে একটি ইন্টেন্টের মাধ্যমে ব্যাচ প্যাচিং শুরু করতে দেয়</string>
+    <string name="settings_advanced_external_batch_patch_description">অটোমেশন অ্যাপগুলোকে ব্যাচ প্যাচিং শুরু করতে দেয়</string>
     <string name="external_batch_patch_title">ব্যাচ প্যাচিং শুরু করবেন?</string>
     <string name="external_batch_patch_description">%s Morphe কে অ্যাপগুলি প্যাচ এবং ইনস্টল করতে চায়</string>
     <string name="external_batch_patch_trust_caller">সর্বদা এই অ্যাপটিকে অনুমতি দিন</string>
@@ -877,11 +889,11 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">বিশেষ্ট সেটিংস</string>
     <string name="settings_advanced_expert_mode">বিশেষ্ট মোড</string>
-    <string name="settings_advanced_expert_mode_description">জটিল Morphe প্যাচিং সেটিংস এবং কাস্টমাইজেশন বিকল্পগুলি সক্ষম করে।</string>
+    <string name="settings_advanced_expert_mode_description">উন্নত প্যাচিং সেটিংস এবং প্যাচ বিকল্পগুলি আনলক করে</string>
     <string name="settings_advanced_expert_mode_dialog_title">এক্সপার্ট মোড সক্ষম করবেন?</string>
     <string name="settings_advanced_expert_mode_dialog_message">এক্সপার্ট মোড অ্যাপ্লিকেশনগুলিতে প্যাচগুলি কীভাবে প্রয়োগ করা হবে তার উপর বেশি নিয়ন্ত্রণ প্রদান করে, কিন্তু এক্সপার্ট মোডে সেটিংস মিসকনফিগার করলে অ্যাপ্লিকেশনটি কাজ না করবে এমন অবস্থা হতে পারে</string>
     <string name="settings_advanced_strip_unused_libs">যন্ত্রের আর্কিটেকচারের জন্য অপ্টিমাইজ করুন</string>
-    <string name="settings_advanced_strip_unused_libs_description">অব্যবহৃত CPU আর্কিটেকচার লাইব এবং বিভক্ত APK মডিউলগুলি সরিয়ে দেয়।</string>
+    <string name="settings_advanced_strip_unused_libs_description">অব্যবহৃত নেটিভ লাইব্রেরি এবং APK স্প্লিটস মুছে ফেলে</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_description">পুল অনুরোধ উৎসের জন্য প্রয়োজনীয়</string>
     <string name="settings_advanced_github_pat_configured">টোকেন কনফিগার করা হয়েছে</string>
@@ -1002,13 +1014,13 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_play_store_warning_risk">প্লে স্টোর প্যাচ করা অ্যাপের জন্য আপডেট দিতে পারে। সেই আপডেট ইনস্টল করলে, এটি আসল সংস্করণ দিয়ে প্যাচ করা APK প্রতিস্থাপন করবে এবং প্যাচগুলি সরিয়ে দেবে। আপডেট করার জন্য অনুরোধ করা হলে, অ্যাপের প্লে স্টোর পৃষ্ঠায় তিনটি ডট মেনুতে আলতো চাপুন এবং \"আপডেট বন্ধ করুন\" নির্বাচন করুন।</string>
     <string name="installer_play_store_warning_continue">আমি বুঝতে পেরেছি, চালিয়ে যান</string>
     <string name="installer_play_store_mode">Play Store হিসাবে ইনস্টল করুন</string>
-    <string name="installer_play_store_mode_description">এই ইনস্টল পদ্ধতির জন্য Google Play Store-কে ইনস্টলেশন উৎস হিসাবে রেকর্ড করুন</string>
+    <string name="installer_play_store_mode_description">Google Play Store-কে ইনস্টলেশনের উৎস হিসেবে চিহ্নিত করে</string>
     <string name="settings_prompt_installer_on_install">ইনস্টলার নির্বাচন প্রম্পট।</string>
-    <string name="settings_prompt_installer_on_install_description">প্যাচ করা অ্যাপ ইনস্টল করার সময়마다 ইনস্টলার নির্বাচন ডায়ালগ দেখায়।</string>
+    <string name="settings_prompt_installer_on_install_description">প্রতিটি ইনস্টলেশনের জন্য কোন ইনস্টলার ব্যবহার করতে হবে তা জিজ্ঞেস করে</string>
     <string name="settings_auto_install_with_shizuku">প্যাচিং করার পরে স্বয়ংক্রিয়ভাবে ইনস্টল করুন</string>
     <string name="settings_auto_install_with_shizuku_description">প্যাচিং শেষ হওয়া মাত্রই প্যাচ করা APK ইনস্টল করে</string>
     <string name="settings_auto_uninstall_with_shizuku">সংঘাত হলে স্বয়ংক্রিয়ভাবে আনইনস্টল করুন</string>
-    <string name="settings_auto_uninstall_with_shizuku_description">Shizuku দিয়ে স্বয়ংক্রিয়ভাবে ইনস্টল করার সময়, যদি Android সিগনেচার কনফ্লিক্ট রিপোর্ট করে তবে প্রথমে বিদ্যমান অ্যাপটি আনইনস্টল করুন। এটি অ্যাপের ডেটা মুছে ফেলতে পারে।</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">সাড়া সংঘাতে বিদ্যমান অ্যাপটি আনইনস্টল করে। এতে অ্যাপের ডেটা মুছে যেতে পারে</string>
     <string name="settings_auto_uninstall_warning_title">স্বয়ংক্রিয়ভাবে আনইনস্টল করা কি সক্রিয় করবেন?</string>
     <string name="settings_auto_uninstall_warning_message">Shizuku স্বয়ংক্রিয় ইনস্টলের সময়, যদি Android সিগনেচার কনফ্লিক্ট রিপোর্ট করে, তাহলে Morphe প্যাচ করা APK ইনস্টল করার আগে বিদ্যমান অ্যাপটি আনইনস্টল করবে।</string>
     <string name="settings_auto_uninstall_warning_risk">এটি অ্যাপের ডেটা মুছে ফেলতে পারে। যদি আনইনস্টল করার পরে প্যাচ করা APK ইনস্টল করতে ব্যর্থ হয়, তাহলে আগের অ্যাপটি সম্ভবত ইতিমধ্যে চলে গেছে।</string>
@@ -1047,13 +1059,13 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_memory_limit_warning">পুরাতন মেমরি সীমিত উচ্চ মেমরি সীমিতগুলি পুরাতন ডিভাইসের জন্য অকার্যকার হতে পারে</string>
     <string name="settings_system_memory_limit_high_warning">উচ্চ মেমরি সীমা কিছু ডিভাইসে প্যাচিং অনেক ধীর করে দিতে পারে। কম সীমায় প্যাচিং ব্যর্থ হতে থাকলেই কেবল এটি বাড়ান।</string>
     <string name="settings_system_process_runtime_enabled_description">%s এমবি সীমা</string>
-    <string name="settings_system_process_runtime_disabled_description">ক্লিক করুন</string>
+    <string name="settings_system_process_runtime_disabled_description">কনফিগার করতে ট্যাপ করুন</string>
     <string name="settings_system_process_runtime_description_not_available">এই বৈশিষ্ট্যটি অ্যান্ড্রয়েড 11 বা তার চেয়ে বেশি সংস্করণের প্রয়োজন।</string>
     <string name="settings_system_patcher_completion_sound">সম্পূর্ণ হওয়ার শব্দ</string>
     <string name="settings_system_patcher_completion_sound_description">প্যাচিং শেষ হলে সাফল্য বা ব্যর্থতার জন্য একটি স্বতন্ত্র সুর বাজায়</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">নোটিস্য়াসেগ</string>
-    <string name="settings_system_notifications_description">ব্যাকগ্রাউন্ড সতর্কতা এবং সম্পূর্ণ হওয়ার শব্দ কনফিগার করুন</string>
+    <string name="settings_system_notifications_description">ব্যাকগ্রাউন্ড সতর্কতা এবং সম্পূর্ণ হওয়ার শব্দ কনফিগার করে</string>
     <string name="settings_system_notifications_success_sound">সাফল্যের শব্দ</string>
     <string name="settings_system_notifications_error_sound">ব্যর্থতার শব্দ</string>
     <string name="settings_system_notifications_sound_default">ডিফল্ট</string>
@@ -1065,7 +1077,7 @@ morphe_adaptive_monochrome_custom.xml
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">ইমপোর্ট &amp; এক্সপোর্ট </string>
     <string name="settings_system_signing_key">স্বাক্ষর কী</string>
-    <string name="settings_system_signing_key_description">আপনার প্যাচ করা অ্যাপগুলো যে কী দিয়ে স্বাক্ষরিত হয় তা ব্যাকআপ এবং পুনরুদ্ধার করে</string>
+    <string name="settings_system_signing_key_description">প্যাচড অ্যাপগুলিকে সাইন করা কি backup বা restore করে</string>
     <string name="settings_system_signing_key_dialog_description">Morphe প্যাচ করা প্রতিটি অ্যাপ এই কী দিয়ে স্বাক্ষরিত হয়। একটি কপি রাখুন: এটি ছাড়া, প্যাচ করা অ্যাপগুলো কেবল আনইনস্টল করার পরে আপডেট করা যাবে।</string>
     <string name="settings_system_signing_key_missing">Morphe আপনার প্রথম প্যাচ করার সময় একটি তৈরি করে দেয়</string>
     <string name="settings_system_signing_key_created">তৈরি হয়েছে %s</string>
@@ -1123,7 +1135,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_apks_export_zip_failed">নির্বাচিত APK রপ্তানি করতে ব্যর্থ</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">স্টোরেজ ব্যবস্থাপনা</string>
-    <string name="settings_system_storage_management_description">ডিস্কের ব্যবহার পর্যালোচনা করুন এবং ক্যাশে করা ফাইলগুলি পরিষ্কার করুন</string>
+    <string name="settings_system_storage_management_description">ডিস্ক ব্যবহার দেখায় এবং ক্যাশed ফাইলস মুছে ফেলে</string>
     <string name="settings_system_storage_keystore_title">সাইন করার কীস্টোর</string>
     <string name="settings_system_storage_app_data_title">অ্যাপ ডেটা</string>
     <string name="settings_system_storage_patch_bundles_title">প্যাচ বান্ডেল</string>
@@ -1189,7 +1201,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="copy_selection_same_source">একই উৎস</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">কাস্টম ফাইল পিকার</string>
-    <string name="settings_system_custom_file_picker_description">সিস্টেম ডিফল্টের পরিবর্তে Morphe-এর বিল্ট-ইন ফাইল পিকার দিয়ে স্টোরেজ ব্রাউজ করুন</string>
+    <string name="settings_system_custom_file_picker_description">সিস্টেমের ফাইল পিকারের পরিবর্তে Morphe-এর বিল্ট-ইন ফাইল পিকার ব্যবহার করে</string>
     <!-- Settings - System Tab - APK download helper -->
     <string name="settings_system_apk_download_helper">APK ডাউনলোড সহায়ক</string>
     <string name="settings_system_apk_download_helper_trusted_count">বিশ্বস্ত: %2$d-এর মধ্যে %1$d</string>
@@ -1240,6 +1252,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="no">না</string>
     <string name="all">সব</string>
     <string name="filter">ফিল্টার</string>
+    <string name="group">গ্রুপ</string>
     <string name="reset">আবার সেট করুন</string>
     <string name="reset_all">সব রিসেট করুন</string>
     <string name="apply">প্রয়োগ করুন</string>
@@ -1307,6 +1320,10 @@ morphe_adaptive_monochrome_custom.xml
     <string name="available">উপলব্ধ</string>
     <string name="continue_">এগিয়ে যান</string>
     <string name="version">সংস্করণ</string>
+    <!-- Who made a patch source, as a field label -->
+    <string name="author">লেখক</string>
+    <!-- A file a patch source is added from, as a field label -->
+    <string name="file">ফাইল</string>
     <string name="clone">ক্লোন করুন</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">প্যাচ</string>

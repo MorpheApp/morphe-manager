@@ -105,6 +105,18 @@
         <item quantity="many">%s programų paruošta pataisymui</item>
         <item quantity="other">%s programų paruošta pataisymui</item>
     </plurals>
+    <plurals name="batch_queue_pending_count">
+        <item quantity="one">%s app queued for patching</item>
+        <item quantity="few">%s apps queued for patching</item>
+        <item quantity="many">%s apps queued for patching</item>
+        <item quantity="other">%s apps queued for patching</item>
+    </plurals>
+    <plurals name="home_alerts_snoozed_count">
+        <item quantity="one">%s paslėptas pranešimas, bakstelėkite norėdami jį rodyti</item>
+        <item quantity="few">%s paslėpti pranešimai, bakstelėkite norėdami juos rodyti</item>
+        <item quantity="many">%s paslėptų pranešimų, baktelėkite norėdami juos rodyti</item>
+        <item quantity="other">%s paslėptų pranešimų, bakstelėkite norėdami juos rodyti</item>
+    </plurals>
     <plurals name="repatch_available_count">
         <item quantity="one">%s programa gali būti pataisyta iš naujo</item>
         <item quantity="few">%s programos gali būti pataisytos iš naujo</item>
@@ -128,12 +140,6 @@
         <item quantity="few">%s šaltiniai įdiegti</item>
         <item quantity="many">%s šaltiniai įdiegti</item>
         <item quantity="other">%s šaltiniai įdiegti</item>
-    </plurals>
-    <plurals name="home_app_filter_active">
-        <item quantity="one">%1$s · %2$s filtruota</item>
-        <item quantity="few">%1$s · %2$s filtruota</item>
-        <item quantity="many">%1$s · %2$s filtruota</item>
-        <item quantity="other">%1$s · %2$s filtruota</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s paslėpta programėlė</item>
@@ -188,6 +194,13 @@
         <item quantity="few">%s pakeitimai</item>
         <item quantity="many">%s pakeitimų</item>
         <item quantity="other">%s pakeitimų</item>
+    </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
+    <plurals name="sources_apps_count_with_new">
+        <item quantity="one">%1$s · %2$d nauja</item>
+        <item quantity="few">%1$s · %2$d naujos</item>
+        <item quantity="many">%1$s · %2$d naujų</item>
+        <item quantity="other">%1$s · %2$d naujų</item>
     </plurals>
     <plurals name="changelog_new_releases">
         <item quantity="one">%s naujas leidimas</item>

@@ -46,7 +46,7 @@ fun ImportExportFooter(
         )
     }
 
-    Column(verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding / 2)) {
+    Column(verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)) {
         if (export != null) {
             AppDialogActions(
                 actions = if (exportLeads) listOf(export, import) else listOf(import, export),

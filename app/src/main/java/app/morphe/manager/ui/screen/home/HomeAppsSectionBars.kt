@@ -7,8 +7,12 @@ package app.morphe.manager.ui.screen.home
 
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.PlaylistAdd
+import androidx.compose.material.icons.automirrored.outlined.Sort
 import androidx.compose.material.icons.outlined.AutoFixHigh
+import androidx.compose.material.icons.outlined.Category
 import androidx.compose.material.icons.outlined.DeleteForever
+import androidx.compose.material.icons.outlined.FilterList
 import androidx.compose.material.icons.outlined.FolderOpen
 import androidx.compose.material.icons.outlined.InstallMobile
 import androidx.compose.material.icons.outlined.Reorder
@@ -19,15 +23,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.onSizeChanged
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import app.morphe.manager.R
+import app.morphe.manager.domain.manager.HomeAppCategoryViewMode
+import app.morphe.manager.domain.manager.HomeAppSortMode
 import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.shared.ActionTone
+import app.morphe.manager.ui.screen.shared.ListOptionSection
+import app.morphe.manager.ui.screen.shared.ListOptionsPanel
 import app.morphe.manager.ui.screen.shared.SelectionAction
-import app.morphe.manager.util.withToast
+import app.morphe.manager.ui.screen.shared.UserMessages
+import app.morphe.manager.ui.screen.shared.listOptionSection
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import org.koin.compose.koinInject
 
 /**
  * Hands the apps section's footer bar to the screen that draws it. The bar acts on what the
@@ -68,9 +77,9 @@ internal fun HomeFooterBarDock(host: HomeFooterBarHost, modifier: Modifier = Mod
 }
 
 /**
- * The bar that occupies the footer slot: app multi-select and reorder, or the category context
- * actions. Only one is ever visible - [HomeAppsSectionState] keeps the modes exclusive - so they
- * live together here, out of the section body.
+ * The bar that occupies the footer slot: app multi-select and reorder, the category context
+ * actions, or the options the list is arranged by. Only one is ever visible - [HomeAppsSectionState]
+ * keeps the modes exclusive - so they live together here, out of the section body.
  */
 @Composable
 internal fun HomeAppsFooterBars(
@@ -88,6 +97,7 @@ internal fun HomeAppsFooterBars(
     isCustomCategoryView: Boolean,
     isSourceCategoryView: Boolean,
     listState: LazyListState,
+    leadingItemCount: Int,
     scope: CoroutineScope,
     modifier: Modifier = Modifier
 ) {
@@ -132,10 +142,12 @@ internal fun HomeAppsFooterBars(
             selectedReinstallItems.size == selectedAppItems.size
     val contextActionIsUninstall = selectedAppItems.isNotEmpty() &&
             selectedInstalledItems.size == selectedAppItems.size
-    val context = LocalContext.current
+    val messages = koinInject<UserMessages>()
     val reinstallLabel = stringResource(R.string.reinstall)
     val uninstallLabel = stringResource(R.string.uninstall)
-    val patchSelectedLabel = stringResource(R.string.batch_patch_action)
+    val patchSelectedLabel = stringResource(
+        if (apps.batchQueuePending) R.string.batch_queue_add_action else R.string.batch_patch_action
+    )
     val patchSourcesLabel = stringResource(R.string.sources_management_title)
     val moveToCategoryLabel = stringResource(R.string.home_category_move_to)
     val reorderListLabel = stringResource(R.string.reorder_list)
@@ -161,14 +173,14 @@ internal fun HomeAppsFooterBars(
         // A lone card is not a group, so keeping it highlighted only dims everything else for nothing
         if (selectedPackages.size == 1) selectedPackages.clear()
         state.isMultiSelectMode = false
-        searchState.onClose()
+        searchState.onClear()
         groupedSelectionPackages?.let { scopePackages ->
             val scopedItems = sourceOrder
                 ?.mapNotNull { itemsByPackage[it] }
                 ?: orderedItems.filter { it.id in scopePackages }
             val focusIndex = scopedItems.indexOfFirst { it.id in focusTargets }
             scope.launch {
-                listState.scrollToItem(focusIndex.coerceAtLeast(0))
+                listState.scrollToItem(focusIndex.coerceAtLeast(0) + leadingItemCount)
                 state.isReorderMode = true
             }
         } ?: run {
@@ -179,7 +191,7 @@ internal fun HomeAppsFooterBars(
     val actions = buildList {
         add(
             SelectionAction(
-                icon = Icons.Outlined.AutoFixHigh,
+                icon = if (apps.batchQueuePending) Icons.AutoMirrored.Outlined.PlaylistAdd else Icons.Outlined.AutoFixHigh,
                 label = patchSelectedLabel,
                 onClick = {
                     appActions.onPatchMultiple(selectedAppItems)
@@ -241,7 +253,7 @@ internal fun HomeAppsFooterBars(
             SelectionAction(
                 icon = Icons.Outlined.VisibilityOff,
                 label = hideLabel,
-                onClick = context.withToast(hiddenMessage) {
+                onClick = messages.confirming(hiddenMessage) {
                     appActions.onHideMultiple(selectedPackages.keys.toSet())
                     state.exitMultiSelect()
                 },
@@ -322,7 +334,7 @@ internal fun HomeAppsFooterBars(
             // already reflects the current source list when reorder begins
             state.activeCategoryId = null
             state.activeSourceUid = null
-            searchState.onClose()
+            searchState.onClear()
             state.isCategoryReorderMode = true
         },
         onExitReorder = {
@@ -341,4 +353,31 @@ internal fun HomeAppsFooterBars(
         modifier = modifier,
         showEditActions = state.activeSourceUid == null && !isSourceCategoryView
     )
+
+    ListOptionsPanel(
+        visible = state.isListOptionsOpen,
+        sections = homeListOptions(apps, appActions),
+        onClose = { state.isListOptionsOpen = false },
+        modifier = modifier
+    )
 }
+
+/**
+ * How the home list is sorted, filtered and grouped: what its options panel offers, and what marks
+ * the sort button once any of it is off its default.
+ */
+@Composable
+internal fun homeListOptions(apps: HomeAppListUi, appActions: HomeAppActions): List<ListOptionSection<*>> = listOf(
+    listOptionSection(
+        R.string.sort, Icons.AutoMirrored.Outlined.Sort, apps.sortMode, HomeAppSortMode.RECOMMENDED,
+        appActions.onSortModeChange
+    ),
+    listOptionSection(
+        R.string.filter, Icons.Outlined.FilterList, apps.filterMode, HomeAppFilterMode.ALL,
+        appActions.onFilterModeChange
+    ),
+    listOptionSection(
+        R.string.group, Icons.Outlined.Category, apps.categoryViewMode, HomeAppCategoryViewMode.ALL_APPS,
+        appActions.onCategoryViewModeChange
+    )
+)

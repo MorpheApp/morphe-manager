@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.shared
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
@@ -103,8 +102,8 @@ fun RadioSelectionCard(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(Defaults.ContentPadding),
-                    horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing),
+                        .padding(Defaults.SpaceLarge),
+                    horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     if (leadingContent != null) {
@@ -114,11 +113,7 @@ fun RadioSelectionCard(
                     }
                     content()
                 }
-                AnimatedVisibility(
-                    visible = footerContent != null,
-                    enter = Animations.expandFadeEnter,
-                    exit = Animations.shrinkFadeExit
-                ) {
+                FoldingVisibility(visible = footerContent != null) {
                     Column {
                         SettingsDivider(fullWidth = true)
                         Box(
@@ -127,8 +122,8 @@ fun RadioSelectionCard(
                                 .background(footerColor)
                                 .animateContentSize()
                                 .padding(
-                                    horizontal = Defaults.ContentPadding,
-                                    vertical = Defaults.ContentPaddingSmall
+                                    horizontal = Defaults.SpaceLarge,
+                                    vertical = Defaults.SpaceSmall
                                 ),
                             contentAlignment = Alignment.Center
                         ) {
@@ -195,7 +190,7 @@ fun SelectionLeadingBox(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     size: Dp = 28.dp,
-    cornerRadius: Dp = 8.dp,
+    cornerRadius: Dp = Defaults.CornerSmall,
     content: @Composable BoxScope.() -> Unit
 ) {
     val borderColor by animateColorAsState(
@@ -275,16 +270,16 @@ fun SelectionCheckRow(
             // Pressed on a rounded plate around the box and its label, as a menu item is, rather
             // than across the whole width the row is centered in
             .wrapContentWidth(Alignment.CenterHorizontally)
-            .clip(RoundedCornerShape(Defaults.CompactCornerRadius))
+            .clip(RoundedCornerShape(Defaults.CornerMedium))
             .toggleable(
                 value = checked,
                 enabled = enabled,
                 role = Role.Checkbox,
                 onValueChange = onCheckedChange
             )
-            .padding(Defaults.ContentPaddingSmall),
+            .padding(Defaults.SpaceSmall),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing, Alignment.CenterHorizontally)
+        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium, Alignment.CenterHorizontally)
     ) {
         SelectionCheckIndicator(
             state = if (checked) ToggleableState.On else ToggleableState.Off,

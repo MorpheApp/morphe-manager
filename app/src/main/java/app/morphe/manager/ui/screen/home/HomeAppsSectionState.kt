@@ -5,6 +5,8 @@
 
 package app.morphe.manager.ui.screen.home
 
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.*
 import app.morphe.manager.domain.manager.HomeAppCategory
 import app.morphe.manager.ui.model.HomeAppItem
@@ -27,6 +29,8 @@ internal data class CategoryNameRequest(
 @Stable
 internal class HomeAppsSectionState(
     val selectedPackages: SelectionState<String>,
+    /** The app list's scroll, which the screen around the list follows too. */
+    val listState: LazyListState,
     initialOrder: List<String>,
     initialSourceGroupOrder: List<Int>,
     initialCategoryOrder: List<String>,
@@ -66,6 +70,9 @@ internal class HomeAppsSectionState(
     var localSourceGroupOrder by mutableStateOf(initialSourceGroupOrder)
     var localCategoryOrder by mutableStateOf(initialCategoryOrder)
 
+    /** The options the list is sorted, filtered and grouped by, docked under it while open. */
+    var isListOptionsOpen by mutableStateOf(false)
+
     // Loading. hasEverLoaded latches so the shimmer never comes back on resume
     var hasEverLoaded by mutableStateOf(hasContent)
     var isLoading by mutableStateOf(!hasContent)
@@ -81,6 +88,10 @@ internal class HomeAppsSectionState(
 
     /** True while any bar owns the footer slot, which the list pads for. */
     val isFooterBarVisible: Boolean
+        get() = isMultiSelectMode || isReorderMode || isCategoryBarVisible || isListOptionsOpen
+
+    /** True while a selection or a reorder is under way, which the list options give way to. */
+    val isEditing: Boolean
         get() = isMultiSelectMode || isReorderMode || isCategoryBarVisible
 
     val isCategoryBarVisible: Boolean
@@ -127,9 +138,11 @@ internal fun rememberHomeAppsSectionState(
     hasContent: Boolean,
 ): HomeAppsSectionState {
     val selectedPackages = rememberSelectionState<String>()
-    return remember(selectedPackages) {
+    val listState = rememberLazyListState()
+    return remember(selectedPackages, listState) {
         HomeAppsSectionState(
             selectedPackages = selectedPackages,
+            listState = listState,
             initialOrder = initialOrder,
             initialSourceGroupOrder = initialSourceGroupOrder,
             initialCategoryOrder = initialCategoryOrder,

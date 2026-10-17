@@ -5,11 +5,10 @@
 
 package app.morphe.manager.ui.screen.shared
 
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -22,9 +21,6 @@ import app.morphe.manager.ui.theme.isDarkTheme
  * Retune once here to shift the palette everywhere consistently.
  */
 object GlassButtonDefaults {
-    /** Corner radius of the whole glass button family, kept in step with the dialog buttons. */
-    val ButtonShape: Shape = RoundedCornerShape(Defaults.CardCornerRadius)
-
     val IconSize = Defaults.IconSize
     val HorizontalPadding = 12.dp
     val IconLabelSpacing = 8.dp
@@ -76,5 +72,53 @@ object GlassButtonDefaults {
             MaterialTheme.colorScheme.outline.copy(alpha = if (isDark) 0.4f else 0.6f)
         }
         return ThemeTraitsDefaults.borderColor(base = edge, selected = selected)
+    }
+}
+
+/** Emphasis of an [ActionGlassButton] or a [FloatingPillItem], resolved through [GlassButtonDefaults]. */
+enum class BottomActionTone {
+    Neutral,
+    Accent,
+    Highlight,
+    Destructive
+}
+
+@Immutable
+internal data class BottomActionColors(
+    val container: Color,
+    val content: Color,
+    val border: Color
+)
+
+@Composable
+internal fun BottomActionTone.colors(): BottomActionColors {
+    val scheme = MaterialTheme.colorScheme
+    // Every tone but Neutral borrows the selected treatment of the tab bar, so an emphasized
+    // action reads at the same weight as the active settings tab
+    return when (this) {
+        BottomActionTone.Neutral -> BottomActionColors(
+            container = GlassButtonDefaults.containerColor(),
+            content = GlassButtonDefaults.contentColor(),
+            border = GlassButtonDefaults.borderColor()
+        )
+
+        BottomActionTone.Accent -> BottomActionColors(
+            container = GlassButtonDefaults.containerColor(selected = true),
+            content = GlassButtonDefaults.contentColor(selected = true),
+            border = GlassButtonDefaults.borderColor(selected = true)
+        )
+
+        BottomActionTone.Highlight -> BottomActionColors(
+            container = GlassButtonDefaults.containerColor(scheme.tertiaryContainer, selected = true),
+            content = GlassButtonDefaults.contentColor(scheme.onTertiaryContainer, selected = true),
+            border = GlassButtonDefaults.borderColor(scheme.tertiary, selected = true)
+        )
+
+        // The neutral glass with a red label and edge, see [destructiveColor]
+        BottomActionTone.Destructive -> BottomActionColors(
+            container = GlassButtonDefaults.containerColor(),
+            content = GlassButtonDefaults.contentColor(destructiveColor(), selected = false),
+            border = GlassButtonDefaults.borderColor(destructiveColor(), selected = true)
+        )
     }
 }

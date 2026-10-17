@@ -51,7 +51,7 @@ internal fun DrawScope.drawDiagonalShimmer(progress: Float, color: Color) {
 @Composable
 fun ShimmerBox(
     modifier: Modifier = Modifier,
-    shape: Shape = RoundedCornerShape(8.dp),
+    shape: Shape = RoundedCornerShape(Defaults.CornerSmall),
     baseColor: Color = Color.Unspecified,
     shimmerColor: Color = Color.Unspecified,
     baseAlpha: Float = 0.2f
@@ -109,7 +109,7 @@ fun ShimmerText(
     modifier: Modifier = Modifier,
     widthFraction: Float = 0.6f,
     height: Dp = 16.dp,
-    cornerRadius: Dp = 4.dp
+    cornerRadius: Dp = Defaults.CornerExtraSmall
 ) {
     ShimmerBox(
         modifier = modifier
@@ -129,18 +129,18 @@ fun ShimmerApkItem() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(Defaults.ContentPadding),
-                horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing),
+                    .padding(Defaults.SpaceLarge),
+                horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 ShimmerBox(
                     modifier = Modifier.size(48.dp),
-                    shape = RoundedCornerShape(Defaults.CompactCornerRadius)
+                    shape = RoundedCornerShape(Defaults.CornerMedium)
                 )
 
                 Column(
                     modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                    verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
                 ) {
                     ShimmerText(widthFraction = 0.6f, height = 18.dp)
                     Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
@@ -156,16 +156,16 @@ fun ShimmerApkItem() {
             FlowRow(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = Defaults.ContentPadding, vertical = Defaults.ItemSpacing),
-                horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall, Alignment.CenterHorizontally),
-                verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
+                    .padding(horizontal = Defaults.SpaceLarge, vertical = Defaults.SpaceMedium),
+                horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall, Alignment.CenterHorizontally),
+                verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
             ) {
                 repeat(4) {
                     ShimmerBox(
                         modifier = Modifier
                             .width(72.dp)
                             .height(36.dp),
-                        shape = RoundedCornerShape(50)
+                        shape = Defaults.PillShape
                     )
                 }
             }
@@ -181,21 +181,21 @@ fun ShimmerApkItem() {
 fun ShimmerBundleRow() {
     Surface(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(Defaults.CornerLarge),
         color = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp),
         border = CardBorder.of(MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(Defaults.ContentPadding),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                .padding(Defaults.SpaceLarge),
+            horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium),
             verticalAlignment = Alignment.CenterVertically
         ) {
             ShimmerBox(modifier = Modifier.size(48.dp), shape = CircleShape)
             Column(
                 modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(6.dp)
+                verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
             ) {
                 ShimmerText(widthFraction = 0.55f, height = 18.dp)
                 ShimmerText(widthFraction = 0.4f, height = 12.dp)
@@ -203,7 +203,7 @@ fun ShimmerBundleRow() {
                     modifier = Modifier
                         .fillMaxWidth(0.3f)
                         .height(24.dp),
-                    shape = RoundedCornerShape(50)
+                    shape = Defaults.PillShape
                 )
             }
         }
@@ -216,13 +216,13 @@ fun ShimmerCompactListCard(descriptionLines: Int = 1) {
     CompactListCard(onClick = null) {
         ShimmerBox(
             modifier = Modifier.size(CompactCardIconSize),
-            shape = RoundedCornerShape(Defaults.CompactCornerRadius)
+            shape = RoundedCornerShape(Defaults.CornerMedium)
         )
         // Laid out on the lines of the text it stands in for, see [CardHeadingText], so the card
         // keeps its height at any font scale once the real row replaces it
         Column(
             modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
         ) {
             val density = LocalDensity.current
             ShimmerLine(
@@ -256,7 +256,7 @@ fun ShimmerLine(
             modifier = Modifier
                 .fillMaxWidth(widthFraction)
                 .height(height * 0.7f),
-            shape = RoundedCornerShape(4.dp),
+            shape = RoundedCornerShape(Defaults.CornerExtraSmall),
             baseColor = baseColor
         )
     }

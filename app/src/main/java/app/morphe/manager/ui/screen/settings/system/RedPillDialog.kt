@@ -9,7 +9,6 @@ import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.util.toast
+import org.koin.compose.koinInject
 
 private val RED_PILL = listOf(Color(0xFFFF5A52), Color(0xFF8E0E0E))
 private val BLUE_PILL = listOf(Color(0xFF4FA8FF), Color(0xFF0B3C7A))
@@ -38,21 +37,21 @@ private val BLUE_PILL = listOf(Color(0xFF4FA8FF), Color(0xFF0B3C7A))
  * so, and their blue pill wakes them up through [onBluePill] instead of doing nothing.
  */
 @Composable
-fun RedPillDialog(
+fun DialogHostScope.RedPillDialog(
     alreadyUnlocked: Boolean,
     onRedPill: () -> Unit,
     onBluePill: () -> Unit,
     onDismiss: () -> Unit
 ) {
     val view = LocalView.current
-    val context = view.context
+    val messages = koinInject<UserMessages>()
     val message = stringResource(
         if (alreadyUnlocked) R.string.easter_egg_pill_message_again else R.string.easter_egg_pill_message
     )
-    val redToast = stringResource(
+    val redPillMessage = stringResource(
         if (alreadyUnlocked) R.string.easter_egg_pill_red_toast_again else R.string.easter_egg_pill_red_toast
     )
-    val blueToast = stringResource(
+    val bluePillMessage = stringResource(
         if (alreadyUnlocked) R.string.easter_egg_pill_blue_toast_again else R.string.easter_egg_pill_blue_toast
     )
 
@@ -94,7 +93,7 @@ fun RedPillDialog(
                     onClick = {
                         view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                         onBluePill()
-                        context.toast(blueToast)
+                        messages.show(bluePillMessage)
                         onDismiss()
                     }
                 )
@@ -104,7 +103,7 @@ fun RedPillDialog(
                     onClick = {
                         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
                         onRedPill()
-                        context.toast(redToast)
+                        messages.show(redPillMessage)
                         onDismiss()
                     }
                 )
@@ -124,12 +123,12 @@ private fun Pill(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(10.dp)
+        verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
     ) {
         Box(
             modifier = Modifier
                 .size(width = 108.dp, height = 52.dp)
-                .clip(RoundedCornerShape(percent = 50))
+                .clip(Defaults.PillShape)
                 .background(Brush.verticalGradient(colors))
                 .clickable(onClick = onClick),
             contentAlignment = Alignment.Center

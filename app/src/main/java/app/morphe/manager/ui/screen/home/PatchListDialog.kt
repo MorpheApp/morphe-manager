@@ -10,15 +10,14 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.MutableTransitionState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -63,7 +62,7 @@ internal class PatchListSection(
  * @param onExpertBadgeClick Marks the patches left out by default, and explains the mark.
  */
 @Composable
-internal fun PatchListDialog(
+internal fun DialogHostScope.PatchListDialog(
     icon: @Composable (Modifier) -> Unit,
     title: String,
     subtitle: String,
@@ -85,7 +84,7 @@ internal fun PatchListDialog(
     }
 
     var selectedKey by remember { mutableStateOf<String?>(null) }
-    var showFilterSheet by remember { mutableStateOf(false) }
+    var showFilterPanel by remember { mutableStateOf(false) }
     // A block the list no longer holds cannot stay picked, or the filter would hide everything
     val selected = selectedKey?.takeIf { key -> sections.any { it.key == key } }
     var foldedKeys by remember { mutableStateOf(emptySet<String>()) }
@@ -127,23 +126,10 @@ internal fun PatchListDialog(
     val searchLabel = stringResource(R.string.expert_mode_search)
     val hasSections = sections.size > 1
 
-    AppDialog(
+    ListDialog(
         onDismissRequest = onDismiss,
-        title = null,
         accentColor = accentColor,
-        footer = { PatchListFooter(onClose = onDismiss) },
-        padding = DialogPadding.Compact,
-        scrollable = false,
-        contentArrangement = Arrangement.Top,
-        fillContentHeight = true,
-        hideFooterWhileTyping = true
-    ) {
-        // Back closes the search, then the filter, before the dialog itself. The last handler
-        // registered is the first one asked, so they go in reverse
-        BackHandler(enabled = selected != null) { selectedKey = null }
-        SearchFieldBackHandler(search)
-
-        Column(modifier = Modifier.fillMaxSize()) {
+        header = {
             ListDialogHeader(
                 icon = icon,
                 title = title,
@@ -171,142 +157,142 @@ internal fun PatchListDialog(
                     TitleAction(
                         icon = Icons.Outlined.FilterList,
                         contentDescription = stringResource(R.string.filter),
-                        onClick = { showFilterSheet = true },
+                        onClick = { showFilterPanel = !showFilterPanel },
                         style = TitleActionStyle.Toggle,
-                        active = selected != null
+                        // Engaged while the panel is open, and marked while one block is shown alone
+                        active = showFilterPanel,
+                        marked = selected != null
                     )
                 }
             }
+        },
+        footer = { PatchListFooter(onClose = onDismiss) },
+        // Docked under the list rather than over it, so the list stays live and narrows as a block is picked
+        bottomBar = if (showFilterPanel) {
+            {
+                SectionFilterPanel(
+                    sections = sections,
+                    selectedKey = selected,
+                    onSelect = { selectedKey = it },
+                    onClose = { showFilterPanel = false }
+                )
+            }
+        } else null,
+        hideFooterWhileTyping = true
+    ) {
+        // Back closes the search, then the filter, before the dialog itself. The last handler
+        // registered is the first one asked, so they go in reverse
+        BackHandler(enabled = selected != null) { selectedKey = null }
+        SearchFieldBackHandler(search)
 
-            // A list read from the database arrives a frame or two late, and an empty list reads
-            // as "nothing to patch" until it does
-            AnimatedContent(
-                targetState = isLoading,
-                transitionSpec = Animations.fadeCrossfade(),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f),
-                label = "patchListLoading"
-            ) { loading ->
-                if (loading) {
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        PulsingLogoIndicator(delayed = true)
+        // A list read from the database arrives a frame or two late, and an empty list reads
+        // as "nothing to patch" until it does
+        AnimatedContent(
+            targetState = isLoading,
+            transitionSpec = Animations.fadeCrossfade(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
+            label = "patchListLoading"
+        ) { loading ->
+            if (loading) {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    PulsingLogoIndicator(delayed = true)
+                }
+                return@AnimatedContent
+            }
+
+            val listState = rememberLazyListState()
+            // The list otherwise holds on to whichever row led it, which another block leaves
+            // somewhere in the middle, so picking one starts the list over from its top
+            val headerCollapse = LocalDialogHeaderCollapse.current
+            LaunchedEffect(selected) {
+                listState.scrollToItem(0)
+                headerCollapse?.unfold()
+            }
+            DialogLazyList(
+                modifier = Modifier.fillMaxSize(),
+                state = listState,
+                verticalArrangement = Arrangement.spacedBy(SegmentGap)
+            ) {
+                if (notice != null) item(key = "notice") { Box(Modifier.endsBlock()) { notice() } }
+
+                if (shownSections.isEmpty()) {
+                    item(key = "empty_state") {
+                        PatchesListEmptyState(modifier = Modifier.animatedListItem(this))
                     }
-                    return@AnimatedContent
                 }
 
-                val listState = rememberLazyListState()
-                // The list otherwise holds on to whichever row led it, which another block leaves
-                // somewhere in the middle, so picking one starts the list over from its top
-                LaunchedEffect(selected) {
-                    listState.scrollToItem(0)
-                }
-                DialogLazyList(
-                    modifier = Modifier.fillMaxSize(),
-                    state = listState,
-                    verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing),
-                    pinnedFirstRow = true
-                ) {
-                    // A row of the list rather than a field above it, so the rows below ease into
-                    // place as it comes and goes. The row stays while the field is closed, and its
-                    // share of the spacing makes the gap under the header
-                    stickyHeader(key = "search") {
-                        AppDialogSearchHeader(
-                            visible = search.visible,
-                            value = search.query,
-                            onValueChange = { search.query = it },
-                            label = searchLabel,
-                            // Opaque, so rows scrolled under the gap stay hidden
+                shownSections.forEach { (section, groups) ->
+                    // A filter narrows the list far enough that a fold would only hide results
+                    val isFolded = !isFiltering && section.key in foldedKeys
+
+                    val target = commonTargets[section.key]
+                    val targetVersions = target?.versions.orEmpty().toList()
+
+                    // A list of several apps heads each one's patches as a block of its own
+                    val head = if (!hasSections) null else PatchBlockHead(
+                        key = "section_${section.key}",
+                        folded = isFolded
+                    ) { segment ->
+                        var versionsExpanded by rememberSaveable(saveStateKey, section.key) {
+                            mutableStateOf(false)
+                        }
+                        PatchGroupHeader(
+                            title = section.title,
+                            count = groups.sumOf { it.items.size },
+                            isExpanded = !isFolded,
+                            onToggle = if (isFiltering) null else ({
+                                foldedKeys = if (isFolded) foldedKeys - section.key
+                                else foldedKeys + section.key
+                            }),
+                            leading = { section.icon(Modifier.size(24.dp)) },
+                            accentColor = section.accentColor,
+                            // The versions belong to the block's app, unless the list's header names them
+                            badges = if (headerTarget == null && targetVersions.isNotEmpty()) {
+                                {
+                                    VersionBadges(
+                                        versions = targetVersions,
+                                        experimental = target?.experimentalVersions.orEmpty(),
+                                        expanded = versionsExpanded,
+                                        onToggle = { versionsExpanded = !versionsExpanded },
+                                        accentColor = section.accentColor
+                                    )
+                                }
+                            } else null,
+                            shape = segment.shape,
                             modifier = Modifier
-                                .background(MaterialTheme.colorScheme.background)
-                                .padding(top = Defaults.ItemSpacing)
+                                .animatedListItem(this)
+                                .endsBlock(segment.endsBlock)
                         )
                     }
 
-                    if (notice != null) item(key = "notice") { notice() }
-
-                    if (shownSections.isEmpty()) {
-                        item(key = "empty_state") {
-                            PatchesListEmptyState(modifier = Modifier.animatedListItem(this))
-                        }
-                    }
-
-                    shownSections.forEach { (section, groups) ->
-                        // A filter narrows the list far enough that a fold would only hide results
-                        val isFolded = !isFiltering && section.key in foldedKeys
-
-                        val target = commonTargets[section.key]
-                        val targetVersions = target?.versions.orEmpty().toList()
-
-                        if (hasSections) {
-                            item(key = "section_${section.key}") {
-                                var versionsExpanded by rememberSaveable(saveStateKey, section.key) {
-                                    mutableStateOf(false)
-                                }
-                                PatchGroupHeader(
-                                    title = section.title,
-                                    count = groups.sumOf { it.items.size },
-                                    isExpanded = !isFolded,
-                                    onToggle = if (isFiltering) null else ({
-                                        foldedKeys = if (isFolded) foldedKeys - section.key
-                                        else foldedKeys + section.key
-                                    }),
-                                    leading = { section.icon(Modifier.size(24.dp)) },
-                                    accentColor = section.accentColor,
-                                    // The versions belong to the block's app, unless the list's header names them
-                                    badges = if (headerTarget == null && targetVersions.isNotEmpty()) {
-                                        {
-                                            VersionBadges(
-                                                versions = targetVersions,
-                                                experimental = target?.experimentalVersions.orEmpty(),
-                                                expanded = versionsExpanded,
-                                                onToggle = { versionsExpanded = !versionsExpanded },
-                                                accentColor = section.accentColor
-                                            )
-                                        }
-                                    } else null,
-                                    modifier = Modifier.animatedListItem(this)
-                                )
-                            }
-                        }
-
-                        if (!isFolded) {
-                            patchGroupRows(
-                                sectionKey = section.key,
-                                groups = groups,
-                                key = { (index, _): IndexedValue<PatchInfo> -> "${section.key}:$index" },
-                                isFiltering = isFiltering,
-                                folds = patchFolds,
-                                onToggle = { group -> patchSections.toggle(section.key, group) },
-                                accentColor = section.accentColor
-                            ) { (_, patch) ->
-                                PatchItemCard(
-                                    patch = patch,
-                                    saveStateKey = "$saveStateKey:${section.key}",
-                                    packageName = section.packageName,
-                                    commonVersions = target?.versions,
-                                    onExpertBadgeClick = onExpertBadgeClick,
-                                    accentColor = section.accentColor,
-                                    modifier = Modifier.animatedListItem(this)
-                                )
-                            }
-                        }
+                    patchGroupRows(
+                        sectionKey = section.key,
+                        groups = groups,
+                        key = { (index, _): IndexedValue<PatchInfo> -> "${section.key}:$index" },
+                        isFiltering = isFiltering,
+                        folds = patchFolds,
+                        onToggle = { group -> patchSections.toggle(section.key, group) },
+                        accentColor = section.accentColor,
+                        head = head
+                    ) { (_, patch), segment ->
+                        PatchItemCard(
+                            patch = patch,
+                            saveStateKey = "$saveStateKey:${section.key}",
+                            packageName = section.packageName,
+                            commonVersions = target?.versions,
+                            onExpertBadgeClick = onExpertBadgeClick,
+                            accentColor = section.accentColor,
+                            shape = segment.shape,
+                            modifier = Modifier
+                                .animatedListItem(this)
+                                .endsBlock(segment.endsBlock)
+                        )
                     }
                 }
             }
         }
-    }
-
-    if (showFilterSheet) {
-        SectionFilterSheet(
-            sections = sections,
-            selectedKey = selected,
-            onSelect = { key ->
-                selectedKey = key
-                showFilterSheet = false
-            },
-            onDismiss = { showFilterSheet = false }
-        )
     }
 }
 
@@ -329,30 +315,33 @@ private fun PatchListFooter(onClose: () -> Unit) {
     )
 }
 
-/** Sheet picking one block of the list to show alone, in the order the list has them. */
-@OptIn(ExperimentalMaterial3Api::class)
+/** Panel picking one block of the list to show alone, in the order the list has them. */
 @Composable
-private fun SectionFilterSheet(
+private fun SectionFilterPanel(
     sections: List<PatchListSection>,
     selectedKey: String?,
     onSelect: (String?) -> Unit,
-    onDismiss: () -> Unit
+    onClose: () -> Unit
 ) {
-    AppBottomSheet(onDismissRequest = onDismiss) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .navigationBarsPadding()
-        ) {
-            PanelHeader(title = { PanelTitle(text = stringResource(R.string.filter)) })
+    DockedPanel(visible = true, onBack = onClose) {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            PanelHeader(title = { PanelTitle(text = stringResource(R.string.filter)) }) {
+                TitleAction(
+                    icon = Icons.Outlined.Close,
+                    contentDescription = stringResource(R.string.close),
+                    onClick = onClose,
+                    style = TitleActionStyle.Neutral
+                )
+            }
             val scrollState = rememberScrollState()
-            Box(Modifier.fillMaxWidth()) {
+            // Held short of the list it filters, which stays in view above it
+            Box(Modifier.fillMaxWidth().heightIn(max = SectionFilterMaxHeight)) {
                 FlowRow(
                     modifier = Modifier
                         .verticalScrollFade(scrollState)
                         .verticalScroll(scrollState)
-                        .padding(start = Defaults.ContentPadding, end = Defaults.ContentPadding, bottom = Defaults.ContentPadding),
-                    horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
+                        .padding(start = Defaults.SpaceLarge, end = Defaults.SpaceLarge, bottom = Defaults.SpaceLarge),
+                    horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
                 ) {
                     AppFilterChip(
                         selected = selectedKey == null,
@@ -370,11 +359,13 @@ private fun SectionFilterSheet(
                     }
                 }
 
-                ListScrollbar(scrollState = scrollState)
+                ListScrollbar(scrollState = scrollState, modifier = Modifier.padding(vertical = Defaults.SpaceMedium))
             }
         }
     }
 }
+
+private val SectionFilterMaxHeight = 280.dp
 
 /**
  * One patch of a patch list: its name, description and what sets it apart from the rest of its
@@ -382,6 +373,7 @@ private fun SectionFilterSheet(
  * and the options fold out from a badge naming how many there are.
  *
  * @param packageName App the block lists the patch under, whose versions the card compares.
+ * @param shape Its place among the rows of its block, see [ListSegment].
  */
 @Composable
 internal fun PatchItemCard(
@@ -391,7 +383,8 @@ internal fun PatchItemCard(
     commonVersions: Set<String>?,
     modifier: Modifier = Modifier,
     onExpertBadgeClick: (() -> Unit)? = null,
-    accentColor: Color? = null
+    accentColor: Color? = null,
+    shape: CornerBasedShape? = null
 ) {
     var expandVersions by rememberSaveable(saveStateKey, patch.name, "versions") {
         mutableStateOf(false)
@@ -417,20 +410,31 @@ internal fun PatchItemCard(
         modifier = modifier,
         showBorder = true,
         borderColor = appAccentBorder(accentColor),
-        color = cardColor
+        color = cardColor,
+        shape = shape
     ) {
         // The badges on the card take the app's color, as its edge does
         ProvideCardAccent(badgeAccent, cardColor) {
-            Column(
-                modifier = Modifier.padding(Defaults.ContentPadding),
-                verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
-            ) {
-                PatchCardText(name = patch.displayName, description = patch.description)
+            // The gaps go with what they part, so the options bring theirs as they fold out rather
+            // than the column opening it at once
+            Column(modifier = Modifier.padding(Defaults.SpaceLarge)) {
+                Row(horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)) {
+                    PatchCardText(
+                        name = patch.displayName,
+                        description = patch.description,
+                        modifier = Modifier.weight(1f)
+                    )
+                    // The whole card folds the options out, and the chevron says so
+                    if (options.isNotEmpty()) {
+                        ExpandChevron(expanded = expandOptions, announced = true)
+                    }
+                }
 
                 if (versions.isNotEmpty() || options.isNotEmpty() || isExpertOnly) {
                     FlowRow(
-                        horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
-                        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
+                        modifier = Modifier.padding(top = Defaults.SpaceMedium),
+                        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
+                        verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
                     ) {
                         VersionBadges(
                             versions = versions,
@@ -442,7 +446,7 @@ internal fun PatchItemCard(
                         if (options.isNotEmpty()) {
                             AppAccentBadge(
                                 text = pluralStringResource(R.plurals.option_count, options.size, options.size.toString()),
-                                icon = if (expandOptions) Icons.Outlined.ExpandLess else Icons.Outlined.Tune,
+                                icon = Icons.Outlined.Tune,
                                 onClick = { expandOptions = !expandOptions }
                             )
                         }
@@ -460,21 +464,20 @@ internal fun PatchItemCard(
                 }
 
                 if (options.isNotEmpty()) {
-                    AnimatedVisibility(
-                        visible = expandOptions,
-                        enter = Animations.expandFadeEnter,
-                        exit = Animations.shrinkFadeExit
-                    ) {
-                        Column(verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)) {
+                    ListRowFold(visible = expandOptions) {
+                        Column(
+                            modifier = Modifier.padding(top = Defaults.SpaceMedium),
+                            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
+                        ) {
                             options.forEach { option ->
                                 Surface(
                                     modifier = Modifier.fillMaxWidth(),
-                                    shape = RoundedCornerShape(Defaults.CompactCornerRadius),
+                                    shape = RoundedCornerShape(Defaults.CornerMedium),
                                     color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
                                 ) {
                                     Column(
-                                        modifier = Modifier.padding(Defaults.ItemSpacing),
-                                        verticalArrangement = Arrangement.spacedBy(6.dp)
+                                        modifier = Modifier.padding(Defaults.SpaceMedium),
+                                        verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
                                     ) {
                                         Text(
                                             text = option.title,
@@ -538,7 +541,10 @@ private fun FoldingBadge(
     content: @Composable () -> Unit
 ) {
     val state = remember { MutableTransitionState(visible) }
-    state.targetState = visible
+    // A badge coming or going can wrap the row onto another line, resizing the card at once. It
+    // follows a frame behind, so the rows below have let go of their spring by the time it does
+    ListRowResizes(resizing = state.targetState != visible || !state.isIdle)
+    LaunchedEffect(visible) { state.targetState = visible }
 
     val enter = remember(order) { Animations.chipEnterStaggered(order) }
     // Gone at once: a badge fading out would hold its place, and the toggle after the run would

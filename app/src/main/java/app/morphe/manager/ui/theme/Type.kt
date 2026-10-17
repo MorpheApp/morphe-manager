@@ -25,3 +25,10 @@ val Typography = Typography(
         letterSpacing = 0.5.sp
     )
 )
+
+/**
+ * Name heading an app's card or a dialog, a step under titleLarge so it leads without dwarfing
+ * the bodyMedium line under it, which is where the card or dialog says the most.
+ */
+val Typography.headerTitle: TextStyle
+    get() = titleLarge.copy(fontSize = 20.sp, lineHeight = 26.sp, fontWeight = FontWeight.SemiBold)

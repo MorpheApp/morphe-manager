@@ -29,7 +29,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
@@ -50,10 +49,10 @@ import app.morphe.manager.util.PatchSelection
 import app.morphe.manager.util.PatchSelectionUtils.hasCustomizedOptions
 import app.morphe.manager.util.PatchSelectionUtils.hasMissingRequiredOptions
 import app.morphe.manager.util.PatchSelectionUtils.hasUniversalToEnable
-import app.morphe.manager.util.toast
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.seconds
+import org.koin.compose.koinInject
 
 /**
  * The patches the expert-mode dialog chooses from: every source's patches with whether each is
@@ -92,7 +91,7 @@ class ExpertPatchActions(
  * @param appIcon Icon for the header where no source has one, as for a file picked from storage.
  */
 @Composable
-fun ExpertModeDialog(
+fun DialogHostScope.ExpertModeDialog(
     packageName: String,
     appName: String? = null,
     appIcon: Drawable? = null,
@@ -119,7 +118,7 @@ fun ExpertModeDialog(
     val selectedPatchForOptions = remember { mutableStateOf<Pair<Int, PatchInfo>?>(null) }
     val search = rememberSearchFieldState()
     val showMultipleSourcesWarning = remember { mutableStateOf(false) }
-    val context = LocalContext.current
+    val messages = koinInject<UserMessages>()
 
     // Both markers are keyed by bundle, since the same patch name can come from several sources
     // with values of its own. Recomputed whenever the selected patches or options change
@@ -210,11 +209,180 @@ fun ExpertModeDialog(
         )
     }
 
-    AppDialog(
+    // Layout mode is determined by total bundle count
+    val hasMultipleBundleLayout = allPatchesInfo.size > 1
+    val pagerState = rememberPagerState { displayedBundles.size }
+    val coroutineScope = rememberCoroutineScope()
+
+    // Held to a source rather than to a page index, which a dropped source reassigns.
+    // Only the settled page counts, so pages a swipe passes over are not a choice
+    val currentBundles = rememberUpdatedState(displayedBundles)
+    val openBundleUid = remember { mutableStateOf<Int?>(null) }
+    // One collector outlives every change: an effect keyed on the filter would be torn
+    // down by the next keystroke, leaving the pager halfway between two bundles
+    LaunchedEffect(pagerState) {
+        launch {
+            snapshotFlow { pagerState.settledPage }.collect { page ->
+                currentBundles.value.getOrNull(page)?.let { (bundle, _) ->
+                    openBundleUid.value = bundle.uid
+                }
+            }
+        }
+        snapshotFlow { currentBundles.value }.collect { bundles ->
+            val openUid = openBundleUid.value ?: return@collect
+            val target = bundles.indexOfFirst { (bundle, _) -> bundle.uid == openUid }
+            if (target == pagerState.currentPage) return@collect
+            if (target >= 0) {
+                // The same source at a new index, so it must not appear to move
+                pagerState.scrollToPage(target)
+            } else if (bundles.isNotEmpty()) {
+                // The open source lost every row: follow to one that kept some
+                pagerState.animateScrollToPage(0)
+            }
+        }
+    }
+
+    // Created up front, outside the pager, so the scrollbar overlay below can track
+    // whichever page is current. HorizontalPager clips each page to its own bounds, so
+    // a scrollbar drawn inside a page can never bleed out to the true dialog edge.
+    // Keyed by source, not by the page index a filter reassigns, so no page inherits
+    // the position of whichever sibling held that slot
+    val bundleUids = remember(allPatchesInfo) { allPatchesInfo.map { (bundle, _) -> bundle.uid } }
+    val pageListStates = rememberSaveable(
+        bundleUids,
+        saver = listSaver(
+            save = { states ->
+                states.entries.flatMap { (uid, state) ->
+                    listOf(uid, state.firstVisibleItemIndex, state.firstVisibleItemScrollOffset)
+                }
+            },
+            restore = { saved ->
+                saved.chunked(3).associate { (uid, index, offset) ->
+                    uid to LazyListState(index, offset)
+                }
+            }
+        )
+    ) {
+        bundleUids.associateWith { LazyListState() }
+    }
+
+    // The pager settles its own page as the count changes, so a frame can arrive
+    // holding an index past the list the filter just narrowed
+    val currentIndex = pagerState.currentPage.coerceAtMost(displayedBundles.lastIndex)
+    // The source whose controls head the list: the lone one, or the one whose tab is open
+    val headBundle = if (hasMultipleBundleLayout) {
+        displayedBundles.getOrNull(currentIndex)?.first
+    } else {
+        allPatchesInfo.firstOrNull()?.first
+    }
+
+    ListDialog(
         onDismissRequest = onDismiss,
-        title = null,
-        dismissOnClickOutside = false,
         accentColor = appColor,
+        header = {
+            // Headed by the app, as its other dialogs are. A lone source takes the subtitle's
+            // second line rather than a row of its own, while several get their tabs below
+            ListDialogHeader(
+                icon = { modifier ->
+                    AppIcon(packageName = packageName, icon = appIcon, contentDescription = null, modifier = modifier)
+                },
+                title = headerTitle,
+                subtitle = listOfNotNull(
+                    stringResource(R.string.settings_advanced_expert_mode),
+                    allPatchesInfo.singleOrNull()?.first?.name
+                ).joinToString("\n"),
+                search = search,
+                searchLabel = stringResource(R.string.expert_mode_search),
+                // The tabs between the sources stay put, the controls of the open one fold away
+                // while the patches scroll
+                content = if (hasMultipleBundleLayout && displayedBundles.isNotEmpty()) {
+                    {
+                        // The open tab is marked by a fill of its own rather than a line under it, and
+                        // the row fades out at an end it runs past, so there is plainly more to scroll to
+                        val tabScroll = rememberScrollState()
+                        SecondaryScrollableTabRow(
+                            selectedTabIndex = currentIndex,
+                            modifier = Modifier
+                                .padding(top = Defaults.SpaceSmall)
+                                .horizontalScrollFade(tabScroll),
+                            scrollState = tabScroll,
+                            edgePadding = 0.dp,
+                            indicator = {},
+                            divider = {},
+                            containerColor = Color.Transparent
+                        ) {
+                            displayedBundles.forEachIndexed { index, (bundle, patches) ->
+                                SourceTab(
+                                    source = sourcesByUid[bundle.uid],
+                                    name = bundle.name,
+                                    count = "${patches.count { it.second }}/${patches.size}",
+                                    selected = currentIndex == index,
+                                    onClick = { coroutineScope.launch { pagerState.animateScrollToPage(index) } }
+                                )
+                            }
+                        }
+                    }
+                } else null,
+                // Kept in place on a tab the filters emptied, so the head keeps its height and the
+                // bulk actions gray out instead of the whole row snapping away
+                collapsible = headBundle?.let { bundle ->
+                    {
+                        BundleControls(
+                            bundle = bundle,
+                            patches = filteredPatchesByUid[bundle.uid].orEmpty(),
+                            patchActions = patchActions,
+                            savedPatches = savedPatches,
+                            lockStateOf = lockStateOf,
+                            holdsUniversalPatches = holdsUniversalPatches,
+                            onExpandUniversal = { patchSections.setExpanded(it, UNIVERSAL_GROUP_KEY, true) }
+                        )
+                    }
+                }
+            ) {
+                // The counter already stands for the selection, so it doubles as the way to filter
+                // the list down to it
+                val badgeTone = if (totalSelectedCount > 0) SemanticTone.Primary else SemanticTone.Neutral
+                // In the header's color like the search beside it: tinted while it counts,
+                // filled while it filters
+                val accent = LocalAccent.current
+                val badgeContainer = when {
+                    accent == null -> if (isSelectedOnly) MaterialTheme.colorScheme.primary else badgeTone.container
+                    isSelectedOnly -> accent
+                    totalSelectedCount > 0 -> accent.copy(alpha = AccentAlpha.LEAD)
+                    else -> accent.copy(alpha = AccentAlpha.STEP)
+                }
+                val badgeContent = when {
+                    accent != null -> appAccentContent(badgeContainer)
+                    isSelectedOnly -> MaterialTheme.colorScheme.onPrimary
+                    else -> badgeTone.content
+                }
+                // Still switchable off after the last patch is unticked under the filter
+                val canFilter = totalSelectedCount > 0 || isSelectedOnly
+                val filterState = stringResource(
+                    if (isSelectedOnly) {
+                        R.string.expert_mode_selected_only_on
+                    } else {
+                        R.string.expert_mode_selected_only_off
+                    }
+                )
+                StatusBadge(
+                    text = "$totalSelectedCount/$totalPatchesCount",
+                    // Carried while the filter is merely available, so the counter reads as the
+                    // control it is instead of only announcing itself once tapped
+                    icon = Icons.Outlined.FilterAlt.takeIf { canFilter },
+                    tone = badgeTone,
+                    // Filled rather than tonal while filtering, so the narrowed list has a visible cause
+                    containerColor = badgeContainer,
+                    contentColor = badgeContent,
+                    onClick = if (canFilter) {
+                        { toggleSelectedOnly() }
+                    } else {
+                        null
+                    },
+                    modifier = Modifier.semantics { stateDescription = filterState }
+                )
+            }
+        },
         footer = {
             AppDialogActions(
                 // A row lays its actions out from the right, so patching ends up there
@@ -236,320 +404,111 @@ fun ExpertModeDialog(
                 )
             )
         },
-        padding = DialogPadding.Compact,
-        scrollable = false,
         hideFooterWhileTyping = true
     ) {
         SearchFieldBackHandler(search)
         // Back unwinds the filter before the dialog itself, the way the search field does
         BackHandler(enabled = isSelectedOnly) { selectedOnly.value = null }
 
-        // Layout mode is determined by total bundle count
-        val hasMultipleBundleLayout = allPatchesInfo.size > 1
-        val searchLabel = stringResource(R.string.expert_mode_search)
+        RetirePrereleaseNotice(
+            bundleUid = headBundle?.uid?.takeIf { it in prereleaseBundleUids },
+            onRetire = { retireNotice(it) }
+        )
 
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
-        ) {
-            Column {
-                // Headed by the app, as its other dialogs are. A lone source takes the subtitle's
-                // second line rather than a row of its own, while several get their tabs below
-                ListDialogHeader(
-                    icon = { modifier ->
-                        AppIcon(packageName = packageName, icon = appIcon, contentDescription = null, modifier = modifier)
-                    },
-                    title = headerTitle,
-                    subtitle = listOfNotNull(
-                        stringResource(R.string.settings_advanced_expert_mode),
-                        allPatchesInfo.singleOrNull()?.first?.name
-                    ).joinToString("\n"),
-                    search = search,
-                    searchLabel = searchLabel
-                ) {
-                    // The counter already stands for the selection, so it doubles as the way to filter
-                    // the list down to it
-                    val badgeTone = if (totalSelectedCount > 0) SemanticTone.Primary else SemanticTone.Neutral
-                    // In the header's color like the search beside it: tinted while it counts,
-                    // filled while it filters
-                    val accent = LocalAccent.current
-                    val badgeContainer = when {
-                        accent == null -> if (isSelectedOnly) MaterialTheme.colorScheme.primary else badgeTone.container
-                        isSelectedOnly -> accent
-                        totalSelectedCount > 0 -> accent.copy(alpha = AccentAlpha.LEAD)
-                        else -> accent.copy(alpha = AccentAlpha.STEP)
-                    }
-                    val badgeContent = when {
-                        accent != null -> appAccentContent(badgeContainer)
-                        isSelectedOnly -> MaterialTheme.colorScheme.onPrimary
-                        else -> badgeTone.content
-                    }
-                    // Still switchable off after the last patch is unticked under the filter
-                    val canFilter = totalSelectedCount > 0 || isSelectedOnly
-                    val filterState = stringResource(
-                        if (isSelectedOnly) {
-                            R.string.expert_mode_selected_only_on
-                        } else {
-                            R.string.expert_mode_selected_only_off
-                        }
-                    )
-                    StatusBadge(
-                        text = "$totalSelectedCount/$totalPatchesCount",
-                        // Carried while the filter is merely available, so the counter reads as the
-                        // control it is instead of only announcing itself once tapped
-                        icon = Icons.Outlined.FilterAlt.takeIf { canFilter },
-                        tone = badgeTone,
-                        // Filled rather than tonal while filtering, so the narrowed list has a visible cause
-                        containerColor = badgeContainer,
-                        contentColor = badgeContent,
-                        onClick = if (canFilter) {
-                            { toggleSelectedOnly() }
-                        } else {
-                            null
-                        },
-                        modifier = Modifier.semantics { stateDescription = filterState }
+        // Each source's page keeps its own scroll, so the controls of the one turned to come back
+        // into view rather than staying folded from the page left
+        val headerCollapse = LocalDialogHeaderCollapse.current
+        LaunchedEffect(pagerState.settledPage) { headerCollapse?.unfold() }
+
+        // Above every source's patches rather than inside one: what it counts is the sources that
+        // have no page here at all
+        val leadingRows: LazyListScope.() -> Unit = {
+            if (hiddenSourceCount > 0) {
+                item(key = "hidden-sources-notice") {
+                    Notice(
+                        text = pluralStringResource(
+                            R.plurals.expert_mode_hidden_sources_notice,
+                            hiddenSourceCount,
+                            hiddenSourceCount.toString()
+                        ),
+                        icon = Icons.Outlined.VisibilityOff,
+                        tone = SemanticTone.Neutral,
+                        density = NoticeDensity.Compact,
+                        modifier = Modifier
+                            .animatedListItem(this)
+                            .endsBlock()
+                            .clickable(onClick = onShowHiddenSources)
                     )
                 }
-
-                // Its gap to the header is part of the field, so the list below settles as it
-                // comes and goes instead of snapping by the spacing the column adds after it
-                AppDialogSearchHeader(
-                    visible = search.visible,
-                    value = search.query,
-                    onValueChange = { search.query = it },
-                    label = searchLabel,
-                    modifier = Modifier.padding(top = Defaults.ContentPaddingSmall)
-                )
             }
+        }
 
-            // Above the list rather than inside one source's page: what it counts is the sources
-            // that have no page here at all
-            if (hiddenSourceCount > 0) {
-                Notice(
-                    text = pluralStringResource(
-                        R.plurals.expert_mode_hidden_sources_notice,
-                        hiddenSourceCount,
-                        hiddenSourceCount.toString()
-                    ),
-                    icon = Icons.Outlined.VisibilityOff,
-                    tone = SemanticTone.Neutral,
-                    density = NoticeDensity.Compact,
-                    modifier = Modifier.clickable(onClick = onShowHiddenSources)
-                )
-            }
-
+        val barInsets = LocalDialogBarInsets.current
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        ) {
             if (!hasMultipleBundleLayout) {
-                val (bundle, _) = allPatchesInfo.firstOrNull() ?: return@Column
+                val bundle = headBundle ?: return@Box
                 val filteredPatches = filteredPatchesByUid[bundle.uid]
-                val displayPatches = filteredPatches ?: emptyList()
-
-                BundleControls(
-                    bundle = bundle,
-                    patches = displayPatches,
-                    patchActions = patchActions,
-                    savedPatches = savedPatches,
-                    lockStateOf = lockStateOf,
-                    holdsUniversalPatches = holdsUniversalPatches,
-                    onExpandUniversal = { patchSections.setExpanded(it, UNIVERSAL_GROUP_KEY, true) }
-                )
-
-                RetirePrereleaseNotice(
-                    bundleUid = bundle.uid.takeIf { it in prereleaseBundleUids },
-                    onRetire = { retireNotice(it) }
-                )
-
                 val singleBundleList = rememberLazyListState()
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f)
-                ) {
-                    // The list keeps its place while empty, so its rows fade out under the
-                    // empty state rather than the two swapping in a single frame
+
+                // The list keeps its place while empty, so its rows fade out under the
+                // empty state rather than the two swapping in a single frame
+                BundlePatchList(
+                    bundle = bundle,
+                    patches = filteredPatches.orEmpty(),
+                    listState = singleBundleList,
+                    markers = markers,
+                    isFiltering = isFiltering,
+                    sectionState = patchSections,
+                    lockStateOf = lockStateOf,
+                    patchActions = patchActions,
+                    accentColor = appColor,
+                    leadingRows = leadingRows,
+                    onConfigureOptions = { selectedPatchForOptions.value = bundle.uid to it }
+                )
+
+                if (filteredPatches != null) DialogScrollIndicators(listState = singleBundleList)
+            } else if (displayedBundles.isEmpty()) {
+                // Nothing matched anywhere, so there is no tab to draw. The pager state
+                // outlives this, so clearing the filter hands the open source back
+                PatchesListEmptyState(modifier = Modifier.padding(barInsets))
+            } else {
+                HorizontalPager(
+                    state = pagerState,
+                    modifier = Modifier.fillMaxSize()
+                ) { pageIndex ->
+                    val (bundle, _) = displayedBundles.getOrNull(pageIndex) ?: return@HorizontalPager
+                    val patches = filteredPatchesByUid[bundle.uid]
+                    val listState = pageListStates[bundle.uid] ?: return@HorizontalPager
+
                     BundlePatchList(
                         bundle = bundle,
-                        patches = displayPatches,
-                        listState = singleBundleList,
+                        patches = patches.orEmpty(),
+                        listState = listState,
                         markers = markers,
                         isFiltering = isFiltering,
                         sectionState = patchSections,
                         lockStateOf = lockStateOf,
                         patchActions = patchActions,
                         accentColor = appColor,
+                        leadingRows = leadingRows,
                         onConfigureOptions = { selectedPatchForOptions.value = bundle.uid to it }
                     )
-
-                    if (filteredPatches != null) {
-                        ListScrollbar(
-                            listState = singleBundleList,
-                            modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
-                        )
-                    }
-                }
-            } else {
-                // Multiple bundles tab layout
-                val pagerState = rememberPagerState { displayedBundles.size }
-                val coroutineScope = rememberCoroutineScope()
-
-                // Held to a source rather than to a page index, which a dropped source reassigns.
-                // Only the settled page counts, so pages a swipe passes over are not a choice
-                val currentBundles = rememberUpdatedState(displayedBundles)
-                val openBundleUid = remember { mutableStateOf<Int?>(null) }
-                // One collector outlives every change: an effect keyed on the filter would be torn
-                // down by the next keystroke, leaving the pager halfway between two bundles
-                LaunchedEffect(pagerState) {
-                    launch {
-                        snapshotFlow { pagerState.settledPage }.collect { page ->
-                            currentBundles.value.getOrNull(page)?.let { (bundle, _) ->
-                                openBundleUid.value = bundle.uid
-                            }
-                        }
-                    }
-                    snapshotFlow { currentBundles.value }.collect { bundles ->
-                        val openUid = openBundleUid.value ?: return@collect
-                        val target = bundles.indexOfFirst { (bundle, _) -> bundle.uid == openUid }
-                        if (target == pagerState.currentPage) return@collect
-                        if (target >= 0) {
-                            // The same source at a new index, so it must not appear to move
-                            pagerState.scrollToPage(target)
-                        } else if (bundles.isNotEmpty()) {
-                            // The open source lost every row: follow to one that kept some
-                            pagerState.animateScrollToPage(0)
-                        }
-                    }
                 }
 
-                // Created up front, outside the pager, so the scrollbar overlay below can track
-                // whichever page is current. HorizontalPager clips each page to its own bounds, so
-                // a scrollbar drawn inside a page can never bleed out to the true dialog edge.
-                // Keyed by source, not by the page index a filter reassigns, so no page inherits
-                // the position of whichever sibling held that slot
-                val bundleUids = remember(allPatchesInfo) { allPatchesInfo.map { (bundle, _) -> bundle.uid } }
-                val pageListStates = rememberSaveable(
-                    bundleUids,
-                    saver = listSaver(
-                        save = { states ->
-                            states.entries.flatMap { (uid, state) ->
-                                listOf(uid, state.firstVisibleItemIndex, state.firstVisibleItemScrollOffset)
-                            }
-                        },
-                        restore = { saved ->
-                            saved.chunked(3).associate { (uid, index, offset) ->
-                                uid to LazyListState(index, offset)
-                            }
-                        }
-                    )
-                ) {
-                    bundleUids.associateWith { LazyListState() }
-                }
-
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f)
-                ) {
-                    if (displayedBundles.isEmpty()) {
-                        // Nothing matched anywhere, so there is no tab to draw. The pager state
-                        // outlives this, so clearing the filter hands the open source back
-                        PatchesListEmptyState()
-                        return@Column
-                    }
-
-                    // The pager settles its own page as the count changes, so a frame can arrive
-                    // holding an index past the list the filter just narrowed
-                    val currentIndex = pagerState.currentPage.coerceAtMost(displayedBundles.lastIndex)
-
-                    // The open tab is marked by a fill of its own rather than a line under it, and
-                    // the row fades out at an end it runs past, so there is plainly more to scroll to
-                    val tabScroll = rememberScrollState()
-                    SecondaryScrollableTabRow(
-                        selectedTabIndex = currentIndex,
-                        modifier = Modifier.horizontalScrollFade(tabScroll),
-                        scrollState = tabScroll,
-                        edgePadding = 0.dp,
-                        indicator = {},
-                        divider = {},
-                        containerColor = Color.Transparent
-                    ) {
-                        displayedBundles.forEachIndexed { index, (bundle, patches) ->
-                            SourceTab(
-                                source = sourcesByUid[bundle.uid],
-                                name = bundle.name,
-                                count = "${patches.count { it.second }}/${patches.size}",
-                                selected = currentIndex == index,
-                                onClick = { coroutineScope.launch { pagerState.animateScrollToPage(index) } }
-                            )
-                        }
-                    }
-
-                    // Controls fixed below the tab row
-                    val (currentBundle, _) = displayedBundles[currentIndex]
-                    val currentFiltered = filteredPatchesByUid[currentBundle.uid]
-
-                    RetirePrereleaseNotice(
-                        bundleUid = currentBundle.uid.takeIf { it in prereleaseBundleUids },
-                        onRetire = { retireNotice(it) }
-                    )
-
-                    // Kept in place on a tab the filters emptied, so the pager height holds and
-                    // the bulk actions gray out instead of the whole row snapping away
-                    BundleControls(
-                        bundle = currentBundle,
-                        patches = currentFiltered.orEmpty(),
-                        patchActions = patchActions,
-                        savedPatches = savedPatches,
-                        lockStateOf = lockStateOf,
-                        holdsUniversalPatches = holdsUniversalPatches,
-                        onExpandUniversal = { patchSections.setExpanded(it, UNIVERSAL_GROUP_KEY, true) },
-                        modifier = Modifier.padding(vertical = Defaults.ContentPaddingSmall)
-                    )
-
-                    // Pager
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(1f)
-                    ) {
-                        HorizontalPager(
-                            state = pagerState,
-                            modifier = Modifier.fillMaxSize()
-                        ) { pageIndex ->
-                            val (bundle, _) = displayedBundles.getOrNull(pageIndex) ?: return@HorizontalPager
-                            val patches = filteredPatchesByUid[bundle.uid]
-                            val listState = pageListStates[bundle.uid] ?: return@HorizontalPager
-
-                            BundlePatchList(
-                                bundle = bundle,
-                                patches = patches.orEmpty(),
-                                listState = listState,
-                                markers = markers,
-                                isFiltering = isFiltering,
-                                sectionState = patchSections,
-                                lockStateOf = lockStateOf,
-                                patchActions = patchActions,
-                                accentColor = appColor,
-                                onConfigureOptions = { selectedPatchForOptions.value = bundle.uid to it }
-                            )
-                        }
-
-                        // Single overlay for the whole pager, tracking whichever page is current,
-                        // instead of one per page - a page-local scrollbar would be clipped by the
-                        // pager before it could reach the true dialog edge
-                        val currentPageList = pageListStates[currentBundle.uid]
-                        if (currentPageList != null) {
-                            ListScrollbar(
-                                listState = currentPageList,
-                                modifier = Modifier.offset(x = LocalDialogHorizontalInset.current)
-                            )
-                        }
-                    }
-                }
+                // Single overlay for the whole pager, tracking whichever page is current,
+                // instead of one per page - a page-local scrollbar would be clipped by the
+                // pager before it could reach the true dialog edge
+                headBundle?.let { pageListStates[it.uid] }?.let { DialogScrollIndicators(listState = it) }
             }
         }
     }
 
     // Multiple bundles warning dialog
-    if (showMultipleSourcesWarning.value) {
+    DialogHost(visible = showMultipleSourcesWarning.value) {
         ConfirmDialog(
             title = stringResource(R.string.expert_mode_multiple_sources_warning_title),
             message = stringResource(R.string.expert_mode_multiple_sources_warning_message),
@@ -564,9 +523,7 @@ fun ExpertModeDialog(
     }
 
     // Options dialog
-    val patchForOptions = selectedPatchForOptions.value
-    if (patchForOptions != null) {
-        val (bundleUid, patch) = patchForOptions
+    DialogHost(target = selectedPatchForOptions.value) { (bundleUid, patch) ->
         val missingOptionsMessage = stringResource(R.string.patch_option_required_missing, patch.displayName)
         PatchOptionsDialog(
             patch = patch,
@@ -583,9 +540,9 @@ fun ExpertModeDialog(
                 patchActions.onResetOptions(bundleUid, patch.name)
             },
             onDismiss = {
-                // Show a toast if the patch still has unfilled required options
+                // Tell the user if the patch still has unfilled required options
                 if (patch.name in patchesWithMissingRequired[bundleUid].orEmpty()) {
-                    context.toast(missingOptionsMessage)
+                    messages.show(missingOptionsMessage)
                 }
                 selectedPatchForOptions.value = null
             }
@@ -631,7 +588,7 @@ private fun SourceTab(
         // which leaves the first flush with the list below. Nothing above or below, so the row
         // keeps the same spacing to the header and the controls as a lone source's layout does
         modifier = Modifier
-            .padding(end = Defaults.ContentPaddingSmall)
+            .padding(end = Defaults.SpaceSmall)
             .clip(Defaults.PillShape)
             .background(fill),
         selectedContentColor = if (accent != null) {
@@ -642,9 +599,9 @@ private fun SourceTab(
         unselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
     ) {
         Row(
-            modifier = Modifier.padding(horizontal = Defaults.ItemSpacing, vertical = Defaults.ContentPaddingSmall),
+            modifier = Modifier.padding(horizontal = Defaults.SpaceMedium, vertical = Defaults.SpaceSmall),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
+            horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
         ) {
             if (source != null) {
                 BundleIcon(bundle = source, modifier = Modifier.size(24.dp), enabled = source.enabled)
@@ -703,7 +660,9 @@ private fun RetirePrereleaseNotice(bundleUid: Int?, onRetire: (Int) -> Unit) {
 private fun LazyListScope.prereleaseNotice() = item(key = "prerelease-notice") {
     Notice(
         text = stringResource(R.string.expert_mode_prerelease_notice),
-        modifier = Modifier.animatedListItem(this),
+        modifier = Modifier
+            .animatedListItem(this)
+            .endsBlock(),
         icon = Icons.Outlined.WarningAmber,
         tone = SemanticTone.Warning,
         density = NoticeDensity.Compact
@@ -735,8 +694,7 @@ private fun BundleControls(
     savedPatches: PatchSelection,
     lockStateOf: (PatchInfo) -> PatchLockState,
     holdsUniversalPatches: (bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) -> Boolean,
-    onExpandUniversal: (bundleUid: Int) -> Unit,
-    modifier: Modifier = Modifier
+    onExpandUniversal: (bundleUid: Int) -> Unit
 ) {
     val holdsUniversal = holdsUniversalPatches(bundle.uid, patches)
     val copySelection: (() -> Unit)? = patchActions.onCopyFromBundle?.let { copy ->
@@ -758,8 +716,7 @@ private fun BundleControls(
         onResetToDefault = { patchActions.onResetToDefault(bundle.uid) },
         onRestoreSaved = { patchActions.onRestoreSaved(bundle.uid) },
         onCopyFromBundle = copySelection,
-        hasSavedSelection = savedPatches[bundle.uid]?.isNotEmpty() == true,
-        modifier = modifier
+        hasSavedSelection = savedPatches[bundle.uid]?.isNotEmpty() == true
     )
 }
 
@@ -784,6 +741,7 @@ private fun BundlePatchList(
     lockStateOf: (PatchInfo) -> PatchLockState,
     patchActions: ExpertPatchActions,
     accentColor: Color?,
+    leadingRows: LazyListScope.() -> Unit,
     onConfigureOptions: (PatchInfo) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -809,8 +767,11 @@ private fun BundlePatchList(
         modifier = modifier
             .fillMaxSize()
             .verticalScrollFade(listState),
-        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
+        // Runs on under the head and footer floating over the list, and comes out from under them
+        contentPadding = LocalDialogBarInsets.current,
+        verticalArrangement = Arrangement.spacedBy(SegmentGap)
     ) {
+        leadingRows()
         if (bundle.uid in markers.prereleaseNotices) prereleaseNotice()
 
         // Kept in the list rather than laid over it, so the message holds its place under a notice
@@ -831,7 +792,7 @@ private fun BundlePatchList(
             folds = folds,
             onToggle = { group -> sectionState.toggle(bundle.uid, group) },
             accentColor = accentColor
-        ) { (patch, isEnabled) ->
+        ) { (patch, isEnabled), segment ->
             PatchCard(
                 patch = patch,
                 isEnabled = isEnabled,
@@ -843,7 +804,10 @@ private fun BundlePatchList(
                 onToggle = { patchActions.onPatchToggle(bundle.uid, patch.name) },
                 onConfigureOptions = { onConfigureOptions(patch) },
                 hasOptions = !patch.options.isNullOrEmpty(),
-                modifier = Modifier.animatedListItem(this)
+                shape = segment.shape,
+                modifier = Modifier
+                    .animatedListItem(this)
+                    .endsBlock(segment.endsBlock)
             )
         }
     }

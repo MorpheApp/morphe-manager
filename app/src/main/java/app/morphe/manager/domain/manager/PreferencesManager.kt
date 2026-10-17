@@ -78,6 +78,9 @@ class PreferencesManager(
 
     /** Whether cards, panels and buttons draw the hairline edge around them. */
     val outlines = booleanPreference("outlines", true)
+
+    /** Whether headers, bars and panels blur what scrolls under them, or stand solid over it. */
+    val blur = booleanPreference("blur", true)
     val showGreetingPhrases = booleanPreference("show_greeting_phrases", true)
 
     /** The per-app badges carry the same news, so the banner is worth turning off. */
@@ -129,6 +132,8 @@ class PreferencesManager(
     // System tab
     val installerPrimary = stringPreference("installer_primary", InstallerPreferenceTokens.INTERNAL)
     val promptInstallerOnInstall = booleanPreference("prompt_installer_on_install", false)
+    /** Lets an expert run on a rooted device pick patches regardless of what its install target requires or rules out. */
+    val ignoreInstallTargetRules = booleanPreference("ignore_install_target_rules", false)
     val installerCustomComponents = stringSetPreference("installer_custom_components", emptySet())
     val installerHiddenComponents = stringSetPreference("installer_hidden_components", emptySet())
 
@@ -179,7 +184,7 @@ class PreferencesManager(
     val trustedApkDownloadHelpers = stringSetPreference("trusted_apk_download_helpers", emptySet())
 
     val lastFilePickerPath = stringPreference("last_file_picker_path", "")
-    val filePickerSortMode = stringPreference("file_picker_sort_mode", "NAME_ASC")
+    val filePickerSortMode = stringPreference("file_picker_sort_mode", "DATE_DESC")
     val filePickerShowHiddenFiles = booleanPreference("file_picker_show_hidden_files", false)
 
     /** Persist the pre-patch APK so it can be reused for repatching without asking the user to reselect it. */
@@ -188,8 +193,8 @@ class PreferencesManager(
     /** Persist the post-patch APK so it can be exported or reinstalled after the patcher screen is closed. */
     val savePatchedApks = booleanPreference("save_patched_apks", true)
 
-    /** Play a distinct notification sound when patching finishes. */
-    val patcherCompletionSound = booleanPreference("patcher_completion_sound", true)
+    /** Play a distinct notification sound when patching finishes. Off until asked for, as a sound can startle. */
+    val patcherCompletionSound = booleanPreference("patcher_completion_sound", false)
 
     /** URI of a user-picked success tone. Empty falls back to the bundled `R.raw.success`. */
     val patcherSuccessSoundUri = stringPreference("patcher_success_sound_uri", "")
@@ -202,6 +207,9 @@ class PreferencesManager(
 
     /** On-disk cache of the remote source blocklist (JSON), so offline launches still enforce it. */
     val blocklistCache = stringPreference("blocklist_cache", "")
+
+    /** Batch queue prepared but not started yet (JSON), empty when there is none. */
+    val batchQueue = stringPreference("batch_queue", "")
 
     /** Tracks whether the user has explicitly toggled the custom file picker preference. */
     val customFilePickerUserConfigured = booleanPreference("custom_file_picker_user_configured", false)
@@ -273,6 +281,7 @@ class PreferencesManager(
         val pureBlackTheme: Boolean? = null,
         val colorAccents: Boolean? = null,
         val outlines: Boolean? = null,
+        val blur: Boolean? = null,
         val customAccentColor: String? = null,
         val customThemeColor: String? = null,
         val appCardColorMode: AppCardColorMode? = null,
@@ -342,6 +351,7 @@ class PreferencesManager(
                 pureBlackTheme = pureBlackTheme.takeIf { appearance },
                 colorAccents = colorAccents.takeIf { appearance },
                 outlines = outlines.takeIf { appearance },
+                blur = blur.takeIf { appearance },
                 customAccentColor = customAccentColor.takeIf { appearance },
                 customThemeColor = customThemeColor.takeIf { appearance },
                 appCardColorMode = appCardColorMode.takeIf { appearance },
@@ -402,6 +412,7 @@ class PreferencesManager(
         pureBlackTheme = pureBlackTheme.get(),
         colorAccents = colorAccents.get(),
         outlines = outlines.get(),
+        blur = blur.get(),
         customAccentColor = customAccentColor.get(),
         customThemeColor = customThemeColor.get(),
         appCardColorMode = appCardColorMode.get(),
@@ -453,6 +464,7 @@ class PreferencesManager(
         snapshot.pureBlackTheme?.let { pureBlackTheme.value = it }
         snapshot.colorAccents?.let { colorAccents.value = it }
         snapshot.outlines?.let { outlines.value = it }
+        snapshot.blur?.let { blur.value = it }
         snapshot.customAccentColor?.let { customAccentColor.value = it }
         snapshot.customThemeColor?.let { customThemeColor.value = it }
         snapshot.appCardColorMode?.let { appCardColorMode.value = it }

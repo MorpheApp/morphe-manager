@@ -37,6 +37,7 @@ import app.morphe.manager.ui.model.PostPatchPrompts
 import app.morphe.manager.ui.model.createApkDownloadHelperRequest
 import app.morphe.manager.ui.model.helperSignatureCheckAvailable
 import app.morphe.manager.ui.screen.shared.CopySelectionCandidate
+import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.*
 import app.morphe.manager.util.PatchSelectionUtils.applyAvailability
 import app.morphe.manager.util.PatchSelectionUtils.bulkEnableHoldsUniversal
@@ -54,8 +55,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 import java.io.File
 
 /**
@@ -213,19 +212,22 @@ class BatchPatchEdit(
  * the batch screen keeps a queue going. This ViewModel only owns screen state such as which
  * item a file picker was opened for.
  */
-class BatchPatcherViewModel : ViewModel(), KoinComponent, ApkDownloadHelperHost {
-    private val app: Application by inject()
-    private val fs: Filesystem by inject()
-    private val pm: PM by inject()
-    private val coordinator: BatchPatchCoordinator by inject()
-    private val installedAppRepository: InstalledAppRepository by inject()
-    private val patchBundleRepository: PatchBundleRepository by inject()
-    private val patchSelectionRepository: PatchSelectionRepository by inject()
-    private val downloadUrlResolver: DownloadUrlResolver by inject()
-    private val versionCatalog: AppVersionCatalog by inject()
-    private val localApkSources: LocalApkSources by inject()
-    private val prefs: PreferencesManager by inject()
-
+class BatchPatcherViewModel(
+    private val app: Application,
+    private val messages: UserMessages,
+    private val fs: Filesystem,
+    private val pm: PM,
+    private val coordinator: BatchPatchCoordinator,
+    private val installedAppRepository: InstalledAppRepository,
+    private val patchBundleRepository: PatchBundleRepository,
+    private val patchSelectionRepository: PatchSelectionRepository,
+    private val downloadUrlResolver: DownloadUrlResolver,
+    private val versionCatalog: AppVersionCatalog,
+    private val localApkSources: LocalApkSources,
+    private val prefs: PreferencesManager,
+    /** Picker behind the copy-from-another-bundle action of the editor. */
+    val editCopy: CopySelectionController
+) : ViewModel(), ApkDownloadHelperHost {
     val state = coordinator.state
 
     /** Notification and tour prompts raised once the queue installs or saves an app. */
@@ -236,21 +238,19 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent, ApkDownloadHelperHost 
         private set
 
     /**
-     * Plans the run once. Re-entering the screen while a queue is alive keeps the existing
-     * state instead of throwing away progress, and a run that already covers exactly these
-     * apps is reused so rotation does not restart planning.
+     * Adds [targets] to the queue being prepared, so re-entering the screen with the same apps
+     * changes nothing. A finished run is kept for its own apps and replaced for any others.
      */
     fun ensurePlan(targets: List<BatchTarget>, useMount: Boolean) {
         // Two cards can stand for the same install, such as a mount and a renamed build of one
         // app, and the queue lists each install once
         val queued = targets.distinctBy { it.id }
         val current = state.value
-        if (current != null) {
-            if (current.phase == BatchPhase.PLANNING || current.phase == BatchPhase.RUNNING) return
+        if (current?.phase == BatchPhase.FINISHED) {
             if (current.targets == queued) return
             coordinator.clear()
         }
-        coordinator.plan(queued, useMount, BatchInstallPolicy.SAVE_ONLY)
+        coordinator.enqueue(queued, useMount)
     }
 
     fun requestAttach(packageName: String) {
@@ -375,7 +375,7 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent, ApkDownloadHelperHost 
         if (handOff(search.url)) {
             attachPrompt = search.item
         } else {
-            app.toast(app.getString(R.string.sources_management_failed_to_open_url))
+            messages.show(R.string.sources_management_failed_to_open_url)
         }
     }
 
@@ -426,7 +426,7 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent, ApkDownloadHelperHost 
         val item = apkSearch?.item ?: return
         if (packageName != item.packageName) {
             // The helper answered about an app the queue never asked to patch
-            app.toast(app.getString(R.string.home_apk_helper_wrong_package))
+            messages.show(R.string.home_apk_helper_wrong_package)
             return
         }
 
@@ -440,9 +440,6 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent, ApkDownloadHelperHost 
     /** Patch selection editor for one queued app, null when none is open. */
     var edit: BatchPatchEdit? by mutableStateOf(null)
         private set
-
-    /** Picker behind the copy-from-another-bundle action of the editor. */
-    val editCopy = CopySelectionController()
 
     /**
      * Opens the editor for [item], scoping the patch list to the exact APK version the queue
@@ -564,7 +561,7 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent, ApkDownloadHelperHost 
         viewModelScope.launch {
             val file = withContext(Dispatchers.IO) { copyToWorkspace(uri) }
             if (file == null) {
-                app.toast(app.getString(R.string.home_invalid_apk_io_error))
+                messages.show(R.string.home_invalid_apk_io_error)
                 return@launch
             }
             coordinator.attachApk(itemId, file)
@@ -574,21 +571,21 @@ class BatchPatcherViewModel : ViewModel(), KoinComponent, ApkDownloadHelperHost 
     fun toggleExcluded(itemId: String) = coordinator.toggleExcluded(itemId)
 
     /**
-     * Accepts an unsupported version. Confirmed with a toast because the card only swaps a
+     * Accepts an unsupported version. Confirmed with a message because the card only swaps a
      * badge, which does not say what was just taken on.
      */
     fun forceVersion(itemId: String) {
         coordinator.forceVersion(itemId)
-        app.toast(app.getString(R.string.batch_patch_force_version_done))
+        messages.show(R.string.batch_patch_force_version_done)
     }
 
     /**
-     * Accepts an APK signed by someone the sources do not vouch for. Confirmed with a toast for
+     * Accepts an APK signed by someone the sources do not vouch for. Confirmed with a message for
      * the same reason as [forceVersion]: the card only swaps a badge.
      */
     fun acceptUnverifiedSignature(itemId: String) {
         coordinator.acceptUnverifiedSignature(itemId)
-        app.toast(app.getString(R.string.batch_patch_accept_signature_done))
+        messages.show(R.string.batch_patch_accept_signature_done)
     }
 
     fun setPolicy(policy: BatchInstallPolicy) = coordinator.setPolicy(policy)

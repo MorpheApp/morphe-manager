@@ -49,11 +49,12 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import app.morphe.manager.R
 import app.morphe.manager.util.*
+import app.morphe.manager.util.isRtl
+import app.morphe.manager.util.startEdgeX
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -76,13 +77,13 @@ private val ReleaseSpacing = 20.dp
 private val SummaryPadding = 20.dp
 private val SummaryArrowSize = 18.dp
 private val SectionIconSize = 28.dp
-private val SectionIconShape = RoundedCornerShape(9.dp)
+private val SectionIconShape = RoundedCornerShape(Defaults.CornerSmall)
 private val ItemDotSize = 6.dp
 
 /** Sets the dot level with the middle of the first line: the change's, or its smaller scope label's. */
 private val ItemDotOffset = 7.dp
 private val ItemDotOffsetScoped = 5.dp
-private val ItemPadding = PaddingValues(horizontal = 14.dp, vertical = 11.dp)
+private val ItemPadding = PaddingValues(horizontal = Defaults.SpaceLarge, vertical = Defaults.SpaceMedium)
 
 /** Sections longer than this show their first [SECTION_PREVIEW_SIZE] changes until opened. */
 private const val SECTION_PREVIEW_LIMIT = 6
@@ -129,12 +130,12 @@ fun ChangelogListLoading(
     Column(modifier = modifier.fillMaxWidth()) {
         if (withSummary) {
             UpdateSummaryPlaceholder()
-            Spacer(modifier = Modifier.height(Defaults.ContentPaddingMedium))
+            Spacer(modifier = Modifier.height(Defaults.SpaceExtraLarge))
         }
 
         TimelineRow(badge = null, isFirst = true, isLast = false) {
             ReleaseHeaderPlaceholder()
-            SectionGroupPlaceholder(modifier = Modifier.padding(top = Defaults.ItemSpacing))
+            SectionGroupPlaceholder(modifier = Modifier.padding(top = Defaults.SpaceMedium))
         }
         repeat(FOLDED_RELEASE_PLACEHOLDERS) { index ->
             TimelineRow(
@@ -157,11 +158,11 @@ private fun UpdateSummaryPlaceholder() {
                 .fillMaxWidth()
                 .padding(SummaryPadding),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
+                horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
             ) {
                 ShimmerBox(
                     modifier = Modifier.size(width = 96.dp, height = statusBadgeHeight),
@@ -173,7 +174,7 @@ private fun UpdateSummaryPlaceholder() {
                     shape = Defaults.PillShape
                 )
             }
-            ShimmerText(widthFraction = 0.5f, height = 20.dp, cornerRadius = 6.dp)
+            ShimmerText(widthFraction = 0.5f, height = 20.dp)
             ShimmerBox(
                 modifier = Modifier.size(width = 110.dp, height = 36.dp),
                 shape = Defaults.PillShape
@@ -186,10 +187,10 @@ private fun UpdateSummaryPlaceholder() {
 @Composable
 private fun ReleaseHeaderPlaceholder() {
     Column(
-        modifier = Modifier.padding(vertical = 4.dp),
-        verticalArrangement = Arrangement.spacedBy(6.dp)
+        modifier = Modifier.padding(vertical = Defaults.SpaceExtraSmall),
+        verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
     ) {
-        ShimmerText(widthFraction = 0.45f, height = 22.dp, cornerRadius = 6.dp)
+        ShimmerText(widthFraction = 0.45f, height = 22.dp)
         ShimmerText(widthFraction = 0.6f, height = 14.dp)
     }
 }
@@ -213,7 +214,7 @@ private fun SectionGroupPlaceholder(modifier: Modifier = Modifier) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(ItemPadding),
-                    horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
+                    horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
                 ) {
                     ShimmerBox(
                         modifier = Modifier
@@ -223,7 +224,7 @@ private fun SectionGroupPlaceholder(modifier: Modifier = Modifier) {
                     )
                     Column(
                         modifier = Modifier.weight(1f),
-                        verticalArrangement = Arrangement.spacedBy(6.dp)
+                        verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
                     ) {
                         ShimmerText(widthFraction = if (index % 2 == 0) 0.9f else 0.75f, height = 14.dp)
                         ShimmerText(widthFraction = 0.5f, height = 14.dp)
@@ -272,7 +273,7 @@ fun ChangelogRelease(
                 sections = sections,
                 isSectionExpanded = isSectionExpanded,
                 onToggleSection = onToggleSection,
-                modifier = Modifier.padding(top = Defaults.ItemSpacing)
+                modifier = Modifier.padding(top = Defaults.SpaceMedium)
             )
         }
     }
@@ -295,15 +296,15 @@ fun ChangelogOlderFailed(onRetry: () -> Unit) {
                 text = stringResource(R.string.changelog_older_failed),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(top = 5.dp)
+                modifier = Modifier.padding(top = Defaults.SpaceExtraSmall)
             )
             Row(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(Defaults.CompactCornerRadius))
+                    .clip(RoundedCornerShape(Defaults.CornerMedium))
                     .clickable(role = Role.Button, onClick = onRetry)
-                    .padding(vertical = 8.dp),
+                    .padding(vertical = Defaults.SpaceSmall),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(6.dp)
+                horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
             ) {
                 Icon(
                     imageVector = Icons.Outlined.Refresh,
@@ -329,7 +330,7 @@ fun ChangelogTimelineLabel(text: String) {
             text = text,
             style = MaterialTheme.typography.labelLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(top = 4.dp)
+            modifier = Modifier.padding(top = Defaults.SpaceExtraSmall)
         )
     }
 }
@@ -393,11 +394,11 @@ fun ChangelogUpdateSummary(
                 .fillMaxWidth()
                 .padding(SummaryPadding),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
+                horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
             ) {
                 StatusBadge(text = fromVersion.withVersionPrefix())
                 Icon(
@@ -426,10 +427,10 @@ fun ChangelogUpdateSummary(
                 // instead of shortening any of them
                 FlowRow(
                     horizontalArrangement = Arrangement.spacedBy(
-                        Defaults.ContentPaddingSmall,
+                        Defaults.SpaceSmall,
                         Alignment.CenterHorizontally
                     ),
-                    verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
+                    verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
                 ) {
                     counts.forEach { count ->
                         SummaryPill(
@@ -452,9 +453,9 @@ private fun SummaryPill(
         modifier = Modifier
             .clip(Defaults.PillShape)
             .background(style.tone.container)
-            .padding(horizontal = 14.dp, vertical = 8.dp),
+            .padding(horizontal = Defaults.SpaceLarge, vertical = Defaults.SpaceSmall),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
+        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
     ) {
         Icon(
             imageVector = style.icon,
@@ -485,14 +486,14 @@ private fun ReleaseHeader(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(Defaults.CompactCornerRadius))
+            .clip(RoundedCornerShape(Defaults.CornerMedium))
             .then(
                 if (onToggle != null) Modifier.clickable(role = Role.Button, onClick = onToggle)
                 else Modifier
             )
-            .padding(vertical = 4.dp),
+            .padding(vertical = Defaults.SpaceExtraSmall),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
+        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
     ) {
         Column(
             modifier = Modifier.weight(1f),
@@ -500,7 +501,7 @@ private fun ReleaseHeader(
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
+                horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
             ) {
                 Text(
                     text = entry.version.withVersionPrefix(),
@@ -540,7 +541,7 @@ private fun ReleaseBody(
         modifier = modifier.fillMaxWidth(),
         label = "releaseSections"
     ) { shown ->
-        Column(verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)) {
+        Column(verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)) {
             shown.forEachIndexed { index, section ->
                 ChangelogSectionGroup(
                     section = section,
@@ -616,7 +617,7 @@ private fun ChangelogItemRow(
         modifier = Modifier
             .fillMaxWidth()
             .padding(ItemPadding),
-        horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
+        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
     ) {
         // Level with the middle of the first line, which is the scope when there is one.
         // A note between the changes is no change itself, so it goes without one
@@ -656,9 +657,9 @@ private fun SectionExpander(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(role = Role.Button, onClick = onToggle)
-            .padding(horizontal = 14.dp, vertical = 12.dp),
+            .padding(horizontal = Defaults.SpaceLarge, vertical = Defaults.SpaceMedium),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(6.dp)
+        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
     ) {
         Text(
             text = if (expanded) stringResource(R.string.changelog_show_less)
@@ -854,7 +855,7 @@ private fun DrawScope.drawTimeline(
     hasNode: Boolean,
     colors: TimelineColors
 ) {
-    val railX = (RailSlotWidth / 2).toPx().let { if (layoutDirection == LayoutDirection.Rtl) size.width - it else it }
+    val railX = startEdgeX(size.width, layoutDirection.isRtl, inset = (RailSlotWidth / 2).toPx())
     val stroke = RailStrokeWidth.toPx()
 
     if (!hasNode) {

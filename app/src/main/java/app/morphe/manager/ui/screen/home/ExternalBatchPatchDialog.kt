@@ -17,11 +17,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.ui.screen.shared.Defaults
 import app.morphe.manager.ui.screen.shared.dialogSecondaryTextColor
 import app.morphe.manager.ui.screen.shared.AppDialog
 import app.morphe.manager.ui.screen.shared.AppDialogButtonRow
+import app.morphe.manager.ui.screen.shared.DialogHostScope
 import app.morphe.manager.ui.screen.shared.SelectionCheckRow
 
 /**
@@ -31,7 +32,7 @@ import app.morphe.manager.ui.screen.shared.SelectionCheckRow
  * The user can trust the calling app once, which stores it in the allowlist.
  */
 @Composable
-fun ExternalBatchPatchDialog(
+fun DialogHostScope.ExternalBatchPatchDialog(
     callerPackage: String?,
     packageCount: Int,
     onConfirm: (trustCaller: Boolean) -> Unit,
@@ -56,7 +57,7 @@ fun ExternalBatchPatchDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
         ) {
             Text(
                 text = pluralStringResource(

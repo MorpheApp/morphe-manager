@@ -12,7 +12,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -30,6 +29,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import app.morphe.manager.ui.screen.shared.Defaults
 import app.morphe.manager.ui.screen.shared.dialogSecondaryTextColor
 import app.morphe.manager.ui.screen.shared.dialogTextColor
 import app.morphe.manager.ui.screen.shared.ShimmerText
@@ -70,7 +70,7 @@ fun StorageHistogram(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 20.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
     ) {
         HistogramLayout(
             bar = {
@@ -146,7 +146,7 @@ private fun HistogramBar(
 
     Box(
         modifier = modifier
-            .clip(RoundedCornerShape(percent = 50))
+            .clip(Defaults.PillShape)
             .background(dialogSecondaryTextColor().copy(alpha = 0.12f))
             .onSizeChanged { barHeightPx = it.height }
     ) {
@@ -202,7 +202,7 @@ private fun HistogramLegend(
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(10.dp)
+        verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
     ) {
         segments.forEach { segment ->
             LegendItem(segment, loading)
@@ -216,7 +216,7 @@ private fun LegendItem(segment: StorageSegment, loading: Boolean) {
         modifier = Modifier
             .fillMaxWidth()
             .alpha(if (loading || segment.bytes > 0) 1f else 0.5f),
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(

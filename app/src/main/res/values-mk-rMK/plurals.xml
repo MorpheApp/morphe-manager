@@ -39,4 +39,5 @@
         <item quantity="one">%s скриена апликација</item>
         <item quantity="other">%s скриени апликации</item>
     </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
 </resources>

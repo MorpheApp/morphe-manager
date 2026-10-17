@@ -125,6 +125,9 @@ class ManagerApplication : Application() {
             )
         }
 
+        // Set before anything can ask for an avatar, so the first one read already comes from disk
+        AvatarCache.useDiskCache(fs.avatarCacheDir)
+
         // App icon loader (Coil)
         // Non-adaptive icons are drawn as they are rather than shrunk onto a white plate: icon
         // packs on One UI hand out finished bitmap icons, and the plate showed around each of them
@@ -373,7 +376,7 @@ class ManagerApplication : Application() {
 
     /**
      * Work that only pays off once a screen exists. A process started by an FCM push or a boot
-     * broadcast has nobody to show an update check to, and its failures toast over another app.
+     * broadcast has nobody to show an update check or its failures to.
      */
     private fun onFirstScreenCreated() {
         scope.launch(Dispatchers.Default) {
@@ -381,13 +384,13 @@ class ManagerApplication : Application() {
         }
 
         // Preload bundle avatar images into AvatarCache while the user hasn't opened the sheet yet.
-        // Suspends until sources are ready, then fetches all URLs in parallel on IO threads
+        // Suspends until sources are ready, then loads them all in parallel, a fallback only for
+        // a source whose own picture does not load
         scope.launch(Dispatchers.IO) {
             patchBundleRepository.sources.first { it.isNotEmpty() }.forEach { bundle ->
                 launch {
                     val avatarUrls = bundle.avatarUrls
-                    avatarUrls.primary?.let { loadRemoteAvatar(it) }
-                    avatarUrls.fallback?.let { loadRemoteAvatar(it) }
+                    loadAvatar(avatarUrls.primary, avatarUrls.fallback)
                 }
             }
         }

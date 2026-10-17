@@ -33,7 +33,6 @@ internal typealias PatchList = List<Patch<*>>
 
 class Session(
     cacheDir: String,
-    frameworkDir: String,
     private val androidContext: Context,
     private val logger: Logger,
     private val input: File,
@@ -56,7 +55,6 @@ class Session(
         PatcherConfig(
             apkFile = input,
             temporaryFilesPath = tempDir,
-            frameworkFileDirectory = frameworkDir,
             // The patcher drops every other ABI while it writes the output, sparing a second pass over it
             keepArchitectures = if (stripUnusedNativeLibs) NativeLibs.keptArchitectures(input) else emptySet(),
             fileWorkspacePath = fileWorkspace

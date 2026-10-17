@@ -33,7 +33,6 @@ import app.morphe.manager.domain.links.AppLinksStatus
 import app.morphe.manager.domain.links.RepairCapability
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.openAppOpenByDefaultSettings
-import app.morphe.manager.util.toast
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 
@@ -43,7 +42,7 @@ import org.koin.compose.koinInject
  * user changes it.
  */
 @Composable
-fun AppLinksDialog(
+fun DialogHostScope.AppLinksDialog(
     appLabel: String,
     appInfo: PackageInfo?,
     accentColor: Color?,
@@ -52,7 +51,36 @@ fun AppLinksDialog(
     onRefresh: () -> Unit,
     onDismiss: () -> Unit
 ) {
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
+        onRefresh()
+    }
+
+    DetailsDialog(
+        onDismissRequest = onDismiss,
+        icon = { modifier ->
+            AppIcon(packageInfo = appInfo, packageName = packageName, contentDescription = null, modifier = modifier)
+        },
+        title = appLabel,
+        subtitle = stringResource(R.string.app_links_title),
+        accentColor = accentColor,
+        actions = rememberAppLinksActions(packageName, status, onRefresh)
+    ) {
+        AppLinksContent(status = status, accentColor = accentColor)
+    }
+}
+
+/**
+ * What can be done about [packageName]'s web links: turning them on where the device lets the
+ * manager do it, and opening the system screen where the user picks them.
+ */
+@Composable
+fun rememberAppLinksActions(
+    packageName: String,
+    status: AppLinksStatus,
+    onRefresh: () -> Unit
+): List<DialogAction> {
     val context = LocalContext.current
+    val messages = koinInject<UserMessages>()
     val resources = LocalResources.current
     val scope = rememberCoroutineScope()
     val appLinksManager: AppLinksManager = koinInject()
@@ -61,11 +89,7 @@ fun AppLinksDialog(
     }
     var isRepairing by remember { mutableStateOf(false) }
 
-    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
-        onRefresh()
-    }
-
-    val dialogActions = buildList {
+    return buildList {
         if (repairCapability != RepairCapability.NONE && status.needsAttention) {
             add(
                 DialogAction(
@@ -80,7 +104,7 @@ fun AppLinksDialog(
                             val success = appLinksManager.repairAppLinks(packageName)
                             isRepairing = false
                             onRefresh()
-                            context.toast(
+                            messages.show(
                                 resources.getString(
                                     if (success) R.string.app_links_repair_success
                                     else R.string.app_links_repair_failed
@@ -101,43 +125,36 @@ fun AppLinksDialog(
             )
         )
     }
+}
 
-    DetailsDialog(
-        onDismissRequest = onDismiss,
-        icon = { modifier ->
-            AppIcon(packageInfo = appInfo, packageName = packageName, contentDescription = null, modifier = modifier)
-        },
-        title = appLabel,
-        subtitle = stringResource(R.string.app_links_title),
-        accentColor = accentColor,
-        actions = dialogActions
+/** Whether the app's web links open in it, then each link and whether it does. */
+@Composable
+fun AppLinksContent(status: AppLinksStatus, accentColor: Color?) {
+    if (status.needsAttention) {
+        Notice(
+            text = stringResource(R.string.app_links_description),
+            tone = SemanticTone.Warning,
+            icon = Icons.Outlined.LinkOff
+        )
+    } else {
+        Notice(
+            text = stringResource(R.string.app_links_all_verified),
+            tone = SemanticTone.Success,
+            icon = Icons.Outlined.CheckCircleOutline
+        )
+    }
+
+    SurfaceCard(
+        cornerRadius = Defaults.CornerLarge,
+        showBorder = true,
+        borderColor = appAccentBorder(accentColor),
+        color = cardFill(),
+        modifier = Modifier.fillMaxWidth()
     ) {
-        if (status.needsAttention) {
-            Notice(
-                text = stringResource(R.string.app_links_description),
-                tone = SemanticTone.Warning,
-                icon = Icons.Outlined.LinkOff
-            )
-        } else {
-            Notice(
-                text = stringResource(R.string.app_links_all_verified),
-                tone = SemanticTone.Success,
-                icon = Icons.Outlined.CheckCircleOutline
-            )
-        }
-
-        SurfaceCard(
-            cornerRadius = Defaults.CardCornerRadius,
-            showBorder = true,
-            borderColor = appAccentBorder(accentColor),
-            color = cardFill(),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Column {
-                status.domains.forEachIndexed { index, domain ->
-                    if (index > 0) SettingsDivider()
-                    DomainRow(domain = domain, isEnabled = domain !in status.unhandledDomains)
-                }
+        Column {
+            status.domains.forEachIndexed { index, domain ->
+                if (index > 0) SettingsDivider()
+                DomainRow(domain = domain, isEnabled = domain !in status.unhandledDomains)
             }
         }
     }
@@ -148,8 +165,8 @@ private fun DomainRow(domain: String, isEnabled: Boolean) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = Defaults.ContentPadding, vertical = Defaults.ItemSpacing),
-        horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
+            .padding(horizontal = Defaults.SpaceLarge, vertical = Defaults.SpaceMedium),
+        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
@@ -165,11 +182,11 @@ private fun DomainRow(domain: String, isEnabled: Boolean) {
             style = MaterialTheme.typography.labelSmall,
             color = if (isEnabled) SemanticTone.Success.content else MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier
-                .clip(RoundedCornerShape(Defaults.CompactCornerRadius))
+                .clip(RoundedCornerShape(Defaults.CornerMedium))
                 .background(
                     if (isEnabled) SemanticTone.Success.container else MaterialTheme.colorScheme.surfaceVariant
                 )
-                .padding(horizontal = 8.dp, vertical = 2.dp)
+                .padding(horizontal = Defaults.SpaceSmall, vertical = 2.dp)
         )
     }
 }

@@ -12,6 +12,7 @@ package app.morphe.manager.di
 
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.platform.NetworkInfo
+import app.morphe.manager.domain.bundles.RemoteBundleServices
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.network.api.MorpheAPI
@@ -31,6 +32,7 @@ val repositoryModule = module {
     singleOf(::SourceMuteRepository)
     singleOf(::PatchOptionsRepository)
     singleOf(::BlocklistRepository)
+    singleOf(::RemoteBundleServices)
     singleOf(::PatchBundleRepository)
     singleOf(::WorkerRepository)
     singleOf(::InstalledAppRepository)

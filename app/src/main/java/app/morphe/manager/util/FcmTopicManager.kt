@@ -48,7 +48,7 @@ object FcmTopics {
  *
  * Called from:
  * - [app.morphe.manager.ManagerApplication] on every cold start
- * - [app.morphe.manager.ui.screen.settings.advanced.UpdatesSettingsItem] on preference toggle
+ * - [app.morphe.manager.ui.screen.settings.advanced.UpdatesItems] on preference toggle
  */
 fun syncFcmTopics(
     notificationsEnabled: Boolean,

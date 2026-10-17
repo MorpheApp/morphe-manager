@@ -71,6 +71,14 @@
         <item quantity="one">Ang %s app ay handa nang i-patch</item>
         <item quantity="other">Ang %s apps ay handa nang i-patch</item>
     </plurals>
+    <plurals name="batch_queue_pending_count">
+        <item quantity="one">%s app queued for patching</item>
+        <item quantity="other">%s apps queued for patching</item>
+    </plurals>
+    <plurals name="home_alerts_snoozed_count">
+        <item quantity="one">%s itaong notification, i-tap para ipakita ito</item>
+        <item quantity="other">%s itaong notifications, i-tap para ipakita sila</item>
+    </plurals>
     <plurals name="repatch_available_count">
         <item quantity="one">%s app ay maaaring i-repatch</item>
         <item quantity="other">%s apps ay maaaring i-repatch</item>
@@ -86,10 +94,6 @@
     <plurals name="sources_management_subtitle">
         <item quantity="one">%s na-install na mapagkukunan</item>
         <item quantity="other">%s na-install na mga mapagkukunan</item>
-    </plurals>
-    <plurals name="home_app_filter_active">
-        <item quantity="one">%1$s · %2$s na-filter</item>
-        <item quantity="other">%1$s · %2$s na-filter</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s nakatagong app</item>
@@ -126,6 +130,11 @@
     <plurals name="changelog_change_count">
         <item quantity="one">%s pagbabago</item>
         <item quantity="other">%s pagbabago</item>
+    </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
+    <plurals name="sources_apps_count_with_new">
+        <item quantity="one">%1$s · %2$d bagong</item>
+        <item quantity="other">%1$s · %2$d bagong</item>
     </plurals>
     <plurals name="changelog_new_releases">
         <item quantity="one">%s bagong release</item>

@@ -32,10 +32,8 @@ import app.morphe.manager.util.PatchSelection
 import app.morphe.manager.util.PatchSelectionUtils.sanitizeForPatcher
 import app.morphe.manager.util.UpdateNotificationManager
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.*
+import kotlinx.serialization.json.Json
 import java.io.File
 import java.util.UUID
 
@@ -64,6 +62,7 @@ class BatchPatchCoordinator(
     private val notificationManager: UpdateNotificationManager,
     private val installerManager: InstallerManager,
     private val sessionInstaller: SessionInstaller,
+    private val json: Json,
     private val scope: AppCoroutineScope
 ) {
     private val workManager = WorkManager.getInstance(app)
@@ -74,11 +73,32 @@ class BatchPatchCoordinator(
     private var runJob: Job? = null
     private var activeWorkId: UUID? = null
 
+    // Once this process has planned, storage only mirrors its state and may lag behind a clear
+    @Volatile
+    private var hasPlanned = false
+
     /** Workspace for APKs copied out of installed apps and for patcher output. */
     private val workspace: File get() = fs.uiTempDir.resolve("batch")
 
     /** True while the queue is patching, used to block a competing single-app run. */
     val isRunning: Boolean get() = _state.value?.isActive == true
+
+    /** The queue waiting to be started as last stored, which outlives the process unlike [state]. */
+    val savedQueue: StateFlow<SavedBatchQueue?> = prefs.batchQueue.flow
+        .map(::decodeQueue)
+        .stateIn(scope, SharingStarted.Eagerly, null)
+
+    init {
+        // Leading empty states are skipped: they only mean nothing was planned in this process,
+        // and a queue stored by an earlier one has to survive until it is picked back up
+        scope.launch {
+            _state
+                .map { it?.savedQueue }
+                .distinctUntilChanged()
+                .dropWhile { it == null }
+                .collect { queue -> prefs.batchQueue.update(queue?.let { json.encodeToString(it) }.orEmpty()) }
+        }
+    }
 
     /**
      * Builds a plan for [targets] and parks it in the preflight phase so the user can
@@ -91,16 +111,74 @@ class BatchPatchCoordinator(
     ) {
         if (isRunning) return
         runJob?.cancel()
+        runJob = scope.launch { planFresh(targets, useMount, policy, excludedIds = emptySet()) }
+    }
+
+    /**
+     * Adds [targets] to the queue being prepared, or plans a new one around them. A queue stored
+     * before the process died is planned again first, so the apps added to it earlier stay.
+     */
+    fun enqueue(targets: List<BatchTarget>, useMount: Boolean) {
+        if (isRunning) return
+        val pending = runJob
         runJob = scope.launch {
-            _state.value = BatchRunState(
-                items = targets.map { placeholder(it) },
-                phase = BatchPhase.PLANNING,
-                policy = policy,
-                useMount = useMount
-            )
-            val items = resolver.resolve(targets, useMount)
-            _state.update { it.copy(items = items, phase = BatchPhase.PREFLIGHT) }
+            // Planning still under way finishes first, so its apps are there to add to
+            pending?.join()
+            val current = _state.value
+            when (current?.phase) {
+                BatchPhase.PREFLIGHT -> append(current, targets)
+                BatchPhase.PLANNING, BatchPhase.RUNNING -> Unit
+                null, BatchPhase.FINISHED -> {
+                    val saved = if (hasPlanned) null else decodeQueue(prefs.batchQueue.get())
+                    planFresh(
+                        targets = (saved?.targets.orEmpty() + targets).distinctBy { it.id },
+                        useMount = saved?.useMount ?: useMount,
+                        policy = saved?.policy ?: BatchInstallPolicy.SAVE_ONLY,
+                        excludedIds = saved?.excluded.orEmpty()
+                    )
+                }
+            }
         }
+    }
+
+    private suspend fun planFresh(
+        targets: List<BatchTarget>,
+        useMount: Boolean,
+        policy: BatchInstallPolicy,
+        excludedIds: Set<String>
+    ) {
+        fun BatchPatchItem.withExclusion() = if (id in excludedIds) excluded() else this
+
+        hasPlanned = true
+        _state.value = BatchRunState(
+            items = targets.map { placeholder(it).withExclusion() },
+            phase = BatchPhase.PLANNING,
+            policy = policy,
+            useMount = useMount
+        )
+        val items = resolver.resolve(targets, useMount).map { it.withExclusion() }
+        _state.update { it.copy(items = items, phase = BatchPhase.PREFLIGHT) }
+    }
+
+    /** Resolves only the apps [current] does not hold yet, leaving what the user set up on the rest. */
+    private suspend fun append(current: BatchRunState, targets: List<BatchTarget>) {
+        val queued = current.items.mapTo(mutableSetOf()) { it.id }
+        val added = targets.distinctBy { it.id }.filter { it.id !in queued }
+        if (added.isEmpty()) return
+
+        _state.update { it.copy(items = it.items + added.map(::placeholder), phase = BatchPhase.PLANNING) }
+        val resolved = resolver.resolve(added, current.useMount).associateBy { it.id }
+        _state.update { state ->
+            state.copy(items = state.items.map { resolved[it.id] ?: it }, phase = BatchPhase.PREFLIGHT)
+        }
+    }
+
+    private fun decodeQueue(stored: String): SavedBatchQueue? {
+        if (stored.isBlank()) return null
+        return runCatching { json.decodeFromString<SavedBatchQueue>(stored) }
+            .onFailure { Log.w(TAG, "Failed to decode the saved batch queue", it) }
+            .getOrNull()
+            ?.takeIf { it.targets.isNotEmpty() }
     }
 
     /** Re-resolves a single item against a manually attached APK. */
@@ -137,17 +215,10 @@ class BatchPatchCoordinator(
             if (state.phase != BatchPhase.PREFLIGHT) return@update state
             state.copy(
                 items = state.items.map { item ->
-                    if (item.id != itemId) return@map item
-                    when (item.state) {
-                        BatchItemState.EXCLUDED -> item.copy(
-                            state = item.restoreState ?: BatchItemState.READY,
-                            restoreState = null
-                        )
-
-                        else -> item.copy(
-                            state = BatchItemState.EXCLUDED,
-                            restoreState = item.state
-                        )
+                    when {
+                        item.id != itemId -> item
+                        item.state == BatchItemState.EXCLUDED -> item.included()
+                        else -> item.excluded()
                     }
                 }
             )
@@ -316,8 +387,8 @@ class BatchPatchCoordinator(
     }
 
     /**
-     * Drops a finished run. The workspace is kept until the next run starts so patched APKs
-     * stay installable while the summary is still open.
+     * Drops a finished run or a queue that was never started. The workspace is kept until the
+     * next run starts so patched APKs stay installable while the summary is still open.
      */
     fun clear() {
         if (isRunning) return

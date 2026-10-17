@@ -43,8 +43,8 @@ fun ScrollableInstruction(
             // The box is dropped on surfaces of their own tint, which the fade leaves showing
             .verticalScrollFade(scrollState)
             .verticalScroll(scrollState)
-            .padding(horizontal = 12.dp, vertical = 8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+            .padding(horizontal = Defaults.SpaceMedium, vertical = Defaults.SpaceSmall),
+        verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
     ) {
         SettingsDivider(fullWidth = true)
 

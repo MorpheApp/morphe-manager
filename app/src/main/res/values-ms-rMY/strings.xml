@@ -22,6 +22,8 @@
     <string name="deep_link_add_source_title">Tambah sumber</string>
     <string name="deep_link_add_source_message">Adakah anda mahu tambahkan sumber tampalan ini ke Morphie</string>
     <string name="deep_link_add_source_warning">Hanya tambahkan sumber yang anda percayai</string>
+    <!-- Shown under the app a link was opened for -->
+    <!-- Asked when the link names an app of a source that is already added -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Kemas kini Morphie tersedia</string>
     <string name="home_update_available_subtitle">Kemas kini baharu tersedia untuk di muat turun</string>
@@ -146,7 +148,6 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Tampalan sumber-sumber</string>
     <string name="sources_search">Cari sumber dan tampalan</string>
-    <string name="sources_sort_title">Isih sumber tampalan</string>
     <string name="sources_sort_manual">Susunan manual</string>
     <string name="sources_sort_manual_hint">Tekan lama sumber untuk menyusun semula</string>
     <string name="sources_sort_last_updated">Kemas kini terakhir</string>
@@ -158,12 +159,13 @@
     <string name="sources_management_report_issue">Laporkan isu</string>
     <string name="sources_management_failed_to_open_url">Gagal untuk membuka URL</string>
     <string name="sources_apps">Aplikasi</string>
-    <string name="sources_apps_description">Ketuk aplikasi untuk mengecualikannya daripada sumber ini atau membawanya kembali, atau tekan lama untuk memilih beberapa. Aplikasi meninggalkan skrin utama apabila tiada sumber membawanya</string>
     <string name="sources_apps_brought">Dibawa oleh sumber ini</string>
     <string name="sources_apps_left_out">Dikecualikan daripada sumber ini</string>
-    <string name="sources_apps_leave_out">Kecualikan</string>
-    <string name="sources_apps_leave_out_done">Dikecualikan</string>
     <string name="sources_apps_bring_back">Bawa kembali</string>
+    <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
+    <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
+    <string name="sources_apps_new">Baharu</string>
+    <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
     <string name="sources_management_prerelease_toggle">Tampalan prakeluaran</string>
     <string name="sources_management_prerelease_toggle_description">Menerima capaian awal kepada versi tampalan uji kaji baru</string>
     <string name="sources_prerelease_warning_title">Aktifkan tampalan prakeluaran?</string>
@@ -208,7 +210,6 @@
     <string name="sources_dialog_url_invalid">URL mestilah menghala ke repositori GitHub/GitLab atau fail .json</string>
     <string name="sources_dialog_preinstalled">Prapasang</string>
     <string name="sources_dialog_community">Tampalan komuniti</string>
-    <string name="sources_dialog_choose_apps">Pilih aplikasi</string>
     <string name="sources_dialog_choose_apps_description">Pilih aplikasi yang mana untuk disimpan sebaik sahaja sumber dimuatkan</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Sumber tampalan pihak ketiga</string>
@@ -440,7 +441,7 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="batch_patch_state_no_patches">Tiada tampalan</string>
     <string name="batch_patch_policy_install">Pasang apabila selesai</string>
     <string name="batch_patch_policy_install_description">Memasang setiap aplikasi bertampal sejurus selepas baris gilir selesai. Mati menyimpan APK untuk kemudian</string>
-    <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
+    <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_start">Mula</string>
     <string name="batch_patch_stop_title">Hentikan tampalan kelompok?</string>
     <string name="batch_patch_stop_description">Aplikasi yang sedang ditampal sekarang dan semua yang masih dalam baris gilir akan dibatalkan</string>
@@ -739,7 +740,6 @@ Nyahpasang akan memadam semua data aplikasi secara kekal"</string>
     <string name="settings_appearance_pure_black">Hitam Tulen</string>
     <string name="settings_appearance_pure_black_description">Gunakan latar belakang hitam sebenar</string>
     <string name="settings_appearance_color_accents">Warna aplikasi dan sumber</string>
-    <string name="settings_appearance_color_accents_description">Menggunakan warna sendiri setiap aplikasi dan sumber dan bukannya warna aksen</string>
     <string name="settings_appearance_outlines">Garis luar</string>
     <string name="settings_appearance_outlines_description">Melukis tepi nipis di sekeliling kad, panel dan butang</string>
     <!-- Settings - Appearance Tab - Language Selector -->
@@ -758,13 +758,8 @@ Nyahpasang akan memadam semua data aplikasi secara kekal"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Skrin utama</string>
     <string name="settings_appearance_greeting_phrases">Frasa ucapan</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Paparkan mesej ucapan pada skrin utama</string>
-    <string name="settings_appearance_app_grouping">Pengumpulan aplikasi</string>
-    <string name="settings_appearance_app_grouping_description">Paparkan pensuis untuk mengumpulkan aplikasi mengikut sumber atau kategori</string>
     <string name="settings_appearance_repatch_notice">Notis tampalan semula</string>
-    <string name="settings_appearance_repatch_notice_description">Paparkan sepanduk apabila aplikasi bertampal boleh ditampal semula</string>
     <string name="settings_appearance_sort_button">Butang isih dan tapis</string>
-    <string name="settings_appearance_sort_button_description">Paparkan butang isih dan tapis pada skrin utama</string>
     <string name="settings_appearance_app_card_colors">Warna kad aplikasi</string>
     <string name="settings_appearance_app_card_colors_default">Lalai</string>
     <string name="settings_appearance_app_card_colors_default_description">Beri setiap aplikasi warna bundlenya sendiri</string>
@@ -820,7 +815,6 @@ Nyahpasang akan memadam semua data aplikasi secara kekal"</string>
 
 Tampalan tidak terjejas: aktifkan tampalan prakeluaran untuk setiap sumber dalam senarai sumber tampalan"</string>
     <string name="settings_advanced_updates_allow_metered">Kemas kini data mudah alih</string>
-    <string name="settings_advanced_updates_allow_metered_description">Benarkan kemas kini Morphe dan tampalan dimuat turun melalui data mudah alih</string>
     <string name="settings_advanced_updates_background_notifications">Pemberitahuan kemas kini latar belakang</string>
     <string name="settings_advanced_updates_background_notifications_description">Semak kemas kini secara berkala di latar belakang dan beritahu apabila tersedia</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Pemberitahuan tolak untuk keluaran baharu, walaupun aplikasi ditutup</string>
@@ -835,7 +829,6 @@ Tampalan tidak terjejas: aktifkan tampalan prakeluaran untuk setiap sumber dalam
     <string name="settings_advanced_update_interval_chip_subtitle">Kekerapan pemeriksaan latar belakang</string>
     <string name="settings_advanced_update_interval_battery_warning">Pemeriksaan latar belakang mungkin tidak berfungsi dengan boleh dipercayai pada beberapa peranti. Pengilang seperti Xiaomi, Huawei, Samsung, dan OnePlus sering kali mengehadkan proses latar belakang dengan agresif untuk menjimatkan bateri</string>
     <string name="settings_advanced_external_batch_patch">Benarkan pencetus luaran</string>
-    <string name="settings_advanced_external_batch_patch_description">Membolehkan aplikasi automasi memulakan tampalan kelompok melalui intent</string>
     <string name="external_batch_patch_title">Mula tampalan kelompok?</string>
     <string name="external_batch_patch_description">%s mahu Morphe menampal dan memasang aplikasi</string>
     <string name="external_batch_patch_trust_caller">Sentiasa benarkan aplikasi ini</string>
@@ -855,11 +848,9 @@ Tampalan tidak terjejas: aktifkan tampalan prakeluaran untuk setiap sumber dalam
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Tetapan pakar</string>
     <string name="settings_advanced_expert_mode">Mod mahir</string>
-    <string name="settings_advanced_expert_mode_description">Mengaktifkan tetapan tampalan Morphe yang kompleks dan pilihan penyesuaian</string>
     <string name="settings_advanced_expert_mode_dialog_title">Aktifkan Mod Pakar?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Mod Pakar memberikan kawalan yang lebih besar ke atas cara tampalan digunakan, tetapi tetapan yang salah konfigurasi dalam Mod Pakar boleh mengakibatkan aplikasi yang tidak berfungsi</string>
     <string name="settings_advanced_strip_unused_libs">Optimumkan untuk seni bina peranti</string>
-    <string name="settings_advanced_strip_unused_libs_description">Mengalih keluar pustaka seni bina CPU dan modul APK berpecah yang tidak digunakan</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_description">Diperlukan untuk sumber permintaan sedekah</string>
     <string name="settings_advanced_github_pat_configured">Token dikonfigurasikan</string>
@@ -990,13 +981,10 @@ Dimensi gambar mestilah seperti berikut:
     <string name="installer_play_store_warning_risk">Play Store mungkin menawarkan kemas kini untuk aplikasi bertampal. Memasang kemas kini itu akan menimpa APK bertampal dengan versi asal dan mengalih keluar tampalan. Jika digesa untuk mengemas kini, ketik menu tiga titik pada halaman Play Store aplikasi dan pilih \"Matikan kemas kini\"</string>
     <string name="installer_play_store_warning_continue">Saya faham, teruskan</string>
     <string name="installer_play_store_mode">Pasang sebagai Play Store</string>
-    <string name="installer_play_store_mode_description">Rekodkan Google Play Store sebagai sumber pemasangan untuk kaedah pemasangan ini</string>
     <string name="settings_prompt_installer_on_install">Gesaan pemilihan pemasang</string>
-    <string name="settings_prompt_installer_on_install_description">Menunjukkan dialog pemilihan pemasang setiap kali aplikasi bertampal dipasang</string>
     <string name="settings_auto_install_with_shizuku">Pasang automatik selepas tampalan</string>
     <string name="settings_auto_install_with_shizuku_description">Memasang APK bertampal sebaik sahaja tampalan selesai</string>
     <string name="settings_auto_uninstall_with_shizuku">Nyahpasang automatik apabila konflik</string>
-    <string name="settings_auto_uninstall_with_shizuku_description">Apabila memasang automatik dengan Shizuku, nyahpasang aplikasi sedia ada dahulu jika Android melaporkan konflik tandatangan. Ini boleh mengalih keluar data aplikasi</string>
     <string name="settings_auto_uninstall_warning_title">Aktifkan nyahpasang automatik?</string>
     <string name="settings_auto_uninstall_warning_message">Jika Android melaporkan konflik tandatangan semasa pemasangan automatik Shizuku, Morphe akan menyahpasang aplikasi sedia ada sebelum memasang APK bertampal</string>
     <string name="settings_auto_uninstall_warning_risk">Ini boleh mengalih keluar data aplikasi. Jika APK bertampal gagal dipasang selepas nyahpasang, aplikasi sebelumnya mungkin sudah tiada</string>
@@ -1035,13 +1023,11 @@ Butiran: %2$s"</string>
     <string name="settings_system_memory_limit_warning">Had memori yang rendah mungkin menyebabkan kegagalan semasa menampal aplikasi yang lebih besar</string>
     <string name="settings_system_memory_limit_high_warning">Had memori yang tinggi boleh menjadikan tampalan jauh lebih perlahan pada sesetengah peranti. Naikkan hanya jika tampalan terus gagal pada had yang lebih rendah</string>
     <string name="settings_system_process_runtime_enabled_description">%s hadkan MB</string>
-    <string name="settings_system_process_runtime_disabled_description">Klik untuk konfigurasi</string>
     <string name="settings_system_process_runtime_description_not_available">Ciri ini memerlukan Android 11 atau lebih tinggi</string>
     <string name="settings_system_patcher_completion_sound">Bunyi selesai</string>
     <string name="settings_system_patcher_completion_sound_description">Memainkan nada berbeza untuk kejayaan atau kegagalan apabila tampalan selesai</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">Pemberitahuan</string>
-    <string name="settings_system_notifications_description">Konfigurasikan amaran latar belakang dan bunyi selesai</string>
     <string name="settings_system_notifications_success_sound">Bunyi berjaya</string>
     <string name="settings_system_notifications_error_sound">Bunyi gagal</string>
     <string name="settings_system_notifications_sound_default">Lalai</string>
@@ -1053,7 +1039,6 @@ Butiran: %2$s"</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Import &amp; eksport</string>
     <string name="settings_system_signing_key">Kunci penandatanganan</string>
-    <string name="settings_system_signing_key_description">Menyandarkan dan memulihkan kunci yang menandatangani aplikasi bertampal anda</string>
     <string name="settings_system_signing_key_dialog_description">Setiap aplikasi yang ditampal Morphe ditandatangani dengan kunci ini. Simpan salinan: tanpanya, aplikasi bertampal hanya boleh dikemas kini selepas menyahpasangnya</string>
     <string name="settings_system_signing_key_missing">Morphe mencipta satu dengan tampalan pertama anda</string>
     <string name="settings_system_signing_key_created">Dicipta %s</string>
@@ -1109,7 +1094,6 @@ Butiran: %2$s"</string>
     <string name="settings_system_apks_export_zip_failed">Gagal mengeksport APK terpilih</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">Pengurusan storan</string>
-    <string name="settings_system_storage_management_description">Semak penggunaan cakera dan kosongkan fail cache</string>
     <string name="settings_system_storage_keystore_title">Stor kunci penandatanganan</string>
     <string name="settings_system_storage_app_data_title">Data aplikasi</string>
     <string name="settings_system_storage_patch_bundles_title">Bundle tampalan</string>
@@ -1175,7 +1159,6 @@ Butiran: %2$s"</string>
     <string name="copy_selection_same_source">Sumber sama</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Pemilih fail tersuai</string>
-    <string name="settings_system_custom_file_picker_description">Layari storan dengan pemilih fail terbina dalam Morphe dan bukannya sistem lalai</string>
     <!-- Settings - System Tab - APK download helper -->
     <string name="settings_system_apk_download_helper">Pembantu muat turun APK</string>
     <string name="settings_system_apk_download_helper_trusted_count">Dipercayai: %1$d daripada %2$d</string>
@@ -1293,6 +1276,8 @@ Butiran: %2$s"</string>
     <string name="available">Tersedia</string>
     <string name="continue_">Teruskan</string>
     <string name="version">Versi</string>
+    <!-- Who made a patch source, as a field label -->
+    <!-- A file a patch source is added from, as a field label -->
     <string name="clone">Klon</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Tampalan</string>

@@ -16,8 +16,6 @@ import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.util.UpdateNotificationManager
 import app.morphe.manager.util.tag
 import kotlinx.coroutines.flow.first
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 import java.util.concurrent.TimeUnit
 
 /**
@@ -60,14 +58,12 @@ enum class UpdateCheckInterval(val minutes: Long, val labelResId: Int) {
  */
 class UpdateCheckWorker(
     context: Context,
-    params: WorkerParameters
-) : CoroutineWorker(context, params), KoinComponent {
-
-    private val prefs: PreferencesManager by inject()
-    private val managerUpdateRepository: ManagerUpdateRepository by inject()
-    private val patchBundleRepository: PatchBundleRepository by inject()
-    private val notificationManager: UpdateNotificationManager by inject()
-
+    params: WorkerParameters,
+    private val prefs: PreferencesManager,
+    private val managerUpdateRepository: ManagerUpdateRepository,
+    private val patchBundleRepository: PatchBundleRepository,
+    private val notificationManager: UpdateNotificationManager
+) : CoroutineWorker(context, params) {
     override suspend fun doWork(): Result {
         // Skip if background update notifications are disabled by user
         if (!prefs.backgroundUpdateNotifications.get()) {

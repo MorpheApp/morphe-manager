@@ -22,6 +22,10 @@
     <string name="deep_link_add_source_title">Forrás hozzáadása</string>
     <string name="deep_link_add_source_message">Hozzáadod ezt a módosításforrást a Morphe-hez?</string>
     <string name="deep_link_add_source_warning">Csak megbízható forrásokat adj hozzá</string>
+    <!-- Shown under the app a link was opened for -->
+    <string name="deep_link_add_source_only_app">Csak ez az app hozzáadva. Más appokat is hozzáadhatsz a forrás applistájából</string>
+    <!-- Asked when the link names an app of a source that is already added -->
+    <string name="deep_link_add_source_app_back">Ez a forrás már hozzá van adva. Hozzáadja ezt az alkalmazást a meglévő forrásból?</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe frissítés elérhető</string>
     <string name="home_update_available_subtitle">Az új verzió telepítésre vár</string>
@@ -54,6 +58,9 @@
     <string name="home_app_filter_uninstalled_description">A Morphe-val módosított, az eszközről már eltávolított alkalmazások</string>
     <string name="home_app_filter_clones">Klónozott alkalmazások</string>
     <string name="home_app_filter_clones_description">Önálló csomagnévvel, az eredeti alkalmazás mellett telepített alkalmazások</string>
+    <string name="home_app_grouping_all_apps_description">Egy lista az összes alkalmazással</string>
+    <string name="home_app_grouping_sources_description">Azok az alkalmazások, amelyeket a forrás biztosít</string>
+    <string name="home_app_grouping_custom_description">Az Ön által létrehozott kategóriákban lévő alkalmazások</string>
     <string name="home_app_sort_manual_description">Nyomj hosszan egy alkalmazásra, majd koppints az átrendezés gombra</string>
     <string name="home_app_sort_recommended">Ajánlott sorrend</string>
     <string name="home_app_sort_recommended_description">Telepített és rögzített alkalmazások a lista elején</string>
@@ -146,7 +153,6 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Módosításforrások</string>
     <string name="sources_search">Források és javítások keresése</string>
-    <string name="sources_sort_title">Javításforrások rendezése</string>
     <string name="sources_sort_manual">Kézi sorrend</string>
     <string name="sources_sort_manual_hint">Nyomja meg hosszan egy forrást a sorrend megváltoztatásához.</string>
     <string name="sources_sort_last_updated">Utolsó frissítés</string>
@@ -158,12 +164,17 @@
     <string name="sources_management_report_issue">Hiba jelentése</string>
     <string name="sources_management_failed_to_open_url">Hiba történt az URL megnyitásakor</string>
     <string name="sources_apps">Alkalmazások</string>
-    <string name="sources_apps_description">Koppintson egy alkalmazásra, hogy kihagyja ebből a forrásból, vagy visszahozza; hosszan lenyomva tartva többet is kiválaszthat. Egy alkalmazás lekerül a kezdőképernyőről, ha már egyetlen forrás sem hozza.</string>
+    <string name="sources_apps_description">A bekapcsolt alkalmazások forrása ez. Érintse meg az alkalmazást a kihagyáshoz vagy visszaállításhoz. Egy alkalmazás eltűnik a kezdőképernyőről, ha egyik forrás sem szolgáltatja, kivéve, ha módosította</string>
     <string name="sources_apps_brought">Ebből a forrásból származó</string>
     <string name="sources_apps_left_out">Ebből a forrásból kihagyott</string>
-    <string name="sources_apps_leave_out">Kihagyás</string>
-    <string name="sources_apps_leave_out_done">Kihagyva</string>
     <string name="sources_apps_bring_back">Visszahozás</string>
+    <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
+    <string name="sources_apps_stays_patched">Módosítva marad</string>
+    <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
+    <string name="sources_apps_new">Új</string>
+    <string name="sources_apps_new_apps">Új alkalmazások hozzáadása</string>
+    <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
+    <string name="sources_apps_new_apps_description">A később hozzáadott alkalmazások megjelennek a kezdőképén</string>
     <string name="sources_management_prerelease_toggle">Kiadás előtti javítások</string>
     <string name="sources_management_prerelease_toggle_description">Korai hozzáférés kísérleti új javításverziókhoz</string>
     <string name="sources_prerelease_warning_title">Előzetes javítások engedélyezése?</string>
@@ -208,7 +219,6 @@
     <string name="sources_dialog_url_invalid">Az URL-nek GitHub/GitLab repóra vagy .json fájlra kell mutatnia</string>
     <string name="sources_dialog_preinstalled">Előretelepített</string>
     <string name="sources_dialog_community">Közösségi javítások</string>
-    <string name="sources_dialog_choose_apps">Alkalmazások kiválasztása</string>
     <string name="sources_dialog_choose_apps_description">Válassza ki, hogy a forrás betöltése után mely alkalmazásait tartsa meg.</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Harmadik féltől származó javításforrások</string>
@@ -451,7 +461,7 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="batch_patch_state_no_patches">Nincs javítás</string>
     <string name="batch_patch_policy_install">Telepítés a befejezés után</string>
     <string name="batch_patch_policy_install_description">Minden javított alkalmazás a soron következő befejezése után azonnal települ. A kikapcsolás esetén az APK-k későbbre megmaradnak</string>
-    <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
+    <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_start">Kezdet</string>
     <string name="batch_patch_stop_title">Megállítsa a csoportos javítást?</string>
     <string name="batch_patch_stop_description">A jelenleg javított alkalmazás és minden a sorban lévő törölve lesz</string>
@@ -460,6 +470,10 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="batch_patch_install_failed">A telepítés sikertelen</string>
     <string name="batch_patch_in_progress">A csoportos javítás már fut</string>
     <string name="batch_patch_nothing_outdated">Minden javított alkalmazás naprakész</string>
+    <string name="batch_queue_add_action">Adáshoz hozzáad</string>
+    <string name="batch_queue_pending_subtitle">Koppints az áttekintéshez és a kezdéshez</string>
+    <string name="batch_queue_clear_title">Várólista törlése?</string>
+    <string name="batch_queue_clear_description">Minden alkalmazás eltávolításra kerül a várólistáról</string>
     <string name="shortcut_repatch_short">Újra javítás</string>
     <string name="shortcut_repatch_long">Régi alkalmazások újra javítása</string>
     <string name="shortcut_check_updates_short">Frissítések ellenőrzése</string>
@@ -757,7 +771,7 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="settings_appearance_pure_black">Tiszta fekete</string>
     <string name="settings_appearance_pure_black_description">Valódi fekete háttér használata</string>
     <string name="settings_appearance_color_accents">Alkalmazás- és forrásszínek</string>
-    <string name="settings_appearance_color_accents_description">Az egyes alkalmazások és források saját színét használja a kiemelő szín helyett</string>
+    <string name="settings_appearance_color_accents_description">A használatban lévő alkalmazások és források színeit használja az akcentusszín helyett</string>
     <string name="settings_appearance_outlines">Körvonalak</string>
     <string name="settings_appearance_outlines_description">Vékony szegélyt rajzol a kártyák, panelek és gombok köré</string>
     <!-- Settings - Appearance Tab - Language Selector -->
@@ -775,13 +789,11 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Kezdőképernyő</string>
     <string name="settings_appearance_greeting_phrases">Üdvözlő szövegek</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Üdvözlő üzenet megjelenítése a kezdőképernyőn</string>
-    <string name="settings_appearance_app_grouping">Alkalmazáscsoportosítás</string>
-    <string name="settings_appearance_app_grouping_description">Kapcsoló megjelenítése az alkalmazások forrás vagy kategória szerinti csoportosításához</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Üdvözlő üzenet megjelenítése</string>
     <string name="settings_appearance_repatch_notice">Újrajavítási értesítés</string>
-    <string name="settings_appearance_repatch_notice_description">Banner megjelenítése, ha a javított alkalmazások újra javíthatók</string>
+    <string name="settings_appearance_repatch_notice_description">Riasztó sáv megjelenítése, ha a módosított alkalmazások újra módosíthatók</string>
     <string name="settings_appearance_sort_button">Rendezés és szűrés gomb</string>
-    <string name="settings_appearance_sort_button_description">A rendezés és szűrés gomb megjelenítése a kezdőképernyőn</string>
+    <string name="settings_appearance_sort_button_description">Rendezési és szűrési gomb megjelenítése</string>
     <string name="settings_appearance_app_card_colors">Alkalmazáskártyák színei</string>
     <string name="settings_appearance_app_card_colors_default">Alapértelmezett</string>
     <string name="settings_appearance_app_card_colors_default_description">Minden alkalmazásnak a saját csomagjának színét adja</string>
@@ -837,7 +849,7 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
 
 Patches are not affected: enable pre-release patches for each source in the patch sources list"</string>
     <string name="settings_advanced_updates_allow_metered">Mobiladat-forgalom aktív</string>
-    <string name="settings_advanced_updates_allow_metered_description">A Morphe és a módosítások frissítéseinek letöltése mobiladattal.</string>
+    <string name="settings_advanced_updates_allow_metered_description">A Morphe és a patch frissítések letöltése mobiladat-csatlakozáson keresztül is engedélyezve</string>
     <string name="settings_advanced_updates_background_notifications">Háttérfrissítési értesítések</string>
     <string name="settings_advanced_updates_background_notifications_description">A háttérben periodikusan ellenőrzi a frissítéseket és értesít, ha elérhetőek.</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Azonnali push értesítések fogadása az új kiadásokról akkor is, ha az alkalmazás be van zárva.</string>
@@ -852,7 +864,7 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="settings_advanced_update_interval_chip_subtitle">Háttérellenőrzés gyakorisága</string>
     <string name="settings_advanced_update_interval_battery_warning">A háttérellenőrzések egyes eszközökön nem működnek megbízhatóan. Az olyan gyártók, mint a Xiaomi, a Huawei, a Samsung és a OnePlus gyakran agresszíven korlátozzák a háttérfolyamatokat az akkumulátor kímélése érdekében</string>
     <string name="settings_advanced_external_batch_patch">Külső események engedélyezése</string>
-    <string name="settings_advanced_external_batch_patch_description">Lehetővé teszi az automatizálási alkalmazásoknak, hogy intent segítségével kötegelt javítást indítsanak.</string>
+    <string name="settings_advanced_external_batch_patch_description">Automatizációs alkalmazások számára lehetővé teszi a kötegelt patchelést</string>
     <string name="external_batch_patch_title">Elindítsa a csoportos javítást?</string>
     <string name="external_batch_patch_description">A(z) %s alkalmazás javításokat és telepítéseket szeretne végrehajtani a Morphe-val</string>
     <string name="external_batch_patch_trust_caller">Mindig engedélyezze ezt az alkalmazást</string>
@@ -876,11 +888,11 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Szakértői beállítások</string>
     <string name="settings_advanced_expert_mode">Szakértői mód</string>
-    <string name="settings_advanced_expert_mode_description">Engedélyezi a Morphe komplex módosítási beállításait és a testreszabási lehetőségeket.</string>
+    <string name="settings_advanced_expert_mode_description">Speciális patchelési beállítások és patch opciók feloldása</string>
     <string name="settings_advanced_expert_mode_dialog_title">Engedélyezed a szakértői módot?</string>
     <string name="settings_advanced_expert_mode_dialog_message">A szakértői mód nagyobb ellenőrzést biztosít a módosítások alkalmazása felett, de ebben a módban a beállítások helytelen konfigurálása az alkalmazás működésképtelenségét eredményezheti</string>
     <string name="settings_advanced_strip_unused_libs">Optimalizálás a készülék architektúrájához</string>
-    <string name="settings_advanced_strip_unused_libs_description">Eltávolítja a nem használt CPU architektúra könyvtárakat és az APK modulokat</string>
+    <string name="settings_advanced_strip_unused_libs_description">Nem használt natív könyvtárak és APK split fájlok eltávolítása</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_description">Pull request forrásokhoz szükséges</string>
     <string name="settings_advanced_github_pat_configured">Token beállítva</string>
@@ -1011,13 +1023,13 @@ A képek méreteinek a következőknek kell lennie:
     <string name="installer_play_store_warning_risk">A Play Store frissítéseket kínálhat a javított alkalmazáshoz. Az ilyen frissítés felülírja a javított APK-t az eredeti verzióval, és eltávolítja a javításokat. Ha a rendszer kéri a frissítést, érintse meg a három pontból álló menüt az alkalmazás Play Store oldalán, és válassza a „Frissítések kikapcsolása” lehetőséget</string>
     <string name="installer_play_store_warning_continue">Értem, folytatom</string>
     <string name="installer_play_store_mode">Play Áruházként telepítés</string>
-    <string name="installer_play_store_mode_description">Jelölje meg a Google Play Áruházat az install forrásaként ehhez a telepítési módhoz.</string>
+    <string name="installer_play_store_mode_description">A Google Play Áruház beállítása alapértelmezett telepítési forrásként</string>
     <string name="settings_prompt_installer_on_install">Telepítőválasztó ablak</string>
-    <string name="settings_prompt_installer_on_install_description">Telepítőválasztó ablak megjelenítése minden alkalommal, amikor módosított alkalmazást telepítesz.</string>
+    <string name="settings_prompt_installer_on_install_description">Minden telepítésnél kérdezze meg, hogy melyik telepítőprogramot kell használni</string>
     <string name="settings_auto_install_with_shizuku">Automatikus telepítés a javítás után</string>
     <string name="settings_auto_install_with_shizuku_description">Telepíti a javított APK-t, amint a javítás befejeződik</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatikus eltávolítás ütközés esetén</string>
-    <string name="settings_auto_uninstall_with_shizuku_description">Az automatikus telepítés során a Shizukuval először eltávolítsa a meglévő alkalmazást, ha az Android aláírási konfliktát jelent. Ez eltávolíthatja az alkalmazás adatait.</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Létező alkalmazás eltávolítása aláírási konfliktus esetén. Ez alkalmazásadatok törléséhez is vezethet</string>
     <string name="settings_auto_uninstall_warning_title">Engedélyezze az automatikus eltávolítást?</string>
     <string name="settings_auto_uninstall_warning_message">Ha az Android aláírási konfliktát jelent a Shizuku automatikus telepítése során, a Morphe eltávolítja a meglévő alkalmazást, mielőtt telepítené a javított APK-t.</string>
     <string name="settings_auto_uninstall_warning_risk">Ez eltávolíthatja az alkalmazás adatait. Ha a javított APK nem települ az eltávolítás után, a korábbi alkalmazás már eltűnhet.</string>
@@ -1056,13 +1068,13 @@ Részletek: %2$s"</string>
     <string name="settings_system_memory_limit_warning">Alacsony memóriakorlát esetén a nagyobb alkalmazások módosításakor hiba léphet fel</string>
     <string name="settings_system_memory_limit_high_warning">Egy magas memóriakorlát egyes eszközökön sokkal lassabbá teheti a javítást. Csak akkor emeld meg, ha a javítás alacsonyabb korlátoknál is folyamatosan meghiúsul.</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB korlát</string>
-    <string name="settings_system_process_runtime_disabled_description">Koppints a konfigurálásához</string>
+    <string name="settings_system_process_runtime_disabled_description">Koppintson a konfiguráláshoz</string>
     <string name="settings_system_process_runtime_description_not_available">Ez a funkció Android 11 vagy újabb verziót igényel</string>
     <string name="settings_system_patcher_completion_sound">Befejezés hangja</string>
     <string name="settings_system_patcher_completion_sound_description">Jellegzetes hangot játszik le a sikeres vagy sikertelen javítás befejezésekor</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">Értesítések</string>
-    <string name="settings_system_notifications_description">Konfigurálja a háttérértesítéseket és a befejezés hangjait</string>
+    <string name="settings_system_notifications_description">Háttérfigyelmeztetések és befejezési hangok beállítása</string>
     <string name="settings_system_notifications_success_sound">Siker hangja</string>
     <string name="settings_system_notifications_error_sound">Hibajelzés hangja</string>
     <string name="settings_system_notifications_sound_default">Alapértelmezett</string>
@@ -1074,7 +1086,7 @@ Részletek: %2$s"</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Importálás és exportálás</string>
     <string name="settings_system_signing_key">Aláírási kulcs</string>
-    <string name="settings_system_signing_key_description">Biztonsági mentést készít és visszaállítja a kulcsot, amellyel a javított alkalmazásaid alá vannak írva.</string>
+    <string name="settings_system_signing_key_description">A módosított alkalmazásokat aláíró kulcs biztonsági mentése vagy visszaállítása</string>
     <string name="settings_system_signing_key_dialog_description">A Morphe minden általa javított alkalmazást ezzel a kulccsal ír alá. Tarts meg egy másolatot: enélkül a javított alkalmazások csak eltávolítás után frissíthetők.</string>
     <string name="settings_system_signing_key_missing">A Morphe az első javításnál létrehoz egyet.</string>
     <string name="settings_system_signing_key_created">%s létrehozva</string>
@@ -1130,7 +1142,7 @@ Részletek: %2$s"</string>
     <string name="settings_system_apks_export_zip_failed">A kiválasztott APK-k exportálása sikertelen</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">Tárhelykezelés</string>
-    <string name="settings_system_storage_management_description">A lemezhasználat áttekintése és a gyorsítótár törlése</string>
+    <string name="settings_system_storage_management_description">Lemezhányadék megjelenítése és gyorsítótárazott fájlok tisztítása</string>
     <string name="settings_system_storage_keystore_title">Aláíró kulcstár</string>
     <string name="settings_system_storage_app_data_title">Alkalmazásadatok</string>
     <string name="settings_system_storage_patch_bundles_title">Módosítócsomagok</string>
@@ -1196,7 +1208,7 @@ Részletek: %2$s"</string>
     <string name="copy_selection_same_source">Ugyanaz a forrás</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Egyéni fájlválasztó</string>
-    <string name="settings_system_custom_file_picker_description">A Morphe beépített fájlválasztóját használja a rendszer alapértelmezett helyett.</string>
+    <string name="settings_system_custom_file_picker_description">A Morphe beépített fájlkezelőjének használata a rendszer helyett</string>
     <!-- Settings - System Tab - APK download helper -->
     <string name="settings_system_apk_download_helper">APK letöltő segédprogram</string>
     <string name="settings_system_apk_download_helper_trusted_count">Megbízható: %1$d / %2$d</string>
@@ -1247,6 +1259,7 @@ Részletek: %2$s"</string>
     <string name="no">Nem</string>
     <string name="all">Minden</string>
     <string name="filter">Szűrő</string>
+    <string name="group">Csoportosítás</string>
     <string name="reset">Visszaállítás</string>
     <string name="reset_all">Összes visszaállítása</string>
     <string name="apply">Alkalmaz</string>
@@ -1314,6 +1327,10 @@ Részletek: %2$s"</string>
     <string name="available">Elérhető</string>
     <string name="continue_">Folytatás</string>
     <string name="version">Verzió</string>
+    <!-- Who made a patch source, as a field label -->
+    <string name="author">Szerző</string>
+    <!-- A file a patch source is added from, as a field label -->
+    <string name="file">Fájl</string>
     <string name="clone">Klón</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Módosítás</string>

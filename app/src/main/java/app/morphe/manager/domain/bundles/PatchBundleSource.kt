@@ -11,7 +11,6 @@
 package app.morphe.manager.domain.bundles
 
 import androidx.compose.runtime.Stable
-import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.gitlabAvatarUrl
 import app.morphe.manager.domain.repository.PatchBundleHeldBackException
 import app.morphe.manager.patcher.patch.PatchBundle
 import app.morphe.manager.util.hasZipHeader
@@ -192,38 +191,44 @@ sealed class PatchBundleSource(
             )
         }
 
+        /** Get custom bundle avatar URL, see [bundleAvatarUrl]. */
+        val PatchBundleSource.bundleAvatarUrl: String? get() =
+            (this as? RemotePatchBundle)?.let { bundleAvatarUrl(it.endpoint) }
+
         /**
-         * Get custom bundle avatar URL (the PNG named after the bundle JSON, next to it).
+         * The PNG named after the bundle JSON at [endpoint], next to it.
          * Returns null if the endpoint does not point to a JSON file.
          */
-        val PatchBundleSource.bundleAvatarUrl: String? get() {
-            val remote = this as? RemotePatchBundle ?: return null
-            val path = remote.endpoint.substringBefore('?').substringBefore('#')
+        fun bundleAvatarUrl(endpoint: String): String? {
+            val path = endpoint.substringBefore('?').substringBefore('#')
             if (!path.endsWith(JSON_EXTENSION, ignoreCase = true)) return null
             // Keep the query and fragment, they can carry the credentials of a private host
-            return path.dropLast(JSON_EXTENSION.length) + ".png" + remote.endpoint.substring(path.length)
+            return path.dropLast(JSON_EXTENSION.length) + ".png" + endpoint.substring(path.length)
         }
 
         /**
          * Get GitHub avatar URL if this bundle is from a GitHub repository.
          * Returns null for GitLab bundles (use [gitlabAvatarUrl] instead).
          */
-        val PatchBundleSource.githubAvatarUrl: String? get() {
-            val remote = this as? RemotePatchBundle ?: return null
-            return extractGitHubOwner(remote.endpoint)?.let { owner ->
-                "https://github.com/$owner.png"
-            }
-        }
+        val PatchBundleSource.githubAvatarUrl: String? get() =
+            (this as? RemotePatchBundle)?.let { extractGitHubOwner(it.endpoint) }?.let(::githubAvatar)
 
         /**
          * Get GitLab avatar URL via unavatar.io if this bundle is from a GitLab repository.
          */
-        val PatchBundleSource.gitlabAvatarUrl: String? get() {
-            val remote = this as? RemotePatchBundle ?: return null
-            return extractGitLabOwner(remote.endpoint)?.let { owner ->
-                "https://unavatar.io/gitlab/$owner"
-            }
-        }
+        val PatchBundleSource.gitlabAvatarUrl: String? get() =
+            (this as? RemotePatchBundle)?.let { extractGitLabOwner(it.endpoint) }?.let(::gitlabAvatar)
+
+        /**
+         * Avatar of whoever owns the GitHub or GitLab repository [url] points at, for a source
+         * that is not added yet. Null for any other host.
+         */
+        fun ownerAvatarUrl(url: String): String? =
+            extractGitHubOwner(url)?.let(::githubAvatar) ?: extractGitLabOwner(url)?.let(::gitlabAvatar)
+
+        private fun githubAvatar(owner: String) = "https://github.com/$owner.png"
+
+        private fun gitlabAvatar(owner: String) = "https://unavatar.io/gitlab/$owner"
 
         /**
          * Extract GitHub owner/organization name from endpoint URL.

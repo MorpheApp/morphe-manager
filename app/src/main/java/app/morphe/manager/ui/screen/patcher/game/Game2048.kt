@@ -183,7 +183,7 @@ fun Game2048Board(state: Game2048State) {
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     color = Color(0xFFEDC22E),
-                    modifier = Modifier.padding(bottom = 16.dp)
+                    modifier = Modifier.padding(bottom = Defaults.SpaceLarge)
                 )
             }
         }
@@ -198,7 +198,7 @@ private fun BoardGrid(state: Game2048State, size: Dp) {
     Box(
         modifier = Modifier
             .size(size)
-            .background(BoardBg, RoundedCornerShape(Defaults.CompactCornerRadius))
+            .background(BoardBg, RoundedCornerShape(Defaults.CornerMedium))
             .pointerInput(Unit) {
                 val threshold = SwipeThreshold.toPx()
                 var drag = Offset.Zero

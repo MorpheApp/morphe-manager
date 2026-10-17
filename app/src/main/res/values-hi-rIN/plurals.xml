@@ -71,6 +71,14 @@
         <item quantity="one">%s ऐप पैच करने के लिए तैयार है</item>
         <item quantity="other">%s ऐप्स पैच करने के लिए तैयार हैं</item>
     </plurals>
+    <plurals name="batch_queue_pending_count">
+        <item quantity="one">पैचिंग के लिए %s ऐप कतार में</item>
+        <item quantity="other">पैचिंग के लिए %s ऐप्स कतार में</item>
+    </plurals>
+    <plurals name="home_alerts_snoozed_count">
+        <item quantity="one">%s छिपी हुई सूचना, इसे दिखाने के लिए टैप करें</item>
+        <item quantity="other">%s छिपी हुई सूचनाएं, उन्हें दिखाने के लिए टैप करें</item>
+    </plurals>
     <plurals name="repatch_available_count">
         <item quantity="one">%s ऐप को फिर से पैच किया जा सकता है</item>
         <item quantity="other">%s ऐप्स को फिर से पैच किए जा सकते हैं</item>
@@ -86,10 +94,6 @@
     <plurals name="sources_management_subtitle">
         <item quantity="one">%s सोर्स इंस्टॉल किया गया है</item>
         <item quantity="other">%s सोर्स इंस्टॉल किए गए हैं</item>
-    </plurals>
-    <plurals name="home_app_filter_active">
-        <item quantity="one">%1$s · %2$s फ़िल्टर किया गया</item>
-        <item quantity="other">%1$s · %2$s फ़िल्टर किए गए</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s छिपा हुआ ऐप</item>
@@ -126,6 +130,11 @@
     <plurals name="changelog_change_count">
         <item quantity="one">%s बदलाव</item>
         <item quantity="other">%s बदलाव</item>
+    </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
+    <plurals name="sources_apps_count_with_new">
+        <item quantity="one">%1$s · %2$d नया</item>
+        <item quantity="other">%1$s · %2$d नए</item>
     </plurals>
     <plurals name="changelog_new_releases">
         <item quantity="one">%s नई रिलीज़</item>

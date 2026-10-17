@@ -121,7 +121,10 @@ That buys you two things ordinary installs cannot offer:
   normally require GmsCore work without it.
 
 Morphe writes a Magisk-style module for each mounted app, so the mount is restored
-automatically after a reboot.
+automatically after a reboot. The module also covers a restart of the Android framework without
+a reboot, which some ROMs and modules offer as a soft reboot: it lifts the mount while the system
+starts again, so Android does not take the patched APK for a broken install and remove the app,
+and mounts it back once the system is up.
 
 ### Choosing the mode
 

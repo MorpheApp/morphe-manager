@@ -6,6 +6,8 @@
 package app.morphe.manager.ui.screen.shared
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -13,6 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -22,10 +25,11 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
-private val MenuItemInset = 6.dp
-private val MenuShape = RoundedCornerShape(Defaults.CompactCornerRadius)
-// Inset from the menu's edge by as much as it is rounded less, so both corners share a center
-private val MenuItemShape = RoundedCornerShape(Defaults.CompactCornerRadius - MenuItemInset)
+// Material's expressive menu: a large container, its entries inset by a small step and rounded
+// less by as much, so both corners share a center
+private val MenuItemInset = Defaults.SpaceExtraSmall
+private val MenuShape = RoundedCornerShape(Defaults.CornerLarge)
+private val MenuItemShape = RoundedCornerShape(Defaults.CornerLarge - MenuItemInset)
 private val MenuShadowElevation = 6.dp
 
 /** Card color of the app's surfaces, which a menu takes so it reads as one of them. */
@@ -83,6 +87,7 @@ fun ExposedDropdownMenuBoxScope.AppExposedDropdownMenu(
  * the surrounding color, see [LocalAccent], so the current choice shows at a glance.
  *
  * @param selected Whether this entry is the one in effect.
+ * @param description Line under [text], such as what the entry in effect does.
  * @param trailing Takes the place of the check, for an entry that shows its state another way.
  */
 @Composable
@@ -91,30 +96,42 @@ fun AppDropdownMenuItem(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     selected: Boolean = false,
+    description: String? = null,
     leadingIcon: ImageVector? = null,
     trailing: (@Composable () -> Unit)? = null
 ) {
     val accent = LocalAccent.current ?: MaterialTheme.colorScheme.primary
     val contentColor = dialogTextColor()
+    val interactionSource = remember { MutableInteractionSource() }
 
     DropdownMenuItem(
         text = {
-            Text(
-                text = text,
-                style = MaterialTheme.typography.bodyLarge,
-                fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal
-            )
+            Column {
+                Text(
+                    text = text,
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal
+                )
+                if (description != null) {
+                    Text(
+                        text = description,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = contentColor.copy(alpha = 0.7f)
+                    )
+                }
+            }
         },
         onClick = onClick,
         modifier = modifier
             .padding(horizontal = MenuItemInset)
-            .clip(MenuItemShape)
+            .clip(rememberPressShape(interactionSource, MenuItemShape))
             .background(if (selected) accent.copy(alpha = AccentAlpha.STEP) else Color.Transparent)
             .semantics { this.selected = selected },
         leadingIcon = leadingIcon?.let { icon -> { Icon(icon, contentDescription = null) } },
         trailingIcon = trailing ?: if (selected) {
             { Icon(Icons.Outlined.Check, contentDescription = null) }
         } else null,
+        interactionSource = interactionSource,
         colors = MenuDefaults.itemColors(
             textColor = contentColor,
             leadingIconColor = contentColor.copy(alpha = 0.8f),

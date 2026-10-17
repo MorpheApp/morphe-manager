@@ -14,24 +14,25 @@ import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import app.morphe.manager.R
-import app.morphe.manager.util.toast
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.launch
+import org.koin.compose.koinInject
 
 /**
  * Plain-text copy for click handlers. [LocalClipboard] only writes from a coroutine, so the
  * returned function launches one in the caller's composition scope.
  *
- * The toast shows on every version: some skins drop the confirmation Android 13 added, and a
+ * The message shows on every version: some skins drop the confirmation Android 13 added, and a
  * second notice where it does show beats none where it does not.
  *
- * @param confirmation What the toast says once the text is on the clipboard.
+ * @param confirmation What the message says once the text is on the clipboard.
  */
 @Composable
 fun rememberCopyToClipboard(
     confirmation: String = stringResource(R.string.copied_to_clipboard)
 ): (String) -> Unit {
     val context = LocalContext.current
+    val messages = koinInject<UserMessages>()
     val clipboard = LocalClipboard.current
     val scope = rememberCoroutineScope()
     return remember(context, clipboard, scope, confirmation) {
@@ -40,7 +41,7 @@ fun rememberCopyToClipboard(
             // also closes the screen would otherwise cancel the scope before the copy is made
             scope.launch(start = CoroutineStart.UNDISPATCHED) {
                 clipboard.setClipEntry(ClipEntry(ClipData.newPlainText(null, text)))
-                context.toast(confirmation)
+                messages.show(confirmation)
             }
         }
     }

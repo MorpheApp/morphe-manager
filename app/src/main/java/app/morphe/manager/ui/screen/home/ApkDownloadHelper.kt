@@ -24,7 +24,6 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.model.ApkDownloadHelperHost
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.ApkDownloadHelperContract
-import app.morphe.manager.util.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
@@ -44,6 +43,7 @@ fun rememberApkDownloadHelperAction(
     prefs: PreferencesManager = koinInject()
 ): (() -> Unit)? {
     val context = LocalContext.current
+    val messages = koinInject<UserMessages>()
     val trustedPackages by prefs.trustedApkDownloadHelpers.getAsState()
     val noResultMessage = stringResource(R.string.home_apk_helper_no_result)
     val noAccessMessage = stringResource(R.string.home_apk_helper_no_access)
@@ -71,7 +71,7 @@ fun rememberApkDownloadHelperAction(
         if (ApkDownloadHelperContract.isInstalledAppResult(result.data)) {
             val packageName = ApkDownloadHelperContract.resultInstalledPackageName(result.data)
             if (packageName == null) {
-                context.toast(noPackageMessage)
+                messages.show(noPackageMessage)
                 return@rememberLauncherForActivityResult
             }
 
@@ -81,21 +81,21 @@ fun rememberApkDownloadHelperAction(
 
         val uri = ApkDownloadHelperContract.resultUri(result.data)
         if (uri == null) {
-            context.toast(noResultMessage)
+            messages.show(noResultMessage)
             return@rememberLauncherForActivityResult
         }
 
         // Reading would fail with a SecurityException anyway, but that surfaces as a generic
         // "try again" error, which is misleading when the helper is the one at fault
         if (!ApkDownloadHelperContract.grantsReadAccess(result.data)) {
-            context.toast(noAccessMessage)
+            messages.show(noAccessMessage)
             return@rememberLauncherForActivityResult
         }
 
         host.onHelperApkReceived(uri)
     }
 
-    if (showPicker && helpers.isNotEmpty()) {
+    DialogHost(visible = showPicker && helpers.isNotEmpty()) {
         ApkDownloadHelperDialog(
             helpers = helpers,
             signatureCheckAvailable = host.helperSignatureCheckAvailable,
@@ -123,7 +123,7 @@ fun rememberApkDownloadHelperAction(
  * so a helper can never download on Morphe's behalf unnoticed.
  */
 @Composable
-private fun ApkDownloadHelperDialog(
+private fun DialogHostScope.ApkDownloadHelperDialog(
     helpers: List<ApkDownloadHelperContract.Helper>,
     signatureCheckAvailable: Boolean,
     onDismiss: () -> Unit,
@@ -148,15 +148,17 @@ private fun ApkDownloadHelperDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
         ) {
-            helpers.forEach { helper ->
-                RadioSelectionCard(
-                    selected = selected == helper,
-                    onSelect = { selected = helper },
-                    title = helper.label,
-                    description = helper.componentName.packageName
-                )
+            SettingsGroup {
+                helpers.forEach { helper ->
+                    RadioSelectionCard(
+                        selected = selected == helper,
+                        onSelect = { selected = helper },
+                        title = helper.label,
+                        description = helper.componentName.packageName
+                    )
+                }
             }
 
             Notice(

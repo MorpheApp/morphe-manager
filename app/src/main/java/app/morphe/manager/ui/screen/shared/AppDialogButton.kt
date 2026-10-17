@@ -9,7 +9,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -17,15 +16,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.util.isDarkBackground
 
 private val DialogButtonHorizontalPadding = 16.dp
-private val DialogButtonVerticalPadding = 14.dp
 private val DialogButtonIconSpacing = 8.dp
 
 /** Resolved colors for a dialog button variant. */
@@ -128,20 +124,22 @@ private fun DialogButton(
 ) {
     val colors = resolveButtonColors(isDestructive, filled)
     val interactionSource = remember { MutableInteractionSource() }
+    val shape = rememberPressShape(interactionSource, Defaults.PillShape, enabled)
+    val fill = colors.containerColor.let { if (enabled) it else it.copy(alpha = it.alpha * 0.5f) }
+    // Over content scrolling on beneath it, such as a list dialog's footer, the fill blurs what
+    // passes under it, so nothing shows through and an outlined button is frosted rather than empty
+    val haze = LocalBackdropHaze.current
+    val container = if (haze != null) Color.Transparent else fill
 
+    // A floor rather than a fixed height, so a large font grows the button instead of clipping its label
     val buttonModifier = modifier
-        .height(Defaults.DialogButtonHeight)
-        .pressScale(
-            interactionSource = interactionSource,
-            enabled = enabled,
-            label = "dialog_button_press_scale"
-        )
-    val shape = RoundedCornerShape(Defaults.CardCornerRadius)
+        .heightIn(min = Defaults.DialogButtonHeight)
+        .then(if (haze != null) Modifier.glassFill(fill, shape, haze) else Modifier)
     // An outlined button is drawn by its edge alone, so it keeps one whatever the outlines setting says
     val border = if (filled) CardBorder.of(colors.borderColor) else BorderStroke(1.dp, colors.borderColor)
     val contentPadding = PaddingValues(
         horizontal = DialogButtonHorizontalPadding,
-        vertical = DialogButtonVerticalPadding
+        vertical = Defaults.SpaceLarge
     )
     val content: @Composable RowScope.() -> Unit = {
         DialogButtonContent(text = text, icon = icon, textSuffix = textSuffix, filled = filled)
@@ -155,9 +153,9 @@ private fun DialogButton(
             interactionSource = interactionSource,
             shape = shape,
             colors = ButtonDefaults.buttonColors(
-                containerColor = colors.containerColor,
+                containerColor = container,
                 contentColor = colors.contentColor,
-                disabledContainerColor = colors.containerColor.copy(alpha = 0.5f),
+                disabledContainerColor = container,
                 disabledContentColor = colors.contentColor.copy(alpha = 0.5f)
             ),
             border = border,
@@ -172,9 +170,9 @@ private fun DialogButton(
             interactionSource = interactionSource,
             shape = shape,
             colors = ButtonDefaults.outlinedButtonColors(
-                containerColor = Color.Transparent,
+                containerColor = container,
                 contentColor = colors.contentColor,
-                disabledContainerColor = Color.Transparent,
+                disabledContainerColor = container,
                 disabledContentColor = colors.contentColor.copy(alpha = 0.4f)
             ),
             border = border,
@@ -212,7 +210,7 @@ private fun RowScope.DialogButtonContent(
     )
 
     if (textSuffix != null) {
-        Spacer(Modifier.width(4.dp))
+        Spacer(Modifier.width(Defaults.SpaceExtraSmall))
         Text(
             text = textSuffix,
             style = MaterialTheme.typography.labelLarge,
@@ -291,7 +289,7 @@ fun AppDialogActions(
 private fun ActionColumn(actions: List<DialogAction>, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding / 2)
+        verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
     ) {
         actions.forEachIndexed { index, action ->
             DialogActionButton(
@@ -307,7 +305,7 @@ private fun ActionColumn(actions: List<DialogAction>, modifier: Modifier = Modif
 private fun ActionRow(actions: List<DialogAction>, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
+        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
     ) {
         // Reversed so the primary action sits on the right, but emphasis still follows
         // the priority order the caller listed
@@ -403,23 +401,13 @@ private fun DialogActionButton(
 /** Whether every label fits the share of [availableWidth] its button would get in a single row. */
 @Composable
 internal fun actionsFitInRow(actions: List<DialogAction>, availableWidth: Dp): Boolean {
-    val measurer = rememberTextMeasurer()
-    val style = MaterialTheme.typography.labelLarge
-    val density = LocalDensity.current
+    val labelWidths = rememberLabelWidths(actions.map { it.text }, MaterialTheme.typography.labelLarge)
 
-    // Lambdas rebuilt on every recomposition would defeat the cache, so key on what is drawn
-    val key = actions.map { Triple(it.text, it.textSuffix, it.icon != null) }
+    // A suffix is marqueed rather than sized, so it never fits a shared row
+    if (actions.any { it.textSuffix != null }) return false
 
-    return remember(key, availableWidth, style, density, measurer) {
-        // A suffix is marqueed rather than sized, so it never fits a shared row
-        if (actions.any { it.textSuffix != null }) return@remember false
-
-        val slotWidth = (availableWidth - Defaults.ItemSpacing * (actions.size - 1)) / actions.size
-        slotWidth > 0.dp && actions.all { action ->
-            val labelWidth = with(density) { measurer.measure(action.text, style).size.width.toDp() }
-            labelWidth + action.labelInset() <= slotWidth
-        }
-    }
+    val slotWidth = (availableWidth - Defaults.SpaceMedium * (actions.size - 1)) / actions.size
+    return slotWidth > 0.dp && actions.indices.all { labelWidths[it] + actions[it].labelInset() <= slotWidth }
 }
 
 /** Width a dialog button spends on everything but its label. */

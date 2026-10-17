@@ -15,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.domain.repository.PatchBundleRepository.ImportMode
 import app.morphe.manager.ui.screen.shared.*
@@ -26,7 +25,7 @@ import app.morphe.manager.ui.screen.shared.*
  * Merge only adds missing entries and preserves everything that already exists.
  */
 @Composable
-fun ImportModeDialog(
+fun DialogHostScope.ImportModeDialog(
     @StringRes titleRes: Int,
     @StringRes descriptionRes: Int,
     onDismiss: () -> Unit,
@@ -44,7 +43,7 @@ fun ImportModeDialog(
             )
         }
     ) {
-        Column(verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)) {
+        Column(verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)) {
             ImportModeOption(
                 icon = Icons.Outlined.SwapVert,
                 title = stringResource(R.string.import_mode_replace_title),
@@ -84,7 +83,7 @@ private fun ImportModeOption(
         }
     ) {
         IconTextRow(
-            modifier = Modifier.padding(Defaults.ContentPadding),
+            modifier = Modifier.padding(Defaults.SpaceLarge),
             leadingContent = {
                 ThemedIcon(
                     icon = icon,

@@ -147,9 +147,9 @@ fun PairsGame(state: PairsGameState) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .clip(RoundedCornerShape(Defaults.CompactCornerRadius))
+            .clip(RoundedCornerShape(Defaults.CornerMedium))
             .background(PairsBg)
-            .padding(6.dp),
+            .padding(Defaults.SpaceExtraSmall),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
@@ -160,7 +160,7 @@ fun PairsGame(state: PairsGameState) {
             repeat(PAIRS_STRIKES) { i ->
                 Box(
                     modifier = Modifier
-                        .padding(horizontal = 3.dp)
+                        .padding(horizontal = Defaults.SpaceExtraSmall)
                         .size(8.dp)
                         .clip(CircleShape)
                         .background(if (i < state.strikes) PairsStrikeLeft else PairsStrikeSpent)
@@ -194,7 +194,7 @@ private fun PairsCard(state: PairsGameState, index: Int, size: Dp) {
     Box(
         modifier = Modifier
             .size(size)
-            .padding(4.dp)
+            .padding(Defaults.SpaceExtraSmall)
             .graphicsLayer {
                 rotationY = rotation
                 cameraDistance = 12f * density

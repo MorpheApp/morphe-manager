@@ -36,7 +36,7 @@ fun PickerButtonRow(
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         AppDialogOutlinedButton(

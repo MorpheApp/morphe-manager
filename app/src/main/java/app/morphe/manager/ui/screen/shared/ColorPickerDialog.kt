@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.shared
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -17,7 +16,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -26,6 +24,8 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.colorpicker.*
 import app.morphe.manager.util.contrastingContent
+import app.morphe.manager.util.isRtl
+import app.morphe.manager.util.startToEndGradient
 import app.morphe.manager.util.toColorOrNull
 import app.morphe.manager.util.toHexString
 import app.morphe.manager.util.toHsv
@@ -59,7 +59,7 @@ data class ColorPickerToggle(
  *   list where a palette would only be noise.
  */
 @Composable
-fun ColorPickerDialog(
+fun DialogHostScope.ColorPickerDialog(
     title: String,
     currentColor: String,
     onColorSelected: (String) -> Unit,
@@ -195,28 +195,22 @@ fun ColorPickerDialog(
         if (landscape) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
+                horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)
             ) {
-                AnimatedVisibility(
+                FoldingVisibility(
                     visible = enabled,
-                    modifier = Modifier.weight(1f),
-                    enter = Animations.expandFadeEnter,
-                    exit = Animations.shrinkFadeExit
+                    modifier = Modifier.weight(1f)
                 ) {
                     panel()
                 }
                 Column(
                     modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
+                    verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)
                 ) {
                     preview()
                     switch()
-                    AnimatedVisibility(
-                        visible = enabled,
-                        enter = Animations.expandFadeEnter,
-                        exit = Animations.shrinkFadeExit
-                    ) {
-                        Column(verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)) {
+                    FoldingVisibility(visible = enabled) {
+                        Column(verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)) {
                             swatches()
                             strip()
                         }
@@ -229,19 +223,15 @@ fun ColorPickerDialog(
 
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)
         ) {
             preview()
             switch()
 
             // The manual controls have nothing to offer while the color follows the toggle, and
             // leaving them grayed out in place would only hold the room they need
-            AnimatedVisibility(
-                visible = enabled,
-                enter = Animations.expandFadeEnter,
-                exit = Animations.shrinkFadeExit
-            ) {
-                Column(verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)) {
+            FoldingVisibility(visible = enabled) {
+                Column(verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)) {
                     swatches()
                     panel()
                     strip()
@@ -265,10 +255,10 @@ private fun ColorPreview(color: Color, gradient: List<Color>?, label: String, he
         modifier = Modifier
             .fillMaxWidth()
             .height(height)
-            .clip(RoundedCornerShape(Defaults.CompactCornerRadius))
+            .clip(RoundedCornerShape(Defaults.CornerMedium))
             .then(
                 if (gradient != null) {
-                    Modifier.background(Brush.horizontalGradient(gradient))
+                    Modifier.background(startToEndGradient(gradient, isRtl()))
                 } else {
                     Modifier.background(animated)
                 }

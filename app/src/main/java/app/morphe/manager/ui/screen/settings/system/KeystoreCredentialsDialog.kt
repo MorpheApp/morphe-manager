@@ -30,7 +30,7 @@ import app.morphe.manager.util.enumByNameOrNull
  * Allows entering alias and password for keystore import.
  */
 @Composable
-fun KeystoreCredentialsDialog(
+fun DialogHostScope.KeystoreCredentialsDialog(
     onDismiss: () -> Unit,
     initialFormat: KeystoreInputFormat = KeystoreInputFormat.KEYSTORE,
     onSubmit: (alias: String, keyPassword: String, storePassword: String, format: KeystoreInputFormat) -> Unit
@@ -54,7 +54,7 @@ fun KeystoreCredentialsDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)
         ) {
             // Format selector
             val formatItems = remember {

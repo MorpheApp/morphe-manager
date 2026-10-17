@@ -18,6 +18,9 @@ import android.os.Build
 import android.util.Log
 import androidx.core.content.ContextCompat
 import app.morphe.manager.BuildConfig
+import app.morphe.manager.data.platform.Filesystem
+import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.patcher.LibraryResolver
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.runtime.process.*
@@ -34,8 +37,8 @@ import app.morphe.manager.util.tag
 import com.github.pgreze.process.Redirect
 import com.github.pgreze.process.process
 import kotlinx.coroutines.*
-import org.koin.core.component.inject
 import java.io.File
+import java.io.IOException
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.atomic.AtomicReference
 import kotlin.time.Duration
@@ -156,12 +159,14 @@ fun lowerMemoryLimit(limit: Int): Int {
  */
 class ProcessRuntime(
     private val context: Context,
+    fs: Filesystem,
+    patchBundlesRepo: PatchBundleRepository,
+    prefs: PreferencesManager,
+    private val pm: PM,
+    private val appScope: AppCoroutineScope,
     // On Android Q and below, memory retry loop is unreliable - skip it and let the caller fall back
     private val skipMemoryRetry: Boolean = Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q
-) : Runtime(context) {
-    private val pm: PM by inject()
-    private val appScope: AppCoroutineScope by inject()
-
+) : Runtime(fs, patchBundlesRepo, prefs) {
     private suspend fun awaitBinderConnection(): IPatcherProcess {
         val binderFuture = CompletableDeferred<IPatcherProcess>()
         val receiver = object : BroadcastReceiver() {
@@ -200,13 +205,13 @@ class ProcessRuntime(
         stripUnusedNativeLibs: Boolean,
         onMergedApkReady: (suspend (File) -> Unit)?,
         onRestart: suspend () -> Unit
-    ): Int? {
+    ): ExecutionResult {
         var memoryMB = coerceMemoryLimit(context, prefs.patcherProcessMemoryLimit.get())
         var retries = 0
 
         while (true) {
             try {
-                executeWithMemory(
+                val elapsedTimeMs = executeWithMemory(
                     memoryMB,
                     inputFile,
                     outputFile,
@@ -221,7 +226,10 @@ class ProcessRuntime(
                     onMergedApkReady
                 )
 
-                return memoryMB.takeIf { retries > 0 }
+                return ExecutionResult(
+                    loweredMemoryLimit = memoryMB.takeIf { retries > 0 },
+                    elapsedTimeMs = elapsedTimeMs
+                )
             } catch (e: Exception) {
                 val nextMemoryMB = lowerMemoryLimit(memoryMB)
                 val retry = e.isReclaimableMemoryFailure() &&
@@ -290,6 +298,22 @@ class ProcessRuntime(
                     put("LD_PRELOAD", propOverride)
                     put("PROP_dalvik.vm.heapgrowthlimit", heapSizeString)
                     put("PROP_dalvik.vm.heapsize", heapSizeString)
+                    // ART is tuned to keep little of the heap free, so with the hundreds of MB the patcher
+                    // keeps alive it collects garbage after every few dozen MB allocated. More free space
+                    // makes far fewer collections, which saves CPU time, battery and heat.
+                    put("PROP_dalvik.vm.heapminfree", "${memoryLimit / 12}m")
+                    put("PROP_dalvik.vm.heapmaxfree", "${memoryLimit / 3}m")
+                    put("PROP_dalvik.vm.heaptargetutilization", "0.5")
+                    // The code of patches is loaded from the patch bundle and never compiled ahead of
+                    // time, so have the JIT compile methods sooner. Patching is about 6% faster.
+                    put("PROP_dalvik.vm.jitthreshold", "1000")
+                    if (usesDeviceCompiledBootImage()) {
+                        // An app cannot read this property, so to app_process the boot image compiled
+                        // on the device looks unverified, and it falls back to the image in the system
+                        // image, which a mainline update of ART makes invalid. It then runs without
+                        // a boot image at all, with the core libraries interpreted until compiled.
+                        put("PROP_odsign.verification.success", "1")
+                    }
                 } else {
                     Log.w(tag, "Skipping prop override on Android ${Build.VERSION.SDK_INT}")
                 }
@@ -337,10 +361,13 @@ class ProcessRuntime(
         val grantedHeapMb = AtomicInteger(0)
         // Held outside the launch so cancel() can tell app_process to exit and release its wakelock
         val binderRef = AtomicReference<IPatcherProcess?>()
+        var patchingExecutionTimeMs = 0L
 
         launch(Dispatchers.IO) {
             val binder = connection.await()
             binderRef.set(binder)
+
+            val processStartTime = System.currentTimeMillis()
 
             // Android Studio's fast deployment feature causes an issue where the other process will be running older code compared to the main process.
             // The patcher process is running outdated code if the randomly generated BUILD_ID numbers don't match.
@@ -391,6 +418,7 @@ class ProcessRuntime(
                 }
 
                 override fun finished(exceptionStackTrace: String?) {
+                    patchingExecutionTimeMs = System.currentTimeMillis() - processStartTime
                     runCatching { binder.exit() }
 
                     exceptionStackTrace?.let {
@@ -403,7 +431,6 @@ class ProcessRuntime(
             }
 
             val parameters = Parameters(
-                frameworkDir = frameworkPath,
                 cacheDir = cacheDir,
                 packageName = packageName,
                 inputFile = inputFile,
@@ -438,6 +465,8 @@ class ProcessRuntime(
             // Always clean up the temporary merged file regardless of success or failure
             mergedFile?.takeIf { it.exists() }?.delete()
         }
+
+        patchingExecutionTimeMs
     }
 
     companion object : LibraryResolver() {
@@ -460,6 +489,19 @@ class ProcessRuntime(
         const val CONNECT_TO_APP_ACTION = "CONNECT_TO_APP_ACTION"
         const val INTENT_BUNDLE_KEY = "BUNDLE"
         const val BUNDLE_BINDER_KEY = "BINDER"
+
+        private const val DEVICE_COMPILED_BOOT_IMAGE_DIR = "/data/misc/apexdata/com.android.art/dalvik-cache/"
+
+        /**
+         * Whether this process runs with the boot image compiled on the device, which zygote only uses
+         * once odsign verified it. This process inherited the boot image zygote mapped.
+         */
+        private fun usesDeviceCompiledBootImage() = try {
+            File("/proc/self/maps").useLines { lines -> lines.any { DEVICE_COMPILED_BOOT_IMAGE_DIR in it } }
+        } catch (e: IOException) {
+            Log.w(tag, "Could not read the memory maps of this process", e)
+            false
+        }
 
         private fun resolvePropOverride(context: Context) = findPropOverrideLibrary(context)
         private fun resolveAppProcessBin(context: Context): String {

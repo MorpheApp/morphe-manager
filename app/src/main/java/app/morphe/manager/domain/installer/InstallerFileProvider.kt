@@ -101,12 +101,12 @@ class InstallerFileProvider : ContentProvider() {
                 .build()
 
         /**
-         * Copies [file] into the share directory under its original name (overwriting if size
-         * differs) and returns a content URI for it.
+         * Copies [file] into the share directory as [name] (overwriting if size differs) and
+         * returns a content URI for it. The name is what a receiving app shows for the file.
          */
-        fun getUriForFile(context: Context, file: File): Uri {
+        fun getUriForFile(context: Context, file: File, name: String = file.name): Uri {
             val shareDir = File(context.cacheDir, SHARE_DIR).also { it.mkdirs() }
-            val dest = File(shareDir, file.name)
+            val dest = File(shareDir, name)
             // Always copy if size or mtime differs. We stamp dest with the source's mtime
             // after each copy, so dest.lastModified() == file.lastModified() on the next
             // call only if the source hasn't changed — skipping the copy is then safe.

@@ -71,6 +71,14 @@
         <item quantity="one">%s sovellus valmis päivitykseen</item>
         <item quantity="other">%s sovellusta valmis päivitykseen</item>
     </plurals>
+    <plurals name="batch_queue_pending_count">
+        <item quantity="one">%s sovellus jonoon paikkaukselle</item>
+        <item quantity="other">%s sovellusta jonossa paikkaukselle</item>
+    </plurals>
+    <plurals name="home_alerts_snoozed_count">
+        <item quantity="one">%s piilotettu ilmoitus, napauta nähdäksesi sen</item>
+        <item quantity="other">%s piilotettua ilmoitusta, napauta nähdäksesi ne</item>
+    </plurals>
     <plurals name="repatch_available_count">
         <item quantity="one">%s sovellus voidaan paikata uudelleen</item>
         <item quantity="other">%s sovellusta voidaan paikata uudelleen</item>
@@ -86,10 +94,6 @@
     <plurals name="sources_management_subtitle">
         <item quantity="one">%s asennettu lähde</item>
         <item quantity="other">%s asennettua lähdettä</item>
-    </plurals>
-    <plurals name="home_app_filter_active">
-        <item quantity="one">%1$s · %2$s suodatettu</item>
-        <item quantity="other">%1$s · %2$s suodatettua</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s piilotettu sovellus</item>
@@ -126,6 +130,11 @@
     <plurals name="changelog_change_count">
         <item quantity="one">%s muutos</item>
         <item quantity="other">%s muutosta</item>
+    </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
+    <plurals name="sources_apps_count_with_new">
+        <item quantity="one">%1$s · %2$d uusi</item>
+        <item quantity="other">%1$s · %2$d uutta</item>
     </plurals>
     <plurals name="changelog_new_releases">
         <item quantity="one">%s uusi julkaisu</item>

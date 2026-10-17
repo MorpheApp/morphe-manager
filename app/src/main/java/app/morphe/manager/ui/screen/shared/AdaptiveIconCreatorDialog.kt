@@ -15,7 +15,6 @@ import android.graphics.PorterDuffColorFilter
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -64,6 +63,7 @@ import app.morphe.manager.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.koin.compose.koinInject
 
 /**
  * Configuration constants for adaptive icon creation.
@@ -183,13 +183,14 @@ private fun PickedImage.maxIconScale(): Float =
  * transparency where it has any.
  */
 @Composable
-fun AdaptiveIconCreatorDialog(
+fun DialogHostScope.AdaptiveIconCreatorDialog(
     packageName: String,
     onDismiss: () -> Unit,
     onIconCreated: (String) -> Unit
 ) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
+    val messages = koinInject<UserMessages>()
 
     val foreground = remember { mutableStateOf<PickedImage?>(null) }
     val initialBackground = MaterialTheme.colorScheme.primaryContainer
@@ -233,11 +234,11 @@ fun AdaptiveIconCreatorDialog(
             )
             isCreating.value = false
             if (result != null) {
-                context.toast(successMessage)
+                messages.show(successMessage)
                 onIconCreated(result)
                 onDismiss()
             } else {
-                context.toast(failureMessage)
+                messages.show(failureMessage)
             }
         }
     }
@@ -299,11 +300,7 @@ fun AdaptiveIconCreatorDialog(
             }
 
             // Transparency warning shown when the selected image has no transparent pixels
-            AnimatedVisibility(
-                visible = foreground.value?.isOpaque == true,
-                enter = Animations.expandFadeEnter,
-                exit = Animations.shrinkFadeExit
-            ) {
+            FoldingVisibility(visible = foreground.value?.isOpaque == true) {
                 Notice(
                     text = stringResource(R.string.adaptive_icon_no_transparency_warning),
                     tone = SemanticTone.Warning,
@@ -362,7 +359,7 @@ fun AdaptiveIconCreatorDialog(
     }
 
     // Color picker dialog
-    if (showColorPicker.value) {
+    DialogHost(visible = showColorPicker.value) {
         // The presets are already on the card behind the dialog, so repeating them inside it
         // would only push the panel down
         ColorPickerDialog(
@@ -444,7 +441,7 @@ private fun IconEditor(
             .widthIn(max = AdaptiveIconConfig.EDITOR_MAX_WIDTH)
             .fillMaxWidth()
             .aspectRatio(1f)
-            .clip(RoundedCornerShape(Defaults.SectionCornerRadius))
+            .clip(RoundedCornerShape(Defaults.CornerLargeIncreased))
             .then(input)
             .drawWithCache {
                 val side = size.width
@@ -469,7 +466,7 @@ private fun IconEditor(
         if (foreground == null) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
             ) {
                 Icon(
                     imageVector = Icons.Outlined.Image,
@@ -537,7 +534,7 @@ private fun HomeScreenPreview(
         modifier = Modifier
             .fillMaxWidth()
             .height(168.dp)
-            .clip(RoundedCornerShape(Defaults.CardCornerRadius))
+            .clip(RoundedCornerShape(Defaults.CornerLarge))
             .background(backdrop.base)
             .drawBehind {
                 // Kept to the corner, since labels are colored for the base and lose contrast on it
@@ -545,7 +542,7 @@ private fun HomeScreenPreview(
             },
         contentAlignment = Alignment.Center
     ) {
-        Row(horizontalArrangement = Arrangement.spacedBy(32.dp)) {
+        Row(horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraExtraLarge)) {
             LauncherIcon(
                 label = appName,
                 caption = stringResource(R.string.adaptive_icon_standard),
@@ -578,7 +575,7 @@ private fun LauncherIcon(
     Column(
         modifier = Modifier.width(88.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(4.dp)
+        verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
     ) {
         Box(
             modifier = Modifier
@@ -616,7 +613,7 @@ private fun StatusBarPreview(
     fallback: Painter?
 ) {
     val contentColor = MaterialTheme.colorScheme.onSurface
-    val shape = RoundedCornerShape(Defaults.CompactCornerRadius)
+    val shape = RoundedCornerShape(Defaults.CornerMedium)
 
     Box(
         modifier = Modifier
@@ -625,12 +622,12 @@ private fun StatusBarPreview(
             .clip(shape)
             .background(MaterialTheme.colorScheme.surfaceContainer)
             .border(1.dp, MaterialTheme.colorScheme.outlineVariant, shape)
-            .padding(horizontal = 16.dp),
+            .padding(horizontal = Defaults.SpaceLarge),
     ) {
         // Left side: clock + notification icon
         Row(
             modifier = Modifier.align(Alignment.CenterStart),
-            horizontalArrangement = Arrangement.spacedBy(6.dp),
+            horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall),
             verticalAlignment = Alignment.CenterVertically
         ) {
             // Simulated clock
@@ -660,7 +657,7 @@ private fun StatusBarPreview(
         // Right side: system status icons
         Row(
             modifier = Modifier.align(Alignment.CenterEnd),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(

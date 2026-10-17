@@ -160,20 +160,18 @@ fun SliderValuePill(
     )
     val content = dialogTextColor()
 
-    val shape = RoundedCornerShape(percent = 50)
-
     Surface(
-        shape = shape,
+        shape = Defaults.PillShape,
         color = container,
         modifier = Modifier
             .scale(scale)
             // Clipped before the click, otherwise the ripple is drawn on the square bounds
-            .clip(shape)
+            .clip(Defaults.PillShape)
             .clickable(onClick = onClick)
     ) {
         Row(
-            modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
-            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            modifier = Modifier.padding(horizontal = Defaults.SpaceMedium, vertical = Defaults.SpaceSmall),
+            horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -226,7 +224,7 @@ fun ScaleSliderRow(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 4.dp),
+            .padding(horizontal = Defaults.SpaceExtraSmall),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
@@ -235,7 +233,7 @@ fun ScaleSliderRow(
             modifier = Modifier.size(16.dp),
             tint = dialogSecondaryTextColor()
         )
-        Spacer(Modifier.width(8.dp))
+        Spacer(Modifier.width(Defaults.SpaceSmall))
         val sliderState = remember(valueRange) { SliderState(value = value, trackRange = valueRange) }
         // The caller owns the value, so anything that moves it elsewhere has to reach the state
         sliderState.value = value
@@ -244,7 +242,7 @@ fun ScaleSliderRow(
             onValueChange = { onValueChange(it.coerceIn(valueRange.start, valueRange.endInclusive)) },
             modifier = Modifier.weight(1f)
         )
-        Spacer(Modifier.width(8.dp))
+        Spacer(Modifier.width(Defaults.SpaceSmall))
         Icon(
             imageVector = icon,
             contentDescription = null,
@@ -267,7 +265,7 @@ fun RowScope.SliderResetAction(
 ) {
     AnimatedVisibility(visible = visible) {
         Row {
-            Spacer(Modifier.width(8.dp))
+            Spacer(Modifier.width(Defaults.SpaceSmall))
             IconButton(
                 onClick = onReset,
                 modifier = Modifier.size(40.dp)

@@ -71,6 +71,14 @@
         <item quantity="one">%s alkalmazás javításra kész</item>
         <item quantity="other">%s alkalmazás javításra kész</item>
     </plurals>
+    <plurals name="batch_queue_pending_count">
+        <item quantity="one">%s app sorolva a javításhoz</item>
+        <item quantity="other">%s app sorolva a javításhoz</item>
+    </plurals>
+    <plurals name="home_alerts_snoozed_count">
+        <item quantity="one">%s rejtett értesítés, koppintson megjelenítéséhez</item>
+        <item quantity="other">%s rejtett értesítés, koppintson a megjelenítésükhöz</item>
+    </plurals>
     <plurals name="repatch_available_count">
         <item quantity="one">%s alkalmazás újrafoltozható</item>
         <item quantity="other">%s alkalmazás újrafoltozható</item>
@@ -86,10 +94,6 @@
     <plurals name="sources_management_subtitle">
         <item quantity="one">%s forrás telepítve</item>
         <item quantity="other">%s forrás telepítve</item>
-    </plurals>
-    <plurals name="home_app_filter_active">
-        <item quantity="one">%1$s · %2$s szűrt</item>
-        <item quantity="other">%1$s · %2$s szűrt</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s rejtett alkalmazás</item>
@@ -126,6 +130,11 @@
     <plurals name="changelog_change_count">
         <item quantity="one">%s változás</item>
         <item quantity="other">%s változás</item>
+    </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
+    <plurals name="sources_apps_count_with_new">
+        <item quantity="one">%1$s · %2$d új</item>
+        <item quantity="other">%1$s · %2$d új</item>
     </plurals>
     <plurals name="changelog_new_releases">
         <item quantity="one">%s új kiadás</item>

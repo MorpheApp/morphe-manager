@@ -24,8 +24,9 @@ interface ComplexParameter<T : Parcelable>
 @Serializable
 object HomeScreen
 
+/** A part of the settings as a page of its own, named by its [app.morphe.manager.ui.screen.settings.SettingsSubpage]. */
 @Serializable
-object Settings
+data class SettingsDetail(val subpage: String)
 
 @Serializable
 data object BatchPatcher : ComplexParameter<BatchPatcher.ViewModelParams> {
@@ -48,6 +49,8 @@ data object Patcher : ComplexParameter<Patcher.ViewModelParams> {
      *   the app's own, which is not something [selectedApp] can say.
      * @param allowIncompatible Whether patches outside the APK's version were offered, kept so
      *   the selection reopened after a failed run offers the same ones.
+     * @param useMount Whether the build is mounted over the stock app with root rather than
+     *   installed, as chosen before patching.
      */
     @Parcelize
     data class ViewModelParams(
@@ -55,6 +58,7 @@ data object Patcher : ComplexParameter<Patcher.ViewModelParams> {
         val selectedPatches: PatchSelection,
         val options: @RawValue Options,
         val targetPackageName: String? = null,
-        val allowIncompatible: Boolean = false
+        val allowIncompatible: Boolean = false,
+        val useMount: Boolean = false
     ) : Parcelable
 }

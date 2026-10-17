@@ -39,7 +39,7 @@ fun InfoPanel(
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(Defaults.CompactCornerRadius),
+        shape = RoundedCornerShape(Defaults.CornerMedium),
         color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f),
         border = CardBorder.of(appAccentBorder(LocalAccent.current))
     ) {
@@ -105,8 +105,8 @@ fun InfoRow(
                 } else Modifier
             )
             .then(if (enabled) Modifier else Modifier.alpha(Defaults.DISABLED_ALPHA))
-            .padding(horizontal = Defaults.ItemSpacing, vertical = Defaults.ContentPaddingSmall),
-        horizontalArrangement = Arrangement.spacedBy(14.dp),
+            .padding(horizontal = Defaults.SpaceMedium, vertical = Defaults.SpaceSmall),
+        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(

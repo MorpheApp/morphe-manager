@@ -57,7 +57,7 @@ import app.morphe.patcher.patch.AppTarget
  * In simple mode there is only one version and no selection UI is shown.
  */
 @Composable
-internal fun ApkAvailabilityDialog(
+internal fun DialogHostScope.ApkAvailabilityDialog(
     appName: String,
     packageName: String?,
     recommendedVersion: AppTarget?,
@@ -116,11 +116,10 @@ internal fun ApkAvailabilityDialog(
         onDismissRequest = onDismiss,
         accentColor = rememberAppColor(packageName),
         title = stringResource(R.string.home_apk_availability_dialog_title),
-        padding = DialogPadding.Compact,
         footer = {
             Column(
                 modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
             ) {
                 // Main action buttons
                 AppDialogButtonRow(
@@ -194,7 +193,7 @@ internal fun ApkAvailabilityDialog(
 
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding),
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             if (isExpertMode && offeredVersions.isNotEmpty()) {
@@ -292,7 +291,7 @@ internal fun ApkAvailabilityDialog(
  * Dialog 3: File picker prompt dialog.
  */
 @Composable
-internal fun FilePickerPromptDialog(
+internal fun DialogHostScope.FilePickerPromptDialog(
     appName: String,
     packageName: String?,
     isOtherApps: Boolean,
@@ -353,7 +352,7 @@ internal fun FilePickerPromptDialog(
  * Unsupported version warning dialog.
  */
 @Composable
-internal fun UnsupportedVersionWarningDialog(
+internal fun DialogHostScope.UnsupportedVersionWarningDialog(
     packageName: String?,
     version: String,
     versionCode: Long? = null,
@@ -382,7 +381,6 @@ internal fun UnsupportedVersionWarningDialog(
                 else -> R.string.home_dialog_unsupported_version_dialog_description
             }
         ),
-        padding = DialogPadding.Compact,
         footer = {
             AppDialogButtonRow(
                 primaryText = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
@@ -395,7 +393,7 @@ internal fun UnsupportedVersionWarningDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
         ) {
             VersionPanel(
                 color = tone.container.copy(alpha = 0.3f),
@@ -450,7 +448,7 @@ internal fun UnsupportedVersionWarningDialog(
  * the expected signatures declared in the patch bundle.
  */
 @Composable
-fun InvalidSignatureDialog(
+fun DialogHostScope.InvalidSignatureDialog(
     appName: String,
     packageName: String?,
     onPickAnother: () -> Unit,
@@ -487,7 +485,7 @@ fun InvalidSignatureDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding),
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Notice(
@@ -504,7 +502,7 @@ fun InvalidSignatureDialog(
  * for an app that requires a full APK.
  */
 @Composable
-fun SplitApkWarningDialog(
+fun DialogHostScope.SplitApkWarningDialog(
     appName: String,
     packageName: String?,
     onProceed: () -> Unit,
@@ -530,7 +528,7 @@ fun SplitApkWarningDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding),
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
         }
@@ -542,7 +540,7 @@ fun SplitApkWarningDialog(
  * in the patch bundle AND experimental-version mode is enabled for that bundle.
  */
 @Composable
-fun ExperimentalVersionWarningDialog(
+fun DialogHostScope.ExperimentalVersionWarningDialog(
     appName: String,
     packageName: String?,
     onDismiss: () -> Unit,
@@ -566,7 +564,7 @@ fun ExperimentalVersionWarningDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding),
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
         }
@@ -577,7 +575,7 @@ fun ExperimentalVersionWarningDialog(
  * Wrong package dialog.
  */
 @Composable
-fun WrongPackageDialog(
+fun DialogHostScope.WrongPackageDialog(
     expectedPackage: String,
     actualPackage: String,
     onDismiss: () -> Unit
@@ -587,7 +585,6 @@ fun WrongPackageDialog(
         accentColor = rememberAppColor(expectedPackage),
         title = stringResource(R.string.home_dialog_wrong_package_title),
         description = stringResource(R.string.home_dialog_wrong_package_description),
-        padding = DialogPadding.Compact,
         footer = {
             AppDialogOutlinedButton(
                 text = stringResource(R.string.close),
@@ -603,7 +600,7 @@ fun WrongPackageDialog(
         ) {
             Column(
                 modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
+                verticalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
             ) {
                 // The two are read against each other, so the tone carries which is which
                 MonospaceValuePanel(
@@ -627,7 +624,7 @@ fun WrongPackageDialog(
  * Informs the user that their device does not meet the requirements for any supported version.
  */
 @Composable
-internal fun NoCompatibleVersionsDialog(
+internal fun DialogHostScope.NoCompatibleVersionsDialog(
     appName: String,
     packageName: String?,
     onDismiss: () -> Unit
@@ -656,7 +653,7 @@ internal fun NoCompatibleVersionsDialog(
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding),
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
         }
@@ -701,7 +698,7 @@ private fun SelectableVersionListCard(
         modifier = modifier
             .fillMaxWidth()
             .selectableGroup(),
-        verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
+        verticalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
     ) {
         versions.groupBy { it.bundleUid }.forEach { (bundleUid, section) ->
             key(bundleUid) {
@@ -832,7 +829,7 @@ private fun VersionPanel(
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(Defaults.SettingsCornerRadius),
+        shape = RoundedCornerShape(Defaults.CornerLarge),
         color = color,
         tonalElevation = 1.dp,
         border = border
@@ -880,8 +877,8 @@ private fun VersionRow(
                 } else Modifier
             )
             .then(if (contentDescription != null) Modifier.semantics { this.contentDescription = contentDescription } else Modifier)
-            .padding(horizontal = Defaults.ContentPadding, vertical = Defaults.ItemSpacing),
-        horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing),
+            .padding(horizontal = Defaults.SpaceLarge, vertical = Defaults.SpaceMedium),
+        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium),
         verticalAlignment = Alignment.CenterVertically
     ) {
         // The app's own round check, in its color, as the other pickers mark their pick
@@ -896,10 +893,10 @@ private fun VersionRow(
             modifier = Modifier
                 .weight(1f)
                 .then(if (enabled) Modifier else Modifier.alpha(Defaults.DISABLED_ALPHA)),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
         ) {
             Row(
-                horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
+                horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
@@ -920,8 +917,8 @@ private fun VersionRow(
             }
             if (badgeTags.size > 1) {
                 FlowRow(
-                    horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
-                    verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
+                    horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
+                    verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
                 ) {
                     badgeTags.forEach { VersionTagBadge(it) }
                 }
@@ -959,7 +956,7 @@ private fun VersionDetailsLine(buildCode: Long?, onHandTags: List<VersionTag>) {
     }
 
     FlowRow(
-        horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
+        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
         verticalArrangement = Arrangement.spacedBy(2.dp),
         itemVerticalAlignment = Alignment.CenterVertically
     ) {
@@ -971,7 +968,7 @@ private fun VersionDetailsLine(buildCode: Long?, onHandTags: List<VersionTag>) {
                 Text(text = "·", style = MaterialTheme.typography.bodySmall, color = color)
             }
             Row(
-                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(

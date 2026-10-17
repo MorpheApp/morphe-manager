@@ -19,10 +19,12 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -81,7 +83,7 @@ fun AppIconSettingsItem() {
         leadingContent = { AppIconPreview(icon = currentIcon.value, size = Defaults.IconSize) }
     )
 
-    if (showPicker.value) {
+    DialogHost(visible = showPicker.value) {
         // The icon being built, only applied once confirmed
         var pending by remember { mutableStateOf(currentIcon.value) }
 
@@ -104,7 +106,7 @@ fun AppIconSettingsItem() {
     }
 
     // Confirmation dialog
-    showConfirmDialog.value?.let { selectedIcon ->
+    DialogHost(target = showConfirmDialog.value) { selectedIcon ->
         AppIconChangeDialog(
             icon = selectedIcon,
             onConfirm = {
@@ -181,7 +183,7 @@ private fun IconBuilder(
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)
     ) {
         LayeredIconPreview(
             background = pending.background,
@@ -201,18 +203,14 @@ private fun IconBuilder(
             }
         )
 
-        AnimatedContent(
-            targetState = appIconName(pending),
+        CrossfadeText(
+            text = appIconName(pending),
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.onSurface,
             transitionSpec = Animations.fadeCrossfade(200),
             label = "icon_name"
-        ) { name ->
-            Text(
-                text = name,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.onSurface
-            )
-        }
+        )
 
         PickerLabel(stringResource(R.string.settings_appearance_app_icon_background))
         BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
@@ -254,7 +252,7 @@ private fun IconBuilder(
         }
 
         PickerLabel(stringResource(R.string.settings_appearance_app_icon_mark))
-        OptionGrid(items = IconMark.entries, columns = 3) { mark, itemModifier ->
+        OptionGroup(items = IconMark.entries) { mark, shape, interactionSource, itemModifier ->
             // A logo that does not read on the background has no icon, and stays off, still showing
             // what it would look like there
             val icon = AppIcon.of(pending.background, mark)
@@ -265,7 +263,9 @@ private fun IconBuilder(
                 isSelected = pending.mark == mark,
                 enabled = icon != null,
                 onClick = { icon?.let(onPick) },
-                modifier = itemModifier
+                modifier = itemModifier,
+                shape = shape,
+                interactionSource = interactionSource
             )
         }
     }
@@ -349,7 +349,9 @@ private fun AppIconCard(
     isSelected: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    shape: CornerBasedShape = SelectionTileShape,
+    interactionSource: MutableInteractionSource? = null
 ) {
     val windowSize = rememberWindowSize()
     val iconSize = when (windowSize.widthSizeClass) {
@@ -368,12 +370,14 @@ private fun AppIconCard(
         stateDescription = stringResource(
             if (isSelected) R.string.selected else R.string.not_selected
         ),
-        modifier = modifier.heightIn(min = cardHeight)
+        modifier = modifier.heightIn(min = cardHeight),
+        shape = shape,
+        interactionSource = interactionSource
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(Defaults.ItemSpacing),
+                .padding(Defaults.SpaceMedium),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -381,7 +385,7 @@ private fun AppIconCard(
                 LayeredIconPreview(background = background, mark = mark, size = iconSize)
             }
 
-            Spacer(modifier = Modifier.height(6.dp))
+            Spacer(modifier = Modifier.height(Defaults.SpaceExtraSmall))
 
             // Icon name
             Text(
@@ -406,7 +410,7 @@ private fun AppIconCard(
  * Confirmation dialog for icon change.
  */
 @Composable
-private fun AppIconChangeDialog(
+private fun DialogHostScope.AppIconChangeDialog(
     icon: AppIcon,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit

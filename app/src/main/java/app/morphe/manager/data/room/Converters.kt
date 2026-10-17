@@ -50,4 +50,10 @@ class Converters {
     @TypeConverter
     fun selectionPayloadToString(payload: SelectionPayload) =
         json.encodeToString(payload)
+
+    @TypeConverter
+    fun stringSetFromString(value: String) = json.decodeFromString<Set<String>>(value)
+
+    @TypeConverter
+    fun stringSetToString(value: Set<String>) = json.encodeToString(value)
 }

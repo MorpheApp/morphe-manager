@@ -139,6 +139,22 @@
         <item quantity="many">%s تطبيق جاهز للتعديل</item>
         <item quantity="other">%s تطبيق جاهز للتعديل</item>
     </plurals>
+    <plurals name="batch_queue_pending_count">
+        <item quantity="zero">%s تطبيق في قائمة الانتظار للتعديل</item>
+        <item quantity="one">%s تطبيق جاهز للتعديل</item>
+        <item quantity="two">%s تطبيقين جاهزين للتعديل</item>
+        <item quantity="few">%s تطبيقات جاهزة للتعديل</item>
+        <item quantity="many">%s تطبيق جاهز للتعديل</item>
+        <item quantity="other">%s تطبيقًا جاهزًا للتعديل</item>
+    </plurals>
+    <plurals name="home_alerts_snoozed_count">
+        <item quantity="zero">%s إشعارات مخفية، انقر لعرضها</item>
+        <item quantity="one">%s إشعار مخفي، انقر لعرضه</item>
+        <item quantity="two">%s إشعارين مخفيين، انقر لعرضهما</item>
+        <item quantity="few">%s إشعارات مخفية، انقر لعرضها</item>
+        <item quantity="many">%s إشعارًا مخفيًا، انقر لعرضه</item>
+        <item quantity="other">%s إشعارات مخفية، انقر لعرضها</item>
+    </plurals>
     <plurals name="repatch_available_count">
         <item quantity="zero">%s تطبيق يمكن إعادة تعديله</item>
         <item quantity="one">%s تطبيق يمكن إعادة تعديله</item>
@@ -170,14 +186,6 @@
         <item quantity="few">%s مصادر تم تثبيتها</item>
         <item quantity="many">%s مصادر تم تثبيتها</item>
         <item quantity="other">%s مصادر تم تثبيتها</item>
-    </plurals>
-    <plurals name="home_app_filter_active">
-        <item quantity="zero">%1$s · لا توجد تطبيقات مفلترة (%2$s)</item>
-        <item quantity="one">%1$s · تطبيق واحد مفلتر (%2$s)</item>
-        <item quantity="two">%1$s · تطبيقان مفلتران (%2$s)</item>
-        <item quantity="few">%1$s · %2$s تطبيقات مفلترة</item>
-        <item quantity="many">%1$s · %2$s تطبيقًا مفلترًا</item>
-        <item quantity="other">%1$s · %2$s تطبيق مفلتر</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="zero">%s تطبيق مخفي</item>
@@ -250,6 +258,15 @@
         <item quantity="few">%s تغييرات</item>
         <item quantity="many">%s تغييرًا</item>
         <item quantity="other">%s تغيير</item>
+    </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
+    <plurals name="sources_apps_count_with_new">
+        <item quantity="zero">%1$s · %2$d جديد</item>
+        <item quantity="one">%1$s · %2$d جديد</item>
+        <item quantity="two">%1$s · %2$d جديد</item>
+        <item quantity="few">%1$s · %2$d جديدة</item>
+        <item quantity="many">%1$s · %2$d جديدًا</item>
+        <item quantity="other">%1$s · %2$d جديد</item>
     </plurals>
     <plurals name="changelog_new_releases">
         <item quantity="zero">%s إصدار جديد</item>

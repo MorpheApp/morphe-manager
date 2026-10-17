@@ -105,6 +105,18 @@
         <item quantity="few">%s aplikacije so pripravljene za popravljanje</item>
         <item quantity="other">%s aplikacij je pripravljenih za popravljanje</item>
     </plurals>
+    <plurals name="batch_queue_pending_count">
+        <item quantity="one">%s aplikacija čakajo na popravljanje</item>
+        <item quantity="two">%s aplikaciji čakata na popravljanje</item>
+        <item quantity="few">%s aplikacije čakajo na popravljanje</item>
+        <item quantity="other">%s aplikacij čakajo na popravljanje</item>
+    </plurals>
+    <plurals name="home_alerts_snoozed_count">
+        <item quantity="one">%s skrito obvestilo, tapnite za prikaz</item>
+        <item quantity="two">%s skrita obvestili, tapnite za prikaz</item>
+        <item quantity="few">%s skrita obvestila, tapnite za prikaz</item>
+        <item quantity="other">%s skritih obvestil, kliknite za prikaz</item>
+    </plurals>
     <plurals name="repatch_available_count">
         <item quantity="one">%s aplikacija se lahko ponovno popravi</item>
         <item quantity="two">%s aplikaciji se lahko ponovno popravita</item>
@@ -128,12 +140,6 @@
         <item quantity="two">%s vira nameščena</item>
         <item quantity="few">%s viri so nameščeni</item>
         <item quantity="other">%s viri so nameščeni</item>
-    </plurals>
-    <plurals name="home_app_filter_active">
-        <item quantity="one">%1$s · %2$s filtriran</item>
-        <item quantity="two">%1$s · %2$s filtrirana</item>
-        <item quantity="few">%1$s · %2$s filtrirani</item>
-        <item quantity="other">%1$s · %2$s filtriranih</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s skrita aplikacija</item>
@@ -188,6 +194,13 @@
         <item quantity="two">%s spremembi</item>
         <item quantity="few">%s spremembe</item>
         <item quantity="other">%s sprememb</item>
+    </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
+    <plurals name="sources_apps_count_with_new">
+        <item quantity="one">%1$s · %2$d nov</item>
+        <item quantity="two">%1$s · %2$d novi</item>
+        <item quantity="few">%1$s · %2$d nova</item>
+        <item quantity="other">%1$s · %2$d novih</item>
     </plurals>
     <plurals name="changelog_new_releases">
         <item quantity="one">%s nova izdaja</item>

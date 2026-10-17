@@ -19,7 +19,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.HomeAppCategory
 import app.morphe.manager.ui.screen.shared.*
@@ -30,7 +29,7 @@ import app.morphe.manager.ui.screen.shared.*
  * [onConfirm] receives the trimmed name and is only enabled once it is non-blank.
  */
 @Composable
-internal fun CategoryNameDialog(
+internal fun DialogHostScope.CategoryNameDialog(
     category: HomeAppCategory?,
     onDismiss: () -> Unit,
     onConfirm: (String) -> Unit
@@ -74,7 +73,7 @@ internal fun CategoryNameDialog(
  * [onSelect] is called with null to clear the assignment.
  */
 @Composable
-internal fun MoveToCategoryDialog(
+internal fun DialogHostScope.MoveToCategoryDialog(
     categories: List<HomeAppCategory>,
     onDismiss: () -> Unit,
     onSelect: (String?) -> Unit,
@@ -82,7 +81,7 @@ internal fun MoveToCategoryDialog(
 ) {
     var showCreateDialog by remember { mutableStateOf(false) }
 
-    if (showCreateDialog) {
+    DialogHost(visible = showCreateDialog) {
         CategoryNameDialog(
             category = null,
             onDismiss = { showCreateDialog = false },
@@ -107,12 +106,12 @@ internal fun MoveToCategoryDialog(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = Defaults.ContentPadding),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
+                .padding(vertical = Defaults.SpaceLarge),
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
         ) {
             SettingsItemCard(onClick = { showCreateDialog = true }, showBorder = true) {
                 IconTextRow(
-                    modifier = Modifier.padding(Defaults.ContentPadding),
+                    modifier = Modifier.padding(Defaults.SpaceLarge),
                     leadingContent = { ThemedIcon(icon = Icons.Outlined.Add) },
                     title = stringResource(R.string.home_category_add),
                     trailingContent = null
@@ -121,7 +120,7 @@ internal fun MoveToCategoryDialog(
 
             SettingsItemCard(onClick = { onSelect(null) }, showBorder = true) {
                 IconTextRow(
-                    modifier = Modifier.padding(Defaults.ContentPadding),
+                    modifier = Modifier.padding(Defaults.SpaceLarge),
                     leadingContent = { ThemedIcon(icon = Icons.Outlined.FolderOff) },
                     title = stringResource(R.string.home_category_uncategorized),
                     trailingContent = null
@@ -131,7 +130,7 @@ internal fun MoveToCategoryDialog(
             categories.forEach { category ->
                 SettingsItemCard(onClick = { onSelect(category.id) }, showBorder = true) {
                     IconTextRow(
-                        modifier = Modifier.padding(Defaults.ContentPadding),
+                        modifier = Modifier.padding(Defaults.SpaceLarge),
                         leadingContent = { ThemedIcon(icon = Icons.Outlined.Folder) },
                         title = category.name,
                         trailingContent = null

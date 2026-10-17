@@ -10,15 +10,11 @@
 
 package app.morphe.manager.util
 
-import android.content.Context
 import android.graphics.Typeface
 import android.os.Build
-import android.os.Handler
-import android.os.Looper
 import android.text.Html
 import android.text.style.StyleSpan
 import android.util.Log
-import android.widget.Toast
 import androidx.annotation.MainThread
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
@@ -34,8 +30,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
-import app.morphe.manager.ManagerApplication
 import app.morphe.manager.patcher.util.Abi
+import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.patcher.patch.ApkArchitecture
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.Flow
@@ -55,40 +51,14 @@ fun isArmV7(): Boolean {
         ?.let(Abi::architectureOf) == ApkArchitecture.ARMEABI_V7A
 }
 
-/** Shows a toast and returns its handle, useful when the caller needs to cancel it later. */
-fun Context.toastHandle(string: String, duration: Int = Toast.LENGTH_SHORT): Toast =
-    Toast.makeText(this, string, duration).apply { show() }
-
-/** Shows a toast message. */
-fun Context.toast(string: String, duration: Int = Toast.LENGTH_SHORT) {
-    toastHandle(string, duration)
-}
-
 /**
- * Shows a toast only while a Morphe screen is in focus, for work that also runs without one -
- * an update check woken by an FCM push would otherwise toast over another app entirely.
- */
-fun Context.toastIfInForeground(string: String, duration: Int = Toast.LENGTH_SHORT) {
-    if (!ManagerApplication.isInForeground) return
-    toast(string, duration)
-}
-
-/** Wraps [action] so it confirms itself with a toast, the feedback every selection gives. */
-fun Context.withToast(doneMessage: String, action: () -> Unit): () -> Unit = {
-    toast(doneMessage)
-    action()
-}
-
-/**
- * Safely perform an operation that may fail to avoid crashing the app.
- * If [block] fails, the error will be logged and a toast will be shown to the user to inform them that the action failed.
+ * Runs [block], and should it fail, logs the error and tells the user, so a failed action never
+ * crashes the app.
  *
- * @param context The android [Context].
- * @param toastMsg The toast message to show if [block] throws.
+ * @param failure The message to show if [block] throws, given the error's message.
  * @param logMsg The log message.
- * @param block The code to execute.
  */
-inline fun uiSafe(context: Context, @StringRes toastMsg: Int, logMsg: String, block: () -> Unit) {
+inline fun UserMessages.reportingFailure(@StringRes failure: Int, logMsg: String, block: () -> Unit) {
     try {
         block()
     } catch (error: Exception) {
@@ -96,10 +66,7 @@ inline fun uiSafe(context: Context, @StringRes toastMsg: Int, logMsg: String, bl
         // put an error in front of the user for something they did on purpose
         if (error is CancellationException) throw error
 
-        // Toast must be posted to the main thread
-        Handler(Looper.getMainLooper()).post {
-            context.toast(context.getString(toastMsg, error.simpleMessage()))
-        }
+        show(failure, error.simpleMessage())
         Log.e(tag, logMsg, error)
     }
 }

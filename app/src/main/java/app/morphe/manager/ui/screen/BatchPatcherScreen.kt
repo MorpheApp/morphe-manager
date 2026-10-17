@@ -7,8 +7,6 @@ package app.morphe.manager.ui.screen
 
 import android.view.HapticFeedbackConstants
 import androidx.activity.compose.BackHandler
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
@@ -54,6 +52,7 @@ import app.morphe.manager.ui.viewmodel.BatchPatcherViewModel
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.util.*
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import kotlin.time.Duration.Companion.milliseconds
@@ -189,12 +188,13 @@ fun BatchPatcherScreen(
     }
 
     var showCancelDialog by remember { mutableStateOf(false) }
+    var showClearDialog by remember { mutableStateOf(false) }
 
     BackHandler {
         if (current?.isActive == true) showCancelDialog = true else onBackClick()
     }
 
-    if (showCancelDialog) {
+    DialogHost(visible = showCancelDialog) {
         ConfirmDialog(
             title = stringResource(R.string.batch_patch_stop_title),
             message = stringResource(R.string.batch_patch_stop_description),
@@ -207,6 +207,21 @@ fun BatchPatcherScreen(
                 viewModel.cancel()
             },
             onDismiss = { showCancelDialog = false }
+        )
+    }
+
+    DialogHost(visible = showClearDialog) {
+        ConfirmDialog(
+            title = stringResource(R.string.batch_queue_clear_title),
+            message = stringResource(R.string.batch_queue_clear_description),
+            primaryText = stringResource(R.string.yes),
+            secondaryText = stringResource(R.string.no),
+            onConfirm = {
+                showClearDialog = false
+                viewModel.clear()
+                onBackClick()
+            },
+            onDismiss = { showClearDialog = false }
         )
     }
 
@@ -225,7 +240,7 @@ fun BatchPatcherScreen(
 
     // The same dialog the single-app flow uses, pointed at one queued app instead of the
     // patcher, so the queue never has to grow a second patch list
-    viewModel.edit?.let { edit ->
+    DialogHost(target = viewModel.edit) { edit ->
         val sources by patchBundleRepository.sources.collectAsStateWithLifecycle()
         val sourcesByUid = remember(sources) { sources.associateBy { it.uid } }
         ExpertModeDialog(
@@ -259,15 +274,17 @@ fun BatchPatcherScreen(
             onProceed = viewModel::applyEdit
         )
 
-        viewModel.editCopy.targetBundleUid?.let { targetUid ->
-            val targetBundle = edit.bundles.firstOrNull { it.uid == targetUid } ?: return@let
+        val copyTarget = edit.bundles.firstOrNull { it.uid == viewModel.editCopy.targetBundleUid }?.let { bundle ->
+            CopySelectionTarget(
+                packageName = edit.configurationKey,
+                bundleUid = bundle.uid,
+                bundleName = bundle.name,
+                appDisplayName = edit.appName
+            )
+        }
+        DialogHost(target = copyTarget) { target ->
             CopySelectionFromBundleDialog(
-                target = CopySelectionTarget(
-                    packageName = edit.configurationKey,
-                    bundleUid = targetUid,
-                    bundleName = targetBundle.name,
-                    appDisplayName = edit.appName
-                ),
+                target = target,
                 candidates = viewModel.editCopy.candidates,
                 onConfirm = viewModel::applyEditCopy,
                 onDismiss = viewModel.editCopy::close
@@ -277,7 +294,7 @@ fun BatchPatcherScreen(
 
     // The single-app flow's own APK question, pointed at a queued app. It carries the version
     // list, so picking a specific or experimental version works here exactly as it does there
-    viewModel.apkChoice?.let { choice ->
+    DialogHost(target = viewModel.apkChoice) { choice ->
         ApkAvailabilityDialog(
             appName = choice.item.appName,
             packageName = choice.item.packageName,
@@ -304,7 +321,7 @@ fun BatchPatcherScreen(
 
     // The same instructions the single-app flow shows before sending someone to download an
     // APK, pointed at a queued app. Continuing hands off the link and then opens the file picker
-    viewModel.apkSearch?.let { search ->
+    DialogHost(target = viewModel.apkSearch) { search ->
         val bundleMetadata by patchBundleRepository.appMetadata.collectAsStateWithLifecycle()
         val metadata = bundleMetadata[search.item.packageName]
 
@@ -325,7 +342,7 @@ fun BatchPatcherScreen(
 
     // Waits on screen while the user is in the browser, so the picker opens on their tap
     // once they are back rather than behind whatever the browser put in front
-    viewModel.attachPrompt?.let { item ->
+    DialogHost(target = viewModel.attachPrompt) { item ->
         FilePickerPromptDialog(
             appName = item.appName,
             packageName = item.packageName,
@@ -341,7 +358,7 @@ fun BatchPatcherScreen(
     }
 
     // The same source question simple mode answers before a single-app patch
-    viewModel.sourcePick?.let { item ->
+    DialogHost(target = viewModel.sourcePick) { item ->
         // Offered from the full plan, not the narrowed selection, so switching sources works
         val offered = item.resolvedSelection ?: item.selection
         SimpleBundleSelectDialog(
@@ -363,41 +380,19 @@ fun BatchPatcherScreen(
     }
 
     // Saving a patched APK somewhere the user picks, the same export the single-app flow and
-    // the saved APK list offer. Held as state because the file name is built from the item
-    var exportItem by remember { mutableStateOf<BatchPatchItem?>(null) }
-    val exportSuccessMessage = stringResource(R.string.save_apk_success)
-    val exportFailedMessage = stringResource(R.string.saved_app_export_failed)
+    // the saved APK list offer
     val context = LocalContext.current
-    val exportLauncher = rememberLauncherForActivityResult(CreateDocument(APK_MIMETYPE)) { uri ->
-        val file = exportItem?.patchedFile
-        exportItem = null
-        if (file != null && uri != null) {
-            installViewModel.export(file, uri) { success ->
-                context.toast(if (success) exportSuccessMessage else exportFailedMessage)
-                if (success) viewModel.postPatchPrompts.trigger()
-            }
-        }
-    }
+    val exporter = rememberApkExporter { exported -> if (exported) viewModel.postPatchPrompts.trigger() }
 
-    LaunchedEffect(exportItem) {
-        val item = exportItem ?: return@LaunchedEffect
-        exportLauncher.launch(
-            ExportNameFormatter.format(
-                null,
-                PatchedAppExportData(
-                    appName = item.appName,
-                    packageName = item.id,
-                    appVersion = item.version,
-                    patchBundleVersions = item.bundles.mapNotNull { it.version?.takeIf(String::isNotBlank) },
-                    patchBundleNames = item.bundles.map { it.name }
-                )
-            )
-        )
+    // Shared under the names a save would give them, so each app can be told apart where it lands
+    fun share(items: List<BatchPatchItem>) {
+        val names = items.mapNotNull { item -> item.patchedFile?.let { it to item.exportFileName() } }.toMap()
+        scope.launch { context.shareApks(names.keys.toList()) { names.getValue(it) } }
     }
 
     // Cards clamp the failure text, so the full reason lives in the patcher's own error dialog
     var errorItem by remember { mutableStateOf<BatchPatchItem?>(null) }
-    errorItem?.let { item ->
+    DialogHost(target = errorItem) { item ->
         PatcherErrorDialog(
             title = stringResource(R.string.patcher_failed_dialog_title),
             errorMessage = item.message ?: stringResource(R.string.patcher_unknown_error),
@@ -495,125 +490,148 @@ fun BatchPatcherScreen(
         if (current?.phase == BatchPhase.FINISHED) viewModel.clear()
         onBackClick()
     }
-    val hasUnfinished = current?.items.orEmpty().any {
+    val isPreflight = current?.phase == BatchPhase.PREFLIGHT
+    val isFinished = current?.phase == BatchPhase.FINISHED
+    val patchedItems = if (isFinished) current.patchedItems else emptyList()
+    val hasPatched = patchedItems.isNotEmpty()
+    val hasUnfinished = isFinished && current.items.any {
         it.state == BatchItemState.FAILED || it.state == BatchItemState.CANCELLED
     }
 
-    AppDialog(
-        onDismissRequest = close,
-        footer = {
-            BatchDialogButtons(
-                state = current,
-                canInstall = installRequests.isNotEmpty(),
-                onStart = viewModel::start,
-                onInstallAll = { startInstallQueue(installRequests) },
-                onClose = close
-            )
-        },
-        scrollable = false,
-        padding = DialogPadding.Compact,
-        contentArrangement = Arrangement.Top,
-        fillContentHeight = true
-    ) {
-        // Headed like the other lists, with how the run stands where the subtitle goes
-        val accent = MaterialTheme.colorScheme.primary
-        ListDialogHeader(
-            icon = { modifier ->
-                ListDialogHeaderIcon(icon = Icons.Outlined.AutoFixHigh, color = accent, modifier = modifier)
-            },
-            title = stringResource(R.string.batch_patch_title),
-            subtitle = current?.let { batchSummary(it) }.orEmpty(),
-            subtitleLoading = current == null,
-            accentColor = accent,
-            actions = if (current?.phase == BatchPhase.FINISHED && hasUnfinished) {
-                {
-                    TitleAction(
-                        icon = Icons.Outlined.Refresh,
-                        contentDescription = stringResource(R.string.retry),
-                        onClick = viewModel::retryUnfinished,
-                        style = TitleActionStyle.Accent
-                    )
-                }
-            } else {
-                null
-            }
-        )
-
-        DialogLazyList(
-            modifier = Modifier.fillMaxWidth(),
-            state = listState,
-            contentPadding = PaddingValues(top = Defaults.ItemSpacing),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
-        ) {
-            if (current == null) return@DialogLazyList
-
-            // Mixing sources is decided by the plan, not by the user, so this is the one place
-            // it can be pointed out. Said once for the run rather than blocking the queue
-            if (current.phase == BatchPhase.PREFLIGHT &&
-                current.runnable.any { it.selection.keys.size > 1 }
-            ) {
-                item(key = "multiple_sources") {
-                    Notice(
-                        text = stringResource(R.string.batch_patch_multiple_sources),
-                        icon = Icons.Outlined.Info,
-                        tone = SemanticTone.Warning,
-                        density = NoticeDensity.Compact,
-                        modifier = Modifier.animateItem()
-                    )
-                }
-            }
-
-            // Nothing was installed yet, so say where the APKs went
-            if (current.phase == BatchPhase.FINISHED && current.patchedItems.isNotEmpty()) {
-                item(key = "saved_hint") {
-                    Notice(
-                        text = stringResource(R.string.batch_patch_saved_hint),
-                        icon = Icons.Outlined.Save,
-                        density = NoticeDensity.Compact,
-                        modifier = Modifier.animateItem()
-                    )
-                }
-            }
-
-            if (current.phase == BatchPhase.PREFLIGHT) {
-                item {
-                    BatchPolicyCard(
-                        policy = current.policy,
-                        onPolicyChange = viewModel::setPolicy
-                    )
-                }
-            }
-
-            items(current.items, key = { it.id }) { item ->
-                val request = installRequestsByItem[item.id]
-                BatchItemCard(
-                    item = item,
-                    editable = current.phase == BatchPhase.PREFLIGHT,
-                    onSelectApk = { viewModel.beginApkChoice(item) },
-                    onToggleExcluded = { viewModel.toggleExcluded(item.id) },
-                    onForceVersion = { viewModel.forceVersion(item.id) },
-                    onAcceptSignature = { viewModel.acceptUnverifiedSignature(item.id) },
-                    // Simple mode never exposes individual patches, and the options edited
-                    // here would not be persisted for it. Nothing to choose from until an
-                    // APK resolves either, the patch list is scoped to its exact version
-                    onEditPatches = item.source
-                        ?.takeIf { useExpertMode }
-                        ?.let { { viewModel.beginEdit(item) } },
-                    // Simple mode gets the source question it knows from single-app
-                    // patching instead of the patch list it never sees
-                    onPickSource = item
-                        .takeIf {
-                            !useExpertMode &&
-                                (it.resolvedSelection ?: it.selection).keys.size > 1
+    val accent = MaterialTheme.colorScheme.primary
+    DialogHost(visible = !closing) {
+        ListDialog(
+            onDismissRequest = close,
+            header = {
+                // Headed like the other lists, with how the run stands where the subtitle goes
+                ListDialogHeader(
+                    icon = { modifier ->
+                        ListDialogHeaderIcon(icon = Icons.Outlined.AutoFixHigh, color = accent, modifier = modifier)
+                    },
+                    title = stringResource(R.string.batch_patch_title),
+                    subtitle = current?.let { batchSummary(it) }.orEmpty(),
+                    subtitleLoading = current == null,
+                    accentColor = accent,
+                    actions = if (isPreflight || hasPatched || hasUnfinished) {
+                        {
+                            // Kept out of the footer, where the button beside Start only closes the screen
+                            if (isPreflight) {
+                                TitleAction(
+                                    icon = Icons.Outlined.Delete,
+                                    contentDescription = stringResource(R.string.clear),
+                                    onClick = { showClearDialog = true },
+                                    style = TitleActionStyle.Destructive
+                                )
+                            }
+                            // Every APK the run made in one go, for sending them on together
+                            if (hasPatched) {
+                                TitleAction(
+                                    icon = Icons.Outlined.Share,
+                                    contentDescription = stringResource(R.string.share),
+                                    onClick = { share(patchedItems) },
+                                    style = TitleActionStyle.Accent
+                                )
+                            }
+                            if (hasUnfinished) {
+                                TitleAction(
+                                    icon = Icons.Outlined.Refresh,
+                                    contentDescription = stringResource(R.string.retry),
+                                    onClick = viewModel::retryUnfinished,
+                                    style = TitleActionStyle.Accent
+                                )
+                            }
                         }
-                        ?.let { { viewModel.beginSourcePick(item) } },
-                    onInstall = request?.let { { startInstallQueue(listOf(it)) } },
-                    onExport = item.patchedFile?.let { { exportItem = item } },
-                    onOpen = item.installedPackageName
-                        ?.takeIf { item.installOutcome == BatchInstallOutcome.INSTALLED }
-                        ?.let { { viewModel.openApp(it) } },
-                    onShowError = { errorItem = item }
+                    } else {
+                        null
+                    }
                 )
+            },
+            footer = {
+                BatchDialogButtons(
+                    state = current,
+                    canInstall = installRequests.isNotEmpty(),
+                    onStart = viewModel::start,
+                    onInstallAll = { startInstallQueue(installRequests) },
+                    onClose = close
+                )
+            }
+        ) {
+            DialogLazyList(
+                modifier = Modifier.fillMaxWidth(),
+                state = listState,
+                verticalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
+            ) {
+                if (current == null) return@DialogLazyList
+
+                // Mixing sources is decided by the plan, not by the user, so this is the one place
+                // it can be pointed out. Said once for the run rather than blocking the queue
+                if (current.phase == BatchPhase.PREFLIGHT &&
+                    current.runnable.any { it.selection.keys.size > 1 }
+                ) {
+                    item(key = "multiple_sources") {
+                        Notice(
+                            text = stringResource(R.string.batch_patch_multiple_sources),
+                            icon = Icons.Outlined.Info,
+                            tone = SemanticTone.Warning,
+                            density = NoticeDensity.Compact,
+                            modifier = Modifier.animateItem()
+                        )
+                    }
+                }
+
+                // Nothing was installed yet, so say where the APKs went
+                if (current.phase == BatchPhase.FINISHED && current.patchedItems.isNotEmpty()) {
+                    item(key = "saved_hint") {
+                        Notice(
+                            text = stringResource(R.string.batch_patch_saved_hint),
+                            icon = Icons.Outlined.Save,
+                            density = NoticeDensity.Compact,
+                            modifier = Modifier.animateItem()
+                        )
+                    }
+                }
+
+                if (current.phase == BatchPhase.PREFLIGHT) {
+                    item {
+                        BatchPolicyCard(
+                            policy = current.policy,
+                            onPolicyChange = viewModel::setPolicy
+                        )
+                    }
+                }
+
+                items(current.items, key = { it.id }) { item ->
+                    val request = installRequestsByItem[item.id]
+                    BatchItemCard(
+                        item = item,
+                        editable = current.phase == BatchPhase.PREFLIGHT,
+                        onSelectApk = { viewModel.beginApkChoice(item) },
+                        onToggleExcluded = { viewModel.toggleExcluded(item.id) },
+                        onForceVersion = { viewModel.forceVersion(item.id) },
+                        onAcceptSignature = { viewModel.acceptUnverifiedSignature(item.id) },
+                        // Simple mode never exposes individual patches, and the options edited
+                        // here would not be persisted for it. Nothing to choose from until an
+                        // APK resolves either, the patch list is scoped to its exact version
+                        onEditPatches = item.source
+                            ?.takeIf { useExpertMode }
+                            ?.let { { viewModel.beginEdit(item) } },
+                        // Simple mode gets the source question it knows from single-app
+                        // patching instead of the patch list it never sees
+                        onPickSource = item
+                            .takeIf {
+                                !useExpertMode &&
+                                    (it.resolvedSelection ?: it.selection).keys.size > 1
+                            }
+                            ?.let { { viewModel.beginSourcePick(item) } },
+                        onInstall = request?.let { { startInstallQueue(listOf(it)) } },
+                        onExport = item.patchedFile?.let { file -> { exporter.export(file, item.exportFileName()) } },
+                        onShare = item.patchedFile?.let { { share(listOf(item)) } },
+                        onOpen = item.installedPackageName
+                            ?.takeIf { item.installOutcome == BatchInstallOutcome.INSTALLED }
+                            ?.let { { viewModel.openApp(it) } },
+                        onShowError = { errorItem = item }
+                    )
+                }
             }
         }
     }
@@ -633,12 +651,13 @@ private fun BatchDialogButtons(
     onClose: () -> Unit
 ) {
     when (state?.phase) {
+        // Closing keeps the queue for apps added later
         BatchPhase.PREFLIGHT -> AppDialogButtonRow(
             primaryText = stringResource(R.string.batch_patch_start),
             primaryIcon = Icons.Outlined.PlayArrow,
             onPrimaryClick = onStart,
             primaryEnabled = state.runnable.isNotEmpty(),
-            secondaryText = stringResource(android.R.string.cancel),
+            secondaryText = stringResource(R.string.close),
             onSecondaryClick = onClose
         )
 
@@ -670,10 +689,10 @@ private fun BatchRunHeader(state: BatchRunState) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = Defaults.ContentPadding)
-            .padding(top = Defaults.ContentPaddingSmall),
+            .padding(horizontal = Defaults.SpaceLarge)
+            .padding(top = Defaults.SpaceSmall),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(4.dp)
+        verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
     ) {
         AnimatedContent(
             targetState = state.processed to state.total,
@@ -761,6 +780,7 @@ private fun BatchItemCard(
     onPickSource: (() -> Unit)? = null,
     onInstall: (() -> Unit)? = null,
     onExport: (() -> Unit)? = null,
+    onShare: (() -> Unit)? = null,
     onOpen: (() -> Unit)? = null,
     onShowError: () -> Unit = {}
 ) {
@@ -776,8 +796,8 @@ private fun BatchItemCard(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(Defaults.ContentPadding),
-                horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing),
+                    .padding(Defaults.SpaceLarge),
+                horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 AppIcon(
@@ -788,7 +808,7 @@ private fun BatchItemCard(
 
                 Column(
                     modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                    verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
                 ) {
                     // The name gets a line to itself: badges beside it grow with translation
                     // and would push it out of the card entirely
@@ -870,17 +890,13 @@ private fun BatchItemCard(
                 }
             }
 
-            AnimatedVisibility(
-                visible = editable,
-                enter = Animations.expandFadeEnter,
-                exit = Animations.shrinkFadeExit
-            ) {
+            FoldingVisibility(visible = editable) {
                 Column {
                     SettingsDivider()
                     ActionPillRow(
                         modifier = Modifier.padding(
-                            horizontal = Defaults.ContentPadding,
-                            vertical = Defaults.ItemSpacing
+                            horizontal = Defaults.SpaceLarge,
+                            vertical = Defaults.SpaceMedium
                         )
                     ) {
                         val selectApkLabel = stringResource(R.string.home_select_apk_title)
@@ -949,17 +965,13 @@ private fun BatchItemCard(
                 }
             }
 
-            AnimatedVisibility(
-                visible = hasResultActions,
-                enter = Animations.expandFadeEnter,
-                exit = Animations.shrinkFadeExit
-            ) {
+            FoldingVisibility(visible = hasResultActions) {
                 Column {
                     SettingsDivider()
                     ActionPillRow(
                         modifier = Modifier.padding(
-                            horizontal = Defaults.ContentPadding,
-                            vertical = Defaults.ItemSpacing
+                            horizontal = Defaults.SpaceLarge,
+                            vertical = Defaults.SpaceMedium
                         )
                     ) {
                         if (failed) {
@@ -994,6 +1006,16 @@ private fun BatchItemCard(
                             )
                         }
 
+                        if (onShare != null) {
+                            val shareLabel = stringResource(R.string.share)
+                            ActionPillButton(
+                                onClick = onShare,
+                                icon = Icons.Outlined.Share,
+                                contentDescription = shareLabel,
+                                tooltip = shareLabel
+                            )
+                        }
+
                         if (onOpen != null) {
                             val openLabel = stringResource(R.string.open)
                             ActionPillButton(
@@ -1009,6 +1031,18 @@ private fun BatchItemCard(
         }
     }
 }
+
+/** The name a saved or shared APK of [this] item goes by, the one the single-app flow gives it. */
+private fun BatchPatchItem.exportFileName(): String = ExportNameFormatter.format(
+    null,
+    PatchedAppExportData(
+        appName = appName,
+        packageName = id,
+        appVersion = version,
+        patchBundleVersions = bundles.mapNotNull { it.version?.takeIf(String::isNotBlank) },
+        patchBundleNames = bundles.map { it.name }
+    )
+)
 
 /** Second detail line: either why the app cannot run, or what it will be patched from. */
 @Composable

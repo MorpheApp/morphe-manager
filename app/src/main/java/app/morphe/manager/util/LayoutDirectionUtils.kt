@@ -20,11 +20,14 @@ val LayoutDirection.isRtl: Boolean get() = this == LayoutDirection.Rtl
 @ReadOnlyComposable
 fun isRtl(): Boolean = LocalLayoutDirection.current.isRtl
 
-/** X coordinate of the start edge of a box [width] wide, since draw coordinates are always physical. */
-fun startEdgeX(width: Float, rtl: Boolean): Float = if (rtl) width else 0f
+/**
+ * X coordinate [inset] in from the start edge of a box [width] wide, since draw coordinates are
+ * always physical.
+ */
+fun startEdgeX(width: Float, rtl: Boolean, inset: Float = 0f): Float = if (rtl) width - inset else inset
 
-/** X coordinate of the end edge of a box [width] wide. */
-fun endEdgeX(width: Float, rtl: Boolean): Float = if (rtl) 0f else width
+/** X coordinate [inset] in from the end edge of a box [width] wide. */
+fun endEdgeX(width: Float, rtl: Boolean, inset: Float = 0f): Float = if (rtl) inset else width - inset
 
 /**
  * Horizontal gradient that runs from the start edge to the end edge, since [Brush.horizontalGradient]

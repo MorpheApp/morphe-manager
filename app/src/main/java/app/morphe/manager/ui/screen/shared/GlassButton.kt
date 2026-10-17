@@ -21,11 +21,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import app.morphe.manager.R
 import app.morphe.manager.util.readableOn
 
 /**
@@ -43,7 +45,7 @@ fun GlassButton(
     contentDescription: String? = null,
     containerColor: Color = GlassButtonDefaults.containerColor(selected),
     contentColor: Color = GlassButtonDefaults.contentColor(selected),
-    shape: Shape = GlassButtonDefaults.ButtonShape,
+    shape: Shape = Defaults.PillShape,
     borderColor: Color = GlassButtonDefaults.borderColor(selected),
     iconSize: Dp = GlassButtonDefaults.IconSize,
     height: Dp = Defaults.GlassButtonHeight,
@@ -51,9 +53,9 @@ fun GlassButton(
     iconLabelSpacing: Dp = GlassButtonDefaults.IconLabelSpacing,
     textStyle: TextStyle = GlassButtonDefaults.labelStyle,
     role: Role = Role.Tab,
-    pressScale: Boolean = false,
     hapticFeedback: Boolean = false,
-    showLabel: Boolean = selected
+    showLabel: Boolean = selected,
+    interactionSource: MutableInteractionSource? = null
 ) {
     // Force the label on when there's no icon to render, otherwise the pill would collapse
     // to an empty click target
@@ -85,21 +87,18 @@ fun GlassButton(
     // The fill is translucent, so the caller's pairing describes a background that is never drawn
     val contentColor = animatedContentColor.readableOn(containerColor, MaterialTheme.colorScheme.surface)
 
-    val interactionSource = remember { MutableInteractionSource() }
+    @Suppress("NAME_SHADOWING")
+    val interactionSource = interactionSource ?: remember { MutableInteractionSource() }
     val clickHandler = if (hapticFeedback) rememberHapticClick(onClick) else onClick
+    val pressShape = rememberPressShape(interactionSource, shape, enabled)
 
     Surface(
         onClick = clickHandler,
         modifier = modifier
             .height(height)
-            .pressScale(
-                interactionSource = interactionSource,
-                enabled = pressScale,
-                label = "glass_button_press_scale"
-            )
             // Mirror the surface shape on the outer modifier so the ripple stays inside
             // the rounded bounds instead of drawing a square
-            .clip(shape)
+            .clip(pressShape)
             .semantics {
                 this.role = role
                 if (isSelectable) this.selected = selected
@@ -107,7 +106,7 @@ fun GlassButton(
             },
         color = containerColor,
         contentColor = contentColor,
-        shape = shape,
+        shape = pressShape,
         border = CardBorder.of(borderColor),
         interactionSource = interactionSource,
         enabled = enabled
@@ -165,3 +164,67 @@ fun GlassButton(
         }
     }
 }
+
+/**
+ * A [GlassButton] for an action rather than a tab, its emphasis set by [tone]. Shared by the
+ * patcher's action bar and the landscape sidebars, so the buttons read the same wherever they sit.
+ */
+@Composable
+fun ActionGlassButton(
+    onClick: () -> Unit,
+    icon: ImageVector,
+    modifier: Modifier = Modifier,
+    text: String? = null,
+    showLabel: Boolean = false,
+    tone: BottomActionTone = BottomActionTone.Neutral,
+    enabled: Boolean = true,
+    showProgress: Boolean = false,
+    contentDescription: String? = null,
+    stateDescription: String? = null,
+    shape: Shape = Defaults.PillShape,
+    height: Dp = Defaults.GlassButtonHeight,
+    interactionSource: MutableInteractionSource? = null
+) {
+    val colors = tone.colors()
+    val loadingLabel = stringResource(R.string.loading)
+
+    val label = contentDescription ?: text
+    val accessibleLabel = remember(label, showProgress, loadingLabel) {
+        when {
+            label == null -> null
+            showProgress -> "$label, $loadingLabel"
+            else -> label
+        }
+    }
+
+    GlassButton(
+        label = text.orEmpty(),
+        selected = false,
+        onClick = onClick,
+        modifier = modifier.semantics {
+            if (stateDescription != null) {
+                this.stateDescription = stateDescription
+            }
+            if (showProgress) {
+                liveRegion = LiveRegionMode.Polite
+            }
+        },
+        icon = icon,
+        enabled = enabled,
+        showProgress = showProgress,
+        contentDescription = accessibleLabel,
+        containerColor = colors.container.dim(enabled),
+        contentColor = colors.content.dim(enabled),
+        borderColor = colors.border.dim(enabled),
+        shape = shape,
+        height = height,
+        role = Role.Button,
+        hapticFeedback = true,
+        showLabel = showLabel,
+        interactionSource = interactionSource
+    )
+}
+
+/** Halves the alpha of a resolved glass color while the button is disabled. */
+private fun Color.dim(enabled: Boolean): Color =
+    if (enabled) this else copy(alpha = alpha * 0.5f)

@@ -88,6 +88,16 @@
         <item quantity="few">%s aplikacije su spremne za zakrpu</item>
         <item quantity="other">%s aplikacija je spremno za zakrpu</item>
     </plurals>
+    <plurals name="batch_queue_pending_count">
+        <item quantity="one">%s aplikacija je na listi čekanja za zakrpavanje</item>
+        <item quantity="few">%s aplikacije su na listi čekanja za zakrpavanje</item>
+        <item quantity="other">%s aplikacija je na listi čekanja za zakrpavanje</item>
+    </plurals>
+    <plurals name="home_alerts_snoozed_count">
+        <item quantity="one">%s sakrivena obaveštenja, dodirnite da pokažete ih</item>
+        <item quantity="few">%s sakrivene obaveštenja, dodirnite da pokažete ih</item>
+        <item quantity="other">%s sakrivenih obaveštenja, dodirnite da pokažete ih</item>
+    </plurals>
     <plurals name="repatch_available_count">
         <item quantity="one">%s aplikacija se može ponovo zakrpiti</item>
         <item quantity="few">%s aplikacije mogu biti ponovo zakrpljene</item>
@@ -107,11 +117,6 @@
         <item quantity="one">%s izvor instaliran</item>
         <item quantity="few">%s izvora instalirano</item>
         <item quantity="other">%s izvora instalirano</item>
-    </plurals>
-    <plurals name="home_app_filter_active">
-        <item quantity="one">%1$s · %2$s filtrirana stavka</item>
-        <item quantity="few">%1$s · %2$s filtrirane stavke</item>
-        <item quantity="other">%1$s · %2$s filtriranih stavki</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s sakrivena aplikacija</item>
@@ -157,6 +162,12 @@
         <item quantity="one">%s promena</item>
         <item quantity="few">%s promene</item>
         <item quantity="other">%s promena</item>
+    </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
+    <plurals name="sources_apps_count_with_new">
+        <item quantity="one">%1$s · %2$d novo</item>
+        <item quantity="few">%1$s · %2$d nova</item>
+        <item quantity="other">%1$s · %2$d novih</item>
     </plurals>
     <plurals name="changelog_new_releases">
         <item quantity="one">%s novo izdanje</item>

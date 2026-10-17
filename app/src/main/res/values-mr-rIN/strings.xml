@@ -22,6 +22,8 @@
     <string name="deep_link_add_source_title">मूळ जोडा</string>
     <string name="deep_link_add_source_message">तुम्हाला \'Morphe\' मध्ये ही सुधारणा मूळ जोडायची आहे का?</string>
     <string name="deep_link_add_source_warning">फक्त तुम्ही विश्वास ठेवता अशा स्त्रोतांनाच जोडा</string>
+    <!-- Shown under the app a link was opened for -->
+    <!-- Asked when the link names an app of a source that is already added -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe नवीन सुधारणा उपलब्ध आहे</string>
     <string name="home_update_available_subtitle">नवीन सुधारणा स्थापनेसाठी तयार आहे</string>
@@ -146,7 +148,6 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">सुधारणांची मुळे</string>
     <string name="sources_search">स्रोत आणि पॅच शोधा</string>
-    <string name="sources_sort_title">सुधारणा स्रोत क्रमवारी लावा</string>
     <string name="sources_sort_manual">मॅन्युअल ऑर्डर</string>
     <string name="sources_sort_manual_hint">पुन्हा क्रमवारी लावण्यासाठी स्रोतावर दाबून ठेवा</string>
     <string name="sources_sort_last_updated">शेवटची अपडेट</string>
@@ -158,12 +159,12 @@
     <string name="sources_management_report_issue">प्री-रिलीझ बिल्ड अजून विकासाधीन आहेत. पॅच अयशस्वी होऊ शकतात किंवा अॅप खराब करू शकतात, आणि वैशिष्ट्ये सूचना न देता बदलू शकतात.</string>
     <string name="sources_management_failed_to_open_url">लिंक उघडता आली नाही</string>
     <string name="sources_apps">अॅप्स</string>
-    <string name="sources_apps_description">एखादे अॅप या स्रोतातून वगळण्यासाठी किंवा परत आणण्यासाठी त्यावर टॅप करा, किंवा अनेक निवडण्यासाठी दाबून ठेवा. कोणताही स्रोत आणत नसल्यास अॅप मुख्य स्क्रीनवरून निघून जातो</string>
     <string name="sources_apps_brought">या स्रोताने आणलेले</string>
     <string name="sources_apps_left_out">या स्रोतातून वगळलेले</string>
-    <string name="sources_apps_leave_out">वगळा</string>
-    <string name="sources_apps_leave_out_done">वगळले</string>
     <string name="sources_apps_bring_back">परत आणा</string>
+    <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
+    <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
+    <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
     <string name="sources_management_prerelease_toggle">प्री-रिलीझ पॅचेस</string>
     <string name="sources_management_prerelease_toggle_description">नवीन प्रायोगिक सुधारणा सर्वांच्या आधी वापरा</string>
     <string name="sources_prerelease_warning_title">सर्व युनिव्हर्सल पॅच सक्षम करायचे का?</string>
@@ -208,7 +209,6 @@
     <string name="sources_dialog_url_invalid">URL GitHub/GitLab रेपॉ किंवा .json फाइलकडे निर्देशित करणे आवश्यक आहे</string>
     <string name="sources_dialog_preinstalled">पूर्व-स्थापित</string>
     <string name="sources_dialog_community">समुदाय पॅचेस</string>
-    <string name="sources_dialog_choose_apps">अॅप्स निवडा</string>
     <string name="sources_dialog_choose_apps_description">स्रोत लोड झाल्यावर त्यातील कोणते अॅप्स ठेवायचे ते निवडा</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">तृतीय-पक्ष पॅच स्रोत</string>
@@ -438,7 +438,7 @@
     <string name="batch_patch_state_no_patches">पॅच नाहीत</string>
     <string name="batch_patch_policy_install">पूर्ण झाल्यावर इंस्टॉल करा</string>
     <string name="batch_patch_policy_install_description">क्यू समाप्त झाल्यावर लगेच प्रत्येक पॅच केलेले ॲप इंस्टॉल करते. बंद केल्यास APK नंतरसाठी जतन केले जातात.</string>
-    <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
+    <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_start">सुरू करा</string>
     <string name="batch_patch_stop_title">बॅच पॅचिंग थांबवायचे?</string>
     <string name="batch_patch_stop_description">सध्या पॅच केलेले ॲप आणि रांगेत असलेली सर्व काही रद्द केली जाईल.</string>
@@ -737,7 +737,6 @@
     <string name="settings_appearance_pure_black">शुद्ध काळा</string>
     <string name="settings_appearance_pure_black_description">सत्य काळ्या रंगाचे बॅकग्राउंड वापरते</string>
     <string name="settings_appearance_color_accents">अॅप आणि स्रोत रंग</string>
-    <string name="settings_appearance_color_accents_description">अॅक्सेंट रंगाऐवजी प्रत्येक अॅप आणि स्रोताचा स्वतःचा रंग वापरते</string>
     <string name="settings_appearance_outlines">बाह्यरेखा</string>
     <string name="settings_appearance_outlines_description">कार्डे, पॅनेल्स आणि बटणांभोवती पातळ बाह्यरेखा काढते</string>
     <!-- Settings - Appearance Tab - Language Selector -->
@@ -756,13 +755,8 @@
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">मुख्य स्क्रीन</string>
     <string name="settings_appearance_greeting_phrases">शुभेच्छा संदेश</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">मुख्य स्क्रीनवर शुभेच्छा संदेश दर्शवा</string>
-    <string name="settings_appearance_app_grouping">ॲप समूहीकरण</string>
-    <string name="settings_appearance_app_grouping_description">अॅप्स स्रोत किंवा श्रेणीनुसार गट करण्यासाठी स्विचर दाखवा</string>
     <string name="settings_appearance_repatch_notice">री-पॅच सूचना</string>
-    <string name="settings_appearance_repatch_notice_description">पॅच केलेले अॅप्स पुन्हा पॅच करता येतात तेव्हा बॅनर दाखवा</string>
     <string name="settings_appearance_sort_button">क्रमवारी आणि फिल्टर बटण</string>
-    <string name="settings_appearance_sort_button_description">होम स्क्रीनवर क्रमवारी आणि फिल्टर बटण दाखवा</string>
     <string name="settings_appearance_app_card_colors">ॲप कार्ड रंग</string>
     <string name="settings_appearance_app_card_colors_default">डीफॉल्ट</string>
     <string name="settings_appearance_app_card_colors_default_description">प्रत्येक ॲपला स्वतःच्या बंडलचा रंग द्या</string>
@@ -818,7 +812,6 @@
 
 पॅच प्रभावित होत नाहीत: पॅच स्रोत सूचीमधील प्रत्येक स्रोतासाठी प्री-रिलीज पॅच सक्षम करा."</string>
     <string name="settings_advanced_updates_allow_metered">मोबाईल डेटा अद्यतने</string>
-    <string name="settings_advanced_updates_allow_metered_description">Morphe आणि पॅच अद्यतने मोबाईल डेटावर डाउनलोड करण्याची परवानगी देते</string>
     <string name="settings_advanced_updates_background_notifications">पार्श्वभूमी अद्यतन सूचना</string>
     <string name="settings_advanced_updates_background_notifications_description">अद्यतने उपलब्ध झाल्यावर पार्श्वभूमीमध्ये वेळोवेळी तपासणी करा आणि सूचित करा</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">ॲप बंद असतानाही नवीन रिलीझसाठी पुश सूचना</string>
@@ -833,7 +826,6 @@
     <string name="settings_advanced_update_interval_chip_subtitle">पार्श्वभूमी तपासणी वारंवारता</string>
     <string name="settings_advanced_update_interval_battery_warning">काही उपकरणांवर पार्श्वभूमी तपासणी विश्वसनीयपणे कार्य करू शकत नाही. Xiaomi, Huawei, Samsung आणि OnePlus सारख्या उत्पादकांकडून बॅटरी वाचवण्यासाठी पार्श्वभूमी प्रक्रियांवर जोरदार निर्बंध लादले जातात</string>
     <string name="settings_advanced_external_batch_patch">बाह्य ट्रिगरला अनुमती द्या</string>
-    <string name="settings_advanced_external_batch_patch_description">ऑटोमेशन अॅप्सना इंटेंटद्वारे बॅच पॅचिंग सुरू करू देते</string>
     <string name="external_batch_patch_title">बॅच पॅचिंग सुरू करायची?</string>
     <string name="external_batch_patch_description">%s ला ॲप्स पॅच आणि इंस्टॉल करण्यासाठी Morphe इच्छित आहे.</string>
     <string name="external_batch_patch_trust_caller">या ॲपला नेहमी अनुमती द्या</string>
@@ -853,11 +845,9 @@
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">तज्ञ सेटिंग्ज</string>
     <string name="settings_advanced_expert_mode">तज्ञ मोड</string>
-    <string name="settings_advanced_expert_mode_description">Morphe पॅचिंग सेटिंग्ज आणि सानुकूलन पर्याय सक्षम करते</string>
     <string name="settings_advanced_expert_mode_dialog_title">तज्ञ मोड सक्षम करायचा?</string>
     <string name="settings_advanced_expert_mode_dialog_message">तज्ञ मोड पॅच कसे लागू केले जातात यावर अधिक नियंत्रण देतो, परंतु तज्ञ मोडमधील सेटिंग्ज चुकीच्या कॉन्फिगर केल्यास ॲप कार्यान्वित होऊ शकत नाही</string>
     <string name="settings_advanced_strip_unused_libs">उपकरणाच्या आर्किटेक्चरसाठी अनुकूल करा</string>
-    <string name="settings_advanced_strip_unused_libs_description">न वापरलेल्या CPU आर्किटेक्चर लायब्ररी आणि स्प्लिट APK मॉड्यूल्स काढून टाकते</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_description">Pull request स्रोतांसाठी आवश्यक</string>
     <string name="settings_advanced_github_pat_configured">टोकन कॉन्फिगर केले</string>
@@ -988,13 +978,10 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_risk">प्ले स्टोअर पॅच केलेल्या ॲपसाठी अपडेट देऊ शकते. ते अपडेट स्थापित केल्यास पॅच केलेले APK मूळ आवृत्तीने बदलले जाईल आणि पॅच काढले जातील. अपडेट करण्यास सांगितले গেলে, ॲपच्या प्ले स्टोअर पृष्ठावरील तीन-डॉट मेनूवर टॅप करा आणि \"अपडेट बंद करा\" निवडा</string>
     <string name="installer_play_store_warning_continue">मला समजले, पुढे जा</string>
     <string name="installer_play_store_mode">Play Store म्हणून इंस्टॉल करा</string>
-    <string name="installer_play_store_mode_description">या इंस्टॉल पद्धतीसाठी इंस्टॉलेशन स्रोत म्हणून Google Play Store रेकॉर्ड करा</string>
     <string name="settings_prompt_installer_on_install">इंस्टॉलर निवड प्रॉम्प्ट</string>
-    <string name="settings_prompt_installer_on_install_description">पॅच केलेले ॲप इंस्टॉल करताना प्रत्येक वेळी इंस्टॉलर निवड संवाद दर्शवितो</string>
     <string name="settings_auto_install_with_shizuku">पॅचिंग केल्यानंतर स्वयंचलितपणे स्थापित करा</string>
     <string name="settings_auto_install_with_shizuku_description">पॅचिंग पूर्ण होताच पॅच केलेले APK स्थापित करते</string>
     <string name="settings_auto_uninstall_with_shizuku">संघर्ष झाल्यास ऑटो-अनइंस्टॉल करा</string>
-    <string name="settings_auto_uninstall_with_shizuku_description">Shizuku सह ऑटो-इंस्टॉल करताना, Android ने सिग्नेचर संघर्ष नोंदवल्यास, विद्यमान ॲप प्रथम अनइंस्टॉल करा. यामुळे ॲप डेटा काढला जाऊ शकतो.</string>
     <string name="settings_auto_uninstall_warning_title">ऑटो-अनइंस्टॉल सक्षम करायचे?</string>
     <string name="settings_auto_uninstall_warning_message">Android Shizuku ऑटो-इंस्टॉल दरम्यान सिग्नेचर संघर्ष नोंदवल्यास, Morphe पॅच केलेले APK इंस्टॉल करण्यापूर्वी विद्यमान ॲप अनइंस्टॉल करेल</string>
     <string name="settings_auto_uninstall_warning_risk">यामुळे ॲप डेटा काढला जाऊ शकतो. पॅच केलेले APK अनइंस्टॉल केल्यानंतर इंस्टॉल करण्यात अयशस्वी झाल्यास, मागील ॲप आधीच काढले गेले असू शकते.</string>
@@ -1033,13 +1020,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_memory_limit_warning">कमी मेमरी मर्यादा मोठ्या ॲप्सला पॅच करताना अपयश आणू शकते</string>
     <string name="settings_system_memory_limit_high_warning">उच्च मेमरी मर्यादा काही डिव्हाइसेसवर पॅचिंग खूप मंद करू शकते. कमी मर्यादांवर पॅचिंग सतत अपयशी ठरत असेल तरच ती वाढवा</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB मर्यादा</string>
-    <string name="settings_system_process_runtime_disabled_description">क्लिक करून कॉन्फिगर करा</string>
     <string name="settings_system_process_runtime_description_not_available">या वैशिष्ट्यासाठी Android 11 किंवा त्यापेक्षा नवीन आवश्यक आहे</string>
     <string name="settings_system_patcher_completion_sound">पूर्णत्वाचा आवाज</string>
     <string name="settings_system_patcher_completion_sound_description">पॅचिंग पूर्ण झाल्यावर यश किंवा अपयश दर्शवण्यासाठी विशिष्ट टोन प्ले करा</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">सूचना</string>
-    <string name="settings_system_notifications_description">पार्श्वभूमी सूचना आणि पूर्णत्वाचा आवाज कॉन्फिगर करा</string>
     <string name="settings_system_notifications_success_sound">यशस्वी आवाज</string>
     <string name="settings_system_notifications_error_sound">त्रुटी आवाज</string>
     <string name="settings_system_notifications_sound_default">डीफॉल्ट</string>
@@ -1051,7 +1036,6 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">आयात आणि निर्यात</string>
     <string name="settings_system_signing_key">स्वाक्षरी की</string>
-    <string name="settings_system_signing_key_description">तुमच्या पॅच केलेल्या अॅप्सवर स्वाक्षरी करण्यासाठी वापरल्या जाणाऱ्या कीचा बॅकअप घेते आणि ती पुनर्संचयित करते</string>
     <string name="settings_system_signing_key_dialog_description">Morphe पॅच करत असलेल्या प्रत्येक अॅपवर या कीने स्वाक्षरी केली जाते. एक प्रत ठेवा: त्याशिवाय, पॅच केलेले अॅप्स अनइंस्टॉल केल्याशिवाय केवळ अपडेट करता येतात</string>
     <string name="settings_system_signing_key_missing">Morphe तुमच्या पहिल्या पॅचसह एक तयार करते</string>
     <string name="settings_system_signing_key_created">%s रोजी तयार केली</string>
@@ -1107,7 +1091,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_export_zip_failed">निवडलेले APK निर्यात करण्यात अयशस्वी</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">स्टोरेज व्यवस्थापन</string>
-    <string name="settings_system_storage_management_description">डिस्क वापर तपासा आणि कॅशे केलेल्या फायली साफ करा</string>
     <string name="settings_system_storage_keystore_title">साइनिंग कीस्टोअर</string>
     <string name="settings_system_storage_app_data_title">ॲप डेटा</string>
     <string name="settings_system_storage_patch_bundles_title">सुधारणांचे बंडल</string>
@@ -1173,7 +1156,6 @@ morphe_header_custom_dark.png
     <string name="copy_selection_same_source">समान स्रोत</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">कस्टम फाइल पिकर</string>
-    <string name="settings_system_custom_file_picker_description">सिस्टम डिफॉल्ट ऐवजी मोर्फच्या बिल्ट-इन फाइल पिकरने स्टोरेज ब्राउझ करा</string>
     <!-- Settings - System Tab - APK download helper -->
     <string name="settings_system_apk_download_helper">APK डाउनलोड हेल्पर</string>
     <string name="settings_system_apk_download_helper_trusted_count">विश्वसनीय: %2$d पैकी %1$d</string>
@@ -1291,6 +1273,8 @@ morphe_header_custom_dark.png
     <string name="available">उपलब्ध</string>
     <string name="continue_">सुरू ठेवा</string>
     <string name="version">व्हर्जन</string>
+    <!-- Who made a patch source, as a field label -->
+    <!-- A file a patch source is added from, as a field label -->
     <string name="clone">क्लोन</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">सुधारणा</string>

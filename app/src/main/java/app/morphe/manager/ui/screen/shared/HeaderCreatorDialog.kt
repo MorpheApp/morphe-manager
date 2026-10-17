@@ -44,6 +44,7 @@ import app.morphe.manager.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.koin.compose.koinInject
 
 private const val MIN_SCALE = 0.3f
 private const val MAX_SCALE = 3f
@@ -150,13 +151,14 @@ private class HeaderVariant(val theme: HeaderTheme) {
  * header slot and shown in the app bar it lands in, then written for every density the patch takes.
  */
 @Composable
-fun HeaderCreatorDialog(
+fun DialogHostScope.HeaderCreatorDialog(
     packageName: String,
     onDismiss: () -> Unit,
     onHeaderCreated: (String) -> Unit
 ) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
+    val messages = koinInject<UserMessages>()
     val layout = remember(packageName) { HeaderLayout.of(packageName) }
     val variants = remember(layout) { layout.themes.map(::HeaderVariant) }
 
@@ -171,11 +173,11 @@ fun HeaderCreatorDialog(
             val result = createHeaderFiles(context, uri, layout, variants)
             isCreating.value = false
             if (result != null) {
-                context.toast(successMessage)
+                messages.show(successMessage)
                 onHeaderCreated(result)
                 onDismiss()
             } else {
-                context.toast(failureMessage)
+                messages.show(failureMessage)
             }
         }
     }
@@ -278,7 +280,7 @@ private fun HeaderEditor(
         label = "header_guides"
     )
     val selectImage = stringResource(R.string.adaptive_icon_select_image)
-    val shape = RoundedCornerShape(Defaults.CompactCornerRadius)
+    val shape = RoundedCornerShape(Defaults.CornerMedium)
 
     val input = if (picture != null) {
         Modifier.imageTransformGestures(
@@ -316,7 +318,7 @@ private fun HeaderEditor(
     ) {
         if (picture == null) {
             Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
@@ -343,7 +345,7 @@ private fun AppBarPreview(
     picture: PickedImage?,
     transform: ImageTransform
 ) {
-    val shape = RoundedCornerShape(Defaults.CompactCornerRadius)
+    val shape = RoundedCornerShape(Defaults.CornerMedium)
 
     Row(
         modifier = Modifier
@@ -395,12 +397,12 @@ private fun AppBarPreview(
                     contentDescription = null,
                     tint = theme.content,
                     modifier = Modifier
-                        .padding(12.dp)
+                        .padding(Defaults.SpaceMedium)
                         .size(Defaults.IconSize)
                 )
                 Box(
                     modifier = Modifier
-                        .padding(start = 8.dp, end = 12.dp)
+                        .padding(start = Defaults.SpaceSmall, end = Defaults.SpaceMedium)
                         .size(32.dp)
                         .clip(CircleShape)
                         .background(theme.field)

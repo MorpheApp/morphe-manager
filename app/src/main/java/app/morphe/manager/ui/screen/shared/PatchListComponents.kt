@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.unit.dp
 
 /**
  * A patch of a [PatchEntryList] with its options. [dimmed] marks one not in effect: no longer
@@ -63,8 +62,8 @@ private fun PatchEntryRow(entry: PatchEntry) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = Defaults.ContentPadding),
-        verticalArrangement = Arrangement.spacedBy(4.dp)
+            .padding(horizontal = Defaults.SpaceLarge),
+        verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
     ) {
         Text(
             text = entry.name,
@@ -75,20 +74,20 @@ private fun PatchEntryRow(entry: PatchEntry) {
             // A capped key cannot squeeze its value to a few letters a line, and the rail hangs the
             // options from their patch, whose name they would otherwise pass for
             BoxWithConstraints {
-                val keyMaxWidth = (maxWidth - AccentRailWidth - Defaults.ItemSpacing) * OPTION_KEY_MAX_FRACTION
+                val keyMaxWidth = (maxWidth - AccentRailWidth - Defaults.SpaceMedium) * OPTION_KEY_MAX_FRACTION
                 Row(
                     modifier = Modifier.height(IntrinsicSize.Min),
-                    horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
+                    horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
                 ) {
                     AccentRail(modifier = Modifier.fillMaxHeight())
                     Column(
                         modifier = Modifier.weight(1f),
-                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                        verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
                     ) {
                         entry.options.forEach { (key, value) ->
                             // Side by side on one baseline as the info panels set theirs, the value
                             // smaller so the patch name stays the lead
-                            Row(horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)) {
+                            Row(horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)) {
                                 ValueLabel(
                                     text = key,
                                     color = textColor,
@@ -154,8 +153,8 @@ fun LabeledSection(
                 )
             }
             Column(
-                modifier = Modifier.padding(vertical = Defaults.ItemSpacing),
-                verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
+                modifier = Modifier.padding(vertical = Defaults.SpaceMedium),
+                verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
             ) {
                 content()
             }

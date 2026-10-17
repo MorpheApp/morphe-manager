@@ -6,6 +6,8 @@
 package app.morphe.manager.domain.repository
 
 import app.morphe.manager.data.room.AppDatabase
+import app.morphe.manager.data.room.selection.SourceAppList
+import app.morphe.manager.data.room.selection.SourceMuteDao
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -22,7 +24,8 @@ private const val SQLITE_BIND_LIMIT = 900
  *
  * A source kept from an app also stops bringing it to the home screen, so a source with hundreds
  * of apps can be cut down to the few wanted from it. An app no source brings leaves the list, see
- * [appsBrought].
+ * [appsBrought]. Such a source can also leave out the apps it starts supporting later, so the cut
+ * holds as it grows: each one is kept from it on arrival, as if the user had left it out.
  *
  * Apps are keyed by the package the user patches, not by the install a run produces: a copy is
  * built from the same app and is offered the same sources.
@@ -59,7 +62,7 @@ class SourceMuteRepository(db: AppDatabase) {
 
     /**
      * Keeps every one of [packageNames] from [bundleUid], on top of what is already ruled out. A
-     * source's app list answers this way, and so does a backup merged into this device.
+     * source's app list answers this way.
      */
     suspend fun muteApps(bundleUid: Int, packageNames: Collection<String>) =
         dao.addForBundle(bundleUid, packageNames)
@@ -70,21 +73,79 @@ class SourceMuteRepository(db: AppDatabase) {
         packageNames.chunked(SQLITE_BIND_LIMIT).forEach { dao.clearForBundle(bundleUid, it) }
     }
 
-    suspend fun resetForBundle(bundleUid: Int) = dao.clearForBundle(bundleUid)
+    /**
+     * Apps left out on arrival and not looked at yet, per source that leaves new apps out. A
+     * source that brings them is absent, so the keys also answer which sources leave them out.
+     */
+    val unseenNewApps: Flow<Map<Int, Set<String>>> = dao.getAppLists()
+        .map { lists -> lists.associate { it.patchBundle to it.unseenApps } }
+        .distinctUntilChanged()
 
-    /** Sources at least one app is kept from, the other half of what a backup has to cover. */
-    suspend fun getAllBundleUids(): List<Int> = dao.getAllBundleUids()
+    /**
+     * Whether [bundleUid] brings the apps it starts supporting. Turned off, everything it names
+     * now counts as known, so only an app it names later is left out.
+     */
+    suspend fun setBringsNewApps(bundleUid: Int, bringsNewApps: Boolean, listedApps: Set<String>) {
+        if (bringsNewApps) dao.clearAppList(bundleUid)
+        else dao.upsertAppList(SourceAppList(bundleUid, knownApps = listedApps))
+    }
+
+    /**
+     * Leaves out what each of [bundles] names for the first time, see [SourceMuteDao.leaveOutNewApps].
+     * Only the sources that leave new apps out have their apps listed, which most never do.
+     */
+    suspend fun leaveOutNewApps(bundles: Map<Int, PatchBundleInfo>) {
+        val tracked = dao.getAppListBundleUids().toSet()
+        if (tracked.isEmpty()) return
+        dao.leaveOutNewApps(
+            bundles.filterKeys { it in tracked }.mapValues { (_, info) -> info.listedApps() }
+        )
+    }
+
+    /** The new apps of [bundleUid] have been seen in its app list and stop being flagged. */
+    suspend fun markNewAppsSeen(bundleUid: Int) = dao.clearUnseenApps(bundleUid)
+
+    suspend fun resetForBundle(bundleUid: Int) {
+        dao.clearForBundle(bundleUid)
+        dao.clearAppList(bundleUid)
+    }
+
+    /** Sources a backup has something to say about: an app kept from them, or new apps left out. */
+    suspend fun getAllBundleUids(): List<Int> =
+        (dao.getAllBundleUids() + dao.getAppListBundleUids()).distinct()
 
     /** The apps kept from [bundleUid], which a backup carries alongside that source's selection. */
     suspend fun exportForBundle(bundleUid: Int): List<String> = dao.getForBundle(bundleUid)
 
+    /** What [bundleUid] has listed so far when it leaves new apps out, or null when it brings them. */
+    suspend fun exportKnownApps(bundleUid: Int): List<String>? =
+        dao.getAppList(bundleUid)?.knownApps?.sorted()
+
     /** Replaces what a backup says about [bundleUid], for a restore that starts from a clean slate. */
-    suspend fun importForBundle(bundleUid: Int, packageNames: Collection<String>) {
-        dao.clearForBundle(bundleUid)
+    suspend fun importForBundle(bundleUid: Int, packageNames: Collection<String>, knownApps: Collection<String>?) {
+        resetForBundle(bundleUid)
         dao.addForBundle(bundleUid, packageNames)
+        knownApps?.let { dao.upsertAppList(SourceAppList(bundleUid, knownApps = it.toSet())) }
     }
 
-    suspend fun reset() = dao.clear()
+    /**
+     * Adds what a backup says about [bundleUid] on top of what is here. A source that leaves new
+     * apps out on either side keeps doing so, knowing the apps both sides have seen.
+     */
+    suspend fun mergeForBundle(bundleUid: Int, packageNames: Collection<String>, knownApps: Collection<String>?) {
+        dao.addForBundle(bundleUid, packageNames)
+        if (knownApps == null) return
+        val current = dao.getAppList(bundleUid)
+        dao.upsertAppList(
+            current?.copy(knownApps = current.knownApps + knownApps)
+                ?: SourceAppList(bundleUid, knownApps = knownApps.toSet())
+        )
+    }
+
+    suspend fun reset() {
+        dao.clear()
+        dao.clearAppLists()
+    }
 }
 
 /**

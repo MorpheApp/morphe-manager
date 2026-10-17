@@ -5,12 +5,15 @@
 
 package app.morphe.manager.ui.screen.settings.appearance
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -53,6 +56,29 @@ fun <T> OptionGrid(
 }
 
 /**
+ * A single choice among a few [items], as one connected group whose buttons widen under a press,
+ * as an expressive button group's do. The picked tile rounds itself out, see [SelectionTile].
+ */
+@Composable
+fun <T> OptionGroup(
+    items: List<T>,
+    modifier: Modifier = Modifier,
+    item: @Composable (item: T, shape: CornerBasedShape, interactionSource: MutableInteractionSource, modifier: Modifier) -> Unit
+) {
+    ButtonGroupRow(modifier = modifier) {
+        items.forEachIndexed { index, option ->
+            val interactionSource = remember { MutableInteractionSource() }
+            item(
+                option,
+                ConnectedShapes.Pill.inRow(index, items.size),
+                interactionSource,
+                Modifier.buttonGroupItem(interactionSource)
+            )
+        }
+    }
+}
+
+/**
  * Standard icon-based option card for appearance settings.
  * Used for backgrounds, themes, and other icon-based selections.
  *
@@ -67,7 +93,9 @@ fun ModernIconOptionCard(
     label: String,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    compact: Boolean = false
+    compact: Boolean = false,
+    shape: CornerBasedShape = SelectionTileShape,
+    interactionSource: MutableInteractionSource? = null
 ) {
     val windowSize = rememberWindowSize()
     val iconSize = when {
@@ -90,12 +118,14 @@ fun ModernIconOptionCard(
         stateDescription = stringResource(
             if (selected) R.string.selected else R.string.not_selected
         ),
-        modifier = modifier.heightIn(min = cardHeight)
+        modifier = modifier.heightIn(min = cardHeight),
+        shape = shape,
+        interactionSource = interactionSource
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(Defaults.ItemSpacing),
+                .padding(Defaults.SpaceMedium),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -111,7 +141,7 @@ fun ModernIconOptionCard(
                 }.copy(alpha = if (enabled) 1f else 0.5f),
                 modifier = Modifier.size(iconSize)
             )
-            Spacer(modifier = Modifier.height(6.dp))
+            Spacer(modifier = Modifier.height(Defaults.SpaceExtraSmall))
             Text(
                 text = label,
                 style = MaterialTheme.typography.bodySmall,

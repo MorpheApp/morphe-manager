@@ -12,6 +12,7 @@ import app.morphe.manager.util.Options
 import app.morphe.manager.util.PatchSelection
 import app.morphe.manager.util.PathValidationResult
 import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
 import java.io.File
 
 /**
@@ -22,6 +23,7 @@ import java.io.File
  *   several the app was cloned into. Null rebuilds the app's own install, or creates it.
  */
 @Parcelize
+@Serializable
 data class BatchTarget(
     val packageName: String,
     val repatchedPackageName: String? = null
@@ -138,7 +140,7 @@ data class BatchBundleRef(
  * @param restoreState State to return to when the user un-excludes the item.
  * @param patchedFile Populated after a successful run with the retained patched APK.
  * @param installOutcome Set once the user installs from the summary, so a failure is visible
- *   on the app it belongs to rather than only in a toast that is gone a moment later.
+ *   on the app it belongs to rather than only in a message that is gone a moment later.
  */
 data class BatchPatchItem(
     val target: BatchTarget,
@@ -175,6 +177,11 @@ data class BatchPatchItem(
 
     val patchCount get() = selection.values.sumOf { it.size }
     val version get() = source?.version
+
+    /** Removed from the run, remembering the state an [included] call puts back. */
+    fun excluded() = copy(state = BatchItemState.EXCLUDED, restoreState = state)
+
+    fun included() = copy(state = restoreState ?: BatchItemState.READY, restoreState = null)
 
     /**
      * Whether patching this item under [resultPackageName] produced a copy of the app rather
@@ -250,4 +257,32 @@ data class BatchRunState(
 
     /** Successful items that still have their patched APK on disk, in queue order. */
     val patchedItems get() = items.filter { it.state == BatchItemState.SUCCEEDED && it.patchedFile != null }
+
+    /** What is kept of a queue that has not started yet, null once it has. */
+    val savedQueue: SavedBatchQueue?
+        get() = if (phase == BatchPhase.PLANNING || phase == BatchPhase.PREFLIGHT) {
+            SavedBatchQueue(
+                targets = targets,
+                excluded = items.filter { it.state == BatchItemState.EXCLUDED }.mapTo(mutableSetOf()) { it.id },
+                policy = policy,
+                useMount = useMount
+            )
+        } else {
+            null
+        }
+}
+
+/**
+ * A queue waiting to be started, stored so apps can be added to it over several sessions. Only
+ * the user's own choices are kept, the rest is resolved again because sources and APKs move on.
+ */
+@Serializable
+data class SavedBatchQueue(
+    val targets: List<BatchTarget>,
+    val excluded: Set<String> = emptySet(),
+    val policy: BatchInstallPolicy = BatchInstallPolicy.SAVE_ONLY,
+    val useMount: Boolean = false
+) {
+    /** Apps the queue would patch if it were started now. */
+    val queuedCount get() = targets.count { it.id !in excluded }
 }

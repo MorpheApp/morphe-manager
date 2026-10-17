@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FormatSize
-import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Restore
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
@@ -26,7 +25,7 @@ import app.morphe.manager.ui.theme.*
  * Dialog for picking the display scale of the interface.
  */
 @Composable
-fun UiScaleDialog(
+fun DialogHostScope.UiScaleDialog(
     currentScale: Float,
     onApply: (Float) -> Unit,
     onDismiss: () -> Unit
@@ -60,8 +59,8 @@ fun UiScaleDialog(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = Defaults.ContentPadding),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
+                .padding(vertical = Defaults.SpaceLarge),
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)
         ) {
             InfoStatBox(
                 value = "${selectedScale.toUiScalePercent()}%",
@@ -70,7 +69,7 @@ fun UiScaleDialog(
                 valueColor = dialogTextColor()
             )
 
-            Column(verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)) {
+            Column(verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)) {
                 ScaleSliderRow(
                     value = selectedScale,
                     // Snapped here rather than on read, so the handle rests on the stops the scale has
@@ -87,12 +86,6 @@ fun UiScaleDialog(
 
             // Drawn at the picked scale relative to the one the dialog itself already uses
             UiScalePreview(relativeScale = selectedScale / appliedScale)
-
-            Notice(
-                text = stringResource(R.string.settings_appearance_ui_scale_description),
-                tone = SemanticTone.Neutral,
-                icon = Icons.Outlined.Info
-            )
         }
     }
 }

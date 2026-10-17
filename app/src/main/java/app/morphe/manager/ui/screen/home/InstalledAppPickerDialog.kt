@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.home
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -15,6 +14,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.InstalledAppPickerItem
@@ -26,7 +27,7 @@ private enum class AppFilter { All, UserOnly, SystemOnly }
  * User picks an app; its APK is extracted and sent through the patch pipeline.
  */
 @Composable
-fun InstalledAppPickerDialog(
+fun DialogHostScope.InstalledAppPickerDialog(
     items: List<InstalledAppPickerItem>,
     isLoading: Boolean,
     onDismiss: () -> Unit,
@@ -51,14 +52,60 @@ fun InstalledAppPickerDialog(
                 }
             }
     }
-    AppDialog(
+    // Picked from a menu as every list's filter is, in the order the filters narrow the list
+    val filterOptions = listOf(
+        SortModeOption(AppFilter.All, stringResource(R.string.home_category_all_apps)),
+        SortModeOption(AppFilter.UserOnly, stringResource(R.string.home_installed_app_picker_filter_user)),
+        SortModeOption(AppFilter.SystemOnly, stringResource(R.string.home_installed_app_picker_filter_system))
+    )
+    val filterLabel = filterOptions.first { it.value == appFilter }.title
+    val filterMenuOpen = remember { mutableStateOf(false) }
+    val accent = MaterialTheme.colorScheme.primary
+    ListDialog(
         onDismissRequest = onDismiss,
         dismissOnClickOutside = true,
-        padding = DialogPadding.Compact,
-        scrollable = false,
-        contentArrangement = Arrangement.Top,
-        fillContentHeight = true,
         hideFooterWhileTyping = true,
+        header = {
+            ListDialogHeader(
+                icon = { modifier ->
+                    ListDialogHeaderIcon(icon = Icons.Outlined.Apps, color = accent, modifier = modifier)
+                },
+                title = stringResource(R.string.home_installed_app_picker_title),
+                // The filter names itself here, so switching it says what the list now holds. A line
+                // each, as the filter's name is a phrase that would otherwise break partway
+                subtitle = listOf(
+                    pluralStringResource(R.plurals.home_category_app_count, filtered.size, filtered.size.toString()),
+                    filterLabel
+                ).joinToString("\n"),
+                subtitleLoading = isLoading,
+                search = search,
+                searchLabel = stringResource(R.string.home_search_apps),
+                searchEnabled = !isLoading,
+                accentColor = accent
+            ) {
+                // The menu hangs off the button, so it opens under the header's end
+                Box {
+                    TitleAction(
+                        icon = Icons.Outlined.FilterList,
+                        contentDescription = stringResource(R.string.filter),
+                        onClick = { filterMenuOpen.value = true },
+                        style = TitleActionStyle.Toggle,
+                        // Engaged while its menu is open, and marked once the list is off the user
+                        // apps it starts on
+                        active = filterMenuOpen.value,
+                        marked = appFilter != AppFilter.UserOnly,
+                        modifier = Modifier.semantics { stateDescription = filterLabel }
+                    )
+                    SortModeMenu(
+                        expanded = filterMenuOpen.value,
+                        onDismissRequest = { filterMenuOpen.value = false },
+                        current = appFilter,
+                        options = filterOptions,
+                        onSelect = { appFilter = it }
+                    )
+                }
+            }
+        },
         footer = {
             AppDialogOutlinedButton(
                 text = stringResource(android.R.string.cancel),
@@ -69,65 +116,11 @@ fun InstalledAppPickerDialog(
     ) {
         SearchFieldBackHandler(search)
 
-        val (filterIcon, filterLabel) = when (appFilter) {
-            AppFilter.All -> Icons.Outlined.FilterList to stringResource(R.string.home_category_all_apps)
-            AppFilter.UserOnly -> Icons.Outlined.Person to stringResource(R.string.home_installed_app_picker_filter_user)
-            AppFilter.SystemOnly -> Icons.Outlined.Android to stringResource(R.string.home_installed_app_picker_filter_system)
-        }
-        val accent = MaterialTheme.colorScheme.primary
-        ListDialogHeader(
-            icon = { modifier ->
-                ListDialogHeaderIcon(icon = Icons.Outlined.Apps, color = accent, modifier = modifier)
-            },
-            title = stringResource(R.string.home_installed_app_picker_title),
-            // The filter names itself here, so switching it says what the list now holds. A line
-            // each, as the filter's name is a phrase that would otherwise break partway
-            subtitle = listOf(
-                pluralStringResource(R.plurals.home_category_app_count, filtered.size, filtered.size.toString()),
-                filterLabel
-            ).joinToString("\n"),
-            subtitleLoading = isLoading,
-            search = search,
-            searchLabel = stringResource(R.string.home_search_apps),
-            searchEnabled = !isLoading,
-            accentColor = accent
-        ) {
-            TitleAction(
-                icon = filterIcon,
-                contentDescription = filterLabel,
-                onClick = {
-                    appFilter = when (appFilter) {
-                        AppFilter.All -> AppFilter.UserOnly
-                        AppFilter.UserOnly -> AppFilter.SystemOnly
-                        AppFilter.SystemOnly -> AppFilter.All
-                    }
-                },
-                style = TitleActionStyle.Toggle,
-                active = appFilter != AppFilter.All
-            )
-        }
-
         DialogLazyList(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing),
-            pinnedFirstRow = true,
+            verticalArrangement = Arrangement.spacedBy(CompactCardSpacing),
             userScrollEnabled = !isLoading
         ) {
-            // Kept while the field is closed, so its share of the spacing makes the gap under
-            // the header
-            stickyHeader(key = "search") {
-                AppDialogSearchHeader(
-                    visible = search.visible,
-                    value = search.query,
-                    onValueChange = { search.query = it },
-                    label = stringResource(R.string.home_search_apps),
-                    // Opaque, so rows scrolled under the gap stay hidden
-                    modifier = Modifier
-                        .background(MaterialTheme.colorScheme.background)
-                        .padding(top = Defaults.ItemSpacing)
-                )
-            }
-
             if (isLoading) {
                 items(10) { ShimmerCompactListCard(descriptionLines = 2) }
             } else {

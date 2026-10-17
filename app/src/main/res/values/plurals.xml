@@ -4,6 +4,11 @@
         <item quantity="one">%s patch</item>
         <item quantity="other">%s patches</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
+    <plurals name="library_count">
+        <item quantity="one">%s library</item>
+        <item quantity="other">%s libraries</item>
+    </plurals>
     <plurals name="option_count">
         <item quantity="one">%s patch option</item>
         <item quantity="other">%s patch options</item>
@@ -71,6 +76,14 @@
         <item quantity="one">%s app ready to patch</item>
         <item quantity="other">%s apps ready to patch</item>
     </plurals>
+    <plurals name="batch_queue_pending_count">
+        <item quantity="one">%s app queued for patching</item>
+        <item quantity="other">%s apps queued for patching</item>
+    </plurals>
+    <plurals name="home_alerts_snoozed_count">
+        <item quantity="one">%s hidden notification, tap to show it</item>
+        <item quantity="other">%s hidden notifications, tap to show them</item>
+    </plurals>
     <plurals name="repatch_available_count">
         <item quantity="one">%s app can be re-patched</item>
         <item quantity="other">%s apps can be re-patched</item>
@@ -86,10 +99,6 @@
     <plurals name="sources_management_subtitle">
         <item quantity="one">%s source installed</item>
         <item quantity="other">%s sources installed</item>
-    </plurals>
-    <plurals name="home_app_filter_active">
-        <item quantity="one">%1$s · %2$s filtered</item>
-        <item quantity="other">%1$s · %2$s filtered</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s hidden app</item>
@@ -126,6 +135,11 @@
     <plurals name="changelog_change_count">
         <item quantity="one">%s change</item>
         <item quantity="other">%s changes</item>
+    </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
+    <plurals name="sources_apps_count_with_new">
+        <item quantity="one">%1$s · %2$d new</item>
+        <item quantity="other">%1$s · %2$d new</item>
     </plurals>
     <plurals name="changelog_new_releases">
         <item quantity="one">%s new release</item>

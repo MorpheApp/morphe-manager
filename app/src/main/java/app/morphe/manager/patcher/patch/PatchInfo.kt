@@ -44,7 +44,6 @@ data class PatchInfo(
     /** Group declared by the bundle, or null when the bundle does not categorize its patches. */
     val category: String? = null
 ) {
-    @Suppress("DEPRECATION")
     constructor(patch: Patch<*>) : this(
         name = patch.name.orEmpty(),
         description = patch.description?.withoutSourceIndent(),
@@ -95,14 +94,7 @@ data class PatchInfo(
                         .takeIf { it.isNotEmpty() },
                 )
             }
-            ?.toImmutableList()
-            // Fallback to legacy API if new compatibility is not available
-            ?: patch.compatiblePackages?.map { (pkgName, versions) ->
-                CompatiblePackage(
-                    packageName = pkgName,
-                    versions = versions?.toImmutableSet()
-                )
-            }?.toImmutableList(),
+            ?.toImmutableList(),
         options = patch.options.map { (_, option) -> Option(option) }.ifEmpty { null }?.toImmutableList(),
         availabilityResolver = patch.availability,
         category = patch.category?.takeIf { it.isNotBlank() }
@@ -178,10 +170,8 @@ data class PatchInfo(
     /**
      * Returns true if [versionName] is an experimental target for [packageName].
      */
-    fun isExperimental(packageName: String, versionName: String?): Boolean {
-        if (versionName == null) return false
-        return pkgFor(packageName)?.experimentalVersions?.contains(versionName) == true
-    }
+    fun isExperimental(packageName: String, versionName: String?): Boolean =
+        versionName != null && pkgFor(packageName)?.experimentalVersions?.contains(versionName) == true
 
     /**
      * Returns the display name for [packageName] declared in the patch bundle, or null if not specified.
@@ -299,7 +289,6 @@ data class Option<T>(
     /** Bounds declared by a slider or range option. Null for every other kind. */
     val sliderBounds: SliderBounds? = null,
 ) {
-    @Suppress("DEPRECATION")
     constructor(option: PatchOption<T>) : this(
         title = option.title ?: option.key,
         key = option.key,

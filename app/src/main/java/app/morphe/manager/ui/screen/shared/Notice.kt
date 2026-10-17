@@ -26,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -116,9 +117,14 @@ fun Notice(
 
     var cutShort by remember(breakableText, maxLines) { mutableStateOf(false) }
 
+    // The icon heads the first line rather than the middle of the block, which a long message or a
+    // large font would leave out of view. Centered on that line, whatever height the font gives it
+    val firstLineHeight = with(LocalDensity.current) { textStyle.lineHeight.toDp() }
+    val iconTopInset = ((firstLineHeight - metrics.iconSize) / 2).coerceAtLeast(0.dp)
+
     Surface(
         modifier = if (isCentered) modifier.wrapContentWidth() else modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(Defaults.CompactCornerRadius),
+        shape = RoundedCornerShape(Defaults.CornerMedium),
         color = tone.container,
         border = CardBorder.tinted(tone.accent)
     ) {
@@ -133,10 +139,15 @@ fun Notice(
                 } else {
                     Arrangement.spacedBy(metrics.itemSpacing)
                 },
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.Top
             ) {
                 icon?.let {
-                    ThemedIcon(icon = it, tint = contentColor, size = metrics.iconSize)
+                    ThemedIcon(
+                        icon = it,
+                        tint = contentColor,
+                        size = metrics.iconSize,
+                        modifier = Modifier.padding(top = iconTopInset)
+                    )
                 }
                 Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                     title?.let {

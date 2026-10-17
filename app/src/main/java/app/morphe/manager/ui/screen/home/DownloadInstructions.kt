@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.home
 
-import android.widget.Toast
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
@@ -29,7 +28,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
@@ -39,6 +37,7 @@ import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.*
 import java.net.URI
+import org.koin.compose.koinInject
 
 /**
  * The site a download link leads to, and the instructions that match what it puts on screen.
@@ -232,7 +231,7 @@ private fun ApkDownloadSource.instructionSteps(
  * to hand it off. That returns false when the link could not be passed on.
  */
 @Composable
-internal fun DownloadInstructionsDialog(
+internal fun DialogHostScope.DownloadInstructionsDialog(
     appName: String,
     packageName: String?,
     downloadUrl: String?,
@@ -339,14 +338,14 @@ internal fun DownloadInstructionsDialog(
 
             // On a card of their own, as the version lists before them are, numbered down a rail
             SurfaceCard(
-                cornerRadius = Defaults.SettingsCornerRadius,
+                cornerRadius = Defaults.CornerLarge,
                 showBorder = true,
                 color = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
             ) {
                 Column(
                     modifier = Modifier.padding(
-                        horizontal = Defaults.ContentPadding,
-                        vertical = Defaults.ItemSpacing
+                        horizontal = Defaults.SpaceLarge,
+                        vertical = Defaults.SpaceMedium
                     )
                 ) {
                     steps.forEachIndexed { index, step ->
@@ -400,8 +399,8 @@ private fun SiteDownloadButton(
     downloadColor: Color,
     isApkBundle: Boolean
 ) {
-    val context = LocalContext.current
-    val toasts = listOf(
+    val messages = koinInject<UserMessages>()
+    val nudges = listOf(
         stringResource(R.string.home_download_instructions_download_button_toast),
         stringResource(R.string.home_download_instructions_download_button_toast_2),
         stringResource(R.string.home_download_instructions_download_button_toast_3),
@@ -412,10 +411,7 @@ private fun SiteDownloadButton(
     var clickCount by remember { mutableIntStateOf(0) }
     val onClick = {
         clickCount++
-        context.toast(
-            string = toasts.getOrElse(clickCount - 1) { toasts.last() },
-            duration = Toast.LENGTH_LONG
-        )
+        messages.show(nudges.getOrElse(clickCount - 1) { nudges.last() }, long = true)
     }
 
     when (button) {
@@ -430,11 +426,11 @@ private fun SiteDownloadButton(
                 color = buttonColor
             ) {
                 Column(
-                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                    modifier = Modifier.padding(horizontal = Defaults.SpaceMedium, vertical = 10.dp),
                     verticalArrangement = Arrangement.spacedBy(2.dp)
                 ) {
                     Row(
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
@@ -519,7 +515,7 @@ private fun InstructionStep(
 
     Row(
         modifier = Modifier.height(IntrinsicSize.Min),
-        horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
+        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
     ) {
         Column(
             modifier = Modifier.fillMaxHeight(),
@@ -544,8 +540,8 @@ private fun InstructionStep(
             modifier = Modifier
                 .weight(1f)
                 // Past the last step there is no rail to leave room for
-                .padding(top = 3.dp, bottom = if (isLast) 0.dp else Defaults.ContentPadding),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall),
+                .padding(top = Defaults.SpaceExtraSmall, bottom = if (isLast) 0.dp else Defaults.SpaceLarge),
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
             content = content
         )
     }

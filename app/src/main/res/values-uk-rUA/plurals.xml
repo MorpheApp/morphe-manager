@@ -105,6 +105,18 @@
         <item quantity="many">%s застосунків готові до патчингу</item>
         <item quantity="other">%s застосунків готові до патчингу</item>
     </plurals>
+    <plurals name="batch_queue_pending_count">
+        <item quantity="one">%s застосунок у черзі на патчинг</item>
+        <item quantity="few">%s застосунки в черзі на патчинг</item>
+        <item quantity="many">%s застосунків у черзі на патчинг</item>
+        <item quantity="other">%s застосунків у черзі на патчинг</item>
+    </plurals>
+    <plurals name="home_alerts_snoozed_count">
+        <item quantity="one">%s приховане сповіщення, натисніть, щоб показати його</item>
+        <item quantity="few">%s приховані сповіщення, натисніть, щоб показати їх</item>
+        <item quantity="many">%s прихованих сповіщень, натисніть, щоб показати їх</item>
+        <item quantity="other">%s прихованих сповіщень, натисніть, щоб показати їх</item>
+    </plurals>
     <plurals name="repatch_available_count">
         <item quantity="one">%s застосунок можна перепатчити</item>
         <item quantity="few">%s застосунки можна перепатчити</item>
@@ -128,12 +140,6 @@
         <item quantity="few">%s джерела встановлено</item>
         <item quantity="many">%s джерел встановлено</item>
         <item quantity="other">%s джерел встановлено</item>
-    </plurals>
-    <plurals name="home_app_filter_active">
-        <item quantity="one">%1$s · %2$s відфільтровано</item>
-        <item quantity="few">%1$s · %2$s відфільтровано</item>
-        <item quantity="many">%1$s · %2$s відфільтровано</item>
-        <item quantity="other">%1$s · %2$s відфільтровано</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s прихований застосунок</item>
@@ -188,6 +194,13 @@
         <item quantity="few">%s зміни</item>
         <item quantity="many">%s змін</item>
         <item quantity="other">%s змін</item>
+    </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
+    <plurals name="sources_apps_count_with_new">
+        <item quantity="one">%1$s · %2$d новий</item>
+        <item quantity="few">%1$s · %2$d нових</item>
+        <item quantity="many">%1$s · %2$d нових</item>
+        <item quantity="other">%1$s · %2$d нових</item>
     </plurals>
     <plurals name="changelog_new_releases">
         <item quantity="one">%s новий реліз</item>

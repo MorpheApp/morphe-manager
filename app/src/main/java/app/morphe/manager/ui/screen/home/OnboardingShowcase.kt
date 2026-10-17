@@ -12,6 +12,8 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
@@ -38,14 +40,16 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.ui.screen.shared.ActionPillButton
-import app.morphe.manager.ui.screen.shared.ActionPillColors
+import app.morphe.manager.ui.screen.shared.AppDialogButtonRow
 import app.morphe.manager.ui.screen.shared.Animations
 import app.morphe.manager.ui.screen.shared.CardBorder
 import app.morphe.manager.ui.screen.shared.Defaults
+import app.morphe.manager.ui.screen.shared.MainPage
 import app.morphe.manager.ui.screen.shared.PanelHeader
 import app.morphe.manager.ui.screen.shared.PanelSubtitle
 import app.morphe.manager.ui.screen.shared.PanelTitle
+import app.morphe.manager.ui.screen.shared.ProvideBringIntoViewInsets
+import app.morphe.manager.ui.screen.shared.glassFill
 import app.morphe.manager.ui.screen.shared.TitleAction
 import app.morphe.manager.ui.screen.shared.TitleActionStyle
 import app.morphe.manager.ui.theme.ThemeTraitsDefaults
@@ -60,38 +64,45 @@ data class StepDef(
     val onShow: (() -> Unit)? = null
 )
 
-/** Holds the window-space bounds for each home-screen spotlight target. */
-class OnboardingState {
-    var sourcesButtonBounds by mutableStateOf<Rect?>(null)
-    var firstAppCardBounds by mutableStateOf<Rect?>(null)
-    var settingsButtonBounds by mutableStateOf<Rect?>(null)
-    var swipeActive by mutableStateOf(false)
+/** Rows inside the pages the tour points at, each marked with [tourTarget]. */
+enum class TourTarget {
+    SOURCE_PATCHES, SOURCE_VERSION, SOURCE_PRERELEASE,
+    EXPERT_MODE, INSTALLER, FILE_PICKER, APPEARANCE
 }
 
-/** Holds window-space bounds and nav callbacks for Settings-screen spotlight targets. */
-class GlobalOnboardingState {
-    // Sources sheet
-    var sourcesPatchesBounds by mutableStateOf<Rect?>(null)
-    var sourcesVersionBounds by mutableStateOf<Rect?>(null)
-    var sourcesPrereleaseBounds by mutableStateOf<Rect?>(null)
-    var sheetOnboardingActive by mutableStateOf(false)
-    // Settings screen
-    var appearanceTabBounds by mutableStateOf<Rect?>(null)
-    var themeSelectorBounds by mutableStateOf<Rect?>(null)
-    var expertModeBounds by mutableStateOf<Rect?>(null)
-    var systemTabBounds by mutableStateOf<Rect?>(null)
-    var installerSectionBounds by mutableStateOf<Rect?>(null)
-    var processRuntimeBounds by mutableStateOf<Rect?>(null)
-    var filePickerBounds by mutableStateOf<Rect?>(null)
-    var onNavigateToAppearanceTab: (() -> Unit)? = null
-    var onNavigateToSystemTab: (() -> Unit)? = null
-    var onScrollToThemeSelector: (() -> Unit)? = null
-    var onScrollToInstaller: (() -> Unit)? = null
-    var onScrollToProcessRuntime: (() -> Unit)? = null
-    var onScrollToFilePicker: (() -> Unit)? = null
-    var onScrollToFirstSource: (() -> Unit)? = null
-    var onScrollToExpertMode: (() -> Unit)? = null
-    var onScrollToPrerelease: (() -> Unit)? = null
+/**
+ * Where the tour's spotlight targets sit in the window, and what it turns the main screen to.
+ * Handed to the screen only while the tour runs.
+ */
+class OnboardingState {
+    var firstAppCardBounds by mutableStateOf<Rect?>(null)
+    var swipeActive by mutableStateOf(false)
+    val navigationBounds = mutableStateMapOf<MainPage, Rect>()
+    val targetBounds = mutableStateMapOf<TourTarget, Rect>()
+    /** The page the current step is on, which the main screen turns to. */
+    var page by mutableStateOf<MainPage?>(null)
+    /** The page the main screen has finished turning to, which is [page] once it stands there. */
+    var pageShown by mutableStateOf<MainPage?>(null)
+    /** The row the current step is about, which its page scrolls into view. */
+    var target by mutableStateOf<TourTarget?>(null)
+}
+
+/**
+ * Marks the row as [target] of the running [tour]: reports where it sits, and scrolls it into view
+ * once the tour turns to it, clear of whatever [ProvideBringIntoViewInsets] keeps it from. Does
+ * nothing while no tour runs.
+ */
+@Composable
+fun Modifier.tourTarget(target: TourTarget, tour: OnboardingState?): Modifier {
+    tour ?: return this
+    val requester = remember { BringIntoViewRequester() }
+    // Once its page stands, since the page turning to it would cut the scroll short
+    val due = tour.target == target && tour.pageShown == tour.page
+    LaunchedEffect(due) {
+        if (due) requester.bringIntoView()
+    }
+    return bringIntoViewRequester(requester)
+        .onGloballyPositioned { tour.targetBounds[target] = it.boundsInWindow() }
 }
 
 /**
@@ -102,26 +113,16 @@ class GlobalOnboardingState {
 fun OnboardingShowcase(
     steps: List<StepDef>,
     onComplete: () -> Unit,
-    onSkip: () -> Unit = onComplete,
-    stepOffset: Int = 0,
-    totalStepsOverride: Int? = null,
-    initialStep: Int = 0,
-    onPhaseBack: (() -> Unit)? = null
+    onSkip: () -> Unit = onComplete
 ) {
     if (steps.isEmpty()) return
-    var step by remember { mutableIntStateOf(initialStep.coerceIn(0, steps.size - 1)) }
+    var step by remember { mutableIntStateOf(0) }
 
     BackHandler {
-        when {
-            step > 0 -> step -= 1
-            onPhaseBack != null -> onPhaseBack()
-            else -> onSkip()
-        }
+        if (step > 0) step -= 1 else onSkip()
     }
     val stepDef = steps[step]
     val bounds = stepDef.getBounds()
-    val displayStep = stepOffset + step + 1
-    val displayTotal = totalStepsOverride ?: steps.size
 
     LaunchedEffect(step) { steps[step].onShow?.invoke() }
 
@@ -218,7 +219,7 @@ fun OnboardingShowcase(
                         color = Color.Black,
                         topLeft = Offset(cx - hw, cy - hh),
                         size = Size(hw * 2, hh * 2),
-                        cornerRadius = CornerRadius(20.dp.toPx()),
+                        cornerRadius = CornerRadius(Defaults.CornerLargeIncreased.toPx()),
                         blendMode = BlendMode.Clear
                     )
                 }
@@ -227,14 +228,10 @@ fun OnboardingShowcase(
             OnboardingCard(
                 title = stringResource(stepDef.titleRes),
                 description = stringResource(stepDef.descRes),
-                step = displayStep,
-                totalSteps = displayTotal,
+                step = step + 1,
+                totalSteps = steps.size,
                 onNext = { if (step < steps.size - 1) step++ else onComplete() },
-                onPrevious = when {
-                    step > 0 -> { { step -= 1 } }
-                    onPhaseBack != null -> onPhaseBack
-                    else -> null
-                },
+                onPrevious = if (step > 0) { { step -= 1 } } else null,
                 onSkip = onSkip,
                 modifier = Modifier
                     .align(Alignment.TopStart)
@@ -257,15 +254,21 @@ private fun OnboardingCard(
     onSkip: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    // Drawn and headed like a selection panel, the other surface that floats over the home screen
+    // Drawn and headed like a selection panel, the other surface that floats over the home screen,
+    // blurring what it covers as one does
+    val surface = ThemeTraitsDefaults.surfaceColor(MaterialTheme.colorScheme.background)
+    val shape = RoundedCornerShape(Defaults.CornerLargeIncreased)
     Surface(
-        modifier = modifier.widthIn(max = 380.dp),
-        shape = RoundedCornerShape(20.dp),
-        color = ThemeTraitsDefaults.surfaceColor(MaterialTheme.colorScheme.background),
-        shadowElevation = 8.dp,
+        modifier = modifier
+            .widthIn(max = 380.dp)
+            .glassFill(surface, shape),
+        shape = shape,
+        color = Color.Transparent,
+        contentColor = contentColorFor(surface),
+        // No shadow, which would show through the glass as one cast under a solid card does not
         border = CardBorder.neutral
     ) {
-        Column(modifier = Modifier.padding(bottom = Defaults.ContentPadding)) {
+        Column(modifier = Modifier.padding(bottom = Defaults.SpaceLarge)) {
             PanelHeader(
                 title = {
                     Column {
@@ -285,38 +288,20 @@ private fun OnboardingCard(
                 text = description,
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(horizontal = Defaults.ContentPadding)
+                modifier = Modifier.padding(horizontal = Defaults.SpaceLarge)
             )
-            Spacer(Modifier.height(Defaults.ContentPadding))
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = Defaults.ContentPadding),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                if (onPrevious != null) {
-                    val back = stringResource(R.string.back)
-                    ActionPillButton(
-                        onClick = onPrevious,
-                        icon = Icons.AutoMirrored.Outlined.ArrowBack,
-                        contentDescription = back,
-                        label = back,
-                        large = true,
-                        modifier = Modifier.weight(1f)
-                    )
-                }
-                val isLast = step == totalSteps
-                val next = stringResource(if (isLast) R.string.done else R.string.next)
-                ActionPillButton(
-                    onClick = onNext,
-                    icon = if (isLast) Icons.Outlined.Check else Icons.AutoMirrored.Outlined.ArrowForward,
-                    contentDescription = next,
-                    label = next,
-                    large = true,
-                    colors = ActionPillColors.primary(),
-                    modifier = Modifier.weight(1f)
-                )
-            }
+            Spacer(Modifier.height(Defaults.SpaceLarge))
+            // Footed as the dialogs are, so the card reads as one of them
+            val isLast = step == totalSteps
+            AppDialogButtonRow(
+                primaryText = stringResource(if (isLast) R.string.done else R.string.next),
+                onPrimaryClick = onNext,
+                primaryIcon = if (isLast) Icons.Outlined.Check else Icons.AutoMirrored.Outlined.ArrowForward,
+                secondaryText = onPrevious?.let { stringResource(R.string.back) },
+                onSecondaryClick = onPrevious,
+                secondaryIcon = Icons.AutoMirrored.Outlined.ArrowBack,
+                modifier = Modifier.padding(horizontal = Defaults.SpaceLarge)
+            )
         }
     }
 }

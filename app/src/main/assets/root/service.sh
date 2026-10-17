@@ -18,7 +18,12 @@ base_dir="$module_dir"
 mkdir -p "$module_dir"
 
 log="$module_dir/log.txt"
-: > "$log"
+
+# Morphe runs the script with "watch" after it mounts the app itself and with "stop" when it unmounts
+# it. Neither touches the boot's log.
+if [ -z "$1" ]; then
+  : > "$log"
+fi
 
 log_msg() {
   echo "$*" >> "$log"
@@ -37,11 +42,6 @@ not_mounted() {
 }
 
 base_path="$base_dir/$package_name.apk"
-
-# Wait for the system to fully boot before proceeding.
-until [ "$(getprop sys.boot_completed)" = 1 ]; do sleep 3; done
-
-mkdir -p "$base_dir"
 
 resolve_apk_from_path() {
   path="$1"
@@ -69,29 +69,205 @@ mount_in_zygote_namespaces() {
   done
 }
 
-# A namespace can hold the patched APK more than once, so each one is unmounted until
-# the stock path no longer appears in its mount table.
+# Runs the command after the mount table while it lists the stock path, one layer per run. Bounded,
+# as a root that hides mounts can report each umount as done and hold the script there forever.
+lift_layers() {
+  table="$1"
+  shift
+  for _ in 1 2 3 4 5 6 7 8 9 10; do
+    grep -qF " $stock_path " "$table" && "$@" 2>/dev/null || return 0
+  done
+}
+
 unmount_from_zygote_namespaces() {
   for zpid in $(pidof zygote64) $(pidof zygote); do
-    while grep -qF " $stock_path " "/proc/$zpid/mountinfo" &&
-      nsenter -t "$zpid" -m -- umount -l "$stock_path" 2>/dev/null; do :; done
+    lift_layers "/proc/$zpid/mountinfo" nsenter -t "$zpid" -m -- umount -l "$stock_path"
   done
 }
 
 # Processes started before the mount, such as System UI, keep what their namespace held, and an
 # APK another root install left there makes them look up the app's resources in another version.
 # A previous patched APK counts too, it shows up marked deleted once a new one replaced it.
+# Hundreds of processes share a few namespaces, and forking for each of them takes seconds.
+# The candidates are found in single passes instead, and one per namespace is entered.
 replace_other_mounts() {
-  for mountinfo in $(grep -lF " $stock_path " /proc/[0-9]*/mountinfo 2>/dev/null); do
-    pid="$(echo "$mountinfo" | cut -d/ -f3)"
-    sources="$(grep -F " $stock_path " "$mountinfo" | cut -d' ' -f4 | grep -vxF "${base_path#/data}")" ||
+  mount_source="${base_path#/data}"
+  for pid in $(grep -F " $stock_path " /proc/[0-9]*/mountinfo 2>/dev/null |
+    grep -vF " $mount_source $stock_path " |
+    sed 's|/mountinfo:.*|/ns/mnt|' | sort -u | xargs -r stat -Lc '%i %n' 2>/dev/null |
+    sort -u -k1,1 | cut -d/ -f3); do
+    mountinfo="/proc/$pid/mountinfo"
+    sources="$(grep -F " $stock_path " "$mountinfo" | cut -d' ' -f4 | grep -vxF "$mount_source")" ||
       continue
     log_msg "Replacing $(echo $sources) in namespace of pid: $pid"
-    while grep -qF " $stock_path " "$mountinfo" &&
-      nsenter -t "$pid" -m -- umount -l "$stock_path" 2>/dev/null; do :; done
+    lift_layers "$mountinfo" nsenter -t "$pid" -m -- umount -l "$stock_path"
     nsenter -t "$pid" -m -- mount -o bind "$base_path" "$stock_path" 2>/dev/null
   done
 }
+
+# Wait up to 180 seconds for PackageManager to report the stock APK path and version.
+# This is necessary because the app may not be registered immediately after boot.
+find_stock() {
+  waited=0
+  max_wait=180
+  stock_path=""
+  stock_versions=""
+  while [ "$waited" -lt "$max_wait" ]; do
+    # Prefer the path under /data/app/ (user-installed); fall back to any base APK path;
+    # last resort: use the lower-level `cmd package` if `pm` returns nothing.
+    stock_path_data="$(pm path "$package_name" 2>/dev/null | grep base | grep /data/app/ | head -n 1 | sed 's/package://g')"
+    stock_path_fallback="$(pm path "$package_name" 2>/dev/null | grep base | head -n 1 | sed 's/package://g')"
+    if [ -z "$stock_path_data" ] && [ -z "$stock_path_fallback" ]; then
+      stock_path_cmd="$(cmd package path "$package_name" 2>/dev/null | grep base | head -n 1 | sed 's/package://g')"
+    else
+      stock_path_cmd=""
+    fi
+
+    # Extract all versionName entries for this package from dumpsys, stopping before
+    # any hidden system package section to avoid picking up OEM preinstall metadata.
+    package_dump="$(dumpsys package "$package_name" 2>/dev/null)"
+    # The hidden section repeats the package header, so it ends the read rather than pausing it.
+    stock_versions="$(echo "$package_dump" | awk -v pkg="$package_name" '
+      $0 ~ ("Package \\[" pkg "\\]") { in_pkg = 1 }
+      $0 ~ /Hidden system package/ { exit }
+      in_pkg && /versionName=/ { sub(/.*versionName=/, ""); print }
+    ' | tr -d '\r')"
+    stock_path_dumpsys="$(echo "$package_dump" | awk -v pkg="$package_name" '
+      $0 ~ ("Package \\[" pkg "\\]") { in_pkg = 1 }
+      $0 ~ /Hidden system package/ { exit }
+      in_pkg && /resourcePath=/ { sub(/.*resourcePath=/, ""); print; exit }
+      in_pkg && /codePath=/ { sub(/.*codePath=/, ""); print; exit }
+    ' | tr -d '\r')"
+
+    stock_path="$stock_path_data"
+    if [ -z "$stock_path" ]; then
+      stock_path="$stock_path_fallback"
+    fi
+    if [ -z "$stock_path" ]; then
+      stock_path="$stock_path_cmd"
+    fi
+    if [ -z "$stock_path" ]; then
+      stock_path="$(resolve_apk_from_path "$stock_path_dumpsys")"
+    fi
+
+    # If the stock version is already known to be wrong, there is no reason to
+    # keep retrying path lookups. The module cannot mount safely in this state.
+    if [ -n "$stock_versions" ] && ! echo "$stock_versions" | grep -Fxq "$version"; then
+      break
+    fi
+
+    # If dumpsys returned versions but pm returned no path, retry path resolution once more.
+    if [ -n "$stock_versions" ] && [ -z "$stock_path" ]; then
+      stock_path="$(pm path "$package_name" 2>/dev/null | grep base | head -n 1 | sed 's/package://g')"
+      if [ -z "$stock_path" ]; then
+        stock_path="$(cmd package path "$package_name" 2>/dev/null | grep base | head -n 1 | sed 's/package://g')"
+      fi
+      if [ -z "$stock_path" ]; then
+        stock_path="$(resolve_apk_from_path "$stock_path_dumpsys")"
+      fi
+    fi
+
+    if [ -n "$stock_path" ] && [ -f "$stock_path" ] && [ -n "$stock_versions" ]; then
+      break
+    fi
+    waited=$((waited + 1))
+    sleep 1
+  done
+}
+
+mount_patched() {
+  log_msg "base_path: $base_path"
+  log_msg "stock_path: $stock_path"
+  log_msg "base_version: $version"
+  log_msg "stock_versions: $(echo "$stock_versions" | tr '\n' ' ' | xargs)"
+
+  # Abort if the patched APK version doesn't match the installed stock version.
+  # Mounting a mismatched APK would cause a signature or version mismatch crash.
+  if [ -n "$stock_versions" ] && ! echo "$stock_versions" | grep -Fxq "$version"; then
+    # Usually a store update, which Morphe can restore. Root reaches the unexported receiver,
+    # -f 0x20 a Morphe not started since boot, and & keeps am from holding up the status.
+    am broadcast -f 0x20 -a app.morphe.manager.action.MOUNT_REPLACED \
+      -n "$manager_package/app.morphe.manager.receiver.MountReplacedReceiver" \
+      --es package "$package_name" >/dev/null 2>&1 &
+    not_mounted "v$stock_versions is installed but the patch is for v$version. Open Morphe to restore it"
+  fi
+
+  if [ -z "$stock_path" ] || [ -z "$stock_versions" ]; then
+    not_mounted "the app was not found"
+  fi
+
+  if [ ! -f "$base_path" ]; then
+    not_mounted "the patched APK is missing"
+  fi
+
+  # Set the correct SELinux context and bind-mount the patched APK over the stock one.
+  if ! chcon u:object_r:apk_data_file:s0 "$base_path" 2>> "$log"; then
+    log_msg "Failed to set SELinux context"
+  fi
+  unmount_from_zygote_namespaces
+  lift_layers /proc/self/mountinfo umount -l "$stock_path"
+  if mount -o bind "$base_path" "$stock_path" 2>> "$log"; then
+    log_msg "Mounted in root namespace"
+  else
+    not_mounted "mounting failed, see log.txt"
+  fi
+  mount_in_zygote_namespaces
+  replace_other_mounts
+  set_status "Mounted the patched v$version at boot"
+}
+
+# Stops the watchers of this module that are already running: the shell running this script, and
+# the reader and logcat under it. This script's own subshells are left alone.
+stop_other_watchers() {
+  for cmdline in $(grep -lF "$module_dir/service.sh" /proc/[0-9]*/cmdline 2>/dev/null); do
+    pid="${cmdline#/proc/}"
+    pid="${pid%/cmdline}"
+    [ "$pid" = "$$" ] && continue
+    [ "$(cut -d' ' -f4 "/proc/$pid/stat" 2>/dev/null)" = "$$" ] && continue
+    pkill -P "$pid" 2>/dev/null
+    kill "$pid" 2>/dev/null
+  done
+}
+
+# A framework restart without a reboot keeps the patched APK mounted, and the new PackageManager
+# deletes the app for not matching its stock certificates. Zygote starts seconds before that scan,
+# so the APK is lifted there and mounted again once the app is reported. The event log keeps the
+# watcher asleep in between.
+watch_framework_restarts() {
+  stop_other_watchers
+  logcat -b events -v raw -s boot_progress_start -T "$(date '+%m-%d %H:%M:%S.000')" 2>/dev/null | {
+    # logcat only notices the reader is gone on the next event, so it is stopped with it
+    trap 'pkill -P $$ -x logcat' EXIT
+    while read -r line; do
+      case "$line" in
+        -*) continue ;;
+      esac
+      if [ ! -f "$base_path" ] || [ -f "$module_dir/disable" ] || [ -f "$module_dir/remove" ]; then
+        exit 0
+      fi
+      lift_layers /proc/self/mountinfo umount -l "$stock_path"
+      log_msg "Framework restarted, lifted the patched APK before the package scan"
+      find_stock
+      mount_patched
+      am force-stop "$package_name"
+    done
+  }
+}
+
+case "$1" in
+  watch)
+    find_stock
+    watch_framework_restarts
+    exit 0
+    ;;
+  stop)
+    stop_other_watchers
+    exit 0
+    ;;
+esac
+
+# Wait for the system to fully boot before proceeding.
+until [ "$(getprop sys.boot_completed)" = 1 ]; do sleep 3; done
 
 # Unmount any existing installation to prevent multiple mounts.
 # Matches the target field (2nd column) of /proc/mounts so unrelated mounts that happen
@@ -101,109 +277,6 @@ awk -v pkg="$package_name" '$2 ~ ("/" pkg "[/-]") && $2 ~ /\.apk$/ { print $2 }'
   | sort -u \
   | xargs -r umount -l 2>/dev/null
 
-# Wait up to 180 seconds for PackageManager to report the stock APK path and version.
-# This is necessary because the app may not be registered immediately after boot.
-waited=0
-max_wait=180
-stock_path=""
-stock_versions=""
-while [ "$waited" -lt "$max_wait" ]; do
-  # Prefer the path under /data/app/ (user-installed); fall back to any base APK path;
-  # last resort: use the lower-level `cmd package` if `pm` returns nothing.
-  stock_path_data="$(pm path "$package_name" 2>/dev/null | grep base | grep /data/app/ | head -n 1 | sed 's/package://g')"
-  stock_path_fallback="$(pm path "$package_name" 2>/dev/null | grep base | head -n 1 | sed 's/package://g')"
-  if [ -z "$stock_path_data" ] && [ -z "$stock_path_fallback" ]; then
-    stock_path_cmd="$(cmd package path "$package_name" 2>/dev/null | grep base | head -n 1 | sed 's/package://g')"
-  else
-    stock_path_cmd=""
-  fi
-
-  # Extract all versionName entries for this package from dumpsys, stopping before
-  # any hidden system package section to avoid picking up OEM preinstall metadata.
-  package_dump="$(dumpsys package "$package_name" 2>/dev/null)"
-  # The hidden section repeats the package header, so it ends the read rather than pausing it.
-  stock_versions="$(echo "$package_dump" | awk -v pkg="$package_name" '
-    $0 ~ ("Package \\[" pkg "\\]") { in_pkg = 1 }
-    $0 ~ /Hidden system package/ { exit }
-    in_pkg && /versionName=/ { sub(/.*versionName=/, ""); print }
-  ' | tr -d '\r')"
-  stock_path_dumpsys="$(echo "$package_dump" | awk -v pkg="$package_name" '
-    $0 ~ ("Package \\[" pkg "\\]") { in_pkg = 1 }
-    $0 ~ /Hidden system package/ { exit }
-    in_pkg && /resourcePath=/ { sub(/.*resourcePath=/, ""); print; exit }
-    in_pkg && /codePath=/ { sub(/.*codePath=/, ""); print; exit }
-  ' | tr -d '\r')"
-
-  stock_path="$stock_path_data"
-  if [ -z "$stock_path" ]; then
-    stock_path="$stock_path_fallback"
-  fi
-  if [ -z "$stock_path" ]; then
-    stock_path="$stock_path_cmd"
-  fi
-  if [ -z "$stock_path" ]; then
-    stock_path="$(resolve_apk_from_path "$stock_path_dumpsys")"
-  fi
-
-  # If the stock version is already known to be wrong, there is no reason to
-  # keep retrying path lookups. The module cannot mount safely in this state.
-  if [ -n "$stock_versions" ] && ! echo "$stock_versions" | grep -Fxq "$version"; then
-    break
-  fi
-
-  # If dumpsys returned versions but pm returned no path, retry path resolution once more.
-  if [ -n "$stock_versions" ] && [ -z "$stock_path" ]; then
-    stock_path="$(pm path "$package_name" 2>/dev/null | grep base | head -n 1 | sed 's/package://g')"
-    if [ -z "$stock_path" ]; then
-      stock_path="$(cmd package path "$package_name" 2>/dev/null | grep base | head -n 1 | sed 's/package://g')"
-    fi
-    if [ -z "$stock_path" ]; then
-      stock_path="$(resolve_apk_from_path "$stock_path_dumpsys")"
-    fi
-  fi
-
-  if [ -n "$stock_path" ] && [ -f "$stock_path" ] && [ -n "$stock_versions" ]; then
-    break
-  fi
-  waited=$((waited + 1))
-  sleep 1
-done
-
-log_msg "base_path: $base_path"
-log_msg "stock_path: $stock_path"
-log_msg "base_version: $version"
-log_msg "stock_versions: $(echo "$stock_versions" | tr '\n' ' ' | xargs)"
-
-# Abort if the patched APK version doesn't match the installed stock version.
-# Mounting a mismatched APK would cause a signature or version mismatch crash.
-if [ -n "$stock_versions" ] && ! echo "$stock_versions" | grep -Fxq "$version"; then
-  # Usually a store update, which Morphe can restore. Root reaches the unexported receiver,
-  # -f 0x20 a Morphe not started since boot, and & keeps am from holding up the status.
-  am broadcast -f 0x20 -a app.morphe.manager.action.MOUNT_REPLACED \
-    -n "$manager_package/app.morphe.manager.receiver.MountReplacedReceiver" \
-    --es package "$package_name" >/dev/null 2>&1 &
-  not_mounted "v$stock_versions is installed but the patch is for v$version. Open Morphe to restore it"
-fi
-
-if [ -z "$stock_path" ] || [ -z "$stock_versions" ]; then
-  not_mounted "the app was not found"
-fi
-
-if [ ! -f "$base_path" ]; then
-  not_mounted "the patched APK is missing"
-fi
-
-# Set the correct SELinux context and bind-mount the patched APK over the stock one.
-if ! chcon u:object_r:apk_data_file:s0 "$base_path" 2>> "$log"; then
-  log_msg "Failed to set SELinux context"
-fi
-unmount_from_zygote_namespaces
-while grep -qF " $stock_path " /proc/self/mountinfo && umount -l "$stock_path" 2>/dev/null; do :; done
-if mount -o bind "$base_path" "$stock_path" 2>> "$log"; then
-  log_msg "Mounted in root namespace"
-else
-  not_mounted "mounting failed, see log.txt"
-fi
-mount_in_zygote_namespaces
-replace_other_mounts
-set_status "Mounted the patched v$version at boot"
+find_stock
+mount_patched
+watch_framework_restarts

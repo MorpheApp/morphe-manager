@@ -12,7 +12,6 @@ package app.morphe.manager.ui.screen.shared
 
 import android.content.pm.PackageInfo
 import androidx.compose.foundation.background
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -144,7 +143,7 @@ private fun SimpleAppLabel(
                 // A pill stands in for the text until the real label arrives
                 if (label == null) {
                     Modifier
-                        .background(MaterialTheme.colorScheme.inverseOnSurface, RoundedCornerShape(100))
+                        .background(MaterialTheme.colorScheme.inverseOnSurface, Defaults.PillShape)
                         .drawWithContent {}
                 } else {
                     Modifier

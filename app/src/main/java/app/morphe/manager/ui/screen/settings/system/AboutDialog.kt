@@ -25,6 +25,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -56,35 +57,20 @@ private const val PILL_TAP_COUNT = 7
 private val PILL_TAP_TIMEOUT = 1500.milliseconds
 
 /**
- * About dialog.
- * Shows app icon, version, description, social links, and credits button.
+ * About dialog: the manager's icon, version, description and social links, with its credits, and
+ * the licenses past them, opening in place of it.
  */
 @Composable
-fun AboutDialog(
+fun DialogHostScope.AboutDialog(
     onDismiss: () -> Unit,
     themeViewModel: ThemeSettingsViewModel = koinViewModel()
 ) {
-    val context = LocalContext.current
-    val uriHandler = LocalUriHandler.current
-    val view = LocalView.current
-
-    val showCreditsDialog = remember { mutableStateOf(false) }
+    // The credits, and the licenses past them, open in place of the about page in the same dialog
+    var page by rememberSaveable { mutableStateOf(AboutPage.About) }
     val showPillDialog = remember { mutableStateOf(false) }
     val matrixUnlocked by themeViewModel.prefs.matrixBackgroundUnlocked.getAsState()
-    var versionTaps by remember { mutableIntStateOf(0) }
 
-    LaunchedEffect(versionTaps) {
-        if (versionTaps == 0) return@LaunchedEffect
-
-        delay(PILL_TAP_TIMEOUT)
-        versionTaps = 0
-    }
-
-    if (showCreditsDialog.value) {
-        CreditsDialog(onDismiss = { showCreditsDialog.value = false })
-    }
-
-    if (showPillDialog.value) {
+    DialogHost(visible = showPillDialog.value) {
         RedPillDialog(
             alreadyUnlocked = matrixUnlocked,
             onRedPill = { themeViewModel.unlockMatrixBackground() },
@@ -94,6 +80,44 @@ fun AboutDialog(
         )
     }
 
+    DialogPages(page = page, key = { it }, modifier = Modifier.fillMaxSize()) { shown ->
+        when (shown) {
+            AboutPage.About -> AboutOverview(
+                onDismiss = onDismiss,
+                onOpenCredits = { page = AboutPage.Credits },
+                onOpenPill = { showPillDialog.value = true }
+            )
+            AboutPage.Credits -> CreditsPage(
+                onBack = { page = AboutPage.About },
+                onOpenLicenses = { page = AboutPage.Licenses }
+            )
+            AboutPage.Licenses -> LicensesPage(onBack = { page = AboutPage.Credits })
+        }
+    }
+}
+
+/** The pages of the about dialog, each going back to the one before it. */
+private enum class AboutPage { About, Credits, Licenses }
+
+/** The manager itself: its icon, version, description and social links. */
+@Composable
+private fun DialogHostScope.AboutOverview(
+    onDismiss: () -> Unit,
+    onOpenCredits: () -> Unit,
+    onOpenPill: () -> Unit
+) {
+    val context = LocalContext.current
+    val uriHandler = LocalUriHandler.current
+    val view = LocalView.current
+    var versionTaps by remember { mutableIntStateOf(0) }
+
+    LaunchedEffect(versionTaps) {
+        if (versionTaps == 0) return@LaunchedEffect
+
+        delay(PILL_TAP_TIMEOUT)
+        versionTaps = 0
+    }
+
     AppDialog(
         onDismissRequest = onDismiss,
         footer = {
@@ -101,7 +125,7 @@ fun AboutDialog(
                 actions = listOf(
                     DialogAction(
                         text = stringResource(R.string.credits),
-                        onClick = { showCreditsDialog.value = true },
+                        onClick = onOpenCredits,
                         icon = Icons.Outlined.People,
                         emphasis = DialogActionEmphasis.Outlined
                     ),
@@ -120,13 +144,13 @@ fun AboutDialog(
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(24.dp)
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraLarge)
         ) {
             // App icon on a plain tile, the way the manager sets off every other object it shows
             Box(
                 modifier = Modifier
                     .size(100.dp)
-                    .background(neutralVeil(dialogTextColor()), RoundedCornerShape(24.dp)),
+                    .background(neutralVeil(dialogTextColor()), RoundedCornerShape(Defaults.CornerExtraLarge)),
                 contentAlignment = Alignment.Center
             ) {
                 val icon = rememberDrawablePainter(
@@ -139,14 +163,14 @@ fun AboutDialog(
                     contentDescription = null,
                     modifier = Modifier
                         .size(80.dp)
-                        .clip(RoundedCornerShape(20.dp))
+                        .clip(RoundedCornerShape(Defaults.CornerLargeIncreased))
                 )
             }
 
             // App Name & Version
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(4.dp)
+                verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
             ) {
                 Text(
                     text = stringResource(R.string.app_name),
@@ -159,7 +183,7 @@ fun AboutDialog(
                     style = MaterialTheme.typography.bodyMedium,
                     color = secondaryColor,
                     modifier = Modifier
-                        .clip(RoundedCornerShape(8.dp))
+                        .clip(RoundedCornerShape(Defaults.CornerSmall))
                         .clickable(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = null
@@ -169,7 +193,7 @@ fun AboutDialog(
                                 versionTaps >= PILL_TAP_COUNT -> {
                                     versionTaps = 0
                                     view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-                                    showPillDialog.value = true
+                                    onOpenPill()
                                 }
                                 // The halfway point is where the taps start answering back,
                                 // enough of a hint to keep going without naming what is coming
@@ -177,7 +201,7 @@ fun AboutDialog(
                                     view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                             }
                         }
-                        .padding(horizontal = 12.dp, vertical = 4.dp)
+                        .padding(horizontal = Defaults.SpaceMedium, vertical = Defaults.SpaceExtraSmall)
                 )
             }
 
@@ -219,11 +243,13 @@ private fun SocialIconButton(
     onClick: () -> Unit,
     textColor: Color
 ) {
+    val interactionSource = remember { MutableInteractionSource() }
     Surface(
         onClick = onClick,
         modifier = Modifier.size(52.dp),
-        shape = RoundedCornerShape(Defaults.SettingsCornerRadius),
-        color = textColor.copy(alpha = 0.1f)
+        shape = rememberPressShape(interactionSource, Defaults.PillShape),
+        color = textColor.copy(alpha = 0.1f),
+        interactionSource = interactionSource
     ) {
         Box(contentAlignment = Alignment.Center) {
             Icon(

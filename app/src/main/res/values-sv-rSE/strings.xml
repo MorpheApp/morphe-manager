@@ -22,6 +22,10 @@
     <string name="deep_link_add_source_title">Lägg till källa</string>
     <string name="deep_link_add_source_message">Vill du lägga till den här tilläggskällan i Morphe?</string>
     <string name="deep_link_add_source_warning">Lägg bara till källor du litar på</string>
+    <!-- Shown under the app a link was opened for -->
+    <string name="deep_link_add_source_only_app">Endast den här appen har lagts till. Du kan lägga till andra appar från källans applista</string>
+    <!-- Asked when the link names an app of a source that is already added -->
+    <string name="deep_link_add_source_app_back">Den här källan har redan lagts till. Vill du lägga till den här appen från den befintliga källan?</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Uppdatering för Morphe är tillgänglig</string>
     <string name="home_update_available_subtitle">Ny version är redo att installeras</string>
@@ -54,6 +58,9 @@
     <string name="home_app_filter_uninstalled_description">Appar modifierade med Morphe som inte längre finns på den här enheten</string>
     <string name="home_app_filter_clones">Kloner</string>
     <string name="home_app_filter_clones_description">Appar byggda under eget paketnamn, installerade bredvid originalet</string>
+    <string name="home_app_grouping_all_apps_description">En lista över alla appar</string>
+    <string name="home_app_grouping_sources_description">Appar under tilläggskällan som tillhandahåller dem</string>
+    <string name="home_app_grouping_custom_description">Appar i kategorier som du skapar</string>
     <string name="home_app_sort_manual_description">Tryck länge på en app och tryck sedan på knappen för att ändra ordning</string>
     <string name="home_app_sort_recommended">Rekommenderad ordning</string>
     <string name="home_app_sort_recommended_description">Installerade och fästa appar först</string>
@@ -146,7 +153,6 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Tilläggskällor</string>
     <string name="sources_search">Sök efter källor och tillägg</string>
-    <string name="sources_sort_title">Sortera tilläggskällor</string>
     <string name="sources_sort_manual">Manuell ordning</string>
     <string name="sources_sort_manual_hint">Tryck länge på en källa för att ändra ordning</string>
     <string name="sources_sort_last_updated">Senast uppdaterad</string>
@@ -158,12 +164,17 @@
     <string name="sources_management_report_issue">Rapportera ett problem</string>
     <string name="sources_management_failed_to_open_url">Det gick inte att öppna webbadressen</string>
     <string name="sources_apps">Appar</string>
-    <string name="sources_apps_description">Tryck på en app för att utesluta den från den här källan eller inkludera den igen, eller tryck länge för att välja flera. En app lämnar startskärmen när ingen källa inkluderar den</string>
+    <string name="sources_apps_description">De markerade apparna kommer från den här källan. Tryck på en app för att utesluta den eller inkludera den igen. En app tas bort från startskärmen om ingen källa inkluderar den, förutom om du har modifierat den</string>
     <string name="sources_apps_brought">Tillhandahålls av den här källan</string>
     <string name="sources_apps_left_out">Utesluts från den här källan</string>
-    <string name="sources_apps_leave_out">Uteslut</string>
-    <string name="sources_apps_leave_out_done">Utesluten</string>
     <string name="sources_apps_bring_back">Ta tillbaka</string>
+    <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
+    <string name="sources_apps_stays_patched">Behålls som modifierad</string>
+    <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
+    <string name="sources_apps_new">Nytt</string>
+    <string name="sources_apps_new_apps">Inkludera nya appar</string>
+    <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
+    <string name="sources_apps_new_apps_description">Appar som läggs till senare visas på startskärmen</string>
     <string name="sources_management_prerelease_toggle">Förhandsversioner av tillägg</string>
     <string name="sources_management_prerelease_toggle_description">Får tidig åtkomst till nya experimentella tilläggsversioner</string>
     <string name="sources_prerelease_warning_title">Aktivera förhandsversioner av tillägg?</string>
@@ -208,11 +219,10 @@
     <string name="sources_dialog_url_invalid">Webbadressen måste peka på en GitHub-/GitLab-lagringsplats eller .json-fil</string>
     <string name="sources_dialog_preinstalled">Förinstallerad</string>
     <string name="sources_dialog_community">Tillägg från communityn</string>
-    <string name="sources_dialog_choose_apps">Välj appar</string>
     <string name="sources_dialog_choose_apps_description">Välj vilka av dess appar som du vill behålla när källan har lästs in</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Tilläggskällor från tredje part</string>
-    <string name="sources_dialog_community_notice_message">"Tilläggskällor från communityn skapas och underhålls av sina egna författare. Morphe varken granskar eller verifierar tillägg från tredje part och är inte ansvarig för deras innehåll eller vad de gör på din enhet.
+    <string name="sources_dialog_community_notice_message">"Tilläggskällor från communityn skapas och underhålls av sina egna upphovspersoner. Morphe varken granskar eller verifierar tillägg från tredje part och är inte ansvarig för deras innehåll eller vad de gör på din enhet.
 
 Allt du lägger till från den här webbplatsen används på egen risk"</string>
     <string name="sources_update_success">Uppdateringen lyckades</string>
@@ -451,7 +461,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="batch_patch_state_no_patches">Inga tillägg</string>
     <string name="batch_patch_policy_install">Installera när modifieringen är klar</string>
     <string name="batch_patch_policy_install_description">Installerar alla modifierade appar direkt efter att kön är klar. Om det här alternativet är inaktiverat sparas APK-filerna till senare.</string>
-    <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
+    <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_start">Starta</string>
     <string name="batch_patch_stop_title">Stoppa gruppmodifiering?</string>
     <string name="batch_patch_stop_description">Den app som modifieras just nu och allt som fortfarande står i kön avbryts</string>
@@ -460,6 +470,10 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="batch_patch_install_failed">Installationen misslyckades</string>
     <string name="batch_patch_in_progress">Gruppmodifiering körs redan</string>
     <string name="batch_patch_nothing_outdated">Alla modifierade appar är uppdaterade</string>
+    <string name="batch_queue_add_action">Lägg till i kön</string>
+    <string name="batch_queue_pending_subtitle">Tryck för att granska och starta</string>
+    <string name="batch_queue_clear_title">Rensa kön?</string>
+    <string name="batch_queue_clear_description">Alla appar tas bort från kön</string>
     <string name="shortcut_repatch_short">Modifiera igen</string>
     <string name="shortcut_repatch_long">Modifiera inaktuella appar igen</string>
     <string name="shortcut_check_updates_short">Sök efter uppdateringar</string>
@@ -510,7 +524,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="app_links_all_verified">Alla stödda länkar är konfigurerade för att öppnas i den här appen</string>
     <string name="app_links_fix">Åtgärda länkar</string>
     <string name="configure">Konfigurera</string>
-    <string name="patcher_rename_title">Detta kommer att installera en klon</string>
+    <string name="patcher_rename_title">Detta installerar en klon</string>
     <string name="patcher_rename_description">Tilläggen byggde den här appen under ett eget paketnamn, så om den installeras läggs en klon till bredvid &lt;b&gt;%s&lt;/b&gt; istället för att uppdatera den</string>
     <string name="patcher_rename_result_package">Installeras som</string>
     <string name="patcher_rename_replaces">En app är redan installerad under det namnet och kommer att ersättas</string>
@@ -537,7 +551,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">App</string>
     <string name="patcher_field_package">Paket</string>
-    <string name="patcher_field_failed_patch">Misslyckad patch</string>
+    <string name="patcher_field_failed_patch">Misslyckad modifiering</string>
     <string name="patcher_field_source">Källa</string>
     <string name="patcher_field_split">Delad APK-fil</string>
     <string name="patcher_field_manager">Manager</string>
@@ -571,7 +585,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="patcher_installing_subtitle">Nästan redo att rocka loss! 🎸</string>
     <string name="patcher_success_title">Allt är klart! 🎉</string>
     <string name="patcher_success_subtitle">Appen är modifierad och installerad!</string>
-    <string name="patcher_mounted_subtitle">Din app är patchad och monterad!</string>
+    <string name="patcher_mounted_subtitle">Appen är modifierad och monterad!</string>
     <string name="patcher_complete_title">Modifieringen är klar! ✨</string>
     <string name="patcher_failed_title">Hoppsan! Något gick fel</string>
     <string name="patcher_failed_dialog_title">Modifieringen misslyckades</string>
@@ -776,13 +790,11 @@ Om du avinstallerar raderas alla appdata permanent"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Startskärm</string>
     <string name="settings_appearance_greeting_phrases">Hälsningsfraser</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Visa ett hälsningsmeddelande på startskärmen</string>
-    <string name="settings_appearance_app_grouping">Appgruppering</string>
-    <string name="settings_appearance_app_grouping_description">Visar en uppsättning knappar för att gruppera appar efter källa eller kategori</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Visar ett hälsningsmeddelande</string>
     <string name="settings_appearance_repatch_notice">Meddelande om att modifiera igen</string>
     <string name="settings_appearance_repatch_notice_description">Visa en banner när modifierade appar kan modifieras igen</string>
     <string name="settings_appearance_sort_button">Knapp för att sortera och filtrera</string>
-    <string name="settings_appearance_sort_button_description">Visa knappen för att sortera och filtrera på startskärmen</string>
+    <string name="settings_appearance_sort_button_description">Visar en knapp för att sortera och filtrera appar</string>
     <string name="settings_appearance_app_card_colors">Färger för appkort</string>
     <string name="settings_appearance_app_card_colors_default">Standard</string>
     <string name="settings_appearance_app_card_colors_default_description">Ge varje app sitt eget pakets färg</string>
@@ -838,7 +850,7 @@ Om du avinstallerar raderas alla appdata permanent"</string>
 
 Tillägg påverkas inte: aktivera förhandsversioner av tillägg för varje källa i listan över tilläggskällor"</string>
     <string name="settings_advanced_updates_allow_metered">Uppdateringar via mobildata</string>
-    <string name="settings_advanced_updates_allow_metered_description">Tillåter att uppdateringar för Morphe och tillägg laddas ned via mobildata</string>
+    <string name="settings_advanced_updates_allow_metered_description">Laddar ned uppdateringar för Morphe och tillägg via mobildata</string>
     <string name="settings_advanced_updates_background_notifications">Aviseringar om uppdateringar i bakgrunden</string>
     <string name="settings_advanced_updates_background_notifications_description">Sök regelbundet efter uppdateringar i bakgrunden och avisera när de är tillgängliga</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Pushmeddelanden om nya versioner, även när appen är stängd</string>
@@ -853,7 +865,7 @@ Tillägg påverkas inte: aktivera förhandsversioner av tillägg för varje käl
     <string name="settings_advanced_update_interval_chip_subtitle">Sökningsfrekvens i bakgrunden</string>
     <string name="settings_advanced_update_interval_battery_warning">Kontroller i bakgrunden kanske inte fungerar tillförlitligt på vissa enheter. Tillverkare som Xiaomi, Huawei, Samsung och OnePlus begränsar ofta bakgrundsprocesser aggressivt för att spara batteri</string>
     <string name="settings_advanced_external_batch_patch">Tillåt externa utlösare</string>
-    <string name="settings_advanced_external_batch_patch_description">Låter automatiseringsappar starta gruppmodifiering med ett intent</string>
+    <string name="settings_advanced_external_batch_patch_description">Låter automatiseringsappar starta gruppmodifiering</string>
     <string name="external_batch_patch_title">Starta gruppmodifiering?</string>
     <string name="external_batch_patch_description">%s vill att Morphe ska modifiera och installera appar</string>
     <string name="external_batch_patch_trust_caller">Tillåt alltid den här appen</string>
@@ -877,11 +889,11 @@ Tillägg påverkas inte: aktivera förhandsversioner av tillägg för varje käl
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Expertinställningar</string>
     <string name="settings_advanced_expert_mode">Expertläge</string>
-    <string name="settings_advanced_expert_mode_description">Aktiverar komplexa modifieringsinställningar och anpassningsalternativ för Morphe</string>
+    <string name="settings_advanced_expert_mode_description">Låser upp avancerade modifieringsinställningar och tilläggsalternativ</string>
     <string name="settings_advanced_expert_mode_dialog_title">Aktivera expertläge?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Expertläget ger mer kontroll över hur tilläggen tillämpas, men om du felaktigt konfigurerar inställningarna i expertläget kan det leda till att appen inte fungerar</string>
     <string name="settings_advanced_strip_unused_libs">Optimera för enhetsarkitektur</string>
-    <string name="settings_advanced_strip_unused_libs_description">Tar bort bibliotek för CPU-arkitekturer och delade APK-moduler som inte används</string>
+    <string name="settings_advanced_strip_unused_libs_description">Tar bort plattformsspecifika bibliotek och delade APK-moduler som inte används</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_description">Krävs för att använda hämtningsbegäranden som källor</string>
     <string name="settings_advanced_github_pat_configured">Token konfigurerades</string>
@@ -1012,13 +1024,13 @@ Bildernas mått ska vara följande:
     <string name="installer_play_store_warning_risk">Play Butik kan erbjuda uppdateringar för den modifierade appen. Om du installerar uppdateringen skrivs den modifierade APK-filen över med den ursprungliga versionen och tilläggen tas bort. Om du uppmanas att uppdatera trycker du på trepunktsmenyn på appens Play Butik-sida och väljer inställningen för att inaktivera uppdateringar</string>
     <string name="installer_play_store_warning_continue">Jag förstår, fortsätt</string>
     <string name="installer_play_store_mode">Installera som Play Butik</string>
-    <string name="installer_play_store_mode_description">Registrera Google Play Butik som installationskälla för den här installationsmetoden</string>
+    <string name="installer_play_store_mode_description">Markerar Google Play Butik som installationskälla</string>
     <string name="settings_prompt_installer_on_install">Uppmaning om val av installerare</string>
-    <string name="settings_prompt_installer_on_install_description">Visar en dialogruta för att välja en installerare varje gång en modifierad app installeras</string>
+    <string name="settings_prompt_installer_on_install_description">Frågar vilken installerare som ska användas för varje installation</string>
     <string name="settings_auto_install_with_shizuku">Installera automatiskt efter modifiering</string>
     <string name="settings_auto_install_with_shizuku_description">Installerar den modifierade APK-filen så snart modifieringen är klar</string>
     <string name="settings_auto_uninstall_with_shizuku">Avinstallera automatiskt vid konflikt</string>
-    <string name="settings_auto_uninstall_with_shizuku_description">När du installerar automatiskt med Shizuku avinstallerar du den befintliga appen först om Android rapporterar en signaturkonflikt. Det här kan ta bort appdata</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Avinstallerar befintlig app vid signaturkonflikt. Detta kan ta bort appdata</string>
     <string name="settings_auto_uninstall_warning_title">Aktivera automatisk avinstallation?</string>
     <string name="settings_auto_uninstall_warning_message">Om Android rapporterar en signaturkonflikt under automatisk installation med Shizuku avinstallerar Morphe den befintliga appen innan den modifierade APK-filen installeras</string>
     <string name="settings_auto_uninstall_warning_risk">Detta kan leda till att appdata raderas. Om den modifierade APK-filen inte går att installera efter avinstallationen kan den tidigare appen redan ha gått förlorad</string>
@@ -1063,7 +1075,7 @@ Information: %2$s"</string>
     <string name="settings_system_patcher_completion_sound_description">Spelar upp en distinkt ton för att indikera om modifieringen har lyckats eller misslyckats när den är klar</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">Aviseringar</string>
-    <string name="settings_system_notifications_description">Konfigurera aviseringar i bakgrunden och ljud för slutförande</string>
+    <string name="settings_system_notifications_description">Konfigurerar aviseringar i bakgrunden och ljud för slutförande</string>
     <string name="settings_system_notifications_success_sound">Ljud för lyckat resultat</string>
     <string name="settings_system_notifications_error_sound">Ljud för misslyckat resultat</string>
     <string name="settings_system_notifications_sound_default">Standard</string>
@@ -1075,7 +1087,7 @@ Information: %2$s"</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Importera och exportera</string>
     <string name="settings_system_signing_key">Signeringsnyckel</string>
-    <string name="settings_system_signing_key_description">Säkerhetskopierar och återställer nyckeln som dina modifierade appar signeras med</string>
+    <string name="settings_system_signing_key_description">Säkerhetskopierar eller återställer nyckeln som signerar modifierade appar</string>
     <string name="settings_system_signing_key_dialog_description">Varje app som Morphe modifierar signeras med den här nyckeln. Spara en kopia: utan den kan modifierade appar bara uppdateras efter att de har avinstallerats</string>
     <string name="settings_system_signing_key_missing">Morphe skapar en i samband med din första modifiering</string>
     <string name="settings_system_signing_key_created">Skapad %s</string>
@@ -1131,7 +1143,7 @@ Information: %2$s"</string>
     <string name="settings_system_apks_export_zip_failed">Det gick inte att exportera de markerade APK-filerna</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">Lagringshantering</string>
-    <string name="settings_system_storage_management_description">Granska diskanvändningen och rensa cachelagrade filer</string>
+    <string name="settings_system_storage_management_description">Visar diskanvändning och rensar cachelagrade filer</string>
     <string name="settings_system_storage_keystore_title">Nyckellager för signering</string>
     <string name="settings_system_storage_app_data_title">Appdata</string>
     <string name="settings_system_storage_patch_bundles_title">Tilläggsarkiv</string>
@@ -1197,7 +1209,7 @@ Information: %2$s"</string>
     <string name="copy_selection_same_source">Samma källa</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Anpassad filväljare</string>
-    <string name="settings_system_custom_file_picker_description">Bläddra i lagringen med Morphes inbyggda filväljare istället för systemets standardfilväljare</string>
+    <string name="settings_system_custom_file_picker_description">Använder Morphes inbyggda filväljare istället för systemets</string>
     <!-- Settings - System Tab - APK download helper -->
     <string name="settings_system_apk_download_helper">APK-nedladdningshjälp</string>
     <string name="settings_system_apk_download_helper_trusted_count">Betrodda: %1$d av %2$d</string>
@@ -1248,6 +1260,7 @@ Information: %2$s"</string>
     <string name="no">Nej</string>
     <string name="all">Alla</string>
     <string name="filter">Filtrera</string>
+    <string name="group">Gruppera</string>
     <string name="reset">Återställ</string>
     <string name="reset_all">Återställ alla</string>
     <string name="apply">Verkställ</string>
@@ -1315,6 +1328,10 @@ Information: %2$s"</string>
     <string name="available">Tillgänglig</string>
     <string name="continue_">Fortsätt</string>
     <string name="version">Version</string>
+    <!-- Who made a patch source, as a field label -->
+    <string name="author">Upphovsperson</string>
+    <!-- A file a patch source is added from, as a field label -->
+    <string name="file">Fil</string>
     <string name="clone">Klona</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Modifiera</string>

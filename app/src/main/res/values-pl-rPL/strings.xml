@@ -22,6 +22,10 @@
     <string name="deep_link_add_source_title">Dodaj źródło</string>
     <string name="deep_link_add_source_message">Czy chcesz dodać to źródło modyfikacji do Morphe?</string>
     <string name="deep_link_add_source_warning">Dodawaj tylko zaufane źródła</string>
+    <!-- Shown under the app a link was opened for -->
+    <string name="deep_link_add_source_only_app">Dodano tylko tę aplikację. Inne aplikacje możesz dodać z listy aplikacji źródła</string>
+    <!-- Asked when the link names an app of a source that is already added -->
+    <string name="deep_link_add_source_app_back">To źródło jest już dodane. Dodać tę aplikację z istniejącego źródła?</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Dostępna aktualizacja Morphe</string>
     <string name="home_update_available_subtitle">Nowa wersja gotowa do instalacji</string>
@@ -54,6 +58,9 @@
     <string name="home_app_filter_uninstalled_description">Aplikacje zmodyfikowane za pomocą Morphe, których nie ma już na tym urządzeniu</string>
     <string name="home_app_filter_clones">Klony</string>
     <string name="home_app_filter_clones_description">Aplikacje zbudowane pod własną nazwą pakietu, zainstalowane obok oryginału</string>
+    <string name="home_app_grouping_all_apps_description">Jedna lista ze wszystkimi aplikacjami</string>
+    <string name="home_app_grouping_sources_description">Aplikacje pogrupowane według źródła modyfikacji, z którego pochodzą</string>
+    <string name="home_app_grouping_custom_description">Aplikacje w utworzonych przez Ciebie kategoriach</string>
     <string name="home_app_sort_manual_description">Przytrzymaj aplikację, a następnie dotknij przycisku zmiany kolejności</string>
     <string name="home_app_sort_recommended">Zalecana kolejność</string>
     <string name="home_app_sort_recommended_description">Najpierw zainstalowane i przypięte aplikacje</string>
@@ -146,7 +153,6 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Źródła modyfikacji</string>
     <string name="sources_search">Szukaj źródeł i modyfikacji</string>
-    <string name="sources_sort_title">Sortuj źródła modyfikacji</string>
     <string name="sources_sort_manual">Ręczna kolejność</string>
     <string name="sources_sort_manual_hint">Przytrzymaj źródło, aby zmienić kolejność</string>
     <string name="sources_sort_last_updated">Ostatnia aktualizacja</string>
@@ -158,12 +164,17 @@
     <string name="sources_management_report_issue">Zgłoś problem</string>
     <string name="sources_management_failed_to_open_url">Nie udało się otworzyć strony</string>
     <string name="sources_apps">Aplikacje</string>
-    <string name="sources_apps_description">Dotknij aplikacji, aby wykluczyć ją z tego źródła lub przywrócić, albo przytrzymaj, aby wybrać kilka. Aplikacja znika z ekranu głównego, gdy nie uwzględnia jej żadne źródło</string>
+    <string name="sources_apps_description">Zaznaczone aplikacje pochodzą z tego źródła. Dotknij aplikacji, aby ją pominąć lub przywrócić. Aplikacja zniknie z ekranu głównego, gdy żadne źródło nie będzie jej dostarczać, chyba że została przez Ciebie zmodyfikowana</string>
     <string name="sources_apps_brought">Uwzględnione w tym źródle</string>
     <string name="sources_apps_left_out">Wykluczone z tego źródła</string>
-    <string name="sources_apps_leave_out">Wyklucz</string>
-    <string name="sources_apps_leave_out_done">Wykluczono</string>
     <string name="sources_apps_bring_back">Przywróć</string>
+    <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
+    <string name="sources_apps_stays_patched">Zachowano jako zmodyfikowaną</string>
+    <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
+    <string name="sources_apps_new">Nowa</string>
+    <string name="sources_apps_new_apps">Dodawaj nowe aplikacje</string>
+    <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
+    <string name="sources_apps_new_apps_description">Aplikacje dodane przez to źródło w przyszłości pojawią się na ekranie głównym</string>
     <string name="sources_management_prerelease_toggle">Przedpremierowe modyfikacje</string>
     <string name="sources_management_prerelease_toggle_description">Zapewnia wczesny dostęp do nowych, eksperymentalnych wersji modyfikacji</string>
     <string name="sources_prerelease_warning_title">Włączyć przedpremierowe modyfikacje?</string>
@@ -209,7 +220,6 @@
     <string name="sources_dialog_url_invalid">Adres musi wskazywać na repozytorium GitHub/GitLab lub plik .json</string>
     <string name="sources_dialog_preinstalled">Wbudowane</string>
     <string name="sources_dialog_community">Modyfikacje społeczności</string>
-    <string name="sources_dialog_choose_apps">Wybierz aplikacje</string>
     <string name="sources_dialog_choose_apps_description">Wybierz, które aplikacje mają zostać zachowane po wczytaniu źródła</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Zewnętrzne źródła modyfikacji</string>
@@ -452,7 +462,7 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="batch_patch_state_no_patches">Brak modyfikacji</string>
     <string name="batch_patch_policy_install">Zainstaluj po zakończeniu</string>
     <string name="batch_patch_policy_install_description">Instaluje każdą zmodyfikowaną aplikację zaraz po zakończeniu kolejki. Wyłączenie zachowa pliki APK na później</string>
-    <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
+    <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_start">Start</string>
     <string name="batch_patch_stop_title">Zatrzymać modyfikowanie grupowe?</string>
     <string name="batch_patch_stop_description">Aktualnie modyfikowana aplikacja i wszystkie pozostałe w kolejce zostaną anulowane</string>
@@ -461,6 +471,10 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="batch_patch_install_failed">Instalacja nie powiodła się</string>
     <string name="batch_patch_in_progress">Modyfikowanie grupowe już trwa</string>
     <string name="batch_patch_nothing_outdated">Wszystkie zmodyfikowane aplikacje są aktualne</string>
+    <string name="batch_queue_add_action">Dodaj do kolejki</string>
+    <string name="batch_queue_pending_subtitle">Dotknij, aby przejrzeć i rozpocząć</string>
+    <string name="batch_queue_clear_title">Wyczyścić kolejkę?</string>
+    <string name="batch_queue_clear_description">Wszystkie aplikacje zostaną usunięte z kolejki</string>
     <string name="shortcut_repatch_short">Zmodyfikuj ponownie</string>
     <string name="shortcut_repatch_long">Zmodyfikuj ponownie nieaktualne aplikacje</string>
     <string name="shortcut_check_updates_short">Sprawdź aktualizacje</string>
@@ -538,7 +552,7 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">Aplikacja</string>
     <string name="patcher_field_package">Pakiet</string>
-    <string name="patcher_field_failed_patch">Nieudana poprawka</string>
+    <string name="patcher_field_failed_patch">Nieudana modyfikacja</string>
     <string name="patcher_field_source">Źródło</string>
     <string name="patcher_field_split">Podzielony plik APK</string>
     <string name="patcher_field_manager">Menedżer</string>
@@ -613,7 +627,7 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="patcher_option_paths_gone_title">Brakuje plików opcji modyfikacji</string>
     <string name="patcher_option_paths_gone_description">Przynajmniej jedna opcja modyfikacji wskazuje na pliki, których już nie ma. Usuń ścieżki, aby modyfikować bez nich, albo przywróć pliki i spróbuj ponownie</string>
     <string name="patcher_option_paths_clear">Usuń ścieżki i kontynuuj</string>
-    <string name="patcher_storage_permission_hint">Wskazówka: Przenieś pliki do /Android/data/app.morphe.manager/files/ - nie wymaga to dodatkowych uprawnień</string>
+    <string name="patcher_storage_permission_hint">Wskazówka: Przenieś pliki do /Android/data/app.morphe.manager/files/. Nie wymaga to dodatkowych uprawnień</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Przygotowywanie</string>
     <string name="patcher_step_load_patches">Wczytywanie modyfikacji</string>
@@ -758,7 +772,7 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="settings_appearance_pure_black">Głęboka czerń</string>
     <string name="settings_appearance_pure_black_description">Używa prawdziwie czarnego tła</string>
     <string name="settings_appearance_color_accents">Kolory aplikacji i źródeł</string>
-    <string name="settings_appearance_color_accents_description">Używa własnych kolorów poszczególnych aplikacji i źródeł zamiast koloru akcentu</string>
+    <string name="settings_appearance_color_accents_description">Używa koloru poszczególnych aplikacji i źródeł zamiast koloru akcentu</string>
     <string name="settings_appearance_outlines">Obramowania</string>
     <string name="settings_appearance_outlines_description">Dodaje cienką obwódkę wokół kart, paneli i przycisków</string>
     <!-- Settings - Appearance Tab - Language Selector -->
@@ -777,13 +791,11 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Ekran główny</string>
     <string name="settings_appearance_greeting_phrases">Powitania</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Wyświetlaj powitanie na ekranie głównym</string>
-    <string name="settings_appearance_app_grouping">Grupowanie aplikacji</string>
-    <string name="settings_appearance_app_grouping_description">Pokaż przełącznik do grupowania aplikacji według źródła lub kategorii</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Pokazuje wiadomość powitalną</string>
     <string name="settings_appearance_repatch_notice">Powiadomienie o ponownym modyfikowaniu</string>
-    <string name="settings_appearance_repatch_notice_description">Pokazuj baner, gdy można ponownie zmodyfikować aplikacje</string>
+    <string name="settings_appearance_repatch_notice_description">Pokazuje baner, gdy można ponownie zmodyfikować aplikacje</string>
     <string name="settings_appearance_sort_button">Przycisk sortowania i filtrowania</string>
-    <string name="settings_appearance_sort_button_description">Pokaż przycisk sortowania i filtrowania na ekranie głównym</string>
+    <string name="settings_appearance_sort_button_description">Pokazuje przycisk do sortowania i filtrowania aplikacji</string>
     <string name="settings_appearance_app_card_colors">Kolory kart aplikacji</string>
     <string name="settings_appearance_app_card_colors_default">Domyślne</string>
     <string name="settings_appearance_app_card_colors_default_description">Nadaj każdej aplikacji kolor z jego własnego pakietu</string>
@@ -839,7 +851,7 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
 
 Modyfikacje nie są tym objęte: włącz przedpremierowe modyfikacje dla każdego źródła na liście źródeł modyfikacji"</string>
     <string name="settings_advanced_updates_allow_metered">Aktualizacje przez dane mobilne</string>
-    <string name="settings_advanced_updates_allow_metered_description">Umożliwia pobieranie aktualizacji Morphe i modyfikacji przez sieć komórkową</string>
+    <string name="settings_advanced_updates_allow_metered_description">Pobiera aktualizacje Morphe i modyfikacji przez dane mobilne</string>
     <string name="settings_advanced_updates_background_notifications">Powiadomienia o aktualizacjach w tle</string>
     <string name="settings_advanced_updates_background_notifications_description">Okresowo sprawdzaj aktualizacje w tle i powiadamiaj, gdy będą dostępne</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Powiadomienia push o nowych wersjach, nawet gdy aplikacja jest zamknięta</string>
@@ -854,7 +866,7 @@ Modyfikacje nie są tym objęte: włącz przedpremierowe modyfikacje dla każdeg
     <string name="settings_advanced_update_interval_chip_subtitle">Częstotliwość sprawdzania w tle</string>
     <string name="settings_advanced_update_interval_battery_warning">Sprawdzanie w tle może nie działać stabilnie na niektórych urządzeniach. Producenci tacy jak Xiaomi, Huawei, Samsung czy OnePlus często agresywnie ograniczają procesy w tle, aby oszczędzać baterię</string>
     <string name="settings_advanced_external_batch_patch">Zezwalaj na zewnętrzne wyzwalacze</string>
-    <string name="settings_advanced_external_batch_patch_description">Pozwala aplikacjom do automatyzacji uruchamiać zbiorcze modyfikowanie za pomocą intencji</string>
+    <string name="settings_advanced_external_batch_patch_description">Pozwala aplikacjom do automatyzacji uruchamiać zbiorcze modyfikowanie</string>
     <string name="external_batch_patch_title">Rozpocząć modyfikowanie grupowe?</string>
     <string name="external_batch_patch_description">%s chce, aby Morphe zmodyfikował i zainstalował aplikacje</string>
     <string name="external_batch_patch_trust_caller">Zawsze zezwalaj tej aplikacji</string>
@@ -878,11 +890,11 @@ Modyfikacje nie są tym objęte: włącz przedpremierowe modyfikacje dla każdeg
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Ustawienia eksperckie</string>
     <string name="settings_advanced_expert_mode">Tryb ekspercki</string>
-    <string name="settings_advanced_expert_mode_description">Włącza zaawansowane ustawienia modyfikowania i opcje personalizacji Morphe</string>
+    <string name="settings_advanced_expert_mode_description">Odblokowuje zaawansowane ustawienia modyfikowania oraz opcje modyfikacji</string>
     <string name="settings_advanced_expert_mode_dialog_title">Włączyć tryb ekspercki?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Tryb ekspercki zapewnia większą kontrolę nad procesem modyfikacji, jednak błędna konfiguracja ustawień może sprawić, że aplikacja przestanie działać</string>
     <string name="settings_advanced_strip_unused_libs">Optymalizuj pod kątem architektury urządzenia</string>
-    <string name="settings_advanced_strip_unused_libs_description">Usuwa nieużywane biblioteki architektur CPU oraz moduły podzielonego pliku APK</string>
+    <string name="settings_advanced_strip_unused_libs_description">Usuwa nieużywane biblioteki natywne i podzielone pliki APK</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_description">Wymagany dla źródeł z Pull Requestów</string>
     <string name="settings_advanced_github_pat_configured">Token skonfigurowany</string>
@@ -1013,13 +1025,13 @@ Wymagane są następujące wymiary obrazów:
     <string name="installer_play_store_warning_risk">Sklep Play może oferować aktualizacje dla zmodyfikowanej aplikacji. Zainstalowanie takiej aktualizacji nadpisze zmodyfikowany plik APK oryginalną wersją i usunie wszelkie modyfikacje. Jeśli pojawi się prośba o aktualizację, dotknij menu z trzema kropkami na stronie aplikacji w Sklepie Play i odznacz opcję \"Autoaktualizacje\"</string>
     <string name="installer_play_store_warning_continue">Rozumiem, kontynuuj</string>
     <string name="installer_play_store_mode">Instaluj jako Sklep Play</string>
-    <string name="installer_play_store_mode_description">Zapisz Sklep Play jako źródło dla tej metody instalacji</string>
+    <string name="installer_play_store_mode_description">Oznacza Sklep Play jako źródło instalacji</string>
     <string name="settings_prompt_installer_on_install">Monit o wybór instalatora</string>
-    <string name="settings_prompt_installer_on_install_description">Wyświetla okno wyboru instalatora przy każdej instalacji zmodyfikowanej aplikacji</string>
+    <string name="settings_prompt_installer_on_install_description">Pyta, którego instalatora użyć przy każdej instalacji</string>
     <string name="settings_auto_install_with_shizuku">Autoinstalacja po modyfikacji</string>
     <string name="settings_auto_install_with_shizuku_description">Automatycznie instaluje plik APK po zakończeniu modyfikacji</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatyczne usuwanie przy konflikcie</string>
-    <string name="settings_auto_uninstall_with_shizuku_description">Podczas automatycznej instalacji przez Shizuku, najpierw odinstaluj istniejącą aplikację, jeśli Android zgłosi konflikt podpisów. Może to usunąć dane aplikacji</string>
+    <string name="settings_auto_uninstall_with_shizuku_description">Odinstalowuje istniejącą aplikację w przypadku konfliktu podpisów. Może to usunąć dane aplikacji</string>
     <string name="settings_auto_uninstall_warning_title">Włączyć automatyczne usuwanie?</string>
     <string name="settings_auto_uninstall_warning_message">Jeśli Android zgłosi konflikt podpisów podczas automatycznej instalacji przez Shizuku, Morphe usunie istniejącą aplikację przed instalacją zmodyfikowanego pliku APK</string>
     <string name="settings_auto_uninstall_warning_risk">Może to usunąć dane aplikacji. Jeśli instalacja zmodyfikowanego pliku APK się nie powiedzie po odinstalowaniu starej wersji, poprzednia aplikacja bezpowrotnie przepadnie</string>
@@ -1064,7 +1076,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_patcher_completion_sound_description">Odtwarza wyraźny dźwięk powodzenia lub niepowodzenia po zakończeniu modyfikacji</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">Powiadomienia</string>
-    <string name="settings_system_notifications_description">Skonfiguruj alerty w tle i dźwięki ukończenia</string>
+    <string name="settings_system_notifications_description">Konfiguruje powiadomienia w tle i dźwięki ukończenia</string>
     <string name="settings_system_notifications_success_sound">Dźwięk powodzenia</string>
     <string name="settings_system_notifications_error_sound">Dźwięk niepowodzenia</string>
     <string name="settings_system_notifications_sound_default">Domyślny</string>
@@ -1076,7 +1088,7 @@ Wymagane są następujące wymiary obrazów:
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Import i eksport</string>
     <string name="settings_system_signing_key">Klucz podpisywania</string>
-    <string name="settings_system_signing_key_description">Tworzy kopię zapasową i przywraca klucz, którym podpisane są zmodyfikowane aplikacje</string>
+    <string name="settings_system_signing_key_description">Tworzy lub przywraca kopię zapasową klucza podpisującego zmodyfikowane aplikacje</string>
     <string name="settings_system_signing_key_dialog_description">Każda aplikacja modyfikowana przez Morphe jest podpisana tym kluczem. Zachowaj jego kopię: bez niego zaktualizowanie zmodyfikowanych aplikacji będzie możliwe tylko po ich wcześniejszym odinstalowaniu</string>
     <string name="settings_system_signing_key_missing">Morphe tworzy go podczas pierwszej modyfikacji</string>
     <string name="settings_system_signing_key_created">Utworzono %s</string>
@@ -1132,7 +1144,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_apks_export_zip_failed">Nie udało się wyeksportować wybranych plików APK</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">Zarządzanie pamięcią</string>
-    <string name="settings_system_storage_management_description">Przejrzyj zużycie dysku i wyczyść pliki pamięci podręcznej</string>
+    <string name="settings_system_storage_management_description">Pokazuje użycie pamięci i czyści pliki pamięci podręcznej</string>
     <string name="settings_system_storage_keystore_title">Magazyn kluczy podpisywania</string>
     <string name="settings_system_storage_app_data_title">Dane aplikacji</string>
     <string name="settings_system_storage_patch_bundles_title">Pakiety modyfikacji</string>
@@ -1198,7 +1210,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="copy_selection_same_source">To samo źródło</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Niestandardowa przeglądarka plików</string>
-    <string name="settings_system_custom_file_picker_description">Przeglądaj pamięć za pomocą wbudowanej przeglądarki plików Morphe zamiast domyślnej systemowej</string>
+    <string name="settings_system_custom_file_picker_description">Używa wbudowanej przeglądarki plików Morphe zamiast systemowej</string>
     <!-- Settings - System Tab - APK download helper -->
     <string name="settings_system_apk_download_helper">Aplikacja pomocnicza do pobierania pliku APK</string>
     <string name="settings_system_apk_download_helper_trusted_count">Zaufane: %1$d z %2$d</string>
@@ -1249,6 +1261,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="no">Nie</string>
     <string name="all">Wszystkie</string>
     <string name="filter">Filtr</string>
+    <string name="group">Grupuj</string>
     <string name="reset">Zresetuj</string>
     <string name="reset_all">Zresetuj wszystko</string>
     <string name="apply">Zastosuj</string>
@@ -1316,6 +1329,10 @@ Wymagane są następujące wymiary obrazów:
     <string name="available">Dostępne</string>
     <string name="continue_">Kontynuuj</string>
     <string name="version">Wersja</string>
+    <!-- Who made a patch source, as a field label -->
+    <string name="author">Autor</string>
+    <!-- A file a patch source is added from, as a field label -->
+    <string name="file">Plik</string>
     <string name="clone">Klonuj</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Modyfikuj</string>

@@ -14,8 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
+import app.morphe.manager.ui.screen.shared.Defaults
 import app.morphe.manager.ui.screen.shared.SectionCard
 import app.morphe.manager.ui.theme.Theme
 import app.morphe.manager.ui.theme.ThemeStyle
@@ -77,8 +77,8 @@ fun ThemeSelector(
 
     SectionCard {
         Column(
-            modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            modifier = Modifier.padding(Defaults.SpaceLarge),
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
         ) {
             ThemeOptionRow(
                 title = stringResource(R.string.settings_appearance_theme_mode),
@@ -105,20 +105,22 @@ private fun <T> ThemeOptionRow(
     selected: T,
     onSelected: (T) -> Unit
 ) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    Column(verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)) {
         Text(
             text = title,
             style = MaterialTheme.typography.titleSmall,
             color = MaterialTheme.colorScheme.onSurface
         )
-        OptionGrid(items = options, columns = options.size) { option, itemModifier ->
+        OptionGroup(items = options) { option, shape, interactionSource, itemModifier ->
             ModernIconOptionCard(
                 selected = option.value == selected,
                 onClick = { onSelected(option.value) },
                 icon = option.icon,
                 label = option.label,
                 modifier = itemModifier,
-                compact = true
+                compact = true,
+                shape = shape,
+                interactionSource = interactionSource
             )
         }
     }

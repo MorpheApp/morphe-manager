@@ -17,7 +17,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 
 /**
@@ -57,7 +56,7 @@ data class CopySelectionCandidate(
  * Pass `candidates = null` while the list is loading to render a branded loader.
  */
 @Composable
-fun CopySelectionFromBundleDialog(
+fun DialogHostScope.CopySelectionFromBundleDialog(
     target: CopySelectionTarget,
     candidates: List<CopySelectionCandidate>?,
     onConfirm: (CopySelectionCandidate) -> Unit,
@@ -74,9 +73,30 @@ fun CopySelectionFromBundleDialog(
         stringResource(R.string.copy)
     }
 
-    AppDialog(
+    ListDialog(
         onDismissRequest = onDismiss,
         accentColor = rememberAppColor(target.packageName),
+        // Headed by the app the selection lands on, with the source it lands in, while the
+        // question the list below answers sits right under it
+        header = {
+            ListDialogHeader(
+                icon = { modifier ->
+                    AppIcon(packageName = target.packageName, contentDescription = null, modifier = modifier)
+                },
+                title = target.appDisplayName,
+                subtitle = target.bundleName,
+                content = {
+                    Text(
+                        text = stringResource(R.string.copy_selection_title),
+                        style = MaterialTheme.typography.titleSmall,
+                        fontWeight = FontWeight.SemiBold,
+                        color = dialogTextColor(),
+                        modifier = Modifier.padding(top = Defaults.SpaceMedium)
+                    )
+                },
+                alwaysShowBand = true
+            )
+        },
         footer = {
             AppDialogButtonRow(
                 primaryText = confirmLabel,
@@ -86,68 +106,45 @@ fun CopySelectionFromBundleDialog(
                 secondaryText = stringResource(android.R.string.cancel),
                 onSecondaryClick = onDismiss
             )
-        },
-        padding = DialogPadding.Compact,
-        scrollable = false,
-        contentArrangement = Arrangement.Top
+        }
     ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
-        ) {
-            // Headed by the app the selection lands on, with the source it lands in, while the
-            // question the list below answers sits right above it
-            ListDialogHeader(
-                icon = { modifier ->
-                    AppIcon(packageName = target.packageName, contentDescription = null, modifier = modifier)
-                },
-                title = target.appDisplayName,
-                subtitle = target.bundleName,
-                modifier = Modifier.padding(bottom = Defaults.ContentPaddingSmall)
-            )
-            Text(
-                text = stringResource(R.string.copy_selection_title),
-                style = MaterialTheme.typography.titleSmall,
-                fontWeight = FontWeight.SemiBold,
-                color = dialogTextColor()
-            )
-
-            when {
-                candidates == null -> Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f),
-                    contentAlignment = Alignment.Center
-                ) {
-                    PulsingLogoWithCaption(caption = stringResource(R.string.loading))
-                }
-                visibleCandidates.isEmpty() -> EmptyState(
-                    message = stringResource(R.string.copy_selection_empty),
-                    icon = Icons.Outlined.FolderOff
-                )
-                else -> CandidateList(
-                    candidates = visibleCandidates,
-                    selectedIndex = selectedIndex,
-                    onSelect = { selectedIndex = it }
-                )
+        if (candidates == null) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                PulsingLogoWithCaption(caption = stringResource(R.string.loading))
             }
+        } else {
+            CandidateList(
+                candidates = visibleCandidates,
+                selectedIndex = selectedIndex,
+                onSelect = { selectedIndex = it }
+            )
         }
     }
 }
 
 @Composable
-private fun ColumnScope.CandidateList(
+private fun CandidateList(
     candidates: List<CopySelectionCandidate>,
     selectedIndex: Int,
     onSelect: (Int) -> Unit
 ) {
     val sourcesByUid = rememberSourcesByUid()
     DialogLazyList(
-        modifier = Modifier
-            .fillMaxWidth()
-            .weight(1f, fill = false),
-        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(DialogListSpacing)
     ) {
+        if (candidates.isEmpty()) {
+            item(key = "empty_state") {
+                EmptyState(
+                    message = stringResource(R.string.copy_selection_empty),
+                    icon = Icons.Outlined.FolderOff
+                )
+            }
+        }
+
         items(
             items = candidates.withIndex().toList(),
             key = { (_, c) -> "${c.bundleUid}:${c.packageName}" }
@@ -186,11 +183,11 @@ private fun CandidateRow(
     ) {
         Column(
             modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
+                horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
             ) {
                 Text(
                     text = candidate.bundleName,

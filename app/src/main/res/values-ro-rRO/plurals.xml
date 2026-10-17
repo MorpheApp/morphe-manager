@@ -88,6 +88,16 @@
         <item quantity="few">%s aplicaţii gata de patch</item>
         <item quantity="other">%s de aplicaţii gata de patch</item>
     </plurals>
+    <plurals name="batch_queue_pending_count">
+        <item quantity="one">Aplicația %s este în așteptare pentru remediere</item>
+        <item quantity="few">%s aplicații sunt în așteptare pentru remediere</item>
+        <item quantity="other">%s de aplicații sunt în așteptare pentru remediere</item>
+    </plurals>
+    <plurals name="home_alerts_snoozed_count">
+        <item quantity="one">%s notificare ascunsă, atingeți pentru a o afișa</item>
+        <item quantity="few">%s notificări ascunse, atingeți pentru a le afișa</item>
+        <item quantity="other">%s notificări ascunse, atingeți pentru a le afișa</item>
+    </plurals>
     <plurals name="repatch_available_count">
         <item quantity="one">%s aplicație poate fi re-patchuită</item>
         <item quantity="few">%s aplicații pot fi re-patchuite</item>
@@ -107,11 +117,6 @@
         <item quantity="one">%s sursă instalată</item>
         <item quantity="few">%s surse instalate</item>
         <item quantity="other">%s de surse instalate</item>
-    </plurals>
-    <plurals name="home_app_filter_active">
-        <item quantity="one">%1$s · %2$s aplicație filtrată</item>
-        <item quantity="few">%1$s · %2$s aplicații filtrate</item>
-        <item quantity="other">%1$s · %2$s de aplicații filtrate</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s aplicație ascunsă</item>
@@ -157,6 +162,12 @@
         <item quantity="one">%s modificare</item>
         <item quantity="few">%s modificări</item>
         <item quantity="other">%s de modificări</item>
+    </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
+    <plurals name="sources_apps_count_with_new">
+        <item quantity="one">%1$s · %2$d nouă</item>
+        <item quantity="few">%1$s · %2$d noi</item>
+        <item quantity="other">%1$s · %2$d de noi</item>
     </plurals>
     <plurals name="changelog_new_releases">
         <item quantity="one">%s versiune nouă</item>

@@ -2,18 +2,38 @@
 <resources>
     <plurals name="patch_count">
         <item quantity="one">%s وصله</item>
-        <item quantity="other">%s وصله</item>
+        <item quantity="other">%s پچ</item>
     </plurals>
     <plurals name="option_count">
-        <item quantity="one">%s گزینه وصله</item>
-        <item quantity="other">%s گزینه وصله</item>
+        <item quantity="one">%s گزینهٔ پچ</item>
+        <item quantity="other">%s گزینهٔ پچ</item>
     </plurals>
     <!-- How many files and folders a folder holds, under its name in the file picker -->
+    <plurals name="file_picker_item_count">
+        <item quantity="one">%s مورد</item>
+        <item quantity="other">%s مورد</item>
+    </plurals>
     <!-- Button that confirms the files checked in the file picker -->
+    <plurals name="file_picker_select_count">
+        <item quantity="one">انتخاب %s فایل</item>
+        <item quantity="other">انتخاب %s فایل</item>
+    </plurals>
     <!-- Button that adds every source waiting in the add source dialog -->
+    <plurals name="sources_dialog_add_count">
+        <item quantity="one">افزودن %s منبع</item>
+        <item quantity="other">افزودن %s منبع</item>
+    </plurals>
+    <plurals name="home_app_patch_sources_title">
+        <item quantity="one">منابع پچ برای %s برنامه</item>
+        <item quantity="other">منابع پچ برای %s برنامه</item>
+    </plurals>
+    <plurals name="expert_mode_hidden_sources_notice">
+        <item quantity="one">%s منبع مخفی است. برای نمایش ضربه بزنید</item>
+        <item quantity="other">%s منبع مخفی هستند. برای نمایش ضربه بزنید</item>
+    </plurals>
     <plurals name="sources_search_patch_matches">
-        <item quantity="one">%s اصلاحیه مطابق</item>
-        <item quantity="other">%s اصلاحیه‌های مطابق</item>
+        <item quantity="one">%s پچ مطابق</item>
+        <item quantity="other">%s پچ مطابق</item>
     </plurals>
     <plurals name="source_count">
         <item quantity="one">%s منبع</item>
@@ -51,6 +71,14 @@
         <item quantity="one">%s برنامه آمادهٔ پچ است</item>
         <item quantity="other">%s برنامه آمادهٔ پچ است</item>
     </plurals>
+    <plurals name="batch_queue_pending_count">
+        <item quantity="one">%s برنامه در صف برای پچ</item>
+        <item quantity="other">%s برنامه در صف برای پچ</item>
+    </plurals>
+    <plurals name="home_alerts_snoozed_count">
+        <item quantity="one">%s اعلان پنهان شده، برای نمایش آن ضربه بزنید</item>
+        <item quantity="other">%s اعلان پنهان شده، برای نمایش آن‌ها ضربه بزنید</item>
+    </plurals>
     <plurals name="repatch_available_count">
         <item quantity="one">%s برنامه را می‌توان دوباره پچ کرد</item>
         <item quantity="other">%s برنامه را می‌توان دوباره پچ کرد</item>
@@ -60,8 +88,8 @@
         <item quantity="other">%s برنامه رد شد</item>
     </plurals>
     <plurals name="home_app_info_repatch_cleaned_invalid_data">
-        <item quantity="one">%s وصله قدیمی از انتخاب ذخیره شده حذف شد</item>
-        <item quantity="other">حذف شده %s وصله های قدیمی از انتخاب ذخیره شده</item>
+        <item quantity="one">%s پچ منسوخ از انتخاب ذخیره‌شده حذف شد</item>
+        <item quantity="other">%s پچ منسوخ از انتخاب ذخیره‌شده حذف شد</item>
     </plurals>
     <plurals name="sources_management_subtitle">
         <item quantity="one">%s منبع نصب شده</item>
@@ -86,5 +114,38 @@
     <plurals name="core_count">
         <item quantity="one">%s هسته</item>
         <item quantity="other">%s هسته</item>
+    </plurals>
+    <plurals name="changelog_feature_count">
+        <item quantity="one">%s ویژگی</item>
+        <item quantity="other">%s ویژگی</item>
+    </plurals>
+    <plurals name="changelog_fix_count">
+        <item quantity="one">%s اصلاح</item>
+        <item quantity="other">%s اصلاح</item>
+    </plurals>
+    <plurals name="changelog_performance_count">
+        <item quantity="one">%s بهینه‌سازی</item>
+        <item quantity="other">%s بهینه‌سازی</item>
+    </plurals>
+    <plurals name="changelog_change_count">
+        <item quantity="one">%s تغییر</item>
+        <item quantity="other">%s تغییر</item>
+    </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
+    <plurals name="sources_apps_count_with_new">
+        <item quantity="one">%1$s · %2$d جدید</item>
+        <item quantity="other">%1$s · %2$d جدید</item>
+    </plurals>
+    <plurals name="changelog_new_releases">
+        <item quantity="one">%s نسخه جدید</item>
+        <item quantity="other">%s نسخه جدید</item>
+    </plurals>
+    <plurals name="app_links_count_enabled">
+        <item quantity="one">%d پیوند فعال</item>
+        <item quantity="other">%d پیوند فعال</item>
+    </plurals>
+    <plurals name="app_links_count_unverified">
+        <item quantity="one">%d پیوند تأیید‌نشده</item>
+        <item quantity="other">%d پیوند تأیید‌نشده</item>
     </plurals>
 </resources>

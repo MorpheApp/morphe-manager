@@ -11,6 +11,7 @@ import androidx.compose.material.icons.automirrored.outlined.Launch
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -24,15 +25,37 @@ import app.morphe.manager.ui.viewmodel.StorageManagementViewModel
 import app.morphe.manager.util.formatBytes
 import app.morphe.manager.util.formatUsedFree
 import app.morphe.manager.util.openAppDetailsSettings
-import app.morphe.manager.util.toast
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
 
+/**
+ * Where the manager's storage goes and what clears it. The saved APKs of each kind open in place of
+ * the overview, in the same dialog, see [ApkManagementPage].
+ */
 @Composable
-fun StorageManagementDialog(
+fun DialogHostScope.StorageManagementDialog(
     onDismissRequest: () -> Unit,
     viewModel: StorageManagementViewModel = koinViewModel()
 ) {
+    var apkPage by rememberSaveable { mutableStateOf<ApkManagementType?>(null) }
+    DialogPages(page = apkPage, key = { it ?: "overview" }, modifier = Modifier.fillMaxSize()) { type ->
+        if (type == null) {
+            StorageOverview(viewModel = viewModel, onOpenApks = { apkPage = it }, onDismissRequest = onDismissRequest)
+        } else {
+            ApkManagementPage(type = type, onBack = { apkPage = null })
+        }
+    }
+}
+
+/** How much the manager holds and in what, with what clears it. Read again each time it shows. */
+@Composable
+private fun DialogHostScope.StorageOverview(
+    viewModel: StorageManagementViewModel,
+    onOpenApks: (ApkManagementType) -> Unit,
+    onDismissRequest: () -> Unit
+) {
     val context = LocalContext.current
+    val messages = koinInject<UserMessages>()
     val stats by viewModel.stats.collectAsStateWithLifecycle()
 
     val nothingToClearText = stringResource(R.string.settings_system_storage_nothing_to_clear)
@@ -41,27 +64,16 @@ fun StorageManagementDialog(
     val onCleared: (Long) -> Unit = { freed ->
         val message = if (freed <= 0L) nothingToClearText
         else clearedTemplate.format(context.formatBytes(freed))
-        context.toast(message)
+        messages.show(message)
     }
 
-    var apkDialog by remember { mutableStateOf<ApkManagementType?>(null) }
     var showClearAllConfirm by remember { mutableStateOf(false) }
     // Incremented on manual refresh to re-key the histogram and replay its entry animation.
     var histogramNonce by remember { mutableIntStateOf(0) }
 
     LaunchedEffect(Unit) { viewModel.refresh() }
 
-    apkDialog?.let { type ->
-        ApkManagementDialog(
-            type = type,
-            onDismissRequest = {
-                apkDialog = null
-                viewModel.refresh()
-            }
-        )
-    }
-
-    if (showClearAllConfirm) {
+    DialogHost(visible = showClearAllConfirm) {
         ConfirmDialog(
             title = stringResource(R.string.settings_system_storage_clear_all),
             message = stringResource(R.string.settings_system_storage_clear_all_confirm),
@@ -83,12 +95,36 @@ fun StorageManagementDialog(
         )
     }
 
-    AppDialog(
+    // Nothing has been read until the first reading lands, and a real one always has room free
+    val loading = stats == StorageStats.Empty
+
+    ListDialog(
         onDismissRequest = onDismissRequest,
-        padding = DialogPadding.Compact,
-        scrollable = false,
-        contentArrangement = Arrangement.Top,
-        fillContentHeight = true,
+        header = {
+            // Headed like the other lists, with how much Morphe holds against what is left free
+            // where the subtitle goes, above the breakdown that scrolls under it
+            val accent = MaterialTheme.colorScheme.primary
+            ListDialogHeader(
+                icon = { modifier ->
+                    ListDialogHeaderIcon(icon = Icons.Outlined.Storage, color = accent, modifier = modifier)
+                },
+                title = stringResource(R.string.settings_system_storage_management_title),
+                subtitle = context.formatUsedFree(used = stats.appUsedBytes, free = stats.deviceFreeBytes),
+                subtitleLoading = loading,
+                accentColor = accent,
+                alwaysShowBand = true
+            ) {
+                TitleAction(
+                    icon = Icons.Outlined.Refresh,
+                    contentDescription = stringResource(R.string.refresh),
+                    onClick = {
+                        viewModel.refresh()
+                        histogramNonce++
+                    },
+                    style = TitleActionStyle.Accent
+                )
+            }
+        },
         footer = {
             AppDialogOutlinedButton(
                 text = stringResource(R.string.close),
@@ -97,36 +133,9 @@ fun StorageManagementDialog(
             )
         }
     ) {
-        // Nothing has been read until the first reading lands, and a real one always has room free
-        val loading = stats == StorageStats.Empty
-
-        // Headed like the other lists, with how much Morphe holds against what is left free
-        // where the subtitle goes, above the breakdown that scrolls under it
-        val accent = MaterialTheme.colorScheme.primary
-        ListDialogHeader(
-            icon = { modifier ->
-                ListDialogHeaderIcon(icon = Icons.Outlined.Storage, color = accent, modifier = modifier)
-            },
-            title = stringResource(R.string.settings_system_storage_management_title),
-            subtitle = context.formatUsedFree(used = stats.appUsedBytes, free = stats.deviceFreeBytes),
-            subtitleLoading = loading,
-            accentColor = accent
-        ) {
-            TitleAction(
-                icon = Icons.Outlined.Refresh,
-                contentDescription = stringResource(R.string.refresh),
-                onClick = {
-                    viewModel.refresh()
-                    histogramNonce++
-                },
-                style = TitleActionStyle.Accent
-            )
-        }
-
         DialogScrollColumn(
             modifier = Modifier.weight(1f),
-            contentPadding = PaddingValues(vertical = Defaults.ItemSpacing),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)
         ) {
             key(histogramNonce) {
                 StorageHistogram(segments = stats.toSegments(), loading = loading)
@@ -138,15 +147,14 @@ fun StorageManagementDialog(
                     accentColor = StorageColors.OriginalApks,
                     title = stringResource(R.string.settings_system_original_apks_title),
                     description = stringResource(R.string.settings_system_original_apks_description),
-                    onClick = { apkDialog = ApkManagementType.ORIGINAL }
+                    onClick = { onOpenApks(ApkManagementType.ORIGINAL) }
                 )
-                SettingsDivider()
                 DataRow(
                     icon = Icons.Outlined.Apps,
                     accentColor = StorageColors.PatchedApks,
                     title = stringResource(R.string.settings_system_patched_apks_title),
                     description = stringResource(R.string.settings_system_patched_apks_description),
-                    onClick = { apkDialog = ApkManagementType.PATCHED }
+                    onClick = { onOpenApks(ApkManagementType.PATCHED) }
                 )
             }
 
@@ -159,7 +167,6 @@ fun StorageManagementDialog(
                     bytes = stats.httpCacheBytes,
                     onClear = { viewModel.clearHttpCache(onCleared) }
                 )
-                SettingsDivider()
                 CacheActionRow(
                     icon = Icons.Outlined.Share,
                     accentColor = StorageColors.InstallerShare,
@@ -168,7 +175,6 @@ fun StorageManagementDialog(
                     bytes = stats.installerShareBytes,
                     onClear = { viewModel.clearInstallerShareCache(onCleared) }
                 )
-                SettingsDivider()
                 CacheActionRow(
                     icon = Icons.Outlined.Build,
                     accentColor = StorageColors.PatcherWorkspace,
@@ -177,7 +183,6 @@ fun StorageManagementDialog(
                     bytes = stats.patcherWorkspaceBytes,
                     onClear = { viewModel.clearPatcherWorkspace(onCleared) }
                 )
-                SettingsDivider()
                 CacheActionRow(
                     icon = Icons.Outlined.HourglassEmpty,
                     accentColor = StorageColors.Temporary,
@@ -186,7 +191,6 @@ fun StorageManagementDialog(
                     bytes = stats.temporaryBytes,
                     onClear = { viewModel.clearTemporary(onCleared) }
                 )
-                SettingsDivider()
                 CacheActionRow(
                     icon = Icons.Outlined.DeleteSweep,
                     accentColor = MaterialTheme.colorScheme.error,
@@ -234,28 +238,30 @@ private fun CacheActionRow(
     bytes: Long,
     onClear: () -> Unit
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(Defaults.ContentPadding),
-        verticalArrangement = Arrangement.spacedBy(Defaults.ContentPadding)
-    ) {
-        IconTextRow(
-            leadingContent = { ThemedIcon(icon = icon, tint = accentColor) },
-            title = title,
-            description = description
-        )
-        CardActionRow(
-            actions = listOf(
-                CardAction(
-                    icon = Icons.Outlined.DeleteSweep,
-                    label = "${stringResource(R.string.clear)} (${LocalContext.current.formatBytes(bytes)})",
-                    onClick = onClear,
-                    enabled = bytes > 0L,
-                    destructive = true
+    SettingsItemCard(onClick = null) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(Defaults.SpaceLarge),
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)
+        ) {
+            IconTextRow(
+                leadingContent = { ThemedIcon(icon = icon, tint = accentColor) },
+                title = title,
+                description = description
+            )
+            CardActionRow(
+                actions = listOf(
+                    CardAction(
+                        icon = Icons.Outlined.DeleteSweep,
+                        label = "${stringResource(R.string.clear)} (${LocalContext.current.formatBytes(bytes)})",
+                        onClick = onClear,
+                        enabled = bytes > 0L,
+                        destructive = true
+                    )
                 )
             )
-        )
+        }
     }
 }
 

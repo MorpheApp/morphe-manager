@@ -7,7 +7,9 @@ package app.morphe.manager.domain.manager
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.annotation.StringRes
 import androidx.core.content.edit
+import app.morphe.manager.R
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.util.enumByNameOrNull
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -41,10 +43,13 @@ data class HomeAppCategoryState(
  * How the home app list is grouped. [ALL_APPS] is a flat list; [SOURCES] groups by patch
  * source; [CUSTOM] groups by user-defined categories.
  */
-enum class HomeAppCategoryViewMode {
-    ALL_APPS,
-    SOURCES,
-    CUSTOM;
+enum class HomeAppCategoryViewMode(
+    @param:StringRes override val labelRes: Int,
+    @param:StringRes override val descriptionRes: Int
+) : SortModeSpec {
+    ALL_APPS(R.string.home_category_all_apps, R.string.home_app_grouping_all_apps_description),
+    SOURCES(R.string.sources, R.string.home_app_grouping_sources_description),
+    CUSTOM(R.string.home_category_custom, R.string.home_app_grouping_custom_description);
 
     companion object {
         /** Parse a persisted enum name; unknown values fall back to [ALL_APPS]. */
@@ -77,9 +82,7 @@ data class HomeAppButtonSnapshot(
     val categories: List<HomeAppCategorySnapshot>? = null,
     val assignments: Map<String, String>? = null,
     val uncategorizedCollapsed: Boolean? = null,
-    val categoryViewMode: String? = null,
-    val showCategoryViewSwitcher: Boolean? = null,
-    val showSortButton: Boolean? = null
+    val categoryViewMode: String? = null
 )
 
 /**
@@ -126,12 +129,6 @@ class HomeAppButtonPreferences(context: Context) {
     private val _categoryViewMode = MutableStateFlow(loadCategoryViewMode())
     val categoryViewMode: StateFlow<HomeAppCategoryViewMode> = _categoryViewMode.asStateFlow()
 
-    private val _showCategoryViewSwitcher = MutableStateFlow(loadShowCategoryViewSwitcher())
-    val showCategoryViewSwitcher: StateFlow<Boolean> = _showCategoryViewSwitcher.asStateFlow()
-
-    private val _showSortButton = MutableStateFlow(loadShowSortButton())
-    val showSortButton: StateFlow<Boolean> = _showSortButton.asStateFlow()
-
     private val _expandedSourceGroups = MutableStateFlow(loadExpandedSourceGroups())
     val expandedSourceGroups: StateFlow<Set<Int>> = _expandedSourceGroups.asStateFlow()
 
@@ -140,8 +137,15 @@ class HomeAppButtonPreferences(context: Context) {
      * know it as. Only the one version is held, so a user staying on an older build is left alone
      * until the sources move past what was turned down.
      */
-    private val _ignoredVersions = MutableStateFlow(loadIgnoredVersions())
-    val ignoredVersions: StateFlow<Map<String, String>> = _ignoredVersions.asStateFlow()
+    private val ignoredVersionStore = IgnoredPerPackage(KEY_IGNORED_VERSIONS)
+    val ignoredVersions: StateFlow<Map<String, String>> = ignoredVersionStore.values
+
+    /**
+     * The patch release each installed app was told to stop offering, keyed by the package the
+     * app is installed as. The next release of its source is offered as usual.
+     */
+    private val ignoredPatchReleaseStore = IgnoredPerPackage(KEY_IGNORED_PATCH_RELEASES)
+    val ignoredPatchReleases: StateFlow<Map<String, String>> = ignoredPatchReleaseStore.values
 
     private fun loadHiddenPackages(): Set<String> {
         return prefs.getStringSet(KEY_HIDDEN, null) ?: emptySet()
@@ -162,18 +166,6 @@ class HomeAppButtonPreferences(context: Context) {
                     .filter { it.isNotBlank() }
                     .distinct()
                 if (packageNames.isEmpty()) null else uid to packageNames
-            }
-            .toMap()
-    }
-
-    private fun loadIgnoredVersions(): Map<String, String> {
-        val raw = prefs.getString(KEY_IGNORED_VERSIONS, null) ?: return emptyMap()
-        return raw.lineSequence()
-            .mapNotNull { line ->
-                val parts = line.split(CATEGORY_SEPARATOR)
-                val packageName = parts.getOrNull(0)?.takeIf { it.isNotBlank() } ?: return@mapNotNull null
-                val version = parts.getOrNull(1)?.takeIf { it.isNotBlank() } ?: return@mapNotNull null
-                packageName to version
             }
             .toMap()
     }
@@ -201,27 +193,57 @@ class HomeAppButtonPreferences(context: Context) {
     }
 
     /** Stops [packageName] being offered at [version]. A later version is offered as usual. */
-    fun ignoreVersion(packageName: String, version: String) {
-        saveIgnoredVersions(
-            _ignoredVersions.value + (packageName.sanitizePersistedField() to version.sanitizePersistedField())
-        )
-    }
+    fun ignoreVersion(packageName: String, version: String) = ignoredVersionStore.ignore(packageName, version)
 
     /** Takes [packageName] off the ignore list, so whatever the sources support is offered again. */
-    fun stopIgnoringVersion(packageName: String) {
-        saveIgnoredVersions(_ignoredVersions.value - packageName)
-    }
+    fun stopIgnoringVersion(packageName: String) = ignoredVersionStore.stopIgnoring(packageName)
 
-    private fun saveIgnoredVersions(versions: Map<String, String>) {
-        prefs.edit {
-            putString(
-                KEY_IGNORED_VERSIONS,
-                versions.entries.joinToString("\n") { (packageName, version) ->
-                    "$packageName$CATEGORY_SEPARATOR$version"
+    /**
+     * Stops the patch update [release] names being offered for [packageName]. The next release
+     * of its source is offered as usual.
+     */
+    fun ignorePatchRelease(packageName: String, release: String) =
+        ignoredPatchReleaseStore.ignore(packageName, release)
+
+    /** Takes [packageName] off the patch ignore list, so the update waiting for it is offered again. */
+    fun stopIgnoringPatchRelease(packageName: String) = ignoredPatchReleaseStore.stopIgnoring(packageName)
+
+    /**
+     * One offer turned down per package, persisted under [key] as a line for each. Only the one
+     * value is held for a package, so whatever comes after it is offered as usual.
+     */
+    private inner class IgnoredPerPackage(private val key: String) {
+        private val _values = MutableStateFlow(load())
+        val values: StateFlow<Map<String, String>> = _values.asStateFlow()
+
+        fun ignore(packageName: String, value: String) =
+            save(_values.value + (packageName.sanitizePersistedField() to value.sanitizePersistedField()))
+
+        fun stopIgnoring(packageName: String) = save(_values.value - packageName)
+
+        private fun load(): Map<String, String> {
+            val raw = prefs.getString(key, null) ?: return emptyMap()
+            return raw.lineSequence()
+                .mapNotNull { line ->
+                    val parts = line.split(CATEGORY_SEPARATOR)
+                    val packageName = parts.getOrNull(0)?.takeIf { it.isNotBlank() } ?: return@mapNotNull null
+                    val value = parts.getOrNull(1)?.takeIf { it.isNotBlank() } ?: return@mapNotNull null
+                    packageName to value
                 }
-            )
+                .toMap()
         }
-        _ignoredVersions.value = versions
+
+        private fun save(values: Map<String, String>) {
+            prefs.edit {
+                putString(
+                    key,
+                    values.entries.joinToString("\n") { (packageName, value) ->
+                        "$packageName$CATEGORY_SEPARATOR$value"
+                    }
+                )
+            }
+            _values.value = values
+        }
     }
 
     fun saveOrder(packageNames: List<String>) {
@@ -275,22 +297,6 @@ class HomeAppButtonPreferences(context: Context) {
     fun setCategoryViewMode(mode: HomeAppCategoryViewMode) {
         prefs.edit { putString(KEY_CATEGORY_VIEW_MODE, mode.name) }
         _categoryViewMode.value = mode
-    }
-
-    fun setShowCategoryViewSwitcher(show: Boolean) {
-        prefs.edit { putBoolean(KEY_SHOW_CATEGORY_VIEW_SWITCHER, show) }
-        _showCategoryViewSwitcher.value = show
-        // Hiding the switcher leaves no way back from a grouped list, so the flat one returns with it.
-        // Showing it reads the saved grouping back, as the next launch would
-        if (!show) setCategoryViewMode(HomeAppCategoryViewMode.ALL_APPS)
-        else _categoryViewMode.value = loadCategoryViewMode()
-    }
-
-    fun setShowSortButton(show: Boolean) {
-        prefs.edit { putBoolean(KEY_SHOW_SORT_BUTTON, show) }
-        _showSortButton.value = show
-        // The filter is set from the sort button, so it goes with it rather than coming back unseen
-        if (!show) setFilterMode(null)
     }
 
     /**
@@ -408,9 +414,7 @@ class HomeAppButtonPreferences(context: Context) {
             categories = category.categories.map { HomeAppCategorySnapshot(it.id, it.name, it.collapsed) },
             assignments = category.assignments,
             uncategorizedCollapsed = category.uncategorizedCollapsed,
-            categoryViewMode = _categoryViewMode.value.name,
-            showCategoryViewSwitcher = _showCategoryViewSwitcher.value,
-            showSortButton = _showSortButton.value
+            categoryViewMode = _categoryViewMode.value.name
         )
     }
 
@@ -424,16 +428,11 @@ class HomeAppButtonPreferences(context: Context) {
             snapshot.customOrder?.let { putString(KEY_CUSTOM_ORDER, it.joinToString("\n")) }
             snapshot.sortMode?.let { putString(KEY_SORT_MODE, it) }
             snapshot.categoryViewMode?.let { putString(KEY_CATEGORY_VIEW_MODE, it) }
-            snapshot.showCategoryViewSwitcher?.let { putBoolean(KEY_SHOW_CATEGORY_VIEW_SWITCHER, it) }
-            snapshot.showSortButton?.let { putBoolean(KEY_SHOW_SORT_BUTTON, it) }
         }
         snapshot.hiddenPackages?.let { _hiddenPackages.value = it }
         snapshot.customOrder?.let { _customOrder.value = it }
         snapshot.sortMode?.let { _sortMode.value = HomeAppSortMode.fromPreference(it) }
-        // Read back rather than parsed, so a backup with the switcher hidden lands on the flat list
-        _categoryViewMode.value = loadCategoryViewMode()
-        snapshot.showCategoryViewSwitcher?.let { _showCategoryViewSwitcher.value = it }
-        snapshot.showSortButton?.let { _showSortButton.value = it }
+        snapshot.categoryViewMode?.let { _categoryViewMode.value = HomeAppCategoryViewMode.fromPreference(it) }
 
         // Route category state through saveCategoryState so persist + StateFlow stay in sync
         val hasCategoryData = snapshot.categories != null ||
@@ -491,19 +490,8 @@ class HomeAppButtonPreferences(context: Context) {
         )
     }
 
-    // A grouping saved while the switcher was hidden has no way back on the home screen
     private fun loadCategoryViewMode(): HomeAppCategoryViewMode =
-        if (loadShowCategoryViewSwitcher()) {
-            HomeAppCategoryViewMode.fromPreference(prefs.getString(KEY_CATEGORY_VIEW_MODE, null))
-        } else {
-            HomeAppCategoryViewMode.ALL_APPS
-        }
-
-    private fun loadShowCategoryViewSwitcher(): Boolean =
-        prefs.getBoolean(KEY_SHOW_CATEGORY_VIEW_SWITCHER, false)
-
-    private fun loadShowSortButton(): Boolean =
-        prefs.getBoolean(KEY_SHOW_SORT_BUTTON, true)
+        HomeAppCategoryViewMode.fromPreference(prefs.getString(KEY_CATEGORY_VIEW_MODE, null))
 
     private fun loadExpandedSourceGroups(): Set<Int> =
         prefs.getStringSet(KEY_EXPANDED_SOURCE_GROUPS, null)
@@ -591,11 +579,10 @@ class HomeAppButtonPreferences(context: Context) {
         private const val KEY_CATEGORIES = "categories"
         private const val KEY_CATEGORY_ASSIGNMENTS = "category_assignments"
         private const val KEY_CATEGORY_VIEW_MODE = "category_view_mode"
-        private const val KEY_SHOW_CATEGORY_VIEW_SWITCHER = "show_category_view_switcher"
-        private const val KEY_SHOW_SORT_BUTTON = "show_sort_button"
         private const val KEY_EXPANDED_SOURCE_GROUPS = "expanded_source_groups"
         private const val KEY_UNCATEGORIZED_COLLAPSED = "uncategorized_collapsed"
         private const val KEY_IGNORED_VERSIONS = "ignored_versions"
+        private const val KEY_IGNORED_PATCH_RELEASES = "ignored_patch_releases"
         private const val CATEGORY_SEPARATOR = "\t"
     }
 }

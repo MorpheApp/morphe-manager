@@ -26,12 +26,14 @@ import androidx.compose.ui.unit.dp
  * @param monochrome Whether the monochrome style flattens the app's accent-heavy visuals into neutral tokens.
  * @param colorAccents Whether apps and sources wear their own colors, or the theme's accent instead.
  * @param outlines Whether cards, panels and buttons draw a hairline edge around them.
+ * @param blur Whether headers, bars and panels blur what scrolls under them.
  */
 @Immutable
 data class ThemeTraits(
     val monochrome: Boolean = false,
     val colorAccents: Boolean = true,
-    val outlines: Boolean = true
+    val outlines: Boolean = true,
+    val blur: Boolean = true
 )
 
 val LocalThemeTraits = staticCompositionLocalOf { ThemeTraits() }
@@ -79,6 +81,10 @@ object ThemeTraitsDefaults {
     @Composable
     fun outline(color: Color, width: Dp): BorderStroke? =
         if (traits.outlines) BorderStroke(width, color) else null
+
+    /** Whether a surface floating over content blurs it, or stands solid where the settings say not to. */
+    @Composable
+    fun blur(): Boolean = traits.blur
 
     @Composable
     fun cardElevation(base: Dp): Dp = if (traits.monochrome) 0.dp else base

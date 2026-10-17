@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.home
 
-import android.content.Context
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -18,7 +17,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.zIndex
 import app.morphe.manager.domain.manager.HomeAppCategoryViewMode
 import app.morphe.manager.ui.model.HomeAppItem
-import app.morphe.manager.util.toast
+import app.morphe.manager.ui.screen.shared.UserMessages
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.ReorderableLazyListState
 
@@ -108,8 +107,8 @@ internal fun LazyListScope.groupedAppCards(
     appActions: HomeAppActions,
     categoryReorderableState: ReorderableLazyListState,
     haptic: HapticFeedback,
-    context: Context,
-    categoryActionsUnavailableToast: String,
+    messages: UserMessages,
+    categoryActionsUnavailableMessage: String,
 ) {
     val selectedPackages = state.selectedPackages
     groups.forEach { group ->
@@ -123,7 +122,7 @@ internal fun LazyListScope.groupedAppCards(
                 isFooterBusy -> null
                 group.editable -> { -> state.activeCategoryId = group.id }
                 group.sourceUid != null -> { -> state.activeSourceUid = group.sourceUid }
-                else -> { -> context.toast(categoryActionsUnavailableToast) }
+                else -> { -> messages.show(categoryActionsUnavailableMessage) }
             }
             val headerContent: @Composable ((@Composable () -> Unit)?) -> Unit = { dragHandle ->
                 HomeCategoryHeader(

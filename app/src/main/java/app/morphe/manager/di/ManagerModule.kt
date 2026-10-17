@@ -21,6 +21,7 @@ import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.links.AppLinksManager
 import app.morphe.manager.domain.manager.*
 import app.morphe.manager.ui.screen.shared.ContentTranslation
+import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.AppCoroutineScope
 import app.morphe.manager.util.ContentTranslator
 import app.morphe.manager.util.PM
@@ -48,4 +49,5 @@ val managerModule = module {
     singleOf(::ContentTranslator)
     singleOf(::ContentTranslation)
     singleOf(::AppLinksManager)
+    singleOf(::UserMessages)
 }

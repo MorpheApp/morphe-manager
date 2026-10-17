@@ -164,7 +164,16 @@ class MainViewModel(
         approvedBatchPatch = null
     }
 
-    data class DeepLinkSource(val url: String, val name: String?)
+    /**
+     * A source a link asks to add. [packageName] names the app the link was opened for, so the
+     * source is added for that app alone, and [appName] is what the link calls that app.
+     */
+    data class DeepLinkSource(
+        val url: String,
+        val name: String?,
+        val packageName: String? = null,
+        val appName: String? = null
+    )
 
     /**
      * A batch patch run requested through [app.morphe.manager.MainActivity.ACTION_BATCH_PATCH].

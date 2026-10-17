@@ -8,21 +8,35 @@ package app.morphe.manager.util
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color as AndroidColor
+import android.os.Build
 import android.os.SystemClock
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.scale
 import app.morphe.manager.R
+import app.morphe.manager.ui.screen.shared.Defaults
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
+import java.io.FileNotFoundException
 import java.net.URL
+import java.security.MessageDigest
 import java.util.concurrent.ConcurrentHashMap
 
 /** Side of the thumbnail an accent is read from: enough for a logo's colors, cheap to walk. */
@@ -36,7 +50,8 @@ private const val ACCENT_MIN_SATURATION = 0.25f
 private const val ACCENT_MIN_VALUE = 0.2f
 
 /**
- * In-memory avatar cache scoped to the process lifetime.
+ * Avatar cache scoped to the process lifetime, backed by a directory on disk once [useDiskCache]
+ * names one, so a cold start shows the avatars it saw last time before the network answers.
  */
 object AvatarCache {
     private val cache = ConcurrentHashMap<String, Bitmap>()
@@ -45,8 +60,29 @@ object AvatarCache {
     // each one's color once rather than every time its row returns
     private val accents = ConcurrentHashMap<String, Accent>()
 
+    @Volatile
+    private var diskDir: File? = null
+
     operator fun get(url: String): Bitmap? = cache[url]
-    operator fun set(url: String, bitmap: Bitmap) { cache[url] = bitmap }
+
+    operator fun set(url: String, bitmap: Bitmap) {
+        cache[url] = bitmap
+        // A picture replaced by a newer one has a color of its own
+        accents.remove(url)
+    }
+
+    fun remove(url: String) {
+        cache.remove(url)
+        accents.remove(url)
+    }
+
+    /** Keeps avatars in [dir] as well, across restarts. */
+    fun useDiskCache(dir: File) {
+        diskDir = dir
+    }
+
+    /** Where the avatar at [url] is kept on disk, or null while no directory is set. */
+    internal fun diskFile(url: String): File? = diskDir?.resolve(url.cacheKey())
 
     /** [accentColor] of the avatar at [url], or null while its bitmap is not in the cache. */
     fun accent(url: String): Accent? =
@@ -60,35 +96,152 @@ object AvatarCache {
 @Volatile
 private var launcherAccent: AvatarCache.Accent? = null
 
+/** Connect and read timeout of an avatar download. */
+private const val AVATAR_TIMEOUT_MILLIS = 5000
+
 /**
- * Load a remote avatar image from [url], storing the result in [AvatarCache].
- * Returns null on failure.
+ * How an avatar is kept on disk. Lossy WebP keeps a photo a fraction of its lossless size with
+ * nothing to see at the size an avatar is drawn, and keeps transparency, unlike JPEG.
  */
-suspend fun loadRemoteAvatar(url: String): Bitmap? = withContext(Dispatchers.IO) {
-    AvatarCache[url]?.let { return@withContext it }
-    if (failedAvatars.isRecent(url)) return@withContext null
-    try {
-        val connection = URL(url).openConnection()
-        connection.connectTimeout = 5000
-        connection.readTimeout = 5000
-        connection.connect()
-        val bytes = connection.getInputStream().use { it.readBytes() }
-        val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
-        BitmapFactory.decodeByteArray(bytes, 0, bytes.size, bounds)
-        val options = BitmapFactory.Options().apply {
-            inSampleSize = calculateSampleSize(bounds.outWidth, bounds.outHeight, AVATAR_MAX_SIDE)
-        }
-        BitmapFactory.decodeByteArray(bytes, 0, bytes.size, options)
-            ?.also { AvatarCache[url] = it }
-            ?: run {
-                failedAvatars.add(url)
-                null
-            }
-    } catch (_: Exception) {
-        failedAvatars.add(url)
-        null
+@Suppress("DEPRECATION")
+private val AVATAR_FORMAT = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+    Bitmap.CompressFormat.WEBP_LOSSY
+} else {
+    // Lossy below a quality of 100 on the versions without the explicit format
+    Bitmap.CompressFormat.WEBP
+}
+private const val AVATAR_QUALITY = 90
+
+// Outlives whoever asked, so a download a closed sheet started still lands in the cache
+private val avatarScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+
+// One load per address at a time, so the startup preload and a sheet opened over it share a
+// download rather than racing two
+private val avatarLoads = ConcurrentHashMap<String, Deferred<Bitmap?>>()
+
+/** Addresses whose kept avatar has been checked against the network in this run. */
+private val revalidatedAvatars = ConcurrentHashMap.newKeySet<String>()
+
+/**
+ * Loads the avatar at [url] into [AvatarCache]: from memory, else from disk, else from the
+ * network. Null when the address holds no picture or cannot be reached.
+ */
+suspend fun loadRemoteAvatar(url: String): Bitmap? {
+    AvatarCache[url]?.let { return it }
+    if (failedAvatars.isRecent(url)) return null
+    val load = avatarLoads.computeIfAbsent(url) {
+        avatarScope.async(start = CoroutineStart.LAZY) { loadUncachedAvatar(url) }
+    }
+    return try {
+        load.await()
+    } finally {
+        avatarLoads.remove(url, load)
     }
 }
+
+/**
+ * Loads the avatar at [url], or at [fallbackUrl] where that one has none, and returns the address
+ * that gave one, whose bitmap is then in [AvatarCache].
+ */
+suspend fun loadAvatar(url: String?, fallbackUrl: String?): String? =
+    url?.takeIf { loadRemoteAvatar(it) != null }
+        ?: fallbackUrl?.takeIf { loadRemoteAvatar(it) != null }
+
+private fun loadUncachedAvatar(url: String): Bitmap? {
+    val file = AvatarCache.diskFile(url)
+    val kept = file?.takeIf { it.isFile }?.let { runCatching { it.readBytes() }.getOrNull() }
+    if (kept != null) {
+        // Shown as kept, and checked once a run in case the author has changed it since
+        revalidateAvatar(url, file)
+        // Kept empty for an address that held no picture, so its fallback shows right away
+        val bitmap = kept.takeIf { it.isNotEmpty() }?.let(::decodeAvatar)
+        if (bitmap != null) AvatarCache[url] = bitmap else failedAvatars.add(url)
+        return bitmap
+    }
+
+    return when (val fetched = fetchAvatar(url)) {
+        is FetchedAvatar.Picture -> fetched.bitmap.also {
+            AvatarCache[url] = it
+            file?.storeAvatar(it)
+        }
+        FetchedAvatar.None -> {
+            failedAvatars.add(url)
+            file?.storeAvatar(null)
+            null
+        }
+        FetchedAvatar.Unreachable -> {
+            failedAvatars.add(url)
+            null
+        }
+    }
+}
+
+private fun revalidateAvatar(url: String, file: File) {
+    if (!revalidatedAvatars.add(url)) return
+    avatarScope.launch {
+        // Picked up by whatever shows the avatar next, the one on screen keeps its picture
+        when (val fetched = fetchAvatar(url)) {
+            is FetchedAvatar.Picture -> {
+                AvatarCache[url] = fetched.bitmap
+                file.storeAvatar(fetched.bitmap)
+            }
+            FetchedAvatar.None -> {
+                AvatarCache.remove(url)
+                file.storeAvatar(null)
+            }
+            // Offline, the kept avatar is the best there is
+            FetchedAvatar.Unreachable -> Unit
+        }
+    }
+}
+
+/** What an address gave: a picture, word that it holds none, or nothing, as it was not reached. */
+private sealed interface FetchedAvatar {
+    class Picture(val bitmap: Bitmap) : FetchedAvatar
+    data object None : FetchedAvatar
+    data object Unreachable : FetchedAvatar
+}
+
+private fun fetchAvatar(url: String): FetchedAvatar {
+    val bytes = try {
+        URL(url).openConnection().run {
+            connectTimeout = AVATAR_TIMEOUT_MILLIS
+            readTimeout = AVATAR_TIMEOUT_MILLIS
+            getInputStream().use { it.readBytes() }
+        }
+    } catch (_: FileNotFoundException) {
+        // What 404 surfaces as, typically a source that ships no picture of its own
+        return FetchedAvatar.None
+    } catch (_: Exception) {
+        return FetchedAvatar.Unreachable
+    }
+    return decodeAvatar(bytes)?.let(FetchedAvatar::Picture) ?: FetchedAvatar.None
+}
+
+private fun decodeAvatar(bytes: ByteArray): Bitmap? {
+    val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
+    BitmapFactory.decodeByteArray(bytes, 0, bytes.size, bounds)
+    val options = BitmapFactory.Options().apply {
+        inSampleSize = calculateSampleSize(bounds.outWidth, bounds.outHeight, AVATAR_MAX_SIDE)
+    }
+    return BitmapFactory.decodeByteArray(bytes, 0, bytes.size, options)
+}
+
+/**
+ * Keeps [bitmap] here, or an empty file for an address that holds no picture. Written beside and
+ * moved into place, so a run that dies halfway never leaves a broken avatar to read back.
+ */
+private fun File.storeAvatar(bitmap: Bitmap?) {
+    runCatching {
+        parentFile?.mkdirs()
+        val partial = resolveSibling("$name.partial")
+        partial.outputStream().use { out -> bitmap?.compress(AVATAR_FORMAT, AVATAR_QUALITY, out) }
+        if (!partial.renameTo(this)) partial.delete()
+    }
+}
+
+private fun String.cacheKey(): String =
+    MessageDigest.getInstance("SHA-256").digest(toByteArray()).joinToString("") { "%02x".format(it) }
 
 /**
  * Avatars that failed to load lately. Rows show the same avatar again each time they scroll back
@@ -163,16 +316,15 @@ fun Bitmap.accentColor(): Color? {
  */
 @Composable
 fun rememberAvatarAccent(url: String?, fallbackUrl: String? = null): Color? {
-    // An avatar already in the cache is read right away, so what shows it opens in its color
-    val known = remember(url, fallbackUrl) {
-        url?.let(AvatarCache::accent) ?: fallbackUrl?.let(AvatarCache::accent)
+    // An avatar already in the cache is read right away, so what shows it opens in its color. The
+    // fallback's only stands in while the avatar it backs up is tried
+    val known = remember(url) { url?.let(AvatarCache::accent) }
+    var accent by remember(url, fallbackUrl) {
+        mutableStateOf((known ?: fallbackUrl?.let(AvatarCache::accent))?.color)
     }
-    var accent by remember(url, fallbackUrl) { mutableStateOf(known?.color) }
     LaunchedEffect(url, fallbackUrl) {
         if (known != null) return@LaunchedEffect
-        val loadedUrl = url?.takeIf { loadRemoteAvatar(it) != null }
-            ?: fallbackUrl?.takeIf { loadRemoteAvatar(it) != null }
-            ?: return@LaunchedEffect
+        val loadedUrl = loadAvatar(url, fallbackUrl) ?: return@LaunchedEffect
         accent = withContext(Dispatchers.Default) { AvatarCache.accent(loadedUrl)?.color }
     }
     return accent
@@ -202,7 +354,8 @@ fun rememberSourceAccent(isDefault: Boolean, avatarUrl: String?, fallbackAvatarU
 /**
  * Displays a remote avatar image loaded from [url].
  * If [url] fails to load, falls back to [fallbackUrl].
- * Renders nothing until a bitmap is available.
+ * Renders nothing until a bitmap is available, then fades in over whatever stood in for it. One
+ * already cached shows at once.
  */
 @Composable
 fun RemoteAvatar(
@@ -210,23 +363,24 @@ fun RemoteAvatar(
     url: String,
     fallbackUrl: String? = null
 ) {
-    var bitmap by remember(url) {
-        mutableStateOf(AvatarCache[url] ?: fallbackUrl?.let { AvatarCache[it] })
-    }
+    val cached = remember(url) { AvatarCache[url] }
+    var bitmap by remember(url) { mutableStateOf(cached ?: fallbackUrl?.let { AvatarCache[it] }) }
+    val alpha = remember(url) { Animatable(if (bitmap != null) 1f else 0f) }
 
     LaunchedEffect(url, fallbackUrl) {
-        if (bitmap == null) {
-            bitmap = loadRemoteAvatar(url)
-                ?: fallbackUrl?.let { loadRemoteAvatar(it) }
+        // A cached fallback only stands in while the avatar it backs up is tried
+        if (cached == null) {
+            bitmap = loadAvatar(url, fallbackUrl)?.let { AvatarCache[it] } ?: bitmap
         }
+        if (bitmap != null) alpha.animateTo(1f, tween(Defaults.ANIMATION_DURATION))
     }
 
-    if (bitmap != null) {
+    bitmap?.let {
         Image(
-            bitmap = bitmap!!.asImageBitmap(),
+            bitmap = it.asImageBitmap(),
             contentDescription = null,
             contentScale = ContentScale.Crop,
-            modifier = modifier
+            modifier = modifier.graphicsLayer { this.alpha = alpha.value }
         )
     }
 }

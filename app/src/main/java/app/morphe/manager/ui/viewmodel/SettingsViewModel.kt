@@ -9,6 +9,7 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -37,10 +38,27 @@ import app.morphe.manager.worker.UpdateCheckWorker
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.*
+import java.util.Locale
+
+/**
+ * An app with saved patch selections: its name as resolved for display, where that came from, and
+ * how many patches each source it has a selection from holds, by source uid.
+ */
+@Immutable
+data class SelectionApp(
+    val packageName: String,
+    val displayName: String,
+    val dataSource: AppDataSource,
+    val bundles: Map<Int, Int>
+)
 
 class SettingsViewModel(
     val prefs: PreferencesManager,
@@ -210,17 +228,28 @@ class SettingsViewModel(
         prefs.includeGitHubPatInExports.update(includeInExport)
     }
 
+    // Asking how to install and installing on its own exclude each other, so turning one on turns the other off
+
     fun setPromptInstallerOnInstall(enabled: Boolean) = viewModelScope.launch {
         prefs.promptInstallerOnInstall.update(enabled)
+        if (enabled) prefs.autoInstallAfterPatching.update(false)
     }
 
     fun setAutoInstallAfterPatching(enabled: Boolean) = viewModelScope.launch {
         prefs.autoInstallAfterPatching.update(enabled)
+        if (enabled) prefs.promptInstallerOnInstall.update(false)
     }
 
     fun setAutoUninstallWithShizuku(enabled: Boolean) = viewModelScope.launch {
         prefs.autoUninstallWithShizuku.update(enabled)
     }
+
+    fun setIgnoreInstallTargetRules(enabled: Boolean) = viewModelScope.launch {
+        prefs.ignoreInstallTargetRules.update(enabled)
+    }
+
+    /** Whether the device has root, which the patch mode and the rules tied to it depend on. */
+    fun isDeviceRooted() = rootInstaller.isDeviceRooted()
 
     fun setUseCustomFilePicker(enabled: Boolean) = viewModelScope.launch {
         prefs.useCustomFilePicker.update(enabled)
@@ -290,6 +319,26 @@ class SettingsViewModel(
         selectionRepository.getSelectionsSummaryFlow()
             .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
 
+    /**
+     * The apps with saved selections, each with its name resolved and in name order, emitted once
+     * every name of a summary is in, so a list of them opens already in its order. Cold, so the
+     * names are resolved for whoever collects it now rather than kept from an earlier look.
+     */
+    @OptIn(ExperimentalCoroutinesApi::class)
+    fun selectionApps(): Flow<List<SelectionApp>> =
+        selectionRepository.getSelectionsSummaryFlow()
+            .mapLatest { summary ->
+                coroutineScope {
+                    summary.map { (packageName, bundles) ->
+                        async {
+                            val data = appDataResolver.resolveAppData(packageName)
+                            SelectionApp(packageName, data.displayName, data.source, bundles)
+                        }
+                    }.awaitAll()
+                }.sortedBy { it.displayName.lowercase(Locale.ROOT) }
+            }
+            .flowOn(Dispatchers.IO)
+
     /** Bundle uid → bundle name */
     val bundleNames: StateFlow<Map<Int, String>> =
         patchBundleRepository.sources
@@ -323,12 +372,6 @@ class SettingsViewModel(
         val packages = optionsRepository.getPackagesWithSavedOptions().first()
         packages.sumOf { optionsRepository.getOptionsCountForPackage(it) }
     }
-
-    /** Loads the options count for a single package (used by the per-package confirmation dialog). */
-    suspend fun loadOptionsCountForPackage(packageName: String): Int =
-        withContext(Dispatchers.IO) {
-            optionsRepository.getOptionsCountForPackage(packageName)
-        }
 
     /** Loads the options count for a specific package+bundle (used by bundle confirmation dialog). */
     suspend fun loadOptionsCountForBundle(packageName: String, bundleUid: Int): Int =

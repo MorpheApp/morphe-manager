@@ -98,6 +98,10 @@ class ThemeSettingsViewModel(
         prefs.outlines.update(!current)
     }
 
+    fun toggleBlur(current: Boolean) = viewModelScope.launch {
+        prefs.blur.update(!current)
+    }
+
     fun setBackgroundType(type: BackgroundType) = viewModelScope.launch {
         prefs.backgroundType.update(type)
     }

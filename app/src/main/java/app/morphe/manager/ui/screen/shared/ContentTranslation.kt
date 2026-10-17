@@ -19,7 +19,6 @@ import app.morphe.manager.util.ChangelogSection
 import app.morphe.manager.util.ContentTranslator
 import app.morphe.manager.util.mapItemTexts
 import app.morphe.manager.util.simpleMessage
-import app.morphe.manager.util.toast
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -37,6 +36,7 @@ private const val PREFETCH_BATCH = 50
 @Stable
 class ContentTranslation(
     private val app: Application,
+    private val messages: UserMessages,
     private val translator: ContentTranslator,
     private val networkInfo: NetworkInfo,
     private val prefs: PreferencesManager
@@ -118,10 +118,11 @@ class ContentTranslation(
     }
 
     private fun reportFailure(error: Exception) {
-        app.toast(
-            if (networkInfo.isConnected()) app.getString(R.string.content_translation_failed, error.simpleMessage())
-            else app.getString(R.string.no_network_toast)
-        )
+        if (networkInfo.isConnected()) {
+            messages.show(R.string.content_translation_failed, error.simpleMessage())
+        } else {
+            messages.show(R.string.no_network_toast)
+        }
     }
 }
 

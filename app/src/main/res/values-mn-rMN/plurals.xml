@@ -3,4 +3,5 @@
     <!-- How many files and folders a folder holds, under its name in the file picker -->
     <!-- Button that confirms the files checked in the file picker -->
     <!-- Button that adds every source waiting in the add source dialog -->
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
 </resources>

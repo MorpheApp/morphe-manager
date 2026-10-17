@@ -8,44 +8,27 @@ package app.morphe.manager.ui.screen.patcher
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.*
-import androidx.compose.foundation.background
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Launch
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.DeleteForever
-import androidx.compose.material.icons.filled.PriorityHigh
-import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.outlined.BugReport
-import androidx.compose.material.icons.outlined.DoneAll
-import androidx.compose.material.icons.outlined.ErrorOutline
-import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.outlined.InstallMobile
-import androidx.compose.material.icons.outlined.Link
-import androidx.compose.material.icons.outlined.LinkOff
-import androidx.compose.material.icons.outlined.Source
-import androidx.compose.material.icons.outlined.SportsEsports
-import androidx.compose.material.icons.outlined.Update
-import androidx.compose.material.icons.outlined.Warning
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.CompositingStrategy
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.heading
@@ -53,18 +36,12 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.patcher.patch.PatchSourceRef
-import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_BUILD
-import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_DEVICE
-import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_SOURCE
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.InstallViewModel.InstallState
-import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import app.morphe.manager.ui.viewmodel.labelRes
-import app.morphe.manager.util.contrastingContent
 import app.morphe.manager.util.withVersionPrefix
 
 /**
@@ -82,81 +59,26 @@ data class PatcherErrorInfo(
     val stripsNativeLibs: Boolean?
 )
 
-/**
- * Log lines the error dialog already spells out field by field in its diagnostics card, dropped
- * from the log it falls back to so the same values are not read twice.
- */
-private val SummarisedLogPrefixes = listOf(
-    LOG_WORKER_PREFIX_BUILD,
-    LOG_WORKER_PREFIX_DEVICE,
-    LOG_WORKER_PREFIX_SOURCE
-)
-
 /** Enum for patcher states. */
 enum class PatcherState {
     IN_PROGRESS,
     SUCCESS,
-    FAILED
+    FAILED;
+
+    companion object {
+        /** Where a run stands, by whether the patcher has succeeded yet. */
+        fun of(succeeded: Boolean?): PatcherState = when (succeeded) {
+            null -> IN_PROGRESS
+            true -> SUCCESS
+            false -> FAILED
+        }
+    }
 }
 
 /** The failure the error dialog is open on. */
 enum class PatcherFailure {
     PATCHING,
     INSTALL
-}
-
-/**
- * State holder for Patcher Screen.
- * Manages patching progress, dialogs, and installation flow.
- */
-@Stable
-class PatcherScreenState(
-    val viewModel: PatcherViewModel
-) {
-    // Error handling
-    var shownFailure by mutableStateOf<PatcherFailure?>(null)
-    var errorMessage by mutableStateOf("")
-    var errorInfo by mutableStateOf<PatcherErrorInfo?>(null)
-    var hasPatchingError by mutableStateOf(false)
-
-    /**
-     * The message shown in the error dialog. If [errorMessage] is blank or generic, falls back
-     * to the patching log so the user always sees actionable information.
-     */
-    val effectiveErrorMessage: String
-        get() {
-            if (errorMessage.isNotBlank()) return errorMessage
-            val logText = viewModel.patchRun.logs
-                .filterNot { (_, message) -> SummarisedLogPrefixes.any { message.startsWith(it) } }
-                .joinToString("\n") { (level, msg) -> "[$level] $msg" }
-            return logText.ifBlank { errorMessage }
-        }
-
-    // Cancel dialog
-    var showCancelDialog by mutableStateOf(false)
-
-    // Computed states
-    val patcherSucceeded: Boolean?
-        get() = viewModel.patcherSucceeded.value
-
-    val currentPatcherState: PatcherState
-        get() = when (patcherSucceeded) {
-            null -> PatcherState.IN_PROGRESS
-            true -> PatcherState.SUCCESS
-            else -> PatcherState.FAILED
-        }
-}
-
-/**
- * Remember patcher state with proper lifecycle.
- */
-@Composable
-fun rememberPatcherScreenState(
-    viewModel: PatcherViewModel
-): PatcherScreenState {
-    return remember(viewModel) {
-        PatcherScreenState(viewModel)
-    }
 }
 
 /**
@@ -245,6 +167,9 @@ fun resultButton(
 private fun ResultStatus.color(): Color =
     if (tone == SemanticTone.Primary) LocalAccent.current ?: tone.accent else tone.accent
 
+/** Font scale from which the result screen condenses its header to leave room for the rest. */
+private const val CONDENSED_HEADER_FONT_SCALE = 1.3f
+
 /** Lines an error takes on the result screen before the rest of it is left to the error dialog. */
 private const val ERROR_NOTICE_LINES = 3
 
@@ -257,6 +182,19 @@ private val ExceptionPackage = Regex("""^(?:[a-z_][\w$]*\.)+(?=[A-Z][\w$]*:)""")
  * without it, and the error dialog still carries the whole of it.
  */
 private fun String.withShortExceptionName(): String = replaceFirst(ExceptionPackage, "")
+
+/**
+ * What starts the error behind the one above it: a stack trace's `Caused by:`, unindented unlike a
+ * suppressed one's, or the line after which the patcher writes a failed dependency's whole trace.
+ */
+private val CauseStart = Regex("""\nCaused by: |which raised an exception:\n""")
+
+/**
+ * The innermost error of a stack trace. An error wrapping another, as a failed dependency does in
+ * the patch relying on it, says little the user can act on, unlike the error it wraps.
+ */
+private fun String.rootCause(): String =
+    CauseStart.findAll(this).lastOrNull()?.let { substring(it.range.last + 1) } ?: this
 
 /** What a finished run patched, which the result screen heads itself with either way it ended. */
 data class PatchedAppSummary(
@@ -292,6 +230,7 @@ fun PatchingSuccess(
     onHomeClick: () -> Unit,
     onLogsClick: () -> Unit,
     onSaveClick: () -> Unit,
+    onShareClick: () -> Unit,
     isSaving: Boolean
 ) {
     val status = installStatus(installState, installedPackageName, usingMountInstall)
@@ -331,20 +270,23 @@ fun PatchingSuccess(
                 installState = installState,
                 failed = status.failed,
                 usingMountInstall = usingMountInstall,
-                actions = installActions
+                actions = installActions,
+                onSave = onSaveClick,
+                onShare = onShareClick,
+                isSaving = isSaving
             )
         },
         bottomBar = { horizontalPadding ->
-            BackToGameCallout(visible = showBackToGameHint && !status.failed)
+            BackToGameCallout(
+                visible = showBackToGameHint && !status.failed,
+                horizontalPadding = horizontalPadding
+            )
             PatcherBottomActionBar(
                 horizontalPadding = horizontalPadding,
                 showCancelButton = false,
                 showLogsButton = isExpertMode,
-                showSaveButton = true,
                 onLogsClick = onLogsClick,
-                onHomeClick = onHomeClick,
-                onSaveClick = onSaveClick,
-                isSaving = isSaving
+                onHomeClick = onHomeClick
             )
         }
     )
@@ -367,36 +309,30 @@ fun PatchingFailed(
         status = PatchingFailedStatus,
         summary = summary,
         notices = {
-            // The button under it opens the whole error, so a long one is only cut short here
+            // The notice opens the whole error, so a long one is only cut short here. Shown even
+            // without a message, as the error dialog still has the diagnostics to offer
             ResultNotice(
-                text = errorMessage?.withShortExceptionName()?.takeIf { it.isNotBlank() },
+                text = errorMessage?.rootCause()?.withShortExceptionName()?.takeIf { it.isNotBlank() }
+                    ?: stringResource(R.string.patcher_unknown_error),
                 // A stack trace rarely names the patch behind it, which is what the user can act on
                 title = failedPatch?.let { stringResource(R.string.failed_to_execute_patch, it) },
                 tone = SemanticTone.Error,
                 icon = Icons.Outlined.ErrorOutline,
-                maxLines = ERROR_NOTICE_LINES
+                maxLines = ERROR_NOTICE_LINES,
+                action = NoticeAction(stringResource(R.string.patcher_error_details), onErrorClick)
             )
         },
-        actions = {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
-            ) {
+        // A run is often failed by one patch, and going back to the selection drops it without
+        // picking the APK and the rest of the patches all over again
+        actions = onChangePatchesClick?.let { onClick ->
+            {
                 ResultActionButton(
-                    text = stringResource(R.string.patcher_error_details),
-                    icon = Icons.Outlined.BugReport,
-                    failed = true,
-                    onClick = onErrorClick
+                    text = stringResource(R.string.patcher_change_patches),
+                    icon = Icons.Outlined.Tune,
+                    // The way on rather than a second error, so it wears the app's color as Install does
+                    failed = false,
+                    onClick = onClick
                 )
-                // A run is often failed by one patch, and going back to the selection drops it
-                // without picking the APK and the rest of the patches all over again
-                onChangePatchesClick?.let {
-                    AppDialogOutlinedButton(
-                        text = stringResource(R.string.patcher_change_patches),
-                        onClick = it,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
             }
         },
         bottomBar = { horizontalPadding ->
@@ -418,14 +354,20 @@ private fun ResultScreen(
     status: ResultStatus,
     summary: PatchedAppSummary,
     notices: @Composable ColumnScope.() -> Unit,
-    actions: @Composable () -> Unit,
+    actions: (@Composable () -> Unit)?,
     bottomBar: @Composable ColumnScope.(horizontalPadding: Dp) -> Unit
 ) {
     val windowSize = rememberWindowSize()
+    // A large font or a short window would leave the full header most of the room, and the
+    // details and notices under it would have to be scrolled to. Landscape gives it a column
+    val condensed = !isLandscape() && (
+            LocalDensity.current.fontScale >= CONDENSED_HEADER_FONT_SCALE ||
+                    windowSize.heightSizeClass == WindowHeightSizeClass.Compact
+            )
 
     ResultLayout(
         windowSize = windowSize,
-        header = { ResultHeader(status, summary.packageName, windowSize) },
+        header = { ResultHeader(status, summary.packageName, windowSize, condensed) },
         details = {
             ResultSummary(summary.version, summary.patchCount, summary.sources)
             notices()
@@ -436,15 +378,16 @@ private fun ResultScreen(
 }
 
 /**
- * Lays the result screen out: one column over the bar in portrait, or the [header] over the bar
- * beside the [details] and [actions] in landscape, so each part is written once.
+ * Lays the result screen out: one column over the [actions] and the bar in portrait, or the
+ * [header] over the bar beside the [details] over the [actions] in landscape, so each part is
+ * written once. Only the header and details scroll, the actions stay in reach under them.
  */
 @Composable
 private fun ResultLayout(
     windowSize: WindowSize,
     header: @Composable () -> Unit,
     details: @Composable ColumnScope.() -> Unit,
-    actions: @Composable () -> Unit,
+    actions: (@Composable () -> Unit)?,
     bottomBar: @Composable ColumnScope.(horizontalPadding: Dp) -> Unit
 ) {
     val itemSpacing = windowSize.itemSpacing
@@ -473,14 +416,16 @@ private fun ResultLayout(
                     }
                     bottomBar(0.dp)
                 }
-                CenteredScrollColumn(
+                Column(
                     modifier = Modifier
                         .weight(0.5f)
                         .fillMaxHeight(),
-                    spacing = itemSpacing
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    details()
-                    actions()
+                    CenteredScrollColumn(modifier = Modifier.weight(1f), spacing = itemSpacing) {
+                        details()
+                    }
+                    actions?.let { ResultActionsDock(horizontalPadding = 0.dp, content = it) }
                 }
             }
         } else {
@@ -493,9 +438,47 @@ private fun ResultLayout(
             ) {
                 header()
                 details()
-                actions()
             }
-            bottomBar(Defaults.ContentPadding)
+            if (actions != null) {
+                // A wider gap than inside either row, so the actions and the bar read as two groups
+                ResultActionsDock(
+                    horizontalPadding = Defaults.SpaceLarge,
+                    bottomPadding = Defaults.SpaceMedium * 2,
+                    content = actions
+                )
+            } else {
+                // The bar keeps no gap above itself, so the scrolling content is held off it here
+                Spacer(Modifier.height(Defaults.SpaceMedium))
+            }
+            bottomBar(Defaults.SpaceLarge)
+        }
+    }
+}
+
+/**
+ * The result's actions held under its scrolling content, as wide as the bar below them. The
+ * default gap under them is the one the bar keeps below its own buttons, so in landscape the
+ * two line up.
+ */
+@Composable
+private fun ResultActionsDock(
+    horizontalPadding: Dp,
+    bottomPadding: Dp = Defaults.SpaceMedium,
+    content: @Composable () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = Defaults.SpaceMedium, bottom = bottomPadding),
+        contentAlignment = Alignment.TopCenter
+    ) {
+        Box(
+            modifier = Modifier
+                .widthIn(max = Defaults.ContentMaxWidth)
+                .fillMaxWidth()
+                .padding(horizontal = horizontalPadding)
+        ) {
+            content()
         }
     }
 }
@@ -557,113 +540,111 @@ private fun Modifier.resultPulse(color: Color, from: Dp): Modifier {
     }
 }
 
-/** The app's icon and name under a badge saying where the run ended up. */
+/**
+ * The app's icon and name under a badge saying where the run ended up. A [condensed] header sets
+ * a smaller icon beside the rest, for a screen with little height to give it.
+ */
 @Composable
-private fun ResultHeader(status: ResultStatus, packageName: String, windowSize: WindowSize) {
-    val compact = windowSize.widthSizeClass == WindowWidthSizeClass.Compact
+private fun ResultHeader(status: ResultStatus, packageName: String, windowSize: WindowSize, condensed: Boolean) {
+    val phone = windowSize.widthSizeClass == WindowWidthSizeClass.Compact
+    val nameStyle = MaterialTheme.typography.run { if (phone && !condensed) headlineMedium else headlineSmall }
+        .copy(color = MaterialTheme.colorScheme.onBackground, fontWeight = FontWeight.SemiBold)
+
+    if (condensed) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            // The status mark overhangs the icon, so the gap is measured from the mark
+            horizontalArrangement = Arrangement.spacedBy(windowSize.itemSpacing + IconMarkOverhang),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            ResultIcon(status, packageName, iconSize = 64.dp)
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
+            ) {
+                ResultBadge(status)
+                AppLabel(
+                    packageName = packageName,
+                    style = nameStyle,
+                    maxLines = 2,
+                    modifier = Modifier.semantics { heading() }
+                )
+                ResultSubtitle(status, TextAlign.Start)
+            }
+        }
+        return
+    }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing)
     ) {
-        ResultIcon(status, packageName, iconSize = if (compact) 112.dp else 96.dp)
-        AnimatedContent(
-            targetState = status,
-            transitionSpec = Animations.fadeCrossfade(500),
-            label = "status_animation"
-        ) { shown ->
-            StatusBadge(
-                text = stringResource(shown.label),
-                icon = shown.icon,
-                tone = shown.tone
-            )
-        }
+        ResultIcon(status, packageName, iconSize = if (phone) 112.dp else 96.dp)
+        ResultBadge(status)
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
         ) {
             AppLabel(
                 packageName = packageName,
-                style = MaterialTheme.typography.run { if (compact) headlineMedium else headlineSmall }
-                    .copy(color = MaterialTheme.colorScheme.onBackground, fontWeight = FontWeight.SemiBold),
+                style = nameStyle,
                 modifier = Modifier.semantics { heading() }
             )
-            AnimatedContent(
-                targetState = status.subtitle,
-                transitionSpec = Animations.fadeCrossfade(500),
-                label = "subtitle_animation"
-            ) { subtitle ->
-                if (subtitle != null) {
-                    Text(
-                        text = stringResource(subtitle),
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-            }
+            ResultSubtitle(status, TextAlign.Center)
         }
     }
 }
 
-/** How far the status mark hangs past the corner of the app's icon. */
-private val ResultMarkOverhang = 6.dp
+/** The badge naming where the run ended up, crossfading as that changes. */
+@Composable
+private fun ResultBadge(status: ResultStatus) {
+    AnimatedContent(
+        targetState = status,
+        transitionSpec = Animations.fadeCrossfade(500),
+        label = "status_animation"
+    ) { shown ->
+        StatusBadge(
+            text = stringResource(shown.label),
+            icon = shown.icon,
+            tone = shown.tone
+        )
+    }
+}
 
-/** Width of the gap cut out of the app's icon around the status mark, within its size. */
-private val ResultMarkGap = 3.dp
+/** The line under the app's name, for the results that have one. */
+@Composable
+private fun ResultSubtitle(status: ResultStatus, textAlign: TextAlign) {
+    CrossfadeText(
+        text = status.subtitle?.let { stringResource(it) },
+        style = MaterialTheme.typography.bodyLarge,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        textAlign = textAlign,
+        modifier = Modifier.fillMaxWidth(),
+        transitionSpec = Animations.fadeCrossfade(500),
+        label = "subtitle_animation"
+    )
+}
 
 /** The patched app's own icon carrying the [status]'s mark, set off by a [resultPulse]. */
 @Composable
 private fun ResultIcon(status: ResultStatus, packageName: String, iconSize: Dp) {
     val color = status.color()
-    val markSize = iconSize * 0.4f
 
-    Box(
+    MarkedIcon(
+        mark = status.icon,
+        markColor = color,
+        iconSize = iconSize,
+        contentFraction = AppIconContentFraction,
         modifier = Modifier
             // Room for the overhanging mark, so it keeps its distance from the badge under it
-            .padding(bottom = ResultMarkOverhang)
-            .size(iconSize)
+            .padding(bottom = IconMarkOverhang)
             .resultPulse(color, from = iconSize)
     ) {
         AppIcon(
             packageName = packageName,
             contentDescription = null,
-            modifier = Modifier
-                .fillMaxSize()
-                // The gap is cleared from the icon rather than painted over it, so it shows
-                // whatever lies behind, the pulse included
-                .graphicsLayer(compositingStrategy = CompositingStrategy.Offscreen)
-                .drawWithContent {
-                    drawContent()
-                    val cutRadius = markSize.toPx() / 2f
-                    val inset = cutRadius - ResultMarkOverhang.toPx()
-                    // The mark sits at the end corner, which is the left one in RTL
-                    val centerX = if (layoutDirection == LayoutDirection.Rtl) inset else size.width - inset
-                    drawCircle(
-                        color = Color.Black,
-                        radius = cutRadius,
-                        center = Offset(centerX, size.height - inset),
-                        blendMode = BlendMode.Clear
-                    )
-                }
+            modifier = Modifier.fillMaxSize()
         )
-        Box(
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .offset(x = ResultMarkOverhang, y = ResultMarkOverhang)
-                .size(markSize)
-                .padding(ResultMarkGap)
-                .background(color, CircleShape),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(
-                imageVector = status.icon,
-                contentDescription = null,
-                modifier = Modifier.size(iconSize * 0.24f),
-                tint = color.contrastingContent()
-            )
-        }
     }
 }
 
@@ -700,15 +681,16 @@ private fun ResultSummary(version: String?, patchCount: Int, sources: List<Patch
  * It sits on the button because the way back is not obvious from a label reading "Logs".
  */
 @Composable
-private fun BackToGameCallout(visible: Boolean) {
+private fun BackToGameCallout(visible: Boolean, horizontalPadding: Dp) {
     if (!visible) return
 
-    BottomActionCallout(
+    PatcherActionCallout(
         text = stringResource(R.string.patcher_back_to_game_hint, stringResource(R.string.logs)),
-        // Logs comes first in a bar of Logs, Home and Save
+        // Logs comes first in a bar of Logs and Home
         slot = 0,
-        slots = 3,
-        icon = Icons.Outlined.SportsEsports
+        slots = 2,
+        icon = Icons.Outlined.SportsEsports,
+        horizontalPadding = horizontalPadding
     )
 }
 
@@ -744,14 +726,18 @@ private fun ResultNotice(
 }
 
 /**
- * Install action button, with the signature bypass offered below it on devices that can use it.
+ * Install action button beside saving and sharing the patched APK, with the signature bypass
+ * offered below them on devices that can use it.
  */
 @Composable
 private fun InstallActions(
     installState: InstallState,
     failed: Boolean,
     usingMountInstall: Boolean,
-    actions: InstallResultActions
+    actions: InstallResultActions,
+    onSave: () -> Unit,
+    onShare: () -> Unit,
+    isSaving: Boolean
 ) {
     val isInstalling = installState is InstallState.Installing
     val isInstalled = installState is InstallState.Installed
@@ -760,40 +746,80 @@ private fun InstallActions(
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
+        verticalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
     ) {
-        ResultActionButton(
-            text = stringResource(
-                when {
-                    isInstalling -> if (usingMountInstall) {
-                        installState.stage?.labelRes ?: R.string.mounting_ellipsis
-                    } else {
-                        R.string.installing_ellipsis
+        // One connected group, so the file buttons read as part of the install rather than as a
+        // row of their own. They take its height, which a large font can raise
+        ButtonGroupRow {
+            val installInteraction = remember { MutableInteractionSource() }
+            val saveInteraction = remember { MutableInteractionSource() }
+            val shareInteraction = remember { MutableInteractionSource() }
+
+            ResultActionButton(
+                modifier = Modifier.buttonGroupItem(installInteraction, enabled = !isInstalling),
+                interactionSource = installInteraction,
+                shape = ConnectedShapes.Pill.leading,
+                text = stringResource(
+                    when {
+                        isInstalling -> if (usingMountInstall) {
+                            installState.stage?.labelRes ?: R.string.mounting_ellipsis
+                        } else {
+                            R.string.installing_ellipsis
+                        }
+                        isInstalled -> R.string.open
+                        conflictPackageName != null -> R.string.uninstall
+                        isError -> R.string.retry
+                        usingMountInstall -> R.string.mount
+                        else -> R.string.install
                     }
-                    isInstalled -> R.string.open
-                    conflictPackageName != null -> R.string.uninstall
-                    isError -> R.string.retry
-                    usingMountInstall -> R.string.mount
-                    else -> R.string.install
+                ),
+                icon = when {
+                    isInstalled -> Icons.AutoMirrored.Outlined.Launch
+                    conflictPackageName != null -> Icons.Default.DeleteForever
+                    isError -> Icons.Default.Refresh
+                    usingMountInstall -> Icons.Outlined.Link
+                    else -> Icons.Outlined.InstallMobile
+                },
+                failed = failed,
+                busy = isInstalling,
+                onClick = {
+                    when {
+                        isInstalled -> actions.onOpen()
+                        conflictPackageName != null -> actions.onUninstall(conflictPackageName)
+                        else -> actions.onInstall()
+                    }
                 }
-            ),
-            icon = when {
-                isInstalled -> Icons.AutoMirrored.Outlined.Launch
-                conflictPackageName != null -> Icons.Default.DeleteForever
-                isError -> Icons.Default.Refresh
-                usingMountInstall -> Icons.Outlined.Link
-                else -> Icons.Outlined.InstallMobile
-            },
-            failed = failed,
-            busy = isInstalling,
-            onClick = {
-                when {
-                    isInstalled -> actions.onOpen()
-                    conflictPackageName != null -> actions.onUninstall(conflictPackageName)
-                    else -> actions.onInstall()
-                }
-            }
-        )
+            )
+            // Square as the install button is tall, named by a tooltip since a label would take
+            // the room the install button's own needs
+            PatcherActionButton(
+                onClick = onSave,
+                icon = Icons.Outlined.Save,
+                text = stringResource(R.string.save),
+                enabled = !isSaving,
+                showProgress = isSaving,
+                shape = ConnectedShapes.Pill.middle,
+                interactionSource = saveInteraction,
+                modifier = Modifier.buttonGroupItem(
+                    saveInteraction,
+                    enabled = !isSaving,
+                    width = PatcherActionHeight,
+                    minWidth = Defaults.MinTouchTarget
+                )
+            )
+            PatcherActionButton(
+                onClick = onShare,
+                icon = Icons.Outlined.Share,
+                text = stringResource(R.string.share),
+                shape = ConnectedShapes.Pill.trailing,
+                interactionSource = shareInteraction,
+                modifier = Modifier.buttonGroupItem(
+                    shareInteraction,
+                    width = PatcherActionHeight,
+                    minWidth = Defaults.MinTouchTarget
+                )
+            )
+        }
 
         AnimatedVisibility(
             visible = (installState as? InstallState.Conflict)?.canIgnoreSignatureMismatch == true,
@@ -820,7 +846,10 @@ private fun ResultActionButton(
     icon: ImageVector,
     failed: Boolean,
     onClick: () -> Unit,
-    busy: Boolean = false
+    modifier: Modifier = Modifier,
+    shape: Shape = Defaults.PillShape,
+    busy: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 ) {
     val accent = LocalAccent.current ?: MaterialTheme.colorScheme.primary
     val buttonColors = if (failed) {
@@ -835,12 +864,13 @@ private fun ResultActionButton(
     Button(
         onClick = onClick,
         enabled = !busy,
-        modifier = Modifier
+        interactionSource = interactionSource,
+        modifier = modifier
             .fillMaxWidth()
-            .heightIn(min = 56.dp),
-        shape = RoundedCornerShape(Defaults.CardCornerRadius),
+            .heightIn(min = PatcherActionHeight),
+        shape = rememberPressShape(interactionSource, shape, enabled = !busy),
         colors = buttonColors,
-        contentPadding = PaddingValues(horizontal = 24.dp, vertical = 12.dp)
+        contentPadding = PaddingValues(horizontal = Defaults.SpaceExtraLarge, vertical = Defaults.SpaceMedium)
     ) {
         if (busy) {
             CircularProgressIndicator(
@@ -851,7 +881,7 @@ private fun ResultActionButton(
         } else {
             ThemedIcon(icon = icon, tint = LocalContentColor.current)
         }
-        Spacer(Modifier.width(12.dp))
+        Spacer(Modifier.width(Defaults.SpaceMedium))
         // Follows a mount install through its steps with a fade rather than a jump
         CrossfadeText(
             text = text,

@@ -54,8 +54,14 @@
     <plurals name="batch_patch_ready_count">
         <item quantity="other">%s aplikasi siap ditambal</item>
     </plurals>
+    <plurals name="batch_queue_pending_count">
+        <item quantity="other">%s aplikasi antri untuk ditambal</item>
+    </plurals>
+    <plurals name="home_alerts_snoozed_count">
+        <item quantity="other">%s notifikasi tersembunyi, ketuk untuk menampilkannya</item>
+    </plurals>
     <plurals name="repatch_available_count">
-        <item quantity="other">%s aplikasi dapat di-tambal ulang</item>
+        <item quantity="other">%s aplikasi dapat ditambal ulang</item>
     </plurals>
     <plurals name="batch_skipped_summary">
         <item quantity="other">%s aplikasi dilewati</item>
@@ -65,9 +71,6 @@
     </plurals>
     <plurals name="sources_management_subtitle">
         <item quantity="other">%s sumber terpasang</item>
-    </plurals>
-    <plurals name="home_app_filter_active">
-        <item quantity="other">%1$s · %2$s difilter</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="other">%s aplikasi disembunyikan</item>
@@ -95,6 +98,10 @@
     </plurals>
     <plurals name="changelog_change_count">
         <item quantity="other">%s perubahan</item>
+    </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
+    <plurals name="sources_apps_count_with_new">
+        <item quantity="other">%1$s · %2$d baru</item>
     </plurals>
     <plurals name="changelog_new_releases">
         <item quantity="other">%s rilis baru</item>

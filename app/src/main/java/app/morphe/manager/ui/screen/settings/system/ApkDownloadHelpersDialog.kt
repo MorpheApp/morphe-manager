@@ -34,7 +34,7 @@ data class ApkDownloadHelperApp(
  * which of them may be offered when an original APK is needed.
  */
 @Composable
-fun ApkDownloadHelpersDialog(
+fun DialogHostScope.ApkDownloadHelpersDialog(
     settingsViewModel: SettingsViewModel,
     helpers: List<ApkDownloadHelperApp>,
     onDismiss: () -> Unit,
@@ -70,15 +70,13 @@ fun ApkDownloadHelpersDialog(
                 modifier = Modifier.fillMaxWidth()
             )
         },
-        padding = DialogPadding.Compact
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ContentPaddingSmall)
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
         ) {
             SettingsGroup {
                 helpers.forEachIndexed { index, helper ->
-                    if (index > 0) SettingsDivider()
 
                     val trusted = helper.packageName in trustedPackages
                     val info = details[helper.packageName]

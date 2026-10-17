@@ -8,6 +8,7 @@ package app.morphe.manager.ui.screen.home
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
@@ -30,8 +31,10 @@ import app.morphe.manager.R
 import app.morphe.manager.domain.manager.HomeAppCategoryState
 import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.shared.CardBorder
+import app.morphe.manager.ui.screen.shared.Defaults
 import app.morphe.manager.ui.screen.shared.GlassButtonDefaults
 import app.morphe.manager.ui.screen.shared.MorpheLauncherLogo
+import app.morphe.manager.ui.screen.shared.animateCornersAsState
 import app.morphe.manager.ui.screen.shared.appAccentBorder
 import app.morphe.manager.ui.screen.shared.appAccentCardFill
 import app.morphe.manager.ui.viewmodel.HomeAppSourceGroup
@@ -182,7 +185,9 @@ private fun List<HomeAppItem>.orderedByPackageOrder(packageOrder: List<String>):
  * on a non-tappable row.
  *
  * A non-null [color] replaces the frosted fill, for rows that belong to something already
- * carrying a color of its own. [below] goes under the row inside the same card.
+ * carrying a color of its own. [below] goes under the title, in its column, as a list item's
+ * supporting line does. A [shape] given outright, as a segment of a block takes from its place,
+ * is taken over [cornerRadius] and eased into as it changes.
  */
 @Composable
 internal fun HomeGlassCategoryRow(
@@ -192,13 +197,14 @@ internal fun HomeGlassCategoryRow(
     onLongClick: (() -> Unit)? = null,
     leading: (@Composable () -> Unit)? = null,
     count: String? = null,
-    cornerRadius: Dp = 20.dp,
+    cornerRadius: Dp = Defaults.CornerLargeIncreased,
+    shape: CornerBasedShape? = null,
     color: Color? = null,
     borderColor: Color? = null,
     below: (@Composable () -> Unit)? = null,
     trailing: @Composable RowScope.() -> Unit = {}
 ) {
-    val shape = RoundedCornerShape(cornerRadius)
+    val shape = shape?.let { animateCornersAsState(it) } ?: RoundedCornerShape(cornerRadius)
     val containerColor = color ?: GlassButtonDefaults.containerColor()
     val borderColor = borderColor ?: GlassButtonDefaults.borderColor()
     val contentColor = MaterialTheme.colorScheme.onSurface
@@ -223,20 +229,27 @@ internal fun HomeGlassCategoryRow(
         shape = shape,
         border = CardBorder.of(borderColor)
     ) {
-        Column {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .heightIn(min = 48.dp)
-                    .padding(horizontal = 12.dp, vertical = 6.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 48.dp)
+                // A supporting line makes it a two-line item, which keeps more room around it
+                .padding(
+                    // Inset as the cards it heads, so a block keeps one edge
+                    horizontal = Defaults.SpaceLarge,
+                    vertical = if (below != null) Defaults.SpaceMedium else Defaults.SpaceSmall
+                ),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
+        ) {
+            leading?.invoke()
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
             ) {
-                leading?.invoke()
                 Row(
-                    modifier = Modifier.weight(1f),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
                 ) {
                     Text(
                         text = title,
@@ -255,11 +268,9 @@ internal fun HomeGlassCategoryRow(
                         )
                     }
                 }
-                trailing()
+                below?.invoke()
             }
-            if (below != null) {
-                Box(modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 12.dp)) { below() }
-            }
+            trailing()
         }
     }
 }
@@ -360,7 +371,7 @@ private fun SourceCategoryIcon(
                     imageVector = Icons.Outlined.Source,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(4.dp)
+                    modifier = Modifier.padding(Defaults.SpaceExtraSmall)
                 )
             }
         }

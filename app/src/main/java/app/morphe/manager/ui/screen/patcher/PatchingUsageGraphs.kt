@@ -358,7 +358,7 @@ private fun UsagePanel(
 
     Surface(
         modifier = modifier,
-        shape = RoundedCornerShape(Defaults.CardCornerRadius),
+        shape = RoundedCornerShape(Defaults.CornerLarge),
         color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
         tonalElevation = 0.dp,
         border = CardBorder.neutral
@@ -371,7 +371,7 @@ private fun UsagePanel(
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
                 verticalAlignment = Alignment.Top
             ) {
                 Box(
@@ -416,7 +416,7 @@ private fun UsagePanel(
             }
 
             Row(
-                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall),
                 verticalAlignment = Alignment.Bottom
             ) {
                 Text(

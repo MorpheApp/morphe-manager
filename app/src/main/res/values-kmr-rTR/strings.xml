@@ -22,6 +22,8 @@
     <string name="deep_link_add_source_title">Kanîna çavkaniyê zêde bike</string>
     <string name="deep_link_add_source_message">Ma tu wê çavkaniya vê pakê ji Morphe zêde bike?</string>
     <string name="deep_link_add_source_warning">Têkilîyên ku bawerî li wan hebin zêde bike</string>
+    <!-- Shown under the app a link was opened for -->
+    <!-- Asked when the link names an app of a source that is already added -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Nûvekirina Morphe heye</string>
     <string name="home_update_available_subtitle">Nûvekirin amade ye ku were sazkirin</string>
@@ -146,7 +148,6 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Kanalan saz bike</string>
     <string name="sources_search">Çavkanî û patchan bigere</string>
-    <string name="sources_sort_title">Sort kirina çavkaniyên patchê</string>
     <string name="sources_sort_manual">Fermanê destî</string>
     <string name="sources_sort_manual_hint">Çavdêriyeke dirêj li ser çavkaniyê bike da ku rêzê guhezîne</string>
     <string name="sources_sort_last_updated">Daxwazkirina herî dawî</string>
@@ -158,12 +159,12 @@
     <string name="sources_management_report_issue">Pirsgirêkek rapor bike</string>
     <string name="sources_management_failed_to_open_url">Serokê URL nefirote</string>
     <string name="sources_apps">Sepan</string>
-    <string name="sources_apps_description">Bitekle ser sepanekê ku wê ji vê çavkaniyê derxîne an jî vegerîne, an jî çapemeniya dirêj bike ku çendê hilbijêrî. Dema ku tu çavkanî sepanekê neyne, ew ji ekrana malê derdikeve.</string>
     <string name="sources_apps_brought">Ji aliyê vê çavkaniyê ve tê</string>
     <string name="sources_apps_left_out">Ji vê çavkaniyê hatiye derxistin</string>
-    <string name="sources_apps_leave_out">Derxe</string>
-    <string name="sources_apps_leave_out_done">Derxistî</string>
     <string name="sources_apps_bring_back">Vegerîne</string>
+    <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
+    <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
+    <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
     <string name="sources_management_prerelease_toggle">Patch-ên pêş-bernameyê</string>
     <string name="sources_management_prerelease_toggle_description">Bi destê pêşîn bigihîje guhertoyên nû yên ceribandinê</string>
     <string name="sources_prerelease_warning_title">Patchên pêş-berdanê çalak bike?</string>
@@ -208,7 +209,6 @@
     <string name="sources_dialog_url_invalid">URL gihub/gitlab depoyê an pelê .json\'yê nîşan bide</string>
     <string name="sources_dialog_preinstalled">Destekî çêkirî</string>
     <string name="sources_dialog_community">Patchên civakê</string>
-    <string name="sources_dialog_choose_apps">Sepanan hilbijêre</string>
     <string name="sources_dialog_choose_apps_description">Gava çavkanî hat barkirin, hilbijêre ku kîjan sepanên wê biparêzî.</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Çavkaniyên patch ên partiya sêyem</string>
@@ -437,7 +437,7 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="batch_patch_state_no_patches">Patch ne hene</string>
     <string name="batch_patch_policy_install">Piştî qedibûna hemûyan saz bike</string>
     <string name="batch_patch_policy_install_description">Her sepa patchkirî piştî qedibûna rêzê rasterast saz dike. Vêalî APKan ji bo paşê dîsa dijîtine</string>
-    <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
+    <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_start">Destpêk</string>
     <string name="batch_patch_stop_title">Êdî patchkirina batchê rawestîne?</string>
     <string name="batch_patch_stop_description">Sepa ku niha tê patchkirin û her tiştê ku dîsa hatî plan kirin, hatî betal kirin</string>
@@ -736,7 +736,6 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <string name="settings_appearance_pure_black">Rewşê veşer</string>
     <string name="settings_appearance_pure_black_description">Bêjeya paşnavê reş ê rastîn bikar bîne</string>
     <string name="settings_appearance_color_accents">Rengên sepan û çavkaniyan</string>
-    <string name="settings_appearance_color_accents_description">Li şûna rengê akcent, rengê her sepan û çavkaniyê bi kar tîne.</string>
     <string name="settings_appearance_outlines">Xêzên derveyî</string>
     <string name="settings_appearance_outlines_description">Li dora kart, panel û bişkojan keviyek zirav dikişîne.</string>
     <!-- Settings - Appearance Tab - Language Selector -->
@@ -755,13 +754,8 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Mîna malê</string>
     <string name="settings_appearance_greeting_phrases">Frazey şahê</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Nîşanekê bi xêrhatinê li ser mîna malê nîşan bide</string>
-    <string name="settings_appearance_app_grouping">Komkirina sepanan</string>
-    <string name="settings_appearance_app_grouping_description">Guhêrkekê nîşan bide ku sepanan li gorî çavkanî an kategoriyê kom dike.</string>
     <string name="settings_appearance_repatch_notice">Agahdariya ji nû ve patchkirinê</string>
-    <string name="settings_appearance_repatch_notice_description">Dema ku sepanên patchkirî dikarin dîsa bên patchkirin, banerekê nîşan bide.</string>
     <string name="settings_appearance_sort_button">Bişkoka rêzkirin û parzûnkirinê</string>
-    <string name="settings_appearance_sort_button_description">Bişkoka rêzkirin û parzûnkirinê li ser ekrana malê nîşan bide</string>
     <string name="settings_appearance_app_card_colors">Rengên karta sepanê</string>
     <string name="settings_appearance_app_card_colors_default">Bixweber</string>
     <string name="settings_appearance_app_card_colors_default_description">Bi her sepanê rengê paketa wê bidin</string>
@@ -817,7 +811,6 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
 
 Patch ne bandor in: ji bo her çavkaniyê di lîsteya çavkaniyên patch de patchên pêş-weşanê çalak bike."</string>
     <string name="settings_advanced_updates_allow_metered">Nûvekirinên daneya mobîl</string>
-    <string name="settings_advanced_updates_allow_metered_description">Destûrê dide Morphe\'yê u nûvekirinên qeyikan da ku li ser danebîna mobîlê biçin</string>
     <string name="settings_advanced_updates_background_notifications">Ragahdaniyên nûvekirina paşînê</string>
     <string name="settings_advanced_updates_background_notifications_description">Ji bo melêstirkirina nûvekirinên paşîn baldarê de bibe û dema ku zafinan debedo bike.</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Agahiyên pêşniyarî ji bo nûvekirinên nû, tewra hekî app tê girtin</string>
@@ -832,7 +825,6 @@ Patch ne bandor in: ji bo her çavkaniyê di lîsteya çavkaniyên patch de patc
     <string name="settings_advanced_update_interval_chip_subtitle">Rêjeya kontrolê paşîn</string>
     <string name="settings_advanced_update_interval_battery_warning">Kontrolên paşîn dibin sedem ku hin alavkêm nekar in. Hilberîneran weke Xiaomi, Huawei, Samsung, û OnePlus gelek caran pêvajeyên paşîn ji bo parastina bataryayê asteng dikin.</string>
     <string name="settings_advanced_external_batch_patch">Têkirina ji derve bidê dest</string>
-    <string name="settings_advanced_external_batch_patch_description">Dihele sepanên otomasyonê bi riya intentê dest bi patchkirina komî bikin.</string>
     <string name="external_batch_patch_title">Dest bi patchkirina batchê bike?</string>
     <string name="external_batch_patch_description">%s dixwaze Morphe sepanan patch bike û saz bike</string>
     <string name="external_batch_patch_trust_caller">Her gav bidê vê sepayê</string>
@@ -852,11 +844,9 @@ Patch ne bandor in: ji bo her çavkaniyê di lîsteya çavkaniyên patch de patc
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert">Saziyên pispor</string>
     <string name="settings_advanced_expert_mode">Mode ekspert</string>
-    <string name="settings_advanced_expert_mode_description">Destûr dide sazkirina vegirêtinên Morphe’yê ên pêşkeftî u hilbijartinên xwerû</string>
     <string name="settings_advanced_expert_mode_dialog_title">Modeka pispor çêbike?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Moda pispor kontrola zêdetir ser bernameyên ku meriv pêdike, lê çêkirina bêreng di moda pispor de dikare bibe sedem ku sepan bibe nekar.</string>
     <string name="settings_advanced_strip_unused_libs">Ji arîkek cihazê ve saz bike</string>
-    <string name="settings_advanced_strip_unused_libs_description">Lîbêrên mîmarîya CPU’yê yên ne-heqî u modûlên APK’êyê yên parvekirî qedide bike</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_description">Ragrapha qebul, pêvir be jibo seyarê ber dom</string>
     <string name="settings_advanced_github_pat_configured">Token sazkirin</string>
@@ -987,13 +977,10 @@ Qasîyên wêneyan divê wiha bin:
     <string name="installer_play_store_warning_risk">Dibe ku Play Store nûvekirinên ji bo aplikasyona guhertoyî pêşkêş bike. Sa zkirina wê nûvekirinê dê APK-ya guhertoyî bi guhertoya orjînal ferz bike û guhertoyînan rake. Ger ji we re nûvekirin were pirsîn, li ser menuya sê nuqtan li ser rûpelê yê Play Store ya aplikasyonê bikirin û \"Veberhêrkirina nûvekirinan\" hilbijêrin</string>
     <string name="installer_play_store_warning_continue">Min fêhm kir, bidomînin</string>
     <string name="installer_play_store_mode">Sazkirin wek Play Store</string>
-    <string name="installer_play_store_mode_description">Play Store wekî çavkaniya sazkirinê ji bo vê rêbazê qeyd bike</string>
     <string name="settings_prompt_installer_on_install">Dîyaloga hilbijartina sazkirî</string>
-    <string name="settings_prompt_installer_on_install_description">Hîşyarî her carî dema ku app’a girêtî hatî sazkirin, dîyaloga hilbijartina sazkirî nîşan bide</string>
     <string name="settings_auto_install_with_shizuku">Têxînekî otomatîkî piştî paqijkirinê</string>
     <string name="settings_auto_install_with_shizuku_description">APK-ya patchkirî di cih de piştî qedandina patchkirinê saz dike.</string>
     <string name="settings_auto_uninstall_with_shizuku">Lêgerîna otomatîkî li ser derengî</string>
-    <string name="settings_auto_uninstall_with_shizuku_description">Dema ku bi Shizuku saz kirin, eger Android rapor bide ku kêşekê qebûl kir, berê aplikasyona heyî ya ku heye rake. Ew dikare daneyên aplikasyonê jê der bike.</string>
     <string name="settings_auto_uninstall_warning_title">Destûrê dayî lêgerîna otomatîkî?</string>
     <string name="settings_auto_uninstall_warning_message">Eger Android di dema saz kirina otomatîkî ya Shizuku de rapor bide ku kêşek heye, Morphe dê berî saz kirina APKya guhartî aplikasyona heyî rake.</string>
     <string name="settings_auto_uninstall_warning_risk">Ew dikare daneyên aplikasyonê jê bike. Ger APK ya guhartî piştî rakirina sazkirinê têk bibe, dibe ku aplikasyona berê jû dest nebe.</string>
@@ -1032,13 +1019,11 @@ Detay: %2$s"</string>
     <string name="settings_system_memory_limit_warning">Sînorê bîra kêman dibe ku heya rayekirinê meşandariya zagon şûnayê</string>
     <string name="settings_system_memory_limit_high_warning">Sînorekî bîrê yê bilind dikare li hin cîhazan patchkirinê pir hêdî bike. Wê tenê bilind bike heke patchkirin di sînorên nizmtir de têk biçe.</string>
     <string name="settings_system_process_runtime_enabled_description">Sînor %s MB</string>
-    <string name="settings_system_process_runtime_disabled_description">Li konfigurasyonê biklik</string>
     <string name="settings_system_process_runtime_description_not_available">Ev taybetmendî Android 11 yan zêdetir tê hewîn</string>
     <string name="settings_system_patcher_completion_sound">Dengê qedandina</string>
     <string name="settings_system_patcher_completion_sound_description">Dengê taybet lêdanê ji bo serkeftinê an têkçûnê dema qedandina patchkirinê</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">Agahîyan</string>
-    <string name="settings_system_notifications_description">Konfîgurekirina agahiyên paşnavê û dengên qedandina</string>
     <string name="settings_system_notifications_success_sound">Dengê serketinê</string>
     <string name="settings_system_notifications_error_sound">Dengê xeletê</string>
     <string name="settings_system_notifications_sound_default">Bixweber</string>
@@ -1050,7 +1035,6 @@ Detay: %2$s"</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_import_export">Import &amp; export</string>
     <string name="settings_system_signing_key">Mifteya îmzekirinê</string>
-    <string name="settings_system_signing_key_description">Mifteya ku sepanên te yên patchkirî pê têne îmzekirin yedek dike û vedigerîne.</string>
     <string name="settings_system_signing_key_dialog_description">Her sepana ku Morphe patch dike bi vê mifteyê tê îmzekirin. Kopiyekê bigire: bêyî wê, sepanên patchkirî tenê piştî rakirina wan dikarin bên nûvekirin.</string>
     <string name="settings_system_signing_key_missing">Morphe bi patchê te yê yekem re yekê çêdike.</string>
     <string name="settings_system_signing_key_created">Hatiye çêkirin %s</string>
@@ -1106,7 +1090,6 @@ Detay: %2$s"</string>
     <string name="settings_system_apks_export_zip_failed">Derxistina APK-yên hilbijartî têk çû</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">Rêveberiya hêsînê</string>
-    <string name="settings_system_storage_management_description">Lêkolîna karanîna dîskê û paqijkirina pelên neyînî</string>
     <string name="settings_system_storage_keystore_title">Keystore-a îmzeyê</string>
     <string name="settings_system_storage_app_data_title">Daneyên sepanê</string>
     <string name="settings_system_storage_patch_bundles_title">Pêkvekirinên paçê</string>
@@ -1172,7 +1155,6 @@ Detay: %2$s"</string>
     <string name="copy_selection_same_source">Çavkaniya heman</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Hilbijêrkê pelan yê xwerû</string>
-    <string name="settings_system_custom_file_picker_description">Li şûna hilbijêrkê pelan yê serî yê sîstemê, hilbijêrkê pelan yê têne çêkirin yê Morphe bikar bîne</string>
     <!-- Settings - System Tab - APK download helper -->
     <string name="settings_system_apk_download_helper">Arîkareka dakêşina APK-yê</string>
     <string name="settings_system_apk_download_helper_trusted_count">Pêbawer: %1$d ji %2$d</string>
@@ -1290,6 +1272,8 @@ Detay: %2$s"</string>
     <string name="available">Hezkir</string>
     <string name="continue_">Domîne</string>
     <string name="version">Versiyon</string>
+    <!-- Who made a patch source, as a field label -->
+    <!-- A file a patch source is added from, as a field label -->
     <string name="clone">Klon</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Dîrok</string>

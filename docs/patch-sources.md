@@ -20,8 +20,9 @@ that ships with Morphe.
 
 - **Patches** - how many patches the source provides. **Details** lists them all.
 - **Version** - the version currently installed. **Details** opens its changelog.
-- **Apps** - how many apps the source brings, shown as `3/232` once some are unticked. Tapping
-  it opens the list described in [Choosing which apps a source brings](#choosing-which-apps-a-source-brings).
+- **Apps** - how many apps the source brings, shown as `3/232` once some are unticked, and as
+  `3/232 · 2 new` while apps it started supporting wait to be looked at. Tapping it opens the
+  list described in [Choosing which apps a source brings](#choosing-which-apps-a-source-brings).
 - **Open in browser** - opens the source's repository or metadata URL.
 - **Report an issue** - opens the issue tracker of that source, so a broken patch is reported
   to the people who wrote it rather than to Morphe.
@@ -98,9 +99,13 @@ https://morphe.software/add-source?github=owner/repo
 https://morphe.software/add-source?gitlab=owner/repo
 ```
 
-An optional `&name=` sets the display name. Opening such a link hands the repository to
-Morphe, which asks **Do you want to add this patch source?** before anything is added. Only
-GitHub and GitLab repositories are accepted this way.
+An optional `&name=` sets the display name, and an optional `&app=` with a package name adds
+the source for that one app: its other apps, the ones it adds later included, are left out from
+the start, see [New apps](#new-apps). The **Add** button next to an app on the community
+patches website opens such a link. If the source is already added, the link brings that app
+back to it instead. Opening a link hands the repository to Morphe, which asks **Do you want to
+add this patch source?** before anything is added. Only GitHub and GitLab repositories are
+accepted this way.
 
 > [!WARNING]
 > Only add sources you trust. A patch source decides what ends up inside your patched apps.
@@ -118,21 +123,34 @@ the file yourself when a new one comes out.
 
 Some sources carry patches for hundreds of apps when you only want one or two. Turn on
 **Choose apps** before tapping **Add**, and once the source has loaded Morphe opens a list of
-every app it has patches for. The same switch is in the confirmation shown for a deep link or a
+every app it has patches for. The same choice is offered in the confirmation shown for a deep link or a
 `.mpp` file opened from a file manager, and the list is always one tap away from the **Apps**
 row on the source card.
 
-The list works like **Hidden apps**. Tap an app to leave it out of this source, and tap it again
-to bring it back. Long-press to pick several: the bar below selects all or none of what the
-search left, then **Leave out** or **Bring back** answers for all of them at once. To keep one
-app out of hundreds, long-press it, select all, tap it to drop it from the selection and tap
-**Leave out**.
+The list works like a patch list. A ticked app is brought by the source, and each app shows how
+many patches the source has for it. Tap an app to leave it out of this source, and tap it again
+to bring it back. The button in the header brings back every app the search left, or leaves
+them all out once all of them are brought. To keep a few apps out of hundreds, tap it once to
+leave out everything, then tap the apps you want.
 
 An app left out no longer comes from this source: the source is not offered when the app is
 patched, the same as unticking it in [Choosing sources per app](#choosing-sources-per-app). An
 app stays on the home screen while any source still brings it, and leaves once none does. It is
 not in the **Hidden apps** list then, since nothing hid it: bring it back here instead. An app
-you already patched keeps its card either way.
+you already patched keeps its card either way, and the list says so under it once it is left
+out. Hide that card from the home screen if you no longer want it there.
+
+#### New apps
+
+By default a source brings every app it starts supporting, so a new app shows up on the home
+screen with the update that adds it. Turn off **Bring new apps** at the top of the list and the
+apps the source names from then on are left out as they arrive, as if you had left them out
+yourself. The apps it names at that moment keep whatever you chose for them.
+
+Apps left out this way are not hidden from you: the **Apps** row on the source card counts them
+as new, and the list puts them first, marked **New**, until you close it. Bring one back the
+same way as any other app. Turning the switch back on does not bring back the apps already left
+out, only the ones that come after.
 
 ## Using more than one source
 

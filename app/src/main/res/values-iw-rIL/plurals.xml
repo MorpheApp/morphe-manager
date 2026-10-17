@@ -88,6 +88,16 @@
         <item quantity="two">%s אפליקציות מוכנות לתיקון</item>
         <item quantity="other">%s אפליקציות מוכנות לתיקון</item>
     </plurals>
+    <plurals name="batch_queue_pending_count">
+        <item quantity="one">אפליקציה %s נמצאת בתור להתקנת תיקון</item>
+        <item quantity="two">שתי אפליקציות %s נמצאות בתור להתקנת תיקון</item>
+        <item quantity="other">אפליקציות %s נמצאות בתור להתקנת תיקון</item>
+    </plurals>
+    <plurals name="home_alerts_snoozed_count">
+        <item quantity="one">%s התראה מוסתרת, לחץ כדי להציג אותה</item>
+        <item quantity="two">%s התראות מוסתרות, לחץ כדי להציג אותן</item>
+        <item quantity="other">%s התראות מוסתרות, לחץ כדי להציג אותן</item>
+    </plurals>
     <plurals name="repatch_available_count">
         <item quantity="one">%s אפליקציה ניתנת לתיקון מחדש</item>
         <item quantity="two">%s אפליקציות נתתות לתיקון מחדש</item>
@@ -107,11 +117,6 @@
         <item quantity="one">מקור אחד הותקן</item>
         <item quantity="two">שני מקורות הותקנו</item>
         <item quantity="other">%s מקורות הותקנו</item>
-    </plurals>
-    <plurals name="home_app_filter_active">
-        <item quantity="one">%1$s · %2$s מסונן</item>
-        <item quantity="two">%1$s · %2$s מסוננים</item>
-        <item quantity="other">%1$s · %2$s מסוננים</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s אפליקציה מוסתרת</item>
@@ -157,6 +162,12 @@
         <item quantity="one">%s שינוי</item>
         <item quantity="two">%s שינויים</item>
         <item quantity="other">%s שינויים</item>
+    </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
+    <plurals name="sources_apps_count_with_new">
+        <item quantity="one">%1$s · %2$d חדש</item>
+        <item quantity="two">%1$s · %2$d שתיים חדשות</item>
+        <item quantity="other">%1$s · %2$d חדשים</item>
     </plurals>
     <plurals name="changelog_new_releases">
         <item quantity="one">%s גרסה חדשה</item>

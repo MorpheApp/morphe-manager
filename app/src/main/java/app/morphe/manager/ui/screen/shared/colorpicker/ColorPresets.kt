@@ -8,6 +8,7 @@ package app.morphe.manager.ui.screen.shared.colorpicker
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.*
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -15,6 +16,7 @@ import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.Colorize
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
@@ -26,6 +28,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
@@ -38,6 +41,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.Defaults
+import app.morphe.manager.ui.screen.shared.animateCornersAsState
+import app.morphe.manager.ui.screen.shared.rememberPressShape
 import app.morphe.manager.ui.screen.shared.horizontalScrollFade
 import app.morphe.manager.util.darken
 import app.morphe.manager.util.readableOn
@@ -91,6 +96,23 @@ data class ColorPresetSwatch(val key: Any, val color: Color, val label: String? 
  * showing the color it stands for at full strength. A see-through color sits on a checkerboard so
  * its transparency shows.
  */
+private val SwatchShape = RoundedCornerShape(Defaults.CornerMedium)
+
+/**
+ * A swatch's outline: rounded out fully once [selected], as a picked tile is, and rounding down
+ * under a press on [interactionSource], as a button does.
+ */
+@Composable
+private fun rememberSwatchShape(
+    selected: Boolean,
+    interactionSource: MutableInteractionSource,
+    enabled: Boolean
+): Shape = rememberPressShape(
+    interactionSource,
+    animateCornersAsState(if (selected) Defaults.PillShape else SwatchShape),
+    enabled
+)
+
 @Composable
 private fun ColorSwatch(
     color: Color,
@@ -101,7 +123,8 @@ private fun ColorSwatch(
     enabled: Boolean = true,
     size: Dp = SwatchSize
 ) {
-    val shape = RoundedCornerShape(Defaults.CompactCornerRadius)
+    val interactionSource = remember { MutableInteractionSource() }
+    val shape = rememberSwatchShape(selected, interactionSource, enabled)
     val scheme = MaterialTheme.colorScheme
     val selectedLabel = stringResource(R.string.selected)
     val notSelectedLabel = stringResource(R.string.not_selected)
@@ -127,7 +150,12 @@ private fun ColorSwatch(
                 }
             )
             .border(borderWidth, borderColor, shape)
-            .clickable(enabled = enabled, onClick = onClick)
+            .clickable(
+                interactionSource = interactionSource,
+                indication = ripple(),
+                enabled = enabled,
+                onClick = onClick
+            )
             .semantics(mergeDescendants = true) {
                 role = Role.RadioButton
                 if (label != null) contentDescription = label
@@ -306,7 +334,8 @@ private fun NoColorSwatch(
     enabled: Boolean,
     size: Dp
 ) {
-    val shape = RoundedCornerShape(Defaults.CompactCornerRadius)
+    val interactionSource = remember { MutableInteractionSource() }
+    val shape = rememberSwatchShape(selected, interactionSource, enabled)
     val scheme = MaterialTheme.colorScheme
     val label = stringResource(R.string.not_selected)
     val selectedLabel = stringResource(R.string.selected)
@@ -323,7 +352,12 @@ private fun NoColorSwatch(
             .clip(shape)
             .background(scheme.surfaceVariant.copy(alpha = if (enabled) 0.4f else 0.2f), shape)
             .border(borderWidth, borderColor, shape)
-            .clickable(enabled = enabled, onClick = onClick)
+            .clickable(
+                interactionSource = interactionSource,
+                indication = ripple(),
+                enabled = enabled,
+                onClick = onClick
+            )
             .semantics(mergeDescendants = true) {
                 role = Role.RadioButton
                 stateDescription = if (selected) selectedLabel else label
@@ -350,7 +384,8 @@ private fun CustomColorSwatch(
     enabled: Boolean,
     size: Dp
 ) {
-    val shape = RoundedCornerShape(Defaults.CompactCornerRadius)
+    val interactionSource = remember { MutableInteractionSource() }
+    val shape = rememberSwatchShape(selected = color != null, interactionSource, enabled)
     val label = stringResource(R.string.custom_color)
     val scheme = MaterialTheme.colorScheme
 
@@ -367,7 +402,12 @@ private fun CustomColorSwatch(
                 color = color?.darken(0.4f) ?: scheme.outline.copy(alpha = 0.5f),
                 shape = shape
             )
-            .clickable(enabled = enabled, onClick = onClick)
+            .clickable(
+                interactionSource = interactionSource,
+                indication = ripple(),
+                enabled = enabled,
+                onClick = onClick
+            )
             .semantics(mergeDescendants = true) { role = Role.Button },
         contentAlignment = Alignment.Center
     ) {

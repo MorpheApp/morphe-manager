@@ -27,7 +27,6 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.Defaults
 import kotlinx.coroutines.isActive
@@ -156,7 +155,7 @@ fun FlappyBirdGame(state: FlappyGameState) {
 private fun FlappyCanvas(state: FlappyGameState, modifier: Modifier) {
     Box(
         modifier = modifier
-            .clip(RoundedCornerShape(Defaults.CompactCornerRadius))
+            .clip(RoundedCornerShape(Defaults.CornerMedium))
             .background(FlappySkyColor)
             .pointerInput(Unit) { detectTapGestures(onPress = { state.tap() }) }
     ) {
@@ -236,9 +235,9 @@ private fun FlappyCanvas(state: FlappyGameState, modifier: Modifier) {
                     color = Color.White,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
-                        .clip(RoundedCornerShape(8.dp))
+                        .clip(RoundedCornerShape(Defaults.CornerSmall))
                         .background(Color.Black.copy(alpha = 0.28f))
-                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                        .padding(horizontal = Defaults.SpaceLarge, vertical = Defaults.SpaceSmall)
                 )
             }
         }

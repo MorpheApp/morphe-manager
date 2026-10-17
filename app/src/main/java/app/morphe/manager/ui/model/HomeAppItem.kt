@@ -63,8 +63,8 @@ data class HomeAppItem(
     val showsVersionBadge: Boolean get() = versionStatus?.isBehind == true && isSettledInstall
 
     /**
-     * Whether the card carries a rebuild badge: newer patches, a newer supported app version, or
-     * both. Only what the badge says: rebuilding at a version the sources still cover returns the
+     * Whether the card is marked for a rebuild: newer patches, a newer supported app version, or
+     * both. Only what the mark says: rebuilding at a version the sources still cover returns the
      * install as it went in, so queueing and sorting stay with [showsUpdateBadge] alone.
      */
     val showsRebuildBadge: Boolean get() = showsUpdateBadge || showsVersionBadge

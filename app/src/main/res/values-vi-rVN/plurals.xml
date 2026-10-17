@@ -54,6 +54,12 @@
     <plurals name="batch_patch_ready_count">
         <item quantity="other">%s ứng dụng sẵn sàng để vá</item>
     </plurals>
+    <plurals name="batch_queue_pending_count">
+        <item quantity="other">%s ứng dụng đang chờ vá lỗi</item>
+    </plurals>
+    <plurals name="home_alerts_snoozed_count">
+        <item quantity="other">Có %s thông báo đang bị tạm ẩn, chạm để hiển thị chúng</item>
+    </plurals>
     <plurals name="repatch_available_count">
         <item quantity="other">%s ứng dụng có thể được vá lại</item>
     </plurals>
@@ -65,9 +71,6 @@
     </plurals>
     <plurals name="sources_management_subtitle">
         <item quantity="other">Đã cài đặt %s nguồn</item>
-    </plurals>
-    <plurals name="home_app_filter_active">
-        <item quantity="other">%1$s · %2$s mục đã lọc</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="other">%s ứng dụng đang ẩn</item>
@@ -95,6 +98,10 @@
     </plurals>
     <plurals name="changelog_change_count">
         <item quantity="other">%s thay đổi</item>
+    </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
+    <plurals name="sources_apps_count_with_new">
+        <item quantity="other">%1$s · %2$d mới</item>
     </plurals>
     <plurals name="changelog_new_releases">
         <item quantity="other">%s bản phát hành mới</item>

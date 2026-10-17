@@ -5,10 +5,8 @@
 
 package app.morphe.manager.ui.screen.settings.appearance
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.SearchOff
@@ -27,7 +25,7 @@ import app.morphe.manager.ui.screen.shared.*
  * Language picker dialog with searchable list.
  */
 @Composable
-fun LanguagePickerDialog(
+fun DialogHostScope.LanguagePickerDialog(
     currentLanguage: String,
     onLanguageSelected: (String) -> Unit,
     onDismiss: () -> Unit
@@ -51,10 +49,21 @@ fun LanguagePickerDialog(
         }
     }
 
-    val listState = rememberLazyListState()
-
-    AppDialog(
+    val accent = MaterialTheme.colorScheme.primary
+    ListDialog(
         onDismissRequest = onDismiss,
+        header = {
+            ListDialogHeader(
+                icon = { modifier ->
+                    ListDialogHeaderIcon(icon = Icons.Outlined.Language, color = accent, modifier = modifier)
+                },
+                title = stringResource(R.string.settings_appearance_app_language),
+                // The language in effect, so the choice reads before the list is scrolled to it
+                subtitle = LanguageRepository.getLanguage(currentLanguage, context).displayName,
+                search = search,
+                accentColor = accent
+            )
+        },
         footer = {
             AppDialogOutlinedButton(
                 text = stringResource(android.R.string.cancel),
@@ -62,48 +71,14 @@ fun LanguagePickerDialog(
                 modifier = Modifier.fillMaxWidth()
             )
         },
-        padding = DialogPadding.Compact,
-        scrollable = false,
-        contentArrangement = Arrangement.Top,
-        fillContentHeight = true,
         hideFooterWhileTyping = true
     ) {
         SearchFieldBackHandler(search)
 
-        val accent = MaterialTheme.colorScheme.primary
-        ListDialogHeader(
-            icon = { modifier ->
-                ListDialogHeaderIcon(icon = Icons.Outlined.Language, color = accent, modifier = modifier)
-            },
-            title = stringResource(R.string.settings_appearance_app_language),
-            // The language in effect, so the choice reads before the list is scrolled to it
-            subtitle = LanguageRepository.getLanguage(currentLanguage, context).displayName,
-            search = search,
-            searchLabel = stringResource(R.string.search),
-            accentColor = accent
-        )
-
         DialogLazyList(
             modifier = Modifier.fillMaxWidth(),
-            state = listState,
-            verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing),
-            pinnedFirstRow = true
+            verticalArrangement = Arrangement.spacedBy(DialogListSpacing)
         ) {
-            // Kept while the field is closed, so its share of the spacing makes the gap under
-            // the header
-            stickyHeader(key = "search") {
-                AppDialogSearchHeader(
-                    visible = search.visible,
-                    value = search.query,
-                    onValueChange = { search.query = it },
-                    label = stringResource(R.string.search),
-                    // Opaque, so rows scrolled under the gap stay hidden
-                    modifier = Modifier
-                        .background(MaterialTheme.colorScheme.background)
-                        .padding(top = Defaults.ItemSpacing)
-                )
-            }
-
             if (filteredLanguages.isEmpty()) {
                 item(key = "empty_state") {
                     EmptyState(

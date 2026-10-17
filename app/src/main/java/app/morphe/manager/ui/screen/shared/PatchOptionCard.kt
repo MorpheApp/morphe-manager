@@ -98,11 +98,11 @@ fun OptionCard(
         // No size animation of its own: what grows inside, such as the instructions or the exact
         // value input of a slider, already animates, and a second one trails behind it
         Column(
-            modifier = Modifier.padding(Defaults.ContentPadding),
-            verticalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing)
+            modifier = Modifier.padding(Defaults.SpaceLarge),
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
         ) {
             Row(
-                horizontalArrangement = Arrangement.spacedBy(Defaults.ItemSpacing),
+                horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // Eases the badges onto a line of their own and back, as an edit shows or hides one.
@@ -195,7 +195,7 @@ fun AssetCreatorAction(
         modifier = Modifier.fillMaxWidth()
     )
 
-    if (showCreator) {
+    DialogHost(visible = showCreator) {
         val onDone: (String) -> Unit = { path ->
             onCreated(path)
             showCreator = false

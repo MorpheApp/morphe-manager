@@ -71,6 +71,14 @@
         <item quantity="one">%s app är redo att modifieras</item>
         <item quantity="other">%s appar är redo att modifieras</item>
     </plurals>
+    <plurals name="batch_queue_pending_count">
+        <item quantity="one">%s app köad för modifiering</item>
+        <item quantity="other">%s appar köade för modifiering</item>
+    </plurals>
+    <plurals name="home_alerts_snoozed_count">
+        <item quantity="one">%s dold avisering, tryck för att visa den</item>
+        <item quantity="other">%s dolda aviseringar, tryck för att visa dem</item>
+    </plurals>
     <plurals name="repatch_available_count">
         <item quantity="one">%s app kan modifieras igen</item>
         <item quantity="other">%s appar kan modifieras igen</item>
@@ -86,10 +94,6 @@
     <plurals name="sources_management_subtitle">
         <item quantity="one">%s installerad källa</item>
         <item quantity="other">%s installerade källor</item>
-    </plurals>
-    <plurals name="home_app_filter_active">
-        <item quantity="one">%1$s · %2$s filtrerad</item>
-        <item quantity="other">%1$s · %2$s filtrerade</item>
     </plurals>
     <plurals name="home_app_show_hidden_count">
         <item quantity="one">%s dold app</item>
@@ -126,6 +130,11 @@
     <plurals name="changelog_change_count">
         <item quantity="one">%s ändring</item>
         <item quantity="other">%s ändringar</item>
+    </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
+    <plurals name="sources_apps_count_with_new">
+        <item quantity="one">%1$s · %2$d ny</item>
+        <item quantity="other">%1$s · %2$d nya</item>
     </plurals>
     <plurals name="changelog_new_releases">
         <item quantity="one">%s ny version</item>

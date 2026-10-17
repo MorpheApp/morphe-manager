@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.cancellation.CancellationException
 
 /** How far a predictive back gesture draws a bottom-anchored surface down before it lets go. */
-private val PredictiveBackSlide = 96.dp
+internal val PredictiveBackSlide = 96.dp
 
 /**
  * Draws a surface anchored to the bottom edge down as far as a predictive back gesture has

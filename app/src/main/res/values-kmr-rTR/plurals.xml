@@ -75,4 +75,5 @@
         <item quantity="one">%s pelê ji pakête hilbijartî ve kopî kir</item>
         <item quantity="other">%s pelên ji pakête hilbijartî ve kopî kir</item>
     </plurals>
+    <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
 </resources>
