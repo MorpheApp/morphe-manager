@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">A forrásaid naprakészek</string>
     <string name="home_sources_are_loading">Források betöltése...</string>
     <string name="home_search_apps">Alkalmazások keresése</string>
-    <string name="home_app_list_options_title">Rendezés és szűrés</string>
-    <string name="home_app_list_options_state_description">Rendezés: %1$s, szűrés: %2$s</string>
+    <string name="list_options_title">Rendezés és szűrés</string>
+    <string name="list_options_state_description">Rendezés: %1$s, szűrés: %2$s</string>
     <string name="home_app_filter_all_description">Minden alkalmazás a kezdőképernyőn</string>
     <string name="home_app_filter_patched_description">A Morphe-val módosított vagy mentett alkalmazások</string>
     <string name="home_app_filter_not_patched_description">A Morphe-ban még nem módosított alkalmazások</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Módosításforrások</string>
     <string name="sources_search">Források és javítások keresése</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Minden forrás</string>
+    <string name="sources_filter_enabled_description">Források javításai innen származnak</string>
+    <string name="sources_filter_disabled_description">Források letiltva</string>
+    <string name="sources_filter_updates">Frissítések</string>
+    <string name="sources_filter_updates_description">A frissítéshez szükséges újabb verziójú források</string>
+    <string name="sources_filter_issues">Figyelmet igényel</string>
+    <string name="sources_filter_issues_description">A letiltott, sikertelen betöltésű vagy újabb Morphe-verziót igénylő források</string>
     <string name="sources_sort_manual">Kézi sorrend</string>
     <string name="sources_sort_manual_hint">Nyomja meg hosszan egy forrást a sorrend megváltoztatásához.</string>
     <string name="sources_sort_last_updated">Utolsó frissítés</string>
@@ -886,7 +894,6 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="notification_mount_replaced_title">A %1$s már nincs javítva</string>
     <string name="notification_mount_replaced_text">v%1$s lecserélte a javított v%2$s verziót. Nyissa meg a Morphe alkalmazást a visszaállításhoz</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Szakértői beállítások</string>
     <string name="settings_advanced_expert_mode">Szakértői mód</string>
     <string name="settings_advanced_expert_mode_description">Speciális patchelési beállítások és patch opciók feloldása</string>
     <string name="settings_advanced_expert_mode_dialog_title">Engedélyezed a szakértői módot?</string>
@@ -1084,7 +1091,6 @@ Részletek: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Visszaállítás alapértékre</string>
     <string name="settings_system_notifications_ringtone_picker_title">Hang kiválasztása</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Importálás és exportálás</string>
     <string name="settings_system_signing_key">Aláírási kulcs</string>
     <string name="settings_system_signing_key_description">A módosított alkalmazásokat aláíró kulcs biztonsági mentése vagy visszaállítása</string>
     <string name="settings_system_signing_key_dialog_description">A Morphe minden általa javított alkalmazást ezzel a kulccsal ír alá. Tarts meg egy másolatot: enélkül a javított alkalmazások csak eltávolítás után frissíthetők.</string>
@@ -1184,14 +1190,11 @@ Részletek: %2$s"</string>
     <string name="settings_system_patch_selections_title">Módosítás kiválasztások</string>
     <string name="settings_system_patch_selections_description">Mentett módosítási kiválasztások, amelyek az eltávolítás után is megmaradnak.</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Visszaállítasz minden kiválasztást?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Visszaállítod a csomag kiválasztásait?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">A kiválasztott csomagok visszaállítása?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Visszaállítod a forráskiválasztást?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s – %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s – %2$s</string>
     <string name="settings_system_patch_selection_source_format">Forrás: #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ez véglegesen törli a mentett kiválasztásokat minden csomag és forrás számára </string>
-    <string name="settings_system_patch_selection_reset_package_warning">Ez véglegesen törli a mentett kiválasztásokat minden forrás számára ehhez: &lt;b&gt;%s&lt;/b&gt;</string>
     <string name="settings_system_patch_selection_reset_source_warning">Ez véglegesen törli a mentett kiválasztásokat &lt;b&gt;%1$s&lt;/b&gt;-ben, a(z) &lt;b&gt;%2$s&lt;/b&gt; forrásban.</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Ez véglegesen törli a mentett kiválasztásokat a kijelölt csomagok számára.</string>
     <string name="settings_system_export_source_data_fail">Nem sikerült a forrásadatok exportálása</string>
@@ -1255,6 +1258,16 @@ Részletek: %2$s"</string>
     <string name="patches">Módosítások</string>
     <string name="home">Főoldal</string>
     <string name="settings">Beállítások</string>
+    <string name="apps">Alkalmazások</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">Módosítás</string>
+    <string name="settings_group_manager">Menedzser</string>
+    <string name="settings_section_appearance_summary">Nyelv, téma, színek és kezdőképernyő</string>
+    <string name="settings_section_patch_options_summary">Egyszerű módban az alkalmazásokat patch-eli</string>
+    <string name="settings_section_performance">Teljesítmény</string>
+    <string name="settings_section_original_apks">Eredeti APK-k</string>
+    <string name="settings_section_files">Fájlok <b>&amp;</b> mentések</string>
+    <string name="settings_search">Beállítások keresése</string>
     <string name="yes">Igen</string>
     <string name="no">Nem</string>
     <string name="all">Minden</string>

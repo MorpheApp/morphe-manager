@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">來源已是最新狀態</string>
     <string name="home_sources_are_loading">正在載入來源，請稍候…</string>
     <string name="home_search_apps">搜尋應用程式</string>
-    <string name="home_app_list_options_title">排序與篩選</string>
-    <string name="home_app_list_options_state_description">依 %1$s 排序，依 %2$s 篩選</string>
+    <string name="list_options_title">排序和篩選</string>
+    <string name="list_options_state_description">已依 %1$s 排序，已依 %2$s 篩選</string>
     <string name="home_app_filter_all_description">主畫面上的每個應用程式</string>
     <string name="home_app_filter_patched_description">您已使用 Morphe 修補或儲存的應用程式</string>
     <string name="home_app_filter_not_patched_description">您尚未在 Morphe 中修補的應用程式</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">修補來源</string>
     <string name="sources_search">搜尋來源與修補程式</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">所有來源</string>
+    <string name="sources_filter_enabled_description">來源修補程式取自</string>
+    <string name="sources_filter_disabled_description">已停用來源</string>
+    <string name="sources_filter_updates">更新</string>
+    <string name="sources_filter_updates_description">要獲取較新版本來源</string>
+    <string name="sources_filter_issues">需要關注</string>
+    <string name="sources_filter_issues_description">被封鎖、載入失敗或需要更新 Morphe 的來源</string>
     <string name="sources_sort_manual">手動排序</string>
     <string name="sources_sort_manual_hint">長按來源以重新排序</string>
     <string name="sources_sort_last_updated">上次更新</string>
@@ -886,7 +894,6 @@
     <string name="notification_mount_replaced_title">不再修補 %1$s</string>
     <string name="notification_mount_replaced_text">v%1$s 取代了已修補的 v%2$s。開啟 Morphe 去進行還原</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">專家設定</string>
     <string name="settings_advanced_expert_mode">專家模式</string>
     <string name="settings_advanced_expert_mode_description">解鎖進階修補設定與修補選項</string>
     <string name="settings_advanced_expert_mode_dialog_title">啟用專家模式？</string>
@@ -1082,7 +1089,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_notifications_sound_reset">重設為預設值</string>
     <string name="settings_system_notifications_ringtone_picker_title">選擇鈴聲</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">匯入與匯出</string>
     <string name="settings_system_signing_key">簽署金鑰</string>
     <string name="settings_system_signing_key_description">備份或還原簽署修補過應用程式的金鑰</string>
     <string name="settings_system_signing_key_dialog_description">Morphe 所修補的每個應用程式都會以這把金鑰簽署。請保留一份副本：少了它，修補過的應用程式只能先解除安裝後才能更新。</string>
@@ -1182,14 +1188,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">修補選擇</string>
     <string name="settings_system_patch_selections_description">儲存修補選擇，在卸載後保留</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">重設所有選擇？</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">重設套件選擇？</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">重設選取的套件？</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">重設來源選擇？</string>
     <string name="settings_system_patch_selection_total_summary_format">%2$s 中共有 %1$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%2$s 中的 %1$s</string>
     <string name="settings_system_patch_selection_source_format">來源 #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">這將永久刪除所有套件和來源中儲存的所有修補選擇</string>
-    <string name="settings_system_patch_selection_reset_package_warning">這將永久刪除 &lt;b&gt;%s&lt;/b&gt; 在所有來源中儲存的修補選擇</string>
     <string name="settings_system_patch_selection_reset_source_warning">這將永久刪除 &lt;b&gt;%1$s&lt;/b&gt; 在 &lt;b&gt;%2$s&lt;/b&gt; 中儲存的修補選擇</string>
     <string name="settings_system_patch_selection_reset_selected_warning">這將永久刪除選取套件的所有儲存修補選擇</string>
     <string name="settings_system_export_source_data_fail">無法匯出來源資料</string>
@@ -1253,6 +1256,16 @@ morphe_header_custom_dark.png
     <string name="patches">修補</string>
     <string name="home">首頁</string>
     <string name="settings">設定</string>
+    <string name="apps">應用程式</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">正在修補</string>
+    <string name="settings_group_manager">管理者</string>
+    <string name="settings_section_appearance_summary">語言、主題、顏色和主畫面</string>
+    <string name="settings_section_patch_options_summary">簡易模式修補應用程式的方式</string>
+    <string name="settings_section_performance">效能</string>
+    <string name="settings_section_original_apks">原始 APK</string>
+    <string name="settings_section_files">檔案<b>&amp;</b>備份</string>
+    <string name="settings_search">搜尋設定</string>
     <string name="yes">是</string>
     <string name="no">否</string>
     <string name="all">全部</string>

@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Đã cập nhật tất cả nguồn lên mới nhất</string>
     <string name="home_sources_are_loading">Đang tải nguồn, vui lòng chờ…</string>
     <string name="home_search_apps">Tìm ứng dụng</string>
-    <string name="home_app_list_options_title">Sắp xếp và lọc</string>
-    <string name="home_app_list_options_state_description">Đã xếp theo %1$s và lọc theo %2$s</string>
+    <string name="list_options_title">Sắp xếp và lọc</string>
+    <string name="list_options_state_description">Đã xếp theo %1$s và lọc theo %2$s</string>
     <string name="home_app_filter_all_description">Mọi ứng dụng trên màn hình chính</string>
     <string name="home_app_filter_patched_description">Các ứng dụng đã được bạn vá hoặc lưu bằng Morphe</string>
     <string name="home_app_filter_not_patched_description">Các ứng dụng mà bạn chưa vá trong Morphe</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Nguồn vá</string>
     <string name="sources_search">Tìm kiếm nguồn và bản vá</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Mọi nguồn</string>
+    <string name="sources_filter_enabled_description">Nguồn patch được lấy từ</string>
+    <string name="sources_filter_disabled_description">Nguồn đã tắt</string>
+    <string name="sources_filter_updates">Cập nhật</string>
+    <string name="sources_filter_updates_description">Nguồn có phiên bản mới hơn để tải</string>
+    <string name="sources_filter_issues">Cần xử lý</string>
+    <string name="sources_filter_issues_description">Các nguồn bị chặn, không thể tải hoặc cần Morphe mới hơn</string>
     <string name="sources_sort_manual">Sắp xếp thủ công</string>
     <string name="sources_sort_manual_hint">Bấm giữ một nguồn để sắp xếp lại</string>
     <string name="sources_sort_last_updated">Cập nhật lần cuối</string>
@@ -889,7 +897,6 @@ Các bản vá không bị ảnh hưởng: bật các bản vá trước khi ph�
     <string name="notification_mount_replaced_title">%1$s không còn được vá</string>
     <string name="notification_mount_replaced_text">v%1$s đã thay thế v%2$s đã được vá. Mở Morphe để khôi phục lại</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Chuyên gia</string>
     <string name="settings_advanced_expert_mode">Chế độ chuyên gia</string>
     <string name="settings_advanced_expert_mode_description">Mở khóa cài đặt vá nâng cao và tùy chọn vá</string>
     <string name="settings_advanced_expert_mode_dialog_title">Bật chế độ Chuyên gia?</string>
@@ -1090,7 +1097,6 @@ Chi tiết: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Đặt lại về mặc định</string>
     <string name="settings_system_notifications_ringtone_picker_title">Chọn âm báo</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Xuất &amp; Nhập</string>
     <string name="settings_system_signing_key">Khóa ký</string>
     <string name="settings_system_signing_key_description">Sao lưu hoặc khôi phục khóa ký các ứng dụng đã vá</string>
     <string name="settings_system_signing_key_dialog_description">Mọi ứng dụng mà Morphe vá đều được ký bằng khóa này. Hãy giữ một bản sao: nếu không có nó, các ứng dụng đã vá chỉ có thể được cập nhật sau khi gỡ cài đặt chúng</string>
@@ -1190,14 +1196,11 @@ Chi tiết: %2$s"</string>
     <string name="settings_system_patch_selections_title">Bản vá đã chọn</string>
     <string name="settings_system_patch_selections_description">Lưu các bản vá đã chọn khi vá, kể cả sau khi gỡ cài đặt</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Đặt lại toàn bộ bản vá đã chọn?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Đặt lại gói đã chọn?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Đặt lại các gói đã chọn?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Đặt lại nguồn đã chọn?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s đến %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s trong %2$s</string>
     <string name="settings_system_patch_selection_source_format">Nguồn #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Toàn bộ bản vá đã lưu (trong mọi gói &amp; nguồn) sẽ bị xóa vĩnh viễn</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Thao tác này sẽ xóa vĩnh viễn toàn bộ lựa chọn bản vá đã lưu của &lt;b&gt;%s&lt;/b&gt; trong mọi nguồn</string>
     <string name="settings_system_patch_selection_reset_source_warning">Thao tác này sẽ xóa vĩnh viễn các lựa chọn bản vá đã lưu của &lt;b&gt;%1$s&lt;/b&gt; trong &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Thao tác này sẽ xóa vĩnh viễn mọi lựa chọn bản vá đã lưu của các gói ứng dụng đã chọn</string>
     <string name="settings_system_export_source_data_fail">Không thể xuất dữ liệu nguồn</string>
@@ -1261,6 +1264,16 @@ Chi tiết: %2$s"</string>
     <string name="patches">Số bản vá</string>
     <string name="home">Trang chủ</string>
     <string name="settings">Cài đặt</string>
+    <string name="apps">Ứng dụng</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">Đang vá</string>
+    <string name="settings_group_manager">Trình quản lý</string>
+    <string name="settings_section_appearance_summary">Ngôn ngữ, giao diện, màu sắc và màn hình chính</string>
+    <string name="settings_section_patch_options_summary">Chế độ đơn giản áp dụng vá cho ứng dụng bằng cách</string>
+    <string name="settings_section_performance">Hiệu suất</string>
+    <string name="settings_section_original_apks">APK gốc</string>
+    <string name="settings_section_files">Tệp &amp; bản sao lưu</string>
+    <string name="settings_search">Tìm kiếm cài đặt</string>
     <string name="yes">Có</string>
     <string name="no">Không</string>
     <string name="all">Tất cả</string>

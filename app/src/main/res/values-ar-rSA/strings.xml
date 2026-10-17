@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">تم تحديث المصادر</string>
     <string name="home_sources_are_loading">جارٍ تحميل المصادر، يرجى الانتظار…</string>
     <string name="home_search_apps">البحث عن التطبيقات</string>
-    <string name="home_app_list_options_title">فرز وتصفية</string>
-    <string name="home_app_list_options_state_description">تم الفرز حسب %1$s، تمت التصفية حسب %2$s</string>
+    <string name="list_options_title">فرز وتصفية</string>
+    <string name="list_options_state_description">تم الفرز حسب %1$s، تمت التصفية حسب %2$s</string>
     <string name="home_app_filter_all_description">جميع التطبيقات على الشاشة الرئيسية</string>
     <string name="home_app_filter_patched_description">التطبيقات التي قمت بتعديلها أو حفظها باستخدام Morphe</string>
     <string name="home_app_filter_not_patched_description">التطبيقات التي لم تقم بتعديلها في Morphe بعد</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">مصادر التعديل</string>
     <string name="sources_search">البحث في المصادر والتعديلات</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">كل المصدر</string>
+    <string name="sources_filter_enabled_description">تُؤخذ تعديلات المصادر من</string>
+    <string name="sources_filter_disabled_description">تم إيقاف المصادر</string>
+    <string name="sources_filter_updates">التحديثات</string>
+    <string name="sources_filter_updates_description">للحصول على مصادر تحتوي على إصدار أحدث</string>
+    <string name="sources_filter_issues">يتطلّب إجراءًا</string>
+    <string name="sources_filter_issues_description">المصادر التي تم حظرها، فشلت في التحميل أو تحتاج إلى نسخة أحدث من Morphe</string>
     <string name="sources_sort_manual">ترتيب يدوي</string>
     <string name="sources_sort_manual_hint">اضغط مطولًا على مصدر لإعادة الترتيب</string>
     <string name="sources_sort_last_updated">آخر تحديث</string>
@@ -891,7 +899,6 @@
     <string name="notification_mount_replaced_title">لم يعد %1$s معدلًا</string>
     <string name="notification_mount_replaced_text">استبدل الإصدار v%1$s الإصدار المعدل v%2$s. افتح Morphe لاستعادته</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">إعدادات الخبير</string>
     <string name="settings_advanced_expert_mode">وضع الخبير</string>
     <string name="settings_advanced_expert_mode_description">يفتح إعدادات التعديل المتقدمة وخيارات التعديل</string>
     <string name="settings_advanced_expert_mode_dialog_title">تمكين وضع الخبير؟</string>
@@ -1090,7 +1097,6 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_notifications_sound_reset">إعادة الضبط إلى الافتراضي</string>
     <string name="settings_system_notifications_ringtone_picker_title">اختر نغمة</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">استيراد &amp; تصدير</string>
     <string name="settings_system_signing_key">مفتاح التوقيع</string>
     <string name="settings_system_signing_key_description">يقوم بعمل نسخة احتياطية أو يستعيد المفتاح الذي يوقّع التطبيقات المعدّلة</string>
     <string name="settings_system_signing_key_dialog_description">كل تطبيق يتم تعديله عبر Morphe يتم توقيعه بهذا المفتاح. احتفظ بنسخة: بدونه، لا يمكن تحديث التطبيقات المعدلة إلا بعد إلغاء تثبيتها.</string>
@@ -1190,14 +1196,11 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_patch_selections_title">اختيارات التعديل</string>
     <string name="settings_system_patch_selections_description">يحفظ اختيارات التعديل، وتبقى محفوظة بعد إلغاء التثبيت</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">إعادة تعيين كل الاختيارات؟</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">إعادة تعيين اختيارات الحزمة؟</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">إعادة تعيين الحزم المحددة؟</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">إعادة تعيين تحديد المصدر؟</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s عبر %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s في %2$s</string>
     <string name="settings_system_patch_selection_source_format">مصدر #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">هذا سيحذف كل التعديلات المحددة المحفوظة بشكل دائم لجميع الحزم والمصادر</string>
-    <string name="settings_system_patch_selection_reset_package_warning">هذا سيحذف كل التعديلات المحددة المحفوظة بشكل دائم لـ &lt;b&gt;%s&lt;/b&gt; عبر جميع المصادر</string>
     <string name="settings_system_patch_selection_reset_source_warning">هذا سيحذف التعديلات المحددة المحفوظة لـ &lt;b&gt;%1$s&lt;/b&gt; في &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="settings_system_patch_selection_reset_selected_warning">هذا سيحذف كل التعديلات المحددة المحفوظة للحزم المحددة بشكل دائم</string>
     <string name="settings_system_export_source_data_fail">فشل تصدير بيانات المصدر</string>
@@ -1261,6 +1264,16 @@ morphe_adaptive_monochrome_custom.xml
     <string name="patches">التعديلات</string>
     <string name="home">الصفحة الرئيسية</string>
     <string name="settings">الإعدادات</string>
+    <string name="apps">التطبيقات</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">جارٍ التعديل</string>
+    <string name="settings_group_manager">المدير</string>
+    <string name="settings_section_appearance_summary">اللغة، المظهر، الألوان والشاشة الرئيسية</string>
+    <string name="settings_section_patch_options_summary">ما الذي يقوم الوضع البسيط بتعديله في التطبيقات؟</string>
+    <string name="settings_section_performance">الأداء</string>
+    <string name="settings_section_original_apks">ملفات APK الأصلية</string>
+    <string name="settings_section_files">الملفات &amp; النُسَّخ الاحتياطية</string>
+    <string name="settings_search">بحث الإعدادات</string>
     <string name="yes">نعم</string>
     <string name="no">لا</string>
     <string name="all">الكل</string>

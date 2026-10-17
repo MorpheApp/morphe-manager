@@ -47,8 +47,6 @@
     <string name="home_update_success_subtitle">Sumber-sumbee anda adalah yang terkini</string>
     <string name="home_sources_are_loading">Sumber sedang di muat naik, sila tunggu… </string>
     <string name="home_search_apps">Cari aplikasi</string>
-    <string name="home_app_list_options_title">Isih dan tapis</string>
-    <string name="home_app_list_options_state_description">Diisih mengikut %1$s, ditapis mengikut %2$s</string>
     <string name="home_app_filter_all_description">Setiap aplikasi pada skrin utama</string>
     <string name="home_app_filter_patched_description">Aplikasi yang anda tampal atau simpan dengan Morphe</string>
     <string name="home_app_filter_not_patched_description">Aplikasi yang belum anda tampal dalam Morphe</string>
@@ -148,6 +146,7 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Tampalan sumber-sumber</string>
     <string name="sources_search">Cari sumber dan tampalan</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_sort_manual">Susunan manual</string>
     <string name="sources_sort_manual_hint">Tekan lama sumber untuk menyusun semula</string>
     <string name="sources_sort_last_updated">Kemas kini terakhir</string>
@@ -846,7 +845,6 @@ Tampalan tidak terjejas: aktifkan tampalan prakeluaran untuk setiap sumber dalam
     <string name="notification_channel_patch_updates_description">Pemberitahuan tentang keluaran tampalan baharu</string>
     <string name="notification_channel_patcher_description">Ditunjukkan semasa Morphe menampal aplikasi di latar belakang</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Tetapan pakar</string>
     <string name="settings_advanced_expert_mode">Mod mahir</string>
     <string name="settings_advanced_expert_mode_dialog_title">Aktifkan Mod Pakar?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Mod Pakar memberikan kawalan yang lebih besar ke atas cara tampalan digunakan, tetapi tetapan yang salah konfigurasi dalam Mod Pakar boleh mengakibatkan aplikasi yang tidak berfungsi</string>
@@ -1037,7 +1035,6 @@ Butiran: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Set semula kepada lalai</string>
     <string name="settings_system_notifications_ringtone_picker_title">Pilih nada</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Import &amp; eksport</string>
     <string name="settings_system_signing_key">Kunci penandatanganan</string>
     <string name="settings_system_signing_key_dialog_description">Setiap aplikasi yang ditampal Morphe ditandatangani dengan kunci ini. Simpan salinan: tanpanya, aplikasi bertampal hanya boleh dikemas kini selepas menyahpasangnya</string>
     <string name="settings_system_signing_key_missing">Morphe mencipta satu dengan tampalan pertama anda</string>
@@ -1135,14 +1132,11 @@ Butiran: %2$s"</string>
     <string name="settings_system_patch_selections_title">Pilihan patch</string>
     <string name="settings_system_patch_selections_description">Pilihan tampalan disimpan, dikekalkan selepas nyahpasang</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Nyah semula semua pilihan?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Nyah semula pilihan pakej?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Set semula pakej yang dipilih?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Nyah semula pilihan sumber?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s merentasi %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s dalam %2$s</string>
     <string name="settings_system_patch_selection_source_format">Sumber #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ini akan memadam secara kekal semua pilihan tampalan yang disimpan untuk semua pakej dan sumber</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Ini akan memadam semua pilihan tampalan yang disimpan untuk &lt;b&gt;%s&lt;/b&gt; merentas semua sumber secara kekal</string>
     <string name="settings_system_patch_selection_reset_source_warning">Ini akan memadam pilihan tampalan yang disimpan untuk &lt;b&gt;%1$s&lt;/b&gt; dalam &lt;b&gt;%2$s&lt;/b&gt; secara kekal</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Ini akan memadam semua pilihan tampalan yang disimpan untuk pakej yang dipilih secara kekal</string>
     <string name="settings_system_export_source_data_fail">Gagal membaca log (kod keluar %s)</string>
@@ -1205,6 +1199,8 @@ Butiran: %2$s"</string>
     <string name="patches">Tampalan</string>
     <string name="home">Rumah</string>
     <string name="settings">Pengaturan</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">Menampal</string>
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
     <string name="all">Semua</string>

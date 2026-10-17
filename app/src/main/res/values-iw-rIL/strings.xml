@@ -50,8 +50,8 @@
     <string name="home_update_success_subtitle">המקורות שלך מעודכנים</string>
     <string name="home_sources_are_loading">המקורות נטענים, נא להמתין…</string>
     <string name="home_search_apps">חיפוש אפליקציות</string>
-    <string name="home_app_list_options_title">מיון וסינון</string>
-    <string name="home_app_list_options_state_description">ממוינת לפי %1$s, מסוננת לפי %2$s</string>
+    <string name="list_options_title">מיון וסינון</string>
+    <string name="list_options_state_description">מיון לפי %1$s, סינון לפי %2$s</string>
     <string name="home_app_filter_all_description">כל אפליקציה במסך הבית</string>
     <string name="home_app_filter_patched_description">אפליקציות שתיקנת או שמרת עם Morphe</string>
     <string name="home_app_filter_not_patched_description">אפליקציות שעדיין לא תיקנת ב-Morphe</string>
@@ -154,6 +154,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">מקורות תיקונים</string>
     <string name="sources_search">חפש מקורות ותיקונים</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">כל המקורות</string>
+    <string name="sources_filter_enabled_description">תיקוני מקורות נלקחים מ</string>
+    <string name="sources_filter_disabled_description">מקורות כבויים</string>
+    <string name="sources_filter_updates">עדכונים</string>
+    <string name="sources_filter_updates_description">מקורות עם גרסה חדשה יותר להשגה</string>
+    <string name="sources_filter_issues">צריכים תשומת לב</string>
+    <string name="sources_filter_issues_description">מקורות שנחסמו, נכשלו בטעינה או דורשים Morphe עדכני</string>
     <string name="sources_sort_manual">הזמנה ידנית</string>
     <string name="sources_sort_manual_hint">לחץ לחיצה ארוכה על מקור כדי לשנות את הסדר</string>
     <string name="sources_sort_last_updated">עודכן לאחרונה</string>
@@ -888,7 +896,6 @@
     <string name="notification_mount_replaced_title">%1$s כבר לא מתוקן</string>
     <string name="notification_mount_replaced_text">v%1$s החליפה את v%2$s המתוקנת. פתח את Morphe כדי לשחזר אותה</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">הגדרות מומחה</string>
     <string name="settings_advanced_expert_mode">מצב מומחה</string>
     <string name="settings_advanced_expert_mode_description">פותח הגדרות מתקדמות לתיקון ואפשרויות תיקון</string>
     <string name="settings_advanced_expert_mode_dialog_title">אפשר את режим מומחה?</string>
@@ -1096,7 +1103,6 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="settings_system_notifications_sound_reset">אפס לברירת מחדל</string>
     <string name="settings_system_notifications_ringtone_picker_title">בחר צליל התראה</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">ייבוא/ייצא הגדרות</string>
     <string name="settings_system_signing_key">מפתח חתימה</string>
     <string name="settings_system_signing_key_description">גבה או שחזר את המפתח החותם את האפליקציות המתוקנות</string>
     <string name="settings_system_signing_key_dialog_description">כל אפליקציה שעברה טלאי ב-Morphe נחתמת באמצעות המפתח הזה. שמור עותק: בלעדיו, אפליקציות שעברו טלאי ניתנות לעדכון רק לאחר הסרת ההתקנה שלהן</string>
@@ -1196,14 +1202,11 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="settings_system_patch_selections_title">ניהול בחירות תיקון</string>
     <string name="settings_system_patch_selections_description">שומר בחירות תיקון, נשמר לאחר הסרה</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">להחזיר את כל הבחירות?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">להחזיר את בחירת החבילה?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">לאפס את החבילות שנשארו?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">להחזיר את בחירת מקור?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s על %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s ב-%2$s</string>
     <string name="settings_system_patch_selection_source_format">מקור #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">פעולה זו תמחק לצמיתות את כל בחירות התיקונים שנשמרו עבור כל החבילות והמקורות</string>
-    <string name="settings_system_patch_selection_reset_package_warning">פעולה זו תמחק לצמיתות את כל בחירות התיקונים שנשמרו עבור &lt;b&gt;%s&lt;/b&gt; בכל המקורות.</string>
     <string name="settings_system_patch_selection_reset_source_warning">פעולה זו תמחק לצמיתות את בחירות התיקונים שנשמרו עבור &lt;b&gt;%1$s&lt;/b&gt; בתוך &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="settings_system_patch_selection_reset_selected_warning">פעולה זו תמחק לצמיתות את כל בחירות התיקונים שנשמרו עבור החבילות הנבחרות.</string>
     <string name="settings_system_export_source_data_fail">שגיאה בייצוא נתוני מקור</string>
@@ -1267,6 +1270,16 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="patches">תיקונים</string>
     <string name="home">בית</string>
     <string name="settings">הגדרות</string>
+    <string name="apps">אפליקציות</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">מתקן</string>
+    <string name="settings_group_manager">מנהל</string>
+    <string name="settings_section_appearance_summary">שפה, ערכת נושא, צבעים ומסך הבית</string>
+    <string name="settings_section_patch_options_summary">מה מצב פשוט משפר באפליקציות עם</string>
+    <string name="settings_section_performance">ביצועים</string>
+    <string name="settings_section_original_apks">קבצי APK מקוריים</string>
+    <string name="settings_section_files">קבצים &amp; גיבויים</string>
+    <string name="settings_search">חפש בהגדרות</string>
     <string name="yes">כן</string>
     <string name="no">לא</string>
     <string name="all">כולם</string>

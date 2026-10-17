@@ -47,8 +47,6 @@
     <string name="home_update_success_subtitle">तुमची मुळे आधीच नवीन आहेत.</string>
     <string name="home_sources_are_loading">मुळे लोड होत आहेत, कृपया वाट पहा</string>
     <string name="home_search_apps">ॲप्स शोधा</string>
-    <string name="home_app_list_options_title">क्रमवारी लावा आणि फिल्टर करा</string>
-    <string name="home_app_list_options_state_description">%1$s नुसार क्रमवारी लावलेले, %2$s नुसार फिल्टर केलेले</string>
     <string name="home_app_filter_all_description">होम स्क्रीनवरील प्रत्येक अॅप</string>
     <string name="home_app_filter_patched_description">तुम्ही Morphe सह पॅच केलेले किंवा सेव्ह केलेले अॅप्स</string>
     <string name="home_app_filter_not_patched_description">तुम्ही Morphe मध्ये अद्याप पॅच न केलेले अॅप्स</string>
@@ -148,6 +146,7 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">सुधारणांची मुळे</string>
     <string name="sources_search">स्रोत आणि पॅच शोधा</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_sort_manual">मॅन्युअल ऑर्डर</string>
     <string name="sources_sort_manual_hint">पुन्हा क्रमवारी लावण्यासाठी स्रोतावर दाबून ठेवा</string>
     <string name="sources_sort_last_updated">शेवटची अपडेट</string>
@@ -843,7 +842,6 @@
     <string name="notification_channel_patch_updates_description">नवीन पॅच रिलीझबद्दल सूचना</string>
     <string name="notification_channel_patcher_description">Morphe पार्श्वभूमीमध्ये ॲप पॅच करत असताना दर्शविले जाते</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">तज्ञ सेटिंग्ज</string>
     <string name="settings_advanced_expert_mode">तज्ञ मोड</string>
     <string name="settings_advanced_expert_mode_dialog_title">तज्ञ मोड सक्षम करायचा?</string>
     <string name="settings_advanced_expert_mode_dialog_message">तज्ञ मोड पॅच कसे लागू केले जातात यावर अधिक नियंत्रण देतो, परंतु तज्ञ मोडमधील सेटिंग्ज चुकीच्या कॉन्फिगर केल्यास ॲप कार्यान्वित होऊ शकत नाही</string>
@@ -1034,7 +1032,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_notifications_sound_reset">डीफॉल्ट वर रीसेट करा</string>
     <string name="settings_system_notifications_ringtone_picker_title">टोन निवडा</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">आयात आणि निर्यात</string>
     <string name="settings_system_signing_key">स्वाक्षरी की</string>
     <string name="settings_system_signing_key_dialog_description">Morphe पॅच करत असलेल्या प्रत्येक अॅपवर या कीने स्वाक्षरी केली जाते. एक प्रत ठेवा: त्याशिवाय, पॅच केलेले अॅप्स अनइंस्टॉल केल्याशिवाय केवळ अपडेट करता येतात</string>
     <string name="settings_system_signing_key_missing">Morphe तुमच्या पहिल्या पॅचसह एक तयार करते</string>
@@ -1132,14 +1129,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">पॅच निवड</string>
     <string name="settings_system_patch_selections_description">अनइंस्टॉल केल्यानंतरही जतन केलेले पॅच निवड</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">सर्व निवड रीसेट करायची?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">पॅकेज निवड रीसेट करायची?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">निवडलेले पॅकेजेस रीसेट करायचे?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">स्रोत निवड रीसेट करायची?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s पैकी %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s मध्ये %2$s</string>
     <string name="settings_system_patch_selection_source_format">स्रोत #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">हे सर्व पॅकेजेस आणि स्रोतांसाठी सेव्ह केलेल्या सर्व पॅच निवडी कायमस्वरूपी हटवेल</string>
-    <string name="settings_system_patch_selection_reset_package_warning">हे सर्व स्त्रोतांमध्ये &lt;b&gt;%s&lt;/b&gt; साठी जतन केलेले सर्व पॅच निवड कायमस्वरूपी डिलीट करेल.</string>
     <string name="settings_system_patch_selection_reset_source_warning">हे &lt;b&gt;%1$s&lt;/b&gt; मधील पॅच निवड &lt;b&gt;%2$s&lt;/b&gt; मध्ये कायमस्वरूपी डिलीट करेल.</string>
     <string name="settings_system_patch_selection_reset_selected_warning">हे निवडलेल्या पॅकेजसाठी जतन केलेले सर्व पॅच निवड कायमस्वरूपी डिलीट करेल.</string>
     <string name="settings_system_export_source_data_fail">स्रोत डेटा निर्यात करण्यात अयशस्वी</string>
@@ -1202,6 +1196,7 @@ morphe_header_custom_dark.png
     <string name="patches">अनेक सुधारणा</string>
     <string name="home">होम</string>
     <string name="settings">सेटिंग्ज</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
     <string name="yes">होय</string>
     <string name="no">नाही</string>
     <string name="all">सर्व</string>

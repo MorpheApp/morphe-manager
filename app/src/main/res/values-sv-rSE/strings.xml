@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Dina källor är uppdaterade</string>
     <string name="home_sources_are_loading">Källor läses in, vänta …</string>
     <string name="home_search_apps">Sök efter appar</string>
-    <string name="home_app_list_options_title">Sortera och filtrera</string>
-    <string name="home_app_list_options_state_description">Sorterad efter %1$s, filtrerad efter %2$s</string>
+    <string name="list_options_title">Sortera och filtrera</string>
+    <string name="list_options_state_description">Sorterad efter %1$s, filtrerad efter %2$s</string>
     <string name="home_app_filter_all_description">Alla appar på startskärmen</string>
     <string name="home_app_filter_patched_description">Appar som du har modifierat eller sparat med Morphe</string>
     <string name="home_app_filter_not_patched_description">Appar som du ännu inte har modifierat i Morphe</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Tilläggskällor</string>
     <string name="sources_search">Sök efter källor och tillägg</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Alla källor</string>
+    <string name="sources_filter_enabled_description">Källor som tillägg hämtas från</string>
+    <string name="sources_filter_disabled_description">Inaktiverade källor</string>
+    <string name="sources_filter_updates">Uppdateringar</string>
+    <string name="sources_filter_updates_description">Källor med en nyare version som kan hämtas</string>
+    <string name="sources_filter_issues">Åtgärd krävs</string>
+    <string name="sources_filter_issues_description">Källor som har blockerats, inte gick att läsa in eller behöver en nyare version av Morphe</string>
     <string name="sources_sort_manual">Manuell ordning</string>
     <string name="sources_sort_manual_hint">Tryck länge på en källa för att ändra ordning</string>
     <string name="sources_sort_last_updated">Senast uppdaterad</string>
@@ -887,7 +895,6 @@ Tillägg påverkas inte: aktivera förhandsversioner av tillägg för varje käl
     <string name="notification_mount_replaced_title">%1$s är inte längre modifierad</string>
     <string name="notification_mount_replaced_text">v%1$s har ersatt den modifierade v%2$s. Öppna Morphe för att återställa den</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Expertinställningar</string>
     <string name="settings_advanced_expert_mode">Expertläge</string>
     <string name="settings_advanced_expert_mode_description">Låser upp avancerade modifieringsinställningar och tilläggsalternativ</string>
     <string name="settings_advanced_expert_mode_dialog_title">Aktivera expertläge?</string>
@@ -1085,7 +1092,6 @@ Information: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Återställ till standard</string>
     <string name="settings_system_notifications_ringtone_picker_title">Välj en ton</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Importera och exportera</string>
     <string name="settings_system_signing_key">Signeringsnyckel</string>
     <string name="settings_system_signing_key_description">Säkerhetskopierar eller återställer nyckeln som signerar modifierade appar</string>
     <string name="settings_system_signing_key_dialog_description">Varje app som Morphe modifierar signeras med den här nyckeln. Spara en kopia: utan den kan modifierade appar bara uppdateras efter att de har avinstallerats</string>
@@ -1185,14 +1191,11 @@ Information: %2$s"</string>
     <string name="settings_system_patch_selections_title">Tilläggsurval</string>
     <string name="settings_system_patch_selections_description">Sparade tilläggsurval som blir kvar om appar avinstalleras</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Återställ alla urval?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Återställ paketurvalen?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Återställ de markerade paketen?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Återställ källurvalet?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s i %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s i %2$s</string>
     <string name="settings_system_patch_selection_source_format">Källa nr %s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Det här raderar alla sparade tilläggsurval för alla paket och källor permanent</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Det här raderar alla sparade tilläggsurval för &lt;b&gt;%s&lt;/b&gt; i alla källor permanent</string>
     <string name="settings_system_patch_selection_reset_source_warning">Det här raderar det sparade tilläggsurvalet för &lt;b&gt;%1$s&lt;/b&gt; i &lt;b&gt;%2$s&lt;/b&gt; permanent</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Det här raderar alla sparade tilläggsurval för de markerade paketen permanent</string>
     <string name="settings_system_export_source_data_fail">Det gick inte att exportera källdata</string>
@@ -1256,6 +1259,16 @@ Information: %2$s"</string>
     <string name="patches">Tillägg</string>
     <string name="home">Start</string>
     <string name="settings">Inställningar</string>
+    <string name="apps">Appar</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">Modifiering</string>
+    <string name="settings_group_manager">Manager</string>
+    <string name="settings_section_appearance_summary">Språk, tema, färger och startskärm</string>
+    <string name="settings_section_patch_options_summary">Vad appar modifieras med i det enkla läget</string>
+    <string name="settings_section_performance">Prestanda</string>
+    <string name="settings_section_original_apks">Ursprungliga APK-filer</string>
+    <string name="settings_section_files">Filer och säkerhetskopior</string>
+    <string name="settings_search">Sök i inställningar</string>
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
     <string name="all">Alla</string>

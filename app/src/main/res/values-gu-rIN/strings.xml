@@ -57,6 +57,7 @@
     <!-- Pun on the saying "Out with the old, in with the new" -->
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">પેચ સ્ત્રોતો</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_management_open_in_browser">બ્રાઉઝરમાં ખોલો</string>
     <string name="sources_management_failed_to_open_url">URL ખોલવામાં નિષ્ફળ</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -261,6 +262,7 @@ morphe_header_custom_dark.png
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="patches">પેચો</string>
     <string name="settings">સેટિંગ્સ</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
     <string name="search">શોધો</string>
     <string name="search_no_results">કોઈ પરિણામ મળ્યું નથી.</string>
     <!-- Who made a patch source, as a field label -->

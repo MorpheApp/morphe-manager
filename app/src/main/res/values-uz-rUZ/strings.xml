@@ -47,8 +47,6 @@
     <string name="home_update_success_subtitle">Sizning manbalaringiz yangilandi</string>
     <string name="home_sources_are_loading">Manbalar yuklanayapti, iltimos kuting…</string>
     <string name="home_search_apps">Ilovalarni qidiring</string>
-    <string name="home_app_list_options_title">Saralash va filtrlash</string>
-    <string name="home_app_list_options_state_description">%1$s bo\'yicha saralangan, %2$s bo\'yicha filtrlangan</string>
     <string name="home_app_filter_all_description">Bosh ekrandagi barcha ilovalar</string>
     <string name="home_app_filter_patched_description">Morphe bilan yamalgan yoki saqlangan ilovalar</string>
     <string name="home_app_filter_not_patched_description">Morphe\'da hali yamalmagan ilovalar</string>
@@ -148,6 +146,7 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Tuzatish manbalari</string>
     <string name="sources_search">Manbalar va yamoqlarni qidirish</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_sort_manual">Pesanan manual</string>
     <string name="sources_sort_manual_hint">Tekan lama sumber untuk mengatur ulang</string>
     <string name="sources_sort_last_updated">Terakhir diperbarui</string>
@@ -843,7 +842,6 @@ Patchlar ta'sirlanmaydi: patch manbalari ro'yxatidagi har bir manba uchun pre-re
     <string name="notification_channel_patch_updates_description">Yangi yamoq versiyalari haqidagi bildirishnomalar</string>
     <string name="notification_channel_patcher_description">Morphe orqa fonda ilovani patchlayotganda ko\'rsatildi</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">O\'qish</string>
     <string name="settings_advanced_expert_mode">Ekspert rejimi</string>
     <string name="settings_advanced_expert_mode_dialog_title">Ekspert rejimini yoqishni xohlaysizmi?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Ekspert rejimi patchlarni qo\'llashni boshqarishda ko\'proq kontrolni beradi, lekin ekspert rejimida sozlamalarni noto\'g\'ri sozlash ilovaning ishlamasligiga olib kelishi mumkin</string>
@@ -1034,7 +1032,6 @@ Ma’lumotlar: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Standartga qaytarish</string>
     <string name="settings_system_notifications_ringtone_picker_title">Ohang tanlang</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Import va eksport</string>
     <string name="settings_system_signing_key">Imzolash kaliti</string>
     <string name="settings_system_signing_key_dialog_description">Morphe yamaydigan har bir ilova shu kalit bilan imzolanadi. Nusxasini saqlang: usiz yamalgan ilovalarni faqat o‘chirib tashlagandan keyin yangilash mumkin</string>
     <string name="settings_system_signing_key_missing">Morphe birinchi yamoqda uni yaratadi</string>
@@ -1132,14 +1129,11 @@ Ma’lumotlar: %2$s"</string>
     <string name="settings_system_patch_selections_title">Tuzatish imkoniyatlari</string>
     <string name="settings_system_patch_selections_description">Saqlangan patch tanlashlari</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Barcha tanlovlarni qayta tiklashni xohlaysizmi?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Paket tanlovlarini qayta tiklashni xohlaysizmi?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Reset paket yang dipilih?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Manba tanlovini qayta tiklashni xohlaysizmi?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s dan %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s da %2$s</string>
     <string name="settings_system_patch_selection_source_format">Manba #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Bu barcha paketlar va manbalar uchun saqlangan barcha patch tanlovlarini doimiy ravishda o\'chirib tashlaydi</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Bu &lt;b&gt;%s&lt;/b&gt; uchun saqlangan barcha tuzatish tanlovlarini barcha manbalar bo\'ylab doimiy ravishda o\'chirib tashlaydi.</string>
     <string name="settings_system_patch_selection_reset_source_warning">Bu &lt;b&gt;%1$s&lt;/b&gt; uchun &lt;b&gt;%2$s&lt;/b&gt; dagi saqlangan tuzatish tanlovlarini doimiy ravishda o\'chirib tashlaydi.</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Bu tanlangan paketlar uchun saqlangan barcha tuzatish tanlovlarini doimiy ravishda o\'chirib tashlaydi.</string>
     <string name="settings_system_export_source_data_fail">Manba ma\'lumotlarini eksport qilishda xatolik yuzaga keldi</string>
@@ -1202,6 +1196,7 @@ Ma’lumotlar: %2$s"</string>
     <string name="patches">Patchlar</string>
     <string name="home">Bosh sahifa</string>
     <string name="settings">Sozlamalar</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
     <string name="yes">Ha</string>
     <string name="no">Yo‘q</string>
     <string name="all">Hammasi</string>

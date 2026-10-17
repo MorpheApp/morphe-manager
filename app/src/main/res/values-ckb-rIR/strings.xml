@@ -69,6 +69,8 @@
     <!-- Pun on the saying "Out with the old, in with the new" -->
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">سەرچاوەکانی پینە</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_updates">نوێکردنەوەکان</string>
     <string name="sources_management_open_in_browser">کردنەوە لە وێبگەڕ</string>
     <string name="sources_management_failed_to_open_url">شکستی هێنا لەکردنەوەی بەستەر</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -489,6 +491,8 @@ morphe_adaptive_monochrome_custom.xml
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="patches">پینەکان</string>
     <string name="settings">ڕێکخستنەکان</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">پینەکردن</string>
     <string name="skip">لەوەشدا بجە</string>
     <string name="remove">سڕینەوە</string>
     <string name="disable">خۆراکە</string>

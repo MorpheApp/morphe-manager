@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Źródła są aktualne</string>
     <string name="home_sources_are_loading">Wczytywanie źródeł, proszę czekać…</string>
     <string name="home_search_apps">Szukaj aplikacji</string>
-    <string name="home_app_list_options_title">Sortuj i filtruj</string>
-    <string name="home_app_list_options_state_description">Posortowane według %1$s, filtrowane według %2$s</string>
+    <string name="list_options_title">Sortuj i filtruj</string>
+    <string name="list_options_state_description">Posortowane według %1$s, filtrowane według %2$s</string>
     <string name="home_app_filter_all_description">Wszystkie aplikacje na ekranie głównym</string>
     <string name="home_app_filter_patched_description">Aplikacje zmodyfikowane lub zapisane za pomocą Morphe</string>
     <string name="home_app_filter_not_patched_description">Aplikacje jeszcze niezmodyfikowane w Morphe</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Źródła modyfikacji</string>
     <string name="sources_search">Szukaj źródeł i modyfikacji</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Wszystkie źródła</string>
+    <string name="sources_filter_enabled_description">Źródła, z których pobierane są modyfikacje</string>
+    <string name="sources_filter_disabled_description">Wyłączone źródła</string>
+    <string name="sources_filter_updates">Aktualizacje</string>
+    <string name="sources_filter_updates_description">Źródła z dostępną nowszą wersją</string>
+    <string name="sources_filter_issues">Wymagające uwagi</string>
+    <string name="sources_filter_issues_description">Zablokowane źródła, których nie udało się wczytać lub które wymagają nowszej wersji Morphe</string>
     <string name="sources_sort_manual">Ręczna kolejność</string>
     <string name="sources_sort_manual_hint">Przytrzymaj źródło, aby zmienić kolejność</string>
     <string name="sources_sort_last_updated">Ostatnia aktualizacja</string>
@@ -791,11 +799,11 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Ekran główny</string>
     <string name="settings_appearance_greeting_phrases">Powitania</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Pokazuje wiadomość powitalną</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Wyświetla wiadomość powitalną</string>
     <string name="settings_appearance_repatch_notice">Powiadomienie o ponownym modyfikowaniu</string>
-    <string name="settings_appearance_repatch_notice_description">Pokazuje baner, gdy można ponownie zmodyfikować aplikacje</string>
+    <string name="settings_appearance_repatch_notice_description">Wyświetla baner, gdy można ponownie zmodyfikować aplikacje</string>
     <string name="settings_appearance_sort_button">Przycisk sortowania i filtrowania</string>
-    <string name="settings_appearance_sort_button_description">Pokazuje przycisk do sortowania i filtrowania aplikacji</string>
+    <string name="settings_appearance_sort_button_description">Wyświetla przycisk do sortowania i filtrowania aplikacji</string>
     <string name="settings_appearance_app_card_colors">Kolory kart aplikacji</string>
     <string name="settings_appearance_app_card_colors_default">Domyślne</string>
     <string name="settings_appearance_app_card_colors_default_description">Nadaj każdej aplikacji kolor z jego własnego pakietu</string>
@@ -888,7 +896,6 @@ Modyfikacje nie są tym objęte: włącz przedpremierowe modyfikacje dla każdeg
     <string name="notification_mount_replaced_title">%1$s nie jest już zmodyfikowana</string>
     <string name="notification_mount_replaced_text">v%1$s zastąpiła zmodyfikowaną v%2$s. Otwórz Morphe, aby ją przywrócić</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Ustawienia eksperckie</string>
     <string name="settings_advanced_expert_mode">Tryb ekspercki</string>
     <string name="settings_advanced_expert_mode_description">Odblokowuje zaawansowane ustawienia modyfikowania oraz opcje modyfikacji</string>
     <string name="settings_advanced_expert_mode_dialog_title">Włączyć tryb ekspercki?</string>
@@ -1086,7 +1093,6 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_notifications_sound_reset">Przywróć domyślny</string>
     <string name="settings_system_notifications_ringtone_picker_title">Wybierz dźwięk</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Import i eksport</string>
     <string name="settings_system_signing_key">Klucz podpisywania</string>
     <string name="settings_system_signing_key_description">Tworzy lub przywraca kopię zapasową klucza podpisującego zmodyfikowane aplikacje</string>
     <string name="settings_system_signing_key_dialog_description">Każda aplikacja modyfikowana przez Morphe jest podpisana tym kluczem. Zachowaj jego kopię: bez niego zaktualizowanie zmodyfikowanych aplikacji będzie możliwe tylko po ich wcześniejszym odinstalowaniu</string>
@@ -1144,7 +1150,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_apks_export_zip_failed">Nie udało się wyeksportować wybranych plików APK</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">Zarządzanie pamięcią</string>
-    <string name="settings_system_storage_management_description">Pokazuje użycie pamięci i czyści pliki pamięci podręcznej</string>
+    <string name="settings_system_storage_management_description">Wyświetla użycie pamięci i czyści pliki pamięci podręcznej</string>
     <string name="settings_system_storage_keystore_title">Magazyn kluczy podpisywania</string>
     <string name="settings_system_storage_app_data_title">Dane aplikacji</string>
     <string name="settings_system_storage_patch_bundles_title">Pakiety modyfikacji</string>
@@ -1186,14 +1192,11 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_patch_selections_title">Wybrane modyfikacje</string>
     <string name="settings_system_patch_selections_description">Zapisane wybory modyfikacji, zachowywane po odinstalowaniu</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Zresetować wszystkie wybory?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Zresetować wybory pakietu?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Zresetować wybrane pakiety?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Zresetować wybór źródła?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s przez %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s w %2$s</string>
     <string name="settings_system_patch_selection_source_format">Źródło #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Spowoduje to trwałe usunięcie wszystkich zapisanych wyborów modyfikacji dla wszystkich pakietów i źródeł</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Spowoduje to trwałe usunięcie wszystkich zapisanych wyborów modyfikacji dla pakietu &lt;b&gt;%s&lt;/b&gt; we wszystkich źródłach</string>
     <string name="settings_system_patch_selection_reset_source_warning">Spowoduje to trwałe usunięcie zapisanych wyborów modyfikacji dla aplikacji &lt;b&gt;%1$s&lt;/b&gt; w źródle &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Spowoduje to trwałe usunięcie wszystkich zapisanych wyborów modyfikacji dla wybranych pakietów</string>
     <string name="settings_system_export_source_data_fail">Nie udało się wyeksportować danych źródła</string>
@@ -1257,6 +1260,16 @@ Wymagane są następujące wymiary obrazów:
     <string name="patches">Modyfikacje</string>
     <string name="home">Strona główna</string>
     <string name="settings">Ustawienia</string>
+    <string name="apps">Aplikacje</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">Modyfikowanie</string>
+    <string name="settings_group_manager">Menedżer</string>
+    <string name="settings_section_appearance_summary">Język, motyw, kolory i ekran główny</string>
+    <string name="settings_section_patch_options_summary">Opcje modyfikacji używane przez tryb prosty</string>
+    <string name="settings_section_performance">Wydajność</string>
+    <string name="settings_section_original_apks">Oryginalne pliki APK</string>
+    <string name="settings_section_files">Pliki i kopie zapasowe</string>
+    <string name="settings_search">Szukaj w ustawieniach</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
     <string name="all">Wszystkie</string>

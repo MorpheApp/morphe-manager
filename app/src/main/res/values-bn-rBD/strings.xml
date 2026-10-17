@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">আপনার সোর্সগুলি আপ-টু-ডেট আছে</string>
     <string name="home_sources_are_loading">সোর্স লোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন…</string>
     <string name="home_search_apps">অ্যাপস অনুসন্ধান করুন</string>
-    <string name="home_app_list_options_title">সাজান এবং ফিল্টার করুন</string>
-    <string name="home_app_list_options_state_description">%1$s অনুসারে সাজানো হয়েছে, %2$s অনুসারে ফিল্টার করা হয়েছে</string>
+    <string name="list_options_title">সাজান ও ফিল্টার করুন</string>
+    <string name="list_options_state_description">%1$s দ্বারা সাজানো, %2$s দ্বারা ফিল্টার করা</string>
     <string name="home_app_filter_all_description">হোম স্ক্রিনে থাকা প্রতিটি অ্যাপ</string>
     <string name="home_app_filter_patched_description">Morphe দিয়ে আপনি যেসব অ্যাপ প্যাচ করেছেন বা সংরক্ষণ করেছেন</string>
     <string name="home_app_filter_not_patched_description">Morphe-এ আপনি যেসব অ্যাপ এখনও প্যাচ করেননি</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">প্যাচ সোর্সগুলো</string>
     <string name="sources_search">উৎস এবং প্যাচ অনুসন্ধান করুন</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">প্রতিটি উৎস</string>
+    <string name="sources_filter_enabled_description">উৎস প্যাচগুলি নেওয়া হয়েছে</string>
+    <string name="sources_filter_disabled_description">উৎস বন্ধ করা হয়েছে</string>
+    <string name="sources_filter_updates">আপডেট</string>
+    <string name="sources_filter_updates_description">পাওয়ার জন্য নতুন সংস্করণ সহ সোর্সগুলি</string>
+    <string name="sources_filter_issues">মনোযোগের প্রয়োজন</string>
+    <string name="sources_filter_issues_description">সোর্সগুলি যা ব্লক করা হয়েছে, লোড করতে ব্যর্থ হয়েছে বা একটি নতুন Morphe-এর প্রয়োজন</string>
     <string name="sources_sort_manual">ম্যানুয়াল অর্ডার</string>
     <string name="sources_sort_manual_hint">পুনরায় সাজানোর জন্য একটি উৎসের উপর দীর্ঘক্ষণ চাপুন</string>
     <string name="sources_sort_last_updated">সর্বশেষ আপডেট করা হয়েছে</string>
@@ -887,7 +895,6 @@
     <string name="notification_mount_replaced_title">%1$s আর প্যাচ করা নেই</string>
     <string name="notification_mount_replaced_text">v%1$s প্যাচ করা v%2$s-কে প্রতিস্থাপন করেছে। এটি পুনরুদ্ধার করতে Morphe খুলুন</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">বিশেষ্ট সেটিংস</string>
     <string name="settings_advanced_expert_mode">বিশেষ্ট মোড</string>
     <string name="settings_advanced_expert_mode_description">উন্নত প্যাচিং সেটিংস এবং প্যাচ বিকল্পগুলি আনলক করে</string>
     <string name="settings_advanced_expert_mode_dialog_title">এক্সপার্ট মোড সক্ষম করবেন?</string>
@@ -1075,7 +1082,6 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_notifications_sound_reset">ডিফল্টে রিসেট করুন</string>
     <string name="settings_system_notifications_ringtone_picker_title">একটি সুর নির্বাচন করুন</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">ইমপোর্ট &amp; এক্সপোর্ট </string>
     <string name="settings_system_signing_key">স্বাক্ষর কী</string>
     <string name="settings_system_signing_key_description">প্যাচড অ্যাপগুলিকে সাইন করা কি backup বা restore করে</string>
     <string name="settings_system_signing_key_dialog_description">Morphe প্যাচ করা প্রতিটি অ্যাপ এই কী দিয়ে স্বাক্ষরিত হয়। একটি কপি রাখুন: এটি ছাড়া, প্যাচ করা অ্যাপগুলো কেবল আনইনস্টল করার পরে আপডেট করা যাবে।</string>
@@ -1177,14 +1183,11 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_patch_selections_title">প্যাচ নির্বাচন</string>
     <string name="settings_system_patch_selections_description">সংরক্ষিত প্যাচ নির্বাচন, আনইনস্টল করার পরেও ধরে রাখা হয়।</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">সবগুলো নির্বাচন পুনরায় সেট করব?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">প্যাকেজ নির্বাচন পুনরায় সেট করব?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">নির্বাচিত প্যাকেজ রিসেট করতে চান?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">উৎস নির্বাচন পুনরায় সেট করব?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s থেকে %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s থেকে %2$s</string>
     <string name="settings_system_patch_selection_source_format">সূত্র #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">সব প্যাকেজ এবং উৎসের জন্য সংরক্ষিত প্যাচ নির্বাচনগুলি স্থায়ীভাবে মুছে ফেলবে</string>
-    <string name="settings_system_patch_selection_reset_package_warning">এটি সমস্ত উৎসের মধ্যে &lt;b&gt;%s&lt;/b&gt;-এর জন্য সংরক্ষিত প্যাচ নির্বাচনগুলি স্থায়ীভাবে মুছে ফেলবে।</string>
     <string name="settings_system_patch_selection_reset_source_warning">এটি &lt;b&gt;%1$s&lt;/b&gt;-এর জন্য &lt;b&gt;%2$s&lt;/b&gt;-এ সংরক্ষিত প্যাচ নির্বাচনগুলি স্থায়ীভাবে মুছে ফেলবে।</string>
     <string name="settings_system_patch_selection_reset_selected_warning">এটি নির্বাচিত প্যাকেজগুলির জন্য সমস্ত সংরক্ষিত প্যাচ নির্বাচনগুলি স্থায়ীভাবে মুছে ফেলবে।</string>
     <string name="settings_system_export_source_data_fail">সোর্স ডাটা এক্সপোর্ট করা ব্যর্থ হয়েছে</string>
@@ -1248,6 +1251,16 @@ morphe_adaptive_monochrome_custom.xml
     <string name="patches">প্যাচ</string>
     <string name="home">হোম</string>
     <string name="settings">সেটিংস</string>
+    <string name="apps">অ্যাপস</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">প্যাচিং</string>
+    <string name="settings_group_manager">ম্যানেজার</string>
+    <string name="settings_section_appearance_summary">ভাষা, থিম, রঙ এবং হোম স্ক্রিন</string>
+    <string name="settings_section_patch_options_summary">যা সাধারণ মোড অ্যাপগুলিকে প্যাচ করে</string>
+    <string name="settings_section_performance">কার্যক্ষমতা</string>
+    <string name="settings_section_original_apks">মূল APK সমূহ</string>
+    <string name="settings_section_files">ফাইল <b>&amp;</b> ও ব্যাকআপ</string>
+    <string name="settings_search">অনুসন্ধান সেটিংস</string>
     <string name="yes">হ্যাঁ</string>
     <string name="no">না</string>
     <string name="all">সব</string>

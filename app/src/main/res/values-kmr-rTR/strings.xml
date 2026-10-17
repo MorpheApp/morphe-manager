@@ -47,8 +47,6 @@
     <string name="home_update_success_subtitle">Kanalan we nû kirin</string>
     <string name="home_sources_are_loading">Kanalan ketin, ji kerema xwe bibeku</string>
     <string name="home_search_apps">İlave avakurîn</string>
-    <string name="home_app_list_options_title">Rêzkirin û fîltrekirin</string>
-    <string name="home_app_list_options_state_description">Rêzkirî li gorî %1$s, fîltrekirî li gorî %2$s</string>
     <string name="home_app_filter_all_description">Her sepana li ser ekrana sereke</string>
     <string name="home_app_filter_patched_description">Sepanên ku we bi Morphe pîne kirine an jî tomar kirine</string>
     <string name="home_app_filter_not_patched_description">Sepanên ku we hê di Morphe de pîne nekirine</string>
@@ -148,6 +146,7 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Kanalan saz bike</string>
     <string name="sources_search">Çavkanî û patchan bigere</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_sort_manual">Fermanê destî</string>
     <string name="sources_sort_manual_hint">Çavdêriyeke dirêj li ser çavkaniyê bike da ku rêzê guhezîne</string>
     <string name="sources_sort_last_updated">Daxwazkirina herî dawî</string>
@@ -842,7 +841,6 @@ Patch ne bandor in: ji bo her çavkaniyê di lîsteya çavkaniyên patch de patc
     <string name="notification_channel_patch_updates_description">Agahdariyên derbarê guhertoyên nû yên patchan de</string>
     <string name="notification_channel_patcher_description">Di dema ku Morphe bernameyekê di rewşê de çêdike</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Saziyên pispor</string>
     <string name="settings_advanced_expert_mode">Mode ekspert</string>
     <string name="settings_advanced_expert_mode_dialog_title">Modeka pispor çêbike?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Moda pispor kontrola zêdetir ser bernameyên ku meriv pêdike, lê çêkirina bêreng di moda pispor de dikare bibe sedem ku sepan bibe nekar.</string>
@@ -1033,7 +1031,6 @@ Detay: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Vegerîne vexwêber</string>
     <string name="settings_system_notifications_ringtone_picker_title">Toneyek hilbijêre</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Import &amp; export</string>
     <string name="settings_system_signing_key">Mifteya îmzekirinê</string>
     <string name="settings_system_signing_key_dialog_description">Her sepana ku Morphe patch dike bi vê mifteyê tê îmzekirin. Kopiyekê bigire: bêyî wê, sepanên patchkirî tenê piştî rakirina wan dikarin bên nûvekirin.</string>
     <string name="settings_system_signing_key_missing">Morphe bi patchê te yê yekem re yekê çêdike.</string>
@@ -1131,14 +1128,11 @@ Detay: %2$s"</string>
     <string name="settings_system_patch_selections_title">Bijartinê qelvaton</string>
     <string name="settings_system_patch_selections_description">Hilbijartinên qeyik kirinê parastî, paş de hatine veqetandin</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Hemû bejna vebejin?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Bejnê pakêtên vebejin?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Pakêtên hilbijartî dîsa vegerînin?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Bejna seyarê vebejin?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s hera %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s hera %2$s</string>
     <string name="settings_system_patch_selection_source_format">Kanî #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ev hemû bejna sifira jibo baweriyan bejinê</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Evê ê hemû hilbijartinên paqijkirinê yên ku hatine tomarkirin ji bo &lt;b&gt;%s&lt;/b&gt; li ser hemû çavkaniyan bi temamî were tarandin.</string>
     <string name="settings_system_patch_selection_reset_source_warning">Evê ê hemû hilbijartinên paqijkirinê yên ku hatine tomarkirin ji bo &lt;b&gt;%1$s&lt;/b&gt; di &lt;b&gt;%2$s&lt;/b&gt; de bi temamî were tarandin.</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Evê ê hemû hilbijartinên paqijkirinê yên ku hatine tomarkirin ji bo paketên hilbijartî bi temamî were tarandin.</string>
     <string name="settings_system_export_source_data_fail">Serûşiya dane seyarê pêş nebûne</string>
@@ -1201,6 +1195,7 @@ Detay: %2$s"</string>
     <string name="patches">Saxkirin</string>
     <string name="home">Mal</string>
     <string name="settings">Sazî</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
     <string name="yes">Bêlî</string>
     <string name="no">Na</string>
     <string name="all">Hemû</string>

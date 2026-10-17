@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Ваши извори су ажурни</string>
     <string name="home_sources_are_loading">Извори се учитавају, молимо сачекајте…</string>
     <string name="home_search_apps">Претрага апликација</string>
-    <string name="home_app_list_options_title">Сортирање и филтрирање</string>
-    <string name="home_app_list_options_state_description">Сортирано по %1$s, филтрирано по %2$s</string>
+    <string name="list_options_title">Сортирај и филтрирај</string>
+    <string name="list_options_state_description">Сортирано по %1$s, филтрирано по %2$s</string>
     <string name="home_app_filter_all_description">Свака апликација на почетном екрану</string>
     <string name="home_app_filter_patched_description">Апликације које сте закрпили или сачували помоћу Morphe</string>
     <string name="home_app_filter_not_patched_description">Апликације које још нисте закрпили у Morphe-у</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Извор печовања</string>
     <string name="sources_search">Претражите изворе и закрпе</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Сваки извор</string>
+    <string name="sources_filter_enabled_description">Заштите извора се узимају из</string>
+    <string name="sources_filter_disabled_description">Извори искључени</string>
+    <string name="sources_filter_updates">Ажурирања</string>
+    <string name="sources_filter_updates_description">Извори са новијом верзијом за добијање</string>
+    <string name="sources_filter_issues">Захтевају пажњу</string>
+    <string name="sources_filter_issues_description">Извори који су блокирани, нису успели да се учитају или захтевају новију Morphe</string>
     <string name="sources_sort_manual">Ручно поређање</string>
     <string name="sources_sort_manual_hint">Притисните и задржите извор да бисте променили редослед</string>
     <string name="sources_sort_last_updated">Последње ажурирање</string>
@@ -887,7 +895,6 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="notification_mount_replaced_title">%1$s више није закрпљена</string>
     <string name="notification_mount_replaced_text">v%1$s је заменила закрпљену v%2$s. Отворите Morphe да бисте је вратили</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Навише подешавања</string>
     <string name="settings_advanced_expert_mode">Нави моћ</string>
     <string name="settings_advanced_expert_mode_description">Откључа напредна подешавања означавања и опције означавања</string>
     <string name="settings_advanced_expert_mode_dialog_title">Omogući režim eksperta?</string>
@@ -1085,7 +1092,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_notifications_sound_reset">Вратите на подразумеване</string>
     <string name="settings_system_notifications_ringtone_picker_title">Изаберите тон</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Увоз и извоз</string>
     <string name="settings_system_signing_key">Кључ за потписивање</string>
     <string name="settings_system_signing_key_description">Резервише или враћа кључ којим се потписују означене апликације</string>
     <string name="settings_system_signing_key_dialog_description">Свака апликација коју Morphe закрпи потписана је овим кључем. Сачувајте копију: без њега, закрпљене апликације могу да се ажурирају само након што их деинсталирате</string>
@@ -1185,14 +1191,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">Патч селекције</string>
     <string name="settings_system_patch_selections_description">Сачуване селекције закрпе, задржане након деинсталирања</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Да ли сте сигурни да желите да обришете све изборе?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Да ли сте сигурни да желите да обришете избор пакета?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Ресетовати изабране пакете?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Да ли сте сигурни да желите да обришете избор извора?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s преко %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s у %2$s</string>
     <string name="settings_system_patch_selection_source_format">Извор #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ово ће трајно обрисати све сачуване изборе пакета за све пакете и изворе</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Ово ће трајно избрисати све сачуване изборе поправки за &lt;b&gt;%s&lt;/b&gt; са свих извора</string>
     <string name="settings_system_patch_selection_reset_source_warning">Ово ће трајно избрисати сачуване изборе поправки за &lt;b&gt;%1$s&lt;/b&gt; у &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Ово ће трајно избрисати све сачуване изборе поправки за изабране пакете</string>
     <string name="settings_system_export_source_data_fail">Неуспешан извоз података извора</string>
@@ -1256,6 +1259,16 @@ morphe_header_custom_dark.png
     <string name="patches">Флатери</string>
     <string name="home">Почетак</string>
     <string name="settings">Поставке</string>
+    <string name="apps">Апликације</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">Закривање</string>
+    <string name="settings_group_manager">Управљач</string>
+    <string name="settings_section_appearance_summary">Језик, тема, боје и почетни екран</string>
+    <string name="settings_section_patch_options_summary">Шта прост режим закочка апликације са</string>
+    <string name="settings_section_performance">Перформансе</string>
+    <string name="settings_section_original_apks">Оригинални APK фајлови</string>
+    <string name="settings_section_files">Фајлови &amp; резервне копије</string>
+    <string name="settings_search">Претражите подешавања</string>
     <string name="yes">Да</string>
     <string name="no">Не</string>
     <string name="all">Сви</string>

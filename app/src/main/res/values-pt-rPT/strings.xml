@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">As tuas fontes estão atualizadas</string>
     <string name="home_sources_are_loading">A carregar fontes, por favor aguarda…</string>
     <string name="home_search_apps">Pesquisar aplicações</string>
-    <string name="home_app_list_options_title">Ordenar e filtrar</string>
-    <string name="home_app_list_options_state_description">Ordenados por %1$s, filtrados por %2$s</string>
+    <string name="list_options_title">Ordenar e filtrar</string>
+    <string name="list_options_state_description">Ordenado por %1$s, filtrado por %2$s</string>
     <string name="home_app_filter_all_description">Todos os apps na tela inicial</string>
     <string name="home_app_filter_patched_description">Apps que você modificou ou salvou com o Morphe</string>
     <string name="home_app_filter_not_patched_description">Apps que você ainda não modificou no Morphe</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Fontes de modificações</string>
     <string name="sources_search">Pesquisar fontes e patches</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Todas as origens</string>
+    <string name="sources_filter_enabled_description">Os patchs das origens são obtidos de</string>
+    <string name="sources_filter_disabled_description">Origens desativadas</string>
+    <string name="sources_filter_updates">Atualizações</string>
+    <string name="sources_filter_updates_description">Fontes com uma versão mais recente para obter</string>
+    <string name="sources_filter_issues">Precisa de atenção</string>
+    <string name="sources_filter_issues_description">Fontes que estão bloqueadas, falharam ao carregar ou precisam de um Morphe mais recente</string>
     <string name="sources_sort_manual">Ordem manual</string>
     <string name="sources_sort_manual_hint">Mantenha pressionado uma fonte para reorganizar</string>
     <string name="sources_sort_last_updated">Última atualização</string>
@@ -887,7 +895,6 @@ Os patches não são afetados: ative os patches de pré-lançamento para cada fo
     <string name="notification_mount_replaced_title">%1$s não está mais com patch</string>
     <string name="notification_mount_replaced_text">v%1$s substituiu a v%2$s com patch. Abra o Morphe para restaurá-la</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Definições avançadas</string>
     <string name="settings_advanced_expert_mode">Modo avançado</string>
     <string name="settings_advanced_expert_mode_description">Desbloqueia configurações avançadas de modificação e opções de modificação</string>
     <string name="settings_advanced_expert_mode_dialog_title">Ativar o modo avançado?</string>
@@ -1085,7 +1092,6 @@ Detalhes: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Restaurar padrão</string>
     <string name="settings_system_notifications_ringtone_picker_title">Escolher um tom</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Importar &amp; exportar</string>
     <string name="settings_system_signing_key">Chave de assinatura</string>
     <string name="settings_system_signing_key_description">Faz backup ou restaura a chave que assina os aplicativos modificados</string>
     <string name="settings_system_signing_key_dialog_description">Cada aplicativo em que o Morphe aplica patches é assinado com esta chave. Guarde uma cópia: sem ela, os aplicativos com patch só podem ser atualizados depois de desinstalados.</string>
@@ -1185,14 +1191,11 @@ Detalhes: %2$s"</string>
     <string name="settings_system_patch_selections_title">Seleções de modificações</string>
     <string name="settings_system_patch_selections_description">Seleções de modificação guardadas, mantidas após a desinstalação</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Redefinir todas as seleções?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Redefinir seleção de pacote?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Redefinir pacotes selecionados?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Redefinir seleção de fonte?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s em %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s em %2$s</string>
     <string name="settings_system_patch_selection_source_format">Fonte #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Isto irá eliminar permanentemente todas as seleções de modificações guardadas para todos os pacotes e fontes</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Isto irá eliminar permanentemente todas as seleções de modificações para <b>%s</b> em todas as fontes</string>
     <string name="settings_system_patch_selection_reset_source_warning">Isto irá eliminar permanentemente as seleções de modificações guardadas para <b>%1$s</b> na <b>%2$s</b></string>
     <string name="settings_system_patch_selection_reset_selected_warning">Isto irá eliminar permanentemente todas as seleções de modificações guardadas para todos os pacotes e fontes</string>
     <string name="settings_system_export_source_data_fail">Erro ao exportar dados da fonte</string>
@@ -1256,6 +1259,16 @@ Detalhes: %2$s"</string>
     <string name="patches">Modificações</string>
     <string name="home">Ecrã Principal</string>
     <string name="settings">D​efinições</string>
+    <string name="apps">Aplicativos</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">A modificar</string>
+    <string name="settings_group_manager">Gestor</string>
+    <string name="settings_section_appearance_summary">Idioma, tema, cores e ecrã inicial</string>
+    <string name="settings_section_patch_options_summary">O que o modo simples aplica nos patches dos apps</string>
+    <string name="settings_section_performance">Desempenho</string>
+    <string name="settings_section_original_apks">APKs originais</string>
+    <string name="settings_section_files">Ficheiros &amp; cópias de segurança</string>
+    <string name="settings_search">Configurações de pesquisa</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
     <string name="all">Tudo</string>

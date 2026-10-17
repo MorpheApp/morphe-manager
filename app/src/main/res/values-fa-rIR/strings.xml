@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">منابع شما به‌روز هستند</string>
     <string name="home_sources_are_loading">منابع در حال بارگذاری هستند، لطفاً صبر کنید…</string>
     <string name="home_search_apps">جستجوی برنامه‌ها</string>
-    <string name="home_app_list_options_title">مرتب‌سازی و فیلتر</string>
-    <string name="home_app_list_options_state_description">مرتب‌شده بر اساس %1$s، فیلترشده بر اساس %2$s</string>
+    <string name="list_options_title">مرتب‌سازی و فیلتر</string>
+    <string name="list_options_state_description">مرتب‌شده بر اساس %1$s، فیلترشده بر اساس %2$s</string>
     <string name="home_app_filter_all_description">همهٔ برنامه‌های صفحهٔ اصلی</string>
     <string name="home_app_filter_patched_description">برنامه‌هایی که با Morphe پچ یا ذخیره کرده‌اید</string>
     <string name="home_app_filter_not_patched_description">برنامه‌هایی که هنوز در Morphe پچ نکرده‌اید</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">منابع پچ </string>
     <string name="sources_search">جستجوی منابع و پچ‌ها</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">هر منبع</string>
+    <string name="sources_filter_enabled_description">پچ‌های منابع از</string>
+    <string name="sources_filter_disabled_description">منابع غیرفعال شده</string>
+    <string name="sources_filter_updates">به‌روزرسانی‌ها</string>
+    <string name="sources_filter_updates_description">منابعی که نسخه جدیدتری دارند برای دریافت</string>
+    <string name="sources_filter_issues">نیازمند توجه</string>
+    <string name="sources_filter_issues_description">منابعی که مسدود شده‌اند، بارگذاری آن‌ها ناموفق بود یا نیاز به Morphe جدیدتری دارند</string>
     <string name="sources_sort_manual">ترتیب دستی</string>
     <string name="sources_sort_manual_hint">روی یک منبع لمس طولانی کنید تا ترتیبش را تغییر دهید</string>
     <string name="sources_sort_last_updated">آخرین به‌روزرسانی</string>
@@ -887,7 +895,6 @@
     <string name="notification_mount_replaced_title">%1$s دیگر پچ‌شده نیست</string>
     <string name="notification_mount_replaced_text">نسخهٔ v%1$s جایگزین نسخهٔ پچ‌شدهٔ v%2$s شد. برای بازیابی، Morphe را باز کنید</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">تنظیمات حرفه‌ای</string>
     <string name="settings_advanced_expert_mode">حالت حرفه‌ای</string>
     <string name="settings_advanced_expert_mode_description">بازکردن تنظیمات پیشرفته پچ و گزینه‌های پچ</string>
     <string name="settings_advanced_expert_mode_dialog_title">حالت حرفه‌ای فعال شود؟</string>
@@ -1085,7 +1092,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_notifications_sound_reset">بازنشانی به پیش‌فرض</string>
     <string name="settings_system_notifications_ringtone_picker_title">انتخاب آهنگ</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">واردکردن و خروجی‌گرفتن</string>
     <string name="settings_system_signing_key">کلید امضا</string>
     <string name="settings_system_signing_key_description">پشتیبان‌گیری یا بازیابی کلیدی که برنامه‌های پچ‌شده را امضا می‌کند</string>
     <string name="settings_system_signing_key_dialog_description">هر برنامه‌ای که Morphe پچ می‌کند با این کلید امضا می‌شود. یک نسخه از آن را نگه دارید: بدون آن، برنامه‌های پچ‌شده را فقط پس از حذف نصب می‌توان به‌روزرسانی کرد</string>
@@ -1185,14 +1191,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">انتخاب‌های پچ</string>
     <string name="settings_system_patch_selections_description">انتخاب‌های ذخیره‌شدهٔ پچ که پس از حذف برنامه حفظ می‌شوند</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">همهٔ انتخاب‌ها بازنشانی شوند؟</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">انتخاب‌های بسته بازنشانی شوند؟</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">انتخاب‌های بسته‌های انتخاب‌شده بازنشانی شوند؟</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">انتخاب منبع بازنشانی شود؟</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s در %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s در %2$s</string>
     <string name="settings_system_patch_selection_source_format">منبع شمارهٔ %s</string>
     <string name="settings_system_patch_selection_reset_all_warning">همهٔ انتخاب‌های ذخیره‌شدهٔ پچ برای همهٔ بسته‌ها و منابع برای همیشه حذف می‌شوند</string>
-    <string name="settings_system_patch_selection_reset_package_warning">همهٔ انتخاب‌های ذخیره‌شدهٔ پچ برای &lt;b&gt;%s&lt;/b&gt; در همهٔ منابع برای همیشه حذف می‌شوند</string>
     <string name="settings_system_patch_selection_reset_source_warning">انتخاب‌های ذخیره‌شدهٔ پچ برای &lt;b&gt;%1$s&lt;/b&gt; در &lt;b&gt;%2$s&lt;/b&gt; برای همیشه حذف می‌شوند</string>
     <string name="settings_system_patch_selection_reset_selected_warning">همهٔ انتخاب‌های ذخیره‌شدهٔ پچ برای بسته‌های انتخاب‌شده برای همیشه حذف می‌شوند</string>
     <string name="settings_system_export_source_data_fail">خروجی‌گرفتن از داده‌های منبع ناموفق بود</string>
@@ -1256,6 +1259,16 @@ morphe_header_custom_dark.png
     <string name="patches">پچ‌ها</string>
     <string name="home">خانه</string>
     <string name="settings">تنظیمات</string>
+    <string name="apps">برنامه‌ها</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">پچ‌کردن</string>
+    <string name="settings_group_manager">مدیر</string>
+    <string name="settings_section_appearance_summary">زبان، پوسته، رنگ‌ها و صفحه اصلی</string>
+    <string name="settings_section_patch_options_summary">چیزی که حالت ساده برنامه‌ها را با آن اصلاح می‌کند</string>
+    <string name="settings_section_performance">عملکرد</string>
+    <string name="settings_section_original_apks">APKهای اصلی</string>
+    <string name="settings_section_files">فایل‌ها &amp; پشتیبان‌ها</string>
+    <string name="settings_search">جست‌وجوی تنظیمات</string>
     <string name="yes">بله</string>
     <string name="no">خیر</string>
     <string name="all">همه</string>

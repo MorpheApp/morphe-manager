@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">आपके स्रोत अप टू डेट हैं</string>
     <string name="home_sources_are_loading">स्रोत लोड हो रहे हैं, कृपया प्रतीक्षा करें…</string>
     <string name="home_search_apps">ऐप्स खोजें</string>
-    <string name="home_app_list_options_title">क्रमबद्ध करें और फ़िल्टर करें</string>
-    <string name="home_app_list_options_state_description">%1$s के अनुसार क्रमबद्ध, %2$s के अनुसार फ़िल्टर किया गया</string>
+    <string name="list_options_title">क्रमबद्ध करें और फ़िल्टर करें</string>
+    <string name="list_options_state_description">%1$s के अनुसार क्रमबद्ध, %2$s के अनुसार फ़िल्टर किया गया</string>
     <string name="home_app_filter_all_description">होम स्क्रीन पर मौजूद हर ऐप</string>
     <string name="home_app_filter_patched_description">Morphe के साथ आपके द्वारा पैच या सेव किए गए ऐप्स</string>
     <string name="home_app_filter_not_patched_description">वे ऐप जिन्हें आपने अभी तक Morphe में पैच नहीं किया है</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">पैच स्रोत</string>
     <string name="sources_search">स्रोत और पैच खोजें</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">सभी स्रोत</string>
+    <string name="sources_filter_enabled_description">स्रोत पatches</string>
+    <string name="sources_filter_disabled_description">स्रोत बंद</string>
+    <string name="sources_filter_updates">अपडेट</string>
+    <string name="sources_filter_updates_description">प्राप्त करने के लिए नई संस्करण वाले स्रोत</string>
+    <string name="sources_filter_issues">ध्यान की आवश्यकता</string>
+    <string name="sources_filter_issues_description">वे स्रोत जो ब्लॉक किए गए हैं, लोड करने में असफल रहे हैं या एक नए Morphe की आवश्यकता है</string>
     <string name="sources_sort_manual">मैन्युअल ऑर्डर</string>
     <string name="sources_sort_manual_hint">पुन:क्रमित करने के लिए किसी स्रोत को देर तक दबाएं</string>
     <string name="sources_sort_last_updated">अंतिम अपडेट किया गया</string>
@@ -887,7 +895,6 @@
     <string name="notification_mount_replaced_title">%1$s अब पैच किया हुआ नहीं है</string>
     <string name="notification_mount_replaced_text">v%1$s ने पैच किए गए v%2$s को प्रतिस्थापित कर दिया। इसे पुनर्स्थापित करने के लिए Morphe खोलें</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">एक्सपर्ट सेटिंग्स</string>
     <string name="settings_advanced_expert_mode">एक्सपर्ट मोड</string>
     <string name="settings_advanced_expert_mode_description">उन्नत पैचिंग सेटिंग्स और पैच विकल्प अनलॉक करता है</string>
     <string name="settings_advanced_expert_mode_dialog_title">एक्सपर्ट मोड को अनुमोदित करना?</string>
@@ -1085,7 +1092,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_notifications_sound_reset">डिफ़ॉल्ट पर रीसेट करें</string>
     <string name="settings_system_notifications_ringtone_picker_title">एक धुन चुनें</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">आइमपोर्ट और एक्सपोर्ट</string>
     <string name="settings_system_signing_key">साइनिंग कुंजी</string>
     <string name="settings_system_signing_key_description">पैच्ड ऐप्स को साइन करने वाले कुंजी को बैकअप या पुनर्स्थापित करता है</string>
     <string name="settings_system_signing_key_dialog_description">Morphe द्वारा पैच किया गया हर ऐप इसी कुंजी से साइन किया जाता है। इसकी एक प्रति सुरक्षित रखें: इसके बिना पैच किए गए ऐप को अपडेट करने के लिए पहले उसे अनइंस्टॉल करना होगा</string>
@@ -1185,14 +1191,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">पथच चयन</string>
     <string name="settings_system_patch_selections_description">सहेजे गए पैच चयन, अनइंस्टॉल करने के बाद भी बरकरार रहते हैं।</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">सभी चयन रीसेट करें?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">पैकेज चयन रीसेट करें?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">चयनित पैकेजों को रीसेट करें?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">स्रोत चयन रीसेट करें?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s Across %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s in %2$s</string>
     <string name="settings_system_patch_selection_source_format">स्रोत #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">यह सभी पैकेजों और स्रोतों के लिए सहेजे गए सभी पटच चयन को स्थायी रूप से हटाएगा</string>
-    <string name="settings_system_patch_selection_reset_package_warning">यह सभी स्रोतों में &lt;b&gt;%s&lt;/b&gt; के लिए सहेजे गए सभी पैच चयन को स्थायी रूप से हटा देगा</string>
     <string name="settings_system_patch_selection_reset_source_warning">यह &lt;b&gt;%1$s&lt;/b&gt; में &lt;b&gt;%2$s&lt;/b&gt; के लिए सहेजे गए पैच चयन को स्थायी रूप से हटा देगा</string>
     <string name="settings_system_patch_selection_reset_selected_warning">यह चयनित पैकेजों के लिए सहेजे गए सभी पैच चयन को स्थायी रूप से हटा देगा</string>
     <string name="settings_system_export_source_data_fail">स्रोत डेटा निर्यात करने में विफल</string>
@@ -1256,6 +1259,16 @@ morphe_header_custom_dark.png
     <string name="patches">पैच</string>
     <string name="home">घर</string>
     <string name="settings">सेटिंग्स</string>
+    <string name="apps">एप्स</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">पैचिंग</string>
+    <string name="settings_group_manager">प्रबंधक</string>
+    <string name="settings_section_appearance_summary">भाषा, थीम, रंग और होम स्क्रीन</string>
+    <string name="settings_section_patch_options_summary">जिसके साथ साधारण मोड ऐप्स को पैच करता है</string>
+    <string name="settings_section_performance">प्रदर्शन</string>
+    <string name="settings_section_original_apks">मूल APKs</string>
+    <string name="settings_section_files">फ़ाइलें <b>&amp;amp;</b> और बैकअप</string>
+    <string name="settings_search">सेटिंग्स खोजें</string>
     <string name="yes">हां</string>
     <string name="no">नहीं</string>
     <string name="all">सभी</string>

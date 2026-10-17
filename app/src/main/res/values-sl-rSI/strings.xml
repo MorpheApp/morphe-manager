@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Viri so posodobljeni</string>
     <string name="home_sources_are_loading">Viri se nalagajo, počakajte…</string>
     <string name="home_search_apps">Poišči aplikacije</string>
-    <string name="home_app_list_options_title">Razvrščanje in filtriranje</string>
-    <string name="home_app_list_options_state_description">Razvrščeno po %1$s, filtrirano po %2$s</string>
+    <string name="list_options_title">Razvrsti in filtriraj</string>
+    <string name="list_options_state_description">Razvrščeno po %1$s, filtrirano po %2$s</string>
     <string name="home_app_filter_all_description">Vse aplikacije na domačem zaslonu</string>
     <string name="home_app_filter_patched_description">Aplikacije, ki ste jih popravili ali shranili z Morphe</string>
     <string name="home_app_filter_not_patched_description">Aplikacije, ki jih z Morphe še niste popravili</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Viri popravkov</string>
     <string name="sources_search">Išči vire in popravke</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Vsaka vira</string>
+    <string name="sources_filter_enabled_description">Popravki virov so odvzeti od</string>
+    <string name="sources_filter_disabled_description">Viri ugasnjeni</string>
+    <string name="sources_filter_updates">Posodobitve</string>
+    <string name="sources_filter_updates_description">Viri z novejšo različico za pridobitev</string>
+    <string name="sources_filter_issues">Potrebuje pozornost</string>
+    <string name="sources_filter_issues_description">Viru, ki so blokirani, se naložiti ali potrebujejo novejši Morphe</string>
     <string name="sources_sort_manual">Ročni vrstni red</string>
     <string name="sources_sort_manual_hint">Dolgo pritisnite vir, da ga ponovno uredite</string>
     <string name="sources_sort_last_updated">Nazadnje posodobljeno</string>
@@ -887,7 +895,6 @@ Ta nastavitev ne vpliva na popravke: omogočite predizdajne popravke za vsak vir
     <string name="notification_mount_replaced_title">Aplikacija %1$s ni več popravljena</string>
     <string name="notification_mount_replaced_text">v%1$s je zamenjala popravljeno v%2$s. Odpri Morphe, da jo obnoviš</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Napredne nastavitve</string>
     <string name="settings_advanced_expert_mode">Način strokovnjaka</string>
     <string name="settings_advanced_expert_mode_description">Odkleni napredane nastavitve popravljanja in možnosti popravkov</string>
     <string name="settings_advanced_expert_mode_dialog_title">Omogoči način strokovnjaka?</string>
@@ -1085,7 +1092,6 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Ponastavi na privzeto</string>
     <string name="settings_system_notifications_ringtone_picker_title">Izberi melodijo</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Uvozi &amp; izvozi</string>
     <string name="settings_system_signing_key">Podpisni ključ</string>
     <string name="settings_system_signing_key_description">Varnostno kopira ali obnovi ključ, ki podpiše popravljene aplikacije</string>
     <string name="settings_system_signing_key_dialog_description">Vsaka aplikacija, ki jo Morphe popravi, je podpisana s tem ključem. Shranite kopijo: brez nje lahko popravljene aplikacije posodobite šele po njihovi odstranitvi.</string>
@@ -1185,14 +1191,11 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_patch_selections_title">Izbira popravkov</string>
     <string name="settings_system_patch_selections_description">Shranjene izbire popravkov, ohranjene po odstranitvi</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Ponastavi vse izbire?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Ponastavi izbire paketov?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Ponastaviti izbrane pakete?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Ponastavi izbiro virov?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s od %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s v %2$s</string>
     <string name="settings_system_patch_selection_source_format">Vir #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">To bo trajno izbrisalo vse shranjene izbire popravkov za vse pakete in vire</string>
-    <string name="settings_system_patch_selection_reset_package_warning">To bo trajno izbrisalo vse shranjene izbire popravkov za &lt;b&gt;%s&lt;/b&gt; za vse vire.</string>
     <string name="settings_system_patch_selection_reset_source_warning">To bo trajno izbrisalo shranjene izbire popravkov za &lt;b&gt;%1$s&lt;/b&gt; v &lt;b&gt;%2$s&lt;/b&gt;.</string>
     <string name="settings_system_patch_selection_reset_selected_warning">To bo trajno izbrisalo vse shranjene izbire popravkov za izbrane pakete.</string>
     <string name="settings_system_export_source_data_fail">Ni bilo mogoče izvoziti podatkov vira</string>
@@ -1256,6 +1259,16 @@ Podrobnosti: %2$s"</string>
     <string name="patches">Popravki</string>
     <string name="home">Domov</string>
     <string name="settings">Nastavitve</string>
+    <string name="apps">Aplikacije</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">Popravljanje</string>
+    <string name="settings_group_manager">Upravitelj</string>
+    <string name="settings_section_appearance_summary">Jezik, tema, barve in zaslon začetne strani</string>
+    <string name="settings_section_patch_options_summary">Kaj preprosti način popravke aplikacij z</string>
+    <string name="settings_section_performance">Učinkovitost</string>
+    <string name="settings_section_original_apks">Izvorni APK-ji</string>
+    <string name="settings_section_files">Datoteke &amp; varnostne kopije</string>
+    <string name="settings_search">Iskanje nastavitev</string>
     <string name="yes">Da</string>
     <string name="no">Ne</string>
     <string name="all">Vse</string>

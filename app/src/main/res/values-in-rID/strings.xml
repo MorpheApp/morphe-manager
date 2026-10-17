@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Sumber Anda sudah yang terbaru</string>
     <string name="home_sources_are_loading">Sumber sedang dimuat, harap tunggu…</string>
     <string name="home_search_apps">Cari aplikasi</string>
-    <string name="home_app_list_options_title">Urutkan dan saring</string>
-    <string name="home_app_list_options_state_description">Diurutkan berdasarkan %1$s, disaring berdasarkan %2$s</string>
+    <string name="list_options_title">Urutkan dan saring</string>
+    <string name="list_options_state_description">Diurutkan berdasarkan %1$s, disaring berdasarkan %2$s</string>
     <string name="home_app_filter_all_description">Semua aplikasi di layar beranda</string>
     <string name="home_app_filter_patched_description">Aplikasi yang sudah Anda tambal atau simpan dengan Morphe</string>
     <string name="home_app_filter_not_patched_description">Aplikasi yang belum Anda tambal di Morphe</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Sumber tambalan</string>
     <string name="sources_search">Cari sumber dan tambalan</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Semua sumber</string>
+    <string name="sources_filter_enabled_description">Patch sumber diambil dari</string>
+    <string name="sources_filter_disabled_description">Sumber dimatikan</string>
+    <string name="sources_filter_updates">Pembaruan</string>
+    <string name="sources_filter_updates_description">Sumber dengan versi terbaru untuk mendapatkan</string>
+    <string name="sources_filter_issues">Perlu perhatian</string>
+    <string name="sources_filter_issues_description">Sumber yang diblokir, gagal dimuat, atau memerlukan Morphe yang lebih baru</string>
     <string name="sources_sort_manual">Urutan manual</string>
     <string name="sources_sort_manual_hint">Tekan lama sumber untuk mengubah urutan</string>
     <string name="sources_sort_last_updated">Terakhir diperbarui</string>
@@ -888,7 +896,6 @@ Tambalan tidak terpengaruh: aktifkan tambalan pra-rilis untuk setiap sumber dala
     <string name="notification_mount_replaced_title">%1$s tidak lagi ditambal</string>
     <string name="notification_mount_replaced_text">v%1$s menggantikan v%2$s yang ditambal. Buka Morphe untuk memulihkannya</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Setelan ahli</string>
     <string name="settings_advanced_expert_mode">Mode ahli</string>
     <string name="settings_advanced_expert_mode_description">Membuka pengaturan penamblan lanjutan dan opsi tambalan</string>
     <string name="settings_advanced_expert_mode_dialog_title">Aktifkan mode Ahli?</string>
@@ -1086,7 +1093,6 @@ Rincian: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Atur ulang ke bawaan</string>
     <string name="settings_system_notifications_ringtone_picker_title">Pilih nada dering</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Impor &amp; ekspor</string>
     <string name="settings_system_signing_key">Kunci penandatanganan</string>
     <string name="settings_system_signing_key_description">Mencadangkan atau memulihkan kunci yang menandatangani aplikasi yang telah ditambal</string>
     <string name="settings_system_signing_key_dialog_description">Setiap aplikasi yang ditambal oleh Morphe ditandatangani dengan kunci ini. Simpan salinannya: tanpa kunci ini, aplikasi yang ditambal hanya dapat diperbarui setelah mencopot nya.</string>
@@ -1186,14 +1192,11 @@ Rincian: %2$s"</string>
     <string name="settings_system_patch_selections_title">Pilihan tambalan</string>
     <string name="settings_system_patch_selections_description">Menyimpan pilihan tambalan, dipertahankan setelah mencopot</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Atur ulang semua pemilihan?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Atur ulang pemilihan paket?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Atur ulang paket yang dipilih?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Atur ulang pemilihan sumber?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s diantara %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s dalam %2$s</string>
     <string name="settings_system_patch_selection_source_format">Sumber #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ini akan menghapus secara permanen semua pemilihan tambalan yang disimpan untuk semua paket dan sumber</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Ini akan menghapus secara permanen semua pemilihan tambalan yang disimpan untuk &lt;b&gt;%s&lt;/b&gt; diantara seluruh sumber</string>
     <string name="settings_system_patch_selection_reset_source_warning">Ini akan menghapus secara permanen pemilihan tambalan yang disimpan untuk &lt;b&gt;%1$s&lt;/b&gt; di &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Ini akan menghapus secara permanen semua pemilihan tambalan yang disimpan untuk paket yang dipilih</string>
     <string name="settings_system_export_source_data_fail">Gagal mengekspor data sumber</string>
@@ -1257,6 +1260,16 @@ Rincian: %2$s"</string>
     <string name="patches">Tambalan</string>
     <string name="home">Beranda</string>
     <string name="settings">Setelan</string>
+    <string name="apps">Aplikasi</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">Menambal</string>
+    <string name="settings_group_manager">Manajer</string>
+    <string name="settings_section_appearance_summary">Bahasa, tema, warna dan layar beranda</string>
+    <string name="settings_section_patch_options_summary">Apa modus sederhana mem-patch aplikasi dengan</string>
+    <string name="settings_section_performance">Performa</string>
+    <string name="settings_section_original_apks">APK asli</string>
+    <string name="settings_section_files">Berkas &amp; cadangan</string>
+    <string name="settings_search">Cari setelan</string>
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
     <string name="all">Semua</string>

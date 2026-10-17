@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Heimildir þínar eru upp til daglegt</string>
     <string name="home_sources_are_loading">Heimildir eru að hlaða, vinsamlegast bíðu…</string>
     <string name="home_search_apps">Leita að forritum</string>
-    <string name="home_app_list_options_title">Raða og sía</string>
-    <string name="home_app_list_options_state_description">Raðað eftir %1$s, síað eftir %2$s</string>
+    <string name="list_options_title">Raða og sía</string>
+    <string name="list_options_state_description">Raðað eftir %1$s, síð eftir %2$s</string>
     <string name="home_app_filter_all_description">Öll forrit á heimaskjánum</string>
     <string name="home_app_filter_patched_description">Forrit sem þú hefur plástrað eða vistað með Morphe</string>
     <string name="home_app_filter_not_patched_description">Forrit sem þú hefur ekki ennþá plástrað í Morphe</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Heimildir breytistillinga</string>
     <string name="sources_search">Leita að uppsprettum og plástrum</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Allar uppsprettur</string>
+    <string name="sources_filter_enabled_description">Upplýsingasveitir eru fengnar frá</string>
+    <string name="sources_filter_disabled_description">Uppgötvanir óvirkar</string>
+    <string name="sources_filter_updates">Uppfærslur</string>
+    <string name="sources_filter_updates_description">Frálegur útgáfur til að fá</string>
+    <string name="sources_filter_issues">Þarfnast athygli</string>
+    <string name="sources_filter_issues_description">Frágang sem eru blokkeraðir, mistókst að hlaða niður eða þarfnast nýrri Morphe</string>
     <string name="sources_sort_manual">Handvirkuð pöntun</string>
     <string name="sources_sort_manual_hint">Halðu lengi á uppspretta til að raða á ný</string>
     <string name="sources_sort_last_updated">Síðast uppfært</string>
@@ -886,7 +894,6 @@ Plástrar verða ekki fyrir áhrifum: virkjaðu forútgáfuplástra fyrir hverja
     <string name="notification_mount_replaced_title">%1$s er ekki lengur plástrað</string>
     <string name="notification_mount_replaced_text">v%1$s kom í stað hins plástraða v%2$s. Opnaðu Morphe til að endurheimta það</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Advanced</string>
     <string name="settings_advanced_expert_mode">Sérstakur háttur</string>
     <string name="settings_advanced_expert_mode_description">Læsir fjölnotastillingar fyrir bryggjingarvalkostir</string>
     <string name="settings_advanced_expert_mode_dialog_title">Virkja fagmanna ástand?</string>
@@ -1081,7 +1088,6 @@ Nánari upplýsingar: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Endurreisa sjálfgefið</string>
     <string name="settings_system_notifications_ringtone_picker_title">Veldu tón</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Inn- og útflutningur</string>
     <string name="settings_system_signing_key">Undirritunarlykill</string>
     <string name="settings_system_signing_key_description">Bakkaðu eða endurstilla lykilinn sem undirskrifar bryggjað forrit</string>
     <string name="settings_system_signing_key_dialog_description">Sérhvert forrit sem Morphe plástrar er undirritað með þessum lykli. Geymdu afrit: án þess geta plástruð forrit aðeins verið uppfærð eftir að þau eru fjarlægð.</string>
@@ -1181,14 +1187,11 @@ Nánari upplýsingar: %2$s"</string>
     <string name="settings_system_patch_selections_title">Pökkunaval</string>
     <string name="settings_system_patch_selections_description">Geymt breytingaval, haldinn eftir afnám</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Endurstilla allar valkosti?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Endurstilla pakkningaval?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Endurstilla valda pakkana?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Endurstilla gjafaval?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s í %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s í %2$s</string>
     <string name="settings_system_patch_selection_source_format">Pökkning gjáfa #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Þetta mun varanlega eyða öllum geymdum pakkningavöldum fyrir allar pakkningingar og gjafa</string>
-    <string name="settings_system_patch_selection_reset_package_warning">                                                                                                                                                                                             Þetta mun varanlega eyða öllum vistaðum valférum breytinga fyrir &lt;b&gt;%s&lt;/b&gt; fyrir allar uppsprellur.</string>
     <string name="settings_system_patch_selection_reset_source_warning">                                                                                                                                                                                                        Þetta mun varanlega eyða vistaðar breytingaval fyrir &lt;b&gt;%1$s&lt;/b&gt; í &lt;b&gt;%2$s&lt;/b&gt;.</string>
     <string name="settings_system_patch_selection_reset_selected_warning">                                                                                                                                Þetta mun varanlega eyða öllum vistaðum valférum breytinga fyrir valda pakkana.</string>
     <string name="settings_system_export_source_data_fail">Ekki tókst að flytja út gögn frá gjafa</string>
@@ -1252,6 +1255,16 @@ Nánari upplýsingar: %2$s"</string>
     <string name="patches">Breytistillingar</string>
     <string name="home">Heim</string>
     <string name="settings">Stillingar</string>
+    <string name="apps">Forrit</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">Viðgerðir</string>
+    <string name="settings_group_manager">Stjóri</string>
+    <string name="settings_section_appearance_summary">Tungumál, þema, litir og aðalskjá</string>
+    <string name="settings_section_patch_options_summary">Hvað einfaldur stilling lappir með</string>
+    <string name="settings_section_performance">Afköst</string>
+    <string name="settings_section_original_apks">Upprunalegar APK-skrár</string>
+    <string name="settings_section_files">Skrár &amp; afrit</string>
+    <string name="settings_search">Leitarstillingar</string>
     <string name="yes">Já</string>
     <string name="no">Nei</string>
     <string name="all">Allt</string>

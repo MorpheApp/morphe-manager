@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Kaynaklarınız güncel</string>
     <string name="home_sources_are_loading">Kaynaklar yükleniyor, lütfen bekleyin…</string>
     <string name="home_search_apps">Uygulamaları ara</string>
-    <string name="home_app_list_options_title">Sırala ve filtrele</string>
-    <string name="home_app_list_options_state_description">Sıralama: %1$s, Filtre: %2$s</string>
+    <string name="list_options_title">Sırala ve filtrele</string>
+    <string name="list_options_state_description">%1$s\'a göre sıralandı, %2$s\'e göre filtrelendi</string>
     <string name="home_app_filter_all_description">Ana ekrandaki tüm uygulamalar</string>
     <string name="home_app_filter_patched_description">Morphe ile yamaladığınız veya kaydettiğiniz uygulamalar</string>
     <string name="home_app_filter_not_patched_description">Morphe\'de henüz yamalamadığınız uygulamalar</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Yama kaynakları</string>
     <string name="sources_search">Kaynakları ve yamaları ara</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Her kaynak</string>
+    <string name="sources_filter_enabled_description">Kaynak yamaları şuralardan alınır</string>
+    <string name="sources_filter_disabled_description">Kaynaklar kapalı</string>
+    <string name="sources_filter_updates">Güncellemeler</string>
+    <string name="sources_filter_updates_description">Güncelleme alacak daha yeni sürümü olan kaynaklar</string>
+    <string name="sources_filter_issues">Dikkat gerektirenler</string>
+    <string name="sources_filter_issues_description">Engellenen, yüklemesi başarısız olan veya daha yeni Morphe gereken kaynaklar</string>
     <string name="sources_sort_manual">Manuel sıra</string>
     <string name="sources_sort_manual_hint">Yeniden sıralamak için bir kaynağa uzun basın</string>
     <string name="sources_sort_last_updated">Son güncelleme</string>
@@ -886,7 +894,6 @@ Yamalar etkilenmez: yamalama kaynakları listesindeki her kaynak için ön sür�
     <string name="notification_mount_replaced_title">v%1$s artık yamalı değil</string>
     <string name="notification_mount_replaced_text">v%1$s, yamalı v%2$s sürümünün yerini aldı. Geri yüklemek için Morphe\'yi açın.</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Uzman ayarları</string>
     <string name="settings_advanced_expert_mode">Uzman modu</string>
     <string name="settings_advanced_expert_mode_description">Gelişmiş yamalama ayarlarının ve yama seçeneklerinin kilidini açar.</string>
     <string name="settings_advanced_expert_mode_dialog_title">Uzman modu etkinleştirilsin mi?</string>
@@ -1084,7 +1091,6 @@ Ayrıntılar: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Varsayılana sıfırla</string>
     <string name="settings_system_notifications_ringtone_picker_title">Bir ton seç</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">İçe &amp; dışa aktar</string>
     <string name="settings_system_signing_key">İmzalama anahtarı</string>
     <string name="settings_system_signing_key_description">Yamalanmış uygulamaları imzalayan anahtarı yedekler veya geri yükler.</string>
     <string name="settings_system_signing_key_dialog_description">Morphe tarafından yamalanan her uygulama bu anahtarla imzalanır. Bir kopyasını saklayın: o olmadan, yamalı uygulamalar yalnızca kaldırıldıktan sonra güncellenebilir</string>
@@ -1184,14 +1190,11 @@ Ayrıntılar: %2$s"</string>
     <string name="settings_system_patch_selections_title">Yama seçenekleri</string>
     <string name="settings_system_patch_selections_description">Kayıtlı yama seçimleri kaldırıldıktan sonra saklanır</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Tüm seçimler sıfırlansın mı?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Paket seçimleri sıfırlansın mı?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Seçili paketler sıfırlansın mı?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Kaynak seçimi sıfırlansın mı?</string>
     <string name="settings_system_patch_selection_total_summary_format">%2$sten %1$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%2$stan %1$s</string>
     <string name="settings_system_patch_selection_source_format">Kaynak #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Bu, tüm paketler ve kaynaklar için kaydedilmiş yama seçimlerinin tamamını kalıcı olarak silecektir</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Bu, tüm kaynaklarda &lt;b&gt;%s&lt;/b&gt; için kaydedilmiş tüm yama seçimlerini kalıcı olarak silecektir</string>
     <string name="settings_system_patch_selection_reset_source_warning">Bu, &lt;b&gt;%1$s&lt;/b&gt; için &lt;b&gt;%2$s&lt;/b&gt; konumundaki kaydedilmiş yama seçimlerini kalıcı olarak silecektir</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Bu, seçilen paketler için kaydedilmiş tüm yama seçimlerini kalıcı olarak silecektir</string>
     <string name="settings_system_export_source_data_fail">Kaynak verisinin dışa aktarılması başarısız oldu</string>
@@ -1255,6 +1258,16 @@ Ayrıntılar: %2$s"</string>
     <string name="patches">Yamalar</string>
     <string name="home">Ana Sayfa</string>
     <string name="settings">Ayarlar</string>
+    <string name="apps">Uygulamalar</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">Yamalanıyor</string>
+    <string name="settings_group_manager">Yönetici</string>
+    <string name="settings_section_appearance_summary">Dil, tema, renkler ve ana ekran</string>
+    <string name="settings_section_patch_options_summary">Uygulamaları yamalamak için kullanılan basit mod</string>
+    <string name="settings_section_performance">Performans</string>
+    <string name="settings_section_original_apks">Orijinal APK\'lar</string>
+    <string name="settings_section_files">Dosyalar &amp; yedeklemeler</string>
+    <string name="settings_search">Ayarları ara</string>
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
     <string name="all">Hepsi</string>

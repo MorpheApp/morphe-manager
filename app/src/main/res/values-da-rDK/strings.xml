@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Dine kilder er opdaterede</string>
     <string name="home_sources_are_loading">Kilder hentes, vent venligst…</string>
     <string name="home_search_apps">Søg apps</string>
-    <string name="home_app_list_options_title">Sorter og filtrer</string>
-    <string name="home_app_list_options_state_description">Sorteret efter %1$s, filtreret efter %2$s</string>
+    <string name="list_options_title">Sortér og filtrér</string>
+    <string name="list_options_state_description">Sorteret efter %1$s, filtreret efter %2$s</string>
     <string name="home_app_filter_all_description">Alle apps på startskærmen</string>
     <string name="home_app_filter_patched_description">Apps, som du har patchet eller gemt med Morphe</string>
     <string name="home_app_filter_not_patched_description">Apps, som du ikke har patchet i Morphe endnu</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patchkilder</string>
     <string name="sources_search">Søg i kilder og patches</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Alle kilder</string>
+    <string name="sources_filter_enabled_description">Kildefejlsøgninger er hentet fra</string>
+    <string name="sources_filter_disabled_description">Kilder slukket</string>
+    <string name="sources_filter_updates">Opdateringer</string>
+    <string name="sources_filter_updates_description">Kilder med en nyere version, der skal hentes</string>
+    <string name="sources_filter_issues">Brug for opmærksomhed</string>
+    <string name="sources_filter_issues_description">Kilder, der er blokeret, fejlede at indlæse eller kræver en nyere Morphe</string>
     <string name="sources_sort_manual">Manuel rækkefølge</string>
     <string name="sources_sort_manual_hint">Hold nede på en kilde for at omarrangere</string>
     <string name="sources_sort_last_updated">Sidst opdateret</string>
@@ -886,7 +894,6 @@ Patcher er ikke påvirket: aktivér præ-release-patcher for hver kilde i patch-
     <string name="notification_mount_replaced_title">%1$s er ikke længere patchet</string>
     <string name="notification_mount_replaced_text">v%1$s erstattede den patchede v%2$s. Åbn Morphe for at gendanne den</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Avancerede indstillinger</string>
     <string name="settings_advanced_expert_mode">Eksperttilstand</string>
     <string name="settings_advanced_expert_mode_description">Åbner avancerede patchindstillinger og patchmuligheder</string>
     <string name="settings_advanced_expert_mode_dialog_title">Aktiver Eksperttilstand?</string>
@@ -1084,7 +1091,6 @@ Detaljer: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Nulstil til standard</string>
     <string name="settings_system_notifications_ringtone_picker_title">Vælg en tone</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Importér &amp; eksportér</string>
     <string name="settings_system_signing_key">Signeringsnøgle</string>
     <string name="settings_system_signing_key_description">Sikkerhedskopierer eller gendanner nøglen, der signerer patchede apps</string>
     <string name="settings_system_signing_key_dialog_description">Hver app, som Morphe patcher, er signeret med denne nøgle. Gem en kopi: uden den kan patchede apps kun opdateres efter at have afinstalleret dem.</string>
@@ -1184,14 +1190,11 @@ Detaljer: %2$s"</string>
     <string name="settings_system_patch_selections_title">Patchvalg</string>
     <string name="settings_system_patch_selections_description">Gemte patch-valg, bevares efter afinstallation</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Nulstil alle valg?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Nulstil pakkevalg?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Nulstil valgte pakker?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Nulstil kildevalg?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s over %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s i %2$s</string>
     <string name="settings_system_patch_selection_source_format">Kilde #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Dette vil permanent slette alle gemte patchvalg for alle pakker og kilder</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Dette vil permanent slette alle gemte patchvalg for &lt;b&gt;%s&lt;/b&gt; på tværs af alle kilder</string>
     <string name="settings_system_patch_selection_reset_source_warning">Dette vil permanent slette gemte patchvalg for &lt;b&gt;%1$s&lt;/b&gt; i &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Dette vil permanent slette alle gemte patchvalg for de valgte pakker</string>
     <string name="settings_system_export_source_data_fail">Kunne ikke eksportere kilde-data</string>
@@ -1255,6 +1258,16 @@ Detaljer: %2$s"</string>
     <string name="patches">Patches</string>
     <string name="home">Hjem</string>
     <string name="settings">Indstillinger</string>
+    <string name="apps">Apps</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">Patcher</string>
+    <string name="settings_group_manager">Styring</string>
+    <string name="settings_section_appearance_summary">Sprog, tema, farver og startskærm</string>
+    <string name="settings_section_patch_options_summary">Hvad enkel tilstand retter apps med</string>
+    <string name="settings_section_performance">Ydelse</string>
+    <string name="settings_section_original_apks">Original APK-filer</string>
+    <string name="settings_section_files">Filer &amp; sikkerhedskopier</string>
+    <string name="settings_search">Søg i indstillinger</string>
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
     <string name="all">Alle</string>

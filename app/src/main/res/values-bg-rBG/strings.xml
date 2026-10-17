@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Вашите източници са актуални</string>
     <string name="home_sources_are_loading">Зареждане на източниците, моля изчакайте…</string>
     <string name="home_search_apps">Търсене на приложения</string>
-    <string name="home_app_list_options_title">Сортиране и филтриране</string>
-    <string name="home_app_list_options_state_description">Сортирано по %1$s, филтрирано по %2$s</string>
+    <string name="list_options_title">Сортиране и филтриране</string>
+    <string name="list_options_state_description">Сортирано по %1$s, филтрирано по %2$s</string>
     <string name="home_app_filter_all_description">Всяко приложение на началния екран</string>
     <string name="home_app_filter_patched_description">Приложения, които сте патчвали или запазили с Morphe</string>
     <string name="home_app_filter_not_patched_description">Приложения, които все още не сте патчвали в Morphe</string>
@@ -154,6 +154,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Източници за поправки</string>
     <string name="sources_search">Търсене на източници и кръпки</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Всички източници</string>
+    <string name="sources_filter_enabled_description">Патчите за източниците са взети от</string>
+    <string name="sources_filter_disabled_description">Източници, изключени</string>
+    <string name="sources_filter_updates">Актуализации</string>
+    <string name="sources_filter_updates_description">Източници с по-нова версия за получаване</string>
+    <string name="sources_filter_issues">Изискват внимание</string>
+    <string name="sources_filter_issues_description">Източници, които са блокирани, неуспешно заредени или изискват по-нова Morphe</string>
     <string name="sources_sort_manual">Ръчна подредба</string>
     <string name="sources_sort_manual_hint">Натиснете и задръжте източник, за да го пренаредите</string>
     <string name="sources_sort_last_updated">Последна актуализация</string>
@@ -887,7 +895,6 @@
     <string name="notification_mount_replaced_title">%1$s вече не е с пач</string>
     <string name="notification_mount_replaced_text">v%1$s замени v%2$s с приложен пач. Отворете Morphe, за да го възстановите</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Настройки за експерти</string>
     <string name="settings_advanced_expert_mode">Режим за експерти</string>
     <string name="settings_advanced_expert_mode_description">Отключва разширени настройки за модификация и опции за патч</string>
     <string name="settings_advanced_expert_mode_dialog_title">Включете експерт режим?</string>
@@ -1085,7 +1092,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_notifications_sound_reset">Възстановяване на настройките по подразбиране</string>
     <string name="settings_system_notifications_ringtone_picker_title">Изберете тон</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Импорт и износ</string>
     <string name="settings_system_signing_key">Ключ за подписване</string>
     <string name="settings_system_signing_key_description">Архивира или възстановява ключа, който подписва модифицираните приложения</string>
     <string name="settings_system_signing_key_dialog_description">Всяко приложение, което Morphe патчва, е подписано с този ключ. Запазете копие: без него патчваните приложения могат да се актуализират само след деинсталирането им</string>
@@ -1185,14 +1191,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">Избрани поправки</string>
     <string name="settings_system_patch_selections_description">Запазени селекции на пачове, запазени след деинсталиране</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Изтриване на всички избрани? </string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Изтриване на избраните пакети? </string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Възстановяване на избраните пакети?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Изтриване на избрания източник? </string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s по %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s в %2$s</string>
     <string name="settings_system_patch_selection_source_format">Източник #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Това ще изтрие всички запазени избрани пакети за всички пакети и източници завинаги</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Това ще изтрие безвъзвратно всички запазени селекции на пачове за &lt;b&gt;%s&lt;/b&gt; във всички източници.</string>
     <string name="settings_system_patch_selection_reset_source_warning">Това ще изтрие безвъзвратно запазените селекции на пачове за &lt;b&gt;%1$s&lt;/b&gt; в &lt;b&gt;%2$s&lt;/b&gt;.</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Това ще изтрие безвъзвратно всички запазени селекции на пачове за избраните пакети.</string>
     <string name="settings_system_export_source_data_fail">Неуспешно експортиране на данни за източника</string>
@@ -1256,6 +1259,16 @@ morphe_header_custom_dark.png
     <string name="patches">Пачове</string>
     <string name="home">Начало</string>
     <string name="settings">Настройки</string>
+    <string name="apps">Приложения</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">Пачове</string>
+    <string name="settings_group_manager">Управление</string>
+    <string name="settings_section_appearance_summary">Език, тема, цветове и начален екран</string>
+    <string name="settings_section_patch_options_summary">Какво прости начини за приложни програми с</string>
+    <string name="settings_section_performance">Изпълнение</string>
+    <string name="settings_section_original_apks">Оригиналните APK файлове</string>
+    <string name="settings_section_files">Файлове &amp; архиви</string>
+    <string name="settings_search">Търсене на настройки</string>
     <string name="yes">Да</string>
     <string name="no">Не</string>
     <string name="all">Всички</string>

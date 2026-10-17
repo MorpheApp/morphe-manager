@@ -76,6 +76,7 @@
     <!-- Pun on the saying "Out with the old, in with the new" -->
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Извори на поправки</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_management_open_in_browser">Отвори во прелистувач</string>
     <string name="sources_management_failed_to_open_url">Не успеа да се отвори URL адреса</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -467,7 +468,6 @@
     <string name="notification_post_patch_dialog_title">Дали сакате да бидете известени кога се достапни ажурирања?</string>
     <string name="notification_channel_patcher_description">Се прикажува додека Morphe го закрпува апликацијата во позадина</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Напредни поставки</string>
     <string name="settings_advanced_expert_mode">Експертски режим</string>
     <string name="settings_advanced_expert_mode_dialog_title">Дали сакате да го вклучите Expert режим?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Expert режимот дава повеќе контрола врз тоа како се применуваат закрпите, но лошо конфигурирање на поставките во Expert режимот може да резултира со апликација која не функционира</string>
@@ -595,7 +595,6 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications_sound_default">Стандардно</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Увоз и извоз</string>
     <string name="settings_system_import_keystore_dialog_title">Внесете податоци за пристап до keystore</string>
     <string name="settings_system_import_keystore_dialog_description">Ќе треба да ги внесете податоците за пристап до keystore за да го увезете</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Корисничко име (Alias)</string>
@@ -638,10 +637,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">Изборите за закрпување</string>
     <string name="settings_system_patch_selections_description">Споделување</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Дали да се ресетираат сите избори?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Дали да се ресетираат изборите за пакети?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Дали да се ресетира изборот на извор?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s од %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s во %2$s</string>
     <string name="settings_system_patch_selection_source_format">Извор бр.%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ова трајно ќе ги избрише сите зачувани избори за закрпување за сите пакети и извори</string>
     <string name="settings_system_export_source_data_fail">Неуспешно извезување на податоците од изворот</string>
@@ -680,6 +677,7 @@ morphe_header_custom_dark.png
     <string name="patches">Поправки</string>
     <string name="home">Дома</string>
     <string name="settings">Подесувања</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
     <string name="yes">Да</string>
     <string name="no">Не</string>
     <string name="all">Сите</string>

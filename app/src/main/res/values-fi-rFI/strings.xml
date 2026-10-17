@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Lähteet ovat ajan tasalla</string>
     <string name="home_sources_are_loading">Lähteitä ladataan, odota…</string>
     <string name="home_search_apps">Hae sovelluksia</string>
-    <string name="home_app_list_options_title">Lajittelu ja suodatus</string>
-    <string name="home_app_list_options_state_description">Lajiteltu: %1$s, suodatettu: %2$s</string>
+    <string name="list_options_title">Lajittele ja suodata</string>
+    <string name="list_options_state_description">Järjestetty %1$s, suodatettu %2$s</string>
     <string name="home_app_filter_all_description">Kaikki aloitusnäytön sovellukset</string>
     <string name="home_app_filter_patched_description">Morphella paikkaamasi tai tallentamasi sovellukset</string>
     <string name="home_app_filter_not_patched_description">Sovellukset, joita et ole vielä paikannut Morphessa</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Lisäosien lähteet</string>
     <string name="sources_search">Hae lähteitä ja korjauksia</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Jokainen lähde</string>
+    <string name="sources_filter_enabled_description">Lähtekohdat poistetaan lähdekoodista</string>
+    <string name="sources_filter_disabled_description">Lähteet pois päältä</string>
+    <string name="sources_filter_updates">Päivitykset</string>
+    <string name="sources_filter_updates_description">Hanki uudempi versio lähteistä</string>
+    <string name="sources_filter_issues">Huomioitavaa</string>
+    <string name="sources_filter_issues_description">Lähteet, jotka on estetty, joita ei voitu ladata tai jotka vaativat uudemman Morphen</string>
     <string name="sources_sort_manual">Manuaalinen järjestys</string>
     <string name="sources_sort_manual_hint">Paina ja pidä lähdettä uudelleenjärjestämistä varten</string>
     <string name="sources_sort_last_updated">Viimeksi päivitetty</string>
@@ -886,7 +894,6 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="notification_mount_replaced_title">%1$s ei ole enää korjattu</string>
     <string name="notification_mount_replaced_text">v%1$s korvasi korjatun v%2$s:n. Avaa Morphe palauttaaksesi sen</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Asiantuntijan asetukset</string>
     <string name="settings_advanced_expert_mode">Asiantuntijatila</string>
     <string name="settings_advanced_expert_mode_description">Avaa edistyneet patchausasetukset ja -vaihtoehdot</string>
     <string name="settings_advanced_expert_mode_dialog_title">Ota asiantuntijatila käyttöön?</string>
@@ -1084,7 +1091,6 @@ Yksityiskohdat: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Palauta oletusasetukset</string>
     <string name="settings_system_notifications_ringtone_picker_title">Valitse sävy</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Tuo ja vie</string>
     <string name="settings_system_signing_key">Allekirjoitusavain</string>
     <string name="settings_system_signing_key_description">Varmuuskopioi tai palauttaa ohitettujen sovellusten allekirjoittavan avaimen</string>
     <string name="settings_system_signing_key_dialog_description">Jokainen Morphen korjaama sovellus allekirjoitetaan tällä avaimella. Säilytä kopio: ilman sitä korjattuja sovelluksia voi päivittää vain poistamalla ne</string>
@@ -1184,14 +1190,11 @@ Yksityiskohdat: %2$s"</string>
     <string name="settings_system_patch_selections_title">Lisäosavalinnat</string>
     <string name="settings_system_patch_selections_description">Tallennetut lisäosavalinnat. Säilytetään, vaikka sovelluksen asennus poistetaan</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Nollataanko kaikki valinnat?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Nollataanko paketin valinnat?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Nollataanko valitut paketit?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Nollataanko lähteen valinnat?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s: %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s: %2$s</string>
     <string name="settings_system_patch_selection_source_format">Lähde #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Tämä poistaa pysyvästi kaikki tallennetut lisäosavalinnat kaikista paketeista ja lähteistä</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Tämä poistaa pysyvästi kaikki tallennetut lisäosavalinnat sovelluksesta &lt;b&gt;%s&lt;/b&gt; kaikista lähteistä</string>
     <string name="settings_system_patch_selection_reset_source_warning">Tämä poistaa pysyvästi tallennetut lisäosavalinnat sovelluksesta &lt;b&gt;%1$s&lt;/b&gt; lähteessä &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Tämä poistaa pysyvästi kaikki tallennetut lisäosavalinnat valituille paketeille</string>
     <string name="settings_system_export_source_data_fail">Lähdetietojen vienti epäonnistui</string>
@@ -1255,6 +1258,16 @@ Yksityiskohdat: %2$s"</string>
     <string name="patches">Lisäosat</string>
     <string name="home">Koti</string>
     <string name="settings">Asetukset</string>
+    <string name="apps">Sovellukset</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">Muokkaaminen</string>
+    <string name="settings_group_manager">Hallinnoija</string>
+    <string name="settings_section_appearance_summary">Kieli, teema, värit ja kotinäyttö</string>
+    <string name="settings_section_patch_options_summary">Miten yksinkertainen tila päivityssovellukset</string>
+    <string name="settings_section_performance">Suorituskyky</string>
+    <string name="settings_section_original_apks">Alkuperäiset APK:t</string>
+    <string name="settings_section_files">Tiedostot ja varmuuskopiot</string>
+    <string name="settings_search">Hae asetuksista</string>
     <string name="yes">Kyllä</string>
     <string name="no">Ei</string>
     <string name="all">Kaikki</string>

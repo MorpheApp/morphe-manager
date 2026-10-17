@@ -23,7 +23,7 @@
     <string name="deep_link_add_source_message">このパッチソースを Morphe に追加しますか？</string>
     <string name="deep_link_add_source_warning">信頼できるソースのみを追加してください</string>
     <!-- Shown under the app a link was opened for -->
-    <string name="deep_link_add_source_only_app">アプリのみが追加されました。ソースのアプリリストから他のアプリを追加できます</string>
+    <string name="deep_link_add_source_only_app">このアプリのみ追加されました。他のアプリは、ソースのアプリ一覧から追加できます</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">このソースは既に追加されています。既存のソースからこのアプリを追加しますか？</string>
     <!-- Home Screen - Update Notifications -->
@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">ソースは最新の状態です</string>
     <string name="home_sources_are_loading">ソースを読み込んでいます。しばらくお待ちください…</string>
     <string name="home_search_apps">アプリを検索</string>
-    <string name="home_app_list_options_title">並べ替えとフィルター</string>
-    <string name="home_app_list_options_state_description">%1$s で並べ替え、%2$s で絞り込み</string>
+    <string name="list_options_title">並べ替えとフィルター</string>
+    <string name="list_options_state_description">%1$sで並べ替え、%2$sで絞り込み</string>
     <string name="home_app_filter_all_description">ホーム画面上のすべてのアプリ</string>
     <string name="home_app_filter_patched_description">Morphe でパッチを適用した、または保存したアプリ</string>
     <string name="home_app_filter_not_patched_description">Morphe でまだパッチを適用していないアプリ</string>
@@ -59,7 +59,7 @@
     <string name="home_app_filter_clones">クローン</string>
     <string name="home_app_filter_clones_description">独自のパッケージ名でビルドされ、オリジナルのアプリと一緒にインストールできるアプリ</string>
     <string name="home_app_grouping_all_apps_description">すべてのアプリを含むリスト</string>
-    <string name="home_app_grouping_sources_description">それらを提供するパッチソースの下にあるアプリ</string>
+    <string name="home_app_grouping_sources_description">パッチの提供元ごとのアプリ</string>
     <string name="home_app_grouping_custom_description">作成したカテゴリ内のアプリ</string>
     <string name="home_app_sort_manual_description">並べ替えるには、アプリを長押しして並べ替えボタンをタップ</string>
     <string name="home_app_sort_recommended">推奨順</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">パッチソース</string>
     <string name="sources_search">ソースとパッチを検索</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">すべてのソース</string>
+    <string name="sources_filter_enabled_description">パッチの取得元となるソース</string>
+    <string name="sources_filter_disabled_description">無効にしたソース</string>
+    <string name="sources_filter_updates">アップデート</string>
+    <string name="sources_filter_updates_description">更新版を取得できるソース</string>
+    <string name="sources_filter_issues">要確認</string>
+    <string name="sources_filter_issues_description">ブロックされている、読み込みに失敗した、または新しいバージョンの Morphe が必要なソース</string>
     <string name="sources_sort_manual">手動</string>
     <string name="sources_sort_manual_hint">ソースを長押しして並べ替え</string>
     <string name="sources_sort_last_updated">最終更新日</string>
@@ -164,12 +172,12 @@
     <string name="sources_management_report_issue">問題を報告</string>
     <string name="sources_management_failed_to_open_url">URL を開けませんでした</string>
     <string name="sources_apps">アプリ</string>
-    <string name="sources_apps_description">表示するアプリはここから選択します。タップして除外するか、再追加してください。すべてのソースから表示されなくなるとホーム画面から削除されます（パッチ適用済みの場合は除く)</string>
+    <string name="sources_apps_description">アプリをタップすると、このソースのパッチ対象にするかどうかを切り替えられます。どのソースからも対象にされなくなったアプリは、パッチ適用済みでない限り、ホーム画面に表示されなくなります</string>
     <string name="sources_apps_brought">このソースから提供されています</string>
     <string name="sources_apps_left_out">このソースから除外されています</string>
     <string name="sources_apps_bring_back">元に戻す</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
-    <string name="sources_apps_stays_patched">パッチ適用済みのまま保持</string>
+    <string name="sources_apps_stays_patched">パッチ適用済みの状態を維持</string>
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
     <string name="sources_apps_new">新機能</string>
     <string name="sources_apps_new_apps">新しいアプリを追加</string>
@@ -219,7 +227,7 @@
     <string name="sources_dialog_url_invalid">URL は GitHub または GitLab のリポジトリ、もしくは .json ファイルを指している必要があります</string>
     <string name="sources_dialog_preinstalled">プリインストール</string>
     <string name="sources_dialog_community">コミュニティ パッチ</string>
-    <string name="sources_dialog_choose_apps_description">ソースの読み込み後、保持するアプリを選択してください</string>
+    <string name="sources_dialog_choose_apps_description">ソースの読み込み後、パッチ対象にするアプリを選択します</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">サードパーティのパッチソース</string>
     <string name="sources_dialog_community_notice_message">"コミュニティのパッチソースは、それぞれの作者によって作成・管理されています。Morphe は、サードパーティー製のパッチの内容を審査・検証しておらず、その内容や、お使いのデバイスに及ぼす影響について一切の責任を負いません。
@@ -471,7 +479,7 @@
     <string name="batch_patch_in_progress">一括パッチはすでに実行中です</string>
     <string name="batch_patch_nothing_outdated">すべてのパッチ適用済みアプリは最新の状態です</string>
     <string name="batch_queue_add_action">キューに追加</string>
-    <string name="batch_queue_pending_subtitle">タップして確認して開始</string>
+    <string name="batch_queue_pending_subtitle">タップして確認・開始</string>
     <string name="batch_queue_clear_title">キューをクリアしますか？</string>
     <string name="batch_queue_clear_description">すべてのアプリがキューから削除されます</string>
     <string name="shortcut_repatch_short">再パッチ</string>
@@ -772,7 +780,7 @@
     <string name="settings_appearance_pure_black">ピュアブラック</string>
     <string name="settings_appearance_pure_black_description">真っ黒な背景を使用します</string>
     <string name="settings_appearance_color_accents">アプリとソースの色</string>
-    <string name="settings_appearance_color_accents_description">アクセント カラーの代わりに、各アプリやソース固有のカラーを使用します</string>
+    <string name="settings_appearance_color_accents_description">アクセントカラーの代わりに、各アプリやソースの色を使用します</string>
     <string name="settings_appearance_outlines">アウトライン</string>
     <string name="settings_appearance_outlines_description">カード、パネル、ボタンの周囲に細い枠線を描画します</string>
     <!-- Settings - Appearance Tab - Language Selector -->
@@ -790,11 +798,11 @@
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">ホーム画面</string>
     <string name="settings_appearance_greeting_phrases">挨拶メッセージ</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">挨拶メッセージを表示する</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">挨拶メッセージを表示します</string>
     <string name="settings_appearance_repatch_notice">再パッチ通知</string>
     <string name="settings_appearance_repatch_notice_description">再パッチ可能なアプリがある場合、バナーを表示します</string>
     <string name="settings_appearance_sort_button">並べ替えとフィルターボタン</string>
-    <string name="settings_appearance_sort_button_description">アプリのソートとフィルターを行うボタンを表示する</string>
+    <string name="settings_appearance_sort_button_description">アプリの並べ替え・絞り込みボタンを表示します</string>
     <string name="settings_appearance_app_card_colors">アプリカードの色</string>
     <string name="settings_appearance_app_card_colors_default">デフォルト</string>
     <string name="settings_appearance_app_card_colors_default_description">ホーム画面のアプリカードに各アプリのバンドルカラーを使用します</string>
@@ -865,7 +873,7 @@
     <string name="settings_advanced_update_interval_chip_subtitle">バックグラウンドでの確認頻度</string>
     <string name="settings_advanced_update_interval_battery_warning">一部のデバイスでは、バックグラウンドでの確認が正常に動作しない場合があります。Xiaomi、Huawei、Samsung、OnePlus などのメーカーは、バッテリーを節約するためにバックグラウンド プロセスを厳しく制限することがよくあります。</string>
     <string name="settings_advanced_external_batch_patch">外部トリガーを許可</string>
-    <string name="settings_advanced_external_batch_patch_description">自動化アプリが一括パッチを開始できるようにする</string>
+    <string name="settings_advanced_external_batch_patch_description">自動化アプリから一括パッチ処理を実行できるようにします</string>
     <string name="external_batch_patch_title">一括パッチを開始しますか？</string>
     <string name="external_batch_patch_description">%s が Morphe にアプリのパッチ適用とインストールを要求しています</string>
     <string name="external_batch_patch_trust_caller">このアプリを常に許可</string>
@@ -887,13 +895,12 @@
     <string name="notification_mount_replaced_title">%1$s のパッチ適用が無効になりました</string>
     <string name="notification_mount_replaced_text">パッチ適用済みの v%2$s が v%1$s に置き換えられました。Morphe を起動して復元してください</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">高度な設定</string>
     <string name="settings_advanced_expert_mode">エキスパート モード</string>
-    <string name="settings_advanced_expert_mode_description">高度なパッチング設定とパッチオプションを解除する</string>
+    <string name="settings_advanced_expert_mode_description">高度なパッチ設定とパッチオプションを表示します</string>
     <string name="settings_advanced_expert_mode_dialog_title">エキスパート モードを有効にしますか？</string>
     <string name="settings_advanced_expert_mode_dialog_message">エキスパート モードでは、パッチの適用方法をより細かく制御できますが、設定を誤るとアプリが正常に動作しなくなる可能性があります</string>
     <string name="settings_advanced_strip_unused_libs">デバイスのアーキテクチャに最適化</string>
-    <string name="settings_advanced_strip_unused_libs_description">未使用のネイティブライブラリとAPK分割を削除する</string>
+    <string name="settings_advanced_strip_unused_libs_description">使用していないネイティブライブラリと分割 APK ファイルを削除します</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_description">プルリクエストのソースに必要です</string>
     <string name="settings_advanced_github_pat_configured">PAT が設定されました</string>
@@ -1024,9 +1031,9 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_risk">Play ストアからパッチ適用済みアプリにアップデートが提供される場合があります。アップデートがインストールされると、パッチ適用済みの APK は元のバージョンで上書きされます。アップデートを求められた場合は、アプリの Play ストアページで三点リーダーをタップし、「自動更新の有効化」をオフにしてください</string>
     <string name="installer_play_store_warning_continue">了解しました。続行します</string>
     <string name="installer_play_store_mode">Play ストア経由としてインストール</string>
-    <string name="installer_play_store_mode_description">Google Play ストアをインストール元としてマークする</string>
+    <string name="installer_play_store_mode_description">Google Play ストアをインストール元として設定します</string>
     <string name="settings_prompt_installer_on_install">インストーラー選択ダイアログ</string>
-    <string name="settings_prompt_installer_on_install_description">各インストールごとに使用するインストーラを確認する</string>
+    <string name="settings_prompt_installer_on_install_description">インストールのたびに使用するインストーラーを選択します</string>
     <string name="settings_auto_install_with_shizuku">パッチ適用後の自動インストール</string>
     <string name="settings_auto_install_with_shizuku_description">パッチ適用が完了次第、パッチ適用済み APK をインストールします</string>
     <string name="settings_auto_uninstall_with_shizuku">競合時に自動でアンインストール</string>
@@ -1085,9 +1092,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_notifications_sound_reset">デフォルトにリセット</string>
     <string name="settings_system_notifications_ringtone_picker_title">トーンを選択</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">インポートとエクスポート</string>
     <string name="settings_system_signing_key">署名キー</string>
-    <string name="settings_system_signing_key_description">パッチ済みアプリに署名するための鍵をバックアップまたは復元する</string>
+    <string name="settings_system_signing_key_description">パッチ適用済みアプリの署名に使うキーをバックアップ・復元します</string>
     <string name="settings_system_signing_key_dialog_description">Morphe でパッチを適用したアプリは、すべてこのキーで署名されます。必ずバックアップしてください。このキーがないと、パッチ適用済みアプリを更新するにはアンインストールする必要があります
 </string>
     <string name="settings_system_signing_key_missing">最初のパッチ適用時に Morphe が作成します</string>
@@ -1144,7 +1150,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_export_zip_failed">選択された APK のエクスポートに失敗しました</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">ストレージの管理</string>
-    <string name="settings_system_storage_management_description">ディスクの使用状況を確認し、キャッシュファイルを削除する</string>
+    <string name="settings_system_storage_management_description">ディスクの使用状況の確認とキャッシュファイルの削除を行います</string>
     <string name="settings_system_storage_keystore_title">署名キーストア</string>
     <string name="settings_system_storage_app_data_title">アプリのデータ</string>
     <string name="settings_system_storage_patch_bundles_title">パッチバンドル</string>
@@ -1186,14 +1192,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">パッチ セレクション</string>
     <string name="settings_system_patch_selections_description">保存されたパッチ セレクションを管理します。これらはアンインストール後も保持されます</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">すべてのセレクションをリセットしますか？</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">パッケージ セレクションをリセットしますか？</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">選択されたパッケージをリセットしますか？</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">ソース セレクションをリセットしますか？</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s ～ %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%2$s 内の %1$s</string>
     <string name="settings_system_patch_selection_source_format">ソース #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">すべてのパッケージとソースの保存済みパッチ セレクションを完全に削除します</string>
-    <string name="settings_system_patch_selection_reset_package_warning">&lt;b&gt;%s&lt;/b&gt; のすべてのソースの保存済みパッチ セレクションを完全に削除します</string>
     <string name="settings_system_patch_selection_reset_source_warning">&lt;b&gt;%1$s&lt;/b&gt; のソース #&lt;b&gt;%2$s&lt;/b&gt; の保存済みパッチ セレクションを完全に削除します</string>
     <string name="settings_system_patch_selection_reset_selected_warning">選択したパッケージの保存済みパッチ セレクションをすべて完全に削除します</string>
     <string name="settings_system_export_source_data_fail">ソースデータのエクスポートに失敗しました</string>
@@ -1210,7 +1213,7 @@ morphe_header_custom_dark.png
     <string name="copy_selection_same_source">同一のソース</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">カスタム ファイルピッカー</string>
-    <string name="settings_system_custom_file_picker_description">システム標準の代わりに、Morphe の内蔵ファイルピッカーを使用してストレージを閲覧します</string>
+    <string name="settings_system_custom_file_picker_description">システム標準のファイル選択画面ではなく、Morphe 内蔵のファイル選択画面を使用します</string>
     <!-- Settings - System Tab - APK download helper -->
     <string name="settings_system_apk_download_helper">APK ダウンロードヘルパー</string>
     <string name="settings_system_apk_download_helper_trusted_count">信頼済み: %1$d / %2$d</string>
@@ -1257,6 +1260,16 @@ morphe_header_custom_dark.png
     <string name="patches">パッチ</string>
     <string name="home">ホーム</string>
     <string name="settings">設定</string>
+    <string name="apps">アプリ</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">パッチ処理</string>
+    <string name="settings_group_manager">マネージャー</string>
+    <string name="settings_section_appearance_summary">言語、テーマ、カラー、ホーム画面</string>
+    <string name="settings_section_patch_options_summary">シンプルモードでアプリに適用するパッチ</string>
+    <string name="settings_section_performance">最適化</string>
+    <string name="settings_section_original_apks">オリジナルの APK</string>
+    <string name="settings_section_files">ファイル &amp; バックアップ</string>
+    <string name="settings_search">設定を検索</string>
     <string name="yes">はい</string>
     <string name="no">いいえ</string>
     <string name="all">すべて</string>

@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Jou oorspronge is opgedateer</string>
     <string name="home_sources_are_loading">Oorsprong word gelaai, wag asseblief…</string>
     <string name="home_search_apps">Soek programme</string>
-    <string name="home_app_list_options_title">Sorteer en filter</string>
-    <string name="home_app_list_options_state_description">Gesorteer volgens %1$s, gefiltreer volgens %2$s</string>
+    <string name="list_options_title">Sorteer en filtreer</string>
+    <string name="list_options_state_description">Gesorteer volgens %1$s, gefiltreer volgens %2$s</string>
     <string name="home_app_filter_all_description">Elke app op die tuisskerm</string>
     <string name="home_app_filter_patched_description">Apps wat jy met Morphe gepatch of gestoor het</string>
     <string name="home_app_filter_not_patched_description">Apps wat jy nog nie in Morphe gepatch het nie</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Verandering oorspronge</string>
     <string name="sources_search">Soek bronne en patches</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Enige bron</string>
+    <string name="sources_filter_enabled_description">Bronkolle word geneem van</string>
+    <string name="sources_filter_disabled_description">Brone afgeskakel</string>
+    <string name="sources_filter_updates">Opdaterings</string>
+    <string name="sources_filter_updates_description">Bronne met \'n nuwer weergawe om te kry</string>
+    <string name="sources_filter_issues">Behoeftige aandag</string>
+    <string name="sources_filter_issues_description">Bronne wat geblokkeer is, kon nie laai nie of benodig \'n nuwer Morphe nie</string>
     <string name="sources_sort_manual">Handmatige volgorde</string>
     <string name="sources_sort_manual_hint">Druk lank op \'n bron om te herschik</string>
     <string name="sources_sort_last_updated">Laaste opgedateer</string>
@@ -887,7 +895,6 @@ Patches word nie beïnvloed nie: aktiveer voorafvrystelling-patches vir elke bro
     <string name="notification_mount_replaced_title">%1$s is nie meer gepatch nie</string>
     <string name="notification_mount_replaced_text">v%1$s het die gepatchte v%2$s vervang. Maak Morphe oop om dit te herstel</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Spesialisinstellings</string>
     <string name="settings_advanced_expert_mode">Spesialismodus</string>
     <string name="settings_advanced_expert_mode_description">Ontsluit gevorderde patch-instellings en -opsies</string>
     <string name="settings_advanced_expert_mode_dialog_title">Aktiveer Expert modus?</string>
@@ -1085,7 +1092,6 @@ Besonderhede: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Stel terug na verstek</string>
     <string name="settings_system_notifications_ringtone_picker_title">Kies \'n toon</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Importeer &amp; eksporteer</string>
     <string name="settings_system_signing_key">Ondertekeningsleutel</string>
     <string name="settings_system_signing_key_description">Rugsteun of herstel die sleutel wat gepatchte apps onderteken</string>
     <string name="settings_system_signing_key_dialog_description">Elke app wat deur Morphe gepatch word, word met hierdie sleutel onderteken. Hou \'n kopie: sonder dit kan gepatchte apps slegs opgedateer word nadat hulle verwyder is</string>
@@ -1185,14 +1191,11 @@ Besonderhede: %2$s"</string>
     <string name="settings_system_patch_selections_title">Patch seleksies</string>
     <string name="settings_system_patch_selections_description">Spaar gestoor patch seleksies, behou na verwydering</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Herstel alles?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Herstel pakket seleksies?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Geselekteerde pakkette terugstel?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Herstel bron seleksie?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s oor %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s in %2$s</string>
     <string name="settings_system_patch_selection_source_format">Bron #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Dit sal permanent alle gestoorde patch seleksies vir alle pakkette en bronne uitvee</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Dit sal permanent alle gestoorde patch-seleksies vir &lt;b&gt;%s&lt;/b&gt; oor alle bronne verwyder.</string>
     <string name="settings_system_patch_selection_reset_source_warning">Dit sal permanent gestoorde patch-seleksies vir &lt;b&gt;%1$s&lt;/b&gt; in &lt;b&gt;%2$s&lt;/b&gt; verwyder.</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Dit sal permanent alle gestoorde patch-seleksies vir die gekose pakkette verwyder.</string>
     <string name="settings_system_export_source_data_fail">Kon nie bron data uitvoer nie</string>
@@ -1256,6 +1259,16 @@ Besonderhede: %2$s"</string>
     <string name="patches">Veranderinge</string>
     <string name="home">Tuis</string>
     <string name="settings">Instellings</string>
+    <string name="apps">Toepassing</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">Lapwerk</string>
+    <string name="settings_group_manager">Bestuurder</string>
+    <string name="settings_section_appearance_summary">Taal, tema, kleure en tuisblad</string>
+    <string name="settings_section_patch_options_summary">Wat eenvoudige modus programme opdateer met</string>
+    <string name="settings_section_performance">Prestasie</string>
+    <string name="settings_section_original_apks">Oorspronklike APK\'s</string>
+    <string name="settings_section_files">Lêers en rugsteun</string>
+    <string name="settings_search">Soek instellings</string>
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
     <string name="all">Almal</string>

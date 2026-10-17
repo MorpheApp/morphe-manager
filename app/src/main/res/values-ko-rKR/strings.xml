@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">소스가 최신 상태입니다</string>
     <string name="home_sources_are_loading">소스를 불러오는 중, 잠시만 기다려 주세요…</string>
     <string name="home_search_apps">앱 검색</string>
-    <string name="home_app_list_options_title">정렬 및 필터</string>
-    <string name="home_app_list_options_state_description">%1$s 기준으로 정렬, %2$s 기준으로 필터링됨</string>
+    <string name="list_options_title">정렬 및 필터</string>
+    <string name="list_options_state_description">%1$s 기준으로 정렬, %2$s 기준으로 필터링됨</string>
     <string name="home_app_filter_all_description">홈 화면에 모든 앱 표시</string>
     <string name="home_app_filter_patched_description">Morphe로 패치하거나 저장한 앱만 표시</string>
     <string name="home_app_filter_not_patched_description">아직 Morphe에서 패치하지 않은 앱만 표시</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">패치 소스</string>
     <string name="sources_search">소스 및 패치 검색</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">모든 소스</string>
+    <string name="sources_filter_enabled_description">소스 패치는 다음에서 가져옵니다</string>
+    <string name="sources_filter_disabled_description">소스 비활성화됨</string>
+    <string name="sources_filter_updates">업데이트</string>
+    <string name="sources_filter_updates_description">최신 버전이 있는 소스</string>
+    <string name="sources_filter_issues">주의 필요</string>
+    <string name="sources_filter_issues_description">차단되었거나 불러오기에 실패했거나, 더 최신 버전의 Morphe가 필요한 소스</string>
     <string name="sources_sort_manual">수동 정렬</string>
     <string name="sources_sort_manual_hint">소스를 길게 탭하여 순서를 변경하세요</string>
     <string name="sources_sort_last_updated">최근 업데이트 우선</string>
@@ -886,7 +894,6 @@
     <string name="notification_mount_replaced_title">%1$s는 더 이상 패치되지 않음</string>
     <string name="notification_mount_replaced_text">v%1$s가 패치된 v%2$s를 교체했습니다. Morphe를 열어서 복원하세요</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">전문가 설정</string>
     <string name="settings_advanced_expert_mode">전문가 모드</string>
     <string name="settings_advanced_expert_mode_description">고급 패치 설정 및 패치 옵션을 잠금 해제합니다</string>
     <string name="settings_advanced_expert_mode_dialog_title">전문가 모드 활성화</string>
@@ -1083,7 +1090,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_notifications_sound_reset">기본값으로 초기화</string>
     <string name="settings_system_notifications_ringtone_picker_title">알림음 선택</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">가져오기 &amp; 내보내기</string>
     <string name="settings_system_signing_key">서명키</string>
     <string name="settings_system_signing_key_description">패치된 앱에 서명하는 데 사용되는 키를 백업하거나 복원할 수 있습니다</string>
     <string name="settings_system_signing_key_dialog_description">Morphe가 패치하는 모든 앱은 이 키로 서명됩니다. 이 키를 반드시 보관하세요: 이 키가 없으면 패치된 앱은 기존 앱을 삭제한 후에만 업데이트할 수 있습니다</string>
@@ -1183,14 +1189,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">패치 선택 목록</string>
     <string name="settings_system_patch_selections_description">저장된 패치 선택 목록은 앱을 제거한 후에도 유지됩니다</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">모든 선택 목록 초기화</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">패키지 선택 목록 초기화</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">선택된 패키지 초기화</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">스소 선택 목록 초기화</string>
     <string name="settings_system_patch_selection_total_summary_format">%2$s의 %1$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%2$s의 %1$s</string>
     <string name="settings_system_patch_selection_source_format">소스 #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">모든 패키지 및 소스에 대해 저장된 모든 패치 선택 목록을 영구적으로 삭제합니다</string>
-    <string name="settings_system_patch_selection_reset_package_warning">모든 소스에서 &lt;b&gt;%s&lt;/b&gt;에 대한 저장된 패치 선택 목록을 영구적으로 삭제합니다</string>
     <string name="settings_system_patch_selection_reset_source_warning">이 작업은 &lt;b&gt;%2$s&lt;/b&gt;에서 &lt;b&gt;%1$s&lt;/b&gt;에 대한 저장된 패치 선택 목록을 영구적으로 삭제합니다</string>
     <string name="settings_system_patch_selection_reset_selected_warning">선택된 패키지에 대해 저장된 모든 패치 선택 목록을 영구적으로 삭제합니다</string>
     <string name="settings_system_export_source_data_fail">소스 데이터를 내보낼 수 없습니다</string>
@@ -1254,6 +1257,16 @@ morphe_header_custom_dark.png
     <string name="patches">패치</string>
     <string name="home">홈</string>
     <string name="settings">설정</string>
+    <string name="apps">앱</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">패치</string>
+    <string name="settings_group_manager">매니저</string>
+    <string name="settings_section_appearance_summary">언어, 테마, 색상 및 홈 화면</string>
+    <string name="settings_section_patch_options_summary">심플 모드가 앱을 패치하는 방식</string>
+    <string name="settings_section_performance">성능</string>
+    <string name="settings_section_original_apks">원본 APK</string>
+    <string name="settings_section_files">파일 및 백업</string>
+    <string name="settings_search">설정 검색</string>
     <string name="yes">예</string>
     <string name="no">아니요</string>
     <string name="all">모두</string>

@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">แหล่งทีมาของคุณเป็นเวอร์ชันล่าสุดแล้ว</string>
     <string name="home_sources_are_loading">กำลังโหลดแหล่งที่มา กรุณารอสักครู่…</string>
     <string name="home_search_apps">ค้นหาแอป</string>
-    <string name="home_app_list_options_title">จัดเรียงและกรอง</string>
-    <string name="home_app_list_options_state_description">เรียงตาม %1$s, กรองตาม %2$s</string>
+    <string name="list_options_title">เรียงลำดับและกรอง</string>
+    <string name="list_options_state_description">เรียงลำดับโดย %1$s, กรองโดย %2$s</string>
     <string name="home_app_filter_all_description">ทุกแอปบนหน้าจอหลัก</string>
     <string name="home_app_filter_patched_description">แอปที่คุณแพตช์หรือบันทึกด้วย Morphe แล้ว</string>
     <string name="home_app_filter_not_patched_description">แอปที่คุณยังไม่ได้แพตช์ใน Morphe</string>
@@ -59,7 +59,7 @@
     <string name="home_app_filter_clones">โคลน</string>
     <string name="home_app_filter_clones_description">แอปที่สร้างด้วยชื่อแพ็กเกจของตัวเอง ติดตั้งเคียงข้างแอปต้นฉบับ</string>
     <string name="home_app_grouping_all_apps_description">รายการหนึ่งที่มีทุกแอป</string>
-    <string name="home_app_grouping_sources_description">แอปภายใต้แหล่งที่มาของแพทช์ที่ให้บริการ</string>
+    <string name="home_app_grouping_sources_description">แอปภายใต้แหล่งแพตช์ที่จัดหาแอปเหล่านั้น</string>
     <string name="home_app_grouping_custom_description">แอปในหมวดหมู่ที่คุณสร้าง</string>
     <string name="home_app_sort_manual_description">แตะแอปค้างไว้ แล้วแตะปุ่มจัดเรียงใหม่</string>
     <string name="home_app_sort_recommended">เรียงตามที่แนะนำ</string>
@@ -136,7 +136,7 @@
     <string name="home_greeting_halloween_2">ไม่มีผีใน APK เหล่านี้ เราตรวจสอบแล้ว</string>
     <string name="home_greeting_halloween_3">ฤดูหลอน แพตช์ใหม่</string>
     <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
-    <string name="home_greeting_halloween_4">บางสิ่งชั่วร้ายมาทางนี้เป็นแพตช์</string>
+    <string name="home_greeting_halloween_4">บางสิ่งที่ชั่วร้ายทางนี้ทำการแพตช์</string>
     <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
     <string name="home_greeting_winter_1">สุขสันต์วันหยุด แพตช์ใหม่</string>
     <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">จัดการแหล่งที่มา</string>
     <string name="sources_search">ค้นหาแหล่งที่มาและแพตช์</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">ทุกแหล่ง</string>
+    <string name="sources_filter_enabled_description">แพตช์แหล่งที่มานำมาจาก</string>
+    <string name="sources_filter_disabled_description">แหล่งที่มาปิดอยู่</string>
+    <string name="sources_filter_updates">อัปเดต</string>
+    <string name="sources_filter_updates_description">แหล่งที่มาที่มีเวอร์ชันใหม่กว่าเพื่อรับ</string>
+    <string name="sources_filter_issues">ต้องการความสนใจ</string>
+    <string name="sources_filter_issues_description">แหล่งที่มาที่ถูกบล็อก โหลดล้มเหลว หรือต้องการ Morphe รุ่นใหม่กว่า</string>
     <string name="sources_sort_manual">จัดเรียงด้วยตนเอง</string>
     <string name="sources_sort_manual_hint">แตะค้างที่แหล่งข้อมูลเพื่อจัดเรียงใหม่</string>
     <string name="sources_sort_last_updated">ปรับปรุงล่าสุด</string>
@@ -257,7 +265,7 @@
     <string name="home_apk_helper_installed_incompatible">ไม่สามารถแพตช์เวอร์ชันที่ติดตั้งอยู่ได้</string>
     <string name="home_apk_use_saved">ใช้ APK ที่บันทึกไว้</string>
     <string name="home_apk_use_installed">ใช้ APK ที่ติดตั้งไว้</string>
-    <string name="home_apk_use_saved_unsupported">แพตช์ไม่รองรับไฟล์ที่บันทึกไว้นี้ การติดตั้งแพตช์จะขอให้คุณยืนยัน หรือเลือกไฟล์ APK อื่น</string>
+    <string name="home_apk_use_saved_unsupported">แพตช์ไม่รองรับไฟล์ที่บันทึกไว้นี้ การแพตช์จะขอให้คุณยืนยัน หรือเลือกไฟล์ APK อื่น</string>
     <string name="home_apk_use_installed_unverified">ไม่สามารถตรวจสอบลายเซ็นของแอปที่ติดตั้งได้ ดังนั้นจึงอาจได้รับการแพตช์แล้ว</string>
     <string name="home_unverified">ไม่ได้รับการยืนยัน</string>
     <string name="home_install_verification_pending">กำลังตรวจสอบการติดตั้ง…</string>
@@ -473,7 +481,7 @@
     <string name="batch_queue_add_action">เพิ่มลงในคิว</string>
     <string name="batch_queue_pending_subtitle">แตะเพื่อตรวจสอบและเริ่ม</string>
     <string name="batch_queue_clear_title">ล้างคิว?</string>
-    <string name="batch_queue_clear_description">แอปทั้งหมดจะถูกนำออกจากรคิว</string>
+    <string name="batch_queue_clear_description">แอปทั้งหมดจะถูกนำออกจากคิว</string>
     <string name="shortcut_repatch_short">แพตช์ซ้ำ</string>
     <string name="shortcut_repatch_long">แพตช์แอปที่ล้าสมัยซ้ำ</string>
     <string name="shortcut_check_updates_short">ตรวจสอบการอัปเดต</string>
@@ -850,7 +858,7 @@
 
 แพตช์ไม่ได้รับผลกระทบ: เปิดใช้งานแพตช์ก่อนเผยแพร่สำหรับแต่ละแหล่งที่มาในรายการแหล่งที่มาของแพตช์"</string>
     <string name="settings_advanced_updates_allow_metered">อัปเดตข้อมูลมือถือ</string>
-    <string name="settings_advanced_updates_allow_metered_description">ดาวน์โหลดการอัปเดต Morphe และการแพทช์ผ่านข้อมูลมือถือ</string>
+    <string name="settings_advanced_updates_allow_metered_description">ดาวน์โหลดการอัปเดต Morphe และแพตช์ผ่านข้อมูลมือถือ</string>
     <string name="settings_advanced_updates_background_notifications">การแจ้งเตือนอัปเดตพื้นหลัง</string>
     <string name="settings_advanced_updates_background_notifications_description">ตรวจสอบการอัปเดตในพื้นหลังตามเวลาที่กำหนดและแจ้งให้ทราบเมื่อมีการอัปเดตใหม่</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">รับการแจ้งเตือนแบบพุชสำหรับการเปิดตัวใหม่ๆ แม้ว่าแอปจะถูกปิดไว้</string>
@@ -887,7 +895,6 @@
     <string name="notification_mount_replaced_title">%1$s ไม่ได้ถูกแพตช์อีกต่อไป</string>
     <string name="notification_mount_replaced_text">v%1$s แทนที่ v%2$s ที่ถูกแพตช์ เปิด Morphe เพื่อกู้คืน</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">การตั้งค่าโหมดผู้เชี่ยวชาญ</string>
     <string name="settings_advanced_expert_mode">โหมดเชี่ยวชาญ</string>
     <string name="settings_advanced_expert_mode_description">เปิดใช้งานการตั้งค่าการแพทช์ขั้นสูงและตัวเลือกการแพทช์</string>
     <string name="settings_advanced_expert_mode_dialog_title">เปิดใช้งานโหมดเชี่ยวชาญ?</string>
@@ -1026,7 +1033,7 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_mode">ติดตั้งเป็น Play Store</string>
     <string name="installer_play_store_mode_description">กำหนด Google Play Store เป็นแหล่งติดตั้ง</string>
     <string name="settings_prompt_installer_on_install">แจ้งเตือนการเลือกตัวติดตั้ง</string>
-    <string name="settings_prompt_installer_on_install_description">ถามว่าจะใช้อะไรมาก่อตั้งสำหรับทุกการติดตั้ง</string>
+    <string name="settings_prompt_installer_on_install_description">ถามว่าจะใช้ตัวติดตั้งใดสำหรับการติดตั้งแต่ละครั้ง</string>
     <string name="settings_auto_install_with_shizuku">ติดตั้งอัตโนมัติหลังจากการแพตช์</string>
     <string name="settings_auto_install_with_shizuku_description">ติดตั้ง APK ที่ผ่านการแพตช์ทันทีที่การแพตช์เสร็จสิ้น</string>
     <string name="settings_auto_uninstall_with_shizuku">ถอนการติดตั้งอัตโนมัติเมื่อเกิดข้อขัดแย้ง</string>
@@ -1055,7 +1062,7 @@ morphe_header_custom_dark.png
     <string name="installer_shizuku_error_downgrade">Android บล็อกสิ่งนี้เนื่องจากจะลดระดับแอปที่ติดตั้ง</string>
     <string name="installer_shizuku_error_signature">Android บล็อกสิ่งนี้เนื่องจากแอปที่ติดตั้งมีลายเซ็นที่แตกต่างกัน</string>
     <string name="installer_shizuku_error_invalid_apk">Android ไม่สามารถอ่าน APK นี้ได้</string>
-    <string name="installer_shizuku_error_user_profile">ระบบบล็อกการติดตั้งนี้ เปิด \"ติดตั้งผ่าน USB\" ในตัวเลือกสำหรับนักพัฒนา</string>
+    <string name="installer_shizuku_error_user_profile">ระบบบล็อกการติดตั้งนี้ บนอุปกรณ์ Xiaomi และอุปกรณ์ที่คล้ายกัน ให้เปิดใช้งาน \"ติดตั้งผ่าน USB\" ในทางเลือกผู้พัฒนา ในโปรไฟล์การทำงาน การติดตั้งอาจถูกจำกัดโดยนโยบาย</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">การเพิ่มประสิทธิภาพแบตเตอรี่</string>
     <string name="settings_system_battery_optimization_description">ทำให้ตัวแพตช์ทำงานต่อไปเมื่อแอปพลิเคชันถูกลดขนาด</string>
@@ -1064,12 +1071,12 @@ morphe_header_custom_dark.png
     <string name="settings_system_process_runtime_description">เรียกใช้การแพตช์ในกระบวนการแยกต่างหากเพื่อเพิ่มความเสถียร</string>
     <string name="settings_system_process_runtime_memory_limit_description">ขีดจำกัดที่สูงขึ้นช่วยเพิ่มความเร็วในการแพตช์บนอุปกรณ์ที่รองรับ</string>
     <string name="settings_system_process_runtime_enable">เปิดใช้การทำงานของโปรเซส</string>
-    <string name="settings_system_memory_limit_subtitle">ขนาดหน่วยความจำที่ใช้สำหรับการแพตช์</string>
+    <string name="settings_system_memory_limit_subtitle">หน่วยความจำที่ว่างสำหรับการแพตช์</string>
     <string name="settings_system_process_runtime_heap_limit_ignored">อุปกรณ์นี้เพิกเฉยต่อขีดจำกัดหน่วยความจำในการรันครั้งล่าสุด ดังนั้นการแพตช์อาจย้อนกลับไปทำงานภายใน Morphe</string>
     <string name="settings_system_memory_limit_warning">ขีดจำกัดหน่วยความจำต่ำอาจทำให้เกิดความล้มเหลวเมื่อทำการแพตช์แอปขนาดใหญ่</string>
     <string name="settings_system_memory_limit_high_warning">ขีดจำกัดหน่วยความจำที่สูงอาจทำให้การแพตช์ช้าลงมากบนอุปกรณ์บางเครื่อง ให้เพิ่มเฉพาะเมื่อการแพตช์ล้มเหลวที่ขีดจำกัดต่ำกว่า</string>
     <string name="settings_system_process_runtime_enabled_description">%s MB จำกัด</string>
-    <string name="settings_system_process_runtime_disabled_description">แตะเพื่อค่าปรับ</string>
+    <string name="settings_system_process_runtime_disabled_description">แตะเพื่อปรับค่า</string>
     <string name="settings_system_process_runtime_description_not_available">คุณสมบัติขั้นตอนนี้ต้องการ Android 11 หรือเวอร์ชันที่สูงกว่า</string>
     <string name="settings_system_patcher_completion_sound">เสียงเมื่อเสร็จสิ้น</string>
     <string name="settings_system_patcher_completion_sound_description">เล่นเสียงที่แตกต่างเมื่อการแพตช์เสร็จสมบูรณ์ ไม่ว่าจะเป็นความสำเร็จหรือความล้มเหลว</string>
@@ -1085,7 +1092,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_notifications_sound_reset">รีเซ็ตเป็นค่าเริ่มต้น</string>
     <string name="settings_system_notifications_ringtone_picker_title">เลือกเสียงเรียกเข้า</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">นำเข้า &amp; ส่งออก</string>
     <string name="settings_system_signing_key">คีย์เซ็นชื่อ</string>
     <string name="settings_system_signing_key_description">สำรองหรือเรียกคืนคีย์ที่ใช้เซ็นแอปที่แพทช์</string>
     <string name="settings_system_signing_key_dialog_description">แอปทุกตัวที่ Morphe แพตช์จะเซ็นชื่อด้วยคีย์นี้ เก็บสำเนาไว้ เพราะหากไม่มีคีย์นี้ แอปที่แพตช์แล้วจะอัปเดตได้ก็ต่อเมื่อถอนการติดตั้งออกก่อนเท่านั้น</string>
@@ -1119,7 +1125,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_mode_title">นำเข้าการตั้งค่า Morphe</string>
     <string name="settings_system_import_manager_settings_mode_description">เลือกวิธีการใช้การตั้งค่าและแหล่งที่มาที่นำเข้า</string>
     <string name="settings_system_import_selections_mode_title">นำเข้าการเลือกแพตช์</string>
-    <string name="settings_system_import_selections_mode_description">เลือกวิธีการนำเข้าตัวเลือกที่เลือกและตัวเลือกการแพตช์ไปใช้</string>
+    <string name="settings_system_import_selections_mode_description">เลือกวิธีการนำตัวเลือกที่นำเข้าและตัวเลือกการแพตช์ไปใช้</string>
     <string name="import_mode_replace_title">แทนที่ที่มีอยู่</string>
     <string name="import_mode_replace_description">ตรงกับข้อมูลสำรองอย่างแน่นอน รายการที่ไม่มีในข้อมูลสำรองจะถูกลบออก</string>
     <string name="import_mode_merge_title">รวมเข้ากับที่มีอยู่</string>
@@ -1185,14 +1191,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">การเลือกแพตช์</string>
     <string name="settings_system_patch_selections_description">บันทึกการเลือกแพตช์ที่เก็บไว้หลังการถอนการติดตั้ง</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">รีเซ็ตการเลือกทั้งหมด?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">รีเซ็ตการเลือกแพ็กเกจ?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">รีเซ็ตแพ็กเกจที่เลือก?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">รีเซ็ตการเลือกแหล่งที่มา?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s ถึง %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s ใน %2$s</string>
     <string name="settings_system_patch_selection_source_format">แหล่งที่มา #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">การดำเนินการนี้จะลบการบันทึกการเลือกแพตช์ทั้งหมดอย่างถาวรสำหรับทุกแพ็กเกจและแหล่งที่มา</string>
-    <string name="settings_system_patch_selection_reset_package_warning">การดำเนินการนี้จะลบการเลือกแพตช์ที่บันทึกไว้ทั้งหมดสำหรับ &lt;b&gt;%s&lt;/b&gt; ในทุกแหล่งที่มาอย่างถาวร</string>
     <string name="settings_system_patch_selection_reset_source_warning">การดำเนินการนี้จะลบการเลือกแพตช์ที่บันทึกไว้อย่างถาวรสำหรับ &lt;b&gt;%1$s&lt;/b&gt; ใน &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="settings_system_patch_selection_reset_selected_warning">การดำเนินการนี้จะลบการเลือกแพตช์ที่บันทึกไว้ทั้งหมดสำหรับแพ็คเกจที่เลือกอย่างถาวร</string>
     <string name="settings_system_export_source_data_fail">ไม่สามารถส่งออกข้อมูลแหล่งที่มาได้</string>
@@ -1256,6 +1259,16 @@ morphe_header_custom_dark.png
     <string name="patches">แพตช์</string>
     <string name="home">หน้าแรก</string>
     <string name="settings">การตั้งค่า</string>
+    <string name="apps">แอป</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">การแพตช์</string>
+    <string name="settings_group_manager">ผู้จัดการ</string>
+    <string name="settings_section_appearance_summary">ภาษา ธีม สี และหน้าจอโฮม</string>
+    <string name="settings_section_patch_options_summary">สิ่งที่โหมดง่ายๆ แปะแอปด้วย</string>
+    <string name="settings_section_performance">ประสิทธิภาพ</string>
+    <string name="settings_section_original_apks">APK ต้นฉบับ</string>
+    <string name="settings_section_files">ไฟล์ &amp; การสำรองข้อมูล</string>
+    <string name="settings_search">ค้นหาในการตั้งค่า</string>
     <string name="yes">ใช่</string>
     <string name="no">ไม่</string>
     <string name="all">ทั้งหมด</string>

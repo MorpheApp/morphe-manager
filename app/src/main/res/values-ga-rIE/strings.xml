@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Tá do foinsí suas chun dáta</string>
     <string name="home_sources_are_loading">Tá na foinsí ag lódáil, fan le do thoil…</string>
     <string name="home_search_apps">Cuardaigh aipeanna</string>
-    <string name="home_app_list_options_title">Sórtáil agus scagaire</string>
-    <string name="home_app_list_options_state_description">Sórtáilte de réir %1$s, scagtha de réir %2$s</string>
+    <string name="list_options_title">Sórtáil agus scagaire</string>
+    <string name="list_options_state_description">Sórtáilte de réir %1$s, scagtha de réir %2$s</string>
     <string name="home_app_filter_all_description">Gach aip ar an scáileán baile</string>
     <string name="home_app_filter_patched_description">Aipeanna atá paisteáilte nó sábháilte agat le Morphe</string>
     <string name="home_app_filter_not_patched_description">Aipeanna nár phaisteáil tú i Morphe go fóill</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Foinsí paiste</string>
     <string name="sources_search">Cuardaigh foinsí agus paistí</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Gach foinse</string>
+    <string name="sources_filter_enabled_description">Foinsí as a dtógtar paistí</string>
+    <string name="sources_filter_disabled_description">Foinsí múchta</string>
+    <string name="sources_filter_updates">Nuashonruithe</string>
+    <string name="sources_filter_updates_description">Foinsí le leagan níos nuaí le fáil</string>
+    <string name="sources_filter_issues">Teastaíonn aird</string>
+    <string name="sources_filter_issues_description">Foinsí atá blocáilte, nár éirigh leo lódáil nó a bhfuil Morphe níos nuaí ag teastáil uathu</string>
     <string name="sources_sort_manual">Ordú láimhe</string>
     <string name="sources_sort_manual_hint">Brúigh suas le foinse le hathordú</string>
     <string name="sources_sort_last_updated">Nuashonraithe is déanaí</string>
@@ -887,7 +895,6 @@ Níl tionchar ar phaistí: cumasaigh paistí réamh-eisiúna do gach foinse sa l
     <string name="notification_mount_replaced_title">Níl %1$s paisteáilte a thuilleadh</string>
     <string name="notification_mount_replaced_text">Tháinig v%1$s in ionad an v%2$s paisteáilte. Oscail Morphe chun é a chur ar ais</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Socruithe saineolaithe</string>
     <string name="settings_advanced_expert_mode">Mód saineolaithe</string>
     <string name="settings_advanced_expert_mode_description">Osclaíonn sé socruithe paisteála casta agus roghanna paisteála</string>
     <string name="settings_advanced_expert_mode_dialog_title">Cumasaigh mód saineolaithe?</string>
@@ -1083,7 +1090,6 @@ Sonraí: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Athshocraigh go réamhshocraithe</string>
     <string name="settings_system_notifications_ringtone_picker_title">Roghnaigh ton</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Iompórtáil &amp; easpórtáil</string>
     <string name="settings_system_signing_key">Eochair shíniúcháin</string>
     <string name="settings_system_signing_key_description">Cúltacaíonn nó athchuir sé an eochair a shíníonn aipeanna paisteáilte</string>
     <string name="settings_system_signing_key_dialog_description">Déantar gach aip a phatchálann Morphe a shíniú leis an eochair seo. Coinnigh cóip di: gan í, ní féidir aipeanna patcháilte a nuashonrú ach amháin tar éis iad a dhíshuiteáil</string>
@@ -1183,14 +1189,11 @@ Sonraí: %2$s"</string>
     <string name="settings_system_patch_selections_title">Roghanna paiste</string>
     <string name="settings_system_patch_selections_description">Sábháil roghanna paisteála, coimeádta tar éis díchómhdaigh</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Athshocraigh gach rogha?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Athshocraigh roghanna pacáiste?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Athshocraigh na pacáistí roghnaithe?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Athshocraigh an rogha foinse?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s trasna %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s i %2$s</string>
     <string name="settings_system_patch_selection_source_format">Foinse #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Scriosfaidh sé seo go buan na roghanna paiste sábháilte go léir do na pacáistí agus na foinsí go léir.</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Scriosfaidh sé seo go buan gach rogha paiste sábháilte do &lt;b&gt;%s&lt;/b&gt; thar na foinsí uile.</string>
     <string name="settings_system_patch_selection_reset_source_warning">Scriosfaidh sé seo go buan na roghanna paiste sábháilte le haghaidh &lt;b&gt;%1$s&lt;/b&gt; i &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Scriosfaidh sé seo go buan na roghanna paiste sábháilte go léir do na pacáistí roghnaithe.</string>
     <string name="settings_system_export_source_data_fail">Theip ar easpórtáil sonraí foinse</string>
@@ -1254,6 +1257,16 @@ Sonraí: %2$s"</string>
     <string name="patches">Paistí</string>
     <string name="home">Baile</string>
     <string name="settings">Socruithe</string>
+    <string name="apps">Aipeanna</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">Ag paisteáil</string>
+    <string name="settings_group_manager">Bainisteoir</string>
+    <string name="settings_section_appearance_summary">Teanga, téama, dathaí agus scáileán baile</string>
+    <string name="settings_section_patch_options_summary">Cad iad na paistí mód simplí aipeanna le</string>
+    <string name="settings_section_performance">Feidhmíocht</string>
+    <string name="settings_section_original_apks">APKanna Bunaidh</string>
+    <string name="settings_section_files">Comhaid &amp; cúltacaí</string>
+    <string name="settings_search">Socruithe cuardaigh</string>
     <string name="yes">Tá</string>
     <string name="no">Níl</string>
     <string name="all">Gach</string>

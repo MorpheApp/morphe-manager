@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Vaši izvori su ažurirani</string>
     <string name="home_sources_are_loading">Izvori se učitavaju, molimo pričekajte…</string>
     <string name="home_search_apps">Pretraživanje aplikacija</string>
-    <string name="home_app_list_options_title">Sortiraj i filtriraj</string>
-    <string name="home_app_list_options_state_description">Sortirano po %1$s, filtrirano po %2$s</string>
+    <string name="list_options_title">Sortiraj i filtriraj</string>
+    <string name="list_options_state_description">Sortirano po %1$s, filtrirano po %2$s</string>
     <string name="home_app_filter_all_description">Svaka aplikacija na početnom zaslonu</string>
     <string name="home_app_filter_patched_description">Aplikacije koje ste patchali ili spremili pomoću Morphea</string>
     <string name="home_app_filter_not_patched_description">Aplikacije koje još niste patchali u Morpheu</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Izvori patcheva</string>
     <string name="sources_search">Pretraži izvore i zakrpe</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Svaki izvor</string>
+    <string name="sources_filter_enabled_description">Zakrpe za izvore uzete su s</string>
+    <string name="sources_filter_disabled_description">Izvori isključeni</string>
+    <string name="sources_filter_updates">Ažuriranja</string>
+    <string name="sources_filter_updates_description">Izvori s novijom verzijom za dobivanje</string>
+    <string name="sources_filter_issues">Potrebna pažnja</string>
+    <string name="sources_filter_issues_description">Izvori koji su blokirani, nisu se uspjeli učitati ili trebaju noviju Morphe</string>
     <string name="sources_sort_manual">Ručni redoslijed</string>
     <string name="sources_sort_manual_hint">Dugo pritisnite izvor za promjenu redoslijeda</string>
     <string name="sources_sort_last_updated">Zadnje ažurirano</string>
@@ -890,7 +898,6 @@ Patchevi nisu pogođeni: omogućite predizdanja patcheva za svaki izvor na popis
     <string name="notification_mount_replaced_title">%1$s više nije zakrpan</string>
     <string name="notification_mount_replaced_text">verzija %1$s je zamijenila zakrpanu verziju %2$s. Otvori Morphe da je vratiš</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Stručne postavke</string>
     <string name="settings_advanced_expert_mode">Napredni način</string>
     <string name="settings_advanced_expert_mode_description">Oblažuje napredna podešavanja patchanja i opcije patcha</string>
     <string name="settings_advanced_expert_mode_dialog_title">Omogućiti Napredni način?</string>
@@ -1088,7 +1095,6 @@ Detalji: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Vrati na zadano</string>
     <string name="settings_system_notifications_ringtone_picker_title">Odaberite ton</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Izvoz &amp; uvoz</string>
     <string name="settings_system_signing_key">Ključ za potpisivanje</string>
     <string name="settings_system_signing_key_description">Sprječava ili vraća ključ kojim su potpisane patchane aplikacije</string>
     <string name="settings_system_signing_key_dialog_description">Svaka aplikacija na koju Morphe primijeni zakrpu potpisana je ovim ključem. Sačuvajte kopiju: bez njega, zakrpane aplikacije mogu se ažurirati samo nakon što ih deinstalirate.</string>
@@ -1188,14 +1194,11 @@ Detalji: %2$s"</string>
     <string name="settings_system_patch_selections_title">Odabir patcheva</string>
     <string name="settings_system_patch_selections_description">Spremljeni odabiri patcheva, zadržani nakon deinstalacije</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Izbriši sve odabire?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Izbriši odabir paketa?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Želite li poništiti odabrane pakete?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Izbriši odabir izvora?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s preko %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s u %2$s</string>
     <string name="settings_system_patch_selection_source_format">Izvor #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ovo će trajno izbrisati sve spremljene odabire patcha za sve pakete i izvor</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Ovim će se trajno izbrisati svi spremljeni odabiri patcha za &lt;b&gt;%s&lt;/b&gt; u svim izvorima</string>
     <string name="settings_system_patch_selection_reset_source_warning">Ovim će se trajno izbrisati svi spremljeni odabiri patcha za &lt;b&gt;%1$s&lt;/b&gt; u &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Ovim će se trajno izbrisati svi spremljeni odabiri patcha za  u odabranim paketima</string>
     <string name="settings_system_export_source_data_fail">Neuspjeh pri izvozu podataka izvora</string>
@@ -1259,6 +1262,16 @@ Detalji: %2$s"</string>
     <string name="patches">Patchevi</string>
     <string name="home">Početna</string>
     <string name="settings">Postavke</string>
+    <string name="apps">Aplikacije</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">Patchanje</string>
+    <string name="settings_group_manager">Upravitelj</string>
+    <string name="settings_section_appearance_summary">Jezik, tema, boje i početni zaslon</string>
+    <string name="settings_section_patch_options_summary">Što jednostavni način zakrpa aplikacije s</string>
+    <string name="settings_section_performance">Performanse</string>
+    <string name="settings_section_original_apks">Originalne aplikacije</string>
+    <string name="settings_section_files">Datoteke &amp; sigurnosne kopije</string>
+    <string name="settings_search">Postavke pretraživanja</string>
     <string name="yes">Da</string>
     <string name="no">Ne</string>
     <string name="all">Svi</string>

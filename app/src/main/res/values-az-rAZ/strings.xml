@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Mənbələriniz yenilənib</string>
     <string name="home_sources_are_loading">Mənbələr yüklənilir, xahiş olunur gözləyin...</string>
     <string name="home_search_apps">Tətbiqləri axtar</string>
-    <string name="home_app_list_options_title">Sırala və filtrlə</string>
-    <string name="home_app_list_options_state_description">%1$s üzrə sıralanıb, %2$s üzrə filtrlənib</string>
+    <string name="list_options_title">Sırala və filtrlə</string>
+    <string name="list_options_state_description">%1$s üzrə sıralanıb, %2$s üzrə filtrlənib</string>
     <string name="home_app_filter_all_description">Əsas ekrandakı hər bir tətbiq</string>
     <string name="home_app_filter_patched_description">Morphe ilə yamaqladığınız və ya saxladığınız tətbiqlər</string>
     <string name="home_app_filter_not_patched_description">Morphe-də hələ yamaqlamadığınız tətbiqlər</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Yamaq mənbələri</string>
     <string name="sources_search">Mənbələri və yamaqları axtar</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Hər mənbə</string>
+    <string name="sources_filter_enabled_description">Mənbələrin yamaqları buradan alınır</string>
+    <string name="sources_filter_disabled_description">Mənbələr qapadılıb</string>
+    <string name="sources_filter_updates">Yenilənmələr</string>
+    <string name="sources_filter_updates_description">Daha yeni versiyası olan mənbələr</string>
+    <string name="sources_filter_issues">Diqqət tələb edir</string>
+    <string name="sources_filter_issues_description">Bloklanmış, yüklənməyən və ya daha yeni Morphe tələb edən mənbələr</string>
     <string name="sources_sort_manual">Əl ilə sıralama</string>
     <string name="sources_sort_manual_hint">Təkrar sıralamaq üçün mənbəyə uzun bas</string>
     <string name="sources_sort_last_updated">Axırıncı dəfə yeniləndi</string>
@@ -886,7 +894,6 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="notification_mount_replaced_title">%1$s artıq yamaqlanmayıb</string>
     <string name="notification_mount_replaced_text">v%1$s yamaqlanmış v%2$s ilə əvəzləndi. Onu bərpa etmək üçün Morphe-ni aç</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Mütəxəssis tənzimləmələri</string>
     <string name="settings_advanced_expert_mode">Mütəxəssis rejimi</string>
     <string name="settings_advanced_expert_mode_description">Qabaqcıl yamaqlama tənzimləmələrini və yamaq seçimlərini kiliddən açır</string>
     <string name="settings_advanced_expert_mode_dialog_title">Mütəxəssis rejimi aktivləşdirilsin?</string>
@@ -1082,7 +1089,6 @@ Təfərrüatlar: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Standarta qaytar</string>
     <string name="settings_system_notifications_ringtone_picker_title">Ton seç</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">İdxal &amp; ixrac</string>
     <string name="settings_system_signing_key">İmzalama açarı</string>
     <string name="settings_system_signing_key_description">Yamaqlanmış tətbiqləri imzalayan açarı nüsxələyir və ya bərpa edir</string>
     <string name="settings_system_signing_key_dialog_description">Morphe yamaqları üzrə hər bir tətbiq bu açarla imzalanır. Bir nüsxəsini saxla: onsuz, yamaqlanmış tətbiqlər yalnız silindikdən sonra yenilənə bilər</string>
@@ -1182,14 +1188,11 @@ Təfərrüatlar: %2$s"</string>
     <string name="settings_system_patch_selections_title">Yamaq seçimləri</string>
     <string name="settings_system_patch_selections_description">Saxlanılan yamaq seçimləri, quraşdırma ləğvi sonrası saxlanılır</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Bütün seçimlər sıfırlansın?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Paket seçimləri sıfırlansın?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Seçilmiş paketlər ilkin vəziyyətinə qaytarılsın?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Mənbə seçimi sıfırlansın?</string>
     <string name="settings_system_patch_selection_total_summary_format">%2$s üzrə %1$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%2$s daxilində %1$s</string>
     <string name="settings_system_patch_selection_source_format">Mənbə #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Bu, bütün paketlər və mənbələr üçün saxlanılan bütün yamaq seçimlərini daimi siləcək</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Bu, bütün mənbələr üzrə &lt;b&gt;%s&lt;/b&gt; üçün saxlanılan bütün yamaq seçimlərini daimi siləcək</string>
     <string name="settings_system_patch_selection_reset_source_warning">Bu, &lt;b&gt;%2$s&lt;/b&gt; mənbəsində &lt;b&gt;%1$s&lt;/b&gt; üçün saxlanılan yamaq seçimlərini daimi siləcək</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Bu, seçilmiş paketlər üçün saxlanılan bütün yamaq seçimlərini daimi siləcək</string>
     <string name="settings_system_export_source_data_fail">Mənbə məlumatını ixrac etmək olmadı</string>
@@ -1253,6 +1256,16 @@ Təfərrüatlar: %2$s"</string>
     <string name="patches">Yamaqlar</string>
     <string name="home">Əsas səhifə</string>
     <string name="settings">Tənzimləmələr</string>
+    <string name="apps">Tətbiqlər</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">Yamaqlanma</string>
+    <string name="settings_group_manager">İdarəedici</string>
+    <string name="settings_section_appearance_summary">Dil, kolorit, rənglər və əsas ekran</string>
+    <string name="settings_section_patch_options_summary">Sadə rejim tətbiqləri nə ilə yamaqlayır</string>
+    <string name="settings_section_performance">Məhsuldarlıq</string>
+    <string name="settings_section_original_apks">Orijinal APK-lar</string>
+    <string name="settings_section_files">Fayllar &amp; nüsxələr</string>
+    <string name="settings_search">Tənzimləmələri axtar</string>
     <string name="yes">Bəli</string>
     <string name="no">Xeyr</string>
     <string name="all">Hamısı</string>

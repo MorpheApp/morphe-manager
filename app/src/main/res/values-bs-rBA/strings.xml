@@ -28,6 +28,7 @@
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
     <!-- Pun on the saying "Out with the old, in with the new" -->
     <!-- Home Screen - Sources Management -->
+    <!-- Which sources the sources page lists, each with what it keeps -->
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
     <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
@@ -129,6 +130,7 @@
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <!-- Shared strings -->
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
     <!-- Who made a patch source, as a field label -->
     <!-- A file a patch source is added from, as a field label -->
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->

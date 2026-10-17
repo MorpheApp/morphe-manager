@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Tus fuentes están al día</string>
     <string name="home_sources_are_loading">Cargando fuentes, por favor espera…</string>
     <string name="home_search_apps">Buscar aplicaciones</string>
-    <string name="home_app_list_options_title">Ordenar y filtrar</string>
-    <string name="home_app_list_options_state_description">Ordenado por %1$s, filtrado por %2$s</string>
+    <string name="list_options_title">Ordenar y filtrar</string>
+    <string name="list_options_state_description">Ordenado por %1$s, filtrado por %2$s</string>
     <string name="home_app_filter_all_description">Todas las aplicaciones de la pantalla de inicio</string>
     <string name="home_app_filter_patched_description">Aplicaciones que has parcheado o guardado con Morphe</string>
     <string name="home_app_filter_not_patched_description">Aplicaciones que aún no has parcheado en Morphe</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Fuentes de parches</string>
     <string name="sources_search">Buscar fuentes y parches</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Cada fuente</string>
+    <string name="sources_filter_enabled_description">Los parches de fuentes se toman de</string>
+    <string name="sources_filter_disabled_description">Fuentes desactivadas</string>
+    <string name="sources_filter_updates">Actualizaciones</string>
+    <string name="sources_filter_updates_description">Fuentes con una versión más reciente para obtener</string>
+    <string name="sources_filter_issues">Requiere atención</string>
+    <string name="sources_filter_issues_description">Fuentes que están bloqueadas, fallaron al cargar o necesitan una Morphe más reciente</string>
     <string name="sources_sort_manual">Orden manual</string>
     <string name="sources_sort_manual_hint">Mantén pulsada una fuente para reordenarla</string>
     <string name="sources_sort_last_updated">Última actualización</string>
@@ -887,7 +895,6 @@ Los parches no se ven afectados: habilita los parches pre-lanzamiento para cada 
     <string name="notification_mount_replaced_title">%1$s ya no está parcheada</string>
     <string name="notification_mount_replaced_text">La v%1$s ha reemplazado a la v%2$s parcheada. Abre Morphe para restaurarla</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Ajustes avanzados</string>
     <string name="settings_advanced_expert_mode">Modo Experto</string>
     <string name="settings_advanced_expert_mode_description">Desbloquea los ajustes avanzados de parcheo y las opciones de parches</string>
     <string name="settings_advanced_expert_mode_dialog_title">¿Activar el modo Experto?</string>
@@ -1085,7 +1092,6 @@ Detalles: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Restablecer a predeterminado</string>
     <string name="settings_system_notifications_ringtone_picker_title">Elegir un tono</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Importar y exportar</string>
     <string name="settings_system_signing_key">Clave de firma</string>
     <string name="settings_system_signing_key_description">Realiza una copia de seguridad o restaura la clave que firma las aplicaciones parcheadas</string>
     <string name="settings_system_signing_key_dialog_description">Todas las aplicaciones que Morphe parchea se firman con esta clave. Guarda una copia: sin ella, las aplicaciones parcheadas solo se podrán actualizar después de desinstalarlas</string>
@@ -1185,14 +1191,11 @@ Detalles: %2$s"</string>
     <string name="settings_system_patch_selections_title">Selecciones de parches</string>
     <string name="settings_system_patch_selections_description">Guarda las selecciones de parches, conservadas después de la desinstalación</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">¿Restablecer todas las selecciones?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">¿Restablecer las selecciones de paquetes?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">¿Restablecer los paquetes seleccionados?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">¿Restablecer las selecciones de fuentes?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s a través de %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s en %2$s</string>
     <string name="settings_system_patch_selection_source_format">Fuente #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Esto eliminará permanentemente todas las selecciones de parches guardadas para todos los paquetes y fuentes</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Esto eliminará permanentemente todas las selecciones de parches guardadas para &lt;b&gt;%s&lt;/b&gt; en todas las fuentes</string>
     <string name="settings_system_patch_selection_reset_source_warning">Esto eliminará permanentemente todas las selecciones de parches guardadas para &lt;b&gt;%1$s&lt;/b&gt; en &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Esto eliminará permanentemente todas las selecciones de parches guardadas para los paquetes seleccionados</string>
     <string name="settings_system_export_source_data_fail">Error al exportar datos de fuente</string>
@@ -1256,6 +1259,16 @@ Detalles: %2$s"</string>
     <string name="patches">Parches</string>
     <string name="home">Inicio</string>
     <string name="settings">Ajustes</string>
+    <string name="apps">Aplicaciones</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">Parcheando</string>
+    <string name="settings_group_manager">Gestor</string>
+    <string name="settings_section_appearance_summary">Idioma, tema, colores y pantalla de inicio</string>
+    <string name="settings_section_patch_options_summary">Qué parchea las aplicaciones en el modo simple</string>
+    <string name="settings_section_performance">Rendimiento</string>
+    <string name="settings_section_original_apks">APK originales</string>
+    <string name="settings_section_files">Archivos y <b>copias de seguridad</b></string>
+    <string name="settings_search">Buscar ajustes</string>
     <string name="yes">Sí</string>
     <string name="no">No</string>
     <string name="all">Todo</string>
