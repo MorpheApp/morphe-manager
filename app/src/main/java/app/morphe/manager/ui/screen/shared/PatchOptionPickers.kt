@@ -76,6 +76,7 @@ fun DropdownOptionField(
     value: String,
     presets: Map<String, Any?>,
     allowCustomValue: Boolean = true,
+    thumbnailFor: ((String) -> Any?)? = null,
     onValueChange: (Any?) -> Unit
 ) {
     // Convert presets to String map for dropdown: display name -> value as string
@@ -93,6 +94,7 @@ fun DropdownOptionField(
             )
         },
         dropdownItems = dropdownItems,
-        allowCustomValue = allowCustomValue
+        allowCustomValue = allowCustomValue,
+        thumbnailFor = thumbnailFor
     )
 }

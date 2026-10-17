@@ -22,6 +22,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -35,6 +36,7 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.screen.shared.colorpicker.ColorPresetGrid
 import app.morphe.manager.ui.screen.shared.colorpicker.ColorPresetSwatch
 import app.morphe.manager.util.*
+import java.io.File
 import kotlinx.collections.immutable.ImmutableList
 import kotlin.math.roundToInt
 
@@ -212,6 +214,7 @@ internal fun PatchOptionsDialog(
     appIcon: Drawable?,
     accentColor: Color?,
     isDefaultBundle: Boolean,
+    bundleFileFor: (() -> File?)? = null,
     values: Map<String, Any?>?,
     onValueChange: (String, Any?) -> Unit,
     onReset: () -> Unit,
@@ -223,7 +226,17 @@ internal fun PatchOptionsDialog(
         if (values == null || option.key !in values) option.default else values[option.key]
     val anyChanged = options.any { !optionValueEquals(valueOf(it), it.default) }
 
+    // Pre-warmed clip players die with the dialog, never leaking decoders.
+    DisposableEffect(Unit) {
+        onDispose { PresetVideoPrewarmer.releaseAll() }
+    }
+
     val showColorPicker = remember { mutableStateOf<Pair<String, String>?>(null) }
+    // The installed bundle archive holds previews/<package>/<optionKey>/<value>. A source whose
+    // file is absent keeps every row text only.
+    val context = LocalContext.current
+    val bundleFile = remember { bundleFileFor?.invoke() }
+    val previewCache = remember(context) { context.cacheDir }
     ListDialog(
         onDismissRequest = onDismiss,
         accentColor = accentColor,
@@ -274,6 +287,11 @@ internal fun PatchOptionsDialog(
 
             options.forEach { option ->
                 val value = valueOf(option)
+                val thumbnailFor = bundleFile?.let { file ->
+                    { preset: String ->
+                        PresetPreviewResolver.resolve(file, packageName, option.key, preset, previewCache)
+                    }
+                }
                 PatchOptionEditor(
                     option = option,
                     value = value,
@@ -289,6 +307,7 @@ internal fun PatchOptionsDialog(
                     ),
                     packageName = packageName,
                     isDefaultBundle = isDefaultBundle,
+                    thumbnailFor = thumbnailFor,
                     onValueChange = { onValueChange(option.key, it) },
                     onCustomColorClick = { showColorPicker.value = option.key to it }
                 )
@@ -322,6 +341,7 @@ private fun PatchOptionEditor(
     heading: OptionHeading,
     packageName: String,
     isDefaultBundle: Boolean,
+    thumbnailFor: ((String) -> Any?)? = null,
     onValueChange: (Any?) -> Unit,
     onCustomColorClick: (String) -> Unit
 ) {
@@ -368,6 +388,7 @@ private fun PatchOptionEditor(
             presets = option.presets as Map<String, Any?>,
             packageName = packageName,
             isDefaultBundle = isDefaultBundle,
+            thumbnailFor = thumbnailFor,
             onValueChange = onValueChange
         )
 
@@ -375,6 +396,7 @@ private fun PatchOptionEditor(
             heading = heading,
             value = value?.toString() ?: "",
             presets = option.presets as Map<String, Any?>,
+            thumbnailFor = thumbnailFor,
             onValueChange = onValueChange
         )
 
@@ -454,6 +476,7 @@ private fun PatchOptionEditor(
             heading = heading,
             value = value?.toString() ?: "",
             presets = option.presets ?: emptyMap(),
+            thumbnailFor = thumbnailFor,
             onValueChange = onValueChange
         )
 
@@ -651,8 +674,20 @@ private fun PathWithPresetsOption(
     presets: Map<String, *>,
     packageName: String,
     isDefaultBundle: Boolean,
+    thumbnailFor: ((String) -> Any?)? = null,
     onValueChange: (String) -> Unit
 ) {
+    // Same head start as DropdownOption: prepare clip players while the dialog
+    // is read, so the menu opens at full speed. Main thread: MediaPlayer needs
+    // its Looper.
+    LaunchedEffect(presets, thumbnailFor) {
+        if (thumbnailFor == null) return@LaunchedEffect
+        presets.values.forEach { preset ->
+            (thumbnailFor(preset.toString()) as? File)
+                ?.takeIf { PresetPreviewResolver.isVideoPreview(it) }
+                ?.let { PresetVideoPrewarmer.prewarm(it) }
+        }
+    }
     // Folder picker
     val folderPicker = rememberFolderPickerWithPermission { uri ->
         onValueChange(uri.toFilePath())
@@ -669,7 +704,8 @@ private fun PathWithPresetsOption(
                 Text("/storage/emulated/0/folder", maxLines = 1, overflow = TextOverflow.Ellipsis)
             },
             showClearButton = true,
-            onFolderPickerClick = { folderPicker() }
+            onFolderPickerClick = { folderPicker() },
+            thumbnailFor = thumbnailFor
         )
 
         optionAssetOf(heading, isDefaultBundle)?.let { asset ->
@@ -685,10 +721,21 @@ private fun DropdownOption(
     heading: OptionHeading,
     value: String,
     presets: Map<String, Any?>,
+    thumbnailFor: ((String) -> Any?)? = null,
     onValueChange: (Any?) -> Unit
 ) {
+    // Players start preparing while the option list is still being read, so
+    // menus open at full speed. Main thread: MediaPlayer needs its Looper.
+    LaunchedEffect(presets, thumbnailFor) {
+        if (thumbnailFor == null) return@LaunchedEffect
+        presets.values.forEach { preset ->
+            (thumbnailFor(preset?.toString().orEmpty()) as? File)
+                ?.takeIf { PresetPreviewResolver.isVideoPreview(it) }
+                ?.let { PresetVideoPrewarmer.prewarm(it) }
+        }
+    }
     OptionCard(heading) {
-        DropdownOptionField(value = value, presets = presets, onValueChange = onValueChange)
+        DropdownOptionField(value = value, presets = presets, thumbnailFor = thumbnailFor, onValueChange = onValueChange)
     }
 }
 

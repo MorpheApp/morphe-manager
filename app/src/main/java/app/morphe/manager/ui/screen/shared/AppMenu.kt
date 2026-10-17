@@ -98,6 +98,7 @@ fun AppDropdownMenuItem(
     selected: Boolean = false,
     description: String? = null,
     leadingIcon: ImageVector? = null,
+    leading: (@Composable () -> Unit)? = null,
     trailing: (@Composable () -> Unit)? = null
 ) {
     val accent = LocalAccent.current ?: MaterialTheme.colorScheme.primary
@@ -127,7 +128,7 @@ fun AppDropdownMenuItem(
             .clip(rememberPressShape(interactionSource, MenuItemShape))
             .background(if (selected) accent.copy(alpha = AccentAlpha.STEP) else Color.Transparent)
             .semantics { this.selected = selected },
-        leadingIcon = leadingIcon?.let { icon -> { Icon(icon, contentDescription = null) } },
+        leadingIcon = leading ?: leadingIcon?.let { icon -> { Icon(icon, contentDescription = null) } },
         trailingIcon = trailing ?: if (selected) {
             { Icon(Icons.Outlined.Check, contentDescription = null) }
         } else null,

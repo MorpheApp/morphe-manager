@@ -25,6 +25,14 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import android.media.MediaPlayer
+import android.view.Surface
+import android.graphics.SurfaceTexture
+import android.view.TextureView
+import androidx.compose.ui.draw.clip
+import coil.compose.AsyncImage
+import app.morphe.manager.util.PresetPreviewResolver
+import java.io.File
 import app.morphe.manager.R
 
 @Composable
@@ -187,6 +195,7 @@ fun AppDialogDropdownTextField(
     onValueChange: (String) -> Unit,
     dropdownItems: Map<String, String>,
     allowCustomValue: Boolean = true,
+    thumbnailFor: ((String) -> Any?)? = null,
     label: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
@@ -325,9 +334,140 @@ fun AppDialogDropdownTextField(
                         expanded = false
                         // A picked preset ends any typing, so the field shows its name again
                         focusManager.clearFocus()
-                    }
+                    },
+                    leading = thumbnailFor?.invoke(itemValue)?.let { model -> { PresetThumbnail(model) } }
                 )
             }
         }
+    }
+}
+
+/**
+ * Optional preset thumbnail beside a dropdown entry. The model is anything Coil
+ * renders (file, uri, drawable resource id). Video files play muted loops.
+ * Null means the row stays text only, exactly as it does without this slot.
+ */
+@Composable
+internal fun PresetThumbnail(model: Any?) {
+    if (model is File && PresetPreviewResolver.isVideoPreview(model)) {
+        PresetVideoThumbnail(model)
+        return
+    }
+    AsyncImage(
+        model = model,
+        contentDescription = null,
+        modifier = Modifier
+            .size(40.dp)
+            .clip(RoundedCornerShape(10.dp))
+    )
+}
+
+/**
+ * Muted players prepared ahead of the menu opening, keyed by file path, so
+ * rows start instantly instead of paying decode init on open. Must be touched
+ * from the main thread: MediaPlayer delivers its prepared callback there.
+ * Released when the options dialog closes.
+ */
+internal object PresetVideoPrewarmer {
+    private data class Entry(var player: MediaPlayer?, var prepared: Boolean)
+
+    private val lock = Any()
+    private val players = mutableMapOf<String, Entry>()
+    var preparedVersion by mutableStateOf(0)
+        private set
+
+    fun prewarm(file: File) {
+        val key = file.absolutePath
+        synchronized(lock) {
+            if (players.containsKey(key)) return
+            val entry = Entry(null, false)
+            players[key] = entry
+            try {
+                val player = MediaPlayer()
+                entry.player = player
+                player.setDataSource(key)
+                player.setVolume(0f, 0f)
+                player.isLooping = true
+                player.setOnPreparedListener {
+                    synchronized(lock) { entry.prepared = true }
+                    preparedVersion++
+                }
+                player.prepareAsync()
+            } catch (e: Exception) {
+                players.remove(key)
+                try {
+                    entry.player?.release()
+                } catch (ignored: Exception) {
+                }
+            }
+        }
+    }
+
+    fun prepared(file: File): MediaPlayer? = synchronized(lock) {
+        players[file.absolutePath]?.takeIf { it.prepared }?.player
+    }
+
+    fun releaseAll() = synchronized(lock) {
+        players.values.forEach {
+            try {
+                it.player?.release()
+            } catch (ignored: Exception) {
+            }
+        }
+        players.clear()
+    }
+}
+
+/** Muted looping preview clip on a pre-warmed player, composited in window
+ * so it animates with the menu instead of punching through it. Shows nothing
+ * until its player is prepared. Failures stay silent and render nothing. */
+@Composable
+private fun PresetVideoThumbnail(file: File) {
+    PresetVideoPrewarmer.preparedVersion.let {
+        val player = PresetVideoPrewarmer.prepared(file) ?: run {
+            Spacer(
+                modifier = Modifier
+                    .size(40.dp)
+                    .clip(RoundedCornerShape(10.dp))
+            )
+            return
+        }
+        androidx.compose.ui.viewinterop.AndroidView(
+            factory = { ctx ->
+                val tv = TextureView(ctx)
+                tv.surfaceTextureListener = object : TextureView.SurfaceTextureListener {
+                    override fun onSurfaceTextureAvailable(
+                        surface: SurfaceTexture,
+                        width: Int,
+                        height: Int,
+                    ) {
+                        try {
+                            player.setSurface(Surface(surface))
+                            if (!player.isPlaying) player.start()
+                        } catch (e: Exception) {
+                        }
+                    }
+                    override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean {
+                        try {
+                            if (player.isPlaying) player.pause()
+                            player.setSurface(null)
+                        } catch (e: Exception) {
+                        }
+                        return true
+                    }
+                    override fun onSurfaceTextureSizeChanged(
+                        surface: SurfaceTexture,
+                        width: Int,
+                        height: Int,
+                    ) = Unit
+                    override fun onSurfaceTextureUpdated(surface: SurfaceTexture) = Unit
+                }
+                tv
+            },
+            modifier = Modifier
+                .size(40.dp)
+                .clip(RoundedCornerShape(10.dp)),
+            onRelease = { tv -> tv.surfaceTextureListener = null }
+        )
     }
 }
