@@ -199,7 +199,7 @@ fun DialogHostScope.MissingPatchesDialog(
  *    ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION; [onRetryAfterPermission]
  *    re-runs validation when the user returns.
  *
- *  - Android 10 and below (API 29-): READ_EXTERNAL_STORAGE - standard runtime
+ *  - Android 10 and below (API 29-): WRITE_EXTERNAL_STORAGE - standard runtime
  *    permission, requested via the system "Allow / Deny" prompt directly from
  *    within the app. If granted, [onRetryAfterPermission] re-runs validation
  *    immediately. If denied, a warning badge is shown and only Cancel is available.
@@ -225,10 +225,10 @@ fun DialogHostScope.UnusableOptionPathsDialog(
         it.reason == PathValidationResult.Reason.NotReadable
     }
 
-    // Only used on Android 10 and below where READ_EXTERNAL_STORAGE is a
+    // Only used on Android 10 and below where WRITE_EXTERNAL_STORAGE is a
     // standard runtime permission that can be requested inline
     val permissionDenied = remember { mutableStateOf(false) }
-    val readStorageLauncher = rememberLauncherForActivityResult(
+    val writeStorageLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { granted ->
         if (granted) {
@@ -282,12 +282,12 @@ fun DialogHostScope.UnusableOptionPathsDialog(
                     icon = MaterialSymbols.Rounded.Settings
                 )
 
-                // Android 10 and below request READ_EXTERNAL_STORAGE inline
+                // Android 10 and below request WRITE_EXTERNAL_STORAGE inline
                 else -> DialogAction(
                     text = stringResource(R.string.patcher_storage_permission_grant),
                     onClick = {
                         permissionDenied.value = false
-                        readStorageLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+                        writeStorageLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     },
                     icon = MaterialSymbols.Rounded.Lock
                 )
@@ -316,7 +316,7 @@ fun DialogHostScope.UnusableOptionPathsDialog(
             verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)
         ) {
             // Shown on Android 10 and below after the user taps "Deny" on the
-            // READ_EXTERNAL_STORAGE prompt. Explains they must either grant the
+            // WRITE_EXTERNAL_STORAGE prompt. Explains they must either grant the
             // permission or move the files to the private app directory
             if (permissionDenied.value) {
                 Notice(
