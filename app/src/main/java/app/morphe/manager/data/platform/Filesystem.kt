@@ -84,7 +84,8 @@ class Filesystem(
 
     private fun usesManagePermission() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
 
-    private val storagePermissionName =
+    /** Storage permission the app asks for on this Android version, write access below Android 11. */
+    val storagePermissionName =
         if (usesManagePermission()) Manifest.permission.MANAGE_EXTERNAL_STORAGE else Manifest.permission.WRITE_EXTERNAL_STORAGE
 
     fun permissionContract(): Pair<ActivityResultContract<String, Boolean>, String> {

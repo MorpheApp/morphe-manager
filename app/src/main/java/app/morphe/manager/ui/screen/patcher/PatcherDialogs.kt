@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.patcher
 
-import android.Manifest
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -36,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
+import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.ui.model.RenameWarning
 import app.morphe.manager.ui.screen.home.ManagerChangelogDialog
 import app.morphe.manager.ui.screen.shared.*
@@ -46,6 +46,7 @@ import app.morphe.manager.util.requestIgnoreBatteryOptimizations
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
 import com.composables.icons.materialsymbols.roundedfilled.*
+import org.koin.compose.koinInject
 
 /**
  * Ceiling for the label column, past which a translation that runs long would leave its value
@@ -217,6 +218,7 @@ fun DialogHostScope.UnusableOptionPathsDialog(
     onClearPaths: () -> Unit = {}
 ) {
     val context = LocalContext.current
+    val fs: Filesystem = koinInject()
     val isApi30Plus = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
 
     // Storage access is worth asking for only while something is actually being kept from the
@@ -287,7 +289,7 @@ fun DialogHostScope.UnusableOptionPathsDialog(
                     text = stringResource(R.string.patcher_storage_permission_grant),
                     onClick = {
                         permissionDenied.value = false
-                        writeStorageLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        writeStorageLauncher.launch(fs.storagePermissionName)
                     },
                     icon = MaterialSymbols.Rounded.Lock
                 )
