@@ -8,6 +8,15 @@
         <item quantity="many">%s تعديلًا</item>
         <item quantity="other">%s تعديلًا</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
+    <plurals name="library_count">
+        <item quantity="zero">%s مكتبة</item>
+        <item quantity="one">%s مكتبة</item>
+        <item quantity="two">%s مكتبتان</item>
+        <item quantity="few">%s مكتبات</item>
+        <item quantity="many">%s مكتبة</item>
+        <item quantity="other">%s مكتبة</item>
+    </plurals>
     <plurals name="option_count">
         <item quantity="zero">%s خيارات التعديل</item>
         <item quantity="one">%s خيارات التعديل</item>

@@ -111,6 +111,7 @@
     <!-- Pun on the saying "Out with the old, in with the new" -->
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Крыніцы патчаў</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_sort_manual">Ручны парадак</string>
     <string name="sources_sort_manual_hint">Націсніце і ўтрымлівайце крыніцу, каб перарадаваць яе.</string>
     <string name="sources_sort_last_updated">Апошняе абнаўленне</string>
@@ -294,6 +295,7 @@
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <!-- Shared strings -->
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
     <!-- Who made a patch source, as a field label -->
     <!-- A file a patch source is added from, as a field label -->
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->

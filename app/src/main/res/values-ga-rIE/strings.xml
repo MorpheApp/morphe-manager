@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Tá do foinsí suas chun dáta</string>
     <string name="home_sources_are_loading">Tá na foinsí ag lódáil, fan le do thoil…</string>
     <string name="home_search_apps">Cuardaigh aipeanna</string>
-    <string name="home_app_list_options_title">Sórtáil agus scagaire</string>
-    <string name="home_app_list_options_state_description">Sórtáilte de réir %1$s, scagtha de réir %2$s</string>
+    <string name="list_options_title">Sórtáil agus scagaire</string>
+    <string name="list_options_state_description">Sórtáilte de réir %1$s, scagtha de réir %2$s</string>
     <string name="home_app_filter_all_description">Gach aip ar an scáileán baile</string>
     <string name="home_app_filter_patched_description">Aipeanna atá paisteáilte nó sábháilte agat le Morphe</string>
     <string name="home_app_filter_not_patched_description">Aipeanna nár phaisteáil tú i Morphe go fóill</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Foinsí paiste</string>
     <string name="sources_search">Cuardaigh foinsí agus paistí</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Gach foinse</string>
+    <string name="sources_filter_enabled_description">Foinsí as a dtógtar paistí</string>
+    <string name="sources_filter_disabled_description">Foinsí múchta</string>
+    <string name="sources_filter_updates">Nuashonruithe</string>
+    <string name="sources_filter_updates_description">Foinsí le leagan níos nuaí le fáil</string>
+    <string name="sources_filter_issues">Teastaíonn aird</string>
+    <string name="sources_filter_issues_description">Foinsí atá blocáilte, nár éirigh leo lódáil nó a bhfuil Morphe níos nuaí ag teastáil uathu</string>
     <string name="sources_sort_manual">Ordú láimhe</string>
     <string name="sources_sort_manual_hint">Brúigh suas le foinse le hathordú</string>
     <string name="sources_sort_last_updated">Nuashonraithe is déanaí</string>
@@ -167,7 +175,6 @@
     <string name="sources_apps_description">Tagann aipanna ticthe ón bhfoinse seo. Tapáil aip chun í a thabhairt isteach nó amach. Fágann aip an scáileán baile nuair nach bhfuil aon foinse á thabhairt, mura bhfuil sé paistithe agat</string>
     <string name="sources_apps_brought">Arna thabhairt ag an bhfoinse seo</string>
     <string name="sources_apps_left_out">Fágtha ar lár ón bhfoinse seo</string>
-    <string name="sources_apps_bring_back">Tabhair ar ais</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
     <string name="sources_apps_stays_patched">Coimeádta mar phacáilte</string>
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
@@ -243,6 +250,8 @@
     <string name="home_apk_availability_yes">Sea, cabhraigh liom APK a aimsiú</string>
     <string name="home_apk_availability_no">Níl, tá APK agam cheana féin</string>
     <string name="home_apk_helper_download">Bain úsáid as aip chúnta</string>
+    <string name="home_apk_helper_untrusted">Tá aip chabhrach suiteáilte ach gan muinín fós, mar sin ní thairgtear í anseo</string>
+    <string name="home_apk_helper_untrusted_action">Cuiditheoirí athbhreithnithe</string>
     <string name="home_apk_helper_title">Íoslódáil le aip chúnta</string>
     <string name="home_apk_helper_description">Iarrfaidh Morphe ar an aip chúnta thíos an APK bunaidh a íoslódáil agus an comhad a thabhairt ar ais.</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -539,7 +548,7 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="root_mount_module_unmount_warning">Má tá Díshuiteáil modúil cumasaithe de réir réamhshocraithe ag KernelSU, oscail KerneSU &gt; Superuser &gt; an aip a shuiteáil tú &gt; Profile &gt; Custom agus díchumasaigh Díshuiteáil modúil. Seachas sin, ní bheidh éifeacht leis an APK paiste suite, fiú má thaispeánann Morphe é mar shuiteáilte.</string>
     <string name="root_pre_patch_installer_standard_title">Mód suiteála caighdeánach</string>
     <string name="root_pre_patch_installer_standard_description">Paistí mar APK gnáth le tacaíocht GmsCore. Úsáidtear do shocrú suiteálaí tar éis na paistí.</string>
-    <string name="root_pre_patch_installer_hint">Tá an modh paiste seo ar leithligh ó Socruithe &gt; Córas &gt; Suiteálaí agus ní féidir é a athrú tar éis paisteála.</string>
+    <string name="root_pre_patch_installer_hint">Iarradh fót ag Settings &gt; Patching &gt; Installation &gt; Installer selection prompt. Ní féidir an mód paiste a athrú tar éis paiste</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Earráid cóipeáilte chuig gearrthaisce</string>
     <string name="patcher_error_log">Log earráide</string>
@@ -730,7 +739,6 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="mini_game_pairs_picker_subtitle">Smeach cártaí, aimsigh an cluiche</string>
     <!-- Settings -->
     <string name="appearance">Dealramh</string>
-    <string name="advanced">Ardleibhéil</string>
     <string name="system">Córas</string>
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background">Beochan cúlra</string>
@@ -758,6 +766,8 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
     <string name="settings_appearance_seasonal_background_notice">Tá cúlra %1$s ar siúl go dtí %2$s fad is atá téamaí séasúracha i bhfeidhm</string>
     <!-- Settings - Appearance Tab - Theme -->
+    <string name="settings_appearance_display">Taispeántas</string>
+    <string name="settings_appearance_effects">Éifeachtaí</string>
     <string name="settings_appearance_theme">Téama</string>
     <string name="settings_appearance_theme_mode">Mód téama</string>
     <string name="settings_appearance_system">Córas</string>
@@ -766,7 +776,6 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_monochrome">Monacrómach</string>
     <string name="settings_appearance_color_style">Stíl datha</string>
-    <string name="settings_appearance_colors">Dathanna</string>
     <string name="settings_appearance_accent_color">Dath béime</string>
     <string name="settings_appearance_pure_black">Dubh Glan</string>
     <string name="settings_appearance_pure_black_description">Úsáideann sé cúlraí fíor-dhubha</string>
@@ -774,8 +783,9 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="settings_appearance_color_accents_description">Úsáideann sé dath gach aip agus na foinse in ionad an datha béime</string>
     <string name="settings_appearance_outlines">Imlínte</string>
     <string name="settings_appearance_outlines_description">Tarraingíonn sé imeall tanaí timpeall ar chártaí, ar phainéil agus ar chnaipí</string>
+    <string name="settings_appearance_blur">Doiléire</string>
+    <string name="settings_appearance_blur_description">Déanann sé doiléir an méid a scrollaíonn faoi cheanntásca, barraí agus painéil</string>
     <!-- Settings - Appearance Tab - Language Selector -->
-    <string name="settings_appearance_language_and_display">Teanga &amp; taispeáint</string>
     <string name="settings_appearance_app_language">Teanga an aip</string>
     <string name="settings_appearance_app_language_current">Teanga reatha</string>
     <string name="settings_appearance_translations_info_title">D’fhéadfadh aistriúcháin do roinnt teangacha a bheith ar iarraidh nó neamhiomlán</string>
@@ -793,8 +803,6 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Taispeánann teachtaireacht ghabhála</string>
     <string name="settings_appearance_repatch_notice">Fógra athphaisteála</string>
     <string name="settings_appearance_repatch_notice_description">Taispeánann sé bratach nuair is féidir aipeanna paisteáilte a phaisteáil arís</string>
-    <string name="settings_appearance_sort_button">Cnaipe sórtála agus scagaire</string>
-    <string name="settings_appearance_sort_button_description">Taispeánann sé cnaipe chun aipeanna a shórtáil agus a scagadh</string>
     <string name="settings_appearance_app_card_colors">Dathanna cártaí aipeanna</string>
     <string name="settings_appearance_app_card_colors_default">Réamhshocrú</string>
     <string name="settings_appearance_app_card_colors_default_description">Tabhair dath a phacáiste féin do gach aip</string>
@@ -887,7 +895,6 @@ Níl tionchar ar phaistí: cumasaigh paistí réamh-eisiúna do gach foinse sa l
     <string name="notification_mount_replaced_title">Níl %1$s paisteáilte a thuilleadh</string>
     <string name="notification_mount_replaced_text">Tháinig v%1$s in ionad an v%2$s paisteáilte. Oscail Morphe chun é a chur ar ais</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Socruithe saineolaithe</string>
     <string name="settings_advanced_expert_mode">Mód saineolaithe</string>
     <string name="settings_advanced_expert_mode_description">Osclaíonn sé socruithe paisteála casta agus roghanna paisteála</string>
     <string name="settings_advanced_expert_mode_dialog_title">Cumasaigh mód saineolaithe?</string>
@@ -910,7 +917,6 @@ Níl tionchar ar phaistí: cumasaigh paistí réamh-eisiúna do gach foinse sa l
     <string name="settings_advanced_github_pat_export_warning">Ná roinn do PAT. Má chuireann tú san áireamh é in easpórtáil socruithe, coinnigh an comhad sin príobháideach mar go bhfuil an comhartha ann.</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Roghanna paiste</string>
-    <string name="settings_advanced_patch_options_youtube_description">Roghanna brandála agus ceanntásca</string>
     <string name="settings_advanced_patch_options_restart_message">Éilíonn athrú roghanna paiste athphaisteáil ar an aip le go dtiocfaidh sé i bhfeidhm</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">I mód Saineolaí beidh roghanna paiste ar fáil le linn an phróisis paisteála</string>
     <string name="settings_advanced_patch_options_loading">Ag lódáil roghanna paiste…</string>
@@ -978,7 +984,6 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
-    <string name="settings_advanced_patch_options_hide_shorts_features">Folaigh gnéithe Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Folaigh aicearra aip Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Baintear Shorts as roghchlár brúigh fhada an lainseálaí</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Folaigh giuirléid Shorts</string>
@@ -986,6 +991,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Suiteálaí</string>
     <string name="installer_settings_title">Suiteálaí réamhshocraithe</string>
+    <string name="settings_installation">Suiteáil</string>
     <string name="installer_title">Roghnaigh suiteálaí</string>
     <string name="installer_internal_description">Úsáideann sé suiteálaí an phacáiste Android</string>
     <string name="installer_play_store_description">Úsáideann sé suiteálaí an chórais agus socraíonn sé Google Play Store mar fhoinse suiteála</string>
@@ -1016,7 +1022,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="installer_unavailable_title">Níl %s ar fáil</string>
     <string name="installer_unavailable_message">Níl an suiteálaí is fearr leat (%s) ar fáil faoi láthair. Is féidir leat an fhadhb a réiteach agus iarracht eile a dhéanamh, nó an suiteálaí caighdeánach a úsáid ina ionad</string>
     <string name="installer_unavailable_shizuku_hint">Cinntigh go bhfuil Shizuku ag rith agus go bhfuil cead tugtha don aip seo</string>
-    <string name="installer_use_standard">Úsáid caighdeánach</string>
+    <string name="installer_choose_another">Roghnaigh suiteálaí eile</string>
     <string name="installer_play_store_warning_title">Suiteáil mar Play Store?</string>
     <string name="installer_play_store_warning_message">Taifeadfar an aip phaisteáilte mar a bheith suiteáilte ó Google Play Store. Is féidir leis seo cabhrú le seirbhísí cosúil le Android Auto é a aithint mar aip Play Store, ach ní ráthaítear é sin do gach aip nó gléas. Féadfaidh an t-iompar a bheith éagsúil ag brath ar leagan Android, ROM, branda gléis agus seiceálacha sonracha don aip.</string>
     <string name="installer_play_store_warning_risk">Féadfaidh Play Store nuashonruithe a thairiscint don aip bhreacach. Má shuiteáiltear an nuashonrú sin, déanfar an APK paiste a fhorscríobh leis an mbunleagan agus bainfidh sé na paistí. Má iarrtar ort nuashonrú a dhéanamh, tapáil an roghchlár trí phonc ar leathanach Play Store na haipe agus roghnaigh \"Múch nuashonruithe\"</string>
@@ -1024,11 +1030,13 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="installer_play_store_mode">Suiteáil mar Play Store</string>
     <string name="installer_play_store_mode_description">Marcáileann sé Google Play Store mar an fhoinse suiteála</string>
     <string name="settings_prompt_installer_on_install">Leid roghnúcháin suiteálaí</string>
-    <string name="settings_prompt_installer_on_install_description">Iarrtar cén suiteálaí a úsáid do gach suiteáil</string>
+    <string name="settings_prompt_installer_on_install_description">Iarra conas gach app a shuiteáil: le root roimh phatching, mar eile tar éis dó</string>
     <string name="settings_auto_install_with_shizuku">Suiteáil uathoibríoch tar éis paisteála</string>
-    <string name="settings_auto_install_with_shizuku_description">Suiteáil an APK paiste a luaithe a chríochnaíonn an paiste</string>
+    <string name="settings_auto_install_with_shizuku_description">Suiteálann nó gléasann sé an APK paisteáilte a luaithe a bhíonn an paisteáil críochnaithe</string>
     <string name="settings_auto_uninstall_with_shizuku">Díshuiteáil uathoibríoch i gcás coimhlinte</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Díshuiteálann sé an aip atá ann cheana má bhíonn coinbhleacht sínithe ann. D’fhéadfadh sé seo sonraí na haipe a scriosadh.</string>
+    <string name="settings_ignore_install_target_rules">Neamhaird a dhéanamh ar riachtanais sprioc shuiteála</string>
+    <string name="settings_ignore_install_target_rules_description">Ligeann sé seo do na ceanglais a bhaineann leis an sprioc-shuiteáil a bheith díchumasaithe, agus do na ceanglais a chuireann an sprioc-shuiteáil as an áireamh a bheith cumasaithe. D’fhéadfadh sé nach n-oibreoidh an aip a bhfuil paiste curtha uirthi.</string>
     <string name="settings_auto_uninstall_warning_title">Cumasaigh díshuiteáil uathoibríoch?</string>
     <string name="settings_auto_uninstall_warning_message">Má thuairiscíonn Android coimhlint shínithe le linn uath-shuiteáil Shizuku, díshuiteálfaidh Morphe an aip atá ann cheana sula suiteálfar an APK paiste.</string>
     <string name="settings_auto_uninstall_warning_risk">Féadann sé seo sonraí aipeanna a bhaint. Mura n-éiríonn leis an APK paisteáilte a shuiteáil tar éis é a dhíshuiteáil, seans go bhfuil an aip roimhe seo imithe cheana féin.</string>
@@ -1057,23 +1065,19 @@ Sonraí: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Uasmhéadú ceallraí</string>
     <string name="settings_system_battery_optimization_description">Coinníonn an paisteálaí ag rith nuair a bhíonn an aip íoslaghdaithe</string>
-    <string name="settings_system_background">Cúlra</string>
     <string name="settings_system_process_runtime">Am rith an phróisis</string>
     <string name="settings_system_process_runtime_description">Ritheann sé paisteáil i bpróiseas ar leithligh le haghaidh cobhsaíochta níos fearr.</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Luasghéaraíonn teorainneacha níos airde paistí ar ghléasanna cumasacha</string>
     <string name="settings_system_process_runtime_enable">Cumasaigh am rith an phróisis</string>
     <string name="settings_system_memory_limit_subtitle">Cuimhne ar fáil le haghaidh paisteála</string>
     <string name="settings_system_process_runtime_heap_limit_ignored">Thug an gléas seo neamhaird ar an teorainn cuimhne le linn an rith dheireanaigh, mar sin d’fhéadfadh sé go mbeadh ar an bpróiseas paisteála filleadh ar rith laistigh de Morphe.</string>
     <string name="settings_system_memory_limit_warning">D’fhéadfadh teorainn íseal chuimhne teipeanna a chur faoi deara agus aipeanna níos mó á bpaisteáil</string>
     <string name="settings_system_memory_limit_high_warning">Is féidir le teorainn ard chuimhne paistí a dhéanamh i bhfad níos moille ar roinnt gléasanna. Ní ardaítear í ach amháin má leanann paistí ag teip ag teorainneacha níos ísle.</string>
-    <string name="settings_system_process_runtime_enabled_description">Teorainn %s MB</string>
-    <string name="settings_system_process_runtime_disabled_description">Tapáil chun cumrú</string>
     <string name="settings_system_process_runtime_description_not_available">Éilíonn an ghné seo Android 11 nó níos déanaí</string>
     <string name="settings_system_patcher_completion_sound">Fuaim críochnaithe</string>
     <string name="settings_system_patcher_completion_sound_description">Seinneann ton ar leith le haghaidh rath nó teip nuair a chríochnaíonn an paisteáil</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">Fógraí</string>
-    <string name="settings_system_notifications_description">Cumraíonn sé foláirimh cúlra agus fuaimníthe críochnaithe</string>
+    <string name="settings_system_notifications_description">An chaoi a gcoinníonn Morphe ar an eolas thú</string>
     <string name="settings_system_notifications_success_sound">Fuaim ratha</string>
     <string name="settings_system_notifications_error_sound">Fuaim teipe</string>
     <string name="settings_system_notifications_sound_default">Réamhshocrú</string>
@@ -1083,7 +1087,6 @@ Sonraí: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Athshocraigh go réamhshocraithe</string>
     <string name="settings_system_notifications_ringtone_picker_title">Roghnaigh ton</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Iompórtáil &amp; easpórtáil</string>
     <string name="settings_system_signing_key">Eochair shíniúcháin</string>
     <string name="settings_system_signing_key_description">Cúltacaíonn nó athchuir sé an eochair a shíníonn aipeanna paisteáilte</string>
     <string name="settings_system_signing_key_dialog_description">Déantar gach aip a phatchálann Morphe a shíniú leis an eochair seo. Coinnigh cóip di: gan í, ní féidir aipeanna patcháilte a nuashonrú ach amháin tar éis iad a dhíshuiteáil</string>
@@ -1130,7 +1133,6 @@ Sonraí: %2$s"</string>
     <string name="settings_system_export_debug_logs_export_failed">Theip ar logaí a onnmhairiú</string>
     <string name="settings_system_export_debug_logs_export_success">Logaí onnmhairithe</string>
     <!-- Settings - System Tab - Files & Storage Section -->
-    <string name="settings_system_files">Comhaid &amp; stóras</string>
     <string name="settings_system_apks_size">Méid iomlán: %s</string>
     <string name="settings_system_apks_delete_all_confirm">Scriosfaidh sé seo na comhaid APK sábháilte a thaispeántar anseo go buan</string>
     <string name="settings_system_apks_delete_selected_title">Scrios na APKanna roghnaithe?</string>
@@ -1142,6 +1144,9 @@ Sonraí: %2$s"</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">Bainistíocht stórála</string>
     <string name="settings_system_storage_management_description">Taispeánann sé úsáid diosca agus glanann sé comhaid taisce</string>
+    <string name="settings_system_storage_used_free">Arna úsáid ag Morphe / saor in aisce ar an ngléas seo</string>
+    <string name="settings_system_storage_saved_apks">APKanna sábháilte</string>
+    <string name="settings_system_storage_caches">Taiscanna</string>
     <string name="settings_system_storage_keystore_title">Stór eochrach sínithe</string>
     <string name="settings_system_storage_app_data_title">Sonraí aipeanna</string>
     <string name="settings_system_storage_patch_bundles_title">Pacáistí paiste</string>
@@ -1166,14 +1171,12 @@ Sonraí: %2$s"</string>
     <string name="settings_system_save_patched_apks_description">Sábháil cóip den APK paisteáilte le haghaidh easpórtála níos déanaí nó le haghaidh athshuiteála ón mbainisteoir</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APKanna paisteáilte</string>
-    <string name="settings_system_patched_apks_description">Bainistíonn comhaid iarratais phaisteáilte sábháilte</string>
     <string name="settings_system_patched_apks_empty">Níl aon APKanna paisteáilte sábháilte fós</string>
     <string name="settings_system_patched_apks_delete_title">APK paisteáilte a scriosadh?</string>
     <string name="settings_system_patched_apks_deleted">Scriosadh an APK paisteáilte go rathúil</string>
     <string name="settings_system_patched_apks_delete_all_title">Scrios gach APK paisteáilte?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">APKanna Bunaidh</string>
-    <string name="settings_system_original_apks_description">Sábháilte le haghaidh athphaisteála. Coinnítear leagan amháin in aghaidh an aip.</string>
     <string name="settings_system_original_apks_empty">Níl aon APKanna bunaidh stóráilte</string>
     <string name="settings_system_original_apks_deleted">Scriosadh an APK bunaidh go rathúil</string>
     <string name="settings_system_original_apks_delete_title">Scrios an APK bunaidh?</string>
@@ -1183,14 +1186,11 @@ Sonraí: %2$s"</string>
     <string name="settings_system_patch_selections_title">Roghanna paiste</string>
     <string name="settings_system_patch_selections_description">Sábháil roghanna paisteála, coimeádta tar éis díchómhdaigh</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Athshocraigh gach rogha?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Athshocraigh roghanna pacáiste?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Athshocraigh na pacáistí roghnaithe?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Athshocraigh an rogha foinse?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s trasna %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s i %2$s</string>
     <string name="settings_system_patch_selection_source_format">Foinse #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Scriosfaidh sé seo go buan na roghanna paiste sábháilte go léir do na pacáistí agus na foinsí go léir.</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Scriosfaidh sé seo go buan gach rogha paiste sábháilte do &lt;b&gt;%s&lt;/b&gt; thar na foinsí uile.</string>
     <string name="settings_system_patch_selection_reset_source_warning">Scriosfaidh sé seo go buan na roghanna paiste sábháilte le haghaidh &lt;b&gt;%1$s&lt;/b&gt; i &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Scriosfaidh sé seo go buan na roghanna paiste sábháilte go léir do na pacáistí roghnaithe.</string>
     <string name="settings_system_export_source_data_fail">Theip ar easpórtáil sonraí foinse</string>
@@ -1212,6 +1212,8 @@ Sonraí: %2$s"</string>
     <string name="settings_system_apk_download_helper">Cúntóir íoslódála APK</string>
     <string name="settings_system_apk_download_helper_trusted_count">Iontaofa: %1$d as %2$d</string>
     <string name="settings_system_apk_download_helper_dialog_description">Is féidir le haipeanna cabhracha APKanna bunaidh a íoslódáil duit. Ní thairgtear sna treoracha íoslódála ach na cinn a bhfuil muinín agat astu anseo.</string>
+    <string name="settings_system_apk_download_helper_trust_title">Muinín a bheith agat as an gcúntóir seo?</string>
+    <string name="settings_system_apk_download_helper_trust">Muinín</string>
     <string name="settings_system_apk_download_helper_warning">Tagann an APK ón aip chabhrach, mar sin ná cuir muinín ach in aipeanna a bhfuil aithne agat orthu. Seiceálann Morphe fós an pacáiste, an leagan agus an síniú de gach comhad roimh phaisteáil.</string>
     <string name="settings_system_apk_download_helper_installed_by">Suiteáilte ag %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Suiteálaí anaithnid</string>
@@ -1233,9 +1235,13 @@ Sonraí: %2$s"</string>
     <string name="settings_system_about">Maidir</string>
     <string name="settings_system_manager_description">Tionscadal foinse oscailte le haghaidh paisteáil nua-aimseartha, sruthlínithe ar aipeanna coitianta Android, á thiomáint ag aiseolas agus ranníocaíochtaí ón bpobal.</string>
     <string name="credits">Creidmheasanna</string>
+    <string name="credits_description">Na daoine taobh thiar de Morphe</string>
+    <string name="settings_about_section_project">Tionscadal</string>
+    <string name="settings_about_section_help">Cabhair</string>
     <string name="credits_current_development">Forbairt reatha</string>
     <string name="credits_prior_development">Forbairt roimhe seo</string>
     <string name="opensource_licenses">Ceadúnais foinse oscailte</string>
+    <string name="opensource_licenses_description">Na leabharlanna ar a bhfuil Morphe tógtha</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Rogha</string>
     <string name="easter_egg_pill_message">Glac an piolla gorm agus fanann na fógraí díreach mar a bhfuil siad. Glac an ceann dearg agus féach cé chomh domhain is a théann an cód beart.</string>
@@ -1254,6 +1260,20 @@ Sonraí: %2$s"</string>
     <string name="patches">Paistí</string>
     <string name="home">Baile</string>
     <string name="settings">Socruithe</string>
+    <string name="apps">Aipeanna</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patcher">Paisteálaí</string>
+    <string name="settings_section_updates">Nuashonruithe</string>
+    <string name="settings_section_patching">Ag paisteáil</string>
+    <string name="settings_section_appearance_summary">Cén chuma atá ar Morphe</string>
+    <string name="settings_section_patch_options_summary">Cad iad na paistí mód simplí aipeanna le</string>
+    <string name="settings_section_general">Ginearálta</string>
+    <string name="settings_section_patcher_summary">An chaoi a gcuirtear paistí i bhfeidhm ar aipeanna ar an ngléas seo</string>
+    <string name="settings_section_help_info">Cabhair &amp; faisnéis</string>
+    <string name="settings_section_about_summary">Tuilleadh faoi Morphe agus faoi chabhair a fháil</string>
+    <string name="settings_section_local_files">Comhaid</string>
+    <string name="settings_section_backup">Cúltaca</string>
+    <string name="settings_search">Socruithe cuardaigh</string>
     <string name="yes">Tá</string>
     <string name="no">Níl</string>
     <string name="all">Gach</string>
@@ -1355,7 +1375,6 @@ Sonraí: %2$s"</string>
     <string name="hide">Folaigh</string>
     <string name="hidden">I bhfolach</string>
     <string name="unhide">Nochtadh</string>
-    <string name="unhide_done">Taispeánta</string>
     <string name="ignore">Déan neamhaird</string>
     <string name="stop_ignoring">Stop ag déanamh neamhairde</string>
     <string name="logs">Logaí</string>
@@ -1428,13 +1447,9 @@ Ar mhaith leat leanúint ar aghaidh fós?"</string>
     <string name="onboarding_sources_version_desc">Beartaigh an leagan chun an loga athraithe iomlán don fhoinse seo a fheiceáil</string>
     <string name="onboarding_sources_prerelease_desc">Cumasaigh seo chun leaganacha paiste réamh-eisiúna a fháil ón bhfoinse seo</string>
     <string name="onboarding_appearance_tab_desc">Saincheap cuma an aip: téama, dath béime, agus cúlra</string>
-    <string name="onboarding_appearance_theme_desc">Roghnaigh idir téama geal, dorcha, nó córais. Is féidir leat dath béime saincheaptha a roghnú nó Dath Dinimiciúil a chumasú freisin.</string>
     <string name="onboarding_expert_mode_desc">Cumasaigh Mód Saineolaí chun roghnú paiste, roghanna saincheaptha agus gnéithe ardleibhéil eile a dhíghlasáil</string>
     <!-- Translate "System" the same way as the System settings tab -->
-    <string name="onboarding_system_tab_title">Táb an chórais</string>
-    <string name="onboarding_system_tab_desc">Bainistíocht stórais eochrach, uirlisí allmhairithe/onnmhairithe, agus faisnéis faoi aipeanna</string>
     <string name="onboarding_system_installer_desc">Roghnaigh conas a shuiteáiltear aipeanna paisteáilte: caighdeánach, fréamh-suite, nó Shizuku</string>
-    <string name="onboarding_system_process_runtime_desc">Rith paisteáil i bpróiseas ar leith chun cobhsaíocht a fheabhsú agus úsáid chuimhne a rialú. Molta d\'aipeanna móra.</string>
     <string name="onboarding_system_file_picker_desc">Cumasaigh úsáid a bhaint as an mbrabhsálaí comhad ionsuite in ionad an roghnóra córais agus APKanna nó stórais eochracha á roghnú agat</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
     <string name="tour_prompt_title">Turas gairid ar ghnéithe</string>

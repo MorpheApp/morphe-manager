@@ -47,8 +47,6 @@
     <string name="home_update_success_subtitle">Sizning manbalaringiz yangilandi</string>
     <string name="home_sources_are_loading">Manbalar yuklanayapti, iltimos kuting…</string>
     <string name="home_search_apps">Ilovalarni qidiring</string>
-    <string name="home_app_list_options_title">Saralash va filtrlash</string>
-    <string name="home_app_list_options_state_description">%1$s bo\'yicha saralangan, %2$s bo\'yicha filtrlangan</string>
     <string name="home_app_filter_all_description">Bosh ekrandagi barcha ilovalar</string>
     <string name="home_app_filter_patched_description">Morphe bilan yamalgan yoki saqlangan ilovalar</string>
     <string name="home_app_filter_not_patched_description">Morphe\'da hali yamalmagan ilovalar</string>
@@ -148,6 +146,7 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Tuzatish manbalari</string>
     <string name="sources_search">Manbalar va yamoqlarni qidirish</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_sort_manual">Pesanan manual</string>
     <string name="sources_sort_manual_hint">Tekan lama sumber untuk mengatur ulang</string>
     <string name="sources_sort_last_updated">Terakhir diperbarui</string>
@@ -161,7 +160,6 @@
     <string name="sources_apps">Ilovalar</string>
     <string name="sources_apps_brought">Bu manba orqali kelgan</string>
     <string name="sources_apps_left_out">Bu manbadan chiqarilgan</string>
-    <string name="sources_apps_bring_back">Qaytarish</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
     <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
@@ -510,7 +508,6 @@ Eng yaxshi natijalar uchun ushbu ilova to‘liq &lt;b&gt;APK&lt;/b&gt;ni patchla
     <string name="root_mount_module_unmount_warning">Agar KernelSU da Dismount modullari avtomatik ravishda yoqilgan bo\'lsa, KernelSU > Superuser > siz o\'rnatgan ilova > Profile > Maxsus sozlamalar oching va Dismount modullarini o\'chiring. Aks holda, o\'rnatilgan o\'zgartirilgan APK ishlamasligi mumkin, hatto Morphe uni o\'rnatilgan deb ko\'rsatsa ham</string>
     <string name="root_pre_patch_installer_standard_title">Standart oʻrnatish rejimi</string>
     <string name="root_pre_patch_installer_standard_description">GmsCore qoʻllab-quvvati bilan oddiy APK sifatida patchlar. Patchdan keyin sizning oʻrnatish sozlamangiz ishlatiladi</string>
-    <string name="root_pre_patch_installer_hint">Ushbu patch rejimi sozlamalar &gt; tizim &gt; oʻrnatuvchidan mustaqil va patchdan keyin oʻzgartirib boʻlmaydi</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Xatolik buferga kopyalandi</string>
     <string name="patcher_error_log">Xatolik jurnali</string>
@@ -696,7 +693,6 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="mini_game_pairs_picker_subtitle">Kartalarni aylantiring, juftini toping</string>
     <!-- Settings -->
     <string name="appearance">Ko‘rinish</string>
-    <string name="advanced">Qo‘shimcha</string>
     <string name="system">Tizim</string>
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background">Fondo animatsiyasi</string>
@@ -732,7 +728,6 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="settings_appearance_dynamic">Material siz</string>
     <string name="settings_appearance_monochrome">Monoxrom</string>
     <string name="settings_appearance_color_style">Rang uslubi</string>
-    <string name="settings_appearance_colors">Ranglar</string>
     <string name="settings_appearance_accent_color">Accent rangi</string>
     <string name="settings_appearance_pure_black">Toza qora</string>
     <string name="settings_appearance_pure_black_description">Qora fonni ishlatish</string>
@@ -740,7 +735,6 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="settings_appearance_outlines">Konturlar</string>
     <string name="settings_appearance_outlines_description">Kartalar, panellar va tugmalar atrofida nozik chiziq chizadi</string>
     <!-- Settings - Appearance Tab - Language Selector -->
-    <string name="settings_appearance_language_and_display">Til &amp; displey</string>
     <string name="settings_appearance_app_language">Ilova tili</string>
     <string name="settings_appearance_app_language_current">Hozirgi til</string>
     <string name="settings_appearance_translations_info_title">Ba\'zi tillar uchun tarjimaning yo\'qligi yoki to\'liq bo\'lmasligi mumkin</string>
@@ -756,7 +750,6 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="settings_appearance_home_screen">Uy ekran</string>
     <string name="settings_appearance_greeting_phrases">Salomlashish iborasi</string>
     <string name="settings_appearance_repatch_notice">Qayta yamash bildirishnomasi</string>
-    <string name="settings_appearance_sort_button">Saralash va filtrlash tugmasi</string>
     <string name="settings_appearance_app_card_colors">Ilovalar kartasining ranglari</string>
     <string name="settings_appearance_app_card_colors_default">Standart</string>
     <string name="settings_appearance_app_card_colors_default_description">Har bir ilovaga o\'z to\'plamining rangini bering</string>
@@ -843,7 +836,6 @@ Patchlar ta'sirlanmaydi: patch manbalari ro'yxatidagi har bir manba uchun pre-re
     <string name="notification_channel_patch_updates_description">Yangi yamoq versiyalari haqidagi bildirishnomalar</string>
     <string name="notification_channel_patcher_description">Morphe orqa fonda ilovani patchlayotganda ko\'rsatildi</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">O\'qish</string>
     <string name="settings_advanced_expert_mode">Ekspert rejimi</string>
     <string name="settings_advanced_expert_mode_dialog_title">Ekspert rejimini yoqishni xohlaysizmi?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Ekspert rejimi patchlarni qo\'llashni boshqarishda ko\'proq kontrolni beradi, lekin ekspert rejimida sozlamalarni noto\'g\'ri sozlash ilovaning ishlamasligiga olib kelishi mumkin</string>
@@ -864,7 +856,6 @@ Patchlar ta'sirlanmaydi: patch manbalari ro'yxatidagi har bir manba uchun pre-re
     <string name="settings_advanced_github_pat_export_warning">O\'zgarishlarni tekshiring</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Tuzatish imkoniyatlari</string>
-    <string name="settings_advanced_patch_options_youtube_description">Brendlash va sarlavha variantlari</string>
     <string name="settings_advanced_patch_options_restart_message">Tuzatish imkoniyatlarini o\'zgartirish tuzatmani qayta o\'rnatishni talab qiladi</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">Ekspert rejimida tuzatish imkoniyatlari tuzatish jarayonida mavjud bo\'ladi</string>
     <string name="settings_advanced_patch_options_loading">Tuzatish imkoniyatlari yuklanayapti…</string>
@@ -934,7 +925,6 @@ Rasm o'lchamlari quyidagicha bo'lishi kerak:
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
-    <string name="settings_advanced_patch_options_hide_shorts_features">Shorts funksiyalarini yashirish</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Shorts ilovasi tezkor yo\'lini yashirish</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Launcher uzun bosish menyusidan qisqa videolar yashirilishi</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Texnik tafsilotlar</string>
@@ -972,7 +962,6 @@ Rasm o'lchamlari quyidagicha bo'lishi kerak:
     <string name="installer_unavailable_title">%s mavjud emas</string>
     <string name="installer_unavailable_message">Sizning afzal installeringiz (%s) hozirda mavjud emas. Muammoni hal qilib qayta urinishingiz yoki standart installerdan foydalanishingiz mumkin.</string>
     <string name="installer_unavailable_shizuku_hint">Keystore import qilishda xatolik yuzaga keldi</string>
-    <string name="installer_use_standard">Standartdan foydalanish</string>
     <string name="installer_play_store_warning_title">Play Store sifatida o\'rnatishni xohlaysizmi?</string>
     <string name="installer_play_store_warning_message">O‘zgartirilgan ilova Google Play Do‘konidan o‘rnatilgan deb qayd etiladi. Bu Android Auto kabi xizmatlarga uni Play Do‘konidan ilova sifatida tan olishga yordam berishi mumkin, lekin har bir ilova yoki qurilma uchun kafolatlanmaydi. Xatti-harakatlar Android versiyasiga, ROM-ga, qurilma brendiga va ilovaga xos tekshiruvlarga qarab farq qilishi mumkin</string>
     <string name="installer_play_store_warning_risk">Play Store yang mungkin menawarkan pembaruan untuk aplikasi yang telah ditambal. Memasang pembaruan tersebut akan menimpa APK yang ditambal dengan versi asli dan menghapus tambalan. Jika diminta untuk memperbarui, ketuk menu tiga titik pada halaman Play Store aplikasi dan pilih \"Matikan pembaruan\"</string>
@@ -980,7 +969,6 @@ Rasm o'lchamlari quyidagicha bo'lishi kerak:
     <string name="installer_play_store_mode">Play Do‘kon sifatida o‘rnating</string>
     <string name="settings_prompt_installer_on_install">O‘rnatishni tanlash bosqichi</string>
     <string name="settings_auto_install_with_shizuku">Patchlashdan keyin avtomatik o\'rnatish</string>
-    <string name="settings_auto_install_with_shizuku_description">Yamash tugashi bilanoq yamalgan APK’ni o‘rnatadi</string>
     <string name="settings_auto_uninstall_with_shizuku">Ziddiyat yuzaga kelganda avtomatik ravishda o‘chirib tashlash</string>
     <string name="settings_auto_uninstall_warning_title">Avtomatik o‘chirib tashlashni yoqish kerakmi?</string>
     <string name="settings_auto_uninstall_warning_message">Agar Shizuku avtomatik o‘rnatish paytida Android imzo ziddiyati haqida xabar bersa, Morphe o‘zgartirilgan APK-ni o‘rnatishdan oldin mavjud ilovani o‘chirib tashlaydi</string>
@@ -1010,16 +998,13 @@ Ma’lumotlar: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Batareyani optimallashtirish</string>
     <string name="settings_system_battery_optimization_description">Patchlashi tugagandan keyin patcherni ishlayotgan holatda ushlab turish</string>
-    <string name="settings_system_background">Fondo</string>
     <string name="settings_system_process_runtime">Jarayon ishlayotgan vaqti</string>
     <string name="settings_system_process_runtime_description">Patchlash jarayonini barqarorligi oshirish uchun alohida jarayonda ishlatish</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Yuqori limitlar imkoniyatli moslamalarda patchlash tezligini oshiradi</string>
     <string name="settings_system_process_runtime_enable">Jarayon ishlayotgan vaqtini yoqish</string>
     <string name="settings_system_memory_limit_subtitle">Patchlash uchun mavjud xotira</string>
     <string name="settings_system_process_runtime_heap_limit_ignored">Bu qurilma oxirgi ishga tushirishda xotira chegarasini e’tiborsiz qoldirdi, shuning uchun yamash Morphe ichida ishlashga qaytishi mumkin</string>
     <string name="settings_system_memory_limit_warning">Xotira limiti kam bo\'lsa, katta ilovalarni patchlashda xatoliklar yuzaga kelishi mumkin</string>
     <string name="settings_system_memory_limit_high_warning">Yuqori xotira chegarasi ba’zi qurilmalarda yamashni ancha sekinlashtirishi mumkin. Uni faqat past chegaralarda yamash muvaffaqiyatsiz tugab qolsa, oshiring</string>
-    <string name="settings_system_process_runtime_enabled_description">%s MB limit</string>
     <string name="settings_system_process_runtime_description_not_available">Bu funksiya Android 11 yoki undan yuqori versiyasini talab qiladi</string>
     <string name="settings_system_patcher_completion_sound">Yakunlanish tovushi</string>
     <string name="settings_system_patcher_completion_sound_description">Qo\'shish tugagach muvaffaqiyat yoki muvaffaqiyatsizlik uchun alohida ohang ijro etiladi</string>
@@ -1034,7 +1019,6 @@ Ma’lumotlar: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Standartga qaytarish</string>
     <string name="settings_system_notifications_ringtone_picker_title">Ohang tanlang</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Import va eksport</string>
     <string name="settings_system_signing_key">Imzolash kaliti</string>
     <string name="settings_system_signing_key_dialog_description">Morphe yamaydigan har bir ilova shu kalit bilan imzolanadi. Nusxasini saqlang: usiz yamalgan ilovalarni faqat o‘chirib tashlagandan keyin yangilash mumkin</string>
     <string name="settings_system_signing_key_missing">Morphe birinchi yamoqda uni yaratadi</string>
@@ -1080,7 +1064,6 @@ Ma’lumotlar: %2$s"</string>
     <string name="settings_system_export_debug_logs_export_failed">Loglarni eksport qilishda xatolik yuzaga keldi</string>
     <string name="settings_system_export_debug_logs_export_success">Loglar eksport qilingan</string>
     <!-- Settings - System Tab - Files & Storage Section -->
-    <string name="settings_system_files">Fayllar va saqlash</string>
     <string name="settings_system_apks_size">Jami hajmi: %s</string>
     <string name="settings_system_apks_delete_all_confirm">Ini akan menghapus secara permanen file APK yang disimpan di sini</string>
     <string name="settings_system_apks_delete_selected_title">Hapus APK yang dipilih?</string>
@@ -1115,14 +1098,12 @@ Ma’lumotlar: %2$s"</string>
     <string name="settings_system_save_patched_apks_description">Keyinchalik eksport qilish yoki menejer orqali qayta o‘rnatish uchun tuzatilgan APK ning nusxasini saqlang</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Uzoq</string>
-    <string name="settings_system_patched_apks_description">Patchlangan ilova fayllariga boshqaruv</string>
     <string name="settings_system_patched_apks_empty">Mahalliy</string>
     <string name="settings_system_patched_apks_delete_title">Tuzatilgan APKni o‘chirib tashlash?</string>
     <string name="settings_system_patched_apks_deleted">Tuzatilgan APK muvaffaqiyatli o‘chirildi</string>
     <string name="settings_system_patched_apks_delete_all_title">Hapus semua APK yang ditambal?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">O\'rnatilgan</string>
-    <string name="settings_system_original_apks_description">Qayta patchlash uchun saqlangan</string>
     <string name="settings_system_original_apks_empty">Yangilash mavjud emas</string>
     <string name="settings_system_original_apks_deleted">Manbalarni yuklab olishda xatolik: %s</string>
     <string name="settings_system_original_apks_delete_title">Original APKni o‘chirib tashlash?</string>
@@ -1132,14 +1113,11 @@ Ma’lumotlar: %2$s"</string>
     <string name="settings_system_patch_selections_title">Tuzatish imkoniyatlari</string>
     <string name="settings_system_patch_selections_description">Saqlangan patch tanlashlari</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Barcha tanlovlarni qayta tiklashni xohlaysizmi?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Paket tanlovlarini qayta tiklashni xohlaysizmi?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Reset paket yang dipilih?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Manba tanlovini qayta tiklashni xohlaysizmi?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s dan %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s da %2$s</string>
     <string name="settings_system_patch_selection_source_format">Manba #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Bu barcha paketlar va manbalar uchun saqlangan barcha patch tanlovlarini doimiy ravishda o\'chirib tashlaydi</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Bu &lt;b&gt;%s&lt;/b&gt; uchun saqlangan barcha tuzatish tanlovlarini barcha manbalar bo\'ylab doimiy ravishda o\'chirib tashlaydi.</string>
     <string name="settings_system_patch_selection_reset_source_warning">Bu &lt;b&gt;%1$s&lt;/b&gt; uchun &lt;b&gt;%2$s&lt;/b&gt; dagi saqlangan tuzatish tanlovlarini doimiy ravishda o\'chirib tashlaydi.</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Bu tanlangan paketlar uchun saqlangan barcha tuzatish tanlovlarini doimiy ravishda o\'chirib tashlaydi.</string>
     <string name="settings_system_export_source_data_fail">Manba ma\'lumotlarini eksport qilishda xatolik yuzaga keldi</string>
@@ -1202,6 +1180,8 @@ Ma’lumotlar: %2$s"</string>
     <string name="patches">Patchlar</string>
     <string name="home">Bosh sahifa</string>
     <string name="settings">Sozlamalar</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_general">Umumiy</string>
     <string name="yes">Ha</string>
     <string name="no">Yo‘q</string>
     <string name="all">Hammasi</string>
@@ -1299,7 +1279,6 @@ Ma’lumotlar: %2$s"</string>
     <string name="hide">Yashirish</string>
     <string name="hidden">Yashirilgan</string>
     <string name="unhide">Ko‘rsatish</string>
-    <string name="unhide_done">Ko\'rsatildi</string>
     <string name="ignore">E’tiborsiz qoldirish</string>
     <string name="stop_ignoring">E’tiborsiz qoldirishni to‘xtatish</string>
     <string name="logs">Jurnallar</string>
@@ -1370,13 +1349,9 @@ Davom etmoqchimisiz?"</string>
     <string name="onboarding_sources_version_desc">Ushbu manba uchun to\'liq o\'zgarishlar jurnallarini ko\'rish uchun versiyaga bosish</string>
     <string name="onboarding_sources_prerelease_desc">Ushbu manbadan oldindan chiqarish patch versiyalarini olishni yoqish</string>
     <string name="onboarding_appearance_tab_desc">Ilovani moslashtiring: mavzu, ranglar va fon</string>
-    <string name="onboarding_appearance_theme_desc">Yorug\', qorong\'u yoki tizim mavzusini tanlang. Shuningdek, moslashtirilgan rangni tanlashingiz yoki dinamik rangni yoqishingiz mumkin</string>
     <string name="onboarding_expert_mode_desc">Patch tanlash, moslashtirilgan opsiyalar va boshqa kengaytirilgan xususiyatlarni ochish uchun Ekspert rejimini yoqing</string>
     <!-- Translate "System" the same way as the System settings tab -->
-    <string name="onboarding_system_tab_title">Tizim jadvali</string>
-    <string name="onboarding_system_tab_desc">Keystore boshqaruvi, import/eksport vositalari va ilova haqidagi ma\'lumotlar</string>
     <string name="onboarding_system_installer_desc">Patchlangan ilovalar o\'rnatish usulini tanlang: standart, root mount yoki Shizuku</string>
-    <string name="onboarding_system_process_runtime_desc">Barqarorlikni yaxshilash va xotira ishlatilishini boshqarish uchun patchlashni alohida jarayonda ishlating. Katta ilovalar uchun tavsiya etiladi</string>
     <string name="onboarding_system_file_picker_desc">APK yoki Keystore tanlaganda tizim tanlash moslamasidan foydalanish uchun yoqing</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
     <string name="tour_prompt_title">Qisqa xususiyatlar sayohati</string>

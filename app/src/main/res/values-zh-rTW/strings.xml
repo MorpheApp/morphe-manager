@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">來源已是最新狀態</string>
     <string name="home_sources_are_loading">正在載入來源，請稍候…</string>
     <string name="home_search_apps">搜尋應用程式</string>
-    <string name="home_app_list_options_title">排序與篩選</string>
-    <string name="home_app_list_options_state_description">依 %1$s 排序，依 %2$s 篩選</string>
+    <string name="list_options_title">排序和篩選</string>
+    <string name="list_options_state_description">已依 %1$s 排序，已依 %2$s 篩選</string>
     <string name="home_app_filter_all_description">主畫面上的每個應用程式</string>
     <string name="home_app_filter_patched_description">您已使用 Morphe 修補或儲存的應用程式</string>
     <string name="home_app_filter_not_patched_description">您尚未在 Morphe 中修補的應用程式</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">修補來源</string>
     <string name="sources_search">搜尋來源與修補程式</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">所有來源</string>
+    <string name="sources_filter_enabled_description">來源修補程式取自</string>
+    <string name="sources_filter_disabled_description">已停用來源</string>
+    <string name="sources_filter_updates">更新</string>
+    <string name="sources_filter_updates_description">要獲取較新版本來源</string>
+    <string name="sources_filter_issues">需要關注</string>
+    <string name="sources_filter_issues_description">被封鎖、載入失敗或需要更新 Morphe 的來源</string>
     <string name="sources_sort_manual">手動排序</string>
     <string name="sources_sort_manual_hint">長按來源以重新排序</string>
     <string name="sources_sort_last_updated">上次更新</string>
@@ -167,7 +175,6 @@
     <string name="sources_apps_description">勾選的應用程式來自此來源。輕按應用程式可將其排除或恢復。一旦沒有來源提供給該應用程式，它就會退出主畫面，除非你已對它做過修補</string>
     <string name="sources_apps_brought">由此來源提供</string>
     <string name="sources_apps_left_out">已從此來源排除</string>
-    <string name="sources_apps_bring_back">重新加入</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
     <string name="sources_apps_stays_patched">保留為已修補狀態</string>
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
@@ -243,6 +250,8 @@
     <string name="home_apk_availability_yes">是，協助我尋找 APK</string>
     <string name="home_apk_availability_no">否，我已經有 APK 了</string>
     <string name="home_apk_helper_download">使用輔助應用程式</string>
+    <string name="home_apk_helper_untrusted">已安裝輔助應用程式但尚未取得信任，因此在此處不提供選項</string>
+    <string name="home_apk_helper_untrusted_action">檢視輔助程式</string>
     <string name="home_apk_helper_title">使用輔助應用程式下載</string>
     <string name="home_apk_helper_description">Morphe 會要求下方的輔助應用程式下載原始 APK 並交回檔案</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -539,7 +548,7 @@
     <string name="root_mount_module_unmount_warning">若 KernelSU 已開啟「預設卸載模組」功能，請開啟 KernelSU &gt; 超級使用者  &gt; 找到您掛載的應用程式  &gt; 設定檔  &gt; 自訂，並將「卸載模組」關閉。否則，即使 Morphe 顯示已掛載，修補後的 APK 仍可能無法生效。</string>
     <string name="root_pre_patch_installer_standard_title">標準安裝模式</string>
     <string name="root_pre_patch_installer_standard_description">以支援 GmsCore 的一般 APK 形式修補。修補完成後，將使用您的安裝程式設定。</string>
-    <string name="root_pre_patch_installer_hint">此修補模式與「設定」>「系統」>「安裝程式」分開，且修補後無法更改。</string>
+    <string name="root_pre_patch_installer_hint">在「設定<b>&gt;</b>修補<b>&gt;</b>安裝<b>&gt;</b>選擇安裝程式」提示出現時詢問。修補後無法變更修補模式</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">已將錯誤複製到剪貼簿</string>
     <string name="patcher_error_log">錯誤記錄檔</string>
@@ -730,7 +739,6 @@
     <string name="mini_game_pairs_picker_subtitle">翻開卡片，找出配對</string>
     <!-- Settings -->
     <string name="appearance">外觀</string>
-    <string name="advanced">進階</string>
     <string name="system">系統</string>
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background">背景動畫</string>
@@ -758,6 +766,8 @@
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
     <string name="settings_appearance_seasonal_background_notice">啟用季節主題時，%1$s 背景會持續顯示至 %2$s</string>
     <!-- Settings - Appearance Tab - Theme -->
+    <string name="settings_appearance_display">顯示</string>
+    <string name="settings_appearance_effects">特效</string>
     <string name="settings_appearance_theme">主題</string>
     <string name="settings_appearance_theme_mode">主題模式</string>
     <string name="settings_appearance_system">系統</string>
@@ -766,7 +776,6 @@
     <string name="settings_appearance_dynamic">動態顏色</string>
     <string name="settings_appearance_monochrome">單色</string>
     <string name="settings_appearance_color_style">顏色樣式</string>
-    <string name="settings_appearance_colors">顏色</string>
     <string name="settings_appearance_accent_color">強調色</string>
     <string name="settings_appearance_pure_black">純黑</string>
     <string name="settings_appearance_pure_black_description">使用純黑背景</string>
@@ -774,8 +783,9 @@
     <string name="settings_appearance_color_accents_description">使用每個應用程式和來源的色彩而非強調色彩</string>
     <string name="settings_appearance_outlines">輪廓線</string>
     <string name="settings_appearance_outlines_description">在卡片、面板和按鈕周圍繪製細邊</string>
+    <string name="settings_appearance_blur">模糊</string>
+    <string name="settings_appearance_blur_description">模糊標題、列和面板下方的滾動內容</string>
     <!-- Settings - Appearance Tab - Language Selector -->
-    <string name="settings_appearance_language_and_display">語言與顯示</string>
     <string name="settings_appearance_app_language">應用程式語言</string>
     <string name="settings_appearance_app_language_current">目前語言</string>
     <string name="settings_appearance_translations_info_title">某些語言的翻譯可能遺失或不完整</string>
@@ -792,8 +802,6 @@
     <string name="settings_appearance_greeting_phrases_subtitle">顯示問候訊息</string>
     <string name="settings_appearance_repatch_notice">重新修補通知</string>
     <string name="settings_appearance_repatch_notice_description">當修補過的應用程式可再次修補時顯示橫幅通知</string>
-    <string name="settings_appearance_sort_button">排序與篩選按鈕</string>
-    <string name="settings_appearance_sort_button_description">顯示用於排序及篩選應用程式的按鈕</string>
     <string name="settings_appearance_app_card_colors">應用程式卡片顏色</string>
     <string name="settings_appearance_app_card_colors_default">預設</string>
     <string name="settings_appearance_app_card_colors_default_description">讓每個應用程式都擁有其套件的顏色</string>
@@ -886,7 +894,6 @@
     <string name="notification_mount_replaced_title">不再修補 %1$s</string>
     <string name="notification_mount_replaced_text">v%1$s 取代了已修補的 v%2$s。開啟 Morphe 去進行還原</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">專家設定</string>
     <string name="settings_advanced_expert_mode">專家模式</string>
     <string name="settings_advanced_expert_mode_description">解鎖進階修補設定與修補選項</string>
     <string name="settings_advanced_expert_mode_dialog_title">啟用專家模式？</string>
@@ -909,7 +916,6 @@
     <string name="settings_advanced_github_pat_export_warning">請勿分享您的 PAT。如果您將其包含在設定匯出中，請將該檔案保密，因為它包含該權杖</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">修補選項</string>
-    <string name="settings_advanced_patch_options_youtube_description">品牌和標頭選項</string>
     <string name="settings_advanced_patch_options_restart_message">變更修補選項需要重新修補應用程式才能生效</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">在專家模式下，修補選項將在修補過程中可用</string>
     <string name="settings_advanced_patch_options_loading">正在載入修補選項……</string>
@@ -979,7 +985,6 @@ morphe_header_custom_dark.png
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px\""</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
-    <string name="settings_advanced_patch_options_hide_shorts_features">隱藏 Shorts 功能</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">隱藏 Shorts 應用程式捷徑</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">從啟動器長按選單中移除 Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">隱藏 Shorts 小工具</string>
@@ -987,6 +992,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">安裝程式</string>
     <string name="installer_settings_title">預設安裝程式</string>
+    <string name="settings_installation">安裝</string>
     <string name="installer_title">選取安裝程式</string>
     <string name="installer_internal_description">使用 Android 封裝安裝程式</string>
     <string name="installer_play_store_description">使用系統安裝程式並將Google Play商店設定為安裝來源</string>
@@ -1017,7 +1023,7 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_title">%s 無法使用</string>
     <string name="installer_unavailable_message">您偏好的安裝程式 (%s) 目前無法使用。您可以修復問題並重試，或改用標準安裝程式</string>
     <string name="installer_unavailable_shizuku_hint">請確認 Shizuku 正在執行且已授予此應用程式權限</string>
-    <string name="installer_use_standard">使用標準</string>
+    <string name="installer_choose_another">選擇其他安裝程式</string>
     <string name="installer_play_store_warning_title">以 Play 商店安裝？</string>
     <string name="installer_play_store_warning_message">已修補的應用程式將被記錄為從 Google Play 商店安裝。這可以協助 Android Auto 等服務將其識別為 Play 商店應用程式，但不保證適用於所有應用程式或裝置。其行為可能因 Android 版本、ROM、裝置品牌和應用程式特定的檢查而異</string>
     <string name="installer_play_store_warning_risk">Play 商店可能會提供修補應用程式的更新。安裝該更新會用原始版本覆寫修補的 APK，並移除修補。如果提示更新，請點選應用程式 Play 商店頁面上的三點選單，然後選擇「關閉更新」</string>
@@ -1025,11 +1031,13 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_mode">安裝為 Play 商店</string>
     <string name="installer_play_store_mode_description">將 Google Play 商店標示為安裝來源</string>
     <string name="settings_prompt_installer_on_install">安裝程式選擇提示</string>
-    <string name="settings_prompt_installer_on_install_description">每次安裝時詢問要使用哪種安裝程式</string>
+    <string name="settings_prompt_installer_on_install_description">詢問所有應用程式要如何安裝：Root模式下會在修補前先安裝，否則會在修補後才安裝</string>
     <string name="settings_auto_install_with_shizuku">修補完成後自動安裝</string>
-    <string name="settings_auto_install_with_shizuku_description">修補完成後立即安裝已修補的 APK</string>
+    <string name="settings_auto_install_with_shizuku_description">修補完成後立即安裝或掛載已修補的APK</string>
     <string name="settings_auto_uninstall_with_shizuku">衝突時自動解除安裝</string>
     <string name="settings_auto_uninstall_with_shizuku_description">在簽章衝突時解除安裝現有的應用程式。這可能會清除應用程式資料</string>
+    <string name="settings_ignore_install_target_rules">忽略安裝目標條件</string>
+    <string name="settings_ignore_install_target_rules_description">關閉安裝目標的檢查規則並啟用相關排除規則。 已修補的應用程式可能會無法正常運作</string>
     <string name="settings_auto_uninstall_warning_title">要啟用自動解除安裝嗎？</string>
     <string name="settings_auto_uninstall_warning_message">若 Android 在 Shizuku 自動安裝期間回報簽名衝突，Morphe 將在安裝已修補的 APK 之前先解除安裝現有的應用程式</string>
     <string name="settings_auto_uninstall_warning_risk">這可能會刪除應用程式資料。若在解除安裝後無法安裝已修補的 APK，原本的應用程式可能已經遺失</string>
@@ -1056,23 +1064,19 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">電池最佳化</string>
     <string name="settings_system_battery_optimization_description">即使應用程式被最小化，也會保持修補程式的執行</string>
-    <string name="settings_system_background">背景</string>
     <string name="settings_system_process_runtime">執行階段程序</string>
     <string name="settings_system_process_runtime_description">在獨立的程序中執行修補以獲得更好的穩定性</string>
-    <string name="settings_system_process_runtime_memory_limit_description">更高的限制可以加快在相容裝置上的修補速度</string>
     <string name="settings_system_process_runtime_enable">啟用程序執行階段</string>
     <string name="settings_system_memory_limit_subtitle">可用於修補的記憶體</string>
     <string name="settings_system_process_runtime_heap_limit_ignored">此裝置在上次執行時忽略了記憶體限制，因此修補可能會改為在 Morphe 內執行。</string>
     <string name="settings_system_memory_limit_warning">記憶體限制過低可能會導致修補較大型應用程式時失敗</string>
     <string name="settings_system_memory_limit_high_warning">記憶體限制設得過高，可能會使某些裝置上的修補作業變慢許多。只有在較低限制下修補持續失敗時，才應調高限制。</string>
-    <string name="settings_system_process_runtime_enabled_description">%s MB 限制</string>
-    <string name="settings_system_process_runtime_disabled_description">輕觸以進行設定</string>
     <string name="settings_system_process_runtime_description_not_available">此功能需要 Android 11 或以上版本</string>
     <string name="settings_system_patcher_completion_sound">完成音效</string>
     <string name="settings_system_patcher_completion_sound_description">修補完成時，成功或失敗會播放不同的提示音</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">通知</string>
-    <string name="settings_system_notifications_description">設定背景警報及完成音效</string>
+    <string name="settings_system_notifications_description">Morphe 如何讓您隨時掌握資訊</string>
     <string name="settings_system_notifications_success_sound">成功音效</string>
     <string name="settings_system_notifications_error_sound">失敗音效</string>
     <string name="settings_system_notifications_sound_default">預設</string>
@@ -1082,7 +1086,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_notifications_sound_reset">重設為預設值</string>
     <string name="settings_system_notifications_ringtone_picker_title">選擇鈴聲</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">匯入與匯出</string>
     <string name="settings_system_signing_key">簽署金鑰</string>
     <string name="settings_system_signing_key_description">備份或還原簽署修補過應用程式的金鑰</string>
     <string name="settings_system_signing_key_dialog_description">Morphe 所修補的每個應用程式都會以這把金鑰簽署。請保留一份副本：少了它，修補過的應用程式只能先解除安裝後才能更新。</string>
@@ -1129,7 +1132,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_failed">無法匯出紀錄</string>
     <string name="settings_system_export_debug_logs_export_success">記錄已匯出</string>
     <!-- Settings - System Tab - Files & Storage Section -->
-    <string name="settings_system_files">檔案與儲存空間</string>
     <string name="settings_system_apks_size">總大小：%s</string>
     <string name="settings_system_apks_delete_all_confirm">這將永久刪除此處顯示的已儲存 APK 檔案</string>
     <string name="settings_system_apks_delete_selected_title">刪除選取的 APK？</string>
@@ -1141,6 +1143,9 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">儲存空間管理</string>
     <string name="settings_system_storage_management_description">顯示磁碟用量並清除快取檔案</string>
+    <string name="settings_system_storage_used_free">由 Morphe 所使用 / 此裝置上的可用儲存空間</string>
+    <string name="settings_system_storage_saved_apks">已儲存的 APK 檔案</string>
+    <string name="settings_system_storage_caches">快取</string>
     <string name="settings_system_storage_keystore_title">簽署金鑰庫</string>
     <string name="settings_system_storage_app_data_title">應用程式資料</string>
     <string name="settings_system_storage_patch_bundles_title">修補程式套件</string>
@@ -1165,14 +1170,12 @@ morphe_header_custom_dark.png
     <string name="settings_system_save_patched_apks_description">儲存已修補 APK 的副本，以便稍後匯出或透過管理員重新安裝</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">已修補的 APK</string>
-    <string name="settings_system_patched_apks_description">管理儲存的修補後應用程式檔案</string>
     <string name="settings_system_patched_apks_empty">尚未儲存已修補的 APK</string>
     <string name="settings_system_patched_apks_delete_title">刪除已修補的 APK？</string>
     <string name="settings_system_patched_apks_deleted">已成功刪除已修補的 APK</string>
     <string name="settings_system_patched_apks_delete_all_title">刪除所有已修補的 APK？</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">原始 APK</string>
-    <string name="settings_system_original_apks_description">已儲存以供重新修補。每個應用程式保留一個版本</string>
     <string name="settings_system_original_apks_empty">未儲存原始 APK</string>
     <string name="settings_system_original_apks_deleted">已成功刪除原始 APK</string>
     <string name="settings_system_original_apks_delete_title">要刪除原始 APK 嗎？</string>
@@ -1182,14 +1185,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">修補選擇</string>
     <string name="settings_system_patch_selections_description">儲存修補選擇，在卸載後保留</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">重設所有選擇？</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">重設套件選擇？</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">重設選取的套件？</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">重設來源選擇？</string>
     <string name="settings_system_patch_selection_total_summary_format">%2$s 中共有 %1$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%2$s 中的 %1$s</string>
     <string name="settings_system_patch_selection_source_format">來源 #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">這將永久刪除所有套件和來源中儲存的所有修補選擇</string>
-    <string name="settings_system_patch_selection_reset_package_warning">這將永久刪除 &lt;b&gt;%s&lt;/b&gt; 在所有來源中儲存的修補選擇</string>
     <string name="settings_system_patch_selection_reset_source_warning">這將永久刪除 &lt;b&gt;%1$s&lt;/b&gt; 在 &lt;b&gt;%2$s&lt;/b&gt; 中儲存的修補選擇</string>
     <string name="settings_system_patch_selection_reset_selected_warning">這將永久刪除選取套件的所有儲存修補選擇</string>
     <string name="settings_system_export_source_data_fail">無法匯出來源資料</string>
@@ -1211,6 +1211,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper">APK 下載輔助工具</string>
     <string name="settings_system_apk_download_helper_trusted_count">已信任：%1$d / %2$d</string>
     <string name="settings_system_apk_download_helper_dialog_description">輔助應用程式可以為你下載原始 APK。只有你在這裡信任的應用程式，才會在下載說明中提供。</string>
+    <string name="settings_system_apk_download_helper_trust_title">信任此輔助工具？</string>
+    <string name="settings_system_apk_download_helper_trust">信任</string>
     <string name="settings_system_apk_download_helper_warning">APK 來自輔助應用程式，因此請只信任你認識的應用程式。Morphe 仍會在修補前檢查每個檔案的套件、版本與簽章。</string>
     <string name="settings_system_apk_download_helper_installed_by">由 %s 安裝</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">安裝者未知</string>
@@ -1232,9 +1234,13 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">關於</string>
     <string name="settings_system_manager_description">\"這是一個開源專案，用於對熱門的 Android 應用程式進行現代、簡化的修補，並由社群的意見回饋和貢獻所驅動\"</string>
     <string name="credits">鳴謝</string>
+    <string name="credits_description">Morphe 的開發團隊</string>
+    <string name="settings_about_section_project">專案</string>
+    <string name="settings_about_section_help">協助</string>
     <string name="credits_current_development">目前開發</string>
     <string name="credits_prior_development">先前開發</string>
     <string name="opensource_licenses">開源授權</string>
+    <string name="opensource_licenses_description">Morphe 所建構使用的函式庫</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">選擇</string>
     <string name="easter_egg_pill_message">吃下藍色藥丸，廣告留在原來的地方。吃下紅色藥丸，看看位元組碼能深入到什麼程度。</string>
@@ -1253,6 +1259,20 @@ morphe_header_custom_dark.png
     <string name="patches">修補</string>
     <string name="home">首頁</string>
     <string name="settings">設定</string>
+    <string name="apps">應用程式</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patcher">修補器</string>
+    <string name="settings_section_updates">更新</string>
+    <string name="settings_section_patching">正在修補</string>
+    <string name="settings_section_appearance_summary">Morphe 的外觀</string>
+    <string name="settings_section_patch_options_summary">簡易模式修補應用程式的方式</string>
+    <string name="settings_section_general">一般</string>
+    <string name="settings_section_patcher_summary">此裝置上的應用程式修補方式</string>
+    <string name="settings_section_help_info">幫助與資訊</string>
+    <string name="settings_section_about_summary">關於 Morphe 及如何取得協助</string>
+    <string name="settings_section_local_files">檔案</string>
+    <string name="settings_section_backup">備份</string>
+    <string name="settings_search">搜尋設定</string>
     <string name="yes">是</string>
     <string name="no">否</string>
     <string name="all">全部</string>
@@ -1354,7 +1374,6 @@ morphe_header_custom_dark.png
     <string name="hide">隱藏</string>
     <string name="hidden">已隱藏</string>
     <string name="unhide">取消隱藏</string>
-    <string name="unhide_done">已顯示</string>
     <string name="ignore">忽略</string>
     <string name="stop_ignoring">停止忽略</string>
     <string name="logs">記錄</string>
@@ -1427,13 +1446,9 @@ morphe_header_custom_dark.png
     <string name="onboarding_sources_version_desc">點擊版本以查看此來源的完整變更紀錄</string>
     <string name="onboarding_sources_prerelease_desc">啟用此選項可從此來源接收預先發佈版</string>
     <string name="onboarding_appearance_tab_desc">自訂應用程式的外觀：主題、重點顏色和背景</string>
-    <string name="onboarding_appearance_theme_desc">在淺色、深色或系統主題之間切換。您還可以選擇自訂重點顏色或啟用動態色彩</string>
     <string name="onboarding_expert_mode_desc">啟用專家模式以解鎖修補選擇、自訂選項和其他進階功能</string>
     <!-- Translate "System" the same way as the System settings tab -->
-    <string name="onboarding_system_tab_title">系統標籤</string>
-    <string name="onboarding_system_tab_desc">金鑰庫管理、匯入/匯出工具和應用程式資訊</string>
     <string name="onboarding_system_installer_desc">選擇修補應用程式的安裝方式：標準、root mount 或 Shizuku</string>
-    <string name="onboarding_system_process_runtime_desc">以獨立的程序執行修補，以提高穩定性和控制記憶體使用量。建議用於大型應用程式</string>
     <string name="onboarding_system_file_picker_desc">啟用此選項可在選擇 APK 或金鑰庫時使用內建檔案瀏覽器，而不是系統挑選器</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
     <string name="tour_prompt_title">快速功能導覽</string>

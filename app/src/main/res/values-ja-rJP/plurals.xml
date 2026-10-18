@@ -3,6 +3,10 @@
     <plurals name="patch_count">
         <item quantity="other">%s 個のパッチ</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
+    <plurals name="library_count">
+        <item quantity="other">%s 件のライブラリ</item>
+    </plurals>
     <plurals name="option_count">
         <item quantity="other">%s 個のパッチ オプション</item>
     </plurals>
@@ -55,10 +59,10 @@
         <item quantity="other">%s 個のアプリがパッチ適用可能です</item>
     </plurals>
     <plurals name="batch_queue_pending_count">
-        <item quantity="other">%s個のアプリがパッチ適用待ち</item>
+        <item quantity="other">%s 個のアプリがパッチ適用待ち</item>
     </plurals>
     <plurals name="home_alerts_snoozed_count">
-        <item quantity="other">%s件の通知を非表示にしています。タップして表示します</item>
+        <item quantity="other">%s件の通知を非表示にしています。タップして表示</item>
     </plurals>
     <plurals name="repatch_available_count">
         <item quantity="other">%s 個のアプリが再パッチ可能です</item>
@@ -101,7 +105,7 @@
     </plurals>
     <!-- Value of the Apps row on a source card when apps were left out on arrival, for example "3/232 · 2 new". %1$s is the app count, %2$d the new apps -->
     <plurals name="sources_apps_count_with_new">
-        <item quantity="other">%1$s · %2$d 件</item>
+        <item quantity="other">%1$s · %2$d 新規</item>
     </plurals>
     <plurals name="changelog_new_releases">
         <item quantity="other">%s 件の新規リリース</item>

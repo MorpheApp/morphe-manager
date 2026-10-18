@@ -5,6 +5,12 @@
         <item quantity="two">שני תיקונים</item>
         <item quantity="other">%s תיקונים</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
+    <plurals name="library_count">
+        <item quantity="one">ספרייה אחת של %s</item>
+        <item quantity="two">%s ספריות</item>
+        <item quantity="other">%s ספריות</item>
+    </plurals>
     <plurals name="option_count">
         <item quantity="one">אופציית תיקון אחת</item>
         <item quantity="two">שתי אופציות תיקון</item>

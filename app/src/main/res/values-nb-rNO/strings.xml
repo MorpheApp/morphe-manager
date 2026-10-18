@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Kildene dine er oppdatert</string>
     <string name="home_sources_are_loading">Kilder lastes, vennligst vent…</string>
     <string name="home_search_apps">Søk etter apper</string>
-    <string name="home_app_list_options_title">Sorter og filtrer</string>
-    <string name="home_app_list_options_state_description">Sortert etter %1$s, filtrert etter %2$s</string>
+    <string name="list_options_title">Sorter og filtrer</string>
+    <string name="list_options_state_description">Sortert etter %1$s, filtrert etter %2$s</string>
     <string name="home_app_filter_all_description">Alle apper på startskjermen</string>
     <string name="home_app_filter_patched_description">Apper du har patchet eller lagret med Morphe</string>
     <string name="home_app_filter_not_patched_description">Apper du ikke har patchet i Morphe ennå</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Patch-kilder</string>
     <string name="sources_search">Søk etter kilder og patcher</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Alle kilder</string>
+    <string name="sources_filter_enabled_description">Kildefiks er hentet fra</string>
+    <string name="sources_filter_disabled_description">Kilder deaktivert</string>
+    <string name="sources_filter_updates">Oppdateringer</string>
+    <string name="sources_filter_updates_description">Kilder med nyere versjon for å hente</string>
+    <string name="sources_filter_issues">Trenger oppmerksomhet</string>
+    <string name="sources_filter_issues_description">Kilder som er blokkert, feilet ved lasting eller trenger en nyere Morphe</string>
     <string name="sources_sort_manual">Manuell rekkefølge</string>
     <string name="sources_sort_manual_hint">Trykk og hold nede en kilde for å endre rekkefølgen</string>
     <string name="sources_sort_last_updated">Sist oppdatert</string>
@@ -167,7 +175,6 @@
     <string name="sources_apps_description">Valgteapper kommer fra denne kilde. Trykk på en app for å ekskludere eller inkludere den igjen. En app forsvinner fra startsiden når ingen kilder lenger inkluderer den, med mindre du har fikset den</string>
     <string name="sources_apps_brought">Levert av denne kilden</string>
     <string name="sources_apps_left_out">Utelatt fra denne kilden</string>
-    <string name="sources_apps_bring_back">Ta inn igjen</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
     <string name="sources_apps_stays_patched">Beholdt som fikset</string>
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
@@ -243,6 +250,8 @@ Alt som legges til fra denne nettsiden brukes på egen risiko"</string>
     <string name="home_apk_availability_yes">Ja, hjelp meg å finne en APK-fil</string>
     <string name="home_apk_availability_no">Nei, jeg har allerede en APK-fil</string>
     <string name="home_apk_helper_download">Bruk en hjelpeapp</string>
+    <string name="home_apk_helper_untrusted">En hjelpeapp er installert, men ikke ennå stolt på, så den tilbys ikke her</string>
+    <string name="home_apk_helper_untrusted_action">Gi hjelpere en vurdering</string>
     <string name="home_apk_helper_title">Last ned med en hjelpeapp</string>
     <string name="home_apk_helper_description">Morphe vil be hjelpeappen nedenfor om å laste ned den originale APK-filen og gi filen tilbake</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -539,7 +548,7 @@ For de beste resultatene anbefaler denne appen å patche en &lt;b&gt;full APK-fi
     <string name="root_mount_module_unmount_warning">Hvis KernelSU har Unmount-moduler aktivert som standard, åpne KernelSU &gt; Superuser &gt; appen du monterte &gt; Profil &gt; Egendefinert og deaktiver Unmount-moduler. Ellers kan den monterte patchede APK-en kanskje ikke tre i kraft, selv om Morphe viser at den er montert.</string>
     <string name="root_pre_patch_installer_standard_title">Standard installasjonsmodus</string>
     <string name="root_pre_patch_installer_standard_description">Installerer som en vanlig APK med GmsCore-støtte. Dine installasjonsinnstillinger brukes etter installasjonen.</string>
-    <string name="root_pre_patch_installer_hint">Denne patchmodusen er separat fra Innstillinger &gt; System &gt; Installasjon, og kan ikke endres etter patchingen.</string>
+    <string name="root_pre_patch_installer_hint">Spurt under Innstillinger &gt; Patching &gt; Installasjon &gt; Velger for installatør. Patchmodus kan ikke endres etter patching</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Feil kopiert til utklippstavlen</string>
     <string name="patcher_error_log">Feillogg</string>
@@ -730,7 +739,6 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="mini_game_pairs_picker_subtitle">Vend kortene, finn paret</string>
     <!-- Settings -->
     <string name="appearance">Utseende</string>
-    <string name="advanced">Avansert</string>
     <string name="system">System</string>
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background">Bakgrunnsanimasjon</string>
@@ -758,6 +766,8 @@ Avinstallering vil permanent slette alle appdata"</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
     <string name="settings_appearance_seasonal_background_notice">Bakgrunnen %1$s er aktiv til %2$s mens sesongtemaer er på</string>
     <!-- Settings - Appearance Tab - Theme -->
+    <string name="settings_appearance_display">Visning</string>
+    <string name="settings_appearance_effects">Effekter</string>
     <string name="settings_appearance_theme">Tema</string>
     <string name="settings_appearance_theme_mode">Temamodus</string>
     <string name="settings_appearance_system">System</string>
@@ -766,7 +776,6 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_monochrome">Monokrom</string>
     <string name="settings_appearance_color_style">Fargestil</string>
-    <string name="settings_appearance_colors">Farger</string>
     <string name="settings_appearance_accent_color">Accentfarge</string>
     <string name="settings_appearance_pure_black">Pure Black</string>
     <string name="settings_appearance_pure_black_description">Bruker ekte svarte bakgrunner</string>
@@ -774,8 +783,9 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="settings_appearance_color_accents_description">Bruker fargen fra hver app og kilde i stedet for accentfarge</string>
     <string name="settings_appearance_outlines">Konturer</string>
     <string name="settings_appearance_outlines_description">Tegner en tynn kant rundt kort, paneler og knapper</string>
+    <string name="settings_appearance_blur">Uskarphet</string>
+    <string name="settings_appearance_blur_description">Uskarp rulling under overskrifter, felt og paneler</string>
     <!-- Settings - Appearance Tab - Language Selector -->
-    <string name="settings_appearance_language_and_display">Språk &amp; skjerm</string>
     <string name="settings_appearance_app_language">Appspråk</string>
     <string name="settings_appearance_app_language_current">Gjeldende språk</string>
     <string name="settings_appearance_translations_info_title">Oversettelser for noen språk mangler eller er ufullstendige</string>
@@ -793,8 +803,6 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Viser en hilsen</string>
     <string name="settings_appearance_repatch_notice">Varsel om å lappe på nytt</string>
     <string name="settings_appearance_repatch_notice_description">Viser en banner når patched apper kan patches på nytt</string>
-    <string name="settings_appearance_sort_button">Sorterings- og filterknapp</string>
-    <string name="settings_appearance_sort_button_description">Viser en knapp for å sortere og filtrere apper</string>
     <string name="settings_appearance_app_card_colors">App-kortfarger</string>
     <string name="settings_appearance_app_card_colors_default">Standard</string>
     <string name="settings_appearance_app_card_colors_default_description">Gi hver app fargen fra sin egen pakke</string>
@@ -887,7 +895,6 @@ Patcher påvirkes ikke: aktiver pre-release-patcher for hver kilde i patch-kilde
     <string name="notification_mount_replaced_title">%1$s er ikke lenger patchet</string>
     <string name="notification_mount_replaced_text">v%1$s erstattet den patchede v%2$s. Åpne Morphe for å gjenopprette den</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Oppdateringer</string>
     <string name="settings_advanced_expert_mode">Ekspertinnstillinger</string>
     <string name="settings_advanced_expert_mode_description">Låser opp avanserte patch-innstillinger og patch-alternativer</string>
     <string name="settings_advanced_expert_mode_dialog_title">Aktiver ekspertmodus?</string>
@@ -910,7 +917,6 @@ Patcher påvirkes ikke: aktiver pre-release-patcher for hver kilde i patch-kilde
     <string name="settings_advanced_github_pat_export_warning">Ikke del din PAT. Hvis du inkluderer den i en eksport av innstillinger, må du holde den filen privat, da den inneholder tokenet</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Patch-alternativer</string>
-    <string name="settings_advanced_patch_options_youtube_description">Merkevare- og topptekstalternativer</string>
     <string name="settings_advanced_patch_options_restart_message">Endring av patch-alternativer krever repatching av appen for å tre i kraft</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">I ekspertmodus vil patch-alternativer være tilgjengelige under patching-prosessen</string>
     <string name="settings_advanced_patch_options_loading">Laster patch-alternativer…</string>
@@ -980,7 +986,6 @@ morphe_header_custom_dark.png
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
-    <string name="settings_advanced_patch_options_hide_shorts_features">Skjul Shorts-funksjoner</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Skjul Shorts-app-snarvei</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Fjerner Shorts fra langtrykkmenyen for startskjermen</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Skjul Shorts-widget</string>
@@ -988,6 +993,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Installasjonsprogram</string>
     <string name="installer_settings_title">Standard installasjonsprogram</string>
+    <string name="settings_installation">Installasjon</string>
     <string name="installer_title">Velg installasjonsprogram</string>
     <string name="installer_internal_description">Bruker Android-pakkeinstallasjonsprogrammet</string>
     <string name="installer_play_store_description">Bruker systeminstallatøren og angir Google Play Butikk som installasjonskilde</string>
@@ -1018,7 +1024,7 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_title">%s er ikke tilgjengelig</string>
     <string name="installer_unavailable_message">Din foretrukne installasjonsprogram (%s) er for øyeblikket ikke tilgjengelig. Du kan fikse problemet og prøve igjen, eller bruke standardinstallasjonsprogrammet i stedet</string>
     <string name="installer_unavailable_shizuku_hint">Sørg for at Shizuku kjører og tillatelse er gitt til denne appen</string>
-    <string name="installer_use_standard">Bruk standard</string>
+    <string name="installer_choose_another">Velg en annen installasjonsprogram</string>
     <string name="installer_play_store_warning_title">Installer som Play Store?</string>
     <string name="installer_play_store_warning_message">Den patchede appen vil bli registrert som installert fra Google Play Butikk. Dette kan hjelpe tjenester som Android Auto med å gjenkjenne den som en Play Butikk-app, men det garanteres ikke for hver app eller enhet. Oppførselen kan variere avhengig av Android-versjon, ROM, enhetsmerke og app-spesifikke kontroller</string>
     <string name="installer_play_store_warning_risk">Play Store kan tilby oppdateringer for den patchede appen. Hvis du installerer den oppdateringen, vil den overskrive den patchede APK-filen med den originale versjonen og fjerne patchene. Hvis du blir bedt om å oppdatere, trykker du på menyen med tre prikker på appens Play Store-side og velger \"Slå av oppdateringer\"</string>
@@ -1026,11 +1032,13 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_mode">Installer som Play Butikk</string>
     <string name="installer_play_store_mode_description">Merk Google Play Butikk som installeringskilde</string>
     <string name="settings_prompt_installer_on_install">Installeringsvalg-melding</string>
-    <string name="settings_prompt_installer_on_install_description">Spør hvilken installeringsmetode som skal brukes for hver installasjon</string>
+    <string name="settings_prompt_installer_on_install_description">Spør hvordan hver app skal installeres: med root før patching, ellers etter det</string>
     <string name="settings_auto_install_with_shizuku">Automatisk installasjon etter patching</string>
-    <string name="settings_auto_install_with_shizuku_description">Installerer den patchede APK-en så snart patchingen er fullført</string>
+    <string name="settings_auto_install_with_shizuku_description">Installerer eller monterer den patchede APK-en så snart patchingen er fullført</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatisk avinstallasjon ved konflikt</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Avinstallerer den eksisterende appen ved signaturkonflikt. Dette kan fjerne appdata</string>
+    <string name="settings_ignore_install_target_rules">Ignorer installasjonsmålskrav</string>
+    <string name="settings_ignore_install_target_rules_description">La patcher at målkrevende installasjoner skrus av og de som er utelukket skrus på. Den patched appen fungerer kanskje ikke</string>
     <string name="settings_auto_uninstall_warning_title">Aktiver automatisk avinstallasjon?</string>
     <string name="settings_auto_uninstall_warning_message">Hvis Android rapporterer en signaturkonflikt under Shizuku-autoinstallasjon, vil Morphe avinstallere den eksisterende appen før den installerer den patchede APK-en</string>
     <string name="settings_auto_uninstall_warning_risk">Dette kan fjerne appdata. Hvis den patchede APK-en ikke klarer å installere etter avinstallasjon, kan den forrige appen allerede være borte</string>
@@ -1059,23 +1067,19 @@ Detaljer: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimalisering av batteri</string>
     <string name="settings_system_battery_optimization_description">Holder patchingen i gang når appen minimeres</string>
-    <string name="settings_system_background">Bakgrunn</string>
     <string name="settings_system_process_runtime">Prosesskjøretid</string>
     <string name="settings_system_process_runtime_description">Kjører patchingen i en separat prosess for bedre stabilitet</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Høyere grenser øker hastigheten for patching på kompatible enheter</string>
     <string name="settings_system_process_runtime_enable">Aktiver prosesskjøretid</string>
     <string name="settings_system_memory_limit_subtitle">Minne tilgjengelig for patching</string>
     <string name="settings_system_process_runtime_heap_limit_ignored">Denne enheten ignorerte minnegrensen på siste kjøring, så patching kan falle tilbake til å kjøre inne i Morphe</string>
     <string name="settings_system_memory_limit_warning">En lav minnebegrensning kan føre til feil ved patching av større apper</string>
     <string name="settings_system_memory_limit_high_warning">En høy minnegrense kan gjøre patching mye tregere på noen enheter. Øk den bare hvis patching fortsetter å mislykkes ved lavere grenser.</string>
-    <string name="settings_system_process_runtime_enabled_description">%s MB grense</string>
-    <string name="settings_system_process_runtime_disabled_description">Trykk for å konfigurere</string>
     <string name="settings_system_process_runtime_description_not_available">Denne funksjonen krever Android 11 eller nyere</string>
     <string name="settings_system_patcher_completion_sound">Fullføringslyd</string>
     <string name="settings_system_patcher_completion_sound_description">Spiller en distinkt tone for suksess eller feil når patching er fullført</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">Varsler</string>
-    <string name="settings_system_notifications_description">Konfigurerer bakgrunnsvarsler og fullføringslyder</string>
+    <string name="settings_system_notifications_description">Hvordan Morphe holder deg informert</string>
     <string name="settings_system_notifications_success_sound">Suksesslyd</string>
     <string name="settings_system_notifications_error_sound">Feil lyd</string>
     <string name="settings_system_notifications_sound_default">Standard</string>
@@ -1085,7 +1089,6 @@ Detaljer: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Tilbakestill til standard</string>
     <string name="settings_system_notifications_ringtone_picker_title">Velg en tone</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Importer og eksporter</string>
     <string name="settings_system_signing_key">Signeringsnøkkel</string>
     <string name="settings_system_signing_key_description">Sikkerhetskopierer eller gjenopprepper nøkkelen som signerer patched apper</string>
     <string name="settings_system_signing_key_dialog_description">Hver app Morphe patcher er signert med denne nøkkelen. Ta vare på en kopi: uten den kan patchede apper bare oppdateres etter at de er avinstallert.</string>
@@ -1132,7 +1135,6 @@ Detaljer: %2$s"</string>
     <string name="settings_system_export_debug_logs_export_failed">Kunne ikke eksportere logger</string>
     <string name="settings_system_export_debug_logs_export_success">Logger eksportert</string>
     <!-- Settings - System Tab - Files & Storage Section -->
-    <string name="settings_system_files">Filer og lagringsplass</string>
     <string name="settings_system_apks_size">Total størrelse: %s</string>
     <string name="settings_system_apks_delete_all_confirm">Dette vil slette de lagrede APK-filene som vises her permanent.</string>
     <string name="settings_system_apks_delete_selected_title">Slette valgte APK-er?</string>
@@ -1144,6 +1146,9 @@ Detaljer: %2$s"</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">Lagringshåndtering</string>
     <string name="settings_system_storage_management_description">Viser diskforbruk og tømmer cachelagrede filer</string>
+    <string name="settings_system_storage_used_free">Brukes av Morphe / gratis på denne enheten</string>
+    <string name="settings_system_storage_saved_apks">Lagrede APK-filer</string>
+    <string name="settings_system_storage_caches">Bufret data</string>
     <string name="settings_system_storage_keystore_title">Signeringsnøkkel</string>
     <string name="settings_system_storage_app_data_title">Appdata</string>
     <string name="settings_system_storage_patch_bundles_title">Patch-pakker</string>
@@ -1168,14 +1173,12 @@ Detaljer: %2$s"</string>
     <string name="settings_system_save_patched_apks_description">Lagre en kopi av den patchede APK-filen for senere eksport eller installasjon fra behandleren</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Patchede APK-er</string>
-    <string name="settings_system_patched_apks_description">Administrerer lagrede patchede applikasjonsfiler</string>
     <string name="settings_system_patched_apks_empty">Ingen patchede APK-er lagret ennå</string>
     <string name="settings_system_patched_apks_delete_title">Slett patched APK?</string>
     <string name="settings_system_patched_apks_deleted">Patchet APK slettet</string>
     <string name="settings_system_patched_apks_delete_all_title">Slette alle patchede APK-er?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Originale APK-er</string>
-    <string name="settings_system_original_apks_description">Lagret for patching på nytt. Én versjon per app holdes</string>
     <string name="settings_system_original_apks_empty">Ingen originale APK-er lagret</string>
     <string name="settings_system_original_apks_deleted">Original APK slettet</string>
     <string name="settings_system_original_apks_delete_title">Slett original APK?</string>
@@ -1185,14 +1188,11 @@ Detaljer: %2$s"</string>
     <string name="settings_system_patch_selections_title">Patch-valg</string>
     <string name="settings_system_patch_selections_description">Lagrede patch-valg, beholdes etter avinstallasjon</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Tilbakestill alle valg?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Tilbakestill pakkevalg?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Tilbakestille valgte pakker?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Tilbakestill kildevalg?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s på tvers av %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s i %2$s</string>
     <string name="settings_system_patch_selection_source_format">Kilde #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Dette vil permanent slette alle lagrede patchvalg for alle pakker og kilder</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Dette vil permanent slette alle lagrede patch-valg for &lt;b&gt;%s&lt;/b&gt; på tvers av alle kilder</string>
     <string name="settings_system_patch_selection_reset_source_warning">Dette vil permanent slette lagrede patch-valg for &lt;b&gt;%1$s&lt;/b&gt; i &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Dette vil permanent slette alle lagrede patch-valg for de valgte pakkene</string>
     <string name="settings_system_export_source_data_fail">Kunne ikke eksportere kildedata</string>
@@ -1214,6 +1214,8 @@ Detaljer: %2$s"</string>
     <string name="settings_system_apk_download_helper">APK-nedlastingshjelper</string>
     <string name="settings_system_apk_download_helper_trusted_count">Betrodde: %1$d av %2$d</string>
     <string name="settings_system_apk_download_helper_dialog_description">Hjelpeapper kan laste ned originale APK-er for deg. Bare de du stoler på her, tilbys i nedlastingsinstruksjonene.</string>
+    <string name="settings_system_apk_download_helper_trust_title">Stol på denne hjelperen?</string>
+    <string name="settings_system_apk_download_helper_trust">Stoler</string>
     <string name="settings_system_apk_download_helper_warning">APK-en kommer fra hjelpeappen, så stol bare på apper du kjenner. Morphe sjekker fortsatt pakken, versjonen og signaturen til hver fil før patching.</string>
     <string name="settings_system_apk_download_helper_installed_by">Installert av %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Installasjonskilde ukjent</string>
@@ -1235,9 +1237,13 @@ Detaljer: %2$s"</string>
     <string name="settings_system_about">Om</string>
     <string name="settings_system_manager_description">Et åpen kildekode-prosjekt for moderne, strømlinjeformet patching av populære Android-apper, drevet av fellesskapets tilbakemeldinger og bidrag</string>
     <string name="credits">Credits</string>
+    <string name="credits_description">Folkene bak Morphe</string>
+    <string name="settings_about_section_project">Prosjekt</string>
+    <string name="settings_about_section_help">Hjelp</string>
     <string name="credits_current_development">Nåværende utvikling</string>
     <string name="credits_prior_development">Tidligere utvikling</string>
     <string name="opensource_licenses">Lisenser med åpen kildekode</string>
+    <string name="opensource_licenses_description">Bibliotekene som Morphe er bygget på</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Et valg</string>
     <string name="easter_egg_pill_message">Ta den blå pillen og annonsene blir akkurat der de er. Ta den røde og se hvor dypt bytekoden går.</string>
@@ -1256,6 +1262,20 @@ Detaljer: %2$s"</string>
     <string name="patches">Patcher</string>
     <string name="home">Hjem</string>
     <string name="settings">Innstillinger</string>
+    <string name="apps">Apper</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patcher">Patcher</string>
+    <string name="settings_section_updates">Oppdateringer</string>
+    <string name="settings_section_patching">Lapplegging</string>
+    <string name="settings_section_appearance_summary">Slik Morphe ser ut</string>
+    <string name="settings_section_patch_options_summary">Hva enkeltmodus retter apper med</string>
+    <string name="settings_section_general">Generelt</string>
+    <string name="settings_section_patcher_summary">Slik appene blir rettet på denne enheten</string>
+    <string name="settings_section_help_info">Hjelp &amp; informasjon</string>
+    <string name="settings_section_about_summary">Mer om Morphe og hvordan du får hjelp</string>
+    <string name="settings_section_local_files">Filer</string>
+    <string name="settings_section_backup">Sikkerhetskopi</string>
+    <string name="settings_search">Søk innstillinger</string>
     <string name="yes">Ja</string>
     <string name="no">Nei</string>
     <string name="all">Alle</string>
@@ -1357,7 +1377,6 @@ Detaljer: %2$s"</string>
     <string name="hide">Skjul</string>
     <string name="hidden">Skjult</string>
     <string name="unhide">Vis</string>
-    <string name="unhide_done">Vises</string>
     <string name="ignore">Ignorer</string>
     <string name="stop_ignoring">Slutt å ignorere</string>
     <string name="logs">Logger</string>
@@ -1430,13 +1449,9 @@ Vil du likevel fortsette?"</string>
     <string name="onboarding_sources_version_desc">Trykk på versjonen for å se hele endringsloggen for denne kilden.</string>
     <string name="onboarding_sources_prerelease_desc">Aktiver dette for å motta forhåndsversjoner av patcher fra denne kilden.</string>
     <string name="onboarding_appearance_tab_desc">Tilpass utseendet til appen: tema, aksentfarge og bakgrunn.</string>
-    <string name="onboarding_appearance_theme_desc">Velg mellom lys, mørk eller systemtema. Du kan også velge en egendefinert aksentfarge eller aktivere dynamisk farge.</string>
     <string name="onboarding_expert_mode_desc">Aktiver Ekspertmodus for å låse opp patch-valg, tilpassede innstillinger og andre avanserte funksjoner.</string>
     <!-- Translate "System" the same way as the System settings tab -->
-    <string name="onboarding_system_tab_title">Systemfane</string>
-    <string name="onboarding_system_tab_desc">Administrering av nøkkellager, import-/eksportverktøy og appinformasjon.</string>
     <string name="onboarding_system_installer_desc">Velg hvordan patchede apper installeres: standard, rotmontering eller Shizuku.</string>
-    <string name="onboarding_system_process_runtime_desc">Kjør patching i en egen prosess for å forbedre stabiliteten og kontrollere minnebruken. Anbefales for store apper.</string>
     <string name="onboarding_system_file_picker_desc">Aktiver dette for å bruke den innebygde filbehandleren i stedet for systemvelgeren når du velger APK-er eller nøkkel lagre.</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
     <string name="tour_prompt_title">Rask omvisning</string>

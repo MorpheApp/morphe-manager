@@ -69,6 +69,7 @@
     <!-- Pun on the saying "Out with the old, in with the new" -->
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Fonte de parches</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_management_open_in_browser">Abrir no navegador</string>
     <string name="sources_management_failed_to_open_url">Erro ao abrir o URL</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -335,6 +336,10 @@ Elixe outro APK</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <!-- Shared strings -->
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patching">Parcheando</string>
+    <string name="settings_section_general">Xeneral</string>
+    <string name="settings_search">Buscar axustes</string>
     <string name="remove">Eliminar</string>
     <string name="search">Busca</string>
     <string name="enabled">Activado</string>

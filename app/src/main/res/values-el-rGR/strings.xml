@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Οι πηγές σας είναι ενημερωμένες</string>
     <string name="home_sources_are_loading">Οι πηγές φορτώνονται, παρακαλώ περιμένετε…</string>
     <string name="home_search_apps">Αναζήτηση εφαρμογών</string>
-    <string name="home_app_list_options_title">Ταξινόμηση και φιλτράρισμα</string>
-    <string name="home_app_list_options_state_description">Ταξινομημένες κατά %1$s, φιλτραρισμένες κατά %2$s</string>
+    <string name="list_options_title">Ταξινόμηση και φιλτράρισμα</string>
+    <string name="list_options_state_description">Ταξινομημένο κατά %1$s, φιλτραρισμένο κατά %2$s</string>
     <string name="home_app_filter_all_description">Κάθε εφαρμογή στην αρχική οθόνη</string>
     <string name="home_app_filter_patched_description">Εφαρμογές που έχετε επιδιορθώσει ή αποθηκεύσει με το Morphe</string>
     <string name="home_app_filter_not_patched_description">Εφαρμογές που δεν έχετε επιδιορθώσει ακόμα στο Morphe</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Πηγές τροποποιήσεων</string>
     <string name="sources_search">Αναζήτηση πηγών και επιδιορθώσεων</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Όλες οι πηγές</string>
+    <string name="sources_filter_enabled_description">Τα έπη των πηγών προέρχονται από</string>
+    <string name="sources_filter_disabled_description">Οι πηγές είναι απενεργοποιημένες</string>
+    <string name="sources_filter_updates">Ενημερώσεις</string>
+    <string name="sources_filter_updates_description">Πηγές με νεότερη έκδοση για λήψη</string>
+    <string name="sources_filter_issues">Απαιτούν προσοχή</string>
+    <string name="sources_filter_issues_description">Πηγές που είναι μπλοκαρισμένες, απέτυχαν να φορτώσουν ή απαιτούν νεότερη Morphe</string>
     <string name="sources_sort_manual">Χειροκίνητη ταξινόμηση</string>
     <string name="sources_sort_manual_hint">Πατήστε παρατεταμένα μια πηγή για να την αναδιατάξετε</string>
     <string name="sources_sort_last_updated">Τελευταία ενημέρωση</string>
@@ -167,7 +175,6 @@
     <string name="sources_apps_description">Οι επιλεγμένες εφαρμογές προέρχονται από αυτή την πηγή. Πατήστε μια εφαρμογή για να την αποκλείσετε ή να την επαναφέρετε. Μια εφαρμογή αφαιρείται από την αρχική οθόνη μόλις δεν υπάρχει καμία πηγή που να την προσφέρει, εκτός αν την έχετε διαμορφώσει χειροκίνητα</string>
     <string name="sources_apps_brought">Παρέχονται από αυτήν την πηγή</string>
     <string name="sources_apps_left_out">Εξαιρούνται από αυτήν την πηγή</string>
-    <string name="sources_apps_bring_back">Επαναφορά</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
     <string name="sources_apps_stays_patched">Κρατείται ως διαμορφωμένη χειροκίνητα</string>
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
@@ -243,6 +250,8 @@
     <string name="home_apk_availability_yes">Ναι, βοήθησέ με να βρω ένα APK</string>
     <string name="home_apk_availability_no">Όχι, ήδη έχω ένα APK</string>
     <string name="home_apk_helper_download">Χρησιμοποιήστε μια βοηθητική εφαρμογή</string>
+    <string name="home_apk_helper_untrusted">Έχει εγκατασταθεί μια βοηθητική εφαρμογή αλλά δεν έχει επικυρωθεί ακόμη, οπότε δεν προσφέρεται εδώ</string>
+    <string name="home_apk_helper_untrusted_action">Επανεξέταση βοηθητικών</string>
     <string name="home_apk_helper_title">Λήψη με μια βοηθητική εφαρμογή</string>
     <string name="home_apk_helper_description">Το Morphe θα ζητήσει από την βοηθητική εφαρμογή παρακάτω να κατεβάσει το αρχικό APK και να παραδώσει το αρχείο</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -539,7 +548,7 @@
     <string name="root_mount_module_unmount_warning">Εάν το KernelSU έχει ενεργοποιημένα από προεπιλογή modules Αποσυναρμολόγησης, ανοίξτε το KernelSU > Superuser > την εφαρμογή που τοποθετήσατε > Profile > Custom και απενεργοποιήστε τα modules Αποσυναρμολόγησης. Διαφορετικά, το τοποθετημένο τροποποιημένο APK ενδέχεται να μην έχει αποτέλεσμα, ακόμη και αν το Morphe το εμφανίζει ως τοποθετημένο</string>
     <string name="root_pre_patch_installer_standard_title">Τυπική Εγκατάσταση</string>
     <string name="root_pre_patch_installer_standard_description">Εφαρμογές ενημέρωσης ως ένα κανονικό APK με υποστήριξη GmsCore. Η ρύθμιση του εγκαταστάτη σας χρησιμοποιείται μετά την ενημέρωση</string>
-    <string name="root_pre_patch_installer_hint">Αυτή η λειτουργία ενημέρωσης είναι ανεξάρτητη από τις Ρυθμίσεις > Σύστημα > Εγκαταστάτη και δεν μπορεί να αλλάξει μετά την ενημέρωση</string>
+    <string name="root_pre_patch_installer_hint">Ζητήθηκε ενώ Ρυθμίσεις &gt; Διαρρύθμιση &gt; Εγκατάσταση &gt; Παράθυρο επιλογής εγκαταστάτη. Η λειτουργία διαρρύθμισης δεν μπορεί να αλλάξει μετά τη διαρρύθμιση</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Το σφάλμα αντιγράφηκε στο πρόχειρο</string>
     <string name="patcher_error_log">Αρχείο καταγραφής σφαλμάτων</string>
@@ -730,7 +739,6 @@
     <string name="mini_game_pairs_picker_subtitle">Αναποδογυρίστε τις κάρτες, βρείτε το ζευγάρι</string>
     <!-- Settings -->
     <string name="appearance">Εμφάνιση</string>
-    <string name="advanced">Για προχωρημένους</string>
     <string name="system">Σύστημα</string>
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background">Κινούμενο σχέδιο ταπετσαρίας</string>
@@ -758,6 +766,8 @@
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
     <string name="settings_appearance_seasonal_background_notice">Το φόντο %1$s είναι ενεργό έως τις %2$s όσο τα εποχιακά θέματα είναι ενεργά</string>
     <!-- Settings - Appearance Tab - Theme -->
+    <string name="settings_appearance_display">Οθόνη</string>
+    <string name="settings_appearance_effects">Εφέ</string>
     <string name="settings_appearance_theme">Θέμα</string>
     <string name="settings_appearance_theme_mode">Λειτουργία θέματος</string>
     <string name="settings_appearance_system">Σύστημα</string>
@@ -766,7 +776,6 @@
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_monochrome">Μονόχρωμο</string>
     <string name="settings_appearance_color_style">Στυλ χρώματος</string>
-    <string name="settings_appearance_colors">Χρώματα</string>
     <string name="settings_appearance_accent_color">Χρώμα έμφασης</string>
     <string name="settings_appearance_pure_black">Αληθινό μαύρο</string>
     <string name="settings_appearance_pure_black_description">Χρησιμοποιεί αληθινά μαύρα φόντα</string>
@@ -774,8 +783,9 @@
     <string name="settings_appearance_color_accents_description">Χρησιμοποιεί τα χρώματα κάθε εφαρμογής και πηγής αντί του έμφασης</string>
     <string name="settings_appearance_outlines">Περιγράμματα</string>
     <string name="settings_appearance_outlines_description">Σχεδιάζει ένα λεπτό περίγραμμα γύρω από κάρτες, πάνελ και κουμπιά</string>
+    <string name="settings_appearance_blur">Θάμπωμα</string>
+    <string name="settings_appearance_blur_description">Θολώνει το περιεχόμενο που κυλά κάτω από τις κεφαλίδες, τις μπάρες και τα παράθυρα</string>
     <!-- Settings - Appearance Tab - Language Selector -->
-    <string name="settings_appearance_language_and_display">Γλώσσα &amp; οθόνη</string>
     <string name="settings_appearance_app_language">Γλώσσα εφαρμογής</string>
     <string name="settings_appearance_app_language_current">Τρέχουσα γλώσσα</string>
     <string name="settings_appearance_translations_info_title">Οι μεταφράσεις για ορισμένες γλώσσες μπορεί να λείπουν ή να μην είναι ολοκληρωμένες</string>
@@ -793,8 +803,6 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Εμφανίζει ένα μήνυμα χαιρετισμού</string>
     <string name="settings_appearance_repatch_notice">Ειδοποίηση επανάληψης τροποποιήσεων</string>
     <string name="settings_appearance_repatch_notice_description">Εμφανίζει banner όταν οι διορθωμένες εφαρμογές μπορούν να επαναδιορθωθούν</string>
-    <string name="settings_appearance_sort_button">Κουμπί ταξινόμησης και φιλτραρίσματος</string>
-    <string name="settings_appearance_sort_button_description">Εμφανίζει κουμπί για ταξινόμηση και φιλτράρισμα εφαρμογών</string>
     <string name="settings_appearance_app_card_colors">Χρώματα καρτών εφαρμογών</string>
     <string name="settings_appearance_app_card_colors_default">Προεπιλογή</string>
     <string name="settings_appearance_app_card_colors_default_description">Δώστε σε κάθε εφαρμογή το χρώμα του δικού της πακέτου</string>
@@ -887,7 +895,6 @@
     <string name="notification_mount_replaced_title">Το %1$s δεν είναι πλέον πατσαρισμένο</string>
     <string name="notification_mount_replaced_text">v%1$s αντικατέστησε την πατσαρισμένη v%2$s. Ανοίξτε το Morphe για να την επαναφέρετε</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Εξειδικευμένες ρυθμίσεις</string>
     <string name="settings_advanced_expert_mode">Εξειδικευμένη λειτουργία</string>
     <string name="settings_advanced_expert_mode_description">Ξεκλειδώνει ρυθμίσεις προχωρημένης διόρθωσης και επιλογές patch</string>
     <string name="settings_advanced_expert_mode_dialog_title">Ενεργοποίηση της λειτουργίας εξειδικευμένου χρήστη;</string>
@@ -910,7 +917,6 @@
     <string name="settings_advanced_github_pat_export_warning">Δεν πρέπει να μοιράζεστε το PAT. Εάν το συμπεριλάβετε στις εξαγόμενες ρυθμίσεις, διατηρήστε το αρχείο ιδιωτικό διότι περιέχει το κλειδί</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Επιλογές τροποποιήσεων</string>
-    <string name="settings_advanced_patch_options_youtube_description">Επιλογές επωνυμίας και επικεφαλίδας</string>
     <string name="settings_advanced_patch_options_restart_message">Η αλλαγή στις ρυθμίσεις των τροποποιήσεων απαιτεί την τροποποίηση της εφαρμογής ξανά για να εφαρμοστούν</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">Στη λειτουργία εξειδικευμένου χρήστη οι ρυθμίσεις των τροποποιήσεων θα είναι διαθέσιμες κατά τη διάρκεια της τροποποίησης</string>
     <string name="settings_advanced_patch_options_loading">Φόρτωση επιλογών τροποποίησης…</string>
@@ -980,7 +986,6 @@ morphe_header_custom_dark.png
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
-    <string name="settings_advanced_patch_options_hide_shorts_features">Απόκρυψη χαρακτηριστικών Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Απόκρυψη συντόμευσης Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Διαγραφή Shorts από το μενού παρατεταμένου πατήματος</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Απόκρυψη γραφικού στοιχείου Shorts</string>
@@ -988,6 +993,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Εγκαταστάτης</string>
     <string name="installer_settings_title">Προεπιλεγμένος εγκαταστάτης</string>
+    <string name="settings_installation">Εγκατάσταση</string>
     <string name="installer_title">Επιλέξτε εγκαταστάτη</string>
     <string name="installer_internal_description">Χρησιμοποιεί τον ενσωματωμένο εγκαταστάτη πακέτων Android</string>
     <string name="installer_play_store_description">Χρησιμοποιεί το συστημικό πρόγραμμα εγκατάστασης και ορίζει το Google Play Store ως πηγή εγκατάστασης</string>
@@ -1018,7 +1024,7 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_title">%s μη διαθέσιμο</string>
     <string name="installer_unavailable_message">Ο προτιμώμενος εγκαταστάτης σας (%s) είναι αυτή τη στιγμή μη διαθέσιμος. Μπορείτε να διορθώσετε αυτό το πρόβλημα και να προσπαθήσετε ξανά, ή να χρησιμοποιήσετε τον καθιερωμένο εγκαταστάτη</string>
     <string name="installer_unavailable_shizuku_hint">Βεβαιωθείτε ότι το Shizuku τρέχει και ότι η άδεια έχει δοθεί σε αυτή την εφαρμογή.</string>
-    <string name="installer_use_standard">Χρησιμοποιήστε τον καθορισμένο</string>
+    <string name="installer_choose_another">Επιλέξτε άλλο εγκαταστάτη</string>
     <string name="installer_play_store_warning_title">Εγκατάσταση ως Play Store;</string>
     <string name="installer_play_store_warning_message">Η εφαρμογή που έχει διορθωθεί θα καταγραφεί ως εγκατεστημένη από το Google Play Store. Αυτό μπορεί να βοηθήσει υπηρεσίες όπως το Android Auto να την αναγνωρίσουν ως εφαρμογή του Play Store, αλλά δεν είναι εγγυημένο για κάθε εφαρμογή ή συσκευή. Η συμπεριφορά ενδέχεται να διαφέρει ανάλογα με την έκδοση Android, το ROM, τη μάρκα της συσκευής και τους ελέγχους της συγκεκριμένης εφαρμογής.</string>
     <string name="installer_play_store_warning_risk">Το Play Store ενδέχεται να προσφέρει ενημερώσεις για την τροποποιημένη εφαρμογή. Η εγκατάσταση αυτής της ενημέρωσης θα αντικαταστήσει το τροποποιημένο APK με την αρχική έκδοση και θα αφαιρέσει τις τροποποιήσεις. Εάν σας ζητηθεί να ενημερώσετε, πατήστε το μενού με τις τρεις τελείες στην σελίδα της εφαρμογής στο Play Store και επιλέξτε \"Απενεργοποίηση ενημερώσεων\".</string>
@@ -1026,11 +1032,13 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_mode">Εγκατάσταση ως Play Store</string>
     <string name="installer_play_store_mode_description">Σημαιοφορεί το Google Play Store ως πηγή εγκατάστασης</string>
     <string name="settings_prompt_installer_on_install">Εμφάνιση προτροπής επιλογής εγκαταστάτη</string>
-    <string name="settings_prompt_installer_on_install_description">Ζητά ποια installer να χρησιμοποιηθεί για κάθε εγκατάσταση</string>
+    <string name="settings_prompt_installer_on_install_description">Ερωτά πώς να εγκατασταθεί κάθε εφαρμογή: με δικαιώματα root πριν τη διαρρύθμιση, διαφορετικά μετά από αυτήν</string>
     <string name="settings_auto_install_with_shizuku">Αυτόματη εγκατάσταση μετά την επιδιόρθωση</string>
-    <string name="settings_auto_install_with_shizuku_description">Εγκαθιστά το τροποποιημένο APK μόλις ολοκληρωθεί η τροποποίηση</string>
+    <string name="settings_auto_install_with_shizuku_description">Εγκαθιστά ή προσάρχει το διαμορφωμένο APK μόλις ολοκληρωθεί η διαρρύθμιση</string>
     <string name="settings_auto_uninstall_with_shizuku">Αυτόματη απεγκατάσταση σε περίπτωση σύγκρουσης</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Απεγκαθιστά την υπάρχουσα εφαρμογή σε σύγκρουση υπογραφής. Αυτό μπορεί να αφαιρέσει δεδομένα εφαρμογής</string>
+    <string name="settings_ignore_install_target_rules">Αγνόηση απαιτήσεων στόχου εγκατάστασης</string>
+    <string name="settings_ignore_install_target_rules_description">Επιτρέπει την απενεργοποίηση των απαιτήσεων στόχου εγκατάστασης και την ενεργοποίηση των κανόνων που αποκλείονται. Η τροποποιημένη εφαρμογή ενδέχεται να μην λειτουργεί</string>
     <string name="settings_auto_uninstall_warning_title">Ενεργοποίηση αυτόματης απεγκατάστασης;</string>
     <string name="settings_auto_uninstall_warning_message">Εάν το Android αναφέρει μια σύγκρουση υπογραφών κατά την αυτόματη εγκατάσταση του Shizuku, το Morphe θα απεγκαταστήσει την υπάρχουσα εφαρμογή πριν εγκαταστήσει το διορθωμένο APK.</string>
     <string name="settings_auto_uninstall_warning_risk">Αυτό μπορεί να αφαιρέσει δεδομένα της εφαρμογής. Εάν το διορθωμένο APK αποτύχει να εγκατασταθεί μετά την απεγκατάσταση, η προηγούμενη εφαρμογή ενδέχεται να έχει ήδη διαγραφεί.</string>
@@ -1059,23 +1067,19 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Βελτιστοποίηση μπαταρίας</string>
     <string name="settings_system_battery_optimization_description">Διατηρεί τον επεξεργαστή ενεργό όταν η εφαρμογή είναι ελαχιστοποιημένη</string>
-    <string name="settings_system_background">Φόντο</string>
     <string name="settings_system_process_runtime">Χρόνος εκτέλεσης διεργασίας</string>
     <string name="settings_system_process_runtime_description">Εκτελεί την τροποποίηση σε ξεχωριστή διεργασία για καλύτερη σταθερότητα</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Υψηλότερες τιμές επιταχύνουν την εφαρμογή αλλαγών σε συσκευές με κατάλληλες δυνατότητες</string>
     <string name="settings_system_process_runtime_enable">Ενεργοποίηση χρόνου εκτέλεσης διεργασίας</string>
     <string name="settings_system_memory_limit_subtitle">Διαθέσιμη μνήμη για τροποποίηση</string>
     <string name="settings_system_process_runtime_heap_limit_ignored">Αυτή η συσκευή αγνόησε το όριο μνήμης κατά την τελευταία εκτέλεση, οπότε η εφαρμογή διορθώσεων ενδέχεται να χρησιμοποιήσει ως εναλλακτική την εκτέλεση εντός του Morphe.</string>
     <string name="settings_system_memory_limit_warning">Ένα μικρό όριο μνήμης μπορεί να δημιουργήσει αποτυχία όταν τροποποιούνται μεγαλύτερες εφαρμογές</string>
     <string name="settings_system_memory_limit_high_warning">Ένα υψηλό όριο μνήμης μπορεί να κάνει την επιδιόρθωση πολύ πιο αργή σε ορισμένες συσκευές. Αυξήστε το μόνο αν η επιδιόρθωση συνεχίζει να αποτυγχάνει σε χαμηλότερα όρια.</string>
-    <string name="settings_system_process_runtime_enabled_description">%s MB όριο</string>
-    <string name="settings_system_process_runtime_disabled_description">Πατήστε για διαμόρφωση</string>
     <string name="settings_system_process_runtime_description_not_available">Αυτή η λειτουργία απαιτεί Android 11 ή νεότερη έκδοση</string>
     <string name="settings_system_patcher_completion_sound">Ήχος ολοκλήρωσης</string>
     <string name="settings_system_patcher_completion_sound_description">Αναπαράγει έναν διακριτό τόνο για επιτυχία ή αποτυχία κατά την ολοκλήρωση της επιδιόρθωσης</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">Ειδοποιήσεις</string>
-    <string name="settings_system_notifications_description">Διαμορφώνει ειδοποιήσεις παρασκηνίου και ήχους ολοκλήρωσης</string>
+    <string name="settings_system_notifications_description">Πώς σας ενημερώνει η Morphe</string>
     <string name="settings_system_notifications_success_sound">Ήχος επιτυχίας</string>
     <string name="settings_system_notifications_error_sound">Ήχος αποτυχίας</string>
     <string name="settings_system_notifications_sound_default">Προεπιλογή</string>
@@ -1085,7 +1089,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_notifications_sound_reset">Επαναφορά στις προεπιλογές</string>
     <string name="settings_system_notifications_ringtone_picker_title">Επιλέξτε τόνο</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Εισαγωγή &amp; εξαγωγή</string>
     <string name="settings_system_signing_key">Κλειδί υπογραφής</string>
     <string name="settings_system_signing_key_description">Kάνει backup ή αποκαθιστά το κλειδί που υπογράφει τις διορθωμένες εφαρμογές</string>
     <string name="settings_system_signing_key_dialog_description">Κάθε εφαρμογή που επιδιορθώνει το Morphe υπογράφεται με αυτό το κλειδί. Φυλάξτε ένα αντίγραφο: χωρίς αυτό, οι επιδιορθωμένες εφαρμογές μπορούν να ενημερωθούν μόνο μετά την απεγκατάστασή τους.</string>
@@ -1132,7 +1135,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_failed">Αποτυχία εξαγωγής αρχείων καταγραφής</string>
     <string name="settings_system_export_debug_logs_export_success">Επιτυχής εξαγωγή αρχείων καταγραφής</string>
     <!-- Settings - System Tab - Files & Storage Section -->
-    <string name="settings_system_files">Αρχεία &amp; αποθηκευτικός χώρος</string>
     <string name="settings_system_apks_size">Συνολικό μέγεθος: %s</string>
     <string name="settings_system_apks_delete_all_confirm">Αυτό θα διαγράψει οριστικά τα αποθηκευμένα αρχεία APK που εμφανίζονται εδώ</string>
     <string name="settings_system_apks_delete_selected_title">Διαγραφή επιλεγμένων APK;</string>
@@ -1144,6 +1146,9 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">Διαχείριση αποθηκευτικού χώρου</string>
     <string name="settings_system_storage_management_description">Εμφανίζει χρήση δίσκου και καθαρίζει αρχεία cache</string>
+    <string name="settings_system_storage_used_free">Χρησιμοποιείται από την Morphe / δωρεάν σε αυτή τη συσκευή</string>
+    <string name="settings_system_storage_saved_apks">Αποθηκευμένα αρχεία APK</string>
+    <string name="settings_system_storage_caches">Εκκαθάριση</string>
     <string name="settings_system_storage_keystore_title">Αποθηκευτικό στοιχείο υπογραφών</string>
     <string name="settings_system_storage_app_data_title">Δεδομένα εφαρμογής</string>
     <string name="settings_system_storage_patch_bundles_title">Δέσμες ενημερώσεων</string>
@@ -1168,14 +1173,12 @@ morphe_header_custom_dark.png
     <string name="settings_system_save_patched_apks_description">Αποθηκεύστε ένα αντίγραφο του τροποποιημένου APK για μεταγενέστερη εξαγωγή ή επανεγκατάσταση από το διαχειριστή</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Τροποποιημένα αρχεία APK</string>
-    <string name="settings_system_patched_apks_description">Διαχείριση αποθηκευμένων αρχείων τροποποιημένων εφαρμογών</string>
     <string name="settings_system_patched_apks_empty">Δεν υπάρχουν αποθηκευμένες τροποποιημένες APKs ακόμα</string>
     <string name="settings_system_patched_apks_delete_title">Διαγραφή τροποποιημένης APK;</string>
     <string name="settings_system_patched_apks_deleted">Επιτυχής διαγραφή</string>
     <string name="settings_system_patched_apks_delete_all_title">Διαγραφή όλων των τροποποιημένων APK;</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Αρχικά αρχεία APK</string>
-    <string name="settings_system_original_apks_description">Αποθηκευμένα για επανατροποποίηση. Διατηρείται μία έκδοση ανά εφαρμογή</string>
     <string name="settings_system_original_apks_empty">Δεν υπάρχουν αποθηκευμένες πρωτότυπες APKs</string>
     <string name="settings_system_original_apks_deleted">Η πρωτότυπη APK διαγράφτηκε επιτυχώς</string>
     <string name="settings_system_original_apks_delete_title">Διαγραφή αρχικού APK;</string>
@@ -1185,14 +1188,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">Επιλεγμένες τροποποιήσεις</string>
     <string name="settings_system_patch_selections_description">Αποθηκευμένες επιλογές τροποποιήσεων, διατηρούνται μετά την απεγκατάσταση</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Επαναφορά όλων των επιλογών;</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Επαναφορά επιλογών πακέτου;</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Επαναφορά επιλεγμένων πακέτων;</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Επαναφορά επιλογής πηγής;</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s από %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s σε %2$s</string>
     <string name="settings_system_patch_selection_source_format">Πηγή #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Αυτό θα διαγράψει οριστικά όλες τις αποθηκευμένες επιλεγμένες τροποποιήσεις για όλα τα πακέτα και τις πηγές</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Αυτό θα διαγράψει οριστικά όλες τις αποθηκευμένες επιλεγμένες τροποποιήσεις για το &lt;b&gt;%s&lt;/b&gt; σε όλες τις πηγές</string>
     <string name="settings_system_patch_selection_reset_source_warning">Αυτό θα διαγράψει οριστικά τις επιλεγμένες τροποποιήσεις για &lt;b&gt;%1$s&lt;/b&gt; στην &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Αυτό θα διαγράψει οριστικά όλες τις αποθηκευμένες επιλεγμένες τροποποιήσεις για τα επιλεγμένα πακέτα</string>
     <string name="settings_system_export_source_data_fail">Αποτυχία εξαγωγής δεδομένων πηγής</string>
@@ -1214,6 +1214,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper">Βοηθητικό εργαλείο λήψης APK</string>
     <string name="settings_system_apk_download_helper_trusted_count">Έμπιστες: %1$d από %2$d</string>
     <string name="settings_system_apk_download_helper_dialog_description">Οι βοηθητικές εφαρμογές μπορούν να κατεβάζουν πρωτότυπα APK για εσάς. Μόνο όσες εμπιστεύεστε εδώ προσφέρονται στις οδηγίες λήψης.</string>
+    <string name="settings_system_apk_download_helper_trust_title">Εμπιστεύεστε αυτό τον βοηθό;</string>
+    <string name="settings_system_apk_download_helper_trust">Εμπιστοσύνη</string>
     <string name="settings_system_apk_download_helper_warning">Το APK προέρχεται από τη βοηθητική εφαρμογή, γι\' αυτό να εμπιστεύεστε μόνο εφαρμογές που γνωρίζετε. Το Morphe εξακολουθεί να ελέγχει το πακέτο, την έκδοση και την υπογραφή κάθε αρχείου πριν από την τροποποίηση.</string>
     <string name="settings_system_apk_download_helper_installed_by">Εγκαταστάθηκε από %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Άγνωστος εγκαταστάτης</string>
@@ -1235,9 +1237,13 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">Πληροφορίες</string>
     <string name="settings_system_manager_description">Ένα έργο ανοικτού κώδικα για σύγχρονη, βελτιστοποιημένη ενημέρωση δημοφιλών εφαρμογών Android, που υποστηρίζεται από την κοινότητα και τις συνεισφορές της</string>
     <string name="credits">Εύσημα</string>
+    <string name="credits_description">Τα πρόσωπα πίσω από τα Morphe</string>
+    <string name="settings_about_section_project">Έργο</string>
+    <string name="settings_about_section_help">Βοήθεια</string>
     <string name="credits_current_development">Τρέχουσα ανάπτυξη</string>
     <string name="credits_prior_development">Προηγούμενη ανάπτυξη</string>
     <string name="opensource_licenses">Άδειες ανοικτού κώδικα</string>
+    <string name="opensource_licenses_description">Βιβλιοθήκες στις οποίες βασίζεται τα Morphe</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Μια επιλογή</string>
     <string name="easter_egg_pill_message">Πάρε το μπλε χάπι και οι διαφημίσεις παραμένουν ακριβώς εκεί που είναι. Πάρε το κόκκινο και δες πόσο βαθιά φτάνει ο bytecode.</string>
@@ -1256,6 +1262,20 @@ morphe_header_custom_dark.png
     <string name="patches">Τροποποιήσεις</string>
     <string name="home">Αρχική</string>
     <string name="settings">Ρυθμίσεις</string>
+    <string name="apps">Εφαρμογές</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patcher">Patch</string>
+    <string name="settings_section_updates">Ενημερώσεις</string>
+    <string name="settings_section_patching">Τροποποίηση</string>
+    <string name="settings_section_appearance_summary">Πώς φαίνεται το Morphe</string>
+    <string name="settings_section_patch_options_summary">Τι διαμορφώνει η απλή λειτουργία στις εφαρμογές</string>
+    <string name="settings_section_general">Γενικά</string>
+    <string name="settings_section_patcher_summary">Πώς επιδιορθώνονται οι εφαρμογές σε αυτή τη συσκευή</string>
+    <string name="settings_section_help_info">Βοήθεια &amp; πληροφορίες</string>
+    <string name="settings_section_about_summary">Περισσότερα για το Morphe και αναζήτηση βοήθειας</string>
+    <string name="settings_section_local_files">Αρχεία</string>
+    <string name="settings_section_backup">Αντίγραφο ασφαλείας</string>
+    <string name="settings_search">Ρυθμίσεις αναζήτησης</string>
     <string name="yes">Ναι</string>
     <string name="no">Όχι</string>
     <string name="all">Όλα</string>
@@ -1357,7 +1377,6 @@ morphe_header_custom_dark.png
     <string name="hide">Απόκρυψη</string>
     <string name="hidden">Κρυφό</string>
     <string name="unhide">Εμφάνιση</string>
-    <string name="unhide_done">Εμφανίστηκε</string>
     <string name="ignore">Αγνόηση</string>
     <string name="stop_ignoring">Σταματήστε να αγνοείτε</string>
     <string name="logs">Εγγραφές</string>
@@ -1430,13 +1449,9 @@ morphe_header_custom_dark.png
     <string name="onboarding_sources_version_desc">Πατήστε στην έκδοση για να δείτε το πλήρες αρχείο αλλαγών για αυτήν την πηγή</string>
     <string name="onboarding_sources_prerelease_desc">Ενεργοποιήστε το για να λαμβάνετε εκδόσεις ενημερώσεων πριν από την επίσημη κυκλοφορία από αυτήν την πηγή</string>
     <string name="onboarding_appearance_tab_desc">Προσαρμόστε την εμφάνιση της εφαρμογής: θέμα, χρώμα έμφασης και φόντο</string>
-    <string name="onboarding_appearance_theme_desc">Επιλέξτε μεταξύ φωτεινού, σκούρου ή θέματος συστήματος. Μπορείτε επίσης να επιλέξετε ένα προσαρμοσμένο χρώμα έμφασης ή να ενεργοποιήσετε το Dynamic Color</string>
     <string name="onboarding_expert_mode_desc">Ενεργοποιήστε την Εξειδικευμένη Λειτουργία για να ξεκλειδώσετε την επιλογή ενημερώσεων, προσαρμοσμένες επιλογές και άλλες προηγμένες λειτουργίες</string>
     <!-- Translate "System" the same way as the System settings tab -->
-    <string name="onboarding_system_tab_title">Καρτέλα Συστήματος</string>
-    <string name="onboarding_system_tab_desc">Διαχείριση καταλόγων κλειδιών, εργαλεία εισαγωγής/εξαγωγής και πληροφορίες εφαρμογών</string>
     <string name="onboarding_system_installer_desc">Επιλέξτε πώς θα εγκατασταθούν οι ενημερωμένες εφαρμογές: τυπική, root mount ή Shizuku</string>
-    <string name="onboarding_system_process_runtime_desc">Εκτελέστε την ενημέρωση σε μια ξεχωριστή διαδικασία για να βελτιώσετε τη σταθερότητα και να ελέγξετε τη χρήση μνήμης. Συνιστάται για μεγάλες εφαρμογές</string>
     <string name="onboarding_system_file_picker_desc">Ενεργοποιήστε το για να χρησιμοποιήσετε τον ενσωματωμένο διαχειριστή αρχείων αντί για το πρόγραμμα επιλογής του συστήματος κατά την επιλογή αρχείων APK ή καταλόγων κλειδιών</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
     <string name="tour_prompt_title">Γρήγορη περιήγηση λειτουργιών</string>

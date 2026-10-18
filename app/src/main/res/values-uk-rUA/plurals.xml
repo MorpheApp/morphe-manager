@@ -6,6 +6,13 @@
         <item quantity="many">%s патчів</item>
         <item quantity="other">%s патчів</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
+    <plurals name="library_count">
+        <item quantity="one">%s бібліотека</item>
+        <item quantity="few">%s бібліотеки</item>
+        <item quantity="many">%s бібліотек</item>
+        <item quantity="other">%s бібліотек</item>
+    </plurals>
     <plurals name="option_count">
         <item quantity="one">%s параметр патча</item>
         <item quantity="few">%s параметри патча</item>

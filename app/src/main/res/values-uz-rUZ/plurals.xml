@@ -4,6 +4,7 @@
         <item quantity="one">%s ta tuzatish</item>
         <item quantity="other">%s ta tuzatishlar</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
     <plurals name="option_count">
         <item quantity="one">%s ta tuzatish imkoniyati</item>
         <item quantity="other">%s ta tuzatish imkoniyatlari</item>

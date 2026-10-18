@@ -4,6 +4,7 @@
         <item quantity="one">%s патч</item>
         <item quantity="other">%s Патчтар</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
     <plurals name="option_count">
         <item quantity="one">%s патч опциясы</item>
         <item quantity="other">%s Патч опциялары</item>

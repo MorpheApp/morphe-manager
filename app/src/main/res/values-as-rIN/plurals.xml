@@ -4,6 +4,7 @@
         <item quantity="one">%s  টা প্যাচ</item>
         <item quantity="other">%s টা প্যাচ</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
     <plurals name="option_count">
         <item quantity="one">%s টা প্যাচ বিকল্প</item>
         <item quantity="other">%s টা প্যাচ বিকল্প</item>

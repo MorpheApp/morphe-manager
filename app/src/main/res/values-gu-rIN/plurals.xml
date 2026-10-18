@@ -4,6 +4,7 @@
         <item quantity="one">%s પેચ</item>
         <item quantity="other">%s પેચો</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
     <plurals name="option_count">
         <item quantity="one">%s પેચ વિકલ્પ</item>
         <item quantity="other">%s પેચ વિકલ્પો</item>

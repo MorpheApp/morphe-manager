@@ -3,6 +3,10 @@
     <plurals name="patch_count">
         <item quantity="other">%s bản vá</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
+    <plurals name="library_count">
+        <item quantity="other">%s thư viện</item>
+    </plurals>
     <plurals name="option_count">
         <item quantity="other">%s tùy chỉnh bản vá</item>
     </plurals>

@@ -4,6 +4,11 @@
         <item quantity="one">%s tillägg</item>
         <item quantity="other">%s tillägg</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
+    <plurals name="library_count">
+        <item quantity="one">%s bibliotek</item>
+        <item quantity="other">%s bibliotek</item>
+    </plurals>
     <plurals name="option_count">
         <item quantity="one">%s tilläggsalternativ</item>
         <item quantity="other">%s tilläggsalternativ</item>

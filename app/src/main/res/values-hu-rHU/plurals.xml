@@ -4,6 +4,11 @@
         <item quantity="one">%s módosítás</item>
         <item quantity="other">%s módosítás</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
+    <plurals name="library_count">
+        <item quantity="one">%s könyvtár</item>
+        <item quantity="other">%s könyvtár</item>
+    </plurals>
     <plurals name="option_count">
         <item quantity="one">%s módosítási opció</item>
         <item quantity="other">%s módosítási opció</item>

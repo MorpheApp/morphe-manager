@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Sursele tale sunt la zi</string>
     <string name="home_sources_are_loading">Sursele se încarcă, te rugăm să aștepți…</string>
     <string name="home_search_apps">Caută aplicații</string>
-    <string name="home_app_list_options_title">Sortează și filtrează</string>
-    <string name="home_app_list_options_state_description">Sortate după %1$s, filtrate după %2$s</string>
+    <string name="list_options_title">Sortează și filtrează</string>
+    <string name="list_options_state_description">Sortate după %1$s, filtrate după %2$s</string>
     <string name="home_app_filter_all_description">Fiecare aplicație de pe ecranul de pornire</string>
     <string name="home_app_filter_patched_description">Aplicațiile pe care le-ai patch-uit sau salvat cu Morphe</string>
     <string name="home_app_filter_not_patched_description">Aplicațiile pe care nu le-ai patch-uit încă în Morphe</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Surse de patch-uri</string>
     <string name="sources_search">Caută surse și patch-uri</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Toate sursele</string>
+    <string name="sources_filter_enabled_description">Patch-urile surselor sunt preluate din</string>
+    <string name="sources_filter_disabled_description">Surse dezactivate</string>
+    <string name="sources_filter_updates">Actualizări</string>
+    <string name="sources_filter_updates_description">Sursele care au o versiune mai nouă de obținut</string>
+    <string name="sources_filter_issues">Necesită atenție</string>
+    <string name="sources_filter_issues_description">Sursele care sunt blocate, nu s-au încărcat sau necesită o versiune mai nouă Morphe</string>
     <string name="sources_sort_manual">Comandă manuală</string>
     <string name="sources_sort_manual_hint">Țineți apăsat pe o sursă pentru a reordona</string>
     <string name="sources_sort_last_updated">Ultima actualizare</string>
@@ -167,7 +175,6 @@
     <string name="sources_apps_description">Aplicațiile bifațe provin din această sursă. Atingeți o aplicație pentru a o exclude sau a o readuce. O aplicație părăsește ecranul de start atunci când nicio sursă nu o mai aduce, decât dacă ați patch-uit-o</string>
     <string name="sources_apps_brought">Aduse de această sursă</string>
     <string name="sources_apps_left_out">Excluse din această sursă</string>
-    <string name="sources_apps_bring_back">Readuceți</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
     <string name="sources_apps_stays_patched">Păstrată ca patch-uită</string>
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
@@ -243,6 +250,8 @@ Orice adaugi de pe acest site este folosit pe propriul risc."</string>
     <string name="home_apk_availability_yes">Da, ajută-mă să găsesc un APK</string>
     <string name="home_apk_availability_no">Nu, am deja un APK</string>
     <string name="home_apk_helper_download">Utilizați o aplicație de asistență</string>
+    <string name="home_apk_helper_untrusted">O aplicație auxiliară este instalată, dar nu este încă de încredere, așa că nu este oferită aici</string>
+    <string name="home_apk_helper_untrusted_action">Revizuiește asistenții</string>
     <string name="home_apk_helper_title">Descărcare cu o aplicație de asistență</string>
     <string name="home_apk_helper_description">Morphe va solicita aplicației de asistență de mai jos să descarce APK-ul original și să returneze fișierul</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -539,7 +548,7 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="root_mount_module_unmount_warning">Dacă KernelSU are modulul Deconectare module activat implicit, deschide KernelSU &gt; Superuser &gt; aplicația montată &gt; Profil &gt; Personalizat și dezactivează Deconectare module. Altfel, fișierul APK patch-uit montat s-ar putea să nu aibă efect, chiar dacă Morphe îl afișează ca fiind montat</string>
     <string name="root_pre_patch_installer_standard_title">Mod de instalare standard</string>
     <string name="root_pre_patch_installer_standard_description">Patch-uri ca un APK normal cu suport GmsCore. Setarea de instalare este folositã dupã aplicarea patch-ului.</string>
-    <string name="root_pre_patch_installer_hint">Acest mod de patch este separat de Settings &gt; System &gt; Installer şi nu poate fi modificat dupã aplicarea patch-ului.</string>
+    <string name="root_pre_patch_installer_hint">Întrebare în timp ce Setări &gt; Patching &gt; Instalare &gt; Prompt de selectare a instalatorului este activ. Modul de patch nu poate fi schimbat după patch</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Eroare copiată în clipboard</string>
     <string name="patcher_error_log">Jurnal erori</string>
@@ -730,7 +739,6 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="mini_game_pairs_picker_subtitle">Întoarceți cărțile, găsiți perechea</string>
     <!-- Settings -->
     <string name="appearance">Aspect</string>
-    <string name="advanced">Avansat</string>
     <string name="system">Sistem</string>
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background">Animație de fond</string>
@@ -758,6 +766,8 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
     <string name="settings_appearance_seasonal_background_notice">Fundalul %1$s este activ până pe %2$s cât timp temele sezoniere sunt pornite</string>
     <!-- Settings - Appearance Tab - Theme -->
+    <string name="settings_appearance_display">Afișaj</string>
+    <string name="settings_appearance_effects">Efecte</string>
     <string name="settings_appearance_theme">Temă</string>
     <string name="settings_appearance_theme_mode">Mod tematic</string>
     <string name="settings_appearance_system">Sistem</string>
@@ -766,7 +776,6 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_monochrome">Monocrom</string>
     <string name="settings_appearance_color_style">Stil de culoare</string>
-    <string name="settings_appearance_colors">Culori</string>
     <string name="settings_appearance_accent_color">Culoare accent</string>
     <string name="settings_appearance_pure_black">Negru pur</string>
     <string name="settings_appearance_pure_black_description">Folosește fundaluri negre pure</string>
@@ -774,8 +783,9 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="settings_appearance_color_accents_description">Folosește culoarea fiecărei aplicații și a sursei în loc de cea de accent</string>
     <string name="settings_appearance_outlines">Contururi</string>
     <string name="settings_appearance_outlines_description">Desenează un contur subțire în jurul cardurilor, panourilor și butoanelor</string>
+    <string name="settings_appearance_blur">Efect de blur</string>
+    <string name="settings_appearance_blur_description">Estompează ce se derulează sub antete, bare și panouri</string>
     <!-- Settings - Appearance Tab - Language Selector -->
-    <string name="settings_appearance_language_and_display">Limbă și afișare</string>
     <string name="settings_appearance_app_language">Limbă aplicație</string>
     <string name="settings_appearance_app_language_current">Limba curentă</string>
     <string name="settings_appearance_translations_info_title">Traduțiile pentru unele limbi pot lipsi sau să fie incomplet</string>
@@ -792,8 +802,6 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Afișează un mesaj de salut</string>
     <string name="settings_appearance_repatch_notice">Notificare privind repatch-uirea</string>
     <string name="settings_appearance_repatch_notice_description">Afișează o banderolă când aplicațiile cu patch-uri pot fi repatch-uite</string>
-    <string name="settings_appearance_sort_button">Buton de sortare și filtrare</string>
-    <string name="settings_appearance_sort_button_description">Afișează un buton pentru sortarea și filtrarea aplicațiilor</string>
     <string name="settings_appearance_app_card_colors">Culori card aplicație</string>
     <string name="settings_appearance_app_card_colors_default">Implicit</string>
     <string name="settings_appearance_app_card_colors_default_description">Oferă fiecărei aplicații culoarea propriului pachet</string>
@@ -886,7 +894,6 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="notification_mount_replaced_title">%1$s nu mai este patchuit</string>
     <string name="notification_mount_replaced_text">v%1$s a înlocuit versiunea patchuită v%2$s. Deschide Morphe pentru a o restaura</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Setări expert</string>
     <string name="settings_advanced_expert_mode">Mod expert</string>
     <string name="settings_advanced_expert_mode_description">Deblochează setările avansate de patch-uire și opțiunile de patch</string>
     <string name="settings_advanced_expert_mode_dialog_title">Vrei sâ activezi modul expert?</string>
@@ -909,7 +916,6 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="settings_advanced_github_pat_export_warning">Nu partaja PAT-ul tău. Dacă îl incluzi într-un export de setări, păstrează acel fișier privat, deoarece conține jetonul</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Opțiuni de patch-uire</string>
-    <string name="settings_advanced_patch_options_youtube_description">Opțiuni de branding și antet</string>
     <string name="settings_advanced_patch_options_restart_message">Schimbarea opțiunilor de patach necesită repatachizarea aplicației pentru a fi aplicată</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">În mod expert, opțiunile de patach vor fi disponibile în timpul procesului de patachizare</string>
     <string name="settings_advanced_patch_options_loading">Se încarcă opțiunile de patach…</string>
@@ -979,7 +985,6 @@ Dimensiunile imaginilor trebuie să fie următoarele:
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
-    <string name="settings_advanced_patch_options_hide_shorts_features">Ascunde Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Ascunde butonul Shorts din meniul de lansare</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Elimină Shorts din meniul lung de apăsare al lansatorului</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Ascunde widgetul Shorts</string>
@@ -987,6 +992,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalator</string>
     <string name="installer_settings_title">Installer implicit</string>
+    <string name="settings_installation">Instalare</string>
     <string name="installer_title">Selectați instalatorul</string>
     <string name="installer_internal_description">Utilizează installerul de pachete Android</string>
     <string name="installer_play_store_description">Utilizează installer-ul sistem și setează Google Play Store ca sursă de instalare</string>
@@ -1017,7 +1023,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="installer_unavailable_title">%s indisponibil</string>
     <string name="installer_unavailable_message">Instalatorul preferat (%s) este curent indisponibil. Poți fixa problema și reinstalare, sau folosi instalatorul standard în schimb</string>
     <string name="installer_unavailable_shizuku_hint">Aseară că Shizuku rulează și permisiunea este acordată acestei aplicații</string>
-    <string name="installer_use_standard">Folosește standard</string>
+    <string name="installer_choose_another">Alege un alt installer</string>
     <string name="installer_play_store_warning_title">Instalează ca Play Store?</string>
     <string name="installer_play_store_warning_message">Aplicația modificată va fi înregistrată ca fiind instalată din Google Play Store. Acest lucru poate ajuta serviciile precum Android Auto să o recunoască drept o aplicație din Play Store, dar nu este garantat pentru fiecare aplicație sau dispozitiv. Comportamentul poate varia în funcție de versiunea Android, ROM, marca dispozitivului și verificările specifice aplicației.</string>
     <string name="installer_play_store_warning_risk">Play Store poate oferi actualizări pentru aplicația modificată. Instalarea acelei actualizări va suprascrie APK-ul modificat cu versiunea originală și va elimina modificările. Dacă ți se solicită să actualizezi, atinge meniul cu trei puncte pe pagina Play Store a aplicației și alege \"Dezactivează actualizările\"</string>
@@ -1025,11 +1031,13 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="installer_play_store_mode">Instalează ca Play Store</string>
     <string name="installer_play_store_mode_description">Marchează Google Play Store ca sursă de instalare</string>
     <string name="settings_prompt_installer_on_install">Solicitare de selecție a installerului</string>
-    <string name="settings_prompt_installer_on_install_description">Întreabă ce instalator se folosește la fiecare instalare</string>
+    <string name="settings_prompt_installer_on_install_description">Intreabă cum se instalează fiecare aplicație: cu root înainte de patch, altfel după</string>
     <string name="settings_auto_install_with_shizuku">Instalare automată după patch-uire</string>
-    <string name="settings_auto_install_with_shizuku_description">Instalează APK-ul modificat imediat ce se finalizează aplicarea patch-ului</string>
+    <string name="settings_auto_install_with_shizuku_description">Instalează sau montează APK-ul patch-uithi rapid ce patch-ul s-a completat</string>
     <string name="settings_auto_uninstall_with_shizuku">Dezinstalare automată în caz de conflict</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Dezinstalază aplicația existentă în caz de conflict de semnătură. Acest lucru poate șterge datele aplicației</string>
+    <string name="settings_ignore_install_target_rules">Ignorați cerințele țintei de instalare</string>
+    <string name="settings_ignore_install_target_rules_description">Permite dezactivarea cerințelor țintei de instalare și activarea celor excluse. Aplicația modificată s-ar putea să nu funcționeze</string>
     <string name="settings_auto_uninstall_warning_title">Activează dezinstalarea automată?</string>
     <string name="settings_auto_uninstall_warning_message">Dacă Android raportează un conflict de semnătură în timpul instalării automate Shizuku, Morphe va dezinstala aplicația existentă înainte de a instala fișierul APK modificat.</string>
     <string name="settings_auto_uninstall_warning_risk">Acest lucru poate elimina datele aplicației. Dacă fișierul APK modificat nu se instalează după dezinstalare, este posibil ca aplicația anterioară să nu mai existe.</string>
@@ -1058,23 +1066,19 @@ Detalii: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimizarea bateriei</string>
     <string name="settings_system_battery_optimization_description">Menține patcherul în funcțiune când aplicația este minimizată</string>
-    <string name="settings_system_background">Fundal</string>
     <string name="settings_system_process_runtime">Runtime proces</string>
     <string name="settings_system_process_runtime_description">Rulează patch-uirea într-un proces separat pentru o stabilitate mai bună</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Limite mai mari accelerează patch-uirea pe dispozitivele capabile</string>
     <string name="settings_system_process_runtime_enable">Activează proces runtime</string>
     <string name="settings_system_memory_limit_subtitle">Memorie disponibilă pentru patachizare</string>
     <string name="settings_system_process_runtime_heap_limit_ignored">Acest dispozitiv a ignorat limita de memorie la ultima rulare, așa că patch-urile ar putea recurge la rularea în interiorul Morphe.</string>
     <string name="settings_system_memory_limit_warning">O limită memorie joasă poate cauza eșecuri când patachizați aplicații mai mari</string>
     <string name="settings_system_memory_limit_high_warning">O limită mare de memorie poate face aplicarea de patch-uri mult mai lentă pe unele dispozitive. Măriți-o doar dacă aplicarea de patch-uri continuă să eșueze la limite mici.</string>
-    <string name="settings_system_process_runtime_enabled_description">Limită %s MO</string>
-    <string name="settings_system_process_runtime_disabled_description">Atinge pentru configurare</string>
     <string name="settings_system_process_runtime_description_not_available">Această funcție necesită Android 11 sau o versiune mai recentă</string>
     <string name="settings_system_patcher_completion_sound">Sunet de finalizare</string>
     <string name="settings_system_patcher_completion_sound_description">Redă un ton distinct pentru succes sau eșec la finalizarea aplicării patch-ului</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">Notificări</string>
-    <string name="settings_system_notifications_description">Configurează alertele din fundal și sunetele de finalizare</string>
+    <string name="settings_system_notifications_description">Cum te ține Morphe informat</string>
     <string name="settings_system_notifications_success_sound">Sunet de succes</string>
     <string name="settings_system_notifications_error_sound">Sunet de eșec</string>
     <string name="settings_system_notifications_sound_default">Implicit</string>
@@ -1084,7 +1088,6 @@ Detalii: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Resetați la implicit</string>
     <string name="settings_system_notifications_ringtone_picker_title">Alegeți un ton</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Importare și exportare</string>
     <string name="settings_system_signing_key">Cheie de semnare</string>
     <string name="settings_system_signing_key_description">Face copie de rezervă sau restaurează cheia care semnează aplicațiile patch-uite</string>
     <string name="settings_system_signing_key_dialog_description">Fiecare aplicație pe care Morphe o patch-uiește este semnată cu această cheie. Păstrează o copie: fără ea, aplicațiile patch-uite pot fi actualizate doar după dezinstalarea lor.</string>
@@ -1131,7 +1134,6 @@ Detalii: %2$s"</string>
     <string name="settings_system_export_debug_logs_export_failed">Eșec la exportarea jurnalelor</string>
     <string name="settings_system_export_debug_logs_export_success">Jurnale exportate</string>
     <!-- Settings - System Tab - Files & Storage Section -->
-    <string name="settings_system_files">Fișiere și stocare</string>
     <string name="settings_system_apks_size">Dimensiune totală: %s</string>
     <string name="settings_system_apks_delete_all_confirm">Aceasta va șterge definitiv fișierele APK salvate afișate aici</string>
     <string name="settings_system_apks_delete_selected_title">Ștergi APK-urile selectate?</string>
@@ -1143,6 +1145,9 @@ Detalii: %2$s"</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">Gestionare spațiu de stocare</string>
     <string name="settings_system_storage_management_description">Afișează utilizarea discului și șterge fișierele din cache</string>
+    <string name="settings_system_storage_used_free">Utilizat de Morphe / gratuit pe acest dispozitiv</string>
+    <string name="settings_system_storage_saved_apks">APK-uri salvate</string>
+    <string name="settings_system_storage_caches">Cache-uri</string>
     <string name="settings_system_storage_keystore_title">Magazie de chei de semnare</string>
     <string name="settings_system_storage_app_data_title">Date aplicație</string>
     <string name="settings_system_storage_patch_bundles_title">Pachete de patch-uri</string>
@@ -1167,14 +1172,12 @@ Detalii: %2$s"</string>
     <string name="settings_system_save_patched_apks_description">Salvează o copie a fișierului APK patch-uit pentru export ulterior sau reinstalare din manager</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK-uri patch-uite</string>
-    <string name="settings_system_patched_apks_description">Administrează fișierele patch-uite salvate ale aplicațiilor</string>
     <string name="settings_system_patched_apks_empty">Niciun APK patch-uit salvat încă</string>
     <string name="settings_system_patched_apks_delete_title">Ștergi APK-ul patch-uit?</string>
     <string name="settings_system_patched_apks_deleted">APK-ul patch-uit a fost șters cu succes</string>
     <string name="settings_system_patched_apks_delete_all_title">Ștergi toate APK-urile modificate?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">APK-uri originale</string>
-    <string name="settings_system_original_apks_description">Salvate pentru patch-uire ulterioară. Este păstrată o singură versiune per aplicație</string>
     <string name="settings_system_original_apks_empty">Niciun APK original stocat</string>
     <string name="settings_system_original_apks_deleted">APK original șters cu succes</string>
     <string name="settings_system_original_apks_delete_title">Ștergi APK-ul original?</string>
@@ -1184,14 +1187,11 @@ Detalii: %2$s"</string>
     <string name="settings_system_patch_selections_title">Gestiune selectii de modificări</string>
     <string name="settings_system_patch_selections_description">Salvează selecțiile de patch-uri, păstrate după dezinstalare</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Resetați toate selectiile?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Resetați selectiile pachetului?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Resetezi pachetele selectate?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Resetați selectia sursei?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s peste %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s în %2$s</string>
     <string name="settings_system_patch_selection_source_format">Sursă #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Acesta va șterge permanent toate selectiile de pachet salvate pentru toate pachetele și sursele</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Aceasta va șterge permanent toate selecțiile de patch-uri salvate pentru &lt;b&gt;%s&lt;/b&gt; pe toate sursele.</string>
     <string name="settings_system_patch_selection_reset_source_warning">Aceasta va șterge permanent selecțiile de patch-uri salvate pentru &lt;b&gt;%1$s&lt;/b&gt; în &lt;b&gt;%2$s&lt;/b&gt;.</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Aceasta va șterge permanent toate selecțiile de patch-uri salvate pentru pachetele selectate.</string>
     <string name="settings_system_export_source_data_fail">Eșec la exportarea datelor sursei</string>
@@ -1213,6 +1213,8 @@ Detalii: %2$s"</string>
     <string name="settings_system_apk_download_helper">Asistent descărcare APK</string>
     <string name="settings_system_apk_download_helper_trusted_count">De încredere: %1$d din %2$d</string>
     <string name="settings_system_apk_download_helper_dialog_description">Aplicațiile de ajutor pot descărca APK-uri originale pentru tine. Doar cele în care ai încredere aici sunt oferite în instrucțiunile de descărcare</string>
+    <string name="settings_system_apk_download_helper_trust_title">Încredere în acest asistent?</string>
+    <string name="settings_system_apk_download_helper_trust">Încredere</string>
     <string name="settings_system_apk_download_helper_warning">APK-ul provine de la aplicația de ajutor, așa că ai încredere doar în aplicațiile pe care le cunoști. Morphe verifică în continuare pachetul, versiunea și semnătura fiecărui fișier înainte de a aplica patch-ul</string>
     <string name="settings_system_apk_download_helper_installed_by">Instalat de %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Instalator necunoscut</string>
@@ -1234,9 +1236,13 @@ Detalii: %2$s"</string>
     <string name="settings_system_about">Despre</string>
     <string name="settings_system_manager_description">Un proiect open-source pentru patch-uri moderne și simplificate ale aplicațiilor Android populare, ghidat de feedback-ul și contribuțiile comunității</string>
     <string name="credits">Credite</string>
+    <string name="credits_description">Oamenii din spatele Morphe</string>
+    <string name="settings_about_section_project">Proiect</string>
+    <string name="settings_about_section_help">Ajutor</string>
     <string name="credits_current_development">Dezvoltare curentă</string>
     <string name="credits_prior_development">Dezvoltare anterioară</string>
     <string name="opensource_licenses">Licențe open-source</string>
+    <string name="opensource_licenses_description">Bibliotecile pe care se bazează Morphe</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">O alegere</string>
     <string name="easter_egg_pill_message">Take the blue pill and the ads stay exactly where they are. Take the red one and see how deep the bytecode goes</string>
@@ -1255,6 +1261,20 @@ Detalii: %2$s"</string>
     <string name="patches">Patch-uri</string>
     <string name="home">Acasă</string>
     <string name="settings">Setări</string>
+    <string name="apps">Aplicații</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patcher">Patcher</string>
+    <string name="settings_section_updates">Actualizează</string>
+    <string name="settings_section_patching">Se aplică patch-uri</string>
+    <string name="settings_section_appearance_summary">Aspectul Morphe</string>
+    <string name="settings_section_patch_options_summary">Modul simplu care modifică aplicațiile cu</string>
+    <string name="settings_section_general">Generalități</string>
+    <string name="settings_section_patcher_summary">Cum sunt patchuite aplicațiile pe acest dispozitiv</string>
+    <string name="settings_section_help_info">Ajutor &amp; informații</string>
+    <string name="settings_section_about_summary">Mai multe despre Morphe și obținerea de ajutor</string>
+    <string name="settings_section_local_files">Fișiere</string>
+    <string name="settings_section_backup">Backup</string>
+    <string name="settings_search">Caută în setări</string>
     <string name="yes">Da</string>
     <string name="no">Nu</string>
     <string name="all">Toți</string>
@@ -1356,7 +1376,6 @@ Detalii: %2$s"</string>
     <string name="hide">Ascunde</string>
     <string name="hidden">Ascuns</string>
     <string name="unhide">Dezascunde</string>
-    <string name="unhide_done">Afișat</string>
     <string name="ignore">Ignoră</string>
     <string name="stop_ignoring">Nu mai ignora</string>
     <string name="logs">Jurnale</string>
@@ -1429,13 +1448,9 @@ Doriți totuși să continuați?"</string>
     <string name="onboarding_sources_version_desc">Atinge versiunea pentru a vedea istoricul complet al modificărilor pentru această sursă</string>
     <string name="onboarding_sources_prerelease_desc">Activează această opțiune pentru a primi versiuni de patch-uri pre-lansare de la această sursă</string>
     <string name="onboarding_appearance_tab_desc">Personalizează aspectul aplicației: temă, culoare de accent și fundal</string>
-    <string name="onboarding_appearance_theme_desc">Alege între tema deschisă, închisă sau cea de sistem. De asemenea, poți alege o culoare de accent personalizată sau poți activa Culoare dinamică</string>
     <string name="onboarding_expert_mode_desc">Activează Modul Expert pentru a debloca selecția patch-urilor, opțiuni personalizate și alte funcții avansate</string>
     <!-- Translate "System" the same way as the System settings tab -->
-    <string name="onboarding_system_tab_title">Tabloul Sistem</string>
-    <string name="onboarding_system_tab_desc">Gestionarea stocării cheilor, instrumente de import/export și informații despre aplicație</string>
     <string name="onboarding_system_installer_desc">Alege modul în care aplicațiile patch-uite sunt instalate: standard, montare root sau Shizuku</string>
-    <string name="onboarding_system_process_runtime_desc">Rulează patch-urile într-un proces separat pentru a îmbunătăți stabilitatea și a controla utilizarea memoriei. Recomandat pentru aplicații mari</string>
     <string name="onboarding_system_file_picker_desc">Activează pentru a utiliza browserul de fișiere încorporat în loc de selectorul de sistem când selectezi fișiere APK sau stocări de chei</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
     <string name="tour_prompt_title">Tur rapid de prezentare</string>

@@ -4,6 +4,7 @@
         <item quantity="one">%s çareser</item>
         <item quantity="other">%s çareserên</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
     <plurals name="option_count">
         <item quantity="one">%s vebûna hevsêr</item>
         <item quantity="other">%s vebûnên hevsêr</item>

@@ -14,10 +14,57 @@
     <string name="home_app_no_hidden">ఏ ఆప్ దాచబడలేదు</string>
     <string name="home_app_hidden_apps_title">దాచబడిన ఆప్ లు</string>
     <string name="home_app_hidden_apps_hint">మళ్లీ కనిపించడానికి నొక్కండి</string>
+    <string name="home_app_patch_sources_covers">%2$s కోసం %1$s కి ప్యాచుండి </string>
     <string name="android_11_bug_dialog_title">ఆండ్రాయిడ్ 11 బగ్</string>
+    <string name="deep_link_add_source_title">మూలాన్ని జోడించు</string>
+    <string name="deep_link_add_source_message">మీరు ఈ ప్యాచ్ మూలాన్ని Morphe లోకి జోడించాలనుకుంటున్నారా </string>
+    <string name="deep_link_add_source_warning">కేవలం మీకు నమ్మకం ఉండే మూలాలనే జోడించండి</string>
     <!-- Shown under the app a link was opened for -->
+    <string name="deep_link_add_source_only_app">కేవలం ఈ యాప్ జోలించబడింది, మీరు ఇతర యాప్లను యాప్లెస్ నుంచి జోడించవచ్చు</string>
     <!-- Asked when the link names an app of a source that is already added -->
+    <string name="deep_link_add_source_app_back">మూలం ఇప్పటికే జోడించబడింది, ఈ యాప్ని ఇప్పటికే ఉండే మూలం నుంచి జోడించాలా? </string>
     <!-- Home Screen - Update Notifications -->
+    <string name="home_update_available">Morphe అప్డేట్ అందుబాటులో ఉంది</string>
+    <string name="home_update_available_subtitle">కొత్త వెర్షన్ ఎక్కించడానికి సిద్ధంగుండి</string>
+    <string name="home_blocked_source_title">నిషేధించిన ప్యాచ్ మూలం కనుక్కోబడింది</string>
+    <string name="home_blocked_source_subtitle">చూపు మరియు తీసే కి నొక్కు</string>
+    <string name="home_metadata_errors_title">కొన్ని ప్యాచ్ మూలాలు అందుబకులోలేవు</string>
+    <string name="home_metadata_errors_subtitle">మూలాలను సమీక్షించడానికి నొక్కండి</string>
+    <string name="home_outdated_manager_title">Morphe పాతదైపోయింది</string>
+    <string name="home_outdated_manager_subtitle">కొన్ని ప్యాచ్ మూలాలకు కొత్త వర్షన్ అవసరమవుతుంది</string>
+    <string name="home_held_back_title">ఒక ప్యాచ్ మూలం Morpheతో క్రాష్ అయ్యింది</string>
+    <string name="home_held_back_subtitle">యాప్ మొదలవుతానికి స్కిప్ అయింది, సమీక్షించడానికి నొక్కండి</string>
+    <string name="home_metered_skipped_title">మొబైల్ డేటా పై అప్డేట్ నిలిపివేయబడింది</string>
+    <string name="home_metered_skipped_subtitle">మొబైల్ డేటా పై అప్డేట్లను అనుమతించడానికి నొక్కండి</string>
+    <string name="home_repatch_available_subtitle">అన్నిటినీ క్యూలో పెరగడానికి నొక్కండి</string>
+    <string name="home_update_error">అప్డేట్ విఫలమైంది</string>
+    <string name="home_update_error_subtitle">మూలాలను అప్డేట్ చేస్తుండగా ఏదో తప్పు జరిగింది</string>
+    <string name="home_update_skipped_metered">అప్డేట్లను వదిలేయపడ్డాయి</string>
+    <string name="home_update_skipped_metered_subtitle">మొబైల్ డేటా నడుస్తోంది</string>
+    <string name="home_updating_sources">మూలాలు అప్డేట్ అవుతున్నాయి …</string>
+    <string name="home_update_success">మూలాల అప్డేట్ పూర్తయింది</string>
+    <string name="home_update_success_subtitle">మీ మూలాలు అన్ని సరికొత్తగా ఉన్నాయి</string>
+    <string name="home_sources_are_loading">మూలాలు లోడ్ అవుతున్నాయి, వేచి ఉండండి …</string>
+    <string name="home_search_apps">యాప్స్ వెతుకు</string>
+    <string name="list_options_title">క్రమబద్ధీకరించు మరియు ఫిల్టర్</string>
+    <string name="list_options_state_description">%1$s క్రమబద్ధీకరణ, %2$s ఫిల్టర్</string>
+    <string name="home_app_filter_all_description">ప్రతి ఒక్క యాప్ హోం స్క్రీన్ పైన </string>
+    <string name="home_app_filter_patched_description">Morphe తో దాచబడిన లేదా బ్యాచ్ చేయబడిన మీ ఆప్స్</string>
+    <string name="home_app_filter_not_patched_description">Morphe లో ఇప్పటికీ మీరు ప్యాచ్ చేయని యాప్స్</string>
+    <string name="home_app_filter_installed_description">యాప్ ఈ క్షణాన్న డివైస్ లో ఇన్స్టాల్ అయి ఉంది</string>
+    <string name="home_app_filter_uninstalled_description">Morphe తో ప్యాడ్స్ చేసిన ఆప్ మీ డివైస్ లో లేదు</string>
+    <string name="home_app_filter_clones">క్లోన్స్ </string>
+    <string name="home_app_filter_clones_description">యాప్స్ తన సొంత ప్యాకేజీ పేరుతో నిర్మించబడిన , అసలైన దానితో పాటు ఇన్స్టాల్ చేయబడుతది</string>
+    <string name="home_app_grouping_all_apps_description">అన్ని యాప్లు ఉండే ఒక జాబితా</string>
+    <string name="home_app_grouping_sources_description">ప్యాచ్ మూలం కింద అది ఇచ్చే యాప్లు</string>
+    <string name="home_app_sort_recommended">సిఫార్సు చేసిన క్రమం </string>
+    <string name="home_app_sort_recommended_description">ఎక్కించిన మరియు పిన్ చేసిన యాప్లు ముందు</string>
+    <string name="home_app_sort_name_asc_description">వర్ణమాల క్రమ A నుంచి Z</string>
+    <string name="home_app_sort_name_desc_description">తిరగేసిన అక్షరమాల క్రమ,Z నుంచి A </string>
+    <string name="home_app_sort_updates_first">బ్యాచ్ అప్డేట్లు ముందు</string>
+    <string name="home_app_sort_recently_patched">ఇటీవల బ్యాచ్ చేశారు</string>
+    <string name="home_app_sort_recently_patched_description">ఈ మధ్య ప్యాక్ చేసిన యాప్లు ముందు</string>
+    <string name="home_no_apps_title">ఏ యాప్లు అందుబాటులో లేవు</string>
     <!-- Home Screen - Home Greetings -->
     <!-- Humorous hype message with light nostalgia -->
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
@@ -35,6 +82,7 @@
     <!-- Super late night greetings (0:00–4:59) -->
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_2">ఈ APKలలో అవశేషాలేవి (ఘోస్ట్) లేవు, మేము చూసాము</string>
     <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
     <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
     <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
@@ -42,6 +90,7 @@
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
     <!-- Pun on the saying "Out with the old, in with the new" -->
     <!-- Home Screen - Sources Management -->
+    <!-- Which sources the sources page lists, each with what it keeps -->
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
     <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
@@ -139,6 +188,7 @@
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <!-- Shared strings -->
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
     <!-- Who made a patch source, as a field label -->
     <!-- A file a patch source is added from, as a field label -->
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->

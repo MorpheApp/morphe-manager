@@ -4,6 +4,11 @@
         <item quantity="one">%s fláki</item>
         <item quantity="other">%s flákir</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
+    <plurals name="library_count">
+        <item quantity="one">%s safn</item>
+        <item quantity="other">%s söfn</item>
+    </plurals>
     <plurals name="option_count">
         <item quantity="one">%s fláka valmöguleiki</item>
         <item quantity="other">%s fláka valmöguleikar</item>

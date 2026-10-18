@@ -76,6 +76,7 @@
     <!-- Pun on the saying "Out with the old, in with the new" -->
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Извори на поправки</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_management_open_in_browser">Отвори во прелистувач</string>
     <string name="sources_management_failed_to_open_url">Не успеа да се отвори URL адреса</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -393,7 +394,6 @@
     <string name="mini_game_dino_tap_to_start">Кликнете за да трчате</string>
     <!-- Settings -->
     <string name="appearance">Изглед</string>
-    <string name="advanced">Напредно</string>
     <string name="system">Систем</string>
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background">Анимација на позадината</string>
@@ -467,7 +467,6 @@
     <string name="notification_post_patch_dialog_title">Дали сакате да бидете известени кога се достапни ажурирања?</string>
     <string name="notification_channel_patcher_description">Се прикажува додека Morphe го закрпува апликацијата во позадина</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Напредни поставки</string>
     <string name="settings_advanced_expert_mode">Експертски режим</string>
     <string name="settings_advanced_expert_mode_dialog_title">Дали сакате да го вклучите Expert режим?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Expert режимот дава повеќе контрола врз тоа како се применуваат закрпите, но лошо конфигурирање на поставките во Expert режимот може да резултира со апликација која не функционира</string>
@@ -550,7 +549,6 @@ morphe_header_custom_dark.png
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
-    <string name="settings_advanced_patch_options_hide_shorts_features">Скриј функции за Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Скриј преку пат на апликацијата Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Отстранување на Shorts од менито со долго притискање на стартерот</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Скриј виџет за Shorts</string>
@@ -578,7 +576,6 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_title">%s не е достапен</string>
     <string name="installer_unavailable_message">Вашиот избран инсталер (%s) во моментот не е достапен. Можете да го решите проблемот и да обидете повторно или да го користите стандардниот инсталер наместо тоа</string>
     <string name="installer_unavailable_shizuku_hint">Проверете дали Shizuku работи и дали дозволата е доделена на оваа апликација</string>
-    <string name="installer_use_standard">Користи стандардно</string>
     <string name="settings_prompt_installer_on_install">Помошни информации за инсталирање</string>
     <string name="settings_auto_install_with_shizuku">Автоматски инсталирај по закрпа</string>
     <!-- Settings - System Tab - Performance Section -->
@@ -586,16 +583,13 @@ morphe_header_custom_dark.png
     <string name="settings_system_battery_optimization_description">Слободно место на дискот</string>
     <string name="settings_system_process_runtime">Време на извршување на процесот</string>
     <string name="settings_system_process_runtime_description">Преземањето може да биде затворено</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Облога за инсталирање</string>
     <string name="settings_system_process_runtime_enable">Овозможи време на извршување на процесот</string>
     <string name="settings_system_memory_limit_subtitle">Меморија достапна за закрпување</string>
     <string name="settings_system_memory_limit_warning">Нисзок лимит на меморија може да предизвика неуспеси при закрпување на поголеми апликации</string>
-    <string name="settings_system_process_runtime_enabled_description">Лимит од %s MB</string>
     <string name="settings_system_process_runtime_description_not_available">Оваа функција бара Android 11 или подоцна</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications_sound_default">Стандардно</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Увоз и извоз</string>
     <string name="settings_system_import_keystore_dialog_title">Внесете податоци за пристап до keystore</string>
     <string name="settings_system_import_keystore_dialog_description">Ќе треба да ги внесете податоците за пристап до keystore за да го увезете</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Корисничко име (Alias)</string>
@@ -619,18 +613,15 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_failed">Неуспешно извезување на логови</string>
     <string name="settings_system_export_debug_logs_export_success">Логови изнесени</string>
     <!-- Settings - System Tab - Files & Storage Section -->
-    <string name="settings_system_files">Датотеки и складиште</string>
     <string name="settings_system_apks_size">Вкупна големина: %s</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Исправени APK-а</string>
-    <string name="settings_system_patched_apks_description">Минатата коверта на пукање</string>
     <string name="settings_system_patched_apks_empty">Сè уште нема зачувани закрпени APK-а</string>
     <string name="settings_system_patched_apks_delete_title">Дали да се избрише закрпениот APK?</string>
     <string name="settings_system_patched_apks_deleted">Закрпениот APK е успешно избришан</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Оригинални APK-а</string>
-    <string name="settings_system_original_apks_description">Зачувани</string>
     <string name="settings_system_original_apks_empty">Не се чуваат оригинални APK-а</string>
     <string name="settings_system_original_apks_deleted">Оригиналниот APK е успешно избришан</string>
     <string name="settings_system_original_apks_delete_title">Дали да се избрише оригиналниот APK?</string>
@@ -638,10 +629,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">Изборите за закрпување</string>
     <string name="settings_system_patch_selections_description">Споделување</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Дали да се ресетираат сите избори?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Дали да се ресетираат изборите за пакети?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Дали да се ресетира изборот на извор?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s од %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s во %2$s</string>
     <string name="settings_system_patch_selection_source_format">Извор бр.%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ова трајно ќе ги избрише сите зачувани избори за закрпување за сите пакети и извори</string>
     <string name="settings_system_export_source_data_fail">Неуспешно извезување на податоците од изворот</string>
@@ -680,6 +669,7 @@ morphe_header_custom_dark.png
     <string name="patches">Поправки</string>
     <string name="home">Дома</string>
     <string name="settings">Подесувања</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
     <string name="yes">Да</string>
     <string name="no">Не</string>
     <string name="all">Сите</string>
@@ -789,13 +779,9 @@ morphe_header_custom_dark.png
     <string name="onboarding_sources_version_desc">Допрете ја верзијата за да ја видите целата листа на промени за овој извор</string>
     <string name="onboarding_sources_prerelease_desc">Овозможете го ова за да добивате предиздание на закрпите од овој извор</string>
     <string name="onboarding_appearance_tab_desc">Прилагодете го изгледот на апликацијата: тема, акцентна боја и позадина</string>
-    <string name="onboarding_appearance_theme_desc">Изберете помеѓу светла, темна или системска тема. Можете исто така да изберете прилагодена акцентна боја или да ја вклучите динамичната боја</string>
     <string name="onboarding_expert_mode_desc">Вклучете го „Експерт“ режимот за да го отклучите изборот на закрпи, прилагодливи опции и други напредни функции</string>
     <!-- Translate "System" the same way as the System settings tab -->
-    <string name="onboarding_system_tab_title">Системска таб</string>
-    <string name="onboarding_system_tab_desc">Управување со кеystore-от, алатки за увоз/извоз и информации за апликацијата</string>
     <string name="onboarding_system_installer_desc">Изберете како се инсталираат апликациите со поправки: стандардно, root монтирање или Shizuku</string>
-    <string name="onboarding_system_process_runtime_desc">Извршете го закрпувањето во посебен процес за да ја подобрите стабилноста и да ја контролирате употребата на меморијата. Препорачано за големи апликации.</string>
     <string name="onboarding_system_file_picker_desc">Овозможете да се користи вградениот прегледувач на датотеки наместо системскиот при избирање APK-та или кеystore-и</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
     <string name="tour_prompt_title">Брза тура на функции</string>

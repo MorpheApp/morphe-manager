@@ -3,6 +3,7 @@
     <plurals name="patch_count">
         <item quantity="other">បំណះ %s</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
     <!-- How many files and folders a folder holds, under its name in the file picker -->
     <!-- Button that confirms the files checked in the file picker -->
     <!-- Button that adds every source waiting in the add source dialog -->

@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Lähteet ovat ajan tasalla</string>
     <string name="home_sources_are_loading">Lähteitä ladataan, odota…</string>
     <string name="home_search_apps">Hae sovelluksia</string>
-    <string name="home_app_list_options_title">Lajittelu ja suodatus</string>
-    <string name="home_app_list_options_state_description">Lajiteltu: %1$s, suodatettu: %2$s</string>
+    <string name="list_options_title">Lajittele ja suodata</string>
+    <string name="list_options_state_description">Järjestetty %1$s, suodatettu %2$s</string>
     <string name="home_app_filter_all_description">Kaikki aloitusnäytön sovellukset</string>
     <string name="home_app_filter_patched_description">Morphella paikkaamasi tai tallentamasi sovellukset</string>
     <string name="home_app_filter_not_patched_description">Sovellukset, joita et ole vielä paikannut Morphessa</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Lisäosien lähteet</string>
     <string name="sources_search">Hae lähteitä ja korjauksia</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Jokainen lähde</string>
+    <string name="sources_filter_enabled_description">Lähtekohdat poistetaan lähdekoodista</string>
+    <string name="sources_filter_disabled_description">Lähteet pois päältä</string>
+    <string name="sources_filter_updates">Päivitykset</string>
+    <string name="sources_filter_updates_description">Hanki uudempi versio lähteistä</string>
+    <string name="sources_filter_issues">Huomioitavaa</string>
+    <string name="sources_filter_issues_description">Lähteet, jotka on estetty, joita ei voitu ladata tai jotka vaativat uudemman Morphen</string>
     <string name="sources_sort_manual">Manuaalinen järjestys</string>
     <string name="sources_sort_manual_hint">Paina ja pidä lähdettä uudelleenjärjestämistä varten</string>
     <string name="sources_sort_last_updated">Viimeksi päivitetty</string>
@@ -167,7 +175,6 @@
     <string name="sources_apps_description">Valitut sovellukset tulevat tästä lähteestä. Napauta sovellusta jättääksesi sen pois tai palauttaaksesi sen. Sovellus poistuu aloitusnäytöstä, kun mikään lähde ei tuo sitä, paitsi jos olet patjannut sen</string>
     <string name="sources_apps_brought">Tämän lähteen tuomat</string>
     <string name="sources_apps_left_out">Tästä lähteestä pois jätetyt</string>
-    <string name="sources_apps_bring_back">Palauta</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
     <string name="sources_apps_stays_patched">Pidetty patjattuna</string>
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
@@ -243,6 +250,8 @@ Kaikki mitä lisäät tältä verkkosivustolta, on oma riskisi."</string>
     <string name="home_apk_availability_yes">Kyllä, auta minua löytämään APK</string>
     <string name="home_apk_availability_no">Ei, minulla on jo APK</string>
     <string name="home_apk_helper_download">Käytä apuohjelmaa</string>
+    <string name="home_apk_helper_untrusted">Autosovellus on asennettu, mutta sitä ei ole vielä luotettavaksi merkitty, joten sitä ei tarjota tässä</string>
+    <string name="home_apk_helper_untrusted_action">Arvioi avustajat</string>
     <string name="home_apk_helper_title">Lataa apuohjelman avulla</string>
     <string name="home_apk_helper_description">Morphe pyytää alla olevaa apuohjelmaa lataamaan alkuperäisen APK-tiedoston ja palauttamaan tiedoston</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -540,7 +549,7 @@ Sovelluksen &lt;b&gt;%s&lt;/b&gt; tässä versiossa on varhainen kokeellinen tuk
     <string name="root_mount_module_unmount_warning">Jos KernelSU:ssa on oletusarvoisesti asennettuina irrotusmoduulit, avaa KernelSU &gt; Superkäyttäjä &gt; sovellus, jonka asensit &gt; Profiili &gt; Mukautettu ja poista irrotusmoduulit käytöstä. Muuten asennettu korjattu APK ei välttämättä tule voimaan, vaikka Morphe näyttäisi sen asennettuna.</string>
     <string name="root_pre_patch_installer_standard_title">Vakioasennustila</string>
     <string name="root_pre_patch_installer_standard_description">Paikkaa normaalina APK-tiedostona GmsCore-tuella. Asennusasetuksiasi käytetään paikkaamisen jälkeen.</string>
-    <string name="root_pre_patch_installer_hint">Tämä paikkaustila on erillinen Asetukset > Järjestelmä > Asennusohjelma -asetuksista, eikä sitä voi muuttaa paikkaamisen jälkeen.</string>
+    <string name="root_pre_patch_installer_hint">Pyydetty, kun Asetukset &amp;gt; Paikannus &amp;gt; Asennus &amp;gt; Asentajan valintakehote on päällä. Paikoitustilaa ei voi muuttaa paikkauksen jälkeen</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Virheilmoitus kopioitu leikepöydälle</string>
     <string name="patcher_error_log">Virheloki</string>
@@ -731,7 +740,6 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="mini_game_pairs_picker_subtitle">Käännä kortit, löydä pari</string>
     <!-- Settings -->
     <string name="appearance">Ulkoasu</string>
-    <string name="advanced">Lisäasetukset</string>
     <string name="system">Järjestelmä</string>
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background">Taustaanimaatio</string>
@@ -759,6 +767,8 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
     <string name="settings_appearance_seasonal_background_notice">%1$s-tausta on käytössä %2$s asti, kun kausiteemat ovat päällä</string>
     <!-- Settings - Appearance Tab - Theme -->
+    <string name="settings_appearance_display">Näyttö</string>
+    <string name="settings_appearance_effects">Efektit</string>
     <string name="settings_appearance_theme">Teema</string>
     <string name="settings_appearance_theme_mode">Teeman tila</string>
     <string name="settings_appearance_system">Järjestelmä</string>
@@ -767,7 +777,6 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_monochrome">Monokrominen</string>
     <string name="settings_appearance_color_style">Värityyli</string>
-    <string name="settings_appearance_colors">Värit</string>
     <string name="settings_appearance_accent_color">Korostusväri</string>
     <string name="settings_appearance_pure_black">Täysin musta</string>
     <string name="settings_appearance_pure_black_description">Käytä täysin mustia taustoja</string>
@@ -775,8 +784,9 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_appearance_color_accents_description">Käyttää kunkin sovelluksen ja lähteen värejä aksenttivärin sijaan</string>
     <string name="settings_appearance_outlines">Ääriviivat</string>
     <string name="settings_appearance_outlines_description">Piirtää ohuen reunan korttien, paneelien ja painikkeiden ympärille</string>
+    <string name="settings_appearance_blur">Sumennus</string>
+    <string name="settings_appearance_blur_description">Sumuttaa otsikoiden, palkkien ja paneelien alla skrollattavan sisällön</string>
     <!-- Settings - Appearance Tab - Language Selector -->
-    <string name="settings_appearance_language_and_display">Kieli &amp; näyttö</string>
     <string name="settings_appearance_app_language">Sovelluksen kieli</string>
     <string name="settings_appearance_app_language_current">Nykyinen kieli</string>
     <string name="settings_appearance_translations_info_title">Joidenkin kielten käännökset saattavat puuttua tai olla puutteellisia</string>
@@ -794,8 +804,6 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Näyttää tervehdysviestin</string>
     <string name="settings_appearance_repatch_notice">Uudelleenkorjausilmoitus</string>
     <string name="settings_appearance_repatch_notice_description">Näyttää bannerin, kun ohitettuja sovelluksia voi ohittaa uudelleen</string>
-    <string name="settings_appearance_sort_button">Lajittelu- ja suodatuspainike</string>
-    <string name="settings_appearance_sort_button_description">Näyttää painikkeen sovellusten lajitteluun ja suodattamiseen</string>
     <string name="settings_appearance_app_card_colors">Sovelluksen korttien värit</string>
     <string name="settings_appearance_app_card_colors_default">Oletus</string>
     <string name="settings_appearance_app_card_colors_default_description">Anna jokaiselle sovellukselle sen oman paketin väri</string>
@@ -886,7 +894,6 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="notification_mount_replaced_title">%1$s ei ole enää korjattu</string>
     <string name="notification_mount_replaced_text">v%1$s korvasi korjatun v%2$s:n. Avaa Morphe palauttaaksesi sen</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Asiantuntijan asetukset</string>
     <string name="settings_advanced_expert_mode">Asiantuntijatila</string>
     <string name="settings_advanced_expert_mode_description">Avaa edistyneet patchausasetukset ja -vaihtoehdot</string>
     <string name="settings_advanced_expert_mode_dialog_title">Ota asiantuntijatila käyttöön?</string>
@@ -909,7 +916,6 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_advanced_github_pat_export_warning">Älä jaka tämä PAT. Jos sisällytät sen asetuksien viedossa, pidä tiedosto yksityisenä, koska se sisältää tokenin</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Lisäosien asetukset</string>
-    <string name="settings_advanced_patch_options_youtube_description">Brändäys- ja ylätunnisteasetukset</string>
     <string name="settings_advanced_patch_options_restart_message">Lisäosien asetusten muuttaminen edellyttää sovelluksen muokkaamista uudelleen, jotta muutokset tulevat voimaan</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">Asiantuntijatilassa lisäosa-asetukset ovat käytettävissä muokkausprosessin aikana</string>
     <string name="settings_advanced_patch_options_loading">Ladataan lisäosa-asetuksia…</string>
@@ -979,7 +985,6 @@ Kuvien mittojen on oltava seuraavat:
 - drawable-xxhdpi: 387 x 144 px
 - drawable-xxxhdpi: 512 x 192 px"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
-    <string name="settings_advanced_patch_options_hide_shorts_features">Piilota Shorts-ominaisuudet</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Piilota Shorts-pikakuvake</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Poista Shorts-kohta käynnistysohjelman pitkän painalluksen valikosta</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Piilota Shorts-widgetti</string>
@@ -987,6 +992,7 @@ Kuvien mittojen on oltava seuraavat:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Asennusohjelma</string>
     <string name="installer_settings_title">Oletusarvoinen asennusohjelma</string>
+    <string name="settings_installation">Asennus</string>
     <string name="installer_title">Valitse asennusohjelma</string>
     <string name="installer_internal_description">Käytä Androidin pakettien asennusohjelmaa</string>
     <string name="installer_play_store_description">Käyttää järjestelmän asennusohjelmaa ja asettaa Google Play Kaupan asennuslähteeksi</string>
@@ -1017,7 +1023,7 @@ Kuvien mittojen on oltava seuraavat:
     <string name="installer_unavailable_title">%s ei ole käytettävissä</string>
     <string name="installer_unavailable_message">Edullisin asennuksesi (%s) on tällä hetkellä käytöstä poissa. Voit korjata ongelman ja yrittää uudelleen tai käyttää standardiasennusta.</string>
     <string name="installer_unavailable_shizuku_hint">Tarkista, että Shizuku on käynnissä ja lupa on myönnetty tälle sovellukselle.</string>
-    <string name="installer_use_standard">Käytä oletusta</string>
+    <string name="installer_choose_another">Valitse toinen asennusohjelma</string>
     <string name="installer_play_store_warning_title">Asenna Play Kauppana?</string>
     <string name="installer_play_store_warning_message">Korjattu sovellus rekisteröidään asennetuksi Google Play Kaupasta. Tämä voi auttaa palveluita, kuten Android Auto, tunnistamaan sen Play Kaupan sovellukseksi, mutta sitä ei voida taata jokaiselle sovellukselle tai laitteelle. Käyttäytyminen voi vaihdella Android-version, ROM:n, laitemerkin ja sovelluskohtaisten tarkistusten mukaan</string>
     <string name="installer_play_store_warning_risk">Play Kauppa saattaa tarjota päivityksiä korjatulle sovellukselle. Päivityksen asentaminen korvaa korjatun APK:n alkuperäisellä versiolla ja poistaa korjaukset. Jos sinua pyydetään päivittämään, napauta sovelluksen Play Kauppa -sivulla olevaa kolmen pisteen valikkoa ja valitse \"Poista päivitykset käytöstä\"</string>
@@ -1025,11 +1031,13 @@ Kuvien mittojen on oltava seuraavat:
     <string name="installer_play_store_mode">Asenna Play Kauppana</string>
     <string name="installer_play_store_mode_description">Merkitsee Google Play -kaupan asennuslähteeksi</string>
     <string name="settings_prompt_installer_on_install">Asennusohjelman valintakehote</string>
-    <string name="settings_prompt_installer_on_install_description">Pyytää valitsemaan asentimen jokaiselle asennukselle</string>
+    <string name="settings_prompt_installer_on_install_description">Pyytää jokaista sovellusta koskevaa asentamistapaa: juurioikeudella ennen paikantamista, muuten sen jälkeen</string>
     <string name="settings_auto_install_with_shizuku">Asenna automaattisesti korjauksen jälkeen</string>
-    <string name="settings_auto_install_with_shizuku_description">Asentaa paikatun APK:n heti, kun paikkaus on valmis</string>
+    <string name="settings_auto_install_with_shizuku_description">Asentaa tai liittää paikitetun APK:n heti paikauksen valmistumisen jälkeen</string>
     <string name="settings_auto_uninstall_with_shizuku">Automaattinen poisto ristiriitatilanteissa</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Poistaa nykyisen sovelluksen allekirjoitusristiriidan yhteydessä. Tämä voi poistaa sovelluksen tiedot</string>
+    <string name="settings_ignore_install_target_rules">Ohita asennuskohdemääritykset</string>
+    <string name="settings_ignore_install_target_rules_description">Pätkittää asennuskohdemääristöjen poistamisen ja niihin kuuluviin sääntöjen aktivoimisen. Paikannettu sovellus ei välttämättä toimi</string>
     <string name="settings_auto_uninstall_warning_title">Ota automaattinen poisto käyttöön?</string>
     <string name="settings_auto_uninstall_warning_message">Jos Android raportoi allekirjoitusristiriidasta Shizukun automaattisen asennuksen aikana, Morphe poistaa olemassa olevan sovelluksen ennen korjatun APK:n asentamista</string>
     <string name="settings_auto_uninstall_warning_risk">Tämä voi poistaa sovelluksen tiedot. Jos korjattu APK ei asennu poiston jälkeen, edellinen sovellus on ehkä jo poistettu</string>
@@ -1058,23 +1066,19 @@ Yksityiskohdat: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Akun käytön optimointi</string>
     <string name="settings_system_battery_optimization_description">Pitää paikkaajan käynnissä, kun sovellus on pienennetty</string>
-    <string name="settings_system_background">Tausta</string>
     <string name="settings_system_process_runtime">Prosessin suoritus</string>
     <string name="settings_system_process_runtime_description">Suorita muokkaaminen erillisessä prosessissa paremman vakauden vuoksi</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Korkeammat rajat nopeuttavat muokkaamista tehokkailla laitteilla</string>
     <string name="settings_system_process_runtime_enable">Ota prosessin suoritus käyttöön</string>
     <string name="settings_system_memory_limit_subtitle">Muokkaamiseen käytettävissä oleva muisti</string>
     <string name="settings_system_process_runtime_heap_limit_ignored">Tämä laite ei noudattanut muistirajaa viimeisellä suorituskerralla, joten paikkaus saattaa pudota takaisin Morphen sisällä suoritettavaksi.</string>
     <string name="settings_system_memory_limit_warning">Pieni muistirajoitus voi aiheuttaa virheitä suuria sovelluksia muokattaessa</string>
     <string name="settings_system_memory_limit_high_warning">Suuri muistiraja voi tehdä paikkaamisesta paljon hitaampaa joissakin laitteissa. Nosta rajaa vain, jos paikkaaminen epäonnistuu edelleen pienemmillä rajoilla.</string>
-    <string name="settings_system_process_runtime_enabled_description">%s Mt:n rajoitus</string>
-    <string name="settings_system_process_runtime_disabled_description">Napauta määrittääksesi</string>
     <string name="settings_system_process_runtime_description_not_available">Tämä ominaisuus vaatii Android-version 11 tai uudemman </string>
     <string name="settings_system_patcher_completion_sound">Valmistumisen ääni</string>
     <string name="settings_system_patcher_completion_sound_description">Toistaa erillisen äänen onnistumisesta tai epäonnistumisesta paikkauksen valmistuttua</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">Ilmoitukset</string>
-    <string name="settings_system_notifications_description">Määrittää taustailmoitukset ja valmiusäänien asetukset</string>
+    <string name="settings_system_notifications_description">Kuinka Morphe pitää sinut ajan tasalla</string>
     <string name="settings_system_notifications_success_sound">Onnistumisen ääni</string>
     <string name="settings_system_notifications_error_sound">Virhetunnus</string>
     <string name="settings_system_notifications_sound_default">Oletus</string>
@@ -1084,7 +1088,6 @@ Yksityiskohdat: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Palauta oletusasetukset</string>
     <string name="settings_system_notifications_ringtone_picker_title">Valitse sävy</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Tuo ja vie</string>
     <string name="settings_system_signing_key">Allekirjoitusavain</string>
     <string name="settings_system_signing_key_description">Varmuuskopioi tai palauttaa ohitettujen sovellusten allekirjoittavan avaimen</string>
     <string name="settings_system_signing_key_dialog_description">Jokainen Morphen korjaama sovellus allekirjoitetaan tällä avaimella. Säilytä kopio: ilman sitä korjattuja sovelluksia voi päivittää vain poistamalla ne</string>
@@ -1131,7 +1134,6 @@ Yksityiskohdat: %2$s"</string>
     <string name="settings_system_export_debug_logs_export_failed">Lokien vienti epäonnistui</string>
     <string name="settings_system_export_debug_logs_export_success">Lokit viety</string>
     <!-- Settings - System Tab - Files & Storage Section -->
-    <string name="settings_system_files">Tiedostot &amp; tallennustila</string>
     <string name="settings_system_apks_size">Koko yhteensä: %s</string>
     <string name="settings_system_apks_delete_all_confirm">Tämä poistaa pysyvästi tässä näkyvät tallennetut APK-tiedostot</string>
     <string name="settings_system_apks_delete_selected_title">Poistetaanko valitut APK-tiedostot?</string>
@@ -1143,6 +1145,9 @@ Yksityiskohdat: %2$s"</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">Tallennustilan hallinta</string>
     <string name="settings_system_storage_management_description">Näyttää levytilankäytön ja tyhjentää välimuistitiedostot</string>
+    <string name="settings_system_storage_used_free">Morpheen käyttämä tila / vapaa tämä laite</string>
+    <string name="settings_system_storage_saved_apks">Tallennetut APK-tiedostot</string>
+    <string name="settings_system_storage_caches">Välimuistit</string>
     <string name="settings_system_storage_keystore_title">Keystore-allekirjoitukset</string>
     <string name="settings_system_storage_app_data_title">Sovelluksen tiedot</string>
     <string name="settings_system_storage_patch_bundles_title">Paikkauspaketit</string>
@@ -1167,14 +1172,12 @@ Yksityiskohdat: %2$s"</string>
     <string name="settings_system_save_patched_apks_description">Tallenna kopio korjatusta APK-tiedostosta myöhempää vientiä tai asennusta varten hallinnan kautta</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Muokatut APK:t</string>
-    <string name="settings_system_patched_apks_description">Hallitse tallennettuja muokattuja sovellustiedostoja</string>
     <string name="settings_system_patched_apks_empty">Muokattuja APK:ita ei ole vielä tallennettu</string>
     <string name="settings_system_patched_apks_delete_title">Poista muokattu APK?</string>
     <string name="settings_system_patched_apks_deleted">Muokattu APK on poistettu</string>
     <string name="settings_system_patched_apks_delete_all_title">Poistetaanko kaikki muutetut APK-tiedostot?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Alkuperäiset APK:t</string>
-    <string name="settings_system_original_apks_description">Tallennettu muokattavaksi uudelleen. Kustakin sovelluksesta säilytetään yksi versio</string>
     <string name="settings_system_original_apks_empty">Ei alkuperäisiä APK:ita tallennettu</string>
     <string name="settings_system_original_apks_deleted">Alkuperäinen APK on poistettu</string>
     <string name="settings_system_original_apks_delete_title">Poista alkuperäinen APK?</string>
@@ -1184,14 +1187,11 @@ Yksityiskohdat: %2$s"</string>
     <string name="settings_system_patch_selections_title">Lisäosavalinnat</string>
     <string name="settings_system_patch_selections_description">Tallennetut lisäosavalinnat. Säilytetään, vaikka sovelluksen asennus poistetaan</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Nollataanko kaikki valinnat?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Nollataanko paketin valinnat?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Nollataanko valitut paketit?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Nollataanko lähteen valinnat?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s: %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s: %2$s</string>
     <string name="settings_system_patch_selection_source_format">Lähde #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Tämä poistaa pysyvästi kaikki tallennetut lisäosavalinnat kaikista paketeista ja lähteistä</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Tämä poistaa pysyvästi kaikki tallennetut lisäosavalinnat sovelluksesta &lt;b&gt;%s&lt;/b&gt; kaikista lähteistä</string>
     <string name="settings_system_patch_selection_reset_source_warning">Tämä poistaa pysyvästi tallennetut lisäosavalinnat sovelluksesta &lt;b&gt;%1$s&lt;/b&gt; lähteessä &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Tämä poistaa pysyvästi kaikki tallennetut lisäosavalinnat valituille paketeille</string>
     <string name="settings_system_export_source_data_fail">Lähdetietojen vienti epäonnistui</string>
@@ -1213,6 +1213,8 @@ Yksityiskohdat: %2$s"</string>
     <string name="settings_system_apk_download_helper">APK-latausapuohjelma</string>
     <string name="settings_system_apk_download_helper_trusted_count">Luotettu: %1$d / %2$d</string>
     <string name="settings_system_apk_download_helper_dialog_description">Apusovellukset voivat ladata alkuperäisiä APK-tiedostoja puolestasi. Vain ne sovellukset, joihin luotat täällä, tarjotaan latausohjeissa.</string>
+    <string name="settings_system_apk_download_helper_trust_title">Luotetaanko tähän apuhahmoon?</string>
+    <string name="settings_system_apk_download_helper_trust">Luotta</string>
     <string name="settings_system_apk_download_helper_warning">APK tulee apusovelluksesta, joten luota vain tuntemiisi sovelluksiin. Morphe tarkistaa silti jokaisen tiedoston paketin, version ja allekirjoituksen ennen korjausta.</string>
     <string name="settings_system_apk_download_helper_installed_by">Asentanut %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Asentajaa ei tunneta</string>
@@ -1234,9 +1236,13 @@ Yksityiskohdat: %2$s"</string>
     <string name="settings_system_about">Tietoja</string>
     <string name="settings_system_manager_description">Avoimen lähdekoodin projekti suosittujen Android-sovellusten moderniin ja suoraviivaiseen muokkaukseen, jota ohjaavat yhteisön palaute ja panokset</string>
     <string name="credits">Tekijät</string>
+    <string name="credits_description">Morpheen takana olevat ihmiset</string>
+    <string name="settings_about_section_project">Projekti</string>
+    <string name="settings_about_section_help">Ohjeet</string>
     <string name="credits_current_development">Nykyinen kehitys</string>
     <string name="credits_prior_development">Aikaisempi kehitys</string>
     <string name="opensource_licenses">Avoimen lähdekoodin lisenssit</string>
+    <string name="opensource_licenses_description">Kirjastot, joille Morphe perustuu</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Valinta</string>
     <string name="easter_egg_pill_message">Ota sininen pilleri ja mainokset pysyvät tarkalleen paikoillaan. Ota punainen ja katso kuinka syvälle tavukoodi menee.</string>
@@ -1255,6 +1261,20 @@ Yksityiskohdat: %2$s"</string>
     <string name="patches">Lisäosat</string>
     <string name="home">Koti</string>
     <string name="settings">Asetukset</string>
+    <string name="apps">Sovellukset</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patcher">Päivitystyökalu</string>
+    <string name="settings_section_updates">Päivitykset</string>
+    <string name="settings_section_patching">Muokkaaminen</string>
+    <string name="settings_section_appearance_summary">Miten Morphe näyttää</string>
+    <string name="settings_section_patch_options_summary">Miten yksinkertainen tila päivityssovellukset</string>
+    <string name="settings_section_general">Yleiset</string>
+    <string name="settings_section_patcher_summary">Tapat, joilla sovelluksia korjataan tällä laitteella</string>
+    <string name="settings_section_help_info">Ohjeet ja <b>info</b></string>
+    <string name="settings_section_about_summary">Lisätietoja Morpheestä ja ohjeiden hakemisesta</string>
+    <string name="settings_section_local_files">Tiedostot</string>
+    <string name="settings_section_backup">Varmuuskopio</string>
+    <string name="settings_search">Hae asetuksista</string>
     <string name="yes">Kyllä</string>
     <string name="no">Ei</string>
     <string name="all">Kaikki</string>
@@ -1356,7 +1376,6 @@ Yksityiskohdat: %2$s"</string>
     <string name="hide">Piilota</string>
     <string name="hidden">Piilotettu</string>
     <string name="unhide">Näytä</string>
-    <string name="unhide_done">Näytetään</string>
     <string name="ignore">Ohita</string>
     <string name="stop_ignoring">Lopeta huomiotta jättäminen</string>
     <string name="logs">Lokit</string>
@@ -1429,13 +1448,9 @@ Haluatko silti jatkaa?"</string>
     <string name="onboarding_sources_version_desc">Napauta versiota nähdäksesi tämän lähteen täydelliset muutoshistoria</string>
     <string name="onboarding_sources_prerelease_desc">Ota tämä käyttöön saadaksesi ennakkokorjauksia tästä lähteestä</string>
     <string name="onboarding_appearance_tab_desc">Muokkaa sovelluksen ulkoasua: teemaa, korostusväriä ja taustaa</string>
-    <string name="onboarding_appearance_theme_desc">Valitse vaalea, tumma tai järjestelmäteema. Voit myös valita mukautetun korostusvärin tai ottaa käyttöön Dynaamisen värin</string>
     <string name="onboarding_expert_mode_desc">Ota asiantuntijatila käyttöön avataksesi korjausvalinnan, mukautetut asetukset ja muut lisäominaisuudet</string>
     <!-- Translate "System" the same way as the System settings tab -->
-    <string name="onboarding_system_tab_title">Järjestelmä-välilehti</string>
-    <string name="onboarding_system_tab_desc">Avaintenhallinta, tuonti-/vientityökalut ja sovellustiedot</string>
     <string name="onboarding_system_installer_desc">Valitse, miten korjattuja sovelluksia asennetaan: vakio, root-asennus tai Shizuku</string>
-    <string name="onboarding_system_process_runtime_desc">Suorita korjaus erillisessä prosessissa vakauden parantamiseksi ja muistin käytön hallitsemiseksi. Suositeltavaa suurille sovelluksille</string>
     <string name="onboarding_system_file_picker_desc">Ota tämä käyttöön käyttääksesi sisäänrakennettua tiedostoselainta järjestelmän valitsimen sijaan APK-tiedostoja tai avaimia valittaessa</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
     <string name="tour_prompt_title">Nopea ominaisuusesittely</string>

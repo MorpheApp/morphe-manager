@@ -6,6 +6,13 @@
         <item quantity="many">%s záplat</item>
         <item quantity="other">%s záplat</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
+    <plurals name="library_count">
+        <item quantity="one">%s knihovna</item>
+        <item quantity="few">%s knihovny</item>
+        <item quantity="many">%s knihoven</item>
+        <item quantity="other">%s knihoven</item>
+    </plurals>
     <plurals name="option_count">
         <item quantity="one">%s možnost záplaty</item>
         <item quantity="few">%s možnosti záplaty</item>

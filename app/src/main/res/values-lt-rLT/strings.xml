@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Jūsų šaltiniai yra atnaujinti</string>
     <string name="home_sources_are_loading">Šaltiniai kraunami, palaukite…</string>
     <string name="home_search_apps">Ieškoti programų</string>
-    <string name="home_app_list_options_title">Rūšiuoti ir filtruoti</string>
-    <string name="home_app_list_options_state_description">Rūšiuota pagal %1$s, filtruota pagal %2$s</string>
+    <string name="list_options_title">Rūšiuoti ir filtruoti</string>
+    <string name="list_options_state_description">Rūšiuojama pagal %1$s, filtruojama pagal %2$s</string>
     <string name="home_app_filter_all_description">Kiekviena programa pradiniame ekrane</string>
     <string name="home_app_filter_patched_description">Programos, kurias pataisėte ar išsaugojote naudodami „Morphe“</string>
     <string name="home_app_filter_not_patched_description">Programos, kurių dar nepataisėte „Morphe“</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Pataisų šaltiniai</string>
     <string name="sources_search">Ieškoti šaltinių ir pataisų</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Visi šaltiniai</string>
+    <string name="sources_filter_enabled_description">Šaltinių patch\'ai imami iš</string>
+    <string name="sources_filter_disabled_description">Šaltiniai išjungti</string>
+    <string name="sources_filter_updates">Atnaujinimai</string>
+    <string name="sources_filter_updates_description">Šaltiniai, kuriems reikia naujesnės versijos</string>
+    <string name="sources_filter_issues">Reikalauja dėmesio</string>
+    <string name="sources_filter_issues_description">Užblokuoti šaltiniai, kurie nepavyko įkelti arba reikalauja naujesnės „Morphe“</string>
     <string name="sources_sort_manual">Rankinis rikiavimas</string>
     <string name="sources_sort_manual_hint">Ilgu paspaudimu perkelkite šaltinį į norimą vietą</string>
     <string name="sources_sort_last_updated">Pagal atnaujinimo datą</string>
@@ -167,7 +175,6 @@
     <string name="sources_apps_description">Programėlės, pažymėtos šaltinyje. Bakstelėkite programėlę, kad ją pašalintumėte arba grąžintumėte. Programėlė palieka namų ekraną, jei nė vienas šaltinys jos neatneša, nebent jūs ją pataisėte</string>
     <string name="sources_apps_brought">Pateikia šis šaltinis</string>
     <string name="sources_apps_left_out">Pašalinta iš šio šaltinio</string>
-    <string name="sources_apps_bring_back">Grąžinti</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
     <string name="sources_apps_stays_patched">Palikta kaip pataisyta</string>
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
@@ -243,6 +250,8 @@ Viskas, ką pridėsite iš šios svetainės, naudojama jūsų pačių rizika"</s
     <string name="home_apk_availability_yes">Taip, padėkite man rasti APK</string>
     <string name="home_apk_availability_no">Ne, jau turiu APK</string>
     <string name="home_apk_helper_download">Naudoti pagalbinę programą</string>
+    <string name="home_apk_helper_untrusted">Padalinio programėlė įdiegta, bet dar nėra patikima, todėl čia ne siūloma</string>
+    <string name="home_apk_helper_untrusted_action">Peržiūrėti padalinius</string>
     <string name="home_apk_helper_title">Atsisiųsti naudojant pagalbinę programą</string>
     <string name="home_apk_helper_description">„Morphe“ paprašys toliau nurodytos pagalbinės programos atsisiųsti originalų APK ir grąžinti failą</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -539,7 +548,7 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <string name="root_mount_module_unmount_warning">Jei „KernelSU“ pagal numatytuosius nustatymus įjungta parinktis „Unmount modules“, atidarykite „KernelSU“ &gt; „Superuser“ &gt; jūsų prijungtą programą &gt; „Profile“ &gt; „Custom“ ir išjunkite „Unmount modules“. Priešingu atveju prijungtas pataisytas APK gali neįsigalioti, net jei „Morphe“ rodo jį kaip prijungtą</string>
     <string name="root_pre_patch_installer_standard_title">Standartinio diegimo režimas</string>
     <string name="root_pre_patch_installer_standard_description">Pataiso kaip įprastą APK su GmsCore palaikymu. Po pataisymo naudojamas jūsų diegimo įrankio nustatymas</string>
-    <string name="root_pre_patch_installer_hint">Šis pataisymo režimas yra atskiras nuo Nustatymai &gt; Sistema &gt; Diegimo įrankis ir po pataisymo jo pakeisti negalima</string>
+    <string name="root_pre_patch_installer_hint">Paklausta, kai nustatymuose <b>&amp;gt;</b> Trynimas <b>&amp;gt;</b> Diegimas <b>&amp;gt;</b> Dieklio pasirinkimo užklausa yra aktyvi. Po trynimo trynimo režimo pakeisti negalima</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Klaida nukopijuota į iškarpinę</string>
     <string name="patcher_error_log">Klaidų žurnalas</string>
@@ -730,7 +739,6 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <string name="mini_game_pairs_picker_subtitle">Apverskite korteles, raskite poras</string>
     <!-- Settings -->
     <string name="appearance">Išvaizda</string>
-    <string name="advanced">Išplėstiniai</string>
     <string name="system">Sistema</string>
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background">Fono animacijos</string>
@@ -758,6 +766,8 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
     <string name="settings_appearance_seasonal_background_notice">Kai sezoninės temos įjungtos, %1$s fonas rodomas iki %2$s</string>
     <!-- Settings - Appearance Tab - Theme -->
+    <string name="settings_appearance_display">Rodinys</string>
+    <string name="settings_appearance_effects">Efektai</string>
     <string name="settings_appearance_theme">Tema</string>
     <string name="settings_appearance_theme_mode">Temos režimas</string>
     <string name="settings_appearance_system">Sistemos</string>
@@ -766,7 +776,6 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_monochrome">Vienspalvis</string>
     <string name="settings_appearance_color_style">Spalvų stilius</string>
-    <string name="settings_appearance_colors">Spalvos</string>
     <string name="settings_appearance_accent_color">Akcento spalva</string>
     <string name="settings_appearance_pure_black">Gili juoda</string>
     <string name="settings_appearance_pure_black_description">Naudoja grynus juodus fonus</string>
@@ -774,8 +783,9 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <string name="settings_appearance_color_accents_description">Naudojamas kiekvienos programėlės ir šaltinio spalva, o ne akcentinė</string>
     <string name="settings_appearance_outlines">Kontūrai</string>
     <string name="settings_appearance_outlines_description">Nubrėžia ploną kraštą aplink korteles, skydelius ir mygtukus</string>
+    <string name="settings_appearance_blur">Blukinimas</string>
+    <string name="settings_appearance_blur_description">Neryškiuoja tai, kas slenka po antraštėmis, juostomis ir skyriais</string>
     <!-- Settings - Appearance Tab - Language Selector -->
-    <string name="settings_appearance_language_and_display">Kalba &amp; rodymas</string>
     <string name="settings_appearance_app_language">Programėlės kalba</string>
     <string name="settings_appearance_app_language_current">Dabartinė kalba</string>
     <string name="settings_appearance_translations_info_title">Kai kurių kalbų vertimų gali trūkti arba jie gali būti nepilni</string>
@@ -793,8 +803,6 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Rodo pasisveikinimo žinutę</string>
     <string name="settings_appearance_repatch_notice">Pakartotinio pataisymo pranešimas</string>
     <string name="settings_appearance_repatch_notice_description">Rodo šaukštą, kai pataisytas programas galima pataisyti dar kartą</string>
-    <string name="settings_appearance_sort_button">Rūšiavimo ir filtravimo mygtukas</string>
-    <string name="settings_appearance_sort_button_description">Rodo mygtuką programėlių rūšiavimui ir filtravimui</string>
     <string name="settings_appearance_app_card_colors">Programų kortelių spalvos</string>
     <string name="settings_appearance_app_card_colors_default">Numatytasis</string>
     <string name="settings_appearance_app_card_colors_default_description">Suteikite kiekvienai programai jos pačios rinkinio spalvą</string>
@@ -887,7 +895,6 @@ Pataisoms tai įtakos neturi: įjunkite išankstines pataisas kiekvienam šaltin
     <string name="notification_mount_replaced_title">%1$s nebėra pataisyta</string>
     <string name="notification_mount_replaced_text">v%1$s pakeitė pataisytą v%2$s. Atidarykite Morphe, kad ją atkurtumėte</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Išplėstiniai nustatymai</string>
     <string name="settings_advanced_expert_mode">Eksperto rėžimas</string>
     <string name="settings_advanced_expert_mode_description">Atrakinava pažangius patvarkymo nustatymus ir parinktis</string>
     <string name="settings_advanced_expert_mode_dialog_title">Įjungti eksperto režimą?</string>
@@ -910,7 +917,6 @@ Pataisoms tai įtakos neturi: įjunkite išankstines pataisas kiekvienam šaltin
     <string name="settings_advanced_github_pat_export_warning">Nesidalykite savo PAT. Jei įtraukiate jį į nustatymų eksportą, laikykite tą failą privačiai, nes jame yra žetonas</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Pataisų nustatymai</string>
-    <string name="settings_advanced_patch_options_youtube_description">Prekės ženklo ir antraštės parinktys</string>
     <string name="settings_advanced_patch_options_restart_message">Pakeitus pataisos parinktis, kad jos įsigaliotų, programą reikia pataisyti iš naujo</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">Eksperto režimu pataisos parinktys bus prieinamos pataisymo proceso metu</string>
     <string name="settings_advanced_patch_options_loading">Kraunami pataisų nustatymai…</string>
@@ -980,7 +986,6 @@ Vaizdų matmenys turi būti tokie:
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
-    <string name="settings_advanced_patch_options_hide_shorts_features">Slėpti „Shorts“ funkcijas</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Slėpti „Shorts“ programos nuorodą</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Pašalina „Shorts“ iš launcher ilgo paspaudimo meniu</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Slėpti „Shorts“ valdiklį</string>
@@ -988,6 +993,7 @@ Vaizdų matmenys turi būti tokie:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Diegimo įrankis</string>
     <string name="installer_settings_title">Numatytasis diegimo įrankis</string>
+    <string name="settings_installation">Įdiegimas</string>
     <string name="installer_title">Pasirinkite diegimo įrankį</string>
     <string name="installer_internal_description">Naudoja „Android“ paketų diegimo įrankį</string>
     <string name="installer_play_store_description">Naudoja sistemos diegimo programą ir nustato Google Play Store kaip diegimo šaltinį</string>
@@ -1018,7 +1024,7 @@ Vaizdų matmenys turi būti tokie:
     <string name="installer_unavailable_title">%s neprieinama</string>
     <string name="installer_unavailable_message">Jūsų pageidaujamas diegimo įrankis (%s) šiuo metu neprieinamas. Galite išspręsti problemą ir bandyti dar kartą arba naudoti standartinį diegimo įrankį</string>
     <string name="installer_unavailable_shizuku_hint">Įsitikinkite, kad „Shizuku“ veikia ir šiai programai suteiktas leidimas</string>
-    <string name="installer_use_standard">Naudoti standartinį</string>
+    <string name="installer_choose_another">Pasirinkti kitą diekiklį</string>
     <string name="installer_play_store_warning_title">Diegti kaip Play Store?</string>
     <string name="installer_play_store_warning_message">Pataisyta programa bus užregistruota kaip įdiegta iš „Google Play“ parduotuvės. Tai gali padėti tokioms paslaugoms kaip „Android Auto“ atpažinti ją kaip „Play“ parduotuvės programą, tačiau tai negarantuojama kiekvienai programai ar įrenginiui. Veikimas gali skirtis priklausomai nuo „Android“ versijos, ROM, įrenginio gamintojo ir programai būdingų patikrų</string>
     <string name="installer_play_store_warning_risk">Play Store gali pasiūlyti atnaujinimus pataisytai programėlei. Įdiegus tą atnaujinimą, pataisytas APK bus perrašytas originalia versija ir pataisos bus pašalintos. Jei būsite paraginti atnaujinti, bakstelėkite trijų taškų meniu programėlės Play Store puslapyje ir pasirinkite \"Išjungti atnaujinimus\"</string>
@@ -1026,11 +1032,13 @@ Vaizdų matmenys turi būti tokie:
     <string name="installer_play_store_mode">Diegti kaip „Play“ parduotuvės</string>
     <string name="installer_play_store_mode_description">Žymi „Google Play Store</string>
     <string name="settings_prompt_installer_on_install">Diegimo įrankio pasirinkimo raginimas</string>
-    <string name="settings_prompt_installer_on_install_description">Klausia, kuriuo diegikliu naudotis kiekvienu įdiegimu</string>
+    <string name="settings_prompt_installer_on_install_description">Kiekvieno programėle įdiegimo metu klausia, kaip ją diegti: su root teisėmis prieš šlifavimą, kitaip – po jo</string>
     <string name="settings_auto_install_with_shizuku">Automatiškai įdiegti po pataisymo</string>
-    <string name="settings_auto_install_with_shizuku_description">Įdiegia pataisytą APK, kai tik pataisymas baigiasi</string>
+    <string name="settings_auto_install_with_shizuku_description">Iškart baigus šlifavimą diegia arba prisukuoja ištaisytą APK</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatiškai pašalinti konflikto atveju</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Pašalina esamą programėlę, jeigu yra parašo konflikto. Tai gali pašalinti programėlės duomenis</string>
+    <string name="settings_ignore_install_target_rules">Ignoruoti diegimo tikslo reikalavimus</string>
+    <string name="settings_ignore_install_target_rules_description">Leidžia išjungti diegimo tikslą reikalaujančias taisykles ir įjungti jas, kurias jos neįtraukia. Su modifikuota programa gali neveikti</string>
     <string name="settings_auto_uninstall_warning_title">Įjungti automatinį pašalinimą?</string>
     <string name="settings_auto_uninstall_warning_message">Jei „Android“ praneša apie parašo konfliktą automatinio diegimo per „Shizuku“ metu, „Morphe“ pašalins esamą programą prieš įdiegdamas pataisytą APK</string>
     <string name="settings_auto_uninstall_warning_risk">Tai gali pašalinti programos duomenis. Jei po pašalinimo pataisytas APK neįdiegiamas, ankstesnės programos gali jau nebebūti</string>
@@ -1059,23 +1067,19 @@ Išsami informacija: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Baterijos optimizavimas</string>
     <string name="settings_system_battery_optimization_description">Palieka pataisymo procesą veikiantį, kai programa sumažinama</string>
-    <string name="settings_system_background">Fonas</string>
     <string name="settings_system_process_runtime">Proceso vykdymo laikas</string>
     <string name="settings_system_process_runtime_description">Pataisymą vykdo atskirame procese, kad būtų didesnis stabilumas</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Didesni limitai pagreitina pataisymą pajėgiuose įrenginiuose</string>
     <string name="settings_system_process_runtime_enable">Įjungti proceso vykdymo laiką</string>
     <string name="settings_system_memory_limit_subtitle">Atmintis, skirta pataisymui</string>
     <string name="settings_system_process_runtime_heap_limit_ignored">Šis įrenginys nepaisė atminties limito paskutinio paleidimo metu, todėl pataisymas gali grįžti prie vykdymo „Morphe“ viduje</string>
     <string name="settings_system_memory_limit_warning">Per mažas atminties limitas gali sukelti klaidas pataisant didesnes programas</string>
     <string name="settings_system_memory_limit_high_warning">Didelis atminties limitas kai kuriuose įrenginiuose gali labai sulėtinti pataisymą. Padidinkite jį tik tuo atveju, jei pataisymas nuolat nepavyksta su mažesniais limitais</string>
-    <string name="settings_system_process_runtime_enabled_description">%s MB limitas</string>
-    <string name="settings_system_process_runtime_disabled_description">Palieskite, kad konfigūruotumėte</string>
     <string name="settings_system_process_runtime_description_not_available">Ši funkcija reikalauja „Android 11“ ar naujesnės versijos</string>
     <string name="settings_system_patcher_completion_sound">Užbaigimo garsas</string>
     <string name="settings_system_patcher_completion_sound_description">Kai pataisymas baigiasi, groja skirtingą toną sėkmės arba nesėkmės atveju</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">Pranešimai</string>
-    <string name="settings_system_notifications_description">Konfigūruoja fono įspėjimus ir užbaigimo garsus</string>
+    <string name="settings_system_notifications_description">Kaip „Morphe“ jus informuoja</string>
     <string name="settings_system_notifications_success_sound">Sėkmės garsas</string>
     <string name="settings_system_notifications_error_sound">Nesėkmės garsas</string>
     <string name="settings_system_notifications_sound_default">Numatytasis</string>
@@ -1085,7 +1089,6 @@ Išsami informacija: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Atstatyti į numatytąjį</string>
     <string name="settings_system_notifications_ringtone_picker_title">Pasirinkite toną</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Importas &amp; eksportas</string>
     <string name="settings_system_signing_key">Pasirašymo raktas</string>
     <string name="settings_system_signing_key_description">Atlieka raktų, signuojančių patvarkytas programėles, atsarginę kopiją arba atkūrimą</string>
     <string name="settings_system_signing_key_dialog_description">Kiekviena „Morphe“ pataisyta programa yra pasirašyta šiuo raktu. Pasilikite kopiją: be jos pataisytas programas bus galima atnaujinti tik jas pašalinus</string>
@@ -1132,7 +1135,6 @@ Išsami informacija: %2$s"</string>
     <string name="settings_system_export_debug_logs_export_failed">Nepavyko eksportuoti žurnalų</string>
     <string name="settings_system_export_debug_logs_export_success">Žurnalai eksportuoti</string>
     <!-- Settings - System Tab - Files & Storage Section -->
-    <string name="settings_system_files">Failai &amp; saugykla</string>
     <string name="settings_system_apks_size">Bendras dydis: %s</string>
     <string name="settings_system_apks_delete_all_confirm">Tai visam laikui ištrins čia rodomus išsaugotus APK failus</string>
     <string name="settings_system_apks_delete_selected_title">Ištrinti pasirinktus APK?</string>
@@ -1144,6 +1146,9 @@ Išsami informacija: %2$s"</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">Saugyklos valdymas</string>
     <string name="settings_system_storage_management_description">Rodo disko naudojimą ir išvalo kaupinėtus failus</string>
+    <string name="settings_system_storage_used_free">Naudoja „Morphe” / šioje įrenginyje nemokama</string>
+    <string name="settings_system_storage_saved_apks">Išsaugoti APK failai</string>
+    <string name="settings_system_storage_caches">Talpyklos</string>
     <string name="settings_system_storage_keystore_title">Pasirašymo rakto saugykla</string>
     <string name="settings_system_storage_app_data_title">Programos duomenys</string>
     <string name="settings_system_storage_patch_bundles_title">Pataisų rinkiniai</string>
@@ -1168,14 +1173,12 @@ Išsami informacija: %2$s"</string>
     <string name="settings_system_save_patched_apks_description">Išsaugokite pataisyto APK kopiją vėlesniam eksportavimui arba pakartotiniam diegimui iš tvarkyklės</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Pataisyti APK</string>
-    <string name="settings_system_patched_apks_description">Tvarko išsaugotus pataisytų programų failus</string>
     <string name="settings_system_patched_apks_empty">Dar nėra išsaugotų pataisytų APK</string>
     <string name="settings_system_patched_apks_delete_title">Ištrinti pataisytą APK?</string>
     <string name="settings_system_patched_apks_deleted">Pataisytas APK sėkmingai ištrintas</string>
     <string name="settings_system_patched_apks_delete_all_title">Ištrinti visus pataisytus APK?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Originalūs APK</string>
-    <string name="settings_system_original_apks_description">Išsaugoma pakartotiniam pataisymui. Kiekvienai programai laikoma viena versija</string>
     <string name="settings_system_original_apks_empty">Nėra išsaugotų originalių APK</string>
     <string name="settings_system_original_apks_deleted">Originalus APK sėkmingai ištrintas</string>
     <string name="settings_system_original_apks_delete_title">Ištrinti originalų APK?</string>
@@ -1185,14 +1188,11 @@ Išsami informacija: %2$s"</string>
     <string name="settings_system_patch_selections_title">Pataisų pasirinkimai</string>
     <string name="settings_system_patch_selections_description">Išsaugoti pataisų pasirinkimai, išliekantys po pašalinimo</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Atstatyti visus pasirinkimus?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Atstatyti paketų pasirinkimus?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Atstatyti pasirinktus paketus?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Atstatyti šaltinio pasirinkimą?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s tarp %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s iš %2$s</string>
     <string name="settings_system_patch_selection_source_format">Šaltinis #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Tai visam laikui ištrins visus išsaugotus pataisų pasirinkimus visiems paketams ir šaltiniams</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Tai visam laikui ištrins visus išsaugotus pataisų pasirinkimus, susijusius su &lt;b&gt;%s&lt;/b&gt;, visuose šaltiniuose</string>
     <string name="settings_system_patch_selection_reset_source_warning">Tai visam laikui ištrins išsaugotus pataisų pasirinkimus, susijusius su &lt;b&gt;%1$s&lt;/b&gt;, šaltinyje &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Tai visam laikui ištrins visus išsaugotus pataisų pasirinkimus pasirinktiems paketams</string>
     <string name="settings_system_export_source_data_fail">Nepavyko eksportuoti šaltinio duomenų</string>
@@ -1214,6 +1214,8 @@ Išsami informacija: %2$s"</string>
     <string name="settings_system_apk_download_helper">APK atsisiuntimo pagalbinė programa</string>
     <string name="settings_system_apk_download_helper_trusted_count">Patikima: %1$d iš %2$d</string>
     <string name="settings_system_apk_download_helper_dialog_description">Pagalbinės programos gali už jus atsisiųsti originalius APK. Atsisiuntimo instrukcijose siūlomos tik tos, kuriomis čia pasitikite</string>
+    <string name="settings_system_apk_download_helper_trust_title">Ar pasitikite šiuo pagalbininku?</string>
+    <string name="settings_system_apk_download_helper_trust">Pasitikėti</string>
     <string name="settings_system_apk_download_helper_warning">APK gaunamas iš pagalbinės programos, todėl pasitikėkite tik jums žinomomis programomis. „Morphe“ vis tiek prieš pataisymą patikrina kiekvieno failo paketą, versiją ir parašą</string>
     <string name="settings_system_apk_download_helper_installed_by">Įdiegė %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Diegimo įrankis nežinomas</string>
@@ -1235,9 +1237,13 @@ Išsami informacija: %2$s"</string>
     <string name="settings_system_about">Apie</string>
     <string name="settings_system_manager_description">Atvirojo kodo projektas, skirtas moderniam ir sklandžiam populiarių „Android“ programų pataisymui, kurį skatina bendruomenės atsiliepimai ir indėlis</string>
     <string name="credits">Autoriai</string>
+    <string name="credits_description">Žmonės, kuriančiai „Morphe“</string>
+    <string name="settings_about_section_project">Projektas</string>
+    <string name="settings_about_section_help">Pagalba</string>
     <string name="credits_current_development">Dabartinis vystymas</string>
     <string name="credits_prior_development">Ankstesnis vystymas</string>
     <string name="opensource_licenses">Atvirojo kodo licencijos</string>
+    <string name="opensource_licenses_description">Programinės įrangos bibliotekos, naudojamos kuriant „Morphe“</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Pasirinkimas</string>
     <string name="easter_egg_pill_message">Išgerkite mėlynąją tabletę ir skelbimai liks tiksliai ten, kur yra. Išgerkite raudonąją ir pamatysite, kaip giliai tęsiasi baitkodas</string>
@@ -1256,6 +1262,20 @@ Išsami informacija: %2$s"</string>
     <string name="patches">Pataisos</string>
     <string name="home">Pradžia</string>
     <string name="settings">Nustatymai</string>
+    <string name="apps">Programos</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patcher">Pataisymo programėlė</string>
+    <string name="settings_section_updates">Atnaujinimai</string>
+    <string name="settings_section_patching">Taisoma</string>
+    <string name="settings_section_appearance_summary">Kai Morphe atrodo taip</string>
+    <string name="settings_section_patch_options_summary">Ką paprastas režimas taiko programoms</string>
+    <string name="settings_section_general">Bendra</string>
+    <string name="settings_section_patcher_summary">Kaip šioje įrenginyje taikomos programų taisyklės</string>
+    <string name="settings_section_help_info">Pagalba ir informacija</string>
+    <string name="settings_section_about_summary">Daugiau apie „Morphe“ ir kaip gauti pagalbą</string>
+    <string name="settings_section_local_files">Failai</string>
+    <string name="settings_section_backup">Atsarginė kopija</string>
+    <string name="settings_search">Paieškos nustatymai</string>
     <string name="yes">Taip</string>
     <string name="no">Ne</string>
     <string name="all">Visi</string>
@@ -1357,7 +1377,6 @@ Išsami informacija: %2$s"</string>
     <string name="hide">Slėpti</string>
     <string name="hidden">Paslėpta</string>
     <string name="unhide">Vėl rodyti</string>
-    <string name="unhide_done">Rodoma</string>
     <string name="ignore">Nepaisyti</string>
     <string name="stop_ignoring">Nustoti nepaisyti</string>
     <string name="logs">Žurnalai</string>
@@ -1430,13 +1449,9 @@ Ar vis tiek norite tęsti?"</string>
     <string name="onboarding_sources_version_desc">Palieskite versiją, kad pamatytumėte visą šio šaltinio pakeitimų žurnalą</string>
     <string name="onboarding_sources_prerelease_desc">Įjunkite, jei norite gauti išankstines šio šaltinio pataisų versijas</string>
     <string name="onboarding_appearance_tab_desc">Tinkinkite programos išvaizdą: temą, akcento spalvą ir foną</string>
-    <string name="onboarding_appearance_theme_desc">Pasirinkite šviesią, tamsią arba sistemos temą. Taip pat galite pasirinkti pasirinktinę akcento spalvą arba įjungti „Dynamic Color“</string>
     <string name="onboarding_expert_mode_desc">Įjunkite eksperto režimą, kad atrakintumėte pataisų pasirinkimą, pasirinktines parinktis ir kitas išplėstines funkcijas</string>
     <!-- Translate "System" the same way as the System settings tab -->
-    <string name="onboarding_system_tab_title">Sistema</string>
-    <string name="onboarding_system_tab_desc">Rakto saugyklos tvarkymas, importavimo/eksportavimo įrankiai ir programos informacija</string>
     <string name="onboarding_system_installer_desc">Pasirinkite, kaip diegiamos pataisytos programos: standartinis, root prijungimas arba „Shizuku“</string>
-    <string name="onboarding_system_process_runtime_desc">Pataisykite atskirame procese, kad padidintumėte stabilumą ir kontroliuotumėte atminties naudojimą. Rekomenduojama didelėms programoms</string>
     <string name="onboarding_system_file_picker_desc">Įjunkite, kad rinkdamiesi APK ar rakto saugyklas naudotumėte įtaisytąją failų naršyklę, o ne sistemos parinkiklį</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
     <string name="tour_prompt_title">Greita funkcijų apžvalga</string>

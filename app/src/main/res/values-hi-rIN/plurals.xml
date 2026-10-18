@@ -4,6 +4,11 @@
         <item quantity="one">%s पैच</item>
         <item quantity="other">%s पैच</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
+    <plurals name="library_count">
+        <item quantity="one">%s लाइब्रेरी</item>
+        <item quantity="other">%s लाइब्रेरियाँ</item>
+    </plurals>
     <plurals name="option_count">
         <item quantity="one">%s पैच विकल्प</item>
         <item quantity="other">%s पैच विकल्प</item>

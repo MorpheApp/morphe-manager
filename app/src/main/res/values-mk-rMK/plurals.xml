@@ -4,6 +4,7 @@
         <item quantity="one">%s поправка</item>
         <item quantity="other">%s поправки</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
     <plurals name="option_count">
         <item quantity="one">%s опција за закрпа</item>
         <item quantity="other">%s опции за закрпа</item>

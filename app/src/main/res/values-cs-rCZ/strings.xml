@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">Vaše zdroje jsou aktuální</string>
     <string name="home_sources_are_loading">Zdroje se načítají, počkejte prosím…</string>
     <string name="home_search_apps">Hledat aplikace</string>
-    <string name="home_app_list_options_title">Řadit a filtrovat</string>
-    <string name="home_app_list_options_state_description">Seřazeno podle %1$s, filtrováno podle %2$s</string>
+    <string name="list_options_title">Seřadit a filtrovat</string>
+    <string name="list_options_state_description">Seřazeno podle %1$s, filtrováno podle %2$s</string>
     <string name="home_app_filter_all_description">Všechny aplikace na domovské obrazovce</string>
     <string name="home_app_filter_patched_description">Aplikace, které jste patchovali nebo uložili pomocí Morphe</string>
     <string name="home_app_filter_not_patched_description">Aplikace, které jste v Morphe ještě nepatchovali</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Zdroje záplat</string>
     <string name="sources_search">Hledat zdroje a záplaty</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">Každý zdroj</string>
+    <string name="sources_filter_enabled_description">Záplaty zdrojů jsou převzaty z</string>
+    <string name="sources_filter_disabled_description">Zdroje vypnuty</string>
+    <string name="sources_filter_updates">Aktualizace</string>
+    <string name="sources_filter_updates_description">Zdroje s novější verzí k získání</string>
+    <string name="sources_filter_issues">Vyžadují pozornost</string>
+    <string name="sources_filter_issues_description">Zdroje, které jsou blokovány, selhaly při načítání nebo potřebují novější Morphe</string>
     <string name="sources_sort_manual">Ruční řazení</string>
     <string name="sources_sort_manual_hint">Dlouhým stisknutím zdroje jej můžete přerazit</string>
     <string name="sources_sort_last_updated">Naposledy aktualizováno</string>
@@ -167,7 +175,6 @@
     <string name="sources_apps_description">Aplikace ze tohoto zdroje mají zaškrtnutá pole. Klepnutím na aplikaci ji můžete vyloučit nebo znovu zahrnout. Aplikace z domovské obrazovky odstraněna, jakmile ji již žádný zdroj nepřináší, pokud jste ji nezměnili.</string>
     <string name="sources_apps_brought">Přinášené tímto zdrojem</string>
     <string name="sources_apps_left_out">Vyřazené z tohoto zdroje</string>
-    <string name="sources_apps_bring_back">Vrátit zpět</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
     <string name="sources_apps_stays_patched">Ponecháno jako změněné</string>
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
@@ -243,6 +250,8 @@ Cokoli, co z této webové stránky přidáte, používáte na vlastní riziko."
     <string name="home_apk_availability_yes">Ano, pomozte mi najít APK</string>
     <string name="home_apk_availability_no">Ne, už mám APK</string>
     <string name="home_apk_helper_download">Použít pomocnou aplikaci</string>
+    <string name="home_apk_helper_untrusted">Aplikace helper je nainstalována, ale ještě není důvěryhodná, takže není zde nabízena</string>
+    <string name="home_apk_helper_untrusted_action">Zkontrolovat assistenty</string>
     <string name="home_apk_helper_title">Stáhnout pomocí pomocné aplikace</string>
     <string name="home_apk_helper_description">Morphe požádá níže uvedenou pomocnou aplikaci o stažení původního APK a vrácení souboru</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -539,7 +548,7 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
     <string name="root_mount_module_unmount_warning">Pokud má KernelSU ve výchozím nastavení povolené odmontování modulů, otevřete KernelSU > Superuser > aplikaci, kterou jste namontovali > Profil > Vlastní a zakažte odmontování modulů. Jinak se namontovaný opravený APK nemusí projevit, i když Morphe zobrazuje, že je namontovaný.</string>
     <string name="root_pre_patch_installer_standard_title">Standardní režim instalace</string>
     <string name="root_pre_patch_installer_standard_description">Patche jako běžný APK se podporou GmsCore. Vaše nastavení instalátoru bude použito po opatchování</string>
-    <string name="root_pre_patch_installer_hint">Tento režim patche je oddělený od Nastavení > Systém > Instalátor a nelze jej změnit po opatchování</string>
+    <string name="root_pre_patch_installer_hint">Zobrazováno při Nastavení <b>&amp;gt;</b> Opravy <b>&amp;gt;</b> Instalace <b>&amp;gt;</b> Výběr instalátoru. Režim opravy nelze po opravě změnit</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Chyba zkopírována do schránky</string>
     <string name="patcher_error_log">Protokol chyb</string>
@@ -730,7 +739,6 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="mini_game_pairs_picker_subtitle">Otočte karty, najděte shodu</string>
     <!-- Settings -->
     <string name="appearance">Vzhled</string>
-    <string name="advanced">Pokročilé</string>
     <string name="system">Systém</string>
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background">Animace pozadí</string>
@@ -758,6 +766,8 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
     <string name="settings_appearance_seasonal_background_notice">Pozadí %1$s je zapnuté do %2$s, dokud jsou sezónní motivy zapnuté</string>
     <!-- Settings - Appearance Tab - Theme -->
+    <string name="settings_appearance_display">Displej</string>
+    <string name="settings_appearance_effects">Efekty</string>
     <string name="settings_appearance_theme">Téma</string>
     <string name="settings_appearance_theme_mode">Režim tématu</string>
     <string name="settings_appearance_system">Systém</string>
@@ -766,7 +776,6 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_monochrome">Černobílý</string>
     <string name="settings_appearance_color_style">Styl barvy</string>
-    <string name="settings_appearance_colors">Barvy</string>
     <string name="settings_appearance_accent_color">Barva akcentu</string>
     <string name="settings_appearance_pure_black">Čistá černá</string>
     <string name="settings_appearance_pure_black_description">Používá pravě černou barvu pozadí</string>
@@ -774,8 +783,9 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="settings_appearance_color_accents_description">Používá barvy jednotlivých aplikací a zdrojů místo akcentu</string>
     <string name="settings_appearance_outlines">Obrysy</string>
     <string name="settings_appearance_outlines_description">Vykresluje tenký okraj kolem karet, panelů a tlačítek.</string>
+    <string name="settings_appearance_blur">Rozmazání</string>
+    <string name="settings_appearance_blur_description">Rozmazává obsah, který se posouvá pod hlavičkami, panely a rámy</string>
     <!-- Settings - Appearance Tab - Language Selector -->
-    <string name="settings_appearance_language_and_display">Jazyk &amp; zobrazení</string>
     <string name="settings_appearance_app_language">Jazyk aplikace</string>
     <string name="settings_appearance_app_language_current">Aktuální jazyk</string>
     <string name="settings_appearance_translations_info_title">Pro některé jazyky mohou chybět nebo být neúplné.</string>
@@ -792,8 +802,6 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Zobrazuje uvítací zprávu</string>
     <string name="settings_appearance_repatch_notice">Oznámení o opětovné záplatě</string>
     <string name="settings_appearance_repatch_notice_description">Zobrazuje banner, když lze opravené aplikace znovu opravit</string>
-    <string name="settings_appearance_sort_button">Tlačítko pro řazení a filtrování</string>
-    <string name="settings_appearance_sort_button_description">Zobrazuje tlačítko pro řazení a filtrování aplikací</string>
     <string name="settings_appearance_app_card_colors">Barvy karet aplikací</string>
     <string name="settings_appearance_app_card_colors_default">Výchozí</string>
     <string name="settings_appearance_app_card_colors_default_description">Přiřadí každé aplikaci barvu jejího balíčku</string>
@@ -886,7 +894,6 @@ Záplaty tím nejsou ovlivněny: povolte předběžné záplaty pro každý zdro
     <string name="notification_mount_replaced_title">Aplikace %1$s již není opatchovaná</string>
     <string name="notification_mount_replaced_text">v%1$s nahradila opatchovanou verzi v%2$s. Otevřete Morphe a obnovte ji</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Expertní nastavení</string>
     <string name="settings_advanced_expert_mode">Režim expertů</string>
     <string name="settings_advanced_expert_mode_description">Odemkne pokročilá nastavení patchování a možnosti patchování</string>
     <string name="settings_advanced_expert_mode_dialog_title">Povolit Expert mód?</string>
@@ -909,7 +916,6 @@ Záplaty tím nejsou ovlivněny: povolte předběžné záplaty pro každý zdro
     <string name="settings_advanced_github_pat_export_warning">Nesdílejte svůj PAT. Pokud ho zahrnete do exportu nastavení, uchovejte tento soubor v soukromí, protože obsahuje token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Nastavení záplaty</string>
-    <string name="settings_advanced_patch_options_youtube_description">Možnosti brandingu a záhlaví</string>
     <string name="settings_advanced_patch_options_restart_message">Pro změnu nastavení záplaty je nutné aplikaci opětovně záplatovat</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">V Expertním režimu budou možnosti záplat dostupné během procesu záplatování</string>
     <string name="settings_advanced_patch_options_loading">Načítám možnosti záplaty…</string>
@@ -979,7 +985,6 @@ Rozměry obrázků musí být následující:
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
-    <string name="settings_advanced_patch_options_hide_shorts_features">Skrýt funkce Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Skrýt odkaz na aplikaci Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Odebere Shorts z nabídky při dlouhém podržení ikony aplikace na domovské obrazovce</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Skrýt widget Shorts</string>
@@ -987,6 +992,7 @@ Rozměry obrázků musí být následující:
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Instalátor</string>
     <string name="installer_settings_title">Výchozí instalátor</string>
+    <string name="settings_installation">Instalace</string>
     <string name="installer_title">Vyberte instalátor</string>
     <string name="installer_internal_description">Používá vestavěný správce balíčků Androidu</string>
     <string name="installer_play_store_description">Používá systémový instalátor a nastaví Obchod Play jako zdroj instalace</string>
@@ -1017,7 +1023,7 @@ Rozměry obrázků musí být následující:
     <string name="installer_unavailable_title">%s nedostupná</string>
     <string name="installer_unavailable_message">Váš preferovaný instalátor (%s) je momentálně nedostupný. Můžete vyřešit problém a zkuste to znovu, nebo použijte standardní instalátor</string>
     <string name="installer_unavailable_shizuku_hint">Ujistěte se, že je Shizuku spuštěn a povoleno pro tuto aplikaci</string>
-    <string name="installer_use_standard">Použít standard</string>
+    <string name="installer_choose_another">Vybrat jiný instalátor</string>
     <string name="installer_play_store_warning_title">Instalovat jako Play Store?</string>
     <string name="installer_play_store_warning_message">Opravená aplikace bude zaznamenána jako nainstalovaná z Obchodu Google Play. To může pomoci službám, jako je Android Auto, rozpoznat ji jako aplikaci z Obchodu Play, ale není to zaručeno pro každou aplikaci nebo zařízení. Chování se může lišit v závislosti na verzi Androidu, ROM, značce zařízení a kontrolách specifických pro aplikaci.</string>
     <string name="installer_play_store_warning_risk">Play Store může nabízet aktualizace pro opravenou aplikaci. Instalace této aktualizace přepíše opravený APK s původní verzí a odstraní opravy. Pokud budete vyzváni k aktualizaci, klepněte na nabídku se třemi tečkami na stránce aplikace v Play Store a zvolte \"Vypnout aktualizace\".</string>
@@ -1025,11 +1031,13 @@ Rozměry obrázků musí být následující:
     <string name="installer_play_store_mode">Instalovat jako Obchod Play</string>
     <string name="installer_play_store_mode_description">Označí Google Play Store jako zdroj instalace</string>
     <string name="settings_prompt_installer_on_install">Výběr instalátoru</string>
-    <string name="settings_prompt_installer_on_install_description">Při každé instalaci se zeptá, který installer použít</string>
+    <string name="settings_prompt_installer_on_install_description">Přeje si určit způsob instalace každé aplikace: s root před opravou, jinak poté</string>
     <string name="settings_auto_install_with_shizuku">Automatická instalace po záplatování</string>
-    <string name="settings_auto_install_with_shizuku_description">Nainstaluje opravený APK, jakmile se oprava dokončí</string>
+    <string name="settings_auto_install_with_shizuku_description">Instaluje nebo připojí opravený APK, jakmile se oprava dokončí</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatické odinstalování v případě konfliktu</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Odinstaluje existující aplikaci při konfliktu podpisů. Toto může odstranit data aplikace</string>
+    <string name="settings_ignore_install_target_rules">Ignorovat požadavky na cíl instalace</string>
+    <string name="settings_ignore_install_target_rules_description">Umožňuje vypnout požadavky na cíl instalace, které patch vyžaduje, a zapnout ta, která vylučuje. Patchovaná aplikace nemusí fungovat</string>
     <string name="settings_auto_uninstall_warning_title">Povolit automatické odinstalování?</string>
     <string name="settings_auto_uninstall_warning_message">Pokud Android během automatické instalace Shizuku nahlásí konflikt podpisů, Morphe nejprve odinstaluje existující aplikaci před instalací opraveného APK</string>
     <string name="settings_auto_uninstall_warning_risk">Tímto může dojít ke smazání dat aplikace. Pokud se opravené APK nepodaří nainstalovat po odinstalování, předchozí aplikace může být již pryč.</string>
@@ -1058,23 +1066,19 @@ Podrobnosti: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimalizace baterie</string>
     <string name="settings_system_battery_optimization_description">Udrží program záplatování spuštěný i při minimalizaci aplikace</string>
-    <string name="settings_system_background">Pozadí</string>
     <string name="settings_system_process_runtime">Doba běhu procesů</string>
     <string name="settings_system_process_runtime_description">Spustí záplatování v odděleném procesu pro lepší stabilitu</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Vyšší limity urychlí záplatování na zařízeních, která to podporují</string>
     <string name="settings_system_process_runtime_enable">Povolit běhové prostředí procesů</string>
     <string name="settings_system_memory_limit_subtitle">Paměť k dispozici pro záplatování</string>
     <string name="settings_system_process_runtime_heap_limit_ignored">Toto zařízení při posledním spuštění ignorovalo limit paměti, takže se patchování může vrátit k běhu uvnitř Morphe.</string>
     <string name="settings_system_memory_limit_warning">Nízký limit paměti může způsobit selhání při záplatování větších aplikací</string>
     <string name="settings_system_memory_limit_high_warning">Vysoký limit paměti může na některých zařízeních výrazně zpomalit patchování. Zvyšte jej pouze v případě, že patchování při nižších limitech stále selhává.</string>
-    <string name="settings_system_process_runtime_enabled_description">%s MB limit</string>
-    <string name="settings_system_process_runtime_disabled_description">Klepnutím nakonfigurujete</string>
     <string name="settings_system_process_runtime_description_not_available">Tato funkce vyžaduje Android 11 nebo vyšší</string>
     <string name="settings_system_patcher_completion_sound">Zvuk dokončení</string>
     <string name="settings_system_patcher_completion_sound_description">Přehrává odlišný tón pro úspěch nebo neúspěch po dokončení záplatování</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">Oznámení</string>
-    <string name="settings_system_notifications_description">Konfiguruje upozornění na pozadí a zvuky dokončení</string>
+    <string name="settings_system_notifications_description">Jak vás Morphe udržuje informovaného</string>
     <string name="settings_system_notifications_success_sound">Zvuk úspěchu</string>
     <string name="settings_system_notifications_error_sound">Chybový zvuk</string>
     <string name="settings_system_notifications_sound_default">Výchozí</string>
@@ -1084,7 +1088,6 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Obnovit výchozí nastavení</string>
     <string name="settings_system_notifications_ringtone_picker_title">Zvolit tón</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Import &amp; export</string>
     <string name="settings_system_signing_key">Podpisový klíč</string>
     <string name="settings_system_signing_key_description">Zálohuje nebo obnovuje klíč pro podepisování opravených aplikací</string>
     <string name="settings_system_signing_key_dialog_description">Každá aplikace, kterou Morphe patchuje, je podepsána tímto klíčem. Uschovejte si kopii: bez ní lze patchované aplikace aktualizovat pouze po jejich odinstalování.</string>
@@ -1131,7 +1134,6 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_export_debug_logs_export_failed">Nepodařilo se exportovat protokoly</string>
     <string name="settings_system_export_debug_logs_export_success">Protokoly exportovány</string>
     <!-- Settings - System Tab - Files & Storage Section -->
-    <string name="settings_system_files">Soubory a úložiště</string>
     <string name="settings_system_apks_size">Celková velikost: %s</string>
     <string name="settings_system_apks_delete_all_confirm">Toto trvale smaže uložené APK soubory zobrazené zde</string>
     <string name="settings_system_apks_delete_selected_title">Smazat vybrané soubory APK?</string>
@@ -1143,6 +1145,9 @@ Podrobnosti: %2$s"</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">Správa úložiště</string>
     <string name="settings_system_storage_management_description">Zobrazuje využití disku a maže soubory v mezipaměti</string>
+    <string name="settings_system_storage_used_free">Využívá Morphe / zdarma na tomto zařízení</string>
+    <string name="settings_system_storage_saved_apks">Uložené APK soubory</string>
+    <string name="settings_system_storage_caches">Mezipaměti</string>
     <string name="settings_system_storage_keystore_title">Keystore pro podepisování</string>
     <string name="settings_system_storage_app_data_title">Data aplikací</string>
     <string name="settings_system_storage_patch_bundles_title">Patch balíčky</string>
@@ -1167,14 +1172,12 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_save_patched_apks_description">Uložit kopii záplatovaného APK pro pozdější export nebo přeinstalaci z manažeru</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Záplatované soubory APK</string>
-    <string name="settings_system_patched_apks_description">Spravuje uložené záplatované soubory aplikací</string>
     <string name="settings_system_patched_apks_empty">Nebyly uloženy žádné záplatované soubory APK</string>
     <string name="settings_system_patched_apks_delete_title">Smazat záplatovaný soubor APK?</string>
     <string name="settings_system_patched_apks_deleted">Záplatovaný soubor APK úspěšně smazán</string>
     <string name="settings_system_patched_apks_delete_all_title">Smazat všechny záplatované APK?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Původní APK</string>
-    <string name="settings_system_original_apks_description">Uloženo pro opětovné záplatování. Udržuje se jedna verze na aplikaci</string>
     <string name="settings_system_original_apks_empty">Nejsou uloženy žádné originální soubory APK</string>
     <string name="settings_system_original_apks_deleted">Originální soubor APK úspěšně smazán</string>
     <string name="settings_system_original_apks_delete_title">Smazat původní APK?</string>
@@ -1184,14 +1187,11 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_patch_selections_title">Výběry záplat</string>
     <string name="settings_system_patch_selections_description">Uloženy výběry záplat, zachovány i po odinstalaci</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Resetovat všechny výběry?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Resetovat výběry balíčku?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Resetovat vybrané balíčky?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Resetovat výběr zdroje?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s z %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s v %2$s</string>
     <string name="settings_system_patch_selection_source_format">Zdroj #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Toto trvale smaže všechny uložené výběry záplaty pro všechny balíčky a zdroje</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Tímto bude trvale smazán veškerý uložený výběr záplat pro &lt;b&gt;%s&lt;/b&gt; ve všech zdrojích</string>
     <string name="settings_system_patch_selection_reset_source_warning">Tímto bude trvale smazána uložená výběry záplat pro &lt;b&gt;%1$s&lt;/b&gt; v &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Tímto budou trvale smazány všechny uložené výběry záplat pro vybrané balíčky.</string>
     <string name="settings_system_export_source_data_fail">Nepodařilo se exportovat data zdroje</string>
@@ -1213,6 +1213,8 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_apk_download_helper">Pomocník pro stahování APK</string>
     <string name="settings_system_apk_download_helper_trusted_count">Důvěryhodné: %1$d z %2$d</string>
     <string name="settings_system_apk_download_helper_dialog_description">Pomocné aplikace za vás mohou stahovat originální APK. V pokynech ke stažení se nabízejí pouze ty, kterým zde důvěřujete.</string>
+    <string name="settings_system_apk_download_helper_trust_title">Důvěřovat tomuto pomocníkovi?</string>
+    <string name="settings_system_apk_download_helper_trust">Důvěřovat</string>
     <string name="settings_system_apk_download_helper_warning">APK pochází z pomocné aplikace, proto důvěřujte pouze aplikacím, které znáte. Morphe před patchováním stále kontroluje balíček, verzi a podpis každého souboru.</string>
     <string name="settings_system_apk_download_helper_installed_by">Nainstalováno aplikací %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Neznámý instalátor</string>
@@ -1234,9 +1236,13 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_about">O aplikaci</string>
     <string name="settings_system_manager_description">Projekt s otevřeným zdrojovým kódem pro moderní, optimalizované záplaty populárních Android aplikací, řízený zpětnou vazbou a příspěvky komunity</string>
     <string name="credits">Kredity</string>
+    <string name="credits_description">Lidé stojící za Morphe</string>
+    <string name="settings_about_section_project">Projekt</string>
+    <string name="settings_about_section_help">Nápověda</string>
     <string name="credits_current_development">Současný vývoj</string>
     <string name="credits_prior_development">Předchozí vývoj</string>
     <string name="opensource_licenses">Open-source licence</string>
+    <string name="opensource_licenses_description">Knihovny, na kterých je Morhe postaven</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Volba</string>
     <string name="easter_egg_pill_message">Vezmi si modrou pilulku a reklamy zůstanou přesně tam, kde jsou. Vezmi si červenou a uvidíš, jak hluboko sahá bytecode.</string>
@@ -1255,6 +1261,20 @@ Podrobnosti: %2$s"</string>
     <string name="patches">Záplaty</string>
     <string name="home">Domů</string>
     <string name="settings">Nastavení</string>
+    <string name="apps">Aplikace</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patcher">Záplatovač</string>
+    <string name="settings_section_updates">Aktualizace</string>
+    <string name="settings_section_patching">Záplatování</string>
+    <string name="settings_section_appearance_summary">Jak vypadá Morphe</string>
+    <string name="settings_section_patch_options_summary">Co jednoduchý režim aplikací patchuje s</string>
+    <string name="settings_section_general">Obecné</string>
+    <string name="settings_section_patcher_summary">Aplikace jsou na tomto zařízení patchovány následovně</string>
+    <string name="settings_section_help_info">Nápověda &amp; informace</string>
+    <string name="settings_section_about_summary">Další informace o aplikaci Morphe a způsobech získání pomoci</string>
+    <string name="settings_section_local_files">Soubory</string>
+    <string name="settings_section_backup">Záloha</string>
+    <string name="settings_search">Hledat nastavení</string>
     <string name="yes">Ano</string>
     <string name="no">Ne</string>
     <string name="all">Vše</string>
@@ -1356,7 +1376,6 @@ Podrobnosti: %2$s"</string>
     <string name="hide">Skrýt</string>
     <string name="hidden">Skrytý</string>
     <string name="unhide">Zobrazit</string>
-    <string name="unhide_done">Zobrazeno</string>
     <string name="ignore">Ignorovat</string>
     <string name="stop_ignoring">Přestat ignorovat</string>
     <string name="logs">Protokoly</string>
@@ -1429,13 +1448,9 @@ Chcete přesto pokračovat?"</string>
     <string name="onboarding_sources_version_desc">Klepnutím na verzi zobrazíte úplný seznam změn pro tento zdroj.</string>
     <string name="onboarding_sources_prerelease_desc">Povolte, abyste obdrželi předběžné verze záplat z tohoto zdroje.</string>
     <string name="onboarding_appearance_tab_desc">Přizpůsobte si vzhled aplikace: motiv, barvu akcentu a pozadí.</string>
-    <string name="onboarding_appearance_theme_desc">Vyberte mezi světlým, tmavým nebo systémovým motivem. Můžete si také vybrat vlastní barvu akcentu nebo povolit dynamické barvy.</string>
     <string name="onboarding_expert_mode_desc">Povolte expertní režim a odemknete výběr záplat, vlastní možnosti a další pokročilé funkce.</string>
     <!-- Translate "System" the same way as the System settings tab -->
-    <string name="onboarding_system_tab_title">Systémová záložka</string>
-    <string name="onboarding_system_tab_desc">Správa klíčů, nástroje pro import/export a informace o aplikaci.</string>
     <string name="onboarding_system_installer_desc">Vyberte způsob instalace záplatovaných aplikací: standardní, root mount nebo Shizuku.</string>
-    <string name="onboarding_system_process_runtime_desc">Spuštění záplatování v samostatném procesu pro zlepšení stability a kontroly spotřeby paměti. Doporučeno pro velké aplikace.</string>
     <string name="onboarding_system_file_picker_desc">Povolte pro použití vestavěného správce souborů namísto systémového výběru při výběru APK nebo klíčů.</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
     <string name="tour_prompt_title">Rychlá prohlídka funkcí</string>

@@ -6,6 +6,7 @@
         <item quantity="many">%s патчаў</item>
         <item quantity="other">%s патчаў</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
     <plurals name="option_count">
         <item quantity="one">%s опцыя патча</item>
         <item quantity="few">%s опцыі патчаў</item>

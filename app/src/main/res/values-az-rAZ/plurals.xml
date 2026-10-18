@@ -4,6 +4,11 @@
         <item quantity="one">%s yamaq</item>
         <item quantity="other">%s yamaq</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
+    <plurals name="library_count">
+        <item quantity="one">%s kitabxana</item>
+        <item quantity="other">%s kitabxana</item>
+    </plurals>
     <plurals name="option_count">
         <item quantity="one">%s yamaq seçimi</item>
         <item quantity="other">%s yamaq seçimi</item>

@@ -4,6 +4,7 @@
         <item quantity="one">%s පැච් එක</item>
         <item quantity="other">%s පැච්</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
     <plurals name="option_count">
         <item quantity="one">%s පැච් විකල්පය</item>
         <item quantity="other">%s පැච් විකල්ප</item>

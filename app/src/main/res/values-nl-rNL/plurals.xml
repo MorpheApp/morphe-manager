@@ -4,6 +4,11 @@
         <item quantity="one">%s patch</item>
         <item quantity="other">%s patches</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
+    <plurals name="library_count">
+        <item quantity="one">bibliotheek %s</item>
+        <item quantity="other">%s bibliotheken</item>
+    </plurals>
     <plurals name="option_count">
         <item quantity="one">%s patch optie</item>
         <item quantity="other">%s patch opties</item>

@@ -6,6 +6,13 @@
         <item quantity="many">%s modyfikacji</item>
         <item quantity="other">%s modyfikacji</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
+    <plurals name="library_count">
+        <item quantity="one">%s biblioteka</item>
+        <item quantity="few">%s biblioteki</item>
+        <item quantity="many">%s bibliotek</item>
+        <item quantity="other">%s bibliotek</item>
+    </plurals>
     <plurals name="option_count">
         <item quantity="one">%s opcja modyfikacji</item>
         <item quantity="few">%s opcje modyfikacji</item>

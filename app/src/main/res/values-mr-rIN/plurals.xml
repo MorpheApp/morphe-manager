@@ -4,6 +4,7 @@
         <item quantity="one">%s सुधारणा</item>
         <item quantity="other">%s अनेक सुधारणा</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
     <plurals name="option_count">
         <item quantity="one">%s  सुधारणा पर्याय</item>
         <item quantity="other">%s  अनेक सुधारणा पर्याय</item>

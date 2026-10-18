@@ -3,6 +3,10 @@
     <plurals name="patch_count">
         <item quantity="other">%s แพตซ์</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
+    <plurals name="library_count">
+        <item quantity="other">ไลบรารี %s</item>
+    </plurals>
     <plurals name="option_count">
         <item quantity="other">%s ตัวเลือกแพตซ์</item>
     </plurals>
@@ -104,7 +108,7 @@
         <item quantity="other">รุ่นใหม่ %s</item>
     </plurals>
     <plurals name="app_links_count_enabled">
-        <item quantity="other">เปิดใช้งาน %d ลิงก์</item>
+        <item quantity="other">เปิดใช้งานแล้ว %d ลิงก์</item>
     </plurals>
     <plurals name="app_links_count_unverified">
         <item quantity="other">%d ลิงก์ที่ไม่ผ่านการยืนยัน</item>

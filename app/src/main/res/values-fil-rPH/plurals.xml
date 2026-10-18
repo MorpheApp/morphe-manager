@@ -4,6 +4,11 @@
         <item quantity="one">%s na-patch</item>
         <item quantity="other">%s mga na-patch</item>
     </plurals>
+    <!-- Subtitle of the open-source licenses page: how many libraries it lists -->
+    <plurals name="library_count">
+        <item quantity="one">%s na aklat</item>
+        <item quantity="other">%s na aklat</item>
+    </plurals>
     <plurals name="option_count">
         <item quantity="one">%s pagpipilian ng patch</item>
         <item quantity="other">%s mga pagpipilian ng patch</item>

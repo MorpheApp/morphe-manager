@@ -47,8 +47,6 @@
     <string name="home_update_success_subtitle">Sumber-sumbee anda adalah yang terkini</string>
     <string name="home_sources_are_loading">Sumber sedang di muat naik, sila tunggu… </string>
     <string name="home_search_apps">Cari aplikasi</string>
-    <string name="home_app_list_options_title">Isih dan tapis</string>
-    <string name="home_app_list_options_state_description">Diisih mengikut %1$s, ditapis mengikut %2$s</string>
     <string name="home_app_filter_all_description">Setiap aplikasi pada skrin utama</string>
     <string name="home_app_filter_patched_description">Aplikasi yang anda tampal atau simpan dengan Morphe</string>
     <string name="home_app_filter_not_patched_description">Aplikasi yang belum anda tampal dalam Morphe</string>
@@ -148,6 +146,7 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Tampalan sumber-sumber</string>
     <string name="sources_search">Cari sumber dan tampalan</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_sort_manual">Susunan manual</string>
     <string name="sources_sort_manual_hint">Tekan lama sumber untuk menyusun semula</string>
     <string name="sources_sort_last_updated">Kemas kini terakhir</string>
@@ -161,7 +160,6 @@
     <string name="sources_apps">Aplikasi</string>
     <string name="sources_apps_brought">Dibawa oleh sumber ini</string>
     <string name="sources_apps_left_out">Dikecualikan daripada sumber ini</string>
-    <string name="sources_apps_bring_back">Bawa kembali</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
     <string name="sources_apps_new">Baharu</string>
@@ -512,7 +510,6 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="root_mount_module_unmount_warning">Jika KernelSU mengaktifkan modul Nyahlekap secara lalai, buka KernelSU &gt; Superuser &gt; aplikasi yang anda lekapkan &gt; Profil &gt; Tersuai dan lumpuhkan modul Nyahlekap. Jika tidak, APK bertampal yang dilekapkan mungkin tidak berkesan, walaupun Morphe menunjukkan ia dilekapkan</string>
     <string name="root_pre_patch_installer_standard_title">Mod pemasangan standard</string>
     <string name="root_pre_patch_installer_standard_description">Tampal sebagai APK biasa dengan sokongan GmsCore. Tetapan pemasang anda digunakan selepas tampalan</string>
-    <string name="root_pre_patch_installer_hint">Mod tampalan ini berasingan daripada Tetapan &gt; Sistem &gt; Pemasang dan tidak boleh diubah selepas tampalan</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Ralat disalin ke papan keratan</string>
     <string name="patcher_error_log">Log ralat</string>
@@ -699,7 +696,6 @@ Nyahpasang akan memadam semua data aplikasi secara kekal"</string>
     <string name="mini_game_pairs_picker_subtitle">Terbalikkan kad, cari padanan</string>
     <!-- Settings -->
     <string name="appearance">Penampilan</string>
-    <string name="advanced">Lebih mahir</string>
     <string name="system">Sistem</string>
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background">Animasi latar belakang</string>
@@ -735,7 +731,6 @@ Nyahpasang akan memadam semua data aplikasi secara kekal"</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_monochrome">Monokrom</string>
     <string name="settings_appearance_color_style">Gaya warna</string>
-    <string name="settings_appearance_colors">Warna</string>
     <string name="settings_appearance_accent_color">Warna aksen</string>
     <string name="settings_appearance_pure_black">Hitam Tulen</string>
     <string name="settings_appearance_pure_black_description">Gunakan latar belakang hitam sebenar</string>
@@ -743,7 +738,6 @@ Nyahpasang akan memadam semua data aplikasi secara kekal"</string>
     <string name="settings_appearance_outlines">Garis luar</string>
     <string name="settings_appearance_outlines_description">Melukis tepi nipis di sekeliling kad, panel dan butang</string>
     <!-- Settings - Appearance Tab - Language Selector -->
-    <string name="settings_appearance_language_and_display">Bahasa &amp; paparan</string>
     <string name="settings_appearance_app_language">Bahasa aplikasi</string>
     <string name="settings_appearance_app_language_current">Bahasa semasa</string>
     <string name="settings_appearance_translations_info_title">Terjemahan untuk sesetengah bahasa mungkin kurang atau tidak lengkap</string>
@@ -759,7 +753,6 @@ Nyahpasang akan memadam semua data aplikasi secara kekal"</string>
     <string name="settings_appearance_home_screen">Skrin utama</string>
     <string name="settings_appearance_greeting_phrases">Frasa ucapan</string>
     <string name="settings_appearance_repatch_notice">Notis tampalan semula</string>
-    <string name="settings_appearance_sort_button">Butang isih dan tapis</string>
     <string name="settings_appearance_app_card_colors">Warna kad aplikasi</string>
     <string name="settings_appearance_app_card_colors_default">Lalai</string>
     <string name="settings_appearance_app_card_colors_default_description">Beri setiap aplikasi warna bundlenya sendiri</string>
@@ -846,7 +839,6 @@ Tampalan tidak terjejas: aktifkan tampalan prakeluaran untuk setiap sumber dalam
     <string name="notification_channel_patch_updates_description">Pemberitahuan tentang keluaran tampalan baharu</string>
     <string name="notification_channel_patcher_description">Ditunjukkan semasa Morphe menampal aplikasi di latar belakang</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">Tetapan pakar</string>
     <string name="settings_advanced_expert_mode">Mod mahir</string>
     <string name="settings_advanced_expert_mode_dialog_title">Aktifkan Mod Pakar?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Mod Pakar memberikan kawalan yang lebih besar ke atas cara tampalan digunakan, tetapi tetapan yang salah konfigurasi dalam Mod Pakar boleh mengakibatkan aplikasi yang tidak berfungsi</string>
@@ -867,7 +859,6 @@ Tampalan tidak terjejas: aktifkan tampalan prakeluaran untuk setiap sumber dalam
     <string name="settings_advanced_github_pat_export_warning">Jangan kongsi PAT anda. Jika anda menyertakannya dalam satu eksport tetapan, simpan fail tersebut sebagai sulit kerana ia mengandungi token</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Pilihan tampalan</string>
-    <string name="settings_advanced_patch_options_youtube_description">Branding and header options</string>
     <string name="settings_advanced_patch_options_restart_message">Mengubah pilihan tampalan memerlukan aplikasi ditampal semula agar berkesan</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">Dalam mod Pakar pilihan tampalan akan tersedia semasa proses tampalan</string>
     <string name="settings_advanced_patch_options_loading">Memuatkan pilihan tampalan…</string>
@@ -937,7 +928,6 @@ Dimensi gambar mestilah seperti berikut:
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
-    <string name="settings_advanced_patch_options_hide_shorts_features">Sembunyikan ciri Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Sembunyikan pintasan aplikasi Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Mengalih keluar Shorts daripada menu tekan lama pelancar</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Sembunyikan widget Shorts</string>
@@ -975,7 +965,6 @@ Dimensi gambar mestilah seperti berikut:
     <string name="installer_unavailable_title">%s tidak tersedia</string>
     <string name="installer_unavailable_message">Pemasang pilihan anda (%s) tidak tersedia pada masa ini. Anda boleh memperbaiki isu itu dan cuba lagi, atau gunakan pemasang standard sebagai gantinya</string>
     <string name="installer_unavailable_shizuku_hint">Pastikan Shizuku berjalan dan izin telah diberikan kepada aplikasi ini</string>
-    <string name="installer_use_standard">Gunakan standard</string>
     <string name="installer_play_store_warning_title">Pasang sebagai Play Store?</string>
     <string name="installer_play_store_warning_message">Aplikasi bertampal akan direkodkan sebagai dipasang daripada Google Play Store. Ini boleh membantu perkhidmatan seperti Android Auto mengenalinya sebagai aplikasi Play Store, tetapi ia tidak dijamin untuk setiap aplikasi atau peranti. Tingkah laku mungkin berbeza mengikut versi Android, ROM, jenama peranti dan semakan khusus aplikasi</string>
     <string name="installer_play_store_warning_risk">Play Store mungkin menawarkan kemas kini untuk aplikasi bertampal. Memasang kemas kini itu akan menimpa APK bertampal dengan versi asal dan mengalih keluar tampalan. Jika digesa untuk mengemas kini, ketik menu tiga titik pada halaman Play Store aplikasi dan pilih \"Matikan kemas kini\"</string>
@@ -983,7 +972,6 @@ Dimensi gambar mestilah seperti berikut:
     <string name="installer_play_store_mode">Pasang sebagai Play Store</string>
     <string name="settings_prompt_installer_on_install">Gesaan pemilihan pemasang</string>
     <string name="settings_auto_install_with_shizuku">Pasang automatik selepas tampalan</string>
-    <string name="settings_auto_install_with_shizuku_description">Memasang APK bertampal sebaik sahaja tampalan selesai</string>
     <string name="settings_auto_uninstall_with_shizuku">Nyahpasang automatik apabila konflik</string>
     <string name="settings_auto_uninstall_warning_title">Aktifkan nyahpasang automatik?</string>
     <string name="settings_auto_uninstall_warning_message">Jika Android melaporkan konflik tandatangan semasa pemasangan automatik Shizuku, Morphe akan menyahpasang aplikasi sedia ada sebelum memasang APK bertampal</string>
@@ -1013,16 +1001,13 @@ Butiran: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimisasi bateri</string>
     <string name="settings_system_battery_optimization_description">Memastikan patcher terus berjalan apabila aplikasi diminimumkan</string>
-    <string name="settings_system_background">Latar belakang</string>
     <string name="settings_system_process_runtime">Masa runtime proses</string>
     <string name="settings_system_process_runtime_description">Menjalankan tampalan dalam proses berasingan untuk kestabilan yang lebih baik</string>
-    <string name="settings_system_process_runtime_memory_limit_description">Had yang lebih tinggi mempercepatkan tampalan pada peranti yang berkemampuan</string>
     <string name="settings_system_process_runtime_enable">Aktifkan masa runtime proses</string>
     <string name="settings_system_memory_limit_subtitle">Memori tersedia untuk tampalan</string>
     <string name="settings_system_process_runtime_heap_limit_ignored">Peranti ini mengabaikan had memori pada jalan terakhir, jadi tampalan mungkin kembali berjalan dalam Morphe</string>
     <string name="settings_system_memory_limit_warning">Had memori yang rendah mungkin menyebabkan kegagalan semasa menampal aplikasi yang lebih besar</string>
     <string name="settings_system_memory_limit_high_warning">Had memori yang tinggi boleh menjadikan tampalan jauh lebih perlahan pada sesetengah peranti. Naikkan hanya jika tampalan terus gagal pada had yang lebih rendah</string>
-    <string name="settings_system_process_runtime_enabled_description">%s hadkan MB</string>
     <string name="settings_system_process_runtime_description_not_available">Ciri ini memerlukan Android 11 atau lebih tinggi</string>
     <string name="settings_system_patcher_completion_sound">Bunyi selesai</string>
     <string name="settings_system_patcher_completion_sound_description">Memainkan nada berbeza untuk kejayaan atau kegagalan apabila tampalan selesai</string>
@@ -1037,7 +1022,6 @@ Butiran: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Set semula kepada lalai</string>
     <string name="settings_system_notifications_ringtone_picker_title">Pilih nada</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">Import &amp; eksport</string>
     <string name="settings_system_signing_key">Kunci penandatanganan</string>
     <string name="settings_system_signing_key_dialog_description">Setiap aplikasi yang ditampal Morphe ditandatangani dengan kunci ini. Simpan salinan: tanpanya, aplikasi bertampal hanya boleh dikemas kini selepas menyahpasangnya</string>
     <string name="settings_system_signing_key_missing">Morphe mencipta satu dengan tampalan pertama anda</string>
@@ -1083,7 +1067,6 @@ Butiran: %2$s"</string>
     <string name="settings_system_export_debug_logs_export_failed">Gagal mengeksport log</string>
     <string name="settings_system_export_debug_logs_export_success">Log dieksport</string>
     <!-- Settings - System Tab - Files & Storage Section -->
-    <string name="settings_system_files">Fail &amp; storan</string>
     <string name="settings_system_apks_size">Saiz keseluruhan: %s</string>
     <string name="settings_system_apks_delete_all_confirm">Ini akan memadam fail APK yang disimpan secara kekal seperti yang ditunjukkan di sini</string>
     <string name="settings_system_apks_delete_selected_title">Padam APK yang dipilih?</string>
@@ -1118,14 +1101,12 @@ Butiran: %2$s"</string>
     <string name="settings_system_save_patched_apks_description">Simpan salinan APK bertampal untuk dieksport kemudian atau dipasang semula daripada pengurus</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">APK yang ditampal</string>
-    <string name="settings_system_patched_apks_description">Menguruskan fail aplikasi bertampal yang disimpan</string>
     <string name="settings_system_patched_apks_empty">Tiada APK yang ditampal disimpan lagi</string>
     <string name="settings_system_patched_apks_delete_title">Padam APK yang ditampal?</string>
     <string name="settings_system_patched_apks_deleted">APK yang ditampal telah dipadam dengan jayanya</string>
     <string name="settings_system_patched_apks_delete_all_title">Padam semua APK bertampal?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">APK asal</string>
-    <string name="settings_system_original_apks_description">Disimpan untuk tampalan semula. Satu versi bagi setiap aplikasi disimpan</string>
     <string name="settings_system_original_apks_empty">Tiada APK asal disimpan</string>
     <string name="settings_system_original_apks_deleted">APK asal telah dipadam dengan jayanya</string>
     <string name="settings_system_original_apks_delete_title">Padam APK asal?</string>
@@ -1135,14 +1116,11 @@ Butiran: %2$s"</string>
     <string name="settings_system_patch_selections_title">Pilihan patch</string>
     <string name="settings_system_patch_selections_description">Pilihan tampalan disimpan, dikekalkan selepas nyahpasang</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Nyah semula semua pilihan?</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">Nyah semula pilihan pakej?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Set semula pakej yang dipilih?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Nyah semula pilihan sumber?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s merentasi %2$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%1$s dalam %2$s</string>
     <string name="settings_system_patch_selection_source_format">Sumber #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Ini akan memadam secara kekal semua pilihan tampalan yang disimpan untuk semua pakej dan sumber</string>
-    <string name="settings_system_patch_selection_reset_package_warning">Ini akan memadam semua pilihan tampalan yang disimpan untuk &lt;b&gt;%s&lt;/b&gt; merentas semua sumber secara kekal</string>
     <string name="settings_system_patch_selection_reset_source_warning">Ini akan memadam pilihan tampalan yang disimpan untuk &lt;b&gt;%1$s&lt;/b&gt; dalam &lt;b&gt;%2$s&lt;/b&gt; secara kekal</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Ini akan memadam semua pilihan tampalan yang disimpan untuk pakej yang dipilih secara kekal</string>
     <string name="settings_system_export_source_data_fail">Gagal membaca log (kod keluar %s)</string>
@@ -1205,6 +1183,10 @@ Butiran: %2$s"</string>
     <string name="patches">Tampalan</string>
     <string name="home">Rumah</string>
     <string name="settings">Pengaturan</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patcher">Penampal</string>
+    <string name="settings_section_patching">Menampal</string>
+    <string name="settings_section_general">Umum</string>
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
     <string name="all">Semua</string>
@@ -1302,7 +1284,6 @@ Butiran: %2$s"</string>
     <string name="hide">Sembunyikan</string>
     <string name="hidden">Tersembunyi</string>
     <string name="unhide">Nyahsembunyi</string>
-    <string name="unhide_done">Dipaparkan</string>
     <string name="ignore">Abaikan</string>
     <string name="stop_ignoring">Berhenti mengabaikan</string>
     <string name="logs">Log</string>
@@ -1373,13 +1354,9 @@ Adakah anda masih ingin meneruskan?"</string>
     <string name="onboarding_sources_version_desc">Ketuk versi untuk melihat log perubahan penuh untuk sumber ini</string>
     <string name="onboarding_sources_prerelease_desc">Aktifkan ini untuk menerima versi tampalan prakeluaran daripada sumber ini</string>
     <string name="onboarding_appearance_tab_desc">Sesuaikan rupa aplikasi: tema, warna aksen dan latar belakang</string>
-    <string name="onboarding_appearance_theme_desc">Pilih antara tema cerah, gelap atau sistem. Anda juga boleh memilih warna aksen tersuai atau mengaktifkan Warna Dinamik</string>
     <string name="onboarding_expert_mode_desc">Aktifkan Mod Pakar untuk membuka kunci pemilihan tampalan, pilihan tersuai dan ciri lanjutan lain</string>
     <!-- Translate "System" the same way as the System settings tab -->
-    <string name="onboarding_system_tab_title">Tab Sistem</string>
-    <string name="onboarding_system_tab_desc">Pengurusan stor kunci, alat import/eksport dan maklumat aplikasi</string>
     <string name="onboarding_system_installer_desc">Pilih cara aplikasi bertampal dipasang: standard, lekap root, atau Shizuku</string>
-    <string name="onboarding_system_process_runtime_desc">Jalankan tampalan dalam proses berasingan untuk meningkatkan kestabilan dan mengawal penggunaan memori. Disyorkan untuk aplikasi besar</string>
     <string name="onboarding_system_file_picker_desc">Aktifkan untuk menggunakan penyemak imbas fail terbina dalam dan bukannya pemilih sistem apabila memilih APK atau stor kunci</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
     <string name="tour_prompt_title">Lawatan ciri pantas</string>

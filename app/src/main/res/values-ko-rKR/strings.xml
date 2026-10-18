@@ -49,8 +49,8 @@
     <string name="home_update_success_subtitle">소스가 최신 상태입니다</string>
     <string name="home_sources_are_loading">소스를 불러오는 중, 잠시만 기다려 주세요…</string>
     <string name="home_search_apps">앱 검색</string>
-    <string name="home_app_list_options_title">정렬 및 필터</string>
-    <string name="home_app_list_options_state_description">%1$s 기준으로 정렬, %2$s 기준으로 필터링됨</string>
+    <string name="list_options_title">정렬 및 필터</string>
+    <string name="list_options_state_description">%1$s 기준으로 정렬, %2$s 기준으로 필터링됨</string>
     <string name="home_app_filter_all_description">홈 화면에 모든 앱 표시</string>
     <string name="home_app_filter_patched_description">Morphe로 패치하거나 저장한 앱만 표시</string>
     <string name="home_app_filter_not_patched_description">아직 Morphe에서 패치하지 않은 앱만 표시</string>
@@ -153,6 +153,14 @@
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">패치 소스</string>
     <string name="sources_search">소스 및 패치 검색</string>
+    <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_filter_all_description">모든 소스</string>
+    <string name="sources_filter_enabled_description">소스 패치는 다음에서 가져옵니다</string>
+    <string name="sources_filter_disabled_description">소스 비활성화됨</string>
+    <string name="sources_filter_updates">업데이트</string>
+    <string name="sources_filter_updates_description">최신 버전이 있는 소스</string>
+    <string name="sources_filter_issues">주의 필요</string>
+    <string name="sources_filter_issues_description">차단되었거나 불러오기에 실패했거나, 더 최신 버전의 Morphe가 필요한 소스</string>
     <string name="sources_sort_manual">수동 정렬</string>
     <string name="sources_sort_manual_hint">소스를 길게 탭하여 순서를 변경하세요</string>
     <string name="sources_sort_last_updated">최근 업데이트 우선</string>
@@ -167,7 +175,6 @@
     <string name="sources_apps_description">체크된 앱은 이 소스에서 가져온 앱입니다. 앱을 탭하면 가져오기 대상에서 제외하거나 다시 포함할 수 있습니다. 어떤 소스에서도 가져오지 않는 앱은 직접 패치한 앱이 아닌 한 홈 화면에서 사라집니다</string>
     <string name="sources_apps_brought">이 소스에서 제공됨</string>
     <string name="sources_apps_left_out">이 소스에서 제외됨</string>
-    <string name="sources_apps_bring_back">다시 가져오기</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
     <string name="sources_apps_stays_patched">패치 후 유지됨</string>
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
@@ -243,6 +250,8 @@
     <string name="home_apk_availability_yes">네, APK를 찾는데 도움을 주세요</string>
     <string name="home_apk_availability_no">아니요, 이미 APK를 가지고 있습니다</string>
     <string name="home_apk_helper_download">Helper 앱 사용</string>
+    <string name="home_apk_helper_untrusted">Helper 앱이 설치되어 있지만 아직 신뢰할 수 있는 앱으로 설정되지 않아 여기에 표시되지 않습니다.</string>
+    <string name="home_apk_helper_untrusted_action">Helper 검토</string>
     <string name="home_apk_helper_title">Helper 앱으로 다운로드</string>
     <string name="home_apk_helper_description">Morphe는 아래의 Helper 앱에 원본 APK를 다운로드하고 파일을 다시 전달하도록 요청합니다</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -539,7 +548,7 @@
     <string name="root_mount_module_unmount_warning">KernelSU에서 \'모듈 마운트 해제를 기본값으로\'가 활성화되어 있다면, \'KernelSU &gt; 슈퍼유저 &gt; 마운트한 앱 &gt; 프로필 &gt; 사용자 지정\'으로 이동하여 \'모듈 마운트 해제\'를 비활성화하세요. 그렇지 않으면 Morphe에서 패치된 APK가 마운트된 것으로 표시되더라도, 실제로는 마운트가 적용되지 않아 패치된 APK가 제대로 작동하지 않을 수 있습니다</string>
     <string name="root_pre_patch_installer_standard_title">일반 설치 모드</string>
     <string name="root_pre_patch_installer_standard_description">GmsCore를 지원하는 일반 APK로 패치합니다. 패치가 완료된 후에는 현재 설정된 설치 프로그램 설정을 사용하여 설치됩니다</string>
-    <string name="root_pre_patch_installer_hint">이 패치 모드는 \'설정 &gt; 시스템 &gt; 설치 프로그램\' 설정과는 별개이며, 패치가 완료된 후에는 변경할 수 없습니다</string>
+    <string name="root_pre_patch_installer_hint">설치 &gt; 패칭 &gt; 설치 &gt; 설치자 선택 프롬프트 활성화 중일 때 묻습니다. 패칭 후 패치 모드는 변경할 수 없습니다</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">오류 정보를 클립보드에 복사하였습니다</string>
     <string name="patcher_error_log">오류 로그</string>
@@ -730,7 +739,6 @@
     <string name="mini_game_pairs_picker_subtitle">카드를 뒤집어 같은 짝 찾기</string>
     <!-- Settings -->
     <string name="appearance">디자인</string>
-    <string name="advanced">고급</string>
     <string name="system">시스템</string>
     <!-- Settings - Appearance Tab - Background animation -->
     <string name="settings_appearance_background">배경 애니메이션</string>
@@ -758,6 +766,8 @@
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
     <string name="settings_appearance_seasonal_background_notice">시즌 테마가 활성화되어 있는 동안 %1$s 배경이 %2$s까지 표시됩니다</string>
     <!-- Settings - Appearance Tab - Theme -->
+    <string name="settings_appearance_display">디스플레이</string>
+    <string name="settings_appearance_effects">효과</string>
     <string name="settings_appearance_theme">테마</string>
     <string name="settings_appearance_theme_mode">테마 모드</string>
     <string name="settings_appearance_system">시스템</string>
@@ -766,7 +776,6 @@
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_monochrome">흑백</string>
     <string name="settings_appearance_color_style">색상 스타일</string>
-    <string name="settings_appearance_colors">색상</string>
     <string name="settings_appearance_accent_color">강조 색상</string>
     <string name="settings_appearance_pure_black">순수 검정</string>
     <string name="settings_appearance_pure_black_description">순수 검정 배경을 사용합니다</string>
@@ -774,8 +783,9 @@
     <string name="settings_appearance_color_accents_description">강조 색상 대신 각 앱과 소스의 고유 색상을 사용합니다</string>
     <string name="settings_appearance_outlines">윤곽선</string>
     <string name="settings_appearance_outlines_description">카드, 패널 및 버튼의 가장자리에 얇은 테두리를 표시합니다</string>
+    <string name="settings_appearance_blur">흐림</string>
+    <string name="settings_appearance_blur_description">헤더, 바, 패널 아래로 스크롤되는 콘텐츠를 흐리게 처리합니다</string>
     <!-- Settings - Appearance Tab - Language Selector -->
-    <string name="settings_appearance_language_and_display">언어 및 디스플레이</string>
     <string name="settings_appearance_app_language">앱 언어</string>
     <string name="settings_appearance_app_language_current">현재 언어</string>
     <string name="settings_appearance_translations_info_title">일부 언어의 번역이 누락되거나 불완전할 수 있습니다</string>
@@ -792,8 +802,6 @@
     <string name="settings_appearance_greeting_phrases_subtitle">인사말을 표시합니다</string>
     <string name="settings_appearance_repatch_notice">다시 패치 알림</string>
     <string name="settings_appearance_repatch_notice_description">패치된 앱을 다시 패치할 수 있을 경우 배너를 표시합니다</string>
-    <string name="settings_appearance_sort_button">정렬 및 필터 버튼</string>
-    <string name="settings_appearance_sort_button_description">앱을 정렬하고 필터링할 수 있는 버튼을 표시합니다</string>
     <string name="settings_appearance_app_card_colors">앱 카드 색상</string>
     <string name="settings_appearance_app_card_colors_default">기본값</string>
     <string name="settings_appearance_app_card_colors_default_description">각 앱에 해당 앱 번들의 고유 색상을 적용합니다</string>
@@ -886,7 +894,6 @@
     <string name="notification_mount_replaced_title">%1$s는 더 이상 패치되지 않음</string>
     <string name="notification_mount_replaced_text">v%1$s가 패치된 v%2$s를 교체했습니다. Morphe를 열어서 복원하세요</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert">전문가 설정</string>
     <string name="settings_advanced_expert_mode">전문가 모드</string>
     <string name="settings_advanced_expert_mode_description">고급 패치 설정 및 패치 옵션을 잠금 해제합니다</string>
     <string name="settings_advanced_expert_mode_dialog_title">전문가 모드 활성화</string>
@@ -908,7 +915,6 @@
     <string name="settings_advanced_github_pat_export_warning">개인 액세스 토큰을 공유하지 마세요. 설정 내보내기에 포함되는 경우에는 토큰이 포함되어 있으므로 해당 파일을 비공개로 유지하세요</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">패치 옵션</string>
-    <string name="settings_advanced_patch_options_youtube_description">브랜딩 및 헤더 옵션</string>
     <string name="settings_advanced_patch_options_restart_message">패치 옵션을 변경하려면 앱을 다시 패치해야 합니다</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">전문가 모드에서는 패치 과정 중에 패치 옵션을 사용할 수 있습니다</string>
     <string name="settings_advanced_patch_options_loading">패치 옵션을 불러오는 중…</string>
@@ -978,7 +984,6 @@ morphe_header_custom_dark.png
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
-    <string name="settings_advanced_patch_options_hide_shorts_features">Shorts 기능 숨기기</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Shorts 앱 바로가기 숨기기</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">앱 아이콘 길게 탭하기 메뉴에서 Shorts를 제거합니다</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Shorts 위젯 숨기기</string>
@@ -986,6 +991,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">설치 프로그램</string>
     <string name="installer_settings_title">기본 설치 프로그램</string>
+    <string name="settings_installation">설치</string>
     <string name="installer_title">설치 프로그램 선택</string>
     <string name="installer_internal_description">Android 패키지 설치 프로그램을 사용합니다</string>
     <string name="installer_play_store_description">시스템 설치 관리자를 사용하고 Google Play 스토어를 앱 설치 출처로 설정합니다</string>
@@ -1016,7 +1022,7 @@ morphe_header_custom_dark.png
     <string name="installer_unavailable_title">\'%s\'를 사용할 수 없음</string>
     <string name="installer_unavailable_message">선택된 설치 프로그램(%s)을 현재 사용할 수 없습니다. 문제를 해결하고 다시 시도하거나 일반 설치 프로그램을 사용해 보세요</string>
     <string name="installer_unavailable_shizuku_hint">Shizuku가 실행 중이고, 이 앱에 권한이 부여되었는지 확인하세요</string>
-    <string name="installer_use_standard">일반 사용하기</string>
+    <string name="installer_choose_another">다른 설치 프로그램 선택</string>
     <string name="installer_play_store_warning_title">Play 스토어로 설치하시겠습니까?</string>
     <string name="installer_play_store_warning_message">패치된 앱은 Google Play 스토어에서 설치된 것으로 기록됩니다. 이를 통해 Android Auto와 같은 서비스에서 해당 앱을 Play 스토어에서 설치된 앱으로 인식하는 데 도움이 될 수 있지만, 모든 앱이나 기기에서 이를 보장하는 것은 아닙니다. 동작 방식은 Android 버전, ROM, 기기 제조사, 그리고 앱별 검증 방식에 따라 달라질 수 있습니다</string>
     <string name="installer_play_store_warning_risk">Play 스토어에서 패치된 앱의 업데이트를 제공할 수 있습니다. 해당 업데이트를 설치하면 패치된 APK가 원래 버전으로 덮어쓰여지고 패치가 제거됩니다. 업데이트하라는 메시지가 표시되면 앱의 Play 스토어 페이지에서 점 3개 메뉴를 탭한 후 \'자동 업데이트 사용\'을 선택 해제하세요</string>
@@ -1024,11 +1030,13 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_mode">Play 스토어로 설치</string>
     <string name="installer_play_store_mode_description">Google Play 스토어를 설치 출처로 지정합니다</string>
     <string name="settings_prompt_installer_on_install">설치 프로그램 선택 프롬프트</string>
-    <string name="settings_prompt_installer_on_install_description">앱을 설치할 때마다 사용할 설치 프로그램을 선택하도록 물어봅니다</string>
+    <string name="settings_prompt_installer_on_install_description">각 앱의 설치 방법을 묻습니다: 루트 권한으로 패칭 전 또는 그 후에 설치</string>
     <string name="settings_auto_install_with_shizuku">패치 후 자동 설치</string>
-    <string name="settings_auto_install_with_shizuku_description">패치가 완료되는 즉시 패치된 APK를 설치합니다</string>
+    <string name="settings_auto_install_with_shizuku_description">패치가 완료되면 즉시 패치된 APK를 설치하거나 마운트합니다</string>
     <string name="settings_auto_uninstall_with_shizuku">충돌 시 자동 제거</string>
     <string name="settings_auto_uninstall_with_shizuku_description">서명 충돌이 발생하면 기존 앱을 제거합니다. 이 경우 앱 데이터가 삭제될 수 있습니다</string>
+    <string name="settings_ignore_install_target_rules">설치 대상 요구사항 무시</string>
+    <string name="settings_ignore_install_target_rules_description">패치를 적용하려면 설치 대상 규칙을 비활성화하고 제외된 항목을 활성화해야 합니다. 패치된 앱이 작동하지 않을 수 있습니다.</string>
     <string name="settings_auto_uninstall_warning_title">자동 제거 활성화</string>
     <string name="settings_auto_uninstall_warning_message">Shizuku를 사용하여 자동 설치하는 중에 Android에서 서명 충돌이 발생했다고 보고되면, Morphe는 패치된 APK를 설치하기 전에 기존 앱을 제거합니다</string>
     <string name="settings_auto_uninstall_warning_risk">이 과정에서 앱 데이터가 삭제될 수 있습니다. 기존 앱을 삭제한 후에 패치된 APK 설치에 실패하면 이전 앱을 복구하지 못할 수 있습니다</string>
@@ -1057,23 +1065,19 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">배터리 최적화</string>
     <string name="settings_system_battery_optimization_description">앱이 최소화되어도 패처가 계속 실행되도록 유지합니다</string>
-    <string name="settings_system_background">배경</string>
     <string name="settings_system_process_runtime">프로세스 런타임</string>
     <string name="settings_system_process_runtime_description">안정성 향상을 위해 별도의 프로세스에서 패치를 실행합니다</string>
-    <string name="settings_system_process_runtime_memory_limit_description">메모리 제한 값을 높이면 지원되는 기기에서 패치 속도가 향상될 수 있습니다</string>
     <string name="settings_system_process_runtime_enable">프로세스 런타임 활성화</string>
     <string name="settings_system_memory_limit_subtitle">패치에 사용 가능한 메모리</string>
     <string name="settings_system_process_runtime_heap_limit_ignored">이 기기는 지난 실행에서 메모리 제한을 무시했으므로 패치 작업이 Morphe 내부에서 실행되는 방식으로 대체될 수 있습니다</string>
     <string name="settings_system_memory_limit_warning">메모리 제한이 낮으면 대용랑 앱을 패치할 경우에 오류가 발생할 수 있습니다</string>
     <string name="settings_system_memory_limit_high_warning">메모리 제한이 높으면 일부 기기에서 패치 속도가 훨씬 느려질 수 있습니다. 더 낮은 제한에서 패치가 계속 실패하는 경우에만 메모리 제한을 높이세요</string>
-    <string name="settings_system_process_runtime_enabled_description">%s MB 제한</string>
-    <string name="settings_system_process_runtime_disabled_description">설정하려면 탭하세요</string>
     <string name="settings_system_process_runtime_description_not_available">이 기능은 Android 11 이상이 필요합니다</string>
     <string name="settings_system_patcher_completion_sound">완료 알림음</string>
     <string name="settings_system_patcher_completion_sound_description">패치가 완료되면 성공 또는 실패 여부에 따라 서로 다른 알림음을 재생합니다</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">알림</string>
-    <string name="settings_system_notifications_description">백그라운드 알림 및 작업 완료 소리를 설정합니다</string>
+    <string name="settings_system_notifications_description">Morphe가 사용자에게 정보를 제공하는 방법</string>
     <string name="settings_system_notifications_success_sound">성공 알림음</string>
     <string name="settings_system_notifications_error_sound">실패 알림음</string>
     <string name="settings_system_notifications_sound_default">기본값</string>
@@ -1083,7 +1087,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_notifications_sound_reset">기본값으로 초기화</string>
     <string name="settings_system_notifications_ringtone_picker_title">알림음 선택</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_import_export">가져오기 &amp; 내보내기</string>
     <string name="settings_system_signing_key">서명키</string>
     <string name="settings_system_signing_key_description">패치된 앱에 서명하는 데 사용되는 키를 백업하거나 복원할 수 있습니다</string>
     <string name="settings_system_signing_key_dialog_description">Morphe가 패치하는 모든 앱은 이 키로 서명됩니다. 이 키를 반드시 보관하세요: 이 키가 없으면 패치된 앱은 기존 앱을 삭제한 후에만 업데이트할 수 있습니다</string>
@@ -1130,7 +1133,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_export_failed">로그를 내보낼 수 없습니다</string>
     <string name="settings_system_export_debug_logs_export_success">로그를 내보냈습니다</string>
     <!-- Settings - System Tab - Files & Storage Section -->
-    <string name="settings_system_files">파일 &amp; 저장소</string>
     <string name="settings_system_apks_size">전체 용량: %s</string>
     <string name="settings_system_apks_delete_all_confirm">저장된 APK 파일을 영구적으로 삭제합니다</string>
     <string name="settings_system_apks_delete_selected_title">선택된 APK를 삭제하시겠습니까?</string>
@@ -1142,6 +1144,9 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">저장소 관리</string>
     <string name="settings_system_storage_management_description">디스크 사용량을 표시하고 캐시된 파일을 삭제합니다</string>
+    <string name="settings_system_storage_used_free">Morphe 사용 공간 / 기기 여유 공간</string>
+    <string name="settings_system_storage_saved_apks">저장된 APK</string>
+    <string name="settings_system_storage_caches">캐시</string>
     <string name="settings_system_storage_keystore_title">서명 키스토어</string>
     <string name="settings_system_storage_app_data_title">앱 데이터</string>
     <string name="settings_system_storage_patch_bundles_title">패치 번들</string>
@@ -1166,14 +1171,12 @@ morphe_header_custom_dark.png
     <string name="settings_system_save_patched_apks_description">나중에 내보내거나 Manager에서 다시 설치할 수 있도록 패치된 APK의 복사본을 저장합니다</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">패치된 APK</string>
-    <string name="settings_system_patched_apks_description">저장된 패치된 앱 파일을 관리합니다</string>
     <string name="settings_system_patched_apks_empty">저장된 패치된 APK가 없습니다</string>
     <string name="settings_system_patched_apks_delete_title">패치된 APK 삭제</string>
     <string name="settings_system_patched_apks_deleted">패치된 APK를 성공적으로 삭제하였습니다</string>
     <string name="settings_system_patched_apks_delete_all_title">패치된 APK 모두 삭제</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">원본 APK</string>
-    <string name="settings_system_original_apks_description">나중에 다시 패치할 경우를 위해 저장됩니다. 앱별로 한 개의 버전만 보관됩니다</string>
     <string name="settings_system_original_apks_empty">저장된 원본 APK가 없습니다</string>
     <string name="settings_system_original_apks_deleted">원본 APK를 성공적으로 삭제하였습니다</string>
     <string name="settings_system_original_apks_delete_title">원본 APK 삭제</string>
@@ -1183,14 +1186,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selections_title">패치 선택 목록</string>
     <string name="settings_system_patch_selections_description">저장된 패치 선택 목록은 앱을 제거한 후에도 유지됩니다</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">모든 선택 목록 초기화</string>
-    <string name="settings_system_patch_selection_reset_package_confirm_title">패키지 선택 목록 초기화</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">선택된 패키지 초기화</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">스소 선택 목록 초기화</string>
     <string name="settings_system_patch_selection_total_summary_format">%2$s의 %1$s</string>
-    <string name="settings_system_patch_selection_patches_in_sources_format">%2$s의 %1$s</string>
     <string name="settings_system_patch_selection_source_format">소스 #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">모든 패키지 및 소스에 대해 저장된 모든 패치 선택 목록을 영구적으로 삭제합니다</string>
-    <string name="settings_system_patch_selection_reset_package_warning">모든 소스에서 &lt;b&gt;%s&lt;/b&gt;에 대한 저장된 패치 선택 목록을 영구적으로 삭제합니다</string>
     <string name="settings_system_patch_selection_reset_source_warning">이 작업은 &lt;b&gt;%2$s&lt;/b&gt;에서 &lt;b&gt;%1$s&lt;/b&gt;에 대한 저장된 패치 선택 목록을 영구적으로 삭제합니다</string>
     <string name="settings_system_patch_selection_reset_selected_warning">선택된 패키지에 대해 저장된 모든 패치 선택 목록을 영구적으로 삭제합니다</string>
     <string name="settings_system_export_source_data_fail">소스 데이터를 내보낼 수 없습니다</string>
@@ -1212,6 +1212,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper">APK Download Helper</string>
     <string name="settings_system_apk_download_helper_trusted_count">신뢰함: %2$d 개 중 %1$d 개</string>
     <string name="settings_system_apk_download_helper_dialog_description">Helper 앱은 원본 APK를 대신 다운로드할 수 있습니다. 다운로드 안내에는 여기에서 신뢰하는 앱만 제공됩니다</string>
+    <string name="settings_system_apk_download_helper_trust_title">이 Helper를 신뢰하시겠습니까?</string>
+    <string name="settings_system_apk_download_helper_trust">신뢰</string>
     <string name="settings_system_apk_download_helper_warning">APK는 Helper 앱에서 제공되므로, 신뢰할 수 있는 앱만 사용하세요. Morphe는 패치하기 전에 모든 파일의 패키지, 버전 및 서명을 확인합니다</string>
     <string name="settings_system_apk_download_helper_installed_by">%s에 의해 설치됨</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">설치 프로그램 알 수 없음</string>
@@ -1233,9 +1235,13 @@ morphe_header_custom_dark.png
     <string name="settings_system_about">정보</string>
     <string name="settings_system_manager_description">커뮤니티 피드백과 기여를 기반으로 인기 있는 Android 앱을 현대적이고 간소화된 방식으로 패치하기 위한 오픈소스 프로젝트입니다</string>
     <string name="credits">크레딧</string>
+    <string name="credits_description">Morphe 개발자</string>
+    <string name="settings_about_section_project">프로젝트</string>
+    <string name="settings_about_section_help">도움말</string>
     <string name="credits_current_development">현재 개발</string>
     <string name="credits_prior_development">이전 개발</string>
     <string name="opensource_licenses">오픈 소스 라이선스</string>
+    <string name="opensource_licenses_description">Morphe 기반 라이브러리</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">알약 선택</string>
     <string name="easter_egg_pill_message">파란 알약을 먹으면 광고가 지금 있는 그대로 남아 있습니다. 빨간 알약을 먹으면 바이트코드가 얼마나 깊이 들어가는지 볼 수 있습니다</string>
@@ -1254,6 +1260,20 @@ morphe_header_custom_dark.png
     <string name="patches">패치</string>
     <string name="home">홈</string>
     <string name="settings">설정</string>
+    <string name="apps">앱</string>
+    <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_patcher">패처</string>
+    <string name="settings_section_updates">업데이트</string>
+    <string name="settings_section_patching">패치</string>
+    <string name="settings_section_appearance_summary">Morphe 표시 방식</string>
+    <string name="settings_section_patch_options_summary">심플 모드가 앱을 패치하는 방식</string>
+    <string name="settings_section_general">일반</string>
+    <string name="settings_section_patcher_summary">이 기기에서 앱이 패치되는 방법</string>
+    <string name="settings_section_help_info">도움말 및 정보</string>
+    <string name="settings_section_about_summary">Morphe 자세히 알아보기 및 도움 받기</string>
+    <string name="settings_section_local_files">파일</string>
+    <string name="settings_section_backup">백업</string>
+    <string name="settings_search">설정 검색</string>
     <string name="yes">예</string>
     <string name="no">아니요</string>
     <string name="all">모두</string>
@@ -1355,7 +1375,6 @@ morphe_header_custom_dark.png
     <string name="hide">숨기기</string>
     <string name="hidden">숨겨짐</string>
     <string name="unhide">숨기기 해제</string>
-    <string name="unhide_done">표시됨</string>
     <string name="ignore">무시</string>
     <string name="stop_ignoring">무시 중지</string>
     <string name="logs">로그</string>
@@ -1428,13 +1447,9 @@ morphe_header_custom_dark.png
     <string name="onboarding_sources_version_desc">버전 버튼을 탭하여 이 소스의 전체 변경 사항을 볼 수 있습니다</string>
     <string name="onboarding_sources_prerelease_desc">이 옵션을 활성화하여 이 소스의 Pre-release 패치 버전을 수신할 수 있습니다</string>
     <string name="onboarding_appearance_tab_desc">테마, 강조 색상 및 배경을 변경하여 앱 디자인을 꾸며 볼 수 있습니다</string>
-    <string name="onboarding_appearance_theme_desc">밝은 테마, 어두운 테마 또는 시스템 테마를 선택할 수 있습니다. 또한 원하는 강조 색상을 지정하거나 동적 색상을 사용할 수 있습니다</string>
     <string name="onboarding_expert_mode_desc">전문가 모드를 활성화하여 패치 선택, 사용자 정의 패치 옵션 등의 다양한 고급 기능을 사용할 수 있습니다</string>
     <!-- Translate "System" the same way as the System settings tab -->
-    <string name="onboarding_system_tab_title">시스템 탭</string>
-    <string name="onboarding_system_tab_desc">키스토어 관리, 가져오기/내보내기 도구 및 앱 정보를 사용할 수 있습니다</string>
     <string name="onboarding_system_installer_desc">일반 설치, 루트 마운트 또는 Shizuku와 같은 패치된 앱의 설치 방식을 선택할 수 있습니다</string>
-    <string name="onboarding_system_process_runtime_desc">안정성을 높이고 메모리 사용량을 관리하기 위해 패치 작업을 별도 프로세스에서 실행할 수 있습니다. 대용량 앱에 권장됩니다</string>
     <string name="onboarding_system_file_picker_desc">APK 또는 키스토어를 선택 시 시스템 기본 파일 선택기 대신 앱에 내장된 파일 선택기를 사용할 수 있습니다</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
     <string name="tour_prompt_title">빠른 기능 투어</string>
