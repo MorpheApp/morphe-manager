@@ -30,8 +30,10 @@ object PresetPreviewResolver {
      * @param packageName target app package, e.g. com.google.android.youtube.
      * @param optionKey patch option key, e.g. "appIcon".
      * @param value stored preset value, e.g. "mmt".
-     * @param cacheDir scratch dir for archive extraction. Files are stable per
-     *   (bundle, option, value); callers may evict the whole folder on bundle update.
+     * @param cacheDir scratch dir for archive extraction. Entries live under a
+     *   folder keyed by the bundle file name, size and modification date, so a
+     *   source that installs a new bundle never reads previews extracted from
+     *   the previous one.
      * @return image file to render, or null when the bundle ships no preview.
      */
     fun resolve(
@@ -60,10 +62,11 @@ object PresetPreviewResolver {
 
     private fun extractEntry(bundleFile: File, entryName: String, cacheDir: File): File? {
         val safeName = entryName.replace("..", "_")
+        val cacheRoot = cacheDir.resolve("preset-previews/${bundleVersionKey(bundleFile)}")
         return try {
             ZipFile(bundleFile).use { zip ->
                 val entry = zip.getEntry(safeName) ?: return null
-                val out = cacheDir.resolve("preset-previews/$safeName")
+                val out = cacheRoot.resolve(safeName)
                 if (out.isFile && out.length() == entry.size) return out
                 out.parentFile?.mkdirs()
                 zip.getInputStream(entry).use { src -> out.outputStream().use { src.copyTo(it) } }
@@ -72,5 +75,11 @@ object PresetPreviewResolver {
         } catch (e: Exception) {
             null
         }
+    }
+
+    /** Stable per (bundle file, its size, its date), so an updated bundle lands in a fresh folder. */
+    private fun bundleVersionKey(bundle: File): String {
+        val name = bundle.name.replace("[^A-Za-z0-9._-]".toRegex(), "_")
+        return "$name-${bundle.length()}-${bundle.lastModified()}"
     }
 }
