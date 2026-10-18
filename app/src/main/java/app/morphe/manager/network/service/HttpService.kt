@@ -306,6 +306,9 @@ class HttpService(
                                             totalRead.addAndGet(read.toLong())
                                             reportProgress()
                                         }
+                                        if (position <= end) {
+                                            throw IOException("Range $start-$end ended early at byte $position")
+                                        }
                                     }
 
                                     else -> throw HttpException(response.status)
