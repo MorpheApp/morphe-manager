@@ -49,6 +49,7 @@ import app.morphe.manager.patcher.runtime.CoroutineRuntime
 import app.morphe.manager.patcher.runtime.HeapExhaustedException
 import app.morphe.manager.patcher.runtime.JvmRuntime
 import app.morphe.manager.patcher.runtime.JvmUnavailableException
+import app.morphe.manager.patcher.runtime.PatcherJvms
 import app.morphe.manager.patcher.runtime.PatcherKilledException
 import app.morphe.manager.patcher.runtime.RemoteFailureException
 import app.morphe.manager.patcher.runtime.Runtime
@@ -83,11 +84,12 @@ class PatcherWorker(
     private val rootInstaller: RootInstaller,
     private val installerManager: InstallerManager,
     private val patchBundleRepository: PatchBundleRepository,
-    private val jvmInstallation: JvmInstallation
+    private val jvmInstallation: JvmInstallation,
+    private val patcherJvms: PatcherJvms
 ) : Worker<PatcherWorker.Args>(context, parameters) {
     private fun coroutineRuntime() = CoroutineRuntime(applicationContext, fs, patchBundleRepository)
 
-    private fun jvmRuntime() = JvmRuntime(applicationContext, fs, patchBundleRepository, jvmInstallation)
+    private fun jvmRuntime() = JvmRuntime(applicationContext, fs, patchBundleRepository, patcherJvms)
 
     class Args(
         val input: SelectedApp,

@@ -31,6 +31,7 @@ import app.morphe.manager.domain.manager.*
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.repository.PatchBundleRepository.LocalFileCheck
 import app.morphe.manager.patcher.patch.*
+import app.morphe.manager.patcher.runtime.PatcherJvms
 import app.morphe.manager.ui.model.*
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.*
@@ -43,6 +44,8 @@ import java.util.Locale
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 /** How long an added source is waited on before its app list is no longer opened for it. */
 private val NEW_SOURCE_LOAD_TIMEOUT = 10.minutes
@@ -83,7 +86,10 @@ class HomeViewModel(
     private val localApkSources: LocalApkSources,
     /** Picker behind the copy-from-another-bundle action of the expert-mode dialog. */
     expertModeCopy: CopySelectionController
-) : ViewModel() {
+) : ViewModel(), KoinComponent {
+    // Past the parameters viewModelOf takes
+    private val patcherJvms: PatcherJvms by inject()
+
     /** The app list on the home screen. */
     val apps = HomeApps(
         scope = viewModelScope,
@@ -289,7 +295,8 @@ class HomeViewModel(
         localApkSources = localApkSources,
         compatibleVersions = compatibleVersionsFlow,
         recommendedVersions = recommendedVersionsFlow,
-        expertModeCopy = expertModeCopy
+        expertModeCopy = expertModeCopy,
+        patcherJvms = patcherJvms
     )
 
     init {

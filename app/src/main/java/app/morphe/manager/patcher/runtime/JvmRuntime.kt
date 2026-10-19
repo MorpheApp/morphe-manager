@@ -7,40 +7,25 @@ package app.morphe.manager.patcher.runtime
 
 import android.app.ActivityManager
 import android.app.ApplicationExitInfo
-import android.content.ComponentName
 import android.content.Context
-import android.content.Intent
-import android.content.ServiceConnection
 import android.os.Build
-import android.os.IBinder
 import android.os.ParcelFileDescriptor
 import android.os.Process
 import androidx.annotation.RequiresApi
-import app.morphe.manager.BuildConfig
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.patcher.PatchRequest
 import app.morphe.manager.patcher.PatchingListener
 import app.morphe.manager.patcher.host.HostEvent
 import app.morphe.manager.patcher.logger.Logger
-import app.morphe.manager.patcher.runtime.jvm.IPatcherService
-import app.morphe.manager.patcher.runtime.jvm.JvmInstallation
-import app.morphe.manager.patcher.runtime.jvm.JvmLaunch
-import app.morphe.manager.patcher.runtime.jvm.PatcherService
 import app.morphe.manager.util.bytesToMebibytes
-import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
 import kotlinx.serialization.json.Json
-import java.io.Closeable
-import java.io.File
 import kotlin.concurrent.thread
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
@@ -53,45 +38,38 @@ class JvmRuntime(
     context: Context,
     private val fs: Filesystem,
     patchBundlesRepo: PatchBundleRepository,
-    private val installation: JvmInstallation
+    private val jvms: PatcherJvms
 ) : Runtime(context, fs, patchBundlesRepo) {
     override suspend fun patch(request: PatchRequest, logger: Logger, listener: PatchingListener) {
-        val installed = installation.install()
-        val heapLimitMb = heapLimitMb(context)
-        val errorFile = fs.tempDir.resolve("patcher-jvm-error.log").apply { delete() }
         val requestFile = fs.tempDir.resolve("patch-request.json")
-        val debugOptions = debugOptions()
-        if (debugOptions.isNotEmpty()) logger.info("Debug JVM options: ${debugOptions.joinToString(" ")}")
-
         try {
             withContext(Dispatchers.IO) {
                 requestFile.writeText(Json.encodeToString(PatchRequest.serializer(), request))
             }
 
-            PatcherConnection.connect(context).use { connection ->
+            jvms.take(request.bundles.map { it.patchesFile }).use { jvm ->
+                if (jvm.debugOptions.isNotEmpty()) logger.info("Debug JVM options: ${jvm.debugOptions.joinToString(" ")}")
+
                 val (events, eventsSink) = ParcelFileDescriptor.createPipe()
                 // Closed here once handed over, or the pipe would stay open after the process is gone
-                val pid = eventsSink.use {
-                    connection.service.start(launch(installed, heapLimitMb, errorFile, debugOptions), requestFile.path, it)
-                }
+                eventsSink.use { jvm.run(requestFile.path, it) }
 
                 var end: RunEnd? = null
                 try {
-                    end = relay(events, logger, listener, heapLimitMb)
+                    end = relay(events, logger, listener, jvm.heapLimitMb)
                 } finally {
                     // A run cut short leaves the JVM running, and nothing but the end of its process stops it
-                    if (end != RunEnd.FINISHED) Process.killProcess(pid)
+                    if (end != RunEnd.FINISHED) Process.killProcess(jvm.pid)
                 }
                 if (end == RunEnd.FINISHED) return
 
-                val reason = exitReason(pid)
-                if (errorFile.exists()) logger.error("Patcher JVM error report:\n${errorFile.readText()}")
+                val reason = exitReason(jvm.pid)
+                if (jvm.errorFile.exists()) logger.error("Patcher JVM error report:\n${jvm.errorFile.readText()}")
                 throw if (end == RunEnd.ENDED_RUNNING) PatcherKilledException(reason)
                 else JvmUnavailableException("The patcher JVM did not start: $reason")
             }
         } finally {
             requestFile.delete()
-            errorFile.delete()
         }
     }
 
@@ -139,45 +117,6 @@ class JvmRuntime(
         return if (started) RunEnd.ENDED_RUNNING else RunEnd.ENDED_BEFORE_START
     }
 
-    private fun launch(
-        installed: JvmInstallation.Installed,
-        heapLimitMb: Int,
-        errorFile: File,
-        debugOptions: List<String>
-    ) = JvmLaunch(
-        libjvm = installed.libjvm.path,
-        preload = installed.preload,
-        options = listOf(
-            "-Djava.class.path=${installed.hostJar}",
-            // The JVM falls back to /tmp, which an app cannot write to
-            "-Djava.io.tmpdir=${fs.tempDir}",
-            "-Xmx${heapLimitMb}m",
-            // Leaves the signals ART relies on to ART, such as the one that dumps its threads
-            "-Xrs",
-            // Nothing reads the performance counters, which would otherwise be kept in a file of their own
-            "-XX:-UsePerfData",
-            // C1 only. A run is too short for C2 to pay off, and its compiles take cores the run needs
-            "-XX:TieredStopAtLevel=1",
-            // The working directory of an app is not writable, which is where the report would go
-            "-XX:ErrorFile=$errorFile"
-        ) + debugOptions, // Last, so a flag given again there wins
-        mainClass = HOST_MAIN_CLASS
-    )
-
-    /**
-     * Options a debug build adds to the JVM, read from [DEBUG_OPTIONS_FILE] in the app's files: one
-     * per line, # starts a comment. Lets flags be tried and runs be profiled without rebuilding,
-     * see patcher-core/README.md.
-     */
-    private suspend fun debugOptions(): List<String> {
-        if (!BuildConfig.DEBUG) return emptyList()
-        val file = context.filesDir.resolve(DEBUG_OPTIONS_FILE)
-        return withContext(Dispatchers.IO) {
-            if (!file.isFile) return@withContext emptyList()
-            file.readLines().map(String::trim).filter { it.isNotEmpty() && !it.startsWith("#") }
-        }
-    }
-
     /**
      * What the system recorded about the end of [pid], in words for the log. Asked a few times, as
      * the record is only written once the system has dealt with the death, which can lag behind
@@ -214,67 +153,9 @@ class JvmRuntime(
         return listOfNotNull(cause, description, memory).joinToString(", ")
     }
 
-    /** A binding to [PatcherService] for a single run, which ends the service's process once closed. */
-    private class PatcherConnection private constructor(private val context: Context) : ServiceConnection, Closeable {
-        private var continuation: CancellableContinuation<IPatcherService>? = null
-        lateinit var service: IPatcherService
-            private set
-
-        override fun onServiceConnected(name: ComponentName, binder: IBinder) {
-            continuation?.resume(IPatcherService.Stub.asInterface(binder))
-            continuation = null
-        }
-
-        // A process that dies is noticed through the events of the run instead
-        override fun onServiceDisconnected(name: ComponentName) = Unit
-
-        override fun onNullBinding(name: ComponentName) = fail("bound to nothing")
-
-        override fun onBindingDied(name: ComponentName) = fail("binding died")
-
-        private fun fail(reason: String) {
-            continuation?.resumeWithException(JvmUnavailableException("Patcher service $reason"))
-            continuation = null
-        }
-
-        override fun close() = context.unbindService(this)
-
-        companion object {
-            suspend fun connect(context: Context): PatcherConnection {
-                val connection = PatcherConnection(context)
-                val service = try {
-                    withTimeoutOrNull(CONNECT_TIMEOUT) {
-                        suspendCancellableCoroutine<IPatcherService> { continuation ->
-                            connection.continuation = continuation
-                            val bound = context.bindService(
-                                Intent(context, PatcherService::class.java),
-                                connection,
-                                Context.BIND_AUTO_CREATE or Context.BIND_IMPORTANT
-                            )
-                            if (!bound) connection.fail("could not be bound")
-                        }
-                    }
-                } catch (e: Throwable) {
-                    connection.close()
-                    throw e
-                }
-
-                if (service == null) {
-                    connection.close()
-                    throw JvmUnavailableException("Patcher service did not connect within $CONNECT_TIMEOUT")
-                }
-                return connection.apply { this.service = service }
-            }
-        }
-    }
-
     companion object {
-        private const val HOST_MAIN_CLASS = "app/morphe/manager/patcher/host/HostMainKt"
         private const val NO_EXIT_RECORD = "no exit record"
-        private const val DEBUG_OPTIONS_FILE = "jvm-options.txt"
 
-        // Generous because a slow device on a cold start can take many seconds to start a process
-        private val CONNECT_TIMEOUT = 30.seconds
         private val EXIT_RECORD_TIMEOUT = 2.seconds
         private val EXIT_RECORD_POLL = 200.milliseconds
 

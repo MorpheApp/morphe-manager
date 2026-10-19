@@ -34,6 +34,7 @@ import app.morphe.manager.domain.repository.BlocklistRepository
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
+import app.morphe.manager.patcher.runtime.PatcherJvms
 import app.morphe.manager.ui.screen.shared.AppIconPixels
 import app.morphe.manager.util.*
 import app.morphe.manager.worker.UpdateCheckWorker
@@ -52,6 +53,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import me.zhanghai.android.appiconloader.coil.AppIconFetcher
 import me.zhanghai.android.appiconloader.coil.AppIconKeyer
+import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -128,6 +130,9 @@ class ManagerApplication : Application() {
                 databaseModule
             )
         }
+
+        // The first run after an install or update would otherwise wait seconds for the JVM to unpack
+        get<PatcherJvms>().unpackAhead()
 
         // Set before anything can ask for an avatar, so the first one read already comes from disk
         AvatarCache.useDiskCache(fs.avatarCacheDir)

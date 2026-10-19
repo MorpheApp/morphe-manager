@@ -11,7 +11,6 @@ import android.os.ParcelFileDescriptor
 import android.os.Process
 import android.util.Log
 import app.morphe.manager.util.tag
-import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.concurrent.thread
 
 /**
@@ -19,20 +18,27 @@ import kotlin.concurrent.thread
  * that process like any other part of the app, and the JVM keeps its heap in native memory, out
  * of reach of the limit ART puts on the app.
  *
- * Bound by [app.morphe.manager.patcher.runtime.JvmRuntime] for a single run. The process ends with the run, which is also the only
- * way to stop the JVM, and the next run starts in a fresh one.
+ * Bound by [app.morphe.manager.patcher.runtime.PatcherJvms] for a single run. The JVM is started
+ * first and waits for the run, so it can be started before the run is known. The process ends with
+ * the run, which is also the only way to stop the JVM, and the next run starts in a fresh one.
  */
 class PatcherService : Service() {
-    private val started = AtomicBoolean()
+    // The write end of the pipe the JVM waits on for the run, set once the JVM started
+    private var commands: ParcelFileDescriptor? = null
+
+    // Kept until the process ends, as the host opens the pipe again through the fd
+    private var events: ParcelFileDescriptor? = null
 
     private val binder = object : IPatcherService.Stub() {
-        override fun start(launch: JvmLaunch, requestFile: String, events: ParcelFileDescriptor): Int {
-            check(started.compareAndSet(false, true)) { "The patcher JVM runs once per process" }
+        @Synchronized
+        override fun prepare(launch: JvmLaunch, bundles: Array<String>): Int {
+            check(commands == null) { "The patcher JVM runs once per process" }
 
+            val (commandsSource, commandsSink) = ParcelFileDescriptor.createPipe()
+            commands = commandsSink
             thread(name = "PatcherJvm") {
-                // The host opens the pipe again through the fd, which has to stay open until it did
-                val code = events.use {
-                    EmbeddedJvm.run(launch, listOf(requestFile, "/proc/self/fd/${events.fd}"))
+                val code = commandsSource.use {
+                    EmbeddedJvm.run(launch, listOf("/proc/self/fd/${commandsSource.fd}") + bundles)
                 }
                 // The host ends the process once the run is over, so getting here means it never ran
                 Log.e(tag, "Patcher JVM returned $code")
@@ -40,6 +46,17 @@ class PatcherService : Service() {
             }
 
             return Process.myPid()
+        }
+
+        @Synchronized
+        override fun run(requestFile: String, events: ParcelFileDescriptor) {
+            val commands = checkNotNull(commands) { "The patcher JVM was not started" }
+            check(this@PatcherService.events == null) { "The patcher JVM runs once per process" }
+
+            this@PatcherService.events = events
+            ParcelFileDescriptor.AutoCloseOutputStream(commands).bufferedWriter().use { writer ->
+                writer.write("$requestFile\n/proc/self/fd/${events.fd}\n")
+            }
         }
     }
 

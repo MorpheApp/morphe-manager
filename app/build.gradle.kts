@@ -161,11 +161,11 @@ val translationTags = translations.joinToString(prefix = "{", postfix = "}") { (
  * The JVM the app embeds for patching, an Android build of OpenJDK per ABI it ships one for. A 32 bit
  * x86 device patches inside the app instead.
  */
-val embeddedJvmRelease = "https://github.com/AngelAuraMC/angelauramc-openjdk-build/releases/download/download_jre21"
+val embeddedJvmRelease = "https://github.com/AngelAuraMC/angelauramc-openjdk-build/releases/download/download_jre25"
 val embeddedJvms = mapOf(
-    "arm64-v8a" to Triple("jre21-android-arm64.tar.xz", "8d41ec401ee59f7722df60ed991f81ad146e130452804bfdd8a05d3436f7bbfe", "linux-aarch64"),
-    "armeabi-v7a" to Triple("jre21-android-arm.tar.xz", "96c297487def64666e379a9a363d9955c05b1a0b091b0cf24af88359a66f394a", "linux-arm"),
-    "x86_64" to Triple("jre21-android-x86_64.tar.xz", "cb88723961f5f9ad63afa1f212eb199816c27cabfd7dc66567bde1d8fb69713b", "linux-amd64")
+    "arm64-v8a" to Triple("jre25-android-arm64.tar.xz", "d3eb7afe2240c26728a1bb440502c5f18ac3883e932d202dd7f0c9bcbbce4c37", "linux-aarch64"),
+    "armeabi-v7a" to Triple("jre25-android-arm.tar.xz", "9ae13aee9cba7b2d2d8f40965061667e876d7380d866f37a992db3eff296ffb5", "linux-arm"),
+    "x86_64" to Triple("jre25-android-x86_64.tar.xz", "7fca862ee1b2d5fe23cd9c9c3d9b7ad3c241947ad1a6cc9464ef2e674867105d", "linux-amd64")
 )
 
 /**
@@ -197,7 +197,7 @@ val embeddedJvmTasks = embeddedJvms.map { (abi, build) ->
         targetPlatform.set(platform)
         modules.set(embeddedJvmModules)
         runtimeFiles.set(embeddedJvmFiles)
-        jdk.set(javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(21)) })
+        jdk.set(javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(25)) })
         downloadCache.set(File(gradle.gradleUserHomeDir, "caches/morphe-embedded-jvm"))
         outputArchive.set(layout.buildDirectory.file("intermediates/embeddedJvm/$abi.zip.xz"))
     }
@@ -247,6 +247,13 @@ android {
 
         buildConfigField("String[]", "EMBEDDED_JVM_ABIS", embeddedJvmAbis)
         buildConfigField("String", "EMBEDDED_JVM_ID", "\"$embeddedJvmId\"")
+
+        // The embedded JVM links against the shared C++ runtime, which the app ships alongside the launcher
+        externalNativeBuild {
+            cmake {
+                arguments += "-DANDROID_STL=c++_shared"
+            }
+        }
 
         vectorDrawables.useSupportLibrary = true
     }

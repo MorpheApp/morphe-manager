@@ -32,6 +32,7 @@ import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.*
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.patcher.patch.*
+import app.morphe.manager.patcher.runtime.PatcherJvms
 import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.morphe.manager.patcher.split.SplitApkInspector
 import app.morphe.manager.patcher.split.SplitApkPreparer
@@ -193,7 +194,8 @@ class PatchFlow(
     private val localApkSources: LocalApkSources,
     private val compatibleVersions: StateFlow<Map<String, List<BundledAppTarget>>>,
     private val recommendedVersions: StateFlow<Map<String, AppTarget>>,
-    expertModeCopy: CopySelectionController
+    expertModeCopy: CopySelectionController,
+    private val patcherJvms: PatcherJvms
 ) : ApkDownloadHelperHost {
     /** The dialogs the flow has open, see [HomeDialog]. */
     val dialogs = HomeDialogStack()
@@ -278,6 +280,8 @@ class PatchFlow(
      */
     fun showPatchDialog(packageName: String, repatchedPackageName: String? = null) {
         session = sessionFor(packageName, repatchedPackageName)
+        // Started while the user picks the APK and patches, so patching does not wait for it
+        patcherJvms.startAhead()
 
         // Guard: if there is a pending bundle update on metered data, show the outdated-patches
         // dialog before proceeding with the actual APK selection flow.
@@ -1510,6 +1514,7 @@ class PatchFlow(
     fun startOtherAppsFlow(appName: String) {
         endRun()
         session = PatchFlowSession(packageName = null, appName = appName)
+        patcherJvms.startAhead()
         dialogs.open(HomeDialog.FilePickerPrompt)
     }
 

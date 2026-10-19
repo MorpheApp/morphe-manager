@@ -11,6 +11,7 @@ import app.morphe.manager.patcher.PatchingListener
 import app.morphe.manager.patcher.logger.LogLevel
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.split.SplitPreparationEvent
+import app.morphe.patcher.patch.Patch
 import app.morphe.patcher.patch.loadPatchesFromJar
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
@@ -18,16 +19,29 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.OutputStream
+import java.util.concurrent.ExecutionException
+import java.util.concurrent.FutureTask
+import kotlin.concurrent.thread
 import kotlin.system.exitProcess
 
 /**
- * Entry point of the JVM the app embeds for patching.
+ * Entry point of the JVM the app embeds for patching. The JVM is started before the run is known,
+ * so it can load ahead of time while the user still picks what to patch.
  *
- * @param args The file the [PatchRequest] was written to, and the file the events go to, which
- *             is the write end of a pipe the app reads.
+ * @param args The read end of a pipe the app writes the run to, followed by the patch bundles that
+ *             run is likely to patch with, which are loaded while waiting for it. The run is two
+ *             lines: the file the [PatchRequest] was written to, and the file the events go to,
+ *             which is the write end of a pipe the app reads.
  */
 fun main(args: Array<String>) {
-    val (requestFile, eventsFile) = args
+    val commandsFile = args.first()
+    val preloaded = args.drop(1).associateWith(::PreloadedBundle)
+
+    val (requestFile, eventsFile) = File(commandsFile).bufferedReader().use { reader ->
+        listOf(reader.readLine(), reader.readLine())
+    }
+    // The app gave up on the run before handing it over
+    if (requestFile == null || eventsFile == null) exitProcess(0)
 
     val code = try {
         HostEvents(FileOutputStream(eventsFile)).use { events ->
@@ -37,7 +51,8 @@ fun main(args: Array<String>) {
                 val request = Json.decodeFromString(PatchRequest.serializer(), File(requestFile).readText())
                 runBlocking {
                     PatchPipeline(request, events.logger, events.listener) { bundle ->
-                        loadPatchesFromJar(setOf(File(bundle.patchesFile)))
+                        preloaded[bundle.patchesFile]?.take(events.logger)
+                            ?: loadPatchesFromJar(setOf(File(bundle.patchesFile)))
                     }.run()
                 }
             }.exceptionOrNull()
@@ -52,6 +67,33 @@ fun main(args: Array<String>) {
 
     // Threads the patches left running must not keep the process, which exists for this run alone
     exitProcess(code)
+}
+
+/**
+ * The patches of a bundle, loaded on a thread of their own from the moment the JVM starts. The
+ * file may be replaced by an update before the run, so they are only used if it is unchanged.
+ */
+private class PreloadedBundle(path: String) {
+    private val file = File(path)
+    private val stamp = stampOf(file)
+    private val patches = FutureTask { loadPatchesFromJar(setOf(file)) }.also {
+        thread(isDaemon = true, name = "PreloadPatches") { it.run() }
+    }
+
+    /** The loaded patches, or null if the file changed or loading failed, for them to be loaded again. */
+    fun take(logger: Logger): Set<Patch<*>>? {
+        if (stampOf(file) != stamp) return null
+        return try {
+            patches.get()
+        } catch (e: ExecutionException) {
+            logger.warn("Loading ${file.name} ahead of the run failed, loading it again: ${e.cause}")
+            null
+        }
+    }
+
+    private companion object {
+        fun stampOf(file: File) = file.lastModified() to file.length()
+    }
 }
 
 /** Sends the run's events to the app, from whichever thread reports them. */

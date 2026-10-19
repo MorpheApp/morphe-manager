@@ -2,7 +2,7 @@
 
 Everything about a patching run that does not need Android. The app runs it in one of two places:
 
-- `JvmRuntime`, the default: an embedded HotSpot 21 in the `:patcher` process of
+- `JvmRuntime`, the default: an embedded HotSpot 25 in the `:patcher` process of
   `PatcherService`, with a heap of a third of the RAM (1-3 GB, at most 1 GB in a 32-bit process).
   Shipped for arm64-v8a, armeabi-v7a and x86_64.
 - `CoroutineRuntime`: inside the app, on ART. Used when the setting is off, on 32-bit x86, and
@@ -28,7 +28,7 @@ pipe.
 
 ## The runtime in the APK
 
-`buildSrc/PrepareEmbeddedJvmTask` turns the OpenJDK 21 Android build of
+`buildSrc/PrepareEmbeddedJvmTask` turns the OpenJDK 25 Android build of
 [AngelAuraMC](https://github.com/AngelAuraMC/angelauramc-openjdk-build) into `jvm/<abi>.zip.xz`.
 The build is pinned by SHA-256 in `app/build.gradle.kts`.
 
