@@ -36,7 +36,10 @@ struct Launch {
     int exitCode = -1;
 };
 
-jint logJvmOutput(FILE *, const char *format, va_list args) {
+// HotSpot hands every write it makes through here, files it opened itself (such as -Xlog:...:file=)
+// included, so only the standard streams go to the log
+jint logJvmOutput(FILE *stream, const char *format, va_list args) {
+    if (stream != stdout && stream != stderr) return vfprintf(stream, format, args);
     __android_log_vprint(ANDROID_LOG_INFO, TAG, format, args);
     return 0;
 }

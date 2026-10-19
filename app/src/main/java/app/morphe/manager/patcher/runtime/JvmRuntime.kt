@@ -16,6 +16,7 @@ import android.os.IBinder
 import android.os.ParcelFileDescriptor
 import android.os.Process
 import androidx.annotation.RequiresApi
+import app.morphe.manager.BuildConfig
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.patcher.PatchRequest
@@ -59,6 +60,8 @@ class JvmRuntime(
         val heapLimitMb = heapLimitMb(context)
         val errorFile = fs.tempDir.resolve("patcher-jvm-error.log").apply { delete() }
         val requestFile = fs.tempDir.resolve("patch-request.json")
+        val debugOptions = debugOptions()
+        if (debugOptions.isNotEmpty()) logger.info("Debug JVM options: ${debugOptions.joinToString(" ")}")
 
         try {
             withContext(Dispatchers.IO) {
@@ -69,7 +72,7 @@ class JvmRuntime(
                 val (events, eventsSink) = ParcelFileDescriptor.createPipe()
                 // Closed here once handed over, or the pipe would stay open after the process is gone
                 val pid = eventsSink.use {
-                    connection.service.start(launch(installed, heapLimitMb, errorFile), requestFile.path, it)
+                    connection.service.start(launch(installed, heapLimitMb, errorFile, debugOptions), requestFile.path, it)
                 }
 
                 var end: RunEnd? = null
@@ -136,7 +139,12 @@ class JvmRuntime(
         return if (started) RunEnd.ENDED_RUNNING else RunEnd.ENDED_BEFORE_START
     }
 
-    private fun launch(installed: JvmInstallation.Installed, heapLimitMb: Int, errorFile: File) = JvmLaunch(
+    private fun launch(
+        installed: JvmInstallation.Installed,
+        heapLimitMb: Int,
+        errorFile: File,
+        debugOptions: List<String>
+    ) = JvmLaunch(
         libjvm = installed.libjvm.path,
         preload = installed.preload,
         options = listOf(
@@ -148,11 +156,27 @@ class JvmRuntime(
             "-Xrs",
             // Nothing reads the performance counters, which would otherwise be kept in a file of their own
             "-XX:-UsePerfData",
+            // C1 only. A run is too short for C2 to pay off, and its compiles take cores the run needs
+            "-XX:TieredStopAtLevel=1",
             // The working directory of an app is not writable, which is where the report would go
             "-XX:ErrorFile=$errorFile"
-        ),
+        ) + debugOptions, // Last, so a flag given again there wins
         mainClass = HOST_MAIN_CLASS
     )
+
+    /**
+     * Options a debug build adds to the JVM, read from [DEBUG_OPTIONS_FILE] in the app's files: one
+     * per line, # starts a comment. Lets flags be tried and runs be profiled without rebuilding,
+     * see patcher-core/README.md.
+     */
+    private suspend fun debugOptions(): List<String> {
+        if (!BuildConfig.DEBUG) return emptyList()
+        val file = context.filesDir.resolve(DEBUG_OPTIONS_FILE)
+        return withContext(Dispatchers.IO) {
+            if (!file.isFile) return@withContext emptyList()
+            file.readLines().map(String::trim).filter { it.isNotEmpty() && !it.startsWith("#") }
+        }
+    }
 
     /**
      * What the system recorded about the end of [pid], in words for the log. Asked a few times, as
@@ -247,6 +271,7 @@ class JvmRuntime(
     companion object {
         private const val HOST_MAIN_CLASS = "app/morphe/manager/patcher/host/HostMainKt"
         private const val NO_EXIT_RECORD = "no exit record"
+        private const val DEBUG_OPTIONS_FILE = "jvm-options.txt"
 
         // Generous because a slow device on a cold start can take many seconds to start a process
         private val CONNECT_TIMEOUT = 30.seconds

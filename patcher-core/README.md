@@ -50,3 +50,40 @@ the app unpacks the runtime again.
 
 A new event of a run has to be added to `PatchingListener`, `HostEvent`, `HostMain`,
 `JvmRuntime.relay` and `ProgressReporter`.
+
+## Tuning and profiling
+
+A debug build adds the options in `files/jvm-options.txt` of the app to the JVM, one per line
+(`#` starts a comment). They come last, so they override the app's own, such as `-Xmx`. The
+patch log lists them, and an option the JVM does not know keeps it from starting.
+
+```sh
+adb shell run-as app.morphe.manager.debug sh -c "'cat > files/jvm-options.txt'" < jvm-options.txt
+adb exec-out run-as app.morphe.manager.debug cat files/gc.log > gc.log
+```
+
+- **Output**: what the JVM prints to its console, such as `-XX:+PrintCompilation` or a bare
+  `-Xlog:gc*`, goes to logcat with the tag `EmbeddedJvm`, each piece of a line as a line of its
+  own. For readable output give `-Xlog` a file with an absolute path, such as
+  `-Xlog:gc*:file=/data/user/0/app.morphe.manager.debug/files/gc.log`.
+- **GC**: `-Xlog:gc+init` shows the collector the VM chose. G1 (the default) paused for about 3%
+  of a YouTube run. ParallelGC paused for 5-8% and SerialGC for more, as both fall back to full
+  collections once the 450-650M kept alive fills the old space.
+- **JIT**: the app passes `-XX:TieredStopAtLevel=1`, so only C1 compiles. YouTube runs started at
+  the same temperature were about 7% faster with it, almost all of it in the patches.
+  `-XX:TieredStopAtLevel=4` in `jvm-options.txt` turns C2 back on. Let the phone cool between
+  runs, as back to back runs got up to 40% slower, more than any flag changes. Read the
+  temperature from the `Current temperatures from HAL` part of `adb shell dumpsys thermalservice`,
+  as the part above it is cached.
+- **CDS**: the runtime ships no archive. One can be made in three runs: one with
+  `-XX:DumpLoadedClassList=<dir>/classes.lst`, one with `-Xshare:dump
+  -XX:SharedClassListFile=<dir>/classes.lst -XX:SharedArchiveFile=<dir>/app.jsa` (it exits
+  after the dump), then runs with `-XX:SharedArchiveFile=<dir>/app.jsa`. The 47M archive of
+  6300 classes made a run about 2% faster, less than runs differ by on their own.
+- **CPU profile**: JFR needs `jdk.jfr` in `embeddedJvmModules` and `lib/jfr` in `embeddedJvmFiles`,
+  then `-XX:StartFlightRecording=settings=profile` with
+  `-XX:FlightRecorderOptions=repository=/data/user/0/app.morphe.manager.debug/files/jfr-repo`.
+  The process is ended as soon as the run reports its end, before a dump at exit gets written, so
+  the chunk in the repository is never finished. `jfr` and Mission Control refuse it, but
+  `jdk.jfr.consumer.EventStream.openRepository` reads what was flushed, which is all but the last
+  second.

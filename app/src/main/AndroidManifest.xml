@@ -195,18 +195,5 @@
             android:name="app.morphe.manager.receiver.MountReplacedReceiver"
             android:exported="false" />
 
-        <!--
-        The patcher runs in a process started with app_process, whose class loader has no shared
-        libraries. Compiled code of the app is only used by a class loader with the same shared
-        libraries it was compiled for, so with these optional libraries of the window library the
-        patcher could only run interpreted. Nothing here uses them.
-        -->
-        <uses-library
-            android:name="androidx.window.extensions"
-            tools:node="remove" />
-        <uses-library
-            android:name="androidx.window.sidecar"
-            tools:node="remove" />
-
     </application>
 </manifest>
