@@ -23,14 +23,12 @@ import org.tukaani.xz.XZInputStream
 import java.io.File
 import java.net.URI
 import java.security.MessageDigest
-import java.util.zip.ZipEntry
-import java.util.zip.ZipOutputStream
 import javax.inject.Inject
 
 /**
  * Turns an Android build of the JVM into the runtime the app ships for one ABI: the modules the
  * patcher needs linked into a new image, next to the native libraries and configuration of the
- * build, packed into one archive for the app's assets.
+ * build, packed into one archive for the app's assets, see [writeXzArchive].
  *
  * The build ships every module of the JDK, most of which patching never touches. Its classes are
  * relinked rather than replaced with those of another JDK, as an Android build carries changes of
@@ -133,7 +131,12 @@ abstract class PrepareEmbeddedJvmTask : DefaultTask() {
             from(build) { (runtimeFiles.get() + legal).forEach { include(it, "$it/**") } }
             into(image)
         }
-        zip(image, outputArchive.get().asFile)
+        writeXzArchive(
+            outputArchive.get().asFile,
+            image.walkTopDown().filter { it.isFile }.map { file ->
+                file.relativeTo(image).invariantSeparatorsPath to { file.readBytes() }
+            }
+        )
     }
 
     private fun download(): File {
@@ -177,19 +180,6 @@ abstract class PrepareEmbeddedJvmTask : DefaultTask() {
 
     private fun run(vararg command: String) {
         exec.exec { commandLine(*command) }
-    }
-
-    // Entries sorted and without timestamps, so the same image always packs into the same archive
-    private fun zip(source: File, archive: File) {
-        archive.parentFile.mkdirs()
-        ZipOutputStream(archive.outputStream().buffered()).use { zip ->
-            zip.setLevel(9)
-            source.walkTopDown().filter { it.isFile }.sortedBy { it.relativeTo(source).invariantSeparatorsPath }.forEach { file ->
-                zip.putNextEntry(ZipEntry(file.relativeTo(source).invariantSeparatorsPath).apply { time = 0 })
-                file.inputStream().use { it.copyTo(zip) }
-                zip.closeEntry()
-            }
-        }
     }
 
     private fun File.sha256(): String {

@@ -138,7 +138,7 @@ firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging
 # Unit tests
 kotlin-test-junit = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit", version.ref = "kotlin" }
 
-# Build logic: unpacks the .tar.xz builds of the embedded JVM
+# XZ: the build unpacks the JVM builds with it and packs the embedded JVM, which the app unpacks
 xz = { group = "org.tukaani", name = "xz", version.ref = "xz" }
 
 [plugins]

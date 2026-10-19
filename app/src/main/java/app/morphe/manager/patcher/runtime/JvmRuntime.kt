@@ -258,12 +258,17 @@ class JvmRuntime(
         private const val HEAP_LIMIT_MINIMUM_MB = 1024
         private const val HEAP_LIMIT_MAXIMUM_MB = 3072
 
+        // The heap is reserved in one piece, which a 32 bit process seldom finds much more of in
+        // its address space. A reservation that fails leaves the run to the app's own process
+        private const val HEAP_LIMIT_32_BIT_MB = 1024
+
         /** The heap the patcher JVM gets on this device: a third of its RAM, within bounds. */
         fun heapLimitMb(context: Context): Int {
             val memoryInfo = ActivityManager.MemoryInfo()
             context.getSystemService(ActivityManager::class.java).getMemoryInfo(memoryInfo)
-            return (bytesToMebibytes(memoryInfo.totalMem) / 3).toInt()
+            val limit = (bytesToMebibytes(memoryInfo.totalMem) / 3).toInt()
                 .coerceIn(HEAP_LIMIT_MINIMUM_MB, HEAP_LIMIT_MAXIMUM_MB)
+            return if (Process.is64Bit()) limit else limit.coerceAtMost(HEAP_LIMIT_32_BIT_MB)
         }
     }
 }

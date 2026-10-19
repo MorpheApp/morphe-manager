@@ -3,9 +3,10 @@
 Everything about a patching run that does not need Android. The app runs it in one of two places:
 
 - `JvmRuntime`, the default: an embedded HotSpot 21 in the `:patcher` process of
-  `PatcherService`, with a heap of a third of the RAM (1-3 GB). Shipped for arm64-v8a and x86_64.
-- `CoroutineRuntime`: inside the app, on ART. Used when the setting is off, on 32-bit devices,
-  and when the JVM fails to start.
+  `PatcherService`, with a heap of a third of the RAM (1-3 GB, at most 1 GB in a 32-bit process).
+  Shipped for arm64-v8a, armeabi-v7a and x86_64.
+- `CoroutineRuntime`: inside the app, on ART. Used when the setting is off, on 32-bit x86, and
+  when the JVM fails to start.
 
 Both run `PatchPipeline`. The JVM reports back through `HostEvent`, one JSON line per event on a
 pipe.
@@ -28,8 +29,12 @@ pipe.
 ## The runtime in the APK
 
 `buildSrc/PrepareEmbeddedJvmTask` turns the OpenJDK 21 Android build of
-[AngelAuraMC](https://github.com/AngelAuraMC/angelauramc-openjdk-build) into `jvm/<abi>.zip`
-(about 18 MB). The build is pinned by SHA-256 in `app/build.gradle.kts`.
+[AngelAuraMC](https://github.com/AngelAuraMC/angelauramc-openjdk-build) into `jvm/<abi>.zip.xz`.
+The build is pinned by SHA-256 in `app/build.gradle.kts`.
+
+- Runtimes and the host jar are zips of stored entries, compressed whole with xz, which takes
+  them to less than half of what deflate does (`XzArchive.kt`).
+- The 32-bit ARM build only ships the client VM (`lib/client`), the others the server VM.
 
 - The build's own classes are relinked (`jimage extract`, `jmod`, `jlink`), not swapped for
   another JDK's, because the Android build patches some of them.

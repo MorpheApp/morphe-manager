@@ -1133,7 +1133,7 @@ Details: %2$s"</string>
     <string name="settings_system_process_runtime">Process runtime</string>
     <string name="settings_system_jvm_runtime_enable">Separate patcher process</string>
     <string name="settings_system_jvm_runtime_description">Patches in a Java runtime of its own, which can use as much memory as the device spares. Turn off to patch inside Morphe</string>
-    <string name="settings_system_jvm_runtime_unavailable">Needs a 64-bit ARM or x86 device</string>
+    <string name="settings_system_jvm_runtime_unavailable">Needs an ARM or 64-bit x86 device</string>
     <string name="settings_system_patcher_completion_sound">Completion sound</string>
     <string name="settings_system_patcher_completion_sound_description">Plays a distinct tone for success or failure when patching finishes</string>
 

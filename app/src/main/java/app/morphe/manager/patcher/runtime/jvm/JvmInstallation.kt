@@ -16,6 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
+import org.tukaani.xz.XZInputStream
 import java.io.File
 import java.io.IOException
 import java.util.zip.ZipInputStream
@@ -25,16 +26,17 @@ import java.util.zip.ZipInputStream
  * needs it, since the JVM can only be loaded from files.
  *
  * The runtime is unpacked once per runtime the app ships. The patcher host is part of the app's
- * own code and is unpacked once per install of the app.
+ * own code and is unpacked once per install of the app. Both ship compressed with xz, which
+ * takes a few seconds to undo on a phone.
  */
 class JvmInstallation(private val app: Application) {
     /**
-     * The ABI of the runtime this device gets, null where the app ships none for it. A 32 bit
-     * process could never hold a heap this large anyway.
+     * The ABI of the runtime this device gets, null where the app ships none for it. Matched to
+     * the process rather than the device, as a 64 bit device can run the app as a 32 bit one.
      */
     val abi: String? =
-        if (Process.is64Bit()) Build.SUPPORTED_64_BIT_ABIS.firstOrNull { it in BuildConfig.EMBEDDED_JVM_ABIS }
-        else null
+        (if (Process.is64Bit()) Build.SUPPORTED_64_BIT_ABIS else Build.SUPPORTED_32_BIT_ABIS)
+            .firstOrNull { it in BuildConfig.EMBEDDED_JVM_ABIS }
 
     val isAvailable get() = abi != null
 
@@ -70,7 +72,7 @@ class JvmInstallation(private val app: Application) {
     private fun unpackRuntime(abi: String, home: File) {
         val staging = File(home.path + STAGING_SUFFIX).apply { deleteRecursively() }
 
-        ZipInputStream(app.assets.open("$ASSETS_DIR/$abi.zip").buffered()).use { zip ->
+        ZipInputStream(XZInputStream(app.assets.open("$ASSETS_DIR/$abi.zip.xz").buffered())).use { zip ->
             generateSequence { zip.nextEntry }.forEach { entry ->
                 val target = staging.resolve(entry.name)
                 if (!target.canonicalPath.startsWith(staging.canonicalPath + File.separator)) {
@@ -92,14 +94,17 @@ class JvmInstallation(private val app: Application) {
 
     private fun unpackHost(hostJar: File) {
         val staging = File(hostJar.path + STAGING_SUFFIX)
-        app.assets.open("$ASSETS_DIR/$HOST_JAR").use { input ->
+        XZInputStream(app.assets.open("$ASSETS_DIR/$HOST_ARCHIVE").buffered()).use { input ->
             staging.outputStream().use { input.copyTo(it) }
         }
         if (!staging.renameTo(hostJar)) throw IOException("Could not move the patcher host into $hostJar")
     }
 
     class Installed(val home: File, val hostJar: File) {
-        val libjvm get() = home.resolve("lib/server/libjvm.so")
+        /** The VM the runtime ships, the server one where there is one, as the 32-bit ARM one only has the client one. */
+        val libjvm
+            get() = VMS.map { home.resolve("lib/$it/libjvm.so") }.firstOrNull { it.isFile }
+                ?: throw JvmUnavailableException("The patcher JVM ships no VM")
 
         /** The libraries of the runtime that others of it link against, dependencies first. */
         val preload get() = PRELOAD.map { home.resolve("lib/$it").path }
@@ -108,8 +113,10 @@ class JvmInstallation(private val app: Application) {
     private companion object {
         const val ROOT_DIR = "jvm"
         const val ASSETS_DIR = "jvm"
-        const val HOST_JAR = "patcher-host.jar"
+        const val HOST_ARCHIVE = "patcher-host.jar.xz"
         const val STAGING_SUFFIX = ".staging"
+
+        val VMS = listOf("server", "client")
 
         // The app's linker namespace does not search the runtime's directory, so a library naming
         // one of these would not find it unless it is already loaded
