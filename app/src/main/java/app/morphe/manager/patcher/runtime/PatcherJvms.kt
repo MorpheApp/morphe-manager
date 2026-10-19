@@ -155,6 +155,9 @@ class PatcherJvms(
             "-XX:-UsePerfData",
             // C1 only. A run is too short for C2 to pay off, and its compiles take cores the run needs
             "-XX:TieredStopAtLevel=1",
+            // 8 byte object headers instead of 12. A run keeps millions of small objects alive, and
+            // smaller ones leave the collector and the caches less to do
+            "-XX:+UseCompactObjectHeaders",
             // The working directory of an app is not writable, which is where the report would go
             "-XX:ErrorFile=$errorFile"
         ) + debugOptions, // Last, so a flag given again there wins

@@ -75,6 +75,10 @@ adb exec-out run-as app.morphe.manager.debug cat files/gc.log > gc.log
   runs, as back to back runs got up to 40% slower, more than any flag changes. Read the
   temperature from the `Current temperatures from HAL` part of `adb shell dumpsys thermalservice`,
   as the part above it is cached.
+- **Object headers**: the app passes `-XX:+UseCompactObjectHeaders`, which shrinks every object
+  header from 12 to 8 bytes. Runs of a split YouTube bundle were about 4% faster with it, mostly in
+  compiling the dex files and encoding the resources. `-XX:-UseCompactObjectHeaders` in
+  `jvm-options.txt` turns it off.
 - **CDS**: the runtime ships no archive. One can be made in three runs: one with
   `-XX:DumpLoadedClassList=<dir>/classes.lst`, one with `-Xshare:dump
   -XX:SharedClassListFile=<dir>/classes.lst -XX:SharedArchiveFile=<dir>/app.jsa` (it exits
