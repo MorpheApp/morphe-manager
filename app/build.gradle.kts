@@ -15,6 +15,11 @@ plugins {
     signing
 }
 
+/** The patcher host for the embedded JVM, see [embeddedJvmAssets]. */
+val patcherHost: Configuration = configurations.create("patcherHost") {
+    isCanBeConsumed = false
+}
+
 dependencies {
     // AndroidX Core
     implementation(libs.androidx.ktx)
@@ -54,9 +59,11 @@ dependencies {
     ksp(libs.room.compiler)
 
     // Morphe
+    implementation(project(":patcher-core"))
     implementation(libs.arsclib)
     implementation(libs.morphe.patcher)
     implementation(libs.morphe.library)
+    patcherHost(project(":patcher-core", "hostJar"))
 
     implementation(libs.androidx.documentfile)
 
@@ -148,6 +155,64 @@ val translationTags = translations.joinToString(prefix = "{", postfix = "}") { (
     "\"$tag\""
 }
 
+/**
+ * The JVM the app embeds for patching, an Android build of OpenJDK per ABI it ships one for. A 32 bit
+ * device patches inside the app instead, as its address space could not hold the heap either way.
+ */
+val embeddedJvmRelease = "https://github.com/AngelAuraMC/angelauramc-openjdk-build/releases/download/download_jre21"
+val embeddedJvms = mapOf(
+    "arm64-v8a" to Triple("jre21-android-arm64.tar.xz", "8d41ec401ee59f7722df60ed991f81ad146e130452804bfdd8a05d3436f7bbfe", "linux-aarch64"),
+    "x86_64" to Triple("jre21-android-x86_64.tar.xz", "cb88723961f5f9ad63afa1f212eb199816c27cabfd7dc66567bde1d8fb69713b", "linux-amd64")
+)
+
+/**
+ * The modules patching can reach: what the patcher and its libraries use, plus what ART offers patches
+ * beyond that, so a patch that runs inside the app also runs in the JVM.
+ */
+val embeddedJvmModules = listOf(
+    "java.base", "java.logging", "java.xml", "java.sql", "jdk.unsupported", "jdk.charsets", "jdk.crypto.ec"
+)
+
+/** What of the build the linked modules need, its native libraries above all. */
+val embeddedJvmFiles = listOf(
+    "lib/server/libjvm.so",
+    "lib/libjava.so", "lib/libjimage.so", "lib/libzip.so", "lib/libnet.so", "lib/libnio.so",
+    "lib/libverify.so", "lib/libsyslookup.so",
+    "lib/jvm.cfg", "lib/tzdb.dat", "lib/security", "conf"
+)
+
+val embeddedJvmTasks = embeddedJvms.map { (abi, build) ->
+    val (file, sha256, platform) = build
+    tasks.register<PrepareEmbeddedJvmTask>("prepareEmbeddedJvm${abi.replace("-", "").replace("_", "").replaceFirstChar(Char::uppercase)}") {
+        group = "build"
+        description = "Links the embedded JVM for $abi."
+        url.set("$embeddedJvmRelease/$file")
+        this.sha256.set(sha256)
+        targetPlatform.set(platform)
+        modules.set(embeddedJvmModules)
+        runtimeFiles.set(embeddedJvmFiles)
+        jdk.set(javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(21)) })
+        downloadCache.set(File(gradle.gradleUserHomeDir, "caches/morphe-embedded-jvm"))
+        outputArchive.set(layout.buildDirectory.file("intermediates/embeddedJvm/$abi.zip"))
+    }
+}
+
+/** The ABIs of [embeddedJvms] as a Java array literal for BuildConfig. */
+val embeddedJvmAbis = embeddedJvms.keys.joinToString(prefix = "{", postfix = "}") { abi -> "\"$abi\"" }
+
+/** Changes with whatever goes into the runtime, which the app then unpacks again. */
+val embeddedJvmId = (embeddedJvms.values.map { build -> build.second } + embeddedJvmModules + embeddedJvmFiles)
+    .hashCode().toUInt().toString(16)
+
+/** Assets the embedded JVM runs from, read by JvmInstallation. */
+val embeddedJvmAssets = tasks.register<EmbeddedJvmAssetsTask>("embeddedJvmAssets") {
+    group = "build"
+    description = "Lays out the embedded JVM runtimes and the patcher host as assets."
+    runtimes.from(embeddedJvmTasks)
+    hostJar.from(patcherHost)
+    outputDirectory.set(layout.buildDirectory.dir("generated/embeddedJvm"))
+}
+
 android {
     namespace = "app.morphe.manager"
     compileSdk = 37
@@ -173,6 +238,9 @@ android {
         buildConfigField("String", "PATCHER_VERSION", "\"${libs.versions.morphe.patcher.get()}\"")
 
         buildConfigField("String[]", "TRANSLATIONS", translationTags)
+
+        buildConfigField("String[]", "EMBEDDED_JVM_ABIS", embeddedJvmAbis)
+        buildConfigField("String", "EMBEDDED_JVM_ID", "\"$embeddedJvmId\"")
 
         vectorDrawables.useSupportLibrary = true
     }
@@ -261,6 +329,9 @@ android {
     }
 
     androidResources {
+        // The embedded JVM comes packed already, so deflating it again only slows down unpacking it
+        noCompress += listOf("zip", "jar")
+
         // Libraries ship strings in far more languages than Morphe has, which only bloat resources.arsc
         @Suppress("UnstableApiUsage")
         localeFilters += translatedLocales
@@ -383,5 +454,6 @@ androidComponents {
         variant.sources.res?.addGeneratedSourceDirectory(generateLauncherIcons, GenerateLauncherIconsTask::resDirectory)
         variant.sources.kotlin?.addGeneratedSourceDirectory(generateLauncherIcons, GenerateLauncherIconsTask::kotlinDirectory)
         variant.sources.manifests.addGeneratedManifestFile(generateLauncherIcons, GenerateLauncherIconsTask::manifestFile)
+        variant.sources.assets?.addGeneratedSourceDirectory(embeddedJvmAssets, EmbeddedJvmAssetsTask::outputDirectory)
     }
 }

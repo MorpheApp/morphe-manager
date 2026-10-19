@@ -678,13 +678,6 @@ Uninstalling will permanently erase all app data"</string>
     <string name="battery_optimization_dialog_description">Some devices may stop the patcher when the app is minimized. Allow Morphe to run without battery restrictions to ensure patching completes reliably</string>
     <string name="battery_optimization_not_now">Not now</string>
 
-    <!-- Memory limit dialog, shown after the patcher process was killed -->
-    <string name="patcher_memory_adjustment_title">Not enough memory</string>
-    <string name="patcher_memory_adjustment_description">The patcher was stopped by the system while running with a %1$d MB memory limit. Lowering the limit to %2$d MB makes the patcher a smaller target and can let the run finish</string>
-    <string name="patcher_memory_adjustment_description_at_minimum">The patcher was stopped by the system while running with a %1$d MB memory limit, which is already the lowest available. Try patching with fewer patch sources, or select fewer patches</string>
-    <string name="patcher_memory_adjustment_description_finished">The system stopped the patcher at a %1$d MB memory limit, and it only finished at %2$d MB. Starting at %2$d MB skips that lost attempt next time</string>
-    <string name="patcher_memory_adjustment_apply">Lower to %1$d MB</string>
-
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Patching in progress…</string>
     <string name="patcher_notification_text">Tap to return to the patcher</string>
@@ -729,7 +722,7 @@ Uninstalling will permanently erase all app data"</string>
     <string name="failed_to_execute_patch">Failed to apply %s</string>
     <string name="patched_app_save_failed_toast">Failed to save patched app</string>
     <string name="plugin_activity_dialog_body">User interaction is required in order to proceed with this plugin</string>
-    <string name="patcher_process_exit_message">Patcher process exited with code %s</string>
+    <string name="patcher_process_killed_message">The system stopped the patcher before it finished, usually to free memory. Close other apps and try again</string>
     <string name="patcher_heap_exhausted_message">The patcher ran out of memory with a %1$d MB heap. This app is too large for the selected patches. Try patching with fewer patch sources, or select fewer patches</string>
 
     <string name="install_app_success">Installed successfully</string>
@@ -1138,13 +1131,9 @@ Details: %2$s"</string>
     <string name="settings_system_battery_optimization">Battery optimization</string>
     <string name="settings_system_battery_optimization_description">Keeps the patcher running when the app is minimized</string>
     <string name="settings_system_process_runtime">Process runtime</string>
-    <string name="settings_system_process_runtime_description">Runs patching in a separate process for better stability</string>
-    <string name="settings_system_process_runtime_enable">Enable process runtime</string>
-    <string name="settings_system_memory_limit_subtitle">Memory available for patching</string>
-    <string name="settings_system_process_runtime_heap_limit_ignored">This device ignored the memory limit on the last run, so patching may fall back to running inside Morphe</string>
-    <string name="settings_system_memory_limit_warning">A low memory limit may cause failures when patching larger apps</string>
-    <string name="settings_system_memory_limit_high_warning">A high memory limit can make patching much slower on some devices. Raise it only if patching keeps failing at lower limits</string>
-    <string name="settings_system_process_runtime_description_not_available">This feature requires Android 11 or greater</string>
+    <string name="settings_system_jvm_runtime_enable">Separate patcher process</string>
+    <string name="settings_system_jvm_runtime_description">Patches in a Java runtime of its own, which can use as much memory as the device spares. Turn off to patch inside Morphe</string>
+    <string name="settings_system_jvm_runtime_unavailable">Needs a 64-bit ARM or x86 device</string>
     <string name="settings_system_patcher_completion_sound">Completion sound</string>
     <string name="settings_system_patcher_completion_sound_description">Plays a distinct tone for success or failure when patching finishes</string>
 

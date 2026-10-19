@@ -44,8 +44,7 @@ import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_MEMORY_FIELD_MAX
 import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_MEMORY_PREFIX_DONE
 import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_USAGE_FIELD_IO_PEAK
 import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_USAGE_PREFIX_DONE
-import app.morphe.manager.patcher.runtime.process.PatcherProcess.Companion.LOG_PROCESS_PREFIX_PROCESS_HEAP
-import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_PROCESS_PREFIX_COROUTINE_HEAP
+import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_HEAP_LIMIT_PREFIX
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_ANDROID
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_API
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_FIELD_DEVICE
@@ -234,8 +233,7 @@ internal class LogItemAccumulator(
                 ioPeakKbPerSec = message.logField(LOG_USAGE_FIELD_IO_PEAK)?.toIntOrNull()
                 updateSuccessSummary()
             }
-            message.startsWith(LOG_PROCESS_PREFIX_PROCESS_HEAP) ||
-                message.startsWith(LOG_PROCESS_PREFIX_COROUTINE_HEAP) -> {
+            message.startsWith(LOG_HEAP_LIMIT_PREFIX) -> {
                 // Auxiliary lines consumed without emitting a LogItem
             }
             message.startsWith(LOG_WORKER_PREFIX_STARTED) -> {

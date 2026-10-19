@@ -53,6 +53,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "morphe-manager"
 include(":app")
+include(":patcher-core")
 
 // Include morphe-patcher and morphe-library as composite builds if they exist locally
 mapOf(

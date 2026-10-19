@@ -12,119 +12,28 @@ package app.morphe.manager.patcher.runtime
 
 import android.content.Context
 import app.morphe.manager.data.platform.Filesystem
-import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
-import app.morphe.manager.patcher.Session
+import app.morphe.manager.patcher.PatchPipeline
+import app.morphe.manager.patcher.PatchRequest
+import app.morphe.manager.patcher.PatchingListener
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.patch.PatchBundle
-import app.morphe.manager.patcher.patch.applyPatchOptions
-import app.morphe.manager.patcher.split.SplitApkPreparer
-import app.morphe.manager.patcher.worker.ProgressEventHandler
-import app.morphe.manager.ui.model.State
-import app.morphe.manager.util.Options
-import app.morphe.manager.util.PatchSelection
 import java.io.File
 
 /**
- * Simple [Runtime] implementation that runs the patcher using coroutines.
+ * Patches inside the app's own process, within the heap Android gives it.
  */
 class CoroutineRuntime(
-    private val context: Context,
+    context: Context,
     fs: Filesystem,
-    patchBundlesRepo: PatchBundleRepository,
-    prefs: PreferencesManager
-) : Runtime(fs, patchBundlesRepo, prefs) {
-    override suspend fun execute(
-        inputFile: String,
-        outputFile: String,
-        packageName: String,
-        selectedPatches: PatchSelection,
-        options: Options,
-        logger: Logger,
-        onPatchCompleted: suspend (String) -> Unit,
-        onPatchFailed: (String) -> Unit,
-        onProgress: ProgressEventHandler,
-        stripUnusedNativeLibs: Boolean,
-        onMergedApkReady: (suspend (File) -> Unit)?,
-        // This runtime patches in the app's own process and gets one attempt at it
-        onRestart: suspend () -> Unit
-    ): ExecutionResult {
-        val startTime = System.currentTimeMillis()
-        ResourceMonitor.startPolling(logger)
-
-        try {
-            val selectedBundles = selectedPatches.keys
-            val bundles = bundles()
-
-            // Only the selected bundles are read, one at a time, so a native death inside any of
-            // them is attributed to it instead of leaving the next launch to crash the same way
-            val allPatches = bundles
-                .filterKeys { it in selectedBundles }
-                .mapValues { (uid, bundle) ->
-                    bundleLoadGuard.read(uid, File(bundle.patchesJar)) {
-                        PatchBundle.Loader.patches(setOf(bundle), packageName).getValue(bundle)
-                    }
-                }
-
-            val patchList = selectedPatches.flatMap { (bundle, selected) ->
-                allPatches[bundle]?.filterKeys { it in selected }?.values
-                    ?: throw IllegalArgumentException("Patch bundle $bundle does not exist")
+    patchBundlesRepo: PatchBundleRepository
+) : Runtime(context, fs, patchBundlesRepo) {
+    override suspend fun patch(request: PatchRequest, logger: Logger, listener: PatchingListener) =
+        PatchPipeline(request, logger, listener) { bundle ->
+            // Read one at a time, so a native death inside a bundle is attributed to it instead of
+            // leaving the next launch to crash the same way
+            bundleLoadGuard.read(bundle.uid, File(bundle.patchesFile)) {
+                PatchBundle.Loader.patches(PatchBundle(bundle.patchesFile))
             }
-
-            // Set all patch options
-            options.forEach { (bundle, bundlePatchOptions) ->
-                val patchesByName = allPatches[bundle] ?: return@forEach
-
-                patchesByName.applyPatchOptions(bundlePatchOptions, logger)
-            }
-
-            onProgress(null, State.COMPLETED, null) // Loading patches
-
-            val preparation = SplitApkPreparer.prepareIfNeeded(
-                source = File(inputFile),
-                workspace = File(cacheDir),
-                logger = logger,
-                skipUnneededSplits = stripUnusedNativeLibs,
-                onEvent = { event ->
-                    val message = event.toLocalizedString(context)
-                    logger.info(message)
-                    onProgress(message, State.RUNNING, null)
-                }
-            )
-
-            try {
-                if (preparation.merged) {
-                    onProgress(null, State.COMPLETED, null)
-                }
-
-                Session(
-                    cacheDir = cacheDir,
-                    androidContext = context,
-                    logger = logger,
-                    input = preparation.file,
-                    stripUnusedNativeLibs = stripUnusedNativeLibs,
-                    onPatchCompleted = onPatchCompleted,
-                    onPatchFailed = onPatchFailed,
-                    onProgress = onProgress
-                ).use { session ->
-                    session.run(
-                        File(outputFile),
-                        patchList
-                    )
-                }
-
-                // Handed over only once the session has closed its input, as ProcessRuntime does
-                if (preparation.merged) {
-                    onMergedApkReady?.invoke(preparation.file)
-                }
-            } finally {
-                preparation.cleanup()
-            }
-        } finally {
-            ResourceMonitor.stopPolling(logger)
-        }
-
-        val elapsed = System.currentTimeMillis() - startTime
-        return ExecutionResult(loweredMemoryLimit = null, elapsedTimeMs = elapsed)
-    }
+        }.run()
 }

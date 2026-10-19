@@ -400,21 +400,6 @@ private fun PatcherScreenContent(
         )
     }
 
-    // Memory limit dialog, shown after the system killed the patcher process.
-    // Waits for the error dialog to close: that one explains the failure this one offers a fix for
-    if (shownFailure == null) {
-        DialogHost(target = patcherViewModel.memoryAdjustmentDialog) { dialogState ->
-            MemoryAdjustmentDialog(
-                currentLimit = dialogState.currentLimit,
-                suggestedLimit = dialogState.suggestedLimit,
-                canAdjust = dialogState.canAdjust,
-                finished = dialogState.finished,
-                onApply = patcherViewModel::applyMemoryAdjustment,
-                onDismiss = patcherViewModel::dismissMemoryAdjustment
-            )
-        }
-    }
-
     // Where the finished APK will actually install, when that is not what the run was aimed at
     DialogHost(target = heldInstall) { held ->
         RenameWarningDialog(

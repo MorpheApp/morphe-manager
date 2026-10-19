@@ -10,37 +10,33 @@
 
 package app.morphe.manager.patcher.runtime
 
+import android.content.Context
+import android.content.res.Resources
+import android.os.Build
 import app.morphe.manager.data.platform.Filesystem
-import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.patcher.DeviceConfig
+import app.morphe.manager.patcher.PatchRequest
+import app.morphe.manager.patcher.PatchingListener
 import app.morphe.manager.patcher.logger.Logger
+import app.morphe.manager.patcher.patch.optionValueToJson
 import app.morphe.manager.patcher.worker.ProgressEventHandler
 import app.morphe.manager.util.Options
 import app.morphe.manager.util.PatchSelection
-import app.morphe.manager.util.bytesToMebibytes
 import kotlinx.coroutines.flow.first
 import java.io.File
+import kotlin.time.Duration
+import kotlin.time.measureTime
 
-/** The heap limit ART granted the calling process, in mebibytes. */
-fun heapLimitMebibytes() = bytesToMebibytes(java.lang.Runtime.getRuntime().maxMemory()).toInt()
-
-/** Outcome of a patcher runtime execution. */
-data class ExecutionResult(
-    /** The heap limit in MB the run only finished under after lowering it, null when original held. */
-    val loweredMemoryLimit: Int? = null,
-    /** Elapsed time taken by the actual patching execution, in milliseconds. */
-    val elapsedTimeMs: Long = 0L
-)
-
+/**
+ * Where a run happens. Everything around it is the same for each: the request it is given, what
+ * its reports turn into on screen, and the merged APK it leaves behind.
+ */
 sealed class Runtime(
-    fs: Filesystem,
-    private val patchBundlesRepo: PatchBundleRepository,
-    protected val prefs: PreferencesManager
+    protected val context: Context,
+    private val fs: Filesystem,
+    private val patchBundlesRepo: PatchBundleRepository
 ) {
-    protected val cacheDir: String = fs.tempDir.absolutePath
-
-    protected suspend fun bundles() = patchBundlesRepo.bundles.first()
-
     /** Only of use to a runtime that reads bundles in this process, see [CoroutineRuntime]. */
     protected val bundleLoadGuard get() = patchBundlesRepo.loadGuard
 
@@ -60,11 +56,9 @@ sealed class Runtime(
      *                         cannot use are dropped.
      * @param onMergedApkReady Called with the merged APK when a split archive patched successfully.
      *                         The runtime has no further use for the file, so it may be moved.
-     * @param onRestart        Called when the current attempt is abandoned and patching starts over,
-     *                         so progress reported so far can be dropped instead of accumulating.
-     * @return Execution result containing the lowered memory limit if lowered, and actual elapsed time.
+     * @return How long patching took.
      */
-    abstract suspend fun execute(
+    suspend fun execute(
         inputFile: String,
         outputFile: String,
         packageName: String,
@@ -75,7 +69,57 @@ sealed class Runtime(
         onPatchFailed: (String) -> Unit,
         onProgress: ProgressEventHandler,
         stripUnusedNativeLibs: Boolean,
-        onMergedApkReady: (suspend (File) -> Unit)? = null,
-        onRestart: suspend () -> Unit = {},
-    ): ExecutionResult
+        onMergedApkReady: (suspend (File) -> Unit)? = null
+    ): Duration {
+        val mergedApk = fs.tempDir.resolve("merged-${System.currentTimeMillis()}.apk")
+        val request = PatchRequest(
+            packageName = packageName,
+            inputFile = inputFile,
+            outputFile = outputFile,
+            mergedApkFile = mergedApk.absolutePath,
+            temporaryDir = fs.tempDir.absolutePath,
+            workspaceDir = context.cacheDir.resolve("patch-workspace").absolutePath,
+            bundles = requestedBundles(selectedPatches, options),
+            stripUnusedNativeLibs = stripUnusedNativeLibs,
+            device = deviceConfig()
+        )
+        val listener = ProgressReporter(context, logger, onProgress, onPatchCompleted, onPatchFailed)
+
+        try {
+            val elapsed = measureTime { patch(request, logger, listener) }
+            if (mergedApk.exists()) onMergedApkReady?.invoke(mergedApk)
+            return elapsed
+        } finally {
+            mergedApk.delete()
+        }
+    }
+
+    /** Runs [request], reporting through [logger] and [listener], and throws if it fails. */
+    protected abstract suspend fun patch(request: PatchRequest, logger: Logger, listener: PatchingListener)
+
+    private suspend fun requestedBundles(selectedPatches: PatchSelection, options: Options) =
+        patchBundlesRepo.bundles.first().let { bundles ->
+            selectedPatches.map { (uid, patches) ->
+                val bundle = bundles[uid] ?: throw IllegalArgumentException("Patch bundle $uid does not exist")
+                PatchRequest.Bundle(
+                    uid = uid,
+                    patchesFile = bundle.patchesJar,
+                    patches = patches,
+                    options = options[uid].orEmpty().mapValues { (_, patchOptions) ->
+                        patchOptions.mapValues { (_, value) -> optionValueToJson(value) }
+                    }
+                )
+            }
+        }
+
+    // The system's own configuration rather than the app's, which an in-app language overrides
+    private fun deviceConfig(): DeviceConfig {
+        val system = Resources.getSystem()
+        val locales = system.configuration.locales
+        return DeviceConfig(
+            supportedAbis = Build.SUPPORTED_ABIS.filter { it.isNotBlank() },
+            localeTags = (0 until locales.size()).map { locales[it].toLanguageTag() },
+            densityDpi = system.displayMetrics.densityDpi
+        )
+    }
 }

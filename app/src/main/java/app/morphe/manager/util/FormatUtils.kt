@@ -21,7 +21,6 @@ private const val BYTES_PER_MEGABYTE = 1_000_000.0
 private const val BYTES_PER_GIGABYTE = 1_000_000_000.0
 
 /** Memory counts in binary, which is what the kernel and the JVM mean by a megabyte. */
-private const val BYTES_PER_MEBIBYTE = 1024 * 1024
 private const val KIBIBYTES_PER_MEBIBYTE = 1024
 
 /** Whole bytes get none of them: "512.00 B" reads like a mistake. */
@@ -110,13 +109,6 @@ fun formatGigabytes(bytes: Long): String =
 
 private fun bytesToGigabytes(bytes: Long): Float =
     if (bytes <= 0) 0f else (bytes / BYTES_PER_GIGABYTE).toFloat()
-
-/**
- * Bytes as whole mebibytes: megabytes counted in binary, which is what a heap limit, the RAM of
- * a device and every memory reading in the log mean by a megabyte. Files never use this.
- */
-fun bytesToMebibytes(bytes: Long): Long =
-    if (bytes <= 0) 0L else bytes / BYTES_PER_MEBIBYTE
 
 /**
  * The unit amounts of memory are named in. Readings shown together share one, picked by the largest

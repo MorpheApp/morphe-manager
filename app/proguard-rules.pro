@@ -1,7 +1,6 @@
 -dontobfuscate
 -dontoptimize
 
--keep class app.morphe.manager.patcher.runtime.process.* { *; }
 -keep class app.morphe.manager.plugin.** { *; }
 -keep class app.morphe.patcher.** { *; }
 -keep class com.android.tools.smali.** { *; }

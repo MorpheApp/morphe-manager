@@ -24,6 +24,7 @@ import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFA
 import app.morphe.manager.domain.repository.PatchOptionsRepository
 import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.domain.repository.SourceMuteRepository
+import app.morphe.manager.patcher.runtime.jvm.JvmInstallation
 import app.morphe.manager.network.api.MorpheAPI
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.screen.settings.system.CopyTarget
@@ -77,7 +78,11 @@ class SettingsViewModel(
     private val appDataResolver: AppDataResolver,
     private val api: MorpheAPI,
     private val appContext: Context,
+    jvmInstallation: JvmInstallation,
 ) : ViewModel() {
+    /** Whether this device can patch in the embedded JVM at all. */
+    val jvmRuntimeAvailable = jvmInstallation.isAvailable
+
     /** True when Google Play Services is available; FCM handles notifications on these devices. */
     val hasGms: Boolean = GoogleApiAvailability.getInstance()
         .isGooglePlayServicesAvailable(appContext) == ConnectionResult.SUCCESS
@@ -196,12 +201,8 @@ class SettingsViewModel(
         }
     }
 
-    fun setProcessRuntime(enabled: Boolean) = viewModelScope.launch {
-        prefs.useProcessRuntime.update(enabled)
-    }
-
-    fun setMemoryLimit(limit: Int) = viewModelScope.launch {
-        prefs.patcherProcessMemoryLimit.update(limit)
+    fun setJvmRuntime(enabled: Boolean) = viewModelScope.launch {
+        prefs.useJvmRuntime.update(enabled)
     }
 
     /** Enables/disables native library stripping for plain APKs, and simultaneously split APK filtering for split bundles. */

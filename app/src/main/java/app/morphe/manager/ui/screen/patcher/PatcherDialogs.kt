@@ -424,55 +424,6 @@ fun DialogHostScope.BatteryOptimizationDialog(
 }
 
 /**
- * Shown after the system killed the patcher process, offering the lower memory limit that
- * might get the next run through, or the one a [finished] run got through on. The limit is a
- * user setting, so nothing changes until it is accepted here.
- */
-@Composable
-fun DialogHostScope.MemoryAdjustmentDialog(
-    currentLimit: Int,
-    suggestedLimit: Int,
-    canAdjust: Boolean,
-    finished: Boolean,
-    onApply: () -> Unit,
-    onDismiss: () -> Unit,
-) {
-    AppDialog(
-        onDismissRequest = onDismiss,
-        title = stringResource(R.string.patcher_memory_adjustment_title),
-        description = if (canAdjust) {
-            stringResource(
-                if (finished) R.string.patcher_memory_adjustment_description_finished
-                else R.string.patcher_memory_adjustment_description,
-                currentLimit,
-                suggestedLimit
-            )
-        } else {
-            stringResource(
-                R.string.patcher_memory_adjustment_description_at_minimum,
-                currentLimit
-            )
-        },
-        footer = {
-            AppDialogActions(
-                actions = listOfNotNull(
-                    DialogAction(
-                        text = stringResource(R.string.patcher_memory_adjustment_apply, suggestedLimit),
-                        onClick = onApply,
-                        icon = MaterialSymbols.Rounded.Memory
-                    ).takeIf { canAdjust },
-                    DialogAction(
-                        text = stringResource(R.string.close),
-                        onClick = onDismiss,
-                        emphasis = DialogActionEmphasis.Outlined
-                    )
-                )
-            )
-        }
-    )
-}
-
-/**
  * Full-screen error dialog shown when patching or installing the patched app fails.
  */
 @Composable

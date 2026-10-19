@@ -11,16 +11,12 @@
 package app.morphe.manager.domain.manager
 
 import android.content.Context
-import android.os.Build
 import android.util.Log
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.domain.manager.base.BasePreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
-import app.morphe.manager.patcher.runtime.PROCESS_RUNTIME_MEMORY_NOT_SET
-import app.morphe.manager.patcher.runtime.coerceMemoryLimit
-import app.morphe.manager.patcher.runtime.initialMemoryLimit
 import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.theme.SeasonalEvent
 import app.morphe.manager.ui.theme.Theme
@@ -31,7 +27,6 @@ import app.morphe.manager.ui.viewmodel.BundleSnapshot
 import app.morphe.manager.ui.viewmodel.RandomInterval
 import app.morphe.manager.util.ApkDownloadHelperContract
 import app.morphe.manager.util.AppCardColorMode
-import app.morphe.manager.util.isArmV7
 import app.morphe.manager.util.tag
 import app.morphe.manager.worker.UpdateCheckInterval
 import kotlinx.coroutines.flow.first
@@ -144,16 +139,11 @@ class PreferencesManager(
     )
     val autoUninstallWithShizuku = booleanPreference("auto_uninstall_with_shizuku", false)
 
-    val useProcessRuntime = booleanPreference(
-        "process_runtime", // Old key was 'use_process_runtime' and may have the wrong default for some devices.
-        // Process runtime fails for Android 10 and lower.
-        // ARMv7 silently fails and nobody has researched why.
-        Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !isArmV7()
-    )
-    val patcherProcessMemoryLimit = intPreference("use_process_runtime_memory_limit", PROCESS_RUNTIME_MEMORY_NOT_SET)
-
-    /** Whether the last patcher process came up without the heap limit it asked for. Tied to the device, so never exported. */
-    val patcherHeapLimitIgnored = booleanPreference("patcher_heap_limit_ignored", false)
+    /**
+     * Whether patching runs in the embedded JVM where the device has one. A key of its own, as
+     * the process runtime it replaced was turned off for reasons that do not apply to it.
+     */
+    val useJvmRuntime = booleanPreference("patcher_jvm", true)
 
     /**
      * Whether changelogs and patch descriptions show in the app language. Needs the translation
@@ -238,13 +228,6 @@ class PreferencesManager(
                 Log.d(tag, "Installation time set to $now")
             }
 
-            // Initialize process memory limit adaptively on first launch
-            if (patcherProcessMemoryLimit.get() == PROCESS_RUNTIME_MEMORY_NOT_SET) {
-                val adaptive = initialMemoryLimit(context)
-                Log.d(tag, "Initializing process memory limit to $adaptive MB (device RAM-based)")
-                patcherProcessMemoryLimit.update(adaptive)
-            }
-
             // Existing installs stored their Material You preference in `dynamic_color`;
             // fold it into [themeStyle] once so the new selector reflects the user's choice
             if (!themeStyleMigrated.get()) {
@@ -293,8 +276,7 @@ class PreferencesManager(
         val appLanguage: String? = null,
         val gitHubPat: String? = null,
         val includeGitHubPatInExports: Boolean? = null,
-        val useProcessRuntime: Boolean? = null,
-        val patcherProcessMemoryLimit: Int? = null,
+        val useJvmRuntime: Boolean? = null,
         val allowMeteredUpdates: Boolean? = null,
         val installerPrimary: String? = null,
         val installerCustomComponents: Set<String>? = null,
@@ -363,8 +345,7 @@ class PreferencesManager(
                 appLanguage = appLanguage.takeIf { appearance },
                 gitHubPat = gitHubPat.takeIf { sources },
                 includeGitHubPatInExports = includeGitHubPatInExports.takeIf { sources },
-                useProcessRuntime = useProcessRuntime.takeIf { patching },
-                patcherProcessMemoryLimit = patcherProcessMemoryLimit.takeIf { patching },
+                useJvmRuntime = useJvmRuntime.takeIf { patching },
                 allowMeteredUpdates = allowMeteredUpdates.takeIf { updates },
                 installerPrimary = installerPrimary.takeIf { patching },
                 installerCustomComponents = installerCustomComponents.takeIf { patching },
@@ -423,8 +404,7 @@ class PreferencesManager(
         uiScale = uiScale.get(),
         gitHubPat = gitHubPat.get().takeIf { includeGitHubPatInExports.get() },
         includeGitHubPatInExports = includeGitHubPatInExports.get(),
-        useProcessRuntime = useProcessRuntime.get(),
-        patcherProcessMemoryLimit = patcherProcessMemoryLimit.get(),
+        useJvmRuntime = useJvmRuntime.get(),
         allowMeteredUpdates = allowMeteredUpdates.get(),
         installerPrimary = installerPrimary.get(),
         installerCustomComponents = installerCustomComponents.get(),
@@ -480,11 +460,7 @@ class PreferencesManager(
         snapshot.uiScale?.let { uiScale.value = it.coerceToUiScale() }
         snapshot.gitHubPat?.let { gitHubPat.value = it }
         snapshot.includeGitHubPatInExports?.let { includeGitHubPatInExports.value = it }
-        snapshot.useProcessRuntime?.let { useProcessRuntime.value = it }
-        // Clamped rather than taken as-is, so a limit exported from a roomier device still fits
-        snapshot.patcherProcessMemoryLimit?.let {
-            patcherProcessMemoryLimit.value = coerceMemoryLimit(context, it)
-        }
+        snapshot.useJvmRuntime?.let { useJvmRuntime.value = it }
         snapshot.allowMeteredUpdates?.let { allowMeteredUpdates.value = it }
         snapshot.installerPrimary?.let { installerPrimary.value = it }
         snapshot.installerCustomComponents?.let { installerCustomComponents.value = it }

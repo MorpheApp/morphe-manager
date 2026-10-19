@@ -67,7 +67,8 @@ data class PatchBundle(val patchesJar: String) : Parcelable {
     )
 
     object Loader {
-        private fun loadBundle(bundle: PatchBundle): Collection<Patch<*>> {
+        /** Every patch [bundle] declares, read from its dex into this process. */
+        fun patches(bundle: PatchBundle): Collection<Patch<*>> {
             validateDexEntries(bundle.patchesJar)
             val patchFiles = runCatching {
                 val jarFile = File(bundle.patchesJar)
@@ -91,25 +92,12 @@ data class PatchBundle(val patchesJar: String) : Parcelable {
             return entry.value
         }
 
-        private fun metadataFor(bundle: PatchBundle) = loadBundle(bundle).map(::PatchInfo)
+        private fun metadataFor(bundle: PatchBundle) = patches(bundle).map(::PatchInfo)
 
         fun metadata(bundles: Iterable<PatchBundle>) =
             bundles.associateWith(::metadataFor)
 
         fun metadata(bundle: PatchBundle) = metadataFor(bundle)
-
-        fun patches(bundles: Iterable<PatchBundle>, packageName: String): Map<PatchBundle, Map<String, Patch<*>>> =
-            bundles.associateWith { bundle ->
-                // Filtered and keyed exactly like PatchBundleInfo.Global.forPackage, so a selection
-                // made against the metadata resolves to the same patch here
-                val relevant = loadBundle(bundle)
-                    .map { patch -> PatchInfo(patch) to patch }
-                    .filter { (info, _) -> info.compatibleWith(packageName) }
-
-                uniqueNames(relevant.map { (info, _) -> info })
-                    .mapIndexed { index, key -> key to relevant[index].second }
-                    .toMap()
-            }
 
         private fun validateDexEntries(jarPath: String) {
             JarFile(jarPath).use { jar ->

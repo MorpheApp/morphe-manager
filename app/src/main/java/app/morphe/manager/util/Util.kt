@@ -11,7 +11,6 @@
 package app.morphe.manager.util
 
 import android.graphics.Typeface
-import android.os.Build
 import android.text.Html
 import android.text.style.StyleSpan
 import android.util.Log
@@ -30,9 +29,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
-import app.morphe.manager.patcher.util.Abi
 import app.morphe.manager.ui.screen.shared.UserMessages
-import app.morphe.patcher.patch.ApkArchitecture
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.Flow
 import kotlin.properties.PropertyDelegateProvider
@@ -43,13 +40,6 @@ import kotlin.reflect.KProperty
 typealias PatchSelection = Map<Int, Set<String>>
 /** bundleUid → patchName → optionKey → value. */
 typealias Options = Map<Int, Map<String, Map<String, Any?>>>
-
-/** Returns true if the device's primary ABI is armeabi-v7a (32-bit ARM). */
-fun isArmV7(): Boolean {
-    // Only check the primary ABI - ArmV8 devices also list armeabi-v7a as a secondary ABI
-    return Build.SUPPORTED_ABIS.firstOrNull()
-        ?.let(Abi::architectureOf) == ApkArchitecture.ARMEABI_V7A
-}
 
 /**
  * Runs [block], and should it fail, logs the error and tells the user, so a failed action never

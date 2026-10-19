@@ -112,10 +112,9 @@ class LogItemAccumulatorTest {
     fun `auxiliary lines are consumed without emitting log entries`() {
         val accumulator = LogItemAccumulator()
 
-        accumulator.append(LogLevel.INFO, "Process heap memory limit: 512MB")
-        accumulator.append(LogLevel.INFO, "App memory limit: 512MB")
+        accumulator.append(LogLevel.INFO, "Heap limit: 512MB")
         accumulator.append(LogLevel.INFO, "Build: manager=1.0 patcher=1.0")
-        accumulator.append(LogLevel.INFO, "Runtime: memoryLimit=256")
+        accumulator.append(LogLevel.INFO, "Runtime: jvm memoryLimit=256")
         accumulator.append(LogLevel.INFO, "Device: android=14")
 
         assertTrue(accumulator.items.isEmpty())

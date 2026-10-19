@@ -13,12 +13,12 @@ import app.morphe.manager.R
 import app.morphe.manager.patcher.logger.LogLevel
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.logger.logField
+import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_HEAP_LIMIT_PREFIX
 import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_MEMORY_PREFIX_CURRENT
 import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_USAGE_FIELD_CPU
 import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_USAGE_FIELD_IO_READ
 import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_USAGE_FIELD_IO_WRITE
 import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_USAGE_PREFIX_CURRENT
-import app.morphe.manager.patcher.runtime.process.PatcherProcess.Companion.LOG_PROCESS_PREFIX_PROCESS_HEAP
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.ui.screen.patcher.LogItem
 import app.morphe.manager.ui.screen.patcher.LogItemAccumulator
@@ -224,7 +224,7 @@ class PatchRunProgress(
             steps.clear()
             steps.addAll(generatePatchSteps(appContext, requiresSplitPreparation))
             patchesPercentage = max(0.0, 1.0 - steps.sumOf { it.progressPercentage })
-            // A memory retry reports its own limit, and a fallback to the app's process has the app's heap
+            // A fallback to the app's process reports the app's heap as its own limit
             heapLimitMb = 0
             heapSamples.clear()
             ioSamples.clear()
@@ -331,8 +331,8 @@ class PatchRunProgress(
     private fun record(level: LogLevel, message: String) {
         level.androidLog(message)
 
-        if (message.startsWith(LOG_PROCESS_PREFIX_PROCESS_HEAP)) {
-            val mb = message.removePrefix(LOG_PROCESS_PREFIX_PROCESS_HEAP)
+        if (message.startsWith(LOG_HEAP_LIMIT_PREFIX)) {
+            val mb = message.removePrefix(LOG_HEAP_LIMIT_PREFIX)
                 .substringBefore("MB").trim().toIntOrNull()
             if (mb != null) scope.launch(Dispatchers.Main) { heapLimitMb = mb }
             // Still passed through to the log panel

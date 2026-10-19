@@ -58,6 +58,7 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.workmanager.koin.workManagerFactory
 import org.koin.core.context.startKoin
 import org.lsposed.hiddenapibypass.HiddenApiBypass
+import java.io.File
 
 class ManagerApplication : Application() {
     companion object {
@@ -108,6 +109,9 @@ class ManagerApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        // The patcher process only hosts the JVM that patches, none of the app is of use to it
+        if (currentProcessName() != packageName) return
 
         startKoin {
             androidContext(this@ManagerApplication)
@@ -249,6 +253,10 @@ class ManagerApplication : Application() {
             HiddenApiBypass.addHiddenApiExemptions("L")
         }
     }
+
+    private fun currentProcessName(): String =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) getProcessName()
+        else File("/proc/self/cmdline").readText().substringBefore('\u0000')
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)

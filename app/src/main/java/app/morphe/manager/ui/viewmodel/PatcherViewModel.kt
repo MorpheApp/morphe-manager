@@ -43,8 +43,6 @@ import app.morphe.manager.patcher.patch.ApkArchitectureResolver
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchLockState
 import app.morphe.manager.patcher.patch.PatchSourceRef
-import app.morphe.manager.patcher.runtime.ProcessRuntime
-import app.morphe.manager.patcher.runtime.lowerMemoryLimit
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.PatcherWorker
 import app.morphe.manager.ui.model.*
@@ -234,41 +232,6 @@ class PatcherViewModel(
             bundles[bundleUid]?.patches?.firstOrNull { it.name == patchName }?.declaresPackageName == true
         }
     )
-
-    /**
-     * Offered after the patcher process was killed, holding the lower limit that might get the
-     * run through. The limit is the user's setting, so it is only ever a suggestion. [finished]
-     * marks a run that got through anyway once the limit was lowered on the way.
-     */
-    data class MemoryAdjustmentDialogState(
-        val currentLimit: Int,
-        val suggestedLimit: Int,
-        val canAdjust: Boolean,
-        val finished: Boolean = false
-    )
-
-    var memoryAdjustmentDialog by mutableStateOf<MemoryAdjustmentDialogState?>(null)
-        private set
-
-    fun applyMemoryAdjustment() {
-        val state = memoryAdjustmentDialog ?: return
-        memoryAdjustmentDialog = null
-        if (!state.canAdjust) return
-        viewModelScope.launch { prefs.patcherProcessMemoryLimit.update(state.suggestedLimit) }
-    }
-
-    fun dismissMemoryAdjustment() {
-        memoryAdjustmentDialog = null
-    }
-
-    private fun offerMemoryAdjustment(currentLimit: Int, suggestedLimit: Int, finished: Boolean) {
-        memoryAdjustmentDialog = MemoryAdjustmentDialogState(
-            currentLimit = currentLimit,
-            suggestedLimit = suggestedLimit,
-            canAdjust = suggestedLimit < currentLimit,
-            finished = finished
-        )
-    }
 
     /**
      * Non-null when the saved selection names patches no enabled source offers anymore, which
@@ -1020,13 +983,13 @@ class PatcherViewModel(
                 val storedFile = if (shouldPreserveInput) {
                     val existing = inputFile
                     if (existing?.exists() == true) {
-                        // Reuse the already-copied file from a previous attempt (e.g. OOM retry).
+                        // Reuse the already-copied file from a previous attempt the system cut short.
                         // Do NOT delete it here - it is still the valid input for this run
                         existing
                     } else withContext(Dispatchers.IO) {
                         // Clean up a stale reference that no longer exists on disk before
                         // creating a new copy, so we don't accumulate input-*.apk files in
-                        // tempDir across multiple OOM retries
+                        // tempDir across multiple retries
                         inputFile?.takeIf { !it.exists() }?.let {
                             Log.d(TAG, "Stale inputFile reference cleared: ${it.name}")
                         }
@@ -1059,16 +1022,6 @@ class PatcherViewModel(
                     WorkInfo.State.SUCCEEDED -> {
                         forceKeepLocalInput = false
                         patchRun.stopStallWatch()
-
-                        // Every later run would lose the same attempt to the same kill
-                        val loweredLimit = workInfo.outputData.getInt(PatcherWorker.PROCESS_LOWERED_LIMIT_KEY, -1)
-                        if (loweredLimit > 0) {
-                            offerMemoryAdjustment(
-                                currentLimit = workInfo.outputData.getInt(PatcherWorker.PROCESS_PREVIOUS_LIMIT_KEY, -1),
-                                suggestedLimit = loweredLimit,
-                                finished = true
-                            )
-                        }
 
                         // Save original APK before deleting temporary file (blocking).
                         // Launched independently so cancelling observeWorkerJob (new patch run)
@@ -1150,25 +1103,9 @@ class PatcherViewModel(
 
     private fun handleWorkerFailure(workInfo: WorkInfo) {
         if (!handledFailureIds.add(workInfo.id)) return
-        val exitCode = workInfo.outputData.getInt(PatcherWorker.PROCESS_EXIT_CODE_KEY, Int.MIN_VALUE)
-        // A process the system killed is exactly what a lower limit is meant to prevent, so
-        // both ways it can be killed for memory lead here
-        if (exitCode == ProcessRuntime.OOM_EXIT_CODE || exitCode == ProcessRuntime.SIGKILL_EXIT_CODE) {
-            viewModelScope.launch {
-                if (!prefs.useProcessRuntime.get()) return@launch
-                forceKeepLocalInput = true
-                val previousFromWorker = workInfo.outputData.getInt(
-                    PatcherWorker.PROCESS_PREVIOUS_LIMIT_KEY,
-                    -1
-                )
-                val currentLimit = if (previousFromWorker > 0) previousFromWorker else prefs.patcherProcessMemoryLimit.get()
-                // The same step down the memory retries take, so accepting this lands on a
-                // value the slider can represent and the runtime honors
-                val suggestedLimit = lowerMemoryLimit(currentLimit)
-                // The setting is left alone until the user accepts the suggestion: silently
-                // lowering it made the configured limit drift down across failed runs
-                offerMemoryAdjustment(currentLimit, suggestedLimit, finished = false)
-            }
+        // Nothing about the input stopped the run, so it is kept for another try
+        if (workInfo.outputData.getBoolean(PatcherWorker.PROCESS_KILLED_KEY, false)) {
+            forceKeepLocalInput = true
         }
     }
 

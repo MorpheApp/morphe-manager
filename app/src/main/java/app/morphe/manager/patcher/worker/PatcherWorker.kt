@@ -24,7 +24,6 @@ import android.os.PowerManager
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import androidx.work.Data
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
@@ -47,9 +46,14 @@ import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.patch.ApkArchitectureResolver
 import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.patcher.runtime.CoroutineRuntime
-import app.morphe.manager.patcher.runtime.ProcessRuntime
-import app.morphe.manager.patcher.runtime.coerceMemoryLimit
+import app.morphe.manager.patcher.runtime.HeapExhaustedException
+import app.morphe.manager.patcher.runtime.JvmRuntime
+import app.morphe.manager.patcher.runtime.JvmUnavailableException
+import app.morphe.manager.patcher.runtime.PatcherKilledException
+import app.morphe.manager.patcher.runtime.RemoteFailureException
+import app.morphe.manager.patcher.runtime.Runtime
 import app.morphe.manager.patcher.runtime.heapLimitMebibytes
+import app.morphe.manager.patcher.runtime.jvm.JvmInstallation
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.ui.model.State
@@ -79,12 +83,11 @@ class PatcherWorker(
     private val rootInstaller: RootInstaller,
     private val installerManager: InstallerManager,
     private val patchBundleRepository: PatchBundleRepository,
-    private val appScope: AppCoroutineScope
+    private val jvmInstallation: JvmInstallation
 ) : Worker<PatcherWorker.Args>(context, parameters) {
-    private fun coroutineRuntime() = CoroutineRuntime(applicationContext, fs, patchBundleRepository, prefs)
+    private fun coroutineRuntime() = CoroutineRuntime(applicationContext, fs, patchBundleRepository)
 
-    private fun processRuntime() =
-        ProcessRuntime(applicationContext, fs, patchBundleRepository, prefs, pm, appScope)
+    private fun jvmRuntime() = JvmRuntime(applicationContext, fs, patchBundleRepository, jvmInstallation)
 
     class Args(
         val input: SelectedApp,
@@ -96,8 +99,8 @@ class PatcherWorker(
         /** Called with the name of the patch the run failed on. */
         val onPatchFailed: (String) -> Unit,
         /**
-         * Patching was abandoned and started over from the first step, so anything reported by
-         * the previous attempt has to be discarded rather than counted twice.
+         * Patching was abandoned and started over from the first step, in the app's own process,
+         * so anything reported by the previous attempt has to be discarded rather than counted twice.
          */
         val onPatchingRestarted: suspend () -> Unit,
         val setInputFile: suspend (File, Boolean, Boolean) -> Unit,
@@ -383,8 +386,8 @@ class PatcherWorker(
 
             keystoreManager.preloadSigner()
 
-            // A value imported from a newer device must not enable it where it cannot run
-            val useProcessRuntime = prefs.useProcessRuntime.get() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
+            // A value imported from another device must not enable it where it cannot run
+            val useJvmRuntime = prefs.useJvmRuntime.get() && jvmInstallation.isAvailable
             val stripNativeLibs = prefs.stripUnusedNativeLibs.get()
             val inputIsSplitArchive = SplitApkPreparer.isSplitArchive(inputFile)
             // The architecture the patches were selected against, worth a line of its own now
@@ -438,20 +441,8 @@ class PatcherWorker(
                 )
             }
 
-            // The limit the process runtime will actually start with, not the raw setting
-            val memLimit = coerceMemoryLimit(applicationContext, prefs.patcherProcessMemoryLimit.get())
-
-            // Log runtime mode info
-            if (useProcessRuntime) {
-                args.logger.info("$LOG_WORKER_PREFIX_RUNTIME process $LOG_WORKER_FIELD_MEMORY_LIMIT=$memLimit")
-            } else {
-                // CoroutineRuntime starts memory polling internally; only log the heap size here
-                args.logger.logCoroutineHeap()
-                args.logger.info("$LOG_WORKER_PREFIX_RUNTIME coroutine")
-            }
-
-            // Execute patching. ProcessRuntime has its own retry loop that reduces memory on OOM
-            val runtime = if (useProcessRuntime) processRuntime() else coroutineRuntime()
+            if (useJvmRuntime) args.logger.logRuntime(RUNTIME_JVM, JvmRuntime.heapLimitMb(applicationContext))
+            else args.logger.logRuntime(RUNTIME_APP, heapLimitMebibytes())
 
             val options = args.options.restrictTo(args.selectedPatches)
 
@@ -472,50 +463,33 @@ class PatcherWorker(
                 args.setInputFile(savedFile ?: mergedFile, true, true)
             }
 
-            val (loweredMemoryLimit, elapsed) = try {
-                runtime.execute(
-                    inputFile.absolutePath,
-                    patchedApk.absolutePath,
-                    args.packageName,
-                    args.selectedPatches,
-                    options,
-                    args.logger,
-                    onPatchCompleted,
-                    args.onPatchFailed,
-                    ::updateProgress,
-                    stripNativeLibs,
-                    onMergedApkReady,
-                    onRestart
-                )
-            } catch (e: Exception) {
-                val fallbackReason = when {
-                    !useProcessRuntime -> null
-                    isBlockedSyscall(e) -> "Patcher process was killed for a system call the device forbids"
-                    e is ProcessRuntime.ProcessConnectTimeoutException -> e.message
-                    e is ProcessRuntime.HeapLimitIgnoredException -> e.message
-                    else -> null
-                } ?: throw e
+            suspend fun Runtime.patchInput() = execute(
+                inputFile.absolutePath,
+                patchedApk.absolutePath,
+                args.packageName,
+                args.selectedPatches,
+                options,
+                args.logger,
+                onPatchCompleted,
+                args.onPatchFailed,
+                ::updateProgress,
+                stripNativeLibs,
+                onMergedApkReady
+            )
 
-                args.logger.warn("$fallbackReason, falling back to coroutine runtime")
-
-                // The fallback is a fresh run of the whole pipeline, same as a memory retry
-                onRestart()
-                args.logger.logCoroutineHeap()
-
-                coroutineRuntime().execute(
-                    inputFile.absolutePath,
-                    patchedApk.absolutePath,
-                    args.packageName,
-                    args.selectedPatches,
-                    options,
-                    args.logger,
-                    onPatchCompleted,
-                    args.onPatchFailed,
-                    ::updateProgress,
-                    stripNativeLibs,
-                    onMergedApkReady,
-                    onRestart
-                )
+            val elapsed = if (useJvmRuntime) {
+                try {
+                    jvmRuntime().patchInput()
+                } catch (e: JvmUnavailableException) {
+                    // Nothing was patched yet, and the app's own process can still take the run
+                    args.logger.warn("${e.message}, patching inside Morphe instead")
+                    Log.w(tag, "Patcher JVM unavailable".logFmt(), e)
+                    onRestart()
+                    args.logger.logRuntime(RUNTIME_APP, heapLimitMebibytes())
+                    coroutineRuntime().patchInput()
+                }
+            } else {
+                coroutineRuntime().patchInput()
             }
 
             updatePatcherNotification(stepName = signingApkLabel, patchProgress = null)
@@ -531,39 +505,26 @@ class PatcherWorker(
             args.logger.info(
                 "$LOG_WORKER_PREFIX_SUCCEEDED $LOG_WORKER_FIELD_OUTPUT=${args.output} " +
                         "$LOG_WORKER_FIELD_SIZE=${File(args.output).length()} " +
-                        "$LOG_WORKER_FIELD_ELAPSED=${elapsed}ms"
+                        "$LOG_WORKER_FIELD_ELAPSED=${elapsed.inWholeMilliseconds}ms"
             )
 
             Log.i(tag, "Patching succeeded".logFmt())
             val outputPackageName = pm.getPackageInfo(File(args.output))?.packageName ?: args.packageName
             autoInstallPending = installerManager.autoInstallAllowed(outputPackageName, mount = args.useMount)
             succeeded = true
-            // A run that only got through on less memory is the same suggestion a killed one
-            // leads to, offered while the limit that worked is known
-            Result.success(
-                loweredMemoryLimit?.let {
-                    workDataOf(PROCESS_PREVIOUS_LIMIT_KEY to memLimit, PROCESS_LOWERED_LIMIT_KEY to it)
-                } ?: Data.EMPTY
-            )
-        } catch (e: ProcessRuntime.ProcessExitException) {
-            Log.e(
-                tag,
-                "Patcher process exited with code ${e.exitCode}".logFmt(),
-                e
-            )
-            val message = applicationContext.getString(
-                R.string.patcher_process_exit_message,
-                e.exitCode.toString()
-            )
+            Result.success()
+        } catch (e: PatcherKilledException) {
+            Log.e(tag, "Patcher process ended: ${e.reason}".logFmt(), e)
+            args.logger.error("Patcher process ended: ${e.reason}")
+            val message = applicationContext.getString(R.string.patcher_process_killed_message)
             updateProgress(state = State.FAILED, message = message)
             Result.failure(
                 workDataOf(
-                    PROCESS_EXIT_CODE_KEY to e.exitCode,
-                    PROCESS_PREVIOUS_LIMIT_KEY to e.heapLimitMb,
+                    PROCESS_KILLED_KEY to true,
                     PROCESS_FAILURE_MESSAGE_KEY to message
                 )
             )
-        } catch (e: ProcessRuntime.HeapExhaustedException) {
+        } catch (e: HeapExhaustedException) {
             Log.e(
                 tag,
                 "Patcher exhausted its ${e.heapLimitMb}MB heap. ${e.originalStackTrace}".logFmt()
@@ -578,7 +539,7 @@ class PatcherWorker(
             Result.failure(
                 workDataOf(PROCESS_FAILURE_MESSAGE_KEY to message)
             )
-        } catch (e: ProcessRuntime.RemoteFailureException) {
+        } catch (e: RemoteFailureException) {
             Log.e(
                 tag,
                 "An exception occurred in the remote process while patching. ${e.originalStackTrace}".logFmt()
@@ -588,8 +549,6 @@ class PatcherWorker(
                 workDataOf(PROCESS_FAILURE_MESSAGE_KEY to e.originalStackTrace.truncateForWorkData())
             )
         } catch (e: Exception) {
-            // Stopping the worker closes the patcher process's streams, so a cancel usually
-            // surfaces as an interrupted read rather than a CancellationException
             if (isStopped || e is CancellationException) {
                 Log.i(tag, "Patching was cancelled".logFmt())
                 throw e
@@ -613,15 +572,8 @@ class PatcherWorker(
         }
     }
 
-    /**
-     * Whether seccomp killed the patcher process. Firmware can load a vendor library from a
-     * framework class initializer, which only runs where the zygote did not get there first,
-     * so the same run survives in the app's own process.
-     */
-    private fun isBlockedSyscall(e: Exception) =
-        e is ProcessRuntime.ProcessExitException && e.exitCode == ProcessRuntime.SIGSYS_EXIT_CODE
-
-    private fun Logger.logCoroutineHeap() = info("$LOG_PROCESS_PREFIX_COROUTINE_HEAP ${heapLimitMebibytes()}MB")
+    private fun Logger.logRuntime(runtime: String, heapLimitMb: Int) =
+        info("$LOG_WORKER_PREFIX_RUNTIME $runtime $LOG_WORKER_FIELD_MEMORY_LIMIT=$heapLimitMb")
 
     companion object {
         private const val LOG_PREFIX = "[Worker]"
@@ -633,10 +585,12 @@ class PatcherWorker(
         /** Kept as the patcher screen's entry point now that the tone itself is shared. */
         fun stopCompletionSound() = CompletionSound.stop()
 
-        const val PROCESS_EXIT_CODE_KEY = "process_exit_code"
-        const val PROCESS_PREVIOUS_LIMIT_KEY = "process_previous_limit"
-        const val PROCESS_LOWERED_LIMIT_KEY = "process_lowered_limit"
+        /** Set when the system ended the patcher in the middle of the run. */
+        const val PROCESS_KILLED_KEY = "process_killed"
         const val PROCESS_FAILURE_MESSAGE_KEY = "process_failure_message"
+
+        private const val RUNTIME_JVM = "jvm"
+        private const val RUNTIME_APP = "app"
 
         const val LOG_WORKER_PREFIX_STARTED = "Patching started at"
         const val LOG_WORKER_PREFIX_SUCCEEDED = "Patching succeeded:"
@@ -658,7 +612,6 @@ class PatcherWorker(
         const val LOG_WORKER_FIELD_MANAGER = "manager"
         const val LOG_WORKER_FIELD_PATCHER = "patcher"
         const val LOG_WORKER_FIELD_NATIVE_LIBS = "nativeLibs"
-        const val LOG_PROCESS_PREFIX_COROUTINE_HEAP = "App memory limit:"
         const val LOG_WORKER_FIELD_SIZE = "size"
         const val LOG_WORKER_FIELD_MEMORY_LIMIT = "memoryLimit"
         const val LOG_WORKER_FIELD_ELAPSED = "elapsed"
