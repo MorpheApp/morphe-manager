@@ -62,21 +62,11 @@ class PatcherJvms(
     private suspend fun isEnabled() = installation.isAvailable && prefs.useJvmRuntime.get()
 
     /**
-     * Unpacks the JVM in the background, so the first run after the app was installed or updated
-     * does not wait for it.
-     */
-    fun unpackAhead() = scope.launch {
-        if (!isEnabled()) return@launch
-        try {
-            installation.install()
-        } catch (e: JvmUnavailableException) {
-            Log.w(tag, "Could not unpack the patcher JVM ahead of a run", e)
-        }
-    }
-
-    /**
      * Starts a JVM for the run the user is setting up, which loads the enabled patch bundles while it
-     * waits. One that is not used within [AHEAD_LIFETIME] is ended, as it holds memory for nothing.
+     * waits. Unpacks the JVM first after an install or update, which takes a few seconds that the
+     * user spends picking the APK and patches. Not done when the app starts, as writing the files
+     * then held up its first frames. One that is not used within [AHEAD_LIFETIME] is ended, as it
+     * holds memory for nothing.
      */
     fun startAhead() = scope.launch {
         if (!isEnabled()) return@launch
