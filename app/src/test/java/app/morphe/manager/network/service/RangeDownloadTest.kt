@@ -12,6 +12,7 @@ import io.ktor.client.request.url
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import java.io.File
+import java.io.IOException
 import java.net.InetSocketAddress
 import java.nio.file.Files
 import java.util.Collections
@@ -19,12 +20,13 @@ import kotlin.random.Random
 import kotlin.test.AfterTest
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
-import kotlin.test.assertTrue
+import kotlin.test.assertFailsWith
 
 class RangeDownloadTest {
 
     private val payload = Random(42).nextBytes(3 * 1024 * 1024)
     private val tempDir: File = Files.createTempDirectory("range-download-test").toFile()
+    private val target = tempDir.resolve("patches.jar.tmp")
     private val server = HttpServer.create(InetSocketAddress("127.0.0.1", 0), 0)
     private val client = HttpClient(OkHttp)
 
@@ -35,8 +37,11 @@ class RangeDownloadTest {
         tempDir.deleteRecursively()
     }
 
-    private fun serve(shortOnce: Boolean): String {
-        val shortenedEnds = Collections.synchronizedSet(mutableSetOf<Long>())
+    /**
+     * Serves [payload] in ranges, answering a request for `start-end` with the part [served]
+     * picks for it, which a well-behaved host makes the range itself.
+     */
+    private fun serve(served: (start: Long, end: Long) -> LongRange): String {
         server.createContext("/patches.mpp") { exchange ->
             exchange.responseHeaders.add("Accept-Ranges", "bytes")
             if (exchange.requestMethod == "HEAD") {
@@ -45,38 +50,55 @@ class RangeDownloadTest {
                 exchange.close()
                 return@createContext
             }
-            val range = exchange.requestHeaders.getFirst("Range")!!.removePrefix("bytes=").split('-')
-            val start = range[0].toLong()
-            val end = range[1].toLong()
-            val shorten = end - start > 1 && (!shortOnce || shortenedEnds.add(end))
-            val last = if (shorten) start + (end - start) / 2 else end
-            exchange.responseHeaders.add("Content-Range", "bytes $start-$last/${payload.size}")
-            exchange.sendResponseHeaders(206, last - start + 1)
-            exchange.responseBody.use { it.write(payload, start.toInt(), (last - start + 1).toInt()) }
+            val (start, end) = exchange.requestHeaders.getFirst("Range")!!
+                .removePrefix("bytes=").split('-').map(String::toLong)
+            val part = served(start, end)
+            val length = part.last - part.first + 1
+            exchange.responseHeaders.add("Content-Range", "bytes ${part.first}-${part.last}/${payload.size}")
+            exchange.sendResponseHeaders(206, length)
+            exchange.responseBody.use { it.write(payload, part.first.toInt(), length.toInt()) }
         }
         server.start()
         return "http://127.0.0.1:${server.address.port}/patches.mpp"
     }
 
+    private suspend fun download(url: String) =
+        HttpService(Json, client).downloadToFile(saveLocation = target, builder = { url(url) })
+
     @Test
     fun `a short range response is resumed instead of leaving a hole`() = runBlocking {
-        val url = serve(shortOnce = true)
-        val target = tempDir.resolve("patches.jar.tmp")
+        val shortenedEnds = Collections.synchronizedSet(mutableSetOf<Long>())
+        val url = serve { start, end ->
+            if (shortenedEnds.add(end)) start..start + (end - start) / 2 else start..end
+        }
 
-        HttpService(Json, client).downloadToFile(saveLocation = target, builder = { url(url) })
+        download(url)
 
         assertContentEquals(payload, target.readBytes())
     }
 
     @Test
-    fun `a server that keeps answering short never yields a file with holes`() = runBlocking {
-        val url = serve(shortOnce = false)
-        val target = tempDir.resolve("patches.jar.tmp")
+    fun `a host that caps every response still serves the whole file`() = runBlocking {
+        val url = serve { start, end -> start..minOf(end, start + 64 * 1024 - 1) }
 
-        val result = runCatching {
-            HttpService(Json, client).downloadToFile(saveLocation = target, builder = { url(url) })
-        }
+        download(url)
 
-        assertTrue(result.isFailure || payload.contentEquals(target.readBytes()))
+        assertContentEquals(payload, target.readBytes())
+    }
+
+    @Test
+    fun `bytes past the requested range are left to the chunk they belong to`() = runBlocking {
+        val url = serve { start, _ -> start..payload.lastIndex.toLong() }
+
+        download(url)
+
+        assertContentEquals(payload, target.readBytes())
+    }
+
+    @Test
+    fun `a part served from another offset fails the download`() {
+        val url = serve { start, end -> 0..end - start }
+
+        assertFailsWith<IOException> { runBlocking { download(url) } }
     }
 }
