@@ -14,6 +14,8 @@ pipe.
 
 - **Heap pointer tagging**: HotSpot keeps flags in the top bits of pointers, and bionic aborts on
   free. `jvm_launcher.cpp` turns tagging off for the `:patcher` process.
+- **Dumpable**: a release build starts `:patcher` as not dumpable, which makes `/proc/self/io`
+  unreadable and leaves the I/O graph empty. The launcher marks the process dumpable again.
 - **Linker namespace**: the app's namespace does not search the runtime's `lib/`, so
   `JvmInstallation.PRELOAD` loads the libraries that others link against by full path.
 - **`ManagerApplication.onCreate` runs in `:patcher` too**, and returns right away there.

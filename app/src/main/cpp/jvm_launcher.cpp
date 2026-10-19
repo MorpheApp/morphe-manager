@@ -8,6 +8,7 @@
 #include <jni.h>
 #include <malloc.h>
 #include <pthread.h>
+#include <sys/prctl.h>
 #include <unistd.h>
 
 #include <cstdarg>
@@ -71,6 +72,10 @@ void *runJvm(void *data) {
 
     // HotSpot keeps flags in the top bits of native pointers, which a tagged heap rejects on free
     mallopt(M_BIONIC_SET_HEAP_TAGGING_LEVEL, M_HEAP_TAGGING_LEVEL_NONE);
+
+    // A release build starts the process as not dumpable, which hands /proc/self over to root, and
+    // the I/O accounting of the run in /proc/self/io is then out of reach of the process itself
+    prctl(PR_SET_DUMPABLE, 1);
 
     void *handle = dlopen(launch->libjvm.c_str(), RTLD_NOW | RTLD_GLOBAL);
     if (handle == nullptr) {
