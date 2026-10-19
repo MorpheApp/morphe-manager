@@ -36,7 +36,21 @@ val hostJar = tasks.register<Jar>("hostJar") {
     from(sourceSets.main.map { it.output })
     from(configurations.runtimeClasspath.map { classpath -> classpath.map { if (it.isDirectory) it else zipTree(it) } })
     // Signatures of the merged libraries no longer match, and the JVM would reject the archive over them
-    exclude("META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA", "META-INF/versions/*/module-info.class", "module-info.class")
+    exclude("META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA", "module-info.class")
+    // The archive is not marked multi-release, so the JVM never reads the classes kept for other releases
+    exclude("META-INF/versions/**")
+    // What the app's APK leaves out of the same libraries, see its packaging excludes
+    exclude(
+        "META-INF/*.version",
+        "DebugProbesKt.bin",
+        "smali.properties",
+        "baksmali.properties",
+        "org/bouncycastle/pqc/**/*.properties",
+        "org/bouncycastle/x509/**/*.properties",
+        "org/antlr/codegen/**",
+        "org/antlr/tool/**",
+        "com/android/tools/smali/smali/*.tokens"
+    )
 }
 
 // The app consumes the archive through this, so it is rebuilt whenever anything in it changes
