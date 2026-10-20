@@ -95,7 +95,7 @@ abstract class ShrinkJarTask : DefaultTask() {
                 appendLine("-injars ${jar.quoted()}($filter)")
                 appendLine("-outjars ${output.quoted()}")
                 // Each module apart, as ProGuard expects the path of a class to follow its name
-                jdkClasses.listFiles()!!.sorted().forEach { appendLine("-libraryjars ${it.quoted()}(**.class,!module-info.class)") }
+                jdkClasses.listFiles()!!.sorted().forEach { appendLine("-libraryjars ${it.quoted()}(!module-info.class,**.class)") }
                 (rules.files + libraryRules.listFiles()!!.sorted()).forEach { appendLine("-include ${it.quoted()}") }
             }
         )

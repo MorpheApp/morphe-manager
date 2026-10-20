@@ -65,6 +65,10 @@ val hostJar = tasks.register<Jar>("hostJar") {
         "org/antlr/tool/**",
         "com/android/tools/smali/smali/*.tokens"
     )
+    // The Android frameworks of ARSCLib, which the app's APK carries already. JvmInstallation adds
+    // them back from there as it unpacks the host. Left out before shrinking, too, as ProGuard
+    // would repack them as archives of their own.
+    exclude("frameworks/**")
 }
 
 // The libraries of the host take up most of it, and patching reaches only some of them

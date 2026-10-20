@@ -44,6 +44,9 @@ The build is pinned by SHA-256 in `app/build.gradle.kts`.
   libraries ship in `META-INF/proguard`. Kotlin reflection is left out: neither the patcher
   nor the patches use more of it than the standard library has. A new library a patch calls
   into has to be kept in `host-rules.pro` as well as in the app's rules.
+- The host jar leaves out the Android frameworks of ARSCLib (`frameworks/android/*.apk`), which
+  the APK carries for patching inside the app. `JvmInstallation` copies them from the APK into
+  the host jar as it unpacks it, and the run falls back to the app if there are none.
 - The 32-bit ARM build only ships the client VM (`lib/client`), the others the server VM.
 
 - The build's own classes are relinked (`jimage extract`, `jmod`, `jlink`), not swapped for

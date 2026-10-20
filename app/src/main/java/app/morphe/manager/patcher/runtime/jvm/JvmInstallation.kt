@@ -20,7 +20,11 @@ import org.tukaani.xz.XZInputStream
 import java.io.File
 import java.io.IOException
 import java.io.RandomAccessFile
+import java.util.zip.CRC32
+import java.util.zip.ZipEntry
+import java.util.zip.ZipFile
 import java.util.zip.ZipInputStream
+import java.util.zip.ZipOutputStream
 
 /**
  * The JVM the app ships in its assets for patching, unpacked to storage the first time a run
@@ -124,10 +128,38 @@ class JvmInstallation(private val app: Application) {
         }
     }
 
+    // The Android frameworks ARSCLib reads as resources are left out of the host by the build, as
+    // the APK carries the very same files for patching inside the app. They are taken from it here.
     private fun unpackHost(hostJar: File) {
         val staging = File(hostJar.path + STAGING_SUFFIX)
-        unpackXz(HOST_ARCHIVE, staging)
+        ZipOutputStream(staging.outputStream().buffered()).use { jar ->
+            ZipInputStream(XZInputStream(app.assets.open("$ASSETS_DIR/$HOST_ARCHIVE").buffered())).use { host ->
+                generateSequence { host.nextEntry }.filter { !it.isDirectory }.forEach { entry ->
+                    jar.writeStored(entry.name, host.readBytes())
+                }
+            }
+
+            ZipFile(app.applicationInfo.sourceDir).use { apk ->
+                val frameworks = apk.entries().asSequence()
+                    .filter { !it.isDirectory && it.name.startsWith(FRAMEWORKS_DIR) }
+                    .toList()
+                if (frameworks.isEmpty()) throw IOException("The app ships no Android frameworks for the patcher host")
+                frameworks.forEach { entry -> jar.writeStored(entry.name, apk.getInputStream(entry).use { it.readBytes() }) }
+            }
+        }
         if (!staging.renameTo(hostJar)) throw IOException("Could not move the patcher host into $hostJar")
+    }
+
+    // Stored like the host ships, so the JVM reads its classes without inflating them
+    private fun ZipOutputStream.writeStored(name: String, content: ByteArray) {
+        putNextEntry(ZipEntry(name).apply {
+            method = ZipEntry.STORED
+            size = content.size.toLong()
+            compressedSize = content.size.toLong()
+            crc = CRC32().apply { update(content) }.value
+        })
+        write(content)
+        closeEntry()
     }
 
     class Installed(val home: File, val hostJar: File) {
@@ -149,6 +181,7 @@ class JvmInstallation(private val app: Application) {
         const val DELTA_SUFFIX = ".modules.delta.xz"
         const val IMAGE_PATH = "lib/modules"
         const val BASE_SUFFIX = ".base"
+        const val FRAMEWORKS_DIR = "frameworks/"
 
         val VMS = listOf("server", "client")
 
