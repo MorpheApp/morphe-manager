@@ -163,7 +163,7 @@ class JvmInstallation(private val app: Application) {
     }
 
     class Installed(val home: File, val hostJar: File) {
-        /** The VM the runtime ships, the server one where there is one, as the 32-bit ARM one only has the client one. */
+        /** The VM the runtime ships, the server one where there is one, the client one otherwise. */
         val libjvm
             get() = VMS.map { home.resolve("lib/$it/libjvm.so") }.firstOrNull { it.isFile }
                 ?: throw JvmUnavailableException("The patcher JVM ships no VM")

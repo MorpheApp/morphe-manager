@@ -47,13 +47,13 @@ The build is pinned by SHA-256 in `app/build.gradle.kts`.
 - The host jar leaves out the Android frameworks of ARSCLib (`frameworks/android/*.apk`), which
   the APK carries for patching inside the app. `JvmInstallation` copies them from the APK into
   the host jar as it unpacks it, and the run falls back to the app if there are none.
-- The 32-bit ARM build only ships the client VM (`lib/client`), the others the server VM.
+- Every build ships the server VM (`lib/server`), the 32-bit ARM one included.
 
 - The build's own classes are relinked (`jimage extract`, `jmod`, `jlink`), not swapped for
   another JDK's, because the Android build patches some of them.
 - `java.base` is packed last with `--hash-modules`, as the hashes it carries no longer match.
   The pattern avoids `*` and `?`, which the JDK launchers on Windows expand as file names.
-- The JDK that links has to be the same feature release, 21.
+- The JDK that links has to be the same feature release, 25.
 - The `legal/` notices of every linked module go into the archive, as the GPL requires them to
   travel with the binaries. The license itself is listed in `app/aboutlibraries`, since
   AboutLibraries only finds Gradle dependencies on its own.

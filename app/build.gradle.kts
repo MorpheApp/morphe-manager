@@ -177,8 +177,8 @@ val embeddedJvmModules = listOf(
 )
 
 /**
- * What of the build the linked modules need, its native libraries above all. The 64 bit builds
- * ship the server VM, the 32-bit ARM one only the client VM.
+ * What of the build the linked modules need, its native libraries above all. Every build ships
+ * the server VM, the 32-bit ARM one included.
  */
 val embeddedJvmFiles = listOf(
     "lib/*/libjvm.so",
