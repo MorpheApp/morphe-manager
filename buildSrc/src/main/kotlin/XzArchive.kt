@@ -42,3 +42,10 @@ internal fun writeXzArchive(archive: File, entries: Sequence<Pair<String, () -> 
         }
     }
 }
+
+/** Compresses [content] with xz on its own, for a file the app reads as one stream. */
+internal fun writeXzFile(file: File, content: ByteArray) {
+    file.parentFile.mkdirs()
+    val options = LZMA2Options(LZMA2Options.PRESET_MAX).apply { dictSize = DICTIONARY_SIZE }
+    XZOutputStream(file.outputStream().buffered(), options).use { it.write(content) }
+}

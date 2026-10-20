@@ -28,7 +28,8 @@ import javax.inject.Inject
 /**
  * Turns an Android build of the JVM into the runtime the app ships for one ABI: the modules the
  * patcher needs linked into a new image, next to the native libraries and configuration of the
- * build, packed into one archive for the app's assets, see [writeXzArchive].
+ * build, packed into one archive for the app's assets, see [writeXzArchive]. The image is left out
+ * of the archive, as [EmbeddedJvmAssetsTask] ships the images of all ABIs as one.
  *
  * The build ships every module of the JDK, most of which patching never touches. Its classes are
  * relinked rather than replaced with those of another JDK, as an Android build carries changes of
@@ -64,6 +65,10 @@ abstract class PrepareEmbeddedJvmTask : DefaultTask() {
 
     @get:OutputFile
     abstract val outputArchive: RegularFileProperty
+
+    /** The linked image, lib/modules of the runtime. */
+    @get:OutputFile
+    abstract val outputImage: RegularFileProperty
 
     @get:Inject
     abstract val archives: ArchiveOperations
@@ -125,9 +130,11 @@ abstract class PrepareEmbeddedJvmTask : DefaultTask() {
         // The license notices of every module the link took in, which the GPL has go with the binaries
         val legal = linkedModules(linked.resolve("release")).map { "legal/$it" }
 
+        linked.resolve(IMAGE_PATH).copyTo(outputImage.get().asFile, overwrite = true)
+
         val image = work.resolve("image")
         fileSystem.copy {
-            from(linked) { include("lib/modules", "release") }
+            from(linked) { include("release") }
             from(build) { (runtimeFiles.get() + legal).forEach { include(it, "$it/**") } }
             into(image)
         }
@@ -198,5 +205,6 @@ abstract class PrepareEmbeddedJvmTask : DefaultTask() {
     private companion object {
         const val JAVA_BASE = "java.base"
         const val RELEASE_MODULES = "MODULES="
+        const val IMAGE_PATH = "lib/modules"
     }
 }

@@ -27,6 +27,20 @@ dependencies {
     testImplementation(libs.kotlin.test.junit)
 }
 
+// The full Kotlin reflection, which neither the patcher nor patches use, is the largest library
+// the host would ship. Without it, Kotlin falls back to the reflection of its standard library.
+configurations.runtimeClasspath {
+    exclude(group = "org.jetbrains.kotlin", module = "kotlin-reflect")
+}
+
+val proguard: Configuration = configurations.create("proguard") {
+    isCanBeConsumed = false
+}
+
+dependencies {
+    proguard(libs.proguard)
+}
+
 // Everything the embedded JVM runs, in one archive the app ships beside the runtime
 val hostJar = tasks.register<Jar>("hostJar") {
     group = "build"
@@ -53,9 +67,23 @@ val hostJar = tasks.register<Jar>("hostJar") {
     )
 }
 
+// The libraries of the host take up most of it, and patching reaches only some of them
+val shrunkHostJar = tasks.register<ShrinkJarTask>("shrinkHostJar") {
+    group = "build"
+    description = "Shrinks the patcher host to what it and the patches it runs can reach."
+    inputJar.set(hostJar.flatMap { it.archiveFile })
+    rules.from("host-rules.pro")
+    // The rules are read before shrinking, and the build information only matters to Maven
+    excludes.addAll("META-INF/proguard/**", "META-INF/com.android.tools/**", "META-INF/maven/**")
+    // The JDK the embedded JVM is built from, see embeddedJvms of the app
+    jdk.set(javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(25)) })
+    proguardClasspath.from(proguard)
+    outputJar.set(layout.buildDirectory.file("libs/${project.name}-host-shrunk.jar"))
+}
+
 // The app consumes the archive through this, so it is rebuilt whenever anything in it changes
 configurations.create("hostJar") {
     isCanBeConsumed = true
     isCanBeResolved = false
-    outgoing.artifact(hostJar)
+    outgoing.artifact(shrunkHostJar.flatMap { it.outputJar })
 }

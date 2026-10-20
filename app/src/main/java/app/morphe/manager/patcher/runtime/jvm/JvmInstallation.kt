@@ -19,6 +19,7 @@ import kotlinx.coroutines.withContext
 import org.tukaani.xz.XZInputStream
 import java.io.File
 import java.io.IOException
+import java.io.RandomAccessFile
 import java.util.zip.ZipInputStream
 
 /**
@@ -27,7 +28,8 @@ import java.util.zip.ZipInputStream
  *
  * The runtime is unpacked once per runtime the app ships. The patcher host is part of the app's
  * own code and is unpacked once per install of the app. Both ship compressed with xz, which
- * takes a few seconds to undo on a phone.
+ * takes a few seconds to undo on a phone. The image of the runtime, its lib/modules, ships once
+ * for all ABIs, see [unpackImage].
  */
 class JvmInstallation(private val app: Application) {
     /**
@@ -88,15 +90,43 @@ class JvmInstallation(private val app: Application) {
             }
         }
 
+        unpackImage(abi, staging.resolve(IMAGE_PATH))
+
         if (!staging.renameTo(home)) throw IOException("Could not move the runtime into $home")
         Log.i(tag, "Unpacked the patcher JVM for $abi")
     }
 
+    // The app ships one image for all ABIs, and for each whose image differs the delta to it
+    private fun unpackImage(abi: String, image: File) {
+        image.parentFile?.mkdirs()
+        val delta = "$abi$DELTA_SUFFIX"
+        if (app.assets.list(ASSETS_DIR)?.contains(delta) != true) {
+            unpackXz(IMAGE_ASSET, image)
+            return
+        }
+
+        val base = File(image.path + BASE_SUFFIX)
+        try {
+            unpackXz(IMAGE_ASSET, base)
+            RandomAccessFile(base, "r").use { baseImage ->
+                XZInputStream(app.assets.open("$ASSETS_DIR/$delta").buffered()).use { input ->
+                    image.outputStream().buffered().use { JvmImageDelta.apply(baseImage, input, it) }
+                }
+            }
+        } finally {
+            base.delete()
+        }
+    }
+
+    private fun unpackXz(asset: String, target: File) {
+        XZInputStream(app.assets.open("$ASSETS_DIR/$asset").buffered()).use { input ->
+            target.outputStream().use { input.copyTo(it) }
+        }
+    }
+
     private fun unpackHost(hostJar: File) {
         val staging = File(hostJar.path + STAGING_SUFFIX)
-        XZInputStream(app.assets.open("$ASSETS_DIR/$HOST_ARCHIVE").buffered()).use { input ->
-            staging.outputStream().use { input.copyTo(it) }
-        }
+        unpackXz(HOST_ARCHIVE, staging)
         if (!staging.renameTo(hostJar)) throw IOException("Could not move the patcher host into $hostJar")
     }
 
@@ -115,6 +145,10 @@ class JvmInstallation(private val app: Application) {
         const val ASSETS_DIR = "jvm"
         const val HOST_ARCHIVE = "patcher-host.jar.xz"
         const val STAGING_SUFFIX = ".staging"
+        const val IMAGE_ASSET = "modules.xz"
+        const val DELTA_SUFFIX = ".modules.delta.xz"
+        const val IMAGE_PATH = "lib/modules"
+        const val BASE_SUFFIX = ".base"
 
         val VMS = listOf("server", "client")
 

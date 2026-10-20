@@ -200,6 +200,7 @@ val embeddedJvmTasks = embeddedJvms.map { (abi, build) ->
         jdk.set(javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(25)) })
         downloadCache.set(File(gradle.gradleUserHomeDir, "caches/morphe-embedded-jvm"))
         outputArchive.set(layout.buildDirectory.file("intermediates/embeddedJvm/$abi.zip.xz"))
+        outputImage.set(layout.buildDirectory.file("intermediates/embeddedJvm/$abi.modules"))
     }
 }
 
@@ -214,7 +215,9 @@ val embeddedJvmId = (embeddedJvms.values.map { build -> build.second } + embedde
 val embeddedJvmAssets = tasks.register<EmbeddedJvmAssetsTask>("embeddedJvmAssets") {
     group = "build"
     description = "Lays out the embedded JVM runtimes and the patcher host as assets."
-    runtimes.from(embeddedJvmTasks)
+    runtimes.from(embeddedJvmTasks.map { task -> task.flatMap { it.outputArchive } })
+    images.from(embeddedJvmTasks.map { task -> task.flatMap { it.outputImage } })
+    baseAbi.set(embeddedJvms.keys.first())
     hostJar.from(patcherHost)
     outputDirectory.set(layout.buildDirectory.dir("generated/embeddedJvm"))
 }
