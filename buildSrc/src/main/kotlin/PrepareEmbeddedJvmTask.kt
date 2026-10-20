@@ -19,6 +19,10 @@ import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 import org.gradle.jvm.toolchain.JavaLauncher
 import org.gradle.process.ExecOperations
+import org.tukaani.xz.ARM64Options
+import org.tukaani.xz.ARMOptions
+import org.tukaani.xz.FilterOptions
+import org.tukaani.xz.X86Options
 import org.tukaani.xz.XZInputStream
 import java.io.File
 import java.net.URI
@@ -142,8 +146,18 @@ abstract class PrepareEmbeddedJvmTask : DefaultTask() {
             outputArchive.get().asFile,
             image.walkTopDown().filter { it.isFile }.map { file ->
                 file.relativeTo(image).invariantSeparatorsPath to { file.readBytes() }
-            }
+            },
+            bcjFor(targetPlatform.get())
         )
+    }
+
+    // The native libraries take up most of the archive. For 32-bit ARM, the ARM converter packs
+    // the build tighter than the Thumb one.
+    private fun bcjFor(platform: String): FilterOptions = when (platform.substringAfter('-')) {
+        "aarch64" -> ARM64Options()
+        "arm" -> ARMOptions()
+        "amd64" -> X86Options()
+        else -> throw GradleException("No branch converter for $platform")
     }
 
     private fun download(): File {
