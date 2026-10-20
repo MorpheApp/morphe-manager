@@ -31,4 +31,6 @@
 # Their methods are signature polymorphic, so a call names a signature they do not declare
 -dontwarn java.lang.invoke.VarHandle
 -dontwarn java.lang.invoke.MethodHandle
--dontnote
+# Notes only report what the keeps above decide on purpose. The pattern is needed, as a bare
+# -dontnote next to the libraries' own, which name their classes, silences nothing
+-dontnote **
