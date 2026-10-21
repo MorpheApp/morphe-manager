@@ -17,6 +17,9 @@ to preload bundles, start a run or cancel it, and `HostEvent` for what the run r
   free. `jvm_launcher.cpp` turns tagging off for the process as it starts the JVM.
 - **Dumpable**: a release build starts the app as not dumpable, which makes `/proc/self/io`
   unreadable and leaves the I/O graph empty. The launcher marks the process dumpable again.
+- **32-bit address space**: the heap is reserved in one piece, and the app's process has
+  already spent much of its 4G. `PatcherJvm` sizes the heap to the largest block still free,
+  less room for a code cache capped at 64M, and leaves the run to ART below 512M.
 - **Linker namespace**: the app's namespace does not search the runtime's `lib/`, so
   `JvmInstallation.PRELOAD` loads the libraries that others link against by full path.
 - **One JVM per process**: HotSpot cannot be stopped or started again. It starts with the first

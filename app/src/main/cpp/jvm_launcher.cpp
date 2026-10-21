@@ -8,6 +8,7 @@
 #include <jni.h>
 #include <malloc.h>
 #include <pthread.h>
+#include <sys/mman.h>
 #include <sys/prctl.h>
 #include <unistd.h>
 
@@ -77,6 +78,9 @@ constexpr int LOAD_FAILED = 1;
 constexpr int MAIN_MISSING = 2;
 
 constexpr size_t JVM_THREAD_STACK_SIZE = 8UL * 1024 * 1024;
+
+constexpr size_t MEBIBYTE = 1024UL * 1024;
+constexpr jint RESERVATION_STEP_MB = 64;
 
 // Creates the JVM and finds the main method, returning 0 or why it could not
 int createJvm(Launch *launch, JNIEnv **env, jclass *mainClass, jmethodID *main) {
@@ -191,4 +195,19 @@ Java_app_morphe_manager_patcher_runtime_jvm_EmbeddedJvm_startJvm(
         return LOAD_FAILED;
     }
     return started.get();
+}
+
+// The largest block of address space up to limitMb that a single reservation gets, in steps of
+// RESERVATION_STEP_MB, or 0. The block is handed back at once, as the JVM reserves it itself
+extern "C" JNIEXPORT jint JNICALL
+Java_app_morphe_manager_patcher_runtime_jvm_EmbeddedJvm_largestReservationMb(JNIEnv *, jobject, jint limitMb) {
+    for (jint mb = limitMb; mb > 0; mb -= RESERVATION_STEP_MB) {
+        const size_t size = static_cast<size_t>(mb) * MEBIBYTE;
+        void *block = mmap(nullptr, size, PROT_NONE, MAP_PRIVATE | MAP_ANONYMOUS | MAP_NORESERVE, -1, 0);
+        if (block != MAP_FAILED) {
+            munmap(block, size);
+            return mb;
+        }
+    }
+    return 0;
 }

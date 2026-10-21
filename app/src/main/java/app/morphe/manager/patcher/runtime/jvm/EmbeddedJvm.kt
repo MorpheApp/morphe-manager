@@ -29,6 +29,12 @@ internal object EmbeddedJvm {
         launch.args.toTypedArray()
     )
 
+    /**
+     * The largest block of address space up to [limitMb] that one reservation gets right now, in
+     * megabytes, or 0. HotSpot reserves its heap in one piece.
+     */
+    external fun largestReservationMb(limitMb: Int): Int
+
     private external fun startJvm(
         libjvm: String,
         preload: Array<String>,

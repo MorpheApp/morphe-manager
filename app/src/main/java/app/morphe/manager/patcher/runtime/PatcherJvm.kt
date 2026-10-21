@@ -63,13 +63,19 @@ class PatcherJvm(
 
     private val errorFile = app.filesDir.resolve(ERROR_FILE)
 
-    /** The heap the JVM gets on this device: a third of its RAM, within bounds. */
+    /**
+     * The heap the JVM gets on this device: a third of its RAM, within bounds. A 32-bit process
+     * gets no more than its address space still has in one piece.
+     */
     val heapLimitMb by lazy {
         val memoryInfo = ActivityManager.MemoryInfo()
         app.getSystemService(ActivityManager::class.java).getMemoryInfo(memoryInfo)
         val limit = (bytesToMebibytes(memoryInfo.totalMem) / 3).toInt()
             .coerceIn(HEAP_LIMIT_MINIMUM_MB, HEAP_LIMIT_MAXIMUM_MB)
-        if (Process.is64Bit()) limit else limit.coerceAtMost(HEAP_LIMIT_32_BIT_MB)
+        if (Process.is64Bit()) return@lazy limit
+
+        val reservable = EmbeddedJvm.largestReservationMb(HEAP_LIMIT_32_BIT_MB + RESERVATION_MARGIN_32_BIT_MB)
+        minOf(limit, HEAP_LIMIT_32_BIT_MB, reservable - RESERVATION_MARGIN_32_BIT_MB)
     }
 
     private suspend fun isEnabled() = installation.isAvailable && prefs.useJvmRuntime.get()
@@ -182,6 +188,10 @@ class PatcherJvm(
     private suspend fun host(): Host {
         host?.let { return it }
         startFailure?.let { throw it }
+        if (heapLimitMb < HEAP_LIMIT_USABLE_MB) {
+            throw JvmUnavailableException("The patcher JVM would get a heap of only ${heapLimitMb}MB")
+                .also { startFailure = it }
+        }
 
         val installed = installation.install()
         val debugOptions = debugOptions()
@@ -221,7 +231,9 @@ class PatcherJvm(
         // 8 byte object headers instead of 12. A run keeps millions of small objects alive, and
         // smaller ones leave the collector and the caches less to do. A 32-bit JVM does not
         // know the flag and will not start with it.
-        "-XX:+UseCompactObjectHeaders".takeIf { Process.is64Bit() }
+        "-XX:+UseCompactObjectHeaders".takeIf { Process.is64Bit() },
+        // The server VM would reserve 240M for compiled code, address space a 32-bit heap needs more
+        "-XX:ReservedCodeCacheSize=${CODE_CACHE_32_BIT_MB}m".takeUnless { Process.is64Bit() }
     )
 
     /**
@@ -267,6 +279,13 @@ class PatcherJvm(
         // The heap is reserved in one piece, which a 32 bit process seldom finds much more of in
         // its address space. A reservation that fails leaves the run to ART
         const val HEAP_LIMIT_32_BIT_MB = 1024
+        const val CODE_CACHE_32_BIT_MB = 64
+
+        // Address space left beside the heap for the code cache and metaspace, reserved apart from it
+        const val RESERVATION_MARGIN_32_BIT_MB = CODE_CACHE_32_BIT_MB + 64
+
+        // A heap below this is no bigger than ART gives a 32-bit app, so ART patches instead
+        const val HEAP_LIMIT_USABLE_MB = 512
 
         // Long enough to pick an APK and the patches, short enough not to hold memory long for nothing
         val AHEAD_LIFETIME = 5.minutes
