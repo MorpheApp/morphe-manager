@@ -603,7 +603,7 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="patcher_field_output_size">Output size</string>
     <!-- How long patching took -->
     <string name="patcher_field_time">Time</string>
-    <!-- Average and peak memory the patcher process held while it ran -->
+    <!-- Average and peak heap the patcher held while it ran -->
     <string name="patcher_field_memory_average">Memory average</string>
     <string name="patcher_field_memory_max">Memory max</string>
     <!-- Fastest read or write rate reached while patching, in data per second -->
@@ -724,7 +724,6 @@ Uninstalling will permanently erase all app data"</string>
     <string name="failed_to_execute_patch">Failed to apply %s</string>
     <string name="patched_app_save_failed_toast">Failed to save patched app</string>
     <string name="plugin_activity_dialog_body">User interaction is required in order to proceed with this plugin</string>
-    <string name="patcher_process_killed_message">The system stopped the patcher before it finished, usually to free memory. Close other apps and try again</string>
     <string name="patcher_heap_exhausted_message">The patcher ran out of memory with a %1$d MB heap. This app is too large for the selected patches. Try patching with fewer patch sources, or select fewer patches</string>
 
     <string name="install_app_success">Installed successfully</string>
@@ -1130,9 +1129,9 @@ Details: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Battery optimization</string>
     <string name="settings_system_battery_optimization_description">Keeps the patcher running when the app is minimized</string>
-    <string name="settings_system_process_runtime">Process runtime</string>
-    <string name="settings_system_jvm_runtime_enable">Separate patcher process</string>
-    <string name="settings_system_jvm_runtime_description">Patches in a Java runtime of its own, which can use as much memory as the device spares. Turn off to patch inside Morphe</string>
+    <string name="settings_system_process_runtime">Patcher runtime</string>
+    <string name="settings_system_jvm_runtime_enable">Use embedded VM</string>
+    <string name="settings_system_jvm_runtime_description">Patches in a Java VM that Morphe carries, which can use as much memory as the device spares. Turn off to patch with the runtime of Android</string>
     <string name="settings_system_jvm_runtime_unavailable">Needs an ARM or 64-bit x86 device</string>
     <string name="settings_system_patcher_completion_sound">Completion sound</string>
     <string name="settings_system_patcher_completion_sound_description">Plays a distinct tone for success or failure when patching finishes</string>

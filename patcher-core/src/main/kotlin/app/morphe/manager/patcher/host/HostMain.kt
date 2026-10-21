@@ -13,6 +13,8 @@ import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.split.SplitPreparationEvent
 import app.morphe.patcher.patch.Patch
 import app.morphe.patcher.patch.loadPatchesFromJar
+import kotlinx.coroutines.CompletableJob
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import java.io.File
@@ -22,55 +24,83 @@ import java.io.OutputStream
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.FutureTask
 import kotlin.concurrent.thread
-import kotlin.system.exitProcess
 
 /**
- * Entry point of the JVM the app embeds for patching. The JVM is started before the run is known,
- * so it can load ahead of time while the user still picks what to patch.
+ * Entry point of the JVM the app embeds for patching. HotSpot cannot be started twice in a
+ * process, so the JVM lives as long as the app does and serves each of its runs.
  *
- * @param args The read end of a pipe the app writes the run to, followed by the patch bundles that
- *             run is likely to patch with, which are loaded while waiting for it. The run is two
- *             lines: the file the [PatchRequest] was written to, and the file the events go to,
- *             which is the write end of a pipe the app reads.
+ * @param args The read end of a pipe the app writes [HostCommand]s to, one per line.
  */
 fun main(args: Array<String>) {
-    val commandsFile = args.first()
-    val preloaded = args.drop(1).associateWith(::PreloadedBundle)
-
-    val (requestFile, eventsFile) = File(commandsFile).bufferedReader().use { reader ->
-        listOf(reader.readLine(), reader.readLine())
+    val host = Host()
+    File(args.single()).bufferedReader().useLines { lines ->
+        lines.forEach { host.handle(HostCommand.decode(it)) }
     }
-    // The app gave up on the run before handing it over
-    if (requestFile == null || eventsFile == null) exitProcess(0)
+}
 
-    val code = try {
-        HostEvents(FileOutputStream(eventsFile)).use { events ->
-            events.send(HostEvent.Started)
+/** Carries out what the app asks for. The app hands over a run only once the one before it finished. */
+private class Host {
+    // Taken by the run that follows, so a bundle is loaded ahead for one run at most
+    @Volatile
+    private var preloaded = emptyMap<String, PreloadedBundle>()
 
-            val failure = runCatching {
-                val request = Json.decodeFromString(PatchRequest.serializer(), File(requestFile).readText())
-                runBlocking {
-                    PatchPipeline(request, events.logger, events.listener) { bundle ->
-                        preloaded[bundle.patchesFile]?.take(events.logger)
-                            ?: loadPatchesFromJar(setOf(File(bundle.patchesFile)))
-                    }.run()
-                }
-            }.exceptionOrNull()
+    // Kept once completed, which a cancel then leaves as it is
+    @Volatile
+    private var run: Job? = null
 
-            events.send(HostEvent.Finished(failure?.let(HostEvent::Failure)))
+    fun handle(command: HostCommand) {
+        when (command) {
+            is HostCommand.Preload -> {
+                preloaded = command.bundles.associateWith(::PreloadedBundle)
+                // A run in progress releases what it leaves once it ends
+                if (command.bundles.isEmpty() && run?.isActive != true) releaseMemory()
+            }
+
+            is HostCommand.Run -> {
+                // Set before the thread starts, so a cancel that follows right away is not lost
+                val job = Job()
+                run = job
+                thread(name = "PatcherRun") { run(command, job) }
+            }
+
+            HostCommand.Cancel -> run?.cancel()
         }
-        0
-    } catch (_: IOException) {
-        // The app stopped reading, so there is nobody left to report to
-        1
     }
 
-    // Threads the patches left running must not keep the process, which exists for this run alone
-    exitProcess(code)
+    private fun run(command: HostCommand.Run, job: CompletableJob) {
+        val bundles = preloaded
+        preloaded = emptyMap()
+        try {
+            HostEvents(FileOutputStream(command.eventsFile)).use { events ->
+                val failure = runCatching {
+                    val request = Json.decodeFromString(PatchRequest.serializer(), File(command.requestFile).readText())
+                    runBlocking(job) {
+                        PatchPipeline(request, events.logger, events.listener) { bundle ->
+                            bundles[bundle.patchesFile]?.take(events.logger)
+                                ?: loadPatchesFromJar(setOf(File(bundle.patchesFile)))
+                        }.run()
+                    }
+                }.exceptionOrNull()
+
+                events.send(HostEvent.Finished(failure?.let(HostEvent::Failure)))
+            }
+        } catch (_: IOException) {
+            // The app stopped reading, so there is nobody left to report to
+        } finally {
+            job.complete()
+            releaseMemory()
+        }
+    }
+
+    /**
+     * Collects in full, which is when the collector shrinks the heap. A run leaves hundreds of
+     * megabytes committed that the app's process would otherwise keep until the next one.
+     */
+    private fun releaseMemory() = System.gc()
 }
 
 /**
- * The patches of a bundle, loaded on a thread of their own from the moment the JVM starts. The
+ * The patches of a bundle, loaded on a thread of their own from the moment they are asked for. The
  * file may be replaced by an update before the run, so they are only used if it is unchanged.
  */
 private class PreloadedBundle(path: String) {

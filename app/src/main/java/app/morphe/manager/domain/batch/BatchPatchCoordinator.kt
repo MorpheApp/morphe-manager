@@ -639,7 +639,7 @@ class BatchPatchCoordinator(
 
                 else -> {
                     val failure = finished?.outputData
-                        ?.getString(PatcherWorker.PROCESS_FAILURE_MESSAGE_KEY)
+                        ?.getString(PatcherWorker.FAILURE_MESSAGE_KEY)
                         ?.lineSequence()
                         ?.firstOrNull { it.isNotBlank() }
                     updateItem(index) {

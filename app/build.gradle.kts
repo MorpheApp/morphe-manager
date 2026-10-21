@@ -250,6 +250,7 @@ android {
         buildConfigField("String", "EMBEDDED_JVM_ID", "\"$embeddedJvmId\"")
 
         // The embedded JVM links against the shared C++ runtime, which the app ships alongside the launcher
+        @Suppress("UnstableApiUsage")
         externalNativeBuild {
             cmake {
                 arguments += "-DANDROID_STL=c++_shared"
@@ -358,7 +359,6 @@ android {
 
     buildFeatures {
         compose = true
-        aidl = true
         buildConfig = true
     }
 

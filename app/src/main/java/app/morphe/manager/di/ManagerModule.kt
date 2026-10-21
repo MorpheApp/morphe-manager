@@ -20,7 +20,7 @@ import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.links.AppLinksManager
 import app.morphe.manager.domain.manager.*
-import app.morphe.manager.patcher.runtime.PatcherJvms
+import app.morphe.manager.patcher.runtime.PatcherJvm
 import app.morphe.manager.patcher.runtime.jvm.JvmInstallation
 import app.morphe.manager.ui.screen.shared.ContentTranslation
 import app.morphe.manager.ui.screen.shared.UserMessages
@@ -53,5 +53,5 @@ val managerModule = module {
     singleOf(::AppLinksManager)
     singleOf(::UserMessages)
     singleOf(::JvmInstallation)
-    singleOf(::PatcherJvms)
+    singleOf(::PatcherJvm)
 }

@@ -31,7 +31,7 @@ import app.morphe.manager.domain.manager.*
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.repository.PatchBundleRepository.LocalFileCheck
 import app.morphe.manager.patcher.patch.*
-import app.morphe.manager.patcher.runtime.PatcherJvms
+import app.morphe.manager.patcher.runtime.PatcherJvm
 import app.morphe.manager.ui.model.*
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.*
@@ -88,7 +88,7 @@ class HomeViewModel(
     expertModeCopy: CopySelectionController
 ) : ViewModel(), KoinComponent {
     // Past the parameters viewModelOf takes
-    private val patcherJvms: PatcherJvms by inject()
+    private val patcherJvm: PatcherJvm by inject()
 
     /** The app list on the home screen. */
     val apps = HomeApps(
@@ -297,7 +297,7 @@ class HomeViewModel(
         compatibleVersions = compatibleVersionsFlow,
         recommendedVersions = recommendedVersionsFlow,
         expertModeCopy = expertModeCopy,
-        patcherJvms = patcherJvms
+        patcherJvm = patcherJvm
     )
 
     init {

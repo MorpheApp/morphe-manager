@@ -70,6 +70,8 @@ import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREF
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_SOURCE
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_STARTED
 import app.morphe.manager.patcher.worker.PatcherWorker.Companion.LOG_WORKER_PREFIX_SUCCEEDED
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.RUNTIME_APP
+import app.morphe.manager.patcher.worker.PatcherWorker.Companion.RUNTIME_JVM
 import app.morphe.manager.ui.model.PatchProgressSource
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.ui.screen.patcher.game.MiniGameContent
@@ -97,8 +99,7 @@ private const val SCROLL_THROTTLE_MS = 150L
 sealed interface LogItem {
     /**
      * Structured card shown at the start of patching.
-     * Aggregates data from "Patching started at …", "Runtime: …", "Process heap memory limit: …"
-     * and "Device: …" log lines.
+     * Aggregates data from "Patching started at …", "Runtime: …" and "Device: …" log lines.
      */
     data class StartBanner(
         val packageName: String,
@@ -110,7 +111,8 @@ sealed interface LogItem {
         val apkSize: String,
         val patchCount: Int,
         val isSplit: Boolean,
-        // null when using CoroutineRuntime
+        // null until the runtime line arrives
+        val runtimeName: String?,
         val runtimeMemoryLimitMb: String?,
         // device environment
         val androidVersion: String?,
@@ -124,12 +126,12 @@ sealed interface LogItem {
 
     /**
      * Structured card shown after patching succeeds.
-     * Aggregates data from "Patching succeeded: …" and "Process heap after patching: …" log lines.
+     * Aggregates data from "Patching succeeded: …" and "Heap after patching: …" log lines.
      */
     data class SuccessSummary(
         val outputSize: String,
         val elapsedSec: String,
-        // null when using CoroutineRuntime (no separate process)
+        // null when the run reported no heap
         val processHeapAverageMb: String?,
         val processHeapMaxMb: String?,
         // null on devices that expose no I/O counters to sample
@@ -152,6 +154,13 @@ private fun formatElapsed(ms: Long?): String {
     return if (minutes > 0) "${minutes}m ${seconds}s" else "${seconds}s"
 }
 
+/** What the banner calls the runtime a log line names. */
+private fun runtimeLabel(name: String) = when (name) {
+    RUNTIME_JVM -> "JVM"
+    RUNTIME_APP -> "ART"
+    else -> name
+}
+
 /**
  * Incremental state machine that converts raw log lines into display [LogItem]s.
  *
@@ -172,6 +181,7 @@ internal class LogItemAccumulator(
     private var patcherVersion: String? = null
     private var stripsNativeLibs: Boolean? = null
     private val sources = mutableListOf<PatchSourceRef>()
+    private var runtimeName: String? = null
     private var runtimeMemoryLimitMb: String? = null
     private var androidVersion: String? = null
     private var ramAvailable: String? = null
@@ -211,6 +221,7 @@ internal class LogItemAccumulator(
                 }
             }
             message.startsWith(LOG_WORKER_PREFIX_RUNTIME) -> {
+                runtimeName = message.logField(LOG_WORKER_FIELD_NAME)
                 runtimeMemoryLimitMb = message.logField(LOG_WORKER_FIELD_MEMORY_LIMIT)?.let { "${it}MB" }
                 updateStartBanner()
             }
@@ -282,6 +293,7 @@ internal class LogItemAccumulator(
         patcherVersion = null
         stripsNativeLibs = null
         sources.clear()
+        runtimeName = null
         runtimeMemoryLimitMb = null
         androidVersion = null
         ramAvailable = null
@@ -331,6 +343,7 @@ internal class LogItemAccumulator(
         apkSize = startApkSize.orEmpty(),
         patchCount = startPatchCount,
         isSplit = startIsSplit,
+        runtimeName = runtimeName,
         runtimeMemoryLimitMb = runtimeMemoryLimitMb,
         androidVersion = androidVersion,
         ramAvailable = ramAvailable,
@@ -930,13 +943,12 @@ private fun StartBannerCard(item: LogItem.StartBanner) {
         }
 
         BannerFieldRow {
-            // The heap limit only exists for the process runtime, so it rides along with the
-            // runtime name rather than taking a cell that is empty half the time
+            // The heap limit rides along with the runtime name rather than taking a cell of its own
             BannerFieldCell(
                 label = stringResource(R.string.patcher_field_runtime),
-                value = item.runtimeMemoryLimitMb
-                    ?.let { "Process $it" }
-                    ?: "Coroutine",
+                value = listOfNotNull(item.runtimeName?.let(::runtimeLabel), item.runtimeMemoryLimitMb)
+                    .joinToString(" ")
+                    .ifEmpty { "?" },
                 modifier = Modifier.weight(1f),
                 valueColor = item.runtimeMemoryLimitMb?.let { LocalAccent.current ?: MaterialTheme.colorScheme.primary }
             )

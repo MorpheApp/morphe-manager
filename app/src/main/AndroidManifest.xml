@@ -153,12 +153,6 @@
                 android:value="patching" />
         </service>
 
-        <!-- Hosts the JVM that patches, in a process of its own that ends with every run -->
-        <service
-            android:name="app.morphe.manager.patcher.runtime.jvm.PatcherService"
-            android:exported="false"
-            android:process=":patcher" />
-
         <provider
             android:name="app.morphe.manager.domain.installer.InstallerFileProvider"
             android:authorities="${applicationId}.installerfileprovider"

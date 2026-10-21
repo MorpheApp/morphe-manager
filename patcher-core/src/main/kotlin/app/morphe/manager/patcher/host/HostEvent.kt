@@ -18,11 +18,6 @@ import kotlinx.serialization.json.Json
  */
 @Serializable
 sealed interface HostEvent {
-    /** The JVM is up and runs the host, so whatever ends the run from here on is no failure to start. */
-    @Serializable
-    @SerialName("started")
-    data object Started : HostEvent
-
     @Serializable
     @SerialName("log")
     data class Log(val level: LogLevel, val message: String) : HostEvent

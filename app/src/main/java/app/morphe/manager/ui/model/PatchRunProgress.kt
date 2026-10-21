@@ -125,7 +125,7 @@ class PatchRunProgress(
     /** Heap usage samples (MB) collected every second while patching. */
     override val heapSamples = mutableStateListOf<Int>()
 
-    /** Heap limit (MB) of the patcher process, parsed from the runtime's log line. */
+    /** Heap limit (MB) of the runtime that patches, parsed from its log line. */
     override var heapLimitMb by mutableIntStateOf(0)
         private set
 

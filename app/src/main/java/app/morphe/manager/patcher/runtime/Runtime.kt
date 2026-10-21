@@ -37,7 +37,7 @@ sealed class Runtime(
     private val fs: Filesystem,
     private val patchBundlesRepo: PatchBundleRepository
 ) {
-    /** Only of use to a runtime that reads bundles in this process, see [CoroutineRuntime]. */
+    /** Only of use to a runtime that reads bundles on ART, see [CoroutineRuntime]. */
     protected val bundleLoadGuard get() = patchBundlesRepo.loadGuard
 
     /**

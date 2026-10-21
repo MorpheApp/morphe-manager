@@ -7,11 +7,11 @@ package app.morphe.manager.patcher.runtime.usage
 
 import java.io.File
 
-/** One storage throughput reading of the patcher process, in kilobytes per second. */
+/** One storage throughput reading of the process that patches, in kilobytes per second. */
 internal data class IoUsage(val readKbPerSec: Int, val writeKbPerSec: Int)
 
 /**
- * Storage throughput of the patcher process, taken from the IO accounting of its own task.
+ * Storage throughput of the process that patches, taken from the IO accounting of its own task.
  *
  * Block level counters are preferred because they are what actually reaches storage; the syscall
  * counters stand in for kernels built without task IO accounting, where the former are missing.

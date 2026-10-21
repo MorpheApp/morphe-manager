@@ -69,7 +69,7 @@ fun PatcherSettings(settingsViewModel: SettingsViewModel = koinViewModel()) {
     }
 }
 
-/** Whether patching runs in the embedded JVM, in a process of its own. */
+/** Whether patching runs in the embedded JVM. */
 @Composable
 private fun JvmRuntimeSettings(settingsViewModel: SettingsViewModel) {
     val enabled by settingsViewModel.prefs.useJvmRuntime.getAsState()

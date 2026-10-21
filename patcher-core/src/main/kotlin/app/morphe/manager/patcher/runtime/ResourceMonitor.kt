@@ -17,7 +17,7 @@ fun heapLimitMebibytes() = bytesToMebibytes(Runtime.getRuntime().maxMemory()).to
 
 /**
  * Polls the resources the patcher run consumes and reports them through the logger, which is the
- * only channel back to the app when patching happens in a process of its own.
+ * only channel back to the app when patching happens in the embedded JVM.
  */
 object ResourceMonitor {
     const val LOG_HEAP_LIMIT_PREFIX = "Heap limit:"

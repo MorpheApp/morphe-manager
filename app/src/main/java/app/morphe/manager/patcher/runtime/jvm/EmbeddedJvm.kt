@@ -6,8 +6,8 @@
 package app.morphe.manager.patcher.runtime.jvm
 
 /**
- * A HotSpot JVM started inside the calling process. HotSpot cannot be started twice in one
- * process, so the process is meant to end with the JVM.
+ * A HotSpot JVM started inside the app's process. HotSpot cannot be started twice in one process,
+ * so the JVM stays until the process ends.
  */
 internal object EmbeddedJvm {
     init {
@@ -15,20 +15,21 @@ internal object EmbeddedJvm {
     }
 
     /**
-     * Starts the JVM [launch] describes and runs its main class with [args], returning once every
-     * non-daemon thread of it ended.
+     * Starts the JVM [launch] describes and calls its main class on a thread of its own, returning
+     * once main is called.
      *
-     * @return 0 when main returned normally, otherwise non-zero.
+     * @return 0, or why the JVM did not start: a JNI_CreateJavaVM error, 1 for a library of the
+     *         runtime that did not load and 2 for a main method that is missing.
      */
-    fun run(launch: JvmLaunch, args: List<String>) = launchJvm(
+    fun start(launch: JvmLaunch) = startJvm(
         launch.libjvm,
         launch.preload.toTypedArray(),
         launch.options.toTypedArray(),
         launch.mainClass,
-        args.toTypedArray()
+        launch.args.toTypedArray()
     )
 
-    private external fun launchJvm(
+    private external fun startJvm(
         libjvm: String,
         preload: Array<String>,
         options: Array<String>,

@@ -6,7 +6,7 @@
 package app.morphe.manager.patcher.runtime
 
 /**
- * The patcher JVM could not be brought up for the run, which the app's own process can still take.
+ * The patcher JVM could not be brought up for the run, which patching on ART can still take.
  */
 class JvmUnavailableException(message: String, cause: Throwable? = null) : Exception(message, cause)
 
@@ -15,7 +15,7 @@ class JvmUnavailableException(message: String, cause: Throwable? = null) : Excep
  *
  * @param originalStackTrace The stack trace of what it failed on there.
  */
-class RemoteFailureException(val originalStackTrace: String) : Exception()
+class JvmFailureException(val originalStackTrace: String) : Exception()
 
 /**
  * The patcher ran out of the heap it was given, which no other heap the device allows would fix.
@@ -25,11 +25,3 @@ class RemoteFailureException(val originalStackTrace: String) : Exception()
  */
 class HeapExhaustedException(val heapLimitMb: Int, val originalStackTrace: String) :
     Exception("Patcher exhausted its ${heapLimitMb}MB heap")
-
-/**
- * The process of the patcher JVM ended in the middle of the run, which on a working runtime is the
- * system reclaiming its memory.
- *
- * @param reason What the system recorded about the end of the process, in words for the log.
- */
-class PatcherKilledException(val reason: String) : Exception("Patcher process ended: $reason")

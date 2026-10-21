@@ -21,7 +21,7 @@ import app.morphe.manager.patcher.patch.PatchBundle
 import java.io.File
 
 /**
- * Patches inside the app's own process, within the heap Android gives it.
+ * Patches on ART, within the heap Android gives the app's process.
  */
 class CoroutineRuntime(
     context: Context,

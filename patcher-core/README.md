@@ -2,29 +2,34 @@
 
 Everything about a patching run that does not need Android. The app runs it in one of two places:
 
-- `JvmRuntime`, the default: an embedded HotSpot 25 in the `:patcher` process of
-  `PatcherService`, with a heap of a third of the RAM (1-3 GB, at most 1 GB in a 32-bit process).
+- `JvmRuntime`, the default: an embedded HotSpot 25 inside the app's process, started by
+  `PatcherJvm`, with a heap of a third of the RAM (1-3 GB, at most 1 GB in a 32-bit process).
   Shipped for arm64-v8a, armeabi-v7a and x86_64.
 - `CoroutineRuntime`: inside the app, on ART. Used when the setting is off, on 32-bit x86, and
   when the JVM fails to start.
 
-Both run `PatchPipeline`. The JVM reports back through `HostEvent`, one JSON line per event on a
-pipe.
+Both run `PatchPipeline`. The app talks to the JVM over pipes, one JSON line each: `HostCommand`
+to preload bundles, start a run or cancel it, and `HostEvent` for what the run reports.
 
 ## Pitfalls
 
 - **Heap pointer tagging**: HotSpot keeps flags in the top bits of pointers, and bionic aborts on
-  free. `jvm_launcher.cpp` turns tagging off for the `:patcher` process.
-- **Dumpable**: a release build starts `:patcher` as not dumpable, which makes `/proc/self/io`
+  free. `jvm_launcher.cpp` turns tagging off for the process as it starts the JVM.
+- **Dumpable**: a release build starts the app as not dumpable, which makes `/proc/self/io`
   unreadable and leaves the I/O graph empty. The launcher marks the process dumpable again.
 - **Linker namespace**: the app's namespace does not search the runtime's `lib/`, so
   `JvmInstallation.PRELOAD` loads the libraries that others link against by full path.
-- **`ManagerApplication.onCreate` runs in `:patcher` too**, and returns right away there.
-  Otherwise, Firebase crashes the process.
-- **One JVM per process**: HotSpot cannot be stopped or started again. The service kills its
-  process on unbind, and every run gets a fresh one.
-- **Priority**: only the binding with `BIND_IMPORTANT` keeps `:patcher` off the slow background
-  cores.
+- **One JVM per process**: HotSpot cannot be stopped or started again. It starts with the first
+  run the user sets up and serves every run after it. A JVM that fails to start leaves the
+  runs of that process to ART.
+- **No process of its own**: some vendors stop an app's extra processes regardless of their
+  priority, so the JVM shares the process of the app and its foreground service.
+- **Memory between runs**: the host collects in full after every run and when preloaded bundles
+  are dropped, which is when G1 shrinks the heap back.
+- **Cancel**: a run cannot be killed, so `HostCommand.Cancel` cancels its coroutines. It ends at
+  the next suspension point, and the next run waits for it.
+- **Exit**: `System.exit` in the JVM ends the app, as does a crash of the JVM. The crash report
+  goes to `files/patcher-jvm-error.log` and into the log of the next run.
 
 ## The runtime in the APK
 
@@ -62,7 +67,7 @@ To change the JDK or add an ABI, edit `embeddedJvms`. `EMBEDDED_JVM_ID` changes 
 the app unpacks the runtime again.
 
 A new event of a run has to be added to `PatchingListener`, `HostEvent`, `HostMain`,
-`JvmRuntime.relay` and `ProgressReporter`.
+`PatcherJvm.relay` and `ProgressReporter`.
 
 ## Tuning and profiling
 
@@ -95,12 +100,12 @@ adb exec-out run-as app.morphe.manager.debug cat files/gc.log > gc.log
 - **CDS**: the runtime ships no archive. One can be made in three runs: one with
   `-XX:DumpLoadedClassList=<dir>/classes.lst`, one with `-Xshare:dump
   -XX:SharedClassListFile=<dir>/classes.lst -XX:SharedArchiveFile=<dir>/app.jsa` (it exits
-  after the dump), then runs with `-XX:SharedArchiveFile=<dir>/app.jsa`. The 47M archive of
+  after the dump, which ends the app too), then runs with `-XX:SharedArchiveFile=<dir>/app.jsa`. The 47M archive of
   6300 classes made a run about 2% faster, less than runs differ by on their own.
 - **CPU profile**: JFR needs `jdk.jfr` in `embeddedJvmModules` and `lib/jfr` in `embeddedJvmFiles`,
   then `-XX:StartFlightRecording=settings=profile` with
   `-XX:FlightRecorderOptions=repository=/data/user/0/app.morphe.manager.debug/files/jfr-repo`.
-  The process is ended as soon as the run reports its end, before a dump at exit gets written, so
-  the chunk in the repository is never finished. `jfr` and Mission Control refuse it, but
+  The JVM exits only with the app, which ends without a dump at exit, so the chunk in the
+  repository is never finished. `jfr` and Mission Control refuse it, but
   `jdk.jfr.consumer.EventStream.openRepository` reads what was flushed, which is all but the last
   second.
