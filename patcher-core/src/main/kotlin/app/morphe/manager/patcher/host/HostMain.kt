@@ -112,8 +112,7 @@ private fun run(
 private fun vmDescription(): String {
     fun property(name: String) = System.getProperty(name) ?: "?"
     return "Host VM: ${property("java.vm.name")} ${property("java.vm.version")} (${property("java.vm.info")}) " +
-            "java=${property("java.version")} arch=${property("os.arch")} " +
-            "cores=${Runtime.getRuntime().availableProcessors()} heap=${heapLimitMebibytes()}MB"
+            "arch=${property("os.arch")} cores=${Runtime.getRuntime().availableProcessors()}"
 }
 
 private fun loadLogged(file: File, loadPatches: (File) -> Collection<Patch<*>>, logger: Logger): Collection<Patch<*>> {

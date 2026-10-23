@@ -38,9 +38,9 @@ preload bundles and start the run, and `HostEvent` for what the run reports.
   ART once a collection frees under 1%). The run then fails with `HeapExhaustedException`.
 - **A run that hangs**: once a run has not moved on for a minute, the host logs the stacks of
   all its threads and the heap in use (`watchForStalls` in `HostMain`), up to five times. The
-  log also has the VM the host runs on (`Host VM:`), the process and the JVM options the app
-  started (`Patcher process:`, `Patcher JVM:`), and how long the patches took to load, ahead
-  of the run or in it. All of it is in the log the user copies.
+  log also has the VM the host runs on (`Host VM:`), the process and the JVM options that differ
+  between devices and builds (`Patcher process:`, `Patcher JVM:`), and how long the patches took
+  to load, ahead of the run or in it. All of it is in the log the user copies.
 - **Cancel**: the app ends the process, which is also what it does with one started ahead that
   no run took.
 - **Priority**: only the binding with `BIND_IMPORTANT` keeps `:patcher` off the slow background
