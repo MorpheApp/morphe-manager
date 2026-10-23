@@ -42,7 +42,7 @@ class PatcherService : Service() {
 
             val options = listOfNotNull(
                 "-Xmx${heapLimitMb}m",
-                // The server VM would reserve 240M for compiled code, address space a 32-bit heap needs more
+                // A cap on the code cache, reserved apart from the heap in address space a 32-bit heap needs more
                 "-XX:ReservedCodeCacheSize=${CODE_CACHE_32_BIT_MB}m".takeUnless { Process.is64Bit() }
             ) + launch.options // Last, so a flag the app gives again wins
 

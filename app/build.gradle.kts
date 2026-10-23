@@ -158,12 +158,16 @@ val translationTags = translations.joinToString(prefix = "{", postfix = "}") { (
 /**
  * The JVM the app embeds for patching, an Android build of OpenJDK per ABI it ships one for. A 32 bit
  * x86 device patches inside the app instead.
+ *
+ * 17, whose ports have run on Android devices the longest, the 32-bit ARM one above all, and which
+ * the patcher and the patches are built for.
  */
-val embeddedJvmRelease = "https://github.com/AngelAuraMC/angelauramc-openjdk-build/releases/download/download_jre25"
+val embeddedJvmFeature = 17
+val embeddedJvmRelease = "https://github.com/AngelAuraMC/angelauramc-openjdk-build/releases/download/download_jre$embeddedJvmFeature"
 val embeddedJvms = mapOf(
-    "arm64-v8a" to Triple("jre25-android-arm64.tar.xz", "d3eb7afe2240c26728a1bb440502c5f18ac3883e932d202dd7f0c9bcbbce4c37", "linux-aarch64"),
-    "armeabi-v7a" to Triple("jre25-android-arm.tar.xz", "9ae13aee9cba7b2d2d8f40965061667e876d7380d866f37a992db3eff296ffb5", "linux-arm"),
-    "x86_64" to Triple("jre25-android-x86_64.tar.xz", "7fca862ee1b2d5fe23cd9c9c3d9b7ad3c241947ad1a6cc9464ef2e674867105d", "linux-amd64")
+    "arm64-v8a" to Triple("jre17-android-arm64.tar.xz", "e162c860fe05ee4a4e4af7606437419879f6c748386a7b09fa77d10db6a64091", "linux-aarch64"),
+    "armeabi-v7a" to Triple("jre17-android-arm.tar.xz", "4a9134f1ebf6340dd855805d351712462cddab6f3c2684da7e7da10ccf06648d", "linux-arm"),
+    "x86_64" to Triple("jre17-android-x86_64.tar.xz", "893e27d2aed8b40407f29fe939e2a0f193e5d55f72892a303db634b0808a2b61", "linux-amd64")
 )
 
 /**
@@ -175,13 +179,13 @@ val embeddedJvmModules = listOf(
 )
 
 /**
- * What of the build the linked modules need, its native libraries above all. Every build ships
- * the server VM, the 32-bit ARM one included.
+ * What of the build the linked modules need, its native libraries above all. A build ships the
+ * server VM, but for the 32-bit ARM one, which ships the client VM.
  */
 val embeddedJvmFiles = listOf(
     "lib/*/libjvm.so",
     "lib/libjava.so", "lib/libjimage.so", "lib/libzip.so", "lib/libnet.so", "lib/libnio.so",
-    "lib/libverify.so", "lib/libsyslookup.so",
+    "lib/libverify.so",
     "lib/jvm.cfg", "lib/tzdb.dat", "lib/security", "conf"
 )
 
@@ -195,7 +199,7 @@ val embeddedJvmTasks = embeddedJvms.map { (abi, build) ->
         targetPlatform.set(platform)
         modules.set(embeddedJvmModules)
         runtimeFiles.set(embeddedJvmFiles)
-        jdk.set(javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(25)) })
+        jdk.set(javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(embeddedJvmFeature)) })
         downloadCache.set(File(gradle.gradleUserHomeDir, "caches/morphe-embedded-jvm"))
         outputArchive.set(layout.buildDirectory.file("intermediates/embeddedJvm/$abi.zip.xz"))
         outputImage.set(layout.buildDirectory.file("intermediates/embeddedJvm/$abi.modules"))

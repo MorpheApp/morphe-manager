@@ -478,7 +478,8 @@ class PatcherWorker(
                 runtime(vm).patchInput()
             } catch (e: JvmUnavailableException) {
                 // Nothing was patched yet, and ART can still take the run
-                args.logger.warn("${e.message}, patching on ART instead")
+                // The cause tells a JVM that crashed on start from one the device had no room for
+                args.logger.warn("${e.message} (${e.cause?.javaClass?.simpleName}), patching on ART instead")
                 Log.w(tag, "Patcher JVM unavailable".logFmt(), e)
                 onRestart()
                 args.logger.logRuntime(PatcherVm.ART)

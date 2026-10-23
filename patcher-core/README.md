@@ -3,7 +3,7 @@
 Everything about a patching run that does not need Android. The app runs it in the `:patcher`
 process of `PatcherService`, started by `PatcherProcesses` for every run, on one of two VMs:
 
-- JVM, the default: an embedded HotSpot 25 with a heap of a third of the RAM (1-3 GB, at most
+- JVM, the default: an embedded HotSpot 17 with a heap of a third of the RAM (1-3 GB, at most
   1 GB in a 32-bit process). Shipped for arm64-v8a, armeabi-v7a and x86_64.
 - ART, the runtime of the process itself, within the heap Android gives the app. Used when the
   setting is off, on 32-bit x86, and when the JVM fails to start.
@@ -34,8 +34,13 @@ preload bundles and start the run, and `HostEvent` for what the run reports.
   A crash of the JVM or `System.exit` in a patch ends only that process too, and the JVM's report
   (`patcher-jvm-error-<pid>.log` in the app's temporary files) goes into the log of the run.
 - **A full heap**: neither VM gives up on a heap that is nearly full right away, but collects
-  for a few minutes first (G1 through its GC overhead limit, ART once a collection frees under
-  1%). The run then fails with `HeapExhaustedException`.
+  for a few minutes first (the JVM until a full collection frees nothing an allocation can use,
+  ART once a collection frees under 1%). The run then fails with `HeapExhaustedException`.
+- **A run that hangs**: once a run has not moved on for a minute, the host logs the stacks of
+  all its threads and the heap in use (`watchForStalls` in `HostMain`), up to five times. The
+  log also has the VM the host runs on (`Host VM:`), the process and the JVM options the app
+  started (`Patcher process:`, `Patcher JVM:`), and how long the patches took to load, ahead
+  of the run or in it. All of it is in the log the user copies.
 - **Cancel**: the app ends the process, which is also what it does with one started ahead that
   no run took.
 - **Priority**: only the binding with `BIND_IMPORTANT` keeps `:patcher` off the slow background
@@ -46,7 +51,7 @@ preload bundles and start the run, and `HostEvent` for what the run reports.
 
 ## The runtime in the APK
 
-`buildSrc/PrepareEmbeddedJvmTask` turns the OpenJDK 25 Android build of
+`buildSrc/PrepareEmbeddedJvmTask` turns the OpenJDK 17 Android build of
 [AngelAuraMC](https://github.com/AngelAuraMC/angelauramc-openjdk-build) into `jvm/<abi>.zip.xz`.
 The build is pinned by SHA-256 in `app/build.gradle.kts`.
 
@@ -65,13 +70,14 @@ The build is pinned by SHA-256 in `app/build.gradle.kts`.
 - The host jar leaves out the Android frameworks of ARSCLib (`frameworks/android/*.apk`), which
   the APK carries for patching inside the app. `JvmInstallation` copies them from the APK into
   the host jar as it unpacks it, and the run falls back to the app if there are none.
-- Every build ships the server VM (`lib/server`), the 32-bit ARM one included.
+- Every build ships the server VM (`lib/server`) but the 32-bit ARM one, which ships the client
+  VM (`lib/client`) with C1 alone.
 
 - The build's own classes are relinked (`jimage extract`, `jmod`, `jlink`), not swapped for
   another JDK's, because the Android build patches some of them.
 - `java.base` is packed last with `--hash-modules`, as the hashes it carries no longer match.
   The pattern avoids `*` and `?`, which the JDK launchers on Windows expand as file names.
-- The JDK that links has to be the same feature release, 25.
+- The JDK that links has to be the same feature release, 17.
 - The `legal/` notices of every linked module go into the archive, as the GPL requires them to
   travel with the binaries. The license itself is listed in `app/aboutlibraries`, since
   AboutLibraries only finds Gradle dependencies on its own.
@@ -99,7 +105,8 @@ adb exec-out run-as app.morphe.manager.debug cat files/gc.log > gc.log
   `-Xlog:gc*:file=/data/user/0/app.morphe.manager.debug/files/gc.log`.
 - **GC**: `-Xlog:gc+init` shows the collector the VM chose. G1 (the default) paused for about 3%
   of a YouTube run. ParallelGC paused for 5-8% and SerialGC for more, as both fall back to full
-  collections once the 450-650M kept alive fills the old space.
+  collections once the 450-650M kept alive fills the old space. A 32-bit process still gets
+  SerialGC, the collector with the fewest threads and the least to go wrong on that port.
 - **JIT**: the app passes `-XX:TieredStopAtLevel=1` in a 64-bit process (a 32-bit JVM only has C1
   and fails to start with the flag), so only C1 compiles. YouTube runs started at
   the same temperature were about 7% faster with it, almost all of it in the patches.
@@ -107,10 +114,6 @@ adb exec-out run-as app.morphe.manager.debug cat files/gc.log > gc.log
   runs, as back to back runs got up to 40% slower, more than any flag changes. Read the
   temperature from the `Current temperatures from HAL` part of `adb shell dumpsys thermalservice`,
   as the part above it is cached.
-- **Object headers**: the app passes `-XX:+UseCompactObjectHeaders` in a 64-bit process (a 32-bit
-  JVM does not have the flag), which shrinks every object header from 12 to 8 bytes. Runs of a
-  split YouTube bundle were about 4% faster with it, mostly in compiling the dex files and
-  encoding the resources. `-XX:-UseCompactObjectHeaders` in `jvm-options.txt` turns it off.
 - **CDS**: the runtime ships no archive. One can be made in three runs: one with
   `-XX:DumpLoadedClassList=<dir>/classes.lst`, one with `-Xshare:dump
   -XX:SharedClassListFile=<dir>/classes.lst -XX:SharedArchiveFile=<dir>/app.jsa` (it exits
