@@ -243,15 +243,20 @@ private fun IconBuilder(
                             scaleX = scale
                             scaleY = scale
                             alpha = 1f - 0.25f * distance
-                        }
-                        .clickable(
-                            interactionSource = null,
-                            indication = null,
-                            onClickLabel = stringResource(background.displayNameResId)
-                        ) { scope.launch { pagerState.animateScrollToPage(page) } },
+                        },
                     contentAlignment = Alignment.Center
                 ) {
-                    LayeredIconPreview(background = background, mark = mark, size = swatch)
+                    LayeredIconPreview(
+                        background = background,
+                        mark = mark,
+                        size = swatch,
+                        // Picking one slides it to the middle, so only the focus ring a remote goes by is drawn
+                        modifier = Modifier.clickable(
+                            interactionSource = null,
+                            indication = shapedIndication(AppIconShape, press = false),
+                            onClickLabel = stringResource(background.displayNameResId)
+                        ) { scope.launch { pagerState.animateScrollToPage(page) } }
+                    )
                 }
             }
         }

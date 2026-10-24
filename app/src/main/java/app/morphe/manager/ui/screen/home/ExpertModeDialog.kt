@@ -10,7 +10,6 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.rememberScrollState
@@ -22,10 +21,10 @@ import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
@@ -112,6 +111,11 @@ fun DialogHostScope.ExpertModeDialog(
     val prereleaseBundleUids = allPatchesInfo.mapNotNullTo(mutableSetOf()) { (bundle, _) ->
         bundle.uid.takeIf(usesPrerelease)
     }
+    // Sources marking the APK's version experimental. A run leaves out the ones whose experimental
+    // versions are off, so a source added back by hand says what its patches are applied to
+    val experimentalBundleUids = allPatchesInfo.mapNotNullTo(mutableSetOf()) { (bundle, _) ->
+        bundle.uid.takeIf { bundle.isVersionExperimental }
+    }
     val selectedPatchForOptions = remember { mutableStateOf<Pair<Int, PatchInfo>?>(null) }
     val search = rememberSearchFieldState()
     val showMultipleSourcesWarning = remember { mutableStateOf(false) }
@@ -192,13 +196,15 @@ fun DialogHostScope.ExpertModeDialog(
         patchesWithMissingRequired,
         patchesWithCustomOptions,
         prereleaseBundleUids,
+        experimentalBundleUids,
         retiredNotices.value
     ) {
         PatchMarkers(
             newPatches = newPatches,
             missingRequiredOptions = patchesWithMissingRequired,
             customOptions = patchesWithCustomOptions,
-            prereleaseNotices = prereleaseBundleUids - retiredNotices.value
+            prereleaseNotices = prereleaseBundleUids - retiredNotices.value,
+            experimentalNotices = experimentalBundleUids
         )
     }
 
@@ -427,10 +433,10 @@ fun DialogHostScope.ExpertModeDialog(
                         icon = MaterialSymbols.Rounded.Visibility_off,
                         tone = SemanticTone.Neutral,
                         density = NoticeDensity.Compact,
+                        onClick = onShowHiddenSources,
                         modifier = Modifier
                             .animatedListItem(this)
                             .endsBlock()
-                            .clickable(onClick = onShowHiddenSources)
                     )
                 }
             }
@@ -469,6 +475,8 @@ fun DialogHostScope.ExpertModeDialog(
                 // outlives this, so clearing the filter hands the open source back
                 PatchesListEmptyState(modifier = Modifier.padding(barInsets))
             } else {
+                // A remote stays on its source's page, the tabs being the way to the others
+                val pageFocus = rememberPagerPageFocus()
                 HorizontalPager(
                     state = pagerState,
                     modifier = Modifier.fillMaxSize()
@@ -488,6 +496,7 @@ fun DialogHostScope.ExpertModeDialog(
                         patchActions = patchActions,
                         accentColor = appColor,
                         leadingRows = leadingRows,
+                        modifier = pageFocus,
                         onConfigureOptions = { selectedPatchForOptions.value = bundle.uid to it }
                     )
                 }
@@ -573,29 +582,29 @@ private fun SourceTab(
         label = "source_tab_fill"
     )
 
-    // Shaped on the tab itself rather than inside it, so the ripple follows the pill too
-    Tab(
-        selected = selected,
-        onClick = onClick,
-        // The row lays tabs edge to edge, so the gap between the pills comes from each one's end,
-        // which leaves the first flush with the list below. Nothing above or below, so the row
-        // keeps the same spacing to the header and the controls as a lone source's layout does
+    val contentColor by animateColorAsState(
+        targetValue = when {
+            !selected -> MaterialTheme.colorScheme.onSurfaceVariant
+            accent != null -> appAccentContent(selectedFill)
+            else -> MaterialTheme.colorScheme.onPrimaryContainer
+        },
+        animationSpec = tween(Defaults.ANIMATION_DURATION),
+        label = "source_tab_content"
+    )
+
+    // The row lays tabs edge to edge, so the gap between the pills comes from each one's end,
+    // which leaves the first flush with the list below. Nothing above or below, so the row
+    // keeps the same spacing to the header and the controls as a lone source's layout does
+    Row(
         modifier = Modifier
             .padding(end = Defaults.SpaceSmall)
-            .clip(Defaults.PillShape)
-            .background(fill),
-        selectedContentColor = if (accent != null) {
-            appAccentContent(selectedFill)
-        } else {
-            MaterialTheme.colorScheme.onPrimaryContainer
-        },
-        unselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
+            .background(fill, Defaults.PillShape)
+            .shapedSelectable(Defaults.PillShape, selected = selected, role = Role.Tab, onClick = onClick)
+            .padding(horizontal = Defaults.SpaceMedium, vertical = Defaults.SpaceSmall),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
     ) {
-        Row(
-            modifier = Modifier.padding(horizontal = Defaults.SpaceMedium, vertical = Defaults.SpaceSmall),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
-        ) {
+        CompositionLocalProvider(LocalContentColor provides contentColor) {
             if (source != null) {
                 BundleIcon(bundle = source, modifier = Modifier.size(24.dp), enabled = source.enabled)
             }
@@ -623,7 +632,8 @@ private data class PatchMarkers(
     val newPatches: Map<Int, Set<String>>,
     val missingRequiredOptions: Map<Int, Set<String>>,
     val customOptions: Map<Int, Set<String>>,
-    val prereleaseNotices: Set<Int>
+    val prereleaseNotices: Set<Int>,
+    val experimentalNotices: Set<Int>
 )
 
 /** How long a pre-release warning holds its place, long enough to read it once. */
@@ -658,6 +668,22 @@ private fun LazyListScope.prereleaseNotice() = item(key = "prerelease-notice") {
             .endsBlock(),
         icon = MaterialSymbols.Rounded.Warning,
         tone = SemanticTone.Warning,
+        density = NoticeDensity.Compact
+    )
+}
+
+/**
+ * Header for a source marking the APK's version experimental. Unlike the pre-release warning it
+ * stays, since it matters for as long as the source's patches can be switched on.
+ */
+private fun LazyListScope.experimentalVersionNotice() = item(key = "experimental-version-notice") {
+    Notice(
+        text = stringResource(R.string.expert_mode_experimental_version_notice),
+        modifier = Modifier
+            .animatedListItem(this)
+            .endsBlock(),
+        icon = VersionTag.Experimental.icon,
+        tone = VersionTag.Experimental.tone,
         density = NoticeDensity.Compact
     )
 }
@@ -766,6 +792,7 @@ private fun BundlePatchList(
     ) {
         leadingRows()
         if (bundle.uid in markers.prereleaseNotices) prereleaseNotice()
+        if (bundle.uid in markers.experimentalNotices) experimentalVersionNotice()
 
         // Kept in the list rather than laid over it, so the message holds its place under a notice
         // and an opening keyboard shortens the surrounding page instead of moving it

@@ -11,7 +11,6 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
@@ -905,7 +904,11 @@ private fun BundleManagementCard(
                             .then(
                                 if (onHeaderClick != null || onLongClick != null) {
                                     Modifier.combinedClickable(
-                                        indication = null,
+                                        // The card answers a tap by folding
+                                        indication = shapedIndication(
+                                            RoundedCornerShape(Defaults.CornerMedium),
+                                            press = false
+                                        ),
                                         interactionSource = headerInteraction,
                                         onClick = { onHeaderClick?.invoke() },
                                         onLongClick = onLongClick
@@ -985,7 +988,7 @@ private fun BundleManagementCard(
                                         BuildConfig.PATCHER_VERSION
                                     ),
                                     icon = MaterialSymbols.Rounded.System_update,
-                                    modifier = Modifier.clickable(onClick = actions.onOutdatedManagerClick)
+                                    onClick = actions.onOutdatedManagerClick
                                 )
                             }
 
@@ -1404,7 +1407,8 @@ private fun CardNotice(
     visible: Boolean,
     text: String,
     icon: ImageVector,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null
 ) {
     ListRowFold(visible = visible) {
         Notice(
@@ -1412,7 +1416,8 @@ private fun CardNotice(
             text = text,
             icon = icon,
             tone = SemanticTone.Error,
-            density = NoticeDensity.Compact
+            density = NoticeDensity.Compact,
+            onClick = onClick
         )
     }
 }

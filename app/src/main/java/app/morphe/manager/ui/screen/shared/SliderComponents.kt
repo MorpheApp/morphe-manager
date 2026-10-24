@@ -13,7 +13,6 @@ import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -30,7 +29,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -163,9 +161,7 @@ fun SliderValuePill(
         color = container,
         modifier = Modifier
             .scale(scale)
-            // Clipped before the click, otherwise the ripple is drawn on the square bounds
-            .clip(Defaults.PillShape)
-            .clickable(onClick = onClick)
+            .shapedClickable(Defaults.PillShape, onClick = onClick)
     ) {
         Row(
             modifier = Modifier.padding(horizontal = Defaults.SpaceMedium, vertical = Defaults.SpaceSmall),

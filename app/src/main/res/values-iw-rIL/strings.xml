@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">לא תוקן</string>
     <string name="home_no_patches_available">אין תיקונים זמינים</string>
     <string name="home_app_hide_title">להסתיר את האפליקציה הזאת?</string>
+    <string name="home_more_apps_title">עוד אפליקציות</string>
+    <string name="home_more_apps_hide_title">להסתיר את הכרטיס הזה?</string>
+    <string name="home_more_apps_hide_message">ניתן להחזיר זאת בכל עת ב-הגדרות &gt; מראה &gt; מסך הבית</string>
     <string name="home_app_hide_message">האפליקציה הזו תוסתר ממסך הבית. תוכל לשחזר אותה מאוחר יותר מהאפליקציות המוסתרות באמצעות הכפתור בתחתית הרשימה</string>
     <string name="home_app_will_be_hidden">האפליקציה הזאת תהיה מוסתרת</string>
     <string name="home_app_hidden_named">%s מוסתרים</string>
@@ -32,6 +35,9 @@
     <string name="deep_link_add_source_only_universal">מוסיפים רק תיקונים גלובליים. ניתן להוסיף אפליקציות מרשימת האפליקציות של המקור</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">מקור זה כבר נוסף. להוסיף אפליקציה זו מהמקור הקיים?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="mpp_import_update_message">זוהי גרסה חדשה של %s. האם ברצונך לעדכן אותה?</string>
+    <string name="mpp_import_unreadable">לא ניתן לקרוא קובץ זה</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">עדכון Morphe זמין</string>
     <string name="home_update_available_subtitle">גרסה חדשה מוכנה להתקנה</string>
@@ -804,6 +810,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">מציג הודעת ברכה</string>
     <string name="settings_appearance_repatch_notice">הודעת תיקון מחדש</string>
     <string name="settings_appearance_repatch_notice_description">מציג באנר כאשר ניתן להחזיר תיקון לאפליקציות שתוקנו</string>
+    <string name="settings_appearance_more_apps_card">כרטיס עוד אפליקציות</string>
+    <string name="settings_appearance_more_apps_card_description">מציג כרטיס מתחת לאפליקציות המוביל לתיקוני קהילה</string>
     <string name="settings_appearance_app_card_colors">צבעי כרטיסי האפליקציה</string>
     <string name="settings_appearance_app_card_colors_default">ברירת מחדל</string>
     <string name="settings_appearance_app_card_colors_default_description">להעניק לכל אפליקציה את צבע החבילה שלה</string>
@@ -868,7 +876,7 @@
     <string name="settings_advanced_update_interval_daily">יומית</string>
     <string name="settings_advanced_update_interval_weekly">שבועי</string>
     <string name="settings_advanced_update_interval_monthly">חודשי</string>
-    <string name="settings_advanced_update_interval_battery_warning">בדיקות ברקע עשויות שלא לעבוד באופן אמין על חלק מהמכשירים. יצרנים כמו Xiaomi, Huawei, Samsung ו-OnePlus לעיתים קרובות מוגבלים את תהליכי הרקע כדי לשמר סוללה</string>
+    <string name="settings_advanced_update_interval_battery_warning">בדיקות רקע עשויות שלא לפעול באופן אמין במכשירים המגבילים אפליקציות ברקע, כגון Xiaomi, Huawei, Samsung ו-OnePlus</string>
     <string name="settings_advanced_external_batch_patch">אפשר טריגרים חיצוניים</string>
     <string name="settings_advanced_external_batch_patch_description">מתיר אפליקציות אוטומציה להתחיל תיקון batch</string>
     <string name="external_batch_patch_title">התחל תיקון באצווה?</string>
@@ -930,7 +938,7 @@
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">הזן שם מותאם אישית</string>
     <string name="settings_advanced_patch_options_path_gone">לא ניתן יותר לקרוא את התיקייה הזו. בחר אותה שוב או נקה אותה, אחרת תהליך התיקון ייעצר וישאל לגביה</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">אייקון האפליקציה</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">הסמל שבו האפליקציה מתוקנת. הוא משמש גם במקומות שבהם האפליקציה לא יכולה לשנות אותו מאוחר יותר, כגון אנדרואיד אוטו ורשימת האפליקציות בהגדרות המערכת</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">הסמל שאיתו האפליקציה מעובדת, המשמש גם במקומות שבהם לא ניתן לשנותו מאוחר יותר, כגון Android Auto</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">סמל האפליקציה המותאם אישית צריך תיקייה עם תמונות סמל</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">סמל מותאם אישית</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"תיקייה עם תמונות לשימוש כסמל מותאם אישית.
@@ -1048,7 +1056,7 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="settings_auto_uninstall_with_shizuku">הסרה אוטומטית במקרה של התנגשות</string>
     <string name="settings_auto_uninstall_with_shizuku_description">מבטל התקנה של האפליקציה הקיימת במקרה של סתירה בחתימה. זה יכול להסיר נתוני אפליקציה</string>
     <string name="settings_ignore_install_target_rules">התעלם מדרישות יעד ההתקנה</string>
-    <string name="settings_ignore_install_target_rules_description">מאפשר להכבות דרישות יעד ההתקנה ולהפעיל את הכללים שיוצאו מהחישוב. האפליקציה המתוקנת עשויה לא לעבוד</string>
+    <string name="settings_ignore_install_target_rules_description">מאפשר כיבוי של תיקונים שיעד ההתקנה דורש והפעלה של כאלו שהוא שולל. ייתכן שהאפליקציה המעובדת לא תעבוד</string>
     <string name="settings_auto_uninstall_warning_title">הפעל הסרה אוטומטית?</string>
     <string name="settings_auto_uninstall_warning_message">אם Android מדווח על התנגשות חתימות במהלך ההתקנה האוטומטית של Shizuku, Morphe תסיר את האפליקציה הקיימת לפני התקנת קובץ ה-APK שעבר תיקון</string>
     <string name="settings_auto_uninstall_warning_risk">פעולה זו עשויה להסיר נתוני אפליקציה. אם קובץ ה-APK שעבר תיקון נכשל בהתקנה לאחר ההסרה, ייתכן שהאפליקציה הקודמת כבר נמחקה</string>
@@ -1079,7 +1087,7 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="settings_system_battery_optimization_description">שומר את התיקון פעיל כאשר האפליקציה ממוזערת</string>
     <string name="settings_system_process_runtime">זמן ריצה של המתקן</string>
     <string name="settings_system_jvm_runtime_enable">השתמש ב-JVM מובנה</string>
-    <string name="settings_system_jvm_runtime_description">תיקונים במכונה הווירטואלית של ג\'אווה ש-Morphe מציעה, שתוכל לנצל את כל הזיכרון העומד לרשות המכשיר. כבה זאת כדי לתקן בעזרת זמן הריצה של אנדרואיד</string>
+    <string name="settings_system_jvm_runtime_description">תיקונים ב-Java VM של Morphe, שעלולים להשתמש ביותר זיכרון. כבה כדי להשתמש ב-runtime של Android</string>
     <string name="settings_system_jvm_runtime_unavailable">נדרש מכשיר ARM או x86 של 64 סיביות</string>
     <string name="settings_system_patcher_completion_sound">צליל השלמה</string>
     <string name="settings_system_patcher_completion_sound_description">מנגן צליל ייחודי להצלחה או לכישלון כאשר התיקון מסתיים</string>
@@ -1228,6 +1236,8 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="settings_system_apk_download_helper_warning">קובץ ה-APK מגיע מאפליקציית העזר, לכן סמוך רק על אפליקציות שאתה מכיר. Morphe עדיין בודק את החבילה, הגרסה והחתימה של כל קובץ לפני תיקון.</string>
     <string name="settings_system_apk_download_helper_installed_by">הותקן על ידי %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">המתקין לא ידוע</string>
+    <string name="settings_system_apk_download_helper_open_directly">פתח את העוזר מיד</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">מדלג על הוראות ההורדה ופותח את העוזר המהימן</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">אין קבצים כאן</string>
     <string name="file_picker_read_error">לא ניתן לקרוא תיקייה זו</string>

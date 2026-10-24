@@ -175,7 +175,9 @@ val embeddedJvms = mapOf(
  * beyond that, so a patch that runs inside the app also runs in the JVM.
  */
 val embeddedJvmModules = listOf(
-    "java.base", "java.logging", "java.xml", "java.sql", "jdk.unsupported", "jdk.charsets", "jdk.crypto.ec"
+    "java.base", "java.logging", "java.xml", "java.sql", "jdk.unsupported", "jdk.charsets", "jdk.crypto.ec",
+    // The time spent collecting garbage, which the host watches for a heap too small for the run
+    "java.management"
 )
 
 /**
@@ -185,7 +187,7 @@ val embeddedJvmModules = listOf(
 val embeddedJvmFiles = listOf(
     "lib/*/libjvm.so",
     "lib/libjava.so", "lib/libjimage.so", "lib/libzip.so", "lib/libnet.so", "lib/libnio.so",
-    "lib/libverify.so",
+    "lib/libverify.so", "lib/libmanagement.so",
     "lib/jvm.cfg", "lib/tzdb.dat", "lib/security", "conf"
 )
 

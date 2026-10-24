@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Ei muokattu</string>
     <string name="home_no_patches_available">Lisäosia ei ole saatavilla</string>
     <string name="home_app_hide_title">Piilota tämä sovellus?</string>
+    <string name="home_more_apps_title">Lisää sovelluksia</string>
+    <string name="home_more_apps_hide_title">Piilotetaanko tämä kortti?</string>
+    <string name="home_more_apps_hide_message">Voit palauttaa sen milloin vain kohdasta Asetukset &gt; Ulkoasu &gt; Kotinäyttö</string>
     <string name="home_app_hide_message">Tämä sovellus piilotetaan aloitusnäytöstä. Voit palauttaa sen myöhemmin piilotettujen sovellusten joukosta luettelon alareunassa olevalla painikkeella.</string>
     <string name="home_app_will_be_hidden">Tämä sovellus piilotetaan</string>
     <string name="home_app_hidden_named">%s piilotettu</string>
@@ -31,6 +34,9 @@
     <string name="deep_link_add_source_only_universal">Vain yleiset korjaukset lisätään. Voit lisätä sovellukset lähteen sovellusluettelosta</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Tähän lähde on jo lisätty. Lisätään tämä sovellus olemassa olevasta lähteestä?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="mpp_import_update_message">Tämä on uusi versio tiedostosta %s. Haluatko päivittää sen?</string>
+    <string name="mpp_import_unreadable">Tätä tiedostoa ei voida lukea</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-päivitys saatavilla</string>
     <string name="home_update_available_subtitle">Uusi versio valmis asennettavaksi</string>
@@ -804,6 +810,8 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Näyttää tervehdysviestin</string>
     <string name="settings_appearance_repatch_notice">Uudelleenkorjausilmoitus</string>
     <string name="settings_appearance_repatch_notice_description">Näyttää bannerin, kun ohitettuja sovelluksia voi ohittaa uudelleen</string>
+    <string name="settings_appearance_more_apps_card">Lisää sovelluksia -kortti</string>
+    <string name="settings_appearance_more_apps_card_description">Näyttää sovellusten alapuolella kortin, joka johtaa yhteisön korjauksiin</string>
     <string name="settings_appearance_app_card_colors">Sovelluksen korttien värit</string>
     <string name="settings_appearance_app_card_colors_default">Oletus</string>
     <string name="settings_appearance_app_card_colors_default_description">Anna jokaiselle sovellukselle sen oman paketin väri</string>
@@ -866,7 +874,7 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_advanced_update_interval_daily">Päivittäinen</string>
     <string name="settings_advanced_update_interval_weekly">Viikoittain</string>
     <string name="settings_advanced_update_interval_monthly">Kuukausittain</string>
-    <string name="settings_advanced_update_interval_battery_warning">Taustatarkistukset eivät välttämättä toimi luotettavasti kaikilla laitteilla. Valmistajat, kuten Xiaomi, Huawei, Samsung ja OnePlus, rajoittavat usein aggressiivisesti taustaprosesseja säästääkseen akkua</string>
+    <string name="settings_advanced_update_interval_battery_warning">Taustatarkistukset eivät välttämättä toimi luotettavasti laitteilla, jotka rajoittavat taustasovelluksia, kuten Xiaomi, Huawei, Samsung ja OnePlus</string>
     <string name="settings_advanced_external_batch_patch">Salli ulkoiset käynnistimet</string>
     <string name="settings_advanced_external_batch_patch_description">Sallii automatisointisovellusten käynnistää joukkopatchauksen</string>
     <string name="external_batch_patch_title">Aloita eräkorjaus?</string>
@@ -928,7 +936,7 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Anna mukautettu nimi</string>
     <string name="settings_advanced_patch_options_path_gone">Tätä kansiota ei voi enää lukea. Valitse se uudelleen tai tyhjennä se, muuten paikkaus pysähtyy ja kysyy siitä.</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Sovelluskuvake</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Kuvake, jota käytetään sovelluksen paikkauksessa. Sitä käytetään myös siellä, missä sovellus ei voi vaihtaa sitä myöhemmin, kuten Android Autossa ja järjestelmäasetusten sovellusluettelossa.</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Kuvake, jolla sovellus on paikkattu; sitä käytetään myös kohdissa, joissa sitä ei voi myöhemmin muuttaa, kuten Android Autossa</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Mukautettu sovelluskuvake tarvitsee kansion, jossa on kuvakuvia.</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Mukautettu kuvake</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Kansion kuvia, joita käytetään mukautettuna kuvakkeena.
@@ -1036,7 +1044,7 @@ Kuvien mittojen on oltava seuraavat:
     <string name="settings_auto_uninstall_with_shizuku">Automaattinen poisto ristiriitatilanteissa</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Poistaa nykyisen sovelluksen allekirjoitusristiriidan yhteydessä. Tämä voi poistaa sovelluksen tiedot</string>
     <string name="settings_ignore_install_target_rules">Ohita asennuskohdemääritykset</string>
-    <string name="settings_ignore_install_target_rules_description">Pätkittää asennuskohdemääristöjen poistamisen ja niihin kuuluviin sääntöjen aktivoimisen. Paikannettu sovellus ei välttämättä toimi</string>
+    <string name="settings_ignore_install_target_rules_description">Sallii asennuskohteen vaatimien paikkausten poistamisen käytöstä ja niiden kytkemisen päälle, jotka se sulkee pois. Paikkattu sovellus ei välttämättä toimi</string>
     <string name="settings_auto_uninstall_warning_title">Ota automaattinen poisto käyttöön?</string>
     <string name="settings_auto_uninstall_warning_message">Jos Android raportoi allekirjoitusristiriidasta Shizukun automaattisen asennuksen aikana, Morphe poistaa olemassa olevan sovelluksen ennen korjatun APK:n asentamista</string>
     <string name="settings_auto_uninstall_warning_risk">Tämä voi poistaa sovelluksen tiedot. Jos korjattu APK ei asennu poiston jälkeen, edellinen sovellus on ehkä jo poistettu</string>
@@ -1067,7 +1075,7 @@ Yksityiskohdat: %2$s"</string>
     <string name="settings_system_battery_optimization_description">Pitää paikkaajan käynnissä, kun sovellus on pienennetty</string>
     <string name="settings_system_process_runtime">Patterin ajoaika</string>
     <string name="settings_system_jvm_runtime_enable">Käytä sisällytettyä VM:iä</string>
-    <string name="settings_system_jvm_runtime_description">Morpheen käyttämässä Java-VM:ssä olevat korjaukset, jotka voivat käyttää yhtä paljon muistia kuin laite säästää. Kytke pois päältä, jotta korjaus tapahtuu Androidin ajoajan kanssa</string>
+    <string name="settings_system_jvm_runtime_description">Paikkaa Morphen omassa Java VM:ssä, joka voi käyttää enemmän muistia. Kytke pois käytöstä käyttääksesi Androidin runtimea</string>
     <string name="settings_system_jvm_runtime_unavailable">Vaatii ARM- tai 64-bittisen x86-laitteen</string>
     <string name="settings_system_patcher_completion_sound">Valmistumisen ääni</string>
     <string name="settings_system_patcher_completion_sound_description">Toistaa erillisen äänen onnistumisesta tai epäonnistumisesta paikkauksen valmistuttua</string>
@@ -1216,6 +1224,8 @@ Yksityiskohdat: %2$s"</string>
     <string name="settings_system_apk_download_helper_warning">APK tulee apusovelluksesta, joten luota vain tuntemiisi sovelluksiin. Morphe tarkistaa silti jokaisen tiedoston paketin, version ja allekirjoituksen ennen korjausta.</string>
     <string name="settings_system_apk_download_helper_installed_by">Asentanut %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Asentajaa ei tunneta</string>
+    <string name="settings_system_apk_download_helper_open_directly">Avaa apuohjelma heti</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Ohittaa latausohjeet ja avaa luotettavan apuohjelman</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Täällä ei ole tiedostoja</string>
     <string name="file_picker_read_error">Tätä hakemistoa ei voida lukea</string>

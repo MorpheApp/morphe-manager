@@ -11,6 +11,7 @@ import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
@@ -213,14 +214,16 @@ private fun FallbackIcon(
 }
 
 /**
- * Glass placeholder icon for apps that have not been patched yet.
+ * Glass placeholder icon for apps that have not been patched yet, or for a card standing in for
+ * apps, which puts its glyph in [content].
  *
  * Drawn in [AppIconShape] at [AppIconContentFraction] of the slot, so the loaded icon covers it.
  */
 @Composable
-private fun GlassPlaceholderIcon(
+internal fun GlassPlaceholderIcon(
     gradientColors: List<Color>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    content: @Composable BoxScope.() -> Unit = {}
 ) {
     val baseColor = gradientColors.firstOrNull() ?: Color.White
     val midColor = gradientColors.getOrElse(1) { baseColor }
@@ -268,7 +271,9 @@ private fun GlassPlaceholderIcon(
                     drawOutline(outline, brush = glass)
                     drawOutline(outline, brush = border, style = borderStroke)
                 }
-            }
+            },
+        contentAlignment = Alignment.Center,
+        content = content
     )
 }
 

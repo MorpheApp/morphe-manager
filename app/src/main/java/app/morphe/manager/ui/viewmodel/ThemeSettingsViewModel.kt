@@ -80,6 +80,10 @@ class ThemeSettingsViewModel(
         prefs.showRepatchNotice.update(!current)
     }
 
+    fun toggleShowMoreAppsCard(current: Boolean) = viewModelScope.launch {
+        prefs.showMoreAppsCard.update(!current)
+    }
+
     fun setPureBlackTheme(enabled: Boolean) = viewModelScope.launch {
         prefs.pureBlackTheme.update(enabled)
     }

@@ -9,7 +9,6 @@ import android.content.pm.PackageInfo
 import android.view.HapticFeedbackConstants
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
@@ -962,7 +961,8 @@ private fun ApkItemCard(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .combinedClickable(
+                        .shapedCombinedClickable(
+                            shape = SectionCardShape,
                             onClick = {
                                 if (selectionMode) onToggleSelection()
                             },

@@ -139,35 +139,36 @@ class HomeViewModel(
     var deepLinkPendingSource by mutableStateOf<MainViewModel.DeepLinkSource?>(null)
         private set
 
+    /**
+     * A .mpp file opened from a file manager, with its manifest and what importing it would do,
+     * both null while they are read.
+     */
+    data class PendingMpp(val uri: Uri, val fileName: String?, val manifest: MppManifest?, val check: LocalFileCheck?)
+
     // .mpp file opened from file manager: pending confirmation dialog
-    var pendingMppUri by mutableStateOf<Uri?>(null)
-    var pendingMppFileName by mutableStateOf<String?>(null)
-    var pendingMppManifest by mutableStateOf<MppManifest?>(null)
+    var pendingMpp by mutableStateOf<PendingMpp?>(null)
+        private set
 
     fun setPendingMpp(uri: Uri) {
         dismissOpenDialogs()
-        pendingMppUri = uri
-        pendingMppFileName = uri.displayName(contentResolver)
-        pendingMppManifest = null
+        val pending = PendingMpp(uri, uri.displayName(contentResolver), manifest = null, check = null)
+        pendingMpp = pending
         viewModelScope.launch {
-            val manifest = withContext(Dispatchers.IO) { uri.readMppManifest(contentResolver) }
+            val (manifest, check) = inspectLocalFile(uri)
             // A file opened in the meantime, or a dismissed prompt, is not described by this one
-            if (pendingMppUri == uri) pendingMppManifest = manifest
+            if (pendingMpp == pending) pendingMpp = pending.copy(manifest = manifest, check = check)
         }
     }
 
+    /** Imports the opened file the way the add source dialog would, updating the source it is a version of. */
     fun confirmMppImport(chooseApps: Boolean) {
-        val uri = pendingMppUri ?: return
-        pendingMppUri = null
-        pendingMppFileName = null
-        pendingMppManifest = null
-        importLocalSources(listOf(uri to null), chooseApps)
+        val pending = pendingMpp ?: return
+        pendingMpp = null
+        importOf(pending.uri, pending.check)?.let { importLocalSources(listOf(it), chooseApps) }
     }
 
     fun dismissMppImport() {
-        pendingMppUri = null
-        pendingMppFileName = null
-        pendingMppManifest = null
+        pendingMpp = null
     }
 
     /**
@@ -207,20 +208,36 @@ class HomeViewModel(
         pickedBundles = pickedBundles + fresh
         fresh.filter { it.check == null }.forEach { picked ->
             viewModelScope.launch {
-                val bundleName = withContext(Dispatchers.IO) { picked.uri.readMppManifest(contentResolver)?.name }
-                val check = runCatching {
-                    patchBundleRepository.checkLocal(bundleName) {
-                        // Closed by checkLocal, which reads it through use
-                        @SuppressLint("Recycle")
-                        val stream = contentResolver.openInputStream(picked.uri)
-                        stream ?: throw FileNotFoundException("Unable to open ${picked.uri}")
-                    }
-                }.getOrElse { LocalFileCheck.NotBundle }
+                val (manifest, check) = inspectLocalFile(picked.uri)
                 pickedBundles = pickedBundles.map {
-                    if (it.uri == picked.uri) it.copy(bundleName = bundleName, check = check) else it
+                    if (it.uri == picked.uri) it.copy(bundleName = manifest?.name, check = check) else it
                 }
             }
         }
+    }
+
+    /** The manifest of [uri] and what importing it would do, a file that cannot be read being no bundle. */
+    private suspend fun inspectLocalFile(uri: Uri): Pair<MppManifest?, LocalFileCheck> {
+        val manifest = withContext(Dispatchers.IO) { uri.readMppManifest(contentResolver) }
+        val check = runCatching {
+            patchBundleRepository.checkLocal(manifest?.name) { openLocalFile(uri) }
+        }.getOrElse { LocalFileCheck.NotBundle }
+        return manifest to check
+    }
+
+    /** Opens [uri] for reading, closed by whoever reads it. */
+    @SuppressLint("Recycle")
+    private fun openLocalFile(uri: Uri): InputStream =
+        contentResolver.openInputStream(uri) ?: throw FileNotFoundException("Unable to open $uri")
+
+    /**
+     * The import [check] calls for, as [importLocalSources] takes it: a new bundle as a source of its
+     * own, another version of a local source into it. Null for a file that adds nothing.
+     */
+    private fun importOf(uri: Uri, check: LocalFileCheck?): Pair<Uri, Int?>? = when (check) {
+        is LocalFileCheck.New -> uri to null
+        is LocalFileCheck.Update -> uri to check.uid
+        else -> null
     }
 
     fun unpickBundle(uri: Uri) {
@@ -236,13 +253,7 @@ class HomeViewModel(
      * source into it, as its update action would. Files already added are left out.
      */
     fun importPickedBundles(chooseApps: Boolean) {
-        val imports = pickedBundleImports.mapNotNull { picked ->
-            when (val check = picked.check) {
-                is LocalFileCheck.New -> picked.uri to null
-                is LocalFileCheck.Update -> picked.uri to check.uid
-                else -> null
-            }
-        }
+        val imports = pickedBundleImports.mapNotNull { importOf(it.uri, it.check) }
         pickedBundles = emptyList()
         importLocalSources(imports, chooseApps)
     }
@@ -523,7 +534,6 @@ class HomeViewModel(
     fun updateLocalSource(uid: Int, patchBundle: Uri) = importLocalSources(listOf(patchBundle to uid), chooseApps = false)
 
     /** @return The uid of the source [patchBundle] landed under, or null when it could not be read. */
-    @SuppressLint("Recycle")
     private suspend fun importLocalFile(patchBundle: Uri, replacingUid: Int?): Int? {
         val permissionFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION
         var persistedPermission = false
@@ -552,10 +562,7 @@ class HomeViewModel(
             // Provider may not support persistable permissions; fall back to transient grant
         }
 
-        val openStream: suspend () -> InputStream = {
-            contentResolver.openInputStream(patchBundle)
-                ?: throw FileNotFoundException("Unable to open $patchBundle")
-        }
+        val openStream: suspend () -> InputStream = { openLocalFile(patchBundle) }
         return try {
             if (replacingUid != null) {
                 patchBundleRepository.replaceLocal(replacingUid, size, openStream)
@@ -688,14 +695,6 @@ class HomeViewModel(
      */
     fun getBundleDisplayName(uid: Int): String? =
         allBundlesInfoState.value[uid]?.name
-
-    /**
-     * Returns the set of experimental version strings for a package from all currently enabled
-     * bundles, narrowed to the versions the user is actually offered. Used by the UI to show
-     * "Experimental" badges on specific versions.
-     */
-    fun getExperimentalVersionsForPackage(packageName: String): Set<String> =
-        compatibleVersions[packageName].orEmpty().offered().experimentalVersions()
 
     suspend fun persistReinstalledApp(
         app: InstalledApp,

@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Nie zmodyfikowano</string>
     <string name="home_no_patches_available">Brak dostępnych modyfikacji</string>
     <string name="home_app_hide_title">Ukryć tę aplikację?</string>
+    <string name="home_more_apps_title">Więcej aplikacji</string>
+    <string name="home_more_apps_hide_title">Ukryć tę kartę?</string>
+    <string name="home_more_apps_hide_message">Możesz przywrócić ją w dowolnej chwili w sekcji Ustawienia &gt; Wygląd &gt; Ekran główny</string>
     <string name="home_app_hide_message">Ta aplikacja zostanie ukryta na ekranie głównym. Możesz ją później przywrócić z ukrytych aplikacji za pomocą przycisku na dole listy</string>
     <string name="home_app_will_be_hidden">Ta aplikacja zostanie ukryta</string>
     <string name="home_app_hidden_named">%s ukryty</string>
@@ -31,6 +34,7 @@
     <string name="deep_link_add_source_only_universal">Dodano tylko uniwersalne modyfikacje. Aplikacje możesz dodać z listy aplikacji tego źródła</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">To źródło jest już dodane. Dodać tę aplikację z istniejącego źródła?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Dostępna aktualizacja Morphe</string>
     <string name="home_update_available_subtitle">Nowa wersja gotowa do instalacji</string>
@@ -804,6 +808,8 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Wyświetla wiadomość powitalną</string>
     <string name="settings_appearance_repatch_notice">Powiadomienie o ponownym modyfikowaniu</string>
     <string name="settings_appearance_repatch_notice_description">Wyświetla baner, gdy można ponownie zmodyfikować aplikacje</string>
+    <string name="settings_appearance_more_apps_card">Karta \"Więcej aplikacji\"</string>
+    <string name="settings_appearance_more_apps_card_description">Wyświetla kartę pod listą aplikacji, prowadzącą do modyfikacji społeczności</string>
     <string name="settings_appearance_app_card_colors">Kolory kart aplikacji</string>
     <string name="settings_appearance_app_card_colors_default">Domyślne</string>
     <string name="settings_appearance_app_card_colors_default_description">Nadaj każdej aplikacji kolor z jego własnego pakietu</string>
@@ -868,7 +874,6 @@ Modyfikacje nie są tym objęte: włącz przedpremierowe modyfikacje dla każdeg
     <string name="settings_advanced_update_interval_daily">Codziennie</string>
     <string name="settings_advanced_update_interval_weekly">Co tydzień</string>
     <string name="settings_advanced_update_interval_monthly">Co miesiąc</string>
-    <string name="settings_advanced_update_interval_battery_warning">Sprawdzanie w tle może nie działać stabilnie na niektórych urządzeniach. Producenci tacy jak Xiaomi, Huawei, Samsung czy OnePlus często agresywnie ograniczają procesy w tle, aby oszczędzać baterię</string>
     <string name="settings_advanced_external_batch_patch">Zezwalaj na zewnętrzne wyzwalacze</string>
     <string name="settings_advanced_external_batch_patch_description">Pozwala aplikacjom do automatyzacji uruchamiać zbiorcze modyfikowanie</string>
     <string name="external_batch_patch_title">Rozpocząć modyfikowanie grupowe?</string>
@@ -930,7 +935,6 @@ Modyfikacje nie są tym objęte: włącz przedpremierowe modyfikacje dla każdeg
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Wprowadź własną nazwę</string>
     <string name="settings_advanced_patch_options_path_gone">Nie można już odczytać tego folderu. Wybierz go ponownie lub wyczyść, w przeciwnym razie modyfikowanie zatrzyma się, wymuszając interakcję</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Ikona aplikacji</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Ikona, z którą aplikacja jest modyfikowana. Jest używana również tam, gdzie aplikacja nie może jej później zmienić, np. w Android Auto i na liście aplikacji w ustawieniach systemu</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Własna ikona aplikacji wymaga folderu z obrazami ikon</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Własna ikona</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Folder z obrazami do użycia jako własna ikona.
@@ -1038,7 +1042,6 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_auto_uninstall_with_shizuku">Automatyczne usuwanie przy konflikcie</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Odinstalowuje istniejącą aplikację w przypadku konfliktu podpisów. Może to usunąć dane aplikacji</string>
     <string name="settings_ignore_install_target_rules">Ignoruj wymagania metody instalacji</string>
-    <string name="settings_ignore_install_target_rules_description">Pozwala wyłączyć modyfikacje wymagane przez wybraną metodę instalacji oraz włączyć te, które ona wyklucza. Zmodyfikowana aplikacja może nie działać</string>
     <string name="settings_auto_uninstall_warning_title">Włączyć automatyczne usuwanie?</string>
     <string name="settings_auto_uninstall_warning_message">Jeśli Android zgłosi konflikt podpisów podczas automatycznej instalacji przez Shizuku, Morphe usunie istniejącą aplikację przed instalacją zmodyfikowanego pliku APK</string>
     <string name="settings_auto_uninstall_warning_risk">Może to usunąć dane aplikacji. Jeśli instalacja zmodyfikowanego pliku APK się nie powiedzie po odinstalowaniu starej wersji, poprzednia aplikacja bezpowrotnie przepadnie</string>
@@ -1069,7 +1072,6 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_battery_optimization_description">Utrzymuje działanie modyfikatora, gdy aplikacja jest zminimalizowana</string>
     <string name="settings_system_process_runtime">Środowisko modyfikowania</string>
     <string name="settings_system_jvm_runtime_enable">Użyj wbudowanej maszyny wirtualnej</string>
-    <string name="settings_system_jvm_runtime_description">Modyfikuje za pomocą maszyny wirtualnej Java dołączonej do Morphe, która może wykorzystać tyle pamięci, ile udostępni urządzenie. Wyłącz, aby modyfikować przy użyciu środowiska systemu Android</string>
     <string name="settings_system_jvm_runtime_unavailable">Wymaga urządzenia z architekturą ARM lub 64-bitową x86</string>
     <string name="settings_system_patcher_completion_sound">Dźwięk ukończenia</string>
     <string name="settings_system_patcher_completion_sound_description">Odtwarza wyraźny dźwięk powodzenia lub niepowodzenia po zakończeniu modyfikacji</string>
@@ -1218,6 +1220,8 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_apk_download_helper_warning">Plik APK pochodzi z aplikacji pomocniczej, dlatego ufaj tylko aplikacjom, które znasz. Morphe nadal sprawdza pakiet, wersję i podpis każdego pliku przed modyfikowaniem</string>
     <string name="settings_system_apk_download_helper_installed_by">Zainstalowane przez %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Nieznany instalator</string>
+    <string name="settings_system_apk_download_helper_open_directly">Otwórz pomocnika od razu</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Pomija instrukcje pobierania i otwiera zaufanego pomocnika</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Brak plików</string>
     <string name="file_picker_read_error">Nie można odczytać tego folderu</string>

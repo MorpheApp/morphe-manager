@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.home
 
-import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerBasedShape
@@ -17,7 +16,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -28,13 +26,7 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.HomeAppCategoryState
 import app.morphe.manager.ui.model.HomeAppItem
-import app.morphe.manager.ui.screen.shared.CardBorder
-import app.morphe.manager.ui.screen.shared.Defaults
-import app.morphe.manager.ui.screen.shared.GlassButtonDefaults
-import app.morphe.manager.ui.screen.shared.MorpheLauncherLogo
-import app.morphe.manager.ui.screen.shared.animateCornersAsState
-import app.morphe.manager.ui.screen.shared.appAccentBorder
-import app.morphe.manager.ui.screen.shared.appAccentCardFill
+import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeAppSourceGroup
 import app.morphe.manager.util.RemoteAvatar
 import app.morphe.manager.util.rememberSourceAccent
@@ -211,18 +203,18 @@ internal fun HomeGlassCategoryRow(
     val mutedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
 
     val interactionModifier = when {
-        onLongClick != null -> Modifier.combinedClickable(
-            onClick = onClick ?: {},
-            onLongClick = onLongClick
+        onLongClick != null -> Modifier.shapedCombinedClickable(
+            shape = shape,
+            onLongClick = onLongClick,
+            onClick = onClick ?: {}
         )
-        onClick != null -> Modifier.clickable(onClick = onClick)
+        onClick != null -> Modifier.shapedClickable(shape, onClick = onClick)
         else -> Modifier
     }
 
     Surface(
         modifier = modifier
             .fillMaxWidth()
-            .clip(shape)
             .then(interactionModifier),
         color = containerColor,
         contentColor = contentColor,

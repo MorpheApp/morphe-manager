@@ -15,16 +15,15 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.model.HomeAppItem
+import app.morphe.manager.ui.screen.shared.CardAction
 import app.morphe.manager.ui.screen.shared.Defaults
+import app.morphe.manager.ui.screen.shared.EmptyState
 import app.morphe.manager.ui.screen.shared.autoMirrored
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
@@ -63,6 +62,13 @@ private fun ShowHiddenAppsButton(
     )
 }
 
+/**
+ * What ends the list: the hidden apps a search finds, the way on when it finds nothing, and the row
+ * opening the hidden apps.
+ *
+ * @param onOpenCommunityPatches Offered when a search finds nothing, since the app looked for may
+ *   come from a source not added yet.
+ */
 internal fun LazyListScope.hiddenSearchAndShowHiddenItems(
     hiddenAppItems: List<HomeAppItem>,
     filteredHiddenItems: List<HomeAppItem>,
@@ -70,6 +76,7 @@ internal fun LazyListScope.hiddenSearchAndShowHiddenItems(
     isSearchEmpty: Boolean,
     appActions: HomeAppActions,
     onShowHiddenApps: () -> Unit,
+    onOpenCommunityPatches: () -> Unit,
     keyPrefix: String = ""
 ) {
     if (filteredHiddenItems.isNotEmpty()) {
@@ -100,33 +107,18 @@ internal fun LazyListScope.hiddenSearchAndShowHiddenItems(
 
     if (isSearchEmpty) {
         item(key = "${keyPrefix}search_empty") {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = Defaults.SpaceExtraExtraLarge)
-                    .animateItem(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
-            ) {
-                Icon(
-                    imageVector = MaterialSymbols.Rounded.Search_off,
-                    contentDescription = null,
-                    modifier = Modifier.size(40.dp),
-                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
-                )
-                Text(
-                    text = stringResource(R.string.search_no_results),
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-                )
-                Text(
-                    text = stringResource(R.string.home_no_apps_search_subtitle, searchQuery),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f),
-                    textAlign = TextAlign.Center
-                )
-            }
+            EmptyState(
+                message = stringResource(R.string.search_no_results),
+                icon = MaterialSymbols.Rounded.Search_off,
+                subtitle = stringResource(R.string.home_no_apps_search_subtitle, searchQuery),
+                action = CardAction(
+                    icon = MaterialSymbols.Rounded.Open_in_new.autoMirrored,
+                    label = stringResource(R.string.sources_dialog_community),
+                    onClick = onOpenCommunityPatches
+                ),
+                contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.animateItem()
+            )
         }
     }
 

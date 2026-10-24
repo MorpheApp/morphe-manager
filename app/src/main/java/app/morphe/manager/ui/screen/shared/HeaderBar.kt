@@ -17,9 +17,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.RoundRect
 import androidx.compose.ui.geometry.Size
@@ -66,10 +70,13 @@ fun HeaderBar(
     // A field restored open, such as on coming back to the page, stands open rather than opening again
     val progress = remember { Animatable(if (open) 1f else 0f) }
     val focusManager = LocalFocusManager.current
+    // Cleared only off the field itself: a header composed closed, as a page turned to is, would
+    // otherwise take the focus a remote holds elsewhere, and the pager turns back after it
+    var fieldFocused by remember { mutableStateOf(false) }
     LaunchedEffect(open) {
         // The keyboard goes as the field starts to close, so what it leaves room for settles alongside
         // rather than jumping once the field is gone
-        if (!open) focusManager.clearFocus()
+        if (!open && fieldFocused) focusManager.clearFocus()
         progress.animateTo(if (open) 1f else 0f, SearchMorphSpec)
     }
     // Composed only while any of it shows, so a closed field holds no focus and takes no taps
@@ -101,7 +108,7 @@ fun HeaderBar(
                         requestFocus = remember { progress.value < 1f },
                         // Drawn out of the toggle's circle and back into it, fading as it nears the
                         // toggle so the two never show as one darker circle
-                        modifier = Modifier.graphicsLayer {
+                        modifier = Modifier.onFocusChanged { fieldFocused = it.hasFocus }.graphicsLayer {
                             shape = ToggleMorphPill(
                                 toggleSize = HeaderControlDefaults.Size.toPx(),
                                 gap = ControlGap.toPx(),

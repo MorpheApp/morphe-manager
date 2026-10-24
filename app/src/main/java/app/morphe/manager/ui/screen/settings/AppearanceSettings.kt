@@ -51,6 +51,7 @@ fun AppearanceSettings(themeViewModel: ThemeSettingsViewModel = koinViewModel())
     val appLanguage by AppLocale.selected.collectAsStateWithLifecycle()
     val showGreetingPhrases by themeViewModel.prefs.showGreetingPhrases.getAsState()
     val showRepatchNotice by themeViewModel.prefs.showRepatchNotice.getAsState()
+    val showMoreAppsCard by themeViewModel.prefs.showMoreAppsCard.getAsState()
     val colorAccents by themeViewModel.prefs.colorAccents.getAsState()
     val outlines by themeViewModel.prefs.outlines.getAsState()
     val blur by themeViewModel.prefs.blur.getAsState()
@@ -130,6 +131,8 @@ fun AppearanceSettings(themeViewModel: ThemeSettingsViewModel = koinViewModel())
             showRepatchNotice = showRepatchNotice,
             onGreetingPhrasesToggle = { themeViewModel.toggleShowGreetingPhrases(showGreetingPhrases) },
             onRepatchNoticeToggle = { themeViewModel.toggleShowRepatchNotice(showRepatchNotice) },
+            showMoreAppsCard = showMoreAppsCard,
+            onMoreAppsCardToggle = { themeViewModel.toggleShowMoreAppsCard(showMoreAppsCard) }
         )
     }
 
@@ -351,7 +354,9 @@ private fun HomeScreenSection(
     showGreetingPhrases: Boolean,
     showRepatchNotice: Boolean,
     onGreetingPhrasesToggle: () -> Unit,
-    onRepatchNoticeToggle: () -> Unit
+    onRepatchNoticeToggle: () -> Unit,
+    showMoreAppsCard: Boolean,
+    onMoreAppsCardToggle: () -> Unit
 ) {
     SettingsSection(
         title = stringResource(R.string.settings_appearance_home_screen),
@@ -371,6 +376,13 @@ private fun HomeScreenSection(
                 icon = MaterialSymbols.Rounded.Auto_fix_high,
                 checked = showRepatchNotice,
                 onToggle = onRepatchNoticeToggle
+            )
+            SettingsSwitchItem(
+                title = stringResource(R.string.settings_appearance_more_apps_card),
+                subtitle = stringResource(R.string.settings_appearance_more_apps_card_description),
+                icon = MaterialSymbols.Rounded.Apps,
+                checked = showMoreAppsCard,
+                onToggle = onMoreAppsCardToggle
             )
         }
     }

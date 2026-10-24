@@ -150,6 +150,13 @@ sealed class PatchBundleInfo {
         val signatures: Set<String>? = null,
         val patcherVersion: String? = null // Propagated from Global.patcherVersion
     ) : PatchBundleInfo() {
+        /**
+         * Whether the source stands behind the version it was scoped to: one marking it
+         * experimental does so only while its experimental versions are switched on.
+         */
+        fun offersVersion(experimentalEnabledUids: Set<String>) =
+            !isVersionExperimental || uid.toString() in experimentalEnabledUids
+
         fun patchSequence(allowIncompatible: Boolean) = if (allowIncompatible) {
             patches.asSequence()
         } else {
@@ -178,5 +185,38 @@ sealed class PatchBundleInfo {
 
             bundle.uid to patches
         }
+
+        /**
+         * The sources contributing to a run by default: those standing behind the APK's version,
+         * see [Scoped.offersVersion], and [chosenUid] whatever it says. When none does, the user
+         * went past the warning about the version, so every source contributes.
+         */
+        fun List<Scoped>.contributingAt(experimentalEnabledUids: Set<String>, chosenUid: Int? = null) =
+            filter { it.uid == chosenUid || it.offersVersion(experimentalEnabledUids) }.ifEmpty { this }
     }
+}
+
+/**
+ * Where the sources an APK is resolved against stand on its version, each answering for itself.
+ * One source supporting the version outright settles it as stable, so it reads as experimental
+ * only when every source that supports it says so.
+ */
+class VersionSupport(bundles: List<PatchBundleInfo.Scoped>) {
+    private val supporting = bundles.filter { it.compatible.isNotEmpty() }
+
+    /** Patches exist for the package, only at versions other than this one. */
+    val isMismatch = supporting.isEmpty() && bundles.any { it.incompatible.isNotEmpty() }
+
+    /** Whether any patch could be applied at all, the version aside. */
+    val hasPatches = supporting.isNotEmpty() || isMismatch || bundles.any { it.universal.isNotEmpty() }
+
+    /** Sources marking the version experimental, none once one supports it as stable. */
+    val experimentalUids: Set<Int> = when {
+        // Nothing supports the version, so whatever names it experimental is all there is to go by
+        supporting.isEmpty() -> bundles.filter { it.isVersionExperimental }
+        supporting.all { it.isVersionExperimental } -> supporting
+        else -> emptyList()
+    }.mapTo(mutableSetOf()) { it.uid }
+
+    val isExperimental get() = experimentalUids.isNotEmpty()
 }

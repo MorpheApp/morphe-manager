@@ -425,6 +425,7 @@ private fun IconEditor(
         label = "editor_guides"
     )
     val selectImage = stringResource(R.string.adaptive_icon_select_image)
+    val shape = RoundedCornerShape(Defaults.CornerLargeIncreased)
 
     val input = if (foreground != null) {
         Modifier.imageTransformGestures(
@@ -434,7 +435,12 @@ private fun IconEditor(
             onGestureChange = { isGesturing.value = it }
         )
     } else {
-        Modifier.clickable(onClickLabel = selectImage, onClick = onSelectImage)
+        Modifier.clickable(
+            interactionSource = null,
+            indication = shapedIndication(shape),
+            onClickLabel = selectImage,
+            onClick = onSelectImage
+        )
     }
 
     Box(
@@ -442,7 +448,7 @@ private fun IconEditor(
             .widthIn(max = AdaptiveIconConfig.EDITOR_MAX_WIDTH)
             .fillMaxWidth()
             .aspectRatio(1f)
-            .clip(RoundedCornerShape(Defaults.CornerLargeIncreased))
+            .clip(shape)
             .then(input)
             .drawWithCache {
                 val side = size.width

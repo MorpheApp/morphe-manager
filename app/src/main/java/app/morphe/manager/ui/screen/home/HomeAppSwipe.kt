@@ -54,6 +54,12 @@ internal data class SwipeActionConfig(
     val contentColor: Color
 )
 
+/** One side of a card's swipe: the action it reveals and what letting go past the threshold does. */
+internal class SwipeAction(val config: SwipeActionConfig, val onTrigger: () -> Unit)
+
+/** How far a card is dragged before letting go of it triggers the action uncovered. */
+private val SwipeActionThreshold = 90.dp
+
 /**
  * Swipe action opening an app's patches, in the app's own color where its sources declare one, as
  * its card and dialogs wear it, or the theme where they do not.
@@ -69,6 +75,17 @@ internal fun rememberPatchesSwipeAction(packageName: String): SwipeActionConfig 
     }
 }
 
+/** Swipe action taking a card off the list. */
+@Composable
+internal fun rememberHideSwipeAction(): SwipeActionConfig {
+    val label = stringResource(R.string.hide)
+    val container = MaterialTheme.colorScheme.errorContainer
+    val content = MaterialTheme.colorScheme.onErrorContainer
+    return remember(label, container, content) {
+        SwipeActionConfig(icon = MaterialSymbols.Rounded.Visibility_off, label = label, containerColor = container, contentColor = content)
+    }
+}
+
 /** Swipe action bringing a hidden app back onto the list. */
 @Composable
 internal fun rememberUnhideSwipeAction(): SwipeActionConfig {
@@ -81,120 +98,74 @@ internal fun rememberUnhideSwipeAction(): SwipeActionConfig {
 }
 
 /**
- * Semi-transparent background that reveals contextual action icons as the user drags the card.
+ * Semi-transparent edge a dragged card uncovers, fading its action in with [progress]. Dragging
+ * toward the start uncovers the end edge, so [atEnd] is set for the action of that side.
  */
 @Composable
-internal fun SwipeBackground(
-    startProgress: Float,
-    endProgress: Float,
-    startConfig: SwipeActionConfig?,
-    endConfig: SwipeActionConfig?,
-    modifier: Modifier = Modifier
-) {
-    val rtl = isRtl()
-
-    Box(modifier = modifier) {
-        // Dragging toward the start edge uncovers the end edge
-        if (startConfig != null && startProgress > 0.01f) {
-            Box(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .fillMaxWidth()
-                    .align(Alignment.CenterEnd)
-                    .background(
-                        startToEndGradient(
-                            startColor = startConfig.containerColor.copy(alpha = 0f),
-                            endColor = startConfig.containerColor.copy(alpha = 0.85f * startProgress),
-                            rtl = rtl
-                        )
-                    ),
-                contentAlignment = Alignment.CenterEnd
-            ) {
-                Column(
-                    modifier = Modifier
-                        .padding(end = 20.dp)
-                        .graphicsLayer { alpha = startProgress },
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
-                ) {
-                    Icon(
-                        imageVector = startConfig.icon,
-                        contentDescription = null,
-                        tint = startConfig.contentColor,
-                        modifier = Modifier.size(22.dp)
-                    )
-                    Text(
-                        text = startConfig.label,
-                        style = MaterialTheme.typography.labelSmall,
-                        color = startConfig.contentColor,
-                        fontWeight = FontWeight.SemiBold
-                    )
-                }
-            }
-        }
-
-        // Dragging toward the end edge uncovers the start edge
-        if (endConfig != null && endProgress > 0.01f) {
-            Box(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .fillMaxWidth()
-                    .align(Alignment.CenterStart)
-                    .background(
-                        startToEndGradient(
-                            startColor = endConfig.containerColor.copy(alpha = 0.85f * endProgress),
-                            endColor = endConfig.containerColor.copy(alpha = 0f),
-                            rtl = rtl
-                        )
-                    ),
-                contentAlignment = Alignment.CenterStart
-            ) {
-                Column(
-                    modifier = Modifier
-                        .padding(start = 20.dp)
-                        .graphicsLayer { alpha = endProgress },
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
-                ) {
-                    Icon(
-                        imageVector = endConfig.icon,
-                        contentDescription = null,
-                        tint = endConfig.contentColor,
-                        modifier = Modifier.size(22.dp)
-                    )
-                    Text(
-                        text = endConfig.label,
-                        style = MaterialTheme.typography.labelSmall,
-                        color = endConfig.contentColor,
-                        fontWeight = FontWeight.SemiBold
-                    )
-                }
-            }
+private fun BoxScope.SwipeReveal(config: SwipeActionConfig, progress: Float, atEnd: Boolean) {
+    val tint = config.containerColor.copy(alpha = 0.85f * progress)
+    val clear = config.containerColor.copy(alpha = 0f)
+    Box(
+        modifier = Modifier
+            .matchParentSize()
+            .background(
+                startToEndGradient(
+                    startColor = if (atEnd) clear else tint,
+                    endColor = if (atEnd) tint else clear,
+                    rtl = isRtl()
+                )
+            ),
+        contentAlignment = if (atEnd) Alignment.CenterEnd else Alignment.CenterStart
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 20.dp)
+                .graphicsLayer { alpha = progress },
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
+        ) {
+            Icon(
+                imageVector = config.icon,
+                contentDescription = null,
+                tint = config.contentColor,
+                modifier = Modifier.size(22.dp)
+            )
+            Text(
+                text = config.label,
+                style = MaterialTheme.typography.labelSmall,
+                color = config.contentColor,
+                fontWeight = FontWeight.SemiBold
+            )
         }
     }
 }
 
 /**
- * Shared container that handles horizontal swipe gestures and drives the [SwipeBackground] reveal animation.
+ * Card that swipes horizontally, uncovering the action of each side as it is dragged and running
+ * it once let go past the threshold. A side without an action does not give at all.
+ *
+ * @param enabled Whether it swipes. Turning it off puts a dragged card back in place.
+ * @param offsetX Where the card is dragged to, hoisted only by a card that moves it on its own too.
  */
 @Composable
 internal fun SwipeableCardContainer(
+    start: SwipeAction?,
+    end: SwipeAction?,
     modifier: Modifier = Modifier,
-    offsetX: Animatable<Float, AnimationVector1D>,
-    actionThresholdPx: Float,
-    onSwipeToStart: () -> Unit,
-    onSwipeToEnd: () -> Unit,
-    startHaptic: Int = HapticFeedbackConstants.LONG_PRESS,
-    endHaptic: Int = HapticFeedbackConstants.VIRTUAL_KEY,
     enabled: Boolean = true,
-    background: @Composable BoxScope.(startProgress: Float, endProgress: Float) -> Unit,
+    offsetX: Animatable<Float, AnimationVector1D> = remember { Animatable(0f) },
     content: @Composable () -> Unit
 ) {
     val view = LocalView.current
     val scope = rememberCoroutineScope()
+    val actionThresholdPx = with(LocalDensity.current) { SwipeActionThreshold.toPx() }
     // The gesture outlives recompositions, while the card it acts on may have been updated since
-    val currentOnSwipeToStart by rememberUpdatedState(onSwipeToStart)
-    val currentOnSwipeToEnd by rememberUpdatedState(onSwipeToEnd)
+    val currentStart by rememberUpdatedState(start)
+    val currentEnd by rememberUpdatedState(end)
+
+    LaunchedEffect(enabled) {
+        if (!enabled) offsetX.animateTo(0f, tween(200))
+    }
 
     // The offset is held in layout coordinates (negative drags the card toward the start edge),
     // while pointer deltas and translationX are physical, so both are mirrored in RTL
@@ -206,53 +177,54 @@ internal fun SwipeableCardContainer(
     val endProgress by remember { derivedStateOf { (offsetX.value / actionThresholdPx).coerceIn(0f, 1f) } }
 
     Box(modifier = modifier.fillMaxWidth()) {
-        background(startProgress, endProgress)
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .clip(RoundedCornerShape(Defaults.CornerLargeIncreased))
+        ) {
+            start?.takeIf { startProgress > 0.01f }?.let { SwipeReveal(it.config, startProgress, atEnd = true) }
+            end?.takeIf { endProgress > 0.01f }?.let { SwipeReveal(it.config, endProgress, atEnd = false) }
+        }
 
         Box(
             modifier = Modifier
                 .graphicsLayer { translationX = offsetX.value * directionSign }
                 .then(
                     if (enabled) Modifier.pointerInput(rtl) {
+                        val settle = spring<Float>(
+                            dampingRatio = Spring.DampingRatioMediumBouncy,
+                            stiffness = Spring.StiffnessMedium
+                        )
+                        val limit = actionThresholdPx * 1.5f
                         detectHorizontalDragGestures(
                             onDragEnd = {
+                                val (action, haptic) = when {
+                                    offsetX.value < -actionThresholdPx ->
+                                        currentStart to HapticFeedbackConstants.LONG_PRESS
+                                    offsetX.value > actionThresholdPx ->
+                                        currentEnd to HapticFeedbackConstants.VIRTUAL_KEY
+                                    else -> null to null
+                                }
                                 scope.launch {
-                                    when {
-                                        offsetX.value < -actionThresholdPx -> {
-                                            view.performHapticFeedback(startHaptic)
-                                            offsetX.animateTo(0f, tween(200))
-                                            currentOnSwipeToStart()
-                                        }
-                                        offsetX.value > actionThresholdPx -> {
-                                            view.performHapticFeedback(endHaptic)
-                                            offsetX.animateTo(0f, tween(200))
-                                            currentOnSwipeToEnd()
-                                        }
-                                        else -> offsetX.animateTo(
-                                            0f,
-                                            spring(
-                                                dampingRatio = Spring.DampingRatioMediumBouncy,
-                                                stiffness = Spring.StiffnessMedium
-                                            )
-                                        )
+                                    if (action != null && haptic != null) {
+                                        view.performHapticFeedback(haptic)
+                                        offsetX.animateTo(0f, tween(200))
+                                        action.onTrigger()
+                                    } else {
+                                        offsetX.animateTo(0f, settle)
                                     }
                                 }
                             },
                             onDragCancel = {
-                                scope.launch {
-                                    offsetX.animateTo(
-                                        0f,
-                                        spring(
-                                            dampingRatio = Spring.DampingRatioMediumBouncy,
-                                            stiffness = Spring.StiffnessMedium
-                                        )
-                                    )
-                                }
+                                scope.launch { offsetX.animateTo(0f, settle) }
                             },
                             onHorizontalDrag = { change, dragAmount ->
                                 change.consume()
                                 scope.launch {
-                                    val clamped = (offsetX.value + dragAmount * directionSign)
-                                        .coerceIn(-actionThresholdPx * 1.5f, actionThresholdPx * 1.5f)
+                                    val clamped = (offsetX.value + dragAmount * directionSign).coerceIn(
+                                        if (currentStart != null) -limit else 0f,
+                                        if (currentEnd != null) limit else 0f
+                                    )
                                     offsetX.snapTo(clamped)
                                 }
                             }
@@ -292,14 +264,7 @@ internal fun DynamicAppCard(
     val showHideDialog = remember { mutableStateOf(false) }
     val density = LocalDensity.current
     val view = LocalView.current
-
-    val actionThresholdPx = with(density) { 90.dp.toPx() }
     val offsetX = remember { Animatable(0f) }
-
-    // When entering multi-select mode snap card back to center (no swipe visible)
-    LaunchedEffect(isMultiSelectMode) {
-        if (isMultiSelectMode) offsetX.animateTo(0f, tween(200))
-    }
 
     // Hint animation: nudge toward the end then the start, once (only first card)
     LaunchedEffect(showGestureHint) {
@@ -317,23 +282,12 @@ internal fun DynamicAppCard(
         onGestureHintShown()
     }
 
-    val hideLabel = stringResource(R.string.hide)
-    val patchesLabel = stringResource(R.string.patches)
     val selectLabel = stringResource(R.string.accessibility_select_app)
     val moveUpLabel = stringResource(R.string.accessibility_move_up)
     val moveDownLabel = stringResource(R.string.accessibility_move_down)
-    val errorContainer = MaterialTheme.colorScheme.errorContainer
-    val onErrorContainer = MaterialTheme.colorScheme.onErrorContainer
 
-    val startConfig = remember(hideLabel, errorContainer, onErrorContainer) {
-        SwipeActionConfig(
-            icon = MaterialSymbols.Rounded.Visibility_off,
-            label = hideLabel,
-            containerColor = errorContainer,
-            contentColor = onErrorContainer
-        )
-    }
-    val endConfig = rememberPatchesSwipeAction(item.packageName)
+    val hideAction = SwipeAction(rememberHideSwipeAction()) { showHideDialog.value = true }
+    val patchesAction = SwipeAction(rememberPatchesSwipeAction(item.packageName), onShowPatches)
 
     Box(modifier = modifier.fillMaxWidth().semantics {
         customActions = buildList {
@@ -344,8 +298,9 @@ internal fun DynamicAppCard(
                 add(CustomAccessibilityAction(selectLabel) { onLongPress(); true })
             }
             if (swipeActionsEnabled) {
-                add(CustomAccessibilityAction(hideLabel) { showHideDialog.value = true; true })
-                add(CustomAccessibilityAction(patchesLabel) { onShowPatches(); true })
+                for (action in listOf(hideAction, patchesAction)) {
+                    add(CustomAccessibilityAction(action.config.label) { action.onTrigger(); true })
+                }
             }
             if (onMoveUp != null) {
                 add(CustomAccessibilityAction(moveUpLabel) { onMoveUp(); true })
@@ -356,22 +311,10 @@ internal fun DynamicAppCard(
         }
     }) {
         SwipeableCardContainer(
-            offsetX = offsetX,
-            actionThresholdPx = actionThresholdPx,
-            onSwipeToStart = { showHideDialog.value = true },
-            onSwipeToEnd = onShowPatches,
+            start = hideAction,
+            end = patchesAction,
             enabled = swipeActionsEnabled && !isMultiSelectMode,
-            background = { startProgress, endProgress ->
-                SwipeBackground(
-                    startProgress = startProgress,
-                    endProgress = endProgress,
-                    startConfig = startConfig,
-                    endConfig = endConfig,
-                    modifier = Modifier
-                        .matchParentSize()
-                        .clip(RoundedCornerShape(Defaults.CornerLargeIncreased))
-                )
-            }
+            offsetX = offsetX
         ) {
             SelectableCard(
                 isSelected = isSelected,
@@ -436,41 +379,14 @@ internal fun HiddenSearchAppCard(
     onAppClick: () -> Unit,
     onShowPatches: () -> Unit
 ) {
-    val density = LocalDensity.current
-    val actionThresholdPx = with(density) { 90.dp.toPx() }
-    val offsetX = remember { Animatable(0f) }
-
-    val startConfig = rememberUnhideSwipeAction()
-    val endConfig = rememberPatchesSwipeAction(item.packageName)
-
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .graphicsLayer { alpha = 0.6f }
+    SwipeableCardContainer(
+        start = SwipeAction(rememberUnhideSwipeAction(), onUnhide),
+        end = SwipeAction(rememberPatchesSwipeAction(item.packageName), onShowPatches),
+        modifier = modifier.graphicsLayer { alpha = 0.6f }
     ) {
-        SwipeableCardContainer(
-            offsetX = offsetX,
-            actionThresholdPx = actionThresholdPx,
-            onSwipeToStart = onUnhide,
-            onSwipeToEnd = onShowPatches,
-            startHaptic = HapticFeedbackConstants.LONG_PRESS,
-            endHaptic = HapticFeedbackConstants.VIRTUAL_KEY,
-            background = { startProgress, endProgress ->
-                SwipeBackground(
-                    startProgress = startProgress,
-                    endProgress = endProgress,
-                    startConfig = startConfig,
-                    endConfig = endConfig,
-                    modifier = Modifier
-                        .matchParentSize()
-                        .clip(RoundedCornerShape(Defaults.CornerLargeIncreased))
-                )
-            }
-        ) {
-            HomeAppCard(
-                item = item,
-                onClick = onAppClick
-            )
-        }
+        HomeAppCard(
+            item = item,
+            onClick = onAppClick
+        )
     }
 }

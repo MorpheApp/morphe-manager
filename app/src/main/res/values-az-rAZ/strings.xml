@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Yamaqlanmayıb</string>
     <string name="home_no_patches_available">Yamaqlar əlçatan deyil</string>
     <string name="home_app_hide_title">Bu tətbiq gizlədilsin?</string>
+    <string name="home_more_apps_title">Daha çox tətbiq</string>
+    <string name="home_more_apps_hide_title">Bu kartı gizlətsin?</string>
+    <string name="home_more_apps_hide_message">Tənzimləmələr &gt; Görünüş &gt; Əsas ekranda bunu istənilən vaxt geri qaytara bilərsiniz</string>
     <string name="home_app_hide_message">Bu tətbiq əsas ekrandan gizlədiləcək. Siyahının aşağısındakı düyməni istifadə edərək onu daha sonra gizli tətbiqlərdən qaytara bilərsiniz</string>
     <string name="home_app_will_be_hidden">Bu tətbiq gizlədiləcək</string>
     <string name="home_app_hidden_named">%s gizlədilib</string>
@@ -31,6 +34,9 @@
     <string name="deep_link_add_source_only_universal">Yalnız ümumi yamaqlar əlavə edilib. Mənbənin tətbiq siyahısından tətbiqləri əlavə edə bilərsiniz</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Bu mənbə artıq əlavə edilib. Bu tətbiq mövcud mənbədən əlavə edilsin?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="mpp_import_update_message">Bu, %s tətbiqinin yeni versiyasıdır. Onu yeniləmək istəyirsiniz?</string>
+    <string name="mpp_import_unreadable">Bu fayl oxuna bilməz</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Əlçatan Morphe yenilənməsi</string>
     <string name="home_update_available_subtitle">Yeni versiya quraşdırılmağa hazırdır</string>
@@ -478,10 +484,10 @@ Davam etmək istədiyinizə əminsiniz?"</string>
     <string name="batch_patch_no_selection">Mövcud yamaqlardan heç biri seçilməyib</string>
     <string name="batch_patch_policy_install">Bitdikdə quraşdır</string>
     <string name="batch_patch_policy_install_description">Növbə bitdikdən dərhal sonra hər bir yamaqlanmış tətbiqi quraşdırır. Qapalıdırsa, APK-lar daha sonra üçün saxlanılır</string>
-    <string name="batch_patch_policy_mount">Bitdikdə mount et</string>
-    <string name="batch_patch_policy_mount_description">Növbə bitdikdə hər yamaqlanmış tətbiqi mount edir. Off seçimi APK-ları sonraya saxlayır.</string>
-    <string name="batch_patch_policy_install_mount">Bitdikdə quraşdır və ya mount et</string>
-    <string name="batch_patch_policy_install_mount_description">Növbə bitdikdə hər yamaqlanmış tətbiqi quraşdırır və ya mount edir. Off seçimi APK-ları sonraya saxlayır.</string>
+    <string name="batch_patch_policy_mount">Bitdikdə montajla</string>
+    <string name="batch_patch_policy_mount_description">Növbə bitdikdə hər bir yamaqlanmış tətbiqi montaj edir. Qapadılarsa, APK-lar daha sonra üçün saxlanılır</string>
+    <string name="batch_patch_policy_install_mount">Bitdikdə quraşdır və ya montajla</string>
+    <string name="batch_patch_policy_install_mount_description">Növbə bitdikdə hər bir yamaqlanmış tətbiqi quraşdırır və ya montajlayır. Qapadılarsa, APK-lar daha sonra üçün saxlanılır</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_start">Başlat</string>
     <string name="batch_patch_stop_title">Toplu yamaqlama dayandırılsın?</string>
@@ -803,6 +809,8 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Salamlama mesajını göstərir</string>
     <string name="settings_appearance_repatch_notice">Yenidən yamaqlama bildirişi</string>
     <string name="settings_appearance_repatch_notice_description">Yamaqlanmış tətbiqlər yenidən yamaqlana bildikdə etiket göstərir</string>
+    <string name="settings_appearance_more_apps_card">Daha çox tətbiq kartı</string>
+    <string name="settings_appearance_more_apps_card_description">Tətbiqlərin altında icma yamaqlarına yönləndirən kart göstərir</string>
     <string name="settings_appearance_app_card_colors">Tətbiq kartı rəngləri</string>
     <string name="settings_appearance_app_card_colors_default">İlkin</string>
     <string name="settings_appearance_app_card_colors_default_description">Hər tətbiqə öz paketinin rəngini ver</string>
@@ -867,7 +875,7 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="settings_advanced_update_interval_daily">Gündəlik</string>
     <string name="settings_advanced_update_interval_weekly">Həftəlik</string>
     <string name="settings_advanced_update_interval_monthly">Aylıq</string>
-    <string name="settings_advanced_update_interval_battery_warning">Fon yoxlamaları bəzi cihazlarda davamlı işləməyə bilər. Xiaomi, Huawei, Samsung və OnePlus kimi istehsalçılar batareyanı qorumaq üçün dəfələrlə fon proseslərini ciddi şəkildə məhdudlaşdırırlar</string>
+    <string name="settings_advanced_update_interval_battery_warning">Fon yoxlamaları arxa plan tətbiqlərini məhdudlaşdıran Xiaomi, Huawei, Samsung və OnePlus kimi cihazlarda sabit işləməyə bilər</string>
     <string name="settings_advanced_external_batch_patch">Xarici tətikləyicilərə icazə ver</string>
     <string name="settings_advanced_external_batch_patch_description">Avtomatlaşdırma tətbiqlərinə toplu yamaqlamağa başlamağa icazə verir</string>
     <string name="external_batch_patch_title">Toplu yamaqlamaya başlanılsın?</string>
@@ -929,7 +937,7 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Fərdi ad daxil et</string>
     <string name="settings_advanced_patch_options_path_gone">Bu qovluq artıq oxuna bilmir. Onu təkrar seçin və ya təmizləyin, əks halda yamaqlama dayanacaq və bu haqda sorğu edəcək</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Tətbiq simvolu</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Tətbiqin yamaqlandığı simvol. Bu həmçinin Android Auto və sistem tənzimləmələrinin tətbiq siyahısı kimi tətbiqin onu sonradan dəyişə bilmədiyi yerlərdə istifadə olunur</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Tətbiqin yamaqlandığı simvol, həmçinin Android Auto kimi sonradan dəyişdirilə bilmədiyi yerlərdə istifadə olunur</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Fərdi tətbiq simvolu üçün simvol şəkilləri olan qovluq tələb olunur</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Fərdi simvol</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Fərdi simvol kimi istifadə etməyə şəkillər olan qovluq.
@@ -1036,7 +1044,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="settings_auto_uninstall_with_shizuku">Ziddiyyət zamanı avtomatik sil</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Mövcud tətbiqi imza ziddiyyətində silir. Bu, tətbiq məlumatlarını silə bilər</string>
     <string name="settings_ignore_install_target_rules">Quraşdırma hədəfi tələblərinə məhəl qoyma</string>
-    <string name="settings_ignore_install_target_rules_description">Quraşdırma hədəfinin tələb etdiyi yamaqları qapatmağa, istisna etdiklərini isə açmağa icazə verir. Yamaqlanmış tətbiq işləməyə bilər</string>
+    <string name="settings_ignore_install_target_rules_description">Quraşdırma hədəfinin tələb etdiyi yamaqları qapatmağa və istisna etdiklərini aktivləşdirməyə imkan verir. Yamaqlanmış tətbiq işləməyə bilər</string>
     <string name="settings_auto_uninstall_warning_title">Avtomatik silmə aktivləşdirilsin?</string>
     <string name="settings_auto_uninstall_warning_message">Android Shizuku avtomatik quraşdırılması zamanı imza münaqişəsini bildirərsə, Morphe yamaqlanmış APK-nı quraşdırmadan əvvəl mövcud tətbiqi siləcək</string>
     <string name="settings_auto_uninstall_warning_risk">Bu, tətbiq məlumatlarını silə bilər. Silinmədən sonra yamaqlanmış APK-nı quraşdırmaq mümkün olmasa, əvvəlki tətbiq artıq itirilmiş ola bilər</string>
@@ -1067,7 +1075,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="settings_system_battery_optimization_description">Tətbiq qısılanda yamaqlayıcını işlək saxlayır</string>
     <string name="settings_system_process_runtime">Yamaqlayıcı icra müddəti</string>
     <string name="settings_system_jvm_runtime_enable">Daxili VM İstifadə Et</string>
-    <string name="settings_system_jvm_runtime_description">Morphe-nin daşıdığı, cihazın ayırdığı qədər yaddaş istifadə edə bilən Java VM-də yamaqlayır. Android icra müddəti ilə yamaqlamaq üçün qapat</string>
+    <string name="settings_system_jvm_runtime_description">Morphe-nin öz Java VM-ində yamaqlayır, bu da daha çox operativ yaddaş istifadə edə bilər. Android-in öz icra mühitini istifadə etmək üçün qapat</string>
     <string name="settings_system_jvm_runtime_unavailable">ARM və ya 64 bitlik x86 cihazı tələb olunur</string>
     <string name="settings_system_patcher_completion_sound">Tamamlanma səsi</string>
     <string name="settings_system_patcher_completion_sound_description">Yamaqlama bitdikdə uğur və ya uğursuzluq üçün fərqli ton səsləndirir</string>

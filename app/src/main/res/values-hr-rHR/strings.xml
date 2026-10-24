@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Nije patchano</string>
     <string name="home_no_patches_available">Nema dostupnih patcheva</string>
     <string name="home_app_hide_title">Sakriti ovu aplikaciju?</string>
+    <string name="home_more_apps_title">Više aplikacija</string>
+    <string name="home_more_apps_hide_title">Sakriti ovu karticu?</string>
+    <string name="home_more_apps_hide_message">Možete ga vratiti u bilo kojem trenutku u Postavke &gt; Izgled &gt; Početni zaslon</string>
     <string name="home_app_hide_message">Ova će aplikacija biti skrivena na početnom zaslonu. Kasnije je možete vratiti iz skrivenih aplikacija pomoću tipke pri dnu popisa</string>
     <string name="home_app_will_be_hidden">Ova će aplikacija biti skrivena</string>
     <string name="home_app_hidden_named">%s skrivena</string>
@@ -31,6 +34,9 @@
     <string name="deep_link_add_source_only_universal">Dodani su samo univerzalni patchevi. Aplikacije možete dodati s popisa aplikacija izvora.</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Izvor je već dodan. Želite li dodati ovu aplikaciju iz postojećeg izvora?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="mpp_import_update_message">Ovo je nova verzija %s. Želite li je ažurirati?</string>
+    <string name="mpp_import_unreadable">Ova datoteka se ne može pročitati</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Dostupno ažuriranje aplikacije</string>
     <string name="home_update_available_subtitle">Nova verzija spremna za instalaciju</string>
@@ -807,6 +813,8 @@ Deinstaliranje će trajno izbrisati sve podatke aplikacije"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Prikazuje pozdravnu poruku</string>
     <string name="settings_appearance_repatch_notice">Obavijest o ponovnom patchanju</string>
     <string name="settings_appearance_repatch_notice_description">Prikazuje baner kada se patchane aplikacije mogu ponovno patchati</string>
+    <string name="settings_appearance_more_apps_card">Kartica Više aplikacija</string>
+    <string name="settings_appearance_more_apps_card_description">Prikazuje karticu ispod aplikacija koja vodi do zakrpa zajednice</string>
     <string name="settings_appearance_app_card_colors">Boje kartica aplikacije</string>
     <string name="settings_appearance_app_card_colors_default">Zadano</string>
     <string name="settings_appearance_app_card_colors_default_description">Dajte svakoj aplikaciji boju vlastitog paketa</string>
@@ -871,7 +879,7 @@ Patchevi nisu pogođeni: omogućite predizdanja patcheva za svaki izvor na popis
     <string name="settings_advanced_update_interval_daily">Dnevno</string>
     <string name="settings_advanced_update_interval_weekly">Sedmično</string>
     <string name="settings_advanced_update_interval_monthly">Mjesečno</string>
-    <string name="settings_advanced_update_interval_battery_warning">Provjere u pozadini možda neće pouzdano funkcionirati na nekim uređajima. Proizvođači poput Xiaomija, Huaweija, Samsunga i OnePlusa često agresivno ograničavaju pozadinske procese kako bi uštedjeli bateriju.</string>
+    <string name="settings_advanced_update_interval_battery_warning">Provjere u pozadini možda neće raditi pouzdano na uređajima koji ograničavaju aplikacije u pozadini, kao što su Xiaomi, Huawei, Samsung i OnePlus</string>
     <string name="settings_advanced_external_batch_patch">Dopusti vanjske okidače</string>
     <string name="settings_advanced_external_batch_patch_description">Dozvoljava aplikacijama za automatizaciju pokretanje grupnog patchanja</string>
     <string name="external_batch_patch_title">Pokrenuti grupno patchanje?</string>
@@ -933,7 +941,7 @@ Patchevi nisu pogođeni: omogućite predizdanja patcheva za svaki izvor na popis
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Unesite prilagođeni naziv</string>
     <string name="settings_advanced_patch_options_path_gone">Ova se mapa više ne može pročitati. Odaberite je ponovno ili je uklonite; u suprotnom će se patchanje zaustaviti i zatražiti rješavanje tog problema</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Ikona aplikacije</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Ikona kojom je aplikacija patchana. Koristi se i tamo gdje aplikacija kasnije ne može promijeniti ikonu, kao što su Android Auto i popis aplikacija u sistemskim postavkama</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Ikona kojom je aplikacija patchana, koristi se i tamo gdje se kasnije ne može promijeniti, kao što je Android Auto</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Prilagođena ikona aplikacije zahtijeva mapu s slikama ikona</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Prilagođena ikona</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Mapa sa slikama koje će se koristiti kao prilagođena ikona.
@@ -1041,7 +1049,7 @@ Dimenzije slike moraju biti sljedeće:
     <string name="settings_auto_uninstall_with_shizuku">Automatski deinstaliraj u slučaju sukoba</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Deinstalira postojeću aplikaciju pri konfliktu potpisa. Ovo može ukloniti podatke aplikacije</string>
     <string name="settings_ignore_install_target_rules">Zanemari zahtjeve cilja instalacije</string>
-    <string name="settings_ignore_install_target_rules_description">Omogućuje isključivanje zahtjeva koje ciljna instalacija postavlja, kao i uključivanje onoga što ona inače onemogućuje. Patchana aplikacija možda neće raditi.</string>
+    <string name="settings_ignore_install_target_rules_description">Omogućuje isključivanje patcheva koje zahtijeva ciljna instalacija i uključivanje onih koje ona isključuje. Patchana aplikacija možda neće raditi</string>
     <string name="settings_auto_uninstall_warning_title">Omogućiti automatsku deinstalaciju?</string>
     <string name="settings_auto_uninstall_warning_message">Ako Android prijavi sukob potpisa tijekom automatske instalacije Shizukua, Morphe će deinstalirati postojeću aplikaciju prije instaliranja patchane APK.</string>
     <string name="settings_auto_uninstall_warning_risk">Ovo može ukloniti podatke aplikacije. Ako se patchani APK ne instalira nakon deinstalacije, prethodna je aplikacija možda već nestala.</string>
@@ -1072,7 +1080,7 @@ Detalji: %2$s"</string>
     <string name="settings_system_battery_optimization_description">Održava aplikaciju pokrenutom čak i kada je minimizirana</string>
     <string name="settings_system_process_runtime">Izvođenje patchera</string>
     <string name="settings_system_jvm_runtime_enable">Koristi ugrađeni VM</string>
-    <string name="settings_system_jvm_runtime_description">Poprasci u Java VM-u koje nosi Morphe, koji mogu koristiti toliko memorije koliko uređaj ima na raspolaganju. Isključite za popravak s vremenom izvođenja Androida</string>
+    <string name="settings_system_jvm_runtime_description">Zakrpe u vlastitoj Java VM-u Morphe-a, koja može koristiti više memorije. Isključite kako biste koristili Android runtime</string>
     <string name="settings_system_jvm_runtime_unavailable">Potreban je ARM ili 64-bitni x86 uređaj</string>
     <string name="settings_system_patcher_completion_sound">Zvučni efekt dovršetka</string>
     <string name="settings_system_patcher_completion_sound_description">Reproducira zaseban ton za uspjeh ili neuspjeh kada se patchanje završi</string>
@@ -1221,6 +1229,8 @@ Detalji: %2$s"</string>
     <string name="settings_system_apk_download_helper_warning">APK dolazi iz pomoćne aplikacije, zato vjerujte samo aplikacijama koje poznajete. Morphe i dalje provjerava paket, verziju i potpis svake datoteke prije patchanja</string>
     <string name="settings_system_apk_download_helper_installed_by">Instalirao/la %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Instalater nepoznat</string>
+    <string name="settings_system_apk_download_helper_open_directly">Odmah otvori pomoćnik</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Preskače upute za preuzimanje i otvara pouzdanog pomoćnika</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Nema datoteka ovdje</string>
     <string name="file_picker_read_error">Nije moguće pročitati ovu mapu</string>

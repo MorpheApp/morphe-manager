@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.shared
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -15,7 +14,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
@@ -33,12 +31,12 @@ fun ExpandableSurface(
     headerTint: Color = dialogTextColor()
 ) {
     var expanded by remember { mutableStateOf(initialExpanded) }
+    // The header is pressed and focused on the surface's own shape, so either fits its corners
+    val shape = RoundedCornerShape(Defaults.CornerMedium)
 
     Surface(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(Defaults.CornerMedium)),
-        shape = RoundedCornerShape(Defaults.CornerMedium),
+        modifier = modifier.fillMaxWidth(),
+        shape = shape,
         color = headerTint.copy(alpha = 0.05f),
         border = CardBorder.tinted(headerTint)
     ) {
@@ -47,7 +45,7 @@ fun ExpandableSurface(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { expanded = !expanded }
+                    .shapedClickable(shape) { expanded = !expanded }
                     .padding(Defaults.SpaceMedium),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically

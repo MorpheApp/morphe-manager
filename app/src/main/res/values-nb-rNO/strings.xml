@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Ikke patchet</string>
     <string name="home_no_patches_available">Ingen patcher tilgjengelig</string>
     <string name="home_app_hide_title">Skjul denne appen?</string>
+    <string name="home_more_apps_title">Flere apper</string>
+    <string name="home_more_apps_hide_title">Skjul dette kortet?</string>
+    <string name="home_more_apps_hide_message">Du kan bringe den tilbake når som helst i Innstillinger &gt; Utseende &gt; Hjemmeskjerm</string>
     <string name="home_app_hide_message">Denne appen vil være skjult fra startskjermen. Du kan gjenopprette den senere fra de skjulte appene ved hjelp av knappen nederst i listen</string>
     <string name="home_app_will_be_hidden">Denne appen vil bli skjult</string>
     <string name="home_app_hidden_named">%s skjult</string>
@@ -31,6 +34,7 @@
     <string name="deep_link_add_source_only_universal">Bare de universelle patchene er lagt til. Du kan legge tilapper fra kildeappens appliste</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Denne kilden er allerede lagt til. Vil du legge til denne appen fra den eksisterende kilden?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-oppdatering er tilgjengelig</string>
     <string name="home_update_available_subtitle">Ny versjon klar for installasjon</string>
@@ -803,6 +807,8 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Viser en hilsen</string>
     <string name="settings_appearance_repatch_notice">Varsel om å lappe på nytt</string>
     <string name="settings_appearance_repatch_notice_description">Viser en banner når patched apper kan patches på nytt</string>
+    <string name="settings_appearance_more_apps_card">Flere apper-kort</string>
+    <string name="settings_appearance_more_apps_card_description">Viser et kort under appene som fører til fellesskapspatcher</string>
     <string name="settings_appearance_app_card_colors">App-kortfarger</string>
     <string name="settings_appearance_app_card_colors_default">Standard</string>
     <string name="settings_appearance_app_card_colors_default_description">Gi hver app fargen fra sin egen pakke</string>
@@ -867,7 +873,6 @@ Patcher påvirkes ikke: aktiver pre-release-patcher for hver kilde i patch-kilde
     <string name="settings_advanced_update_interval_daily">Daglig</string>
     <string name="settings_advanced_update_interval_weekly">Ukentlig</string>
     <string name="settings_advanced_update_interval_monthly">Månedlig</string>
-    <string name="settings_advanced_update_interval_battery_warning">Bakgrunnssjekker fungerer kanskje ikke pålitelig på noen enheter. Produsenter som Xiaomi, Huawei, Samsung og OnePlus begrenser ofte bakgrunnsprosesser for å spare batteri</string>
     <string name="settings_advanced_external_batch_patch">Tillat eksterne utløsere</string>
     <string name="settings_advanced_external_batch_patch_description">Tillater automatiseringsapper å starte batch-patching</string>
     <string name="external_batch_patch_title">Start batch-patching?</string>
@@ -929,7 +934,6 @@ Patcher påvirkes ikke: aktiver pre-release-patcher for hver kilde i patch-kilde
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Skriv inn et egendefinert navn</string>
     <string name="settings_advanced_patch_options_path_gone">Denne mappen kan ikke lenger leses. Velg den på nytt eller fjern den, ellers vil patcheprosessen stoppe og spørre om det.</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">App-ikon</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Ikonet som appen blir patchet med. Det brukes også der appen ikke kan endre det senere, for eksempel i Android Auto og i applisten i systeminnstillingene.</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Det egendefinerte app-ikonet trenger en mappe med ikonbilder.</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Egendefinert ikon</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Mappe med bilder som skal brukes som et tilpasset ikon.
@@ -1037,7 +1041,6 @@ morphe_header_custom_dark.png
     <string name="settings_auto_uninstall_with_shizuku">Automatisk avinstallasjon ved konflikt</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Avinstallerer den eksisterende appen ved signaturkonflikt. Dette kan fjerne appdata</string>
     <string name="settings_ignore_install_target_rules">Ignorer installasjonsmålskrav</string>
-    <string name="settings_ignore_install_target_rules_description">La patcher at målkrevende installasjoner skrus av og de som er utelukket skrus på. Den patched appen fungerer kanskje ikke</string>
     <string name="settings_auto_uninstall_warning_title">Aktiver automatisk avinstallasjon?</string>
     <string name="settings_auto_uninstall_warning_message">Hvis Android rapporterer en signaturkonflikt under Shizuku-autoinstallasjon, vil Morphe avinstallere den eksisterende appen før den installerer den patchede APK-en</string>
     <string name="settings_auto_uninstall_warning_risk">Dette kan fjerne appdata. Hvis den patchede APK-en ikke klarer å installere etter avinstallasjon, kan den forrige appen allerede være borte</string>
@@ -1068,7 +1071,6 @@ Detaljer: %2$s"</string>
     <string name="settings_system_battery_optimization_description">Holder patchingen i gang når appen minimeres</string>
     <string name="settings_system_process_runtime">Patcher-kjøretid</string>
     <string name="settings_system_jvm_runtime_enable">Bruk innebygd VM</string>
-    <string name="settings_system_jvm_runtime_description">Fiks i en Java-VM som Morphe håndterer, som kan bruke så mye minne som enheten har til overs. Skru av for å fikse med Androids kjøretid</string>
     <string name="settings_system_jvm_runtime_unavailable">Krever en ARM- eller 64-bits x86-enhet</string>
     <string name="settings_system_patcher_completion_sound">Fullføringslyd</string>
     <string name="settings_system_patcher_completion_sound_description">Spiller en distinkt tone for suksess eller feil når patching er fullført</string>
@@ -1217,6 +1219,8 @@ Detaljer: %2$s"</string>
     <string name="settings_system_apk_download_helper_warning">APK-en kommer fra hjelpeappen, så stol bare på apper du kjenner. Morphe sjekker fortsatt pakken, versjonen og signaturen til hver fil før patching.</string>
     <string name="settings_system_apk_download_helper_installed_by">Installert av %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Installasjonskilde ukjent</string>
+    <string name="settings_system_apk_download_helper_open_directly">Åpne hjelper med en gang</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Hoppper over nedlastingsinstruksjonene og åpner den betrodde hjelperen</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Ingen filer her</string>
     <string name="file_picker_read_error">Kan ikke lese denne mappen</string>

@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Не пропатчено</string>
     <string name="home_no_patches_available">Нет доступных патчей</string>
     <string name="home_app_hide_title">Скрыть это приложение?</string>
+    <string name="home_more_apps_title">Другие приложения</string>
+    <string name="home_more_apps_hide_title">Скрыть эту карточку?</string>
+    <string name="home_more_apps_hide_message">Вы можете вернуть его в любое время в разделе Настройки &gt; Оформление &gt; Главный экран</string>
     <string name="home_app_hide_message">Это приложение будет скрыто из домашнего экрана. Вы можете восстановить его позже из скрытых приложений, используя кнопку внизу списка.</string>
     <string name="home_app_will_be_hidden">Это приложение будет скрыто</string>
     <string name="home_app_hidden_named">%s скрытых</string>
@@ -31,6 +34,7 @@
     <string name="deep_link_add_source_only_universal">Добавляются только универсальные патчи. Вы можете добавлять приложения из списка приложений источника</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Этот источник уже добавлен. Добавить это приложение из существующего источника?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Доступно обновление Morphe</string>
     <string name="home_update_available_subtitle">Новая версия готова к установке.</string>
@@ -803,6 +807,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Показывает приветственное сообщение</string>
     <string name="settings_appearance_repatch_notice">Уведомление о перепатчивании</string>
     <string name="settings_appearance_repatch_notice_description">Показывает баннер когда пропатченные приложения могут быть перепатчены</string>
+    <string name="settings_appearance_more_apps_card">Карточка «Другие приложения»</string>
+    <string name="settings_appearance_more_apps_card_description">Показывает карточку под приложениями, ведущую к патчам сообщества</string>
     <string name="settings_appearance_app_card_colors">Цвета карточек приложений</string>
     <string name="settings_appearance_app_card_colors_default">По умолчанию</string>
     <string name="settings_appearance_app_card_colors_default_description">Присваивать каждому приложению цвет его собственного набора</string>
@@ -867,7 +873,6 @@
     <string name="settings_advanced_update_interval_daily">Ежедневно</string>
     <string name="settings_advanced_update_interval_weekly">Еженедельно</string>
     <string name="settings_advanced_update_interval_monthly">Ежемесячно</string>
-    <string name="settings_advanced_update_interval_battery_warning">Фоновые проверки могут не работать надежно на некоторых устройствах. Производители, такие как Xiaomi, Huawei, Samsung и OnePlus, часто агрессивно ограничивают фоновые процессы для экономии батареи</string>
     <string name="settings_advanced_external_batch_patch">Разрешить внешние триггеры</string>
     <string name="settings_advanced_external_batch_patch_description">Разрешает автоматизированным приложениям запускать пакетное патчинг</string>
     <string name="external_batch_patch_title">Начать массовый патчинг?</string>
@@ -929,7 +934,6 @@
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Введите своё имя</string>
     <string name="settings_advanced_patch_options_path_gone">Эту папку больше нельзя прочитать. Выберите её снова или очистите её, иначе патчинг остановится и спросит о ней</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Иконка приложения</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Значок, с которым патчится приложение. Он также используется там, где приложение не сможет изменить его позже, например, в Android Auto и в списке приложений в системных настройках</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Для пользовательского значка приложения нужна папка с изображениями значков</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Своя иконка</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Папка с изображениями для использования в качестве пользовательского значка.
@@ -1037,7 +1041,6 @@ morphe_header_custom_dark.png
     <string name="settings_auto_uninstall_with_shizuku">Автоматически удалять при конфликте</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Удаляет существующее приложение при конфликте подписей. Это может удалить данные приложения</string>
     <string name="settings_ignore_install_target_rules">Игнорировать требования к целевой версии установки</string>
-    <string name="settings_ignore_install_target_rules_description">Патч отключает проверки целевой версии установки и включает те, которые они исключают. Патченое приложение может работать некорректно</string>
     <string name="settings_auto_uninstall_warning_title">Включить автоматическое удаление?</string>
     <string name="settings_auto_uninstall_warning_message">Если Android сообщает о конфликте подписей во время автоматической установки Shizuku, Morphe удалит существующее приложение перед установкой исправленного APK.</string>
     <string name="settings_auto_uninstall_warning_risk">Это может удалить данные приложения. Если исправленный APK не удается установить после удаления, предыдущее приложение, возможно, уже было удалено.</string>
@@ -1068,7 +1071,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_battery_optimization_description">Поддерживает работу патчера при минимизации приложения</string>
     <string name="settings_system_process_runtime">Среда выполнения патчера</string>
     <string name="settings_system_jvm_runtime_enable">Использовать встроенную ВМ</string>
-    <string name="settings_system_jvm_runtime_description">Патчи в среде выполнения Java, которую использует Morphe, которая может потреблять столько памяти, сколько доступно на устройстве. Отключите, чтобы патчить с помощью среды выполнения Android</string>
     <string name="settings_system_jvm_runtime_unavailable">Требуется ARM или 64-bit x86 устройство</string>
     <string name="settings_system_patcher_completion_sound">Звук завершения</string>
     <string name="settings_system_patcher_completion_sound_description">Воспроизводит отличный тон при успешном или неудачном завершении патчинга</string>
@@ -1217,6 +1219,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_warning">APK поступает из вспомогательного приложения, поэтому доверяйте только тем приложениям, которые вы знаете. Morphe по-прежнему проверяет пакет, версию и подпись каждого файла перед наложением патча.</string>
     <string name="settings_system_apk_download_helper_installed_by">Установлено: %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Установщик неизвестен</string>
+    <string name="settings_system_apk_download_helper_open_directly">Открыть помощник сразу</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Пропускает инструкции по загрузке и открывает доверенный помощник</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Здесь нет файлов</string>
     <string name="file_picker_read_error">Не удается прочитать эту директорию</string>

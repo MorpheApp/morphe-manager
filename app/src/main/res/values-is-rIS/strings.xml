@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Ekki púttað</string>
     <string name="home_no_patches_available">Engar breytistillingar eru til staðar</string>
     <string name="home_app_hide_title">Fela þetta app?</string>
+    <string name="home_more_apps_title">Fleiri forrit</string>
+    <string name="home_more_apps_hide_title">Fela þetta kort?</string>
+    <string name="home_more_apps_hide_message">Þú getur sýnt það aftur hvenær sem er undir Stillingar &gt; Útlitsstillingar &gt; Heimsíru</string>
     <string name="home_app_hide_message">Þetta app verður falið frá heimaskjánum. Hægt er að endurheimta það síðar frá falinu forritum með því að nota hnappinn neðst á listanum</string>
     <string name="home_app_will_be_hidden">Þetta app verður falin</string>
     <string name="home_app_hidden_named">%s falin</string>
@@ -31,6 +34,9 @@
     <string name="deep_link_add_source_only_universal">Aðeins almennt flikin eru bætt við. Þú getur bætt við forritum úr app-lista upprunans</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Þessi uppruni er nú þegar bætt við. Bæta við appinu frá þessum upruna?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="mpp_import_update_message">Þetta er ný útgáfa af %s. Viltu uppfæra hana?</string>
+    <string name="mpp_import_unreadable">Ekki hægt að lesa þessa skrá</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe uppfærsla í boði</string>
     <string name="home_update_available_subtitle">Ný útgáfa tilbúin til að setja upp</string>
@@ -802,6 +808,8 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Sýnir kveðjurétt</string>
     <string name="settings_appearance_repatch_notice">Tilkynning um endurplástrun</string>
     <string name="settings_appearance_repatch_notice_description">Sýnir borða þegar forrit sem bryggst má brygja aftur</string>
+    <string name="settings_appearance_more_apps_card">Kort yfir fleiri forrit</string>
+    <string name="settings_appearance_more_apps_card_description">Sýnir kort undir forritum sem leiðir til samfélagsbótanna</string>
     <string name="settings_appearance_app_card_colors">Litir á app kortum</string>
     <string name="settings_appearance_app_card_colors_default">Sjálfgefið</string>
     <string name="settings_appearance_app_card_colors_default_description">Nota litinn á pakkann fyrir hvert app</string>
@@ -866,7 +874,7 @@ Plástrar verða ekki fyrir áhrifum: virkjaðu forútgáfuplástra fyrir hverja
     <string name="settings_advanced_update_interval_daily">Daglega</string>
     <string name="settings_advanced_update_interval_weekly">Vikulega</string>
     <string name="settings_advanced_update_interval_monthly">Mánaðarlega</string>
-    <string name="settings_advanced_update_interval_battery_warning">Bakgrunnur prótanir mega ekki virka á ákveðnum tækjum. Framleiðendur eins og Xiaomi, Huawei, Samsung og OnePlus takast oft á við bakgrunns prótanir til að spara rafmagn</string>
+    <string name="settings_advanced_update_interval_battery_warning">Bakgrunnskönnunum gæti ekki gengið vel á tækjum sem takmarka forrit í bakgrunni, eins og Xiaomi, Huawei, Samsung og OnePlus</string>
     <string name="settings_advanced_external_batch_patch">Leyfa ytri kveikja</string>
     <string name="settings_advanced_external_batch_patch_description">Leyfir sjálfvirkni fyrir forrit til að hefja hópafbrigði</string>
     <string name="external_batch_patch_title">Heja breytingum?</string>
@@ -928,7 +936,7 @@ Plástrar verða ekki fyrir áhrifum: virkjaðu forútgáfuplástra fyrir hverja
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Slá í sérstakt nafn</string>
     <string name="settings_advanced_patch_options_path_gone">Ekki er lengur hægt að lesa þessa möppu. Veldu hana aftur eða hreinsaðu hana, annars stöðvast plástrunin og spyr um hana.</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Forritatákn</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Táknið sem forritið er plástrað með. Það er einnig notað þar sem forritið getur ekki breytt því síðar, eins og í Android Auto og forritalistanum í kerfisstillingunum.</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Tákninu sem appið er púttað með, einnig notað þar sem ekki hægt er að breyta því síðar, eins og í Android Auto</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Sérsniðna forritatáknið þarf möppu með táknmyndum.</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Sérstakt tákn</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Mappa með myndum til að nota sem sérsniðna tákn.
@@ -1033,8 +1041,7 @@ Myndastærðin verður að vera sem hér segir:
     <string name="settings_auto_uninstall_with_shizuku">Sjálfvirk upphæfing við átök</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Týnir núverandi forriti við undirskriftaratvik. Þetta getur fjarlægt forritagögn</string>
     <string name="settings_ignore_install_target_rules">Hunsa kröfur um uppsetu markmiðs</string>
-    <string name="settings_ignore_install_target_rules_description">Leyfir að kveikt sé á reglum sem banna uppsetu markmiðs og slökkt sé á þeim sem útiloka það. Uppsett forrit virkar kannski ekki
-</string>
+    <string name="settings_ignore_install_target_rules_description">Leyfir að slökkva á púttum sem uppsetningsmarkmiðið krefst og kveikja á þeim sem það útilokar. Púttaða appið gæti ekki virkað</string>
     <string name="settings_auto_uninstall_warning_title">Vilkja þú að virkja sjálfvirka upphæfingu?</string>
     <string name="settings_auto_uninstall_warning_message">Ef Android tilkynnir um signature átök í sjálfvirkri uppsetningu Shizuku, mun Morphe afhæfa núverandi app áður en pattaða APK-ið er upphætt</string>
     <string name="settings_auto_uninstall_warning_risk">Þetta getur fjarlægt app gögn. Ef pattaða APK-ið tekst ekki að upphæfa eftir upphæfingu, gæti fyrra appið þegar verið horfið.</string>
@@ -1065,7 +1072,7 @@ Nánari upplýsingar: %2$s"</string>
     <string name="settings_system_battery_optimization_description">Skoða upprunaleg geymslu</string>
     <string name="settings_system_process_runtime">Patcher keyrt</string>
     <string name="settings_system_jvm_runtime_enable">Nota innbyggða VM</string>
-    <string name="settings_system_jvm_runtime_description">Breytingar í Java VM sem Morhe ber, sem geta notið eins mikið af minni og tækið skilar. Slökkva til að breyta með keyrt Android</string>
+    <string name="settings_system_jvm_runtime_description">Púttar í eigin Java VM Morphe, sem getur notað meira minni. Slökkvið til að nota runtime Android</string>
     <string name="settings_system_jvm_runtime_unavailable">Þarf ARM- eða 64 bita x86 tæki</string>
     <string name="settings_system_patcher_completion_sound">Ljós hljóð</string>
     <string name="settings_system_patcher_completion_sound_description">Spilar ákveðinn tón fyrir árangur eða misgengi þegar flakkast er lokið</string>
@@ -1214,6 +1221,8 @@ Nánari upplýsingar: %2$s"</string>
     <string name="settings_system_apk_download_helper_warning">APK-skráin kemur frá hjálparaforritinu, svo treystu aðeins forritum sem þú þekkir. Morphe athugar samt pakkann, útgáfuna og undirskrift hverrar skráar áður en það plástrar.</string>
     <string name="settings_system_apk_download_helper_installed_by">Sett upp af %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Óþekktur uppsetningaraðili</string>
+    <string name="settings_system_apk_download_helper_open_directly">Opna hjálpartól strax</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Flytur hjá leiðbeiningum um niðurherjun og opnar traust hjálpartól</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Engar skrár hér</string>
     <string name="file_picker_read_error">Gat ekki lesið þennan skráarskil</string>

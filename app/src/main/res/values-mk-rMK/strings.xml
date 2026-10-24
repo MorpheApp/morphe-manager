@@ -18,6 +18,7 @@
     <!-- Shown under the app a link was opened for -->
     <!-- Shown when the link was opened for the universal patches of a source, which no app is added with -->
     <!-- Asked when the link names an app of a source that is already added -->
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Достапно е ажурирање на Morphe</string>
     <string name="home_update_available_subtitle">Достапно е ажурирање</string>
@@ -449,7 +450,6 @@
     <string name="settings_advanced_updates_background_notifications_description">Периодично проверувај за ажурирања во позадина и извести кога се достапни</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Увезува или извезува вашиот keystore за потпишување</string>
     <string name="settings_advanced_update_interval">Фреквенција на проверка</string>
-    <string name="settings_advanced_update_interval_battery_warning">Проверките во позадина можеби нема да работат доверливо на некои уреди. Производители како Xiaomi, Huawei, Samsung и OnePlus често агресивно ги ограничуваат процесите во позадина за да заштедат батерија</string>
     <!-- Notification content -->
     <string name="notification_bundle_update_title">Достапни се нови закрпи</string>
     <string name="notification_update_text">Подготвена е верзијата %s за преземање</string>

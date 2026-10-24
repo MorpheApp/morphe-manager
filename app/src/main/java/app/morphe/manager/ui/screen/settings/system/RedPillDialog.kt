@@ -130,7 +130,7 @@ private fun Pill(
                 .size(width = 108.dp, height = 52.dp)
                 .clip(Defaults.PillShape)
                 .background(Brush.verticalGradient(colors))
-                .clickable(onClick = onClick),
+                .clickable(interactionSource = null, indication = shapedIndication(Defaults.PillShape), onClick = onClick),
             contentAlignment = Alignment.Center
         ) {
             // Highlight along the top half and a seam down the middle, the two cues that make a

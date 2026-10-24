@@ -49,6 +49,9 @@ interface InstalledAppDao {
     )
     suspend fun getBundleVersions(packageName: String): List<BundleWithVersion>
 
+    @Query("SELECT DISTINCT package_name, bundle FROM applied_patch")
+    fun getAppliedBundles(): Flow<Map<@MapColumn("package_name") String, List<@MapColumn("bundle") Int>>>
+
     @Transaction
     suspend fun upsertApp(installedApp: InstalledApp, appliedPatches: List<AppliedPatch>) {
         upsertApp(installedApp)

@@ -101,59 +101,26 @@ fun DialogHostScope.AddSourceDialog(
         localFiles.count { it.check is LocalFileCheck.New || it.check is LocalFileCheck.Update }
     }
 
-    val openUrl = rememberOpenUrl()
-    var showCommunityNotice by rememberSaveable { mutableStateOf(false) }
-
-    DialogHost(visible = showCommunityNotice) {
-        ConfirmDialog(
-            title = stringResource(R.string.sources_dialog_community_notice_title),
-            message = stringResource(R.string.sources_dialog_community_notice_message),
-            primaryText = stringResource(R.string.open),
-            isPrimaryDestructive = false,
-            onDismiss = { showCommunityNotice = false },
-            onConfirm = {
-                showCommunityNotice = false
-                openUrl(COMMUNITY_PATCHES_URL)
-            }
-        )
-    }
-
     AppDialog(
         onDismissRequest = onDismiss,
         title = stringResource(R.string.sources_dialog_add_source),
         footer = {
-            Column(modifier = Modifier.fillMaxWidth()) {
-                // The website hands out remote URLs, so it has nothing to offer the local tab
-                FoldingVisibility(visible = selectedTab == 0) {
-                    Column {
-                        // Nothing that website lists is reviewed by Morphe, so the disclaimer comes first
-                        AppDialogOutlinedButton(
-                            text = stringResource(R.string.sources_dialog_community),
-                            onClick = { showCommunityNotice = true },
-                            icon = MaterialSymbols.Rounded.Open_in_new.autoMirrored,
-                            modifier = Modifier.fillMaxWidth()
-                        )
-                        // As far as the buttons under it stand apart, so the three read as one grid
-                        Spacer(modifier = Modifier.height(Defaults.SpaceMedium))
+            AppDialogButtonRow(
+                primaryText = if (readyCount > 1) {
+                    pluralStringResource(R.plurals.sources_dialog_add_count, readyCount, readyCount.toString())
+                } else {
+                    stringResource(R.string.add)
+                },
+                onPrimaryClick = {
+                    when (selectedTab) {
+                        0 -> onRemoteSubmit(remote.readyLinks, chooseApps)
+                        1 -> onLocalSubmit(chooseApps)
                     }
-                }
-                AppDialogButtonRow(
-                    primaryText = if (readyCount > 1) {
-                        pluralStringResource(R.plurals.sources_dialog_add_count, readyCount, readyCount.toString())
-                    } else {
-                        stringResource(R.string.add)
-                    },
-                    onPrimaryClick = {
-                        when (selectedTab) {
-                            0 -> onRemoteSubmit(remote.readyLinks, chooseApps)
-                            1 -> onLocalSubmit(chooseApps)
-                        }
-                    },
-                    primaryEnabled = readyCount > 0,
-                    secondaryText = stringResource(android.R.string.cancel),
-                    onSecondaryClick = onDismiss
-                )
-            }
+                },
+                primaryEnabled = readyCount > 0,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss
+            )
         }
     ) {
         SegmentedTabs(
@@ -527,7 +494,12 @@ private fun LocalFilesDropZone(onPickFiles: () -> Unit) {
                     style = stroke
                 )
             }
-            .clickable(role = Role.Button, onClick = onPickFiles)
+            .clickable(
+                interactionSource = null,
+                indication = shapedIndication(shape),
+                role = Role.Button,
+                onClick = onPickFiles
+            )
     ) {
         EmptyState(
             message = stringResource(R.string.sources_dialog_local_files),
@@ -991,14 +963,12 @@ private fun BundleChangelogContent(
             )
             is BundleChangelogState.Error -> ChangelogError(error = current.throwable)
             is BundleChangelogState.Entries -> {
-                if (current.entries.isEmpty()) {
-                    Text(
-                        text = stringResource(R.string.changelog_empty),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(LocalDialogBarInsets.current)
+                // Releases with nothing for the app still leave its history below them to read
+                if (current.entries.isEmpty() && older.entries?.isEmpty() == true) {
+                    EmptyState(
+                        message = stringResource(R.string.changelog_empty),
+                        icon = MaterialSymbols.Rounded.History,
+                        modifier = Modifier.padding(LocalDialogBarInsets.current)
                     )
                 } else {
                     // The release the app was patched with, the point its changes are counted from,

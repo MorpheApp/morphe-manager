@@ -1,3 +1,41 @@
+# [2.2.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v2.2.0-dev.2...v2.2.0-dev.3) (2026-10-24)
+
+
+### Bug Fixes
+
+* Judge app versions by the source they are picked from ([caed35a](https://github.com/MorpheApp/morphe-manager/commit/caed35a27a37fad17f7ac327ff3a39da8ce932e9))
+
+
+### Features
+
+* Open an app's patch notes from its info dialog ([55b625e](https://github.com/MorpheApp/morphe-manager/commit/55b625e659e57878ad978b5ddcbf254a92d44f7c))
+
+# [2.2.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v2.2.0-dev.1...v2.2.0-dev.2) (2026-10-24)
+
+
+### Bug Fixes
+
+* Fail patching that runs out of memory instead of hanging ([76b5477](https://github.com/MorpheApp/morphe-manager/commit/76b5477eca7a97b393a95cc5880d90d1ab47354a))
+
+
+### Features
+
+* Option to open the APK download helper right away ([901ecc0](https://github.com/MorpheApp/morphe-manager/commit/901ecc04bf9b6575d58fd64a630578f4d7e150e6))
+* Update a local source from an opened .mpp file ([eb9cd44](https://github.com/MorpheApp/morphe-manager/commit/eb9cd44e3eed29a63fb24e0a1427ef7a7ab27b46))
+
+# [2.2.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v2.1.0...v2.2.0-dev.1) (2026-10-24)
+
+
+### Bug Fixes
+
+* Auto-install during a mini-game round ([ec26a3d](https://github.com/MorpheApp/morphe-manager/commit/ec26a3db66b85a241196beeacfaa6ed0fd1c1d20))
+* Remote and D-pad navigation on Android TV ([2742b26](https://github.com/MorpheApp/morphe-manager/commit/2742b263a4c71f541e361988b309831fcceca958))
+
+
+### Features
+
+* More apps card on the home screen ([a974389](https://github.com/MorpheApp/morphe-manager/commit/a9743897cf69b5d38bbaa0c48410cb07bf756d02))
+
 # [2.1.0](https://github.com/MorpheApp/morphe-manager/compare/v2.0.0...v2.1.0) (2026-10-23)
 
 

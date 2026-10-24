@@ -32,6 +32,7 @@ import app.morphe.manager.domain.manager.*
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.patcher.patch.*
 import app.morphe.manager.patcher.runtime.PatcherProcesses
+import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.contributingAt
 import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.morphe.manager.patcher.split.SplitApkInspector
 import app.morphe.manager.patcher.split.SplitApkPreparer
@@ -62,9 +63,8 @@ data class UnsupportedVersionDialogState(
     val version: String,
     val versionCode: Long? = null,
     val recommendedVersion: AppTarget?,
-    val compatibleVersionNames: List<String> = emptyList(),
-    val compatibleVersionDescriptions: Map<String, String> = emptyMap(),
-    val compatibleVersionCodes: Map<String, Set<Int>> = emptyMap(),
+    /** The versions offered instead, each under the source that names it. */
+    val compatibleVersions: List<BundledAppTarget> = emptyList(),
     /** True if the selected version is marked as experimental in the patch bundle. */
     val isExperimental: Boolean = false
 )
@@ -104,7 +104,8 @@ data class InstalledAppPickerItem(
  *   separate one. Patching an app that is already installed keeps that install, so a run has to
  *   say which of an app's installs it is aimed at before it can replace anything.
  * @param selectedVersion The version an APK is looked for at, the recommended one until another
- *   is picked.
+ *   is picked. Sources share versions, so the pick names its source too, which answers for an
+ *   APK of that version.
  * @param bundleUid The source picked in simple mode before the APK, which the run patches from.
  * @param installedVersion The unpatched version the device has right now: [installedApk] is
  *   dropped for a version the patches do not target, which is exactly when the version itself is
@@ -120,7 +121,7 @@ data class PatchFlowSession(
     val repatchPackageName: String? = null,
     val recommendedVersion: AppTarget? = null,
     val compatibleVersions: List<BundledAppTarget> = emptyList(),
-    val selectedVersion: AppTarget? = recommendedVersion,
+    val selectedVersion: BundledAppTarget? = null,
     val bundleUid: Int? = null,
     val savedApk: SavedApkInfo? = null,
     val installedApk: InstalledApkInfo? = null,
@@ -131,7 +132,7 @@ data class PatchFlowSession(
     val hiddenSources: Int = 0
 ) {
     /** The version an APK is looked for at. */
-    val requestedVersion: String? get() = (selectedVersion ?: recommendedVersion)?.version
+    val requestedVersion: String? get() = (selectedVersion?.target ?: recommendedVersion)?.version
 }
 
 /**
@@ -304,13 +305,31 @@ class PatchFlow(
         ?: KnownApps.getAppName(packageName)
 
     /** A fresh run for [packageName], seeded from the current bundle data. */
-    private fun sessionFor(packageName: String, repatchedPackageName: String? = null) = PatchFlowSession(
-        packageName = packageName,
-        appName = appNameFor(packageName),
-        repatchPackageName = repatchedPackageName,
-        recommendedVersion = recommendedVersions.value[packageName],
-        compatibleVersions = compatibleVersions.value[packageName].orEmpty()
-    )
+    private fun sessionFor(packageName: String, repatchedPackageName: String? = null): PatchFlowSession {
+        val versions = compatibleVersions.value[packageName].orEmpty()
+        return PatchFlowSession(
+            packageName = packageName,
+            appName = appNameFor(packageName),
+            repatchPackageName = repatchedPackageName,
+            recommendedVersion = recommendedVersions.value[packageName],
+            compatibleVersions = versions,
+            // The dialog shows it picked, so it answers for the APK as a pick by hand would
+            selectedVersion = versions.recommendedEntry()
+        )
+    }
+
+    /**
+     * The source answering for [app]: the one picked in simple mode, or in expert mode the one the
+     * version was picked under, once the APK turns out to be that version. Null leaves it to every
+     * source.
+     */
+    private fun chosenBundleUidFor(app: SelectedApp): Int? {
+        val current = session ?: return null
+        current.bundleUid?.let { return it }
+        // Simple mode offers no versions to pick from, so its recommended one stands for no choice
+        if (!prefs.useExpertMode.getBlocking()) return null
+        return current.selectedVersion?.takeIf { it.target.version == app.version }?.bundleUid
+    }
 
     private suspend fun showPatchDialogInternal(packageName: String) {
         val savedInfo = withContext(Dispatchers.IO) {
@@ -370,10 +389,14 @@ class PatchFlow(
         val bundleRecommended = compatibleVersions.value[packageName]
             .orEmpty()
             .filter { it.bundleUid == bundleUid }
-            .recommended()
+            .recommendedEntry()
         session = session?.let { current ->
             if (bundleRecommended == null) current.copy(bundleUid = bundleUid)
-            else current.copy(bundleUid = bundleUid, recommendedVersion = bundleRecommended, selectedVersion = bundleRecommended)
+            else current.copy(
+                bundleUid = bundleUid,
+                recommendedVersion = bundleRecommended.target,
+                selectedVersion = bundleRecommended
+            )
         }
 
         continueApkSelectionFlow(packageName)
@@ -433,7 +456,7 @@ class PatchFlow(
     }
 
     /** Picks [version] to look an APK up at. */
-    fun selectVersion(version: AppTarget) {
+    fun selectVersion(version: BundledAppTarget) {
         session = session?.copy(selectedVersion = version)
     }
 
@@ -817,20 +840,13 @@ class PatchFlow(
         // Scoped.compatible = version matches, Scoped.incompatible = package matches but wrong version,
         // Scoped.universal = compatiblePackages == null (applies to any package/version).
         val bundles = withContext(Dispatchers.IO) {
-            patchBundleRepository
-                .offeredBundleInfoFlow(selectedApp.packageName, selectedApp.version, selectedApp.versionCode)
-                .first()
+            patchBundleRepository.resolvingBundleInfo(
+                selectedApp.packageName, selectedApp.version, selectedApp.versionCode, chosenBundleUidFor(selectedApp)
+            )
         }
+        val support = VersionSupport(bundles)
 
-        val enabledBundles = bundles.filter { it.enabled }
-
-        // Categorize what exists across all enabled bundles for this APK:
-        val hasCompatible   = enabledBundles.any { it.compatible.isNotEmpty() }   // right pkg + right version
-        val hasIncompatible = enabledBundles.any { it.incompatible.isNotEmpty() } // right pkg, wrong version
-        val hasUniversal    = enabledBundles.any { it.universal.isNotEmpty() }    // no pkg restriction
-        val hasAnything     = hasCompatible || hasIncompatible || hasUniversal
-
-        if (!hasAnything) {
+        if (!support.hasPatches) {
             // Truly no patches exist for this package in any enabled bundle
             messages.show(R.string.home_no_patches_available)
             selectedApp.discard()
@@ -846,25 +862,20 @@ class PatchFlow(
         // that the APK version is not officially supported.
         // Note: experimental versions are compatible (they pass the version check) but show an
         // additional "Experimental" badge in the warning dialog.
-        val versionMismatch = !hasCompatible && hasIncompatible
-        // Experimental check is independent - a version can be experimental AND compatible
-        val isVersionExperimental = enabledBundles.any { it.isVersionExperimental }
-
-        // Check if the user has enabled experimental-version mode for this package's bundle
-        val experimentalEnabledUids = prefs.bundleExperimentalVersionsEnabled.getBlocking()
-        val isExperimentalModeEnabled = enabledBundles.any { bundle ->
-            bundle.uid.toString() in experimentalEnabledUids
-        }
-
-        if (versionMismatch && !allowIncompatible) {
-            holdFor(HomeDialog.UnsupportedVersion(unsupportedVersionState(selectedApp, isVersionExperimental)), selectedApp)
+        if (support.isMismatch && !allowIncompatible) {
+            holdFor(HomeDialog.UnsupportedVersion(unsupportedVersionState(selectedApp, support.isExperimental)), selectedApp)
             return
         }
 
-        // If the version is experimental, show the appropriate warning:
+        // Experimental check is independent - a version can be experimental AND compatible.
+        // If it is, show the appropriate warning for the sources marking it so:
         // - Experimental mode ON → ExperimentalVersionWarningDialog
         // - Experimental mode OFF → UnsupportedVersionWarningDialog
-        if (isVersionExperimental && !allowIncompatible) {
+        if (support.isExperimental && !allowIncompatible) {
+            val experimentalEnabledUids = prefs.bundleExperimentalVersionsEnabled.getBlocking()
+            val isExperimentalModeEnabled = support.experimentalUids.any { uid ->
+                uid.toString() in experimentalEnabledUids
+            }
             val state = unsupportedVersionState(selectedApp, isExperimental = true)
             holdFor(
                 if (isExperimentalModeEnabled) {
@@ -893,24 +904,17 @@ class PatchFlow(
         selectedApp: SelectedApp,
         isExperimental: Boolean
     ): UnsupportedVersionDialogState {
+        // A chosen source answers for the APK alone
+        val chosenBundleUid = chosenBundleUidFor(selectedApp)
         val offered = compatibleVersions.value[selectedApp.packageName].orEmpty().offered()
+            .let { all -> all.filter { it.bundleUid == chosenBundleUid }.ifEmpty { all } }
 
         return UnsupportedVersionDialogState(
             packageName = selectedApp.packageName,
             version = selectedApp.version ?: "unknown",
             versionCode = selectedApp.versionCode,
-            recommendedVersion = recommendedVersions.value[selectedApp.packageName],
-            compatibleVersionNames = offered.mapNotNull { it.target.version },
-            compatibleVersionDescriptions = offered.mapNotNull { b ->
-                val v = b.target.version ?: return@mapNotNull null
-                val d = b.target.description ?: return@mapNotNull null
-                v to d
-            }.toMap(),
-            compatibleVersionCodes = offered.mapNotNull { b ->
-                val v = b.target.version ?: return@mapNotNull null
-                val codes = b.buildCodes ?: return@mapNotNull null
-                v to codes
-            }.toMap(),
+            recommendedVersion = offered.recommended(),
+            compatibleVersions = offered,
             isExperimental = isExperimental
         )
     }
@@ -1006,12 +1010,13 @@ class PatchFlow(
     /**
      * Start patching flow.
      *
-     * @param bundleUid The source picked in simple mode, which the run patches from alone.
+     * @param bundleUid The source chosen for the APK, see [chosenBundleUidFor]. Simple mode
+     *   patches from it alone, and expert mode opens on it.
      */
     private suspend fun startPatchingWithApp(
         selectedApp: SelectedApp,
         allowIncompatible: Boolean,
-        bundleUid: Int? = session?.bundleUid
+        bundleUid: Int? = chosenBundleUidFor(selectedApp)
     ) {
         // Read before the first selection is resolved, so every rule below and every later edit
         // in the expert dialog is answered for the APK this run actually starts from. The rules
@@ -1064,6 +1069,13 @@ class PatchFlow(
                 .filterKeys { it in currentBundleUids }
         }
 
+        // A source not standing behind this version, one marking it experimental with those
+        // switched off, contributes nothing unless the user adds it back by hand
+        val contributingBundles = allBundles.contributingAt(
+            prefs.bundleExperimentalVersionsEnabled.get(),
+            chosenUid = bundleUid
+        )
+
         // Opens the selection by hand, which the patches' own availability for the install
         // target has the final say on unless the run is set to ignore it
         fun openExpertMode(
@@ -1075,6 +1087,11 @@ class PatchFlow(
                 app = selectedApp,
                 allBundles = availableBundles,
                 mutedSources = mutedSources,
+                // The dialog opens on the source answering for the APK, or on the first one
+                // contributing when the others were left out
+                leadingBundleUid = bundleUid ?: contributingBundles
+                    .takeIf { it.size < allBundles.size }
+                    ?.firstOrNull()?.uid,
                 patches = target.applyTo(patches, allBundles),
                 options = options,
                 newPatches = newPatches,
@@ -1085,17 +1102,18 @@ class PatchFlow(
         }
 
         if (isExpertMode()) {
-            val savedSelections = savedSelections()
+            val contributingUids = contributingBundles.mapTo(mutableSetOf()) { it.uid }
+            val savedSelections = savedSelections().filterKeys { it in contributingUids }
             val savedOptions = savedOptions()
 
             // The seen-patch snapshot is what tells a genuinely new patch from one the user
             // deselected. Not read without a saved selection, so a first run flags nothing as new
             val seenByBundle = if (savedSelections.isEmpty()) emptyMap() else withContext(Dispatchers.IO) {
-                allBundles.associate {
+                contributingBundles.associate {
                     it.uid to patchSelectionRepository.getSeenPatches(configurationKey, it.uid)
                 }
             }
-            val newPatchesMap = allBundles.mapNotNull { bundle ->
+            val newPatchesMap = contributingBundles.mapNotNull { bundle ->
                 val seen = seenByBundle[bundle.uid] ?: return@mapNotNull null
                 val new = bundle.patches.mapTo(mutableSetOf()) { it.name } - seen
                 new.takeIf { it.isNotEmpty() }?.let { bundle.uid to it }
@@ -1125,15 +1143,15 @@ class PatchFlow(
                 // Runs after validation, so patches the sources dropped never sneak back in. The
                 // saved selection stands in for a snapshot that does not exist yet
                 mergeNewlyAdded(
-                    bundles = allBundles,
+                    bundles = contributingBundles,
                     validated = validatedPatches,
                     known = { uid -> seenByBundle[uid] ?: savedSelections[uid] },
                     installerType = target.installerType,
                     apkArchitecture = target.apkArchitecture
                 )
             } else {
-                // No saved selections - use default for all current bundles
-                allBundles.toPatchSelection(allowIncompatible) { _, patch -> target.defaultSelected(patch) }
+                // No saved selections - use default for the contributing bundles
+                contributingBundles.toPatchSelection(allowIncompatible) { _, patch -> target.defaultSelected(patch) }
             }
 
             // Validate options
@@ -1155,7 +1173,7 @@ class PatchFlow(
         // A patch is applicable if:
         //   - compatiblePackages == null (universal), OR
         //   - compatiblePackages contains this packageName
-        val bundleWithPatches = allBundles
+        val bundleWithPatches = contributingBundles
             .filter { it.enabled }
             .map { bundle ->
                 val patchNames = bundle.patchSequence(allowIncompatible)

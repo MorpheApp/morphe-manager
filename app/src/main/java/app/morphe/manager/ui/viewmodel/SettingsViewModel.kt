@@ -273,6 +273,10 @@ class SettingsViewModel(
         prefs.trustedApkDownloadHelpers.update(if (trusted) current + packageName else current - packageName)
     }
 
+    fun setOpenApkDownloadHelperDirectly(enabled: Boolean) = viewModelScope.launch {
+        prefs.openApkDownloadHelperDirectly.update(enabled)
+    }
+
     fun setPatcherCompletionSound(enabled: Boolean) = viewModelScope.launch {
         prefs.patcherCompletionSound.update(enabled)
     }

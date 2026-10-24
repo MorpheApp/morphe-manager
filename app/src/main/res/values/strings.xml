@@ -7,6 +7,9 @@
     <string name="home_unpatched_badge">Not patched</string>
     <string name="home_no_patches_available">No patches available</string>
     <string name="home_app_hide_title">Hide this app?</string>
+    <string name="home_more_apps_title">More apps</string>
+    <string name="home_more_apps_hide_title">Hide this card?</string>
+    <string name="home_more_apps_hide_message">You can bring it back anytime in Settings > Appearance > Home screen</string>
     <string name="home_app_hide_message">This app will be hidden from the home screen. You can restore it later from the hidden apps using the button at the bottom of the list</string>
     <string name="home_app_will_be_hidden">This app will be hidden</string>
     <string name="home_app_hidden_named">%s hidden</string>
@@ -31,6 +34,9 @@
     <string name="deep_link_add_source_only_universal">Only the universal patches are added. You can add apps from the source\'s app list</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">This source is already added. Add this app from the existing source?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="mpp_import_update_message">This is a new version of %s. Do you want to update it?</string>
+    <string name="mpp_import_unreadable">This file cannot be read</string>
 
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe update available</string>
@@ -197,6 +203,7 @@
     <string name="sources_prerelease_warning_title">Enable pre-release patches?</string>
     <string name="sources_prerelease_warning_message">Pre-release builds are still in development. Patches may fail or break the app, and features can change without warning</string>
     <string name="expert_mode_prerelease_notice">This source is on pre-release patches. Patching may fail or behave unexpectedly</string>
+    <string name="expert_mode_experimental_version_notice">This source has only experimental support for this app version. Its patches may be unstable or incomplete</string>
     <string name="sources_management_experimental_versions_toggle">Experimental app versions</string>
     <string name="sources_management_experimental_versions_toggle_description">Shows and patches experimental app targets</string>
     <string name="sources_management_already_exists">This source has already been added</string>
@@ -859,6 +866,8 @@ Uninstalling will permanently erase all app data"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Shows a greeting message</string>
     <string name="settings_appearance_repatch_notice">Re-patch notice</string>
     <string name="settings_appearance_repatch_notice_description">Shows a banner when patched apps can be re-patched</string>
+    <string name="settings_appearance_more_apps_card">More apps card</string>
+    <string name="settings_appearance_more_apps_card_description">Shows a card under the apps leading to community patches</string>
     <string name="settings_appearance_app_card_colors">App card colors</string>
     <string name="settings_appearance_app_card_colors_default">Default</string>
     <string name="settings_appearance_app_card_colors_default_description">Give each app the color of its own bundle</string>
@@ -926,7 +935,7 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="settings_advanced_update_interval_daily">Daily</string>
     <string name="settings_advanced_update_interval_weekly">Weekly</string>
     <string name="settings_advanced_update_interval_monthly">Monthly</string>
-    <string name="settings_advanced_update_interval_battery_warning">Background checks may not work reliably on some devices. Manufacturers like Xiaomi, Huawei, Samsung, and OnePlus often aggressively restrict background processes to save battery</string>
+    <string name="settings_advanced_update_interval_battery_warning">Background checks may not run reliably on devices that restrict background apps, such as Xiaomi, Huawei, Samsung and OnePlus</string>
 
     <string name="settings_advanced_external_batch_patch">Allow external triggers</string>
     <string name="settings_advanced_external_batch_patch_description">Lets automation apps start batch patching</string>
@@ -995,7 +1004,7 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Enter custom name</string>
     <string name="settings_advanced_patch_options_path_gone">This folder cannot be read anymore. Pick it again or clear it, otherwise patching will stop and ask about it</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">App icon</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">The icon the app is patched with. It is also used where the app cannot change it later, such as Android Auto and the app list of the system settings</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">The icon the app is patched with, also used where it cannot be changed later, such as Android Auto</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">The custom app icon needs a folder with icon images</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Custom icon</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Folder with images to use as a custom icon.
@@ -1106,7 +1115,7 @@ The image dimensions must be as follows:
     <string name="settings_auto_uninstall_with_shizuku">Auto-uninstall on conflict</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Uninstalls the existing app on a signature conflict. This can remove app data</string>
     <string name="settings_ignore_install_target_rules">Ignore install target requirements</string>
-    <string name="settings_ignore_install_target_rules_description">Lets patches the install target requires be turned off and those it rules out be turned on. The patched app may not work</string>
+    <string name="settings_ignore_install_target_rules_description">Allows turning off patches the install target requires and turning on those it rules out. The patched app may not work</string>
     <string name="settings_auto_uninstall_warning_title">Enable auto-uninstall?</string>
     <string name="settings_auto_uninstall_warning_message">If Android reports a signature conflict during Shizuku auto-install, Morphe will uninstall the existing app before installing the patched APK</string>
     <string name="settings_auto_uninstall_warning_risk">This can remove app data. If the patched APK fails to install after uninstalling, the previous app may already be gone</string>
@@ -1137,7 +1146,7 @@ Details: %2$s"</string>
     <string name="settings_system_battery_optimization_description">Keeps the patcher running when the app is minimized</string>
     <string name="settings_system_process_runtime">Patcher runtime</string>
     <string name="settings_system_jvm_runtime_enable">Use embedded VM</string>
-    <string name="settings_system_jvm_runtime_description">Patches in a Java VM that Morphe carries, which can use as much memory as the device spares. Turn off to patch with the runtime of Android</string>
+    <string name="settings_system_jvm_runtime_description">Patches in Morphe\'s own Java VM, which can use more memory. Turn off to use the runtime of Android</string>
     <string name="settings_system_jvm_runtime_unavailable">Needs an ARM or 64-bit x86 device</string>
     <string name="settings_system_patcher_completion_sound">Completion sound</string>
     <string name="settings_system_patcher_completion_sound_description">Plays a distinct tone for success or failure when patching finishes</string>
@@ -1299,6 +1308,8 @@ Details: %2$s"</string>
     <string name="settings_system_apk_download_helper_warning">The APK comes from the helper app, so only trust apps you know. Morphe still checks the package, version and signature of every file before patching</string>
     <string name="settings_system_apk_download_helper_installed_by">Installed by %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Installer unknown</string>
+    <string name="settings_system_apk_download_helper_open_directly">Open helper right away</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Skips the download instructions and opens the trusted helper</string>
 
     <!-- File Picker -->
     <string name="file_picker_no_files">No files here</string>

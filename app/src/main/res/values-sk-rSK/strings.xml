@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Nezaplátané</string>
     <string name="home_no_patches_available">Neboli nájdené žiadne záplaty</string>
     <string name="home_app_hide_title">Skryť túto aplikáciu?</string>
+    <string name="home_more_apps_title">Ďalšie aplikácie</string>
+    <string name="home_more_apps_hide_title">Skryť túto kartu?</string>
+    <string name="home_more_apps_hide_message">Kedykoľvek si ho môžete vrátiť v Nastaveniach &gt; Vzhľad &gt; Domovská obrazovka</string>
     <string name="home_app_hide_message">Táto aplikácia bude skrytá z domovskej obrazovky. Môžete ju neskôr obnoviť zo skrytých aplikácií pomocou tlačidla v dolnej časti zoznamu</string>
     <string name="home_app_will_be_hidden">Táto aplikácia bude skrytá</string>
     <string name="home_app_hidden_named">%s skrytých</string>
@@ -31,6 +34,7 @@
     <string name="deep_link_add_source_only_universal">Pridané sú iba univerzálne záplaty. Aplikácie môžete pridať zo zoznamu aplikácií zdroja</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Tento zdroj je už pridaný. Pridať túto aplikáciu z existujúceho zdroja?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Je dostupná aktualizácia Morphe</string>
     <string name="home_update_available_subtitle">Nová verzia je pripravená na inštaláciu</string>
@@ -803,6 +807,8 @@ Odinštalovanie trvalo vymaže všetky údaje aplikácie."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Zobrazuje privítaciu správu</string>
     <string name="settings_appearance_repatch_notice">Upozornenie na opätovné záplatovanie</string>
     <string name="settings_appearance_repatch_notice_description">Zobrazuje banner, keď je možné znovu opraviť opravené aplikácie</string>
+    <string name="settings_appearance_more_apps_card">Karta Ďalšie aplikácie</string>
+    <string name="settings_appearance_more_apps_card_description">Zobrazí kartu pod aplikáciami, ktorá vedie k patchom komunity</string>
     <string name="settings_appearance_app_card_colors">Farby karty aplikácie</string>
     <string name="settings_appearance_app_card_colors_default">Predvolená</string>
     <string name="settings_appearance_app_card_colors_default_description">Priradiť každej aplikácii farbu jej vlastného balíka</string>
@@ -867,7 +873,6 @@ Záplaty tým nie sú ovplyvnené: povoľte predbežné záplaty pre každý zdr
     <string name="settings_advanced_update_interval_daily">Denne</string>
     <string name="settings_advanced_update_interval_weekly">Týždenne</string>
     <string name="settings_advanced_update_interval_monthly">Mesačne</string>
-    <string name="settings_advanced_update_interval_battery_warning">Kontroly na pozadí nemusia na niektorých zariadeniach fungovať spoľahlivo. Výrobcovia, ako napr. Xiaomi, Huawei, Samsung a OnePlus, často agresívne obmedzujú procesy na pozadí, aby šetrili batériu</string>
     <string name="settings_advanced_external_batch_patch">Povoliť externé spúšťače</string>
     <string name="settings_advanced_external_batch_patch_description">Povoľuje aplikáciám automatizácie spustiť hromadnú opravu</string>
     <string name="external_batch_patch_title">Začať dávkové záplatovanie?</string>
@@ -929,7 +934,6 @@ Záplaty tým nie sú ovplyvnené: povoľte predbežné záplaty pre každý zdr
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Zadajte vlastný názov</string>
     <string name="settings_advanced_patch_options_path_gone">Tento priečinok sa už nedá prečítať. Vyberte ho znova alebo ho vymažte, inak sa záplatovanie zastaví a opýta sa naň.</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Ikona aplikácie</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Ikona, ktorou je aplikácia záplatovaná. Používa sa aj tam, kde ju aplikácia nemôže neskôr zmeniť, napríklad v Android Auto a v zozname aplikácií v systémových nastaveniach.</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Vlastná ikona aplikácie potrebuje priečinok s obrázkami ikon.</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Vlastná ikona</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Priečinok s obrázkami, ktoré sa majú použiť ako vlastná ikona.
@@ -1037,7 +1041,6 @@ Rozmery obrázka musia byť nasledovné:
     <string name="settings_auto_uninstall_with_shizuku">Automaticky odinštalovať v prípade konfliktu</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Odinštaluje existujúcu aplikáciu pri konflikte podpisov. Môže to odstrániť údaje aplikácie</string>
     <string name="settings_ignore_install_target_rules">Ignorovať požiadavky cieľa inštalácie</string>
-    <string name="settings_ignore_install_target_rules_description">Patch upraví tak, že cieľ inštalácie bude vyžadovať vypnutie a pravidlá, ktoré vylučuje, budú zapnuté. Upravená aplikácia nemusí fungovať</string>
     <string name="settings_auto_uninstall_warning_title">Povoliť automatické odinštalovanie?</string>
     <string name="settings_auto_uninstall_warning_message">Ak Android nahlási konflikt podpisu počas automatickej inštalácie pomocou Shizuku, Morphe najprv odinštaluje existujúcu aplikáciu a potom nainštaluje opravený APK</string>
     <string name="settings_auto_uninstall_warning_risk">Týmto sa môžu odstrániť údaje aplikácie. Ak sa opravenému APK nepodarí nainštalovať po odinštalovaní, predchádzajúca aplikácia už nemusí existovať</string>
@@ -1068,7 +1071,6 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_battery_optimization_description">Udrží pátrač v prevádzke, keď je aplikácia minimalizovaná</string>
     <string name="settings_system_process_runtime">Runtime patchera</string>
     <string name="settings_system_jvm_runtime_enable">Použiť embednutý VM</string>
-    <string name="settings_system_jvm_runtime_description">Záplaty v Java VM, ktoré Morphe prevádzkuje a ktorá môže využiť toľko pamäte, koľko je dostupné zariadení. Vypnutím zápuíte pomocou runtime Androidu</string>
     <string name="settings_system_jvm_runtime_unavailable">Vyžaduje zariadenie s ARM alebo 64-bitovým x86</string>
     <string name="settings_system_patcher_completion_sound">Zvuk úspešného dokončenia</string>
     <string name="settings_system_patcher_completion_sound_description">Prehráva odlišný tón pre úspech alebo zlyhanie po dokončení záplatovania</string>
@@ -1217,6 +1219,8 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_apk_download_helper_warning">APK pochádza z pomocnej aplikácie, preto dôverujte iba aplikáciám, ktoré poznáte. Morphe pred patchovaním stále kontroluje balík, verziu a podpis každého súboru.</string>
     <string name="settings_system_apk_download_helper_installed_by">Nainštalované cez %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Neznámy inštalátor</string>
+    <string name="settings_system_apk_download_helper_open_directly">Otvoriť pomocníka okamžite</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Preskočí pokyny na sťahovanie a otvorí dôveryhodného pomocníka</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Tu nie sú žiadne súbory</string>
     <string name="file_picker_read_error">Nie je možné prečítať tento adresár</string>

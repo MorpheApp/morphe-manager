@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
@@ -40,6 +39,7 @@ import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.Defaults
 import app.morphe.manager.ui.screen.shared.animateCornersAsState
 import app.morphe.manager.ui.screen.shared.rememberPressShape
+import app.morphe.manager.ui.screen.shared.shapedIndication
 import app.morphe.manager.util.darken
 import app.morphe.manager.util.readableOn
 import com.composables.icons.materialsymbols.MaterialSymbols
@@ -151,7 +151,7 @@ private fun ColorSwatch(
             .border(borderWidth, borderColor, shape)
             .clickable(
                 interactionSource = interactionSource,
-                indication = ripple(),
+                indication = shapedIndication(shape),
                 enabled = enabled,
                 onClick = onClick
             )
@@ -327,7 +327,7 @@ private fun NoColorSwatch(
             .border(borderWidth, borderColor, shape)
             .clickable(
                 interactionSource = interactionSource,
-                indication = ripple(),
+                indication = shapedIndication(shape),
                 enabled = enabled,
                 onClick = onClick
             )
@@ -377,7 +377,7 @@ private fun CustomColorSwatch(
             )
             .clickable(
                 interactionSource = interactionSource,
-                indication = ripple(),
+                indication = shapedIndication(shape),
                 enabled = enabled,
                 onClick = onClick
             )

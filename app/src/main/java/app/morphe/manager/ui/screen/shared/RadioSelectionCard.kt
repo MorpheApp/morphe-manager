@@ -12,7 +12,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -23,7 +22,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.state.ToggleableState
@@ -278,8 +276,8 @@ fun SelectionCheckRow(
             // Pressed on a rounded plate around the box and its label, as a menu item is, rather
             // than across the whole width the row is centered in
             .wrapContentWidth(Alignment.CenterHorizontally)
-            .clip(RoundedCornerShape(Defaults.CornerMedium))
-            .toggleable(
+            .shapedToggleable(
+                shape = RoundedCornerShape(Defaults.CornerMedium),
                 value = checked,
                 enabled = enabled,
                 role = Role.Checkbox,

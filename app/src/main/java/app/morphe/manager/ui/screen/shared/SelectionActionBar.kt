@@ -10,7 +10,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.animate
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
@@ -20,7 +19,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
@@ -379,9 +377,8 @@ fun PanelRow(
             // Pressed like a menu item, on a rounded plate held off the panel's edge, so the
             // highlight does not run into the border and the corners the panel is drawn with
             .padding(horizontal = PanelActionInset)
-            .clip(PanelActionShape)
             .heightIn(min = 48.dp)
-            .clickable(enabled = enabled, role = Role.Button, onClick = onClick)
+            .shapedClickable(PanelActionShape, enabled = enabled, role = Role.Button, onClick = onClick)
             .padding(horizontal = Defaults.SpaceLarge - PanelActionInset),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)

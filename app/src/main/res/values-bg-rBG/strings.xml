@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Не е патчнато</string>
     <string name="home_no_patches_available">Няма достъпни патчове</string>
     <string name="home_app_hide_title">Скриване на това приложение?</string>
+    <string name="home_more_apps_title">Още приложения</string>
+    <string name="home_more_apps_hide_title">Скриване на тази карта?</string>
+    <string name="home_more_apps_hide_message">Можете да го върнете по всяко време в Настройки &gt; Външен вид &gt; Начален екран</string>
     <string name="home_app_hide_message">Това приложение ще бъде скрито от началния екран. Можете да го възстановите по-късно от скритите приложения, като използвате бутона в долната част на списъка.</string>
     <string name="home_app_will_be_hidden">Това приложение ще бъде скрито.</string>
     <string name="home_app_hidden_named">Скрити %s</string>
@@ -31,6 +34,9 @@
     <string name="deep_link_add_source_only_universal">Добавени са само универсалните патчове. Можете да добавяте приложения от списъка с приложения на източника</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Този източник вече е добавен. Да се добави това приложение от съществуващия източник?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="mpp_import_update_message">Това е нова версия на %s. Искате ли да я актуализирате?</string>
+    <string name="mpp_import_unreadable">Този файл не може да бъде прочетен</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Налично е ново обновление за Morphe</string>
     <string name="home_update_available_subtitle">Готово за инсталиране</string>
@@ -803,6 +809,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Показва приветствено съобщение</string>
     <string name="settings_appearance_repatch_notice">Известие за повторно кръпване</string>
     <string name="settings_appearance_repatch_notice_description">Показва банер, когато модифицираните приложения могат да бъдат повторно модифицирани</string>
+    <string name="settings_appearance_more_apps_card">Карта \"Още приложения\"</string>
+    <string name="settings_appearance_more_apps_card_description">Показва карта под приложенията, водеща към общностни корекции</string>
     <string name="settings_appearance_app_card_colors">Цветове на картите на приложенията</string>
     <string name="settings_appearance_app_card_colors_default">По подразбиране</string>
     <string name="settings_appearance_app_card_colors_default_description">Присвояване на цвета на пакета на всяко приложение</string>
@@ -867,7 +875,7 @@
     <string name="settings_advanced_update_interval_daily">Дневно</string>
     <string name="settings_advanced_update_interval_weekly">Седмично</string>
     <string name="settings_advanced_update_interval_monthly">Месечно</string>
-    <string name="settings_advanced_update_interval_battery_warning">Проверките в фона може да не работят надеждно на някои устройства. Производители като Xiaomi, Huawei, Samsung и OnePlus често агресивно ограничават фоновите процеси за спестяване на батерия</string>
+    <string name="settings_advanced_update_interval_battery_warning">Проверките във фонов режим може да не работят надеждно на устройства, които ограничават приложенията във фонов режим, като Xiaomi, Huawei, Samsung и OnePlus</string>
     <string name="settings_advanced_external_batch_patch">Разрешаване на външни тригери</string>
     <string name="settings_advanced_external_batch_patch_description">Позволява на автоматизационните приложения да стартират партидна модификация</string>
     <string name="external_batch_patch_title">Стартиране на пакетно закърпване?</string>
@@ -929,7 +937,7 @@
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Въведете име</string>
     <string name="settings_advanced_patch_options_path_gone">Тази папка вече не може да се чете. Изберете я отново или я изчистете, в противен случай прилагането на кръпки ще спре и ще попита за нея</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Икона на приложението</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Иконата, с която се прилагат кръпки върху приложението. Тя се използва и там, където приложението не може да я промени по-късно, като например Android Auto и списъка с приложения в системните настройки</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Иконата, с която се патчва приложението, използва се също и там, където не може да бъде променена по-късно, като например Android Auto</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Персонализираната икона на приложението изисква папка с изображения на икони</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Настройки за брандиране</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Папка с изображения, които да използвате като персонализирана икона.
@@ -1037,7 +1045,7 @@ morphe_header_custom_dark.png
     <string name="settings_auto_uninstall_with_shizuku">Автоматично деинсталиране при конфликт</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Деинсталира съществуващото приложение при конфликт на сигнатури. Това може да премахне данни от приложението</string>
     <string name="settings_ignore_install_target_rules">Игнорирай изискванията за целта на инсталиране</string>
-    <string name="settings_ignore_install_target_rules_description">Позволява изключване на правилата за целта на инсталиране и включване на тези, които те изключват. Модифицираното приложение може да не работи</string>
+    <string name="settings_ignore_install_target_rules_description">Позволява изключване на пачове, които целта на инсталирането изисква, и включване на такива, които тя изключва. Патчваното приложение може да не работи</string>
     <string name="settings_auto_uninstall_warning_title">Активиране на автоматично деинсталиране?</string>
     <string name="settings_auto_uninstall_warning_message">Ако Android съобщи за конфликт в подписите по време на автоматична инсталация със Shizuku, Morphe ще деинсталира съществуващото приложение, преди да инсталира пачвания APK файл.</string>
     <string name="settings_auto_uninstall_warning_risk">Това може да премахне данните на приложението. Ако пачваният APK файл не успее да се инсталира след деинсталирането, предишното приложение може вече да е премахнато.</string>
@@ -1068,7 +1076,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_battery_optimization_description">Поддържа работещ патчър, когато приложението е минимизирано</string>
     <string name="settings_system_process_runtime">Ръчен модул</string>
     <string name="settings_system_jvm_runtime_enable">Използвай вграден VM</string>
-    <string name="settings_system_jvm_runtime_description">Поправки в Java VM, които Morhe носи и които могат да използват колкото паметта на устройството е свободна. Изключете за поправка с runtime на Android</string>
+    <string name="settings_system_jvm_runtime_description">Пачове в собствената Java VM на Morphe, която може да използва повече памет. Изключете, за да използвате runtime на Android</string>
     <string name="settings_system_jvm_runtime_unavailable">Изисква ARM или 64-битово x86 устройство</string>
     <string name="settings_system_patcher_completion_sound">Звук за завършване</string>
     <string name="settings_system_patcher_completion_sound_description">Възпроизвежда отделен тон при успех или неуспех, когато завърши прилагането на корекциите</string>
@@ -1217,6 +1225,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_warning">APK файлът идва от помощното приложение, затова се доверявайте само на приложения, които познавате. Morphe все пак проверява пакета, версията и подписа на всеки файл преди кръпване.</string>
     <string name="settings_system_apk_download_helper_installed_by">Инсталирано от %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Неизвестен инсталатор</string>
+    <string name="settings_system_apk_download_helper_open_directly">Отвори помощника веднага</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Пропуска инструкциите за изтегляне и отваря доверения помощник</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Няма файлове тук</string>
     <string name="file_picker_read_error">Невъзможно е да се прочете тази директория</string>

@@ -14,8 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -119,13 +117,10 @@ fun ChangelogList(
             }
 
             olderEntries.isEmpty() -> item("changelog_older_empty") {
-                Text(
-                    text = stringResource(R.string.changelog_older_empty),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = Defaults.SpaceExtraLarge)
+                EmptyState(
+                    message = stringResource(R.string.changelog_older_empty),
+                    icon = MaterialSymbols.Rounded.History,
+                    modifier = Modifier.padding(top = Defaults.SpaceExtraLarge)
                 )
             }
 

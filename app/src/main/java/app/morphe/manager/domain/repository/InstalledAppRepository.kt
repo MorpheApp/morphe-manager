@@ -48,7 +48,7 @@ internal fun retainedPatchedApkOwners(
 
 /**
  * The name a record keeps: the label just read from an artifact, unless it says nothing the
- * package name does not already say, in which case an earlier write's answer still stands.
+ * package name does not already say, in which case the answer of an earlier write still stands.
  */
 internal fun rememberedAppLabel(
     readLabel: String?,
@@ -64,8 +64,8 @@ internal fun outlivesRetainedPatchedApk(installType: InstallType) =
     installType != InstallType.SAVED
 
 /**
- * Deletes every retained copy in [files] and returns those still on storage afterwards.
- * Storage has the last word rather than the return value of the delete: a path something else
+ * Deletes every retained copy in [files] and returns those still on storage afterward.
+ * Storage has the last word rather than the return value of the delete call: a path something else
  * cleared in the meantime reports failure while being gone all the same.
  */
 internal fun deleteRetainedCopies(files: List<File>): List<File> = files.filter { file ->
@@ -108,6 +108,12 @@ class InstalledAppRepository(
 
     suspend fun getAppliedPatches(packageName: String): PatchSelection =
         dao.getPatchesSelection(packageName).mapValues { (_, patches) -> patches.toSet() }
+
+    /** The sources each install was patched from, keyed by its current package name. */
+    val patchedFromBundles: Flow<Map<String, Set<Int>>> =
+        dao.getAppliedBundles()
+            .map { byPackage -> byPackage.mapValues { (_, uids) -> uids.toSet() } }
+            .distinctUntilChanged()
 
     suspend fun getBundleVersionsForApp(packageName: String): Map<Int, String?> =
         dao.getBundleVersions(packageName)

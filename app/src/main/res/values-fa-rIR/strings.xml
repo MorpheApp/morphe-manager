@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">پچ‌نشده</string>
     <string name="home_no_patches_available">هیچ پچی در دسترس نیست</string>
     <string name="home_app_hide_title">این برنامه پنهان شود؟ </string>
+    <string name="home_more_apps_title">برنامه‌های بیشتر</string>
+    <string name="home_more_apps_hide_title">این کارت پنهان شود؟</string>
+    <string name="home_more_apps_hide_message">هر زمان که بخواهید می‌توانید آن را از مسیر تنظیمات &gt; ظاهر &gt; صفحه اصلی بازگردانید</string>
     <string name="home_app_hide_message">این برنامه از صفحهٔ اصلی پنهان خواهد شد. بعداً می‌توانید آن را با دکمهٔ انتهای فهرست، از بخش برنامه‌های پنهان بازیابی کنید.</string>
     <string name="home_app_will_be_hidden">این برنامه پنهان خواهد شد</string>
     <string name="home_app_hidden_named">%s پنهان</string>
@@ -31,6 +34,7 @@
     <string name="deep_link_add_source_only_universal">فقط پچ‌های یونیورسال اضافه شده‌اند. می‌توانید برنامه‌ها را از لیست برنامه‌های منبع اضافه کنید</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">این منبع قبلاً اضافه شده است. آیا می‌خواهید این برنامه را از منبع موجود اضافه کنید؟</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">به‌روزرسانی Morphe در دسترس است</string>
     <string name="home_update_available_subtitle">نسخهٔ جدید آمادهٔ نصب است</string>
@@ -803,6 +807,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">نمایش پیام خوش‌آمدگویی</string>
     <string name="settings_appearance_repatch_notice">اعلان پچ دوباره</string>
     <string name="settings_appearance_repatch_notice_description">نمایش بنر هنگامی که برنامه‌های پچ‌شده را می‌توان دوباره پچ کرد</string>
+    <string name="settings_appearance_more_apps_card">کارت برنامه‌های بیشتر</string>
+    <string name="settings_appearance_more_apps_card_description">یک کارت را زیر برنامه‌ها نمایش می‌دهد که به وصله‌های جامعه منجر می‌شود</string>
     <string name="settings_appearance_app_card_colors">رنگ کارت برنامه‌ها</string>
     <string name="settings_appearance_app_card_colors_default">پیش‌فرض</string>
     <string name="settings_appearance_app_card_colors_default_description">به هر برنامه رنگ بستهٔ خودش را می‌دهد</string>
@@ -867,7 +873,6 @@
     <string name="settings_advanced_update_interval_daily">روزانه</string>
     <string name="settings_advanced_update_interval_weekly">هفتگی</string>
     <string name="settings_advanced_update_interval_monthly">ماهانه</string>
-    <string name="settings_advanced_update_interval_battery_warning">بررسی‌های پس‌زمینه ممکن است در بعضی دستگاه‌ها قابل اعتماد نباشند. سازندگانی مانند Xiaomi، Huawei، Samsung و OnePlus معمولاً برای صرفه‌جویی در باتری، فرایندهای پس‌زمینه را به‌شدت محدود می‌کنند</string>
     <string name="settings_advanced_external_batch_patch">اجازهٔ محرک‌های خارجی</string>
     <string name="settings_advanced_external_batch_patch_description">اجازه به برنامه‌های اتوماسیون برای شروع پچ دسته‌ای</string>
     <string name="external_batch_patch_title">پچ‌کردن گروهی شروع شود؟</string>
@@ -929,7 +934,6 @@
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">نام سفارشی را وارد کنید</string>
     <string name="settings_advanced_patch_options_path_gone">خواندن این پوشه دیگر ممکن نیست. آن را دوباره انتخاب کنید یا پاک کنید، وگرنه پچ کردن متوقف می‌شود و دربارهٔ آن سؤال خواهد کرد</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">آیکون برنامه</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">نمادی که برنامه با آن پچ می‌شود. این نماد در جاهایی که برنامه بعداً نمی‌تواند آن را تغییر دهد نیز استفاده می‌شود، مانند Android Auto و فهرست برنامه‌های تنظیمات سیستم</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">آیکون سفارشی برنامه به پوشه‌ای شامل تصاویر آیکون نیاز دارد</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">آیکون سفارشی</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"پوشه‌ای با تصاویری که به‌عنوان آیکون سفارشی استفاده می‌شوند.
@@ -1037,7 +1041,6 @@ morphe_header_custom_dark.png
     <string name="settings_auto_uninstall_with_shizuku">حذف خودکار هنگام تداخل</string>
     <string name="settings_auto_uninstall_with_shizuku_description">حذف برنامه موجود در صورت تداخل امضا. این کار ممکن است داده‌های برنامه را حذف کند</string>
     <string name="settings_ignore_install_target_rules">نادیده گرفتن الزامات هدف نصب</string>
-    <string name="settings_ignore_install_target_rules_description">این گزینه باعث می‌شود قوانین هدف نصب غیرفعال شده و قوانین آن فعال شوند. برنامه اصلاح‌شده ممکن است کار نکند</string>
     <string name="settings_auto_uninstall_warning_title">حذف خودکار فعال شود؟</string>
     <string name="settings_auto_uninstall_warning_message">اگر Android هنگام نصب خودکار با Shizuku تداخل امضا گزارش کند، Morphe پیش از نصب APK پچ‌شده برنامهٔ موجود را حذف می‌کند</string>
     <string name="settings_auto_uninstall_warning_risk">این کار ممکن است داده‌های برنامه را پاک کند. اگر APK پچ‌شده پس از حذف نصب نشود، ممکن است برنامهٔ قبلی دیگر وجود نداشته باشد</string>
@@ -1068,7 +1071,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_battery_optimization_description">پچر را هنگام کوچک‌شدن برنامه در حال اجرا نگه می‌دارد</string>
     <string name="settings_system_process_runtime">زمان اجرای اصلاح‌کننده</string>
     <string name="settings_system_jvm_runtime_enable">استفاده از VM تعبیه‌شده</string>
-    <string name="settings_system_jvm_runtime_description">اصلاحاتی در VM جاوا که Morphe حمل می‌کند، که می‌تواند تا حد حافظه موجود دستگاه استفاده کند. برای اعمال اصلاحات با زمان اجرای Android غیرفعال کنید</string>
     <string name="settings_system_jvm_runtime_unavailable">به دستگاه ARM یا x86 ۶۴ بیتی نیاز دارد</string>
     <string name="settings_system_patcher_completion_sound">صدای پایان</string>
     <string name="settings_system_patcher_completion_sound_description">هنگام پایان پچ‌کردن، برای موفقیت یا شکست صدایی متمایز پخش می‌کند</string>
@@ -1217,6 +1219,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_warning">APK از برنامهٔ کمکی دریافت می‌شود، پس فقط به برنامه‌هایی اعتماد کنید که می‌شناسید. Morphe همچنان بسته، نسخه و امضای هر فایل را پیش از پچ کردن بررسی می‌کند</string>
     <string name="settings_system_apk_download_helper_installed_by">نصب‌شده توسط %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">نصب‌کننده ناشناس</string>
+    <string name="settings_system_apk_download_helper_open_directly">باز کردن فوری کمک‌کننده</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">دستورالعمل‌های دانلود را نادیده می‌گیرد و کمک‌کننده مورد اعتماد را باز می‌کند</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">اینجا فایلی نیست</string>
     <string name="file_picker_read_error">خواندن این پوشه ممکن نیست</string>

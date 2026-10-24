@@ -12,7 +12,6 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -298,8 +297,7 @@ fun ChangelogOlderFailed(onRetry: () -> Unit) {
             )
             Row(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(Defaults.CornerMedium))
-                    .clickable(role = Role.Button, onClick = onRetry)
+                    .shapedClickable(RoundedCornerShape(Defaults.CornerMedium), role = Role.Button, onClick = onRetry)
                     .padding(vertical = Defaults.SpaceSmall),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
@@ -484,10 +482,10 @@ private fun ReleaseHeader(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(Defaults.CornerMedium))
             .then(
-                if (onToggle != null) Modifier.clickable(role = Role.Button, onClick = onToggle)
-                else Modifier
+                if (onToggle != null) {
+                    Modifier.shapedClickable(RoundedCornerShape(Defaults.CornerMedium), role = Role.Button, onClick = onToggle)
+                } else Modifier
             )
             .padding(vertical = Defaults.SpaceExtraSmall),
         verticalAlignment = Alignment.CenterVertically,
@@ -654,7 +652,7 @@ private fun SectionExpander(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(role = Role.Button, onClick = onToggle)
+            .shapedClickable(SectionCardShape, role = Role.Button, onClick = onToggle)
             .padding(horizontal = Defaults.SpaceLarge, vertical = Defaults.SpaceMedium),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)

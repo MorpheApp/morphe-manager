@@ -17,7 +17,6 @@ import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
@@ -27,7 +26,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalDensity
@@ -135,6 +133,9 @@ fun SegmentedTabs(
         }
     )
 
+    // A remote stays on its page, the pill being the way to the others
+    val pageFocus = rememberPagerPageFocus()
+
     Column(
         modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(spacing)
@@ -163,7 +164,7 @@ fun SegmentedTabs(
                     .animateContentSize(tween(Defaults.ANIMATION_DURATION))
             }
         ) { index ->
-            page(index)
+            Box(modifier = pageFocus, propagateMinConstraints = true) { page(index) }
         }
 
         Column(modifier = swipeModifier, content = below)
@@ -223,8 +224,8 @@ private fun SegmentedSelector(
                         modifier = Modifier
                             .weight(1f)
                             .height(segmentHeight)
-                            .clip(Defaults.PillShape)
-                            .selectable(
+                            .shapedSelectable(
+                                shape = Defaults.PillShape,
                                 selected = isSelected,
                                 role = Role.Tab,
                                 onClick = { onSelect(index) }

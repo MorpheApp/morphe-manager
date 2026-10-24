@@ -65,8 +65,7 @@ fun ListSearchField(
     val iconColor = textColor.copy(alpha = 0.7f)
     val textStyle = MaterialTheme.typography.bodyLarge.copy(color = textColor)
 
-    // The field scrolls its own line, which the insets of a list it heads have nothing to do with
-    WithoutBringIntoViewInsets {
+    TextFieldLine {
         BasicTextField(
             value = value,
             onValueChange = onValueChange,

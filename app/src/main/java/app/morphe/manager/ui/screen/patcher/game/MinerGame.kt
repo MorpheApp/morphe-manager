@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.Defaults
+import app.morphe.manager.ui.screen.shared.shapedIndication
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
 import kotlin.random.Random
@@ -242,12 +243,13 @@ private fun MineCell(state: MinerGameState, index: Int, size: Dp) {
     val flagged = state.isFlagged(index)
     val mine = state.isMine(index)
     val count = state.neighborMines(index)
+    val cellShape = RoundedCornerShape(size * 0.14f)
 
     Box(
         modifier = Modifier
             .size(size)
             .padding(1.dp)
-            .clip(RoundedCornerShape(size * 0.14f))
+            .clip(cellShape)
             .background(
                 when {
                     revealed && mine -> MineExploded
@@ -256,6 +258,8 @@ private fun MineCell(state: MinerGameState, index: Int, size: Dp) {
                 }
             )
             .combinedClickable(
+                interactionSource = null,
+                indication = shapedIndication(cellShape),
                 onClick = { state.reveal(index) },
                 onLongClick = { state.toggleFlag(index) }
             ),

@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.shared
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -125,6 +124,9 @@ internal fun footnoteIcon(tone: SemanticTone): ImageVector = when (tone) {
     else -> MaterialSymbols.Rounded.Warning
 }
 
+/** Shape of a [Notice], which its action row takes too, so its press and focus fit the corners. */
+private val NoticeShape = RoundedCornerShape(Defaults.CornerMedium)
+
 /** Link under a [Notice], to where its message can be read in full or acted on. */
 class NoticeAction(
     val text: String,
@@ -146,6 +148,7 @@ class NoticeAction(
  * @param overflowAction Offered under the message only once [maxLines] cut it short, so a
  *        message that fits never points at a longer version of itself
  * @param action Offered under the message whatever its length, ahead of [overflowAction]
+ * @param onClick Makes the whole block a button, for a notice that opens what it tells of
  * @param modifier Modifier to be applied to the notice
  */
 @Composable
@@ -159,7 +162,8 @@ fun Notice(
     isCentered: Boolean = false,
     maxLines: Int = Int.MAX_VALUE,
     overflowAction: NoticeAction? = null,
-    action: NoticeAction? = null
+    action: NoticeAction? = null,
+    onClick: (() -> Unit)? = null
 ) {
     val metrics = when (density) {
         NoticeDensity.Comfortable -> ComfortableMetrics
@@ -186,8 +190,9 @@ fun Notice(
     val textTopInset = ((metrics.iconSize - firstLineHeight) / 2).coerceAtLeast(0.dp)
 
     Surface(
-        modifier = if (isCentered) modifier.wrapContentWidth() else modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(Defaults.CornerMedium),
+        modifier = (if (isCentered) modifier.wrapContentWidth() else modifier.fillMaxWidth())
+            .then(if (onClick != null) Modifier.shapedClickable(NoticeShape, role = Role.Button, onClick = onClick) else Modifier),
+        shape = NoticeShape,
         color = tone.container,
         border = CardBorder.tinted(tone.accent)
     ) {
@@ -243,7 +248,7 @@ fun Notice(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable(role = Role.Button, onClick = shownAction.onClick)
+                        .shapedClickable(NoticeShape, role = Role.Button, onClick = shownAction.onClick)
                         .heightIn(min = 44.dp)
                         // Lined up with the message rather than the icon, as the rest of its text
                         .padding(

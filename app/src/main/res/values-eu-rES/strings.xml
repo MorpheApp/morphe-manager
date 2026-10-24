@@ -5,6 +5,7 @@
     <!-- Shown under the app a link was opened for -->
     <!-- Shown when the link was opened for the universal patches of a source, which no app is added with -->
     <!-- Asked when the link names an app of a source that is already added -->
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_error">Eguneraketak huts egin du</string>
     <!-- Home Screen - Home Greetings -->

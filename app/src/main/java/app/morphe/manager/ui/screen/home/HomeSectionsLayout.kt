@@ -68,7 +68,9 @@ data class HomeAppListUi(
     val categoryViewMode: HomeAppCategoryViewMode,
     val sourceGroups: List<HomeAppSourceGroup>,
     /** Whether a batch queue is waiting to be started, which patching a selection adds to. */
-    val batchQueuePending: Boolean = false
+    val batchQueuePending: Boolean = false,
+    /** Whether the list ends on the card leading to the community patches. */
+    val showMoreAppsCard: Boolean = false
 )
 
 /** Callbacks fired from an app card. */
@@ -100,12 +102,13 @@ class HomeAppActions(
     val onAssignAppsToCategory: (Set<String>, String?) -> Unit
 )
 
-/** Callbacks of what stands around the list: the header, the greeting and the empty state. */
+/** Callbacks of what stands around the apps: the header, the greeting, the empty state and the card closing the list. */
 @Stable
 class HomeChromeActions(
     val onOtherAppsClick: () -> Unit,
     val onOpenSources: () -> Unit,
-    val onRefreshGreeting: (() -> Unit)?
+    val onRefreshGreeting: (() -> Unit)?,
+    val onHideMoreAppsCard: () -> Unit
 )
 
 /**
@@ -175,6 +178,7 @@ internal fun SectionsLayout(
             state = state,
             search = search,
             onOpenSources = chromeActions.onOpenSources,
+            onHideMoreAppsCard = chromeActions.onHideMoreAppsCard,
             footerBar = footerBar,
             footerBarHeight = insets.bottom,
             bottomBarHeight = bottomBarHeight,
@@ -234,6 +238,7 @@ internal fun MainAppsSection(
     state: HomeAppsSectionState,
     search: SearchFieldState,
     onOpenSources: () -> Unit,
+    onHideMoreAppsCard: () -> Unit,
     footerBar: HomeFooterBarHost,
     modifier: Modifier = Modifier,
     // Height of the bar docked over the list's lower edge, such as a selection's
@@ -720,6 +725,8 @@ internal fun MainAppsSection(
     // An active filter takes the empty state, since clearing it is the way out the user needs
     val isFilterEmpty = isListEmpty && isFilterActive
     val isSearchEmpty = isListEmpty && !isFilterActive && searchQuery.isNotBlank()
+    val showMoreAppsCard = apps.showMoreAppsCard && !isFilteringList && !state.isEditing
+    val openCommunityPatches = { state.showCommunityNotice = true }
 
     Box(
         modifier = modifier.fillMaxSize(),
@@ -847,6 +854,13 @@ internal fun MainAppsSection(
                                         keyPrefix = "category_"
                                     )
 
+                                    moreAppsCard(
+                                        visible = showMoreAppsCard,
+                                        onOpen = openCommunityPatches,
+                                        onHide = onHideMoreAppsCard,
+                                        keyPrefix = "category_"
+                                    )
+
                                     hiddenSearchAndShowHiddenItems(
                                         hiddenAppItems = hiddenAppItems,
                                         filteredHiddenItems = filteredHiddenItems,
@@ -854,6 +868,7 @@ internal fun MainAppsSection(
                                         isSearchEmpty = isSearchEmpty,
                                         appActions = appActions,
                                         onShowHiddenApps = { state.showHiddenAppsDialog = true },
+                                        onOpenCommunityPatches = openCommunityPatches,
                                         keyPrefix = "category_"
                                     )
                                 } else {
@@ -878,13 +893,20 @@ internal fun MainAppsSection(
                                         onClearFilter = onClearFilter
                                     )
 
+                                    moreAppsCard(
+                                        visible = showMoreAppsCard,
+                                        onOpen = openCommunityPatches,
+                                        onHide = onHideMoreAppsCard
+                                    )
+
                                     hiddenSearchAndShowHiddenItems(
                                         hiddenAppItems = hiddenAppItems,
                                         filteredHiddenItems = filteredHiddenItems,
                                         searchQuery = searchQuery,
                                         isSearchEmpty = isSearchEmpty,
                                         appActions = appActions,
-                                        onShowHiddenApps = { state.showHiddenAppsDialog = true }
+                                        onShowHiddenApps = { state.showHiddenAppsDialog = true },
+                                        onOpenCommunityPatches = openCommunityPatches
                                     )
                                 }
                             }

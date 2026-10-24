@@ -147,13 +147,9 @@ class PatcherViewModel(
     private var successScreenHeldBack = false
     private var successScreenDeferred = false
 
-    // An auto-install waits for the success screen, so it never starts over a game still in play
-    private var autoInstallQueued = false
-
     fun showSuccess() {
         successScreenHeldBack = false
         showSuccessScreen = true
-        startQueuedAutoInstall()
     }
 
     fun hideSuccessScreen() { showSuccessScreen = false }
@@ -164,7 +160,7 @@ class PatcherViewModel(
      *
      * A run that finishes meanwhile is not lost: the progress screen turns its own action bar into
      * an install button, and the screen appears on its own once [defer] goes back to false,
-     * bringing an auto-install that was waiting for it along.
+     * bringing along whatever an auto-install that ran meanwhile has to ask.
      */
     fun deferSuccessScreen(defer: Boolean) {
         successScreenDeferred = defer
@@ -1046,15 +1042,8 @@ class PatcherViewModel(
             ?: packageName
         if (!installerManager.autoInstallAllowed(target, mount = usingMountInstall)) return@launch
         autoInstallPending = true
-        // Started by the success screen rather than on a timer of its own: an install starting
-        // sooner puts the system dialog over a run still drawn as unfinished, or over a game
-        autoInstallQueued = true
-        if (showSuccessScreen) startQueuedAutoInstall()
-    }
-
-    private fun startQueuedAutoInstall() {
-        if (!autoInstallQueued) return
-        autoInstallQueued = false
+        // Allowed only where no system dialog comes up, so it starts right away, a round in play
+        // included. What it may still have to ask waits on the screen for the success screen
         _autoInstallChannel.trySend(Unit)
     }
 

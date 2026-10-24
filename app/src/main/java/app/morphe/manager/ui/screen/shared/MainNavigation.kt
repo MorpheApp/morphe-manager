@@ -15,6 +15,8 @@ import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.boundsInWindow
@@ -96,29 +98,35 @@ fun MainPagerScaffold(
         )
     }
     val userScrollEnabled = swipeEnabled && !navigationCovered
-    val pager: @Composable (Modifier, Dp) -> Unit = { pagerModifier, bottomBarHeight ->
+    val pager: @Composable (Modifier, FocusRequester?, Dp) -> Unit = { pagerModifier, startFocus, bottomBarHeight ->
+        // A remote steps off a page onto the navigation beside it, if any, never into the next page
+        val pageFocus = rememberPagerPageFocus(startFocus)
         Box(modifier = pagerModifier) {
             HorizontalPager(
                 state = pagerState,
                 modifier = Modifier.fillMaxSize(),
                 userScrollEnabled = userScrollEnabled,
                 key = { index -> MainPage.entries[index] }
-            ) { index -> page(MainPage.entries[index], bottomBarHeight) }
+            ) { index ->
+                Box(modifier = Modifier.fillMaxSize().then(pageFocus)) { page(MainPage.entries[index], bottomBarHeight) }
+            }
             overlay()
         }
     }
 
     Box(modifier = modifier.fillMaxSize()) {
         if (isLandscape()) {
+            val sidebarFocus = remember { FocusRequester() }
             Row(modifier = Modifier.fillMaxSize().navigationBarsPadding()) {
                 MainNavigationSidebar(
                     items = items,
                     current = current,
                     onSelect = select,
+                    currentFocus = sidebarFocus,
                     modifier = Modifier.statusBarsPadding()
                 )
                 VerticalDivider(modifier = Modifier.statusBarsPadding().padding(vertical = 20.dp))
-                pager(Modifier.weight(1f).fillMaxHeight(), 0.dp)
+                pager(Modifier.weight(1f).fillMaxHeight(), sidebarFocus, 0.dp)
             }
         } else {
             val barHaze = rememberHazeState()
@@ -149,7 +157,7 @@ fun MainPagerScaffold(
                 }
             ) { _, bottomBarHeight ->
                 // What the pill blurs as a page scrolls on under it
-                pager(Modifier.fillMaxSize().hazeSource(barHaze), bottomBarHeight)
+                pager(Modifier.fillMaxSize().hazeSource(barHaze), null, bottomBarHeight)
             }
         }
     }
@@ -164,12 +172,17 @@ private class MainNavItem(
     val modifier: Modifier
 )
 
-/** The navigation stacked down the side of a landscape screen, every label shown since there is the room. */
+/**
+ * The navigation stacked down the side of a landscape screen, every label shown since there is the room.
+ *
+ * @param currentFocus Focuses the [current] page's item, where a remote stepping off the page lands.
+ */
 @Composable
 private fun MainNavigationSidebar(
     items: List<MainNavItem>,
     current: MainPage,
     onSelect: (MainPage) -> Unit,
+    currentFocus: FocusRequester,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -186,7 +199,10 @@ private fun MainNavigationSidebar(
                 contentDescription = item.contentDescription,
                 selected = item.page == current,
                 onClick = { onSelect(item.page) },
-                modifier = Modifier.fillMaxWidth().then(item.modifier),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .then(if (item.page == current) Modifier.focusRequester(currentFocus) else Modifier)
+                    .then(item.modifier),
                 hapticFeedback = true,
                 showLabel = true
             )

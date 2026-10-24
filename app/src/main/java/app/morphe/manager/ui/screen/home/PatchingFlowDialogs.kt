@@ -9,7 +9,6 @@ import android.os.Build
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -66,8 +65,8 @@ internal fun DialogHostScope.ApkAvailabilityDialog(
     packageName: String?,
     recommendedVersion: AppTarget?,
     compatibleVersions: List<BundledAppTarget>,
-    selectedDownloadVersion: AppTarget?,
-    onVersionSelect: (AppTarget) -> Unit,
+    selectedDownloadVersion: BundledAppTarget?,
+    onVersionSelect: (BundledAppTarget) -> Unit,
     usingMountInstall: Boolean,
     stockAppInstalled: Boolean,
     isExpertMode: Boolean,
@@ -193,12 +192,11 @@ internal fun DialogHostScope.ApkAvailabilityDialog(
                 )
 
                 if (offeredVersions.size > 1) {
-                    SelectableVersionListCard(
+                    SourceVersionListCard(
                         versions = offeredVersions,
                         selectedVersion = selectedDownloadVersion,
                         onVersionSelect = onVersionSelect,
                         anyString = anyString,
-                        hasMultipleBundles = offeredVersions.map { it.bundleUid }.distinct().size > 1,
                         incompatibleSdkVersions = incompatibleSdkVersions,
                         savedVersion = savedApkInfo?.version,
                         installedVersion = installedAppVersion,
@@ -368,17 +366,16 @@ internal fun DialogHostScope.UnsupportedVersionWarningDialog(
     packageName: String?,
     version: String,
     versionCode: Long? = null,
-    recommendedVersion: String?,
-    allCompatibleVersions: List<String>,
-    versionDescriptions: Map<String, String> = emptyMap(),
-    compatibleVersionCodes: Map<String, Set<Int>> = emptyMap(),
-    experimentalVersions: Set<String> = emptySet(),
+    recommendedVersion: AppTarget?,
+    compatibleVersions: List<BundledAppTarget>,
     isExperimental: Boolean = false,
     isExpertMode: Boolean,
     onDismiss: () -> Unit,
     onProceed: () -> Unit
 ) {
-    val versionCodeMismatch = !isExperimental && versionCode != null && version == recommendedVersion
+    // The sources name this version and refuse only this build of it
+    val versionCodeMismatch = !isExperimental && versionCode != null &&
+            compatibleVersions.any { it.target.version == version }
     val tags = versionTagsOf(isExperimental = isExperimental, isUnsupported = !isExperimental)
     // The card is tinted by the same tag it is badged with, so it cannot read as two verdicts
     val tone = tags.firstOrNull()?.tone ?: SemanticTone.Error
@@ -427,28 +424,28 @@ internal fun DialogHostScope.UnsupportedVersionWarningDialog(
                 )
             }
 
-            if (isExpertMode && allCompatibleVersions.isNotEmpty()) {
-                // Expert mode: every compatible version
-                VersionListCard(
+            val recommended = recommendedVersion?.version
+            if (isExpertMode && compatibleVersions.isNotEmpty()) {
+                // Expert mode: every compatible version, under the source naming it
+                SourceVersionListCard(
+                    versions = compatibleVersions,
+                    anyString = stringResource(R.string.any_version),
                     title = stringResource(R.string.home_dialog_unsupported_version_compatible_versions),
-                    icon = MaterialSymbols.Rounded.Checklist,
-                    versions = allCompatibleVersions,
-                    recommendedIndex = allCompatibleVersions
-                        .indexOfFirst { it !in experimentalVersions }
-                        .takeIf { it >= 0 } ?: 0,
-                    experimentalVersions = experimentalVersions,
-                    descriptions = versionDescriptions,
-                    versionCodes = compatibleVersionCodes
+                    icon = MaterialSymbols.Rounded.Checklist
                 )
-            } else if (recommendedVersion != null) {
+            } else if (recommended != null) {
                 // Simple mode or single version: the recommended one alone
                 VersionListCard(
                     title = stringResource(R.string.home_recommended_version),
                     icon = VersionTag.Recommended.icon,
-                    versions = listOf(recommendedVersion),
+                    versions = listOf(recommended),
                     recommendedIndex = 0,
-                    experimentalVersions = experimentalVersions,
-                    versionCodes = compatibleVersionCodes
+                    experimentalVersions = setOfNotNull(recommended.takeIf { recommendedVersion.isExperimental }),
+                    versionCodes = compatibleVersions
+                        .firstOrNull { it.target.version == recommended }
+                        ?.buildCodes
+                        ?.let { mapOf(recommended to it) }
+                        .orEmpty()
                 )
             }
         }
@@ -672,33 +669,38 @@ internal fun DialogHostScope.NoCompatibleVersionsDialog(
 }
 
 /**
- * Version list card where each row is tappable.
- * The selected version gets a checkmark; the recommended version is labeled when not selected.
+ * Versions in a card of their own for each source, tappable when [onVersionSelect] is given.
+ * The selected entry gets a checkmark; each source's recommended version is labeled.
  * Experimental versions are always labeled regardless of selection state.
  * Versions whose [AppTarget.minSdk] exceeds the current device SDK are shown greyed-out
  * and cannot be selected.
+ *
+ * @param title Heads the card of a lone source, which has no source of its own to be headed by.
  */
 @Composable
-private fun SelectableVersionListCard(
+private fun SourceVersionListCard(
     modifier: Modifier = Modifier,
     versions: List<BundledAppTarget>,
-    selectedVersion: AppTarget?,
-    onVersionSelect: (AppTarget) -> Unit,
     anyString: String,
-    hasMultipleBundles: Boolean,
+    selectedVersion: BundledAppTarget? = null,
+    onVersionSelect: ((BundledAppTarget) -> Unit)? = null,
+    title: String? = null,
+    icon: ImageVector? = null,
     incompatibleSdkVersions: Set<String> = emptySet(),
     savedVersion: String? = null,
     installedVersion: String? = null
 ) {
     if (versions.isEmpty()) return
 
+    val sections = remember(versions) { versions.groupBy { it.bundleUid } }
+    val hasMultipleBundles = sections.size > 1
+
     // The version each source stands behind, experimental ones aside: a source does not
     // recommend a version it marks experimental, whatever the toggle promotes above it
-    val recommendedByBundle = remember(versions) {
-        versions.groupBy { it.bundleUid }
-            .mapValues { (_, section) ->
-                section.installable().firstOrNull { !it.target.isExperimental }?.target?.version
-            }
+    val recommendedByBundle = remember(sections) {
+        sections.mapValues { (_, section) ->
+            section.installable().firstOrNull { !it.target.isExperimental }?.target?.version
+        }
     }
     val sourcesByUid = rememberSourcesByUid()
     val selectedLabel = stringResource(R.string.home_selected_version)
@@ -708,10 +710,10 @@ private fun SelectableVersionListCard(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .selectableGroup(),
+            .then(if (onVersionSelect != null) Modifier.selectableGroup() else Modifier),
         verticalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
     ) {
-        versions.groupBy { it.bundleUid }.forEach { (bundleUid, section) ->
+        sections.forEach { (bundleUid, section) ->
             key(bundleUid) {
                 val source = sourcesByUid[bundleUid]
                 val sourceColor = source?.let { rememberBundleAccent(it) }
@@ -724,30 +726,40 @@ private fun SelectableVersionListCard(
                     } else {
                         CardBorder.neutral
                     },
-                    header = if (hasMultipleBundles) {
-                        {
-                            CardHeader(
-                                title = section.first().bundleName,
-                                accentColor = edgeColor,
-                                leading = source?.let {
-                                    { BundleIcon(bundle = it, modifier = Modifier.size(24.dp)) }
-                                }
-                            )
+                    header = when {
+                        hasMultipleBundles -> {
+                            {
+                                CardHeader(
+                                    title = section.first().bundleName,
+                                    accentColor = edgeColor,
+                                    leading = source?.let {
+                                        { BundleIcon(bundle = it, modifier = Modifier.size(24.dp)) }
+                                    }
+                                )
+                            }
                         }
-                    } else null
+                        // Neutral edge, so a neutral header band
+                        title != null -> {
+                            { CardHeader(title = title, accentColor = null, icon = icon) }
+                        }
+                        else -> null
+                    }
                 ) {
                     section.forEachIndexed { index, bundled ->
                         val target = bundled.target
                         val versionString = target.version ?: anyString
                         val isIncompatibleSdk = target.version != null && target.version in incompatibleSdkVersions
+                        // Sources share versions, so the pick is matched by its source too
                         val isSelected = !isIncompatibleSdk && target.version != null &&
-                                target.version == selectedVersion?.version
+                                selectedVersion?.bundleUid == bundleUid &&
+                                target.version == selectedVersion.target.version
+                        val isRecommended = !isIncompatibleSdk && target.version != null &&
+                                target.version == recommendedByBundle[bundleUid]
                         val tags = versionTagsOf(
                             requiresAndroidSdk = target.minSdk.takeIf { isIncompatibleSdk },
                             isIncompatible = isIncompatibleSdk && target.minSdk == null,
                             isExperimental = target.isExperimental,
-                            isRecommended = !isIncompatibleSdk && target.version != null &&
-                                    target.version == recommendedByBundle[bundleUid],
+                            isRecommended = isRecommended,
                             isSaved = target.version != null && target.version == savedVersion,
                             isInstalled = target.version != null && target.version == installedVersion
                         )
@@ -762,10 +774,14 @@ private fun SelectableVersionListCard(
                         VersionRow(
                             version = versionString,
                             tags = tags,
+                            buildCode = bundled.buildCodes?.firstOrNull()?.toLong(),
                             description = target.description,
-                            selected = isSelected,
+                            // A list only read keeps no room for a check, and bolds the
+                            // recommended version instead of the pick
+                            selected = isSelected.takeIf { onVersionSelect != null },
                             enabled = !isIncompatibleSdk,
-                            onClick = { onVersionSelect(target) },
+                            emphasized = if (onVersionSelect != null) isSelected else isRecommended,
+                            onClick = onVersionSelect?.let { select -> { select(bundled) } },
                             contentDescription = rowContentDescription
                         )
                         if (index < section.lastIndex) {
@@ -825,6 +841,9 @@ private fun VersionListCard(
     }
 }
 
+/** Shape of a [VersionPanel], which its rows are pressed and focused on too, so either fits its corners. */
+private val VersionPanelShape = RoundedCornerShape(Defaults.CornerLarge)
+
 /**
  * A card holding versions, one [VersionRow] after another: a source's own, in the neutral card or
  * edged in its color, or [color] and [border] for a card that stands for a verdict, such as a warning.
@@ -840,7 +859,7 @@ private fun VersionPanel(
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(Defaults.CornerLarge),
+        shape = VersionPanelShape,
         color = color,
         tonalElevation = 1.dp,
         border = border
@@ -884,7 +903,7 @@ private fun VersionRow(
             .fillMaxWidth()
             .then(
                 if (selected != null && onClick != null && enabled) {
-                    Modifier.selectable(selected = selected, onClick = onClick, role = Role.RadioButton)
+                    Modifier.shapedSelectable(VersionPanelShape, selected = selected, role = Role.RadioButton, onClick = onClick)
                 } else Modifier
             )
             .then(if (contentDescription != null) Modifier.semantics { this.contentDescription = contentDescription } else Modifier)

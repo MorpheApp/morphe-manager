@@ -8,7 +8,6 @@ package app.morphe.manager.ui.screen.settings.appearance
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
@@ -233,8 +232,7 @@ private fun ColorStopHandle(
     Box(
         modifier = Modifier
             .size(StopTargetSize)
-            .clip(CircleShape)
-            .clickable(role = Role.Button, onClick = onClick)
+            .shapedClickable(CircleShape, role = Role.Button, onClick = onClick)
             .semantics { contentDescription = description },
         contentAlignment = Alignment.Center
     ) {

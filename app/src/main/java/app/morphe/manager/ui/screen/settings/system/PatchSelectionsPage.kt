@@ -9,7 +9,6 @@ import android.net.Uri
 import android.view.HapticFeedbackConstants
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
@@ -567,7 +566,8 @@ private fun PackageSelectionHeader(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .combinedClickable(
+                    .shapedCombinedClickable(
+                        shape = segment.shape,
                         onClick = {
                             if (isSelectionMode) multiSelect.onToggleSelection(packageName) else onToggleExpanded()
                         },

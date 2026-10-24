@@ -290,7 +290,12 @@ private fun HeaderEditor(
             onGestureChange = { isGesturing.value = it }
         )
     } else {
-        Modifier.clickable(onClickLabel = selectImage, onClick = onSelectImage)
+        Modifier.clickable(
+            interactionSource = null,
+            indication = shapedIndication(shape),
+            onClickLabel = selectImage,
+            onClick = onSelectImage
+        )
     }
 
     Box(

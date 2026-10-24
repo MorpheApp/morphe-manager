@@ -26,12 +26,23 @@ import androidx.compose.ui.AbsoluteAlignment
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.focus.FocusManager
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.input.key.type
 import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.layout.positionInParent
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -167,12 +178,22 @@ fun FloatingBarsLayout(
     content: @Composable BoxScope.(topHeight: Dp, bottomHeight: Dp) -> Unit
 ) {
     val currentContent = rememberUpdatedState(content)
-    val contentSlot = remember(wrapContentHeight) { HeightKeyedContent(currentContent, wrapContentHeight) }
+    val focusManager = LocalFocusManager.current
+    val focus = remember(focusManager) { FloatingBarsFocus(focusManager) }
+    val contentSlot = remember(wrapContentHeight, focus) {
+        HeightKeyedContent(currentContent, wrapContentHeight, focus.contentModifier)
+    }
+    val topSlot: @Composable () -> Unit = {
+        Box(modifier = focus.top.modifier, contentAlignment = Alignment.TopCenter) { topBar() }
+    }
+    val bottomSlot: @Composable () -> Unit = {
+        Box(modifier = focus.bottom.modifier, contentAlignment = Alignment.BottomCenter) { bottomBar() }
+    }
 
     SubcomposeLayout(modifier) { constraints ->
         val barConstraints = constraints.copy(minWidth = 0, minHeight = 0)
-        val topPlaceables = subcompose(FloatingBarsSlot.Top, topBar).map { it.measure(barConstraints) }
-        val bottomPlaceables = subcompose(FloatingBarsSlot.Bottom, bottomBar).map { it.measure(barConstraints) }
+        val topPlaceables = subcompose(FloatingBarsSlot.Top, topSlot).map { it.measure(barConstraints) }
+        val bottomPlaceables = subcompose(FloatingBarsSlot.Bottom, bottomSlot).map { it.measure(barConstraints) }
         val topHeight = topPlaceables.maxOfOrNull { it.height } ?: 0
         val bottomHeight = bottomPlaceables.maxOfOrNull { it.height } ?: 0
         val contentPlaceables = subcompose(FloatingBarsSlot.Content, contentSlot.at(topHeight.toDp(), bottomHeight.toDp()))
@@ -196,12 +217,44 @@ fun FloatingBarsLayout(
 private enum class FloatingBarsSlot { Top, Bottom, Content }
 
 /**
+ * Lands a move off a bar of a [FloatingBarsLayout] in its content. The content runs on under the
+ * bars, so the area it takes up for focus reaches over them, and a search leaving a bar toward it
+ * passes it by for whatever lies beyond, or finds nothing at all.
+ */
+private class FloatingBarsFocus(private val focusManager: FocusManager) {
+    private val content = FocusRequester()
+    private var contentFocused = false
+
+    val contentModifier: Modifier = Modifier
+        .focusRequester(content)
+        .onFocusChanged { contentFocused = it.hasFocus }
+
+    val top = Bar(Key.DirectionDown, FocusDirection.Down)
+    val bottom = Bar(Key.DirectionUp, FocusDirection.Up)
+
+    /** A bar, its presses of [key] moving focus toward the content in [direction]. */
+    inner class Bar(private val key: Key, private val direction: FocusDirection) {
+        private var focused = false
+
+        val modifier: Modifier = Modifier
+            .onFocusChanged { focused = it.hasFocus }
+            .onKeyEvent { event ->
+                if (event.type != KeyEventType.KeyDown || event.key != key) return@onKeyEvent false
+                // A move the search keeps within the bar, or takes into the content, stands
+                val moved = focusManager.moveFocus(direction)
+                (moved && (focused || contentFocused)) || content.requestFocus(direction) || moved
+            }
+    }
+}
+
+/**
  * Content slot kept as the same lambda until a bar's height moves, since a subcomposition handed
  * a new lambda recomposes on every measure. The content is read from state.
  */
 private class HeightKeyedContent(
     private val content: State<@Composable BoxScope.(Dp, Dp) -> Unit>,
-    private val wrapHeight: Boolean
+    private val wrapHeight: Boolean,
+    private val focusModifier: Modifier
 ) {
     private var heights: Pair<Dp, Dp>? = null
     private var slot: @Composable () -> Unit = {}
@@ -210,7 +263,7 @@ private class HeightKeyedContent(
         if (heights != top to bottom) {
             heights = top to bottom
             val fill = if (wrapHeight) Modifier.fillMaxWidth() else Modifier.fillMaxSize()
-            slot = { Box(fill) { content.value(this, top, bottom) } }
+            slot = { Box(fill.then(focusModifier)) { content.value(this, top, bottom) } }
         }
         return slot
     }
@@ -278,7 +331,7 @@ private fun RowScope.PillAction(
                 )
                 .clickable(
                     interactionSource = interactionSource,
-                    indication = ripple(),
+                    indication = shapedIndication(shape),
                     role = if (item.selected != null) Role.Tab else Role.Button,
                     onClick = rememberHapticClick(item.onClick)
                 )

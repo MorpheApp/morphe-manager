@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Chưa vá</string>
     <string name="home_no_patches_available">Không có bản vá nào</string>
     <string name="home_app_hide_title">Ẩn ứng dụng này?</string>
+    <string name="home_more_apps_title">Thêm ứng dụng</string>
+    <string name="home_more_apps_hide_title">Ẩn thẻ này?</string>
+    <string name="home_more_apps_hide_message">Bạn có thể mang nó trở lại bất cứ lúc nào trong Cài đặt &gt; Giao diện &gt; Màn hình chính</string>
     <string name="home_app_hide_message">Ứng dụng này sẽ bị ẩn khỏi trang chủ. Bạn có thể khôi phục lại từ danh sách ứng dụng đang ẩn ở cuối danh sách</string>
     <string name="home_app_will_be_hidden">Ứng dụng này sẽ bị ẩn</string>
     <string name="home_app_hidden_named">%s ẩn</string>
@@ -31,6 +34,7 @@
     <string name="deep_link_add_source_only_universal">Chỉ các bản vá chung mới được thêm. Bạn có thể thêm ứng dụng từ danh sách ứng dụng của nguồn</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Nguồn này đã được thêm. Thêm ứng dụng này từ nguồn hiện có không?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Đã có bản cập nhật Morphe mới</string>
     <string name="home_update_available_subtitle">Phiên bản mới đã sẵn sàng để được cài đặt</string>
@@ -803,6 +807,8 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_appearance_greeting_phrases_subtitle">Hiển thị lời chào</string>
     <string name="settings_appearance_repatch_notice">Thông báo vá lại</string>
     <string name="settings_appearance_repatch_notice_description">Hiển thị banner khi các ứng dụng đã vá có thể được vá lại</string>
+    <string name="settings_appearance_more_apps_card">Thẻ Thêm ứng dụng</string>
+    <string name="settings_appearance_more_apps_card_description">Hiển thị một thẻ bên dưới các ứng dụng dẫn đến các bản vá cộng đồng</string>
     <string name="settings_appearance_app_card_colors">Màu thẻ ứng dụng</string>
     <string name="settings_appearance_app_card_colors_default">Mặc định</string>
     <string name="settings_appearance_app_card_colors_default_description">Gán cho mỗi ứng dụng màu sắc của nguồn vá tương ứng</string>
@@ -867,7 +873,6 @@ Các bản vá không bị ảnh hưởng: bật các bản vá trước khi ph�
     <string name="settings_advanced_update_interval_daily">Hàng ngày</string>
     <string name="settings_advanced_update_interval_weekly">Hàng tuần</string>
     <string name="settings_advanced_update_interval_monthly">Hàng tháng</string>
-    <string name="settings_advanced_update_interval_battery_warning">Tính năng này có thể không hoạt động trên một số thiết bị như Xiaomi, Huawei, Samsung và OnePlus, vì chúng thường giới hạn ứng dụng chạy nền để tiết kiệm pin</string>
     <string name="settings_advanced_external_batch_patch">Cho phép kích hoạt từ bên ngoài</string>
     <string name="settings_advanced_external_batch_patch_description">Cho phép các ứng dụng tự động hóa bắt đầu vá hàng loạt</string>
     <string name="external_batch_patch_title">Bắt đầu vá hàng loạt?</string>
@@ -929,7 +934,6 @@ Các bản vá không bị ảnh hưởng: bật các bản vá trước khi ph�
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Nhập tên tùy chỉnh</string>
     <string name="settings_advanced_patch_options_path_gone">Biểu tượng ứng dụng tùy chỉnh cần một thư mục chứa hình ảnh biểu tượng.</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Biểu tượng</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Vietnamese</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Biểu tượng ứng dụng tùy chỉnh cần một thư mục chứa hình ảnh biểu tượng.</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Biểu tượng tùy chỉnh</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Thư mục chứa ảnh dùng làm biểu tượng tuỳ chỉnh.
@@ -1040,7 +1044,6 @@ Kết quả thực tế có thể khác nhau tùy theo phiên bản Android, ROM
     <string name="settings_auto_uninstall_with_shizuku">Tự động gỡ cài đặt khi có xung đột</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Gỡ cài đặt ứng dụng hiện tại khi xung đột chữ ký. Điều này có thể xóa dữ liệu ứng dụng</string>
     <string name="settings_ignore_install_target_rules">Bỏ qua yêu cầu về đích cài đặt</string>
-    <string name="settings_ignore_install_target_rules_description">Cho phép các yêu cầu về đích cài đặt bị tắt và bật những quy tắc mà nó loại trừ. Ứng dụng đã vá có thể không hoạt động</string>
     <string name="settings_auto_uninstall_warning_title">Bật tính năng gỡ cài đặt tự động?</string>
     <string name="settings_auto_uninstall_warning_message">Nếu Android phát hiện xung đột chữ ký trong quá trình tự động cài đặt bằng Shizuku, Morphe sẽ gỡ ứng dụng đang có trước khi cài đặt APK đã vá</string>
     <string name="settings_auto_uninstall_warning_risk">Việc này có thể làm mất dữ liệu ứng dụng. Nếu APK đã vá không cài đặt được sau khi gỡ ứng dụng, ứng dụng trước đó có thể đã bị xóa và không thể khôi phục được</string>
@@ -1071,7 +1074,6 @@ Chi tiết: %2$s"</string>
     <string name="settings_system_battery_optimization_description">Duy trì trình vá tiếp tục chạy kể cả khi ứng dụng bị thu nhỏ</string>
     <string name="settings_system_process_runtime">Thời gian chạy Patcher</string>
     <string name="settings_system_jvm_runtime_enable">Sử dụng VM nhúng</string>
-    <string name="settings_system_jvm_runtime_description">Các bản vá trong Java VM mà Morphe mang theo, có thể sử dụng nhiều bộ nhớ như thiết bị nhường. Tắt để vá bằng thời gian chạy của Android</string>
     <string name="settings_system_jvm_runtime_unavailable">Yêu cầu thiết bị ARM hoặc x86 64-bit</string>
     <string name="settings_system_patcher_completion_sound">Âm báo hoàn tất</string>
     <string name="settings_system_patcher_completion_sound_description">Phát ra âm thanh để báo hiệu kết quả vá thành công hoặc thất bại</string>
@@ -1220,6 +1222,8 @@ Chi tiết: %2$s"</string>
     <string name="settings_system_apk_download_helper_warning">APK đến từ ứng dụng trợ giúp, vì vậy chỉ tin cậy những ứng dụng bạn biết. Morphe vẫn kiểm tra gói, phiên bản và chữ ký của mọi tệp trước khi vá.</string>
     <string name="settings_system_apk_download_helper_installed_by">Được cài đặt bởi %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Không rõ trình cài đặt</string>
+    <string name="settings_system_apk_download_helper_open_directly">Mở trình hỗ trợ ngay lập tức</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Bỏ qua hướng dẫn tải xuống và mở trình hỗ trợ đáng tin cậy</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Chẳng có gì ở đây cả</string>
     <string name="file_picker_read_error">Không thể đọc thư mục này</string>

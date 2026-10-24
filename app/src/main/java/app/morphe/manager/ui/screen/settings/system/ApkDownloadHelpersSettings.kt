@@ -17,6 +17,8 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.ApkDownloadHelperApp
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.manager.util.PM
+import com.composables.icons.materialsymbols.MaterialSymbols
+import com.composables.icons.materialsymbols.rounded.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.androidx.compose.koinViewModel
@@ -46,6 +48,7 @@ fun ApkDownloadHelpersSettings(
     val helpers = rememberApkDownloadHelpers(settingsViewModel)
     var pendingTrust by remember { mutableStateOf<ApkDownloadHelperApp?>(null) }
     val trustedPackages by settingsViewModel.prefs.trustedApkDownloadHelpers.getAsState()
+    val openDirectly by settingsViewModel.prefs.openApkDownloadHelperDirectly.getAsState()
     val unknownInstaller = stringResource(R.string.settings_system_apk_download_helper_installed_by_unknown)
 
     // Version and install source are what tell two helpers apart, so they are worth a PackageManager round trip
@@ -113,6 +116,19 @@ fun ApkDownloadHelpersSettings(
                         helper.packageName,
                         installedBy.takeIf { info != null }
                     ).joinToString("\n")
+                )
+            }
+        }
+
+        // Only means something once there is a trusted helper to open
+        if (helpers.any { it.packageName in trustedPackages }) {
+            SettingsGroup {
+                SettingsSwitchItem(
+                    checked = openDirectly,
+                    onToggle = { settingsViewModel.setOpenApkDownloadHelperDirectly(!openDirectly) },
+                    icon = MaterialSymbols.Rounded.Download,
+                    title = stringResource(R.string.settings_system_apk_download_helper_open_directly),
+                    subtitle = stringResource(R.string.settings_system_apk_download_helper_open_directly_description)
                 )
             }
         }

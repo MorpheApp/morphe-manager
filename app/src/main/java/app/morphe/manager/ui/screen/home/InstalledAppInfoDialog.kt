@@ -149,9 +149,8 @@ fun DialogHostScope.InstalledAppInfoDialog(
     // Where the install stands against the newest version the enabled sources cover. Keyed by the
     // package the sources know it as, which is the original one for a build that was renamed.
     val catalogPackageName = installedApp?.originalPackageName ?: packageName
-    val supportedVersions by homeViewModel.recommendedVersionsFlow.collectAsStateWithLifecycle()
+    val supportedVersion by viewModel.supportedVersion.collectAsStateWithLifecycle()
     val ignoredVersions by homeViewModel.apps.ignoredAppVersions.collectAsStateWithLifecycle()
-    val supportedVersion = supportedVersions[catalogPackageName]
     val ignoredVersion = ignoredVersions[catalogPackageName]
     val installedVersionStatus = remember(supportedVersion, ignoredVersion, appInfo, installedApp) {
         versionStatus(
@@ -210,22 +209,28 @@ fun DialogHostScope.InstalledAppInfoDialog(
     // Content entrance animation
     val entered = remember { mutableStateOf(false) }
 
+    val scope = rememberCoroutineScope()
+
     // Bundle data
     val sources by homeViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle()
-    // Only a remote source has a changelog to read the pending update from
-    val updateChangelogRequest = appUpdate
-        ?.takeIf { update -> sources.any { it.uid == update.bundleUid && it is RemotePatchBundle } }
-        ?.let {
-            BundleChangelogRequest(
-                bundleUid = it.bundleUid,
-                sinceVersion = it.patchedWithVersion,
-                subject = it.subject
-            )
-        }
-    val onShowUpdateChangelog: (() -> Unit)? = updateChangelogRequest?.let { request ->
-        { changelogRequest.value = request }
-    }
     val appliedBundles by viewModel.appliedBundles.collectAsStateWithLifecycle()
+    // Only a remote source has a changelog. The one carrying a pending update is read from the
+    // version the app was patched with, any other from its current release
+    val changelogUids = appliedBundles.map { it.uid }.filter { uid -> sources.any { it.uid == uid && it is RemotePatchBundle } }
+    val changelogUid = appUpdate?.bundleUid?.takeIf { it in changelogUids } ?: changelogUids.firstOrNull()
+    val onShowChangelog: (() -> Unit)? = changelogUid?.let { uid ->
+        {
+            scope.launch {
+                changelogRequest.value = BundleChangelogRequest(
+                    bundleUid = uid,
+                    sinceVersion = appUpdate?.takeIf { it.bundleUid == uid }?.patchedWithVersion,
+                    subject = installedApp?.let { homeViewModel.apps.changelogSubject(it, uid) }
+                )
+            }
+        }
+    }
+    // The rebuild banner reads out the notes of the update it offers, so the info row leaves them to it
+    val updateChangelog = onShowChangelog?.takeIf { showsRebuildBanner && appUpdate?.bundleUid == changelogUid }
     val bundlesUsedSummary by viewModel.bundlesUsedSummary.collectAsStateWithLifecycle()
     val availablePatches by viewModel.availablePatches.collectAsStateWithLifecycle()
 
@@ -250,7 +255,6 @@ fun DialogHostScope.InstalledAppInfoDialog(
         ))
     }
 
-    val scope = rememberCoroutineScope()
     // Offered under the name an export would suggest, so the file lands the same either way
     val shareSaved: () -> Unit = {
         viewModel.savedApkFile()?.let { file ->
@@ -546,7 +550,7 @@ fun DialogHostScope.InstalledAppInfoDialog(
                     accentColor = infoAccentColor,
                     mountRestore = mountRestore,
                     onPatch = { onTriggerPatchFlow(app.originalPackageName, app.trackingKey) },
-                    onShowUpdateChangelog = onShowUpdateChangelog,
+                    onShowUpdateChangelog = updateChangelog,
                     onIgnoreVersion = onIgnoreVersion,
                     onOpenAppLinks = { page = InfoPage.AppLinks }
                 )
@@ -562,6 +566,7 @@ fun DialogHostScope.InstalledAppInfoDialog(
                         installedApkSize = viewModel.installedApkSize,
                         installedApkAbis = viewModel.installedApkAbis,
                         onShowPatches = { page = InfoPage.AppliedPatches },
+                        onShowChangelog = onShowChangelog.takeIf { updateChangelog == null },
                         onOpenAppLinks = { page = InfoPage.AppLinks },
                         accentColor = infoAccentColor
                     )
@@ -1163,6 +1168,7 @@ private fun InfoSection(
     installedApkSize: Long?,
     installedApkAbis: List<String>,
     onShowPatches: () -> Unit,
+    onShowChangelog: (() -> Unit)?,
     onOpenAppLinks: () -> Unit,
     accentColor: Color,
     modifier: Modifier = Modifier
@@ -1225,21 +1231,29 @@ private fun InfoSection(
             }
 
             InfoSlot(totalPatches.takeIf { it > 0 }) { count ->
-                InfoRowWithAction(
+                InfoRowWithActions(
                     icon = MaterialSymbols.Rounded.Done_all,
                     label = stringResource(R.string.home_app_info_applied_patches),
                     value = pluralStringResource(R.plurals.patch_count, count, count.toString()),
-                    onAction = onShowPatches
+                    actions = listOf(
+                        InfoRowAction(MaterialSymbols.Rounded.List.autoMirrored, stringResource(R.string.view), onShowPatches)
+                    )
                 )
             }
 
-            // Where a patch update that was turned down is taken back up again
+            // Where the source's notes are read, and a patch update that was turned down is taken
+            // back up again
             InfoSlot(bundlesUsedSummary.takeIf { it.isNotBlank() }) { summary ->
                 IgnorableInfoRow(
                     icon = MaterialSymbols.Rounded.Folder_code,
                     label = stringResource(R.string.home_app_info_patch_source_used),
                     value = summary,
-                    onStopIgnoring = onStopIgnoringPatchUpdate
+                    onStopIgnoring = onStopIgnoringPatchUpdate,
+                    actions = listOfNotNull(
+                        onShowChangelog?.let {
+                            InfoRowAction(MaterialSymbols.Rounded.History, stringResource(R.string.whats_new), it)
+                        }
+                    )
                 )
             }
 
@@ -1257,13 +1271,13 @@ private fun InfoSection(
                         status.unhandledDomains.size
                     )
                 }
-                InfoRowWithAction(
+                InfoRowWithActions(
                     icon = if (status.isFullyConfigured) MaterialSymbols.Rounded.Link else MaterialSymbols.Rounded.Link_off,
                     label = stringResource(R.string.app_links_title),
                     value = linksValue,
-                    onAction = onOpenAppLinks,
-                    actionIcon = MaterialSymbols.Rounded.Settings,
-                    actionContentDescription = stringResource(R.string.configure)
+                    actions = listOf(
+                        InfoRowAction(MaterialSymbols.Rounded.Settings, stringResource(R.string.configure), onOpenAppLinks)
+                    )
                 )
             }
         }
@@ -1272,27 +1286,27 @@ private fun InfoSection(
 
 /**
  * [InfoRow] for something whose offer can be turned down. While it is, [onStopIgnoring] is set and
- * the row trades [icon] for a crossed out eye and takes the offer back up from its end.
+ * the row trades [icon] for a crossed out eye and takes the offer back up from its end, after
+ * its other [actions].
  */
 @Composable
 private fun IgnorableInfoRow(
     icon: ImageVector,
     label: String,
     value: String,
-    onStopIgnoring: (() -> Unit)?
+    onStopIgnoring: (() -> Unit)?,
+    actions: List<InfoRowAction> = emptyList()
 ) {
-    if (onStopIgnoring != null) {
-        InfoRowWithAction(
-            icon = MaterialSymbols.Rounded.Visibility_off,
-            label = label,
-            value = value,
-            onAction = onStopIgnoring,
-            actionIcon = MaterialSymbols.Rounded.Visibility,
-            actionContentDescription = stringResource(R.string.stop_ignoring)
+    InfoRowWithActions(
+        icon = if (onStopIgnoring != null) MaterialSymbols.Rounded.Visibility_off else icon,
+        label = label,
+        value = value,
+        actions = actions + listOfNotNull(
+            onStopIgnoring?.let {
+                InfoRowAction(MaterialSymbols.Rounded.Visibility, stringResource(R.string.stop_ignoring), it)
+            }
         )
-    } else {
-        InfoRow(icon = icon, label = label, value = value)
-    }
+    )
 }
 
 /**
@@ -1312,26 +1326,34 @@ private fun <T : Any> InfoSlot(value: T?, content: @Composable (T) -> Unit) {
     }
 }
 
+/** A pill at the end of an info row. */
+private class InfoRowAction(val icon: ImageVector, val contentDescription: String, val onClick: () -> Unit)
+
+/** [InfoRow] ending in [actions] side by side, or a plain one without any. */
 @Composable
-private fun InfoRowWithAction(
+private fun InfoRowWithActions(
     icon: ImageVector,
     label: String,
     value: String,
-    onAction: () -> Unit,
-    actionIcon: ImageVector = MaterialSymbols.Rounded.List.autoMirrored,
-    actionContentDescription: String = stringResource(R.string.view),
+    actions: List<InfoRowAction>
 ) {
     InfoRow(
         icon = icon,
         label = label,
         value = value,
-        trailing = {
-            // A plain pill takes the app's color the dialog hands it, as the pills on its cards do
-            ActionPillButton(
-                onClick = onAction,
-                icon = actionIcon,
-                contentDescription = actionContentDescription
-            )
+        trailing = actions.takeIf { it.isNotEmpty() }?.let { shown ->
+            {
+                Row(horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)) {
+                    // A plain pill takes the app's color the dialog hands it, as the pills on its cards do
+                    shown.forEach { action ->
+                        ActionPillButton(
+                            onClick = action.onClick,
+                            icon = action.icon,
+                            contentDescription = action.contentDescription
+                        )
+                    }
+                }
+            }
         }
     )
 }

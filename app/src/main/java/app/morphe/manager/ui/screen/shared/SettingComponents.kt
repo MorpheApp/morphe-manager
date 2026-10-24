@@ -10,9 +10,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -25,7 +23,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -104,10 +101,9 @@ fun SurfaceCard(
                 } else Modifier
             )
             .fillMaxWidth()
-            .clip(shape)
             .then(
                 if (onClick != null) {
-                    Modifier.clickable(enabled = enabled, onClick = onClick)
+                    Modifier.shapedClickable(shape, enabled = enabled, onClick = onClick)
                 } else Modifier
             ),
         shape = shape,
@@ -172,8 +168,8 @@ fun ToggleRow(
         Row(
             modifier = rowModifier
                 .fillMaxWidth()
-                .clip(MaterialTheme.shapes.medium)
-                .toggleable(
+                .shapedToggleable(
+                    shape = MaterialTheme.shapes.medium,
                     value = checked,
                     role = Role.Switch,
                     enabled = enabled,
@@ -527,6 +523,9 @@ fun SettingsSwitchItem(
     )
 }
 
+/** Shape of a [SectionCard] standing on its own, which a row of it is pressed and focused on, so either fits its corners. */
+val SectionCardShape = RoundedCornerShape(Defaults.CornerLargeIncreased)
+
 /**
  * Section container card.
  *
@@ -588,9 +587,7 @@ internal fun SectionTitle(text: String, icon: ImageVector?, parent: String?, onC
             .fillMaxWidth()
             .then(
                 if (onClick != null) {
-                    Modifier
-                        .clip(MaterialTheme.shapes.small)
-                        .clickable(role = Role.Button, onClick = onClick)
+                    Modifier.shapedClickable(MaterialTheme.shapes.small, role = Role.Button, onClick = onClick)
                 } else Modifier
             )
             // The extra room above ties the title to the section below rather than the one above

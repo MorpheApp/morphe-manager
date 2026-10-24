@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Nezáplatováno</string>
     <string name="home_no_patches_available">Žádné záplaty k dispozici</string>
     <string name="home_app_hide_title">Skrýt tuto aplikaci?</string>
+    <string name="home_more_apps_title">Více aplikací</string>
+    <string name="home_more_apps_hide_title">Skrýt tuto kartu?</string>
+    <string name="home_more_apps_hide_message">Můžete si jej kdykoliv vrátit v Nastavení &gt; Vzhled &gt; Domovská obrazovka</string>
     <string name="home_app_hide_message">Tato aplikace bude skryta z domovské obrazovky. Můžete ji později obnovit pomocí tlačítka na konci seznamu</string>
     <string name="home_app_will_be_hidden">Tato aplikace bude skryta</string>
     <string name="home_app_hidden_named">%s skrytých</string>
@@ -31,6 +34,9 @@
     <string name="deep_link_add_source_only_universal">Jsou přidány pouze univerzální záplaty. Aplikace můžete přidat ze seznamu aplikací zdroje</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Tento zdroj je již přidán. Přidat tuto aplikaci ze stávajícího zdroje?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="mpp_import_update_message">Toto je nová verze %s. Chcete ji aktualizovat?</string>
+    <string name="mpp_import_unreadable">Tento soubor nelze přečíst</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Dostupná aktualizace Morphe</string>
     <string name="home_update_available_subtitle">Připravena nová verze k instalaci</string>
@@ -803,6 +809,8 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Zobrazuje uvítací zprávu</string>
     <string name="settings_appearance_repatch_notice">Oznámení o opětovné záplatě</string>
     <string name="settings_appearance_repatch_notice_description">Zobrazuje banner, když lze opravené aplikace znovu opravit</string>
+    <string name="settings_appearance_more_apps_card">Karta Více aplikací</string>
+    <string name="settings_appearance_more_apps_card_description">Zobrazí kartu pod aplikacemi, která vede k komunitním opravám</string>
     <string name="settings_appearance_app_card_colors">Barvy karet aplikací</string>
     <string name="settings_appearance_app_card_colors_default">Výchozí</string>
     <string name="settings_appearance_app_card_colors_default_description">Přiřadí každé aplikaci barvu jejího balíčku</string>
@@ -867,7 +875,7 @@ Záplaty tím nejsou ovlivněny: povolte předběžné záplaty pro každý zdro
     <string name="settings_advanced_update_interval_daily">Denně</string>
     <string name="settings_advanced_update_interval_weekly">Týdně</string>
     <string name="settings_advanced_update_interval_monthly">Měsíčně</string>
-    <string name="settings_advanced_update_interval_battery_warning">Kontroly v pozadí nemusí fungovat spolehlivě na některých zařízeních. Výrobci jako Xiaomi, Huawei, Samsung a OnePlus často agresivně omezují procesy v pozadí pro úsporu baterie.</string>
+    <string name="settings_advanced_update_interval_battery_warning">Kontroly na pozadí nemusí fungovat spolehlivě na zařízeních, která omezují aplikace na pozadí, jako jsou Xiaomi, Huawei, Samsung a OnePlus</string>
     <string name="settings_advanced_external_batch_patch">Povolit externí spouštěče</string>
     <string name="settings_advanced_external_batch_patch_description">Umožňuje automatizacím zahajit hromadnou opravu</string>
     <string name="external_batch_patch_title">Spustit dávkové záplatování?</string>
@@ -929,7 +937,7 @@ Záplaty tím nejsou ovlivněny: povolte předběžné záplaty pro každý zdro
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Zadejte vlastní název</string>
     <string name="settings_advanced_patch_options_path_gone">Tuto složku už nelze přečíst. Znovu ji vyberte, nebo ji vymažte, jinak se patchování zastaví a zeptá se na to.</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Ikona aplikace</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Ikona, kterou se aplikace patchuje. Používá se také tam, kde ji aplikace později nemůže změnit, například v Android Auto a v seznamu aplikací v systémovém nastavení.</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Ikona, kterou je aplikace patchována, používá se také tam, kde ji nelze později změnit, například v Android Auto</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Vlastní ikona aplikace potřebuje složku s obrázky ikon</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Vlastní ikona</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Složka s obrázky, které se mají použít jako vlastní ikona.
@@ -1037,7 +1045,7 @@ Rozměry obrázků musí být následující:
     <string name="settings_auto_uninstall_with_shizuku">Automatické odinstalování v případě konfliktu</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Odinstaluje existující aplikaci při konfliktu podpisů. Toto může odstranit data aplikace</string>
     <string name="settings_ignore_install_target_rules">Ignorovat požadavky na cíl instalace</string>
-    <string name="settings_ignore_install_target_rules_description">Umožňuje vypnout požadavky na cíl instalace, které patch vyžaduje, a zapnout ta, která vylučuje. Patchovaná aplikace nemusí fungovat</string>
+    <string name="settings_ignore_install_target_rules_description">Umožňuje vypnutí patchů, které vyžaduje cíl instalace, a zapnutí těch, které vylučuje. Patchovaná aplikace nemusí fungovat</string>
     <string name="settings_auto_uninstall_warning_title">Povolit automatické odinstalování?</string>
     <string name="settings_auto_uninstall_warning_message">Pokud Android během automatické instalace Shizuku nahlásí konflikt podpisů, Morphe nejprve odinstaluje existující aplikaci před instalací opraveného APK</string>
     <string name="settings_auto_uninstall_warning_risk">Tímto může dojít ke smazání dat aplikace. Pokud se opravené APK nepodaří nainstalovat po odinstalování, předchozí aplikace může být již pryč.</string>
@@ -1068,7 +1076,7 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_battery_optimization_description">Udrží program záplatování spuštěný i při minimalizaci aplikace</string>
     <string name="settings_system_process_runtime">Runtime patchera</string>
     <string name="settings_system_jvm_runtime_enable">Použít vestavěný VM</string>
-    <string name="settings_system_jvm_runtime_description">Záplaty v Javovském VM, který Morphe přenáší, které mohou použít tolik paměti, kolik je k dispozici na zařízení. Vypnout pro záplatu s runtime Androidu</string>
+    <string name="settings_system_jvm_runtime_description">Patche ve vlastní Java VM aplikace Morphe, která může využívat více paměti. Vypněte pro použití runtime prostředí Android</string>
     <string name="settings_system_jvm_runtime_unavailable">Vyžaduje zařízení s ARM nebo 64bitovým x86</string>
     <string name="settings_system_patcher_completion_sound">Zvuk dokončení</string>
     <string name="settings_system_patcher_completion_sound_description">Přehrává odlišný tón pro úspěch nebo neúspěch po dokončení záplatování</string>
@@ -1217,6 +1225,8 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_apk_download_helper_warning">APK pochází z pomocné aplikace, proto důvěřujte pouze aplikacím, které znáte. Morphe před patchováním stále kontroluje balíček, verzi a podpis každého souboru.</string>
     <string name="settings_system_apk_download_helper_installed_by">Nainstalováno aplikací %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Neznámý instalátor</string>
+    <string name="settings_system_apk_download_helper_open_directly">Otevřít pomocníka hned</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Přeskočí pokyny ke stažení a otevře důvěryhodného pomocníka</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Zde nejsou žádné soubory</string>
     <string name="file_picker_read_error">Nelze přečíst tento adresář</string>

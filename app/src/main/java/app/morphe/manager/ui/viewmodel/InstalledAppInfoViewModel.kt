@@ -24,6 +24,8 @@ import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.apk.InstalledPatchState
 import app.morphe.manager.domain.apk.LocalApkSources
 import app.morphe.manager.domain.apk.canRemoveTrackedRecord
+import app.morphe.manager.domain.bundles.AppVersionCatalog
+import app.morphe.manager.domain.bundles.supportedFor
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.UninstallCancelledException
@@ -40,6 +42,7 @@ import app.morphe.manager.ui.screen.home.AppliedPatchBundleUi
 import app.morphe.manager.ui.screen.home.resolveAppliedBundleAttribution
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.*
+import app.morphe.patcher.patch.AppTarget
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -63,7 +66,8 @@ class InstalledAppInfoViewModel(
     private val applicationScope: AppCoroutineScope,
     private val localApkSources: LocalApkSources,
     private val appLinksManager: AppLinksManager,
-    private val prefs: PreferencesManager
+    private val prefs: PreferencesManager,
+    versionCatalog: AppVersionCatalog
 ) : ViewModel() {
     lateinit var onBackClick: () -> Unit
     var onAppStateChanged: ((packageName: String) -> Unit)? = null
@@ -392,6 +396,21 @@ class InstalledAppInfoViewModel(
     val availablePatches: StateFlow<Int> = patchBundleRepository.bundleInfoFlow
         .map { it.values.sumOf { bundle -> bundle.patches.size } }
         .stateIn(viewModelScope, SharingStarted.Eagerly, 0)
+
+    /**
+     * The newest version the sources this install was patched from support, see [supportedFor].
+     * Keyed by the package the sources know it as, the original one for a renamed build.
+     */
+    val supportedVersion: StateFlow<AppTarget?> =
+        combine(
+            installedAppRepository.getAsFlow(packageName),
+            versionCatalog.compatibleVersions,
+            _appliedPatches
+        ) { app, versions, patches ->
+            // Unknown until the applied patches load, so no banner offers a version meanwhile
+            patches ?: return@combine null
+            versions[app?.originalPackageName ?: packageName].orEmpty().supportedFor(patches.keys)
+        }.stateIn(viewModelScope, SharingStarted.Eagerly, null)
 
     /**
      * UI model for each bundle that was used to patch the current app.

@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Não patcheado</string>
     <string name="home_no_patches_available">Nenhum patch disponível</string>
     <string name="home_app_hide_title">Ocultar esse aplicativo?</string>
+    <string name="home_more_apps_title">Mais aplicativos</string>
+    <string name="home_more_apps_hide_title">Ocultar este cartão?</string>
+    <string name="home_more_apps_hide_message">Você pode trazê-lo de volta a qualquer momento em Configurações &gt; Aparência &gt; Tela inicial</string>
     <string name="home_app_hide_message">Este aplicativo será ocultado da tela inicial. Você pode restaurá-lo mais tarde a partir dos aplicativos ocultos usando o botão no final da lista</string>
     <string name="home_app_will_be_hidden">Este aplicativo será ocultado</string>
     <string name="home_app_hidden_named">%s oculto</string>
@@ -31,6 +34,7 @@
     <string name="deep_link_add_source_only_universal">Apenas os patches universais são adicionados. Você pode adicionar aplicativos da lista de aplicativos da fonte</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Esta fonte já está adicionada. Adicionar este aplicativo da fonte existente?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Atualização do Morphe disponível</string>
     <string name="home_update_available_subtitle">Nova versão pronta para instalação</string>
@@ -804,6 +808,8 @@ A desinstalação apagará permanentemente todos os dados do aplicativo"</string
     <string name="settings_appearance_greeting_phrases_subtitle">Mostra uma mensagem de saudação</string>
     <string name="settings_appearance_repatch_notice">Aviso de reaplicação de patch</string>
     <string name="settings_appearance_repatch_notice_description">Mostra um banner quando os aplicativos modificados podem ser patcheados novamente</string>
+    <string name="settings_appearance_more_apps_card">Cartão de mais aplicativos</string>
+    <string name="settings_appearance_more_apps_card_description">Exibe um cartão abaixo dos aplicativos que leva aos patches da comunidade</string>
     <string name="settings_appearance_app_card_colors">Cores do cartão do aplicativo</string>
     <string name="settings_appearance_app_card_colors_default">Padrão</string>
     <string name="settings_appearance_app_card_colors_default_description">Atribuir a cada app a cor de seu próprio pacote</string>
@@ -868,7 +874,6 @@ Os patches não são afetados: ative os patches de pré-lançamento para cada fo
     <string name="settings_advanced_update_interval_daily">Diariamente</string>
     <string name="settings_advanced_update_interval_weekly">Semanal</string>
     <string name="settings_advanced_update_interval_monthly">Mensal</string>
-    <string name="settings_advanced_update_interval_battery_warning">Verificações em segundo plano podem não funcionar confiavelmente em alguns dispositivos. Fabricantes como Xiaomi, Huawei, Samsung e OnePlus frequentemente restringem agressivamente os processos em segundo plano para economizar bateria</string>
     <string name="settings_advanced_external_batch_patch">Permitir gatilhos externos</string>
     <string name="settings_advanced_external_batch_patch_description">Permite que aplicativos de automação iniciem o reparo em lote</string>
     <string name="external_batch_patch_title">Iniciar a aplicação de patches em lote?</string>
@@ -930,7 +935,6 @@ Os patches não são afetados: ative os patches de pré-lançamento para cada fo
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Escreva o nome personalizado</string>
     <string name="settings_advanced_patch_options_path_gone">Não é mais possível ler esta pasta. Selecione-a novamente ou remova-a; caso contrário, a aplicação de patches será interrompida e solicitará uma ação a respeito</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Ícone do aplicativo</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">O ícone com o qual o aplicativo é modificado. Ele também é utilizado em situações em que o aplicativo não consegue alterá-lo posteriormente, como no Android Auto e na lista de aplicativos das configurações do sistema</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">O ícone personalizado do aplicativo requer uma pasta com imagens de ícones</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Ícone personalizado</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Pasta com imagens para usar como um ícone personalizado.
@@ -1038,7 +1042,6 @@ As dimensões das imagens devem ser as seguintes:
     <string name="settings_auto_uninstall_with_shizuku">Desinstalação automática em caso de conflito</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Desinstala o aplicativo existente em caso de conflito de assinatura. Isso pode remover os dados do aplicativo</string>
     <string name="settings_ignore_install_target_rules">Ignorar requisitos de destino de instalação</string>
-    <string name="settings_ignore_install_target_rules_description">Permite que as regras de destino de instalação sejam desativadas e que aquelas que elas descartam sejam ativadas. O aplicativo modificado pode não funcionar</string>
     <string name="settings_auto_uninstall_warning_title">Ativar desinstalação automática?</string>
     <string name="settings_auto_uninstall_warning_message">Se o Android relatar um conflito de assinatura durante a instalação automática do Shizuku, o Morphe desinstalará o app existente antes de instalar o APK corrigido</string>
     <string name="settings_auto_uninstall_warning_risk">Isso pode remover dados do app. Se o APK corrigido falhar ao instalar após a desinstalação, o app anterior pode já ter sido removido</string>
@@ -1069,7 +1072,6 @@ Detalhes: %2$s"</string>
     <string name="settings_system_battery_optimization_description">Mantém o aplicador de patches em execução quando o aplicativo é minimizado</string>
     <string name="settings_system_process_runtime">Tempo de execução do Patcher</string>
     <string name="settings_system_jvm_runtime_enable">Usar VM embutida</string>
-    <string name="settings_system_jvm_runtime_description">Patches em uma Java VM que a Morphe executa, que pode utilizar toda a memória disponível no dispositivo. Desative para fazer os patches com o tempo de execução do Android</string>
     <string name="settings_system_jvm_runtime_unavailable">Necessita de um dispositivo ARM ou x86 de 64 bits</string>
     <string name="settings_system_patcher_completion_sound">Som de conclusão</string>
     <string name="settings_system_patcher_completion_sound_description">Reproduz um tom distinto para sucesso ou falha quando a aplicação de patch for concluída</string>
@@ -1218,6 +1220,8 @@ Detalhes: %2$s"</string>
     <string name="settings_system_apk_download_helper_warning">O APK vem do aplicativo auxiliar, portanto confie apenas em aplicativos que você conhece. O Morphe ainda verifica o pacote, a versão e a assinatura de cada arquivo antes de aplicar o patch.</string>
     <string name="settings_system_apk_download_helper_installed_by">Instalado por %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Instalador desconhecido</string>
+    <string name="settings_system_apk_download_helper_open_directly">Abrir o assistente imediatamente</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Pula as instruções de download e abre o assistente confiável</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Nenhum arquivo aqui</string>
     <string name="file_picker_read_error">Não é possível ler este diretório</string>

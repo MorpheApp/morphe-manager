@@ -71,96 +71,98 @@ fun AppDialogTextField(
 ) {
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
 
-    OutlinedTextField(
-        value = value,
-        onValueChange = onValueChange,
-        label = label,
-        placeholder = placeholder,
-        leadingIcon = leadingIcon,
-        trailingIcon = {
-            if (isPassword || showClearButton || onFolderPickerClick != null || onFilePickerClick != null) {
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall),
-                    modifier = Modifier.padding(end = Defaults.SpaceExtraSmall)
-                ) {
-                    // Password visibility toggle
-                    if (isPassword) {
-                        IconButton(
-                            onClick = { passwordVisible = !passwordVisible },
-                            modifier = Modifier.size(40.dp)
-                        ) {
-                            Icon(
-                                imageVector = if (passwordVisible) {
-                                    MaterialSymbols.Rounded.Visibility_off
-                                } else {
-                                    MaterialSymbols.Rounded.Visibility
-                                },
-                                contentDescription = if (passwordVisible) {
-                                    stringResource(R.string.settings_system_hide_password_field)
-                                } else {
-                                    stringResource(R.string.settings_system_show_password_field)
-                                }
-                            )
+    TextFieldLine {
+        OutlinedTextField(
+            value = value,
+            onValueChange = onValueChange,
+            label = label,
+            placeholder = placeholder,
+            leadingIcon = leadingIcon,
+            trailingIcon = {
+                if (isPassword || showClearButton || onFolderPickerClick != null || onFilePickerClick != null) {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall),
+                        modifier = Modifier.padding(end = Defaults.SpaceExtraSmall)
+                    ) {
+                        // Password visibility toggle
+                        if (isPassword) {
+                            IconButton(
+                                onClick = { passwordVisible = !passwordVisible },
+                                modifier = Modifier.size(40.dp)
+                            ) {
+                                Icon(
+                                    imageVector = if (passwordVisible) {
+                                        MaterialSymbols.Rounded.Visibility_off
+                                    } else {
+                                        MaterialSymbols.Rounded.Visibility
+                                    },
+                                    contentDescription = if (passwordVisible) {
+                                        stringResource(R.string.settings_system_hide_password_field)
+                                    } else {
+                                        stringResource(R.string.settings_system_show_password_field)
+                                    }
+                                )
+                            }
                         }
-                    }
 
-                    // Clear button
-                    if (showClearButton && value.isNotBlank()) {
-                        IconButton(
-                            onClick = { onValueChange("") },
-                            modifier = Modifier.size(40.dp)
-                        ) {
-                            Icon(
-                                imageVector = MaterialSymbols.Rounded.Close,
-                                contentDescription = stringResource(R.string.clear)
-                            )
+                        // Clear button
+                        if (showClearButton && value.isNotBlank()) {
+                            IconButton(
+                                onClick = { onValueChange("") },
+                                modifier = Modifier.size(40.dp)
+                            ) {
+                                Icon(
+                                    imageVector = MaterialSymbols.Rounded.Close,
+                                    contentDescription = stringResource(R.string.clear)
+                                )
+                            }
                         }
-                    }
 
-                    // Folder picker button
-                    if (onFolderPickerClick != null) {
-                        IconButton(
-                            onClick = onFolderPickerClick,
-                            modifier = Modifier.size(40.dp)
-                        ) {
-                            Icon(
-                                imageVector = MaterialSymbols.Rounded.Folder_open,
-                                contentDescription = stringResource(R.string.select_folder)
-                            )
+                        // Folder picker button
+                        if (onFolderPickerClick != null) {
+                            IconButton(
+                                onClick = onFolderPickerClick,
+                                modifier = Modifier.size(40.dp)
+                            ) {
+                                Icon(
+                                    imageVector = MaterialSymbols.Rounded.Folder_open,
+                                    contentDescription = stringResource(R.string.select_folder)
+                                )
+                            }
                         }
-                    }
 
-                    // File picker button
-                    if (onFilePickerClick != null) {
-                        IconButton(
-                            onClick = onFilePickerClick,
-                            modifier = Modifier.size(40.dp)
-                        ) {
-                            Icon(
-                                imageVector = MaterialSymbols.Rounded.Draft.autoMirrored,
-                                contentDescription = stringResource(R.string.select_file)
-                            )
+                        // File picker button
+                        if (onFilePickerClick != null) {
+                            IconButton(
+                                onClick = onFilePickerClick,
+                                modifier = Modifier.size(40.dp)
+                            ) {
+                                Icon(
+                                    imageVector = MaterialSymbols.Rounded.Draft.autoMirrored,
+                                    contentDescription = stringResource(R.string.select_file)
+                                )
+                            }
                         }
                     }
+                } else {
+                    trailingIcon?.invoke()
                 }
+            },
+            visualTransformation = if (isPassword && !passwordVisible) {
+                PasswordVisualTransformation()
             } else {
-                trailingIcon?.invoke()
-            }
-        },
-        visualTransformation = if (isPassword && !passwordVisible) {
-            PasswordVisualTransformation()
-        } else {
-            VisualTransformation.None
-        },
-        isError = isError,
-        singleLine = singleLine,
-        enabled = enabled,
-        keyboardOptions = keyboardOptions,
-        keyboardActions = keyboardActions,
-        modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(Defaults.CornerMedium),
-        colors = morpheDialogTextFieldColors(dialogTextColor())
-    )
+                VisualTransformation.None
+            },
+            isError = isError,
+            singleLine = singleLine,
+            enabled = enabled,
+            keyboardOptions = keyboardOptions,
+            keyboardActions = keyboardActions,
+            modifier = modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(Defaults.CornerMedium),
+            colors = morpheDialogTextFieldColors(dialogTextColor())
+        )
+    }
 }
 
 /**
@@ -221,95 +223,97 @@ fun AppDialogDropdownTextField(
         onExpandedChange = { expanded = it },
         modifier = modifier.fillMaxWidth()
     ) {
-        OutlinedTextField(
-            value = displayValue,
-            onValueChange = changeInput,
-            readOnly = !allowCustomValue,
-            label = label,
-            placeholder = placeholder ?: inEffect?.let { text ->
-                { Text(text, maxLines = 1, overflow = TextOverflow.Ellipsis) }
-            },
-            leadingIcon = leadingIcon,
-            singleLine = singleLine,
-            trailingIcon = {
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall),
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(end = Defaults.SpaceExtraSmall)
-                ) {
-                    // Folder picker button
-                    if (onFolderPickerClick != null) {
-                        IconButton(
-                            onClick = onFolderPickerClick,
-                            modifier = Modifier.size(40.dp)
-                        ) {
-                            Icon(
-                                imageVector = MaterialSymbols.Rounded.Folder_open,
-                                contentDescription = stringResource(R.string.select_folder)
-                            )
-                        }
-                    }
-
-                    // Clear button, hidden while the field already shows nothing
-                    if (showClearButton && displayValue.isNotBlank()) {
-                        IconButton(
-                            onClick = { changeInput("") },
-                            modifier = Modifier.size(40.dp)
-                        ) {
-                            Icon(
-                                imageVector = MaterialSymbols.Rounded.Close,
-                                contentDescription = stringResource(R.string.clear)
-                            )
-                        }
-                    }
-
-                    // Dropdown arrow. On an editable field it is the only anchor, so opening the
-                    // presets leaves the field unfocused and the keyboard closed
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier
-                            .size(40.dp)
-                            .then(
-                                if (allowCustomValue) {
-                                    Modifier.menuAnchor(
-                                        ExposedDropdownMenuAnchorType.SecondaryEditable,
-                                        enabled
-                                    )
-                                } else Modifier
-                            )
+        TextFieldLine {
+            OutlinedTextField(
+                value = displayValue,
+                onValueChange = changeInput,
+                readOnly = !allowCustomValue,
+                label = label,
+                placeholder = placeholder ?: inEffect?.let { text ->
+                    { Text(text, maxLines = 1, overflow = TextOverflow.Ellipsis) }
+                },
+                leadingIcon = leadingIcon,
+                singleLine = singleLine,
+                trailingIcon = {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall),
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(end = Defaults.SpaceExtraSmall)
                     ) {
-                        Icon(
-                            imageVector = if (expanded)
-                                MaterialSymbols.Rounded.Expand_less
-                            else
-                                MaterialSymbols.Rounded.Expand_more,
-                            contentDescription = null
-                        )
-                    }
-                }
-            },
-            enabled = enabled,
-            keyboardOptions = keyboardOptions,
-            keyboardActions = keyboardActions,
-            modifier = Modifier
-                .fillMaxWidth()
-                .then(
-                    if (allowCustomValue) {
-                        Modifier.onFocusChanged { state ->
-                            input = when {
-                                !state.isFocused -> null
-                                input != null -> input
-                                presetName != null -> ""
-                                else -> value
+                        // Folder picker button
+                        if (onFolderPickerClick != null) {
+                            IconButton(
+                                onClick = onFolderPickerClick,
+                                modifier = Modifier.size(40.dp)
+                            ) {
+                                Icon(
+                                    imageVector = MaterialSymbols.Rounded.Folder_open,
+                                    contentDescription = stringResource(R.string.select_folder)
+                                )
                             }
                         }
-                    } else {
-                        Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable, enabled)
+
+                        // Clear button, hidden while the field already shows nothing
+                        if (showClearButton && displayValue.isNotBlank()) {
+                            IconButton(
+                                onClick = { changeInput("") },
+                                modifier = Modifier.size(40.dp)
+                            ) {
+                                Icon(
+                                    imageVector = MaterialSymbols.Rounded.Close,
+                                    contentDescription = stringResource(R.string.clear)
+                                )
+                            }
+                        }
+
+                        // Dropdown arrow. On an editable field it is the only anchor, so opening the
+                        // presets leaves the field unfocused and the keyboard closed
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .size(40.dp)
+                                .then(
+                                    if (allowCustomValue) {
+                                        Modifier.menuAnchor(
+                                            ExposedDropdownMenuAnchorType.SecondaryEditable,
+                                            enabled
+                                        )
+                                    } else Modifier
+                                )
+                        ) {
+                            Icon(
+                                imageVector = if (expanded)
+                                    MaterialSymbols.Rounded.Expand_less
+                                else
+                                    MaterialSymbols.Rounded.Expand_more,
+                                contentDescription = null
+                            )
+                        }
                     }
-                ),
-            shape = RoundedCornerShape(Defaults.CornerMedium),
-            colors = morpheDialogTextFieldColors(dialogTextColor())
-        )
+                },
+                enabled = enabled,
+                keyboardOptions = keyboardOptions,
+                keyboardActions = keyboardActions,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .then(
+                        if (allowCustomValue) {
+                            Modifier.onFocusChanged { state ->
+                                input = when {
+                                    !state.isFocused -> null
+                                    input != null -> input
+                                    presetName != null -> ""
+                                    else -> value
+                                }
+                            }
+                        } else {
+                            Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable, enabled)
+                        }
+                    ),
+                shape = RoundedCornerShape(Defaults.CornerMedium),
+                colors = morpheDialogTextFieldColors(dialogTextColor())
+            )
+        }
 
         AppExposedDropdownMenu(
             expanded = expanded,

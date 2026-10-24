@@ -33,37 +33,53 @@ import org.koin.compose.koinInject
  * @param open Starts the helper flow with one of those trusted, null while none is.
  * @param hasUntrusted Whether one is installed that is not trusted yet, which only the settings
  *   let in, while none trusted is there to download with instead.
+ * @param opensDirectly Whether the user asked for the helper flow to start as soon as an APK is
+ *   needed, see [showInstructions].
  */
 @Immutable
 class ApkDownloadHelperOffer(
     val open: (() -> Unit)?,
-    val hasUntrusted: Boolean
-)
+    val hasUntrusted: Boolean,
+    private val opensDirectly: Boolean
+) {
+    /**
+     * Shows the download instructions with [show] and starts the helper flow over them at once
+     * where the user asked for that. The instructions stay behind it for when the helper finds nothing.
+     */
+    fun showInstructions(show: () -> Unit) {
+        show()
+        if (opensDirectly) open?.invoke()
+    }
+}
 
 /**
- * Wires up the optional APK download helper flow and returns what it can offer, see
- * [ApkDownloadHelperOffer].
+ * Wires up the optional APK download helper flow and hands what it can offer, see
+ * [ApkDownloadHelperOffer], to the dialogs in [content]. The picker is composed after them, so one
+ * opening in the same frame as a dialog stands over it rather than under it.
  *
  * @param host The patching flow asking for the APK, which is what a result is handed back to.
  * @param enabled Whether a helper may be offered right now. Resolving helpers queries
- * PackageManager, so callers pass true only while the download instructions dialog is on screen.
+ * PackageManager, so callers pass true only while the APK availability or download instructions
+ * dialog is on screen.
  */
 @Composable
-fun rememberApkDownloadHelperAction(
+fun WithApkDownloadHelpers(
     host: ApkDownloadHelperHost,
     enabled: Boolean,
-    prefs: PreferencesManager = koinInject()
-): ApkDownloadHelperOffer {
+    prefs: PreferencesManager = koinInject(),
+    content: @Composable (ApkDownloadHelperOffer) -> Unit
+) {
     val context = LocalContext.current
     val messages = koinInject<UserMessages>()
     val trustedPackages by prefs.trustedApkDownloadHelpers.getAsState()
+    val openDirectly by prefs.openApkDownloadHelperDirectly.getAsState()
     val noResultMessage = stringResource(R.string.home_apk_helper_no_result)
     val noAccessMessage = stringResource(R.string.home_apk_helper_no_access)
     val noPackageMessage = stringResource(R.string.home_apk_helper_no_package)
     var installed by remember { mutableStateOf(emptyList<ApkDownloadHelperContract.Helper>()) }
     var showPicker by remember { mutableStateOf(false) }
 
-    // Re-resolved every time the dialog opens, so helpers installed mid-session are picked up
+    // Re-resolved every time an APK is asked for, so helpers installed mid-session are picked up
     LaunchedEffect(enabled) {
         installed = if (enabled) {
             withContext(Dispatchers.IO) { ApkDownloadHelperContract.findHelpers(context) }
@@ -105,6 +121,30 @@ fun rememberApkDownloadHelperAction(
         host.onHelperApkReceived(uri)
     }
 
+    fun launch(helper: ApkDownloadHelperContract.Helper) {
+        val intent = host.createApkDownloadHelperIntent(helper.componentName) ?: return
+        try {
+            helperLauncher.launch(intent)
+        } catch (_: ActivityNotFoundException) {
+            // The helper was uninstalled between resolving and launching it
+            installed = installed - helper
+        }
+    }
+
+    // A user who wants the helper right away has nothing left to confirm with a single one trusted,
+    // unless the APK it brings cannot be verified, which only the picker warns about
+    val open = {
+        val helper = helpers.singleOrNull()?.takeIf { openDirectly && host.helperSignatureCheckAvailable }
+        if (helper != null) launch(helper) else showPicker = true
+    }
+    content(
+        ApkDownloadHelperOffer(
+            open = open.takeIf { helpers.isNotEmpty() },
+            hasUntrusted = helpers.isEmpty() && installed.any { it.componentName.packageName !in trustedPackages },
+            opensDirectly = openDirectly
+        )
+    )
+
     DialogHost(visible = showPicker && helpers.isNotEmpty()) {
         ApkDownloadHelperDialog(
             helpers = helpers,
@@ -112,23 +152,10 @@ fun rememberApkDownloadHelperAction(
             onDismiss = { showPicker = false },
             onConfirm = { helper ->
                 showPicker = false
-                host.createApkDownloadHelperIntent(helper.componentName)?.let { intent ->
-                    try {
-                        helperLauncher.launch(intent)
-                    } catch (_: ActivityNotFoundException) {
-                        // The helper was uninstalled between resolving and launching it
-                        installed = installed - helper
-                    }
-                }
+                launch(helper)
             }
         )
     }
-
-    val openPicker = remember { { showPicker = true } }
-    return ApkDownloadHelperOffer(
-        open = openPicker.takeIf { helpers.isNotEmpty() },
-        hasUntrusted = helpers.isEmpty() && installed.any { it.componentName.packageName !in trustedPackages }
-    )
 }
 
 /**

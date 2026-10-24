@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.ui.screen.shared.Defaults
+import app.morphe.manager.ui.screen.shared.shapedIndication
 import app.morphe.manager.ui.theme.MorpheBrandBlue
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
@@ -190,6 +191,7 @@ private fun PairsCard(state: PairsGameState, index: Int, size: Dp) {
         animationSpec = tween(260),
         label = "pairs_card_flip"
     )
+    val cardShape = RoundedCornerShape(size * 0.16f)
 
     Box(
         modifier = Modifier
@@ -199,9 +201,9 @@ private fun PairsCard(state: PairsGameState, index: Int, size: Dp) {
                 rotationY = rotation
                 cameraDistance = 12f * density
             }
-            .clip(RoundedCornerShape(size * 0.16f))
+            .clip(cardShape)
             .background(if (rotation > 90f) PairsCardFace else PairsCardBack)
-            .clickable { state.flip(index) },
+            .clickable(interactionSource = null, indication = shapedIndication(cardShape)) { state.flip(index) },
         contentAlignment = Alignment.Center
     ) {
         // Past the halfway point the back is facing away, so the symbol takes over and is

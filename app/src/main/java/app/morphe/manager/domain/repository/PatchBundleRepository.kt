@@ -188,6 +188,20 @@ class PatchBundleRepository(
         }
 
     /**
+     * The enabled sources an APK of [version] is resolved against. A chosen source answers for
+     * the version alone, while one no longer offered leaves the choice with nothing to stand for.
+     */
+    suspend fun resolvingBundleInfo(
+        packageName: String,
+        version: String?,
+        versionCode: Long?,
+        chosenBundleUid: Int?
+    ): List<PatchBundleInfo.Scoped> =
+        offeredBundleInfoFlow(packageName, version, versionCode).first()
+            .filter { it.enabled }
+            .let { offered -> offered.filter { it.uid == chosenBundleUid }.ifEmpty { offered } }
+
+    /**
      * The sources simple mode asks the user to choose between for [packageName], each with the
      * patches it would apply. Asked before the APK is known, so every version a source covers
      * counts.

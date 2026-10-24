@@ -25,8 +25,10 @@ import app.morphe.manager.domain.repository.PatchOptionsRepository
 import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.patcher.patch.ApkArchitectureResolver
 import app.morphe.manager.patcher.patch.PatchBundleInfo
+import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.contributingAt
 import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.morphe.manager.patcher.patch.PatchInfo
+import app.morphe.manager.patcher.patch.VersionSupport
 import app.morphe.manager.patcher.patch.installerTypeFor
 import app.morphe.manager.patcher.split.SplitApkInspector
 import app.morphe.manager.ui.model.declaresPackageName
@@ -365,25 +367,19 @@ class BatchPlanResolver(
         chosenBundleUid: Int?
     ): BatchPatchItem {
         val packageName = target.packageName
-        val bundles = patchBundleRepository
-            .offeredBundleInfoFlow(packageName, source.version, source.versionCode)
-            .first()
-            .filter { it.enabled }
-            // A chosen source is the only one the app is patched from, and the version warnings
-            // are its own. One no longer offered leaves the choice with nothing to stand for
-            .let { offered -> offered.filter { it.uid == chosenBundleUid }.ifEmpty { offered } }
+        // A chosen source is the only one the app is patched from, and the version warnings
+        // are its own
+        val bundles = patchBundleRepository.resolvingBundleInfo(
+            packageName, source.version, source.versionCode, chosenBundleUid
+        )
 
         // Asked of the bundles the APK is being resolved against rather than of the version
         // catalog, so the badge cannot disagree with the warning the single-app flow shows
-        val experimental = bundles.any { it.isVersionExperimental }
+        val support = VersionSupport(bundles)
 
         // Forced per app from the preflight screen, or globally by the compatibility setting
         val allowIncompatible = forceIncompatible || prefs.disablePatchVersionCompatCheck.get()
-        val hasCompatible = bundles.any { it.compatible.isNotEmpty() }
-        val hasIncompatible = bundles.any { it.incompatible.isNotEmpty() }
-        val hasUniversal = bundles.any { it.universal.isNotEmpty() }
-
-        val versionMismatch = !hasCompatible && hasIncompatible && !allowIncompatible
+        val versionMismatch = support.isMismatch && !allowIncompatible
 
         /**
          * Nothing to run with. Which of the reasons it is matters: an app whose patches simply
@@ -400,7 +396,7 @@ class BatchPlanResolver(
             selection = emptyMap(),
             options = emptyMap(),
             bundles = contributing.map { it.toRef() },
-            experimentalVersion = experimental,
+            experimentalVersion = support.isExperimental,
             suggestedVersion = suggested,
             state = when {
                 versionMismatch -> BatchItemState.VERSION_MISMATCH
@@ -410,11 +406,13 @@ class BatchPlanResolver(
             useMount = useMount
         )
 
-        if (!hasCompatible && !hasIncompatible && !hasUniversal) return blocked()
+        if (!support.hasPatches) return blocked()
 
         // Every source that has something to contribute is used, the same way the single-app
         // flow merges them. Picking just one would silently drop patches the user relies on
-        val contributing = bundles.filter { it.patchSequence(allowIncompatible).any() }
+        val contributing = bundles
+            .filter { it.patchSequence(allowIncompatible).any() }
+            .contributingAt(prefs.bundleExperimentalVersionsEnabled.get())
         if (contributing.isEmpty()) return blocked()
 
         val configurationKey = configurationKeyFor(target)
@@ -442,7 +440,7 @@ class BatchPlanResolver(
             selection = selection,
             options = options,
             bundles = contributing.map { it.toRef() },
-            experimentalVersion = experimental,
+            experimentalVersion = support.isExperimental,
             suggestedVersion = suggested,
             unreadableOptionPaths = unreadablePaths,
             state = if (versionMismatch) BatchItemState.VERSION_MISMATCH else BatchItemState.READY,

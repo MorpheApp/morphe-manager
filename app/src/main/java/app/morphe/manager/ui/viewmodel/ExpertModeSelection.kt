@@ -91,6 +91,9 @@ class ExpertModeSelection(
     var unreadablePaths by mutableStateOf<List<PathValidationResult>>(emptyList())
         private set
 
+    /** The source chosen for the APK, whose tab leads so the dialog opens on it. */
+    private var leadingBundleUid: Int? by mutableStateOf(null)
+
     /**
      * Opens the selection for [app], over every source the app has patches in, [allBundles], with
      * those in [mutedSources] held back.
@@ -99,6 +102,7 @@ class ExpertModeSelection(
         app: SelectedApp,
         allBundles: List<PatchBundleInfo.Scoped>,
         mutedSources: Set<Int>,
+        leadingBundleUid: Int?,
         patches: PatchSelection,
         options: Options,
         newPatches: Map<Int, Set<String>>,
@@ -108,6 +112,7 @@ class ExpertModeSelection(
         this.app = app
         this.allBundles = allBundles
         this.mutedSources = mutedSources
+        this.leadingBundleUid = leadingBundleUid
         applyMutes()
         this.patches = patches
         savedPatches = patches
@@ -124,6 +129,7 @@ class ExpertModeSelection(
         bundles = emptyList()
         allBundles = emptyList()
         mutedSources = emptySet()
+        leadingBundleUid = null
         patches = emptyMap()
         savedPatches = emptyMap()
         options = emptyMap()
@@ -140,7 +146,7 @@ class ExpertModeSelection(
      * applied in the UI layer.
      */
     val allPatchesInfo: List<Pair<PatchBundleInfo.Scoped, List<Pair<PatchInfo, Boolean>>>>
-        get() = bundles.listedWith(patches)
+        get() = bundles.listedWith(patches, leadingBundleUid)
 
     /**
      * The selection as the run would use it: what the dialog shows, minus what it holds back.

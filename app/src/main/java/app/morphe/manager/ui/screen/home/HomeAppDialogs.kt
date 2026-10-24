@@ -9,17 +9,12 @@ import android.view.HapticFeedbackConstants
 import androidx.annotation.PluralsRes
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -189,8 +184,8 @@ private fun DialogHostScope.UnhideAppsDialog(
  * Dialog listing all hidden apps.
  *
  * Swipe gestures (disabled in multi-select mode):
- * - Swipe LEFT  → Patches dialog
- * - Swipe RIGHT → Unhide
+ * - Swipe toward the start → unhide
+ * - Swipe toward the end   → patches dialog
  *
  * Long-press enters multi-select; bulk unhide via the selection bar.
  */
@@ -215,10 +210,7 @@ internal fun DialogHostScope.HiddenAppsDialog(
     }
 
     val view = LocalView.current
-    val density = LocalDensity.current
-    val actionThresholdPx = with(density) { 90.dp.toPx() }
-
-    val startConfig = rememberUnhideSwipeAction()
+    val unhideConfig = rememberUnhideSwipeAction()
 
     // The apps a bulk unhide waits to be confirmed for
     val pendingUnhide = remember { mutableStateOf<List<HomeAppItem>?>(null) }
@@ -330,13 +322,7 @@ internal fun DialogHostScope.HiddenAppsDialog(
                 key = { it.id }
             ) { item ->
                 val isSelected = selectedPackages.contains(item.id)
-                val offsetX = remember(item.id) { Animatable(0f) }
                 val unhide = unhideReporting(item, onUnhide)
-
-                // Snap card back when entering multi-select
-                LaunchedEffect(isMultiSelectMode.value) {
-                    if (isMultiSelectMode.value) offsetX.animateTo(0f, tween(200))
-                }
 
                 SelectableCard(
                     modifier = Modifier.animatedListItem(this),
@@ -344,24 +330,9 @@ internal fun DialogHostScope.HiddenAppsDialog(
                     isSelectionMode = isMultiSelectMode.value
                 ) {
                     SwipeableCardContainer(
-                        offsetX = offsetX,
-                        actionThresholdPx = actionThresholdPx,
-                        onSwipeToStart = unhide,
-                        onSwipeToEnd = { onShowPatches(item) },
-                        startHaptic = HapticFeedbackConstants.LONG_PRESS,
-                        endHaptic = HapticFeedbackConstants.VIRTUAL_KEY,
-                        enabled = !isMultiSelectMode.value,
-                        background = { startProgress, endProgress ->
-                            SwipeBackground(
-                                startProgress = startProgress,
-                                endProgress = endProgress,
-                                startConfig = startConfig,
-                                endConfig = rememberPatchesSwipeAction(item.packageName),
-                                modifier = Modifier
-                                    .matchParentSize()
-                                    .clip(RoundedCornerShape(Defaults.CornerLargeIncreased))
-                            )
-                        }
+                        start = SwipeAction(unhideConfig, unhide),
+                        end = SwipeAction(rememberPatchesSwipeAction(item.packageName)) { onShowPatches(item) },
+                        enabled = !isMultiSelectMode.value
                     ) {
                         AppCardLayout(
                             gradientColors = item.gradientColors,

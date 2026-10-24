@@ -23,10 +23,12 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.io.OutputStream
 import java.io.PrintStream
+import java.lang.management.ManagementFactory
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.FutureTask
 import kotlin.concurrent.thread
 import kotlin.system.exitProcess
+import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.nanoseconds
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.TimeSource
@@ -39,7 +41,8 @@ import kotlin.time.TimeSource
  */
 fun main(args: Array<String>) {
     val (commandsFile, eventsFile) = args
-    serveRun(commandsFile, eventsFile) { loadPatchesFromJar(setOf(it)) }
+    val collectors = ManagementFactory.getGarbageCollectorMXBeans()
+    serveRun(commandsFile, eventsFile, { collectors.sumOf { it.collectionTime } }) { loadPatchesFromJar(setOf(it)) }
 }
 
 /**
@@ -49,11 +52,13 @@ fun main(args: Array<String>) {
  *
  * @param commandsFile What the app writes [HostCommand]s to, one per line.
  * @param eventsFile What the app reads [HostEvent]s from.
+ * @param gcMillis The time the VM spent collecting garbage so far, or null if it does not tell.
  * @param loadPatches Reads the patches of a bundle, which is the one step that depends on the VM.
  */
 fun serveRun(
     commandsFile: String,
     eventsFile: String,
+    gcMillis: (() -> Long)?,
     loadPatches: (File) -> Collection<Patch<*>>
 ): Nothing {
     val code = try {
@@ -70,7 +75,7 @@ fun serveRun(
                         preloaded = command.bundles.associateWith { PreloadedBundle(File(it), loadPatches) }
 
                     is HostCommand.Run -> {
-                        run(command, preloaded, loadPatches, events)
+                        run(command, preloaded, gcMillis, loadPatches, events)
                         break
                     }
                 }
@@ -89,11 +94,13 @@ fun serveRun(
 private fun run(
     command: HostCommand.Run,
     preloaded: Map<String, PreloadedBundle>,
+    gcMillis: (() -> Long)?,
     loadPatches: (File) -> Collection<Patch<*>>,
     events: HostEvents
 ) {
     events.logger.info(vmDescription())
     events.watchForStalls()
+    gcMillis?.let(events::watchForGcOverhead)
 
     val failure = runCatching {
         val request = Json.decodeFromString(PatchRequest.serializer(), File(command.requestFile).readText())
@@ -221,6 +228,46 @@ private class HostEvents(stream: OutputStream) : AutoCloseable {
         }
     }
 
+    /**
+     * Ends the run as out of memory once collecting garbage took most of the time for a while. A
+     * heap that barely holds what the run keeps alive is collected over and over for little each
+     * time, and the run crawls on long past the point where the user gives up on it. Not every
+     * collector gives up on its own, the serial one of a 32-bit JVM never does.
+     *
+     * @param gcMillis The time the VM spent collecting garbage so far.
+     */
+    fun watchForGcOverhead(gcMillis: () -> Long) {
+        thread(isDaemon = true, name = "GcOverheadWatch") {
+            val started = TimeSource.Monotonic.markNow()
+            // When each sample was taken and the time spent collecting by then, in milliseconds
+            val samples = ArrayDeque<Pair<Long, Long>>()
+            while (true) {
+                try {
+                    Thread.sleep(GC_OVERHEAD_POLL.inWholeMilliseconds)
+                } catch (_: InterruptedException) {
+                    return@thread
+                }
+
+                val now = started.elapsedNow().inWholeMilliseconds
+                samples.addLast(now to gcMillis())
+                val (windowStart, windowGc) = samples.first()
+                val window = now - windowStart
+                if (window < GC_OVERHEAD_WINDOW.inWholeMilliseconds) continue
+                samples.removeFirst()
+
+                val share = (samples.last().second - windowGc).toDouble() / window
+                if (share < GC_OVERHEAD_LIMIT) continue
+
+                val error = OutOfMemoryError(
+                    "Collecting garbage took ${(share * 100).toInt()}% of the last " +
+                            "${window.milliseconds.inWholeSeconds}s, heap=${heapUsedMebibytes()}MB/${heapLimitMebibytes()}MB"
+                )
+                send(HostEvent.Finished(HostEvent.Failure(error)))
+                exitProcess(0)
+            }
+        }
+    }
+
     val logger = object : Logger() {
         override fun log(level: LogLevel, message: String) = send(HostEvent.Log(level, message))
     }
@@ -254,15 +301,18 @@ private class HostEvents(stream: OutputStream) : AutoCloseable {
         val STALL_TIMEOUT = 60.seconds
         val STALL_POLL = 5.seconds
         const val STALL_DUMPS = 5
+
+        // A run that patched TikTok on a 960MB heap spent about 70% of the time collecting
+        val GC_OVERHEAD_WINDOW = 120.seconds
+        val GC_OVERHEAD_POLL = 10.seconds
+        const val GC_OVERHEAD_LIMIT = 0.6
     }
 }
 
 /** The stacks of all threads and how much of the heap is in use, for a run that stopped moving on. */
 private fun threadDump(): String {
-    val runtime = Runtime.getRuntime()
-    val used = bytesToMebibytes(runtime.totalMemory() - runtime.freeMemory())
     return buildString {
-        append("Threads, heap=${used}MB/${heapLimitMebibytes()}MB:")
+        append("Threads, heap=${heapUsedMebibytes()}MB/${heapLimitMebibytes()}MB:")
         Thread.getAllStackTraces().entries.sortedBy { it.key.name }.forEach { (thread, frames) ->
             append("\n\"${thread.name}\" ${thread.state}")
             if (thread.isDaemon) append(" daemon")
@@ -273,3 +323,8 @@ private fun threadDump(): String {
 }
 
 private const val DUMP_FRAMES = 40
+
+private fun heapUsedMebibytes(): Long {
+    val runtime = Runtime.getRuntime()
+    return bytesToMebibytes(runtime.totalMemory() - runtime.freeMemory())
+}

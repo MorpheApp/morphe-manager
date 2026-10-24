@@ -8,7 +8,6 @@ package app.morphe.manager.ui.screen.shared
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -160,7 +159,7 @@ fun StatusBadge(
                 if (onClick != null) {
                     Modifier.clickable(
                         interactionSource = interactionSource,
-                        indication = LocalIndication.current,
+                        indication = shapedIndication(Defaults.PillShape),
                         onClick = onClick
                     )
                 } else {

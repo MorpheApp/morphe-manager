@@ -10,7 +10,6 @@ import app.morphe.manager.domain.apk.InstalledApkInfo
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.SourceMuteRepository
-import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.util.AppCoroutineScope
 import app.morphe.manager.util.compareVersions
@@ -43,13 +42,11 @@ data class BundledAppTarget(
  * An empty list, or a target carrying no version, is what a universal patch produces: nothing
  * is being asked of the APK, so anything passes.
  */
-fun List<BundledAppTarget>.patchableAt(version: String, versionCode: Long?): Boolean {
-    if (isEmpty() || any { it.target.version == null }) return true
-    return any { entry ->
-        entry.target.version == version &&
-            (entry.buildCodes == null || versionCode == null || versionCode.toInt() in entry.buildCodes)
+fun List<BundledAppTarget>.patchableAt(version: String, versionCode: Long?): Boolean =
+    isEmpty() || any { entry ->
+        entry.target.version == null || (entry.target.version == version &&
+            (entry.buildCodes == null || versionCode == null || versionCode.toInt() in entry.buildCodes))
     }
-}
 
 /**
  * The installed APK as a source these targets accept, or null when they do not: the version it
@@ -92,8 +89,19 @@ fun List<BundledAppTarget>.installable(): List<BundledAppTarget> =
  * The version to suggest out of these targets: the newest one the device can install, once the
  * versions the user does not want to see are out of the way.
  */
-fun List<BundledAppTarget>.recommended(): AppTarget? =
-    offered().installable().firstOrNull()?.target
+fun List<BundledAppTarget>.recommended(): AppTarget? = recommendedEntry()?.target
+
+/**
+ * The version an install patched from [patchedFrom] is measured against: what those sources
+ * support, since a rebuild goes back to them. Once none of them names a version anymore, every
+ * source counts, as a rebuild would then be patched from the others.
+ */
+fun List<BundledAppTarget>.supportedFor(patchedFrom: Set<Int>): AppTarget? =
+    filter { it.bundleUid in patchedFrom }.ifEmpty { this }.recommended()
+
+/** [recommended] together with the source suggesting it, for a pick that has to name one. */
+fun List<BundledAppTarget>.recommendedEntry(): BundledAppTarget? =
+    offered().installable().firstOrNull()
 
 /**
  * Where an install stands against the newest version the sources support: either behind it, with
@@ -164,7 +172,8 @@ class AppVersionCatalog(
         extract(
             bundleInfo = bundleInfo,
             bundleNames = enabledSources.associate { it.uid to it.displayTitle },
-            enabledBundleUids = enabledSources.map { it.uid }.toSet(),
+            // The order the user arranged the sources in, which the source list keeps
+            sourceOrder = enabledSources.withIndex().associate { (index, source) -> source.uid to index },
             experimentalEnabledUids = experimentalEnabledUids
         ).mapValues { (packageName, targets) ->
             // Or the picker suggests a download none of the sources left standing can patch
@@ -193,7 +202,7 @@ class AppVersionCatalog(
     private fun extract(
         bundleInfo: Map<Int, PatchBundleInfo>,
         bundleNames: Map<Int, String>,
-        enabledBundleUids: Set<Int> = emptySet(),
+        sourceOrder: Map<Int, Int>,
         experimentalEnabledUids: Set<String> = emptySet(),
     ): Map<String, List<BundledAppTarget>> {
         // packageName → bundleUid → version → AppTarget
@@ -202,7 +211,7 @@ class AppVersionCatalog(
         val codesByPackage = mutableMapOf<String, MutableMap<Int, MutableMap<String, Set<Int>>>>()
 
         bundleInfo.forEach { (bundleUid, info) ->
-            if (enabledBundleUids.isNotEmpty() && bundleUid !in enabledBundleUids) return@forEach
+            if (bundleUid !in sourceOrder) return@forEach
 
             info.patches.forEach { patch ->
                 patch.compatiblePackages?.forEach { pkg ->
@@ -233,11 +242,11 @@ class AppVersionCatalog(
             }
         }
 
-        // Flatten: bundles ordered by display name, versions newest→oldest within each bundle
+        // Flatten: bundles in the user's source order, versions newest→oldest within each bundle
         return targetsByPackage
             .mapValues { (packageName, byBundle) ->
                 byBundle.entries
-                    .sortedWith(compareBy({ it.key != DEFAULT_SOURCE_UID }, { bundleNames[it.key] ?: "" }))
+                    .sortedBy { sourceOrder[it.key] }
                     .flatMap { (uid, versionMap) ->
                         val codesForBundle = codesByPackage[packageName]?.get(uid)
                         versionMap.values

@@ -19,7 +19,8 @@ import androidx.compose.ui.unit.Dp
  * field, out from under them rather than up to the list's own edge, [top] and [bottom] in from it.
  *
  * Every scrolling container under it reads the insets, whichever way it scrolls, so one that is not
- * the list's own, such as a text field's line, sets them aside with [WithoutBringIntoViewInsets].
+ * the list's own sets them aside: a dialog's window with [WithoutBringIntoViewInsets], a text field's
+ * line with [TextFieldLine].
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -34,7 +35,7 @@ fun ProvideBringIntoViewInsets(top: Dp, bottom: Dp, content: @Composable () -> U
 
 /**
  * Leaves the insets of [ProvideBringIntoViewInsets] out of what scrolls within [content], which is
- * not the list they belong to: a text field's own line, or a dialog's window over the list.
+ * not the list they belong to, such as a dialog's window over the list.
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -42,6 +43,23 @@ fun WithoutBringIntoViewInsets(content: @Composable () -> Unit) {
     val spec = LocalBringIntoViewSpec.current
     if (spec !is InsetBringIntoViewSpec) return content()
     CompositionLocalProvider(LocalBringIntoViewSpec provides spec.outer, content = content)
+}
+
+/**
+ * Holds a text field in [content] to its own way of keeping the cursor in view, which is to lay
+ * its line out around it. Its scroller would otherwise scroll toward the cursor too, find itself
+ * already there, and hand what it could not scroll on to what scrolls around it: a pager would take
+ * that and turn to the page beside. The insets of a list the field sits in go with it.
+ */
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun TextFieldLine(content: @Composable () -> Unit) {
+    CompositionLocalProvider(LocalBringIntoViewSpec provides StayPutBringIntoViewSpec, content = content)
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+private object StayPutBringIntoViewSpec : BringIntoViewSpec {
+    override fun calculateScrollDistance(offset: Float, size: Float, containerSize: Float): Float = 0f
 }
 
 @OptIn(ExperimentalFoundationApi::class)

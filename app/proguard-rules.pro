@@ -19,4 +19,6 @@
 -dontwarn com.google.j2objc.annotations.*
 -dontwarn java.awt.**
 -dontwarn javax.**
+# Only the entry point of the embedded JVM reads it, which ART never runs
+-dontwarn java.lang.management.**
 -dontwarn org.slf4j.**

@@ -26,7 +26,7 @@ import app.morphe.manager.domain.batch.*
 import app.morphe.manager.domain.bundles.AppVersionCatalog
 import app.morphe.manager.domain.bundles.BundledAppTarget
 import app.morphe.manager.domain.bundles.patchableBy
-import app.morphe.manager.domain.bundles.recommended
+import app.morphe.manager.domain.bundles.recommendedEntry
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.DownloadUrlResolver
 import app.morphe.manager.domain.manager.PreferencesManager
@@ -269,7 +269,8 @@ class BatchPatcherViewModel(
         /** The unpatched version on the device, even where [installed] is no source to patch from. */
         val installedVersion: String?,
         val hasStockInstall: Boolean,
-        val selectedVersion: AppTarget?,
+        /** Kept with its source, since sources share versions and the pick is one entry. */
+        val selectedVersion: BundledAppTarget?,
         /** Sources the app is kept from, which the dialog says how to bring back. */
         val hiddenSources: Int
     )
@@ -307,19 +308,15 @@ class BatchPatcherViewModel(
      */
     private suspend fun showApkChoice(item: BatchPatchItem, bundleUid: Int?) = whileProcessingApk {
         val allCompatible = versionCatalog.compatibleVersions.first()[item.packageName].orEmpty()
-        val sourceVersions = allCompatible.filter { it.bundleUid == bundleUid }
-        val (compatible, recommended) = if (sourceVersions.isNotEmpty()) {
-            sourceVersions to sourceVersions.recommended()
-        } else {
-            allCompatible to versionCatalog.recommendedVersions.first()[item.packageName]
-        }
+        val compatible = allCompatible.filter { it.bundleUid == bundleUid }.ifEmpty { allCompatible }
+        val recommended = compatible.recommendedEntry()
         val expertMode = prefs.useExpertMode.get()
         val device = withContext(Dispatchers.IO) {
             localApkSources.installed(item.packageName)
         }
         val choice = ApkChoice(
             item = item,
-            recommended = recommended,
+            recommended = recommended?.target,
             compatible = compatible,
             saved = withContext(Dispatchers.IO) { localApkSources.saved(item.packageName) },
             // The installed source is an expert-mode offer, and only for a version the
@@ -336,7 +333,7 @@ class BatchPatcherViewModel(
         apkChoice = choice
     }
 
-    fun selectApkVersion(target: AppTarget) {
+    fun selectApkVersion(target: BundledAppTarget) {
         apkChoice = apkChoice?.copy(selectedVersion = target)
     }
 

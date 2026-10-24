@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.shared
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -28,6 +27,9 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
+/** Shape of an [InfoPanel], which its rows are pressed and focused on too, so either fits its corners. */
+private val InfoPanelShape = RoundedCornerShape(Defaults.CornerMedium)
+
 /**
  * Panel of [InfoRow]s inside a card, parted by inset [SettingsDivider]s. Its fill stays neutral so a
  * stacked tint cannot wash out the values, and its edge in the card's color ties it to the card.
@@ -39,7 +41,7 @@ fun InfoPanel(
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(Defaults.CornerMedium),
+        shape = InfoPanelShape,
         color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f),
         border = CardBorder.of(appAccentBorder(LocalAccent.current))
     ) {
@@ -101,7 +103,7 @@ fun InfoRow(
             .fillMaxWidth()
             .then(
                 if (onClick != null) {
-                    Modifier.clickable(enabled = enabled, role = Role.Button, onClick = onClick)
+                    Modifier.shapedClickable(InfoPanelShape, enabled = enabled, role = Role.Button, onClick = onClick)
                 } else Modifier
             )
             .then(if (enabled) Modifier else Modifier.alpha(Defaults.DISABLED_ALPHA))

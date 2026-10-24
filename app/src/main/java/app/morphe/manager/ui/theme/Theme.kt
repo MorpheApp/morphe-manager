@@ -278,9 +278,15 @@ fun ManagerTheme(
         MaterialExpressiveTheme(
             colorScheme = finalScheme,
             motionScheme = MotionScheme.expressive(),
-            typography = Typography,
-            content = content
-        )
+            typography = Typography
+        ) {
+            // A ring rather than a tint marks the focused control, which a remote or a keyboard
+            // has nothing else to go by, and a tint barely shows through the translucent surfaces
+            CompositionLocalProvider(
+                LocalRippleThemeConfiguration provides RippleDefaults.InsetFocusRingThemeConfiguration,
+                content = content
+            )
+        }
     }
 }
 

@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Није исправљено</string>
     <string name="home_no_patches_available">Нema печева доступно</string>
     <string name="home_app_hide_title">Sakrij ovu aplikaciju?</string>
+    <string name="home_more_apps_title">Више апликација</string>
+    <string name="home_more_apps_hide_title">Сакрити ову картицу?</string>
+    <string name="home_more_apps_hide_message">Можете га вратити у било ком тренутку у Подешавањима &gt; Изглед &gt; Почетни екран</string>
     <string name="home_app_hide_message">Ова апликација ће бити сакривена са почетног екрана. Можете је касније вратити из скривених апликација помоћу дугмета на дну листе.</string>
     <string name="home_app_will_be_hidden">Ova aplikacija će biti sakrivena</string>
     <string name="home_app_hidden_named">%s сакривен</string>
@@ -31,6 +34,7 @@
     <string name="deep_link_add_source_only_universal">Додати су само универзални закључци. Можете додати апликације са списа апликација извора</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Овај извор је већ додат. Додати ову апликацију из постојећег извора?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Доступно је ажурирање за Morphe</string>
     <string name="home_update_available_subtitle">Нова верзија спремна за инсталирање</string>
@@ -803,6 +807,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Приказује поздравну поруку</string>
     <string name="settings_appearance_repatch_notice">Обавештење о поновном закрпавању</string>
     <string name="settings_appearance_repatch_notice_description">Приказује банер када се модификоване апликације могу поново модуфиковати</string>
+    <string name="settings_appearance_more_apps_card">Картица „Више апликација“</string>
+    <string name="settings_appearance_more_apps_card_description">Приказује картицу испод апликација која води до заједничких исправки</string>
     <string name="settings_appearance_app_card_colors">Боје картица апликација</string>
     <string name="settings_appearance_app_card_colors_default">Подразумевано</string>
     <string name="settings_appearance_app_card_colors_default_description">Додели свакој апликацији боју њеног пакета</string>
@@ -867,7 +873,6 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="settings_advanced_update_interval_daily">Сваког дана</string>
     <string name="settings_advanced_update_interval_weekly">Недељно</string>
     <string name="settings_advanced_update_interval_monthly">Месечно</string>
-    <string name="settings_advanced_update_interval_battery_warning">Позадинске провере могу не радити на неким уређајима. Производитељи попут Xiaomi, Huawei, Samsung и OnePlus често агресивно ограничавају позадинске процесе да би сачували батерију</string>
     <string name="settings_advanced_external_batch_patch">Дозволи екстерне окидаче</string>
     <string name="settings_advanced_external_batch_patch_description">Омогућава аутоматизацијским апликацијама да покрену групно означавање</string>
     <string name="external_batch_patch_title">Почните групно печење?</string>
@@ -929,7 +934,6 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Унесите прилагођени назив</string>
     <string name="settings_advanced_patch_options_path_gone">Ова фасцикла се више не може читати. Поново је изаберите или је обришите, у супротном ће се закрпљивање зауставити и поставиће питање о томе.</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Иконица апликације</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Икона којом се апликација закрпљује. Такође се користи тамо где је апликација касније не може да промени, као што су Android Auto и списак апликација у системским подешавањима.</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Прилагођена икона апликације захтева фасциклу са сликама икона.</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Прилагођени икон</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Фајл са сликама које ће се користити као прилагођена икона.
@@ -1037,7 +1041,6 @@ morphe_header_custom_dark.png
     <string name="settings_auto_uninstall_with_shizuku">Аутоматско деинсталирање у случају конфликта</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Деинсталира постојећу апликацију при сукобу потписа. Ово може уклонити податке апликације</string>
     <string name="settings_ignore_install_target_rules">Занемари захтеве циља инсталације</string>
-    <string name="settings_ignore_install_target_rules_description">Ово омогућава да се правила за циљ инсталација искључе, а они који су искључени укључе. Патч апликација можда неће радити</string>
     <string name="settings_auto_uninstall_warning_title">Омогућите аутоматско деинсталирање?</string>
     <string name="settings_auto_uninstall_warning_message">Ако Android извештава о конфликту потписа током аутоматске инсталације преко Shizuku-а, Morphe ће деинсталирати постојећу апликацију пре инсталирања поправљеног APK-а.</string>
     <string name="settings_auto_uninstall_warning_risk">Ово може уклонити податке апликације. Ако поправљени APK не успе да се инсталира након деинсталирања, претходна апликација је можда већ нестала.</string>
@@ -1068,7 +1071,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_battery_optimization_description">Држи закрпљивач активним када је апликација минимизирана</string>
     <string name="settings_system_process_runtime">Рунтајни поправник</string>
     <string name="settings_system_jvm_runtime_enable">Користи уграђени ВМ</string>
-    <string name="settings_system_jvm_runtime_description">Поправке у Јава ВМ које носи Морфе, која може да користи толико меморије колико уређај има на располагању. Искључите да бисте поправили са рунтајним Андроидом</string>
     <string name="settings_system_jvm_runtime_unavailable">Потребан је ARM или 64-битни x86 уређај</string>
     <string name="settings_system_patcher_completion_sound">Звук завршетка</string>
     <string name="settings_system_patcher_completion_sound_description">Пушта посебан тон за успех или неуспех када се заврши закачивање</string>
@@ -1217,6 +1219,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_warning">APK датотека долази из помоћне апликације, па верујте само апликацијама које знате. Morphe и даље проверава пакет, верзију и потпис сваке датотеке пре него што примени закрпу.</string>
     <string name="settings_system_apk_download_helper_installed_by">Инсталирао %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Непознати инсталер</string>
+    <string name="settings_system_apk_download_helper_open_directly">Отвори помоћника одмах</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Заобилази упутства за преузимање и отвара поверљивог помоћника</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Нема фајлова овде</string>
     <string name="file_picker_read_error">Не могу да прочитам ову директорију</string>

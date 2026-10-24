@@ -27,7 +27,6 @@ import app.morphe.manager.patcher.patch.BundleAppMetadata
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.ui.model.*
 import app.morphe.manager.util.*
-import app.morphe.patcher.patch.AppTarget
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.sync.Semaphore
@@ -42,14 +41,12 @@ internal fun <K, V> changedMapKeys(previous: Map<K, V>, current: Map<K, V>): Set
 
 /**
  * The patch update waiting for an installed app: the source carrying it, the version the app
- * was patched with and the one the source is at now. [subject] is null when no changelog
- * narrowed the update down.
+ * was patched with and the one the source is at now.
  */
 data class AppPatchUpdate(
     val bundleUid: Int,
     val patchedWithVersion: String?,
-    val availableVersion: String,
-    val subject: ChangelogSubject? = null
+    val availableVersion: String
 ) {
     /** The source and the version it is at, which an ignored update is remembered by. */
     val release: String get() = "$bundleUid:$availableVersion"
@@ -385,16 +382,18 @@ class HomeApps(
      */
     private data class HomeBundleState(
         val bundleState: PatchBundleRepository.BundleState,
-        val supportedVersions: Map<String, AppTarget>,
+        val compatibleVersions: Map<String, List<BundledAppTarget>>,
         val ignoredVersions: Map<String, String>,
-        val keptFrom: Map<String, Set<Int>>
+        val keptFrom: Map<String, Set<Int>>,
+        val patchedFrom: Map<String, Set<Int>>
     )
 
     private val _homeBundleStateFlow = combine(
         patchBundleRepository.bundleState,
-        versionCatalog.recommendedVersions,
+        versionCatalog.compatibleVersions,
         homeAppButtonPrefs.ignoredVersions,
         sourceMuteRepository.mutedSources,
+        installedAppRepository.patchedFromBundles,
         ::HomeBundleState
     )
 
@@ -524,7 +523,7 @@ class HomeApps(
     /** The home cards for [inputs], or the cached ones while the bundles load. */
     private suspend fun buildHomeCards(inputs: HomeInputs): HomeCards? {
         val (homeBundle, homePrefs, installedApps, updatesMap, trackedSnapshots) = inputs
-        val (bundleState, supportedVersions, ignoredVersions, keptFrom) = homeBundle
+        val (bundleState, compatibleVersions, ignoredVersions, keptFrom, patchedFrom) = homeBundle
         val ready = bundleState as? PatchBundleRepository.BundleState.Ready
             ?: return cachedHomeCards?.toCards(installedApps, homePrefs)
 
@@ -618,10 +617,13 @@ class HomeApps(
                 savedApkFile = savedPatchedApk,
                 hasUpdate = hasUpdate,
                 // Keyed by the package the sources know: a clone shares that package with the
-                // app it was copied from rather than carrying one of its own
+                // app it was copied from rather than carrying one of its own. Measured against
+                // the sources the install was patched from, which a rebuild goes back to
                 versionStatus = versionStatus(
                     installedVersion = packageInfo?.versionName ?: installedApp?.version,
-                    supported = supportedVersions[packageName],
+                    supported = compatibleVersions[packageName].orEmpty().supportedFor(
+                        installedApp?.let { patchedFrom[it.currentPackageName] }.orEmpty()
+                    ),
                     ignoredVersion = ignoredVersions[packageName]
                 ),
                 patchCount = 0,
@@ -1019,20 +1021,11 @@ class HomeApps(
                 val entries = runCatching { source.fetchChangelogSince(storedVersion) }.getOrNull()
                     ?: return@firstNotNullOfOrNull unscoped
 
-                val subject = ChangelogSubject(
-                    appNames = appNames,
-                    patchNames = app.selectionPayload?.bundles
-                        ?.find { it.bundleUid == bundleUid }?.patches.orEmpty().toSet(),
-                    packageName = app.originalPackageName,
-                    otherAppNames = bundlesInfo[bundleUid]?.listedApps().orEmpty()
-                        .minus(app.originalPackageName)
-                        .mapNotNullTo(mutableSetOf()) { appMetadata[it]?.displayName }
-                )
-                AppPatchUpdate(bundleUid, storedVersion, currentVersion, subject).takeIf {
+                unscoped.takeIf {
                     ChangelogParser.hasChangesFor(
                         entries = entries,
                         installedVersion = storedVersion,
-                        subject = subject,
+                        subject = changelogSubject(app, bundleUid, appNames, bundlesInfo, appMetadata),
                     )
                 }
             }
@@ -1042,6 +1035,34 @@ class HomeApps(
 
         _appUpdatesAvailable.value = updates
     }
+
+    /**
+     * What picks [app]'s changes out of the changelog of the [bundleUid] source, the same the
+     * update badge is judged by. Null when the whole changelog is the app's: the source lists only
+     * this app, or no name of it is known to match scopes against.
+     */
+    suspend fun changelogSubject(app: InstalledApp, bundleUid: Int): ChangelogSubject? = withContext(Dispatchers.IO) {
+        val bundlesInfo = patchBundleRepository.allBundlesInfoFlow.first()
+        if (bundlesInfo[bundleUid]?.listedApps()?.singleOrNull() == app.originalPackageName) return@withContext null
+        val appNames = resolveChangelogNames(app.originalPackageName).ifEmpty { return@withContext null }
+        changelogSubject(app, bundleUid, appNames, bundlesInfo, patchBundleRepository.allAppMetadata.value)
+    }
+
+    private fun changelogSubject(
+        app: InstalledApp,
+        bundleUid: Int,
+        appNames: Set<String>,
+        bundlesInfo: Map<Int, PatchBundleInfo>,
+        appMetadata: Map<String, BundleAppMetadata>
+    ) = ChangelogSubject(
+        appNames = appNames,
+        patchNames = app.selectionPayload?.bundles
+            ?.find { it.bundleUid == bundleUid }?.patches.orEmpty().toSet(),
+        packageName = app.originalPackageName,
+        otherAppNames = bundlesInfo[bundleUid]?.listedApps().orEmpty()
+            .minus(app.originalPackageName)
+            .mapNotNullTo(mutableSetOf()) { appMetadata[it]?.displayName }
+    )
 
     /**
      * Resolves candidate changelog scope names for [packageName].

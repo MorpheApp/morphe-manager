@@ -8,14 +8,17 @@
     <string name="home_unpatched_badge">未修补</string>
     <string name="home_no_patches_available">没有可用的补丁</string>
     <string name="home_app_hide_title">隐藏此应用？</string>
-    <string name="home_app_hide_message">此应用将从主屏幕隐藏。您可以使用列表底部的按钮稍后从隐藏的应用中恢复它。</string>
+    <string name="home_more_apps_title">更多应用</string>
+    <string name="home_more_apps_hide_title">隐藏此卡片？</string>
+    <string name="home_more_apps_hide_message">您可以随时在“设置 &gt; 外观 &gt; 主屏幕”中将其恢复</string>
+    <string name="home_app_hide_message">此应用将从主界面中隐藏。您可以点按列表底部的按钮来从隐藏的应用中恢复它。</string>
     <string name="home_app_will_be_hidden">此应用将被隐藏</string>
-    <string name="home_app_hidden_named">%s个隐藏</string>
-    <string name="home_app_shown_named">%s个显示</string>
+    <string name="home_app_hidden_named">%s 已隐藏</string>
+    <string name="home_app_shown_named">%s 已显示</string>
     <string name="home_app_no_hidden">没有隐藏的应用</string>
     <string name="home_app_hidden_apps_title">隐藏的应用</string>
     <string name="home_app_hidden_apps_hint">点一下以取消隐藏</string>
-    <string name="home_apps_unhide_message">取消隐藏的应用将返回到主屏幕</string>
+    <string name="home_apps_unhide_message">取消隐藏的应用将回到主界面</string>
     <string name="home_app_patch_sources_description">未勾选的补丁源在修补这些应用时不会被提供，其补丁也永远不会自行加入任何选择。对于其他每个应用，每个补丁源都会保持开启。</string>
     <string name="home_app_patch_sources_mixed">已向 %1$s 个应用提供（共 %2$s 个）</string>
     <string name="home_app_patch_sources_covers">拥有 %1$s 个应用的补丁（共 %2$s 个）</string>
@@ -28,9 +31,12 @@
     <!-- Shown under the app a link was opened for -->
     <string name="deep_link_add_source_only_app">仅添加了此应用。您可以从来源的应用列表中添加到其他应用</string>
     <!-- Shown when the link was opened for the universal patches of a source, which no app is added with -->
-    <string name="deep_link_add_source_only_universal">仅添加了通用补丁。您可以从源的應用列表中添加應用</string>
+    <string name="deep_link_add_source_only_universal">仅添加了通用补丁。您可以从补丁源的应用列表中添加应用</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">该来源已添加。是否从现有来源添加此应用？</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="mpp_import_update_message">这是 %s 的新版本。您想要更新它吗？</string>
+    <string name="mpp_import_unreadable">无法读取此文件</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe更新可用</string>
     <string name="home_update_available_subtitle">新版本已准备好安装</string>
@@ -131,9 +137,9 @@
     <string name="home_greeting_late_night_2">深夜更新会话？点赞</string>
     <string name="home_greeting_late_night_3">夜猫模式：已启动</string>
     <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">更新高峰时段…据说</string>
-    <string name="home_greeting_super_late_2">睡不着？更新个应用</string>
-    <string name="home_greeting_super_late_3">到这个点，干脆起来更新吧</string>
+    <string name="home_greeting_super_late_1">现在正是修补高峰时段…据说</string>
+    <string name="home_greeting_super_late_2">睡不着？来修补个应用吧</string>
+    <string name="home_greeting_super_late_3">到这个点，干脆起来修补应用吧</string>
     <string name="home_greeting_super_late_4">你和服务器，都在线上</string>
     <string name="home_greeting_super_late_5">夜间且高效</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
@@ -440,8 +446,8 @@
     <string name="notification_icon_preview">通知</string>
     <!-- Header Creator -->
     <string name="header_creator_create">创建自定义标头</string>
-    <string name="header_creator_light_theme">亮色主题标题</string>
-    <string name="header_creator_dark_theme">暗色主题标题</string>
+    <string name="header_creator_light_theme">浅色主题标题</string>
+    <string name="header_creator_dark_theme">深色主题标题</string>
     <string name="header_creator_success">标题创建成功</string>
     <string name="header_creator_failed">创建标题失败</string>
     <string name="header_creator_guide">页眉创建指南</string>
@@ -485,7 +491,7 @@
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_start">开始</string>
     <string name="batch_patch_stop_title">停止批量修补？</string>
-    <string name="batch_patch_stop_description">正在打補丁的應用以及所有待處理的操作都將被取消</string>
+    <string name="batch_patch_stop_description">正在修补的应用以及所有排队等待的操作都将被取消</string>
     <!-- Label of a footer button beside "Done". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_install_all">全部安装</string>
     <string name="batch_patch_install_failed">安装失败</string>
@@ -557,10 +563,10 @@
     <string name="root_pre_patch_installer_description">您的设备已获取 root 权限。请选择是否为此应用应用 root 挂载补丁或标准安装</string>
     <string name="root_pre_patch_installer_mount_title">Root 挂载模式</string>
     <string name="root_pre_patch_installer_mount_description">针对 root 挂载的补丁，然后将 APK 覆盖到匹配的库存应用上。无需 GmsCore</string>
-    <string name="root_mount_module_unmount_warning">如果 KernelSU 啟用了「默情況下卸載模塊」，請打開 KernelSU &gt; 超級用戶 &gt; 您掛載的應用 &gt; 配置文件 &gt; 自定義，並關閉「卸載模塊」。否則，即使 Morphe 顯示為已掛載，掛載的補丁 APK 也可能無效</string>
+    <string name="root_mount_module_unmount_warning">如果在 KernelSU 中启用了「默认卸载模块」，请在 KernelSU &gt; 超级用户 &gt; 对应的挂载应用 &gt; 配置文件 &gt; 自定义，並关闭「卸载模块」。 否则，即使在 Morphe 中显示为已挂载，挂载的已修补 APK 也可能无效</string>
     <string name="root_pre_patch_installer_standard_title">标准安装模式</string>
     <string name="root_pre_patch_installer_standard_description">将补丁作为带有 GmsCore 支持的普通 APK 安装。应用补丁后将使用您的安装程序设置。</string>
-    <string name="root_pre_patch_installer_hint">在<b>&amp;gt;</b>设置 &amp;gt; <b>&amp;gt;</b>修补 &amp;gt; <b>&amp;gt;</b>安装 &amp;gt; 安装器选择提示处于激活状态时询问。修补后无法更改修补模式</string>
+    <string name="root_pre_patch_installer_hint">在设置 &gt; 安装 &gt; 修补中 &gt; 里的安装程序选择提示已开启。 修补完成后您将无法再更改修补模式</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">错误已复制到剪贴板</string>
     <string name="patcher_error_log">错误日志</string>
@@ -640,13 +646,13 @@
     <string name="patcher_storage_permission_open_settings">打开存储设置</string>
     <string name="patcher_storage_badge_denied">权限被拒绝</string>
     <string name="patcher_storage_badge_missing">未找到</string>
-    <string name="batch_patch_option_paths_skipped">Patch option files are missing and will be skipped: %1$s</string>
-    <string name="patcher_missing_patches_title">Some patches are gone</string>
-    <string name="patcher_missing_patches_description">此應用的保存選擇包含不再有啟用源提供的補丁。繼續操作將在不這些補的情況下對應用進行補丁</string>
-    <string name="patcher_missing_patches_label">No longer offered</string>
-    <string name="patcher_option_paths_gone_title">Patch option files are missing</string>
-    <string name="patcher_option_paths_gone_description">One or more patch options point to files that are no longer there. Remove the paths to patch without them, or put the files back and try again</string>
-    <string name="patcher_option_paths_clear">Remove the paths and continue</string>
+    <string name="batch_patch_option_paths_skipped">未找到修补选项文件将跳过: %1$s</string>
+    <string name="patcher_missing_patches_title">部分补丁已不再提供</string>
+    <string name="patcher_missing_patches_description">此应用的已保存选项中包含已不再提供的补丁。继续修补操作将会跳过它们</string>
+    <string name="patcher_missing_patches_label">不再提供</string>
+    <string name="patcher_option_paths_gone_title">未找到补丁选项文件</string>
+    <string name="patcher_option_paths_gone_description">一个或多个补丁选项所指向的文件已不存在。请移除这些文件路径，或将文件放回原处后再试。</string>
+    <string name="patcher_option_paths_clear">移除文件路径并继续</string>
     <string name="patcher_storage_permission_hint">提示：将文件移动到/Android/data/app.morphe.manager/files/ - 不需要额外权限</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">准备中</string>
@@ -803,6 +809,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">显示问候语</string>
     <string name="settings_appearance_repatch_notice">重新打补丁通知</string>
     <string name="settings_appearance_repatch_notice_description">当已修补的应用可重新修补时显示横幅通知</string>
+    <string name="settings_appearance_more_apps_card">更多应用卡片</string>
+    <string name="settings_appearance_more_apps_card_description">在应用下方显示一个指向社区补丁的卡片</string>
     <string name="settings_appearance_app_card_colors">应用卡片颜色</string>
     <string name="settings_appearance_app_card_colors_default">默认</string>
     <string name="settings_appearance_app_card_colors_default_description">为每个应用赋予其自身包的颜色</string>
@@ -867,7 +875,7 @@
     <string name="settings_advanced_update_interval_daily">每天</string>
     <string name="settings_advanced_update_interval_weekly">每周</string>
     <string name="settings_advanced_update_interval_monthly">每月</string>
-    <string name="settings_advanced_update_interval_battery_warning">后台检查在某些设备上可能无法可靠工作。制造商如小米、华为、三星和一加经常积极限制后台进程以节省电池</string>
+    <string name="settings_advanced_update_interval_battery_warning">在限制后台应用的设备（如小米、华为、三星和一加）上，后台检查可能无法可靠运行</string>
     <string name="settings_advanced_external_batch_patch">允许外部触发器</string>
     <string name="settings_advanced_external_batch_patch_description">允许自动化工具启动批量修补</string>
     <string name="external_batch_patch_title">开始批量修补？</string>
@@ -929,7 +937,7 @@
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">输入自定义名称</string>
     <string name="settings_advanced_patch_options_path_gone">This folder cannot be read anymore. Pick it again or clear it, otherwise patching will stop and ask about it</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">应用图标</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">The icon the app is patched with. It is also used where the app cannot change it later, such as Android Auto and the app list of the system settings</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">应用程序补丁所使用的图标，也用于以后无法更改的地方，例如 Android 自动驾驶</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">The custom app icon needs a folder with icon images</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">自定义图标</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"用于作为自定义图标的图像文件夹。
@@ -1037,7 +1045,7 @@ morphe_header_custom_dark.png
     <string name="settings_auto_uninstall_with_shizuku">冲突时自动卸载</string>
     <string name="settings_auto_uninstall_with_shizuku_description">在签名冲突时卸载现有应用。这可能会删除应用数据</string>
     <string name="settings_ignore_install_target_rules">忽略安装目标要求</string>
-    <string name="settings_ignore_install_target_rules_description">将补丁安装目标要求关闭，并开启其排除的规则。补丁后的应用可能无法工作</string>
+    <string name="settings_ignore_install_target_rules_description">允许关闭安装目标要求的补丁，并开启其排除的补丁。补丁后的应用程序可能无法工作</string>
     <string name="settings_auto_uninstall_warning_title">启用自动卸载？</string>
     <string name="settings_auto_uninstall_warning_message">如果在 Shizuku 自动安装期间，Android 报告签名冲突，Morphe 将在安装修补后的 APK 之前卸载现有的应用</string>
     <string name="settings_auto_uninstall_warning_risk">这可能会删除应用数据。如果卸载后修补后的 APK 安装失败，则以前的应用可能已经消失</string>
@@ -1068,7 +1076,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_battery_optimization_description">在应用最小化时，保持修补程序运行</string>
     <string name="settings_system_process_runtime">修补程序运行时</string>
     <string name="settings_system_jvm_runtime_enable">使用嵌入式虚拟机</string>
-    <string name="settings_system_jvm_runtime_description">Morphe 携带的 Java 虚拟机中的补丁，可使用设备剩余的所有内存。关闭后将以 Android 运行时进行补丁操作</string>
+    <string name="settings_system_jvm_runtime_description">在 Morphe 自己的 Java VM 中运行补丁，这可能会占用更多内存。关闭以使用 Android 的运行时</string>
     <string name="settings_system_jvm_runtime_unavailable">需要 ARM 或 64 位 x86 设备</string>
     <string name="settings_system_patcher_completion_sound">完成提示音</string>
     <string name="settings_system_patcher_completion_sound_description">修补完成后，播放不同的提示音以表示成功或失败</string>
@@ -1217,6 +1225,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_warning">APK 来自辅助应用，因此只信任你了解的应用。Morphe 在修补前仍会检查每个文件的软件包、版本和签名。</string>
     <string name="settings_system_apk_download_helper_installed_by">由 %s 安装</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">安装来源未知</string>
+    <string name="settings_system_apk_download_helper_open_directly">立即打开助手</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">跳过下载说明并打开可信助手</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">这里没有文件</string>
     <string name="file_picker_read_error">无法读取此目录</string>

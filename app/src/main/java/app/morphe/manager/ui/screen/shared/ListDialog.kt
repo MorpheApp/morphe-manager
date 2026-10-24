@@ -179,9 +179,14 @@ private fun DialogPane(
         LocalDialogBarInsets provides barInsets,
         LocalDialogScrollbarInsets provides scrollbarInsets
     ) {
-        Column(
-            modifier = modifier.padding(horizontal = DialogInset),
-            content = content
-        )
+        // A row brought into view, as a remote's focus is, comes out from under the bars the way
+        // the first and last rows do. The header counts unfolded, which it is whenever moving back
+        // up unfolds it
+        ProvideBringIntoViewInsets(top = barInsets.calculateTopPadding(), bottom = barInsets.calculateBottomPadding()) {
+            Column(
+                modifier = modifier.padding(horizontal = DialogInset),
+                content = content
+            )
+        }
     }
 }

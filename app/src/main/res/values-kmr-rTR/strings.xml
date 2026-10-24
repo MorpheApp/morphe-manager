@@ -25,6 +25,7 @@
     <!-- Shown under the app a link was opened for -->
     <!-- Shown when the link was opened for the universal patches of a source, which no app is added with -->
     <!-- Asked when the link names an app of a source that is already added -->
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Nûvekirina Morphe heye</string>
     <string name="home_update_available_subtitle">Nûvekirin amade ye ku were sazkirin</string>
@@ -791,7 +792,6 @@ Patch ne bandor in: ji bo her çavkaniyê di lîsteya çavkaniyên patch de patc
     <string name="settings_system_notifications_categories">Kategorîyên agahdariyan</string>
     <string name="settings_system_notifications_categories_description">Di mîhengên pergalê de hilbijêre ku kîjan nûvekirin agahdarî bidin te.</string>
     <string name="settings_advanced_update_interval">Rêjeya kontrolê</string>
-    <string name="settings_advanced_update_interval_battery_warning">Kontrolên paşîn dibin sedem ku hin alavkêm nekar in. Hilberîneran weke Xiaomi, Huawei, Samsung, û OnePlus gelek caran pêvajeyên paşîn ji bo parastina bataryayê asteng dikin.</string>
     <string name="settings_advanced_external_batch_patch">Têkirina ji derve bidê dest</string>
     <string name="external_batch_patch_title">Dest bi patchkirina batchê bike?</string>
     <string name="external_batch_patch_description">%s dixwaze Morphe sepanan patch bike û saz bike</string>
@@ -838,7 +838,6 @@ Patch ne bandor in: ji bo her çavkaniyê di lîsteya çavkaniyên patch de patc
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Navê xwerûst dafîne</string>
     <string name="settings_advanced_patch_options_path_gone">Ev peldank êdî nayê xwendin. Dîsa hilbijêre an jî paqij bike, wekî din patchkirin dê bisekine û li ser wê bipirse.</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Îkona sepanê</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Îkona ku sepan pê tê patchkirin. Ew di heman demê de tê bikaranîn li cihê ku sepan nikare paşê wê biguherîne, wekî Android Auto û lîsteya sepanan a mîhengên pergalê.</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Îkona sepanê ya xwerû hewceyî peldankek bi wêneyên îkonan e.</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Îkon xwerûst</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Folder ku wêneyan hene ku wekî ikonê bikaribin serdest bikin.

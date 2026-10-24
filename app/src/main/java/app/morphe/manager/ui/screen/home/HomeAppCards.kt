@@ -13,6 +13,7 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -176,16 +177,40 @@ internal fun RowScope.AppCardContent(
     subtitle: String?,
     gradientColors: List<Color>
 ) {
+    AppCardContent(
+        displayName = displayName,
+        subtitle = subtitle,
+        gradientColors = gradientColors
+    ) { placeholderColors ->
+        AppIcon(
+            packageInfo = packageInfo,
+            packageName = if (packageInfo == null) packageName else null,
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            preferredSource = AppDataSource.PATCHED_APK,
+            placeholderGradientColors = placeholderColors
+        )
+    }
+}
+
+/**
+ * [AppCardContent] with [icon] in the slot of the app's icon, handed the card colors a placeholder
+ * wears. A glyph drawn there takes the card's text color, which is picked to read on its gradient.
+ */
+@Composable
+internal fun RowScope.AppCardContent(
+    displayName: String,
+    subtitle: String?,
+    gradientColors: List<Color>,
+    icon: @Composable (placeholderColors: List<Color>) -> Unit
+) {
     val cardStyle = homeAppCardStyle().onCard(gradientColors)
 
-    AppIcon(
-        packageInfo = packageInfo,
-        packageName = if (packageInfo == null) packageName else null,
-        contentDescription = null,
-        modifier = Modifier.size(cardStyle.iconSize),
-        preferredSource = AppDataSource.PATCHED_APK,
-        placeholderGradientColors = cardStyle.cardColors(gradientColors)
-    )
+    Box(modifier = Modifier.size(cardStyle.iconSize)) {
+        CompositionLocalProvider(LocalContentColor provides cardStyle.titleColor) {
+            icon(cardStyle.cardColors(gradientColors))
+        }
+    }
 
     Column(
         modifier = Modifier.weight(1f),
@@ -527,6 +552,8 @@ private fun NotPatchedAppCard(
  * - a gradient border
  *
  * @param selected Whether the card is picked, null outside a selection. Marked at the end of the row.
+ * @param onLongClickLabel What a long press does, announced rather than left as an unlabeled
+ *   action the screen reader cannot describe. On an app card it starts a selection.
  */
 @Composable
 internal fun AppCardLayout(
@@ -534,17 +561,14 @@ internal fun AppCardLayout(
     gradientColors: List<Color>,
     onClick: () -> Unit,
     onLongClick: (() -> Unit)? = null,
+    onLongClickLabel: String = stringResource(R.string.accessibility_select_app),
     selected: Boolean? = null,
     content: @Composable RowScope.() -> Unit
 ) {
     val cardStyle = homeAppCardStyle().onCard(gradientColors)
     val shape = RoundedCornerShape(cardStyle.cardRadius)
     val view = LocalView.current
-
-    // Long-pressing a card always means the same thing here, so the gesture is announced
-    // rather than left as an unlabeled action the screen reader cannot describe
-    val longClickLabel = stringResource(R.string.accessibility_select_app)
-        .takeIf { onLongClick != null }
+    val longClickLabel = onLongClickLabel.takeIf { onLongClick != null }
 
     val colors = cardStyle.cardColors(gradientColors)
     val baseColor = colors.firstOrNull() ?: Color.White
@@ -630,7 +654,8 @@ internal fun AppCardLayout(
             }
             .combinedClickable(
                 interactionSource = interactionSource,
-                indication = null,
+                // A press scales the card instead
+                indication = shapedIndication(shape, press = false),
                 onClick = {
                     view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                     onClick()

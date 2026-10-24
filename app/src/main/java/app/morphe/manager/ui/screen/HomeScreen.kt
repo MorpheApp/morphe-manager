@@ -124,6 +124,7 @@ fun HomeScreen(
     // Reactively observe the preference so the greeting updates immediately
     val showGreetingPhrases by prefs.showGreetingPhrases.getAsState()
     val showRepatchNotice by prefs.showRepatchNotice.getAsState()
+    val showMoreAppsCard by prefs.showMoreAppsCard.getAsState()
     val seasonalThemes by prefs.seasonalThemes.getAsState()
     val seasonalEvent = remember(seasonalThemes) { SeasonalEvent.on().takeIf { seasonalThemes } }
 
@@ -416,7 +417,8 @@ fun HomeScreen(
                         categoryState = homeAppCategoryState,
                         categoryViewMode = homeAppCategoryViewMode,
                         sourceGroups = homeAppSourceGroups,
-                        batchQueuePending = savedBatchQueue != null
+                        batchQueuePending = savedBatchQueue != null,
+                        showMoreAppsCard = showMoreAppsCard
                     ),
                     appActions = HomeAppActions(
                         onAppClick = { item ->
@@ -487,7 +489,8 @@ fun HomeScreen(
                             }
                         },
                         onOpenSources = { openPage(MainPage.SOURCES) },
-                        onRefreshGreeting = onRefresh
+                        onRefreshGreeting = onRefresh,
+                        onHideMoreAppsCard = { scope.launch { prefs.showMoreAppsCard.update(false) } }
                     ),
                     greetingMessage = greetingMessage,
                     state = sectionState,
