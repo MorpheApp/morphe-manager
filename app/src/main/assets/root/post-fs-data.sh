@@ -18,6 +18,13 @@ log_msg() {
   echo "$*" >> "$log"
 }
 
+# If NoMount was configured for this module, RAM is empty on cold boot and disk already
+# has the genuine stock APK. Skip bind mounting stock to keep /proc/mounts 100% clean.
+if [ -f "$module_dir/use_nomount" ]; then
+  log_msg "NoMount mode active; skipping stock bind mount in post-fs-data"
+  exit 0
+fi
+
 resolve_apk_from_path() {
   path="$1"
   if [ -z "$path" ]; then

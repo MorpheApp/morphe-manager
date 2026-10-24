@@ -385,8 +385,12 @@ internal fun InstallerManager.Token.isShizukuToken(): Boolean =
 @Composable
 private fun rememberModuleUnmountRisk(): Boolean {
     val rootInstaller: RootInstaller = koinInject()
-    val isMagisk by produceState<Boolean?>(null) { value = rootInstaller.isMagisk() }
-    return isMagisk == false
+    val hasRisk by produceState(false) {
+        value = withContext(Dispatchers.IO) {
+            !rootInstaller.isMagisk() && !rootInstaller.isNoMountAvailable()
+        }
+    }
+    return hasRisk
 }
 
 /** The warning of [rememberModuleUnmountRisk], under a mount offered in a dialog. */
