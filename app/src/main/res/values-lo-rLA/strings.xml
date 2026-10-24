@@ -18,6 +18,7 @@
     <!-- Shown under the app a link was opened for -->
     <!-- Shown when the link was opened for the universal patches of a source, which no app is added with -->
     <!-- Asked when the link names an app of a source that is already added -->
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">ມີອັບເດດ Morphe</string>
     <string name="home_update_available_subtitle">ມີເວີຊັນໃໝ່ພ້ອມຕິດຕັ້ງ</string>
@@ -503,7 +504,6 @@
     <string name="settings_advanced_updates_background_notifications_description">ກວດສອບອັບເດດໃນພື້ນຫຼັງເປັນໄລຍະ ແລະແຈ້ງເຕືອນເມື່ອມີ</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">ການແຈ້ງເຕືອນສຳລັບເວີຊັນໃໝ່, ເຖິງແມ່ນວ່າແອັບຈະປິດຢູ່</string>
     <string name="settings_advanced_update_interval">ຄວາມຖີ່ການກວດສອບ</string>
-    <string name="settings_advanced_update_interval_battery_warning">ການກວດສອບໃນພື້ນຫຼັງອາດບໍ່ເຮັດວຽກຢ່າງໜ້າເຊື່ອຖືໃນບາງອຸປະກອນ. ຜູ້ຜະລິດຢ່າງ Xiaomi, Huawei, Samsung, ແລະ OnePlus ມັກຈຳກັດຂະບວນການພື້ນຫຼັງຢ່າງເຂັ້ມງວດເພື່ອປະຫຍັດແບັດເຕີຣີ</string>
     <!-- Notification content -->
     <string name="notification_bundle_update_title">ມີຊຸດແພດໃໝ່</string>
     <string name="notification_update_text">ເວີຊັນ %s ພ້ອມດາວໂຫຼດ</string>

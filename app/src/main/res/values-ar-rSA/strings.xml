@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">غير معدل</string>
     <string name="home_no_patches_available">لا يوجد تعديلات متاحة</string>
     <string name="home_app_hide_title">إخفاء هذا التطبيق؟</string>
+    <string name="home_more_apps_title">المزيد من التطبيقات</string>
+    <string name="home_more_apps_hide_title">إخفاء هذه البطاقة؟</string>
+    <string name="home_more_apps_hide_message">يمكنك إعادته في أي وقت من الإعدادات &gt; المظهر &gt; الشاشة الرئيسية</string>
     <string name="home_app_hide_message">سيتم إخفاء هذا التطبيق من الشاشة الرئيسية. يمكنك استعادته لاحقًا من قائمة التطبيقات المخفية باستخدام الزر الموجود أسفل القائمة.</string>
     <string name="home_app_will_be_hidden">سيتم إخفاء هذا التطبيق</string>
     <string name="home_app_hidden_named">%s مخفي</string>
@@ -31,6 +34,9 @@
     <string name="deep_link_add_source_only_universal">تمت إضافة التعديلات الشاملة فقط. يمكنك إضافة التطبيقات من قائمة تطبيقات المصدر</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">تمت إضافة هذا المصدر بالفعل. هل تريد إضافة هذا التطبيق من المصدر الموجود؟</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="mpp_import_update_message">هذا إصدار جديد من %s. هل تريد تحديثه؟</string>
+    <string name="mpp_import_unreadable">لا يمكن قراءة هذا الملف</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">تحديث Morphe متاح</string>
     <string name="home_update_available_subtitle">إصدار جديد جاهز للتثبيت</string>
@@ -806,6 +812,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">يعرض رسالة ترحيب</string>
     <string name="settings_appearance_repatch_notice">إشعار إعادة التعديل</string>
     <string name="settings_appearance_repatch_notice_description">يعرض شريطًا إعلاميًا عندما يمكن إعادة تعديل التطبيقات المعدلة</string>
+    <string name="settings_appearance_more_apps_card">بطاقة المزيد من التطبيقات</string>
+    <string name="settings_appearance_more_apps_card_description">يعرض بطاقة أسفل التطبيقات تؤدي إلى تعديلات المجتمع</string>
     <string name="settings_appearance_app_card_colors">ألوان بطاقة التطبيق</string>
     <string name="settings_appearance_app_card_colors_default">الافتراضية</string>
     <string name="settings_appearance_app_card_colors_default_description">امنح كل تطبيق لون حزمته الخاصة</string>
@@ -870,7 +878,7 @@
     <string name="settings_advanced_update_interval_daily">يوميًا</string>
     <string name="settings_advanced_update_interval_weekly">أسبوعيًا</string>
     <string name="settings_advanced_update_interval_monthly">شهريًا</string>
-    <string name="settings_advanced_update_interval_battery_warning">قد لا يعمل التحقق في الخلفية بشكل موثوق على بعض الأجهزة. غالبًا ماتقيّد الشركات المصنعة مثل Xiaomi، Huawei، Samsung، و OnePlus عمليات الخلفية بشدة لتوفير البطارية</string>
+    <string name="settings_advanced_update_interval_battery_warning">قد لا تعمل عمليات التحقق في الخلفية بشكل موثوق على الأجهزة التي تقيد تطبيقات الخلفية، مثل Xiaomi وHuawei وSamsung وOnePlus</string>
     <string name="settings_advanced_external_batch_patch">السماح بالمشغلات الخارجية</string>
     <string name="settings_advanced_external_batch_patch_description">يسمح لتطبيقات الأتمتة ببدء تعديل عدة تطبيقات</string>
     <string name="external_batch_patch_title">بدء تعديل التطبيقات على دفعات؟</string>
@@ -932,7 +940,7 @@
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">أدخل اسمًا مخصصًا</string>
     <string name="settings_advanced_patch_options_path_gone">لم يعد بالإمكان قراءة هذا المجلد. اختره مرة أخرى أو امسحه، وإلا فسيتوقف التعديل ويسألك عنه</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">أيقونة التطبيق</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">الأيقونة التي يُعدل بها التطبيق. وتُستخدم أيضًا في الأماكن التي لا يمكن للتطبيق فيها تغييرها لاحقًا، مثل Android Auto وقائمة التطبيقات في إعدادات النظام</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">الأيقونة التي يتم تعديل التطبيق بها، وتُستخدم أيضاً في الحالات التي لا يمكن تغييرها لاحقاً، مثل Android Auto</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">تحتاج أيقونة التطبيق المخصصة إلى مجلد يحتوي على صور الأيقونة</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">أيقونة مخصصة</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"مجلد يحتوي على صور لاستخدامها كأيقونة مخصصة.
@@ -1072,7 +1080,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_battery_optimization_description">يحافظ على تشغيل أداة التعديل عند تصغير التطبيق</string>
     <string name="settings_system_process_runtime">وقت تشغيل أداة التعديل</string>
     <string name="settings_system_jvm_runtime_enable">استخدام VM المدمج</string>
-    <string name="settings_system_jvm_runtime_description">التعديلات في Java VM التي يحملها Morphe، والتي يمكنها استخدام أكبر قدر من الذاكرة يوفرها الجهاز. قم بإيقاف التشغيل للتعديل بوقت تشغيل نظام Android</string>
+    <string name="settings_system_jvm_runtime_description">تصحيحات في Java VM الخاصة بـ Morphe، والتي يمكنها استخدام ذاكرة أكبر. قم بإيقاف التشغيل لاستخدام وقت التشغيل الخاص بـ Android</string>
     <string name="settings_system_jvm_runtime_unavailable">يتطلب جهازًا بمعالج ARM أو x86-64 بت</string>
     <string name="settings_system_patcher_completion_sound">صوت الإكمال</string>
     <string name="settings_system_patcher_completion_sound_description">تشغيل نغمة مميزة للنجاح أو الفشل عند انتهاء التعديل</string>
@@ -1221,6 +1229,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_apk_download_helper_warning">يأتي ملف APK من تطبيق المساعدة، لذا ثق فقط بالتطبيقات التي تعرفها. لا يزال Morphe يتحقق من الحزمة والإصدار والتوقيع لكل ملف قبل التعديل.</string>
     <string name="settings_system_apk_download_helper_installed_by">مثبّت بواسطة %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">أداة التثبيت غير معروفة</string>
+    <string name="settings_system_apk_download_helper_open_directly">افتح المساعد فوراً</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">يتخطى تعليمات التنزيل ويفتح المساعد الموثوق</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">لا توجد ملفات هنا</string>
     <string name="file_picker_read_error">لا يمكن قراءة هذا المجلد</string>

@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">패치되지 않음</string>
     <string name="home_no_patches_available">사용 가능한 패치 없음</string>
     <string name="home_app_hide_title">이 앱을 숨기시겠습니까?</string>
+    <string name="home_more_apps_title">더 많은 앱</string>
+    <string name="home_more_apps_hide_title">이 카드를 숨기시겠습니까?</string>
+    <string name="home_more_apps_hide_message">설정 &gt; 화면 설정 &gt; 홈 화면에서 언제든지 다시 되돌릴 수 있습니다</string>
     <string name="home_app_hide_message">이 앱은 홈 화면에서 숨겨집니다. 목록 하단에 있는 버튼을 사용하여 숨겨진 앱 목록에서 나중에 복원할 수 있습니다</string>
     <string name="home_app_will_be_hidden">이 앱이 숨겨집니다</string>
     <string name="home_app_hidden_named">%s 숨겨짐</string>
@@ -31,6 +34,7 @@
     <string name="deep_link_add_source_only_universal">유니버셜 패치만 추가됩니다. 소스의 앱 목록에서 앱을 추가할 수 있습니다</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">이 소스는 이미 추가되었습니다. 기존 소스에서 이 앱을 추가하시겠습니까?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe 업데이트 사용 가능</string>
     <string name="home_update_available_subtitle">새 버전 설치 준비 완료</string>
@@ -803,6 +807,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">인사말을 표시합니다</string>
     <string name="settings_appearance_repatch_notice">다시 패치 알림</string>
     <string name="settings_appearance_repatch_notice_description">패치된 앱을 다시 패치할 수 있을 경우 배너를 표시합니다</string>
+    <string name="settings_appearance_more_apps_card">더 많은 앱 카드</string>
+    <string name="settings_appearance_more_apps_card_description">커뮤니티 패치로 연결되는 카드를 앱 아래에 표시합니다</string>
     <string name="settings_appearance_app_card_colors">앱 카드 색상</string>
     <string name="settings_appearance_app_card_colors_default">기본값</string>
     <string name="settings_appearance_app_card_colors_default_description">각 앱에 해당 앱 번들의 고유 색상을 적용합니다</string>
@@ -867,7 +873,6 @@
     <string name="settings_advanced_update_interval_daily">매일</string>
     <string name="settings_advanced_update_interval_weekly">주간</string>
     <string name="settings_advanced_update_interval_monthly">월간</string>
-    <string name="settings_advanced_update_interval_battery_warning">일부 기기에서는 백그라운드 확인 기능이 정상적으로 작동하지 않을 수 있습니다. 특히 Xiaomi, Huawei, Samsung, OnePlus 기기는 배터리 최적화 정책 때문에 백그라운드 작업이 제한되는 경우가 많습니다</string>
     <string name="settings_advanced_external_batch_patch">외부 트리거 허용</string>
     <string name="settings_advanced_external_batch_patch_description">자동화 앱에서 일괄 패치를 시작할 수 있도록 합니다</string>
     <string name="external_batch_patch_title">일괄 패치 시작</string>
@@ -929,7 +934,6 @@
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">커스텀 앱 이름 입력</string>
     <string name="settings_advanced_patch_options_path_gone">이 폴더를 더 이상 읽을 수 없습니다. 폴더를 다시 선택하거나 삭제하세요. 그렇지 않으면 패치가 중단되고 해당 폴더에 대해 물어봅니다</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">앱 아이콘</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">앱에 패치되어 적용되는 아이콘입니다. 또한 Android Auto나 시스템 설정의 앱 목록처럼 앱에서 나중에 아이콘을 변경할 수 없는 곳에서도 사용됩니다</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">사용자 정의 앱 아이콘에는 아이콘 이미지가 들어 있는 폴더가 필요합니다</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">커스텀 앱 아이콘</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"커스텀 아이콘으로 사용될 이미지가 있는 폴더.
@@ -1037,7 +1041,6 @@ morphe_header_custom_dark.png
     <string name="settings_auto_uninstall_with_shizuku">충돌 시 자동 제거</string>
     <string name="settings_auto_uninstall_with_shizuku_description">서명 충돌이 발생하면 기존 앱을 제거합니다. 이 경우 앱 데이터가 삭제될 수 있습니다</string>
     <string name="settings_ignore_install_target_rules">설치 대상 요구사항 무시</string>
-    <string name="settings_ignore_install_target_rules_description">패치를 적용하려면 설치 대상 규칙을 비활성화하고 제외된 항목을 활성화해야 합니다. 패치된 앱이 작동하지 않을 수 있습니다.</string>
     <string name="settings_auto_uninstall_warning_title">자동 제거 활성화</string>
     <string name="settings_auto_uninstall_warning_message">Shizuku를 사용하여 자동 설치하는 중에 Android에서 서명 충돌이 발생했다고 보고되면, Morphe는 패치된 APK를 설치하기 전에 기존 앱을 제거합니다</string>
     <string name="settings_auto_uninstall_warning_risk">이 과정에서 앱 데이터가 삭제될 수 있습니다. 기존 앱을 삭제한 후에 패치된 APK 설치에 실패하면 이전 앱을 복구하지 못할 수 있습니다</string>
@@ -1068,7 +1071,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_battery_optimization_description">앱이 최소화되어도 패처가 계속 실행되도록 유지합니다</string>
     <string name="settings_system_process_runtime">패처 런타임</string>
     <string name="settings_system_jvm_runtime_enable">임베디드 VM 사용</string>
-    <string name="settings_system_jvm_runtime_description">Morphe가 제공하는 Java VM의 패치 기능으로, 기기 여유 메모리를 최대한 사용할 수 있습니다. 이 기능을 비활성화하면 Android 기본 런타임을 사용하여 패치합니다</string>
     <string name="settings_system_jvm_runtime_unavailable">ARM 또는 64비트 x86 기기가 필요합니다</string>
     <string name="settings_system_patcher_completion_sound">완료 알림음</string>
     <string name="settings_system_patcher_completion_sound_description">패치가 완료되면 성공 또는 실패 여부에 따라 서로 다른 알림음을 재생합니다</string>
@@ -1217,6 +1219,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_warning">APK는 Helper 앱에서 제공되므로, 신뢰할 수 있는 앱만 사용하세요. Morphe는 패치하기 전에 모든 파일의 패키지, 버전 및 서명을 확인합니다</string>
     <string name="settings_system_apk_download_helper_installed_by">%s에 의해 설치됨</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">설치 프로그램 알 수 없음</string>
+    <string name="settings_system_apk_download_helper_open_directly">즉시 헬퍼 열기</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">다운로드 안내를 건너뛰고 신뢰할 수 있는 헬퍼를 엽니다</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">파일이 없습니다</string>
     <string name="file_picker_read_error">이 디렉터리를 읽을 수 없습니다</string>

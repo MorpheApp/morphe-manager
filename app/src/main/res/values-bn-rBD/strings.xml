@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">প্যাচ করা হয়নি</string>
     <string name="home_no_patches_available">কোনো প্যাচ পাওয়া যায়নি</string>
     <string name="home_app_hide_title">এই অ্যাপটি লুকিয়ে রাখবেন?</string>
+    <string name="home_more_apps_title">আরও অ্যাপ</string>
+    <string name="home_more_apps_hide_title">এই কার্ডটি লুকিয়ে রাখবেন?</string>
+    <string name="home_more_apps_hide_message">আপনি যেকোনো সময় সেটি Settings &gt; Appearance &gt; Home screen থেকে ফিরিয়ে আনতে পারেন</string>
     <string name="home_app_hide_message">এই অ্যাপটি হোম স্ক্রীন থেকে লুকানো হবে। আপনি তালিকাটির নীচে থাকা \'\' বোতামটি ব্যবহার করে পরে এটি পুনরুদ্ধার করতে পারেন</string>
     <string name="home_app_will_be_hidden">এ অ্যাপটি লুকিয়ে রাখা হবে</string>
     <string name="home_app_hidden_named">%s লুকানো</string>
@@ -31,6 +34,9 @@
     <string name="deep_link_add_source_only_universal">শুধুমাত্র সর্বজনীন প্যাচগুলো যোগ করা হয়েছে। আপনি উৎসের অ্যাপ তালিকা থেকে অ্যাপ যোগ করতে পারেন</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">এই সোর্সটি ইতিমধ্যে যোগ করা হয়েছে। বিদ্যমান সোর্স থেকে এই অ্যাপটি যোগ করবেন?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="mpp_import_update_message">এটি %s-এর একটি নতুন সংস্করণ। আপনি কি এটি আপডেট করতে চান?</string>
+    <string name="mpp_import_unreadable">এই ফাইলটি পড়া যাচ্ছে না</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe আপডেট উপলব্ধ</string>
     <string name="home_update_available_subtitle">নতুন সংস্করণ ইনস্টল করতে প্রস্তুত</string>
@@ -803,6 +809,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">একটি অভিবাদন বার্তা দেখায়</string>
     <string name="settings_appearance_repatch_notice">পুনরায় প্যাচ বিজ্ঞপ্তি</string>
     <string name="settings_appearance_repatch_notice_description">যখন প্যাচড অ্যাপগুলিকে পুনরায় প্যাচ করা যায় তখন একটি ব্যানার দেখায়</string>
+    <string name="settings_appearance_more_apps_card">আরও অ্যাপ কার্ড</string>
+    <string name="settings_appearance_more_apps_card_description">অ্যাপগুলির নিচে একটি কার্ড দেখায় যা কমিউনিটি প্যাচগুলোর দিকে নিয়ে যায়</string>
     <string name="settings_appearance_app_card_colors">অ্যাপ কার্ডের রং</string>
     <string name="settings_appearance_app_card_colors_default">ডিফল্ট</string>
     <string name="settings_appearance_app_card_colors_default_description">প্রতিটি অ্যাপকে তার নিজস্ব বান্ডেলের রং দিন</string>
@@ -867,7 +875,7 @@
     <string name="settings_advanced_update_interval_daily">প্রতিদিন</string>
     <string name="settings_advanced_update_interval_weekly">সাপ্তাহিক</string>
     <string name="settings_advanced_update_interval_monthly">মাসিক</string>
-    <string name="settings_advanced_update_interval_battery_warning">কিছু ডিভাইসে ব্যাকগ্রাউন্ড চেকগুলি সঠিকভাবে কাজ করতে পারে না। ব্যাটারি সংরক্ষণের জন্য ম্যানুফ্যাকচারাররা যেমন এক্সিয়োমি, হুয়াওয়েই, স্যামসাং এবং অনেপ্লাস ব্যাকগ্রাউন্ড প্রসেসগুলি সীমিত করে।</string>
+    <string name="settings_advanced_update_interval_battery_warning">Xiaomi, Huawei, Samsung এবং OnePlus-এর মতো যেসব ডিভাইসে ব্যাকগ্রাউন্ড অ্যাপ সীমিত করা থাকে, সেখানে ব্যাকগ্রাউন্ড চেক নির্ভরযোগ্যভাবে কাজ নাও করতে পারে</string>
     <string name="settings_advanced_external_batch_patch">বাহ্যিক ট্রিগার করার অনুমতি দিন</string>
     <string name="settings_advanced_external_batch_patch_description">অটোমেশন অ্যাপগুলোকে ব্যাচ প্যাচিং শুরু করতে দেয়</string>
     <string name="external_batch_patch_title">ব্যাচ প্যাচিং শুরু করবেন?</string>
@@ -929,7 +937,7 @@
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">ব্যঁত নাম প্রদান করুন</string>
     <string name="settings_advanced_patch_options_path_gone">এই ফোল্ডারটি আর পড়া যায় না। এটি আবার নির্বাচন করুন বা সাফ করুন, অন্যথায় প্যাচিং বন্ধ হয়ে যাবে এবং এটি সম্পর্কে জিজ্ঞাসা করবে।</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">অ্যাপ আইকন</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">অ্যাপটি যে আইকনটি দিয়ে প্যাচ করা হয়। এটি এমন জায়গায়ও ব্যবহৃত হয় যেখানে অ্যাপটি পরে এটি পরিবর্তন করতে পারে না, যেমন Android Auto এবং সিস্টেম সেটিংসের অ্যাপের তালিকা।</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">অ্যাপটি যে আইকন দিয়ে প্যাচ করা হয়েছে, এটি সেখানেও ব্যবহৃত হয় যেখানে পরবর্তীতে পরিবর্তন করা সম্ভব নয়, যেমন Android Auto</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">কাস্টম অ্যাপ আইকনটির জন্য আইকনের ছবিসহ একটি ফোল্ডার প্রয়োজন।</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">কাস্টম আইকন</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"কাস্টম icon হিসাবে ব্যবহার করার জন্য ছবির সাথে একটি ফোল্ডার।
@@ -1027,7 +1035,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_auto_uninstall_with_shizuku">সংঘাত হলে স্বয়ংক্রিয়ভাবে আনইনস্টল করুন</string>
     <string name="settings_auto_uninstall_with_shizuku_description">সাড়া সংঘাতে বিদ্যমান অ্যাপটি আনইনস্টল করে। এতে অ্যাপের ডেটা মুছে যেতে পারে</string>
     <string name="settings_ignore_install_target_rules">ইনস্টল টার্গেটের শর্তাবলী উপেক্ষা করুন</string>
-    <string name="settings_ignore_install_target_rules_description">এটি ইনস্টল টার্গেট দ্বারা প্রয়োজনীয় বিধিনিষেধ বন্ধ এবং যা অনুমোদিত নয় সেগুলো চালু করবে। সংশোধিত অ্যাপটি কাজ নাও করতে পারে</string>
+    <string name="settings_ignore_install_target_rules_description">ইনস্টল টার্গেটের প্রয়োজনীয় প্যাচগুলো বন্ধ করতে এবং এটি যা বাতিল করে সেগুলো চালু করার অনুমতি দেয়। প্যাচ করা অ্যাপটি কাজ নাও করতে পারে</string>
     <string name="settings_auto_uninstall_warning_title">স্বয়ংক্রিয়ভাবে আনইনস্টল করা কি সক্রিয় করবেন?</string>
     <string name="settings_auto_uninstall_warning_message">Shizuku স্বয়ংক্রিয় ইনস্টলের সময়, যদি Android সিগনেচার কনফ্লিক্ট রিপোর্ট করে, তাহলে Morphe প্যাচ করা APK ইনস্টল করার আগে বিদ্যমান অ্যাপটি আনইনস্টল করবে।</string>
     <string name="settings_auto_uninstall_warning_risk">এটি অ্যাপের ডেটা মুছে ফেলতে পারে। যদি আনইনস্টল করার পরে প্যাচ করা APK ইনস্টল করতে ব্যর্থ হয়, তাহলে আগের অ্যাপটি সম্ভবত ইতিমধ্যে চলে গেছে।</string>
@@ -1058,7 +1066,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_battery_optimization_description">অ্যাপটি মিনিমাইজ করা হলে প্যাচার চালু রাখে।</string>
     <string name="settings_system_process_runtime">প্যাচার রানটাইম</string>
     <string name="settings_system_jvm_runtime_enable">এমবেডেড VM ব্যবহার করুন</string>
-    <string name="settings_system_jvm_runtime_description">Morphe-এর বহন করা Java VM-এর পাচগুলো, যা ডিভাইসের সংস্থানের মতো মেমোরি ব্যবহার করতে পারে। Android-এর রানটাইম দিয়ে পাচ করার জন্য বন্ধ করুন</string>
+    <string name="settings_system_jvm_runtime_description">Morphe-এর নিজস্ব Java VM-এ প্যাচ করুন, যা আরও বেশি মেমরি ব্যবহার করতে পারে। অ্যান্ড্রয়েডের রানটাইম ব্যবহার করতে এটি বন্ধ করুন</string>
     <string name="settings_system_jvm_runtime_unavailable">ARM অথবা ৬৪-বিট x86 ডিভাইস প্রয়োজন</string>
     <string name="settings_system_patcher_completion_sound">সম্পূর্ণ হওয়ার শব্দ</string>
     <string name="settings_system_patcher_completion_sound_description">প্যাচিং শেষ হলে সাফল্য বা ব্যর্থতার জন্য একটি স্বতন্ত্র সুর বাজায়</string>
@@ -1209,6 +1217,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_apk_download_helper_warning">APK সহায়ক অ্যাপ থেকে আসে, তাই শুধুমাত্র আপনার জানা অ্যাপগুলোকেই বিশ্বাস করুন। Morphe এখনও প্যাচ করার আগে প্রতিটি ফাইলের প্যাকেজ, সংস্করণ এবং স্বাক্ষর যাচাই করে।</string>
     <string name="settings_system_apk_download_helper_installed_by">%s দ্বারা ইনস্টল করা হয়েছে</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">ইনস্টলকারী অজানা</string>
+    <string name="settings_system_apk_download_helper_open_directly">তৎক্ষণাৎ হেল্পার ওপেন করুন</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">ডাউনলোড নির্দেশাবলী এড়িয়ে যায় এবং বিশ্বস্ত হেল্পারটি ওপেন করে</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">এখানে কোন ফাইল নেই</string>
     <string name="file_picker_read_error">এই ডিরেক্টরিটি পড়া সম্ভব নয়</string>

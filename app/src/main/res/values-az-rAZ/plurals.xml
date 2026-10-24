@@ -65,8 +65,8 @@
         <item quantity="other">%s tətbiq quraşdırıldı</item>
     </plurals>
     <plurals name="batch_mount_summary">
-        <item quantity="one">%s tətbiq quraşdırıldı</item>
-        <item quantity="other">%s tətbiq quraşdırıldı</item>
+        <item quantity="one">%s tətbiq montajlandı</item>
+        <item quantity="other">%s tətbiq montajlandı</item>
     </plurals>
     <plurals name="batch_reinstall_summary">
         <item quantity="one">%s tətbiq yenidən quraşdırıldı</item>

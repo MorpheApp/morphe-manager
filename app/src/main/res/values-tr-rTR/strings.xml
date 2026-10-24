@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Yamalanmadı</string>
     <string name="home_no_patches_available">Yama mevcut değil</string>
     <string name="home_app_hide_title">Uygulama gizlensin mi?</string>
+    <string name="home_more_apps_title">Daha fazla uygulama</string>
+    <string name="home_more_apps_hide_title">Bu kart gizlensin mi?</string>
+    <string name="home_more_apps_hide_message">Ayarlar &gt; Görünüm &gt; Ana ekran üzerinden istediğiniz zaman geri getirebilirsiniz</string>
     <string name="home_app_hide_message">Bu uygulama ana ekrandan gizlenecektir. Daha sonra listenin altındaki düğmeyi kullanarak gizli uygulamalardan geri getirebilirsiniz</string>
     <string name="home_app_will_be_hidden">Bu uygulama gizlenecektir</string>
     <string name="home_app_hidden_named">%s gizli</string>
@@ -31,6 +34,7 @@
     <string name="deep_link_add_source_only_universal">Yalnızca evrensel yamalar eklendi. Kaynağın uygulama listesinden uygulamalar ekleyebilirsiniz</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Bu kaynak zaten eklenmiş. Uygulama mevcut kaynaktan eklensin mi?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe güncellemesi mevcut</string>
     <string name="home_update_available_subtitle">Yeni sürüm yüklenmeye hazır</string>
@@ -803,6 +807,8 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Bir karşılama mesajı gösterir</string>
     <string name="settings_appearance_repatch_notice">Yeniden yama bildirimi</string>
     <string name="settings_appearance_repatch_notice_description">Yamalanmış uygulamalar yeniden yamalanabilir olduğunda bir başlık gösterir.</string>
+    <string name="settings_appearance_more_apps_card">Daha fazla uygulama kartı</string>
+    <string name="settings_appearance_more_apps_card_description">Uygulamaların altında topluluk yamalarına yönlendiren bir kart gösterir</string>
     <string name="settings_appearance_app_card_colors">Uygulama kartı renkleri</string>
     <string name="settings_appearance_app_card_colors_default">Varsayılan</string>
     <string name="settings_appearance_app_card_colors_default_description">Her uygulamaya kendi paketinin rengini ver</string>
@@ -867,7 +873,6 @@ Yamalar etkilenmez: yamalama kaynakları listesindeki her kaynak için ön sür�
     <string name="settings_advanced_update_interval_daily">Günlük</string>
     <string name="settings_advanced_update_interval_weekly">Haftalık</string>
     <string name="settings_advanced_update_interval_monthly">Aylık</string>
-    <string name="settings_advanced_update_interval_battery_warning">Bazı cihazlarda arka plan kontrolleri güvenilir şekilde çalışmayabilir. Xiaomi, Huawei, Samsung ve OnePlus gibi üreticiler, pil ömrünü uzatmak için arka plan işlemlerini genellikle agresif şekilde kısıtlarlar</string>
     <string name="settings_advanced_external_batch_patch">Harici tetikleyicilere izin ver</string>
     <string name="settings_advanced_external_batch_patch_description">Otomasyon uygulamalarının toplu yama işlemlerini başlatmasını sağlar.</string>
     <string name="external_batch_patch_title">Toplu yamalamayı başlat?</string>
@@ -929,7 +934,6 @@ Yamalar etkilenmez: yamalama kaynakları listesindeki her kaynak için ön sür�
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Özel ad girin</string>
     <string name="settings_advanced_patch_options_path_gone">Bu klasör artık okunamıyor. Klasörü tekrar seçin veya temizleyin; aksi takdirde yamalama işlemi durup ne yapılacağını soracaktır</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Uygulama simgesi</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Uygulamanın yamalandığı simge. Ayrıca Android Auto ve sistem ayarlarındaki uygulama listesi gibi, uygulamanın sonradan değiştiremediği yerlerde de bu simge kullanılır</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Özel uygulama simgesi için simge görselleri içeren bir klasör gerekli</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Özel filtre</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Özel bir simge olarak kullanılacak görüntüleri içeren klasör.
@@ -1037,7 +1041,6 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_auto_uninstall_with_shizuku">Çakışma durumunda otomatik olarak kaldır</string>
     <string name="settings_auto_uninstall_with_shizuku_description">İmza çakışması durumunda mevcut uygulamayı kaldırır. Bu işlem uygulama verilerini silebilir.</string>
     <string name="settings_ignore_install_target_rules">Yükleme hedefi gereksinimlerini yoksay</string>
-    <string name="settings_ignore_install_target_rules_description">Yama, yükleme hedefinin gerektirdiği ayarların kapatılmasını ve buna aykırı olan kuralın açılmasını sağlar. Yama uygulanan uygulama çalışmayabilir</string>
     <string name="settings_auto_uninstall_warning_title">Otomatik kaldırmayı etkinleştir?</string>
     <string name="settings_auto_uninstall_warning_message">Android, Shizuku otomatik yüklemesi sırasında bir imza çakışması bildirirse, Morphe yamalı APK\'yı yüklemeden önce mevcut uygulamayı kaldıracaktır.</string>
     <string name="settings_auto_uninstall_warning_risk">Bu, uygulama verilerini kaldırabilir. Yamalı APK, kaldırma işleminden sonra yüklenemezse, önceki uygulama zaten gitmiş olabilir.</string>
@@ -1068,7 +1071,6 @@ Ayrıntılar: %2$s"</string>
     <string name="settings_system_battery_optimization_description">Uygulama küçültüldüğünde patcher\'ı çalışır durumda tutar</string>
     <string name="settings_system_process_runtime">Yamalayıcı çalışma zamanı</string>
     <string name="settings_system_jvm_runtime_enable">Dahili VM kullan</string>
-    <string name="settings_system_jvm_runtime_description">Morphe\'nin çalıştırdığı, cihazın ayırabildiği kadar bellek kullanabilen bir Java VM içinde yamalar. Android\'in çalışma zamanı ile yamalamak için kapatın</string>
     <string name="settings_system_jvm_runtime_unavailable">ARM veya 64-bit x86 cihaz gerektirir</string>
     <string name="settings_system_patcher_completion_sound">Tamamlama Sesi</string>
     <string name="settings_system_patcher_completion_sound_description">Yamalama işlemi bittiğinde başarı veya başarısızlık için farklı bir ton çalınır</string>
@@ -1217,6 +1219,8 @@ Ayrıntılar: %2$s"</string>
     <string name="settings_system_apk_download_helper_warning">APK, yardımcı uygulamadan gelir, bu yüzden yalnızca tanıdığınız uygulamalara güvenin. Morphe, yamalamadan önce her dosyanın paketini, sürümünü ve imzasını yine de kontrol eder.</string>
     <string name="settings_system_apk_download_helper_installed_by">%s tarafından yüklendi</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Yükleyen bilinmiyor</string>
+    <string name="settings_system_apk_download_helper_open_directly">Yardımcıyı hemen aç</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">İndirme talimatlarını atlar ve güvenilir yardımcıyı açar</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Burada dosya yok</string>
     <string name="file_picker_read_error">Bu dizin okunamıyor</string>
@@ -1302,7 +1306,7 @@ Ayrıntılar: %2$s"</string>
     <string name="delete_all">Tümünü sil</string>
     <string name="remove">Kaldır</string>
     <string name="exclude">Yamalıyor</string>
-    <string name="excluded">Yamalanıyor</string>
+    <string name="excluded">Hariç tutuldu</string>
     <string name="include">Dahil Et</string>
     <string name="disable">Devre dışı bırak</string>
     <string name="enable">Etkinleştir</string>

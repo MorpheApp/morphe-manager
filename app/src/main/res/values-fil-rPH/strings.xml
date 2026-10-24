@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Hindi pa na-patch</string>
     <string name="home_no_patches_available">Walang patch na magagamit</string>
     <string name="home_app_hide_title">Itago ang aplikasyong ito?</string>
+    <string name="home_more_apps_title">Higit pang mga aplikasyon</string>
+    <string name="home_more_apps_hide_title">Itago ang card na ito?</string>
+    <string name="home_more_apps_hide_message">Maaari mo itong ibalik anumang oras sa Settings &gt; Appearance &gt; Home screen</string>
     <string name="home_app_hide_message">Itatago ang aplikasyong ito mula sa home screen. Maaari mo itong buksan muli gamit ang button sa ibaba ng listahan</string>
     <string name="home_app_will_be_hidden">Itatago ang aplikasyong ito</string>
     <string name="home_app_hidden_named">%s nakatago</string>
@@ -31,6 +34,9 @@
     <string name="deep_link_add_source_only_universal">Pansamahing mga patch lamang ang idinagdag. Maaari kang magdagdag ng mga app mula sa listahan ng app ng pinagmulan</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Ang pinagmulan na ito ay nakadagdag na. Magdagdag ng app na ito mula sa umiiral na pinagmulan?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="mpp_import_update_message">Ito ay isang bagong bersyon ng %s. Gusto mo ba itong i-update?</string>
+    <string name="mpp_import_unreadable">Hindi mabasa ang file na ito</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">May available na update para sa Morphe</string>
     <string name="home_update_available_subtitle">Handa na mag-install ang bagong bersyon</string>
@@ -803,6 +809,8 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Nagpapakita ng mensahe ng pagbati</string>
     <string name="settings_appearance_repatch_notice">Paunawa sa muling pag-patch</string>
     <string name="settings_appearance_repatch_notice_description">Nagpapakita ng banner kapag maaaring i-patch muli ang mga patched apps</string>
+    <string name="settings_appearance_more_apps_card">Card ng higit pang mga aplikasyon</string>
+    <string name="settings_appearance_more_apps_card_description">Nagpapakita ng card sa ilalim ng mga app na humahantong sa mga community patch</string>
     <string name="settings_appearance_app_card_colors">Mga kulay ng card ng app</string>
     <string name="settings_appearance_app_card_colors_default">Panimula</string>
     <string name="settings_appearance_app_card_colors_default_description">Bigyan ang bawat app ng kulay ng sarili nitong bundle</string>
@@ -867,7 +875,7 @@ Hindi maaapektuhan ang mga patch: paganahin ang mga patch na pre-release para sa
     <string name="settings_advanced_update_interval_daily">Araw-araw</string>
     <string name="settings_advanced_update_interval_weekly">Buwan</string>
     <string name="settings_advanced_update_interval_monthly">Bilangbulan</string>
-    <string name="settings_advanced_update_interval_battery_warning">Maaaring hindi gumana nang mapagkakatiwalaan ang mga pagsusuri sa background sa ilang device. Ang mga tagagawa tulad ng Xiaomi, Huawei, Samsung, at OnePlus ay madalas na agresibong naghihigpit sa mga proseso sa background upang makatipid ng baterya</string>
+    <string name="settings_advanced_update_interval_battery_warning">Maaaring hindi gumana nang maayos ang mga background check sa mga device na naglilimita sa mga background app, gaya ng Xiaomi, Huawei, Samsung at OnePlus</string>
     <string name="settings_advanced_external_batch_patch">Payagan ang mga panlabas na trigger</string>
     <string name="settings_advanced_external_batch_patch_description">Pinahihintulutan ng automation apps ang pagsisimula ng batch patching</string>
     <string name="external_batch_patch_title">Magsimulang mag-batch patch?</string>
@@ -929,7 +937,7 @@ Hindi maaapektuhan ang mga patch: paganahin ang mga patch na pre-release para sa
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Ilagay ang pasadyang pangalan</string>
     <string name="settings_advanced_patch_options_path_gone">Hindi na mababasa ang folder na ito. Piliin itong muli o i-clear ito, kung hindi, hihinto ang pag-patch at magtatanong ito tungkol dito.</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Icon ng aplikasyon</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Ang icon na ginagamit sa pag-patch sa app. Ginagamit din ito sa mga lugar kung saan hindi mababago ng app ang icon sa ibang pagkakataon, gaya ng Android Auto at ng listahan ng mga app sa mga setting ng system.</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Ang icon na ginamit sa pag-patch ng app, na ginagamit din kung saan hindi na ito maaaring baguhin sa huli, gaya ng Android Auto</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Ang custom na icon ng app ay nangangailangan ng isang folder na may mga larawan ng icon</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Pasadyang icon</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Folder na may mga larawan na gagamitin bilang isang custom na icon.
@@ -1037,7 +1045,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="settings_auto_uninstall_with_shizuku">Awtomatikong i-uninstall sa pagkakasalungatan</string>
     <string name="settings_auto_uninstall_with_shizuku_description">I-e uninstall ang umiiral na app kapag may konfliktong signature. Maaari itong magtanggal ng data ng app</string>
     <string name="settings_ignore_install_target_rules">I-ignore ang mga kinailangan ng target ng pag-install</string>
-    <string name="settings_ignore_install_target_rules_description">Pinapayagan nitong i-off ang mga kinailangan ng target ng pag-install na kailangang ipatigil at i-on ang mga itinutuwid nito. Baka hindi gumana ang patched app</string>
+    <string name="settings_ignore_install_target_rules_description">Pinapayagan ang pag-off ng mga patch na kinakailangan ng install target at pag-on ng mga ito na tinanggal nito. Maaaring hindi gumana ang na-patch na app</string>
     <string name="settings_auto_uninstall_warning_title">Paganahin ang auto-uninstall?</string>
     <string name="settings_auto_uninstall_warning_message">Kung mag-uulat ang Android ng salungatan sa lagda sa panahon ng Shizuku auto-install, ia-uninstall ng Morphe ang kasalukuyang app bago i-install ang na-patch na APK</string>
     <string name="settings_auto_uninstall_warning_risk">Maaari nitong alisin ang data ng app. Kung mabigo ang na-patch na APK na i-install pagkatapos ng pag-uninstall, maaaring wala na ang nakaraang app</string>
@@ -1068,7 +1076,7 @@ Mga Detalye: %2$s"</string>
     <string name="settings_system_battery_optimization_description">Pinapanatili ang patcher na tumatakbo kapag ang app ay minimize</string>
     <string name="settings_system_process_runtime">Patcher runtime</string>
     <string name="settings_system_jvm_runtime_enable">Gumamit ng embedded VM</string>
-    <string name="settings_system_jvm_runtime_description">Mga patch sa isang Java VM na dala nina Morphe, na maaaring gumamit ng memorya hanggang sa kaya ng device. I-off upang i-patch gamit ang runtime ng Android</string>
+    <string name="settings_system_jvm_runtime_description">Mga patch sa sariling Java VM ng Morphe, na maaaring gumamit ng mas maraming memory. I-off upang gamitin ang runtime ng Android</string>
     <string name="settings_system_jvm_runtime_unavailable">Nangangailangan ng ARM o 64-bit x86 na device</string>
     <string name="settings_system_patcher_completion_sound">Tunog ng pagkumpleto</string>
     <string name="settings_system_patcher_completion_sound_description">Tumutugtog ng natatanging tono para sa tagumpay o kabiguan kapag natapos ang pag-patch</string>
@@ -1217,6 +1225,8 @@ Mga Detalye: %2$s"</string>
     <string name="settings_system_apk_download_helper_warning">Ang APK ay nagmumula sa helper app, kaya magtiwala ka lamang sa mga app na kilala mo. Sinusuri pa rin ng Morphe ang package, bersyon, at lagda ng bawat file bago i-patch.</string>
     <string name="settings_system_apk_download_helper_installed_by">In-install ng %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Hindi kilala ang installer</string>
+    <string name="settings_system_apk_download_helper_open_directly">Buksan agad ang helper</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Lalaktawan ang mga tagubilin sa pag-download at bubuksan ang pinagkakatiwalaang helper</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Walang mga file dito</string>
     <string name="file_picker_read_error">Hindi mabasa ang direktoryong ito</string>

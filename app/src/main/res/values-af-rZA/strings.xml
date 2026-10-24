@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Nie gepatch nie</string>
     <string name="home_no_patches_available">Geen veranderinge beskikbaar</string>
     <string name="home_app_hide_title">Versteek hierdie program?</string>
+    <string name="home_more_apps_title">Meer programme</string>
+    <string name="home_more_apps_hide_title">Versteek hierdie kaart?</string>
+    <string name="home_more_apps_hide_message">Jy kan dit enige tyd terugbring in Instellings &gt; Voorkoms &gt; Tuisskerm</string>
     <string name="home_app_hide_message">Hierdie app sal van die tuisskerm weggesteek word. Jy kan dit later herstel deur die \'\'-knoppie onderaan die lys te gebruik</string>
     <string name="home_app_will_be_hidden">Hierdie program sal versteek word</string>
     <string name="home_app_hidden_named">%s versteek</string>
@@ -31,6 +34,9 @@
     <string name="deep_link_add_source_only_universal">Slegs die universele kolle word gevoeg. U kan programme uit die bron se programlys byvoeg</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Hierdie bron is reeds bygevoeg. Wil u hierdie toepassing uit die bestaande bron byvoeg?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="mpp_import_update_message">Hierdie is \'n nuwe weergawe van %s. Wil jy dit opdateer?</string>
+    <string name="mpp_import_unreadable">Hierdie lêer kan nie gelees word nie</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-opdatering beskikbaar</string>
     <string name="home_update_available_subtitle">Nuwe weergawe gereed om te installeer</string>
@@ -803,6 +809,8 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Wys \'n begroetingboodskap</string>
     <string name="settings_appearance_repatch_notice">Re-patch-kennisgewing</string>
     <string name="settings_appearance_repatch_notice_description">Wys \'n banier wanneer gemodifieerde opnuut gepatch kan word</string>
+    <string name="settings_appearance_more_apps_card">Meer programme-kaart</string>
+    <string name="settings_appearance_more_apps_card_description">Wys \'n kaart onder die toepassings wat lei na gemeenskap-regstellings</string>
     <string name="settings_appearance_app_card_colors">App-kaartkleure</string>
     <string name="settings_appearance_app_card_colors_default">Verstek</string>
     <string name="settings_appearance_app_card_colors_default_description">Gee elke app die kleur van sy eie bundel</string>
@@ -867,7 +875,7 @@ Patches word nie beïnvloed nie: aktiveer voorafvrystelling-patches vir elke bro
     <string name="settings_advanced_update_interval_daily">Daagliks</string>
     <string name="settings_advanced_update_interval_weekly">Weekliks</string>
     <string name="settings_advanced_update_interval_monthly">Maandeliks</string>
-    <string name="settings_advanced_update_interval_battery_warning">Agtergrondkontroles werk moontlik nie betroubaar op sommige toestelle nie. Vervaardigers soos Xiaomi, Huawei, Samsung en OnePlus beperk dikwels agtergrondprosesse aggressief om battery te spaar</string>
+    <string name="settings_advanced_update_interval_battery_warning">Agtergrondkontroles werk dalk nie betroubaar op toestelle wat agtergrondtoepassings beperk nie, soos Xiaomi, Huawei, Samsung en OnePlus</string>
     <string name="settings_advanced_external_batch_patch">Laat eksterne snellers toe</string>
     <string name="settings_advanced_external_batch_patch_description">Laat outomatiseringsapps toe om pakhetering te begin</string>
     <string name="external_batch_patch_title">Begin batch pleister?</string>
@@ -929,7 +937,7 @@ Patches word nie beïnvloed nie: aktiveer voorafvrystelling-patches vir elke bro
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Gee pasgemaakte naam in</string>
     <string name="settings_advanced_patch_options_path_gone">Hierdie vouer kan nie meer gelees word nie. Kies dit weer of maak dit skoon, anders sal die patchproses stop en daaroor vra.</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Program ikoon</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Die ikoon waarmee die app gepatch word. Dit word ook gebruik waar die app dit later nie kan verander nie, soos in Android Auto en in die app-lys van die stelselinstellings.</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Die ikoon waarmee die toepassing gepatch word, word ook gebruik waar dit later nie verander kan word nie, soos Android Auto</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Die pasgemaakte app-ikoon benodig \'n vouer met ikoonbeelde.</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Pasgemaakte ikoon</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"'N vouer met beelde om as 'n persoonlike ikoon te gebruik.
@@ -1037,7 +1045,7 @@ Die beeld afmetings moet soos volg wees:
     <string name="settings_auto_uninstall_with_shizuku">Outo-deïnstallering by konflik</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Uninstall the existing app on a signature conflict. This can remove app data</string>
     <string name="settings_ignore_install_target_rules">Ignoreer instellingstekenvereistes</string>
-    <string name="settings_ignore_install_target_rules_description">Laat toe dat die installasieteken vereistes afgeskakel word en dié wat dit uitsluit, aangeskakel word. Die gepatste app mag nie werk nie</string>
+    <string name="settings_ignore_install_target_rules_description">Laat dit toe om patches wat die installasiedoelwit vereis af te skakel en dié wat dit uitsluit aan te skakel. Die gepatchte toepassing werk dalk nie nie</string>
     <string name="settings_auto_uninstall_warning_title">Outo-deïnstallering aktiveer?</string>
     <string name="settings_auto_uninstall_warning_message">As Android \'n handtekeningskonflik tydens Shizuku-outo-installasie rapporteer, sal Morphe die bestaande app deïnstalleer voordat die gepatchte APK geïnstalleer word.</string>
     <string name="settings_auto_uninstall_warning_risk">Dit kan appdata verwyder. Indien die gepatchte APK nie na deïnstallering kan installeer nie, is die vorige app dalk reeds verwyder.</string>
@@ -1068,7 +1076,7 @@ Besonderhede: %2$s"</string>
     <string name="settings_system_battery_optimization_description">Hou die patcher lopend wanneer die toepassing geminimaliseer is</string>
     <string name="settings_system_process_runtime">Patcher-runtime</string>
     <string name="settings_system_jvm_runtime_enable">Gebruik ingeboude VM</string>
-    <string name="settings_system_jvm_runtime_description">Vlekke in \'n Java-VM wat Morphe dra, wat soveel geheue kan gebruik as wat die toestel oor het. Skakel af om met Android se tydeloop te flikker</string>
+    <string name="settings_system_jvm_runtime_description">Patches in Morphe se eie Java VM, wat meer geheue kan gebruik. Skakel af om die Android-runtime te gebruik</string>
     <string name="settings_system_jvm_runtime_unavailable">Benodig \'n ARM- of 64-bis x86-toestel</string>
     <string name="settings_system_patcher_completion_sound">Voltooiingklank</string>
     <string name="settings_system_patcher_completion_sound_description">Speel \'n kenmerkende toon vir sukses of mislukking wanneer die patching voltooi is</string>
@@ -1217,6 +1225,8 @@ Besonderhede: %2$s"</string>
     <string name="settings_system_apk_download_helper_warning">Die APK kom van die helperprogram af, so vertrou net programme wat jy ken. Morphe kontroleer steeds die pakket, weergawe en handtekening van elke lêer voordat dit gepatch word.</string>
     <string name="settings_system_apk_download_helper_installed_by">Geïnstalleer deur %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Installeerder onbekend</string>
+    <string name="settings_system_apk_download_helper_open_directly">Maak helper onmiddellik oop</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Slaan die aflaai-instruksies oor en maak die vertroude helper oop</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Geen lêers hier</string>
     <string name="file_picker_read_error">Kan hierdie gids nie lees nie</string>

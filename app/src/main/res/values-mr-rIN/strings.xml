@@ -25,6 +25,7 @@
     <!-- Shown under the app a link was opened for -->
     <!-- Shown when the link was opened for the universal patches of a source, which no app is added with -->
     <!-- Asked when the link names an app of a source that is already added -->
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe नवीन सुधारणा उपलब्ध आहे</string>
     <string name="home_update_available_subtitle">नवीन सुधारणा स्थापनेसाठी तयार आहे</string>
@@ -790,7 +791,6 @@
     <string name="settings_system_notifications_categories">सूचना श्रेणी</string>
     <string name="settings_system_notifications_categories_description">कोणते अपडेट्स तुम्हाला सूचित करतात ते सिस्टम सेटिंग्जमध्ये निवडा</string>
     <string name="settings_advanced_update_interval">तपासणी वारंवारता</string>
-    <string name="settings_advanced_update_interval_battery_warning">काही उपकरणांवर पार्श्वभूमी तपासणी विश्वसनीयपणे कार्य करू शकत नाही. Xiaomi, Huawei, Samsung आणि OnePlus सारख्या उत्पादकांकडून बॅटरी वाचवण्यासाठी पार्श्वभूमी प्रक्रियांवर जोरदार निर्बंध लादले जातात</string>
     <string name="settings_advanced_external_batch_patch">बाह्य ट्रिगरला अनुमती द्या</string>
     <string name="external_batch_patch_title">बॅच पॅचिंग सुरू करायची?</string>
     <string name="external_batch_patch_description">%s ला ॲप्स पॅच आणि इंस्टॉल करण्यासाठी Morphe इच्छित आहे.</string>
@@ -837,7 +837,6 @@
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">कस्टम नाव एंटर करा</string>
     <string name="settings_advanced_patch_options_path_gone">हा फोल्डर आता वाचता येत नाही. तो पुन्हा निवडा किंवा साफ करा, अन्यथा पॅचिंग थांबेल आणि त्याबद्दल विचारेल</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">अॅप चिन्ह</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">अॅप ज्या चिन्हासह पॅच केला जातो. हे असे ठिकाणी देखील वापरले जाते जेथे अॅप नंतर ते बदलू शकत नाही, जसे की Android Auto आणि सिस्टम सेटिंग्जमधील अॅप यादी</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">सानुकूल अॅप चिन्हासाठी चिन्ह प्रतिमा असलेला फोल्डर आवश्यक आहे</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">कस्टम आयकॉन</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"कस्टम आयकॉन म्हणून वापरण्यासाठी प्रतिमा असलेली फोल्डर.

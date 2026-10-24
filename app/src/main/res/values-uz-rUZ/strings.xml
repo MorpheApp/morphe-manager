@@ -31,6 +31,7 @@
     <string name="deep_link_add_source_only_universal">Faqat universal patchlar qo\'shiladi. Manbaning ilovalar ro\'yxatidan ilovalar qo\'shishingiz mumkin.</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Bu manba allaqachon qo\'shilgan. Bu ilovani mavjud manbadan qo\'shasizmi?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe\'da yangilanish mavjud</string>
     <string name="home_update_available_subtitle">Yangi versiya o‘rnatishga tayyor</string>
@@ -866,7 +867,6 @@ Patchlar ta'sirlanmaydi: patch manbalari ro'yxatidagi har bir manba uchun pre-re
     <string name="settings_advanced_update_interval_daily">Har kuni</string>
     <string name="settings_advanced_update_interval_weekly">Har hafta</string>
     <string name="settings_advanced_update_interval_monthly">Har oy</string>
-    <string name="settings_advanced_update_interval_battery_warning">Orqa fonda tekshirish ba\'zi qurilmalarda ishonchli ishlamasligi mumkin. Xiaomi, Huawei, Samsung va OnePlus kabi ishlab chiqaruvchilar batareyani tejash uchun orqa plan chizuvlarini kuchli cheklab qo\'yaydi</string>
     <string name="settings_advanced_external_batch_patch">Tashqi hodisalarni ruxsat berish</string>
     <string name="settings_advanced_external_batch_patch_description">Avtomatlashtirish ilovalariga ommaviy patchlashni boshlashga ruxsat beradi.</string>
     <string name="external_batch_patch_title">Ommaviy ta’mirlashni boshlash kerakmi?</string>
@@ -928,7 +928,6 @@ Patchlar ta'sirlanmaydi: patch manbalari ro'yxatidagi har bir manba uchun pre-re
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Kengaytirish</string>
     <string name="settings_advanced_patch_options_path_gone">Bu papkani endi o‘qib bo‘lmaydi. Uni qaytadan tanlang yoki tozalang, aks holda yamash to‘xtab, bu haqda so‘raydi</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Ilova belgisi</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Ilova shu belgi bilan yamaladi. U ilova keyinchalik o‘zgartira olmaydigan joylarda ham ishlatiladi, masalan, Android Auto va tizim sozlamalaridagi ilovalar ro‘yxatida</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Maxsus ilova belgisi uchun belgi tasvirlari solingan papka kerak</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Qisqartirish</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Maxsus ikon sifatida ishlatiladigan tasvirlar papkasi.
@@ -1036,7 +1035,6 @@ Rasm o'lchamlari quyidagicha bo'lishi kerak:
     <string name="settings_auto_uninstall_with_shizuku">Ziddiyat yuzaga kelganda avtomatik ravishda o‘chirib tashlash</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Imzo ziddiyatida mavjud ilovani o\'chiradi. Bu ilova ma\'lumotlarini olib tashlashi mumkin.</string>
     <string name="settings_ignore_install_target_rules">O\'rnatish maqsadi talablarini e\'tiborsiz qoldirish</string>
-    <string name="settings_ignore_install_target_rules_description">O\'rnatish maqsadi talab qiladigan patchlarni o\'chirishga va u istisno qilganlarni yoqishga ruxsat beradi. Patchlangan ilova ishlamasligi mumkin.</string>
     <string name="settings_auto_uninstall_warning_title">Avtomatik o‘chirib tashlashni yoqish kerakmi?</string>
     <string name="settings_auto_uninstall_warning_message">Agar Shizuku avtomatik o‘rnatish paytida Android imzo ziddiyati haqida xabar bersa, Morphe o‘zgartirilgan APK-ni o‘rnatishdan oldin mavjud ilovani o‘chirib tashlaydi</string>
     <string name="settings_auto_uninstall_warning_risk">Bu ilova ma’lumotlarini o‘chirib tashlashi mumkin. Agar o‘zgartirilgan APK-ni o‘chirib tashlashdan so‘ng o‘rnatish muvaffaqiyatsiz bo‘lsa, oldingi ilova allaqachon o‘chirilgan bo‘lishi mumkin</string>
@@ -1067,7 +1065,6 @@ Ma’lumotlar: %2$s"</string>
     <string name="settings_system_battery_optimization_description">Patchlashi tugagandan keyin patcherni ishlayotgan holatda ushlab turish</string>
     <string name="settings_system_process_runtime">Patcher ish vaqti</string>
     <string name="settings_system_jvm_runtime_enable">O\'rnatilgan VM ishlatish</string>
-    <string name="settings_system_jvm_runtime_description">Morphe olib yuradigan Java VM\'da patchlaydi, u qurilma ajratgancha xotiradan foydalanishi mumkin. Android runtime bilan patchlash uchun o\'chiring.</string>
     <string name="settings_system_jvm_runtime_unavailable">ARM yoki 64-bit x86 qurilmasi kerak.</string>
     <string name="settings_system_patcher_completion_sound">Yakunlanish tovushi</string>
     <string name="settings_system_patcher_completion_sound_description">Qo\'shish tugagach muvaffaqiyat yoki muvaffaqiyatsizlik uchun alohida ohang ijro etiladi</string>

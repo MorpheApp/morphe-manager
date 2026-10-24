@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">ไม่ได้รับการแพตช์</string>
     <string name="home_no_patches_available">ไม่มีแพตช์ที่ใช้งานได้</string>
     <string name="home_app_hide_title">ซ่อนแอปนี้หรือไม่?</string>
+    <string name="home_more_apps_title">แอปเพิ่มเติม</string>
+    <string name="home_more_apps_hide_title">ซ่อนการ์ดนี้หรือไม่?</string>
+    <string name="home_more_apps_hide_message">คุณสามารถนำกลับมาได้ทุกเมื่อใน การตั้งค่า &gt; รูปลักษณ์ &gt; หน้าจอหลัก</string>
     <string name="home_app_hide_message">แอปนี้จะถูกซ่อนจากหน้าจอหลัก คุณสามารถกู้คืนได้ในภายหลังจากแอปที่ซ่อนอยู่โดยใช้ปุ่มที่ด้านล่างของรายการ</string>
     <string name="home_app_will_be_hidden">แอปนี้จะถูกซ่อน</string>
     <string name="home_app_hidden_named">ซ่อน %s รายการ</string>
@@ -31,6 +34,7 @@
     <string name="deep_link_add_source_only_universal">เพิ่มเฉพาะแพตช์แบบสากลเท่านั้น คุณสามารถเพิ่มแอปจากรายชื่อแอปของแหล่งที่มา</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">แหล่งข้อมูลนี้ได้ถูกเพิ่มไว้แล้ว ต้องการเพิ่มแอปนี้จากแหล่งข้อมูลที่มีอยู่หรือไม่?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">มีการอัปเดต Morphe พร้อมใช้งาน</string>
     <string name="home_update_available_subtitle">มีเวอร์ชันใหม่พร้อมติดตั้ง</string>
@@ -803,6 +807,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">แสดงข้อความทักทาย</string>
     <string name="settings_appearance_repatch_notice">ประกาศการแพตช์ซ้ำ</string>
     <string name="settings_appearance_repatch_notice_description">แสดงแบนเนอร์เมื่อแอปที่แพตช์แล้วสามารถแพตช์ซ้ำได้</string>
+    <string name="settings_appearance_more_apps_card">การ์ดแอปเพิ่มเติม</string>
+    <string name="settings_appearance_more_apps_card_description">แสดงการ์ดใต้แอปที่นำไปสู่แพตช์ชุมชน</string>
     <string name="settings_appearance_app_card_colors">สีการ์ดแอป</string>
     <string name="settings_appearance_app_card_colors_default">ค่าเริ่มต้น</string>
     <string name="settings_appearance_app_card_colors_default_description">กำหนดสีให้บันเดิลของแต่ละแอป</string>
@@ -867,7 +873,6 @@
     <string name="settings_advanced_update_interval_daily">รายวัน</string>
     <string name="settings_advanced_update_interval_weekly">รายสัปดาห์</string>
     <string name="settings_advanced_update_interval_monthly">รายเดือน</string>
-    <string name="settings_advanced_update_interval_battery_warning">การตรวจสอบพื้นหลังอาจไม่ทำงานได้อย่างมั่นคงบนบางอุปกรณ์. ผู้ผลิตเช่น Xiaomi, Huawei, Samsung, และ OnePlus บ่อยครั้งจำกัดขั้นตอนการทำงานพื้นหลังอย่างเข้มงวดเพื่อประหยัดแบตเตอรี่</string>
     <string name="settings_advanced_external_batch_patch">อนุญาตให้ทริกเกอร์ภายนอก</string>
     <string name="settings_advanced_external_batch_patch_description">อนุญาตให้แอปอัตโนมัติเริ่มการแพตช์แบบกลุ่ม</string>
     <string name="external_batch_patch_title">เริ่มแพตช์กลุ่ม?</string>
@@ -929,7 +934,6 @@
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">ป้อนชื่อแบบกำหนดเอง</string>
     <string name="settings_advanced_patch_options_path_gone">ไม่สามารถอ่านโฟลเดอร์นี้ได้อีกต่อไป เลือกอีกครั้งหรือล้างออก ไม่เช่นนั้นการแพตช์จะหยุดและถามถึงโฟลเดอร์นี้</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">ไอคอนแอป</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">ไอคอนที่ใช้แพตช์แอป ไอคอนนี้ยังใช้ในตำแหน่งที่แอปไม่สามารถเปลี่ยนได้ในภายหลัง เช่น Android Auto และรายการแอปในการตั้งค่าระบบ</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">ไอคอนแอปที่กำหนดเองต้องมีโฟลเดอร์ที่มีรูปภาพไอคอน</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">ไอคอนแบบกำหนดเอง</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"โฟลเดอร์ที่มีรูปภาพสำหรับใช้เป็นไอคอนแบบกำหนดเอง
@@ -1037,7 +1041,6 @@ morphe_header_custom_dark.png
     <string name="settings_auto_uninstall_with_shizuku">ถอนการติดตั้งอัตโนมัติเมื่อเกิดข้อขัดแย้ง</string>
     <string name="settings_auto_uninstall_with_shizuku_description">ลบการติดตั้งแอปที่มีอยู่เมื่อมีการขัดแย้งของลายเซ็น สิ่งนี้อาจลบข้อมูลแอป</string>
     <string name="settings_ignore_install_target_rules">ละเลยข้อกำหนดเป้าหมายการติดตั้ง</string>
-    <string name="settings_ignore_install_target_rules_description">ให้แพตช์ที่เป้าหมายการติดตั้งต้องการถูกปิด และเปิดแพตช์ที่มันตัดออกไปได้ แอปที่ได้รับการแพตช์แล้วอาจใช้งานไม่ได้</string>
     <string name="settings_auto_uninstall_warning_title">เปิดใช้งานการถอนการติดตั้งอัตโนมัติหรือไม่</string>
     <string name="settings_auto_uninstall_warning_message">หาก Android รายงานข้อขัดแย้งของลายเซ็นระหว่างการติดตั้งอัตโนมัติของ Shizuku, Morphe จะถอนการติดตั้งแอปที่มีอยู่ก่อนที่จะติดตั้ง APK ที่แพตช์แล้ว</string>
     <string name="settings_auto_uninstall_warning_risk">ซึ่งอาจลบข้อมูลแอปได้ หาก APK ที่แพตช์แล้วไม่สามารถติดตั้งได้หลังจากถอนการติดตั้ง แอปก่อนหน้านี้อาจหายไปแล้ว</string>
@@ -1068,7 +1071,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_battery_optimization_description">ทำให้ตัวแพตช์ทำงานต่อไปเมื่อแอปพลิเคชันถูกลดขนาด</string>
     <string name="settings_system_process_runtime">รันไทม์ของตัวแพตช์</string>
     <string name="settings_system_jvm_runtime_enable">ใช้ VM ในตัว</string>
-    <string name="settings_system_jvm_runtime_description">แพตช์ใน Java VM ที่ Morphe นำไป ซึ่งสามารถใช้หน่วยความจำได้เท่าที่อุปกรณ์มีเหลือ ปิดใช้งานเพื่อแพตช์ด้วยรันไทม์ของ Android</string>
     <string name="settings_system_jvm_runtime_unavailable">ต้องใช้อุปกรณ์ ARM หรือ x86 แบบ 64 บิต</string>
     <string name="settings_system_patcher_completion_sound">เสียงเมื่อเสร็จสิ้น</string>
     <string name="settings_system_patcher_completion_sound_description">เล่นเสียงที่แตกต่างเมื่อการแพตช์เสร็จสมบูรณ์ ไม่ว่าจะเป็นความสำเร็จหรือความล้มเหลว</string>
@@ -1217,6 +1219,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_warning">APK มาจากแอปตัวช่วย ดังนั้นให้ไว้วางใจเฉพาะแอปที่คุณรู้จักเท่านั้น Morphe ยังคงตรวจสอบแพ็กเกจ เวอร์ชัน และลายเซ็นของทุกไฟล์ก่อนแพตช์</string>
     <string name="settings_system_apk_download_helper_installed_by">ติดตั้งโดย %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">ไม่ทราบผู้ติดตั้ง</string>
+    <string name="settings_system_apk_download_helper_open_directly">เปิดตัวช่วยทันที</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">ข้ามคำแนะนำการดาวน์โหลดและเปิดตัวช่วยที่เชื่อถือได้</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">ไม่มีไฟล์อยู่ที่นี่</string>
     <string name="file_picker_read_error">ไม่สามารถอ่านไดเรกทอรีนี้ได้</string>

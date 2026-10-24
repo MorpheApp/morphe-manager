@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Sin parchear</string>
     <string name="home_no_patches_available">No hay parches disponibles</string>
     <string name="home_app_hide_title">¿Ocultar esta aplicación?</string>
+    <string name="home_more_apps_title">Más aplicaciones</string>
+    <string name="home_more_apps_hide_title">¿Ocultar esta tarjeta?</string>
+    <string name="home_more_apps_hide_message">Puedes volver a activarlo en cualquier momento en Ajustes &gt; Apariencia &gt; Pantalla de inicio</string>
     <string name="home_app_hide_message">Esta aplicación se ocultará de la pantalla de inicio. Puedes restaurarla más tarde desde las aplicaciones ocultas usando el botón situado en la parte inferior de la lista</string>
     <string name="home_app_will_be_hidden">Esta aplicación se ocultará</string>
     <string name="home_app_hidden_named">%s oculta</string>
@@ -31,6 +34,9 @@
     <string name="deep_link_add_source_only_universal">Solo se añaden los parches universales. Puedes añadir aplicaciones de la lista de aplicaciones de la fuente</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Esta fuente ya está añadida. ¿Quieres añadir esta aplicación desde la fuente existente?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="mpp_import_update_message">Esta es una nueva versión de %s. ¿Quieres actualizarla?</string>
+    <string name="mpp_import_unreadable">Este archivo no se puede leer</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Actualización de Morphe disponible</string>
     <string name="home_update_available_subtitle">Nueva versión lista para instalar</string>
@@ -803,6 +809,8 @@ Al desinstalarla se borrarán permanentemente todos los datos de la aplicación"
     <string name="settings_appearance_greeting_phrases_subtitle">Muestra un mensaje de bienvenida</string>
     <string name="settings_appearance_repatch_notice">Aviso de nuevos parches</string>
     <string name="settings_appearance_repatch_notice_description">Muestra un banner cuando las aplicaciones parcheadas se pueden volver a parchear</string>
+    <string name="settings_appearance_more_apps_card">Tarjeta de Más aplicaciones</string>
+    <string name="settings_appearance_more_apps_card_description">Muestra una tarjeta debajo de las aplicaciones que lleva a los parches de la comunidad</string>
     <string name="settings_appearance_app_card_colors">Colores de las tarjetas de aplicaciones</string>
     <string name="settings_appearance_app_card_colors_default">Predeterminado</string>
     <string name="settings_appearance_app_card_colors_default_description">Da a cada aplicación el color de su propio paquete</string>
@@ -867,7 +875,7 @@ Los parches no se ven afectados: habilita los parches pre-lanzamiento para cada 
     <string name="settings_advanced_update_interval_daily">Cada día</string>
     <string name="settings_advanced_update_interval_weekly">Cada semana</string>
     <string name="settings_advanced_update_interval_monthly">Cada mes</string>
-    <string name="settings_advanced_update_interval_battery_warning">Las comprobaciones en segundo plano pueden no funcionar de forma fiable en algunos dispositivos. Fabricantes como Xiaomi, Huawei, Samsung u OnePlus, a menudo restringen agresivamente los procesos en segundo plano para ahorrar batería</string>
+    <string name="settings_advanced_update_interval_battery_warning">Es posible que las comprobaciones en segundo plano no se ejecuten de forma fiable en dispositivos que restringen las aplicaciones en segundo plano, como Xiaomi, Huawei, Samsung y OnePlus</string>
     <string name="settings_advanced_external_batch_patch">Permitir activadores externos</string>
     <string name="settings_advanced_external_batch_patch_description">Permite que las aplicaciones de automatización comiencen a aplicar parches por lotes</string>
     <string name="external_batch_patch_title">¿Iniciar el parcheo por lotes?</string>
@@ -929,7 +937,7 @@ Los parches no se ven afectados: habilita los parches pre-lanzamiento para cada 
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Introduce un nombre personalizado</string>
     <string name="settings_advanced_patch_options_path_gone">Esta carpeta ya no se puede leer. Vuelve a seleccionarla o bórrala; de lo contrario, el parcheo se detendrá y preguntará al respecto</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Icono de la aplicación</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">El icono con el que se parchea la aplicación. También se usa donde la aplicación no puede cambiarlo después, como en Android Auto y en la lista de aplicaciones de los ajustes del sistema</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">El icono con el que se parchea la aplicación, también utilizado cuando no se puede cambiar más tarde, como en Android Auto</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">El icono personalizado de la aplicación necesita una carpeta con imágenes de iconos</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Icono personalizado</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Carpeta con imágenes para usar como icono personalizado.
@@ -1037,7 +1045,7 @@ Las dimensiones de la imagen deben ser las siguientes:
     <string name="settings_auto_uninstall_with_shizuku">Desinstalación automática en caso de conflicto</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Desinstala la aplicación existente en caso de conflicto de firmas. Esto puede eliminar los datos de la aplicación</string>
     <string name="settings_ignore_install_target_rules">Ignorar requisitos del destino de instalación</string>
-    <string name="settings_ignore_install_target_rules_description">Permite parchear los requisitos del destino de instalación que deben estar desactivados y los que descarta que deben estar activados. Es posible que la aplicación parcheada no funcione</string>
+    <string name="settings_ignore_install_target_rules_description">Permite desactivar los parches que requiere el destino de instalación y activar los que descarta. Es posible que la aplicación parcheada no funcione</string>
     <string name="settings_auto_uninstall_warning_title">¿Activar desinstalación automática?</string>
     <string name="settings_auto_uninstall_warning_message">Si Android informa de un conflicto de firma durante la instalación automática de Shizuku, Morphe desinstalará la aplicación existente antes de instalar el APK parcheado</string>
     <string name="settings_auto_uninstall_warning_risk">Esto puede eliminar los datos de la aplicación. Si el APK parcheado falla al instalarse después de la desinstalación, es posible que la aplicación anterior ya no esté disponible</string>
@@ -1068,7 +1076,7 @@ Detalles: %2$s"</string>
     <string name="settings_system_battery_optimization_description">Mantiene el parcheador en funcionamiento cuando la aplicación está minimizada</string>
     <string name="settings_system_process_runtime">Entorno de ejecución del parcheador</string>
     <string name="settings_system_jvm_runtime_enable">Usar máquina virtual integrada</string>
-    <string name="settings_system_jvm_runtime_description">Parchea en una máquina virtual Java que incluye Morphe, la cual puede usar toda la memoria que sobre en el dispositivo. Desactívalo para parchear con el entorno de ejecución de Android</string>
+    <string name="settings_system_jvm_runtime_description">Parchea en la propia máquina virtual Java de Morphe, que puede usar más memoria. Desactiva esta opción para usar el entorno de ejecución de Android</string>
     <string name="settings_system_jvm_runtime_unavailable">Necesita un dispositivo ARM o x86 de 64 bits</string>
     <string name="settings_system_patcher_completion_sound">Sonido de finalización</string>
     <string name="settings_system_patcher_completion_sound_description">Reproduce un tono distintivo para indicar éxito o fallo al finalizar el parcheo</string>
@@ -1217,6 +1225,8 @@ Detalles: %2$s"</string>
     <string name="settings_system_apk_download_helper_warning">El APK proviene de la aplicación auxiliar, así que confía solo en aplicaciones que conozcas. Morphe sigue comprobando el paquete, la versión y la firma de cada archivo antes de parchear</string>
     <string name="settings_system_apk_download_helper_installed_by">Instalada por %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Instalador desconocido</string>
+    <string name="settings_system_apk_download_helper_open_directly">Abrir ayudante de inmediato</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Omite las instrucciones de descarga y abre el ayudante de confianza</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">No hay archivos aquí</string>
     <string name="file_picker_read_error">No se puede leer este directorio</string>

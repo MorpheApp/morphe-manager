@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Nincs módosítva</string>
     <string name="home_no_patches_available">Nincsenek elérhető módosítások</string>
     <string name="home_app_hide_title">Elrejti az alkalmazást?</string>
+    <string name="home_more_apps_title">További alkalmazások</string>
+    <string name="home_more_apps_hide_title">Elrejtsük ezt a kártyát?</string>
+    <string name="home_more_apps_hide_message">Bármikor visszahozatja a Beállítások &gt; Megjelenés &gt; Kezdőképernyő menüpontban</string>
     <string name="home_app_hide_message">Az alkalmazás el lesz rejtve a főképernyőről. Később visszaállíthatod a lista alján található gomb segítségével.</string>
     <string name="home_app_will_be_hidden">Az alkalmazás nem lesz látható</string>
     <string name="home_app_hidden_named">%s rejtett</string>
@@ -31,6 +34,9 @@
     <string name="deep_link_add_source_only_universal">Csak az univerzális javítások kerülnek hozzáadásra. Az alkalmazásokat a forrás alkalmazáslistájából adhatod hozzá</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Ez a forrás már hozzá van adva. Hozzáadja ezt az alkalmazást a meglévő forrásból?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="mpp_import_update_message">Ez a %s újabb verziója. Szeretné frissíteni?</string>
+    <string name="mpp_import_unreadable">Ez a fájl nem olvasható</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe frissítés elérhető</string>
     <string name="home_update_available_subtitle">Az új verzió telepítésre vár</string>
@@ -803,6 +809,8 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Üdvözlő üzenet megjelenítése</string>
     <string name="settings_appearance_repatch_notice">Újrajavítási értesítés</string>
     <string name="settings_appearance_repatch_notice_description">Riasztó sáv megjelenítése, ha a módosított alkalmazások újra módosíthatók</string>
+    <string name="settings_appearance_more_apps_card">További alkalmazások kártya</string>
+    <string name="settings_appearance_more_apps_card_description">Kártyát jelenít az alkalmazások alatt, amely a közösségi javításokhoz vezet</string>
     <string name="settings_appearance_app_card_colors">Alkalmazáskártyák színei</string>
     <string name="settings_appearance_app_card_colors_default">Alapértelmezett</string>
     <string name="settings_appearance_app_card_colors_default_description">Minden alkalmazásnak a saját csomagjának színét adja</string>
@@ -867,7 +875,7 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="settings_advanced_update_interval_daily">Napi</string>
     <string name="settings_advanced_update_interval_weekly">Heti</string>
     <string name="settings_advanced_update_interval_monthly">Havi</string>
-    <string name="settings_advanced_update_interval_battery_warning">A háttérellenőrzések egyes eszközökön nem működnek megbízhatóan. Az olyan gyártók, mint a Xiaomi, a Huawei, a Samsung és a OnePlus gyakran agresszíven korlátozzák a háttérfolyamatokat az akkumulátor kímélése érdekében</string>
+    <string name="settings_advanced_update_interval_battery_warning">A háttérben történő ellenőrzések nem működhetnek megbízhatóan olyan eszközökön, amelyek korlátozzák a háttérben futó alkalmazásokat, például a Xiaomi, Huawei, Samsung és OnePlus</string>
     <string name="settings_advanced_external_batch_patch">Külső események engedélyezése</string>
     <string name="settings_advanced_external_batch_patch_description">Automatizációs alkalmazások számára lehetővé teszi a kötegelt patchelést</string>
     <string name="external_batch_patch_title">Elindítsa a csoportos javítást?</string>
@@ -929,7 +937,7 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Adj meg egy egyedi nevet</string>
     <string name="settings_advanced_patch_options_path_gone">Ez a mappa már nem olvasható. Válassza ki újra, vagy törölje, különben a javítás megáll, és rákérdez.</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Alkalmazásikon</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Az ikon, amellyel az alkalmazást javítják. Olyan helyeken is használják, ahol az alkalmazás később nem tudja megváltoztatni, például az Android Auto-ban és a rendszerbeállítások alkalmazáslistájában.</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Az ikon, amivel az alkalmazás được patch-el, és amelyet ott is használnak, ahol később nem módosítható, például az Android Auto esetében</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Az egyéni alkalmazásikonhoz egy ikonképeket tartalmazó mappára van szükség.</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Egyedi ikon</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Képek mappája, amelyek egyedi ikonként használhatók.
@@ -1037,7 +1045,7 @@ A képek méreteinek a következőknek kell lennie:
     <string name="settings_auto_uninstall_with_shizuku">Automatikus eltávolítás ütközés esetén</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Létező alkalmazás eltávolítása aláírási konfliktus esetén. Ez alkalmazásadatok törléséhez is vezethet</string>
     <string name="settings_ignore_install_target_rules">A telepítési célkövetelmények figyelmen kívül hagyása</string>
-    <string name="settings_ignore_install_target_rules_description">Lehetővé teszi, hogy az installációs cél szerinti szabályok le legyenek tiltva, és azok be legyenek kapcsolva, amelyeket ez kiküszöböl. A módosított alkalmazás nem működhet helyesen.</string>
+    <string name="settings_ignore_install_target_rules_description">Lehetővé teszi a telepítési cél által igényelt patch-ek kikapcsolását és az általa kizárt patch-ek bekapcsolását. A patch-elt alkalmazás möglicherweise nem fog működni</string>
     <string name="settings_auto_uninstall_warning_title">Engedélyezze az automatikus eltávolítást?</string>
     <string name="settings_auto_uninstall_warning_message">Ha az Android aláírási konfliktát jelent a Shizuku automatikus telepítése során, a Morphe eltávolítja a meglévő alkalmazást, mielőtt telepítené a javított APK-t.</string>
     <string name="settings_auto_uninstall_warning_risk">Ez eltávolíthatja az alkalmazás adatait. Ha a javított APK nem települ az eltávolítás után, a korábbi alkalmazás már eltűnhet.</string>
@@ -1068,7 +1076,7 @@ Részletek: %2$s"</string>
     <string name="settings_system_battery_optimization_description">A javító folyamat futtatása a háttérben, amikor az alkalmazás minimalizálva van.</string>
     <string name="settings_system_process_runtime">Patcher futásideje</string>
     <string name="settings_system_jvm_runtime_enable">Beágyazott VM használata</string>
-    <string name="settings_system_jvm_runtime_description">A Morphe által futtatott Java VM-mel kapcsolatos javítások, amelyek felhasználhatják a készüléken elérhető memóriát. A letiltással az Android futásidejével történik a javítás</string>
+    <string name="settings_system_jvm_runtime_description">A patch-ek a Morphe saját Java VM-jében futnak, ami több memóriát igényelhet. Kapcsolja ki, hogy az Android futási környezetét használja</string>
     <string name="settings_system_jvm_runtime_unavailable">ARM vagy 64-bit x86 eszköz szükséges</string>
     <string name="settings_system_patcher_completion_sound">Befejezés hangja</string>
     <string name="settings_system_patcher_completion_sound_description">Jellegzetes hangot játszik le a sikeres vagy sikertelen javítás befejezésekor</string>
@@ -1217,6 +1225,8 @@ Részletek: %2$s"</string>
     <string name="settings_system_apk_download_helper_warning">Az APK a segédalkalmazásból származik, ezért csak olyan alkalmazásokban bízzon meg, amelyeket ismer. A Morphe a módosítás előtt továbbra is ellenőrzi minden fájl csomagját, verzióját és aláírását.</string>
     <string name="settings_system_apk_download_helper_installed_by">Telepítő: %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Ismeretlen telepítő</string>
+    <string name="settings_system_apk_download_helper_open_directly">Segítő azonnali megnyitása</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Átlépi a letöltési útmutatót, és megnyitja a megbízható segítőt</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Nincs itt fájl</string>
     <string name="file_picker_read_error">Nem lehet beolvasni ezt a könyvtárat</string>

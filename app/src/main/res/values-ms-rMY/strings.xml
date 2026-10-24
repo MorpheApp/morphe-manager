@@ -25,6 +25,7 @@
     <!-- Shown under the app a link was opened for -->
     <!-- Shown when the link was opened for the universal patches of a source, which no app is added with -->
     <!-- Asked when the link names an app of a source that is already added -->
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Kemas kini Morphie tersedia</string>
     <string name="home_update_available_subtitle">Kemas kini baharu tersedia untuk di muat turun</string>
@@ -795,7 +796,6 @@ Tampalan tidak terjejas: aktifkan tampalan prakeluaran untuk setiap sumber dalam
     <string name="settings_system_notifications_categories">Kategori pemberitahuan</string>
     <string name="settings_system_notifications_categories_description">Pilih dalam tetapan sistem kemas kini mana yang memberitahu anda</string>
     <string name="settings_advanced_update_interval">Semak kekerapan</string>
-    <string name="settings_advanced_update_interval_battery_warning">Pemeriksaan latar belakang mungkin tidak berfungsi dengan boleh dipercayai pada beberapa peranti. Pengilang seperti Xiaomi, Huawei, Samsung, dan OnePlus sering kali mengehadkan proses latar belakang dengan agresif untuk menjimatkan bateri</string>
     <string name="settings_advanced_external_batch_patch">Benarkan pencetus luaran</string>
     <string name="external_batch_patch_title">Mula tampalan kelompok?</string>
     <string name="external_batch_patch_description">%s mahu Morphe menampal dan memasang aplikasi</string>
@@ -842,7 +842,6 @@ Tampalan tidak terjejas: aktifkan tampalan prakeluaran untuk setiap sumber dalam
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Masukkan nama tersuai</string>
     <string name="settings_advanced_patch_options_path_gone">Folder ini tidak dapat dibaca lagi. Pilih semula atau kosongkannya, jika tidak tampalan akan berhenti dan bertanya mengenainya</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Ikon aplikasi</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Ikon yang digunakan untuk menampal aplikasi. Ia juga digunakan di tempat aplikasi tidak boleh menukarnya kemudian, seperti Android Auto dan senarai aplikasi dalam tetapan sistem</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Ikon aplikasi tersuai memerlukan folder dengan imej ikon</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Ikon tersuai</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Folder dengan imej untuk digunakan sebagai ikon khusus.

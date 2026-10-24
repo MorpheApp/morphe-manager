@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Gan paisteáil</string>
     <string name="home_no_patches_available">Níl aon phaistí ar fáil</string>
     <string name="home_app_hide_title">An bhfuil tú ag iarraidh an aip seo a cheilt?</string>
+    <string name="home_more_apps_title">Tuilleadh aipeanna</string>
+    <string name="home_more_apps_hide_title">An gceiltfidh tú an cárta seo?</string>
+    <string name="home_more_apps_hide_message">Is féidir leat é a thabhairt ar ais anum túil i Socruithe &gt; Cumhrú &gt; Scáileán baile</string>
     <string name="home_app_hide_message">Beidh an aip seo i bhfolach ón scáileán baile. Is féidir leat é a chur ar ais níos déanaí ó na apps i bhfolach ag baint úsáide as an gcnaipe ag bun an liosta</string>
     <string name="home_app_will_be_hidden">Beidh an aip seo i bhfolach</string>
     <string name="home_app_hidden_named">%s i bhfolach</string>
@@ -31,6 +34,9 @@
     <string name="deep_link_add_source_only_universal">Níl ach na leasáin uilíacha curtha leis. Is féidir leat aipeanna a chur leis ó liosta aipeanna an fhoinse</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Tá an foinse seo san áireamh cheana. An bhfuil fonn ort an aip seo a chur leis ón fhoinsi atá ann cheana?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="mpp_import_update_message">Is leagan nua é seo de %s. An bhfuil tú ag iarraidh é a nuasháiliú?</string>
+    <string name="mpp_import_unreadable">Ní féidir an comhad seo a léamh</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Nuashonrú Morphe ar fáil</string>
     <string name="home_update_available_subtitle">Tá nuashonrú nua ar fáil</string>
@@ -803,6 +809,8 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Taispeánann teachtaireacht ghabhála</string>
     <string name="settings_appearance_repatch_notice">Fógra athphaisteála</string>
     <string name="settings_appearance_repatch_notice_description">Taispeánann sé bratach nuair is féidir aipeanna paisteáilte a phaisteáil arís</string>
+    <string name="settings_appearance_more_apps_card">Cárta tuilleadh aipeanna</string>
+    <string name="settings_appearance_more_apps_card_description">Taispeánann cárta faoi na happs a threoraíonn go dtí patchanna pobail</string>
     <string name="settings_appearance_app_card_colors">Dathanna cártaí aipeanna</string>
     <string name="settings_appearance_app_card_colors_default">Réamhshocrú</string>
     <string name="settings_appearance_app_card_colors_default_description">Tabhair dath a phacáiste féin do gach aip</string>
@@ -867,7 +875,7 @@ Níl tionchar ar phaistí: cumasaigh paistí réamh-eisiúna do gach foinse sa l
     <string name="settings_advanced_update_interval_daily">Go laethúil</string>
     <string name="settings_advanced_update_interval_weekly">Go seachtainiúil</string>
     <string name="settings_advanced_update_interval_monthly">Go míosúil</string>
-    <string name="settings_advanced_update_interval_battery_warning">B’fhéidir nach n-oibreoidh seiceálacha cúlra go hiontaofa ar roinnt gléasanna. Is minic a chuireann monaróirí cosúil le Xiaomi, Huawei, Samsung, agus OnePlus srian dian ar phróisis chúlra chun ceallraí a shábháil.</string>
+    <string name="settings_advanced_update_interval_battery_warning">Seans go mbeidh seiceála cúlra gan iontaobh ar ghléasanna a chuir theorainn ar aipí cúlra, mar shampla Xiaomi, Huawei, Samsung agus OnePlus</string>
     <string name="settings_advanced_external_batch_patch">Ceadaigh spreagthóirí seachtracha</string>
     <string name="settings_advanced_external_batch_patch_description">Ligeann do aipeanna uathoibrithe tús a chur le paisteáil bhaisc</string>
     <string name="external_batch_patch_title">Tosaigh ag paisteáil bhaisc?</string>
@@ -929,7 +937,7 @@ Níl tionchar ar phaistí: cumasaigh paistí réamh-eisiúna do gach foinse sa l
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Cuir isteach ainm saincheaptha</string>
     <string name="settings_advanced_patch_options_path_gone">Ní féidir an fillteán seo a léamh a thuilleadh. Roghnaigh arís é nó glan é; murach sin, stopfaidh an próiseas paisteála agus iarrfar ort cinneadh a dhéanamh ina leith</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Deilbhín aipe</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">An deilbhín a úsáidtear chun an aip a mhodhnú (a \'phatcháil\'). Úsáidtear é freisin i gcásanna nach féidir leis an aip é a athrú níos déanaí, mar shampla in Android Auto agus i liosta na n-aipeanna i socruithe an chórais</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">An aicón a phaisteáiltear leis an aip, úsáidtear é freisin i háiteanna nach féidir é a athrú níos déanaí, mar shampla Android Auto</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Teastaíonn fillteán ina bhfuil íomhánna deilbhín ón deilbhín saincheaptha aip</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Deilbhín saincheaptha</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Fillteán le híomhánna le húsáid mar dheilbhín saincheaptha. Caithfidh ceann amháin nó níos mó de na fillteáin seo a leanas a bheith sa fhillteán, ag brath ar DPI an fheiste:
@@ -1035,7 +1043,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="settings_auto_uninstall_with_shizuku">Díshuiteáil uathoibríoch i gcás coimhlinte</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Díshuiteálann sé an aip atá ann cheana má bhíonn coinbhleacht sínithe ann. D’fhéadfadh sé seo sonraí na haipe a scriosadh.</string>
     <string name="settings_ignore_install_target_rules">Neamhaird a dhéanamh ar riachtanais sprioc shuiteála</string>
-    <string name="settings_ignore_install_target_rules_description">Ligeann sé seo do na ceanglais a bhaineann leis an sprioc-shuiteáil a bheith díchumasaithe, agus do na ceanglais a chuireann an sprioc-shuiteáil as an áireamh a bheith cumasaithe. D’fhéadfadh sé nach n-oibreoidh an aip a bhfuil paiste curtha uirthi.</string>
+    <string name="settings_ignore_install_target_rules_description">Ligeann sé seo do na paisteanna a éiríonn an sprioc-shuiteáil riachtnúla a bheith díchumasaithe, agus do na paisteanna a chuireann an sprioc-shuiteáil as an áireamh a bheith cumasaithe. D’fhéadfadh sé nach n-oibreoidh an aip a bhfuil paiste curtha uirthi</string>
     <string name="settings_auto_uninstall_warning_title">Cumasaigh díshuiteáil uathoibríoch?</string>
     <string name="settings_auto_uninstall_warning_message">Má thuairiscíonn Android coimhlint shínithe le linn uath-shuiteáil Shizuku, díshuiteálfaidh Morphe an aip atá ann cheana sula suiteálfar an APK paiste.</string>
     <string name="settings_auto_uninstall_warning_risk">Féadann sé seo sonraí aipeanna a bhaint. Mura n-éiríonn leis an APK paisteáilte a shuiteáil tar éis é a dhíshuiteáil, seans go bhfuil an aip roimhe seo imithe cheana féin.</string>
@@ -1066,7 +1074,7 @@ Sonraí: %2$s"</string>
     <string name="settings_system_battery_optimization_description">Coinníonn an paisteálaí ag rith nuair a bhíonn an aip íoslaghdaithe</string>
     <string name="settings_system_process_runtime">Am rite an phaitseálaí</string>
     <string name="settings_system_jvm_runtime_enable">Úsáid VM leabaithe</string>
-    <string name="settings_system_jvm_runtime_description">Paistí i VM Java atá á n-iompar ag Morphe, ar féidir leo an oiread cuimhne a úsáid agus atá ar fáil ar an bhfeiste. Múch é seo chun paistí a chur i bhfeidhm ag baint úsáide as am rite Android.</string>
+    <string name="settings_system_jvm_runtime_description">Patchtaí i VM Java féin Morphe, a féidir leo níos mó cuimhne a úsáid. Múch an rogha chun runtime Android a úsáid</string>
     <string name="settings_system_jvm_runtime_unavailable">Teastaíonn gléas ARM nó x86 64-giotán</string>
     <string name="settings_system_patcher_completion_sound">Fuaim críochnaithe</string>
     <string name="settings_system_patcher_completion_sound_description">Seinneann ton ar leith le haghaidh rath nó teip nuair a chríochnaíonn an paisteáil</string>
@@ -1215,6 +1223,8 @@ Sonraí: %2$s"</string>
     <string name="settings_system_apk_download_helper_warning">Tagann an APK ón aip chabhrach, mar sin ná cuir muinín ach in aipeanna a bhfuil aithne agat orthu. Seiceálann Morphe fós an pacáiste, an leagan agus an síniú de gach comhad roimh phaisteáil.</string>
     <string name="settings_system_apk_download_helper_installed_by">Suiteáilte ag %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Suiteálaí anaithnid</string>
+    <string name="settings_system_apk_download_helper_open_directly">Oscail an cúntóir láithreach</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Scaipann sé treorach an íoslódála agus oscailann sé an cúntóir iontaofa</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Níl aon chomhaid anseo</string>
     <string name="file_picker_read_error">Ní féidir an t-eolaire seo a léamh</string>

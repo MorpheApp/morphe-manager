@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Не патчено</string>
     <string name="home_no_patches_available">Немає доступних патчів</string>
     <string name="home_app_hide_title">Приховати цей застосунок?</string>
+    <string name="home_more_apps_title">Більше застосунків</string>
+    <string name="home_more_apps_hide_title">Приховати цю картку?</string>
+    <string name="home_more_apps_hide_message">Ви можете повернути його будь-коли в Налаштування &gt; Вигляд &gt; Головний екран</string>
     <string name="home_app_hide_message">Цей застосунок буде приховано з головного екрану. Ви можете відновити його пізніше, використовуючи кнопку внизу списку</string>
     <string name="home_app_will_be_hidden">Цей застосунок буде приховано</string>
     <string name="home_app_hidden_named">%s приховано</string>
@@ -31,6 +34,9 @@
     <string name="deep_link_add_source_only_universal">Додаються лише універсальні патчі. Застосунки можна додати зі списку застосунків джерела</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Це джерело вже додано. Додати цей застосунок із наявного джерела?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="mpp_import_update_message">Це нова версія %s. Бажаєте оновити її?</string>
+    <string name="mpp_import_unreadable">Цей файл неможливо прочитати</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Доступне оновлення Morphe</string>
     <string name="home_update_available_subtitle">Нова версія готова до встановлення</string>
@@ -803,6 +809,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Показує вітальне повідомлення</string>
     <string name="settings_appearance_repatch_notice">Сповіщення про перепатчинг</string>
     <string name="settings_appearance_repatch_notice_description">Показує банер, коли пропатчені застосунки можна перепатчити</string>
+    <string name="settings_appearance_more_apps_card">Картка \"Більше застосунків\"</string>
+    <string name="settings_appearance_more_apps_card_description">Показує картку під застосунками, що веде до патчів спільноти</string>
     <string name="settings_appearance_app_card_colors">Кольори картки застосунку</string>
     <string name="settings_appearance_app_card_colors_default">Стандартний</string>
     <string name="settings_appearance_app_card_colors_default_description">Надавати кожному застосунку колір його власного пакета</string>
@@ -867,7 +875,7 @@
     <string name="settings_advanced_update_interval_daily">Щодня</string>
     <string name="settings_advanced_update_interval_weekly">Щотижня</string>
     <string name="settings_advanced_update_interval_monthly">Щомісяця</string>
-    <string name="settings_advanced_update_interval_battery_warning">Фонові перевірки можуть не працювати надійно на деяких пристроях. Виробники, такі як Xiaomi, Huawei, Samsung та OnePlus, часто агресивно обмежують фонові процеси, щоб зберегти заряд батареї</string>
+    <string name="settings_advanced_update_interval_battery_warning">Фонові перевірки можуть працювати ненадійно на пристроях, які обмежують фонові застосунки, наприклад Xiaomi, Huawei, Samsung і OnePlus</string>
     <string name="settings_advanced_external_batch_patch">Дозволити зовнішні тригери</string>
     <string name="settings_advanced_external_batch_patch_description">Дозволяє застосункам автоматизації запускати пакетний патчинг</string>
     <string name="external_batch_patch_title">Почати пакетний патчинг?</string>
@@ -929,7 +937,7 @@
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Введіть власну назву</string>
     <string name="settings_advanced_patch_options_path_gone">Ця тека більше не може бути прочитана. Виберіть її знову або очистіть, інакше патчинг зупиниться і запитає про це</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Іконка застосунку</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Іконка, з якою пропатчено застосунок. Вона також використовується там, де застосунок не може змінити її пізніше, наприклад в Android Auto та списку застосунків системних налаштувань</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Іконка, з якою пропатчено застосунок, також використовується там, де її не можна змінити пізніше, наприклад в Android Auto</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Власна іконка застосунку потребує теку із зображеннями іконок</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Власна іконка</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Тека із зображеннями для використання як власної іконки.
@@ -1037,7 +1045,7 @@ morphe_header_custom_dark.png
     <string name="settings_auto_uninstall_with_shizuku">Автоматичне видалення при конфлікті</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Видаляє наявний застосунок у разі конфлікту підписів. Це може призвести до втрати даних застосунку</string>
     <string name="settings_ignore_install_target_rules">Ігнорувати вимоги до типу встановлення</string>
-    <string name="settings_ignore_install_target_rules_description">Дозволяє вимикати патчі, які вимагає об\'єкт встановлення, і вмикати ті, які він виключає. Пропатчений застосунок може не працювати</string>
+    <string name="settings_ignore_install_target_rules_description">Дозволяє вимикати патчі, які вимагає тип встановлення, і вмикати ті, які він виключає. Пропатчений застосунок може не працювати</string>
     <string name="settings_auto_uninstall_warning_title">Увімкнути автоматичне видалення?</string>
     <string name="settings_auto_uninstall_warning_message">Якщо Android повідомляє про конфлікт підпису під час автоматичного встановлення через Shizuku, Morphe видалить наявний застосунок перед встановленням пропатченого APK</string>
     <string name="settings_auto_uninstall_warning_risk">Це може видалити дані застосунку. Якщо встановлення пропатченого APK не вдасться після видалення, попередній застосунок може бути вже втрачено</string>
@@ -1068,7 +1076,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_battery_optimization_description">Утримує патчер активним під час згортання застосунку</string>
     <string name="settings_system_process_runtime">Середовище виконання патчера</string>
     <string name="settings_system_jvm_runtime_enable">Вбудована віртуальна машина</string>
-    <string name="settings_system_jvm_runtime_description">Патчить у віртуальній машині Java, яку Morphe містить у собі, і вона може використовувати стільки пам\'яті, скільки здатен виділити пристрій. Вимкніть, щоб патчити за допомогою середовища виконання Android</string>
+    <string name="settings_system_jvm_runtime_description">Патчить у власній Java VM Morphe, яка може використовувати більше пам\'яті. Вимкніть, щоб використовувати середовище виконання Android</string>
     <string name="settings_system_jvm_runtime_unavailable">Потрібен пристрій ARM або 64-бітний x86</string>
     <string name="settings_system_patcher_completion_sound">Звук завершення</string>
     <string name="settings_system_patcher_completion_sound_description">Відтворює окремий сигнал для успіху або невдачі після завершення патчингу</string>
@@ -1217,6 +1225,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_warning">APK надходить від допоміжного застосунку, тому довіряйте лише знайомим застосункам. Morphe все одно перевіряє пакет, версію та підпис кожного файлу перед патчингом</string>
     <string name="settings_system_apk_download_helper_installed_by">Встановлено %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Інсталятор невідомий</string>
+    <string name="settings_system_apk_download_helper_open_directly">Відразу відкривати допоміжний застосунок</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Пропускає інструкції із завантаження та відкриває довірений допоміжний застосунок</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Тут немає файлів</string>
     <string name="file_picker_read_error">Не вдалося прочитати цю теку</string>

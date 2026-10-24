@@ -27,6 +27,7 @@
     <!-- Shown when the link was opened for the universal patches of a source, which no app is added with -->
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">మూలం ఇప్పటికే జోడించబడింది, ఈ యాప్ని ఇప్పటికే ఉండే మూలం నుంచి జోడించాలా? </string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe అప్డేట్ అందుబాటులో ఉంది</string>
     <string name="home_update_available_subtitle">కొత్త వెర్షన్ ఎక్కించడానికి సిద్ధంగుండి</string>

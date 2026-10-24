@@ -2,22 +2,39 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Іншыя праграмы</string>
+    <string name="home_other_apps_action">Выбраць іншыя праграмы</string>
     <string name="home_not_patched_yet">Яшчэ не прапатчана</string>
+    <string name="home_unpatched_version_installed">Усталявана версія без патчаў</string>
+    <string name="home_unpatched_badge">Не прапатчана</string>
     <string name="home_no_patches_available">Няма даступных патчаў</string>
     <string name="home_app_hide_title">Схаваць гэтую праграму?</string>
+    <string name="home_more_apps_title">Больш праграм</string>
+    <string name="home_more_apps_hide_title">Схаваць гэтую картку?</string>
+    <string name="home_more_apps_hide_message">Вы можаце вярнуць яе ў любы час у Налады &gt; Выгляд &gt; Галоўны экран</string>
     <string name="home_app_hide_message">Гэтая праграма будзе схавана з галоўнага экрана. Вы зможаце пазней яе аднавіць са спіса схаваных праграм з дапамогай кнопкі ўнізе спіса</string>
     <string name="home_app_will_be_hidden">Гэтая праграма будзе схавана</string>
+    <string name="home_app_hidden_named">%s схаваных</string>
+    <string name="home_app_shown_named">%s паказаных</string>
     <string name="home_app_no_hidden">Няма схаваных праграм</string>
     <string name="home_app_hidden_apps_title">Схаваныя праграмы</string>
     <string name="home_app_hidden_apps_hint">Націсніце, каб паказаць</string>
+    <string name="home_apps_unhide_message">Паказаныя праграмы вяртаюцца на галоўны экран</string>
+    <string name="home_app_patch_sources_description">Неадзначаныя крыніцы не прапануюцца пры патчынге гэтых праграм, і іх патчы ніколі не далучаюцца да выбару самастойна. Кожная крыніца застаецца ўключанай для ўсіх астатніх праграм</string>
+    <string name="home_app_patch_sources_mixed">Прапанавана для %1$s з %2$s</string>
+    <string name="home_app_patch_sources_covers">Мае патчы для %1$s з %2$s</string>
+    <string name="home_app_patch_sources_last">Кожнай праграме патрэбна хаця б адна крыніца для патчаў</string>
     <string name="android_11_bug_dialog_title">Памылка Android 11</string>
     <string name="android_11_bug_dialog_description">Дазвол на ўсталёўку праграмы неабходна даць загадзя, каб пазбегнуць памылкі ў сістэме Android 11, якая негатыўна паўплывае на карыстальніцкі досвед</string>
     <string name="deep_link_add_source_title">Дадаць крыніцу</string>
     <string name="deep_link_add_source_message">Вы хочаце дадаць гэтую крыніцу патча ў Morphe?</string>
     <string name="deep_link_add_source_warning">Дадавайце толькі надзейныя крыніцы</string>
     <!-- Shown under the app a link was opened for -->
+    <string name="deep_link_add_source_only_app">Толькі гэтая праграма была дададзена. Вы можаце дадаць іншыя праграмы са спіса праграм крыніцы</string>
     <!-- Shown when the link was opened for the universal patches of a source, which no app is added with -->
+    <string name="deep_link_add_source_only_universal">Дадаюцца толькі ўніверсальныя патчы. Вы можаце дадаваць праграмы са спіса праграм крыніцы</string>
     <!-- Asked when the link names an app of a source that is already added -->
+    <string name="deep_link_add_source_app_back">Гэтая крыніца ўжо дададзена. Дадаць гэтую праграму з існуючай крыніцы?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Даступна абнаўленне Morphe</string>
     <string name="home_update_available_subtitle">Новая версія гатовая да ўстаноўкі</string>
@@ -212,6 +229,8 @@
     <string name="home_file_picker_prompt_title">Выберыце спампаваны APK</string>
     <string name="home_file_picker_prompt_description">Выберыце &lt;b&gt;%s&lt;/b&gt; файл APK, які вы толькі што спампавалі</string>
     <string name="home_file_picker_prompt_open_apk">Адкрыць APK-файл</string>
+    <string name="home_installed_app_picker_title">Усталяваныя праграмы</string>
+    <string name="home_installed_app_picker_empty">Праграмы не знойдзены</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <!-- Home Screen - Home Sub-Dialogs -->
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -232,6 +251,7 @@
     <string name="batch_patch_action">Патч выбраны</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <!-- Label of a footer button beside "Done". Keep it short, a longer one moves the buttons onto two rows -->
+    <string name="shortcut_repatch_long">Перапатчыць састарэлыя праграмы</string>
     <!-- Home Screen - App Info Screen -->
     <!-- Home Screen - Root Mode -->
     <!-- Patcher Screen -->
@@ -263,7 +283,10 @@
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
     <!-- Settings - Appearance Tab - Theme -->
     <!-- Settings - Appearance Tab - Language Selector -->
+    <string name="settings_appearance_app_language">Мова праграмы</string>
+    <string name="settings_appearance_app_language_current">Бягучая мова</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
+    <string name="settings_appearance_ui_scale">Маштаб інтэрфейсу</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -271,6 +294,7 @@
     <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
     <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
     <!-- Notification content -->
+    <string name="notification_channel_mounted_apps">Замацаваныя праграмы</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- "%s" is the GitHub scope name, keep it as is -->

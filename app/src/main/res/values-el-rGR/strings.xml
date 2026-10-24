@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Δεν τροποποιήθηκε</string>
     <string name="home_no_patches_available">Δεν υπάρχουν διαθέσιμες τροποποιήσεις</string>
     <string name="home_app_hide_title"> Απόκρυψη αυτής της εφαρμογής;</string>
+    <string name="home_more_apps_title">Περισσότερες εφαρμογές</string>
+    <string name="home_more_apps_hide_title">Απόκρυψη αυτής της κάρτας;</string>
+    <string name="home_more_apps_hide_message">Μπορείτε να το επαγάγετε ανά πάσα στιγμή στις Ρυθμίσεις &gt; Εμφάνιση &gt; Αρχική οθόνη</string>
     <string name="home_app_hide_message">Αυτή η εφαρμογή θα αποκρυφθεί από την αρχική οθόνη. Μπορείτε να την επαναφέρετε αργότερα από τις κρυφές εφαρμογές χρησιμοποιώντας το κουμπί στο κάτω μέρος της λίστας</string>
     <string name="home_app_will_be_hidden">Αυτή η εφαρμογή θα αποκρυφθεί</string>
     <string name="home_app_hidden_named">%s κρυφές</string>
@@ -31,6 +34,9 @@
     <string name="deep_link_add_source_only_universal">Προσθέτονται μόνο οι καθολικές επιδιορθώσεις. Μπορείτε να προσθέσετε εφαρμογές από τη λίστα εφαρμογών της πηγής</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Αυτή η πηγή έχει ήδη προστεθεί. Να προστεθεί αυτή η εφαρμογή από την υπάρχουσα πηγή;</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="mpp_import_update_message">Αυτή είναι μια νέα έκδοση του %s. Θέλετε να την ενημερώσετε;</string>
+    <string name="mpp_import_unreadable">Αυτό το αρχείο δεν μπορεί να διαβαστεί</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Διαθέσιμη ενημέρωση του Morphe</string>
     <string name="home_update_available_subtitle">Νέα έκδοση έτοιμη για εγκατάσταση</string>
@@ -803,6 +809,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">Εμφανίζει ένα μήνυμα χαιρετισμού</string>
     <string name="settings_appearance_repatch_notice">Ειδοποίηση επανάληψης τροποποιήσεων</string>
     <string name="settings_appearance_repatch_notice_description">Εμφανίζει banner όταν οι διορθωμένες εφαρμογές μπορούν να επαναδιορθωθούν</string>
+    <string name="settings_appearance_more_apps_card">Κάρτα περισσότερων εφαρμογών</string>
+    <string name="settings_appearance_more_apps_card_description">Εμφανίζει μια κάρτα κάτω από τις εφαρμογές που οδηγεί σε κοινοτικά διορθώματα</string>
     <string name="settings_appearance_app_card_colors">Χρώματα καρτών εφαρμογών</string>
     <string name="settings_appearance_app_card_colors_default">Προεπιλογή</string>
     <string name="settings_appearance_app_card_colors_default_description">Δώστε σε κάθε εφαρμογή το χρώμα του δικού της πακέτου</string>
@@ -867,7 +875,7 @@
     <string name="settings_advanced_update_interval_daily">Ημερησίως</string>
     <string name="settings_advanced_update_interval_weekly">Εβδομαδιαία</string>
     <string name="settings_advanced_update_interval_monthly">Μηνιαία</string>
-    <string name="settings_advanced_update_interval_battery_warning">Οι έλεγχοι στο παρασκήνιο μπορεί να μη λειτουργούν σωστά σε ορισμένες συσκευές. Κατασκευαστές όπως Xiaomi, Huawei, Samsung και OnePlus συχνά περιορίζουν σφοδρά τις διαδικασίες παρασκηνίου για να εξοικονομήσουν μπαταρία</string>
+    <string name="settings_advanced_update_interval_battery_warning">Οι έλεγχοι στο παρασκήνιο ενδέχεται να μην εκτελούνται αξιόπιστα σε συσκευές που περιορίζουν τις εφαρμογές παρασκηνίου, όπως Xiaomi, Huawei, Samsung και OnePlus</string>
     <string name="settings_advanced_external_batch_patch">Επιτρέψτε εξωτερικούς ενεργοποιητές</string>
     <string name="settings_advanced_external_batch_patch_description">Επιτρέπει σε αυτοματοποιημένες εφαρμογές να ξεκινούν μαζική διόρθωση</string>
     <string name="external_batch_patch_title">Έναρξη ομαδικής διόρθωσης;</string>
@@ -929,7 +937,7 @@
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Εισαγωγή προσαρμοσμένου ονόματος</string>
     <string name="settings_advanced_patch_options_path_gone">Αυτός ο φάκελος δεν μπορεί να διαβαστεί πλέον. Επιλέξτε τον ξανά ή αφαιρέστε τη διαδρομή, αλλιώς η τροποποίηση θα σταματήσει και θα σας ρωτήσει σχετικά.</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Εικονίδιο εφαρμογής</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Το εικονίδιο με το οποίο τροποποιείται η εφαρμογή. Χρησιμοποιείται επίσης σε μέρη όπου η εφαρμογή δεν μπορεί να το αλλάξει αργότερα, όπως στο Android Auto και στη λίστα εφαρμογών των ρυθμίσεων συστήματος.</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Το εικονίδιο με το οποίο τροποποιείται η εφαρμογή, το οποίο χρησιμοποιείται επίσης εκεί όπου δεν μπορεί να αλλάξει αργότερα, όπως στο Android Auto</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Το προσαρμοσμένο εικονίδιο της εφαρμογής χρειάζεται έναν φάκελο με εικόνες εικονιδίων.</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Προσαρμοσμένο εικονίδιο</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Φάκελος με εικόνες για χρήση ως προσαρμοσμένο εικονίδιο.
@@ -1037,7 +1045,7 @@ morphe_header_custom_dark.png
     <string name="settings_auto_uninstall_with_shizuku">Αυτόματη απεγκατάσταση σε περίπτωση σύγκρουσης</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Απεγκαθιστά την υπάρχουσα εφαρμογή σε σύγκρουση υπογραφής. Αυτό μπορεί να αφαιρέσει δεδομένα εφαρμογής</string>
     <string name="settings_ignore_install_target_rules">Αγνόηση απαιτήσεων στόχου εγκατάστασης</string>
-    <string name="settings_ignore_install_target_rules_description">Επιτρέπει την απενεργοποίηση των απαιτήσεων στόχου εγκατάστασης και την ενεργοποίηση των κανόνων που αποκλείονται. Η τροποποιημένη εφαρμογή ενδέχεται να μην λειτουργεί</string>
+    <string name="settings_ignore_install_target_rules_description">Επιτρέπει την απενεργοποίηση τροποποιήσεων που απαιτεί ο στόχος εγκατάστασης και την ενεργοποίηση εκείνων που αποκλείει. Η τροποποιημένη εφαρμογή ενδέχεται να μην λειτουργεί</string>
     <string name="settings_auto_uninstall_warning_title">Ενεργοποίηση αυτόματης απεγκατάστασης;</string>
     <string name="settings_auto_uninstall_warning_message">Εάν το Android αναφέρει μια σύγκρουση υπογραφών κατά την αυτόματη εγκατάσταση του Shizuku, το Morphe θα απεγκαταστήσει την υπάρχουσα εφαρμογή πριν εγκαταστήσει το διορθωμένο APK.</string>
     <string name="settings_auto_uninstall_warning_risk">Αυτό μπορεί να αφαιρέσει δεδομένα της εφαρμογής. Εάν το διορθωμένο APK αποτύχει να εγκατασταθεί μετά την απεγκατάσταση, η προηγούμενη εφαρμογή ενδέχεται να έχει ήδη διαγραφεί.</string>
@@ -1068,7 +1076,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_battery_optimization_description">Διατηρεί τον επεξεργαστή ενεργό όταν η εφαρμογή είναι ελαχιστοποιημένη</string>
     <string name="settings_system_process_runtime">Χρόνος εκτέλεσης Patcher</string>
     <string name="settings_system_jvm_runtime_enable">Ενεργοποίηση ενσωματωμένης JVM</string>
-    <string name="settings_system_jvm_runtime_description">Τροποποιήσεις σε μια Java VM που φέρνει ο Morphe, η οποία μπορεί να χρησιμοποιήσει όσο μνήμη διαθέτει η συσκευή. Απενεργοποιήστε για τροποποίηση με τον χρόνο εκτέλεσης του Android</string>
+    <string name="settings_system_jvm_runtime_description">Τροποποιήσεις στη δική της Java VM του Morphe, η οποία μπορεί να χρησιμοποιήσει περισσότερη μνήμη. Απενεργοποιήστε για να χρησιμοποιήσετε το runtime του Android</string>
     <string name="settings_system_jvm_runtime_unavailable">Απαιτείται συσκευή ARM ή x86 64-bit</string>
     <string name="settings_system_patcher_completion_sound">Ήχος ολοκλήρωσης</string>
     <string name="settings_system_patcher_completion_sound_description">Αναπαράγει έναν διακριτό τόνο για επιτυχία ή αποτυχία κατά την ολοκλήρωση της επιδιόρθωσης</string>
@@ -1217,6 +1225,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_warning">Το APK προέρχεται από τη βοηθητική εφαρμογή, γι\' αυτό να εμπιστεύεστε μόνο εφαρμογές που γνωρίζετε. Το Morphe εξακολουθεί να ελέγχει το πακέτο, την έκδοση και την υπογραφή κάθε αρχείου πριν από την τροποποίηση.</string>
     <string name="settings_system_apk_download_helper_installed_by">Εγκαταστάθηκε από %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Άγνωστος εγκαταστάτης</string>
+    <string name="settings_system_apk_download_helper_open_directly">Άνοιγμα βοηθού αμέσως</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Παραλείπει τις οδηγίες λήψης και ανοίγει τον έμπιστο βοηθό</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Δεν υπάρχουν αρχεία εδώ</string>
     <string name="file_picker_read_error">Δεν είναι δυνατή η ανάγνωση αυτού του καταλόγου</string>

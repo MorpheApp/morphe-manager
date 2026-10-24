@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">尚未修補</string>
     <string name="home_no_patches_available">沒有可用的修補程式</string>
     <string name="home_app_hide_title">要隱藏這個應用程式嗎？</string>
+    <string name="home_more_apps_title">更多應用程式</string>
+    <string name="home_more_apps_hide_title">要隱藏此卡片嗎？</string>
+    <string name="home_more_apps_hide_message">您可以隨時在「設定 &gt; 外觀 &gt; 主螢幕」中將其恢復</string>
     <string name="home_app_hide_message">此應用程式將從主螢幕隱藏。您之後可以在 [隱藏的應用程式] 中，使用清單底部的按鈕將其還原</string>
     <string name="home_app_will_be_hidden">此應用程式將會隱藏</string>
     <string name="home_app_hidden_named">%s已隱藏</string>
@@ -31,6 +34,9 @@
     <string name="deep_link_add_source_only_universal">僅添加通用修補程式。您可以從來源的應用程式列表中新增應用程式</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">此來源已新增。要從現有來源新增這個應用程式嗎？</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="mpp_import_update_message">這是 %s 的新版本。您想要更新它嗎？</string>
+    <string name="mpp_import_unreadable">此檔案無法讀取</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">有可用的 Morphe 更新</string>
     <string name="home_update_available_subtitle">新版本已準備好安裝</string>
@@ -803,6 +809,8 @@
     <string name="settings_appearance_greeting_phrases_subtitle">顯示問候訊息</string>
     <string name="settings_appearance_repatch_notice">重新修補通知</string>
     <string name="settings_appearance_repatch_notice_description">當修補過的應用程式可再次修補時顯示橫幅通知</string>
+    <string name="settings_appearance_more_apps_card">更多應用程式卡片</string>
+    <string name="settings_appearance_more_apps_card_description">在應用程式下方顯示一個導向社群修補程式的卡片</string>
     <string name="settings_appearance_app_card_colors">應用程式卡片顏色</string>
     <string name="settings_appearance_app_card_colors_default">預設</string>
     <string name="settings_appearance_app_card_colors_default_description">讓每個應用程式都擁有其套件的顏色</string>
@@ -867,7 +875,7 @@
     <string name="settings_advanced_update_interval_daily">每天</string>
     <string name="settings_advanced_update_interval_weekly">每週</string>
     <string name="settings_advanced_update_interval_monthly">每月</string>
-    <string name="settings_advanced_update_interval_battery_warning">在某些裝置上，背景檢查可能無法可靠運作。小米、華為、三星和 OnePlus 等製造商通常會積極限制背景程式以節省電池電量</string>
+    <string name="settings_advanced_update_interval_battery_warning">在限制背景應用程式的裝置（例如 Xiaomi、Huawei、Samsung 和 OnePlus）上，背景檢查可能無法可靠地執行</string>
     <string name="settings_advanced_external_batch_patch">允許外部觸發器</string>
     <string name="settings_advanced_external_batch_patch_description">允許自動化應用程式啟動批次修補</string>
     <string name="external_batch_patch_title">開始批次修補？</string>
@@ -929,7 +937,7 @@
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">輸入自訂名稱</string>
     <string name="settings_advanced_patch_options_path_gone">此資料夾已無法再讀取。請重新選取或將其清除，否則修補會停止並就此詢問</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">應用程式圖示</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">應用程式在修補時使用的圖示。此圖示也會用於應用程式日後無法自行變更的地方，例如 Android Auto 和系統設定中的應用程式清單</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">應用程式修補時使用的圖示，也用於之後無法更改的地方，例如 Android Auto</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">自訂應用程式圖示需要一個包含圖示圖片的資料夾</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">自訂圖示</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"\"包含要作為自訂圖示使用的影像的資料夾。
@@ -1037,7 +1045,7 @@ morphe_header_custom_dark.png
     <string name="settings_auto_uninstall_with_shizuku">衝突時自動解除安裝</string>
     <string name="settings_auto_uninstall_with_shizuku_description">在簽章衝突時解除安裝現有的應用程式。這可能會清除應用程式資料</string>
     <string name="settings_ignore_install_target_rules">忽略安裝目標條件</string>
-    <string name="settings_ignore_install_target_rules_description">關閉安裝目標的檢查規則並啟用相關排除規則。 已修補的應用程式可能會無法正常運作</string>
+    <string name="settings_ignore_install_target_rules_description">允許關閉安裝目標要求的修補程式，並啟用其排除的修補程式。修補後的應用程式可能無法正常運作</string>
     <string name="settings_auto_uninstall_warning_title">要啟用自動解除安裝嗎？</string>
     <string name="settings_auto_uninstall_warning_message">若 Android 在 Shizuku 自動安裝期間回報簽名衝突，Morphe 將在安裝已修補的 APK 之前先解除安裝現有的應用程式</string>
     <string name="settings_auto_uninstall_warning_risk">這可能會刪除應用程式資料。若在解除安裝後無法安裝已修補的 APK，原本的應用程式可能已經遺失</string>
@@ -1066,7 +1074,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_battery_optimization_description">即使應用程式被最小化，也會保持修補程式的執行</string>
     <string name="settings_system_process_runtime">修補程式執行階段</string>
     <string name="settings_system_jvm_runtime_enable">使用內建 VM</string>
-    <string name="settings_system_jvm_runtime_description">在 Morphe 所搭載的 Java VM 中進行修補，可使用裝置閒置的任何記憶體。關閉以使用 Android 執行組件環境進行修補</string>
+    <string name="settings_system_jvm_runtime_description">Morphe 自有的 Java VM 補丁，可以使用更多記憶體。關閉以使用 Android 的運行時</string>
     <string name="settings_system_jvm_runtime_unavailable">需要ARM架構或64位元x86架構的裝置</string>
     <string name="settings_system_patcher_completion_sound">完成音效</string>
     <string name="settings_system_patcher_completion_sound_description">修補完成時，成功或失敗會播放不同的提示音</string>
@@ -1215,6 +1223,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_warning">APK 來自輔助應用程式，因此請只信任你認識的應用程式。Morphe 仍會在修補前檢查每個檔案的套件、版本與簽章。</string>
     <string name="settings_system_apk_download_helper_installed_by">由 %s 安裝</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">安裝者未知</string>
+    <string name="settings_system_apk_download_helper_open_directly">立即開啟助手</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">跳過下載說明並開啟信任的助手</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">這裡沒有檔案</string>
     <string name="file_picker_read_error">無法讀取此目錄</string>

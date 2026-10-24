@@ -8,6 +8,9 @@
     <string name="home_unpatched_badge">Tidak ditambal</string>
     <string name="home_no_patches_available">Tidak ada tambalan yang tersedia</string>
     <string name="home_app_hide_title">Sembunyikan aplikasi ini?</string>
+    <string name="home_more_apps_title">Lebih banyak aplikasi</string>
+    <string name="home_more_apps_hide_title">Sembunyikan kartu ini?</string>
+    <string name="home_more_apps_hide_message">Anda dapat mengembalikannya kapan saja di Pengaturan &gt; Tampilan &gt; Layar utama</string>
     <string name="home_app_hide_message">Aplikasi ini akan disembunyikan dari layar beranda. Anda dapat mengembalikannya nanti dari aplikasi tersembunyi menggunakan tombol di bagian bawah daftar</string>
     <string name="home_app_will_be_hidden">Aplikasi ini akan disembunyikan</string>
     <string name="home_app_hidden_named">%s disembunyikan</string>
@@ -31,6 +34,9 @@
     <string name="deep_link_add_source_only_universal">Hanya tambalan universal yang ditambahkan. Anda dapat menambahkan aplikasi dari daftar aplikasi sumber</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Sumber ini sudah ditambahkan. Tambahkan aplikasi ini dari sumber yang sudah ada?</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="mpp_import_update_message">Ini adalah versi baru dari %s. Apakah Anda ingin memperbaruinya?</string>
+    <string name="mpp_import_unreadable">Berkas ini tidak dapat dibaca</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Pembaruan Morphe tersedia</string>
     <string name="home_update_available_subtitle">Versi baru siap dipasang</string>
@@ -804,6 +810,8 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Menampilkan pesan sapaan</string>
     <string name="settings_appearance_repatch_notice">Notifikasi penambalan ulang</string>
     <string name="settings_appearance_repatch_notice_description">Menampilkan spanduk ketika aplikasi yang telah ditambal dapat ditambal ulang</string>
+    <string name="settings_appearance_more_apps_card">Kartu lebih banyak aplikasi</string>
+    <string name="settings_appearance_more_apps_card_description">Menampilkan kartu di bawah aplikasi yang mengarah ke patch komunitas</string>
     <string name="settings_appearance_app_card_colors">Warna kartu aplikasi</string>
     <string name="settings_appearance_app_card_colors_default">Bawaan</string>
     <string name="settings_appearance_app_card_colors_default_description">Beri setiap aplikasi warna dari paketnya sendiri</string>
@@ -868,7 +876,7 @@ Tambalan tidak terpengaruh: aktifkan tambalan pra-rilis untuk setiap sumber dala
     <string name="settings_advanced_update_interval_daily">Harian</string>
     <string name="settings_advanced_update_interval_weekly">Mingguan</string>
     <string name="settings_advanced_update_interval_monthly">Bulanan</string>
-    <string name="settings_advanced_update_interval_battery_warning">Periksa latar belakang mungkin tidak bekerja dengan baik pada beberapa perangkat. Produsen seperti Xiaomi, Huawei, Samsung, dan OnePlus sering membatasi proses latar belakang untuk menghemat baterai</string>
+    <string name="settings_advanced_update_interval_battery_warning">Pemeriksaan latar belakang mungkin tidak berjalan dengan andal pada perangkat yang membatasi aplikasi latar belakang, seperti Xiaomi, Huawei, Samsung, dan OnePlus</string>
     <string name="settings_advanced_external_batch_patch">Izinkan pemicu eksternal</string>
     <string name="settings_advanced_external_batch_patch_description">Memungkinkan aplikasi otomatisasi memulai penambalan batch</string>
     <string name="external_batch_patch_title">Mulai penambalan massal?</string>
@@ -930,7 +938,7 @@ Tambalan tidak terpengaruh: aktifkan tambalan pra-rilis untuk setiap sumber dala
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Masukkan nama kustom</string>
     <string name="settings_advanced_patch_options_path_gone">Folder ini tidak dapat dibaca lagi. Pilih ulang atau hapus, jika tidak proses menambal akan berhenti dan menanyakannya</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Ikon aplikasi</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Ikon yang digunakan untuk menambal aplikasi. Ikon ini juga digunakan di tempat di mana aplikasi tidak dapat mengubahnya nanti, seperti Android Auto dan daftar aplikasi pada pengaturan sistem</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Ikon yang digunakan untuk menambal aplikasi, juga digunakan di tempat yang tidak dapat diubah nantinya, seperti Android Auto</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Ikon aplikasi kustom membutuhkan folder berisi gambar ikon</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Ikon kustom</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Folder yang berisi gambar untuk digunakan sebagai ikon kustom.
@@ -1038,7 +1046,7 @@ Dimensi gambar harus sebagai berikut:
     <string name="settings_auto_uninstall_with_shizuku">Copot otomatis jika terjadi konflik</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Membubarkan aplikasi yang ada jika terjadi konflik tanda tangan. Hal ini dapat menghapus data aplikasi</string>
     <string name="settings_ignore_install_target_rules">Abaikan persyaratan target instalasi</string>
-    <string name="settings_ignore_install_target_rules_description">Memungkinkan aturan target instalasi dimatikan dan aturan yang dikecualikan diaktifkan. Aplikasi yang telah dimodifikasi mungkin tidak berfungsi</string>
+    <string name="settings_ignore_install_target_rules_description">Memungkinkan untuk menonaktifkan tambalan yang diperlukan target instalasi dan mengaktifkan tambalan yang dilarang. Aplikasi yang ditambal mungkin tidak berfungsi</string>
     <string name="settings_auto_uninstall_warning_title">Aktifkan copot otomatis?</string>
     <string name="settings_auto_uninstall_warning_message">Jika Android melaporkan konflik tanda tangan selama pemasangan otomatis Shizuku, Morphe akan mencopot aplikasi yang ada sebelum memasang APK hasil tambalan</string>
     <string name="settings_auto_uninstall_warning_risk">Ini dapat menghapus data aplikasi. Jika APK hasil tambalan gagal dipasang setelah pencopotan, aplikasi sebelumnya mungkin sudah hilang</string>
@@ -1069,7 +1077,7 @@ Rincian: %2$s"</string>
     <string name="settings_system_battery_optimization_description">Menjaga penambal tetap berjalan saat aplikasi diminimalkan</string>
     <string name="settings_system_process_runtime">Runtime patcher</string>
     <string name="settings_system_jvm_runtime_enable">Gunakan VM bawaan</string>
-    <string name="settings_system_jvm_runtime_description">Patch di dalam Java VM yang dibawa oleh Morphe, yang dapat menggunakan memori sebanyak yang tersedia pada perangkat. Matikan untuk melakukan patch dengan runtime Android</string>
+    <string name="settings_system_jvm_runtime_description">Menambal di Java VM milik Morphe sendiri, yang dapat menggunakan lebih banyak memori. Nonaktifkan untuk menggunakan runtime Android</string>
     <string name="settings_system_jvm_runtime_unavailable">Membutuhkan perangkat ARM atau 64-bit x86</string>
     <string name="settings_system_patcher_completion_sound">Suara penyelesaian</string>
     <string name="settings_system_patcher_completion_sound_description">Memainkan nada berbeda untuk keberhasilan atau kegagalan saat penambalan selesai</string>
@@ -1218,6 +1226,8 @@ Rincian: %2$s"</string>
     <string name="settings_system_apk_download_helper_warning">APK berasal dari aplikasi pembantu, jadi hanya percayai aplikasi yang Anda kenal. Morphe tetap memeriksa paket, versi, dan tanda tangan setiap file sebelum menambal.</string>
     <string name="settings_system_apk_download_helper_installed_by">Diinstal oleh %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Penginstal tidak diketahui</string>
+    <string name="settings_system_apk_download_helper_open_directly">Buka pembantu segera</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Melewati instruksi pengunduhan dan membuka pembantu terpercaya</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Tidak ada berkas di sini</string>
     <string name="file_picker_read_error">Tidak dapat membaca direktori ini</string>

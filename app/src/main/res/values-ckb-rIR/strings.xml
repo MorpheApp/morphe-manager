@@ -2,26 +2,52 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">ئەپەکانی تر</string>
+    <string name="home_other_apps_action">ئەپی تریش هەڵبژێرە</string>
     <string name="home_not_patched_yet">پینە نەکراوە هێشتا</string>
+    <string name="home_unpatched_version_installed">ڤێرژنێکی بێپاتچکراو دابەزێندراوە</string>
+    <string name="home_unpatched_badge">پاتچ نەکراوە</string>
     <string name="home_no_patches_available">هیچ پینەیەک بەردەست نیە</string>
     <string name="home_app_hide_title">شاردنەوەی ئەم ئەپە ؟</string>
     <string name="home_app_hide_message">ئەم ئەپە لە شاشەی سەرەکی دەشاردرێتەوە.  دەتوانیت دواتر لە ئەپە شاراوەکانەوە بیگەڕێنیتەوە بە بەکارهێنانی دوگمەی خوارەوەی لیستەکە</string>
     <string name="home_app_will_be_hidden">ئەم ئەپە دەبێتە شاراوە</string>
+    <string name="home_app_hidden_named">%s شاردراوەتەوە</string>
+    <string name="home_app_shown_named">%s پشاندراوە</string>
     <string name="home_app_no_hidden">ئەپی شاراوە نیە</string>
     <string name="home_app_hidden_apps_title">ئەپە شاراوەکان</string>
     <string name="home_app_hidden_apps_hint">دەست لێبدە بۆ دەرخستنەوە</string>
+    <string name="home_apps_unhide_message">ئەپە نەشاردراوەکان دەچنەوە هۆم سکرین</string>
+    <string name="home_app_patch_sources_description">ئەو سەرچاوانەی کە بەبێ تیک ماونەتەوە بەکارنایەن کاتێک ئەم ئەپانە پاتچ دەکرێن، وە پاچەکانیشیان نایەنە ناو هەڵبژاردەکە. هەر سەرچاوەیەک بە پێکراوی دەمێنێتەوە بۆ هەر ئەپێکی تر</string>
+    <string name="home_app_patch_sources_mixed">ئۆفەرکراوە بۆ %1$s ی %2$s</string>
+    <string name="home_app_patch_sources_covers"> پاتچی هەیە بۆ  %1$s ی %2$s</string>
+    <string name="home_app_patch_sources_last">هەر ئەپێک پێویستی بە یەک سەرچاوەیە بۆ ئەوەی لێی پاتچ بکرێت</string>
     <string name="android_11_bug_dialog_title">کەلێنی ئەندرۆید ١١ </string>
     <string name="android_11_bug_dialog_description">پێویستە پێشوەختە مۆڵەتی دامەزراندنی ئەپەکە بدرێت بۆ ئەوەی هەڵەیەک لە سیستەمی ئەندرۆید ١١ ڕوونەدات کە کاریگەری نەرێنی لەسەر ئەزموونی بەکارهێنەر دەبێت</string>
     <string name="deep_link_add_source_title">زیادکردنی سەرچاوە</string>
     <string name="deep_link_add_source_message">دەتەوێت ئەم سەرچاوەی پاچە زیاد بکەیت بۆ Morphe؟</string>
     <string name="deep_link_add_source_warning">تەنها ئەو سەرچاوانە زیاد بکە کە متمانەت پێیانە</string>
     <!-- Shown under the app a link was opened for -->
+    <string name="deep_link_add_source_only_app">تەنیا ئەم ئەپە زیادکراوە. دەتوانیت ئەپی تریش زیادبکەیت لە لیستی ئەپەکانی سەرچاوە</string>
     <!-- Shown when the link was opened for the universal patches of a source, which no app is added with -->
+    <string name="deep_link_add_source_only_universal">تەنیا پاتچە جیهانیەکان زیادکراون. دەتوانیت ئەپەکان زیادبکەیت لە لیستی ئەپەکانی سەرچاوە</string>
     <!-- Asked when the link names an app of a source that is already added -->
+    <string name="deep_link_add_source_app_back">ئەم سەرچاوەیە زیادکراوە. ئەم ئەپە لە سەرچاوەیەک زیاد بکە کە هەبێت؟</string>
+    <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe نوێکردنەوە بەردەستە</string>
     <string name="home_update_available_subtitle">وەشانی نوێ ئامادەیە بۆ دابەزاندن</string>
+    <string name="home_blocked_source_title">سەرچاوەی پاتچ بلۆککراو دۆزراوەتەوە</string>
+    <string name="home_blocked_source_subtitle">دایبگرە بۆ پێداچوونەوە و سڕینەوە</string>
+    <string name="home_metadata_errors_title">هەندێک سەرچاوەی پاتچ دەردەست نین</string>
+    <string name="home_metadata_errors_subtitle">دایبگرە بۆ پێداچوونەوەی سەرچاوەکان</string>
+    <string name="home_outdated_manager_title">Morphe کاتی نەماوە</string>
+    <string name="home_outdated_manager_subtitle">هەندێک سەرچاوەی پاتچ پێویستان بە ڤێرژنی نوێیە</string>
+    <string name="home_held_back_title">سەرچاوەیەکی پاتچ morphe تێکدا</string>
+    <string name="home_held_back_subtitle">فەرامۆشکرا تا ئەپەکە بتوانێت دەستپێبکات. پەنجە بنێ بۆ پێداچوونەوە</string>
+    <string name="home_metered_skipped_title">ئەپدەیتەکان ڕاگیراون لە ئینتەرنێتی مۆبایل</string>
+    <string name="home_metered_skipped_subtitle">دایبگرە تا ڕێگەبدەی ئەپدەیتەکان لەڕێگەی ئینتەرنێتی مۆبایلەوە بێت</string>
+    <string name="home_repatch_available_subtitle">پەنجە بنێ تا هەموویان لە سڕە دابنێیت</string>
     <string name="home_update_error">نوێکردنەوە شکستس هێنا</string>
+    <string name="home_update_error_subtitle">لەکاتی ئەپدەیتکردنەوەی سەرچاوەکان هەڵەیەک ڕویدا</string>
     <string name="home_update_skipped_metered">نوێکردنەوەکان پەڕێندرا</string>
     <string name="home_update_skipped_metered_subtitle">داتای مۆبایل چاڵاکە</string>
     <string name="home_updating_sources">نوێکردنەوەی سەرچاوەکان...</string>
@@ -29,7 +55,20 @@
     <string name="home_update_success_subtitle">سەرچاوەکانت نوێن</string>
     <string name="home_sources_are_loading">سەرچاوەکان باردەکرێن، تکایە چاوەڕوان بە...</string>
     <string name="home_search_apps">گەڕانی ئەپەکان</string>
+    <string name="list_options_title">ڕیز و فلتەر</string>
+    <string name="list_options_state_description">ڕیزکراوە بە %1$s, فلتەرکراوە بە %2$s</string>
+    <string name="home_app_filter_all_description">هەر ئەپیک لە هۆمسکرین</string>
+    <string name="home_app_filter_patched_description">ئەو ئەپانەی کە پاتچ یان خەزنت کردووە لەگەڵ Morphe</string>
+    <string name="home_app_filter_not_patched_description">ئەو ئەپانەی هێشتا پاتچ نەکردووە لە morphe</string>
+    <string name="home_app_filter_installed_description">ئەو ئەپانەی لە ئێستادا دابەزێنراون لەم ئامێرەدا</string>
+    <string name="home_app_filter_uninstalled_description">ئەو ئەپانەی پاتچکراون بە morphe کە لەناو موبایلەکەتدا نەماون</string>
+    <string name="home_app_filter_clones">دوانەکان</string>
+    <string name="home_app_filter_clones_description">ئەو ئەپانەی کە لە ژێر ناوی پاکێجێکی تایبەت بە خۆیان دروستکراون، شانبەشانی ئەسڵی دابەزێندراون</string>
     <string name="home_app_grouping_none">هیچ</string>
+    <string name="home_app_grouping_all_apps_description">یەک لیست لەگەر هەر ئەپێک</string>
+    <string name="home_app_grouping_sources_description">ئەو ئەپانەی کە سەرچاوەی پاتچ لەخۆیان دەگرێت</string>
+    <string name="home_app_grouping_custom_description">ئەپەکان لەو پۆلانەی کە دروستی دەکەیت</string>
+    <string name="home_app_sort_manual_description">داگرتنی درێژ لە ئەپێک بکە، پاشان دوگمەی دووبارە ڕێکخستنەوە دابگە</string>
     <string name="home_no_apps_title">هیچ ئەپێک بەردەست نیە</string>
     <string name="home_no_apps_subtitle">سەرچاوەی پاچ زیاد بکە یان سەرچاوەیەکی هەبوو لە %s چالاک بکە</string>
     <string name="home_no_apps_search_subtitle">هیچ ئەپێک ناگونجێ لەگەڵ \"%s\"</string>
@@ -410,7 +449,6 @@
     <string name="settings_advanced_updates_background_notifications_description">بە خوولی پشکنین بۆ نوێکردنەوەکان لە باکگراوند و ئاگادارکردنەوە بکە کاتێک بەردەست بوو</string>
     <string name="settings_advanced_update_interval">پشکنینی فریکوێنس</string>
     <string name="settings_advanced_update_interval_daily">ڕۆژانە</string>
-    <string name="settings_advanced_update_interval_battery_warning">لەوانەیە پشکنینی پاشبنەما بە شێوەیەکی باوەڕپێکراو کار نەکات لەسەر هەندێک ئامێر. بەرهەمهێنەرانی وەک شیاومی، هواوی، سامسۆنگ و وەن پڵەس زۆرجار پرۆسەکانی پاشخان سنووردار دەکەن بۆ پاشەکەوت کردنی پاتری.</string>
     <!-- Notification content -->
     <string name="notification_bundle_update_title">پینەی نوێ بەردەستە</string>
     <string name="notification_update_text">وەشانی %s ئامادەیە بۆ دابەزاندن</string>
