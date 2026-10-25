@@ -12,6 +12,7 @@ import android.os.SystemClock
 import android.util.Log
 import app.morphe.manager.util.PLAY_STORE_INSTALLER_PACKAGE
 import app.morphe.manager.util.PM
+import app.morphe.manager.domain.manager.PreferencesManager
 import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +29,8 @@ private const val TAG = "Morphe RootInstaller"
 
 class RootInstaller(
     private val app: Application,
-    private val pm: PM
+    private val pm: PM,
+    private val prefs: PreferencesManager
 ) {
     @Volatile
     private var cachedHasRoot: Boolean? = null
@@ -110,14 +112,6 @@ class RootInstaller(
      */
     suspend fun isNoMountAvailable() = noMountBin() != null
 
-    // Selection must survive an unavailable driver, a missing CLI, and a reboot. Once selected,
-    // this module must never silently switch back to bind mounts.
-    private suspend fun usesNoMount(packageName: String) = execute(
-        "test -f ${"$MODULES_PATH/${moduleId(packageName)}/$NO_MOUNT_MARKER".shellQuote()} || " +
-                "test -d /data/adb/modules/nomount || " +
-                NO_MOUNT_BINS.joinToString(" || ") { "test -e ${it.shellQuote()}" }
-    ).isSuccess
-
     /**
      * The NoMount CLI, when its driver is loaded and speaks the protocol of the UID scoped rules.
      * Rechecked now and then, as the module can be installed or removed while Morphe runs.
@@ -165,11 +159,15 @@ class RootInstaller(
             // The redirect leaves system_server on the stock APK, so a framework restart scans that
             // one and needs no watcher. Whatever a bind mount left behind is lifted first, and only
             // the rule decides whether the redirect took
-            if (usesNoMount(packageName)) {
-                execute("touch ${"$MODULES_PATH/${moduleId(packageName)}/$NO_MOUNT_MARKER".shellQuote()}")
-                    .assertSuccess("Failed to record NoMount mode")
+            val noMountOnly = prefs.noMountOnly.get()
+            val marker = "$MODULES_PATH/${moduleId(packageName)}/$NO_MOUNT_MARKER".shellQuote()
+            execute("printf '%s' '${if (noMountOnly) "1" else "0"}' > $marker")
+                .assertSuccess("Failed to record NoMount mode")
+            val nm = noMountBin()?.shellQuote()
+            var redirected = false
+            if (noMountOnly || nm != null) {
                 execute(unmountBindCommands(stockPath) + "; " + frameworkWatcherCommand(packageName, "stop"))
-                val nm = noMountBin()?.shellQuote() ?: run {
+                if (nm == null) {
                     execute(moduleStatusCommand(packageName, "NoMount unavailable; bind mounts disabled"))
                     error("NoMount driver unavailable or unsupported; bind mounts disabled")
                 }
@@ -178,10 +176,13 @@ class RootInstaller(
                             noMountRemoveCommand(nm, stockPath) + "; " +
                             "$nm rule add $NO_MOUNT_SCOPE $stockPath $patchedPath"
                 )
-                if (!result.isSuccess) {
+                if (!result.isSuccess && noMountOnly) {
                     execute(moduleStatusCommand(packageName, "NoMount redirect failed; bind mounts disabled"))
                     result.assertSuccess("NoMount redirect failed; bind mounts disabled")
                 }
+                redirected = result.isSuccess
+            }
+            if (redirected) {
                 execute(moduleStatusCommand(packageName, "Redirected the patched APK in Morphe with NoMount") + "; " + forceStop)
             } else {
                 // Set SELinux context, bind-mount in the root and zygote namespaces, replace any other
@@ -246,7 +247,7 @@ class RootInstaller(
         // Use new path for new installations
         val moduleId = moduleId(packageName)
         val modulePath = "$MODULES_PATH/$moduleId"
-        val useNoMount = usesNoMount(packageName)
+        val noMountOnly = prefs.noMountOnly.get()
 
         unmount(packageName)
         removeOtherRootInstalls(packageName)
@@ -307,7 +308,7 @@ class RootInstaller(
         } else {
             emptyMap()
         }
-        val backendFiles = if (useNoMount) mapOf(NO_MOUNT_MARKER to "") else emptyMap()
+        val backendFiles = mapOf(NO_MOUNT_MARKER to if (noMountOnly) "1" else "0")
         val textFiles = (moduleFiles + stockPathsFile + backendFiles).mapKeys { (name, _) -> "$modulePath/$name" }
         stageModuleFiles(modulePath, textFiles)
 

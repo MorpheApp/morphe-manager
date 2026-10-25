@@ -234,6 +234,10 @@ class SettingsViewModel(
         if (enabled) prefs.promptInstallerOnInstall.update(false)
     }
 
+    fun setNoMountOnly(enabled: Boolean) = viewModelScope.launch {
+        prefs.noMountOnly.update(enabled)
+    }
+
     fun setAutoUninstallWithShizuku(enabled: Boolean) = viewModelScope.launch {
         prefs.autoUninstallWithShizuku.update(enabled)
     }

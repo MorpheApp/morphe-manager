@@ -30,6 +30,7 @@ fun InstallerSettings(settingsViewModel: SettingsViewModel = koinViewModel()) {
     }
 
     val autoInstallEnabled by prefs.autoInstallAfterPatching.getAsState()
+    val noMountOnly by prefs.noMountOnly.getAsState()
     val autoUninstallEnabled by prefs.autoUninstallWithShizuku.getAsState()
     val promptEnabled by prefs.promptInstallerOnInstall.getAsState()
     val ignoreTargetRulesEnabled by prefs.ignoreInstallTargetRules.getAsState()
@@ -65,6 +66,17 @@ fun InstallerSettings(settingsViewModel: SettingsViewModel = koinViewModel()) {
                 shizukuStatusProvider = settingsViewModel::getShizukuStatus,
                 onRequestShizukuPermission = settingsViewModel::requestShizukuPermission
             )
+            FoldingVisibility(visible = primaryToken.isRootMount) {
+                SettingsGroup {
+                    SettingsSwitchItem(
+                        checked = noMountOnly,
+                        onToggle = { settingsViewModel.setNoMountOnly(!noMountOnly) },
+                        icon = MaterialSymbols.Rounded.Lock,
+                        title = stringResource(R.string.settings_nomount_only),
+                        subtitle = stringResource(R.string.settings_nomount_only_description)
+                    )
+                }
+            }
         }
 
         SettingsSection(

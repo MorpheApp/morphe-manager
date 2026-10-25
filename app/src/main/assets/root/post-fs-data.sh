@@ -18,11 +18,8 @@ log_msg() {
   echo "$*" >> "$log"
 }
 
-# Select by installation, not driver readiness: post-fs-data can run before the driver loads.
-# Keep this choice even if NoMount later breaks or is removed.
-if [ -f "$module_dir/nomount-only" ] || [ -d /data/adb/modules/nomount ] ||
-   [ -e /data/adb/modules/nomount/bin/nm ] || [ -e /data/adb/ksu/bin/nm ] || [ -e /data/adb/ap/bin/nm ]; then
-  touch "$module_dir/nomount-only" || exit 1
+# This is the user's policy, not a cached driver probe. Empty legacy markers also mean strict.
+if [ -f "$module_dir/nomount-only" ] && [ "$(cat "$module_dir/nomount-only")" != 0 ]; then
   log_msg "Skipping all stock mounts; NoMount mode"
   exit 0
 fi
@@ -85,6 +82,21 @@ while IFS= read -r path; do
   esac
 done < "$stock_paths"
 
+# Automatic mode retains the stock mount over hidden system APKs. The driver may load later;
+# service.sh will then lift the installed APK's mount before redirecting it.
+nomount_ready() {
+  for nm in /data/adb/modules/nomount/bin/nm /data/adb/ksu/bin/nm /data/adb/ap/bin/nm; do
+    [ -x "$nm" ] || continue
+    protocol="$("$nm" version 2>/dev/null)" || continue
+    [ "${protocol%% *}" -ge 22 ] 2>/dev/null && return 0
+  done
+  return 1
+}
+redirect_installed=0
+nomount_ready && redirect_installed=1
 while IFS= read -r path; do
+  case "$path" in
+    /data/app/*) [ "$redirect_installed" = 1 ] && continue ;;
+  esac
   mount_stock_path "$path"
 done < "$stock_paths"

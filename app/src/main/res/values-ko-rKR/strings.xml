@@ -1036,6 +1036,8 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_continue">알겠습니다. 계속하겠습니다</string>
     <string name="installer_play_store_mode">Play 스토어로 설치</string>
     <string name="installer_play_store_mode_description">Google Play 스토어를 설치 출처로 지정합니다</string>
+    <string name="settings_nomount_only">NoMount only</string>
+    <string name="settings_nomount_only_description">루트 앱에 Bind Mount를 사용하지 않습니다. NoMount를 사용할 수 없으면 마운트가 실패합니다.</string>
     <string name="settings_prompt_installer_on_install">설치 프로그램 선택 프롬프트</string>
     <string name="settings_prompt_installer_on_install_description">모든 앱의 설치 방법을 묻습니다: 패치 전에 루트 권한이 있어야 하고, 그렇지 않으면 패치 후에 설치합니다</string>
     <string name="settings_auto_install_with_shizuku">패치 후 자동 설치</string>
