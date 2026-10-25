@@ -110,6 +110,14 @@ class RootInstaller(
      */
     suspend fun isNoMountAvailable() = noMountBin() != null
 
+    // Selection must survive an unavailable driver, a missing CLI, and a reboot. Once selected,
+    // this module must never silently switch back to bind mounts.
+    private suspend fun usesNoMount(packageName: String) = execute(
+        "test -f ${"$MODULES_PATH/${moduleId(packageName)}/$NO_MOUNT_MARKER".shellQuote()} || " +
+                "test -d /data/adb/modules/nomount || " +
+                NO_MOUNT_BINS.joinToString(" || ") { "test -e ${it.shellQuote()}" }
+    ).isSuccess
+
     /**
      * The NoMount CLI, when its driver is loaded and speaks the protocol of the UID scoped rules.
      * Rechecked now and then, as the module can be installed or removed while Morphe runs.
@@ -157,19 +165,23 @@ class RootInstaller(
             // The redirect leaves system_server on the stock APK, so a framework restart scans that
             // one and needs no watcher. Whatever a bind mount left behind is lifted first, and only
             // the rule decides whether the redirect took
-            val redirected = noMountBin()?.shellQuote()?.let { nm ->
-                execute(
+            if (usesNoMount(packageName)) {
+                execute("touch ${"$MODULES_PATH/${moduleId(packageName)}/$NO_MOUNT_MARKER".shellQuote()}")
+                    .assertSuccess("Failed to record NoMount mode")
+                execute(unmountBindCommands(stockPath) + "; " + frameworkWatcherCommand(packageName, "stop"))
+                val nm = noMountBin()?.shellQuote() ?: run {
+                    execute(moduleStatusCommand(packageName, "NoMount unavailable; bind mounts disabled"))
+                    error("NoMount driver unavailable or unsupported; bind mounts disabled")
+                }
+                val result = execute(
                     "chcon u:object_r:apk_data_file:s0 $patchedPath; " +
-                            unmountBindCommands(stockPath) + "; " +
-                            frameworkWatcherCommand(packageName, "stop") + "; " +
                             noMountRemoveCommand(nm, stockPath) + "; " +
                             "$nm rule add $NO_MOUNT_SCOPE $stockPath $patchedPath"
-                ).also { result ->
-                    if (!result.isSuccess) Log.w(TAG, "NoMount redirect failed, bind mounting instead: ${result.failureDetail()}")
-                }.isSuccess
-            } == true
-
-            if (redirected) {
+                )
+                if (!result.isSuccess) {
+                    execute(moduleStatusCommand(packageName, "NoMount redirect failed; bind mounts disabled"))
+                    result.assertSuccess("NoMount redirect failed; bind mounts disabled")
+                }
                 execute(moduleStatusCommand(packageName, "Redirected the patched APK in Morphe with NoMount") + "; " + forceStop)
             } else {
                 // Set SELinux context, bind-mount in the root and zygote namespaces, replace any other
@@ -234,6 +246,7 @@ class RootInstaller(
         // Use new path for new installations
         val moduleId = moduleId(packageName)
         val modulePath = "$MODULES_PATH/$moduleId"
+        val useNoMount = usesNoMount(packageName)
 
         unmount(packageName)
         removeOtherRootInstalls(packageName)
@@ -294,7 +307,8 @@ class RootInstaller(
         } else {
             emptyMap()
         }
-        val textFiles = (moduleFiles + stockPathsFile).mapKeys { (name, _) -> "$modulePath/$name" }
+        val backendFiles = if (useNoMount) mapOf(NO_MOUNT_MARKER to "") else emptyMap()
+        val textFiles = (moduleFiles + stockPathsFile + backendFiles).mapKeys { (name, _) -> "$modulePath/$name" }
         stageModuleFiles(modulePath, textFiles)
 
         val patchedModuleApk = "$modulePath/$packageName.apk"
@@ -578,6 +592,7 @@ class RootInstaller(
         private val MODULE_SCRIPTS = listOf("service.sh", "post-fs-data.sh")
         private val MODULE_FILES = MODULE_SCRIPTS + "module.prop"
         private const val STOCK_PATHS_FILE = "stock-paths.txt"
+        private const val NO_MOUNT_MARKER = "nomount-only"
 
         /** Where NoMount puts its CLI, linked next to the root manager's own tools. */
         private val NO_MOUNT_BINS = listOf(

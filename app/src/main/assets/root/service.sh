@@ -180,6 +180,11 @@ find_stock() {
 nomount_scope="--uid-range all --uid-excluded 1000-1000"
 redirected=0
 
+uses_nomount() {
+  [ -f "$module_dir/nomount-only" ] || [ -d /data/adb/modules/nomount ] ||
+    [ -e /data/adb/modules/nomount/bin/nm ] || [ -e /data/adb/ksu/bin/nm ] || [ -e /data/adb/ap/bin/nm ]
+}
+
 # Finds the NoMount CLI whose driver is loaded and speaks the protocol of the UID scoped rules.
 # It prints the protocol and build count, such as "22 (605)".
 find_nomount() {
@@ -198,16 +203,17 @@ find_nomount() {
 # Redirects the stock path to the patched APK in the kernel, which no mount table shows and no
 # root manager unmounts from an app. The stock APK post-fs-data may have mounted is lifted first.
 redirect_patched() {
-  find_nomount || return 1
+  touch "$module_dir/nomount-only" || not_mounted "could not record NoMount mode"
   unmount_from_zygote_namespaces
   lift_layers /proc/self/mountinfo umount -l "$stock_path"
+  stop_other_watchers
+  find_nomount || not_mounted "NoMount driver unavailable or unsupported; bind mounts disabled"
   # A rule is only deleted under the UID scope it was added with, so the unscoped one other root
   # installs add for the same path goes too
   "$nm_bin" rule del $nomount_scope "$stock_path" 2>/dev/null
   "$nm_bin" rule del "$stock_path" 2>/dev/null
   if ! "$nm_bin" rule add $nomount_scope "$stock_path" "$base_path" 2>> "$log"; then
-    log_msg "NoMount redirect failed, bind mounting instead"
-    return 1
+    not_mounted "NoMount redirect failed; bind mounts disabled, see log.txt"
   fi
   log_msg "Redirected with NoMount"
 }
@@ -241,7 +247,8 @@ mount_patched() {
   if ! chcon u:object_r:apk_data_file:s0 "$base_path" 2>> "$log"; then
     log_msg "Failed to set SELinux context"
   fi
-  if redirect_patched; then
+  if uses_nomount; then
+    redirect_patched
     redirected=1
     set_status "Redirected the patched v$version with NoMount at boot"
     return
@@ -299,6 +306,10 @@ watch_framework_restarts() {
 case "$1" in
   watch)
     find_stock
+    if uses_nomount; then
+      mount_patched
+      exit 0
+    fi
     watch_framework_restarts
     exit 0
     ;;
