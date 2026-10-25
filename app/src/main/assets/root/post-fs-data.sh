@@ -18,13 +18,6 @@ log_msg() {
   echo "$*" >> "$log"
 }
 
-# If NoMount was configured for this module, RAM is empty on cold boot and disk already
-# has the genuine stock APK. Skip bind mounting stock to keep /proc/mounts 100% clean.
-if [ -f "$module_dir/use_nomount" ]; then
-  log_msg "NoMount mode active; skipping stock bind mount in post-fs-data"
-  exit 0
-fi
-
 resolve_apk_from_path() {
   path="$1"
   if [ -z "$path" ]; then
@@ -83,6 +76,28 @@ while IFS= read -r path; do
   esac
 done < "$stock_paths"
 
+# service.sh redirects the installed APK with NoMount when its driver is loaded, and the APK on
+# disk is the stock one already, so a mount over it would only show up in the mount table. The
+# driver may load after this script, and service.sh then lifts the mount itself.
+nomount_ready() {
+  for nm in /data/adb/modules/nomount/bin/nm /data/adb/ksu/bin/nm /data/adb/ap/bin/nm; do
+    [ -x "$nm" ] || continue
+    protocol="$("$nm" version 2>/dev/null)" || continue
+    [ "${protocol%% *}" -ge 22 ] 2>/dev/null && return 0
+  done
+  return 1
+}
+redirect_installed=0
+nomount_ready && redirect_installed=1
+
 while IFS= read -r path; do
+  case "$path" in
+    /data/app/*)
+      if [ "$redirect_installed" = 1 ]; then
+        log_msg "Skipping stock mount over $path; NoMount redirects it"
+        continue
+      fi
+      ;;
+  esac
   mount_stock_path "$path"
 done < "$stock_paths"

@@ -175,26 +175,41 @@ find_stock() {
   done
 }
 
-# Locate nm binary across standard locations
-NM_BIN=""
-if [ -x /data/adb/modules/nomount/bin/nm ]; then
-  NM_BIN="/data/adb/modules/nomount/bin/nm"
-elif [ -x /data/adb/ksu/bin/nm ]; then
-  NM_BIN="/data/adb/ksu/bin/nm"
-elif [ -x /data/adb/ap/bin/nm ]; then
-  NM_BIN="/data/adb/ap/bin/nm"
-elif command -v nm >/dev/null 2>&1; then
-  NM_BIN="nm"
-fi
+# Every UID but system_server's, so PackageManager keeps seeing the stock APK it verifies, also
+# after a framework restart, which leaves a redirect without a watcher
+nomount_scope="--uid-range all --uid-excluded 1000-1000"
+redirected=0
 
-NOMOUNT_INJECTED=0
+# Finds the NoMount CLI whose driver is loaded and speaks the protocol of the UID scoped rules.
+# It prints the protocol and build count, such as "22 (605)".
+find_nomount() {
+  nm_bin=""
+  for nm in /data/adb/modules/nomount/bin/nm /data/adb/ksu/bin/nm /data/adb/ap/bin/nm; do
+    [ -x "$nm" ] || continue
+    protocol="$("$nm" version 2>/dev/null)" || continue
+    if [ "${protocol%% *}" -ge 22 ] 2>/dev/null; then
+      nm_bin="$nm"
+      return 0
+    fi
+  done
+  return 1
+}
 
-is_nomount_ready() {
-  [ -n "$NM_BIN" ] || return 1
-  ver_out="$("$NM_BIN" version 2>/dev/null)" || return 1
-  major="${ver_out%% *}"
-  major="${major%%(*}"
-  [ -n "$major" ] && [ "$major" -ge 22 ] 2>/dev/null
+# Redirects the stock path to the patched APK in the kernel, which no mount table shows and no
+# root manager unmounts from an app. The stock APK post-fs-data may have mounted is lifted first.
+redirect_patched() {
+  find_nomount || return 1
+  unmount_from_zygote_namespaces
+  lift_layers /proc/self/mountinfo umount -l "$stock_path"
+  # A rule is only deleted under the UID scope it was added with, so the unscoped one other root
+  # installs add for the same path goes too
+  "$nm_bin" rule del $nomount_scope "$stock_path" 2>/dev/null
+  "$nm_bin" rule del "$stock_path" 2>/dev/null
+  if ! "$nm_bin" rule add $nomount_scope "$stock_path" "$base_path" 2>> "$log"; then
+    log_msg "NoMount redirect failed, bind mounting instead"
+    return 1
+  fi
+  log_msg "Redirected with NoMount"
 }
 
 mount_patched() {
@@ -222,31 +237,15 @@ mount_patched() {
     not_mounted "the patched APK is missing"
   fi
 
-  # 1. NoMount Stealth Branch
-  if is_nomount_ready; then
-    log_msg "Using NoMount VFS redirection"
-    chmod 755 "$module_dir" 2>/dev/null || true
-    chmod 644 "$base_path" 2>/dev/null || true
-    chcon u:object_r:apk_data_file:s0 "$base_path" 2>> "$log" || true
-
-    # Dual-clean prior mounts and rules
-    lift_layers /proc/self/mountinfo umount -l "$stock_path"
-    "$NM_BIN" rule del --uid-range all --uid-excluded 1000-1000 "$stock_path" >/dev/null 2>&1 || true
-    "$NM_BIN" rule del "$stock_path" >/dev/null 2>&1 || true
-
-    if "$NM_BIN" rule add --uid-range all --uid-excluded 1000-1000 "$stock_path" "$base_path" 2>> "$log"; then
-      log_msg "Successfully injected via NoMount"
-      set_status "Injected via NoMount v$version at boot"
-      NOMOUNT_INJECTED=1
-      return 0
-    else
-      log_msg "NoMount rule addition failed; falling back to classic bind mount"
-    fi
+  # Set the correct SELinux context and redirect or bind-mount the patched APK over the stock one.
+  if ! chcon u:object_r:apk_data_file:s0 "$base_path" 2>> "$log"; then
+    log_msg "Failed to set SELinux context"
   fi
-
-  # 2. Classic Bind Mount Fallback
-  log_msg "Using classic bind mount"
-  chcon u:object_r:apk_data_file:s0 "$base_path" 2>> "$log" || true
+  if redirect_patched; then
+    redirected=1
+    set_status "Redirected the patched v$version with NoMount at boot"
+    return
+  fi
   unmount_from_zygote_namespaces
   lift_layers /proc/self/mountinfo umount -l "$stock_path"
   if mount -o bind "$base_path" "$stock_path" 2>> "$log"; then
@@ -257,8 +256,6 @@ mount_patched() {
   mount_in_zygote_namespaces
   replace_other_mounts
   set_status "Mounted the patched v$version at boot"
-  NOMOUNT_INJECTED=0
-  return 0
 }
 
 # Stops the watchers of this module that are already running: the shell running this script, and
@@ -325,11 +322,8 @@ awk -v pkg="$package_name" '$2 ~ ("/" pkg "[/-]") && $2 ~ /\.apk$/ { print $2 }'
 find_stock
 mount_patched
 
-# If injected via NoMount, system_server is already excluded in-kernel.
-# Stop any stale watchers and exit cleanly; do NOT leak background logcat daemons.
-if [ "$NOMOUNT_INJECTED" = 1 ]; then
+if [ "$redirected" = 1 ]; then
   stop_other_watchers
   exit 0
 fi
-
 watch_framework_restarts

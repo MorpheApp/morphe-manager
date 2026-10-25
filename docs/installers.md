@@ -162,7 +162,10 @@ with a **Mount** chip and offers **Remount** and **Unmount**, an unmounted one o
   version to install.
 - **KernelSU and APatch users**: disable module unmounting or hiding for apps installed with
   root mount. Otherwise the stock app may keep running even though Morphe reports it as
-  mounted.
+  mounted. With [NoMount](https://github.com/maxsteeel/nomount) 2.2.0 or newer installed,
+  Morphe redirects the app to the patched APK in the kernel instead of mounting it, which
+  module unmounting does not affect and the mount table does not show. Keep the app off
+  NoMount's own exclusion list, or it sees the stock APK.
 - The **Root mount** entry in the installer list only handles apps that were patched in
   root mount mode. Standard patched APKs still go through whichever other installer you
   selected.
@@ -186,7 +189,7 @@ with a **Mount** chip and offers **Remount** and **Unmount**, an unmounted one o
 | "Your preferred installer is unavailable" | Fix the underlying issue and retry, or let Morphe fall back to the standard installer |
 | Play Store replaced the patched app with the original | Turn off updates for that app on its Play Store page, then patch and install again |
 | Mount fails with a version mismatch | Install the stock version that matches the patched APK, then mount again |
-| Morphe says the app is mounted but the stock app still runs | On KernelSU or APatch, disable module unmounting or hiding for that app |
+| Morphe says the app is mounted but the stock app still runs | On KernelSU or APatch, disable module unmounting or hiding for that app, or install NoMount 2.2.0 or newer. With NoMount, take the app off its exclusion list |
 
 ## Next steps
 
