@@ -179,13 +179,11 @@ class RootInstaller(
                 }.isSuccess
             } == true
 
-            val detach = detachCommand(packageName)
-
             if (redirected) {
                 execute(
                     moduleStatusCommand(packageName, "Redirected the patched APK in Morphe with NoMount") + "; " +
                             forceStop + "; " +
-                            detach
+                            detachCommand(packageName)
                 )
             } else if (noMountOnly) {
                 // Whatever a bind mount left behind is lifted, so the app is left on the stock APK
@@ -210,7 +208,7 @@ class RootInstaller(
                             frameworkWatcherCommand(packageName, "watch") + "; " +
                             moduleStatusCommand(packageName, "Mounted the patched APK in Morphe") + "; " +
                             forceStop + "; " +
-                            detach
+                            detachCommand(packageName)
                 ).assertSuccess("Failed to mount APK")
             }
 
@@ -369,7 +367,7 @@ class RootInstaller(
         val removeStockRedirects = noMountBin()?.let { nm ->
             noMountRemoveRedirectsToCommand(nm.shellQuote(), "$modulePath/$packageName-stock.apk") + "; "
         }.orEmpty()
-        execute(removeStockRedirects + "rm -rf ${modulePath.shellQuote()}")
+        execute(removeStockRedirects + reattachCommand(packageName) + "; rm -rf ${modulePath.shellQuote()}")
             .assertSuccess("Failed to delete files")
     }
 
@@ -616,10 +614,25 @@ class RootInstaller(
         umount = $$"nsenter -t \"$pid\" -m -- umount -l $$targetPath"
     )
 
-    /** Detaches the mounted app from Google Play Store if zygisk-detach is installed. */
-    private fun detachCommand(packageName: String): String =
-        "for d in ${DETACH_BINS.joinToString(" ")} \$(command -v detach 2>/dev/null); do " +
-                "if [ -x \"\$d\" ]; then \"\$d\" detach ${packageName.shellQuote()} >/dev/null 2>&1; break; fi; done; true"
+    /**
+     * Hides the app from Play Store updates, which would replace the stock APK under the mount, when
+     * zygisk-detach is installed. The marker records that Morphe detached it, not the user.
+     */
+    private fun detachCommand(packageName: String): String {
+        val marker = "$MODULES_PATH/${moduleId(packageName)}/$DETACHED_MARKER".shellQuote()
+        return $$"""
+            if [ -x $$DETACH_BIN ] && out=$($$DETACH_BIN detach $${packageName.shellQuote()} 2>/dev/null); then
+                case "$out" in *"already detached"*) ;; *) touch $$marker ;; esac;
+            fi; true
+        """.trimIndent()
+    }
+
+    /** Gives the app back to Play Store updates, unless the user detached it before Morphe did. */
+    private fun reattachCommand(packageName: String): String {
+        val marker = "$MODULES_PATH/${moduleId(packageName)}/$DETACHED_MARKER".shellQuote()
+        return "if [ -f $marker ] && [ -x $DETACH_BIN ]; then " +
+                "$DETACH_BIN reattach ${packageName.shellQuote()} >/dev/null 2>&1; fi"
+    }
 
     companion object {
         const val MODULES_PATH = "/data/adb/modules"
@@ -679,10 +692,9 @@ class RootInstaller(
         private const val NO_MOUNT_SCOPE = "--uid-range all --uid-excluded 1000-1000"
 
         /** Where zygisk-detach puts its CLI. */
-        private val DETACH_BINS = listOf(
-            "/data/adb/modules/zygisk-detach/detach",
-            "/data/adb/modules/zygisk_detach/detach"
-        )
+        private const val DETACH_BIN = "$MODULES_PATH/zygisk-detach/detach"
+        /** Present when Morphe, not the user, detached the app with zygisk-detach. */
+        private const val DETACHED_MARKER = "detached"
     }
 }
 
