@@ -11,6 +11,8 @@ import android.os.Process
 import android.os.SystemClock
 import android.util.Log
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.patcher.split.SplitApkInspector
+import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.util.PLAY_STORE_INSTALLER_PACKAGE
 import app.morphe.manager.util.PM
 import com.topjohnwu.superuser.Shell
@@ -23,6 +25,7 @@ import kotlinx.coroutines.time.withTimeoutOrNull
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.time.Duration
+import java.util.zip.ZipFile
 import kotlin.time.Duration.Companion.milliseconds
 
 private const val TAG = "Morphe RootInstaller"
@@ -234,8 +237,8 @@ class RootInstaller(
      * A process killed during the slow copies leaves the previous module in place, still
      * matching what was recorded about it.
      *
-     * [stockAPK] is only installed when the matching stock app is missing. The stock copy the
-     * module mounts at boot always comes from the installed APK.
+     * [stockAPK], an APK or a split archive, is only installed when the matching stock app is
+     * missing. The stock copy the module mounts at boot always comes from the installed APK.
      */
     suspend fun install(
         patchedAPK: File,
@@ -258,7 +261,7 @@ class RootInstaller(
         var installedStockInfo = pm.getPackageInfo(packageName)
 
         stockAPK?.let { stockApp ->
-            val stockInfo = pm.getPackageInfo(stockApp)
+            val stockInfo = readStockInfo(stockApp)
                 ?: error("Failed to get package info for stock app")
             if (stockInfo.packageName != packageName) {
                 error("Stock APK package (${stockInfo.packageName}) does not match $packageName")
@@ -330,6 +333,10 @@ class RootInstaller(
         onStaged()
         commitStaged(textFiles.keys + apkPaths)
     }
+
+    /** The package info of a stock APK, or of the base module of a split archive. */
+    suspend fun readStockInfo(file: File): PackageInfo? =
+        SplitApkInspector.withRepresentativeApk(file, app.cacheDir) { apk -> pm.getPackageInfo(apk) }
 
     suspend fun installAsPlayStore(apkFile: File) = withContext(Dispatchers.IO) {
         if (!apkFile.exists()) throw Exception("File doesn't exist")
@@ -407,25 +414,57 @@ class RootInstaller(
             .assertSuccess("Failed to put the module in place")
     }
 
+    /**
+     * Installs the stock app in one session, as a store does. A split archive is installed from
+     * its own modules: the merged APK patching builds from one keeps the base module's signing
+     * block over contents it no longer describes, so PackageManager rejects it.
+     */
     private suspend fun installStockApp(stockApp: File, packageName: String): Shell.Result {
-        val tempPath = "/data/local/tmp/morphe-stock-$packageName.apk"
-        val tempPathQuoted = tempPath.shellQuote()
+        val extractDir = app.cacheDir.resolve("stock-splits-$packageName")
+        val tempDirQuoted = "/data/local/tmp/morphe-stock-$packageName".shellQuote()
 
-        // The subshell keeps exit from closing the shared root shell, which would leave the
-        // commands queued after this one reading nothing back
-        return execute(
-            $$"""
-                (
-                    rm -f $$tempPathQuoted;
-                    cp $${stockApp.absolutePath.shellQuote()} $$tempPathQuoted &&
-                    chmod 644 $$tempPathQuoted &&
-                    pm install -r -d $$tempPathQuoted;
-                    result=$?;
-                    rm -f $$tempPathQuoted;
-                    exit $result
-                )
-            """.trimIndent()
-        )
+        try {
+            val modules = if (SplitApkPreparer.isSplitArchive(stockApp)) {
+                extractDir.deleteRecursively()
+                extractDir.mkdirs()
+                ZipFile(stockApp).use { zip ->
+                    SplitApkPreparer.splitModuleEntries(zip).map { entry ->
+                        extractDir.resolve(entry.name).also { module ->
+                            zip.getInputStream(entry).use { input -> module.outputStream().use { input.copyTo(it) } }
+                        }
+                    }.toList()
+                }.ifEmpty { error("Split archive does not contain any APK entries") }
+            } else {
+                listOf(stockApp)
+            }
+
+            val writes = modules.joinToString(" && ") { module ->
+                val name = module.name.shellQuote()
+                $$"""pm install-write -S $${module.length()} "$session" $$name $$tempDirQuoted/$$name"""
+            }
+
+            // The subshell keeps exit from closing the shared root shell, which would leave the
+            // commands queued after this one reading nothing back. A module that fails to write
+            // abandons the session, so nothing half installed is left
+            return execute(
+                $$"""
+                    (
+                        rm -rf $$tempDirQuoted;
+                        mkdir -p $$tempDirQuoted &&
+                        cp $${modules.joinToString(" ") { it.absolutePath.shellQuote() }} $$tempDirQuoted/ &&
+                        chmod 644 $$tempDirQuoted/* &&
+                        session="$(pm install-create -r -d | sed -n 's/.*\[\([0-9]*\)\].*/\1/p')" &&
+                        [ -n "$session" ] &&
+                        { $$writes && pm install-commit "$session" || { pm install-abandon "$session"; false; }; };
+                        result=$?;
+                        rm -rf $$tempDirQuoted;
+                        exit $result
+                    )
+                """.trimIndent()
+            )
+        } finally {
+            extractDir.deleteRecursively()
+        }
     }
 
     private suspend fun waitForInstalledStock(packageName: String, stockInfo: PackageInfo): Boolean =

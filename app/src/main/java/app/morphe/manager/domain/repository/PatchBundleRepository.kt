@@ -1108,7 +1108,11 @@ class PatchBundleRepository(
         fun reportFailure(e: Exception) {
             if (e is CancellationException) throw e
             Log.e(tag, "Got exception while importing bundle", e)
-            messages.showIfInForeground(R.string.home_app_info_patches_replace_fail, e.simpleMessage())
+            if (e is PatchBundleSignerChangedException) {
+                messages.showIfInForeground(R.string.sources_signing_key_changed_local)
+            } else {
+                messages.showIfInForeground(R.string.home_app_info_patches_replace_fail, e.simpleMessage())
+            }
         }
         enqueueLocalImport()
         localImportMutex.withLock {
@@ -1451,7 +1455,9 @@ class PatchBundleRepository(
     private fun handleBundleDownloadError(e: Exception, bundle: RemotePatchBundle) {
         val code = e.httpCodeOrNull()
         Log.e(tag, "Failed to update bundle ${bundle.name} (HTTP $code)", e)
-        if (code != null && code in 400..499
+        if (e is PatchBundleSignerChangedException) {
+            messages.showIfInForeground(R.string.sources_signing_key_changed_named, bundle.displayTitle)
+        } else if (code != null && code in 400..499
             && bundle is JsonPatchBundle && bundle.supportsPrerelease
         ) {
             messages.showIfInForeground(R.string.sources_download_endpoint_not_found, bundle.displayTitle)
@@ -1703,6 +1709,17 @@ class PatchBundleRepository(
                 )
             )
         )
+    }
+
+    /**
+     * Trusts the key the latest bundle of [source] is signed with, after an update refused it for
+     * not being signed by the key the source trusted, and updates the source again.
+     */
+    suspend fun trustNewSigningKey(source: RemotePatchBundle) {
+        val refused = metadataFetchErrorsFlow.value[source.uid] as? PatchBundleSignerChangedException ?: return
+        source.trustSigningKey(refused.signer)
+        metadataFetchErrorsFlow.update { it - source.uid }
+        update(source, showMessage = true)
     }
 
     /**

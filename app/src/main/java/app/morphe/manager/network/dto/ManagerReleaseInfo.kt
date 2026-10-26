@@ -21,7 +21,5 @@ data class ManagerReleaseInfo(
     @SerialName("created_at")
     val createdAt: String,
     @SerialName("description")
-    val description: String,
-    @SerialName("signature_download_url")
-    val signatureDownloadUrl: String? = null
+    val description: String
 )

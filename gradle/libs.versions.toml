@@ -29,7 +29,7 @@ libsu = "6.0.0"
 # Ahead of the Compose BOM, which still ships 1.4.0: the sheets build on the 1.5 bottom sheet API
 # (rememberBottomSheetState). Drop the override once the BOM ships a stable 1.5.0
 material3 = "1.5.0-beta02"
-morphe-patcher = "2.0.1"
+morphe-patcher = "2.1.0-dev.1"
 navigation = "2.10.2"
 play-services-base = "18.11.1"
 preferences-datastore = "1.3.0"

@@ -22,6 +22,7 @@ data class PatchesReleaseInfo(
     val createdAt: String,
     @SerialName("description")
     val description: String,
-    @SerialName("signature_download_url")
-    val signatureDownloadUrl: String? = null
+    /** Key the bundles of the source are signed with, see PatchBundleSignature. */
+    @SerialName("public_key")
+    val publicKey: String? = null
 )

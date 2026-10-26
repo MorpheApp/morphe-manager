@@ -802,7 +802,8 @@ class BatchPatchCoordinator(
     /**
      * Keeps the unpatched APK for future runs. Split archives are skipped because the patcher
      * already stored the merged mono-APK it built from them, which is the better input for a
-     * later run than the archive itself.
+     * later run than the archive itself. A mount keeps the archive, as the stock app it restores
+     * is installed from its signed splits.
      */
     private suspend fun saveOriginalApk(
         item: BatchPatchItem,
@@ -810,14 +811,13 @@ class BatchPatchCoordinator(
         patchedVersion: String
     ) {
         val file = (selectedApp as? SelectedApp.Local)?.file?.takeIf { it.exists() } ?: return
-        if (SplitApkPreparer.isSplitArchive(file)) return
+        if (!item.useMount && SplitApkPreparer.isSplitArchive(file)) return
         // Recorded under its own version, which a patch may have renamed in the patched build
         val version = pm.getPackageInfo(file)?.versionName?.takeUnless { it.isBlank() }
             ?: item.version
             ?: patchedVersion
 
-        val existing = originalApkRepository.get(item.packageName)
-        if (existing != null && existing.version == version && File(existing.filePath).exists()) return
+        if (originalApkRepository.hasOriginal(item.packageName, version, file)) return
 
         runCatching {
             originalApkRepository.saveOriginalApk(

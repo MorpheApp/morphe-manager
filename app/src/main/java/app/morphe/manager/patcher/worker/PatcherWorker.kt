@@ -445,7 +445,9 @@ class PatcherWorker(
 
             // After merging a split archive (in either runtime), save the resulting mono-APK
             // directly to originalApksDir so it is used for repatching instead of the archive.
-            // The runtime is done with the file by then, so it is moved rather than copied
+            // The runtime is done with the file by then, so it is moved rather than copied.
+            // A mount keeps the archive instead: the stock app it restores has to carry the
+            // original signatures, which no longer verify on the merged APK
             val onMergedApkReady: suspend (File) -> Unit = { mergedFile ->
                 val version = pm.getPackageInfo(mergedFile)?.versionName
                     ?.takeUnless { it.isBlank() }
@@ -471,7 +473,7 @@ class PatcherWorker(
                 args.onPatchFailed,
                 ::updateProgress,
                 stripNativeLibs,
-                onMergedApkReady
+                onMergedApkReady.takeUnless { args.useMount }
             )
 
             val elapsed = try {

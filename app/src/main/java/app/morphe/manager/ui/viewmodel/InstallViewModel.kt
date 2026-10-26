@@ -105,8 +105,7 @@ class InstallViewModel(
     private data class MountInstallInputs(
         val patchedInfo: PackageInfo,
         val installedInfo: PackageInfo?,
-        val inputCandidate: MountStockCandidate?,
-        val savedOriginalCandidate: MountStockCandidate?
+        val stockFiles: List<File>
     )
 
     var installState by mutableStateOf<InstallState>(InstallState.Ready)
@@ -792,24 +791,12 @@ class InstallViewModel(
                 val inputs = withContext(Dispatchers.IO) {
                     val patchedInfo = pm.getPackageInfo(outputFile)
                         ?: throw Exception("Failed to load application info")
-                    val inputCandidate = inputFile
-                        ?.takeIf { it.exists() }
-                        ?.let { file ->
-                            pm.getPackageInfo(file)?.let { MountStockCandidate(file, it) }
-                        }
-                    val savedOriginalCandidate = originalApkRepository.get(packageName)
-                        ?.filePath
-                        ?.let(::File)
-                        ?.takeIf { it.exists() }
-                        ?.let { file ->
-                            pm.getPackageInfo(file)?.let { MountStockCandidate(file, it) }
-                        }
+                    val savedOriginal = originalApkRepository.get(packageName)?.filePath?.let(::File)
 
                     MountInstallInputs(
                         patchedInfo = patchedInfo,
                         installedInfo = pm.getPackageInfo(packageName),
-                        inputCandidate = inputCandidate,
-                        savedOriginalCandidate = savedOriginalCandidate
+                        stockFiles = listOfNotNull(inputFile, savedOriginal).filter { it.exists() }.distinct()
                     )
                 }
 
@@ -822,13 +809,16 @@ class InstallViewModel(
                 fun PackageInfo.matchesPatched() =
                     packageName == this.packageName &&
                             versionName == patchedVersion
-                fun MountStockCandidate.matchesPatched() =
-                    info.matchesPatched()
 
-                val restorableStock = listOfNotNull(
-                    inputs.inputCandidate,
-                    inputs.savedOriginalCandidate
-                ).firstOrNull { it.matchesPatched() }
+                // Either file can be a split archive, read through its base module, so they are
+                // only read when the installed app does not already match
+                val restorableStock = if (stockInfo?.matchesPatched() == true) null else withContext(Dispatchers.IO) {
+                    inputs.stockFiles.firstNotNullOfOrNull { file ->
+                        rootInstaller.readStockInfo(file)
+                            ?.takeIf { it.matchesPatched() }
+                            ?.let { MountStockCandidate(file, it) }
+                    }
+                }
 
                 // Only worth waiting for when nothing here can restore the stock app, since the
                 // install below reinstalls a matching one and waits for it on its own

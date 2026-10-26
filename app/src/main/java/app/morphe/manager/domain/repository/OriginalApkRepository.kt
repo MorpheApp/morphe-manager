@@ -10,6 +10,7 @@ import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.AppDatabase
 import app.morphe.manager.data.room.apps.original.OriginalApk
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.util.FilenameUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -85,6 +86,16 @@ class OriginalApkRepository(
     fun getAll() = dao.getAll().distinctUntilChanged()
 
     suspend fun get(packageName: String) = dao.get(packageName)
+
+    /**
+     * Whether the saved original of [packageName] already stands for [file] of [version]. A split
+     * archive still replaces a merged APK, which a mount cannot restore the stock app from.
+     */
+    suspend fun hasOriginal(packageName: String, version: String, file: File): Boolean {
+        val existing = get(packageName)?.takeIf { it.version == version } ?: return false
+        val saved = File(existing.filePath).takeIf { it.exists() } ?: return false
+        return SplitApkPreparer.isSplitArchive(saved) || !SplitApkPreparer.isSplitArchive(file)
+    }
 
     /**
      * Save original APK file for later repatching.

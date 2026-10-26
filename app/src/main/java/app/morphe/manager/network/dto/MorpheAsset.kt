@@ -20,8 +20,9 @@ data class MorpheAsset (
     val downloadUrl: String,
     @SerialName("created_at")
     val createdAt: LocalDateTime,
-    @SerialName("signature_download_url")
-    val signatureDownloadUrl: String? = null,
+    /** Key the bundles of the source are signed with, see PatchBundleSignature. */
+    @SerialName("public_key")
+    val publicKey: String? = null,
     @SerialName("page_url")
     val pageUrl: String? = null,
     val description: String,

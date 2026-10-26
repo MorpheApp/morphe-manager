@@ -15,6 +15,7 @@ import app.morphe.manager.domain.repository.PatchBundleHeldBackException
 import app.morphe.manager.patcher.patch.PatchBundle
 import app.morphe.manager.util.hasZipHeader
 import app.morphe.manager.util.isPatcherOutdated
+import app.morphe.patcher.patch.PatchBundleSignature
 import java.io.File
 import java.io.IOException
 
@@ -34,6 +35,16 @@ sealed class PatchBundleSource(
 ) {
     protected val patchesFile = directory.resolve("patches.jar")
     internal val patchesJarFile: File get() = patchesFile
+    private val signingKeyFile = directory.resolve(SIGNING_KEY_FILE_NAME)
+
+    /**
+     * Key every bundle of this source has to be signed with, the key of the first signed bundle it
+     * installed. Null while it installed none, and then any bundle is accepted.
+     */
+    val signingKey: String? by lazy { readSigningKey() }
+
+    /** [signingKey] in the short form people compare, see [PatchBundleSignature.fingerprint]. */
+    val signingKeyFingerprint: String? by lazy { signingKey?.let(PatchBundleSignature::fingerprint) }
 
     val state = runCatching {
         when {
@@ -89,9 +100,14 @@ sealed class PatchBundleSource(
      * reader must never observe the container half-written or writable - Android 14+ rejects a
      * writable dex container outright.
      *
-     * [write] receives the staging file and is responsible for filling it.
+     * [write] receives the staging file and is responsible for filling it. [publishedKey] is the
+     * key the source declares, see [requireTrustedSigner].
      */
-    protected suspend fun installPatchBundle(context: String, write: suspend (staging: File) -> Unit) {
+    protected suspend fun installPatchBundle(
+        context: String,
+        publishedKey: String? = null,
+        write: suspend (staging: File) -> Unit
+    ) {
         val staging = directory.resolve(STAGING_FILE_NAME)
         try {
             directory.mkdirs()
@@ -99,12 +115,14 @@ sealed class PatchBundleSource(
             runCatching { staging.delete() }
             write(staging)
             requireNonEmptyBundleFile(staging, context)
+            val signer = requireTrustedSigner(staging, publishedKey)
             staging.setReadOnly()
             // Replaces the installed bundle in a single step, so readers see either the old
             // file or the new one
             if (!staging.renameTo(patchesFile)) {
                 throw IOException("$context could not replace the installed patch bundle")
             }
+            pinSigningKey(signer)
         } catch (t: Throwable) {
             runCatching { staging.setWritable(true, true) }
             runCatching { staging.delete() }
@@ -127,6 +145,39 @@ sealed class PatchBundleSource(
         }
     }
 
+    /**
+     * Checks that [file] is signed by [signingKey], or by [publishedKey] while the source has no
+     * key yet. A source with neither takes any bundle, signed nor not.
+     *
+     * @return The key [file] is signed with, to pin with [pinSigningKey] once it is installed.
+     * @throws SecurityException If the signature does not match the content of [file].
+     * @throws PatchBundleSignerChangedException If [file] is not signed by the expected key.
+     */
+    protected fun requireTrustedSigner(file: File, publishedKey: String? = null): String? {
+        val signer = PatchBundleSignature.verify(file)
+        // Read again rather than from signingKey, which a key trusted since then does not change
+        val expected = readSigningKey() ?: publishedKey
+        if (expected != null && signer != expected) throw PatchBundleSignerChangedException(signer)
+        return signer
+    }
+
+    /** Pins [signer] as [signingKey], so later bundles must be signed by it too. */
+    protected fun pinSigningKey(signer: String?) {
+        if (signer != null && signer != readSigningKey()) signingKeyFile.writeText(signer)
+    }
+
+    /** [signingKey] as it is now, which a key trusted since this source was loaded changes. */
+    protected fun readSigningKey() =
+        signingKeyFile.takeIf { it.exists() }?.readText()?.trim()?.takeIf { it.isNotEmpty() }
+
+    /**
+     * Trusts [signer] from now on in place of [signingKey], after the user accepted it.
+     * A null [signer] lets the source take unsigned bundles again.
+     */
+    fun trustSigningKey(signer: String?) {
+        if (signer == null) signingKeyFile.delete() else signingKeyFile.writeText(signer)
+    }
+
     sealed interface State {
         data object Missing : State
         data class Failed(val throwable: Throwable) : State
@@ -136,6 +187,7 @@ sealed class PatchBundleSource(
     companion object Extensions {
         private const val MIN_PATCH_BUNDLE_BYTES = 8L
         private const val STAGING_FILE_NAME = "patches.jar.tmp"
+        private const val SIGNING_KEY_FILE_NAME = "signing.key"
         private const val JSON_EXTENSION = ".json"
         val PatchBundleSource.isDefault inline get() = uid == 0
         val PatchBundleSource.asRemoteOrNull inline get() = this as? RemotePatchBundle
@@ -277,4 +329,14 @@ enum class BundleSourceType {
     PreInstalled,
     Remote,
     Local
+}
+
+/**
+ * A bundle that is not signed by the key its source trusts. [signer] is the key it is signed
+ * with, or null if it is not signed at all.
+ */
+class PatchBundleSignerChangedException(val signer: String?) :
+    Exception("The patch bundle is not signed by the key its source trusts") {
+    /** [signer] in the short form people compare, see [PatchBundleSignature.fingerprint]. */
+    val signerFingerprint get() = signer?.let(PatchBundleSignature::fingerprint)
 }

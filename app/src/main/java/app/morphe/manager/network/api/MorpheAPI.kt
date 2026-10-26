@@ -324,7 +324,6 @@ class MorpheAPI(
      * Maps a [GitHubRelease] + its [GitHubAsset] into the unified [MorpheAsset] format.
      *
      * The release page URL is always set to the GitHub Releases tag page.
-     * A matching `.sig` / `.asc` signature asset is automatically attached if present.
      */
     private fun mapReleaseToAsset(
         config: RepoConfig,
@@ -337,7 +336,6 @@ class MorpheAPI(
         return MorpheAsset(
             downloadUrl = asset.downloadUrl,
             createdAt = parseTimestamp(timestamp),
-            signatureDownloadUrl = findSignatureUrl(release, asset),
             pageUrl = releasePageUrl(config.htmlUrl, release.tagName),
             description = release.body?.ifBlank { release.name.orEmpty() } ?: release.name.orEmpty(),
             version = release.tagName
@@ -352,7 +350,6 @@ class MorpheAPI(
         return MorpheAsset(
             downloadUrl = releaseInfo.downloadUrl,
             createdAt = parseTimestamp(releaseInfo.createdAt),
-            signatureDownloadUrl = releaseInfo.signatureDownloadUrl,
             pageUrl = releasePageUrl(config.htmlUrl, version),
             description = releaseInfo.description,
             version = version
@@ -367,32 +364,11 @@ class MorpheAPI(
         return MorpheAsset(
             downloadUrl = releaseInfo.downloadUrl,
             createdAt = parseTimestamp(releaseInfo.createdAt),
-            // Treat empty string the same as absent — some JSON files emit ""
-            signatureDownloadUrl = releaseInfo.signatureDownloadUrl?.ifBlank { null },
+            publicKey = releaseInfo.publicKey,
             pageUrl = releasePageUrl(config.htmlUrl, version),
             description = releaseInfo.description,
             version = version
         )
-    }
-
-    /**
-     * Searches [release] assets for a detached signature file matching [asset].
-     *
-     * Candidates checked in priority order:
-     *  1. `<full-name>.sig`
-     *  2. `<full-name>.asc`
-     *  3. `<name-without-extension>.sig`
-     *  4. `<name-without-extension>.asc`
-     */
-    private fun findSignatureUrl(release: GitHubRelease, asset: GitHubAsset): String? {
-        val base = asset.name.substringBeforeLast('.', asset.name)
-        val candidates = setOf(
-            "${asset.name}.sig",
-            "${asset.name}.asc",
-            "$base.sig",
-            "$base.asc"
-        )
-        return release.assets.firstOrNull { it.name in candidates }?.downloadUrl
     }
 
     /**

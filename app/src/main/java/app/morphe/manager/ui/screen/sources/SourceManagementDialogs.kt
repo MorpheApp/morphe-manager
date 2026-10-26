@@ -547,6 +547,73 @@ private fun PendingSourceRow(
 }
 
 /**
+ * Asks before a source takes a release that is not signed by the key it trusts.
+ *
+ * @param trustedKey Fingerprint of the key the source trusts.
+ * @param newKey Fingerprint of the key the release is signed with, or null if it is not signed.
+ */
+@Composable
+fun DialogHostScope.SigningKeyTrustDialog(
+    bundle: PatchBundleSource,
+    trustedKey: String?,
+    newKey: String?,
+    onTrust: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    AppDialog(
+        onDismissRequest = onDismiss,
+        accentColor = rememberSourceHeaderColor(bundle),
+        title = stringResource(R.string.sources_signing_key_trust_title),
+        description = stringResource(
+            if (newKey != null) R.string.sources_signing_key_trust_message
+            else R.string.sources_signing_key_trust_message_unsigned
+        ),
+        footer = {
+            AppDialogButtonRow(
+                primaryText = stringResource(R.string.trust),
+                onPrimaryClick = onTrust,
+                isPrimaryDestructive = true,
+                secondaryText = stringResource(android.R.string.cancel),
+                onSecondaryClick = onDismiss
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            ConfirmSubject(name = bundle.displayTitle) { modifier ->
+                BundleIcon(bundle = bundle, modifier = modifier)
+            }
+
+            // The two are read against each other, so the tone carries which is which
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
+            ) {
+                trustedKey?.let {
+                    MonospaceValuePanel(
+                        value = it,
+                        label = stringResource(R.string.sources_signing_key_trusted),
+                        tone = SemanticTone.Success,
+                        textAlign = TextAlign.Center
+                    )
+                }
+                newKey?.let {
+                    MonospaceValuePanel(
+                        value = it,
+                        label = stringResource(R.string.sources_signing_key_new),
+                        tone = SemanticTone.Error,
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
+        }
+    }
+}
+
+/**
  * Dialog for renaming a bundle.
  */
 @Composable

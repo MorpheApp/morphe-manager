@@ -58,11 +58,13 @@ class LocalPatchBundle(
         // bundle in one step, so a concurrent reader never sees a writable dex container
         // Checked before the swap, so a broken file never takes the place of a working bundle
         requireNonEmptyBundleFile(tempFile, "Importing patch bundle")
+        val signer = requireTrustedSigner(tempFile)
         tempFile.setReadOnly()
         if (!tempFile.renameTo(target)) {
             runCatching { tempFile.setWritable(true, true) }
             return@withContext false
         }
+        pinSigningKey(signer)
         onProgress?.invoke(0L, totalBytes)
         return@withContext true
     }

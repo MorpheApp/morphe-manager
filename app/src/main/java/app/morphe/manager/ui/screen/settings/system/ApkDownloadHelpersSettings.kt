@@ -71,7 +71,7 @@ fun ApkDownloadHelpersSettings(
         ConfirmDialog(
             title = stringResource(R.string.settings_system_apk_download_helper_trust_title),
             message = stringResource(R.string.settings_system_apk_download_helper_warning),
-            primaryText = stringResource(R.string.settings_system_apk_download_helper_trust),
+            primaryText = stringResource(R.string.trust),
             isPrimaryDestructive = false,
             subject = {
                 ConfirmSubject(name = helper.label) { modifier ->

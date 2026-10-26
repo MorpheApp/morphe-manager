@@ -663,7 +663,8 @@ class PatcherViewModel(
      * Called after successful patching, independent of installation method.
      * For split APK archives: inputFile points to the merged mono-APK already saved to
      * originalApksDir by the worker via onMergedApkReady - this call will detect the
-     * existing record and skip re-saving.
+     * existing record and skip re-saving. A mount install keeps the archive instead, which is
+     * saved here, as the stock app it restores is installed from the archive's signed splits.
      * For regular APK files, saves the APK itself.
      *
      * Thread-safe: uses mutex to prevent concurrent saves from observeWorker and persistPatchedApp.
@@ -691,8 +692,7 @@ class PatcherViewModel(
                 ?: "unknown"
 
             // Does original already exist in repository?
-            val existing = originalApkRepository.get(packageName)
-            if (existing != null && existing.version == originalVersion) {
+            if (originalApkRepository.hasOriginal(packageName, originalVersion, fileToSave)) {
                 Log.d(TAG, "Original APK already exists in repository (version $originalVersion), skipping duplicate save")
                 return@withLock
             }
