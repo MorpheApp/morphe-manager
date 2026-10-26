@@ -17,6 +17,9 @@ const val tag = "Morphe Manager"
 const val SOURCE_NAME = "Morphe Patches"
 const val MANAGER_REPO_URL = "https://github.com/MorpheApp/morphe-manager"
 const val SOURCE_REPO_URL = "https://github.com/MorpheApp/morphe-patches"
+
+/** Key the releases of [SOURCE_REPO_URL] are signed with, see PatchBundleSignature. */
+const val SOURCE_SIGNING_KEY = "g8Ys9leTu2yeixojeR35HrNkK6eOSLpA6nNIizRutqI="
 const val MORPHE_API_URL = "https://api.morphe.software"
 
 /** Sent on every request to [MORPHE_API_URL]. */

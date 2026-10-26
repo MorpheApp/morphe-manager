@@ -546,7 +546,9 @@ class APIPatchBundle(
     services: RemoteBundleServices,
     val usePrerelease: Boolean = false,
 ) : RemotePatchBundle(name, uid, displayName, createdAt, updatedAt, installedVersionSignature, error, directory, endpoint, enabled, services) {
+    // Releases declare their key, but the API fallback and older releases do not
     override suspend fun getLatestInfo() = api.getPatchesUpdate(usePrerelease).getOrThrow()
+        .let { it.copy(publicKey = it.publicKey ?: SOURCE_SIGNING_KEY) }
 
     // The endpoint is the API identifier rather than a browsable URL
     override val browsePageUrl: String get() = SOURCE_REPO_URL
