@@ -180,10 +180,6 @@ find_stock() {
 nomount_scope="--uid-range all --uid-excluded 1000-1000"
 redirected=0
 
-nomount_only() {
-  [ -f "$module_dir/nomount-only" ] && [ "$(cat "$module_dir/nomount-only")" != 0 ]
-}
-
 # Finds the NoMount CLI whose driver is loaded and speaks the protocol of the UID scoped rules.
 # It prints the protocol and build count, such as "22 (605)".
 find_nomount() {
@@ -199,22 +195,26 @@ find_nomount() {
   return 1
 }
 
+# Set in Morphe, where NoMount only never falls back to a bind mount
+nomount_only() {
+  [ "$(cat "$module_dir/nomount-only" 2>/dev/null)" = 1 ]
+}
+
 # Redirects the stock path to the patched APK in the kernel, which no mount table shows and no
 # root manager unmounts from an app. The stock APK post-fs-data may have mounted is lifted first.
 redirect_patched() {
-  unmount_from_zygote_namespaces
-  lift_layers /proc/self/mountinfo umount -l "$stock_path"
-  stop_other_watchers
   if ! find_nomount; then
-    nomount_only && not_mounted "NoMount driver unavailable or unsupported; bind mounts disabled"
+    nomount_only && not_mounted "NoMount is unavailable and bind mounts are off"
     return 1
   fi
+  unmount_from_zygote_namespaces
+  lift_layers /proc/self/mountinfo umount -l "$stock_path"
   # A rule is only deleted under the UID scope it was added with, so the unscoped one other root
   # installs add for the same path goes too
   "$nm_bin" rule del $nomount_scope "$stock_path" 2>/dev/null
   "$nm_bin" rule del "$stock_path" 2>/dev/null
   if ! "$nm_bin" rule add $nomount_scope "$stock_path" "$base_path" 2>> "$log"; then
-    nomount_only && not_mounted "NoMount redirect failed; bind mounts disabled, see log.txt"
+    nomount_only && not_mounted "NoMount redirect failed and bind mounts are off, see log.txt"
     log_msg "NoMount redirect failed, bind mounting instead"
     return 1
   fi
@@ -308,10 +308,6 @@ watch_framework_restarts() {
 case "$1" in
   watch)
     find_stock
-    if nomount_only; then
-      mount_patched
-      exit 0
-    fi
     watch_framework_restarts
     exit 0
     ;;

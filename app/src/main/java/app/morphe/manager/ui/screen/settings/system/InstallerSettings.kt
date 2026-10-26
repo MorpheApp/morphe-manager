@@ -36,6 +36,8 @@ fun InstallerSettings(settingsViewModel: SettingsViewModel = koinViewModel()) {
     val ignoreTargetRulesEnabled by prefs.ignoreInstallTargetRules.getAsState()
     val useExpertMode by prefs.useExpertMode.getAsState()
     val rooted = remember { settingsViewModel.isDeviceRooted() }
+    // NoMount runs on KernelSU and APatch only
+    val magisk by produceState(false) { value = settingsViewModel.isMagisk() }
 
     var pendingAutoUninstallConfirm by remember { mutableStateOf(false) }
 
@@ -66,7 +68,7 @@ fun InstallerSettings(settingsViewModel: SettingsViewModel = koinViewModel()) {
                 shizukuStatusProvider = settingsViewModel::getShizukuStatus,
                 onRequestShizukuPermission = settingsViewModel::requestShizukuPermission
             )
-            FoldingVisibility(visible = primaryToken.isRootMount) {
+            FoldingVisibility(visible = primaryToken.isRootMount && !magisk) {
                 SettingsGroup {
                     SettingsSwitchItem(
                         checked = noMountOnly,

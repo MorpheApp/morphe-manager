@@ -249,6 +249,8 @@ class SettingsViewModel(
     /** Whether the device has root, which the patch mode and the rules tied to it depend on. */
     fun isDeviceRooted() = rootInstaller.isDeviceRooted()
 
+    suspend fun isMagisk() = rootInstaller.isMagisk()
+
     fun setUseCustomFilePicker(enabled: Boolean) = viewModelScope.launch {
         prefs.useCustomFilePicker.update(enabled)
         prefs.customFilePickerUserConfigured.update(true)

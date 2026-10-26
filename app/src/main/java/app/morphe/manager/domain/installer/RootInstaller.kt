@@ -10,9 +10,9 @@ import android.content.pm.PackageInfo
 import android.os.Process
 import android.os.SystemClock
 import android.util.Log
+import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.util.PLAY_STORE_INSTALLER_PACKAGE
 import app.morphe.manager.util.PM
-import app.morphe.manager.domain.manager.PreferencesManager
 import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
@@ -161,29 +161,33 @@ class RootInstaller(
             // the rule decides whether the redirect took
             val noMountOnly = prefs.noMountOnly.get()
             val marker = "$MODULES_PATH/${moduleId(packageName)}/$NO_MOUNT_MARKER".shellQuote()
-            execute("printf '%s' '${if (noMountOnly) "1" else "0"}' > $marker")
-                .assertSuccess("Failed to record NoMount mode")
+            execute("printf %s ${noMountMarker(noMountOnly)} > $marker")
+                .assertSuccess("Failed to save the NoMount only setting")
             val nm = noMountBin()?.shellQuote()
-            var redirected = false
-            if (noMountOnly || nm != null) {
-                execute(unmountBindCommands(stockPath) + "; " + frameworkWatcherCommand(packageName, "stop"))
-                if (nm == null) {
-                    execute(moduleStatusCommand(packageName, "NoMount unavailable; bind mounts disabled"))
-                    error("NoMount driver unavailable or unsupported; bind mounts disabled")
-                }
-                val result = execute(
+            val redirected = nm?.let {
+                execute(
                     "chcon u:object_r:apk_data_file:s0 $patchedPath; " +
+                            unmountBindCommands(stockPath) + "; " +
+                            frameworkWatcherCommand(packageName, "stop") + "; " +
                             noMountRemoveCommand(nm, stockPath) + "; " +
                             "$nm rule add $NO_MOUNT_SCOPE $stockPath $patchedPath"
-                )
-                if (!result.isSuccess && noMountOnly) {
-                    execute(moduleStatusCommand(packageName, "NoMount redirect failed; bind mounts disabled"))
-                    result.assertSuccess("NoMount redirect failed; bind mounts disabled")
-                }
-                redirected = result.isSuccess
-            }
+                ).also { result ->
+                    if (!result.isSuccess) Log.w(TAG, "NoMount redirect failed: ${result.failureDetail()}")
+                }.isSuccess
+            } == true
+
             if (redirected) {
                 execute(moduleStatusCommand(packageName, "Redirected the patched APK in Morphe with NoMount") + "; " + forceStop)
+            } else if (noMountOnly) {
+                // Whatever a bind mount left behind is lifted, so the app is left on the stock APK
+                val reason = if (nm == null) "NoMount is unavailable" else "NoMount redirect failed"
+                execute(
+                    unmountBindCommands(stockPath) + "; " +
+                            frameworkWatcherCommand(packageName, "stop") + "; " +
+                            moduleStatusCommand(packageName, "Not mounted in Morphe: $reason and bind mounts are off") + "; " +
+                            forceStop
+                )
+                error("$reason and bind mounts are off")
             } else {
                 // Set SELinux context, bind-mount in the root and zygote namespaces, replace any other
                 // APK running processes still hold, and restart the app so its next process inherits
@@ -247,7 +251,6 @@ class RootInstaller(
         // Use new path for new installations
         val moduleId = moduleId(packageName)
         val modulePath = "$MODULES_PATH/$moduleId"
-        val noMountOnly = prefs.noMountOnly.get()
 
         unmount(packageName)
         removeOtherRootInstalls(packageName)
@@ -308,8 +311,8 @@ class RootInstaller(
         } else {
             emptyMap()
         }
-        val backendFiles = mapOf(NO_MOUNT_MARKER to if (noMountOnly) "1" else "0")
-        val textFiles = (moduleFiles + stockPathsFile + backendFiles).mapKeys { (name, _) -> "$modulePath/$name" }
+        val noMountFile = NO_MOUNT_MARKER to noMountMarker(prefs.noMountOnly.get())
+        val textFiles = (moduleFiles + stockPathsFile + noMountFile).mapKeys { (name, _) -> "$modulePath/$name" }
         stageModuleFiles(modulePath, textFiles)
 
         val patchedModuleApk = "$modulePath/$packageName.apk"
@@ -346,7 +349,13 @@ class RootInstaller(
         if (isAppMounted(packageName))
             unmount(packageName)
 
-        execute("rm -rf ${"$MODULES_PATH/${moduleId(packageName)}".shellQuote()}")
+        // A NoMount only module redirects the hidden system copy to its stock APK until the next
+        // boot, and the rule would point at nothing once the module is gone
+        val modulePath = "$MODULES_PATH/${moduleId(packageName)}"
+        val removeStockRedirects = noMountBin()?.let { nm ->
+            noMountRemoveRedirectsToCommand(nm.shellQuote(), "$modulePath/$packageName-stock.apk") + "; "
+        }.orEmpty()
+        execute(removeStockRedirects + "rm -rf ${modulePath.shellQuote()}")
             .assertSuccess("Failed to delete files")
     }
 
@@ -526,6 +535,13 @@ class RootInstaller(
     private fun noMountRemoveCommand(nm: String, stockPath: String) =
         "$nm rule del $NO_MOUNT_SCOPE $stockPath 2>/dev/null; $nm rule del $stockPath 2>/dev/null; true"
 
+    // Removes the unscoped rules redirecting to the real path, which are listed as "virtual -> real"
+    private fun noMountRemoveRedirectsToCommand(nm: String, realPath: String) =
+        $$"""
+            $$nm rule list 2>/dev/null | grep -F $${" -> $realPath".shellQuote()} | sed 's| -> .*||' |
+                while IFS= read -r path; do $$nm rule del "$path"; done; true
+        """.trimIndent()
+
     // A namespace can hold the patched APK twice, once propagated from the root namespace and
     // once mounted into it directly, and a single umount only lifts the top one. Morphe's own
     // namespace was copied from zygote's, so it is cleared too or the APK it reads back for
@@ -593,7 +609,10 @@ class RootInstaller(
         private val MODULE_SCRIPTS = listOf("service.sh", "post-fs-data.sh")
         private val MODULE_FILES = MODULE_SCRIPTS + "module.prop"
         private const val STOCK_PATHS_FILE = "stock-paths.txt"
+        /** Holds "1" when the module may only redirect with NoMount and never falls back to a bind mount. */
         private const val NO_MOUNT_MARKER = "nomount-only"
+
+        private fun noMountMarker(noMountOnly: Boolean) = if (noMountOnly) "1" else "0"
 
         /** Where NoMount puts its CLI, linked next to the root manager's own tools. */
         private val NO_MOUNT_BINS = listOf(

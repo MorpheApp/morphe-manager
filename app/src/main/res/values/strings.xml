@@ -1106,7 +1106,7 @@ The image dimensions must be as follows:
     <string name="installer_play_store_mode">Install as Play Store</string>
     <string name="installer_play_store_mode_description">Marks Google Play Store as the install source</string>
     <string name="settings_nomount_only">NoMount only</string>
-    <string name="settings_nomount_only_description">Never use bind mounts for root apps. If NoMount is unavailable, mounting fails.</string>
+    <string name="settings_nomount_only_description">Mounts apps only with NoMount and never falls back to a bind mount, so they stay unmounted without it</string>
     <string name="settings_prompt_installer_on_install">Installer selection prompt</string>
     <string name="settings_prompt_installer_on_install_description">Asks how to install every app: with root before patching, otherwise after it</string>
     <string name="settings_auto_install_with_shizuku">Auto-install after patching</string>
