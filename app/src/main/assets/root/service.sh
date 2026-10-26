@@ -221,6 +221,17 @@ redirect_patched() {
   log_msg "Redirected with NoMount"
 }
 
+detach_from_play_store() {
+  for d in /data/adb/modules/zygisk-detach/detach /data/adb/modules/zygisk_detach/detach $(command -v detach 2>/dev/null); do
+    if [ -x "$d" ]; then
+      if "$d" detach "$package_name" >/dev/null 2>&1; then
+        log_msg "Detached from Play Store with zygisk-detach"
+      fi
+      break
+    fi
+  done
+}
+
 mount_patched() {
   log_msg "base_path: $base_path"
   log_msg "stock_path: $stock_path"
@@ -252,6 +263,7 @@ mount_patched() {
   fi
   if redirect_patched; then
     redirected=1
+    detach_from_play_store
     set_status "Redirected the patched v$version with NoMount at boot"
     return
   fi
@@ -264,6 +276,7 @@ mount_patched() {
   fi
   mount_in_zygote_namespaces
   replace_other_mounts
+  detach_from_play_store
   set_status "Mounted the patched v$version at boot"
 }
 

@@ -179,8 +179,14 @@ class RootInstaller(
                 }.isSuccess
             } == true
 
+            val detach = detachCommand(packageName)
+
             if (redirected) {
-                execute(moduleStatusCommand(packageName, "Redirected the patched APK in Morphe with NoMount") + "; " + forceStop)
+                execute(
+                    moduleStatusCommand(packageName, "Redirected the patched APK in Morphe with NoMount") + "; " +
+                            forceStop + "; " +
+                            detach
+                )
             } else if (noMountOnly) {
                 // Whatever a bind mount left behind is lifted, so the app is left on the stock APK
                 val reason = if (nm == null) "NoMount is unavailable" else "NoMount redirect failed"
@@ -203,7 +209,8 @@ class RootInstaller(
                             replaceOtherMountsCommand(patchedAPK, stockPath) + "; " +
                             frameworkWatcherCommand(packageName, "watch") + "; " +
                             moduleStatusCommand(packageName, "Mounted the patched APK in Morphe") + "; " +
-                            forceStop
+                            forceStop + "; " +
+                            detach
                 ).assertSuccess("Failed to mount APK")
             }
 
@@ -609,6 +616,11 @@ class RootInstaller(
         umount = $$"nsenter -t \"$pid\" -m -- umount -l $$targetPath"
     )
 
+    /** Detaches the mounted app from Google Play Store if zygisk-detach is installed. */
+    private fun detachCommand(packageName: String): String =
+        "for d in ${DETACH_BINS.joinToString(" ")} \$(command -v detach 2>/dev/null); do " +
+                "if [ -x \"\$d\" ]; then \"\$d\" detach ${packageName.shellQuote()} >/dev/null 2>&1; break; fi; done; true"
+
     companion object {
         const val MODULES_PATH = "/data/adb/modules"
 
@@ -665,6 +677,12 @@ class RootInstaller(
 
         // Every UID but system_server's, so PackageManager keeps seeing the stock APK it verifies
         private const val NO_MOUNT_SCOPE = "--uid-range all --uid-excluded 1000-1000"
+
+        /** Where zygisk-detach puts its CLI. */
+        private val DETACH_BINS = listOf(
+            "/data/adb/modules/zygisk-detach/detach",
+            "/data/adb/modules/zygisk_detach/detach"
+        )
     }
 }
 
