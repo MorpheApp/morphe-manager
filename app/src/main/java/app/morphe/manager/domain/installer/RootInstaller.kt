@@ -44,6 +44,8 @@ class RootInstaller(
     @Volatile
     private var cachedNoMountBin: String? = null
     @Volatile
+    private var cachedNoMountReason: String? = null
+    @Volatile
     private var lastNoMountCheck = 0L
 
     private val _mountChanges = MutableSharedFlow<String>(extraBufferCapacity = 8)
@@ -120,7 +122,10 @@ class RootInstaller(
      * Rechecked now and then, as the module can be installed or removed while Morphe runs.
      */
     private suspend fun noMountBin(): String? {
-        if (Shell.isAppGrantedRoot() != true || isMagisk()) return null
+        if (Shell.isAppGrantedRoot() != true || isMagisk()) {
+            cachedNoMountReason = if (isMagisk()) "NoMount does not run on Magisk" else null
+            return null
+        }
         val now = SystemClock.elapsedRealtime()
         if (lastNoMountCheck != 0L && now - lastNoMountCheck < NO_MOUNT_CHECK_INTERVAL_MS) return cachedNoMountBin
 
@@ -132,10 +137,24 @@ class RootInstaller(
                     if [ -x "$nm" ] && version=$("$nm" version 2>/dev/null); then echo "$nm $version"; break; fi;
                 done
             """.trimIndent()
-        ).out.firstOrNull()?.trim().orEmpty()
-        val protocol = probe.substringAfter(' ', "").substringBefore(' ').toIntOrNull() ?: 0
+        ).out.firstOrNull { it.isNotBlank() }?.trim().orEmpty()
+        val binPath = probe.substringBefore(' ').takeIf { it.isNotBlank() }
+        val rawVersion = probe.substringAfter(' ', "")
+        val protocol = rawVersion.substringBefore(' ').toIntOrNull()
+            ?: Regex("""\d+""").find(rawVersion)?.value?.toIntOrNull() ?: 0
 
-        cachedNoMountBin = probe.substringBefore(' ').takeIf { protocol >= NO_MOUNT_MIN_PROTOCOL }
+        cachedNoMountBin = binPath?.takeIf { protocol >= NO_MOUNT_MIN_PROTOCOL }
+        cachedNoMountReason = when {
+            cachedNoMountBin != null -> null
+            binPath != null -> {
+                Log.w(
+                    TAG,
+                    "NoMount CLI found at $binPath but driver protocol $protocol is below required $NO_MOUNT_MIN_PROTOCOL (v2.2.0+ required)"
+                )
+                "NoMount driver protocol $protocol is outdated (v2.2.0+ required)"
+            }
+            else -> null
+        }
         lastNoMountCheck = now
         return cachedNoMountBin
     }
@@ -187,7 +206,7 @@ class RootInstaller(
                 )
             } else if (noMountOnly) {
                 // Whatever a bind mount left behind is lifted, so the app is left on the stock APK
-                val reason = if (nm == null) "NoMount is unavailable" else "NoMount redirect failed"
+                val reason = if (nm == null) (cachedNoMountReason ?: "NoMount is unavailable") else "NoMount redirect failed"
                 execute(
                     unmountBindCommands(stockPath) + "; " +
                             frameworkWatcherCommand(packageName, "stop") + "; " +

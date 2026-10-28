@@ -192,8 +192,9 @@ with a **Mount** chip and offers **Remount** and **Unmount**, an unmounted one o
 | "Uninstall required" or a signature conflict | The unpatched app is still installed. Uninstall it, which erases its data, or use root mount instead. On rooted devices you can also try **Install anyway** |
 | Shizuku option is greyed out | Shizuku or Sui is not installed, not running, or has not granted Morphe permission. **Check Shizuku status** shows which |
 | "Your preferred installer is unavailable" | Fix the underlying issue and retry, or let Morphe fall back to the standard installer |
-| Play Store replaced the patched app with the original | Turn off updates for that app on its Play Store page, then patch and install again |
+| Play Store replaced the patched app with the original | Turn off updates for that app on its Play Store page. Tap the notification or open the app in Morphe and use **Restore** to reinstall the matching stock version and remount |
 | Mount fails with a version mismatch | Install the stock version that matches the patched APK, then mount again |
+| "NoMount driver protocol ... is outdated" | Update NoMount to 2.2.0 or newer and reboot the device |
 | Morphe says the app is mounted but the stock app still runs | On KernelSU or APatch, disable module unmounting or hiding for that app, or install NoMount 2.2.0 or newer. With NoMount, take the app off its exclusion list |
 
 ## Next steps
