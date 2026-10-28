@@ -785,17 +785,21 @@ class InstallViewModel(
             currentInstallType = InstallType.MOUNT
             installState = InstallState.Installing()
             var recordCreated = false
+            var temporaryStockFile: File? = null
 
             try {
                 val inputs = withContext(Dispatchers.IO) {
                     val patchedInfo = pm.getPackageInfo(outputFile)
                         ?: throw Exception("Failed to load application info")
                     val savedOriginal = originalApkRepository.get(packageName)?.filePath?.let(::File)
+                    val moduleStock = if (inputFile?.exists() != true && savedOriginal?.exists() != true && rootInstaller.hasRootAccess()) {
+                        rootInstaller.extractModuleStockApk(packageName)?.also { temporaryStockFile = it }
+                    } else null
 
                     MountInstallInputs(
                         patchedInfo = patchedInfo,
                         installedInfo = pm.getPackageInfo(packageName),
-                        stockFiles = listOfNotNull(inputFile, savedOriginal).filter { it.exists() }.distinct()
+                        stockFiles = listOfNotNull(inputFile, savedOriginal, moduleStock).filter { it.exists() }.distinct()
                     )
                 }
 
@@ -876,11 +880,13 @@ class InstallViewModel(
                 // Drop only caller-owned temporary inputs; persistent saved originals must survive
                 // for future root mount updates.
                 if (inputIsTemporary) inputFile?.delete()
+                temporaryStockFile?.delete()
 
                 // Success
                 handleInstallSuccess(packageName)
 
             } catch (e: Exception) {
+                temporaryStockFile?.delete()
                 Log.e(TAG, "Mount install failed", e)
                 val message = if (e is StockAppInstallException) {
                     app.getString(R.string.mount_stock_restore_failed_message)

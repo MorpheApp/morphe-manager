@@ -262,6 +262,8 @@ class RootInstaller(
 
         unmount(packageName)
         removeOtherRootInstalls(packageName)
+        app.cacheDir.resolve("module-stock-$packageName.apk").delete()
+        app.cacheDir.resolve("module-patched-$packageName.apk").delete()
 
         var installedStockInfo = pm.getPackageInfo(packageName)
 
@@ -369,6 +371,8 @@ class RootInstaller(
         }.orEmpty()
         execute(removeStockRedirects + reattachCommand(packageName) + "; rm -rf ${modulePath.shellQuote()}")
             .assertSuccess("Failed to delete files")
+        app.cacheDir.resolve("module-stock-$packageName.apk").delete()
+        app.cacheDir.resolve("module-patched-$packageName.apk").delete()
     }
 
     /**
@@ -396,6 +400,55 @@ class RootInstaller(
         if (execute("test -f ${moduleApk.shellQuote()}").isSuccess) return moduleApk
 
         throw Exception("Patched APK not found for mount")
+    }
+
+    /**
+     * Checks whether the root module for [packageName] holds a saved stock APK.
+     */
+    suspend fun hasModuleStockApk(packageName: String): Boolean = withContext(Dispatchers.IO) {
+        if (!hasRootAccess()) return@withContext false
+        val path = "$MODULES_PATH/${moduleId(packageName)}/$packageName-stock.apk".shellQuote()
+        execute("test -f $path").isSuccess
+    }
+
+    /**
+     * Extracts the saved stock APK from the root module to a cache file, returning it if present.
+     */
+    suspend fun extractModuleStockApk(packageName: String): File? = withContext(Dispatchers.IO) {
+        if (!hasRootAccess()) return@withContext null
+        val target = app.cacheDir.resolve("module-stock-$packageName.apk")
+        if (target.exists() && target.length() > 0L) return@withContext target
+
+        val source = "$MODULES_PATH/${moduleId(packageName)}/$packageName-stock.apk".shellQuote()
+        val targetPath = target.absolutePath.shellQuote()
+
+        val result = execute("if [ -f $source ]; then cp -f $source $targetPath && chmod 644 $targetPath; else false; fi")
+        if (result.isSuccess && target.exists() && target.length() > 0L) {
+            target
+        } else {
+            target.delete()
+            null
+        }
+    }
+
+    /**
+     * Extracts the patched APK from the root module to a cache file, returning it if present.
+     */
+    suspend fun extractModulePatchedApk(packageName: String): File? = withContext(Dispatchers.IO) {
+        if (!hasRootAccess()) return@withContext null
+        val target = app.cacheDir.resolve("module-patched-$packageName.apk")
+        if (target.exists() && target.length() > 0L) return@withContext target
+
+        val source = "$MODULES_PATH/${moduleId(packageName)}/$packageName.apk".shellQuote()
+        val targetPath = target.absolutePath.shellQuote()
+
+        val result = execute("if [ -f $source ]; then cp -f $source $targetPath && chmod 644 $targetPath; else false; fi")
+        if (result.isSuccess && target.exists() && target.length() > 0L) {
+            target
+        } else {
+            target.delete()
+            null
+        }
     }
 
     /**

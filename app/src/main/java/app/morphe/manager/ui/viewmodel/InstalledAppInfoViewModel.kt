@@ -142,7 +142,10 @@ class InstalledAppInfoViewModel(
                 if (app != null) try {
                     coroutineScope {
                         // Run all checks in parallel
-                        val deferredOriginalApk = async { originalApkRepository.get(app.originalPackageName) != null }
+                        val deferredOriginalApk = async {
+                            originalApkRepository.get(app.originalPackageName) != null ||
+                                    (app.installType == InstallType.MOUNT && rootInstaller.hasModuleStockApk(app.currentPackageName))
+                        }
                         val deferredSiblings = async { installedAppRepository.hasSiblingRecords(app) }
                         val deferredAppState = async { refreshAppState(app) }
                         val deferredPatches = async { resolveAppliedSelection(app) }
@@ -334,7 +337,9 @@ class InstalledAppInfoViewModel(
         val installedApk = installedInfo?.applicationInfo?.sourceDir?.let(::File)
         installedApkSize = installedApk?.length()
         readInstalledApkAbis(installedApk)
-        usableSavedApk = snapshot.savedPatchedApk
+        usableSavedApk = snapshot.savedPatchedApk ?: if (app.installType == InstallType.MOUNT) {
+            rootInstaller.extractModulePatchedApk(app.currentPackageName)
+        } else null
         hasSavedCopy = usableSavedApk != null
         val trackedPatchState = snapshot.patchState
         val trackedPresentation = trackedInstallPresentation(app.installType, trackedPatchState)
@@ -345,6 +350,7 @@ class InstalledAppInfoViewModel(
         appInfo = trackedPresentation.displayedPackageInfo(
             installedPackageInfo = installedInfo,
             savedPackageInfo = snapshot.savedPatchedApkInfo
+                ?: usableSavedApk?.let { pm.getPackageInfo(it) }
         )
         isAppDeleted = trackedPresentation.isDeleted
         isInstallStateNotPatched = trackedPresentation.isNotPatched
