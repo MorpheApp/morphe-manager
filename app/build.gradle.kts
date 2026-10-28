@@ -161,18 +161,27 @@ val translationTags = translations.joinToString(prefix = "{", postfix = "}") { (
 }
 
 /**
- * The JVM the app embeds for patching, an Android build of OpenJDK per ABI it ships one for. A 32 bit
- * x86 device patches inside the app instead.
+ * An Android build of OpenJDK by AngelAuraMC, pinned by [sha256].
  *
- * 17, whose ports have run on Android devices the longest, the 32-bit ARM one above all, and which
- * the patcher and the patches are built for.
+ * @param feature The feature release, which the JDK that links its image has to match.
+ * @param platform The platform its modules are linked for, as jmod names it.
  */
-val embeddedJvmFeature = 17
-val embeddedJvmRelease = "https://github.com/AngelAuraMC/angelauramc-openjdk-build/releases/download/download_jre$embeddedJvmFeature"
+data class EmbeddedJvm(val feature: Int, val file: String, val sha256: String, val platform: String) {
+    val url get() = "https://github.com/AngelAuraMC/angelauramc-openjdk-build/releases/download/download_jre$feature/$file"
+}
+
+/**
+ * The JVM the app embeds for patching per ABI it ships one for. A 32 bit x86 device patches inside
+ * the app instead.
+ *
+ * 25 in a 64-bit process, whose compact object headers leave a large run room for about 8% more.
+ * 17 on 32-bit ARM, as the JIT of 25 there loops for good on loading the patches, C1 alone
+ * included, in more than one build of it. PatcherProcesses tunes each by the bitness of the process.
+ */
 val embeddedJvms = mapOf(
-    "arm64-v8a" to Triple("jre17-android-arm64.tar.xz", "e162c860fe05ee4a4e4af7606437419879f6c748386a7b09fa77d10db6a64091", "linux-aarch64"),
-    "armeabi-v7a" to Triple("jre17-android-arm.tar.xz", "4a9134f1ebf6340dd855805d351712462cddab6f3c2684da7e7da10ccf06648d", "linux-arm"),
-    "x86_64" to Triple("jre17-android-x86_64.tar.xz", "893e27d2aed8b40407f29fe939e2a0f193e5d55f72892a303db634b0808a2b61", "linux-amd64")
+    "arm64-v8a" to EmbeddedJvm(25, "jre25-android-arm64.tar.xz", "d3eb7afe2240c26728a1bb440502c5f18ac3883e932d202dd7f0c9bcbbce4c37", "linux-aarch64"),
+    "armeabi-v7a" to EmbeddedJvm(17, "jre17-android-arm.tar.xz", "4a9134f1ebf6340dd855805d351712462cddab6f3c2684da7e7da10ccf06648d", "linux-arm"),
+    "x86_64" to EmbeddedJvm(25, "jre25-android-x86_64.tar.xz", "7fca862ee1b2d5fe23cd9c9c3d9b7ad3c241947ad1a6cc9464ef2e674867105d", "linux-amd64")
 )
 
 /**
@@ -186,27 +195,28 @@ val embeddedJvmModules = listOf(
 )
 
 /**
- * What of the build the linked modules need, its native libraries above all. A build ships the
- * server VM, but for the 32-bit ARM one, which ships the client VM.
+ * What of a build the linked modules need, its native libraries above all, whichever of them the
+ * build has. A build ships the server VM, but for the 32-bit ARM one, which ships the client VM.
  */
 val embeddedJvmFiles = listOf(
     "lib/*/libjvm.so",
     "lib/libjava.so", "lib/libjimage.so", "lib/libzip.so", "lib/libnet.so", "lib/libnio.so",
     "lib/libverify.so", "lib/libmanagement.so",
+    // Only in 25, whose java.base looks up native symbols through it
+    "lib/libsyslookup.so",
     "lib/jvm.cfg", "lib/tzdb.dat", "lib/security", "conf"
 )
 
 val embeddedJvmTasks = embeddedJvms.map { (abi, build) ->
-    val (file, sha256, platform) = build
     tasks.register<PrepareEmbeddedJvmTask>("prepareEmbeddedJvm${abi.replace("-", "").replace("_", "").replaceFirstChar(Char::uppercase)}") {
         group = "build"
         description = "Links the embedded JVM for $abi."
-        url.set("$embeddedJvmRelease/$file")
-        this.sha256.set(sha256)
-        targetPlatform.set(platform)
+        url.set(build.url)
+        sha256.set(build.sha256)
+        targetPlatform.set(build.platform)
         modules.set(embeddedJvmModules)
         runtimeFiles.set(embeddedJvmFiles)
-        jdk.set(javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(embeddedJvmFeature)) })
+        jdk.set(javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(build.feature)) })
         downloadCache.set(File(gradle.gradleUserHomeDir, "caches/morphe-embedded-jvm"))
         outputArchive.set(layout.buildDirectory.file("intermediates/embeddedJvm/$abi.zip.xz"))
         outputImage.set(layout.buildDirectory.file("intermediates/embeddedJvm/$abi.modules"))
@@ -217,7 +227,7 @@ val embeddedJvmTasks = embeddedJvms.map { (abi, build) ->
 val embeddedJvmAbis = embeddedJvms.keys.joinToString(prefix = "{", postfix = "}") { abi -> "\"$abi\"" }
 
 /** Changes with whatever goes into the runtime, which the app then unpacks again. */
-val embeddedJvmId = (embeddedJvms.values.map { build -> build.second } + embeddedJvmModules + embeddedJvmFiles)
+val embeddedJvmId = (embeddedJvms.values.map { build -> build.sha256 } + embeddedJvmModules + embeddedJvmFiles)
     .hashCode().toUInt().toString(16)
 
 /** Assets the embedded JVM runs from, read by JvmInstallation. */

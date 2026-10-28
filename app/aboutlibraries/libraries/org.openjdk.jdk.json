@@ -1,7 +1,7 @@
 {
   "uniqueId": "org.openjdk:jdk",
   "name": "OpenJDK",
-  "description": "The Java runtime that patching runs in, built for Android by AngelAuraMC. Its source is at https://github.com/AngelAuraMC/angelauramc-openjdk-build and https://github.com/openjdk/jdk17u",
+  "description": "The Java runtime that patching runs in, built for Android by AngelAuraMC. Its source is at https://github.com/AngelAuraMC/angelauramc-openjdk-build, https://github.com/openjdk/jdk17u and https://github.com/openjdk/jdk25u",
   "developers": [{"name": "Oracle and the OpenJDK community"}, {"name": "AngelAuraMC"}],
   "website": "https://openjdk.org",
   "scm": {

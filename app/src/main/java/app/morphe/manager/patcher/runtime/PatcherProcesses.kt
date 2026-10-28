@@ -250,11 +250,15 @@ class PatcherProcesses(
 
     /**
      * The options that tune the JVM to the process, and last those of a debug build, so a flag
-     * given again there wins.
+     * given again there wins. A 64-bit process runs JDK 25 and a 32-bit one JDK 17, see
+     * embeddedJvms of the app.
      */
     private suspend fun jvmTuning() = (if (Process.is64Bit()) listOf(
         // C1 only. A run is too short for C2 to pay off, and its compiles take cores the run needs
-        "-XX:TieredStopAtLevel=1"
+        "-XX:TieredStopAtLevel=1",
+        // 8 byte object headers instead of 12. A run keeps millions of small objects alive, and
+        // smaller ones leave the heap and the collector less to do
+        "-XX:+UseCompactObjectHeaders"
     ) else listOf(
         // The simplest collector, with no threads of its own, on a port that runs few others. A
         // 32-bit JVM is the client VM, which only has C1 to begin with

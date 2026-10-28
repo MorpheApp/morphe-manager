@@ -79,7 +79,8 @@ val shrunkHostJar = tasks.register<ShrinkJarTask>("shrinkHostJar") {
     rules.from("host-rules.pro")
     // The rules are read before shrinking, and the build information only matters to Maven
     excludes.addAll("META-INF/proguard/**", "META-INF/com.android.tools/**", "META-INF/maven/**")
-    // The JDK the embedded JVM is built from, see embeddedJvms of the app
+    // The oldest JDK the embedded JVM is built from, see embeddedJvms of the app, as the host has to
+    // run on every one of them
     jdk.set(javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(17)) })
     proguardClasspath.from(proguard)
     outputJar.set(layout.buildDirectory.file("libs/${project.name}-host-shrunk.jar"))

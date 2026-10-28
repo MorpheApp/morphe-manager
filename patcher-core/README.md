@@ -3,8 +3,8 @@
 Everything about a patching run that does not need Android. The app runs it in the `:patcher`
 process of `PatcherService`, started by `PatcherProcesses` for every run, on one of two VMs:
 
-- JVM, the default: an embedded HotSpot 17 with a heap of a third of the RAM (1.5-3 GB, at most
-  1 GB in a 32-bit process). Shipped for arm64-v8a, armeabi-v7a and x86_64.
+- JVM, the default: an embedded HotSpot with a heap of a third of the RAM (1.5-3 GB, at most
+  1 GB in a 32-bit process). Shipped for arm64-v8a and x86_64 as 25, and for armeabi-v7a as 17.
 - ART, the runtime of the process itself, within the heap Android gives the app. Used when the
   setting is off, on 32-bit x86, and when the JVM fails to start.
 
@@ -51,16 +51,25 @@ preload bundles and start the run, and `HostEvent` for what the run reports.
 
 ## The runtime in the APK
 
-`buildSrc/PrepareEmbeddedJvmTask` turns the OpenJDK 17 Android build of
+`buildSrc/PrepareEmbeddedJvmTask` turns the OpenJDK Android builds of
 [AngelAuraMC](https://github.com/AngelAuraMC/angelauramc-openjdk-build) into `jvm/<abi>.zip.xz`.
-The build is pinned by SHA-256 in `app/build.gradle.kts`.
+Each is pinned by SHA-256 in `app/build.gradle.kts`.
+
+- A 64-bit process runs 25, whose compact object headers leave the largest runs room for about
+  8% more than 17 does (TikTok with Hushfeed fits in a heap of a third of 3.5 GB on 25 alone).
+- A 32-bit ARM process runs 17. On 25 the run never gets past loading the patches: one thread
+  loops in compiled code and the VM never reaches a safepoint again. C1 alone does it as well,
+  `-Xint` does not but takes minutes for what 17 does in seconds, and the 25 of Termux loops the
+  same way, so it is the JIT of 25 on that port rather than a build of it.
+- The host jar is built for 17 and shrunk against it, so it runs on either.
 
 - Runtimes and the host jar are zips of stored entries, compressed whole with xz, which takes
   them to less than half of what deflate does (`XzArchive.kt`).
 - The image (`lib/modules`) is left out of the runtimes. The ABIs link the same classes but for
   a few generated per platform (`UnixConstants`, `Architecture`, ...), so `jvm/modules.xz` ships
   the image of the first ABI of `embeddedJvms`, and every ABI whose image differs gets
-  `jvm/<abi>.modules.delta.xz` (`ImageDelta.kt`), about 90K in place of 7M. `JvmImageDelta`
+  `jvm/<abi>.modules.delta.xz` (`ImageDelta.kt`), about 90K in place of 7M. The image of 17 for
+  armeabi-v7a shares nothing with that of 25, so its delta is about the size of the image. `JvmImageDelta`
   rebuilds the image on the device, byte for byte, checked by size and CRC-32.
 - The host jar is shrunk with ProGuard (`ShrinkJarTask`, `host-rules.pro`), which keeps the
   patcher, smali and Kotlin whole, as the app's R8 rules do, and follows the rules the
@@ -77,7 +86,8 @@ The build is pinned by SHA-256 in `app/build.gradle.kts`.
   another JDK's, because the Android build patches some of them.
 - `java.base` is packed last with `--hash-modules`, as the hashes it carries no longer match.
   The pattern avoids `*` and `?`, which the JDK launchers on Windows expand as file names.
-- The JDK that links has to be the same feature release, 17.
+- The JDK that links has to be the same feature release as the build, so both 17 and 25 are
+  toolchains of the build.
 - The `legal/` notices of every linked module go into the archive, as the GPL requires them to
   travel with the binaries. The license itself is listed in `app/aboutlibraries`, since
   AboutLibraries only finds Gradle dependencies on its own.
@@ -114,6 +124,11 @@ adb exec-out run-as app.morphe.manager.debug cat files/gc.log > gc.log
   runs, as back to back runs got up to 40% slower, more than any flag changes. Read the
   temperature from the `Current temperatures from HAL` part of `adb shell dumpsys thermalservice`,
   as the part above it is cached.
+- **Object headers**: the app passes `-XX:+UseCompactObjectHeaders` in a 64-bit process (17,
+  which a 32-bit process runs, does not have the flag), which shrinks every object header from
+  12 to 8 bytes. Runs of a split YouTube bundle were about 4% faster with it, mostly in compiling
+  the dex files and encoding the resources. `-XX:-UseCompactObjectHeaders` in `jvm-options.txt`
+  turns it off.
 - **CDS**: the runtime ships no archive. One can be made in three runs: one with
   `-XX:DumpLoadedClassList=<dir>/classes.lst`, one with `-Xshare:dump
   -XX:SharedClassListFile=<dir>/classes.lst -XX:SharedArchiveFile=<dir>/app.jsa` (it exits
