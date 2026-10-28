@@ -252,6 +252,14 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
+        // Notification opening an app's info dialog (e.g. mount replaced)
+        if (intent?.action == ACTION_SHOW_APP_INFO) {
+            intent.getStringExtra(EXTRA_APP_INFO_PACKAGE)
+                ?.takeIf { it.isNotBlank() }
+                ?.let { vm.pendingAppInfoPackage = it }
+            return
+        }
+
         // Batch patch requested by another app, for example an automation tool.
         // The request is only recorded here; MorpheManager gates it before anything runs
         if (intent?.action == ACTION_BATCH_PATCH) {
@@ -351,6 +359,12 @@ class MainActivity : AppCompatActivity() {
 
         /** Package the per-app shortcut opens the patch dialog for. */
         const val EXTRA_PATCH_PACKAGE = "patch_package"
+
+        /** Action behind a notification opening an app's info dialog. */
+        const val ACTION_SHOW_APP_INFO = "app.morphe.manager.action.SHOW_APP_INFO"
+
+        /** Package the notification opens the info dialog for. */
+        const val EXTRA_APP_INFO_PACKAGE = "app_info_package"
     }
 }
 
@@ -433,6 +447,15 @@ private fun MorpheManager(vm: MainViewModel) {
             navController.popBackStack(HomeScreen, false)
             navController.getBackStackEntry(HomeScreen)
                 .savedStateHandle["patch_trigger_package"] = packageName
+        }
+    }
+
+    LaunchedEffect(vm.pendingAppInfoPackage) {
+        vm.pendingAppInfoPackage?.let { packageName ->
+            vm.pendingAppInfoPackage = null
+            navController.popBackStack(HomeScreen, false)
+            navController.getBackStackEntry(HomeScreen)
+                .savedStateHandle["app_info_trigger_package"] = packageName
         }
     }
 
@@ -590,6 +613,8 @@ private fun MorpheManager(vm: MainViewModel) {
                 val bundleUpdateProgress by homeViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
                 val patchTriggerPackage by entry.savedStateHandle.getStateFlow<String?>("patch_trigger_package", null)
                     .collectAsStateWithLifecycle()
+                val appInfoTriggerPackage by entry.savedStateHandle.getStateFlow<String?>("app_info_trigger_package", null)
+                    .collectAsStateWithLifecycle()
 
                 // If opened from an FCM notification, trigger an update check.
                 // vm.pendingUpdateCheck is set in onNewIntent() and reset here after handling.
@@ -621,6 +646,10 @@ private fun MorpheManager(vm: MainViewModel) {
                     patchTriggerPackage = patchTriggerPackage,
                     onPatchTriggerHandled = {
                         entry.savedStateHandle["patch_trigger_package"] = null
+                    },
+                    appInfoTriggerPackage = appInfoTriggerPackage,
+                    onAppInfoTriggerHandled = {
+                        entry.savedStateHandle["app_info_trigger_package"] = null
                     }
                 )
             }

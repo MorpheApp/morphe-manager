@@ -70,6 +70,8 @@ fun HomeScreen(
     onboardingState: OnboardingState? = null,
     patchTriggerPackage: String? = null,
     onPatchTriggerHandled: () -> Unit = {},
+    appInfoTriggerPackage: String? = null,
+    onAppInfoTriggerHandled: () -> Unit = {},
     installViewModel: InstallViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
@@ -246,6 +248,14 @@ fun HomeScreen(
         patchTriggerPackage?.let { packageName ->
             homeViewModel.patchFlow.showPatchDialog(packageName)
             onPatchTriggerHandled()
+        }
+    }
+
+    // Handle app info trigger (e.g. from mount replaced notification)
+    LaunchedEffect(appInfoTriggerPackage) {
+        appInfoTriggerPackage?.let { packageName ->
+            homeViewModel.patchFlow.openInstalledAppInfo(packageName)
+            onAppInfoTriggerHandled()
         }
     }
 

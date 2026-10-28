@@ -213,7 +213,10 @@ class UpdateNotificationManager(private val context: Context) {
             ),
             notificationId = NOTIFICATION_ID_MOUNT_REPLACED,
             tag = packageName,
-            contentIntent = buildActivityIntent(REQUEST_CODE_MOUNT_REPLACED) {}
+            contentIntent = buildActivityIntent(REQUEST_CODE_MOUNT_REPLACED) {
+                action = MainActivity.ACTION_SHOW_APP_INFO
+                putExtra(MainActivity.EXTRA_APP_INFO_PACKAGE, packageName)
+            }
         )
     }
 
