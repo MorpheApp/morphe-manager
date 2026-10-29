@@ -785,21 +785,17 @@ class InstallViewModel(
             currentInstallType = InstallType.MOUNT
             installState = InstallState.Installing()
             var recordCreated = false
-            var temporaryStockFile: File? = null
 
             try {
                 val inputs = withContext(Dispatchers.IO) {
                     val patchedInfo = pm.getPackageInfo(outputFile)
                         ?: throw Exception("Failed to load application info")
                     val savedOriginal = originalApkRepository.get(packageName)?.filePath?.let(::File)
-                    val moduleStock = if (inputFile?.exists() != true && savedOriginal?.exists() != true && rootInstaller.hasRootAccess()) {
-                        rootInstaller.extractModuleStockApk(packageName)?.also { temporaryStockFile = it }
-                    } else null
 
                     MountInstallInputs(
                         patchedInfo = patchedInfo,
                         installedInfo = pm.getPackageInfo(packageName),
-                        stockFiles = listOfNotNull(inputFile, savedOriginal, moduleStock).filter { it.exists() }.distinct()
+                        stockFiles = listOfNotNull(inputFile, savedOriginal).filter { it.exists() }.distinct()
                     )
                 }
 
@@ -880,23 +876,13 @@ class InstallViewModel(
                 // Drop only caller-owned temporary inputs; persistent saved originals must survive
                 // for future root mount updates.
                 if (inputIsTemporary) inputFile?.delete()
-                temporaryStockFile?.delete()
 
                 // Success
                 handleInstallSuccess(packageName)
 
             } catch (e: Exception) {
-                temporaryStockFile?.delete()
                 Log.e(TAG, "Mount install failed", e)
-                val message = if (e is StockAppInstallException) {
-                    app.getString(R.string.mount_stock_restore_failed_message)
-                } else {
-                    app.getString(
-                        R.string.install_app_fail,
-                        e.simpleMessage() ?: e.javaClass.simpleName
-                    )
-                }
-                handleInstallError(message)
+                handleInstallError(mountFailureMessage(e))
 
                 // Cleanup on failure
                 try {
@@ -919,6 +905,36 @@ class InstallViewModel(
     /**
      * Mount a saved patched APK, restoring the matching original APK first when Morphe has it.
      */
+    /**
+     * Puts a mount another version replaced back from the copies its root module keeps, for an app
+     * whose saved builds are gone, see [RootInstaller.restoreFromModule].
+     */
+    fun restoreMountFromModule(packageName: String, version: String) {
+        if (installState is InstallState.Installing) return
+
+        launchDetached {
+            currentInstallType = InstallType.MOUNT
+            installState = InstallState.Installing()
+            try {
+                rootInstaller.restoreFromModule(packageName, version) { installState = InstallState.Installing(it) }
+                installState = InstallState.Installing(MountStage.MOUNTING)
+                rootInstaller.mount(packageName)
+                handleInstallSuccess(packageName)
+            } catch (e: Exception) {
+                // The module is kept, as it holds the only copies to try again from
+                Log.e(TAG, "Mount restore failed", e)
+                handleInstallError(mountFailureMessage(e))
+            }
+        }
+    }
+
+    private fun mountFailureMessage(e: Exception): String =
+        if (e is StockAppInstallException) {
+            app.getString(R.string.mount_stock_restore_failed_message)
+        } else {
+            app.getString(R.string.install_app_fail, e.simpleMessage() ?: e.javaClass.simpleName)
+        }
+
     fun installSavedMount(
         outputFile: File,
         packageName: String,

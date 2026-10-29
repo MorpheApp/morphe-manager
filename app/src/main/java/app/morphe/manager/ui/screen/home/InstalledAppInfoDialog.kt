@@ -514,20 +514,25 @@ fun DialogHostScope.InstalledAppInfoDialog(
     }
 
     // Offered only once another version, usually a store update, replaced the mount. An unmounted
-    // app still at its patched version is mounted again instead
+    // app still at its patched version is mounted again instead. The builds Morphe saved come
+    // first, and the copies the root module keeps stand in where they are gone
     val installedVersion = appInfo?.versionName
+    val restoresSavedBuilds = viewModel.hasSavedCopy && viewModel.hasOriginalApk
     val mountRestore = if (
         loadedApp != null &&
         viewModel.isInstallStateNotPatched &&
         loadedApp.installType == InstallType.MOUNT &&
-        viewModel.hasSavedCopy && viewModel.hasOriginalApk &&
+        (restoresSavedBuilds || viewModel.canRestoreFromModule) &&
         installedVersion != null && installedVersion != loadedApp.version
     ) {
         MountRestore(
             versions = installedVersion.withVersionPrefix() to loadedApp.version.withVersionPrefix(),
             label = mountStageLabel,
             isRunning = isInstalling,
-            onRestore = { reinstallSavedMount(loadedApp) },
+            onRestore = {
+                if (restoresSavedBuilds) reinstallSavedMount(loadedApp)
+                else installViewModel.restoreMountFromModule(loadedApp.currentPackageName, loadedApp.version)
+            },
             onOpenPlayStore = if (viewModel.isReplacedByPlayStore) {
                 { context.openPlayStorePage(loadedApp.currentPackageName) }
             } else null

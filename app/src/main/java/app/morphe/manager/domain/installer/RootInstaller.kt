@@ -122,8 +122,9 @@ class RootInstaller(
      * Rechecked now and then, as the module can be installed or removed while Morphe runs.
      */
     private suspend fun noMountBin(): String? {
-        if (Shell.isAppGrantedRoot() != true || isMagisk()) {
-            cachedNoMountReason = if (isMagisk()) "NoMount does not run on Magisk" else null
+        if (Shell.isAppGrantedRoot() != true) return null
+        if (isMagisk()) {
+            cachedNoMountReason = "NoMount does not run on Magisk"
             return null
         }
         val now = SystemClock.elapsedRealtime()
@@ -137,24 +138,16 @@ class RootInstaller(
                     if [ -x "$nm" ] && version=$("$nm" version 2>/dev/null); then echo "$nm $version"; break; fi;
                 done
             """.trimIndent()
-        ).out.firstOrNull { it.isNotBlank() }?.trim().orEmpty()
-        val binPath = probe.substringBefore(' ').takeIf { it.isNotBlank() }
-        val rawVersion = probe.substringAfter(' ', "")
-        val protocol = rawVersion.substringBefore(' ').toIntOrNull()
-            ?: Regex("""\d+""").find(rawVersion)?.value?.toIntOrNull() ?: 0
+        ).out.firstOrNull()?.trim().orEmpty()
+        val bin = probe.substringBefore(' ').takeIf { it.isNotEmpty() }
+        val protocol = probe.substringAfter(' ', "").substringBefore(' ').toIntOrNull() ?: 0
 
-        cachedNoMountBin = binPath?.takeIf { protocol >= NO_MOUNT_MIN_PROTOCOL }
-        cachedNoMountReason = when {
-            cachedNoMountBin != null -> null
-            binPath != null -> {
-                Log.w(
-                    TAG,
-                    "NoMount CLI found at $binPath but driver protocol $protocol is below required $NO_MOUNT_MIN_PROTOCOL (v2.2.0+ required)"
-                )
-                "NoMount driver protocol $protocol is outdated (v2.2.0+ required)"
-            }
-            else -> null
-        }
+        cachedNoMountBin = bin?.takeIf { protocol >= NO_MOUNT_MIN_PROTOCOL }
+        // A driver too old for the UID scoped rules is told apart, as it looks installed and working
+        cachedNoMountReason = if (bin != null && cachedNoMountBin == null) {
+            "NoMount driver protocol $protocol is outdated ($NO_MOUNT_MIN_VERSION or newer required)"
+                .also { Log.w(TAG, "$it, found at $bin") }
+        } else null
         lastNoMountCheck = now
         return cachedNoMountBin
     }
@@ -281,8 +274,6 @@ class RootInstaller(
 
         unmount(packageName)
         removeOtherRootInstalls(packageName)
-        app.cacheDir.resolve("module-stock-$packageName.apk").delete()
-        app.cacheDir.resolve("module-patched-$packageName.apk").delete()
 
         var installedStockInfo = pm.getPackageInfo(packageName)
 
@@ -293,19 +284,9 @@ class RootInstaller(
                 error("Stock APK package (${stockInfo.packageName}) does not match $packageName")
             }
 
-            val installedInfo = installedStockInfo
-            val stockAlreadyInstalled = installedInfo != null &&
-                    pm.getVersionCode(installedInfo) == pm.getVersionCode(stockInfo) &&
-                    installedInfo.versionName == stockInfo.versionName
-
-            if (!stockAlreadyInstalled) {
+            if (installedStockInfo?.isBuildOf(stockInfo) != true) {
                 onStage(MountStage.RESTORING_STOCK)
-                val result = installStockApp(stockApp, packageName)
-                val stockInstalled = waitForInstalledStock(packageName, stockInfo)
-                if (!stockInstalled) {
-                    if (!result.isSuccess) throw StockAppInstallException(result.failureDetail())
-                    throw StockAppInstallException("Stock app install did not settle")
-                }
+                installStockApp(stockApp, packageName) { it.isBuildOf(stockInfo) }
             }
 
             installedStockInfo = pm.getPackageInfo(packageName)
@@ -318,6 +299,13 @@ class RootInstaller(
         // post-fs-data mounts this copy over the installed APK at boot, where one that differs fails
         // PackageManager's certificate check and the app is removed
         val stockModuleApkWritten = !installedStockPath.isNullOrBlank() && stockMountPaths.isNotEmpty()
+        // Kept for restoreFromModule alone, as the stock app installed again needs its splits too
+        val stockSplitApks = if (stockModuleApkWritten) {
+            installedStockInfo?.applicationInfo?.splitSourceDirs.orEmpty()
+                .associateWith { "$modulePath/$packageName$STOCK_SPLIT_INFIX${File(it).name}" }
+        } else {
+            emptyMap()
+        }
 
         val placeholders = mapOf(
             "__PKG_NAME__" to packageName,
@@ -348,9 +336,11 @@ class RootInstaller(
         if (stockModuleApkWritten) {
             stageCopy(installedStockPath, stockModuleApk, "Stock APK doesn't exist")
         }
+        stockSplitApks.forEach { (source, target) -> stageCopy(source, target, "Stock split APK doesn't exist") }
         stageCopy(patchedAPK.absolutePath, patchedModuleApk, "File doesn't exist")
 
-        val apkPaths = listOfNotNull(patchedModuleApk, stockModuleApk.takeIf { stockModuleApkWritten })
+        val apkPaths = listOfNotNull(patchedModuleApk, stockModuleApk.takeIf { stockModuleApkWritten }) +
+                stockSplitApks.values
         setStagedFilePermissions(
             apkPaths = apkPaths,
             scriptPaths = MODULE_SCRIPTS.map { "$modulePath/$it" }
@@ -358,6 +348,17 @@ class RootInstaller(
 
         onStaged()
         commitStaged(textFiles.keys + apkPaths)
+
+        // Splits of the version staged before would not install beside this one
+        val staleSplits = moduleStockSplits(packageName) - stockSplitApks.values.toSet()
+        if (staleSplits.isNotEmpty()) execute("rm -f ${staleSplits.joinToString(" ") { it.shellQuote() }}")
+    }
+
+    /** The split APKs of the stock app the module of [packageName] keeps beside its stock APK. */
+    private suspend fun moduleStockSplits(packageName: String): List<String> {
+        val prefix = "$MODULES_PATH/${moduleId(packageName)}/$packageName$STOCK_SPLIT_INFIX"
+        return execute($$"""for f in $${prefix.shellQuote()}*.apk; do [ -f "$f" ] && echo "$f"; done""")
+            .out.filter { it.isNotBlank() }
     }
 
     /** The package info of a stock APK, or of the base module of a split archive. */
@@ -390,8 +391,6 @@ class RootInstaller(
         }.orEmpty()
         execute(removeStockRedirects + reattachCommand(packageName) + "; rm -rf ${modulePath.shellQuote()}")
             .assertSuccess("Failed to delete files")
-        app.cacheDir.resolve("module-stock-$packageName.apk").delete()
-        app.cacheDir.resolve("module-patched-$packageName.apk").delete()
     }
 
     /**
@@ -422,55 +421,6 @@ class RootInstaller(
     }
 
     /**
-     * Checks whether the root module for [packageName] holds a saved stock APK.
-     */
-    suspend fun hasModuleStockApk(packageName: String): Boolean = withContext(Dispatchers.IO) {
-        if (!hasRootAccess()) return@withContext false
-        val path = "$MODULES_PATH/${moduleId(packageName)}/$packageName-stock.apk".shellQuote()
-        execute("test -f $path").isSuccess
-    }
-
-    /**
-     * Extracts the saved stock APK from the root module to a cache file, returning it if present.
-     */
-    suspend fun extractModuleStockApk(packageName: String): File? = withContext(Dispatchers.IO) {
-        if (!hasRootAccess()) return@withContext null
-        val target = app.cacheDir.resolve("module-stock-$packageName.apk")
-        if (target.exists() && target.length() > 0L) return@withContext target
-
-        val source = "$MODULES_PATH/${moduleId(packageName)}/$packageName-stock.apk".shellQuote()
-        val targetPath = target.absolutePath.shellQuote()
-
-        val result = execute("if [ -f $source ]; then cp -f $source $targetPath && chmod 644 $targetPath; else false; fi")
-        if (result.isSuccess && target.exists() && target.length() > 0L) {
-            target
-        } else {
-            target.delete()
-            null
-        }
-    }
-
-    /**
-     * Extracts the patched APK from the root module to a cache file, returning it if present.
-     */
-    suspend fun extractModulePatchedApk(packageName: String): File? = withContext(Dispatchers.IO) {
-        if (!hasRootAccess()) return@withContext null
-        val target = app.cacheDir.resolve("module-patched-$packageName.apk")
-        if (target.exists() && target.length() > 0L) return@withContext target
-
-        val source = "$MODULES_PATH/${moduleId(packageName)}/$packageName.apk".shellQuote()
-        val targetPath = target.absolutePath.shellQuote()
-
-        val result = execute("if [ -f $source ]; then cp -f $source $targetPath && chmod 644 $targetPath; else false; fi")
-        if (result.isSuccess && target.exists() && target.length() > 0L) {
-            target
-        } else {
-            target.delete()
-            null
-        }
-    }
-
-    /**
      * Copies [sourcePath] to the staging file of [targetPath] in the same directory. The module's
      * APK is bind mounted over the app at boot, so a copy cut short by a full disk or a power loss
      * must never be left under the name the mount script looks for.
@@ -492,13 +442,12 @@ class RootInstaller(
     }
 
     /**
-     * Installs the stock app in one session, as a store does. A split archive is installed from
-     * its own modules: the merged APK patching builds from one keeps the base module's signing
+     * Installs the stock app from [stockApp], see [installStockApks]. A split archive is installed
+     * from its own modules: the merged APK patching builds from one keeps the base module's signing
      * block over contents it no longer describes, so PackageManager rejects it.
      */
-    private suspend fun installStockApp(stockApp: File, packageName: String): Shell.Result {
+    private suspend fun installStockApp(stockApp: File, packageName: String, settled: (PackageInfo) -> Boolean) {
         val extractDir = app.cacheDir.resolve("stock-splits-$packageName")
-        val tempDirQuoted = "/data/local/tmp/morphe-stock-$packageName".shellQuote()
 
         try {
             val modules = if (SplitApkPreparer.isSplitArchive(stockApp)) {
@@ -514,49 +463,92 @@ class RootInstaller(
             } else {
                 listOf(stockApp)
             }
-
-            val writes = modules.joinToString(" && ") { module ->
-                val name = module.name.shellQuote()
-                $$"""pm install-write -S $${module.length()} "$session" $$name $$tempDirQuoted/$$name"""
-            }
-
-            // The subshell keeps exit from closing the shared root shell, which would leave the
-            // commands queued after this one reading nothing back. A module that fails to write
-            // abandons the session, so nothing half installed is left
-            return execute(
-                $$"""
-                    (
-                        rm -rf $$tempDirQuoted;
-                        mkdir -p $$tempDirQuoted &&
-                        cp $${modules.joinToString(" ") { it.absolutePath.shellQuote() }} $$tempDirQuoted/ &&
-                        chmod 644 $$tempDirQuoted/* &&
-                        session="$(pm install-create -r -d | sed -n 's/.*\[\([0-9]*\)\].*/\1/p')" &&
-                        [ -n "$session" ] &&
-                        { $$writes && pm install-commit "$session" || { pm install-abandon "$session"; false; }; };
-                        result=$?;
-                        rm -rf $$tempDirQuoted;
-                        exit $result
-                    )
-                """.trimIndent()
-            )
+            installStockApks(modules.map { it.absolutePath }, packageName, settled)
         } finally {
             extractDir.deleteRecursively()
         }
     }
 
-    private suspend fun waitForInstalledStock(packageName: String, stockInfo: PackageInfo): Boolean =
-        withTimeoutOrNull(STOCK_INSTALL_SETTLE_TIMEOUT) {
-            while (true) {
-                val installedInfo = pm.getPackageInfo(packageName)
-                if (installedInfo != null &&
-                    pm.getVersionCode(installedInfo) == pm.getVersionCode(stockInfo) &&
-                    installedInfo.versionName == stockInfo.versionName
-                ) {
-                    return@withTimeoutOrNull true
-                }
-                delay(STOCK_INSTALL_SETTLE_POLL)
-            }
-        } == true
+    /**
+     * Installs [apkPaths], the APKs of the stock app, in one session as a store does, and waits for
+     * PackageManager to hold a build [settled] accepts. They are read as root, so they can be files
+     * only root reaches, as the copies a module keeps are.
+     *
+     * @throws StockAppInstallException If no such build settles.
+     */
+    private suspend fun installStockApks(apkPaths: List<String>, packageName: String, settled: (PackageInfo) -> Boolean) {
+        val tempDirQuoted = "/data/local/tmp/morphe-stock-$packageName".shellQuote()
+        val writes = apkPaths.joinToString(" && ") { path ->
+            val name = File(path).name.shellQuote()
+            $$"""pm install-write -S "$(stat -c %s $$tempDirQuoted/$$name)" "$session" $$name $$tempDirQuoted/$$name"""
+        }
+
+        // The subshell keeps exit from closing the shared root shell, which would leave the
+        // commands queued after this one reading nothing back. A module that fails to write
+        // abandons the session, so nothing half installed is left
+        val result = execute(
+            $$"""
+                (
+                    rm -rf $$tempDirQuoted;
+                    mkdir -p $$tempDirQuoted &&
+                    cp $${apkPaths.joinToString(" ") { it.shellQuote() }} $$tempDirQuoted/ &&
+                    chmod 644 $$tempDirQuoted/* &&
+                    session="$(pm install-create -r -d | sed -n 's/.*\[\([0-9]*\)\].*/\1/p')" &&
+                    [ -n "$session" ] &&
+                    { $$writes && pm install-commit "$session" || { pm install-abandon "$session"; false; }; };
+                    result=$?;
+                    rm -rf $$tempDirQuoted;
+                    exit $result
+                )
+            """.trimIndent()
+        )
+
+        val settledInTime = withTimeoutOrNull(STOCK_INSTALL_SETTLE_TIMEOUT) {
+            while (pm.getPackageInfo(packageName)?.let(settled) != true) delay(STOCK_INSTALL_SETTLE_POLL)
+        } != null
+        if (!settledInTime) {
+            if (!result.isSuccess) throw StockAppInstallException(result.failureDetail())
+            throw StockAppInstallException("Stock app install did not settle")
+        }
+    }
+
+    private fun PackageInfo.isBuildOf(other: PackageInfo) =
+        pm.getVersionCode(this) == pm.getVersionCode(other) && versionName == other.versionName
+
+    /**
+     * Whether the module of [packageName] still holds the patched APK it mounts and the stock APK it
+     * was staged from, which is all [restoreFromModule] needs.
+     */
+    suspend fun hasModuleCopies(packageName: String) = withContext(Dispatchers.IO) {
+        val modulePath = "$MODULES_PATH/${moduleId(packageName)}"
+        hasRootAccess() && execute(
+            "test -f ${"$modulePath/$packageName.apk".shellQuote()} && " +
+                    "test -f ${"$modulePath/$packageName-stock.apk".shellQuote()}"
+        ).isSuccess
+    }
+
+    /**
+     * Puts a mount another version replaced, usually a store update, back from the copies its
+     * module keeps, which outlast any Morphe saved: the stock APK it was staged from is installed
+     * again with its splits and the module staged anew over it, as the reinstalled app has moved.
+     * [version] is the one the module mounts. The module is mounted again by [mount].
+     */
+    suspend fun restoreFromModule(
+        packageName: String,
+        version: String,
+        onStage: (MountStage) -> Unit = {}
+    ) = withContext(Dispatchers.IO) {
+        val modulePath = "$MODULES_PATH/${moduleId(packageName)}"
+
+        onStage(MountStage.RESTORING_STOCK)
+        installStockApks(
+            listOf("$modulePath/$packageName-stock.apk") + moduleStockSplits(packageName),
+            packageName
+        ) { it.versionName == version }
+
+        val label = pm.getPackageInfo(packageName)?.let { with(pm) { it.label() } } ?: packageName
+        install(File("$modulePath/$packageName.apk"), null, packageName, version, label, onStage)
+    }
 
     private suspend fun collectStockMountPaths(
         packageName: String,
@@ -745,6 +737,9 @@ class RootInstaller(
         private val MODULE_SCRIPTS = listOf("service.sh", "post-fs-data.sh")
         private val MODULE_FILES = MODULE_SCRIPTS + "module.prop"
         private const val STOCK_PATHS_FILE = "stock-paths.txt"
+
+        // Between the package name and the split's own file name, so no split reads as the stock APK
+        private const val STOCK_SPLIT_INFIX = "-stock-"
         /** Holds "1" when the module may only redirect with NoMount and never falls back to a bind mount. */
         private const val NO_MOUNT_MARKER = "nomount-only"
 
@@ -759,6 +754,9 @@ class RootInstaller(
 
         /** The driver protocol that brought UID scoped rules. */
         private const val NO_MOUNT_MIN_PROTOCOL = 22
+
+        /** The NoMount release that brought [NO_MOUNT_MIN_PROTOCOL]. */
+        private const val NO_MOUNT_MIN_VERSION = "2.2.0"
 
         // Every UID but system_server's, so PackageManager keeps seeing the stock APK it verifies
         private const val NO_MOUNT_SCOPE = "--uid-range all --uid-excluded 1000-1000"

@@ -100,6 +100,10 @@ class InstalledAppInfoViewModel(
     var hasOriginalApk by mutableStateOf(false)
         private set
 
+    /** Whether a replaced mount can be put back from its root module, see [RootInstaller.restoreFromModule]. */
+    var canRestoreFromModule by mutableStateOf(false)
+        private set
+
     /** Web links of the installed app, null while nothing is installed under its package. */
     var appLinksStatus: AppLinksStatus? by mutableStateOf(null)
         private set
@@ -142,10 +146,7 @@ class InstalledAppInfoViewModel(
                 if (app != null) try {
                     coroutineScope {
                         // Run all checks in parallel
-                        val deferredOriginalApk = async {
-                            originalApkRepository.get(app.originalPackageName) != null ||
-                                    (app.installType == InstallType.MOUNT && rootInstaller.hasModuleStockApk(app.currentPackageName))
-                        }
+                        val deferredOriginalApk = async { originalApkRepository.get(app.originalPackageName) != null }
                         val deferredSiblings = async { installedAppRepository.hasSiblingRecords(app) }
                         val deferredAppState = async { refreshAppState(app) }
                         val deferredPatches = async { resolveAppliedSelection(app) }
@@ -337,9 +338,7 @@ class InstalledAppInfoViewModel(
         val installedApk = installedInfo?.applicationInfo?.sourceDir?.let(::File)
         installedApkSize = installedApk?.length()
         readInstalledApkAbis(installedApk)
-        usableSavedApk = snapshot.savedPatchedApk ?: if (app.installType == InstallType.MOUNT) {
-            rootInstaller.extractModulePatchedApk(app.currentPackageName)
-        } else null
+        usableSavedApk = snapshot.savedPatchedApk
         hasSavedCopy = usableSavedApk != null
         val trackedPatchState = snapshot.patchState
         val trackedPresentation = trackedInstallPresentation(app.installType, trackedPatchState)
@@ -350,13 +349,15 @@ class InstalledAppInfoViewModel(
         appInfo = trackedPresentation.displayedPackageInfo(
             installedPackageInfo = installedInfo,
             savedPackageInfo = snapshot.savedPatchedApkInfo
-                ?: usableSavedApk?.let { pm.getPackageInfo(it) }
         )
         isAppDeleted = trackedPresentation.isDeleted
         isInstallStateNotPatched = trackedPresentation.isNotPatched
         isReplacedByPlayStore = isInstallStateNotPatched &&
                 pm.getInstallerPackageName(app.currentPackageName) == PLAY_STORE_INSTALLER_PACKAGE
         isInstallStateUnknown = trackedPresentation.isUnknown
+        // Asked only of a mount another version replaced, the one case it is restored for
+        canRestoreFromModule = app.installType == InstallType.MOUNT && isInstallStateNotPatched &&
+                rootInstaller.hasModuleCopies(app.currentPackageName)
 
         canRemoveRecord = canRemoveTrackedRecord(app.installType, trackedPatchState, hasSavedCopy)
 
