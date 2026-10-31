@@ -163,8 +163,11 @@ data class BatchPatchItem(
     val failedPatch: String? = null,
     /** True when the sources mark this APK version as experimental. */
     val experimentalVersion: Boolean = false,
-    /** Version the sources recommend, offered for download when the APK is missing or wrong. */
-    val suggestedVersion: String? = null,
+    /**
+     * Newer app version the sources the app is patched from support, when [source] is behind it
+     * and the user has not turned that version down.
+     */
+    val newerVersion: String? = null,
     val forceVersionMismatch: Boolean = false,
     val forceUnverifiedSignature: Boolean = false,
     /** The one source simple mode was told to patch this app from, null to use every source. */

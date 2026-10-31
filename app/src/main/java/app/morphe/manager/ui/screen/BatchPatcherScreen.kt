@@ -23,6 +23,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -869,6 +871,18 @@ private fun BatchItemCard(
                             )
 
                             null -> BatchStateBadge(item.state)
+                        }
+
+                        // The build is as old as the APK on hand, which the home card would go
+                        // on marking for a rebuild, so the version it is behind is named up front
+                        item.newerVersion?.let { newer ->
+                            val description =
+                                "${stringResource(R.string.home_app_info_newest_supported_version)} $newer"
+                            StatusBadge(
+                                text = newer,
+                                icon = AppStateIcons.NewerVersion,
+                                modifier = Modifier.clearAndSetSemantics { contentDescription = description }
+                            )
                         }
                     }
 
