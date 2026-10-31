@@ -10,7 +10,7 @@
     <string name="home_app_hide_title">要隱藏這個應用程式嗎？</string>
     <string name="home_more_apps_title">更多應用程式</string>
     <string name="home_more_apps_hide_title">要隱藏此卡片嗎？</string>
-    <string name="home_more_apps_hide_message">您可以隨時在「設定 &gt; 外觀 &gt; 主螢幕」中將其恢復</string>
+    <string name="home_more_apps_hide_message">你可以隨時在「設定 &gt; 外觀 &gt; 主螢幕」中將其恢復</string>
     <string name="home_app_hide_message">此應用程式將從主螢幕隱藏。您之後可以在 [隱藏的應用程式] 中，使用清單底部的按鈕將其還原</string>
     <string name="home_app_will_be_hidden">此應用程式將會隱藏</string>
     <string name="home_app_hidden_named">%s已隱藏</string>
@@ -62,26 +62,11 @@
     <string name="home_search_apps">搜尋應用程式</string>
     <string name="list_options_title">排序和篩選</string>
     <string name="list_options_state_description">已依 %1$s 排序，已依 %2$s 篩選</string>
-    <string name="home_app_filter_all_description">主畫面上的每個應用程式</string>
-    <string name="home_app_filter_patched_description">您已使用 Morphe 修補或儲存的應用程式</string>
-    <string name="home_app_filter_not_patched_description">您尚未在 Morphe 中修補的應用程式</string>
-    <string name="home_app_filter_installed_description">目前安裝在此裝置上的應用程式</string>
-    <string name="home_app_filter_uninstalled_description">已使用 Morphe 修補但已不在這部裝置上的應用程式</string>
     <string name="home_app_filter_clones">克隆</string>
-    <string name="home_app_filter_clones_description">使用自己的套件名稱建置，並與原始應用程式一同安裝的應用程式</string>
     <string name="home_app_grouping_none">無</string>
-    <string name="home_app_grouping_all_apps_description">所有應用程式的列表</string>
-    <string name="home_app_grouping_sources_description">提供這些應用程式的來源套件的應用程式</string>
-    <string name="home_app_grouping_custom_description">你所建立的應用程式類別</string>
-    <string name="home_app_sort_manual_description">長按應用程式，然後點選重新排序按鈕</string>
     <string name="home_app_sort_recommended">推薦順序</string>
-    <string name="home_app_sort_recommended_description">優先顯示已安裝和固定應用程式</string>
-    <string name="home_app_sort_name_asc_description">依字母順序，A 到 Z</string>
-    <string name="home_app_sort_name_desc_description">反向字母順序，Z 到 A</string>
     <string name="home_app_sort_updates_first">先更新修補程式</string>
-    <string name="home_app_sort_updates_first_description">具有較新修補程式的應用程式優先，然後是建議順序。</string>
     <string name="home_app_sort_recently_patched">最近修補</string>
-    <string name="home_app_sort_recently_patched_description">最近修補的應用程式優先</string>
     <string name="home_no_apps_title">沒有可用的應用程式</string>
     <string name="home_no_apps_subtitle">在 %s 新增修補程式來源，或啟用現有來源</string>
     <string name="home_no_apps_search_subtitle">沒有符合「%s」的應用程式</string>
@@ -91,7 +76,6 @@
     <string name="home_no_apps_filter_subtitle">沒有符合「%s」的項目</string>
     <string name="home_category_add">新增類別</string>
     <string name="home_category_all_apps">所有應用程式</string>
-    <string name="home_category_custom">自訂</string>
     <string name="home_category_uncategorized">未分類</string>
     <string name="home_category_new_title">新增類別</string>
     <string name="home_category_rename_title">重新命名類別</string>
@@ -168,17 +152,11 @@
     <string name="sources_management_title">修補來源</string>
     <string name="sources_search">搜尋來源與修補程式</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">所有來源</string>
-    <string name="sources_filter_enabled_description">來源修補程式取自</string>
-    <string name="sources_filter_disabled_description">已停用來源</string>
     <string name="sources_filter_issues">需要關注</string>
-    <string name="sources_filter_issues_description">被封鎖、載入失敗或需要更新 Morphe 的來源</string>
     <string name="sources_sort_manual">手動排序</string>
     <string name="sources_sort_manual_hint">長按來源以重新排序</string>
     <string name="sources_sort_last_updated">上次更新</string>
-    <string name="sources_sort_last_updated_description">先顯示最新的來源更新</string>
     <string name="sources_sort_enabled_first">優先顯示已啟用</string>
-    <string name="sources_sort_enabled_first_description">在已停用的來源之前顯示已啟用來源</string>
     <string name="sources_patches_source_disabled_hint">此來源已停用。其修補程式僅供參考，不會套用。</string>
     <string name="sources_management_open_in_browser">在瀏覽器中開啟</string>
     <string name="sources_management_report_issue">回報問題</string>
@@ -220,7 +198,7 @@
     <string name="sources_management_held_back_hint">此來源在載入時導致 Morphe 當機，因此已被略過。請更新或重新匯入再試一次。</string>
     <string name="sources_management_signed_by">簽署者</string>
     <string name="sources_management_signing_key_changed_badge">金鑰已變更</string>
-    <string name="sources_management_signing_key_changed_hint">最新版本並非由該來源先前使用的金鑰簽署，因此未安裝。點擊以查看</string>
+    <string name="sources_management_signing_key_changed_hint">最新版本並非由該來源先前使用的金鑰所簽署，因此未進行安裝。點擊以查看</string>
     <string name="sources_management_source_enabled">來源已啟用</string>
     <string name="sources_management_source_disabled">來源已停用</string>
     <string name="sources_management_source_updating">正在更新來源…</string>
@@ -255,11 +233,11 @@
     <string name="sources_download_fail">無法下載來源: %s</string>
     <string name="sources_download_fail_named">無法更新「%s」。請檢查網際網路連線，然後再試一次</string>
     <string name="sources_download_endpoint_not_found">「%s」: 找不到修補中繼資料</string>
-    <string name="sources_signing_key_changed_named">\'%s\' 未更新，因為其最新版本並非由先前使用的金鑰簽署</string>
-    <string name="sources_signing_key_changed_local">該檔案未由此來源之前使用的金鑰簽署。若要信任該檔案，請刪除來源並重新添加該檔案</string>
+    <string name="sources_signing_key_changed_named">「%s」未更新，因為其最新版本並非由先前使用的金鑰所簽署</string>
+    <string name="sources_signing_key_changed_local">該檔案並非由此來源之前使用的金鑰所簽署。若要信任該檔案，請刪除來源並重新新增該檔案</string>
     <string name="sources_signing_key_trust_title">信任新金鑰？</string>
     <string name="sources_signing_key_trust_message">最新版本由不同的金鑰簽署。可能是開發者更換了金鑰，或是他人發佈了此版本。僅在開發者宣布新金鑰後才信任它</string>
-    <string name="sources_signing_key_trust_message_unsigned">最新版本未經簽署。可能是開發者停止簽署版本，或是他人發佈了此版本。僅在開發者宣布後才信任它</string>
+    <string name="sources_signing_key_trust_message_unsigned">最新版本未經簽署。可能是開發者停止簽署版本，或是他人發佈了此版本。僅在開發者公佈後才信任它</string>
     <string name="sources_signing_key_trusted">已信任金鑰</string>
     <string name="sources_signing_key_new">新金鑰</string>
     <string name="sources_patch_expert_badge">專家</string>
@@ -271,7 +249,6 @@
     <string name="home_apk_availability_recommended_label">推薦</string>
     <string name="home_apk_availability_unpatched_label">未修補</string>
     <string name="home_apk_availability_incompatible_label">不相容</string>
-    <string name="home_apk_availability_installed_version">已安裝於此裝置：%s</string>
     <string name="home_apk_availability_find">是的，幫我找一下</string>
     <string name="home_apk_availability_have">否，我已經有了</string>
     <string name="home_apk_helper_download">使用輔助應用程式</string>
@@ -671,8 +648,8 @@
     <string name="patcher_missing_patches_label">不再提供</string>
     <string name="patcher_option_paths_gone_title">缺少修補選項檔案</string>
     <string name="patcher_option_paths_gone_description">一個或多個修補選項指向已不存在的檔案。請移除路徑以在沒有這些檔案的情況下修補，或將檔案放回後再試一次</string>
-    <string name="patcher_option_paths_rejected_title">無法使用補丁選項文件</string>
-    <string name="patcher_option_paths_rejected_description">一個或多個補丁選項指向的文件缺失，或不包含補丁所需內容。請移除這些路徑後再進行補丁，或按照選項說明修復文件後重試</string>
+    <string name="patcher_option_paths_rejected_title">無法使用修補選項檔案</string>
+    <string name="patcher_option_paths_rejected_description">缺乏一個或多個修補選項指向的檔案，或不包含修補所需內容。請移除這些路徑後再進行修補，或按照選項說明修復檔案後重試</string>
     <string name="patcher_option_paths_clear">移除路徑並繼續</string>
     <string name="patcher_storage_permission_hint">提示：將檔案移至 /Android/data/app.morphe.manager/files/ - 不需要額外權限</string>
     <!-- Patcher Screen - Patcher Steps -->
@@ -731,7 +708,7 @@
     <string name="patched_app_save_failed_toast">無法儲存修補後的應用程式</string>
     <string name="plugin_activity_dialog_body">需要使用者互動才能繼續使用此外掛程式</string>
     <string name="patcher_process_killed_message">系統在還未完成修補時就停止了，通常是為了釋放記憶體。請關閉其他應用程式後再試一次。</string>
-    <string name="patcher_process_crashed_message">補丁程式在完成前崩潰了。如果再次發生，請在設定中關閉 \"使用內嵌 VM\" 並附上日誌回報問題</string>
+    <string name="patcher_process_crashed_message">修補程式在完成前當機了。如果再次發生，請在設定中關閉「使用內嵌 VM」並附上日誌回報問題</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">偵錯工具記憶體不足，堆疊大小為 %1$s MB。此應用程式相對於選取的修補程式而言過於龐大。請嘗試使用較少的修補來源進行修補，或減少選取的修補程式數量</string>
     <string name="install_app_success">安裝成功</string>
@@ -1101,7 +1078,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_battery_optimization_description">即使應用程式被最小化，也會保持修補程式的執行</string>
     <string name="settings_system_process_runtime">修補程式執行階段</string>
     <string name="settings_system_jvm_runtime_enable">使用內建 VM</string>
-    <string name="settings_system_jvm_runtime_description">Morphe 自有的 Java VM 補丁，可以使用更多記憶體。關閉以使用 Android 的運行時</string>
+    <string name="settings_system_jvm_runtime_description">Morphe 內建的 Java VM 修補，可以使用更多記憶體。關閉以使用 Android 的運行組件</string>
     <string name="settings_system_jvm_runtime_unavailable">需要ARM架構或64位元x86架構的裝置</string>
     <string name="settings_system_patcher_completion_sound">完成音效</string>
     <string name="settings_system_patcher_completion_sound_description">修補完成時，成功或失敗會播放不同的提示音</string>
@@ -1267,10 +1244,10 @@ morphe_header_custom_dark.png
     <string name="file_picker_internal_storage">內部儲存空間</string>
     <string name="file_picker_sd_card">SD 卡</string>
     <string name="file_picker_root">根目錄 (/)</string>
-    <string name="file_picker_storage_access_unavailable">此裝置沒有螢幕可允許存取所有檔案。請透過 ADB 允許：adb shell appops set %1$s MANAGE_EXTERNAL_STORAGE allow</string>
+    <string name="file_picker_storage_access_unavailable">此裝置沒有選項畫面可允許存取所有檔案。請透過 ADB 允許：adb shell appops set %1$s MANAGE_EXTERNAL_STORAGE allow</string>
     <string name="file_picker_storages">儲存空間</string>
-    <string name="file_saver_downloads_failed">無法在「下載」中建立檔案</string>
-    <string name="file_saver_saving_to_downloads">此裝置沒有儲存螢幕，因此檔案將以 %1$s 的名稱儲存至「下載」</string>
+    <string name="file_saver_downloads_failed">無法在「下載」資料夾中建立檔案</string>
+    <string name="file_saver_saving_to_downloads">此裝置沒有儲存選項畫面，因此檔案將以 %1$s 的名稱儲存至「下載」資料夾</string>
     <string name="file_picker_sort_name_asc">名稱 (A–Z)</string>
     <string name="file_picker_sort_name_desc">名稱 (Z–A)</string>
     <string name="file_picker_sort_size_desc">大小 (由大到小)</string>

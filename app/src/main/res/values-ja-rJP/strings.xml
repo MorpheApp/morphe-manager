@@ -62,26 +62,11 @@
     <string name="home_search_apps">アプリを検索</string>
     <string name="list_options_title">並べ替えとフィルター</string>
     <string name="list_options_state_description">%1$sで並べ替え、%2$sで絞り込み</string>
-    <string name="home_app_filter_all_description">ホーム画面上のすべてのアプリ</string>
-    <string name="home_app_filter_patched_description">Morphe でパッチを適用した、または保存したアプリ</string>
-    <string name="home_app_filter_not_patched_description">Morphe でまだパッチを適用していないアプリ</string>
-    <string name="home_app_filter_installed_description">このデバイスに現在インストールされているアプリ</string>
-    <string name="home_app_filter_uninstalled_description">Morphe でパッチを適用した後、このデバイスから削除されたアプリ</string>
     <string name="home_app_filter_clones">クローン</string>
-    <string name="home_app_filter_clones_description">独自のパッケージ名でビルドされ、オリジナルのアプリと一緒にインストールできるアプリ</string>
     <string name="home_app_grouping_none">なし</string>
-    <string name="home_app_grouping_all_apps_description">すべてのアプリを含むリスト</string>
-    <string name="home_app_grouping_sources_description">パッチの提供元ごとのアプリ</string>
-    <string name="home_app_grouping_custom_description">作成したカテゴリ内のアプリ</string>
-    <string name="home_app_sort_manual_description">並べ替えるには、アプリを長押しして並べ替えボタンをタップ</string>
     <string name="home_app_sort_recommended">推奨順</string>
-    <string name="home_app_sort_recommended_description">インストール済みのアプリとピン留め済みのアプリを優先</string>
-    <string name="home_app_sort_name_asc_description">アルファベット順（A-Z）</string>
-    <string name="home_app_sort_name_desc_description">アルファベット順（Z-A）</string>
     <string name="home_app_sort_updates_first">パッチの更新を優先</string>
-    <string name="home_app_sort_updates_first_description">新しいパッチがあるアプリを優先、その後は推奨順</string>
     <string name="home_app_sort_recently_patched">最近パッチされた</string>
-    <string name="home_app_sort_recently_patched_description">最近パッチされたアプリを優先</string>
     <string name="home_no_apps_title">利用可能なアプリはありません</string>
     <string name="home_no_apps_subtitle">%s でパッチソースを追加するか、既存のパッチソースを有効にしてください</string>
     <string name="home_no_apps_search_subtitle">「%s」に一致するアプリはありません</string>
@@ -91,7 +76,6 @@
     <string name="home_no_apps_filter_subtitle">%s に一致するものはありません</string>
     <string name="home_category_add">カテゴリを追加</string>
     <string name="home_category_all_apps">すべてのアプリ</string>
-    <string name="home_category_custom">カスタム</string>
     <string name="home_category_uncategorized">カテゴリ未分類</string>
     <string name="home_category_new_title">新しいカテゴリ</string>
     <string name="home_category_rename_title">カテゴリの名前を変更</string>
@@ -168,17 +152,11 @@
     <string name="sources_management_title">パッチソース</string>
     <string name="sources_search">ソースとパッチを検索</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">すべてのソース</string>
-    <string name="sources_filter_enabled_description">パッチの取得元となるソース</string>
-    <string name="sources_filter_disabled_description">無効にしたソース</string>
     <string name="sources_filter_issues">要確認</string>
-    <string name="sources_filter_issues_description">ブロックされている、読み込みに失敗した、または新しいバージョンの Morphe が必要なソース</string>
     <string name="sources_sort_manual">手動</string>
     <string name="sources_sort_manual_hint">ソースを長押しして並べ替え</string>
     <string name="sources_sort_last_updated">最終更新日</string>
-    <string name="sources_sort_last_updated_description">新しく更新されたソースを優先</string>
     <string name="sources_sort_enabled_first">有効なものを優先</string>
-    <string name="sources_sort_enabled_first_description">有効なソースを先に表示</string>
     <string name="sources_patches_source_disabled_hint">このソースは無効になっています。パッチは参照のために表示されるだけで、適用されません</string>
     <string name="sources_management_open_in_browser">ブラウザで開く</string>
     <string name="sources_management_report_issue">問題を報告</string>
@@ -198,7 +176,7 @@
     <string name="sources_management_prerelease_toggle_description">実験的なバージョンのパッチを取得します</string>
     <string name="sources_prerelease_warning_title">プレリリース版パッチを有効にしますか？</string>
     <string name="sources_prerelease_warning_message">プレリリース版は現在開発中です。パッチに失敗したり、アプリが正常に動作しなくなったりする可能性があります。また、予告なく機能が変更される場合があります</string>
-    <string name="expert_mode_unstable_notice">プレリリースまたは実験的なパッチは不安定な場合があります</string>
+    <string name="expert_mode_unstable_notice">プレリリース版または実験的なパッチは不安定な場合があります</string>
     <string name="sources_management_experimental_versions_toggle">実験的なバージョンのアプリ</string>
     <string name="sources_management_experimental_versions_toggle_description">実験的なパッチ対象アプリを表示し、パッチを適用できるようにします</string>
     <!-- Actions of the panel for several selected sources at once -->
@@ -271,7 +249,6 @@
     <string name="home_apk_availability_recommended_label">おすすめ</string>
     <string name="home_apk_availability_unpatched_label">未パッチ</string>
     <string name="home_apk_availability_incompatible_label">非対応</string>
-    <string name="home_apk_availability_installed_version">このデバイスにインストール済み: %s</string>
     <string name="home_apk_availability_find">はい、探すのを手伝ってください</string>
     <string name="home_apk_availability_have">いいえ、すでに持っています</string>
     <string name="home_apk_helper_download">ヘルパーアプリを使用する</string>
@@ -358,7 +335,7 @@ APK ファイルの取得元を選択してください"</string>
     <string name="expert_mode_recommended">推奨パッチ</string>
     <string name="expert_mode_reset_to_default_done">推奨パッチを適用しました</string>
     <string name="expert_mode_selected_count">%1$s / %2$s を選択中</string>
-    <string name="expert_mode_saved_selection">保存された選択</string>
+    <string name="expert_mode_saved_selection">保存済みのセレクション</string>
     <string name="expert_mode_restore_saved_done">保存したセレクションを復元しました</string>
     <string name="expert_mode_copy_from_bundle_no_patches">このバンドルに一致するパッチはありません</string>
     <string name="expert_mode_no_results">パッチが見つかりません</string>
@@ -665,14 +642,14 @@ APK ファイルの取得元を選択してください"</string>
     <string name="patcher_storage_badge_denied">権限が許可されていません</string>
     <string name="patcher_storage_badge_missing">見つかりません</string>
     <string name="patcher_storage_badge_rejected">使用できません</string>
-    <string name="batch_patch_option_paths_skipped">パッチ設定ファイルが見つからないため、スキップします: %1$s</string>
+    <string name="batch_patch_option_paths_skipped">パッチ オプションのファイルが見つからないため、スキップします: %1$s</string>
     <string name="patcher_missing_patches_title">一部のパッチが利用できなくなりました</string>
     <string name="patcher_missing_patches_description">このアプリに保存されたパッチ セレクションには、現在有効なソースから提供されていないパッチが含まれています。このまま続行すると、それらのパッチなしでアプリにパッチを適用します</string>
     <string name="patcher_missing_patches_label">利用できなくなりました</string>
-    <string name="patcher_option_paths_gone_title">パッチ設定ファイルが見つかりません</string>
-    <string name="patcher_option_paths_gone_description">存在しないファイルを参照しているパッチ設定があります。パッチ処理を続けるにはパスを削除するか、ファイルを元に戻して再度お試しください</string>
+    <string name="patcher_option_paths_gone_title">パッチ オプションのファイルが見つかりません</string>
+    <string name="patcher_option_paths_gone_description">存在しないファイルを参照しているパッチ オプションがあります。パッチ処理を続けるにはパスを削除するか、ファイルを元に戻して再度お試しください</string>
     <string name="patcher_option_paths_rejected_title">パッチ設定ファイルを使用できません</string>
-    <string name="patcher_option_paths_rejected_description">1 つ以上のパッチ オプションが、存在しないファイル、またはパッチの要件を満たさないファイルを指しています。それらのファイルを除外してパッチを適用するか、オプションの説明に従ってファイルを修正してから、もう一度お試しください</string>
+    <string name="patcher_option_paths_rejected_description">1 つ以上のパッチ オプションで指定されているファイルが存在しないか、パッチの適用に必要な内容が含まれていません。該当するファイルへのパスを削除するか、オプションの説明に従ってファイルを修正してから、もう一度お試しください</string>
     <string name="patcher_option_paths_clear">パスを削除して続行</string>
     <string name="patcher_storage_permission_hint">ヒント: ファイルを /Android/data/app.morphe.manager/files/ に移動すれば、追加の権限は必要ありません</string>
     <!-- Patcher Screen - Patcher Steps -->
@@ -951,7 +928,7 @@ APK ファイルの取得元を選択してください"</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">パッチ オプション</string>
     <string name="settings_advanced_patch_options_restart_message">パッチ オプションの変更を反映するには、アプリの再パッチが必要です</string>
-    <string name="settings_advanced_patch_options_expert_mode_notice">エキスパート モードでは、パッチ適用の過程でパッチオプションを設定できます</string>
+    <string name="settings_advanced_patch_options_expert_mode_notice">エキスパート モードでは、パッチ適用の過程でパッチ オプションを設定できます</string>
     <string name="settings_advanced_patch_options_loading">パッチ オプションを読み込み中…</string>
     <string name="settings_advanced_patch_options_waiting_for_source">パッチソースが更新されるまで待機する</string>
     <string name="settings_advanced_patch_options_load_error">パッチ オプションの読み込みに失敗しました</string>
@@ -1153,7 +1130,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_mode_title">Morphe の設定をインポート</string>
     <string name="settings_system_import_manager_settings_mode_description">インポートした設定とソースの適用方法を選択してください</string>
     <string name="settings_system_import_selections_mode_title">パッチ セレクションをインポート</string>
-    <string name="settings_system_import_selections_mode_description">インポートした選択項目とパッチ設定の適用方法を選択してください</string>
+    <string name="settings_system_import_selections_mode_description">インポートした選択項目とパッチ オプションの適用方法を選択してください</string>
     <string name="import_mode_replace_title">既存のものを置き換える</string>
     <string name="import_mode_replace_description">バックアップと完全に一致させます。バックアップにない項目は削除されます</string>
     <string name="import_mode_merge_title">既存のものをマージする</string>
@@ -1220,7 +1197,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_delete_all_title">オリジナルの APK をすべて削除しますか？</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">パッチ セレクション</string>
-    <string name="settings_system_patch_selections_description">保存されたパッチ セレクションを管理します。これらはアンインストール後も保持されます</string>
+    <string name="settings_system_patch_selections_description">保存済みのパッチ セレクションを管理します。これらはアンインストール後も保持されます</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">すべてのセレクションをリセットしますか？</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">選択されたパッケージをリセットしますか？</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">ソース セレクションをリセットしますか？</string>
@@ -1234,9 +1211,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_source_data_fail">ソースデータのインポートに失敗しました</string>
     <string name="settings_system_import_source_data_success">ソースデータのインポートに成功しました</string>
     <string name="settings_system_selected_patches_section">選択したパッチ</string>
-    <string name="settings_system_no_patches_or_options">保存されたパッチやオプションなし</string>
+    <string name="settings_system_no_patches_or_options">保存済みのパッチやオプションはありません</string>
     <!-- Selection panel: saved selection, sets and copies -->
-    <string name="selection_panel_title">選択内容</string>
+    <string name="selection_panel_title">セレクション</string>
     <string name="selection_panel_copy_into">%s にコピー</string>
     <string name="selection_sets_title">セット</string>
     <string name="selection_set_name">セット名</string>
@@ -1379,7 +1356,7 @@ morphe_header_custom_dark.png
     <string name="reset_order">並び順をリセット</string>
     <string name="reset_order_done">並び順をリセットしました</string>
     <string name="reset_order_confirm_title">並び順をリセットしますか？</string>
-    <string name="reset_order_confirm_message">リストがデフォルトの順序に戻り、手動でドラッグして変更した順序は失われます</string>
+    <string name="reset_order_confirm_message">リストがデフォルトの順序に戻り、手動で並べ替えた順序は失われます</string>
     <string name="accessibility_select_app">アプリを選択</string>
     <string name="accessibility_select_source">ソースを選択</string>
     <string name="accessibility_move_up">上に移動</string>

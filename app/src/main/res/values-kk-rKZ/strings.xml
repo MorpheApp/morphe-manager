@@ -62,26 +62,11 @@
     <string name="home_search_apps">Қосымшаларды іздеу</string>
     <string name="list_options_title">Сұрыптау және сүзгілеу</string>
     <string name="list_options_state_description">%1$s бойынша сұрыпталды, %2$s бойынша сүзілді</string>
-    <string name="home_app_filter_all_description">Бас экрандағы барлық қолданбалар</string>
-    <string name="home_app_filter_patched_description">Morphe арқылы патч жасаған немесе сақтаған қолданбаларыңыз</string>
-    <string name="home_app_filter_not_patched_description">Morphe-де әлі патч жасалмаған қолданбалар</string>
-    <string name="home_app_filter_installed_description">Осы құрылғыға қазіргі уақытта орнатылған қолданбалар</string>
-    <string name="home_app_filter_uninstalled_description">Мұнда бұрын Morphe арқылы патчтелген, бірақ қазір бұл құрылғыда жоқ қосымшалар</string>
     <string name="home_app_filter_clones">Клондар</string>
-    <string name="home_app_filter_clones_description">Жеке пакеттік атаумен жасалған және түпнұсқамен бірге орнатылған қолданбалар</string>
     <string name="home_app_grouping_none">Жоқ</string>
-    <string name="home_app_grouping_all_apps_description">Барлық қосымшалар жинақталған бір тізім</string>
-    <string name="home_app_grouping_sources_description">Қосымшалар оларды ұсынатын патч дереккөзі астында</string>
-    <string name="home_app_grouping_custom_description">Сіз жасаған категориялардағы қосымшалар</string>
-    <string name="home_app_sort_manual_description">Қосымшаны ұзақ басып, содан кейін қайта реттеу батырмасын басыңыз</string>
     <string name="home_app_sort_recommended">Ұсынылған реті</string>
-    <string name="home_app_sort_recommended_description">Орнатылған және бекітілген қолданбалар бірінші</string>
-    <string name="home_app_sort_name_asc_description">Әліпби бойынша, A-дан Z-ге дейін</string>
-    <string name="home_app_sort_name_desc_description">Кері әліпби бойынша, Z-ден A-ға дейін</string>
     <string name="home_app_sort_updates_first">Патч жаңартулары бірінші</string>
-    <string name="home_app_sort_updates_first_description">Жаңа патчтары бар қолданбалар алдымен, содан кейін ұсынылған реттілікпен</string>
     <string name="home_app_sort_recently_patched">Жақында патчтелген</string>
-    <string name="home_app_sort_recently_patched_description">Ең соңғы патчтелген қолданбалар бірінші болады</string>
     <string name="home_no_apps_title">Қолжетімді қосымшалар жоқ</string>
     <string name="home_no_apps_subtitle">%s бөлімінде патч көзін қосыңыз немесе қолданыстағыны қосыңыз</string>
     <string name="home_no_apps_search_subtitle">\"%s\" сәйкес келетін қолданбалар жоқ</string>
@@ -91,7 +76,6 @@
     <string name="home_no_apps_filter_subtitle">%s сәйкестігі бойынша ештеңе табылмады</string>
     <string name="home_category_add">Санатты қосу</string>
     <string name="home_category_all_apps">Барлық қолданбалар</string>
-    <string name="home_category_custom">Жеке</string>
     <string name="home_category_uncategorized">Санатталмаған</string>
     <string name="home_category_new_title">Жаңа санат</string>
     <string name="home_category_rename_title">Санатты қайта атау</string>
@@ -168,17 +152,11 @@
     <string name="sources_management_title">Патч дереккөздері</string>
     <string name="sources_search">Дереккөздер мен патчтарды іздеу</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Әрбір дереккөз</string>
-    <string name="sources_filter_enabled_description">Дереккөздер патчтар алынатын жерлер</string>
-    <string name="sources_filter_disabled_description">Көздер өшірілді</string>
     <string name="sources_filter_issues">Назар аудару қажет</string>
-    <string name="sources_filter_issues_description">Блокталған, жүктеу сәтінде қате шыққан немесе жаңарақ Morphe нұсқасын қажет ететін көздер</string>
     <string name="sources_sort_manual">Қолмен реттеу</string>
     <string name="sources_sort_manual_hint">Реттеу үшін дереккөзге ұзақ басыңыз</string>
     <string name="sources_sort_last_updated">Соңғы жаңарту уақыты</string>
-    <string name="sources_sort_last_updated_description">Ең жаңа дереккөз жаңартулары бірінші</string>
     <string name="sources_sort_enabled_first">Қосылғандар бірінші</string>
-    <string name="sources_sort_enabled_first_description">Белсенді дереккөздерді өшірілгендерден бұрын көрсету</string>
     <string name="sources_patches_source_disabled_hint">Бұл дереккөз өшірілген. Оның патчтары анықтама үшін көрсетілген және қолданылмайды</string>
     <string name="sources_management_open_in_browser">Браузерде ашу</string>
     <string name="sources_management_report_issue">Мәселені хабарлау</string>
@@ -198,6 +176,7 @@
     <string name="sources_management_prerelease_toggle_description">Жаңа эксперименттік патч нұсқаларына ерте қолжетімділік алады</string>
     <string name="sources_prerelease_warning_title">Алдын ала шығарылған патчтарды қосу керек пе?</string>
     <string name="sources_prerelease_warning_message">Алдын ала шығарылған нұсқалар әлі де әзірленуде. Патчтар сәтсіз болуы немесе қолданбаны бұзуы мүмкін, сондай-ақ функциялар ескертусіз өзгеруі мүмкін</string>
+    <string name="expert_mode_unstable_notice">Алдын ала шығарылған немесе эксперименттік патчтар тұрақсыз болуы мүмкін</string>
     <string name="sources_management_experimental_versions_toggle">Қосымшаның эксперименттік нұсқалары</string>
     <string name="sources_management_experimental_versions_toggle_description">Эксперименталды қолданба нысаналарын көрсетеді және патчтейді</string>
     <!-- Actions of the panel for several selected sources at once -->
@@ -212,6 +191,7 @@
     <string name="sources_management_metadata_unavailable">Метадеректер қолжетімсіз</string>
     <string name="sources_management_metadata_unavailable_hint">Қашықтағы метадеректер файлы қолжетімді емес. Орнатылған пакетпен патчтау әлі де жұмыс істейді, бірақ бұл дереккөз үшін автожаңарту өшірілген</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Патч пакетін жүктеу мүмкін болмады. Дереккөз URL-мекенжайы қате болуы мүмкін немесе файл жоқ</string>
+    <string name="sources_management_metadata_unavailable_hint_missing_editable">Патчтар жиынтығын жүктеп алу мүмкін болмады. Дереккөзі URL-мекені қате болуы мүмкін немесе файл жоқ. Өзгерту үшін түктіңіз</string>
     <string name="sources_management_outdated_manager_badge">Morphe-ні жаңарту</string>
     <string name="sources_management_outdated_manager_hint">Бұл дереккөз %1$s патчері үшін жасалған, бірақ Morphe %2$s нұсқасына %3$s патчері кіреді. Оны қолдану үшін Morphe-ні жаңартыңыз</string>
     <string name="sources_management_held_back_badge">Қатемен жабылды</string>
@@ -225,6 +205,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Көрінетін атауы</string>
     <string name="sources_dialog_rename">Патч дереккөзін қайта атау</string>
+    <string name="sources_dialog_change_url">Патч дереккөзі жүктелетін жерді өзгерту</string>
     <string name="sources_dialog_duplicate_name_error">Бұл атаулы патч дереккөзі redan бар</string>
     <string name="sources_dialog_missing_error">Бұл патч дереккөзін жаңарту мүмкін болмады</string>
     <string name="sources_dialog_add_source">Патч дереккөзін қосу</string>
@@ -268,7 +249,6 @@
     <string name="home_apk_availability_recommended_label">Ұсынылған</string>
     <string name="home_apk_availability_unpatched_label">Патчталмаған</string>
     <string name="home_apk_availability_incompatible_label">Сәйкес емес</string>
-    <string name="home_apk_availability_installed_version">Осы құрылғыда орнатылған: %s</string>
     <string name="home_apk_availability_find">Иә, оны табуға көмектесіңіз</string>
     <string name="home_apk_availability_have">Жоқ, ол менде бар</string>
     <string name="home_apk_helper_download">Көмекші қолданбаны пайдаланыңыз</string>
@@ -352,7 +332,10 @@
     <string name="expert_mode_enable_all_universal_pending">Универсал патчтар үшін қайта түктіңіз</string>
     <string name="expert_mode_universal_all_warning_title">Барлық әмбебап патчтарды қосу керек пе?</string>
     <string name="expert_mode_universal_all_warning_message">Универсалды патчтар бірге тестіленбеген. Барлығын бірден қосу қақтығыстарға, патчтаудың сәтсіз болуына немесе қосымшаның жабылуына әкелуі мүмкін</string>
+    <string name="expert_mode_recommended">Ұсынылатын патчтар</string>
     <string name="expert_mode_reset_to_default_done">Ұсынылған патчтер қолданылды</string>
+    <string name="expert_mode_selected_count">%2$s из %1$s таңдалды</string>
+    <string name="expert_mode_saved_selection">Сақталған таңдау</string>
     <string name="expert_mode_restore_saved_done">Сақталған таңдау қалпына келтірілді</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Бұл жиынтықта сәйкес келетін патчтар жоқ</string>
     <string name="expert_mode_no_results">Патчтар табылмады</string>

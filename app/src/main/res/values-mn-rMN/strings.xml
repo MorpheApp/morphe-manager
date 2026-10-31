@@ -62,26 +62,11 @@
     <string name="home_search_apps">Аппликейшн хайх</string>
     <string name="list_options_title">Эрэмбэлэх ба шүүх</string>
     <string name="list_options_state_description">%1$s-ээр эрэмбэлэв, %2$s-ээр шүүв</string>
-    <string name="home_app_filter_all_description">Нүүр дэлгэц дээрх бүх аппликейшн</string>
-    <string name="home_app_filter_patched_description">Таны Morphe-ээр патчласан эсвэл хадгалсан аппликейшнүүд</string>
-    <string name="home_app_filter_not_patched_description">Таны Morphe-ээр хараахан патчлаагүй аппликейшнүүд</string>
-    <string name="home_app_filter_installed_description">Энэ төхөөрөмж дээр одоогоор суулгасан аппликейшнүүд</string>
-    <string name="home_app_filter_uninstalled_description">Morphe-оор засварласан боловч энэ төхөөрөмж дээр байхгүй байгаа аппликейшнүүд</string>
     <string name="home_app_filter_clones">Хуулбарууд</string>
-    <string name="home_app_filter_clones_description">Өөрсдийн багцын нэрээр үүсгэгдэж, эх хувьтайгаа зэрэгцэн суулгагдсан аппликейшнүүд</string>
     <string name="home_app_grouping_none">Байхгүй</string>
-    <string name="home_app_grouping_all_apps_description">Бүх апп-ыг нэг жагсаалтад харах</string>
-    <string name="home_app_grouping_sources_description">Тэдгээрийг хангадаг патчийн эх сурвалжийн доорх апп-ууд</string>
-    <string name="home_app_grouping_custom_description">Таны үүсгэсэн ангилал дахь апп-ууд</string>
-    <string name="home_app_sort_manual_description">Аппликейшн дээр удаан дарж, дараа нь дарааллыг өөрчлөх товчийг дарна уу</string>
     <string name="home_app_sort_recommended">Зөвлөсөн дараалал</string>
-    <string name="home_app_sort_recommended_description">Суурилуулсан болон бэхлэгдсэн аппликейшнүүдийг эхлээд харуулах</string>
-    <string name="home_app_sort_name_asc_description">Цагаан толгойн дарааллаар, А-ээс Z хүртэл</string>
-    <string name="home_app_sort_name_desc_description">Цагаан толгойн урвуу дараалал, Z-ээс A хүртэл</string>
     <string name="home_app_sort_updates_first">Засваруудыг эхлээд харуулах</string>
-    <string name="home_app_sort_updates_first_description">Шинэ патчтай аппликейшнуудыг эхлээд, дараа нь санал болгох дарааллаар</string>
     <string name="home_app_sort_recently_patched">Сүүлд патлагдсан</string>
-    <string name="home_app_sort_recently_patched_description">Хамгийн сүүлд патлагдсан аппуудыг эхлээд харуулна</string>
     <string name="home_no_apps_title">Боломжтой апп байхгүй байна</string>
     <string name="home_no_apps_subtitle">Патчийн эх сурвалж нэмэх эсвэл %s хэсэгт байгааг идэвхжүүлнэ үү</string>
     <string name="home_no_apps_search_subtitle">\"%s\"-тай тохирох апп олдоогүй</string>
@@ -91,7 +76,6 @@
     <string name="home_no_apps_filter_subtitle">%s-тэй тохирох зүйл олдоогүй</string>
     <string name="home_category_add">Ангилал нэмэх</string>
     <string name="home_category_all_apps">Бүх аппликейшн</string>
-    <string name="home_category_custom">Захиалгат</string>
     <string name="home_category_uncategorized">Ангилаагүй</string>
     <string name="home_category_new_title">Шинэ ангилал</string>
     <string name="home_category_rename_title">Ангиллын нэрийг өөрчлөх</string>
@@ -168,17 +152,11 @@
     <string name="sources_management_title">Патчийн эх сурвалжууд</string>
     <string name="sources_search">Эх сурвалж болон патчуудыг хайх</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Бүх эх сурвалж</string>
-    <string name="sources_filter_enabled_description">Эх сурвалжийн патчуудыг авдаг хэсэг</string>
-    <string name="sources_filter_disabled_description">Унтраасан эх сурвалжууд</string>
     <string name="sources_filter_issues">Анхаарал шаардлагатай</string>
-    <string name="sources_filter_issues_description">Хаагдсан, ачаалагдаж чадаагүй эсвэл Morphe-ийн шинэ хувилбар шаардлагатай эх сурвалжууд</string>
     <string name="sources_sort_manual">Гар аргаар эрэмбэлэх</string>
     <string name="sources_sort_manual_hint">Эрэмбэ өөрчлөхийн тулд эх сурвалж дээр удаан дарна уу</string>
     <string name="sources_sort_last_updated">Хамгийн сүүлд шинэчилсэн</string>
-    <string name="sources_sort_last_updated_description">Эх сурвалжийн хамгийн сүүлийн засваруудыг эхлээд харуулах</string>
     <string name="sources_sort_enabled_first">Идэвхжүүлсэнийг эхлээд харуулах</string>
-    <string name="sources_sort_enabled_first_description">Идэвхгүй эх сурвалжуудаас өмнө идэвхтэй эх сурвалжуудыг харуулах</string>
     <string name="sources_patches_source_disabled_hint">Энэ эх сурвалж идэвхгүй байна. Түүний патчууд зөвхөн лавлах зорилгоор жагсаасан бөгөөд хэрэглэгдээгүй</string>
     <string name="sources_management_open_in_browser">Хөтөч дээр нээх</string>
     <string name="sources_management_report_issue">Асуудлыг мэдээлэх</string>
@@ -198,6 +176,7 @@
     <string name="sources_management_prerelease_toggle_description">Шинэ туршилтын патчийн хувилбаруудыг эртээр авах</string>
     <string name="sources_prerelease_warning_title">Урьдчилсан хувилбарын патчуудыг идэвхжүүлэх үү?</string>
     <string name="sources_prerelease_warning_message">Урьдчилсан хувилбарын билдүүд хөгжүүлэлтийн шатандаа байна. Патлах үед алдаа гарч апп ажиллахгүй болох эсвэл функцууд урьдчилсан анхааруулгагүйгээр өөрчлөгдөж болно</string>
+    <string name="expert_mode_unstable_notice">Урьдчилсан хувилбар эсвэл туршилтын нөхцөльеүүд нь тогтворгүй байж болзошгүй</string>
     <string name="sources_management_experimental_versions_toggle">Аппликейшний туршилтын хувилбарууд</string>
     <string name="sources_management_experimental_versions_toggle_description">Туршилтын апп зорилтуудыг харуулах болон патчлах</string>
     <!-- Actions of the panel for several selected sources at once -->
@@ -212,6 +191,7 @@
     <string name="sources_management_metadata_unavailable">Мета өгөгдөл олдохгүй байна</string>
     <string name="sources_management_metadata_unavailable_hint">Алсын мета өгөгдлийн файл олдохгүй байна. Суурилуулсан багцаар патчлах боломжтой хэвээр байгаа ч энэ эх сурвалжийн автоматаар шинэчлэх функцийг идэвхгүй болголоо</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Патчийн багцыг татаж авж чадсангүй. Эх сурвалжийн URL буруу эсвэл файл байхгүй байж болзошгүй</string>
+    <string name="sources_management_metadata_unavailable_hint_missing_editable">Нөхцөльеийн багцыг татаж авж чадсангүй. Эх сурвалж URL буруу байх эсвэл файл байхгүй байж болзошгүй. Өөрчлөхийн тулд товшино уу</string>
     <string name="sources_management_outdated_manager_badge">Morphe-ийг шинэчлэх</string>
     <string name="sources_management_outdated_manager_hint">Энэ эх сурвалж нь %1$s патчерт зориулагдсан боловч Morphe %2$s хувилбар нь %3$s патчерыг агуулж байна. Үүнийг ашиглахын тулд Morphe-ийг шинэчлээрэй</string>
     <string name="sources_management_held_back_badge">Гацсан</string>
@@ -225,6 +205,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Харуулах нэр</string>
     <string name="sources_dialog_rename">Патчийн эх сурвалжийг дахин нэрлэх</string>
+    <string name="sources_dialog_change_url">Нөхцөльеийн эх сурвалж татаж авах хаягийг өөрчлөх</string>
     <string name="sources_dialog_duplicate_name_error">Энэхүү нэртэй патчийн эх сурвалж аль хэдийн байна</string>
     <string name="sources_dialog_missing_error">Энэхүү патчийн эх сурвалжийг шинэчилж чадсангүй</string>
     <string name="sources_dialog_add_source">Патчийн эх сурвалж нэмэх</string>
@@ -268,7 +249,6 @@
     <string name="home_apk_availability_recommended_label">Зөвлөмжтэй</string>
     <string name="home_apk_availability_unpatched_label">Засваруулаагүй</string>
     <string name="home_apk_availability_incompatible_label">Тохирохгүй</string>
-    <string name="home_apk_availability_installed_version">Энэ төхөөрөмж дээр суурилуулсан: %s</string>
     <string name="home_apk_availability_find">Тийм, олоход туслаарай</string>
     <string name="home_apk_availability_have">Үгүй, би аль хэдийн авсан</string>
     <string name="home_apk_helper_download">Туслах аппликейшн ашиглах</string>
@@ -352,8 +332,10 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="expert_mode_enable_all_universal_pending">Универсал патчуудыг идэвхжүүлэхийн тулд дахин дарна уу</string>
     <string name="expert_mode_universal_all_warning_title">Бүх универсал патчуудыг идэвхжүүлэх үү?</string>
     <string name="expert_mode_universal_all_warning_message">Төвлөрсөн патчуудыг хамтдаа туршиж үзээгүй. Бүгдийг нь нэгэн зэрэг идэвхжүүлбэл зөрчил үүсэх, патчлах үйлдэл амжилтгүй болох эсвэл програм гацаж магадгүй</string>
+    <string name="expert_mode_recommended">Зөвлөмжтэй нөхцөльеүүд</string>
     <string name="expert_mode_reset_to_default_done">Зөвлөмжтэй патчуудыг хэрэглээд дууслаа</string>
     <string name="expert_mode_selected_count">%2$s-аас %1$s сонгогдсон</string>
+    <string name="expert_mode_saved_selection">Хадгалагдсан сонголт</string>
     <string name="expert_mode_restore_saved_done">Хадгалагдсан сонголтыг сэргээлээ</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Энэ багцад тохирох патч байхгүй байна</string>
     <string name="expert_mode_no_results">Патч олдсонгүй</string>
@@ -475,6 +457,7 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="batch_patch_planning">Дарааллыг бэлдэж байна…</string>
     <string name="batch_patch_preparing_next">Дараагийн апп-ыг бэлдэж байна…</string>
     <string name="batch_patch_progress_counter">%2$s-аас %1$s-ыг патчлаж байна</string>
+    <string name="batch_patch_summary">%1$s засагдсан, %2$s алдаа гарсан, %3$s алгассан</string>
     <string name="batch_patch_saved_hint">Зассан апп-уудыг хадгаллаа. Одоо суулгах эсвэл дараа нь тохиргооны зассан APK жагсаалтаас суулгана уу</string>
     <string name="batch_patch_multiple_sources">Зарим апп-ууд нэгээс олон эх сурвалжаас засваруудыг нэгтгэдэг бөгөөд энэ нь зөрчилдөөн үүсгэж болзошгүй</string>
     <string name="batch_patch_needs_apk">Боломжит APK байхгүй байна, файл хавсаргана уу</string>
