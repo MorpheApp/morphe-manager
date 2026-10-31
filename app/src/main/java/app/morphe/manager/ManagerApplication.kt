@@ -15,6 +15,7 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
@@ -242,17 +243,23 @@ class ManagerApplication : Application() {
         })
     }
 
+    /** Resources in the app language on Android 12 and lower, where the system does not apply it. */
+    private var localizedResources: AppLocale.LocalizedResources? = null
+
     /**
-     * Attaches a base context in the app language before any Activity or Resources object is
-     * created, so strings resolved through the application follow it from the first one on.
+     * Loads the app language before any Activity or Resources object is created, so strings
+     * resolved through the application follow it from the first one on.
      */
     override fun attachBaseContext(base: Context) {
-        super.attachBaseContext(AppLocale.attach(base))
+        super.attachBaseContext(base)
+        localizedResources = AppLocale.attach(base)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             HiddenApiBypass.addHiddenApiExemptions("L")
         }
     }
+
+    override fun getResources(): Resources = localizedResources?.get() ?: super.getResources()
 
     private fun currentProcessName(): String =
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) getProcessName()
