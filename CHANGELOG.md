@@ -1,3 +1,21 @@
+## [2.4.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v2.3.0...v2.4.0-dev.1) (2026-10-31)
+
+### Features
+
+* Copy sets of other apps from the selection panel ([bec1bd8](https://github.com/MorpheApp/morphe-manager/commit/bec1bd8fc9fcda8e6a3264595cab1adc26ccb053))
+* Pin the clone mark to one corner and show newer app versions in batch patching ([8c8df9f](https://github.com/MorpheApp/morphe-manager/commit/8c8df9ff0ad844c3832f46498c88f6d6ffb753e8))
+* Simplify sort and filter menus ([f3cab9d](https://github.com/MorpheApp/morphe-manager/commit/f3cab9df8df475ee3b2054273ef2d82eb29518f1))
+
+### Bug Fixes
+
+* Align the row menu button with chevrons and selection marks ([ac099f2](https://github.com/MorpheApp/morphe-manager/commit/ac099f215782a62094ac6fcf4be9ff855f6fcb16))
+* Crash on broadcasts to the app on Android 12 and lower ([5d6f417](https://github.com/MorpheApp/morphe-manager/commit/5d6f417d01c5e16dfaa6172c0b55c116f9ad3dd9))
+* Drop the unsupported installed version note from the APK dialog ([a283c4c](https://github.com/MorpheApp/morphe-manager/commit/a283c4c39bfe49f43711f11d629b0af3d82a7446))
+* Keep panel row values readable next to long titles ([812581c](https://github.com/MorpheApp/morphe-manager/commit/812581c07e3f4e6e142db6533fe1399d3966a59a))
+* Report a root mount that did not take as failed ([b3594fd](https://github.com/MorpheApp/morphe-manager/commit/b3594fd50cf3616d5be6de83eb4f2264ec25da0d))
+* Start the patcher JVM on devices with memory tagging ([ad2f464](https://github.com/MorpheApp/morphe-manager/commit/ad2f4644edfe848a3d09260b2f53c441ebfd6161))
+* Wrap the badges of a patch selection card instead of squeezing them ([b9206a6](https://github.com/MorpheApp/morphe-manager/commit/b9206a660483ebf1675c51fd802e875038472352))
+
 # [2.3.0](https://github.com/MorpheApp/morphe-manager/compare/v2.2.0...v2.3.0) (2026-10-30)
 
 
