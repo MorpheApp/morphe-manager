@@ -107,9 +107,8 @@ data class InstalledAppPickerItem(
  *   is picked. Sources share versions, so the pick names its source too, which answers for an
  *   APK of that version.
  * @param bundleUid The source picked in simple mode before the APK, which the run patches from.
- * @param installedVersion The unpatched version the device has right now: [installedApk] is
- *   dropped for a version the patches do not target, which is exactly when the version itself is
- *   worth showing.
+ * @param installedVersion The unpatched version the device has right now, which the version list
+ *   marks even when [installedApk] is not offered as a source.
  * @param stockAppInstalled Whether a mount install would have the app itself to overlay, which a
  *   patched build under the same package name is not. Null until it is looked up.
  * @param downloadUrl Where the APK is downloaded from, the unfollowed search link until the
@@ -409,8 +408,8 @@ class PatchFlow(
      */
     private suspend fun continueApkSelectionFlow(packageName: String) {
         // Load saved APK (Room + AppDataResolver) and installed app (PackageManager) in
-        // parallel. The device is asked about in both modes, because the version it carries is
-        // worth showing wherever the installed APK itself is not offered as a source
+        // parallel. The device is asked about in both modes, because the version list marks the
+        // installed version even where the installed APK itself is not offered as a source
         val expertMode = isExpertMode()
         coroutineScope {
             val savedJob = if (session?.savedApk == null) {
