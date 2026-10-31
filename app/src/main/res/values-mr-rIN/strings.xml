@@ -62,26 +62,11 @@
     <string name="home_search_apps">ॲप्स शोधा</string>
     <string name="list_options_title">क्रमवारी लावा आणि फिल्टर करा</string>
     <string name="list_options_state_description">%1$s नुसार क्रमवारीबद्ध, %2$s नुसार फिल्टर केलेले</string>
-    <string name="home_app_filter_all_description">होम स्क्रीनवरील प्रत्येक अॅप</string>
-    <string name="home_app_filter_patched_description">तुम्ही Morphe सह पॅच केलेले किंवा सेव्ह केलेले अॅप्स</string>
-    <string name="home_app_filter_not_patched_description">तुम्ही Morphe मध्ये अद्याप पॅच न केलेले अॅप्स</string>
-    <string name="home_app_filter_installed_description">या डिव्हाइसवर सध्या इंस्टॉल केलेले ॲप्स</string>
-    <string name="home_app_filter_uninstalled_description">Morphe वापरून पॅच केलेले आणि या डिव्हाइसवर यापुढे नसलेले ॲप्स</string>
     <string name="home_app_filter_clones">क्लोन्स</string>
-    <string name="home_app_filter_clones_description">मूळ अॅपसोबत स्थापित, स्वतःच्या पॅकेज नावाखाली तयार केलेली अॅप्स</string>
     <string name="home_app_grouping_none">काहीही नाही</string>
-    <string name="home_app_grouping_all_apps_description">प्रत्येक ॲपसह एक यादी</string>
-    <string name="home_app_grouping_sources_description">ते प्रदान करणाऱ्या पॅच सोर्स अंतर्गतची ॲप्स</string>
-    <string name="home_app_grouping_custom_description">तुम्ही तयार केलेल्या श्रेणींमधील ॲप्स</string>
-    <string name="home_app_sort_manual_description">एका ॲपला लांब दाबा, मग पुन्हा क्रमवारी लावा बटणावर टॅप करा</string>
     <string name="home_app_sort_recommended">सुचवलेला क्रम</string>
-    <string name="home_app_sort_recommended_description">इंस्टॉल केलेले आणि पिन केलेले ॲप्स प्रथम</string>
-    <string name="home_app_sort_name_asc_description">वर्णक्रमानुसार, A ते Z</string>
-    <string name="home_app_sort_name_desc_description">अक्षरांनुसार उतरत्या क्रमाने, Z ते A</string>
     <string name="home_app_sort_updates_first">पॅच अपडेट्स प्रथम</string>
-    <string name="home_app_sort_updates_first_description">नवीन पॅच असलेले अॅप्स आधी, नंतर शिफारस केलेला क्रम</string>
     <string name="home_app_sort_recently_patched">नुकतेच पॅच केलेले</string>
-    <string name="home_app_sort_recently_patched_description">समस्या नोंदवा</string>
     <string name="home_no_apps_title">ॲप्स उपलब्ध नाहीत</string>
     <string name="home_no_apps_subtitle">पॅच स्रोत जोडा किंवा %s मध्ये বিদ্যমান सक्षम करा</string>
     <string name="home_no_apps_search_subtitle">\"%s\" शी जुळणारे कोणतेही ॲप्स नाहीत</string>
@@ -91,7 +76,6 @@
     <string name="home_no_apps_filter_subtitle">%s शी काहीही जुळले नाही</string>
     <string name="home_category_add">श्रेणी जोडा</string>
     <string name="home_category_all_apps">सर्व ॲप्स</string>
-    <string name="home_category_custom">सानुकूल</string>
     <string name="home_category_uncategorized">वर्गीकरण केलेले नाही</string>
     <string name="home_category_new_title">नवीन श्रेणी</string>
     <string name="home_category_rename_title">श्रेणीचे नाव बदला</string>
@@ -168,17 +152,11 @@
     <string name="sources_management_title">सुधारणांची मुळे</string>
     <string name="sources_search">स्रोत आणि पॅच शोधा</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">प्रत्येक स्रोत</string>
-    <string name="sources_filter_enabled_description">स्रोत जिथून पॅचेस घेतले जातात</string>
-    <string name="sources_filter_disabled_description">बंद केलेले स्रोत</string>
     <string name="sources_filter_issues">लक्ष देणे आवश्यक आहे</string>
-    <string name="sources_filter_issues_description">असे स्रोत जे ब्लॉक झाले आहेत, लोड झाले नाहीत किंवा ज्यांना नवीन Morphe ची आवश्यकता आहे</string>
     <string name="sources_sort_manual">मॅन्युअल ऑर्डर</string>
     <string name="sources_sort_manual_hint">पुन्हा क्रमवारी लावण्यासाठी स्रोतावर दाबून ठेवा</string>
     <string name="sources_sort_last_updated">शेवटची अपडेट</string>
-    <string name="sources_sort_last_updated_description">नवीनतम स्रोत अद्यतने प्रथम</string>
     <string name="sources_sort_enabled_first">सक्षम केलेले प्रथम</string>
-    <string name="sources_sort_enabled_first_description">अक्षम स्त्रोतांपूर्वी सक्रिय स्रोत दर्शवा</string>
     <string name="sources_patches_source_disabled_hint">हा स्रोत अक्षम आहे. त्याचे पॅच संदर्भासाठी सूचीबद्ध आहेत आणि लागू केले जात नाहीत</string>
     <string name="sources_management_open_in_browser">लिंक बाहेर नेटवर उघडा</string>
     <string name="sources_management_report_issue">प्री-रिलीझ बिल्ड अजून विकासाधीन आहेत. पॅच अयशस्वी होऊ शकतात किंवा अॅप खराब करू शकतात, आणि वैशिष्ट्ये सूचना न देता बदलू शकतात.</string>
@@ -198,6 +176,7 @@
     <string name="sources_management_prerelease_toggle_description">नवीन प्रायोगिक सुधारणा सर्वांच्या आधी वापरा</string>
     <string name="sources_prerelease_warning_title">सर्व युनिव्हर्सल पॅच सक्षम करायचे का?</string>
     <string name="sources_prerelease_warning_message">डाउनलोड केलेले अपडेट यापुढे उपलब्ध नाही. ते पुन्हा डाउनलोड करा.</string>
+    <string name="expert_mode_unstable_notice">प्री-रिलीज किंवा प्रायोगिक पॅचेज अस्थिर असू शकतात</string>
     <string name="sources_management_experimental_versions_toggle">प्रायोगिक ॲप आवृत्त्या</string>
     <string name="sources_management_experimental_versions_toggle_description">प्रायोगिक अॅप लक्ष्ये दाखवते आणि पॅच करते</string>
     <!-- Actions of the panel for several selected sources at once -->
@@ -212,6 +191,7 @@
     <string name="sources_management_metadata_unavailable">मेटाडेटा उपलब्ध नाही</string>
     <string name="sources_management_metadata_unavailable_hint">दूरस्थ मेटाडेटा फाइल उपलब्ध नाही. स्थापित बंडलसह पॅचिंग अजूनही कार्य करते, परंतु या स्रोतासाठी स्वयंचलित अद्यतन अक्षम केले आहे</string>
     <string name="sources_management_metadata_unavailable_hint_missing">पॅच बंडल डाउनलोड करता आले नाही. स्रोत URL चुकीचा असू शकतो किंवा फाइल अस्तित्वात नाही</string>
+    <string name="sources_management_metadata_unavailable_hint_missing_editable">पॅच बंडल डाउनलोड होऊ शकले नाही. स्रोत URL चुकीची असू शकते किंवा फाईल अस्तित्वात नाही. ते बदलण्यासाठी टॅप करा</string>
     <string name="sources_management_outdated_manager_badge">Morphe अद्यतनित करा</string>
     <string name="sources_management_outdated_manager_hint">हा स्रोत पॅचर %1$s साठी तयार केला आहे, परंतु Morphe %2$s मध्ये पॅचर %3$s समाविष्ट आहे. ते वापरण्यासाठी Morphe अद्यतनित करा</string>
     <string name="sources_management_held_back_badge">क्रॅश झाले</string>
@@ -225,6 +205,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">दिसणारे नाव</string>
     <string name="sources_dialog_rename">सुधारणांच्या मुळाचे नाव बदला</string>
+    <string name="sources_dialog_change_url">पॅच स्रोत कोठून डाउनलोड होतो ते बदला</string>
     <string name="sources_dialog_duplicate_name_error">या नावाचे सुधारणा मूळ आधीपासून उपलब्ध आहे</string>
     <string name="sources_dialog_missing_error">हे सुधारणा मूळ अपडेट करता आले नाही</string>
     <string name="sources_dialog_add_source">सुधारणा मूळ जोडा</string>
@@ -268,7 +249,6 @@
     <string name="home_apk_availability_recommended_label">सुचवलेले</string>
     <string name="home_apk_availability_unpatched_label"> बदल न केलेले</string>
     <string name="home_apk_availability_incompatible_label">असंगत</string>
-    <string name="home_apk_availability_installed_version">या डिव्हाइसवर स्थापित: %s</string>
     <string name="home_apk_availability_find">हो, मला ते शोधण्यात मदत करा</string>
     <string name="home_apk_availability_have">नाही, माझ्याकडे आधीपासूनच आहे</string>
     <string name="home_apk_helper_download">एका हेल्पर ॲपचा वापर करा</string>
@@ -352,8 +332,10 @@
     <string name="expert_mode_enable_all_universal_pending">सार्वत्रिक पॅचेससाठी पुन्हा टॅप करा</string>
     <string name="expert_mode_universal_all_warning_title">सर्व सार्वत्रिक पॅच सक्षम करायचे?</string>
     <string name="expert_mode_universal_all_warning_message">सार्वत्रिक पॅच एकत्र तपासले गेले नाहीत. त्या सर्वांना एकाच वेळी सक्षम केल्याने संघर्ष, अयशस्वी पॅचिंग किंवा क्रॅश होऊ शकतात.</string>
+    <string name="expert_mode_recommended">सुचवलेले पॅचेस</string>
     <string name="expert_mode_reset_to_default_done">शिफारस केलेले पॅच लागू केले</string>
     <string name="expert_mode_selected_count">%2$s पैकी %1$s निवडले</string>
+    <string name="expert_mode_saved_selection">जतन केलेली निवड</string>
     <string name="expert_mode_restore_saved_done">निवड जतन केली पुनर्स्थापित</string>
     <string name="expert_mode_copy_from_bundle_no_patches">\u0928\u093e\u0932\u093e \u092a\u093e\u0939\u093e\u0928\u093e \u092c\u0941\u0928\u093e\u0932\u093e\u0928\u093e \u0905\u0928\u093e\u0925 \u092a\u093e\u0939\u093e\u0928\u093e \u0926\u0941\u0928\u0941\u0928\u093e</string>
     <string name="expert_mode_no_results">पॅच आढळले नाहीत</string>

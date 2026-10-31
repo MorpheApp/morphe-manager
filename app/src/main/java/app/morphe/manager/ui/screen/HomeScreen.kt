@@ -78,6 +78,7 @@ fun HomeScreen(
     val messages = koinInject<UserMessages>()
     val scope = rememberCoroutineScope()
     val sourcesLoadingText = stringResource(R.string.home_sources_are_loading)
+    val manualSortHint = stringResource(R.string.home_app_sort_manual_hint)
     val otherAppsText = stringResource(R.string.home_other_apps)
     val settingsLabel = stringResource(R.string.settings)
     val expertModeLabel = stringResource(R.string.settings_advanced_expert_mode)
@@ -449,7 +450,10 @@ fun HomeScreen(
                         onSaveSourceGroupOrder = { sourceUids ->
                             homeViewModel.apps.saveAppSourceGroupOrder(sourceUids)
                         },
-                        onSortModeChange = { mode -> homeViewModel.apps.setAppSortMode(mode) },
+                        onSortModeChange = { mode ->
+                            if (mode == HomeAppSortMode.MANUAL) messages.show(manualSortHint)
+                            homeViewModel.apps.setAppSortMode(mode)
+                        },
                         onFilterModeChange = { mode ->
                             homeAppButtonPrefs.setFilterMode(mode.name.takeIf { mode.isActive })
                         },

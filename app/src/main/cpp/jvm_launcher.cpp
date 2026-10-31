@@ -6,6 +6,7 @@
 #include <android/log.h>
 #include <dlfcn.h>
 #include <jni.h>
+#include <malloc.h>
 #include <pthread.h>
 #include <sys/mman.h>
 #include <sys/prctl.h>
@@ -122,17 +123,39 @@ void describeException(JNIEnv *env) {
 // Why the JVM did not start, next to the JNI_CreateJavaVM codes, which are all negative
 constexpr int LOAD_FAILED = 1;
 constexpr int MAIN_MISSING = 2;
+constexpr int TAG_CHECKS_ON = 3;
 
 constexpr size_t JVM_THREAD_STACK_SIZE = 8UL * 1024 * 1024;
 
 constexpr size_t MEBIBYTE = 1024UL * 1024;
 constexpr jint RESERVATION_STEP_MB = 64;
 
+// HotSpot keeps flags in the top bits of native pointers and drops the memory tag with them, so a
+// device that checks tags, which the user can turn on for any app, faults on its first access. The
+// checks are turned off for the whole process, which runs nothing but the patcher. Returns false
+// where they are still on
+bool disableTagChecks() {
+#if defined(__aarch64__)
+    const int control = prctl(PR_GET_TAGGED_ADDR_CTRL, 0, 0, 0, 0);
+    // Fails on a kernel or CPU without tagged addresses, where there is nothing to turn off
+    if (control < 0 || (control & PR_MTE_TCF_MASK) == 0) return true;
+    if (mallopt(M_BIONIC_SET_HEAP_TAGGING_LEVEL, M_HEAP_TAGGING_LEVEL_NONE) == 0) {
+        __android_log_print(ANDROID_LOG_ERROR, TAG, "Memory tag checks could not be turned off");
+        return false;
+    }
+    __android_log_print(ANDROID_LOG_WARN, TAG, "Memory tag checks turned off for the JVM");
+#endif
+    return true;
+}
+
 // Creates the JVM and finds the main method, returning 0 or why it could not
 int createJvm(Launch *launch, JNIEnv **env, jclass *mainClass, jmethodID *main) {
     // A release build starts the process as not dumpable, which hands /proc/self over to root, and
     // the I/O accounting of the run in /proc/self/io is then out of reach of the process itself
     prctl(PR_SET_DUMPABLE, 1);
+
+    // Before the runtime is loaded, as its libraries allocate as they load
+    if (!disableTagChecks()) return TAG_CHECKS_ON;
 
     void *handle = dlopen(launch->libjvm.c_str(), RTLD_NOW | RTLD_GLOBAL);
     if (handle == nullptr) {

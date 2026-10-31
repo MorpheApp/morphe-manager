@@ -8,7 +8,6 @@ package app.morphe.manager.ui.screen.shared
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,10 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import com.composables.icons.materialsymbols.MaterialSymbols
@@ -93,7 +93,6 @@ fun ExposedDropdownMenuBoxScope.AppExposedDropdownMenu(
  * the surrounding color, see [LocalAccent], so the current choice shows at a glance.
  *
  * @param selected Whether this entry is the one in effect.
- * @param description Line under [text], such as what the entry in effect does.
  * @param trailing Takes the place of the check, for an entry that shows its state another way.
  * @param destructive Whether the entry removes something, which it says in the error color.
  */
@@ -103,7 +102,6 @@ fun AppDropdownMenuItem(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     selected: Boolean = false,
-    description: String? = null,
     leadingIcon: ImageVector? = null,
     trailing: (@Composable () -> Unit)? = null,
     destructive: Boolean = false
@@ -113,22 +111,7 @@ fun AppDropdownMenuItem(
     val interactionSource = remember { MutableInteractionSource() }
 
     DropdownMenuItem(
-        text = {
-            Column {
-                Text(
-                    text = text,
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal
-                )
-                if (description != null) {
-                    Text(
-                        text = description,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = contentColor.copy(alpha = 0.7f)
-                    )
-                }
-            }
-        },
+        text = { Text(text = text, style = MaterialTheme.typography.bodyLarge) },
         onClick = onClick,
         modifier = modifier
             .padding(horizontal = MenuItemInset)
@@ -157,7 +140,17 @@ fun AppDropdownMenuItem(
 @Composable
 fun RowActionsMenu(actions: List<SelectionAction>, modifier: Modifier = Modifier) {
     var expanded by remember { mutableStateOf(false) }
-    Box(modifier = modifier) {
+    // As wide in the row as its icon, so the dots end a row where a chevron or a selection mark
+    // ends another, while the button's touch target reaches out over the room around it
+    Box(
+        modifier = modifier.layout { measurable, constraints ->
+            val placeable = measurable.measure(constraints.copy(minWidth = 0, maxWidth = Constraints.Infinity))
+            val width = Defaults.IconSize.roundToPx()
+            layout(width, placeable.height) {
+                placeable.place((width - placeable.width) / 2, 0)
+            }
+        }
+    ) {
         TooltipIconButton(
             onClick = { expanded = true },
             icon = MaterialSymbols.Rounded.More_vert,

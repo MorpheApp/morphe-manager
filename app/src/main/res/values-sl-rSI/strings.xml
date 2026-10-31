@@ -2,15 +2,15 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">Ostale aplikacije</string>
-    <string name="home_other_apps_action">Izberi druge aplikacije</string>
+    <string name="home_other_apps_action">Izberi ostale aplikacije</string>
     <string name="home_not_patched_yet">Še ni popravljeno</string>
     <string name="home_unpatched_version_installed">Nameščena je nepopravljena različica</string>
     <string name="home_unpatched_badge">Ni popravljeno</string>
     <string name="home_no_patches_available">Na voljo ni nobenih popravkov</string>
     <string name="home_app_hide_title">Skrijem to aplikacijo?</string>
     <string name="home_more_apps_title">Več aplikacij</string>
-    <string name="home_more_apps_hide_title">Skriti to ploščico?</string>
-    <string name="home_more_apps_hide_message">Ponovno ga lahko vrnete kadar koli v Nastavitvah &gt; Videz &gt; Domovni zaslon</string>
+    <string name="home_more_apps_hide_title">Skrijem to ploščico?</string>
+    <string name="home_more_apps_hide_message">Ponovno jo lahko vrnete kadar koli v Nastavitvah &gt; Videz &gt; Domači zaslon</string>
     <string name="home_app_hide_message">Ta aplikacija bo skrita z začetnega zaslona. Pozneje jo lahko obnovite iz skritih aplikacij s klikom na gumb na dnu seznama.</string>
     <string name="home_app_will_be_hidden">Ta aplikacija bo skrita</string>
     <string name="home_app_hidden_named">%s skritih</string>
@@ -18,7 +18,7 @@
     <string name="home_app_no_hidden">Ni skritih aplikacij</string>
     <string name="home_app_hidden_apps_title">Skrite aplikacije</string>
     <string name="home_app_hidden_apps_hint">Klikni za prikaz</string>
-    <string name="home_apps_unhide_message">Skrite aplikacije se vrnejo na zaslon za doma</string>
+    <string name="home_apps_unhide_message">Od-skrite aplikacije se vrnejo na domači zaslon</string>
     <string name="home_app_patch_sources_description">Viri, ki ostanejo neoznačeni, niso na voljo, ko so te aplikacije popravljene, njihovi popravki pa se nikoli sami od sebe ne vključijo v izbiro. Vsak vir ostane vklopljen za vse druge aplikacije.</string>
     <string name="home_app_patch_sources_mixed">Na voljo za %1$s od %2$s</string>
     <string name="home_app_patch_sources_covers">Ima popravke za %1$s od %2$s</string>
@@ -62,26 +62,11 @@
     <string name="home_search_apps">Poišči aplikacije</string>
     <string name="list_options_title">Razvrsti in filtriraj</string>
     <string name="list_options_state_description">Razvrščeno po %1$s, filtrirano po %2$s</string>
-    <string name="home_app_filter_all_description">Vse aplikacije na domačem zaslonu</string>
-    <string name="home_app_filter_patched_description">Aplikacije, ki ste jih popravili ali shranili z Morphe</string>
-    <string name="home_app_filter_not_patched_description">Aplikacije, ki jih z Morphe še niste popravili</string>
-    <string name="home_app_filter_installed_description">Trenutno nameščene aplikacije</string>
-    <string name="home_app_filter_uninstalled_description">Aplikacije, popravljene z Morphe, ki niso več na tej napravi</string>
     <string name="home_app_filter_clones">Klonirane aplikacije</string>
-    <string name="home_app_filter_clones_description">Aplikacije z lastnim imenom paketa, nameščene ob originalni aplikaciji</string>
     <string name="home_app_grouping_none">Nič</string>
-    <string name="home_app_grouping_all_apps_description">En seznam z vsemi aplikacijami</string>
-    <string name="home_app_grouping_sources_description">Aplikacije v viru za popravke, ki jih zagotavlja</string>
-    <string name="home_app_grouping_custom_description">Aplikacije v kategorijah, ki jih ustvarite</string>
-    <string name="home_app_sort_manual_description">Dolgo držite aplikacijo, nato tapnite gumb za ponovno razvrstitev</string>
     <string name="home_app_sort_recommended">Priporočen vrstni red</string>
-    <string name="home_app_sort_recommended_description">Nameščene in pripete aplikacije naj bodo prve</string>
-    <string name="home_app_sort_name_asc_description">Normalen vrstni red, od A do Ž</string>
-    <string name="home_app_sort_name_desc_description">Obraten abecedni vrstni red, od Ž do A</string>
     <string name="home_app_sort_updates_first">Najprej posodobitve popravkov</string>
-    <string name="home_app_sort_updates_first_description">Aplikacije z novejšimi popravki najprej, nato priporočeni vrstni red</string>
     <string name="home_app_sort_recently_patched">Nedavno popravljeno</string>
-    <string name="home_app_sort_recently_patched_description">Nazadnje popravljene aplikacije najprej</string>
     <string name="home_no_apps_title">Nobena aplikacija ni na voljo</string>
     <string name="home_no_apps_subtitle">Dodaj vir popravkov ali omogoči že obstoječega v %s</string>
     <string name="home_no_apps_search_subtitle">Nobena aplikacija se ne ujema z \"%s\"</string>
@@ -91,7 +76,6 @@
     <string name="home_no_apps_filter_subtitle">Nič ni ustrezalo %s</string>
     <string name="home_category_add">Dodaj kategorijo</string>
     <string name="home_category_all_apps">Vse aplikacije</string>
-    <string name="home_category_custom">Po meri</string>
     <string name="home_category_uncategorized">Nekategorizirano</string>
     <string name="home_category_new_title">Nova kategorija</string>
     <string name="home_category_rename_title">Preimenuj kategorijo</string>
@@ -168,32 +152,26 @@
     <string name="sources_management_title">Viri popravkov</string>
     <string name="sources_search">Išči vire in popravke</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Vsaka vira</string>
-    <string name="sources_filter_enabled_description">Popravki virov so odvzeti od</string>
-    <string name="sources_filter_disabled_description">Viri ugasnjeni</string>
     <string name="sources_filter_issues">Potrebuje pozornost</string>
-    <string name="sources_filter_issues_description">Viru, ki so blokirani, se naložiti ali potrebujejo novejši Morphe</string>
     <string name="sources_sort_manual">Ročni vrstni red</string>
     <string name="sources_sort_manual_hint">Dolgo pritisnite vir, da ga ponovno uredite</string>
     <string name="sources_sort_last_updated">Nazadnje posodobljeno</string>
-    <string name="sources_sort_last_updated_description">Najprej najnovejše posodobitve virov</string>
     <string name="sources_sort_enabled_first">Omogočeni najprej</string>
-    <string name="sources_sort_enabled_first_description">Prikaži aktivne vire pred onemogočenimi viri</string>
     <string name="sources_patches_source_disabled_hint">Ta vir je onemogočen. Njegovi popravki so navedeni samo za referenco in se ne uporabijo</string>
     <string name="sources_management_open_in_browser">Odpri v brskalniku</string>
     <string name="sources_management_report_issue">Prijavi težavo</string>
-    <string name="sources_management_failed_to_open_url">Ni mogoče odpreti URL</string>
+    <string name="sources_management_failed_to_open_url">URL-ja ni bilo mogoče odpreti</string>
     <string name="sources_apps">Aplikacije</string>
-    <string name="sources_apps_description">Aplikacije, označene kot aktivne, prihajajo iz tega vira. Pritisnite aplikacijo, da jo izključite ali ponovno vključite. Aplikacija izgine z domačega zaslona, ko noben vir ne prinaša več, razen če je bila popravljena</string>
+    <string name="sources_apps_description">Aplikacije, označene kot aktivne, prihajajo iz tega vira. Pritisnite aplikacijo, da jo izključite ali ponovno vključite. Aplikacija izgine z domačega zaslona, ko je noben vir ne prinaša več, razen če je bila popravljena</string>
     <string name="sources_apps_brought">Prinaša vir</string>
     <string name="sources_apps_left_out">Izpuščeno iz tega vira</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
     <string name="sources_apps_stays_patched">Ohranjeno kot popravljeno</string>
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
     <string name="sources_apps_new">Nova</string>
-    <string name="sources_apps_new_apps">Prinesi nove aplikacije</string>
+    <string name="sources_apps_new_apps">Dodaj nove aplikacije</string>
     <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
-    <string name="sources_apps_new_apps_description">Aplikacije, ki jih kasneje doda, se pojavijo na domačem zaslonu</string>
+    <string name="sources_apps_new_apps_description">Aplikacije, ki so kasneje dodane, se pojavijo na domačem zaslonu</string>
     <string name="sources_management_prerelease_toggle">Predizdani-popravki</string>
     <string name="sources_management_prerelease_toggle_description">Prejmite zgodnji dostop do novih eksperimentalnih različic popravkov</string>
     <string name="sources_prerelease_warning_title">Omogoči predizdajne-popravke?</string>
@@ -220,7 +198,7 @@
     <string name="sources_management_held_back_hint">Ta vir je med nalaganjem zrušil aplikacijo Morphe, zato je preskočen. Posodobite ga ali ga znova uvozite, da poskusite znova</string>
     <string name="sources_management_signed_by">Podpisal</string>
     <string name="sources_management_signing_key_changed_badge">Ključ spremenjen</string>
-    <string name="sources_management_signing_key_changed_hint">Najnovejša različica ni podpisana s ključem, ki ga je ta vir uporabljal prej, zato zato ni bila nameščena. Zapletite za pregled</string>
+    <string name="sources_management_signing_key_changed_hint">Najnovejša različica ni podpisana s ključem, ki ga je ta vir uporabljal prej, zato ni bila nameščena. Tapnite za pregled</string>
     <string name="sources_management_source_enabled">Vir omogočen</string>
     <string name="sources_management_source_disabled">Vir onemogočen</string>
     <string name="sources_management_source_updating">Posodabljanje vira</string>
@@ -230,11 +208,11 @@
     <string name="sources_dialog_change_url">Spremenite lokacijo prenosa izvora popravkov</string>
     <string name="sources_dialog_duplicate_name_error">Vir s tem imenom že obstaja</string>
     <string name="sources_dialog_missing_error">Ni mogoče posodobiti tega vira popravkov.</string>
-    <string name="sources_dialog_add_source">Dodaj vir popravka</string>
+    <string name="sources_dialog_add_source">Dodaj vir popravkov</string>
     <string name="sources_dialog_delete_confirm_body">Tega ni mogoče razveljaviti</string>
     <string name="sources_dialog_remote">Oddaljen</string>
     <string name="sources_dialog_remote_url">Izvorni URL</string>
-    <string name="sources_dialog_remote_url_hint">Repozitorij ali povezava do paketa popravkov .json. Prilepi več naenkrat, da jih dodaš vse.</string>
+    <string name="sources_dialog_remote_url_hint">Repozitorij ali povezava do paketa popravkov .json. Prilepite jih več naenkrat, da dodate vse.</string>
     <string name="sources_dialog_paste_no_links">Na odložišču ni najdenih povezav.</string>
     <string name="sources_dialog_local">Lokalni</string>
     <string name="sources_dialog_local_files">Izberi datoteke vira popravkov.</string>
@@ -243,7 +221,7 @@
     <string name="sources_dialog_local_updates">Posodobi %s</string>
     <string name="sources_dialog_url_valid">Veljaven repozitorij ali URL naslov datoteke JSON</string>
     <string name="sources_dialog_url_invalid">URL mora kazati na repozitorij GitHub/GitLab ali na .json datoteko</string>
-    <string name="sources_dialog_preinstalled">Prednameščen</string>
+    <string name="sources_dialog_preinstalled">Prednameščeni</string>
     <string name="sources_dialog_community">Javni popravki</string>
     <string name="sources_dialog_choose_apps">Izberite aplikacije</string>
     <string name="sources_dialog_choose_apps_description">Izberite, katere aplikacije iz tega vira obdržati, ko se vir naloži.</string>
@@ -256,10 +234,10 @@
     <string name="sources_download_fail_named">\"%s\" ni bilo mogoče posodobiti. Preverite internetno povezavo in poskusite znova</string>
     <string name="sources_download_endpoint_not_found">\"%s\": metapodatki popravka niso bili najdeni</string>
     <string name="sources_signing_key_changed_named">\'%s\' ni bilo posodobljeno, ker najnovejša različica ni podpisana s ključem, ki ga je uporabljal prej</string>
-    <string name="sources_signing_key_changed_local">Datoteka ni podpisana s ključem, ki ga je ta vir uporabljal prej. Če ji zaupate, izbrišite vir in datoteko dodajte ponovno</string>
-    <string name="sources_signing_key_trust_title">Zaupati novemu ključu?</string>
-    <string name="sources_signing_key_trust_message">Najnovejša različica je podpisana z drugim ključem. Razvijalec je zamenjal svoj ključ ali pa je to različico objavil nekdo drug. Ji zaupajte le, če je razvijalec napovedal nov ključ</string>
-    <string name="sources_signing_key_trust_message_unsigned">Najnovejša različica ni podpisana. Razvijalec je prenehal podpisovati različice ali pa je to različico objavil nekdo drug. Ji zaupajte le, če je to razvijalec napovedal</string>
+    <string name="sources_signing_key_changed_local">Datoteka ni podpisana s ključem, ki ga je ta vir uporabljal prej. Če ji želite zaupati, izbrišite vir in datoteko dodajte ponovno</string>
+    <string name="sources_signing_key_trust_title">Zaupate novemu ključu?</string>
+    <string name="sources_signing_key_trust_message">Najnovejša različica je podpisana z drugim ključem. Razvijalec je zamenjal svoj ključ ali pa je to različico objavil nekdo drug. Zaupajte ji le, če je razvijalec napovedal nov ključ</string>
+    <string name="sources_signing_key_trust_message_unsigned">Najnovejša različica ni podpisana. Razvijalec je prenehal podpisovati različice ali pa je to različico objavil nekdo drug. Zaupajte ji le, če je to razvijalec napovedal</string>
     <string name="sources_signing_key_trusted">Zaupan ključ</string>
     <string name="sources_signing_key_new">Novi ključ</string>
     <string name="sources_patch_expert_badge">Poznavalec</string>
@@ -271,9 +249,8 @@
     <string name="home_apk_availability_recommended_label">Priporočeno</string>
     <string name="home_apk_availability_unpatched_label">Nepopravljeno</string>
     <string name="home_apk_availability_incompatible_label">Nezdružljivo</string>
-    <string name="home_apk_availability_installed_version">Nameščeno na tej napravi: %s</string>
     <string name="home_apk_availability_find">Da, pomagajte mi ga najti</string>
-    <string name="home_apk_availability_have">Ne, že ga imam</string>
+    <string name="home_apk_availability_have">Ne, ga že imam</string>
     <string name="home_apk_helper_download">Uporabi pomožni program</string>
     <string name="home_apk_helper_untrusted">Nameščena je pomožna aplikacija, vendar še ni zaupanja vredna, zato tukaj ni ponujena</string>
     <string name="home_apk_helper_untrusted_action">Preglejte pomočnike</string>
@@ -289,11 +266,11 @@
     <string name="home_apk_helper_wrong_package">Pomožna aplikacija je vrnila drugo aplikacijo, kot je tista, ki se popravlja.</string>
     <string name="home_apk_helper_installed_unavailable">Morphe ni mogel uporabiti nameščene aplikacije.</string>
     <string name="home_apk_helper_installed_incompatible">Nameščene različice ni mogoče popraviti.</string>
-    <string name="home_apk_use_saved_copy">Uporabi shranjen kopijo</string>
+    <string name="home_apk_use_saved_copy">Uporabi shranjeno kopijo</string>
     <string name="home_apk_use_installed_app">Uporabi nameščeno aplikacijo</string>
     <string name="home_apk_use_saved_unsupported">Popravki ne podpirajo te shranjene kopije. Nameščanje popravkov bo zahtevalo potrditev ali izbiro drugega APK.</string>
-    <string name="home_apk_use_installed_unverified">Ni je bilo mogoče preveriti podpis nameščenega programa, zato je morda že spremenjen.</string>
-    <string name="home_unverified">Nepotrjeno</string>
+    <string name="home_apk_use_installed_unverified">Ni bilo mogoče preveriti podpisa nameščenega programa, zato je morda že popravljen</string>
+    <string name="home_unverified">Nepotrjen</string>
     <string name="home_install_verification_pending">Preverjanje namestitve…</string>
     <string name="home_app_info_install_unverified">Morphe ne more potrditi, da je nameščena aplikacija različica, ki jo je popravil. Ponovite popravek ali jo ponovno namestite iz shranjene datoteke APK, da obnovite njene funkcije</string>
     <string name="home_app_info_no_saved_apk">Ni shranjenega APK. Popravilo bo zahtevalo ponovno izbiro datoteke APK.</string>
@@ -305,7 +282,7 @@
     <string name="home_download_instructions_finding">Iskanje strani za prenos…</string>
     <string name="home_download_instructions_step1">Pritisnite gumb \"%s\" spodaj</string>
     <string name="home_download_instructions_step2_part1">Podrsajte po spletni strani navzdol in pritisni</string>
-    <string name="home_download_instructions_step2_generic">Pomaknite se navzdol po spletni strani in pritisnite njen gumb za prenos</string>
+    <string name="home_download_instructions_step2_generic">Pomaknite se navzdol po spletni strani in tam pritisnite na gumb za prenos</string>
     <string name="home_download_instructions_step2_variant">Pomaknite se navzdol po spletni strani in pritisnite gumb za prenos zgornje &lt;b&gt;različice APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_search">Odprite rezultat iskanja s spletne strani, ki ji zaupate</string>
     <string name="home_download_instructions_step2_search_note">Morphe ne more jamčiti za te spletne strani. Preskočite tiste, ki ponujajo svojo trgovino z aplikacijami namesto datoteke APK</string>
@@ -328,14 +305,14 @@
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <!-- %s is the name of the app whose APK was just downloaded -->
     <string name="home_file_picker_prompt_app_title">Izberite %s APK</string>
-    <string name="home_file_picker_prompt_where">Brauzerji ga običajno shranijo v mapo Prenosih</string>
+    <string name="home_file_picker_prompt_where">Brskalniki ga običajno shranijo v mapo Prenosi</string>
     <string name="home_file_picker_prompt_open_apk">Odpri datoteko APK</string>
     <string name="home_recommended_version">Priporočena verzija</string>
     <string name="home_selected_version">Izbrana različica</string>
     <string name="home_select_apk_title">Izberi APK</string>
-    <string name="home_select_apk_description">"Univerzalni popravki delujejo znočno aplikacijo
+    <string name="home_select_apk_description">"Univerzalni popravki delujejo s katero koli aplikacijo
 
-Izberite, od kje naj prevzame APK"</string>
+Izberite,  iz kje izbrati APK"</string>
     <string name="home_use_installed_app">Uporabi nameščeno aplikacijo</string>
     <string name="home_use_installed_app_description">Izberite aplikacijo, ki je že na tej napravi</string>
     <string name="home_open_apk_file_description">Iz pomnilnika izberite datoteko APK, APKM, APKS ali XAPK</string>
@@ -1194,7 +1171,7 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_storage_clear_all">Počisti vse predpomnilnike</string>
     <string name="settings_system_storage_clear_all_description">Naenkrat izbriše ves prostor predpomnilnika, ki ga je mogoče povrniti</string>
     <string name="settings_system_storage_clear_all_confirm">To počisti predpomnjene omrežne odzive, pripravljene kopije namestitvenih programov in začasne datoteke. Izvorne in popravljene datoteke APK ostanejo nedotaknjene</string>
-    <string name="settings_system_storage_cleared">Osvobojeno %s</string>
+    <string name="settings_system_storage_cleared">Sproščenih %s</string>
     <string name="settings_system_storage_patch_running_warning">Zaznana je bila operacija posodobitve, ki uporablja te datoteke. Če jih zdaj izbrišete, se bo operacija neuspešno končala</string>
     <string name="settings_system_storage_clear_anyway">Vseeno počisti</string>
     <string name="settings_system_storage_nothing_to_clear">Nič za izbris</string>

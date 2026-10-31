@@ -661,10 +661,7 @@ private fun PackageSelectionHeader(
                         overflow = TextOverflow.Ellipsis
                     )
 
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
+                    StatusBadgeRow {
                         // An app with only sets kept for it has no selection to count
                         if (bundleMap.isNotEmpty()) {
                             StatusBadge(
@@ -984,21 +981,18 @@ private fun DialogHostScope.PatchDetailsDialog(
 /** One source's part of a [PatchDetailsDialog]. */
 private class DetailsSection(val title: String, val count: Int, val entries: List<PatchEntry>)
 
-/** Room an icon button keeps between its touch target and the icon it draws. */
-private val IconButtonIconInset = (48.dp - Defaults.IconSize) / 2
-
 /** How far the header's chevron sits in from its end, centered in the slot of its selection mark. */
 private val HeaderMarkInset = (SelectionMarkSize - Defaults.IconSize) / 2
 
 /**
  * Room inside an [InfoRow] standing as a row of an app's block on its own, rather than in a panel,
- * the header's room, so its icon and text line up with the header above. Its end is set so the icon
- * of its menu button, inside the room the button keeps around it, sits under the header's chevron.
+ * the header's room, so its icon and text line up with the header above. Its end is set so the
+ * icon of its menu button sits under the header's chevron.
  */
 private val SegmentRowPadding = PaddingValues(
     start = Defaults.SpaceLarge,
     top = Defaults.SpaceLarge,
-    end = Defaults.SpaceLarge + HeaderMarkInset - IconButtonIconInset,
+    end = Defaults.SpaceLarge + HeaderMarkInset,
     bottom = Defaults.SpaceLarge
 )
 
