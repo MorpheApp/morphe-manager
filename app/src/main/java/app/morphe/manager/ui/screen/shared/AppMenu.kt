@@ -22,10 +22,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import com.composables.icons.materialsymbols.MaterialSymbols
@@ -157,7 +159,17 @@ fun AppDropdownMenuItem(
 @Composable
 fun RowActionsMenu(actions: List<SelectionAction>, modifier: Modifier = Modifier) {
     var expanded by remember { mutableStateOf(false) }
-    Box(modifier = modifier) {
+    // As wide in the row as its icon, so the dots end a row where a chevron or a selection mark
+    // ends another, while the button's touch target reaches out over the room around it
+    Box(
+        modifier = modifier.layout { measurable, constraints ->
+            val placeable = measurable.measure(constraints.copy(minWidth = 0, maxWidth = Constraints.Infinity))
+            val width = Defaults.IconSize.roundToPx()
+            layout(width, placeable.height) {
+                placeable.place((width - placeable.width) / 2, 0)
+            }
+        }
+    ) {
         TooltipIconButton(
             onClick = { expanded = true },
             icon = MaterialSymbols.Rounded.More_vert,
