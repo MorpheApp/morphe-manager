@@ -661,10 +661,7 @@ private fun PackageSelectionHeader(
                         overflow = TextOverflow.Ellipsis
                     )
 
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
+                    StatusBadgeRow {
                         // An app with only sets kept for it has no selection to count
                         if (bundleMap.isNotEmpty()) {
                             StatusBadge(
