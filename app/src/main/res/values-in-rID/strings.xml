@@ -62,26 +62,11 @@
     <string name="home_search_apps">Cari aplikasi</string>
     <string name="list_options_title">Urutkan dan saring</string>
     <string name="list_options_state_description">Diurutkan berdasarkan %1$s, disaring berdasarkan %2$s</string>
-    <string name="home_app_filter_all_description">Semua aplikasi di layar beranda</string>
-    <string name="home_app_filter_patched_description">Aplikasi yang sudah Anda tambal atau simpan dengan Morphe</string>
-    <string name="home_app_filter_not_patched_description">Aplikasi yang belum Anda tambal di Morphe</string>
-    <string name="home_app_filter_installed_description">Aplikasi yang saat ini terpasang di perangkat ini</string>
-    <string name="home_app_filter_uninstalled_description">Aplikasi yang ditambal dengan Morphe dan tidak lagi berada di perangkat ini</string>
     <string name="home_app_filter_clones">Klon</string>
-    <string name="home_app_filter_clones_description">Aplikasi yang dibuat dengan nama paket tersendiri, dipasang bersamaan dengan aslinya</string>
     <string name="home_app_grouping_none">Tidak ada</string>
-    <string name="home_app_grouping_all_apps_description">Satu daftar berisi semua aplikasi</string>
-    <string name="home_app_grouping_sources_description">Aplikasi di bawah sumber penambalan yang menyediakan mereka</string>
-    <string name="home_app_grouping_custom_description">Aplikasi dalam kategori yang Anda buat</string>
-    <string name="home_app_sort_manual_description">Tekan lama sebuah aplikasi, lalu ketuk tombol urutkan</string>
     <string name="home_app_sort_recommended">Urutan yang Direkomendasikan</string>
-    <string name="home_app_sort_recommended_description">Aplikasi yang sudah dipasang dan disematkan terlebih dahulu</string>
-    <string name="home_app_sort_name_asc_description">Berdasarkan abjad, A sampai Z</string>
-    <string name="home_app_sort_name_desc_description">Urutan abjad terbalik, Z sampai A</string>
     <string name="home_app_sort_updates_first">Tambal pembaruan terlebih dahulu</string>
-    <string name="home_app_sort_updates_first_description">Aplikasi dengan tambalan terbaru dulu, lalu urutan yang direkomendasikan</string>
     <string name="home_app_sort_recently_patched">Baru saja ditambal</string>
-    <string name="home_app_sort_recently_patched_description">Aplikasi paling baru ditambal terlebih dulu</string>
     <string name="home_no_apps_title">Tidak ada aplikasi yang tersedia</string>
     <string name="home_no_apps_subtitle">Tambahkan sumber tambalan atau aktifkan yang sudah ada di %s</string>
     <string name="home_no_apps_search_subtitle">Tidak ada aplikasi yang cocok \"%s\"</string>
@@ -91,7 +76,6 @@
     <string name="home_no_apps_filter_subtitle">Tidak ada yang cocok dengan %s</string>
     <string name="home_category_add">Tambahkan kategori</string>
     <string name="home_category_all_apps">Semua aplikasi</string>
-    <string name="home_category_custom">Kustom</string>
     <string name="home_category_uncategorized">Tidak berkategori</string>
     <string name="home_category_new_title">Kategori baru</string>
     <string name="home_category_rename_title">Ganti nama kategori</string>
@@ -168,17 +152,11 @@
     <string name="sources_management_title">Sumber tambalan</string>
     <string name="sources_search">Cari sumber dan tambalan</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Semua sumber</string>
-    <string name="sources_filter_enabled_description">Patch sumber diambil dari</string>
-    <string name="sources_filter_disabled_description">Sumber dimatikan</string>
     <string name="sources_filter_issues">Perlu perhatian</string>
-    <string name="sources_filter_issues_description">Sumber yang diblokir, gagal dimuat, atau memerlukan Morphe yang lebih baru</string>
     <string name="sources_sort_manual">Urutan manual</string>
     <string name="sources_sort_manual_hint">Tekan lama sumber untuk mengubah urutan</string>
     <string name="sources_sort_last_updated">Terakhir diperbarui</string>
-    <string name="sources_sort_last_updated_description">Pembaruan sumber terbaru terlebih dahulu</string>
     <string name="sources_sort_enabled_first">Aktifkan terlebih dahulu</string>
-    <string name="sources_sort_enabled_first_description">Tampilkan sumber aktif sebelum sumber yang dinonaktifkan</string>
     <string name="sources_patches_source_disabled_hint">Sumber ini dinonaktifkan. Tambalannya tercantum untuk referensi dan tidak diterapkan.</string>
     <string name="sources_management_open_in_browser">Buka di peramban</string>
     <string name="sources_management_report_issue">Laporkan masalah</string>
@@ -237,7 +215,7 @@
     <string name="sources_dialog_remote_url_hint">Repositori atau tautan ke bundel patch .json. Tempel beberapa sekaligus untuk menambahkan semuanya.</string>
     <string name="sources_dialog_paste_no_links">Tidak ada tautan yang ditemukan di papan klip.</string>
     <string name="sources_dialog_local">Lokal</string>
-    <string name="sources_dialog_local_files">Pilih file sumber patch.</string>
+    <string name="sources_dialog_local_files">Pilih berkas sumber tambalan</string>
     <string name="sources_dialog_local_invalid_extension">Berkas harus memiliki ekstensi .mpp</string>
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Memperbarui %s</string>
@@ -271,7 +249,6 @@
     <string name="home_apk_availability_recommended_label">Direkomendasikan</string>
     <string name="home_apk_availability_unpatched_label">Tidak ditambal</string>
     <string name="home_apk_availability_incompatible_label">Tidak kompatibel</string>
-    <string name="home_apk_availability_installed_version">Terpasang di perangkat ini: %s</string>
     <string name="home_apk_availability_find">Ya, bantu aku menemukannya</string>
     <string name="home_apk_availability_have">Tidak, aku sudah memilikinya</string>
     <string name="home_apk_helper_download">Gunakan aplikasi pembantu</string>
@@ -283,7 +260,7 @@
     <string name="home_apk_helper_continue">Buka helper</string>
     <string name="home_apk_helper_warning">Lanjutkan hanya jika Anda mempercayai aplikasi pembantu ini. Morphe memeriksa paket, versi dan tanda tangan dari apa pun yang diterimanya sebelum melakukan penambalan</string>
     <string name="home_apk_helper_warning_unverified">Lanjutkan hanya jika Anda mempercayai aplikasi pembantu ini. Morphe tidak dapat memverifikasi tanda tangan APK ini, sehingga berkas yang dimodifikasi tidak akan terdeteksi</string>
-    <string name="home_apk_helper_no_result">Aplikasi pembantu tidak mengembalikan file APK</string>
+    <string name="home_apk_helper_no_result">Aplikasi pembantu tidak mengembalikan berkas APK</string>
     <string name="home_apk_helper_no_access">Aplikasi pembantu tersebut tidak memberikan akses ke APK yang dikembalikannya</string>
     <string name="home_apk_helper_no_package">Aplikasi pembantu tersebut tidak menyebutkan aplikasi mana yang sudah terpasang untuk digunakan</string>
     <string name="home_apk_helper_wrong_package">Aplikasi pembantu mengembalikan aplikasi yang berbeda dari aplikasi yang sedang diperbarui</string>
@@ -308,7 +285,7 @@
     <string name="home_download_instructions_step2_generic">Geser halaman web ke bawah dan tekan tombol unduhnya</string>
     <string name="home_download_instructions_step2_variant">Geser halaman web ke bawah dan tekan tombol unduh dari &lt;b&gt;varian APK&lt;/b&gt; teratas</string>
     <string name="home_download_instructions_step2_search">Buka hasil penelusuran dari situs web yang Anda percayai</string>
-    <string name="home_download_instructions_step2_search_note">Morphe tidak dapat menjamin situs-situs web ini. Lewati yang menawarkan toko aplikasi sendiri, bukan file APK</string>
+    <string name="home_download_instructions_step2_search_note">Morphe tidak dapat menjamin keakuratan situs web ini. Hindari situs web yang menawarkan toko aplikasi mereka sendiri alih-alih berkas APK</string>
     <string name="home_download_instructions_step3_search">Di situs web tersebut, unduh APK versi &lt;b&gt;%s&lt;/b&gt;, bukan versi terbaru</string>
     <string name="home_download_instructions_step3_search_any">Di situs web tersebut, unduh APK aplikasi. &lt;b&gt;Versi apa pun&lt;/b&gt; dapat ditambal</string>
     <string name="home_download_instructions_download_button_toast">Tekan unduh di situs web, dan bukan di sini 😊</string>
@@ -338,7 +315,7 @@
 Pilih dari mana Anda ingin mengambil APK-nya"</string>
     <string name="home_use_installed_app">Gunakan aplikasi yang terpasang</string>
     <string name="home_use_installed_app_description">Pilih aplikasi yang sudah ada di perangkat ini</string>
-    <string name="home_open_apk_file_description">Pilih file APK, APKM, APKS, atau XAPK dari penyimpanan</string>
+    <string name="home_open_apk_file_description">Pilih berkas APK, APKM, APKS, atau XAPK dari penyimpanan</string>
     <string name="home_installed_app_picker_title">Aplikasi terpasang</string>
     <string name="home_installed_app_picker_empty">Tidak ditemukan aplikasi</string>
     <string name="home_installed_app_picker_filter_user">Hanya aplikasi pengguna</string>
@@ -457,7 +434,7 @@ Untuk hasil terbaik, aplikasi ini merekomendasikan untuk menambal &lt;b&gt;APK l
     <string name="adaptive_icon_guide_safe_zones_title">Zona aman</string>
     <string name="adaptive_icon_guide_safe_zones_body">Garis luar menunjukkan bentuk ikon peluncur Anda, dan semua yang berada di luarnya akan terpotong. Peluncur lain menggunakan bentuk lain, jadi pertahankan detail penting di dalam lingkaran putus-putus, yang ditampilkan oleh setiap bentuk.</string>
     <string name="adaptive_icon_guide_notification_title">Ikon notifikasi</string>
-    <string name="adaptive_icon_guide_notification_body">Dipotong dari bagian gambar yang terlihat dan berukuran seperti ikon bilah status lainnya, berapa pun margin pada file. Sesuaikan dengan penggeser di bawah pratinjau. Android menampilkannya dalam satu warna.</string>
+    <string name="adaptive_icon_guide_notification_body">Dipotong dari bagian gambar yang terlihat dan berukuran seperti ikon bilah status lainnya, berapa pun margin pada berkas. Sesuaikan dengan penggeser di bawah pratinjau. Android menampilkannya dalam satu warna.</string>
     <string name="adaptive_icon_guide_monochrome_title">Ikon bertema</string>
     <string name="adaptive_icon_guide_monochrome_body">Dipotong dari gambar dengan posisi dan ukuran yang sama dengan ikon peluncur. Pada Android 13 dan yang lebih baru, peluncur dengan ikon bertema yang diaktifkan akan mewarnainya dari wallpaper.</string>
     <string name="notification_icon_preview">Notifikasi</string>
@@ -469,7 +446,7 @@ Untuk hasil terbaik, aplikasi ini merekomendasikan untuk menambal &lt;b&gt;APK l
     <string name="header_creator_failed">Gagal membuat header</string>
     <string name="header_creator_guide">Panduan pembuatan header</string>
     <string name="header_creator_guide_image_title">Persyaratan gambar</string>
-    <string name="header_creator_guide_image_body">PNG dengan latar belakang transparan menyatu dengan bilah aplikasi. Margin di sekitar logo dalam file diabaikan, sehingga ukuran dan posisinya sama dengan logo bawaan.</string>
+    <string name="header_creator_guide_image_body">PNG dengan latar belakang transparan menyatu dengan bilah aplikasi. Margin di sekitar logo dalam berkas diabaikan, sehingga ukuran dan posisinya sama dengan logo bawaan.</string>
     <string name="header_creator_guide_themes_title">Tema terang dan gelap</string>
     <string name="header_creator_guide_themes_body">Sebagian besar aplikasi memerlukan gambar terpisah untuk tema terang dan gelap. Beberapa aplikasi (seperti YouTube Music) hanya menggunakan tema gelap, jadi hanya bagian itu yang ditampilkan.</string>
     <string name="header_creator_guide_positioning_title">Pemosisian dan penskalaan</string>
@@ -483,7 +460,7 @@ Untuk hasil terbaik, aplikasi ini merekomendasikan untuk menambal &lt;b&gt;APK l
     <string name="batch_patch_summary">%1$s ditambal, %2$s gagal, %3$s dilewati</string>
     <string name="batch_patch_saved_hint">Aplikasi yang telah ditambal telah tersimpan. Pasang sekarang, atau nanti dari daftar APK yang telah ditambal di setelan.</string>
     <string name="batch_patch_multiple_sources">Beberapa aplikasi menggabungkan tambalan dari lebih dari satu sumber, yang dapat menyebabkan konflik</string>
-    <string name="batch_patch_needs_apk">Tidak ada APK yang tersedia, lampirkan file</string>
+    <string name="batch_patch_needs_apk">Tidak ada APK yang tersedia, lampirkan berkas</string>
     <string name="batch_patch_wrong_package">Berkas terlampir milik %s</string>
     <string name="batch_patch_version_mismatch">Versi %s tidak didukung tambalan</string>
     <string name="batch_patch_source_saved">Aplikasi asli disimpan</string>
@@ -502,9 +479,9 @@ Untuk hasil terbaik, aplikasi ini merekomendasikan untuk menambal &lt;b&gt;APK l
     <string name="batch_patch_policy_install">Pasang setelah selesai</string>
     <string name="batch_patch_policy_install_description">Pasang setiap aplikasi yang ditambal segera setelah antrean selesai. Jika nonaktif, APK akan disimpan untuk nanti</string>
     <string name="batch_patch_policy_mount">Mount setelah selesai</string>
-    <string name="batch_patch_policy_mount_description">Setelah antrean selesai, setiap aplikasi yang telah di-patch di-mount. Jika nonaktif, APK disimpan untuk digunakan nanti.</string>
+    <string name="batch_patch_policy_mount_description">Pasang setiap aplikasi yang ditambal segera setelah antrean selesai. Jika nonaktif, APK akan disimpan untuk nanti</string>
     <string name="batch_patch_policy_install_mount">Instal atau mount setelah selesai</string>
-    <string name="batch_patch_policy_install_mount_description">Setelah antrean selesai, setiap aplikasi yang telah di-patch diinstal atau di-mount. Jika nonaktif, APK disimpan untuk digunakan nanti.</string>
+    <string name="batch_patch_policy_install_mount_description">Pasang atau muat setiap aplikasi yang ditambal segera setelah antrean selesai. Jika nonaktif, APK akan disimpan untuk nanti</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_start">Mulai</string>
     <string name="batch_patch_stop_title">Hentikan penambalan massal?</string>
@@ -600,7 +577,7 @@ Untuk hasil terbaik, aplikasi ini merekomendasikan untuk menambal &lt;b&gt;APK l
     <string name="patcher_field_source">Sumber</string>
     <string name="patcher_field_split">APK Terpisah</string>
     <string name="patcher_field_manager">Pengelola</string>
-    <string name="patcher_field_runtime">Runtime</string>
+    <string name="patcher_field_runtime">Waktu proses</string>
     <!-- Native code libraries (.so files) packed inside the APK -->
     <string name="patcher_field_libraries">Pustaka</string>
     <string name="patcher_field_android">Android</string>
@@ -633,7 +610,7 @@ Untuk hasil terbaik, aplikasi ini merekomendasikan untuk menambal &lt;b&gt;APK l
     <string name="patcher_mounted_subtitle">Aplikasi Anda telah ditambal dan terpasang!</string>
     <string name="patcher_complete_title">Penambalan selesai! ✨</string>
     <string name="patcher_failed_title">Oops! Terjadi kesalahan</string>
-    <string name="patcher_failed_dialog_title">Gagal Menambal</string>
+    <string name="patcher_failed_dialog_title">Gagal menambal</string>
     <string name="patcher_error_details">Detail kesalahan</string>
     <string name="patcher_change_patches">Ganti tambalan</string>
     <string name="patcher_unknown_error">Terjadi kesalahan yang tidak diketahui</string>
@@ -669,10 +646,10 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="patcher_missing_patches_title">Beberapa tambalan hilang</string>
     <string name="patcher_missing_patches_description">Pilihan yang tersimpan untuk aplikasi ini memuat tambalan yang sudah tidak tersedia lagi di sumber aktif mana pun. Jika dilanjutkan, aplikasi akan ditambal tanpa tambalan tersebut</string>
     <string name="patcher_missing_patches_label">Sudah tidak tersedia</string>
-    <string name="patcher_option_paths_gone_title">Opsi tambalan file tidak ditemukan</string>
-    <string name="patcher_option_paths_gone_description">Satu atau lebih opsi tambalan mengarah ke file yang sudah tidak ada. Hapus jalur untuk melakukan tambalan tanpanya, atau letakkan kembali file tersebut dan coba lagi</string>
-    <string name="patcher_option_paths_rejected_title">File opsi tambalan tidak dapat digunakan</string>
-    <string name="patcher_option_paths_rejected_description">Satu atau lebih opsi tambalan mengarah ke file yang hilang atau tidak memiliki apa yang diminta oleh tambalan. Hapus jalur untuk melakukan tambalan tanpanya, atau perbaiki file sesuai deskripsi instruksi opsi dan coba lagi</string>
+    <string name="patcher_option_paths_gone_title">Opsi tambalan berkas tidak ditemukan</string>
+    <string name="patcher_option_paths_gone_description">Satu atau lebih opsi tambalan mengarah ke berkas yang sudah tidak ada. Hapus jalur untuk melakukan tambalan tanpanya, atau letakkan kembali berkas tersebut dan coba lagi</string>
+    <string name="patcher_option_paths_rejected_title">Berkas opsi tambalan tidak dapat digunakan</string>
+    <string name="patcher_option_paths_rejected_description">Satu atau lebih opsi tambalan mengarah ke berkas yang hilang atau tidak memiliki apa yang diminta oleh tambalan. Hapus jalur untuk melakukan tambalan tanpanya, atau perbaiki berkas sesuai deskripsi instruksi opsi dan coba lagi</string>
     <string name="patcher_option_paths_clear">Hapus jalur dan lanjutkan</string>
     <string name="patcher_storage_permission_hint">Saran: Pindahkan berkas ke /Android/data/app.morphe.manager/files/ - tidak diperlukan perizinan tambahan</string>
     <!-- Patcher Screen - Patcher Steps -->
@@ -1101,7 +1078,7 @@ Rincian: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimisasi baterai</string>
     <string name="settings_system_battery_optimization_description">Menjaga penambal tetap berjalan saat aplikasi diminimalkan</string>
-    <string name="settings_system_process_runtime">Runtime patcher</string>
+    <string name="settings_system_process_runtime">Waktu proses penambal</string>
     <string name="settings_system_jvm_runtime_enable">Gunakan VM tertanam</string>
     <string name="settings_system_jvm_runtime_description">Menambal di Java VM milik Morphe sendiri, yang dapat menggunakan lebih banyak memori. Nonaktifkan untuk menggunakan runtime Android</string>
     <string name="settings_system_jvm_runtime_unavailable">Membutuhkan perangkat ARM atau 64-bit x86</string>
@@ -1188,7 +1165,7 @@ Rincian: %2$s"</string>
     <string name="settings_system_storage_installer_cache_title">Cache pemasang eksternal</string>
     <string name="settings_system_storage_installer_cache_description">Salinan APK yang diteruskan ke pemasang pihak ketiga</string>
     <string name="settings_system_storage_patcher_workspace_title">Ruang kerja penambal</string>
-    <string name="settings_system_storage_patcher_workspace_description">Berkas runtime penambal dan data sampah yang tidak terpakai</string>
+    <string name="settings_system_storage_patcher_workspace_description">Berkas waktu proses penambal dan data sampah yang tidak terpakai</string>
     <string name="settings_system_storage_temporary_title">Berkas sementara</string>
     <string name="settings_system_storage_temporary_description">Berkas yang masih dapat digunakan dibuat selama penambalan</string>
     <string name="settings_system_storage_clear_all">Hapus semua cache</string>
@@ -1315,9 +1292,9 @@ Rincian: %2$s"</string>
     <string name="settings_section_updates">Pembaruan</string>
     <string name="settings_section_patching">Menambal</string>
     <string name="settings_section_appearance_summary">Tampilan Morphe</string>
-    <string name="settings_section_patch_options_summary">Apa modus sederhana mem-patch aplikasi dengan</string>
+    <string name="settings_section_patch_options_summary">Mode sederhana apa yang menambal aplikasi dengan</string>
     <string name="settings_section_general">Umum</string>
-    <string name="settings_section_patcher_summary">Cara aplikasi di-patch pada perangkat ini</string>
+    <string name="settings_section_patcher_summary">Cara aplikasi ditambal pada perangkat ini</string>
     <string name="settings_section_help_info">Bantuan &amp; info</string>
     <string name="settings_section_about_summary">Selengkapnya tentang Morphe dan cara mendapatkan bantuan</string>
     <string name="settings_section_local_files">File</string>
@@ -1406,7 +1383,7 @@ Rincian: %2$s"</string>
     <string name="clone">Duplikat</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Tambalan</string>
-    <string name="patching">Menambal</string>
+    <string name="patching">Penambalan</string>
     <string name="patched">Ditambal</string>
     <string name="open">Buka</string>
     <string name="mount">Pasang</string>

@@ -62,26 +62,12 @@
     <string name="home_search_apps">Cuardaigh aipeanna</string>
     <string name="list_options_title">Sórtáil agus scagaire</string>
     <string name="list_options_state_description">Sórtáilte de réir %1$s, scagtha de réir %2$s</string>
-    <string name="home_app_filter_all_description">Gach aip ar an scáileán baile</string>
-    <string name="home_app_filter_patched_description">Aipeanna atá paisteáilte nó sábháilte agat le Morphe</string>
-    <string name="home_app_filter_not_patched_description">Aipeanna nár phaisteáil tú i Morphe go fóill</string>
-    <string name="home_app_filter_installed_description">Aipeanna atá suiteáilte ar an ngléas seo faoi láthair</string>
-    <string name="home_app_filter_uninstalled_description">Aipeanna atá paisteáilte le Morphe nach bhfuil ar an ngléas seo a thuilleadh</string>
     <string name="home_app_filter_clones">Clóin</string>
-    <string name="home_app_filter_clones_description">Aipeanna a tógadh faoi ainm pacáiste dá gcuid féin, suiteáilte taobh leis an gceann bunaidh</string>
     <string name="home_app_grouping_none">Dada</string>
-    <string name="home_app_grouping_all_apps_description">Liosta amháin le gach aip</string>
-    <string name="home_app_grouping_sources_description">Aipeanna faoin bhfoinse pleata atá ag soláthar dóibh</string>
-    <string name="home_app_grouping_custom_description">Aipeanna i gcatagoírí a chruthaíonn tú féin</string>
-    <string name="home_app_sort_manual_description">Brúigh go fada ar aip, ansin tapáil an cnaipe athordaithe</string>
+    <string name="home_app_sort_manual_hint">Brúigh fada ar aip, ansin tapáil an cnaipe athordaithe</string>
     <string name="home_app_sort_recommended">Ordú molta</string>
-    <string name="home_app_sort_recommended_description">Aipeanna suiteáilte agus bioráilte ar dtús</string>
-    <string name="home_app_sort_name_asc_description">In ord aibítre, A go Z</string>
-    <string name="home_app_sort_name_desc_description">Droim ar ais aibítreach, Z go A</string>
     <string name="home_app_sort_updates_first">Nuashonruithe paiste ar dtús</string>
-    <string name="home_app_sort_updates_first_description">Aipeanna a bhfuil paistí níos nuaí acu ar dtús, ansin an t-ordú molta</string>
     <string name="home_app_sort_recently_patched">Paisteáilte le déanaí</string>
-    <string name="home_app_sort_recently_patched_description">Aipeanna is déanaí a paisteáladh ar dtús</string>
     <string name="home_no_apps_title">Níl aon aipeanna ar fáil</string>
     <string name="home_no_apps_subtitle">Cuir foinse paiste leis nó cumasaigh ceann atá ann cheana féin i %s</string>
     <string name="home_no_apps_search_subtitle">Níl aon aip ag teacht le \"%s\"</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Níor tháinig aon rud le %s</string>
     <string name="home_category_add">Cuir catagóir leis</string>
     <string name="home_category_all_apps">Gach aip</string>
-    <string name="home_category_custom">Saincheaptha</string>
+    <string name="home_app_grouping_categories">Catagóirí</string>
     <string name="home_category_uncategorized">Gan catagóir</string>
     <string name="home_category_new_title">Catagóir nua</string>
     <string name="home_category_rename_title">Athainmnigh an chatagóir</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">Foinsí paiste</string>
     <string name="sources_search">Cuardaigh foinsí agus paistí</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Gach foinse</string>
-    <string name="sources_filter_enabled_description">Foinsí as a dtógtar paistí</string>
-    <string name="sources_filter_disabled_description">Foinsí múchta</string>
     <string name="sources_filter_issues">Teastaíonn aird</string>
-    <string name="sources_filter_issues_description">Foinsí atá blocáilte, nár éirigh leo lódáil nó a bhfuil Morphe níos nuaí ag teastáil uathu</string>
     <string name="sources_sort_manual">Ordú láimhe</string>
     <string name="sources_sort_manual_hint">Brúigh suas le foinse le hathordú</string>
     <string name="sources_sort_last_updated">Nuashonraithe is déanaí</string>
-    <string name="sources_sort_last_updated_description">Nuashonruithe foinse is déanaí ar dtús</string>
     <string name="sources_sort_enabled_first">Cumasaithe ar dtús</string>
-    <string name="sources_sort_enabled_first_description">Taispeáin foinsí gníomhacha roimh fhoinsí díchumasaithe</string>
     <string name="sources_patches_source_disabled_hint">Tá an fhoinse seo díchumasaithe. Tá na paistí a bhaineann léi liostaithe mar thagairt agus níl siad curtha i bhfeidhm.</string>
     <string name="sources_management_open_in_browser">Oscail sa bhrabhsálaí</string>
     <string name="sources_management_report_issue">Tuairiscigh fadhb</string>
@@ -198,7 +178,7 @@
     <string name="sources_management_prerelease_toggle_description">Faigheann sé rochtain luath ar leaganacha nua paiste turgnamhacha</string>
     <string name="sources_prerelease_warning_title">Paistí réamh-eisiúna a chumasú?</string>
     <string name="sources_prerelease_warning_message">Tá leaganacha réamh-eisiúna fós á bhforbairt. D’fhéadfadh paistí teip nó an aip a bhriseadh, agus d’fhéadfadh gnéithe athrú gan rabhadh.</string>
-    <string name="expert_mode_unstable_notice">Seachas patching roimh sc subtly nó patches turgnaimh, is féidir go mbeadh siad neamhbhuan</string>
+    <string name="expert_mode_unstable_notice">D’fhéadfadh paistí réamheisiúna nó turgnamhacha a bheith éagobhsaí</string>
     <string name="sources_management_experimental_versions_toggle">Leaganacha turgnamhacha aipeanna</string>
     <string name="sources_management_experimental_versions_toggle_description">Taispeánann agus paistíonn spriocanna aipeanna turgnamhacha</string>
     <!-- Actions of the panel for several selected sources at once -->
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">Molta</string>
     <string name="home_apk_availability_unpatched_label">Díphaisteáilte</string>
     <string name="home_apk_availability_incompatible_label">Neamh-chomhoiriúnach</string>
-    <string name="home_apk_availability_installed_version">Suiteáilte ar an ngléas seo: %s</string>
     <string name="home_apk_availability_find">Sea, cabhraigh liom é a aimsiú</string>
     <string name="home_apk_availability_have">Ní hea, tá sé agam cheana féin.</string>
     <string name="home_apk_helper_download">Bain úsáid as aip chúnta</string>

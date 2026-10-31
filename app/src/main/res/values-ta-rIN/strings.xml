@@ -36,8 +36,11 @@
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
     <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
+    <string name="expert_mode_unstable_notice">முன்பதிவு அல்லது சோதனை முயற்சியிலான பேட்ச்கள் நிலையற்றதாக இருக்கலாம்</string>
     <!-- Actions of the panel for several selected sources at once -->
+    <string name="sources_management_metadata_unavailable_hint_missing_editable">பேட்ச் பண்டிலை பதிவிறக்க முடியவில்லை. மூல URL தவறாக இருக்கலாம் அல்லது கோப்பு இல்லை. அதை மாற்ற தட்டவும்</string>
     <!-- Home Screen - Sources Dialogs -->
+    <string name="sources_dialog_change_url">பேட்ச் மூலப்பொருள் பதிவிறக்கம் செய்யப்படும் இடத்தை மாற்றவும்</string>
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -46,6 +49,9 @@
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <!-- %s is the name of the app whose APK was just downloaded -->
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
+    <string name="expert_mode_recommended">பரிந்துரைக்கப்பட்ட பேட்ச்கள்</string>
+    <string name="expert_mode_selected_count">%2$s இல் %1$s தேர்ந்தெடுக்கப்பட்டது</string>
+    <string name="expert_mode_saved_selection">சேமிக்கப்பட்ட தேர்வு</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
