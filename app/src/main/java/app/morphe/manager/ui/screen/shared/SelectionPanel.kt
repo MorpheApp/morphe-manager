@@ -281,7 +281,7 @@ private fun SetsSection(
             ) {
                 RowValue(
                     text = pluralStringResource(R.plurals.patch_count, set.patchCount, set.patchCount.toString()),
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f, fill = false)
                 )
                 RowActionsMenu(selectionSetActions(onRename = { onRename(set) }, onDelete = { onDelete(set) }))
             }
@@ -377,7 +377,7 @@ private fun CopySection(
                     } else MaterialSymbols.Rounded.Content_copy
                 ) {
                     // Where it comes from and how much of it lands, ending in line with the other rows
-                    Column(modifier = Modifier.weight(1f), horizontalAlignment = Alignment.End) {
+                    Column(horizontalAlignment = Alignment.End) {
                         RowValue(text = listOfNotNull(candidate.setName, candidate.bundleName).joinToString(" · "))
                         Text(
                             text = stringResource(

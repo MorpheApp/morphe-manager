@@ -129,8 +129,7 @@ private fun <T> SectionRow(
             textAlign = TextAlign.End,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            // All the title leaves of the row, so the values of every row end in line
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f, fill = false)
         )
         // The menu hangs off the chevron, so it opens at the row's end, under the value it changes
         Box {

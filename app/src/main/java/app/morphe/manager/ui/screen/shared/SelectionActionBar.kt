@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
@@ -33,6 +34,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.theme.ThemeTraitsDefaults
@@ -455,9 +457,10 @@ private fun PanelActionRow(action: SelectionAction, enabled: Boolean) {
 }
 
 /**
- * One row of a panel in a [DockedPanel]: [icon] and [title] at the
- * start and [trailing] after it, such as the value the row opens, which takes what the title leaves
- * of the row. Every row of a panel is one of these, so its actions and its settings read as one list.
+ * One row of a panel in a [DockedPanel]: [icon] and [title] at the start and [trailing] after it,
+ * such as the value the row opens. [trailing] takes what the title leaves, and at least half the row
+ * when both run long, the title scrolling past the rest. Every row of a panel is one of these, so
+ * its actions and its settings read as one list.
  */
 @Composable
 fun PanelRow(
@@ -505,14 +508,40 @@ fun PanelRow(
                 modifier = Modifier.size(Defaults.IconSize)
             )
         }
-        // Set like the item rows across the app
-        Text(
-            text = title,
-            style = MaterialTheme.typography.bodyLarge,
-            fontWeight = FontWeight.Medium,
-            color = titleColor.copy(alpha = titleColor.alpha * alpha)
-        )
-        trailing?.invoke(this)
+        Layout(
+            content = {
+                // Set like the item rows across the app
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Medium,
+                    color = titleColor.copy(alpha = titleColor.alpha * alpha),
+                    maxLines = 1,
+                    modifier = Modifier.marquee()
+                )
+                if (trailing != null) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge),
+                        content = trailing
+                    )
+                }
+            },
+            modifier = Modifier.weight(1f)
+        ) { measurables, constraints ->
+            val width = constraints.maxWidth
+            val gap = Defaults.SpaceLarge.roundToPx()
+            val titleNatural = measurables[0].maxIntrinsicWidth(constraints.maxHeight)
+            val endMax = maxOf((width - gap) / 2, width - gap - titleNatural).coerceAtLeast(0)
+            val end = measurables.getOrNull(1)?.measure(Constraints(maxWidth = endMax))
+            val titleWidth = (width - (end?.let { it.width + gap } ?: 0)).coerceAtLeast(0)
+            val start = measurables[0].measure(Constraints(maxWidth = titleWidth))
+            val height = maxOf(start.height, end?.height ?: 0, constraints.minHeight)
+            layout(width, height) {
+                start.placeRelative(0, (height - start.height) / 2)
+                end?.placeRelative(width - end.width, (height - end.height) / 2)
+            }
+        }
     }
 }
 
