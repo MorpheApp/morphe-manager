@@ -106,6 +106,8 @@ data class InstalledAppPickerItem(
  * @param selectedVersion The version an APK is looked for at, the recommended one until another
  *   is picked. Sources share versions, so the pick names its source too, which answers for an
  *   APK of that version.
+ * @param versionPicked Whether [selectedVersion] was picked by hand rather than preselected. Only
+ *   a pick by hand narrows the run down to the source it was made under.
  * @param bundleUid The source picked in simple mode before the APK, which the run patches from.
  * @param installedVersion The unpatched version the device has right now, which the version list
  *   marks even when [installedApk] is not offered as a source.
@@ -121,6 +123,7 @@ data class PatchFlowSession(
     val recommendedVersion: AppTarget? = null,
     val compatibleVersions: List<BundledAppTarget> = emptyList(),
     val selectedVersion: BundledAppTarget? = null,
+    val versionPicked: Boolean = false,
     val bundleUid: Int? = null,
     val savedApk: SavedApkInfo? = null,
     val installedApk: InstalledApkInfo? = null,
@@ -456,7 +459,7 @@ class PatchFlow(
 
     /** Picks [version] to look an APK up at. */
     fun selectVersion(version: BundledAppTarget) {
-        session = session?.copy(selectedVersion = version)
+        session = session?.copy(selectedVersion = version, versionPicked = true)
     }
 
     /**
@@ -1025,7 +1028,8 @@ class PatchFlow(
      * Start patching flow.
      *
      * @param bundleUid The source chosen for the APK, see [chosenBundleUidFor]. The run patches
-     *   from it alone, unless the others are shown again in the expert dialog.
+     *   from it alone when it was picked by hand, unless the others are shown again in the expert
+     *   dialog.
      */
     private suspend fun startPatchingWithApp(
         selectedApp: SelectedApp,
@@ -1057,10 +1061,12 @@ class PatchFlow(
             return
         }
 
-        // A source chosen for the APK answers for the run alone, so the others are held back the
-        // way the sources the app is kept from are, for this run only. The expert dialog offers
-        // them back, which is how a run mixes sources
-        val heldBackSources = if (bundleUid != null) {
+        // A source picked by hand answers for the run alone, so the others are held back the way
+        // the sources the app is kept from are, for this run only. The expert dialog offers them
+        // back, which is how a run mixes sources. The preselected version is no such pick: it
+        // leaves every source in, as a user who mixes sources expects
+        val fromChosenAlone = !isExpertMode() || session?.versionPicked == true
+        val heldBackSources = if (bundleUid != null && fromChosenAlone) {
             availableBundles.mapTo(mutableSetOf()) { it.uid } - bundleUid
         } else withContext(Dispatchers.IO) {
             sourceMuteRepository.getMutedFor(selectedApp.packageName)
