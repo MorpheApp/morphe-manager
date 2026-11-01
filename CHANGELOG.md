@@ -1,3 +1,15 @@
+## [2.4.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.2...v2.4.0-dev.3) (2026-11-01)
+
+### Features
+
+* Show download instructions for APKs on GitHub releases ([079c7a0](https://github.com/MorpheApp/morphe-manager/commit/079c7a01007ab2dd2e1558025559fd6249810c11))
+
+### Bug Fixes
+
+* Open link settings on One UI 4 ([a77e840](https://github.com/MorpheApp/morphe-manager/commit/a77e84079de1c1fad00ce69a6b2995aebef77353))
+* Support Shizuku forks such as Shevery 14.6 ([cdde80a](https://github.com/MorpheApp/morphe-manager/commit/cdde80ab4eb459a5edbe79124f7abf41d3d89682))
+* Wait for external installers while they are on screen ([6a1dbd0](https://github.com/MorpheApp/morphe-manager/commit/6a1dbd05d57a55f5fc7a7d4c74e7be264cb123e6))
+
 ## [2.4.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.1...v2.4.0-dev.2) (2026-11-01)
 
 ### Features
