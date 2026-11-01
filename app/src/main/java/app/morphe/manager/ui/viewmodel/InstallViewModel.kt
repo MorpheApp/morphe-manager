@@ -221,6 +221,7 @@ class InstallViewModel(
     ) {
         // A second tap lands before the first one's checks report Installing
         if (installState is InstallState.Installing || installStart?.isActive == true) return
+        dropHandedOffInstall()
 
         // Store for potential retry
         pendingInstallFile = outputFile
@@ -585,9 +586,6 @@ class InstallViewModel(
      * Launch external installer app.
      */
     private fun launchExternalInstaller(plan: InstallerManager.InstallPlan.External) {
-        pendingExternalInstall?.let(installerManager::cleanup)
-        externalInstallTimeoutJob?.cancel()
-
         pendingExternalInstall = plan
         externalInstallStartTime = System.currentTimeMillis()
 
@@ -609,28 +607,38 @@ class InstallViewModel(
             return
         }
 
-        // Monitor for install completion
-        externalInstallTimeoutJob = launchDetached {
-            val timeoutAt = System.currentTimeMillis() + EXTERNAL_INSTALL_TIMEOUT_MS
-            while (true) {
-                if (pendingExternalInstall != plan) return@launchDetached
-
-                val info = withContext(Dispatchers.IO) { pm.getPackageInfo(plan.expectedPackage) }
-                if (info != null && isUpdatedSinceBaseline(info)) {
-                    handleExternalInstallSuccess(plan.expectedPackage)
-                    return@launchDetached
-                }
-
-                if (System.currentTimeMillis() >= timeoutAt) break
-                delay(INSTALL_MONITOR_POLL_MS)
-            }
-
-            if (pendingExternalInstall == plan) {
-                installerManager.cleanup(plan)
-                pendingExternalInstall = null
+        monitorHandedOffInstall(
+            packageName = plan.expectedPackage,
+            isPending = { pendingExternalInstall == plan },
+            onInstalled = { handleExternalInstallSuccess(plan.expectedPackage) },
+            onTimeout = {
                 handleInstallError(
                     app.getString(R.string.installer_external_timeout, plan.installerLabel)
                 )
+            }
+        )
+    }
+
+    /**
+     * Watches [packageName] while [isPending] holds, for an install handed to another app that a
+     * package broadcast may never report, such as one finished after this screen went away.
+     * A timeout leaves the install pending, so [packageReceiver] still records one the other app
+     * finishes late, until [dropHandedOffInstall] gives up on it.
+     */
+    private fun monitorHandedOffInstall(
+        packageName: String,
+        isPending: () -> Boolean,
+        onInstalled: () -> Unit,
+        onTimeout: () -> Unit
+    ) {
+        externalInstallTimeoutJob = launchDetached {
+            val installed = awaitHandedOffInstall {
+                !isPending() || isUpdatedSinceBaseline(packageName)
+            }
+            when {
+                !isPending() -> Unit
+                installed -> onInstalled()
+                else -> onTimeout()
             }
         }
     }
@@ -662,7 +670,6 @@ class InstallViewModel(
         onPersistApp: suspend (String, InstallType) -> Boolean,
         launchInstaller: () -> Unit
     ) {
-        externalInstallTimeoutJob?.cancel()
         pendingPersistCallback = onPersistApp
         currentInstallType = installType
 
@@ -688,24 +695,26 @@ class InstallViewModel(
             return
         }
 
-        externalInstallTimeoutJob = launchDetached {
-            val timeoutAt = System.currentTimeMillis() + EXTERNAL_INSTALL_TIMEOUT_MS
-            while (true) {
-                if (pendingIntentFallbackPackage == null) return@launchDetached
-                val info = withContext(Dispatchers.IO) { pm.getPackageInfo(targetPackageName) }
-                if (info != null && isUpdatedSinceBaseline(info)) {
-                    handleIntentFallbackSuccess(targetPackageName)
-                    return@launchDetached
-                }
-                if (System.currentTimeMillis() >= timeoutAt) break
-                delay(INSTALL_MONITOR_POLL_MS)
-            }
-            if (pendingIntentFallbackPackage != null) {
-                pendingIntentFallbackPackage = null
-                pendingIntentFallbackInstallType = InstallType.DEFAULT
+        monitorHandedOffInstall(
+            packageName = targetPackageName,
+            isPending = { pendingIntentFallbackPackage == targetPackageName },
+            onInstalled = { handleIntentFallbackSuccess(targetPackageName) },
+            onTimeout = {
                 handleInstallError(app.getString(R.string.installer_external_timeout, installerLabel))
             }
-        }
+        )
+    }
+
+    /**
+     * Gives up on an install handed to another app, before another attempt starts, so a result
+     * the earlier one reports late is not taken for the new one.
+     */
+    private fun dropHandedOffInstall() {
+        externalInstallTimeoutJob?.cancel()
+        pendingExternalInstall?.let(installerManager::cleanup)
+        pendingExternalInstall = null
+        pendingIntentFallbackPackage = null
+        pendingIntentFallbackInstallType = InstallType.DEFAULT
     }
 
     private fun handleIntentFallbackSuccess(packageName: String) {
@@ -727,6 +736,11 @@ class InstallViewModel(
             runCatching { callback(packageName, installType) }
                 .onFailure { Log.e(TAG, "Failed to persist app data", it) }
         }
+    }
+
+    private suspend fun isUpdatedSinceBaseline(packageName: String): Boolean {
+        val info = withContext(Dispatchers.IO) { pm.getPackageInfo(packageName) } ?: return false
+        return isUpdatedSinceBaseline(info)
     }
 
     private fun isUpdatedSinceBaseline(info: PackageInfo): Boolean {
@@ -781,6 +795,7 @@ class InstallViewModel(
         waitForStockInstall: Boolean = false
     ) {
         if (installState is InstallState.Installing) return
+        dropHandedOffInstall()
 
         // Leaving the screen must not stop the install between writing the module and
         // recording it, or the app runs a build the record does not know
@@ -914,6 +929,7 @@ class InstallViewModel(
      */
     fun restoreMountFromModule(packageName: String, version: String) {
         if (installState is InstallState.Installing) return
+        dropHandedOffInstall()
 
         launchDetached {
             currentInstallType = InstallType.MOUNT
@@ -1400,10 +1416,8 @@ class InstallViewModel(
 
     companion object {
         private const val TAG = "Morphe Install"
-        private const val EXTERNAL_INSTALL_TIMEOUT_MS = 60_000L
         private const val UNINSTALL_VERIFY_TIMEOUT_MS = 10_000L
         private const val UNINSTALL_VERIFY_POLL_MS = 250L
-        private val INSTALL_MONITOR_POLL_MS = 1.seconds
         private val STOCK_INSTALL_SETTLE_TIMEOUT = 30.seconds
         private val STOCK_INSTALL_SETTLE_POLL = 1.seconds
     }

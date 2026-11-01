@@ -26,6 +26,7 @@ import app.morphe.manager.domain.installer.InstallCancelledException
 import app.morphe.manager.domain.installer.InstallResult
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.SessionInstaller
+import app.morphe.manager.domain.installer.awaitHandedOffInstall
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.ManagerUpdateRepository
 import app.morphe.manager.network.api.MorpheAPI
@@ -36,7 +37,6 @@ import app.morphe.manager.util.*
 import kotlinx.coroutines.*
 import java.io.File
 import java.io.IOException
-import kotlin.time.Duration.Companion.seconds
 
 /**
  * Drives the manager self-update, from the release lookup down to handing the APK to an
@@ -312,9 +312,6 @@ class UpdateViewModel(
     }
 
     private fun launchExternalInstaller(plan: InstallerManager.InstallPlan.External) {
-        pendingExternalInstall?.let(installerManager::cleanup)
-        externalInstallTimeoutJob?.cancel()
-
         pendingExternalInstall = plan
         installError = ""
         try {
@@ -331,11 +328,10 @@ class UpdateViewModel(
 
         state = State.INSTALLING
 
+        // Completion is reported by installBroadcastReceiver, which clears the pending plan. A
+        // timeout leaves it pending, so an install the other app finishes late still counts
         externalInstallTimeoutJob = viewModelScope.launch {
-            delay(EXTERNAL_INSTALL_TIMEOUT)
-            if (pendingExternalInstall == plan) {
-                installerManager.cleanup(plan)
-                pendingExternalInstall = null
+            if (!awaitHandedOffInstall { pendingExternalInstall != plan }) {
                 val timedOut = app.getString(R.string.installer_external_timeout, plan.installerLabel)
                 failInstall(timedOut, userMessage = timedOut)
                 externalInstallTimeoutJob = null
@@ -530,10 +526,6 @@ class UpdateViewModel(
         olderManagerEntries = null
         isLoadingOlderEntries = false
         olderEntriesFailed = false
-    }
-
-    companion object {
-        private val EXTERNAL_INSTALL_TIMEOUT = 60.seconds
     }
 
     enum class State(@param:StringRes val title: Int) {
