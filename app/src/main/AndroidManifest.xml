@@ -25,6 +25,11 @@
          See https://github.com/MorpheApp/morphe-manager/issues/1117 -->
     <uses-permission android:name="af.shizuku.plus.permission.API_V23" />
 
+    <!-- Lets Shevery hand Morphe its binder, which since 14.6 reaches apps declaring only the
+         original permission solely through its optional compatibility stub.
+         See https://github.com/MorpheApp/morphe-manager/issues/1338 -->
+    <uses-permission android:name="com.hamondev.shevery.permission.PRIVILEGED_API" />
+
     <!-- Foreground Services -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />

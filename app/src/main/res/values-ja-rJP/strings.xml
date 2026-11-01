@@ -43,7 +43,7 @@
     <string name="home_blocked_source_title">ブロックされたパッチソースが検出されました</string>
     <string name="home_blocked_source_subtitle">タップして確認・削除</string>
     <string name="home_metadata_errors_title">一部のパッチソースは利用できません</string>
-    <string name="home_metadata_errors_subtitle">ソースの確認のためタップしてください</string>
+    <string name="home_metadata_errors_subtitle">タップしてソースを確認</string>
     <string name="home_outdated_manager_title">Morphe は最新のバージョンではありません</string>
     <string name="home_outdated_manager_subtitle">一部のパッチソースには新しいバージョンが必要です</string>
     <string name="home_held_back_title">パッチソースが原因で Morphe がクラッシュしました</string>
@@ -64,6 +64,7 @@
     <string name="list_options_state_description">%1$sで並べ替え、%2$sで絞り込み</string>
     <string name="home_app_filter_clones">クローン</string>
     <string name="home_app_grouping_none">なし</string>
+    <string name="home_app_sort_manual_hint">アプリを長押しして並べ替えボタンをタップ</string>
     <string name="home_app_sort_recommended">推奨順</string>
     <string name="home_app_sort_updates_first">パッチの更新を優先</string>
     <string name="home_app_sort_recently_patched">最近パッチされた</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">%s に一致するものはありません</string>
     <string name="home_category_add">カテゴリを追加</string>
     <string name="home_category_all_apps">すべてのアプリ</string>
+    <string name="home_app_grouping_categories">カテゴリ</string>
     <string name="home_category_uncategorized">カテゴリ未分類</string>
     <string name="home_category_new_title">新しいカテゴリ</string>
     <string name="home_category_rename_title">カテゴリの名前を変更</string>
@@ -495,6 +497,9 @@ APK ファイルの取得元を選択してください"</string>
     <string name="batch_queue_pending_subtitle">タップして確認・開始</string>
     <string name="batch_queue_clear_title">キューをクリアしますか？</string>
     <string name="batch_queue_clear_description">すべてのアプリがキューから削除されます</string>
+    <string name="batch_queue_keep_title">キューを保持しますか？</string>
+    <string name="batch_queue_keep_description">キューに入れられたアプリは、後で起動されるまでホーム画面で待機します</string>
+    <string name="batch_queue_keep">保持</string>
     <string name="shortcut_repatch_short">再パッチ</string>
     <string name="shortcut_repatch_long">古いアプリを再パッチ</string>
     <string name="shortcut_check_updates_short">更新を確認</string>

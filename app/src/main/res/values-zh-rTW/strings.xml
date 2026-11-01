@@ -64,6 +64,7 @@
     <string name="list_options_state_description">已依 %1$s 排序，已依 %2$s 篩選</string>
     <string name="home_app_filter_clones">克隆</string>
     <string name="home_app_grouping_none">無</string>
+    <string name="home_app_sort_manual_hint">長按應用程式，然後點擊重新排序的按鈕</string>
     <string name="home_app_sort_recommended">推薦順序</string>
     <string name="home_app_sort_updates_first">先更新修補程式</string>
     <string name="home_app_sort_recently_patched">最近修補</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">沒有符合「%s」的項目</string>
     <string name="home_category_add">新增類別</string>
     <string name="home_category_all_apps">所有應用程式</string>
+    <string name="home_app_grouping_categories">類別</string>
     <string name="home_category_uncategorized">未分類</string>
     <string name="home_category_new_title">新增類別</string>
     <string name="home_category_rename_title">重新命名類別</string>
@@ -288,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe 無法為這些網站擔保。請略過那些提供自家應用程式商店而不是 APK 檔案的網站</string>
     <string name="home_download_instructions_step3_search">在該網站上，請下載版本&lt;b&gt;%s&lt;/b&gt;的 APK，而不是最新版</string>
     <string name="home_download_instructions_step3_search_any">在該網站上，請下載該應用程式的 APK。&lt;b&gt;任何版本&lt;/b&gt;都可以修補</string>
+    <string name="home_download_instructions_step2_github">在&lt;b&gt;%s&lt;/b&gt;發佈的&lt;b&gt;資源&lt;/b&gt;下，按下以&lt;b&gt;.apk&lt;/b&gt; 結尾的檔案。</string>
+    <string name="home_download_instructions_step2_github_latest">在最新版的&lt;b&gt;資源&lt;/b&gt;下，按下以&lt;b&gt;.apk&lt;/b&gt;結尾的檔案。</string>
+    <string name="home_download_instructions_step2_github_note">若有幾個 APK 檔案，請選取名稱為 %s 的檔案，或選取通用版本。</string>
     <string name="home_download_instructions_download_button_toast">請到網站上輕觸「下載」，不是這裡的範例按鈕 😊</string>
     <string name="home_download_instructions_download_button_toast_2">太棒了！現在點擊繼續並前往網站 👆</string>
     <string name="home_download_instructions_download_button_toast_3">熟能生巧，你快要掌握了 💪</string>
@@ -495,6 +500,9 @@
     <string name="batch_queue_pending_subtitle">輕觸以檢視並開始</string>
     <string name="batch_queue_clear_title">清除佇列？</string>
     <string name="batch_queue_clear_description">所有應用程式都將從佇列中移除</string>
+    <string name="batch_queue_keep_title">要保留佇列嗎？</string>
+    <string name="batch_queue_keep_description">佇列中的應用程式將在主畫面等候並在稍後啟動</string>
+    <string name="batch_queue_keep">保留</string>
     <string name="shortcut_repatch_short">重新修補</string>
     <string name="shortcut_repatch_long">重新修補過時的應用程式</string>
     <string name="shortcut_check_updates_short">檢查更新</string>

@@ -497,6 +497,9 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="batch_queue_pending_subtitle">Tapáil chun athbhreithniú a dhéanamh agus tús a chur</string>
     <string name="batch_queue_clear_title">Glan an scuaine?</string>
     <string name="batch_queue_clear_description">Buirníodh gach feidhmchlár as an scuain</string>
+    <string name="batch_queue_keep_title">An líne a choinneáil?</string>
+    <string name="batch_queue_keep_description">Fanfaidh na feidhmchláir atá sa scuaine ar an scáileán baile go dtí go seolfar iad níos déanaí</string>
+    <string name="batch_queue_keep">Coinnigh</string>
     <string name="shortcut_repatch_short">Athphaisteáil</string>
     <string name="shortcut_repatch_long">Athphaisteáil aipeanna atá as dáta</string>
     <string name="shortcut_check_updates_short">Seiceáil nuashonruithe</string>

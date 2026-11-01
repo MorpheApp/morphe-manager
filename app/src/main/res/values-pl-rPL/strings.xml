@@ -64,6 +64,7 @@
     <string name="list_options_state_description">Posortowane według %1$s, filtrowane według %2$s</string>
     <string name="home_app_filter_clones">Klony</string>
     <string name="home_app_grouping_none">Brak</string>
+    <string name="home_app_sort_manual_hint">Przytrzymaj aplikację, a następnie dotknij przycisku zmiany kolejności</string>
     <string name="home_app_sort_recommended">Zalecana kolejność</string>
     <string name="home_app_sort_updates_first">Najpierw aktualizacje modyfikacji</string>
     <string name="home_app_sort_recently_patched">Ostatnio zmodyfikowane</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Nic nie pasuje do %s</string>
     <string name="home_category_add">Dodaj kategorię</string>
     <string name="home_category_all_apps">Wszystkie aplikacje</string>
+    <string name="home_app_grouping_categories">Kategorie</string>
     <string name="home_category_uncategorized">Bez kategorii</string>
     <string name="home_category_new_title">Nowa kategoria</string>
     <string name="home_category_rename_title">Zmień nazwę kategorii</string>
@@ -289,6 +291,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe nie ręczy za te strony. Pomiń te, które oferują własny sklep z aplikacjami zamiast pliku APK</string>
     <string name="home_download_instructions_step3_search">Na tej stronie pobierz plik APK w wersji &lt;b&gt;%s&lt;/b&gt;, nie tej najnowszej</string>
     <string name="home_download_instructions_step3_search_any">Na tej stronie pobierz plik APK aplikacji. &lt;b&gt;Dowolna wersja&lt;/b&gt; może zostać zmodyfikowana</string>
+    <string name="home_download_instructions_step2_github">W sekcji &lt;b&gt;Assets&lt;/b&gt; wydania &lt;b&gt;%s&lt;/b&gt; dotknij pliku kończącego się na &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">W sekcji &lt;b&gt;Assets&lt;/b&gt; najnowszego wydania dotknij pliku kończącego się na &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Jeśli plików APK jest kilka, wybierz ten zawierający w nazwie %s lub wersję uniwersalną</string>
     <string name="home_download_instructions_download_button_toast">Naciśnij \"Download\" na stronie, a nie tutaj 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Świetnie! Teraz kliknij \"Kontynuuj\" i przejdź na stronę 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Praktyka czyni mistrza, jesteś na dobrej drodze 💪</string>
@@ -496,6 +501,9 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="batch_queue_pending_subtitle">Dotknij, aby przejrzeć i rozpocząć</string>
     <string name="batch_queue_clear_title">Wyczyścić kolejkę?</string>
     <string name="batch_queue_clear_description">Wszystkie aplikacje zostaną usunięte z kolejki</string>
+    <string name="batch_queue_keep_title">Zachować kolejkę?</string>
+    <string name="batch_queue_keep_description">Aplikacje w kolejce zaczekają na ekranie głównym, aby można je było uruchomić później</string>
+    <string name="batch_queue_keep">Zachowaj</string>
     <string name="shortcut_repatch_short">Zmodyfikuj ponownie</string>
     <string name="shortcut_repatch_long">Zmodyfikuj ponownie nieaktualne aplikacje</string>
     <string name="shortcut_check_updates_short">Sprawdź aktualizacje</string>

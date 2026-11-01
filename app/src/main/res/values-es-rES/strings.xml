@@ -290,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe no puede responder por estos sitios web. Evita los que ofrecen su propia tienda de aplicaciones en lugar de un archivo APK</string>
     <string name="home_download_instructions_step3_search">En ese sitio web, descarga el APK de la versión &lt;b&gt;%s&lt;/b&gt;, no de la más reciente</string>
     <string name="home_download_instructions_step3_search_any">En ese sitio web, descarga el APK de la aplicación. Se puede parchear &lt;b&gt;cualquier versión&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github">En &lt;b&gt;Activos&lt;/b&gt; de la versión &lt;b&gt;%s&lt;/b&gt;, pulsa el archivo que termina en &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">En &lt;b&gt;Activos&lt;/b&gt; de la versión más reciente, pulsa en el archivo que termina en &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Si hay varios archivos APK, elige el que se llame %s o el universal</string>
     <string name="home_download_instructions_download_button_toast">Pulsa descargar en el sitio web, no aquí 😊</string>
     <string name="home_download_instructions_download_button_toast_2">¡Genial! Ahora pulsa en Continuar y ve al sitio web 👆</string>
     <string name="home_download_instructions_download_button_toast_3">La práctica hace al maestro y estás en camino 💪</string>
@@ -497,6 +500,9 @@ Para un mejor resultado, esta aplicación te recomienda parchear un &lt;b&gt;APK
     <string name="batch_queue_pending_subtitle">Toca para revisar y comenzar</string>
     <string name="batch_queue_clear_title">¿Borrar la cola?</string>
     <string name="batch_queue_clear_description">Todas las aplicaciones se eliminarán de la cola</string>
+    <string name="batch_queue_keep_title">¿Mantener la cola?</string>
+    <string name="batch_queue_keep_description">Las aplicaciones en cola esperarán en la pantalla de inicio para iniciarse más tarde</string>
+    <string name="batch_queue_keep">Mantener</string>
     <string name="shortcut_repatch_short">Reparchear</string>
     <string name="shortcut_repatch_long">Reparchear aplicaciones desactualizadas</string>
     <string name="shortcut_check_updates_short">Buscar actualizaciones</string>

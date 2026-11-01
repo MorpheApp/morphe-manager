@@ -64,6 +64,7 @@
     <string name="list_options_state_description">Diurutkan berdasarkan %1$s, disaring berdasarkan %2$s</string>
     <string name="home_app_filter_clones">Klon</string>
     <string name="home_app_grouping_none">Tidak ada</string>
+    <string name="home_app_sort_manual_hint">Tekan lama sebuah aplikasi, lalu ketuk tombol untuk mengubah urutan</string>
     <string name="home_app_sort_recommended">Urutan yang Direkomendasikan</string>
     <string name="home_app_sort_updates_first">Tambal pembaruan terlebih dahulu</string>
     <string name="home_app_sort_recently_patched">Baru saja ditambal</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Tidak ada yang cocok dengan %s</string>
     <string name="home_category_add">Tambahkan kategori</string>
     <string name="home_category_all_apps">Semua aplikasi</string>
+    <string name="home_app_grouping_categories">Kategori</string>
     <string name="home_category_uncategorized">Tidak berkategori</string>
     <string name="home_category_new_title">Kategori baru</string>
     <string name="home_category_rename_title">Ganti nama kategori</string>

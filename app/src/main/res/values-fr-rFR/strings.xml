@@ -64,6 +64,7 @@
     <string name="list_options_state_description">Triées par %1$s, filtrées par %2$s</string>
     <string name="home_app_filter_clones">Clones</string>
     <string name="home_app_grouping_none">Aucun</string>
+    <string name="home_app_sort_manual_hint">Appuyez longuement sur une application, puis appuyez sur le bouton de réorganisation</string>
     <string name="home_app_sort_recommended">Ordre recommandé</string>
     <string name="home_app_sort_updates_first">Mises à jour de patchs en premier</string>
     <string name="home_app_sort_recently_patched">Récemment patchée</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Rien ne correspond à %s</string>
     <string name="home_category_add">Ajouter une catégorie</string>
     <string name="home_category_all_apps">Toutes les applications</string>
+    <string name="home_app_grouping_categories">Catégories</string>
     <string name="home_category_uncategorized">Non catégorisées</string>
     <string name="home_category_new_title">Nouvelle catégorie</string>
     <string name="home_category_rename_title">Renommer la catégorie</string>
@@ -746,7 +748,7 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="mini_game_dino_picker_subtitle">Touchez pour sauter par-dessus les cactus</string>
     <string name="mini_game_dino_tap_to_start">Touchez pour courir</string>
     <string name="mini_game_blocks_picker_subtitle">Emboîtez les formes, effacez les lignes</string>
-    <string name="mini_game_blocks_tap_to_start">Touchez pour faire pivoter, faites glisser pour déplacer, faites glisser vers le bas pour déposer</string>
+    <string name="mini_game_blocks_tap_to_start">Touchez pour faire pivoter, balayer pour déplacer, balayer vers le bas pour déposer</string>
     <string name="mini_game_bricks_picker_subtitle">Faites rebondir la balle, détruisez le mur</string>
     <string name="mini_game_bricks_tap_to_start">Faites glisser pour viser, touchez pour lancer</string>
     <string name="mini_game_miner_picker_subtitle">Touchez pour ouvrir, maintenez appuyé pour marquer</string>

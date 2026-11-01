@@ -19,8 +19,8 @@ import rikka.sui.Sui
  * [SessionInstaller] and [ShizukuInstaller] depend on.
  *
  * Nothing here looks up the canonical package name directly, since none of the providers reliably
- * owns it: Sui has no package, Shizuku's stealth mode renames its own, and Shizuku+ keeps a
- * separate one so it can sit next to stock Shizuku.
+ * owns it: Sui has no package, Shizuku's stealth mode renames its own, and forks such as Shizuku+
+ * keep a separate one so they can sit next to stock Shizuku.
  */
 class ShizukuEnvironment(private val app: Application) {
 
@@ -43,8 +43,12 @@ class ShizukuEnvironment(private val app: Application) {
     val isSui: Boolean
         get() = runCatching { Sui.isSui() }.getOrDefault(false)
 
-    /** Returns true when Shizuku, Shizuku+ or Sui is present on the device. */
-    fun isInstalled(): Boolean = isSui || candidatePackages().isNotEmpty()
+    /**
+     * Returns true when Shizuku, one of its forks or Sui is present on the device. A running server
+     * counts even when no package can be told apart as its manager.
+     */
+    fun isInstalled(): Boolean =
+        isSui || candidatePackages().isNotEmpty() || runCatching { Shizuku.pingBinder() }.getOrDefault(false)
 
     /** Returns the [Flavor] serving this device. */
     fun flavor(): Flavor = if (isSui) Flavor.Sui else flavorOf(candidatePackages())
@@ -64,10 +68,19 @@ class ShizukuEnvironment(private val app: Application) {
     }
 
     /** Packages that could be serving this device, in no particular order. */
-    private fun candidatePackages(): List<String> = listOfNotNull(
-        SHIZUKU_PLUS_PACKAGE.takeIf { isPackageInstalled(it) },
-        permissionInfo()?.packageName
-    ).distinct()
+    private fun candidatePackages(): List<String> =
+        (binderRequestHandlers() + listOfNotNull(permissionInfo()?.packageName)).distinct()
+
+    /**
+     * Returns the managers that hand out the binder on request. Every Shizuku build keeps this
+     * receiver for rish and legacy clients, forks included, even one that renames its package or
+     * leaves the client permission to a separate stub.
+     */
+    @Suppress("DEPRECATION")
+    private fun binderRequestHandlers(): List<String> = runCatching {
+        app.packageManager.queryBroadcastReceivers(Intent(ACTION_REQUEST_BINDER), 0)
+            .map { it.activityInfo.packageName }
+    }.getOrDefault(emptyList())
 
     /**
      * Settles which of [candidates] is serving. Two managers can be installed while only one of
@@ -89,12 +102,15 @@ class ShizukuEnvironment(private val app: Application) {
     }
 
     /**
-     * Orders [candidates] with the one representing [flavor] first. The canonical name can belong
-     * to a Shizuku+ companion, a stub with no launcher and no icon, so it is not always the better
-     * answer even when it is the package declaring the permission.
+     * Orders [candidates] with the one representing [flavor] first, and among the rest a manager
+     * with a launcher before a stub without one. The canonical name can belong to such a stub, as
+     * the Shizuku+ companion and the compatibility stubs of other forks are, so it is not always
+     * the better answer even when it is the package declaring the permission.
      */
     private fun orderedFor(flavor: Flavor, candidates: List<String>): List<String> {
-        val (plus, rest) = candidates.partition { it == SHIZUKU_PLUS_PACKAGE }
+        val (plus, rest) = candidates
+            .sortedByDescending { app.packageManager.getLaunchIntentForPackage(it) != null }
+            .partition { it == SHIZUKU_PLUS_PACKAGE }
         return if (flavor == Flavor.ShizukuPlus) plus + rest else rest + plus
     }
 
@@ -143,18 +159,15 @@ class ShizukuEnvironment(private val app: Application) {
         app.packageManager.resolveContentProvider(SHIZUKU_PACKAGE, 0) != null
     }.getOrDefault(false)
 
-    @Suppress("DEPRECATION")
-    private fun isPackageInstalled(packageName: String): Boolean = runCatching {
-        app.packageManager.getApplicationInfo(packageName, 0)
-        true
-    }.getOrDefault(false)
-
     companion object {
         /** Canonical Shizuku package, also claimed by the Shizuku+ drop-in build and its companion. */
         const val SHIZUKU_PACKAGE = "moe.shizuku.privileged.api"
 
         /** Shizuku+ manager, kept under its own name so it can coexist with stock Shizuku. */
         const val SHIZUKU_PLUS_PACKAGE = "af.shizuku.plus.api"
+
+        /** Broadcast a Shizuku manager answers with the binder, see [binderRequestHandlers]. */
+        private const val ACTION_REQUEST_BINDER = "rikka.shizuku.intent.action.REQUEST_BINDER"
 
         /** Descriptor every Shizuku-compatible server answers to, Shizuku+ included. */
         private const val SHIZUKU_SERVICE_DESCRIPTOR = "moe.shizuku.server.IShizukuService"

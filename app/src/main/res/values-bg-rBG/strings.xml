@@ -64,6 +64,7 @@
     <string name="list_options_state_description">Сортирано по %1$s, филтрирано по %2$s</string>
     <string name="home_app_filter_clones">Клонинги</string>
     <string name="home_app_grouping_none">Без</string>
+    <string name="home_app_sort_manual_hint">Натиснете и задръжте върху дадено приложение, след което докоснете бутона за пренареждане.</string>
     <string name="home_app_sort_recommended">Препоръчителен ред</string>
     <string name="home_app_sort_updates_first">Първо актуализации за поправки</string>
     <string name="home_app_sort_recently_patched">Наскоро пачвани</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Нищо не съвпада с %s</string>
     <string name="home_category_add">Добави категория</string>
     <string name="home_category_all_apps">Всички приложения</string>
+    <string name="home_app_grouping_categories">Категории</string>
     <string name="home_category_uncategorized">Без категория</string>
     <string name="home_category_new_title">Нова категория</string>
     <string name="home_category_rename_title">Преименувай категория</string>
@@ -289,6 +291,11 @@
     <string name="home_download_instructions_step2_search_note">Morphe не може да гарантира за тези уебсайтове. Пропуснете тези, които предлагат собствен магазин за приложения вместо APK файл.</string>
     <string name="home_download_instructions_step3_search">На този уебсайт изтеглете APK на версия &lt;b&gt;%s&lt;/b&gt;, а не най-новата.</string>
     <string name="home_download_instructions_step3_search_any">На този уебсайт изтеглете APK на приложението. &lt;b&gt;Всяка версия&lt;/b&gt; може да бъде кръпната.</string>
+    <string name="home_download_instructions_step2_github">В <b>Assets</b> на версия <b>%s</b> докоснете файла, завършващ на <b>.apk</b>“
+(или: „...натиснете файла, завършващ на <b>.apk</b></string>
+    <string name="home_download_instructions_step2_github_latest">В <b>Assets</b> на най-новата версия докоснете файла, завършващ на “
+(или: „...натиснете файла, завършващ на “)</string>
+    <string name="home_download_instructions_step2_github_note">В <b>Assets</b> на версия <b>%s</b> докосни файла, завършващ на <b>.apk</b></string>
     <string name="home_download_instructions_download_button_toast">Натиснете \"Изтеглете\" на уебсайта, а не тук 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Чудесно! Сега натиснете продължи и отидете на уебсайта 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Практиката прави майстора и ти се справяш добре 💪</string>
@@ -496,6 +503,9 @@
     <string name="batch_queue_pending_subtitle">Докоснете, за да прегледате и започнете</string>
     <string name="batch_queue_clear_title">Изчистване на опашката?</string>
     <string name="batch_queue_clear_description">Всички приложения ще бъдат премахнати от опашката</string>
+    <string name="batch_queue_keep_title">Запазване на опашката?</string>
+    <string name="batch_queue_keep_description">Приложенията в опашката ще изчакват на началния екран, за да бъдат стартирани по-късно.</string>
+    <string name="batch_queue_keep">Запази</string>
     <string name="shortcut_repatch_short">Презакачване</string>
     <string name="shortcut_repatch_long">Презакачване на остарели приложения</string>
     <string name="shortcut_check_updates_short">Проверка за актуализации</string>
