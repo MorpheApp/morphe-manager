@@ -137,7 +137,8 @@ class BatchPatchCoordinator(
                     planFresh(
                         targets = (saved?.targets.orEmpty() + targets).distinctBy { it.id },
                         policy = saved?.policy ?: prefs.batchInstallPolicy.get(),
-                        excludedIds = saved?.excluded.orEmpty()
+                        excludedIds = saved?.excluded.orEmpty(),
+                        kept = saved != null
                     )
                 }
             }
@@ -147,7 +148,8 @@ class BatchPatchCoordinator(
     private suspend fun planFresh(
         targets: List<BatchTarget>,
         policy: BatchInstallPolicy,
-        excludedIds: Set<String>
+        excludedIds: Set<String>,
+        kept: Boolean
     ) {
         fun BatchPatchItem.withExclusion() = if (id in excludedIds) excluded() else this
 
@@ -155,7 +157,8 @@ class BatchPatchCoordinator(
         _state.value = BatchRunState(
             items = targets.map { placeholder(it).withExclusion() },
             phase = BatchPhase.PLANNING,
-            policy = policy
+            policy = policy,
+            kept = kept
         )
         val items = resolver.resolve(targets).map { it.withExclusion() }
         _state.update { it.copy(items = items, phase = BatchPhase.PREFLIGHT) }
@@ -321,6 +324,11 @@ class BatchPatchCoordinator(
     fun setPolicy(policy: BatchInstallPolicy) {
         _state.update { it.copy(policy = policy) }
         scope.launch { prefs.batchInstallPolicy.update(policy) }
+    }
+
+    /** Keeps the queue that has not started yet for later, stored until it is started or cleared. */
+    fun keep() {
+        _state.update { if (it.isPending) it.copy(kept = true) else it }
     }
 
     fun markAutoInstallStarted() {

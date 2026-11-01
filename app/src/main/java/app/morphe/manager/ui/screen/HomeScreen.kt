@@ -410,7 +410,8 @@ fun HomeScreen(
                         categoryState = homeAppCategoryState,
                         categoryViewMode = homeAppCategoryViewMode,
                         sourceGroups = homeAppSourceGroups,
-                        batchQueuePending = savedBatchQueue != null,
+                        // A queue nobody chose to keep yet is not stored, but selected apps still join it
+                        batchQueuePending = savedBatchQueue != null || batchRun?.isPending == true,
                         showMoreAppsCard = showMoreAppsCard
                     ),
                     appActions = HomeAppActions(

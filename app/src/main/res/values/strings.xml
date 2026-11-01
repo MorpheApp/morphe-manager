@@ -512,6 +512,9 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="batch_queue_pending_subtitle">Tap to review and start</string>
     <string name="batch_queue_clear_title">Clear the queue?</string>
     <string name="batch_queue_clear_description">All apps will be removed from the queue</string>
+    <string name="batch_queue_keep_title">Keep the queue?</string>
+    <string name="batch_queue_keep_description">The queued apps will wait on the home screen to be started later</string>
+    <string name="batch_queue_keep">Keep</string>
     <string name="shortcut_repatch_short">Re-patch</string>
     <string name="shortcut_repatch_long">Re-patch outdated apps</string>
     <string name="shortcut_check_updates_short">Check updates</string>

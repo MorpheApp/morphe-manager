@@ -736,6 +736,8 @@ class BatchPatcherViewModel(
 
     fun cancel() = coordinator.cancel()
 
+    fun keep() = coordinator.keep()
+
     fun clear() = coordinator.clear()
 
     fun retryUnfinished() = coordinator.retryUnfinished()

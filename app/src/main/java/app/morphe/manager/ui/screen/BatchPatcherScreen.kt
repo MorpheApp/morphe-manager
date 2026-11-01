@@ -194,9 +194,24 @@ fun BatchPatcherScreen(
 
     var showCancelDialog by remember { mutableStateOf(false) }
     var showClearDialog by remember { mutableStateOf(false) }
+    var showKeepDialog by remember { mutableStateOf(false) }
+
+    // Clearing empties the state, which would otherwise put the planning overlay back on
+    // screen for the length of the exit animation
+    var closing by remember { mutableStateOf(false) }
+    val leave: (clear: Boolean) -> Unit = { clear ->
+        closing = true
+        if (clear) viewModel.clear()
+        onBackClick()
+    }
+    // A queue nobody chose to keep would stay behind unnoticed, so leaving it asks what to do
+    val close: () -> Unit = {
+        if (current?.asksBeforeLeaving == true) showKeepDialog = true
+        else leave(current?.phase == BatchPhase.FINISHED)
+    }
 
     BackHandler {
-        if (current?.isActive == true) showCancelDialog = true else onBackClick()
+        if (current?.isActive == true) showCancelDialog = true else close()
     }
 
     DialogHost(visible = showCancelDialog) {
@@ -223,10 +238,33 @@ fun BatchPatcherScreen(
             primaryText = stringResource(R.string.clear),
             onConfirm = {
                 showClearDialog = false
-                viewModel.clear()
-                onBackClick()
+                leave(true)
             },
             onDismiss = { showClearDialog = false }
+        )
+    }
+
+    // Dismissing stays on the queue, so neither answer is taken for the user
+    DialogHost(visible = showKeepDialog) {
+        AppDialog(
+            onDismissRequest = { showKeepDialog = false },
+            title = stringResource(R.string.batch_queue_keep_title),
+            description = stringResource(R.string.batch_queue_keep_description),
+            footer = {
+                AppDialogButtonRow(
+                    primaryText = stringResource(R.string.batch_queue_keep),
+                    onPrimaryClick = {
+                        showKeepDialog = false
+                        viewModel.keep()
+                        leave(false)
+                    },
+                    secondaryText = stringResource(R.string.clear),
+                    onSecondaryClick = {
+                        showKeepDialog = false
+                        leave(true)
+                    }
+                )
+            }
         )
     }
 
@@ -499,14 +537,6 @@ fun BatchPatcherScreen(
         return
     }
 
-    // Clearing a finished run empties the state, which would otherwise put the planning
-    // overlay back on screen for the length of the exit animation
-    var closing by remember { mutableStateOf(false) }
-    val close: () -> Unit = {
-        closing = true
-        if (current?.phase == BatchPhase.FINISHED) viewModel.clear()
-        onBackClick()
-    }
     val isPreflight = current?.phase == BatchPhase.PREFLIGHT
     val isFinished = current?.phase == BatchPhase.FINISHED
     val patchedItems = if (isFinished) current.patchedItems else emptyList()
@@ -666,7 +696,7 @@ private fun BatchDialogButtons(
     onClose: () -> Unit
 ) {
     when (state?.phase) {
-        // Closing keeps the queue for apps added later
+        // Closing keeps the queue for apps added later, once the user chose to keep it
         BatchPhase.PREFLIGHT -> AppDialogButtonRow(
             primaryText = stringResource(R.string.batch_patch_start),
             primaryIcon = MaterialSymbols.Rounded.Play_arrow,
