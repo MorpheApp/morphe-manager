@@ -32,6 +32,12 @@ sealed class ApkDownloadSource(val label: String?) {
      */
     data class GitHub(val release: String?) : ApkDownloadSource("GitHub.com")
 
+    /**
+     * @param onDownloadPage True for the download page, pinned to one version by its `?version=`.
+     * The app's own page stops short of it, with the version still to be picked.
+     */
+    data class ApkCube(val onDownloadPage: Boolean) : ApkDownloadSource("APKCube.com")
+
     /** Search results rather than one app page, used when the API knows no direct link. */
     data object WebSearch : ApkDownloadSource("Google")
 
@@ -67,6 +73,8 @@ sealed class ApkDownloadSource(val label: String?) {
                     ApkMirror(onDownloadPage = path.endsWith("-android-apk-download"))
                 host.endsWith("uptodown.com") -> Uptodown
                 host == "github.com" && RELEASES_SEGMENT in path.split('/') -> GitHub(releaseTag(uri))
+                host == "apkcube.com" || host.endsWith(".apkcube.com") ->
+                    ApkCube(onDownloadPage = path.endsWith("/download"))
                 host.endsWith("google.com") -> WebSearch
                 else -> Other(host)
             }

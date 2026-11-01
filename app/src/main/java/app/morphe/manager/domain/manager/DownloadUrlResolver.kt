@@ -99,6 +99,6 @@ class DownloadUrlResolver(private val morpheAPI: MorpheAPI) {
         // Kept in step with the mirrors the API falls back to, so a search started here and one
         // started by the API lead to the same set of sites
         const val SEARCH_SITES =
-            "(site:apkmirror.com OR site:uptodown.com OR site:apkpure.com OR site:apkcombo.com)"
+            "(site:apkmirror.com OR site:uptodown.com OR site:apkpure.com OR site:apkcube.com)"
     }
 }
