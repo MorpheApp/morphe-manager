@@ -297,6 +297,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe cannot vouch for these websites. Skip the ones offering their own app store instead of an APK file</string>
     <string name="home_download_instructions_step3_search">On that website, download the APK of version &lt;b&gt;%s&lt;/b&gt;, not the newest one</string>
     <string name="home_download_instructions_step3_search_any">On that website, download the APK of the app. &lt;b&gt;Any version&lt;/b&gt; can be patched</string>
+    <string name="home_download_instructions_step2_github">Under &lt;b&gt;Assets&lt;/b&gt; of release &lt;b&gt;%s&lt;/b&gt;, press the file ending in &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">Under &lt;b&gt;Assets&lt;/b&gt; of the newest release, press the file ending in &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">If there are several APK files, pick the one named after %s or the universal one</string>
     <string name="home_download_instructions_download_button_toast">Press download on the website, and not here 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Great! Now click continue and go to the website 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Practice makes perfect and you\'re getting there 💪</string>
