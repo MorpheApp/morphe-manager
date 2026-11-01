@@ -14,6 +14,7 @@ import android.os.Build
 import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.core.net.toUri
+import androidx.core.os.bundleOf
 
 /** Opens the system app info screen for Morphe. */
 fun Context.openAppDetailsSettings() {
@@ -66,9 +67,20 @@ fun Context.requestIgnoreBatteryOptimizations() {
 fun Context.openAppOpenByDefaultSettings(targetPackageName: String): Boolean {
     val uri = Uri.fromParts("package", targetPackageName, null)
     return (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
-            startSettings(Intent(Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS, uri))) ||
+            startSettings(
+                Intent(Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS, uri)
+                    // One UI 4 reads the screen's fragment arguments without a null check and
+                    // crashes when the intent carries none, so they are passed as Settings itself does
+                    .putExtra(SETTINGS_FRAGMENT_ARGS, bundleOf(SETTINGS_ARG_PACKAGE to targetPackageName))
+            )) ||
             startSettings(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, uri))
 }
+
+/** Extra whose bundle Settings hands the fragment of the screen it opens as arguments. */
+private const val SETTINGS_FRAGMENT_ARGS = ":settings:show_fragment_args"
+
+/** Argument the app screens of Settings read their package from. */
+private const val SETTINGS_ARG_PACKAGE = "package"
 
 /**
  * Opens the Google Play page of [targetPackageName], where its auto-updates are turned off.
