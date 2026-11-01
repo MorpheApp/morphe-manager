@@ -1,3 +1,13 @@
+## [2.4.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.1...v2.4.0-dev.2) (2026-11-01)
+
+### Features
+
+* Ask whether to keep the queue when leaving it ([9130ec3](https://github.com/MorpheApp/morphe-manager/commit/9130ec3794bc5816d3d0aa99920e10badc774deb))
+
+### Bug Fixes
+
+* Keep every source in the run unless a version was picked by hand ([64e3beb](https://github.com/MorpheApp/morphe-manager/commit/64e3beb8245318ce8217b30f5dce8619ccf7a417))
+
 ## [2.4.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v2.3.0...v2.4.0-dev.1) (2026-10-31)
 
 ### Features
