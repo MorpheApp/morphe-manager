@@ -1,3 +1,9 @@
+## [2.4.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.3...v2.4.0-dev.4) (2026-11-01)
+
+### Bug Fixes
+
+* Export the signing key as a password-protected PKCS12 keystore ([ca660e7](https://github.com/MorpheApp/morphe-manager/commit/ca660e7064a72adb0872055e3f5ddf55c2fe38e4))
+
 ## [2.4.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.2...v2.4.0-dev.3) (2026-11-01)
 
 ### Features
