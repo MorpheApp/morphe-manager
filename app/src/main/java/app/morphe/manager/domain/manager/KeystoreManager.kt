@@ -15,6 +15,7 @@ import android.content.Context
 import android.os.Build
 import android.util.Log
 import app.morphe.manager.domain.apk.apkFileStampOrNull
+import app.morphe.manager.util.JksKeyStoreParser
 import app.morphe.manager.util.sha256Fingerprint
 import app.morphe.patcher.apk.ApkSigner
 import app.morphe.patcher.apk.ApkUtils
@@ -25,10 +26,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
-import java.io.*
+import java.io.File
+import java.io.IOException
+import java.io.OutputStream
 import java.nio.file.Files
+import java.nio.file.StandardCopyOption
+import java.security.GeneralSecurityException
 import java.security.KeyStore
-import java.security.UnrecoverableKeyException
 import java.security.cert.Certificate
 import java.security.cert.X509Certificate
 
@@ -67,14 +71,8 @@ class KeystoreManager(app: Application, private val prefs: PreferencesManager) {
     private val signerLock = Mutex()
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
-    private suspend fun updatePrefs(alias: String, pass: String, keystorePw: String) = prefs.edit {
-        prefs.keystoreAlias.value = alias
-        prefs.keystorePass.value = pass
-        prefs.keystorePassword.value = keystorePw
-    }
-
-    private suspend fun signingDetails(path: File = keystorePath) = ApkUtils.KeyStoreDetails(
-        keyStore = path,
+    private suspend fun signingDetails() = ApkUtils.KeyStoreDetails(
+        keyStore = keystorePath,
         keyStorePassword = prefs.keystorePassword.get().ifEmpty { null },
         alias = prefs.keystoreAlias.get(),
         password = prefs.keystorePass.get()
@@ -108,29 +106,52 @@ class KeystoreManager(app: Application, private val prefs: PreferencesManager) {
         }
     }
 
-    suspend fun import(alias: String, pass: String, keystorePw: String = "", keystore: InputStream): Boolean {
-        val keystoreData = withContext(Dispatchers.IO) { keystore.readBytes() }
+    /**
+     * Makes the key [alias] in the keystore [source] the one patching signs with, keeping the
+     * keystore as it is unless Android cannot read it. Returns false if [pass] does not open it.
+     */
+    suspend fun import(alias: String, pass: String, source: File): Boolean {
+        val stagingPath = keystorePath.resolveSibling("${keystorePath.name}.tmp")
+        val storedAlias = withContext(Dispatchers.IO) {
+            try {
+                // Android has no JKS support, so only that format is converted
+                val data = source.readBytes()
+                val isJks = ApkSigner.KeyStoreType.of(data) == ApkSigner.KeyStoreType.JKS
+                stagingPath.writeBytes(if (isJks) JksKeyStoreParser.toPkcs12(data, pass) else data)
 
-        // BKS looks aliases up by exact case, while keytool stores a JKS alias in lowercase, so
-        // "MyKey" typed for a key saved as "mykey" is matched to the alias the file holds
-        val storedAlias = try {
-            val ks = ApkSigner.readKeyStore(ByteArrayInputStream(keystoreData), null)
-            val resolved = if (ks.containsAlias(alias)) alias
-            else ks.aliases().asSequence().firstOrNull { it.equals(alias, ignoreCase = true) } ?: alias
+                // The store opens with the key's password, as the export writes it and keytool
+                // does for PKCS12, while a BKS keystore is read without one
+                val details = ApkUtils.KeyStoreDetails(stagingPath, alias = alias, password = pass)
+                val keyStore = ApkUtils.readKeyStore(details)
 
-            ApkSigner.readPrivateKeyCertificatePair(ks, resolved, pass)
-            resolved
-        } catch (_: UnrecoverableKeyException) {
-            return false
-        } catch (_: IllegalArgumentException) {
-            return false
+                // BKS looks aliases up by exact case, while keytool stores a JKS alias in lowercase, so
+                // "MyKey" typed for a key saved as "mykey" is matched to the alias the file holds
+                val resolved = if (keyStore.containsAlias(alias)) alias
+                else keyStore.aliases().asSequence().firstOrNull { it.equals(alias, ignoreCase = true) } ?: alias
+
+                ApkSigner.readPrivateKeyCertificatePair(keyStore, resolved, pass)
+                Files.move(stagingPath.toPath(), keystorePath.toPath(), StandardCopyOption.REPLACE_EXISTING)
+                resolved
+            } catch (_: IllegalArgumentException) {
+                null
+            } catch (_: GeneralSecurityException) {
+                null
+            } catch (_: SecurityException) {
+                // A JKS key the password does not decrypt
+                null
+            } catch (_: IOException) {
+                // BouncyCastle reports a wrong PKCS12 password as a failed integrity check
+                null
+            } finally {
+                stagingPath.delete()
+            }
+        } ?: return false
+
+        prefs.edit {
+            prefs.keystoreAlias.value = storedAlias
+            prefs.keystorePass.value = pass
+            prefs.keystorePassword.value = ""
         }
-
-        withContext(Dispatchers.IO) {
-            Files.write(keystorePath.toPath(), keystoreData)
-        }
-
-        updatePrefs(storedAlias, pass, keystorePw)
         return true
     }
 
@@ -181,16 +202,13 @@ class KeystoreManager(app: Application, private val prefs: PreferencesManager) {
         }
     }
 
-    private suspend fun readKeyStore(): KeyStore {
-        val keyStorePassword = prefs.keystorePassword.get().ifEmpty { null }
-        return keystorePath.inputStream().use { ApkSigner.readKeyStore(it, keyStorePassword) }
-    }
+    private suspend fun readKeyStore(): KeyStore = ApkUtils.readKeyStore(signingDetails())
 
     private fun Certificate.sha256(): String = encoded.sha256Fingerprint()
 
+    /** Writes the signing key to [target] as a PKCS12 keystore that opens with the key's password. */
     suspend fun export(target: OutputStream) {
-        withContext(Dispatchers.IO) {
-            Files.copy(keystorePath.toPath(), target)
-        }
+        val details = signingDetails()
+        withContext(Dispatchers.IO) { ApkUtils.exportKeyStore(details, target) }
     }
 }
