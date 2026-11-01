@@ -495,6 +495,9 @@
     <string name="batch_queue_pending_subtitle">Натисніть, щоб переглянути та почати</string>
     <string name="batch_queue_clear_title">Очистити чергу?</string>
     <string name="batch_queue_clear_description">Усі застосунки буде видалено з черги</string>
+    <string name="batch_queue_keep_title">Зберегти чергу?</string>
+    <string name="batch_queue_keep_description">Застосунки з черги чекатимуть на головному екрані, щоб їх запустили пізніше</string>
+    <string name="batch_queue_keep">Залишити</string>
     <string name="shortcut_repatch_short">Перепатчити</string>
     <string name="shortcut_repatch_long">Перепатчити застарілі застосунки</string>
     <string name="shortcut_check_updates_short">Перевірити оновлення</string>

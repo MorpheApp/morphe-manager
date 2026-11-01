@@ -198,7 +198,7 @@
     <string name="sources_management_outdated_manager_hint">Bu mənbə %1$s yamaqlayıcısı üçün qurulmuşdur, lakin Morphe %2$s versiyası %3$s yamaqlayıcısını ehtiva edir. İstifadə etmək üçün Morphe-ni yenilə</string>
     <string name="sources_management_held_back_badge">Çökdü</string>
     <string name="sources_management_held_back_hint">Bu mənbə yüklənərkən Morphe-nin çökməsinə səbəb oldu, buna görə də ötürülür. Təkrar cəhd etmək üçün onu yenilə və ya təkrar idxal et</string>
-    <string name="sources_management_signed_by">İmzalayan</string>
+    <string name="sources_management_signed_by">İmzalanan</string>
     <string name="sources_management_signing_key_changed_badge">Açar dəyişdirildi</string>
     <string name="sources_management_signing_key_changed_hint">Son buraxılış bu mənbənin əvvəlki açarı ilə imzalanmayıb, buna görə də quraşdırılmadı. Nəzərdən keçirmək üçün toxun</string>
     <string name="sources_management_source_enabled">Mənbə işləkdir</string>
@@ -290,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe bu veb saytlara zəmanət verə bilməz. APK faylı əvəzinə öz tətbiq mağazasını təklif edənləri ötür</string>
     <string name="home_download_instructions_step3_search">Həmin veb-saytda ən yenisini deyil, &lt;b&gt;%s&lt;/b&gt; versiyasının APK-sını yüklə</string>
     <string name="home_download_instructions_step3_search_any">Həmin veb-saytda tətbiqin APK-sını yüklə. &lt;b&gt;İstənilən versiya&lt;/b&gt; yamaqlana bilər</string>
+    <string name="home_download_instructions_step2_github">&lt;b&gt;%s&lt;/b&gt; buraxılışının &lt;b&gt;Resursları&lt;/b&gt; bölməsində, &lt;b&gt;.apk&lt;/b&gt; ilə bitən faylı basın</string>
+    <string name="home_download_instructions_step2_github_latest">Ən yeni buraxılışın &lt;b&gt;Resursları&lt;/b&gt; bölməsində, &lt;b&gt;.apk&lt;/b&gt; ilə bitən fayla basın</string>
+    <string name="home_download_instructions_step2_github_note">Bir neçə APK faylı olarsa, %s adını daşıyanı və ya universal olanı seçin</string>
     <string name="home_download_instructions_download_button_toast">Burada deyil, vebsaytdakı yükləməyə toxun 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Əla! İndi davam et-ə kliklə və veb sayta keç 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Təcrübə mükəmməlləşdirir və siz hədəfə yaxınlaşırsınız 💪</string>
@@ -497,6 +500,9 @@ APK-nı haradan götürəcəyinizi seçin"</string>
     <string name="batch_queue_pending_subtitle">Gözdən keçirmək və başlatmaq üçün toxun</string>
     <string name="batch_queue_clear_title">Növbəni təmizləsin?</string>
     <string name="batch_queue_clear_description">Bütün tətbiqlər növbədən silinəcək</string>
+    <string name="batch_queue_keep_title">Növbəni saxlasın?</string>
+    <string name="batch_queue_keep_description">Növbəyə qoyulmuş tətbiqlər daha sonra başladılmaq üçün əsas ekranda gözlədiləcək</string>
+    <string name="batch_queue_keep">Saxla</string>
     <string name="shortcut_repatch_short">Yenidən yamaqla</string>
     <string name="shortcut_repatch_long">Köhnəlmiş tətbiqləri yenidən yamaqla</string>
     <string name="shortcut_check_updates_short">Yeniləmələri yoxla</string>

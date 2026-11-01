@@ -64,6 +64,7 @@
     <string name="list_options_state_description">Sortirano po %1$s, filtrirano po %2$s</string>
     <string name="home_app_filter_clones">Klonovi</string>
     <string name="home_app_grouping_none">Ništa</string>
+    <string name="home_app_sort_manual_hint">Dugo pritisnite aplikaciju, a zatim dodirnite tipku za promjenu redoslijeda</string>
     <string name="home_app_sort_recommended">Preporučeni redoslijed</string>
     <string name="home_app_sort_updates_first">Najprije ažuriranja patcheva</string>
     <string name="home_app_sort_recently_patched">Nedavno patchano</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Ništa se ne podudara s %s</string>
     <string name="home_category_add">Dodaj kategoriju</string>
     <string name="home_category_all_apps">Sve aplikacije</string>
+    <string name="home_app_grouping_categories">Kategorije</string>
     <string name="home_category_uncategorized">Nekategorizirano</string>
     <string name="home_category_new_title">Nova kategorija</string>
     <string name="home_category_rename_title">Preimenuj kategoriju</string>
@@ -130,7 +132,7 @@
     <string name="home_greeting_super_late_5">Noćna i produktivna</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
-    <string name="home_greeting_halloween_1">Trik ili patch?</string>
+    <string name="home_greeting_halloween_1">Slatkiš ili patch?</string>
     <string name="home_greeting_halloween_2">Nema duhova u ovim APK-ovima, provjerili smo</string>
     <string name="home_greeting_halloween_3">Jeziva sezona, svježi patchevi</string>
     <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
@@ -676,7 +678,7 @@ Deinstaliranje će trajno izbrisati sve podatke aplikacije"</string>
     <string name="patcher_keep_patching">Nastavi patchanje</string>
     <!-- Patcher Screen - Patcher Messages -->
     <string name="patcher_message_1">Pretvaranje vaše aplikacije u nešto sjajno… 🏆</string>
-    <string name="patcher_message_2">Učenje starih aplikacija novim trikovima… 🎩</string>
+    <string name="patcher_message_2">Učimo stare aplikacije novim trikovima… 🎩</string>
     <string name="patcher_message_3">Digitalno podešavanje vaše aplikacije… 🔧</string>
     <string name="patcher_message_4">Kuhanje digitalne magije… ☕</string>
     <string name="patcher_message_5">Preporučuje se pauza za kavu… ☕</string>
