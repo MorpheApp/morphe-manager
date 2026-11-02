@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-11-01T23:35:37",
-  "description": "## [2.4.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.3...v2.4.0-dev.4) (2026-11-01)\n\n### Bug Fixes\n\n* Export the signing key as a password-protected PKCS12 keystore ([ca660e7](https://github.com/MorpheApp/morphe-manager/commit/ca660e7064a72adb0872055e3f5ddf55c2fe38e4))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.4.0-dev.4/morphe-manager-2.4.0-dev.4.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.4.0-dev.4/morphe-manager-2.4.0-dev.4.apk.asc",
-  "version": "2.4.0-dev.4"
+  "created_at": "2026-11-02T19:54:08",
+  "description": "## [2.4.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.4...v2.4.0-dev.5) (2026-11-02)\n\n### Performance Improvements\n\n* Write the patched APK in one pass ([#1345](https://github.com/MorpheApp/morphe-manager/issues/1345)) ([04e8fa7](https://github.com/MorpheApp/morphe-manager/commit/04e8fa7b67beae719d6aa2696098ba61e4977be2))\n\n### Bug Fixes\n\n* Clear the patching notification once a run ends ([efd050e](https://github.com/MorpheApp/morphe-manager/commit/efd050ed7ab7700f47efb4b987dbba3db7c0cd83))\n* Keep patching and installing in the foreground ([f29c101](https://github.com/MorpheApp/morphe-manager/commit/f29c1018ff0c629ebc3f8bf084226d859523070b))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.4.0-dev.5/morphe-manager-2.4.0-dev.5.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.4.0-dev.5/morphe-manager-2.4.0-dev.5.apk.asc",
+  "version": "2.4.0-dev.5"
 }
