@@ -7,6 +7,7 @@ package app.morphe.manager.domain.manager
 
 import android.os.Build
 import android.util.Log
+import app.morphe.manager.domain.bundles.PatchSourceHeaders
 import app.morphe.manager.network.api.MorpheAPI
 import app.morphe.manager.util.KnownApps
 import app.morphe.manager.util.MORPHE_API_URL
@@ -29,26 +30,30 @@ class DownloadUrlResolver(private val morpheAPI: MorpheAPI) {
      * Every redirect along the way is followed: the API sometimes points at itself once more,
      * and the download sites redirect for reasons of their own, so only the end of the chain
      * says what the user will actually get.
+     *
+     * @param patchSources The sources the app is patched from, see
+     *   [app.morphe.manager.domain.repository.PatchBundleRepository.patchSourceHeaders]. The API
+     *   counts requests by them.
      */
-    suspend fun resolve(packageName: String, version: String?): String =
+    suspend fun resolve(packageName: String, version: String?, patchSources: PatchSourceHeaders? = null): String =
         // The instructions wait on this, so a host that never answers has to end the wait itself
-        withTimeoutOrNull(RESOLVE_TIMEOUT) { follow(packageName, version) } ?: run {
+        withTimeoutOrNull(RESOLVE_TIMEOUT) { follow(packageName, version, patchSources) } ?: run {
             Log.w(tag, "Timed out resolving the download page")
             webSearchUrl(packageName, version)
         }
 
-    private suspend fun follow(packageName: String, version: String?): String {
+    private suspend fun follow(packageName: String, version: String?, patchSources: PatchSourceHeaders?): String {
         val searchUrl = apiSearchUrl(packageName, version)
         Log.d(tag, "Using search url: $searchUrl")
 
-        var resolved = morpheAPI.resolveRedirect(searchUrl) ?: run {
+        var resolved = morpheAPI.resolveRedirect(searchUrl, patchSources) ?: run {
             Log.w(tag, "No redirect location for: $searchUrl")
             return webSearchUrl(packageName, version)
         }
 
         repeat(MAX_REDIRECTS) {
             // A URL that redirects nowhere is the end of the chain
-            val next = morpheAPI.resolveRedirect(resolved) ?: return finalUrl(resolved, packageName, version)
+            val next = morpheAPI.resolveRedirect(resolved, patchSources) ?: return finalUrl(resolved, packageName, version)
             Log.i(tag, "Following redirect to: $next")
             resolved = next
         }

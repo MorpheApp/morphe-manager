@@ -217,6 +217,16 @@ class PatchBundleRepository(
             .filter { (_, patches) -> patches.isNotEmpty() }
 
     /**
+     * [PatchBundleSource.Extensions.patchSourceHeaders] for the sources [uids], or when there are
+     * none for every source with patches for [packageName].
+     */
+    suspend fun patchSourceHeaders(packageName: String, uids: Collection<Int>): PatchSourceHeaders? {
+        val wanted = uids.ifEmpty { simpleSourceChoices(packageName).map { (bundle, _) -> bundle.uid } }
+        val byUid = sources.value.associateBy { it.uid }
+        return PatchBundleSource.patchSourceHeaders(wanted.distinct().mapNotNull { byUid[it] })
+    }
+
+    /**
      * How many sources with patches for [packageName] it is kept from, which every point
      * offering a choice leaves out. Counted the way [offeredBundleInfoFlow] drops them, so an
      * app kept from every source hides none.

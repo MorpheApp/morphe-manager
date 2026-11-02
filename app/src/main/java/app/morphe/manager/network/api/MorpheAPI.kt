@@ -12,6 +12,8 @@ package app.morphe.manager.network.api
 
 import android.util.Log
 import app.morphe.manager.BuildConfig
+import app.morphe.manager.domain.bundles.PatchBundleSource
+import app.morphe.manager.domain.bundles.PatchSourceHeaders
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.network.dto.*
 import app.morphe.manager.network.service.HttpService
@@ -748,9 +750,17 @@ class MorpheAPI(
     /**
      * Resolves a redirect URL by delegating a HEAD request to [HttpService.headRedirect].
      * Returns the final destination URL, or null if there is no redirect or an error occurs.
+     *
+     * @param patchSources The patch source headers, only sent to the API.
      */
-    suspend fun resolveRedirect(url: String): String? = client.headRedirect(url) {
-        if (url.startsWith("$MORPHE_API_URL/")) header(HttpHeaders.UserAgent, MORPHE_USER_AGENT)
+    suspend fun resolveRedirect(url: String, patchSources: PatchSourceHeaders? = null): String? = client.headRedirect(url) {
+        if (url.startsWith("$MORPHE_API_URL/")) {
+            header(HttpHeaders.UserAgent, MORPHE_USER_AGENT)
+            patchSources?.let {
+                header(PatchBundleSource.PATCH_SOURCE_HEADER, it.sources)
+                header(PatchBundleSource.PATCH_SOURCE_VERSION_HEADER, it.versions)
+            }
+        }
     }
 
     /**

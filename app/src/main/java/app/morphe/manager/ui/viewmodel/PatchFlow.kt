@@ -1482,10 +1482,23 @@ class PatchFlow(
         downloadRedirectJob?.cancel()
         downloadRedirectJob = scope.launch {
             val resolved = withContext(Dispatchers.IO) {
-                downloadUrlResolver.resolve(packageName, version)
+                val patchSources = patchBundleRepository.patchSourceHeaders(packageName, downloadSourceUids(current))
+                downloadUrlResolver.resolve(packageName, version, patchSources)
             }
             session = session?.copy(downloadUrl = resolved)
         }
+    }
+
+    /**
+     * Sources the requested version is patched from: the one picked, or else every source that
+     * lists the version. Empty when none lists it, which leaves it to every source of the app.
+     */
+    private fun downloadSourceUids(current: PatchFlowSession): List<Int> {
+        current.bundleUid?.let { return listOf(it) }
+        current.selectedVersion?.takeIf { current.versionPicked }?.let { return listOf(it.bundleUid) }
+        return current.compatibleVersions
+            .filter { it.target.version == current.requestedVersion }
+            .map { it.bundleUid }
     }
 
     override val helperSignatureCheckAvailable: Boolean

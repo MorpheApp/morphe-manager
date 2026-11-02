@@ -68,6 +68,8 @@ sealed class RemotePatchBundle(
     protected val api = services.api
     private val refusedReleaseFile = directory.resolve("refused-release")
 
+    override val patchSourceEntry: String get() = patchSourceEntryForEndpoint(endpoint)
+
     protected abstract suspend fun getLatestInfo(): MorpheAsset
     abstract override fun copy(
         error: Throwable?,
@@ -304,6 +306,25 @@ sealed class RemotePatchBundle(
                     append("&name=").append(URLEncoder.encode(it, "UTF-8").replace("+", "%20"))
                 }
             }
+        }
+
+        /**
+         * [PatchBundleSource.patchSourceEntry] of a remote source: the repository on GitHub and
+         * GitLab whatever the branch, file or pull request, otherwise the host and path. The
+         * query and user info are left out, as they can hold a token.
+         */
+        fun patchSourceEntryForEndpoint(endpoint: String): String {
+            val (host, segments) = endpointParts(endpoint) ?: return "url=unknown"
+            val entry = when {
+                segments.size >= 2 && (host == "raw.githubusercontent.com" || host == "github.com") ->
+                    "github=${segments[0]}/${segments[1]}"
+
+                segments.size >= 2 && host == "gitlab.com" -> "gitlab=${segments[0]}/${segments[1]}"
+                else -> "url=" + (listOf(host) + segments).joinToString("/")
+            }
+            // Commas separate entries, and the API takes printable ASCII only
+            return entry.replace(",", "%2C").filter { it in '!'..'~' }
+                .take(PatchBundleSource.MAX_PATCH_SOURCE_ENTRY_LENGTH)
         }
 
         /** Lowercased host and path segments of [endpoint], or null when it is not a valid URL. */
@@ -579,6 +600,8 @@ class APIPatchBundle(
 
     // Every install already has the default source
     override val addSourceLink: String? get() = null
+
+    override val patchSourceEntry: String get() = patchSourceEntryForEndpoint(SOURCE_REPO_URL)
 
     override suspend fun fetchChangelogEntries(): List<ChangelogEntry> {
         val branch = if (usePrerelease) BRANCH_DEV else BRANCH_STABLE

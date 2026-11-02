@@ -25,6 +25,8 @@ class LocalPatchBundle(
     directory: File,
     enabled: Boolean
 ) : PatchBundleSource(name, uid, displayName, createdAt, updatedAt, error, directory, enabled) {
+    override val patchSourceEntry: String get() = localPatchSourceEntry(name)
+
     suspend fun replace(
         patches: InputStream,
         totalBytes: Long? = null,
