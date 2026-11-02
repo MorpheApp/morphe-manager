@@ -1,3 +1,14 @@
+## [2.4.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.4...v2.4.0-dev.5) (2026-11-02)
+
+### Performance Improvements
+
+* Write the patched APK in one pass ([#1345](https://github.com/MorpheApp/morphe-manager/issues/1345)) ([04e8fa7](https://github.com/MorpheApp/morphe-manager/commit/04e8fa7b67beae719d6aa2696098ba61e4977be2))
+
+### Bug Fixes
+
+* Clear the patching notification once a run ends ([efd050e](https://github.com/MorpheApp/morphe-manager/commit/efd050ed7ab7700f47efb4b987dbba3db7c0cd83))
+* Keep patching and installing in the foreground ([f29c101](https://github.com/MorpheApp/morphe-manager/commit/f29c1018ff0c629ebc3f8bf084226d859523070b))
+
 ## [2.4.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.3...v2.4.0-dev.4) (2026-11-01)
 
 ### Bug Fixes
