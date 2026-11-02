@@ -162,6 +162,16 @@
                 android:value="patching" />
         </service>
 
+        <!-- Keeps the app in the foreground for patching and installing once it leaves the screen -->
+        <service
+            android:name="app.morphe.manager.service.ForegroundHoldService"
+            android:foregroundServiceType="specialUse"
+            android:exported="false">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="patching" />
+        </service>
+
         <!-- Hosts the run, in a process of its own that ends with it -->
         <service
             android:name="app.morphe.manager.patcher.runtime.PatcherService"

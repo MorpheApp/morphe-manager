@@ -22,6 +22,7 @@ import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.PatcherWorker
+import app.morphe.manager.service.ForegroundHoldService
 import app.morphe.manager.ui.model.PatchRunProgress
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.util.AppCoroutineScope
@@ -74,6 +75,10 @@ class BatchPatchCoordinator(
 
     private var runJob: Job? = null
     private var activeWorkId: UUID? = null
+
+    // Keeps the queue in the foreground between the workers of its apps
+    @Volatile
+    private var foregroundHold: ForegroundHoldService.Hold? = null
 
     // The latest re-resolve per item, so an older one finishing last cannot undo the user's newer pick
     private val resolveJobs = ConcurrentHashMap<String, Job>()
@@ -366,6 +371,12 @@ class BatchPatchCoordinator(
         if (current.runnable.isEmpty()) return
 
         runJob?.cancel()
+        // Taken while the app is still on screen, the last moment the system grants it
+        val hold = ForegroundHoldService.Hold(
+            app,
+            app.getText(R.string.batch_patch_title),
+            app.getText(R.string.patcher_notification_text)
+        ).also { foregroundHold = it }
         runJob = scope.launch {
             _state.update { it.copy(phase = BatchPhase.RUNNING) }
             try {
@@ -377,6 +388,7 @@ class BatchPatchCoordinator(
                 withContext(NonCancellable) {
                     activeWorkId = null
                     installUnattendedIfRequested()
+                    hold.release()
                     _state.update {
                         it.copy(
                             phase = BatchPhase.FINISHED,
@@ -396,6 +408,7 @@ class BatchPatchCoordinator(
         activeWorkId?.let(workManager::cancelWorkById)
         runJob?.cancel()
         runJob = null
+        foregroundHold?.release()
         markRemainingCancelled()
         _state.update { it.copy(phase = BatchPhase.FINISHED, activeIndex = null, activeRun = null) }
     }
@@ -624,6 +637,12 @@ class BatchPatchCoordinator(
 
         try {
             val finished = workManager.getWorkInfoByIdFlow(workId).first { it?.state?.isFinished == true }
+            // The worker leaves its last step in the notification, which the queue holds on to
+            val preparingNext = _state.value?.runnable?.isNotEmpty() == true
+            foregroundHold?.update(
+                app.getText(R.string.batch_patch_title),
+                app.getText(if (preparingNext) R.string.batch_patch_preparing_next else R.string.patcher_notification_text)
+            )
 
             when (finished?.state) {
                 WorkInfo.State.SUCCEEDED -> {

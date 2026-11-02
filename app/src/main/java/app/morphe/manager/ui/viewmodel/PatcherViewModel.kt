@@ -45,6 +45,7 @@ import app.morphe.manager.patcher.patch.PatchLockState
 import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.PatcherWorker
+import app.morphe.manager.service.ForegroundHoldService
 import app.morphe.manager.ui.model.*
 import app.morphe.manager.ui.model.navigation.Patcher
 import app.morphe.manager.ui.screen.patcher.PatcherErrorInfo
@@ -654,7 +655,22 @@ class PatcherViewModel(
         return true
     }
 
+    // Held from the start of the run, while the screen is still up, until the original is saved
+    // and an auto-install has its own hold, since both follow the worker that ends its foreground
+    private var foregroundHold: ForegroundHoldService.Hold? = null
+
+    private fun releaseForeground() {
+        foregroundHold?.release()
+        foregroundHold = null
+    }
+
     private fun startWorker(options: Options) {
+        releaseForeground()
+        foregroundHold = ForegroundHoldService.Hold(
+            app,
+            app.getText(R.string.patcher_notification_title),
+            app.getText(R.string.patcher_notification_text)
+        )
         val workId = launchWorker(options)
         patcherWorkerId = ParcelUuid(workId)
         observeWorker(workId)
@@ -964,6 +980,7 @@ class PatcherViewModel(
                 when (workInfo?.state) {
                     WorkInfo.State.SUCCEEDED -> {
                         patchRun.stopStallWatch()
+                        foregroundHold?.refresh()
 
                         // Save original APK before deleting temporary file (blocking).
                         // Launched independently so cancelling observeWorkerJob (new patch run)
@@ -995,6 +1012,7 @@ class PatcherViewModel(
 
                     WorkInfo.State.FAILED -> {
                         patchRun.stopStallWatch()
+                        releaseForeground()
                         isPatching = false
                         _patcherSucceeded.value = false
                         showSuccessScreen = true
@@ -1007,7 +1025,12 @@ class PatcherViewModel(
                         isPatching = true
                         _patcherSucceeded.value = null
                     }
-                    else -> _patcherSucceeded.value = null
+                    WorkInfo.State.CANCELLED -> {
+                        releaseForeground()
+                        _patcherSucceeded.value = null
+                    }
+                    // Not on record yet, or pruned
+                    null -> _patcherSucceeded.value = null
                 }
             }
         }
@@ -1036,13 +1059,17 @@ class PatcherViewModel(
     /** Called once the installer has taken the auto-install over. */
     fun autoInstallHandedOff() {
         autoInstallPending = false
+        releaseForeground()
     }
 
     private fun scheduleAutoInstallIfNeeded() = viewModelScope.launch {
         // A patch is free to rename the app, and the name it built under is the one being replaced
         val target = withContext(Dispatchers.IO) { pm.getPackageInfo(outputFile)?.packageName }
             ?: packageName
-        if (!installerManager.autoInstallAllowed(target, mount = usingMountInstall)) return@launch
+        if (!installerManager.autoInstallAllowed(target, mount = usingMountInstall)) {
+            releaseForeground()
+            return@launch
+        }
         autoInstallPending = true
         // Allowed only where no system dialog comes up, so it starts right away, a round in play
         // included. What it may still have to ask waits on the screen for the success screen
@@ -1127,6 +1154,7 @@ class PatcherViewModel(
 
     override fun onCleared() {
         patcherWorkerId?.uuid?.let(workManager::cancelWorkById)
+        releaseForeground()
         // A mount restores the stock app from the input, and drops it itself once done
         if (!installStarted || !usingMountInstall) cleanupTemporaryInput()
         stopCompletionSound()

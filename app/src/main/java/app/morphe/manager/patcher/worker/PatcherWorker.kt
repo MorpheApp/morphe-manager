@@ -10,25 +10,17 @@
 
 package app.morphe.manager.patcher.worker
 
-import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
-import android.content.pm.ServiceInfo
 import android.graphics.drawable.Icon
 import android.os.Build
-import android.os.Bundle
 import android.os.PowerManager
 import android.util.Log
-import androidx.annotation.RequiresApi
-import androidx.core.app.NotificationCompat
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import app.morphe.manager.BuildConfig
-import app.morphe.manager.MainActivity
 import app.morphe.manager.ManagerApplication
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
@@ -119,88 +111,31 @@ class PatcherWorker(
     /** Queue position shown in the ongoing notification, set once the args are claimed. */
     private var queueLabel: String? = null
 
+    private val notificationManager = applicationContext.getSystemService(NotificationManager::class.java)
+
     override suspend fun getForegroundInfo() =
-        ForegroundInfo(
-            NOTIFICATION_ID,
-            createNotification(),
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE else 0
-        )
+        ForegroundInfo(PatcherNotification.ID, createNotification(), PatcherNotification.foregroundServiceType)
 
-    @SuppressLint("WrongConstant")
-    private fun mainActivityPendingIntent(): PendingIntent {
-        val intent = Intent(applicationContext, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-        }
-        return PendingIntent.getActivity(
-            applicationContext,
-            0,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
-    }
-
-    @SuppressLint("WrongConstant")
     private fun createNotification(
         stepName: String? = null,
         patchProgress: Pair<Int, Int>? = null, // Completed to total patches
         contentText: String? = null,
-    ): Notification {
-        val pendingIntent = mainActivityPendingIntent()
-        return Notification.Builder(applicationContext, UpdateNotificationManager.CHANNEL_PATCHER)
-            .setContentTitle(
-                stepName ?: applicationContext.getString(R.string.patcher_notification_title)
-            )
-            .setContentText(
-                contentText
-                    ?: queueLabel
-                    ?: applicationContext.getText(R.string.patcher_notification_text)
-            )
-            .apply {
-                if (patchProgress != null) {
-                    val (completed, total) = patchProgress
-                    setSubText("$completed / $total")
-                    setProgress(total, completed, false)
-                }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.BAKLAVA) {
-                    applyLiveUpdate(patchProgress)
-                }
-            }
-            .setSmallIcon(Icon.createWithResource(applicationContext, R.drawable.ic_notification))
-            .setContentIntent(pendingIntent)
-            .setCategory(Notification.CATEGORY_SERVICE)
-            .setOngoing(true)
-            .build()
-    }
-
-    /** Request promotion to a Live Update, shown as a status bar chip while the manager is in the background. */
-    @RequiresApi(Build.VERSION_CODES.BAKLAVA)
-    private fun Notification.Builder.applyLiveUpdate(patchProgress: Pair<Int, Int>?) {
-        val style = Notification.ProgressStyle()
-        if (patchProgress != null) {
-            val (completed, total) = patchProgress
-            // The bar length is the sum of its segments, a single one spans every patch
-            style.progressSegments = listOf(Notification.ProgressStyle.Segment(total.coerceAtLeast(1)))
-            style.progress = completed
-            setShortCriticalText("$completed/$total")
-        } else {
-            style.isProgressIndeterminate = true
-        }
-        setStyle(style)
-        // The builder setter only exists from 36.1, the extra is what the framework reads on 36.0
-        addExtras(Bundle().apply { putBoolean(NotificationCompat.EXTRA_REQUEST_PROMOTED_ONGOING, true) })
-    }
+    ) = PatcherNotification.build(
+        applicationContext,
+        title = stepName ?: applicationContext.getString(R.string.patcher_notification_title),
+        text = contentText ?: queueLabel ?: applicationContext.getText(R.string.patcher_notification_text),
+        patchProgress = patchProgress
+    )
 
     private fun updatePatcherNotification(
         stepName: String?,
         patchProgress: Pair<Int, Int>? = null,
         contentText: String? = null,
     ) {
-        val notificationManager =
-            applicationContext.getSystemService(NotificationManager::class.java)
         // Android won't visually switch from indeterminate → determinate on the same notification
         // ID unless we first post a brief non-indeterminate update. Post the real notification
         // directly - the determinate bar replaces the spinning one cleanly this way
-        notificationManager.notify(NOTIFICATION_ID, createNotification(stepName, patchProgress, contentText))
+        notificationManager.notify(PatcherNotification.ID, createNotification(stepName, patchProgress, contentText))
     }
 
     private fun showCompletionNotification(
@@ -239,11 +174,10 @@ class PatcherWorker(
                     if (succeeded) R.color.notification_success else R.color.notification_failure
                 )
             )
-            .setContentIntent(mainActivityPendingIntent())
+            .setContentIntent(PatcherNotification.contentIntent(applicationContext))
             .setAutoCancel(true)
             .build()
-        applicationContext.getSystemService(NotificationManager::class.java)
-            .notify(COMPLETION_NOTIFICATION_ID, notification)
+        notificationManager.notify(COMPLETION_NOTIFICATION_ID, notification)
     }
 
     override suspend fun doWork(): Result {
@@ -288,7 +222,7 @@ class PatcherWorker(
             wakeLock.release()
             // WorkManager removes the progress notification only with a foreground it got, so a run
             // denied one would leave the ongoing notification it posted directly behind
-            applicationContext.getSystemService(NotificationManager::class.java).cancel(NOTIFICATION_ID)
+            notificationManager.cancel(PatcherNotification.ID)
         }
 
         // A mount can still restore the stock app from it, the install flow deletes it after mounting
@@ -588,7 +522,6 @@ class PatcherWorker(
         private const val LOG_PREFIX = "[Worker]"
         private fun String.logFmt() = "$LOG_PREFIX $this"
 
-        const val NOTIFICATION_ID = 1
         const val COMPLETION_NOTIFICATION_ID = 2
 
         /** Kept as the patcher screen's entry point now that the tone itself is shared. */
