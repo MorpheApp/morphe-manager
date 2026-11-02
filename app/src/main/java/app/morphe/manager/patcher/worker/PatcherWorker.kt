@@ -286,6 +286,9 @@ class PatcherWorker(
             runPatcher(args).also { if (it == Result.success()) patchingSucceeded = true }
         } finally {
             wakeLock.release()
+            // WorkManager removes the progress notification only with a foreground it got, so a run
+            // denied one would leave the ongoing notification it posted directly behind
+            applicationContext.getSystemService(NotificationManager::class.java).cancel(NOTIFICATION_ID)
         }
 
         // A mount can still restore the stock app from it, the install flow deletes it after mounting
