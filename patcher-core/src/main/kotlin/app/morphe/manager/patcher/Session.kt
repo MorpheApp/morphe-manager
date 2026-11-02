@@ -13,7 +13,6 @@ package app.morphe.manager.patcher
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.patcher.Patcher
 import app.morphe.patcher.PatcherConfig
-import app.morphe.patcher.apk.ApkUtils.applyTo
 import app.morphe.patcher.patch.Patch
 import app.morphe.patcher.patch.PatchResult
 import app.morphe.patcher.resource.CpuArchitecture
@@ -24,7 +23,6 @@ import java.io.File
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
 import kotlin.time.measureTime
-import kotlin.time.measureTimedValue
 
 internal typealias PatchList = List<Patch<*>>
 
@@ -98,24 +96,14 @@ class Session(
         }
 
         logger.info("Writing patched files...")
-        val (result, compileTime) = withContext(Dispatchers.Default) {
-            // patcher.get() writes dex files, then encodes resources, so run on default pool
-            // instead of main thread.
-            measureTimedValue { patcher.get() }
+        val patched = tempDir.resolve("patched.apk")
+        val compileTime = withContext(Dispatchers.Default) {
+            // patcher.writeApk() compiles dex files and resources and writes the aligned, unsigned apk
+            // in one pass, so run on default pool instead of main thread.
+            measureTime { patcher.writeApk(patched) }
         }
 
         val writeTime = measureTime {
-            val patched = result.resources.resourcesApk ?: tempDir.resolve("result.apk").also { fallback ->
-                withContext(Dispatchers.IO) {
-                    Files.copy(input.toPath(), fallback.toPath(), StandardCopyOption.REPLACE_EXISTING)
-                }
-            }
-
-            withContext(Dispatchers.Default) {
-                // Run on default pool instead of I/O since we're processing large files in our own code
-                result.applyTo(patched)
-            }
-
             withContext(Dispatchers.IO) {
                 Files.move(patched.toPath(), output.toPath(), StandardCopyOption.REPLACE_EXISTING)
             }
