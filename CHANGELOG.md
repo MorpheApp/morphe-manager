@@ -1,3 +1,14 @@
+## [2.4.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.6...v2.4.0-dev.7) (2026-11-03)
+
+### Features
+
+* List the apps a source brings first and count them ([a2b0820](https://github.com/MorpheApp/morphe-manager/commit/a2b0820e838e0f308beb8e7206a927dfa263469c))
+
+### Bug Fixes
+
+* Name the running patch in the log only ([87f9461](https://github.com/MorpheApp/morphe-manager/commit/87f9461601372651d873ff67c41ee6604e37ed5c))
+* Name unnamed patches in the log and keep reading events past a broken line ([e211a52](https://github.com/MorpheApp/morphe-manager/commit/e211a52826012ee4c1df47a4184cfef0c4b4d922))
+
 ## [2.4.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.5...v2.4.0-dev.6) (2026-11-03)
 
 ### Features
