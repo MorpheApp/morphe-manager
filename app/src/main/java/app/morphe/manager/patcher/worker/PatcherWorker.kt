@@ -413,7 +413,7 @@ class PatcherWorker(
                     Files.move(patchedApk.toPath(), File(args.output).toPath(), StandardCopyOption.REPLACE_EXISTING)
                 }
             }
-            args.logger.info("Signed apk in ${signTime.inWholeMilliseconds}ms")
+            args.logger.info("Signed apk in ${signTime.toLogString()}")
             updateProgress(state = State.COMPLETED) // Signing
 
             args.logger.info(

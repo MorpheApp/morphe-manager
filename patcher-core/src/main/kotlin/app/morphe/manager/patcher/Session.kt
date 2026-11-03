@@ -11,6 +11,7 @@
 package app.morphe.manager.patcher
 
 import app.morphe.manager.patcher.logger.Logger
+import app.morphe.manager.util.toLogString
 import app.morphe.patcher.Patcher
 import app.morphe.patcher.PatcherConfig
 import app.morphe.patcher.patch.Patch
@@ -110,8 +111,8 @@ class Session(
         }
 
         logger.info(
-            "Patched apk saved to $output (patch=${patchTime.inWholeMilliseconds}ms " +
-                "compile=${compileTime.inWholeMilliseconds}ms write=${writeTime.inWholeMilliseconds}ms)"
+            "Patched apk saved to $output (patch=${patchTime.toLogString()} " +
+                "compile=${compileTime.toLogString()} write=${writeTime.toLogString()})"
         )
         listener.stepCompleted() // Saving
     }

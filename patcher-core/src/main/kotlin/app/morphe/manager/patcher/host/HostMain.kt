@@ -13,6 +13,7 @@ import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.runtime.heapLimitMebibytes
 import app.morphe.manager.patcher.split.SplitPreparationEvent
 import app.morphe.manager.util.bytesToMebibytes
+import app.morphe.manager.util.toLogString
 import app.morphe.patcher.patch.Patch
 import app.morphe.patcher.patch.loadPatchesFromJar
 import kotlinx.coroutines.runBlocking
@@ -28,6 +29,7 @@ import java.util.concurrent.ExecutionException
 import java.util.concurrent.FutureTask
 import kotlin.concurrent.thread
 import kotlin.system.exitProcess
+import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.nanoseconds
 import kotlin.time.Duration.Companion.seconds
@@ -141,7 +143,7 @@ private fun vmDescription(): String {
 private fun loadLogged(file: File, loadPatches: (File) -> Collection<Patch<*>>, logger: Logger): Collection<Patch<*>> {
     val started = TimeSource.Monotonic.markNow()
     return loadPatches(file).also {
-        logger.info("Loaded ${it.size} patches of ${file.name} in ${started.elapsedNow().inWholeMilliseconds}ms")
+        logger.info("Loaded ${it.size} patches of ${file.name} in ${started.elapsedNow().toLogString()}")
     }
 }
 
@@ -185,10 +187,10 @@ private class PreloadedBundle(private val file: File, loadPatches: (File) -> Col
         }
         // A run that waits here for long is held up by the load itself rather than by what follows
         if (!patches.isDone) {
-            logger.info("Waiting for ${file.name}, loading ahead for ${started.elapsedNow().inWholeMilliseconds}ms")
+            logger.info("Waiting for ${file.name}, loading ahead for ${started.elapsedNow().toLogString()}")
         }
         return try {
-            patches.get().also { logger.info("Loaded ${it.size} patches of ${file.name} ahead in ${loadedIn}ms") }
+            patches.get().also { logger.info("Loaded ${it.size} patches of ${file.name} ahead in ${loadedIn.milliseconds.toLogString()}") }
         } catch (e: ExecutionException) {
             logger.warn("Loading ${file.name} ahead of the run failed, loading it again: ${e.cause}")
             null
