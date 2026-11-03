@@ -8,9 +8,11 @@ package app.morphe.manager.ui.screen.shared
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.lazy.LazyItemScope
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.IntSize
 
 /** [value], or the last one it held once it is gone, so content animating out has something to show. */
 @Composable
@@ -271,8 +273,12 @@ object Animations {
 }
 
 /**
- * Shows [content] while [visible], folding it in and out of the layout around it rather than
+ * Shows [content] while [visible], folding it in and out of the surrounding layout rather than
  * letting it pop, so what stands below slides along.
+ *
+ * In a [SettingsGroup] its rows fold as Material's segmented list items do: on the motion scheme's
+ * spring without a fade, which would wash the cards out against the page ahead of what they hold,
+ * and giving up their places as they start to, so the surrounding rows reshape at once.
  */
 @Composable
 fun FoldingVisibility(
@@ -280,11 +286,24 @@ fun FoldingVisibility(
     modifier: Modifier = Modifier,
     content: @Composable AnimatedVisibilityScope.() -> Unit
 ) {
+    if (LocalSegmentRegistry.current == null) {
+        AnimatedVisibility(
+            visible = visible,
+            modifier = modifier,
+            enter = Animations.expandFadeEnter,
+            exit = Animations.shrinkFadeExit,
+            content = content
+        )
+        return
+    }
+    val spec = MaterialTheme.motionScheme.fastSpatialSpec<IntSize>()
     AnimatedVisibility(
         visible = visible,
         modifier = modifier,
-        enter = Animations.expandFadeEnter,
-        exit = Animations.shrinkFadeExit,
-        content = content
-    )
+        enter = expandVertically(spec),
+        exit = shrinkVertically(spec)
+    ) {
+        val leaving = LocalRowLeaving.current || transition.targetState == EnterExitState.PostExit
+        CompositionLocalProvider(LocalRowLeaving provides leaving) { content() }
+    }
 }
