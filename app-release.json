@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-11-03T13:35:02",
-  "description": "## [2.4.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.6...v2.4.0-dev.7) (2026-11-03)\n\n### Features\n\n* List the apps a source brings first and count them ([a2b0820](https://github.com/MorpheApp/morphe-manager/commit/a2b0820e838e0f308beb8e7206a927dfa263469c))\n\n### Bug Fixes\n\n* Name the running patch in the log only ([87f9461](https://github.com/MorpheApp/morphe-manager/commit/87f9461601372651d873ff67c41ee6604e37ed5c))\n* Name unnamed patches in the log and keep reading events past a broken line ([e211a52](https://github.com/MorpheApp/morphe-manager/commit/e211a52826012ee4c1df47a4184cfef0c4b4d922))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.4.0-dev.7/morphe-manager-2.4.0-dev.7.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.4.0-dev.7/morphe-manager-2.4.0-dev.7.apk.asc",
-  "version": "2.4.0-dev.7"
+  "created_at": "2026-11-03T15:49:37",
+  "description": "## [2.4.0-dev.8](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.7...v2.4.0-dev.8) (2026-11-03)\n\n### Features\n\n* Show the open-source licenses without AboutLibraries ([3714b88](https://github.com/MorpheApp/morphe-manager/commit/3714b88d16c954cf6fe0b60fa72fbf6c51fa945a))\n\n### Performance Improvements\n\n* Drop AppCompat from the app ([7c86151](https://github.com/MorpheApp/morphe-manager/commit/7c861513b7af827cabefe268fe238551bf3fe95d))\n\n### Bug Fixes\n\n* End the patching Live Update once patching is over ([b7fc871](https://github.com/MorpheApp/morphe-manager/commit/b7fc871d85f146afbdbbd05acd8ead5c5e84cc0c))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.4.0-dev.8/morphe-manager-2.4.0-dev.8.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.4.0-dev.8/morphe-manager-2.4.0-dev.8.apk.asc",
+  "version": "2.4.0-dev.8"
 }
