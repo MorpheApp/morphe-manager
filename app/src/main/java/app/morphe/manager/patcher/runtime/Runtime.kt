@@ -56,7 +56,6 @@ class Runtime(
      * @param selectedPatches  Patches to apply, per bundle.
      * @param options          Patch option values, per bundle.
      * @param logger           Sink for everything the run reports.
-     * @param onPatchExecuting Called with the name of each patch about to run, dependencies included.
      * @param onPatchCompleted Called with the name of each patch that finished.
      * @param onPatchFailed    Called with the name of the patch the run failed on.
      * @param onProgress       Called as the run moves between steps.
@@ -73,7 +72,6 @@ class Runtime(
         selectedPatches: PatchSelection,
         options: Options,
         logger: Logger,
-        onPatchExecuting: (String) -> Unit,
         onPatchCompleted: suspend (String) -> Unit,
         onPatchFailed: (String) -> Unit,
         onProgress: ProgressEventHandler,
@@ -92,7 +90,7 @@ class Runtime(
             stripUnusedNativeLibs = stripUnusedNativeLibs,
             device = deviceConfig()
         )
-        val listener = ProgressReporter(context, logger, onProgress, onPatchExecuting, onPatchCompleted, onPatchFailed)
+        val listener = ProgressReporter(context, logger, onProgress, onPatchCompleted, onPatchFailed)
 
         try {
             val elapsed = measureTime { patch(request, logger, listener) }

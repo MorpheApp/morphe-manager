@@ -264,28 +264,14 @@ class PatcherWorker(
             args.onProgress(name, state, message)
         }
 
-        // In expert mode the notification names the patch that is running, which is the one
-        // to blame when a run stops moving
-        var executingPatch: String? = null
-
-        val onPatchExecuting: (String) -> Unit = { patchName ->
-            if (isExpertMode) {
-                executingPatch = patchName
-                updatePatcherNotification(
-                    stepName = applyingPatchesLabel,
-                    patchProgress = completedPatches to totalPatches,
-                    contentText = patchName,
-                )
-            }
-        }
-
-        val onPatchCompleted: suspend (String) -> Unit = {
+        val onPatchCompleted: suspend (String) -> Unit = { patchName ->
             completedPatches++
-            // Title and progress bar move together on every completed patch
+            // Update both title and progress bar together on every completed patch;
+            // in expert mode also show which patch just finished
             updatePatcherNotification(
                 stepName = applyingPatchesLabel,
                 patchProgress = completedPatches to totalPatches,
-                contentText = executingPatch,
+                contentText = if (isExpertMode && patchName.isNotBlank()) patchName else null,
             )
             args.onPatchCompleted()
         }
@@ -296,7 +282,6 @@ class PatcherWorker(
         // patches, not at applying them
         val onRestart: suspend () -> Unit = {
             completedPatches = 0
-            executingPatch = null
             patchingPhaseCompleted = false
             updatePatcherNotification(stepName = null, patchProgress = null)
             args.onPatchingRestarted()
@@ -421,7 +406,6 @@ class PatcherWorker(
                 args.selectedPatches,
                 options,
                 args.logger,
-                onPatchExecuting,
                 onPatchCompleted,
                 args.onPatchFailed,
                 ::updateProgress,
