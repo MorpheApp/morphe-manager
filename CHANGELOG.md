@@ -1,3 +1,15 @@
+## [2.4.0-dev.9](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.8...v2.4.0-dev.9) (2026-11-03)
+
+### Bug Fixes
+
+* Give patching results a notification channel of their own ([357fdb3](https://github.com/MorpheApp/morphe-manager/commit/357fdb305020c5485e30d71062b8b8b05e41aeef))
+* Keep a message in place as it moves between screens ([a8169fe](https://github.com/MorpheApp/morphe-manager/commit/a8169fe0a31198112c77df6bcba004638ac08eea))
+* Keep page titles to one line, scrolling through a long one ([2e2bccc](https://github.com/MorpheApp/morphe-manager/commit/2e2bcccd6a897f6dc765b0d6df9ac942f96b183d))
+* Keep settings rows in shape as they show, hide and fold ([3f47ca0](https://github.com/MorpheApp/morphe-manager/commit/3f47ca0c7f1c3ebf34373f0cbc5383b2c6a1dd91))
+* Keep the apps list scrollbar clear of the header and bottom bars ([f02d6e3](https://github.com/MorpheApp/morphe-manager/commit/f02d6e3379690cff2c64e5c0d2c9535389ec51eb))
+* Keep the latest release node from being clipped in the changelog ([5289913](https://github.com/MorpheApp/morphe-manager/commit/528991398bf39a54391ea1571b061c98d679c746))
+* Show log timings in the unit that suits them ([fb4943c](https://github.com/MorpheApp/morphe-manager/commit/fb4943cdb65bf688f83090fc825c36b96d85c61d))
+
 ## [2.4.0-dev.8](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.7...v2.4.0-dev.8) (2026-11-03)
 
 ### Features
