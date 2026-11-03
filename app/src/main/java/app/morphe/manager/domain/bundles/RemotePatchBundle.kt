@@ -28,8 +28,6 @@ import io.ktor.http.contentType
 import io.ktor.utils.io.jvm.javaio.toInputStream
 import io.ktor.utils.io.readAvailable
 import kotlinx.coroutines.*
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toInstant
 import java.io.File
 import java.io.IOException
 import java.net.URLEncoder
@@ -92,9 +90,7 @@ sealed class RemotePatchBundle(
 
             PatchBundleDownloadResult(
                 versionSignature = info.version,
-                assetCreatedAtMillis = runCatching {
-                    info.createdAt.toInstant(TimeZone.UTC).toEpochMilliseconds()
-                }.getOrNull()
+                assetCreatedAtMillis = info.createdAtMillis
             )
         }
 
@@ -115,13 +111,10 @@ sealed class RemotePatchBundle(
     suspend fun update(onProgress: PatchBundleDownloadProgress? = null): PatchBundleDownloadResult? =
         withContext(Dispatchers.IO) {
             val info = latestInfo()
-            val remoteCreatedAt = runCatching {
-                info.createdAt.toInstant(TimeZone.UTC).toEpochMilliseconds()
-            }.getOrNull()
 
             if (hasInstalled()
                 && info.version == installedVersionSignatureInternal
-                && (remoteCreatedAt == null || remoteCreatedAt == createdAt)
+                && info.createdAtMillis == createdAt
             ) return@withContext null
 
             downloadUnlessRefused(info, onProgress)
@@ -324,7 +317,7 @@ sealed class RemotePatchBundle(
             }
             // Commas separate entries, and the API takes printable ASCII only
             return entry.replace(",", "%2C").filter { it in '!'..'~' }
-                .take(PatchBundleSource.MAX_PATCH_SOURCE_ENTRY_LENGTH)
+                .take(MAX_PATCH_SOURCE_ENTRY_LENGTH)
         }
 
         /** Lowercased host and path segments of [endpoint], or null when it is not a valid URL. */
@@ -758,9 +751,7 @@ class GitHubPullRequestBundle(
 
         PatchBundleDownloadResult(
             versionSignature = info.version,
-            assetCreatedAtMillis = runCatching {
-                info.createdAt.toInstant(TimeZone.UTC).toEpochMilliseconds()
-            }.getOrNull()
+            assetCreatedAtMillis = info.createdAtMillis
         )
     }
 

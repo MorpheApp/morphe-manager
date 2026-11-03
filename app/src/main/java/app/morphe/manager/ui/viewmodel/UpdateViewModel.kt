@@ -478,7 +478,7 @@ class UpdateViewModel(
 
         return if (notes.isBlank()) null else ChangelogEntry(
             version = release.version.normalizeVersion(),
-            date = release.createdAt.date.toString(),
+            date = release.createdAt.toLocalDate().toString(),
             content = notes
         )
     }

@@ -50,7 +50,6 @@ dependencies {
     // KotlinX
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.collection.immutable)
-    implementation(libs.kotlinx.datetime)
 
     // Room
     implementation(libs.room.runtime)
@@ -65,9 +64,6 @@ dependencies {
     implementation(libs.xz)
 
     implementation(libs.androidx.documentfile)
-
-    // Native processes
-    implementation(libs.kotlin.process)
 
     // HiddenAPI
     compileOnly(libs.hidden.api.stub)
@@ -103,9 +99,6 @@ dependencies {
     implementation(libs.icons.material.symbols.rounded)
     implementation(libs.icons.material.symbols.rounded.filled)
     implementation(libs.icons.font.awesome.brands)
-
-    // Semantic versioning parser
-    implementation(libs.semver.parser)
 
     // Unit tests
     testImplementation(libs.kotlin.test.junit)
@@ -427,7 +420,6 @@ val licensesByUrl = mapOf(
     "https://github.com/composablehorizons/composeicons/blob/main/LICENSE" to "MIT",
     "https://github.com/RikkaApps/Shizuku-API/blob/master/LICENSE" to "MIT",
     "https://opensource.org/license/mit" to "MIT",
-    "https://raw.githubusercontent.com/z4kn4fein/kotlin-semver/main/LICENSE" to "MIT",
 )
 
 // A dependency under any other license fails the build, as the app could not be shipped with it

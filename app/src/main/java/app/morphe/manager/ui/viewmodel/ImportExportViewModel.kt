@@ -36,13 +36,9 @@ import app.morphe.manager.domain.repository.StoredSelectionSet
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.*
 import app.morphe.patcher.apk.ApkSigner
-import com.github.pgreze.process.Redirect
-import com.github.pgreze.process.process
 import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -668,15 +664,12 @@ class ImportExportViewModel(
 
         writer.write("\n=== Logcat ===\n\n")
 
-        val consumer = Redirect.Consume { flow ->
-            flow
-                .onEach { line -> writer.write("$line\n") }
-                .flowOn(Dispatchers.IO)
-                .collect { }
-        }
-
         // Filter logs by current process UID to include only Morphe Manager logs
-        process("logcat", "-d", "--uid=${app.applicationInfo.uid}", stdout = consumer).resultCode
+        val logcat = ProcessBuilder("logcat", "-d", "--uid=${app.applicationInfo.uid}")
+            .redirectErrorStream(true)
+            .start()
+        logcat.inputStream.bufferedReader().useLines { lines -> lines.forEach { writer.write("$it\n") } }
+        logcat.waitFor()
     }
 
     fun exportDebugLogs(target: Uri) = viewModelScope.launch {

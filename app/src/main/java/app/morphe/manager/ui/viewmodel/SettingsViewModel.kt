@@ -32,11 +32,10 @@ import app.morphe.manager.ui.screen.shared.CopySelectionCandidate
 import app.morphe.manager.util.ApkDownloadHelperContract
 import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.AppDataSource
+import app.morphe.manager.util.hasGooglePlayServices
 import app.morphe.manager.util.syncFcmTopics
 import app.morphe.manager.worker.UpdateCheckInterval
 import app.morphe.manager.worker.UpdateCheckWorker
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.GoogleApiAvailability
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
@@ -88,8 +87,7 @@ class SettingsViewModel(
     val jvmRuntimeAvailable = jvmInstallation.isAvailable
 
     /** True when Google Play Services is available; FCM handles notifications on these devices. */
-    val hasGms: Boolean = GoogleApiAvailability.getInstance()
-        .isGooglePlayServicesAvailable(appContext) == ConnectionResult.SUCCESS
+    val hasGms: Boolean = appContext.hasGooglePlayServices()
 
     /** True when POST_NOTIFICATIONS is granted (always true below Android 13). */
     fun hasNotificationPermission(): Boolean =

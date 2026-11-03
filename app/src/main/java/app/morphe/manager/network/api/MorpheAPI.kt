@@ -30,10 +30,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.withContext
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
-import kotlin.time.Instant
+import java.time.LocalDateTime
+import java.time.OffsetDateTime
+import java.time.ZoneOffset
 
 private const val GITHUB_DOWNLOAD_PREFIX = "https://github.com/"
 
@@ -93,6 +92,24 @@ internal fun parseReleaseAssetUrl(downloadUrl: String): ReleaseAssetRef? {
         tag = parts[4],
         fileName = fileName
     )
+}
+
+/**
+ * Parses ISO-8601 / GitHub timestamp strings into [LocalDateTime] (UTC).
+ *
+ * Handles:
+ *  - Full ISO-8601 with Z suffix: `2024-01-15T12:00:00Z`
+ *  - With offset: `2024-01-15T12:00:00+02:00`
+ *  - Without timezone (assumed UTC): `2024-01-15T12:00:00`
+ */
+internal fun parseTimestamp(timestamp: String): LocalDateTime {
+    val normalized = when {
+        timestamp.endsWith("Z", ignoreCase = true) -> timestamp
+        timestamp.contains("+") -> timestamp
+        timestamp.contains("T") && timestamp.lastIndexOf("-") > 10 -> timestamp
+        else -> "${timestamp}Z" // No timezone info, assume UTC
+    }
+    return OffsetDateTime.parse(normalized).atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime()
 }
 
 /**
@@ -371,24 +388,6 @@ class MorpheAPI(
             description = releaseInfo.description,
             version = version
         )
-    }
-
-    /**
-     * Parses ISO-8601 / GitHub timestamp strings into [LocalDateTime] (UTC).
-     *
-     * Handles:
-     *  - Full ISO-8601 with Z suffix: `2024-01-15T12:00:00Z`
-     *  - With offset: `2024-01-15T12:00:00+02:00`
-     *  - Without timezone (assumed UTC): `2024-01-15T12:00:00`
-     */
-    private fun parseTimestamp(timestamp: String): LocalDateTime {
-        val normalized = when {
-            timestamp.endsWith("Z", ignoreCase = true) -> timestamp
-            timestamp.contains("+") -> timestamp
-            timestamp.contains("T") && timestamp.lastIndexOf("-") > 10 -> timestamp
-            else -> "${timestamp}Z" // no timezone info — assume UTC
-        }
-        return Instant.parse(normalized).toLocalDateTime(TimeZone.UTC)
     }
 
     /** Returns true if [asset] looks like an Android APK by name or content-type. */

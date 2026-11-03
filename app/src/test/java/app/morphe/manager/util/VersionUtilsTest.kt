@@ -90,6 +90,17 @@ class VersionUtilsTest {
     }
 
     @Test
+    fun `patcher pre-releases are ordered by their counter and below the release`() {
+        assertTrue(isPatcherOutdated(required = "2.2.0-dev.7", current = "2.2.0-dev.6"))
+        assertTrue(isPatcherOutdated(required = "2.2.0-dev.10", current = "2.2.0-dev.9"))
+        assertTrue(isPatcherOutdated(required = "2.2.0", current = "2.2.0-dev.7"))
+        assertTrue(isPatcherOutdated(required = "v2.2.0", current = "2.1.9"))
+        assertFalse(isPatcherOutdated(required = "2.2.0-dev.7", current = "2.2.0"))
+        assertFalse(isPatcherOutdated(required = "2.2.0-dev.7", current = "2.2.0-dev.7"))
+        assertFalse(isPatcherOutdated(required = "2.1.0", current = "2.2.0-dev.1"))
+    }
+
+    @Test
     fun `an unparseable requirement never blocks patching`() {
         assertFalse(isPatcherOutdated(required = "not-a-version", current = "1.8.0"))
         assertFalse(isPatcherOutdated(required = "", current = "1.8.0"))

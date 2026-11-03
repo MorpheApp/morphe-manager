@@ -40,8 +40,6 @@ import app.morphe.manager.util.*
 import app.morphe.manager.worker.UpdateCheckWorker
 import coil.Coil
 import coil.ImageLoader
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.GoogleApiAvailability
 import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -178,8 +176,7 @@ class ManagerApplication : Application() {
 
             // On GMS devices FCM is the primary delivery channel - WorkManager is not needed.
             // Cancel any previously scheduled jobs on GMS devices
-            val hasGms = GoogleApiAvailability.getInstance()
-                .isGooglePlayServicesAvailable(this@ManagerApplication) == ConnectionResult.SUCCESS
+            val hasGms = hasGooglePlayServices()
 
             if (notificationsEnabled && !hasGms) {
                 UpdateCheckWorker.schedule(this@ManagerApplication, prefs.updateCheckInterval.get())
