@@ -62,11 +62,11 @@ import kotlin.math.abs
 
 // Timeline geometry: the rail runs through the middle of a slot at the leading edge, and each
 // node sits level with the first line of its release header
-private val RailSlotWidth = 18.dp
-private val RailContentGap = 14.dp
 private val RailStrokeWidth = 2.dp
 private val NodeRadius = 6.dp
 private val NodeHaloRadius = 10.dp
+private val RailSlotWidth = NodeHaloRadius * 2
+private val RailContentGap = 12.dp
 private val NodeCenterY = 16.dp
 private val ReleaseSpacing = 20.dp
 
