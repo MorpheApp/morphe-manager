@@ -21,7 +21,7 @@ import java.time.LocalDateTime
 import java.time.ZoneOffset
 
 @Serializable
-data class MorpheAsset (
+data class ReleaseAsset (
     @SerialName("download_url")
     val downloadUrl: String,
     /** When the release came out, in UTC. */

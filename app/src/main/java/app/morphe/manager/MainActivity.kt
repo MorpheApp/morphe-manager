@@ -45,6 +45,7 @@ import app.morphe.manager.domain.batch.BatchTarget
 import app.morphe.manager.domain.manager.HomeAppButtonPreferences
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.notification.UpdateNotifications
 import app.morphe.manager.ui.model.SourceScope
 import app.morphe.manager.ui.model.navigation.*
 import app.morphe.manager.ui.screen.BatchPatcherScreen
@@ -215,7 +216,7 @@ class MainActivity : ComponentActivity() {
 
         // Handled here rather than in onNewIntent so a cold start from a notification or a
         // launcher shortcut triggers the check as well
-        if (intent?.getBooleanExtra(UpdateNotificationManager.EXTRA_TRIGGER_UPDATE_CHECK, false) == true) {
+        if (intent?.getBooleanExtra(UpdateNotifications.EXTRA_TRIGGER_UPDATE_CHECK, false) == true) {
             vm.pendingUpdateCheck = true
             return
         }

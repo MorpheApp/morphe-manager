@@ -7,7 +7,7 @@ package app.morphe.manager.network.service
 
 import android.util.Log
 import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.network.api.MorpheAPI
+import app.morphe.manager.network.api.ReleaseAPI
 import app.morphe.manager.network.api.isRawGitHubUrl
 import app.morphe.manager.util.tag
 import io.ktor.client.request.header
@@ -32,7 +32,7 @@ import java.io.File
  */
 class AssetDownloader(
     private val http: HttpService,
-    private val api: MorpheAPI,
+    private val api: ReleaseAPI,
     private val prefs: PreferencesManager
 ) {
     /**

@@ -13,7 +13,7 @@ import app.morphe.manager.R
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.ManagerUpdateRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
-import app.morphe.manager.util.UpdateNotificationManager
+import app.morphe.manager.notification.UpdateNotifications
 import app.morphe.manager.util.normalizeVersion
 import app.morphe.manager.util.tag
 import kotlinx.coroutines.flow.first
@@ -63,7 +63,7 @@ class UpdateCheckWorker(
     private val prefs: PreferencesManager,
     private val managerUpdateRepository: ManagerUpdateRepository,
     private val patchBundleRepository: PatchBundleRepository,
-    private val notificationManager: UpdateNotificationManager
+    private val notificationManager: UpdateNotifications
 ) : CoroutineWorker(context, params) {
     override suspend fun doWork(): Result {
         // Skip if background update notifications are disabled by user

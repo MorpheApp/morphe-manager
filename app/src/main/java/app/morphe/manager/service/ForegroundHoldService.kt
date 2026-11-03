@@ -14,7 +14,7 @@ import android.os.Binder
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.ServiceCompat
-import app.morphe.manager.patcher.worker.PatcherNotification
+import app.morphe.manager.notification.PatchingNotifications
 import app.morphe.manager.util.tag
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -29,7 +29,8 @@ import java.util.concurrent.atomic.AtomicBoolean
  * stays in the foreground until the last one is released.
  *
  * It is bound rather than started, so letting go of it never races the system waiting for the
- * foreground. It shows the [PatcherNotification], which a worker takes over while it runs.
+ * foreground. It shows the ongoing notification of [PatchingNotifications], which a worker takes
+ * over while it runs.
  */
 class ForegroundHoldService : Service() {
     override fun onBind(intent: Intent): IBinder = LocalBinder()
@@ -45,9 +46,9 @@ class ForegroundHoldService : Service() {
         try {
             ServiceCompat.startForeground(
                 this,
-                PatcherNotification.ID,
-                PatcherNotification.build(this, title, text, live = false),
-                PatcherNotification.foregroundServiceType
+                PatchingNotifications.ONGOING_ID,
+                PatchingNotifications.ongoing(this, title, text, live = false),
+                PatchingNotifications.foregroundServiceType
             )
         } catch (e: RuntimeException) {
             // The work goes on without it, as it would have without the hold

@@ -8,7 +8,7 @@ package app.morphe.manager.domain.manager
 import android.os.Build
 import android.util.Log
 import app.morphe.manager.domain.bundles.PatchSourceHeaders
-import app.morphe.manager.network.api.MorpheAPI
+import app.morphe.manager.network.api.ReleaseAPI
 import app.morphe.manager.util.KnownApps
 import app.morphe.manager.util.MORPHE_API_URL
 import app.morphe.manager.util.tag
@@ -21,7 +21,7 @@ import kotlin.time.Duration.Companion.seconds
 /**
  * Works out where a specific version of an app can be downloaded from.
  */
-class DownloadUrlResolver(private val morpheAPI: MorpheAPI) {
+class DownloadUrlResolver(private val releaseAPI: ReleaseAPI) {
 
     /**
      * Resolves the download page for [packageName] at [version], falling back to a plain web
@@ -46,14 +46,14 @@ class DownloadUrlResolver(private val morpheAPI: MorpheAPI) {
         val searchUrl = apiSearchUrl(packageName, version)
         Log.d(tag, "Using search url: $searchUrl")
 
-        var resolved = morpheAPI.resolveRedirect(searchUrl, patchSources) ?: run {
+        var resolved = releaseAPI.resolveRedirect(searchUrl, patchSources) ?: run {
             Log.w(tag, "No redirect location for: $searchUrl")
             return webSearchUrl(packageName, version)
         }
 
         repeat(MAX_REDIRECTS) {
             // A URL that redirects nowhere is the end of the chain
-            val next = morpheAPI.resolveRedirect(resolved, patchSources) ?: return finalUrl(resolved, packageName, version)
+            val next = releaseAPI.resolveRedirect(resolved, patchSources) ?: return finalUrl(resolved, packageName, version)
             Log.i(tag, "Following redirect to: $next")
             resolved = next
         }

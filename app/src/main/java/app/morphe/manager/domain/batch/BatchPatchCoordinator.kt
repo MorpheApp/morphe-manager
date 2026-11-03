@@ -19,6 +19,7 @@ import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.worker.WorkerRepository
+import app.morphe.manager.notification.PatchingNotifications
 import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.PatcherWorker
@@ -31,7 +32,6 @@ import app.morphe.manager.util.Options
 import app.morphe.manager.util.PM
 import app.morphe.manager.util.PatchSelection
 import app.morphe.manager.util.PatchSelectionUtils.sanitizeForPatcher
-import app.morphe.manager.util.UpdateNotificationManager
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import kotlinx.serialization.json.Json
@@ -62,7 +62,6 @@ class BatchPatchCoordinator(
     private val installedAppRepository: InstalledAppRepository,
     private val originalApkRepository: OriginalApkRepository,
     private val sourceMuteRepository: SourceMuteRepository,
-    private val notificationManager: UpdateNotificationManager,
     private val installerManager: InstallerManager,
     private val sessionInstaller: SessionInstaller,
     private val json: Json,
@@ -535,18 +534,23 @@ class BatchPatchCoordinator(
         val state = _state.value ?: return
         if (!state.hasOutcome) return
 
+        // A queue stopped before its end closes quietly rather than sounding like a result
+        val playTone = prefs.patcherCompletionSound.get() && !state.wasStopped
+
         // The summary screen already says all of this when the user is watching it, the same
-        // rule a single run follows. The tone still plays, it is what draws them back
+        // rule a single run follows. The tone still plays, it is what draws them back, and
+        // stands in for the channel sound rather than playing beside it
         if (!ManagerApplication.isInForeground) {
-            notificationManager.showBatchCompletionNotification(
+            PatchingNotifications.showBatchResult(
+                context = app,
                 patched = state.succeeded,
                 failed = state.failed,
-                skipped = state.skipped
+                skipped = state.skipped,
+                silent = playTone
             )
         }
 
-        // A queue stopped before its end closes quietly rather than sounding like a result
-        if (prefs.patcherCompletionSound.get() && !state.wasStopped) {
+        if (playTone) {
             CompletionSound.play(
                 context = app,
                 succeeded = state.succeeded > 0,

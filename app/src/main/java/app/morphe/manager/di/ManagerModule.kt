@@ -20,6 +20,7 @@ import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.links.AppLinksManager
 import app.morphe.manager.domain.manager.*
+import app.morphe.manager.notification.UpdateNotifications
 import app.morphe.manager.patcher.runtime.PatcherProcesses
 import app.morphe.manager.patcher.runtime.jvm.JvmInstallation
 import app.morphe.manager.ui.screen.shared.ContentTranslation
@@ -27,7 +28,6 @@ import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.AppCoroutineScope
 import app.morphe.manager.util.ContentTranslator
 import app.morphe.manager.util.PM
-import app.morphe.manager.util.UpdateNotificationManager
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
@@ -40,7 +40,7 @@ val managerModule = module {
     singleOf(::InstallerManager)
     singleOf(::PatchOptionsPreferencesManager)
     singleOf(::AppIconManager)
-    singleOf(::UpdateNotificationManager)
+    singleOf(::UpdateNotifications)
     singleOf(::DownloadUrlResolver)
     singleOf(::AppVersionCatalog)
     singleOf(::LocalApkSources)

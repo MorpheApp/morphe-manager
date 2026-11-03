@@ -202,7 +202,7 @@
 
         <!-- Firebase Cloud Messaging - receives push notifications bypassing Doze mode -->
         <service
-            android:name="app.morphe.manager.service.MorpheFcmService"
+            android:name="app.morphe.manager.service.FcmService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

@@ -11,8 +11,8 @@
 package app.morphe.manager.domain.bundles
 
 import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.network.api.MorpheAPI
-import app.morphe.manager.network.dto.MorpheAsset
+import app.morphe.manager.network.api.ReleaseAPI
+import app.morphe.manager.network.dto.ReleaseAsset
 import app.morphe.manager.network.service.AssetDownloader
 import app.morphe.manager.network.service.HttpService
 import app.morphe.manager.network.utils.getOrThrow
@@ -44,7 +44,7 @@ typealias PatchBundleDownloadProgress = (bytesRead: Long, bytesTotal: Long?) -> 
 /** What a remote bundle reaches its source with, handed to it by whoever builds the bundle. */
 class RemoteBundleServices(
     val http: HttpService,
-    val api: MorpheAPI,
+    val api: ReleaseAPI,
     val assetDownloader: AssetDownloader,
     val prefs: PreferencesManager
 )
@@ -68,7 +68,7 @@ sealed class RemotePatchBundle(
 
     override val patchSourceEntry: String get() = patchSourceEntryForEndpoint(endpoint)
 
-    protected abstract suspend fun getLatestInfo(): MorpheAsset
+    protected abstract suspend fun getLatestInfo(): ReleaseAsset
     abstract override fun copy(
         error: Throwable?,
         name: String,
@@ -78,7 +78,7 @@ sealed class RemotePatchBundle(
         enabled: Boolean
     ): RemotePatchBundle
 
-    protected open suspend fun download(info: MorpheAsset, onProgress: PatchBundleDownloadProgress? = null) =
+    protected open suspend fun download(info: ReleaseAsset, onProgress: PatchBundleDownloadProgress? = null) =
         withContext(Dispatchers.IO) {
             installPatchBundle("Downloading patch bundle", publishedKey = info.publicKey) { staging ->
                 services.assetDownloader.downloadToFile(
@@ -98,7 +98,7 @@ sealed class RemotePatchBundle(
      * [getLatestInfo] with the manifest page URL remembered, so [browsePageUrl] can use it without
      * a network request of its own.
      */
-    private suspend fun latestInfo(): MorpheAsset = getLatestInfo().also { asset ->
+    private suspend fun latestInfo(): ReleaseAsset = getLatestInfo().also { asset ->
         asset.pageUrl?.let { pageUrls[uid] = it }
     }
 
@@ -125,7 +125,7 @@ sealed class RemotePatchBundle(
      * source trusted the same key as now, which would only download it to refuse it again.
      */
     private suspend fun downloadUnlessRefused(
-        info: MorpheAsset,
+        info: ReleaseAsset,
         onProgress: PatchBundleDownloadProgress?
     ): PatchBundleDownloadResult {
         val release = listOf(info.version, info.createdAt, readSigningKey().orEmpty()).joinToString("|")
@@ -142,7 +142,7 @@ sealed class RemotePatchBundle(
         }
     }
 
-    suspend fun fetchLatestReleaseInfo(): MorpheAsset {
+    suspend fun fetchLatestReleaseInfo(): ReleaseAsset {
         val key = "$uid|$endpoint"
         releaseInfoCache[key]?.let { return it }
 
@@ -249,7 +249,7 @@ sealed class RemotePatchBundle(
         private const val DEFAULT_BUNDLE_FILE = "patches-bundle.json"
 
         internal const val CHANGELOG_CACHE_TTL = 10 * 60 * 1000L
-        private val releaseInfoCache = TimedCache<String, MorpheAsset>(CHANGELOG_CACHE_TTL)
+        private val releaseInfoCache = TimedCache<String, ReleaseAsset>(CHANGELOG_CACHE_TTL)
         private val entriesCache = TimedCache<String, List<ChangelogEntry>>(CHANGELOG_CACHE_TTL)
 
         // Manifest page URLs by source uid, kept here because bundle instances are recreated on every reload
@@ -488,7 +488,7 @@ class JsonPatchBundle(
         }
     }
 
-    private suspend fun fetchManifest(url: String) = api.rawFileRequest<MorpheAsset>(url).getOrThrow()
+    private suspend fun fetchManifest(url: String) = api.rawFileRequest<ReleaseAsset>(url).getOrThrow()
 
     override suspend fun fetchChangelogEntries(): List<ChangelogEntry> {
         val changelogUrl = api.changelogUrlFromBundleEndpoint(activeEndpoint) ?: return emptyList()
@@ -648,7 +648,7 @@ class GitHubPullRequestBundle(
         api.getAssetFromPullRequest(owner, repo, prNumber)
     }
 
-    override suspend fun download(info: MorpheAsset, onProgress: PatchBundleDownloadProgress?) = withContext(Dispatchers.IO) {
+    override suspend fun download(info: ReleaseAsset, onProgress: PatchBundleDownloadProgress?) = withContext(Dispatchers.IO) {
         val gitHubPat = services.prefs.gitHubPat.get().also {
             if (it.isBlank()) throw RuntimeException("PAT is required")
         }

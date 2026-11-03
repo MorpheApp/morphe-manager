@@ -5,7 +5,7 @@
 
 package app.morphe.manager.network.api
 
-import app.morphe.manager.network.dto.MorpheAsset
+import app.morphe.manager.network.dto.ReleaseAsset
 import kotlinx.serialization.json.Json
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -25,7 +25,7 @@ class ReleaseTimestampTest {
 
     @Test
     fun `a manifest gives its release time without an offset`() {
-        val asset = Json.decodeFromString<MorpheAsset>(
+        val asset = Json.decodeFromString<ReleaseAsset>(
             """{"download_url":"https://example.com/patches.mpp","created_at":"2026-11-03T12:13:45","description":"","version":"v1.0.0"}"""
         )
 

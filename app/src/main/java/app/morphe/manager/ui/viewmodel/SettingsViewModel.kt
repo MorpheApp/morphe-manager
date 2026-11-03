@@ -25,7 +25,7 @@ import app.morphe.manager.domain.repository.SelectionSetRepository
 import app.morphe.manager.domain.repository.SelectionSetSummary
 import app.morphe.manager.domain.repository.SourceMuteRepository
 import app.morphe.manager.patcher.runtime.jvm.JvmInstallation
-import app.morphe.manager.network.api.MorpheAPI
+import app.morphe.manager.network.api.ReleaseAPI
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.screen.settings.system.CopyTarget
 import app.morphe.manager.ui.screen.shared.CopySelectionCandidate
@@ -77,7 +77,7 @@ class SettingsViewModel(
     private val optionsRepository: PatchOptionsRepository,
     private val patchBundleRepository: PatchBundleRepository,
     private val appDataResolver: AppDataResolver,
-    private val api: MorpheAPI,
+    private val api: ReleaseAPI,
     private val appContext: Context,
     jvmInstallation: JvmInstallation,
     /** State behind the copy panel, see [openCopy], and behind renaming and deleting sets. */

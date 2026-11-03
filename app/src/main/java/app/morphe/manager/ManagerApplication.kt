@@ -35,6 +35,9 @@ import app.morphe.manager.domain.repository.BlocklistRepository
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
+import app.morphe.manager.notification.NotificationChannels
+import app.morphe.manager.notification.PatchingNotifications
+import app.morphe.manager.notification.UpdateNotifications
 import app.morphe.manager.ui.screen.shared.AppIconPixels
 import app.morphe.manager.util.*
 import app.morphe.manager.worker.UpdateCheckWorker
@@ -99,7 +102,6 @@ class ManagerApplication : Application() {
     private val patchBundleRepository: PatchBundleRepository by inject()
     private val blocklistRepository: BlocklistRepository by inject()
     private val fs: Filesystem by inject()
-    private val updateNotificationManager: UpdateNotificationManager by inject()
     private val installedAppRepository: InstalledAppRepository by inject()
     private val appDataResolver: AppDataResolver by inject()
 
@@ -152,7 +154,7 @@ class ManagerApplication : Application() {
         )
 
         // Create notification channels before any notification can be posted (required on API 26+)
-        updateNotificationManager.createNotificationChannels()
+        NotificationChannels.create(this@ManagerApplication)
 
         observeLanguage()
         observeLauncherShortcuts()
@@ -227,7 +229,7 @@ class ManagerApplication : Application() {
             override fun onActivityStarted(activity: Activity) {}
             override fun onActivityResumed(activity: Activity) {
                 resumedActivityCount++
-                updateNotificationManager.cancelPatchingResultNotifications()
+                PatchingNotifications.cancelResults(this@ManagerApplication)
                 onReturnToForeground?.let {
                     onReturnToForeground = null
                     it()
@@ -281,7 +283,7 @@ class ManagerApplication : Application() {
         }
         scope.launch {
             stringLocales.filterNotNull().drop(1).collect {
-                updateNotificationManager.createNotificationChannels()
+                NotificationChannels.create(this@ManagerApplication)
             }
         }
     }
@@ -322,7 +324,7 @@ class ManagerApplication : Application() {
                 icon = IconCompat.createWithResource(this, R.drawable.ic_shortcut_updates),
                 rank = 1,
                 intent = shortcutIntent(MainActivity.ACTION_CHECK_UPDATES).apply {
-                    putExtra(UpdateNotificationManager.EXTRA_TRIGGER_UPDATE_CHECK, true)
+                    putExtra(UpdateNotifications.EXTRA_TRIGGER_UPDATE_CHECK, true)
                 }
             )
         )

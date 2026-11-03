@@ -10,10 +10,8 @@
 
 package app.morphe.manager.patcher.worker
 
-import android.app.Notification
 import android.app.NotificationManager
 import android.content.Context
-import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.PowerManager
 import android.util.Log
@@ -34,6 +32,7 @@ import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.worker.Worker
 import app.morphe.manager.domain.worker.WorkerRepository
+import app.morphe.manager.notification.PatchingNotifications
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.patch.ApkArchitectureResolver
 import app.morphe.manager.patcher.patch.PatchSourceRef
@@ -114,14 +113,14 @@ class PatcherWorker(
     private val notificationManager = applicationContext.getSystemService(NotificationManager::class.java)
 
     override suspend fun getForegroundInfo() =
-        ForegroundInfo(PatcherNotification.ID, createNotification(), PatcherNotification.foregroundServiceType)
+        ForegroundInfo(PatchingNotifications.ONGOING_ID, createNotification(), PatchingNotifications.foregroundServiceType)
 
     private fun createNotification(
         stepName: String? = null,
         patchProgress: Pair<Int, Int>? = null, // Completed to total patches
         contentText: String? = null,
         live: Boolean = true,
-    ) = PatcherNotification.build(
+    ) = PatchingNotifications.ongoing(
         applicationContext,
         title = stepName ?: applicationContext.getString(R.string.patcher_notification_title),
         text = contentText ?: queueLabel ?: applicationContext.getText(R.string.patcher_notification_text),
@@ -137,7 +136,7 @@ class PatcherWorker(
         // Android won't visually switch from indeterminate → determinate on the same notification
         // ID unless we first post a brief non-indeterminate update. Post the real notification
         // directly - the determinate bar replaces the spinning one cleanly this way
-        notificationManager.notify(PatcherNotification.ID, createNotification(stepName, patchProgress, contentText))
+        notificationManager.notify(PatchingNotifications.ONGOING_ID, createNotification(stepName, patchProgress, contentText))
     }
 
     private fun showCompletionNotification(
@@ -158,28 +157,8 @@ class PatcherWorker(
         if (succeeded && autoInstallPending) return
         // Don't notify when the app is in the foreground - user sees the result on screen
         if (ManagerApplication.isInForeground) return
-        val notification = Notification.Builder(applicationContext, UpdateNotificationManager.CHANNEL_PATCHER)
-            .setContentTitle(
-                applicationContext.getString(
-                    if (succeeded) R.string.patcher_complete_title else R.string.patcher_failed_title
-                )
-            )
-            .setContentText(applicationContext.getText(R.string.patcher_notification_text))
-            .setSmallIcon(
-                Icon.createWithResource(
-                    applicationContext,
-                    if (succeeded) R.drawable.ic_notification_done else R.drawable.ic_notification_failed
-                )
-            )
-            .setColor(
-                applicationContext.getColor(
-                    if (succeeded) R.color.notification_success else R.color.notification_failure
-                )
-            )
-            .setContentIntent(PatcherNotification.contentIntent(applicationContext))
-            .setAutoCancel(true)
-            .build()
-        notificationManager.notify(COMPLETION_NOTIFICATION_ID, notification)
+        // The tone already announces it, the channel sound on top would be a second one
+        PatchingNotifications.showPatchResult(applicationContext, succeeded, silent = playSound)
     }
 
     override suspend fun doWork(): Result {
@@ -224,7 +203,7 @@ class PatcherWorker(
             wakeLock.release()
             // Patching is over, so its Live Update ends here instead of being left to the foreground
             // to take down, and a run denied a foreground leaves nothing it posted directly behind
-            PatcherNotification.end(applicationContext, createNotification(live = false))
+            PatchingNotifications.endOngoing(applicationContext, createNotification(live = false))
         }
 
         // A mount can still restore the stock app from it, the install flow deletes it after mounting
@@ -523,8 +502,6 @@ class PatcherWorker(
     companion object {
         private const val LOG_PREFIX = "[Worker]"
         private fun String.logFmt() = "$LOG_PREFIX $this"
-
-        const val COMPLETION_NOTIFICATION_ID = 2
 
         /** Kept as the patcher screen's entry point now that the tone itself is shared. */
         fun stopCompletionSound() = CompletionSound.stop()
