@@ -50,12 +50,17 @@ fun PageHeader(
     HeaderBar(
         title = {
             Column {
+                // One line, as a dialog's title is, so every page's header stands as tall beside
+                // its controls. A title too long for it scrolls through and settles at its start
                 Text(
                     text = title,
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.semantics { heading() }
+                    maxLines = 1,
+                    modifier = Modifier
+                        .semantics { heading() }
+                        .marquee()
                 )
                 if (subtitle != null) PageSubtitle(subtitle)
             }
@@ -78,13 +83,18 @@ fun PageHeader(
     )
 }
 
-/** Line under a page's title, such as what the page holds or what a mode under way asks for. */
+/**
+ * Line under a page's title, such as what the page holds or what a mode under way asks for. Kept
+ * to one line as the title is, scrolling through a phrase too long for it.
+ */
 @Composable
 fun PageSubtitle(text: String) {
     Text(
         text = text,
         style = MaterialTheme.typography.bodyMedium,
-        color = MaterialTheme.colorScheme.onSurfaceVariant
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        maxLines = 1,
+        modifier = Modifier.marquee()
     )
 }
 
