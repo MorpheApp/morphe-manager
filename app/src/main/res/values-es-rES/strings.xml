@@ -1122,7 +1122,6 @@ Detalles: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Necesitarás introducir las credenciales del almacén de claves para importarlo</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Nombre de usuario (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Contraseña</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Formato de almacén de claves</string>
     <string name="settings_system_import_keystore_wrong_credentials">Credenciales de almacén de claves incorrectas</string>
     <string name="settings_system_import_keystore_success">Almacén de claves importado</string>
     <string name="settings_system_import_keystore_failed">Error al importar el almacén de claves</string>

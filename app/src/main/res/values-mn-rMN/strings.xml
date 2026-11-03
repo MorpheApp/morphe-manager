@@ -64,6 +64,7 @@
     <string name="list_options_state_description">%1$s-ээр эрэмбэлэв, %2$s-ээр шүүв</string>
     <string name="home_app_filter_clones">Хуулбарууд</string>
     <string name="home_app_grouping_none">Байхгүй</string>
+    <string name="home_app_sort_manual_hint">Аппликейшн дээр удаан дарж, дараа нь дарааллыг өөрчлөх товчийг дарна уу</string>
     <string name="home_app_sort_recommended">Зөвлөсөн дараалал</string>
     <string name="home_app_sort_updates_first">Засваруудыг эхлээд харуулах</string>
     <string name="home_app_sort_recently_patched">Сүүлд патлагдсан</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">%s-тэй тохирох зүйл олдоогүй</string>
     <string name="home_category_add">Ангилал нэмэх</string>
     <string name="home_category_all_apps">Бүх аппликейшн</string>
+    <string name="home_app_grouping_categories">Ангилал</string>
     <string name="home_category_uncategorized">Ангилаагүй</string>
     <string name="home_category_new_title">Шинэ ангилал</string>
     <string name="home_category_rename_title">Ангиллын нэрийг өөрчлөх</string>
@@ -288,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe эдгээр вэбсайтуудын найдвартай байдлыг баталгаажуулж чадахгүй. APK файлын оронд өөрсдийн апп дэлгүүрээ санал болгож буй сайтуудыг алгасаарай</string>
     <string name="home_download_instructions_step3_search">Тэрхүү вэбсайтээс хамгийн сүүлийн хувилбарыг биш, харин &lt;b&gt;%s&lt;/b&gt; хувилбарын APK-г татаж авна уу</string>
     <string name="home_download_instructions_step3_search_any">Тэрхүү вэбсайтээс аппликейшны APK-г татаж авна уу. &lt;b&gt;Аль ч хувилбарыг&lt;/b&gt; патчлах боломжтой</string>
+    <string name="home_download_instructions_step2_github">&lt;b&gt;%s&lt;/b&gt; хувилбарын &lt;b&gt;Assets&lt;/b&gt; хэсгээс &lt;b&gt;.apk&lt;/b&gt; өргөтгөлтэй файлыг дарна уу</string>
+    <string name="home_download_instructions_step2_github_latest">Хамгийн сүүлийн хувилбарын &lt;b&gt;Assets&lt;/b&gt; хэсгээс &lt;b&gt;.apk&lt;/b&gt; өргөтгөлтэй файлыг дарна уу</string>
+    <string name="home_download_instructions_step2_github_note">Хэрэв хэд хэдэн APK файл байгаа бол %s нэртэй эсвэл универсал файлыг сонгоно уу</string>
     <string name="home_download_instructions_download_button_toast">Энд бус, вэбсайт дээрх татаж авах товчийг дарна уу 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Сайхан байна! Одоо \"үргэлжлүүлэх\" дээр дарж вебсайт руу орно уу 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Дадлага бол төгсբайдлын түлхүүр, та амжилтадээ дөхөж байна 💪</string>
@@ -495,6 +500,9 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="batch_queue_pending_subtitle">Шалгаж, эхлүүлэхийн тулд товшоорой</string>
     <string name="batch_queue_clear_title">Дарааллыг цэвэрлэх үү?</string>
     <string name="batch_queue_clear_description">Бүх апп-уудыг дарааллаас хасах болно</string>
+    <string name="batch_queue_keep_title">Дарааллыг хадгалах уу?</string>
+    <string name="batch_queue_keep_description">Дарааллын аппликейшнүүд дараа нь эхлүүлэхийг хүлээж нүүр хуудсан дээр байх болно</string>
+    <string name="batch_queue_keep">Хадгалах</string>
     <string name="shortcut_repatch_short">Дахин патлах</string>
     <string name="shortcut_repatch_long">Хуучирсан апп-уудыг дахин патлах</string>
     <string name="shortcut_check_updates_short">Шинэчлэлийг шалгах</string>
@@ -1114,7 +1122,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">Үүнийг импортлохын тулд keystore-ийн эрх бүхий мэдээллийг оруулах шаардлагатай</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Хэрэглэгчийн нэр (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Нууц үг</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Keystore формат</string>
     <string name="settings_system_import_keystore_wrong_credentials">Keystore-ийн нэвтрэх мэдээлэл буруу байна</string>
     <string name="settings_system_import_keystore_success">Keystore-ийг импортлолоо</string>
     <string name="settings_system_import_keystore_failed">Keystore импортлоход алдаа гарлаа</string>

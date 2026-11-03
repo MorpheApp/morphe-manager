@@ -64,6 +64,7 @@
     <string name="list_options_state_description">Diisih mengikut %1$s, ditapis mengikut %2$s</string>
     <string name="home_app_filter_clones">Klon</string>
     <string name="home_app_grouping_none">Tiada</string>
+    <string name="home_app_sort_manual_hint">Tekan lama pada aplikasi, kemudian ketik butang susun semula</string>
     <string name="home_app_sort_recommended">Susunan disyorkan</string>
     <string name="home_app_sort_updates_first">Kemas kini tampalan dahulu</string>
     <string name="home_app_sort_recently_patched">Baru-baru ditampal</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Tiada yang sepadan dengan %s</string>
     <string name="home_category_add">Tambah kategori</string>
     <string name="home_category_all_apps">Semua aplikasi</string>
+    <string name="home_app_grouping_categories">Kategori</string>
     <string name="home_category_uncategorized">Tanpa kategori</string>
     <string name="home_category_new_title">Kategori baharu</string>
     <string name="home_category_rename_title">Namakan semula kategori</string>
@@ -176,6 +178,7 @@
     <string name="sources_management_prerelease_toggle_description">Menerima capaian awal kepada versi tampalan uji kaji baru</string>
     <string name="sources_prerelease_warning_title">Aktifkan tampalan prakeluaran?</string>
     <string name="sources_prerelease_warning_message">Binaan prakeluaran masih dalam pembangunan. Tampalan mungkin gagal atau merosakkan aplikasi, dan ciri boleh berubah tanpa amaran</string>
+    <string name="expert_mode_unstable_notice">Tampalan pra-risi atau eksperimen mungkin tidak stabil</string>
     <string name="sources_management_experimental_versions_toggle">Versi aplikasi uji kaji</string>
     <string name="sources_management_experimental_versions_toggle_description">Menunjukkan dan menampal sasaran aplikasi eksperimen</string>
     <!-- Actions of the panel for several selected sources at once -->
@@ -190,6 +193,7 @@
     <string name="sources_management_metadata_unavailable">Metadata tidak tersedia</string>
     <string name="sources_management_metadata_unavailable_hint">Fail metadata jauh tidak tersedia. Menampal dengan berkas terpasang masih berfungsi, tetapi kemas kini automatik dilumpuhkan untuk sumber ini</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Berkas tampalan tidak dapat dimuat turun. URL sumber mungkin salah atau fail itu tidak ada</string>
+    <string name="sources_management_metadata_unavailable_hint_missing_editable">Berkas tampalan tidak dapat dimuat turun. URL sumber mungkin salah atau fail itu tidak ada. Ketik untuk mengubahnya</string>
     <string name="sources_management_outdated_manager_badge">Kemas kini Morphe</string>
     <string name="sources_management_outdated_manager_hint">Sumber ini dibina untuk patcher %1$s, tetapi Morphe %2$s termasuk patcher %3$s. Kemas kini Morphe untuk menggunakannya</string>
     <string name="sources_management_held_back_badge">Ranap</string>
@@ -203,6 +207,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nama paparan</string>
     <string name="sources_dialog_rename">Namakan semula sumber tampalan</string>
+    <string name="sources_dialog_change_url">Ubah lokasi muat turun sumber tampalan</string>
     <string name="sources_dialog_duplicate_name_error">Sumber tampalan dengan nama ini sudah ada</string>
     <string name="sources_dialog_missing_error">Sumber tampalan ini tidak dapat dikemas kini</string>
     <string name="sources_dialog_add_source">Tambah sumber tampalan</string>
@@ -285,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe tidak boleh menjamin laman web ini. Langkau laman yang menawarkan kedai aplikasi sendiri dan bukannya fail APK</string>
     <string name="home_download_instructions_step3_search">Pada laman web itu, muat turun APK versi &lt;b&gt;%s&lt;/b&gt;, bukan yang terbaharu</string>
     <string name="home_download_instructions_step3_search_any">Pada laman web itu, muat turun APK aplikasi. &lt;b&gt;Mana-mana versi&lt;/b&gt; boleh ditampal</string>
+    <string name="home_download_instructions_step2_github">Di bawah &lt;b&gt;Assets&lt;/b&gt; bagi versi &lt;b&gt;%s&lt;/b&gt;, tekan fail yang berakhir dengan &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">Di bawah &lt;b&gt;Assets&lt;/b&gt; bagi versi terbaru, tekan fail yang berakhir dengan &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Jika terdapat beberapa fail APK, pilih yang dinamakan mengikut %s atau yang universal</string>
     <string name="home_download_instructions_download_button_toast">Tekan muat turun pada tapak sesawang, bukannya di sini 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Bagus! Sekarang klik teruskan dan pergi ke tapak sesawang 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Alah bisa tegal biasa dan anda semakin hampir 💪</string>
@@ -329,8 +337,10 @@ Pilih dari mana untuk mengambil APK tersebut"</string>
     <string name="expert_mode_enable_all_universal_pending">Ketuk sekali lagi untuk tampalan universal</string>
     <string name="expert_mode_universal_all_warning_title">Aktifkan semua tampalan universal?</string>
     <string name="expert_mode_universal_all_warning_message">Tampalan universal tidak diuji bersama. Mengaktifkan kesemuanya sekaligus boleh menyebabkan konflik, kegagalan tampalan atau ranap</string>
+    <string name="expert_mode_recommended">Tampalan yang disyorkan</string>
     <string name="expert_mode_reset_to_default_done">Tampalan disyorkan digunakan</string>
     <string name="expert_mode_selected_count">%1$s daripada %2$s dipilih</string>
+    <string name="expert_mode_saved_selection">Pemilihan yang disimpan</string>
     <string name="expert_mode_restore_saved_done">Pemilihan yang disimpan telah dipulihkan</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Tiada tampalan sepadan dalam bundle ini</string>
     <string name="expert_mode_no_results">Tiada tampalan tersedia</string>
@@ -491,6 +501,9 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="batch_queue_pending_subtitle">Ketik untuk menyemak dan mula</string>
     <string name="batch_queue_clear_title">Kosongkan giliran?</string>
     <string name="batch_queue_clear_description">Semua aplikasi akan dialih keluar daripada giliran</string>
+    <string name="batch_queue_keep_title">Kekalkan baris gilir?</string>
+    <string name="batch_queue_keep_description">Aplikasi yang dalam baris gilir akan menunggu di skrin utama untuk dimulakan kemudian</string>
+    <string name="batch_queue_keep">Kekalkan</string>
     <string name="shortcut_repatch_short">Tampal semula</string>
     <string name="shortcut_repatch_long">Tampal semula aplikasi lapuk</string>
     <string name="shortcut_check_updates_short">Semak kemas kini</string>
@@ -1110,7 +1123,6 @@ Butiran: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Anda perlu masukkan kelayakan kad pengaman untuk mengimportnya</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Nama pengguna (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Kata laluan</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Format stor kunci</string>
     <string name="settings_system_import_keystore_wrong_credentials">Kelayakan kunci simpanan tidak betul</string>
     <string name="settings_system_import_keystore_success">Kunci simpanan diimport</string>
     <string name="settings_system_import_keystore_failed">Gagal mengimport kunci simpanan</string>

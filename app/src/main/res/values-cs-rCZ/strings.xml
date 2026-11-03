@@ -64,6 +64,7 @@
     <string name="list_options_state_description">Seřazeno podle %1$s, filtrováno podle %2$s</string>
     <string name="home_app_filter_clones">Klonované aplikace nainstalované vedle původní aplikace pod jiným názvem balíčku</string>
     <string name="home_app_grouping_none">Žádné</string>
+    <string name="home_app_sort_manual_hint">Dlouhým stisknutím aplikace zvolte tlačítko pro změnu pořadí</string>
     <string name="home_app_sort_recommended">Doporučené pořadí</string>
     <string name="home_app_sort_updates_first">Nejprve aktualizace v záplatách</string>
     <string name="home_app_sort_recently_patched">Nedávno záplatované</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Nic neodpovídá %s</string>
     <string name="home_category_add">Přidat kategorii</string>
     <string name="home_category_all_apps">Všechny aplikace</string>
+    <string name="home_app_grouping_categories">Kategorie</string>
     <string name="home_category_uncategorized">Nekategorizované</string>
     <string name="home_category_new_title">Nová kategorie</string>
     <string name="home_category_rename_title">Přejmenovat kategorii</string>
@@ -288,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe nemůže ručit za tyto webové stránky. Přeskočte ty, které nabízejí vlastní obchod s aplikacemi namísto souboru APK.</string>
     <string name="home_download_instructions_step3_search">Na tomto webu stáhněte APK pro verzi &lt;b&gt;%s&lt;/b&gt;, ne pro tu nejnovější.</string>
     <string name="home_download_instructions_step3_search_any">Na tomto webu stáhněte APK dané aplikace. &lt;b&gt;Jakoukoli verzi&lt;/b&gt; lze opatchovat.</string>
+    <string name="home_download_instructions_step2_github">V sekci &lt;b&gt;Assets&lt;/b&gt; verze &lt;b&gt;%s&lt;/b&gt; stiskněte soubor končící příponou &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">V sekci &lt;b&gt;Assets&lt;/b&gt; nejnovější verze stiskněte soubor končící příponou &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Pokud je k dispozici více souborů APK, vyberte ten s názvem %s nebo univerzální</string>
     <string name="home_download_instructions_download_button_toast">Na webové stránce stiskněte tlačítko stažení, ne zde 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Skvělé! Nyní klikněte na Pokračovat a přejděte na webovou stránku 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Praxe dělá mistra a ty se zlepšuješ 💪</string>
@@ -495,6 +500,9 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
     <string name="batch_queue_pending_subtitle">Klepnutím pro kontrolu a spuštění</string>
     <string name="batch_queue_clear_title">Vymazat frontu?</string>
     <string name="batch_queue_clear_description">Aplikace budou odstraněny z fronty</string>
+    <string name="batch_queue_keep_title">Ponechat frontu?</string>
+    <string name="batch_queue_keep_description">Aplikace ve frontě budou na domovské obrazovce čekat na pozdější spuštění</string>
+    <string name="batch_queue_keep">Ponechat</string>
     <string name="shortcut_repatch_short">Znovu záplatovat</string>
     <string name="shortcut_repatch_long">Znovu záplatovat zastaralé aplikace</string>
     <string name="shortcut_check_updates_short">Zkontrolovat aktualizace</string>
@@ -1114,7 +1122,6 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Pro import klíčenky budete muset zadat přihlašovací údaje ke klíčence</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Uživatelské jméno (alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Heslo</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Formát úložiště klíčů</string>
     <string name="settings_system_import_keystore_wrong_credentials">Neplatné přihlašovací údaje klíčového dílu</string>
     <string name="settings_system_import_keystore_success">Úložiště klíčů importováno</string>
     <string name="settings_system_import_keystore_failed">Selhalo importování klíčového dílu</string>

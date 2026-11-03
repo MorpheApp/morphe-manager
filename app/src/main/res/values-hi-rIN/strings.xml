@@ -64,6 +64,7 @@
     <string name="list_options_state_description">%1$s के अनुसार क्रमबद्ध, %2$s के अनुसार फ़िल्टर किया गया</string>
     <string name="home_app_filter_clones">क्लोन</string>
     <string name="home_app_grouping_none">कोई नहीं</string>
+    <string name="home_app_sort_manual_hint">किसी ऐप को देर तक दबाकर रखें, फिर रीऑर्डर बटन पर टैप करें</string>
     <string name="home_app_sort_recommended">अनुशंसित क्रम</string>
     <string name="home_app_sort_updates_first">पैच अपडेट पहले</string>
     <string name="home_app_sort_recently_patched">हाल ही में पैच किया गया</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">कुछ भी %s से मेल नहीं खाया</string>
     <string name="home_category_add">श्रेणी जोड़ें</string>
     <string name="home_category_all_apps">सभी ऐप्स</string>
+    <string name="home_app_grouping_categories">श्रेणियाँ</string>
     <string name="home_category_uncategorized">वर्गीकृत नहीं</string>
     <string name="home_category_new_title">नई श्रेणी</string>
     <string name="home_category_rename_title">श्रेणी का नाम बदलें</string>
@@ -288,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe इन वेबसाइटों की गारंटी नहीं दे सकता। जो वेबसाइटें APK फ़ाइल के बजाय अपना खुद का ऐप स्टोर पेश करती हैं, उन्हें छोड़ दें</string>
     <string name="home_download_instructions_step3_search">उस वेबसाइट पर, संस्करण &lt;b&gt;%s&lt;/b&gt; का APK डाउनलोड करें, न कि नवीनतम संस्करण</string>
     <string name="home_download_instructions_step3_search_any">उस वेबसाइट पर, ऐप का APK डाउनलोड करें। &lt;b&gt;कोई भी संस्करण&lt;/b&gt; पैच किया जा सकता है</string>
+    <string name="home_download_instructions_step2_github">रिलीज़ &lt;b&gt;%s&lt;/b&gt; के &lt;b&gt;Assets&lt;/b&gt; के तहत, &lt;b&gt;.apk&lt;/b&gt; पर समाप्त होने वाली फ़ाइल को दबाएं</string>
+    <string name="home_download_instructions_step2_github_latest">नवीनतम रिलीज़ के &lt;b&gt;Assets&lt;/b&gt; के तहत, &lt;b&gt;.apk&lt;/b&gt; पर समाप्त होने वाली फ़ाइल को दबाएं</string>
+    <string name="home_download_instructions_step2_github_note">यदि कई APK फ़ाइलें हैं, तो %s के नाम वाली या यूनिवर्सल वाली फ़ाइल चुनें</string>
     <string name="home_download_instructions_download_button_toast">वेबसाइट पर डाउनलोड बटन पर क्लिक करें, यहां नहीं 😊</string>
     <string name="home_download_instructions_download_button_toast_2">बहुत बढ़िया! अब जारी रखें पर क्लिक करें और वेबसाइट पर जाएं 👆</string>
     <string name="home_download_instructions_download_button_toast_3">अभ्यास परिपूर्ण बनाता है और आप वहां पहुंच रहे हैं 💪</string>
@@ -495,6 +500,9 @@
     <string name="batch_queue_pending_subtitle">समीक्षा करने के लिए टैप करें और शुरू करें</string>
     <string name="batch_queue_clear_title">कतार साफ़ करें?</string>
     <string name="batch_queue_clear_description">सभी ऐप्स कतार से हटा दिए जाएंगे</string>
+    <string name="batch_queue_keep_title">क्यू को रखें?</string>
+    <string name="batch_queue_keep_description">क्यू किए गए ऐप्स बाद में शुरू होने के लिए होम स्क्रीन पर प्रतीक्षा करेंगे</string>
+    <string name="batch_queue_keep">रखें</string>
     <string name="shortcut_repatch_short">पुन: पैच करें</string>
     <string name="shortcut_repatch_long">आउटडेटेड ऐप्स को पुन: पैच करें</string>
     <string name="shortcut_check_updates_short">अपडेट जांचें</string>
@@ -1114,7 +1122,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">केस्टोर के क्रेडेंशियल्स के लिए प्रवेश करना होगा इसे आयात करने के लिए।</string>
     <string name="settings_system_import_keystore_dialog_alias_field">यूज़रनेम (एलियास)</string>
     <string name="settings_system_import_keystore_dialog_password_field">पासवर्ड</string>
-    <string name="settings_system_import_keystore_dialog_format_field">कीस्टोर प्रारूप</string>
     <string name="settings_system_import_keystore_wrong_credentials">गलत कीस्टोर क्रेडेंशियल</string>
     <string name="settings_system_import_keystore_success">कीस्टोर आयम किया गया</string>
     <string name="settings_system_import_keystore_failed">कीस्टोर आयम करने में विफल</string>

@@ -64,6 +64,7 @@
     <string name="list_options_state_description">%1$s бойынша сұрыпталды, %2$s бойынша сүзілді</string>
     <string name="home_app_filter_clones">Клондар</string>
     <string name="home_app_grouping_none">Жоқ</string>
+    <string name="home_app_sort_manual_hint">Қосымшаны ұзақ басып, содан кейін қайта реттеу түймесін басыңыз</string>
     <string name="home_app_sort_recommended">Ұсынылған реті</string>
     <string name="home_app_sort_updates_first">Патч жаңартулары бірінші</string>
     <string name="home_app_sort_recently_patched">Жақында патчтелген</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">%s сәйкестігі бойынша ештеңе табылмады</string>
     <string name="home_category_add">Санатты қосу</string>
     <string name="home_category_all_apps">Барлық қолданбалар</string>
+    <string name="home_app_grouping_categories">Санаттар</string>
     <string name="home_category_uncategorized">Санатталмаған</string>
     <string name="home_category_new_title">Жаңа санат</string>
     <string name="home_category_rename_title">Санатты қайта атау</string>
@@ -288,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe бұл веб-сайттарға кепілдік бере алмайды. APK файлының орнына өз қолданбалар дүкенін ұсынатын сайттарды өткізіп жіберіңіз</string>
     <string name="home_download_instructions_step3_search">Сол веб-сайттан ең жаңасын емес, &lt;b&gt;%s&lt;/b&gt; нұсқасының APK файлын жүктеңіз</string>
     <string name="home_download_instructions_step3_search_any">Сол веб-сайттан қолданбаның APK файлын жүктеңіз. &lt;b&gt;Кез келген нұсқаны&lt;/b&gt; патчтеуге болады</string>
+    <string name="home_download_instructions_step2_github">%s шығарылымының &lt;b&gt;Assets&lt;/b&gt; бөлімінде &lt;b&gt;.apk&lt;/b&gt; деп бітетін файлды басыңыз</string>
+    <string name="home_download_instructions_step2_github_latest">Ең соңғы шығарылымның &lt;b&gt;Assets&lt;/b&gt; бөлімінде &lt;b&gt;.apk&lt;/b&gt; деп бітетін файлды басыңыз</string>
+    <string name="home_download_instructions_step2_github_note">Егер бірнеше APK файлдары болса, %s деп аталатынды немесе универсалдысын таңдаңыз</string>
     <string name="home_download_instructions_download_button_toast">Жүктеуді осында емес, веб-сайтта басыңыз 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Керемет! Енді жалғастыру батырмасын басып, веб-сайтқа өтіңіз 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Жаттығу жетістікке жеткізеді, сіз дұрыс жолдасыз 💪</string>
@@ -495,6 +500,9 @@
     <string name="batch_queue_pending_subtitle">Қарап шығу және бастау үшін түктіңіз</string>
     <string name="batch_queue_clear_title">Кезекті тазалау керек пе?</string>
     <string name="batch_queue_clear_description">Барлық қосымшалар кезектен жойылады</string>
+    <string name="batch_queue_keep_title">Кезекті сақтау керек пе?</string>
+    <string name="batch_queue_keep_description">Кезектегі қосымшалар кейінірек іске қосылу үшін басты экранда күтеді</string>
+    <string name="batch_queue_keep">Сақтау</string>
     <string name="shortcut_repatch_short">Қайта патчтау</string>
     <string name="shortcut_repatch_long">Ескірген қолданбаларды қайта патчтеу</string>
     <string name="shortcut_check_updates_short">Жаңартуларды тексеру</string>
@@ -1114,7 +1122,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">Оны импорттау үшін keystore деректемелерін енгізуіңіз керек</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Пайдаланушы есімі (Алиас)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Құпия сөз</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Кілт қоймасының форматы</string>
     <string name="settings_system_import_keystore_wrong_credentials">Кілт қоймасының деректемелері қате</string>
     <string name="settings_system_import_keystore_success">Кілт қоймасы импортталды</string>
     <string name="settings_system_import_keystore_failed">Кілт қоймасын импорттау сәтсіз аяқталды</string>

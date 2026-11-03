@@ -64,6 +64,7 @@
     <string name="list_options_state_description">%1$s नुसार क्रमवारीबद्ध, %2$s नुसार फिल्टर केलेले</string>
     <string name="home_app_filter_clones">क्लोन्स</string>
     <string name="home_app_grouping_none">काहीही नाही</string>
+    <string name="home_app_sort_manual_hint">एका ॲपला दाबून धरा, त्यानंतर पुनर्रचना बटणावर टॅप करा</string>
     <string name="home_app_sort_recommended">सुचवलेला क्रम</string>
     <string name="home_app_sort_updates_first">पॅच अपडेट्स प्रथम</string>
     <string name="home_app_sort_recently_patched">नुकतेच पॅच केलेले</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">%s शी काहीही जुळले नाही</string>
     <string name="home_category_add">श्रेणी जोडा</string>
     <string name="home_category_all_apps">सर्व ॲप्स</string>
+    <string name="home_app_grouping_categories">वर्गवारी</string>
     <string name="home_category_uncategorized">वर्गीकरण केलेले नाही</string>
     <string name="home_category_new_title">नवीन श्रेणी</string>
     <string name="home_category_rename_title">श्रेणीचे नाव बदला</string>
@@ -288,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe या वेबसाइट्सची हमी देऊ शकत नाही. APK फाईलऐवजी स्वतःचा अॅप स्टोअर देणाऱ्या वेबसाइट्स वगळा</string>
     <string name="home_download_instructions_step3_search">त्या वेबसाइटवर, आवृत्ती &lt;b&gt;%s&lt;/b&gt; चा APK डाउनलोड करा, सर्वात नवीन आवृत्ती नाही</string>
     <string name="home_download_instructions_step3_search_any">त्या वेबसाइटवर, अॅपचा APK डाउनलोड करा. &lt;b&gt;कोणतीही आवृत्ती&lt;/b&gt; पॅच केली जाऊ शकते</string>
+    <string name="home_download_instructions_step2_github">रिलीज &lt;b&gt;%s&lt;/b&gt; च्या &lt;b&gt;Assets&lt;/b&gt; अंतर्गत, &lt;b&gt;.apk&lt;/b&gt; ने संपणाऱ्या फाइलवर दाबा</string>
+    <string name="home_download_instructions_step2_github_latest">नवीनतम रिलीजच्या &lt;b&gt;Assets&lt;/b&gt; अंतर्गत, &lt;b&gt;.apk&lt;/b&gt; ने संपणाऱ्या फाइलवर दाबा</string>
+    <string name="home_download_instructions_step2_github_note">जर अनेक APK फाइल्स असतील, तर %s नावाच्या किंवा युनिव्हर्सल फाइलची निवड करा</string>
     <string name="home_download_instructions_download_button_toast">वेबसाइटवर असलेल्या डाउनलोड बटणावर दाबा, येथे नाही. 😊</string>
     <string name="home_download_instructions_download_button_toast_2">उत्तम! आता पुढे क्लिक करा आणि वेबसाइटवर जा 👆</string>
     <string name="home_download_instructions_download_button_toast_3">सरावाने माणूस पारंगत होतो आणि तुम्ही तिथे पोहोचत आहात 💪</string>
@@ -494,6 +499,9 @@
     <string name="batch_queue_pending_subtitle">पुनरावलोकन करून सुरू करण्यासाठी टॅप करा</string>
     <string name="batch_queue_clear_title">रांग रिकामी करायची?</string>
     <string name="batch_queue_clear_description">सर्व ॲप्स रांगेतून काढून टाकले जातील</string>
+    <string name="batch_queue_keep_title">रांग ठेवायची आहे का?</string>
+    <string name="batch_queue_keep_description">रांगेतील ॲप्स नंतर सुरू करण्यासाठी होम स्क्रीनवर थांबतील</string>
+    <string name="batch_queue_keep">ठेवा</string>
     <string name="shortcut_repatch_short">पुन्हा पॅच करा</string>
     <string name="shortcut_repatch_long">जुने झालेले ॲप्स पुन्हा पॅच करा</string>
     <string name="shortcut_check_updates_short">अपडेट तपासा</string>
@@ -1113,7 +1121,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">कीस्टोअर क्रेडेन्शियल्स प्रविष्ट करण्याची आवश्यकता असेल</string>
     <string name="settings_system_import_keystore_dialog_alias_field">वापरकर्तानाव (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">पासवर्ड</string>
-    <string name="settings_system_import_keystore_dialog_format_field">कीस्टोअर स्वरूप</string>
     <string name="settings_system_import_keystore_wrong_credentials">चुकीचे कीस्टोर क्रेडेन्शियल्स</string>
     <string name="settings_system_import_keystore_success">कीस्टोर आयात केले</string>
     <string name="settings_system_import_keystore_failed">कीस्टोर आयात करण्यात अयशस्वी</string>

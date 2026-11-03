@@ -1126,7 +1126,6 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_import_keystore_dialog_description">سوف تحتاج إلى إدخال بيانات اعتماد Keystore لاستيراده</string>
     <string name="settings_system_import_keystore_dialog_alias_field">اسم المستخدم (الاسم المستعار)</string>
     <string name="settings_system_import_keystore_dialog_password_field">كلمة المرور</string>
-    <string name="settings_system_import_keystore_dialog_format_field">تنسيق Keystore</string>
     <string name="settings_system_import_keystore_wrong_credentials">بيانات Keystore غير صحيحة</string>
     <string name="settings_system_import_keystore_success">تم استيراد Keystore</string>
     <string name="settings_system_import_keystore_failed">فشل استيراد Keystore</string>

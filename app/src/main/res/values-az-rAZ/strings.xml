@@ -1121,7 +1121,6 @@ Təfərrüatlar: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Bunu idxal etmək üçün keystore etimadnaməsini qeyd etməlisiniz</string>
     <string name="settings_system_import_keystore_dialog_alias_field">İstifadəçi adı (Ləqəb)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Parol</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Keystore formatı</string>
     <string name="settings_system_import_keystore_wrong_credentials">Səhv keystore etimadnaməsi</string>
     <string name="settings_system_import_keystore_success">Keystore idxal edildi</string>
     <string name="settings_system_import_keystore_failed">Keystore-u idxal etmək olmadı</string>

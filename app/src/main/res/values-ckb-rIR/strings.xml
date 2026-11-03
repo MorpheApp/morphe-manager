@@ -64,6 +64,7 @@
     <string name="list_options_state_description">ڕیزکراوە بە %1$s, فلتەرکراوە بە %2$s</string>
     <string name="home_app_filter_clones">دوانەکان</string>
     <string name="home_app_grouping_none">هیچ</string>
+    <string name="home_app_sort_manual_hint">داگرتنی درێژ لە ئەپێک بکە، پاشان دوگمەی دووبارە ڕێکخستنەوە دابگە</string>
     <string name="home_app_sort_recommended">ڕیزبەندی پێشنیارکراو</string>
     <string name="home_app_sort_updates_first">نوێکارییەکانی پاتچ سەرەتا بن</string>
     <string name="home_app_sort_recently_patched">دوایین پاتچکراوەکان</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">هیچ شتێک ناگونجێ لەگەڵ %s</string>
     <string name="home_category_add">زیادکردنی پۆل</string>
     <string name="home_category_all_apps">هەموو بەرنامەکان</string>
+    <string name="home_app_grouping_categories">پۆلەکان</string>
     <string name="home_category_uncategorized">بێ پۆل</string>
     <string name="home_category_new_title">پۆلی نوێ</string>
     <string name="home_category_rename_title">گۆڕینی ناوی پۆل</string>
@@ -176,6 +178,7 @@
     <string name="sources_management_prerelease_toggle_description">وەرگرتنی دەستگەیشتنی پێشوەخت بۆ وەشانی نوێی پینەی ئەزموونی</string>
     <string name="sources_prerelease_warning_title">چالاککردنی پاتچەکانی پێش بڵاوکرندەوە؟</string>
     <string name="sources_prerelease_warning_message">بڵاوکراوەکانی پێش بڵاوکرندەوە هێشتا لە قۆناغی گەشەپێداندان. ڕەنگە پاتچەکان سەرکەوتوو نەبن یان ئەپڵیکەیشنەکە تێکبدەن، هەروەها تایبەتمەندییەکان دەکرێت بەبێ ئاگادارکردنەوە بگۆڕدرێن</string>
+    <string name="expert_mode_unstable_notice">پینەکانی پێش بڵاوکردنەوە یان تاقیکاری لەوانەیە جێگیر نەبن</string>
     <string name="sources_management_experimental_versions_toggle">وەشانە تاقیکارییەکانی ئەپ</string>
     <string name="sources_management_experimental_versions_toggle_description">ئامانجە تاقیکارییەکانی ئەپ پیشان دەدات و پاتچ دەکات</string>
     <!-- Actions of the panel for several selected sources at once -->
@@ -190,6 +193,7 @@
     <string name="sources_management_metadata_unavailable">مێتاداتا N/A</string>
     <string name="sources_management_metadata_unavailable_hint">فایلی مێتاداتای دوور بەردەست نیە. پینەکردن لەگەڵ گورزەی دامەزراو هێشتا کاردەکات، بەڵام نوێکردنەوەی خۆکار بۆ ئەم سەرچاوەیە ناچالاک کراوە</string>
     <string name="sources_management_metadata_unavailable_hint_missing">نەتوانرا گورزەی پینەکردن دابەزێنرێت. سەرچاوەی بەستەر لەوانەیە هەڵە بێت یان فایلەکە بوونی نەبێت</string>
+    <string name="sources_management_metadata_unavailable_hint_missing_editable">نەتوانرا گورزەی پینەکردن دابەزێنرێت. سەرچاوەی بەستەر لەوانەیە هەڵە بێت یان فایلەکە بوونی نەبێت. کلیک بکە بۆ گۆڕینی</string>
     <string name="sources_management_outdated_manager_badge">نوێکردنەوەی Morphe</string>
     <string name="sources_management_outdated_manager_hint">ئەم سەرچاوەیە بۆ پاتچەری %1$s دروستکراوە، بەڵام Morphe %2$s پاتچەری %3$s لەخۆ دەگرێت. Morphe نوێ بکەرەوە بۆ بەکارهێنانی</string>
     <string name="sources_management_held_back_badge">تێکچووە</string>
@@ -203,6 +207,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">ناوی پیشاندان</string>
     <string name="sources_dialog_rename">ناونانەوەی سەرچاوەی پینەکردن</string>
+    <string name="sources_dialog_change_url">گۆڕینی ئەو شوێنەی کە سەرچاوەی پینەکردن لێی دابەزێنرێت</string>
     <string name="sources_dialog_duplicate_name_error">سەرچاوەیەکی پینە بەم ناوە پێشتر بوونی هەیە</string>
     <string name="sources_dialog_missing_error">نەیتوانی سەرچاوەی ئەم پیینە نوێ بکاتەوە</string>
     <string name="sources_dialog_add_source">سەرچاوەی پینە زیاد بکە</string>
@@ -285,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe ناتوانێت گەرەنتی ئەم ماڵپەڕانە بکات. ئەو ماڵپەڕانە ت headphone بپەڕێ کە لەجیاتی فایلی APK، دوکانی ئەپڵیکەیشنی خۆیان پێشنیار دەکەن</string>
     <string name="home_download_instructions_step3_search">لەو ماڵپەڕەدا، APKـی وەشان &lt;b&gt;%s&lt;/b&gt; دابەزێنە، نەک نوێترین وەشان</string>
     <string name="home_download_instructions_step3_search_any">لەو ماڵپەڕەدا، APKـی ئەپەکە دابەزێنە. &lt;b&gt;هەر وەشانێک&lt;/b&gt; دەکرێت پاتچ بکرێت</string>
+    <string name="home_download_instructions_step2_github">لە ژێر &lt;b&gt;Assets&lt;/b&gt;ی بڵاوکراوەی &lt;b&gt;%s&lt;/b&gt;، کلیک لەو فایلە بکە کە بە &lt;b&gt;.apk&lt;/b&gt; کۆتایی دێت</string>
+    <string name="home_download_instructions_step2_github_latest">لە ژێر &lt;b&gt;Assets&lt;/b&gt;ی نوێترین بڵاوکراوە، کلیک لەو فایلە بکە کە بە &lt;b&gt;.apk&lt;/b&gt; کۆتایی دێت</string>
+    <string name="home_download_instructions_step2_github_note">ئەگەر چەندین فایلی APK هەبن، ئەوە هەڵبژێرە کە ناوی %s بێت یان ئەوەی گشتگیرە</string>
     <string name="home_download_instructions_download_button_toast">لە ماڵپەڕدا دەبەزاندن بکە، نەک لێرە 😊</string>
     <string name="home_download_instructions_download_button_toast_2">ناوازەیە! ئێستا کلیک لەسەر بەردەوامبوون بکە و بچۆ بۆ ماڵپەڕەکە 👆</string>
     <string name="home_download_instructions_download_button_toast_3">پراکتیکت زۆر دەکات و تۆ خەریکی گەیشتنیت بۆ ئەنجامەکە 💪</string>
@@ -330,8 +338,10 @@
     <string name="expert_mode_enable_all_universal_pending">دووبارە کلیک بکە بۆ پاتچەکانی گشتگیر</string>
     <string name="expert_mode_universal_all_warning_title">چالاککردنی هەموو پاتچە گشتگییەکان؟</string>
     <string name="expert_mode_universal_all_warning_message">پاتچە گشتگییەکان پێکەوە تاقیکراوەنەوە. چالاککردنی هەموویان بە یەکجار دەکرێت ببێتە هۆی دژایەتی، سەرنەکەوتنی پاتچکردن، یان داخستنی کتوپڕی ئەپەکە</string>
+    <string name="expert_mode_recommended">پینە پێشنیارکراوەکان</string>
     <string name="expert_mode_reset_to_default_done">پینە پێشنیارکراوەکان جێبەجێ کراون</string>
     <string name="expert_mode_selected_count">%1$s لە %2$s هەڵبژێردراوە</string>
+    <string name="expert_mode_saved_selection">دەستنیشانکردنی هەڵگیراو</string>
     <string name="expert_mode_restore_saved_done">دەستنیشانکردنی هەڵگیراو گەڕێندرایەوە</string>
     <string name="expert_mode_copy_from_bundle_no_patches">هیچ پاتچێکی گونجاو لەم باندڵەدا نییە</string>
     <string name="expert_mode_no_results">هیچ پینەیەک نەدۆزرایەوە</string>
@@ -491,6 +501,9 @@
     <string name="batch_queue_pending_subtitle">دایبگرە بۆ پێداچوونەوە و دەستپێکردن</string>
     <string name="batch_queue_clear_title">ڕێزەکەی بسڕینەوە؟</string>
     <string name="batch_queue_clear_description">هەموو بەرنامەکان لە ڕێزەکە لادەبرێن</string>
+    <string name="batch_queue_keep_title">ڕیزبەندییەکە بهێڵیتەوە؟</string>
+    <string name="batch_queue_keep_description">ئەپەکانی ڕیزبەندی کراو دواتر لە شاشەی سەرەکی دەمێننەوە بۆ ئەوەی دەستپێبکرێن</string>
+    <string name="batch_queue_keep">بهێڵەوە</string>
     <string name="shortcut_repatch_short">دووبارە پینە بکەرەوە</string>
     <string name="shortcut_repatch_long">دووبارە پینەکردنی ئەپەکانی کۆن</string>
     <string name="shortcut_check_updates_short">پشکنینی نوێکردنەوەکان</string>
@@ -1110,7 +1123,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">پێویستە زانیارییەکانی keystore بنوسیت بۆ هێنانە ناوەوە</string>
     <string name="settings_system_import_keystore_dialog_alias_field">ناوی بەکارهێنەر (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">وشەی نهێنی</string>
-    <string name="settings_system_import_keystore_dialog_format_field">فۆرماتی keystore</string>
     <string name="settings_system_import_keystore_wrong_credentials">زانیارییەکانی چاوەکی کلیل هەڵەن</string>
     <string name="settings_system_import_keystore_success">چاوەکی کلیل هاتە هێنان</string>
     <string name="settings_system_import_keystore_failed">هێنانی چاوەکی کلیل سەرکەوتوو نەبوو</string>

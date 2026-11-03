@@ -1120,7 +1120,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">您需要輸入金鑰儲存庫的憑證才能將其匯入</string>
     <string name="settings_system_import_keystore_dialog_alias_field">使用者名稱 (別名)</string>
     <string name="settings_system_import_keystore_dialog_password_field">密碼</string>
-    <string name="settings_system_import_keystore_dialog_format_field">金鑰儲存庫格式</string>
     <string name="settings_system_import_keystore_wrong_credentials">金鑰儲存庫憑證不正確</string>
     <string name="settings_system_import_keystore_success">已匯入金鑰儲存庫</string>
     <string name="settings_system_import_keystore_failed">無法匯入金鑰儲存庫</string>

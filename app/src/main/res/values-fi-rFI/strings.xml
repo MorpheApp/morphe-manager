@@ -64,6 +64,7 @@
     <string name="list_options_state_description">Järjestetty %1$s, suodatettu %2$s</string>
     <string name="home_app_filter_clones">Kloonit</string>
     <string name="home_app_grouping_none">Ei mitään</string>
+    <string name="home_app_sort_manual_hint">Pidä sovellusta painettuna ja napauta sitten järjestyspainiketta</string>
     <string name="home_app_sort_recommended">Suositeltu järjestys</string>
     <string name="home_app_sort_updates_first">Asennuspaikat ensin</string>
     <string name="home_app_sort_recently_patched">Viimeksi patchatut</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Mikään ei vastannut suodatinta %s</string>
     <string name="home_category_add">Lisää kategoria</string>
     <string name="home_category_all_apps">Kaikki sovellukset</string>
+    <string name="home_app_grouping_categories">Kategoriat</string>
     <string name="home_category_uncategorized">Luokittelemattomat</string>
     <string name="home_category_new_title">Uusi luokka</string>
     <string name="home_category_rename_title">Luo luokan nimi uudelleen</string>
@@ -288,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe ei voi mennä takuuseen näistä verkkosivustoista. Ohita ne, jotka tarjoavat omaa sovelluskauppaansa APK-tiedoston sijaan</string>
     <string name="home_download_instructions_step3_search">Lataa siltä verkkosivustolta version &lt;b&gt;%s&lt;/b&gt; APK, ei uusinta</string>
     <string name="home_download_instructions_step3_search_any">Lataa siltä verkkosivustolta sovelluksen APK. &lt;b&gt;Mikä tahansa versio&lt;/b&gt; voidaan paikata</string>
+    <string name="home_download_instructions_step2_github">Valitse julkaisun &lt;b&gt;%s&lt;/b&gt; &lt;b&gt;Assets&lt;/b&gt;-kohdasta tiedosto, joka päättyy päätteeseen &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">Valitse uusimman julkaisun &lt;b&gt;Assets&lt;/b&gt;-kohdasta tiedosto, joka päättyy päätteeseen &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Jos APK-tiedostoja on useita, valitse %s-niminen tai universaali tiedosto</string>
     <string name="home_download_instructions_download_button_toast">Paina latauspainiketta verkkosivustolla, älä tässä 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Hienoa! Napsauta nyt Jatka ja siirry verkkosivustolle 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Harjoitus tekee mestarin, ja olet jo pitkällä 💪</string>
@@ -495,6 +500,9 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee &lt;b&gt;kokonaisen APK:n&
     <string name="batch_queue_pending_subtitle">Katsastus ja aloitus</string>
     <string name="batch_queue_clear_title">Tyhjennetäänkö jono?</string>
     <string name="batch_queue_clear_description">Sovellukset poistetaan jonosta</string>
+    <string name="batch_queue_keep_title">Säilytetäänkö jono?</string>
+    <string name="batch_queue_keep_description">Jonossa olevat sovellukset odottavat aloittamista aloitusnäytöllä</string>
+    <string name="batch_queue_keep">Säilytä</string>
     <string name="shortcut_repatch_short">Korjaa uudelleen</string>
     <string name="shortcut_repatch_long">Korjaa vanhentuneet sovellukset</string>
     <string name="shortcut_check_updates_short">Tarkista päivitykset</string>
@@ -1112,7 +1120,6 @@ Yksityiskohdat: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Sinun on annettava avainsäilön tiedot, jotta voit tuoda sen</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Käyttäjänimi (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Salasana</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Avainsäilön muoto</string>
     <string name="settings_system_import_keystore_wrong_credentials">Väärät avainsäilötiedot</string>
     <string name="settings_system_import_keystore_success">Avainsäilö tuotu</string>
     <string name="settings_system_import_keystore_failed">Avainsäilön tuonti epäonnistui</string>

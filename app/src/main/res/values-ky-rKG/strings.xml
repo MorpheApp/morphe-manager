@@ -64,6 +64,7 @@
     <string name="list_options_state_description">%1$s боюнча сорттолду, %2$s боюнча чыпкаланды</string>
     <string name="home_app_filter_clones">Клондор</string>
     <string name="home_app_grouping_none">Эч бири</string>
+    <string name="home_app_sort_manual_hint">Тиркемени узак басып, андан соң кайра жайгаштыруу баскычын басыңыз</string>
     <string name="home_app_sort_recommended">Сунушталган тартип</string>
     <string name="home_app_sort_updates_first">Патч жаңыртуулары биринчи</string>
     <string name="home_app_sort_recently_patched">Жакында патчталган</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">%s боюнча эч нерсе табылган жок</string>
     <string name="home_category_add">Категорияны кошуу</string>
     <string name="home_category_all_apps">Бардык тиркемелер</string>
+    <string name="home_app_grouping_categories">Категориялар</string>
     <string name="home_category_uncategorized">Категорияга кирбегендер</string>
     <string name="home_category_new_title">Жаңы категория</string>
     <string name="home_category_rename_title">Категорияны кайра аттоо</string>
@@ -176,6 +178,7 @@
     <string name="sources_management_prerelease_toggle_description">Жаңы эксперименталдык патч версияларына эрте мүмкүнчүлүк алат</string>
     <string name="sources_prerelease_warning_title">Алдын ала чыгарылган патчтарды иштетүүнү каалайсызбы?</string>
     <string name="sources_prerelease_warning_message">Алдын ала чыгарылган версиялар дагы деле иштелип жатат. Патчтар иштебей калышы же колдонмону бузушу мүмкүн, ошондой эле функциялар эскертүүсүз өзгөрүшү мүмкүн</string>
+    <string name="expert_mode_unstable_notice">Релизга чейинки же эксперименталдык патчтар туруксуз болушу мүмкүн</string>
     <string name="sources_management_experimental_versions_toggle">Тиркеменин эксперименталдык версиялары</string>
     <string name="sources_management_experimental_versions_toggle_description">Эксперименталдык тиркеме максаттарын көрсөтөт жана патчтайт</string>
     <!-- Actions of the panel for several selected sources at once -->
@@ -190,6 +193,7 @@
     <string name="sources_management_metadata_unavailable">Метамаалымат жок</string>
     <string name="sources_management_metadata_unavailable_hint">Алыстагы метамаалымат файлы жеткиликсиз. Орнотулган пакет менен патч жасоо дагы деле иштейт, бирок бул булак үчүн авто-жаңыртуу өчүрүлгөн</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Патч пакетин жүктөө мүмкүн болгон жок. Булактын URL дареги ката болушу мүмкүн же файл жок</string>
+    <string name="sources_management_metadata_unavailable_hint_missing_editable">Патч топтомун жүктөө мүмкүн болгон жок. Булак URL-дарегі туура эмес болушу мүмкүн же файл жок. Өзгөртүү үчүн басыңыз</string>
     <string name="sources_management_outdated_manager_badge">Morphe колдонмосун жаңыртоо</string>
     <string name="sources_management_outdated_manager_hint">Бул булак %1$s патчери үчүн түзүлгөн, бирок Morphe %2$s патчер %3$s камтыйт. Аны колдонуу үчүн Morphe\'ни жаңылаңыз</string>
     <string name="sources_management_held_back_badge">Бузулду</string>
@@ -203,6 +207,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Көрсөтүлүүчү ат</string>
     <string name="sources_dialog_rename">Патч булагын кайра аттоо</string>
+    <string name="sources_dialog_change_url">Патч булагы жүктөлүүчү жерди өзгөртүү</string>
     <string name="sources_dialog_duplicate_name_error">Бул аттуу патч булагы буга чейин эле бар</string>
     <string name="sources_dialog_missing_error">Бул патч булагын жаңыртуу мүмкүн болбоду</string>
     <string name="sources_dialog_add_source">Патч булагын кошуу</string>
@@ -285,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe бул веб-сайттар үчүн кепилдик бере албайт. APK файлынын ордуна өзүнүн колдонмолор дүкөнүн сунуштаган сайттарды өткөрүп жибериңиз</string>
     <string name="home_download_instructions_step3_search">Ал сайттан эң акыркысын эмес, &lt;b&gt;%s&lt;/b&gt; версиясынын APK файлын жүктөп алыңыз</string>
     <string name="home_download_instructions_step3_search_any">Ал сайттан тиркеменин APK файлын жүктөп алыңыз. &lt;b&gt;Каалаган версияны&lt;/b&gt; патчтоого болот</string>
+    <string name="home_download_instructions_step2_github">%s чыгарылышынын &lt;b&gt;Assets&lt;/b&gt; бөлүмүнөн &lt;b&gt;.apk&lt;/b&gt; менен бүткөн файлды басыңыз</string>
+    <string name="home_download_instructions_step2_github_latest">Эң акыркы чыгарылыштын &lt;b&gt;Assets&lt;/b&gt; бөлүмүнөн &lt;b&gt;.apk&lt;/b&gt; менен бүткөн файлды басыңыз</string>
+    <string name="home_download_instructions_step2_github_note">Эгерде бир нече APK файлдары болсо, %s деп аталганды же универсалдуусун тандаңыз</string>
     <string name="home_download_instructions_download_button_toast">Жүктөөнү бул жерден эмес, веб-сайттан басыңыз 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Керемет! Эми \"улантуу\" баскычын басып, веб-сайттын беттине өтүңүз 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Көнүгүү mükemmelдикке жеткирет жана сиз алгачкы кадамдарды жасап жатасыз 💪</string>
@@ -329,8 +337,10 @@
     <string name="expert_mode_enable_all_universal_pending">Универсалдуу патчтар үчүн кайра басыңыз</string>
     <string name="expert_mode_universal_all_warning_title">Бардык универсалдуу патчтарды күydүрүү?</string>
     <string name="expert_mode_universal_all_warning_message">Универсалдуу патчтар бирге тестирленген эмес. Бардыгын бир убакта күydүрүү чыр-чатактарга, патчтоонун иштебей калышына же программанын бузулушуна алып келиши мүмкүн</string>
+    <string name="expert_mode_recommended">Сунушталган патчтар</string>
     <string name="expert_mode_reset_to_default_done">Сунушталган патчтер колдонулду</string>
     <string name="expert_mode_selected_count">%2$s санын ичинен %1$s тандалды</string>
+    <string name="expert_mode_saved_selection">Сакталган тандоо</string>
     <string name="expert_mode_restore_saved_done">Сакталган тандоо калыбына келтирилди</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Бул пакетте тиешелүү патчтар жок</string>
     <string name="expert_mode_no_results">Патчтар табылган жок</string>
@@ -490,6 +500,9 @@
     <string name="batch_queue_pending_subtitle">Кароо жана баштоо үчүн басыңыз</string>
     <string name="batch_queue_clear_title">Кезекти тазалоо керекпи?</string>
     <string name="batch_queue_clear_description">Бардык тиркемелер кезектен алынат</string>
+    <string name="batch_queue_keep_title">Кезекти сактоо керекпи?</string>
+    <string name="batch_queue_keep_description">Кезекке алынган тиркемелер кийин баштоо үчүн башкы экранда күтөт</string>
+    <string name="batch_queue_keep">Сактоо</string>
     <string name="shortcut_repatch_short">Кайра патчилөө</string>
     <string name="shortcut_repatch_long">Эскирген колдонмолорду кайра патчилөө</string>
     <string name="shortcut_check_updates_short">Жаңыртууларды текшерүү</string>
@@ -1109,7 +1122,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">Аны импорттоо үчүн keystore\'дун идентификациялык маалыматтарын киргизишиңиз керек</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Колдонуучунун аты (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Сырсөз</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Keystore форматы</string>
     <string name="settings_system_import_keystore_wrong_credentials">Keystore\'дин туура эмес идентификациялык маалыматтары</string>
     <string name="settings_system_import_keystore_success">Keystore импортталды</string>
     <string name="settings_system_import_keystore_failed">Keystore\'ду импорттоо мүмкүн болгон жок</string>

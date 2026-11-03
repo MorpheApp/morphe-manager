@@ -64,6 +64,7 @@
     <string name="list_options_state_description">%1$s দ্বারা সাজানো, %2$s দ্বারা ফিল্টার করা</string>
     <string name="home_app_filter_clones">ক্লোন</string>
     <string name="home_app_grouping_none">কোনোটিই নয়</string>
+    <string name="home_app_sort_manual_hint">একটি অ্যাপ দীর্ঘক্ষণ চেপে ধরুন, তারপর রিঅর্ডার বাটনে ট্যাপ করুন</string>
     <string name="home_app_sort_recommended">সুপারিশকৃত ক্রম</string>
     <string name="home_app_sort_updates_first">প্রথমে প্যাচ আপডেট</string>
     <string name="home_app_sort_recently_patched">সম্প্রতি প্যাচ করা</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">%s-এর সাথে কিছুই মেলেনি</string>
     <string name="home_category_add">বিভাগ যোগ করুন</string>
     <string name="home_category_all_apps">সমস্ত অ্যাপস</string>
+    <string name="home_app_grouping_categories">ক্যাটেগরি</string>
     <string name="home_category_uncategorized">শ্রেণীবিহীন</string>
     <string name="home_category_new_title">নতুন বিভাগ</string>
     <string name="home_category_rename_title">বিভাগটির নাম পরিবর্তন করুন</string>
@@ -288,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe এই ওয়েবসাইটগুলোর ব্যাপারে নিশ্চয়তা দিতে পারে না। যেগুলো APK ফাইলের পরিবর্তে নিজস্ব অ্যাপ স্টোর অফার করে, সেগুলো এড়িয়ে যান।</string>
     <string name="home_download_instructions_step3_search">সেই ওয়েবসাইটে, <b>%s</b> সংস্করণের APK ডাউনলোড করুন, সবচেয়ে নতুনটি নয়।</string>
     <string name="home_download_instructions_step3_search_any">সেই ওয়েবসাইটে, অ্যাপটির APK ডাউনলোড করুন। <b>যেকোনো সংস্করণ</b> প্যাচ করা যেতে পারে।</string>
+    <string name="home_download_instructions_step2_github">রিলিজ &lt;b&gt;%s&lt;/b&gt;-এর &lt;b&gt;Assets&lt;/b&gt;-এর অধীনে, &lt;b&gt;.apk&lt;/b&gt; দিয়ে শেষ হওয়া ফাইলটিতে প্রেস করুন</string>
+    <string name="home_download_instructions_step2_github_latest">সর্বশেষ রিলিজের &lt;b&gt;Assets&lt;/b&gt;-এর অধীনে, &lt;b&gt;.apk&lt;/b&gt; দিয়ে শেষ হওয়া ফাইলটিতে প্রেস করুন</string>
+    <string name="home_download_instructions_step2_github_note">যদি বেশ কয়েকটি APK ফাইল থাকে, তবে %s নামে থাকা ফাইলটি অথবা ইউনিভার্সাল ফাইলটি বেছে নিন</string>
     <string name="home_download_instructions_download_button_toast">এখানে নয়, ওয়েবসাইটে ডাউনলোড করুন 😊</string>
     <string name="home_download_instructions_download_button_toast_2">চমৎকার! এখন কন্টিনিউ বাটনে ক্লিক করে ওয়েবসাইটে চলে যান 👆</string>
     <string name="home_download_instructions_download_button_toast_3">অনুশীলনের মাধ্যমেই নিখুঁত হওয়া যায় এবং আপনি সঠিক পথেই এগোচ্ছেন 💪</string>
@@ -495,6 +500,9 @@
     <string name="batch_queue_pending_subtitle">সমীক্ষা করে শুরু করতে ট্যাপ করুন</string>
     <string name="batch_queue_clear_title">কিউ পরিষ্কার করবেন?</string>
     <string name="batch_queue_clear_description">সব অ্যাপ কিউ থেকে সরানো হবে</string>
+    <string name="batch_queue_keep_title">কিউটি কি রাখা হবে?</string>
+    <string name="batch_queue_keep_description">কিউতে থাকা অ্যাপগুলো পরবর্তীতে শুরু করার জন্য হোম স্ক্রিনে অপেক্ষা করবে</string>
+    <string name="batch_queue_keep">রাখুন</string>
     <string name="shortcut_repatch_short">পুনরায় প্যাচ করুন</string>
     <string name="shortcut_repatch_long">পুরানো অ্যাপগুলি পুনরায় প্যাচ করুন</string>
     <string name="shortcut_check_updates_short">আপডেটগুলি দেখুন</string>
@@ -1106,7 +1114,6 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_import_keystore_dialog_description">আপনাকে ইম্পোর্ট করতে অ্যাপের মধ্যে keystore এর credentials লিখতে হবে</string>
     <string name="settings_system_import_keystore_dialog_alias_field">কাস্টম কী-স্টোর আমদানি করুন</string>
     <string name="settings_system_import_keystore_dialog_password_field">পাসওয়ার্ড</string>
-    <string name="settings_system_import_keystore_dialog_format_field">কী-স্টোর ফর্ম্যাট</string>
     <string name="settings_system_import_keystore_wrong_credentials">কী-স্টোর নাম (এলিয়াস) ভুলে</string>
     <string name="settings_system_import_keystore_success">কী-স্টোর নাম (এলিয়াস) ভুলে</string>
     <string name="settings_system_import_keystore_failed">কী-স্টোর আমদানি ব্যর্থ হয়েছে</string>

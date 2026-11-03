@@ -64,6 +64,7 @@
     <string name="list_options_state_description">Rendezés: %1$s, szűrés: %2$s</string>
     <string name="home_app_filter_clones">Klónozott alkalmazások</string>
     <string name="home_app_grouping_none">Egyik sem</string>
+    <string name="home_app_sort_manual_hint">Nyomj hosszan egy alkalmazásra, majd koppints az átrendezés gombra</string>
     <string name="home_app_sort_recommended">Ajánlott sorrend</string>
     <string name="home_app_sort_updates_first">Frissíthető alkalmazások előre</string>
     <string name="home_app_sort_recently_patched">Legutóbb módosított</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Nincs találat erre a szűrőre: %s</string>
     <string name="home_category_add">Kategória hozzáadása</string>
     <string name="home_category_all_apps">Összes alkalmazás</string>
+    <string name="home_app_grouping_categories">Kategóriák</string>
     <string name="home_category_uncategorized">Kategorizálatlan</string>
     <string name="home_category_new_title">Új kategória</string>
     <string name="home_category_rename_title">Kategória átnevezése</string>
@@ -288,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">A Morphe nem tud jótállni ezekért a weboldalakért. Hagyd ki azokat, amelyek APK-fájl helyett saját alkalmazásboltot kínálnak</string>
     <string name="home_download_instructions_step3_search">Azon a weboldalon töltsd le a &lt;b&gt;%s&lt;/b&gt; verzió APK-ját, nem a legújabbat</string>
     <string name="home_download_instructions_step3_search_any">Azon a weboldalon töltsd le az alkalmazás APK-ját. &lt;b&gt;Bármelyik verzió&lt;/b&gt; patch-elhető</string>
+    <string name="home_download_instructions_step2_github">A(z) &lt;b&gt;%s&lt;/b&gt; kiadás &lt;b&gt;Assets&lt;/b&gt; részén nyomj a(z) &lt;b&gt;.apk&lt;/b&gt; végződésű fájlra</string>
+    <string name="home_download_instructions_step2_github_latest">A legújabb kiadás &lt;b&gt;Assets&lt;/b&gt; részén nyomj a(z) &lt;b&gt;.apk&lt;/b&gt; végződésű fájlra</string>
+    <string name="home_download_instructions_step2_github_note">Ha több APK fájl is van, válaszd azt, amelynek neve %s, vagy az univerzális változatot</string>
     <string name="home_download_instructions_download_button_toast">​A weboldalon nyomj a letöltésre, ne itt 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Szuper! Most kattints a folytatásra, és látogass el a weboldalra 👆</string>
     <string name="home_download_instructions_download_button_toast_3">A gyakorlás tökéletessé tesz, és már jó úton vagy 💪</string>
@@ -495,6 +500,9 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="batch_queue_pending_subtitle">Koppints az áttekintéshez és a kezdéshez</string>
     <string name="batch_queue_clear_title">Várólista törlése?</string>
     <string name="batch_queue_clear_description">Minden alkalmazás eltávolításra kerül a várólistáról</string>
+    <string name="batch_queue_keep_title">Tartsd meg a sorot?</string>
+    <string name="batch_queue_keep_description">A sorban várakozó alkalmazások a kezdőképernyőn maradnak, hogy később belelehessen kezdeni őket</string>
+    <string name="batch_queue_keep">Megtartás</string>
     <string name="shortcut_repatch_short">Újra javítás</string>
     <string name="shortcut_repatch_long">Régi alkalmazások újra javítása</string>
     <string name="shortcut_check_updates_short">Frissítések ellenőrzése</string>
@@ -1114,7 +1122,6 @@ Részletek: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">A kulcstároló importálásához meg kell adnod a hozzáférési adatokat</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Felhasználónév (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Jelszó</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Kulcstároló formátum</string>
     <string name="settings_system_import_keystore_wrong_credentials">Hibás kulcstároló hitelesítési adatok</string>
     <string name="settings_system_import_keystore_success">Kulcstároló importálva</string>
     <string name="settings_system_import_keystore_failed">Nem sikerült importálni a kulcstárolót</string>

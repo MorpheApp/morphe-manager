@@ -290,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe はこれらのウェブサイトの信頼性を保証できません。APK ファイルではなく独自のアプリストアを提供しているサイトは避けてください</string>
     <string name="home_download_instructions_step3_search">そのウェブサイトで、最新版ではなく、バージョン &lt;b&gt;%s&lt;/b&gt; の APK をダウンロードしてください</string>
     <string name="home_download_instructions_step3_search_any">そのウェブサイトで、アプリの APK をダウンロードしてください。&lt;b&gt;どのバージョンでも&lt;/b&gt;パッチを適用できます</string>
+    <string name="home_download_instructions_step2_github">リリース &lt;b&gt;%s&lt;/b&gt; の &lt;b&gt;Assets&lt;/b&gt; で、&lt;b&gt;.apk&lt;/b&gt; で終わるファイルを押してください</string>
+    <string name="home_download_instructions_step2_github_latest">最新リリースの &lt;b&gt;Assets&lt;/b&gt; で、&lt;b&gt;.apk&lt;/b&gt; で終わるファイルを押してください</string>
+    <string name="home_download_instructions_step2_github_note">APK ファイルが複数ある場合は、%s という名前のものか、universal と記載されたものを選択してください</string>
     <string name="home_download_instructions_download_button_toast">ここではなく、ウェブサイトにあるボタンをタップしてください😊</string>
     <string name="home_download_instructions_download_button_toast_2">それでは、下の「続行」をタップしてウェブサイトへ進んでください👆</string>
     <string name="home_download_instructions_download_button_toast_3">練習あるのみ！着実に上達していますよ！💪</string>
@@ -1120,7 +1123,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">キーストアをインポートするには、認証情報の入力が必要です</string>
     <string name="settings_system_import_keystore_dialog_alias_field">ユーザー名（エイリアス）</string>
     <string name="settings_system_import_keystore_dialog_password_field">パスワード</string>
-    <string name="settings_system_import_keystore_dialog_format_field">キーストア形式</string>
     <string name="settings_system_import_keystore_wrong_credentials">キーストアの資格情報が正しくありません</string>
     <string name="settings_system_import_keystore_success">キーストアをインポートしました</string>
     <string name="settings_system_import_keystore_failed">キーストアのインポートに失敗しました</string>

@@ -64,6 +64,7 @@
     <string name="list_options_state_description">Gesorteer volgens %1$s, gefiltreer volgens %2$s</string>
     <string name="home_app_filter_clones">Klone</string>
     <string name="home_app_grouping_none">Geen</string>
+    <string name="home_app_sort_manual_hint">Hou \'n toepassing lank gedruk, tik dan op die herrangskik-knoppie</string>
     <string name="home_app_sort_recommended">Aanbevole volgorde</string>
     <string name="home_app_sort_updates_first">Eerstens foutopdaterings</string>
     <string name="home_app_sort_recently_patched">Onlangs gepatch</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Niks het met %s ooreengestem nie</string>
     <string name="home_category_add">Kategorie byvoeg</string>
     <string name="home_category_all_apps">Alle toepassings</string>
+    <string name="home_app_grouping_categories">Kategorieë</string>
     <string name="home_category_uncategorized">Nie gekategoriseer nie</string>
     <string name="home_category_new_title">Nuwe kategorie</string>
     <string name="home_category_rename_title">Hernoem kategorie</string>
@@ -288,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe kan nie vir hierdie webwerwe instaan nie. Slaan dié oor wat hul eie appwinkel in plaas van ’n APK-lêer aanbied</string>
     <string name="home_download_instructions_step3_search">Op daardie webwerf, laai die APK van weergawe &lt;b&gt;%s&lt;/b&gt; af, nie die nuutste een nie</string>
     <string name="home_download_instructions_step3_search_any">Op daardie webwerf, laai die APK van die app af. &lt;b&gt;Enige weergawe&lt;/b&gt; kan gepatch word</string>
+    <string name="home_download_instructions_step2_github">Onder &lt;b&gt;Assets&lt;/b&gt; van vrystelling &lt;b&gt;%s&lt;/b&gt;, druk die lêer wat eindig op &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">Onder &lt;b&gt;Assets&lt;/b&gt; van die nuutste vrystelling, druk die lêer wat eindig op &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">As daar verskeie APK-lêers is, kies die een wat na %s vernoem is of die universele een</string>
     <string name="home_download_instructions_download_button_toast">Druk op aflaai op die webwerf, en nie hier nie 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Fantasties! Klik nou op \"Gaan voort\" en besoek die webwerf 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Oefening maak perfeksie en jy kom daar 🔥</string>
@@ -495,6 +500,9 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="batch_queue_pending_subtitle">Tik om te hersien en te begin</string>
     <string name="batch_queue_clear_title">Maak die waglys skoon?</string>
     <string name="batch_queue_clear_description">Alle toepassing sal uit die waglys verwyder word</string>
+    <string name="batch_queue_keep_title">Hou die tou?</string>
+    <string name="batch_queue_keep_description">Die tou-toepassings sal op die tuisskerm wag om later gestart te word</string>
+    <string name="batch_queue_keep">Hou</string>
     <string name="shortcut_repatch_short">Her-pleister</string>
     <string name="shortcut_repatch_long">Her-pleister verouderde programme</string>
     <string name="shortcut_check_updates_short">Kyk vir opgraderings</string>
@@ -1114,7 +1122,6 @@ Besonderhede: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Jy sal die sleutel se geloofsbriewe moet invoer om dit te importeer</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Gebruikersnaam (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Wagwoord</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Sleutelwinkel formaat</string>
     <string name="settings_system_import_keystore_wrong_credentials">Verkeerde sleutel geloofsbriewe</string>
     <string name="settings_system_import_keystore_success">Sleutel geïmporteer</string>
     <string name="settings_system_import_keystore_failed">Kon nie sleutel invoer nie</string>

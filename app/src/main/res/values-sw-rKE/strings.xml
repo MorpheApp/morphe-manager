@@ -64,6 +64,7 @@
     <string name="list_options_state_description">Imepangwa kwa %1$s, imechujwa kwa %2$s</string>
     <string name="home_app_filter_clones">Nakala</string>
     <string name="home_app_grouping_none">Hakuna</string>
+    <string name="home_app_sort_manual_hint">Bonyeza na ushikilie programu, kisha gusa kitufe cha kupanga upya</string>
     <string name="home_app_sort_recommended">Mpangilio unaopendekezwa</string>
     <string name="home_app_sort_updates_first">Sasisho za patch kwanza</string>
     <string name="home_app_sort_recently_patched">Zilizo-patch hivi karibuni</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Hakuna kitu kilicholingana na %s</string>
     <string name="home_category_add">Ongeza kategoria</string>
     <string name="home_category_all_apps">Programu zote</string>
+    <string name="home_app_grouping_categories">Kategoria</string>
     <string name="home_category_uncategorized">Haina kategoria</string>
     <string name="home_category_new_title">Kategoria mpya</string>
     <string name="home_category_rename_title">Badilisha jina la kategoria</string>
@@ -176,6 +178,7 @@
     <string name="sources_management_prerelease_toggle_description">Hupata ufikiaji wa mapema wa matoleo mapya ya majaribio ya viraka</string>
     <string name="sources_prerelease_warning_title">Wezesha patch za kabla ya toleo rasmi?</string>
     <string name="sources_prerelease_warning_message">Build za kabla ya toleo rasmi bado zipo katika hatua ya uundaji. Patch zinaweza kushindwa au kuharibu programu, na vipengele vinaweza kubadilika bila taarifa</string>
+    <string name="expert_mode_unstable_notice">Patch za kabla ya toleo au za majaribio zinaweza kutokuwa thabiti</string>
     <string name="sources_management_experimental_versions_toggle">Matoleo ya majaribio ya programu</string>
     <string name="sources_management_experimental_versions_toggle_description">Inaonyesha na kurekebisha malengo ya programu ya majaribio</string>
     <!-- Actions of the panel for several selected sources at once -->
@@ -190,6 +193,7 @@
     <string name="sources_management_metadata_unavailable">Metadata haipatikani</string>
     <string name="sources_management_metadata_unavailable_hint">Faili ya metadata ya mbali haipatikani. Kufanya patching kwa bundle iliyosakinishwa bado inafanya kazi, lakini sasisho la kiotomatiki limezimwa kwa chanzo hiki</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Bundle ya patch haikuweza kupakuliwa. URL ya chanzo inaweza kuwa si sahihi au faili haipo</string>
+    <string name="sources_management_metadata_unavailable_hint_missing_editable">Kifurushi cha patch hakikuweza kupakuliwa. URL ya chanzo inaweza kuwa si sahihi au faili haipo. Gusa ili kuibadilisha</string>
     <string name="sources_management_outdated_manager_badge">Sasisha Morphe</string>
     <string name="sources_management_outdated_manager_hint">Chanzo hiki kimeundwa kwa ajili ya patcher %1$s, lakini Morphe %2$s inajumuisha patcher %3$s. Sasisha Morphe ili kuitumia</string>
     <string name="sources_management_held_back_badge">Kimefeli</string>
@@ -203,6 +207,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Jina la kuonyesha</string>
     <string name="sources_dialog_rename">Badilisha jina la chanzo cha patche</string>
+    <string name="sources_dialog_change_url">Badilisha mahali ambapo chanzo cha patch kinapakuliwa</string>
     <string name="sources_dialog_duplicate_name_error">Chanzo cha patche chenye jina hili tayari kipo</string>
     <string name="sources_dialog_missing_error">Hakuweza kusasisha chanzo hiki cha patch</string>
     <string name="sources_dialog_add_source">Ongeza chanzo cha patche</string>
@@ -285,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe haiwezi kuhakikisha usalama wa tovuti hizi. Ruka zile zinazotoa duka lao la programu badala ya faili ya APK</string>
     <string name="home_download_instructions_step3_search">Kwenye tovuti hiyo, pakua APK ya toleo &lt;b&gt;%s&lt;/b&gt;, siyo ya hivi karibuni zaidi</string>
     <string name="home_download_instructions_step3_search_any">Kwenye tovuti hiyo, pakua APK ya programu. &lt;b&gt;Toleo lolote&lt;/b&gt; linaweza kufanyiwa patch</string>
+    <string name="home_download_instructions_step2_github">Chini ya &lt;b&gt;Assets&lt;/b&gt; ya toleo &lt;b&gt;%s&lt;/b&gt;, bonyeza faili inayomalizia na &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">Chini ya &lt;b&gt;Assets&lt;/b&gt; ya toleo jipya zaidi, bonyeza faili inayomalizia na &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Ikiwa kuna faili nyingi za APK, chagua ile iliyopewa jina la %s au ile ya ulimwengu</string>
     <string name="home_download_instructions_download_button_toast">Bonyeza pakua kwenye tovuti, na si hapa 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Safi! Sasa bonyeza endelea na uende kwenye tovuti 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Mazoezi huleta ukamilifu na unaelekea huko 💪</string>
@@ -329,7 +337,10 @@ Chagua mahali pa kuchukulia APK yake"</string>
     <string name="expert_mode_enable_all_universal_pending">Gusa tena kwa ajili ya marekebisho ya ulimwengu</string>
     <string name="expert_mode_universal_all_warning_title">Washa viraka vyote vya ulimwengu?</string>
     <string name="expert_mode_universal_all_warning_message">Viraka vya ulimwengu havijajaribiwa pamoja. Kuwashwa kwa vyote kwa wakati mmoja kunaweza kusababisha migongano, kushindwa kwa viraka, au programu kufungwa ghafla</string>
+    <string name="expert_mode_recommended">Patch zinazopendekezwa</string>
     <string name="expert_mode_reset_to_default_done">Viraka vinavyopendekezwa vimeidhinishwa</string>
+    <string name="expert_mode_selected_count">%1$s kati ya %2$s vimechaguliwa</string>
+    <string name="expert_mode_saved_selection">Uchaguzi ulihifadhiwa</string>
     <string name="expert_mode_restore_saved_done">Uchaguzi ulihifadhiwa ume rudishwa</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Hakuna patch zinazolingana katika kifurushi hiki</string>
     <string name="expert_mode_no_results">Hakuna viraka vilivyopatikana</string>
@@ -489,6 +500,9 @@ Kwa matokeo bora, programu hii inapendekeza kutumia &lt;b&gt;full APK&lt;/b&gt;"
     <string name="batch_queue_pending_subtitle">Gusa ili kupitia na kuanza</string>
     <string name="batch_queue_clear_title">Futa foleni?</string>
     <string name="batch_queue_clear_description">Programu zote zitaondolewa kwenye foleni</string>
+    <string name="batch_queue_keep_title">Weka foleni?</string>
+    <string name="batch_queue_keep_description">Programu zilizowekwa kwenye foleni zitasubiri kwenye skrini ya nyumbani ili kuanzishwa baadaye</string>
+    <string name="batch_queue_keep">Weka</string>
     <string name="shortcut_repatch_short">Patch tena</string>
     <string name="shortcut_repatch_long">Patch tena app zilizopitwa na wakati</string>
     <string name="shortcut_check_updates_short">Angalia sasisho</string>
@@ -1108,7 +1122,6 @@ Maelezo: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Utahitaji kuingiza sifa za utambulisho za keystore ili kuimport</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Jina la mtumiaji (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Nywila</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Mfumo wa keystore</string>
     <string name="settings_system_import_keystore_wrong_credentials">Sifa za keystore si sahihi</string>
     <string name="settings_system_import_keystore_success">Keystore imeingizwa</string>
     <string name="settings_system_import_keystore_failed">Imeshindikana kuingiza keystore</string>

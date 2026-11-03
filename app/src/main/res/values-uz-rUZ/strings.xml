@@ -64,6 +64,7 @@
     <string name="list_options_state_description">%1$s bo\'yicha saralangan, %2$s bo\'yicha filtrlangan</string>
     <string name="home_app_filter_clones">Klonlar</string>
     <string name="home_app_grouping_none">Hech biri</string>
+    <string name="home_app_sort_manual_hint">Ilovani uzoq bosing, so\'ngra qayta tartiblash tugmasini bosing</string>
     <string name="home_app_sort_recommended">Tekan lama sebuah aplikasi, lalu ketuk tombol urutkan ulang</string>
     <string name="home_app_sort_updates_first">Abjad terbalik, Z sampai A</string>
     <string name="home_app_sort_recently_patched">Yaqinda yangilangan</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Hech narsa %s ga mos kelmadi</string>
     <string name="home_category_add">Kategoriya qo\'shish</string>
     <string name="home_category_all_apps">Barcha ilovalar</string>
+    <string name="home_app_grouping_categories">Kategoriyalar</string>
     <string name="home_category_uncategorized">Kategoriyasiz</string>
     <string name="home_category_new_title">Yangi kategoriya</string>
     <string name="home_category_rename_title">Kategoriyani qayta nomlash</string>
@@ -176,6 +178,7 @@
     <string name="sources_management_prerelease_toggle_description">Yangi eksperimental patch versiyalariga erta kira olish</string>
     <string name="sources_prerelease_warning_title">Oldindan chiqarilgan yangilanishlarni yoqish?</string>
     <string name="sources_prerelease_warning_message">Oldindan chiqarilgan versiyalar hali ham ishlab chiqilmoqda. Yangilanishlar muvaffaqiyatsiz bo\'lishi yoki ilovani buzishi mumkin, va xususiyatlar ogohlantirishsiz o\'zgarishi mumkin.</string>
+    <string name="expert_mode_unstable_notice">Pre-reliz yoki eksperimental patchlar beqaror bo\'lishi mumkin</string>
     <string name="sources_management_experimental_versions_toggle">Eksperimental ilova versiyalari</string>
     <string name="sources_management_experimental_versions_toggle_description">Eksperimental ilova maqsadlarini ko‘rsatadi va yamaydi</string>
     <!-- Actions of the panel for several selected sources at once -->
@@ -190,6 +193,7 @@
     <string name="sources_management_metadata_unavailable">Metadata mavjud emas</string>
     <string name="sources_management_metadata_unavailable_hint">Uzoqdagi metadata fayli mavjud emas. Ushbu manba uchun avto-yangilash o‘chirildi</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Patch to‘plamini yuklab olish imkoniyati yo‘q. Manba URL noto‘g‘ri yoki fayl mavjud emas</string>
+    <string name="sources_management_metadata_unavailable_hint_missing_editable">Patch paketi yuklab olunamadi. Manba URL manzili noto\"g\'ri bo\'lishi mumkin yoki fayl mavjud emas. Uni o\'zgartirish uchun bosing</string>
     <string name="sources_management_outdated_manager_badge">Morphe ni yangilang</string>
     <string name="sources_management_outdated_manager_hint">Ushbu manba %1$s yamoqchisi uchun yaratilgan, lekin Morphe %2$s %3$s yamoqchisini o\'z ichiga oladi. Undan foydalanish uchun Morphe ni yangilang</string>
     <string name="sources_management_held_back_badge">Ishdan chiqdi</string>
@@ -203,6 +207,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Displey nomi</string>
     <string name="sources_dialog_rename">Tuzatish manbai nomini o\'zgartirish</string>
+    <string name="sources_dialog_change_url">Patch manbasi yuklanadigan joyni o\'zgartiring</string>
     <string name="sources_dialog_duplicate_name_error">Bunday nomdagi tuzatish manbai allaqachon mavjud</string>
     <string name="sources_dialog_missing_error">Ushbu patch manbasini yangilash mumkin emas</string>
     <string name="sources_dialog_add_source">Tuzatish manbai qo\'shish</string>
@@ -285,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe bu veb-saytlarga kafolat bera olmaydi. APK fayl o\'rniga o\'z ilovalar do\'konini taklif qiladiganlarini o\'tkazib yuboring</string>
     <string name="home_download_instructions_step3_search">O\'sha veb-saytda &lt;b&gt;%s&lt;/b&gt; versiyasining APK faylini yuklab oling, eng yangisini emas</string>
     <string name="home_download_instructions_step3_search_any">O\'sha veb-saytda ilovaning APK faylini yuklab oling. &lt;b&gt;Har qanday versiyaga&lt;/b&gt; yamoq qo\'llash mumkin</string>
+    <string name="home_download_instructions_step2_github">&lt;b&gt;%s&lt;/b&gt; versiyasining &lt;b&gt;Assets&lt;/b&gt; bo\'limida &lt;b&gt;.apk&lt;/b&gt; bilan tugaydigan faylni bosing</string>
+    <string name="home_download_instructions_step2_github_latest">Eng so\'nggi versiyaning &lt;b&gt;Assets&lt;/b&gt; bo\'limida &lt;b&gt;.apk&lt;/b&gt; bilan tugaydigan faylni bosing</string>
+    <string name="home_download_instructions_step2_github_note">Agar bir nechta APK fayllari bo\'lsa, %s nomi bilan atalganini yoki universal faylni tanlang</string>
     <string name="home_download_instructions_download_button_toast">Veb-saytdagi \"Yuklab olish\" tugmasini bosing, lekin bu yerni emas 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Ajoyib! Endi davom etish tugmasini bosing va vebsaytga o\'ting 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Amaliyot mukammal qiladi va siz o\'zingizni kutayapsiz 💪</string>
@@ -329,8 +337,10 @@ Uning APK faylini qayerdan olishni tanlang"</string>
     <string name="expert_mode_enable_all_universal_pending">Universal yamalar uchun yana bir marta bosing</string>
     <string name="expert_mode_universal_all_warning_title">Barcha universal yangilanishlarni yoqish?</string>
     <string name="expert_mode_universal_all_warning_message">Universal yangilanishlar birgalikda sinovdan o\'tkazilmagan. Ularning hammasini bir vaqtda yoqish konfliktlarga, yangilanishning muvaffaqiyatsiz bo\'lishiga yoki ishdan chiqishiga olib kelishi mumkin.</string>
+    <string name="expert_mode_recommended">Tavsiya etilgan patchlar</string>
     <string name="expert_mode_reset_to_default_done">Tavsiya etilgan patchlar qo‘llandi</string>
     <string name="expert_mode_selected_count">%2$s dan %1$s ta tanlandi</string>
+    <string name="expert_mode_saved_selection">Saqlangan tanlov</string>
     <string name="expert_mode_restore_saved_done">Saqlangan tanlov tiklandi</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Ushbu paketda mos keladigan takrorlash yo‘q</string>
     <string name="expert_mode_no_results">Tuzatishlar topilmadi</string>
@@ -490,6 +500,9 @@ Eng yaxshi natijalar uchun ushbu ilova to‘liq &lt;b&gt;APK&lt;/b&gt;ni patchla
     <string name="batch_queue_pending_subtitle">Ko\'rib chiqish va boshlash uchun bosing.</string>
     <string name="batch_queue_clear_title">Navbatni tozalaysizmi?</string>
     <string name="batch_queue_clear_description">Barcha ilovalar navbatdan olib tashlanadi.</string>
+    <string name="batch_queue_keep_title">Navbatni saqlash kerakmi?</string>
+    <string name="batch_queue_keep_description">Navbatdagi ilovalar keyinroq ishga tushirilishini kutish uchun bosh ekranda qoladi</string>
+    <string name="batch_queue_keep">Saqlash</string>
     <string name="shortcut_repatch_short">Qayta ta’mirlash</string>
     <string name="shortcut_repatch_long">Eski ilovalarni qayta ta’mirlash</string>
     <string name="shortcut_check_updates_short">Yangilanishlarni tekshirish</string>
@@ -1108,7 +1121,6 @@ Ma’lumotlar: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Xatolik</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Foydalanuvchi nomi (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Parol</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Keystore formati</string>
     <string name="settings_system_import_keystore_wrong_credentials">Noto\'g\'ri keystore ma\'lumotlari</string>
     <string name="settings_system_import_keystore_success">Keystore import qilingan</string>
     <string name="settings_system_import_keystore_failed">Keystore import qilishda xatolik yuzaga keldi</string>

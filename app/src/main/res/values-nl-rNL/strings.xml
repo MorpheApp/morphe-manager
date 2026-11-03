@@ -64,6 +64,7 @@
     <string name="list_options_state_description">Gesorteerd op %1$s, gefilterd op %2$s</string>
     <string name="home_app_filter_clones">Klonen</string>
     <string name="home_app_grouping_none">Geen</string>
+    <string name="home_app_sort_manual_hint">Houd een app lang ingedrukt en tik vervolgens op de knop om opnieuw te ordenen</string>
     <string name="home_app_sort_recommended">Aanbevolen volgorde</string>
     <string name="home_app_sort_updates_first">Eerst patches bijwerken</string>
     <string name="home_app_sort_recently_patched">Recent gepatcht</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Niets kwam overeen met %s</string>
     <string name="home_category_add">Categorie toevoegen</string>
     <string name="home_category_all_apps">Alle apps</string>
+    <string name="home_app_grouping_categories">Categorieën</string>
     <string name="home_category_uncategorized">Niet gecategoriseerd</string>
     <string name="home_category_new_title">Nieuwe categorie</string>
     <string name="home_category_rename_title">Categorie hernoemen</string>
@@ -288,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe kan niet voor deze websites instaan. Sla de websites over die een eigen appwinkel aanbieden in plaats van een APK-bestand</string>
     <string name="home_download_instructions_step3_search">Download op die website de APK van versie &lt;b&gt;%s&lt;/b&gt;, niet de nieuwste</string>
     <string name="home_download_instructions_step3_search_any">Download op die website de APK van de app. &lt;b&gt;Elke versie&lt;/b&gt; kan worden gepatcht</string>
+    <string name="home_download_instructions_step2_github">Druk onder &lt;b&gt;Assets&lt;/b&gt; van release &lt;b&gt;%s&lt;/b&gt; op het bestand dat eindigt op &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">Druk onder &lt;b&gt;Assets&lt;/b&gt; van de nieuwste release op het bestand dat eindigt op &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Als er meerdere APK-bestanden zijn, kies dan degene die is vernoemd naar %s of de universele versie</string>
     <string name="home_download_instructions_download_button_toast">Druk op de download op de website, en niet hier 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Geweldig! Klik nu op doorgaan en ga naar de website 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Oefening baart kunst en jij bent zeker op het goede pad 💪</string>
@@ -495,6 +500,9 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="batch_queue_pending_subtitle">Tik om te controleren en te starten</string>
     <string name="batch_queue_clear_title">Wachtrij wissen?</string>
     <string name="batch_queue_clear_description">Alle apps worden uit de wachtrij verwijderd</string>
+    <string name="batch_queue_keep_title">Wachtrij behouden?</string>
+    <string name="batch_queue_keep_description">De apps in de wachtrij wachten op het startscherm om later te worden gestart</string>
+    <string name="batch_queue_keep">Behouden</string>
     <string name="shortcut_repatch_short">Opnieuw patchen</string>
     <string name="shortcut_repatch_long">Oude apps opnieuw patchen</string>
     <string name="shortcut_check_updates_short">Controleren op updates</string>
@@ -1114,7 +1122,6 @@ Details: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">U moet de referenties van het keystore invoeren om het te importeren</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Gebruikersnaam (alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Wachtwoord</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Keystore-formaat</string>
     <string name="settings_system_import_keystore_wrong_credentials">Verkeerde keystore-gegevens</string>
     <string name="settings_system_import_keystore_success">Keystore geïmporteerd</string>
     <string name="settings_system_import_keystore_failed">Kan keystore niet importeren</string>

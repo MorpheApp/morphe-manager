@@ -1125,7 +1125,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">Трябва да въведете данните за keystore, за да го импортирате</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Име на потребител (Алиас)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Парола</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Формат на хранилището</string>
     <string name="settings_system_import_keystore_wrong_credentials">Невалидни данни за ключовата запазна книга</string>
     <string name="settings_system_import_keystore_success">Ключовата запазна книга е импортирана</string>
     <string name="settings_system_import_keystore_failed">Неуспешно импортиране на ключовата запазна книга</string>

@@ -64,6 +64,7 @@
     <string name="list_options_state_description">按 %1$s 排序，按 %2$s 筛选</string>
     <string name="home_app_filter_clones">克隆应用</string>
     <string name="home_app_grouping_none">无</string>
+    <string name="home_app_sort_manual_hint">长按应用，然后点击重新排序按钮</string>
     <string name="home_app_sort_recommended">推荐顺序</string>
     <string name="home_app_sort_updates_first">补丁更新优先</string>
     <string name="home_app_sort_recently_patched">最近修补的</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">没有与 %s 匹配的内容</string>
     <string name="home_category_add">添加类别</string>
     <string name="home_category_all_apps">所有应用</string>
+    <string name="home_app_grouping_categories">类别</string>
     <string name="home_category_uncategorized">未分类</string>
     <string name="home_category_new_title">新建分类</string>
     <string name="home_category_rename_title">重命名分类</string>
@@ -288,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe 无法为这些网站担保。请跳过那些提供自己的应用商店而不是 APK 文件的网站</string>
     <string name="home_download_instructions_step3_search">在那个网站上，下载 &lt;b&gt;%s&lt;/b&gt; 版本的 APK，而不是最新版本</string>
     <string name="home_download_instructions_step3_search_any">在那个网站上，下载该应用的 APK。&lt;b&gt;任何版本&lt;/b&gt;都可以修补</string>
+    <string name="home_download_instructions_step2_github">在版本 &lt;b&gt;%s&lt;/b&gt; 的 &lt;b&gt;Assets&lt;/b&gt; 下，点击以 &lt;b&gt;.apk&lt;/b&gt; 结尾的文件</string>
+    <string name="home_download_instructions_step2_github_latest">在最新版本的 &lt;b&gt;Assets&lt;/b&gt; 下，点击以 &lt;b&gt;.apk&lt;/b&gt; 结尾的文件</string>
+    <string name="home_download_instructions_step2_github_note">如果有多个 APK 文件，请选择以 %s 命名或通用版本的文件</string>
     <string name="home_download_instructions_download_button_toast">在网站上按下下载，而不是在这里 😊</string>
     <string name="home_download_instructions_download_button_toast_2">太棒了！现在点击继续并访问网站👆</string>
     <string name="home_download_instructions_download_button_toast_3">熟能生巧，你做得越来越好了💪</string>
@@ -495,6 +500,9 @@
     <string name="batch_queue_pending_subtitle">点击以审核并开始</string>
     <string name="batch_queue_clear_title">是否清空队列？</string>
     <string name="batch_queue_clear_description">所有应用将从队列中移除</string>
+    <string name="batch_queue_keep_title">保留队列？</string>
+    <string name="batch_queue_keep_description">已排队的应用将在主屏幕上等待稍后启动</string>
+    <string name="batch_queue_keep">保留</string>
     <string name="shortcut_repatch_short">重新修补</string>
     <string name="shortcut_repatch_long">重新修补过时的应用程序</string>
     <string name="shortcut_check_updates_short">检查更新</string>
@@ -1114,7 +1122,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">您需要输入密钥库的凭据才能导入它</string>
     <string name="settings_system_import_keystore_dialog_alias_field">用户名 (别名)</string>
     <string name="settings_system_import_keystore_dialog_password_field">密码</string>
-    <string name="settings_system_import_keystore_dialog_format_field">密钥库格式</string>
     <string name="settings_system_import_keystore_wrong_credentials">密钥库凭据错误</string>
     <string name="settings_system_import_keystore_success">密钥库已导入</string>
     <string name="settings_system_import_keystore_failed">导入密钥库失败</string>

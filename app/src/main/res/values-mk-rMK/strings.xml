@@ -64,6 +64,7 @@
     <string name="list_options_state_description">Сортирано според %1$s, филтрирано според %2$s</string>
     <string name="home_app_filter_clones">Клонови</string>
     <string name="home_app_grouping_none">Ниту едно</string>
+    <string name="home_app_sort_manual_hint">Долг притисок на апликација, потоа допрете го копчето за преуредување</string>
     <string name="home_app_sort_recommended">Препорачан редослед</string>
     <string name="home_app_sort_updates_first">Прво ажурирања на закрпи</string>
     <string name="home_app_sort_recently_patched">Неодамна закрпено</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Ништо не одговара на %s</string>
     <string name="home_category_add">Додај категорија</string>
     <string name="home_category_all_apps">Сите апликации</string>
+    <string name="home_app_grouping_categories">Категории</string>
     <string name="home_category_uncategorized">Некатегоризирано</string>
     <string name="home_category_new_title">Нова категорија</string>
     <string name="home_category_rename_title">Преименувај категорија</string>
@@ -288,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe не може да ги гарантира овие веб-страници. Прескокнете ги оние што нудат сопствена продавница со апликации наместо APK датотека</string>
     <string name="home_download_instructions_step3_search">На таа веб-страница, преземете го APK за верзија &lt;b&gt;%s&lt;/b&gt;, а не најновата</string>
     <string name="home_download_instructions_step3_search_any">На таа веб-страница, преземете го APK-то на апликацијата. &lt;b&gt;Секоја верзија&lt;/b&gt; може да се закрпи</string>
+    <string name="home_download_instructions_step2_github">Под &lt;b&gt;Assets&lt;/b&gt; од верзијата &lt;b&gt;%s&lt;/b&gt;, притиснете ја датотеката што завршува на &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">Под &lt;b&gt;Assets&lt;/b&gt; од најновата верзија, притиснете ја датотеката што завршува на &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Ако има неколку APK датотеки, изберете ја онаа именувана по %s или универзалната</string>
     <string name="home_download_instructions_download_button_toast">Притиснете „Преземи“ на веб-страницата, а не овде 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Одлично! Сега кликнете на продолжете и посетете го сајтот 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Вежбањето создава совршенство, па напред 💪</string>
@@ -494,6 +499,9 @@
     <string name="batch_queue_pending_subtitle">Допрете за да прегледате и започнете</string>
     <string name="batch_queue_clear_title">Да се исчисти редот?</string>
     <string name="batch_queue_clear_description">Сите апликации ќе бидат отстранети од редот</string>
+    <string name="batch_queue_keep_title">Да се задржи редот?</string>
+    <string name="batch_queue_keep_description">Апликациите во редот ќе чекаат на почетниот екран за да бидат стартувани подоцна</string>
+    <string name="batch_queue_keep">Задржи</string>
     <string name="shortcut_repatch_short">Повторно закрпи</string>
     <string name="shortcut_repatch_long">Повторно закрпи ги застарените апликации</string>
     <string name="shortcut_check_updates_short">Проверете ажурирања</string>
@@ -1113,7 +1121,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">Ќе треба да ги внесете податоците за пристап до keystore за да го увезете</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Корисничко име (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Лозинка</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Формат на Keystore</string>
     <string name="settings_system_import_keystore_wrong_credentials">Неправилни податоци за пристап до keystore</string>
     <string name="settings_system_import_keystore_success">Keystore е увезен</string>
     <string name="settings_system_import_keystore_failed">Неуспешен увоз на keystore</string>
