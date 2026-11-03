@@ -35,8 +35,15 @@ preload bundles and start the run, and `HostEvent` for what the run reports.
   (`patcher-jvm-error-<pid>.log` in the app's temporary files) goes into the log of the run.
 - **A full heap**: neither VM gives up on a heap that is nearly full right away, but collects
   for a few minutes first (the JVM until a full collection frees nothing an allocation can use,
-  ART once a collection frees under 1%). The run then fails with `HeapExhaustedException`.
-- **A run that hangs**: once a run has not moved on for a minute, the host logs the stacks of
+  ART once a collection frees under 1%). The run then fails with `HeapExhaustedException`. On
+  the JVM the host does not wait for that: once collecting took over 60% of the last two
+  minutes, `watchForGcOverhead` sends a verdict encoded at its start and halts the process, as
+  the heap has no room left for anything else by then.
+- **The patch at fault**: the patcher reports a patch only once it is done, so the host also
+  sends `PatchExecuting` right before each one runs. The app (`RunningPatchWatch`) logs a patch
+  that runs 30 seconds, again each time it runs twice as long, and names the running patch when
+  the heap runs out or the process ends. It times this in the app, whose heap is not the full one.
+- **A run that hangs**: once a run has not moved on for five minutes, the host logs the stacks of
   all its threads and the heap in use (`watchForStalls` in `HostMain`), up to five times. The
   log also has the VM the host runs on (`Host VM:`), the process and the JVM options that differ
   between devices and builds (`Patcher process:`, `Patcher JVM:`), and how long the patches took

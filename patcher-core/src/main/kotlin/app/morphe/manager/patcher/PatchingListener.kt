@@ -20,6 +20,12 @@ interface PatchingListener {
 
     suspend fun patchesStarted()
 
+    /**
+     * A patch, or a dependency of one, is about to run. Not suspending, as the patcher reports it
+     * from deep inside the run, where nothing can suspend.
+     */
+    fun patchExecuting(name: String)
+
     suspend fun patchSucceeded(name: String)
 
     /** Reported right before the run fails on the patch, so the app can name it. */

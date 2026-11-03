@@ -21,6 +21,7 @@ internal class ProgressReporter(
     private val context: Context,
     private val logger: Logger,
     private val onProgress: ProgressEventHandler,
+    private val onPatchExecuting: (String) -> Unit,
     private val onPatchCompleted: suspend (String) -> Unit,
     private val onPatchFailed: (String) -> Unit
 ) : PatchingListener {
@@ -33,6 +34,8 @@ internal class ProgressReporter(
     }
 
     override suspend fun patchesStarted() = onProgress(null, State.RUNNING, null)
+
+    override fun patchExecuting(name: String) = onPatchExecuting(name)
 
     override suspend fun patchSucceeded(name: String) = onPatchCompleted(name)
 
