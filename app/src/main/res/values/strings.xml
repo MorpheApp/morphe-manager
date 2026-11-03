@@ -1359,6 +1359,7 @@ Details: %2$s"</string>
     <string name="credits_prior_development">Prior development</string>
     <string name="opensource_licenses">Open-source licenses</string>
     <string name="opensource_licenses_description">The libraries Morphe is built on</string>
+    <string name="opensource_licenses_search">Search libraries and licenses</string>
 
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">A choice</string>

@@ -96,8 +96,8 @@ Each is pinned by SHA-256 in `app/build.gradle.kts`.
 - The JDK that links has to be the same feature release as the build, so both 17 and 25 are
   toolchains of the build.
 - The `legal/` notices of every linked module go into the archive, as the GPL requires them to
-  travel with the binaries. The license itself is listed in `app/aboutlibraries`, since
-  AboutLibraries only finds Gradle dependencies on its own.
+  travel with the binaries. The license itself is listed in `app/licenses/licenses.json`,
+  since Licensee only finds Gradle dependencies on its own.
 
 To change the JDK or add an ABI, edit `embeddedJvms`. `EMBEDDED_JVM_ID` changes with it, and
 the app unpacks the runtime again.
