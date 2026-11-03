@@ -1,5 +1,6 @@
 [versions]
 activity = "1.13.0"
+# 9.5.0 fails to configure :app: its Compose Preview task requires unit tests to include Android resources
 android-gradle-plugin = "9.4.1"
 app-icon-loader-coil = "1.5.0"
 # MorpheApp fork until its changes (MorpheApp/ARSCLib#1) land in REAndroid/ARSCLib
@@ -19,14 +20,14 @@ hiddenapibypass = "6.2"
 koin = "4.2.2"
 kotlin = "2.4.21"
 kotlinx-coroutines = "1.11.0"
-ktor = "3.6.0"
+ktor = "3.6.1"
 ktx = "1.19.1"
 libsu = "6.0.0"
 licensee = "1.14.1"
 # Ahead of the Compose BOM, which still ships 1.4.0: the sheets build on the 1.5 bottom sheet API
 # (rememberBottomSheetState). Drop the override once the BOM ships a stable 1.5.0
 material3 = "1.5.0-beta02"
-morphe-patcher = "2.2.0-dev.7"
+morphe-patcher = "2.2.0-dev.8"
 navigation = "2.10.2"
 play-services-base = "18.11.1"
 preferences-datastore = "1.3.0"
