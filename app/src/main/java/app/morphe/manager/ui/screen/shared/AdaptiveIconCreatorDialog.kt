@@ -15,7 +15,6 @@ import android.graphics.PorterDuffColorFilter
 import android.net.Uri
 import android.os.Build
 import android.util.Log
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -52,6 +51,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.createBitmap
 import androidx.core.graphics.get
 import androidx.documentfile.provider.DocumentFile
@@ -216,7 +216,7 @@ fun DialogHostScope.AdaptiveIconCreatorDialog(
 
     // The patch keeps its Morphe logo for the icons a picture without transparency cannot be cut into
     val morpheLogo = rememberDrawablePainter(
-        drawable = remember(context) { AppCompatResources.getDrawable(context, R.drawable.ic_mpp) }
+        drawable = remember(context) { ContextCompat.getDrawable(context, R.drawable.ic_mpp) }
     )
     val logoFallback = morpheLogo.takeIf { foreground.value?.isOpaque == true }
 

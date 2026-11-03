@@ -28,7 +28,6 @@ dependencies {
     implementation(libs.activity.compose)
     implementation(libs.work.runtime.ktx)
     implementation(libs.preferences.datastore)
-    implementation(libs.appcompat)
 
     // Compose
     implementation(platform(libs.compose.bom))

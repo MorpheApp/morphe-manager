@@ -22,7 +22,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
@@ -86,7 +85,7 @@ import org.koin.core.context.GlobalContext
 import org.koin.core.parameter.parametersOf
 import org.koin.androidx.viewmodel.ext.android.getViewModel as getActivityViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
 
     /** Language the activity was attached in, to tell when it has to be recreated. */
     private var attachedLanguage = AppLocale.SYSTEM

@@ -2,7 +2,6 @@
 activity = "1.13.0"
 android-gradle-plugin = "9.4.1"
 app-icon-loader-coil = "1.5.0"
-appcompat = "1.8.0"
 # MorpheApp fork until its changes (MorpheApp/ARSCLib#1) land in REAndroid/ARSCLib
 # Keep in step with morphe-patcher: Gradle ships only one of the two, picked by comparing hashes as versions
 arsclib = "4695b583ef"
@@ -52,7 +51,6 @@ splash-screen = { group = "androidx.core", name = "core-splashscreen", version.r
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity" }
 work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "work-runtime" }
 preferences-datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "preferences-datastore" }
-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 
 # Compose
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
