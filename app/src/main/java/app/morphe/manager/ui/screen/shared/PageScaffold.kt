@@ -94,7 +94,14 @@ fun PageSubtitle(text: String) {
  * on a screen wider than it.
  */
 @Immutable
-data class PageInsets(val top: Dp, val bottom: Dp, val horizontal: Dp)
+data class PageInsets(val top: Dp, val bottom: Dp, val horizontal: Dp) {
+    /**
+     * Room the page's [ListScrollbar] keeps from the header and from [bottom], whatever covers the
+     * lower edge of the page, an even step clear of each so both ends show past rounded corners.
+     */
+    fun scrollbarPadding(bottom: Dp = this.bottom): PaddingValues =
+        PaddingValues(top = top + Defaults.SpaceMedium, bottom = bottom + Defaults.SpaceMedium)
+}
 
 /**
  * Padding of a list running on under a page's header, its [top] grown by [extraTop]. That is read
@@ -208,10 +215,7 @@ fun SubpageScaffold(
 
         ListScrollbar(
             scrollState = scrollState,
-            modifier = Modifier.padding(
-                top = insets.top + Defaults.SpaceMedium,
-                bottom = navigationBar + Defaults.SpaceMedium
-            )
+            modifier = Modifier.padding(insets.scrollbarPadding(bottom = navigationBar))
         )
         ScrollToTopButton(scrollState = scrollState, extraBottomPadding = navigationBar)
     }

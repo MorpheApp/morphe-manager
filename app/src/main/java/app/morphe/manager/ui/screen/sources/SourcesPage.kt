@@ -652,11 +652,7 @@ private fun SourcesPageContent(
 
         ListScrollbar(
             listState = listState,
-            // The same step at both ends as on the screens, so the end shows past rounded corners
-            modifier = Modifier.padding(
-                top = insets.top + Defaults.SpaceMedium,
-                bottom = listBottom + Defaults.SpaceMedium
-            ),
+            modifier = Modifier.padding(insets.scrollbarPadding(bottom = listBottom)),
             alphabetTargets = sourceScrollTargets,
             alphabetMode = alphabetScrollMode
         )

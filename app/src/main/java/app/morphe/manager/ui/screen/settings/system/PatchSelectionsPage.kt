@@ -408,10 +408,7 @@ private fun PatchSelectionsContent(
 
         ListScrollbar(
             listState = listState,
-            modifier = Modifier.padding(
-                top = insets.top + Defaults.SpaceMedium,
-                bottom = insets.bottom + Defaults.SpaceMedium
-            )
+            modifier = Modifier.padding(insets.scrollbarPadding())
         )
         ScrollToTopButton(listState = listState, extraBottomPadding = insets.bottom)
     }

@@ -98,10 +98,7 @@ fun SettingsPage(
 
         ListScrollbar(
             scrollState = scrollState,
-            modifier = Modifier.padding(
-                top = insets.top + Defaults.SpaceMedium,
-                bottom = bottomBarHeight + Defaults.SpaceMedium
-            )
+            modifier = Modifier.padding(insets.scrollbarPadding(bottom = bottomBarHeight))
         )
         ScrollToTopButton(scrollState = scrollState, extraBottomPadding = bottomBarHeight)
     }

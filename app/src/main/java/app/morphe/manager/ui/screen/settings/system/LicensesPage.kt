@@ -163,10 +163,7 @@ fun LicensesPage(onBack: () -> Unit) {
 
         ListScrollbar(
             listState = lazyListState,
-            modifier = Modifier.padding(
-                top = insets.top + Defaults.SpaceMedium,
-                bottom = navigationBar + Defaults.SpaceMedium
-            )
+            modifier = Modifier.padding(insets.scrollbarPadding(bottom = navigationBar))
         )
         ScrollToTopButton(listState = lazyListState, extraBottomPadding = navigationBar)
     }

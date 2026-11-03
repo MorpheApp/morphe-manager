@@ -69,15 +69,6 @@ private const val MinThumbFraction = 0.08f
  */
 private const val MinAlphabetTargets = 5
 
-/**
- * Keeps a screen's scrollbar an even step clear of the system bars its content runs on under, so
- * both ends show past the screen's rounded corners.
- */
-fun Modifier.scrollbarSystemBarsPadding(): Modifier =
-    statusBarsPadding()
-        .navigationBarsPadding()
-        .padding(vertical = Defaults.SpaceMedium)
-
 /** First row carrying a given leading letter, used to drive the alphabet fast scroll. */
 @Immutable
 data class ScrollTarget(
