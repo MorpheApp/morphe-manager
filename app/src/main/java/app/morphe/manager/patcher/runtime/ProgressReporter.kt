@@ -34,9 +34,6 @@ internal class ProgressReporter(
 
     override suspend fun patchesStarted() = onProgress(null, State.RUNNING, null)
 
-    // The patch that is running goes to the log, which RunningPatchWatch writes, not to the progress
-    override fun patchExecuting(name: String) = Unit
-
     override suspend fun patchSucceeded(name: String) = onPatchCompleted(name)
 
     override suspend fun patchFailed(name: String?, stackTrace: String) {

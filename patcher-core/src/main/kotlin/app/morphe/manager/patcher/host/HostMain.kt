@@ -208,11 +208,14 @@ private class HostEvents(private val stream: OutputStream) : AutoCloseable {
     @Volatile
     private var progressedAt = System.nanoTime()
 
-    @Synchronized
     fun send(event: HostEvent) {
-        writer.write(HostEvent.encode(event))
-        writer.newLine()
-        writer.flush()
+        // Encoded before the lock is taken, so sendAndHalt only ever waits for a line being written
+        val line = HostEvent.encode(event)
+        synchronized(this) {
+            writer.write(line)
+            writer.newLine()
+            writer.flush()
+        }
         if (event !is HostEvent.Log) progressedAt = System.nanoTime()
     }
 
@@ -254,7 +257,7 @@ private class HostEvents(private val stream: OutputStream) : AutoCloseable {
      * runs: it samples into arrays made up front and sends a verdict encoded before it is needed.
      */
     fun watchForGcOverhead(gcClock: GcClock) {
-        val verdict = (HostEvent.encode(HostEvent.Finished(GC_OVERHEAD_FAILURE)) + '\n').toByteArray()
+        val verdict = ('\n' + HostEvent.encode(HostEvent.Finished(GC_OVERHEAD_FAILURE)) + '\n').toByteArray()
         val samples = (GC_OVERHEAD_WINDOW / GC_OVERHEAD_POLL).toInt()
         // When each sample was taken, in nanoseconds, and the time spent collecting by then, in milliseconds
         val takenAt = LongArray(samples)
@@ -285,10 +288,12 @@ private class HostEvents(private val stream: OutputStream) : AutoCloseable {
         }
     }
 
-    /** Sends an event encoded ahead and ends the process, without the shutdown that exit runs. */
+    /**
+     * Sends an event encoded ahead and ends the process, without the shutdown that exit runs. The
+     * event starts on a line of its own, as a send the full heap cut short may have left half of one.
+     */
     private fun sendAndHalt(encoded: ByteArray) {
         synchronized(this) {
-            // Every send leaves the writer flushed, so the line cannot land inside another
             stream.write(encoded)
             stream.flush()
         }

@@ -27,6 +27,7 @@ import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.patcher.PatchingListener
 import app.morphe.manager.patcher.host.HostCommand
 import app.morphe.manager.patcher.host.HostEvent
+import app.morphe.manager.patcher.logger.LogLevel
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.runtime.jvm.JvmInstallation
 import app.morphe.manager.patcher.runtime.jvm.JvmLaunch
@@ -47,6 +48,7 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
+import kotlinx.serialization.SerializationException
 import java.io.Closeable
 import java.io.File
 import java.io.IOException
@@ -389,10 +391,7 @@ class PatcherProcesses(
                     HostEvent.StepCompleted -> listener.stepCompleted()
                     is HostEvent.SplitPreparation -> listener.splitPreparation(event.event)
                     HostEvent.PatchesStarted -> listener.patchesStarted()
-                    is HostEvent.PatchExecuting -> {
-                        runningPatch.started(event.name)
-                        listener.patchExecuting(event.name)
-                    }
+                    is HostEvent.PatchExecuting -> runningPatch.started(event.name)
                     is HostEvent.PatchSucceeded -> listener.patchSucceeded(event.name)
                     is HostEvent.PatchFailed -> {
                         runningPatch.stopped()
@@ -450,7 +449,7 @@ class PatcherProcesses(
         thread(isDaemon = true, name = "PatcherEvents") {
             try {
                 ParcelFileDescriptor.AutoCloseInputStream(source).bufferedReader().useLines { lines ->
-                    lines.forEach { channel.trySend(HostEvent.decode(it)) }
+                    lines.filter(String::isNotBlank).forEach { channel.trySend(decodeEvent(it)) }
                 }
                 channel.close()
             } catch (e: Exception) {
@@ -458,6 +457,16 @@ class PatcherProcesses(
             }
         }
         return channel
+    }
+
+    /**
+     * The event of a line, or the line itself as a warning if it holds none. A host that ran out of
+     * heap halfway through a send leaves half a line, and the events after it still count.
+     */
+    private fun decodeEvent(line: String) = try {
+        HostEvent.decode(line)
+    } catch (_: SerializationException) {
+        HostEvent.Log(LogLevel.WARN, "Unreadable event of the patcher process: $line")
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
