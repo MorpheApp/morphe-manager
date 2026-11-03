@@ -1,3 +1,9 @@
+## [2.4.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.5...v2.4.0-dev.6) (2026-11-03)
+
+### Features
+
+* Name the patch a stuck run is on and end runs lost to garbage collection ([a41bc98](https://github.com/MorpheApp/morphe-manager/commit/a41bc98a032eef7b28c9c4514ab5ef7ffeb73019))
+
 ## [2.4.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.4...v2.4.0-dev.5) (2026-11-02)
 
 ### Performance Improvements
