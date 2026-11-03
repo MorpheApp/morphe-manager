@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-11-02T19:54:08",
-  "description": "## [2.4.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.4...v2.4.0-dev.5) (2026-11-02)\n\n### Performance Improvements\n\n* Write the patched APK in one pass ([#1345](https://github.com/MorpheApp/morphe-manager/issues/1345)) ([04e8fa7](https://github.com/MorpheApp/morphe-manager/commit/04e8fa7b67beae719d6aa2696098ba61e4977be2))\n\n### Bug Fixes\n\n* Clear the patching notification once a run ends ([efd050e](https://github.com/MorpheApp/morphe-manager/commit/efd050ed7ab7700f47efb4b987dbba3db7c0cd83))\n* Keep patching and installing in the foreground ([f29c101](https://github.com/MorpheApp/morphe-manager/commit/f29c1018ff0c629ebc3f8bf084226d859523070b))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.4.0-dev.5/morphe-manager-2.4.0-dev.5.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.4.0-dev.5/morphe-manager-2.4.0-dev.5.apk.asc",
-  "version": "2.4.0-dev.5"
+  "created_at": "2026-11-03T09:27:52",
+  "description": "## [2.4.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.5...v2.4.0-dev.6) (2026-11-03)\n\n### Features\n\n* Name the patch a stuck run is on and end runs lost to garbage collection ([a41bc98](https://github.com/MorpheApp/morphe-manager/commit/a41bc98a032eef7b28c9c4514ab5ef7ffeb73019))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.4.0-dev.6/morphe-manager-2.4.0-dev.6.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.4.0-dev.6/morphe-manager-2.4.0-dev.6.apk.asc",
+  "version": "2.4.0-dev.6"
 }
