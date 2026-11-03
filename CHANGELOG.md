@@ -1,3 +1,17 @@
+## [2.4.0-dev.8](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.7...v2.4.0-dev.8) (2026-11-03)
+
+### Features
+
+* Show the open-source licenses without AboutLibraries ([3714b88](https://github.com/MorpheApp/morphe-manager/commit/3714b88d16c954cf6fe0b60fa72fbf6c51fa945a))
+
+### Performance Improvements
+
+* Drop AppCompat from the app ([7c86151](https://github.com/MorpheApp/morphe-manager/commit/7c861513b7af827cabefe268fe238551bf3fe95d))
+
+### Bug Fixes
+
+* End the patching Live Update once patching is over ([b7fc871](https://github.com/MorpheApp/morphe-manager/commit/b7fc871d85f146afbdbbd05acd8ead5c5e84cc0c))
+
 ## [2.4.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.6...v2.4.0-dev.7) (2026-11-03)
 
 ### Features
