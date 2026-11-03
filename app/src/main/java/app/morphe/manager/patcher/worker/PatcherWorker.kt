@@ -120,10 +120,12 @@ class PatcherWorker(
         stepName: String? = null,
         patchProgress: Pair<Int, Int>? = null, // Completed to total patches
         contentText: String? = null,
+        live: Boolean = true,
     ) = PatcherNotification.build(
         applicationContext,
         title = stepName ?: applicationContext.getString(R.string.patcher_notification_title),
         text = contentText ?: queueLabel ?: applicationContext.getText(R.string.patcher_notification_text),
+        live = live,
         patchProgress = patchProgress
     )
 
@@ -220,9 +222,9 @@ class PatcherWorker(
             runPatcher(args).also { if (it == Result.success()) patchingSucceeded = true }
         } finally {
             wakeLock.release()
-            // WorkManager removes the progress notification only with a foreground it got, so a run
-            // denied one would leave the ongoing notification it posted directly behind
-            notificationManager.cancel(PatcherNotification.ID)
+            // Patching is over, so its Live Update ends here instead of being left to the foreground
+            // to take down, and a run denied a foreground leaves nothing it posted directly behind
+            PatcherNotification.end(applicationContext, createNotification(live = false))
         }
 
         // A mount can still restore the stock app from it, the install flow deletes it after mounting

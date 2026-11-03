@@ -46,7 +46,7 @@ class ForegroundHoldService : Service() {
             ServiceCompat.startForeground(
                 this,
                 PatcherNotification.ID,
-                PatcherNotification.build(this, title, text),
+                PatcherNotification.build(this, title, text, live = false),
                 PatcherNotification.foregroundServiceType
             )
         } catch (e: RuntimeException) {

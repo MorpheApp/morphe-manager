@@ -7,6 +7,7 @@ package app.morphe.manager.patcher.worker
 
 import android.annotation.SuppressLint
 import android.app.Notification
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -44,12 +45,15 @@ object PatcherNotification {
     /**
      * The notification for the run as [title] and [text] describe it.
      *
+     * @param live Whether it is the Live Update of patching, the one step that reports progress.
+     * What holds the app in the foreground before and after it shows a plain notification.
      * @param patchProgress Completed to total patches, or null while the step has no count.
      */
     fun build(
         context: Context,
         title: CharSequence,
         text: CharSequence?,
+        live: Boolean,
         patchProgress: Pair<Int, Int>? = null
     ): Notification = Notification.Builder(context, UpdateNotificationManager.CHANNEL_PATCHER)
         .setContentTitle(title)
@@ -60,7 +64,7 @@ object PatcherNotification {
                 setSubText("$completed / $total")
                 setProgress(total, completed, false)
             }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.BAKLAVA) {
+            if (live && Build.VERSION.SDK_INT >= Build.VERSION_CODES.BAKLAVA) {
                 applyLiveUpdate(patchProgress)
             }
         }
@@ -69,6 +73,20 @@ object PatcherNotification {
         .setCategory(Notification.CATEGORY_SERVICE)
         .setOngoing(true)
         .build()
+
+    /**
+     * Ends the Live Update with [ended], a plain notification, and takes the notification down.
+     * Left to the foreground that held it, the system removes the notification, while the Live
+     * Update shown apart from it, such as in the Now Bar of One UI, can stay behind. A foreground
+     * service that still holds the notification keeps it up as [ended] until it lets go.
+     */
+    fun end(context: Context, ended: Notification) {
+        val notificationManager = context.getSystemService(NotificationManager::class.java)
+        // Posting it again would bring back a notification the system took down already
+        if (notificationManager.activeNotifications.none { it.id == ID }) return
+        notificationManager.notify(ID, ended)
+        notificationManager.cancel(ID)
+    }
 
     /** Request promotion to a Live Update, shown as a status bar chip while the manager is in the background. */
     @RequiresApi(Build.VERSION_CODES.BAKLAVA)
