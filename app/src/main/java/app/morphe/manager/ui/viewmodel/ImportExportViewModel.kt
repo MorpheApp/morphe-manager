@@ -35,16 +35,12 @@ import app.morphe.manager.domain.repository.SourceMuteRepository
 import app.morphe.manager.domain.repository.StoredSelectionSet
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.*
-import com.github.pgreze.process.Redirect
-import com.github.pgreze.process.process
+import app.morphe.patcher.apk.ApkSigner
 import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.io.IOException
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -59,7 +55,6 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 import kotlin.io.path.deleteExisting
-import kotlin.io.path.inputStream
 
 @Serializable
 data class ManagerSettingsExportFile(
@@ -167,9 +162,7 @@ class ImportExportViewModel(
     private val contentResolver = app.contentResolver
 
     private var keystoreImportPath by mutableStateOf<Path?>(null)
-    private var keystoreImportFormat by mutableStateOf(KeystoreInputFormat.KEYSTORE)
     val showCredentialsDialog by derivedStateOf { keystoreImportPath != null }
-    val detectedKeystoreFormat: KeystoreInputFormat get() = keystoreImportFormat
 
     /** The key patching signs with, null until the first patch creates one. */
     var signingKey by mutableStateOf<SigningKeyInfo?>(null)
@@ -204,29 +197,16 @@ class ImportExportViewModel(
                 }
             }
 
-            // Detect format: magic bytes first (reliable), extension as fallback
-            val detectedFormat = withContext(Dispatchers.IO) {
-                val header = path.inputStream().use { stream ->
-                    val buf = ByteArray(4)
-                    stream.read(buf)
-                    buf
-                }
-                // The shown name, as a document URI's last segment is an id without an extension
-                KeystoreInputFormat.detectFromBytes(header)
-                    ?: KeystoreInputFormat.fromExtension(
-                        content.displayName(contentResolver)?.substringAfterLast('.', "").orEmpty()
-                    )
-                    ?: KeystoreInputFormat.PKCS12
+            // No credentials open a file that is no keystore, so none are asked for
+            val data = withContext(Dispatchers.IO) { Files.readAllBytes(path) }
+            if (ApkSigner.KeyStoreType.of(data) == null) {
+                withContext(Dispatchers.IO) { Files.deleteIfExists(path) }
+                throw IllegalArgumentException("Unrecognized keystore format")
             }
-            keystoreImportFormat = detectedFormat
 
-            // Try known aliases/passwords with all supported formats (detected format first)
-            val autoFormats = listOf(detectedFormat) + (KeystoreInputFormat.entries - detectedFormat)
-            for (format in autoFormats) {
-                for (alias in aliases) {
-                    for (pass in knownPasswords) {
-                        if (tryKeystoreImport(alias, pass, "", format, path)) return@launch
-                    }
+            for (alias in aliases) {
+                for (pass in knownPasswords) {
+                    if (tryKeystoreImport(alias, pass, path)) return@launch
                 }
             }
 
@@ -240,37 +220,19 @@ class ImportExportViewModel(
         keystoreImportPath = null
     }
 
-    suspend fun tryKeystoreImport(alias: String, pass: String, keystorePw: String = "", format: KeystoreInputFormat): Boolean =
-        tryKeystoreImport(alias, pass, keystorePw, format, keystoreImportPath!!)
+    suspend fun tryKeystoreImport(alias: String, pass: String): Boolean =
+        tryKeystoreImport(alias, pass, keystoreImportPath!!)
 
-    private suspend fun tryKeystoreImport(alias: String, pass: String, keystorePw: String, format: KeystoreInputFormat, path: Path): Boolean {
-        // BKS is passed through as-is; converting it would re-encrypt the private key
-        // in a way that ApkSigner cannot read back
-        val bksBytes = if (format == KeystoreInputFormat.BKS || format == KeystoreInputFormat.KEYSTORE) {
-            withContext(Dispatchers.IO) { path.toFile().readBytes() }
-        } else {
-            val result = withContext(Dispatchers.IO) {
-                path.inputStream().use { KeystoreConversionUtils.convert(it, format, alias, pass) }
-            }
-            when (result) {
-                is KeystoreConversionResult.Error -> return false
-                is KeystoreConversionResult.Success -> result.data.toByteArray()
-            }
+    private suspend fun tryKeystoreImport(alias: String, pass: String, path: Path): Boolean {
+        val imported = keystoreManager.import(alias, pass, path.toFile())
+        if (imported) {
+            messages.show(R.string.settings_system_import_keystore_success)
+            // The copy holds the private key, and an automatic import never recorded its path
+            withContext(Dispatchers.IO) { Files.deleteIfExists(path) }
+            keystoreImportPath = null
+            refreshSigningKey()
         }
-
-        return try {
-            val imported = keystoreManager.import(alias, pass, keystorePw, bksBytes.inputStream())
-            if (imported) {
-                messages.show(R.string.settings_system_import_keystore_success)
-                // The copy holds the private key, and an automatic import never recorded its path
-                withContext(Dispatchers.IO) { Files.deleteIfExists(path) }
-                keystoreImportPath = null
-                refreshSigningKey()
-            }
-            imported
-        } catch (_: IOException) {
-            false
-        }
+        return imported
     }
 
     fun exportKeystore(target: Uri) = viewModelScope.launch {
@@ -702,15 +664,12 @@ class ImportExportViewModel(
 
         writer.write("\n=== Logcat ===\n\n")
 
-        val consumer = Redirect.Consume { flow ->
-            flow
-                .onEach { line -> writer.write("$line\n") }
-                .flowOn(Dispatchers.IO)
-                .collect { }
-        }
-
         // Filter logs by current process UID to include only Morphe Manager logs
-        process("logcat", "-d", "--uid=${app.applicationInfo.uid}", stdout = consumer).resultCode
+        val logcat = ProcessBuilder("logcat", "-d", "--uid=${app.applicationInfo.uid}")
+            .redirectErrorStream(true)
+            .start()
+        logcat.inputStream.bufferedReader().useLines { lines -> lines.forEach { writer.write("$it\n") } }
+        logcat.waitFor()
     }
 
     fun exportDebugLogs(target: Uri) = viewModelScope.launch {

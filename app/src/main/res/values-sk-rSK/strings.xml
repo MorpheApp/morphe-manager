@@ -62,26 +62,12 @@
     <string name="home_search_apps">Vyhľadávanie aplikácií</string>
     <string name="list_options_title">Zoradiť a filtrovať</string>
     <string name="list_options_state_description">Zoradené podľa %1$s, filtrované podľa %2$s</string>
-    <string name="home_app_filter_all_description">Všetky aplikácie na domovskej obrazovke</string>
-    <string name="home_app_filter_patched_description">Aplikácie, ktoré ste opatchovali alebo uložili pomocou Morphe</string>
-    <string name="home_app_filter_not_patched_description">Aplikácie, ktoré ste v Morphe ešte neopatchovali</string>
-    <string name="home_app_filter_installed_description">Aplikácie aktuálne nainštalované v tomto zariadení</string>
-    <string name="home_app_filter_uninstalled_description">Aplikácie opatchované pomocou Morphe, ktoré už nie sú v tomto zariadení</string>
     <string name="home_app_filter_clones">Klonované</string>
-    <string name="home_app_filter_clones_description">Aplikácie vytvorené pod vlastným názvom balíka, inštalované popri origináli</string>
     <string name="home_app_grouping_none">Žiadna</string>
-    <string name="home_app_grouping_all_apps_description">Jeden zoznam so všetkými aplikáciami</string>
-    <string name="home_app_grouping_sources_description">Aplikácie pod zdrojom záplaty, ktorý ich poskytuje</string>
-    <string name="home_app_grouping_custom_description">Aplikácie v kategóriách, ktoré vytvoríte</string>
-    <string name="home_app_sort_manual_description">Dlhým stlačením aplikácie a potom klepnutím na tlačidlo zoradiť</string>
+    <string name="home_app_sort_manual_hint">Dlho podržte aplikáciu a potom klepnite na tlačidlo pre zmenu poradia</string>
     <string name="home_app_sort_recommended">Odporúčaná verzia</string>
-    <string name="home_app_sort_recommended_description">Najprv nainštalované a pripnuté aplikácie</string>
-    <string name="home_app_sort_name_asc_description">Abecedne, od A po Z</string>
-    <string name="home_app_sort_name_desc_description">Abecedne zotriedené, od Z po A</string>
     <string name="home_app_sort_updates_first">Najprv opravy</string>
-    <string name="home_app_sort_updates_first_description">Aplikácie s novšími opravami najskôr, potom odporúčané poradie</string>
     <string name="home_app_sort_recently_patched">Nedávno opravené</string>
-    <string name="home_app_sort_recently_patched_description">Najnovšie opravené aplikácie ako prvé</string>
     <string name="home_no_apps_title">Nedostupné žiadne aplikácie</string>
     <string name="home_no_apps_subtitle">Pridajte zdroj záplaty alebo povoľte existujúci v %s</string>
     <string name="home_no_apps_search_subtitle">Žiadne aplikácie sa nezhodujú s \"%s\"</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Nič nezodpovedá %s</string>
     <string name="home_category_add">Pridať kategóriu</string>
     <string name="home_category_all_apps">Všetky aplikácie</string>
-    <string name="home_category_custom">Vlastné</string>
+    <string name="home_app_grouping_categories">Kategórie</string>
     <string name="home_category_uncategorized">Nekategorizované</string>
     <string name="home_category_new_title">Nová kategória</string>
     <string name="home_category_rename_title">Premenovať kategóriu</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">Zdroje záplat</string>
     <string name="sources_search">Hľadať zdroje a záplaty</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Každý zdroj</string>
-    <string name="sources_filter_enabled_description">Záplaty zdrojov sú prevzaté z</string>
-    <string name="sources_filter_disabled_description">Zdroje vypnuté</string>
     <string name="sources_filter_issues">Vyžadujú pozornosť</string>
-    <string name="sources_filter_issues_description">Zdroje, ktoré sú zablokované, zlyhali pri načítaní alebo vyžadujú novšiu Morphe</string>
     <string name="sources_sort_manual">Manuálne zoradenie</string>
     <string name="sources_sort_manual_hint">Dlhým stlačením položky zdroja ju môžete presunúť</string>
     <string name="sources_sort_last_updated">Posledná aktualizácia</string>
-    <string name="sources_sort_last_updated_description">Najnovšie aktualizácie zdrojov najprv</string>
     <string name="sources_sort_enabled_first">Najprv povolené</string>
-    <string name="sources_sort_enabled_first_description">Zobraziť aktívne zdroje pred zakázanými zdrojmi</string>
     <string name="sources_patches_source_disabled_hint">Tento zdroj je vypnutý. Jeho záplaty sú uvedené len pre informáciu a neaplikujú sa</string>
     <string name="sources_management_open_in_browser">Otvoriť v prehliadači</string>
     <string name="sources_management_report_issue">Nahlásiť problém</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">Odporúčané</string>
     <string name="home_apk_availability_unpatched_label">Nezaplátané</string>
     <string name="home_apk_availability_incompatible_label">Nekompatibilné</string>
-    <string name="home_apk_availability_installed_version">Nainštalované v tomto zariadení: %s</string>
     <string name="home_apk_availability_find">Áno, pomôžte mi to nájsť</string>
     <string name="home_apk_availability_have">Nie, už ho mám</string>
     <string name="home_apk_helper_download">Použiť pomocnú aplikáciu</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">Hľadá sa stránka na stiahnutie…</string>
     <string name="home_download_instructions_step1">Stlačte tlačidlo \'%s\' nižšie</string>
     <string name="home_download_instructions_step2_part1">Prejdite na webovej stránke nižšie a stlačte</string>
+    <string name="home_download_instructions_step2_apkcube">Prejdite na webovej stránke nižšie, vyberte verziu &lt;b&gt;%s&lt;/b&gt; a stlačte</string>
     <string name="home_download_instructions_step2_generic">Prejdite nižšie na webovej stránke a stlačte jej tlačidlo na stiahnutie</string>
     <string name="home_download_instructions_step2_variant">Prejdite nižšie na webovej stránke a stlačte tlačidlo na stiahnutie horného &lt;b&gt;variantu APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_search">Otvorte výsledok vyhľadávania z webovej stránky, ktorej dôverujete</string>
     <string name="home_download_instructions_step2_search_note">Morphe nemôže ručiť za tieto webové stránky. Preskočte tie, ktoré ponúkajú vlastný obchod s aplikáciami namiesto súboru APK</string>
     <string name="home_download_instructions_step3_search">Na tejto webovej stránke si stiahnite súbor APK verzie &lt;b&gt;%s&lt;/b&gt;, nie najnovšej</string>
     <string name="home_download_instructions_step3_search_any">Na tejto webovej stránke si stiahnite súbor APK aplikácie. &lt;b&gt;Akákoľvek verzia&lt;/b&gt; sa dá opatchovať</string>
+    <string name="home_download_instructions_step2_github">V sekcii &lt;b&gt;Assets&lt;/b&gt; vydania &lt;b&gt;%s&lt;/b&gt; stlačte súbor s príponou &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">V sekcii &lt;b&gt;Assets&lt;/b&gt; najnovšieho vydania stlačte súbor s príponou &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Ak je k dispozícii viacero APK súborov, vyberte ten s názvom %s alebo univerzálny</string>
     <string name="home_download_instructions_download_button_toast">Stlačte tlačidlo \'Download\' na webovej stránke, nie tu 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Skvelé! Teraz kliknite na tlačidlo Pokračovať a prejdite na webovú stránku 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Praxou k dokonalosti a už sa vám to darí 💪</string>
@@ -518,6 +501,9 @@ Pre najlepšie výsledky sa odporúča záplatovať &lt;b&gt;úplný APK&lt;/b&g
     <string name="batch_queue_pending_subtitle">Kliknutím skontrolujte a začnite</string>
     <string name="batch_queue_clear_title">Vymazať frontu?</string>
     <string name="batch_queue_clear_description">Všetky aplikácie budú odstránené z fronty</string>
+    <string name="batch_queue_keep_title">ponechať vo fronte?</string>
+    <string name="batch_queue_keep_description">Aplikácie vo fronte budú na hlavnej obrazovke čakať na neskoršie spustenie</string>
+    <string name="batch_queue_keep">Ponechať</string>
     <string name="shortcut_repatch_short">Zopakovať záplatu</string>
     <string name="shortcut_repatch_long">Znova záplatať zastarané aplikácie</string>
     <string name="shortcut_check_updates_short">Skontrolovať aktualizácie</string>
@@ -919,6 +905,8 @@ Záplaty tým nie sú ovplyvnené: povoľte predbežné záplaty pre každý zdr
     <string name="notification_channel_patch_updates">Opravné aktualizácie</string>
     <string name="notification_channel_patch_updates_description">Oznámenia o nových opravných verziách</string>
     <string name="notification_channel_patcher_description">Zobrazuje sa, keď Morphe pláta aplikácie na pozadí</string>
+    <string name="notification_channel_patching_results">Výsledky plátania</string>
+    <string name="notification_channel_patching_results_description">Keď plátanie skončí alebo keď Morphe beží na pozadí a čaká na vašu inštaláciu</string>
     <string name="notification_channel_mounted_apps">Pripojené aplikácie</string>
     <string name="notification_channel_mounted_apps_description">Keď iná verzia nahradila pripojenú aplikáciu a jej záplata sa už neaplikuje</string>
     <string name="notification_mount_replaced_title">Aplikácia %1$s už nie je záplatovaná</string>
@@ -1137,7 +1125,6 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Na importovanie budete musieť zadať údaje pre prístup ku keystoru</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Používateľské meno (alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Heslo</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Formát keystoru</string>
     <string name="settings_system_import_keystore_wrong_credentials">Nesprávne údaje pre prístup ku keystoru</string>
     <string name="settings_system_import_keystore_success">Keystore bol importovaný</string>
     <string name="settings_system_import_keystore_failed">Nepodarilo sa importovať keystore</string>
@@ -1291,6 +1278,7 @@ Podrobnosti: %2$s"</string>
     <string name="credits_prior_development">Predchádzajúci vývoj</string>
     <string name="opensource_licenses">Licencie otvoreného zdroja</string>
     <string name="opensource_licenses_description">Knihovny, na ktorých Morphe stojí</string>
+    <string name="opensource_licenses_search">Hľadať knižnice a licencie</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Voľba</string>
     <string name="easter_egg_pill_message">Vezmi si modrú tabletku a reklamy zostanú presne tam, kde sú. Vezmi si červenú a uvidíš, ako hlboko siaha bytecode.</string>

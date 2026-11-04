@@ -62,26 +62,12 @@
     <string name="home_search_apps">Sesha ama-app</string>
     <string name="list_options_title">Hlela futhi uhluze</string>
     <string name="list_options_state_description">Hlelwe ngokuka %1$s, hlulwe ngokuka %2$s</string>
-    <string name="home_app_filter_all_description">Yonke i-app esikrinini sasekhaya</string>
-    <string name="home_app_filter_patched_description">Ama-app owalungisile noma owawagcine ngoMorphe</string>
-    <string name="home_app_filter_not_patched_description">Ama-app ongakawalungisanga kuMorphe okwamanje</string>
-    <string name="home_app_filter_installed_description">Ama-app afakwe kuleli device njengamanje</string>
-    <string name="home_app_filter_uninstalled_description">Izinhlelo ezilungisiwe nge-Morphe ezingasekho kuleli device</string>
     <string name="home_app_filter_clones">Ama-Clones</string>
-    <string name="home_app_filter_clones_description">Ama-app akhiwe ngaphansi kwigama le-package lawo, afakwe eceleni kweyaqala</string>
     <string name="home_app_grouping_none">Akukho</string>
-    <string name="home_app_grouping_all_apps_description">Uhlu olulodwa lazo zonke izinhlelo</string>
-    <string name="home_app_grouping_sources_description">Izinhlelo ngaphansi komthombo we-patch ozihlinzekayo</string>
-    <string name="home_app_grouping_custom_description">Izinhlelo ezizinhlobonhlobo ozidala wena</string>
-    <string name="home_app_sort_manual_description">Cindezela isekelwe ku-app, bese uchofoza inkinobho yokuhlela kabusha</string>
+    <string name="home_app_sort_manual_hint">Cindezela isekelwe i-app, bese uchofoza inkinobho yokuhlela kabusha</string>
     <string name="home_app_sort_recommended">Uhlelo oluncomekile</string>
-    <string name="home_app_sort_recommended_description">Ama-app afakwe naphinishwe kuqala</string>
-    <string name="home_app_sort_name_asc_description">Ngohlelo lwezinhlamvu, kusuka ku-A kuya ku-Z</string>
-    <string name="home_app_sort_name_desc_description">Ngohlelo lwezinhlamvu oluhlebiwe, kusuka ku-Z kuya ku-A</string>
     <string name="home_app_sort_updates_first">Izibuyekezo ze-Patch kuqala</string>
-    <string name="home_app_sort_updates_first_description">Ama-app anama-patch amasha kuqala, bese kulandela uhlelo olunconywe</string>
     <string name="home_app_sort_recently_patched">Kwakhelwe muva</string>
-    <string name="home_app_sort_recently_patched_description">Izinhlelo ezikhelwe muva kakhulu zize kuqala</string>
     <string name="home_no_apps_title">Azikho izinhlelo ezitholakalayo</string>
     <string name="home_no_apps_subtitle">Yengeda umthombo we-patch noma uvule lowo okhona ku-%s</string>
     <string name="home_no_apps_search_subtitle">Azikho izinhlelo ezifanayo ne \"%s\"</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Akukho okuhambisana ne-%s</string>
     <string name="home_category_add">Yengeza uhlobo</string>
     <string name="home_category_all_apps">Zonke izinhlelo</string>
-    <string name="home_category_custom">Okuyisipesheli</string>
+    <string name="home_app_grouping_categories">Izigaba</string>
     <string name="home_category_uncategorized">Okungahlukanisiwe</string>
     <string name="home_category_new_title">Uhlobo olusha</string>
     <string name="home_category_rename_title">Shintsha igama lohlobo</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">Imithombo ye-patch</string>
     <string name="sources_search">Funa imithombo namaphetshi</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Yonke imithombo</string>
-    <string name="sources_filter_enabled_description">Izilungiso zemithombo zithathwa ku-</string>
-    <string name="sources_filter_disabled_description">Imithombo icishiwe</string>
     <string name="sources_filter_issues">Kudingeka ukunaka</string>
-    <string name="sources_filter_issues_description">Imithombo evimbwe, engalondiki, noma edinga iMorphe entsha</string>
     <string name="sources_sort_manual">Uhlelo lwezandla</string>
     <string name="sources_sort_manual_hint">Cindezela isikhathi eside kumthombo ukuze uhlele kabusha</string>
     <string name="sources_sort_last_updated">Okugcinwe okugcina</string>
-    <string name="sources_sort_last_updated_description">Izibuyekezo zomthombo ezishintshweamuva kuqala</string>
     <string name="sources_sort_enabled_first">Ezivuliwe kuqala</string>
-    <string name="sources_sort_enabled_first_description">Khombisa imithombo esebenzayo ngaphambi kwemithombo evalwele</string>
     <string name="sources_patches_source_disabled_hint">Lo mthombo uvalwe. Amaphetshi alo abhalwe njengokubhekisisa futhi awasebenzi</string>
     <string name="sources_management_open_in_browser">Vula kubrowser</string>
     <string name="sources_management_report_issue">Bika inkinga</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">Kunelulekile</string>
     <string name="home_apk_availability_unpatched_label">Angalungiswanga</string>
     <string name="home_apk_availability_incompatible_label">Ayihambisani</string>
-    <string name="home_apk_availability_installed_version">Efakiwe kuleli device: %s</string>
     <string name="home_apk_availability_find">Yebo, ngisize ngiyithole</string>
     <string name="home_apk_availability_have">Cha, senginayo</string>
     <string name="home_apk_helper_download">Sebenzisa i-app esizayo</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">Kufunwa ikhasi lokulandela…</string>
     <string name="home_download_instructions_step1">Cindezela inkinobho ye-\'%s\' ngezansi</string>
     <string name="home_download_instructions_step2_part1">Hlehla phansi ekhasini lewebhu bese ucindezela</string>
+    <string name="home_download_instructions_step2_apkcube">Sula phansi ikhasi lewebhu, khetha uhlobo u&lt;b&gt;%s&lt;/b&gt; bese ucindezela</string>
     <string name="home_download_instructions_step2_generic">Sula phansi ikhasi lewebhu bese ucindezela inkinobho yokudownloada</string>
     <string name="home_download_instructions_step2_variant">Sula phansi ikhasi lewebhu bese ucindezela inkinobho yokudownloada ye-&lt;b&gt;APK variant&lt;/b&gt; yephezulu</string>
     <string name="home_download_instructions_step2_search">Vula imiphumela yokusesha okuvela kuwebhu okwethembayo</string>
     <string name="home_download_instructions_step2_search_note">IMorphe ayikwazi ukuqinisekisa lezi zayithi. Shiya lezo ezihlinzeka isitolo sazo sohlelo esikhundleni sefaili le-APK</string>
     <string name="home_download_instructions_step3_search">Kulelo webhu, download i-APK ye-version &lt;b&gt;%s&lt;/b&gt;, hhayi entsha kakhulu</string>
     <string name="home_download_instructions_step3_search_any">Kulelo webhu, download i-APK yohlelo. &lt;b&gt;Noma iyiphi i-version&lt;/b&gt; ingapatchwa</string>
+    <string name="home_download_instructions_step2_github">Ngaphansi kwe-&lt;b&gt;Assets&lt;/b&gt; yokukhipha u-&lt;b&gt;%s&lt;/b&gt;, cindezela ifayela eliphela ngo-&lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">Ngaphansi kwe-&lt;b&gt;Assets&lt;/b&gt; kokukhipha kwakamuva, cindezela ifayela eliphela ngo-&lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Uma kukhona amafayela ama-APK amaningi, khetha lelo elibizwa ngokuthi u-%s noma elijwayelekile</string>
     <string name="home_download_instructions_download_button_toast">Cindezela ukulandisa kuwebhu, hhayi lapha 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Kuhle! Manje chofoza ukuqhubeka uye kuwebhusayithi 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Ukuzijwayeza kwenza ukuthi ube yingcweti futhi usondela lapho 💪</string>
@@ -355,8 +338,10 @@ Khetha ukuthi uthathe i-APK yayo kuphi"</string>
     <string name="expert_mode_enable_all_universal_pending">Thinta futhi ukuze uthole ama-patches onke</string>
     <string name="expert_mode_universal_all_warning_title">Vula wonke ama-patches universal?</string>
     <string name="expert_mode_universal_all_warning_message">Ama-patches universal awakuhloliswana. Ukuvula wonke ngasikhathi sinye kungabangela ukungahambisani, ukuhluleka kokufaka i-patch, noma ukuqhuma kwe-app</string>
+    <string name="expert_mode_recommended">Ama-patches anelele</string>
     <string name="expert_mode_reset_to_default_done">Izipathi ezinekilwayo sezifakwe</string>
     <string name="expert_mode_selected_count">%1$s kwe-%2$s ukhethiwe</string>
+    <string name="expert_mode_saved_selection">Ukukhetha okugcinwe</string>
     <string name="expert_mode_restore_saved_done">Ukukhetha okugcinwe sekubuyiselwe</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Azikho ama-patch ahambisana naleyo bundle</string>
     <string name="expert_mode_no_results">Azikho izigaba ezitholakele</string>
@@ -516,6 +501,9 @@ Ukuze uthole imiphumela engcono kakhulu, lolu hlelo luhlanganisa ukulungisa i-&l
     <string name="batch_queue_pending_subtitle">Thinta ukuze ubuyekeze futhi uqale</string>
     <string name="batch_queue_clear_title">Sula umsizi?</string>
     <string name="batch_queue_clear_description">Zonke izinhlelo zizosuswa ohlwini</string>
+    <string name="batch_queue_keep_title">Ugcine umsiphelo?</string>
+    <string name="batch_queue_keep_description">Izinhlelo ezilindile zizolinda kuscreen sasekhaya ukuze zaqale kamuva</string>
+    <string name="batch_queue_keep">Gcina</string>
     <string name="shortcut_repatch_short">Phephela futhi</string>
     <string name="shortcut_repatch_long">Phinda u-patch izinhlelo ezindala</string>
     <string name="shortcut_check_updates_short">Hlola izibuyekezo</string>
@@ -917,6 +905,8 @@ Ama-patch awathintikile: vumela ama-patch angaphambi kokukhishwa kuthumele wonke
     <string name="notification_channel_patch_updates">Izibuyekezo ze-patch</string>
     <string name="notification_channel_patch_updates_description">Izaziso mayelana nokukhipha okusha kwe-patch</string>
     <string name="notification_channel_patcher_description">Kubonakala ngenkathi i-Morphe ipatch-a uhlelo ngokungasemva</string>
+    <string name="notification_channel_patching_results">Imiphumela yokulungisa</string>
+    <string name="notification_channel_patching_results_description">Lapho ukulungisa kuphela noma ukufaka kulindele wena ngenkathi iMorphe isengemuva</string>
     <string name="notification_channel_mounted_apps">Izinhlelo ezifakwe</string>
     <string name="notification_channel_mounted_apps_description">Lapho omunye uhlobo uthathe indawo yohlelo olufakwe futhi i-patch yalo ayisasebenzi</string>
     <string name="notification_mount_replaced_title">%1$s ayisasebenzi i-patch yalo</string>
@@ -1135,7 +1125,6 @@ Imininingwane: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Kuzodingeka ukuba ungene ngemininingwane ye-keystore ukuze uyifake</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Igama lomsebenzisi (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Iphasiwudi</string>
-    <string name="settings_system_import_keystore_dialog_format_field">I-format ye-keystore</string>
     <string name="settings_system_import_keystore_wrong_credentials">Imininingwane ye-keystore ayilungile</string>
     <string name="settings_system_import_keystore_success">I-Keystore ifakwe</string>
     <string name="settings_system_import_keystore_failed">Kuhlulekile ukufaka i-keystore</string>
@@ -1289,6 +1278,7 @@ Imininingwane: %2$s"</string>
     <string name="credits_prior_development">Ukuthuthukiswa kwangaphambilini</string>
     <string name="opensource_licenses">Ama-license we-open-source</string>
     <string name="opensource_licenses_description">Imilayibrari i-Morphe eyakhiwe ngayo</string>
+    <string name="opensource_licenses_search">Sesha imilayibrari namalayisense</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Inketho</string>
     <string name="easter_egg_pill_message">Thatha iphali eliluhlaza bese izikhangiso zihlala lapho zikhona. Thatha elibomvu ubone ukuthi i-bytecode ijula kangakanani</string>

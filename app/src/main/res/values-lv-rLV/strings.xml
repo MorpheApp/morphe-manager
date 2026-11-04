@@ -62,26 +62,12 @@
     <string name="home_search_apps">Meklēt lietotnes</string>
     <string name="list_options_title">Kārtot un filtrēt</string>
     <string name="list_options_state_description">Kārtots pēc %1$s, filtrēts pēc %2$s</string>
-    <string name="home_app_filter_all_description">Katra programma sākumekrāna ekrānā</string>
-    <string name="home_app_filter_patched_description">Lietotnes, kuras esat patched vai saglabājis ar Morphe</string>
-    <string name="home_app_filter_not_patched_description">Lietotnes, kuras vēl neesat patched Morphe</string>
-    <string name="home_app_filter_installed_description">Lietotnes, kas pašlaik ir instalētas šajā ierīcē</string>
-    <string name="home_app_filter_uninstalled_description">Ar Morphe patched lietotnes, kuras vairs nav šajā ierīcē</string>
     <string name="home_app_filter_clones">Kloni</string>
-    <string name="home_app_filter_clones_description">Lietotnes, kas izveidotas ar savu paketes nosaukumu un instalētas līdzsidedīgi ar oriģinālo</string>
     <string name="home_app_grouping_none">Nav</string>
-    <string name="home_app_grouping_all_apps_description">Viens saraksts ar visām lietotnēm</string>
-    <string name="home_app_grouping_sources_description">Lietotnes saskaņā ar patchu avotu, kas tās nodrošina</string>
-    <string name="home_app_grouping_custom_description">Lietotnes jūsu izveidotajās kategorijās</string>
-    <string name="home_app_sort_manual_description">Ilgstoši nospiediet lietotni, pēc tam nospiediet pārkārtošanas pogu</string>
+    <string name="home_app_sort_manual_hint">Ilgstoši nospiediet lietotni, pēc tam nospiediet pogu kārtības maiņai</string>
     <string name="home_app_sort_recommended">Ieteiktā secība</string>
-    <string name="home_app_sort_recommended_description">Vispirms instalētās un fiksētās lietotnes</string>
-    <string name="home_app_sort_name_asc_description">Alfabētiski, no A līdz Z</string>
-    <string name="home_app_sort_name_desc_description">Alfabētiski descending, no Z līdz A</string>
     <string name="home_app_sort_updates_first">Vispirms rumpja atjauninājumi</string>
-    <string name="home_app_sort_updates_first_description">Vispirms lietotnes ar jaunākajiem lapašiem, pēc tam rekomendētā secība</string>
     <string name="home_app_sort_recently_patched">Nesavārtoti nesen</string>
-    <string name="home_app_sort_recently_patched_description">Vispirms visnesavārtotākās lietotnes</string>
     <string name="home_no_apps_title">Nav pieejamu lietotnēm</string>
     <string name="home_no_apps_subtitle">Pievienojiet lāpumu avotu vai iespējojiet esošo %s</string>
     <string name="home_no_apps_search_subtitle">Neviena lietotne neatbilst \"%s\"</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Nekas neatbilst %s</string>
     <string name="home_category_add">Pievienot kategoriju</string>
     <string name="home_category_all_apps">Visas lietotnes</string>
-    <string name="home_category_custom">Pielagots</string>
+    <string name="home_app_grouping_categories">Kategorijas</string>
     <string name="home_category_uncategorized">Bez kategorijas</string>
     <string name="home_category_new_title">Jauna kategorija</string>
     <string name="home_category_rename_title">Pārchrist kategoriju</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">Pielāgojumu avoti</string>
     <string name="sources_search">Meklēt avotos un lapašos</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Katrs avots</string>
-    <string name="sources_filter_enabled_description">Avoti, no kuriem tiek paņemti patchi</string>
-    <string name="sources_filter_disabled_description">Avoti izslēgti</string>
     <string name="sources_filter_issues">Nepieciešama uzmanība</string>
-    <string name="sources_filter_issues_description">Avoti, kas ir bloķēti, nav izlastes vai kam nepieciešama jaunāka Morphe versija</string>
     <string name="sources_sort_manual">Manuāla secība</string>
     <string name="sources_sort_manual_hint">Ilgāk nospiediet avotu, lai mainītu secību</string>
     <string name="sources_sort_last_updated">Pēdējā atjauninājuma datums</string>
-    <string name="sources_sort_last_updated_description">Vispirms jaunākie avotu atjauninājumi</string>
     <string name="sources_sort_enabled_first">Vispirms iespējotie</string>
-    <string name="sources_sort_enabled_first_description">Rādīt aktīvos avotus pirms nicht iespējotajiem avotiem</string>
     <string name="sources_patches_source_disabled_hint">Šis avots ir izslēgts. Tā lapaši ir sarakstīti informatīvi un netiek pielietoti</string>
     <string name="sources_management_open_in_browser">Atvērt pārlūkprogrammā</string>
     <string name="sources_management_report_issue">Ziņot par problēmu</string>
@@ -198,6 +178,7 @@
     <string name="sources_management_prerelease_toggle_description">Saņem agri piekļuvi jaunām eksperimentālajām patch versijām</string>
     <string name="sources_prerelease_warning_title">Activēt pirmizlaiduma lappisus?</string>
     <string name="sources_prerelease_warning_message">Pirmizlaiduma versijas joprojām tiek izstrādātas. Lappisēšana var neveiksmīgi beigties vai sabojāt lietotni, un funkcijas var mainīties bez brīdinājuma</string>
+    <string name="expert_mode_unstable_notice">Pirmālaiduma vai eksperimentālie plastmali var būt nestabili</string>
     <string name="sources_management_experimental_versions_toggle">Eksperimentālās lietotnes versijas</string>
     <string name="sources_management_experimental_versions_toggle_description">Rāda un patchē eksperimentālos lietotnes mērķus</string>
     <!-- Actions of the panel for several selected sources at once -->
@@ -212,6 +193,7 @@
     <string name="sources_management_metadata_unavailable">Metadati nav pieejami</string>
     <string name="sources_management_metadata_unavailable_hint">Tālstatnējais metadatu fails nav pieejams. Plāstums ar instalēto pakauju joprojām darbojas, taču šim avotam automātiskais atjauninājums ir izslēgts</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Plāstuma pakauju neizdevās lejupielādēt. Avota URL var būt nepareizs vai fails neeksistē</string>
+    <string name="sources_management_metadata_unavailable_hint_missing_editable">Plastmalas pakaupē neizdevās lejupielādēt. Avota URL adrese var būt nepareiza vai fails neeksistē. Pieskarieties, lai to mainītu</string>
     <string name="sources_management_outdated_manager_badge">Atjaunināt Morphe</string>
     <string name="sources_management_outdated_manager_hint">Šis avots ir izveidots patcherim %1$s, taču Morphe %2$s ietver patcher %3$s. Lai to izmantotu, atjauniniet Morphe</string>
     <string name="sources_management_held_back_badge">Avārija</string>
@@ -225,6 +207,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Rādīšanas nosaukums</string>
     <string name="sources_dialog_rename">Pārroksti patcha avotu</string>
+    <string name="sources_dialog_change_url">Mainīt vietu, no kuras tiek lejupielādāts plastmalu avots</string>
     <string name="sources_dialog_duplicate_name_error">Lapaṇu avots ar šādu nosaukumu jau eksistē</string>
     <string name="sources_dialog_missing_error">Neizdevās atjaunināt šo lapisa avotu</string>
     <string name="sources_dialog_add_source">Pievienot lapaṇu avotu</string>
@@ -268,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">Ieteikts</string>
     <string name="home_apk_availability_unpatched_label">Nepatika</string>
     <string name="home_apk_availability_incompatible_label">Nesaderīgs</string>
-    <string name="home_apk_availability_installed_version">Instalēts šajā ierīcē: %s</string>
     <string name="home_apk_availability_find">Jā, palīdziet man to atrast</string>
     <string name="home_apk_availability_have">Nē, tā jau ir manā rīcībā</string>
     <string name="home_apk_helper_download">Izmantot palīglieku lietotni</string>
@@ -302,12 +284,16 @@
     <string name="home_download_instructions_finding">Meklēju lejupielādes lapu…</string>
     <string name="home_download_instructions_step1">Nospiediet tālāk esošo pogu \'%s\'</string>
     <string name="home_download_instructions_step2_part1">Nokrītojieties lejup lapā un nospiediet</string>
+    <string name="home_download_instructions_step2_apkcube">Nokrītojieties lejup mājaslapā, izvēlieties versiju &lt;b&gt;%s&lt;/b&gt; un nospiediet</string>
     <string name="home_download_instructions_step2_generic">Noskrullējiet uznedeņu uz leju un nospiediet tās lejupielādes pogu</string>
     <string name="home_download_instructions_step2_variant">Noskrullējiet uznedeņu uz leju un nospiediet augstākā &lt;b&gt;APK varianta&lt;/b&gt; lejupielādes pogu</string>
     <string name="home_download_instructions_step2_search">Atveriet meklēšanas rezultātu no vietnes, kurai uzticaties</string>
     <string name="home_download_instructions_step2_search_note">Morphe nevar garantēt šo tīmekļa vietņu drošību. Izlaiziet tās, kas piedāvā savu lietotņu veikalu APK faila vietā</string>
     <string name="home_download_instructions_step3_search">Šajā tīmekļa vietnē lejupielādējiet versijas &lt;b&gt;%s&lt;/b&gt; APK, nevis jaunāko</string>
     <string name="home_download_instructions_step3_search_any">Šajā tīmekļa vietnē lejupielādējiet lietotnes APK. Var patchēt &lt;b&gt; jebkuru versiju&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github">Izlaiduma &lt;b&gt;%s&lt;/b&gt; sadaļā &lt;b&gt;Assets&lt;/b&gt; nospiediet failu, kas beidzas ar &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">Jaunākā izlaiduma sadaļā &lt;b&gt;Assets&lt;/b&gt; nospiediet failu, kas beidzas ar &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Ja ir vairāki APK faili, izvēlieties to, kuram ir %s nosaukums, vai universālo failu</string>
     <string name="home_download_instructions_download_button_toast">Nospiediet lejupielādēšanu vietnē, nevis šeit 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Lieliski! Tagad noklikšķiniet uz \"turpināt\" un dodies uz tīmekļa vietni 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Praksis padara perfektu, un jūs tuvājaties mērķim 💪</string>
@@ -352,7 +338,9 @@ Izvēlieties, no kurienes ņemt tās APK"</string>
     <string name="expert_mode_enable_all_universal_pending">Kārtējiet vēlreiz universāliem patchiem</string>
     <string name="expert_mode_universal_all_warning_title">Akativēt visus universālos patchus?</string>
     <string name="expert_mode_universal_all_warning_message">Universālie patchi nav testēti kopā. Aktivizējot visus vienlaicīgi, var rasties konflikti, patchošanas kļūme vai programma var crashes</string>
+    <string name="expert_mode_recommended">Ieteiktie plastmali</string>
     <string name="expert_mode_reset_to_default_done">Ieteiktie patches piemērti</string>
+    <string name="expert_mode_saved_selection">Saglabāta atlase</string>
     <string name="expert_mode_restore_saved_done">Saglabātā atlase atjaunota</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Šajā bundle nav atbilstošu patchiem</string>
     <string name="expert_mode_no_results">Nekādi patchi netika atrasti</string>
@@ -512,6 +500,9 @@ Lai pretendētu uz labākajiem rezultātiem, šī lietotne iesaka patchēt &lt;b
     <string name="batch_queue_pending_subtitle">Kārtojiet, lai pārskatītu un sāktu</string>
     <string name="batch_queue_clear_title">Notīrīt rindu?</string>
     <string name="batch_queue_clear_description">Visas lietotnes tiks izdzēstas no cērtes</string>
+    <string name="batch_queue_keep_title">Saglabāt rindu?</string>
+    <string name="batch_queue_keep_description">Rindā esošās lietotnes paliks uz sākuma ekrāna, lai tās vēlāk varētu palaist</string>
+    <string name="batch_queue_keep">Saglabāt</string>
     <string name="shortcut_repatch_short">Atjaunot patch</string>
     <string name="shortcut_repatch_long">Atjaunot patched novecotušas aplikācijas</string>
     <string name="shortcut_check_updates_short">Pārbaudīt atjauninājumus</string>
@@ -913,6 +904,8 @@ Patchi netiek ietekmēti: aktivizējiet pre-release patchus katram avotam patchu
     <string name="notification_channel_patch_updates">Lāpīšanas atjauninājumi</string>
     <string name="notification_channel_patch_updates_description">Paziņojumi par jauniem lāpīšanas izlaidumiem</string>
     <string name="notification_channel_patcher_description">Rādā, kad Morphe backgroundā patched aplikāciju</string>
+    <string name="notification_channel_patching_results">Lāpīšanas rezultāti</string>
+    <string name="notification_channel_patching_results_description">Kad lāpīšana beidzas vai instalācija gaida jūs, kamēr Morphe darbojas fonā</string>
     <string name="notification_channel_mounted_apps">Montētās lietotnes</string>
     <string name="notification_channel_mounted_apps_description">Ja cita versija aizstāj montēto lietotni un tās lāpums vairs nav spēkā</string>
     <string name="notification_mount_replaced_title">%1$s vairs nav lāpota</string>
@@ -1131,7 +1124,6 @@ Sīkāk: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Lai importētu keystore, jums būs jāievada tā autentifikācijas dati</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Lietotājvārds (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Parole</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Atslēgu kopas formāts</string>
     <string name="settings_system_import_keystore_wrong_credentials">Nepareizi keystore autentifikācijas dati</string>
     <string name="settings_system_import_keystore_success">Atslēgu kopa importēta</string>
     <string name="settings_system_import_keystore_failed">Neizdevās importēt atslēgu kopu</string>
@@ -1285,6 +1277,7 @@ Sīkāk: %2$s"</string>
     <string name="credits_prior_development">Iepēkšējā izstrāde</string>
     <string name="opensource_licenses">Atklātā pirmkoda licences</string>
     <string name="opensource_licenses_description">Bibliotēkas, uz kurām Morphe ir uzbūvēta</string>
+    <string name="opensource_licenses_search">Meklēt bibliotēkas un licences</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Izvēle</string>
     <string name="easter_egg_pill_message">Kāpiniet zilo tableti, un reklāmas paliks tieši tur, kur tās ir. Kāpiniet sarkanu un uzziniet, cik dziļi sniedzas baitkods</string>

@@ -62,26 +62,12 @@
     <string name="home_search_apps">ຄົ້ນຫາແອັບ</string>
     <string name="list_options_title">ຈັດລຽງ ແລະ ກັ່ນຕອງ</string>
     <string name="list_options_state_description">ຈັດລຽງໂດຍ %1$s, ກັ່ນຕອງໂດຍ %2$s</string>
-    <string name="home_app_filter_all_description">ທຸກໆແອັບໃນໜ້າຈໍຫຼັກ</string>
-    <string name="home_app_filter_patched_description">ແອັບທີ່ທ່ານໄດ້ປັບແຕ່ງ ຫຼື ບັນທຶກໄວ້ດ້ວຍ Morphe</string>
-    <string name="home_app_filter_not_patched_description">ແອັບທີ່ທ່ານຍັງບໍ່ທັນໄດ້ປັບແຕ່ງໃນ Morphe</string>
-    <string name="home_app_filter_installed_description">ແອັບທີ່ຕິດຕັ້ງຢູ່ໃນອຸປະກອນນີ້ໃນປັດຈຸບັນ</string>
-    <string name="home_app_filter_uninstalled_description">ແອັບທີ່ຖືກ patch ດ້ວຍ Morphe ທີ່ບໍ່ມີຢູ່ໃນອຸປະກອນນີ້ອີກຕໍ່ໄປ</string>
     <string name="home_app_filter_clones">ຕົວໂຄລນ</string>
-    <string name="home_app_filter_clones_description">ແອັບທີ່ຖືກສ້າງພາຍໃຕ້ຊື່ package ຂອງພວກເຂົາເອງ, ຖືກຕິດຕັ້ງຄວບຄູ່ໄປກັບຕົ້ນສະບັບ</string>
     <string name="home_app_grouping_none">ບໍ່ມີ</string>
-    <string name="home_app_grouping_all_apps_description">ລາຍການດຽວທີ່ມີທຸກແອັບ</string>
-    <string name="home_app_grouping_sources_description">ແອັບພລິເຄຊັນພາຍໃຕ້ແຫຼ່ງ patch ທີ່ສະໜອງໃຫ້ພວກມັນ</string>
-    <string name="home_app_grouping_custom_description">ແອັບພລິເຄຊັນໃນໝວດໝູ່ທີ່ທ່ານສ້າງ</string>
-    <string name="home_app_sort_manual_description">ກົດຄ້າງແອັບ, ແລ້ວແຕະປຸ່ມຈັດລຳດັບ</string>
+    <string name="home_app_sort_manual_hint">ກົດແຊ່ທີ່ແອັບ, ຈາກນັ້ນແຕະປຸ່ມຈັດລຽງໃໝ່</string>
     <string name="home_app_sort_recommended">ລຳດັບທີ່ແນະນຳ</string>
-    <string name="home_app_sort_recommended_description">ແອັບທີ່ຕິດຕັ້ງ ແລະປັກໝຸດໄວ້ກ່ອນ</string>
-    <string name="home_app_sort_name_asc_description">ຕາມຕົວອັກສອນ, A ຫາ Z</string>
-    <string name="home_app_sort_name_desc_description">ກົງກັນຂ້າມຕາມຕົວອັກສອນ, Z ຫາ A</string>
     <string name="home_app_sort_updates_first">ອັບເດດຊຸດແພດກ່ອນ</string>
-    <string name="home_app_sort_updates_first_description">ແອັບທີ່ມີແພັດຊ໌ໃໝ່ກວ່າກ່ອນ, ຈາກນັ້ນຕາມດ້ວຍລຳດັບທີ່ແນະນຳ</string>
     <string name="home_app_sort_recently_patched">ແພັດຊ໌ຫຼ້າສຸດ</string>
-    <string name="home_app_sort_recently_patched_description">ສະແດງແອັບທີ່ຖືກແພັດຊ໌ຫຼ້າສຸດກ່ອນ</string>
     <string name="home_no_apps_title">ບໍ່ມີແອັບພ້ອມໃຊ້</string>
     <string name="home_no_apps_subtitle">ເພີ່ມແຫຼ່ງຊຸດແພດ ຫຼືເປີດໃຊ້ແຫຼ່ງທີ່ມີຢູ່ແລ້ວໃນ %s</string>
     <string name="home_no_apps_search_subtitle">ບໍ່ມີແອັບທີ່ກົງກັບ \"%s\"</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">ບໍ່ມີສິ່ງໃດກົງກັບ %s</string>
     <string name="home_category_add">ເພີ່ມໝວດໝູ່</string>
     <string name="home_category_all_apps">ແອັບທັງໝົດ</string>
-    <string name="home_category_custom">ກຳນົດເອງ</string>
+    <string name="home_app_grouping_categories">ໝວດໝູ່</string>
     <string name="home_category_uncategorized">ບໍ່ມີໝວດໝູ່</string>
     <string name="home_category_new_title">ໝວດໝູ່ໃໝ່</string>
     <string name="home_category_rename_title">ປ່ຽນຊື່ໝວດໝູ່</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">ແຫຼ່ງຊຸດແພດ</string>
     <string name="sources_search">ຄົ້ນຫາແຫຼ່ງທີ່ມາ ແລະ ແພັດຊ໌</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">ທຸກແຫຼ່ງທີ່ມາ</string>
-    <string name="sources_filter_enabled_description">ແຫຼ່ງທີ່ມາທີ່ໃຊ້ໃນການດຶງ Patch</string>
-    <string name="sources_filter_disabled_description">ແຫຼ່ງທີ່ມາທີ່ຖືກປິດ</string>
     <string name="sources_filter_issues">ຕ້ອງການການເອົາໃຈໃສ່</string>
-    <string name="sources_filter_issues_description">ແຫຼ່ງທີ່ມາທີ່ຖືກບລັອກ, ໂຫລດບໍ່ສຳເລັດ ຫຼື ຕ້ອງການ Morphe ເວີຊັນໃໝ່ກວ່າ</string>
     <string name="sources_sort_manual">ລຳດັບດ້ວຍມື</string>
     <string name="sources_sort_manual_hint">ກົດຄ້າງແຫຼ່ງຂໍ້ມູນເພື່ອຈັດລຳດັບ</string>
     <string name="sources_sort_last_updated">ອັບເດດຫຼ້າສຸດ</string>
-    <string name="sources_sort_last_updated_description">ອັບເດດແຫຼ່ງຂໍ້ມູນໃໝ່ທີ່ສຸດກ່ອນ</string>
     <string name="sources_sort_enabled_first">ອັນທີ່ເປີດໃຊ້ງານກ່ອນ</string>
-    <string name="sources_sort_enabled_first_description">ສະແດງແຫຼ່ງທີ່ເຮັດວຽກກ່ອນແຫຼ່ງທີ່ປິດໃຊ້ງານ</string>
     <string name="sources_patches_source_disabled_hint">ແຫຼ່ງທີ່ມານີ້ຖືກປິດໃຊ້ງານ. ແພັດຊ໌ຂອງມັນຖືກລາຍຊື່ໄວ້ເພື່ອອ້າງອີງ ແລະ ຈະບໍ່ຖືກນຳໃຊ້</string>
     <string name="sources_management_open_in_browser">ເປີດໃນບຣາວເຊີ</string>
     <string name="sources_management_report_issue">ລາຍງານບັນຫາ</string>
@@ -198,6 +178,7 @@
     <string name="sources_management_prerelease_toggle_description">ໄດ້ຮັບສິດເຂົ້າເຖິງເວີຊັນຊຸດແພດທົດລອງໃໝ່ກ່ອນໄວ</string>
     <string name="sources_prerelease_warning_title">ເປີດໃຊ້ແພັດຊ໌ເວີຊັນກ່ອນປ່ອຍຕົວບໍ?</string>
     <string name="sources_prerelease_warning_message">ບິວເວີຊັນກ່ອນປ່ອຍຕົວຍັງຢູ່ໃນຂັ້ນຕອນການພັດທະນາ. ການແພັດຊ໌ອາດຈະລົ້ມເຫຼວ ຫຼື ເຮັດໃຫ້ແອັບໃຊ້ງານບໍ່ໄດ້, ແລະ ຄຸນສົມບັດຕ່າງໆອາດມີການປ່ຽນແປງໂດຍບໍ່ມີການແຈ້ງລ່ວງໜ້າ</string>
+    <string name="expert_mode_unstable_notice">ແພັດເວີຊັນ Pre-release ຫຼື ທົດລອງອາດຈະບໍ່ຄົງທີ່</string>
     <string name="sources_management_experimental_versions_toggle">ເວີຊັນແອັບທົດລອງ</string>
     <string name="sources_management_experimental_versions_toggle_description">ສະແດງ ແລະ ແພັດຊ໌ເປົ້າໝາຍແອັບທົດລອງ</string>
     <!-- Actions of the panel for several selected sources at once -->
@@ -212,6 +193,7 @@
     <string name="sources_management_metadata_unavailable">ຂໍ້ມູນກຳກັບບໍ່ມີ</string>
     <string name="sources_management_metadata_unavailable_hint">ໄຟລ໌ຂໍ້ມູນກຳກັບຣີໂມດບໍ່ສາມາດໃຊ້ໄດ້. ການແພດດ້ວຍຊຸດທີ່ຕິດຕັ້ງໄວ້ຍັງເຮັດວຽກໄດ້, ແຕ່ການອັບເດດອັດຕະໂນມັດຈະຖືກປິດສຳລັບແຫຼ່ງນີ້</string>
     <string name="sources_management_metadata_unavailable_hint_missing">ບໍ່ສາມາດດາວໂຫຼດຊຸດແພດໄດ້. URL ແຫຼ່ງຂໍ້ມູນອາດບໍ່ຖືກຕ້ອງ ຫຼືໄຟລ໌ບໍ່ມີຢູ່</string>
+    <string name="sources_management_metadata_unavailable_hint_missing_editable">ບໍ່ສາມາດດາວໂຫຼດຊຸດແພັດໄດ້. URL ຕົ້ນທາງອາດຈະບໍ່ຖືກຕ້ອງ ຫຼື ໄຟລ໌ບໍ່ມີຢູ່. ແຕະເພື່ອປ່ຽນມັນ</string>
     <string name="sources_management_outdated_manager_badge">ອັບເດດ Morphe</string>
     <string name="sources_management_outdated_manager_hint">ແຫຼ່ງນີ້ຖືກສ້າງມາສຳລັບ patcher %1$s, ແຕ່ Morphe %2$s ປະກອບມີ patcher %3$s. ກະລຸນາອັບເດດ Morphe ເພື່ອໃຊ້ງານ</string>
     <string name="sources_management_held_back_badge">ຢຸດເຮັດວຽກ</string>
@@ -225,6 +207,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">ຊື່ທີ່ສະແດງ</string>
     <string name="sources_dialog_rename">ປ່ຽນຊື່ແຫຼ່ງຊຸດແພດ</string>
+    <string name="sources_dialog_change_url">ປ່ຽນບ່ອນທີ່ດາວໂຫຼດແຫຼ່ງຂອງແພັດ</string>
     <string name="sources_dialog_duplicate_name_error">ມີແຫຼ່ງຊຸດແພດທີ່ມີຊື່ນີ້ຢູ່ແລ້ວ</string>
     <string name="sources_dialog_missing_error">ບໍ່ສາມາດອັບເດດແຫຼ່ງຊຸດແພດນີ້ໄດ້</string>
     <string name="sources_dialog_add_source">ເພີ່ມແຫຼ່ງຊຸດແພດ</string>
@@ -268,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">ແນະນຳ</string>
     <string name="home_apk_availability_unpatched_label">ຍັງບໍ່ໄດ້ແພດ</string>
     <string name="home_apk_availability_incompatible_label">ບໍ່ເຂົ້າກັນໄດ້</string>
-    <string name="home_apk_availability_installed_version">ຕິດຕັ້ງໃນອຸປະກອນນີ້: %s</string>
     <string name="home_apk_availability_find">ແມ່ນ, ຊ່ວຍຂ້ອຍຊອກຫາ}{|pluralForm\":\"other\"</string>
     <string name="home_apk_availability_have">ບໍ່, ຂ້ອຍມີມັນຢູ່ແລ້ວ</string>
     <string name="home_apk_helper_download">ໃຊ້ແອັບຊ່ວຍ</string>
@@ -302,12 +284,16 @@
     <string name="home_download_instructions_finding">ກຳລັງຊອກຫາໜ້າດາວໂຫຼດ…</string>
     <string name="home_download_instructions_step1">ກົດປຸ່ມ \'%s\' ດ້ານລຸ່ມ</string>
     <string name="home_download_instructions_step2_part1">ເລື່ອນລົງລຸ່ມຂອງໜ້າເວັບແລ້ວກົດ</string>
+    <string name="home_download_instructions_step2_apkcube">ເລື່ອນລົງລຸ່ມໃນໜ້າເວັບ, ເລືອກເວີຊັນ &lt;b&gt;%s&lt;/b&gt; ແລະ ກົດ</string>
     <string name="home_download_instructions_step2_generic">ເລື່ອນລົງໃນໜ້າເວັບໄຊທ໌ ແລະ ກົດປຸ່ມດາວໂຫຼດ</string>
     <string name="home_download_instructions_step2_variant">ເລື່ອນລົງໃນໜ້າເວັບໄຊທ໌ ແລະ ກົດປຸ່ມດາວໂຫຼດຂອງ &lt;b&gt;APK variant&lt;/b&gt; ອັນເທິງສຸດ</string>
     <string name="home_download_instructions_step2_search">ເປີດຜົນການຄົ້ນຫາຈາກເວັບໄຊທ໌ທີ່ທ່ານໄວ້ວາງໃຈ</string>
     <string name="home_download_instructions_step2_search_note">Morphe ບໍ່ສາມາດຮັບປະກັນເວັບໄຊທ໌ເຫຼົ່ານີ້ໄດ້. ໃຫ້ຂ້າມເວັບໄຊທ໌ທີ່ສະເໜີ app store ຂອງພວກເຂົາເອງ ແທນທີ່ຈະເປັນໄຟລ໌ APK</string>
     <string name="home_download_instructions_step3_search">ໃນເວັບໄຊທ໌ນັ້ນ, ໃຫ້ດາວໂຫຼດ APK ຂອງເວີຊັນ &lt;b&gt;%s&lt;/b&gt;, ບໍ່ແມ່ນເວີຊັນໃໝ່ສຸດ</string>
     <string name="home_download_instructions_step3_search_any">ໃນເວັບໄຊທ໌ນັ້ນ, ໃຫ້ດາວໂຫຼດ APK ຂອງແອັບ. &lt;b&gt;ທຸກເວີຊັນ&lt;/b&gt; ສາມາດ patch ໄດ້</string>
+    <string name="home_download_instructions_step2_github">ພາຍໃຕ້ &lt;b&gt;Assets&lt;/b&gt; ຂອງເວີຊັນ &lt;b&gt;%s&lt;/b&gt;, ໃຫ້ກົດທີ່ໄຟລ໌ທີ່ລົງທ້າຍດ້ວຍ &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">ພາຍໃຕ້ &lt;b&gt;Assets&lt;/b&gt; ຂອງເວີຊັນຫຼ້າສຸດ, ໃຫ້ກົດທີ່ໄຟລ໌ທີ່ລົງທ້າຍດ້ວຍ &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">ຖ້າມີໄຟລ໌ APK ຫຼາຍໄຟລ໌, ໃຫ້ເລືອກໄຟລ໌ທີ່ຕັ້ງຊື່ຕາມ %s ຫຼື ໄຟລ໌ universal</string>
     <string name="home_download_instructions_download_button_toast">ກົດດາວໂຫຼດຢູ່ເວັບໄຊ, ບໍ່ແມ່ນຢູ່ນີ້ 😊</string>
     <string name="home_download_instructions_download_button_toast_2">ເຢັ້ມ! ຕອນນີ້ກົດສືບຕໍ່ແລ້ວໄປທີ່ເວັບໄຊ 👆</string>
     <string name="home_download_instructions_download_button_toast_3">ຝຶກຫຼາຍເຮັດໃຫ້ຊຳນານ ແລະເຈົ້າໃກ້ຈະໄດ້ແລ້ວ 💪</string>
@@ -352,8 +338,10 @@
     <string name="expert_mode_enable_all_universal_pending">ແຕະອີກຄັ້ງ ສຳລັບ universal patches</string>
     <string name="expert_mode_universal_all_warning_title">ເປີດໃຊ້ແພັດຊ໌ສາກົນທັງໝົດບໍ?</string>
     <string name="expert_mode_universal_all_warning_message">ແພັດຊ໌ສາກົນບໍ່ໄດ້ຖືກທົດສອບຮ່ວມກັນ. ການເປີດໃຊ້ທັງໝົດພ້ອມກັນອາດເຮັດໃຫ້ເກີດຄວາມຂັດແຍ່ງ, ການແພັດຊ໌ລົ້ມເຫຼວ ຫຼື ແອັບປິດໂຕເອງ</string>
+    <string name="expert_mode_recommended">ແພັດທີ່ແນະນຳ</string>
     <string name="expert_mode_reset_to_default_done">ນຳໃຊ້ຊຸດແພດທີ່ແນະນຳແລ້ວ</string>
     <string name="expert_mode_selected_count">ເລືອກແລ້ວ %1$s ຈາກ %2$s</string>
+    <string name="expert_mode_saved_selection">ການເລືອກທີ່ບັນທຶກໄວ້</string>
     <string name="expert_mode_restore_saved_done">ກູ້ຄືນການເລືອກທີ່ບັນທຶກໄວ້ແລ້ວ</string>
     <string name="expert_mode_copy_from_bundle_no_patches">ບໍ່ມີ patch ທີ່ກົງກັນໃນບັນດິລນີ້</string>
     <string name="expert_mode_no_results">ບໍ່ພົບຊຸດແພດ</string>
@@ -513,6 +501,9 @@
     <string name="batch_queue_pending_subtitle">ແຕະເພື່ອທົບທວນ ແລະ ເລີ່ມຕົ້ນ</string>
     <string name="batch_queue_clear_title">ລ້າງຄິວບໍ?</string>
     <string name="batch_queue_clear_description">ແອັບທັງໝົດຈະຖືກລຶບອອກຈາກຄິວ</string>
+    <string name="batch_queue_keep_title">ເກັບຄິວໄວ້ບໍ?</string>
+    <string name="batch_queue_keep_description">ແອັບໃນຄິວຈະລໍຖ້າຢູ່ໜ້າຈໍຫຼັກເພື່ອເລີ່ມຕົ້ນໃນພາຍຫຼັງ</string>
+    <string name="batch_queue_keep">ເກັບໄວ້</string>
     <string name="shortcut_repatch_short">Patch ຄືນ</string>
     <string name="shortcut_repatch_long">ແພັດແອັບທີ່ລ້າສະໄໝຄືນໃໝ່</string>
     <string name="shortcut_check_updates_short">ກວດສອບການອັບເດດ</string>
@@ -914,6 +905,8 @@ Patch ຈະບໍ່ໄດ້ຮັບຜົນກະທົບ: ໃຫ້ເປ
     <string name="notification_channel_patch_updates">ການອັບເດດ Patch</string>
     <string name="notification_channel_patch_updates_description">ການແຈ້ງເຕືອນກ່ຽວກັບການປ່ອຍ Patch ໃໝ່</string>
     <string name="notification_channel_patcher_description">ສະແດງໃນຂະນະທີ່ Morphe ກຳລັງແພດແອັບໃນພື້ນຫຼັງ</string>
+    <string name="notification_channel_patching_results">ຜົນການປັບປຸງ</string>
+    <string name="notification_channel_patching_results_description">ເມື່ອການປັບປຸງສິ້ນສຸດລົງ ຫຼື ການຕິດຕັ້ງກຳລັງລໍຖ້າທ່ານ ໃນຂະນະທີ່ Morphe ເຮັດວຽກຢູ່ພື້ນຫຼັງ</string>
     <string name="notification_channel_mounted_apps">ແອັບທີ່ຖືກ Mount ໄວ້</string>
     <string name="notification_channel_mounted_apps_description">ເມື່ອເວີຊັນອື່ນໄດ້ປ່ຽນແທນແອັບທີ່ຖືກ Mount ໄວ້ ແລະ ການປັບປຸງຂອງມັນບໍ່ມີຜົນອີກຕໍ່ໄປ</string>
     <string name="notification_mount_replaced_title">%1$s ບໍ່ໄດ້ຖືກປັບປຸງແລ້ວ</string>
@@ -1132,7 +1125,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">ທ່ານຈະຕ້ອງປ້ອນຂໍ້ມູນປະຈຳຕົວຂອງ keystore ເພື່ອນຳເຂົ້າມັນ</string>
     <string name="settings_system_import_keystore_dialog_alias_field">ຊື່ຜູ້ໃຊ້ (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">ລະຫັດຜ່ານ</string>
-    <string name="settings_system_import_keystore_dialog_format_field">ຮູບແບບ keystore</string>
     <string name="settings_system_import_keystore_wrong_credentials">ຂໍ້ມູນປະຈຳຕົວ keystore ບໍ່ຖືກຕ້ອງ</string>
     <string name="settings_system_import_keystore_success">ນຳເຂົ້າ keystore ແລ້ວ</string>
     <string name="settings_system_import_keystore_failed">ນຳເຂົ້າ keystore ລົ້ມເຫຼວ</string>
@@ -1286,6 +1278,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">ການພັດທະນາກ່ອນໜ້າ</string>
     <string name="opensource_licenses">ໃບອະນຸຍາດໂອເພນຊອດ</string>
     <string name="opensource_licenses_description">ໄລບຣາຣີທີ່ Morphe ຖືກສ້າງຂຶ້ນ</string>
+    <string name="opensource_licenses_search">ຄົ້ນຫາຫໍສະໝຸດ ແລະ ໃບອະນຸຍາດ</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">ທາງເລືອກ</string>
     <string name="easter_egg_pill_message">ກິນຢາເມັດສີຟ້າ ແລ້ວໂຄສະນາຈະຍັງຄົງຢູ່ບ່ອນເກົ່າ. ກິນເມັດສີແດງ ແລ້ວເບິ່ງວ່າ bytecode ນັ້ນລົງເລິກໄດ້ປານໃດ</string>

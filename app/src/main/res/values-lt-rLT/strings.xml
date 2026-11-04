@@ -62,26 +62,12 @@
     <string name="home_search_apps">Ieškoti programų</string>
     <string name="list_options_title">Rūšiuoti ir filtruoti</string>
     <string name="list_options_state_description">Rūšiuojama pagal %1$s, filtruojama pagal %2$s</string>
-    <string name="home_app_filter_all_description">Kiekviena programa pradiniame ekrane</string>
-    <string name="home_app_filter_patched_description">Programos, kurias pataisėte ar išsaugojote naudodami „Morphe“</string>
-    <string name="home_app_filter_not_patched_description">Programos, kurių dar nepataisėte „Morphe“</string>
-    <string name="home_app_filter_installed_description">Šiuo metu įdiegtos programos šiame įrenginyje</string>
-    <string name="home_app_filter_uninstalled_description">Programos, pataisytos naudojant „Morphe“, kurių šiame įrenginyje jau nėra</string>
     <string name="home_app_filter_clones">Klonai</string>
-    <string name="home_app_filter_clones_description">Programos, sukurtos su savo paketo pavadinimu, įdiegtos šalia originalo</string>
     <string name="home_app_grouping_none">Nieko</string>
-    <string name="home_app_grouping_all_apps_description">Vienas sąrašas su visomis programomis</string>
-    <string name="home_app_grouping_sources_description">Programos pagal šaltinį, kuris jas pateikia</string>
-    <string name="home_app_grouping_custom_description">Programos jūsų sukurtose kategorijose</string>
-    <string name="home_app_sort_manual_description">Ilgai paspauskite programą, tada palieskite pertvarkymo mygtuką</string>
+    <string name="home_app_sort_manual_hint">Ilgai paspauskite programėlę ir bakstelėkite perdėliojimo mygtuką</string>
     <string name="home_app_sort_recommended">Rekomenduojama eilė</string>
-    <string name="home_app_sort_recommended_description">Įdiegtos ir prisegtos programos pirmiausia</string>
-    <string name="home_app_sort_name_asc_description">Abėcėlės tvarka, A–Z</string>
-    <string name="home_app_sort_name_desc_description">Atvirkščia abėcėlės tvarka, Z–A</string>
     <string name="home_app_sort_updates_first">Pataisų naujinimai pirmiausia</string>
-    <string name="home_app_sort_updates_first_description">Programos su naujesnėmis pataisomis pirmiausia, tada rekomenduojama eilė</string>
     <string name="home_app_sort_recently_patched">Neseniai pataisytos</string>
-    <string name="home_app_sort_recently_patched_description">Neseniai pataisytos programos pirmiausia</string>
     <string name="home_no_apps_title">Nėra pasiekiamų programų</string>
     <string name="home_no_apps_subtitle">Pridėti pataisos šaltinį arba įjungti jau esantį iš %s</string>
     <string name="home_no_apps_search_subtitle">Nėra programų, atitinkančių \"%s\"</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Nieko neatitiko %s</string>
     <string name="home_category_add">Pridėti kategoriją</string>
     <string name="home_category_all_apps">Visos programos</string>
-    <string name="home_category_custom">Savo</string>
+    <string name="home_app_grouping_categories">Kategorijos</string>
     <string name="home_category_uncategorized">Be kategorijos</string>
     <string name="home_category_new_title">Nauja kategorija</string>
     <string name="home_category_rename_title">Pervadinti kategoriją</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">Pataisų šaltiniai</string>
     <string name="sources_search">Ieškoti šaltinių ir pataisų</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Visi šaltiniai</string>
-    <string name="sources_filter_enabled_description">Šaltinių patch\'ai imami iš</string>
-    <string name="sources_filter_disabled_description">Šaltiniai išjungti</string>
     <string name="sources_filter_issues">Reikalauja dėmesio</string>
-    <string name="sources_filter_issues_description">Užblokuoti šaltiniai, kurie nepavyko įkelti arba reikalauja naujesnės „Morphe“</string>
     <string name="sources_sort_manual">Rankinis rikiavimas</string>
     <string name="sources_sort_manual_hint">Ilgu paspaudimu perkelkite šaltinį į norimą vietą</string>
     <string name="sources_sort_last_updated">Pagal atnaujinimo datą</string>
-    <string name="sources_sort_last_updated_description">Naujausi šaltinio naujinimai pirmiausia</string>
     <string name="sources_sort_enabled_first">Įjungti pirmiausia</string>
-    <string name="sources_sort_enabled_first_description">Rodyti aktyvius šaltinius prieš išjungtus</string>
     <string name="sources_patches_source_disabled_hint">Šis šaltinis išjungtas. Jo pataisos pateikiamos tik kaip nuoroda ir nėra taikomos</string>
     <string name="sources_management_open_in_browser">Atidaryti naršyklėje</string>
     <string name="sources_management_report_issue">Pranešti apie problemą</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">Rekomenduojama</string>
     <string name="home_apk_availability_unpatched_label">Nepataisytas</string>
     <string name="home_apk_availability_incompatible_label">Nesuderinama</string>
-    <string name="home_apk_availability_installed_version">Įdiegta šiame įrenginyje: %s</string>
     <string name="home_apk_availability_find">Taip, padėkite man jį surasti</string>
     <string name="home_apk_availability_have">Ne, aš jį jau turiu</string>
     <string name="home_apk_helper_download">Naudoti pagalbinę programą</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">Ieškoma atsisiuntimo puslapio…</string>
     <string name="home_download_instructions_step1">Paspauskite \'%s\' mygtuką apačioje</string>
     <string name="home_download_instructions_step2_part1">Slinkite žemyn tinklalapyje ir paspauskite</string>
+    <string name="home_download_instructions_step2_apkcube">Slinkite žemyn svetainėje, pasirinkite versiją &lt;b&gt;%s&lt;/b&gt; ir paspauskite</string>
     <string name="home_download_instructions_step2_generic">Slinkite tinklalapiu žemyn ir paspauskite jo atsisiuntimo mygtuką</string>
     <string name="home_download_instructions_step2_variant">Slinkite tinklalapiu žemyn ir paspauskite viršutinės &lt;b&gt;APK variantos&lt;/b&gt; atsisiuntimo mygtuką</string>
     <string name="home_download_instructions_step2_search">Atidarykite paieškos rezultatą iš jūsų pasitikimo svetainės</string>
     <string name="home_download_instructions_step2_search_note">„Morphe“ negali laiduoti už šias svetaines. Praleiskite tas, kurios siūlo savo programų parduotuvę, o ne APK failą</string>
     <string name="home_download_instructions_step3_search">Toje svetainėje atsisiųskite versijos &lt;b&gt;%s&lt;/b&gt; APK, o ne naujausią</string>
     <string name="home_download_instructions_step3_search_any">Toje svetainėje atsisiųskite programos APK. &lt;b&gt;Bet kurią versiją&lt;/b&gt; galima pataisyti</string>
+    <string name="home_download_instructions_step2_github">Skiltis &lt;b&gt;Assets&lt;/b&gt; versijoje &lt;b&gt;%s&lt;/b&gt; pasirinkite failą, kuris baigiasi &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">Skiltis &lt;b&gt;Assets&lt;/b&gt; naujausioje versijoje pasirinkite failą, kuris baigiasi &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Jei yra keli APK failai, pasirinkite tą, kuris vadinamas %s, arba universalią versiją</string>
     <string name="home_download_instructions_download_button_toast">Paspauskite atsisiųsti (Download) puslapyje, o ne čia 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Puiku! Dabar spustelėkite tęsti ir eikite į svetainę 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Praktika svarbiausia ir jums puikiai sekasi 💪</string>
@@ -518,6 +501,9 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <string name="batch_queue_pending_subtitle">Paspauskite, kad peržiūrėtumėte ir pradėtumėte</string>
     <string name="batch_queue_clear_title">Išvalyti eilę?</string>
     <string name="batch_queue_clear_description">Visos programėlės bus pašalintos iš eilės</string>
+    <string name="batch_queue_keep_title">Išlaikyti eilę?</string>
+    <string name="batch_queue_keep_description">Eilėje stovėsiančios programėlės paliks pagrindiniame ekrane, kol bus paleistos vėliau</string>
+    <string name="batch_queue_keep">Išlaikyti</string>
     <string name="shortcut_repatch_short">Pataisyti iš naujo</string>
     <string name="shortcut_repatch_long">Iš naujo pataisyti pasenusias programas</string>
     <string name="shortcut_check_updates_short">Patikrinti atnaujinimus</string>
@@ -919,6 +905,8 @@ Pataisoms tai įtakos neturi: įjunkite išankstines pataisas kiekvienam šaltin
     <string name="notification_channel_patch_updates">Pataisų naujinimai</string>
     <string name="notification_channel_patch_updates_description">Pranešimai apie naujus pataisų leidimus</string>
     <string name="notification_channel_patcher_description">Rodoma, kai „Morphe“ fone pataiso programą</string>
+    <string name="notification_channel_patching_results">Taisymo rezultatai</string>
+    <string name="notification_channel_patching_results_description">Kai baigiasi taisymas arba įdiegimas laukia jūsų, kol Morphe veikia fone</string>
     <string name="notification_channel_mounted_apps">Prijungtos programėlės</string>
     <string name="notification_channel_mounted_apps_description">Kai kita versija pakeičia prijungtą programėlę ir jos pataisa nebepritaikoma</string>
     <string name="notification_mount_replaced_title">%1$s nebėra pataisyta</string>
@@ -1137,7 +1125,6 @@ Išsami informacija: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Norėdami importuoti rakto saugyklą, turėsite įvesti jos prisijungimo duomenis</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Naudotojo vardas (pseudonimas)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Slaptažodis</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Rakto saugyklos formatas</string>
     <string name="settings_system_import_keystore_wrong_credentials">Neteisingi rakto saugyklos prisijungimo duomenys</string>
     <string name="settings_system_import_keystore_success">Rakto saugykla importuota</string>
     <string name="settings_system_import_keystore_failed">Nepavyko importuoti rakto saugyklos</string>
@@ -1291,6 +1278,7 @@ Išsami informacija: %2$s"</string>
     <string name="credits_prior_development">Ankstesnis vystymas</string>
     <string name="opensource_licenses">Atvirojo kodo licencijos</string>
     <string name="opensource_licenses_description">Programinės įrangos bibliotekos, naudojamos kuriant „Morphe“</string>
+    <string name="opensource_licenses_search">Ieškoti bibliotekų ir licencijų</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Pasirinkimas</string>
     <string name="easter_egg_pill_message">Išgerkite mėlynąją tabletę ir skelbimai liks tiksliai ten, kur yra. Išgerkite raudonąją ir pamatysite, kaip giliai tęsiasi baitkodas</string>

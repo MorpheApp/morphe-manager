@@ -43,7 +43,6 @@ import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.androidVersionName
 import app.morphe.manager.util.htmlAnnotatedString
-import app.morphe.manager.util.withVersionPrefix
 import app.morphe.patcher.patch.AppTarget
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
@@ -98,17 +97,6 @@ internal fun DialogHostScope.ApkAvailabilityDialog(
         savedApkInfo != null && !savedApkMatchesTargets &&
             compatibleVersions.any { it.target.version == savedApkInfo.version }
     }
-
-    // What the list below prints: the version on the device is called out under it only when
-    // the list is not already showing that version
-    val listedVersions = remember(isExpertMode, offeredVersions, recommendedVersion) {
-        if (isExpertMode && offeredVersions.isNotEmpty()) {
-            offeredVersions.mapNotNullTo(mutableSetOf()) { it.target.version }
-        } else {
-            setOfNotNull(recommendedVersion?.version)
-        }
-    }
-    val unlistedInstalledVersion = installedAppVersion?.takeIf { it !in listedVersions }
 
     // When saved and installed APKs share the same version, prefer the saved copy.
     // Hide the installed button in that case to avoid showing two equivalent sources
@@ -241,18 +229,6 @@ internal fun DialogHostScope.ApkAvailabilityDialog(
                         ?: emptyMap(),
                     savedVersion = savedApkInfo?.version,
                     installedVersion = installedAppVersion
-                )
-            }
-
-            // For reference only, so neutral rather than a warning
-            unlistedInstalledVersion?.let {
-                Footnote(
-                    text = stringResource(
-                        R.string.home_apk_availability_installed_version,
-                        it.withVersionPrefix()
-                    ),
-                    tone = SemanticTone.Neutral,
-                    icon = MaterialSymbols.Rounded.Install_mobile
                 )
             }
 

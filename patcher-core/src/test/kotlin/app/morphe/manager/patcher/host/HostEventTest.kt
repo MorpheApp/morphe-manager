@@ -23,6 +23,7 @@ class HostEventTest {
             HostEvent.SplitPreparation(SplitPreparationEvent.Merging("split_config.arm64_v8a.apk")),
             HostEvent.SplitPreparation(SplitPreparationEvent.Finalizing),
             HostEvent.PatchesStarted,
+            HostEvent.PatchExecuting("Hide ads"),
             HostEvent.PatchSucceeded("Hide ads"),
             HostEvent.PatchFailed(null, "trace"),
             HostEvent.PatchesFinished(3),

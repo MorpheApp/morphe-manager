@@ -62,26 +62,12 @@
     <string name="home_search_apps">Поиск приложений</string>
     <string name="list_options_title">Сортировка и фильтрация</string>
     <string name="list_options_state_description">Отсортировано по %1$s, отфильтровано по %2$s</string>
-    <string name="home_app_filter_all_description">Все приложения на главном экране</string>
-    <string name="home_app_filter_patched_description">Приложения, которые вы пропатчили или сохранили с помощью Morphe</string>
-    <string name="home_app_filter_not_patched_description">Приложения, которые вы ещё не пропатчили в Morphe</string>
-    <string name="home_app_filter_installed_description">Приложения, установленные в данный момент на этом устройстве</string>
-    <string name="home_app_filter_uninstalled_description">Приложения, пропатченные с помощью Morphe, которых больше нет на этом устройстве</string>
     <string name="home_app_filter_clones">Клоны</string>
-    <string name="home_app_filter_clones_description">Приложения, созданные под собственным именем пакета, устанавливаются вместе с оригинальным</string>
     <string name="home_app_grouping_none">Нет</string>
-    <string name="home_app_grouping_all_apps_description">Один список со всеми приложениями</string>
-    <string name="home_app_grouping_sources_description">Приложения под источником патча, который их предоставляет</string>
-    <string name="home_app_grouping_custom_description">Приложения в категориях, которые вы создаете</string>
-    <string name="home_app_sort_manual_description">Нажмите и удерживайте значок приложения, затем нажмите кнопку изменения порядка</string>
+    <string name="home_app_sort_manual_hint">Нажмите и удерживайте значок приложения, затем нажмите кнопку изменения порядка</string>
     <string name="home_app_sort_recommended">Рекомендуемый порядок</string>
-    <string name="home_app_sort_recommended_description">Сначала установленные и закреплённые приложения</string>
-    <string name="home_app_sort_name_asc_description">По алфавиту, от А до Я</string>
-    <string name="home_app_sort_name_desc_description">В обратном алфавитном порядке, от Я до А</string>
     <string name="home_app_sort_updates_first">Сначала обновите патчи</string>
-    <string name="home_app_sort_updates_first_description">Сначала приложения с более новыми патчами, затем рекомендуемый порядок</string>
     <string name="home_app_sort_recently_patched">Недавно пропатченные</string>
-    <string name="home_app_sort_recently_patched_description">Сначала недавно пропатченные приложения</string>
     <string name="home_no_apps_title">Нет доступных приложений</string>
     <string name="home_no_apps_subtitle">Добавить источник патчей или включить существующий в %s</string>
     <string name="home_no_apps_search_subtitle">Нет соответствующих приложений \"%s\"</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Ничего не соответствует %s</string>
     <string name="home_category_add">Добавить категорию</string>
     <string name="home_category_all_apps">Все приложения</string>
-    <string name="home_category_custom">Пользовательское</string>
+    <string name="home_app_grouping_categories">Категории</string>
     <string name="home_category_uncategorized">Некатегоризированные</string>
     <string name="home_category_new_title">Новая категория</string>
     <string name="home_category_rename_title">Переименовать категорию</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">Источники патчей</string>
     <string name="sources_search">Поиск источников и патчей</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Все источники</string>
-    <string name="sources_filter_enabled_description">Источники патчей взяты из</string>
-    <string name="sources_filter_disabled_description">Источники отключены</string>
     <string name="sources_filter_issues">Требуют внимания</string>
-    <string name="sources_filter_issues_description">Источники, которые заблокированы, не загрузились или требуют более новой версии Morphe</string>
     <string name="sources_sort_manual">Ручная сортировка</string>
     <string name="sources_sort_manual_hint">Нажмите и удерживайте источник, чтобы изменить порядок</string>
     <string name="sources_sort_last_updated">Последнее обновление</string>
-    <string name="sources_sort_last_updated_description">Сначала новые обновления источников</string>
     <string name="sources_sort_enabled_first">Сначала включенные</string>
-    <string name="sources_sort_enabled_first_description">Показывать активные источники перед отключенными источниками</string>
     <string name="sources_patches_source_disabled_hint">Этот источник отключен. Его патчи указаны для справки и не применяются.</string>
     <string name="sources_management_open_in_browser">Открыть в браузере</string>
     <string name="sources_management_report_issue">Сообщить о проблеме</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">Рекомендуемый</string>
     <string name="home_apk_availability_unpatched_label">Непатченый</string>
     <string name="home_apk_availability_incompatible_label">Несовместимый</string>
-    <string name="home_apk_availability_installed_version">Установлено на этом устройстве: %s</string>
     <string name="home_apk_availability_find">Да, помогите мне его найти</string>
     <string name="home_apk_availability_have">Нет, у меня это уже есть</string>
     <string name="home_apk_helper_download">Использовать вспомогательное приложение</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">Поиск страницы загрузки…</string>
     <string name="home_download_instructions_step1">Нажмите \'%s\' кнопке ниже</string>
     <string name="home_download_instructions_step2_part1">Прокрутите страницу вниз и нажмите</string>
+    <string name="home_download_instructions_step2_apkcube">Прокрутите веб-страницу вниз, выберите версию &lt;b&gt;%s&lt;/b&gt; и нажмите</string>
     <string name="home_download_instructions_step2_generic">Прокрутите страницу вниз и нажмите её кнопку загрузки</string>
     <string name="home_download_instructions_step2_variant">Прокрутите страницу вниз и нажмите кнопку загрузки верхнего &lt;b&gt;варианта APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_search">Откройте результат поиска на сайте, которому вы доверяете</string>
     <string name="home_download_instructions_step2_search_note">Morphe не может поручиться за эти сайты. Пропустите те, которые предлагают собственный магазин приложений вместо APK-файла</string>
     <string name="home_download_instructions_step3_search">На этом сайте скачайте APK версии &lt;b&gt;%s&lt;/b&gt;, а не последней</string>
     <string name="home_download_instructions_step3_search_any">На этом сайте скачайте APK приложения. &lt;b&gt;Любую версию&lt;/b&gt; можно пропатчить</string>
+    <string name="home_download_instructions_step2_github">В разделе &lt;b&gt;Assets&lt;/b&gt; релиза &lt;b&gt;%s&lt;/b&gt; нажмите на файл, заканчивающийся на &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">В разделе &lt;b&gt;Assets&lt;/b&gt; последнего релиза нажмите на файл, заканчивающийся на &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Если доступно несколько APK-файлов, выберите тот, который назван в честь %s, или универсальный</string>
     <string name="home_download_instructions_download_button_toast">Нажмите скачать на веб-сайте, а не здесь 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Отлично! Теперь нажмите \"Продолжить\" и перейдите на сайт 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Практика — залог успеха, и у вас всё получается 💪</string>
@@ -518,6 +501,9 @@
     <string name="batch_queue_pending_subtitle">Нажмите, чтобы проверить и начать</string>
     <string name="batch_queue_clear_title">Очистить очередь?</string>
     <string name="batch_queue_clear_description">Все приложения будут удалены из очереди</string>
+    <string name="batch_queue_keep_title">Оставить очередь?</string>
+    <string name="batch_queue_keep_description">Приложения в очереди будут ждать запуска на главном экране</string>
+    <string name="batch_queue_keep">Оставить</string>
     <string name="shortcut_repatch_short">Перепаковать</string>
     <string name="shortcut_repatch_long">Перепаковать устаревшие приложения</string>
     <string name="shortcut_check_updates_short">Проверить обновления</string>
@@ -919,6 +905,8 @@
     <string name="notification_channel_patch_updates">Обновления патчей</string>
     <string name="notification_channel_patch_updates_description">Уведомления о новых релизах патчей</string>
     <string name="notification_channel_patcher_description">Отображается во время установки Morphe патча для приложения в фоновом режиме</string>
+    <string name="notification_channel_patching_results">Результаты патчинга</string>
+    <string name="notification_channel_patching_results_description">Когда патчинг завершается или установка ожидает вашего действия, пока Morphe находится в фоновом режиме</string>
     <string name="notification_channel_mounted_apps">Смонтированные приложения</string>
     <string name="notification_channel_mounted_apps_description">Когда другая версия заменила смонтированное приложение и его патч больше не применяется</string>
     <string name="notification_mount_replaced_title">%1$s больше не пропатчено</string>
@@ -1137,7 +1125,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">Вам нужно будет ввести учетные данные хранилища ключей, чтобы импортировать его</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Имя пользователя (псевдоним)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Пароль</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Формат хранилища ключей</string>
     <string name="settings_system_import_keystore_wrong_credentials">Неверные учетные данные хранилища</string>
     <string name="settings_system_import_keystore_success">Хранилище ключей импортировано</string>
     <string name="settings_system_import_keystore_failed">Не удалось импортировать хранилище ключей</string>
@@ -1291,6 +1278,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">Предыдущая разработка</string>
     <string name="opensource_licenses">Лицензии открытого кода</string>
     <string name="opensource_licenses_description">Библиотеки, на которых построен Morphe</string>
+    <string name="opensource_licenses_search">Поиск библиотек и лицензий</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Выбор</string>
     <string name="easter_egg_pill_message">Прими синюю таблетку — и реклама останется на месте. Прими красную — и узнаешь, насколько глубоко уходит байткод.</string>

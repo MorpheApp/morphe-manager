@@ -1,5 +1,3 @@
-import com.mikepenz.aboutlibraries.plugin.DuplicateMode
-import com.mikepenz.aboutlibraries.plugin.DuplicateRule
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -11,9 +9,8 @@ plugins {
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.devtools)
-    alias(libs.plugins.about.libraries)
-    alias(libs.plugins.about.libraries.android)
     alias(libs.plugins.google.services)
+    alias(libs.plugins.licensee)
     signing
 }
 
@@ -31,7 +28,6 @@ dependencies {
     implementation(libs.activity.compose)
     implementation(libs.work.runtime.ktx)
     implementation(libs.preferences.datastore)
-    implementation(libs.appcompat)
 
     // Compose
     implementation(platform(libs.compose.bom))
@@ -53,7 +49,6 @@ dependencies {
     // KotlinX
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.collection.immutable)
-    implementation(libs.kotlinx.datetime)
 
     // Room
     implementation(libs.room.runtime)
@@ -68,9 +63,6 @@ dependencies {
     implementation(libs.xz)
 
     implementation(libs.androidx.documentfile)
-
-    // Native processes
-    implementation(libs.kotlin.process)
 
     // HiddenAPI
     compileOnly(libs.hidden.api.stub)
@@ -87,10 +79,6 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
     implementation(libs.koin.workmanager)
-
-    // Licenses
-    implementation(libs.about.libraries.core)
-    implementation(libs.about.libraries.m3)
 
     // Ktor
     implementation(libs.ktor.core)
@@ -110,9 +98,6 @@ dependencies {
     implementation(libs.icons.material.symbols.rounded)
     implementation(libs.icons.material.symbols.rounded.filled)
     implementation(libs.icons.font.awesome.brands)
-
-    // Semantic versioning parser
-    implementation(libs.semver.parser)
 
     // Unit tests
     testImplementation(libs.kotlin.test.junit)
@@ -422,14 +407,28 @@ kotlin {
     }
 }
 
-aboutLibraries {
-    collect {
-        configPath = file("aboutlibraries")
-    }
-    library {
-        duplicationMode = DuplicateMode.MERGE
-        duplicationRule = DuplicateRule.EXACT
-    }
+/**
+ * The license each URL stands for that a dependency names its license by rather than by an SPDX
+ * identifier. The licenses page shows that license for it, see [LicensesAssetsTask].
+ */
+val licensesByUrl = mapOf(
+    "http://antlr.org/license.html" to "ANTLR-BSD",
+    "http://www.antlr.org/license.html" to "ANTLR-BSD",
+    "https://developer.android.com/studio/terms.html" to "ASDKL",
+    "https://www.bouncycastle.org/licence.html" to "Bouncy-Castle",
+    "https://github.com/composablehorizons/composeicons/blob/main/LICENSE" to "MIT",
+    "https://github.com/RikkaApps/Shizuku-API/blob/master/LICENSE" to "MIT",
+    "https://opensource.org/license/mit" to "MIT",
+)
+
+// A dependency under any other license fails the build, as the app could not be shipped with it
+licensee {
+    listOf("0BSD", "Apache-2.0", "BSD-3-Clause").forEach(::allow)
+    licensesByUrl.forEach { (url, license) -> allowUrl(url) { because(license) } }
+    ignoreDependencies("app.morphe") { because("Morphe, listed as the manager itself") }
+    // JitPack builds come without a license, so these are listed by hand in licenses/licenses.json
+    ignoreDependencies("com.github.MorpheApp", "ARSCLib") { because("Apache-2.0, listed by hand") }
+    ignoreDependencies("com.github.topjohnwu.libsu", "core") { because("Apache-2.0, listed by hand") }
 }
 
 tasks {
@@ -504,5 +503,17 @@ androidComponents {
         variant.sources.kotlin?.addGeneratedSourceDirectory(generateLauncherIcons, GenerateLauncherIconsTask::kotlinDirectory)
         variant.sources.manifests.addGeneratedManifestFile(generateLauncherIcons, GenerateLauncherIconsTask::manifestFile)
         variant.sources.assets?.addGeneratedSourceDirectory(embeddedJvmAssets, EmbeddedJvmAssetsTask::outputDirectory)
+
+        val variantName = variant.name.replaceFirstChar(Char::uppercase)
+        val licensesAssets = tasks.register<LicensesAssetsTask>("${variant.name}LicensesAssets") {
+            group = "build"
+            description = "Lays out the libraries the $variantName build ships and their licenses as assets."
+            report.from(tasks.named("licenseeAndroid$variantName"))
+            extras.set(layout.projectDirectory.file("licenses/licenses.json"))
+            texts.set(layout.projectDirectory.dir("licenses/texts"))
+            notice.set(rootProject.layout.projectDirectory.file("NOTICE"))
+            licenseUrls.set(licensesByUrl)
+        }
+        variant.sources.assets?.addGeneratedSourceDirectory(licensesAssets, LicensesAssetsTask::outputDirectory)
     }
 }

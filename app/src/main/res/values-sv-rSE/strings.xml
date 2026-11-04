@@ -62,26 +62,12 @@
     <string name="home_search_apps">Sök efter appar</string>
     <string name="list_options_title">Sortera och filtrera</string>
     <string name="list_options_state_description">Sorterad efter %1$s, filtrerad efter %2$s</string>
-    <string name="home_app_filter_all_description">Alla appar på startskärmen</string>
-    <string name="home_app_filter_patched_description">Appar som du har modifierat eller sparat med Morphe</string>
-    <string name="home_app_filter_not_patched_description">Appar som du ännu inte har modifierat i Morphe</string>
-    <string name="home_app_filter_installed_description">Appar som för närvarande är installerade på den här enheten</string>
-    <string name="home_app_filter_uninstalled_description">Appar modifierade med Morphe som inte längre finns på den här enheten</string>
     <string name="home_app_filter_clones">Kloner</string>
-    <string name="home_app_filter_clones_description">Appar byggda under eget paketnamn, installerade bredvid originalet</string>
     <string name="home_app_grouping_none">Ingen</string>
-    <string name="home_app_grouping_all_apps_description">En lista över alla appar</string>
-    <string name="home_app_grouping_sources_description">Appar under tilläggskällan som tillhandahåller dem</string>
-    <string name="home_app_grouping_custom_description">Appar i kategorier som du skapar</string>
-    <string name="home_app_sort_manual_description">Tryck länge på en app och tryck sedan på knappen för att ändra ordning</string>
+    <string name="home_app_sort_manual_hint">Tryck länge på en app och tryck sedan på knappen för att ändra ordning</string>
     <string name="home_app_sort_recommended">Rekommenderad ordning</string>
-    <string name="home_app_sort_recommended_description">Installerade och fästa appar först</string>
-    <string name="home_app_sort_name_asc_description">Alfabetisk ordning, A till Ö</string>
-    <string name="home_app_sort_name_desc_description">Omvänd alfabetisk ordning, Ö till A</string>
     <string name="home_app_sort_updates_first">Tilläggsuppdateringar först</string>
-    <string name="home_app_sort_updates_first_description">Appar med nyare tillägg först, sedan den rekommenderade ordningen</string>
     <string name="home_app_sort_recently_patched">Nyligen modifierade</string>
-    <string name="home_app_sort_recently_patched_description">Senast modifierade apparna först</string>
     <string name="home_no_apps_title">Inga appar är tillgängliga</string>
     <string name="home_no_apps_subtitle">Lägg till en källa eller aktivera en befintlig i %s</string>
     <string name="home_no_apps_search_subtitle">Inga appar matchar \"%s\"</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Ingenting matchade %s</string>
     <string name="home_category_add">Lägg till kategori</string>
     <string name="home_category_all_apps">Alla appar</string>
-    <string name="home_category_custom">Anpassat</string>
+    <string name="home_app_grouping_categories">Kategorier</string>
     <string name="home_category_uncategorized">Okategoriserat</string>
     <string name="home_category_new_title">Ny kategori</string>
     <string name="home_category_rename_title">Byt namn på kategori</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">Tilläggskällor</string>
     <string name="sources_search">Sök efter källor och tillägg</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Alla källor</string>
-    <string name="sources_filter_enabled_description">Källor som tillägg hämtas från</string>
-    <string name="sources_filter_disabled_description">Inaktiverade källor</string>
     <string name="sources_filter_issues">Åtgärd krävs</string>
-    <string name="sources_filter_issues_description">Källor som har blockerats, inte gick att läsa in eller behöver en nyare version av Morphe</string>
     <string name="sources_sort_manual">Manuell ordning</string>
     <string name="sources_sort_manual_hint">Tryck länge på en källa för att ändra ordning</string>
     <string name="sources_sort_last_updated">Senast uppdaterade</string>
-    <string name="sources_sort_last_updated_description">Nyaste källuppdateringarna först</string>
     <string name="sources_sort_enabled_first">Aktiverade först</string>
-    <string name="sources_sort_enabled_first_description">Visa aktiva källor före inaktiverade källor</string>
     <string name="sources_patches_source_disabled_hint">Den här källan är inaktiverad. Dess tillägg listas som referens och tillämpas inte</string>
     <string name="sources_management_open_in_browser">Öppna i webbläsare</string>
     <string name="sources_management_report_issue">Rapportera ett problem</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">Rekommenderas</string>
     <string name="home_apk_availability_unpatched_label">Omodifierad</string>
     <string name="home_apk_availability_incompatible_label">Inkompatibel</string>
-    <string name="home_apk_availability_installed_version">Installerad på den här enheten: %s</string>
     <string name="home_apk_availability_find">Ja, hjälp mig att hitta den</string>
     <string name="home_apk_availability_have">Nej, jag har den redan</string>
     <string name="home_apk_helper_download">Använd en hjälpapp</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">Söker efter nedladdningssidan …</string>
     <string name="home_download_instructions_step1">Tryck på knappen %s nedan</string>
     <string name="home_download_instructions_step2_part1">Skrolla ned på webbsidan och tryck på</string>
+    <string name="home_download_instructions_step2_apkcube">Scrolla ner på webbsidan, välj version &lt;b&gt;%s&lt;/b&gt; och tryck på</string>
     <string name="home_download_instructions_step2_generic">Skrolla ned på webbsidan och tryck på dess nedladdningsknapp</string>
     <string name="home_download_instructions_step2_variant">Skrolla ned på webbsidan och tryck på nedladdningsknappen för den översta &lt;b&gt;APK-varianten&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_search">Öppna ett sökresultat från en webbplats du litar på</string>
     <string name="home_download_instructions_step2_search_note">Morphe kan inte gå i god för dessa webbplatser. Hoppa över de som erbjuder sin egen appbutik istället för en APK-fil.</string>
     <string name="home_download_instructions_step3_search">På den webbplatsen, ladda ned APK-filen för version &lt;b&gt;%s&lt;/b&gt;, inte den nyaste</string>
     <string name="home_download_instructions_step3_search_any">På den webbplatsen, ladda ned APK-filen för appen. &lt;b&gt;Vilken version som helst&lt;/b&gt; kan modifieras</string>
+    <string name="home_download_instructions_step2_github">Under &lt;b&gt;Assets&lt;/b&gt; för version &lt;b&gt;%s&lt;/b&gt;, tryck på filen som slutar på &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">Under &lt;b&gt;Assets&lt;/b&gt; för den senaste versionen, tryck på filen som slutar på &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Om det finns flera APK-filer, välj den som är namngiven efter %s eller den universella</string>
     <string name="home_download_instructions_download_button_toast">Tryck på nedladdningsknappen på webbplatsen, inte här 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Toppen! Tryck nu på knappen för att fortsätta till webbplatsen 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Övning ger färdighet, och du är på god väg 💪</string>
@@ -518,6 +501,9 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="batch_queue_pending_subtitle">Tryck för att granska och starta</string>
     <string name="batch_queue_clear_title">Rensa kön?</string>
     <string name="batch_queue_clear_description">Alla appar tas bort från kön</string>
+    <string name="batch_queue_keep_title">Behåll kön?</string>
+    <string name="batch_queue_keep_description">De köade apparna kommer att vänta på startskärmen för att startas senare</string>
+    <string name="batch_queue_keep">Behåll</string>
     <string name="shortcut_repatch_short">Modifiera igen</string>
     <string name="shortcut_repatch_long">Modifiera inaktuella appar igen</string>
     <string name="shortcut_check_updates_short">Sök efter uppdateringar</string>
@@ -919,6 +905,8 @@ Tillägg påverkas inte: aktivera förhandsversioner av tillägg för varje käl
     <string name="notification_channel_patch_updates">Tilläggsuppdateringar</string>
     <string name="notification_channel_patch_updates_description">Aviseringar om nya tilläggsversioner</string>
     <string name="notification_channel_patcher_description">Visas när Morphe modifierar en app i bakgrunden</string>
+    <string name="notification_channel_patching_results">Resultat för modifiering</string>
+    <string name="notification_channel_patching_results_description">När modifieringen avslutas eller en installation väntar på dig medan Morphe är i bakgrunden</string>
     <string name="notification_channel_mounted_apps">Monterade appar</string>
     <string name="notification_channel_mounted_apps_description">När en annan version har ersatt en monterad app och dess modifiering inte längre gäller</string>
     <string name="notification_mount_replaced_title">%1$s är inte längre modifierad</string>
@@ -1137,7 +1125,6 @@ Information: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Du måste ange nyckellagrets uppgifter för att importera det</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Användarnamn (alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Lösenord</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Nyckellagerformat</string>
     <string name="settings_system_import_keystore_wrong_credentials">Felaktiga nyckellageruppgifter</string>
     <string name="settings_system_import_keystore_success">Nyckellager importerades</string>
     <string name="settings_system_import_keystore_failed">Det gick inte att importera nyckellager</string>
@@ -1291,6 +1278,7 @@ Information: %2$s"</string>
     <string name="credits_prior_development">Tidigare utveckling</string>
     <string name="opensource_licenses">Licenser för öppen källkod</string>
     <string name="opensource_licenses_description">De bibliotek som Morphe bygger på</string>
+    <string name="opensource_licenses_search">Sök efter bibliotek och licenser</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Ett val</string>
     <string name="easter_egg_pill_message">Ta det blå pillret så förblir annonserna precis där de är. Ta det röda och se hur djupt bytekoden går</string>

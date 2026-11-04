@@ -62,26 +62,12 @@
     <string name="home_search_apps">Alkalmazások keresése</string>
     <string name="list_options_title">Rendezés és szűrés</string>
     <string name="list_options_state_description">Rendezés: %1$s, szűrés: %2$s</string>
-    <string name="home_app_filter_all_description">Minden alkalmazás a kezdőképernyőn</string>
-    <string name="home_app_filter_patched_description">A Morphe-val módosított vagy mentett alkalmazások</string>
-    <string name="home_app_filter_not_patched_description">A Morphe-ban még nem módosított alkalmazások</string>
-    <string name="home_app_filter_installed_description">Jelenleg az eszközön telepített alkalmazások</string>
-    <string name="home_app_filter_uninstalled_description">A Morphe-val módosított, az eszközről már eltávolított alkalmazások</string>
     <string name="home_app_filter_clones">Klónozott alkalmazások</string>
-    <string name="home_app_filter_clones_description">Önálló csomagnévvel, az eredeti alkalmazás mellett telepített alkalmazások</string>
     <string name="home_app_grouping_none">Egyik sem</string>
-    <string name="home_app_grouping_all_apps_description">Egy lista az összes alkalmazással</string>
-    <string name="home_app_grouping_sources_description">Azok az alkalmazások, amelyeket a forrás biztosít</string>
-    <string name="home_app_grouping_custom_description">Az Ön által létrehozott kategóriákban lévő alkalmazások</string>
-    <string name="home_app_sort_manual_description">Nyomj hosszan egy alkalmazásra, majd koppints az átrendezés gombra</string>
+    <string name="home_app_sort_manual_hint">Nyomj hosszan egy alkalmazásra, majd koppints az átrendezés gombra</string>
     <string name="home_app_sort_recommended">Ajánlott sorrend</string>
-    <string name="home_app_sort_recommended_description">Telepített és rögzített alkalmazások a lista elején</string>
-    <string name="home_app_sort_name_asc_description">Betűrend szerint (A-Z)</string>
-    <string name="home_app_sort_name_desc_description">Fordított betűrendben (Z–A)</string>
     <string name="home_app_sort_updates_first">Frissíthető alkalmazások előre</string>
-    <string name="home_app_sort_updates_first_description">Először az újabb javításokkal rendelkező alkalmazások, majd az ajánlott sorrend</string>
     <string name="home_app_sort_recently_patched">Legutóbb módosított</string>
-    <string name="home_app_sort_recently_patched_description">A legutóbb módosított alkalmazások kerülnek előre</string>
     <string name="home_no_apps_title">Nincsenek elérhető alkalmazások</string>
     <string name="home_no_apps_subtitle">Adj hozzá egy módosításforrást, vagy kapcsolj be egyet itt: %s</string>
     <string name="home_no_apps_search_subtitle">Nincs találat erre: „%s”</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Nincs találat erre a szűrőre: %s</string>
     <string name="home_category_add">Kategória hozzáadása</string>
     <string name="home_category_all_apps">Összes alkalmazás</string>
-    <string name="home_category_custom">Egyéni</string>
+    <string name="home_app_grouping_categories">Kategóriák</string>
     <string name="home_category_uncategorized">Kategorizálatlan</string>
     <string name="home_category_new_title">Új kategória</string>
     <string name="home_category_rename_title">Kategória átnevezése</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">Módosításforrások</string>
     <string name="sources_search">Források és javítások keresése</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Minden forrás</string>
-    <string name="sources_filter_enabled_description">Források javításai innen származnak</string>
-    <string name="sources_filter_disabled_description">Források letiltva</string>
     <string name="sources_filter_issues">Figyelmet igényel</string>
-    <string name="sources_filter_issues_description">A letiltott, sikertelen betöltésű vagy újabb Morphe-verziót igénylő források</string>
     <string name="sources_sort_manual">Kézi sorrend</string>
     <string name="sources_sort_manual_hint">Nyomja meg hosszan egy forrást a sorrend megváltoztatásához.</string>
     <string name="sources_sort_last_updated">Utolsó frissítés</string>
-    <string name="sources_sort_last_updated_description">A legújabb forrásfrissítések először</string>
     <string name="sources_sort_enabled_first">Először az engedélyezettek</string>
-    <string name="sources_sort_enabled_first_description">Az aktív forrásokat mutassa először a letiltott forrásokkal szemben</string>
     <string name="sources_patches_source_disabled_hint">Ez a forrás le van tiltva. A javításai referenciaként vannak felsorolva, és nincsenek alkalmazva.</string>
     <string name="sources_management_open_in_browser">Megnyitás böngészőben</string>
     <string name="sources_management_report_issue">Hiba jelentése</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">Javasolt</string>
     <string name="home_apk_availability_unpatched_label">Nem módosított</string>
     <string name="home_apk_availability_incompatible_label">Nem kompatibilis</string>
-    <string name="home_apk_availability_installed_version">Ezen az eszközön telepítve: %s</string>
     <string name="home_apk_availability_find">Igen, segíts megtalálni</string>
     <string name="home_apk_availability_have">Nem, már megvan</string>
     <string name="home_apk_helper_download">Használj egy segédalkalmazást.</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">A letöltési oldal keresése…</string>
     <string name="home_download_instructions_step1">Koppints az alábbi „%s” gombra</string>
     <string name="home_download_instructions_step2_part1">Görgess le a weboldalon, majd nyomd meg:</string>
+    <string name="home_download_instructions_step2_apkcube">Görgessen le a weboldalon, válassza a &lt;b&gt;%s&lt;/b&gt; verziót, majd nyomja meg</string>
     <string name="home_download_instructions_step2_generic">Görgess le a weboldalon, majd nyomd meg a letöltő gombját</string>
     <string name="home_download_instructions_step2_variant">Görgess le a weboldalon, majd nyomd meg a legfelső &lt;b&gt;APK-változat&lt;/b&gt; letöltő gombját</string>
     <string name="home_download_instructions_step2_search">Nyiss meg egy keresési találatot egy olyan weboldalról, amelyben megbízol</string>
     <string name="home_download_instructions_step2_search_note">A Morphe nem tud jótállni ezekért a weboldalakért. Hagyd ki azokat, amelyek APK-fájl helyett saját alkalmazásboltot kínálnak</string>
     <string name="home_download_instructions_step3_search">Azon a weboldalon töltsd le a &lt;b&gt;%s&lt;/b&gt; verzió APK-ját, nem a legújabbat</string>
     <string name="home_download_instructions_step3_search_any">Azon a weboldalon töltsd le az alkalmazás APK-ját. &lt;b&gt;Bármelyik verzió&lt;/b&gt; patch-elhető</string>
+    <string name="home_download_instructions_step2_github">A(z) &lt;b&gt;%s&lt;/b&gt; kiadás &lt;b&gt;Assets&lt;/b&gt; részén nyomj a(z) &lt;b&gt;.apk&lt;/b&gt; végződésű fájlra</string>
+    <string name="home_download_instructions_step2_github_latest">A legújabb kiadás &lt;b&gt;Assets&lt;/b&gt; részén nyomj a(z) &lt;b&gt;.apk&lt;/b&gt; végződésű fájlra</string>
+    <string name="home_download_instructions_step2_github_note">Ha több APK fájl is van, válaszd azt, amelynek neve %s, vagy az univerzális változatot</string>
     <string name="home_download_instructions_download_button_toast">​A weboldalon nyomj a letöltésre, ne itt 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Szuper! Most kattints a folytatásra, és látogass el a weboldalra 👆</string>
     <string name="home_download_instructions_download_button_toast_3">A gyakorlás tökéletessé tesz, és már jó úton vagy 💪</string>
@@ -518,6 +501,9 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="batch_queue_pending_subtitle">Koppints az áttekintéshez és a kezdéshez</string>
     <string name="batch_queue_clear_title">Várólista törlése?</string>
     <string name="batch_queue_clear_description">Minden alkalmazás eltávolításra kerül a várólistáról</string>
+    <string name="batch_queue_keep_title">Tartsd meg a sorot?</string>
+    <string name="batch_queue_keep_description">A sorban várakozó alkalmazások a kezdőképernyőn maradnak, hogy később belelehessen kezdeni őket</string>
+    <string name="batch_queue_keep">Megtartás</string>
     <string name="shortcut_repatch_short">Újra javítás</string>
     <string name="shortcut_repatch_long">Régi alkalmazások újra javítása</string>
     <string name="shortcut_check_updates_short">Frissítések ellenőrzése</string>
@@ -919,6 +905,8 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="notification_channel_patch_updates">Patch-frissítések</string>
     <string name="notification_channel_patch_updates_description">Értesítések az új patch-kiadásokról</string>
     <string name="notification_channel_patcher_description">Akkor jelenik meg, amikor a Morphe a háttérben módosít egy alkalmazást</string>
+    <string name="notification_channel_patching_results">Módosítási eredmények</string>
+    <string name="notification_channel_patching_results_description">Amikor a módosítás befejeződik, vagy egy telepítés vár rád, miközben a Morphe a háttérben fut</string>
     <string name="notification_channel_mounted_apps">Csatlakoztatott alkalmazások</string>
     <string name="notification_channel_mounted_apps_description">Amikor egy másik verzió lecserélt egy mountolt alkalmazást, és a javítása már nem illeszkedik</string>
     <string name="notification_mount_replaced_title">A %1$s már nincs javítva</string>
@@ -1137,7 +1125,6 @@ Részletek: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">A kulcstároló importálásához meg kell adnod a hozzáférési adatokat</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Felhasználónév (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Jelszó</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Kulcstároló formátum</string>
     <string name="settings_system_import_keystore_wrong_credentials">Hibás kulcstároló hitelesítési adatok</string>
     <string name="settings_system_import_keystore_success">Kulcstároló importálva</string>
     <string name="settings_system_import_keystore_failed">Nem sikerült importálni a kulcstárolót</string>
@@ -1291,6 +1278,7 @@ Részletek: %2$s"</string>
     <string name="credits_prior_development">Korábbi fejlesztők</string>
     <string name="opensource_licenses">Nyílt forráskódú licencek</string>
     <string name="opensource_licenses_description">A Morphe által használt könyvtárak</string>
+    <string name="opensource_licenses_search">Keresés könyvtárak és licencek között</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Egy választás</string>
     <string name="easter_egg_pill_message">Take the blue pill and the ads stay exactly where they are. Take the red one and see how deep the bytecode goes</string>

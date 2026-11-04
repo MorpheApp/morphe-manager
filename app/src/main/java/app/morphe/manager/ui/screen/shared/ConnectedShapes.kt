@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -88,45 +89,65 @@ class ConnectedShapes private constructor(outer: CornerSize) {
 
 /**
  * [target] with its corners easing over from the shape it had before, so a button that is picked,
- * or moves to another place in its group, rounds out rather than jumping. Without [animate] the
- * corners take [target] at once, for a shape that is only now being settled.
+ * or moves to another place in its group, rounds out rather than jumping. The first shape is taken
+ * at once.
  */
 @Composable
-fun animateCornersAsState(target: CornerBasedShape, animate: Boolean = true): CornerBasedShape {
-    val transition = remember { CornerTransition(target) }
-    LaunchedEffect(target) {
-        if (target == transition.to) return@LaunchedEffect
-        if (!animate) {
-            transition.from = target
-            transition.to = target
-            transition.progress = 1f
-            return@LaunchedEffect
-        }
-        // Set together before the next frame, so an interrupted change carries on from where it is
-        transition.from = transition.current()
-        transition.to = target
-        transition.progress = 0f
-        animate(0f, 1f, animationSpec = spring(dampingRatio = 0.8f, stiffness = Spring.StiffnessMedium)) { value, _ ->
-            transition.progress = value
-        }
-    }
-    return transition.current()
+fun animateCornersAsState(target: CornerBasedShape): CornerBasedShape {
+    val corners = remember { AnimatedCorners(target) }
+    LaunchedEffect(target) { corners.animateTo(target) }
+    return corners.shape
 }
 
-private class CornerTransition(shape: CornerBasedShape) {
-    var from by mutableStateOf(shape)
-    var to by mutableStateOf(shape)
-    var progress by mutableFloatStateOf(1f)
+/**
+ * Corners easing from one shape to the next, resolved where [shape] is drawn rather than where it
+ * is composed, so a change only redraws what takes it.
+ */
+@Stable
+private class AnimatedCorners(initial: CornerBasedShape) {
+    private class Leg(val from: CornerBasedShape, val to: CornerBasedShape)
 
-    fun current(): CornerBasedShape = when (progress) {
+    private var leg by mutableStateOf(Leg(initial, initial))
+    private var progress by mutableFloatStateOf(1f)
+
+    /** The same shape throughout, so what takes it never recomposes as its corners move. */
+    val shape: CornerBasedShape = initial.copy(
+        topStart = Corner(CornerBasedShape::topStart),
+        topEnd = Corner(CornerBasedShape::topEnd),
+        bottomEnd = Corner(CornerBasedShape::bottomEnd),
+        bottomStart = Corner(CornerBasedShape::bottomStart)
+    )
+
+    suspend fun animateTo(target: CornerBasedShape) {
+        val current = leg
+        if (target == current.to) return
+        // Set together before the next frame, so an interrupted change carries on from where it is
+        leg = Leg(current.at(progress), target)
+        progress = 0f
+        animate(0f, 1f, animationSpec = spring(dampingRatio = 0.8f, stiffness = Spring.StiffnessMedium)) { value, _ ->
+            progress = value
+        }
+    }
+
+    private fun Leg.at(fraction: Float): CornerBasedShape = when (fraction) {
         0f -> from
         1f -> to
         else -> to.copy(
-            topStart = LerpCornerSize(from.topStart, to.topStart, progress),
-            topEnd = LerpCornerSize(from.topEnd, to.topEnd, progress),
-            bottomEnd = LerpCornerSize(from.bottomEnd, to.bottomEnd, progress),
-            bottomStart = LerpCornerSize(from.bottomStart, to.bottomStart, progress)
+            topStart = LerpCornerSize(from.topStart, to.topStart, fraction),
+            topEnd = LerpCornerSize(from.topEnd, to.topEnd, fraction),
+            bottomEnd = LerpCornerSize(from.bottomEnd, to.bottomEnd, fraction),
+            bottomStart = LerpCornerSize(from.bottomStart, to.bottomStart, fraction)
         )
+    }
+
+    /** One corner of [shape], read when its outline is made, which redraws it as the corner moves. */
+    private inner class Corner(private val of: (CornerBasedShape) -> CornerSize) : CornerSize {
+        override fun toPx(shapeSize: Size, density: Density): Float {
+            val leg = leg
+            val end = of(leg.to).toPx(shapeSize, density)
+            val fraction = progress
+            return if (fraction == 1f) end else lerp(of(leg.from).toPx(shapeSize, density), end, fraction)
+        }
     }
 }
 

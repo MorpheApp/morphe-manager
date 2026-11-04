@@ -139,6 +139,7 @@ class SelectionPanelController(
         scope.launch(Dispatchers.IO) {
             val loaded = loadCopySelectionCandidates(
                 patchSelectionRepository = patchSelectionRepository,
+                setRepository = setRepository,
                 patchBundleRepository = patchBundleRepository,
                 appDataResolver = appDataResolver,
                 targetPackageName = targetPackageName,
@@ -161,6 +162,14 @@ class SelectionPanelController(
         targetPatches: Map<String, PatchInfo>
     ): CopiedSelection? {
         val copied = withContext(Dispatchers.IO) {
+            if (candidate.setUid != null) {
+                val set = setRepository.load(candidate.setUid, mapOf(candidate.bundleUid to targetPatches))
+                return@withContext CopiedSelection(
+                    patches = set.patches[candidate.bundleUid].orEmpty(),
+                    options = set.options[candidate.bundleUid].orEmpty()
+                )
+            }
+
             val patches = patchSelectionRepository
                 .exportForPackageAndBundle(candidate.packageName, candidate.bundleUid)
                 .filterTo(mutableSetOf()) { it in targetPatches }

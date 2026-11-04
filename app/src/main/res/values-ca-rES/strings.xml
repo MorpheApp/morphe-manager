@@ -62,26 +62,12 @@
     <string name="home_search_apps">Cerca aplicacions</string>
     <string name="list_options_title">Ordenar i filtrar</string>
     <string name="list_options_state_description">Ordenat per %1$s, filtrat per %2$s</string>
-    <string name="home_app_filter_all_description">Totes les aplicacions de la pantalla d\'inici</string>
-    <string name="home_app_filter_patched_description">Aplicacions que has patxat o desat amb Morphe</string>
-    <string name="home_app_filter_not_patched_description">Aplicacions que encara no has patxat a Morphe</string>
-    <string name="home_app_filter_installed_description">Aplicacions actualment instal·lades en aquest dispositiu</string>
-    <string name="home_app_filter_uninstalled_description">Aplicacions patchades amb Morphe que ja no estan en aquest dispositiu</string>
     <string name="home_app_filter_clones">Clons</string>
-    <string name="home_app_filter_clones_description">Aplicacions creades sota un nom de paquet propi, instal·lades al costat de l\'original</string>
     <string name="home_app_grouping_none">Cap</string>
-    <string name="home_app_grouping_all_apps_description">Una llista amb totes les aplicacions</string>
-    <string name="home_app_grouping_sources_description">Aplicacions sota la font del patch que les proporciona</string>
-    <string name="home_app_grouping_custom_description">Aplicacions en categories que tu creates</string>
-    <string name="home_app_sort_manual_description">Mantingueu premuda una aplicació i, a continuació, toqueu el botó de reordenar</string>
+    <string name="home_app_sort_manual_hint">Mantingueu premuda una aplicació i després toqueu el botó de reordenar</string>
     <string name="home_app_sort_recommended">Ordre recomanat</string>
-    <string name="home_app_sort_recommended_description">Primer les aplicacions instal·lades i fixades</string>
-    <string name="home_app_sort_name_asc_description">Alfabètic, de la A a la Z</string>
-    <string name="home_app_sort_name_desc_description">Ordre alfabètic invers, de la Z a la A</string>
     <string name="home_app_sort_updates_first">Actualitzacions de pedaços primer</string>
-    <string name="home_app_sort_updates_first_description">Apps amb patches més recents primer, després l\'ordre recomanat</string>
     <string name="home_app_sort_recently_patched">Corregides recentment</string>
-    <string name="home_app_sort_recently_patched_description">Les aplicacions corregides més recentment apareixen primer</string>
     <string name="home_no_apps_title">No hi ha aplicacions disponibles</string>
     <string name="home_no_apps_subtitle">Afegeix una font de pegats o activa\'n-ne una existent a %s</string>
     <string name="home_no_apps_search_subtitle">No hi ha cap aplicació que coincideixi amb \"%s\"</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Res coincideix amb %s</string>
     <string name="home_category_add">Afegeix categoria</string>
     <string name="home_category_all_apps">Totes les aplicacions</string>
-    <string name="home_category_custom">Personalitzat</string>
+    <string name="home_app_grouping_categories">Categories</string>
     <string name="home_category_uncategorized">Sense categoria</string>
     <string name="home_category_new_title">Categoria nova</string>
     <string name="home_category_rename_title">Canvia el nom de la categoria</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">Fonts de pegats</string>
     <string name="sources_search">Cerca fonts iط patches</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Totes les fonts</string>
-    <string name="sources_filter_enabled_description">Les patches de les fonts es prenen de</string>
-    <string name="sources_filter_disabled_description">Fonts desactivades</string>
     <string name="sources_filter_issues">Requereix atenció</string>
-    <string name="sources_filter_issues_description">Fonts que estan bloquejades, que han fallat en carregar-se o que requereixen una versió més recent de Morphe</string>
     <string name="sources_sort_manual">Ordre manual</string>
     <string name="sources_sort_manual_hint">Mantingueu premuda una font per reordenar-la</string>
     <string name="sources_sort_last_updated">Última actualització</string>
-    <string name="sources_sort_last_updated_description">Actualitzacions de fonts més recents primer</string>
     <string name="sources_sort_enabled_first">Habilitades primer</string>
-    <string name="sources_sort_enabled_first_description">Mostra les fonts actives abans que les deshabilitades</string>
     <string name="sources_patches_source_disabled_hint">Aquesta font està deshabilitada. Els seus patches s\'enllisten per referència i no s\'apliquen</string>
     <string name="sources_management_open_in_browser">Obrir al navegador</string>
     <string name="sources_management_report_issue">Informa d\'un problema</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">Recomanat</string>
     <string name="home_apk_availability_unpatched_label">Sense patch</string>
     <string name="home_apk_availability_incompatible_label">Incompatible</string>
-    <string name="home_apk_availability_installed_version">Instal·lada en aquest dispositiu: %s</string>
     <string name="home_apk_availability_find">Sí, ajuda\'m a trobar-la</string>
     <string name="home_apk_availability_have">No, ja la tinc</string>
     <string name="home_apk_helper_download">Utilitza una aplicació d\'ajuda</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">Buscant la pàgina de descàrrega…</string>
     <string name="home_download_instructions_step1">Premeu el botó \'%s\' de sota</string>
     <string name="home_download_instructions_step2_part1">Desplaceu-vos per la pàgina web i premeu</string>
+    <string name="home_download_instructions_step2_apkcube">Desplaça-t\'hi cap avall a la pàgina web, selecciona la versió &lt;b&gt;%s&lt;/b&gt; i prem</string>
     <string name="home_download_instructions_step2_generic">Desplaceu-vos per la pàgina web i premeu el botó de descàrrega</string>
     <string name="home_download_instructions_step2_variant">Desplaceu-vos per la pàgina web i premeu el botó de descàrrega de la primera &lt;b&gt;variant d\'APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_search">Obriu un resultat de cerca d\'un lloc web en què confieu</string>
     <string name="home_download_instructions_step2_search_note">Morphe no pot avalar aquests llocs web. Ignoreu aquells que ofereixin la seva pròpia botiga d\'aplicacions en lloc d\'un fitxer APK</string>
     <string name="home_download_instructions_step3_search">En aquest lloc web, descarrega l\'APK de la versió &lt;b&gt;%s&lt;/b&gt;, no la més recent</string>
     <string name="home_download_instructions_step3_search_any">En aquest lloc web, descarrega l\'APK de l\'aplicació. &lt;b&gt;Qualsevol versió&lt;/b&gt; es pot patxar</string>
+    <string name="home_download_instructions_step2_github">A &lt;b&gt;Assets&lt;/b&gt; del llançament &lt;b&gt;%s&lt;/b&gt;, premeu el fitxer que acaba en &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">A &lt;b&gt;Assets&lt;/b&gt; del llançament més recent, premeu el fitxer que acaba en &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Si hi ha diversos fitxers APK, trieu el que té el nom de %s o el universal</string>
     <string name="home_download_instructions_download_button_toast">Premeu \'descarrega\' al lloc web, i no aquí 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Genial! Ara fes clic a continuar i ves al lloc web 👆</string>
     <string name="home_download_instructions_download_button_toast_3">La pràctica fa el mestre i hi estàs arribant 💪</string>
@@ -355,8 +338,10 @@ Tria d'on voler agafar l'APK"</string>
     <string name="expert_mode_enable_all_universal_pending">Toca de nou per als patxes universals</string>
     <string name="expert_mode_universal_all_warning_title">Habilitar tots els pegats universals?</string>
     <string name="expert_mode_universal_all_warning_message">Els pegats universals no estan provats conjuntament. Habilitar-los tots a la vegada pot causar conflictes, falls en el pegat o tancaments inesperats</string>
+    <string name="expert_mode_recommended">Patxes recomanades</string>
     <string name="expert_mode_reset_to_default_done">Pegats recomanats aplicats</string>
     <string name="expert_mode_selected_count">%1$s de %2$s seleccionats</string>
+    <string name="expert_mode_saved_selection">Selecció desada</string>
     <string name="expert_mode_restore_saved_done">Selecció guardada restaurada</string>
     <string name="expert_mode_copy_from_bundle_no_patches">No hi ha patchs corresponents en aquest paquet</string>
     <string name="expert_mode_no_results">No s\'han trobat mosaics</string>
@@ -516,6 +501,9 @@ Per obtenir els millors resultats, aquesta aplicació recomana patxar un &lt;b&g
     <string name="batch_queue_pending_subtitle">Toca per revisar i començar</string>
     <string name="batch_queue_clear_title">Netejar la cua?</string>
     <string name="batch_queue_clear_description">Totes les aplicacions seran eliminades de la cua</string>
+    <string name="batch_queue_keep_title">Conserveu la cua?</string>
+    <string name="batch_queue_keep_description">Les aplicacions en cua esperaran a la pantalla d\'inici per ser iniciades més tard</string>
+    <string name="batch_queue_keep">Conserva</string>
     <string name="shortcut_repatch_short">Tornar a pedaçar</string>
     <string name="shortcut_repatch_long">Torna a patchar les aplicacions desactualitzades</string>
     <string name="shortcut_check_updates_short">Comprova actualitzacions</string>
@@ -917,6 +905,8 @@ Els pegats no s'en veuen afectats: habilita els pegats de pre-llançament per a 
     <string name="notification_channel_patch_updates">Actualitzacions de pegats</string>
     <string name="notification_channel_patch_updates_description">Notificacions sobre noves versions de pegats</string>
     <string name="notification_channel_patcher_description">Es mostra mentre Morphe està patxant una aplicació en segon pla</string>
+    <string name="notification_channel_patching_results">Resultats del pegat</string>
+    <string name="notification_channel_patching_results_description">Quan el pegat finalitza o una instal·lació espera mentre Morphe està en segon pla</string>
     <string name="notification_channel_mounted_apps">Aplicacions muntades</string>
     <string name="notification_channel_mounted_apps_description">Quan una altra versió substitueix una aplicació muntada i el seu tapatge ja no s\'aplica</string>
     <string name="notification_mount_replaced_title">%1$s ja no està tapatat</string>
@@ -1135,7 +1125,6 @@ Detalls: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Haurà de introduir les credencials del magatzem de claus per importar-lo</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Nom d\'usuari (Àlias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Contrasenya</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Format del magatzem de claus</string>
     <string name="settings_system_import_keystore_wrong_credentials">Credencials del magatzem de claus incorrectes</string>
     <string name="settings_system_import_keystore_success">Magatzem de claus importat</string>
     <string name="settings_system_import_keystore_failed">S\'ha produït un error en importar el magatzem de claus</string>
@@ -1289,6 +1278,7 @@ Detalls: %2$s"</string>
     <string name="credits_prior_development">Desenvolupament previ</string>
     <string name="opensource_licenses">Llicències de codi obert</string>
     <string name="opensource_licenses_description">Les llibreries sobre les quals es construeix Morphe</string>
+    <string name="opensource_licenses_search">Cerca biblioteques i llicències</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Una elecció</string>
     <string name="easter_egg_pill_message">Pren la píxula blava i els anuncis es queden exactament on són. Pren la vermella i mira fins on arriba el bytecode</string>

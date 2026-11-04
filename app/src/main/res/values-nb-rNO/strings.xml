@@ -62,26 +62,12 @@
     <string name="home_search_apps">Søk etter apper</string>
     <string name="list_options_title">Sorter og filtrer</string>
     <string name="list_options_state_description">Sortert etter %1$s, filtrert etter %2$s</string>
-    <string name="home_app_filter_all_description">Alle apper på startskjermen</string>
-    <string name="home_app_filter_patched_description">Apper du har patchet eller lagret med Morphe</string>
-    <string name="home_app_filter_not_patched_description">Apper du ikke har patchet i Morphe ennå</string>
-    <string name="home_app_filter_installed_description">Apper som er installert på denne enheten</string>
-    <string name="home_app_filter_uninstalled_description">Apper patchet med Morphe som ikke lenger er på denne enheten</string>
     <string name="home_app_filter_clones">Kloner</string>
-    <string name="home_app_filter_clones_description">Apper bygget under et eget pakkenavn, installert ved siden av originalen</string>
     <string name="home_app_grouping_none">Ingen</string>
-    <string name="home_app_grouping_all_apps_description">Én liste med alle apper</string>
-    <string name="home_app_grouping_sources_description">Apper under kildekategorien som tilbyr dem</string>
-    <string name="home_app_grouping_custom_description">Apper i kategorier du oppretter</string>
-    <string name="home_app_sort_manual_description">Trykk og hold på en app, og trykk deretter på sorter-knappen</string>
+    <string name="home_app_sort_manual_hint">Hold inne en app, og trykk deretter på knappen for å endre rekkefølge</string>
     <string name="home_app_sort_recommended">Anbefalt rekkefølge</string>
-    <string name="home_app_sort_recommended_description">Installerte og fastsatte apper først</string>
-    <string name="home_app_sort_name_asc_description">Alfabetisk, A til Å</string>
-    <string name="home_app_sort_name_desc_description">Omvendt alfabetisk, Å til A</string>
     <string name="home_app_sort_updates_first">Patch-oppdateringer først</string>
-    <string name="home_app_sort_updates_first_description">Apper med nyere patcher først, deretter anbefalt rekkefølge</string>
     <string name="home_app_sort_recently_patched">Nylig patchet</string>
-    <string name="home_app_sort_recently_patched_description">Siste patchede apper først</string>
     <string name="home_no_apps_title">Ingen apper tilgjengelig</string>
     <string name="home_no_apps_subtitle">Legg til en patch-kilde eller aktiver en eksisterende i %s</string>
     <string name="home_no_apps_search_subtitle">Ingen apper samsvarer med \"%s\"</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Ingenting matchet %s</string>
     <string name="home_category_add">Legg til kategori</string>
     <string name="home_category_all_apps">Alle apper</string>
-    <string name="home_category_custom">Tilpasset</string>
+    <string name="home_app_grouping_categories">Kategorier</string>
     <string name="home_category_uncategorized">Usortert</string>
     <string name="home_category_new_title">Ny kategori</string>
     <string name="home_category_rename_title">Gi nytt navn til kategori</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">Patch-kilder</string>
     <string name="sources_search">Søk etter kilder og patcher</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Alle kilder</string>
-    <string name="sources_filter_enabled_description">Kildefiks er hentet fra</string>
-    <string name="sources_filter_disabled_description">Kilder deaktivert</string>
     <string name="sources_filter_issues">Trenger oppmerksomhet</string>
-    <string name="sources_filter_issues_description">Kilder som er blokkert, feilet ved lasting eller trenger en nyere Morphe</string>
     <string name="sources_sort_manual">Manuell rekkefølge</string>
     <string name="sources_sort_manual_hint">Trykk og hold nede en kilde for å endre rekkefølgen</string>
     <string name="sources_sort_last_updated">Sist oppdatert</string>
-    <string name="sources_sort_last_updated_description">Nyeste oppdateringer først</string>
     <string name="sources_sort_enabled_first">Aktiverte først</string>
-    <string name="sources_sort_enabled_first_description">Vis aktive kilder før deaktiverte kilder</string>
     <string name="sources_patches_source_disabled_hint">Denne kilden er deaktivert. Patchene er oppført for referanse og blir ikke brukt</string>
     <string name="sources_management_open_in_browser">Åpne i nettleser</string>
     <string name="sources_management_report_issue">Rapporter et problem</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">Anbefalt</string>
     <string name="home_apk_availability_unpatched_label">Ikke patchet</string>
     <string name="home_apk_availability_incompatible_label">Inkompatibel</string>
-    <string name="home_apk_availability_installed_version">Installert på denne enheten: %s</string>
     <string name="home_apk_availability_find">Ja, hjelp meg å finne den</string>
     <string name="home_apk_availability_have">Nei, jeg har den allerede</string>
     <string name="home_apk_helper_download">Bruk en hjelpeapp</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">Finner nedlastingssiden…</string>
     <string name="home_download_instructions_step1">Trykk på \'%s\'-knappen nedenfor</string>
     <string name="home_download_instructions_step2_part1">Rull nedover nettsiden og trykk på</string>
+    <string name="home_download_instructions_step2_apkcube">Rull ned på nettsiden, velg versjon &lt;b&gt;%s&lt;/b&gt; og trykk</string>
     <string name="home_download_instructions_step2_generic">Rull nedover på nettsiden og trykk på nedlastingsknappen</string>
     <string name="home_download_instructions_step2_variant">Rull nedover på nettsiden og trykk på nedlastingsknappen til den øverste &lt;b&gt;APK-varianten&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_search">Åpne et søkeresultat fra et nettsted du stoler på</string>
     <string name="home_download_instructions_step2_search_note">Morphe kan ikke gå god for disse nettstedene. Hopp over de som tilbyr sin egen appbutikk i stedet for en APK-fil</string>
     <string name="home_download_instructions_step3_search">På det nettstedet laster du ned APK-en til versjon &lt;b&gt;%s&lt;/b&gt;, ikke den nyeste</string>
     <string name="home_download_instructions_step3_search_any">På det nettstedet laster du ned APK-en til appen. &lt;b&gt;Enhver versjon&lt;/b&gt; kan bli patchet</string>
+    <string name="home_download_instructions_step2_github">Under &lt;b&gt;Assets&lt;/b&gt; for utgivelse &lt;b&gt;%s&lt;/b&gt;, trykk på filen som slutter på &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">Under &lt;b&gt;Assets&lt;/b&gt; for den nyeste utgivelsen, trykk på filen som slutter på &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Hvis det er flere APK-filer, velg den som er oppkalt etter %s eller den universelle</string>
     <string name="home_download_instructions_download_button_toast">Trykk på nedlastingsknappen på nettsiden, og ikke her 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Flott! Klikk nå fortsett og gå til nettsiden 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Øvelse gjør mester, og du er på vei 💪</string>
@@ -518,6 +501,9 @@ For de beste resultatene anbefaler denne appen å patche en &lt;b&gt;full APK-fi
     <string name="batch_queue_pending_subtitle">Trykk for å gjennomgå og starte</string>
     <string name="batch_queue_clear_title">Tøm køen?</string>
     <string name="batch_queue_clear_description">Alle appene blir fjernet fra køen</string>
+    <string name="batch_queue_keep_title">Beholde køen?</string>
+    <string name="batch_queue_keep_description">Appene i køen vil vente på startskjermen for å bli startet senere</string>
+    <string name="batch_queue_keep">Behold</string>
     <string name="shortcut_repatch_short">Repatch</string>
     <string name="shortcut_repatch_long">Repatch utdaterte apper</string>
     <string name="shortcut_check_updates_short">Sjekk oppdateringer</string>
@@ -919,6 +905,8 @@ Patcher påvirkes ikke: aktiver pre-release-patcher for hver kilde i patch-kilde
     <string name="notification_channel_patch_updates">Patch-oppdateringer</string>
     <string name="notification_channel_patch_updates_description">Varsler om nye patch-utgivelser</string>
     <string name="notification_channel_patcher_description">Vises mens Morphe patcher en app i bakgrunnen</string>
+    <string name="notification_channel_patching_results">Patchingsresultater</string>
+    <string name="notification_channel_patching_results_description">Når patching avsluttes eller en installasjon venter på deg mens Morphe er i bakgrunnen</string>
     <string name="notification_channel_mounted_apps">Monterte apper</string>
     <string name="notification_channel_mounted_apps_description">Når en annen versjon har erstattet en montert app og patchen ikke lenger gjelder</string>
     <string name="notification_mount_replaced_title">%1$s er ikke lenger patchet</string>
@@ -1137,7 +1125,6 @@ Detaljer: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Du må skrive inn nøkkelbutikkens legitimasjon for å importere den</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Brukernavn (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Passord</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Format for nøkkelregister</string>
     <string name="settings_system_import_keystore_wrong_credentials">Feil nøkkelbutikklegitimasjon</string>
     <string name="settings_system_import_keystore_success">Nøkkelbutikk importert</string>
     <string name="settings_system_import_keystore_failed">Kunne ikke importere nøkkelbutikk</string>
@@ -1291,6 +1278,7 @@ Detaljer: %2$s"</string>
     <string name="credits_prior_development">Tidligere utvikling</string>
     <string name="opensource_licenses">Lisenser med åpen kildekode</string>
     <string name="opensource_licenses_description">Bibliotekene som Morphe er bygget på</string>
+    <string name="opensource_licenses_search">Søk i biblioteker og lisenser</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Et valg</string>
     <string name="easter_egg_pill_message">Ta den blå pillen og annonsene blir akkurat der de er. Ta den røde og se hvor dypt bytekoden går.</string>

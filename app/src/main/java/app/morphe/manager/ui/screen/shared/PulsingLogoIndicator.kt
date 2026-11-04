@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.shared
 
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -23,6 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import app.morphe.manager.R
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.milliseconds
@@ -55,7 +55,7 @@ fun PulsingLogoIndicator(
 
     val context = LocalContext.current
     val painter = rememberDrawablePainter(
-        drawable = remember(context) { AppCompatResources.getDrawable(context, R.drawable.ic_launcher_foreground) }
+        drawable = remember(context) { ContextCompat.getDrawable(context, R.drawable.ic_launcher_foreground) }
     )
 
     val transition = rememberInfiniteTransition(label = "logo_pulse")

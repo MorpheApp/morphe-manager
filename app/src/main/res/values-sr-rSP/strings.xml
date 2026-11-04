@@ -62,26 +62,12 @@
     <string name="home_search_apps">Претрага апликација</string>
     <string name="list_options_title">Сортирај и филтрирај</string>
     <string name="list_options_state_description">Сортирано по %1$s, филтрирано по %2$s</string>
-    <string name="home_app_filter_all_description">Свака апликација на почетном екрану</string>
-    <string name="home_app_filter_patched_description">Апликације које сте закрпили или сачували помоћу Morphe</string>
-    <string name="home_app_filter_not_patched_description">Апликације које још нисте закрпили у Morphe-у</string>
-    <string name="home_app_filter_installed_description">Апликације које су тренутно инсталиране на овом уређају</string>
-    <string name="home_app_filter_uninstalled_description">Апликације закрпљене помоћу Morphe-а које више нису на овом уређају</string>
     <string name="home_app_filter_clones">Клонови</string>
-    <string name="home_app_filter_clones_description">Апликације направљене под сопственим именом пакета, инсталиране уз оригинал</string>
     <string name="home_app_grouping_none">Нема</string>
-    <string name="home_app_grouping_all_apps_description">Једна листе са свим апликацијама</string>
-    <string name="home_app_grouping_sources_description">Апликације испод извора за патче који их пружа</string>
-    <string name="home_app_grouping_custom_description">Апликације у категоријама које креирате</string>
-    <string name="home_app_sort_manual_description">Притисните и задржите апликацију, затим додирните дугме за поредање</string>
+    <string name="home_app_sort_manual_hint">Држите прст на апликацији, а затим додирните дугме за промену редоследа</string>
     <string name="home_app_sort_recommended">Препоручени поредак</string>
-    <string name="home_app_sort_recommended_description">Инсталиране и причвршћене апликације прво</string>
-    <string name="home_app_sort_name_asc_description">Абецедно, од А до Ш</string>
-    <string name="home_app_sort_name_desc_description">Упадна абецеда, од З до А</string>
     <string name="home_app_sort_updates_first">Прво ажурирања закрпа</string>
-    <string name="home_app_sort_updates_first_description">Апликације са новијим закрпама прво, затим препоручени редослед</string>
     <string name="home_app_sort_recently_patched">Недавно закрпљене</string>
-    <string name="home_app_sort_recently_patched_description">Најновије закрпљене апликације прво</string>
     <string name="home_no_apps_title">Нисe доступни апликације</string>
     <string name="home_no_apps_subtitle">Додај извор пача или омогући постојећи у %s</string>
     <string name="home_no_apps_search_subtitle">Нема апликација које одговарају на \"%s\"</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Ништа није пронађено за %s</string>
     <string name="home_category_add">Додај категорију</string>
     <string name="home_category_all_apps">Све апликације</string>
-    <string name="home_category_custom">Прилагођено</string>
+    <string name="home_app_grouping_categories">Категорије</string>
     <string name="home_category_uncategorized">Некатегорисано</string>
     <string name="home_category_new_title">Нова категорија</string>
     <string name="home_category_rename_title">Преименуј категорију</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">Извор печовања</string>
     <string name="sources_search">Претражите изворе и закрпе</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Сваки извор</string>
-    <string name="sources_filter_enabled_description">Заштите извора се узимају из</string>
-    <string name="sources_filter_disabled_description">Извори искључени</string>
     <string name="sources_filter_issues">Захтевају пажњу</string>
-    <string name="sources_filter_issues_description">Извори који су блокирани, нису успели да се учитају или захтевају новију Morphe</string>
     <string name="sources_sort_manual">Ручно поређање</string>
     <string name="sources_sort_manual_hint">Притисните и задржите извор да бисте променили редослед</string>
     <string name="sources_sort_last_updated">Последње ажурирање</string>
-    <string name="sources_sort_last_updated_description">Прво најновија ажурирања извора</string>
     <string name="sources_sort_enabled_first">Омогућени први</string>
-    <string name="sources_sort_enabled_first_description">Прикажи активне изворе пре онемогућених извора</string>
     <string name="sources_patches_source_disabled_hint">Овај извор је онемогућен. Његове закрпе су наведене ради увида и не примењују се.</string>
     <string name="sources_management_open_in_browser">Отвори у прегледачу</string>
     <string name="sources_management_report_issue">Пријави проблем</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">Preporučeno</string>
     <string name="home_apk_availability_unpatched_label">Необрађен</string>
     <string name="home_apk_availability_incompatible_label">Некомпатибилан</string>
-    <string name="home_apk_availability_installed_version">Инсталирано на овом уређају: %s</string>
     <string name="home_apk_availability_find">Да, помози ми да га нађем</string>
     <string name="home_apk_availability_have">Не, већ га имам</string>
     <string name="home_apk_helper_download">Користи помоћну апликацију</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">Проналажење странице за преузимање…</string>
     <string name="home_download_instructions_step1">Кликните на дугме „%s” испод</string>
     <string name="home_download_instructions_step2_part1">Скролујте низ веб-страницу и притисните</string>
+    <string name="home_download_instructions_step2_apkcube">Скролујте доле на веб страници, изаберите верзију &lt;b&gt;%s&lt;/b&gt; и притисните</string>
     <string name="home_download_instructions_step2_generic">Скролујте низ веб-страницу и притисните њено дугме за преузимање</string>
     <string name="home_download_instructions_step2_variant">Скролујте низ веб-страницу и притисните дугме за преузимање горње &lt;b&gt;APK варијанте&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_search">Отворите резултат претраге са веб-сајта којем верујете</string>
     <string name="home_download_instructions_step2_search_note">Morphe не може да гарантује за ове веб-сајтове. Прескочите оне који нуде сопствену продавницу апликација уместо APK датотеке</string>
     <string name="home_download_instructions_step3_search">На том веб-сајту преузмите APK датотеку верзије &lt;b&gt;%s&lt;/b&gt;, а не најновију</string>
     <string name="home_download_instructions_step3_search_any">На том веб-сајту преузмите APK датотеку апликације. &lt;b&gt;Било која верзија&lt;/b&gt; се може пачовати</string>
+    <string name="home_download_instructions_step2_github">У одељку &lt;b&gt;Assets&lt;/b&gt; верзије &lt;b&gt;%s&lt;/b&gt;, притисните датотеку која се завршава са &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">У одељку &lt;b&gt;Assets&lt;/b&gt; најновије верзије, притисните датотеку која се завршава са &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Ако постоји неколико APK датотека, изаберите ону која носи име %s или универзалну</string>
     <string name="home_download_instructions_download_button_toast">Притисните преузимање на веб-сајту, а не овде 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Одлично! Сада кликните на настави и посетите веб страницу 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Вежба води до савршенства и ти си на добром путу 💪</string>
@@ -518,6 +501,9 @@
     <string name="batch_queue_pending_subtitle">Додирните за преглед и почетак</string>
     <string name="batch_queue_clear_title">Брисати ред?</string>
     <string name="batch_queue_clear_description">Све апликације ће бити уклоните из реда</string>
+    <string name="batch_queue_keep_title">Зачувати ред чекања?</string>
+    <string name="batch_queue_keep_description">Апликације у реду чекања ће чекати на почетном екрану да буду покренуте касније</string>
+    <string name="batch_queue_keep">Зачувај</string>
     <string name="shortcut_repatch_short">Поново пеци</string>
     <string name="shortcut_repatch_long">Поново пеци застареле апликације</string>
     <string name="shortcut_check_updates_short">Провери ажурирања</string>
@@ -919,6 +905,8 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="notification_channel_patch_updates">Ажурирања закрпа</string>
     <string name="notification_channel_patch_updates_description">Обавештења о новим издањима закрпа</string>
     <string name="notification_channel_patcher_description">Приказано док Morphe патчи апликацију у позадини</string>
+    <string name="notification_channel_patching_results">Резултати печовања</string>
+    <string name="notification_channel_patching_results_description">Када се печовање заврши или инсталација чека на вас док је Morphe у позадини</string>
     <string name="notification_channel_mounted_apps">Монтиране апликације</string>
     <string name="notification_channel_mounted_apps_description">Када друга верзија замени монтирану апликацију и њена закрпа се више не примењује</string>
     <string name="notification_mount_replaced_title">%1$s више није закрпљена</string>
@@ -1137,7 +1125,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">Требаћете да унесете дугме за складиштење</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Корисник (Алиас)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Лозинка</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Формат кејстора</string>
     <string name="settings_system_import_keystore_wrong_credentials">Погрешно унете податке кластерског кључа</string>
     <string name="settings_system_import_keystore_success">Кластерски кључ успешно увезен</string>
     <string name="settings_system_import_keystore_failed">Неуспешно увоз кластерског кључа</string>
@@ -1291,6 +1278,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">Претходни развој</string>
     <string name="opensource_licenses">Лиценце отвореног кода</string>
     <string name="opensource_licenses_description">Библиотеке на којима је изграђен Морфе</string>
+    <string name="opensource_licenses_search">Претражите библиотеке и лиценце</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Избор</string>
     <string name="easter_egg_pill_message">Узми плаву пилулу и рекламе остају тачно где јесу. Узми црвену и види колико дубоко иде бајткод.</string>

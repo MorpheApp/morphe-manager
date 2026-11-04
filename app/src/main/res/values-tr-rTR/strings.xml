@@ -62,26 +62,12 @@
     <string name="home_search_apps">Uygulamaları ara</string>
     <string name="list_options_title">Sırala ve filtrele</string>
     <string name="list_options_state_description">%1$s\'a göre sıralandı, %2$s\'e göre filtrelendi</string>
-    <string name="home_app_filter_all_description">Ana ekrandaki tüm uygulamalar</string>
-    <string name="home_app_filter_patched_description">Morphe ile yamaladığınız veya kaydettiğiniz uygulamalar</string>
-    <string name="home_app_filter_not_patched_description">Morphe\'de henüz yamalamadığınız uygulamalar</string>
-    <string name="home_app_filter_installed_description">Bu cihazda şu anda yüklü olan uygulamalar</string>
-    <string name="home_app_filter_uninstalled_description">Morphe ile yamalanmış ve bu cihazda artık bulunmayan uygulamalar</string>
     <string name="home_app_filter_clones">Klonlar</string>
-    <string name="home_app_filter_clones_description">Kendi paket adıyla oluşturulan ve orijinalin yanına kurulan uygulamalar</string>
     <string name="home_app_grouping_none">Yok</string>
-    <string name="home_app_grouping_all_apps_description">Her uygulamanın bulunduğu tek bir liste</string>
-    <string name="home_app_grouping_sources_description">Uygulamaları sağlayan yama kaynağının altındaki uygulamalar</string>
-    <string name="home_app_grouping_custom_description">Oluşturduğunuz kategorilerdeki uygulamalar</string>
-    <string name="home_app_sort_manual_description">Bir uygulamaya uzun basın, ardından yeniden sıralama düğmesine dokunun</string>
+    <string name="home_app_sort_manual_hint">Bir uygulamaya basılı tutun ve yeniden sırala düğmesine dokunun</string>
     <string name="home_app_sort_recommended">Önerilen sıra</string>
-    <string name="home_app_sort_recommended_description">Önce yüklenen ve sabitlenen uygulamalar</string>
-    <string name="home_app_sort_name_asc_description">Alfabetik, A\'dan Z\'ye</string>
-    <string name="home_app_sort_name_desc_description">Ters alfabetik, Z\'den A\'ya</string>
     <string name="home_app_sort_updates_first">Önce yama güncellemeleri</string>
-    <string name="home_app_sort_updates_first_description">Yamaları daha yeni olan uygulamalar önce, sonra önerilen sıra</string>
     <string name="home_app_sort_recently_patched">Son yamalanan</string>
-    <string name="home_app_sort_recently_patched_description">En son yamalanan uygulamalar önce</string>
     <string name="home_no_apps_title">Uygulama bulunamadı</string>
     <string name="home_no_apps_subtitle">Bir yama kaynağı ekleyin veya %s içinde mevcut olanı etkinleştirin</string>
     <string name="home_no_apps_search_subtitle">\"%s\" ile eşleşen uygulama yok</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">%s ile eşleşen bir şey yok</string>
     <string name="home_category_add">Kategori ekle</string>
     <string name="home_category_all_apps">Tüm uygulamalar</string>
-    <string name="home_category_custom">Özel</string>
+    <string name="home_app_grouping_categories">Kategoriler</string>
     <string name="home_category_uncategorized">Kategorilendirilmemiş</string>
     <string name="home_category_new_title">Yeni kategori</string>
     <string name="home_category_rename_title">Kategoriyi yeniden adlandır</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">Yama kaynakları</string>
     <string name="sources_search">Kaynakları ve yamaları ara</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Tüm kaynaklar</string>
-    <string name="sources_filter_enabled_description">Yamaların alınacağı kaynaklar</string>
-    <string name="sources_filter_disabled_description">Kapatılan kaynaklar</string>
     <string name="sources_filter_issues">Dikkat gerektirenler</string>
-    <string name="sources_filter_issues_description">Engellenen, yüklemesi başarısız olan veya daha yeni bir Morphe gerektiren kaynaklar</string>
     <string name="sources_sort_manual">Manuel sıra</string>
     <string name="sources_sort_manual_hint">Yeniden sıralamak için bir kaynağa uzun basın</string>
     <string name="sources_sort_last_updated">Son güncelleme</string>
-    <string name="sources_sort_last_updated_description">Önce en yeni kaynak güncellemeleri</string>
     <string name="sources_sort_enabled_first">Önce ekin olanlar</string>
-    <string name="sources_sort_enabled_first_description">Etkin kaynakları devre dışı kaynaklardan önce göster</string>
     <string name="sources_patches_source_disabled_hint">Bu kaynak devre dışı. Yamaları referans için listelenmiştir ve uygulanmaz</string>
     <string name="sources_management_open_in_browser">Tarayıcıda aç</string>
     <string name="sources_management_report_issue">Sorun bildir</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">Önerilen</string>
     <string name="home_apk_availability_unpatched_label">Yamalanmamış</string>
     <string name="home_apk_availability_incompatible_label">Uyumsuz</string>
-    <string name="home_apk_availability_installed_version">Bu cihazda yüklü: %s</string>
     <string name="home_apk_availability_find">Evet, bulmama yardım et</string>
     <string name="home_apk_availability_have">Hayır, zaten bende var</string>
     <string name="home_apk_helper_download">Bir yardımcı uygulama kullanın</string>
@@ -304,13 +283,17 @@
     <string name="home_download_instructions_title">Orijinal APK\'yi indir</string>
     <string name="home_download_instructions_finding">İndirme sayfası aranıyor…</string>
     <string name="home_download_instructions_step1">Aşağıdaki \"%s\" düğmesine tıklayın</string>
-    <string name="home_download_instructions_step2_part1">Web sayfasını aşağı kaydırın ve</string>
+    <string name="home_download_instructions_step2_part1">Web sayfasını aşağı kaydırın ve şuna basın</string>
+    <string name="home_download_instructions_step2_apkcube">Web sayfasını aşağı kaydırın, &lt;b&gt;%s&lt;/b&gt; sürümünü seçin ve basın</string>
     <string name="home_download_instructions_step2_generic">Web sayfasını aşağı kaydırın ve indirme düğmesine basın</string>
     <string name="home_download_instructions_step2_variant">Web sayfasını aşağı kaydırın ve en üstteki &lt;b&gt;APK varyantının&lt;/b&gt; indirme düğmesine basın</string>
     <string name="home_download_instructions_step2_search">Güvendiğiniz bir web sitesinden bir arama sonucunu açın</string>
     <string name="home_download_instructions_step2_search_note">Morphe bu web sitelerini garanti edemez. APK dosyası yerine kendi uygulama mağazasını sunanları atlayın</string>
     <string name="home_download_instructions_step3_search">Bu web sitesinde, en yeni sürümü değil, &lt;b&gt;%s&lt;/b&gt; sürümünün APK\'sını indirin</string>
     <string name="home_download_instructions_step3_search_any">Bu web sitesinde uygulamanın APK\'sını indirin. &lt;b&gt;Herhangi bir sürüm&lt;/b&gt; yamalanabilir</string>
+    <string name="home_download_instructions_step2_github">&lt;b&gt;%s&lt;/b&gt; sürümünün &lt;b&gt;Assets&lt;/b&gt; kısmında &lt;b&gt;.apk&lt;/b&gt; ile biten dosyaya tıklayın</string>
+    <string name="home_download_instructions_step2_github_latest">En son sürümün &lt;b&gt;Assets&lt;/b&gt; kısmında &lt;b&gt;.apk&lt;/b&gt; ile biten dosyaya tıklayın</string>
+    <string name="home_download_instructions_step2_github_note">Birden fazla APK dosyası varsa, %s adını taşıyanı veya evrensel (universal) olanı seçin</string>
     <string name="home_download_instructions_download_button_toast">Web sitesindeki indirme düğmesine basın, buradakine değil 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Harika! Şimdi devam\'a tıklayın ve web sitesine gidin 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Pratik mükemmelleştirir ve yavaş yavaş ilerliyorsun 💪</string>
@@ -518,6 +501,9 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="batch_queue_pending_subtitle">Gözden geçirip başlatmak için dokunun</string>
     <string name="batch_queue_clear_title">Kuyruk temizlensin mi?</string>
     <string name="batch_queue_clear_description">Tüm uygulamalar kuyruktan kaldırılacak</string>
+    <string name="batch_queue_keep_title">Kuyruk korunsun mu?</string>
+    <string name="batch_queue_keep_description">Kuyruktaki uygulamalar daha sonra başlatılmak üzere ana ekranda bekleyecektir</string>
+    <string name="batch_queue_keep">Koru</string>
     <string name="shortcut_repatch_short">Yeniden yama</string>
     <string name="shortcut_repatch_long">Güncel olmayan uygulamaları yeniden yama</string>
     <string name="shortcut_check_updates_short">Güncellemeleri kontrol et</string>
@@ -919,6 +905,8 @@ Yamalar etkilenmez: yamalama kaynakları listesindeki her kaynak için ön sür�
     <string name="notification_channel_patch_updates">Yama güncellemeleri</string>
     <string name="notification_channel_patch_updates_description">Yeni yama sürümleri hakkında bildirimler</string>
     <string name="notification_channel_patcher_description">Morphe bir uygulamayı arka planda yamalarken gösterilir</string>
+    <string name="notification_channel_patching_results">Yamalama sonuçları</string>
+    <string name="notification_channel_patching_results_description">Yamalama bittiğinde veya Morphe arka plandayken bir yükleme sizi beklerken</string>
     <string name="notification_channel_mounted_apps">Bağlı uygulamalar</string>
     <string name="notification_channel_mounted_apps_description">Başka bir sürüm bağlı bir uygulamanın yerini aldığında ve yaması artık uygulanmadığında</string>
     <string name="notification_mount_replaced_title">v%1$s artık yamalı değil</string>
@@ -1137,7 +1125,6 @@ Ayrıntılar: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">İçe aktarmak için anahtar deposu kimlik bilgilerini girmeniz gerekecek</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Kullanıcı Adı (Takma Ad)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Şifre</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Anahtar deposu formatı</string>
     <string name="settings_system_import_keystore_wrong_credentials">Yanlış anahtar deposu kimlik bilgileri</string>
     <string name="settings_system_import_keystore_success">Anahtar deposu içe aktarıldı</string>
     <string name="settings_system_import_keystore_failed">Anahtar deposu içe aktarılamadı</string>
@@ -1257,7 +1244,7 @@ Ayrıntılar: %2$s"</string>
     <string name="settings_system_apk_download_helper">APK indirme yardımcısı</string>
     <string name="settings_system_apk_download_helper_trusted_count">Güvenilen: %1$d / %2$d</string>
     <string name="settings_system_apk_download_helper_dialog_description">Yardımcı uygulamalar sizin için orijinal APK\'lar indirebilir. İndirme talimatlarında yalnızca burada güvendiğiniz uygulamalar sunulur.</string>
-    <string name="settings_system_apk_download_helper_trust_title">Bu yardımcıya güveniliyor mu?</string>
+    <string name="settings_system_apk_download_helper_trust_title">Bu yardımcıya güvenilsin mi?</string>
     <string name="settings_system_apk_download_helper_warning">APK, yardımcı uygulamadan gelir, bu yüzden yalnızca tanıdığınız uygulamalara güvenin. Morphe, yamalamadan önce her dosyanın paketini, sürümünü ve imzasını yine de kontrol eder.</string>
     <string name="settings_system_apk_download_helper_installed_by">%s tarafından yüklendi</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Yükleyen bilinmiyor</string>
@@ -1291,6 +1278,7 @@ Ayrıntılar: %2$s"</string>
     <string name="credits_prior_development">Önceki geliştirme</string>
     <string name="opensource_licenses">Açık kaynak lisansları</string>
     <string name="opensource_licenses_description">Morphe tarafından kullanılan kütüphaneler</string>
+    <string name="opensource_licenses_search">Kütüphane ve lisans ara</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Bir seçim</string>
     <string name="easter_egg_pill_message">Mavi hapı al ve reklamlar tam olarak oldukları yerde kalsın. Kırmızı olanı al ve bayt kodunun ne kadar derin olduğunu gör.</string>

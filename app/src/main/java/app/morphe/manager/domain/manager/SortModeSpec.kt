@@ -9,9 +9,8 @@ import androidx.annotation.StringRes
 
 /**
  * Enum values picked from a list of modes (sorting, filtering, grouping) provide their own
- * label/description string resources so shared UI can render them without a per-enum mapping helper.
+ * label string resource so shared UI can render them without a per-enum mapping helper.
  */
 interface SortModeSpec {
     @get:StringRes val labelRes: Int
-    @get:StringRes val descriptionRes: Int
 }

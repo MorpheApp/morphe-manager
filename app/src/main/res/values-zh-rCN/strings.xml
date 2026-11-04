@@ -62,26 +62,12 @@
     <string name="home_search_apps">搜索应用</string>
     <string name="list_options_title">排序和筛选</string>
     <string name="list_options_state_description">按 %1$s 排序，按 %2$s 筛选</string>
-    <string name="home_app_filter_all_description">主屏幕上的所有应用</string>
-    <string name="home_app_filter_patched_description">你已使用 Morphe 修补或保存的应用</string>
-    <string name="home_app_filter_not_patched_description">你尚未在 Morphe 中修补的应用</string>
-    <string name="home_app_filter_installed_description">此设备上当前安装的应用</string>
-    <string name="home_app_filter_uninstalled_description">使用 Morphe 修补过且已不在本设备上的应用</string>
     <string name="home_app_filter_clones">克隆应用</string>
-    <string name="home_app_filter_clones_description">以自有包名构建，与原始应用一起安装的应用</string>
     <string name="home_app_grouping_none">无</string>
-    <string name="home_app_grouping_all_apps_description">包含所有应用的列表</string>
-    <string name="home_app_grouping_sources_description">提供这些应用的分发源下的应用</string>
-    <string name="home_app_grouping_custom_description">您创建的分类中的应用</string>
-    <string name="home_app_sort_manual_description">长按一个应用，然后点击重新排序按钮</string>
+    <string name="home_app_sort_manual_hint">长按应用，然后点击重新排序按钮</string>
     <string name="home_app_sort_recommended">推荐顺序</string>
-    <string name="home_app_sort_recommended_description">优先显示已安装和固定应用</string>
-    <string name="home_app_sort_name_asc_description">字母顺序，A 到 Z</string>
-    <string name="home_app_sort_name_desc_description">反向字母顺序，Z 到 A</string>
     <string name="home_app_sort_updates_first">补丁更新优先</string>
-    <string name="home_app_sort_updates_first_description">先列出补丁较新的应用，然后按推荐顺序排列</string>
     <string name="home_app_sort_recently_patched">最近修补的</string>
-    <string name="home_app_sort_recently_patched_description">最近修补的应用优先</string>
     <string name="home_no_apps_title">没有可用的应用</string>
     <string name="home_no_apps_subtitle">添加一个补丁源或在 %s 中启用现有补丁源</string>
     <string name="home_no_apps_search_subtitle">没有应用匹配“%s”</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">没有与 %s 匹配的内容</string>
     <string name="home_category_add">添加类别</string>
     <string name="home_category_all_apps">所有应用</string>
-    <string name="home_category_custom">自定义</string>
+    <string name="home_app_grouping_categories">类别</string>
     <string name="home_category_uncategorized">未分类</string>
     <string name="home_category_new_title">新建分类</string>
     <string name="home_category_rename_title">重命名分类</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">补丁源</string>
     <string name="sources_search">搜索源和补丁</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">所有来源</string>
-    <string name="sources_filter_enabled_description">源补丁取自</string>
-    <string name="sources_filter_disabled_description">已关闭的源</string>
     <string name="sources_filter_issues">需要关注</string>
-    <string name="sources_filter_issues_description">被阻止、加载失败或需要更新 Morphe 的源</string>
     <string name="sources_sort_manual">手动排序</string>
     <string name="sources_sort_manual_hint">长按源以重新排序</string>
     <string name="sources_sort_last_updated">上次更新</string>
-    <string name="sources_sort_last_updated_description">最新更新的源优先</string>
     <string name="sources_sort_enabled_first">已启用优先</string>
-    <string name="sources_sort_enabled_first_description">在禁用源之前显示活动源</string>
     <string name="sources_patches_source_disabled_hint">此源已禁用。其补丁仅列出供参考，不会被应用。</string>
     <string name="sources_management_open_in_browser">在浏览器中打开链接</string>
     <string name="sources_management_report_issue">报告问题</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">推荐</string>
     <string name="home_apk_availability_unpatched_label">未修补</string>
     <string name="home_apk_availability_incompatible_label">不兼容</string>
-    <string name="home_apk_availability_installed_version">此设备上已安装：%s</string>
     <string name="home_apk_availability_find">是的，帮我查找</string>
     <string name="home_apk_availability_have">不，我已经有了</string>
     <string name="home_apk_helper_download">使用辅助应用程序</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">正在查找下载页面…</string>
     <string name="home_download_instructions_step1">请按下下面的“%s”按钮。</string>
     <string name="home_download_instructions_step2_part1">向下滚动网页并按</string>
+    <string name="home_download_instructions_step2_apkcube">向下滚动网页，选择版本 &lt;b&gt;%s&lt;/b&gt; 并点击</string>
     <string name="home_download_instructions_step2_generic">向下滚动网页并点击其下载按钮</string>
     <string name="home_download_instructions_step2_variant">向下滚动网页，然后点击顶部 &lt;b&gt;APK 变体&lt;/b&gt; 的下载按钮</string>
     <string name="home_download_instructions_step2_search">打开来自你信任的网站的搜索结果</string>
     <string name="home_download_instructions_step2_search_note">Morphe 无法为这些网站担保。请跳过那些提供自己的应用商店而不是 APK 文件的网站</string>
     <string name="home_download_instructions_step3_search">在那个网站上，下载 &lt;b&gt;%s&lt;/b&gt; 版本的 APK，而不是最新版本</string>
     <string name="home_download_instructions_step3_search_any">在那个网站上，下载该应用的 APK。&lt;b&gt;任何版本&lt;/b&gt;都可以修补</string>
+    <string name="home_download_instructions_step2_github">在版本 &lt;b&gt;%s&lt;/b&gt; 的 &lt;b&gt;Assets&lt;/b&gt; 下，点击以 &lt;b&gt;.apk&lt;/b&gt; 结尾的文件</string>
+    <string name="home_download_instructions_step2_github_latest">在最新版本的 &lt;b&gt;Assets&lt;/b&gt; 下，点击以 &lt;b&gt;.apk&lt;/b&gt; 结尾的文件</string>
+    <string name="home_download_instructions_step2_github_note">如果有多个 APK 文件，请选择以 %s 命名或通用版本的文件</string>
     <string name="home_download_instructions_download_button_toast">在网站上按下下载，而不是在这里 😊</string>
     <string name="home_download_instructions_download_button_toast_2">太棒了！现在点击继续并访问网站👆</string>
     <string name="home_download_instructions_download_button_toast_3">熟能生巧，你做得越来越好了💪</string>
@@ -518,6 +501,9 @@
     <string name="batch_queue_pending_subtitle">点击以审核并开始</string>
     <string name="batch_queue_clear_title">是否清空队列？</string>
     <string name="batch_queue_clear_description">所有应用将从队列中移除</string>
+    <string name="batch_queue_keep_title">保留队列？</string>
+    <string name="batch_queue_keep_description">已排队的应用将在主屏幕上等待稍后启动</string>
+    <string name="batch_queue_keep">保留</string>
     <string name="shortcut_repatch_short">重新修补</string>
     <string name="shortcut_repatch_long">重新修补过时的应用程序</string>
     <string name="shortcut_check_updates_short">检查更新</string>
@@ -919,6 +905,8 @@
     <string name="notification_channel_patch_updates">补丁更新</string>
     <string name="notification_channel_patch_updates_description">有关新补丁版本的通知</string>
     <string name="notification_channel_patcher_description">当 Morphe 在后台为应用打补丁时显示</string>
+    <string name="notification_channel_patching_results">补丁结果</string>
+    <string name="notification_channel_patching_results_description">当补丁结束或 Morphe 在后台运行时安装正在等待您时</string>
     <string name="notification_channel_mounted_apps">已挂载的应用</string>
     <string name="notification_channel_mounted_apps_description">当另一个版本替换了已挂载的应用且其补丁不再适用时</string>
     <string name="notification_mount_replaced_title">%1$s 不再被修补</string>
@@ -1137,7 +1125,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">您需要输入密钥库的凭据才能导入它</string>
     <string name="settings_system_import_keystore_dialog_alias_field">用户名 (别名)</string>
     <string name="settings_system_import_keystore_dialog_password_field">密码</string>
-    <string name="settings_system_import_keystore_dialog_format_field">密钥库格式</string>
     <string name="settings_system_import_keystore_wrong_credentials">密钥库凭据错误</string>
     <string name="settings_system_import_keystore_success">密钥库已导入</string>
     <string name="settings_system_import_keystore_failed">导入密钥库失败</string>
@@ -1291,6 +1278,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">先前开发</string>
     <string name="opensource_licenses">开源许可证</string>
     <string name="opensource_licenses_description">构建 Morphe 所使用的库</string>
+    <string name="opensource_licenses_search">搜索库和许可证</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">一个选择</string>
     <string name="easter_egg_pill_message">服用蓝色药丸，广告就会保持原样。服用红色药丸，看看字节码究竟有多深。</string>

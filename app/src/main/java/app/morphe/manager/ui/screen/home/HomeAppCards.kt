@@ -239,8 +239,7 @@ private fun InstalledAppCard(
         item.showsUpdateBadge -> AppStateIcons.NewerPatches
         else -> null
     }
-    // A copy is marked where every other card is, and steps over to the other corner for an
-    // update, which is the mark worth finding in the same place down the list
+    // Each corner keeps one meaning down the list, so copies and updates are found at a glance
     val cloneMark = AppStateIcons.Clone.takeIf { item.isClone }
 
     // The states the badges stand for are read out whether the badges themselves are showing or
@@ -297,8 +296,8 @@ private fun InstalledAppCard(
         // App icon
         // Frosted and as tall as the badges in the row, but capped so a large font can't bury the icon
         MarkedIcon(
-            mark = updateMark ?: cloneMark,
-            startMark = cloneMark.takeIf { updateMark != null },
+            mark = updateMark,
+            startMark = cloneMark,
             markColor = cardStyle.markContainerColor,
             markSize = cardStyle.markSize,
             markContentColor = cardStyle.chipContentColor,

@@ -28,9 +28,9 @@ import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
 
 /**
- * A (bundle + package) pair the user can copy from.
- * [applicableCount] is the count of source patches that survive intersection
- * with the target bundle's patch names.
+ * A (bundle + package) pair the user can copy from: its saved selection, or set [setUid] when one
+ * is given. [applicableCount] is the count of source patches that survive intersection with the
+ * target bundle's patch names.
  */
 @Immutable
 data class CopySelectionCandidate(
@@ -41,7 +41,9 @@ data class CopySelectionCandidate(
     val sourceCount: Int,
     val applicableCount: Int,
     val isSameSource: Boolean,
-    val isSamePackage: Boolean
+    val isSamePackage: Boolean,
+    val setUid: Int? = null,
+    val setName: String? = null
 )
 
 /**
@@ -279,7 +281,7 @@ private fun SetsSection(
             ) {
                 RowValue(
                     text = pluralStringResource(R.plurals.patch_count, set.patchCount, set.patchCount.toString()),
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f, fill = false)
                 )
                 RowActionsMenu(selectionSetActions(onRename = { onRename(set) }, onDelete = { onDelete(set) }))
             }
@@ -370,11 +372,13 @@ private fun CopySection(
                 PanelRow(
                     title = candidate.packageDisplayName,
                     onClick = { onCopy(candidate) },
-                    icon = MaterialSymbols.Rounded.Content_copy
+                    icon = if (candidate.setName != null) {
+                        MaterialSymbols.Rounded.Bookmark
+                    } else MaterialSymbols.Rounded.Content_copy
                 ) {
                     // Where it comes from and how much of it lands, ending in line with the other rows
-                    Column(modifier = Modifier.weight(1f), horizontalAlignment = Alignment.End) {
-                        RowValue(text = candidate.bundleName)
+                    Column(horizontalAlignment = Alignment.End) {
+                        RowValue(text = listOfNotNull(candidate.setName, candidate.bundleName).joinToString(" · "))
                         Text(
                             text = stringResource(
                                 R.string.copy_selection_available_format,

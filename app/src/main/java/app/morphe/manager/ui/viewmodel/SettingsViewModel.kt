@@ -25,18 +25,17 @@ import app.morphe.manager.domain.repository.SelectionSetRepository
 import app.morphe.manager.domain.repository.SelectionSetSummary
 import app.morphe.manager.domain.repository.SourceMuteRepository
 import app.morphe.manager.patcher.runtime.jvm.JvmInstallation
-import app.morphe.manager.network.api.MorpheAPI
+import app.morphe.manager.network.api.ReleaseAPI
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.screen.settings.system.CopyTarget
 import app.morphe.manager.ui.screen.shared.CopySelectionCandidate
 import app.morphe.manager.util.ApkDownloadHelperContract
 import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.AppDataSource
+import app.morphe.manager.util.hasGooglePlayServices
 import app.morphe.manager.util.syncFcmTopics
 import app.morphe.manager.worker.UpdateCheckInterval
 import app.morphe.manager.worker.UpdateCheckWorker
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.GoogleApiAvailability
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
@@ -78,7 +77,7 @@ class SettingsViewModel(
     private val optionsRepository: PatchOptionsRepository,
     private val patchBundleRepository: PatchBundleRepository,
     private val appDataResolver: AppDataResolver,
-    private val api: MorpheAPI,
+    private val api: ReleaseAPI,
     private val appContext: Context,
     jvmInstallation: JvmInstallation,
     /** State behind the copy panel, see [openCopy], and behind renaming and deleting sets. */
@@ -88,8 +87,7 @@ class SettingsViewModel(
     val jvmRuntimeAvailable = jvmInstallation.isAvailable
 
     /** True when Google Play Services is available; FCM handles notifications on these devices. */
-    val hasGms: Boolean = GoogleApiAvailability.getInstance()
-        .isGooglePlayServicesAvailable(appContext) == ConnectionResult.SUCCESS
+    val hasGms: Boolean = appContext.hasGooglePlayServices()
 
     /** True when POST_NOTIFICATIONS is granted (always true below Android 13). */
     fun hasNotificationPermission(): Boolean =

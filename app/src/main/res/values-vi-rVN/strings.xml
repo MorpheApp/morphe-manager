@@ -62,26 +62,12 @@
     <string name="home_search_apps">Tìm ứng dụng</string>
     <string name="list_options_title">Sắp xếp và lọc</string>
     <string name="list_options_state_description">Đã xếp theo %1$s và lọc theo %2$s</string>
-    <string name="home_app_filter_all_description">Mọi ứng dụng trên màn hình chính</string>
-    <string name="home_app_filter_patched_description">Các ứng dụng đã được bạn vá hoặc lưu bằng Morphe</string>
-    <string name="home_app_filter_not_patched_description">Các ứng dụng mà bạn chưa vá trong Morphe</string>
-    <string name="home_app_filter_installed_description">Các ứng dụng hiện đang được cài đặt trên thiết bị này</string>
-    <string name="home_app_filter_uninstalled_description">Các ứng dụng từng được vá bằng Morphe nhưng không còn trên thiết bị nữa</string>
     <string name="home_app_filter_clones">Bản sao</string>
-    <string name="home_app_filter_clones_description">Các ứng dụng được đựng dưới tên gói riêng, được cài đặt như ứng dụng khác ứng dụng gốc</string>
     <string name="home_app_grouping_none">Không</string>
-    <string name="home_app_grouping_all_apps_description">Một danh sách chứa mọi ứng dụng</string>
-    <string name="home_app_grouping_sources_description">Các ứng dụng nằm trong nguồn patch cung cấp chúng</string>
-    <string name="home_app_grouping_custom_description">Các ứng dụng trong các danh mục do bạn tạo</string>
-    <string name="home_app_sort_manual_description">Bấm giữ một ứng dụng, sau đó chọn nút sắp xếp lại</string>
+    <string name="home_app_sort_manual_hint">Bấm giữ một ứng dụng, sau đó chọn nút sắp xếp lại</string>
     <string name="home_app_sort_recommended">Thứ tự đề xuất</string>
-    <string name="home_app_sort_recommended_description">Ưu tiên ứng dụng đã cài đặt và được ghim trước</string>
-    <string name="home_app_sort_name_asc_description">Theo thứ tự bảng chữ cái, A đến Z</string>
-    <string name="home_app_sort_name_desc_description">Đảo ngược theo thứ tự bảng chữ cái, Z đến A</string>
     <string name="home_app_sort_updates_first">Ưu tiên vá cập nhật</string>
-    <string name="home_app_sort_updates_first_description">Các ứng dụng có bản vá mới hơn trước, rồi theo thứ tự đề xuất</string>
     <string name="home_app_sort_recently_patched">Mới vá gần đây</string>
-    <string name="home_app_sort_recently_patched_description">Các ứng dụng được vá gần đây nhất trước</string>
     <string name="home_no_apps_title">Không có ứng dụng nào có sẵn</string>
     <string name="home_no_apps_subtitle">Thêm nguồn vá mới hoặc bật nguồn có sẵn trong %s</string>
     <string name="home_no_apps_search_subtitle">Không có ứng dụng nào khớp với \"%s\"</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Không có kết quả nào phù hợp với %s</string>
     <string name="home_category_add">Thêm danh mục</string>
     <string name="home_category_all_apps">Tất cả ứng dụng</string>
-    <string name="home_category_custom">Tùy chỉnh</string>
+    <string name="home_app_grouping_categories">Danh mục</string>
     <string name="home_category_uncategorized">Chưa phân loại</string>
     <string name="home_category_new_title">Danh mục mới</string>
     <string name="home_category_rename_title">Đổi tên danh mục</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">Nguồn vá</string>
     <string name="sources_search">Tìm kiếm nguồn và bản vá</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Mọi nguồn</string>
-    <string name="sources_filter_enabled_description">Nguồn patch được lấy từ</string>
-    <string name="sources_filter_disabled_description">Nguồn đã tắt</string>
     <string name="sources_filter_issues">Cần xử lý</string>
-    <string name="sources_filter_issues_description">Các nguồn bị chặn, không thể tải hoặc cần Morphe mới hơn</string>
     <string name="sources_sort_manual">Sắp xếp thủ công</string>
     <string name="sources_sort_manual_hint">Bấm giữ một nguồn để sắp xếp lại</string>
     <string name="sources_sort_last_updated">Cập nhật lần cuối</string>
-    <string name="sources_sort_last_updated_description">Ưu tiên cập nhật nguồn mới nhất trước</string>
     <string name="sources_sort_enabled_first">Ưu tiên đã kích hoạt trước</string>
-    <string name="sources_sort_enabled_first_description">Hiển thị các nguồn đang hoạt động trước các nguồn đã bị vô hiệu hóa</string>
     <string name="sources_patches_source_disabled_hint">Nguồn này đã bị tắt. Các bản vá của nó được liệt kê để tham khảo và không được áp dụng</string>
     <string name="sources_management_open_in_browser">Mở trong trình duyệt</string>
     <string name="sources_management_report_issue">Báo cáo sự cố</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">Khuyên dùng</string>
     <string name="home_apk_availability_unpatched_label">Chưa vá</string>
     <string name="home_apk_availability_incompatible_label">Không tương thích</string>
-    <string name="home_apk_availability_installed_version">Đã cài đặt trên thiết bị này: %s</string>
     <string name="home_apk_availability_find">Có, hãy giúp tôi tìm nó</string>
     <string name="home_apk_availability_have">Không, tôi có rồi</string>
     <string name="home_apk_helper_download">Dùng ứng dụng hỗ trợ</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">Đang tìm trang tải xuống…</string>
     <string name="home_download_instructions_step1">Bấm nút \"%s\" ở bên dưới</string>
     <string name="home_download_instructions_step2_part1">Cuộn xuống trang web và bấm</string>
+    <string name="home_download_instructions_step2_apkcube">Cuộn xuống trang web, chọn phiên bản &lt;b&gt;%s&lt;/b&gt; và nhấn</string>
     <string name="home_download_instructions_step2_generic">Lướt xuống trong trang web và bấm nút tải xuống</string>
     <string name="home_download_instructions_step2_variant">Lướt xuống trong trang web và bấm nút tải xuống của &lt;b&gt;biến thể APK&lt;/b&gt; ở trên cùng</string>
     <string name="home_download_instructions_step2_search">Mở một kết quả tìm kiếm từ trang web mà bạn tin tưởng</string>
     <string name="home_download_instructions_step2_search_note">Morphe không thể đảm bảo độ tin cậy của các trang web này. Hãy bỏ qua những trang yêu cầu cài đặt kho ứng dụng của họ thay vì cho tải tệp APK ngay</string>
     <string name="home_download_instructions_step3_search">Trên trang web đó, hãy tải APK của phiên bản &lt;b&gt;%s&lt;/b&gt;, chứ không phải cái mới nhất</string>
     <string name="home_download_instructions_step3_search_any">Trên trang web đó, cứ tải APK nào cũng được, vì &lt;b&gt;bất kỳ phiên bản nào&lt;/b&gt; cũng có thể vá</string>
+    <string name="home_download_instructions_step2_github">Trong mục &lt;b&gt;Assets&lt;/b&gt; của bản phát hành &lt;b&gt;%s&lt;/b&gt;, hãy nhấn vào tệp kết thúc bằng &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">Trong mục &lt;b&gt;Assets&lt;/b&gt; của bản phát hành mới nhất, hãy nhấn vào tệp kết thúc bằng &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Nếu có nhiều tệp APK, hãy chọn tệp được đặt tên theo %s hoặc tệp universal</string>
     <string name="home_download_instructions_download_button_toast">Bấm tải xuống trên trang web ấy, chứ không phải ở đây 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Tuyệt! Bây giờ hãy bấm tiếp tục và truy cập trang web 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Có công mài sắt, có ngày nên kim. Bạn đang làm rất tốt 💪</string>
@@ -518,6 +501,9 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="batch_queue_pending_subtitle">Chạm để xem lại và bắt đầu</string>
     <string name="batch_queue_clear_title">Xóa hàng đợi?</string>
     <string name="batch_queue_clear_description">Tất cả ứng dụng sẽ bị xóa khỏi hàng đợi</string>
+    <string name="batch_queue_keep_title">Giữ hàng chờ?</string>
+    <string name="batch_queue_keep_description">Các ứng dụng trong hàng chờ sẽ đợi trên màn hình chính để khởi chạy sau</string>
+    <string name="batch_queue_keep">Giữ</string>
     <string name="shortcut_repatch_short">Vá lại</string>
     <string name="shortcut_repatch_long">Vá lại các ứng dụng đã cũ</string>
     <string name="shortcut_check_updates_short">Kiểm tra cập nhật</string>
@@ -919,6 +905,8 @@ Các bản vá không bị ảnh hưởng: bật các bản vá trước khi ph�
     <string name="notification_channel_patch_updates">Cập nhật bản vá</string>
     <string name="notification_channel_patch_updates_description">Thông báo về các bản phát hành bản vá mới</string>
     <string name="notification_channel_patcher_description">Hiển thị khi Morphe đang vá ứng dụng trong nền</string>
+    <string name="notification_channel_patching_results">Kết quả vá lỗi</string>
+    <string name="notification_channel_patching_results_description">Khi quá trình vá lỗi kết thúc hoặc một bản cài đặt đang chờ bạn trong khi Morphe chạy ngầm</string>
     <string name="notification_channel_mounted_apps">Ứng dụng đã gắn</string>
     <string name="notification_channel_mounted_apps_description">Khi một phiên bản khác thay thế một ứng dụng đã được gắn và bản vá của nó không còn áp dụng được nữa</string>
     <string name="notification_mount_replaced_title">%1$s không còn được vá</string>
@@ -1140,7 +1128,6 @@ Chi tiết: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Bạn sẽ cần điền thông tin xác thực của kho khóa để nhập chúng</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Tên người dùng (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Mật khẩu</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Định dạng kho khoá</string>
     <string name="settings_system_import_keystore_wrong_credentials">Thông tin xác thực kho khóa không đúng</string>
     <string name="settings_system_import_keystore_success">Đã nhập kho khóa</string>
     <string name="settings_system_import_keystore_failed">Khổng thể nhập kho khóa</string>
@@ -1294,6 +1281,7 @@ Chi tiết: %2$s"</string>
     <string name="credits_prior_development">Trước đây</string>
     <string name="opensource_licenses">Giấy phép mã nguồn mở</string>
     <string name="opensource_licenses_description">Các thư viện mà Morphe xây dựng trên đó</string>
+    <string name="opensource_licenses_search">Tìm kiếm thư viện và giấy phép</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Một lựa chọn</string>
     <string name="easter_egg_pill_message">Hãy uống viên thuốc màu xanh và quảng cáo sẽ ở nguyên vị trí. Hãy uống viên thuốc màu đỏ và xem mã byte có thể đi sâu đến đâu.</string>

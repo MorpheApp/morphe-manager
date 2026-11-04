@@ -7,7 +7,6 @@ package app.morphe.manager.util
 
 import android.app.LocaleManager
 import android.content.Context
-import android.content.ContextWrapper
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.content.res.Resources
@@ -28,7 +27,7 @@ import java.util.Locale
  * Android 13+ keeps the choice itself and applies it to every context of the app, the application
  * and its services included. Older versions have no notion of a per-app language, so there the
  * choice lives in [SharedPreferences], the only store readable from attachBaseContext before Koin
- * and DataStore exist, and each base context is localized by hand.
+ * and DataStore exist, and the application resources and each activity are localized by hand.
  */
 object AppLocale {
     /** Follows the device language. */
@@ -56,22 +55,22 @@ object AppLocale {
     val selected: StateFlow<String> = _selected.asStateFlow()
 
     /**
-     * Loads the choice and returns the base context the application should attach, localized on
-     * Android 12 and lower so that strings resolved outside an activity follow the choice too.
+     * Loads the choice and, on Android 12 and lower, returns the resources the application should
+     * serve, so that strings resolved outside an activity follow the choice too.
      */
-    fun attach(base: Context): Context {
+    fun attach(base: Context): LocalizedResources? {
         prefs = base.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
         if (appliedBySystem) {
             handToSystem(base)
             _selected.value = systemChoice(base)
-            return base
+            return null
         }
 
         val choice = normalize(prefs.getString(KEY_LANGUAGE, null))
         _selected.value = choice
         applyDefaultLocale(choice)
-        return LocalizedContext(base)
+        return LocalizedResources(base)
     }
 
     /** Switches every context of the app to [code], a BCP 47 tag or [SYSTEM]. */
@@ -156,27 +155,27 @@ object AppLocale {
     private fun normalize(code: String?): String = code?.trim()?.takeIf { toLocale(it) != null } ?: SYSTEM
 
     /**
-     * Base context of the application on Android 12 and lower. The language can change while the
-     * process runs, and a base context is attached only once, so its resources follow [selected]
-     * instead of being fixed at attach time.
+     * Resources of the application on Android 12 and lower, following [selected] as it changes.
+     * They are served from getResources instead of a wrapped base context, since these versions
+     * cast the application base context to ContextImpl to deliver a broadcast to a receiver.
      */
-    private class LocalizedContext(base: Context) : ContextWrapper(base) {
-        private class Localized(val code: String, val context: Context)
+    class LocalizedResources internal constructor(private val base: Context) {
+        private class Localized(val code: String, val resources: Resources)
 
         @Volatile
         private var localized: Localized? = null
 
-        override fun getResources(): Resources {
+        fun get(): Resources {
             val code = selected.value
             val current = localized?.takeIf { it.code == code }
                 ?: Localized(code, localize(code)).also { localized = it }
-            return current.context.resources
+            return current.resources
         }
 
         /** Overrides the locale alone, so the rest of the configuration keeps following the device. */
-        private fun localize(code: String): Context {
-            val locale = toLocale(code) ?: return baseContext
-            return baseContext.createConfigurationContext(Configuration().apply { setLocale(locale) })
+        private fun localize(code: String): Resources {
+            val locale = toLocale(code) ?: return base.resources
+            return base.createConfigurationContext(Configuration().apply { setLocale(locale) }).resources
         }
     }
 }

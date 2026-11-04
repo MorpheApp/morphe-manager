@@ -19,7 +19,8 @@ internal object EmbeddedJvm {
      * own, returning once main is called.
      *
      * @return 0, or why the JVM did not start: a JNI_CreateJavaVM error, 1 for a library of the
-     *         runtime that did not load and 2 for a main method that is missing.
+     *         runtime that did not load, 2 for a main method that is missing and 3 for memory tag
+     *         checks that could not be turned off.
      */
     fun start(launch: JvmLaunch, options: List<String>, args: List<String>) = startJvm(
         launch.libjvm,

@@ -62,26 +62,12 @@
     <string name="home_search_apps">აპლიკაციების ძებნა</string>
     <string name="list_options_title">სორტირება და ფილტრაცია</string>
     <string name="list_options_state_description">დასორტირებული %1$s-ით, გაფილტრებული %2$s-ით</string>
-    <string name="home_app_filter_all_description">ყველა აპლიკაცია მთავარ ეკრანზე</string>
-    <string name="home_app_filter_patched_description">აპლიკაციები, რომლებიც დააპატჩეთ ან შეინახეთ Morphe-ის მეშვეობით</string>
-    <string name="home_app_filter_not_patched_description">აპლიკაციები, რომლებიც ჯერ არ დააპატჩეთ Morphe-ში</string>
-    <string name="home_app_filter_installed_description">ამ მოწყობილობაზე ამჟამად დაინსტალირებული აპლიკაციები</string>
-    <string name="home_app_filter_uninstalled_description">Morphe-ით დაპატჩული აპლიკაციები, რომლებიც აღარ არის ამ მოწყობილობაზე</string>
     <string name="home_app_filter_clones">კლონები</string>
-    <string name="home_app_filter_clones_description">აპლიკაციები, რომლებიც შექმნილია საკუთარი პაკეტის სახელით და დაინსტალირებულია ორიგინალთან ერთად</string>
     <string name="home_app_grouping_none">არცერთი</string>
-    <string name="home_app_grouping_all_apps_description">ერთი სია ყველა აპლიკაციით</string>
-    <string name="home_app_grouping_sources_description">აპლიკაციები იმ პატჩის წყაროს მიხედვით, რომელიც მათ უზრუნველყოფს</string>
-    <string name="home_app_grouping_custom_description">აპლიკაციები თქვენ მიერ შექმნილ კატეგორიებში</string>
-    <string name="home_app_sort_manual_description">გააწყვეტინეთ აპლიკაცია, შემდეგ დააჭირეთ გადალაგების ღილაკს</string>
+    <string name="home_app_sort_manual_hint">გააწყვეტინეთ აპლიკაცია, შემდეგ დააჭირეთ განლაგების შეცვლის ღილაკს</string>
     <string name="home_app_sort_recommended">რეკომენდებული თანმიმდევრობა</string>
-    <string name="home_app_sort_recommended_description">ინსტალირებული და закрепებული აპლიკაციები პირველ რიგში</string>
-    <string name="home_app_sort_name_asc_description">ანბანის მიხედვით, A-დან Z-მდე</string>
-    <string name="home_app_sort_name_desc_description">ანბანის უკუმიმართულებით, Z-დან A-მდე</string>
     <string name="home_app_sort_updates_first">პატჩის განახლებები პირველ რიგში</string>
-    <string name="home_app_sort_updates_first_description">აპლიკაციები უახლესი პატჩებით პირველად, შემდეგ რეკომენდებული თანმიმდევრობით</string>
     <string name="home_app_sort_recently_patched">ბოლოს დაფატჩებული</string>
-    <string name="home_app_sort_recently_patched_description">ჯერ ყველაზე ახლახან დაფატჩებული აპლიკაციები</string>
     <string name="home_no_apps_title">აპლიკაციები არ არის ხელმისაწვდომი</string>
     <string name="home_no_apps_subtitle">დაამატეთ პატჩის წყარო ან ჩართეთ არსებული %s-ში</string>
     <string name="home_no_apps_search_subtitle">აპლიკაციები, რომლებიც შეესაბამება \"%s\"-ს, ვერ მოიძებნა</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">არაფერი შეესაბამება %s-ს</string>
     <string name="home_category_add">კატეგორიის დამატება</string>
     <string name="home_category_all_apps">ყველა აპლიკაცია</string>
-    <string name="home_category_custom">საკუთარი</string>
+    <string name="home_app_grouping_categories">კატეგორიები</string>
     <string name="home_category_uncategorized">უკატეგორიზო</string>
     <string name="home_category_new_title">ახალი კატეგორია</string>
     <string name="home_category_rename_title">კატეგორიის გადარქმევა</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">პატჩების წყაროები</string>
     <string name="sources_search">წყაროებისა და პატჩების ძებნა</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">ყველა წყარო</string>
-    <string name="sources_filter_enabled_description">წყაროები, საიდანაც მოიტანება პატჩები</string>
-    <string name="sources_filter_disabled_description">გამორთული წყაროები</string>
     <string name="sources_filter_issues">საჭიროებს ყურადღებას</string>
-    <string name="sources_filter_issues_description">წყაროები, რომლებიც არის დაბლოკილი, ვერ ჩაიტვირთა ან საჭიროებენ Morphe-ის უფრო ახალ ვერსიას</string>
     <string name="sources_sort_manual">მექანიკური თანმიმდევრობა</string>
     <string name="sources_sort_manual_hint">თანმიმდევრობის შესაცვლელად, გრძელვრად დააჭირეთ წყაროს</string>
     <string name="sources_sort_last_updated">ბოლო განახლება</string>
-    <string name="sources_sort_last_updated_description">წყაროს უახლესი განახლებები პირველ რიგში</string>
     <string name="sources_sort_enabled_first">გაქტიურებული პირველ რიგში</string>
-    <string name="sources_sort_enabled_first_description">აჩვენეთ აქტიური წყაროები გათიშულ წყაროებამდე</string>
     <string name="sources_patches_source_disabled_hint">ეს წყარო გათიშულია. მისი პატჩები ჩამოთვლილია მხოლოდ საინფორმაციოდ და არ გამოიყენება</string>
     <string name="sources_management_open_in_browser">გახსენი ბრაუზერში</string>
     <string name="sources_management_report_issue">პრობლემის შეტყობინება</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">რეკომენდებული</string>
     <string name="home_apk_availability_unpatched_label">დაუპატჩავი</string>
     <string name="home_apk_availability_incompatible_label">შეუსაბამო</string>
-    <string name="home_apk_availability_installed_version">ინსტალირებულია ამ მოწყობილობაზე: %s</string>
     <string name="home_apk_availability_find">დიახ, დამეხმარეთ მის პოვნაში</string>
     <string name="home_apk_availability_have">არა, ის უკვე მაქვს</string>
     <string name="home_apk_helper_download">გამოიყენეთ დამხმარე აპლიკაცია</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">ჩამოტვირთვის გვერდის ძებნა…</string>
     <string name="home_download_instructions_step1">დააჭირეთ ქვემოთ მოცემულ ღილაკს \'%s\'</string>
     <string name="home_download_instructions_step2_part1">ჩამოსქროლეთ ვებგვერდი და დააჭირეთ</string>
+    <string name="home_download_instructions_step2_apkcube">ჩამოიწევთ ვებგვერდზე ქვემოთ, აირჩიეთ ვერსია &lt;b&gt;%s&lt;/b&gt; და დააჭირეთ</string>
     <string name="home_download_instructions_step2_generic">ჩამოშალეთ ვებგვერდი ქვემოთ და დააჭირეთ ჩამოტვირთვის ღილაკს</string>
     <string name="home_download_instructions_step2_variant">ჩამოშალეთ ვებგვერდი ქვემოთ და დააჭირეთ პირველი &lt;b&gt;APK ვარიანტის&lt;/b&gt; ჩამოტვირთვის ღილაკს</string>
     <string name="home_download_instructions_step2_search">გახსენით ძიების შედეგი ვებგვერდიდან, რომელსაც ენდობით</string>
     <string name="home_download_instructions_step2_search_note">Morphe ვერ განკვეთავს ამ ვებგვერდების நம்பራዊანობას. გამოტოვეთ ისინი, რომლებიც APK ფაილის ნაცვლად საკუთარ აპლიკაციების მაღაზიას სთავაზობენ</string>
     <string name="home_download_instructions_step3_search">მოცემულ ვებგვერდზე ჩამოტვირთეთ &lt;b&gt;%s&lt;/b&gt; ვერსიის APK და არა უახლესი ვერსია</string>
     <string name="home_download_instructions_step3_search_any">მოცემულ ვებგვერდზე ჩამოტვირთეთ აპლიკაციის APK. &lt;b&gt;ნებისმიერი ვერსიის&lt;/b&gt; პატჩირებაა შესაძლებელი</string>
+    <string name="home_download_instructions_step2_github">გამოშვების &lt;b&gt;%s&lt;/b&gt; განყოფილებაში &lt;b&gt;Assets&lt;/b&gt;, დააჭირეთ ფაილს, რომელიც სრულდება &lt;b&gt;.apk&lt;/b&gt;-ით</string>
+    <string name="home_download_instructions_step2_github_latest">უახლეს გამოშვებაში, განყოფილებაში &lt;b&gt;Assets&lt;/b&gt;, დააჭირეთ ფაილს, რომელიც სრულდება &lt;b&gt;.apk&lt;/b&gt;-ით</string>
+    <string name="home_download_instructions_step2_github_note">თუ არის რამდენიმე APK ფაილი, აირჩიეთ ის, რომელსაც ჰქვია %s ან უნივერსალური ფაილი</string>
     <string name="home_download_instructions_download_button_toast">დააჭირეთ ჩამოტვირთვას ვებგვერდზე და არა აქ 😊</string>
     <string name="home_download_instructions_download_button_toast_2">შესანიშნავია! ახლა დააჭირეთ გაგრძელებას და გადადით ვებგვერდზე 👆</string>
     <string name="home_download_instructions_download_button_toast_3">პრაქტიკა სრულყოფილებას ამაღლებს და თქვენ უკვე მიუახლოვდებით მას 💪</string>
@@ -355,8 +338,10 @@
     <string name="expert_mode_enable_all_universal_pending">კვლავ დააჭირეთ უნივერსალური პატჩებისთვის</string>
     <string name="expert_mode_universal_all_warning_title">ყველა უნივერსალური პატჩის ჩართვა?</string>
     <string name="expert_mode_universal_all_warning_message">უნივერსალური პატჩები ერთად არ არის დატესტავებული. მათი ერთდროულად ჩართვამ შესაძლოა გამოიწვიოს კონფლიქტები, პატჩირების ჩაგდება ან აპლიკაციის გათიშვა</string>
+    <string name="expert_mode_recommended">რეკომენდებული პატჩები</string>
     <string name="expert_mode_reset_to_default_done">გამოყენებულია რეკომენდებული პატჩები</string>
     <string name="expert_mode_selected_count">%1$s შერჩეულია %2$s-დან</string>
+    <string name="expert_mode_saved_selection">შენახული არჩევანი</string>
     <string name="expert_mode_restore_saved_done">აღდგენილია შენახული არჩევანი</string>
     <string name="expert_mode_copy_from_bundle_no_patches">ამ ბანდლში შესაბამისი პატჩები არ მოიპოვება</string>
     <string name="expert_mode_no_results">პატჩები ვერ მოიძებნა</string>
@@ -516,6 +501,9 @@
     <string name="batch_queue_pending_subtitle">გადახედეთ და დაიწყეთ დაჭერით</string>
     <string name="batch_queue_clear_title">გსურთ რიგის გასუფთავება?</string>
     <string name="batch_queue_clear_description">ყველა აპლიკაცია ამოიშლება რიგიდან</string>
+    <string name="batch_queue_keep_title">შეინახოთ რიგი?</string>
+    <string name="batch_queue_keep_description">რიგში ჩადგმული აპლიკაციები დაელოდებიან მთავარ ეკრანზე მოგვიანებით გაშვებას</string>
+    <string name="batch_queue_keep">შენახვა</string>
     <string name="shortcut_repatch_short">გადაპატჩვა</string>
     <string name="shortcut_repatch_long">მოძველებული აპლიკაციების გადაპატჩვა</string>
     <string name="shortcut_check_updates_short">განახლებების შემოწმება</string>
@@ -917,6 +905,8 @@
     <string name="notification_channel_patch_updates">ფათჩის განახლებები</string>
     <string name="notification_channel_patch_updates_description">შეტყობინებები ახალი ფათჩის რელიზების შესახებ</string>
     <string name="notification_channel_patcher_description">ჩნდება, როდესაც Morphe აპლიკაციას ფონურ რეჟიმში ამodიფიცირებს</string>
+    <string name="notification_channel_patching_results">პატჩინგის შედეგები</string>
+    <string name="notification_channel_patching_results_description">როდესაც პატჩინგი სრულდება ან ინსტალაცია გელოდებათ, სანამ Morphe ფონურ რეჟიმშია</string>
     <string name="notification_channel_mounted_apps">დაინსტალირებული აპლიკაციები</string>
     <string name="notification_channel_mounted_apps_description">როდესაც სხვა ვერსია ანაცვლებს დაინსტალირებულ აპლიკაციას და მისი პატჩი აღარ მოქმედებს</string>
     <string name="notification_mount_replaced_title">%1$s აღარ არის პატჩირებული</string>
@@ -1135,7 +1125,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">იმპორტისთვის დაგჭირდებათ keystore-ის ავტორიზაციის მონაცემების შეყვანა</string>
     <string name="settings_system_import_keystore_dialog_alias_field">მომხმარებლის სახელი (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">პაროლი</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Keystore-ის ფორმატი</string>
     <string name="settings_system_import_keystore_wrong_credentials">Keystore-ის არასწორი ავტორიზაციის მონაცემები</string>
     <string name="settings_system_import_keystore_success">Keystore იმპორტირებულია</string>
     <string name="settings_system_import_keystore_failed">Keystore-ის იმპორტი ვერ მოხერხდა</string>
@@ -1289,6 +1278,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">წინა დეველოპმენტი</string>
     <string name="opensource_licenses">ღია კოდის ლიცენზიები</string>
     <string name="opensource_licenses_description">ბიბლიოთეკები, რომლებსაც Morphe ეფუძნება</string>
+    <string name="opensource_licenses_search">ბიბლიოთეკებისა და ლიცენზიების ძებნა</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">არჩევანი</string>
     <string name="easter_egg_pill_message">მიიღეთ ლურჯი აფთიაქის კაფსულა და რეკლამები დარჩება იქ, სადაც არიან. მიიღეთ წითელი და ნახეთ, რამდენად ღრმაა ბაიტკოდი</string>

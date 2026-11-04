@@ -6,7 +6,6 @@
 package app.morphe.manager.ui.screen.settings.system
 
 import android.view.HapticFeedbackConstants
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -30,6 +29,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
@@ -103,7 +103,7 @@ fun DialogHostScope.AboutDialog(
             ) {
                 val icon = rememberDrawablePainter(
                     drawable = remember {
-                        AppCompatResources.getDrawable(context, R.mipmap.ic_launcher_default)
+                        ContextCompat.getDrawable(context, R.mipmap.ic_launcher_default)
                     }
                 )
                 Image(

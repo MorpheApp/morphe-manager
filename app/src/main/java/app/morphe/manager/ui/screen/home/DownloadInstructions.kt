@@ -5,13 +5,17 @@
 
 package app.morphe.manager.ui.screen.home
 
+import android.os.Build
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -21,77 +25,23 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
+import app.morphe.manager.domain.manager.ApkDownloadSource
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.theme.isDarkTheme
 import app.morphe.manager.util.*
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
 import com.composables.icons.materialsymbols.roundedfilled.*
-import java.net.URI
 import org.koin.compose.koinInject
-
-/**
- * The site a download link leads to, and the instructions that match what it puts on screen.
- *
- * The API answers the version lookup with a single redirect and picks the host itself, so the
- * destination is read off the resolved URL instead of assuming everything comes from APKMirror.
- *
- * @param label Site name shown to the user. Null while the destination is not known yet.
- */
-sealed class ApkDownloadSource(val label: String?) {
-    /**
-     * @param onDownloadPage True for the page carrying the download button. A release page stops
-     * short of it, with the APK variants still to be picked from.
-     */
-    data class ApkMirror(val onDownloadPage: Boolean) : ApkDownloadSource("APKMirror.com")
-
-    data object Uptodown : ApkDownloadSource("Uptodown.com")
-
-    /** Search results rather than one app page, used when the API knows no direct link. */
-    data object WebSearch : ApkDownloadSource("Google")
-
-    /** A link to the APK itself, which the browser downloads without putting up a page. */
-    data class DirectFile(val host: String) : ApkDownloadSource(host)
-
-    /** Any other host the API points at, named after itself so the button never promises the wrong site. */
-    data class Other(val host: String) : ApkDownloadSource(host)
-
-    /** The redirect has not been followed yet, so nothing site specific can be shown. */
-    data object Unresolved : ApkDownloadSource(null)
-
-    companion object {
-        private val DOWNLOADABLE_EXTENSIONS = setOf("apk", "apkm", "apks", "xapk")
-
-        /**
-         * Works out where [url] leads.
-         *
-         * Until the redirect is followed the URL still points at the API, which says nothing
-         * about where the user will end up, so that case resolves to [Unresolved].
-         */
-        fun from(url: String?): ApkDownloadSource {
-            if (url == null || url.startsWith(MORPHE_API_URL)) return Unresolved
-
-            val uri = runCatching { URI(url) }.getOrNull() ?: return Unresolved
-            val host = uri.host?.lowercase()?.removePrefix("www.") ?: return Unresolved
-            val path = uri.path.orEmpty().trimEnd('/')
-            val extension = path.substringAfterLast('/').substringAfterLast('.', "").lowercase()
-
-            return when {
-                extension in DOWNLOADABLE_EXTENSIONS -> DirectFile(host)
-                host.endsWith("apkmirror.com") ->
-                    ApkMirror(onDownloadPage = path.endsWith("-android-apk-download"))
-                host.endsWith("uptodown.com") -> Uptodown
-                host.endsWith("google.com") -> WebSearch
-                else -> Other(host)
-            }
-        }
-    }
-}
 
 /** Where the continue button leads, worded generically while the destination is still unknown. */
 @Composable
@@ -99,20 +49,46 @@ private fun ApkDownloadSource.destinationLabel(): String =
     label ?: stringResource(R.string.home_download_instructions_destination)
 
 /** Site button an instruction step points at, redrawn below the step so it can be recognized. */
-private enum class SiteButton { ApkMirror, Uptodown }
+private enum class SiteButton { ApkMirror, Uptodown, GitHubAssets, ApkCube }
 
 private val UptodownBrandColor = Color(0xFF4CB050)
+
+/** APKCube's "Download on APKCube" badge, in its variant for light pages and for dark ones. */
+private class ApkCubeBadgeColors(val container: Color, val caption: Color, val wordmark: Color, val border: Color?)
+
+private val ApkCubeBadgeForLightPages = ApkCubeBadgeColors(
+    container = Color(0xFF191F28),
+    caption = Color(0xFF9CA2A9),
+    wordmark = Color(0xFFF8FAFD),
+    border = null
+)
+
+private val ApkCubeBadgeForDarkPages = ApkCubeBadgeColors(
+    container = Color(0xFFF8FAFD),
+    caption = Color(0xFF535861),
+    wordmark = Color(0xFF192029),
+    border = Color(0xFFDDE1E7)
+)
 
 /**
  * One numbered instruction line.
  *
  * @param button Button to redraw below the text, when the step tells the user to press one.
- * @param note Caveat about the page, shown below the step.
+ * @param note Remark about the page, shown below the step.
+ * @param noteTone Warning for a caveat, neutral for a plain hint.
  */
 private data class DownloadStep(
     val text: AnnotatedString,
     val button: SiteButton? = null,
-    val note: String? = null
+    val note: String? = null,
+    val noteTone: SemanticTone = SemanticTone.Warning
+)
+
+/** The step that has the user press [button] once they have scrolled down to it. */
+@Composable
+private fun pressSiteButton(button: SiteButton) = DownloadStep(
+    text = AnnotatedString(stringResource(R.string.home_download_instructions_step2_part1)),
+    button = button
 )
 
 /**
@@ -146,22 +122,50 @@ private fun ApkDownloadSource.instructionSteps(
                     )
                 )
             }
-            add(
-                DownloadStep(
-                    text = AnnotatedString(stringResource(R.string.home_download_instructions_step2_part1)),
-                    button = SiteButton.ApkMirror
-                )
-            )
+            add(pressSiteButton(SiteButton.ApkMirror))
         }
 
         // The browser is handed the file itself, so there is no page to find anything on
         is ApkDownloadSource.DirectFile -> emptyList()
 
-        ApkDownloadSource.Uptodown -> listOf(
-            DownloadStep(
-                text = AnnotatedString(stringResource(R.string.home_download_instructions_step2_part1)),
-                button = SiteButton.Uptodown
+        ApkDownloadSource.Uptodown -> listOf(pressSiteButton(SiteButton.Uptodown))
+
+        is ApkDownloadSource.GitHub -> {
+            // The list of every release leaves the right one to be found, so it is named, and
+            // without a version asked for the newest one at the top will do
+            val tag = release ?: requestedVersion
+            listOf(
+                DownloadStep(
+                    text = htmlAnnotatedString(
+                        if (tag == null) {
+                            stringResource(R.string.home_download_instructions_step2_github_latest)
+                        } else {
+                            stringResource(R.string.home_download_instructions_step2_github, tag)
+                        }
+                    ),
+                    button = SiteButton.GitHubAssets,
+                    // Releases often attach one APK per architecture next to a universal one
+                    note = stringResource(
+                        R.string.home_download_instructions_step2_github_note,
+                        Build.SUPPORTED_ABIS.first()
+                    ),
+                    noteTone = SemanticTone.Neutral
+                )
             )
+        }
+
+        // Without a pinned version the page offers the newest build, so a required one is picked first
+        is ApkDownloadSource.ApkCube -> listOf(
+            if (versionPinned || requestedVersion == null) {
+                pressSiteButton(SiteButton.ApkCube)
+            } else {
+                DownloadStep(
+                    text = htmlAnnotatedString(
+                        stringResource(R.string.home_download_instructions_step2_apkcube, requestedVersion)
+                    ),
+                    button = SiteButton.ApkCube
+                )
+            }
         )
 
         ApkDownloadSource.WebSearch -> listOf(
@@ -188,29 +192,14 @@ private fun ApkDownloadSource.instructionSteps(
         )
     }
 
+    val (waitStep, returnStep) = if (mountInstallRequired) {
+        R.string.home_download_instructions_step3_mount to R.string.home_download_instructions_step4_mount
+    } else {
+        R.string.home_download_instructions_step3 to R.string.home_download_instructions_step4
+    }
     val backInMorphe = listOf(
-        DownloadStep(
-            htmlAnnotatedString(
-                stringResource(
-                    if (mountInstallRequired) {
-                        R.string.home_download_instructions_step3_mount
-                    } else {
-                        R.string.home_download_instructions_step3
-                    }
-                )
-            )
-        ),
-        DownloadStep(
-            AnnotatedString(
-                stringResource(
-                    if (mountInstallRequired) {
-                        R.string.home_download_instructions_step4_mount
-                    } else {
-                        R.string.home_download_instructions_step4
-                    }
-                )
-            )
-        )
+        DownloadStep(htmlAnnotatedString(stringResource(waitStep))),
+        DownloadStep(AnnotatedString(stringResource(returnStep)))
     )
 
     return listOf(openSite) + onSite + backInMorphe
@@ -369,7 +358,7 @@ internal fun DialogHostScope.DownloadInstructionsDialog(
                                 step.note?.let { note ->
                                     Footnote(
                                         text = note,
-                                        tone = SemanticTone.Warning
+                                        tone = step.noteTone
                                     )
                                 }
                             }
@@ -465,6 +454,8 @@ private fun SiteDownloadButton(
             }
         }
 
+        SiteButton.ApkCube -> ApkCubeBadge(onClick = onClick)
+
         // Uptodown uses its own brand color for every app, so the accent color plays no part here
         SiteButton.Uptodown -> Surface(
             onClick = onClick,
@@ -497,14 +488,177 @@ private fun SiteDownloadButton(
                 )
             }
         }
+
+        SiteButton.GitHubAssets -> GitHubAssets(onClick = onClick)
     }
 }
+
+/** GitHub's palette for one theme, as its release page shows the attached files. */
+private class GitHubColors(
+    val background: Color,
+    val border: Color,
+    val text: Color,
+    val link: Color,
+    val muted: Color
+)
+
+private val GitHubLight = GitHubColors(
+    background = Color(0xFFFFFFFF),
+    border = Color(0xFFD1D9E0),
+    text = Color(0xFF1F2328),
+    link = Color(0xFF0969DA),
+    muted = Color(0xFF59636E)
+)
+
+private val GitHubDark = GitHubColors(
+    background = Color(0xFF0D1117),
+    border = Color(0xFF3D444D),
+    text = Color(0xFFF0F6FC),
+    link = Color(0xFF4493F8),
+    muted = Color(0xFF9198A1)
+)
+
+/**
+ * The Assets section of a GitHub release: the APK the user is after, above the source archive
+ * GitHub attaches to every release, so the right row is told apart from the one always there.
+ *
+ * Its name is left out, as every project names its files its own way.
+ */
+@Composable
+private fun GitHubAssets(onClick: () -> Unit) {
+    // Drawn in the theme of the app, which is most often the one the browser shows GitHub in
+    val colors = if (isDarkTheme()) GitHubDark else GitHubLight
+
+    Surface(
+        onClick = onClick,
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(GitHubCornerRadius),
+        color = colors.background,
+        border = BorderStroke(1.dp, colors.border)
+    ) {
+        Column(modifier = Modifier.padding(vertical = Defaults.SpaceSmall)) {
+            Row(
+                modifier = Modifier.padding(horizontal = Defaults.SpaceSmall),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    imageVector = MaterialSymbols.Rounded.Arrow_drop_down,
+                    contentDescription = null,
+                    tint = colors.muted
+                )
+                Text(
+                    text = "Assets",
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = colors.text
+                )
+            }
+            HorizontalDivider(
+                modifier = Modifier.padding(vertical = Defaults.SpaceExtraSmall),
+                color = colors.border
+            )
+            GitHubAssetRow(
+                icon = MaterialSymbols.Rounded.Deployed_code,
+                name = "*.apk",
+                colors = colors,
+                bold = true
+            )
+            GitHubAssetRow(
+                icon = MaterialSymbols.Rounded.Folder_zip,
+                name = "Source code (zip)",
+                colors = colors
+            )
+        }
+    }
+}
+
+@Composable
+private fun GitHubAssetRow(
+    icon: ImageVector,
+    name: String,
+    colors: GitHubColors,
+    bold: Boolean = false
+) {
+    Row(
+        modifier = Modifier.padding(horizontal = Defaults.SpaceMedium, vertical = Defaults.SpaceExtraSmall),
+        horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            tint = colors.muted,
+            modifier = Modifier.size(Defaults.IconSizeSmall)
+        )
+        Text(
+            text = name,
+            style = MaterialTheme.typography.bodyMedium,
+            fontWeight = if (bold) FontWeight.Bold else null,
+            color = colors.link
+        )
+    }
+}
+
+/**
+ * APKCube's own "Download on APKCube" badge, dark on a light page and light on a dark one, as
+ * APKCube itself publishes it.
+ */
+@Composable
+private fun ApkCubeBadge(onClick: () -> Unit) {
+    val colors = if (isDarkTheme()) ApkCubeBadgeForDarkPages else ApkCubeBadgeForLightPages
+
+    Surface(
+        onClick = onClick,
+        shape = RoundedCornerShape(ApkCubeBadgeCornerRadius),
+        color = colors.container,
+        border = colors.border?.let { BorderStroke(1.dp, it) }
+    ) {
+        Row(
+            modifier = Modifier.padding(start = 12.dp, end = 20.dp, top = 11.dp, bottom = 11.dp),
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                painter = painterResource(R.drawable.ic_apkcube_badge_logo),
+                contentDescription = null,
+                modifier = Modifier.size(ApkCubeBadgeLogoSize)
+            )
+            Column {
+                Text(
+                    text = "DOWNLOAD ON",
+                    color = colors.caption,
+                    fontSize = 9.sp,
+                    lineHeight = 11.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    letterSpacing = 1.3.sp
+                )
+                Text(
+                    text = "APKCube",
+                    color = colors.wordmark,
+                    fontSize = 19.sp,
+                    lineHeight = 22.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = (-0.2).sp
+                )
+            }
+        }
+    }
+}
+
+/** Rounding of APKCube's badge, 9 of its 54 units of height. */
+private val ApkCubeBadgeCornerRadius = 10.dp
+
+/** Side of the logo tile at the start of APKCube's badge. */
+private val ApkCubeBadgeLogoSize = 32.dp
 
 /** Side of the disc a step's number sits on. */
 private val StepNumberSize = 26.dp
 
 /** Rounding Uptodown gives its own download button, which the copy of it keeps. */
 private val UptodownButtonCornerRadius = 8.dp
+
+/** Rounding of the boxes GitHub draws around a release's files. */
+private val GitHubCornerRadius = 6.dp
 
 /**
  * One step of the instructions: its [number] on a disc in the color of the app being patched, and a

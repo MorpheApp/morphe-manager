@@ -674,7 +674,8 @@ fun DialogHostScope.SourceAppsDialog(
     // Every source, so a disabled one still lists what it would bring once switched back on
     val bundleInfo by patchBundleRepository.allBundlesInfoFlow.collectAsStateWithLifecycle(emptyMap())
     val appMetadata by patchBundleRepository.allAppMetadata.collectAsStateWithLifecycle()
-    val keptFrom by sourceMuteRepository.mutedSources.collectAsStateWithLifecycle(emptyMap())
+    // Null until read, so the list is never ordered or counted as if nothing were left out
+    val keptFrom by sourceMuteRepository.mutedSources.collectAsStateWithLifecycle(null)
     // Null until read, so the switch never shows the default before the stored answer
     val unseenNewApps by sourceMuteRepository.unseenNewApps.collectAsStateWithLifecycle(null)
     val newApps = unseenNewApps?.get(src.uid).orEmpty()
@@ -685,7 +686,12 @@ fun DialogHostScope.SourceAppsDialog(
     val sourceInfo = bundleInfo[src.uid]
     val listedApps = remember(sourceInfo) { sourceInfo?.listedApps().orEmpty() }
     // By the rule the home screen applies, so a tick here is a card there
-    val broughtApps = remember(sourceInfo, keptFrom) { sourceInfo?.appsBrought(keptFrom).orEmpty() }
+    val broughtApps = remember(sourceInfo, keptFrom) {
+        keptFrom?.let { sourceInfo?.appsBrought(it) }.orEmpty()
+    }
+    // The apps brought when the list opened, taken once both are read. A snapshot rather than a
+    // live read, so an app ticked or unticked here keeps its place instead of jumping away
+    val broughtAtOpen = remember(sourceInfo != null && keptFrom != null) { broughtApps }
     // What each app gets from this source, so the choice is not made on a name alone
     val patchCounts = remember(sourceInfo) {
         buildMap {
@@ -696,13 +702,15 @@ fun DialogHostScope.SourceAppsDialog(
             }
         }
     }
-    // New apps lead, as they are what the user came back for
-    val apps = remember(listedApps, appMetadata, newApps) {
+    // New apps lead, as they are what the user came back for, then the brought ones, which a source
+    // of hundreds of apps is usually opened again to change
+    val apps = remember(listedApps, appMetadata, newApps, broughtAtOpen) {
         listedApps
             .map { packageName -> packageName to (appMetadata[packageName]?.displayName ?: packageName) }
             .sortedWith(
                 compareBy(
                     { (packageName, _) -> packageName !in newApps },
+                    { (packageName, _) -> packageName !in broughtAtOpen },
                     { (_, label) -> label.lowercase(Locale.ROOT) }
                 )
             )
@@ -747,7 +755,11 @@ fun DialogHostScope.SourceAppsDialog(
             ListDialogHeader(
                 icon = { modifier -> BundleIcon(bundle = src, modifier = modifier) },
                 title = src.displayTitle,
-                subtitle = pluralStringResource(R.plurals.home_category_app_count, apps.size, apps.size.toString()),
+                subtitle = if (keptFrom == null) {
+                    pluralStringResource(R.plurals.home_category_app_count, apps.size, apps.size.toString())
+                } else {
+                    stringResource(R.string.expert_mode_selected_count, broughtApps.size, apps.size)
+                },
                 search = search,
                 searchLabel = stringResource(R.string.home_search_apps),
                 // A lone app leaves nothing to search through

@@ -106,10 +106,11 @@ data class InstalledAppPickerItem(
  * @param selectedVersion The version an APK is looked for at, the recommended one until another
  *   is picked. Sources share versions, so the pick names its source too, which answers for an
  *   APK of that version.
+ * @param versionPicked Whether [selectedVersion] was picked by hand rather than preselected. Only
+ *   a pick by hand narrows the run down to the source it was made under.
  * @param bundleUid The source picked in simple mode before the APK, which the run patches from.
- * @param installedVersion The unpatched version the device has right now: [installedApk] is
- *   dropped for a version the patches do not target, which is exactly when the version itself is
- *   worth showing.
+ * @param installedVersion The unpatched version the device has right now, which the version list
+ *   marks even when [installedApk] is not offered as a source.
  * @param stockAppInstalled Whether a mount install would have the app itself to overlay, which a
  *   patched build under the same package name is not. Null until it is looked up.
  * @param downloadUrl Where the APK is downloaded from, the unfollowed search link until the
@@ -122,6 +123,7 @@ data class PatchFlowSession(
     val recommendedVersion: AppTarget? = null,
     val compatibleVersions: List<BundledAppTarget> = emptyList(),
     val selectedVersion: BundledAppTarget? = null,
+    val versionPicked: Boolean = false,
     val bundleUid: Int? = null,
     val savedApk: SavedApkInfo? = null,
     val installedApk: InstalledApkInfo? = null,
@@ -409,8 +411,8 @@ class PatchFlow(
      */
     private suspend fun continueApkSelectionFlow(packageName: String) {
         // Load saved APK (Room + AppDataResolver) and installed app (PackageManager) in
-        // parallel. The device is asked about in both modes, because the version it carries is
-        // worth showing wherever the installed APK itself is not offered as a source
+        // parallel. The device is asked about in both modes, because the version list marks the
+        // installed version even where the installed APK itself is not offered as a source
         val expertMode = isExpertMode()
         coroutineScope {
             val savedJob = if (session?.savedApk == null) {
@@ -457,7 +459,7 @@ class PatchFlow(
 
     /** Picks [version] to look an APK up at. */
     fun selectVersion(version: BundledAppTarget) {
-        session = session?.copy(selectedVersion = version)
+        session = session?.copy(selectedVersion = version, versionPicked = true)
     }
 
     /**
@@ -1026,7 +1028,8 @@ class PatchFlow(
      * Start patching flow.
      *
      * @param bundleUid The source chosen for the APK, see [chosenBundleUidFor]. The run patches
-     *   from it alone, unless the others are shown again in the expert dialog.
+     *   from it alone when it was picked by hand, unless the others are shown again in the expert
+     *   dialog.
      */
     private suspend fun startPatchingWithApp(
         selectedApp: SelectedApp,
@@ -1058,10 +1061,12 @@ class PatchFlow(
             return
         }
 
-        // A source chosen for the APK answers for the run alone, so the others are held back the
-        // way the sources the app is kept from are, for this run only. The expert dialog offers
-        // them back, which is how a run mixes sources
-        val heldBackSources = if (bundleUid != null) {
+        // A source picked by hand answers for the run alone, so the others are held back the way
+        // the sources the app is kept from are, for this run only. The expert dialog offers them
+        // back, which is how a run mixes sources. The preselected version is no such pick: it
+        // leaves every source in, as a user who mixes sources expects
+        val fromChosenAlone = !isExpertMode() || session?.versionPicked == true
+        val heldBackSources = if (bundleUid != null && fromChosenAlone) {
             availableBundles.mapTo(mutableSetOf()) { it.uid } - bundleUid
         } else withContext(Dispatchers.IO) {
             sourceMuteRepository.getMutedFor(selectedApp.packageName)
@@ -1477,10 +1482,23 @@ class PatchFlow(
         downloadRedirectJob?.cancel()
         downloadRedirectJob = scope.launch {
             val resolved = withContext(Dispatchers.IO) {
-                downloadUrlResolver.resolve(packageName, version)
+                val patchSources = patchBundleRepository.patchSourceHeaders(packageName, downloadSourceUids(current))
+                downloadUrlResolver.resolve(packageName, version, patchSources)
             }
             session = session?.copy(downloadUrl = resolved)
         }
+    }
+
+    /**
+     * Sources the requested version is patched from: the one picked, or else every source that
+     * lists the version. Empty when none lists it, which leaves it to every source of the app.
+     */
+    private fun downloadSourceUids(current: PatchFlowSession): List<Int> {
+        current.bundleUid?.let { return listOf(it) }
+        current.selectedVersion?.takeIf { current.versionPicked }?.let { return listOf(it.bundleUid) }
+        return current.compatibleVersions
+            .filter { it.target.version == current.requestedVersion }
+            .map { it.bundleUid }
     }
 
     override val helperSignatureCheckAvailable: Boolean

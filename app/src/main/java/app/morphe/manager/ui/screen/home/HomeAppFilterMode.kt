@@ -12,15 +12,14 @@ import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.util.enumByNameOrNull
 
 enum class HomeAppFilterMode(
-    @param:StringRes override val labelRes: Int,
-    @param:StringRes override val descriptionRes: Int
+    @param:StringRes override val labelRes: Int
 ) : SortModeSpec {
-    ALL(R.string.home_category_all_apps, R.string.home_app_filter_all_description),
-    PATCHED(R.string.patched, R.string.home_app_filter_patched_description),
-    NOT_PATCHED(R.string.home_not_patched_yet, R.string.home_app_filter_not_patched_description),
-    INSTALLED(R.string.installed, R.string.home_app_filter_installed_description),
-    UNINSTALLED(R.string.uninstalled, R.string.home_app_filter_uninstalled_description),
-    CLONES(R.string.home_app_filter_clones, R.string.home_app_filter_clones_description);
+    ALL(R.string.home_category_all_apps),
+    PATCHED(R.string.patched),
+    NOT_PATCHED(R.string.home_not_patched_yet),
+    INSTALLED(R.string.installed),
+    UNINSTALLED(R.string.uninstalled),
+    CLONES(R.string.home_app_filter_clones);
 
     val isActive: Boolean get() = this != ALL
 

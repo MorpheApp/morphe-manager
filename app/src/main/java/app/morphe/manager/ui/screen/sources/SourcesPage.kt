@@ -185,6 +185,7 @@ private fun SourcesPageContent(
     val patchBundleRepository: PatchBundleRepository = koinInject()
     val prefs: PreferencesManager = koinInject()
     val sourceMuteRepository: SourceMuteRepository = koinInject()
+    val messages: UserMessages = koinInject()
     val scope = rememberCoroutineScope()
 
     val sources by patchBundleRepository.sources.collectAsStateWithLifecycle()
@@ -385,12 +386,16 @@ private fun SourcesPageContent(
     // Registered inside the page so it outranks the main screen's own back handling
     SearchFieldBackHandler(search)
     val searchLabel = stringResource(R.string.sources_search)
+    val manualSortHint = stringResource(R.string.sources_sort_manual_hint)
 
     // What the options panel offers, and what marks the sort button once any is off its default
     val listOptions = listOf(
         listOptionSection(
             R.string.sort, MaterialSymbols.Rounded.Sort.autoMirrored, sourceSortMode, SourceBundleSortMode.MANUAL
-        ) { mode -> scope.launch { prefs.sourceBundleSortMode.update(mode.name) } },
+        ) { mode ->
+            if (mode == SourceBundleSortMode.MANUAL) messages.show(manualSortHint)
+            scope.launch { prefs.sourceBundleSortMode.update(mode.name) }
+        },
         listOptionSection(
             R.string.filter, MaterialSymbols.Rounded.Filter_list, sourceFilter, SourceFilterMode.ALL
         ) { sourceFilter = it }
@@ -647,11 +652,7 @@ private fun SourcesPageContent(
 
         ListScrollbar(
             listState = listState,
-            // The same step at both ends as on the screens, so the end shows past rounded corners
-            modifier = Modifier.padding(
-                top = insets.top + Defaults.SpaceMedium,
-                bottom = listBottom + Defaults.SpaceMedium
-            ),
+            modifier = Modifier.padding(insets.scrollbarPadding(bottom = listBottom)),
             alphabetTargets = sourceScrollTargets,
             alphabetMode = alphabetScrollMode
         )

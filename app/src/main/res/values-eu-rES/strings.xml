@@ -62,26 +62,12 @@
     <string name="home_search_apps">Bilatu aplikazioak</string>
     <string name="list_options_title">Ordenar eta filtratu</string>
     <string name="list_options_state_description">%1$s arabera ordenatuta, %2$s arabera filtratuta</string>
-    <string name="home_app_filter_all_description">Pantaila nagusiko aplikazio guztiak</string>
-    <string name="home_app_filter_patched_description">Morphe-rekin patching egin dituzun edo gorde dituzun aplikazioak</string>
-    <string name="home_app_filter_not_patched_description">Morphe-n oraindik patching egin ez dituzun aplikazioak</string>
-    <string name="home_app_filter_installed_description">Gailu honetan instalatuta dauden aplikazioak</string>
-    <string name="home_app_filter_uninstalled_description">Morphe-rekin patchatutako aplikazioak, gailu honetan ez daudenak</string>
     <string name="home_app_filter_clones">Kloneak</string>
-    <string name="home_app_filter_clones_description">Package-izenen propioak erabiliz eraikitako aplikazioak, originalarekin ondoan instalatuak</string>
     <string name="home_app_grouping_none">Ezik</string>
-    <string name="home_app_grouping_all_apps_description">Aplikazio guztiekin zerrenda bat</string>
-    <string name="home_app_grouping_sources_description">Aplikazioak, haiek eskaintzen dituen patch-iturriaren pean</string>
-    <string name="home_app_grouping_custom_description">Aplikazioak, sortutako kategoriak</string>
-    <string name="home_app_sort_manual_description">Lutsutuen sakatu aplikazio batean eta sakatu berordenatzeko botoia</string>
+    <string name="home_app_sort_manual_hint">Lutsutuen aplikazio bat, eta ondoren sakatu berordenatzeko botoia</string>
     <string name="home_app_sort_recommended">Ordna recommended</string>
-    <string name="home_app_sort_recommended_description">Instalatu eta finkatuzko aplikazioak lehen</string>
-    <string name="home_app_sort_name_asc_description">Alfabetiko, A-tik Z-ra</string>
-    <string name="home_app_sort_name_desc_description">Alfabetiko逆, Z-tik A-ra</string>
     <string name="home_app_sort_updates_first">Patch eguneratzeak lehenik</string>
-    <string name="home_app_sort_updates_first_description">Patch berriagoak dituzten aplikazioak lehenik, eta ondoren gomendatutako ordena</string>
     <string name="home_app_sort_recently_patched">Berriki patchatuak</string>
-    <string name="home_app_sort_recently_patched_description">Berriki patchatutako aplikazioak lehenik</string>
     <string name="home_no_apps_title">Ez dago aplikaziorik eskuragarri</string>
     <string name="home_no_apps_subtitle">Gehitu patch-iturri bat edo aktibatu existing bat %s-en</string>
     <string name="home_no_apps_search_subtitle">Ez dago \"%s\" bilan bat datoren aplikaziorik</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Ezer ez dago %s-rekin bat</string>
     <string name="home_category_add">Kategoria gehitu</string>
     <string name="home_category_all_apps">Aplikazio guztiak</string>
-    <string name="home_category_custom">Kustomizatua</string>
+    <string name="home_app_grouping_categories">Kategoriak</string>
     <string name="home_category_uncategorized">Kategoriatu gabe</string>
     <string name="home_category_new_title">Kategoria berria</string>
     <string name="home_category_rename_title">Kategoria berrandatu</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">Patch iturriak</string>
     <string name="sources_search">Bilatu iturriak eta patchak</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Iturri guztiak</string>
-    <string name="sources_filter_enabled_description">Iturriak patchak hartzen dituztenak</string>
-    <string name="sources_filter_disabled_description">Iturriak txalratuta</string>
     <string name="sources_filter_issues">Arretaz begiratu</string>
-    <string name="sources_filter_issues_description">Blokatuta dauden, karga huts egin duten edo Morphe bertsio berriago bat behar duten iturriak</string>
     <string name="sources_sort_manual">Ordena eskualda</string>
     <string name="sources_sort_manual_hint">Lutsutekin sakatu iturri bat berordenatzeko</string>
     <string name="sources_sort_last_updated">Azken eguneratzea</string>
-    <string name="sources_sort_last_updated_description">Iturri eguneratze berrienak lehenik</string>
     <string name="sources_sort_enabled_first">Gawatutakoak lehenik</string>
-    <string name="sources_sort_enabled_first_description">Iturri aktiboak erakutsi iturri desaktibatuen aurretik</string>
     <string name="sources_patches_source_disabled_hint">Iturri hau desaktibatuta dago. Bere patchak erreferentziatzat agertzen dira baina ez dira aplikatzen</string>
     <string name="sources_management_open_in_browser">Apertu nabigadorean</string>
     <string name="sources_management_report_issue">Arazo bat saldaratu</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">Gomendatua</string>
     <string name="home_apk_availability_unpatched_label">Patchik gabea</string>
     <string name="home_apk_availability_incompatible_label">Sinestagarria ez</string>
-    <string name="home_apk_availability_installed_version">Gailu honetan instalatuta: %s</string>
     <string name="home_apk_availability_find">Bai, lagundu nazai aurkitzen</string>
     <string name="home_apk_availability_have">Ez, badakit jadan</string>
     <string name="home_apk_helper_download">Laguntza-aplikazio bat erabili</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">Deskarga orrialdea bilatzen...</string>
     <string name="home_download_instructions_step1">Sakatu beheko \'%s\' botoia</string>
     <string name="home_download_instructions_step2_part1">Deskargatu weborretik behera joan eta sakatu</string>
+    <string name="home_download_instructions_step2_apkcube">Webgunean behera mugitu, hautatu &lt;b&gt;%s&lt;/b&gt; bertsioa eta sakatu</string>
     <string name="home_download_instructions_step2_generic">Iritsatza webguneko behealdera eta sakatu deskarga botoia</string>
     <string name="home_download_instructions_step2_variant">Iritsatza webguneko behealdera eta sakatu goikoko &lt;b&gt;APK bertsioaren&lt;/b&gt; deskarga botoia</string>
     <string name="home_download_instructions_step2_search">Ireki fidagarria den webgun bateko bilaketa emaitza bat</string>
     <string name="home_download_instructions_step2_search_note">Morphe-k ezin ditu webgune hauek bermatu. APK fitxategi baten ordez beren aplikazio-denda eskaintzen dutenak saltatu</string>
     <string name="home_download_instructions_step3_search">Webgun horretan, deskargatu &lt;b&gt;%s&lt;/b&gt; bertsioaren APKa, ez berriena</string>
     <string name="home_download_instructions_step3_search_any">Webgun horretan, deskargatu aplikazioaren APKa. &lt;b&gt;Bertsio edozein&lt;/b&gt; patchatuko da</string>
+    <string name="home_download_instructions_step2_github">%s releaseko &lt;b&gt;Assets&lt;/b&gt; atarean, sakatu &lt;b&gt;.apk&lt;/b&gt; bota duten fitxategia</string>
+    <string name="home_download_instructions_step2_github_latest">Azken releaseko &lt;b&gt;Assets&lt;/b&gt; atarean, sakatu &lt;b&gt;.apk&lt;/b&gt; bota duten fitxategia</string>
+    <string name="home_download_instructions_step2_github_note">APK fitxategi several badira, %s izendutakoa edo universala aukeratu</string>
     <string name="home_download_instructions_download_button_toast">Sakatu deskarga webgunean, hemen ez 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Bikain! Ora klik egin jarraitu botoian eta joan webgunean 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Praktikak perfekzioa ekartzen dute eta hura lortzen ari zara 💪</string>
@@ -355,8 +338,10 @@ Zukertu non hartu APK-a"</string>
     <string name="expert_mode_enable_all_universal_pending">Sakatu berriro patch universalentzat</string>
     <string name="expert_mode_universal_all_warning_title">Universal patch guztiak aktibatzea?</string>
     <string name="expert_mode_universal_all_warning_message">Universal patch-ak ez dira elkarrekin probatu. Guztira behin aktibatzeak gatazkak, patchatze hutsak edo crashes eragin ditzake</string>
+    <string name="expert_mode_recommended">Patch-ak gomendatuak</string>
     <string name="expert_mode_reset_to_default_done">Patch gomendatuak aplikatuak</string>
     <string name="expert_mode_selected_count">%2$s-tik %1$s hautatuak</string>
+    <string name="expert_mode_saved_selection">Hautapena gordetakoa</string>
     <string name="expert_mode_restore_saved_done">Gorde 된 hautaketa berreskuratuta</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Ez daunik patchik matchatuko bundle honetan</string>
     <string name="expert_mode_no_results">Ez da patchingik aurkitu</string>
@@ -516,6 +501,9 @@ Emaitzarik onenak lortzeko, aplikazio honek &lt;b&gt;APK oso bat&lt;/b&gt; patch
     <string name="batch_queue_pending_subtitle">Sakatu berrikutatzeko eta hasteko</string>
     <string name="batch_queue_clear_title">Herrenbustea hutsik utzi?</string>
     <string name="batch_queue_clear_description">Aplikazio guztak kenduko dira pausedan</string>
+    <string name="batch_queue_keep_title">Herren queuea mantendu?</string>
+    <string name="batch_queue_keep_description">Queuean dauden aplikazioek etxeko pantailan zain egongo dira geroago abiatzeko</string>
+    <string name="batch_queue_keep">Mantendu</string>
     <string name="shortcut_repatch_short">Berrepatchatu</string>
     <string name="shortcut_repatch_long">Aplikazio zaharkituta berrepatchatu</string>
     <string name="shortcut_check_updates_short">Eguneratzeak egiaztatu</string>
@@ -917,6 +905,8 @@ Patch-ak ez dira eragin: gaitzen dira aurre-lanzamenduko patch-ak patch-iturri b
     <string name="notification_channel_patch_updates">Patch eguneratzeak</string>
     <string name="notification_channel_patch_updates_description">Patch bertsio berrien jakinarazpenak</string>
     <string name="notification_channel_patcher_description">Morphe-k aplikazio bat atzealdean patchatzen ari denean erakusten da</string>
+    <string name="notification_channel_patching_results">Patching emaitzak</string>
+    <string name="notification_channel_patching_results_description">Patching amaitu denean edo instalazio bat zure zain dagoenbaten Morphe atzealdean dagoen bitartean</string>
     <string name="notification_channel_mounted_apps">Mountatutako aplikazioak</string>
     <string name="notification_channel_mounted_apps_description">Beste bertsio batek mountatutako aplikazio bat ordezkatzean eta haren patcha ez denean aplikatzen</string>
     <string name="notification_mount_replaced_title">%1$s ez dago patchatuta</string>
@@ -1135,7 +1125,6 @@ Xehetasunak: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Keystore-ren datuak sartu beharko dituzu hura importatzeko</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Erabiltzaile izena (Aliasa)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Paswoorda</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Gorde-gakoen formatua</string>
     <string name="settings_system_import_keystore_wrong_credentials">Keystore-en kredentialak okerrak dira</string>
     <string name="settings_system_import_keystore_success">Keystore inportatuta</string>
     <string name="settings_system_import_keystore_failed">Keystore inportatzea huts egin du</string>
@@ -1289,6 +1278,7 @@ Xehetasunak: %2$s"</string>
     <string name="credits_prior_development">Garapen aurrekoa</string>
     <string name="opensource_licenses">Iturri irekiko lizentziak</string>
     <string name="opensource_licenses_description">Morphe eraiki den liburutegiak</string>
+    <string name="opensource_licenses_search">Bilatu liburutegiak eta lizentziak</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Aukera bat</string>
     <string name="easter_egg_pill_message">Hartu pildora urdina eta iragarkiak zehazki lekuan geratuko dira. Hartu gorria eta ikusi non iristen den bytecode-a</string>

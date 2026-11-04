@@ -62,26 +62,12 @@
     <string name="home_search_apps">Αναζήτηση εφαρμογών</string>
     <string name="list_options_title">Ταξινόμηση και φιλτράρισμα</string>
     <string name="list_options_state_description">Ταξινομημένο κατά %1$s, φιλτραρισμένο κατά %2$s</string>
-    <string name="home_app_filter_all_description">Κάθε εφαρμογή στην αρχική οθόνη</string>
-    <string name="home_app_filter_patched_description">Εφαρμογές που έχετε επιδιορθώσει ή αποθηκεύσει με το Morphe</string>
-    <string name="home_app_filter_not_patched_description">Εφαρμογές που δεν έχετε επιδιορθώσει ακόμα στο Morphe</string>
-    <string name="home_app_filter_installed_description">Εφαρμογές που είναι εγκατεστημένες αυτήν τη στιγμή σε αυτήν τη συσκευή</string>
-    <string name="home_app_filter_uninstalled_description">Εφαρμογές που έχουν τροποποιηθεί με το Morphe και δε βρίσκονται πλέον σε αυτήν τη συσκευή</string>
     <string name="home_app_filter_clones">Κλώνοι</string>
-    <string name="home_app_filter_clones_description">Εφαρμογές που δημιουργήθηκαν με δικό τους όνομα πακέτου, εγκατεστημένες δίπλα στην πρωτότυπη</string>
     <string name="home_app_grouping_none">Κανένα</string>
-    <string name="home_app_grouping_all_apps_description">Μια λίστα με όλες τις εφαρμογές</string>
-    <string name="home_app_grouping_sources_description">Εφαρμογές από την πηγή patch που τις παρέχει</string>
-    <string name="home_app_grouping_custom_description">Εφαρμογές στις κατηγορίες που δημιουργείτε</string>
-    <string name="home_app_sort_manual_description">Πατήστε παρατεταμένα μια εφαρμογή, στη συνέχεια πατήστε το κουμπί αναδιάταξης</string>
+    <string name="home_app_sort_manual_hint">Κρατήστε πατημένη μια εφαρμογή και στη συνέχεια πατήστε το κουμπί αναδιάταξης</string>
     <string name="home_app_sort_recommended">Προτεινόμενη έκδοση</string>
-    <string name="home_app_sort_recommended_description">Εγκατεστημένες και καρφιτσωμένες εφαρμογές πρώτα</string>
-    <string name="home_app_sort_name_asc_description">Αλφαβητικά, από το Α έως το Ω</string>
-    <string name="home_app_sort_name_desc_description">Αλφαβητικά αντίστροφα, από Ζ έως Α</string>
     <string name="home_app_sort_updates_first">Ενημερώσεις διαχειριστή πρώτα</string>
-    <string name="home_app_sort_updates_first_description">Εφαρμογές με νεότερες ενημερώσεις πρώτα, μετά προτεινόμενη σειρά</string>
     <string name="home_app_sort_recently_patched">Πρόσφατα επιδιορθωμένα</string>
-    <string name="home_app_sort_recently_patched_description">Πρώτα οι πιο πρόσφατα επιδιορθωμένες εφαρμογές</string>
     <string name="home_no_apps_title">Καμία διαθέσιμη εφαρμογή</string>
     <string name="home_no_apps_subtitle">Προσθέστε μια πηγή τροποποιήσεων ή ενεργοποιήστε μια υπάρχουσα στο %s</string>
     <string name="home_no_apps_search_subtitle">Καμία εφαρμογή δεν ταιριάζει με το \"%s\"</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Τίποτα δεν ταιριάζει με %s</string>
     <string name="home_category_add">Προσθήκη κατηγορίας</string>
     <string name="home_category_all_apps">Όλες οι εφαρμογές</string>
-    <string name="home_category_custom">Προσαρμοσμένο</string>
+    <string name="home_app_grouping_categories">Κατηγορίες</string>
     <string name="home_category_uncategorized">Μη κατηγοριοποιημένες</string>
     <string name="home_category_new_title">Νέα κατηγορία</string>
     <string name="home_category_rename_title">Μετονομασία κατηγορίας</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">Πηγές τροποποιήσεων</string>
     <string name="sources_search">Αναζήτηση πηγών και επιδιορθώσεων</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Όλες οι πηγές</string>
-    <string name="sources_filter_enabled_description">Τα έπη των πηγών προέρχονται από</string>
-    <string name="sources_filter_disabled_description">Οι πηγές είναι απενεργοποιημένες</string>
     <string name="sources_filter_issues">Απαιτούν προσοχή</string>
-    <string name="sources_filter_issues_description">Πηγές που είναι μπλοκαρισμένες, απέτυχαν να φορτώσουν ή απαιτούν νεότερη Morphe</string>
     <string name="sources_sort_manual">Χειροκίνητη ταξινόμηση</string>
     <string name="sources_sort_manual_hint">Πατήστε παρατεταμένα μια πηγή για να την αναδιατάξετε</string>
     <string name="sources_sort_last_updated">Τελευταία ενημέρωση</string>
-    <string name="sources_sort_last_updated_description">Νεότερες ενημερώσεις πηγών πρώτα</string>
     <string name="sources_sort_enabled_first">Ενεργοποιημένες πρώτα</string>
-    <string name="sources_sort_enabled_first_description">Εμφάνιση ενεργών πηγών πριν από τις απενεργοποιημένες</string>
     <string name="sources_patches_source_disabled_hint">Αυτή η πηγή είναι απενεργοποιημένη. Τα patches της παρατίθενται για αναφορά και δεν εφαρμόζονται.</string>
     <string name="sources_management_open_in_browser">Άνοιγμα σε πρόγραμμα περιήγησης</string>
     <string name="sources_management_report_issue">Αναφορά προβλήματος</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">Συνιστάται</string>
     <string name="home_apk_availability_unpatched_label">Μη τροποποιημένο</string>
     <string name="home_apk_availability_incompatible_label">Ασύμβατο</string>
-    <string name="home_apk_availability_installed_version">Εγκατεστημένο σε αυτή τη συσκευή: %s</string>
     <string name="home_apk_availability_find">Ναι, βοήθησέ με να το βρω</string>
     <string name="home_apk_availability_have">Όχι, το έχω ήδη</string>
     <string name="home_apk_helper_download">Χρησιμοποιήστε μια βοηθητική εφαρμογή</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">Εντοπισμός της σελίδας λήψης…</string>
     <string name="home_download_instructions_step1">Πατήστε το παρακάτω κουμπί \'%s\'</string>
     <string name="home_download_instructions_step2_part1">Κάντε κύλιση της ιστοσελίδας προς τα κάτω και πατήστε</string>
+    <string name="home_download_instructions_step2_apkcube">Κυλήστε προς τα κάτω στη σελίδα, επιλέξτε την έκδοση &lt;b&gt;%s&lt;/b&gt; και πατήστε</string>
     <string name="home_download_instructions_step2_generic">Κάντε κύλιση προς τα κάτω στην ιστοσελίδα και πατήστε το κουμπί λήψης της</string>
     <string name="home_download_instructions_step2_variant">Κάντε κύλιση προς τα κάτω στην ιστοσελίδα και πατήστε το κουμπί λήψης της πρώτης &lt;b&gt;παραλλαγής APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_search">Ανοίξτε ένα αποτέλεσμα αναζήτησης από έναν ιστότοπο που εμπιστεύεστε</string>
     <string name="home_download_instructions_step2_search_note">Το Morphe δεν μπορεί να εγγυηθεί για αυτούς τους ιστότοπους. Παραλείψτε όσους προσφέρουν το δικό τους κατάστημα εφαρμογών αντί για αρχείο APK</string>
     <string name="home_download_instructions_step3_search">Σε αυτόν τον ιστότοπο, κατεβάστε το APK της έκδοσης &lt;b&gt;%s&lt;/b&gt;, όχι τη νεότερη</string>
     <string name="home_download_instructions_step3_search_any">Σε αυτόν τον ιστότοπο, κατεβάστε το APK της εφαρμογής. &lt;b&gt;Οποιαδήποτε έκδοση&lt;/b&gt; μπορεί να τροποποιηθεί</string>
+    <string name="home_download_instructions_step2_github">Στο τμήμα &lt;b&gt;Assets&lt;/b&gt; της έκδοσης &lt;b&gt;%s&lt;/b&gt;, πατήστε το αρχείο που λήγει σε &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">Στο τμήμα &lt;b&gt;Assets&lt;/b&gt; της νεότερης έκδοσης, πατήστε το αρχείο που λήγει σε &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Εάν υπάρχουν πολλά αρχεία APK, επιλέξτε αυτό που ονομάζεται %s ή το καθολικό</string>
     <string name="home_download_instructions_download_button_toast">Πατήστε λήψη στην ιστοσελίδα, και όχι εδώ 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Εξαιρετικά! Τώρα κάντε κλικ στο συνεχίστε και επισκεφθείτε την ιστοσελίδα 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Η εξάσκηση φέρνει την τελειότητα και πλησιάζεις 💪</string>
@@ -518,6 +501,9 @@
     <string name="batch_queue_pending_subtitle">Πάτατε για να ελέγξετε και να ξεκινήσετε</string>
     <string name="batch_queue_clear_title">Καθαρισμός ουράς;</string>
     <string name="batch_queue_clear_description">Όλες οι εφαρμογές θα αφαιρεθούν από την ουρά</string>
+    <string name="batch_queue_keep_title">Να διατηρηθεί η ουρά;</string>
+    <string name="batch_queue_keep_description">Οι εφαρμογές στην ουρά θα περιμένουν στην αρχική οθόνη για να ξεκινήσουν αργότερα</string>
+    <string name="batch_queue_keep">Διατήρηση</string>
     <string name="shortcut_repatch_short">Επανάληψη διόρθωσης</string>
     <string name="shortcut_repatch_long">Επανάληψη διόρθωσης ξεπερασμένων εφαρμογών</string>
     <string name="shortcut_check_updates_short">Έλεγχος για ενημερώσεις</string>
@@ -919,6 +905,8 @@
     <string name="notification_channel_patch_updates">Ενημερώσεις επιδιόρθωσης</string>
     <string name="notification_channel_patch_updates_description">Ειδοποιήσεις για νέες εκδόσεις επιδιόρθωσης</string>
     <string name="notification_channel_patcher_description">Εμφανίζεται όταν το Morphe ενημερώνει μια εφαρμογή στο παρασκήνιο</string>
+    <string name="notification_channel_patching_results">Αποτελέσματα τροποποίησης</string>
+    <string name="notification_channel_patching_results_description">Όταν η τροποποίηση ολοκληρωθεί ή μια εγκατάσταση σας περιμένει ενώ το Morphe βρίσκεται στο παρασκήνιο</string>
     <string name="notification_channel_mounted_apps">Προσαρτημένες εφαρμογές</string>
     <string name="notification_channel_mounted_apps_description">Όταν μια άλλη έκδοση αντικατέστησε μια προσαρτημένη εφαρμογή και το patch της δεν εφαρμόζεται πλέον</string>
     <string name="notification_mount_replaced_title">Το %1$s δεν είναι πλέον πατσαρισμένο</string>
@@ -1137,7 +1125,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">Θα χρειαστεί να καταχωρίσεις τα διαπιστευτήρια της αποθήκης κλειδιών για να τα εισάγεις</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Όνομα χρήστη (Ψευδώνυμο)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Κωδικός πρόσβασης</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Μορφή χώρου αποθήκευσης κλειδιών</string>
     <string name="settings_system_import_keystore_wrong_credentials">Λανθασμένα διαπιστευτήρια αποθήκης κλειδιών</string>
     <string name="settings_system_import_keystore_success">Επιτυχής εισαγωγή αποθήκης κλειδιών </string>
     <string name="settings_system_import_keystore_failed">Απέτυχε η εισαγωγή χώρου αποθήκευσης κλειδιών</string>
@@ -1291,6 +1278,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">Προηγούμενη ανάπτυξη</string>
     <string name="opensource_licenses">Άδειες ανοικτού κώδικα</string>
     <string name="opensource_licenses_description">Βιβλιοθήκες στις οποίες βασίζεται τα Morphe</string>
+    <string name="opensource_licenses_search">Αναζήτηση βιβλιοθηκών και αδειών</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Μια επιλογή</string>
     <string name="easter_egg_pill_message">Πάρε το μπλε χάπι και οι διαφημίσεις παραμένουν ακριβώς εκεί που είναι. Πάρε το κόκκινο και δες πόσο βαθιά φτάνει ο bytecode.</string>

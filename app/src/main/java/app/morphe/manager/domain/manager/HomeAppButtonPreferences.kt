@@ -44,12 +44,11 @@ data class HomeAppCategoryState(
  * source; [CUSTOM] groups by user-defined categories.
  */
 enum class HomeAppCategoryViewMode(
-    @param:StringRes override val labelRes: Int,
-    @param:StringRes override val descriptionRes: Int
+    @param:StringRes override val labelRes: Int
 ) : SortModeSpec {
-    ALL_APPS(R.string.home_app_grouping_none, R.string.home_app_grouping_all_apps_description),
-    SOURCES(R.string.sources, R.string.home_app_grouping_sources_description),
-    CUSTOM(R.string.home_category_custom, R.string.home_app_grouping_custom_description);
+    ALL_APPS(R.string.home_app_grouping_none),
+    SOURCES(R.string.sources),
+    CUSTOM(R.string.home_app_grouping_categories);
 
     companion object {
         /** Parse a persisted enum name; unknown values fall back to [ALL_APPS]. */

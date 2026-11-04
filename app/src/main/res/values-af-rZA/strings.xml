@@ -62,26 +62,12 @@
     <string name="home_search_apps">Soek programme</string>
     <string name="list_options_title">Sorteer en filtreer</string>
     <string name="list_options_state_description">Gesorteer volgens %1$s, gefiltreer volgens %2$s</string>
-    <string name="home_app_filter_all_description">Elke app op die tuisskerm</string>
-    <string name="home_app_filter_patched_description">Apps wat jy met Morphe gepatch of gestoor het</string>
-    <string name="home_app_filter_not_patched_description">Apps wat jy nog nie in Morphe gepatch het nie</string>
-    <string name="home_app_filter_installed_description">Toepassings wat tans op hierdie toestel geïnstalleer is</string>
-    <string name="home_app_filter_uninstalled_description">Toepassings wat met Morphe gepatch is en nie meer op hierdie toestel is nie</string>
     <string name="home_app_filter_clones">Klone</string>
-    <string name="home_app_filter_clones_description">Toepassings wat onder \'n eie pakketnaam gebou is, langs die oorspronklike geïnstalleer</string>
     <string name="home_app_grouping_none">Geen</string>
-    <string name="home_app_grouping_all_apps_description">Een lys met elke toepassing</string>
-    <string name="home_app_grouping_sources_description">Toepassings onder die plakbronsbron wat hulle verskaf</string>
-    <string name="home_app_grouping_custom_description">Toepassings in kategorieë wat jy skep</string>
-    <string name="home_app_sort_manual_description">Druk lank op \'n program, en tik dan op die herordeneer knoppie</string>
+    <string name="home_app_sort_manual_hint">Hou \'n toepassing lank gedruk, tik dan op die herrangskik-knoppie</string>
     <string name="home_app_sort_recommended">Aanbevole volgorde</string>
-    <string name="home_app_sort_recommended_description">Geïnstalleerde en vasgestelde programme eerste</string>
-    <string name="home_app_sort_name_asc_description">Alfabeties, A tot Z</string>
-    <string name="home_app_sort_name_desc_description">Omgekeerde alfabetiese volgorde, van Z tot A</string>
     <string name="home_app_sort_updates_first">Eerstens foutopdaterings</string>
-    <string name="home_app_sort_updates_first_description">Apps met nuwer patches eerste, dan aanbevole volgorde</string>
     <string name="home_app_sort_recently_patched">Onlangs gepatch</string>
-    <string name="home_app_sort_recently_patched_description">Mees onlangs gepatchde apps eerste</string>
     <string name="home_no_apps_title">Geen programme beskikbaar nie</string>
     <string name="home_no_apps_subtitle">Voeg \'n verandering oorsprong by of aktiveer \'n bestaande een in %s</string>
     <string name="home_no_apps_search_subtitle">Geen programme gelyk aan \"%s\" nie</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Niks het met %s ooreengestem nie</string>
     <string name="home_category_add">Kategorie byvoeg</string>
     <string name="home_category_all_apps">Alle toepassings</string>
-    <string name="home_category_custom">Pasgemaak</string>
+    <string name="home_app_grouping_categories">Kategorieë</string>
     <string name="home_category_uncategorized">Nie gekategoriseer nie</string>
     <string name="home_category_new_title">Nuwe kategorie</string>
     <string name="home_category_rename_title">Hernoem kategorie</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">Verandering oorspronge</string>
     <string name="sources_search">Soek bronne en patches</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Enige bron</string>
-    <string name="sources_filter_enabled_description">Bronkolle word geneem van</string>
-    <string name="sources_filter_disabled_description">Brone afgeskakel</string>
     <string name="sources_filter_issues">Behoeftige aandag</string>
-    <string name="sources_filter_issues_description">Bronne wat geblokkeer is, kon nie laai nie of benodig \'n nuwer Morphe nie</string>
     <string name="sources_sort_manual">Handmatige volgorde</string>
     <string name="sources_sort_manual_hint">Druk lank op \'n bron om te herschik</string>
     <string name="sources_sort_last_updated">Laaste opgedateer</string>
-    <string name="sources_sort_last_updated_description">Nuutste bronopdaterings eerste</string>
     <string name="sources_sort_enabled_first">Eerstens geaktiveer</string>
-    <string name="sources_sort_enabled_first_description">Wys aktiewe bronne voor gedeaktiveerde bronne</string>
     <string name="sources_patches_source_disabled_hint">Hierdie bron is gedeaktiveer. Sy pleisters word ter verwysing gelys en word nie toegepas nie</string>
     <string name="sources_management_open_in_browser">Maak oop in blaaier</string>
     <string name="sources_management_report_issue">Rapporteer \'n probleem</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">Aanbeveel</string>
     <string name="home_apk_availability_unpatched_label">Onveranderd</string>
     <string name="home_apk_availability_incompatible_label">Onversoenbaar</string>
-    <string name="home_apk_availability_installed_version">Geïnstalleer op hierdie toestel: %s</string>
     <string name="home_apk_availability_find">Ja, help my om dit te vind</string>
     <string name="home_apk_availability_have">Nee, ek het dit reeds</string>
     <string name="home_apk_helper_download">Gebruik \'n hulp-app</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">Besig om die aflaaibladsy te vind…</string>
     <string name="home_download_instructions_step1">Druk op die \'%s\' knoppie hieronder</string>
     <string name="home_download_instructions_step2_part1">Rol af op die webblad en druk</string>
+    <string name="home_download_instructions_step2_apkcube">Blaai af op die webblad, kies weergawe &lt;b&gt;%s&lt;/b&gt; en druk</string>
     <string name="home_download_instructions_step2_generic">Rol af op die webblad en druk op sy aflaaiknoppie</string>
     <string name="home_download_instructions_step2_variant">Rol af op die webblad en druk op die aflaaiknoppie van die boonste &lt;b&gt;APK-variant&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_search">Maak ’n soekresultaat oop van ’n webwerf wat jy vertrou</string>
     <string name="home_download_instructions_step2_search_note">Morphe kan nie vir hierdie webwerwe instaan nie. Slaan dié oor wat hul eie appwinkel in plaas van ’n APK-lêer aanbied</string>
     <string name="home_download_instructions_step3_search">Op daardie webwerf, laai die APK van weergawe &lt;b&gt;%s&lt;/b&gt; af, nie die nuutste een nie</string>
     <string name="home_download_instructions_step3_search_any">Op daardie webwerf, laai die APK van die app af. &lt;b&gt;Enige weergawe&lt;/b&gt; kan gepatch word</string>
+    <string name="home_download_instructions_step2_github">Onder &lt;b&gt;Assets&lt;/b&gt; van vrystelling &lt;b&gt;%s&lt;/b&gt;, druk die lêer wat eindig op &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">Onder &lt;b&gt;Assets&lt;/b&gt; van die nuutste vrystelling, druk die lêer wat eindig op &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">As daar verskeie APK-lêers is, kies die een wat na %s vernoem is of die universele een</string>
     <string name="home_download_instructions_download_button_toast">Druk op aflaai op die webwerf, en nie hier nie 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Fantasties! Klik nou op \"Gaan voort\" en besoek die webwerf 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Oefening maak perfeksie en jy kom daar 🔥</string>
@@ -518,6 +501,9 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="batch_queue_pending_subtitle">Tik om te hersien en te begin</string>
     <string name="batch_queue_clear_title">Maak die waglys skoon?</string>
     <string name="batch_queue_clear_description">Alle toepassing sal uit die waglys verwyder word</string>
+    <string name="batch_queue_keep_title">Hou die tou?</string>
+    <string name="batch_queue_keep_description">Die tou-toepassings sal op die tuisskerm wag om later gestart te word</string>
+    <string name="batch_queue_keep">Hou</string>
     <string name="shortcut_repatch_short">Her-pleister</string>
     <string name="shortcut_repatch_long">Her-pleister verouderde programme</string>
     <string name="shortcut_check_updates_short">Kyk vir opgraderings</string>
@@ -919,6 +905,8 @@ Patches word nie beïnvloed nie: aktiveer voorafvrystelling-patches vir elke bro
     <string name="notification_channel_patch_updates">Pleisteropdaterings</string>
     <string name="notification_channel_patch_updates_description">Kennisgewings oor nuwe pleistervrystellings</string>
     <string name="notification_channel_patcher_description">Word gewys terwyl Morphe \'n app in die agtergrond pleister</string>
+    <string name="notification_channel_patching_results">Regstel-resultate</string>
+    <string name="notification_channel_patching_results_description">Wanneer regstelling eindig of \'n installasie op jou wag terwyl Morphe in die agtergrond is</string>
     <string name="notification_channel_mounted_apps">Gemonteerde apps</string>
     <string name="notification_channel_mounted_apps_description">Wanneer \'n ander weergawe \'n gemonteerde app vervang het en sy patch nie meer van toepassing is nie</string>
     <string name="notification_mount_replaced_title">%1$s is nie meer gepatch nie</string>
@@ -1137,7 +1125,6 @@ Besonderhede: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Jy sal die sleutel se geloofsbriewe moet invoer om dit te importeer</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Gebruikersnaam (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Wagwoord</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Sleutelwinkel formaat</string>
     <string name="settings_system_import_keystore_wrong_credentials">Verkeerde sleutel geloofsbriewe</string>
     <string name="settings_system_import_keystore_success">Sleutel geïmporteer</string>
     <string name="settings_system_import_keystore_failed">Kon nie sleutel invoer nie</string>
@@ -1291,6 +1278,7 @@ Besonderhede: %2$s"</string>
     <string name="credits_prior_development">Vorige ontwikkeling</string>
     <string name="opensource_licenses">Open-source lisensies</string>
     <string name="opensource_licenses_description">Die biblioteke waarop Morphe gebou is</string>
+    <string name="opensource_licenses_search">Soek biblioteke en lisensies</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">\'n Keuse</string>
     <string name="easter_egg_pill_message">Neem die blou pil en die advertensies bly presies waar hulle is. Neem die rooi een en kyk hoe diep die bytekode gaan.</string>

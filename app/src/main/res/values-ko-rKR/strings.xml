@@ -62,26 +62,12 @@
     <string name="home_search_apps">앱 검색</string>
     <string name="list_options_title">정렬 및 필터</string>
     <string name="list_options_state_description">%1$s 기준으로 정렬, %2$s 기준으로 필터링됨</string>
-    <string name="home_app_filter_all_description">홈 화면에 모든 앱 표시</string>
-    <string name="home_app_filter_patched_description">Morphe로 패치하거나 저장한 앱만 표시</string>
-    <string name="home_app_filter_not_patched_description">아직 Morphe에서 패치하지 않은 앱만 표시</string>
-    <string name="home_app_filter_installed_description">현재 이 기기에 설치된 앱만 표시</string>
-    <string name="home_app_filter_uninstalled_description">Morphe로 패치되었지만 더 이상 이 기기에 없는 앱만 표시</string>
     <string name="home_app_filter_clones">복제본</string>
-    <string name="home_app_filter_clones_description">자체 패키지명으로 빌드되어 원본 앱과 함께 설치된 앱만 표시</string>
     <string name="home_app_grouping_none">없음</string>
-    <string name="home_app_grouping_all_apps_description">모든 앱을 하나의 목록으로 표시</string>
-    <string name="home_app_grouping_sources_description">앱을 제공하는 패치 소스별로 앱 표시</string>
-    <string name="home_app_grouping_custom_description">사용자가 생성한 카테고리별로 앱 표시 </string>
-    <string name="home_app_sort_manual_description">앱을 길게 탭한 후에 정렬 버튼을 탭하면 순서를 변경할 수 있습니다</string>
+    <string name="home_app_sort_manual_hint">앱을 길게 누른 다음 다시 정렬 버튼을 탭하세요</string>
     <string name="home_app_sort_recommended">권장 순서</string>
-    <string name="home_app_sort_recommended_description">설치된 앱 및 고정된 앱을 먼저 표시</string>
-    <string name="home_app_sort_name_asc_description">오름차순으로 정렬하여 표시</string>
-    <string name="home_app_sort_name_desc_description">내림차순으로 정렬하여 표시</string>
     <string name="home_app_sort_updates_first">패치 업데이트 우선</string>
-    <string name="home_app_sort_updates_first_description">최신 패치가 있는 앱을 먼저, 그 다음 권장 순서로 정렬</string>
     <string name="home_app_sort_recently_patched">최근 패치된 앱 우선</string>
-    <string name="home_app_sort_recently_patched_description">가장 최근에 패치된 앱부터 먼저 표시</string>
     <string name="home_no_apps_title">사용 가능한 앱이 없습니다</string>
     <string name="home_no_apps_subtitle">%s에 패치 소스를 추가하거나 기존 패치 소스를 활성화하세요</string>
     <string name="home_no_apps_search_subtitle">\'%s\'와 일치하는 앱이 없습니다</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">\'%s\'과 일치하는 항목이 없습니다</string>
     <string name="home_category_add">카테고리 추가</string>
     <string name="home_category_all_apps">모든 앱</string>
-    <string name="home_category_custom">사용자 정의</string>
+    <string name="home_app_grouping_categories">카테고리</string>
     <string name="home_category_uncategorized">분류되지 않음</string>
     <string name="home_category_new_title">새 카테고리</string>
     <string name="home_category_rename_title">카테고리 이름 변경</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">패치 소스</string>
     <string name="sources_search">소스 및 패치 검색</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">모든 소스</string>
-    <string name="sources_filter_enabled_description">소스 패치는 다음에서 가져옵니다</string>
-    <string name="sources_filter_disabled_description">소스 비활성화됨</string>
     <string name="sources_filter_issues">주의 필요</string>
-    <string name="sources_filter_issues_description">차단되었거나 불러오기에 실패했거나, 더 최신 버전의 Morphe가 필요한 소스</string>
     <string name="sources_sort_manual">수동 정렬</string>
     <string name="sources_sort_manual_hint">소스를 길게 탭하여 순서를 변경하세요</string>
     <string name="sources_sort_last_updated">최근 업데이트 우선</string>
-    <string name="sources_sort_last_updated_description">최근 업데이트된 소스부터 먼저 표시</string>
     <string name="sources_sort_enabled_first">활성화된 소스 우선</string>
-    <string name="sources_sort_enabled_first_description">비활성화된 소스보다 활성화된 소스를 먼저 표시</string>
     <string name="sources_patches_source_disabled_hint">이 소스는 비활성화되었습니다. 패치는 참조용으로 나열되며 적용되지 않습니다</string>
     <string name="sources_management_open_in_browser">브라우저에서 열기</string>
     <string name="sources_management_report_issue">문제 보고</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">권장 버전</string>
     <string name="home_apk_availability_unpatched_label">패치되지 않음</string>
     <string name="home_apk_availability_incompatible_label">호환되지 않음</string>
-    <string name="home_apk_availability_installed_version">이 기기에 설치된 버전: %s</string>
     <string name="home_apk_availability_find">네, 찾는 데 도움을 주세요</string>
     <string name="home_apk_availability_have">아니요, 이미 가지고 있습니다</string>
     <string name="home_apk_helper_download">Helper 앱 사용</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">다운로드 페이지를 찾는 중…</string>
     <string name="home_download_instructions_step1">아래 \'%s\' 버튼을 탭하세요</string>
     <string name="home_download_instructions_step2_part1">웹페이지를 아래로 스크롤 한 후에 이 버튼을 탭하세요</string>
+    <string name="home_download_instructions_step2_apkcube">웹페이지를 아래로 스크롤하여 버전 &lt;b&gt;%s&lt;/b&gt;를 선택하고 누르세요</string>
     <string name="home_download_instructions_step2_generic">웹페이지를 아래로 스크롤한 후에 해당 다운로드 버튼을 탭하세요</string>
     <string name="home_download_instructions_step2_variant">웹페이지를 아래로 스크롤한 후에 상단에 있는 &lt;b&gt;APK 변형&lt;/b&gt;의 다운로드 버튼을 탭하세요</string>
     <string name="home_download_instructions_step2_search">신뢰하는 웹사이트에서 검색 결과를 여세요</string>
     <string name="home_download_instructions_step2_search_note">Morphe는 APK 파일 대신 자체 앱 스토어를 제공하는 웹사이트를 보증할 수 없습니다. 이러한 웹사이트는 건너뛰세요</string>
     <string name="home_download_instructions_step3_search">해당 웹사이트에서 최신 버전이 아닌 &lt;b&gt;%s&lt;/b&gt; 버전의 APK를 다운로드하세요</string>
     <string name="home_download_instructions_step3_search_any">해당 웹사이트에서 앱의 APK를 다운로드하세요. &lt;b&gt;어떤 버전이든&lt;/b&gt; 패치할 수 있습니다</string>
+    <string name="home_download_instructions_step2_github">&lt;b&gt;%s&lt;/b&gt; 릴리스의 &lt;b&gt;파일 항목&lt;/b&gt;에서 파일 이름이 &lt;b&gt;.apk&lt;/b&gt;로 끝나는 파일을 탭하세요</string>
+    <string name="home_download_instructions_step2_github_latest">최신 릴리스의 &lt;b&gt;파일 항목&lt;/b&gt;에서 파일 이름이 &lt;b&gt;.apk&lt;/b&gt;로 끝나는 파일을 탭하세요</string>
+    <string name="home_download_instructions_step2_github_note">APK 파일이 여러 개라면 \'%s\'의 이름이 포함된 파일 또는 \'universal\'이라고 표시된 파일을 선택하세요</string>
     <string name="home_download_instructions_download_button_toast">여기 말고, 웹사이트에서 다운로드 버튼을 탭하세요 😊</string>
     <string name="home_download_instructions_download_button_toast_2">좋아요! 이제 계속 버튼을 탭하여 웹사이트로 이동하세요 👆</string>
     <string name="home_download_instructions_download_button_toast_3">연습할수록 실력이 늘고, 당신도 잘하고 있어요 💪</string>
@@ -395,7 +378,7 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="home_dialog_unsupported_version_compatible_versions">호환 가능한 버전:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">지원되지 않음</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Build %s</string>
+    <string name="home_dialog_unsupported_version_build">빌드 %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">동일 버전이지만 다른 빌드입니다. 패치하려면 특정 빌드가 필요합니다</string>
     <string name="home_dialog_wrong_package_title">잘못된 패키지가 선택됨</string>
     <string name="home_dialog_wrong_package_description">선택된 APK는 패치하려는 애플리케이션이 아닙니다</string>
@@ -518,6 +501,9 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="batch_queue_pending_subtitle">탭하여 검토하고 시작하세요</string>
     <string name="batch_queue_clear_title">패치 목록을 지우겠습니까?</string>
     <string name="batch_queue_clear_description">모든 앱이 패치 목록에서 제거됩니다</string>
+    <string name="batch_queue_keep_title">패치 목록을 유지하시겠습니까?</string>
+    <string name="batch_queue_keep_description">패치 목록에 추가된 앱은 나중에 실행할 수 있도록 홈 화면에서 대기합니다</string>
+    <string name="batch_queue_keep">유지</string>
     <string name="shortcut_repatch_short">다시 패치</string>
     <string name="shortcut_repatch_long">오래된 앱 다시 패치</string>
     <string name="shortcut_check_updates_short">업데이트 확인</string>
@@ -919,6 +905,8 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="notification_channel_patch_updates">패치 업데이트</string>
     <string name="notification_channel_patch_updates_description">새 패치 릴리스에 대한 알림</string>
     <string name="notification_channel_patcher_description">Morphe가 백그라운드에서 앱을 패치하는 동안에 표시되는 알림</string>
+    <string name="notification_channel_patching_results">패치 결과</string>
+    <string name="notification_channel_patching_results_description">Morphe가 백그라운드에서 실행 중일 때 패치가 완료되거나 설치가 사용자 확인을 기다리는 경우</string>
     <string name="notification_channel_mounted_apps">마운트된 앱</string>
     <string name="notification_channel_mounted_apps_description">다른 버전이 마운트된 앱을 교체하여 기존 패치가 더 이상 적용되지 않는 경우입니다</string>
     <string name="notification_mount_replaced_title">%1$s는 더 이상 패치되지 않음</string>
@@ -1132,12 +1120,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_backup_updates_description">Pre-releases 및 업데이트 확인</string>
     <string name="settings_system_backup_sources_description">사용자 정의 소스 및 GitHub 토큰</string>
     <string name="settings_system_backup_patch_selections_description">모든 앱에 대해 선택된 패치</string>
-    <string name="settings_system_backup_signing_key_note">서명 키는 별도로 백업됩니다</string>
+    <string name="settings_system_backup_signing_key_note">서명키는 별도로 백업됩니다</string>
     <string name="settings_system_import_keystore_dialog_title">키스토어 자격 증명 입력</string>
     <string name="settings_system_import_keystore_dialog_description">키스토어를 가져오려면 키스토어의 자격 증명을 입력해야 합니다</string>
     <string name="settings_system_import_keystore_dialog_alias_field">사용자 이름 (별칭)</string>
     <string name="settings_system_import_keystore_dialog_password_field">비밀번호</string>
-    <string name="settings_system_import_keystore_dialog_format_field">키스토어 형식</string>
     <string name="settings_system_import_keystore_wrong_credentials">키스토어 자격 증명이 잘못되었습니다</string>
     <string name="settings_system_import_keystore_success">키스토어를 가져왔습니다</string>
     <string name="settings_system_import_keystore_failed">키스토어를 가져올 수 없습니다</string>
@@ -1291,6 +1278,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">이전 개발</string>
     <string name="opensource_licenses">오픈 소스 라이선스</string>
     <string name="opensource_licenses_description">Morphe 기반 라이브러리</string>
+    <string name="opensource_licenses_search">라이브러리 및 라이선스 검색</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">알약 선택</string>
     <string name="easter_egg_pill_message">파란 알약을 먹으면 광고가 지금 있는 그대로 남아 있습니다. 빨간 알약을 먹으면 바이트코드가 얼마나 깊이 들어가는지 볼 수 있습니다</string>

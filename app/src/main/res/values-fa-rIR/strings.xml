@@ -62,26 +62,12 @@
     <string name="home_search_apps">جستجوی برنامه‌ها</string>
     <string name="list_options_title">مرتب‌سازی و فیلتر</string>
     <string name="list_options_state_description">مرتب‌شده بر اساس %1$s، فیلترشده بر اساس %2$s</string>
-    <string name="home_app_filter_all_description">همهٔ برنامه‌های صفحهٔ اصلی</string>
-    <string name="home_app_filter_patched_description">برنامه‌هایی که با Morphe پچ یا ذخیره کرده‌اید</string>
-    <string name="home_app_filter_not_patched_description">برنامه‌هایی که هنوز در Morphe پچ نکرده‌اید</string>
-    <string name="home_app_filter_installed_description">برنامه‌های نصب‌شده روی این دستگاه</string>
-    <string name="home_app_filter_uninstalled_description">برنامه‌های پچ‌شده با Morphe که دیگر روی این دستگاه نیستند</string>
     <string name="home_app_filter_clones">نسخه‌های کلون</string>
-    <string name="home_app_filter_clones_description">برنامه‌هایی که با نام بستهٔ اختصاصی ساخته شده‌اند و در کنار نسخهٔ اصلی نصب شده‌اند</string>
     <string name="home_app_grouping_none">هیچ‌کدام</string>
-    <string name="home_app_grouping_all_apps_description">یک فهرست با همه برنامه‌ها</string>
-    <string name="home_app_grouping_sources_description">برنامه‌هایی در منبع پچ که آن‌ها را فراهم می‌کند</string>
-    <string name="home_app_grouping_custom_description">برنامه‌هایی در دسته‌هایی که شما ایجاد می‌کنید</string>
-    <string name="home_app_sort_manual_description">روی یک برنامه لمس طولانی کنید، سپس دکمهٔ مرتب‌سازی مجدد را بزنید</string>
+    <string name="home_app_sort_manual_hint">روی یک برنامه لمس طولانی کنید، سپس دکمهٔ مرتب‌سازی مجدد را بزنید</string>
     <string name="home_app_sort_recommended">ترتیب پیشنهادی</string>
-    <string name="home_app_sort_recommended_description">ابتدا برنامه‌های نصب‌شده و سنجاق‌شده</string>
-    <string name="home_app_sort_name_asc_description">حروف الفبا، از A تا Z</string>
-    <string name="home_app_sort_name_desc_description">حروف الفبا به‌صورت معکوس، از Z تا A</string>
     <string name="home_app_sort_updates_first">ابتدا به‌روزرسانی‌های پچ</string>
-    <string name="home_app_sort_updates_first_description">ابتدا برنامه‌هایی که پچ جدیدتر دارند، سپس به ترتیب پیشنهادی</string>
     <string name="home_app_sort_recently_patched">به‌تازگی پچ‌شده</string>
-    <string name="home_app_sort_recently_patched_description">ابتدا برنامه‌هایی که اخیراً پچ شده‌اند</string>
     <string name="home_no_apps_title">برنامه‌ای در دسترس نیست</string>
     <string name="home_no_apps_subtitle">یک منبع پچ اضافه کنید یا منبع موجود را در %s فعال کنید</string>
     <string name="home_no_apps_search_subtitle">هیچ برنامه‌ای با «%s» مطابقت ندارد</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">هیچ موردی با %s مطابقت نداشت</string>
     <string name="home_category_add">افزودن دسته</string>
     <string name="home_category_all_apps">همهٔ برنامه‌ها</string>
-    <string name="home_category_custom">سفارشی</string>
+    <string name="home_app_grouping_categories">دسته‌بندی‌ها</string>
     <string name="home_category_uncategorized">بدون دسته</string>
     <string name="home_category_new_title">دستهٔ جدید</string>
     <string name="home_category_rename_title">تغییر نام دسته</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">منابع پچ </string>
     <string name="sources_search">جستجوی منابع و پچ‌ها</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">هر منبع</string>
-    <string name="sources_filter_enabled_description">پچ‌های منابع از</string>
-    <string name="sources_filter_disabled_description">منابع غیرفعال شده</string>
     <string name="sources_filter_issues">نیازمند توجه</string>
-    <string name="sources_filter_issues_description">منابعی که مسدود شده‌اند، بارگذاری آن‌ها ناموفق بود یا نیاز به Morphe جدیدتری دارند</string>
     <string name="sources_sort_manual">ترتیب دستی</string>
     <string name="sources_sort_manual_hint">روی یک منبع لمس طولانی کنید تا ترتیبش را تغییر دهید</string>
     <string name="sources_sort_last_updated">آخرین به‌روزرسانی</string>
-    <string name="sources_sort_last_updated_description">ابتدا جدیدترین به‌روزرسانی‌های منابع</string>
     <string name="sources_sort_enabled_first">ابتدا فعال‌شده‌ها</string>
-    <string name="sources_sort_enabled_first_description">منابع فعال را پیش از منابع غیرفعال نشان می‌دهد</string>
     <string name="sources_patches_source_disabled_hint">این منبع غیرفعال است. پچ‌های آن فقط برای مرجع فهرست شده‌اند و اعمال نمی‌شوند</string>
     <string name="sources_management_open_in_browser">باز کردن در مرورگر</string>
     <string name="sources_management_report_issue">گزارش مشکل</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">توصیه شده </string>
     <string name="home_apk_availability_unpatched_label">پچ نشده</string>
     <string name="home_apk_availability_incompatible_label">ناسازگار</string>
-    <string name="home_apk_availability_installed_version">نصب شده روی این دستگاه: %s</string>
     <string name="home_apk_availability_find">بله، کمکم کن پیداش کنم</string>
     <string name="home_apk_availability_have">نه، من قبلاً آن را دارم</string>
     <string name="home_apk_helper_download">استفاده از برنامهٔ کمکی</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">در حال یافتن صفحهٔ دانلود…</string>
     <string name="home_download_instructions_step1">دکمهٔ «%s» را در پایین بزنید</string>
     <string name="home_download_instructions_step2_part1">به آخر صفحه برو و بزن</string>
+    <string name="home_download_instructions_step2_apkcube">صفحه وب را به پایین اسکرول کنید، نسخه &lt;b&gt;%s&lt;/b&gt; را انتخاب کرده و فشار دهید</string>
     <string name="home_download_instructions_step2_generic">صفحهٔ وب را به پایین پیمایش کنید و دکمهٔ دانلود آن را بزنید</string>
     <string name="home_download_instructions_step2_variant">صفحهٔ وب را به پایین پیمایش کنید و دکمهٔ &lt;b&gt;گونهٔ APK&lt;/b&gt; بالایی را بزنید</string>
     <string name="home_download_instructions_step2_search">یکی از نتایج جست‌وجو را از وب‌سایتی که به آن اعتماد دارید باز کنید</string>
     <string name="home_download_instructions_step2_search_note">Morphe این وب‌سایت‌ها را تأیید نمی‌کند. وب‌سایت‌هایی را که به‌جای فایل APK فروشگاه برنامهٔ خودشان را پیشنهاد می‌دهند، نادیده بگیرید</string>
     <string name="home_download_instructions_step3_search">در آن وب‌سایت، APK نسخهٔ &lt;b&gt;%s&lt;/b&gt; را دانلود کنید، نه جدیدترین نسخه را</string>
     <string name="home_download_instructions_step3_search_any">در آن وب‌سایت، APK برنامه را دانلود کنید. &lt;b&gt;هر نسخه‌ای&lt;/b&gt; را می‌توان پچ کرد</string>
+    <string name="home_download_instructions_step2_github">در بخش &lt;b&gt;Assets&lt;/b&gt; از نسخه &lt;b&gt;%s&lt;/b&gt;، روی فایلی که به &lt;b&gt;.apk&lt;/b&gt; ختم می‌شود بزنید</string>
+    <string name="home_download_instructions_step2_github_latest">در بخش &lt;b&gt;Assets&lt;/b&gt; از جدیدترین نسخه، روی فایلی که به &lt;b&gt;.apk&lt;/b&gt; ختم می‌شود بزنید</string>
+    <string name="home_download_instructions_step2_github_note">اگر چندین فایل APK وجود دارد، فایلی که به نام %s است یا فایل universal را انتخاب کنید</string>
     <string name="home_download_instructions_download_button_toast">دکمه دانلود رو توی وبسایتش بزن، نه اینجا ☺️</string>
     <string name="home_download_instructions_download_button_toast_2">عالی است! حالا ادامه را بزنید و به وب‌سایت بروید 👆</string>
     <string name="home_download_instructions_download_button_toast_3">کار نیکو کردن از پر کردن است؛ دارید پیشرفت می‌کنید 💪</string>
@@ -518,6 +501,9 @@
     <string name="batch_queue_pending_subtitle">برای بررسی و شروع، ضربه بزنید</string>
     <string name="batch_queue_clear_title">صف پاک شود؟</string>
     <string name="batch_queue_clear_description">تمام برنامه‌ها از صف حذف خواهند شد</string>
+    <string name="batch_queue_keep_title">صف حفظ شود؟</string>
+    <string name="batch_queue_keep_description">برنامه‌های موجود در صف در صفحه اصلی منتظر می‌مانند تا بعداً اجرا شوند</string>
+    <string name="batch_queue_keep">حفظ</string>
     <string name="shortcut_repatch_short">دوباره پچ کن</string>
     <string name="shortcut_repatch_long">دوباره پچ‌کردن برنامه‌های قدیمی</string>
     <string name="shortcut_check_updates_short">بررسی به‌روزرسانی‌ها</string>
@@ -919,6 +905,8 @@
     <string name="notification_channel_patch_updates">به‌روزرسانی پچ‌ها</string>
     <string name="notification_channel_patch_updates_description">اعلان‌های مربوط به انتشار پچ‌های جدید</string>
     <string name="notification_channel_patcher_description">وقتی Morphe برنامه‌ای را در پس‌زمینه پچ می‌کند نمایش داده می‌شود</string>
+    <string name="notification_channel_patching_results">نتایج پچ‌کردن</string>
+    <string name="notification_channel_patching_results_description">هنگامی که پچ‌کردن به پایان می‌رسد یا در حالی که Morphe در پس‌زمینه است، نصبی منتظر شماست</string>
     <string name="notification_channel_mounted_apps">برنامه‌های نصب‌شده</string>
     <string name="notification_channel_mounted_apps_description">زمانی که نسخهٔ دیگری جایگزین برنامهٔ نصب‌شده با روت شود و پچ آن دیگر اعمال نشود</string>
     <string name="notification_mount_replaced_title">%1$s دیگر پچ‌شده نیست</string>
@@ -1137,7 +1125,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">برای واردکردن مخزن کلید، باید اطلاعات آن را وارد کنید</string>
     <string name="settings_system_import_keystore_dialog_alias_field">نام کاربری (نام مستعار)</string>
     <string name="settings_system_import_keystore_dialog_password_field">گذرواژه</string>
-    <string name="settings_system_import_keystore_dialog_format_field">قالب مخزن کلید</string>
     <string name="settings_system_import_keystore_wrong_credentials">اطلاعات مخزن کلید نادرست است</string>
     <string name="settings_system_import_keystore_success">مخزن کلید وارد شد</string>
     <string name="settings_system_import_keystore_failed">واردکردن مخزن کلید ناموفق بود</string>
@@ -1293,6 +1280,7 @@ adb shell appops set %1$s MANAGE_EXTERNAL_STORAGE allow</string>
     <string name="credits_prior_development">توسعهٔ پیشین</string>
     <string name="opensource_licenses">مجوزهای متن‌باز</string>
     <string name="opensource_licenses_description">کتابخانه‌هایی که مورفه بر آن‌ها ساخته شده است</string>
+    <string name="opensource_licenses_search">جستجوی کتابخانه‌ها و مجوزها</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">یک انتخاب</string>
     <string name="easter_egg_pill_message">قرص آبی را بردارید تا تبلیغات دقیقاً سر جای خود بمانند. قرص قرمز را بردارید و ببینید بایت‌کد تا کجا پیش می‌رود</string>

@@ -10,7 +10,6 @@ import android.graphics.BitmapFactory
 import android.graphics.Color as AndroidColor
 import android.os.Build
 import android.os.SystemClock
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -21,6 +20,7 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.scale
 import app.morphe.manager.R
@@ -333,7 +333,7 @@ fun rememberSourceAccent(isDefault: Boolean, avatarUrl: String?, fallbackAvatarU
     val defaultAccent = remember(isDefault) {
         if (isDefault) {
             (launcherAccent ?: AvatarCache.Accent(
-                AppCompatResources.getDrawable(context, R.drawable.ic_launcher_foreground)?.toBitmap()?.accentColor()
+                ContextCompat.getDrawable(context, R.drawable.ic_launcher_foreground)?.toBitmap()?.accentColor()
             ).also { launcherAccent = it }).color
         } else null
     }

@@ -63,26 +63,12 @@ Diese App aus der vorhandenen Quelle hinzufügen?</string>
     <string name="home_search_apps">Apps suchen</string>
     <string name="list_options_title">Sortieren und filtern</string>
     <string name="list_options_state_description">Sortiert nach %1$s, gefiltert nach %2$s</string>
-    <string name="home_app_filter_all_description">Jede App auf dem Startbildschirm</string>
-    <string name="home_app_filter_patched_description">Apps, die du mit Morphe gepatcht oder gespeichert hast</string>
-    <string name="home_app_filter_not_patched_description">Apps, die du noch nicht mit Morphe gepatcht hast</string>
-    <string name="home_app_filter_installed_description">Apps, die derzeit auf diesem Gerät installiert sind</string>
-    <string name="home_app_filter_uninstalled_description">Apps, die mit Morphe gepatcht wurden und nicht mehr auf diesem Gerät vorhanden sind</string>
     <string name="home_app_filter_clones">Klone</string>
-    <string name="home_app_filter_clones_description">Apps, die unter einem eigenen Paketnamen erstellt und neben der Original-App installiert werden</string>
     <string name="home_app_grouping_none">Keine</string>
-    <string name="home_app_grouping_all_apps_description">Eine Liste mit allen Apps</string>
-    <string name="home_app_grouping_sources_description">Apps unter der Patch-Quelle, die sie bereitstellt</string>
-    <string name="home_app_grouping_custom_description">Apps in von dir erstellten Kategorien</string>
-    <string name="home_app_sort_manual_description">Halte eine App lange gedrückt und tippe dann auf die Schaltfläche zum Sortieren</string>
+    <string name="home_app_sort_manual_hint">Halte eine App lange gedrückt und tippe dann auf die Schaltfläche zum Sortieren</string>
     <string name="home_app_sort_recommended">Empfohlene Reihenfolge</string>
-    <string name="home_app_sort_recommended_description">Installierte und angeheftete Apps zuerst</string>
-    <string name="home_app_sort_name_asc_description">Alphabetisch, A bis Z</string>
-    <string name="home_app_sort_name_desc_description">Umgekehrte alphabetische Reihenfolge, Z bis A</string>
     <string name="home_app_sort_updates_first">Patch-Updates zuerst</string>
-    <string name="home_app_sort_updates_first_description">Apps mit neueren Patches zuerst, dann empfohlene Reihenfolge</string>
     <string name="home_app_sort_recently_patched">Zuletzt gepatcht</string>
-    <string name="home_app_sort_recently_patched_description">Zuletzt gepatchte Apps zuerst</string>
     <string name="home_no_apps_title">Keine Apps verfügbar</string>
     <string name="home_no_apps_subtitle">Eine Patch-Quelle hinzufügen oder eine vorhandene in %s aktivieren</string>
     <string name="home_no_apps_search_subtitle">Keine Apps passen zu \"%s\"</string>
@@ -92,7 +78,7 @@ Diese App aus der vorhandenen Quelle hinzufügen?</string>
     <string name="home_no_apps_filter_subtitle">Nichts entspricht %s</string>
     <string name="home_category_add">Kategorie hinzufügen</string>
     <string name="home_category_all_apps">Alle Apps</string>
-    <string name="home_category_custom">Benutzerdefiniert</string>
+    <string name="home_app_grouping_categories">Kategorien</string>
     <string name="home_category_uncategorized">Nicht kategorisiert</string>
     <string name="home_category_new_title">Neue Kategorie</string>
     <string name="home_category_rename_title">Kategorie umbenennen</string>
@@ -169,17 +155,11 @@ Diese App aus der vorhandenen Quelle hinzufügen?</string>
     <string name="sources_management_title">Patch-Quellen</string>
     <string name="sources_search">Quellen und Patches durchsuchen</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Jede Quelle</string>
-    <string name="sources_filter_enabled_description">Quellenpatches stammen von</string>
-    <string name="sources_filter_disabled_description">Quellen deaktiviert</string>
     <string name="sources_filter_issues">Aufmerksamkeit erforderlich</string>
-    <string name="sources_filter_issues_description">Quellen, die blockiert sind, nicht geladen werden konnten oder eine neuere Version von Morphe benötigen</string>
     <string name="sources_sort_manual">Manuelle Reihenfolge</string>
     <string name="sources_sort_manual_hint">Halte eine Quelle gedrückt, um sie neu anzuordnen</string>
     <string name="sources_sort_last_updated">Zuletzt aktualisiert</string>
-    <string name="sources_sort_last_updated_description">Neueste Quellen-Updates zuerst</string>
     <string name="sources_sort_enabled_first">Aktivierte zuerst</string>
-    <string name="sources_sort_enabled_first_description">Aktive Quellen vor deaktivierten Quellen anzeigen</string>
     <string name="sources_patches_source_disabled_hint">Diese Quelle ist deaktiviert. Ihre Patches werden als Referenz angeführt und nicht angewendet.</string>
     <string name="sources_management_open_in_browser">Im Browser öffnen</string>
     <string name="sources_management_report_issue">Problem melden</string>
@@ -272,7 +252,6 @@ Diese App aus der vorhandenen Quelle hinzufügen?</string>
     <string name="home_apk_availability_recommended_label">Empfohlen</string>
     <string name="home_apk_availability_unpatched_label">Nicht gepatcht</string>
     <string name="home_apk_availability_incompatible_label">Inkompatibel</string>
-    <string name="home_apk_availability_installed_version">Auf diesem Gerät installiert: %s</string>
     <string name="home_apk_availability_find">Ja, hilf mir, sie zu finden</string>
     <string name="home_apk_availability_have">Nein, ich habe sie bereits</string>
     <string name="home_apk_helper_download">Eine Hilfs-App verwenden</string>
@@ -306,12 +285,16 @@ Diese App aus der vorhandenen Quelle hinzufügen?</string>
     <string name="home_download_instructions_finding">Suche nach der Download-Seite …</string>
     <string name="home_download_instructions_step1">Drücken Sie die Taste \'%s\' unten </string>
     <string name="home_download_instructions_step2_part1">Scrollen Sie auf der Webseite nach unten und drücken Sie </string>
+    <string name="home_download_instructions_step2_apkcube">Scrollen Sie auf der Webseite nach unten, wählen Sie die Version &lt;b&gt;%s&lt;/b&gt; aus und drücken Sie</string>
     <string name="home_download_instructions_step2_generic">Scrolle auf der Webseite nach unten und drücke auf die Download-Schaltfläche</string>
     <string name="home_download_instructions_step2_variant">Scrolle auf der Webseite nach unten und drücke auf die Download-Schaltfläche der oberen &lt;b&gt;APK-Variante&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_search">Öffne ein Suchergebnis von einer Website, der du vertraust</string>
     <string name="home_download_instructions_step2_search_note">Morphe kann nicht für diese Websites bürgen. Überspringe diejenigen, die statt einer APK-Datei einen eigenen App-Store anbieten</string>
     <string name="home_download_instructions_step3_search">Lade auf dieser Website die APK der Version &lt;b&gt;%s&lt;/b&gt; herunter, nicht die neueste Version</string>
     <string name="home_download_instructions_step3_search_any">Lade auf dieser Website die APK der App herunter. &lt;b&gt;Jede Version&lt;/b&gt; kann gepatcht werden</string>
+    <string name="home_download_instructions_step2_github">Drücke unter &lt;b&gt;Assets&lt;/b&gt; von Version &lt;b&gt;%s&lt;/b&gt; auf die Datei, die auf &lt;b&gt;.apk&lt;/b&gt; endet</string>
+    <string name="home_download_instructions_step2_github_latest">Drücke unter &lt;b&gt;Assets&lt;/b&gt; der neuesten Version auf die Datei, die auf &lt;b&gt;.apk&lt;/b&gt; endet</string>
+    <string name="home_download_instructions_step2_github_note">Wenn es mehrere APK-Dateien gibt, wähle diejenige aus, die nach %s benannt ist, oder die universelle</string>
     <string name="home_download_instructions_download_button_toast">Drücke die Download-Taste auf der Website und nicht hier 😊 </string>
     <string name="home_download_instructions_download_button_toast_2">Ausgezeichnet! Klicke nun auf \'Weiter\' und gehe zur Website 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Übung macht den Meister, und du bist auf dem richtigen Weg 💪</string>
@@ -519,6 +502,9 @@ Für optimale Ergebnisse empfiehlt diese App, eine &lt;b&gt;vollständige APK&lt
     <string name="batch_queue_pending_subtitle">Tippen zum Überprüfen und Starten</string>
     <string name="batch_queue_clear_title">Warteschlange löschen?</string>
     <string name="batch_queue_clear_description">Alle Apps werden aus der Warteschlange entfernt</string>
+    <string name="batch_queue_keep_title">Warteschlange beibehalten?</string>
+    <string name="batch_queue_keep_description">Die in der Warteschlange stehenden Apps warten auf dem Startbildschirm, um später gestartet zu werden</string>
+    <string name="batch_queue_keep">Beibehalten</string>
     <string name="shortcut_repatch_short">Neu patchen</string>
     <string name="shortcut_repatch_long">Veraltete Apps neu patchen</string>
     <string name="shortcut_check_updates_short">Auf Updates prüfen</string>
@@ -921,6 +907,8 @@ Patches sind nicht betroffen: Aktivieren Sie Vorab-Patches für jede Quelle in d
     <string name="notification_channel_patch_updates">Patch-Updates</string>
     <string name="notification_channel_patch_updates_description">Benachrichtigungen über neue Patch-Versionen</string>
     <string name="notification_channel_patcher_description">Wird angezeigt, während Morphe eine App im Hintergrund patcht</string>
+    <string name="notification_channel_patching_results">Patching-Ergebnisse</string>
+    <string name="notification_channel_patching_results_description">Wenn das Patching endet oder eine Installation auf Sie wartet, während Morphe im Hintergrund ist</string>
     <string name="notification_channel_mounted_apps">Gemountete Apps</string>
     <string name="notification_channel_mounted_apps_description">Wenn eine andere Version eine gemountete App ersetzt hat und ihr Patch nicht mehr angewendet wird</string>
     <string name="notification_mount_replaced_title">%1$s ist nicht mehr gepatcht</string>
@@ -1139,7 +1127,6 @@ Details: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Sie müssen die Anmeldeinformationen des Keystores zum Importieren eingeben</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Benutzername (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Passwort</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Keystore-Format</string>
     <string name="settings_system_import_keystore_wrong_credentials">Falsche Keystore-Anmeldeinformationen</string>
     <string name="settings_system_import_keystore_success">Keystore importiert</string>
     <string name="settings_system_import_keystore_failed">Fehler beim Importieren des Keystores</string>
@@ -1293,6 +1280,7 @@ Details: %2$s"</string>
     <string name="credits_prior_development">Frühere Entwicklung</string>
     <string name="opensource_licenses">Open-Source-Lizenzen</string>
     <string name="opensource_licenses_description">Die Bibliotheken, auf denen Morphe aufbaut</string>
+    <string name="opensource_licenses_search">Bibliotheken und Lizenzen suchen</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Eine Wahl</string>
     <string name="easter_egg_pill_message">Nimm die blaue Pille und die Werbung bleibt genau dort, wo sie ist. Nimm die rote Pille und sieh, wie tief der Bytecode geht.</string>

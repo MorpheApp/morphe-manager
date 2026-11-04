@@ -208,20 +208,27 @@ class RootInstaller(
                 )
                 error("$reason and bind mounts are off")
             } else {
-                // Set SELinux context, bind-mount in the root and zygote namespaces, replace any other
-                // APK running processes still hold, and restart the app so its next process inherits
-                // the patched APK view.
-                execute(
+                // Set SELinux context and bind-mount in the root and zygote namespaces
+                val mounted = execute(
                     "chcon u:object_r:apk_data_file:s0 $patchedPath; " +
                             unmountBindCommands(stockPath) + "; " +
                             "mount -o bind $patchedPath $stockPath; " +
-                            mountInZygoteNamespacesCommand(patchedPath, stockPath) + "; " +
-                            replaceOtherMountsCommand(patchedAPK, stockPath) + "; " +
+                            mountInZygoteNamespacesCommand(patchedPath, stockPath)
+                )
+                // The commands above report only the last one, so the mount is judged by what the
+                // stock path holds afterwards
+                if (!execute(isMountedOverCommand(patchedPath, stockPath)).isSuccess) {
+                    throw mounted.failure("Failed to mount APK")
+                }
+                // Replace any other APK running processes still hold, and restart the app so its
+                // next process inherits the patched APK view
+                execute(
+                    replaceOtherMountsCommand(patchedAPK, stockPath) + "; " +
                             frameworkWatcherCommand(packageName, "watch") + "; " +
                             moduleStatusCommand(packageName, "Mounted the patched APK in Morphe") + "; " +
                             forceStop + "; " +
                             detachCommand(packageName)
-                ).assertSuccess("Failed to mount APK")
+                )
             }
 
             _mountChanges.emit(packageName)
@@ -595,6 +602,11 @@ class RootInstaller(
             done
         """.trimIndent()
 
+    // Succeeds when the root namespace sees the source file at the target path, which a bind mount
+    // of it there shows as the same device and inode
+    private fun isMountedOverCommand(sourcePath: String, targetPath: String) =
+        "[ \"$(stat -Lc %d:%i $targetPath)\" = \"$(stat -Lc %d:%i $sourcePath)\" ]"
+
     // Processes started before the mount, such as System UI, keep what their namespace held, and an
     // APK another root install left there makes them look up the app's resources in another version.
     // A previous patched APK counts too, it shows up marked deleted once a new one replaced it.
@@ -711,10 +723,13 @@ class RootInstaller(
         fun moduleId(packageName: String) = "$packageName-morphe"
 
         private fun Shell.Result.assertSuccess(errorMessage: String) {
-            if (!isSuccess) {
-                val detail = failureDetail()
-                throw Exception(if (detail.isBlank()) errorMessage else "$errorMessage: $detail")
-            }
+            if (!isSuccess) throw failure(errorMessage)
+        }
+
+        /** [errorMessage] with what the shell printed, if anything. */
+        private fun Shell.Result.failure(errorMessage: String): Exception {
+            val detail = failureDetail()
+            return Exception(if (detail.isBlank()) errorMessage else "$errorMessage: $detail")
         }
 
         private fun Shell.Result.failureDetail() = (err + out).joinToString("\n").trim()

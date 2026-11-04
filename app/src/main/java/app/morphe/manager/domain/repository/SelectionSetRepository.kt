@@ -112,6 +112,10 @@ class SelectionSetRepository(db: AppDatabase) {
         return SelectionSnapshot(patches, options)
     }
 
+    /** The patches set [setUid] selects, by source. */
+    suspend fun patchNames(setUid: Int): Map<Int, List<String>> =
+        dao.getPatches(setUid).groupBy({ it.patchBundle }, { it.patchName })
+
     suspend fun delete(setUid: Int) = dao.delete(setUid)
 
     /** Names [set] [name], in place of any other set its app has under that name. */
@@ -128,7 +132,7 @@ class SelectionSetRepository(db: AppDatabase) {
     private suspend fun stored(set: SelectionSet) = StoredSelectionSet(
         packageName = set.packageName,
         name = set.name,
-        patches = dao.getPatches(set.uid).groupBy({ it.patchBundle }, { it.patchName }),
+        patches = patchNames(set.uid),
         options = dao.getOptions(set.uid)
             .groupBy { it.patchBundle }
             .mapValues { (_, rows) ->

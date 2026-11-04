@@ -6,7 +6,6 @@
 package app.morphe.manager.util
 
 import app.morphe.manager.BuildConfig
-import io.github.z4kn4fein.semver.Version
 
 /**
  * Check if the patcher version [required] by a patch bundle is newer than the [current] one
@@ -16,9 +15,8 @@ import io.github.z4kn4fein.semver.Version
  * malformed manifest attribute never blocks patching.
  */
 fun isPatcherOutdated(required: String, current: String = BuildConfig.PATCHER_VERSION): Boolean =
-    runCatching {
-        Version.parse(required, strict = false) > Version.parse(current, strict = false)
-    }.getOrDefault(false)
+    PatcherVersion.matches(required.normalizeVersion()) && PatcherVersion.matches(current.normalizeVersion()) &&
+            compareVersions(required, current) > 0
 
 /**
  * Strips a leading `v` and surrounding whitespace so version strings from different
@@ -32,6 +30,7 @@ fun String.withVersionPrefix(): String = if (startsWith("v")) this else "v$this"
 // Compiled once, since versions are compared for every app a source lists
 private val PreReleaseVersion = """^([\d.]+)[-._]?(dev|beta|rc|alpha|preview)""".toRegex(RegexOption.IGNORE_CASE)
 private val SuffixedVersion = """^([\d.]+)(.*)$""".toRegex()
+private val PatcherVersion = """^\d+(\.\d+)*(-[0-9A-Za-z.]+)?$""".toRegex()
 
 /**
  * Compare two version strings.

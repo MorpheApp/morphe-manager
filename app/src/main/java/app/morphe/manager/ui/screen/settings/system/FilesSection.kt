@@ -94,16 +94,15 @@ fun FilesSection(
         }
     )
 
-    val exportKeystore = rememberDocumentSaver("*/*", importExportViewModel::exportKeystore)
+    val exportKeystore = rememberDocumentSaver("application/x-pkcs12", importExportViewModel::exportKeystore)
     val exportSettings = rememberDocumentSaver(JSON_MIMETYPE, importExportViewModel::exportManagerSettings)
 
     DialogHost(visible = importExportViewModel.showCredentialsDialog) {
         KeystoreCredentialsDialog(
             onDismiss = importExportViewModel::cancelKeystoreImport,
-            initialFormat = importExportViewModel.detectedKeystoreFormat,
-            onSubmit = { alias, pass, format ->
+            onSubmit = { alias, pass ->
                 scope.launch {
-                    if (!importExportViewModel.tryKeystoreImport(alias, pass, format = format)) {
+                    if (!importExportViewModel.tryKeystoreImport(alias, pass)) {
                         messages.show(wrongCredentialsText)
                     }
                 }
@@ -142,7 +141,7 @@ fun FilesSection(
                 importExportViewModel = importExportViewModel,
                 tour = tour,
                 onImportKeystore = { importKeystoreLauncher() },
-                onExportKeystore = { exportKeystore("Morphe.keystore") },
+                onExportKeystore = { exportKeystore("Morphe.p12") },
                 onImportSettings = { importSettingsLauncher() },
                 onExportSettings = { exportSettings("morphe_manager_settings.json") }
             )

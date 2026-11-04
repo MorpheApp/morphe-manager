@@ -62,26 +62,12 @@
     <string name="home_search_apps">Buscar aplicaciones</string>
     <string name="list_options_title">Ordenar y filtrar</string>
     <string name="list_options_state_description">Ordenado por %1$s, filtrado por %2$s</string>
-    <string name="home_app_filter_all_description">Todas las aplicaciones de la pantalla de inicio</string>
-    <string name="home_app_filter_patched_description">Aplicaciones que has parcheado o guardado con Morphe</string>
-    <string name="home_app_filter_not_patched_description">Aplicaciones que aún no has parcheado en Morphe</string>
-    <string name="home_app_filter_installed_description">Aplicaciones instaladas actualmente en este dispositivo</string>
-    <string name="home_app_filter_uninstalled_description">Aplicaciones parcheadas con Morphe que ya no están en este dispositivo</string>
     <string name="home_app_filter_clones">Clones</string>
-    <string name="home_app_filter_clones_description">Aplicaciones compiladas con un nombre de paquete propio, instaladas junto a la original</string>
     <string name="home_app_grouping_none">Nada</string>
-    <string name="home_app_grouping_all_apps_description">Una lista con todas las aplicaciones</string>
-    <string name="home_app_grouping_sources_description">Aplicaciones de la fuente del parche que las proporciona</string>
-    <string name="home_app_grouping_custom_description">Aplicaciones en categorías que creas</string>
-    <string name="home_app_sort_manual_description">Mantén pulsada una aplicación, luego pulsa el botón de reordenar</string>
+    <string name="home_app_sort_manual_hint">Mantén pulsada una aplicación, luego pulsa el botón de reordenar</string>
     <string name="home_app_sort_recommended">Orden recomendado</string>
-    <string name="home_app_sort_recommended_description">Aplicaciones instaladas y fijadas primero</string>
-    <string name="home_app_sort_name_asc_description">Alfabético, de la A a la Z</string>
-    <string name="home_app_sort_name_desc_description">Alfabético inverso, de la Z a la A</string>
     <string name="home_app_sort_updates_first">Actualizaciones de parches primero</string>
-    <string name="home_app_sort_updates_first_description">Aplicaciones con parches más recientes primero, luego en orden recomendado</string>
     <string name="home_app_sort_recently_patched">Recientemente parcheadas</string>
-    <string name="home_app_sort_recently_patched_description">Aplicaciones parcheadas más recientemente primero</string>
     <string name="home_no_apps_title">No hay aplicaciones disponibles</string>
     <string name="home_no_apps_subtitle">Añadir una fuente de parches o habilitar una existente en %s</string>
     <string name="home_no_apps_search_subtitle">No hay aplicaciones que coincidan con \"%s\"</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">No hay coincidencias con %s</string>
     <string name="home_category_add">Añadir categoría</string>
     <string name="home_category_all_apps">Todas las aplicaciones</string>
-    <string name="home_category_custom">Personalizado</string>
+    <string name="home_app_grouping_categories">Categorías</string>
     <string name="home_category_uncategorized">Sin categoría</string>
     <string name="home_category_new_title">Nueva categoría</string>
     <string name="home_category_rename_title">Renombrar categoría</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">Fuentes de parches</string>
     <string name="sources_search">Buscar fuentes y parches</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Cada fuente</string>
-    <string name="sources_filter_enabled_description">Los parches de fuentes se toman de</string>
-    <string name="sources_filter_disabled_description">Fuentes desactivadas</string>
     <string name="sources_filter_issues">Requiere atención</string>
-    <string name="sources_filter_issues_description">Fuentes que están bloqueadas, fallaron al cargar o necesitan una Morphe más reciente</string>
     <string name="sources_sort_manual">Orden manual</string>
     <string name="sources_sort_manual_hint">Mantén pulsada una fuente para reordenarla</string>
     <string name="sources_sort_last_updated">Última actualización</string>
-    <string name="sources_sort_last_updated_description">Actualizaciones de fuentes más recientes primero</string>
     <string name="sources_sort_enabled_first">Activadas primero</string>
-    <string name="sources_sort_enabled_first_description">Muestra las fuentes activas antes que las desactivadas</string>
     <string name="sources_patches_source_disabled_hint">Esta fuente está desactivada. Sus parches se muestran a modo de referencia y no se aplican</string>
     <string name="sources_management_open_in_browser">Abrir en el navegador</string>
     <string name="sources_management_report_issue">Informar de un problema</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">Recomendado</string>
     <string name="home_apk_availability_unpatched_label">Sin parchear</string>
     <string name="home_apk_availability_incompatible_label">Incompatible</string>
-    <string name="home_apk_availability_installed_version">Instalado en este dispositivo: %s</string>
     <string name="home_apk_availability_find">Sí, ayúdame a encontrarlo</string>
     <string name="home_apk_availability_have">No, ya lo tengo</string>
     <string name="home_apk_helper_download">Utilizar una aplicación auxiliar</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">Buscando la página de descarga…</string>
     <string name="home_download_instructions_step1">Pulsa el botón \'%s\' de abajo</string>
     <string name="home_download_instructions_step2_part1">Desplázate hacia abajo en la página web y pulsa</string>
+    <string name="home_download_instructions_step2_apkcube">Desplázate hacia abajo en la página web, elige la versión &lt;b&gt;%s&lt;/b&gt; y presiona</string>
     <string name="home_download_instructions_step2_generic">Desplázate hacia abajo en la página web y pulsa el botón de descarga</string>
     <string name="home_download_instructions_step2_variant">Desplázate hacia abajo en la página web y pulsa el botón de descarga de la &lt;b&gt;variante APK&lt;/b&gt; principal</string>
     <string name="home_download_instructions_step2_search">Abre un resultado de búsqueda de un sitio web de confianza</string>
     <string name="home_download_instructions_step2_search_note">Morphe no puede responder por estos sitios web. Evita los que ofrecen su propia tienda de aplicaciones en lugar de un archivo APK</string>
     <string name="home_download_instructions_step3_search">En ese sitio web, descarga el APK de la versión &lt;b&gt;%s&lt;/b&gt;, no de la más reciente</string>
     <string name="home_download_instructions_step3_search_any">En ese sitio web, descarga el APK de la aplicación. Se puede parchear &lt;b&gt;cualquier versión&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github">En &lt;b&gt;Activos&lt;/b&gt; de la versión &lt;b&gt;%s&lt;/b&gt;, pulsa el archivo que termina en &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">En &lt;b&gt;Activos&lt;/b&gt; de la versión más reciente, pulsa en el archivo que termina en &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Si hay varios archivos APK, elige el que se llame %s o el universal</string>
     <string name="home_download_instructions_download_button_toast">Pulsa descargar en el sitio web, no aquí 😊</string>
     <string name="home_download_instructions_download_button_toast_2">¡Genial! Ahora pulsa en Continuar y ve al sitio web 👆</string>
     <string name="home_download_instructions_download_button_toast_3">La práctica hace al maestro y estás en camino 💪</string>
@@ -518,6 +501,9 @@ Para un mejor resultado, esta aplicación te recomienda parchear un &lt;b&gt;APK
     <string name="batch_queue_pending_subtitle">Toca para revisar y comenzar</string>
     <string name="batch_queue_clear_title">¿Borrar la cola?</string>
     <string name="batch_queue_clear_description">Todas las aplicaciones se eliminarán de la cola</string>
+    <string name="batch_queue_keep_title">¿Mantener la cola?</string>
+    <string name="batch_queue_keep_description">Las aplicaciones en cola esperarán en la pantalla de inicio para iniciarse más tarde</string>
+    <string name="batch_queue_keep">Mantener</string>
     <string name="shortcut_repatch_short">Reparchear</string>
     <string name="shortcut_repatch_long">Reparchear aplicaciones desactualizadas</string>
     <string name="shortcut_check_updates_short">Buscar actualizaciones</string>
@@ -919,6 +905,8 @@ Los parches no se ven afectados: habilita los parches pre-lanzamiento para cada 
     <string name="notification_channel_patch_updates">Actualizaciones de parches</string>
     <string name="notification_channel_patch_updates_description">Notificaciones sobre nuevas versiones de parches</string>
     <string name="notification_channel_patcher_description">Se muestra mientras Morphe está parcheando una aplicación en segundo plano</string>
+    <string name="notification_channel_patching_results">Resultados del parcheo</string>
+    <string name="notification_channel_patching_results_description">Cuando finaliza el parcheo o una instalación te espera mientras Morphe está en segundo plano</string>
     <string name="notification_channel_mounted_apps">Apps montadas</string>
     <string name="notification_channel_mounted_apps_description">Cuando otra versión ha sustituido a una aplicación montada y su parcheo ya no se aplica</string>
     <string name="notification_mount_replaced_title">%1$s ya no está parcheada</string>
@@ -1137,7 +1125,6 @@ Detalles: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Necesitarás introducir las credenciales del almacén de claves para importarlo</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Nombre de usuario (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Contraseña</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Formato de almacén de claves</string>
     <string name="settings_system_import_keystore_wrong_credentials">Credenciales de almacén de claves incorrectas</string>
     <string name="settings_system_import_keystore_success">Almacén de claves importado</string>
     <string name="settings_system_import_keystore_failed">Error al importar el almacén de claves</string>
@@ -1291,6 +1278,7 @@ Detalles: %2$s"</string>
     <string name="credits_prior_development">Desarrollo anterior</string>
     <string name="opensource_licenses">Licencias de código abierto</string>
     <string name="opensource_licenses_description">Las bibliotecas en las que se basa Morphe</string>
+    <string name="opensource_licenses_search">Buscar bibliotecas y licencias</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Una elección</string>
     <string name="easter_egg_pill_message">Toma la pastilla azul y los anuncios se quedan exactamente donde están. Toma la roja y descubre hasta dónde llega el bytecode</string>

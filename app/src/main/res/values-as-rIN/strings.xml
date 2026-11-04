@@ -62,26 +62,12 @@
     <string name="home_search_apps">এপসমূহ সন্ধান কৰক</string>
     <string name="list_options_title">ছৰ্ট আৰু ফিল্টাৰ</string>
     <string name="list_options_state_description">%1$s ৰ দ্বাৰা ছৰ্ট কৰা হৈছে, %2$s ৰ দ্বাৰা ফিল্টাৰ কৰা হৈছে</string>
-    <string name="home_app_filter_all_description">হোম স্ক্ৰীনৰ প্ৰতিটো এপ</string>
-    <string name="home_app_filter_patched_description">আপুনি Morphe-ৰ সৈতে পেচ কৰা বা সংৰক্ষণ কৰা এপসমূহ</string>
-    <string name="home_app_filter_not_patched_description">আপুনি Morphe-ত এতিয়াও পেচ নকৰা এপসমূহ</string>
-    <string name="home_app_filter_installed_description">বৰ্তমান এই ডিভাইচত সংস্থাপিত এপসমূহ</string>
-    <string name="home_app_filter_uninstalled_description">Morphe ৰ দ্বাৰা প্যাচ কৰা এপসমূহ যিবোৰ এই ডিভাইচত আৰু নাই</string>
     <string name="home_app_filter_clones">ক্লনসমূহ</string>
-    <string name="home_app_filter_clones_description">নিজাকৈ এটা পেকেজ নামৰ অধীনত নিৰ্মিত এপসমূহ, যিবোৰ মূল এপটোৰ সৈতে সংস্থাপন কৰা হৈছে</string>
     <string name="home_app_grouping_none">একো নহয়</string>
-    <string name="home_app_grouping_all_apps_description">প্ৰতিটো এপৰ সৈতে এটা তালিকা</string>
-    <string name="home_app_grouping_sources_description">প্ৰদান কৰা পেচ উৎসৰ অধীনৰ এপসমূহ</string>
-    <string name="home_app_grouping_custom_description">আপুনি সৃষ্টি কৰা শ্ৰেণীৰ এপসমূহ</string>
-    <string name="home_app_sort_manual_description">এটা এপৰ ওপৰত দীঘলীয়া সময়ৰ বাবে প্ৰেছ কৰক, তাৰ পিছত পুনৰ সজাব পৰা বুটামত টেপ কৰক</string>
+    <string name="home_app_sort_manual_hint">এটা এপক দীঘলীয়া সময়ৰ বাবে টিপি ৰাখক, তাৰ পিছত পুনৰ সজাই লোৱাৰ বুটামত ক্লিক কৰক</string>
     <string name="home_app_sort_recommended">পৰামৰ্শ কৰা ক্ৰম</string>
-    <string name="home_app_sort_recommended_description">ইনষ্টল কৰা আৰু পিন কৰা এপসমূহ প্ৰথমে</string>
-    <string name="home_app_sort_name_asc_description">বৰ্ণানুসৰি, A ৰ পৰা Z লৈ</string>
-    <string name="home_app_sort_name_desc_description">উল্টো বৰ্ণানুসৰি, Z ৰ পৰা A লৈ</string>
     <string name="home_app_sort_updates_first">পেচ আপডেটসমূহ প্ৰথমে</string>
-    <string name="home_app_sort_updates_first_description">নতুন পেচ থকা এপবোৰ প্ৰথমে, তাৰ পিছত পৰামৰ্শ কৰা ক্ৰম</string>
     <string name="home_app_sort_recently_patched">শেহতীয়াকৈ প্ৰচিং কৰা</string>
-    <string name="home_app_sort_recently_patched_description">সৰ্বশেষত প্ৰচিং কৰা এপবোৰ আগতে</string>
     <string name="home_no_apps_title">কোনো এপ উপলব্ধ নাই</string>
     <string name="home_no_apps_subtitle">%s ত এটা পেচ উৎস যোগ কৰক বা বিদ্যমান এটা সক্ৰিয় কৰক</string>
     <string name="home_no_apps_search_subtitle">\"%s\" ৰ সৈতে কোনো এপ মিল নাখায়</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">%s ৰ সৈতে একো মিল নাই</string>
     <string name="home_category_add">বিভাগ যোগ কৰক</string>
     <string name="home_category_all_apps">সকলো এপ্‌স</string>
-    <string name="home_category_custom">কষ্টম</string>
+    <string name="home_app_grouping_categories">বিভাগসমূহ</string>
     <string name="home_category_uncategorized">বিভাগহীন</string>
     <string name="home_category_new_title">নতুন বিভাগ</string>
     <string name="home_category_rename_title">বিভাগৰ নাম সলনি কৰক</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">পেচ উত্‍সসমূহ</string>
     <string name="sources_search">উৎস আৰু পেচবোৰৰ বাবে সন্ধান কৰক</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">প্ৰতিটো উৎস</string>
-    <string name="sources_filter_enabled_description">উৎসৰ পেচচবোৰ ইয়াৰ পৰা লোৱা হয়</string>
-    <string name="sources_filter_disabled_description">উৎসবোৰ বন্ধ কৰা হৈছে</string>
     <string name="sources_filter_issues">মনোযোগৰ প্ৰয়োজন</string>
-    <string name="sources_filter_issues_description">যিবোৰ উৎস ব্লক কৰা হৈছে, লোড কৰিব পৰা নাই বা নতুন Morphe ৰ প্ৰয়োজন</string>
     <string name="sources_sort_manual">ম্যানুৱেল ক্ৰম</string>
     <string name="sources_sort_manual_hint">পুনৰ সজাবলৈ এটা উৎসত লং-প্ৰেছ কৰক</string>
     <string name="sources_sort_last_updated">শেষবাৰ আপডেট কৰা হৈছে</string>
-    <string name="sources_sort_last_updated_description">নৱীনতম উৎস আপডেটসমূহ প্ৰথমে</string>
     <string name="sources_sort_enabled_first">সক্ৰিয়বোৰ আগতে</string>
-    <string name="sources_sort_enabled_first_description">অসক্ৰিয় উৎসসমূহৰ আগতে সক্ৰিয় উৎসসমূহ দেখুৱাওক</string>
     <string name="sources_patches_source_disabled_hint">এই উৎসটো নিষ্ক্ৰিয় কৰা হৈছে। ইয়াৰ পেচবোৰ কেৱল সহায়ৰ বাবে তালিকাভুক্ত কৰা হৈছে আৰু প্ৰয়োগ কৰা হোৱা নাই</string>
     <string name="sources_management_open_in_browser">ব্ৰাউজাৰত খোলক</string>
     <string name="sources_management_report_issue">এটা সমস্যাৰ ৰিপৰ্ট কৰক</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">সুপৰিশ কৰা</string>
     <string name="home_apk_availability_unpatched_label">আনপেচড</string>
     <string name="home_apk_availability_incompatible_label">অসামঞ্জস্যপূৰ্ণ</string>
-    <string name="home_apk_availability_installed_version">এই ডিভাইচত ইনষ্টল কৰা হৈছে: %s</string>
     <string name="home_apk_availability_find">হয়, ইয়াক বিচাৰি পাবলৈ মোক সহায় কৰক</string>
     <string name="home_apk_availability_have">নহয়, মোৰ ওচৰত ইতিমধ্যে আছে</string>
     <string name="home_apk_helper_download">এটা হেল্পাৰ এপ ব্যৱহাৰ কৰক</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">ডাউনলোড পৃষ্ঠাটি বিচাৰি উলিয়াই থকা হৈছে…</string>
     <string name="home_download_instructions_step1">তলত থকা \'%s\' বুটামত ক্লিক কৰক</string>
     <string name="home_download_instructions_step2_part1">ৱেবপেজটো তললৈ স্ক্ৰোল কৰক আৰু চাপক</string>
+    <string name="home_download_instructions_step2_apkcube">ৱেবপেজটো তললৈ স্ক্ৰল কৰক, সংস্কৰণ &lt;b&gt;%s&lt;/b&gt; বাছনি কৰক আৰু চাপক</string>
     <string name="home_download_instructions_step2_generic">ৱেবপেজটো তললৈ স্ক্ৰল কৰক আৰু ইয়াৰ ডাউনলোড বুটামটোত চাপক</string>
     <string name="home_download_instructions_step2_variant">ৱেবপেজটো তললৈ স্ক্ৰল কৰক আৰু ওপৰৰ &lt;b&gt;APK variant&lt;/b&gt;ৰ ডাউনলোড বুটামটোত চাপক</string>
     <string name="home_download_instructions_step2_search">আপুনি বিশ্বাস কৰা এখন ৱেবছাইটৰ পৰা এটা সন্ধান ফল খোলক</string>
     <string name="home_download_instructions_step2_search_note">Morphe-এ এই ৱেবছাইটবোৰৰ বাবে নিশ্চয়তা দিব নোৱাৰে। যিবোৰ ৱেবছাইটত APK ফাইলৰ পৰিবৰ্তে নিজাকৈ এপ ষ্টৰ আগবঢ়োৱা হয়, সেইবোৰ বাদ দিয়ক</string>
     <string name="home_download_instructions_step3_search">সেই ৱেবছাইটত, আটাইতকৈ নতুনটো নহয়, বৰঞ্চ &lt;b&gt;%s&lt;/b&gt; সংস্কৰণৰ APK টো ডাউনলোড কৰক</string>
     <string name="home_download_instructions_step3_search_any">সেই ৱেবছাইটত, এপটোৰ APK টো ডাউনলোড কৰক। &lt;b&gt;যিকোনো সংস্কৰণ&lt;/b&gt; পেচ কৰিব পৰা যায়</string>
+    <string name="home_download_instructions_step2_github">ৰিলিজ &lt;b&gt;%s&lt;/b&gt; ৰ &lt;b&gt;Assets&lt;/b&gt; ৰ অধীনত, &lt;b&gt;.apk&lt;/b&gt; ত শেষ হোৱা ফাইলটোত ক্লিক কৰক</string>
+    <string name="home_download_instructions_step2_github_latest">নতুনকৈ ৰিলিজ হোৱা সংস্কৰণৰ &lt;b&gt;Assets&lt;/b&gt; ৰ অধীনত, &lt;b&gt;.apk&lt;/b&gt; ত শেষ হোৱা ফাইলটোত ক্লিক কৰক</string>
+    <string name="home_download_instructions_step2_github_note">যদি কেইবাটাও APK ফাইল থাকে, তেন্তে %s নামৰটো বা ইউনিভাৰ্চেল ফাইলটো বাছি লওক</string>
     <string name="home_download_instructions_download_button_toast">ৱেবছাইটত ডাউনলোডত চাপক, ইয়াত নহয় 😊</string>
     <string name="home_download_instructions_download_button_toast_2">চৰমত! এতিয়া কন্টিনিউত ক্লিক কৰক আৰু ৱেবছাইটলৈ যাওক 👆</string>
     <string name="home_download_instructions_download_button_toast_3">অনুশীলনে মানুহক নিখুঁত কৰে আৰু আপুনি তাৰ ফালে আগবাঢ়িছে 💪</string>
@@ -355,8 +338,10 @@
     <string name="expert_mode_enable_all_universal_pending">ইউনিভাৰ্চেল পেচৰ বাবে পুনৰ টেপ কৰক</string>
     <string name="expert_mode_universal_all_warning_title">সকলো সৰ্বজনীন প্ৰচ সক্ৰিয় কৰিব নেকি?</string>
     <string name="expert_mode_universal_all_warning_message">ইউনিভাৰ্চেল পেচবোৰ একেলগে পৰীক্ষা কৰা হোৱা নাই। এই সকলোবোৰ একেলগে সক্ৰিয় কৰিলে সংঘাত, পেচিংত বিফলতা বা ক্ৰেশ হ\'ব পাৰে</string>
+    <string name="expert_mode_recommended">সুপৰিশ কৰা পেচ,</string>
     <string name="expert_mode_reset_to_default_done">সুপৰিশ কৰা patch সমূহ প্ৰয়োগ কৰা হৈছে</string>
     <string name="expert_mode_selected_count">%2$s ৰ ভিতৰত %1$s টা চয়ন কৰা হৈছে</string>
+    <string name="expert_mode_saved_selection">সংৰক্ষিত নিৰ্বাচন</string>
     <string name="expert_mode_restore_saved_done">সংৰক্ষিত নিৰ্বাচন পুনৰুদ্ধাৰ কৰা হৈছে</string>
     <string name="expert_mode_copy_from_bundle_no_patches">এই বান্ডেলটোত কোনো মিল থকা পেচ নাই</string>
     <string name="expert_mode_no_results">কোনো পেচ পতা যোৱা নাই</string>
@@ -516,6 +501,9 @@
     <string name="batch_queue_pending_subtitle">চাবৰ বাৰু আৰম্ভ কৰিবলৈ টেপ কৰক</string>
     <string name="batch_queue_clear_title">কিউটো মচি পেলাব নেকি?</string>
     <string name="batch_queue_clear_description">সকলো এপ্স কিউৰ পৰা আঁতৰাই দিয়া হ\'ব</string>
+    <string name="batch_queue_keep_title">কিউটো ৰাখিবনে?</string>
+    <string name="batch_queue_keep_description">কিউত থকা এপবোৰে পিছত আৰম্ভ কৰিবলৈ হোম স্ক্ৰীনত অপেক্ষা কৰিব</string>
+    <string name="batch_queue_keep">ৰাখক</string>
     <string name="shortcut_repatch_short">পুনৰ-পেচ</string>
     <string name="shortcut_repatch_long">আউটডেটেড এপবোৰ পুনৰ-পেচ কৰক</string>
     <string name="shortcut_check_updates_short">আপডেট পৰীক্ষা কৰক</string>
@@ -917,6 +905,8 @@
     <string name="notification_channel_patch_updates">পাচ আপডেটসমূহ</string>
     <string name="notification_channel_patch_updates_description">নতুন পাচ ৰিলিজৰ বিষয়ে নটিফিকেচন</string>
     <string name="notification_channel_patcher_description">Morphe-এ বেকগ্ৰাউণ্ডত এটা এপ পেচিং কৰি থকাৰ সময়ত দেখুওৱা হয়</string>
+    <string name="notification_channel_patching_results">পেচিংৰ ফলাফল</string>
+    <string name="notification_channel_patching_results_description">যেতিয়া পেচিং শেষ হয় বা Morphe বেকগ্ৰাউণ্ডত থকাৰ সময়ত কোনো সংস্থাপন আপোনাৰ বাবে অপেক্ষা কৰে</string>
     <string name="notification_channel_mounted_apps">মাউণ্ট কৰা এপসমূহ</string>
     <string name="notification_channel_mounted_apps_description">যেতিয়া আন এটা সংস্কৰণে মাউণ্ট কৰা এপটো প্রতিস্থাপন কৰে আৰু ইয়াৰ পেচটো আৰু প্ৰযোজ্য নহয়</string>
     <string name="notification_mount_replaced_title">%1$s আৰু patched নহয়</string>
@@ -1135,7 +1125,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">ইমপৰ্ট কৰিবলৈ আপুনি কিষ্টষ্ট’ৰৰ ক্ৰেডেনচিয়েলসমূহ প্ৰৱেশ কৰিব লাগিব</string>
     <string name="settings_system_import_keystore_dialog_alias_field">ইউজাৰনেম (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">পাসৱৰ্ড</string>
-    <string name="settings_system_import_keystore_dialog_format_field">কিস্টোৰ ফৰ্মেট</string>
     <string name="settings_system_import_keystore_wrong_credentials">ভুল কিষ্ট’ষ্ট’ বিশ্বাসযোগ্যতা</string>
     <string name="settings_system_import_keystore_success">কিষ্ট’ষ্ট’ ইমপোর্ট কৰা হৈছে</string>
     <string name="settings_system_import_keystore_failed">কিষ্ট’ষ্ট’ ইমপোর্ট কৰাত ব্যৰ্থ</string>
@@ -1289,6 +1278,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">পূৰ্বৰ উন্নয়ন</string>
     <string name="opensource_licenses">মুক্ত উৎসৰ লাইচেন্সসমূহ</string>
     <string name="opensource_licenses_description">Morphe নিৰ্মাণ কৰিবলৈ ব্যৱহাৰ কৰা লাইব্ৰেৰীসমূহ</string>
+    <string name="opensource_licenses_search">লাইব্ৰেৰী আৰু লাইচেন্সসমূহ বিচাৰক</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">এটা পছন্দ</string>
     <string name="easter_egg_pill_message">নীলা পিলটো লওক আৰু বিজ্ঞাপনবোৰ ঠিক তাতেই থাকিব। ৰঙা পিলটো লওক আৰু চাওক bytecode কিমান গভীৰ</string>

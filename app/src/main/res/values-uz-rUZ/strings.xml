@@ -62,26 +62,12 @@
     <string name="home_search_apps">Ilovalarni qidiring</string>
     <string name="list_options_title">Saralash va filtrlash</string>
     <string name="list_options_state_description">%1$s bo\'yicha saralangan, %2$s bo\'yicha filtrlangan</string>
-    <string name="home_app_filter_all_description">Bosh ekrandagi barcha ilovalar</string>
-    <string name="home_app_filter_patched_description">Morphe bilan yamalgan yoki saqlangan ilovalar</string>
-    <string name="home_app_filter_not_patched_description">Morphe\'da hali yamalmagan ilovalar</string>
-    <string name="home_app_filter_installed_description">Ushbu qurilmada hozir o\'rnatilgan ilovalar</string>
-    <string name="home_app_filter_uninstalled_description">Morphe yordamida yamalgan, endi bu qurilmada mavjud bo\'lmagan ilovalar</string>
     <string name="home_app_filter_clones">Klonlar</string>
-    <string name="home_app_filter_clones_description">O\'z paket nomi ostida qurilgan, asl ilova bilan birga o\'rnatilgan ilovalar</string>
     <string name="home_app_grouping_none">Hech biri</string>
-    <string name="home_app_grouping_all_apps_description">Barcha ilovalar bilan bitta ro\'yxat</string>
-    <string name="home_app_grouping_sources_description">Ilovalar ularni taqdim etadigan patch manbasi ostida</string>
-    <string name="home_app_grouping_custom_description">Siz yaratgan kategoriyalardagi ilovalar</string>
-    <string name="home_app_sort_manual_description">Urutkan aplikasi</string>
+    <string name="home_app_sort_manual_hint">Ilovani uzoq bosing, so\'ngra qayta tartiblash tugmasini bosing</string>
     <string name="home_app_sort_recommended">Tekan lama sebuah aplikasi, lalu ketuk tombol urutkan ulang</string>
-    <string name="home_app_sort_recommended_description">Urutan yang direkomendasikan</string>
-    <string name="home_app_sort_name_asc_description">Aplikasi yang diinstal dan disematkan terlebih dahulu</string>
-    <string name="home_app_sort_name_desc_description">Abjad, A sampai Z</string>
     <string name="home_app_sort_updates_first">Abjad terbalik, Z sampai A</string>
-    <string name="home_app_sort_updates_first_description">Yangi yamoqlari bo‘lgan ilovalar birinchi, keyin tavsiya etilgan tartib</string>
     <string name="home_app_sort_recently_patched">Yaqinda yangilangan</string>
-    <string name="home_app_sort_recently_patched_description">Yaqinda yangilangan ilovalar birinchi</string>
     <string name="home_no_apps_title">Qo‘llab-quvvatlanadigan ilovalar yo‘q</string>
     <string name="home_no_apps_subtitle">%s da patch manbai qo‘shing yoki mavjud bo‘lganini yoqing</string>
     <string name="home_no_apps_search_subtitle">\"%s\" ga mos ilovalar yo‘q</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Hech narsa %s ga mos kelmadi</string>
     <string name="home_category_add">Kategoriya qo\'shish</string>
     <string name="home_category_all_apps">Barcha ilovalar</string>
-    <string name="home_category_custom">Maxsus</string>
+    <string name="home_app_grouping_categories">Kategoriyalar</string>
     <string name="home_category_uncategorized">Kategoriyasiz</string>
     <string name="home_category_new_title">Yangi kategoriya</string>
     <string name="home_category_rename_title">Kategoriyani qayta nomlash</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">Tuzatish manbalari</string>
     <string name="sources_search">Manbalar va yamoqlarni qidirish</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Har bir manba</string>
-    <string name="sources_filter_enabled_description">Patchlar olinadigan manbalar</string>
-    <string name="sources_filter_disabled_description">O\'chirilgan manbalar</string>
     <string name="sources_filter_issues">E\'tibor talab qiladi</string>
-    <string name="sources_filter_issues_description">Bloklangan, yuklanishi muvaffaqiyatsiz bo\'lgan yoki yangiroq Morphe talab qiladigan manbalar</string>
     <string name="sources_sort_manual">Pesanan manual</string>
     <string name="sources_sort_manual_hint">Tekan lama sumber untuk mengatur ulang</string>
     <string name="sources_sort_last_updated">Terakhir diperbarui</string>
-    <string name="sources_sort_last_updated_description">Urutkan sumber tambalan</string>
     <string name="sources_sort_enabled_first">Pembaruan sumber terbaru terlebih dahulu</string>
-    <string name="sources_sort_enabled_first_description">Diaktifkan terlebih dahulu</string>
     <string name="sources_patches_source_disabled_hint">Bu manba o‘chirilgan. Uning yamoqlari ma’lumot uchun ro‘yxatda ko‘rsatilgan va qo‘llanilmaydi</string>
     <string name="sources_management_open_in_browser">Brauzerda ochish</string>
     <string name="sources_management_report_issue">Muammo haqida xabar berish</string>
@@ -198,6 +178,7 @@
     <string name="sources_management_prerelease_toggle_description">Yangi eksperimental patch versiyalariga erta kira olish</string>
     <string name="sources_prerelease_warning_title">Oldindan chiqarilgan yangilanishlarni yoqish?</string>
     <string name="sources_prerelease_warning_message">Oldindan chiqarilgan versiyalar hali ham ishlab chiqilmoqda. Yangilanishlar muvaffaqiyatsiz bo\'lishi yoki ilovani buzishi mumkin, va xususiyatlar ogohlantirishsiz o\'zgarishi mumkin.</string>
+    <string name="expert_mode_unstable_notice">Pre-reliz yoki eksperimental patchlar beqaror bo\'lishi mumkin</string>
     <string name="sources_management_experimental_versions_toggle">Eksperimental ilova versiyalari</string>
     <string name="sources_management_experimental_versions_toggle_description">Eksperimental ilova maqsadlarini ko‘rsatadi va yamaydi</string>
     <!-- Actions of the panel for several selected sources at once -->
@@ -212,6 +193,7 @@
     <string name="sources_management_metadata_unavailable">Metadata mavjud emas</string>
     <string name="sources_management_metadata_unavailable_hint">Uzoqdagi metadata fayli mavjud emas. Ushbu manba uchun avto-yangilash o‘chirildi</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Patch to‘plamini yuklab olish imkoniyati yo‘q. Manba URL noto‘g‘ri yoki fayl mavjud emas</string>
+    <string name="sources_management_metadata_unavailable_hint_missing_editable">Patch paketi yuklab olunamadi. Manba URL manzili noto\"g\'ri bo\'lishi mumkin yoki fayl mavjud emas. Uni o\'zgartirish uchun bosing</string>
     <string name="sources_management_outdated_manager_badge">Morphe ni yangilang</string>
     <string name="sources_management_outdated_manager_hint">Ushbu manba %1$s yamoqchisi uchun yaratilgan, lekin Morphe %2$s %3$s yamoqchisini o\'z ichiga oladi. Undan foydalanish uchun Morphe ni yangilang</string>
     <string name="sources_management_held_back_badge">Ishdan chiqdi</string>
@@ -225,6 +207,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Displey nomi</string>
     <string name="sources_dialog_rename">Tuzatish manbai nomini o\'zgartirish</string>
+    <string name="sources_dialog_change_url">Patch manbasi yuklanadigan joyni o\'zgartiring</string>
     <string name="sources_dialog_duplicate_name_error">Bunday nomdagi tuzatish manbai allaqachon mavjud</string>
     <string name="sources_dialog_missing_error">Ushbu patch manbasini yangilash mumkin emas</string>
     <string name="sources_dialog_add_source">Tuzatish manbai qo\'shish</string>
@@ -268,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">Tavsiya etilgan</string>
     <string name="home_apk_availability_unpatched_label">Tuzatilmagan</string>
     <string name="home_apk_availability_incompatible_label">Uyushmaslik</string>
-    <string name="home_apk_availability_installed_version">Ushbu qurilmada o‘rnatilgan: %s</string>
     <string name="home_apk_availability_find">Ha, uni topishga yordam bering</string>
     <string name="home_apk_availability_have">Yo\"q, u menda bor</string>
     <string name="home_apk_helper_download">Yordamchi ilovadan foydalaning</string>
@@ -302,12 +284,16 @@
     <string name="home_download_instructions_finding">Yuklab olish sahifasi qidirilmoqda…</string>
     <string name="home_download_instructions_step1">\'%s\' tugmasini bosing</string>
     <string name="home_download_instructions_step2_part1">Veb-sahifada pastga aylantiring va tugmachani bosing</string>
+    <string name="home_download_instructions_step2_apkcube">Veb-sahifani pastga aylantiring, &lt;b&gt;%s&lt;/b&gt; versiyasini tanlang va bosing</string>
     <string name="home_download_instructions_step2_generic">Veb-sahifani pastga aylantiring va uning yuklab olish tugmasini bosing</string>
     <string name="home_download_instructions_step2_variant">Veb-sahifani pastga aylantiring va eng yuqoridagi &lt;b&gt;APK variantining&lt;/b&gt; yuklab olish tugmasini bosing</string>
     <string name="home_download_instructions_step2_search">O\'zingiz ishonadigan veb-saytdan qidiruv natijasini oching</string>
     <string name="home_download_instructions_step2_search_note">Morphe bu veb-saytlarga kafolat bera olmaydi. APK fayl o\'rniga o\'z ilovalar do\'konini taklif qiladiganlarini o\'tkazib yuboring</string>
     <string name="home_download_instructions_step3_search">O\'sha veb-saytda &lt;b&gt;%s&lt;/b&gt; versiyasining APK faylini yuklab oling, eng yangisini emas</string>
     <string name="home_download_instructions_step3_search_any">O\'sha veb-saytda ilovaning APK faylini yuklab oling. &lt;b&gt;Har qanday versiyaga&lt;/b&gt; yamoq qo\'llash mumkin</string>
+    <string name="home_download_instructions_step2_github">&lt;b&gt;%s&lt;/b&gt; versiyasining &lt;b&gt;Assets&lt;/b&gt; bo\'limida &lt;b&gt;.apk&lt;/b&gt; bilan tugaydigan faylni bosing</string>
+    <string name="home_download_instructions_step2_github_latest">Eng so\'nggi versiyaning &lt;b&gt;Assets&lt;/b&gt; bo\'limida &lt;b&gt;.apk&lt;/b&gt; bilan tugaydigan faylni bosing</string>
+    <string name="home_download_instructions_step2_github_note">Agar bir nechta APK fayllari bo\'lsa, %s nomi bilan atalganini yoki universal faylni tanlang</string>
     <string name="home_download_instructions_download_button_toast">Veb-saytdagi \"Yuklab olish\" tugmasini bosing, lekin bu yerni emas 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Ajoyib! Endi davom etish tugmasini bosing va vebsaytga o\'ting 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Amaliyot mukammal qiladi va siz o\'zingizni kutayapsiz 💪</string>
@@ -352,8 +338,10 @@ Uning APK faylini qayerdan olishni tanlang"</string>
     <string name="expert_mode_enable_all_universal_pending">Universal yamalar uchun yana bir marta bosing</string>
     <string name="expert_mode_universal_all_warning_title">Barcha universal yangilanishlarni yoqish?</string>
     <string name="expert_mode_universal_all_warning_message">Universal yangilanishlar birgalikda sinovdan o\'tkazilmagan. Ularning hammasini bir vaqtda yoqish konfliktlarga, yangilanishning muvaffaqiyatsiz bo\'lishiga yoki ishdan chiqishiga olib kelishi mumkin.</string>
+    <string name="expert_mode_recommended">Tavsiya etilgan patchlar</string>
     <string name="expert_mode_reset_to_default_done">Tavsiya etilgan patchlar qo‘llandi</string>
     <string name="expert_mode_selected_count">%2$s dan %1$s ta tanlandi</string>
+    <string name="expert_mode_saved_selection">Saqlangan tanlov</string>
     <string name="expert_mode_restore_saved_done">Saqlangan tanlov tiklandi</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Ushbu paketda mos keladigan takrorlash yo‘q</string>
     <string name="expert_mode_no_results">Tuzatishlar topilmadi</string>
@@ -513,6 +501,9 @@ Eng yaxshi natijalar uchun ushbu ilova to‘liq &lt;b&gt;APK&lt;/b&gt;ni patchla
     <string name="batch_queue_pending_subtitle">Ko\'rib chiqish va boshlash uchun bosing.</string>
     <string name="batch_queue_clear_title">Navbatni tozalaysizmi?</string>
     <string name="batch_queue_clear_description">Barcha ilovalar navbatdan olib tashlanadi.</string>
+    <string name="batch_queue_keep_title">Navbatni saqlash kerakmi?</string>
+    <string name="batch_queue_keep_description">Navbatdagi ilovalar keyinroq ishga tushirilishini kutish uchun bosh ekranda qoladi</string>
+    <string name="batch_queue_keep">Saqlash</string>
     <string name="shortcut_repatch_short">Qayta ta’mirlash</string>
     <string name="shortcut_repatch_long">Eski ilovalarni qayta ta’mirlash</string>
     <string name="shortcut_check_updates_short">Yangilanishlarni tekshirish</string>
@@ -913,6 +904,8 @@ Patchlar ta'sirlanmaydi: patch manbalari ro'yxatidagi har bir manba uchun pre-re
     <string name="notification_channel_patch_updates">Yamoq yangilanishlari</string>
     <string name="notification_channel_patch_updates_description">Yangi yamoq versiyalari haqidagi bildirishnomalar</string>
     <string name="notification_channel_patcher_description">Morphe orqa fonda ilovani patchlayotganda ko\'rsatildi</string>
+    <string name="notification_channel_patching_results">Patchlash natijalari</string>
+    <string name="notification_channel_patching_results_description">Patchlash yakunlanganda yoki Morphe fonda ishlayotgan vaqtda o\'rnatish sizni kutayotganida</string>
     <string name="notification_channel_mounted_apps">Mount qilingan ilovalar</string>
     <string name="notification_channel_mounted_apps_description">Boshqa versiya mount qilingan ilovani almashtirganda va uning patch endi qo\'llanilmaydi</string>
     <string name="notification_mount_replaced_title">%1$s endi patchlangan emas</string>
@@ -1131,7 +1124,6 @@ Ma’lumotlar: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Xatolik</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Foydalanuvchi nomi (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Parol</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Keystore formati</string>
     <string name="settings_system_import_keystore_wrong_credentials">Noto\'g\'ri keystore ma\'lumotlari</string>
     <string name="settings_system_import_keystore_success">Keystore import qilingan</string>
     <string name="settings_system_import_keystore_failed">Keystore import qilishda xatolik yuzaga keldi</string>
@@ -1285,6 +1277,7 @@ Ma’lumotlar: %2$s"</string>
     <string name="credits_prior_development">Oldingi rivojlanish</string>
     <string name="opensource_licenses">Ochiq kodli litsenziyalar</string>
     <string name="opensource_licenses_description">Morphe qurilgan kutubxonalar</string>
+    <string name="opensource_licenses_search">Kutubxonalar va litsenziyalarni qidirish</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Tanlov</string>
     <string name="easter_egg_pill_message">Ko\'k tabletkani oling va reklamalar aynan shu joyda qoladi. Qizil tabletkani oling va bayt-kod qanchalik chuqur ekanini ko\'ring.</string>

@@ -27,6 +27,7 @@ import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.patcher.PatchingListener
 import app.morphe.manager.patcher.host.HostCommand
 import app.morphe.manager.patcher.host.HostEvent
+import app.morphe.manager.patcher.logger.LogLevel
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.runtime.jvm.JvmInstallation
 import app.morphe.manager.patcher.runtime.jvm.JvmLaunch
@@ -38,6 +39,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -46,6 +48,7 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
+import kotlinx.serialization.SerializationException
 import java.io.Closeable
 import java.io.File
 import java.io.IOException
@@ -251,9 +254,9 @@ class PatcherProcesses(
     )
 
     /**
-     * The options that tune the JVM to the process, and last those of a debug build, so a flag
-     * given again there wins. A 64-bit process runs JDK 25 and a 32-bit one JDK 17, see
-     * embeddedJvms of the app.
+     * The options that tune the JVM to the process, and last those of a debug build, so a debug
+     * build can override any flag by giving it again. A 64-bit process runs JDK 25 and a 32-bit
+     * one JDK 17, see embeddedJvms of the app.
      */
     private suspend fun jvmTuning() = (if (Process.is64Bit()) listOf(
         // C1 only. A run is too short for C2 to pay off, and its compiles take cores the run needs
@@ -375,19 +378,41 @@ class PatcherProcesses(
             }
         }
 
-        /** Hands the events of the run over as they arrive, up to its end, or null if the process ended first. */
-        private suspend fun relay(logger: Logger, listener: PatchingListener): HostEvent.Finished? {
-            for (event in events) when (event) {
-                is HostEvent.Log -> logger.log(event.level, event.message)
-                HostEvent.StepCompleted -> listener.stepCompleted()
-                is HostEvent.SplitPreparation -> listener.splitPreparation(event.event)
-                HostEvent.PatchesStarted -> listener.patchesStarted()
-                is HostEvent.PatchSucceeded -> listener.patchSucceeded(event.name)
-                is HostEvent.PatchFailed -> listener.patchFailed(event.name, event.stackTrace)
-                is HostEvent.PatchesFinished -> listener.patchesFinished(event.count)
-                is HostEvent.Finished -> return event
+        /**
+         * Hands the events of the run over as they arrive, up to its end, or null if the process
+         * ended first. A run that ends in the middle of a patch names it, as it reported nothing
+         * of that patch yet.
+         */
+        private suspend fun relay(logger: Logger, listener: PatchingListener) = coroutineScope {
+            val runningPatch = RunningPatchWatch(this, logger)
+            try {
+                for (event in events) when (event) {
+                    is HostEvent.Log -> logger.log(event.level, event.message)
+                    HostEvent.StepCompleted -> listener.stepCompleted()
+                    is HostEvent.SplitPreparation -> listener.splitPreparation(event.event)
+                    HostEvent.PatchesStarted -> listener.patchesStarted()
+                    is HostEvent.PatchExecuting -> runningPatch.started(event.name)
+                    is HostEvent.PatchSucceeded -> listener.patchSucceeded(event.name)
+                    is HostEvent.PatchFailed -> {
+                        runningPatch.stopped()
+                        listener.patchFailed(event.name, event.stackTrace)
+                    }
+                    is HostEvent.PatchesFinished -> {
+                        runningPatch.stopped()
+                        listener.patchesFinished(event.count)
+                    }
+                    is HostEvent.Finished -> {
+                        if (event.failure?.outOfMemory == true) {
+                            runningPatch.current?.let { logger.error("$it was running when the heap ran out") }
+                        }
+                        return@coroutineScope event
+                    }
+                }
+                runningPatch.current?.let { logger.error("$it was running when the patcher process ended") }
+                null
+            } finally {
+                runningPatch.stopped()
             }
-            return null
         }
 
         /**
@@ -424,7 +449,7 @@ class PatcherProcesses(
         thread(isDaemon = true, name = "PatcherEvents") {
             try {
                 ParcelFileDescriptor.AutoCloseInputStream(source).bufferedReader().useLines { lines ->
-                    lines.forEach { channel.trySend(HostEvent.decode(it)) }
+                    lines.filter(String::isNotBlank).forEach { channel.trySend(decodeEvent(it)) }
                 }
                 channel.close()
             } catch (e: Exception) {
@@ -432,6 +457,16 @@ class PatcherProcesses(
             }
         }
         return channel
+    }
+
+    /**
+     * The event of a line, or the line itself as a warning if it holds none. A host that ran out of
+     * heap halfway through a send leaves half a line, and the events after it still count.
+     */
+    private fun decodeEvent(line: String) = try {
+        HostEvent.decode(line)
+    } catch (_: SerializationException) {
+        HostEvent.Log(LogLevel.WARN, "Unreadable event of the patcher process: $line")
     }
 
     @RequiresApi(Build.VERSION_CODES.R)

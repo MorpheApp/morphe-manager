@@ -26,17 +26,17 @@ import app.morphe.manager.domain.installer.InstallCancelledException
 import app.morphe.manager.domain.installer.InstallResult
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.SessionInstaller
+import app.morphe.manager.domain.installer.awaitHandedOffInstall
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.ManagerUpdateRepository
-import app.morphe.manager.network.api.MorpheAPI
-import app.morphe.manager.network.dto.MorpheAsset
+import app.morphe.manager.network.api.ReleaseAPI
+import app.morphe.manager.network.dto.ReleaseAsset
 import app.morphe.manager.network.service.AssetDownloader
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.*
 import kotlinx.coroutines.*
 import java.io.File
 import java.io.IOException
-import kotlin.time.Duration.Companion.seconds
 
 /**
  * Drives the manager self-update, from the release lookup down to handing the APK to an
@@ -46,7 +46,7 @@ import kotlin.time.Duration.Companion.seconds
 class UpdateViewModel(
     private val app: Application,
     private val messages: UserMessages,
-    private val morpheAPI: MorpheAPI,
+    private val releaseAPI: ReleaseAPI,
     private val managerUpdateRepository: ManagerUpdateRepository,
     private val assetDownloader: AssetDownloader,
     private val sessionInstaller: SessionInstaller,
@@ -77,7 +77,7 @@ class UpdateViewModel(
     var installError by mutableStateOf("")
 
     // Release info for update dialog
-    var releaseInfo: MorpheAsset? by mutableStateOf(null)
+    var releaseInfo: ReleaseAsset? by mutableStateOf(null)
         private set
 
     // True while an update check is in flight, so the dialog can tell a check that is still
@@ -312,9 +312,6 @@ class UpdateViewModel(
     }
 
     private fun launchExternalInstaller(plan: InstallerManager.InstallPlan.External) {
-        pendingExternalInstall?.let(installerManager::cleanup)
-        externalInstallTimeoutJob?.cancel()
-
         pendingExternalInstall = plan
         installError = ""
         try {
@@ -331,11 +328,10 @@ class UpdateViewModel(
 
         state = State.INSTALLING
 
+        // Completion is reported by installBroadcastReceiver, which clears the pending plan. A
+        // timeout leaves it pending, so an install the other app finishes late still counts
         externalInstallTimeoutJob = viewModelScope.launch {
-            delay(EXTERNAL_INSTALL_TIMEOUT)
-            if (pendingExternalInstall == plan) {
-                installerManager.cleanup(plan)
-                pendingExternalInstall = null
+            if (!awaitHandedOffInstall { pendingExternalInstall != plan }) {
                 val timedOut = app.getString(R.string.installer_external_timeout, plan.installerLabel)
                 failInstall(timedOut, userMessage = timedOut)
                 externalInstallTimeoutJob = null
@@ -431,9 +427,9 @@ class UpdateViewModel(
                 // causing entriesNewerThan() to return an empty list even though a newer dev version
                 // is available and its changelog lives on the dev branch
                 val targetIsPrerelease = release?.version?.contains('-') == true
-                val forDevBranch = morpheAPI.isDevBuild || targetIsPrerelease
+                val forDevBranch = releaseAPI.isDevBuild || targetIsPrerelease
                 val entries = managerEntriesCache.getOrPut(forDevBranch) {
-                    morpheAPI.fetchManagerChangelog(forDevBranch = forDevBranch)
+                    releaseAPI.fetchManagerChangelog(forDevBranch = forDevBranch)
                 }
 
                 val newer = if (release == null) emptyList() else {
@@ -482,7 +478,7 @@ class UpdateViewModel(
 
         return if (notes.isBlank()) null else ChangelogEntry(
             version = release.version.normalizeVersion(),
-            date = release.createdAt.date.toString(),
+            date = release.createdAt.toLocalDate().toString(),
             content = notes
         )
     }
@@ -508,7 +504,7 @@ class UpdateViewModel(
         olderEntriesJob = viewModelScope.launch {
             try {
                 val entries = managerEntriesCache.getOrPut(false) {
-                    morpheAPI.fetchManagerChangelog(forDevBranch = false)
+                    releaseAPI.fetchManagerChangelog(forDevBranch = false)
                 }
                 olderManagerEntries = entries.filter {
                     it.version.normalizeVersion() !in exclude && !it.isPrerelease
@@ -530,10 +526,6 @@ class UpdateViewModel(
         olderManagerEntries = null
         isLoadingOlderEntries = false
         olderEntriesFailed = false
-    }
-
-    companion object {
-        private val EXTERNAL_INSTALL_TIMEOUT = 60.seconds
     }
 
     enum class State(@param:StringRes val title: Int) {

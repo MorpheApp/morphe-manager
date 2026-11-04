@@ -62,26 +62,12 @@
     <string name="home_search_apps">البحث عن التطبيقات</string>
     <string name="list_options_title">فرز وتصفية</string>
     <string name="list_options_state_description">تم الفرز حسب %1$s، تمت التصفية حسب %2$s</string>
-    <string name="home_app_filter_all_description">جميع التطبيقات على الشاشة الرئيسية</string>
-    <string name="home_app_filter_patched_description">التطبيقات التي قمت بتعديلها أو حفظها باستخدام Morphe</string>
-    <string name="home_app_filter_not_patched_description">التطبيقات التي لم تقم بتعديلها في Morphe بعد</string>
-    <string name="home_app_filter_installed_description">التطبيقات المثبتة حاليًا على هذا الجهاز</string>
-    <string name="home_app_filter_uninstalled_description">التطبيقات المعدّلة باستخدام Morphe التي لم تعد موجودة على هذا الجهاز</string>
     <string name="home_app_filter_clones">المستنسخة</string>
-    <string name="home_app_filter_clones_description">تطبيقات تم إنشاؤها باستخدام اسم حزمة مختلف، ومثبتة إلى جانب التطبيق الأصلي</string>
     <string name="home_app_grouping_none">بدون</string>
-    <string name="home_app_grouping_all_apps_description">قائمة واحدة تحتوي على كل التطبيقات</string>
-    <string name="home_app_grouping_sources_description">التطبيقات الموجودة ضمن مصدر التعديل التي يوفرها</string>
-    <string name="home_app_grouping_custom_description">التطبيقات في الفئات التي تنشئها</string>
-    <string name="home_app_sort_manual_description">اضغط مطولًا على تطبيق، ثم انقر على زر إعادة الترتيب</string>
+    <string name="home_app_sort_manual_hint">اضغط مطولًا على تطبيق، ثم انقر على زر إعادة الترتيب</string>
     <string name="home_app_sort_recommended">الترتيب الموصى به</string>
-    <string name="home_app_sort_recommended_description">التطبيقات المنصَّبة والمثبتة أولًا</string>
-    <string name="home_app_sort_name_asc_description">أبجديًا، من A إلى Z</string>
-    <string name="home_app_sort_name_desc_description">عكس أبجدي، من Z إلى A</string>
     <string name="home_app_sort_updates_first">تحديثات التعديل أولًا</string>
-    <string name="home_app_sort_updates_first_description">التطبيقات ذات التعديلات الأحدث أولًا، ثم الترتيب الموصى به</string>
     <string name="home_app_sort_recently_patched">تم تعديلها مؤخرًا</string>
-    <string name="home_app_sort_recently_patched_description">التطبيقات التي تم تعديلها مؤخرًا أولًا</string>
     <string name="home_no_apps_title">لا توجد تطبيقات متاحة</string>
     <string name="home_no_apps_subtitle">أضِف مصدرًا للتعديل أو قم بتمكين مصدر موجود في %s</string>
     <string name="home_no_apps_search_subtitle">لا يوجد تطبيقات تطابق \"%s\"</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">لا شيء يطابق %s</string>
     <string name="home_category_add">إضافة فئة</string>
     <string name="home_category_all_apps">كل التطبيقات</string>
-    <string name="home_category_custom">مخصّص</string>
+    <string name="home_app_grouping_categories">الفئات</string>
     <string name="home_category_uncategorized">غير مصنف</string>
     <string name="home_category_new_title">فئة جديدة</string>
     <string name="home_category_rename_title">إعادة تسمية الفئة</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">مصادر التعديل</string>
     <string name="sources_search">البحث في المصادر والتعديلات</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">كل المصدر</string>
-    <string name="sources_filter_enabled_description">يتم أخذ تعديلات المصادر من</string>
-    <string name="sources_filter_disabled_description">تم إيقاف المصادر</string>
     <string name="sources_filter_issues">يتطلّب إجراءًا</string>
-    <string name="sources_filter_issues_description">المصادر التي تم حظرها، فشلت في التحميل أو تحتاج إلى نسخة أحدث من Morphe</string>
     <string name="sources_sort_manual">ترتيب يدوي</string>
     <string name="sources_sort_manual_hint">اضغط مطولًا على مصدر لإعادة الترتيب</string>
     <string name="sources_sort_last_updated">آخر تحديث</string>
-    <string name="sources_sort_last_updated_description">آخر تحديثات المصادر أولًا</string>
     <string name="sources_sort_enabled_first">المفعّلة أولًا</string>
-    <string name="sources_sort_enabled_first_description">عرض المصادر النشطة قبل المصادر المعطلة</string>
     <string name="sources_patches_source_disabled_hint">هذا المصدر معطل. تُدرج تعديلاته كمرجع فقط ولا يتم تطبيقها</string>
     <string name="sources_management_open_in_browser">فتح في المتصفح</string>
     <string name="sources_management_report_issue">الإبلاغ عن مشكلة</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">موصى به</string>
     <string name="home_apk_availability_unpatched_label">غير معدل</string>
     <string name="home_apk_availability_incompatible_label">غير متوافق</string>
-    <string name="home_apk_availability_installed_version">المثبَّت على هذا الجهاز: %s</string>
     <string name="home_apk_availability_find">نعم، ساعدني في العثور عليه</string>
     <string name="home_apk_availability_have">لا، لقد حصلت عليه بالفعل</string>
     <string name="home_apk_helper_download">استخدام تطبيق مساعد</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">جارٍ العثور على صفحة التنزيل…</string>
     <string name="home_download_instructions_step1">انقر على زر \'%s\' أدناه</string>
     <string name="home_download_instructions_step2_part1">مرر لأسفل صفحة الويب واضغط</string>
+    <string name="home_download_instructions_step2_apkcube">قم بالتمرير لأسفل في صفحة الويب، واختيار الإصدار &lt;b&gt;%s&lt;/b&gt; ثم اضغط على</string>
     <string name="home_download_instructions_step2_generic">مرّر لأسفل صفحة الويب واضغط زر التنزيل</string>
     <string name="home_download_instructions_step2_variant">مرّر لأسفل صفحة الويب واضغط على زر التنزيل الخاص بأول &lt;b&gt;APK Variant&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_search">افتح نتيجة بحث من موقع ويب تثق به</string>
     <string name="home_download_instructions_step2_search_note">لا تضمن Morphe هذه المواقع. تخطَّ تلك التي تقدم متجر تطبيقات خاصًا بها بدلًا من ملف APK</string>
     <string name="home_download_instructions_step3_search">على ذلك الموقع، نزّل ملف APK الخاص بالإصدار &lt;b&gt;%s&lt;/b&gt;، وليس الأحدث</string>
     <string name="home_download_instructions_step3_search_any">على ذلك الموقع، نَزِّل ملف APK الخاص بالتطبيق. &lt;b&gt;أي إصدار&lt;/b&gt; يمكن تعديله</string>
+    <string name="home_download_instructions_step2_github">ضمن &lt;b&gt;Assets&lt;/b&gt; للإصدار &lt;b&gt;%s&lt;/b&gt;، انقر على الملف الذي ينتهي بـ &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">ضمن &lt;b&gt;Assets&lt;/b&gt; في الإصدار الأحدث، انقر على الملف الذي ينتهي بـ &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">إذا كان هناك عدة ملفات APK، فاختر الملف الذي يحمل اسم %s أو ملف Universal</string>
     <string name="home_download_instructions_download_button_toast">اضغط على التنزيل من الموقع الإلكتروني، وليس هنا 😊</string>
     <string name="home_download_instructions_download_button_toast_2">رائع! الآن انقر على المتابعة وانتقل إلى الموقع الإلكتروني 👆</string>
     <string name="home_download_instructions_download_button_toast_3">الممارسة تؤدي إلى الإتقان، وأنت تقترب من ذلك 💪</string>
@@ -518,6 +501,9 @@
     <string name="batch_queue_pending_subtitle">انقر للمراجعة والبدء</string>
     <string name="batch_queue_clear_title">مسح قائمة الانتظار؟</string>
     <string name="batch_queue_clear_description">سيتم إزالة كل التطبيقات من قائمة الانتظار</string>
+    <string name="batch_queue_keep_title">إبقاء قائمة الانتظار؟</string>
+    <string name="batch_queue_keep_description">ستظل التطبيقات في قائمة الانتظار على الشاشة الرئيسية حتى يتم تشغيلها لاحقًا</string>
+    <string name="batch_queue_keep">إبقاء</string>
     <string name="shortcut_repatch_short">إعادة التعديل</string>
     <string name="shortcut_repatch_long">إعادة تعديل التطبيقات غير المحدثة</string>
     <string name="shortcut_check_updates_short">التحقق من التحديثات</string>
@@ -922,6 +908,8 @@
     <string name="notification_channel_patch_updates">تحديثات التعديل</string>
     <string name="notification_channel_patch_updates_description">إشعارات عن إصدارات تعديل جديدة</string>
     <string name="notification_channel_patcher_description">يتم عرضه أثناء قيام Morphe بتعديل تطبيق في الخلفية</string>
+    <string name="notification_channel_patching_results">نتائج التعديل</string>
+    <string name="notification_channel_patching_results_description">عندما تنتهي عملية التعديل أو ينتظر التثبيت منك بينما Morphe موجود في الخلفية</string>
     <string name="notification_channel_mounted_apps">التطبيقات المُركَّبة</string>
     <string name="notification_channel_mounted_apps_description">عندما يستبدل إصدار آخر تطبيقًا مثبّتًا ولم يعد تعديله قابلًا للتطبيق</string>
     <string name="notification_mount_replaced_title">لم يعد %1$s معدلًا</string>
@@ -1141,7 +1129,6 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_import_keystore_dialog_description">سوف تحتاج إلى إدخال بيانات اعتماد Keystore لاستيراده</string>
     <string name="settings_system_import_keystore_dialog_alias_field">اسم المستخدم (الاسم المستعار)</string>
     <string name="settings_system_import_keystore_dialog_password_field">كلمة المرور</string>
-    <string name="settings_system_import_keystore_dialog_format_field">تنسيق Keystore</string>
     <string name="settings_system_import_keystore_wrong_credentials">بيانات Keystore غير صحيحة</string>
     <string name="settings_system_import_keystore_success">تم استيراد Keystore</string>
     <string name="settings_system_import_keystore_failed">فشل استيراد Keystore</string>
@@ -1295,6 +1282,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="credits_prior_development">التطوير المسبق</string>
     <string name="opensource_licenses">تراخيص مفتوحة المصدر</string>
     <string name="opensource_licenses_description">المكتبات التي بُني عليها Morphe</string>
+    <string name="opensource_licenses_search">البحث في المكتبات والتراخيص</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">خيار واحد</string>
     <string name="easter_egg_pill_message">تناول الحبة الزرقاء وستبقى الإعلانات في مكانها تمامًا. تناول الحبة الحمراء وشاهد مدى عمق الكود</string>

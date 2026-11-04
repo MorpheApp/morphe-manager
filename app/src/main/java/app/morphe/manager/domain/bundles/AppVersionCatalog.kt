@@ -17,7 +17,6 @@ import app.morphe.patcher.patch.AppTarget
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.shareIn
 
@@ -194,10 +193,6 @@ class AppVersionCatalog(
                 }
             }
         }.shareIn(scope, SharingStarted.Eagerly, replay = 1)
-
-    /** One-shot lookup for the entry points that resolve one app at a time. */
-    suspend fun recommendedVersion(packageName: String): String? =
-        recommendedVersions.first()[packageName]?.version
 
     private fun extract(
         bundleInfo: Map<Int, PatchBundleInfo>,

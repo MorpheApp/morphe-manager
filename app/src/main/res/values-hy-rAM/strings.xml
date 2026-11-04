@@ -62,26 +62,12 @@
     <string name="home_search_apps">Փնտրել հավելվածները</string>
     <string name="list_options_title">Տեսակավորում և զտում</string>
     <string name="list_options_state_description">Տեսակավորված է ըստ %1$s-ի, զտված է ըստ %2$s-ի</string>
-    <string name="home_app_filter_all_description">Բոլոր հավելվածները գլխավոր էկրանին</string>
-    <string name="home_app_filter_patched_description">Հավելվածներ, որոնք դուք փոփոխել եք կամ պահպանել Morphe-ի միջոցով</string>
-    <string name="home_app_filter_not_patched_description">Հավելվածներ, որոնք դուք դեռ չեք փոփոխել Morphe-ում</string>
-    <string name="home_app_filter_installed_description">Այս սարքի վրա տեղադրված հավելվածները</string>
-    <string name="home_app_filter_uninstalled_description">Morphe-ով փոփոխված հավելվածներ, որոնք այլևս չկան այս սարքի վրա</string>
     <string name="home_app_filter_clones">Կլոններ</string>
-    <string name="home_app_filter_clones_description">Սեփական փաթեթի անվամբ կառուցված հավելվածներ, որոնք տեղադրված են բնօրինակի կողքին</string>
     <string name="home_app_grouping_none">Ոչինչ</string>
-    <string name="home_app_grouping_all_apps_description">Մեկ ցուցակ բոլոր հավելվածներով</string>
-    <string name="home_app_grouping_sources_description">Հավելվածները՝ տրամադրող փեչի աղբյուրի ներքո</string>
-    <string name="home_app_grouping_custom_description">Հավելվածները ձեր ստեղծած կատեգորիաներում</string>
-    <string name="home_app_sort_manual_description">Երկար սեղմեք հավելվածի վրա, ապա սեղմեք վերադասավորման կոճակը</string>
+    <string name="home_app_sort_manual_hint">Երկար սեղմեք հավելվածի վրա, ապա սեղմեք վերադասավորման կոճակը</string>
     <string name="home_app_sort_recommended">Հ سفارشված հերթականություն</string>
-    <string name="home_app_sort_recommended_description">Տեղադրված և ամրացված հավելվածները՝ առաջին հերթին</string>
-    <string name="home_app_sort_name_asc_description">Այբբենական, Ա-ից Զ</string>
-    <string name="home_app_sort_name_desc_description">Հակառակ այբբենական, Զ-ից Ա</string>
     <string name="home_app_sort_updates_first">Թարմացումները՝ առաջին հերթին</string>
-    <string name="home_app_sort_updates_first_description">Նախ հավելվածները նոր թարմացումներով, այնուհետև՝ නිර්දේශված հերթականությամբ</string>
     <string name="home_app_sort_recently_patched">Վերջերս պատչված</string>
-    <string name="home_app_sort_recently_patched_description">Նախ ստեղծված վերջերս պատչված հավելվածները</string>
     <string name="home_no_apps_title">Հավելվածներ չկան</string>
     <string name="home_no_apps_subtitle">Ավելացրեք փեթչի աղբյուր կամ ակտիվացրեք գոյություն ունեցողը %s-ում</string>
     <string name="home_no_apps_search_subtitle">«%s»-ին համապատասխանող հավելվածներ չկան</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Ոչինչ չի համապատասխանել %s-ին</string>
     <string name="home_category_add">Ավելացնել կատեգորիա</string>
     <string name="home_category_all_apps">Բոլոր հավելվածները</string>
-    <string name="home_category_custom">Անհատական</string>
+    <string name="home_app_grouping_categories">Կատեգորիաներ</string>
     <string name="home_category_uncategorized">Առանց կատեգորիայի</string>
     <string name="home_category_new_title">Նոր կատեգորիա</string>
     <string name="home_category_rename_title">Վերանվանել կատեգորիան</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">Պատչերի աղբյուրներ</string>
     <string name="sources_search">Որոնել աղբյուրները և թարմացումները</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Յուրաքանչյուր աղբյուր</string>
-    <string name="sources_filter_enabled_description">Աղբյուրներ, որտեղից վերցվում են փաթեթները</string>
-    <string name="sources_filter_disabled_description">Անջատված աղբյուրներ</string>
     <string name="sources_filter_issues">Ուշադրություն է պահանջվում</string>
-    <string name="sources_filter_issues_description">Աղբյուրներ, որոնք արգելափակված են, չեն բեռնվել կամ պահանջում են Morphe-ի ավելի նոր տարբերակ</string>
     <string name="sources_sort_manual">Ձեռքով դասավորում</string>
     <string name="sources_sort_manual_hint">Սեղմեք և պահեք աղբյուրի վրա՝ դասավորությունը փոխելու համար</string>
     <string name="sources_sort_last_updated">Վերջին թարմացումը</string>
-    <string name="sources_sort_last_updated_description">Ամենանոր աղբյուրների թարմացումները՝ առաջին հերթին</string>
     <string name="sources_sort_enabled_first">Միացվածները՝ առաջին հերթին</string>
-    <string name="sources_sort_enabled_first_description">Ցուցադրել ակտիվ աղբյուրները לפני անջատված աղբյուրները</string>
     <string name="sources_patches_source_disabled_hint">Այս աղբյուրն անջատված է: Դրա թարմացումները նշված են միայն տեղեկատվության համար և չեն կիրառվի</string>
     <string name="sources_management_open_in_browser">Բացել բրաուզերում</string>
     <string name="sources_management_report_issue">Հայտնել խնդրի մասին</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">Խորհուրդ տրվող</string>
     <string name="home_apk_availability_unpatched_label">Չփոփոխված</string>
     <string name="home_apk_availability_incompatible_label">Անհամատեղելի</string>
-    <string name="home_apk_availability_installed_version">Տեղադրված է այս սարքի վրա՝ %s</string>
     <string name="home_apk_availability_find">Այո, օգնեք ինձ գտնել այն</string>
     <string name="home_apk_availability_have">Ոչ, ես արդեն ունեմ այն</string>
     <string name="home_apk_helper_download">Օգտագործել օգնող հավելված</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">Փնտրել ներբեռնման էջը…</string>
     <string name="home_download_instructions_step1">Սեղմեք ստորև գտնվող \'%s\' կոճակը</string>
     <string name="home_download_instructions_step2_part1">Գլխվեք էջի ներքևի մասին և սեղմեք</string>
+    <string name="home_download_instructions_step2_apkcube">Թերթեք վեբ-էջը ներքև, ընտրեք <b>%s</b> տարբերակը և սեղմեք</string>
     <string name="home_download_instructions_step2_generic">Թերթեք վեբ-էջը ներքև և սեղմեք ներբեռնման կոճակը</string>
     <string name="home_download_instructions_step2_variant">Թերթեք վեբ-էջը ներքև և սեղմեք ամենավերևի &lt;b&gt;APK տարբերակի&lt;/b&gt; ներբեռնման կոճակը</string>
     <string name="home_download_instructions_step2_search">Բացեք որոնման արդյունքը վստահելի վեբ-կայքից</string>
     <string name="home_download_instructions_step2_search_note">Morphe-ը չի կարող երաշխավորել այս վեբ-կայքերը: Բաց թողեք նրանք, որոնք առաջարկում են իրենց սեփական հավելվածների խանութը APK ֆայլի փոխարեն</string>
     <string name="home_download_instructions_step3_search">Այդ վեբ-կայքում ներբեռնեք &lt;b&gt;%s&lt;/b&gt; տարբերակի APK-ն, ոչ թե ամենանորը</string>
     <string name="home_download_instructions_step3_search_any">Այդ վեբ-կայքում ներբեռնեք հավելվածի APK-ն: &lt;b&gt;Ցանկացած տարբերակ&lt;/b&gt; կարող է փոփոխվել</string>
+    <string name="home_download_instructions_step2_github">Թողարկման &lt;b&gt;%s&lt;/b&gt; &lt;b&gt;Assets&lt;/b&gt; բաժնում սեղմեք &lt;b&gt;.apk&lt;/b&gt; հավելվածով ավարտվող ֆայլի վրա</string>
+    <string name="home_download_instructions_step2_github_latest">Ամենանոր թողարկման &lt;b&gt;Assets&lt;/b&gt; բաժնում սեղմեք &lt;b&gt;.apk&lt;/b&gt; հավելվածով ավարտվող ֆայլի վրա</string>
+    <string name="home_download_instructions_step2_github_note">Եթե կան մի քանի APK ֆայլեր, ընտրեք այն մեկը, որը կոչված է %s անունով, կամ համամուտականը</string>
     <string name="home_download_instructions_download_button_toast">Սեղմեք ներբեռնման կոճակը կայքում, ոչ թե այստեղ 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Հիանալի է: Հիմա սեղմեք \"շարունակել\" և անցեք կայք 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Պրակտիկան կատարելին է դարձնում, և դուք արդեն հասնում եք դրան 💪</string>
@@ -355,8 +338,10 @@
     <string name="expert_mode_enable_all_universal_pending">Հպեք նորից՝ համապարփակ փոփոխությունների համար</string>
     <string name="expert_mode_universal_all_warning_title">Ակտիվացնել բոլոր համընդհանուր պատչերը՞</string>
     <string name="expert_mode_universal_all_warning_message">Համընդհանուր պատչերը միասին չեն թեստավորվել: Բոլորը միաժամանակ ակտիվացնելը կարող է առաջացնել կոնֆլիկտներ, պատչիଂի ձախողում կամ հավելվածի անկումներ</string>
+    <string name="expert_mode_recommended">Խորհուրդ տրվող փաթեթներ</string>
     <string name="expert_mode_reset_to_default_done">Հանձնարարված փեթչերը կիրառված են</string>
     <string name="expert_mode_selected_count">ընտրված է %1$s-ը %2$s-ից</string>
+    <string name="expert_mode_saved_selection">Պահպանված ընտրություն</string>
     <string name="expert_mode_restore_saved_done">Պահպանված ընտրությունը վերականգնված է</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Այս փաթեթում չկան համապատասխան փոփոխություններ</string>
     <string name="expert_mode_no_results">Փաթեթներ չեն գտնվել</string>
@@ -516,6 +501,9 @@
     <string name="batch_queue_pending_subtitle">Հպեք՝ վերանայելու և սկսելու համար</string>
     <string name="batch_queue_clear_title">Մաքրե՞լ հերթը։</string>
     <string name="batch_queue_clear_description">Բոլոր հավելվածները կհեռացվեն հերթից</string>
+    <string name="batch_queue_keep_title">Պահպանե՞լ հերթը։</string>
+    <string name="batch_queue_keep_description">Հերթի դրված հավելվածները կսպասեն գլխավոր էկրանին՝ հետագայում գործարկվելու համար</string>
+    <string name="batch_queue_keep">Պահպանել</string>
     <string name="shortcut_repatch_short">Վերապատչել</string>
     <string name="shortcut_repatch_long">Վերապատչել հնացած հավելվածները</string>
     <string name="shortcut_check_updates_short">Ստուգել թարմացումները</string>
@@ -917,6 +905,8 @@
     <string name="notification_channel_patch_updates">Փեթչի թարմացումներ</string>
     <string name="notification_channel_patch_updates_description">Ծանուցումներ փեթչի նոր թողարկումների մասին</string>
     <string name="notification_channel_patcher_description">Ցուցադրվում է, երբ Morphe-ը ֆոնային ռեժիմում փոփոխում է հավելվածը</string>
+    <string name="notification_channel_patching_results">Պատչավորման արդյունքները</string>
+    <string name="notification_channel_patching_results_description">Երբ պատչավորումն ավարտվում է կամ տեղադրումը սպասում է ձեզ, մինչ Morphe-ը գտնվում է հետին պլանում</string>
     <string name="notification_channel_mounted_apps">Տեղադրված հավելվածներ</string>
     <string name="notification_channel_mounted_apps_description">Երբ մի այլ տարբերակը փոխարինում է տեղադրված հավելվածը, և դրա փոփոխությունը այլևս չի գործում</string>
     <string name="notification_mount_replaced_title">%1$s-ը այլևս փոփոխված չէ</string>
@@ -1135,7 +1125,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">Այն ներկայացնելու համար անհրաժեշտ է մուտքագրել keystore-ի հավաստագրերը</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Օգտանուն (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Գաղտնաբառ</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Բանալիների պահոցի ձևաչափը</string>
     <string name="settings_system_import_keystore_wrong_credentials">Բանալիների պահոցի սխալ հավաստագրեր</string>
     <string name="settings_system_import_keystore_success">Բանալիների պահոցը ներմուծվեց</string>
     <string name="settings_system_import_keystore_failed">Բանալիների պահոցի ներմուծումը ձախողվեց</string>
@@ -1289,6 +1278,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">Նախկին մշակում</string>
     <string name="opensource_licenses">Բաց կոդի լիցենզիաներ</string>
     <string name="opensource_licenses_description">Գրադարանները, որոնց վրա կառուցված է Morphe-ը</string>
+    <string name="opensource_licenses_search">Որոնել գրադարանները և լիցենզիաները</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Ընտրություն</string>
     <string name="easter_egg_pill_message">Ընդունիր կապույտ հաբը, և գովազդները կմնան այնտեղ, որտեղ կան։ Ընդունիր կարմիրը և տես, թե որքան խորն է բայթկոդը</string>

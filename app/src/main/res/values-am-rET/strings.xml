@@ -62,26 +62,12 @@
     <string name="home_search_apps">መተግበሪያዎችን ፈልግ</string>
     <string name="list_options_title">ደራጅ እና አጥልት</string>
     <string name="list_options_state_description">በ %1$s ተደራጅቷል፣ በ %2$s ተጥልቷል</string>
-    <string name="home_app_filter_all_description">በመነሻ ስክሪኑ ላይ ያሉ ሁሉም መተግበሪያዎች</string>
-    <string name="home_app_filter_patched_description">በMorphe ፓች ያደረጓቸው ወይም ያስቀመጧቸው መተግበሪያዎች</string>
-    <string name="home_app_filter_not_patched_description">በMorphe እስካሁን ፓች ያላደረጓቸው መተግበሪያዎች</string>
-    <string name="home_app_filter_installed_description">በአሁኑ ጊዜ በዚህ መሳሪያ ላይ የተጫኑ መተግበሪያዎች</string>
-    <string name="home_app_filter_uninstalled_description">በMorphe የተስተካከሉ ነገር ግን በዚህ መሳሪያ ላይ የማይገኙ መተግበሪያዎች</string>
     <string name="home_app_filter_clones">ቅጂዎች</string>
-    <string name="home_app_filter_clones_description">በራሳቸው የፓኬጅ ስም የተሰሩ እና ከዋናው መተግበሪያ ጋር ተጫንተው የሚገኙ መተግበሪያዎች</string>
     <string name="home_app_grouping_none">ምንም</string>
-    <string name="home_app_grouping_all_apps_description">ሁሉንም መተግበሪያዎች የያዘ አንድ ዝርዝር</string>
-    <string name="home_app_grouping_sources_description">መተግበሪያዎች በሚያቀርቡላቸው የፓች ምንጮች ስር</string>
-    <string name="home_app_grouping_custom_description">እርስዎ በፈጠሯቸው ምድቦች ውስጥ ያሉ መተግበሪያዎች</string>
-    <string name="home_app_sort_manual_description">አንድን መተግበሪያ ለረጅም ጊዜ ተጭነው ይያዙ፣ ከዚያም የቅደም ተከተል ማስተካከያ ቁልፉን ይጫኑ</string>
+    <string name="home_app_sort_manual_hint">አንድን መተግበሪያ ለረጅም ጊዜ ተጭነው ይያዙ፣ ከዚያም የቅደም ተከተል ማስተካከያ ቁልፉን ይጫኑ</string>
     <string name="home_app_sort_recommended">የሚመከር ቅደም ተከተል</string>
-    <string name="home_app_sort_recommended_description">የተጫኑ እና የተሰኩ መተግበሪያዎች መጀመሪያ</string>
-    <string name="home_app_sort_name_asc_description">በፊደል ቅደም ተከተል፣ ከሀ እስከ ፐ</string>
-    <string name="home_app_sort_name_desc_description">በተገላቢጦሽ የፊደል ቅደም ተከተል፣ ከፐ እስከ ሀ</string>
     <string name="home_app_sort_updates_first">የጥገና ማሻሻያዎች መጀመሪያ</string>
-    <string name="home_app_sort_updates_first_description">አዳዲስ ፓቾች ያሏቸው መተግበሪያዎች መጀመሪያ፣ ከዚያም የሚመከረው ቅደም ተከተል</string>
     <string name="home_app_sort_recently_patched">በቅርቡ ፓች የተደረጉ</string>
-    <string name="home_app_sort_recently_patched_description">በቅርቡ ፓች የተደረጉ መተግበሪያዎች መጀመሪያ ይመጣሉ</string>
     <string name="home_no_apps_title">ምንም መተግበሪያዎች የሉም</string>
     <string name="home_no_apps_subtitle">በ%s ውስጥ የፓች ምንጭ ያክሉ ወይም ያለውን ያብሩ</string>
     <string name="home_no_apps_search_subtitle">ከ\"%s\" ጋር የሚዛመዱ ምንም አፖች የሉም</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">ከ%s ጋር የሚዛመድ ምንም ነገር አልተገኘም</string>
     <string name="home_category_add">ምድብ አክል</string>
     <string name="home_category_all_apps">ሁሉም መተግበሪያዎች</string>
-    <string name="home_category_custom">ብጁ</string>
+    <string name="home_app_grouping_categories">ምድቦች</string>
     <string name="home_category_uncategorized">ያልተመደቡ</string>
     <string name="home_category_new_title">አዲስ ምድብ</string>
     <string name="home_category_rename_title">የምድብ ስም ቀይር</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">የፓች ምንጮች</string>
     <string name="sources_search">ምንጮችን እና ፓቾችን ፈልግ</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">ሁሉም ምንጮች</string>
-    <string name="sources_filter_enabled_description">የምንጮች ፓቾች የሚወሰዱበት ቦታ</string>
-    <string name="sources_filter_disabled_description">የጠፉ ምንጮች</string>
     <string name="sources_filter_issues">ትኩረት የሚሹ</string>
-    <string name="sources_filter_issues_description">የተከለከሉ፣ ለመጫን የከሸፉ ወይም አዲስ Morphe የሚፈልጉ ምንጮች</string>
     <string name="sources_sort_manual">በእጅ ማዘዝ</string>
     <string name="sources_sort_manual_hint">የምንጩን ቅደም ተከተል ለመቀየር ምንጩን ተጭነው ይያዙ</string>
     <string name="sources_sort_last_updated">ለመጨረሻ ጊዜ የተዘመነው</string>
-    <string name="sources_sort_last_updated_description">አዳዲስ የምንጭ ማሻሻያዎች መጀመሪያ</string>
     <string name="sources_sort_enabled_first">የነቁዎች መጀመሪያ</string>
-    <string name="sources_sort_enabled_first_description">ያልነቁ ምንጮችን ከመመልከትዎ በፊት ንቁ ምንጮችን ያሳዩ</string>
     <string name="sources_patches_source_disabled_hint">ይህ ምንጭ ተዘግቷል። ፓቾቹ ለማጣቀሻ ተዘርዝረዋል ነገር ግን አልተተገበሩም</string>
     <string name="sources_management_open_in_browser">በብราวዘር ይክፈቱ</string>
     <string name="sources_management_report_issue">ችግርን ሪፖርት አድርግ</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">የሚመከር</string>
     <string name="home_apk_availability_unpatched_label">ያልተስተካከለ</string>
     <string name="home_apk_availability_incompatible_label">ተኳሃኝ ያልሆነ</string>
-    <string name="home_apk_availability_installed_version">በዚህ መሣሪያ ላይ የተጫነው፡ %s</string>
     <string name="home_apk_availability_find">አዎ፣ እንዳገኘው ይርዱኝ</string>
     <string name="home_apk_availability_have">አይ፣ ቀድሞውኑ አለኝ</string>
     <string name="home_apk_helper_download">ረዳት መተግበሪያን ይጠቀሙ</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">የማውረጃ ገጹ እየተፈለገ ነው…</string>
     <string name="home_download_instructions_step1">ከታች ያለውን \'%s\' ቁልፍ ይጫኑ</string>
     <string name="home_download_instructions_step2_part1">የድረ-ገጹን ገጽ ወደ ታች ያውርዱ እና ይጫኑ</string>
+    <string name="home_download_instructions_step2_apkcube">የድረገጹን ገጽ ወደ ታች ያውርዱ፣ ስሪት &lt;b&gt;%s&lt;/b&gt;ን ይምረጡ እና ይጫኑ</string>
     <string name="home_download_instructions_step2_generic">የድረ-ገጹን ገጽ ወደ ታች በማውረድ የዳውንሎድ ቁልፉን ይጫኑ</string>
     <string name="home_download_instructions_step2_variant">የድረ-ገጹን ገጽ ወደ ታች በማውረድ የላይኛውን &lt;b&gt;APK variant&lt;/b&gt; የዳውንሎድ ቁልፍ ይጫኑ</string>
     <string name="home_download_instructions_step2_search">ከሚያምኑት ድረ-ገጽ ላይ የፍለጋ ውጤትን ይክፈቱ</string>
     <string name="home_download_instructions_step2_search_note">Morphe ለእነዚህ ድረ-ገጾች ዋስትና ሊሰጥ አይችልም። ከAPK ፋይል ይልቅ የራሳቸውን መተግበሪያ መደብር የሚያቀርቡትን ይዘለሉ</string>
     <string name="home_download_instructions_step3_search">በዚያ ድረ-ገጽ ላይ፣ አዲሱን ሳይሆን የትግበራውን ስሪት &lt;b&gt;%s&lt;/b&gt; APK ያውርዱ</string>
     <string name="home_download_instructions_step3_search_any">በዚያ ድረ-ገጽ ላይ የትግበራውን APK ያውርዱ። &lt;b&gt;ማንኛውም ስሪት&lt;/b&gt; ሊስተካከል ይችላል</string>
+    <string name="home_download_instructions_step2_github">በ الإصدار &lt;b&gt;%s&lt;/b&gt; ስር ባለው &lt;b&gt;Assets&lt;/b&gt; ውስጥ፣ በ&lt;b&gt;.apk&lt;/b&gt; የሚጨርሰውን ፋይል ይጫኑ</string>
+    <string name="home_download_instructions_step2_github_latest">በአዲሱ الإصدار ስር ባለው &lt;b&gt;Assets&lt;/b&gt; ውስጥ፣ በ&lt;b&gt;.apk&lt;/b&gt; የሚጨርሰውን ፋይል ይጫኑ</string>
+    <string name="home_download_instructions_step2_github_note">በርካታ የAPK ፋይሎች ካሉ፣ በ %s ስም የተሰየመውን ወይም ሁለንተናዊውን ይምረጡ</string>
     <string name="home_download_instructions_download_button_toast">እባክዎ እዚህ ላይ ሳይሆን በድረ-ገጹ ላይ ማውረጃውን ይጫኑ 😊</string>
     <string name="home_download_instructions_download_button_toast_2">በጣም ጥሩ! አሁን ቀጥል የሚለውን ተጫን እና ወደ ድረ-ገጹ ሂድ 👆</string>
     <string name="home_download_instructions_download_button_toast_3">ልምምድ ለብቃት ያበቃል እና አንተም እየደረስክ ነው 💪</string>
@@ -355,8 +338,10 @@
     <string name="expert_mode_enable_all_universal_pending">ለዩኒቨርሳል ፓቾች እንደገና ይጫኑ</string>
     <string name="expert_mode_universal_all_warning_title">ሁሉንም አጠቃላይ ፓቾች ማብራት?</string>
     <string name="expert_mode_universal_all_warning_message">አጠቃላይ ፓቾች አብረው አልተሞከሩም። ሁሉንም በአንድ ጊዜ ማብራት ግጭቶችን፣ የፓች ውድቀትን ወይም መተግበሪያው እንዲዘጋ ሊያደርግ ይችላል</string>
+    <string name="expert_mode_recommended">የሚመከሩ ፓቾች</string>
     <string name="expert_mode_reset_to_default_done">የሚመከሩት ፓቾች ተተግብረዋል</string>
     <string name="expert_mode_selected_count">%2$s ውስጥ %1$s ተመርጧል</string>
+    <string name="expert_mode_saved_selection">የተቀመጠ ምርጫ</string>
     <string name="expert_mode_restore_saved_done">የተቀመጠው ምርጫ ተመልሷል</string>
     <string name="expert_mode_copy_from_bundle_no_patches">በዚህ ባንድል ውስጥ የሚዛመዱ ፓቾች የሉም</string>
     <string name="expert_mode_no_results">ምንም ፓቾች አልተገኙም</string>
@@ -516,6 +501,9 @@
     <string name="batch_queue_pending_subtitle">ለመገምገም እና ለመጀመር ይጫኑ</string>
     <string name="batch_queue_clear_title">ተራውን ላጽዳው?</string>
     <string name="batch_queue_clear_description">ሁሉም መተግበሪያዎች ከተራው ይወገዳሉ</string>
+    <string name="batch_queue_keep_title">ተራው ይቀጥል?</string>
+    <string name="batch_queue_keep_description">በተራ ላይ ያሉ መተግበሪያዎች ቆይተው በኋላ ላይ እንዲጀምሩ በዋናው ስክሪን ላይ ይጠበቃሉ</string>
+    <string name="batch_queue_keep">አቆይ</string>
     <string name="shortcut_repatch_short">እንደገና ፓች አድርግ</string>
     <string name="shortcut_repatch_long">ያረጁ መተግበሪያዎችን እንደገና ፓች አድርግ</string>
     <string name="shortcut_check_updates_short">አዳኝነቶችን ፈትሽ</string>
@@ -917,6 +905,8 @@
     <string name="notification_channel_patch_updates">የፓች ወቅታዊ መረጃዎች</string>
     <string name="notification_channel_patch_updates_description">ስለ አዳዲስ የፓች ስሪቶች የሚላኩ ማሳወቂያዎች</string>
     <string name="notification_channel_patcher_description">Morphe በጀርባ አንድን መተግበሪያ ፓች በሚያደርግበት ጊዜ ይታያል</string>
+    <string name="notification_channel_patching_results">የፓቺንግ ውጤቶች</string>
+    <string name="notification_channel_patching_results_description">ፓቺንግ ሲያበቃ ወይም Morphe ከጀርባ ስራ ላይ እያለ ጭነት ይጠብቅዎት በሚሆንበት ጊዜ</string>
     <string name="notification_channel_mounted_apps">የተጫኑ መተግበሪያዎች</string>
     <string name="notification_channel_mounted_apps_description">ሌላ ስሪት የተጫነውን መተግበሪያ ሲተካ እና ማስተካከያው ከአሁን በኋላ የማይሰራምበት ጊዜ</string>
     <string name="notification_mount_replaced_title">%1$s ከአሁን በኋላ አልተስተካከለም</string>
@@ -1135,7 +1125,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">ኬይስቶሩን ለማስገባት የኬይስቶሩን መለያ መረጃዎች ማስገባት ይኖርብዎታል</string>
     <string name="settings_system_import_keystore_dialog_alias_field">የተጠቃሚ ስም (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">የይለፍ ቃል</string>
-    <string name="settings_system_import_keystore_dialog_format_field">የኪይስቶር ፎርማት</string>
     <string name="settings_system_import_keystore_wrong_credentials">የተሳሳተ የkeystore መታወቂያ</string>
     <string name="settings_system_import_keystore_success">Keystore ተይዟል</string>
     <string name="settings_system_import_keystore_failed">Keystore ለመያዝ አልተቻለም</string>
@@ -1289,6 +1278,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">የቀድሞ ልማት</string>
     <string name="opensource_licenses">የክፍት-ምንጭ ፈቃዶች</string>
     <string name="opensource_licenses_description">Morphe የተገነባባቸው ላይብረሪዎች</string>
+    <string name="opensource_licenses_search">ቤተ-መጻሕፍትን እና ፈቃዶችን ፈልግ</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">አንድ ምርጫ</string>
     <string name="easter_egg_pill_message">ሰማያዊውን ኪኒን ይውሰዱ እና ማስታወቂያዎቹ ባሉበት ይቆያሉ። ቀዩን ይውሰዱ እና የባይትኮዱ ጥልቀት ምን ያህል እንደሆነ ይመልከቱ</string>

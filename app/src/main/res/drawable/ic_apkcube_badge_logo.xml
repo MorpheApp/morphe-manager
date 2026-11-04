@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- APKCube's logo tile, as drawn on its "Download on APKCube" badge. Brand artwork, so never tinted -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+
+    <path
+        android:fillColor="#3B6CE0"
+        android:pathData="M12,0H52A12,12 0 0 1 64,12V52A12,12 0 0 1 52,64H12A12,12 0 0 1 0,52V12A12,12 0 0 1 12,0Z" />
+
+    <!-- translate(32 32) scale(0.92) translate(-32 -28.7), folded into one scale and offset -->
+    <group
+        android:scaleX="0.92"
+        android:scaleY="0.92"
+        android:translateX="2.56"
+        android:translateY="5.596">
+
+        <!-- Antennae -->
+        <path
+            android:pathData="M22.2,5.4L25.8,13M41.8,5.4L38.2,13"
+            android:strokeColor="#FAFBFD"
+            android:strokeWidth="3.4"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+
+        <!-- Head, with the eyes cut out -->
+        <path
+            android:fillColor="#FAFBFD"
+            android:fillType="evenOdd"
+            android:pathData="M13.7,23.2L32,33.7L50.3,23.2C50.3,17.2 41.6,11.6 32,11.6S13.7,17.2 13.7,23.2ZM23.7,22.6a2.1,2.5 0 1,0 4.2,0a2.1,2.5 0 1,0 -4.2,0ZM36.1,22.6a2.1,2.5 0 1,0 4.2,0a2.1,2.5 0 1,0 -4.2,0Z" />
+
+        <path
+            android:pathData="M13.7,23.2L32,33.7L50.3,23.2C50.3,17.2 41.6,11.6 32,11.6S13.7,17.2 13.7,23.2Z"
+            android:strokeColor="#FAFBFD"
+            android:strokeWidth="2.4"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+
+        <!-- Cube faces. The SVG fades each face as a whole (opacity .72 and .48); a vector drawable
+             can only fade fill and stroke apart, which leaves a brighter rim where they overlap,
+             so the white is mixed with the tile's blue up front instead -->
+        <path
+            android:fillColor="#C5D3F5"
+            android:pathData="M13.7,29L29.4,38V53.4L13.7,44.4Z"
+            android:strokeColor="#C5D3F5"
+            android:strokeWidth="2.4"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+
+        <path
+            android:fillColor="#97B1EE"
+            android:pathData="M50.3,29L34.6,38V53.4L50.3,44.4Z"
+            android:strokeColor="#97B1EE"
+            android:strokeWidth="2.4"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+    </group>
+</vector>

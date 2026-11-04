@@ -17,8 +17,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -75,16 +73,9 @@ fun SurfaceCard(
 ) {
     val group = LocalSegmentRegistry.current
     val row = remember { Any() }
-    val shape = if (group == null) {
-        shape?.let { animateCornersAsState(it) } ?: RoundedCornerShape(cornerRadius)
-    } else {
-        // A row settling into its place takes its shape at once, only later moves ease it over
-        val memory = remember { RowPlacement() }
-        val placed = group.isPlaced(row)
-        SideEffect { memory.placed = placed }
-        DisposableEffect(group) { onDispose { group.remove(row) } }
-        animateCornersAsState(group.shape(row), animate = memory.placed)
-    }
+    val shape = group?.rowShape(row, leaving = LocalRowLeaving.current)
+        ?: shape?.let { animateCornersAsState(it) }
+        ?: RoundedCornerShape(cornerRadius)
     val border = when {
         showBorder -> CardBorder.of(borderColor)
         group != null -> CardBorder.of(appAccentBorder(null))
@@ -113,13 +104,12 @@ fun SurfaceCard(
         shadowElevation = 0.dp,
         border = border
     ) {
-        CompositionLocalProvider(LocalSegmentRegistry provides null, content = content)
+        CompositionLocalProvider(
+            LocalSegmentRegistry provides null,
+            LocalRowLeaving provides false,
+            content = content
+        )
     }
-}
-
-/** Whether a row of a [SettingsGroup] had its place by the last composition. */
-private class RowPlacement {
-    var placed = false
 }
 
 /**

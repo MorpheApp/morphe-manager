@@ -14,8 +14,12 @@ import app.morphe.manager.data.room.apps.installed.reinstallsByMount
 import app.morphe.manager.data.room.apps.installed.trackingKey
 import app.morphe.manager.domain.apk.LocalApkSources
 import app.morphe.manager.domain.bundles.AppVersionCatalog
+import app.morphe.manager.domain.bundles.BundledAppTarget
+import app.morphe.manager.domain.bundles.supportedFor
+import app.morphe.manager.domain.bundles.versionStatus
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
+import app.morphe.manager.domain.manager.HomeAppButtonPreferences
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
@@ -154,6 +158,7 @@ class BatchPlanResolver(
     private val fs: Filesystem,
     private val appDataResolver: AppDataResolver,
     private val versionCatalog: AppVersionCatalog,
+    private val homeAppButtonPrefs: HomeAppButtonPreferences,
     private val localApkSources: LocalApkSources,
     private val installerManager: InstallerManager,
     private val rootInstaller: RootInstaller,
@@ -161,13 +166,12 @@ class BatchPlanResolver(
 ) {
     /** Resolves every package in parallel and returns the items in the requested order. */
     suspend fun resolve(targets: List<BatchTarget>): List<BatchPatchItem> = coroutineScope {
-        // Built once for the whole plan: it is derived from every patch of every source, and
-        // resolving it per app would repeat that work for each one of them
-        val recommended = versionCatalog.recommendedVersions.first()
+        // Read once for the whole plan rather than once per app
+        val compatible = versionCatalog.compatibleVersions.first()
         targets
             .map { target ->
                 async {
-                    resolve(target, suggestedVersion = recommended[target.packageName]?.version)
+                    resolve(target, compatibleVersions = compatible[target.packageName].orEmpty())
                 }
             }
             .awaitAll()
@@ -180,8 +184,8 @@ class BatchPlanResolver(
      * @param useMount The install target the selection is resolved against, so patches that declare
      *   themselves unavailable for it are dropped just like the single-app flow does. Null picks
      *   the one the app is installed with, see [mountsByDefault].
-     * @param suggestedVersion Passed in when the whole plan already resolved it, so the version
-     *   catalog is not rebuilt once per app; looked up here otherwise.
+     * @param compatibleVersions Versions the sources cover for the app, passed in when the whole
+     *   plan already read them; looked up here otherwise.
      * @param allowUnverifiedSignature Set once the user has accepted an APK whose signing
      *   certificate no bundle vouches for, so the same file is not questioned twice.
      * @param chosenBundleUid The one source simple mode was told to patch the app from.
@@ -190,7 +194,7 @@ class BatchPlanResolver(
         target: BatchTarget,
         useMount: Boolean? = null,
         attachedFile: File? = null,
-        suggestedVersion: String? = null,
+        compatibleVersions: List<BundledAppTarget>? = null,
         allowIncompatible: Boolean = false,
         allowUnverifiedSignature: Boolean = false,
         preferInstalled: Boolean = false,
@@ -198,7 +202,6 @@ class BatchPlanResolver(
     ): BatchPatchItem = withContext(Dispatchers.IO) {
         val packageName = target.packageName
         val appName = resolveAppName(target)
-        val suggested = suggestedVersion ?: versionCatalog.recommendedVersion(packageName)
         val mount = useMount ?: mountsByDefault(target)
 
         val attached = try {
@@ -223,7 +226,6 @@ class BatchPlanResolver(
             selection = emptyMap(),
             options = emptyMap(),
             bundles = emptyList(),
-            suggestedVersion = suggested,
             state = state,
             useMount = mount,
             message = message
@@ -246,7 +248,6 @@ class BatchPlanResolver(
                     selection = emptyMap(),
                     options = emptyMap(),
                     bundles = emptyList(),
-                    suggestedVersion = suggested,
                     state = BatchItemState.UNVERIFIED_SIGNATURE,
                     useMount = mount
                 )
@@ -258,7 +259,8 @@ class BatchPlanResolver(
             appName = appName,
             source = source,
             useMount = mount,
-            suggested = suggested,
+            compatibleVersions = compatibleVersions
+                ?: versionCatalog.compatibleVersions.first()[packageName].orEmpty(),
             forceIncompatible = allowIncompatible,
             chosenBundleUid = chosenBundleUid
         )
@@ -362,7 +364,7 @@ class BatchPlanResolver(
         appName: String,
         source: BatchApkSource,
         useMount: Boolean,
-        suggested: String?,
+        compatibleVersions: List<BundledAppTarget>,
         forceIncompatible: Boolean,
         chosenBundleUid: Int?
     ): BatchPatchItem {
@@ -397,7 +399,6 @@ class BatchPlanResolver(
             options = emptyMap(),
             bundles = contributing.map { it.toRef() },
             experimentalVersion = support.isExperimental,
-            suggestedVersion = suggested,
             state = when {
                 versionMismatch -> BatchItemState.VERSION_MISMATCH
                 nothingSelected -> BatchItemState.NO_SELECTION
@@ -441,7 +442,12 @@ class BatchPlanResolver(
             options = options,
             bundles = contributing.map { it.toRef() },
             experimentalVersion = support.isExperimental,
-            suggestedVersion = suggested,
+            // An unsupported version already has a warning of its own, which tells the same story
+            newerVersion = if (versionMismatch) null else versionStatus(
+                installedVersion = source.version.takeUnless { it == UNSPECIFIED_VERSION },
+                supported = compatibleVersions.supportedFor(contributing.mapTo(HashSet()) { it.uid }),
+                ignoredVersion = homeAppButtonPrefs.ignoredVersions.value[packageName]
+            )?.takeIf { it.isBehind }?.supportedVersion,
             unreadableOptionPaths = unreadablePaths,
             state = if (versionMismatch) BatchItemState.VERSION_MISMATCH else BatchItemState.READY,
             useMount = useMount

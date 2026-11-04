@@ -62,26 +62,12 @@
     <string name="home_search_apps">Otsi rakendusi</string>
     <string name="list_options_title">Sorteeri ja filtreeri</string>
     <string name="list_options_state_description">Sorteeritud %1$s järgi, filtreeritud %2$s järgi</string>
-    <string name="home_app_filter_all_description">Kõik rakendused avakuval</string>
-    <string name="home_app_filter_patched_description">Rakendused, mille olete Morphe abil paigutanud või salvestanud</string>
-    <string name="home_app_filter_not_patched_description">Rakendused, mille pole Morphe\'s veel paigutatud</string>
-    <string name="home_app_filter_installed_description">Rakendused, mis on praegu sellele seadmele installitud</string>
-    <string name="home_app_filter_uninstalled_description">Morphe\'ga paigutatud rakendused, mida ei ole enam selles seadmes</string>
     <string name="home_app_filter_clones">Kloonid</string>
-    <string name="home_app_filter_clones_description">Rakendused, mis on ehitatud oma paketi nimega ja installitud originaali kõrvale</string>
     <string name="home_app_grouping_none">None</string>
-    <string name="home_app_grouping_all_apps_description">Üks nimekiri kõigiga rakendustega</string>
-    <string name="home_app_grouping_sources_description">Rakendused allikaal, mis neid pakub</string>
-    <string name="home_app_grouping_custom_description">Rakendused teie loodud kategooriates</string>
-    <string name="home_app_sort_manual_description">Vajuta rakendust pikalt ja siis nupule järjekorra muutmiseks</string>
+    <string name="home_app_sort_manual_hint">Vajuta rakendust pikalt ja siis nupule järjekorra muutmiseks</string>
     <string name="home_app_sort_recommended">Soovitatav järjestus</string>
-    <string name="home_app_sort_recommended_description">Esmalt installitud ja kinnitatud rakendused</string>
-    <string name="home_app_sort_name_asc_description">Tähestikuliselt, A-st Z-ni</string>
-    <string name="home_app_sort_name_desc_description">Käänestikuliselt, Z-st A-ni</string>
     <string name="home_app_sort_updates_first">Esmalt paranduseuuendused</string>
-    <string name="home_app_sort_updates_first_description">Esmalt rakendused uuemate parandustegutustega, seejärel soovitatud järjekorras</string>
     <string name="home_app_sort_recently_patched">Viimasena paigandatud</string>
-    <string name="home_app_sort_recently_patched_description">Kõige viimasena paigandatud rakendused esimesena</string>
     <string name="home_no_apps_title">Rakendusi pole saadaval</string>
     <string name="home_no_apps_subtitle">Lisage plastri allikas või aktiveerige olemasolev %s jaotises</string>
     <string name="home_no_apps_search_subtitle">Rakendusi, mis vastavad otsingule \"%s\", ei leitud</string>
@@ -91,7 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Sellega ei ühi midagi: %s</string>
     <string name="home_category_add">Lisa kategooria</string>
     <string name="home_category_all_apps">Kõik rakendused</string>
-    <string name="home_category_custom">Kohandatud</string>
+    <string name="home_app_grouping_categories">Kategooriad</string>
     <string name="home_category_uncategorized">Kategooria määramata</string>
     <string name="home_category_new_title">Uus kategooria</string>
     <string name="home_category_rename_title">Nimele kategooria</string>
@@ -168,17 +154,11 @@
     <string name="sources_management_title">Patchide allikad</string>
     <string name="sources_search">Otsi allikaid ja parandustegutusi</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
-    <string name="sources_filter_all_description">Iga allikas</string>
-    <string name="sources_filter_enabled_description">Allikad, kust paigutused võetakse</string>
-    <string name="sources_filter_disabled_description">Väljalülitatud allikad</string>
     <string name="sources_filter_issues">Vajab tähelepanu</string>
-    <string name="sources_filter_issues_description">Allikad, mis on blokeeritud, mille laadimine ebaõnnestus või mis vajavad uuemas Morphe versiooni</string>
     <string name="sources_sort_manual">Käsijärjestus</string>
     <string name="sources_sort_manual_hint">Kordustamiseks hoidke allikat kauem vajutatud</string>
     <string name="sources_sort_last_updated">Viimasekordne uuendus</string>
-    <string name="sources_sort_last_updated_description">Esmalt uusimad allikauuendused</string>
     <string name="sources_sort_enabled_first">Esmalt aktiveeritud</string>
-    <string name="sources_sort_enabled_first_description">Kuva aktiivsed allikad enne deaktivitud allikaid</string>
     <string name="sources_patches_source_disabled_hint">See allikas on leviotatud. Selle parandustegutused on loetletud viiteks ja neid ei rakendata</string>
     <string name="sources_management_open_in_browser">Ava brauseris</string>
     <string name="sources_management_report_issue">Teata probleemist</string>
@@ -271,7 +251,6 @@
     <string name="home_apk_availability_recommended_label">Soovitatav</string>
     <string name="home_apk_availability_unpatched_label">Patchimata</string>
     <string name="home_apk_availability_incompatible_label">Ühildamatu</string>
-    <string name="home_apk_availability_installed_version">Sellele seadmel on installitud: %s</string>
     <string name="home_apk_availability_find">Jah, converged abi selle leidmisel</string>
     <string name="home_apk_availability_have">Ei, see on mul juba olemas</string>
     <string name="home_apk_helper_download">Kasuta abiärakku</string>
@@ -305,12 +284,16 @@
     <string name="home_download_instructions_finding">Otsitakse allalaadimislehte…</string>
     <string name="home_download_instructions_step1">Vajuta allpool nuppu \'%s\'</string>
     <string name="home_download_instructions_step2_part1">Kerige veebilehel all ja vajutage</string>
+    <string name="home_download_instructions_step2_apkcube">Kerki veebilehel alla, vali versioon &lt;b&gt;%s&lt;/b&gt; ja vajuta</string>
     <string name="home_download_instructions_step2_generic">Kerige veebilehte all ja vajutage selle allalaadimisnuppu</string>
     <string name="home_download_instructions_step2_variant">Kerige veebilehte all ja vajutage esimese &lt;b&gt;APK variandi&lt;/b&gt; allalaadimisnuppu</string>
     <string name="home_download_instructions_step2_search">Avage usaldatavalt veebilehnalt leitud otsingutulemus</string>
     <string name="home_download_instructions_step2_search_note">Morphe ei saa nende veebilehtede eest garanteerida. Jäätke need, mis pakuvad APK faili asemel oma rakenduspoodi</string>
     <string name="home_download_instructions_step3_search">Laadi sellest veebilehelt alla versiooni &lt;b&gt;%s&lt;/b&gt; APK, mitte kõige uuem versioon</string>
     <string name="home_download_instructions_step3_search_any">Laadi sellest veebilehelt alla rakenduse APK. Võib patchida &lt;b&gt;suigupäeva versiooni&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github">Väljaande &lt;b&gt;%s&lt;/b&gt; jaotises &lt;b&gt;Assets&lt;/b&gt; vali fail, mille lõpp on &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">Uuimaima väljaande jaotises &lt;b&gt;Assets&lt;/b&gt; vali fail, mille lõpp on &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Kui APK-faile on mitu, vali see, mille nimi vastab %s, või universaalne fail</string>
     <string name="home_download_instructions_download_button_toast">Vajutage allalaadimiseks veebilehel, mitte siin 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Super! Nüüd klõpsake \"jätka\" ja minge veebilehele 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Harjutamine annab tulemusi ja te ed Nestele 💪</string>
@@ -355,8 +338,10 @@ Valige, kust selle APK võtta"</string>
     <string name="expert_mode_enable_all_universal_pending">Universaalsete paigutuste jaoks puudutage uuesti</string>
     <string name="expert_mode_universal_all_warning_title">Kas aktiveerida kõik universaalsed lapid?</string>
     <string name="expert_mode_universal_all_warning_message">Universaalseid lappe ei ole koos testitud. Kõigi nende korraga aktiveerimine võib põhjustada konflikte, lappimise ebaõnnestumist või rakenduse kokkujärgemist</string>
+    <string name="expert_mode_recommended">Soovitatud paigad</string>
     <string name="expert_mode_reset_to_default_done">Soovitatud paigad on rakendatud</string>
     <string name="expert_mode_selected_count">Valitud %1$s / %2$s</string>
+    <string name="expert_mode_saved_selection">Salvestatud valik</string>
     <string name="expert_mode_restore_saved_done">Salvestatud valik on taastatud</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Selle paketist ei leidu sobivaid plaastreid</string>
     <string name="expert_mode_no_results">Plaastreid ei leitud</string>
@@ -516,6 +501,9 @@ Parimate tulemuste saamiseks soovitab see rakendus kasutada &lt;b&gt;täielikku 
     <string name="batch_queue_pending_subtitle">Puuduta ülevaatamiseks ja alustamiseks</string>
     <string name="batch_queue_clear_title">Tõhjutada järjekord?</string>
     <string name="batch_queue_clear_description">Kõik rakendused eemaldatakse järjekorrast</string>
+    <string name="batch_queue_keep_title">Kas jätta järjekord?</string>
+    <string name="batch_queue_keep_description">Järjekorda ootavad rakendused jäävad avatud ekraanile hilisemaks käivitamiseks</string>
+    <string name="batch_queue_keep">Jätka</string>
     <string name="shortcut_repatch_short">Paiguta uuesti</string>
     <string name="shortcut_repatch_long">Paiguta aegunud rakendused uuesti</string>
     <string name="shortcut_check_updates_short">Kontrolli värskendusi</string>
@@ -917,6 +905,8 @@ Patchid ei ole sellest mõjutatud: lubage eeluletamise patchid iga allika jaoks 
     <string name="notification_channel_patch_updates">Paiganduste uuendused</string>
     <string name="notification_channel_patch_updates_description">Teavitused uute paranduste väljalaskmise kohta</string>
     <string name="notification_channel_patcher_description">Näidatakse, kui Morphe paigutab rakendust taustal</string>
+    <string name="notification_channel_patching_results">Paigutamise tulemused</string>
+    <string name="notification_channel_patching_results_description">Kui paigutamine lõppeb või installimine ootab teid, kui Morphe on taustal</string>
     <string name="notification_channel_mounted_apps">Paigaldatud rakendused</string>
     <string name="notification_channel_mounted_apps_description">Kui teine versioon asendab paigaldatud rakenduse ja selle paiga ei kehti enam</string>
     <string name="notification_mount_replaced_title">%1$s ei ole enam paigutatud</string>
@@ -1135,7 +1125,6 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="settings_system_import_keystore_dialog_description">Selle importimiseks peate sisestama keystore\'i tõenduse</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Kasutajanimi (alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Parool</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Keystore\'i vormaat</string>
     <string name="settings_system_import_keystore_wrong_credentials">Vale keystore\'i tõendusandmed</string>
     <string name="settings_system_import_keystore_success">Keystore imporditud</string>
     <string name="settings_system_import_keystore_failed">Keystore\'i importimine ebaõnnestus</string>
@@ -1289,6 +1278,7 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="credits_prior_development">Varasem arendus</string>
     <string name="opensource_licenses">Avatud lähtekoodi litsentsid</string>
     <string name="opensource_licenses_description">Raamatukogud, millele Morphe on ehitatud</string>
+    <string name="opensource_licenses_search">Otsi raamatukogusid ja litsentse</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Valik</string>
     <string name="easter_egg_pill_message">Võta sinine pill ja reklaamid jäävad täpselt sinna, kus nad on. Võta punane ja näe, kui sügavale bytecode ulatub</string>

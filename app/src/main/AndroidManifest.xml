@@ -25,6 +25,11 @@
          See https://github.com/MorpheApp/morphe-manager/issues/1117 -->
     <uses-permission android:name="af.shizuku.plus.permission.API_V23" />
 
+    <!-- Lets Shevery hand Morphe its binder, which since 14.6 reaches apps declaring only the
+         original permission solely through its optional compatibility stub.
+         See https://github.com/MorpheApp/morphe-manager/issues/1338 -->
+    <uses-permission android:name="com.hamondev.shevery.permission.PRIVILEGED_API" />
+
     <!-- Foreground Services -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
@@ -157,6 +162,16 @@
                 android:value="patching" />
         </service>
 
+        <!-- Keeps the app in the foreground for patching and installing once it leaves the screen -->
+        <service
+            android:name="app.morphe.manager.service.ForegroundHoldService"
+            android:foregroundServiceType="specialUse"
+            android:exported="false">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="patching" />
+        </service>
+
         <!-- Hosts the run, in a process of its own that ends with it -->
         <service
             android:name="app.morphe.manager.patcher.runtime.PatcherService"
@@ -187,7 +202,7 @@
 
         <!-- Firebase Cloud Messaging - receives push notifications bypassing Doze mode -->
         <service
-            android:name="app.morphe.manager.service.MorpheFcmService"
+            android:name="app.morphe.manager.service.FcmService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
