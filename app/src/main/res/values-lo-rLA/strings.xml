@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">ກຳລັງຊອກຫາໜ້າດາວໂຫຼດ…</string>
     <string name="home_download_instructions_step1">ກົດປຸ່ມ \'%s\' ດ້ານລຸ່ມ</string>
     <string name="home_download_instructions_step2_part1">ເລື່ອນລົງລຸ່ມຂອງໜ້າເວັບແລ້ວກົດ</string>
+    <string name="home_download_instructions_step2_apkcube">ເລື່ອນລົງລຸ່ມໃນໜ້າເວັບ, ເລືອກເວີຊັນ &lt;b&gt;%s&lt;/b&gt; ແລະ ກົດ</string>
     <string name="home_download_instructions_step2_generic">ເລື່ອນລົງໃນໜ້າເວັບໄຊທ໌ ແລະ ກົດປຸ່ມດາວໂຫຼດ</string>
     <string name="home_download_instructions_step2_variant">ເລື່ອນລົງໃນໜ້າເວັບໄຊທ໌ ແລະ ກົດປຸ່ມດາວໂຫຼດຂອງ &lt;b&gt;APK variant&lt;/b&gt; ອັນເທິງສຸດ</string>
     <string name="home_download_instructions_step2_search">ເປີດຜົນການຄົ້ນຫາຈາກເວັບໄຊທ໌ທີ່ທ່ານໄວ້ວາງໃຈ</string>

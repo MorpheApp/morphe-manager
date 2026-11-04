@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">Meklēju lejupielādes lapu…</string>
     <string name="home_download_instructions_step1">Nospiediet tālāk esošo pogu \'%s\'</string>
     <string name="home_download_instructions_step2_part1">Nokrītojieties lejup lapā un nospiediet</string>
+    <string name="home_download_instructions_step2_apkcube">Nokrītojieties lejup mājaslapā, izvēlieties versiju &lt;b&gt;%s&lt;/b&gt; un nospiediet</string>
     <string name="home_download_instructions_step2_generic">Noskrullējiet uznedeņu uz leju un nospiediet tās lejupielādes pogu</string>
     <string name="home_download_instructions_step2_variant">Noskrullējiet uznedeņu uz leju un nospiediet augstākā &lt;b&gt;APK varianta&lt;/b&gt; lejupielādes pogu</string>
     <string name="home_download_instructions_step2_search">Atveriet meklēšanas rezultātu no vietnes, kurai uzticaties</string>

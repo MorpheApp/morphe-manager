@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">Ag aimsiú an leathanaigh íoslódála…</string>
     <string name="home_download_instructions_step1">Brúigh an cnaipe \'%s\' thíos</string>
     <string name="home_download_instructions_step2_part1">Scrollaigh síos an leathanach gréasáin agus brúigh</string>
+    <string name="home_download_instructions_step2_apkcube">Scoláil síos an leathanach gréasáin, roghnaigh leagan &lt;b&gt;%s&lt;/b&gt; agus brúigh</string>
     <string name="home_download_instructions_step2_generic">Scrollaigh síos an leathanach gréasáin agus brúigh a chnaipe íoslódála</string>
     <string name="home_download_instructions_step2_variant">Scrollaigh síos an leathanach gréasáin agus brúigh an cnaipe íoslódála don &lt;b&gt;leagan APK&lt;/b&gt; is fearr</string>
     <string name="home_download_instructions_step2_search">Oscail toradh cuardaigh ó shuíomh gréasáin a bhfuil muinín agat as</string>

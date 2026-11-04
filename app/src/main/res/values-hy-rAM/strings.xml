@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">Փնտրել ներբեռնման էջը…</string>
     <string name="home_download_instructions_step1">Սեղմեք ստորև գտնվող \'%s\' կոճակը</string>
     <string name="home_download_instructions_step2_part1">Գլխվեք էջի ներքևի մասին և սեղմեք</string>
+    <string name="home_download_instructions_step2_apkcube">Թերթեք վեբ-էջը ներքև, ընտրեք <b>%s</b> տարբերակը և սեղմեք</string>
     <string name="home_download_instructions_step2_generic">Թերթեք վեբ-էջը ներքև և սեղմեք ներբեռնման կոճակը</string>
     <string name="home_download_instructions_step2_variant">Թերթեք վեբ-էջը ներքև և սեղմեք ամենավերևի &lt;b&gt;APK տարբերակի&lt;/b&gt; ներբեռնման կոճակը</string>
     <string name="home_download_instructions_step2_search">Բացեք որոնման արդյունքը վստահելի վեբ-կայքից</string>

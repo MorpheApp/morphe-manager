@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">Inatafuta ukurasa wa kupakulia…</string>
     <string name="home_download_instructions_step1">Bonyeza kitufe cha \'%s\' hapo chini</string>
     <string name="home_download_instructions_step2_part1">Shuka chini kwenye ukurasa wa wavuti na ubonyeze</string>
+    <string name="home_download_instructions_step2_apkcube">Shusha ukurasa wa wavuti, chagua toleo &lt;b&gt;%s&lt;/b&gt; na ubonyeze</string>
     <string name="home_download_instructions_step2_generic">Shusha ukurasa wa wavuti na ubonyeze kitufe chake cha kupakua</string>
     <string name="home_download_instructions_step2_variant">Shusha ukurasa wa wavuti na ubonyeze kitufe cha kupakua cha &lt;b&gt;toleo la APK&lt;/b&gt; la juu</string>
     <string name="home_download_instructions_step2_search">Fungua matokeo ya utafutaji kutoka tovuti unayoiamini</string>

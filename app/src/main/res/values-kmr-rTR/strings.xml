@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">Rûpela daxistinê tê dîtin…</string>
     <string name="home_download_instructions_step1">Butona \'%s\' ya jêr lê deynin.</string>
     <string name="home_download_instructions_step2_part1">Li ser rûbera malperê biqewime û bikşîne</string>
+    <string name="home_download_instructions_step2_apkcube">Rûpelê xwarê bikişîne, versiyona &lt;b&gt;%s&lt;/b&gt; hilbijêre û bitikîne</string>
     <string name="home_download_instructions_step2_generic">Rûpela webê berjêr bigerînin û pêlî bişkoka daxistinê ya wê bikin</string>
     <string name="home_download_instructions_step2_variant">Rûpela webê berjêr bigerînin û pêlî bişkoka daxistinê ya <b>guhertoya APK</b> ya jorîn bikin</string>
     <string name="home_download_instructions_step2_search">Netîceyek lêgerînê ji malpereke ku hûn pê bawer in vekin</string>

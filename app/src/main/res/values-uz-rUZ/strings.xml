@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">Yuklab olish sahifasi qidirilmoqda…</string>
     <string name="home_download_instructions_step1">\'%s\' tugmasini bosing</string>
     <string name="home_download_instructions_step2_part1">Veb-sahifada pastga aylantiring va tugmachani bosing</string>
+    <string name="home_download_instructions_step2_apkcube">Veb-sahifani pastga aylantiring, &lt;b&gt;%s&lt;/b&gt; versiyasini tanlang va bosing</string>
     <string name="home_download_instructions_step2_generic">Veb-sahifani pastga aylantiring va uning yuklab olish tugmasini bosing</string>
     <string name="home_download_instructions_step2_variant">Veb-sahifani pastga aylantiring va eng yuqoridagi &lt;b&gt;APK variantining&lt;/b&gt; yuklab olish tugmasini bosing</string>
     <string name="home_download_instructions_step2_search">O\'zingiz ishonadigan veb-saytdan qidiruv natijasini oching</string>

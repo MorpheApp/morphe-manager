@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">डाउनलोड पेज ढूंढा जा रहा है…</string>
     <string name="home_download_instructions_step1">नीचे दिया गया \'%s\' बटन दबाएं</string>
     <string name="home_download_instructions_step2_part1">वेबपेज पर नीचे की ओर स्क्रोल करें और दबाएं</string>
+    <string name="home_download_instructions_step2_apkcube">वेबपेज को नीचे स्क्रॉल करें, वर्शन &lt;b&gt;%s&lt;/b&gt; चुनें और दबाएं</string>
     <string name="home_download_instructions_step2_generic">वेबपेज पर नीचे की ओर स्क्रोल करें और उसका डाउनलोड बटन दबाएं</string>
     <string name="home_download_instructions_step2_variant">वेबपेज पर नीचे की ओर स्क्रोल करें और सबसे ऊपर वाले &lt;b&gt;APK वेरिएंट&lt;/b&gt; का डाउनलोड बटन दबाएं</string>
     <string name="home_download_instructions_step2_search">आप जिस वेबसाइट पर भरोसा करते हैं, उसका एक खोज परिणाम खोलें</string>

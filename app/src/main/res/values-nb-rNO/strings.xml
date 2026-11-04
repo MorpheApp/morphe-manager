@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">Finner nedlastingssiden…</string>
     <string name="home_download_instructions_step1">Trykk på \'%s\'-knappen nedenfor</string>
     <string name="home_download_instructions_step2_part1">Rull nedover nettsiden og trykk på</string>
+    <string name="home_download_instructions_step2_apkcube">Rull ned på nettsiden, velg versjon &lt;b&gt;%s&lt;/b&gt; og trykk</string>
     <string name="home_download_instructions_step2_generic">Rull nedover på nettsiden og trykk på nedlastingsknappen</string>
     <string name="home_download_instructions_step2_variant">Rull nedover på nettsiden og trykk på nedlastingsknappen til den øverste &lt;b&gt;APK-varianten&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_search">Åpne et søkeresultat fra et nettsted du stoler på</string>

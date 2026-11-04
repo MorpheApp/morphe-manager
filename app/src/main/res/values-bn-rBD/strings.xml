@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">ডাউনলোড পেজ খোঁজা হচ্ছে…</string>
     <string name="home_download_instructions_step1">নিচের \'%s\' বোতামটি চাপুন</string>
     <string name="home_download_instructions_step2_part1">ওয়েবপেজটি স্ক্রোল করুন এবং চাপুন</string>
+    <string name="home_download_instructions_step2_apkcube">ওয়েবপেজটি স্ক্রল করে নিচে নামুন, ভার্সন &lt;b&gt;%s&lt;/b&gt; বেছে নিন এবং প্রেস করুন</string>
     <string name="home_download_instructions_step2_generic">ওয়েবপেজে নিচে স্ক্রল করুন এবং এর ডাউনলোড বাটনটি চাপুন</string>
     <string name="home_download_instructions_step2_variant">ওয়েবপেজে নিচে স্ক্রল করুন এবং উপরের <b>APK ভ্যারিয়েন্টের</b> ডাউনলোড বাটনটি চাপুন</string>
     <string name="home_download_instructions_step2_search">আপনি বিশ্বাস করেন এমন একটি ওয়েবসাইট থেকে একটি অনুসন্ধান ফলাফল খুলুন</string>

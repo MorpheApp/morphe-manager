@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">Se caută pagina de descărcare…</string>
     <string name="home_download_instructions_step1">Apasă pe butonul \'%s\' de mai jos</string>
     <string name="home_download_instructions_step2_part1">Derulează în josul paginii și apasă</string>
+    <string name="home_download_instructions_step2_apkcube">Derulați în jos pagina web, selectați versiunea &lt;b&gt;%s&lt;/b&gt; și apăsați</string>
     <string name="home_download_instructions_step2_generic">Derulează în josul paginii web și apasă butonul ei de descărcare</string>
     <string name="home_download_instructions_step2_variant">Derulează în josul paginii web și apasă butonul de descărcare al &lt;b&gt;variantei APK&lt;/b&gt; din partea de sus</string>
     <string name="home_download_instructions_step2_search">Deschide un rezultat de căutare de pe un site web de încredere</string>

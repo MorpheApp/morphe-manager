@@ -285,6 +285,7 @@ Diese App aus der vorhandenen Quelle hinzufügen?</string>
     <string name="home_download_instructions_finding">Suche nach der Download-Seite …</string>
     <string name="home_download_instructions_step1">Drücken Sie die Taste \'%s\' unten </string>
     <string name="home_download_instructions_step2_part1">Scrollen Sie auf der Webseite nach unten und drücken Sie </string>
+    <string name="home_download_instructions_step2_apkcube">Scrollen Sie auf der Webseite nach unten, wählen Sie die Version &lt;b&gt;%s&lt;/b&gt; aus und drücken Sie</string>
     <string name="home_download_instructions_step2_generic">Scrolle auf der Webseite nach unten und drücke auf die Download-Schaltfläche</string>
     <string name="home_download_instructions_step2_variant">Scrolle auf der Webseite nach unten und drücke auf die Download-Schaltfläche der oberen &lt;b&gt;APK-Variante&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_search">Öffne ein Suchergebnis von einer Website, der du vertraust</string>

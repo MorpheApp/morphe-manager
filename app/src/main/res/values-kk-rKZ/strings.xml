@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">Жүктеу беті ізделіп жатыр…</string>
     <string name="home_download_instructions_step1">Төмендегі \'%s\' түймесін басыңыз</string>
     <string name="home_download_instructions_step2_part1">Веб-бетті төмен айналдырып, басыңыз</string>
+    <string name="home_download_instructions_step2_apkcube">Веб-бетті төмен қарай айналдырып, &lt;b&gt;%s&lt;/b&gt; нұсқасын таңдаңыз және басыңыз</string>
     <string name="home_download_instructions_step2_generic">Веб-бетті төмен қарай айналдырып, жүктеу түймесін басыңыз</string>
     <string name="home_download_instructions_step2_variant">Веб-бетті төмен қарай айналдырып, ең жоғарғы &lt;b&gt;APK нұсқасының&lt;/b&gt; жүктеу түймесін басыңыз</string>
     <string name="home_download_instructions_step2_search">Сенімді веб-сайттан іздеу нәтижесін ашыңыз</string>

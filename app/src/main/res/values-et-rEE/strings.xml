@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">Otsitakse allalaadimislehte…</string>
     <string name="home_download_instructions_step1">Vajuta allpool nuppu \'%s\'</string>
     <string name="home_download_instructions_step2_part1">Kerige veebilehel all ja vajutage</string>
+    <string name="home_download_instructions_step2_apkcube">Kerki veebilehel alla, vali versioon &lt;b&gt;%s&lt;/b&gt; ja vajuta</string>
     <string name="home_download_instructions_step2_generic">Kerige veebilehte all ja vajutage selle allalaadimisnuppu</string>
     <string name="home_download_instructions_step2_variant">Kerige veebilehte all ja vajutage esimese &lt;b&gt;APK variandi&lt;/b&gt; allalaadimisnuppu</string>
     <string name="home_download_instructions_step2_search">Avage usaldatavalt veebilehnalt leitud otsingutulemus</string>

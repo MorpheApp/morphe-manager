@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">Жүктөө баракчасы изделип жатат…</string>
     <string name="home_download_instructions_step1">Төмөндөгү \'%s\' баскычын басыңыз</string>
     <string name="home_download_instructions_step2_part1">Веб-баракчаны төмөн түшүрүп, басыңыз</string>
+    <string name="home_download_instructions_step2_apkcube">Веб-баракчаны төмөн карай жылдырыңыз, &lt;b&gt;%s&lt;/b&gt; версиясын тандаңыз жана басыңыз</string>
     <string name="home_download_instructions_step2_generic">Веб-баракчаны төмөн жылдырып, жүктөө баскычын басыңыз</string>
     <string name="home_download_instructions_step2_variant">Веб-баракчаны төмөн жылдырып, эң жогорку &lt;b&gt;APK вариантынын&lt;/b&gt; жүктөө баскычын басыңыз</string>
     <string name="home_download_instructions_step2_search">Ишенген веб-сайтыңыздан издөө жыйынтыгын ачыңыз</string>

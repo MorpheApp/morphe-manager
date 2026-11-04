@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">Се бара страницата за преземање…</string>
     <string name="home_download_instructions_step1">Притиснете го копчето „%s“ подолу</string>
     <string name="home_download_instructions_step2_part1">Скролувајте надолу на веб-страницата и притиснете</string>
+    <string name="home_download_instructions_step2_apkcube">Скролајте надолу низ вебстраницата, изберете верзија &lt;b&gt;%s&lt;/b&gt; и притиснете</string>
     <string name="home_download_instructions_step2_generic">Скролајте надолу низ веб-страницата и притиснете го копчето за преземање</string>
     <string name="home_download_instructions_step2_variant">Скролајте надолу низ веб-страницата и притиснете го копчето за преземање на најгорната &lt;b&gt;APK варијанта&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_search">Отворете резултат од пребарување од веб-страница на која верувате</string>

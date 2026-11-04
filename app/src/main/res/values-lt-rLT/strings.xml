@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">Ieškoma atsisiuntimo puslapio…</string>
     <string name="home_download_instructions_step1">Paspauskite \'%s\' mygtuką apačioje</string>
     <string name="home_download_instructions_step2_part1">Slinkite žemyn tinklalapyje ir paspauskite</string>
+    <string name="home_download_instructions_step2_apkcube">Slinkite žemyn svetainėje, pasirinkite versiją &lt;b&gt;%s&lt;/b&gt; ir paspauskite</string>
     <string name="home_download_instructions_step2_generic">Slinkite tinklalapiu žemyn ir paspauskite jo atsisiuntimo mygtuką</string>
     <string name="home_download_instructions_step2_variant">Slinkite tinklalapiu žemyn ir paspauskite viršutinės &lt;b&gt;APK variantos&lt;/b&gt; atsisiuntimo mygtuką</string>
     <string name="home_download_instructions_step2_search">Atidarykite paieškos rezultatą iš jūsų pasitikimo svetainės</string>

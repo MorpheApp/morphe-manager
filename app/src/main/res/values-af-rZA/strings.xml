@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">Besig om die aflaaibladsy te vind…</string>
     <string name="home_download_instructions_step1">Druk op die \'%s\' knoppie hieronder</string>
     <string name="home_download_instructions_step2_part1">Rol af op die webblad en druk</string>
+    <string name="home_download_instructions_step2_apkcube">Blaai af op die webblad, kies weergawe &lt;b&gt;%s&lt;/b&gt; en druk</string>
     <string name="home_download_instructions_step2_generic">Rol af op die webblad en druk op sy aflaaiknoppie</string>
     <string name="home_download_instructions_step2_variant">Rol af op die webblad en druk op die aflaaiknoppie van die boonste &lt;b&gt;APK-variant&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_search">Maak ’n soekresultaat oop van ’n webwerf wat jy vertrou</string>

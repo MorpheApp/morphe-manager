@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">正在查找下载页面…</string>
     <string name="home_download_instructions_step1">请按下下面的“%s”按钮。</string>
     <string name="home_download_instructions_step2_part1">向下滚动网页并按</string>
+    <string name="home_download_instructions_step2_apkcube">向下滚动网页，选择版本 &lt;b&gt;%s&lt;/b&gt; 并点击</string>
     <string name="home_download_instructions_step2_generic">向下滚动网页并点击其下载按钮</string>
     <string name="home_download_instructions_step2_variant">向下滚动网页，然后点击顶部 &lt;b&gt;APK 变体&lt;/b&gt; 的下载按钮</string>
     <string name="home_download_instructions_step2_search">打开来自你信任的网站的搜索结果</string>

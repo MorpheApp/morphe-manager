@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">Mencari halaman unduh…</string>
     <string name="home_download_instructions_step1">Tekan tombol \'%s\' di bawah ini</string>
     <string name="home_download_instructions_step2_part1">Geser halaman web ke bawah dan tekan</string>
+    <string name="home_download_instructions_step2_apkcube">Gulir halaman web ke bawah, pilih versi &lt;b&gt;%s&lt;/b&gt; dan tekan</string>
     <string name="home_download_instructions_step2_generic">Geser halaman web ke bawah dan tekan tombol unduhnya</string>
     <string name="home_download_instructions_step2_variant">Geser halaman web ke bawah dan tekan tombol unduh dari &lt;b&gt;varian APK&lt;/b&gt; teratas</string>
     <string name="home_download_instructions_step2_search">Buka hasil penelusuran dari situs web yang Anda percayai</string>

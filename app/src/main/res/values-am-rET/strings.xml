@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">የማውረጃ ገጹ እየተፈለገ ነው…</string>
     <string name="home_download_instructions_step1">ከታች ያለውን \'%s\' ቁልፍ ይጫኑ</string>
     <string name="home_download_instructions_step2_part1">የድረ-ገጹን ገጽ ወደ ታች ያውርዱ እና ይጫኑ</string>
+    <string name="home_download_instructions_step2_apkcube">የድረገጹን ገጽ ወደ ታች ያውርዱ፣ ስሪት &lt;b&gt;%s&lt;/b&gt;ን ይምረጡ እና ይጫኑ</string>
     <string name="home_download_instructions_step2_generic">የድረ-ገጹን ገጽ ወደ ታች በማውረድ የዳውንሎድ ቁልፉን ይጫኑ</string>
     <string name="home_download_instructions_step2_variant">የድረ-ገጹን ገጽ ወደ ታች በማውረድ የላይኛውን &lt;b&gt;APK variant&lt;/b&gt; የዳውንሎድ ቁልፍ ይጫኑ</string>
     <string name="home_download_instructions_step2_search">ከሚያምኑት ድረ-ገጽ ላይ የፍለጋ ውጤትን ይክፈቱ</string>

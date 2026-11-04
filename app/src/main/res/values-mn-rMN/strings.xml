@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">Татаж авах хуудсыг хайж байна…</string>
     <string name="home_download_instructions_step1">Доорх \'%s\' товчийг дарна уу</string>
     <string name="home_download_instructions_step2_part1">Вэб хуудсыг доош гүйлгэж, дарана уу</string>
+    <string name="home_download_instructions_step2_apkcube">Веб хуудсыг доошоо гүйлгэж, &lt;b&gt;%s&lt;/b&gt; хувилбарыг сонгоод дарана уу</string>
     <string name="home_download_instructions_step2_generic">Вэб хуудсыг доош гүйлгэж, татаж авах товчийг дарна уу</string>
     <string name="home_download_instructions_step2_variant">Вэб хуудсыг доош гүйлгэж, хамгийн дээрх &lt;b&gt;APK хувилбарын&lt;/b&gt; татаж авах товчийг дарна уу</string>
     <string name="home_download_instructions_step2_search">Өөрийн итгэдэг вэбсайтаас хайлтын үр дүнг нээнэ үү</string>

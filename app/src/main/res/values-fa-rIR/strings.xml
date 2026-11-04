@@ -284,6 +284,7 @@
     <string name="home_download_instructions_finding">در حال یافتن صفحهٔ دانلود…</string>
     <string name="home_download_instructions_step1">دکمهٔ «%s» را در پایین بزنید</string>
     <string name="home_download_instructions_step2_part1">به آخر صفحه برو و بزن</string>
+    <string name="home_download_instructions_step2_apkcube">صفحه وب را به پایین اسکرول کنید، نسخه &lt;b&gt;%s&lt;/b&gt; را انتخاب کرده و فشار دهید</string>
     <string name="home_download_instructions_step2_generic">صفحهٔ وب را به پایین پیمایش کنید و دکمهٔ دانلود آن را بزنید</string>
     <string name="home_download_instructions_step2_variant">صفحهٔ وب را به پایین پیمایش کنید و دکمهٔ &lt;b&gt;گونهٔ APK&lt;/b&gt; بالایی را بزنید</string>
     <string name="home_download_instructions_step2_search">یکی از نتایج جست‌وجو را از وب‌سایتی که به آن اعتماد دارید باز کنید</string>

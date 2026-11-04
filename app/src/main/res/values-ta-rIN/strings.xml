@@ -48,6 +48,7 @@
     <!-- Home Screen - Dialog 1: APK Availability -->
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
     <!-- Home Screen - Dialog 2: Download Instructions -->
+    <string name="home_download_instructions_step2_apkcube">இணையப் பக்கத்தை கீழே நகர்த்தி, பதிப்பு &lt;b&gt;%s&lt;/b&gt;-ஐத் தேர்ந்தெடுத்து அழுத்தவும்</string>
     <string name="home_download_instructions_step2_github">வெளியீடு &lt;b&gt;%s&lt;/b&gt;-ன் &lt;b&gt;Assets&lt;/b&gt; பிரிவில், &lt;b&gt;.apk&lt;/b&gt; என முடியும் கோப்பை அழுத்தவும்</string>
     <string name="home_download_instructions_step2_github_latest">புதிய வெளியீட்டின் &lt;b&gt;Assets&lt;/b&gt; பிரிவில், &lt;b&gt;.apk&lt;/b&gt; என முடியும் கோப்பை அழுத்தவும்</string>
     <string name="home_download_instructions_step2_github_note">பல APK கோப்புகள் இருந்தால், %s எனப் பெயரிடப்பட்ட அல்லது பொதுவான கோப்பைத் தேர்ந்தெடுக்கவும்</string>
