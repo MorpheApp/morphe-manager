@@ -440,7 +440,9 @@ class BatchPatcherViewModel(
         )
         viewModelScope.launch {
             val resolved = withContext(Dispatchers.IO) {
-                downloadUrlResolver.resolve(item.packageName, version)
+                val uids = item.chosenBundleUid?.let(::listOf) ?: item.bundles.map { it.uid }
+                val patchSources = patchBundleRepository.patchSourceHeaders(item.packageName, uids)
+                downloadUrlResolver.resolve(item.packageName, version, patchSources)
             }
             // A search reopened meanwhile, for another version or a clone, waits on its own answer
             apkSearch = apkSearch?.takeIf { it.item.id == item.id && it.version == version }?.copy(url = resolved)

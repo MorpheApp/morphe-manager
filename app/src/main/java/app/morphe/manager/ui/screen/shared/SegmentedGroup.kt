@@ -9,12 +9,15 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CornerBasedShape
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonGroupDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onPlaced
+import androidx.compose.ui.unit.Density
 
 /** Gap between the rows of a segmented list, the one a connected group of buttons keeps. */
 val SegmentGap = ButtonGroupDefaults.ConnectedSpaceBetween
@@ -79,6 +82,37 @@ fun SettingsGroup(
 internal val LocalSegmentRegistry = staticCompositionLocalOf<SegmentRegistry?> { null }
 
 /**
+ * Shape of [row] in this group, its corners read where it is drawn: its place is known only once
+ * the group is laid out, which comes before the first frame is drawn, and it takes every later one
+ * at once, as Material's segmented lists do. One [leaving] gives up its place as it starts to fold
+ * away, keeping the shape it had.
+ */
+@Composable
+internal fun SegmentRegistry.rowShape(row: Any, leaving: Boolean): CornerBasedShape {
+    SideEffect { setLeaving(row, leaving) }
+    DisposableEffect(this, row) { onDispose { remove(row) } }
+    return remember(this, row) {
+        RoundedCornerShape(
+            topStart = PlacedCorner { shape(row).topStart },
+            topEnd = PlacedCorner { shape(row).topEnd },
+            bottomEnd = PlacedCorner { shape(row).bottomEnd },
+            bottomStart = PlacedCorner { shape(row).bottomStart }
+        )
+    }
+}
+
+/** A corner of a row's shape, taken from its place in the group each time its outline is made. */
+private class PlacedCorner(private val corner: () -> CornerSize) : CornerSize {
+    override fun toPx(shapeSize: Size, density: Density): Float = corner().toPx(shapeSize, density)
+}
+
+/**
+ * Whether a [FoldingVisibility] within a group, or one around it, is folding the rows under it
+ * away. Read by each row, see [SurfaceCard], which gives up its place in the group as it starts to.
+ */
+internal val LocalRowLeaving = compositionLocalOf { false }
+
+/**
  * The rows of a [SettingsGroup] in the order they show within it, so each takes the shape of its
  * place among those showing. Positions are only compared, so scrolling never rewrites the order.
  */
@@ -86,11 +120,18 @@ internal val LocalSegmentRegistry = staticCompositionLocalOf<SegmentRegistry?> {
 internal class SegmentRegistry {
     private val rows = mutableMapOf<Any, LayoutCoordinates>()
     private var group: LayoutCoordinates? = null
+    // Rows folding away, each with the shape it had as it started to
+    private val leaving = mutableMapOf<Any, RoundedCornerShape>()
     private var order by mutableStateOf(emptyList<Any>())
 
-    fun isPlaced(row: Any): Boolean = row in order
-
+    /**
+     * Shape of [row] by its place among those showing, the one it left with while it folds away,
+     * and a middle one until it first shows.
+     */
     fun shape(row: Any): RoundedCornerShape {
+        // The order is read either way, so a row brought back while it folds away is drawn anew
+        val order = order
+        leaving[row]?.let { return it }
         val index = order.indexOf(row)
         return if (index < 0) ConnectedShapes.Card.middle else ConnectedShapes.Card.inColumn(index, order.size)
     }
@@ -105,17 +146,28 @@ internal class SegmentRegistry {
         reorder()
     }
 
+    /**
+     * Leaves [row] out of the order from the moment it starts to fold away rather than once it is
+     * gone, so the surrounding rows reshape along with the fold, not after it.
+     */
+    fun setLeaving(row: Any, isLeaving: Boolean) {
+        if (isLeaving == row in leaving) return
+        if (isLeaving) leaving[row] = shape(row) else leaving.remove(row)
+        reorder()
+    }
+
     fun remove(row: Any) {
+        leaving.remove(row)
         if (rows.remove(row) != null) reorder()
     }
 
     // By the part of each row the group shows, clipped by a fold within the group but not by a page
-    // scrolling it, so a row folding away under the one above counts for where it still shows, and
-    // not at all once nothing of it does
+    // scrolling it, so a row folding in counts from the first of it that shows. One folding away
+    // has given up its place already
     private fun reorder() {
         val group = group?.takeIf { it.isAttached } ?: return
         val sorted = rows.mapNotNull { (row, coordinates) ->
-            if (!coordinates.isAttached) return@mapNotNull null
+            if (row in leaving || !coordinates.isAttached) return@mapNotNull null
             val shown = group.localBoundingBoxOf(coordinates, clipBounds = true)
             if (shown.height > 0f) row to shown.top else null
         }.sortedBy { (_, top) -> top }.map { (row, _) -> row }

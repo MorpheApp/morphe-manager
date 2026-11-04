@@ -6,7 +6,6 @@
 package app.morphe.manager.ui.screen.settings.appearance
 
 import androidx.annotation.DrawableRes
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.spring
@@ -51,6 +50,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.AppIcon
 import app.morphe.manager.domain.manager.AppIconManager
@@ -132,7 +132,7 @@ fun AppIconSettingsItem() {
 private fun AppIconPreview(icon: AppIcon, size: Dp) {
     val context = LocalContext.current
     val iconPainter = rememberDrawablePainter(
-        drawable = remember(icon) { AppCompatResources.getDrawable(context, icon.launcherIconResId) }
+        drawable = remember(icon) { ContextCompat.getDrawable(context, icon.launcherIconResId) }
     )
     Image(
         painter = iconPainter,
@@ -323,7 +323,7 @@ private fun LayeredIconPreview(
 private fun IconLayer(@DrawableRes drawableResId: Int, size: Dp) {
     val context = LocalContext.current
     val painter = rememberDrawablePainter(
-        drawable = remember(drawableResId) { AppCompatResources.getDrawable(context, drawableResId) }
+        drawable = remember(drawableResId) { ContextCompat.getDrawable(context, drawableResId) }
     )
     Image(
         painter = painter,

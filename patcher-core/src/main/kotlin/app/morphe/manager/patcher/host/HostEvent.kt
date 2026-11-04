@@ -36,6 +36,11 @@ sealed interface HostEvent {
     @SerialName("patches")
     data object PatchesStarted : HostEvent
 
+    /** [PatchingListener.patchExecuting]. */
+    @Serializable
+    @SerialName("patch_executing")
+    data class PatchExecuting(val name: String) : HostEvent
+
     @Serializable
     @SerialName("patch")
     data class PatchSucceeded(val name: String) : HostEvent

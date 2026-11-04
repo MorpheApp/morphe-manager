@@ -64,6 +64,7 @@
     <string name="list_options_state_description">Сортирано по %1$s, филтрирано по %2$s</string>
     <string name="home_app_filter_clones">Клонови</string>
     <string name="home_app_grouping_none">Нема</string>
+    <string name="home_app_sort_manual_hint">Држите прст на апликацији, а затим додирните дугме за промену редоследа</string>
     <string name="home_app_sort_recommended">Препоручени поредак</string>
     <string name="home_app_sort_updates_first">Прво ажурирања закрпа</string>
     <string name="home_app_sort_recently_patched">Недавно закрпљене</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Ништа није пронађено за %s</string>
     <string name="home_category_add">Додај категорију</string>
     <string name="home_category_all_apps">Све апликације</string>
+    <string name="home_app_grouping_categories">Категорије</string>
     <string name="home_category_uncategorized">Некатегорисано</string>
     <string name="home_category_new_title">Нова категорија</string>
     <string name="home_category_rename_title">Преименуј категорију</string>
@@ -288,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe не може да гарантује за ове веб-сајтове. Прескочите оне који нуде сопствену продавницу апликација уместо APK датотеке</string>
     <string name="home_download_instructions_step3_search">На том веб-сајту преузмите APK датотеку верзије &lt;b&gt;%s&lt;/b&gt;, а не најновију</string>
     <string name="home_download_instructions_step3_search_any">На том веб-сајту преузмите APK датотеку апликације. &lt;b&gt;Било која верзија&lt;/b&gt; се може пачовати</string>
+    <string name="home_download_instructions_step2_github">У одељку &lt;b&gt;Assets&lt;/b&gt; верзије &lt;b&gt;%s&lt;/b&gt;, притисните датотеку која се завршава са &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_latest">У одељку &lt;b&gt;Assets&lt;/b&gt; најновије верзије, притисните датотеку која се завршава са &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Ако постоји неколико APK датотека, изаберите ону која носи име %s или универзалну</string>
     <string name="home_download_instructions_download_button_toast">Притисните преузимање на веб-сајту, а не овде 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Одлично! Сада кликните на настави и посетите веб страницу 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Вежба води до савршенства и ти си на добром путу 💪</string>
@@ -495,6 +500,9 @@
     <string name="batch_queue_pending_subtitle">Додирните за преглед и почетак</string>
     <string name="batch_queue_clear_title">Брисати ред?</string>
     <string name="batch_queue_clear_description">Све апликације ће бити уклоните из реда</string>
+    <string name="batch_queue_keep_title">Зачувати ред чекања?</string>
+    <string name="batch_queue_keep_description">Апликације у реду чекања ће чекати на почетном екрану да буду покренуте касније</string>
+    <string name="batch_queue_keep">Зачувај</string>
     <string name="shortcut_repatch_short">Поново пеци</string>
     <string name="shortcut_repatch_long">Поново пеци застареле апликације</string>
     <string name="shortcut_check_updates_short">Провери ажурирања</string>
@@ -1114,7 +1122,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">Требаћете да унесете дугме за складиштење</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Корисник (Алиас)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Лозинка</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Формат кејстора</string>
     <string name="settings_system_import_keystore_wrong_credentials">Погрешно унете податке кластерског кључа</string>
     <string name="settings_system_import_keystore_success">Кластерски кључ успешно увезен</string>
     <string name="settings_system_import_keystore_failed">Неуспешно увоз кластерског кључа</string>

@@ -12,6 +12,8 @@ package app.morphe.manager.network.api
 
 import android.util.Log
 import app.morphe.manager.BuildConfig
+import app.morphe.manager.domain.bundles.PatchBundleSource
+import app.morphe.manager.domain.bundles.PatchSourceHeaders
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.network.dto.*
 import app.morphe.manager.network.service.HttpService
@@ -28,10 +30,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.withContext
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
-import kotlin.time.Instant
+import java.time.LocalDateTime
+import java.time.OffsetDateTime
+import java.time.ZoneOffset
 
 private const val GITHUB_DOWNLOAD_PREFIX = "https://github.com/"
 
@@ -42,7 +43,7 @@ internal fun isRawGitHubUrl(url: String): Boolean = runCatching {
     java.net.URI(url).host.equals(GITHUB_RAW_HOST, ignoreCase = true)
 }.getOrDefault(false)
 
-/** What GitHub says of a token, see [MorpheAPI.checkGitHubPat]. */
+/** What GitHub says of a token, see [ReleaseAPI.checkGitHubPat]. */
 sealed interface GitHubPatCheck {
     data class Valid(val login: String) : GitHubPatCheck
 
@@ -94,6 +95,24 @@ internal fun parseReleaseAssetUrl(downloadUrl: String): ReleaseAssetRef? {
 }
 
 /**
+ * Parses ISO-8601 / GitHub timestamp strings into [LocalDateTime] (UTC).
+ *
+ * Handles:
+ *  - Full ISO-8601 with Z suffix: `2024-01-15T12:00:00Z`
+ *  - With offset: `2024-01-15T12:00:00+02:00`
+ *  - Without timezone (assumed UTC): `2024-01-15T12:00:00`
+ */
+internal fun parseTimestamp(timestamp: String): LocalDateTime {
+    val normalized = when {
+        timestamp.endsWith("Z", ignoreCase = true) -> timestamp
+        timestamp.contains("+") -> timestamp
+        timestamp.contains("T") && timestamp.lastIndexOf("-") > 10 -> timestamp
+        else -> "${timestamp}Z" // No timezone info, assume UTC
+    }
+    return OffsetDateTime.parse(normalized).atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime()
+}
+
+/**
  * High-level network layer for Morphe.
  *
  * Responsible for:
@@ -104,7 +123,7 @@ internal fun parseReleaseAssetUrl(downloadUrl: String): ReleaseAssetRef? {
  * All methods return [APIResponse] or nullable results — no exceptions propagate to callers
  * except [getAssetFromPullRequest], which throws on hard failure.
  */
-class MorpheAPI(
+class ReleaseAPI(
     @PublishedApi internal val client: HttpService,
     private val prefs: PreferencesManager
 ) {
@@ -321,7 +340,7 @@ class MorpheAPI(
     }
 
     /**
-     * Maps a [GitHubRelease] + its [GitHubAsset] into the unified [MorpheAsset] format.
+     * Maps a [GitHubRelease] + its [GitHubAsset] into the unified [ReleaseAsset] format.
      *
      * The release page URL is always set to the GitHub Releases tag page.
      */
@@ -329,11 +348,11 @@ class MorpheAPI(
         config: RepoConfig,
         release: GitHubRelease,
         asset: GitHubAsset
-    ): MorpheAsset {
+    ): ReleaseAsset {
         val timestamp = requireNotNull(release.publishedAt ?: release.createdAt) {
             "Release ${release.tagName} has no timestamp"
         }
-        return MorpheAsset(
+        return ReleaseAsset(
             downloadUrl = asset.downloadUrl,
             createdAt = parseTimestamp(timestamp),
             pageUrl = releasePageUrl(config.htmlUrl, release.tagName),
@@ -345,9 +364,9 @@ class MorpheAPI(
     private fun mapManagerJsonToAsset(
         config: RepoConfig,
         releaseInfo: ManagerReleaseInfo
-    ): MorpheAsset {
+    ): ReleaseAsset {
         val version = releaseInfo.version.withVersionPrefix()
-        return MorpheAsset(
+        return ReleaseAsset(
             downloadUrl = releaseInfo.downloadUrl,
             createdAt = parseTimestamp(releaseInfo.createdAt),
             pageUrl = releasePageUrl(config.htmlUrl, version),
@@ -359,9 +378,9 @@ class MorpheAPI(
     private fun mapPatchesJsonToAsset(
         config: RepoConfig,
         releaseInfo: PatchesReleaseInfo
-    ): MorpheAsset {
+    ): ReleaseAsset {
         val version = releaseInfo.version.withVersionPrefix()
-        return MorpheAsset(
+        return ReleaseAsset(
             downloadUrl = releaseInfo.downloadUrl,
             createdAt = parseTimestamp(releaseInfo.createdAt),
             publicKey = releaseInfo.publicKey,
@@ -369,24 +388,6 @@ class MorpheAPI(
             description = releaseInfo.description,
             version = version
         )
-    }
-
-    /**
-     * Parses ISO-8601 / GitHub timestamp strings into [LocalDateTime] (UTC).
-     *
-     * Handles:
-     *  - Full ISO-8601 with Z suffix: `2024-01-15T12:00:00Z`
-     *  - With offset: `2024-01-15T12:00:00+02:00`
-     *  - Without timezone (assumed UTC): `2024-01-15T12:00:00`
-     */
-    private fun parseTimestamp(timestamp: String): LocalDateTime {
-        val normalized = when {
-            timestamp.endsWith("Z", ignoreCase = true) -> timestamp
-            timestamp.contains("+") -> timestamp
-            timestamp.contains("T") && timestamp.lastIndexOf("-") > 10 -> timestamp
-            else -> "${timestamp}Z" // no timezone info — assume UTC
-        }
-        return Instant.parse(normalized).toLocalDateTime(TimeZone.UTC)
     }
 
     /** Returns true if [asset] looks like an Android APK by name or content-type. */
@@ -399,7 +400,7 @@ class MorpheAPI(
         get() = BuildConfig.VERSION_NAME.contains('-')
 
     /** Fetches the latest manager release metadata from GitHub Releases. */
-    private suspend fun getManagerFromGitHub(): APIResponse<MorpheAsset> {
+    private suspend fun getManagerFromGitHub(): APIResponse<ReleaseAsset> {
         val includePrerelease = prefs.useManagerPrereleases.get()
         return fetchReleaseAsset(managerConfig, includePrerelease, ::isManagerAsset)
     }
@@ -410,7 +411,7 @@ class MorpheAPI(
      * [branch] determines which JSON URL is used (`dev` → prerelease, anything else → stable).
      * The request is cache busted because the raw CDN serves stale copies of freshly pushed files.
      */
-    private suspend fun getManagerFromJson(branch: String): APIResponse<MorpheAsset> {
+    private suspend fun getManagerFromJson(branch: String): APIResponse<ReleaseAsset> {
         val url = cacheBusted(if (branch == "dev") MANAGER_PRERELEASE_JSON_URL else MANAGER_RELEASE_JSON_URL)
         return when (val response = client.request<ManagerReleaseInfo> {
             url(url)
@@ -434,7 +435,7 @@ class MorpheAPI(
     }
 
     /**
-     * Returns a newer [MorpheAsset] if one is available, or null if the app is up to date.
+     * Returns a newer [ReleaseAsset] if one is available, or null if the app is up to date.
      *
      * Channel selection logic (mirrors FCM subscription matrix in [app.morphe.manager.util.syncFcmTopics]):
      *  - `usePrereleases == true` OR current build is dev → use `dev` branch / prerelease channel
@@ -447,7 +448,7 @@ class MorpheAPI(
      * A newer version is reported only once its APK is downloadable, so a release that is
      * already announced but still uploading is treated as if it did not exist yet.
      */
-    suspend fun getAppUpdate(): MorpheAsset? {
+    suspend fun getAppUpdate(): ReleaseAsset? {
         val usePrereleases = prefs.useManagerPrereleases.get()
         val branch = if (usePrereleases) "dev" else "main"
 
@@ -482,7 +483,7 @@ class MorpheAPI(
      * Fetches patches update from the Morphe backend API.
      * Uses the `/patches/prerelease` endpoint when [usePrerelease] is true.
      */
-    private suspend fun getPatchesFromApi(usePrerelease: Boolean): APIResponse<MorpheAsset> {
+    private suspend fun getPatchesFromApi(usePrerelease: Boolean): APIResponse<ReleaseAsset> {
         val route = if (usePrerelease) "patches/prerelease" else "patches"
         return apiRequest(route)
     }
@@ -491,7 +492,7 @@ class MorpheAPI(
      * Fetches patches update from a static `patches-bundle.json` file in the repository.
      * Uses the `dev` branch for pre-releases, `main` for stable.
      */
-    private suspend fun getPatchesFromJson(usePrerelease: Boolean): APIResponse<MorpheAsset> {
+    private suspend fun getPatchesFromJson(usePrerelease: Boolean): APIResponse<ReleaseAsset> {
         val branch = if (usePrerelease) "dev" else "main"
         return when (val r = rawPatchesBundleRequest<PatchesReleaseInfo>(patchesConfig, branch)) {
             is APIResponse.Success -> runCatching {
@@ -519,7 +520,7 @@ class MorpheAPI(
      *
      * Source priority: static JSON → Morphe API (fallback).
      */
-    suspend fun getPatchesUpdate(usePrerelease: Boolean): APIResponse<MorpheAsset> {
+    suspend fun getPatchesUpdate(usePrerelease: Boolean): APIResponse<ReleaseAsset> {
         return if (USE_PATCHES_DIRECT_JSON) {
             getPatchesFromJson(usePrerelease).fallbackTo {
                 Log.w(tag, "Patches JSON unavailable, falling back to Morphe API")
@@ -540,7 +541,7 @@ class MorpheAPI(
         config: RepoConfig,
         includePrerelease: Boolean,
         matcher: (GitHubAsset) -> Boolean
-    ): APIResponse<MorpheAsset> {
+    ): APIResponse<ReleaseAsset> {
         return when (val r = githubRequest<List<GitHubRelease>>(config, "releases")) {
             is APIResponse.Success -> runCatching {
                 val release = r.data.firstOrNull { release ->
@@ -682,7 +683,7 @@ class MorpheAPI(
         owner: String,
         repo: String,
         pullRequestNumber: String
-    ): MorpheAsset {
+    ): ReleaseAsset {
         val config = RepoConfig(
             owner = owner,
             name = repo,
@@ -691,7 +692,7 @@ class MorpheAPI(
         )
         val run = getPullRequestRun(config, pullRequestNumber)
         val artifact = getRunArtifact(config, run.id, pullRequestNumber)
-        return MorpheAsset(
+        return ReleaseAsset(
             downloadUrl = artifact.archiveDownloadUrl,
             createdAt = parseTimestamp(artifact.createdAt),
             pageUrl = "${config.htmlUrl}/pull/$pullRequestNumber",
@@ -748,9 +749,17 @@ class MorpheAPI(
     /**
      * Resolves a redirect URL by delegating a HEAD request to [HttpService.headRedirect].
      * Returns the final destination URL, or null if there is no redirect or an error occurs.
+     *
+     * @param patchSources The patch source headers, only sent to the API.
      */
-    suspend fun resolveRedirect(url: String): String? = client.headRedirect(url) {
-        if (url.startsWith("$MORPHE_API_URL/")) header(HttpHeaders.UserAgent, MORPHE_USER_AGENT)
+    suspend fun resolveRedirect(url: String, patchSources: PatchSourceHeaders? = null): String? = client.headRedirect(url) {
+        if (url.startsWith("$MORPHE_API_URL/")) {
+            header(HttpHeaders.UserAgent, MORPHE_USER_AGENT)
+            patchSources?.let {
+                header(PatchBundleSource.PATCH_SOURCE_HEADER, it.sources)
+                header(PatchBundleSource.PATCH_SOURCE_VERSION_HEADER, it.versions)
+            }
+        }
     }
 
     /**

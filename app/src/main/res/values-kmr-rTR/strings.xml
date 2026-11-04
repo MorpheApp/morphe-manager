@@ -64,6 +64,7 @@
     <string name="list_options_state_description">Li gorî %1$s hatine rêzkirin, li gorî %2$s hatine filtrekirin</string>
     <string name="home_app_filter_clones">Klon</string>
     <string name="home_app_grouping_none">Netû</string>
+    <string name="home_app_sort_manual_hint">Appekê dirêj bitikîne, piştre li buttona rêzkirinê bitikîne</string>
     <string name="home_app_sort_recommended">Rêza pêşniyarkirî</string>
     <string name="home_app_sort_updates_first">Pêşîn nûvekirinên patchê</string>
     <string name="home_app_sort_recently_patched">Nû patchkirî</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Tiştek bi %s re li hev nehat</string>
     <string name="home_category_add">Kategoriyê zêde bike</string>
     <string name="home_category_all_apps">Hemû sepan</string>
+    <string name="home_app_grouping_categories">Kategorî</string>
     <string name="home_category_uncategorized">Bêkategorî</string>
     <string name="home_category_new_title">Kategoriya nû</string>
     <string name="home_category_rename_title">Kategoriya biguhezîne</string>
@@ -176,6 +178,7 @@
     <string name="sources_management_prerelease_toggle_description">Bi destê pêşîn bigihîje guhertoyên nû yên ceribandinê</string>
     <string name="sources_prerelease_warning_title">Patchên pêş-berdanê çalak bike?</string>
     <string name="sources_prerelease_warning_message">Nusxeyên pêş-berdanê hê jî di pêşveçûnê de ne. Patch dibe ku têk biçin an sepanê bişkînin, û taybetmendî dikarin bê hişyarî biguherin.</string>
+    <string name="expert_mode_unstable_notice">Patchên beriya berbelavkirinê yan jî yên eksperîmental dibe ku ne îstikraran bin</string>
     <string name="sources_management_experimental_versions_toggle">Werzîyonên sepanê yên eksperîmental</string>
     <string name="sources_management_experimental_versions_toggle_description">Armancên sepanê yên ceribandinî nîşan dide û patch dike</string>
     <!-- Actions of the panel for several selected sources at once -->
@@ -190,6 +193,7 @@
     <string name="sources_management_metadata_unavailable">Metadata N/A</string>
     <string name="sources_management_metadata_unavailable_hint">Pelgeya metadateya dûr nepehwîze. Lê dîsa jî nûkirina bi pakêta ku hatiye saz kirin dixebite, lê nûvekirina otomatîkî ji bo vê çavkaniyê nehate çalak kirin</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Pakêta paşîn nikaribû were dakêşîn. URL-a çavkaniyê dikare ne rast be an pelge ne heye</string>
+    <string name="sources_management_metadata_unavailable_hint_missing_editable">Paketa patchê nehati dawnloadkirin. Dibe ku URL-ya çavkaniyê ne rast be an jî pel tune be. Ji bo guherînê lê bitikîne</string>
     <string name="sources_management_outdated_manager_badge">Morphe nûve bike</string>
     <string name="sources_management_outdated_manager_hint">Ev çavkanî ji bo patcher %1$s hatî çêkirin, lê Morphe %2$s patcher %3$s vedihewîne. Morphe nûve bike da ku wê bikar bîne</string>
     <string name="sources_management_held_back_badge">Rûxî</string>
@@ -203,6 +207,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Navnê nîşankêr</string>
     <string name="sources_dialog_rename">Ji bo guherîna çavkaniyê navê nû</string>
+    <string name="sources_dialog_change_url">Guherîne ka çavkaniya patchê ji ku derê tê dawnloadkirin</string>
     <string name="sources_dialog_duplicate_name_error">Çavkaniyek bi vana navê berê heye</string>
     <string name="sources_dialog_missing_error">Niwia nûvekirin bilîxe</string>
     <string name="sources_dialog_add_source">Çavkaniyê zêde bike</string>
@@ -285,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe nikare ji bo van malperan garantiyê bide. Yên ku li şûna dosyeyeke APK firoşgeha xwe ya sepanan pêşkêş dikin derbas bikin</string>
     <string name="home_download_instructions_step3_search">Li ser wê malperê, APK-ya guhertoya <b>%s</b> daxînin, ne guhertoya herî nû</string>
     <string name="home_download_instructions_step3_search_any">Li ser wê malperê, APK-ya sepanê daxînin. <b>Her guhertoyek</b> dikare were patch kirin</string>
+    <string name="home_download_instructions_step2_github">Di bin &lt;b&gt;Assets&lt;/b&gt; ya berbelavkirina &lt;b&gt;%s&lt;/b&gt; de, pelê ku bi &lt;b&gt;.apk&lt;/b&gt; bidawî dibe bitikîne</string>
+    <string name="home_download_instructions_step2_github_latest">Di bin &lt;b&gt;Assets&lt;/b&gt; a weşana herî nû de, li ser fîla ku bi &lt;b&gt;.apk&lt;/b&gt; bidawî dibe bitikîne</string>
+    <string name="home_download_instructions_step2_github_note">Heke çend fîlên APK hebin, yê ku bi navê %s ye an jî yê universal hilbijêre</string>
     <string name="home_download_instructions_download_button_toast">Li ser malpera çapa serdest bike, ne ku xwer li vir 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Serkeftî! Naha bikîne virê û biçin ser malperê 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Ezberkirin baş e û hûn nêzîk dibin 💪</string>
@@ -329,8 +337,10 @@ Hilbijêre ku APK ya wê ji ku derê bê"</string>
     <string name="expert_mode_enable_all_universal_pending">Dîsa bikirtîne ji bo pêçekên gerdûnî</string>
     <string name="expert_mode_universal_all_warning_title">Hemû patchên gerdûnî çalak bike?</string>
     <string name="expert_mode_universal_all_warning_message">Patchên gerdûnî bi hev re nehatine ceribandin. Çalakkirina hemûyan bi carekê dikare bibe sedema nakokî, patchkirina têkçûyî, an jî hilweşînan.</string>
+    <string name="expert_mode_recommended">Patchên pêşniyarkirî</string>
     <string name="expert_mode_reset_to_default_done">Pelîkên ku hatine pêşniyar kirin hatin çêkirin</string>
     <string name="expert_mode_selected_count">%1$s ji %2$s hatin hilbijartin</string>
+    <string name="expert_mode_saved_selection">Hêlbajêya hatî savekirin</string>
     <string name="expert_mode_restore_saved_done">Hilbijartina ku hatî parastin</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Di vê pakêtê de tu parçe nehatine dîtin</string>
     <string name="expert_mode_no_results">Paqejiyê ne hebin</string>
@@ -490,6 +500,9 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="batch_queue_pending_subtitle">Ji bo reviewkirin û destpêkirin lê bide</string>
     <string name="batch_queue_clear_title">Rêzê paqij bike?</string>
     <string name="batch_queue_clear_description">Hemû app dê ji rêza bendawarîyê bên jêbirin</string>
+    <string name="batch_queue_keep_title">Rîzê biparêze?</string>
+    <string name="batch_queue_keep_description">Appên di rîzê de dê li ekranê sêwirî bimînin da ku piştre bên destpêkirin</string>
+    <string name="batch_queue_keep">Biparêze</string>
     <string name="shortcut_repatch_short">Dîsa patch bike</string>
     <string name="shortcut_repatch_long">Sepayên kevn nû bike</string>
     <string name="shortcut_check_updates_short">Nûvekirinan kontrol bike</string>
@@ -1109,7 +1122,6 @@ Detay: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Hûn dê pêwist be serdanan kredensiyelên keystorê bidin da ku ew sazkirin</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Karanbera (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Parola</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Formata kilîdparêzê</string>
     <string name="settings_system_import_keystore_wrong_credentials">Nivîsandina parçehuyê xeṭî ye</string>
     <string name="settings_system_import_keystore_success">Parçehuyê zafortir hate kirin</string>
     <string name="settings_system_import_keystore_failed">Ji kirina parçehuyê neçîbe</string>

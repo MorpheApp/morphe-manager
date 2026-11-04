@@ -64,6 +64,7 @@
     <string name="list_options_state_description">%1$s ৰ দ্বাৰা ছৰ্ট কৰা হৈছে, %2$s ৰ দ্বাৰা ফিল্টাৰ কৰা হৈছে</string>
     <string name="home_app_filter_clones">ক্লনসমূহ</string>
     <string name="home_app_grouping_none">একো নহয়</string>
+    <string name="home_app_sort_manual_hint">এটা এপক দীঘলীয়া সময়ৰ বাবে টিপি ৰাখক, তাৰ পিছত পুনৰ সজাই লোৱাৰ বুটামত ক্লিক কৰক</string>
     <string name="home_app_sort_recommended">পৰামৰ্শ কৰা ক্ৰম</string>
     <string name="home_app_sort_updates_first">পেচ আপডেটসমূহ প্ৰথমে</string>
     <string name="home_app_sort_recently_patched">শেহতীয়াকৈ প্ৰচিং কৰা</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">%s ৰ সৈতে একো মিল নাই</string>
     <string name="home_category_add">বিভাগ যোগ কৰক</string>
     <string name="home_category_all_apps">সকলো এপ্‌স</string>
+    <string name="home_app_grouping_categories">বিভাগসমূহ</string>
     <string name="home_category_uncategorized">বিভাগহীন</string>
     <string name="home_category_new_title">নতুন বিভাগ</string>
     <string name="home_category_rename_title">বিভাগৰ নাম সলনি কৰক</string>
@@ -288,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe-এ এই ৱেবছাইটবোৰৰ বাবে নিশ্চয়তা দিব নোৱাৰে। যিবোৰ ৱেবছাইটত APK ফাইলৰ পৰিবৰ্তে নিজাকৈ এপ ষ্টৰ আগবঢ়োৱা হয়, সেইবোৰ বাদ দিয়ক</string>
     <string name="home_download_instructions_step3_search">সেই ৱেবছাইটত, আটাইতকৈ নতুনটো নহয়, বৰঞ্চ &lt;b&gt;%s&lt;/b&gt; সংস্কৰণৰ APK টো ডাউনলোড কৰক</string>
     <string name="home_download_instructions_step3_search_any">সেই ৱেবছাইটত, এপটোৰ APK টো ডাউনলোড কৰক। &lt;b&gt;যিকোনো সংস্কৰণ&lt;/b&gt; পেচ কৰিব পৰা যায়</string>
+    <string name="home_download_instructions_step2_github">ৰিলিজ &lt;b&gt;%s&lt;/b&gt; ৰ &lt;b&gt;Assets&lt;/b&gt; ৰ অধীনত, &lt;b&gt;.apk&lt;/b&gt; ত শেষ হোৱা ফাইলটোত ক্লিক কৰক</string>
+    <string name="home_download_instructions_step2_github_latest">নতুনকৈ ৰিলিজ হোৱা সংস্কৰণৰ &lt;b&gt;Assets&lt;/b&gt; ৰ অধীনত, &lt;b&gt;.apk&lt;/b&gt; ত শেষ হোৱা ফাইলটোত ক্লিক কৰক</string>
+    <string name="home_download_instructions_step2_github_note">যদি কেইবাটাও APK ফাইল থাকে, তেন্তে %s নামৰটো বা ইউনিভাৰ্চেল ফাইলটো বাছি লওক</string>
     <string name="home_download_instructions_download_button_toast">ৱেবছাইটত ডাউনলোডত চাপক, ইয়াত নহয় 😊</string>
     <string name="home_download_instructions_download_button_toast_2">চৰমত! এতিয়া কন্টিনিউত ক্লিক কৰক আৰু ৱেবছাইটলৈ যাওক 👆</string>
     <string name="home_download_instructions_download_button_toast_3">অনুশীলনে মানুহক নিখুঁত কৰে আৰু আপুনি তাৰ ফালে আগবাঢ়িছে 💪</string>
@@ -332,8 +337,10 @@
     <string name="expert_mode_enable_all_universal_pending">ইউনিভাৰ্চেল পেচৰ বাবে পুনৰ টেপ কৰক</string>
     <string name="expert_mode_universal_all_warning_title">সকলো সৰ্বজনীন প্ৰচ সক্ৰিয় কৰিব নেকি?</string>
     <string name="expert_mode_universal_all_warning_message">ইউনিভাৰ্চেল পেচবোৰ একেলগে পৰীক্ষা কৰা হোৱা নাই। এই সকলোবোৰ একেলগে সক্ৰিয় কৰিলে সংঘাত, পেচিংত বিফলতা বা ক্ৰেশ হ\'ব পাৰে</string>
+    <string name="expert_mode_recommended">সুপৰিশ কৰা পেচ,</string>
     <string name="expert_mode_reset_to_default_done">সুপৰিশ কৰা patch সমূহ প্ৰয়োগ কৰা হৈছে</string>
     <string name="expert_mode_selected_count">%2$s ৰ ভিতৰত %1$s টা চয়ন কৰা হৈছে</string>
+    <string name="expert_mode_saved_selection">সংৰক্ষিত নিৰ্বাচন</string>
     <string name="expert_mode_restore_saved_done">সংৰক্ষিত নিৰ্বাচন পুনৰুদ্ধাৰ কৰা হৈছে</string>
     <string name="expert_mode_copy_from_bundle_no_patches">এই বান্ডেলটোত কোনো মিল থকা পেচ নাই</string>
     <string name="expert_mode_no_results">কোনো পেচ পতা যোৱা নাই</string>
@@ -493,6 +500,9 @@
     <string name="batch_queue_pending_subtitle">চাবৰ বাৰু আৰম্ভ কৰিবলৈ টেপ কৰক</string>
     <string name="batch_queue_clear_title">কিউটো মচি পেলাব নেকি?</string>
     <string name="batch_queue_clear_description">সকলো এপ্স কিউৰ পৰা আঁতৰাই দিয়া হ\'ব</string>
+    <string name="batch_queue_keep_title">কিউটো ৰাখিবনে?</string>
+    <string name="batch_queue_keep_description">কিউত থকা এপবোৰে পিছত আৰম্ভ কৰিবলৈ হোম স্ক্ৰীনত অপেক্ষা কৰিব</string>
+    <string name="batch_queue_keep">ৰাখক</string>
     <string name="shortcut_repatch_short">পুনৰ-পেচ</string>
     <string name="shortcut_repatch_long">আউটডেটেড এপবোৰ পুনৰ-পেচ কৰক</string>
     <string name="shortcut_check_updates_short">আপডেট পৰীক্ষা কৰক</string>
@@ -1112,7 +1122,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">ইমপৰ্ট কৰিবলৈ আপুনি কিষ্টষ্ট’ৰৰ ক্ৰেডেনচিয়েলসমূহ প্ৰৱেশ কৰিব লাগিব</string>
     <string name="settings_system_import_keystore_dialog_alias_field">ইউজাৰনেম (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">পাসৱৰ্ড</string>
-    <string name="settings_system_import_keystore_dialog_format_field">কিস্টোৰ ফৰ্মেট</string>
     <string name="settings_system_import_keystore_wrong_credentials">ভুল কিষ্ট’ষ্ট’ বিশ্বাসযোগ্যতা</string>
     <string name="settings_system_import_keystore_success">কিষ্ট’ষ্ট’ ইমপোর্ট কৰা হৈছে</string>
     <string name="settings_system_import_keystore_failed">কিষ্ট’ষ্ট’ ইমপোর্ট কৰাত ব্যৰ্থ</string>

@@ -7,7 +7,7 @@ package app.morphe.manager.service
 
 import android.annotation.SuppressLint
 import android.util.Log
-import app.morphe.manager.util.UpdateNotificationManager
+import app.morphe.manager.notification.UpdateNotifications
 import app.morphe.manager.util.tag
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -50,33 +50,33 @@ import org.koin.android.ext.android.inject
  *
  * | type             | extra keys       | action                                                          |
  * |------------------|------------------|-----------------------------------------------------------------|
- * | `manager_update` | `version` (opt.) | Calls [UpdateNotificationManager.showManagerUpdateNotification] |
- * | `bundle_update`  | `version` (opt.) | Calls [UpdateNotificationManager.showBundleUpdateNotification]  |
+ * | `manager_update` | `version` (opt.) | Calls [UpdateNotifications.showManagerUpdateNotification] |
+ * | `bundle_update`  | `version` (opt.) | Calls [UpdateNotifications.showBundleUpdateNotification]  |
  *
  * `version` is optional in both types for compatibility.
  * Unknown types are silently ignored for forward-compatibility with future message types.
  */
 @SuppressLint("MissingFirebaseInstanceTokenRefresh")
-class MorpheFcmService : FirebaseMessagingService() {
+class FcmService : FirebaseMessagingService() {
 
-    private val notificationManager: UpdateNotificationManager by inject()
+    private val notificationManager: UpdateNotifications by inject()
 
     override fun onMessageReceived(message: RemoteMessage) {
         val data = message.data
 
         if (data.isEmpty()) {
-            Log.w(tag, "MorpheFcmService: received empty data payload - ignoring")
+            Log.w(tag, "FcmService: received empty data payload - ignoring")
             return
         }
 
         val type = data[KEY_TYPE]
         val version = data[KEY_VERSION]
-        Log.d(tag, "MorpheFcmService: message received, type=$type, topic=${message.from}")
+        Log.d(tag, "FcmService: message received, type=$type, topic=${message.from}")
 
         when (type) {
             TYPE_MANAGER_UPDATE -> notificationManager.showManagerUpdateNotification(version)
             TYPE_BUNDLE_UPDATE  -> notificationManager.showBundleUpdateNotification(version)
-            else -> Log.d(tag, "MorpheFcmService: unknown type '$type' - ignoring")
+            else -> Log.d(tag, "FcmService: unknown type '$type' - ignoring")
         }
     }
 

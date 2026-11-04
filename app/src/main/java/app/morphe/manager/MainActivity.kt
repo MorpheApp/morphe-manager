@@ -22,7 +22,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
@@ -46,6 +45,7 @@ import app.morphe.manager.domain.batch.BatchTarget
 import app.morphe.manager.domain.manager.HomeAppButtonPreferences
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.notification.UpdateNotifications
 import app.morphe.manager.ui.model.SourceScope
 import app.morphe.manager.ui.model.navigation.*
 import app.morphe.manager.ui.screen.BatchPatcherScreen
@@ -86,7 +86,7 @@ import org.koin.core.context.GlobalContext
 import org.koin.core.parameter.parametersOf
 import org.koin.androidx.viewmodel.ext.android.getViewModel as getActivityViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
 
     /** Language the activity was attached in, to tell when it has to be recreated. */
     private var attachedLanguage = AppLocale.SYSTEM
@@ -216,7 +216,7 @@ class MainActivity : AppCompatActivity() {
 
         // Handled here rather than in onNewIntent so a cold start from a notification or a
         // launcher shortcut triggers the check as well
-        if (intent?.getBooleanExtra(UpdateNotificationManager.EXTRA_TRIGGER_UPDATE_CHECK, false) == true) {
+        if (intent?.getBooleanExtra(UpdateNotifications.EXTRA_TRIGGER_UPDATE_CHECK, false) == true) {
             vm.pendingUpdateCheck = true
             return
         }

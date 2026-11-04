@@ -5,8 +5,15 @@
 
 package app.morphe.manager.util
 
+import android.content.Context
 import android.util.Log
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
 import com.google.firebase.messaging.FirebaseMessaging
+
+/** Whether Google Play services can deliver FCM here, which otherwise leaves update checks to WorkManager. */
+fun Context.hasGooglePlayServices(): Boolean =
+    GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS
 
 /**
  * FCM topic strings used for update push notifications.

@@ -966,6 +966,8 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="notification_channel_patch_updates">Patch updates</string>
     <string name="notification_channel_patch_updates_description">Notifications about new patch releases</string>
     <string name="notification_channel_patcher_description">Shown while Morphe is patching an app in the background</string>
+    <string name="notification_channel_patching_results">Patching results</string>
+    <string name="notification_channel_patching_results_description">When patching ends or an install waits for you while Morphe is in the background</string>
     <string name="notification_channel_mounted_apps">Mounted apps</string>
     <string name="notification_channel_mounted_apps_description">When another version replaced a mounted app and its patch no longer applies</string>
     <string name="notification_mount_replaced_title">%1$s is no longer patched</string>
@@ -1194,7 +1196,6 @@ Details: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">You\'ll need enter the keystore\'s credentials to import it</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Username (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Password</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Keystore format</string>
     <string name="settings_system_import_keystore_wrong_credentials">Incorrect keystore credentials</string>
     <string name="settings_system_import_keystore_success">Keystore imported</string>
     <string name="settings_system_import_keystore_failed">Failed to import keystore</string>
@@ -1361,6 +1362,7 @@ Details: %2$s"</string>
     <string name="credits_prior_development">Prior development</string>
     <string name="opensource_licenses">Open-source licenses</string>
     <string name="opensource_licenses_description">The libraries Morphe is built on</string>
+    <string name="opensource_licenses_search">Search libraries and licenses</string>
 
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">A choice</string>

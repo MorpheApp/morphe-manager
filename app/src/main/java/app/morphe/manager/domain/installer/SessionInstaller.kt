@@ -7,8 +7,6 @@ package app.morphe.manager.domain.installer
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.app.Notification
-import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -16,15 +14,14 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageInstaller
 import android.content.pm.PackageManager
-import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.Process
 import android.util.Log
 import app.morphe.manager.ManagerApplication
 import app.morphe.manager.R
+import app.morphe.manager.notification.PatchingNotifications
 import app.morphe.manager.util.APK_MIMETYPE
 import app.morphe.manager.util.PLAY_STORE_INSTALLER_PACKAGE
-import app.morphe.manager.util.UpdateNotificationManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -40,7 +37,6 @@ private const val ACTION_INSTALL_STATUS = "app.morphe.manager.INSTALL_STATUS"
 private const val ACTION_UNINSTALL_STATUS = "app.morphe.manager.UNINSTALL_STATUS"
 private const val EXTRA_SESSION_ID = "session_id"
 private const val EXTRA_UNINSTALL_REQUEST_ID = "uninstall_request_id"
-private const val CONFIRM_NOTIFICATION_ID = 2006
 
 /**
  * PackageInstaller-based installer.
@@ -53,7 +49,6 @@ private const val CONFIRM_NOTIFICATION_ID = 2006
  */
 class SessionInstaller(private val app: Application) {
 
-    private val notificationManager = app.getSystemService(NotificationManager::class.java)
     private val shizuku = ShizukuEnvironment(app)
     private val shizukuInstaller = ShizukuInstaller(app)
     private val uninstallRequestIds = AtomicInteger()
@@ -82,7 +77,7 @@ class SessionInstaller(private val app: Application) {
         } finally {
             // However it ended, a confirmation nobody answered must not outlive the session
             ManagerApplication.onReturnToForeground = null
-            notificationManager.cancel(CONFIRM_NOTIFICATION_ID)
+            PatchingNotifications.cancelInstallConfirmation(app)
         }
     }
 
@@ -528,28 +523,12 @@ class SessionInstaller(private val app: Application) {
 
     /** Posts [confirmIntent] so a tap opens the install dialog the session is waiting on. */
     private fun notifyPendingConfirmation(confirmIntent: Intent) {
-        @Suppress("WrongConstant")
-        val pendingIntent = PendingIntent.getActivity(
-            app,
-            CONFIRM_NOTIFICATION_ID,
-            confirmIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-
-        val notification = Notification.Builder(app, UpdateNotificationManager.CHANNEL_PATCHER)
-            .setContentTitle(app.getString(R.string.installer_confirm_notification_title))
-            .setContentText(app.getString(R.string.installer_confirm_notification_text))
-            .setSmallIcon(Icon.createWithResource(app, R.drawable.ic_notification))
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(true)
-            .build()
-
-        notificationManager.notify(CONFIRM_NOTIFICATION_ID, notification)
+        PatchingNotifications.showInstallConfirmation(app, confirmIntent)
 
         // Tapping the notification is one way back to the dialog; opening the manager is the
         // other, and a session waiting on it must not look like an install that stalled
         ManagerApplication.onReturnToForeground = {
-            notificationManager.cancel(CONFIRM_NOTIFICATION_ID)
+            PatchingNotifications.cancelInstallConfirmation(app)
             runCatching { app.startActivity(confirmIntent) }
         }
     }

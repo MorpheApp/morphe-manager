@@ -6,6 +6,8 @@
     <!-- Asked when the link names an app of a source that is already added -->
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <!-- Home Screen - Update Notifications -->
+    <string name="home_app_sort_manual_hint">ஒரு செயலியை நீண்ட நேரம் அழுத்திப் பிடித்து, பின் மறுவரிசைப்படுத்தும் பொத்தானைத் தட்டவும்</string>
+    <string name="home_app_grouping_categories">வகைகள்</string>
     <!-- %s is the name of the category -->
     <!-- %s is the name of the category the apps fall back to -->
     <!-- Home Screen - Home Greetings -->
@@ -46,6 +48,9 @@
     <!-- Home Screen - Dialog 1: APK Availability -->
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
     <!-- Home Screen - Dialog 2: Download Instructions -->
+    <string name="home_download_instructions_step2_github">வெளியீடு &lt;b&gt;%s&lt;/b&gt;-ன் &lt;b&gt;Assets&lt;/b&gt; பிரிவில், &lt;b&gt;.apk&lt;/b&gt; என முடியும் கோப்பை அழுத்தவும்</string>
+    <string name="home_download_instructions_step2_github_latest">புதிய வெளியீட்டின் &lt;b&gt;Assets&lt;/b&gt; பிரிவில், &lt;b&gt;.apk&lt;/b&gt; என முடியும் கோப்பை அழுத்தவும்</string>
+    <string name="home_download_instructions_step2_github_note">பல APK கோப்புகள் இருந்தால், %s எனப் பெயரிடப்பட்ட அல்லது பொதுவான கோப்பைத் தேர்ந்தெடுக்கவும்</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <!-- %s is the name of the app whose APK was just downloaded -->
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
@@ -70,6 +75,9 @@
     <!-- Batch patching -->
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <!-- Label of a footer button beside "Done". Keep it short, a longer one moves the buttons onto two rows -->
+    <string name="batch_queue_keep_title">வரிசையைத் தக்கவைக்க வேண்டுமா?</string>
+    <string name="batch_queue_keep_description">வரிசைப்படுத்தப்பட்ட செயலிகள் பின்னர் தொடங்குவதற்காக முகப்புத் திரையில் காத்திருக்கும்</string>
+    <string name="batch_queue_keep">தக்கவை</string>
     <!-- Home Screen - App Info Screen -->
     <!-- Home Screen - Root Mode -->
     <!-- Patcher Screen -->

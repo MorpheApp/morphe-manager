@@ -13,6 +13,7 @@ import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.runtime.heapLimitMebibytes
 import app.morphe.manager.patcher.split.SplitPreparationEvent
 import app.morphe.manager.util.bytesToMebibytes
+import app.morphe.manager.util.toLogString
 import app.morphe.patcher.patch.Patch
 import app.morphe.patcher.patch.loadPatchesFromJar
 import kotlinx.coroutines.runBlocking
@@ -45,8 +46,21 @@ fun main(args: Array<String>) {
     // embedded OpenJDK build leaves as N/A
     System.setProperty("java.vendor", "The Android Project")
     val (commandsFile, eventsFile) = args
-    val collectors = ManagementFactory.getGarbageCollectorMXBeans()
-    serveRun(commandsFile, eventsFile, { collectors.sumOf { it.collectionTime } }) { loadPatchesFromJar(setOf(it)) }
+    val collectors = ManagementFactory.getGarbageCollectorMXBeans().toTypedArray()
+    val gcClock = GcClock {
+        var total = 0L
+        for (collector in collectors) total += collector.collectionTime
+        total
+    }
+    serveRun(commandsFile, eventsFile, gcClock) { loadPatchesFromJar(setOf(it)) }
+}
+
+/**
+ * The time the VM spent collecting garbage so far, in milliseconds. A primitive rather than a
+ * lambda returning Long, which would box: it is read when the heap has no room left for that.
+ */
+fun interface GcClock {
+    fun collectedMillis(): Long
 }
 
 /**
@@ -56,13 +70,13 @@ fun main(args: Array<String>) {
  *
  * @param commandsFile What the app writes [HostCommand]s to, one per line.
  * @param eventsFile What the app reads [HostEvent]s from.
- * @param gcMillis The time the VM spent collecting garbage so far, or null if it does not tell.
+ * @param gcClock The time the VM spent collecting garbage so far, or null if it does not tell.
  * @param loadPatches Reads the patches of a bundle, which is the one step that depends on the VM.
  */
 fun serveRun(
     commandsFile: String,
     eventsFile: String,
-    gcMillis: (() -> Long)?,
+    gcClock: GcClock?,
     loadPatches: (File) -> Collection<Patch<*>>
 ): Nothing {
     val code = try {
@@ -79,7 +93,7 @@ fun serveRun(
                         preloaded = command.bundles.associateWith { PreloadedBundle(File(it), loadPatches) }
 
                     is HostCommand.Run -> {
-                        run(command, preloaded, gcMillis, loadPatches, events)
+                        run(command, preloaded, gcClock, loadPatches, events)
                         break
                     }
                 }
@@ -98,13 +112,13 @@ fun serveRun(
 private fun run(
     command: HostCommand.Run,
     preloaded: Map<String, PreloadedBundle>,
-    gcMillis: (() -> Long)?,
+    gcClock: GcClock?,
     loadPatches: (File) -> Collection<Patch<*>>,
     events: HostEvents
 ) {
     events.logger.info(vmDescription())
     events.watchForStalls()
-    gcMillis?.let(events::watchForGcOverhead)
+    gcClock?.let(events::watchForGcOverhead)
 
     val failure = runCatching {
         val request = Json.decodeFromString(PatchRequest.serializer(), File(command.requestFile).readText())
@@ -129,7 +143,7 @@ private fun vmDescription(): String {
 private fun loadLogged(file: File, loadPatches: (File) -> Collection<Patch<*>>, logger: Logger): Collection<Patch<*>> {
     val started = TimeSource.Monotonic.markNow()
     return loadPatches(file).also {
-        logger.info("Loaded ${it.size} patches of ${file.name} in ${started.elapsedNow().inWholeMilliseconds}ms")
+        logger.info("Loaded ${it.size} patches of ${file.name} in ${started.elapsedNow().toLogString()}")
     }
 }
 
@@ -173,10 +187,10 @@ private class PreloadedBundle(private val file: File, loadPatches: (File) -> Col
         }
         // A run that waits here for long is held up by the load itself rather than by what follows
         if (!patches.isDone) {
-            logger.info("Waiting for ${file.name}, loading ahead for ${started.elapsedNow().inWholeMilliseconds}ms")
+            logger.info("Waiting for ${file.name}, loading ahead for ${started.elapsedNow().toLogString()}")
         }
         return try {
-            patches.get().also { logger.info("Loaded ${it.size} patches of ${file.name} ahead in ${loadedIn}ms") }
+            patches.get().also { logger.info("Loaded ${it.size} patches of ${file.name} ahead in ${loadedIn.milliseconds.toLogString()}") }
         } catch (e: ExecutionException) {
             logger.warn("Loading ${file.name} ahead of the run failed, loading it again: ${e.cause}")
             null
@@ -189,18 +203,21 @@ private class PreloadedBundle(private val file: File, loadPatches: (File) -> Col
 }
 
 /** Sends the run's events to the app, from whichever thread reports them. */
-private class HostEvents(stream: OutputStream) : AutoCloseable {
+private class HostEvents(private val stream: OutputStream) : AutoCloseable {
     private val writer = stream.bufferedWriter()
 
     // When the run last moved on, which a log line alone does not count as
     @Volatile
     private var progressedAt = System.nanoTime()
 
-    @Synchronized
     fun send(event: HostEvent) {
-        writer.write(HostEvent.encode(event))
-        writer.newLine()
-        writer.flush()
+        // Encoded before the lock is taken, so sendAndHalt only ever waits for a line being written
+        val line = HostEvent.encode(event)
+        synchronized(this) {
+            writer.write(line)
+            writer.newLine()
+            writer.flush()
+        }
         if (event !is HostEvent.Log) progressedAt = System.nanoTime()
     }
 
@@ -238,13 +255,18 @@ private class HostEvents(stream: OutputStream) : AutoCloseable {
      * time, and the run crawls on long past the point where the user gives up on it. Not every
      * collector gives up on its own, the serial one of a 32-bit JVM never does.
      *
-     * @param gcMillis The time the VM spent collecting garbage so far.
+     * By then the heap has no room for even the message, so the watch allocates nothing once it
+     * runs: it samples into arrays made up front and sends a verdict encoded before it is needed.
      */
-    fun watchForGcOverhead(gcMillis: () -> Long) {
+    fun watchForGcOverhead(gcClock: GcClock) {
+        val verdict = ('\n' + HostEvent.encode(HostEvent.Finished(GC_OVERHEAD_FAILURE)) + '\n').toByteArray()
+        val samples = (GC_OVERHEAD_WINDOW / GC_OVERHEAD_POLL).toInt()
+        // When each sample was taken, in nanoseconds, and the time spent collecting by then, in milliseconds
+        val takenAt = LongArray(samples)
+        val collectedAt = LongArray(samples)
+
         thread(isDaemon = true, name = "GcOverheadWatch") {
-            val started = TimeSource.Monotonic.markNow()
-            // When each sample was taken and the time spent collecting by then, in milliseconds
-            val samples = ArrayDeque<Pair<Long, Long>>()
+            var taken = 0
             while (true) {
                 try {
                     Thread.sleep(GC_OVERHEAD_POLL.inWholeMilliseconds)
@@ -252,25 +274,32 @@ private class HostEvents(stream: OutputStream) : AutoCloseable {
                     return@thread
                 }
 
-                val now = started.elapsedNow().inWholeMilliseconds
-                samples.addLast(now to gcMillis())
-                val (windowStart, windowGc) = samples.first()
-                val window = now - windowStart
-                if (window < GC_OVERHEAD_WINDOW.inWholeMilliseconds) continue
-                samples.removeFirst()
-
-                val share = (samples.last().second - windowGc).toDouble() / window
-                if (share < GC_OVERHEAD_LIMIT) continue
-
-                val error = OutOfMemoryError(
-                    "Collecting garbage took ${(share * 100).toInt()}% of the last " +
-                            "${window.milliseconds.inWholeSeconds}s, heap=${heapUsedMebibytes()}MB/${heapLimitMebibytes()}MB"
-                )
-                val failure = HostEvent.Failure(error.stackTraceToString(), outOfMemory = true)
-                send(HostEvent.Finished(failure))
-                exitProcess(0)
+                val now = System.nanoTime()
+                val collected = gcClock.collectedMillis()
+                // Holds the sample a whole window back, once there is one
+                val slot = taken++ % samples
+                if (taken > samples) {
+                    val windowMillis = (now - takenAt[slot]) / NANOS_PER_MILLI
+                    if ((collected - collectedAt[slot]) * 100 >= windowMillis * GC_OVERHEAD_PERCENT) {
+                        sendAndHalt(verdict)
+                    }
+                }
+                takenAt[slot] = now
+                collectedAt[slot] = collected
             }
         }
+    }
+
+    /**
+     * Sends an event encoded ahead and ends the process, without the shutdown that exit runs. The
+     * event starts on a line of its own, as a send the full heap cut short may have left half of one.
+     */
+    private fun sendAndHalt(encoded: ByteArray) {
+        synchronized(this) {
+            stream.write(encoded)
+            stream.flush()
+        }
+        Runtime.getRuntime().halt(0)
     }
 
     val logger = object : Logger() {
@@ -284,6 +313,8 @@ private class HostEvents(stream: OutputStream) : AutoCloseable {
             send(HostEvent.SplitPreparation(event))
 
         override suspend fun patchesStarted() = send(HostEvent.PatchesStarted)
+
+        override fun patchExecuting(name: String) = send(HostEvent.PatchExecuting(name))
 
         override suspend fun patchSucceeded(name: String) = send(HostEvent.PatchSucceeded(name))
 
@@ -311,7 +342,14 @@ private class HostEvents(stream: OutputStream) : AutoCloseable {
         // A run that patched TikTok on a 960MB heap spent about 70% of the time collecting
         val GC_OVERHEAD_WINDOW = 120.seconds
         val GC_OVERHEAD_POLL = 10.seconds
-        const val GC_OVERHEAD_LIMIT = 0.6
+        const val GC_OVERHEAD_PERCENT = 60
+        const val NANOS_PER_MILLI = 1_000_000L
+
+        val GC_OVERHEAD_FAILURE = HostEvent.Failure(
+            "${OutOfMemoryError::class.java.name}: Collecting garbage took over $GC_OVERHEAD_PERCENT% " +
+                    "of the last ${GC_OVERHEAD_WINDOW.inWholeSeconds}s",
+            outOfMemory = true
+        )
     }
 }
 

@@ -1,0 +1,52 @@
+{
+  "licenses": {
+    "ANTLR-BSD": {
+      "name": "BSD License",
+      "url": "http://www.antlr.org/license.html"
+    },
+    "ASDKL": {
+      "name": "Android Software Development Kit License",
+      "url": "https://developer.android.com/studio/terms.html"
+    },
+    "Bouncy-Castle": {
+      "name": "Bouncy Castle Licence",
+      "url": "https://www.bouncycastle.org/licence.html"
+    },
+    "GPL-2.0-with-classpath-exception": {
+      "name": "GNU General Public License v2.0 with Classpath Exception",
+      "url": "https://openjdk.org/legal/gplv2+ce.html"
+    },
+    "GPL-3.0-only": {
+      "name": "GNU General Public License v3.0 only",
+      "url": "https://spdx.org/licenses/GPL-3.0-only.html"
+    },
+    "MIT": {
+      "name": "MIT License",
+      "url": "https://spdx.org/licenses/MIT.html"
+    }
+  },
+  "libraries": [
+    {
+      "name": "Morphe Manager",
+      "website": "https://Morphe.software",
+      "licenses": ["GPL-3.0-only"],
+      "text": "NOTICE.txt"
+    },
+    {
+      "name": "OpenJDK",
+      "description": "The Java runtime that patching runs in, built for Android by AngelAuraMC. Its source is at https://github.com/AngelAuraMC/angelauramc-openjdk-build, https://github.com/openjdk/jdk17u and https://github.com/openjdk/jdk25u",
+      "website": "https://openjdk.org",
+      "licenses": ["GPL-2.0-with-classpath-exception"]
+    },
+    {
+      "name": "ARSCLib",
+      "website": "https://github.com/REAndroid/ARSCLib",
+      "licenses": ["Apache-2.0"]
+    },
+    {
+      "name": "libsu (core)",
+      "website": "https://github.com/topjohnwu/libsu",
+      "licenses": ["Apache-2.0"]
+    }
+  ]
+}

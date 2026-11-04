@@ -183,15 +183,12 @@ internal fun SectionsLayout(
             onOpenSources = chromeActions.onOpenSources,
             onHideMoreAppsCard = chromeActions.onHideMoreAppsCard,
             footerBar = footerBar,
-            footerBarHeight = insets.bottom,
+            insets = insets,
             bottomBarHeight = bottomBarHeight,
             itemSpacing = windowSize.itemSpacing,
-            // The gutters keep the scrollbar at the list's edge clear of the cards
-            horizontalPadding = insets.horizontal,
             onboardingState = onboardingState,
             showFadeOverlay = !isLandscape(),
             header = greeting,
-            topPadding = insets.top + Defaults.SpaceMedium,
             alertsHeight = alertsHeight
         )
     }
@@ -244,19 +241,17 @@ internal fun MainAppsSection(
     onOpenSources: () -> Unit,
     onHideMoreAppsCard: () -> Unit,
     footerBar: HomeFooterBarHost,
+    // Room the page leaves for its header, the bar docked over the list's lower edge, such as a
+    // selection's, and the gutters that keep the scrollbar at the list's edge clear of the cards
+    insets: PageInsets,
     modifier: Modifier = Modifier,
-    // Height of the bar docked over the list's lower edge, such as a selection's
-    footerBarHeight: Dp = 0.dp,
     // Height of the navigation floating over the list's lower edge
     bottomBarHeight: Dp = 0.dp,
     itemSpacing: Dp = 16.dp,
-    horizontalPadding: Dp = 0.dp,
     onboardingState: OnboardingState? = null,
     showFadeOverlay: Boolean = true,
     // Opens the list and scrolls away with it, such as the greeting
     header: (@Composable () -> Unit)? = null,
-    // Room above the first row, for the page's header the list scrolls on under
-    topPadding: Dp = 0.dp,
     // Further room for the alerts hanging under the header, read as the list is laid out
     alertsHeight: () -> Dp = { 0.dp }
 ) {
@@ -280,7 +275,9 @@ internal fun MainAppsSection(
 
     // Clears whichever bar reaches into the list: the floating navigation, or the docked bar that
     // takes its place
-    val footerBarOverlap = maxOf(footerBarHeight, bottomBarHeight)
+    val footerBarOverlap = maxOf(insets.bottom, bottomBarHeight)
+    // Room above the first row, for the page's header the list scrolls on under
+    val topPadding = insets.top + Defaults.SpaceMedium
 
     // Retire stale header action state when switching grouping modes.
     LaunchedEffect(appGrouping) { state.closeCategoryBar() }
@@ -787,9 +784,9 @@ internal fun MainAppsSection(
                         )
                         // Cached so the LazyColumn doesn't allocate a new PaddingValues on
                         // every recomposition (which can be per-frame under scroll)
-                        val listContentPadding = remember(horizontalPadding, topPadding, alertsHeight, footerClearance) {
+                        val listContentPadding = remember(insets, alertsHeight, footerClearance) {
                             ListContentPadding(
-                                horizontal = horizontalPadding,
+                                horizontal = insets.horizontal,
                                 top = topPadding,
                                 bottom = footerClearance,
                                 extraTop = alertsHeight
@@ -943,7 +940,7 @@ internal fun MainAppsSection(
 
                         ListScrollbar(
                             listState = listState,
-                            modifier = Modifier.scrollbarSystemBarsPadding(),
+                            modifier = Modifier.padding(insets.scrollbarPadding(bottom = footerBarOverlap)),
                             alphabetTargets = scrollTargets,
                             alphabetMode = alphabetScrollMode
                         )

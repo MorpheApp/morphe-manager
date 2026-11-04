@@ -8,10 +8,9 @@ package app.morphe.manager.ui.model
 import android.app.Application
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
+import app.morphe.manager.util.hasGooglePlayServices
 import app.morphe.manager.util.syncFcmTopics
 import app.morphe.manager.worker.UpdateCheckWorker
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.GoogleApiAvailability
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,8 +30,7 @@ class PostPatchPrompts(
     private val prefs: PreferencesManager,
     private val scope: CoroutineScope
 ) {
-    private val hasGms = GoogleApiAvailability.getInstance()
-        .isGooglePlayServicesAvailable(app) == ConnectionResult.SUCCESS
+    private val hasGms = app.hasGooglePlayServices()
 
     private val _notification = MutableStateFlow(false)
 

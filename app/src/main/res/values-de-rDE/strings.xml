@@ -65,6 +65,7 @@ Diese App aus der vorhandenen Quelle hinzufügen?</string>
     <string name="list_options_state_description">Sortiert nach %1$s, gefiltert nach %2$s</string>
     <string name="home_app_filter_clones">Klone</string>
     <string name="home_app_grouping_none">Keine</string>
+    <string name="home_app_sort_manual_hint">Halte eine App lange gedrückt und tippe dann auf die Schaltfläche zum Sortieren</string>
     <string name="home_app_sort_recommended">Empfohlene Reihenfolge</string>
     <string name="home_app_sort_updates_first">Patch-Updates zuerst</string>
     <string name="home_app_sort_recently_patched">Zuletzt gepatcht</string>
@@ -77,6 +78,7 @@ Diese App aus der vorhandenen Quelle hinzufügen?</string>
     <string name="home_no_apps_filter_subtitle">Nichts entspricht %s</string>
     <string name="home_category_add">Kategorie hinzufügen</string>
     <string name="home_category_all_apps">Alle Apps</string>
+    <string name="home_app_grouping_categories">Kategorien</string>
     <string name="home_category_uncategorized">Nicht kategorisiert</string>
     <string name="home_category_new_title">Neue Kategorie</string>
     <string name="home_category_rename_title">Kategorie umbenennen</string>
@@ -289,6 +291,9 @@ Diese App aus der vorhandenen Quelle hinzufügen?</string>
     <string name="home_download_instructions_step2_search_note">Morphe kann nicht für diese Websites bürgen. Überspringe diejenigen, die statt einer APK-Datei einen eigenen App-Store anbieten</string>
     <string name="home_download_instructions_step3_search">Lade auf dieser Website die APK der Version &lt;b&gt;%s&lt;/b&gt; herunter, nicht die neueste Version</string>
     <string name="home_download_instructions_step3_search_any">Lade auf dieser Website die APK der App herunter. &lt;b&gt;Jede Version&lt;/b&gt; kann gepatcht werden</string>
+    <string name="home_download_instructions_step2_github">Drücke unter &lt;b&gt;Assets&lt;/b&gt; von Version &lt;b&gt;%s&lt;/b&gt; auf die Datei, die auf &lt;b&gt;.apk&lt;/b&gt; endet</string>
+    <string name="home_download_instructions_step2_github_latest">Drücke unter &lt;b&gt;Assets&lt;/b&gt; der neuesten Version auf die Datei, die auf &lt;b&gt;.apk&lt;/b&gt; endet</string>
+    <string name="home_download_instructions_step2_github_note">Wenn es mehrere APK-Dateien gibt, wähle diejenige aus, die nach %s benannt ist, oder die universelle</string>
     <string name="home_download_instructions_download_button_toast">Drücke die Download-Taste auf der Website und nicht hier 😊 </string>
     <string name="home_download_instructions_download_button_toast_2">Ausgezeichnet! Klicke nun auf \'Weiter\' und gehe zur Website 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Übung macht den Meister, und du bist auf dem richtigen Weg 💪</string>
@@ -496,6 +501,9 @@ Für optimale Ergebnisse empfiehlt diese App, eine &lt;b&gt;vollständige APK&lt
     <string name="batch_queue_pending_subtitle">Tippen zum Überprüfen und Starten</string>
     <string name="batch_queue_clear_title">Warteschlange löschen?</string>
     <string name="batch_queue_clear_description">Alle Apps werden aus der Warteschlange entfernt</string>
+    <string name="batch_queue_keep_title">Warteschlange beibehalten?</string>
+    <string name="batch_queue_keep_description">Die in der Warteschlange stehenden Apps warten auf dem Startbildschirm, um später gestartet zu werden</string>
+    <string name="batch_queue_keep">Beibehalten</string>
     <string name="shortcut_repatch_short">Neu patchen</string>
     <string name="shortcut_repatch_long">Veraltete Apps neu patchen</string>
     <string name="shortcut_check_updates_short">Auf Updates prüfen</string>
@@ -1116,7 +1124,6 @@ Details: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Sie müssen die Anmeldeinformationen des Keystores zum Importieren eingeben</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Benutzername (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Passwort</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Keystore-Format</string>
     <string name="settings_system_import_keystore_wrong_credentials">Falsche Keystore-Anmeldeinformationen</string>
     <string name="settings_system_import_keystore_success">Keystore importiert</string>
     <string name="settings_system_import_keystore_failed">Fehler beim Importieren des Keystores</string>

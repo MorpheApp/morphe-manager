@@ -5,9 +5,15 @@
 
 package app.morphe.manager.util
 
+import app.morphe.patcher.apk.ApkSigner
+import java.io.ByteArrayOutputStream
 import java.io.DataInputStream
 import java.io.InputStream
+import java.security.KeyFactory
 import java.security.MessageDigest
+import java.security.cert.CertificateFactory
+import java.security.cert.X509Certificate
+import java.security.spec.PKCS8EncodedKeySpec
 
 /**
  * Minimal JKS keystore parser that extracts private key + certificate chain entries.
@@ -31,6 +37,28 @@ object JksKeyStoreParser {
         val privateKeyDer: List<Byte>,
         val certificatesDer: List<List<Byte>>
     )
+
+    /**
+     * Re-encodes every key in the JKS keystore [data] as a PKCS12 keystore that opens with
+     * [password], the one the JKS keys are protected by.
+     *
+     * @throws IllegalArgumentException if [data] is not a JKS keystore or holds no key.
+     * @throws SecurityException if key decryption fails (wrong password).
+     */
+    fun toPkcs12(data: ByteArray, password: String): ByteArray {
+        val certificateFactory = CertificateFactory.getInstance("X.509")
+        val entries = parse(data.inputStream(), password).associate { entry ->
+            val certificate = certificateFactory
+                .generateCertificate(entry.certificatesDer.first().toByteArray().inputStream()) as X509Certificate
+            // The key is of whatever kind its certificate names, EC and DSA as well as RSA
+            val privateKey = KeyFactory.getInstance(certificate.publicKey.algorithm)
+                .generatePrivate(PKCS8EncodedKeySpec(entry.privateKeyDer.toByteArray()))
+            entry.alias to ApkSigner.PrivateKeyCertificatePair(privateKey, certificate)
+        }
+        require(entries.isNotEmpty()) { "No keys found in JKS keystore" }
+
+        return ByteArrayOutputStream().also { ApkSigner.writeKeyStore(it, password, entries) }.toByteArray()
+    }
 
     /**
      * Parses a JKS [inputStream] and returns all private key entries.

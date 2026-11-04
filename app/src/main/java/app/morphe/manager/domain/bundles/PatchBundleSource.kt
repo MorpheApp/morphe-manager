@@ -18,6 +18,13 @@ import app.morphe.manager.util.isPatcherOutdated
 import app.morphe.patcher.patch.PatchBundleSignature
 import java.io.File
 import java.io.IOException
+import java.net.URLEncoder
+
+/**
+ * Values of [PatchBundleSource.PATCH_SOURCE_HEADER] and
+ * [PatchBundleSource.PATCH_SOURCE_VERSION_HEADER], see [PatchBundleSource.patchSourceHeaders].
+ */
+data class PatchSourceHeaders(val sources: String, val versions: String)
 
 /**
  * A [PatchBundle] source.
@@ -78,6 +85,12 @@ sealed class PatchBundleSource(
      * releases carry no date, as a local file, holds the time it was added there instead.
      */
     val releasedAt get() = createdAt ?: updatedAt
+
+    /**
+     * How the API is told an app is patched from this source, in the add-source format such as
+     * `github=crimera/piko`. See [Extensions.patchSourceHeaders].
+     */
+    abstract val patchSourceEntry: String
 
     /** Patcher version this bundle was built for, null for bundles built before the attribute existed. */
     val requiredPatcherVersion get() = manifestAttributes?.patcherVersion
@@ -196,6 +209,43 @@ sealed class PatchBundleSource(
         private const val SIGNING_KEY_FILE_NAME = "signing.key"
         private const val JSON_EXTENSION = ".json"
         val PatchBundleSource.isDefault inline get() = uid == 0
+
+        /** Header the API counts web search requests by, per source the app is patched from. */
+        const val PATCH_SOURCE_HEADER = "X-Morphe-Patch-Source"
+
+        /** Installed version of each source of [PATCH_SOURCE_HEADER], in the same order. */
+        const val PATCH_SOURCE_VERSION_HEADER = "X-Morphe-Patch-Source-Version"
+
+        // The API reads no more entries than this, and refuses longer ones
+        private const val MAX_PATCH_SOURCES = 3
+        internal const val MAX_PATCH_SOURCE_ENTRY_LENGTH = 100
+        private const val MAX_PATCH_SOURCE_VERSION_LENGTH = 40
+
+        /** Headers naming [sources] and their versions, or null when there are none. */
+        fun patchSourceHeaders(sources: List<PatchBundleSource>): PatchSourceHeaders? {
+            val named = sources.distinctBy { it.patchSourceEntry }.take(MAX_PATCH_SOURCES)
+            if (named.isEmpty()) return null
+            return PatchSourceHeaders(
+                sources = named.joinToString(",") { it.patchSourceEntry },
+                versions = named.joinToString(",") { patchSourceVersion(it.version) }
+            )
+        }
+
+        /** [version] as the API accepts it, "unknown" when there is none. */
+        internal fun patchSourceVersion(version: String?): String =
+            version.orEmpty().filter { (it.isLetterOrDigit() && it.code < 128) || it in ".+-" }
+                .take(MAX_PATCH_SOURCE_VERSION_LENGTH).ifEmpty { "unknown" }
+
+        /**
+         * Entry of a source known only by its [name], as a bundle file is. Encoded the way the
+         * add-source link encodes a name, and shortened to what the API accepts.
+         */
+        fun localPatchSourceEntry(name: String): String {
+            val encoded = name.takeIf { it.isNotBlank() }
+                ?.let { URLEncoder.encode(it.trim(), "UTF-8").replace("+", "%20") }
+                ?: "unknown"
+            return "local=$encoded".take(MAX_PATCH_SOURCE_ENTRY_LENGTH)
+        }
         val PatchBundleSource.asRemoteOrNull inline get() = this as? RemotePatchBundle
 
         /**

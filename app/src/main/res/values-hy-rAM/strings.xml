@@ -64,6 +64,7 @@
     <string name="list_options_state_description">Տեսակավորված է ըստ %1$s-ի, զտված է ըստ %2$s-ի</string>
     <string name="home_app_filter_clones">Կլոններ</string>
     <string name="home_app_grouping_none">Ոչինչ</string>
+    <string name="home_app_sort_manual_hint">Երկար սեղմեք հավելվածի վրա, ապա սեղմեք վերադասավորման կոճակը</string>
     <string name="home_app_sort_recommended">Հ سفارشված հերթականություն</string>
     <string name="home_app_sort_updates_first">Թարմացումները՝ առաջին հերթին</string>
     <string name="home_app_sort_recently_patched">Վերջերս պատչված</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Ոչինչ չի համապատասխանել %s-ին</string>
     <string name="home_category_add">Ավելացնել կատեգորիա</string>
     <string name="home_category_all_apps">Բոլոր հավելվածները</string>
+    <string name="home_app_grouping_categories">Կատեգորիաներ</string>
     <string name="home_category_uncategorized">Առանց կատեգորիայի</string>
     <string name="home_category_new_title">Նոր կատեգորիա</string>
     <string name="home_category_rename_title">Վերանվանել կատեգորիան</string>
@@ -288,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe-ը չի կարող երաշխավորել այս վեբ-կայքերը: Բաց թողեք նրանք, որոնք առաջարկում են իրենց սեփական հավելվածների խանութը APK ֆայլի փոխարեն</string>
     <string name="home_download_instructions_step3_search">Այդ վեբ-կայքում ներբեռնեք &lt;b&gt;%s&lt;/b&gt; տարբերակի APK-ն, ոչ թե ամենանորը</string>
     <string name="home_download_instructions_step3_search_any">Այդ վեբ-կայքում ներբեռնեք հավելվածի APK-ն: &lt;b&gt;Ցանկացած տարբերակ&lt;/b&gt; կարող է փոփոխվել</string>
+    <string name="home_download_instructions_step2_github">Թողարկման &lt;b&gt;%s&lt;/b&gt; &lt;b&gt;Assets&lt;/b&gt; բաժնում սեղմեք &lt;b&gt;.apk&lt;/b&gt; հավելվածով ավարտվող ֆայլի վրա</string>
+    <string name="home_download_instructions_step2_github_latest">Ամենանոր թողարկման &lt;b&gt;Assets&lt;/b&gt; բաժնում սեղմեք &lt;b&gt;.apk&lt;/b&gt; հավելվածով ավարտվող ֆայլի վրա</string>
+    <string name="home_download_instructions_step2_github_note">Եթե կան մի քանի APK ֆայլեր, ընտրեք այն մեկը, որը կոչված է %s անունով, կամ համամուտականը</string>
     <string name="home_download_instructions_download_button_toast">Սեղմեք ներբեռնման կոճակը կայքում, ոչ թե այստեղ 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Հիանալի է: Հիմա սեղմեք \"շարունակել\" և անցեք կայք 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Պրակտիկան կատարելին է դարձնում, և դուք արդեն հասնում եք դրան 💪</string>
@@ -495,6 +500,9 @@
     <string name="batch_queue_pending_subtitle">Հպեք՝ վերանայելու և սկսելու համար</string>
     <string name="batch_queue_clear_title">Մաքրե՞լ հերթը։</string>
     <string name="batch_queue_clear_description">Բոլոր հավելվածները կհեռացվեն հերթից</string>
+    <string name="batch_queue_keep_title">Պահպանե՞լ հերթը։</string>
+    <string name="batch_queue_keep_description">Հերթի դրված հավելվածները կսպասեն գլխավոր էկրանին՝ հետագայում գործարկվելու համար</string>
+    <string name="batch_queue_keep">Պահպանել</string>
     <string name="shortcut_repatch_short">Վերապատչել</string>
     <string name="shortcut_repatch_long">Վերապատչել հնացած հավելվածները</string>
     <string name="shortcut_check_updates_short">Ստուգել թարմացումները</string>
@@ -1114,7 +1122,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">Այն ներկայացնելու համար անհրաժեշտ է մուտքագրել keystore-ի հավաստագրերը</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Օգտանուն (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Գաղտնաբառ</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Բանալիների պահոցի ձևաչափը</string>
     <string name="settings_system_import_keystore_wrong_credentials">Բանալիների պահոցի սխալ հավաստագրեր</string>
     <string name="settings_system_import_keystore_success">Բանալիների պահոցը ներմուծվեց</string>
     <string name="settings_system_import_keystore_failed">Բանալիների պահոցի ներմուծումը ձախողվեց</string>

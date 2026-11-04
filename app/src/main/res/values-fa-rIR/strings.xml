@@ -64,6 +64,7 @@
     <string name="list_options_state_description">مرتب‌شده بر اساس %1$s، فیلترشده بر اساس %2$s</string>
     <string name="home_app_filter_clones">نسخه‌های کلون</string>
     <string name="home_app_grouping_none">هیچ‌کدام</string>
+    <string name="home_app_sort_manual_hint">روی یک برنامه لمس طولانی کنید، سپس دکمهٔ مرتب‌سازی مجدد را بزنید</string>
     <string name="home_app_sort_recommended">ترتیب پیشنهادی</string>
     <string name="home_app_sort_updates_first">ابتدا به‌روزرسانی‌های پچ</string>
     <string name="home_app_sort_recently_patched">به‌تازگی پچ‌شده</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">هیچ موردی با %s مطابقت نداشت</string>
     <string name="home_category_add">افزودن دسته</string>
     <string name="home_category_all_apps">همهٔ برنامه‌ها</string>
+    <string name="home_app_grouping_categories">دسته‌بندی‌ها</string>
     <string name="home_category_uncategorized">بدون دسته</string>
     <string name="home_category_new_title">دستهٔ جدید</string>
     <string name="home_category_rename_title">تغییر نام دسته</string>
@@ -288,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe این وب‌سایت‌ها را تأیید نمی‌کند. وب‌سایت‌هایی را که به‌جای فایل APK فروشگاه برنامهٔ خودشان را پیشنهاد می‌دهند، نادیده بگیرید</string>
     <string name="home_download_instructions_step3_search">در آن وب‌سایت، APK نسخهٔ &lt;b&gt;%s&lt;/b&gt; را دانلود کنید، نه جدیدترین نسخه را</string>
     <string name="home_download_instructions_step3_search_any">در آن وب‌سایت، APK برنامه را دانلود کنید. &lt;b&gt;هر نسخه‌ای&lt;/b&gt; را می‌توان پچ کرد</string>
+    <string name="home_download_instructions_step2_github">در بخش &lt;b&gt;Assets&lt;/b&gt; از نسخه &lt;b&gt;%s&lt;/b&gt;، روی فایلی که به &lt;b&gt;.apk&lt;/b&gt; ختم می‌شود بزنید</string>
+    <string name="home_download_instructions_step2_github_latest">در بخش &lt;b&gt;Assets&lt;/b&gt; از جدیدترین نسخه، روی فایلی که به &lt;b&gt;.apk&lt;/b&gt; ختم می‌شود بزنید</string>
+    <string name="home_download_instructions_step2_github_note">اگر چندین فایل APK وجود دارد، فایلی که به نام %s است یا فایل universal را انتخاب کنید</string>
     <string name="home_download_instructions_download_button_toast">دکمه دانلود رو توی وبسایتش بزن، نه اینجا ☺️</string>
     <string name="home_download_instructions_download_button_toast_2">عالی است! حالا ادامه را بزنید و به وب‌سایت بروید 👆</string>
     <string name="home_download_instructions_download_button_toast_3">کار نیکو کردن از پر کردن است؛ دارید پیشرفت می‌کنید 💪</string>
@@ -495,6 +500,9 @@
     <string name="batch_queue_pending_subtitle">برای بررسی و شروع، ضربه بزنید</string>
     <string name="batch_queue_clear_title">صف پاک شود؟</string>
     <string name="batch_queue_clear_description">تمام برنامه‌ها از صف حذف خواهند شد</string>
+    <string name="batch_queue_keep_title">صف حفظ شود؟</string>
+    <string name="batch_queue_keep_description">برنامه‌های موجود در صف در صفحه اصلی منتظر می‌مانند تا بعداً اجرا شوند</string>
+    <string name="batch_queue_keep">حفظ</string>
     <string name="shortcut_repatch_short">دوباره پچ کن</string>
     <string name="shortcut_repatch_long">دوباره پچ‌کردن برنامه‌های قدیمی</string>
     <string name="shortcut_check_updates_short">بررسی به‌روزرسانی‌ها</string>
@@ -1114,7 +1122,6 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_description">برای واردکردن مخزن کلید، باید اطلاعات آن را وارد کنید</string>
     <string name="settings_system_import_keystore_dialog_alias_field">نام کاربری (نام مستعار)</string>
     <string name="settings_system_import_keystore_dialog_password_field">گذرواژه</string>
-    <string name="settings_system_import_keystore_dialog_format_field">قالب مخزن کلید</string>
     <string name="settings_system_import_keystore_wrong_credentials">اطلاعات مخزن کلید نادرست است</string>
     <string name="settings_system_import_keystore_success">مخزن کلید وارد شد</string>
     <string name="settings_system_import_keystore_failed">واردکردن مخزن کلید ناموفق بود</string>

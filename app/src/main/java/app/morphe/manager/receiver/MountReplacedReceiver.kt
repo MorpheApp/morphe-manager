@@ -10,9 +10,9 @@ import android.content.Context
 import android.content.Intent
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.domain.repository.InstalledAppRepository
+import app.morphe.manager.notification.UpdateNotifications
 import app.morphe.manager.util.AppCoroutineScope
 import app.morphe.manager.util.PM
-import app.morphe.manager.util.UpdateNotificationManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -25,7 +25,7 @@ import org.koin.core.component.inject
 class MountReplacedReceiver : BroadcastReceiver(), KoinComponent {
     private val installedAppRepository: InstalledAppRepository by inject()
     private val pm: PM by inject()
-    private val notificationManager: UpdateNotificationManager by inject()
+    private val notificationManager: UpdateNotifications by inject()
     private val applicationScope: AppCoroutineScope by inject()
 
     override fun onReceive(context: Context, intent: Intent) {

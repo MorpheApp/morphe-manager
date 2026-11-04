@@ -18,8 +18,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.util.KeystoreInputFormat
-import app.morphe.manager.util.enumByNameOrNull
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
 
@@ -30,12 +28,10 @@ import com.composables.icons.materialsymbols.rounded.*
 @Composable
 fun DialogHostScope.KeystoreCredentialsDialog(
     onDismiss: () -> Unit,
-    initialFormat: KeystoreInputFormat = KeystoreInputFormat.KEYSTORE,
-    onSubmit: (alias: String, keyPassword: String, format: KeystoreInputFormat) -> Unit
+    onSubmit: (alias: String, keyPassword: String) -> Unit
 ) {
     val alias = rememberSaveable { mutableStateOf("") }
     val pass = rememberSaveable { mutableStateOf("") }
-    val format = rememberSaveable(initialFormat) { mutableStateOf(initialFormat) }
 
     AppDialog(
         onDismissRequest = onDismiss,
@@ -44,7 +40,7 @@ fun DialogHostScope.KeystoreCredentialsDialog(
         footer = {
             AppDialogButtonRow(
                 primaryText = stringResource(R.string.import_),
-                onPrimaryClick = { onSubmit(alias.value, pass.value, format.value) },
+                onPrimaryClick = { onSubmit(alias.value, pass.value) },
                 secondaryText = stringResource(android.R.string.cancel),
                 onSecondaryClick = onDismiss
             )
@@ -54,26 +50,6 @@ fun DialogHostScope.KeystoreCredentialsDialog(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)
         ) {
-            // Format selector
-            val formatItems = remember {
-                KeystoreInputFormat.entries.associate { it.displayName to it.name }
-            }
-            AppDialogDropdownTextField(
-                value = format.value.name,
-                onValueChange = { name ->
-                    format.value = enumByNameOrNull<KeystoreInputFormat>(name) ?: format.value
-                },
-                dropdownItems = formatItems,
-                allowCustomValue = false,
-                label = { Text(stringResource(R.string.settings_system_import_keystore_dialog_format_field)) },
-                leadingIcon = {
-                    Icon(
-                        imageVector = MaterialSymbols.Rounded.Folder_zip,
-                        contentDescription = null
-                    )
-                }
-            )
-
             // Alias Input
             AppDialogTextField(
                 value = alias.value,

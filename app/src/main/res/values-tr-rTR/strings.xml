@@ -283,13 +283,16 @@
     <string name="home_download_instructions_title">Orijinal APK\'yi indir</string>
     <string name="home_download_instructions_finding">İndirme sayfası aranıyor…</string>
     <string name="home_download_instructions_step1">Aşağıdaki \"%s\" düğmesine tıklayın</string>
-    <string name="home_download_instructions_step2_part1">Web sayfasını aşağı kaydırın ve</string>
+    <string name="home_download_instructions_step2_part1">Web sayfasını aşağı kaydırın ve şuna basın</string>
     <string name="home_download_instructions_step2_generic">Web sayfasını aşağı kaydırın ve indirme düğmesine basın</string>
     <string name="home_download_instructions_step2_variant">Web sayfasını aşağı kaydırın ve en üstteki &lt;b&gt;APK varyantının&lt;/b&gt; indirme düğmesine basın</string>
     <string name="home_download_instructions_step2_search">Güvendiğiniz bir web sitesinden bir arama sonucunu açın</string>
     <string name="home_download_instructions_step2_search_note">Morphe bu web sitelerini garanti edemez. APK dosyası yerine kendi uygulama mağazasını sunanları atlayın</string>
     <string name="home_download_instructions_step3_search">Bu web sitesinde, en yeni sürümü değil, &lt;b&gt;%s&lt;/b&gt; sürümünün APK\'sını indirin</string>
     <string name="home_download_instructions_step3_search_any">Bu web sitesinde uygulamanın APK\'sını indirin. &lt;b&gt;Herhangi bir sürüm&lt;/b&gt; yamalanabilir</string>
+    <string name="home_download_instructions_step2_github">&lt;b&gt;%s&lt;/b&gt; sürümünün &lt;b&gt;Assets&lt;/b&gt; kısmında &lt;b&gt;.apk&lt;/b&gt; ile biten dosyaya tıklayın</string>
+    <string name="home_download_instructions_step2_github_latest">En son sürümün &lt;b&gt;Assets&lt;/b&gt; kısmında &lt;b&gt;.apk&lt;/b&gt; ile biten dosyaya tıklayın</string>
+    <string name="home_download_instructions_step2_github_note">Birden fazla APK dosyası varsa, %s adını taşıyanı veya evrensel (universal) olanı seçin</string>
     <string name="home_download_instructions_download_button_toast">Web sitesindeki indirme düğmesine basın, buradakine değil 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Harika! Şimdi devam\'a tıklayın ve web sitesine gidin 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Pratik mükemmelleştirir ve yavaş yavaş ilerliyorsun 💪</string>
@@ -497,6 +500,9 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="batch_queue_pending_subtitle">Gözden geçirip başlatmak için dokunun</string>
     <string name="batch_queue_clear_title">Kuyruk temizlensin mi?</string>
     <string name="batch_queue_clear_description">Tüm uygulamalar kuyruktan kaldırılacak</string>
+    <string name="batch_queue_keep_title">Kuyruk korunsun mu?</string>
+    <string name="batch_queue_keep_description">Kuyruktaki uygulamalar daha sonra başlatılmak üzere ana ekranda bekleyecektir</string>
+    <string name="batch_queue_keep">Koru</string>
     <string name="shortcut_repatch_short">Yeniden yama</string>
     <string name="shortcut_repatch_long">Güncel olmayan uygulamaları yeniden yama</string>
     <string name="shortcut_check_updates_short">Güncellemeleri kontrol et</string>
@@ -1116,7 +1122,6 @@ Ayrıntılar: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">İçe aktarmak için anahtar deposu kimlik bilgilerini girmeniz gerekecek</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Kullanıcı Adı (Takma Ad)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Şifre</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Anahtar deposu formatı</string>
     <string name="settings_system_import_keystore_wrong_credentials">Yanlış anahtar deposu kimlik bilgileri</string>
     <string name="settings_system_import_keystore_success">Anahtar deposu içe aktarıldı</string>
     <string name="settings_system_import_keystore_failed">Anahtar deposu içe aktarılamadı</string>
@@ -1236,7 +1241,7 @@ Ayrıntılar: %2$s"</string>
     <string name="settings_system_apk_download_helper">APK indirme yardımcısı</string>
     <string name="settings_system_apk_download_helper_trusted_count">Güvenilen: %1$d / %2$d</string>
     <string name="settings_system_apk_download_helper_dialog_description">Yardımcı uygulamalar sizin için orijinal APK\'lar indirebilir. İndirme talimatlarında yalnızca burada güvendiğiniz uygulamalar sunulur.</string>
-    <string name="settings_system_apk_download_helper_trust_title">Bu yardımcıya güveniliyor mu?</string>
+    <string name="settings_system_apk_download_helper_trust_title">Bu yardımcıya güvenilsin mi?</string>
     <string name="settings_system_apk_download_helper_warning">APK, yardımcı uygulamadan gelir, bu yüzden yalnızca tanıdığınız uygulamalara güvenin. Morphe, yamalamadan önce her dosyanın paketini, sürümünü ve imzasını yine de kontrol eder.</string>
     <string name="settings_system_apk_download_helper_installed_by">%s tarafından yüklendi</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Yükleyen bilinmiyor</string>

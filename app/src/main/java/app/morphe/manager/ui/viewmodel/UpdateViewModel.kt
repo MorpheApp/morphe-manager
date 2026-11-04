@@ -29,8 +29,8 @@ import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.installer.awaitHandedOffInstall
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.ManagerUpdateRepository
-import app.morphe.manager.network.api.MorpheAPI
-import app.morphe.manager.network.dto.MorpheAsset
+import app.morphe.manager.network.api.ReleaseAPI
+import app.morphe.manager.network.dto.ReleaseAsset
 import app.morphe.manager.network.service.AssetDownloader
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.*
@@ -46,7 +46,7 @@ import java.io.IOException
 class UpdateViewModel(
     private val app: Application,
     private val messages: UserMessages,
-    private val morpheAPI: MorpheAPI,
+    private val releaseAPI: ReleaseAPI,
     private val managerUpdateRepository: ManagerUpdateRepository,
     private val assetDownloader: AssetDownloader,
     private val sessionInstaller: SessionInstaller,
@@ -77,7 +77,7 @@ class UpdateViewModel(
     var installError by mutableStateOf("")
 
     // Release info for update dialog
-    var releaseInfo: MorpheAsset? by mutableStateOf(null)
+    var releaseInfo: ReleaseAsset? by mutableStateOf(null)
         private set
 
     // True while an update check is in flight, so the dialog can tell a check that is still
@@ -427,9 +427,9 @@ class UpdateViewModel(
                 // causing entriesNewerThan() to return an empty list even though a newer dev version
                 // is available and its changelog lives on the dev branch
                 val targetIsPrerelease = release?.version?.contains('-') == true
-                val forDevBranch = morpheAPI.isDevBuild || targetIsPrerelease
+                val forDevBranch = releaseAPI.isDevBuild || targetIsPrerelease
                 val entries = managerEntriesCache.getOrPut(forDevBranch) {
-                    morpheAPI.fetchManagerChangelog(forDevBranch = forDevBranch)
+                    releaseAPI.fetchManagerChangelog(forDevBranch = forDevBranch)
                 }
 
                 val newer = if (release == null) emptyList() else {
@@ -478,7 +478,7 @@ class UpdateViewModel(
 
         return if (notes.isBlank()) null else ChangelogEntry(
             version = release.version.normalizeVersion(),
-            date = release.createdAt.date.toString(),
+            date = release.createdAt.toLocalDate().toString(),
             content = notes
         )
     }
@@ -504,7 +504,7 @@ class UpdateViewModel(
         olderEntriesJob = viewModelScope.launch {
             try {
                 val entries = managerEntriesCache.getOrPut(false) {
-                    morpheAPI.fetchManagerChangelog(forDevBranch = false)
+                    releaseAPI.fetchManagerChangelog(forDevBranch = false)
                 }
                 olderManagerEntries = entries.filter {
                     it.version.normalizeVersion() !in exclude && !it.isPrerelease

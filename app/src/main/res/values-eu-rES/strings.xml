@@ -64,6 +64,7 @@
     <string name="list_options_state_description">%1$s arabera ordenatuta, %2$s arabera filtratuta</string>
     <string name="home_app_filter_clones">Kloneak</string>
     <string name="home_app_grouping_none">Ezik</string>
+    <string name="home_app_sort_manual_hint">Lutsutuen aplikazio bat, eta ondoren sakatu berordenatzeko botoia</string>
     <string name="home_app_sort_recommended">Ordna recommended</string>
     <string name="home_app_sort_updates_first">Patch eguneratzeak lehenik</string>
     <string name="home_app_sort_recently_patched">Berriki patchatuak</string>
@@ -76,6 +77,7 @@
     <string name="home_no_apps_filter_subtitle">Ezer ez dago %s-rekin bat</string>
     <string name="home_category_add">Kategoria gehitu</string>
     <string name="home_category_all_apps">Aplikazio guztiak</string>
+    <string name="home_app_grouping_categories">Kategoriak</string>
     <string name="home_category_uncategorized">Kategoriatu gabe</string>
     <string name="home_category_new_title">Kategoria berria</string>
     <string name="home_category_rename_title">Kategoria berrandatu</string>
@@ -288,6 +290,9 @@
     <string name="home_download_instructions_step2_search_note">Morphe-k ezin ditu webgune hauek bermatu. APK fitxategi baten ordez beren aplikazio-denda eskaintzen dutenak saltatu</string>
     <string name="home_download_instructions_step3_search">Webgun horretan, deskargatu &lt;b&gt;%s&lt;/b&gt; bertsioaren APKa, ez berriena</string>
     <string name="home_download_instructions_step3_search_any">Webgun horretan, deskargatu aplikazioaren APKa. &lt;b&gt;Bertsio edozein&lt;/b&gt; patchatuko da</string>
+    <string name="home_download_instructions_step2_github">%s releaseko &lt;b&gt;Assets&lt;/b&gt; atarean, sakatu &lt;b&gt;.apk&lt;/b&gt; bota duten fitxategia</string>
+    <string name="home_download_instructions_step2_github_latest">Azken releaseko &lt;b&gt;Assets&lt;/b&gt; atarean, sakatu &lt;b&gt;.apk&lt;/b&gt; bota duten fitxategia</string>
+    <string name="home_download_instructions_step2_github_note">APK fitxategi several badira, %s izendutakoa edo universala aukeratu</string>
     <string name="home_download_instructions_download_button_toast">Sakatu deskarga webgunean, hemen ez 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Bikain! Ora klik egin jarraitu botoian eta joan webgunean 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Praktikak perfekzioa ekartzen dute eta hura lortzen ari zara 💪</string>
@@ -495,6 +500,9 @@ Emaitzarik onenak lortzeko, aplikazio honek &lt;b&gt;APK oso bat&lt;/b&gt; patch
     <string name="batch_queue_pending_subtitle">Sakatu berrikutatzeko eta hasteko</string>
     <string name="batch_queue_clear_title">Herrenbustea hutsik utzi?</string>
     <string name="batch_queue_clear_description">Aplikazio guztak kenduko dira pausedan</string>
+    <string name="batch_queue_keep_title">Herren queuea mantendu?</string>
+    <string name="batch_queue_keep_description">Queuean dauden aplikazioek etxeko pantailan zain egongo dira geroago abiatzeko</string>
+    <string name="batch_queue_keep">Mantendu</string>
     <string name="shortcut_repatch_short">Berrepatchatu</string>
     <string name="shortcut_repatch_long">Aplikazio zaharkituta berrepatchatu</string>
     <string name="shortcut_check_updates_short">Eguneratzeak egiaztatu</string>
@@ -1114,7 +1122,6 @@ Xehetasunak: %2$s"</string>
     <string name="settings_system_import_keystore_dialog_description">Keystore-ren datuak sartu beharko dituzu hura importatzeko</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Erabiltzaile izena (Aliasa)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Paswoorda</string>
-    <string name="settings_system_import_keystore_dialog_format_field">Gorde-gakoen formatua</string>
     <string name="settings_system_import_keystore_wrong_credentials">Keystore-en kredentialak okerrak dira</string>
     <string name="settings_system_import_keystore_success">Keystore inportatuta</string>
     <string name="settings_system_import_keystore_failed">Keystore inportatzea huts egin du</string>

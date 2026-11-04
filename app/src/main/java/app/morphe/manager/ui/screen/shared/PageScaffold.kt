@@ -50,12 +50,17 @@ fun PageHeader(
     HeaderBar(
         title = {
             Column {
+                // One line, as a dialog's title is, so every page's header stands as tall beside
+                // its controls. A title too long for it scrolls through and settles at its start
                 Text(
                     text = title,
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.semantics { heading() }
+                    maxLines = 1,
+                    modifier = Modifier
+                        .semantics { heading() }
+                        .marquee()
                 )
                 if (subtitle != null) PageSubtitle(subtitle)
             }
@@ -78,13 +83,18 @@ fun PageHeader(
     )
 }
 
-/** Line under a page's title, such as what the page holds or what a mode under way asks for. */
+/**
+ * Line under a page's title, such as what the page holds or what a mode under way asks for. Kept
+ * to one line as the title is, scrolling through a phrase too long for it.
+ */
 @Composable
 fun PageSubtitle(text: String) {
     Text(
         text = text,
         style = MaterialTheme.typography.bodyMedium,
-        color = MaterialTheme.colorScheme.onSurfaceVariant
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        maxLines = 1,
+        modifier = Modifier.marquee()
     )
 }
 
@@ -94,7 +104,14 @@ fun PageSubtitle(text: String) {
  * on a screen wider than it.
  */
 @Immutable
-data class PageInsets(val top: Dp, val bottom: Dp, val horizontal: Dp)
+data class PageInsets(val top: Dp, val bottom: Dp, val horizontal: Dp) {
+    /**
+     * Room the page's [ListScrollbar] keeps from the header and from [bottom], whatever covers the
+     * lower edge of the page, an even step clear of each so both ends show past rounded corners.
+     */
+    fun scrollbarPadding(bottom: Dp = this.bottom): PaddingValues =
+        PaddingValues(top = top + Defaults.SpaceMedium, bottom = bottom + Defaults.SpaceMedium)
+}
 
 /**
  * Padding of a list running on under a page's header, its [top] grown by [extraTop]. That is read
@@ -208,10 +225,7 @@ fun SubpageScaffold(
 
         ListScrollbar(
             scrollState = scrollState,
-            modifier = Modifier.padding(
-                top = insets.top + Defaults.SpaceMedium,
-                bottom = navigationBar + Defaults.SpaceMedium
-            )
+            modifier = Modifier.padding(insets.scrollbarPadding(bottom = navigationBar))
         )
         ScrollToTopButton(scrollState = scrollState, extraBottomPadding = navigationBar)
     }

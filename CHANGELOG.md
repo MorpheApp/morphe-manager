@@ -1,3 +1,63 @@
+## [2.4.0-dev.9](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.8...v2.4.0-dev.9) (2026-11-03)
+
+### Bug Fixes
+
+* Give patching results a notification channel of their own ([357fdb3](https://github.com/MorpheApp/morphe-manager/commit/357fdb305020c5485e30d71062b8b8b05e41aeef))
+* Keep a message in place as it moves between screens ([a8169fe](https://github.com/MorpheApp/morphe-manager/commit/a8169fe0a31198112c77df6bcba004638ac08eea))
+* Keep page titles to one line, scrolling through a long one ([2e2bccc](https://github.com/MorpheApp/morphe-manager/commit/2e2bcccd6a897f6dc765b0d6df9ac942f96b183d))
+* Keep settings rows in shape as they show, hide and fold ([3f47ca0](https://github.com/MorpheApp/morphe-manager/commit/3f47ca0c7f1c3ebf34373f0cbc5383b2c6a1dd91))
+* Keep the apps list scrollbar clear of the header and bottom bars ([f02d6e3](https://github.com/MorpheApp/morphe-manager/commit/f02d6e3379690cff2c64e5c0d2c9535389ec51eb))
+* Keep the latest release node from being clipped in the changelog ([5289913](https://github.com/MorpheApp/morphe-manager/commit/528991398bf39a54391ea1571b061c98d679c746))
+* Show log timings in the unit that suits them ([fb4943c](https://github.com/MorpheApp/morphe-manager/commit/fb4943cdb65bf688f83090fc825c36b96d85c61d))
+
+## [2.4.0-dev.8](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.7...v2.4.0-dev.8) (2026-11-03)
+
+### Features
+
+* Show the open-source licenses without AboutLibraries ([3714b88](https://github.com/MorpheApp/morphe-manager/commit/3714b88d16c954cf6fe0b60fa72fbf6c51fa945a))
+
+### Performance Improvements
+
+* Drop AppCompat from the app ([7c86151](https://github.com/MorpheApp/morphe-manager/commit/7c861513b7af827cabefe268fe238551bf3fe95d))
+
+### Bug Fixes
+
+* End the patching Live Update once patching is over ([b7fc871](https://github.com/MorpheApp/morphe-manager/commit/b7fc871d85f146afbdbbd05acd8ead5c5e84cc0c))
+
+## [2.4.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.6...v2.4.0-dev.7) (2026-11-03)
+
+### Features
+
+* List the apps a source brings first and count them ([a2b0820](https://github.com/MorpheApp/morphe-manager/commit/a2b0820e838e0f308beb8e7206a927dfa263469c))
+
+### Bug Fixes
+
+* Name the running patch in the log only ([87f9461](https://github.com/MorpheApp/morphe-manager/commit/87f9461601372651d873ff67c41ee6604e37ed5c))
+* Name unnamed patches in the log and keep reading events past a broken line ([e211a52](https://github.com/MorpheApp/morphe-manager/commit/e211a52826012ee4c1df47a4184cfef0c4b4d922))
+
+## [2.4.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.5...v2.4.0-dev.6) (2026-11-03)
+
+### Features
+
+* Name the patch a stuck run is on and end runs lost to garbage collection ([a41bc98](https://github.com/MorpheApp/morphe-manager/commit/a41bc98a032eef7b28c9c4514ab5ef7ffeb73019))
+
+## [2.4.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.4...v2.4.0-dev.5) (2026-11-02)
+
+### Performance Improvements
+
+* Write the patched APK in one pass ([#1345](https://github.com/MorpheApp/morphe-manager/issues/1345)) ([04e8fa7](https://github.com/MorpheApp/morphe-manager/commit/04e8fa7b67beae719d6aa2696098ba61e4977be2))
+
+### Bug Fixes
+
+* Clear the patching notification once a run ends ([efd050e](https://github.com/MorpheApp/morphe-manager/commit/efd050ed7ab7700f47efb4b987dbba3db7c0cd83))
+* Keep patching and installing in the foreground ([f29c101](https://github.com/MorpheApp/morphe-manager/commit/f29c1018ff0c629ebc3f8bf084226d859523070b))
+
+## [2.4.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.3...v2.4.0-dev.4) (2026-11-01)
+
+### Bug Fixes
+
+* Export the signing key as a password-protected PKCS12 keystore ([ca660e7](https://github.com/MorpheApp/morphe-manager/commit/ca660e7064a72adb0872055e3f5ddf55c2fe38e4))
+
 ## [2.4.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0-dev.2...v2.4.0-dev.3) (2026-11-01)
 
 ### Features

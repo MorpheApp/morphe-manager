@@ -23,6 +23,7 @@ import app.morphe.manager.domain.installer.*
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.service.ForegroundHoldService
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.*
 import kotlinx.coroutines.*
@@ -204,6 +205,21 @@ class InstallViewModel(
         applicationScope.launch(Dispatchers.Main.immediate, block = block)
 
     /**
+     * [launchDetached] for the install itself, held in the foreground as [title] for as long as
+     * it runs, since the system ends a process left without one once the user walks away.
+     */
+    private fun launchInstall(@StringRes title: Int, block: suspend CoroutineScope.() -> Unit): Job {
+        val hold = ForegroundHoldService.Hold(app, app.getText(title))
+        return launchDetached {
+            try {
+                block()
+            } finally {
+                hold.release()
+            }
+        }
+    }
+
+    /**
      * Start installation process using user's preferred installer or prompt for selection.
      *
      * @param allowSignatureMismatch Skips the signature pre-check and lets the platform decide,
@@ -231,14 +247,14 @@ class InstallViewModel(
         pendingAutoUninstallOnConflict = autoUninstallOnConflict
         pendingAllowSignatureMismatch = allowSignatureMismatch
 
-        installStart = launchDetached {
+        installStart = launchInstall(R.string.installing_ellipsis) {
             // Check if we should prompt for installer selection
             val shouldPrompt = askInstaller && prefs.promptInstallerOnInstall.get()
 
             if (shouldPrompt && oneTimeInstallerToken == null) {
                 // Show installer selection dialog
                 showInstallerSelectionDialog = true
-                return@launchDetached
+                return@launchInstall
             }
 
             installState = InstallState.Installing()
@@ -258,7 +274,7 @@ class InstallViewModel(
                     if (pm.getVersionCode(packageInfo) < pm.getVersionCode(existingInfo)) {
                         Log.i(TAG, "Version downgrade detected - showing conflict")
                         installState = InstallState.Conflict(targetPackageName)
-                        return@launchDetached
+                        return@launchInstall
                     }
                     // Check signature mismatch before launching the installer - avoids
                     // INSTALL_FAILED_UPDATE_INCOMPATIBLE from the system PackageInstaller
@@ -270,7 +286,7 @@ class InstallViewModel(
                             if (!tryAutoUninstallSignatureConflict(targetPackageName)) {
                                 Log.i(TAG, "Signature mismatch detected for $targetPackageName - showing conflict")
                                 installState = signatureConflictState(targetPackageName)
-                                return@launchDetached
+                                return@launchInstall
                             }
                         }
                     }
@@ -320,7 +336,7 @@ class InstallViewModel(
                             )
                             installState = InstallState.Ready
                             selectedInstallerToken = null
-                            return@launchDetached
+                            return@launchInstall
                         }
                         InstallerManager.Token.AutoSaved,
                         InstallerManager.Token.RootPlayStore -> {
@@ -332,7 +348,7 @@ class InstallViewModel(
                             )
                             installState = InstallState.Ready
                             selectedInstallerToken = null
-                            return@launchDetached
+                            return@launchInstall
                         }
                         else -> {
                             // For other installers, proceed with fallback
@@ -799,7 +815,7 @@ class InstallViewModel(
 
         // Leaving the screen must not stop the install between writing the module and
         // recording it, or the app runs a build the record does not know
-        launchDetached {
+        launchInstall(R.string.mounting_ellipsis) {
             currentInstallType = InstallType.MOUNT
             installState = InstallState.Installing()
             var recordCreated = false
@@ -860,14 +876,14 @@ class InstallViewModel(
                             stockVersion ?: "unknown"
                         )
                     )
-                    return@launchDetached
+                    return@launchInstall
                 }
 
                 // Check for base APK - app must be installed for mount
                 if (stockInfo == null) {
                     if (stockCandidate == null || packageInfo.splitNames.isNotEmpty()) {
                         handleInstallError(app.getString(R.string.installer_hint_generic))
-                        return@launchDetached
+                        return@launchInstall
                     }
                 }
 
@@ -931,7 +947,7 @@ class InstallViewModel(
         if (installState is InstallState.Installing) return
         dropHandedOffInstall()
 
-        launchDetached {
+        launchInstall(R.string.mounting_ellipsis) {
             currentInstallType = InstallType.MOUNT
             installState = InstallState.Installing()
             try {
