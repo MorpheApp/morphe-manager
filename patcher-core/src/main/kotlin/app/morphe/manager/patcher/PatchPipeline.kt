@@ -35,7 +35,7 @@ class PatchPipeline(
     private val request: PatchRequest,
     private val logger: Logger,
     private val listener: PatchingListener,
-    private val loadPatches: suspend (PatchRequest.Bundle) -> Collection<Patch<*>>
+    private val loadPatches: suspend (PatchRequest.Bundle) -> Collection<Patch>
 ) {
     suspend fun run() {
         ResourceMonitor.startPolling(logger)
@@ -47,7 +47,7 @@ class PatchPipeline(
         }
     }
 
-    private suspend fun selectedPatches(): List<Patch<*>> {
+    private suspend fun selectedPatches(): List<Patch> {
         val selected = request.bundles.flatMap { bundle ->
             val patches = loadPatches(bundle).keyedFor(request.packageName)
             patches.applyPatchOptions(
@@ -60,7 +60,7 @@ class PatchPipeline(
         return selected
     }
 
-    private suspend fun patch(patches: List<Patch<*>>) {
+    private suspend fun patch(patches: List<Patch>) {
         val preparation = prepareInput()
         try {
             val input = if (preparation.merged) {

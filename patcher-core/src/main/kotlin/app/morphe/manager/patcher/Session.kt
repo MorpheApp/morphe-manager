@@ -25,7 +25,7 @@ import java.nio.file.Files
 import java.nio.file.StandardCopyOption
 import kotlin.time.measureTime
 
-internal typealias PatchList = List<Patch<*>>
+internal typealias PatchList = List<Patch>
 
 /**
  * @param keepArchitectures The native libraries the output keeps, every one of them when empty.

@@ -68,7 +68,7 @@ data class PatchBundle(val patchesJar: String) : Parcelable {
 
     object Loader {
         /** Every patch [bundle] declares, read from its dex into this process. */
-        fun patches(bundle: PatchBundle): Collection<Patch<*>> {
+        fun patches(bundle: PatchBundle): Collection<Patch> {
             validateDexEntries(bundle.patchesJar)
             val patchFiles = runCatching {
                 val jarFile = File(bundle.patchesJar)
