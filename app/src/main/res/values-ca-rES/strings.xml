@@ -904,6 +904,8 @@ Els pegats no s'en veuen afectats: habilita els pegats de pre-llançament per a 
     <string name="notification_channel_patch_updates">Actualitzacions de pegats</string>
     <string name="notification_channel_patch_updates_description">Notificacions sobre noves versions de pegats</string>
     <string name="notification_channel_patcher_description">Es mostra mentre Morphe està patxant una aplicació en segon pla</string>
+    <string name="notification_channel_patching_results">Resultats del pegat</string>
+    <string name="notification_channel_patching_results_description">Quan el pegat finalitza o una instal·lació espera mentre Morphe està en segon pla</string>
     <string name="notification_channel_mounted_apps">Aplicacions muntades</string>
     <string name="notification_channel_mounted_apps_description">Quan una altra versió substitueix una aplicació muntada i el seu tapatge ja no s\'aplica</string>
     <string name="notification_mount_replaced_title">%1$s ja no està tapatat</string>
@@ -1275,6 +1277,7 @@ Detalls: %2$s"</string>
     <string name="credits_prior_development">Desenvolupament previ</string>
     <string name="opensource_licenses">Llicències de codi obert</string>
     <string name="opensource_licenses_description">Les llibreries sobre les quals es construeix Morphe</string>
+    <string name="opensource_licenses_search">Cerca biblioteques i llicències</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Una elecció</string>
     <string name="easter_egg_pill_message">Pren la píxula blava i els anuncis es queden exactament on són. Pren la vermella i mira fins on arriba el bytecode</string>

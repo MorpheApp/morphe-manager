@@ -905,6 +905,8 @@ Tampalan tidak terjejas: aktifkan tampalan prakeluaran untuk setiap sumber dalam
     <string name="notification_channel_patch_updates">Kemas kini tampalan</string>
     <string name="notification_channel_patch_updates_description">Pemberitahuan tentang keluaran tampalan baharu</string>
     <string name="notification_channel_patcher_description">Ditunjukkan semasa Morphe menampal aplikasi di latar belakang</string>
+    <string name="notification_channel_patching_results">Hasil tampalan</string>
+    <string name="notification_channel_patching_results_description">Apabila tampalan berakhir atau pemasangan menunggu anda semasa Morphe berada di latar belakang</string>
     <string name="notification_channel_mounted_apps">Aplikasi yang dipasang</string>
     <string name="notification_channel_mounted_apps_description">Apabila versi lain menggantikan aplikasi yang dipasang dan tampalannya tidak lagi terpakai</string>
     <string name="notification_mount_replaced_title">%1$s tidak lagi ditampal</string>
@@ -1276,6 +1278,7 @@ Butiran: %2$s"</string>
     <string name="credits_prior_development">Pembangunan sebelumnya</string>
     <string name="opensource_licenses">Lesen sumber terbuka</string>
     <string name="opensource_licenses_description">Pustaka yang membina Morphe</string>
+    <string name="opensource_licenses_search">Cari pustaka dan lesen</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Satu pilihan</string>
     <string name="easter_egg_pill_message">Ambil pil biru dan iklan kekal tepat di tempatnya. Ambil pil merah dan lihat sejauh mana bytecode itu pergi</string>

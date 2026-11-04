@@ -904,6 +904,8 @@ Tambalan tidak terpengaruh: aktifkan tambalan pra-rilis untuk setiap sumber dala
     <string name="notification_channel_patch_updates">Pembaruan patch</string>
     <string name="notification_channel_patch_updates_description">Notifikasi tentang rilis patch baru</string>
     <string name="notification_channel_patcher_description">Ditampilkan saat Morphe menambal aplikasi di latar belakang</string>
+    <string name="notification_channel_patching_results">Hasil penambalan</string>
+    <string name="notification_channel_patching_results_description">Saat penambalan berakhir atau instalasi menunggu Anda sementara Morphe berada di latar belakang</string>
     <string name="notification_channel_mounted_apps">Aplikasi terpasang</string>
     <string name="notification_channel_mounted_apps_description">Saat versi lain menggantikan aplikasi yang terpasang dan tambalannya tidak lagi berlaku</string>
     <string name="notification_mount_replaced_title">%1$s tidak lagi ditambal</string>
@@ -1275,6 +1277,7 @@ Rincian: %2$s"</string>
     <string name="credits_prior_development">Pengembangan sebelumnya</string>
     <string name="opensource_licenses">Lisensi sumber terbuka</string>
     <string name="opensource_licenses_description">Perpustakaan yang digunakan untuk membangun Morphe</string>
+    <string name="opensource_licenses_search">Cari pustaka dan lisensi</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Sebuah pilihan</string>
     <string name="easter_egg_pill_message">Ambil pil biru dan iklan tetap di tempatnya. Ambil pil merah dan lihat seberapa dalam bytecode itu</string>

@@ -904,6 +904,8 @@ Patchid ei ole sellest mõjutatud: lubage eeluletamise patchid iga allika jaoks 
     <string name="notification_channel_patch_updates">Paiganduste uuendused</string>
     <string name="notification_channel_patch_updates_description">Teavitused uute paranduste väljalaskmise kohta</string>
     <string name="notification_channel_patcher_description">Näidatakse, kui Morphe paigutab rakendust taustal</string>
+    <string name="notification_channel_patching_results">Paigutamise tulemused</string>
+    <string name="notification_channel_patching_results_description">Kui paigutamine lõppeb või installimine ootab teid, kui Morphe on taustal</string>
     <string name="notification_channel_mounted_apps">Paigaldatud rakendused</string>
     <string name="notification_channel_mounted_apps_description">Kui teine versioon asendab paigaldatud rakenduse ja selle paiga ei kehti enam</string>
     <string name="notification_mount_replaced_title">%1$s ei ole enam paigutatud</string>
@@ -1275,6 +1277,7 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="credits_prior_development">Varasem arendus</string>
     <string name="opensource_licenses">Avatud lähtekoodi litsentsid</string>
     <string name="opensource_licenses_description">Raamatukogud, millele Morphe on ehitatud</string>
+    <string name="opensource_licenses_search">Otsi raamatukogusid ja litsentse</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Valik</string>
     <string name="easter_egg_pill_message">Võta sinine pill ja reklaamid jäävad täpselt sinna, kus nad on. Võta punane ja näe, kui sügavale bytecode ulatub</string>

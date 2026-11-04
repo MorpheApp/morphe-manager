@@ -905,6 +905,8 @@ Os parches non se ven afectados: activa os parches pre-lanzamento para cada font
     <string name="notification_channel_patch_updates">Actualizacións de parches</string>
     <string name="notification_channel_patch_updates_description">Notificacións sobre novas versións de parches</string>
     <string name="notification_channel_patcher_description">Amósase mentres Morphe está parcheando unha aplicación en segundo plano</string>
+    <string name="notification_channel_patching_results">Resultados do parcheado</string>
+    <string name="notification_channel_patching_results_description">Cando remata o parcheado ou unha instalación agarda por ti mentres Morphe está en segundo plano</string>
     <string name="notification_channel_mounted_apps">Aplicacións montadas</string>
     <string name="notification_channel_mounted_apps_description">Cando outra versión substitúe unha aplicación montada e o seu parche xa non se aplica</string>
     <string name="notification_mount_replaced_title">%1$s xa non está parcheado</string>
@@ -1276,6 +1278,7 @@ Detalles: %2$s"</string>
     <string name="credits_prior_development">Desenvolvemento previo</string>
     <string name="opensource_licenses">Licenzas de código aberto</string>
     <string name="opensource_licenses_description">As bibliotecas nas que se basea Morphe</string>
+    <string name="opensource_licenses_search">Buscar bibliotecas e licenzas</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Unha elección</string>
     <string name="easter_egg_pill_message">Toma a pílula azul e os anuncios quedan exactamente onde están. Toma a vermella e ve ata onde chega o bytecode</string>

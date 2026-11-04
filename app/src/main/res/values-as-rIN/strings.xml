@@ -904,6 +904,8 @@
     <string name="notification_channel_patch_updates">পাচ আপডেটসমূহ</string>
     <string name="notification_channel_patch_updates_description">নতুন পাচ ৰিলিজৰ বিষয়ে নটিফিকেচন</string>
     <string name="notification_channel_patcher_description">Morphe-এ বেকগ্ৰাউণ্ডত এটা এপ পেচিং কৰি থকাৰ সময়ত দেখুওৱা হয়</string>
+    <string name="notification_channel_patching_results">পেচিংৰ ফলাফল</string>
+    <string name="notification_channel_patching_results_description">যেতিয়া পেচিং শেষ হয় বা Morphe বেকগ্ৰাউণ্ডত থকাৰ সময়ত কোনো সংস্থাপন আপোনাৰ বাবে অপেক্ষা কৰে</string>
     <string name="notification_channel_mounted_apps">মাউণ্ট কৰা এপসমূহ</string>
     <string name="notification_channel_mounted_apps_description">যেতিয়া আন এটা সংস্কৰণে মাউণ্ট কৰা এপটো প্রতিস্থাপন কৰে আৰু ইয়াৰ পেচটো আৰু প্ৰযোজ্য নহয়</string>
     <string name="notification_mount_replaced_title">%1$s আৰু patched নহয়</string>
@@ -1275,6 +1277,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">পূৰ্বৰ উন্নয়ন</string>
     <string name="opensource_licenses">মুক্ত উৎসৰ লাইচেন্সসমূহ</string>
     <string name="opensource_licenses_description">Morphe নিৰ্মাণ কৰিবলৈ ব্যৱহাৰ কৰা লাইব্ৰেৰীসমূহ</string>
+    <string name="opensource_licenses_search">লাইব্ৰেৰী আৰু লাইচেন্সসমূহ বিচাৰক</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">এটা পছন্দ</string>
     <string name="easter_egg_pill_message">নীলা পিলটো লওক আৰু বিজ্ঞাপনবোৰ ঠিক তাতেই থাকিব। ৰঙা পিলটো লওক আৰু চাওক bytecode কিমান গভীৰ</string>

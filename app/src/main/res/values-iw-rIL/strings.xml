@@ -905,6 +905,8 @@
     <string name="notification_channel_patch_updates">עדכוני תיקונים</string>
     <string name="notification_channel_patch_updates_description">התראות על מהדורות תיקון חדשות</string>
     <string name="notification_channel_patcher_description">מוצג בזמן ש-Morphe מתקן אפליקציה ברקע</string>
+    <string name="notification_channel_patching_results">תוצאות תיקון</string>
+    <string name="notification_channel_patching_results_description">כאשר התיקון מסתיים או כהתקנה ממתינה לך בזמן ש-Morphe נמצא ברקע</string>
     <string name="notification_channel_mounted_apps">אפליקציות שהורכבו</string>
     <string name="notification_channel_mounted_apps_description">כאשר גרסה אחרת החליפה אפליקציה מותקנת והטלאי שלה כבר לא תקף</string>
     <string name="notification_mount_replaced_title">%1$s כבר לא מתוקן</string>
@@ -1286,6 +1288,7 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="credits_prior_development">פיתוח קודם</string>
     <string name="opensource_licenses">רישיונות קוד פתוח</string>
     <string name="opensource_licenses_description">ספריות הבנייה של Morphe</string>
+    <string name="opensource_licenses_search">חיפוש ספריות ורישיונות</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">בחירה</string>
     <string name="easter_egg_pill_message">קח את הגלולה הכחולה והמודעות יישארו בדיוק במקומן. קח את האדומה וראה עד כמה עמוק מגיע הבייט קוד.</string>

@@ -907,6 +907,8 @@
     <string name="notification_channel_patch_updates">تحديثات التعديل</string>
     <string name="notification_channel_patch_updates_description">إشعارات عن إصدارات تعديل جديدة</string>
     <string name="notification_channel_patcher_description">يتم عرضه أثناء قيام Morphe بتعديل تطبيق في الخلفية</string>
+    <string name="notification_channel_patching_results">نتائج التعديل</string>
+    <string name="notification_channel_patching_results_description">عندما تنتهي عملية التعديل أو ينتظر التثبيت منك بينما Morphe موجود في الخلفية</string>
     <string name="notification_channel_mounted_apps">التطبيقات المُركَّبة</string>
     <string name="notification_channel_mounted_apps_description">عندما يستبدل إصدار آخر تطبيقًا مثبّتًا ولم يعد تعديله قابلًا للتطبيق</string>
     <string name="notification_mount_replaced_title">لم يعد %1$s معدلًا</string>
@@ -1279,6 +1281,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="credits_prior_development">التطوير المسبق</string>
     <string name="opensource_licenses">تراخيص مفتوحة المصدر</string>
     <string name="opensource_licenses_description">المكتبات التي بُني عليها Morphe</string>
+    <string name="opensource_licenses_search">البحث في المكتبات والتراخيص</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">خيار واحد</string>
     <string name="easter_egg_pill_message">تناول الحبة الزرقاء وستبقى الإعلانات في مكانها تمامًا. تناول الحبة الحمراء وشاهد مدى عمق الكود</string>

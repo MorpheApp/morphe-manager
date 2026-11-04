@@ -904,6 +904,8 @@
     <string name="notification_channel_patch_updates">ფათჩის განახლებები</string>
     <string name="notification_channel_patch_updates_description">შეტყობინებები ახალი ფათჩის რელიზების შესახებ</string>
     <string name="notification_channel_patcher_description">ჩნდება, როდესაც Morphe აპლიკაციას ფონურ რეჟიმში ამodიფიცირებს</string>
+    <string name="notification_channel_patching_results">პატჩინგის შედეგები</string>
+    <string name="notification_channel_patching_results_description">როდესაც პატჩინგი სრულდება ან ინსტალაცია გელოდებათ, სანამ Morphe ფონურ რეჟიმშია</string>
     <string name="notification_channel_mounted_apps">დაინსტალირებული აპლიკაციები</string>
     <string name="notification_channel_mounted_apps_description">როდესაც სხვა ვერსია ანაცვლებს დაინსტალირებულ აპლიკაციას და მისი პატჩი აღარ მოქმედებს</string>
     <string name="notification_mount_replaced_title">%1$s აღარ არის პატჩირებული</string>
@@ -1275,6 +1277,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">წინა დეველოპმენტი</string>
     <string name="opensource_licenses">ღია კოდის ლიცენზიები</string>
     <string name="opensource_licenses_description">ბიბლიოთეკები, რომლებსაც Morphe ეფუძნება</string>
+    <string name="opensource_licenses_search">ბიბლიოთეკებისა და ლიცენზიების ძებნა</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">არჩევანი</string>
     <string name="easter_egg_pill_message">მიიღეთ ლურჯი აფთიაქის კაფსულა და რეკლამები დარჩება იქ, სადაც არიან. მიიღეთ წითელი და ნახეთ, რამდენად ღრმაა ბაიტკოდი</string>

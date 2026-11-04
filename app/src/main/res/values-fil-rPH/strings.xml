@@ -904,6 +904,8 @@ Hindi maaapektuhan ang mga patch: paganahin ang mga patch na pre-release para sa
     <string name="notification_channel_patch_updates">Mga update sa patch</string>
     <string name="notification_channel_patch_updates_description">Mga notification tungkol sa mga bagong patch release</string>
     <string name="notification_channel_patcher_description">Ipinapakita habang ina-patch ng Morphe ang isang app sa background</string>
+    <string name="notification_channel_patching_results">Mga resulta ng pag-patch</string>
+    <string name="notification_channel_patching_results_description">Kapag natapos ang pag-patch o may install na naghihintay sa iyo habang ang Morphe ay nasa background</string>
     <string name="notification_channel_mounted_apps">Mga naka-mount na app</string>
     <string name="notification_channel_mounted_apps_description">Kapag pinalitan ng ibang bersyon ang naka-mount na app at hindi na naaangkop ang patch nito</string>
     <string name="notification_mount_replaced_title">Hindi na naka-patch ang %1$s</string>
@@ -1275,6 +1277,7 @@ Mga Detalye: %2$s"</string>
     <string name="credits_prior_development">Naunang pag-unlad</string>
     <string name="opensource_licenses">Open-source licenses</string>
     <string name="opensource_licenses_description">Mga library kung saan binuo ang Morphe</string>
+    <string name="opensource_licenses_search">Maghanap ng mga library at lisensya</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Isang pagpipilian</string>
     <string name="easter_egg_pill_message">Kunin ang asul na tableta at mananatili ang mga ad sa eksaktong lugar nila. Kunin ang pula at tingnan kung gaano kalalim ang bytecode.</string>

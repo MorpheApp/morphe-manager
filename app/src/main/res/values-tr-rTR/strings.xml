@@ -904,6 +904,8 @@ Yamalar etkilenmez: yamalama kaynakları listesindeki her kaynak için ön sür�
     <string name="notification_channel_patch_updates">Yama güncellemeleri</string>
     <string name="notification_channel_patch_updates_description">Yeni yama sürümleri hakkında bildirimler</string>
     <string name="notification_channel_patcher_description">Morphe bir uygulamayı arka planda yamalarken gösterilir</string>
+    <string name="notification_channel_patching_results">Yamalama sonuçları</string>
+    <string name="notification_channel_patching_results_description">Yamalama bittiğinde veya Morphe arka plandayken bir yükleme sizi beklerken</string>
     <string name="notification_channel_mounted_apps">Bağlı uygulamalar</string>
     <string name="notification_channel_mounted_apps_description">Başka bir sürüm bağlı bir uygulamanın yerini aldığında ve yaması artık uygulanmadığında</string>
     <string name="notification_mount_replaced_title">v%1$s artık yamalı değil</string>
@@ -1275,6 +1277,7 @@ Ayrıntılar: %2$s"</string>
     <string name="credits_prior_development">Önceki geliştirme</string>
     <string name="opensource_licenses">Açık kaynak lisansları</string>
     <string name="opensource_licenses_description">Morphe tarafından kullanılan kütüphaneler</string>
+    <string name="opensource_licenses_search">Kütüphane ve lisans ara</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Bir seçim</string>
     <string name="easter_egg_pill_message">Mavi hapı al ve reklamlar tam olarak oldukları yerde kalsın. Kırmızı olanı al ve bayt kodunun ne kadar derin olduğunu gör.</string>

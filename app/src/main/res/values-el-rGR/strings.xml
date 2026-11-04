@@ -904,6 +904,8 @@
     <string name="notification_channel_patch_updates">Ενημερώσεις επιδιόρθωσης</string>
     <string name="notification_channel_patch_updates_description">Ειδοποιήσεις για νέες εκδόσεις επιδιόρθωσης</string>
     <string name="notification_channel_patcher_description">Εμφανίζεται όταν το Morphe ενημερώνει μια εφαρμογή στο παρασκήνιο</string>
+    <string name="notification_channel_patching_results">Αποτελέσματα τροποποίησης</string>
+    <string name="notification_channel_patching_results_description">Όταν η τροποποίηση ολοκληρωθεί ή μια εγκατάσταση σας περιμένει ενώ το Morphe βρίσκεται στο παρασκήνιο</string>
     <string name="notification_channel_mounted_apps">Προσαρτημένες εφαρμογές</string>
     <string name="notification_channel_mounted_apps_description">Όταν μια άλλη έκδοση αντικατέστησε μια προσαρτημένη εφαρμογή και το patch της δεν εφαρμόζεται πλέον</string>
     <string name="notification_mount_replaced_title">Το %1$s δεν είναι πλέον πατσαρισμένο</string>
@@ -1275,6 +1277,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">Προηγούμενη ανάπτυξη</string>
     <string name="opensource_licenses">Άδειες ανοικτού κώδικα</string>
     <string name="opensource_licenses_description">Βιβλιοθήκες στις οποίες βασίζεται τα Morphe</string>
+    <string name="opensource_licenses_search">Αναζήτηση βιβλιοθηκών και αδειών</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Μια επιλογή</string>
     <string name="easter_egg_pill_message">Πάρε το μπλε χάπι και οι διαφημίσεις παραμένουν ακριβώς εκεί που είναι. Πάρε το κόκκινο και δες πόσο βαθιά φτάνει ο bytecode.</string>

@@ -904,6 +904,8 @@ Los parches no se ven afectados: habilita los parches pre-lanzamiento para cada 
     <string name="notification_channel_patch_updates">Actualizaciones de parches</string>
     <string name="notification_channel_patch_updates_description">Notificaciones sobre nuevas versiones de parches</string>
     <string name="notification_channel_patcher_description">Se muestra mientras Morphe está parcheando una aplicación en segundo plano</string>
+    <string name="notification_channel_patching_results">Resultados del parcheo</string>
+    <string name="notification_channel_patching_results_description">Cuando finaliza el parcheo o una instalación te espera mientras Morphe está en segundo plano</string>
     <string name="notification_channel_mounted_apps">Apps montadas</string>
     <string name="notification_channel_mounted_apps_description">Cuando otra versión ha sustituido a una aplicación montada y su parcheo ya no se aplica</string>
     <string name="notification_mount_replaced_title">%1$s ya no está parcheada</string>
@@ -1275,6 +1277,7 @@ Detalles: %2$s"</string>
     <string name="credits_prior_development">Desarrollo anterior</string>
     <string name="opensource_licenses">Licencias de código abierto</string>
     <string name="opensource_licenses_description">Las bibliotecas en las que se basa Morphe</string>
+    <string name="opensource_licenses_search">Buscar bibliotecas y licencias</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Una elección</string>
     <string name="easter_egg_pill_message">Toma la pastilla azul y los anuncios se quedan exactamente donde están. Toma la roja y descubre hasta dónde llega el bytecode</string>

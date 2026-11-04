@@ -904,6 +904,8 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="notification_channel_patch_updates">Actualizări de patch</string>
     <string name="notification_channel_patch_updates_description">Notificări despre noile lansări de patch</string>
     <string name="notification_channel_patcher_description">Afișate în timp ce Morphe aplică un patch unei aplicații în fundal</string>
+    <string name="notification_channel_patching_results">Rezultatele patching-ului</string>
+    <string name="notification_channel_patching_results_description">Când patching-ul se termină sau o instalare te așteaptă în timp ce Morphe este în fundal</string>
     <string name="notification_channel_mounted_apps">Aplicații montate</string>
     <string name="notification_channel_mounted_apps_description">Când o altă versiune a înlocuit o aplicație montată și patch-ul acesteia nu se mai aplică</string>
     <string name="notification_mount_replaced_title">%1$s nu mai este patchuit</string>
@@ -1275,6 +1277,7 @@ Detalii: %2$s"</string>
     <string name="credits_prior_development">Dezvoltare anterioară</string>
     <string name="opensource_licenses">Licențe open-source</string>
     <string name="opensource_licenses_description">Bibliotecile pe care se bazează Morphe</string>
+    <string name="opensource_licenses_search">Căutare în biblioteci și licențe</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">O alegere</string>
     <string name="easter_egg_pill_message">Take the blue pill and the ads stay exactly where they are. Take the red one and see how deep the bytecode goes</string>

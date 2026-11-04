@@ -904,6 +904,8 @@ Zakrpe nisu pogođene: omogućite prerelease zakrpe za svaki izvor na listi izvo
     <string name="notification_channel_patch_updates">Ažuriranja zakrpa</string>
     <string name="notification_channel_patch_updates_description">Obaveštenja o novim zakrpama</string>
     <string name="notification_channel_patcher_description">Prikazuje se dok Morphe zakrpava aplikaciju u pozadini</string>
+    <string name="notification_channel_patching_results">Rezultati zakrpljivanja</string>
+    <string name="notification_channel_patching_results_description">Kada se zakrpljivanje završi ili kada instalacija čeka na vas dok je Morphe u pozadini</string>
     <string name="notification_channel_mounted_apps">Montirane aplikacije</string>
     <string name="notification_channel_mounted_apps_description">Kada druga verzija zameni montiranu aplikaciju i njena zakrpa više ne važi</string>
     <string name="notification_mount_replaced_title">%1$s više nije zakrpljen</string>
@@ -1259,6 +1261,7 @@ Detalji: %2$s"</string>
     <string name="credits_prior_development">Претходни развој</string>
     <string name="opensource_licenses">Open-source licence</string>
     <string name="opensource_licenses_description">Knjižnice na kojima je Morhe izgrađen</string>
+    <string name="opensource_licenses_search">Pretraži biblioteke i licence</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Izbor</string>
     <string name="easter_egg_pill_message">Uzmi plavu pilulu i oglasi ostaju tačno gde jesu. Uzmi crvenu i vidi koliko duboko ide bajtkod.</string>

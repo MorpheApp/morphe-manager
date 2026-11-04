@@ -904,6 +904,8 @@ Patcher påvirkes ikke: aktiver pre-release-patcher for hver kilde i patch-kilde
     <string name="notification_channel_patch_updates">Patch-oppdateringer</string>
     <string name="notification_channel_patch_updates_description">Varsler om nye patch-utgivelser</string>
     <string name="notification_channel_patcher_description">Vises mens Morphe patcher en app i bakgrunnen</string>
+    <string name="notification_channel_patching_results">Patchingsresultater</string>
+    <string name="notification_channel_patching_results_description">Når patching avsluttes eller en installasjon venter på deg mens Morphe er i bakgrunnen</string>
     <string name="notification_channel_mounted_apps">Monterte apper</string>
     <string name="notification_channel_mounted_apps_description">Når en annen versjon har erstattet en montert app og patchen ikke lenger gjelder</string>
     <string name="notification_mount_replaced_title">%1$s er ikke lenger patchet</string>
@@ -1275,6 +1277,7 @@ Detaljer: %2$s"</string>
     <string name="credits_prior_development">Tidligere utvikling</string>
     <string name="opensource_licenses">Lisenser med åpen kildekode</string>
     <string name="opensource_licenses_description">Bibliotekene som Morphe er bygget på</string>
+    <string name="opensource_licenses_search">Søk i biblioteker og lisenser</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Et valg</string>
     <string name="easter_egg_pill_message">Ta den blå pillen og annonsene blir akkurat der de er. Ta den røde og se hvor dypt bytekoden går.</string>

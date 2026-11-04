@@ -904,6 +904,8 @@ Patch ຈະບໍ່ໄດ້ຮັບຜົນກະທົບ: ໃຫ້ເປ
     <string name="notification_channel_patch_updates">ການອັບເດດ Patch</string>
     <string name="notification_channel_patch_updates_description">ການແຈ້ງເຕືອນກ່ຽວກັບການປ່ອຍ Patch ໃໝ່</string>
     <string name="notification_channel_patcher_description">ສະແດງໃນຂະນະທີ່ Morphe ກຳລັງແພດແອັບໃນພື້ນຫຼັງ</string>
+    <string name="notification_channel_patching_results">ຜົນການປັບປຸງ</string>
+    <string name="notification_channel_patching_results_description">ເມື່ອການປັບປຸງສິ້ນສຸດລົງ ຫຼື ການຕິດຕັ້ງກຳລັງລໍຖ້າທ່ານ ໃນຂະນະທີ່ Morphe ເຮັດວຽກຢູ່ພື້ນຫຼັງ</string>
     <string name="notification_channel_mounted_apps">ແອັບທີ່ຖືກ Mount ໄວ້</string>
     <string name="notification_channel_mounted_apps_description">ເມື່ອເວີຊັນອື່ນໄດ້ປ່ຽນແທນແອັບທີ່ຖືກ Mount ໄວ້ ແລະ ການປັບປຸງຂອງມັນບໍ່ມີຜົນອີກຕໍ່ໄປ</string>
     <string name="notification_mount_replaced_title">%1$s ບໍ່ໄດ້ຖືກປັບປຸງແລ້ວ</string>
@@ -1275,6 +1277,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">ການພັດທະນາກ່ອນໜ້າ</string>
     <string name="opensource_licenses">ໃບອະນຸຍາດໂອເພນຊອດ</string>
     <string name="opensource_licenses_description">ໄລບຣາຣີທີ່ Morphe ຖືກສ້າງຂຶ້ນ</string>
+    <string name="opensource_licenses_search">ຄົ້ນຫາຫໍສະໝຸດ ແລະ ໃບອະນຸຍາດ</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">ທາງເລືອກ</string>
     <string name="easter_egg_pill_message">ກິນຢາເມັດສີຟ້າ ແລ້ວໂຄສະນາຈະຍັງຄົງຢູ່ບ່ອນເກົ່າ. ກິນເມັດສີແດງ ແລ້ວເບິ່ງວ່າ bytecode ນັ້ນລົງເລິກໄດ້ປານໃດ</string>

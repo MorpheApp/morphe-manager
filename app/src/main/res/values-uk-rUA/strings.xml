@@ -291,8 +291,8 @@
     <string name="home_download_instructions_step3_search">На цьому сайті завантажте APK версії &lt;b&gt;%s&lt;/b&gt;, а не найновішої</string>
     <string name="home_download_instructions_step3_search_any">На цьому сайті завантажте APK застосунку. Можна пропатчити &lt;b&gt;будь-яку версію&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_github">У розділі &lt;b&gt;Assets&lt;/b&gt; релізу &lt;b&gt;%s&lt;/b&gt; натисніть на файл, що закінчується на &lt;b&gt;.apk&lt;/b&gt;</string>
-    <string name="home_download_instructions_step2_github_latest">У розділі &lt;b&gt;Assets&lt;/b&gt; останнього релізу натисніть на файл, що закінчується на &lt;b&gt;.apk&lt;/b&gt;</string>
-    <string name="home_download_instructions_step2_github_note">Якщо доступно кілька APK-файлів, виберіть той, що має назву %s, або універсальний</string>
+    <string name="home_download_instructions_step2_github_latest">У розділі &lt;b&gt;Assets&lt;/b&gt; найновішого релізу натисніть на файл, що закінчується на &lt;b&gt;.apk&lt;/b&gt;</string>
+    <string name="home_download_instructions_step2_github_note">Якщо є кілька файлів APK, виберіть файл із назвою %s або універсальний</string>
     <string name="home_download_instructions_download_button_toast">Натисніть завантажити на сайті, а не тут 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Чудово! Тепер натисніть продовжити нижче та перейдіть на сайт 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Практика веде до досконалості, ви на правильному шляху 💪</string>
@@ -902,6 +902,8 @@
     <string name="notification_channel_patch_updates">Оновлення патчів</string>
     <string name="notification_channel_patch_updates_description">Сповіщення про нові релізи патчів</string>
     <string name="notification_channel_patcher_description">Показується, коли Morphe патчить застосунок у фоновому режимі</string>
+    <string name="notification_channel_patching_results">Результати патчингу</string>
+    <string name="notification_channel_patching_results_description">Коли патчинг завершується або встановлення очікує на вас, поки Morphe працює у фоновому режимі</string>
     <string name="notification_channel_mounted_apps">Змонтовані застосунки</string>
     <string name="notification_channel_mounted_apps_description">Коли змонтований застосунок замінила інша версія і його патч більше не застосовується</string>
     <string name="notification_mount_replaced_title">%1$s більше не пропатчено</string>
@@ -1273,6 +1275,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">Попередня розробка</string>
     <string name="opensource_licenses">Ліцензії відкритого коду</string>
     <string name="opensource_licenses_description">Бібліотеки, на яких побудовано Morphe</string>
+    <string name="opensource_licenses_search">Пошук бібліотек і ліцензій</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Вибір</string>
     <string name="easter_egg_pill_message">Прийміть синю пігулку - і реклама залишиться на своєму місці. Прийміть червону - і побачите, наскільки глибоко сягає байткод</string>

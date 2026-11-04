@@ -903,6 +903,8 @@ Patchi netiek ietekmēti: aktivizējiet pre-release patchus katram avotam patchu
     <string name="notification_channel_patch_updates">Lāpīšanas atjauninājumi</string>
     <string name="notification_channel_patch_updates_description">Paziņojumi par jauniem lāpīšanas izlaidumiem</string>
     <string name="notification_channel_patcher_description">Rādā, kad Morphe backgroundā patched aplikāciju</string>
+    <string name="notification_channel_patching_results">Lāpīšanas rezultāti</string>
+    <string name="notification_channel_patching_results_description">Kad lāpīšana beidzas vai instalācija gaida jūs, kamēr Morphe darbojas fonā</string>
     <string name="notification_channel_mounted_apps">Montētās lietotnes</string>
     <string name="notification_channel_mounted_apps_description">Ja cita versija aizstāj montēto lietotni un tās lāpums vairs nav spēkā</string>
     <string name="notification_mount_replaced_title">%1$s vairs nav lāpota</string>
@@ -1274,6 +1276,7 @@ Sīkāk: %2$s"</string>
     <string name="credits_prior_development">Iepēkšējā izstrāde</string>
     <string name="opensource_licenses">Atklātā pirmkoda licences</string>
     <string name="opensource_licenses_description">Bibliotēkas, uz kurām Morphe ir uzbūvēta</string>
+    <string name="opensource_licenses_search">Meklēt bibliotēkas un licences</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Izvēle</string>
     <string name="easter_egg_pill_message">Kāpiniet zilo tableti, un reklāmas paliks tieši tur, kur tās ir. Kāpiniet sarkanu un uzziniet, cik dziļi sniedzas baitkods</string>

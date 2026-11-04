@@ -904,6 +904,8 @@ Ta nastavitev ne vpliva na popravke: omogočite predizdajne popravke za vsak vir
     <string name="notification_channel_patch_updates">Posodobitve s popravki</string>
     <string name="notification_channel_patch_updates_description">Obvestila o novih izdajah s popravki</string>
     <string name="notification_channel_patcher_description">Prikazano medtem ko Morphe popravlja aplikacijo v ozadju</string>
+    <string name="notification_channel_patching_results">Rezultati popravljanja</string>
+    <string name="notification_channel_patching_results_description">Ko se popravljanje konča ali namestitev čaka nanje, medtem ko je Morphe v ozadju</string>
     <string name="notification_channel_mounted_apps">Priklopljene aplikacije</string>
     <string name="notification_channel_mounted_apps_description">Ko je druga različica zamenjala priklopljeno aplikacijo in njen popravek ne velja več</string>
     <string name="notification_mount_replaced_title">Aplikacija %1$s ni več popravljena</string>
@@ -1275,6 +1277,7 @@ Podrobnosti: %2$s"</string>
     <string name="credits_prior_development">Dosedanji razvoj</string>
     <string name="opensource_licenses">Odprtokodne licence</string>
     <string name="opensource_licenses_description">Knjižnice, na katerih je zgrajeno Morphe</string>
+    <string name="opensource_licenses_search">Išči knjižnice in licence</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Izbira</string>
     <string name="easter_egg_pill_message">Vzemi modro tableto in oglasi ostanejo natanko tam, kjer so. Vzemi rdečo in poglej, kako globoko gre bitna koda.</string>

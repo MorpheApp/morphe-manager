@@ -904,6 +904,8 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="notification_channel_patch_updates">Ажурирања закрпа</string>
     <string name="notification_channel_patch_updates_description">Обавештења о новим издањима закрпа</string>
     <string name="notification_channel_patcher_description">Приказано док Morphe патчи апликацију у позадини</string>
+    <string name="notification_channel_patching_results">Резултати печовања</string>
+    <string name="notification_channel_patching_results_description">Када се печовање заврши или инсталација чека на вас док је Morphe у позадини</string>
     <string name="notification_channel_mounted_apps">Монтиране апликације</string>
     <string name="notification_channel_mounted_apps_description">Када друга верзија замени монтирану апликацију и њена закрпа се више не примењује</string>
     <string name="notification_mount_replaced_title">%1$s више није закрпљена</string>
@@ -1275,6 +1277,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">Претходни развој</string>
     <string name="opensource_licenses">Лиценце отвореног кода</string>
     <string name="opensource_licenses_description">Библиотеке на којима је изграђен Морфе</string>
+    <string name="opensource_licenses_search">Претражите библиотеке и лиценце</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Избор</string>
     <string name="easter_egg_pill_message">Узми плаву пилулу и рекламе остају тачно где јесу. Узми црвену и види колико дубоко иде бајткод.</string>

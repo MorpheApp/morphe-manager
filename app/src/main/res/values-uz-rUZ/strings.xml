@@ -903,6 +903,8 @@ Patchlar ta'sirlanmaydi: patch manbalari ro'yxatidagi har bir manba uchun pre-re
     <string name="notification_channel_patch_updates">Yamoq yangilanishlari</string>
     <string name="notification_channel_patch_updates_description">Yangi yamoq versiyalari haqidagi bildirishnomalar</string>
     <string name="notification_channel_patcher_description">Morphe orqa fonda ilovani patchlayotganda ko\'rsatildi</string>
+    <string name="notification_channel_patching_results">Patchlash natijalari</string>
+    <string name="notification_channel_patching_results_description">Patchlash yakunlanganda yoki Morphe fonda ishlayotgan vaqtda o\'rnatish sizni kutayotganida</string>
     <string name="notification_channel_mounted_apps">Mount qilingan ilovalar</string>
     <string name="notification_channel_mounted_apps_description">Boshqa versiya mount qilingan ilovani almashtirganda va uning patch endi qo\'llanilmaydi</string>
     <string name="notification_mount_replaced_title">%1$s endi patchlangan emas</string>
@@ -1274,6 +1276,7 @@ Ma’lumotlar: %2$s"</string>
     <string name="credits_prior_development">Oldingi rivojlanish</string>
     <string name="opensource_licenses">Ochiq kodli litsenziyalar</string>
     <string name="opensource_licenses_description">Morphe qurilgan kutubxonalar</string>
+    <string name="opensource_licenses_search">Kutubxonalar va litsenziyalarni qidirish</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Tanlov</string>
     <string name="easter_egg_pill_message">Ko\'k tabletkani oling va reklamalar aynan shu joyda qoladi. Qizil tabletkani oling va bayt-kod qanchalik chuqur ekanini ko\'ring.</string>

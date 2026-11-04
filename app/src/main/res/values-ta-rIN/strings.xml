@@ -119,6 +119,8 @@
     <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
     <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
     <!-- Notification content -->
+    <string name="notification_channel_patching_results">பேட்ச் செய்யும் முடிவுகள்</string>
+    <string name="notification_channel_patching_results_description">Morphe பின்னணியில் இருக்கும்போது, பேட்ச் செய்தல் முடிந்தாலோ அல்லது நிறுவல் உங்களுக்காகக் காத்திருக்கும்போதோ</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- "%s" is the GitHub scope name, keep it as is -->
@@ -144,6 +146,7 @@
     <!-- Settings - System Tab - APK download helper -->
     <!-- File Picker -->
     <!-- Settings - System Tab - About Section -->
+    <string name="opensource_licenses_search">நூலகங்கள் மற்றும் உரிமங்களைத் தேடுங்கள்</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <!-- Shared strings -->
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->

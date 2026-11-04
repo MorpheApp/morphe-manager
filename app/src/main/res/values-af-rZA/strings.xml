@@ -904,6 +904,8 @@ Patches word nie beïnvloed nie: aktiveer voorafvrystelling-patches vir elke bro
     <string name="notification_channel_patch_updates">Pleisteropdaterings</string>
     <string name="notification_channel_patch_updates_description">Kennisgewings oor nuwe pleistervrystellings</string>
     <string name="notification_channel_patcher_description">Word gewys terwyl Morphe \'n app in die agtergrond pleister</string>
+    <string name="notification_channel_patching_results">Regstel-resultate</string>
+    <string name="notification_channel_patching_results_description">Wanneer regstelling eindig of \'n installasie op jou wag terwyl Morphe in die agtergrond is</string>
     <string name="notification_channel_mounted_apps">Gemonteerde apps</string>
     <string name="notification_channel_mounted_apps_description">Wanneer \'n ander weergawe \'n gemonteerde app vervang het en sy patch nie meer van toepassing is nie</string>
     <string name="notification_mount_replaced_title">%1$s is nie meer gepatch nie</string>
@@ -1275,6 +1277,7 @@ Besonderhede: %2$s"</string>
     <string name="credits_prior_development">Vorige ontwikkeling</string>
     <string name="opensource_licenses">Open-source lisensies</string>
     <string name="opensource_licenses_description">Die biblioteke waarop Morphe gebou is</string>
+    <string name="opensource_licenses_search">Soek biblioteke en lisensies</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">\'n Keuse</string>
     <string name="easter_egg_pill_message">Neem die blou pil en die advertensies bly presies waar hulle is. Neem die rooi een en kyk hoe diep die bytekode gaan.</string>

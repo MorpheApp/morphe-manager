@@ -904,6 +904,8 @@ Níl tionchar ar phaistí: cumasaigh paistí réamh-eisiúna do gach foinse sa l
     <string name="notification_channel_patch_updates">Nuashonruithe paiste</string>
     <string name="notification_channel_patch_updates_description">Fógraí faoi eisiúintí nua paiste</string>
     <string name="notification_channel_patcher_description">Taispeántar é agus Morphe ag paisteáil aip sa chúlra</string>
+    <string name="notification_channel_patching_results">Torthaí paiste</string>
+    <string name="notification_channel_patching_results_description">Nuair a chríochnaíonn an paistíú nó nuair a bhíonn suiteáil ag fanacht ort agus Morphe sa chúlra</string>
     <string name="notification_channel_mounted_apps">Aipeanna feistithe</string>
     <string name="notification_channel_mounted_apps_description">Nuair a tháinig leagan eile in ionad aip atá gléasta agus nach bhfuil a paiste i bhfeidhm a thuilleadh</string>
     <string name="notification_mount_replaced_title">Níl %1$s paisteáilte a thuilleadh</string>
@@ -1273,6 +1275,7 @@ Sonraí: %2$s"</string>
     <string name="credits_prior_development">Forbairt roimhe seo</string>
     <string name="opensource_licenses">Ceadúnais foinse oscailte</string>
     <string name="opensource_licenses_description">Na leabharlanna ar a bhfuil Morphe tógtha</string>
+    <string name="opensource_licenses_search">Cuardaigh leabharlanna agus ceadúnais</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Rogha</string>
     <string name="easter_egg_pill_message">Glac an piolla gorm agus fanann na fógraí díreach mar a bhfuil siad. Glac an ceann dearg agus féach cé chomh domhain is a théann an cód beart.</string>

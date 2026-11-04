@@ -904,6 +904,8 @@ Le patch non sono interessate: abilita le patch pre-release per ciascuna fonte n
     <string name="notification_channel_patch_updates">Aggiornamenti patch</string>
     <string name="notification_channel_patch_updates_description">Notifiche sui nuovi rilasci di patch</string>
     <string name="notification_channel_patcher_description">Visualizzate mentre Morphe sta patchando una app in background</string>
+    <string name="notification_channel_patching_results">Risultati del patching</string>
+    <string name="notification_channel_patching_results_description">Quando il patching termina o un\'installazione è in attesa mentre Morphe è in background</string>
     <string name="notification_channel_mounted_apps">App montate</string>
     <string name="notification_channel_mounted_apps_description">Quando un\'altra versione ha sostituito un\'app montata e la relativa patch non si applica più</string>
     <string name="notification_mount_replaced_title">%1$s non è più patchato</string>
@@ -1275,6 +1277,7 @@ Dettagli: %2$s"</string>
     <string name="credits_prior_development">Sviluppo precedente</string>
     <string name="opensource_licenses">Licenze open-source</string>
     <string name="opensource_licenses_description">Le librerie su cui è costruito Morphe</string>
+    <string name="opensource_licenses_search">Cerca librerie e licenze</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Una scelta</string>
     <string name="easter_egg_pill_message">Prendi la pillola blu e gli annunci restano esattamente dove sono. Prendi quella rossa e vedi quanto è profondo il bytecode</string>

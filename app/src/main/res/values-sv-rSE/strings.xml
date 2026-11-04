@@ -904,6 +904,8 @@ Tillägg påverkas inte: aktivera förhandsversioner av tillägg för varje käl
     <string name="notification_channel_patch_updates">Tilläggsuppdateringar</string>
     <string name="notification_channel_patch_updates_description">Aviseringar om nya tilläggsversioner</string>
     <string name="notification_channel_patcher_description">Visas när Morphe modifierar en app i bakgrunden</string>
+    <string name="notification_channel_patching_results">Resultat för modifiering</string>
+    <string name="notification_channel_patching_results_description">När modifieringen avslutas eller en installation väntar på dig medan Morphe är i bakgrunden</string>
     <string name="notification_channel_mounted_apps">Monterade appar</string>
     <string name="notification_channel_mounted_apps_description">När en annan version har ersatt en monterad app och dess modifiering inte längre gäller</string>
     <string name="notification_mount_replaced_title">%1$s är inte längre modifierad</string>
@@ -1275,6 +1277,7 @@ Information: %2$s"</string>
     <string name="credits_prior_development">Tidigare utveckling</string>
     <string name="opensource_licenses">Licenser för öppen källkod</string>
     <string name="opensource_licenses_description">De bibliotek som Morphe bygger på</string>
+    <string name="opensource_licenses_search">Sök efter bibliotek och licenser</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Ett val</string>
     <string name="easter_egg_pill_message">Ta det blå pillret så förblir annonserna precis där de är. Ta det röda och se hur djupt bytekoden går</string>

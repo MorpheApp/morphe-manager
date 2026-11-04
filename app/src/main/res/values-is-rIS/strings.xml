@@ -904,6 +904,8 @@ Plástrar verða ekki fyrir áhrifum: virkjaðu forútgáfuplástra fyrir hverja
     <string name="notification_channel_patch_updates">Plástursuppfærslur</string>
     <string name="notification_channel_patch_updates_description">Tilkynningar um nýjar plástursútgáfur</string>
     <string name="notification_channel_patcher_description">Sýnt þegar Morphe breytir app í bakgrunninum</string>
+    <string name="notification_channel_patching_results">Niðurstöður lagaðar</string>
+    <string name="notification_channel_patching_results_description">Þegar lagað er lokið eða uppsetning bíður þín á meðan Morphe er í bakgrunni</string>
     <string name="notification_channel_mounted_apps">Tengd forrit</string>
     <string name="notification_channel_mounted_apps_description">Þegar önnur útgáfa kom í stað tengds forrits og plástur þess á ekki lengur við</string>
     <string name="notification_mount_replaced_title">%1$s er ekki lengur plástrað</string>
@@ -1272,6 +1274,7 @@ Nánari upplýsingar: %2$s"</string>
     <string name="credits_prior_development">Fyrri þróun</string>
     <string name="opensource_licenses">Open-source leyfisveitingar</string>
     <string name="opensource_licenses_description">Bókasafnin sem Morphe er byggt á</string>
+    <string name="opensource_licenses_search">Leita að bókasöfnum og leyfisnúmerum</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Val</string>
     <string name="easter_egg_pill_message">Taktu bláu pilluna og auglýsingarnar haldast nákvæmlega þar sem þær eru. Taktu rauðu pilluna og sjáðu hversu djúpt bytecode-ið fer.</string>

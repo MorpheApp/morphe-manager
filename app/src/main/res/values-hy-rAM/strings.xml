@@ -904,6 +904,8 @@
     <string name="notification_channel_patch_updates">Փեթչի թարմացումներ</string>
     <string name="notification_channel_patch_updates_description">Ծանուցումներ փեթչի նոր թողարկումների մասին</string>
     <string name="notification_channel_patcher_description">Ցուցադրվում է, երբ Morphe-ը ֆոնային ռեժիմում փոփոխում է հավելվածը</string>
+    <string name="notification_channel_patching_results">Պատչավորման արդյունքները</string>
+    <string name="notification_channel_patching_results_description">Երբ պատչավորումն ավարտվում է կամ տեղադրումը սպասում է ձեզ, մինչ Morphe-ը գտնվում է հետին պլանում</string>
     <string name="notification_channel_mounted_apps">Տեղադրված հավելվածներ</string>
     <string name="notification_channel_mounted_apps_description">Երբ մի այլ տարբերակը փոխարինում է տեղադրված հավելվածը, և դրա փոփոխությունը այլևս չի գործում</string>
     <string name="notification_mount_replaced_title">%1$s-ը այլևս փոփոխված չէ</string>
@@ -1275,6 +1277,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">Նախկին մշակում</string>
     <string name="opensource_licenses">Բաց կոդի լիցենզիաներ</string>
     <string name="opensource_licenses_description">Գրադարանները, որոնց վրա կառուցված է Morphe-ը</string>
+    <string name="opensource_licenses_search">Որոնել գրադարանները և լիցենզիաները</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Ընտրություն</string>
     <string name="easter_egg_pill_message">Ընդունիր կապույտ հաբը, և գովազդները կմնան այնտեղ, որտեղ կան։ Ընդունիր կարմիրը և տես, թե որքան խորն է բայթկոդը</string>

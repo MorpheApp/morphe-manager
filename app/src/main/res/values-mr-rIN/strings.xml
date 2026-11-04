@@ -903,6 +903,8 @@
     <string name="notification_channel_patch_updates">पॅच अपडेट्स</string>
     <string name="notification_channel_patch_updates_description">नवीन पॅच रिलीझबद्दल सूचना</string>
     <string name="notification_channel_patcher_description">Morphe पार्श्वभूमीमध्ये ॲप पॅच करत असताना दर्शविले जाते</string>
+    <string name="notification_channel_patching_results">पॅचिंगचे निकाल</string>
+    <string name="notification_channel_patching_results_description">जेव्हा पॅचिंग समाप्त होते किंवा Morphe बॅकग्राउंडमध्ये असताना एखादे इंस्टॉलेशन तुमच्या प्रतीक्षेत असते</string>
     <string name="notification_channel_mounted_apps">माउंट केलेले ॲप्स</string>
     <string name="notification_channel_mounted_apps_description">जेव्हा दुसऱ्या आवृत्तीने माउंट केलेले ॲप बदलले आणि त्याचा पॅच आता लागू होत नाही</string>
     <string name="notification_mount_replaced_title">%1$s आता पॅच केलेले नाही</string>
@@ -1274,6 +1276,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">मागील विकास</string>
     <string name="opensource_licenses">मुक्त-स्रोत परवाने</string>
     <string name="opensource_licenses_description">Morphe ज्या लायब्ररीवर आधारित आहे</string>
+    <string name="opensource_licenses_search">लायब्ररी आणि परवाने शोधा</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">एक पर्याय</string>
     <string name="easter_egg_pill_message">निळी गोळी घ्या आणि जाहिराती तिथेच राहतील. लाल गोळी घ्या आणि बाइटकोड किती खोल जातो ते पहा.</string>

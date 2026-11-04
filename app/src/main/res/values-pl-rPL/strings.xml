@@ -905,6 +905,8 @@ Modyfikacje nie są tym objęte: włącz przedpremierowe modyfikacje dla każdeg
     <string name="notification_channel_patch_updates">Aktualizacje modyfikacji</string>
     <string name="notification_channel_patch_updates_description">Powiadomienia o nowych wydaniach modyfikacji</string>
     <string name="notification_channel_patcher_description">Wyświetlane, gdy Morphe modyfikuje aplikację w tle</string>
+    <string name="notification_channel_patching_results">Wyniki modyfikowania</string>
+    <string name="notification_channel_patching_results_description">Gdy modyfikowanie dobiegnie końca lub instalacja oczekuje na działanie, podczas gdy Morphe działa w tle</string>
     <string name="notification_channel_mounted_apps">Zamontowane aplikacje</string>
     <string name="notification_channel_mounted_apps_description">Gdy inna wersja zastąpi zamontowaną aplikację i jej modyfikacja przestanie działać</string>
     <string name="notification_mount_replaced_title">%1$s nie jest już zmodyfikowana</string>
@@ -1276,6 +1278,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="credits_prior_development">Poprzedni twórcy</string>
     <string name="opensource_licenses">Licencje otwartoźródłowe</string>
     <string name="opensource_licenses_description">Biblioteki, na których opiera się Morphe</string>
+    <string name="opensource_licenses_search">Szukaj bibliotek i licencji</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Wybór</string>
     <string name="easter_egg_pill_message">Weź niebieską pigułkę, a reklamy zostaną dokładnie tam, gdzie są. Weź czerwoną i przekonaj się, jak głęboko sięga kod bajtowy</string>

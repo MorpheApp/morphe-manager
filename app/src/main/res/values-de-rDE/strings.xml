@@ -906,6 +906,8 @@ Patches sind nicht betroffen: Aktivieren Sie Vorab-Patches für jede Quelle in d
     <string name="notification_channel_patch_updates">Patch-Updates</string>
     <string name="notification_channel_patch_updates_description">Benachrichtigungen über neue Patch-Versionen</string>
     <string name="notification_channel_patcher_description">Wird angezeigt, während Morphe eine App im Hintergrund patcht</string>
+    <string name="notification_channel_patching_results">Patching-Ergebnisse</string>
+    <string name="notification_channel_patching_results_description">Wenn das Patching endet oder eine Installation auf Sie wartet, während Morphe im Hintergrund ist</string>
     <string name="notification_channel_mounted_apps">Gemountete Apps</string>
     <string name="notification_channel_mounted_apps_description">Wenn eine andere Version eine gemountete App ersetzt hat und ihr Patch nicht mehr angewendet wird</string>
     <string name="notification_mount_replaced_title">%1$s ist nicht mehr gepatcht</string>
@@ -1277,6 +1279,7 @@ Details: %2$s"</string>
     <string name="credits_prior_development">Frühere Entwicklung</string>
     <string name="opensource_licenses">Open-Source-Lizenzen</string>
     <string name="opensource_licenses_description">Die Bibliotheken, auf denen Morphe aufbaut</string>
+    <string name="opensource_licenses_search">Bibliotheken und Lizenzen suchen</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Eine Wahl</string>
     <string name="easter_egg_pill_message">Nimm die blaue Pille und die Werbung bleibt genau dort, wo sie ist. Nimm die rote Pille und sieh, wie tief der Bytecode geht.</string>

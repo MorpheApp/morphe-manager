@@ -718,7 +718,7 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="patched_app_save_failed_toast">Échec de l\'enregistrement de l\'application patchée</string>
     <string name="plugin_activity_dialog_body">Une interaction de l\'utilisateur est nécessaire pour pouvoir poursuivre avec ce plugin</string>
     <string name="patcher_process_killed_message">Le système a arrêté le patcheur avant qu\'il ait terminé, généralement pour libérer de la mémoire. Fermez les autres applications et réessayez</string>
-    <string name="patcher_process_crashed_message">Le patcheur a planté avant d\'avoir terminé. Si cela se reproduit, désactivez l\'option \'Utiliser la machine virtuelle intégrée\' dans les paramètres et signalez le problème en joignant le journal</string>
+    <string name="patcher_process_crashed_message">Le patcheur a planté avant d\'avoir terminé. Si cela se reproduit, désactivez \'Utiliser la machine virtuelle intégrée\' dans les paramètres et signalez le problème en joignant le journal</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Le patcheur a manqué de mémoire avec un tas de %1$s Mo. Cette application est trop volumineuse pour les patchs sélectionnés. Essayez de patcher avec moins de sources de patchs, ou sélectionnez moins de patchs</string>
     <string name="install_app_success">Installé avec succès</string>
@@ -906,6 +906,8 @@ Les patchs ne sont pas affectés : activez les patchs en préversion pour chaque
     <string name="notification_channel_patch_updates">Mises à jour de patchs</string>
     <string name="notification_channel_patch_updates_description">Notifications concernant les nouvelles versions de patchs</string>
     <string name="notification_channel_patcher_description">Affiché lorsque Morphe effectue le patching d\'une application en arrière-plan</string>
+    <string name="notification_channel_patching_results">Résultats du patching</string>
+    <string name="notification_channel_patching_results_description">Lorsque le patching se termine ou qu\'une installation est en attente de votre intervention pendant que Morphe est en arrière-plan</string>
     <string name="notification_channel_mounted_apps">Applications montées</string>
     <string name="notification_channel_mounted_apps_description">Lorsqu\'une autre version a remplacé une application montée et que son patch ne s\'applique plus</string>
     <string name="notification_mount_replaced_title">%1$s n\'est plus patchée</string>
@@ -1280,6 +1282,7 @@ Détails : %2$s"</string>
     <string name="credits_prior_development">Développements antérieurs</string>
     <string name="opensource_licenses">Licences open-source</string>
     <string name="opensource_licenses_description">Les bibliothèques sur lesquelles Morphe est basé</string>
+    <string name="opensource_licenses_search">Rechercher des bibliothèques et des licences</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Un choix</string>
     <string name="easter_egg_pill_message">Prenez la pilule bleue et les publicités resteront exactement là où elles sont. Prenez la rouge et découvrez jusqu\'où va le bytecode</string>

@@ -904,6 +904,8 @@
     <string name="notification_channel_patch_updates">การอัปเดตแพตช์</string>
     <string name="notification_channel_patch_updates_description">การแจ้งเตือนเกี่ยวกับแพตช์เวอร์ชันใหม่</string>
     <string name="notification_channel_patcher_description">แสดงขณะที่ Morphe กำลังแพตช์แอปพลิเคชันในพื้นหลัง</string>
+    <string name="notification_channel_patching_results">ผลลัพธ์การแพตช์</string>
+    <string name="notification_channel_patching_results_description">เมื่อการแพตช์สิ้นสุดลง หรือการติดตั้งกำลังรอคุณในขณะที่ Morphe อยู่ในพื้นหลัง</string>
     <string name="notification_channel_mounted_apps">แอปที่เมานต์</string>
     <string name="notification_channel_mounted_apps_description">เมื่อเวอร์ชันอื่นเข้ามาแทนที่แอปที่เมานต์ไว้ และแพตช์ของแอปนั้นใช้ไม่ได้อีกต่อไป</string>
     <string name="notification_mount_replaced_title">%1$s ไม่ได้ถูกแพตช์อีกต่อไป</string>
@@ -1275,6 +1277,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">การพัฒนาที่ผ่านมา</string>
     <string name="opensource_licenses">สัญญาอนุญาตโอเพนซอร์ส</string>
     <string name="opensource_licenses_description">ไลบรารีที่สร้าง Morphe ขึ้นมา</string>
+    <string name="opensource_licenses_search">ค้นหาไลบรารีและใบอนุญาต</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">ทางเลือก</string>
     <string name="easter_egg_pill_message">กินยาเม็ดสีฟ้า โฆษณาก็จะยังคงอยู่ที่เดิม กินยาเม็ดสีแดง แล้วจะได้เห็นว่าไบต์โค้ดลึกแค่ไหน</string>

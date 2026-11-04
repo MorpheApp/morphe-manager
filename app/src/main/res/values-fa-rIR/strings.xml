@@ -904,6 +904,8 @@
     <string name="notification_channel_patch_updates">به‌روزرسانی پچ‌ها</string>
     <string name="notification_channel_patch_updates_description">اعلان‌های مربوط به انتشار پچ‌های جدید</string>
     <string name="notification_channel_patcher_description">وقتی Morphe برنامه‌ای را در پس‌زمینه پچ می‌کند نمایش داده می‌شود</string>
+    <string name="notification_channel_patching_results">نتایج پچ‌کردن</string>
+    <string name="notification_channel_patching_results_description">هنگامی که پچ‌کردن به پایان می‌رسد یا در حالی که Morphe در پس‌زمینه است، نصبی منتظر شماست</string>
     <string name="notification_channel_mounted_apps">برنامه‌های نصب‌شده</string>
     <string name="notification_channel_mounted_apps_description">زمانی که نسخهٔ دیگری جایگزین برنامهٔ نصب‌شده با روت شود و پچ آن دیگر اعمال نشود</string>
     <string name="notification_mount_replaced_title">%1$s دیگر پچ‌شده نیست</string>
@@ -1277,6 +1279,7 @@ adb shell appops set %1$s MANAGE_EXTERNAL_STORAGE allow</string>
     <string name="credits_prior_development">توسعهٔ پیشین</string>
     <string name="opensource_licenses">مجوزهای متن‌باز</string>
     <string name="opensource_licenses_description">کتابخانه‌هایی که مورفه بر آن‌ها ساخته شده است</string>
+    <string name="opensource_licenses_search">جستجوی کتابخانه‌ها و مجوزها</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">یک انتخاب</string>
     <string name="easter_egg_pill_message">قرص آبی را بردارید تا تبلیغات دقیقاً سر جای خود بمانند. قرص قرمز را بردارید و ببینید بایت‌کد تا کجا پیش می‌رود</string>

@@ -904,6 +904,8 @@ Patches are not affected: enable pre-release patches for each source in the patc
     <string name="notification_channel_patch_updates">Patch-frissítések</string>
     <string name="notification_channel_patch_updates_description">Értesítések az új patch-kiadásokról</string>
     <string name="notification_channel_patcher_description">Akkor jelenik meg, amikor a Morphe a háttérben módosít egy alkalmazást</string>
+    <string name="notification_channel_patching_results">Módosítási eredmények</string>
+    <string name="notification_channel_patching_results_description">Amikor a módosítás befejeződik, vagy egy telepítés vár rád, miközben a Morphe a háttérben fut</string>
     <string name="notification_channel_mounted_apps">Csatlakoztatott alkalmazások</string>
     <string name="notification_channel_mounted_apps_description">Amikor egy másik verzió lecserélt egy mountolt alkalmazást, és a javítása már nem illeszkedik</string>
     <string name="notification_mount_replaced_title">A %1$s már nincs javítva</string>
@@ -1275,6 +1277,7 @@ Részletek: %2$s"</string>
     <string name="credits_prior_development">Korábbi fejlesztők</string>
     <string name="opensource_licenses">Nyílt forráskódú licencek</string>
     <string name="opensource_licenses_description">A Morphe által használt könyvtárak</string>
+    <string name="opensource_licenses_search">Keresés könyvtárak és licencek között</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Egy választás</string>
     <string name="easter_egg_pill_message">Take the blue pill and the ads stay exactly where they are. Take the red one and see how deep the bytecode goes</string>

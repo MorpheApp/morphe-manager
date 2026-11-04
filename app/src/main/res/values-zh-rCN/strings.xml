@@ -904,6 +904,8 @@
     <string name="notification_channel_patch_updates">补丁更新</string>
     <string name="notification_channel_patch_updates_description">有关新补丁版本的通知</string>
     <string name="notification_channel_patcher_description">当 Morphe 在后台为应用打补丁时显示</string>
+    <string name="notification_channel_patching_results">补丁结果</string>
+    <string name="notification_channel_patching_results_description">当补丁结束或 Morphe 在后台运行时安装正在等待您时</string>
     <string name="notification_channel_mounted_apps">已挂载的应用</string>
     <string name="notification_channel_mounted_apps_description">当另一个版本替换了已挂载的应用且其补丁不再适用时</string>
     <string name="notification_mount_replaced_title">%1$s 不再被修补</string>
@@ -1275,6 +1277,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">先前开发</string>
     <string name="opensource_licenses">开源许可证</string>
     <string name="opensource_licenses_description">构建 Morphe 所使用的库</string>
+    <string name="opensource_licenses_search">搜索库和许可证</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">一个选择</string>
     <string name="easter_egg_pill_message">服用蓝色药丸，广告就会保持原样。服用红色药丸，看看字节码究竟有多深。</string>

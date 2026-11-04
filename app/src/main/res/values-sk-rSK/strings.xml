@@ -904,6 +904,8 @@ Záplaty tým nie sú ovplyvnené: povoľte predbežné záplaty pre každý zdr
     <string name="notification_channel_patch_updates">Opravné aktualizácie</string>
     <string name="notification_channel_patch_updates_description">Oznámenia o nových opravných verziách</string>
     <string name="notification_channel_patcher_description">Zobrazuje sa, keď Morphe pláta aplikácie na pozadí</string>
+    <string name="notification_channel_patching_results">Výsledky plátania</string>
+    <string name="notification_channel_patching_results_description">Keď plátanie skončí alebo keď Morphe beží na pozadí a čaká na vašu inštaláciu</string>
     <string name="notification_channel_mounted_apps">Pripojené aplikácie</string>
     <string name="notification_channel_mounted_apps_description">Keď iná verzia nahradila pripojenú aplikáciu a jej záplata sa už neaplikuje</string>
     <string name="notification_mount_replaced_title">Aplikácia %1$s už nie je záplatovaná</string>
@@ -1275,6 +1277,7 @@ Podrobnosti: %2$s"</string>
     <string name="credits_prior_development">Predchádzajúci vývoj</string>
     <string name="opensource_licenses">Licencie otvoreného zdroja</string>
     <string name="opensource_licenses_description">Knihovny, na ktorých Morphe stojí</string>
+    <string name="opensource_licenses_search">Hľadať knižnice a licencie</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Voľba</string>
     <string name="easter_egg_pill_message">Vezmi si modrú tabletku a reklamy zostanú presne tam, kde sú. Vezmi si červenú a uvidíš, ako hlboko siaha bytecode.</string>

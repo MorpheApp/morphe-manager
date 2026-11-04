@@ -904,6 +904,8 @@
     <string name="notification_channel_patch_updates">修補程式更新</string>
     <string name="notification_channel_patch_updates_description">關於新修補程式版本的通知</string>
     <string name="notification_channel_patcher_description">在 Morphe 於背景修補應用程式時顯示</string>
+    <string name="notification_channel_patching_results">修補結果</string>
+    <string name="notification_channel_patching_results_description">當 Morphe 在背景執行且修補結束，或安裝正等待您操作時</string>
     <string name="notification_channel_mounted_apps">已掛載的應用程式</string>
     <string name="notification_channel_mounted_apps_description">當另一個版本取代了已安裝的應用程式而且它的修補檔不再適用時</string>
     <string name="notification_mount_replaced_title">不再修補 %1$s</string>
@@ -1273,6 +1275,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">先前開發</string>
     <string name="opensource_licenses">開源授權</string>
     <string name="opensource_licenses_description">Morphe 所建構使用的函式庫</string>
+    <string name="opensource_licenses_search">搜尋函式庫與授權</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">選擇</string>
     <string name="easter_egg_pill_message">吃下藍色藥丸，廣告留在原來的地方。吃下紅色藥丸，看看位元組碼能深入到什麼程度。</string>
@@ -1297,7 +1300,7 @@ morphe_header_custom_dark.png
     <string name="settings_section_updates">更新</string>
     <string name="settings_section_patching">正在修補</string>
     <string name="settings_section_appearance_summary">Morphe 的外觀</string>
-    <string name="settings_section_patch_options_summary">簡易模式修補應用程式的方式</string>
+    <string name="settings_section_patch_options_summary">簡易模式方式修補的應用程式</string>
     <string name="settings_section_general">一般</string>
     <string name="settings_section_patcher_summary">此裝置上的應用程式修補方式</string>
     <string name="settings_section_help_info">幫助與資訊</string>

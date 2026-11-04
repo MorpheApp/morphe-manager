@@ -904,6 +904,8 @@ Záplaty tím nejsou ovlivněny: povolte předběžné záplaty pro každý zdro
     <string name="notification_channel_patch_updates">Opravné aktualizace</string>
     <string name="notification_channel_patch_updates_description">Oznámení o nových opravných verzích</string>
     <string name="notification_channel_patcher_description">Zobrazuje se během záplatování aplikace Morphe na pozadí</string>
+    <string name="notification_channel_patching_results">Výsledky záplatování</string>
+    <string name="notification_channel_patching_results_description">Když záplatování skončí nebo instalace čeká na vyřízení, zatímco je Morphe na pozadí</string>
     <string name="notification_channel_mounted_apps">Namountované aplikace</string>
     <string name="notification_channel_mounted_apps_description">Když jiná verze nahradila namountovanou aplikaci a její patch již nelze použít</string>
     <string name="notification_mount_replaced_title">Aplikace %1$s již není opatchovaná</string>
@@ -1275,6 +1277,7 @@ Podrobnosti: %2$s"</string>
     <string name="credits_prior_development">Předchozí vývoj</string>
     <string name="opensource_licenses">Open-source licence</string>
     <string name="opensource_licenses_description">Knihovny, na kterých je Morhe postaven</string>
+    <string name="opensource_licenses_search">Hledat knihovny a licence</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Volba</string>
     <string name="easter_egg_pill_message">Vezmi si modrou pilulku a reklamy zůstanou přesně tam, kde jsou. Vezmi si červenou a uvidíš, jak hluboko sahá bytecode.</string>

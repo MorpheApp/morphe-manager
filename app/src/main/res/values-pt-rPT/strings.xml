@@ -904,6 +904,8 @@ Os patches não são afetados: ative os patches de pré-lançamento para cada fo
     <string name="notification_channel_patch_updates">Atualizações de patch</string>
     <string name="notification_channel_patch_updates_description">Notificações sobre novas versões de patch</string>
     <string name="notification_channel_patcher_description">Mostrado enquanto o Morphe está a modificar uma aplicação em segundo plano</string>
+    <string name="notification_channel_patching_results">Resultados do Patching</string>
+    <string name="notification_channel_patching_results_description">Quando o patch finalizar ou a instalação aguardar sua ação com o Morphe em segundo plano</string>
     <string name="notification_channel_mounted_apps">Aplicativos montados</string>
     <string name="notification_channel_mounted_apps_description">Quando outra versão substituiu um app montado e o patch não se aplica mais</string>
     <string name="notification_mount_replaced_title">%1$s não está mais com patch</string>
@@ -1275,6 +1277,7 @@ Detalhes: %2$s"</string>
     <string name="credits_prior_development">Desenvolvimento anterior</string>
     <string name="opensource_licenses">Licenças de código aberto</string>
     <string name="opensource_licenses_description">As bibliotecas em que o Morphe foi construído</string>
+    <string name="opensource_licenses_search">Procurar bibliotecas e licenças</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Uma escolha</string>
     <string name="easter_egg_pill_message">Tome a pílula azul e os anúncios ficam exatamente onde estão. Tome a pílula vermelha e veja até onde vai o bytecode.</string>

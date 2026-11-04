@@ -904,6 +904,8 @@ Pataisoms tai įtakos neturi: įjunkite išankstines pataisas kiekvienam šaltin
     <string name="notification_channel_patch_updates">Pataisų naujinimai</string>
     <string name="notification_channel_patch_updates_description">Pranešimai apie naujus pataisų leidimus</string>
     <string name="notification_channel_patcher_description">Rodoma, kai „Morphe“ fone pataiso programą</string>
+    <string name="notification_channel_patching_results">Taisymo rezultatai</string>
+    <string name="notification_channel_patching_results_description">Kai baigiasi taisymas arba įdiegimas laukia jūsų, kol Morphe veikia fone</string>
     <string name="notification_channel_mounted_apps">Prijungtos programėlės</string>
     <string name="notification_channel_mounted_apps_description">Kai kita versija pakeičia prijungtą programėlę ir jos pataisa nebepritaikoma</string>
     <string name="notification_mount_replaced_title">%1$s nebėra pataisyta</string>
@@ -1275,6 +1277,7 @@ Išsami informacija: %2$s"</string>
     <string name="credits_prior_development">Ankstesnis vystymas</string>
     <string name="opensource_licenses">Atvirojo kodo licencijos</string>
     <string name="opensource_licenses_description">Programinės įrangos bibliotekos, naudojamos kuriant „Morphe“</string>
+    <string name="opensource_licenses_search">Ieškoti bibliotekų ir licencijų</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Pasirinkimas</string>
     <string name="easter_egg_pill_message">Išgerkite mėlynąją tabletę ir skelbimai liks tiksliai ten, kur yra. Išgerkite raudonąją ir pamatysite, kaip giliai tęsiasi baitkodas</string>

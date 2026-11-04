@@ -904,6 +904,8 @@
     <string name="notification_channel_patch_updates">Обновления патчей</string>
     <string name="notification_channel_patch_updates_description">Уведомления о новых релизах патчей</string>
     <string name="notification_channel_patcher_description">Отображается во время установки Morphe патча для приложения в фоновом режиме</string>
+    <string name="notification_channel_patching_results">Результаты патчинга</string>
+    <string name="notification_channel_patching_results_description">Когда патчинг завершается или установка ожидает вашего действия, пока Morphe находится в фоновом режиме</string>
     <string name="notification_channel_mounted_apps">Смонтированные приложения</string>
     <string name="notification_channel_mounted_apps_description">Когда другая версия заменила смонтированное приложение и его патч больше не применяется</string>
     <string name="notification_mount_replaced_title">%1$s больше не пропатчено</string>
@@ -1275,6 +1277,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">Предыдущая разработка</string>
     <string name="opensource_licenses">Лицензии открытого кода</string>
     <string name="opensource_licenses_description">Библиотеки, на которых построен Morphe</string>
+    <string name="opensource_licenses_search">Поиск библиотек и лицензий</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Выбор</string>
     <string name="easter_egg_pill_message">Прими синюю таблетку — и реклама останется на месте. Прими красную — и узнаешь, насколько глубоко уходит байткод.</string>

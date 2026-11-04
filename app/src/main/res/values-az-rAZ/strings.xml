@@ -904,6 +904,8 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="notification_channel_patch_updates">Yamaq yeniləmələri</string>
     <string name="notification_channel_patch_updates_description">Yeni yamaq buraxılışları haqqında bildirişlər</string>
     <string name="notification_channel_patcher_description">Morphe tətbiqi fonda yamaqlayarkən görünür</string>
+    <string name="notification_channel_patching_results">Yamaqlama nəticələri</string>
+    <string name="notification_channel_patching_results_description">Yamaqlama bitdikdə və ya Morphe fonda olarkən quraşdırma sizin üçün gözlədildikdə</string>
     <string name="notification_channel_mounted_apps">Quraşdırılmış tətbiqlər</string>
     <string name="notification_channel_mounted_apps_description">Başqa versiya quraşdırılmış tətbiqi əvəzlədikdə və onun yamağı artıq tətbiq olunmadıqda</string>
     <string name="notification_mount_replaced_title">%1$s artıq yamaqlanmayıb</string>
@@ -1274,6 +1276,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="credits_prior_development">Əvvəlki inkişaf</string>
     <string name="opensource_licenses">Açıq mənbə lisenziyaları</string>
     <string name="opensource_licenses_description">Morphe-nin əsaslandığı kitabxanalar</string>
+    <string name="opensource_licenses_search">Kitabxanaları və lisenziyaları axtar</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Seçim</string>
     <string name="easter_egg_pill_message">Mavi həbi seçsəniz, reklamlar olduğu kimi qalacaq. Qırmızı həbi seçin və baytkodun nə qədər dərinə getdiyini görün</string>

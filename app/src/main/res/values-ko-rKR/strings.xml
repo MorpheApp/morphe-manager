@@ -904,6 +904,8 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="notification_channel_patch_updates">패치 업데이트</string>
     <string name="notification_channel_patch_updates_description">새 패치 릴리스에 대한 알림</string>
     <string name="notification_channel_patcher_description">Morphe가 백그라운드에서 앱을 패치하는 동안에 표시되는 알림</string>
+    <string name="notification_channel_patching_results">패치 결과</string>
+    <string name="notification_channel_patching_results_description">Morphe가 백그라운드에서 실행 중일 때 패치가 완료되거나 설치가 사용자 확인을 기다리는 경우</string>
     <string name="notification_channel_mounted_apps">마운트된 앱</string>
     <string name="notification_channel_mounted_apps_description">다른 버전이 마운트된 앱을 교체하여 기존 패치가 더 이상 적용되지 않는 경우입니다</string>
     <string name="notification_mount_replaced_title">%1$s는 더 이상 패치되지 않음</string>
@@ -1275,6 +1277,7 @@ morphe_header_custom_dark.png
     <string name="credits_prior_development">이전 개발</string>
     <string name="opensource_licenses">오픈 소스 라이선스</string>
     <string name="opensource_licenses_description">Morphe 기반 라이브러리</string>
+    <string name="opensource_licenses_search">라이브러리 및 라이선스 검색</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">알약 선택</string>
     <string name="easter_egg_pill_message">파란 알약을 먹으면 광고가 지금 있는 그대로 남아 있습니다. 빨간 알약을 먹으면 바이트코드가 얼마나 깊이 들어가는지 볼 수 있습니다</string>

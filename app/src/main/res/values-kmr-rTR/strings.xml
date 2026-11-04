@@ -904,6 +904,8 @@ Patch ne bandor in: ji bo her çavkaniyê di lîsteya çavkaniyên patch de patc
     <string name="notification_channel_patch_updates">Nûvekirinên patchan</string>
     <string name="notification_channel_patch_updates_description">Agahdariyên derbarê guhertoyên nû yên patchan de</string>
     <string name="notification_channel_patcher_description">Di dema ku Morphe bernameyekê di rewşê de çêdike</string>
+    <string name="notification_channel_patching_results">Encamên patchworkê</string>
+    <string name="notification_channel_patching_results_description">Dema patchwork bidawî dibe an jî gava Morphe di paşbingavê de ye û sazkirin li benda te ye</string>
     <string name="notification_channel_mounted_apps">Appên mountkirî</string>
     <string name="notification_channel_mounted_apps_description">Dema ku guherînek din nivîsana appekê ya mountkirî guhert û patchê wê êdî nayê sepandin</string>
     <string name="notification_mount_replaced_title">%1$s êdî nayê patchkirin</string>
@@ -1275,6 +1277,7 @@ Detay: %2$s"</string>
     <string name="credits_prior_development">Gelişîna berê</string>
     <string name="opensource_licenses">Lîsansên çavkaniyê vekirî</string>
     <string name="opensource_licenses_description">Kutubxaneyên ku Morphe li ser hatiye avakirin</string>
+    <string name="opensource_licenses_search">Pirtûkxane û lisansan bigere</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Vebijarkek</string>
     <string name="easter_egg_pill_message">Heba şîn bixwe û reklam tam li cihê xwe dimînin. Heba sor bixwe û bibîne ka bytecode çiqas kûr diçe.</string>

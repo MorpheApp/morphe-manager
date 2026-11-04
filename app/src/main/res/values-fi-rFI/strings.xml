@@ -902,6 +902,8 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="notification_channel_patch_updates">Korjauspäivitykset</string>
     <string name="notification_channel_patch_updates_description">Ilmoitukset uusista korjausjulkaisuista</string>
     <string name="notification_channel_patcher_description">Näytetään, kun Morphe paikkaa sovellusta taustalla</string>
+    <string name="notification_channel_patching_results">Muokkaustulokset</string>
+    <string name="notification_channel_patching_results_description">Kun muokkaus päättyy tai asennus odottaa sinua Morphen ollessa taustalla</string>
     <string name="notification_channel_mounted_apps">Mountatut sovellukset</string>
     <string name="notification_channel_mounted_apps_description">Kun toinen versio korvasi mountatun sovelluksen eikä sen korjaus enää päde</string>
     <string name="notification_mount_replaced_title">%1$s ei ole enää korjattu</string>
@@ -1273,6 +1275,7 @@ Yksityiskohdat: %2$s"</string>
     <string name="credits_prior_development">Aikaisempi kehitys</string>
     <string name="opensource_licenses">Avoimen lähdekoodin lisenssit</string>
     <string name="opensource_licenses_description">Kirjastot, joille Morphe perustuu</string>
+    <string name="opensource_licenses_search">Hae kirjastoja ja lisenssejä</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Valinta</string>
     <string name="easter_egg_pill_message">Ota sininen pilleri ja mainokset pysyvät tarkalleen paikoillaan. Ota punainen ja katso kuinka syvälle tavukoodi menee.</string>
