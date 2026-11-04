@@ -10,6 +10,7 @@ import androidx.compose.animation.Crossfade
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -26,10 +27,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.ApkDownloadSource
 import app.morphe.manager.ui.screen.shared.*
@@ -46,9 +49,26 @@ private fun ApkDownloadSource.destinationLabel(): String =
     label ?: stringResource(R.string.home_download_instructions_destination)
 
 /** Site button an instruction step points at, redrawn below the step so it can be recognized. */
-private enum class SiteButton { ApkMirror, Uptodown, GitHubAssets }
+private enum class SiteButton { ApkMirror, Uptodown, GitHubAssets, ApkCube }
 
 private val UptodownBrandColor = Color(0xFF4CB050)
+
+/** APKCube's "Download on APKCube" badge, in its variant for light pages and for dark ones. */
+private class ApkCubeBadgeColors(val container: Color, val caption: Color, val wordmark: Color, val border: Color?)
+
+private val ApkCubeBadgeForLightPages = ApkCubeBadgeColors(
+    container = Color(0xFF191F28),
+    caption = Color(0xFF9CA2A9),
+    wordmark = Color(0xFFF8FAFD),
+    border = null
+)
+
+private val ApkCubeBadgeForDarkPages = ApkCubeBadgeColors(
+    container = Color(0xFFF8FAFD),
+    caption = Color(0xFF535861),
+    wordmark = Color(0xFF192029),
+    border = Color(0xFFDDE1E7)
+)
 
 /**
  * One numbered instruction line.
@@ -133,6 +153,20 @@ private fun ApkDownloadSource.instructionSteps(
                 )
             )
         }
+
+        // Without a pinned version the page offers the newest build, so a required one is picked first
+        is ApkDownloadSource.ApkCube -> listOf(
+            if (versionPinned || requestedVersion == null) {
+                pressSiteButton(SiteButton.ApkCube)
+            } else {
+                DownloadStep(
+                    text = htmlAnnotatedString(
+                        stringResource(R.string.home_download_instructions_step2_apkcube, requestedVersion)
+                    ),
+                    button = SiteButton.ApkCube
+                )
+            }
+        )
 
         ApkDownloadSource.WebSearch -> listOf(
             DownloadStep(
@@ -420,6 +454,8 @@ private fun SiteDownloadButton(
             }
         }
 
+        SiteButton.ApkCube -> ApkCubeBadge(onClick = onClick)
+
         // Uptodown uses its own brand color for every app, so the accent color plays no part here
         SiteButton.Uptodown -> Surface(
             onClick = onClick,
@@ -562,6 +598,58 @@ private fun GitHubAssetRow(
         )
     }
 }
+
+/**
+ * APKCube's own "Download on APKCube" badge, dark on a light page and light on a dark one, as
+ * APKCube itself publishes it.
+ */
+@Composable
+private fun ApkCubeBadge(onClick: () -> Unit) {
+    val colors = if (isDarkTheme()) ApkCubeBadgeForDarkPages else ApkCubeBadgeForLightPages
+
+    Surface(
+        onClick = onClick,
+        shape = RoundedCornerShape(ApkCubeBadgeCornerRadius),
+        color = colors.container,
+        border = colors.border?.let { BorderStroke(1.dp, it) }
+    ) {
+        Row(
+            modifier = Modifier.padding(start = 12.dp, end = 20.dp, top = 11.dp, bottom = 11.dp),
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                painter = painterResource(R.drawable.ic_apkcube_badge_logo),
+                contentDescription = null,
+                modifier = Modifier.size(ApkCubeBadgeLogoSize)
+            )
+            Column {
+                Text(
+                    text = "DOWNLOAD ON",
+                    color = colors.caption,
+                    fontSize = 9.sp,
+                    lineHeight = 11.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    letterSpacing = 1.3.sp
+                )
+                Text(
+                    text = "APKCube",
+                    color = colors.wordmark,
+                    fontSize = 19.sp,
+                    lineHeight = 22.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = (-0.2).sp
+                )
+            }
+        }
+    }
+}
+
+/** Rounding of APKCube's badge, 9 of its 54 units of height. */
+private val ApkCubeBadgeCornerRadius = 10.dp
+
+/** Side of the logo tile at the start of APKCube's badge. */
+private val ApkCubeBadgeLogoSize = 32.dp
 
 /** Side of the disc a step's number sits on. */
 private val StepNumberSize = 26.dp

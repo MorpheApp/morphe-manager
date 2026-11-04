@@ -69,4 +69,36 @@ class ApkDownloadSourceTest {
             ApkDownloadSource.from("https://boost.en.uptodown.com/android/download/123-x")
         )
     }
+
+    @Test
+    fun `an APKCube download page is recognized`() {
+        assertEquals(
+            ApkDownloadSource.ApkCube(versionPinned = true),
+            ApkDownloadSource.from("https://apkcube.com/youtube/com.google.android.youtube/download?version=20.12.46")
+        )
+    }
+
+    @Test
+    fun `an APKCube app page stops short of the download`() {
+        assertEquals(
+            ApkDownloadSource.ApkCube(versionPinned = false),
+            ApkDownloadSource.from("https://www.apkcube.com/youtube/com.google.android.youtube")
+        )
+    }
+
+    @Test
+    fun `an APKCube download page without a version is not pinned`() {
+        assertEquals(
+            ApkDownloadSource.ApkCube(versionPinned = false),
+            ApkDownloadSource.from("https://apkcube.com/youtube/com.google.android.youtube/download")
+        )
+    }
+
+    @Test
+    fun `a host only ending in apkcube is not APKCube`() {
+        assertEquals(
+            ApkDownloadSource.Other("notapkcube.com"),
+            ApkDownloadSource.from("https://notapkcube.com/youtube/com.google.android.youtube/download")
+        )
+    }
 }
