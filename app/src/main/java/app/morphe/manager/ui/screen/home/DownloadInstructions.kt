@@ -154,19 +154,18 @@ private fun ApkDownloadSource.instructionSteps(
             )
         }
 
-        // The app's page shows the newest build, so a required version is picked there first.
-        // The download page is already pinned to it
+        // Without a pinned version the page offers the newest build, so a required one is picked first
         is ApkDownloadSource.ApkCube -> listOf(
-            DownloadStep(
-                text = if (onDownloadPage || requestedVersion == null) {
-                    AnnotatedString(stringResource(R.string.home_download_instructions_step2_part1))
-                } else {
-                    htmlAnnotatedString(
+            if (versionPinned || requestedVersion == null) {
+                pressSiteButton(SiteButton.ApkCube)
+            } else {
+                DownloadStep(
+                    text = htmlAnnotatedString(
                         stringResource(R.string.home_download_instructions_step2_apkcube, requestedVersion)
-                    )
-                },
-                button = SiteButton.ApkCube
-            )
+                    ),
+                    button = SiteButton.ApkCube
+                )
+            }
         )
 
         ApkDownloadSource.WebSearch -> listOf(

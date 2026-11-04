@@ -33,10 +33,10 @@ sealed class ApkDownloadSource(val label: String?) {
     data class GitHub(val release: String?) : ApkDownloadSource("GitHub.com")
 
     /**
-     * @param onDownloadPage True for the download page, pinned to one version by its `?version=`.
-     * The app's own page stops short of it, with the version still to be picked.
+     * @param versionPinned True for the download page pinned to one version by its `?version=`.
+     * The app's own page, or a download page reached without it, leaves the version to be picked.
      */
-    data class ApkCube(val onDownloadPage: Boolean) : ApkDownloadSource("APKCube.com")
+    data class ApkCube(val versionPinned: Boolean) : ApkDownloadSource("APKCube.com")
 
     /** Search results rather than one app page, used when the API knows no direct link. */
     data object WebSearch : ApkDownloadSource("Google")
@@ -74,13 +74,16 @@ sealed class ApkDownloadSource(val label: String?) {
                 host.endsWith("uptodown.com") -> Uptodown
                 host == "github.com" && RELEASES_SEGMENT in path.split('/') -> GitHub(releaseTag(uri))
                 host == "apkcube.com" || host.endsWith(".apkcube.com") ->
-                    ApkCube(onDownloadPage = path.endsWith("/download"))
+                    ApkCube(versionPinned = path.endsWith("/download") && hasQueryValue(uri, "version"))
                 host.endsWith("google.com") -> WebSearch
                 else -> Other(host)
             }
         }
 
         private const val RELEASES_SEGMENT = "releases"
+
+        private fun hasQueryValue(uri: URI, name: String): Boolean =
+            uri.rawQuery.orEmpty().split('&').any { it.startsWith("$name=") && it.length > name.length + 1 }
 
         /**
          * Tag of the one release [uri] leads to, either its own page or its card on the list of

@@ -73,7 +73,7 @@ class ApkDownloadSourceTest {
     @Test
     fun `an APKCube download page is recognized`() {
         assertEquals(
-            ApkDownloadSource.ApkCube(onDownloadPage = true),
+            ApkDownloadSource.ApkCube(versionPinned = true),
             ApkDownloadSource.from("https://apkcube.com/youtube/com.google.android.youtube/download?version=20.12.46")
         )
     }
@@ -81,8 +81,16 @@ class ApkDownloadSourceTest {
     @Test
     fun `an APKCube app page stops short of the download`() {
         assertEquals(
-            ApkDownloadSource.ApkCube(onDownloadPage = false),
+            ApkDownloadSource.ApkCube(versionPinned = false),
             ApkDownloadSource.from("https://www.apkcube.com/youtube/com.google.android.youtube")
+        )
+    }
+
+    @Test
+    fun `an APKCube download page without a version is not pinned`() {
+        assertEquals(
+            ApkDownloadSource.ApkCube(versionPinned = false),
+            ApkDownloadSource.from("https://apkcube.com/youtube/com.google.android.youtube/download")
         )
     }
 
