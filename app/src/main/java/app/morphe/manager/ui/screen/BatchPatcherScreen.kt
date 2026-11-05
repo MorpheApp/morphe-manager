@@ -492,11 +492,10 @@ fun BatchPatcherScreen(
                         )
                     }
                 } else {
-                    // Nudged ahead between the patcher's coarse steps and eased, as a single run is
+                    // Eased toward what the run reports, as a single run is
                     val displayProgress = rememberDisplayedPatchProgress(
-                        progress = { shownRun.progress },
-                        succeeded = if (holdSummary) true else null,
-                        run = shownRun
+                        run = shownRun,
+                        succeeded = if (holdSummary) true else null
                     )
                     // Each app ramps the background up from rest. A run held on screen past its
                     // end, for a round in play, is over and leaves the background at rest

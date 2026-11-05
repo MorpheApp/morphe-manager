@@ -692,6 +692,15 @@ Uninstalling will permanently erase all app data"</string>
     <string name="patcher_step_write_patched">Writing patched APK file</string>
     <string name="patcher_step_sign_apk">Signing patched APK file</string>
 
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Reading DEX files</string>
+    <string name="patcher_task_extracting_resources">Extracting resources</string>
+    <string name="patcher_task_decoding_resources">Decoding resources</string>
+    <string name="patcher_task_indexing_classes">Indexing classes</string>
+    <string name="patcher_task_compiling_dex">Compiling DEX files</string>
+    <string name="patcher_task_compiling_resources">Compiling resources</string>
+    <string name="patcher_task_writing_apk">Writing APK file</string>
+
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Background patching protection</string>
     <string name="battery_optimization_dialog_description">Some devices may stop the patcher when the app is minimized. Allow Morphe to run without battery restrictions to ensure patching completes reliably</string>

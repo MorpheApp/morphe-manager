@@ -6,6 +6,7 @@
 package app.morphe.manager.patcher
 
 import app.morphe.manager.patcher.split.SplitPreparationEvent
+import app.morphe.patcher.PatcherTask
 
 /**
  * What a run reports as it moves through its steps. Facts rather than text, so wherever the run
@@ -28,6 +29,12 @@ interface PatchingListener {
     fun patchExecuting(name: String) = Unit
 
     suspend fun patchSucceeded(name: String)
+
+    /**
+     * The patcher got [done] of [total] through [task], work it does besides executing patches.
+     * Not suspending, as the patcher reports it from the threads that do the work.
+     */
+    fun taskProgress(task: PatcherTask, done: Long, total: Long) = Unit
 
     /** Reported right before the run fails on the patch, so the app can name it. */
     suspend fun patchFailed(name: String?, stackTrace: String)

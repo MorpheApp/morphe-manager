@@ -14,6 +14,7 @@ import app.morphe.manager.patcher.runtime.heapLimitMebibytes
 import app.morphe.manager.patcher.split.SplitPreparationEvent
 import app.morphe.manager.util.bytesToMebibytes
 import app.morphe.manager.util.toLogString
+import app.morphe.patcher.PatcherTask
 import app.morphe.patcher.patch.Patch
 import app.morphe.patcher.patch.loadPatchesFromJar
 import kotlinx.coroutines.runBlocking
@@ -317,6 +318,9 @@ private class HostEvents(private val stream: OutputStream) : AutoCloseable {
         override fun patchExecuting(name: String) = send(HostEvent.PatchExecuting(name))
 
         override suspend fun patchSucceeded(name: String) = send(HostEvent.PatchSucceeded(name))
+
+        override fun taskProgress(task: PatcherTask, done: Long, total: Long) =
+            send(HostEvent.TaskProgress(task, done, total))
 
         override suspend fun patchFailed(name: String?, stackTrace: String) =
             send(HostEvent.PatchFailed(name, stackTrace))

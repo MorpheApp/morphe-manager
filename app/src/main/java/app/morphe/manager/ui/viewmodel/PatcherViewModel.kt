@@ -507,7 +507,6 @@ class PatcherViewModel(
                 .filterNot { (_, message) -> SummarisedLogPrefixes.any { message.startsWith(it) } }
                 .joinToString("\n") { (level, message) -> "[$level] $message" }
         }
-    val progress: Float get() = patchRun.progress
     val patchesProgress get() = patchRun.patchesProgress
 
     private val workManager = WorkManager.getInstance(app)
@@ -964,6 +963,7 @@ class PatcherViewModel(
                 }
             },
             onProgress = patchRun::onProgress,
+            onTaskProgress = patchRun::onTaskProgress,
             patchSources = patchSourcesForLog,
             useMount = usingMountInstall
         )

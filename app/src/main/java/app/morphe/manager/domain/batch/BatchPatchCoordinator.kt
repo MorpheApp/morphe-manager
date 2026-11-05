@@ -629,6 +629,7 @@ class BatchPatchCoordinator(
                 withContext(Dispatchers.Main) { runProgress.updateSplitRequirement(file, needsSplit, merged) }
             },
             onProgress = runProgress::onProgress,
+            onTaskProgress = runProgress::onTaskProgress,
             patchSources = patchSources,
             announceCompletion = false,
             queuePosition = _state.value?.let { it.position to it.total },

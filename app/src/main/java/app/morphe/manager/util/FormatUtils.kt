@@ -76,6 +76,9 @@ private fun scaleBytes(bytes: Long): Pair<Double, Int> = when {
     else -> bytes / BYTES_PER_GIGABYTE to 3
 }
 
+/** A count as the reader writes numbers, with the grouping of their language. */
+fun Context.formatCount(count: Long): String = numberFormat(locale, 0).format(count)
+
 private fun sizeFormat(locale: Locale, decimals: Int): MeasureFormat =
     sizeFormats.getOrPut(locale to decimals) {
         MeasureFormat.getInstance(locale, MeasureFormat.FormatWidth.SHORT, numberFormat(locale, decimals))

@@ -131,7 +131,7 @@ private fun PatcherScreenContent(
 
     val reduceMotion = rememberAccessibilityEnabled()
     val displayProgress = rememberDisplayedPatchProgress(
-        progress = { patcherViewModel.progress },
+        run = patcherViewModel.patchRun,
         succeeded = patcherSucceeded
     )
 
