@@ -1,3 +1,9 @@
+## [2.5.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v2.5.0-dev.1...v2.5.0-dev.2) (2026-11-05)
+
+### Bug Fixes
+
+* Bump patcher ([5a7a04d](https://github.com/MorpheApp/morphe-manager/commit/5a7a04d902c693020675e42ade3698811f669ac8))
+
 ## [2.5.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0...v2.5.0-dev.1) (2026-11-05)
 
 ### Features
