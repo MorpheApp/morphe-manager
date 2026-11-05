@@ -19,7 +19,6 @@ import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.data.room.apps.installed.reinstallsByMount
-import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.labelRes
 import app.morphe.manager.util.batchActionSummary
@@ -118,11 +117,9 @@ fun rememberInstallQueue(
         active = next
         awaitedInstallerDialog = false
         val installedApp = next.installedApp
-        val primaryInstallerIsMount =
-            installViewModel.getPrimaryInstallerToken() == InstallerManager.Token.AutoSaved
         val mountPackageName = when {
             next.builtForMount -> next.originalPackageName
-            installedApp != null && installedApp.reinstallsByMount(primaryInstallerIsMount) ->
+            installedApp != null && installedApp.reinstallsByMount(installViewModel.mountsByDefault()) ->
                 installedApp.currentPackageName
             else -> null
         }

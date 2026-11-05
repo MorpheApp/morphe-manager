@@ -136,18 +136,16 @@ class PreferencesManager(
 
     // System tab
     val installerPrimary = stringPreference("installer_primary", InstallerPreferenceTokens.INTERNAL)
+    val rootPatchMode = enumPreference("root_patch_mode", RootPatchMode.ASK)
+    val afterPatching = enumPreference("after_patching", AfterPatching.MANUAL)
+    /** Guards the one-shot migration of the install settings into [rootPatchMode] and [afterPatching]. */
+    private val installModesMigrated = booleanPreference("install_modes_migrated_v1", false)
     val noMountOnly = booleanPreference("nomount_only", false)
-    val promptInstallerOnInstall = booleanPreference("prompt_installer_on_install", false)
     /** Lets an expert run on a rooted device pick patches regardless of what its install target requires or rules out. */
     val ignoreInstallTargetRules = booleanPreference("ignore_install_target_rules", false)
     val installerCustomComponents = stringSetPreference("installer_custom_components", emptySet())
     val installerHiddenComponents = stringSetPreference("installer_hidden_components", emptySet())
 
-    /** Installs the patched APK as soon as patching completes. */
-    val autoInstallAfterPatching = booleanPreference(
-        "auto_install_with_shizuku", // Old key from when Shizuku was the only installer that could
-        false
-    )
     val autoUninstallWithShizuku = booleanPreference("auto_uninstall_with_shizuku", false)
 
     /**
@@ -239,7 +237,8 @@ class PreferencesManager(
 
     init {
         runBlocking {
-            if (installationTime.get() == 0L) {
+            val freshInstall = installationTime.get() == 0L
+            if (freshInstall) {
                 val now = System.currentTimeMillis()
                 installationTime.update(now)
                 Log.d(tag, "Installation time set to $now")
@@ -254,6 +253,11 @@ class PreferencesManager(
                     themeStyle.update(ThemeStyle.MATERIAL_YOU)
                 }
                 themeStyleMigrated.update(true)
+            }
+
+            if (!installModesMigrated.get()) {
+                if (!freshInstall) migrateInstallModes()
+                installModesMigrated.update(true)
             }
 
             // Helpers used to share a single switch; whoever had it on keeps every helper it let in
@@ -272,6 +276,35 @@ class PreferencesManager(
                     prereleaseAutoEnabled.value = true
                 }
             }
+        }
+    }
+
+    /**
+     * Folds the installer prompt and auto-install switches, and root mount stored as the installer,
+     * into [rootPatchMode] and [afterPatching], keeping what each install did before.
+     */
+    private suspend fun migrateInstallModes() {
+        val promptKey = booleanPreferencesKey("prompt_installer_on_install")
+        val autoInstallKey = booleanPreferencesKey("auto_install_with_shizuku")
+        val raw = dataStore.data.first()
+        val prompt = raw[promptKey] ?: false
+        val legacyInstaller = legacyRootMountInstaller(installerPrimary.get())
+        edit {
+            legacyInstaller?.let { installerPrimary.value = it }
+            rootPatchMode.value = when {
+                prompt -> RootPatchMode.ASK
+                legacyInstaller != null -> RootPatchMode.MOUNT
+                else -> RootPatchMode.STANDARD
+            }
+            afterPatching.value = when {
+                raw[autoInstallKey] == true -> AfterPatching.INSTALL
+                prompt -> AfterPatching.ASK_INSTALLER
+                else -> AfterPatching.MANUAL
+            }
+        }
+        dataStore.edit {
+            it.remove(promptKey)
+            it.remove(autoInstallKey)
         }
     }
 
@@ -296,6 +329,8 @@ class PreferencesManager(
         val useJvmRuntime: Boolean? = null,
         val allowMeteredUpdates: Boolean? = null,
         val installerPrimary: String? = null,
+        val rootPatchMode: RootPatchMode? = null,
+        val afterPatching: AfterPatching? = null,
         val noMountOnly: Boolean? = null,
         val installerCustomComponents: Set<String>? = null,
         val installerHiddenComponents: Set<String>? = null,
@@ -367,6 +402,8 @@ class PreferencesManager(
                 useJvmRuntime = useJvmRuntime.takeIf { patching },
                 allowMeteredUpdates = allowMeteredUpdates.takeIf { updates },
                 installerPrimary = installerPrimary.takeIf { patching },
+                rootPatchMode = rootPatchMode.takeIf { patching },
+                afterPatching = afterPatching.takeIf { patching },
                 noMountOnly = noMountOnly.takeIf { patching },
                 installerCustomComponents = installerCustomComponents.takeIf { patching },
                 installerHiddenComponents = installerHiddenComponents.takeIf { patching },
@@ -428,6 +465,8 @@ class PreferencesManager(
         useJvmRuntime = useJvmRuntime.get(),
         allowMeteredUpdates = allowMeteredUpdates.get(),
         installerPrimary = installerPrimary.get(),
+        rootPatchMode = rootPatchMode.get(),
+        afterPatching = afterPatching.get(),
         noMountOnly = noMountOnly.get(),
         installerCustomComponents = installerCustomComponents.get(),
         installerHiddenComponents = installerHiddenComponents.get(),
@@ -485,7 +524,13 @@ class PreferencesManager(
         snapshot.includeGitHubPatInExports?.let { includeGitHubPatInExports.value = it }
         snapshot.useJvmRuntime?.let { useJvmRuntime.value = it }
         snapshot.allowMeteredUpdates?.let { allowMeteredUpdates.value = it }
-        snapshot.installerPrimary?.let { installerPrimary.value = it }
+        // Older exports store root mount as the installer
+        val legacyInstaller = snapshot.installerPrimary
+            ?.takeIf { snapshot.rootPatchMode == null }
+            ?.let(::legacyRootMountInstaller)
+        snapshot.installerPrimary?.let { installerPrimary.value = legacyInstaller ?: it }
+        (snapshot.rootPatchMode ?: legacyInstaller?.let { RootPatchMode.MOUNT })?.let { rootPatchMode.value = it }
+        snapshot.afterPatching?.let { afterPatching.value = it }
         snapshot.noMountOnly?.let { noMountOnly.value = it }
         snapshot.installerCustomComponents?.let { installerCustomComponents.value = it }
         snapshot.installerHiddenComponents?.let { installerHiddenComponents.value = it }
@@ -552,11 +597,21 @@ class PreferencesManager(
     }
 }
 
+/** The installer standard builds used while [installer] stored root mount, null for any other value. */
+private fun legacyRootMountInstaller(installer: String): String? = when (installer) {
+    InstallerPreferenceTokens.LEGACY_ROOT,
+    InstallerPreferenceTokens.LEGACY_AUTO_SAVED -> InstallerPreferenceTokens.INTERNAL
+    InstallerPreferenceTokens.ROOT_PLAY_STORE -> InstallerPreferenceTokens.ROOT_PLAY_STORE
+    else -> null
+}
+
 object InstallerPreferenceTokens {
     const val INTERNAL = ":internal:"
     const val SYSTEM = ":system:"
-    const val ROOT = ":root:" // Legacy value, mapped to AUTO_SAVED
-    const val AUTO_SAVED = ":auto_saved:"
+    // Root mount as the default installer, see legacyRootMountInstaller
+    const val LEGACY_ROOT = ":root:"
+    const val LEGACY_AUTO_SAVED = ":auto_saved:"
+    const val ROOT = ":root_install:"
     const val PLAY_STORE = ":play_store:"
     const val ROOT_PLAY_STORE = ":root_play_store:"
     const val SHIZUKU = ":shizuku:"

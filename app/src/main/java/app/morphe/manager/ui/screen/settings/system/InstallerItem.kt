@@ -157,6 +157,14 @@ internal fun InstallerChoice(
     }
     val selectedToken = selected.baseInstallerToken()
     val installAsPlayStore = selected.isPlayStoreModeToken()
+    var pendingPlayStoreSelection by remember { mutableStateOf<InstallerManager.Token?>(null) }
+    val select: (InstallerManager.Token) -> Unit = { token ->
+        if (token.isPlayStoreModeToken() && !installAsPlayStore) {
+            pendingPlayStoreSelection = token
+        } else {
+            onSelect(token)
+        }
+    }
     var inlineShizukuStatus by remember { mutableStateOf<SessionInstaller.ShizukuStatus?>(null) }
 
     LaunchedEffect(selectedToken, shizukuStatusProvider) {
@@ -171,7 +179,6 @@ internal fun InstallerChoice(
         }
     }
 
-    var pendingPlayStoreModeConfirm by remember { mutableStateOf(false) }
     var showShizukuStatus by remember { mutableStateOf(false) }
 
     // Localized strings for accessibility
@@ -217,7 +224,7 @@ internal fun InstallerChoice(
                     selected = isSelected,
                     enabled = enabled,
                     // Play Store mode carries over to another installer that offers it
-                    onSelect = { if (enabled) onSelect(option.token.withPlayStoreMode(installAsPlayStore)) },
+                    onSelect = { if (enabled) select(option.token.withPlayStoreMode(installAsPlayStore)) },
                     stateDescription = stateDesc,
                     footerText = shizukuFooterText,
                     // Shizuku's fixes sit in its own card, under what is wrong with it
@@ -239,27 +246,13 @@ internal fun InstallerChoice(
         }
     }
 
-    val moduleUnmountRisk = rememberModuleUnmountRisk()
-    FoldingVisibility(visible = selectedToken == InstallerManager.Token.AutoSaved && moduleUnmountRisk) {
-        SettingsFooter(
-            text = stringResource(R.string.root_mount_module_unmount_warning),
-            tone = SemanticTone.Warning
-        )
-    }
-
     val showPlayStoreToggle = selectedToken.supportsPlayStoreMode() &&
             options.any { it.token == selectedToken.withPlayStoreMode(true) }
     FoldingVisibility(visible = showPlayStoreToggle) {
         SettingsGroup {
             SettingsSwitchItem(
                 checked = installAsPlayStore,
-                onToggle = {
-                    if (installAsPlayStore) {
-                        onSelect(selectedToken)
-                    } else {
-                        pendingPlayStoreModeConfirm = true
-                    }
-                },
+                onToggle = { select(selectedToken.withPlayStoreMode(!installAsPlayStore)) },
                 leadingContent = { ThemedIcon(icon = MaterialSymbols.Rounded.Storefront, size = 28.dp) },
                 title = stringResource(R.string.installer_play_store_mode),
                 subtitle = stringResource(R.string.installer_play_store_mode_description)
@@ -267,7 +260,7 @@ internal fun InstallerChoice(
         }
     }
 
-    DialogHost(visible = pendingPlayStoreModeConfirm) {
+    DialogHost(target = pendingPlayStoreSelection) { token ->
         ConfirmDialog(
             title = stringResource(R.string.installer_play_store_warning_title),
             message = stringResource(R.string.installer_play_store_warning_message),
@@ -276,10 +269,10 @@ internal fun InstallerChoice(
             // A risk the user can avoid by turning off updates, not a failure
             notice = stringResource(R.string.installer_play_store_warning_risk),
             onConfirm = {
-                pendingPlayStoreModeConfirm = false
-                onSelect(selectedToken.withPlayStoreMode(true))
+                pendingPlayStoreSelection = null
+                onSelect(token)
             },
-            onDismiss = { pendingPlayStoreModeConfirm = false }
+            onDismiss = { pendingPlayStoreSelection = null }
         )
     }
 
@@ -353,7 +346,7 @@ fun DialogHostScope.InstallerSelectionDialog(
 
 private fun InstallerManager.Token.baseInstallerToken(): InstallerManager.Token = when (this) {
     InstallerManager.Token.PlayStore -> InstallerManager.Token.Internal
-    InstallerManager.Token.RootPlayStore -> InstallerManager.Token.AutoSaved
+    InstallerManager.Token.RootPlayStore -> InstallerManager.Token.Root
     InstallerManager.Token.ShizukuPlayStore -> InstallerManager.Token.Shizuku
     else -> this
 }
@@ -365,12 +358,12 @@ private fun InstallerManager.Token.isPlayStoreModeToken(): Boolean =
 
 private fun InstallerManager.Token.supportsPlayStoreMode(): Boolean =
     this == InstallerManager.Token.Internal ||
-            this == InstallerManager.Token.AutoSaved ||
+            this == InstallerManager.Token.Root ||
             this == InstallerManager.Token.Shizuku
 
 private fun InstallerManager.Token.withPlayStoreMode(enabled: Boolean): InstallerManager.Token = when {
     this == InstallerManager.Token.Internal && enabled -> InstallerManager.Token.PlayStore
-    this == InstallerManager.Token.AutoSaved && enabled -> InstallerManager.Token.RootPlayStore
+    this == InstallerManager.Token.Root && enabled -> InstallerManager.Token.RootPlayStore
     this == InstallerManager.Token.Shizuku && enabled -> InstallerManager.Token.ShizukuPlayStore
     else -> this
 }
@@ -384,7 +377,7 @@ internal fun InstallerManager.Token.isShizukuToken(): Boolean =
  * stays false there, and until it is known.
  */
 @Composable
-private fun rememberModuleUnmountRisk(): Boolean {
+internal fun rememberModuleUnmountRisk(): Boolean {
     val rootInstaller: RootInstaller = koinInject()
     val hasRisk by produceState(false) {
         value = !rootInstaller.isMagisk() && !rootInstaller.isNoMountAvailable()
@@ -654,7 +647,7 @@ fun DialogHostScope.InstallerUnavailableDialog(
     val installerName = when (state.installerToken) {
         InstallerManager.Token.Shizuku -> stringResource(R.string.home_app_info_install_type_shizuku)
         InstallerManager.Token.ShizukuPlayStore -> stringResource(R.string.home_app_info_install_type_shizuku_play_store)
-        InstallerManager.Token.AutoSaved -> stringResource(R.string.installer_auto_saved_name)
+        InstallerManager.Token.Root -> stringResource(R.string.home_app_info_install_type_root)
         InstallerManager.Token.RootPlayStore -> stringResource(R.string.home_app_info_install_type_root_play_store)
         else -> stringResource(R.string.home_app_info_install_type_system_installer)
     }

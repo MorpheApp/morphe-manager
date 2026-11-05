@@ -545,6 +545,7 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="home_app_info_install_type_custom_installer">Custom installer</string>
     <string name="home_app_info_install_type_system_installer">System installer</string>
     <string name="home_app_info_install_type_play_store">Play Store install</string>
+    <string name="home_app_info_install_type_root">Root install</string>
     <string name="home_app_info_install_type_root_play_store">Root Play Store install</string>
     <string name="home_app_info_install_type_shizuku" translatable="false">Shizuku</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Store install</string>
@@ -588,7 +589,7 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="root_mount_module_unmount_warning">If KernelSU has \"Unmount modules by default\" turned on, open KernelSU > Superuser > the app you mounted > Profile > Custom and turn off \"Unmount modules\". Otherwise, the mounted patched APK may not take effect, even if Morphe shows it as mounted</string>
     <string name="root_pre_patch_installer_standard_title">Standard install mode</string>
     <string name="root_pre_patch_installer_standard_description">Patches as a normal APK with GmsCore support. Your installer setting is used after patching</string>
-    <string name="root_pre_patch_installer_hint">Asked while Settings > Patching > Installation > Installer selection prompt is on. The patch mode cannot be changed after patching</string>
+    <string name="root_pre_patch_installer_hint">Asked while Settings > Patching > Installation > Patch mode is set to Ask every time. The patch mode cannot be changed after patching</string>
 
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Error copied to clipboard</string>
@@ -1095,9 +1096,8 @@ The image dimensions must be as follows:
     <string name="installer_title">Select installer</string>
     <string name="installer_internal_description">Uses the Android package installer</string>
     <string name="installer_play_store_description">Uses the system installer and sets Google Play Store as the install source</string>
+    <string name="installer_root_description">Installs silently with root</string>
     <string name="installer_root_play_store_description">Installs silently with root and sets Google Play Store as the install source</string>
-    <string name="installer_auto_saved_name">Root mount</string>
-    <string name="installer_auto_saved_description">Mounts apps that were patched in root mount mode. Standard patched APKs use another installer</string>
     <string name="installer_shizuku_description">Installs silently using Shizuku or Sui</string>
     <string name="installer_shizuku_play_store_description">Installs silently through Shizuku or Sui and sets Google Play Store as the install source</string>
     <string name="installer_option_none">No fallback</string>
@@ -1107,7 +1107,7 @@ The image dimensions must be as follows:
     <string name="installer_status_shizuku_not_installed">Install Shizuku or Sui to use this option</string>
     <string name="installer_status_shizuku_not_running">Start Shizuku or Sui and try again</string>
     <string name="installer_status_shizuku_permission">Grant permission to Morphe from the Shizuku app</string>
-    <string name="installer_mount_warning_install">Your primary installer is set to the rooted mount installer. This saved app was not installed using mount</string>
+    <string name="installer_mount_warning_install">Patch mode is set to root mount. This saved app was not installed using mount</string>
     <string name="mount_version_mismatch_message">Stock app version (%2$s) does not match patched app version (%1$s). Mount the matching stock version, then try again</string>
     <string name="mount_stock_restore_failed_message">Android rejected the saved original APK. Install the matching stock version, then try Mount again</string>
     <string name="installer_status_shizuku_unsupported">The installed Shizuku version is not supported</string>
@@ -1129,11 +1129,17 @@ The image dimensions must be as follows:
     <string name="installer_play_store_warning_continue">I understand, continue</string>
     <string name="installer_play_store_mode">Install as Play Store</string>
     <string name="installer_play_store_mode_description">Marks Google Play Store as the install source</string>
+    <string name="settings_section_patch_mode">Patch mode</string>
+    <string name="settings_patch_mode_ask">Ask every time</string>
+    <string name="settings_patch_mode_ask_description">Asks before patching each app whether to patch it for root mount or a standard install</string>
+    <string name="settings_section_after_patching">After patching</string>
+    <string name="settings_after_patching_install">Install automatically</string>
+    <string name="settings_after_patching_ask">Ask which installer</string>
+    <string name="settings_after_patching_ask_description">Asks which installer to use every time an app is installed</string>
+    <string name="settings_after_patching_manual">Install manually</string>
+    <string name="settings_after_patching_manual_description">Installs with the default installer once you tap Install</string>
     <string name="settings_nomount_only">NoMount only</string>
     <string name="settings_nomount_only_description">Mounts apps only with NoMount and never falls back to a bind mount, so they stay unmounted without it</string>
-    <string name="settings_prompt_installer_on_install">Installer selection prompt</string>
-    <string name="settings_prompt_installer_on_install_description">Asks how to install every app: with root before patching, otherwise after it</string>
-    <string name="settings_auto_install_with_shizuku">Auto-install after patching</string>
     <string name="settings_auto_install_with_shizuku_description">Installs or mounts the patched APK as soon as patching completes</string>
     <string name="settings_auto_uninstall_with_shizuku">Auto-uninstall on conflict</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Uninstalls the existing app on a signature conflict. This can remove app data</string>

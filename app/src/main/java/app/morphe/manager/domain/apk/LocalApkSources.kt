@@ -462,9 +462,9 @@ class LocalApkSources(
                     installer == AOSP_INSTALLER_PACKAGE ||
                     installer == AOSP_INSTALLER_PACKAGE_LEGACY
 
-            // Shizuku runs as the shell user, so its installs are attributed either to the shell
-            // package or to nothing at all, and anything else replaced the package
-            InstallType.SHIZUKU, InstallType.SAVED -> installer == null ||
+            // Shizuku runs as the shell user and root as no package at all, so their installs are
+            // attributed either to the shell package or to nothing, and anything else replaced it
+            InstallType.ROOT, InstallType.SHIZUKU, InstallType.SAVED -> installer == null ||
                     installer == SHELL_INSTALLER_PACKAGE
         }
 

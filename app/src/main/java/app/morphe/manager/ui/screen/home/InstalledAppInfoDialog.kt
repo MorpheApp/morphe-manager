@@ -302,15 +302,8 @@ fun DialogHostScope.InstalledAppInfoDialog(
                     finalPackageName != app.originalPackageName) {
                     return@LaunchedEffect
                 }
-                val newInstallType = when (installViewModel.currentInstallType) {
-                    InstallType.MOUNT -> InstallType.MOUNT
-                    InstallType.SHIZUKU -> InstallType.SHIZUKU
-                    InstallType.SHIZUKU_PLAY_STORE -> InstallType.SHIZUKU_PLAY_STORE
-                    InstallType.PLAY_STORE -> InstallType.PLAY_STORE
-                    InstallType.ROOT_PLAY_STORE -> InstallType.ROOT_PLAY_STORE
-                    InstallType.CUSTOM -> InstallType.CUSTOM
-                    else -> InstallType.DEFAULT
-                }
+                val newInstallType = installViewModel.currentInstallType
+                    .takeUnless { it == InstallType.SAVED } ?: InstallType.DEFAULT
                 viewModel.updateInstallType(finalPackageName, newInstallType)
                 homeViewModel.apps.notifyAppStateChanged(finalPackageName)
             }
@@ -489,11 +482,11 @@ fun DialogHostScope.InstalledAppInfoDialog(
     }
 
     // Installs the saved patched build. A Mount build is always mounted, while any other one warns
-    // first when the primary installer is Mount
+    // first when apps are mounted by default
     fun installSavedCopy(app: InstalledApp) {
         viewModel.savedApkFile()?.let { savedFile ->
             val installAction = {
-                if (app.reinstallsByMount(viewModel.primaryInstallerIsMount)) {
+                if (app.reinstallsByMount(viewModel.mountsByDefault)) {
                     reinstallSavedMount(app)
                 } else {
                     // The install result handler records the install type once it lands
@@ -504,7 +497,7 @@ fun DialogHostScope.InstalledAppInfoDialog(
                     )
                 }
             }
-            if (viewModel.primaryInstallerIsMount && app.installType != InstallType.MOUNT) {
+            if (viewModel.mountsByDefault && app.installType != InstallType.MOUNT) {
                 pendingMountWarningAction.value = installAction
                 showMountWarningDialog.value = true
             } else {
@@ -1121,6 +1114,7 @@ private val InstallType.badge: Pair<ImageVector, Int>
         InstallType.SHIZUKU -> MaterialSymbols.Rounded.Terminal to R.string.home_app_info_install_type_shizuku
         InstallType.SHIZUKU_PLAY_STORE -> MaterialSymbols.Rounded.Terminal to R.string.home_app_info_install_type_shizuku_play_store
         InstallType.PLAY_STORE -> MaterialSymbols.Rounded.Shop to R.string.home_app_info_install_type_play_store
+        InstallType.ROOT -> MaterialSymbols.Rounded.Security to R.string.home_app_info_install_type_root
         InstallType.ROOT_PLAY_STORE -> MaterialSymbols.Rounded.Security to R.string.home_app_info_install_type_root_play_store
         InstallType.CUSTOM  -> MaterialSymbols.Rounded.Build to R.string.home_app_info_install_type_custom_installer
         InstallType.SAVED   -> MaterialSymbols.Rounded.Save to R.string.saved

@@ -467,17 +467,17 @@ class BatchPlanResolver(
     /**
      * Whether [target] is patched for a root mount when the user picked nothing else. An install
      * already on the device keeps the way it was made, so a mounted app is mounted again and a
-     * renamed GmsCore build stays one. Only an app with no tracked install follows the primary
-     * installer, as a single-app run on a rooted device does.
+     * renamed GmsCore build stays one. Only an app with no tracked install follows the root mount
+     * default, as a single-app run on a rooted device does.
      */
     private suspend fun mountsByDefault(target: BatchTarget): Boolean {
         if (!rootInstaller.isDeviceRooted()) return false
-        val primaryMounts = installerManager.getPrimaryToken().isRootMount
+        val defaultMounts = installerManager.mountsByDefault()
         // A build that was only saved says nothing about how the app is installed
         val installs = installedAppRepository.getAll().first()
             .filter { it.trackingKey == target.id && it.installType != InstallType.SAVED }
-        if (installs.isEmpty()) return primaryMounts
-        return installs.any { it.reinstallsByMount(primaryMounts) }
+        if (installs.isEmpty()) return defaultMounts
+        return installs.any { it.reinstallsByMount(defaultMounts) }
     }
 
     /**

@@ -1010,17 +1010,15 @@ class PatchFlow(
     }
 
     /**
-     * Starts patching in the mode the run is set up for. A rooted device asks for it first while
-     * the installer prompt is on, and otherwise mounts whenever root mount is the default
-     * installer. Anywhere else the build is a standard one, its installer asked for after patching.
+     * Starts patching in the mode the run is set up for. A rooted device asks for it first or
+     * follows its patch mode, while anywhere else the build is a standard one.
      */
     private suspend fun startPatchingInPatchMode(selectedApp: SelectedApp, allowIncompatible: Boolean) {
         if (installerManager.promptsBeforePatching()) {
             holdFor(HomeDialog.PrePatchInstaller, selectedApp, allowIncompatible)
             return
         }
-        usingMountInstall = rootInstaller.isDeviceRooted() &&
-                installerManager.parseToken(prefs.installerPrimary.get()).isRootMount
+        usingMountInstall = installerManager.mountsByDefault()
         startPatchingWithApp(selectedApp, allowIncompatible)
     }
 

@@ -19,6 +19,7 @@ import kotlinx.serialization.Serializable
 enum class InstallType(val stringResource: Int) {
     DEFAULT(R.string.home_app_info_install_type_system_installer),
     PLAY_STORE(R.string.home_app_info_install_type_play_store),
+    ROOT(R.string.home_app_info_install_type_root),
     ROOT_PLAY_STORE(R.string.home_app_info_install_type_root_play_store),
     CUSTOM(R.string.home_app_info_install_type_custom_installer),
     MOUNT(R.string.mount),
@@ -81,10 +82,10 @@ val InstalledApp.supportsMount: Boolean
 
 /**
  * Whether the saved build of this app is put back by mounting it. A mount build only works
- * mounted, so its record decides, while any other build follows the primary installer.
+ * mounted, so its record decides, while any other build is mounted while apps [mountsByDefault].
  */
-fun InstalledApp.reinstallsByMount(primaryInstallerIsMount: Boolean): Boolean =
-    installType == InstallType.MOUNT || (primaryInstallerIsMount && supportsMount)
+fun InstalledApp.reinstallsByMount(mountsByDefault: Boolean): Boolean =
+    installType == InstallType.MOUNT || (mountsByDefault && supportsMount)
 
 /**
  * How the manager refers to this install everywhere the package name is not enough: home cards,

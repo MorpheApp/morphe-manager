@@ -189,9 +189,7 @@ private fun PatcherScreenContent(
                     outputFile = outputFile,
                     originalPackageName = patcherViewModel.packageName,
                     onPersistApp = patcherViewModel::persistPatchedApp,
-                    autoUninstallOnConflict = automatic,
-                    // Started on its own only once the prompt was answered before patching
-                    askInstaller = !automatic
+                    autoUninstallOnConflict = automatic
                 )
             }
         }
