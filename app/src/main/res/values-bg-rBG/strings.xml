@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Скриване на това приложение?</string>
     <string name="home_more_apps_title">Още приложения</string>
     <string name="home_more_apps_hide_title">Скриване на тази карта?</string>
-    <string name="home_more_apps_hide_message">Можете да го върнете по всяко време в Настройки &gt; Външен вид &gt; Начален екран</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Можете да го върнете по всяко време в %1$s</string>
     <string name="home_app_hide_message">Това приложение ще бъде скрито от началния екран. Можете да го възстановите по-късно от скритите приложения, като използвате бутона в долната част на списъка.</string>
     <string name="home_app_will_be_hidden">Това приложение ще бъде скрито.</string>
     <string name="home_app_hidden_named">Скрити %s</string>
@@ -244,7 +245,8 @@
     <string name="sources_signing_key_trusted">Доверен ключ</string>
     <string name="sources_signing_key_new">Нов ключ</string>
     <string name="sources_patch_expert_badge">Експерт</string>
-    <string name="sources_patch_expert_badge_tooltip">Активиране на Експертен режим в Настройки, за да включите ръчно тази поправка.</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Включете %1$s, за да добавите този пач ръчно</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Нуждаете ли се от помощ за намиране на APK файла?</string>
     <string name="home_apk_availability_dialog_simple">За да оновяваш &lt;b&gt;%s&lt;/b&gt;, ти трябва непрошатата версия на APK:</string>
@@ -285,7 +287,7 @@
     <string name="home_download_instructions_finding">Намиране на страницата за изтегляне…</string>
     <string name="home_download_instructions_step1">Натиснете бутона \'%s\' отдолу</string>
     <string name="home_download_instructions_step2_part1">Скролни надолу страницата и натиснете</string>
-    <string name="home_download_instructions_step2_apkcube">Плизнете надолу в уебстраницата, изберете версия &lt;b&gt;%s&lt;/b&gt; и натиснете</string>
+    <string name="home_download_instructions_step2_apkcube">Превъртете надолу по уеб страницата, изберете версия &lt;b&gt;%s&lt;/b&gt; и натиснете.</string>
     <string name="home_download_instructions_step2_generic">Скролнете надолу страницата и натиснете нейния бутон за изтегляне.</string>
     <string name="home_download_instructions_step2_variant">Скролнете надолу страницата и натиснете бутона за изтегляне на най-горния &lt;b&gt;APK вариант&lt;/b&gt;.</string>
     <string name="home_download_instructions_step2_search">Отворете резултат от търсене от уебсайт, на който имате доверие.</string>
@@ -532,6 +534,7 @@
     <string name="home_app_info_install_type_custom_installer">Намиране на инсталатор</string>
     <string name="home_app_info_install_type_system_installer">Системен инсталатор</string>
     <string name="home_app_info_install_type_play_store">Инсталиране от Play Store</string>
+    <string name="home_app_info_install_type_root">Root инсталиране</string>
     <string name="home_app_info_install_type_root_play_store">Инсталиране от Play Store с root</string>
     <string name="home_app_info_install_type_shizuku_play_store">Инсталиране от Play Store чрез Shizuku</string>
     <string name="home_app_info_patch_update_available">Достъпно е ново издание на замести</string>
@@ -573,7 +576,8 @@
     <string name="root_mount_module_unmount_warning">Ако KernelSU има включена опцията „Unmount modules by default“, отворете KernelSU &gt; Superuser &gt; приложението, което сте закачили &gt; Profile &gt; Custom и изключете „Unmount modules“. В противен случая закаченото модифицирано APK може да не влезе в сила, дори ако Morphe го показва като закачено</string>
     <string name="root_pre_patch_installer_standard_title">Стандартен режим на инсталиране</string>
     <string name="root_pre_patch_installer_standard_description">Патчове като нормален APK с GmsCore поддръжка. Вашата настройка на инсталатора се използва след патчването</string>
-    <string name="root_pre_patch_installer_hint">Задано, докато настройки &gt; Пачене &gt; Инсталация &gt; Заявка за избор на инсталатор. Режимът на пачене не може да се промени след паченето</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Попитано, докато %1$s е настроен на %2$s. Режимът на пачване не може да бъде променен след пачването</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Грешка е копирана в клипборда</string>
     <string name="patcher_error_log">Дневник на грешки</string>
@@ -672,6 +676,14 @@
     <string name="patcher_step_group_saving">Patches</string>
     <string name="patcher_step_write_patched">Patch Bundles</string>
     <string name="patcher_step_sign_apk">Patch Bundle</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Четене на DEX файлове</string>
+    <string name="patcher_task_extracting_resources">Извличане на ресурси</string>
+    <string name="patcher_task_decoding_resources">Декодиране на ресурси</string>
+    <string name="patcher_task_indexing_classes">Индексиране на класове</string>
+    <string name="patcher_task_compiling_dex">Компилиране на DEX файлове</string>
+    <string name="patcher_task_compiling_resources">Компилиране на ресурси</string>
+    <string name="patcher_task_writing_apk">Записване на APK файл</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Защита от корекции във фонов режим</string>
     <string name="battery_optimization_dialog_description">Някои устройства може да спрат коректора, когато приложението е минимизирано. Разрешете на Morphe да работи без ограничения на батерията, за да сте сигурни, че корекциите ще бъдат завършени надеждно.</string>
@@ -720,7 +732,8 @@
     <string name="patched_app_save_failed_toast">Import</string>
     <string name="plugin_activity_dialog_body">Потребителски интеракция е нужна, за да продължите с този плагин.</string>
     <string name="patcher_process_killed_message">Системата спря програма за обновяване преди тя да приключи, обикновено с цел освобождаване на памет. Затворете други приложения и опитайте отново</string>
-    <string name="patcher_process_crashed_message">Патчерът crashed преди да приключи. Ако се случи отново, изключете \"Use embedded VM\" в настройките и докладвайте проблема с лога</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Патчърът crashed преди да приключи. Ако се случи отново, изключете %1$s и докладвайте проблема с лога</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Програмата за патчове свърши с паметта при куп от %1$s МБ. Това приложение е твърде голямо за избраните патчове. Опитайте да патчувате с по-малко източници на патчове или изберете по-малко патчове</string>
     <string name="install_app_success">Инсталирано успешно</string>
@@ -909,7 +922,7 @@
     <string name="notification_channel_patch_updates_description">Известия за нови корекции</string>
     <string name="notification_channel_patcher_description">Показва се, когато Morphe актуализира приложение във фона</string>
     <string name="notification_channel_patching_results">Резултати от пачването</string>
-    <string name="notification_channel_patching_results_description">Когато пачването приключи или инсталация очаква вашето действие, докато Morphe е във фонов режим</string>
+    <string name="notification_channel_patching_results_description">Когато пачването завърши или инсталацията очаква действие от вас, докато Morphe работи във фонов режим</string>
     <string name="notification_channel_mounted_apps">Монтирани приложения</string>
     <string name="notification_channel_mounted_apps_description">Когато друга версия замени монтирано приложение и пачът му вече не се прилага</string>
     <string name="notification_mount_replaced_title">%1$s вече не е с пач</string>
@@ -1020,9 +1033,8 @@ morphe_header_custom_dark.png
     <string name="installer_title">Изберете инсталатор.</string>
     <string name="installer_internal_description">Използва Android инсталатора на пакети</string>
     <string name="installer_play_store_description">Използва системния инсталатор и задава Google Play Store като източник за инсталиране</string>
+    <string name="installer_root_description">Инсталира тихо с root</string>
     <string name="installer_root_play_store_description">Инсталира тихо с root права и задава Google Play Store като източник на инсталацията</string>
-    <string name="installer_auto_saved_name">Root mount</string>
-    <string name="installer_auto_saved_description">Монтира приложения, които са били патчнати в root mount режим. Стандартните патчнати APK-та използват друг инсталатор</string>
     <string name="installer_shizuku_description">Инсталира се тихо, използвайки Shizuku или Sui</string>
     <string name="installer_shizuku_play_store_description">Инсталира тихо чрез Shizuku или Sui и задава Google Play Store като източник на инсталацията</string>
     <string name="installer_option_none">Без резервен</string>
@@ -1032,7 +1044,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">Инсталирайте Shizuku или Sui, за да използвате тази опция.</string>
     <string name="installer_status_shizuku_not_running">Запустете Shizuku или Sui и опитайте отново.</string>
     <string name="installer_status_shizuku_permission">Разрешете на Morphe достъп от приложението Shizuku</string>
-    <string name="installer_mount_warning_install">Основният ви инсталатор е настроен на инсталатора с коренен достъп. Това запазено приложение не бе инсталирано използвайки достъп.</string>
+    <string name="installer_mount_warning_install">Режимът на пачване е настроен на root mount. Товато запазено приложение не е било инсталирано чрез mount</string>
     <string name="mount_version_mismatch_message">Версия на приложението за акции (%2$s) не съвпада с версията на патнатото приложение (%1$s). Монтирайте съответстващата версия на приложението за акции, след това опитайте отново</string>
     <string name="mount_stock_restore_failed_message">Android отхвърли запазения оригинален APK. Инсталирайте съответстващата стокова версия, след това опитайте да монтирате отново.</string>
     <string name="installer_status_shizuku_unsupported">Версията на инсталирания Shizuku не е поддържана.</string>
@@ -1054,11 +1066,17 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_continue">Разбирам, продължи</string>
     <string name="installer_play_store_mode">Инсталиране като Play Store</string>
     <string name="installer_play_store_mode_description">Маркира Google Play Store като инсталационен източник</string>
+    <string name="settings_section_patch_mode">Режим на пачване</string>
+    <string name="settings_patch_mode_ask">Питай всеки път</string>
+    <string name="settings_patch_mode_ask_description">Пита преди пачването на всяко приложение дали да бъде пачнато за root mount или стандартна инсталация</string>
+    <string name="settings_section_after_patching">След пачването</string>
+    <string name="settings_after_patching_install">Инсталирай автоматично</string>
+    <string name="settings_after_patching_ask">Попитай кой инсталатор</string>
+    <string name="settings_after_patching_ask_description">Попитва кой инсталатор да се използва всеки път, когато се инсталира приложение</string>
+    <string name="settings_after_patching_manual">Инсталирай ръчно</string>
+    <string name="settings_after_patching_manual_description">Инсталира с инсталатора по подразбиране, след като докоснете Инсталиране</string>
     <string name="settings_nomount_only">Само NoMount</string>
     <string name="settings_nomount_only_description">Монтира приложения само с NoMount и никога не превключва към bind mount, така че те остават немонтирани без него</string>
-    <string name="settings_prompt_installer_on_install">Показва се прозорец за избор на инсталатор</string>
-    <string name="settings_prompt_installer_on_install_description">Поискайте как да инсталирате всяко приложение: с root преди паченето, иначе след него</string>
-    <string name="settings_auto_install_with_shizuku">Автоматична инсталация след поправяне</string>
     <string name="settings_auto_install_with_shizuku_description">Инсталира или монтира опачения APK веднага след като паченето приключи</string>
     <string name="settings_auto_uninstall_with_shizuku">Автоматично деинсталиране при конфликт</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Деинсталира съществуващото приложение при конфликт на сигнатури. Това може да премахне данни от приложението</string>

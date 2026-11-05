@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Скрыть это приложение?</string>
     <string name="home_more_apps_title">Другие приложения</string>
     <string name="home_more_apps_hide_title">Скрыть эту карточку?</string>
-    <string name="home_more_apps_hide_message">Вы можете вернуть его в любое время в разделе Настройки &gt; Оформление &gt; Главный экран</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Вы сможете вернуть это в любое время в %1$s</string>
     <string name="home_app_hide_message">Это приложение будет скрыто из домашнего экрана. Вы можете восстановить его позже из скрытых приложений, используя кнопку внизу списка.</string>
     <string name="home_app_will_be_hidden">Это приложение будет скрыто</string>
     <string name="home_app_hidden_named">%s скрытых</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Доверенный ключ</string>
     <string name="sources_signing_key_new">Новый ключ</string>
     <string name="sources_patch_expert_badge">Эксперт</string>
-    <string name="sources_patch_expert_badge_tooltip">Включите режим Эксперта в Настройках для добавления этого патча вручную</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Включите %1$s, чтобы добавить этот патч вручную</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Нужна помощь в поиске APK?</string>
     <string name="home_apk_availability_dialog_simple">Чтобы патчить &lt;b&gt;%s&lt;/b&gt;, вам нужен непатченый APK с версией:</string>
@@ -529,6 +531,7 @@
     <string name="home_app_info_install_type_custom_installer">Пользовательский установщик</string>
     <string name="home_app_info_install_type_system_installer">Системный установщик</string>
     <string name="home_app_info_install_type_play_store">Установить из Play Store</string>
+    <string name="home_app_info_install_type_root">Root-установка</string>
     <string name="home_app_info_install_type_root_play_store">Установить из Play Store с правами root</string>
     <string name="home_app_info_install_type_shizuku_play_store">Установить через Shizuku Play Store</string>
     <string name="home_app_info_patch_update_available">Доступно обновление патчей</string>
@@ -570,7 +573,8 @@
     <string name="root_mount_module_unmount_warning">Если в KernelSU включена опция «Unmount modules by default», откройте KernelSU &gt; Superuser &gt; ваше примонтированное приложение &gt; Profile &gt; Custom и выключите «Unmount modules». Иначе примонтированный исправленный APK может не примениться, даже если Morphe показывает его как примонтированный</string>
     <string name="root_pre_patch_installer_standard_title">Стандартный режим установки</string>
     <string name="root_pre_patch_installer_standard_description">Патчи как обычный APK с поддержкой GmsCore. Ваша настройка установщика будет использована после применения патча</string>
-    <string name="root_pre_patch_installer_hint">Запрашивается, когда настройки > <b>&amp;gt;</b> патчинг > <b>&amp;gt;</b> установка > <b>&amp;gt;</b> выбор установщика активны. Режим патча нельзя изменить после применения</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Запрос был отправлен, пока %1$s установлено на %2$s. Режим патчинга нельзя изменить после патчинга</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Ошибка скопирована в буфер обмена</string>
     <string name="patcher_error_log">Журнал ошибок</string>
@@ -669,6 +673,14 @@
     <string name="patcher_step_group_saving">Сохранение</string>
     <string name="patcher_step_write_patched">Запись патченного APK файла</string>
     <string name="patcher_step_sign_apk">Подпись пропатченного APK-файла</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Чтение DEX-файлов</string>
+    <string name="patcher_task_extracting_resources">Извлечение ресурсов</string>
+    <string name="patcher_task_decoding_resources">Декодирование ресурсов</string>
+    <string name="patcher_task_indexing_classes">Индексация классов</string>
+    <string name="patcher_task_compiling_dex">Компиляция DEX-файлов</string>
+    <string name="patcher_task_compiling_resources">Компиляция ресурсов</string>
+    <string name="patcher_task_writing_apk">Запись APK файла</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Защита от патчей в фоновом режиме</string>
     <string name="battery_optimization_dialog_description">На некоторых устройствах патчер может быть остановлен, когда приложение свернуто. Разрешите Morphe работать без ограничений заряда батареи, чтобы гарантировать надежное завершение патчинга.</string>
@@ -717,7 +729,8 @@
     <string name="patched_app_save_failed_toast">Не удалось сохранить исправленное приложение</string>
     <string name="plugin_activity_dialog_body">Требуется взаимодействие пользователя для продолжения работы с этим плагином</string>
     <string name="patcher_process_killed_message">Система остановила патчер до его завершения, обычно для освобождения памяти. Закройте другие приложения и попробуйте ещё раз</string>
-    <string name="patcher_process_crashed_message">Патчер завершил работу с ошибкой до окончания процесса. Если это повторится, отключите опцию \"Использовать встроенную VM\" в настройках и сообщите о проблеме, приложив лог</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Патчер завершился с ошибкой до окончания работы. Если это повторится, выключите %1$s и сообщите о проблеме, приложив лог</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Приложению не хватило памяти: куча имела размер %1$s МБ. Приложение слишком большое для выбранных патчей. Попробуйте применить патчи с меньшим количеством источников или выберите меньше патчей</string>
     <string name="install_app_success">Успешно установлено</string>
@@ -1017,9 +1030,8 @@ morphe_header_custom_dark.png
     <string name="installer_title">Выберите установщик</string>
     <string name="installer_internal_description">Использует установщик пакетов Android</string>
     <string name="installer_play_store_description">Использует системную установку и задает Google Play Store в качестве источника установки</string>
+    <string name="installer_root_description">Бесшумная установка с root-правами</string>
     <string name="installer_root_play_store_description">Бесшумная установка с правами root и установка Google Play Store в качестве источника установки</string>
-    <string name="installer_auto_saved_name">Root монтирование</string>
-    <string name="installer_auto_saved_description">Монтирует приложения, которые были пропатчены в режиме root mount. Стандартные пропатченные APK используют другой установщик</string>
     <string name="installer_shizuku_description">Устанавливает молча, используя Shizuku или Sui</string>
     <string name="installer_shizuku_play_store_description">Тихая установка через Shizuku или Sui с использованием Google Play Store в качестве источника установки</string>
     <string name="installer_option_none">Без запасного установщика</string>
@@ -1029,7 +1041,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">Установите Shizuku или Sui, чтобы использовать эту опцию</string>
     <string name="installer_status_shizuku_not_running">Запустите Shizuku или Sui и повторите попытку</string>
     <string name="installer_status_shizuku_permission">Предоставьте разрешение Morphe от приложения Shizuku</string>
-    <string name="installer_mount_warning_install">Ваш основной установщик настроен на установщик с корневым монтированием. Это сохраненное приложение не было установлено с помощью монтирования</string>
+    <string name="installer_mount_warning_install">Режим патчинга установлен на root-монтирование. Это сохраненное приложение было установлено не через монтирование</string>
     <string name="mount_version_mismatch_message">Версия запатченного приложения (%1$s) не совпадает с версией запатченного приложения (%2$s). Замонтируйте совпадающую версию запатченного приложения, затем повторите попытку</string>
     <string name="mount_stock_restore_failed_message">Android отклонил сохраненный оригинальный APK. Установите соответствующую версию приложения, затем попробуйте смонтировать снова</string>
     <string name="installer_status_shizuku_unsupported">Версия установленного Shizuku не поддерживается</string>
@@ -1051,11 +1063,17 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_continue">Я понимаю, продолжить</string>
     <string name="installer_play_store_mode">Установить как Play Store</string>
     <string name="installer_play_store_mode_description">Прописывает Google Play как источник установки</string>
+    <string name="settings_section_patch_mode">Режим патчинга</string>
+    <string name="settings_patch_mode_ask">Спрашивать каждый раз</string>
+    <string name="settings_patch_mode_ask_description">Перед патчингом каждого приложения будет запрашиваться выбор: патчить для root-монтирования или для стандартной установки</string>
+    <string name="settings_section_after_patching">После патчинга</string>
+    <string name="settings_after_patching_install">Устанавливать автоматически</string>
+    <string name="settings_after_patching_ask">Выбрать установщик</string>
+    <string name="settings_after_patching_ask_description">Спрашивать, какой установщик использовать, при каждой установке приложения</string>
+    <string name="settings_after_patching_manual">Устанавливать вручную</string>
+    <string name="settings_after_patching_manual_description">При нажатии кнопки «Установить» приложение будет установлено с помощью установщика по умолчанию</string>
     <string name="settings_nomount_only">Только NoMount</string>
     <string name="settings_nomount_only_description">Монтирует приложения только с помощью NoMount и никогда не переключается на bind mount, поэтому без него они остаются несмонтированными</string>
-    <string name="settings_prompt_installer_on_install">Окно выбора установщика</string>
-    <string name="settings_prompt_installer_on_install_description">Запрашивает способ установки каждого приложения: с рутом перед патчингом, иначе после него</string>
-    <string name="settings_auto_install_with_shizuku">Автоматическая установка после патча</string>
     <string name="settings_auto_install_with_shizuku_description">Устанавливает или монит patched APK сразу после завершения патчинга</string>
     <string name="settings_auto_uninstall_with_shizuku">Автоматически удалять при конфликте</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Удаляет существующее приложение при конфликте подписей. Это может удалить данные приложения</string>

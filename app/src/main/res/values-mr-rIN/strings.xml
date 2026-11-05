@@ -10,7 +10,7 @@
     <string name="home_app_hide_title">हे ॲप लपवायचे का</string>
     <string name="home_more_apps_title">अधिक ॲप्स</string>
     <string name="home_more_apps_hide_title">हे कार्ड लपवायचे का?</string>
-    <string name="home_more_apps_hide_message">तुम्ही ते कधीही Settings &gt; Appearance &gt; Home screen मध्ये जाऊन परत आणू शकता</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
     <string name="home_app_hide_message">हे ॲप मुख्य पानावरून लपवले जाईल. तुम्ही नंतर यादीच्या तळाशी असलेल्या  \'\' बटणाचा वापर करून ते पुन्हा मिळवू शकता.</string>
     <string name="home_app_will_be_hidden">हे ॲप लपवले जाईल.</string>
     <string name="home_app_hidden_named">%s लपवले</string>
@@ -243,7 +243,7 @@
     <string name="sources_signing_key_trusted">विश्वसनीय की</string>
     <string name="sources_signing_key_new">नवीन की</string>
     <string name="sources_patch_expert_badge">तज्ञ</string>
-    <string name="sources_patch_expert_badge_tooltip">हा पॅच मॅन्युअली समाविष्ट करण्यासाठी सेटिंग्जमध्ये तज्ञ मोड सक्षम करा</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">APK शोधण्यासाठी मदत हवी आहे का?</string>
     <string name="home_apk_availability_dialog_simple"> &lt;b&gt;%s&lt;/b&gt;, मध्ये बदल करण्यासाठी, तुमच्याकडे  बदल न केलेले APK आवृत्ती असणे आवश्यक आहे:</string>
@@ -569,7 +569,7 @@
     <string name="root_mount_module_unmount_warning">जर KernelSU मध्ये \"Unmount modules by default\" चालू असेल, तर KernelSU &gt; Superuser &gt; तुम्ही माउंट केलेले ॲप &gt; Profile &gt; Custom उघडा आणि \"Unmount modules\" बंद करा. अन्यथा, Morphe ने माउंट केल्याचे दाखवले तरीही, माउंट केलेली पॅच केलेली APK लागू होणार नाही</string>
     <string name="root_pre_patch_installer_standard_title">मानक स्थापना मोड</string>
     <string name="root_pre_patch_installer_standard_description">GmsCore सपोर्टसह सामान्य APK म्हणून पॅच. पॅच केल्यानंतर तुमची इंस्टॉलर सेटिंग वापरली जाईल.</string>
-    <string name="root_pre_patch_installer_hint">Settings &gt; Patching &gt; Installation &gt; Installer selection prompt सुरू असताना विचारले जाते. पॅचिंग केल्यानंतर पॅच मोड बदलता येत नाही</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">एरर क्लिपबोर्डवर कॉपी केला गेला</string>
     <string name="patcher_error_log">एरर लॉग</string>
@@ -668,6 +668,14 @@
     <string name="patcher_step_group_saving">जतन करत आहे</string>
     <string name="patcher_step_write_patched">पॅच केलेला APK फाइल लिहित आहे</string>
     <string name="patcher_step_sign_apk">पॅच केलेला APK फाइल साइन करत आहे</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">DEX फाईल्स वाचत आहे</string>
+    <string name="patcher_task_extracting_resources">रिसोर्सेस एक्स्ट्रॅक्ट करत आहे</string>
+    <string name="patcher_task_decoding_resources">रिसोर्सेस डिकोड करत आहे</string>
+    <string name="patcher_task_indexing_classes">क्लासेस इंडेक्स करत आहे</string>
+    <string name="patcher_task_compiling_dex">DEX फाईल्स कंपाईल करत आहे</string>
+    <string name="patcher_task_compiling_resources">रिसोर्सेस संकलित करत आहे</string>
+    <string name="patcher_task_writing_apk">APK फाईल लिहित आहे</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">पार्श्वभूमी पॅचिंग संरक्षण</string>
     <string name="battery_optimization_dialog_description">ॲप मिनिमाइज केल्यावर काही उपकरणे पॅचर थांबवू शकतात. पॅचिंग নির্ভরযোগ্যपणे पूर्ण होण्यासाठी मोर्फेला बॅटरी निर्बंधांशिवाय चालण्याची परवानगी द्या.</string>
@@ -716,7 +724,7 @@
     <string name="patched_app_save_failed_toast">पॅच केलेले ॲप जतन करण्यात अयशस्वी</string>
     <string name="plugin_activity_dialog_body">या प्लगइनसह पुढे जाण्यासाठी वापरकर्त्याच्या इंटरॅक्शनची आवश्यकता आहे</string>
     <string name="patcher_process_killed_message">सिस्टमने पॅचर पूर्ण होण्यापूर्वीच थांबवले, सहसा मेमरी मोकळी करण्यासाठी. इतर अ‍ॅप्स बंद करा आणि पुन्हा प्रयत्न करा</string>
-    <string name="patcher_process_crashed_message">पॅचर पूर्ण होण्यापूर्वी क्रॅश झाला. जर हे पुन्हा घडले, तर सेटिंग्जमध्ये \"Use embedded VM\" बंद करा आणि लॉगसह समस्या रिपोर्ट करा</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">%1$s MB heap सह पॅचरची मेमरी संपली आहे. निवडलेल्या पॅचेजसाठी हे अ‍ॅप खूप मोठे आहे. कमी पॅच सोर्सेससह पॅच करण्याचा प्रयत्न करा, किंवा कमी पॅचेज निवडा</string>
     <string name="install_app_success">इंस्टॉल यशस्वी झाले</string>
@@ -1017,8 +1025,6 @@ morphe_header_custom_dark.png
     <string name="installer_internal_description">Android पॅकेज इंस्टॉलर वापरतो</string>
     <string name="installer_play_store_description">सिस्टम इंस्टॉलर वापरतो आणि Google Play Store ला इंस्टॉलेशन स्रोत म्हणून सेट करतो</string>
     <string name="installer_root_play_store_description">रूटसह शांतपणे स्थापित करते आणि Google Play Store ला इंस्टॉलेशन स्त्रोत म्हणून सेट करते</string>
-    <string name="installer_auto_saved_name">रूट माउंट</string>
-    <string name="installer_auto_saved_description">रूट माउंट मोडमध्ये पॅच केलेले ॲप्स माउंट करते. मानक पॅच केलेले APK दुसरे इंस्टॉलर वापरतात.</string>
     <string name="installer_shizuku_description">Shizuku किंवा Sui वापरून शांतपणे इंस्टॉल करते</string>
     <string name="installer_shizuku_play_store_description">शिझुकू किंवा सुईद्वारे शांतपणे स्थापित करते आणि Google Play Store ला इंस्टॉलेशन स्त्रोत म्हणून सेट करते</string>
     <string name="installer_option_none">कोणताही पर्याय नाही</string>
@@ -1028,7 +1034,6 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">या पर्यायाचा वापर करण्यासाठी Shizuku किंवा Sui स्थापित करा</string>
     <string name="installer_status_shizuku_not_running">Shizuku किंवा Sui सुरू करा आणि पुन्हा प्रयत्न करा</string>
     <string name="installer_status_shizuku_permission">Morphe ॲपमधून Shizuku साठी परवानगी द्या</string>
-    <string name="installer_mount_warning_install">तुमचा प्राथमिक इंस्टॉलर रूटेड माउंट इंस्टॉलरवर सेट आहे. हे सेव्ह केलेले ॲप माउंट वापरून स्थापित केलेले नव्हते</string>
     <string name="mount_version_mismatch_message">स्टॉक ॲप आवृत्ती (%2$s) पॅच केलेल्या ॲप आवृत्तीशी जुळत नाही (%1$s). जुळणारी स्टॉक आवृत्ती माउंट करा, नंतर पुन्हा प्रयत्न करा</string>
     <string name="mount_stock_restore_failed_message">Android ने जतन केलेले मूळ APK नाकारले. संबंधित स्टॉक आवृत्ती स्थापित करा, नंतर पुन्हा माउंट करण्याचा प्रयत्न करा.</string>
     <string name="installer_status_shizuku_unsupported">स्थापित Shizuku आवृत्ती समर्थित नाही</string>
@@ -1052,9 +1057,6 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_mode_description">Google Play Store ला इन्स्टॉल सोर्स म्हणून मार्क करते</string>
     <string name="settings_nomount_only">केवळ NoMount</string>
     <string name="settings_nomount_only_description">केवळ NoMount सह ॲप्स माउंट करते आणि कधीही बाइंड माउंटवर परत जात नाही, ज्यामुळे त्यांच्याशिवाय ते अनमाउंट राहतात</string>
-    <string name="settings_prompt_installer_on_install">इंस्टॉलर निवड प्रॉम्प्ट</string>
-    <string name="settings_prompt_installer_on_install_description">प्रत्येक ॲप कसे इन्स्टॉल करायचे हे विचारते: पॅचिंगपूर्वी रूटसह, अन्यथा त्यानंतर</string>
-    <string name="settings_auto_install_with_shizuku">पॅचिंग केल्यानंतर स्वयंचलितपणे स्थापित करा</string>
     <string name="settings_auto_install_with_shizuku_description">पॅचिंग पूर्ण झाल्यावर लगेच पॅच केलेला APK इंस्टॉल किंवा माउंट करा</string>
     <string name="settings_auto_uninstall_with_shizuku">संघर्ष झाल्यास ऑटो-अनइंस्टॉल करा</string>
     <string name="settings_auto_uninstall_with_shizuku_description">सिग्नेचर कॉन्फ्लिक्ट असल्यास अस्तित्वात असलेले ॲप अनइन्स्टॉल करते. यामुळे ॲप डेटा हटवला जाऊ शकतो</string>

@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Elrejti az alkalmazást?</string>
     <string name="home_more_apps_title">További alkalmazások</string>
     <string name="home_more_apps_hide_title">Elrejtsük ezt a kártyát?</string>
-    <string name="home_more_apps_hide_message">Bármikor visszahozatja a Beállítások &gt; Megjelenés &gt; Kezdőképernyő menüpontban</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Bármikor visszahozhatod a(z) %1$s menüpontban</string>
     <string name="home_app_hide_message">Az alkalmazás el lesz rejtve a főképernyőről. Később visszaállíthatod a lista alján található gomb segítségével.</string>
     <string name="home_app_will_be_hidden">Az alkalmazás nem lesz látható</string>
     <string name="home_app_hidden_named">%s rejtett</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Megbízható kulcs</string>
     <string name="sources_signing_key_new">Új kulcs</string>
     <string name="sources_patch_expert_badge">Szakértő</string>
-    <string name="sources_patch_expert_badge_tooltip">A módosítás manuális hozzáadásához engedélyezd a szakértői módot a beállításokban.</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Kapcsold be a(z) %1$s opciót, hogy manuálisan hozzáadhassad ezt a patchet</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Segítségre van szükséged az APK megtalálásához?</string>
     <string name="home_apk_availability_dialog_simple">​A(z) &lt;b&gt;%s&lt;/b&gt; módosításához a következő, módosítások nélküli APK-verzióra van szükséged:</string>
@@ -529,6 +531,7 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="home_app_info_install_type_custom_installer">Egyéni telepítő</string>
     <string name="home_app_info_install_type_system_installer">Rendszertelepítő</string>
     <string name="home_app_info_install_type_play_store">Play Áruház install</string>
+    <string name="home_app_info_install_type_root">Root telepítés</string>
     <string name="home_app_info_install_type_root_play_store">Root Play Áruház install</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Áruház install</string>
     <string name="home_app_info_patch_update_available">Módosításfrissítések érhetők el</string>
@@ -570,7 +573,8 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="root_mount_module_unmount_warning">Ha a KernelSU beállításaiban az „Alapértelmezetten modulok leválása” kapcsoló be van kapcsolva, nyisd meg a KernelSU-t &gt; Superuser &gt; a felügyelt appod &gt; Profil &gt; Egyéni, és kapcsold ki a „Modulok leválása” opciót. Ellenkező esetben a felülről telepített, javított APK-fájl nem léphet hatályba, még akkor sem, ha a Morphe telepítettként jelzi azt.</string>
     <string name="root_pre_patch_installer_standard_title">Standard telepítési mód</string>
     <string name="root_pre_patch_installer_standard_description">Folyamatosan APK formátumú javítások GmsCore támogatással. A javítás után a telepítőbeállításaidat használjuk.</string>
-    <string name="root_pre_patch_installer_hint">Még a Beállítások &gt; Javítás &gt; Telepítés &gt; Telepítő kiválasztása jelző alatt van. A javítási mód a javítás után nem módosítható</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">A(z) %1$s beállítása %2$s. A patch módot a patchelés után már nem lehet megváltoztatni</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">A hiba másolva a vágólapra</string>
     <string name="patcher_error_log">Hibanapló</string>
@@ -669,6 +673,14 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="patcher_step_group_saving">Mentés</string>
     <string name="patcher_step_write_patched">Módosított APK fájl írása</string>
     <string name="patcher_step_sign_apk">Módosított APK fájl aláírása</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">DEX fájlok olvasása</string>
+    <string name="patcher_task_extracting_resources">Erőforrások kibontása</string>
+    <string name="patcher_task_decoding_resources">Erőforrások dekódolása</string>
+    <string name="patcher_task_indexing_classes">Osztályok indexelése</string>
+    <string name="patcher_task_compiling_dex">DEX fájlok tömörítése</string>
+    <string name="patcher_task_compiling_resources">Erőforrások tömörítése</string>
+    <string name="patcher_task_writing_apk">APK fájl írása</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Háttérjavítási védelem</string>
     <string name="battery_optimization_dialog_description">Bizonyos eszközök leállíthatják a javítót, ha az alkalmazás minimalizálva van. Engedélyezze a Morphe akadálytalan futását akkumulátor-korlátozások nélkül, hogy a javítás megbízhatóan befejeződjön.</string>
@@ -717,7 +729,8 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="patched_app_save_failed_toast">A módosított alkalmazás mentése sikertelen</string>
     <string name="plugin_activity_dialog_body">A bővítmény használatához felhasználói beavatkozásra van szükség</string>
     <string name="patcher_process_killed_message">A rendszer leállította a javítót mielőtt befejezte, általában a memória felszabadítása érdekében. Zárja be a többi alkalmazást, és próbálja újra</string>
-    <string name="patcher_process_crashed_message">A patcher összeomlott a befejezés előtt. Ha ez ismét előfordul, kapcsolja ki a \"Beágyazott VM használata\" opciót a beállításokban, és jelezze a hibát a naplónak</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">A patchelő összeomlott a befejezés előtt. Ha ez újra előfordul, kapcsold ki a(z) %1$s opciót, és jelezd a hibát a naplóval</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">A javítóprogram %1$s MB-os vermemmel futott ki. Az alkalmazás túl nagy a kiválasztott javításokhoz. Próbáljon meg kevesebb javítási forrással vagy kevesebb javítással alkalmazni a javítást</string>
     <string name="install_app_success">Sikeresen telepítve</string>
@@ -1017,9 +1030,8 @@ A képek méreteinek a következőknek kell lennie:
     <string name="installer_title">Telepítő kiválasztása</string>
     <string name="installer_internal_description">Az Android csomagtelepítő használata</string>
     <string name="installer_play_store_description">A rendszer telepítőt használja, és a Google Play Áruházat állítja be telepítési forrásként.</string>
+    <string name="installer_root_description">Root jogokkal csendben telepít</string>
     <string name="installer_root_play_store_description">Csendben telepít root hozzáféréssel, és a Google Play Áruházat állítja be telepítési forrásként</string>
-    <string name="installer_auto_saved_name">Root csatolás</string>
-    <string name="installer_auto_saved_description">A root csatolási módban javított alkalmazások csatolása. A szabványos javított APK-k egy másik telepítőt használnak.</string>
     <string name="installer_shizuku_description">Csendes telepítés Shizuku vagy Sui használatával</string>
     <string name="installer_shizuku_play_store_description">Csendben telepít a Shizuku vagy Sui segítségével, és a Google Play Áruházat állítja be telepítési forrásként</string>
     <string name="installer_option_none">Nincs tartalék</string>
@@ -1029,7 +1041,7 @@ A képek méreteinek a következőknek kell lennie:
     <string name="installer_status_shizuku_not_installed">Telepítsd a Shizuku vagy a Sui alkalmazást a használathoz</string>
     <string name="installer_status_shizuku_not_running">Indítsd el a Shizuku vagy a Sui alkalmazást és próbáld újra</string>
     <string name="installer_status_shizuku_permission">Adj engedélyt a Morphe számára a Shizuku alkalmazásból</string>
-    <string name="installer_mount_warning_install">Az elsődleges telepítő root telepítőre van állítva. Ez a mentett alkalmazás nem csatolással lett telepítve</string>
+    <string name="installer_mount_warning_install">A patch mód root mountra van állítva. Ez a mentett alkalmazás nem csatolással lett telepítve</string>
     <string name="mount_version_mismatch_message">A telepített alapverzió (%2$s) nem egyezik a módosított alkalmazás verziójával (%1$s). Csatold a megfelelő alapverziót, majd próbáld újra</string>
     <string name="mount_stock_restore_failed_message">Az Android elutasította a mentett eredeti APK-t. Telepítsd a megfelelő gyári verziót, majd próbáld meg újra a csatolást.</string>
     <string name="installer_status_shizuku_unsupported">A telepített Shizuku verzió nem támogatott</string>
@@ -1051,11 +1063,17 @@ A képek méreteinek a következőknek kell lennie:
     <string name="installer_play_store_warning_continue">Értem, folytatom</string>
     <string name="installer_play_store_mode">Play Áruházként telepítés</string>
     <string name="installer_play_store_mode_description">A Google Play Áruház beállítása alapértelmezett telepítési forrásként</string>
+    <string name="settings_section_patch_mode">Patch mód</string>
+    <string name="settings_patch_mode_ask">Minden alkalommal kérdezze</string>
+    <string name="settings_patch_mode_ask_description">Minden alkalmazás patchelése előtt megkérdezi, hogy root mountra vagy standard telepítésre patchelje</string>
+    <string name="settings_section_after_patching">Patchelés után</string>
+    <string name="settings_after_patching_install">Automatikus telepítés</string>
+    <string name="settings_after_patching_ask">Kérdezze, melyik telepítőt használja</string>
+    <string name="settings_after_patching_ask_description">Minden alkalommal megkérdezi, melyik telepítőt kell használni az alkalmazás telepítésekor</string>
+    <string name="settings_after_patching_manual">Manuális telepítés</string>
+    <string name="settings_after_patching_manual_description">Az alapértelmezett telepítővel telepít, amint rákattintasz a Telepítésre</string>
     <string name="settings_nomount_only">Csak NoMount</string>
     <string name="settings_nomount_only_description">Az alkalmazásokat csak NoMount segítségével csatolja, és soha nem vált vissza bind mountra, így azok NoMount nélkül csatolatlanul maradnak</string>
-    <string name="settings_prompt_installer_on_install">Telepítőválasztó ablak</string>
-    <string name="settings_prompt_installer_on_install_description">Megkérdezi, hogyan kell minden alkalmazást telepíteni: root hozzáféréssel a javítás előtt, egyébként utána</string>
-    <string name="settings_auto_install_with_shizuku">Automatikus telepítés a javítás után</string>
     <string name="settings_auto_install_with_shizuku_description">Amint a javítás befejeződött, telepíti vagy csatolja a javított APK-t</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatikus eltávolítás ütközés esetén</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Létező alkalmazás eltávolítása aláírási konfliktus esetén. Ez alkalmazásadatok törléséhez is vezethet</string>

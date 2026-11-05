@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">隐藏此应用？</string>
     <string name="home_more_apps_title">更多应用</string>
     <string name="home_more_apps_hide_title">隐藏此卡片？</string>
-    <string name="home_more_apps_hide_message">您可以随时在“设置 &gt; 外观 &gt; 主屏幕”中将其恢复</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">您可以随时在 %1$s 中将其恢复</string>
     <string name="home_app_hide_message">此应用将从主界面中隐藏。您可以点按列表底部的按钮来从隐藏的应用中恢复它。</string>
     <string name="home_app_will_be_hidden">此应用将被隐藏</string>
     <string name="home_app_hidden_named">%s 已隐藏</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">受信任的密钥</string>
     <string name="sources_signing_key_new">新密钥</string>
     <string name="sources_patch_expert_badge">专家</string>
-    <string name="sources_patch_expert_badge_tooltip">在设置中启用专家模式以手动包含此补丁</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">开启 %1$s 以手动包含此补丁</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">需要帮助查找 APK 吗？</string>
     <string name="home_apk_availability_dialog_simple">要修补&lt;b&gt;%s&lt;/b&gt;，需要未修补的 APK 版本：</string>
@@ -529,6 +531,7 @@
     <string name="home_app_info_install_type_custom_installer">自定义安装程序</string>
     <string name="home_app_info_install_type_system_installer">系统安装程序</string>
     <string name="home_app_info_install_type_play_store">Play商店安装</string>
+    <string name="home_app_info_install_type_root">Root 安装</string>
     <string name="home_app_info_install_type_root_play_store">Root Play商店安装</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play商店安装</string>
     <string name="home_app_info_patch_update_available">有可用的补丁更新</string>
@@ -570,7 +573,8 @@
     <string name="root_mount_module_unmount_warning">如果在 KernelSU 中启用了「默认卸载模块」，请在 KernelSU &gt; 超级用户 &gt; 对应的挂载应用 &gt; 配置文件 &gt; 自定义，並关闭「卸载模块」。 否则，即使在 Morphe 中显示为已挂载，挂载的已修补 APK 也可能无效</string>
     <string name="root_pre_patch_installer_standard_title">标准安装模式</string>
     <string name="root_pre_patch_installer_standard_description">将补丁作为带有 GmsCore 支持的普通 APK 安装。应用补丁后将使用您的安装程序设置。</string>
-    <string name="root_pre_patch_installer_hint">在设置 &gt; 安装 &gt; 修补中 &gt; 里的安装程序选择提示已开启。 修补完成后您将无法再更改修补模式</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">询问时 %1$s 已设置为 %2$s。补丁完成后无法更改补丁模式</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">错误已复制到剪贴板</string>
     <string name="patcher_error_log">错误日志</string>
@@ -669,6 +673,14 @@
     <string name="patcher_step_group_saving">保存中</string>
     <string name="patcher_step_write_patched">写入修补后的 APK 文件</string>
     <string name="patcher_step_sign_apk">为修补后的 APK 文件签名</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">读取 DEX 文件</string>
+    <string name="patcher_task_extracting_resources">提取资源</string>
+    <string name="patcher_task_decoding_resources">解码资源</string>
+    <string name="patcher_task_indexing_classes">建立类索引</string>
+    <string name="patcher_task_compiling_dex">编译 DEX 文件</string>
+    <string name="patcher_task_compiling_resources">正在编译资源</string>
+    <string name="patcher_task_writing_apk">正在写入 APK 文件</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">后台补丁保护</string>
     <string name="battery_optimization_dialog_description">一些设备在应用被最小化时可能会停止补丁程序。允许 Morphe 在没有电池限制的情况下运行，以确保补丁完成可靠。</string>
@@ -717,7 +729,8 @@
     <string name="patched_app_save_failed_toast">保存修补后的应用失败</string>
     <string name="plugin_activity_dialog_body">需要用户交互才能继续使用此插件</string>
     <string name="patcher_process_killed_message">系统在修补程序完成之前停止，通常是为了释放内存。关闭其他应用并重试</string>
-    <string name="patcher_process_crashed_message">补丁程序在完成前崩溃。如果再次发生，请在设置中关闭 \"使用内置 VM\" 并提交包含日志的问题报告</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">补丁程序在完成前崩溃。如果再次发生，请关闭 %1$s 并附带日志报告问题</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">修补器在使用 %1$s MB 堆时内存耗尽。此应用对于所选修补程序来说太大了。尝试使用较少的修补源进行修补，或选择较少的修补程序</string>
     <string name="install_app_success">安装成功</string>
@@ -1017,9 +1030,8 @@ morphe_header_custom_dark.png
     <string name="installer_title">选择安装程序</string>
     <string name="installer_internal_description">使用 Android 包安装程序</string>
     <string name="installer_play_store_description">使用系统安装程序，并将Google Play商店设置为安装来源</string>
+    <string name="installer_root_description">使用 root 静默安装</string>
     <string name="installer_root_play_store_description">以 root 权限静默安装，并将 Google Play Store 设置为安装来源</string>
-    <string name="installer_auto_saved_name">Root 挂载模式</string>
-    <string name="installer_auto_saved_description">挂载以 Root 挂载模式打补丁的应用。标准打补丁的 APK 使用另一个安装程序。</string>
     <string name="installer_shizuku_description">使用 Shizuku 或 Sui 静默安装。</string>
     <string name="installer_shizuku_play_store_description">通过 Shizuku 或 Sui 静默安装，并将 Google Play Store 设置为安装来源</string>
     <string name="installer_option_none">无备用</string>
@@ -1029,7 +1041,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">安装 Shizuku 或 Sui 以使用此选项</string>
     <string name="installer_status_shizuku_not_running">启动 Shizuku 或 Sui 后重试</string>
     <string name="installer_status_shizuku_permission">授予 Morphe 从 Shizuku 应用权限</string>
-    <string name="installer_mount_warning_install">您的主要安装程序设置为根挂载安装程序。此保存的应用未使用挂载安装</string>
+    <string name="installer_mount_warning_install">修补模式已设置为 root 挂载。此保存的应用并非使用挂载方式安装</string>
     <string name="mount_version_mismatch_message">原始应用版本（%2$s）与修补后的应用版本（%1$s）不匹配。挂载匹配的原始版本，然后重试</string>
     <string name="mount_stock_restore_failed_message">Android 拒绝了保存的原始 APK。请安装匹配的系统版本，然后重试挂载。</string>
     <string name="installer_status_shizuku_unsupported">已安装的 Shizuku 版本不受支持</string>
@@ -1051,11 +1063,17 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_continue">我知道了，继续</string>
     <string name="installer_play_store_mode">作为 Play 商店安装</string>
     <string name="installer_play_store_mode_description">将 Google Play 商店标记为安装来源</string>
+    <string name="settings_section_patch_mode">修补模式</string>
+    <string name="settings_patch_mode_ask">每次询问</string>
+    <string name="settings_patch_mode_ask_description">在修补每个应用前，询问是将其修补为 root 挂载还是标准安装</string>
+    <string name="settings_section_after_patching">修补后</string>
+    <string name="settings_after_patching_install">自动安装</string>
+    <string name="settings_after_patching_ask">询问使用哪个安装程序</string>
+    <string name="settings_after_patching_ask_description">每次安装应用时都会询问使用哪个安装程序</string>
+    <string name="settings_after_patching_manual">手动安装</string>
+    <string name="settings_after_patching_manual_description">点击“安装”后将使用默认安装程序进行安装</string>
     <string name="settings_nomount_only">仅限 NoMount</string>
     <string name="settings_nomount_only_description">仅使用 NoMount 挂载应用，且绝不回退到绑定挂载，因此在没有 NoMount 的情况下它们将保持未挂载状态</string>
-    <string name="settings_prompt_installer_on_install">安装程序选择提示</string>
-    <string name="settings_prompt_installer_on_install_description">询问如何安装每个应用：在修补前使用 root 安装，否则在修补后安装</string>
-    <string name="settings_auto_install_with_shizuku">补丁应用后自动安装</string>
     <string name="settings_auto_install_with_shizuku_description">修补完成后立即安装或挂载已修补的 APK</string>
     <string name="settings_auto_uninstall_with_shizuku">冲突时自动卸载</string>
     <string name="settings_auto_uninstall_with_shizuku_description">在签名冲突时卸载现有应用。这可能会删除应用数据</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
     <!-- Shown under the app a link was opened for -->
     <!-- Shown when the link was opened for the universal patches of a source, which no app is added with -->
     <!-- Asked when the link names an app of a source that is already added -->
@@ -45,6 +46,7 @@
     <string name="sources_dialog_change_url">பேட்ச் மூலப்பொருள் பதிவிறக்கம் செய்யப்படும் இடத்தை மாற்றவும்</string>
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
     <!-- Home Screen - Dialog 1: APK Availability -->
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -81,6 +83,7 @@
     <string name="batch_queue_keep">தக்கவை</string>
     <!-- Home Screen - App Info Screen -->
     <!-- Home Screen - Root Mode -->
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
     <!-- Patcher Screen -->
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
@@ -93,6 +96,14 @@
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <!-- Patcher Screen - Patcher Steps -->
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">DEX கோப்புகளைப் படிக்கிறது</string>
+    <string name="patcher_task_extracting_resources">வளங்களை வெளியே எடுக்கிறது</string>
+    <string name="patcher_task_decoding_resources">வளங்களை டிகோடிங் செய்கிறது</string>
+    <string name="patcher_task_indexing_classes">வகுப்புகளை வரிசைப்படுத்துகிறது</string>
+    <string name="patcher_task_compiling_dex">DEX கோப்புகளை தொகுக்கிறது</string>
+    <string name="patcher_task_compiling_resources">வளங்களை தொகுக்கிறது</string>
+    <string name="patcher_task_writing_apk">APK கோப்பை எழுதுகிறது</string>
     <!-- Battery optimization pre-flight dialog -->
     <!-- Patcher Screen - Patcher Worker -->
     <!-- Keeps the run going, the way out of a dialog that asks whether to stop it -->
@@ -104,6 +115,7 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <!-- Expert patcher Screen -->
     <!-- Patcher Screen - Other hidden strings -->
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <!-- Patcher Screen - Mini-games -->
     <!-- Settings -->

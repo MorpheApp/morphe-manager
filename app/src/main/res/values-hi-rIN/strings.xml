@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">इस ऐप को छुपाएं?</string>
     <string name="home_more_apps_title">और ऐप्स</string>
     <string name="home_more_apps_hide_title">इस कार्ड को छिपाएँ?</string>
-    <string name="home_more_apps_hide_message">आप इसे कभी भी Settings &gt; Appearance &gt; Home screen में वापस ला सकते हैं</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">आप इसे किसी भी समय %1$s में वापस ला सकते हैं</string>
     <string name="home_app_hide_message">यह ऐप होम स्क्रीन से छिपा दिया जाएगा। आप सूची के नीचे दिए गए बटन का उपयोग करके छिपे हुए ऐप्स से इसे बाद में पुनर्स्थापित कर सकते हैं</string>
     <string name="home_app_will_be_hidden">इस ऐप को छुपाया जाएगा</string>
     <string name="home_app_hidden_named">%s छिपा</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">भरोसेमंद कुंजी</string>
     <string name="sources_signing_key_new">नई कुंजी</string>
     <string name="sources_patch_expert_badge">विशेषज्ञ</string>
-    <string name="sources_patch_expert_badge_tooltip">इस पैच को मैन्युअल रूप से शामिल करने के लिए सेटिंग्स में विशेषज्ञ मोड सक्षम करें</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">इस पैच को मैन्युअल रूप से शामिल करने के लिए %1$s चालू करें</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">APK ढूंढने में मदद चाहिए?</string>
     <string name="home_apk_availability_dialog_simple">पैच करने के लिए &lt;b&gt;%s&lt;/b&gt;, अपैच्ड एपीएक्सी संस्करण की आवश्यकता है:</string>
@@ -529,6 +531,7 @@
     <string name="home_app_info_install_type_custom_installer">कस्टम इंस्टॉलर</string>
     <string name="home_app_info_install_type_system_installer">सिस्टम इंस्टॉलर</string>
     <string name="home_app_info_install_type_play_store">प्ले स्टोर से इंस्टॉल करें</string>
+    <string name="home_app_info_install_type_root">रूट इंस्टॉलेशन</string>
     <string name="home_app_info_install_type_root_play_store">रूट प्ले स्टोर से इंस्टॉल करें</string>
     <string name="home_app_info_install_type_shizuku_play_store">शिज़ुकू प्ले स्टोर से इंस्टॉल करें</string>
     <string name="home_app_info_patch_update_available">पैच अपडेट उपलब्ध है</string>
@@ -570,7 +573,8 @@
     <string name="root_mount_module_unmount_warning">यदि KernelSU में \"Unmount modules by default\" चालू है, तो KernelSU खोलें &gt; Superuser &gt; आपका माउंट किया गया ऐप &gt; Profile &gt; Custom और \"Unmount modules\" बंद करें। वरना, माउंट किया गया पैचेड APK प्रभाव नहीं ला सकता, भले ही Morphe इसे माउंटेड के रूप में दिखाए</string>
     <string name="root_pre_patch_installer_standard_title">मानक इंस्टॉलेशन मोड</string>
     <string name="root_pre_patch_installer_standard_description">GmsCore समर्थन के साथ एक सामान्य APK के रूप में पैच। पैचिंग के बाद आपकी इंस्टॉलर सेटिंग का उपयोग किया जाता है।</string>
-    <string name="root_pre_patch_installer_hint">सेटिंग्स <b>&gt;</b> पैचिंग <b>&gt;</b> इंस्टॉलेशन <b>&gt;</b> इंस्टॉलर चयन संकेत पर पूछा गया। पैचिंग के बाद पैच मोड को बदला नहीं जा सकता</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">जब %1$s को %2$s पर सेट किया गया हो तब पूछा गया। पैचिंग के बाद पैच मोड बदला नहीं जा सकता</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Error copied to clipboard</string>
     <string name="patcher_error_log">त्रुटि रिपोर्ट</string>
@@ -669,6 +673,14 @@
     <string name="patcher_step_group_saving">सेव हो रहा है</string>
     <string name="patcher_step_write_patched">पैच्ड एपीके फाइल लिखना</string>
     <string name="patcher_step_sign_apk">Signing patched APK file</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">DEX फ़ाइलें पढ़ी जा रही हैं</string>
+    <string name="patcher_task_extracting_resources">संसाधन निकाले जा रहे हैं</string>
+    <string name="patcher_task_decoding_resources">संसाधनों को डिकोड किया जा रहा है</string>
+    <string name="patcher_task_indexing_classes">क्लासेस का इंडेक्सिंग किया जा रहा है</string>
+    <string name="patcher_task_compiling_dex">DEX फ़ाइलें कंपाइल की जा रही हैं</string>
+    <string name="patcher_task_compiling_resources">रिसोर्सेज कंपाइल करना</string>
+    <string name="patcher_task_writing_apk">APK फाइल लिखना</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">पृष्ठभूमि पैचिंग सुरक्षा</string>
     <string name="battery_optimization_dialog_description">कुछ डिवाइस ऐप को मिनिमाइज किए जाने पर पैचर को रोक सकते हैं। पैचिंग को विश्वसनीय रूप से पूरा करने के लिए मोर्फ़ को बैटरी प्रतिबंधों के बिना चलाने की अनुमति दें।</string>
@@ -717,7 +729,8 @@
     <string name="patched_app_save_failed_toast">Failed to save patched app</string>
     <string name="plugin_activity_dialog_body">इस प्लगइन के लिए आगे बढ़ने के लिए उपयोगकर्ता इंटरैक्शन आवश्यक है।</string>
     <string name="patcher_process_killed_message">सिस्टम ने पचर को पूरा होने से पहले ही बंद कर दिया, आमतौर पर मेमोरी खाली करने के लिए। अन्य ऐप्ब को बंद करें और पुन: प्रयास करें</string>
-    <string name="patcher_process_crashed_message">पैचर पूरा होने से पहले क्रैश हो गया। यदि ऐसा दोबारा होता है, तो सेटिंग्स में \"Use embedded VM\" को बंद करें और लॉग के साथ समस्या की रिपोर्ट करें</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">पैचर पूरा होने से पहले क्रैश हो गया। यदि ऐसा फिर से होता है, तो %1$s बंद करें और लॉग के साथ समस्या की रिपोर्ट करें</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">पैचर की %1$s MB हीप के साथ मेमोरी समाप्त हो गई। यह ऐप चयनित पैचों के लिए बहुत बड़ा है। कमतर पैच स्रोतों के साथ पैचिंग का प्रयास करें, या कमतर पैच चयन करें</string>
     <string name="install_app_success">सफलतापूर्वक इंस्टॉल हो गया</string>
@@ -1017,9 +1030,8 @@ morphe_header_custom_dark.png
     <string name="installer_title">इंस्टॉलर चुनें</string>
     <string name="installer_internal_description">एंड्रॉइड पैकेज इंस्टॉलर का उपयोग करें।</string>
     <string name="installer_play_store_description">सिस्टम इंस्टॉलर का उपयोग करता है और Google Play Store को इंस्टॉल स्रोत के रूप में सेट करता है</string>
+    <string name="installer_root_description">रूट के साथ चुपचाप इंस्टॉल करता है</string>
     <string name="installer_root_play_store_description">रूट के साथ चुपचाप इंस्टॉल करता है और Google Play Store को इंस्टॉलेशन स्रोत के रूप में सेट करता है</string>
-    <string name="installer_auto_saved_name">रूट माउंट</string>
-    <string name="installer_auto_saved_description">रूट माउंट मोड में पैच किए गए ऐप्स को माउंट करता है। मानक पैच किए गए APK किसी अन्य इंस्टॉलर का उपयोग करते हैं।</string>
     <string name="installer_shizuku_description">Shizuku या Sui का उपयोग करके चुपचाप इंस्टॉल करता है।</string>
     <string name="installer_shizuku_play_store_description">शिज़ुकु या सुई के माध्यम से चुपचाप इंस्टॉल करता है और Google Play Store को इंस्टॉलेशन स्रोत के रूप में सेट करता है</string>
     <string name="installer_option_none">कोई बैकफ़ॉल नहीं</string>
@@ -1029,7 +1041,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">इस विकल्प का उपयोग करने के लिए शिज़ुकू या साई इंस्टॉल करें</string>
     <string name="installer_status_shizuku_not_running">शिज़ुकू या साई को शुरू करें और पुन: प्रयास करें</string>
     <string name="installer_status_shizuku_permission">Morphe ऐप से Shizuku की अनुमति दें</string>
-    <string name="installer_mount_warning_install">आपका प्राथमिक इंस्टॉलर रूट माउंट इंस्टॉलर पर सेट है. यह सहेजा गया ऐप माउंट का उपयोग करके इंस्टॉल नहीं किया गया था।</string>
+    <string name="installer_mount_warning_install">पैच मोड को रूट माउंट पर सेट किया गया है। यह सेव किया गया ऐप माउंट का उपयोग करके इंस्टॉल नहीं किया गया था</string>
     <string name="mount_version_mismatch_message">स्टॉक ऐप वर्जन (%2$s) पैच्ड ऐप वर्जन (%1$s) से मेल नहीं खाती. माउंट मैचिंग स्टॉक वर्जन, फिर पुन: प्रयास करें।</string>
     <string name="mount_stock_restore_failed_message">Android ने सहेजे गए मूल APK को अस्वीकार कर दिया है। मिलान करने वाले स्टॉक संस्करण को इंस्टॉल करें, फिर माउंट करने का प्रयास करें।</string>
     <string name="installer_status_shizuku_unsupported">इंस्टॉल किया गया शिज़ुकू वर्जन समर्थित नहीं है</string>
@@ -1051,11 +1063,17 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_continue">मुझे समझ आ गया, जारी रखें</string>
     <string name="installer_play_store_mode">Play Store के रूप में इंस्टॉल करें</string>
     <string name="installer_play_store_mode_description">Google Play स्टोर को इंस्टॉल स्रोत के रूप में चिह्नित करता है</string>
+    <string name="settings_section_patch_mode">पैच मोड</string>
+    <string name="settings_patch_mode_ask">हर बार पूछें</string>
+    <string name="settings_patch_mode_ask_description">प्रत्येक ऐप को पैच करने से पहले पूछता है कि इसे रूट माउंट के लिए पैच करना है या स्टैंडर्ड इंस्टॉलेशन के लिए</string>
+    <string name="settings_section_after_patching">पैचिंग के बाद</string>
+    <string name="settings_after_patching_install">अपने आप इंस्टॉल करें</string>
+    <string name="settings_after_patching_ask">पूछें कि कौन सा इंस्टॉलर</string>
+    <string name="settings_after_patching_ask_description">जब भी कोई ऐप इंस्टॉल किया जाता है, तो हर बार पूछता है कि किस इंस्टॉलर का उपयोग करना है</string>
+    <string name="settings_after_patching_manual">मैन्युअल रूप से इंस्टॉल करें</string>
+    <string name="settings_after_patching_manual_description">एक बार जब आप इंस्टॉल पर टैप करते हैं, तो यह डिफॉल्ट इंस्टॉलर के साथ इंस्टॉल हो जाता है</string>
     <string name="settings_nomount_only">केवल NoMount</string>
     <string name="settings_nomount_only_description">ऐप्स को केवल NoMount के साथ माउंट करता है और कभी भी बाइंड माउंट पर वापस नहीं जाता है, इसलिए इसके बिना वे अनमाउंटेड रहते हैं</string>
-    <string name="settings_prompt_installer_on_install">इंस्टॉलर चयन संकेत</string>
-    <string name="settings_prompt_installer_on_install_description">हर ऐप को कैसे इंस्टॉल करना है, यह पूछता है: पेटचिंग से पहले रूट के साथ, अन्यथा उसके बाद</string>
-    <string name="settings_auto_install_with_shizuku">पैचिंग के बाद स्वतः इंस्टॉल करें</string>
     <string name="settings_auto_install_with_shizuku_description">पेटचिंग पूरी होते ही पेट्चित APK को इंस्टॉल या माउंट करता है</string>
     <string name="settings_auto_uninstall_with_shizuku">विवाद होने पर स्वतः अनइंस्टॉल करें</string>
     <string name="settings_auto_uninstall_with_shizuku_description">साइनचरण संघर्ष पर मौजूदा ऐप को अनइंस्टॉल करता है। इससे ऐप डेटा हट सकता है</string>

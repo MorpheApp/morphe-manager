@@ -10,7 +10,7 @@
     <string name="home_app_hide_title">এই এপটো লুকুৱাবনে?</string>
     <string name="home_more_apps_title">আৰু অধিক এপ</string>
     <string name="home_more_apps_hide_title">এই কাৰ্ডটো লুকুৱাব নেকি?</string>
-    <string name="home_more_apps_hide_message">আপুনি ইয়াক যিকোনো সময়ত Settings &gt; Appearance &gt; Home screen-ত উভটাই আনিব পাৰে</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
     <string name="home_app_hide_message">এই এপটো হোম স্ক্ৰীনৰ পৰা লুকাই থাকিব। আপুনি পিছত তালিকাৰ তলত থকা বুটামটো ব্যৱহাৰ কৰি লুকাই থকা এপসমূহৰ পৰা ইয়াক পুনৰ ঘূৰাই আনিব পাৰিব</string>
     <string name="home_app_will_be_hidden">এই এপটো লুকুৱাই ৰখা হ\'ব</string>
     <string name="home_app_hidden_named">%s লুকাইছে</string>
@@ -243,7 +243,7 @@
     <string name="sources_signing_key_trusted">বিশ্বাসযোগ্য কি</string>
     <string name="sources_signing_key_new">নতুন কি</string>
     <string name="sources_patch_expert_badge">এক্সপাৰ্ট</string>
-    <string name="sources_patch_expert_badge_tooltip">এই পেচটোৰ মানুয়ালি অন্তৰ্ভুক্ত কৰিবলৈ ছেটিঙত এক্সপাৰ্ট মোড সক্ৰিয় কৰক</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">APK টো বিচাৰি পাবলৈ সহায়ৰ প্ৰয়োজন নেকি?</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt; পেচ কৰিবলৈ, আপোনাক আনপেচড APK সংস্কৰণটোৰ প্ৰয়োজন:</string>
@@ -529,6 +529,7 @@
     <string name="home_app_info_install_type_custom_installer">কষ্টম ইনষ্টলাৰ</string>
     <string name="home_app_info_install_type_system_installer">চিষ্টেম ইনষ্টলাৰ</string>
     <string name="home_app_info_install_type_play_store">Play Store ইন্সটল</string>
+    <string name="home_app_info_install_type_root">ৰুট সংস্থাপন</string>
     <string name="home_app_info_install_type_root_play_store">Root Play Store ইন্সটল</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Store ইন্সটল</string>
     <string name="home_app_info_patch_update_available">প্যাচ আপডেট উপলব্ধ</string>
@@ -570,7 +571,7 @@
     <string name="root_mount_module_unmount_warning">যদি KernelSU-ত \"Unmount modules by default\" অন কৰা থাকে, তেন্তে KernelSU &gt; Superuser &gt; আপুনি মাউণ্ট কৰা এপটো &gt; Profile &gt; Custom খোলক আৰু \"Unmount modules\" অফ কৰক। অন্যথা, মাউণ্ট কৰা patched APK-টো কাৰ্যকৰী নহ\'বও পাৰে, যদিও Morphe-এ ইয়াক মাউণ্ট কৰা বুলি দেখুৱাইছে</string>
     <string name="root_pre_patch_installer_standard_title">Standard install মোড</string>
     <string name="root_pre_patch_installer_standard_description">GmsCore সমৰ্থনৰ সৈতে এটা স্বাভাৱিক APK হিচাপে patch কৰে। Patch কৰাৰ পিছত আপোনাৰ installer সেটিংস ব্যৱহাৰ কৰা হয়</string>
-    <string name="root_pre_patch_installer_hint">Settings &gt; Patching &gt; Installation &gt; Installer selection prompt অন হৈ থাকিলে এইটো সোধা হয়। পেচিং কৰাৰ পিছত পেচ মোডটো সলনি কৰিব নোৱাৰি</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">ত্ৰুটিটো ক্লিপবৰ্ডলৈ কপি কৰা হৈছে</string>
     <string name="patcher_error_log">ত্ৰুটি লগ</string>
@@ -669,6 +670,14 @@
     <string name="patcher_step_group_saving">সংৰক্ষণ কৰিছে</string>
     <string name="patcher_step_write_patched">প্যাচ কৰা APK ফাইল লিখি থকা হৈছে</string>
     <string name="patcher_step_sign_apk">প্যাচ কৰা APK ফাইল ছাইন কৰা হৈছে</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">DEX ফাইলসমূহ পঢ়ি আছে</string>
+    <string name="patcher_task_extracting_resources">সম্পদসমূহ নিষ্কাশন কৰি আছে</string>
+    <string name="patcher_task_decoding_resources">সম্পদসমূহৰ ডিকোডিং কৰি আছে</string>
+    <string name="patcher_task_indexing_classes">ক্লাছসমূহৰ ইনডেক্সিং কৰি আছে</string>
+    <string name="patcher_task_compiling_dex">DEX ফাইলসমূহ কম্পাইল কৰি আছে</string>
+    <string name="patcher_task_compiling_resources">সম্পদসমূহ সংকলন কৰা হৈছে</string>
+    <string name="patcher_task_writing_apk">APK ফাইল লিখা হৈছে</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">বেকগ্ৰাউণ্ড পেচিং প্ৰটেকচন</string>
     <string name="battery_optimization_dialog_description">কিছুমান ডিভাইচত এপটো মিনিমাইজ কৰিলে পেচাৰটো বন্ধ হৈ যাব পাৰে। পেচিং নিৰ্ভৰযোগ্যভাৱে সম্পূৰ্ণ হোৱাটো নিশ্চিত কৰিবলৈ Morphe-ক বেটাৰীৰ বাধা অবিহনে চলাবলৈ অনুমতি দিয়ক</string>
@@ -717,7 +726,7 @@
     <string name="patched_app_save_failed_toast">প্যাচ কৰা এপটো সংৰক্ষণ কৰাত ব্যৰ্থ হৈছে</string>
     <string name="plugin_activity_dialog_body">এই প্লাগইনটোৰ সৈতে আগবাঢ়িবলৈ ব্যৱহাৰকাৰীৰ অন্তৰ্ক্ৰিয়াৰ প্ৰয়োজন</string>
     <string name="patcher_process_killed_message">চিষ্টেমটোৱে প্যাচাৰটো সম্পূৰ্ণ হোৱাৰ আগতেই বন্ধ কৰি দিছে, সাধাৰণতে মেমৰী খালী কৰিবলৈ। আন এপৰিকেচনবোৰ বন্ধ কৰি পুনৰ চেষ্টা কৰক</string>
-    <string name="patcher_process_crashed_message">Patcher-টো সম্পূৰ্ণ হোৱাৰ আগতেই ক্ৰাশ কৰিছে। যদি ই পুনৰ ঘটে, তেন্তে settings-ত \"Use embedded VM\" বন্ধ কৰক আৰু লগৰ সৈতে সমস্যাটোৰ কথা জনাওক</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">প্যাচৰটো %1$s MB হীপেৰে মেমৰীৰ অভাৱত পৰিছে। এই এপটো নিৰ্বাচিত প্যাচবোৰৰ বাবে খুব ডাঙৰ। কম সংখ্যক প্যাচ উৎসৰ সৈতে প্যাচ কৰিবলৈ চেষ্টা কৰক, অথবা কম সংখ্যক প্যাচ নিৰ্বাচন কৰক</string>
     <string name="install_app_success">সফলভাৱে ইনষ্টল কৰা হৈছে</string>
@@ -1017,9 +1026,8 @@ morphe_header_custom_dark.png
     <string name="installer_title">ইনষ্টলেৰ নিৰ্বাচন কৰক</string>
     <string name="installer_internal_description">Android পেকেজ ইনষ্টলাৰ ব্যৱহাৰ কৰে</string>
     <string name="installer_play_store_description">চিস্টেম ইনষ্টলাৰ ব্যৱহাৰ কৰে আৰু Google Play Store-ক ইন্সটল উৎস হিচাপে নিৰ্ধাৰণ কৰে</string>
+    <string name="installer_root_description">Root-ৰ সৈতে মনে মনে ইনষ্টল কৰে</string>
     <string name="installer_root_play_store_description">Root-ৰ সৈতে মনে মনে ইন্সটল কৰে আৰু Google Play Store-ক ইন্সটল উৎস হিচাপে নিৰ্ধাৰণ কৰে</string>
-    <string name="installer_auto_saved_name">ৰুট মাউণ্ট</string>
-    <string name="installer_auto_saved_description">Root mount মোডত patch কৰা এপসমূহ mount কৰে। Standard patched APK-সমূহে আন এটা ইনষ্টলাৰ ব্যৱহাৰ কৰে</string>
     <string name="installer_shizuku_description">Shizuku বা Sui ব্যৱহাৰ কৰি মনে মনে ইনষ্টল কৰে</string>
     <string name="installer_shizuku_play_store_description">Shizuku বা Sui-ৰ জৰিয়তে মনে মনে ইন্সটল কৰে আৰু Google Play Store-ক ইন্সটল উৎস হিচাপে নিৰ্ধাৰণ কৰে</string>
     <string name="installer_option_none">কোনো ফলবেক নাই</string>
@@ -1029,7 +1037,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">এই বিকল্পটো ব্যৱহাৰ কৰিবলৈ Shizuku বা Sui ইনষ্টল কৰক</string>
     <string name="installer_status_shizuku_not_running">Shizuku বা Sui আৰম্ভ কৰক আৰু পুনৰ চেষ্টা কৰক</string>
     <string name="installer_status_shizuku_permission">Shizuku এপৰ পৰা Morphe ক অনুমতি প্ৰদান কৰক</string>
-    <string name="installer_mount_warning_install">আপোনাৰ প্ৰাথমিক ইনষ্টলাৰটো rooted mount ইনষ্টলাৰত ছেট কৰা হৈছে। এই সংৰক্ষিত এপটো mount ব্যৱহাৰ কৰি ইনষ্টল কৰা হোৱা নাছিল</string>
+    <string name="installer_mount_warning_install">পেচ মোড root mount-লৈ ছেট কৰা হৈছে। এই সংৰক্ষিত এপটো mount ব্যৱহাৰ কৰি ইনষ্টল কৰা হোৱা নাছিল</string>
     <string name="mount_version_mismatch_message">ষ্টক এপ সংস্কৰণ (%2$s) পেচড এপ সংস্কৰণৰ (%1$s) সৈতে মিলা নাই। মিল থকা ষ্টক সংস্কৰণটো mount কৰক, তাৰ পিছত পুনৰ চেষ্টা কৰক</string>
     <string name="mount_stock_restore_failed_message">Android-এ সংৰক্ষিত মূল APKটো প্ৰত্যাখ্যান কৰিছে। মিল থকা ষ্টক সংস্কৰণটো সংস্থাপন কৰক, তাৰ পিছত পুনৰ Mount কৰিবলৈ চেষ্টা কৰক</string>
     <string name="installer_status_shizuku_unsupported">ইনষ্টল কৰা Shizuku সংস্কৰণটো সমৰ্থিত নহয়</string>
@@ -1051,11 +1059,17 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_continue">মই বুজিলোঁ, আগবাঢ়ক</string>
     <string name="installer_play_store_mode">Play Store হিচাপে সংস্থাপন কৰক</string>
     <string name="installer_play_store_mode_description">Google Play Store-ক সংস্থাপন উৎস হিচাপে চিহ্নিত কৰে</string>
+    <string name="settings_section_patch_mode">পেচ মোড</string>
+    <string name="settings_patch_mode_ask">প্ৰতিবাৰ সোধক</string>
+    <string name="settings_patch_mode_ask_description">প্ৰতিটো এপ পেচ কৰাৰ আগতে ই root mount বা এটা ষ্টেণ্ডাৰ্ড ইনষ্টলেশ্যনৰ বাবে পেচ কৰিব লাগে নেকি সেইটো সোধে</string>
+    <string name="settings_section_after_patching">পেচিং কৰাৰ পিছত</string>
+    <string name="settings_after_patching_install">স্বয়ংক্ৰিয়ভাৱে ইনষ্টল কৰক</string>
+    <string name="settings_after_patching_ask">কোনটো ইনষ্টলেৰ ব্যৱহাৰ কৰিব সোধক</string>
+    <string name="settings_after_patching_ask_description">প্ৰতিবাৰ এপ ইনষ্টল কৰোঁতে কোনটো ইনষ্টলেৰ ব্যৱহাৰ কৰিব লাগে সেইটো সোধে</string>
+    <string name="settings_after_patching_manual">মেনুয়ালি সংস্থাপন কৰক</string>
+    <string name="settings_after_patching_manual_description">আপুনি Install ট্যাপ কৰাৰ পিছত ডিফল্ট সংস্থাপনকাৰীৰ সহায়ত সংস্থাপন কৰিব</string>
     <string name="settings_nomount_only">কেৱল NoMount</string>
     <string name="settings_nomount_only_description">কেৱল NoMount ৰ সৈতে এপবোৰ মাউণ্ট কৰে আৰু কেতিয়াও বাইণ্ড মাউণ্টৰ সহায়ত কাম নকৰে, যাৰ ফলত ই অবিহনে সেইবোৰ আনমাউণ্ট হৈ থাকে</string>
-    <string name="settings_prompt_installer_on_install">ইনষ্টলাৰ নিৰ্বাচন প্ৰম্পট</string>
-    <string name="settings_prompt_installer_on_install_description">প্ৰতিটো এপ কেনেকৈ ইনষ্টল কৰিব লাগে সেইটো সোধে: পেচিং কৰাৰ আগতে ৰুটৰ সৈতে, অন্যথা ইয়াৰ পিছত</string>
-    <string name="settings_auto_install_with_shizuku">প্যাচিংৰ পিছত অটো-ইনষ্টল কৰক</string>
     <string name="settings_auto_install_with_shizuku_description">পেচিং সম্পূৰ্ণ হোৱাৰ লগে লগে পেচড APKটো ইনষ্টল বা মাউন্ট কৰে</string>
     <string name="settings_auto_uninstall_with_shizuku">সংঘাতৰ সময়ত স্বয়ংক্রিয়ভাৱে সংস্থাপন বাতিল কৰক</string>
     <string name="settings_auto_uninstall_with_shizuku_description">চিনহাৰ সংঘাতৰ সময়ত বিদ্যমান এপটো আনইনষ্টল কৰে। ইয়াৰ ফলত এপৰ ডাটা আঁতৰ হ\'ব পাৰে</string>

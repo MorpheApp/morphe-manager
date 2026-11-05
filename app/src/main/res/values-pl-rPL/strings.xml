@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Ukryć tę aplikację?</string>
     <string name="home_more_apps_title">Więcej aplikacji</string>
     <string name="home_more_apps_hide_title">Ukryć tę kartę?</string>
-    <string name="home_more_apps_hide_message">Możesz przywrócić ją w dowolnej chwili w sekcji Ustawienia &gt; Wygląd &gt; Ekran główny</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Możesz przywrócić tę opcję w dowolnym momencie w %1$s</string>
     <string name="home_app_hide_message">Ta aplikacja zostanie ukryta na ekranie głównym. Możesz ją później przywrócić z ukrytych aplikacji za pomocą przycisku na dole listy</string>
     <string name="home_app_will_be_hidden">Ta aplikacja zostanie ukryta</string>
     <string name="home_app_hidden_named">%s ukryty</string>
@@ -244,7 +245,8 @@
     <string name="sources_signing_key_trusted">Zaufany klucz</string>
     <string name="sources_signing_key_new">Nowy klucz</string>
     <string name="sources_patch_expert_badge">Ekspert</string>
-    <string name="sources_patch_expert_badge_tooltip">Włącz tryb ekspercki w Ustawieniach, aby ręcznie dodać tę modyfikację</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Włącz %1$s, aby ręcznie dodać tę modyfikację</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Potrzebujesz pomocy w znalezieniu pliku APK?</string>
     <string name="home_apk_availability_dialog_simple">Aby zmodyfikować &lt;b&gt;%s&lt;/b&gt;, potrzebujesz niezmodyfikowanego pliku APK w wersji:</string>
@@ -285,7 +287,7 @@
     <string name="home_download_instructions_finding">Szukanie strony pobierania…</string>
     <string name="home_download_instructions_step1">Naciśnij przycisk \"%s\" poniżej</string>
     <string name="home_download_instructions_step2_part1">Przewiń stronę w dół i naciśnij</string>
-    <string name="home_download_instructions_step2_apkcube">Przewiń stronę w dół, wybierz wersję &lt;b&gt;%s&lt;/b&gt; i naciśnij</string>
+    <string name="home_download_instructions_step2_apkcube">Przewiń stronę w dół, wybierz wersję &lt;b&gt;%s&lt;/b&gt; i dotknij</string>
     <string name="home_download_instructions_step2_generic">Przewiń stronę w dół i naciśnij jej przycisk pobierania</string>
     <string name="home_download_instructions_step2_variant">Przewiń stronę w dół i naciśnij przycisk pobierania najwyższego &lt;b&gt;wariantu APK&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_search">Otwórz wynik wyszukiwania ze strony, której ufasz</string>
@@ -530,6 +532,7 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="home_app_info_install_type_custom_installer">Niestandardowy instalator</string>
     <string name="home_app_info_install_type_system_installer">Instalator systemowy</string>
     <string name="home_app_info_install_type_play_store">Instalacja ze Sklepu Play</string>
+    <string name="home_app_info_install_type_root">Instalacja z rootem</string>
     <string name="home_app_info_install_type_root_play_store">Instalacja root ze Sklepu Play</string>
     <string name="home_app_info_install_type_shizuku_play_store">Instalacja Shizuku ze Sklepu Play</string>
     <string name="home_app_info_patch_update_available">Dostępna aktualizacja modyfikacji</string>
@@ -571,7 +574,8 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="root_mount_module_unmount_warning">Jeśli w KernelSU włączona jest opcja \"Domyślnie odmontowuj moduły\", otwórz KernelSU &gt; Superużytkownik &gt; zamontowana aplikacja &gt; Profil &gt; Niestandardowy i wyłącz \"Odmontowuj moduły\". W przeciwnym razie zamontowany zmodyfikowany plik APK może nie działać, nawet jeśli Morphe pokazuje go jako zamontowany</string>
     <string name="root_pre_patch_installer_standard_title">Standardowy tryb instalacji</string>
     <string name="root_pre_patch_installer_standard_description">Modyfikuje jako zwykły plik APK z obsługą GmsCore. Po zakończeniu modyfikacji zostanie użyte twoje ustawienie instalatora</string>
-    <string name="root_pre_patch_installer_hint">Pytanie pojawia się, gdy włączona jest opcja Ustawienia &gt; Modyfikowanie &gt; Instalacja &gt; Monit o wybór instalatora. Trybu modyfikacji nie można zmienić po zakończeniu modyfikowania</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Zapytanie zadano, gdy %1$s jest ustawione na %2$s. Trybu modyfikowania nie można zmienić po zakończeniu procesu</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Skopiowano błąd do schowka</string>
     <string name="patcher_error_log">Dziennik błędów</string>
@@ -670,6 +674,14 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="patcher_step_group_saving">Zapisywanie</string>
     <string name="patcher_step_write_patched">Zapisywanie zmodyfikowanego pliku APK</string>
     <string name="patcher_step_sign_apk">Podpisywanie zmodyfikowanego pliku APK</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Odczytywanie plików DEX</string>
+    <string name="patcher_task_extracting_resources">Wypakowywanie zasobów</string>
+    <string name="patcher_task_decoding_resources">Dekodowanie zasobów</string>
+    <string name="patcher_task_indexing_classes">Indeksowanie klas</string>
+    <string name="patcher_task_compiling_dex">Kompilowanie plików DEX</string>
+    <string name="patcher_task_compiling_resources">Kompilowanie zasobów</string>
+    <string name="patcher_task_writing_apk">Zapisywanie pliku APK</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Ochrona modyfikowania w tle</string>
     <string name="battery_optimization_dialog_description">Niektóre urządzenia mogą zatrzymać modyfikator, gdy aplikacja jest zminimalizowana. Zezwól Morphe na działanie bez ograniczeń baterii, aby proces modyfikowania zakończył się pomyślnie</string>
@@ -718,7 +730,8 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="patched_app_save_failed_toast">Nie udało się zapisać zmodyfikowanej aplikacji</string>
     <string name="plugin_activity_dialog_body">Wymagana jest interakcja użytkownika, aby kontynuować działanie tej wtyczki</string>
     <string name="patcher_process_killed_message">System zatrzymał proces modyfikowania przed jego zakończeniem, zazwyczaj w celu zwolnienia pamięci. Zamknij inne aplikacje i spróbuj ponownie</string>
-    <string name="patcher_process_crashed_message">Modyfikator uległ awarii przed zakończeniem pracy. Jeśli problem się powtórzy, wyłącz opcję \"Używaj wbudowanej maszyny wirtualnej\" w ustawieniach i zgłoś błąd wraz z dziennikiem zdarzeń</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Modyfikator uległ awarii przed zakończeniem pracy. Jeśli problem się powtórzy, wyłącz %1$s i zgłoś błąd wraz z dziennikiem zdarzeń</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Modyfikatorowi zabrakło pamięci przy rozmiarze sterty %1$s MB. Ta aplikacja jest zbyt duża dla wybranych modyfikacji. Spróbuj zmodyfikować z mniejszą liczbą źródeł modyfikacji lub wybierz mniej modyfikacji</string>
     <string name="install_app_success">Zainstalowano pomyślnie</string>
@@ -1018,9 +1031,8 @@ Wymagane są następujące wymiary obrazów:
     <string name="installer_title">Wybierz instalator</string>
     <string name="installer_internal_description">Używa instalatora pakietów Androida</string>
     <string name="installer_play_store_description">Używa instalatora systemowego i ustawia Sklep Play jako źródło instalacji</string>
+    <string name="installer_root_description">Instaluje po cichu z uprawnieniami roota</string>
     <string name="installer_root_play_store_description">Instaluje w tle z użyciem roota i ustawia Sklep Play jako źródło instalacji</string>
-    <string name="installer_auto_saved_name">Montowanie z rootem</string>
-    <string name="installer_auto_saved_description">Montuje aplikacje, które zostały zmodyfikowane w trybie montowania z rootem. Standardowe, zmodyfikowane pliki APK używają innego instalatora</string>
     <string name="installer_shizuku_description">Instaluje w tle za pomocą Shizuku lub Sui</string>
     <string name="installer_shizuku_play_store_description">Instaluje w tle przez Shizuku lub Sui i ustawia Sklep Play jako źródło instalacji</string>
     <string name="installer_option_none">Brak instalatora zapasowego</string>
@@ -1030,7 +1042,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="installer_status_shizuku_not_installed">Zainstaluj Shizuku lub Sui, aby użyć tej opcji</string>
     <string name="installer_status_shizuku_not_running">Uruchom Shizuku lub Sui i spróbuj ponownie</string>
     <string name="installer_status_shizuku_permission">Przyznaj uprawnienia dla Morphe w aplikacji Shizuku</string>
-    <string name="installer_mount_warning_install">Główny instalator został ustawiony na instalator z montowaniem. Ta zapisana aplikacja nie została zainstalowana przy użyciu montowania</string>
+    <string name="installer_mount_warning_install">Tryb modyfikacji jest ustawiony na montowanie z rootem. Ta zapisana aplikacja nie została zainstalowana przy użyciu montowania</string>
     <string name="mount_version_mismatch_message">Wersja oryginalnej aplikacji (%2$s) nie jest zgodna z wersją zmodyfikowanej aplikacji (%1$s). Zamontuj zgodną wersję oryginalną, a następnie spróbuj ponownie</string>
     <string name="mount_stock_restore_failed_message">Android odrzucił zapisany, oryginalny plik APK. Zainstaluj odpowiednią, oryginalną wersję, a następnie spróbuj zamontować ponownie</string>
     <string name="installer_status_shizuku_unsupported">Zainstalowana wersja Shizuku nie jest obsługiwana</string>
@@ -1052,11 +1064,17 @@ Wymagane są następujące wymiary obrazów:
     <string name="installer_play_store_warning_continue">Rozumiem, kontynuuj</string>
     <string name="installer_play_store_mode">Instaluj jako Sklep Play</string>
     <string name="installer_play_store_mode_description">Oznacza Sklep Play jako źródło instalacji</string>
+    <string name="settings_section_patch_mode">Tryb modyfikacji</string>
+    <string name="settings_patch_mode_ask">Pytaj za każdym razem</string>
+    <string name="settings_patch_mode_ask_description">Pyta przed zmodyfikowaniem każdej aplikacji, czy przygotować ją pod montowanie z rootem, czy pod standardową instalację</string>
+    <string name="settings_section_after_patching">Po zmodyfikowaniu</string>
+    <string name="settings_after_patching_install">Zainstaluj automatycznie</string>
+    <string name="settings_after_patching_ask">Pytaj o instalator</string>
+    <string name="settings_after_patching_ask_description">Pyta, którego instalatora użyć za każdym razem, gdy instalowana jest aplikacja</string>
+    <string name="settings_after_patching_manual">Zainstaluj ręcznie</string>
+    <string name="settings_after_patching_manual_description">Instaluje za pomocą domyślnego instalatora po dotknięciu przycisku Zainstaluj</string>
     <string name="settings_nomount_only">Tylko NoMount</string>
     <string name="settings_nomount_only_description">Montuje aplikacje wyłącznie przez NoMount i nigdy nie przełącza się awaryjnie na montowanie wiązane, więc bez niego pozostaną niezamontowane</string>
-    <string name="settings_prompt_installer_on_install">Monit o wybór instalatora</string>
-    <string name="settings_prompt_installer_on_install_description">Pyta o sposób instalacji każdej aplikacji: z dostępem root przed modyfikowaniem, w pozostałych przypadkach po nim</string>
-    <string name="settings_auto_install_with_shizuku">Autoinstalacja po modyfikacji</string>
     <string name="settings_auto_install_with_shizuku_description">Instaluje lub montuje zmodyfikowany plik APK od razu po zakończeniu modyfikowania</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatyczne usuwanie przy konflikcie</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Odinstalowuje istniejącą aplikację w przypadku konfliktu podpisów. Może to usunąć dane aplikacji</string>

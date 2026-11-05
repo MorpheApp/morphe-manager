@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Sakrij ovu aplikaciju?</string>
     <string name="home_more_apps_title">Više aplikacija</string>
     <string name="home_more_apps_hide_title">Sakrij ovu karticu?</string>
-    <string name="home_more_apps_hide_message">Možete je vratiti u bilo kojem trenutku u Postavke &gt; Izgled &gt; Početni ekran</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Možete ga vratiti u bilo kojem trenutku u %1$s</string>
     <string name="home_app_hide_message">Ova aplikacija će biti skrivena sa početnog ekrana. Možete je kasnije vratiti iz skrivenih aplikacija koristeći dugme na dnu liste</string>
     <string name="home_app_will_be_hidden">Ova aplikacija će biti skrivena</string>
     <string name="home_app_hidden_named">%s skriveno</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Povjerljiv ključ</string>
     <string name="sources_signing_key_new">Novi ključ</string>
     <string name="sources_patch_expert_badge">Ekspert</string>
-    <string name="sources_patch_expert_badge_tooltip">Omogućite Ekspert način u Postavkama kako biste ručno uključili ovu zakrpu</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Uključite %1$s da biste ručno uključili ovaj zakrpu</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Trebate li pomoć pri pronalaženju APK-a?</string>
     <string name="home_apk_availability_dialog_simple">Da biste zakrpili &lt;b&gt;%s&lt;/b&gt;, potrebna vam je nezakrpljena APK verzija:</string>
@@ -529,6 +531,7 @@ Za najbolje rezultate, ova aplikacija preporučuje patchovanje &lt;b&gt;punog AP
     <string name="home_app_info_install_type_custom_installer">Prilagođeni instalater</string>
     <string name="home_app_info_install_type_system_installer">Sistemski instalater</string>
     <string name="home_app_info_install_type_play_store">Instalacija putem Play Store-a</string>
+    <string name="home_app_info_install_type_root">Root instalacija</string>
     <string name="home_app_info_install_type_root_play_store">Root Play Store instalacija</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Store instalacija</string>
     <string name="home_app_info_patch_update_available">Dostupno ažuriranje zakrpe</string>
@@ -570,7 +573,8 @@ Za najbolje rezultate, ova aplikacija preporučuje patchovanje &lt;b&gt;punog AP
     <string name="root_mount_module_unmount_warning">Ako je u KernelSU-u uključena opcija \"Unmount modules by default\", otvorite KernelSU &gt; Superuser &gt; aplikaciju koju ste montirali &gt; Profile &gt; Custom i isključite \"Unmount modules\". U suprotnom, montirani zakrpljeni APK možda neće imati efekta, čak i ako Morphe pokazuje da je montiran</string>
     <string name="root_pre_patch_installer_standard_title">Standardni način instalacije</string>
     <string name="root_pre_patch_installer_standard_description">Zakrpljuje kao normalni APK sa podrškom za GmsCore. Vaša postavka instalatera se koristi nakon zakrpljivanja</string>
-    <string name="root_pre_patch_installer_hint">Traži se dok su Postavke &gt; Patching &gt; Instalacija &gt; Prompt za odabir instalatera uključeni. Režim patchinga se ne može promijeniti nakon patchinga</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Zatraženo dok je %1$s postavljeno na %2$s. Način zakrpljivanja se ne može promijeniti nakon zakrpljivanja</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Greška je kopirana u međupamćen</string>
     <string name="patcher_error_log">Dnevnik grešaka</string>
@@ -669,6 +673,14 @@ Deinstalacija će trajno izbrisati sve podatke aplikacije"</string>
     <string name="patcher_step_group_saving">Spremanje</string>
     <string name="patcher_step_write_patched">Zapisivanje zakrpljene APK datoteke</string>
     <string name="patcher_step_sign_apk">Potpisivanje zakrpljene APK datoteke</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Čitanje DEX datoteka</string>
+    <string name="patcher_task_extracting_resources">Ekstrahovanje resursa</string>
+    <string name="patcher_task_decoding_resources">Dekodiranje resursa</string>
+    <string name="patcher_task_indexing_classes">Indeksiranje klasa</string>
+    <string name="patcher_task_compiling_dex">Kompajliranje DEX datoteka</string>
+    <string name="patcher_task_compiling_resources">Kompajliranje resursa</string>
+    <string name="patcher_task_writing_apk">Pisanje APK datoteke</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Zaštita zakrpljivanja u pozadini</string>
     <string name="battery_optimization_dialog_description">Neki uređaji mogu zaustaviti zakrpljivač kada je aplikacija minimizirana. Dozvolite Morphe-u da radi bez ograničenja baterije kako biste osigurali pouzdano završavanje zakrpljivanja</string>
@@ -717,7 +729,8 @@ Deinstalacija će trajno izbrisati sve podatke aplikacije"</string>
     <string name="patched_app_save_failed_toast">Neuspjelo spremanje zakrpljene aplikacije</string>
     <string name="plugin_activity_dialog_body">Potrebna je interakcija korisnika kako bi se nastavilo sa ovim dodatakom</string>
     <string name="patcher_process_killed_message">Sistem je zaustavio patcher prije nego što je završio, obično kako bi oslobodio memoriju. Zatvorite ostale aplikacije i pokušajte ponovo</string>
-    <string name="patcher_process_crashed_message">Patcher je zaključan prije nego što je završio. Ako se to ponovi, isključite \"Koristi ugrađenu VM\" u postavkama i prijavite problem uz log</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Program za zakrpljivanje je srušio prije završetka. Ako se to ponovi, isključite %1$s i prijavite problem uz dnevnik</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Patcheru je ponestalo memorije sa heap-om od %1$s MB. Ova aplikacija je prevelika za odabrane patch-ove. Pokušajte patch-ovati sa manje izvora patch-ova ili odaberite manje patch-ova</string>
     <string name="install_app_success">Uspješno instalirano</string>
@@ -1017,9 +1030,8 @@ Dimenzije slika moraju biti sljedeće:
     <string name="installer_title">Odaberite instalater</string>
     <string name="installer_internal_description">Koristi Android instalater paketa</string>
     <string name="installer_play_store_description">Koristi sistemski instalater i postavlja Google Play Store kao izvor instalacije</string>
+    <string name="installer_root_description">Instalira tiho pomoću root-a</string>
     <string name="installer_root_play_store_description">Instalira tiho putem root-a i postavlja Google Play Store kao izvor instalacije</string>
-    <string name="installer_auto_saved_name">Root mount</string>
-    <string name="installer_auto_saved_description">Montira aplikacije koje su zakrpljene u root mount režimu. Standardni zakrpljeni APK-ovi koriste drugi instalater</string>
     <string name="installer_shizuku_description">Instalira tiho koristeći Shizuku ili Sui</string>
     <string name="installer_shizuku_play_store_description">Instalira tiho putem Shizuku-a ili Sui-ja i postavlja Google Play Store kao izvor instalacije</string>
     <string name="installer_option_none">Bez rezervne opcije</string>
@@ -1029,7 +1041,7 @@ Dimenzije slika moraju biti sljedeće:
     <string name="installer_status_shizuku_not_installed">Instalirajte Shizuku ili Sui da biste koristili ovu opciju</string>
     <string name="installer_status_shizuku_not_running">Pokrenite Shizuku ili Sui i pokušajte ponovo</string>
     <string name="installer_status_shizuku_permission">Dodijeli dozvolu aplikaciji Morphe iz Shizuku aplikacije</string>
-    <string name="installer_mount_warning_install">Vaš primarni instalater je postavljen na rooted mount instalater. Ova sačuvana aplikacija nije instalirana pomoću mount opcije</string>
+    <string name="installer_mount_warning_install">Režim patchovanja je postavljen na root mount. Ova spremljena aplikacija nije instalirana pomoću mount-a</string>
     <string name="mount_version_mismatch_message">Verzija originalne aplikacije (%2$s) se ne podudara sa verzijom zakrpljene aplikacije (%1$s). Montirajte odgovarajuću originalnu verziju, a zatim pokušajte ponovo</string>
     <string name="mount_stock_restore_failed_message">Android je odbio sačuvani originalni APK. Instalirajte odgovarajuću stock verziju, zatim ponovo pokušajte Mount</string>
     <string name="installer_status_shizuku_unsupported">Instalirana verzija Shizuku-a nije podržana</string>
@@ -1051,11 +1063,17 @@ Dimenzije slika moraju biti sljedeće:
     <string name="installer_play_store_warning_continue">Razumijem, nastavi</string>
     <string name="installer_play_store_mode">Instaliraj kao Play Store</string>
     <string name="installer_play_store_mode_description">Označava Google Play Store kao izvor instalacije</string>
+    <string name="settings_section_patch_mode">Režim patchovanja</string>
+    <string name="settings_patch_mode_ask">Pitaj svaki put</string>
+    <string name="settings_patch_mode_ask_description">Prije patchovanja svake aplikacije pita da li je patchovati za root mount ili standardnu instalaciju</string>
+    <string name="settings_section_after_patching">Nakon patchovanja</string>
+    <string name="settings_after_patching_install">Instaliraj automatski</string>
+    <string name="settings_after_patching_ask">Pitaj koji instalater</string>
+    <string name="settings_after_patching_ask_description">Svaki put kada se aplikacija instalira pita koji instalater koristiti</string>
+    <string name="settings_after_patching_manual">Instaliraj ručno</string>
+    <string name="settings_after_patching_manual_description">Instalira pomoću podrazumijevanog instalera nakon što dodirnete Instaliraj</string>
     <string name="settings_nomount_only">Samo NoMount</string>
     <string name="settings_nomount_only_description">Montira aplikacije samo pomoću NoMount i nikada ne prelazi na bind mount, tako da ostaju nemontirane bez njega</string>
-    <string name="settings_prompt_installer_on_install">Zahtjev za odabirom instalatera</string>
-    <string name="settings_prompt_installer_on_install_description">Traži kako instalirati svaku aplikaciju: sa root-om prije patchinga, inače nakon njega</string>
-    <string name="settings_auto_install_with_shizuku">Auto-instalacija nakon zakrpljivanja</string>
     <string name="settings_auto_install_with_shizuku_description">Instalira ili montira patchani APK čim se patching završi</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatsko deinstaliranje pri konfliktu</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Deinstalira postojeću aplikaciju u slučaju konflikta potpisa. Ovo može ukloniti podatke aplikacije</string>

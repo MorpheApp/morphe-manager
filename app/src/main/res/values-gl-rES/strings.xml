@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Ocultar esta aplicación?</string>
     <string name="home_more_apps_title">Máis aplicacións</string>
     <string name="home_more_apps_hide_title">Ocultar esta tarxeta?</string>
-    <string name="home_more_apps_hide_message">Podes recuperalo en calquera momento en Ajustes &gt; Apariencia &gt; Pantalla de inicio</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Podes recuperalo en calquera momento en %1$s</string>
     <string name="home_app_hide_message">Esta aplicación ocultarse na pantalla de inicio. Podes cambialo máis tarde dende aplicacións escondidas utilizando o botón ao final da lista.</string>
     <string name="home_app_will_be_hidden">Ocultarase esta aplicación</string>
     <string name="home_app_hidden_named">%s oculta</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Clave de confianza</string>
     <string name="sources_signing_key_new">Nova clave</string>
     <string name="sources_patch_expert_badge">Experto</string>
-    <string name="sources_patch_expert_badge_tooltip">Activar o modo Experto en Configuración para incluír o parche manualmente</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Activa %1$s para incluír este parche manualmente</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Necesitas axuda para atopar o APK?</string>
     <string name="home_apk_availability_dialog_simple">Para parchear &lt;b&gt;%s&lt;/b&gt; necesitas a versión non parcheada da APK:</string>
@@ -530,6 +532,7 @@ Elixe outro APK</string>
     <string name="home_app_info_install_type_custom_installer">Instalador personalizado</string>
     <string name="home_app_info_install_type_system_installer">Instalador do sistema</string>
     <string name="home_app_info_install_type_play_store">Instalación de Play Store</string>
+    <string name="home_app_info_install_type_root">Instalación root</string>
     <string name="home_app_info_install_type_root_play_store">Instalación de Play Store con Root</string>
     <string name="home_app_info_install_type_shizuku_play_store">Instalación de Play Store con Shizuku</string>
     <string name="home_app_info_patch_update_available">Actualización de parche dispoñible</string>
@@ -571,7 +574,8 @@ Elixe outro APK</string>
     <string name="root_mount_module_unmount_warning">Se KernelSU ten activada a opción \"Desmontar módulos por defecto\", abre KernelSU &gt; Superusuario &gt; a aplicación que montaste &gt; Perfil &gt; Personalizado e desactiva \"Desmontar módulos\". De contrario, é posible que o APK parcheado e montado non surta efecto, aínda que Morphe o mostre como montado</string>
     <string name="root_pre_patch_installer_standard_title">Modo de instalación estándar</string>
     <string name="root_pre_patch_installer_standard_description">Parchea como un APK normal con soporte para GmsCore. O teu axuste do instalador úsase despois do parcheo</string>
-    <string name="root_pre_patch_installer_hint">Pregúntase cando Ajustes &gt; Patching &gt; Instalación &gt; Solicitude de selección do instalador está activo. O modo de patch non pode cambiarse despois do patching</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Preguntouse mentres %1$s estaba configurado en %2$s. O modo de parcheo non pode cambiarse despois do parcheo</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Error copiado ao portapapeis</string>
     <string name="patcher_error_log">Rexistro de erros</string>
@@ -670,6 +674,14 @@ A desinstalación borrará permanentemente todos os datos da aplicación"</strin
     <string name="patcher_step_group_saving">Gardando</string>
     <string name="patcher_step_write_patched">Escribindo o ficheiro APK parcheado</string>
     <string name="patcher_step_sign_apk">Asinando o ficheiro APK parcheado</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Lendo ficheiros DEX</string>
+    <string name="patcher_task_extracting_resources">Extraendo recursos</string>
+    <string name="patcher_task_decoding_resources">Decodificando recursos</string>
+    <string name="patcher_task_indexing_classes">Indexando clases</string>
+    <string name="patcher_task_compiling_dex">Compilando ficheiros DEX</string>
+    <string name="patcher_task_compiling_resources">Compilando recursos</string>
+    <string name="patcher_task_writing_apk">Escribindo o ficheiro APK</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Protección do parcheo en segundo plano</string>
     <string name="battery_optimization_dialog_description">Alguns dispositivos poden detener o parcheador cando a aplicación está minimizada. Permita que Morphe se execute sen restricións de batería para garantir que o parcheo se complete de forma fiable</string>
@@ -718,7 +730,8 @@ A desinstalación borrará permanentemente todos os datos da aplicación"</strin
     <string name="patched_app_save_failed_toast">Non se puido gardar a aplicación parcheada</string>
     <string name="plugin_activity_dialog_body">É necesaria a interacción do usuario para continuar con este complemento</string>
     <string name="patcher_process_killed_message">O sistema detivo o patcher antes de rematar, normalmente para liberar memoria. Pecha outras aplicacións e tenta de novo</string>
-    <string name="patcher_process_crashed_message">O patcher fallou antes de rematar. Se volve suceder, desactiva \"Usar VM integrada\" nos axustes e informa do problema co log</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">O parcheador crashou antes de rematar. Se volve suceder, desactiva %1$s e informa do problema co rexistro</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">O patcher quedou sen memoria cun heap de %1$s MB. Esta aplicación é demasiado grande para os patches seleccionados. Tenta facer o patch con menos orixes de patches, ou selecciona menos patches</string>
     <string name="install_app_success">Instalado con éxito</string>
@@ -1018,9 +1031,8 @@ As dimensións da imaxe deben ser as seguintes:
     <string name="installer_title">Selecciona o instalador</string>
     <string name="installer_internal_description">Usa o instalador de paquetes de Android</string>
     <string name="installer_play_store_description">Usa o instalador do sistema e establece Google Play Store como a fonte de instalación</string>
+    <string name="installer_root_description">Instálase silenciosamente con root</string>
     <string name="installer_root_play_store_description">Instala silenciosamente con root e establece Google Play Store como a fonte de instalación</string>
-    <string name="installer_auto_saved_name">Montaxe root</string>
-    <string name="installer_auto_saved_description">Monta aplicacións que foron parcheadas no modo de montaxe root. Os APKs parcheados estándar usan outro instalador</string>
     <string name="installer_shizuku_description">Instala silenciosamente usando Shizuku ou Sui</string>
     <string name="installer_shizuku_play_store_description">Instálase silenciosamente a través de Shizuku ou Sui e establece Google Play Store como a fonte de instalación</string>
     <string name="installer_option_none">Sen alternativa</string>
@@ -1030,7 +1042,7 @@ As dimensións da imaxe deben ser as seguintes:
     <string name="installer_status_shizuku_not_installed">Instala Shizuku ou Sui para usar esta opción</string>
     <string name="installer_status_shizuku_not_running">Inicia Shizuku ou Sui e tenta de novo</string>
     <string name="installer_status_shizuku_permission">Concede permiso a Morphe desde a aplicación Shizuku</string>
-    <string name="installer_mount_warning_install">O teu instalador principal está configurado como o instalador de montaxe rooted. Esta aplicación gardada non foi instalada usando montaxe</string>
+    <string name="installer_mount_warning_install">O modo de parcheo está configurado en montaxe root. Esta aplicación gardada non se instalou mediante montaxe</string>
     <string name="mount_version_mismatch_message">A versión da aplicación orixinal (%2$s) non coincide coa versión da aplicación parcheada (%1$s). Monta a versión orixinal correspondente e tenta de novo</string>
     <string name="mount_stock_restore_failed_message">Android rexeitou o APK orixinal gardado. Instala a versión de fábrica correspondente e intenta montar de novo</string>
     <string name="installer_status_shizuku_unsupported">A versión de Shizuku instalada non é compatibles</string>
@@ -1052,11 +1064,17 @@ As dimensións da imaxe deben ser as seguintes:
     <string name="installer_play_store_warning_continue">Comprendo, continuar</string>
     <string name="installer_play_store_mode">Instalar como Play Store</string>
     <string name="installer_play_store_mode_description">Marca a Google Play Store como a fonte de instalación</string>
+    <string name="settings_section_patch_mode">Modo de parcheo</string>
+    <string name="settings_patch_mode_ask">Preguntar cada vez</string>
+    <string name="settings_patch_mode_ask_description">Pregunta antes de parchear cada aplicación se desexa parcheala para montaxe root ou unha instalación estándar</string>
+    <string name="settings_section_after_patching">Despois do parcheo</string>
+    <string name="settings_after_patching_install">Instalar automaticamente</string>
+    <string name="settings_after_patching_ask">Preguntar que instalador</string>
+    <string name="settings_after_patching_ask_description">Pregunta que instalador usar cada vez que se instala unha aplicación</string>
+    <string name="settings_after_patching_manual">Instalar manualmente</string>
+    <string name="settings_after_patching_manual_description">Instálase co instalador predefinido unha vez que toques en Instalar</string>
     <string name="settings_nomount_only">Só NoMount</string>
     <string name="settings_nomount_only_description">Monta aplicacións nur con NoMount e nunca recurre a un bind mount, polo que permanecen desmontadas sen el</string>
-    <string name="settings_prompt_installer_on_install">Solicitude de selección do instalador</string>
-    <string name="settings_prompt_installer_on_install_description">Pregunta como instalar cada aplicación: con root antes do patching, ou despois se non</string>
-    <string name="settings_auto_install_with_shizuku">Auto-instalar despois do parcheo</string>
     <string name="settings_auto_install_with_shizuku_description">Instala ou monta o APK parcheado así que remate o parcheo</string>
     <string name="settings_auto_uninstall_with_shizuku">Desinstalar automaticamente en caso de conflito</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Desinstala a aplicación existente nun conflito de sinatura. Isto pode eliminar os datos da aplicación</string>

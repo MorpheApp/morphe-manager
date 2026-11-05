@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">An bhfuil tú ag iarraidh an aip seo a cheilt?</string>
     <string name="home_more_apps_title">Tuilleadh aipeanna</string>
     <string name="home_more_apps_hide_title">Folaigh an cárta seo?</string>
-    <string name="home_more_apps_hide_message">Is féidir leat é a thabhairt ar ais anum túil i Socruithe &gt; Cumhrú &gt; Scáileán baile</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Is féidir leat é a thabhairt ar ais anumála in %1$s</string>
     <string name="home_app_hide_message">Beidh an aip seo i bhfolach ón scáileán baile. Is féidir leat é a chur ar ais níos déanaí ó na apps i bhfolach ag baint úsáide as an gcnaipe ag bun an liosta</string>
     <string name="home_app_will_be_hidden">Beidh an aip seo i bhfolach</string>
     <string name="home_app_hidden_named">%s i bhfolach</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Eochair iontaofa</string>
     <string name="sources_signing_key_new">Eochair nua</string>
     <string name="sources_patch_expert_badge">Saineolaí</string>
-    <string name="sources_patch_expert_badge_tooltip">Cumasaigh mód saineolaithe sna Socruithe chun an paiste seo a chur san áireamh de láimh</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Cuir %1$s ar on chun an paiste seo a chur san áireamh de láimh</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">An bhfuil cabhair uait chun an APK a aimsiú?</string>
     <string name="home_apk_availability_dialog_simple">Chun &lt;b&gt;%s&lt;/b&gt;, a phaisteáil, beidh an leagan APK neamhphaisteáilte ag teastáil uait:</string>
@@ -284,7 +286,7 @@
     <string name="home_download_instructions_finding">Ag aimsiú an leathanaigh íoslódála…</string>
     <string name="home_download_instructions_step1">Brúigh an cnaipe \'%s\' thíos</string>
     <string name="home_download_instructions_step2_part1">Scrollaigh síos an leathanach gréasáin agus brúigh</string>
-    <string name="home_download_instructions_step2_apkcube">Scoláil síos an leathanach gréasáin, roghnaigh leagan &lt;b&gt;%s&lt;/b&gt; agus brúigh</string>
+    <string name="home_download_instructions_step2_apkcube">Scrollaigh síos an leathanach gréasáin, roghnaigh an leagan &lt;b&gt;%s&lt;/b&gt; agus brúigh</string>
     <string name="home_download_instructions_step2_generic">Scrollaigh síos an leathanach gréasáin agus brúigh a chnaipe íoslódála</string>
     <string name="home_download_instructions_step2_variant">Scrollaigh síos an leathanach gréasáin agus brúigh an cnaipe íoslódála don &lt;b&gt;leagan APK&lt;/b&gt; is fearr</string>
     <string name="home_download_instructions_step2_search">Oscail toradh cuardaigh ó shuíomh gréasáin a bhfuil muinín agat as</string>
@@ -529,6 +531,7 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="home_app_info_install_type_custom_installer">Suiteálaí saincheaptha</string>
     <string name="home_app_info_install_type_system_installer">Suiteálaí córais</string>
     <string name="home_app_info_install_type_play_store">Suiteáil ón Play Store</string>
+    <string name="home_app_info_install_type_root">Suiteáil fréamhaithe</string>
     <string name="home_app_info_install_type_root_play_store">Suiteáil ón Play Store le fréamh</string>
     <string name="home_app_info_install_type_shizuku_play_store">Suiteáil ón Play Store le Shizuku</string>
     <string name="home_app_info_patch_update_available">Nuashonrú paiste ar fáil</string>
@@ -570,7 +573,8 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="root_mount_module_unmount_warning">Má tá \"Díshuiteáil modúil de réir réamhshocraithe\" cumasaithe ag KernelSU, oscail KernelSU &gt; Úsáideoir Síochána &gt; an aip a shuiteáil tú &gt; Profil &gt; Saincheaptha agus díchumasaigh \"Díshuiteáil modúil\". Seachas sin, ní bheidh éifeacht ag an APK paiste suite, fiú má thaispeánann Morphe é mar shuiteáilte</string>
     <string name="root_pre_patch_installer_standard_title">Mód suiteála caighdeánach</string>
     <string name="root_pre_patch_installer_standard_description">Paistí mar APK gnáth le tacaíocht GmsCore. Úsáidtear do shocrú suiteálaí tar éis na paistí.</string>
-    <string name="root_pre_patch_installer_hint">Iarradh fót ag Settings &gt; Patching &gt; Installation &gt; Installer selection prompt. Ní féidir an mód paiste a athrú tar éis paiste</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Iarradh while %1$s socraithe go %2$s. Ní féidir an mód paiste a athrú tar éis paisteála</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Earráid cóipeáilte chuig gearrthaisce</string>
     <string name="patcher_error_log">Log earráide</string>
@@ -669,6 +673,14 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="patcher_step_group_saving">Sábháil</string>
     <string name="patcher_step_write_patched">Ag scríobh comhaid APK paistithe</string>
     <string name="patcher_step_sign_apk">Comhad APK paisteáilte á shíniú</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Comhaid DEX á léamh</string>
+    <string name="patcher_task_extracting_resources">Acmhainní a bhaint amach</string>
+    <string name="patcher_task_decoding_resources">Acmhainní díchódaithe</string>
+    <string name="patcher_task_indexing_classes">Ranganna innéacsaithe</string>
+    <string name="patcher_task_compiling_dex">Comhaid DEX a thiomsú</string>
+    <string name="patcher_task_compiling_resources">Acmhainní a thiomsú</string>
+    <string name="patcher_task_writing_apk">Ag scríobh comhaid APK</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Cosaint paisteála cúlra</string>
     <string name="battery_optimization_dialog_description">D\'fhéadfadh roinnt feistí an paiste a stopadh nuair a íoslaghdaítear an aip. Lig do Morphe rith gan srianta ceallraí chun a chinntiú go gcríochnaítear an paiste go hiontaofa</string>
@@ -717,7 +729,8 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="patched_app_save_failed_toast">Theip ar aip chomhfhiosach a shábháil</string>
     <string name="plugin_activity_dialog_body">Tá idirghníomhaíocht úsáideora ag teastáil chun dul ar aghaidh leis an mbreiseán seo</string>
     <string name="patcher_process_killed_message">Chuir an córas stop leis an gclár paisteála sular chríochnaigh sé, de ghnáth chun cuimhne a shaoradh. Dún aipeanna eile agus bain triail as arís.</string>
-    <string name="patcher_process_crashed_message">Thit an clár paisteála as a chéile sular chríochnaigh sé. Má tharlaíonn sé arís, díchumasaigh an rogha \"Use embedded VM\" sna socruithe agus tuairiscigh an fhadhb, ag cur an logchomhaid san áireamh.</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Thit an clár paisteála as a chéile sular chríochnaigh sé. Má tharlaíonn sé arís, díchumasaigh %1$s agus tuairiscigh an fhadhb leis an log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Bhí an paisteálaí as cuimhne le carn %1$s MB. Tá an aip seo ró-mhór do na paistí roghnaithe. Bain triail as paisteáil le níos lú foinsí paiste, nó roghnaigh níos lú paistí</string>
     <string name="install_app_success">Suiteáilte go rathúil</string>
@@ -905,8 +918,8 @@ Níl tionchar ar phaistí: cumasaigh paistí réamh-eisiúna do gach foinse sa l
     <string name="notification_channel_patch_updates">Nuashonruithe paiste</string>
     <string name="notification_channel_patch_updates_description">Fógraí faoi eisiúintí nua paiste</string>
     <string name="notification_channel_patcher_description">Taispeántar é agus Morphe ag paisteáil aip sa chúlra</string>
-    <string name="notification_channel_patching_results">Torthaí paiste</string>
-    <string name="notification_channel_patching_results_description">Nuair a chríochnaíonn an paistíú nó nuair a bhíonn suiteáil ag fanacht ort agus Morphe sa chúlra</string>
+    <string name="notification_channel_patching_results">Torthaí paisteála</string>
+    <string name="notification_channel_patching_results_description">Nuair a chríochnaíonn an paisteáil, nó nuair a bhíonn suiteáil ag fanacht leat fad is atá Morphe ag rith sa chúlra</string>
     <string name="notification_channel_mounted_apps">Aipeanna feistithe</string>
     <string name="notification_channel_mounted_apps_description">Nuair a tháinig leagan eile in ionad aip atá gléasta agus nach bhfuil a paiste i bhfeidhm a thuilleadh</string>
     <string name="notification_mount_replaced_title">Níl %1$s paisteáilte a thuilleadh</string>
@@ -1015,9 +1028,8 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="installer_title">Roghnaigh suiteálaí</string>
     <string name="installer_internal_description">Úsáideann sé suiteálaí an phacáiste Android</string>
     <string name="installer_play_store_description">Úsáideann sé suiteálaí an chórais agus socraíonn sé Google Play Store mar fhoinse suiteála</string>
+    <string name="installer_root_description">Suiteálann go tostach le fréamhaithe</string>
     <string name="installer_root_play_store_description">Suiteáil sé go ciúin le fréamh agus socraíonn sé Google Play Store mar an fhoinse suiteála</string>
-    <string name="installer_auto_saved_name">Gléasadh fréimhe</string>
-    <string name="installer_auto_saved_description">Suiteálann sé aipeanna a ndearnadh paistí orthu i mód fréimhe suite. Úsáideann APKanna paiste caighdeánacha suiteálaí eile</string>
     <string name="installer_shizuku_description">Suiteáiltear go ciúin ag baint úsáide as Shizuku nó Sui</string>
     <string name="installer_shizuku_play_store_description">Suiteáil sé go ciúin trí Shizuku nó Sui agus socraíonn sé Google Play Store mar fhoinse suiteála</string>
     <string name="installer_option_none">Gan aon chúltaca</string>
@@ -1027,7 +1039,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="installer_status_shizuku_not_installed">Suiteáil Shizuku nó Sui chun an rogha seo a úsáid</string>
     <string name="installer_status_shizuku_not_running">Tosaigh Shizuku nó Sui agus déan iarracht arís</string>
     <string name="installer_status_shizuku_permission">Tabhair cead do Morphe ón aip Shizuku</string>
-    <string name="installer_mount_warning_install">Tá do phríomhshuiteálaí socraithe chuig an suiteálaí gléasta fréamhaithe. Níor suiteáladh an aip shábháilte seo ag baint úsáide as gléas gléasta</string>
+    <string name="installer_mount_warning_install">Tá mód paiste socraithe go gléas fréamhaithe. Níor suiteáladh an aip shábháilte seo ag baint úsáide as gléas gléasta</string>
     <string name="mount_version_mismatch_message">Ní hionann leagan stoic an aip (%2$s) agus an leagan paisteáilte den aip (%1$s). Suiteáil an leagan stoic comhoiriúnach, agus déan iarracht arís</string>
     <string name="mount_stock_restore_failed_message">Dhiúltaigh Android don APK bunaidh sábháilte. Suiteáil an leagan stoic comhoiriúnach, ansin déan iarracht an Suiteáil arís.</string>
     <string name="installer_status_shizuku_unsupported">Ní thacaítear leis an leagan Shizuku atá suiteáilte</string>
@@ -1049,11 +1061,17 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="installer_play_store_warning_continue">Tuigim, lean ar aghaidh</string>
     <string name="installer_play_store_mode">Suiteáil mar Play Store</string>
     <string name="installer_play_store_mode_description">Marcáileann sé Google Play Store mar an fhoinse suiteála</string>
+    <string name="settings_section_patch_mode">Mód paiste</string>
+    <string name="settings_patch_mode_ask">Iarr an t-uair i gach uair</string>
+    <string name="settings_patch_mode_ask_description">Iarrann sé roimh gach aip a phaisteáil an bhfuil sé le paisteáil don gléas fréamhaithe nó do shuiteáil chaighdeánach</string>
+    <string name="settings_section_after_patching">Tar éis paisteála</string>
+    <string name="settings_after_patching_install">Suiteáil go huathoibríoch</string>
+    <string name="settings_after_patching_ask">Iarr cén suiteálaí</string>
+    <string name="settings_after_patching_ask_description">Iarrtar cén suiteálaí a úsáid gach uair a suiteáiltear aip</string>
+    <string name="settings_after_patching_manual">Suiteáil de láimh</string>
+    <string name="settings_after_patching_manual_description">Suiteálann leis an suiteálaí bunreacha nuair a bhreiseann tú Suiteáil</string>
     <string name="settings_nomount_only">NoMount amháin</string>
     <string name="settings_nomount_only_description">Cuirann sé apps i bhfeidhm le NoMount amháin agus ní thiteann sé riamh ar bind mount, ionas go fanann siad gan a bheith mountáil gan é</string>
-    <string name="settings_prompt_installer_on_install">Leid roghnúcháin suiteálaí</string>
-    <string name="settings_prompt_installer_on_install_description">Iarra conas gach app a shuiteáil: le root roimh phatching, mar eile tar éis dó</string>
-    <string name="settings_auto_install_with_shizuku">Suiteáil uathoibríoch tar éis paisteála</string>
     <string name="settings_auto_install_with_shizuku_description">Suiteálann nó gléasann sé an APK paisteáilte a luaithe a bhíonn an paisteáil críochnaithe</string>
     <string name="settings_auto_uninstall_with_shizuku">Díshuiteáil uathoibríoch i gcás coimhlinte</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Díshuiteálann sé an aip atá ann cheana má bhíonn coinbhleacht sínithe ann. D’fhéadfadh sé seo sonraí na haipe a scriosadh.</string>

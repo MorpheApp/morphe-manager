@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">要隱藏這個應用程式嗎？</string>
     <string name="home_more_apps_title">更多應用程式</string>
     <string name="home_more_apps_hide_title">要隱藏此卡片嗎？</string>
-    <string name="home_more_apps_hide_message">你可以隨時在「設定 &gt; 外觀 &gt; 主螢幕」中將其恢復</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">您可以隨時在 %1$s 中將其恢復</string>
     <string name="home_app_hide_message">此應用程式將從主螢幕隱藏。您之後可以在 [隱藏的應用程式] 中，使用清單底部的按鈕將其還原</string>
     <string name="home_app_will_be_hidden">此應用程式將會隱藏</string>
     <string name="home_app_hidden_named">%s已隱藏</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">已信任金鑰</string>
     <string name="sources_signing_key_new">新金鑰</string>
     <string name="sources_patch_expert_badge">專家</string>
-    <string name="sources_patch_expert_badge_tooltip">在 [設定] 啟用專家模式，以手動納入此修補程式</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">開啟 %1$s 以手動納入此修補程式</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">需要幫助尋找 APK 嗎？</string>
     <string name="home_apk_availability_dialog_simple">若要修補 &lt;b&gt;%s&lt;/b&gt;，您需要這個版本的未修補 APK:</string>
@@ -284,7 +286,7 @@
     <string name="home_download_instructions_finding">正在尋找下載頁面…</string>
     <string name="home_download_instructions_step1">請選取下方的「%s」按鈕</string>
     <string name="home_download_instructions_step2_part1">請往下滑動網頁，然後點選</string>
-    <string name="home_download_instructions_step2_apkcube">向下滾動網頁，選擇版本 &lt;b&gt;%s&lt;/b&gt; 並按下</string>
+    <string name="home_download_instructions_step2_apkcube">向下滑動網頁，選擇版本 &lt;b&gt;%s&lt;/b&gt; 並點擊</string>
     <string name="home_download_instructions_step2_generic">請往下滑動網頁，然後點選其下載按鈕</string>
     <string name="home_download_instructions_step2_variant">請往下滑動網頁，然後點選最上方&lt;b&gt;APK 變體&lt;/b&gt;的下載按鈕</string>
     <string name="home_download_instructions_step2_search">從您信任的網站開啟搜尋結果</string>
@@ -529,6 +531,7 @@
     <string name="home_app_info_install_type_custom_installer">自訂安裝程式</string>
     <string name="home_app_info_install_type_system_installer">系統安裝程式</string>
     <string name="home_app_info_install_type_play_store">Play商店安裝</string>
+    <string name="home_app_info_install_type_root">Root 安裝</string>
     <string name="home_app_info_install_type_root_play_store">Root Play商店安裝</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play商店安裝</string>
     <string name="home_app_info_patch_update_available">有可用的修補程式更新</string>
@@ -570,7 +573,8 @@
     <string name="root_mount_module_unmount_warning">若 KernelSU 已開啟「預設卸載模組」功能，請開啟 KernelSU &gt; 超級使用者 &gt; 找到您掛載的應用程式 &gt; 設定檔 &gt; 自訂，並將「卸載模組」關閉。否則，即使 Morphe 顯示已掛載，APK 仍可能無法生效</string>
     <string name="root_pre_patch_installer_standard_title">標準安裝模式</string>
     <string name="root_pre_patch_installer_standard_description">以支援 GmsCore 的一般 APK 形式修補。修補完成後，將使用您的安裝程式設定。</string>
-    <string name="root_pre_patch_installer_hint">在「設定<b>&gt;</b>修補<b>&gt;</b>安裝<b>&gt;</b>選擇安裝程式」提示出現時詢問。修補後無法變更修補模式</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">詢問時 %1$s 已設定為 %2$s。修補後無法更改修補模式</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">已將錯誤複製到剪貼簿</string>
     <string name="patcher_error_log">錯誤記錄檔</string>
@@ -669,6 +673,14 @@
     <string name="patcher_step_group_saving">正在儲存</string>
     <string name="patcher_step_write_patched">寫入已修補的 APK 檔案</string>
     <string name="patcher_step_sign_apk">簽署已修補的 APK 檔案</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">正在讀取 DEX 檔案</string>
+    <string name="patcher_task_extracting_resources">正在提取資源</string>
+    <string name="patcher_task_decoding_resources">正在解碼資源</string>
+    <string name="patcher_task_indexing_classes">正在為類別建立索引</string>
+    <string name="patcher_task_compiling_dex">正在編譯 DEX 檔案</string>
+    <string name="patcher_task_compiling_resources">正在編譯資源</string>
+    <string name="patcher_task_writing_apk">正在寫入 APK 檔案</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">背景修補保護</string>
     <string name="battery_optimization_dialog_description">部份裝置可能在應用程式縮小時停止修補程式。允許 Morphe 在沒有電池限制的情況下執行，以確保修補程式可靠完成。</string>
@@ -717,7 +729,8 @@
     <string name="patched_app_save_failed_toast">無法儲存修補後的應用程式</string>
     <string name="plugin_activity_dialog_body">需要使用者互動才能繼續使用此外掛程式</string>
     <string name="patcher_process_killed_message">系統在還未完成修補時就停止了，通常是為了釋放記憶體。請關閉其他應用程式後再試一次。</string>
-    <string name="patcher_process_crashed_message">修補程式在完成前當機了。如果再次發生，請在設定中關閉「使用內嵌 VM」並附上日誌回報問題</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">修補程式在完成前當機了。如果再次發生，請關閉 %1$s 並附上日誌回報問題</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">偵錯工具記憶體不足，堆疊大小為 %1$s MB。此應用程式相對於選取的修補程式而言過於龐大。請嘗試使用較少的修補來源進行修補，或減少選取的修補程式數量</string>
     <string name="install_app_success">安裝成功</string>
@@ -906,7 +919,7 @@
     <string name="notification_channel_patch_updates_description">關於新修補程式版本的通知</string>
     <string name="notification_channel_patcher_description">在 Morphe 於背景修補應用程式時顯示</string>
     <string name="notification_channel_patching_results">修補結果</string>
-    <string name="notification_channel_patching_results_description">當 Morphe 在背景執行且修補結束，或安裝正等待您操作時</string>
+    <string name="notification_channel_patching_results_description">當 Morphe 在背景執行且修補結束，或正等待您操作安裝時</string>
     <string name="notification_channel_mounted_apps">已掛載的應用程式</string>
     <string name="notification_channel_mounted_apps_description">當另一個版本取代了已安裝的應用程式而且它的修補檔不再適用時</string>
     <string name="notification_mount_replaced_title">不再修補 %1$s</string>
@@ -1017,9 +1030,8 @@ morphe_header_custom_dark.png
     <string name="installer_title">選取安裝程式</string>
     <string name="installer_internal_description">使用 Android 封裝安裝程式</string>
     <string name="installer_play_store_description">使用系統安裝程式並將Google Play商店設定為安裝來源</string>
+    <string name="installer_root_description">使用 Root 靜默安裝</string>
     <string name="installer_root_play_store_description">以根權限靜默安裝，並將 Google Play 商店設定為安裝來源</string>
-    <string name="installer_auto_saved_name">Root 掛載</string>
-    <string name="installer_auto_saved_description">掛載以 Root 掛載模式修補的應用程式。標準修補的 APK 使用另一個安裝程式。</string>
     <string name="installer_shizuku_description">使用 Shizuku 或 Sui 進行靜默安裝</string>
     <string name="installer_shizuku_play_store_description">透過 Shizuku 或 Sui 靜默安裝，並將 Google Play 商店設定為安裝來源</string>
     <string name="installer_option_none">無後備選項</string>
@@ -1029,7 +1041,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">安裝 Shizuku 或 Sui 以使用此選項</string>
     <string name="installer_status_shizuku_not_running">啟動 Shizuku 或 Sui 並重試</string>
     <string name="installer_status_shizuku_permission">請從 Shizuku 應用程式授予 Morphe 權限</string>
-    <string name="installer_mount_warning_install">您的主要安裝程式設為根目錄掛載安裝程式。此儲存的應用程式並非使用掛載安裝</string>
+    <string name="installer_mount_warning_install">修補模式已設定為 Root 掛載。此儲存的應用程式並非使用掛載安裝</string>
     <string name="mount_version_mismatch_message">原廠應用程式版本 (%2$s) 與修補後的應用程式版本 (%1$s) 不符。掛載相符的原廠版本，然後重試</string>
     <string name="mount_stock_restore_failed_message">Android 拒絕了儲存的原始 APK。請安裝相符的原始版本，然後再次嘗試掛載。</string>
     <string name="installer_status_shizuku_unsupported">安裝的 Shizuku 版本不受支援</string>
@@ -1051,11 +1063,17 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_continue">我了解，繼續</string>
     <string name="installer_play_store_mode">安裝為 Play 商店</string>
     <string name="installer_play_store_mode_description">將 Google Play 商店標示為安裝來源</string>
+    <string name="settings_section_patch_mode">修補模式</string>
+    <string name="settings_patch_mode_ask">每次詢問</string>
+    <string name="settings_patch_mode_ask_description">在修補每個應用程式之前，詢問要使用 Root 掛載還是標準安裝進行修補</string>
+    <string name="settings_section_after_patching">修補後</string>
+    <string name="settings_after_patching_install">自動安裝</string>
+    <string name="settings_after_patching_ask">詢問使用哪個安裝程式</string>
+    <string name="settings_after_patching_ask_description">每次安裝應用程式時，都會詢問要使用哪個安裝程式</string>
+    <string name="settings_after_patching_manual">手動安裝</string>
+    <string name="settings_after_patching_manual_description">在您點擊安裝後，將使用預設安裝程式進行安裝</string>
     <string name="settings_nomount_only">僅限 NoMount</string>
     <string name="settings_nomount_only_description">僅使用 NoMount 掛載應用程式，且絕不回退至綁定掛載，因此在沒有 NoMount 的情況下將保持未掛載狀態</string>
-    <string name="settings_prompt_installer_on_install">安裝程式選擇提示</string>
-    <string name="settings_prompt_installer_on_install_description">詢問所有應用程式要如何安裝：Root模式下會在修補前先安裝，否則會在修補後才安裝</string>
-    <string name="settings_auto_install_with_shizuku">修補完成後自動安裝</string>
     <string name="settings_auto_install_with_shizuku_description">修補完成後立即安裝或掛載已修補的APK</string>
     <string name="settings_auto_uninstall_with_shizuku">衝突時自動解除安裝</string>
     <string name="settings_auto_uninstall_with_shizuku_description">在簽章衝突時解除安裝現有的應用程式。這可能會清除應用程式資料</string>

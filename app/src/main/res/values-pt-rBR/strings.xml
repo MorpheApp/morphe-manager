@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Hide this app?</string>
     <string name="home_more_apps_title">More apps</string>
     <string name="home_more_apps_hide_title">Hide this card?</string>
-    <string name="home_more_apps_hide_message">You can bring it back anytime in Settings &gt; Appearance &gt; Home screen</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Você pode recuperá-lo a qualquer momento em %1$s</string>
     <string name="home_app_hide_message">This app will be hidden from the home screen. You can restore it later from the hidden apps using the button at the bottom of the list</string>
     <string name="home_app_will_be_hidden">This app will be hidden</string>
     <string name="home_app_hidden_named">%s hidden</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Chave confiável</string>
     <string name="sources_signing_key_new">Nova chave</string>
     <string name="sources_patch_expert_badge">Expert</string>
-    <string name="sources_patch_expert_badge_tooltip">Ative o Modo Expert em Configurações para incluir este patch manualmente</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Ative %1$s para incluir este patch manualmente</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Precisa de ajuda para encontrar o APK?</string>
     <string name="home_apk_availability_dialog_simple">Para aplicar os patches no aplicativo &lt;b&gt;%s&lt;/b&gt;, você precisa do APK sem patches na versão:</string>
@@ -527,6 +529,7 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;
     <string name="home_app_info_install_type_custom_installer">Instalador personalizado</string>
     <string name="home_app_info_install_type_system_installer">Instalador do sistema</string>
     <string name="home_app_info_install_type_play_store">Instalação via Play Store</string>
+    <string name="home_app_info_install_type_root">Instalação root</string>
     <string name="home_app_info_install_type_root_play_store">Instalação via Play Store com root</string>
     <string name="home_app_info_install_type_shizuku_play_store">Instalação via Shizuku como Play Store</string>
     <string name="home_app_info_patch_update_available">Nova versão de patches disponível</string>
@@ -568,7 +571,8 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;
     <string name="root_mount_module_unmount_warning">Se o KernelSU tiver \"Desmontar módulos por padrão\" ativado, abra o KernelSU &gt; Superusuário &gt; o aplicativo que você montou &gt; Perfil &gt; Personalizado e desative \"Desmontar módulos\". Caso contrário, o APK montado com patch pode não ter efeito, mesmo que o Morphe mostre que ele está montado</string>
     <string name="root_pre_patch_installer_standard_title">Modo de instalação padrão</string>
     <string name="root_pre_patch_installer_standard_description">Patches como um APK normal com suporte ao GmsCore. Sua configuração de instalador é usada após o patching</string>
-    <string name="root_pre_patch_installer_hint">Perguntado enquanto Configurações &gt; Aplicação de patches &gt; Instalação &gt; O prompt de seleção do instalador está ativo. O modo de patch não pode ser alterado após a aplicação de patches</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Perguntado enquanto %1$s está definido como %2$s. O modo de patch não pode ser alterado após a aplicação do patch</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Erro copiado para a área de transferência</string>
     <string name="patcher_error_log">Log de erros</string>
@@ -668,6 +672,14 @@ A desinstalação apagará permanentemente todos os dados do aplicativo"</string
     <string name="patcher_step_group_saving">Salvando</string>
     <string name="patcher_step_write_patched">Escrevendo arquivo APK patcheado</string>
     <string name="patcher_step_sign_apk">Assinando arquivo APK patcheado</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Lendo arquivos DEX</string>
+    <string name="patcher_task_extracting_resources">Extraindo recursos</string>
+    <string name="patcher_task_decoding_resources">Decodificando recursos</string>
+    <string name="patcher_task_indexing_classes">Indexando classes</string>
+    <string name="patcher_task_compiling_dex">Compilando arquivos DEX</string>
+    <string name="patcher_task_compiling_resources">Compilando recursos</string>
+    <string name="patcher_task_writing_apk">Escrevendo arquivo APK</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Proteção ao aplicar patches em segundo plano</string>
     <string name="battery_optimization_dialog_description">Alguns dispositivos podem fechar o patcher quando minimizado. Permita que o Morphe seja executado sem restrições de bateria para garantir que a aplicação de patches seja concluída de forma confiável</string>
@@ -716,7 +728,8 @@ A desinstalação apagará permanentemente todos os dados do aplicativo"</string
     <string name="patched_app_save_failed_toast">Falha ao salvar o aplicaitvo patcheado</string>
     <string name="plugin_activity_dialog_body">Interação do usuário é necessária para prosseguir com este plugin</string>
     <string name="patcher_process_killed_message">O sistema interrompeu o patcher antes que ele terminasse, geralmente para liberar memória. Feche outros aplicativos e tente novamente</string>
-    <string name="patcher_process_crashed_message">O patcher travou antes de terminar. Se isso acontecer novamente, desative \"Usar VM incorporada\" nas configurações e relate o problema com o log</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">O patcher travou antes de terminar. Se isso acontecer novamente, desative %1$s e relate o problema com o log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">O aplicador de patch ficou sem memória com um heap de %1$s MB. Este aplicativo é grande demais para os patches selecionados. Tente aplicar o patch com menos fontes ou selecione menos patches</string>
     <string name="install_app_success">Instalado com sucesso</string>
@@ -1016,9 +1029,8 @@ As dimensões das imagens devem ser as seguintes:
     <string name="installer_title">Selecionar instalador</string>
     <string name="installer_internal_description">Usa o instalador de pacotes do Android</string>
     <string name="installer_play_store_description">Utiliza o instalador do sistema e define o Google Play Store como fonte de instalação</string>
+    <string name="installer_root_description">Instala silenciosamente com root</string>
     <string name="installer_root_play_store_description">Instala silenciosamente com root e define o Google Play Store como fonte de instalação</string>
-    <string name="installer_auto_saved_name">Montar root</string>
-    <string name="installer_auto_saved_description">Monta os aplicativos que foram patcheados no modo de montagem root. APKs patcheados padrão usam outro instalador</string>
     <string name="installer_shizuku_description">Instala silenciosamente usando Shizuku ou Sui</string>
     <string name="installer_shizuku_play_store_description">Instala silenciosamente através do Shizuku ou Sui e define o Google Play Store como fonte de instalação</string>
     <string name="installer_option_none">Sem fallback</string>
@@ -1028,7 +1040,7 @@ As dimensões das imagens devem ser as seguintes:
     <string name="installer_status_shizuku_not_installed">Instale Shizuku ou Sui para usar esta opção</string>
     <string name="installer_status_shizuku_not_running">Inicie Shizuku ou Sui e tente novamente</string>
     <string name="installer_status_shizuku_permission">Conceda permissão do Shizuku ao Morphe a partir do aplicativo Shizuku</string>
-    <string name="installer_mount_warning_install">Seu instalador principal está definido para o instalador montado com root. Este aplicativo salvo não foi instalado usando o montador</string>
+    <string name="installer_mount_warning_install">O modo de patch está definido como montagem root. Este app salvo não foi instalado usando montagem</string>
     <string name="mount_version_mismatch_message">A versão do aplicativo original (%2$s) não corresponde à versão do aplicativo patcheado (%1$s). Monte a versão original correspondente, depois tente novamente</string>
     <string name="mount_stock_restore_failed_message">O Android rejeitou o APK original salvo. Instale a versão original correspondente e tente Montar novamente</string>
     <string name="installer_status_shizuku_unsupported">A versão do Shizuku instalada não é suportada</string>
@@ -1050,11 +1062,17 @@ As dimensões das imagens devem ser as seguintes:
     <string name="installer_play_store_warning_continue">Eu entendo, continuar</string>
     <string name="installer_play_store_mode">Instalar como Play Store</string>
     <string name="installer_play_store_mode_description">Marca a Google Play Store como a origem da instalação</string>
+    <string name="settings_section_patch_mode">Modo de patch</string>
+    <string name="settings_patch_mode_ask">Perguntar sempre</string>
+    <string name="settings_patch_mode_ask_description">Pergunta antes de aplicar o patch em cada app se deve aplicá-lo para montagem root ou instalação padrão</string>
+    <string name="settings_section_after_patching">Após a aplicação do patch</string>
+    <string name="settings_after_patching_install">Instalar automaticamente</string>
+    <string name="settings_after_patching_ask">Perguntar qual instalador</string>
+    <string name="settings_after_patching_ask_description">Pergunta qual instalador usar toda vez que um app é instalado</string>
+    <string name="settings_after_patching_manual">Instalar manualmente</string>
+    <string name="settings_after_patching_manual_description">Instala com o instalador padrão assim que você tocar em Instalar</string>
     <string name="settings_nomount_only">Apenas NoMount</string>
     <string name="settings_nomount_only_description">Monta aplicativos apenas com NoMount e nunca recorre a um bind mount, para que permaneçam desmontados sem ele</string>
-    <string name="settings_prompt_installer_on_install">Prompt de seleção do instalador</string>
-    <string name="settings_prompt_installer_on_install_description">Pergunta como instalar cada app: com root antes da aplicação de patches, caso contrário, depois disso</string>
-    <string name="settings_auto_install_with_shizuku">Instalação automática após a aplicação do patch</string>
     <string name="settings_auto_install_with_shizuku_description">Instala ou monta o APK patcheado assim que a aplicação de patches for concluída</string>
     <string name="settings_auto_uninstall_with_shizuku">Desinstalação automática em caso de conflito</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Desinstala o aplicativo existente em caso de conflito de assinatura. Isso pode remover os dados do aplicativo</string>

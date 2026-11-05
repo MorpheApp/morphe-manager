@@ -10,7 +10,8 @@
     <string name="home_app_hide_title"> Απόκρυψη αυτής της εφαρμογής;</string>
     <string name="home_more_apps_title">Περισσότερες εφαρμογές</string>
     <string name="home_more_apps_hide_title">Απόκρυψη αυτής της κάρτας;</string>
-    <string name="home_more_apps_hide_message">Μπορείτε να το επαγάγετε ανά πάσα στιγμή στις Ρυθμίσεις &gt; Εμφάνιση &gt; Αρχική οθόνη</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Μπορείτε να το επαγάγετε ανά πάσα στιγμή στο %1$s</string>
     <string name="home_app_hide_message">Αυτή η εφαρμογή θα αποκρυφθεί από την αρχική οθόνη. Μπορείτε να την επαναφέρετε αργότερα από τις κρυφές εφαρμογές χρησιμοποιώντας το κουμπί στο κάτω μέρος της λίστας</string>
     <string name="home_app_will_be_hidden">Αυτή η εφαρμογή θα αποκρυφθεί</string>
     <string name="home_app_hidden_named">%s κρυφές</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Εμπιστευμένο κλειδί</string>
     <string name="sources_signing_key_new">Νέο κλειδί</string>
     <string name="sources_patch_expert_badge">Ειδικός</string>
-    <string name="sources_patch_expert_badge_tooltip">Ενεργοποιήστε τη λειτουργία Ειδικού στις Ρυθμίσεις για να συμπεριλάβετε αυτήν την ενημέρωση χειροκίνητα</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Ενεργοποιήστε το %1$s για να συμπεριλάβετε αυτή την τροποποίηση χειροκίνητα</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Χρειάζεστε βοήθεια για να βρείτε το APK;</string>
     <string name="home_apk_availability_dialog_simple">Για την τροποποίηση του &lt;b&gt;%s&lt;/b&gt;, χρειάζεστε τη μη τροποποιημένη έκδοση του APK:</string>
@@ -529,6 +531,7 @@
     <string name="home_app_info_install_type_custom_installer">Προσαρμοσμένος εγκαταστάτης</string>
     <string name="home_app_info_install_type_system_installer">Εγκαταστάτης συστήματος</string>
     <string name="home_app_info_install_type_play_store">Εγκατάσταση από το Play Store</string>
+    <string name="home_app_info_install_type_root">Εγκατάσταση root</string>
     <string name="home_app_info_install_type_root_play_store">Εγκατάσταση από το Play Store με δικαιώματα root</string>
     <string name="home_app_info_install_type_shizuku_play_store">Εγκατάσταση από το Play Store μέσω Shizuku</string>
     <string name="home_app_info_patch_update_available">Διαθέσιμη ενημέρωση τροποποιήσεων</string>
@@ -570,7 +573,8 @@
     <string name="root_mount_module_unmount_warning">Αν το KernelSU έχει ενεργοποιημένη την επιλογή «Unmount modules by default», ανοίξτε το KernelSU &gt; Superuser &gt; την εφαρμογή που mounted &gt; Profile &gt; Custom και απενεργοποιήστε το «Unmount modules». Διαφορετικά, το mounted patched APK μπορεί να μην ενεργοποιηθεί, ακόμα κι αν το Morphe δείχνει ότι είναι mounted</string>
     <string name="root_pre_patch_installer_standard_title">Τυπική Εγκατάσταση</string>
     <string name="root_pre_patch_installer_standard_description">Εφαρμογές ενημέρωσης ως ένα κανονικό APK με υποστήριξη GmsCore. Η ρύθμιση του εγκαταστάτη σας χρησιμοποιείται μετά την ενημέρωση</string>
-    <string name="root_pre_patch_installer_hint">Ζητήθηκε ενώ Ρυθμίσεις &gt; Διαρρύθμιση &gt; Εγκατάσταση &gt; Παράθυρο επιλογής εγκαταστάτη. Η λειτουργία διαρρύθμισης δεν μπορεί να αλλάξει μετά τη διαρρύθμιση</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Ρωτήθηκε ενώ το %1$s είναι ορισμένο στο %2$s. Ο τρόπος τροποποίησης δεν μπορεί να αλλάξει μετά την τροποποίηση</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Το σφάλμα αντιγράφηκε στο πρόχειρο</string>
     <string name="patcher_error_log">Αρχείο καταγραφής σφαλμάτων</string>
@@ -669,6 +673,14 @@
     <string name="patcher_step_group_saving">Αποθήκευση</string>
     <string name="patcher_step_write_patched">Εγγραφή τροποποιημένου αρχείου APK</string>
     <string name="patcher_step_sign_apk">Υπογραφή τροποποιημένου αρχείου APK</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Ανάγνωση αρχείων DEX</string>
+    <string name="patcher_task_extracting_resources">Εξαγωγή πόρων</string>
+    <string name="patcher_task_decoding_resources">Αποκωδικοποίηση πόρων</string>
+    <string name="patcher_task_indexing_classes">Ευρετηρίαση κλάσεων</string>
+    <string name="patcher_task_compiling_dex">Μεταγλώττιση αρχείων DEX</string>
+    <string name="patcher_task_compiling_resources">Μεταγλώττιση πόρων</string>
+    <string name="patcher_task_writing_apk">Γραφή αρχείου APK</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Προστασία επισκευής παρασκηνίου</string>
     <string name="battery_optimization_dialog_description">Ορισμένες συσκευές ενδέχεται να σταματήσουν το πρόγραμμα επισκευής όταν η εφαρμογή ελαχιστοποιηθεί. Επιτρέψτε στο Morphe να εκτελείται χωρίς περιορισμούς μπαταρίας για να διασφαλίσετε ότι η επισκευή ολοκληρώνεται αξιόπιστα</string>
@@ -717,7 +729,8 @@
     <string name="patched_app_save_failed_toast">Αποτυχία αποθήκευσης της τροποποιημένης εφαρμογής</string>
     <string name="plugin_activity_dialog_body">Απαιτείται αλληλεπίδραση χρήστη για να συνεχίσετε με αυτό το πρόσθετο.</string>
     <string name="patcher_process_killed_message">Το σύστημα σταμάτησε τον patcher πριν ολοκληρωθεί, συνήθως για να ελευθερώσει μνήμη. Κλείστε άλλες εφαρμογές και δοκιμάστε ξανά</string>
-    <string name="patcher_process_crashed_message">Το patcher καrashed πριν ολοκληρώσει. Εάν συμβεί ξανά, απενεργοποιήστε το \"Χρήση ενσωματωμένης VM\" στις ρυθμίσεις και αναφέρετε το πρόβλημα μαζί με το αρχείο καταγραφής</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Ο τροποποιητής κατέρρευσε πριν ολοκληρωθεί. Εάν συμβεί ξανά, απενεργοποιήστε το %1$s και αναφέρετε το πρόβλημα με το αρχείο καταγραφής</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Ο patcher εξάντλησε τη μνήμη με κούπα %1$s MB. Αυτή η εφαρμογή είναι πολύ μεγάλη για τις επιλεγμένες επισκευές. Προσπαθήστε να επισκευάσετε με λιγότερες πηγές επισκευών, ή επιλέξτε λιγότερες επισκευές</string>
     <string name="install_app_success">Επιτυχής εγκατάσταση</string>
@@ -1017,9 +1030,8 @@ morphe_header_custom_dark.png
     <string name="installer_title">Επιλέξτε εγκαταστάτη</string>
     <string name="installer_internal_description">Χρησιμοποιεί τον ενσωματωμένο εγκαταστάτη πακέτων Android</string>
     <string name="installer_play_store_description">Χρησιμοποιεί το συστημικό πρόγραμμα εγκατάστασης και ορίζει το Google Play Store ως πηγή εγκατάστασης</string>
+    <string name="installer_root_description">Εγκατασταθεί σιωπηλά με root</string>
     <string name="installer_root_play_store_description">Εγκαθιστά αθόρυβα με δικαιώματα root και ορίζει το Google Play Store ως πηγή εγκατάστασης</string>
-    <string name="installer_auto_saved_name">Προσάρτηση με root</string>
-    <string name="installer_auto_saved_description">Προσάρτηση εφαρμογών που έχουν ενημερωθεί σε λειτουργία προσάρτησης με root. Οι συνηθισμένες ενημερωμένες APK χρησιμοποιούν έναν άλλο εγκαταστάτη</string>
     <string name="installer_shizuku_description">Εγκαθίσταται αθόρυβα χρησιμοποιώντας Shizuku ή Sui</string>
     <string name="installer_shizuku_play_store_description">Εγκαθιστά αθόρυβα μέσω Shizuku ή Sui και ορίζει το Google Play Store ως πηγή εγκατάστασης</string>
     <string name="installer_option_none">Χωρίς εφεδρεία</string>
@@ -1029,7 +1041,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">Εγκαταστήστε το Shizuku ή Sui για να χρησιμοποιήσετε αυτή την επιλογή.</string>
     <string name="installer_status_shizuku_not_running">Εκκινήστε το Shizuku ή Sui και προσπαθήστε ξανά.</string>
     <string name="installer_status_shizuku_permission">Δώστε άδεια στο Morphe από την εφαρμογή Shizuku</string>
-    <string name="installer_mount_warning_install">Ο πρωταρχικός εγκαταστάτης σας είναι ορισμένος με τον rooted προσαρτημένο εγκαταστάτη. Αυτή η αποθηκευμένη εφαρμογή δεν εγκαταστάθηκε με προσάρτηση</string>
+    <string name="installer_mount_warning_install">Ο τρόπος τροποποίησης είναι ορισμένος σε root mount. Αυτή η αποθηκευμένη εφαρμογή δεν εγκαταστάθηκε χρησιμοποιώντας mount</string>
     <string name="mount_version_mismatch_message">Η έκδοση της αρχικής ανεπεξέργαστης εφαρμογής (%2$s) δεν ταιριάζει με την έκδοση της τροποποιημένης εφαρμογής (%1$s). Προσαρτήστε την αρχική ανεπεξέργαστη έκδοση της εφαρμογής, και μετά προσπαθήστε ξανά.</string>
     <string name="mount_stock_restore_failed_message">Το Android απέρριψε το αρχικό APK που αποθηκεύτηκε. Εγκαταστήστε την αντίστοιχη αρχική έκδοση, στη συνέχεια δοκιμάστε να προσαρτήσετε ξανά</string>
     <string name="installer_status_shizuku_unsupported">Η εγκατεστημένη έκδοση του Shizuku δεν υποστηρίζεται.</string>
@@ -1051,11 +1063,17 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_continue">Κατανοώ, συνέχισε</string>
     <string name="installer_play_store_mode">Εγκατάσταση ως Play Store</string>
     <string name="installer_play_store_mode_description">Σημαιοφορεί το Google Play Store ως πηγή εγκατάστασης</string>
+    <string name="settings_section_patch_mode">Τρόπος τροποποίησης</string>
+    <string name="settings_patch_mode_ask">Ρώτησε κάθε φορά</string>
+    <string name="settings_patch_mode_ask_description">Ρωτά πριν από την τροποποίηση κάθε εφαρμογής εάν θα γίνει τροποποίηση για root mount ή τυπική εγκατάσταση</string>
+    <string name="settings_section_after_patching">Μετά την τροποποίηση</string>
+    <string name="settings_after_patching_install">Αυτόματη εγκατάσταση</string>
+    <string name="settings_after_patching_ask">Ρώτησε ποιον εγκαταστάτη</string>
+    <string name="settings_after_patching_ask_description">Ρωτά ποιον εγκαταστάτη να χρησιμοποιήσει κάθε φορά που εγκαθίσταται μια εφαρμογή</string>
+    <string name="settings_after_patching_manual">Χειροκίνητη εγκατάσταση</string>
+    <string name="settings_after_patching_manual_description">Εγκαθίσταται με τον προεπιλεγμένο εγκαταστάτη μόλις πατήσετε Εγκατάσταση</string>
     <string name="settings_nomount_only">Μόνο NoMount</string>
     <string name="settings_nomount_only_description">Εγκαθιστά εφαρμογές μόνο με NoMount και δεν επιστρέφει ποτέ σε bind mount, ώστε να παραμένουν μη εγκατεστημένες χωρίς αυτό</string>
-    <string name="settings_prompt_installer_on_install">Εμφάνιση προτροπής επιλογής εγκαταστάτη</string>
-    <string name="settings_prompt_installer_on_install_description">Ερωτά πώς να εγκατασταθεί κάθε εφαρμογή: με δικαιώματα root πριν τη διαρρύθμιση, διαφορετικά μετά από αυτήν</string>
-    <string name="settings_auto_install_with_shizuku">Αυτόματη εγκατάσταση μετά την επιδιόρθωση</string>
     <string name="settings_auto_install_with_shizuku_description">Εγκαθιστά ή προσάρχει το διαμορφωμένο APK μόλις ολοκληρωθεί η διαρρύθμιση</string>
     <string name="settings_auto_uninstall_with_shizuku">Αυτόματη απεγκατάσταση σε περίπτωση σύγκρουσης</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Απεγκαθιστά την υπάρχουσα εφαρμογή σε σύγκρουση υπογραφής. Αυτό μπορεί να αφαιρέσει δεδομένα εφαρμογής</string>

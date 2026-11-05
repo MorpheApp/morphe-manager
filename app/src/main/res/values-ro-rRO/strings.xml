@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Ascunzi această aplicație?</string>
     <string name="home_more_apps_title">Mai multe aplicații</string>
     <string name="home_more_apps_hide_title">Ascunzi acest card?</string>
-    <string name="home_more_apps_hide_message">Îl poți readuce oricând din Setări &gt; Aspect &gt; Ecranul principal</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Îl puteți readuce oricând în %1$s</string>
     <string name="home_app_hide_message">Această aplicație va fi ascunsă de pe ecranul de pornire. O poți restaura mai târziu din secțiunea aplicațiilor ascunse, folosind butonul din partea de jos a listei.</string>
     <string name="home_app_will_be_hidden">Aplicația va fi ascunsă</string>
     <string name="home_app_hidden_named">%s ascunse</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Cheie de încredere</string>
     <string name="sources_signing_key_new">Cheie nouă</string>
     <string name="sources_patch_expert_badge">Expert</string>
-    <string name="sources_patch_expert_badge_tooltip">Activează modul Expert în Setări pentru a include manual acest patch</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Activați %1$s pentru a include acest patch manual</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Ai nevoie de ajutor pentru a găsi APK-ul?</string>
     <string name="home_apk_availability_dialog_simple">Pentru a patch-ui &lt;b&gt;%s&lt;/b&gt;, ai nevoie de o versiune APK nepatch-uită:</string>
@@ -529,6 +531,7 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="home_app_info_install_type_custom_installer">Instalator personalizat</string>
     <string name="home_app_info_install_type_system_installer">Instalator sistem</string>
     <string name="home_app_info_install_type_play_store">Instalare de pe Play Store</string>
+    <string name="home_app_info_install_type_root">Instalare root</string>
     <string name="home_app_info_install_type_root_play_store">Instalare de pe Play Store cu root</string>
     <string name="home_app_info_install_type_shizuku_play_store">Instalare Play Store prin Shizuku</string>
     <string name="home_app_info_patch_update_available">Actualizare patach disponibilă</string>
@@ -570,7 +573,8 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="root_mount_module_unmount_warning">Dacă KernelSU are activată opțiunea „Deconectarea modulelor implicit”, deschideți KernelSU &gt; Superuser &gt; aplicația montată &gt; Profil &gt; Personalizat și dezactivați „Deconectarea modulelor”. În caz contrar, APK-ul patchuit montat poate să nu fie aplicat, chiar dacă Morphe îl indică ca fiind montat</string>
     <string name="root_pre_patch_installer_standard_title">Mod de instalare standard</string>
     <string name="root_pre_patch_installer_standard_description">Patch-uri ca un APK normal cu suport GmsCore. Setarea de instalare este folositã dupã aplicarea patch-ului.</string>
-    <string name="root_pre_patch_installer_hint">Întrebare în timp ce Setări &gt; Patching &gt; Instalare &gt; Prompt de selectare a instalatorului este activ. Modul de patch nu poate fi schimbat după patch</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">S-a întrebat în timp ce %1$s este setat pe %2$s. Modul de patch nu poate fi modificat după patch-uire</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Eroare copiată în clipboard</string>
     <string name="patcher_error_log">Jurnal erori</string>
@@ -669,6 +673,14 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="patcher_step_group_saving">Se salvează</string>
     <string name="patcher_step_write_patched">Se scrie fișierul APK modificat</string>
     <string name="patcher_step_sign_apk">Se semnează fișierul APK modificat</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Citire fișiere DEX</string>
+    <string name="patcher_task_extracting_resources">Extragere resurse</string>
+    <string name="patcher_task_decoding_resources">Decodare resurse</string>
+    <string name="patcher_task_indexing_classes">Indexare clase</string>
+    <string name="patcher_task_compiling_dex">Compilare fișiere DEX</string>
+    <string name="patcher_task_compiling_resources">Compilare resurse</string>
+    <string name="patcher_task_writing_apk">Scriere fișier APK</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Protecție la patch-uri în fundal</string>
     <string name="battery_optimization_dialog_description">Unele dispozitive pot opri patcher-ul când aplicația este minimizată. Permiteți aplicației Morphe să ruleze fără restricții de baterie pentru a asigura finalizarea fiabilă a patch-urilor</string>
@@ -717,7 +729,8 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="patched_app_save_failed_toast">Eroare la salvarea aplicației modificate</string>
     <string name="plugin_activity_dialog_body">Este necesară interacțiunea utilizatorului pentru a continua cu acest plugin</string>
     <string name="patcher_process_killed_message">Sistemul a oprit patcher-ul înainte ca acesta să se încheie, de obicei pentru a elibera memorie. Închideți alte aplicații și încercați din nou</string>
-    <string name="patcher_process_crashed_message">Patcher-ul s-a blocat înainte de a termina. Dacă se întâmplă din nou, dezactivează \"Use embedded VM\" în setări și raportează problema împreună cu log-ul</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Patcher-ul a crash-uit înainte de a termina. Dacă se întâmplă din nou, dezactivați %1$s și raportați problema împreună cu log-ul</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Programul de aplicare a modificărilor nu a avut memorie suficientă, cu un heap de %1$s MB. Această aplicație este prea mare pentru patch-urile selectate. Încercați aplicarea modificărilor cu mai puține surse sau selectați mai puține patch-uri</string>
     <string name="install_app_success">Instalat cu succes</string>
@@ -1017,9 +1030,8 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="installer_title">Selectați instalatorul</string>
     <string name="installer_internal_description">Utilizează installerul de pachete Android</string>
     <string name="installer_play_store_description">Utilizează installer-ul sistem și setează Google Play Store ca sursă de instalare</string>
+    <string name="installer_root_description">Se instalează silențios cu root</string>
     <string name="installer_root_play_store_description">Instalează silențios cu acces root și setează Google Play Store ca sursă de instalare</string>
-    <string name="installer_auto_saved_name">Montare root</string>
-    <string name="installer_auto_saved_description">Monteazã aplicaţiile care au fost patch-uite în modul de montare root. APK-urile patch-uite standard folosesc un alt installer.</string>
     <string name="installer_shizuku_description">Instalează silențios folosind Shizuku sau Sui</string>
     <string name="installer_shizuku_play_store_description">Instalează silențios prin Shizuku sau Sui și setează Google Play Store ca sursă de instalare</string>
     <string name="installer_option_none">Fără opțiuni de rezervă</string>
@@ -1029,7 +1041,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="installer_status_shizuku_not_installed">Instalează Shizuku sau Sui pentru a folosi această opțiune</string>
     <string name="installer_status_shizuku_not_running">Pornește Shizuku sau Sui și încearcă din nou</string>
     <string name="installer_status_shizuku_permission">Acordă permisiune aplicației Morphe din aplicația Shizuku</string>
-    <string name="installer_mount_warning_install">Instalatorul principal setat la instalatorul montat radical. Această aplicație salvată nu a fost instalată folosind montaj</string>
+    <string name="installer_mount_warning_install">Modul de patch este setat pe mount root. Această aplicație salvată nu a fost instalată folosind mount</string>
     <string name="mount_version_mismatch_message">Versiunea aplicației de bază (%2$s) nu se potrivște cu versiunea aplicației patate (%1$s). Montează versiunea de bază potrivită, apoi reîncercați</string>
     <string name="mount_stock_restore_failed_message">Android a respins APK-ul original salvat. Instaleazã versiunea implicitã corespunzãtoare, apoi încercã din nou Montare.</string>
     <string name="installer_status_shizuku_unsupported">Versiunea Shizuku instalată nu este suportată</string>
@@ -1051,11 +1063,17 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="installer_play_store_warning_continue">Am înțeles, continuă</string>
     <string name="installer_play_store_mode">Instalează ca Play Store</string>
     <string name="installer_play_store_mode_description">Marchează Google Play Store ca sursă de instalare</string>
+    <string name="settings_section_patch_mode">Mod patch</string>
+    <string name="settings_patch_mode_ask">Întreabă de fiecare dată</string>
+    <string name="settings_patch_mode_ask_description">Întreabă înainte de a patch-ui fiecare aplicație dacă doriți patch pentru mount root sau instalare standard</string>
+    <string name="settings_section_after_patching">După patch-uire</string>
+    <string name="settings_after_patching_install">Instalează automat</string>
+    <string name="settings_after_patching_ask">Întreabă ce instalator</string>
+    <string name="settings_after_patching_ask_description">Întreabă ce instalator să folosească de fiecare dată când se instalează o aplicație</string>
+    <string name="settings_after_patching_manual">Instalează manual</string>
+    <string name="settings_after_patching_manual_description">Instalează cu instalatorul implicit odată ce apăsați Instalare</string>
     <string name="settings_nomount_only">Doar NoMount</string>
     <string name="settings_nomount_only_description">Montează aplicațiile doar cu NoMount și nu revine niciodată la un bind mount, astfel încât acestea să rămână demontate fără acesta</string>
-    <string name="settings_prompt_installer_on_install">Solicitare de selecție a installerului</string>
-    <string name="settings_prompt_installer_on_install_description">Intreabă cum se instalează fiecare aplicație: cu root înainte de patch, altfel după</string>
-    <string name="settings_auto_install_with_shizuku">Instalare automată după patch-uire</string>
     <string name="settings_auto_install_with_shizuku_description">Instalează sau montează APK-ul patch-uithi rapid ce patch-ul s-a completat</string>
     <string name="settings_auto_uninstall_with_shizuku">Dezinstalare automată în caz de conflict</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Dezinstalază aplicația existentă în caz de conflict de semnătură. Acest lucru poate șterge datele aplicației</string>

@@ -10,7 +10,7 @@
     <string name="home_app_hide_title">شاردنەوەی ئەم ئەپە ؟</string>
     <string name="home_more_apps_title">ئەپەکانی تر</string>
     <string name="home_more_apps_hide_title">ئەم کارتە بشارینەوە؟</string>
-    <string name="home_more_apps_hide_message">دەتوانیت لە هەر کاتێک بێت بیگەڕێنیتەوە لە ڕێگەی ڕێکخستنەکان &gt; شێوەی دەرەوە &gt; شاشەی سەرەکی</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
     <string name="home_app_hide_message">ئەم ئەپە لە شاشەی سەرەکی دەشاردرێتەوە.  دەتوانیت دواتر لە ئەپە شاراوەکانەوە بیگەڕێنیتەوە بە بەکارهێنانی دوگمەی خوارەوەی لیستەکە</string>
     <string name="home_app_will_be_hidden">ئەم ئەپە دەبێتە شاراوە</string>
     <string name="home_app_hidden_named">%s شاردراوەتەوە</string>
@@ -243,7 +243,7 @@
     <string name="sources_signing_key_trusted">کلیلێکی جێی متمانەیە</string>
     <string name="sources_signing_key_new">کلیلێکی نوێ</string>
     <string name="sources_patch_expert_badge">شارەزا</string>
-    <string name="sources_patch_expert_badge_tooltip">دۆخی شارەزا چالاک بکە لە ڕێکخستنەکان بۆ گرتنەخۆی ئەم پینەیە بە دەستی</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">پێویستت بە یارمەتییە بۆ دۆزینەوەی APK؟</string>
     <string name="home_apk_availability_dialog_simple">بۆ پینەکردنی &lt;b&gt;%s&lt;/b&gt;, تۆ پێویستت بە وەشانی پینەنەکراوی APKە:</string>
@@ -571,7 +571,7 @@
     <string name="root_mount_module_unmount_warning">ئەگەر KernelSU بژاردەی \"Unmount modules by default\"ی چالاک بووبێت، بڕۆ بۆ KernelSU &gt; Superuser &gt; ئەو ئەپڵیکەیشنەی کە ماونتت کردووە &gt; Profile &gt; Custom و بژاردەی \"Unmount modules\" بکە بە ناچالاک. ئەگەر وای نەکەیت، ڕەنگە APKی پاتچی کراو و ماونتکراو کاری نەکات، تەنانەت ئەگەر Morphe پیشی بدات کە ماونت کراوە</string>
     <string name="root_pre_patch_installer_standard_title">شێوازی دامەزراندنی پێوانەیی</string>
     <string name="root_pre_patch_installer_standard_description">وەک APKیەکی ئاسایی پاتچ دەکرێت لەگەڵ پشتگیری GmsCore. ڕێکخستنی دامەزراندنی تۆ بەکاردێت دوای پاتچکردن</string>
-    <string name="root_pre_patch_installer_hint">داوا دەکرێت کاتێک ڕێکخستنەکان &gt; پاتچکردن &gt; دامەزراندن &gt; پرۆمپتی هەڵبژاردنی دامەزرێنەر چالاکە. شێوازی پاتچکردن ناتوانرێت بگۆڕدرێت دوای پاتچکردن</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">هەڵە کۆپی کرا بۆ ڕوونووسگە</string>
     <string name="patcher_error_log">تۆماری هەڵە</string>
@@ -670,6 +670,14 @@
     <string name="patcher_step_group_saving">هەڵگرتن</string>
     <string name="patcher_step_write_patched">نووسینی فایلی APK پینەکراو</string>
     <string name="patcher_step_sign_apk">واژۆکردنی فایلی APK پینەکراو</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">خوێندنەوەی فایلەکانی DEX</string>
+    <string name="patcher_task_extracting_resources">دەرکەشانى سەرچاوەکان</string>
+    <string name="patcher_task_decoding_resources">دیکۆدکردنی سەرچاوەکان</string>
+    <string name="patcher_task_indexing_classes">ئینْدێکسکردنی کلاسەکان</string>
+    <string name="patcher_task_compiling_dex">کۆمپایلکردنی فایلەکانی DEX</string>
+    <string name="patcher_task_compiling_resources">کۆکردنەوەی سەرچاوەکان</string>
+    <string name="patcher_task_writing_apk">نووسینی فایلی APK</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">پاراستن لە پینەکردنی پاشخان</string>
     <string name="battery_optimization_dialog_description">هەندێک ئامێر لەوانەیە پینەکەرەکە بوەستێنن کاتێک ئەپەکە بچووک دەکرێتەوە. ڕێگە بە Morphe بدە بە کارکردن بەبێ سنووردارکردنی پاتری بۆ دڵنیابوون لە تەواوبوونی پینەکردن بە شێوەیەکی باوەڕپێکراو</string>
@@ -718,7 +726,7 @@
     <string name="patched_app_save_failed_toast">شکستی هێنا لە پاشەکەوت کردنی ئەپی پینەکراو</string>
     <string name="plugin_activity_dialog_body">کارلێکردنی بەکارهێنەر پێویستە بۆ ئەوەی بەردەوام بیت لەگەڵ ئەم پێوەکراوە</string>
     <string name="patcher_process_killed_message">سیستەمەکە پاتچەرەکەی ڕاگرت پێش ئەوەی تەواو ببێت، بەزۆری بۆ بەتاڵکردنی میمۆری. ئەپەکانی تر دابخە و دووبارە هەوڵ بدەوە</string>
-    <string name="patcher_process_crashed_message">پاتشەر پێش ئەوەی تەواو ببێت ڕایستا. ئەگەر دووبارە ڕوویدا، \"Use embedded VM\" لە ڕێکخستنەکاندا کوژێنەرەوە و کێشەکە لەگەڵ لۆگەکە ڕاپۆرت بکە</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">میمۆری پاتچەرەکە تەواو بوو لەگەڵ %1$s MB heap. ئەم ئەپە زۆر گەورەیە بۆ ئەو پاتچانەی هەڵبژێردراون. هەوڵ بدە پاتچ بکەیت بە سەرچاوەی پاتچی کەمتر، یان پاتچی کەمتر هەڵبژێرە</string>
     <string name="install_app_success">بە سەرکەوتوویی دامەزرا</string>
@@ -1019,8 +1027,6 @@ morphe_header_custom_dark.png
     <string name="installer_internal_description">دامەزرێنەری پاکێجی ئەندرۆید بەکاردەهێنێت</string>
     <string name="installer_play_store_description">دامەزرێنەری سیستەم بەکاردەهێنێت و Google Play Store وەک سەرچاوەی دامەزراندن دیاری دەکات</string>
     <string name="installer_root_play_store_description">بەبێ دەنگ بە root دامەزناندن و Google Play Store وەک سەرچاوەی دامەزراندن دیاری دەکات</string>
-    <string name="installer_auto_saved_name">ڕۆت بەستن</string>
-    <string name="installer_auto_saved_description">ئەپەکانی کە لە شێوەی root mount پاتچی کراون، ماونت دەکات. APK-کانی پاتچکراوی ستاندارد دامەزرێنەرێکی تریان بەکاردێنێت</string>
     <string name="installer_shizuku_description">بە بێدەنگی دایخستنی بەکارهێنانی Shizuku یان Sui</string>
     <string name="installer_shizuku_play_store_description">بەبێ دەنگ لە ڕێگەی Shizuku یان Sui جێگیر دەکرێت و Google Play Store وەک سەرچاوەی جێگیرکردن دەداتە سەر</string>
     <string name="installer_option_none">هیچ ئەگەرێکی زیادە نییە</string>
@@ -1030,7 +1036,6 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">بۆ بەکارهێنانی ئەم بژاردەیە Shizuku یان Sui دامەزرێنە</string>
     <string name="installer_status_shizuku_not_running">Shizuku یان Sui دەستپێبکە و دووبارە هەوڵ بدەرەوە</string>
     <string name="installer_status_shizuku_permission">ڕێپێدان بە Morphe لە ئەپڵیکەیشنی Shizuku</string>
-    <string name="installer_mount_warning_install">دامەزراندنی سەرەکی تۆ لەسەر rooted mount installer ڕێکخراوە. ئەم ئەپڵیکەیشنە پاشکەوتکراوە بە بەکارهێنانی mount دامەزراندراوە</string>
     <string name="mount_version_mismatch_message">وەشانى ئەپی ڕەسەن (%2$s) لەگەڵ وەشانى ئەپی دەستکاریکراو (%1$s) ناگونجێت. وەشانی ڕەسەنی گونجاو mount بکە، پاشان دووبارە هەوڵ بدەرەوە</string>
     <string name="mount_stock_restore_failed_message">ئاندڕۆید APK-ی ڕەسەنی پاشکەوتکراوی ڕەت کردەوە. وەشانە ڕەسەنی گونجاو دابەزێنە، پاشان دووبارە هەوڵی Mount بدەرەوە</string>
     <string name="installer_status_shizuku_unsupported">وەشانی دامەزراندنی Shizuku پشتگیری ناکرێت</string>
@@ -1054,9 +1059,6 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_mode_description">دیاریکردنی Google Play Store وەک سەرچاوەی دامەزراندن</string>
     <string name="settings_nomount_only">تەنها NoMount</string>
     <string name="settings_nomount_only_description">ئەپەکان تەنها بە NoMount ماونت دەکات و هەرگیز ناگەڕێتەوە بۆ bind mount، بۆیە بێ ئەوە ماونت نابن</string>
-    <string name="settings_prompt_installer_on_install">داواکاری هەڵبژاردنی دابخەراو</string>
-    <string name="settings_prompt_installer_on_install_description">داوا دەکات چۆن هەموو ئەپەکان دامەزرێنرێن: بە ڕووت پێش پاتچکردن، ئەگەر نا دوای ئەوە</string>
-    <string name="settings_auto_install_with_shizuku">داپێکردنی ئۆتۆماتیکی دوای پاتچکردن</string>
     <string name="settings_auto_install_with_shizuku_description">APK پاتچکراوە دامەزراندن یان ماونت دەکات هەر کە پاتچکردن تەواو ببێت</string>
     <string name="settings_auto_uninstall_with_shizuku">سڕینەوەی خۆکار لە کاتی هەماوێتی</string>
     <string name="settings_auto_uninstall_with_shizuku_description">سڕینەوەی ئەپی ئێستا لە کاتی ململانێی واژۆدا. ئەمە ڕەنگە داتاکانی ئەپەکە بسڕێتەوە</string>

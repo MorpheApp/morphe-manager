@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">এই অ্যাপটি লুকিয়ে রাখবেন?</string>
     <string name="home_more_apps_title">আরও অ্যাপ</string>
     <string name="home_more_apps_hide_title">এই কার্ডটি লুকিয়ে রাখবেন?</string>
-    <string name="home_more_apps_hide_message">আপনি যেকোনো সময় সেটি Settings &gt; Appearance &gt; Home screen থেকে ফিরিয়ে আনতে পারেন</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">আপনি যেকোনো সময় %1$s থেকে এটি ফিরিয়ে আনতে পারেন</string>
     <string name="home_app_hide_message">এই অ্যাপটি হোম স্ক্রীন থেকে লুকানো হবে। আপনি তালিকাটির নীচে থাকা \'\' বোতামটি ব্যবহার করে পরে এটি পুনরুদ্ধার করতে পারেন</string>
     <string name="home_app_will_be_hidden">এ অ্যাপটি লুকিয়ে রাখা হবে</string>
     <string name="home_app_hidden_named">%s লুকানো</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">বিশ্বস্ত কী</string>
     <string name="sources_signing_key_new">নতুন কী</string>
     <string name="sources_patch_expert_badge">বিশেষজ্ঞ</string>
-    <string name="sources_patch_expert_badge_tooltip">এই প্যাচটি ম্যানুয়ালি অন্তর্ভুক্ত করতে সেটিংস-এ বিশেষজ্ঞ মোড সক্রিয় করুন</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">এই প্যাচটি ম্যানুয়ালি অন্তর্ভুক্ত করতে %1$s চালু করুন</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">APK খুঁজে পেতে সাহায্য প্রয়োজন?</string>
     <string name="home_apk_availability_dialog_simple">প্যাচ করতে &lt;b&gt;%s&lt;/b&gt; এর জন্য, অ-প্যাচড এপিকি (APK) সংস্করণ দরকার:</string>
@@ -529,6 +531,7 @@
     <string name="home_app_info_install_type_custom_installer">কাস্টম ইনস্টলার</string>
     <string name="home_app_info_install_type_system_installer">সিস্টেম ইনস্টলার</string>
     <string name="home_app_info_install_type_play_store">Play Store-এ ইনস্টল করুন</string>
+    <string name="home_app_info_install_type_root">রুট ইনস্টল</string>
     <string name="home_app_info_install_type_root_play_store">রুট প্লে স্টোর ইনস্টল করুন</string>
     <string name="home_app_info_install_type_shizuku_play_store">শিজুউকু প্লে স্টোর ইনস্টল করুন</string>
     <string name="home_app_info_patch_update_available">প্যাচ আপডেট উপলব্ধ আছে</string>
@@ -570,7 +573,8 @@
     <string name="root_mount_module_unmount_warning">যদি KernelSU-তে \"ডিফল্টভাবে মডিউল আনমাউন্ট\" চালু থাকে, তবে KernelSU &gt; সুপারইউজার &gt; যে অ্যাপটি আপনি মাউন্ট করেছিলেন &gt; প্রোফাইল &gt; কাস্টমে জানুন এবং \"মডিউল আনমাউন্ট\" বন্ধ করুন। অন্যথায়, মাউন্ট করা প্যাচড APK কার্যকর নাও হতে পারে, এমনকি Morphe এটা মাউন্ট করা হিসাবে দেখালেও</string>
     <string name="root_pre_patch_installer_standard_title">স্ট্যান্ডার্ড ইনস্টল মোড</string>
     <string name="root_pre_patch_installer_standard_description">GmsCore সমর্থন সহ একটি সাধারণ APK হিসাবে প্যাচ। প্যাচিং করার পরে আপনার ইনস্টলার সেটিংস ব্যবহার করা হয়</string>
-    <string name="root_pre_patch_installer_hint"><b>&amp;gt;</b> সেটিংস <b>&amp;gt;</b> প্যাচিং <b>&amp;gt;</b> ইনস্টলেশনে ইনস্টলার নির্বাচনের প্রম্পট সক্রিয় থাকাকালীন জিজ্ঞাসা করা হয়। প্যাচিংয়ের পরে প্যাচ মোড পরিবর্তন করা যায় না</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">%1$s যখন %2$s সেট করা থাকে তখন জিজ্ঞাসা করা হয়েছে। প্যাচ করার পরে প্যাচ মোড পরিবর্তন করা যাবে না</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">ত্রুটি ক্লিপবোর্ডে অনুলিপি করা হয়েছে</string>
     <string name="patcher_error_log">ত্রুটি রিপোর্ট</string>
@@ -669,6 +673,14 @@
     <string name="patcher_step_group_saving">সংরক্ষণ</string>
     <string name="patcher_step_write_patched">প্যাচযুক্ত APK ফাইল লেখা হচ্ছে</string>
     <string name="patcher_step_sign_apk">প্যাচ করা APK ফাইল সাইন করা হচ্ছে</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">DEX ফাইলগুলো পড়া হচ্ছে</string>
+    <string name="patcher_task_extracting_resources">রিসোর্স এক্সট্র্যাক্ট করা হচ্ছে</string>
+    <string name="patcher_task_decoding_resources">রিসোর্স ডিকোড করা হচ্ছে</string>
+    <string name="patcher_task_indexing_classes">ক্লাস ইনডেক্সিং করা হচ্ছে</string>
+    <string name="patcher_task_compiling_dex">DEX ফাইলগুলো কম্পাইল করা হচ্ছে</string>
+    <string name="patcher_task_compiling_resources">রিসোর্স কম্পাইল করা হচ্ছে</string>
+    <string name="patcher_task_writing_apk">APK ফাইল লেখা হচ্ছে</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">ব্যাকগ্রাউন্ড প্যাচিং সুরক্ষা</string>
     <string name="battery_optimization_dialog_description">কিছু ডিভাইস অ্যাপটি মিনিমাইজ করা হলে প্যাচার বন্ধ করতে পারে। প্যাচিং নির্ভরযোগ্যভাবে সম্পন্ন করার জন্য Morphe-কে ব্যাটারি সীমাবদ্ধতা ছাড়াই চলতে দেওয়ার অনুমতি দিন</string>
@@ -717,7 +729,8 @@
     <string name="patched_app_save_failed_toast">প্যাচ করা অ্যাপ সংরক্ষণ করতে ব্যর্থ</string>
     <string name="plugin_activity_dialog_body">এই প্লাগইন চালিয়ে যেতে জন্য ব্যবহারকারীর ইন্টারেকশন প্রয়োজন</string>
     <string name="patcher_process_killed_message">সিস্টেমটি প্যাচারকে সম্পন্ন করার আগেই বন্ধ করে দিয়েছে, সাধারণত মেমোরি খালি করতে। অন্য অ্যাপগুলো বন্ধ করুন এবং আবার চেষ্টা করুন</string>
-    <string name="patcher_process_crashed_message">প্যাচার শেষ হওয়ার আগেই ক্র্যাশ করেছে। এটি আবার ঘটলে, সেটিংসে গিয়ে \"Use embedded VM\" বন্ধ করুন এবং লগসহ সমস্যাটি রিপোর্ট করুন</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">প্যাচার শেষ হওয়ার আগেই ক্র্যাশ করেছে। যদি এটি আবার ঘটে, তবে %1$s বন্ধ করুন এবং লগ সহ সমস্যাটি রিপোর্ট করুন</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">%1$s MB হিপ মেমোরি ব্যবহার করে প্যাচার রান শেষ হয়ে গেছে। এই অ্যাপটি নির্বাচিত প্যাচগুলির জন্য খুব বড়। কম প্যাচ সোর্স সহ প্যাচিং করার চেষ্টা করুন, অথবা কম প্যাচ নির্বাচন করুন</string>
     <string name="install_app_success">সাফল্য়ের সাথে ইনস্টল করা হয়েছে</string>
@@ -1007,9 +1020,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_title">ইনস্টলার নির্বাচন করুন</string>
     <string name="installer_internal_description">অ্যান্ড্রয়েড প্যাকেজ ইনস্টলার ব্যবহার করে।</string>
     <string name="installer_play_store_description">সিস্টেম ইনস্টলার ব্যবহার করে এবং Google Play Store-কে ইনস্টল উৎস হিসাবে সেট করে</string>
+    <string name="installer_root_description">রুট-এর সাহায্যে নিঃশব্দে ইনস্টল করে</string>
     <string name="installer_root_play_store_description">রুট ব্যবহার করে নিঃশব্দে ইনস্টল করে এবং গুগল প্লে স্টোরকে ইনস্টল উৎস হিসেবে সেট করে</string>
-    <string name="installer_auto_saved_name">রুট মাউন্ট</string>
-    <string name="installer_auto_saved_description">রুট মাউন্ট মোডে প্যাচ করা অ্যাপ্লিকেশনগুলো মাউন্ট করে। স্ট্যান্ডার্ড প্যাচ করা APKs অন্য ইনস্টলার ব্যবহার করে</string>
     <string name="installer_shizuku_description">Shizuku বা Sui ব্যবহার করে নিঃশব্দে ইনস্টল করে।</string>
     <string name="installer_shizuku_play_store_description">শিজুকু অথবা সুই এর মাধ্যমে নিঃশব্দে ইনস্টল করে এবং গুগল প্লে স্টোরকে ইনস্টল উৎস হিসেবে সেট করে</string>
     <string name="installer_option_none">কোন ফলব্যাক নেই</string>
@@ -1019,7 +1031,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_status_shizuku_not_installed">এই বিকল্প ব্যবহার করতে শিজুকু বা সুই ইনস্টল করুন</string>
     <string name="installer_status_shizuku_not_running">শিজুকু বা সুই শুরু করুন এবং আবার চেষ্টা করুন</string>
     <string name="installer_status_shizuku_permission">Morphe-কে Shizuku অ্যাপ থেকে অনুমতি দিন</string>
-    <string name="installer_mount_warning_install">তোমার প্রধান ইনস্টলার রুটেড মাউন্ট ইনস্টলার সেট করা আছে. এই সেভড অ্যাপটি মাউন্ট ব্যবহার করে ইনস্টল করা হয়নি</string>
+    <string name="installer_mount_warning_install">প্যাচ মোড root mount-এ সেট করা আছে। এই সেভ করা অ্যাপটি mount ব্যবহার করে ইনস্টল করা হয়নি</string>
     <string name="mount_version_mismatch_message">স্টক অ্যাপ ভার্সন (%2$s) প্যাচড অ্যাপ ভার্সন (%1$s) এর সাথে ম্যাচ করে না. ম্যাচিং স্টক ভার্সন মাউন্ট কর এবং আবার চেষ্টা করুন</string>
     <string name="mount_stock_restore_failed_message">অ্যান্ড্রয়েড সংরক্ষিত মূল APK প্রত্যাখ্যান করেছে। ম্যাচিং স্টক সংস্করণ ইনস্টল করুন, তারপর আবার মাউন্ট করার চেষ্টা করুন।</string>
     <string name="installer_status_shizuku_unsupported">ইনস্টল করা শিজুকু ভার্সন সমর্থিত নয়</string>
@@ -1041,11 +1053,17 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_play_store_warning_continue">আমি বুঝতে পেরেছি, চালিয়ে যান</string>
     <string name="installer_play_store_mode">Play Store হিসাবে ইনস্টল করুন</string>
     <string name="installer_play_store_mode_description">Google Play Store-কে ইনস্টলেশনের উৎস হিসেবে চিহ্নিত করে</string>
+    <string name="settings_section_patch_mode">প্যাচ মোড</string>
+    <string name="settings_patch_mode_ask">প্রতিবার জিজ্ঞাসা করুন</string>
+    <string name="settings_patch_mode_ask_description">প্রতিটি অ্যাপ প্যাচ করার আগে এটি root mount নাকি স্ট্যান্ডার্ড ইনস্টলের জন্য প্যাচ করতে হবে তা জিজ্ঞাসা করে</string>
+    <string name="settings_section_after_patching">প্যাচ করার পর</string>
+    <string name="settings_after_patching_install">স্বয়ংক্রিয়ভাবে ইনস্টল করুন</string>
+    <string name="settings_after_patching_ask">কোন ইনস্টলার ব্যবহার করবেন তা জিজ্ঞাসা করুন</string>
+    <string name="settings_after_patching_ask_description">প্রতিবার অ্যাপ ইনস্টল করার সময় কোন ইনস্টলার ব্যবহার করতে হবে তা জিজ্ঞাসা করে</string>
+    <string name="settings_after_patching_manual">ম্যানুয়ালি ইনস্টল করুন</string>
+    <string name="settings_after_patching_manual_description">আপনি Install ট্যাপ করার পর ডিফল্ট ইনস্টলারের মাধ্যমে ইনস্টল করে</string>
     <string name="settings_nomount_only">শুধুমাত্র NoMount</string>
     <string name="settings_nomount_only_description">অ্যাপগুলোকে শুধুমাত্র NoMount দিয়ে মাউন্ট করে এবং কখনোই বাইন্ড মাউন্টে ফিরে যায় না, ফলে NoMount ছাড়া সেগুলো আনমাউন্টেড থাকে</string>
-    <string name="settings_prompt_installer_on_install">ইনস্টলার নির্বাচন প্রম্পট।</string>
-    <string name="settings_prompt_installer_on_install_description">প্রতিটি অ্যাপ ইনস্টল করার পদ্ধতি জিজ্ঞাসা করে: রুট ব্যবহার করে প্যাচিংয়ের আগে, অন্যথায় এর পরে</string>
-    <string name="settings_auto_install_with_shizuku">প্যাচিং করার পরে স্বয়ংক্রিয়ভাবে ইনস্টল করুন</string>
     <string name="settings_auto_install_with_shizuku_description">প্যাচিং সম্পন্ন হওয়ার সাথে সাথে প্যাচযুক্ত APK ইনস্টল বা মাউন্ট করে</string>
     <string name="settings_auto_uninstall_with_shizuku">সংঘাত হলে স্বয়ংক্রিয়ভাবে আনইনস্টল করুন</string>
     <string name="settings_auto_uninstall_with_shizuku_description">সাড়া সংঘাতে বিদ্যমান অ্যাপটি আনইনস্টল করে। এতে অ্যাপের ডেটা মুছে যেতে পারে</string>

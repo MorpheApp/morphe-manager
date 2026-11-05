@@ -10,7 +10,7 @@
     <string name="home_app_hide_title">Скриј ја оваа апликација?</string>
     <string name="home_more_apps_title">Повеќе апликации</string>
     <string name="home_more_apps_hide_title">Да ја сокриете оваа картичка?</string>
-    <string name="home_more_apps_hide_message">Можете да ја вратите во секое време во Подесувања &gt; Изглед &gt; Почетен екран</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
     <string name="home_app_hide_message">Оваа апликација ќе биде скриена од почетниот екран. Можете да ја вратите подоцна од скриените апликации користејќи го копчето на дното од листата</string>
     <string name="home_app_will_be_hidden">Оваа апликација ќе биде скриена</string>
     <string name="home_app_hidden_named">%s скриени</string>
@@ -243,7 +243,7 @@
     <string name="sources_signing_key_trusted">Доверен клуч</string>
     <string name="sources_signing_key_new">Нов клуч</string>
     <string name="sources_patch_expert_badge">Експерт</string>
-    <string name="sources_patch_expert_badge_tooltip">Овозможете експертски режим во Поставки за рачно да ја вклучите оваа закрпа</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Ви треба помош да го најдете APK-то?</string>
     <string name="home_apk_availability_dialog_simple">За закрпување &lt;b&gt;%s&lt;/b&gt;, ви треба не закрпена верзија на APK:</string>
@@ -569,7 +569,7 @@
     <string name="root_mount_module_unmount_warning">Ако во KernelSU е вклучено \"Unmount modules by default\", отворете KernelSU &gt; Superuser &gt; апликацијата што сте ја монтирале &gt; Profile &gt; Custom и исклучете го \"Unmount modules\". Во спротивно, монтираниот пачиран APK може да не стапи на сила, дури и ако Morphe покажува дека е монтиран</string>
     <string name="root_pre_patch_installer_standard_title">Режим на стандардна инсталација</string>
     <string name="root_pre_patch_installer_standard_description">Крпи како нормален APK со поддршка за GmsCore. Вашата поставка за инсталер се користи по крпењето</string>
-    <string name="root_pre_patch_installer_hint">Се прашува додека Поставки &gt; Крпење &gt; Инсталација &gt; Поттикнување за избор на инсталатор е вклучено. Режимот на крпење не може да се промени по крпењето</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Грешката е копирана во штитката</string>
     <string name="patcher_error_log">Дневник на грешки</string>
@@ -668,6 +668,14 @@
     <string name="patcher_step_group_saving">Зачувување</string>
     <string name="patcher_step_write_patched">Запишување на поправена APK датотека</string>
     <string name="patcher_step_sign_apk">Потпишување на поправена APK датотека</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Читање на DEX датотеки</string>
+    <string name="patcher_task_extracting_resources">Екстракција на ресурси</string>
+    <string name="patcher_task_decoding_resources">Декодирање на ресурси</string>
+    <string name="patcher_task_indexing_classes">Индексирање на класи</string>
+    <string name="patcher_task_compiling_dex">Компилирање на DEX датотеки</string>
+    <string name="patcher_task_compiling_resources">Компилирање ресурси</string>
+    <string name="patcher_task_writing_apk">Запишување на APK датотека</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Заштита од закрпување во позадина</string>
     <string name="battery_optimization_dialog_description">Некои уреди може да го запре закрпувачот кога апликацијата е минимизирана. Дозволете на Morphe да работи без ограничувања на батеријата за да се осигури закрпувањето целосно</string>
@@ -716,7 +724,7 @@
     <string name="patched_app_save_failed_toast">Не успеа да се зачува поправената апликација</string>
     <string name="plugin_activity_dialog_body">За да продолжите со овој приклучок, потребна е корисничка интеракција.</string>
     <string name="patcher_process_killed_message">Системот го прекина пачерот пред да заврши, обично за да ослободи меморија. Затворете ги другите апликации и обидете се повторно</string>
-    <string name="patcher_process_crashed_message">Програмата за закрпување падна пред да заврши. Ако ова се случи повторно, исклучете ја опцијата \"Користи вградена VM\" во поставките и пријавете го проблемот со дневникот</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Пачерот остана без меморија со хип од %1$s MB. Оваа апликација е преголема за избраните закрпи. Обидете се со пачирање со помалку извори на закрпи или изберете помалку закрпи</string>
     <string name="install_app_success">Успешно инсталирано</string>
@@ -1017,8 +1025,6 @@ morphe_header_custom_dark.png
     <string name="installer_internal_description">Користи системски инсталер</string>
     <string name="installer_play_store_description">Го користи системскиот инсталатор и го поставува Google Play Store како извор за инсталација</string>
     <string name="installer_root_play_store_description">Инсталира тивко со root и го поставува Google Play Store како извор за инсталација</string>
-    <string name="installer_auto_saved_name">Root монтирање</string>
-    <string name="installer_auto_saved_description">Монтира апликации што беа крпени во режим на root монтирање. Стандардните крпени APK-а користат друг инсталер</string>
     <string name="installer_shizuku_description">Инсталира тихо користејќи Shizuku или Sui</string>
     <string name="installer_shizuku_play_store_description">Инсталира тивко преку Shizuku или Sui и го поставува Google Play Store како извор за инсталација</string>
     <string name="installer_option_none">Без резервна</string>
@@ -1028,7 +1034,6 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">Не е поддржано за оваа акција</string>
     <string name="installer_status_shizuku_not_running">Инсталирај Shizuku или Sui за да ја користиш оваа опција</string>
     <string name="installer_status_shizuku_permission">Доделете дозвола на Morphe преку апликацијата Shizuku</string>
-    <string name="installer_mount_warning_install">Додели дозвола на Morphe од апликацијата Shizuku</string>
     <string name="mount_version_mismatch_message">Верзијата на инсталираната апликација (%2$s) не одговара на верзијата на закрпената апликација (%1$s). Монтирајте ја соодветната верзија на инсталираната апликација, а потоа обидете повторно.</string>
     <string name="mount_stock_restore_failed_message">Android го одби saved оригиналниот APK. Инсталирајте ја одговарачката оригинална верзија, па потоа обидете се повторно со Монтирање</string>
     <string name="installer_status_shizuku_unsupported">Неподдржана верзија на Shizuku</string>
@@ -1052,9 +1057,6 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_mode_description">Го означува Google Play Store како извор за инсталација</string>
     <string name="settings_nomount_only">Само NoMount</string>
     <string name="settings_nomount_only_description">Ги монтира апликациите само со NoMount и никогаш не се враќа на bind mount, па затоа тие остануваат немонтирани без него</string>
-    <string name="settings_prompt_installer_on_install">Помошни информации за инсталирање</string>
-    <string name="settings_prompt_installer_on_install_description">Прашува како да се инсталира секоја апликација: со root пред закрпувањето, во спротивно после него</string>
-    <string name="settings_auto_install_with_shizuku">Автоматски инсталирај по закрпа</string>
     <string name="settings_auto_install_with_shizuku_description">Ја инсталира или ја монтира закрпената APK штом ќе заврши закрпувањето</string>
     <string name="settings_auto_uninstall_with_shizuku">Автоматско деинсталирање при конфликт</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Деинсталира ја постоечката апликација при конфликт на потписот. Ова може да ги отстрани податоците на апликацијата</string>

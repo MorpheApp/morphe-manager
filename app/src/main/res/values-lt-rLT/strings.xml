@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Paslėpti šią programą?</string>
     <string name="home_more_apps_title">Daugiau programų</string>
     <string name="home_more_apps_hide_title">Paslėpti šią kortelę?</string>
-    <string name="home_more_apps_hide_message">Galite jį bet kada grąžinti tekstu: Nustatymai &gt; Išvaizda &gt; Pagrindinis ekranas</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Galite ją bet kada grąžinti skiltyje %1$s</string>
     <string name="home_app_hide_message">Ši programa bus paslėpta iš pagrindinio ekrano. Vėliau ją galite atkelti iš paslėptų programų naudodami mygtuką apačioje esančio sąrašo</string>
     <string name="home_app_will_be_hidden">Ši programa bus paslėpta</string>
     <string name="home_app_hidden_named">%s paslėpta</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Pasitikėtas raktas</string>
     <string name="sources_signing_key_new">Naujas raktas</string>
     <string name="sources_patch_expert_badge">Ekspertas</string>
-    <string name="sources_patch_expert_badge_tooltip">Įjunkite Ekspertų režimą Parametruose, kad galėtumėte rankiniu būdu įtraukti šį pataisą</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Įjunkite %1$s, kad galėtumėte rankiniu būdu įtraukti šį pataisą</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Reikia pagalbos surast APK?</string>
     <string name="home_apk_availability_dialog_simple">Kad pataisyti&lt;b&gt;%s&lt;/b&gt;, jums reikia nepataisytos versijos:</string>
@@ -529,6 +531,7 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <string name="home_app_info_install_type_custom_installer">Savo diegiklis</string>
     <string name="home_app_info_install_type_system_installer">Sistemos diegiklis</string>
     <string name="home_app_info_install_type_play_store">\'Play\' parduotuvės instaliacija</string>
+    <string name="home_app_info_install_type_root">Root diegimas</string>
     <string name="home_app_info_install_type_root_play_store">Root Play Store diegimas</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Store diegimas</string>
     <string name="home_app_info_patch_update_available">Pataisos atnaujinimas prieinamas</string>
@@ -570,7 +573,8 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <string name="root_mount_module_unmount_warning">Jei KernelSU turi įjungtą nustatymą „Numatytaisiais atvejais nuimti modulius“, atidarykite KernelSU &gt; Suvienybė &gt; prisegtas programėlę &gt; Profilis &gt; Custom ir išjunkite „Nuimti modulius“. Kitu atveju prisegtas pataisyta APK gali neveikti, net jei Morphe rodo ją kaip prisegtą</string>
     <string name="root_pre_patch_installer_standard_title">Standartinio diegimo režimas</string>
     <string name="root_pre_patch_installer_standard_description">Pataiso kaip įprastą APK su GmsCore palaikymu. Po pataisymo naudojamas jūsų diegimo įrankio nustatymas</string>
-    <string name="root_pre_patch_installer_hint">Paklausta, kai nustatymuose <b>&amp;gt;</b> Trynimas <b>&amp;gt;</b> Diegimas <b>&amp;gt;</b> Dieklio pasirinkimo užklausa yra aktyvi. Po trynimo trynimo režimo pakeisti negalima</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Paklausyta, kai %1$s nustatyta į %2$s. Pataisų režimo po pataisymo pakeisti negalima</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Klaida nukopijuota į iškarpinę</string>
     <string name="patcher_error_log">Klaidų žurnalas</string>
@@ -669,6 +673,14 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <string name="patcher_step_group_saving">Išsaugoma</string>
     <string name="patcher_step_write_patched">Rašomas pataisytas APK failas</string>
     <string name="patcher_step_sign_apk">Pasirašomas pataisytas APK failas</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Skaityti DEX failus</string>
+    <string name="patcher_task_extracting_resources">Ištraukti išteklius</string>
+    <string name="patcher_task_decoding_resources">Dekoduoti išteklius</string>
+    <string name="patcher_task_indexing_classes">Indeksuoti klases</string>
+    <string name="patcher_task_compiling_dex">Kompiliuoti DEX failus</string>
+    <string name="patcher_task_compiling_resources">Kompiliuojami resursai</string>
+    <string name="patcher_task_writing_apk">Rašomas APK failas</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Foninio taisymo apsauga</string>
     <string name="battery_optimization_dialog_description">Kai kurie prietaisai gali sustabdyti taisytoją kai programa yra sumažinama. Leiskite Morphe veikti be baterijos apribojimų, kad pataisymas būtų įvykdytas patikimai</string>
@@ -717,7 +729,8 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <string name="patched_app_save_failed_toast">Nepavyko išsaugoti pataisytos programos</string>
     <string name="plugin_activity_dialog_body">Reikia vartotojo sąveikos, kad tęsti su šiuo įskiepiu</string>
     <string name="patcher_process_killed_message">Sistema sustabdė švirkštuvą, kol dar nebaigė veikti, paprastai dėl atminties išlaisvinimo. Uždarykite kitas programas ir bandykite dar kartą</string>
-    <string name="patcher_process_crashed_message">Atnaujinimo programa lūžo prieš pabaigą. Jei tai pasikartos, nustatymuose išjunkite \"Use embedded VM\" ir praneškite apie problemą kartu su žurnalu</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Pataisykliu programanucleus išjungė prieš baigdamas. Jei tai pasikartos, išjunkite %1$s ir praneškite apie problemą kartu su žurnalu</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Patcherio atminties baigėsi su %1$s MB krūva. Ši programėlė per didelė pasirinktiems patamsims. Bandykite keisti mažesnių šaltinių, arba pasirinkti mažiau patamsų</string>
     <string name="install_app_success">Sėkmingai įdiegta</string>
@@ -1017,9 +1030,8 @@ Vaizdų matmenys turi būti tokie:
     <string name="installer_title">Pasirinkite diegimo įrankį</string>
     <string name="installer_internal_description">Naudoja „Android“ paketų diegimo įrankį</string>
     <string name="installer_play_store_description">Naudoja sistemos diegimo programą ir nustato Google Play Store kaip diegimo šaltinį</string>
+    <string name="installer_root_description">Tyliai diegia naudojant root</string>
     <string name="installer_root_play_store_description">Diegia tyliai su root ir nustato Google Play Store kaip diegimo šaltinį</string>
-    <string name="installer_auto_saved_name">Root prijungimas</string>
-    <string name="installer_auto_saved_description">Prijungia programas, kurios buvo pataisytos root prijungimo režimu. Standartiniai pataisyti APK naudoja kitą diegimo įrankį</string>
     <string name="installer_shizuku_description">Tyliai diegia naudodamas „Shizuku“ arba „Sui“</string>
     <string name="installer_shizuku_play_store_description">Diegia tyliai per Shizuku arba Sui ir nustato Google Play Store kaip diegimo šaltinį</string>
     <string name="installer_option_none">Nėra atsarginės parinkties</string>
@@ -1029,7 +1041,7 @@ Vaizdų matmenys turi būti tokie:
     <string name="installer_status_shizuku_not_installed">Įdiekite „Shizuku“ arba „Sui“, kad galėtumėte naudoti šią parinktį</string>
     <string name="installer_status_shizuku_not_running">Paleiskite „Shizuku“ arba „Sui“ ir bandykite dar kartą</string>
     <string name="installer_status_shizuku_permission">Suteikite leidimą „Morphe“ iš „Shizuku“ programos</string>
-    <string name="installer_mount_warning_install">Jūsų pagrindinis diegimo įrankis nustatytas kaip root prijungimo diegimo įrankis. Ši išsaugota programa nebuvo įdiegta naudojant prijungimą</string>
+    <string name="installer_mount_warning_install">Pataisų režimas nustatytas į root montavimą. Ši išsaugota programėlė nebuvo įdiegta naudojant montavimą</string>
     <string name="mount_version_mismatch_message">Originalios programos versija (%2$s) neatitinka pataisytos programos versijos (%1$s). Prijunkite atitinkančią originalią versiją ir bandykite dar kartą</string>
     <string name="mount_stock_restore_failed_message">„Android“ atmetė išsaugotą originalų APK. Įdiekite atitinkančią originalią versiją ir bandykite prijungti dar kartą</string>
     <string name="installer_status_shizuku_unsupported">Įdiegta „Shizuku“ versija nepalaikoma</string>
@@ -1051,11 +1063,17 @@ Vaizdų matmenys turi būti tokie:
     <string name="installer_play_store_warning_continue">Suprantu, tęskite</string>
     <string name="installer_play_store_mode">Diegti kaip „Play“ parduotuvės</string>
     <string name="installer_play_store_mode_description">Žymi „Google Play Store</string>
+    <string name="settings_section_patch_mode">Pataisų režimas</string>
+    <string name="settings_patch_mode_ask">Klausti kiekvieną kartą</string>
+    <string name="settings_patch_mode_ask_description">Prieš kiekvieną programėlę taikant pataisą klausia, ar ją pataisyti root montavimui, ar standartiniam diegimui</string>
+    <string name="settings_section_after_patching">Po pataisymo</string>
+    <string name="settings_after_patching_install">Diegti automatiškai</string>
+    <string name="settings_after_patching_ask">Klausti, kokio diegiklio naudoti</string>
+    <string name="settings_after_patching_ask_description">Kiekvieną kartą diegiant programėlę klausia, kokio diegiklio naudoti</string>
+    <string name="settings_after_patching_manual">Diegti rankiniu būdu</string>
+    <string name="settings_after_patching_manual_description">Paspaudus \"Diegti\", programėlė bus įdiegta naudojant standartinį diegiklį</string>
     <string name="settings_nomount_only">Tik NoMount</string>
     <string name="settings_nomount_only_description">Programas montuoja tik naudojant „NoMount“ ir niekada negrįžta prie „bind mount“, todėl be jo jos lieka nemontuotos</string>
-    <string name="settings_prompt_installer_on_install">Diegimo įrankio pasirinkimo raginimas</string>
-    <string name="settings_prompt_installer_on_install_description">Kiekvieno programėle įdiegimo metu klausia, kaip ją diegti: su root teisėmis prieš šlifavimą, kitaip – po jo</string>
-    <string name="settings_auto_install_with_shizuku">Automatiškai įdiegti po pataisymo</string>
     <string name="settings_auto_install_with_shizuku_description">Iškart baigus šlifavimą diegia arba prisukuoja ištaisytą APK</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatiškai pašalinti konflikto atveju</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Pašalina esamą programėlę, jeigu yra parašo konflikto. Tai gali pašalinti programėlės duomenis</string>

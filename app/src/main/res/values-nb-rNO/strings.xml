@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Skjul denne appen?</string>
     <string name="home_more_apps_title">Flere apper</string>
     <string name="home_more_apps_hide_title">Skjul dette kortet?</string>
-    <string name="home_more_apps_hide_message">Du kan bringe den tilbake når som helst i Innstillinger &gt; Utseende &gt; Hjemmeskjerm</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Du kan få den tilbake når som helst i %1$s</string>
     <string name="home_app_hide_message">Denne appen vil være skjult fra startskjermen. Du kan gjenopprette den senere fra de skjulte appene ved hjelp av knappen nederst i listen</string>
     <string name="home_app_will_be_hidden">Denne appen vil bli skjult</string>
     <string name="home_app_hidden_named">%s skjult</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Godkjent nøkkel</string>
     <string name="sources_signing_key_new">Ny nøkkel</string>
     <string name="sources_patch_expert_badge">Ekspert</string>
-    <string name="sources_patch_expert_badge_tooltip">Aktiver Ekspertmodus i Innstillinger for å inkludere denne patchen manuelt</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Slå på %1$s for å inkludere denne patchen manuelt</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Trenger du hjelp til å finne APK-filen?</string>
     <string name="home_apk_availability_dialog_simple">For å patche &lt;b&gt;%s&lt;/b&gt;, trenger du den upatchede APK-versjonen:</string>
@@ -529,6 +531,7 @@ For de beste resultatene anbefaler denne appen å patche en &lt;b&gt;full APK-fi
     <string name="home_app_info_install_type_custom_installer">Tilpasset installasjonsprogram</string>
     <string name="home_app_info_install_type_system_installer">Systeminstallasjonsprogram</string>
     <string name="home_app_info_install_type_play_store">Installer fra Play Butikk</string>
+    <string name="home_app_info_install_type_root">Root-installasjon</string>
     <string name="home_app_info_install_type_root_play_store">Root-installasjon fra Play Butikk</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Butikk-installasjon</string>
     <string name="home_app_info_patch_update_available">Patch-oppdatering tilgjengelig</string>
@@ -570,7 +573,8 @@ For de beste resultatene anbefaler denne appen å patche en &lt;b&gt;full APK-fi
     <string name="root_mount_module_unmount_warning">Hvis KernelSU har \"Slett moduler som standard\" slått på, åpne KernelSU &gt; Superuser &gt; appen du monterte &gt; Profil &gt; Egendefinert og slå av \"Slett moduler\". Ellers kan den monterne patchede APK-en kanskje ikke tre i kraft, selv om Morphe viser at den er montert</string>
     <string name="root_pre_patch_installer_standard_title">Standard installasjonsmodus</string>
     <string name="root_pre_patch_installer_standard_description">Installerer som en vanlig APK med GmsCore-støtte. Dine installasjonsinnstillinger brukes etter installasjonen.</string>
-    <string name="root_pre_patch_installer_hint">Spurt under Innstillinger &gt; Patching &gt; Installasjon &gt; Velger for installatør. Patchmodus kan ikke endres etter patching</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Spurt mens %1$s er satt til %2$s. Patch-modus kan ikke endres etter patching</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Feil kopiert til utklippstavlen</string>
     <string name="patcher_error_log">Feillogg</string>
@@ -669,6 +673,14 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="patcher_step_group_saving">Lagrer</string>
     <string name="patcher_step_write_patched">Skriver patchet APK-fil</string>
     <string name="patcher_step_sign_apk">Signerer patchet APK-fil</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Leser DEX-filer</string>
+    <string name="patcher_task_extracting_resources">Henter ut ressurser</string>
+    <string name="patcher_task_decoding_resources">Dekoder ressurser</string>
+    <string name="patcher_task_indexing_classes">Indekserer klasser</string>
+    <string name="patcher_task_compiling_dex">Kompilerer DEX-filer</string>
+    <string name="patcher_task_compiling_resources">Kompilerer ressurser</string>
+    <string name="patcher_task_writing_apk">Skriver APK-fil</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Beskyttelse for patching i bakgrunnen</string>
     <string name="battery_optimization_dialog_description">Noen enheter kan stoppe patchingen når appen minimeres. La Morphe kjøre uten batteribegrensninger for å sikre at oppdateringen fullføres pålitelig.</string>
@@ -717,7 +729,8 @@ Avinstallering vil permanent slette alle appdata"</string>
     <string name="patched_app_save_failed_toast">Kunne ikke lagre patchet app</string>
     <string name="plugin_activity_dialog_body">Brukerinteraksjon er nødvendig for å fortsette med dette pluginet</string>
     <string name="patcher_process_killed_message">Systemet stoppet patcheren før den ble ferdig, vanligvis for å frigjøre minne. Lukk andre apper og prøv igjen</string>
-    <string name="patcher_process_crashed_message">Patcher-programmet krasjet før det var ferdig. Hvis dette skjer igjen, slå av \"Bruk innebygd VM\" i innstillingene og rapporter problemet med loggen</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Patcheren krasjet før den var ferdig. Hvis dette skjer igjen, slå av %1$s og rapporter problemet med loggen</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Patcheren løp tom for minne med en %1$s MB heap. Denne appen er for stor for de valgte patchene. Prøv å patche med færre patch-kilder, eller velg færre patcher</string>
     <string name="install_app_success">Installert vellykket</string>
@@ -1017,9 +1030,8 @@ morphe_header_custom_dark.png
     <string name="installer_title">Velg installasjonsprogram</string>
     <string name="installer_internal_description">Bruker Android-pakkeinstallasjonsprogrammet</string>
     <string name="installer_play_store_description">Bruker systeminstallatøren og angir Google Play Butikk som installasjonskilde</string>
+    <string name="installer_root_description">Installerer lydløst med root</string>
     <string name="installer_root_play_store_description">Installeres stille med root og angir Google Play Store som installasjonskilde</string>
-    <string name="installer_auto_saved_name">Rottilgang</string>
-    <string name="installer_auto_saved_description">Monterer apper som ble installert i rottilgangsmodus. Standard installerte APK-er bruker et annet installasjonsprogram.</string>
     <string name="installer_shizuku_description">Installerer lydløst ved hjelp av Shizuku eller Sui</string>
     <string name="installer_shizuku_play_store_description">Installeres stille via Shizuku eller Sui og angir Google Play Store som installasjonskilde</string>
     <string name="installer_option_none">Ingen fallback</string>
@@ -1029,7 +1041,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">Installer Shizuku eller Sui for å bruke dette alternativet</string>
     <string name="installer_status_shizuku_not_running">Start Shizuku eller Sui og prøv igjen</string>
     <string name="installer_status_shizuku_permission">Gi Morphe tillatelse fra Shizuku-appen</string>
-    <string name="installer_mount_warning_install">Din primære installasjonsprogram er satt til den rooted mount-installasjonsprogrammet. Denne lagrede appen ble ikke installert ved hjelp av mount</string>
+    <string name="installer_mount_warning_install">Patch-modus er satt til root-montering. Denne lagrede appen ble ikke installert ved bruk av montering</string>
     <string name="mount_version_mismatch_message">Aksjeversjonen (%2$s) stemmer ikke overens med den patchede appversjonen (%1$s). Mount den matchende aksjeversjonen og prøv igjen</string>
     <string name="mount_stock_restore_failed_message">Android avviste den lagrede originale APK-en. Installer den matchende standardversjonen, og prøv å montere igjen.</string>
     <string name="installer_status_shizuku_unsupported">Den installerte Shizuku-versjonen støttes ikke</string>
@@ -1051,11 +1063,17 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_continue">Jeg forstår, fortsett</string>
     <string name="installer_play_store_mode">Installer som Play Butikk</string>
     <string name="installer_play_store_mode_description">Merk Google Play Butikk som installeringskilde</string>
+    <string name="settings_section_patch_mode">Patch-modus</string>
+    <string name="settings_patch_mode_ask">Spør hver gang</string>
+    <string name="settings_patch_mode_ask_description">Spør før patching av hver app om den skal patches for root-montering eller standardinstallasjon</string>
+    <string name="settings_section_after_patching">Etter patching</string>
+    <string name="settings_after_patching_install">Installer automatisk</string>
+    <string name="settings_after_patching_ask">Spør om installatør</string>
+    <string name="settings_after_patching_ask_description">Spør hvilken installatør som skal brukes hver gang en app installeres</string>
+    <string name="settings_after_patching_manual">Installer manuelt</string>
+    <string name="settings_after_patching_manual_description">Installerer med standardinstallatøren når du trykker på Installer</string>
     <string name="settings_nomount_only">Kun NoMount</string>
     <string name="settings_nomount_only_description">Monterer apper kun med NoMount og faller aldri tilbake til et bind-mount, slik at de forblir umonterte uten det</string>
-    <string name="settings_prompt_installer_on_install">Installeringsvalg-melding</string>
-    <string name="settings_prompt_installer_on_install_description">Spør hvordan hver app skal installeres: med root før patching, ellers etter det</string>
-    <string name="settings_auto_install_with_shizuku">Automatisk installasjon etter patching</string>
     <string name="settings_auto_install_with_shizuku_description">Installerer eller monterer den patchede APK-en så snart patchingen er fullført</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatisk avinstallasjon ved konflikt</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Avinstallerer den eksisterende appen ved signaturkonflikt. Dette kan fjerne appdata</string>
