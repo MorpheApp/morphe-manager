@@ -87,7 +87,7 @@ Morphe shows this warning and asks you to confirm before enabling the option.
   itself, which means replacing a build Morphe put there, with the same signature. Anything
   else waits for you to tap **Install**.
 - **Ask which installer** - every install asks which installer to use, the default one
-  preselected.
+  preselected. A root mount needs no installer, so it is mounted as soon as patching finishes.
 - **Install manually** - nothing happens until you tap **Install**, which uses the default installer.
 
 ### Auto-uninstall on conflict

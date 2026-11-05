@@ -151,11 +151,12 @@ class InstallerManager(
      * silently or through a confirmation the installer knows how to put in front of them.
      *
      * @param mount Whether the build is mounted rather than installed, which root does without
-     *   any installer.
+     *   any installer, so asking for one leaves nothing to wait for.
      */
     suspend fun autoInstallAllowed(targetPackageName: String, mount: Boolean): Boolean {
-        if (prefs.afterPatching.get() != AfterPatching.INSTALL) return false
-        if (mount) return true
+        val afterPatching = prefs.afterPatching.get()
+        if (mount) return afterPatching != AfterPatching.MANUAL
+        if (afterPatching != AfterPatching.INSTALL) return false
 
         return when (val token = parseToken(prefs.installerPrimary.get())) {
             // A system session only updates an app silently in some cases
