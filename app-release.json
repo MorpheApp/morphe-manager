@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-11-05T16:58:18",
-  "description": "## [2.5.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0...v2.5.0-dev.1) (2026-11-05)\n\n### Features\n\n* Copy app and source details with a long press ([d73e5bf](https://github.com/MorpheApp/morphe-manager/commit/d73e5bf38af3ff3601e2952041e6e7f45b2e8465))\n* Mark the sort button only while a filter narrows the list ([4fd6c74](https://github.com/MorpheApp/morphe-manager/commit/4fd6c74f0301bb67ef98e4bbef945e21fd0eb7e3))\n* Rework installation settings and add root install ([56f13f6](https://github.com/MorpheApp/morphe-manager/commit/56f13f60722276f62cd81f0d8b3baed41b73564c))\n* Show patching progress as the patcher reports it ([1d16f32](https://github.com/MorpheApp/morphe-manager/commit/1d16f32614fef8c9642350a7544424b6841be5f9))\n\n### Bug Fixes\n\n* Mount after patching unless installing manually ([0493aeb](https://github.com/MorpheApp/morphe-manager/commit/0493aeb43760a7383976861fe871380b449d2d07))\n* Slide dialog panels in and out ([a5b148e](https://github.com/MorpheApp/morphe-manager/commit/a5b148e10bded398e5f050960b5960c0a9368d33))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.5.0-dev.1/morphe-manager-2.5.0-dev.1.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.5.0-dev.1/morphe-manager-2.5.0-dev.1.apk.asc",
-  "version": "2.5.0-dev.1"
+  "created_at": "2026-11-05T19:57:49",
+  "description": "## [2.5.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v2.5.0-dev.1...v2.5.0-dev.2) (2026-11-05)\n\n### Bug Fixes\n\n* Bump patcher ([5a7a04d](https://github.com/MorpheApp/morphe-manager/commit/5a7a04d902c693020675e42ade3698811f669ac8))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.5.0-dev.2/morphe-manager-2.5.0-dev.2.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.5.0-dev.2/morphe-manager-2.5.0-dev.2.apk.asc",
+  "version": "2.5.0-dev.2"
 }
