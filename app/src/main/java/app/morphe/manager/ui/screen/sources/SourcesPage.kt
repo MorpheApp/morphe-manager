@@ -1138,7 +1138,8 @@ private fun BundleManagementCard(
                                         label = stringResource(R.string.version),
                                         value = bundle.version?.normalizeVersion()?.isolateLtr() ?: "N/A",
                                         onClick = actions.onVersionClick,
-                                        enabled = !info.isUpdating
+                                        enabled = !info.isUpdating,
+                                        copyText = bundle.version?.normalizeVersion()
                                     )
 
                                     bundle.signingKeyFingerprint?.let { fingerprint ->

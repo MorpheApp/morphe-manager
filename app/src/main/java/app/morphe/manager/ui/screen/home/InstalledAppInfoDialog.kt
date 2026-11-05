@@ -1189,7 +1189,8 @@ private fun InfoSection(
             InfoRow(
                 icon = MaterialSymbols.Rounded.Inventory_2,
                 label = stringResource(R.string.package_name),
-                value = installedApp.currentPackageName
+                value = installedApp.currentPackageName,
+                copyText = installedApp.currentPackageName
             )
 
             if (installedApp.originalPackageName != installedApp.currentPackageName) {
@@ -1197,7 +1198,8 @@ private fun InfoSection(
                 InfoRow(
                     icon = MaterialSymbols.Rounded.Category,
                     label = stringResource(R.string.home_app_info_original_package_name),
-                    value = installedApp.originalPackageName
+                    value = installedApp.originalPackageName,
+                    copyText = installedApp.originalPackageName
                 )
             }
 
@@ -1209,6 +1211,7 @@ private fun InfoSection(
                     icon = MaterialSymbols.Rounded.Update,
                     label = stringResource(R.string.home_app_info_newest_supported_version),
                     value = version.withVersionPrefix(),
+                    copyText = version,
                     onStopIgnoring = onStopIgnoringVersion
                 )
             }
@@ -1217,7 +1220,8 @@ private fun InfoSection(
                 InfoRow(
                     icon = MaterialSymbols.Rounded.Sd_card,
                     label = stringResource(R.string.home_app_info_apk_size),
-                    value = size
+                    value = size,
+                    copyText = size
                 )
             }
 
@@ -1225,7 +1229,8 @@ private fun InfoSection(
                 InfoRow(
                     icon = MaterialSymbols.Rounded.Memory,
                     label = stringResource(R.string.home_app_info_cpu_arch),
-                    value = abis.joinToString(" • ")
+                    value = abis.joinToString(" • "),
+                    copyText = abis.joinToString(", ")
                 )
             }
 
@@ -1247,6 +1252,7 @@ private fun InfoSection(
                     icon = MaterialSymbols.Rounded.Folder_code,
                     label = stringResource(R.string.home_app_info_patch_source_used),
                     value = summary,
+                    copyText = summary,
                     onStopIgnoring = onStopIgnoringPatchUpdate,
                     actions = listOfNotNull(
                         onShowChangelog?.let {
@@ -1293,6 +1299,7 @@ private fun IgnorableInfoRow(
     icon: ImageVector,
     label: String,
     value: String,
+    copyText: String?,
     onStopIgnoring: (() -> Unit)?,
     actions: List<InfoRowAction> = emptyList()
 ) {
@@ -1300,6 +1307,7 @@ private fun IgnorableInfoRow(
         icon = if (onStopIgnoring != null) MaterialSymbols.Rounded.Visibility_off else icon,
         label = label,
         value = value,
+        copyText = copyText,
         actions = actions + listOfNotNull(
             onStopIgnoring?.let {
                 InfoRowAction(MaterialSymbols.Rounded.Visibility, stringResource(R.string.stop_ignoring), it)
@@ -1334,12 +1342,14 @@ private fun InfoRowWithActions(
     icon: ImageVector,
     label: String,
     value: String,
-    actions: List<InfoRowAction>
+    actions: List<InfoRowAction>,
+    copyText: String? = null
 ) {
     InfoRow(
         icon = icon,
         label = label,
         value = value,
+        copyText = copyText,
         trailing = actions.takeIf { it.isNotEmpty() }?.let { shown ->
             {
                 Row(horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)) {

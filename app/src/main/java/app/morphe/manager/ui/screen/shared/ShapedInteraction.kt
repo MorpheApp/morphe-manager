@@ -8,14 +8,20 @@ package app.morphe.manager.ui.screen.shared
 import androidx.compose.foundation.IndicationNodeFactory
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.ripple
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.onLongClick
+import androidx.compose.ui.semantics.semantics
 
 /**
  * Material's ripple for a control drawn on [shape], its focus ring traced along the shape. Left to
@@ -55,6 +61,7 @@ fun Modifier.shapedClickable(
 fun Modifier.shapedCombinedClickable(
     shape: Shape,
     enabled: Boolean = true,
+    role: Role? = null,
     onLongClickLabel: String? = null,
     onLongClick: (() -> Unit)? = null,
     onClick: () -> Unit
@@ -62,10 +69,50 @@ fun Modifier.shapedCombinedClickable(
     interactionSource = null,
     indication = shapedIndication(shape),
     enabled = enabled,
+    role = role,
     onLongClickLabel = onLongClickLabel,
     onLongClick = onLongClick,
     onClick = onClick
 )
+
+/**
+ * A long press on [shape], clipped to it and showing the [shapedIndication] of it once the press
+ * turns long. For an element with nothing to do on a tap, which [combinedClickable] would still
+ * offer as an action.
+ */
+fun Modifier.shapedLongPressable(
+    shape: Shape,
+    interactionSource: MutableInteractionSource,
+    enabled: Boolean = true,
+    onLongClickLabel: String? = null,
+    onLongClick: () -> Unit
+): Modifier {
+    if (!enabled) return this
+    return clip(shape)
+        .indication(interactionSource, shapedIndication(shape))
+        .pointerInput(interactionSource, onLongClick) {
+            var held: PressInteraction.Press? = null
+            detectTapGestures(
+                onPress = {
+                    val released = tryAwaitRelease()
+                    held?.let {
+                        interactionSource.emit(if (released) PressInteraction.Release(it) else PressInteraction.Cancel(it))
+                    }
+                    held = null
+                },
+                onLongPress = { offset ->
+                    held = PressInteraction.Press(offset).also { interactionSource.tryEmit(it) }
+                    onLongClick()
+                }
+            )
+        }
+        .semantics {
+            onLongClick(label = onLongClickLabel) {
+                onLongClick()
+                true
+            }
+        }
+}
 
 /** [toggleable] on [shape], clipped to it and showing the [shapedIndication] of it. */
 fun Modifier.shapedToggleable(
