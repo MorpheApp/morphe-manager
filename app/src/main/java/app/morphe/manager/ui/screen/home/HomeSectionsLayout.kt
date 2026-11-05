@@ -155,7 +155,6 @@ internal fun SectionsLayout(
         header = {
             HomeHeader(
                 apps = apps,
-                appActions = appActions,
                 search = search,
                 alerts = alerts,
                 sortEnabled = !state.isEditing,

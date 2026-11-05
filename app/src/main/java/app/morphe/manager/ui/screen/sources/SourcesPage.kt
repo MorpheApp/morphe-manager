@@ -388,7 +388,7 @@ private fun SourcesPageContent(
     val searchLabel = stringResource(R.string.sources_search)
     val manualSortHint = stringResource(R.string.sources_sort_manual_hint)
 
-    // What the options panel offers, and what marks the sort button once any is off its default
+    // What the options panel offers
     val listOptions = listOf(
         listOptionSection(
             R.string.sort, MaterialSymbols.Rounded.Sort.autoMirrored, sourceSortMode, SourceBundleSortMode.MANUAL
@@ -433,22 +433,11 @@ private fun SourcesPageContent(
                     return@PageHeader
                 }
                 AnimatedVisibility(visible = isSearchable) {
-                    val optionsState = listOptionsStateDescription(
-                        sourceSortMode.labelRes,
-                        sourceFilter.labelRes.takeIf { sourceFilter.isActive }
-                    )
-                    // Engaged while the options are open, and marked while any is off its default
-                    TitleAction(
-                        icon = MaterialSymbols.Rounded.Sort.autoMirrored,
-                        contentDescription = stringResource(R.string.sort),
-                        onClick = state::toggleListOptions,
-                        modifier = Modifier.semantics {
-                            role = Role.Button
-                            stateDescription = optionsState
-                        },
-                        style = TitleActionStyle.Toggle,
-                        active = state.isListOptionsOpen,
-                        marked = listOptions.any { it.isChanged }
+                    ListOptionsButton(
+                        sortRes = sourceSortMode.labelRes,
+                        filterRes = sourceFilter.labelRes.takeIf { sourceFilter.isActive },
+                        open = state.isListOptionsOpen,
+                        onClick = state::toggleListOptions
                     )
                 }
                 TitleAction(
