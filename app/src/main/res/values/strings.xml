@@ -9,7 +9,8 @@
     <string name="home_app_hide_title">Hide this app?</string>
     <string name="home_more_apps_title">More apps</string>
     <string name="home_more_apps_hide_title">Hide this card?</string>
-    <string name="home_more_apps_hide_message">You can bring it back anytime in Settings > Appearance > Home screen</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">You can bring it back anytime in %1$s</string>
     <string name="home_app_hide_message">This app will be hidden from the home screen. You can restore it later from the hidden apps using the button at the bottom of the list</string>
     <string name="home_app_will_be_hidden">This app will be hidden</string>
     <string name="home_app_hidden_named">%s hidden</string>
@@ -248,7 +249,8 @@
     <string name="sources_signing_key_trusted">Trusted key</string>
     <string name="sources_signing_key_new">New key</string>
     <string name="sources_patch_expert_badge">Expert</string>
-    <string name="sources_patch_expert_badge_tooltip">Enable Expert mode in Settings to include this patch manually</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Turn on %1$s to include this patch manually</string>
 
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Need help finding the APK?</string>
@@ -589,7 +591,8 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="root_mount_module_unmount_warning">If KernelSU has \"Unmount modules by default\" turned on, open KernelSU > Superuser > the app you mounted > Profile > Custom and turn off \"Unmount modules\". Otherwise, the mounted patched APK may not take effect, even if Morphe shows it as mounted</string>
     <string name="root_pre_patch_installer_standard_title">Standard install mode</string>
     <string name="root_pre_patch_installer_standard_description">Patches as a normal APK with GmsCore support. Your installer setting is used after patching</string>
-    <string name="root_pre_patch_installer_hint">Asked while Settings > Patching > Installation > Patch mode is set to Ask every time. The patch mode cannot be changed after patching</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Asked while %1$s is set to %2$s. The patch mode cannot be changed after patching</string>
 
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Error copied to clipboard</string>
@@ -754,7 +757,8 @@ Uninstalling will permanently erase all app data"</string>
     <string name="patched_app_save_failed_toast">Failed to save patched app</string>
     <string name="plugin_activity_dialog_body">User interaction is required in order to proceed with this plugin</string>
     <string name="patcher_process_killed_message">The system stopped the patcher before it finished, usually to free memory. Close other apps and try again</string>
-    <string name="patcher_process_crashed_message">The patcher crashed before it finished. If it happens again, turn off \"Use embedded VM\" in settings and report the issue with the log</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">The patcher crashed before it finished. If it happens again, turn off %1$s and report the issue with the log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">The patcher ran out of memory with a %1$s MB heap. This app is too large for the selected patches. Try patching with fewer patch sources, or select fewer patches</string>
 

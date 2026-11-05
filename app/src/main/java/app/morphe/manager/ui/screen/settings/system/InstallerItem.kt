@@ -21,6 +21,7 @@ import app.morphe.manager.domain.installer.ShizukuEnvironment
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
+import app.morphe.manager.util.settingsPath
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
 import kotlinx.coroutines.Dispatchers
@@ -792,7 +793,11 @@ fun DialogHostScope.PrePatchInstallerDialog(
             // Info hint
             if (showPromptHint) {
                 Footnote(
-                    text = stringResource(R.string.root_pre_patch_installer_hint),
+                    text = stringResource(
+                        R.string.root_pre_patch_installer_hint,
+                        settingsPath(R.string.settings_installation, R.string.settings_section_patch_mode),
+                        stringResource(R.string.settings_patch_mode_ask)
+                    ),
                     tone = SemanticTone.Primary
                 )
             }

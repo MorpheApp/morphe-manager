@@ -437,9 +437,14 @@ class PatcherWorker(
         } catch (e: PatcherKilledException) {
             Log.e(tag, "Patcher process ended: ${e.reason}".logFmt(), e)
             args.logger.error("Patcher process ended: ${e.reason}")
-            val message = applicationContext.getString(
-                if (e.crashed) R.string.patcher_process_crashed_message else R.string.patcher_process_killed_message
-            )
+            val message = if (e.crashed) {
+                applicationContext.getString(
+                    R.string.patcher_process_crashed_message,
+                    applicationContext.settingsPath(R.string.settings_section_patcher, R.string.settings_system_jvm_runtime_enable)
+                )
+            } else {
+                applicationContext.getString(R.string.patcher_process_killed_message)
+            }
             updateProgress(state = State.FAILED, message = message)
             Result.failure(
                 workDataOf(FAILURE_MESSAGE_KEY to message)

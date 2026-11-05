@@ -250,7 +250,10 @@ fun DialogHostScope.BundlePatchesDialog(
     val universalTitle = stringResource(R.string.expert_mode_universal_patches)
     val sections = remember(patches, universalTitle) { patchesByApp(patches, universalTitle) }
     val appCount = sections.count { it.packageName != null }
-    val expertBadgeTooltip = stringResource(R.string.sources_patch_expert_badge_tooltip)
+    val expertBadgeTooltip = stringResource(
+        R.string.sources_patch_expert_badge_tooltip,
+        settingsPath(R.string.settings_advanced_expert_mode)
+    )
 
     PatchListDialog(
         icon = { modifier -> BundleIcon(bundle = src, modifier = modifier) },
