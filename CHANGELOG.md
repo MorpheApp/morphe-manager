@@ -1,3 +1,17 @@
+## [2.5.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0...v2.5.0-dev.1) (2026-11-05)
+
+### Features
+
+* Copy app and source details with a long press ([d73e5bf](https://github.com/MorpheApp/morphe-manager/commit/d73e5bf38af3ff3601e2952041e6e7f45b2e8465))
+* Mark the sort button only while a filter narrows the list ([4fd6c74](https://github.com/MorpheApp/morphe-manager/commit/4fd6c74f0301bb67ef98e4bbef945e21fd0eb7e3))
+* Rework installation settings and add root install ([56f13f6](https://github.com/MorpheApp/morphe-manager/commit/56f13f60722276f62cd81f0d8b3baed41b73564c))
+* Show patching progress as the patcher reports it ([1d16f32](https://github.com/MorpheApp/morphe-manager/commit/1d16f32614fef8c9642350a7544424b6841be5f9))
+
+### Bug Fixes
+
+* Mount after patching unless installing manually ([0493aeb](https://github.com/MorpheApp/morphe-manager/commit/0493aeb43760a7383976861fe871380b449d2d07))
+* Slide dialog panels in and out ([a5b148e](https://github.com/MorpheApp/morphe-manager/commit/a5b148e10bded398e5f050960b5960c0a9368d33))
+
 ## [2.4.0](https://github.com/MorpheApp/morphe-manager/compare/v2.3.0...v2.4.0) (2026-11-04)
 
 ### Features
