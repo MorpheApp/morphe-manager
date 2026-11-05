@@ -218,7 +218,7 @@ class OptionValuesTest {
         assertTrue(logger.warnings.single().contains("maxDuration"))
     }
 
-    private fun patchesByName(vararg patches: Patch<*>) = patches.associateBy { it.name!! }
+    private fun patchesByName(vararg patches: Patch) = patches.associateBy { it.name!! }
 
     private class TestLogger : Logger() {
         val warnings = mutableListOf<String>()

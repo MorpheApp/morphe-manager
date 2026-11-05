@@ -8,13 +8,13 @@ package app.morphe.manager.patcher.patch
 import app.morphe.patcher.patch.Patch
 
 /** Whether the patch applies to [packageName], which a universal patch does to every package. */
-fun Patch<*>.compatibleWith(packageName: String) =
+fun Patch.compatibleWith(packageName: String) =
     compatibility.let { targets ->
         targets == null || targets.any { it.packageName == null || it.packageName == packageName }
     }
 
 /** Compatible package names, sorted, or empty for a universal patch. */
-fun Patch<*>.compatibilityKey() =
+fun Patch.compatibilityKey() =
     compatibility?.mapNotNull { it.packageName }?.sorted()?.joinToString().orEmpty()
 
 /**
@@ -22,7 +22,7 @@ fun Patch<*>.compatibilityKey() =
  * patcher has to resolve a selection to the very patch the user picked, so the app keys what it
  * shows the same way.
  */
-fun Collection<Patch<*>>.keyedFor(packageName: String): Map<String, Patch<*>> {
+fun Collection<Patch>.keyedFor(packageName: String): Map<String, Patch> {
     val relevant = filter { it.compatibleWith(packageName) }
     return uniqueKeys(relevant, { it.name.orEmpty() }, { it.compatibilityKey() })
         .zip(relevant)

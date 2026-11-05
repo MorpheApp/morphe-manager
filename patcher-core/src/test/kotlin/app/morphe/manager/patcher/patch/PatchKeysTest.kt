@@ -79,7 +79,7 @@ class PatchKeysTest {
 
     @Test
     fun `keys do not depend on the order the bundle lists the patches in`() {
-        val patches: List<Patch<*>> = listOf(universal("Ads"), patch("Ads", app), patch("Ads", app, "com.other"))
+        val patches: List<Patch> = listOf(universal("Ads"), patch("Ads", app), patch("Ads", app, "com.other"))
 
         val forward = patches.keyedFor(app)
         val backward = patches.reversed().keyedFor(app)

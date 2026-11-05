@@ -32,12 +32,12 @@ class PatchKeyParityTest {
     }
 
     // Keyed the way PatchBundleInfo lists the patches of an app
-    private fun listedKeys(patches: List<Patch<*>>): Map<String, String?> {
+    private fun listedKeys(patches: List<Patch>): Map<String, String?> {
         val listed = patches.map(::PatchInfo).filter { it.compatibleWith(app) }
         return uniqueNames(listed).zip(listed.map { it.description }).toMap()
     }
 
-    private fun patcherKeys(patches: List<Patch<*>>): Map<String, String?> =
+    private fun patcherKeys(patches: List<Patch>): Map<String, String?> =
         patches.keyedFor(app).mapValues { (_, patch) -> patch.description }
 
     @Test
