@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen.shared
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -66,25 +67,31 @@ internal fun DialogLayout(
             bottomBar = {
                 // Blurs the content as the header does, the footer's buttons included
                 CompositionLocalProvider(LocalBackdropHaze provides haze) {
-                    when {
+                    // A bar is handed in only while it is up, so it slides in and out here, the last
+                    // one kept on screen until it has slid away
+                    val shownBar = rememberLatest(bottomBar)
+                    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.BottomCenter) {
+                        if (footer != null) {
+                            FoldingVisibility(visible = bottomBar == null && !footerFolded) {
+                                DialogFooter(footer, split)
+                            }
+                        } else if (bottomBar == null) {
+                            // Nothing floats over the content, which still ends clear of the navigation bar
+                            Spacer(
+                                Modifier
+                                    .fillMaxWidth()
+                                    .windowInsetsBottomHeight(WindowInsets.navigationBars.exclude(WindowInsets.ime))
+                            )
+                        }
                         // Held to the bottom edge, as a page's panels are, see PageScaffold
-                        bottomBar != null -> Box(
-                            modifier = Modifier.dialogBarColumn(split),
-                            contentAlignment = Alignment.BottomCenter
+                        AnimatedVisibility(
+                            visible = bottomBar != null,
+                            enter = Animations.springSlideUpEnter,
+                            exit = Animations.springSlideDownExit,
+                            modifier = Modifier.dialogBarColumn(split)
                         ) {
-                            bottomBar()
+                            Box(contentAlignment = Alignment.BottomCenter) { shownBar?.invoke() }
                         }
-
-                        footer != null -> FoldingVisibility(visible = !footerFolded) {
-                            DialogFooter(footer, split)
-                        }
-
-                        // Nothing floats over the content, which still ends clear of the navigation bar
-                        else -> Spacer(
-                            Modifier
-                                .fillMaxWidth()
-                                .windowInsetsBottomHeight(WindowInsets.navigationBars.exclude(WindowInsets.ime))
-                        )
                     }
                 }
             }
