@@ -510,7 +510,6 @@
     <string name="shortcut_repatch_long">แพตช์แอปที่ล้าสมัยซ้ำ</string>
     <string name="shortcut_check_updates_short">ตรวจสอบการอัปเดต</string>
     <string name="shortcut_check_updates_long">ตรวจสอบการอัปเดตแพตช์</string>
-    <string name="shortcut_patch_app">แพตช์ %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">ถอนการติดตั้งแอปนี้หรือไม่?</string>
     <string name="home_app_info_uninstall_removes_data">แอปและข้อมูลจะถูกลบออกจากอุปกรณ์นี้</string>

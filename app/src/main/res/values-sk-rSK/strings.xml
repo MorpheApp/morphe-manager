@@ -510,7 +510,6 @@ Pre najlepšie výsledky sa odporúča záplatovať &lt;b&gt;úplný APK&lt;/b&g
     <string name="shortcut_repatch_long">Znova záplatať zastarané aplikácie</string>
     <string name="shortcut_check_updates_short">Skontrolovať aktualizácie</string>
     <string name="shortcut_check_updates_long">Skontrolovať aktualizácie záplat</string>
-    <string name="shortcut_patch_app">Zaplátovať %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Odinštalovať túto aplikáciu?</string>
     <string name="home_app_info_uninstall_removes_data">Aplikácia a jej údaje budú z tohto zariadenia odstránené</string>

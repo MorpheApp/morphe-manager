@@ -510,7 +510,6 @@
     <string name="shortcut_repatch_long">Перепаковать устаревшие приложения</string>
     <string name="shortcut_check_updates_short">Проверить обновления</string>
     <string name="shortcut_check_updates_long">Проверить наличие обновлений патчей</string>
-    <string name="shortcut_patch_app">Патч %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Деинсталлировать это приложение?</string>
     <string name="home_app_info_uninstall_removes_data">The app and its data are removed from this device</string>

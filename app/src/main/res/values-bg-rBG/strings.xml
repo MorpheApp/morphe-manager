@@ -513,7 +513,6 @@
     <string name="shortcut_repatch_long">Презакачване на остарели приложения</string>
     <string name="shortcut_check_updates_short">Проверка за актуализации</string>
     <string name="shortcut_check_updates_long">Проверка за актуализации на пачове</string>
-    <string name="shortcut_patch_app">Закърпване на %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Да се деинсталира ли това приложение?</string>
     <string name="home_app_info_uninstall_removes_data">Приложението и данните му се премахват от това устройство</string>

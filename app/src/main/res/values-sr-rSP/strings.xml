@@ -510,7 +510,6 @@
     <string name="shortcut_repatch_long">Поново пеци застареле апликације</string>
     <string name="shortcut_check_updates_short">Провери ажурирања</string>
     <string name="shortcut_check_updates_long">Провери за ажурирања печева</string>
-    <string name="shortcut_patch_app">Пеци %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Деинсталирати ову апликацију?</string>
     <string name="home_app_info_uninstall_removes_data">Апликација и њени подаци биће уклоњени са овог уређаја</string>

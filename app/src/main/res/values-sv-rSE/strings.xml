@@ -510,7 +510,6 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="shortcut_repatch_long">Modifiera inaktuella appar igen</string>
     <string name="shortcut_check_updates_short">Sök efter uppdateringar</string>
     <string name="shortcut_check_updates_long">Sök efter tilläggsuppdateringar</string>
-    <string name="shortcut_patch_app">Modifiera %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Avinstallera den här appen?</string>
     <string name="home_app_info_uninstall_removes_data">Appen och dess data tas bort från den här enheten</string>

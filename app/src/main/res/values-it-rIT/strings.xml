@@ -510,7 +510,6 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <string name="shortcut_repatch_long">Modifica di nuovo le app obsolete</string>
     <string name="shortcut_check_updates_short">Verifica aggiornamenti</string>
     <string name="shortcut_check_updates_long">Verifica aggiornamenti patch</string>
-    <string name="shortcut_patch_app">Modifica %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Disinstallare quest\'app?</string>
     <string name="home_app_info_uninstall_removes_data">L\'app e i relativi dati vengono rimossi da questo dispositivo</string>

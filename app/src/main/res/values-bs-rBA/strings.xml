@@ -510,7 +510,6 @@ Za najbolje rezultate, ova aplikacija preporučuje patchovanje &lt;b&gt;punog AP
     <string name="shortcut_repatch_long">Ponovo zakrpli zastarjele aplikacije</string>
     <string name="shortcut_check_updates_short">Provjeri ažuriranja</string>
     <string name="shortcut_check_updates_long">Provjeri dostupnost ažuriranja zakrpa</string>
-    <string name="shortcut_patch_app">Zakrpli %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Deinstalirati ovu aplikaciju?</string>
     <string name="home_app_info_uninstall_removes_data">Aplikacija i njeni podaci će biti uklonjeni sa ovog uređaja</string>

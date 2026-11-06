@@ -510,7 +510,6 @@
     <string name="shortcut_repatch_long">მოძველებული აპლიკაციების გადაპატჩვა</string>
     <string name="shortcut_check_updates_short">განახლებების შემოწმება</string>
     <string name="shortcut_check_updates_long">პატჩების განახლებების შემოწმება</string>
-    <string name="shortcut_patch_app">პატჩინგი %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">წაშალოთ ეს აპლიკაცია?</string>
     <string name="home_app_info_uninstall_removes_data">აპლიკაცია და მისი მონაცემები წაიშლება ამ მოწყობილობიდან</string>

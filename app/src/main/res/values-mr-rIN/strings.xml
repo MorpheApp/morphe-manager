@@ -11,6 +11,7 @@
     <string name="home_more_apps_title">अधिक ॲप्स</string>
     <string name="home_more_apps_hide_title">हे कार्ड लपवायचे का?</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">तुम्ही ते कधीही %1$s मध्ये परत आणू शकता</string>
     <string name="home_app_hide_message">हे ॲप मुख्य पानावरून लपवले जाईल. तुम्ही नंतर यादीच्या तळाशी असलेल्या  \'\' बटणाचा वापर करून ते पुन्हा मिळवू शकता.</string>
     <string name="home_app_will_be_hidden">हे ॲप लपवले जाईल.</string>
     <string name="home_app_hidden_named">%s लपवले</string>
@@ -244,6 +245,7 @@
     <string name="sources_signing_key_new">नवीन की</string>
     <string name="sources_patch_expert_badge">तज्ञ</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">हा पॅच मॅन्युअली समाविष्ट करण्यासाठी %1$s चालू करा</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">APK शोधण्यासाठी मदत हवी आहे का?</string>
     <string name="home_apk_availability_dialog_simple"> &lt;b&gt;%s&lt;/b&gt;, मध्ये बदल करण्यासाठी, तुमच्याकडे  बदल न केलेले APK आवृत्ती असणे आवश्यक आहे:</string>
@@ -507,7 +509,6 @@
     <string name="shortcut_repatch_long">जुने झालेले ॲप्स पुन्हा पॅच करा</string>
     <string name="shortcut_check_updates_short">अपडेट तपासा</string>
     <string name="shortcut_check_updates_long">पॅच अपडेटसाठी तपासा</string>
-    <string name="shortcut_patch_app">%s पॅच करा</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">हे ॲप अनइन्स्टॉल करायचे आहे का?</string>
     <string name="home_app_info_uninstall_removes_data">ॲप आणि त्याचा डेटा या डिव्हाइसमधून काढून टाकला जातो</string>
@@ -528,6 +529,7 @@
     <string name="home_app_info_install_type_custom_installer">कस्टम इंस्टॉलर</string>
     <string name="home_app_info_install_type_system_installer">सिस्टम इंस्टॉलर</string>
     <string name="home_app_info_install_type_play_store">Play Store वर स्थापित करा</string>
+    <string name="home_app_info_install_type_root">रूट इंस्टॉल</string>
     <string name="home_app_info_install_type_root_play_store">Root Play Store वर स्थापित करा</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Store वर स्थापित करा</string>
     <string name="home_app_info_patch_update_available">पॅच अपडेट उपलब्ध आहे</string>
@@ -570,6 +572,7 @@
     <string name="root_pre_patch_installer_standard_title">मानक स्थापना मोड</string>
     <string name="root_pre_patch_installer_standard_description">GmsCore सपोर्टसह सामान्य APK म्हणून पॅच. पॅच केल्यानंतर तुमची इंस्टॉलर सेटिंग वापरली जाईल.</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">%1$s हे %2$s वर सेट असताना विचारले गेले. पॅचिंग केल्यानंतर पॅच मोड बदलला जाऊ शकत नाही</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">एरर क्लिपबोर्डवर कॉपी केला गेला</string>
     <string name="patcher_error_log">एरर लॉग</string>
@@ -725,6 +728,7 @@
     <string name="plugin_activity_dialog_body">या प्लगइनसह पुढे जाण्यासाठी वापरकर्त्याच्या इंटरॅक्शनची आवश्यकता आहे</string>
     <string name="patcher_process_killed_message">सिस्टमने पॅचर पूर्ण होण्यापूर्वीच थांबवले, सहसा मेमरी मोकळी करण्यासाठी. इतर अ‍ॅप्स बंद करा आणि पुन्हा प्रयत्न करा</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">पॅचर पूर्ण होण्यापूर्वी क्रॅश झाले. जर असे पुन्हा घडले, तर %1$s बंद करा आणि लॉगसह समस्या कळवा</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">%1$s MB heap सह पॅचरची मेमरी संपली आहे. निवडलेल्या पॅचेजसाठी हे अ‍ॅप खूप मोठे आहे. कमी पॅच सोर्सेससह पॅच करण्याचा प्रयत्न करा, किंवा कमी पॅचेज निवडा</string>
     <string name="install_app_success">इंस्टॉल यशस्वी झाले</string>
@@ -1024,6 +1028,7 @@ morphe_header_custom_dark.png
     <string name="installer_title">इंस्टॉलर निवडा</string>
     <string name="installer_internal_description">Android पॅकेज इंस्टॉलर वापरतो</string>
     <string name="installer_play_store_description">सिस्टम इंस्टॉलर वापरतो आणि Google Play Store ला इंस्टॉलेशन स्रोत म्हणून सेट करतो</string>
+    <string name="installer_root_description">रूटसह शांतपणे इंस्टॉल करते</string>
     <string name="installer_root_play_store_description">रूटसह शांतपणे स्थापित करते आणि Google Play Store ला इंस्टॉलेशन स्त्रोत म्हणून सेट करते</string>
     <string name="installer_shizuku_description">Shizuku किंवा Sui वापरून शांतपणे इंस्टॉल करते</string>
     <string name="installer_shizuku_play_store_description">शिझुकू किंवा सुईद्वारे शांतपणे स्थापित करते आणि Google Play Store ला इंस्टॉलेशन स्त्रोत म्हणून सेट करते</string>
@@ -1034,6 +1039,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">या पर्यायाचा वापर करण्यासाठी Shizuku किंवा Sui स्थापित करा</string>
     <string name="installer_status_shizuku_not_running">Shizuku किंवा Sui सुरू करा आणि पुन्हा प्रयत्न करा</string>
     <string name="installer_status_shizuku_permission">Morphe ॲपमधून Shizuku साठी परवानगी द्या</string>
+    <string name="installer_mount_warning_install">पॅच मोड रूट माउंटवर सेट केला आहे. हे सेव्ह केलेले अॅप माउंट वापरून इंस्टॉल केले नव्हते</string>
     <string name="mount_version_mismatch_message">स्टॉक ॲप आवृत्ती (%2$s) पॅच केलेल्या ॲप आवृत्तीशी जुळत नाही (%1$s). जुळणारी स्टॉक आवृत्ती माउंट करा, नंतर पुन्हा प्रयत्न करा</string>
     <string name="mount_stock_restore_failed_message">Android ने जतन केलेले मूळ APK नाकारले. संबंधित स्टॉक आवृत्ती स्थापित करा, नंतर पुन्हा माउंट करण्याचा प्रयत्न करा.</string>
     <string name="installer_status_shizuku_unsupported">स्थापित Shizuku आवृत्ती समर्थित नाही</string>
@@ -1055,6 +1061,15 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_continue">मला समजले, पुढे जा</string>
     <string name="installer_play_store_mode">Play Store म्हणून इंस्टॉल करा</string>
     <string name="installer_play_store_mode_description">Google Play Store ला इन्स्टॉल सोर्स म्हणून मार्क करते</string>
+    <string name="settings_section_patch_mode">पॅच मोड</string>
+    <string name="settings_patch_mode_ask">प्रत्येक वेळी विचारा</string>
+    <string name="settings_patch_mode_ask_description">प्रत्येक अॅप पॅच करण्यापूर्वी ते रूट माउंटसाठी पॅच करायचे की स्टँडर्ड इंस्टॉलसाठी, हे विचारले जाते</string>
+    <string name="settings_section_after_patching">पॅचिंगनंतर</string>
+    <string name="settings_after_patching_install">स्वयंचलितपणे इंस्टॉल करा</string>
+    <string name="settings_after_patching_ask">कोणता इंस्टॉलर विचारा</string>
+    <string name="settings_after_patching_ask_description">अॅप इंस्टॉल करताना प्रत्येक वेळी कोणता इंस्टॉलर वापरायचा हे विचारले जाते</string>
+    <string name="settings_after_patching_manual">मॅन्युअली इंस्टॉल करा</string>
+    <string name="settings_after_patching_manual_description">तुम्ही Install वर टॅप केल्यावर डिफॉल्ट इन्स्टॉलरसह इन्स्टॉल होईल</string>
     <string name="settings_nomount_only">केवळ NoMount</string>
     <string name="settings_nomount_only_description">केवळ NoMount सह ॲप्स माउंट करते आणि कधीही बाइंड माउंटवर परत जात नाही, ज्यामुळे त्यांच्याशिवाय ते अनमाउंट राहतात</string>
     <string name="settings_auto_install_with_shizuku_description">पॅचिंग पूर्ण झाल्यावर लगेच पॅच केलेला APK इंस्टॉल किंवा माउंट करा</string>

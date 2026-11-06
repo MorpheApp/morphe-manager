@@ -510,7 +510,6 @@ Emaitzarik onenak lortzeko, aplikazio honek &lt;b&gt;APK oso bat&lt;/b&gt; patch
     <string name="shortcut_repatch_long">Aplikazio zaharkituta berrepatchatu</string>
     <string name="shortcut_check_updates_short">Eguneratzeak egiaztatu</string>
     <string name="shortcut_check_updates_long">Egitezak eguneratzea egiaztatu</string>
-    <string name="shortcut_patch_app">%s patchatu</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Desinstalatu aplikazio hau?</string>
     <string name="home_app_info_uninstall_removes_data">Aplikazioa eta haren datuak kendu dira gailu honetatik</string>

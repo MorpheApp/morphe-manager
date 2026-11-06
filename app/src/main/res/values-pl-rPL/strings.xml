@@ -11,7 +11,7 @@
     <string name="home_more_apps_title">Więcej aplikacji</string>
     <string name="home_more_apps_hide_title">Ukryć tę kartę?</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
-    <string name="home_more_apps_hide_message">Możesz przywrócić tę opcję w dowolnym momencie w %1$s</string>
+    <string name="home_more_apps_hide_message">Możesz przywrócić ten element w dowolnym momencie w sekcji %1$s</string>
     <string name="home_app_hide_message">Ta aplikacja zostanie ukryta na ekranie głównym. Możesz ją później przywrócić z ukrytych aplikacji za pomocą przycisku na dole listy</string>
     <string name="home_app_will_be_hidden">Ta aplikacja zostanie ukryta</string>
     <string name="home_app_hidden_named">%s ukryty</string>
@@ -246,7 +246,7 @@
     <string name="sources_signing_key_new">Nowy klucz</string>
     <string name="sources_patch_expert_badge">Ekspert</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
-    <string name="sources_patch_expert_badge_tooltip">Włącz %1$s, aby ręcznie dodać tę modyfikację</string>
+    <string name="sources_patch_expert_badge_tooltip">Włącz opcję %1$s, aby dołączyć tę modyfikację ręcznie</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Potrzebujesz pomocy w znalezieniu pliku APK?</string>
     <string name="home_apk_availability_dialog_simple">Aby zmodyfikować &lt;b&gt;%s&lt;/b&gt;, potrzebujesz niezmodyfikowanego pliku APK w wersji:</string>
@@ -511,7 +511,6 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="shortcut_repatch_long">Zmodyfikuj ponownie nieaktualne aplikacje</string>
     <string name="shortcut_check_updates_short">Sprawdź aktualizacje</string>
     <string name="shortcut_check_updates_long">Sprawdź aktualizacje modyfikacji</string>
-    <string name="shortcut_patch_app">Zmodyfikuj %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Odinstalować tę aplikację?</string>
     <string name="home_app_info_uninstall_removes_data">Aplikacja i jej dane zostaną usunięte z tego urządzenia</string>
@@ -575,7 +574,7 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="root_pre_patch_installer_standard_title">Standardowy tryb instalacji</string>
     <string name="root_pre_patch_installer_standard_description">Modyfikuje jako zwykły plik APK z obsługą GmsCore. Po zakończeniu modyfikacji zostanie użyte twoje ustawienie instalatora</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
-    <string name="root_pre_patch_installer_hint">Zapytanie zadano, gdy %1$s jest ustawione na %2$s. Trybu modyfikowania nie można zmienić po zakończeniu procesu</string>
+    <string name="root_pre_patch_installer_hint">Pytanie pojawia się, gdy opcja %1$s jest ustawiona na \"%2$s\". Trybu modyfikacji nie można zmienić po zmodyfikowaniu aplikacji</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Skopiowano błąd do schowka</string>
     <string name="patcher_error_log">Dziennik błędów</string>
@@ -731,7 +730,7 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="plugin_activity_dialog_body">Wymagana jest interakcja użytkownika, aby kontynuować działanie tej wtyczki</string>
     <string name="patcher_process_killed_message">System zatrzymał proces modyfikowania przed jego zakończeniem, zazwyczaj w celu zwolnienia pamięci. Zamknij inne aplikacje i spróbuj ponownie</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
-    <string name="patcher_process_crashed_message">Modyfikator uległ awarii przed zakończeniem pracy. Jeśli problem się powtórzy, wyłącz %1$s i zgłoś błąd wraz z dziennikiem zdarzeń</string>
+    <string name="patcher_process_crashed_message">Proces modyfikowania uległ awarii przed zakończeniem pracy. Jeśli sytuacja się powtórzy, wyłącz opcję %1$s i zgłoś problem, dołączając dziennik zdarzeń</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Modyfikatorowi zabrakło pamięci przy rozmiarze sterty %1$s MB. Ta aplikacja jest zbyt duża dla wybranych modyfikacji. Spróbuj zmodyfikować z mniejszą liczbą źródeł modyfikacji lub wybierz mniej modyfikacji</string>
     <string name="install_app_success">Zainstalowano pomyślnie</string>

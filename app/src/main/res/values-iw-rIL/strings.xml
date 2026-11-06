@@ -511,7 +511,6 @@
     <string name="shortcut_repatch_long">תקן מחדש אפליקציות מיושנות</string>
     <string name="shortcut_check_updates_short">בדוק עדכונים</string>
     <string name="shortcut_check_updates_long">בדוק עדכוני טלאים</string>
-    <string name="shortcut_patch_app">טלא %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">להסיר את האפליקציה הזו?</string>
     <string name="home_app_info_uninstall_removes_data">האפליקציה והנתונים שלה מוסרים ממכשיר זה</string>

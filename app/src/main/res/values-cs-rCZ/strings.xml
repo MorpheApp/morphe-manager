@@ -510,7 +510,6 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
     <string name="shortcut_repatch_long">Znovu záplatovat zastaralé aplikace</string>
     <string name="shortcut_check_updates_short">Zkontrolovat aktualizace</string>
     <string name="shortcut_check_updates_long">Zkontrolovat aktualizace záplat</string>
-    <string name="shortcut_patch_app">Záplatovat %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Odinstalovat tuto aplikaci?</string>
     <string name="home_app_info_uninstall_removes_data">Aplikace a její data budou z tohoto zařízení odstraněny</string>
@@ -1030,7 +1029,7 @@ Rozměry obrázků musí být následující:
     <string name="installer_title">Vyberte instalátor</string>
     <string name="installer_internal_description">Používá vestavěný správce balíčků Androidu</string>
     <string name="installer_play_store_description">Používá systémový instalátor a nastaví Obchod Play jako zdroj instalace</string>
-    <string name="installer_root_description">Instaluje tiše pomocí rootu</string>
+    <string name="installer_root_description">Instaluje tichým způsobem pomocí rootu</string>
     <string name="installer_root_play_store_description">Instaluje se potichu s root přístupy a nastavuje Google Play Store jako zdroj instalace</string>
     <string name="installer_shizuku_description">Instaluje potichu pomocí Shizuku nebo Sui</string>
     <string name="installer_shizuku_play_store_description">Instaluje se potichu přes Shizuku nebo Sui a nastavuje Google Play Store jako zdroj instalace</string>
@@ -1064,14 +1063,14 @@ Rozměry obrázků musí být následující:
     <string name="installer_play_store_mode">Instalovat jako Obchod Play</string>
     <string name="installer_play_store_mode_description">Označí Google Play Store jako zdroj instalace</string>
     <string name="settings_section_patch_mode">Režim záplat</string>
-    <string name="settings_patch_mode_ask">Pptát se pokaždé</string>
+    <string name="settings_patch_mode_ask">Ptát se pokaždé</string>
     <string name="settings_patch_mode_ask_description">Před záplatováním každé aplikace se zeptá, zda ji záplatovat pro root mount nebo standardní instalaci</string>
     <string name="settings_section_after_patching">Po záplatování</string>
     <string name="settings_after_patching_install">Instalovat automaticky</string>
-    <string name="settings_after_patching_ask">Vybrat instalátor</string>
-    <string name="settings_after_patching_ask_description">Při každé instalaci aplikace se zeptá, který instalátor má použít</string>
+    <string name="settings_after_patching_ask">Ptát se na instalátor</string>
+    <string name="settings_after_patching_ask_description">Pokaždé při instalaci aplikace se zeptá, který instalátor má použít</string>
     <string name="settings_after_patching_manual">Instalovat ručně</string>
-    <string name="settings_after_patching_manual_description">Po klepnutí na Instalovat nainstaluje aplikaci pomocí výchozího instalátoru</string>
+    <string name="settings_after_patching_manual_description">Po klepnutí na Instalovat se provede instalace pomocí výchozího instalátoru</string>
     <string name="settings_nomount_only">Pouze NoMount</string>
     <string name="settings_nomount_only_description">Připojuje aplikace pouze pomocí NoMount a nikdy nenavrací k bind mountu, takže bez něj zůstanou nepřipojené</string>
     <string name="settings_auto_install_with_shizuku_description">Instaluje nebo připojí opravený APK, jakmile se oprava dokončí</string>

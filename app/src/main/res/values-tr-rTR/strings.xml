@@ -510,7 +510,6 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="shortcut_repatch_long">Güncel olmayan uygulamaları yeniden yama</string>
     <string name="shortcut_check_updates_short">Güncellemeleri kontrol et</string>
     <string name="shortcut_check_updates_long">Yama güncellemelerini kontrol et</string>
-    <string name="shortcut_patch_app">%s\'yi yamala</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Bu uygulama kaldırılsın mı?</string>
     <string name="home_app_info_uninstall_removes_data">Uygulama ve verileri bu cihazdan kaldırılır</string>

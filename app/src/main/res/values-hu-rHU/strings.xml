@@ -510,7 +510,6 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="shortcut_repatch_long">Régi alkalmazások újra javítása</string>
     <string name="shortcut_check_updates_short">Frissítések ellenőrzése</string>
     <string name="shortcut_check_updates_long">Javításfrissítések ellenőrzése</string>
-    <string name="shortcut_patch_app">%s javítása</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Törölje ezt az alkalmazást?</string>
     <string name="home_app_info_uninstall_removes_data">Az alkalmazás és az associated adatai eltávolítva lesznek erről a készülékről</string>

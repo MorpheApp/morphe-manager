@@ -510,7 +510,6 @@
     <string name="shortcut_repatch_long">重新修补过时的应用程序</string>
     <string name="shortcut_check_updates_short">检查更新</string>
     <string name="shortcut_check_updates_long">检查补丁更新</string>
-    <string name="shortcut_patch_app">修补 %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">卸载此应用？</string>
     <string name="home_app_info_uninstall_removes_data">该应用及其数据将从本设备中删除</string>

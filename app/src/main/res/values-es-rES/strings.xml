@@ -510,7 +510,6 @@ Para un mejor resultado, esta aplicación te recomienda parchear un &lt;b&gt;APK
     <string name="shortcut_repatch_long">Reparchear aplicaciones desactualizadas</string>
     <string name="shortcut_check_updates_short">Buscar actualizaciones</string>
     <string name="shortcut_check_updates_long">Buscar actualizaciones de los parches</string>
-    <string name="shortcut_patch_app">Parchear %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">¿Desinstalar esta app?</string>
     <string name="home_app_info_uninstall_removes_data">La app y sus datos se eliminan de este dispositivo</string>
@@ -574,7 +573,7 @@ Para un mejor resultado, esta aplicación te recomienda parchear un &lt;b&gt;APK
     <string name="root_pre_patch_installer_standard_title">Modo de instalación estándar</string>
     <string name="root_pre_patch_installer_standard_description">Parchea como un APK normal con soporte para GmsCore. Se utilizará tu configuración del instalador tras aplicar los parches.</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
-    <string name="root_pre_patch_installer_hint">Se solicitó mientras %1$s está configurado en %2$s. El modo de parcheo no se puede cambiar después de parchear</string>
+    <string name="root_pre_patch_installer_hint">Se pregunta mientras %1$s está configurado en %2$s. El modo de parcheo no se puede cambiar después de parchear.</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Error copiado al portapapeles</string>
     <string name="patcher_error_log">Registro de errores</string>

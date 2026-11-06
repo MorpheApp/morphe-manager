@@ -11,6 +11,7 @@
     <string name="home_more_apps_title">আৰু অধিক এপ</string>
     <string name="home_more_apps_hide_title">এই কাৰ্ডটো লুকুৱাব নেকি?</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">আপুনি ইয়াক যিকোনো সময়ত %1$s-ৰ পৰা ঘূৰাই আনিব পাৰিব</string>
     <string name="home_app_hide_message">এই এপটো হোম স্ক্ৰীনৰ পৰা লুকাই থাকিব। আপুনি পিছত তালিকাৰ তলত থকা বুটামটো ব্যৱহাৰ কৰি লুকাই থকা এপসমূহৰ পৰা ইয়াক পুনৰ ঘূৰাই আনিব পাৰিব</string>
     <string name="home_app_will_be_hidden">এই এপটো লুকুৱাই ৰখা হ\'ব</string>
     <string name="home_app_hidden_named">%s লুকাইছে</string>
@@ -244,6 +245,7 @@
     <string name="sources_signing_key_new">নতুন কি</string>
     <string name="sources_patch_expert_badge">এক্সপাৰ্ট</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">এই পেচটো ম্যানুৱেলকৈ অন্তৰ্ভুক্ত কৰিবলৈ %1$s অন কৰক</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">APK টো বিচাৰি পাবলৈ সহায়ৰ প্ৰয়োজন নেকি?</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt; পেচ কৰিবলৈ, আপোনাক আনপেচড APK সংস্কৰণটোৰ প্ৰয়োজন:</string>
@@ -508,7 +510,6 @@
     <string name="shortcut_repatch_long">আউটডেটেড এপবোৰ পুনৰ-পেচ কৰক</string>
     <string name="shortcut_check_updates_short">আপডেট পৰীক্ষা কৰক</string>
     <string name="shortcut_check_updates_long">পেচ আপডেটৰ বাবে পৰীক্ষা কৰক</string>
-    <string name="shortcut_patch_app">প্ৰেচ %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">এই এপটো আনইনষ্টল কৰিবনে?</string>
     <string name="home_app_info_uninstall_removes_data">এপটো আৰু ইয়াৰ ডাটা এই ডিভাইচৰ পৰা আঁতৰ কৰি দিয়া হ\'ব</string>
@@ -572,6 +573,7 @@
     <string name="root_pre_patch_installer_standard_title">Standard install মোড</string>
     <string name="root_pre_patch_installer_standard_description">GmsCore সমৰ্থনৰ সৈতে এটা স্বাভাৱিক APK হিচাপে patch কৰে। Patch কৰাৰ পিছত আপোনাৰ installer সেটিংস ব্যৱহাৰ কৰা হয়</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">%1$s-ক %2$s-ত ছেট কৰাৰ সময়ত সোধা হৈছে। পেচিং কৰাৰ পিছত পেচ মোডটো সলনি কৰিব নোৱাৰি</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">ত্ৰুটিটো ক্লিপবৰ্ডলৈ কপি কৰা হৈছে</string>
     <string name="patcher_error_log">ত্ৰুটি লগ</string>
@@ -727,6 +729,7 @@
     <string name="plugin_activity_dialog_body">এই প্লাগইনটোৰ সৈতে আগবাঢ়িবলৈ ব্যৱহাৰকাৰীৰ অন্তৰ্ক্ৰিয়াৰ প্ৰয়োজন</string>
     <string name="patcher_process_killed_message">চিষ্টেমটোৱে প্যাচাৰটো সম্পূৰ্ণ হোৱাৰ আগতেই বন্ধ কৰি দিছে, সাধাৰণতে মেমৰী খালী কৰিবলৈ। আন এপৰিকেচনবোৰ বন্ধ কৰি পুনৰ চেষ্টা কৰক</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">পেচাৰটো সম্পূৰ্ণ হোৱাৰ আগতেই ক্ৰাশ কৰিছে। যদি ই পুনৰ ঘটে, তেন্তে %1$s অফ কৰক আৰু লগৰ সৈতে সমস্যাটোৰ রিপোর্ট কৰক</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">প্যাচৰটো %1$s MB হীপেৰে মেমৰীৰ অভাৱত পৰিছে। এই এপটো নিৰ্বাচিত প্যাচবোৰৰ বাবে খুব ডাঙৰ। কম সংখ্যক প্যাচ উৎসৰ সৈতে প্যাচ কৰিবলৈ চেষ্টা কৰক, অথবা কম সংখ্যক প্যাচ নিৰ্বাচন কৰক</string>
     <string name="install_app_success">সফলভাৱে ইনষ্টল কৰা হৈছে</string>

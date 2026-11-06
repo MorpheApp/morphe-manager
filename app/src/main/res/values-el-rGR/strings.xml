@@ -510,7 +510,6 @@
     <string name="shortcut_repatch_long">Επανάληψη διόρθωσης ξεπερασμένων εφαρμογών</string>
     <string name="shortcut_check_updates_short">Έλεγχος για ενημερώσεις</string>
     <string name="shortcut_check_updates_long">Έλεγχος για ενημερώσεις διορθώσεων</string>
-    <string name="shortcut_patch_app">Διόρθωση %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Καταργήστε την εγκατάσταση αυτής της εφαρμογής;</string>
     <string name="home_app_info_uninstall_removes_data">Η εφαρμογή και τα δεδομένα της αφαιρούνται από αυτή τη συσκευή</string>

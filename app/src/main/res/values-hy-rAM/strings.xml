@@ -510,7 +510,6 @@
     <string name="shortcut_repatch_long">Վերապատչել հնացած հավելվածները</string>
     <string name="shortcut_check_updates_short">Ստուգել թարմացումները</string>
     <string name="shortcut_check_updates_long">Ստուգել թարմացումների առկայությունը</string>
-    <string name="shortcut_patch_app">Թարմացնել %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Հեռացնե՞լ այս հավելվածը։</string>
     <string name="home_app_info_uninstall_removes_data">Հավելվածը և դրա տվյալները հեռացվում են այս սարքից</string>

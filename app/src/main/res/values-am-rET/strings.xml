@@ -11,6 +11,7 @@
     <string name="home_more_apps_title">ተጨማሪ መተግበሪያዎች</string>
     <string name="home_more_apps_hide_title">ይህንን ካርድ ደብቅ?</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">በማንኛውም ጊዜ በ %1$s ይመልሱት ይችላሉ</string>
     <string name="home_app_hide_message">ይህ መተግበሪያ ከቤት ስክሪኑ ላይ ይደበቃል። በኋላ ላይ ከዝርዝሩ ግርጌ ባለው ቁልፍ በመጠቀም ከተደበቁ መተግበሪያዎች ውስጥ መልሰው ማግኘት ይችላሉ</string>
     <string name="home_app_will_be_hidden">ይህ መተግበሪያ ይደበቃል</string>
     <string name="home_app_hidden_named">%s ተደብቋል</string>
@@ -244,6 +245,7 @@
     <string name="sources_signing_key_new">አዲስ ቁልፍ</string>
     <string name="sources_patch_expert_badge">ባለሙያ</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">ይህንን ፓች በእጅ ለማካተት %1$s ያብሩ</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">APK-ውን ለማግኘት እርዳታ ይፈልጋሉ?</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt;ን ፓች ለማድረግ፣ ያልተፓች APK ስሪት ያስፈልግዎታል፦</string>
@@ -508,7 +510,6 @@
     <string name="shortcut_repatch_long">ያረጁ መተግበሪያዎችን እንደገና ፓች አድርግ</string>
     <string name="shortcut_check_updates_short">አዳኝነቶችን ፈትሽ</string>
     <string name="shortcut_check_updates_long">የፓች ማሻሻያዎችን ያረጋግጡ</string>
-    <string name="shortcut_patch_app">%sን ፓች ያድርጉ</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">ይህንን መተግበሪያ ያጥፉ?</string>
     <string name="home_app_info_uninstall_removes_data">መተግበሪያው እና መረጃዎቹ ከዚህ መሳሪያ ላይ ይወገዳሉ</string>
@@ -572,6 +573,7 @@
     <string name="root_pre_patch_installer_standard_title">መደበኛ የጫን ዘዴ</string>
     <string name="root_pre_patch_installer_standard_description">ከGmsCore ድጋፍ ጋር እንደ መደበኛ APK ፓች ያደርጋል። ከፓቺንግ በኋላ የእርስዎ የጫን መጋጠሚያ ቅንጅት ጥቅም ላይ ይውላል</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">%1$s ወደ %2$s ተቀይሮ ሳለ ተጠይቋል። ከፓቺንግ በኋላ የፓች ሞዱን መቀየር አይቻልም</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">ስህተቱ ወደ ክሊፕቦርድ ተቀዳ</string>
     <string name="patcher_error_log">የስህተት መዝገብ</string>
@@ -727,6 +729,7 @@
     <string name="plugin_activity_dialog_body">በዚህ ፕለጊን ለመቀጠል የተጠቃሚ መስተጋብር ያስፈልጋል</string>
     <string name="patcher_process_killed_message">ሲስተሙ ፓቸሩን ሳይጨርስ አቋርጦታል፣ አብዛኛውን ጊዜ ይህ የሚሆነው ሜሞሪን ነፃ ለማድረግ ነው። ሌሎች አፕሊኬሽኖችን ይዝጉ እና እንደገና ይሞክሩ</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">ፓቸሩ ከመጠናቀቁ በፊት ተቋርጧል። ይህ እንደገና ከተከሰተ፣ %1$s ያጥፉ እና ችግሩን በሎግ ሪፖርት ያድርጉ</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">ፓቸሩ በ %1$s MB ሂፕ ሜሞሪ አቅም አልቋል። ይህ አፕሊኬሽን ለተመረጡት ፓቾች በጣም ትልቅ ነው። በጥቂት የፓች ምንጮች በመጠቀም ይሞክሩ፣ ወይም ጥቂት ፓቾችን ይምረጡ</string>
     <string name="install_app_success">በስኬት ተጭኗል</string>

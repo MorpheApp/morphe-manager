@@ -511,7 +511,6 @@
     <string name="shortcut_repatch_long">Перапатчыць састарэлыя праграмы</string>
     <string name="shortcut_check_updates_short">Праверыць абнаўленні</string>
     <string name="shortcut_check_updates_long">Праверыць наяўнасць абнаўленняў патчаў</string>
-    <string name="shortcut_patch_app">Патчыць %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Выдаліць гэтую праграму?</string>
     <string name="home_app_info_uninstall_removes_data">Праграма і яе даныя будуць выдалены з гэтай прылады</string>

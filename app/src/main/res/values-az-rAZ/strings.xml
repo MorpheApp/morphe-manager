@@ -11,6 +11,7 @@
     <string name="home_more_apps_title">Daha çox tətbiq</string>
     <string name="home_more_apps_hide_title">Bu kartı gizlətsin?</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Bunu istənilən vaxt %1$s daxilində qaytara bilərsiniz</string>
     <string name="home_app_hide_message">Bu tətbiq əsas ekrandan gizlədiləcək. Siyahının aşağısındakı düyməni istifadə edərək onu daha sonra gizli tətbiqlərdən qaytara bilərsiniz</string>
     <string name="home_app_will_be_hidden">Bu tətbiq gizlədiləcək</string>
     <string name="home_app_hidden_named">%s gizlədilib</string>
@@ -244,6 +245,7 @@
     <string name="sources_signing_key_new">Yeni açar</string>
     <string name="sources_patch_expert_badge">Mütəxəssis</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Bu yamağı əl ilə yerləşdirmək üçün %1$s \'i aktivləşdir</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">APK-nı tapmaqda köməyə ehtiyac varmı?</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt;, yamaqlamaq üçün yamaqlanmayan APK versiyasına ehtiyacınız var:</string>
@@ -508,7 +510,6 @@ APK-nı haradan götürəcəyinizi seçin"</string>
     <string name="shortcut_repatch_long">Köhnəlmiş tətbiqləri yenidən yamaqla</string>
     <string name="shortcut_check_updates_short">Yeniləmələri yoxla</string>
     <string name="shortcut_check_updates_long">Yamaq yeniləmələrini yoxla</string>
-    <string name="shortcut_patch_app">%s tətbiqini yamaqla</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Bu tətbiqi silsin?</string>
     <string name="home_app_info_uninstall_removes_data">Tətbiq və onun məlumatları bu cihazdan silinib</string>
@@ -572,6 +573,7 @@ APK-nı haradan götürəcəyinizi seçin"</string>
     <string name="root_pre_patch_installer_standard_title">Standart quraşdırma rejimi</string>
     <string name="root_pre_patch_installer_standard_description">GmsCore dəstəyi ilə adi APK kimi yamaqlayır. Quraşdırıcı tənzimləməniz yamaqlanmadan sonra istifadə olunur</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">%1$s %2$s olaraq təyin edildikdə soruşuldu. Yamaq rejimi yamaqlamadan sonra dəyişdirilə bilməz</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Xəta buferə köçürüldü</string>
     <string name="patcher_error_log">Xəta jurnalı</string>
@@ -671,13 +673,13 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="patcher_step_write_patched">Yamaqlanan APK faylı qeyd olunur</string>
     <string name="patcher_step_sign_apk">Yamaqlanan APK faylı imzalanır</string>
     <!-- Patcher Screen - Patcher Tasks -->
-    <string name="patcher_task_decoding_dex">DEX faylları oxunur</string>
-    <string name="patcher_task_extracting_resources">Resurslar çıxarılır</string>
-    <string name="patcher_task_decoding_resources">Resurslar dekodlaşdırılır</string>
-    <string name="patcher_task_indexing_classes">Siniflər indekslənir</string>
-    <string name="patcher_task_compiling_dex">DEX faylları kompilyasiya edilir</string>
-    <string name="patcher_task_compiling_resources">Resurslar tərtib edilir</string>
-    <string name="patcher_task_writing_apk">APK faylı yazılır</string>
+    <string name="patcher_task_decoding_dex">DEX fayllarını oxuyur</string>
+    <string name="patcher_task_extracting_resources">Resursları çıxarır</string>
+    <string name="patcher_task_decoding_resources">Resursları dekodlaşdırır</string>
+    <string name="patcher_task_indexing_classes">Sinifləri indeksləyir</string>
+    <string name="patcher_task_compiling_dex">DEX fayllarını tərtib edir</string>
+    <string name="patcher_task_compiling_resources">Resursları tərtib edir</string>
+    <string name="patcher_task_writing_apk">APK faylını qeyd edir</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Fon yamaqlanma müdafiəsi</string>
     <string name="battery_optimization_dialog_description">Bəzi cihazlar tətbiqi qısanda yamaqlayıcını dayandıra bilər. Etibarlı tamamlanan yamaqlanmaya əmin olmaq üçün Morphe-ni batareya məhdudiyyətləri olmadan işlətməyə icazə ver</string>
@@ -727,6 +729,7 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="plugin_activity_dialog_body">Bu qoşmayla davam etmək üçün istifadəçi reaksiyası tələb olunur</string>
     <string name="patcher_process_killed_message">Sistem yamaqlayıcını işini bitirmədən dayandırdı, bu adətən yaddaşı boşaltmaq üçün olur. Digər tətbiqləri bağla və təkrar cəhd et</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Yamaqlayıcı bitmədən çökdü. Bu hal təkrarlanarsa, %1$s -i qapat və log qeydi ilə birlikdə problemi bildir</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Yamaqlayıcının %1$s MB-lıq yaddaş yığını tükəndi. Bu tətbiq seçilmiş yamaqlar üçün çox böyükdür. Daha az yamaq mənbəyi ilə yamaqlamağa çalış və ya daha az yamaq seç</string>
     <string name="install_app_success">Uğurla quraşdırıldı</string>
@@ -1025,7 +1028,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="installer_title">Quraşdırıcını seç</string>
     <string name="installer_internal_description">Android paket quraşdırıcısı istifadə edilir</string>
     <string name="installer_play_store_description">Sistem quraşdırıcısın istifadə edir və Google Play Store-u quraşdırma mənbəyi kimi təyin edir</string>
-    <string name="installer_root_description">Root ilə səssiz şəkildə quraşdırır</string>
+    <string name="installer_root_description">Root ilə səssizcə quraşdırır</string>
     <string name="installer_root_play_store_description">Səssizcə root ilə quraşdırır və Google Play Store-u quraşdırma mənbəyi kimi təyin edir</string>
     <string name="installer_shizuku_description">Shizuku və ya Sui istifadə edərək səssizcə quraşdırır</string>
     <string name="installer_shizuku_play_store_description">Shizuku yaxud Sui vasitəsilə səssizcə quraşdırır və Google Play Store-u quraşdırma mənbəyi kimi təyin edir</string>
@@ -1036,7 +1039,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">Bu seçimi istifadə etmək üçün Shizuku və ya Sui quraşdır</string>
     <string name="installer_status_shizuku_not_running">Shizuku yaxud Sui-ni başlat və təkrar sına</string>
     <string name="installer_status_shizuku_permission">Shizuku tətbiqindən Morphe üçün icazəni qəbul et</string>
-    <string name="installer_mount_warning_install">Yamaq rejimi root montajı olaraq təyin edilib. Saxlanılan bu tətbiq montaj istifadə edilərək quraşdırılmayıb</string>
+    <string name="installer_mount_warning_install">Yamaq rejimi root montajlama olaraq təyin edilib. Saxlanılan bu tətbiq montajlama istifadə edilərək quraşdırılmayıb</string>
     <string name="mount_version_mismatch_message">Əsas tətbiq versiyası (%2$s) yamaqlanan tətbiq versiyasına (%1$s) uyğun deyil. Uyuşan əsas versiyanı montajla, sonra təkrar sına</string>
     <string name="mount_stock_restore_failed_message">Android saxlanılan orijinal APK-nı qəbul etmədi. Uyğun əsas versiyanı quraşdır, sonra təkrar montaj etməyə çalış</string>
     <string name="installer_status_shizuku_unsupported">Quraşdırılan Shizuku versiyası dəstəklənmir</string>
@@ -1060,13 +1063,13 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="installer_play_store_mode_description">Google Play Store-u quraşdırma mənbəyi kimi qeyd edir</string>
     <string name="settings_section_patch_mode">Yamaq rejimi</string>
     <string name="settings_patch_mode_ask">Hər dəfə soruş</string>
-    <string name="settings_patch_mode_ask_description">Hər tətbiqi yamaqlamazdan əvvəl, onun root mount üçün yoxsa standart quraşdırma üçün yamaqlanacağını soruşur</string>
+    <string name="settings_patch_mode_ask_description">Hər tətbiqi yamaqlamazdan əvvəl root montajlama və ya standart quraşdırma üçün yamaqlamaq haqqında soruşur</string>
     <string name="settings_section_after_patching">Yamaqlamadan sonra</string>
     <string name="settings_after_patching_install">Avtomatik olaraq quraşdır</string>
     <string name="settings_after_patching_ask">Hansı quraşdırıcı olduğunu soruş</string>
-    <string name="settings_after_patching_ask_description">Hər tətbiq quraşdırıldıqda hansı quraşdırıcının istifadə ediləcəyini soruşur</string>
-    <string name="settings_after_patching_manual">Manual quraşdır</string>
-    <string name="settings_after_patching_manual_description">Quraşdır düyməsinə toxunduğunuzda standart quraşdırıcı ilə quraşdırır</string>
+    <string name="settings_after_patching_ask_description">Hər dəfə tətbiq quraşdırılanda hansı quraşdırıcının istifadə olunacağını soruşur</string>
+    <string name="settings_after_patching_manual">Əl ilə quraşdır</string>
+    <string name="settings_after_patching_manual_description">Siz quraşdıra toxunduqdan sonra ilkin quraşdırıcı ilə quraşdırılır</string>
     <string name="settings_nomount_only">Yalnız NoMount</string>
     <string name="settings_nomount_only_description">Tətbiqləri yalnız NoMount ilə montajlayır və heç vaxt bind mount rejiminə keçmir, beləliklə onlar bunsuz montajlanmamış qalır</string>
     <string name="settings_auto_install_with_shizuku_description">Yamaqlamanı tamamlayan kimi yamaqlanmış APK-nı quraşdırır və ya montajlayır</string>

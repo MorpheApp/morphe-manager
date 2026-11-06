@@ -510,7 +510,6 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="shortcut_repatch_long">Genpatch forældede apps</string>
     <string name="shortcut_check_updates_short">Tjek opdateringer</string>
     <string name="shortcut_check_updates_long">Tjek for patch-opdateringer</string>
-    <string name="shortcut_patch_app">Patch %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Afinstaller denne app?</string>
     <string name="home_app_info_uninstall_removes_data">Appen og dens data fjernes fra denne enhed</string>

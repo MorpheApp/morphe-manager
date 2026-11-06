@@ -510,7 +510,6 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="shortcut_repatch_long">Repară aplicațiile depășite</string>
     <string name="shortcut_check_updates_short">Verifică actualizări</string>
     <string name="shortcut_check_updates_long">Verifică actualizările patch-ului</string>
-    <string name="shortcut_patch_app">Aplică patch la %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Dezinstalezi această aplicație?</string>
     <string name="home_app_info_uninstall_removes_data">Aplicația și datele sale sunt eliminate de pe acest dispozitiv</string>

@@ -510,7 +510,6 @@
     <string name="shortcut_repatch_long">आउटडेटेड ऐप्स को पुन: पैच करें</string>
     <string name="shortcut_check_updates_short">अपडेट जांचें</string>
     <string name="shortcut_check_updates_long">पैच अपडेट के लिए जांचें</string>
-    <string name="shortcut_patch_app">%s को पैच करें</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">इस ऐप को अनइंस्टॉल करें?</string>
     <string name="home_app_info_uninstall_removes_data">ऐप और उसका डेटा इस डिवाइस से हटा दिया जाएगा</string>

@@ -2,6 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">உங்களால் இதை எப்போது வேண்டுமானாலும் %1$s மூலம் மீண்டும் கொண்டு வர முடியும்</string>
     <!-- Shown under the app a link was opened for -->
     <!-- Shown when the link was opened for the universal patches of a source, which no app is added with -->
     <!-- Asked when the link names an app of a source that is already added -->
@@ -47,6 +48,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">இந்த பேட்ச்-ஐ கைமுறையாகச் சேர்க்க %1$s-ஐ ஆன் செய்யவும்</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
     <!-- Home Screen - Dialog 2: Download Instructions -->
@@ -82,8 +84,10 @@
     <string name="batch_queue_keep_description">வரிசைப்படுத்தப்பட்ட செயலிகள் பின்னர் தொடங்குவதற்காக முகப்புத் திரையில் காத்திருக்கும்</string>
     <string name="batch_queue_keep">தக்கவை</string>
     <!-- Home Screen - App Info Screen -->
+    <string name="home_app_info_install_type_root">ரூட் நிறுவல்</string>
     <!-- Home Screen - Root Mode -->
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">%1$s ஆனது %2$s என அமைக்கப்பட்டிருக்கும் போது கேட்கப்பட்டது. பேட்ச் செய்த பிறகு பேட்ச் பயன்முறையை மாற்ற முடியாது</string>
     <!-- Patcher Screen -->
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
@@ -116,6 +120,7 @@
     <!-- Expert patcher Screen -->
     <!-- Patcher Screen - Other hidden strings -->
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">பேட்சர் முடிவடைவதற்கு முன்பே செயலிழந்தது. இது மீண்டும் நடந்தால், %1$s-ஐ ஆஃப் செய்து லாக் உடன் பிரச்சனையைப் புகாரளிக்கவும்</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <!-- Patcher Screen - Mini-games -->
     <!-- Settings -->
@@ -145,6 +150,17 @@
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <!-- Settings - System Tab - Installer Section -->
+    <string name="installer_root_description">ரூட் மூலம் அமைதியாக நிறுவுகிறது</string>
+    <string name="installer_mount_warning_install">பேட்ச் பயன்முறை ரூட் மவுண்டிற்கு அமைக்கப்பட்டுள்ளது. இந்த சேமிக்கப்பட்ட ஆப் மவுண்ட் மூலம் நிறுவப்படவில்லை</string>
+    <string name="settings_section_patch_mode">பேட்ச் பயன்முறை</string>
+    <string name="settings_patch_mode_ask">ஒவ்வொரு முறையும் கேட்கவும்</string>
+    <string name="settings_patch_mode_ask_description">ஒவ்வொரு ஆப்பையும் பேட்ச் செய்வதற்கு முன்னால், அதை ரூட் மவுண்ட் அல்லது நிலையான நிறுவலுக்கு பேட்ச் செய்ய வேண்டுமா என்று கேட்கும்</string>
+    <string name="settings_section_after_patching">பேட்ச் செய்த பிறகு</string>
+    <string name="settings_after_patching_install">தானாகவே நிறுவவும்</string>
+    <string name="settings_after_patching_ask">எந்த நிறுவி என்று கேட்கவும்</string>
+    <string name="settings_after_patching_ask_description">ஒரு ஆப் நிறுவப்படும் போதெல்லாம் எந்த நிறுவியைப் பயன்படுத்த வேண்டும் என்று கேட்கும்</string>
+    <string name="settings_after_patching_manual">கைமுறையாக நிறுவவும்</string>
+    <string name="settings_after_patching_manual_description">நீங்கள் நிறுவி (Install) என்பதைத் தட்டியவுடன் இயல்புநிலை நிறுவியைக் கொண்டு நிறுவுகிறது</string>
     <!-- Settings - System Tab - Performance Section -->
     <!-- Settings - System Tab - Notifications Section -->
     <!-- Settings - System Tab - Import and Export Section -->

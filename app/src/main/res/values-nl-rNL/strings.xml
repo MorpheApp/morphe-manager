@@ -510,7 +510,6 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="shortcut_repatch_long">Oude apps opnieuw patchen</string>
     <string name="shortcut_check_updates_short">Controleren op updates</string>
     <string name="shortcut_check_updates_long">Controleren op patch updates</string>
-    <string name="shortcut_patch_app">Patch %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Deze app uninstallen?</string>
     <string name="home_app_info_uninstall_removes_data">De app en de bijbehorende gegevens worden van dit apparaat verwijderd</string>

@@ -510,7 +510,6 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="shortcut_repatch_long">I-re-patch ang mga hindi napapanahong app</string>
     <string name="shortcut_check_updates_short">Suriin ang mga update</string>
     <string name="shortcut_check_updates_long">Suriin para sa mga patch update</string>
-    <string name="shortcut_patch_app">I-patch ang %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">I-uninstall ang app na ito?</string>
     <string name="home_app_info_uninstall_removes_data">Ang app at ang mga data nito ay tatanggalin mula sa device na ito</string>

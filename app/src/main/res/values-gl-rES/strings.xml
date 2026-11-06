@@ -511,7 +511,6 @@ Elixe outro APK</string>
     <string name="shortcut_repatch_long">Volver parchear aplicacións obsoletas</string>
     <string name="shortcut_check_updates_short">Comprobar actualizacións</string>
     <string name="shortcut_check_updates_long">Buscar actualizacións do parche</string>
-    <string name="shortcut_patch_app">Parchear %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Desinstalar esta aplicación?</string>
     <string name="home_app_info_uninstall_removes_data">A aplicación e os seus datos son eliminados deste dispositivo</string>

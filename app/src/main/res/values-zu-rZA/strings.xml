@@ -510,7 +510,6 @@ Ukuze uthole imiphumela engcono kakhulu, lolu hlelo luhlanganisa ukulungisa i-&l
     <string name="shortcut_repatch_long">Phinda u-patch izinhlelo ezindala</string>
     <string name="shortcut_check_updates_short">Hlola izibuyekezo</string>
     <string name="shortcut_check_updates_long">Hlola izibuyekezo ze-patch</string>
-    <string name="shortcut_patch_app">Patch %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Susa le app?</string>
     <string name="home_app_info_uninstall_removes_data">I-app kanye nedatha yayo zisuswa kuleli device</string>

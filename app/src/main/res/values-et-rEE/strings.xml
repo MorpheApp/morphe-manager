@@ -510,7 +510,6 @@ Parimate tulemuste saamiseks soovitab see rakendus kasutada &lt;b&gt;täielikku 
     <string name="shortcut_repatch_long">Paiguta aegunud rakendused uuesti</string>
     <string name="shortcut_check_updates_short">Kontrolli värskendusi</string>
     <string name="shortcut_check_updates_long">Kontrolli plaastriuuendusi</string>
-    <string name="shortcut_patch_app">Plaastri %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Eemaldada see rakendus?</string>
     <string name="home_app_info_uninstall_removes_data">Rakendus ja selle andmed eemaldatakse sellest seadmest</string>

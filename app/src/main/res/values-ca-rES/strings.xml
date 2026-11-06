@@ -510,7 +510,6 @@ Per obtenir els millors resultats, aquesta aplicació recomana patxar un &lt;b&g
     <string name="shortcut_repatch_long">Torna a patchar les aplicacions desactualitzades</string>
     <string name="shortcut_check_updates_short">Comprova actualitzacions</string>
     <string name="shortcut_check_updates_long">Busca actualitzacions del patch</string>
-    <string name="shortcut_patch_app">Patcha %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Desinstal·lar aquesta aplicació?</string>
     <string name="home_app_info_uninstall_removes_data">L\'aplicació i les seves dades s\'eliminen d\'aquest dispositiu</string>

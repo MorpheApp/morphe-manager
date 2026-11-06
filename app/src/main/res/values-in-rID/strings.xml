@@ -510,7 +510,6 @@ Untuk hasil terbaik, aplikasi ini merekomendasikan untuk menambal &lt;b&gt;APK l
     <string name="shortcut_repatch_long">Tambal ulang aplikasi usang</string>
     <string name="shortcut_check_updates_short">Periksa pembaruan</string>
     <string name="shortcut_check_updates_long">Periksa pembaruan tambalan</string>
-    <string name="shortcut_patch_app">Tambal %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Copot aplikasi ini?</string>
     <string name="home_app_info_uninstall_removes_data">Aplikasi beserta datanya dihapus dari perangkat ini</string>

@@ -508,7 +508,6 @@
     <string name="shortcut_repatch_long">Перепатчити застарілі застосунки</string>
     <string name="shortcut_check_updates_short">Перевірити оновлення</string>
     <string name="shortcut_check_updates_long">Перевірити оновлення патчів</string>
-    <string name="shortcut_patch_app">Патчити %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Видалити цей застосунок?</string>
     <string name="home_app_info_uninstall_removes_data">Застосунок і його дані буде видалено з цього пристрою</string>

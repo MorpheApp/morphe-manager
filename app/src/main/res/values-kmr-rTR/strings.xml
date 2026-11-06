@@ -11,6 +11,7 @@
     <string name="home_more_apps_title">Zêde sepan</string>
     <string name="home_more_apps_hide_title">Vê kartê veşêrî?</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Tu dikarî herdem di %1$s de vebîne</string>
     <string name="home_app_hide_message">Evê app wê ji dîroka sereke ve bê neşînîn. Hûn dikarin paşê wê ji appên veşartî vegerînin bişkoika li jorî navnîşê re.</string>
     <string name="home_app_will_be_hidden">Epp şifre be</string>
     <string name="home_app_hidden_named">%s veşartî</string>
@@ -244,6 +245,7 @@
     <string name="sources_signing_key_new">Kîla nû</string>
     <string name="sources_patch_expert_badge">Ekspert</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">%1$s veke da ku ev patch bi destan bê zêdekirin</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Alîkariyê ji bo dîtina APK pîdivî ye?</string>
     <string name="home_apk_availability_dialog_simple">Ji bo dirûtîna &lt;b&gt;%s&lt;/b&gt;, hûn pêdiviya APK-ya nebixwe hebin:</string>
@@ -508,7 +510,6 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="shortcut_repatch_long">Sepayên kevn nû bike</string>
     <string name="shortcut_check_updates_short">Nûvekirinan kontrol bike</string>
     <string name="shortcut_check_updates_long">Li nûvekirinên patchê kontrol bike</string>
-    <string name="shortcut_patch_app">%s patch bike</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Vê appê jê bibe?</string>
     <string name="home_app_info_uninstall_removes_data">App û daneyên wê ji vî ampirî tên jêbirin</string>
@@ -529,6 +530,7 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="home_app_info_install_type_custom_installer">Danerê xwezî</string>
     <string name="home_app_info_install_type_system_installer">Danerê sistemê</string>
     <string name="home_app_info_install_type_play_store">Saetkirina Google Playê</string>
+    <string name="home_app_info_install_type_root">Sazkirina root</string>
     <string name="home_app_info_install_type_root_play_store">Saetkirina Google Playê bi rootê</string>
     <string name="home_app_info_install_type_shizuku_play_store">Saetkirina Google Playê bi Shizuku</string>
     <string name="home_app_info_patch_update_available">Nûvekirina paqijkirinê peyda bûye</string>
@@ -571,6 +573,7 @@ Ji bo mezgînî, ev sepan pêşniyar dike ku paketek &lt;b&gt;full APK&lt;/b&gt;
     <string name="root_pre_patch_installer_standard_title">Moda sazkirina standard</string>
     <string name="root_pre_patch_installer_standard_description">Pêçekan wekî APK\'yeke normal bi piştgiriya GmsCore. Rêgeziya sazkirina we piştî pêçekirinê tê bikar anîn</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Hat pirsîn gava %1$s li ser %2$s hat setkirin. Piştî patching-ê, moda patchê nayê guhertin</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Xetalî bi mêjiyê kopî kirin</string>
     <string name="patcher_error_log">Log xistina</string>
@@ -726,6 +729,7 @@ Neqişandin dê hemî daneyên serîlêdanê bi awayê daîmî tune bike"</strin
     <string name="plugin_activity_dialog_body">Bixweştana mêz rêk û pê dei bilinge da pêşbaziyê bi zaniye vê plugin you bo lazmî bîye se</string>
     <string name="patcher_process_killed_message">Sîstemê patcher\'î berî ku biqedand rawêstand, bi gelemperî ji bo valakirina bîryariyê. Appên din bigire û careke din ceribîne</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Patcher berî ku biqediye crash bûye. Ger dîsa bibe, %1$s veguherîne off û bi log-ê re pirsgirêkê rapor bike</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Bîryariya patcher\'î bi heap\'ek %1$s MB xelas bû. Ev app ji bo paçeyên hatine hilbijartin pir mezin e. Bi kêm çavkaniyên paçeyê ceribîne, an paçeyên kêmtir hilbijêre</string>
     <string name="install_app_success">Bi ser ketin</string>
@@ -1025,6 +1029,7 @@ Qasîyên wêneyan divê wiha bin:
     <string name="installer_title">Sazkerê hilbijêre</string>
     <string name="installer_internal_description">Sazkera pakketa Android’ê bikar bîne</string>
     <string name="installer_play_store_description">Seta pêşnişazê sîstemê bikar tîne û Google Play Store wekî çavkaniya saetkirinê destnîşîn dike</string>
+    <string name="installer_root_description">Bi root bêdeng tê sazkirin</string>
     <string name="installer_root_play_store_description">Bi rihên root ve bêdeng sazkirin û çavkaniya sazkirinê wekî Google Play Store destnîşan bike</string>
     <string name="installer_shizuku_description">Sazkirina bêdeng bi Shizuku an Sui’yê</string>
     <string name="installer_shizuku_play_store_description">Bi rihên Shizuku an Sui ve bêdeng sazkirin û çavkaniya sazkirinê wekî Google Play Store destnîşan bike</string>
@@ -1035,6 +1040,7 @@ Qasîyên wêneyan divê wiha bin:
     <string name="installer_status_shizuku_not_installed">Ji bo vê vebijarkê Shizuku an Sui saz bike</string>
     <string name="installer_status_shizuku_not_running">Shizuku anîye yê an Suiyê dest pê bike û dîsa hewil bide</string>
     <string name="installer_status_shizuku_permission">Destûrê da Morphe ji bo sepina Shizuku</string>
+    <string name="installer_mount_warning_install">Moda patchkirinê li ser root mount hatiye belgekirin. Ev appa hatî parastin bi mount nehatiye sazkirin</string>
     <string name="mount_version_mismatch_message">Versiyona sepanê orîjînal (%2$s) bi versiyona sepanê têra sipêde nebaxe (%1$s). Versiyona orîjînal a pêşîn saz bike, paştrê dîsa hewil bide</string>
     <string name="mount_stock_restore_failed_message">Android\'ê APK\'ya orjînal a ku hatibû tomarkirin qebûl nekir. Vebijêrka testê ya ku pêşî tê saz kirin saz bike, hewce dîtin</string>
     <string name="installer_status_shizuku_unsupported">Versiyona sazkirî ya Şizuku piştgirî nadê</string>
@@ -1056,6 +1062,15 @@ Qasîyên wêneyan divê wiha bin:
     <string name="installer_play_store_warning_continue">Min fêhm kir, bidomînin</string>
     <string name="installer_play_store_mode">Sazkirin wek Play Store</string>
     <string name="installer_play_store_mode_description">Google Play Store wek çavkaniya sazkirinê nîşan dide</string>
+    <string name="settings_section_patch_mode">Moda patchkirinê</string>
+    <string name="settings_patch_mode_ask">Her caran bipirse</string>
+    <string name="settings_patch_mode_ask_description">Berî patchkirina her appekî dipirse ka dê ji bo root mount an jî sazkirineke standard bê patchkirin</string>
+    <string name="settings_section_after_patching">Piştî patchkirinê</string>
+    <string name="settings_after_patching_install">Bi otomatîkî saz bike</string>
+    <string name="settings_after_patching_ask">Bipirse kîjan sazker</string>
+    <string name="settings_after_patching_ask_description">Her carê appek tê sazkirin, dipirse ka kîjan sazker bê bikaranîn</string>
+    <string name="settings_after_patching_manual">Bi destan saz bike</string>
+    <string name="settings_after_patching_manual_description">Piştî ku hûn li ser Install bitapînin, bi installerê default têne sazkirin</string>
     <string name="settings_nomount_only">Tenê NoMount</string>
     <string name="settings_nomount_only_description">Tenê aplikasyonan bi NoMount mount dike û qet navere gihîştine bind mount, lewma bêyî wê dimînin bê-mountkirin</string>
     <string name="settings_auto_install_with_shizuku_description">Piştî ku patching bi dawî dibe, APK-ya patched hemen sazkirî yan mount dike</string>

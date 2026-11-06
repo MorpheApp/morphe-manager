@@ -510,7 +510,6 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee &lt;b&gt;kokonaisen APK:n&
     <string name="shortcut_repatch_long">Korjaa vanhentuneet sovellukset</string>
     <string name="shortcut_check_updates_short">Tarkista päivitykset</string>
     <string name="shortcut_check_updates_long">Tarkista korjauspäivitykset</string>
-    <string name="shortcut_patch_app">Korjaa %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Poistetaanko tämä sovellus?</string>
     <string name="home_app_info_uninstall_removes_data">Sovellus ja sen tiedot poistetaan tästä laitteesta</string>

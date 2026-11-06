@@ -510,7 +510,6 @@ For de beste resultatene anbefaler denne appen å patche en &lt;b&gt;full APK-fi
     <string name="shortcut_repatch_long">Repatch utdaterte apper</string>
     <string name="shortcut_check_updates_short">Sjekk oppdateringer</string>
     <string name="shortcut_check_updates_long">Se etter patch-oppdateringer</string>
-    <string name="shortcut_patch_app">Patch %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Avinstallere denne appen?</string>
     <string name="home_app_info_uninstall_removes_data">Appen og dataene fjernes fra denne enheten</string>

@@ -510,7 +510,6 @@ Za najboljše rezultate ta aplikacija priporoča popravljanje &lt;b&gt;polnega A
     <string name="shortcut_repatch_long">Ponovno popravite zastarele aplikacije</string>
     <string name="shortcut_check_updates_short">Preverite posodobitve</string>
     <string name="shortcut_check_updates_long">Preverite posodobitve popravkov</string>
-    <string name="shortcut_patch_app">Popravite %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Odnamestiti to aplikacijo?</string>
     <string name="home_app_info_uninstall_removes_data">Aplikacija in njeni podatki bodo odstranjeni s te naprave</string>

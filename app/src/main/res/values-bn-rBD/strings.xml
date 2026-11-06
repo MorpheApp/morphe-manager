@@ -510,7 +510,6 @@
     <string name="shortcut_repatch_long">পুরানো অ্যাপগুলি পুনরায় প্যাচ করুন</string>
     <string name="shortcut_check_updates_short">আপডেটগুলি দেখুন</string>
     <string name="shortcut_check_updates_long">প্যাচ আপডেটের জন্য দেখুন</string>
-    <string name="shortcut_patch_app">%s প্যাচ করুন</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">এই অ্যাপটি আনইনস্টল করবেন?</string>
     <string name="home_app_info_uninstall_removes_data">অ্যাপ এবং এর ডেটা এই ডিভাইস থেকে সরিয়ে ফেলা হবে</string>

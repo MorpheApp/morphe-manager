@@ -510,7 +510,6 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="shortcut_repatch_long">Her-pleister verouderde programme</string>
     <string name="shortcut_check_updates_short">Kyk vir opgraderings</string>
     <string name="shortcut_check_updates_long">Kyk vir pleister opgraderings</string>
-    <string name="shortcut_patch_app">Pleister %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Deïnstalleer hierdie toepassing?</string>
     <string name="home_app_info_uninstall_removes_data">Die toepassing en sy data word van hierdie toestel verwyder</string>

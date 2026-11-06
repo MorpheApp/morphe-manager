@@ -510,7 +510,6 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="shortcut_repatch_long">Athphaisteáil aipeanna atá as dáta</string>
     <string name="shortcut_check_updates_short">Seiceáil nuashonruithe</string>
     <string name="shortcut_check_updates_long">Seiceáil le haghaidh nuashonruithe paiste</string>
-    <string name="shortcut_patch_app">Paiste %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Díshuiteáil an aip seo?</string>
     <string name="home_app_info_uninstall_removes_data">Baintear an aip agus a sonraí den fheiste seo</string>

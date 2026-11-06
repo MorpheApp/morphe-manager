@@ -511,7 +511,6 @@ Für optimale Ergebnisse empfiehlt diese App, eine &lt;b&gt;vollständige APK&lt
     <string name="shortcut_repatch_long">Veraltete Apps neu patchen</string>
     <string name="shortcut_check_updates_short">Auf Updates prüfen</string>
     <string name="shortcut_check_updates_long">Nach Patch-Updates suchen</string>
-    <string name="shortcut_patch_app">%s patchen</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Diese App deinstallieren?</string>
     <string name="home_app_info_uninstall_removes_data">Die App und ihre Daten werden von diesem Gerät entfernt</string>

@@ -510,7 +510,6 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="shortcut_repatch_long">Endurbreyta úreltum appum</string>
     <string name="shortcut_check_updates_short">Leita að uppfærslum</string>
     <string name="shortcut_check_updates_long">Leita að breytingum</string>
-    <string name="shortcut_patch_app">Breyta %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Afuppsetja þetta forrit?</string>
     <string name="home_app_info_uninstall_removes_data">Forappið og gögn þess eru fjarlægð frá þessu tæki</string>

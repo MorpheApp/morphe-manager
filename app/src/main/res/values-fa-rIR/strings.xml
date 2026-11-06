@@ -510,7 +510,6 @@
     <string name="shortcut_repatch_long">دوباره پچ‌کردن برنامه‌های قدیمی</string>
     <string name="shortcut_check_updates_short">بررسی به‌روزرسانی‌ها</string>
     <string name="shortcut_check_updates_long">بررسی به‌روزرسانی پچ‌ها</string>
-    <string name="shortcut_patch_app">پچ‌کردن %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">این برنامه حذف شود؟</string>
     <string name="home_app_info_uninstall_removes_data">برنامه و داده‌های آن از این دستگاه پاک می‌شوند</string>

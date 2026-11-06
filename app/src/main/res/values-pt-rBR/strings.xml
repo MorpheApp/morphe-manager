@@ -508,7 +508,6 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;
     <string name="shortcut_repatch_long">Refazer o patch dos aplicativos desatualizados</string>
     <string name="shortcut_check_updates_short">Verificar atualizações</string>
     <string name="shortcut_check_updates_long">Verificar atualizações de patch</string>
-    <string name="shortcut_patch_app">Patch %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Desinstalar este aplicativo?</string>
     <string name="home_app_info_uninstall_removes_data">O aplicativo e seus dados serão removidos deste dispositivo</string>

@@ -510,7 +510,6 @@ Para obteres os melhores resultados, este ficheiro recomenda a modificação de 
     <string name="shortcut_repatch_long">Refazer correção dos aplicativos desatualizados</string>
     <string name="shortcut_check_updates_short">Verificar atualizações</string>
     <string name="shortcut_check_updates_long">Verificar atualizações de patch</string>
-    <string name="shortcut_patch_app">Corrigir %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Desinstalar este app?</string>
     <string name="home_app_info_uninstall_removes_data">O app e seus dados serão removidos deste dispositivo</string>

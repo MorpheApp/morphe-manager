@@ -509,7 +509,6 @@ Pour de meilleurs résultats, cette application recommande d'effectuer le patchi
     <string name="shortcut_repatch_long">Re-patcher les applications obsolètes</string>
     <string name="shortcut_check_updates_short">Vérifier les mises à jour</string>
     <string name="shortcut_check_updates_long">Vérifier les mises à jour de patchs</string>
-    <string name="shortcut_patch_app">Patcher %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Désinstaller cette application ?</string>
     <string name="home_app_info_uninstall_removes_data">L\'application et ses données seront supprimées de cet appareil</string>
@@ -575,7 +574,7 @@ Restaurer remet la version patchée. Désactive les mises à jour automatiques p
     <string name="root_pre_patch_installer_standard_title">Mode d\'installation standard</string>
     <string name="root_pre_patch_installer_standard_description">Patche en tant qu\'APK normal avec prise en charge de GmsCore. Votre paramètre d\'installateur est utilisé après le patching</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
-    <string name="root_pre_patch_installer_hint">Demandé alors que %1$s est défini sur %2$s. Le mode de patch ne peut pas être modifié après le patching</string>
+    <string name="root_pre_patch_installer_hint">Demandé lorsque %1$s est défini sur %2$s. Le mode de patch ne peut plus être modifié après le patching.</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Erreur copiée dans le presse-papiers</string>
     <string name="patcher_error_log">Journal d\'erreur</string>
@@ -731,7 +730,7 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="plugin_activity_dialog_body">Une interaction de l\'utilisateur est nécessaire pour pouvoir poursuivre avec ce plugin</string>
     <string name="patcher_process_killed_message">Le système a arrêté le patcheur avant qu\'il ait terminé, généralement pour libérer de la mémoire. Fermez les autres applications et réessayez</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
-    <string name="patcher_process_crashed_message">Le patcheur a planté avant d\'avoir terminé. Si cela se reproduit, désactivez %1$s et signalez le problème avec le journal</string>
+    <string name="patcher_process_crashed_message">Le patcheur a planté avant d\'avoir terminé. Si cela se reproduit, désactivez %1$s et signalez le problème en joignant le journal</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Le patcheur a manqué de mémoire avec un tas de %1$s Mo. Cette application est trop volumineuse pour les patchs sélectionnés. Essayez de patcher avec moins de sources de patchs, ou sélectionnez moins de patchs</string>
     <string name="install_app_success">Installé avec succès</string>
@@ -1033,7 +1032,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="installer_title">Sélectionner l\'installateur</string>
     <string name="installer_internal_description">Utilise l\'installateur de paquets Android</string>
     <string name="installer_play_store_description">Utilise l\'installateur système et définit le Google Play Store comme source d\'installation</string>
-    <string name="installer_root_description">S\'installe silencieusement avec root</string>
+    <string name="installer_root_description">Installe silencieusement avec root</string>
     <string name="installer_root_play_store_description">Installe silencieusement avec les droits root et définit le Google Play Store comme source d\'installation</string>
     <string name="installer_shizuku_description">Installe silencieusement via Shizuku ou Sui</string>
     <string name="installer_shizuku_play_store_description">Installe silencieusement via Shizuku ou Sui et définit le Google Play Store comme source d\'installation</string>
@@ -1068,13 +1067,13 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="installer_play_store_mode_description">Définit le Google Play Store comme source d\'installation</string>
     <string name="settings_section_patch_mode">Mode de patch</string>
     <string name="settings_patch_mode_ask">Demander à chaque fois</string>
-    <string name="settings_patch_mode_ask_description">Demande avant de patcher chaque application s\'il faut la patcher pour un montage root ou une installation standard</string>
+    <string name="settings_patch_mode_ask_description">Demande avant le patching de chaque application s\'il faut patcher pour un montage root ou une installation standard</string>
     <string name="settings_section_after_patching">Après le patching</string>
     <string name="settings_after_patching_install">Installer automatiquement</string>
     <string name="settings_after_patching_ask">Demander quel installateur</string>
-    <string name="settings_after_patching_ask_description">Demande quel installateur utiliser à chaque fois qu\'une application est installée</string>
+    <string name="settings_after_patching_ask_description">Demander quel installateur utiliser à chaque installation d\'une application</string>
     <string name="settings_after_patching_manual">Installer manuellement</string>
-    <string name="settings_after_patching_manual_description">Installe avec l\'installateur par défaut une fois que vous appuyez sur Installer</string>
+    <string name="settings_after_patching_manual_description">Installe avec l\'installateur par défaut une fois que vous appuyez sur \'Installer\'</string>
     <string name="settings_nomount_only">NoMount uniquement</string>
     <string name="settings_nomount_only_description">Monte les applications uniquement avec NoMount et ne bascule jamais vers un montage lié, afin qu\'elles restent non montées sans celui-ci</string>
     <string name="settings_auto_install_with_shizuku_description">Installe ou monte l\'APK patché dès que le patching est terminé</string>

@@ -510,7 +510,6 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="shortcut_repatch_long">오래된 앱 다시 패치</string>
     <string name="shortcut_check_updates_short">업데이트 확인</string>
     <string name="shortcut_check_updates_long">패치 업데이트 확인</string>
-    <string name="shortcut_patch_app">%s 패치</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">이 앱을 제거하시겠습니까?</string>
     <string name="home_app_info_uninstall_removes_data">앱과 해당 데이터가 이 기기에서 제거됩니다</string>

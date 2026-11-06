@@ -510,7 +510,6 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="shortcut_repatch_long">Vá lại các ứng dụng đã cũ</string>
     <string name="shortcut_check_updates_short">Kiểm tra cập nhật</string>
     <string name="shortcut_check_updates_long">Kiểm tra cập nhật bản vá</string>
-    <string name="shortcut_patch_app">Vá %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Gỡ cài đặt ứng dụng này?</string>
     <string name="home_app_info_uninstall_removes_data">Ứng dụng và dữ liệu của nó sẽ bị xóa khỏi thiết bị này</string>

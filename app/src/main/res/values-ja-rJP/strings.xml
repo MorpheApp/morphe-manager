@@ -510,7 +510,6 @@ APK ファイルの取得元を選択してください"</string>
     <string name="shortcut_repatch_long">古いアプリを再パッチ</string>
     <string name="shortcut_check_updates_short">更新を確認</string>
     <string name="shortcut_check_updates_long">パッチの更新を確認</string>
-    <string name="shortcut_patch_app">%s をパッチ処理</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">このアプリをアンインストールしますか？</string>
     <string name="home_app_info_uninstall_removes_data">このデバイスからアプリとアプリデータが削除されます</string>
@@ -1031,7 +1030,7 @@ morphe_header_custom_dark.png
     <string name="installer_title">インストーラーを選択</string>
     <string name="installer_internal_description">Android パッケージ インストーラーを使用します</string>
     <string name="installer_play_store_description">システム インストーラーを使用し、インストール元を Google Play ストアに設定します</string>
-    <string name="installer_root_description">Root権限でサイレントインストールします</string>
+    <string name="installer_root_description">root 権限でサイレント インストールを行います</string>
     <string name="installer_root_play_store_description">root 権限でサイレント インストールし、インストール元を Google Play ストアに設定します</string>
     <string name="installer_shizuku_description">Shizuku または Sui を使用して自動インストールします</string>
     <string name="installer_shizuku_play_store_description">Shizuku または Sui を介してサイレント インストールし、インストール元を Google Play ストアに設定します</string>
