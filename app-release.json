@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-11-05T19:57:49",
-  "description": "## [2.5.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v2.5.0-dev.1...v2.5.0-dev.2) (2026-11-05)\n\n### Bug Fixes\n\n* Bump patcher ([5a7a04d](https://github.com/MorpheApp/morphe-manager/commit/5a7a04d902c693020675e42ade3698811f669ac8))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.5.0-dev.2/morphe-manager-2.5.0-dev.2.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.5.0-dev.2/morphe-manager-2.5.0-dev.2.apk.asc",
-  "version": "2.5.0-dev.2"
+  "created_at": "2026-11-06T09:46:43",
+  "description": "## [2.5.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v2.5.0-dev.2...v2.5.0-dev.3) (2026-11-06)\n\n### Features\n\n* Sort saved APKs by name or size ([bebb7ee](https://github.com/MorpheApp/morphe-manager/commit/bebb7ee1e929cdef9737c1c7bbc782c428b4ba25))\n\n### Bug Fixes\n\n* Apply patch options picked by hand in simple mode ([bc122d3](https://github.com/MorpheApp/morphe-manager/commit/bc122d34db2b82782c181199449d456e3af291aa))\n* Keep only the standard launcher shortcuts ([82bdb1d](https://github.com/MorpheApp/morphe-manager/commit/82bdb1d8ebcd1bba5f628615362f9f872e0c10bb))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.5.0-dev.3/morphe-manager-2.5.0-dev.3.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.5.0-dev.3/morphe-manager-2.5.0-dev.3.apk.asc",
+  "version": "2.5.0-dev.3"
 }
