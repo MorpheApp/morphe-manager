@@ -16,7 +16,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.os.LocaleList
@@ -24,10 +23,8 @@ import android.util.Log
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
-import androidx.core.graphics.drawable.toBitmap
 import androidx.work.WorkManager
 import app.morphe.manager.data.platform.Filesystem
-import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.di.*
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.avatarUrls
 import app.morphe.manager.domain.manager.PreferencesManager
@@ -47,7 +44,6 @@ import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
@@ -84,12 +80,6 @@ class ManagerApplication : Application() {
         /** Launcher shortcut that opens the batch queue with everything worth re-patching. */
         private const val SHORTCUT_ID_REPATCH = "repatch_outdated"
         private const val SHORTCUT_ID_UPDATES = "check_updates"
-        private const val SHORTCUT_ID_PATCH_PREFIX = "patch_"
-
-        /** Launchers show about four entries in the long-press menu. */
-        private const val MIN_SHORTCUT_SLOTS = 2
-        private const val MAX_SHORTCUT_SLOTS = 4
-        private const val SHORTCUT_ICON_PX = 192
 
         /**
          * Schedule of the automatic re-patching the re-patch alert replaced. Installs that had
@@ -103,7 +93,6 @@ class ManagerApplication : Application() {
     private val blocklistRepository: BlocklistRepository by inject()
     private val fs: Filesystem by inject()
     private val installedAppRepository: InstalledAppRepository by inject()
-    private val appDataResolver: AppDataResolver by inject()
 
     /** Locales the app's own strings resolve in, null until [observeLanguage] first reads them. */
     private val stringLocales = MutableStateFlow<LocaleList?>(null)
@@ -289,7 +278,7 @@ class ManagerApplication : Application() {
     }
 
     /**
-     * Keeps the long-press menu on the launcher icon in sync with the patched apps.
+     * Publishes the long-press menu on the launcher icon, relabeled whenever the language changes.
      *
      * Dynamic rather than declared in XML on purpose: the launcher entry is one of several
      * activity aliases that swap with the icon style, and a dynamic shortcut is published for
@@ -297,18 +286,12 @@ class ManagerApplication : Application() {
      */
     private fun observeLauncherShortcuts() {
         scope.launch(Dispatchers.IO) {
-            combine(installedAppRepository.getAll(), stringLocales.filterNotNull()) { apps, _ -> apps }
-                .collect { apps -> publishLauncherShortcuts(apps) }
+            stringLocales.filterNotNull().collect { publishLauncherShortcuts() }
         }
     }
 
-    private suspend fun publishLauncherShortcuts(installedApps: List<InstalledApp>) {
-        // The system allows far more than a launcher ever shows, so publish only what fits in
-        // the long-press menu instead of turning every patched app into a shortcut
-        val maxShortcuts = ShortcutManagerCompat.getMaxShortcutCountPerActivity(this)
-            .coerceIn(MIN_SHORTCUT_SLOTS, MAX_SHORTCUT_SLOTS)
-
-        val shortcuts = mutableListOf(
+    private fun publishLauncherShortcuts() {
+        val shortcuts = listOf(
             shortcut(
                 id = SHORTCUT_ID_REPATCH,
                 shortLabel = getString(R.string.shortcut_repatch_short),
@@ -329,32 +312,8 @@ class ManagerApplication : Application() {
             )
         )
 
-        // The apps patched most recently are the ones most likely to be patched again
-        installedApps
-            .sortedByDescending { it.patchedAt ?: 0L }
-            .take(maxShortcuts - shortcuts.size)
-            .forEachIndexed { index, app ->
-                // Patching renames packages, so an app that was saved but never installed can
-                // only be named from its saved APK, the same source the home screen reads
-                val appData = appDataResolver.resolveAppData(
-                    packageName = app.originalPackageName,
-                    preferredSource = AppDataSource.ORIGINAL_APK
-                )
-
-                shortcuts += shortcut(
-                    id = "$SHORTCUT_ID_PATCH_PREFIX${app.originalPackageName}",
-                    shortLabel = appData.displayName,
-                    longLabel = getString(R.string.shortcut_patch_app, appData.displayName),
-                    icon = appIcon(appData.icon),
-                    rank = shortcuts.size + index,
-                    intent = shortcutIntent(MainActivity.ACTION_PATCH_APP).apply {
-                        putExtra(MainActivity.EXTRA_PATCH_PACKAGE, app.originalPackageName)
-                    }
-                )
-            }
-
         runCatching {
-            ShortcutManagerCompat.setDynamicShortcuts(this, shortcuts.take(maxShortcuts))
+            ShortcutManagerCompat.setDynamicShortcuts(this, shortcuts)
         }.onFailure { Log.w(tag, "Failed to publish launcher shortcuts", it) }
     }
 
@@ -378,15 +337,6 @@ class ManagerApplication : Application() {
         // Stamped here rather than at each call site so no shortcut can arrive unnamed
         .setIntent(intent.putExtra(MainActivity.EXTRA_SHORTCUT_ID, id))
         .build()
-
-    /**
-     * Real app icon so the shortcut reads like the app it patches, with the wand as a
-     * fallback for apps whose icon cannot be resolved.
-     */
-    private fun appIcon(icon: Drawable?): IconCompat = runCatching {
-        icon?.let { IconCompat.createWithBitmap(it.toBitmap(SHORTCUT_ICON_PX, SHORTCUT_ICON_PX)) }
-    }.getOrNull()
-        ?: IconCompat.createWithResource(this, R.drawable.ic_shortcut_repatch)
 
     /**
      * Work that only pays off once a screen exists. A process started by an FCM push or a boot

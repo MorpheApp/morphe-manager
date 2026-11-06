@@ -525,7 +525,6 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="shortcut_repatch_long">Re-patch outdated apps</string>
     <string name="shortcut_check_updates_short">Check updates</string>
     <string name="shortcut_check_updates_long">Check for patch updates</string>
-    <string name="shortcut_patch_app">Patch %s</string>
 
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Uninstall this app?</string>
