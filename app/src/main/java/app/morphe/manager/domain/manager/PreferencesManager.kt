@@ -18,6 +18,7 @@ import app.morphe.manager.BuildConfig
 import app.morphe.manager.domain.batch.BatchInstallPolicy
 import app.morphe.manager.domain.manager.base.BasePreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
+import app.morphe.manager.ui.screen.settings.system.ApkSortMode
 import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.theme.SeasonalEvent
 import app.morphe.manager.ui.theme.Theme
@@ -188,6 +189,9 @@ class PreferencesManager(
     val lastFilePickerPath = stringPreference("last_file_picker_path", "")
     val filePickerSortMode = stringPreference("file_picker_sort_mode", "DATE_DESC")
     val filePickerShowHiddenFiles = booleanPreference("file_picker_show_hidden_files", false)
+
+    /** Order of the saved APK lists in storage management, shared by both of them. */
+    val apkManagementSortMode = enumPreference("apk_management_sort_mode", ApkSortMode.NAME)
 
     /** Persist the pre-patch APK so it can be reused for repatching without asking the user to reselect it. */
     val saveOriginalApks = booleanPreference("save_original_apks", true)

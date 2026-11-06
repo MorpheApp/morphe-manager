@@ -7,6 +7,7 @@ package app.morphe.manager.ui.screen.settings.system
 
 import android.content.pm.PackageInfo
 import android.view.HapticFeedbackConstants
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
@@ -32,6 +33,7 @@ import app.morphe.manager.domain.apk.InstalledPatchState
 import app.morphe.manager.domain.apk.LocalApkSources
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.UninstallCancelledException
+import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.patcher.util.NativeLibs
@@ -84,8 +86,23 @@ private val ApkItemData.selectionKey: String
 private val ApkItemData.isInstallableFromStorage: Boolean
     get() = file?.exists() == true && installType != InstallType.MOUNT
 
-private fun List<ApkItemData>.sortedByDisplayName(): List<ApkItemData> =
-    sortedBy { it.displayName.lowercase(Locale.ROOT) }
+/** Order of the saved APK lists. Entries of the same size keep to the order of their names. */
+enum class ApkSortMode(@param:StringRes val labelRes: Int) {
+    NAME(R.string.file_picker_sort_name_asc),
+    SIZE_DESC(R.string.file_picker_sort_size_desc),
+    SIZE_ASC(R.string.file_picker_sort_size_asc);
+
+    val comparator: Comparator<ApkItemData>
+        get() = when (this) {
+            NAME -> byDisplayName
+            SIZE_DESC -> compareByDescending<ApkItemData> { it.fileSize }.then(byDisplayName)
+            SIZE_ASC -> compareBy<ApkItemData> { it.fileSize }.then(byDisplayName)
+        }
+
+    private companion object {
+        val byDisplayName = compareBy<ApkItemData> { it.displayName.lowercase(Locale.ROOT) }
+    }
+}
 
 private val ApkItemData.installLabelRes: Int
     get() = when (installType) {
@@ -250,7 +267,7 @@ private fun DialogHostScope.PatchedApksContent(
     var pendingDelete by remember { mutableStateOf<Pair<ApkItemData, InstalledApp>?>(null) }
 
     // Look up by selectionKey to avoid index shifts on concurrent list updates
-    val displayItems = remember(state) { apkItems.map { it.toApkItemData() }.sortedByDisplayName() }
+    val displayItems = remember(state) { apkItems.map { it.toApkItemData() } }
     val appByKey = remember(state) {
         apkItems.associate { it.toApkItemData().selectionKey to it.installedApp }
     }
@@ -482,7 +499,7 @@ private fun DialogHostScope.OriginalApksContent(
 
     val isLoading = state is ApkLoadState.Loading
     val entries = (state as? ApkLoadState.Loaded)?.items ?: emptyList()
-    val apkItems = remember(state) { entries.map { it.data }.sortedByDisplayName() }
+    val apkItems = remember(state) { entries.map { it.data } }
     val apkByKey = remember(state) { entries.associate { it.data.selectionKey to it.apk } }
     val totalSize = remember(state) { apkItems.sumOf { it.fileSize } }
     var pendingDelete by remember { mutableStateOf<Pair<ApkItemData, OriginalApk>?>(null) }
@@ -640,12 +657,16 @@ private fun DialogHostScope.ApkManagementDialogContent(
     var isMultiSelectMode by remember { mutableStateOf(false) }
     var isExporting by remember { mutableStateOf(false) }
     val selection = rememberSelectionState<String>()
-    // Nothing to narrow down while loading or with a single entry
+    val prefs = koinInject<PreferencesManager>()
+    val sortMode by prefs.apkManagementSortMode.getAsState()
+    var showSortMenu by remember { mutableStateOf(false) }
+    // Nothing to narrow down or reorder while loading or with a single entry
     val isSearchable = !meta.isLoading && items.size >= 2
     val search = rememberSearchFieldState(searchable = isSearchable)
-    val filteredItems = remember(items, search.query) {
-        if (search.query.isBlank()) items
-        else items.filter {
+    val sortedItems = remember(items, sortMode) { items.sortedWith(sortMode.comparator) }
+    val filteredItems = remember(sortedItems, search.query) {
+        if (search.query.isBlank()) sortedItems
+        else sortedItems.filter {
             it.displayName.contains(search.query, ignoreCase = true) ||
                     it.packageName.contains(search.query, ignoreCase = true)
         }
@@ -710,6 +731,31 @@ private fun DialogHostScope.ApkManagementDialogContent(
                 searchLabel = stringResource(R.string.home_search_apps),
                 searchEnabled = isSearchable
             ) {
+                Box {
+                    TitleAction(
+                        icon = MaterialSymbols.Rounded.Sort.autoMirrored,
+                        contentDescription = stringResource(R.string.sort),
+                        onClick = { showSortMenu = true },
+                        style = TitleActionStyle.Toggle,
+                        active = showSortMenu,
+                        enabled = isSearchable
+                    )
+                    AppDropdownMenu(
+                        expanded = showSortMenu,
+                        onDismissRequest = { showSortMenu = false }
+                    ) {
+                        ApkSortMode.entries.forEach { mode ->
+                            AppDropdownMenuItem(
+                                text = stringResource(mode.labelRes),
+                                selected = sortMode == mode,
+                                onClick = {
+                                    showSortMenu = false
+                                    scope.launch { prefs.apkManagementSortMode.update(mode) }
+                                }
+                            )
+                        }
+                    }
+                }
                 TitleAction(
                     icon = MaterialSymbols.Rounded.Delete_forever,
                     contentDescription = stringResource(R.string.delete_all),
@@ -852,7 +898,9 @@ private fun DialogHostScope.ApkManagementDialogContent(
                         onUninstall = if (item.isInstalledOnDevice && actions.onUninstall != null) {
                             { itemToUninstallConfirm = item }
                         } else null,
-                        onDelete = { actions.onDelete(item) }
+                        onDelete = { actions.onDelete(item) },
+                        // Moves to its new place when the list is sorted another way
+                        modifier = Modifier.animateItem()
                     )
                 }
             }
@@ -936,13 +984,14 @@ private fun ApkItemCard(
     onExport: (() -> Unit)?,
     onInstall: (() -> Unit)?,
     onUninstall: (() -> Unit)?,
-    onDelete: () -> Unit
+    onDelete: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val view = LocalView.current
     val selectLabel = stringResource(R.string.accessibility_select_app)
 
     SelectableCard(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         isSelected = selected,
         isSelectionMode = selectionMode
     ) {
