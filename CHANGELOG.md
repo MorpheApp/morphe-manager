@@ -1,3 +1,14 @@
+## [2.5.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v2.5.0-dev.2...v2.5.0-dev.3) (2026-11-06)
+
+### Features
+
+* Sort saved APKs by name or size ([bebb7ee](https://github.com/MorpheApp/morphe-manager/commit/bebb7ee1e929cdef9737c1c7bbc782c428b4ba25))
+
+### Bug Fixes
+
+* Apply patch options picked by hand in simple mode ([bc122d3](https://github.com/MorpheApp/morphe-manager/commit/bc122d34db2b82782c181199449d456e3af291aa))
+* Keep only the standard launcher shortcuts ([82bdb1d](https://github.com/MorpheApp/morphe-manager/commit/82bdb1d8ebcd1bba5f628615362f9f872e0c10bb))
+
 ## [2.5.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v2.5.0-dev.1...v2.5.0-dev.2) (2026-11-05)
 
 ### Bug Fixes
