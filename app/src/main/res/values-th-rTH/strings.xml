@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">ซ่อนแอปนี้หรือไม่?</string>
     <string name="home_more_apps_title">แอปเพิ่มเติม</string>
     <string name="home_more_apps_hide_title">ซ่อนการ์ดนี้หรือไม่?</string>
-    <string name="home_more_apps_hide_message">คุณสามารถนำกลับมาได้ทุกเมื่อใน การตั้งค่า &gt; รูปลักษณ์ &gt; หน้าจอหลัก</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">คุณสามารถนำกลับมาได้ทุกเมื่อใน %1$s</string>
     <string name="home_app_hide_message">แอปนี้จะถูกซ่อนจากหน้าจอหลัก คุณสามารถกู้คืนได้ในภายหลังจากแอปที่ซ่อนอยู่โดยใช้ปุ่มที่ด้านล่างของรายการ</string>
     <string name="home_app_will_be_hidden">แอปนี้จะถูกซ่อน</string>
     <string name="home_app_hidden_named">ซ่อน %s รายการ</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">คีย์ที่เชื่อถือได้</string>
     <string name="sources_signing_key_new">คีย์ใหม่</string>
     <string name="sources_patch_expert_badge">ผู้เชี่ยวชาญ</string>
-    <string name="sources_patch_expert_badge_tooltip">เปิดใช้งานโหมดผู้เชี่ยวชาญในการตั้งค่าเพื่อเลือกแพตช์นี้ด้วยตนเอง</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">เปิด %1$s เพื่อรวมแพตช์นี้ด้วยตนเอง</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">ต้องการความช่วยเหลือในการหา APK หรือไม่?</string>
     <string name="home_apk_availability_dialog_simple">เพื่อที่จะแพตช์ &lt;b&gt;%s&lt;/b&gt; คุณต้องมี APK ที่ยังไม่ถูกแพตช์เวอร์ชัน:</string>
@@ -508,7 +510,6 @@
     <string name="shortcut_repatch_long">แพตช์แอปที่ล้าสมัยซ้ำ</string>
     <string name="shortcut_check_updates_short">ตรวจสอบการอัปเดต</string>
     <string name="shortcut_check_updates_long">ตรวจสอบการอัปเดตแพตช์</string>
-    <string name="shortcut_patch_app">แพตช์ %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">ถอนการติดตั้งแอปนี้หรือไม่?</string>
     <string name="home_app_info_uninstall_removes_data">แอปและข้อมูลจะถูกลบออกจากอุปกรณ์นี้</string>
@@ -529,6 +530,7 @@
     <string name="home_app_info_install_type_custom_installer">ตัวกรองติดตั้งกำหนดเอง</string>
     <string name="home_app_info_install_type_system_installer">ตัวกรองติดตั้งระบบ</string>
     <string name="home_app_info_install_type_play_store">ติดตั้งจาก Play Store</string>
+    <string name="home_app_info_install_type_root">ติดตั้งแบบ Root</string>
     <string name="home_app_info_install_type_root_play_store">ติดตั้งจาก Play Store แบบรูท</string>
     <string name="home_app_info_install_type_shizuku_play_store">ติดตั้งจาก Play Store ด้วย Shizuku</string>
     <string name="home_app_info_patch_update_available">มีอัพเดทแพตช์ใหม่ให้ใช้งานแล้ว</string>
@@ -570,7 +572,8 @@
     <string name="root_mount_module_unmount_warning">หาก KernelSU มีการเปิดใช้ \"Unmount modules by default\" เปิด KernelSU &gt; Superuser &gt; แอปที่คุณติดตั้ง &gt; โปรไฟล์ &gt; กำหนดเอง และปิด \"Unmount modules\" มิเช่นนั้น APK ที่แพตช์แล้วที่ติดตั้งอาจไม่มีผล แม้ Morphe จะแสดงว่าติดตั้งแล้วก็ตาม</string>
     <string name="root_pre_patch_installer_standard_title">โหมดการติดตั้งแบบมาตรฐาน</string>
     <string name="root_pre_patch_installer_standard_description">แพตช์เป็น APK ปกติพร้อมการรองรับ GmsCore การตั้งค่าตัวติดตั้งของคุณจะถูกใช้หลังจากการแพตช์</string>
-    <string name="root_pre_patch_installer_hint">จะถามในขณะที่ การตั้งค่า &gt; การแพตช์ &gt; การติดตั้ง &gt; แจ้งเตือนการเลือกตัวติดตั้ง ถูกเปิดใช้งาน ไม่สามารถเปลี่ยนโหมดการแพตช์ได้หลังจากแพตช์เสร็จสิ้นแล้ว</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">ถามในขณะที่ %1$s ถูกตั้งค่าเป็น %2$s โหมดแพตช์ไม่สามารถเปลี่ยนแปลงได้หลังการแพตช์</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">คัดลอกข้อผิดพลาดไปยังคลิปบอร์ดแล้ว</string>
     <string name="patcher_error_log">บันทึกข้อผิดพลาด</string>
@@ -669,6 +672,14 @@
     <string name="patcher_step_group_saving">กำลังบันทึก</string>
     <string name="patcher_step_write_patched">กำลังเขียนไฟล์ APK ที่ถูกแพตช์</string>
     <string name="patcher_step_sign_apk">กำลังลงนามไฟล์ APK ที่ถูกแพตช์</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">กำลังอ่านไฟล์ DEX</string>
+    <string name="patcher_task_extracting_resources">กำลังแยกทรัพยากร</string>
+    <string name="patcher_task_decoding_resources">กำลังถอดรหัสทรัพยากร</string>
+    <string name="patcher_task_indexing_classes">กำลังทำดัชนีคลาส</string>
+    <string name="patcher_task_compiling_dex">กำลังคอมไพล์ไฟล์ DEX</string>
+    <string name="patcher_task_compiling_resources">กำลังรวบรวมทรัพยากร</string>
+    <string name="patcher_task_writing_apk">กำลังเขียนไฟล์ APK</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">การป้องกันการปรับแก้เบื้องหลัง</string>
     <string name="battery_optimization_dialog_description">อุปกรณ์บางเครื่องอาจหยุดโปรแกรมปรับแก้เมื่อแอปพลิเคชันถูกลดขนาด อนุญาตให้ Morphe ทำงานโดยไม่มีข้อจำกัดด้านแบตเตอรี่เพื่อให้แน่ใจว่าการปรับแก้เสร็จสมบูรณ์ได้อย่างน่าเชื่อถือ</string>
@@ -717,7 +728,8 @@
     <string name="patched_app_save_failed_toast">ไม่สามารถบันทึกแอปที่แพตช์แล้วได้</string>
     <string name="plugin_activity_dialog_body">ต้องมีการติดต่อผู้ใช้เพื่อดำเนินการต่อไปนี้</string>
     <string name="patcher_process_killed_message">ระบบหยุดการทำงานของตัวแพตช์ก่อนที่จะเสร็จสิ้น โดยปกติแล้วเพื่อเพิ่มพื้นที่ว่างในหน่วยความจำ โปรดปิดแอปอื่นๆ แล้วลองใหม่อีกครั้ง</string>
-    <string name="patcher_process_crashed_message">ตัวแพตช์หยุดทำงานก่อนที่จะเสร็จสิ้น หากเกิดขึ้นอีก ให้ปิด \"ใช้ VM ในตัว\" ในการตั้งค่า และรายงานปัญหาพร้อมบันทึก</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">ตัวแพตช์หยุดทำงานก่อนที่จะเสร็จสิ้น หากเกิดขึ้นอีก ให้ปิด %1$s และรายงานปัญหาพร้อมบันทึก</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">ตัวแพตช์ทำงานล้มเหลวเนื่องจากหน่วยความจำหมดโดยมีฮีปขนาด %1$s MB แอปนี้มีขนาดใหญ่เกินไปสำหรับแพตช์ที่เลือก ลองแพตช์โดยใช้แหล่งแพตช์น้อยลง หรือเลือกแพตช์ให้น้อยลง</string>
     <string name="install_app_success">ติดตั้งสำเร็จแล้ว</string>
@@ -1017,9 +1029,8 @@ morphe_header_custom_dark.png
     <string name="installer_title">เลือกตัวติดตั้ง</string>
     <string name="installer_internal_description">ใช้ตัวติดตั้งแพ็คเกจ Android</string>
     <string name="installer_play_store_description">ใช้ตัวติดตั้งของระบบและตั้งค่า Google Play Store เป็นแหล่งติดตั้ง</string>
+    <string name="installer_root_description">ติดตั้งแบบเงียบโดยใช้ root</string>
     <string name="installer_root_play_store_description">ติดตั้งโดยอัตโนมัติด้วยสิทธิ์รูท และตั้งค่า Google Play Store เป็นแหล่งติดตั้ง</string>
-    <string name="installer_auto_saved_name">เมานต์รูท</string>
-    <string name="installer_auto_saved_description">เมานต์แอปที่ได้รับการแพตช์ในโหมดเมานต์ APK ที่แพตช์แบบมาตรฐานใช้ตัวติดตั้งอื่น</string>
     <string name="installer_shizuku_description">ติดตั้งอย่างเงียบๆ โดยใช้ Shizuku หรือ Sui</string>
     <string name="installer_shizuku_play_store_description">ติดตั้งโดยอัตโนมัติผ่าน Shizuku หรือ Sui และตั้งค่า Google Play Store เป็นแหล่งติดตั้ง</string>
     <string name="installer_option_none">ไม่มีตัวติดตั้งสำรอง</string>
@@ -1029,7 +1040,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">ติดตั้ง Shizuku หรือ Sui เพื่อใช้ตัวเลือกนี้</string>
     <string name="installer_status_shizuku_not_running">เริ่มต้น Shizuku หรือ Sui และลองอีกครั้ง</string>
     <string name="installer_status_shizuku_permission">อนุญาตให้ Morphe จากแอป Shizuku</string>
-    <string name="installer_mount_warning_install">ตัวติดตั้งหลักของคุณตั้งเป็นตัวติดตั้งมอนต์รากรูต. แอปนี้ไม่ได้ติดตั้งด้วยมอนต์</string>
+    <string name="installer_mount_warning_install">โหมดแพตช์ถูกตั้งค่าเป็นการเมาท์แบบ root แอปที่บันทึกไว้นี้ไม่ได้ถูกติดตั้งโดยใช้การเมาท์</string>
     <string name="mount_version_mismatch_message">รุ่นแอปสต็อก (%2$s) ไม่ตรงกับรุ่นแอปปรับแก้ (%1$s). มอนต์รุ่นสต็อกที่ตรงกัน, แล้วลองอีกครั้ง</string>
     <string name="mount_stock_restore_failed_message">Android ปฏิเสธ APK ดั้งเดิมที่บันทึกไว้ ติดตั้งเวอร์ชันสต็อกที่ตรงกัน จากนั้นลองมิวนต์อีกครั้ง</string>
     <string name="installer_status_shizuku_unsupported">รุ่น Shizuku ที่ติดตั้งไม่ได้รับการรองรับ</string>
@@ -1051,11 +1062,17 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_continue">ฉันเข้าใจแล้ว ดำเนินการต่อ</string>
     <string name="installer_play_store_mode">ติดตั้งเป็น Play Store</string>
     <string name="installer_play_store_mode_description">กำหนด Google Play Store เป็นแหล่งติดตั้ง</string>
+    <string name="settings_section_patch_mode">โหมดแพตช์</string>
+    <string name="settings_patch_mode_ask">ถามทุกครั้ง</string>
+    <string name="settings_patch_mode_ask_description">ถามก่อนแพตช์แต่ละแอปว่าต้องการแพตช์เพื่อการเมาท์แบบ root หรือการติดตั้งแบบมาตรฐาน</string>
+    <string name="settings_section_after_patching">หลังการแพตช์</string>
+    <string name="settings_after_patching_install">ติดตั้งอัตโนมัติ</string>
+    <string name="settings_after_patching_ask">ถามว่าจะใช้ตัวติดตั้งใด</string>
+    <string name="settings_after_patching_ask_description">ถามว่าจะใช้ตัวติดตั้งใดทุกครั้งที่มีการติดตั้งแอป</string>
+    <string name="settings_after_patching_manual">ติดตั้งด้วยตนเอง</string>
+    <string name="settings_after_patching_manual_description">ติดตั้งด้วยตัวติดตั้งเริ่มต้นเมื่อคุณแตะติดตั้ง</string>
     <string name="settings_nomount_only">NoMount เท่านั้น</string>
     <string name="settings_nomount_only_description">ติดตั้งแอปด้วย NoMount เท่านั้น และจะไม่ถอยกลับไปใช้ bind mount เพื่อให้แอปยังคงไม่ถูกติดตั้งหากไม่มี NoMount</string>
-    <string name="settings_prompt_installer_on_install">แจ้งเตือนการเลือกตัวติดตั้ง</string>
-    <string name="settings_prompt_installer_on_install_description">ถามวิธีการติดตั้งแอปทุกแอป: ต้องมีสิทธิ์รูทก่อนแพตช์ หรือหลังจากแพตช์เสร็จแล้ว</string>
-    <string name="settings_auto_install_with_shizuku">ติดตั้งอัตโนมัติหลังจากการแพตช์</string>
     <string name="settings_auto_install_with_shizuku_description">ติดตั้งหรือเมานต์ APK ที่ถูกแพตช์ทันทีเมื่อการแพตช์เสร็จสิ้น</string>
     <string name="settings_auto_uninstall_with_shizuku">ถอนการติดตั้งอัตโนมัติเมื่อเกิดข้อขัดแย้ง</string>
     <string name="settings_auto_uninstall_with_shizuku_description">ลบการติดตั้งแอปที่มีอยู่เมื่อมีการขัดแย้งของลายเซ็น สิ่งนี้อาจลบข้อมูลแอป</string>
@@ -1288,7 +1305,7 @@ morphe_header_custom_dark.png
     <string name="easter_egg_pill_blue_toast">โฆษณาจะรอคุณอยู่</string>
     <string name="easter_egg_pill_message_again">คุณอยู่ในเมทริกซ์แล้ว. ยาเม็ดแดงทำให้คุณกลับไปในสายฝน, ยาเม็ดสีฟ้าปลุกคุณให้ตื่น</string>
     <string name="easter_egg_pill_red_toast_again">กลับไปในสายฝน</string>
-    <string name="easter_egg_pill_blue_toast_again">ถอดปลั๊กแล้ว. ทางกลับคือที่เดิม</string>
+    <string name="easter_egg_pill_blue_toast_again">ถอดปลั๊กแล้ว ทางกลับก็อยู่ที่เดิมเสมอมา</string>
     <!-- Shared strings -->
     <string name="select_file">เลือกไฟล์</string>
     <string name="select_files">เลือกไฟล์</string>

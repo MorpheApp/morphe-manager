@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Amagar aquesta aplicació?</string>
     <string name="home_more_apps_title">Més aplicacions</string>
     <string name="home_more_apps_hide_title">Amagar aquesta targeta?</string>
-    <string name="home_more_apps_hide_message">La pots recuperar en qualsevol moment a Ajustos &gt; Aparença &gt; Pantalla d\'inici</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Podeu recuperar-ho en qualsevol moment a %1$s</string>
     <string name="home_app_hide_message">Aquesta aplicació s\'ocultarà de la pantalla d\'inici. Podeu restaurar-la més endavant des de les aplicacions ocultes utilitzant el botó a la part inferior de la llista</string>
     <string name="home_app_will_be_hidden">Aquesta aplicació s\'ocultarà</string>
     <string name="home_app_hidden_named">%s ocult</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Clau fiable</string>
     <string name="sources_signing_key_new">Clau nova</string>
     <string name="sources_patch_expert_badge">Expert</string>
-    <string name="sources_patch_expert_badge_tooltip">Activa el mode Expert als Ajustos per incloure aquest pegat manualment</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Activeu %1$s per incloure aquest patch manualment</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Necessiteu ajuda per trobar l\'APK?</string>
     <string name="home_apk_availability_dialog_simple">Per aplicar el patch a &lt;b&gt;%s&lt;/b&gt;, necessites la versió APK sense patch:</string>
@@ -508,7 +510,6 @@ Per obtenir els millors resultats, aquesta aplicació recomana patxar un &lt;b&g
     <string name="shortcut_repatch_long">Torna a patchar les aplicacions desactualitzades</string>
     <string name="shortcut_check_updates_short">Comprova actualitzacions</string>
     <string name="shortcut_check_updates_long">Busca actualitzacions del patch</string>
-    <string name="shortcut_patch_app">Patcha %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Desinstal·lar aquesta aplicació?</string>
     <string name="home_app_info_uninstall_removes_data">L\'aplicació i les seves dades s\'eliminen d\'aquest dispositiu</string>
@@ -529,6 +530,7 @@ Per obtenir els millors resultats, aquesta aplicació recomana patxar un &lt;b&g
     <string name="home_app_info_install_type_custom_installer">Instal·lador personalitzat</string>
     <string name="home_app_info_install_type_system_installer">Instal·lador del sistema</string>
     <string name="home_app_info_install_type_play_store">Instal·lació de Play Store</string>
+    <string name="home_app_info_install_type_root">Instal·lació root</string>
     <string name="home_app_info_install_type_root_play_store">Instal·lació de Play Store amb Root</string>
     <string name="home_app_info_install_type_shizuku_play_store">Instal·lació de Play Store amb Shizuku</string>
     <string name="home_app_info_patch_update_available">Actualització del pedaç disponible</string>
@@ -570,7 +572,8 @@ Per obtenir els millors resultats, aquesta aplicació recomana patxar un &lt;b&g
     <string name="root_mount_module_unmount_warning">Si KernelSU té activada l\'opció \"Desmuntar mòduls per defecte\", obriu KernelSU &gt; Superusuari &gt; l\'aplicació que heu muntat &gt; Perfil &gt; Personalitzat i desactiveu \"Desmuntar mòduls\". En cas contrari, l\'APK patxat i muntat podria no tenir efecte, encara que Morphe indiqui que està muntat</string>
     <string name="root_pre_patch_installer_standard_title">Mode d\'instal·lació estàndard</string>
     <string name="root_pre_patch_installer_standard_description">Patcha com un APK normal amb suport de GmsCore. S\'utilitza la configuració de l\'instal·lador després del patch</string>
-    <string name="root_pre_patch_installer_hint">Pregunta mentre Ajustos &gt; Patxat &gt; Instal·lació &gt; Prompt de selecció d\'instal·lador està activat. El mode de patxat no es pot canviar després del patxat</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Preguntat mentre %1$s està configurat com a %2$s. El mode de patch no es pot canviar després del patch</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Error copiat al recoverable</string>
     <string name="patcher_error_log">Registre d\'errors</string>
@@ -669,6 +672,14 @@ Desinstal·lar-la esborrarà permanentment totes les dades de l'aplicació"</str
     <string name="patcher_step_group_saving">Desant</string>
     <string name="patcher_step_write_patched">Escribint el fitxer APK amb pedaços</string>
     <string name="patcher_step_sign_apk">Signant el fitxer APK amb pedaços</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Llegint fitxers DEX</string>
+    <string name="patcher_task_extracting_resources">Extreient recursos</string>
+    <string name="patcher_task_decoding_resources">Descodificant recursos</string>
+    <string name="patcher_task_indexing_classes">Indexant classes</string>
+    <string name="patcher_task_compiling_dex">Compilant fitxers DEX</string>
+    <string name="patcher_task_compiling_resources">Compilant els recursos</string>
+    <string name="patcher_task_writing_apk">Escribint el fitxer APK</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Protecció del patxatge en segon pla</string>
     <string name="battery_optimization_dialog_description">Alguns dispositius poden aturar el patxador quan l\'aplicació està minimitzada. Permeteu que Morphe s\'executi sense restriccions de bateria per assegurar que el patxatge es completi correctament</string>
@@ -717,7 +728,8 @@ Desinstal·lar-la esborrarà permanentment totes les dades de l'aplicació"</str
     <string name="patched_app_save_failed_toast">Error en desar the aplicació amb el pegat</string>
     <string name="plugin_activity_dialog_body">Es requereix la interacció de l\'usuari per procedir amb aquest plugin</string>
     <string name="patcher_process_killed_message">El sistema ha aturat el patcher abans que acabés, normalment per alliberar memòria. Tanca altres aplicacions i torna-ho a intentar</string>
-    <string name="patcher_process_crashed_message">El patcher s\'ha bloquejat abans de acabar. Si torna a passar, desactiva \"Utilitza VM integrada\" a la configuració i informa del problema amb el registre</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">El patcher s\'ha bloquejat abans de finalitzar. Si torna a passar, desactiveu %1$s i informeu del problema amb el log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">El patcher s\'ha quedat sense memòria amb un munt heap de %1$s MB. Aquesta aplicació és massa gran per als paquets seleccionats. Intenta fer el patch amb menys fonts de paquets, o selecciona menys paquets</string>
     <string name="install_app_success">Instal·lat correctament</string>
@@ -1017,9 +1029,8 @@ Les dimensions de la imatge han de ser les següents:
     <string name="installer_title">Selecciona l\'instal·lador</string>
     <string name="installer_internal_description">Utilitza l\'instal·lador de paquets d\'Android</string>
     <string name="installer_play_store_description">Utilitza l\'instal·lador del sistema i estableix Google Play Store com a origen de la instal·lació</string>
+    <string name="installer_root_description">Instal·la silenciosament amb root</string>
     <string name="installer_root_play_store_description">Instal·la silenciosament amb root i estableix Google Play Store com a origen de la instal·lació</string>
-    <string name="installer_auto_saved_name">Muntatge root</string>
-    <string name="installer_auto_saved_description">Munta les aplicacions que es van patchar en mode de muntatge root. Els APK patchats estàndard utilitzen un altre instal·lador</string>
     <string name="installer_shizuku_description">Instal·la silenciosament mitjançant Shizuku o Sui</string>
     <string name="installer_shizuku_play_store_description">Instal·la silenciosament a través de Shizuku o Sui i estableix Google Play Store com a origen de la instal·lació</string>
     <string name="installer_option_none">Cap alternativa</string>
@@ -1029,7 +1040,7 @@ Les dimensions de la imatge han de ser les següents:
     <string name="installer_status_shizuku_not_installed">Instal·la Shizuku o Sui per utilitzar aquesta opció</string>
     <string name="installer_status_shizuku_not_running">Inicia Shizuku o Sui i torna-ho a intentar</string>
     <string name="installer_status_shizuku_permission">Concede permís a Morphe des de l\'aplicació Shizuku</string>
-    <string name="installer_mount_warning_install">El teu instal·lador primari està configurat com l\'instal·lador de muntatge per a root. Aquesta aplicació descarregada no s\'ha instal·lat mitjançant muntatge</string>
+    <string name="installer_mount_warning_install">El mode de patch està configurat com a muntatge root. Aquesta aplicació guardada no s\'ha instal·lat mitjançant muntatge</string>
     <string name="mount_version_mismatch_message">La versió de l\'aplicació original (%2$s) no coincideix amb la versió de l\'aplicació modificada (%1$s). Munta la versió original corresponent i torna-ho a intentar</string>
     <string name="mount_stock_restore_failed_message">Android ha rebutjat l\'APK original desat. Instal·la la versió stock corresponent i torna a provar el muntatge</string>
     <string name="installer_status_shizuku_unsupported">La versió de Shizuku instal·lada no és compatible</string>
@@ -1051,11 +1062,17 @@ Les dimensions de la imatge han de ser les següents:
     <string name="installer_play_store_warning_continue">Ho entenc, continuar</string>
     <string name="installer_play_store_mode">Instal·lar com a Play Store</string>
     <string name="installer_play_store_mode_description">Marca la Google Play Store com a origen d\'instal·lació</string>
+    <string name="settings_section_patch_mode">Mode de patch</string>
+    <string name="settings_patch_mode_ask">Preguntar cada vegada</string>
+    <string name="settings_patch_mode_ask_description">Pregunta abans de fer el patching de cada aplicació si s\'ha de fer el patch per a muntatge root o una instal·lació estàndard</string>
+    <string name="settings_section_after_patching">Després del patching</string>
+    <string name="settings_after_patching_install">Instal·lar automàticament</string>
+    <string name="settings_after_patching_ask">Preguntar quin instal·lador</string>
+    <string name="settings_after_patching_ask_description">Pregunta quin instal·lador utilitzar cada vegada que s\'instal·la una aplicació</string>
+    <string name="settings_after_patching_manual">Instal·lar manualment</string>
+    <string name="settings_after_patching_manual_description">Instal·la amb l\'instal·lador per defecte un cop hagis polsat Instal·lar</string>
     <string name="settings_nomount_only">Només NoMount</string>
     <string name="settings_nomount_only_description">Munta les aplicacions només amb NoMount i mai torna a un muntatge de vincle, de manera que es mantinguin desmuntades sense ell</string>
-    <string name="settings_prompt_installer_on_install">Sol·licitud de selecció de l\'instal·lador</string>
-    <string name="settings_prompt_installer_on_install_description">Pregunta com instal·lar cada aplicació: amb root abans del patxat, i si no, després</string>
-    <string name="settings_auto_install_with_shizuku">Auto-instal·lar després del patxat</string>
     <string name="settings_auto_install_with_shizuku_description">Instal·la o munta l\'APK patxat tan bon punt s\'acabi el patxat</string>
     <string name="settings_auto_uninstall_with_shizuku">Desinstal·lació automàtica en cas de conflicte</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Desinstal·la l\'aplicació existent en cas de conflicte de signatura. Això pot eliminar les dades de l\'aplicació</string>

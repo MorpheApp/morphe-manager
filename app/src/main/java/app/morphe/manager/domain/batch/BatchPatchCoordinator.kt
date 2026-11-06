@@ -301,7 +301,12 @@ class BatchPatchCoordinator(
                 items = state.items.map { item ->
                     if (item.id != itemId) return@map item
 
-                    val edited = item.copy(selection = selection, options = options, selectionEdited = true)
+                    val edited = item.copy(
+                        selection = selection,
+                        options = options,
+                        selectedByHand = true,
+                        selectionEdited = true
+                    )
                     edited.copy(state = edited.stateForSelection(item.state))
                 }
             )
@@ -448,6 +453,7 @@ class BatchPatchCoordinator(
                 resolved.copy(
                     selection = item.selection,
                     options = item.options,
+                    selectedByHand = true,
                     selectionEdited = true,
                     // The edited selection is what ran, so it has patches even where the defaults have none
                     state = item.stateForSelection(resolved.state)
@@ -629,6 +635,7 @@ class BatchPatchCoordinator(
                 withContext(Dispatchers.Main) { runProgress.updateSplitRequirement(file, needsSplit, merged) }
             },
             onProgress = runProgress::onProgress,
+            onTaskProgress = runProgress::onTaskProgress,
             patchSources = patchSources,
             announceCompletion = false,
             queuePosition = _state.value?.let { it.position to it.total },
@@ -794,11 +801,9 @@ class BatchPatchCoordinator(
                 patchNames = bundle.patchNames
             )
         }
-        // Simple mode derives its options from the per-app preference screen rather than the
-        // database, so only an expert-mode selection is worth writing back
-        if (prefs.useExpertMode.get()) {
-            patchOptionsRepository.saveOptions(configurationKey, item.options)
-        }
+        // Options simple mode keeps on its preference screen stay there, rather than replacing
+        // the ones saved for the sources they name
+        if (item.selectedByHand) patchOptionsRepository.saveOptions(configurationKey, item.options)
 
         if (!prefs.savePatchedApks.get()) {
             // Retention is off, so the patched APK only lives long enough for the summary

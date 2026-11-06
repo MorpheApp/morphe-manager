@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Ẩn ứng dụng này?</string>
     <string name="home_more_apps_title">Thêm ứng dụng</string>
     <string name="home_more_apps_hide_title">Ẩn thẻ này?</string>
-    <string name="home_more_apps_hide_message">Bạn có thể mang nó trở lại bất cứ lúc nào trong Cài đặt &gt; Giao diện &gt; Màn hình chính</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Bạn có thể khôi phục lại bất cứ lúc nào trong %1$s</string>
     <string name="home_app_hide_message">Ứng dụng này sẽ bị ẩn khỏi trang chủ. Bạn có thể khôi phục lại từ danh sách ứng dụng đang ẩn ở cuối danh sách</string>
     <string name="home_app_will_be_hidden">Ứng dụng này sẽ bị ẩn</string>
     <string name="home_app_hidden_named">%s ẩn</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Khóa đáng tin cậy</string>
     <string name="sources_signing_key_new">Khóa mới</string>
     <string name="sources_patch_expert_badge">Chuyên gia</string>
-    <string name="sources_patch_expert_badge_tooltip">Bật chế độ Chuyên gia trong Cài đặt để có thể tự thêm bản vá này</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Bật %1$s để thêm bản vá này theo cách thủ công</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Cần trợ giúp tìm APK?</string>
     <string name="home_apk_availability_dialog_simple">Để vá &lt;b&gt;%s&lt;/b&gt;, bạn cần APK chưa vá với phiên bản:</string>
@@ -508,7 +510,6 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="shortcut_repatch_long">Vá lại các ứng dụng đã cũ</string>
     <string name="shortcut_check_updates_short">Kiểm tra cập nhật</string>
     <string name="shortcut_check_updates_long">Kiểm tra cập nhật bản vá</string>
-    <string name="shortcut_patch_app">Vá %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Gỡ cài đặt ứng dụng này?</string>
     <string name="home_app_info_uninstall_removes_data">Ứng dụng và dữ liệu của nó sẽ bị xóa khỏi thiết bị này</string>
@@ -529,6 +530,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="home_app_info_install_type_custom_installer">Trình cài đặt tùy chỉnh</string>
     <string name="home_app_info_install_type_system_installer">Trình cài đặt hệ thống</string>
     <string name="home_app_info_install_type_play_store">Cài đặt từ Cửa hàng Play</string>
+    <string name="home_app_info_install_type_root">Cài đặt root</string>
     <string name="home_app_info_install_type_root_play_store">Cài đặt từ Cửa hàng Play (Root)</string>
     <string name="home_app_info_install_type_shizuku_play_store">Cài đặt từ Cửa hàng Play (Shizuku)</string>
     <string name="home_app_info_patch_update_available"> Đã có bản vá mới</string>
@@ -570,7 +572,8 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="root_mount_module_unmount_warning">Nếu KernelSU có bật \"Unmount modules by default\", hãy mở KernelSU &gt; Superuser &gt; ứng dụng đã mount &gt; Profile &gt; Custom rồi tắt \"Unmount modules\". Nếu không, APK đã vá và mounted có thể không hoạt động, ngay cả khi Morphe hiển thị nó đã mounted</string>
     <string name="root_pre_patch_installer_standard_title">Chế độ cài đặt tiêu chuẩn</string>
     <string name="root_pre_patch_installer_standard_description">Vá như APK thông thường có hỗ trợ GmsCore. au khi vá xong, ứng dụng sẽ được cài đặt theo phương thức cài đặt đã chọn</string>
-    <string name="root_pre_patch_installer_hint">Được hỏi khi Cài đặt <b>&amp;gt;</b> Vá lỗi <b>&amp;gt;</b> Cài đặt <b>&amp;gt;</b> Yêu cầu chọn trình cài đặt đang hiển thị. Chế độ vá không thể thay đổi sau khi vá</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Được hỏi khi %1$s được đặt thành %2$s. Chế độ vá không thể thay đổi sau khi vá</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Đã sao chép lỗi vào bảng nhớ tạm</string>
     <string name="patcher_error_log">Nhật ký lỗi</string>
@@ -669,6 +672,14 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="patcher_step_group_saving">Đang lưu</string>
     <string name="patcher_step_write_patched">Đang viết APK đã vá</string>
     <string name="patcher_step_sign_apk">Đang ký APK đã vá</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Đọc các tệp DEX</string>
+    <string name="patcher_task_extracting_resources">Đang trích xuất tài nguyên</string>
+    <string name="patcher_task_decoding_resources">Đang giải mã tài nguyên</string>
+    <string name="patcher_task_indexing_classes">Đang lập chỉ mục các lớp</string>
+    <string name="patcher_task_compiling_dex">Đang biên dịch các tệp DEX</string>
+    <string name="patcher_task_compiling_resources">Đang biên dịch tài nguyên</string>
+    <string name="patcher_task_writing_apk">Đang ghi tệp APK</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Bảo vệ khi vá nền</string>
     <string name="battery_optimization_dialog_description">Một số thiết bị có thể tắt trình vá khi ứng dụng bị thu nhỏ. Cho phép Morphe chạy không giới hạn pin để quá trình vá hoàn thành ổn định</string>
@@ -717,7 +728,8 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="patched_app_save_failed_toast">Không thể lưu ứng dụng đã vá</string>
     <string name="plugin_activity_dialog_body">Bạn vẫn cần tự thao tác để tải ứng dụng</string>
     <string name="patcher_process_killed_message">Hệ thống đã dừng trình vá trước khi hoàn tất, thường là để giải phóng bộ nhớ. Đóng các ứng dụng khác và thử lại</string>
-    <string name="patcher_process_crashed_message">Trình vá lỗi đã bị treo trước khi hoàn tất. Nếu tình trạng này tiếp tục xảy ra, hãy tắt \"Sử dụng VM nhúng\" trong cài đặt và báo cáo sự cố kèm theo bản ghi log</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Trình vá đã bị sự cố trước khi hoàn tất. Nếu điều này xảy ra lần nữa, hãy tắt %1$s và báo cáo sự cố cùng với nhật ký</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Trình vá đã hết bộ nhớ với heap %1$s MB. Ứng dụng này quá lớn so với các bản vá đã chọn. Hãy thử vá với ít nguồn vá hơn hoặc chọn ít bản vá hơn</string>
     <string name="install_app_success">Đã cài đặt thành công</string>
@@ -1018,9 +1030,8 @@ Kích thước hình ảnh yêu cầu:
     <string name="installer_title">Trình cài đặt</string>
     <string name="installer_internal_description">Dùng trình cài đặt gói của Android</string>
     <string name="installer_play_store_description">Sử dụng trình cài đặt hệ thống và đặt Cửa hàng Play làm nguồn cài đặt</string>
+    <string name="installer_root_description">Tự động cài đặt với root</string>
     <string name="installer_root_play_store_description">Cài đặt bằng root mà không cần xác nhận, đồng thời đặt Google Play Store làm nguồn cài đặt</string>
-    <string name="installer_auto_saved_name">Gắn kết bằng root</string>
-    <string name="installer_auto_saved_description">Chỉ áp dụng cho các ứng dụng được vá ở chế độ Gắn kết bằng root. Các APK được vá theo chế độ tiêu chuẩn sẽ được cài bằng trình cài đặt khác</string>
     <string name="installer_shizuku_description">Cài ẩn bằng Shizuku hoặc Sui</string>
     <string name="installer_shizuku_play_store_description">Cài đặt thông qua Shizuku mà không cần xác nhận, đồng thời đặt Google Play Store làm nguồn cài đặt</string>
     <string name="installer_option_none">Không có</string>
@@ -1030,7 +1041,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="installer_status_shizuku_not_installed">Cài Shizuku hoặc Sui để dùng tuỳ chọn này</string>
     <string name="installer_status_shizuku_not_running">Chạy Shizuku hoặc Sui và thử lại</string>
     <string name="installer_status_shizuku_permission">Cấp quyền Shizuku cho Morphe trong ứng dụng Shizuku</string>
-    <string name="installer_mount_warning_install">Trình cài đặt chính của bạn đã được đặt là trình cài đặt mount gốc. Ứng dụng đã lưu này không được cài đặt bằng mount</string>
+    <string name="installer_mount_warning_install">Chế độ vá được đặt thành root mount. Ứng dụng đã lưu này không được cài đặt bằng mount</string>
     <string name="mount_version_mismatch_message">Phiên bản ứng dụng gốc (%2$s) không khớp với phiên bản ứng dụng đã sửa (%1$s). Mount phiên bản gốc khớp, sau đó thử lại</string>
     <string name="mount_stock_restore_failed_message">Android đã từ chối APK gốc đã lưu. Hãy cài đặt đúng phiên bản gốc tương ứng rồi thử gắn lại</string>
     <string name="installer_status_shizuku_unsupported">Phiên bản Shizuku đã cài không được hỗ trợ</string>
@@ -1054,11 +1065,17 @@ Kết quả thực tế có thể khác nhau tùy theo phiên bản Android, ROM
     <string name="installer_play_store_warning_continue">Tôi hiểu, tiếp đi</string>
     <string name="installer_play_store_mode">Cài đặt như ứng dụng từ Cửa hàng Play</string>
     <string name="installer_play_store_mode_description">Đánh dấu Google Play Store là nguồn cài đặt</string>
+    <string name="settings_section_patch_mode">Chế độ vá</string>
+    <string name="settings_patch_mode_ask">Hỏi mỗi lần</string>
+    <string name="settings_patch_mode_ask_description">Hỏi trước khi vá mỗi ứng dụng xem nên vá cho root mount hay cài đặt tiêu chuẩn</string>
+    <string name="settings_section_after_patching">Sau khi vá</string>
+    <string name="settings_after_patching_install">Tự động cài đặt</string>
+    <string name="settings_after_patching_ask">Hỏi trình cài đặt nào</string>
+    <string name="settings_after_patching_ask_description">Hỏi trình cài đặt nào cần sử dụng mỗi khi cài đặt ứng dụng</string>
+    <string name="settings_after_patching_manual">Cài đặt thủ công</string>
+    <string name="settings_after_patching_manual_description">Cài đặt bằng trình cài đặt mặc định sau khi bạn nhấn Cài đặt</string>
     <string name="settings_nomount_only">Chỉ NoMount</string>
     <string name="settings_nomount_only_description">Chỉ gắn kết các ứng dụng bằng NoMount và không bao giờ quay lại dùng bind mount, vì vậy chúng sẽ không được gắn kết nếu thiếu NoMount</string>
-    <string name="settings_prompt_installer_on_install">Hỏi chọn trình cài đặt</string>
-    <string name="settings_prompt_installer_on_install_description">Hỏi cách cài đặt từng ứng dụng: với quyền root trước khi vá, nếu không thì sau đó</string>
-    <string name="settings_auto_install_with_shizuku">Tự động cài đặt sau khi vá</string>
     <string name="settings_auto_install_with_shizuku_description">Cài đặt hoặc gắn APK đã vá ngay sau khi quá trình vá hoàn tất</string>
     <string name="settings_auto_uninstall_with_shizuku">Tự động gỡ cài đặt khi có xung đột</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Gỡ cài đặt ứng dụng hiện tại khi xung đột chữ ký. Điều này có thể xóa dữ liệu ứng dụng</string>

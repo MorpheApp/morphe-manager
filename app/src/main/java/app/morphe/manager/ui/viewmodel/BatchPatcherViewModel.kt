@@ -553,9 +553,9 @@ class BatchPatcherViewModel(
 
     /**
      * Waits for [itemId] to be resolved against the APK just given to it, and then opens the
-     * editor when none of its patches is selected. Expert mode, as the single-app flow opens the
-     * expert dialog after the APK, so the app is not left for the user to find the editor for. The
-     * APK question is closed otherwise, having waited for the answer.
+     * editor when none of its patches is selected, as the single-app flow opens the selection
+     * after the APK, so the app is not left for the user to find the editor for. The APK question
+     * is closed otherwise, having waited for the answer.
      */
     private suspend fun settleGivenApk(itemId: String, resolution: Job?) = whileProcessingApk {
         resolution?.join()
@@ -564,7 +564,7 @@ class BatchPatcherViewModel(
         val item = state.value?.items?.firstOrNull { it.id == itemId }?.takeIf { resolution != null }
         // The card changes little for an APK of the version it already had, so the choice is confirmed
         if (item?.source != null) messages.show(R.string.batch_patch_apk_selected)
-        if (item?.state == BatchItemState.NO_SELECTION && item.source != null && prefs.useExpertMode.get()) {
+        if (item?.state == BatchItemState.NO_SELECTION && item.source != null) {
             openEdit(item)
         } else if (apkChoice?.item?.id == itemId) {
             apkChoice = null

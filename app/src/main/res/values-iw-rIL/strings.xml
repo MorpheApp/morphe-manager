@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">להסתיר את האפליקציה הזאת?</string>
     <string name="home_more_apps_title">עוד אפליקציות</string>
     <string name="home_more_apps_hide_title">להסתיר את הכרטיס הזה?</string>
-    <string name="home_more_apps_hide_message">ניתן להחזיר זאת בכל עת ב-הגדרות &gt; מראה &gt; מסך הבית</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">ניתן להחזיר זאת בכל עת ב-%1$s</string>
     <string name="home_app_hide_message">האפליקציה הזו תוסתר ממסך הבית. תוכל לשחזר אותה מאוחר יותר מהאפליקציות המוסתרות באמצעות הכפתור בתחתית הרשימה</string>
     <string name="home_app_will_be_hidden">האפליקציה הזאת תהיה מוסתרת</string>
     <string name="home_app_hidden_named">%s מוסתרים</string>
@@ -244,7 +245,8 @@
     <string name="sources_signing_key_trusted">מפתח מהימן</string>
     <string name="sources_signing_key_new">מפתח חדש</string>
     <string name="sources_patch_expert_badge">מומחה</string>
-    <string name="sources_patch_expert_badge_tooltip">הפעל מצב מומחה בהגדרות כדי לכלול תיקון זה באופן ידני</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">הפעל את %1$s כדי לכלול תיקון זה ידנית</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">צריך עזרה במציאת ה-APK?</string>
     <string name="home_apk_availability_dialog_simple">להתקן &lt;b&gt;%s&lt;/b&gt;, צריך את הגרסה הלא מתוקנת של APK:</string>
@@ -509,7 +511,6 @@
     <string name="shortcut_repatch_long">תקן מחדש אפליקציות מיושנות</string>
     <string name="shortcut_check_updates_short">בדוק עדכונים</string>
     <string name="shortcut_check_updates_long">בדוק עדכוני טלאים</string>
-    <string name="shortcut_patch_app">טלא %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">להסיר את האפליקציה הזו?</string>
     <string name="home_app_info_uninstall_removes_data">האפליקציה והנתונים שלה מוסרים ממכשיר זה</string>
@@ -530,6 +531,7 @@
     <string name="home_app_info_install_type_custom_installer">מתקין מותאם אישית</string>
     <string name="home_app_info_install_type_system_installer">מתקין מערכת</string>
     <string name="home_app_info_install_type_play_store">התקנה דרך חנות Play</string>
+    <string name="home_app_info_install_type_root">התקנת Root</string>
     <string name="home_app_info_install_type_root_play_store">התקנה דרך Root של חנות Play</string>
     <string name="home_app_info_install_type_shizuku_play_store">התקנה דרך Shizuku של חנות Play</string>
     <string name="home_app_info_patch_update_available">עדכון התאמה זמין</string>
@@ -571,7 +573,8 @@
     <string name="root_mount_module_unmount_warning">אם ב-KernelSU המצב \"Unmount modules by default\" מופעל, פתח את KernelSU &gt; Superuser &gt; האפליקציה שהותקנה &gt; Profile &gt; Custom והפעל את \"Unmount modules\" בחזרה לכבוי. אחרת, ה-APK המתוקן והמותקן עשוי לא להיכנס לתוקף, גם אם Morphe מציג אותו כמותקן</string>
     <string name="root_pre_patch_installer_standard_title">מצב התקנה רגיל</string>
     <string name="root_pre_patch_installer_standard_description">התקנת תיקונים כקובץ APK רגיל עם תמיכה ב-GmsCore. הגדרת המתקין שלך משמשת לאחר תיקון</string>
-    <string name="root_pre_patch_installer_hint">בקש כאשר ההגדרות <b>&amp;gt;</b> הטמעה <b>&amp;gt;</b> התקנה <b>&amp;gt;</b> בחירת מתקינה מופעלת. לא ניתן לשנות את מצב ההטמעה לאחר ההטמעה</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">נשאל כאשר %1$s מוגדר ל-%2$s. לא ניתן לשנות את מצב התיקון לאחר התיקון</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">השגיאה הועתקה ללוח</string>
     <string name="patcher_error_log">יומן שגיאות</string>
@@ -670,6 +673,14 @@
     <string name="patcher_step_group_saving">שומר</string>
     <string name="patcher_step_write_patched">כתיבת קובץ APK מתוקן</string>
     <string name="patcher_step_sign_apk">חתימה על קובץ APK מתוקן</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">קריאת קבצי DEX</string>
+    <string name="patcher_task_extracting_resources">חילוץ משאבים</string>
+    <string name="patcher_task_decoding_resources">פענוח משאבים</string>
+    <string name="patcher_task_indexing_classes">אינדוקס מחלקות</string>
+    <string name="patcher_task_compiling_dex">הידור קבצי DEX</string>
+    <string name="patcher_task_compiling_resources">הידור משאבים</string>
+    <string name="patcher_task_writing_apk">כתיבת קובץ APK</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">הגנה על תיקון רקע</string>
     <string name="battery_optimization_dialog_description">ייתכן שמכשירים מסוימים יפסיקו את המתקן כאשר האפליקציה מצומצמת. אפשר ל-Morphe לפעול ללא הגבלות סוללה כדי להבטיח שהתיקון יושלם באופן מהימן</string>
@@ -718,7 +729,8 @@
     <string name="patched_app_save_failed_toast">נכשל לשמור אפליקציה מתוקנת</string>
     <string name="plugin_activity_dialog_body">נדרש אינטראקציה של המשתמש כדי להמשיך עם תוסף זה</string>
     <string name="patcher_process_killed_message">המערכת עצרה את המתקן לפני השלמתו, בדרך כלל כדי לשחרר זיכרון. סגור אפליקציות אחרות ונסה שוב</string>
-    <string name="patcher_process_crashed_message">הפאצ\'ר קרס לפני שסיים. אם זה קורה שוב, כבה את \"Use embedded VM\" בהגדרות ודווח על הבעיה עם הלוג</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">המתקן קרס לפני שסיים. אם זה קורה שוב, כבה את %1$s ודווח על הבעיה עם הלוג</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">מחולל הפאץ\' מיעד את זיכרון ה-heap עם %1$s MB. האפליקציה גדולה מדי עבור הפאצ\'ים הנבחרים. נסה לגנון עם מעט מקורות פאץ\', או בחר בפאצ\'ים fewer</string>
     <string name="install_app_success">הותקן בהצלחה</string>
@@ -1028,9 +1040,8 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="installer_title">בחר התקן</string>
     <string name="installer_internal_description">משתמש במתקין החבילות של Android</string>
     <string name="installer_play_store_description">משתמש במתקין המערכת ומגדיר את חנות Google Play כמקור ההתקנה</string>
+    <string name="installer_root_description">מתקין בשקט עם root</string>
     <string name="installer_root_play_store_description">מתקין בשקט עם הרשאות רוט ומגדיר את חנות Google Play כמקור ההתקנה</string>
-    <string name="installer_auto_saved_name">הרכבת root</string>
-    <string name="installer_auto_saved_description">מרכיב אפליקציות שהותקנו במצב הרכבת root. קבצי APK מתוקנים רגילים משתמשים במתקין אחר</string>
     <string name="installer_shizuku_description">מתקין בשקט באמצעות Shizuku או Sui</string>
     <string name="installer_shizuku_play_store_description">מתקין בשקט דרך Shizuku או Sui ומגדיר את חנות Google Play כמקור ההתקנה</string>
     <string name="installer_option_none">אין חלופה</string>
@@ -1040,7 +1051,7 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="installer_status_shizuku_not_installed">התקן שיזוקה או סוי כדי להשתמש באפשרות זו</string>
     <string name="installer_status_shizuku_not_running">הפעל Shizuku או Sui ונסה שוב</string>
     <string name="installer_status_shizuku_permission">אפשר למורפי הרשאה מאפליקציית Shizuku</string>
-    <string name="installer_mount_warning_install">התקן שלך הוא מותקן על התקן שורש. אפליקציה זו לא התקינה באמצעות מותקן</string>
+    <string name="installer_mount_warning_install">מצב תיקון מוגדר כ-root mount. אפליקציה שמורה זו לא הותקנה באמצעות mount</string>
     <string name="mount_version_mismatch_message">גרסת אפליקציה מקורית (%2$s) אינה תואמת לגרסת אפליקציה שחורה (%1$s). מותקן את הגרסה המקורית התואמת, ואז נסה שוב</string>
     <string name="mount_stock_restore_failed_message">Android דחה את קובץ ה-APK המקורי השמור. התקן את הגרסה המקורית התואמת, ואז נסה להרכיב שוב</string>
     <string name="installer_status_shizuku_unsupported">גרסת שיזוקה המותקנת אינה נתמכת</string>
@@ -1062,11 +1073,17 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="installer_play_store_warning_continue">אני מבין, המשך</string>
     <string name="installer_play_store_mode">התקן כ-Play Store</string>
     <string name="installer_play_store_mode_description">מסמן את חנות Google Play כמקור התקנה</string>
+    <string name="settings_section_patch_mode">מצב תיקון</string>
+    <string name="settings_patch_mode_ask">שאל בכל פעם</string>
+    <string name="settings_patch_mode_ask_description">שואל לפני תיקון כל אפליקציה האם לתקן אותה עבור root mount או התקנה סטנדרטית</string>
+    <string name="settings_section_after_patching">לאחר התיקון</string>
+    <string name="settings_after_patching_install">התקן באופן אוטומטי</string>
+    <string name="settings_after_patching_ask">שאל באיזה מתקין להשתמש</string>
+    <string name="settings_after_patching_ask_description">שואל באיזה מתקין להשתמש בכל פעם שמתקינים אפליקציה</string>
+    <string name="settings_after_patching_manual">התקן ידנית</string>
+    <string name="settings_after_patching_manual_description">מתקין עם מתקין ברירת המחדל ברגע שתלחץ על התקן</string>
     <string name="settings_nomount_only">NoMount בלבד</string>
     <string name="settings_nomount_only_description">מעמיס אפליקציות רק באמצעות NoMount ולעולם לא חוזר להרכבת bind, כך שהן נשארות לא מועמסות בלעדיו</string>
-    <string name="settings_prompt_installer_on_install">בקשת בחירת מתקין</string>
-    <string name="settings_prompt_installer_on_install_description">שואל כיצד להתקין כל אפליקציה: עם רוט לפני ההטמעה, אחרת אחריה</string>
-    <string name="settings_auto_install_with_shizuku">התקנה אוטומטית לאחר תיקון</string>
     <string name="settings_auto_install_with_shizuku_description">מתקין או מעלה את ה-APK המוטמע ברגע שההטמעה מסתיימת</string>
     <string name="settings_auto_uninstall_with_shizuku">הסרה אוטומטית במקרה של התנגשות</string>
     <string name="settings_auto_uninstall_with_shizuku_description">מבטל התקנה של האפליקציה הקיימת במקרה של סתירה בחתימה. זה יכול להסיר נתוני אפליקציה</string>

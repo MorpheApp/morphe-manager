@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">إخفاء هذا التطبيق؟</string>
     <string name="home_more_apps_title">المزيد من التطبيقات</string>
     <string name="home_more_apps_hide_title">إخفاء هذه البطاقة؟</string>
-    <string name="home_more_apps_hide_message">يمكنك إعادته في أي وقت من الإعدادات &gt; المظهر &gt; الشاشة الرئيسية</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">يمكنك استعادتها في أي وقت من %1$s</string>
     <string name="home_app_hide_message">سيتم إخفاء هذا التطبيق من الشاشة الرئيسية. يمكنك استعادته لاحقًا من قائمة التطبيقات المخفية باستخدام الزر الموجود أسفل القائمة.</string>
     <string name="home_app_will_be_hidden">سيتم إخفاء هذا التطبيق</string>
     <string name="home_app_hidden_named">%s مخفي</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">المفتاح الموثوق</string>
     <string name="sources_signing_key_new">مفتاح جديد</string>
     <string name="sources_patch_expert_badge">وضع الخبير</string>
-    <string name="sources_patch_expert_badge_tooltip">تمكين وضع الخبير في الإعدادات لتضمين هذا التعديل يدويًا</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">قم بتمكين %1$s لتضمين هذا التعديل يدويًا</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">هل تحتاج إلى مساعدة في العثور على ملف APK؟</string>
     <string name="home_apk_availability_dialog_simple">لتعديل &lt;b&gt;%s&lt;/b&gt;، تحتاج إلى ملف APK غير معدل بالإصدار:</string>
@@ -508,10 +510,9 @@
     <string name="shortcut_repatch_long">إعادة تعديل التطبيقات غير المحدثة</string>
     <string name="shortcut_check_updates_short">التحقق من التحديثات</string>
     <string name="shortcut_check_updates_long">التحقق من تحديثات التعديل</string>
-    <string name="shortcut_patch_app">تعديل %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">إلغاء تثبيت هذا التطبيق؟</string>
-    <string name="home_app_info_uninstall_removes_data">تمت إزالة التطبيق وبياناته من هذا الجهاز</string>
+    <string name="home_app_info_uninstall_removes_data">سيتم إزالة التطبيق وبياناته من هذا الجهاز</string>
     <string name="batch_uninstall_confirm_body">سيتم حذف التطبيقات المحددة نهائيًا من جهازك</string>
     <string name="home_app_info_remove_app_warning">هذا سيحذف بشكل دائم:</string>
     <string name="home_app_info_delete_item_database">إدخال قاعدة البيانات</string>
@@ -529,6 +530,7 @@
     <string name="home_app_info_install_type_custom_installer">أداة تثبيت مخصصة</string>
     <string name="home_app_info_install_type_system_installer">أداة تثبيت النظام</string>
     <string name="home_app_info_install_type_play_store">تثبيت من متجر Play</string>
+    <string name="home_app_info_install_type_root">تثبيت Root</string>
     <string name="home_app_info_install_type_root_play_store">تثبيت من متجر Play مع صلاحيات Root</string>
     <string name="home_app_info_install_type_shizuku_play_store">تثبيت من متجر Play عبر Shizuku</string>
     <string name="home_app_info_patch_update_available">تحديث تعديل متاح</string>
@@ -570,7 +572,8 @@
     <string name="root_mount_module_unmount_warning">إذا كان KernelSU لديه \"Unmount modules by default\" مفعّلًا، افتح KernelSU &gt; Superuser &gt; التطبيق الذي قمت بتركيبه &gt; Profile &gt; Custom وقم بإيقاف \"Unmount modules\". وإلا، قد لا يسري مفعول ملف APK المُعدَّل المركّب، حتى لو أظهره Morphe على أنه مركّب</string>
     <string name="root_pre_patch_installer_standard_title">وضع التثبيت القياسي</string>
     <string name="root_pre_patch_installer_standard_description">تثبيت كملف APK عادي مع دعم GmsCore. يتم استخدام إعداد أداة التثبيت الخاصة بك بعد التعديل</string>
-    <string name="root_pre_patch_installer_hint">يظهر هذا السؤال عند تمكين الخيار: الإعدادات &gt; التعديل &gt; التثبيت &gt; نافذة اختيار أداة التثبيت. لا يمكن تغيير وضع التعديل بعد البدء في عملية التعديل</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">تم السؤال بينما تم تعيين %1$s على %2$s. لا يمكن تغيير وضع التعديل بعد عملية التعديل</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">تم نسخ الخطأ إلى الحافظة</string>
     <string name="patcher_error_log">سجل الأخطاء</string>
@@ -669,6 +672,14 @@
     <string name="patcher_step_group_saving">الحفظ</string>
     <string name="patcher_step_write_patched">جارٍ كتابة ملف APK المعدل</string>
     <string name="patcher_step_sign_apk">جارٍ توقيع ملف APK المعدل</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">قراءة ملفات DEX</string>
+    <string name="patcher_task_extracting_resources">استخراج الموارد</string>
+    <string name="patcher_task_decoding_resources">فك تشفير الموارد</string>
+    <string name="patcher_task_indexing_classes">فهرسة الفئات</string>
+    <string name="patcher_task_compiling_dex">تجميع ملفات DEX</string>
+    <string name="patcher_task_compiling_resources">تجميع الموارد</string>
+    <string name="patcher_task_writing_apk">كتابة ملف APK</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">استمرار التعديل في الخلفية</string>
     <string name="battery_optimization_dialog_description">قد توقف بعض الأجهزة عملية أداة التعديل عند تصغير التطبيق.
@@ -718,7 +729,8 @@
     <string name="patched_app_save_failed_toast">فشل حفظ التطبيق المعدل</string>
     <string name="plugin_activity_dialog_body">يلزم تفاعل المستخدم للمتابعة باستخدام هذا المكون الإضافي</string>
     <string name="patcher_process_killed_message">أوقف النظام أداة التعديل قبل إتمام عملها، وعادةً ما يحدث ذلك لتوفير مساحة في الذاكرة. أغلق التطبيقات الأخرى وحاول مجددًا</string>
-    <string name="patcher_process_crashed_message">تعطلت أداة التعديل قبل أن تنتهي. إذا تكرر ذلك، قم بإيقاف تشغيل \"استخدام VM المدمج\" في الإعدادات وأبلغ عن المشكلة مع إرفاق السجل</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">تعطلت أداة التعديل قبل أن تنتهي. إذا تكرر ذلك، قم بإيقاف تشغيل %1$s وأبلغ عن المشكلة مع إرفاق السجل</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">نفدت ذاكرة أداة التعديل، حيث بلغ حجم الكومة %1$s ميجابايت. هذا التطبيق كبير جدًا بالنسبة للتعديلات المحددة. حاول التعديل باستخدام عدد أقل من مصادر التعديل، أو حدد عددًا أقل من التعديلات
 
@@ -1020,9 +1032,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_title">اختر أداة التثبيت</string>
     <string name="installer_internal_description">يستخدم أداة تثبيت حزم Android</string>
     <string name="installer_play_store_description">يستخدم أداة تثبيت النظام ويحدد متجر Google Play كمصدر للتثبيت</string>
+    <string name="installer_root_description">يتم التثبيت بصمت باستخدام root</string>
     <string name="installer_root_play_store_description">يقوم بالتثبيت تلقائيًا باستخدام صلاحيات Root ويضبط متجر Google Play كمصدر للتثبيت</string>
-    <string name="installer_auto_saved_name">Root Mount</string>
-    <string name="installer_auto_saved_description">يقوم بتركيب التطبيقات التي تم تعديلها في وضع Root Mount. تستخدم ملفات APK المعدلة القياسية أداة تثبيت أخرى</string>
     <string name="installer_shizuku_description">يُثبّت تلقائيًا باستخدام Shizuku أو Sui</string>
     <string name="installer_shizuku_play_store_description">يقوم بالتثبيت تلقائيًا من خلال Shizuku أو Sui ويضبط متجر Google Play كمصدر للتثبيت</string>
     <string name="installer_option_none">لا بديل</string>
@@ -1032,7 +1043,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_status_shizuku_not_installed">قم بتثبيت Shizuku أو Sui لاستخدام هذا الخيار</string>
     <string name="installer_status_shizuku_not_running">ابدأ بتشغيل Shizuku أو Sui وحاول مرة أخرى</string>
     <string name="installer_status_shizuku_permission">امنح تطبيق Shizuku الإذن بالوصول إلى Morphe من تطبيق Shizuku</string>
-    <string name="installer_mount_warning_install">أداة التثبيت الأساسية الخاصة بك محددة على أداة تثبيت Rooted Mount. لم يتم تثبيت التطبيق المحفوظ باستخدام Mount</string>
+    <string name="installer_mount_warning_install">تم ضبط وضع التعديل على root mount. هذا التطبيق المحفوظ لم يتم تثبيته باستخدام mount</string>
     <string name="mount_version_mismatch_message">إصدار التطبيق الأصلي (%2$s) لا يتطابق مع إصدار التطبيق المعدل (%1$s). قم بتركيب الإصدار الأصلي المطابق، ثم حاول مرة أخرى</string>
     <string name="mount_stock_restore_failed_message">رفض Android ملف APK الأصلي المحفوظ. قم بتثبيت الإصدار الأصلي المطابق، ثم حاول التركيب مرة أخرى</string>
     <string name="installer_status_shizuku_unsupported">إصدار Shizuku المثبت غير مدعوم</string>
@@ -1055,11 +1066,17 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_play_store_warning_continue">أفهم، متابعة</string>
     <string name="installer_play_store_mode">التثبيت كمتجر Play</string>
     <string name="installer_play_store_mode_description">يحدد متجر Google Play كمصدر للتثبيت</string>
+    <string name="settings_section_patch_mode">وضع التعديل</string>
+    <string name="settings_patch_mode_ask">السؤال في كل مرة</string>
+    <string name="settings_patch_mode_ask_description">يسأل قبل تعديل كل تطبيق عما إذا كان سيتم تعديله للتركيب الجذري أو للتثبيت القياسي</string>
+    <string name="settings_section_after_patching">بعد التعديل</string>
+    <string name="settings_after_patching_install">التثبيت التلقائي</string>
+    <string name="settings_after_patching_ask">السؤال عن أداة التثبيت</string>
+    <string name="settings_after_patching_ask_description">يطلب اختيار أداة التثبيت التي سيتم استخدامها في كل مرة يتم فيها تثبيت تطبيق</string>
+    <string name="settings_after_patching_manual">التثبيت يدويًا</string>
+    <string name="settings_after_patching_manual_description">يتم التثبيت باستخدام أداة التثبيت الافتراضية بمجرد النقر على تثبيت</string>
     <string name="settings_nomount_only">NoMount فقط</string>
     <string name="settings_nomount_only_description">يقوم بتثبيت التطبيقات باستخدام NoMount فقط ولا يعود أبداً إلى تثبيت الربط، وبذلك تظل غير مثبتة بدونه</string>
-    <string name="settings_prompt_installer_on_install">نافذة اختيار أداة التثبيت</string>
-    <string name="settings_prompt_installer_on_install_description">السؤال عن كيفية تثبيت كل تطبيق: مع الجذر قبل التعديل، وإلا بعده</string>
-    <string name="settings_auto_install_with_shizuku">التثبيت التلقائي بعد التعديل</string>
     <string name="settings_auto_install_with_shizuku_description">يُثبِّت أو يُركِّب ملف APK المُعدّل بمجرد اكتمال التعديل</string>
     <string name="settings_auto_uninstall_with_shizuku">إلغاء التثبيت التلقائي في حالة وجود تعارض</string>
     <string name="settings_auto_uninstall_with_shizuku_description">يقوم بإلغاء تثبيت التطبيق الحالي عند حدوث تعارض في التوقيع. قد يؤدي هذا إلى إزالة بيانات التطبيق</string>
@@ -1165,7 +1182,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_apks_export_zip_success">تم تصدير ملفات APK المحددة</string>
     <string name="settings_system_apks_export_zip_failed">فشل تصدير ملفات APK المحددة</string>
     <!-- Settings - System Tab - Storage Management screen -->
-    <string name="settings_system_storage_management_title">إدارة التخزين</string>
+    <string name="settings_system_storage_management_title">إدارة مكان التخزين</string>
     <string name="settings_system_storage_management_description">يعرض استخدام مساحة التخزين ويُتيح لك مسح الملفات المؤقتة</string>
     <!-- Shown under how much Morphe takes up. "%1$s" is the space still available on the device, already formatted with its unit. "Free" as in unused, not as in free of charge. -->
     <string name="settings_system_storage_free">%1$s متاح</string>
@@ -1189,7 +1206,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_storage_patch_running_warning">هناك تعديل يعمل ويستخدم هذه الملفات. مسحها الآن سيؤدي إلى الفشل</string>
     <string name="settings_system_storage_clear_anyway">مسح على أي حال</string>
     <string name="settings_system_storage_nothing_to_clear">لا يوجد ما يمكن مسحه</string>
-    <string name="settings_system_storage_open_app_info_title">فتح مساحة تخزين تطبيق Android</string>
+    <string name="settings_system_storage_open_app_info_title">فتح مكان تخزين تطبيق Android</string>
     <string name="settings_system_storage_open_app_info_description">إدارة أو مسح جميع بيانات Morphe من خلال إعدادات النظام</string>
     <string name="settings_system_save_original_apks_title">احتفظ بملفات APK الأصلية</string>
     <string name="settings_system_save_original_apks_description">حفظ ملف APK قبل التعديل حتى تتمكن من إعادة استخدامه عند إعادة التعديل دون الحاجة إلى اختيار الملف مرة أخرى</string>
@@ -1257,7 +1274,7 @@ morphe_adaptive_monochrome_custom.xml
     <!-- File Picker -->
     <string name="file_picker_no_files">لا توجد ملفات هنا</string>
     <string name="file_picker_read_error">لا يمكن قراءة هذا المجلد</string>
-    <string name="file_picker_internal_storage">التخزين الداخلي</string>
+    <string name="file_picker_internal_storage">مكان التخزين الداخلي</string>
     <string name="file_picker_sd_card">الذاكرة الخارجية SD</string>
     <string name="file_picker_root">Root (/)</string>
     <string name="file_picker_storage_access_unavailable">هذا الجهاز لايحتوي على شاشة للسماح بالوصول إلى جميع الملفات. اسمح بذلك عبر ADB باستخدام: adb shell appops set %1$s MANAGE_EXTERNAL_STORAGE allow</string>

@@ -492,11 +492,10 @@ fun BatchPatcherScreen(
                         )
                     }
                 } else {
-                    // Nudged ahead between the patcher's coarse steps and eased, as a single run is
+                    // Eased toward what the run reports, as a single run is
                     val displayProgress = rememberDisplayedPatchProgress(
-                        progress = { shownRun.progress },
-                        succeeded = if (holdSummary) true else null,
-                        run = shownRun
+                        run = shownRun,
+                        succeeded = if (holdSummary) true else null
                     )
                     // Each app ramps the background up from rest. A run held on screen past its
                     // end, for a round in play, is over and leaves the background at rest
@@ -659,11 +658,12 @@ fun BatchPatcherScreen(
                         onAcceptSignature = { viewModel.acceptUnverifiedSignature(item.id) },
                         // Asked only where mounting is possible at all, since nothing else has a choice
                         onChooseTarget = { targetItem = item }.takeIf { viewModel.canMount },
-                        // Simple mode never exposes individual patches, and the options edited
-                        // here would not be persisted for it. Nothing to choose from until an
-                        // APK resolves either, the patch list is scoped to its exact version
+                        // Simple mode exposes individual patches only where the source defaults
+                        // leave them to be picked by hand, as the single-app flow does. Nothing
+                        // to choose from until an APK resolves either, the patch list is scoped
+                        // to its exact version
                         onEditPatches = item.source
-                            ?.takeIf { useExpertMode }
+                            ?.takeIf { useExpertMode || item.selectedByHand }
                             ?.let { { viewModel.beginEdit(item) } },
                         onInstall = request?.let { { startInstallQueue(listOf(it)) } },
                         onExport = item.patchedFile?.let { file -> { exporter.export(file, item.exportFileName()) } },

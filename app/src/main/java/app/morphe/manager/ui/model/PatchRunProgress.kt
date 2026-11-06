@@ -22,6 +22,7 @@ import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_USAGE_PREFIX_CURRE
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.ui.screen.patcher.LogItem
 import app.morphe.manager.ui.screen.patcher.LogItemAccumulator
+import app.morphe.patcher.PatcherTask
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -58,6 +59,9 @@ interface PatchProgressSource {
 
     /** Cumulative number of log entries recorded during this run. */
     val totalLogCount: Int get() = logs.size
+
+    /** The task the patcher is busy with besides executing patches, null while there is none. */
+    val runningTask: TaskStatus?
 }
 
 /**
@@ -149,12 +153,6 @@ class PatchRunProgress(
     var failedPatch by mutableStateOf(restoredFailedPatch)
         private set
 
-    /** Share of the progress bar left for executing patches after the fixed steps. */
-    private var patchesPercentage = patchesShare()
-
-    // Follows the steps, so the split step coming or going mid-run still adds up to the full bar
-    private fun patchesShare() = max(0.0, 1.0 - steps.sumOf { it.progressPercentage })
-
     private var currentStepIndex = steps.indexOfFirst { it.state == State.RUNNING }.coerceAtLeast(0)
 
     private var requiresSplitPreparation = steps.any { it.id == StepId.PREPARE_SPLIT_APK }
@@ -168,17 +166,39 @@ class PatchRunProgress(
 
     val patchesProgress get() = completedPatches to totalPatches
 
-    /** [0, 1] progress across every step of the run. */
-    val progress by derivedStateOf {
-        val current = steps.sumOf {
-            if (it.state == State.COMPLETED && it.category != StepCategory.PATCHING) {
-                it.progressPercentage
-            } else {
-                0.0
-            }
-        } + (completedPatches / totalPatches.coerceAtLeast(1).toDouble()) * patchesPercentage
+    /** How far the patcher got through each of its tasks, never going back within a run. */
+    private val taskFractions = mutableStateMapOf<PatcherTask, Float>()
 
-        min(1.0, current).toFloat()
+    override var runningTask by mutableStateOf<TaskStatus?>(null)
+        private set
+
+    /**
+     * [0, 1] progress across every step of the run. Each step fills its share as it completes,
+     * and the steps made of patcher tasks fill theirs as the tasks and patches get through.
+     */
+    val progress by derivedStateOf {
+        var done = 0.0
+        var total = 0.0
+        steps.forEach { step ->
+            total += step.progressPercentage
+            done += step.progressPercentage * when (step.state) {
+                State.COMPLETED -> 1.0
+                State.RUNNING, State.FAILED -> stepFraction(step.id)
+                State.WAITING -> 0.0
+            }
+        }
+        if (total > 0) min(1.0, done / total).toFloat() else 0f
+    }
+
+    /** How far through its parts the step is, 0 for a step not made of any. */
+    private fun stepFraction(step: StepId): Double {
+        val parts = STEP_PARTS[step] ?: return 0.0
+        return parts.entries.sumOf { (part, share) ->
+            share * when (part) {
+                StepPart.Patches -> completedPatches / totalPatches.coerceAtLeast(1).toDouble()
+                is StepPart.Task -> taskFractions[part.task]?.toDouble() ?: 0.0
+            }
+        } / parts.values.sum()
     }
 
     /** Logger handed to the patcher worker. */
@@ -207,6 +227,14 @@ class PatchRunProgress(
         }
     }
 
+    fun onTaskProgress(task: PatcherTask, done: Long, total: Long) {
+        scope.launch(Dispatchers.Main) {
+            val fraction = if (total > 0) done.toFloat() / total else 0f
+            taskFractions[task] = max(taskFractions[task] ?: 0f, fraction)
+            runningTask = TaskStatus(task, done, total).takeIf { done < total }
+        }
+    }
+
     fun onPatchCompleted() {
         scope.launch(Dispatchers.Main) { completedPatches += 1 }
     }
@@ -229,7 +257,8 @@ class PatchRunProgress(
             currentStepIndex = 0
             steps.clear()
             steps.addAll(generatePatchSteps(appContext, requiresSplitPreparation))
-            patchesPercentage = patchesShare()
+            taskFractions.clear()
+            runningTask = null
             // A fallback to ART reports a heap limit of its own
             heapLimitMb = 0
             heapSamples.clear()
@@ -390,7 +419,6 @@ class PatchRunProgress(
         val state = if (insertIndex <= currentStepIndex) State.COMPLETED else State.WAITING
 
         steps.add(insertIndex, buildSplitStep(appContext, state = state))
-        patchesPercentage = patchesShare()
 
         if (insertIndex <= currentStepIndex) {
             currentStepIndex++
@@ -403,7 +431,6 @@ class PatchRunProgress(
 
         val removingCurrent = index == currentStepIndex
         steps.removeAt(index)
-        patchesPercentage = patchesShare()
 
         when {
             currentStepIndex > index -> currentStepIndex--
@@ -442,9 +469,40 @@ class PatchRunProgress(
     }
 }
 
+/** A patcher task with how far it got, as the patcher last reported it. */
+@Immutable
+data class TaskStatus(val task: PatcherTask, val done: Long, val total: Long)
+
+/** Part of a step whose progress the patcher reports on its way. */
+private sealed interface StepPart {
+    data class Task(val task: PatcherTask) : StepPart
+
+    data object Patches : StepPart
+}
+
 /**
- * Builds the step pipeline of a patcher run. The percentages add up to less than one, the
- * remainder is what executing patches is worth.
+ * What the steps that report progress on their way are made of, with the share of the step each
+ * part takes in a typical run. A part a run skips leaves its share to be filled when the step completes.
+ */
+private val STEP_PARTS: Map<StepId, Map<StepPart, Double>> = mapOf(
+    // Decoding happens when the first patches need it, so it runs among them
+    StepId.EXECUTE_PATCHES to mapOf(
+        StepPart.Task(PatcherTask.DECODING_DEX) to 0.06,
+        StepPart.Task(PatcherTask.EXTRACTING_RESOURCES) to 0.04,
+        StepPart.Task(PatcherTask.DECODING_RESOURCES) to 0.23,
+        StepPart.Task(PatcherTask.INDEXING_CLASSES) to 0.1,
+        StepPart.Patches to 0.57
+    ),
+    StepId.WRITE_PATCHED_APK to mapOf(
+        StepPart.Task(PatcherTask.COMPILING_DEX) to 0.21,
+        StepPart.Task(PatcherTask.COMPILING_RESOURCES) to 0.55,
+        StepPart.Task(PatcherTask.WRITING_APK) to 0.24
+    )
+)
+
+/**
+ * Builds the step pipeline of a patcher run. The percentages are the share of time each step takes
+ * in a typical run, relative to each other, so a split step that comes or goes keeps them adding up.
  */
 fun generatePatchSteps(context: Context, splitStepActive: Boolean): List<Step> = listOfNotNull(
     Step(
@@ -452,21 +510,20 @@ fun generatePatchSteps(context: Context, splitStepActive: Boolean): List<Step> =
         name = context.getString(R.string.patcher_step_load_patches),
         category = StepCategory.PREPARING,
         state = State.RUNNING,
-        progressPercentage = 0.05
+        progressPercentage = 0.04
     ),
     buildSplitStep(context).takeIf { splitStepActive },
     Step(
         id = StepId.READ_APK,
         name = context.getString(R.string.patcher_step_unpack),
         category = StepCategory.PREPARING,
-        progressPercentage = 0.05
+        progressPercentage = 0.02
     ),
     Step(
         id = StepId.EXECUTE_PATCHES,
         name = context.getString(R.string.applying_patches),
         category = StepCategory.PATCHING,
-        // Takes whatever percentage the other steps did not claim
-        progressPercentage = 0.0
+        progressPercentage = 0.53
     ),
     Step(
         id = StepId.WRITE_PATCHED_APK,
@@ -478,7 +535,7 @@ fun generatePatchSteps(context: Context, splitStepActive: Boolean): List<Step> =
         id = StepId.SIGN_PATCHED_APK,
         name = context.getString(R.string.patcher_step_sign_apk),
         category = StepCategory.SAVING,
-        progressPercentage = 0.1
+        progressPercentage = 0.01
     )
 )
 

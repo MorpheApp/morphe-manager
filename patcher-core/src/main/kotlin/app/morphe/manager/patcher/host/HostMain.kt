@@ -14,6 +14,7 @@ import app.morphe.manager.patcher.runtime.heapLimitMebibytes
 import app.morphe.manager.patcher.split.SplitPreparationEvent
 import app.morphe.manager.util.bytesToMebibytes
 import app.morphe.manager.util.toLogString
+import app.morphe.patcher.PatcherTask
 import app.morphe.patcher.patch.Patch
 import app.morphe.patcher.patch.loadPatchesFromJar
 import kotlinx.coroutines.runBlocking
@@ -77,7 +78,7 @@ fun serveRun(
     commandsFile: String,
     eventsFile: String,
     gcClock: GcClock?,
-    loadPatches: (File) -> Collection<Patch<*>>
+    loadPatches: (File) -> Collection<Patch>
 ): Nothing {
     val code = try {
         HostEvents(FileOutputStream(eventsFile)).use { events ->
@@ -113,7 +114,7 @@ private fun run(
     command: HostCommand.Run,
     preloaded: Map<String, PreloadedBundle>,
     gcClock: GcClock?,
-    loadPatches: (File) -> Collection<Patch<*>>,
+    loadPatches: (File) -> Collection<Patch>,
     events: HostEvents
 ) {
     events.logger.info(vmDescription())
@@ -140,7 +141,7 @@ private fun vmDescription(): String {
             "arch=${property("os.arch")} cores=${Runtime.getRuntime().availableProcessors()}"
 }
 
-private fun loadLogged(file: File, loadPatches: (File) -> Collection<Patch<*>>, logger: Logger): Collection<Patch<*>> {
+private fun loadLogged(file: File, loadPatches: (File) -> Collection<Patch>, logger: Logger): Collection<Patch> {
     val started = TimeSource.Monotonic.markNow()
     return loadPatches(file).also {
         logger.info("Loaded ${it.size} patches of ${file.name} in ${started.elapsedNow().toLogString()}")
@@ -166,7 +167,7 @@ private class LineOutputStream(private val onLine: (String) -> Unit) : OutputStr
  * The patches of a bundle, loaded on a thread of their own from the moment they are asked for. The
  * file may be replaced by an update before the run, so they are only used if it is unchanged.
  */
-private class PreloadedBundle(private val file: File, loadPatches: (File) -> Collection<Patch<*>>) {
+private class PreloadedBundle(private val file: File, loadPatches: (File) -> Collection<Patch>) {
     private val stamp = stampOf(file)
     private val started = TimeSource.Monotonic.markNow()
 
@@ -180,7 +181,7 @@ private class PreloadedBundle(private val file: File, loadPatches: (File) -> Col
     }
 
     /** The loaded patches, or null if the file changed or loading failed, for them to be loaded again. */
-    fun take(logger: Logger): Collection<Patch<*>>? {
+    fun take(logger: Logger): Collection<Patch>? {
         if (stampOf(file) != stamp) {
             logger.info("${file.name} changed since it was loaded ahead, loading it again")
             return null
@@ -317,6 +318,9 @@ private class HostEvents(private val stream: OutputStream) : AutoCloseable {
         override fun patchExecuting(name: String) = send(HostEvent.PatchExecuting(name))
 
         override suspend fun patchSucceeded(name: String) = send(HostEvent.PatchSucceeded(name))
+
+        override fun taskProgress(task: PatcherTask, done: Long, total: Long) =
+            send(HostEvent.TaskProgress(task, done, total))
 
         override suspend fun patchFailed(name: String?, stackTrace: String) =
             send(HostEvent.PatchFailed(name, stackTrace))

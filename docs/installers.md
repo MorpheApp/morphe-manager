@@ -11,8 +11,9 @@ Google Play keeps trying to overwrite your patched build.
 ## Where the setting lives
 
 Open **Settings → Installation**. The **Default installer** section lists everything available
-on your device, with the shared options underneath. The row in the settings shows the installer
-you picked.
+on your device, **After patching** decides what happens once an app is patched, and on a rooted
+device **Patch mode** decides whether apps are patched for root mount. The row in the settings
+shows the installer you picked.
 
 <p align="center">
   <img src="images/installers/01-select-installer.jpg" width="320" alt="Installation settings with the default installer list" />
@@ -34,11 +35,12 @@ This works on every device with no extra software. The trade-off is a confirmati
 every install, and if the unpatched app is still installed you have to uninstall it first,
 because the patched build is signed with a different certificate.
 
-### Root mount
+### Root install
 
-Only selectable on rooted devices, and only for apps that were patched in root mount mode.
-See [Root mount](#root-mount-in-detail) below, it works differently from every other option
-here.
+Rooted devices only. Installs silently with root, with no confirmation dialog.
+
+Root mount is not an installer, since a mounted app is never installed. See
+[Root mount](#root-mount-in-detail) below.
 
 ### Shizuku
 
@@ -62,11 +64,10 @@ over and waits for that app to report the result.
 ## The shared options
 
 Below the installer list are the settings that apply to whichever installer you selected.
-**Install as Play Store** sits right under the list, the rest are grouped under **Patching**.
 
 ### Install as Play Store
 
-Records Google Play Store as the installation source for the patched app. This can help
+Offered for the system installer, root install and Shizuku. Records Google Play Store as the installation source for the patched app. This can help
 services that check the install source, for example Android Auto, though it is not
 guaranteed on every app, device, ROM, or Android version.
 
@@ -78,17 +79,20 @@ guaranteed on every app, device, ROM, or Android version.
 
 Morphe shows this warning and asks you to confirm before enabling the option.
 
-### Auto-install after patching
+### After patching
 
-The patched APK is installed the moment patching finishes, without you returning to the app.
-Shizuku does this for any install. The system installer manages it only where Android lets
-Morphe update an app it installed itself, which means replacing a build Morphe put there,
-with the same signature and no installer prompt in the way. Anything else still opens the
-usual confirmation.
+- **Install automatically** - the patched APK is installed, or mounted, the moment patching
+  finishes, without you returning to the app. Root install and Shizuku do this for any install.
+  The system installer manages it only where Android lets Morphe update an app it installed
+  itself, which means replacing a build Morphe put there, with the same signature. Anything
+  else waits for you to tap **Install**.
+- **Ask which installer** - every install asks which installer to use, the default one
+  preselected. A root mount needs no installer, so it is mounted as soon as patching finishes.
+- **Install manually** - nothing happens until you tap **Install**, which uses the default installer.
 
 ### Auto-uninstall on conflict
 
-Shizuku only, and off by default. When a silent install fails because the installed app has
+Shizuku with **Install automatically** only, and off by default. When a silent install fails because the installed app has
 a different signature, Morphe uninstalls the existing app first and then installs the
 patched one.
 
@@ -104,12 +108,6 @@ Rooted devices only. The signature conflict dialog offers **Install anyway** nex
 Root alone is not enough for this to succeed. Android still verifies the certificate, so the
 install only goes through on devices running a module that patches that verification out of the
 framework. Without one, the install is rejected and the conflict dialog comes back.
-
-### Installer selection prompt
-
-Asks how to install every app instead of committing to one default. On a rooted device the
-question comes before patching, since root mount has to be decided then, otherwise it comes
-when the patched app is installed.
 
 ## Root mount in detail
 
@@ -132,16 +130,18 @@ and mounts it back once the system is up.
 
 ### Choosing the mode
 
-Root mount is decided **before** patching, not in the installer settings. On a rooted device
-Morphe shows a **Choose patch mode** dialog when you start patching:
+Root mount is a patch mode, decided **before** patching. On a rooted device, **Patch mode** in
+**Settings → Installation** offers:
 
+- **Standard install mode** - patches as a normal APK with GmsCore support, and your default
+  installer is used afterwards.
 - **Root mount mode** - patches for mounting over the stock app.
-- **Standard install mode** - patches as a normal APK with GmsCore support, and your
-  installer setting is used afterwards.
+- **Ask every time** - the default. Morphe asks with a **Choose patch mode** dialog each time
+  you start patching.
 
 > [!IMPORTANT]
-> The patch mode is separate from **Settings → Installation** and cannot be changed after
-> patching. To switch, patch the app again in the other mode.
+> The patch mode cannot be changed after patching. To switch, patch the app again in the
+> other mode.
 
 In root mount mode the APK download step also changes: you **do** install the original APK,
 because the stock app has to be present for the patched one to mount over it. In standard
@@ -171,9 +171,8 @@ with a **Mount** chip and offers **Remount** and **Unmount**, an unmounted one o
   when NoMount is missing or its redirect fails the app stays unmounted instead of being bind
   mounted. The setting applies to an app the next time it is mounted or installed, and a stock
   APK mounted over the system copy before stays there until the next reboot.
-- The **Root mount** entry in the installer list only handles apps that were patched in
-  root mount mode. Standard patched APKs still go through whichever other installer you
-  selected.
+- Root mount only handles apps that were patched in root mount mode. Standard patched APKs go
+  through the default installer.
 
 ## Which one should I use?
 
@@ -181,9 +180,10 @@ with a **Mount** chip and offers **Remount** and **Unmount**, an unmounted one o
 | --- | --- |
 | No root, no Shizuku | **System installer** |
 | You want installs without confirmation taps | **Shizuku** |
-| Rooted, and you want to keep app data across updates | **Root mount** (chosen before patching) |
+| Rooted, and you want installs without confirmation taps | **Root install** |
+| Rooted, and you want to keep app data across updates | **Root mount mode** in **Patch mode**, or chosen when asked |
 | A service refuses to work unless the app came from Play | **Install as Play Store**, and turn off Play updates for that app |
-| You switch between methods often | Enable **Installer selection prompt** |
+| You switch between methods often | **Ask which installer** and **Ask every time** |
 
 ## Troubleshooting
 

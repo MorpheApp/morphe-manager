@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Skrýt tuto aplikaci?</string>
     <string name="home_more_apps_title">Více aplikací</string>
     <string name="home_more_apps_hide_title">Skrýt tuto kartu?</string>
-    <string name="home_more_apps_hide_message">Můžete si jej kdykoliv vrátit v Nastavení &gt; Vzhled &gt; Domovská obrazovka</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Kdykoliv ji můžete vrátit v %1$s</string>
     <string name="home_app_hide_message">Tato aplikace bude skryta z domovské obrazovky. Můžete ji později obnovit pomocí tlačítka na konci seznamu</string>
     <string name="home_app_will_be_hidden">Tato aplikace bude skryta</string>
     <string name="home_app_hidden_named">%s skrytých</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Důvěryhodný klíč</string>
     <string name="sources_signing_key_new">Nový klíč</string>
     <string name="sources_patch_expert_badge">Expert</string>
-    <string name="sources_patch_expert_badge_tooltip">Povolte Expert režim v Nastavení, abyste mohli tuto záplatu ručně přidat</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Zapněte %1$s, abyste mohli tuto záplatu přidat ručně</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Potřebujete pomoct s nalezením APK?</string>
     <string name="home_apk_availability_dialog_simple">Pro záplatu &lt;b&gt;%s&lt;/b&gt; je potřeba nezáplatovaná APK verze:</string>
@@ -508,7 +510,6 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
     <string name="shortcut_repatch_long">Znovu záplatovat zastaralé aplikace</string>
     <string name="shortcut_check_updates_short">Zkontrolovat aktualizace</string>
     <string name="shortcut_check_updates_long">Zkontrolovat aktualizace záplat</string>
-    <string name="shortcut_patch_app">Záplatovat %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Odinstalovat tuto aplikaci?</string>
     <string name="home_app_info_uninstall_removes_data">Aplikace a její data budou z tohoto zařízení odstraněny</string>
@@ -529,6 +530,7 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
     <string name="home_app_info_install_type_custom_installer">Vlastní instalátor</string>
     <string name="home_app_info_install_type_system_installer">Systémový instalátor</string>
     <string name="home_app_info_install_type_play_store">Instalace z Obchodu Play</string>
+    <string name="home_app_info_install_type_root">Root instalace</string>
     <string name="home_app_info_install_type_root_play_store">Instalace z Obchodu Play s root přístupem</string>
     <string name="home_app_info_install_type_shizuku_play_store">Instalace z Obchodu Play přes Shizuku</string>
     <string name="home_app_info_patch_update_available">Je k dispozici novější verze záplat.</string>
@@ -570,7 +572,8 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
     <string name="root_mount_module_unmount_warning">Pokud má KernelSU zapnuto „Odpojit moduly ve výchozím nastavení“, otevřete KernelSU &gt; Superuser &gt; aplikaci, kterou jste nainstalovali &gt; Profil &gt; Vlastní a vypněte „Odpojit moduly“. Jinak může nainstalovaná upravená APK neprojet, i když Morphe ukazuje, že je instalována</string>
     <string name="root_pre_patch_installer_standard_title">Standardní režim instalace</string>
     <string name="root_pre_patch_installer_standard_description">Patche jako běžný APK se podporou GmsCore. Vaše nastavení instalátoru bude použito po opatchování</string>
-    <string name="root_pre_patch_installer_hint">Zobrazováno při Nastavení <b>&amp;gt;</b> Opravy <b>&amp;gt;</b> Instalace <b>&amp;gt;</b> Výběr instalátoru. Režim opravy nelze po opravě změnit</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Dotaz byl položen, zatímco %1$s je nastaveno na %2$s. Režim záplat nelze po záplatování změnit</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Chyba zkopírována do schránky</string>
     <string name="patcher_error_log">Protokol chyb</string>
@@ -669,6 +672,14 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="patcher_step_group_saving">Ukládání</string>
     <string name="patcher_step_write_patched">Zápis opraveného APK souboru</string>
     <string name="patcher_step_sign_apk">Podpis opraveného APK souboru</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Čtení souborů DEX</string>
+    <string name="patcher_task_extracting_resources">Extrakce zdrojů</string>
+    <string name="patcher_task_decoding_resources">Dekódování zdrojů</string>
+    <string name="patcher_task_indexing_classes">Indexování tříd</string>
+    <string name="patcher_task_compiling_dex">Kompilace souborů DEX</string>
+    <string name="patcher_task_compiling_resources">Kompilování prostředků</string>
+    <string name="patcher_task_writing_apk">Zápis souboru APK</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Ochrana záplat na pozadí</string>
     <string name="battery_optimization_dialog_description">Na některých zařízeních se může záplata zastavit, když je aplikace minimalizována. Povolte aplikaci Morphe, aby běžela bez omezení spotřeby energie, a zajistěte tak spolehlivé dokončení záplatování.</string>
@@ -717,7 +728,8 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="patched_app_save_failed_toast">Chyba při ukládání zastaralé aplikace</string>
     <string name="plugin_activity_dialog_body">Provedení je vyžadováno pro pokračování v tomto rozšíření</string>
     <string name="patcher_process_killed_message">Systém ukončil patcher před dokončením, obvykle kvůli uvolnění paměti. Zavřete jiné aplikace a zkuste to znovu</string>
-    <string name="patcher_process_crashed_message">Patcher spadl předtím, než dokončil svou práci. Pokud se to opakuje, vypněte v nastavení možnost \"Use embedded VM\" a nahlaste problém společně s logem</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Záplatovač spadl před dokončením. Pokud se to opakuje, vypněte %1$s a nahlaste problém společně s logem</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Patcher došel paměť s %1$s MB heapem. Tato aplikace je příliš velká pro vybrané patche. Zkuste patchovat s méně zdrojů patchů nebo vyberte méně patchů</string>
     <string name="install_app_success">Úspěšně nainstalováno</string>
@@ -1017,9 +1029,8 @@ Rozměry obrázků musí být následující:
     <string name="installer_title">Vyberte instalátor</string>
     <string name="installer_internal_description">Používá vestavěný správce balíčků Androidu</string>
     <string name="installer_play_store_description">Používá systémový instalátor a nastaví Obchod Play jako zdroj instalace</string>
+    <string name="installer_root_description">Instaluje tichým způsobem pomocí rootu</string>
     <string name="installer_root_play_store_description">Instaluje se potichu s root přístupy a nastavuje Google Play Store jako zdroj instalace</string>
-    <string name="installer_auto_saved_name">Připojení pomocí rootu</string>
-    <string name="installer_auto_saved_description">Připojuje aplikace, které byly opatchovány v režimu připojení pomocí rootu. Standardní opatchované APK používají jiný instalátor</string>
     <string name="installer_shizuku_description">Instaluje potichu pomocí Shizuku nebo Sui</string>
     <string name="installer_shizuku_play_store_description">Instaluje se potichu přes Shizuku nebo Sui a nastavuje Google Play Store jako zdroj instalace</string>
     <string name="installer_option_none">Žádný záložní</string>
@@ -1029,7 +1040,7 @@ Rozměry obrázků musí být následující:
     <string name="installer_status_shizuku_not_installed">Instalujte Shizuku nebo Sui pro použití této možnosti</string>
     <string name="installer_status_shizuku_not_running">Spusťte Shizuku nebo Sui a zkuste to znovu</string>
     <string name="installer_status_shizuku_permission">Povolte aplikaci Morphe přístup od aplikace Shizuku</string>
-    <string name="installer_mount_warning_install">Vaš primary instalátor je nastaven na kořenový instalátor. Tato uložená aplikace nebyla nainstalována pomocí kořenového instalátoru</string>
+    <string name="installer_mount_warning_install">Režim záplat je nastaven na root mount. Tato uložená aplikace nebyla instalována pomocí mount</string>
     <string name="mount_version_mismatch_message">Verze původní aplikace (%2$s) se neshoduje s verzí upravené aplikace (%1$s). Kořenujte odpovídající původní verzi, pak zkuste to znovu</string>
     <string name="mount_stock_restore_failed_message">Android odmítl uložený původní APK. Nainstalujte odpovídající verzi původní aplikace a poté zkuste znovu připojit</string>
     <string name="installer_status_shizuku_unsupported">Použitá verze Shizuku není podporována</string>
@@ -1051,11 +1062,17 @@ Rozměry obrázků musí být následující:
     <string name="installer_play_store_warning_continue">Rozumím, pokračovat</string>
     <string name="installer_play_store_mode">Instalovat jako Obchod Play</string>
     <string name="installer_play_store_mode_description">Označí Google Play Store jako zdroj instalace</string>
+    <string name="settings_section_patch_mode">Režim záplat</string>
+    <string name="settings_patch_mode_ask">Ptát se pokaždé</string>
+    <string name="settings_patch_mode_ask_description">Před záplatováním každé aplikace se zeptá, zda ji záplatovat pro root mount nebo standardní instalaci</string>
+    <string name="settings_section_after_patching">Po záplatování</string>
+    <string name="settings_after_patching_install">Instalovat automaticky</string>
+    <string name="settings_after_patching_ask">Ptát se na instalátor</string>
+    <string name="settings_after_patching_ask_description">Pokaždé při instalaci aplikace se zeptá, který instalátor má použít</string>
+    <string name="settings_after_patching_manual">Instalovat ručně</string>
+    <string name="settings_after_patching_manual_description">Po klepnutí na Instalovat se provede instalace pomocí výchozího instalátoru</string>
     <string name="settings_nomount_only">Pouze NoMount</string>
     <string name="settings_nomount_only_description">Připojuje aplikace pouze pomocí NoMount a nikdy nenavrací k bind mountu, takže bez něj zůstanou nepřipojené</string>
-    <string name="settings_prompt_installer_on_install">Výběr instalátoru</string>
-    <string name="settings_prompt_installer_on_install_description">Přeje si určit způsob instalace každé aplikace: s root před opravou, jinak poté</string>
-    <string name="settings_auto_install_with_shizuku">Automatická instalace po záplatování</string>
     <string name="settings_auto_install_with_shizuku_description">Instaluje nebo připojí opravený APK, jakmile se oprava dokončí</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatické odinstalování v případě konfliktu</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Odinstaluje existující aplikaci při konfliktu podpisů. Toto může odstranit data aplikace</string>

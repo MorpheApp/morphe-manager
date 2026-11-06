@@ -155,6 +155,12 @@ data class BatchPatchItem(
     val source: BatchApkSource?,
     val selection: PatchSelection,
     val options: Options,
+    /**
+     * Whether [selection] is set up by hand rather than taken from the source defaults. Only such
+     * a selection can be edited in simple mode, and only its [options] are saved with it: the
+     * ones simple mode keeps on its preference screen stay there.
+     */
+    val selectedByHand: Boolean = false,
     val bundles: List<BatchBundleRef>,
     val state: BatchItemState,
     val useMount: Boolean = false,

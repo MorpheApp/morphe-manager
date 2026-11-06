@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen.shared
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -19,14 +20,21 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import app.morphe.manager.R
 
 /** Shape of an [InfoPanel], which its rows are pressed and focused on too, so either fits its corners. */
 private val InfoPanelShape = RoundedCornerShape(Defaults.CornerMedium)
@@ -86,6 +94,7 @@ fun ValueText(
  *
  * A row with [onClick] opens what its value sums up and says so with a chevron, dropped along with
  * the click while it is not [enabled]. [trailing] is for a row whose action is a control of its own.
+ * A row with [copyText] copies it on a long press, for a value that goes into a report.
  *
  * @param contentPadding Room inside the row, a panel's by default. A row standing on its own takes
  *   the room of what it stands among instead.
@@ -99,17 +108,38 @@ fun InfoRow(
     onClick: (() -> Unit)? = null,
     enabled: Boolean = true,
     contentPadding: PaddingValues = InfoRowPadding,
+    copyText: String? = null,
     trailing: (@Composable () -> Unit)? = null
 ) {
     val onSurface = MaterialTheme.colorScheme.onSurface
+    // A row with a tap long presses through combinedClickable, which buzzes on its own
+    val copy = copyText?.let { rememberCopyAction(it, haptic = onClick == null) }
+    val copyLabel = stringResource(R.string.copy)
+    val interactionSource = remember { MutableInteractionSource() }
 
     Row(
         modifier = modifier
             .fillMaxWidth()
             .then(
-                if (onClick != null) {
-                    Modifier.shapedClickable(InfoPanelShape, enabled = enabled, role = Role.Button, onClick = onClick)
-                } else Modifier
+                when {
+                    onClick != null && copy != null -> Modifier.shapedCombinedClickable(
+                        InfoPanelShape,
+                        enabled = enabled,
+                        role = Role.Button,
+                        onLongClickLabel = copyLabel,
+                        onLongClick = copy,
+                        onClick = onClick
+                    )
+                    onClick != null -> Modifier.shapedClickable(InfoPanelShape, enabled = enabled, role = Role.Button, onClick = onClick)
+                    copy != null -> Modifier.shapedLongPressable(
+                        InfoPanelShape,
+                        interactionSource = interactionSource,
+                        enabled = enabled,
+                        onLongClickLabel = copyLabel,
+                        onLongClick = copy
+                    )
+                    else -> Modifier
+                }
             )
             .then(if (enabled) Modifier else Modifier.alpha(Defaults.DISABLED_ALPHA))
             .padding(contentPadding),
@@ -135,6 +165,23 @@ fun InfoRow(
                 size = Defaults.IconSizeSmall,
                 tint = onSurface.copy(alpha = 0.6f)
             )
+        }
+    }
+}
+
+/**
+ * Copies [text] to the clipboard, through one handler for as long as the row stays, so a press
+ * already held is not dropped as the text changes.
+ */
+@Composable
+private fun rememberCopyAction(text: String, haptic: Boolean): () -> Unit {
+    val latestText by rememberUpdatedState(text)
+    val copyToClipboard = rememberCopyToClipboard()
+    val haptics = LocalHapticFeedback.current
+    return remember(copyToClipboard, haptics, haptic) {
+        {
+            if (haptic) haptics.performHapticFeedback(HapticFeedbackType.LongPress)
+            copyToClipboard(latestText)
         }
     }
 }

@@ -169,6 +169,10 @@
         <item quantity="one">%s بڵاوکراوەی نوێ</item>
         <item quantity="other">%s بڵاوکراوەی نوێ</item>
     </plurals>
+    <plurals name="app_links_count_enabled">
+        <item quantity="one">%d لینک چاڵاککراوە</item>
+        <item quantity="other">%d لینک چالاککراوە</item>
+    </plurals>
     <plurals name="app_links_count_unverified">
         <item quantity="one">%d لینکێکی پشتڕاستنەکراو</item>
         <item quantity="other">%d لینکی پشتڕاستنەکراو</item>

@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Itago ang aplikasyong ito?</string>
     <string name="home_more_apps_title">Higit pang mga aplikasyon</string>
     <string name="home_more_apps_hide_title">Itago ang card na ito?</string>
-    <string name="home_more_apps_hide_message">Maaari mo itong ibalik anumang oras sa Settings &gt; Appearance &gt; Home screen</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Maaari mo itong ibalik anumang oras sa %1$s</string>
     <string name="home_app_hide_message">Itatago ang aplikasyong ito mula sa home screen. Maaari mo itong buksan muli gamit ang button sa ibaba ng listahan</string>
     <string name="home_app_will_be_hidden">Itatago ang aplikasyong ito</string>
     <string name="home_app_hidden_named">%s nakatago</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Pinagkatiwalaang key</string>
     <string name="sources_signing_key_new">Bagong key</string>
     <string name="sources_patch_expert_badge">Eksperto</string>
-    <string name="sources_patch_expert_badge_tooltip">I-enable ang Expert mode sa Settings upang isama ang patch na ito nang manu-mano</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">I-on ang %1$s para isama ang patch na ito nang manual</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Kailangan ng tulong sa paghahanap ng APK?</string>
     <string name="home_apk_availability_dialog_simple">Upang ma-patch ang &lt;b&gt;%s&lt;/b&gt;, kailangan mo ng hindi pa napa-patch na APK na may bersyong:</string>
@@ -508,7 +510,6 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="shortcut_repatch_long">I-re-patch ang mga hindi napapanahong app</string>
     <string name="shortcut_check_updates_short">Suriin ang mga update</string>
     <string name="shortcut_check_updates_long">Suriin para sa mga patch update</string>
-    <string name="shortcut_patch_app">I-patch ang %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">I-uninstall ang app na ito?</string>
     <string name="home_app_info_uninstall_removes_data">Ang app at ang mga data nito ay tatanggalin mula sa device na ito</string>
@@ -529,6 +530,7 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="home_app_info_install_type_custom_installer">Pasadyang installer</string>
     <string name="home_app_info_install_type_system_installer">System installer</string>
     <string name="home_app_info_install_type_play_store">I-install mula sa Play Store</string>
+    <string name="home_app_info_install_type_root">Root install</string>
     <string name="home_app_info_install_type_root_play_store">I-install mula sa Play Store gamit ang Root</string>
     <string name="home_app_info_install_type_shizuku_play_store">I-install mula sa Play Store gamit ang Shizuku</string>
     <string name="home_app_info_patch_update_available">Magagamit ang isang update sa patch</string>
@@ -570,7 +572,8 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="root_mount_module_unmount_warning">Kung ang KernelSU may \"Unmount modules by default\" na naka-on, buksan ang KernelSU &gt; Superuser &gt; ang i-nmount na app &gt; Profile &gt; Custom at naka-off ang \"Unmount modules\". Kung hindi, maaaring hindi umuga ang patched APK na naka-mount, kahit ipakita ito ng Morphe bilang naka-mount</string>
     <string name="root_pre_patch_installer_standard_title">Standard na pag-install</string>
     <string name="root_pre_patch_installer_standard_description">Mga patch bilang isang normal na APK na may suporta sa GmsCore. Ang iyong setting ng installer ay ginagamit pagkatapos ng pag-patch.</string>
-    <string name="root_pre_patch_installer_hint">Ginatanong habang nasa Settings > Patching > Installation > Installer selection prompt. Hindi maibagay ang patch mode pagkatapos ng patching</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Tinanong habang ang %1$s ay nakatakda sa %2$s. Hindi maaaring baguhin ang patch mode pagkatapos ng pag-patch</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Isang pagkakamali na nakopya sa clipboard</string>
     <string name="patcher_error_log">Tala ng pagkakamali</string>
@@ -669,6 +672,14 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="patcher_step_group_saving">Iniimbak</string>
     <string name="patcher_step_write_patched">Isinusulat ang na-patch na APK file</string>
     <string name="patcher_step_sign_apk">Inilalagda ang na-patch na APK file</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Binabasa ang mga DEX file</string>
+    <string name="patcher_task_extracting_resources">Inie-extract ang mga resource</string>
+    <string name="patcher_task_decoding_resources">Idinedecode ang mga resource</string>
+    <string name="patcher_task_indexing_classes">Inine-index ang mga class</string>
+    <string name="patcher_task_compiling_dex">I-compile ang mga DEX file</string>
+    <string name="patcher_task_compiling_resources">Pag-compile ng mga resource</string>
+    <string name="patcher_task_writing_apk">Pagsusulat ng APK file</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Proteksyon sa pag-patch sa background</string>
     <string name="battery_optimization_dialog_description">Maaaring itigil ng ilang device ang patcher kapag na-minimize ang app. Payagan ang Morphe na tumakbo nang walang mga paghihigpit sa baterya upang matiyak na kumpleto ang pag-patch nang maaasahan</string>
@@ -717,7 +728,8 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="patched_app_save_failed_toast">Nabigong ma-save ang na-patch na aplikasyon</string>
     <string name="plugin_activity_dialog_body">Kinakailangan ng pakikipag-ugnayan sa tagagamit upang magpatuloy sa plugin na ito</string>
     <string name="patcher_process_killed_message">Itinigil ng system ang patcher bago ito matapos, upang magkaroon ng sapat na memory. Isara ang ibang apps at subukan ulit</string>
-    <string name="patcher_process_crashed_message">Nag-crash ang patcher bago ito natapos. Kung mangyari itong muli, i-off ang \"Use embedded VM\" sa settings at i-report ang isyu kasama ang log</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Nag-crash ang patcher bago ito natapos. Kung mangyari itong muli, i-off ang %1$s at i-report ang isyu kasama ang log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Ang patcher ay wala nang memorya sa %1$s MB heap. Ang app na ito ay masyadong malaki para sa mga piniling patches. Subukang mag-patch gamit ang mas kaunting patch sources, o piliin ang mas kaunting patches</string>
     <string name="install_app_success">Matagumpay na na-install</string>
@@ -1017,9 +1029,8 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="installer_title">Piliin ang installer</string>
     <string name="installer_internal_description">Gamitin ang Android package installer</string>
     <string name="installer_play_store_description">Gumagamit ng system installer at itinakda ang Google Play Store bilang pinagmumulan ng pag-install</string>
+    <string name="installer_root_description">Tahimik na nag-i-install gamit ang root</string>
     <string name="installer_root_play_store_description">Tahimik na nag-i-install gamit ang root at itinakda ang Google Play Store bilang pinagmumulan ng pag-install</string>
-    <string name="installer_auto_saved_name">Root mount</string>
-    <string name="installer_auto_saved_description">Ikakabit ang mga app na na-patch sa root mount mode. Ang mga standard na na-patch na APK ay gumagamit ng ibang installer.</string>
     <string name="installer_shizuku_description">Mag-install nang tahimik gamit ang Shizuku o Sui</string>
     <string name="installer_shizuku_play_store_description">Tahimik na nag-i-install sa pamamagitan ng Shizuku o Sui at itinakda ang Google Play Store bilang pinagmumulan ng pag-install</string>
     <string name="installer_option_none">Walang urong</string>
@@ -1029,7 +1040,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="installer_status_shizuku_not_installed">I-install sa pamamagitan ng Shizuku o Sui upang gamitin ang opsyon na ito</string>
     <string name="installer_status_shizuku_not_running">Simulan ang Shizuku o Sui at subukan muli</string>
     <string name="installer_status_shizuku_permission">Bigyan ng pahintulot ang Morphe mula sa Shizuku app</string>
-    <string name="installer_mount_warning_install">Nakatakda ang iyong primary installer sa rooted na mount installer. Hindi na-install gamit ang mount ang na-save na aplikasyong ito</string>
+    <string name="installer_mount_warning_install">Nakatakda ang patch mode sa root mount. Ang na-save na app na ito ay hindi na-install gamit ang mount</string>
     <string name="mount_version_mismatch_message">Hindi tumutugma sa na-patch na bersyon ng aplikasyon (%1$s) ang stock na bersyon ng aplikasyon (%2$s). I-mount ang tumutugmang stock na bersyon, at subukan muli</string>
     <string name="mount_stock_restore_failed_message">Tanggihan ng Android ang na-save na orihinal na APK. I-install ang katumbas na stock na bersyon, pagkatapos ay subukang Mount muli.</string>
     <string name="installer_status_shizuku_unsupported">Hindi suportado ang naka-install na bersyon ng Shizuku</string>
@@ -1051,11 +1062,17 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="installer_play_store_warning_continue">Naiintindihan ko, magpatuloy</string>
     <string name="installer_play_store_mode">I-install bilang Play Store</string>
     <string name="installer_play_store_mode_description">Tinutukoy ang Google Play Store bilang pinagmulan ng pag-install</string>
+    <string name="settings_section_patch_mode">Patch mode</string>
+    <string name="settings_patch_mode_ask">Magtanong tuwing gagawin</string>
+    <string name="settings_patch_mode_ask_description">Nagtatanong bago i-patch ang bawat app kung i-patch ito para sa root mount o standard install</string>
+    <string name="settings_section_after_patching">Pagkatapos ng pag-patch</string>
+    <string name="settings_after_patching_install">I-install nang awtomatiko</string>
+    <string name="settings_after_patching_ask">Magtanong kung aling installer</string>
+    <string name="settings_after_patching_ask_description">Nagtatanong kung aling installer ang gagamitin tuwing may i-i-install na app</string>
+    <string name="settings_after_patching_manual">I-install nang manual</string>
+    <string name="settings_after_patching_manual_description">Nag-i-install gamit ang default installer kapag tinap mo ang Install</string>
     <string name="settings_nomount_only">NoMount lang</string>
     <string name="settings_nomount_only_description">I-mount ang mga app gamit lamang ang NoMount at hindi kailanman babalik sa isang bind mount, kaya mananatili silang unmounted kung wala ito</string>
-    <string name="settings_prompt_installer_on_install">Prompt ng pagpili ng installer</string>
-    <string name="settings_prompt_installer_on_install_description">Tinatanong kung paano i-install ang bawat app: may root bago mag-patch, sa iba pang mga kaso pagkatapos nito</string>
-    <string name="settings_auto_install_with_shizuku">Awtomatikong i-install pagkatapos ng pag-patch</string>
     <string name="settings_auto_install_with_shizuku_description">Ina-install o in-mount ang patched APK nang sabay-sabay na matapos ang patching</string>
     <string name="settings_auto_uninstall_with_shizuku">Awtomatikong i-uninstall sa pagkakasalungatan</string>
     <string name="settings_auto_uninstall_with_shizuku_description">I-e uninstall ang umiiral na app kapag may konfliktong signature. Maaari itong magtanggal ng data ng app</string>

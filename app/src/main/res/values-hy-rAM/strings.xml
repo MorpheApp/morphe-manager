@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Թաքցնե՞լ այս հավելվածը։</string>
     <string name="home_more_apps_title">Ավելի շատ հավելվածներ</string>
     <string name="home_more_apps_hide_title">Թաքցնե՞լ այս քարտը։</string>
-    <string name="home_more_apps_hide_message">Դուք կարող եք վերականգնել այն ցանկացած պահի՝ Կարգավորումներ &gt; Արտաքին տեսք &gt; Գլխավոր էկրան</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Դուք կարող եք վերադարձնել այն ցանկացած պահի %1$s բաժնում</string>
     <string name="home_app_hide_message">Այս հավելվածը կթաքցվի գլխավոր էկրանից: Դուք կարող եք վերականգնել այն ավելի ուշ թաքցված հավելվածների բաժնից՝ օգտագործելով ցուցակի ներքևի կոճակը</string>
     <string name="home_app_will_be_hidden">Այս հավելվածը կթաքցվի</string>
     <string name="home_app_hidden_named">%s-ը թաքցված է</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Վստահելի բանալի</string>
     <string name="sources_signing_key_new">Նոր բանալի</string>
     <string name="sources_patch_expert_badge">Էքսպերտ</string>
-    <string name="sources_patch_expert_badge_tooltip">Ակտիվացրեք Էքսպերտ ռեժիմը Կարգավորումներում՝ այս փեթչը ձեռքով ավելացնելու համար</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Միացրեք %1$s-ը՝ այս փաթեթը ձեռքով ներառելու համար</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Օգնություն է պետք APK-ն գտնելու համար:</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt;-ը պատչելու համար ձեզ անհրաժեշտ է APK-ի չպատչված տարբերակը։</string>
@@ -508,7 +510,6 @@
     <string name="shortcut_repatch_long">Վերապատչել հնացած հավելվածները</string>
     <string name="shortcut_check_updates_short">Ստուգել թարմացումները</string>
     <string name="shortcut_check_updates_long">Ստուգել թարմացումների առկայությունը</string>
-    <string name="shortcut_patch_app">Թարմացնել %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Հեռացնե՞լ այս հավելվածը։</string>
     <string name="home_app_info_uninstall_removes_data">Հավելվածը և դրա տվյալները հեռացվում են այս սարքից</string>
@@ -529,6 +530,7 @@
     <string name="home_app_info_install_type_custom_installer">Անհատականացված տեղադրիչ</string>
     <string name="home_app_info_install_type_system_installer">Համակարգային տեղադրիչ</string>
     <string name="home_app_info_install_type_play_store">Տեղադրում Play Store-ից</string>
+    <string name="home_app_info_install_type_root">Root տեղադրում</string>
     <string name="home_app_info_install_type_root_play_store">Տեղադրում Root Play Store-ով</string>
     <string name="home_app_info_install_type_shizuku_play_store">Տեղադրում Shizuku Play Store-ով</string>
     <string name="home_app_info_patch_update_available">Հասանելի է փաթեթի թարմացում</string>
@@ -570,7 +572,8 @@
     <string name="root_mount_module_unmount_warning">Եթե KernelSU-ում միացված է \"Unmount modules by default\" տարբերակը, բացեք KernelSU &gt; Superuser &gt; ձեր միացրած հավելվածը &gt; Profile &gt; Custom և անջատեք \"Unmount modules\" տարբերակը: Հակառակ դեպքում միացված փոփոխված APK-ն կարող է չգործել, նույնիսկ եթե Morphe-ը ցույց է տալիս, որ այն միացված է</string>
     <string name="root_pre_patch_installer_standard_title">Ստանդարտ տեղադրման ռեժիմ</string>
     <string name="root_pre_patch_installer_standard_description">Փաթեթավորում է որպես սովորական APK՝ GmsCore-ի աջակցությամբ: Ձեր տեղադրման կարգավորումն օգտագործվում է փաթեթավորումից հետո</string>
-    <string name="root_pre_patch_installer_hint">Հարցնում է, երբ միացված է Settings &gt; Patching &gt; Installation &gt; Installer selection prompt տարբերակը: Պատչի ռեժիմը հնարավոր չէ փոխել պատչավորումից հետո</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Հարցումն արվել է, երբ %1$s-ը սահմանված է որպես %2$s: Փաթեթավորման ռեժիմը հնարավոր չէ փոխել փաթեթավորումից հետո</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Սխալը պատճենվեց հիշողության մեջ</string>
     <string name="patcher_error_log">Սխալների մատյան</string>
@@ -669,6 +672,14 @@
     <string name="patcher_step_group_saving">Պահպանում</string>
     <string name="patcher_step_write_patched">Գրում փոփոխված APK ֆայլը</string>
     <string name="patcher_step_sign_apk">Ստորագրում փոփոխված APK ֆայլը</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">DEX ֆայլերի ընթերցում</string>
+    <string name="patcher_task_extracting_resources">Ռեսուրսների արտահանում</string>
+    <string name="patcher_task_decoding_resources">Ռեսուրսների վերծանում</string>
+    <string name="patcher_task_indexing_classes">Դասերի ինդեքսավորում</string>
+    <string name="patcher_task_compiling_dex">DEX ֆայլերի կոմպիլյացիա</string>
+    <string name="patcher_task_compiling_resources">Ռեսուրսների կոմպիլյացիա</string>
+    <string name="patcher_task_writing_apk">APK ֆայլի գրում</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Ֆոնային փոփոխման պաշտպանություն</string>
     <string name="battery_optimization_dialog_description">Որոշ սարքեր կարող են կանգնեցնել փոփոխիչը, երբ հավելվածը փոքրացվում է: Թույլ տվեք Morphe-ին աշխատել առանց մարտկոցի սահմանափակումների՝ ապահովելու համար, որ փոփոխումն ավարտվի հուսալիորեն</string>
@@ -717,7 +728,8 @@
     <string name="patched_app_save_failed_toast">Չհաջողվեց պահպանել փոփոխված հավելվածը</string>
     <string name="plugin_activity_dialog_body">Այս պլագինի հետ շարունակելու համար անհրաժեշտ է օգտատիրոջ ഇടപെլությունը</string>
     <string name="patcher_process_killed_message">Համակարգը կանգնեցրեց փաթեթավորողը նախքան դրա ավարտը, սովորաբար հիշողությունը ազատելու համար: Փակեք մյուս հավելվածները և փորձեք նորից</string>
-    <string name="patcher_process_crashed_message">Փոփոխիչը խ തափտալվեց նախքան ավարտելը: Եթե դա կրկնվի, կարգավորումներում անջատեք \"Օգտագործել ներկառուցված VM\" տարբերակը և հայտնեք խնդրի մասին՝ կցելով լոգը</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Փաթեթավորողը կասեցավ նախքան ավարտելը: Եթե դա կրկնվի, անջատեք %1$s-ը և հայտեք խնդրի մասին՝ կցելով լոգը</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Փաթեթավորողի հիշողությունը սպառվեց %1$s ՄԲ heap-ի դեպքում: Այս հավելվածը չափազանց մեծ է ընտրված փաթեթների համար: Փորձեք փաթեթավորել ավելի քիչ աղբյուրներով կամ ընտրեք ավելի քիչ փաթեթներ</string>
     <string name="install_app_success">Հաջողությամբ տեղադրվեց</string>
@@ -1017,9 +1029,8 @@ morphe_header_custom_dark.png
     <string name="installer_title">Ընտրեք տեղադրողը</string>
     <string name="installer_internal_description">Օգտագործում է Android-ի փաթեթների տեղադրիչը</string>
     <string name="installer_play_store_description">Օգտագործում է համակարգային տեղադրիչը և որպես տեղադրման աղբյուր սահմանում է Google Play Store-ը</string>
+    <string name="installer_root_description">Լռելյայն տեղադրում root-ի միջոցով</string>
     <string name="installer_root_play_store_description">Լռելյայն տեղադրում է root-ի միջոցով և որպես տեղադրման աղբյուր սահմանում է Google Play Store-ը</string>
-    <string name="installer_auto_saved_name">Root մոնտավորում</string>
-    <string name="installer_auto_saved_description">Մոնտավորում է այն հավելվածները, որոնք փոփոխվել են root մոնտավորման ռեժիմում: Ստանդարտ փոփոխված APK-ները օգտագործում են մեկ այլ տեղադրող</string>
     <string name="installer_shizuku_description">Տեղադրում է լռելյայն Shizuku-ի կամ Sui-ի միջոցով</string>
     <string name="installer_shizuku_play_store_description">Լռելյայն տեղադրում է Shizuku-ի կամ Sui-ի միջոցով և որպես տեղադրման աղբյուր սահմանում է Google Play Store-ը</string>
     <string name="installer_option_none">Առանց պահուստային տարբերակի</string>
@@ -1029,7 +1040,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">Այս տարբերակն օգտագործելու համար տեղադրեք Shizuku-ն կամ Sui-ն</string>
     <string name="installer_status_shizuku_not_running">Միացրեք Shizuku-ն կամ Sui-ն և փորձեք նորից</string>
     <string name="installer_status_shizuku_permission">Տրամադրել թույլտվություն Morphe-ին Shizuku հավելվածից</string>
-    <string name="installer_mount_warning_install">Ձեր հիմնական տեղադրողը սահմանված է որպես rooted mount տեղադրող: Այս պահպանված հավելվածը չի տեղադրվել mount-ի միջոցով</string>
+    <string name="installer_mount_warning_install">Պատչի ռեժիմը սահմանված է root mount-ի վրա: Այս պահպանված հավելվածը չի տեղադրվել mount-ի միջոցով</string>
     <string name="mount_version_mismatch_message">Ծնագծային հավելվածի տարբերակը (%2$s) չի համընկնում փոփոխված հավելվածի տարբերակի հետ (%1$s): Միացրեք համապատասխան ծնագծային տարբերակը, ապա փորձեք նորից</string>
     <string name="mount_stock_restore_failed_message">Android-ը մերժեց պահպանված բնօրինակ APK-ն: Տեղադրեք համապատասխան ստանդարտ տարբերակը, ապա կրկին փորձեք Մոնտավորումը</string>
     <string name="installer_status_shizuku_unsupported">Տեղադրված Shizuku-ի տարբերակը չի աջակցվի</string>
@@ -1051,11 +1062,17 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_continue">Հասկացա, շարունակել</string>
     <string name="installer_play_store_mode">Տեղադրել որպես Play Store</string>
     <string name="installer_play_store_mode_description">Նշում է Google Play Store-ը որպես տեղադրման աղբյուր</string>
+    <string name="settings_section_patch_mode">Պատչի ռեժիմ</string>
+    <string name="settings_patch_mode_ask">Հարցնել ամեն անգամ</string>
+    <string name="settings_patch_mode_ask_description">Յուրաքանչյուր հավելվածի պատչավորումից առաջ հարցնում է՝ պատչավորել այն root mount-ի թե ստանդարտ տեղադրման համար</string>
+    <string name="settings_section_after_patching">Պատչավորումից հետո</string>
+    <string name="settings_after_patching_install">Տեղադրել ավտոմատ կերպով</string>
+    <string name="settings_after_patching_ask">Հարցնել տեղադրողի մասին</string>
+    <string name="settings_after_patching_ask_description">Ամեն անգամ հավելված տեղադրելիս հարցնում է, թե որ տեղադրողն օգտագործել</string>
+    <string name="settings_after_patching_manual">Տեղադրել ձեռքով</string>
+    <string name="settings_after_patching_manual_description">Տեղադրվում է լռելյայն տեղադրիչի միջոցով, երբ սեղմում եք «Տեղադրել»</string>
     <string name="settings_nomount_only">Միայն NoMount</string>
     <string name="settings_nomount_only_description">Միացնում է հավելվածները միայն NoMount-ի միջոցով և երբեք չի անցնում bind mount-ին, അതിനാൽ առանց դրա դրանք մնում են անմիացված</string>
-    <string name="settings_prompt_installer_on_install">Տեղադրիչի ընտրության հարցում</string>
-    <string name="settings_prompt_installer_on_install_description">Հարցնում է, թե ինչպես տեղադրել յուրաքանչյուր հավելված. root-ով՝ նախքան պատչավորումը, հակառակ դեպքում՝ դրանից հետո</string>
-    <string name="settings_auto_install_with_shizuku">Ավտոմատ տեղադրում փաթեթավորումից հետո</string>
     <string name="settings_auto_install_with_shizuku_description">Տեղադրում կամ մոնտավորում է պատչավորված APK-ն հենց պատչավորումն ավարտվի</string>
     <string name="settings_auto_uninstall_with_shizuku">Ավտոմատ հեռացում կոնֆլիկտի դեպքում</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Հեռացնում է գոյություն ունեցող հավելվածը ստորագրության կոնֆլիկտի դեպքում: Սա կարող է հեռացնել հավելվածի տվյալները</string>

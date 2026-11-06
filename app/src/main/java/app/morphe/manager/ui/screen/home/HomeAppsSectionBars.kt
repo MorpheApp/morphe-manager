@@ -357,12 +357,9 @@ private fun HomeAppsFooterBars(
     )
 }
 
-/**
- * How the home list is sorted, filtered and grouped: what its options panel offers, and what marks
- * the sort button once any of it is off its default.
- */
+/** How the home list is sorted, filtered and grouped, as its options panel offers it. */
 @Composable
-internal fun homeListOptions(apps: HomeAppListUi, appActions: HomeAppActions): List<ListOptionSection<*>> = listOf(
+private fun homeListOptions(apps: HomeAppListUi, appActions: HomeAppActions): List<ListOptionSection<*>> = listOf(
     listOptionSection(
         R.string.sort, MaterialSymbols.Rounded.Sort.autoMirrored, apps.sortMode, HomeAppSortMode.RECOMMENDED,
         appActions.onSortModeChange

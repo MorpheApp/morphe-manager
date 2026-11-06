@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Paslēpt šo lietotni?</string>
     <string name="home_more_apps_title">Vairāk lietotnes</string>
     <string name="home_more_apps_hide_title">Paslēpt šo karti?</string>
-    <string name="home_more_apps_hide_message">Tā var tikt atgriezta jebkurā laikā Iestatījumos &gt; Izskats &gt; Sākuma ekrāns</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">To to var atgriezci jebkurā laikā sadaļā %1$s</string>
     <string name="home_app_hide_message">Šī lietotne būs paslēpta no galvenā ekrāna. Jūs to varat parādīt atkal vēlāk no paslēpto lietotņu saraksta, izmantojot pogu zem šī saraksta</string>
     <string name="home_app_will_be_hidden">Šī lietotne būs paslēpta</string>
     <string name="home_app_hidden_named">%s slēpts</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Uzticēta atslēga</string>
     <string name="sources_signing_key_new">Jauna atslēga</string>
     <string name="sources_patch_expert_badge">Eksperts</string>
-    <string name="sources_patch_expert_badge_tooltip">Ienablet Eksperta režīmu iestatījumos, lai manuāli pievienotu šo patchu</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Iesaɪciet %1$s, lai manuāli pievienotu šo patchu</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Vai jums ir nepieciešama palīdzība APK meklēšanā?</string>
     <string name="home_apk_availability_dialog_simple">Lai patchedētu &lt;b&gt;%s&lt;/b&gt;, jums nepieciešama nepachedētā APK versija:</string>
@@ -507,7 +509,6 @@ Lai pretendētu uz labākajiem rezultātiem, šī lietotne iesaka patchēt &lt;b
     <string name="shortcut_repatch_long">Atjaunot patched novecotušas aplikācijas</string>
     <string name="shortcut_check_updates_short">Pārbaudīt atjauninājumus</string>
     <string name="shortcut_check_updates_long">Pārbaudīt patch atjauninājumus</string>
-    <string name="shortcut_patch_app">Lapiņot %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Atinstalēt šo lietotni?</string>
     <string name="home_app_info_uninstall_removes_data">Lietotne un tās dati tiekdzēsti no šīs ierīces</string>
@@ -528,6 +529,7 @@ Lai pretendētu uz labākajiem rezultātiem, šī lietotne iesaka patchēt &lt;b
     <string name="home_app_info_install_type_custom_installer">Pielagots instalators</string>
     <string name="home_app_info_install_type_system_installer">Sistēmas instalators</string>
     <string name="home_app_info_install_type_play_store">Play Store instalēšana</string>
+    <string name="home_app_info_install_type_root">Root instalācija</string>
     <string name="home_app_info_install_type_root_play_store">Root Play Store instalēšana</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Store instalēšana</string>
     <string name="home_app_info_patch_update_available">Pieejams patch atjauninājums</string>
@@ -569,7 +571,8 @@ Lai pretendētu uz labākajiem rezultātiem, šī lietotne iesaka patchēt &lt;b
     <string name="root_mount_module_unmount_warning">Ja KernelSU ir ieslēgta opcija \"Unmount modules by default\", atveriet KernelSU &gt; Superuser &gt; lietotne, ko piemontējāt &gt; Profile &gt; Custom un izslēdziet \"Unmount modules\". Pretējā gadījumā piemontētais patchedais APK var neiestāties, pat ja Morphe rāda, ka tas ir piemontēts</string>
     <string name="root_pre_patch_installer_standard_title">Standarta instalēšanas režīms</string>
     <string name="root_pre_patch_installer_standard_description">Atlapiņo kā parastu APK ar GmsCore atbalstu. Jūsu instalētāja iestatījums tiek izmantots pēc atlapiņošanas</string>
-    <string name="root_pre_patch_installer_hint">Tiek pajautāts, ja ir ieslēgts Iestatījumi &gt; Patcheris &gt; Instalēšana &gt; Instalētāja izvēles prompts. Pēc patchēšanas patchēšanas režīmu nevar mainīt</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Jautājums tika uzdots, kamēr %1$s ir iestatīts uz %2$s. Patcha režīmu pēc patchēšanas nevar mainīt</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Kļūda kopēta starpbaferī</string>
     <string name="patcher_error_log">Kļūdu žurnāls</string>
@@ -668,6 +671,14 @@ Deinstalējot tiks neatgriezeniski dzēsti visi lietotnes dati"</string>
     <string name="patcher_step_group_saving">Saglabāšana</string>
     <string name="patcher_step_write_patched">Raksta patched APK failu</string>
     <string name="patcher_step_sign_apk">Parakstām patched APK failu</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Lasa DEX failus</string>
+    <string name="patcher_task_extracting_resources">Izvelk resursus</string>
+    <string name="patcher_task_decoding_resources">Dekodē resursus</string>
+    <string name="patcher_task_indexing_classes">Indeksē klases</string>
+    <string name="patcher_task_compiling_dex">Kompilē DEX failus</string>
+    <string name="patcher_task_compiling_resources">Resursu kompilēšana</string>
+    <string name="patcher_task_writing_apk">APK faila rakstīšana</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Fona patched aizsardzība</string>
     <string name="battery_optimization_dialog_description">Daðas ierīces var apturēt patcher, kad lietotne ir minimizēta. Atļaujiet Morphe darboties bez akumulatora ierobežojumiem, lai nodrošinātu uzticamu patching pabeigšanu</string>
@@ -716,7 +727,8 @@ Deinstalējot tiks neatgriezeniski dzēsti visi lietotnes dati"</string>
     <string name="patched_app_save_failed_toast">Neizdevās saglabāt laboto lietotni</string>
     <string name="plugin_activity_dialog_body">Lai turpinātu ar šo papildinājumu, nepieciešama lietotāja mijiedarbība</string>
     <string name="patcher_process_killed_message">Sistēma aptura patcheru, pirms tas pabeidza darbu, parasti, lai atbrīvotu atmiņu. Aizveriet citas lietotnes un mēģiniet vēlreiz</string>
-    <string name="patcher_process_crashed_message">Lapiņotājs avārsējās, pirms noslēgza darbu. Ja tas atkārtojas, izslēdziet \"Izmantot iebūvēto VM\" iestatījumos un ziņojiet par problēmu, pievienojot žurnālu</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Patcher programma avārotās, pirms tā pabeidza darbu. Ja tas atkārtojas, izslēdziet %1$s un ziņojiet par problēmu, pievienojot logfailu</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Patcheram izbeidzās atmiņa ar %1$s MB krāju. Šī lietotne ir pārāk liela izvēlētajiem patchiem. Mēģiniet veikt patchingu ar mazāku patchu avotu skaitu vai izvēlieties mazāk patchu</string>
     <string name="install_app_success">Veiksmīgi instalēts</string>
@@ -1016,9 +1028,8 @@ Attēla izmēri jābūt šādiem:
     <string name="installer_title">Izvēlieties instalatoru</string>
     <string name="installer_internal_description">Izmanto Android pakauju instalatoru</string>
     <string name="installer_play_store_description">Izmanto sistēmas instalatoru un Google Play Store iestatīja kā instalācijas avotu</string>
+    <string name="installer_root_description">Klusi instalē, izmantojot root</string>
     <string name="installer_root_play_store_description">Klusi instalē, izmantojot root, un Google Play Store iestatīja kā instalācijas avotu</string>
-    <string name="installer_auto_saved_name">Root montēšana</string>
-    <string name="installer_auto_saved_description">Montē lietotnes, kas tika patched root montēšanas režīmā. Standarta patched APK izmanto citu instalatoru</string>
     <string name="installer_shizuku_description">Instalē klusi, izmantojot Shizuku vai Sui</string>
     <string name="installer_shizuku_play_store_description">Klusi instalē caur Shizuku vai Sui un Google Play Store iestatīja kā instalācijas avotu</string>
     <string name="installer_option_none">Nav rezervā</string>
@@ -1028,7 +1039,7 @@ Attēla izmēri jābūt šādiem:
     <string name="installer_status_shizuku_not_installed">Lai izmantotu šo opciju, instalējiet Shizuku vai Sui</string>
     <string name="installer_status_shizuku_not_running">Sakiet Shizuku vai Sui un mēģiniet vēlreiz</string>
     <string name="installer_status_shizuku_permission">Piešķiriet atļauju Morphe Shizuku lietotnē</string>
-    <string name="installer_mount_warning_install">Jūsu galvenais instalators ir iestatīts uz root mount instalatoru. Šī saglabātā lietotne netika instalēta, izmantojot mount</string>
+    <string name="installer_mount_warning_install">Lapa režīms ir iestatīts uz root mount. Šī saglabātā lietotne netika instalēta, izmantojot mount</string>
     <string name="mount_version_mismatch_message">Oriģinālās lietotnes versija (%2$s) nesakrīt ar patched lietotnes versiju (%1$s). Veiciet mount atbilstošajai oriģinālajai versijai un pēc tam mēģiniet vēlreiz</string>
     <string name="mount_stock_restore_failed_message">Android noraidīja saglabāto oriģinālo APK. Instalējiet atbilstošo stock versiju, pēc tam mēģiniet montēt vēlreiz</string>
     <string name="installer_status_shizuku_unsupported">Instalētā Shizuku versija netiek atbalstīta</string>
@@ -1050,11 +1061,17 @@ Attēla izmēri jābūt šādiem:
     <string name="installer_play_store_warning_continue">Es saprotu, turpināt</string>
     <string name="installer_play_store_mode">Instalēt kā Play Store</string>
     <string name="installer_play_store_mode_description">Atzīmē Google Play veikalu kā instalācijas avotu</string>
+    <string name="settings_section_patch_mode">Lapa režīms</string>
+    <string name="settings_patch_mode_ask">Jāprasa katru reizi</string>
+    <string name="settings_patch_mode_ask_description">Pirms katras lietotnes lapa procesa jautā, vai to lapatu root mount vai standartizētai instalācijai</string>
+    <string name="settings_section_after_patching">Pēc lapa procesa</string>
+    <string name="settings_after_patching_install">Instalēt automātiski</string>
+    <string name="settings_after_patching_ask">Jāprasa, kuru instalatoru izmantot</string>
+    <string name="settings_after_patching_ask_description">Katru reizi, kad tiek instalēta lietotne, jautā, kuru instalatoru izmantot</string>
+    <string name="settings_after_patching_manual">Instalēt manuāli</string>
+    <string name="settings_after_patching_manual_description">Instalē ar noklūsojošo instalatoru, kad nospiežat Install</string>
     <string name="settings_nomount_only">Tikai NoMount</string>
     <string name="settings_nomount_only_description">Montē lietotnes tikai ar NoMount un nekad neatgriežas pie bind mount, tāpēc tās paliek nemontētas bez tā</string>
-    <string name="settings_prompt_installer_on_install">Instalatora izvēles azaņa</string>
-    <string name="settings_prompt_installer_on_install_description">Katrai lietotnei jautā, kā instalēt: ar root tiesībām pirms patchēšanas, pretējā gadījumā pēc tās</string>
-    <string name="settings_auto_install_with_shizuku">Auto-instalācija pēc patchēšanas</string>
     <string name="settings_auto_install_with_shizuku_description">Instalē vai montē patchēto APK tiklīdz patchēšana ir pabeigta</string>
     <string name="settings_auto_uninstall_with_shizuku">Auto-deinstalēšana konflikta gadījumā</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Atinstalē esošo lietotni paraksta konflikta gadījumā. Tas var izdzēst lietotnes datus</string>

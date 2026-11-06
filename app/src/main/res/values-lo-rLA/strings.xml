@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">ເຊື່ອງແອັບນີ້ບໍ?</string>
     <string name="home_more_apps_title">ແອັບເພີ່ມເຕີມ</string>
     <string name="home_more_apps_hide_title">ເຊື່ອງບັດນີ້ບໍ?</string>
-    <string name="home_more_apps_hide_message">ທ່ານສາມາດນຳມັນກັບຄືນມາໄດ້ທຸກເວລາໃນ ການຕັ້ງຄ່າ &gt; ຮູບລັກສະນະ &gt; ໜ້າຈໍຫຼັກ</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">ທ່ານສາມາດນຳມັນກັບຄືນມາໄດ້ທຸກເວລາໃນ %1$s</string>
     <string name="home_app_hide_message">ແອັບນີ້ຈະຖືກເຊື່ອງຈາກໜ້າຫຼັກ. ທ່ານສາມາດກູ້ຄືນມັນໄດ້ໃນພາຍຫຼັງຈາກລາຍການແອັບທີ່ເຊື່ອງໄວ້ໂດຍໃຊ້ປຸ່ມຢູ່ລຸ່ມສຸດຂອງລາຍການ</string>
     <string name="home_app_will_be_hidden">ແອັບນີ້ຈະຖືກເຊື່ອງ</string>
     <string name="home_app_hidden_named">%s ຖືກເຊື່ອງໄວ້</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">ຄີທີ່ເຊື່ອໝັ້ນໄດ້</string>
     <string name="sources_signing_key_new">ຄີໃໝ່</string>
     <string name="sources_patch_expert_badge">ຜູ້ຊ່ຽວຊານ</string>
-    <string name="sources_patch_expert_badge_tooltip">ເປີດໂໝດຜູ້ຊ່ຽວຊານໃນການຕັ້ງຄ່າເພື່ອລວມຊຸດແພດນີ້ດ້ວຍຕົນເອງ</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">ເປີດ %1$s ເພື່ອລວມແພັດນີ້ດ້ວຍຕົນເອງ</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">ຕ້ອງການຄວາມຊ່ວຍເຫຼືອໃນການຊອກຫາ APK ບໍ່?</string>
     <string name="home_apk_availability_dialog_simple">ເພື່ອແພດ &lt;b&gt;%s&lt;/b&gt;, ທ່ານຕ້ອງການເວີຊັນ APK ທີ່ຍັງບໍ່ໄດ້ແພດ:</string>
@@ -508,7 +510,6 @@
     <string name="shortcut_repatch_long">ແພັດແອັບທີ່ລ້າສະໄໝຄືນໃໝ່</string>
     <string name="shortcut_check_updates_short">ກວດສອບການອັບເດດ</string>
     <string name="shortcut_check_updates_long">ກວດສອບການອັບເດດຂອງແພັດ</string>
-    <string name="shortcut_patch_app">ແພັດ %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">ຖອນການຕິດຕັ້ງແອັບນີ້ບໍ່?</string>
     <string name="home_app_info_uninstall_removes_data">ແອັບ ແລະ ຂໍ້ມູນຂອງມັນຈະຖືກລຶບອອກຈາກອຸປະກອນນີ້</string>
@@ -529,6 +530,7 @@
     <string name="home_app_info_install_type_custom_installer">ຕົວຕິດຕັ້ງທີ່ກຳນົດເອງ</string>
     <string name="home_app_info_install_type_system_installer">ຕົວຕິດຕັ້ງລະບົບ</string>
     <string name="home_app_info_install_type_play_store">ການຕິດຕັ້ງຜ່ານ Play Store</string>
+    <string name="home_app_info_install_type_root">ຕິດຕັ້ງແບບ Root</string>
     <string name="home_app_info_install_type_root_play_store">ການຕິດຕັ້ງ Play Store ຜ່ານ root</string>
     <string name="home_app_info_install_type_shizuku_play_store">ການຕິດຕັ້ງ Play Store ຜ່ານ Shizuku</string>
     <string name="home_app_info_patch_update_available">ມີອັບເດດຊຸດແພດ</string>
@@ -570,7 +572,8 @@
     <string name="root_mount_module_unmount_warning">ຖ້າ KernelSU ເປີດ \"Unmount modules by default\" ໄວ້, ໃຫ້ເປີດ KernelSU &gt; Superuser &gt; ແອັບທີ່ທ່ານ mount &gt; Profile &gt; Custom ແລະ ປິດ \"Unmount modules\". ຖ້າບໍ່ດັ່ງນັ້ນ, APK ທີ່ຖືກ patch ແລະ mount ອາດຈະບໍ່ມີຜົນ, ເຖິງແມ່ນວ່າ Morphe ຈະສະແດງວ່າມັນຖືກ mount ແລ້ວກໍຕາມ</string>
     <string name="root_pre_patch_installer_standard_title">ໂໝດການຕິດຕັ້ງມາດຕະຖານ</string>
     <string name="root_pre_patch_installer_standard_description">ປັບແຕ່ງເປັນ APK ປົກກະຕິ ພ້ອມດ້ວຍການຮອງຮັບ GmsCore. ການຕັ້ງຄ່າຕົວຕິດຕັ້ງຂອງທ່ານຈະຖືກນຳໃຊ້ຫຼັງຈາກການປັບແຕ່ງ</string>
-    <string name="root_pre_patch_installer_hint">ຖືກຖາມໃນຂະນະທີ່ Settings &gt; Patching &gt; Installation &gt; Installer selection prompt ເປີດໃຊ້ງານຢູ່. ໂໝດການປັບແກ້ບໍ່ສາມາດປ່ຽນໄດ້ຫຼັງຈາກການປັບແກ້</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">ຖືກຖາມໃນຂະນະທີ່ %1$s ຖືກຕັ້ງຄ່າເປັນ %2$s. ໂໝດການແພັດບໍ່ສາມາດປ່ຽນແປງໄດ້ຫຼັງຈາກການແພັດ</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">ສຳເນົາຂໍ້ຜິດພາດໃສ່ຄລິບບອດແລ້ວ</string>
     <string name="patcher_error_log">ບັນທຶກຂໍ້ຜິດພາດ</string>
@@ -669,6 +672,14 @@
     <string name="patcher_step_group_saving">ກຳລັງບັນທຶກ</string>
     <string name="patcher_step_write_patched">ກຳລັງຂຽນໄຟລ໌ APK ທີ່ແພດແລ້ວ</string>
     <string name="patcher_step_sign_apk">ກຳລັງເຊັນໄຟລ໌ APK ທີ່ແພດແລ້ວ</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">ກຳລັງອ່ານໄຟລ໌ DEX</string>
+    <string name="patcher_task_extracting_resources">ກຳລັງສະກັດຊັບພະຍາກອນ</string>
+    <string name="patcher_task_decoding_resources">ກຳລັງຖອດລະຫັດຊັບພະຍາກອນ</string>
+    <string name="patcher_task_indexing_classes">ກຳລັງສ້າງດັດສະນີຂອງຄລາດ</string>
+    <string name="patcher_task_compiling_dex">ກຳລັງຄອມໄພລ໌ DEX</string>
+    <string name="patcher_task_compiling_resources">ກຳລັງລວມຊັບພະຍາກອນ</string>
+    <string name="patcher_task_writing_apk">ກຳລັງຂຽນໄຟລ໌ APK</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">ການປ້ອງກັນການແພດໃນພື້ນຫຼັງ</string>
     <string name="battery_optimization_dialog_description">ບາງອຸປະກອນອາດຢຸດຕົວແພດເມື່ອແອັບຖືກຍ່ອຍ. ອະນຸຍາດໃຫ້ Morphe ເຮັດວຽກໂດຍບໍ່ມີຂໍ້ຈຳກັດແບັດເຕີຣີເພື່ອໃຫ້ການແພດສຳເລັດຢ່າງໜ້າເຊື່ອຖື</string>
@@ -717,7 +728,8 @@
     <string name="patched_app_save_failed_toast">ບັນທຶກແອັບທີ່ແພດແລ້ວລົ້ມເຫຼວ</string>
     <string name="plugin_activity_dialog_body">ຕ້ອງມີການໂຕ້ຕອບຈາກຜູ້ໃຊ້ເພື່ອດຳເນີນການກັບປລັກອິນນີ້</string>
     <string name="patcher_process_killed_message">ລະບົບໄດ້ຢຸດ patcher ກ່ອນທີ່ມັນຈະສຳເລັດ, ປົກກະຕິແມ່ນເພື່ອຄືນໜ່ວຍຄວາມຈຳ. ກະລຸນາປິດແອັບອື່ນໆ ແລະ ລອງໃໝ່</string>
-    <string name="patcher_process_crashed_message">ຕົວປັບປຸງຫຼຸດກ່ອນທີ່ຈະສຳເລັດ. ຖ້າມັນເກີດຂຶ້ນອີກ, ໃຫ້ປິດ \"Use embedded VM\" ໃນການຕັ້ງຄ່າ ແລະ ລາຍງານບັນຫາດັ່ງກ່າວພ້ອມກັບ log</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">ຕົວແພັດຢຸດເຮັດວຽກກ່ອນທີ່ຈະສຳເລັດ. ຖ້າຫາກເກີດຂຶ້ນອີກ, ໃຫ້ປິດ %1$s ແລະ ລາຍງານບັນຫານີ້ພ້ອມກັບບົດບັນທຶກ</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Patcher ໝົດໜ່ວຍຄວາມຈຳດ້ວຍ heap %1$s MB. ແອັບນີ້ມີຂະໜາດໃຫຍ່ເກີນໄປສຳລັບ patch ທີ່ເລືອກ. ລອງ patch ດ້ວຍແຫຼ່ງ patch ທີ່ໜ້ອຍລົງ, ຫຼື ເລືອກ patch ໃຫ້ໜ້ອຍລົງ</string>
     <string name="install_app_success">ຕິດຕັ້ງສຳເລັດ</string>
@@ -1017,9 +1029,8 @@ morphe_header_custom_dark.png
     <string name="installer_title">ເລືອກຕົວຕິດຕັ້ງ</string>
     <string name="installer_internal_description">ໃຊ້ຕົວຕິດຕັ້ງແພັກເກັດຂອງ Android</string>
     <string name="installer_play_store_description">ໃຊ້ຕົວຕິດຕັ້ງລະບົບ ແລະຕັ້ງ Google Play Store ເປັນແຫຼ່ງຕິດຕັ້ງ</string>
+    <string name="installer_root_description">ຕິດຕັ້ງແບບງຽບໆດ້ວຍ root</string>
     <string name="installer_root_play_store_description">ຕິດຕັ້ງແບບງຽບໆດ້ວຍ root ແລະຕັ້ງ Google Play Store ເປັນແຫຼ່ງຕິດຕັ້ງ</string>
-    <string name="installer_auto_saved_name">ຣູດ მაውን (Root mount)</string>
-    <string name="installer_auto_saved_description">Mount ແອັບທີ່ຖືກປັບແຕ່ງໃນໂໝດ root mount. APK ທີ່ຖືກປັບແຕ່ງແບບມາດຕະຖານຈະໃຊ້ຕົວຕິດຕັ້ງອື່ນ</string>
     <string name="installer_shizuku_description">ຕິດຕັ້ງແບບງຽບໆໂດຍໃຊ້ Shizuku ຫຼື Sui</string>
     <string name="installer_shizuku_play_store_description">ຕິດຕັ້ງແບບງຽບໆຜ່ານ Shizuku ຫຼື Sui ແລະຕັ້ງ Google Play Store ເປັນແຫຼ່ງຕິດຕັ້ງ</string>
     <string name="installer_option_none">ບໍ່ມີຕົວສຳຮອງ</string>
@@ -1029,7 +1040,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">ຕິດຕັ້ງ Shizuku ຫຼື Sui ເພື່ອໃຊ້ຕົວເລືອກນີ້</string>
     <string name="installer_status_shizuku_not_running">ເປີດ Shizuku ຫຼື Sui ແລ້ວລອງໃໝ່</string>
     <string name="installer_status_shizuku_permission">ອະນຸຍາດສິດໃຫ້ Morphe ຈາກແອັບ Shizuku</string>
-    <string name="installer_mount_warning_install">ຕົວຕິດຕັ້ງຫຼັກຂອງທ່ານຖືກຕັ້ງເປັນຕົວຕິດຕັ້ງແບບ root mount. ແອັບທີ່ບັນທຶກໄວ້ນີ້ບໍ່ໄດ້ຕິດຕັ້ງແບບແນບ</string>
+    <string name="installer_mount_warning_install">ໂໝດການ Patch ຖືກຕັ້ງເປັນ root mount. ແອັບທີ່ບັນທຶກໄວ້ນີ້ບໍ່ໄດ້ຖືກຕິດຕັ້ງໂດຍໃຊ້ mount</string>
     <string name="mount_version_mismatch_message">ເວີຊັນແອັບຕົ້ນສະບັບ (%2$s) ບໍ່ກົງກັບເວີຊັນແອັບທີ່ແພດແລ້ວ (%1$s). ແນບເວີຊັນຕົ້ນສະບັບທີ່ກົງກັນ, ແລ້ວລອງໃໝ່</string>
     <string name="mount_stock_restore_failed_message">Android ປະຕິເສດ APK ຕົ້ນສະບັບທີ່ບັນທຶກໄວ້. ກະລຸນາຕິດຕັ້ງເວີຊັນດັ້ງເດີມທີ່ກົງກັນ, ຈາກນັ້ນລອງ Mount ອີກຄັ້ງ</string>
     <string name="installer_status_shizuku_unsupported">ເວີຊັນ Shizuku ທີ່ຕິດຕັ້ງໄວ້ບໍ່ຮອງຮັບ</string>
@@ -1051,11 +1062,17 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_continue">ຂ້ອຍເຂົ້າໃຈ, ສືບຕໍ່</string>
     <string name="installer_play_store_mode">ຕິດຕັ້ງເປັນ Play Store</string>
     <string name="installer_play_store_mode_description">ກຳນົດໃຫ້ Google Play Store ເປັນແຫຼ່ງຕິດຕັ້ງ</string>
+    <string name="settings_section_patch_mode">ໂໝດການ Patch</string>
+    <string name="settings_patch_mode_ask">ຖາມທຸກຄັ້ງ</string>
+    <string name="settings_patch_mode_ask_description">ຖາມກ່ອນການ Patch ແຕ່ລະແອັບວ່າຈະ Patch ມັນສຳລັບ root mount ຫຼື ການຕິດຕັ້ງແບບມາດຕະຖານ</string>
+    <string name="settings_section_after_patching">ຫຼັງຈາກການ Patch</string>
+    <string name="settings_after_patching_install">ຕິດຕັ້ງໂດຍອັດຕະໂນມັດ</string>
+    <string name="settings_after_patching_ask">ຖາມວ່າຈະໃຊ້ຕົວຕິດຕັ້ງໃດ</string>
+    <string name="settings_after_patching_ask_description">ຖາມວ່າຈະໃຊ້ຕົວຕິດຕັ້ງໃດທຸກຄັ້ງທີ່ມີການຕິດຕັ້ງແອັບ</string>
+    <string name="settings_after_patching_manual">ຕິດຕັ້ງດ້ວຍຕົນເອງ</string>
+    <string name="settings_after_patching_manual_description">ຕິດຕັ້ງດ້ວຍຕົວຕິດຕັ້ງເລີ່ມຕົ້ນເມື່ອທ່ານແຕະ ຕິດຕັ້ງ</string>
     <string name="settings_nomount_only">ສະເພາະ NoMount ເທົ່ານັ້ນ</string>
     <string name="settings_nomount_only_description">ຕິດຕັ້ງແອັບດ້ວຍ NoMount ເທົ່ານັ້ນ ແລະ ຈະບໍ່ກັບໄປໃຊ້ bind mount, ດັ່ງນັ້ນພວກມັນຈະບໍ່ຖືກຕິດຕັ້ງໂດຍບໍ່ມີມັນ</string>
-    <string name="settings_prompt_installer_on_install">ການແຈ້ງເຕືອນໃຫ້ເລືອກຕົວຕິດຕັ້ງ</string>
-    <string name="settings_prompt_installer_on_install_description">ຖາມວິທີການຕິດຕັ້ງທຸກແອັບ: ດ້ວຍ root ກ່ອນການປັບແກ້, ຖ້າບໍ່ດັ່ງນັ້ນແມ່ນຫຼັງຈາກນັ້ນ</string>
-    <string name="settings_auto_install_with_shizuku">ຕິດຕັ້ງອັດຕະໂນມັດຫຼັງຈາກແພດ</string>
     <string name="settings_auto_install_with_shizuku_description">ຕິດຕັ້ງ ຫຼື ມައウント APK ທີ່ຖືກປັບແກ້ທັນທີທີ່ການປັບແກ້ສຳເລັດ</string>
     <string name="settings_auto_uninstall_with_shizuku">ຖອນການຕິດຕັ້ງອັດຕະໂນມັດເມື່ອມີຄວາມຂັດແຍ່ງ</string>
     <string name="settings_auto_uninstall_with_shizuku_description">ຖອນການຕິດຕັ້ງແອັບທີ່ມີຢູ່ເມື່ອເກີດຄວາມຂັດແຍ້ງຂອງລາຍເຊັນ. ສິ່ງນີ້ອາດຈະລຶບຂໍ້ມູນຂອງແອັບ</string>

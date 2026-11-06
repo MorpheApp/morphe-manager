@@ -48,6 +48,7 @@ import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.util.*
 import app.morphe.manager.util.PatchSelectionUtils.restrictTo
+import app.morphe.patcher.PatcherTask
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.NonCancellable
@@ -58,6 +59,9 @@ import java.nio.file.StandardCopyOption
 import kotlin.time.measureTime
 
 typealias ProgressEventHandler = (name: String?, state: State?, message: String?) -> Unit
+
+/** Called from the threads of the patcher, so it must be thread-safe. */
+typealias TaskProgressHandler = (task: PatcherTask, done: Long, total: Long) -> Unit
 
 class PatcherWorker(
     context: Context,
@@ -93,6 +97,8 @@ class PatcherWorker(
         val onPatchingRestarted: suspend () -> Unit,
         val setInputFile: suspend (File, Boolean, Boolean) -> Unit,
         val onProgress: ProgressEventHandler,
+        /** How far the patcher got with the work it does besides executing patches. */
+        val onTaskProgress: TaskProgressHandler,
         val patchSources: List<PatchSourceRef> = emptyList(),
         /**
          * Batch runs announce the whole queue once instead of every app, so the completion
@@ -390,6 +396,7 @@ class PatcherWorker(
                 onPatchCompleted,
                 args.onPatchFailed,
                 ::updateProgress,
+                args.onTaskProgress,
                 stripNativeLibs,
                 onMergedApkReady.takeUnless { args.useMount }
             )
@@ -430,9 +437,14 @@ class PatcherWorker(
         } catch (e: PatcherKilledException) {
             Log.e(tag, "Patcher process ended: ${e.reason}".logFmt(), e)
             args.logger.error("Patcher process ended: ${e.reason}")
-            val message = applicationContext.getString(
-                if (e.crashed) R.string.patcher_process_crashed_message else R.string.patcher_process_killed_message
-            )
+            val message = if (e.crashed) {
+                applicationContext.getString(
+                    R.string.patcher_process_crashed_message,
+                    applicationContext.settingsPath(R.string.settings_section_patcher, R.string.settings_system_jvm_runtime_enable)
+                )
+            } else {
+                applicationContext.getString(R.string.patcher_process_killed_message)
+            }
             updateProgress(state = State.FAILED, message = message)
             Result.failure(
                 workDataOf(FAILURE_MESSAGE_KEY to message)

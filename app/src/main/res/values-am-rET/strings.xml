@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">ይህንን መተግበሪያ ይደብቁ?</string>
     <string name="home_more_apps_title">ተጨማሪ መተግበሪያዎች</string>
     <string name="home_more_apps_hide_title">ይህንን ካርድ ደብቅ?</string>
-    <string name="home_more_apps_hide_message">በማንኛውም ጊዜ በቅንብሮች &gt; ገጽታ &gt; የቤት ስክሪን ውስጥ መልሰው ሊያመጡት ይችላሉ</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">በማንኛውም ጊዜ በ %1$s ይመልሱት ይችላሉ</string>
     <string name="home_app_hide_message">ይህ መተግበሪያ ከቤት ስክሪኑ ላይ ይደበቃል። በኋላ ላይ ከዝርዝሩ ግርጌ ባለው ቁልፍ በመጠቀም ከተደበቁ መተግበሪያዎች ውስጥ መልሰው ማግኘት ይችላሉ</string>
     <string name="home_app_will_be_hidden">ይህ መተግበሪያ ይደበቃል</string>
     <string name="home_app_hidden_named">%s ተደብቋል</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">የታመነ ቁልፍ</string>
     <string name="sources_signing_key_new">አዲስ ቁልፍ</string>
     <string name="sources_patch_expert_badge">ባለሙያ</string>
-    <string name="sources_patch_expert_badge_tooltip">ይህንን ፓች በእጅ ለማካተት በቅንብሮች ውስጥ የባለሙያ ሁነታን ያብሩ</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">ይህንን ፓች በእጅ ለማካተት %1$s ያብሩ</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">APK-ውን ለማግኘት እርዳታ ይፈልጋሉ?</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt;ን ፓች ለማድረግ፣ ያልተፓች APK ስሪት ያስፈልግዎታል፦</string>
@@ -508,7 +510,6 @@
     <string name="shortcut_repatch_long">ያረጁ መተግበሪያዎችን እንደገና ፓች አድርግ</string>
     <string name="shortcut_check_updates_short">አዳኝነቶችን ፈትሽ</string>
     <string name="shortcut_check_updates_long">የፓች ማሻሻያዎችን ያረጋግጡ</string>
-    <string name="shortcut_patch_app">%sን ፓች ያድርጉ</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">ይህንን መተግበሪያ ያጥፉ?</string>
     <string name="home_app_info_uninstall_removes_data">መተግበሪያው እና መረጃዎቹ ከዚህ መሳሪያ ላይ ይወገዳሉ</string>
@@ -529,6 +530,7 @@
     <string name="home_app_info_install_type_custom_installer">ብጁ መጫኛ</string>
     <string name="home_app_info_install_type_system_installer">የስርዓት መጫኛ</string>
     <string name="home_app_info_install_type_play_store">የPlay Store ጭነት</string>
+    <string name="home_app_info_install_type_root">የRoot ተከላ</string>
     <string name="home_app_info_install_type_root_play_store">Root Play Store ጭነት</string>
     <string name="home_app_info_install_type_shizuku_play_store">የShizuku Play Store ጭነት</string>
     <string name="home_app_info_patch_update_available">የፓች ማሻሻያ ይገኛል</string>
@@ -570,7 +572,8 @@
     <string name="root_mount_module_unmount_warning">KernelSU \"Unmount modules by default\" የሚለው በርቶ ከሆነ፣ KernelSU &gt; Superuser &gt; የጫኑት መተግበሪያ &gt; Profile &gt; Custom ውስጥ በመግባት \"Unmount modules\" የሚለውን ያጥፉ። አለበለዚያ፣ Morphe እንደተጫነ ቢያሳይም የተጫነው የተስተካከለ APK ውጤታማ ላይሆን ይችላል</string>
     <string name="root_pre_patch_installer_standard_title">መደበኛ የጫን ዘዴ</string>
     <string name="root_pre_patch_installer_standard_description">ከGmsCore ድጋፍ ጋር እንደ መደበኛ APK ፓች ያደርጋል። ከፓቺንግ በኋላ የእርስዎ የጫን መጋጠሚያ ቅንጅት ጥቅም ላይ ይውላል</string>
-    <string name="root_pre_patch_installer_hint">Settings &gt; Patching &gt; Installation &gt; Installer selection prompt ሲበራ ይጠየቃል። ከፓቺንግ በኋላ የፓች ሞድ መቀየር አይቻልም</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">%1$s ወደ %2$s ተቀይሮ ሳለ ተጠይቋል። ከፓቺንግ በኋላ የፓች ሞዱን መቀየር አይቻልም</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">ስህተቱ ወደ ክሊፕቦርድ ተቀዳ</string>
     <string name="patcher_error_log">የስህተት መዝገብ</string>
@@ -669,6 +672,14 @@
     <string name="patcher_step_group_saving">በማስቀመጥ ላይ</string>
     <string name="patcher_step_write_patched">የተስተካከለውን የ APK ፋይል በመጻፍ ላይ</string>
     <string name="patcher_step_sign_apk">የተስተካከለውን የ APK ፋይል በመፈረም ላይ</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">DEX ፋይሎችን ማንበብ</string>
+    <string name="patcher_task_extracting_resources">ሀብቶችን ማውጣት</string>
+    <string name="patcher_task_decoding_resources">ሀብቶችን ዲኮድ ማድረግ</string>
+    <string name="patcher_task_indexing_classes">ክላሶችን ኢንዴክስ ማድረግ</string>
+    <string name="patcher_task_compiling_dex">DEX ፋይሎችን ማጠናቀር</string>
+    <string name="patcher_task_compiling_resources">ሀብቶችን በማጠናቀር ላይ</string>
+    <string name="patcher_task_writing_apk">የ APK ፋይል እየጻፈ ነው</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">የዳራ ጥገና ጥበቃ</string>
     <string name="battery_optimization_dialog_description">አንዳንድ መሳሪያዎች መተግበሪያው ሲቀንስ ጥገናውን ሊያቋርጡ ይችላሉ። ጥገናው በልበ ሙሉነት መጠናቀቁን ለማረጋገጥ Morphe ያለ ባትሪ ገደቦች እንዲሰራ ይፍቀዱ</string>
@@ -717,7 +728,8 @@
     <string name="patched_app_save_failed_toast">የተፓች አፑን ለማስቀመጥ አልተሳካም</string>
     <string name="plugin_activity_dialog_body">በዚህ ፕለጊን ለመቀጠል የተጠቃሚ መስተጋብር ያስፈልጋል</string>
     <string name="patcher_process_killed_message">ሲስተሙ ፓቸሩን ሳይጨርስ አቋርጦታል፣ አብዛኛውን ጊዜ ይህ የሚሆነው ሜሞሪን ነፃ ለማድረግ ነው። ሌሎች አፕሊኬሽኖችን ይዝጉ እና እንደገና ይሞክሩ</string>
-    <string name="patcher_process_crashed_message">ፓቸሩ ከመጠናቀቁ በፊት ተቋርጧል። ይህ እንደገና ከተከሰተ፣ በቅንብሮች ውስጥ \"Use embedded VM\" የሚለውን ያጥፉ እና ችግሩን ከሎጉ ጋር ሪፖርት ያድርጉ</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">ፓቸሩ ከመጠናቀቁ በፊት ተቋርጧል። ይህ እንደገና ከተከሰተ፣ %1$s ያጥፉ እና ችግሩን በሎግ ሪፖርት ያድርጉ</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">ፓቸሩ በ %1$s MB ሂፕ ሜሞሪ አቅም አልቋል። ይህ አፕሊኬሽን ለተመረጡት ፓቾች በጣም ትልቅ ነው። በጥቂት የፓች ምንጮች በመጠቀም ይሞክሩ፣ ወይም ጥቂት ፓቾችን ይምረጡ</string>
     <string name="install_app_success">በስኬት ተጭኗል</string>
@@ -1017,9 +1029,8 @@ morphe_header_custom_dark.png
     <string name="installer_title">ጫናኝን ይምረጡ</string>
     <string name="installer_internal_description">የአንድሮይድ ፓኬጅ ኢንስታለርን ይጠቀማል</string>
     <string name="installer_play_store_description">የስርዓቱን ጭነት ተጠቃሚ ይሆናል እና Google Play Storeን እንደ ጭነት ምንጭ ያደርጋል</string>
+    <string name="installer_root_description">በroot በዝምታ ይጫናል</string>
     <string name="installer_root_play_store_description">በroot በዝምታ ይጭናል እና Google Play Storeን እንደ ጭነት ምንጭ ያደርጋል</string>
-    <string name="installer_auto_saved_name">ሩት ማውንት</string>
-    <string name="installer_auto_saved_description">በroot mount ሁኔታ ፓች የተደረጉ አፖችን ይጭናል። መደበኛ ፓች የተደረጉ APKዎች ሌላ ጫን ይጠቀማሉ</string>
     <string name="installer_shizuku_description">በShizuku ወይም Sui በመጠቀም በዝምታ ይጭናል</string>
     <string name="installer_shizuku_play_store_description">በShizuku ወይም በSui በዝምታ ይጭናል እና Google Play Storeን እንደ ጭነት ምንጭ ያደርጋል</string>
     <string name="installer_option_none">ምንም አማራጭ የለም</string>
@@ -1029,7 +1040,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">ይህንን አማራጭ ለመጠቀም Shizuku ወይም Sui ይጫኑ</string>
     <string name="installer_status_shizuku_not_running">Shizuku ወይም Suiን ያስጀምሩ እና እንደገና ይሞክሩ</string>
     <string name="installer_status_shizuku_permission">ከ Shizuku መተግበሪያ ውስጥ ለ Morphe ፈቃድ ይስጡ</string>
-    <string name="installer_mount_warning_install">ዋናው መጫኛዎ ወደ rooted mount installer ተቀይሯል። ይህ የተቀመጠ መተግበሪያ በ mount ተጠቅሞ አልተጫነም</string>
+    <string name="installer_mount_warning_install">የፓች ሞዱ root mount ላይ ተጥሏል። ይህ የተቀመጠ መተግበሪያ በmount ስላልተጫነ</string>
     <string name="mount_version_mismatch_message">የመጀመሪያው የመተግበሪያ ስሪት (%2$s) ከተስተካከለው የመተግበሪያ ስሪት (%1$s) ጋር አይዛመድም። ተዛማጅ የሆነውን የመጀመሪያ ስሪት mount ያድርጉ፣ ከዚያ እንደገና ይሞክሩ</string>
     <string name="mount_stock_restore_failed_message">አንድሮይድ የተቀመጠውን ኦሪጅናል APK ውድቅ አድርጓል። የሚዛመደውን stock ስሪት ይጫኑ፣ ከዚያም Mountን እንደገና ይሞክሩ</string>
     <string name="installer_status_shizuku_unsupported">የተጫነው የ Shizuku ስሪት ተቀባይነት የለውም</string>
@@ -1051,11 +1062,17 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_continue">ተረድቻለሁ፣ ቀጥል</string>
     <string name="installer_play_store_mode">እንደ Play Store ይጫን</string>
     <string name="installer_play_store_mode_description">የመጫኛ ምንጩን እንደ Google Play Store ያደርገዋል</string>
+    <string name="settings_section_patch_mode">የፓች ሞድ</string>
+    <string name="settings_patch_mode_ask">ሁልጊዜ ጠይቅ</string>
+    <string name="settings_patch_mode_ask_description">እያንዳንዱን መተግበሪያ ከፓቺንግ በፊት ለroot mount ወይም ለተራ ጭነት ፓች እንዲደረግ ይጠይቃል</string>
+    <string name="settings_section_after_patching">ከፓቺንግ በኋላ</string>
+    <string name="settings_after_patching_install">በራስ-ሰር ጫን</string>
+    <string name="settings_after_patching_ask">የትኛው ኢንስታለር እንደሆነ ይጠይቅ</string>
+    <string name="settings_after_patching_ask_description">መተግበሪያ በጫነ ቁጥር የትኛውን ኢንስታለር መጠቀም እንዳለበት ይጠይቃል</string>
+    <string name="settings_after_patching_manual">በእጅ ይጫኑ</string>
+    <string name="settings_after_patching_manual_description">ጫን የሚለውን ሲጫኑ በነባር መጫኛ ይጫናል</string>
     <string name="settings_nomount_only">NoMount ብቻ</string>
     <string name="settings_nomount_only_description">መተግበሪያዎችን በ NoMount ብቻ ይጫናል እና በፍጹም ወደ bind mount አይመለስም፣ ስለዚህ ያለ እሱ ሳይጫኑ ይቀራሉ</string>
-    <string name="settings_prompt_installer_on_install">የመጫኛ መረጫ ጥያቄ</string>
-    <string name="settings_prompt_installer_on_install_description">እያንዳንዱን መተግበሪያ እንዴት እንደሚጫን ይጠይቃል፦ ከፓቺንግ በፊት በ root፣ ካልሆነ ግን በኋላ</string>
-    <string name="settings_auto_install_with_shizuku">ከፓቺንግ በኋላ በራስ-ሰር ይጫኑ</string>
     <string name="settings_auto_install_with_shizuku_description">ፓቺንግ እንደተጠናቀቀ የተፓች የተደረገውን APK ይጫናል ወይም ይገጥማል</string>
     <string name="settings_auto_uninstall_with_shizuku">ግጭት ሲኖር በራስ-ሰር ይሰርዝ</string>
     <string name="settings_auto_uninstall_with_shizuku_description">የፊርማ ግጭት በሚኖርበት ጊዜ ያለውን መተግበሪያ ይሰርዛል። ይህም የመተግበሪያ ዳታን ሊያጠፋ ይችላል</string>

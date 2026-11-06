@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Приховати цей застосунок?</string>
     <string name="home_more_apps_title">Більше застосунків</string>
     <string name="home_more_apps_hide_title">Приховати цю картку?</string>
-    <string name="home_more_apps_hide_message">Ви можете повернути його будь-коли в Налаштування &gt; Вигляд &gt; Головний екран</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Ви можете повернути це будь-коли в %1$s</string>
     <string name="home_app_hide_message">Цей застосунок буде приховано з головного екрану. Ви можете відновити його пізніше, використовуючи кнопку внизу списку</string>
     <string name="home_app_will_be_hidden">Цей застосунок буде приховано</string>
     <string name="home_app_hidden_named">%s приховано</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Довірений ключ</string>
     <string name="sources_signing_key_new">Новий ключ</string>
     <string name="sources_patch_expert_badge">Експерт</string>
-    <string name="sources_patch_expert_badge_tooltip">Увімкніть Режим експерта в Налаштуваннях, щоб додати цей патч вручну</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Увімкніть %1$s, щоб додати цей патч вручну</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Потрібна допомога з пошуком APK?</string>
     <string name="home_apk_availability_dialog_simple">Щоб патчити &lt;b&gt;%s&lt;/b&gt;, вам потрібний непатчений APK файл з версією:</string>
@@ -506,7 +508,6 @@
     <string name="shortcut_repatch_long">Перепатчити застарілі застосунки</string>
     <string name="shortcut_check_updates_short">Перевірити оновлення</string>
     <string name="shortcut_check_updates_long">Перевірити оновлення патчів</string>
-    <string name="shortcut_patch_app">Патчити %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Видалити цей застосунок?</string>
     <string name="home_app_info_uninstall_removes_data">Застосунок і його дані буде видалено з цього пристрою</string>
@@ -527,6 +528,7 @@
     <string name="home_app_info_install_type_custom_installer">Інший інсталятор</string>
     <string name="home_app_info_install_type_system_installer">Системний інсталятор</string>
     <string name="home_app_info_install_type_play_store">Інсталятор Play Store</string>
+    <string name="home_app_info_install_type_root">Встановлення з root</string>
     <string name="home_app_info_install_type_root_play_store">Інсталятор Play Store з рут</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Store</string>
     <string name="home_app_info_patch_update_available">Доступне оновлення патчів</string>
@@ -562,13 +564,14 @@
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Режим root вимагає, щоб оригінальний APK файл був встановлений на вашому пристрої перед патчингом</string>
     <string name="root_pre_patch_installer_title">Оберіть режим патчингу</string>
-    <string name="root_pre_patch_installer_description">Ваш пристрій має root-доступ. Оберіть, чи слід патчити цей застосунок для root монтування чи стандартного встановлення</string>
-    <string name="root_pre_patch_installer_mount_title">Режим root монтування</string>
-    <string name="root_pre_patch_installer_mount_description">Патчить для root монтування, потім монтує APK поверх відповідного стокового застосунку. GmsCore не потрібен</string>
+    <string name="root_pre_patch_installer_description">Ваш пристрій має root-доступ. Виберіть, чи патчити цей застосунок для root-монтування, чи для звичайного встановлення</string>
+    <string name="root_pre_patch_installer_mount_title">Режим root-монтування</string>
+    <string name="root_pre_patch_installer_mount_description">Патчить для root-монтування, потім монтує APK поверх відповідного оригінального застосунку. GmsCore не потрібен</string>
     <string name="root_mount_module_unmount_warning">Якщо в KernelSU увімкнено \"Unmount modules by default\", відкрийте KernelSU &gt; Superuser &gt; застосунок, який ви змонтували &gt; Профіль &gt; Власні та вимкніть \"Демонтувати модулі\". Інакше змонтований пропатчений APK може не набути чинності, навіть якщо Morphe показує його як змонтований</string>
     <string name="root_pre_patch_installer_standard_title">Стандартний режим встановлення</string>
-    <string name="root_pre_patch_installer_standard_description">Патчить як звичайний APK з підтримкою GmsCore. Ваше налаштування інсталятора використовується після патчингу</string>
-    <string name="root_pre_patch_installer_hint">Запитується, поки увімкнено Налаштування &gt; Патчинг &gt; Встановлення &gt; Запит вибору інсталятора. Режим патчингу не можна змінити після патчингу</string>
+    <string name="root_pre_patch_installer_standard_description">Патчить як звичайний APK із підтримкою GmsCore. Після патчингу використовується ваше налаштування інсталятора</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Запитується, коли для %1$s вибрано %2$s. Режим патчингу не можна змінити після патчингу</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Помилку скопійовано у буфер обміну</string>
     <string name="patcher_error_log">Журнал помилок</string>
@@ -667,6 +670,14 @@
     <string name="patcher_step_group_saving">Збереження</string>
     <string name="patcher_step_write_patched">Запис патченого APK файлу</string>
     <string name="patcher_step_sign_apk">Підпис патченого APK файлу</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Читання файлів DEX</string>
+    <string name="patcher_task_extracting_resources">Вилучення ресурсів</string>
+    <string name="patcher_task_decoding_resources">Декодування ресурсів</string>
+    <string name="patcher_task_indexing_classes">Індексація класів</string>
+    <string name="patcher_task_compiling_dex">Компіляція файлів DEX</string>
+    <string name="patcher_task_compiling_resources">Компіляція ресурсів</string>
+    <string name="patcher_task_writing_apk">Запис файлу APK</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Захист патчингу у фоні</string>
     <string name="battery_optimization_dialog_description">Деякі пристрої можуть зупиняти патчер, коли застосунок згорнуто. Дозвольте Morphe працювати без обмежень батареї, щоб патчинг завершувався стабільно</string>
@@ -715,7 +726,8 @@
     <string name="patched_app_save_failed_toast">Не вдалося зберегти патчений застосунок</string>
     <string name="plugin_activity_dialog_body">Для продовження потрібна взаємодія користувача з цим плагіном</string>
     <string name="patcher_process_killed_message">Систему зупинила патчер до завершення роботи, зазвичай щоб звільнити пам\'ять. Закрийте інші застосунки та спробуйте ще раз</string>
-    <string name="patcher_process_crashed_message">Патчер аварійно завершив роботу до закінчення. Якщо це повториться, вимкніть \"Вбудована віртуальна машина\" у налаштуваннях і повідомте про проблему разом із журналом</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Патчер аварійно завершив роботу, не закінчивши. Якщо це повториться, вимкніть %1$s і повідомте про проблему, додавши журнал</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Патчеру не вистачило пам\'яті з купою %1$s МБ. Цей застосунок завеликий для вибраних патчів. Спробуйте пропатчити з меншою кількістю джерел патчів або виберіть менше патчів</string>
     <string name="install_app_success">Встановлено успішно</string>
@@ -1015,45 +1027,50 @@ morphe_header_custom_dark.png
     <string name="installer_title">Виберіть інсталятор</string>
     <string name="installer_internal_description">Використовує стандартний інсталятор Android</string>
     <string name="installer_play_store_description">Використовує стандартний інсталятор та встановлює Google Play Store як джерело встановлення</string>
-    <string name="installer_root_play_store_description">Встановлює без сповіщень за допомогою рут монтування та встановлює Google Play Store як джерело встановлення</string>
-    <string name="installer_auto_saved_name">Root монтування</string>
-    <string name="installer_auto_saved_description">Монтує застосунки, що були пропатчені в режимі root монтування. Стандартні пропатчені APK використовують інший інсталятор</string>
-    <string name="installer_shizuku_description">Встановлює без підтвердження, використовуючи Shizuku або Sui</string>
-    <string name="installer_shizuku_play_store_description">Встановлює без підтвердження використовуючи Shizuku або Sui та встановлює Google Play Store як джерело встановлення</string>
-    <string name="installer_option_none">Без резервного варіанту</string>
-    <string name="installer_none_description">Не налаштований резервний інсталятор</string>
-    <string name="installer_status_requires_root">Потребує root-доступу</string>
+    <string name="installer_root_description">Встановлює непомітно з root</string>
+    <string name="installer_root_play_store_description">Встановлює непомітно з root і задає Google Play Store джерелом встановлення</string>
+    <string name="installer_shizuku_description">Встановлює непомітно через Shizuku або Sui</string>
+    <string name="installer_shizuku_play_store_description">Встановлює непомітно через Shizuku або Sui і задає Google Play Store джерелом встановлення</string>
+    <string name="installer_option_none">Без запасного варіанта</string>
+    <string name="installer_none_description">Запасний інсталятор не налаштовано</string>
+    <string name="installer_status_requires_root">Потрібен root-доступ</string>
     <string name="installer_status_not_supported">Не підтримується для цієї дії</string>
-    <string name="installer_status_shizuku_not_installed">Встановіть Shizuku або Sui для використання цього варіанту</string>
+    <string name="installer_status_shizuku_not_installed">Встановіть Shizuku або Sui, щоб використовувати цей параметр</string>
     <string name="installer_status_shizuku_not_running">Запустіть Shizuku або Sui та спробуйте знову</string>
     <string name="installer_status_shizuku_permission">Надайте дозвіл Morphe у застосунку Shizuku</string>
-    <string name="installer_mount_warning_install">Ваш основний інсталятор налаштований на інсталятор із рут монтуванням. Цей збережений застосунок не був встановлений за допомогою монтування</string>
+    <string name="installer_mount_warning_install">Режим патчингу встановлено на root-монтування. Цей збережений застосунок було встановлено не через монтування</string>
     <string name="mount_version_mismatch_message">Версія стокового застосунку (%2$s) не відповідає версії патченого (%1$s). Змонтуйте відповідну стокову версію, а потім спробуйте знову</string>
     <string name="mount_stock_restore_failed_message">Android відхилив збережений оригінальний APK. Встановіть відповідну стокову версію, потім спробуйте змонтувати знову</string>
     <string name="installer_status_shizuku_unsupported">Версія встановленого Shizuku не підтримується</string>
     <string name="installer_action_open_shizuku">Відкрити Shizuku</string>
-    <string name="installer_hint_generic">Не вдалося встановити. Спробуйте ще раз або перемкніть на інший інсталятор</string>
-    <string name="installer_hint_conflict">Інший застосунок із цим іменем пакета вже встановлений. Видаліть його, перш ніж продовжити</string>
+    <string name="installer_hint_generic">Не вдалося встановити. Спробуйте ще раз або перейдіть на інший інсталятор</string>
+    <string name="installer_hint_conflict">Інший застосунок із такою назвою пакета вже встановлено. Видаліть його, перш ніж продовжити</string>
     <string name="installer_confirm_notification_title">Підтвердьте встановлення</string>
     <string name="installer_confirm_notification_text">Натисніть, щоб завершити встановлення пропатченого застосунку</string>
     <string name="installer_external_launched">Відкривається %s…</string>
     <string name="installer_external_timeout">%s не підтвердив встановлення. Перевірте інший застосунок і спробуйте знову</string>
     <string name="installer_external_success">%s повідомив про успішне встановлення</string>
     <string name="installer_unavailable_title">%s недоступний</string>
-    <string name="installer_unavailable_message">Ваш бажаний інсталятор (%s) наразі недоступний. Ви можете виправити проблему та повторити спробу або скористатися стандартним інсталятором</string>
+    <string name="installer_unavailable_message">Ваш бажаний інсталятор (%s) зараз недоступний. Ви можете усунути проблему та повторити спробу або натомість скористатися стандартним інсталятором</string>
     <string name="installer_unavailable_shizuku_hint">Переконайтеся, що Shizuku запущено, і менеджеру Морфе надано дозвіл</string>
     <string name="installer_choose_another">Виберіть інший інсталятор</string>
     <string name="installer_play_store_warning_title">Встановити як Play Store?</string>
-    <string name="installer_play_store_warning_message">Пропатчений застосунок буде записано як встановлений з Google Play Store. Це може допомогти таким сервісам, як Android Auto, розпізнавати його як застосунок із Play Store, але це не гарантовано для кожного застосунку чи пристрою. Поведінка може відрізнятися залежно від версії Android, ROM, бренду пристрою та специфічних перевірок застосунку</string>
-    <string name="installer_play_store_warning_risk">Play Store може пропонувати оновлення для пропатченого застосунку. Встановлення цього оновлення перезапише пропатчений APK оригінальною версією та видалить патчі. Якщо з\'явиться запит на оновлення, натисніть меню з трьома крапками на сторінці застосунку в Play Store та виберіть \"Вимкнути оновлення\"</string>
+    <string name="installer_play_store_warning_message">Пропатчений застосунок буде записано як встановлений із Google Play Store. Це може допомогти сервісам на кшталт Android Auto розпізнати його як застосунок із Play Store, але це не гарантовано для кожного застосунку чи пристрою. Поведінка може залежати від версії Android, прошивки, бренду пристрою та перевірок самого застосунку</string>
+    <string name="installer_play_store_warning_risk">Play Store може пропонувати оновлення для пропатченого застосунку. Встановлення такого оновлення замінить пропатчений APK оригінальною версією та видалить патчі. Якщо з\'явиться запит на оновлення, натисніть меню з трьома крапками на сторінці застосунку в Play Store і виберіть \"Вимкнути оновлення\"</string>
     <string name="installer_play_store_warning_continue">Я розумію, продовжити</string>
     <string name="installer_play_store_mode">Встановити як з Play Store</string>
     <string name="installer_play_store_mode_description">Позначає Google Play Store як джерело встановлення</string>
+    <string name="settings_section_patch_mode">Режим патчингу</string>
+    <string name="settings_patch_mode_ask">Запитувати щоразу</string>
+    <string name="settings_patch_mode_ask_description">Перед патчингом кожного застосунку запитує, чи патчити його для root-монтування, чи для звичайного встановлення</string>
+    <string name="settings_section_after_patching">Після патчингу</string>
+    <string name="settings_after_patching_install">Встановити автоматично</string>
+    <string name="settings_after_patching_ask">Запитувати, який інсталятор використовувати</string>
+    <string name="settings_after_patching_ask_description">Щоразу під час встановлення застосунку запитує, який інсталятор використовувати</string>
+    <string name="settings_after_patching_manual">Встановити вручну</string>
+    <string name="settings_after_patching_manual_description">Встановлює типовим інсталятором після натискання \"Встановити\"</string>
     <string name="settings_nomount_only">Лише NoMount</string>
     <string name="settings_nomount_only_description">Монтує застосунки лише через NoMount і ніколи не переходить до bind-монтування, тож без нього вони залишаються незмонтованими</string>
-    <string name="settings_prompt_installer_on_install">Запит вибору інсталятора</string>
-    <string name="settings_prompt_installer_on_install_description">Запитує, як встановлювати кожен застосунок: з root перед патчингом, інакше після нього</string>
-    <string name="settings_auto_install_with_shizuku">Автоматична інсталяція після патчингу</string>
     <string name="settings_auto_install_with_shizuku_description">Встановлює або монтує пропатчений APK одразу після завершення патчингу</string>
     <string name="settings_auto_uninstall_with_shizuku">Автоматичне видалення при конфлікті</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Видаляє наявний застосунок у разі конфлікту підписів. Це може призвести до втрати даних застосунку</string>

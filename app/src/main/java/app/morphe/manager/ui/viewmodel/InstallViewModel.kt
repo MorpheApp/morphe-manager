@@ -22,6 +22,7 @@ import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.domain.installer.*
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
+import app.morphe.manager.domain.manager.AfterPatching
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.service.ForegroundHoldService
 import app.morphe.manager.ui.screen.shared.UserMessages
@@ -224,16 +225,13 @@ class InstallViewModel(
      *
      * @param allowSignatureMismatch Skips the signature pre-check and lets the platform decide,
      * for rooted devices where a module removes the signature verification.
-     * @param askInstaller Whether the installer prompt may come up, which an install started on
-     * its own after patching skips for the default installer.
      */
     fun install(
         outputFile: File,
         originalPackageName: String,
         onPersistApp: suspend (String, InstallType) -> Boolean,
         autoUninstallOnConflict: Boolean = false,
-        allowSignatureMismatch: Boolean = false,
-        askInstaller: Boolean = true
+        allowSignatureMismatch: Boolean = false
     ) {
         // A second tap lands before the first one's checks report Installing
         if (installState is InstallState.Installing || installStart?.isActive == true) return
@@ -248,10 +246,7 @@ class InstallViewModel(
         pendingAllowSignatureMismatch = allowSignatureMismatch
 
         installStart = launchInstall(R.string.installing_ellipsis) {
-            // Check if we should prompt for installer selection
-            val shouldPrompt = askInstaller && prefs.promptInstallerOnInstall.get()
-
-            if (shouldPrompt && oneTimeInstallerToken == null) {
+            if (prefs.afterPatching.get() == AfterPatching.ASK_INSTALLER && oneTimeInstallerToken == null) {
                 // Show installer selection dialog
                 showInstallerSelectionDialog = true
                 return@launchInstall
@@ -294,29 +289,14 @@ class InstallViewModel(
 
                 // Plan resolution probes installer availability on disk; keep off main
                 val resolved = withContext(Dispatchers.IO) {
-                    fun regularInstallToken(token: InstallerManager.Token) =
-                        if (token == InstallerManager.Token.AutoSaved) {
-                            InstallerManager.Token.Internal
-                        } else {
-                            token
-                        }
-
-                    val token = oneTimeInstallerToken
-                    val primaryToken = if (token != null) {
-                        selectedInstallerToken = token.takeUnless { it == InstallerManager.Token.AutoSaved }
-                        oneTimeInstallerToken = null
-                        token
-                    } else {
-                        selectedInstallerToken = null
-                        installerManager.getPrimaryToken()
-                    }
-
+                    selectedInstallerToken = oneTimeInstallerToken
+                    oneTimeInstallerToken = null
                     installerManager.resolvePlanWithStatus(
                         InstallerManager.InstallTarget.PATCHER,
                         outputFile,
                         targetPackageName,
                         null,
-                        primaryTokenOverride = regularInstallToken(primaryToken)
+                        primaryTokenOverride = selectedInstallerToken
                     )
                 }
 
@@ -338,7 +318,7 @@ class InstallViewModel(
                             selectedInstallerToken = null
                             return@launchInstall
                         }
-                        InstallerManager.Token.AutoSaved,
+                        InstallerManager.Token.Root,
                         InstallerManager.Token.RootPlayStore -> {
                             Log.d(TAG, "Root unavailable, showing dialog")
                             installerUnavailableDialog = InstallerUnavailableState(
@@ -394,9 +374,14 @@ class InstallViewModel(
                 performPlayStoreInstall(outputFile, onPersistApp)
             }
 
+            is InstallerManager.InstallPlan.Root -> {
+                Log.d(TAG, "Using root installer")
+                performRootInstall(outputFile, asPlayStore = false, onPersistApp)
+            }
+
             is InstallerManager.InstallPlan.RootPlayStore -> {
                 Log.d(TAG, "Using root Play Store installer")
-                performRootPlayStoreInstall(outputFile, onPersistApp)
+                performRootInstall(outputFile, asPlayStore = true, onPersistApp)
             }
 
             is InstallerManager.InstallPlan.Shizuku -> {
@@ -409,12 +394,6 @@ class InstallViewModel(
                 performShizukuInstall(outputFile, asPlayStore = true, onPersistApp)
             }
 
-            is InstallerManager.InstallPlan.Mount -> {
-                Log.w(TAG, "Root mount plan resolved for regular install; using internal installer")
-                currentInstallType = InstallType.DEFAULT
-                performStandardInstall(outputFile, onPersistApp)
-            }
-
             is InstallerManager.InstallPlan.External -> {
                 Log.d(TAG, "Using external installer: ${plan.installerLabel}")
                 launchExternalInstaller(plan)
@@ -425,20 +404,20 @@ class InstallViewModel(
     private fun InstallerManager.InstallPlan.installerToken(): InstallerManager.Token = when (this) {
         is InstallerManager.InstallPlan.Internal -> InstallerManager.Token.Internal
         is InstallerManager.InstallPlan.PlayStore -> InstallerManager.Token.PlayStore
+        is InstallerManager.InstallPlan.Root -> InstallerManager.Token.Root
         is InstallerManager.InstallPlan.RootPlayStore -> InstallerManager.Token.RootPlayStore
         is InstallerManager.InstallPlan.Shizuku -> InstallerManager.Token.Shizuku
         is InstallerManager.InstallPlan.ShizukuPlayStore -> InstallerManager.Token.ShizukuPlayStore
-        is InstallerManager.InstallPlan.Mount -> InstallerManager.Token.AutoSaved
         is InstallerManager.InstallPlan.External -> token
     }
 
     private fun InstallerManager.InstallPlan.installType(): InstallType = when (this) {
         is InstallerManager.InstallPlan.Internal -> InstallType.DEFAULT
         is InstallerManager.InstallPlan.PlayStore -> InstallType.PLAY_STORE
+        is InstallerManager.InstallPlan.Root -> InstallType.ROOT
         is InstallerManager.InstallPlan.RootPlayStore -> InstallType.ROOT_PLAY_STORE
         is InstallerManager.InstallPlan.Shizuku -> InstallType.SHIZUKU
         is InstallerManager.InstallPlan.ShizukuPlayStore -> InstallType.SHIZUKU_PLAY_STORE
-        is InstallerManager.InstallPlan.Mount -> InstallType.MOUNT
         is InstallerManager.InstallPlan.External ->
             if (token is InstallerManager.Token.Component) InstallType.CUSTOM else InstallType.DEFAULT
     }
@@ -504,25 +483,24 @@ class InstallViewModel(
         }
     }
 
-    /**
-     * Root install that asks PackageManager to record Google Play Store as the installer.
-     */
-    private suspend fun performRootPlayStoreInstall(
+    /** Silent root install, which records Google Play Store as the installer when [asPlayStore]. */
+    private suspend fun performRootInstall(
         outputFile: File,
+        asPlayStore: Boolean,
         onPersistApp: suspend (String, InstallType) -> Boolean
     ) {
         val targetPackageName = readPackageName(outputFile)
 
         try {
             unmountIfMounted(targetPackageName)
-            rootInstaller.installAsPlayStore(outputFile)
+            rootInstaller.installPackage(outputFile, asPlayStore)
         } catch (e: Exception) {
             if (!e.isSignatureRejection()) throw e
             handleConflict(targetPackageName, e.simpleMessage())
             return
         }
 
-        onPersistApp(targetPackageName, InstallType.ROOT_PLAY_STORE)
+        onPersistApp(targetPackageName, if (asPlayStore) InstallType.ROOT_PLAY_STORE else InstallType.ROOT)
         handleInstallSuccess(targetPackageName)
     }
 
@@ -1277,24 +1255,16 @@ class InstallViewModel(
         installedPackageName?.let { pm.launch(it) }
     }
 
-    /**
-     * Installer the one-time selection dialog starts on: the default one, with the system installer
-     * in place of root mount, which mounts builds and never installs one.
-     */
-    fun getPromptInstallerToken(): InstallerManager.Token =
-        installerManager.getPrimaryToken().let {
-            if (it == InstallerManager.Token.AutoSaved) InstallerManager.Token.Internal else it
-        }
-
-    /** Installer entries for the one-time selection dialog shown during install, root mount left out. */
-    fun getInstallerOptions(): List<InstallerManager.Entry> {
-        val raw = installerManager.listEntries(InstallerManager.InstallTarget.PATCHER, includeNone = false)
-            .filterNot { it.token == InstallerManager.Token.AutoSaved }
-        return installerManager.ensureValidEntries(raw, getPromptInstallerToken(), InstallerManager.InstallTarget.PATCHER)
-    }
-
     fun getPrimaryInstallerToken(): InstallerManager.Token =
         installerManager.getPrimaryToken()
+
+    /** Installer entries for the one-time selection dialog shown during install. */
+    fun getInstallerOptions(): List<InstallerManager.Entry> {
+        val raw = installerManager.listEntries(InstallerManager.InstallTarget.PATCHER, includeNone = false)
+        return installerManager.ensureValidEntries(raw, getPrimaryInstallerToken(), InstallerManager.InstallTarget.PATCHER)
+    }
+
+    fun mountsByDefault(): Boolean = installerManager.mountsByDefault()
 
     fun openShizukuApp(): Boolean = installerManager.openShizukuApp()
 

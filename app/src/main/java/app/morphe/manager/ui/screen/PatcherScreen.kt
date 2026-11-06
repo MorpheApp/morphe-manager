@@ -131,7 +131,7 @@ private fun PatcherScreenContent(
 
     val reduceMotion = rememberAccessibilityEnabled()
     val displayProgress = rememberDisplayedPatchProgress(
-        progress = { patcherViewModel.progress },
+        run = patcherViewModel.patchRun,
         succeeded = patcherSucceeded
     )
 
@@ -189,9 +189,7 @@ private fun PatcherScreenContent(
                     outputFile = outputFile,
                     originalPackageName = patcherViewModel.packageName,
                     onPersistApp = patcherViewModel::persistPatchedApp,
-                    autoUninstallOnConflict = automatic,
-                    // Started on its own only once the prompt was answered before patching
-                    askInstaller = !automatic
+                    autoUninstallOnConflict = automatic
                 )
             }
         }
@@ -375,11 +373,10 @@ private fun PatcherScreenContent(
 
     // Option path pre-flight dialog
     // Shown when a patch option points at a path that is gone or cannot be read
-    DialogHost(target = patcherViewModel.inaccessibleOptionPaths) { errorState ->
+    DialogHost(target = patcherViewModel.inaccessibleOptionPaths) { failures ->
         UnusableOptionPathsDialog(
-            failures = errorState.failures,
+            failures = failures,
             onRetryAfterPermission = patcherViewModel::retryAfterPermission,
-            canClearPaths = errorState.canClear,
             onClearPaths = patcherViewModel::clearInaccessibleOptionPaths,
             onDismiss = {
                 patcherViewModel.dismissInaccessibleOptionPathsError()

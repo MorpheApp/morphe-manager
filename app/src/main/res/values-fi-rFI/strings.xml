@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Piilota tämä sovellus?</string>
     <string name="home_more_apps_title">Lisää sovelluksia</string>
     <string name="home_more_apps_hide_title">Piilotetaanko tämä kortti?</string>
-    <string name="home_more_apps_hide_message">Voit palauttaa sen milloin vain kohdasta Asetukset &gt; Ulkoasu &gt; Kotinäyttö</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Voit palauttaa sen milloin tahansa kohdasta %1$s</string>
     <string name="home_app_hide_message">Tämä sovellus piilotetaan aloitusnäytöstä. Voit palauttaa sen myöhemmin piilotettujen sovellusten joukosta luettelon alareunassa olevalla painikkeella.</string>
     <string name="home_app_will_be_hidden">Tämä sovellus piilotetaan</string>
     <string name="home_app_hidden_named">%s piilotettu</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Luotettu avain</string>
     <string name="sources_signing_key_new">Uusi avain</string>
     <string name="sources_patch_expert_badge">Asiantuntija</string>
-    <string name="sources_patch_expert_badge_tooltip">Ota Asiantuntijatila käyttöön asetuksista, jotta voit sisällyttää tämän lisäosan manuaalisesti</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Ota %1$s käyttöön, jotta voit sisällyttää tämän lisäosan manuaalisesti</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Tarvitsetko apua APK:n löytämisessä?</string>
     <string name="home_apk_availability_dialog_simple">Jos haluat muokata &lt;b&gt;%s&lt;/b&gt;-sovellusta, tarvitset muokkaamattoman APK:n seuraavasta versiosta:</string>
@@ -508,7 +510,6 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee &lt;b&gt;kokonaisen APK:n&
     <string name="shortcut_repatch_long">Korjaa vanhentuneet sovellukset</string>
     <string name="shortcut_check_updates_short">Tarkista päivitykset</string>
     <string name="shortcut_check_updates_long">Tarkista korjauspäivitykset</string>
-    <string name="shortcut_patch_app">Korjaa %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Poistetaanko tämä sovellus?</string>
     <string name="home_app_info_uninstall_removes_data">Sovellus ja sen tiedot poistetaan tästä laitteesta</string>
@@ -529,6 +530,7 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee &lt;b&gt;kokonaisen APK:n&
     <string name="home_app_info_install_type_custom_installer">Oma asennusohjelma</string>
     <string name="home_app_info_install_type_system_installer">Järjestelmän asennusohjelma</string>
     <string name="home_app_info_install_type_play_store">Play Kaupan asennus</string>
+    <string name="home_app_info_install_type_root">Root-asennus</string>
     <string name="home_app_info_install_type_root_play_store">Root Play Kaupan asennus</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Kaupan asennus</string>
     <string name="home_app_info_patch_update_available">Lisäosien päivitys saatavilla</string>
@@ -570,7 +572,8 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee &lt;b&gt;kokonaisen APK:n&
     <string name="root_mount_module_unmount_warning">Jos KernelSU:ssa on \"Poista moduulit oletuksena\" -toiminto käytössä, avaa KernelSU > Superuser > sovellus, jonka asensit > Profiili > Mukauta ja poista \"Poista moduulit\" -asetus käytöstä. Muuten asennettu korjattu APK-tiedosto ei ehkä tule voimaan, vaikka Morphe näyttää sen asennetuksi</string>
     <string name="root_pre_patch_installer_standard_title">Vakioasennustila</string>
     <string name="root_pre_patch_installer_standard_description">Paikkaa normaalina APK-tiedostona GmsCore-tuella. Asennusasetuksiasi käytetään paikkaamisen jälkeen.</string>
-    <string name="root_pre_patch_installer_hint">Pyydetty, kun Asetukset &amp;gt; Paikannus &amp;gt; Asennus &amp;gt; Asentajan valintakehote on päällä. Paikoitustilaa ei voi muuttaa paikkauksen jälkeen</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Kysytty, kun %1$s on asetettu arvoon %2$s. Paikkaustilaa ei voi muuttaa paikkauksen jälkeen</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Virheilmoitus kopioitu leikepöydälle</string>
     <string name="patcher_error_log">Virheloki</string>
@@ -669,6 +672,14 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="patcher_step_group_saving">Tallennetaan</string>
     <string name="patcher_step_write_patched">Kirjoitetaan muokattua APK-tiedostoa</string>
     <string name="patcher_step_sign_apk">Allekirjoitetaan muokattua APK-tiedostoa</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Luetaan DEX-tiedostoja</string>
+    <string name="patcher_task_extracting_resources">Puretaan resursseja</string>
+    <string name="patcher_task_decoding_resources">Dekoodataan resursseja</string>
+    <string name="patcher_task_indexing_classes">Indeksoidaan luokkia</string>
+    <string name="patcher_task_compiling_dex">Käännetään DEX-tiedostoja</string>
+    <string name="patcher_task_compiling_resources">Kootaan resursseja</string>
+    <string name="patcher_task_writing_apk">Kirjoitetaan APK-tiedostoa</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Taustakorjaussuojaus</string>
     <string name="battery_optimization_dialog_description">Jotkin laitteet saattavat pysäyttää korjausohjelman, kun sovellus minimoidaan. Salli Morphen toimia ilman virransäästörajoituksia varmistaaksesi, että korjaus suoritetaan luotettavasti.</string>
@@ -717,7 +728,8 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="patched_app_save_failed_toast">Muokatun sovelluksen tallennus epäonnistui</string>
     <string name="plugin_activity_dialog_body">Tämän liitännäisen käyttöönoton jatkamiseksi tarvitaan käyttäjän toimia.</string>
     <string name="patcher_process_killed_message">Järjestelmä pysäytti paikkurin ennen sen valmistumista, yleensä muistin vapauttamiseksi. Sulje muut sovellukset ja yritä uudelleen</string>
-    <string name="patcher_process_crashed_message">Päivitysohjelma kaatui ennen valmistumista. Jos tämä toistuu, poista käytöstä \"Käytä upotettua VM:ää\" asetuksista ja raportoi ongelma lokitiedoston kanssa</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Paikkausohjelma kaatui ennen valmistumista. Jos näin käy uudelleen, kytke %1$s pois päältä ja raportoi ongelma lokitiedostojen kanssa</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Paikantaja loppui muistin puutteesta %1$s MT:n pinolla. Tämä sovellus on liian suuri valituille paikoille. Kokeile paikantamista vähemmällä paikantalähteellä tai valitse vähemmän paikkoja</string>
     <string name="install_app_success">Asennus onnistui</string>
@@ -1015,9 +1027,8 @@ Kuvien mittojen on oltava seuraavat:
     <string name="installer_title">Valitse asennusohjelma</string>
     <string name="installer_internal_description">Käytä Androidin pakettien asennusohjelmaa</string>
     <string name="installer_play_store_description">Käyttää järjestelmän asennusohjelmaa ja asettaa Google Play Kaupan asennuslähteeksi</string>
+    <string name="installer_root_description">Asentaa hiljaisesti root-oikeuksilla</string>
     <string name="installer_root_play_store_description">Asennetaan äänettömästi juurikäyttäjällä ja asetetaan Google Play Kauppa asennuslähteeksi</string>
-    <string name="installer_auto_saved_name">Root-liitos</string>
-    <string name="installer_auto_saved_description">Liittää sovellukset, jotka on paikkattu root-liitostilassa. Tavalliset paikatut APK-tiedostot käyttävät toista asennusohjelmaa.</string>
     <string name="installer_shizuku_description">Asenna hiljaisesti Shizuku- tai Sui-ohjelmalla</string>
     <string name="installer_shizuku_play_store_description">Asennetaan äänettömästi Shizukun tai Suin kautta ja asetetaan Google Play Kauppa asennuslähteeksi</string>
     <string name="installer_option_none">Ei varajärjestelmää</string>
@@ -1027,7 +1038,7 @@ Kuvien mittojen on oltava seuraavat:
     <string name="installer_status_shizuku_not_installed">Asenna Shizuku tai Sui käyttääksesi tämän vaihtoehdon.</string>
     <string name="installer_status_shizuku_not_running">Käynnistä Shizuku tai Sui ja yritä uudelleen.</string>
     <string name="installer_status_shizuku_permission">Myönnä Morphen lupa Shizuku-sovelluksesta</string>
-    <string name="installer_mount_warning_install">Pääasennuksesi on asetettu juurtimen asennukseen. Tämä tallennettu sovellus ei ole asennettu juurtimella.</string>
+    <string name="installer_mount_warning_install">Paikkaustila on asetettu root-asennukseksi. Tätä tallennettua sovellusta ei asennettu mount-menetelmällä</string>
     <string name="mount_version_mismatch_message">Perusversion (%2$s) ei vastaa korjattua sovellusta (%1$s). Juurta korjatun perusversion kanssa, sitten yritä uudelleen.</string>
     <string name="mount_stock_restore_failed_message">Android hylkäsi tallennetun alkuperäisen APK-tiedoston. Asenna vastaava virallinen versio ja yritä sitten Liitä uudelleen.</string>
     <string name="installer_status_shizuku_unsupported">Asennettu Shizuku-versio ei ole tuettu.</string>
@@ -1049,11 +1060,17 @@ Kuvien mittojen on oltava seuraavat:
     <string name="installer_play_store_warning_continue">Ymmärrän, jatka</string>
     <string name="installer_play_store_mode">Asenna Play Kauppana</string>
     <string name="installer_play_store_mode_description">Merkitsee Google Play -kaupan asennuslähteeksi</string>
+    <string name="settings_section_patch_mode">Paikkaustila</string>
+    <string name="settings_patch_mode_ask">Kysy joka kerta</string>
+    <string name="settings_patch_mode_ask_description">Kysyy ennen jokaisen sovelluksen paikkausta, paikkaetaanko se root-asennukseen vai tavalliseen asennukseen</string>
+    <string name="settings_section_after_patching">Paikkauksen jälkeen</string>
+    <string name="settings_after_patching_install">Asenna automaattisesti</string>
+    <string name="settings_after_patching_ask">Kysy asennusohjelma</string>
+    <string name="settings_after_patching_ask_description">Kysyy joka kerta sovelluksen asennuksessa, mitä asennusohjelmaa käytetään</string>
+    <string name="settings_after_patching_manual">Asenna manuaalisesti</string>
+    <string name="settings_after_patching_manual_description">Asentaa oletusasennusohjelmalla, kun napautat Asenna</string>
     <string name="settings_nomount_only">Vain NoMount</string>
     <string name="settings_nomount_only_description">Asentaa sovellukset vain NoMountin avulla eikä käytä koskaan bind-asennusta varajärjestelmänä, joten ne pysyvät asennoittamattomina ilman sitä</string>
-    <string name="settings_prompt_installer_on_install">Asennusohjelman valintakehote</string>
-    <string name="settings_prompt_installer_on_install_description">Pyytää jokaista sovellusta koskevaa asentamistapaa: juurioikeudella ennen paikantamista, muuten sen jälkeen</string>
-    <string name="settings_auto_install_with_shizuku">Asenna automaattisesti korjauksen jälkeen</string>
     <string name="settings_auto_install_with_shizuku_description">Asentaa tai liittää paikitetun APK:n heti paikauksen valmistumisen jälkeen</string>
     <string name="settings_auto_uninstall_with_shizuku">Automaattinen poisto ristiriitatilanteissa</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Poistaa nykyisen sovelluksen allekirjoitusristiriidan yhteydessä. Tämä voi poistaa sovelluksen tiedot</string>

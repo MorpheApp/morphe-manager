@@ -372,12 +372,13 @@ class RootInstaller(
     suspend fun readStockInfo(file: File): PackageInfo? =
         SplitApkInspector.withRepresentativeApk(file, app.cacheDir) { apk -> pm.getPackageInfo(apk) }
 
-    suspend fun installAsPlayStore(apkFile: File) = withContext(Dispatchers.IO) {
+    /** Installs [apkFile] with root, recording Google Play Store as its install source when [asPlayStore]. */
+    suspend fun installPackage(apkFile: File, asPlayStore: Boolean) = withContext(Dispatchers.IO) {
         if (!apkFile.exists()) throw Exception("File doesn't exist")
 
-        execute(
-            "pm install -t -i ${PLAY_STORE_INSTALLER_PACKAGE.shellQuote()} -r ${apkFile.absolutePath.shellQuote()}"
-        ).assertSuccess("Failed to install APK as Play Store")
+        val source = if (asPlayStore) "-i ${PLAY_STORE_INSTALLER_PACKAGE.shellQuote()} " else ""
+        execute("pm install -t $source-r ${apkFile.absolutePath.shellQuote()}")
+            .assertSuccess("Failed to install APK")
     }
 
     suspend fun uninstallPackage(packageName: String) = withContext(Dispatchers.IO) {

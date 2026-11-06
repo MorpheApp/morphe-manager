@@ -23,12 +23,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.Animations
 import app.morphe.manager.ui.screen.shared.Defaults
 import app.morphe.manager.ui.screen.shared.HeaderBar
+import app.morphe.manager.ui.screen.shared.ListOptionsButton
 import app.morphe.manager.ui.screen.shared.ListReorder
 import app.morphe.manager.ui.screen.shared.MorpheWordmark
 import app.morphe.manager.ui.screen.shared.PageSubtitle
@@ -36,8 +36,6 @@ import app.morphe.manager.ui.screen.shared.ReorderHeaderActions
 import app.morphe.manager.ui.screen.shared.SearchFieldState
 import app.morphe.manager.ui.screen.shared.TitleAction
 import app.morphe.manager.ui.screen.shared.TitleActionStyle
-import app.morphe.manager.ui.screen.shared.autoMirrored
-import app.morphe.manager.ui.screen.shared.listOptionsStateDescription
 import app.morphe.manager.ui.screen.shared.rememberLatest
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
@@ -54,7 +52,6 @@ import com.composables.icons.materialsymbols.rounded.*
 @Composable
 internal fun HomeHeader(
     apps: HomeAppListUi,
-    appActions: HomeAppActions,
     search: SearchFieldState,
     alerts: HomeAlerts,
     sortEnabled: Boolean,
@@ -112,20 +109,12 @@ internal fun HomeHeader(
                 )
             }
 
-            val sortState = listOptionsStateDescription(
-                apps.sortMode.labelRes,
-                apps.filterMode.labelRes.takeIf { apps.filterMode.isActive }
-            )
-            TitleAction(
-                icon = MaterialSymbols.Rounded.Sort.autoMirrored,
-                contentDescription = stringResource(R.string.sort),
+            ListOptionsButton(
+                sortRes = apps.sortMode.labelRes,
+                filterRes = apps.filterMode.labelRes.takeIf { apps.filterMode.isActive },
+                open = sortOpen,
                 onClick = onSortClick,
-                // Engaged while the options are docked, and marked while any is off its default
-                style = TitleActionStyle.Toggle,
-                active = sortOpen,
-                marked = homeListOptions(apps, appActions).any { it.isChanged },
-                enabled = sortEnabled,
-                modifier = Modifier.semantics { stateDescription = sortState }
+                enabled = sortEnabled
             )
 
             TitleAction(

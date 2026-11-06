@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Deze app verbergen?</string>
     <string name="home_more_apps_title">Meer apps</string>
     <string name="home_more_apps_hide_title">Deze kaart verbergen?</string>
-    <string name="home_more_apps_hide_message">Je kunt het op elk moment terugzetten via Instellingen &gt; Weergave &gt; Startscherm</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">U kunt het op elk moment terugbrengen in %1$s</string>
     <string name="home_app_hide_message">Deze app zal worden verborgen op het startscherm. Je kunt hem later weer zichtbaar maken met de knop onderaan de lijst.</string>
     <string name="home_app_will_be_hidden">Deze app wordt verborgen</string>
     <string name="home_app_hidden_named">%s verborgen</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Vertrouwde sleutel</string>
     <string name="sources_signing_key_new">Nieuwe sleutel</string>
     <string name="sources_patch_expert_badge">Expert</string>
-    <string name="sources_patch_expert_badge_tooltip">Schakel Expertmodus in Instellingen in om deze patch handmatig toe te voegen</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Schakel %1$s in om deze patch handmatig toe te voegen</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Hulp nodig bij het vinden van de APK?</string>
     <string name="home_apk_availability_dialog_simple">Om &lt;b&gt;%s&lt;/b&gt; te patchen, heb je de ongepatchte APK nodig:</string>
@@ -508,7 +510,6 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="shortcut_repatch_long">Oude apps opnieuw patchen</string>
     <string name="shortcut_check_updates_short">Controleren op updates</string>
     <string name="shortcut_check_updates_long">Controleren op patch updates</string>
-    <string name="shortcut_patch_app">Patch %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Deze app uninstallen?</string>
     <string name="home_app_info_uninstall_removes_data">De app en de bijbehorende gegevens worden van dit apparaat verwijderd</string>
@@ -529,6 +530,7 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="home_app_info_install_type_custom_installer">Aangepaste installer</string>
     <string name="home_app_info_install_type_system_installer">Systeeminstaller</string>
     <string name="home_app_info_install_type_play_store">Play Store installeren</string>
+    <string name="home_app_info_install_type_root">Root-installatie</string>
     <string name="home_app_info_install_type_root_play_store">Root Play Store installeren</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Store installeren</string>
     <string name="home_app_info_patch_update_available">Patchupdate beschikbaar</string>
@@ -570,7 +572,8 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="root_mount_module_unmount_warning">Als KernelSU \"Modules standaard unmounten\" is ingeschakeld, open dan KernelSU &gt; Superuser &gt; de gemonteerde app &gt; Profiel &gt; Aangepast en schakel \"Modules unmounten\" uit. Zo niet, dan kan de gemonteerde gepachte APK mogelijk niet werken, zelfs als Morphe aangeeft dat deze is gemonteerd</string>
     <string name="root_pre_patch_installer_standard_title">Standaard installatiemodus</string>
     <string name="root_pre_patch_installer_standard_description">Patches als een normale APK met GmsCore-ondersteuning. Je installatie-instelling wordt gebruikt na het patchen</string>
-    <string name="root_pre_patch_installer_hint">Vraag tijdens Instellingen &gt; Patchen &gt; Installatie &gt; Installator selectie prompt actief. De patch-modus kan niet worden gewijzigd na het patchen</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Gevraagd terwijl %1$s is ingesteld op %2$s. De patchmodus kan na het patchen niet meer worden gewijzigd</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Fout gekopieerd naar klembord</string>
     <string name="patcher_error_log">Foutlogboek</string>
@@ -669,6 +672,14 @@ Deïnstalleren wist alle app-gegevens permanent."</string>
     <string name="patcher_step_group_saving">Opslaan</string>
     <string name="patcher_step_write_patched">Gepatcht APK-bestand schrijven</string>
     <string name="patcher_step_sign_apk">Gepatcht APK-bestand ondertekenen</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">DEX-bestanden lezen</string>
+    <string name="patcher_task_extracting_resources">Resources extraheren</string>
+    <string name="patcher_task_decoding_resources">Resources decoderen</string>
+    <string name="patcher_task_indexing_classes">Klassen indexeren</string>
+    <string name="patcher_task_compiling_dex">DEX-bestanden compileren</string>
+    <string name="patcher_task_compiling_resources">Resources compileren</string>
+    <string name="patcher_task_writing_apk">APK-bestand schrijven</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Bescherming tegen achtergrond patching</string>
     <string name="battery_optimization_dialog_description">Sommige apparaten kunnen de patcher stoppen wanneer de app geminimaliseerd is. Sta Morphe toe om zonder batterijbeperkingen te draaien om ervoor te zorgen dat het patchen betrouwbaar voltooid wordt.</string>
@@ -717,7 +728,8 @@ Deïnstalleren wist alle app-gegevens permanent."</string>
     <string name="patched_app_save_failed_toast">Kon gepatchte app niet opslaan</string>
     <string name="plugin_activity_dialog_body">Gebruikersinteractie is vereist om te kunnen doorgaan met deze plugin</string>
     <string name="patcher_process_killed_message">Het systeem heeft de patcher gestopt voordat deze klaar was, meestal om geheugen vrij te maken. Sluit andere apps en probeer opnieuw</string>
-    <string name="patcher_process_crashed_message">De patcher is gecrasht voordat deze klaar was. Als dit opnieuw gebeurt, schakel dan \"Gebruik ingebedde VM\" uit in de instellingen en rapporteer het probleem met het logbestand</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">De patcher is gecrasht voordat deze klaar was. Als dit opnieuw gebeurt, schakel %1$s uit en rapporteer het probleem met het logboek</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">De patcher is buiten geheugen geraakt met een heap van %1$s MB. Deze app is te groot voor de geselecteerde patches. Probeer te patchen met minder patchbronnen, of selecteer minder patches</string>
     <string name="install_app_success">Succesvol geïnstalleerd</string>
@@ -1017,9 +1029,8 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="installer_title">Installatieprogramma selecteren</string>
     <string name="installer_internal_description">Gebruikt de Android-pakketinstaller</string>
     <string name="installer_play_store_description">Gebruikt de systeeminstaller en stelt de Google Play Store in als de installatiebron</string>
+    <string name="installer_root_description">Installeert geruisloos met root</string>
     <string name="installer_root_play_store_description">Installeert in stilte met root en stelt Google Play Store in als de installatiebron</string>
-    <string name="installer_auto_saved_name">Root mount</string>
-    <string name="installer_auto_saved_description">Mount apps die zijn gepatcht in root mount-modus. Standaard gepatchte APK\'s gebruiken een andere installateur</string>
     <string name="installer_shizuku_description">Installeert stil via Shizuku of Sui</string>
     <string name="installer_shizuku_play_store_description">Installeert in stilte via Shizuku of Sui en stelt Google Play Store in als de installatiebron</string>
     <string name="installer_option_none">Geen fallback</string>
@@ -1029,7 +1040,7 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="installer_status_shizuku_not_installed">Installeer Shizuku of Sui om deze optie te gebruiken</string>
     <string name="installer_status_shizuku_not_running">Start Shizuku of Sui en probeer het opnieuw</string>
     <string name="installer_status_shizuku_permission">Geef Morphe toestemming vanuit de Shizuku-app</string>
-    <string name="installer_mount_warning_install">Uw primaire installatieprogramma is ingesteld op het rooted mount-installatieprogramma. Deze opgeslagen app is niet geïnstalleerd met behulp van mount</string>
+    <string name="installer_mount_warning_install">Patchmodus is ingesteld op root mount. Deze opgeslagen app is niet geïnstalleerd met behulp van mount</string>
     <string name="mount_version_mismatch_message">Originele app-versie (%2$s) komt niet overeen met gepatchte app-versie (%1$s). Mount de overeenkomende originele versie, dan probeer het opnieuw</string>
     <string name="mount_stock_restore_failed_message">Android heeft de opgeslagen originele APK geweigerd. Installeer de bijpassende stock-versie en probeer Mount dan opnieuw</string>
     <string name="installer_status_shizuku_unsupported">De geïnstalleerde Shizuku-versie wordt niet ondersteund</string>
@@ -1051,11 +1062,17 @@ De afbeelddimensionen moeten als volgt zijn:
     <string name="installer_play_store_warning_continue">Ik begrijp het, ga verder</string>
     <string name="installer_play_store_mode">Installeren als Play Store-app</string>
     <string name="installer_play_store_mode_description">Markeert Google Play Store als installatiebron</string>
+    <string name="settings_section_patch_mode">Patchmodus</string>
+    <string name="settings_patch_mode_ask">Elke keer vragen</string>
+    <string name="settings_patch_mode_ask_description">Vraagt vóór het patchen van elke app of deze gepatcht moet worden voor root mount of een standaardinstallatie</string>
+    <string name="settings_section_after_patching">Na het patchen</string>
+    <string name="settings_after_patching_install">Automatisch installeren</string>
+    <string name="settings_after_patching_ask">Vragen welk installatieprogramma</string>
+    <string name="settings_after_patching_ask_description">Vraagt elke keer wanneer een app wordt geïnstalleerd welk installatieprogramma moet worden gebruikt</string>
+    <string name="settings_after_patching_manual">Handmatig installeren</string>
+    <string name="settings_after_patching_manual_description">Installeert met het standaardinstallatieprogramma zodra u op Installeren tikt</string>
     <string name="settings_nomount_only">Alleen NoMount</string>
     <string name="settings_nomount_only_description">Mount apps alleen met NoMount en valt nooit terug op een bind mount, zodat ze zonder NoMount ongemount blijven</string>
-    <string name="settings_prompt_installer_on_install">Keuze van installer</string>
-    <string name="settings_prompt_installer_on_install_description">Vraagt hoe elke app moet worden geïnstalleerd: met root voorafgaand aan patchen, anders daarna</string>
-    <string name="settings_auto_install_with_shizuku">Automatisch installeren na patchen</string>
     <string name="settings_auto_install_with_shizuku_description">Installeert of koppelt de gepatchte APK zodra het patchen is voltooid</string>
     <string name="settings_auto_uninstall_with_shizuku">Automatisch verwijderen bij conflicten</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Deïnstalleert de bestaande app bij een handtekeningconflict. Dit kan appgegevens verwijderen</string>

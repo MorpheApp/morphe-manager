@@ -44,7 +44,7 @@ data class PatchInfo(
     /** Group declared by the bundle, or null when the bundle does not categorize its patches. */
     val category: String? = null
 ) {
-    constructor(patch: Patch<*>) : this(
+    constructor(patch: Patch) : this(
         name = patch.name.orEmpty(),
         description = patch.description?.withoutSourceIndent(),
         include = patch.default,

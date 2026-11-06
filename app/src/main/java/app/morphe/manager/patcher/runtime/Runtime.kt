@@ -22,6 +22,7 @@ import app.morphe.manager.patcher.PatchingListener
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.patch.optionValueToJson
 import app.morphe.manager.patcher.worker.ProgressEventHandler
+import app.morphe.manager.patcher.worker.TaskProgressHandler
 import app.morphe.manager.util.Options
 import app.morphe.manager.util.PatchSelection
 import kotlinx.coroutines.Dispatchers
@@ -59,6 +60,7 @@ class Runtime(
      * @param onPatchCompleted Called with the name of each patch that finished.
      * @param onPatchFailed    Called with the name of the patch the run failed on.
      * @param onProgress       Called as the run moves between steps.
+     * @param onTaskProgress   Called as the patcher gets through the work it does besides executing patches.
      * @param stripUnusedNativeLibs Whether native libraries and split configurations the device
      *                         cannot use are dropped.
      * @param onMergedApkReady Called with the merged APK when a split archive patched successfully.
@@ -75,6 +77,7 @@ class Runtime(
         onPatchCompleted: suspend (String) -> Unit,
         onPatchFailed: (String) -> Unit,
         onProgress: ProgressEventHandler,
+        onTaskProgress: TaskProgressHandler,
         stripUnusedNativeLibs: Boolean,
         onMergedApkReady: (suspend (File) -> Unit)? = null
     ): Duration {
@@ -90,7 +93,7 @@ class Runtime(
             stripUnusedNativeLibs = stripUnusedNativeLibs,
             device = deviceConfig()
         )
-        val listener = ProgressReporter(context, logger, onProgress, onPatchCompleted, onPatchFailed)
+        val listener = ProgressReporter(context, logger, onProgress, onPatchCompleted, onPatchFailed, onTaskProgress)
 
         try {
             val elapsed = measureTime { patch(request, logger, listener) }

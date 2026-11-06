@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Ficha programu hii?</string>
     <string name="home_more_apps_title">Programu zaidi</string>
     <string name="home_more_apps_hide_title">Ficha kadi hii?</string>
-    <string name="home_more_apps_hide_message">Unaweza kuirudisha wakati wowote katika Mipangilio &gt; Mwonekano &gt; Skrini ya nyumbani</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Unaweza kuirudisha wakati wowote katika %1$s</string>
     <string name="home_app_hide_message">Programu hii itafichwa kutoka kwenye skrini ya nyumbani. Unaweza kuirudisha baadaye kutoka kwenye programu zilizofichwa kwa kutumia kitufe kilicho chini ya orodha</string>
     <string name="home_app_will_be_hidden">Programu hii itafichwa</string>
     <string name="home_app_hidden_named">%s imefichwa</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Ufunguo ulioaminika</string>
     <string name="sources_signing_key_new">Ufunguo mpya</string>
     <string name="sources_patch_expert_badge">Mtaalamu</string>
-    <string name="sources_patch_expert_badge_tooltip">Wezesha mfumo wa Mtaalamu katika Mipangilio ili kujumuisha patch hii kwa mkono</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Washa %1$s ili kujumuisha kiraka hiki kwa mkono</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Unahitaji msaada wa kupata APK?</string>
     <string name="home_apk_availability_dialog_simple">Ili kupatch &lt;b&gt;%s&lt;/b&gt;, unahitaji toleo la APK ambalo halijapatched:</string>
@@ -508,7 +510,6 @@ Kwa matokeo bora, programu hii inapendekeza kutumia &lt;b&gt;full APK&lt;/b&gt;"
     <string name="shortcut_repatch_long">Patch tena app zilizopitwa na wakati</string>
     <string name="shortcut_check_updates_short">Angalia sasisho</string>
     <string name="shortcut_check_updates_long">Angalia sasisho za patch</string>
-    <string name="shortcut_patch_app">Rekebisha %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Ondoa programu hii?</string>
     <string name="home_app_info_uninstall_removes_data">Programu na data zake huondolewa kwenye kifaa hiki</string>
@@ -529,6 +530,7 @@ Kwa matokeo bora, programu hii inapendekeza kutumia &lt;b&gt;full APK&lt;/b&gt;"
     <string name="home_app_info_install_type_custom_installer">Kifunguzi cha kistadi</string>
     <string name="home_app_info_install_type_system_installer">Kifunguzi cha mfumo</string>
     <string name="home_app_info_install_type_play_store">Ufungaji wa Play Store</string>
+    <string name="home_app_info_install_type_root">Usakinishaji wa Root</string>
     <string name="home_app_info_install_type_root_play_store">Ufungaji wa Root Play Store</string>
     <string name="home_app_info_install_type_shizuku_play_store">Ufungaji wa Shizuku Play Store</string>
     <string name="home_app_info_patch_update_available">Sasisho la kiraka linapatikana</string>
@@ -570,7 +572,8 @@ Kwa matokeo bora, programu hii inapendekeza kutumia &lt;b&gt;full APK&lt;/b&gt;"
     <string name="root_mount_module_unmount_warning">Ikiwa KernelSU ina \"Unmount modules by default\" imewashwa, fungua KernelSU &gt; Superuser &gt; programu uliyokuwa umeimount &gt; Profile &gt; Custom na uzime \"Unmount modules\". Vinginevyo, APK ya patched iliyomountwa inaweza isifanye kazi, hata kama Morphe inaonyesha kuwa imemountwa</string>
     <string name="root_pre_patch_installer_standard_title">Modi ya installation ya kawaida</string>
     <string name="root_pre_patch_installer_standard_description">Hufanya patch kama APK ya kawaida yenye msaada wa GmsCore. Mpangilio wako wa installer hutumiwa baada ya patching</string>
-    <string name="root_pre_patch_installer_hint">Hulizwa wakati Mipangilio &gt; Patching &gt; Usakinishaji &gt; Ombi la uteuzi wa kisakinishi limewashwa. Mtindo wa patch hauwezi kubadilishwa baada ya kupatch</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Iliulizwa wakati %1$s imewekwa kuwa %2$s. Hali ya kiraka haiwezi kubadilishwa baada ya kuweka kiraka</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Kosa limenakiliwa kwenye ubao cha kunakili</string>
     <string name="patcher_error_log">Kumbukumbu ya makosa</string>
@@ -669,6 +672,14 @@ Kuondoa programu kutafuta data zote za programu moja kwa moja"</string>
     <string name="patcher_step_group_saving">Inahifadhi</string>
     <string name="patcher_step_write_patched">Inaandika faili ya APK iliyorekebishwa</string>
     <string name="patcher_step_sign_apk">Inasaini faili ya APK iliyorekebishwa</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Kusoma faili za DEX</string>
+    <string name="patcher_task_extracting_resources">Kuchomoa rasilimali</string>
+    <string name="patcher_task_decoding_resources">Kudekodi rasilimali</string>
+    <string name="patcher_task_indexing_classes">Kuweka faharasa ya madaraja</string>
+    <string name="patcher_task_compiling_dex">Kusanifu faili za DEX</string>
+    <string name="patcher_task_compiling_resources">Kukusanya rasilimali</string>
+    <string name="patcher_task_writing_apk">Kuandika faili la APK</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Ulinzi wa urekebishaji wa nyuma</string>
     <string name="battery_optimization_dialog_description">Baadhi ya vifaa vinaweza kusitisha kirekebishaji programu wakati programu inapopunguzwa. Ruhusu Morphe iendelee kufanya kazi bila vizuizi vya betri ili kuhakikisha urekebishaji unakamilika kwa uhakika</string>
@@ -717,7 +728,8 @@ Kuondoa programu kutafuta data zote za programu moja kwa moja"</string>
     <string name="patched_app_save_failed_toast">Imeshindwa kuhifadhi programu iliyorekebishwa</string>
     <string name="plugin_activity_dialog_body">Mwingiliano wa mtumiaji unahitajika ili kuendelea na plugin hii</string>
     <string name="patcher_process_killed_message">Mfumo ulisimamisha patcher kabla haijamaliza, kwa kawaida ili kuachilia kumbukumbu. Funga programu zingine na ujaribu tena</string>
-    <string name="patcher_process_crashed_message">Kifaa cha kupachika kilianguka kabla ya kumaliza. Ikitokea tena, zima \"Tumia VM iliyojumuishwa\" katika mipangilio na utoe ripoti ya tatizo pamoja na log</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Kifaa cha kupatcha kimevimba kabla ya kumaliza. Ikitokea tena, zima %1$s na uripoti tatizo pamoja na logi</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Patcher imeishiwa na kumbukumbu ikiwa na heap ya %1$s MB. Programu hii ni kubwa mno kwa patch zilizochaguliwa. Jaribu kufanya patch kwa vyanzo vichache vya patch, au chagua patch chache</string>
     <string name="install_app_success">Imesakinishwa kwa mafanikio</string>
@@ -1017,9 +1029,8 @@ Vipimo vya picha lazima viwe kama vifuatavyo:
     <string name="installer_title">Chagua kisakinishi</string>
     <string name="installer_internal_description">Hutumia kisakinishi cha kifurushi cha Android</string>
     <string name="installer_play_store_description">Hutumia kifunguzi cha mfumo na kuweka Google Play Store kama chanzo cha ufungaji</string>
+    <string name="installer_root_description">Husanikisha kimya kimya kwa kutumia root</string>
     <string name="installer_root_play_store_description">Hufunga kimya kimya kwa kutumia root na kuweka Google Play Store kama chanzo cha ufungaji</string>
-    <string name="installer_auto_saved_name">Mmount ya Root</string>
-    <string name="installer_auto_saved_description">Husanidisha programu ambazo zilirekebishwa katika mfumo wa root mount. APK zilizorekebishwa za kawaida hutumia kisakinishi kingine</string>
     <string name="installer_shizuku_description">Husakinisha kimyakimya kwa kutumia Shizuku au Sui</string>
     <string name="installer_shizuku_play_store_description">Hufunga kimya kimya kupitia Shizuku au Sui na kuweka Google Play Store kama chanzo cha ufungaji</string>
     <string name="installer_option_none">Hakuna mbadala</string>
@@ -1029,7 +1040,7 @@ Vipimo vya picha lazima viwe kama vifuatavyo:
     <string name="installer_status_shizuku_not_installed">Sakinisha Shizuku au Sui ili kutumia chaguo hili</string>
     <string name="installer_status_shizuku_not_running">Anzisha Shizuku au Sui na ujaribu tena</string>
     <string name="installer_status_shizuku_permission">Toa ruhusa kwa Morphe kutoka kwenye programu ya Shizuku</string>
-    <string name="installer_mount_warning_install">Kisakinishi chako kikuu kimepangwa kuwa kisakinishi cha rooted mount. Programu hii iliyohifadhiwa haikusakinishwa kwa kutumia mount</string>
+    <string name="installer_mount_warning_install">Hali ya patch imewekwa kwenye root mount. Programu hii iliyohifadhiwa haikusanikishwa kwa kutumia mount</string>
     <string name="mount_version_mismatch_message">Toleo la programu ya awali (%2$s) halilingani na toleo la programu iliyorekebishwa (%1$s). Weka toleo la awali linalolingana, kisha jaribu tena</string>
     <string name="mount_stock_restore_failed_message">Android imekataa APK asili iliyohifadhiwa. Sakinisha toleo sahihi la stock, kisha jaribu Mount tena</string>
     <string name="installer_status_shizuku_unsupported">Toleo la Shizuku lililosakinishwa halitungwi</string>
@@ -1051,11 +1062,17 @@ Vipimo vya picha lazima viwe kama vifuatavyo:
     <string name="installer_play_store_warning_continue">Naelewa, endelea</string>
     <string name="installer_play_store_mode">Sakinisha kama Play Store</string>
     <string name="installer_play_store_mode_description">Huweka Google Play Store kama chanzo cha usakinishaji</string>
+    <string name="settings_section_patch_mode">Hali ya patch</string>
+    <string name="settings_patch_mode_ask">Uliza kila wakati</string>
+    <string name="settings_patch_mode_ask_description">Huliza kabla ya kupatch kila programu ikiwa ipatchwe kwa root mount au usanikishaji wa kawaida</string>
+    <string name="settings_section_after_patching">Baada ya kupatch</string>
+    <string name="settings_after_patching_install">Sanikisha kiotomatiki</string>
+    <string name="settings_after_patching_ask">Uliza ni kisanikishi kipi</string>
+    <string name="settings_after_patching_ask_description">Huliza ni kisanikishi kipi cha kutumia kila wakati programu inaposanikishwa</string>
+    <string name="settings_after_patching_manual">Sanikisha kwa mkono</string>
+    <string name="settings_after_patching_manual_description">Husanikisha kwa kisanikishi cha kawaida mara tu unapobofya Sanikisha</string>
     <string name="settings_nomount_only">NoMount pekee</string>
     <string name="settings_nomount_only_description">Husanidisha programu tu kwa NoMount na hairudi nyuma kwenye bind mount, hivyo zinabaki bila kusanidishwa bila hiyo</string>
-    <string name="settings_prompt_installer_on_install">Ombi la uteuzi wa kisakinishi</string>
-    <string name="settings_prompt_installer_on_install_description">Huliza jinsi ya kusakinisha kila programu: kwa root kabla ya kupatch, vinginevyo baada ya hapo</string>
-    <string name="settings_auto_install_with_shizuku">Sakinisha kiotomatiki baada ya kuweka patch</string>
     <string name="settings_auto_install_with_shizuku_description">Husanikisha au kuunganisha APK iliyorekebishwa mara tu urekebishaji unapokamilika</string>
     <string name="settings_auto_uninstall_with_shizuku">Ondoa kiotomatiki wakati wa mgongano</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Hufuta programu iliyopo wakati kuna mgongano wa saini. Hii inaweza kufuta data ya programu</string>

@@ -132,8 +132,8 @@ class InstalledAppInfoViewModel(
     var isLoading by mutableStateOf(true)
         private set
 
-    val primaryInstallerIsMount: Boolean
-        get() = installerManager.getPrimaryToken() == InstallerManager.Token.AutoSaved
+    val mountsByDefault: Boolean
+        get() = installerManager.mountsByDefault()
 
     init {
         viewModelScope.launch {
@@ -218,6 +218,7 @@ class InstalledAppInfoViewModel(
         when (app.installType) {
             InstallType.DEFAULT,
             InstallType.PLAY_STORE,
+            InstallType.ROOT,
             InstallType.ROOT_PLAY_STORE,
             InstallType.CUSTOM,
             InstallType.SHIZUKU,

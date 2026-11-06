@@ -68,8 +68,6 @@ fun HomeScreen(
     homeAppButtonPrefs: HomeAppButtonPreferences = koinInject(),
     bundleUpdateProgress: PatchBundleRepository.BundleUpdateProgress?,
     onboardingState: OnboardingState? = null,
-    patchTriggerPackage: String? = null,
-    onPatchTriggerHandled: () -> Unit = {},
     appInfoTriggerPackage: String? = null,
     onAppInfoTriggerHandled: () -> Unit = {},
     installViewModel: InstallViewModel = koinViewModel()
@@ -242,14 +240,6 @@ fun HomeScreen(
     }
     val startBatchPatch: (List<HomeAppItem>) -> Unit = { items ->
         openBatchQueue(items.map { it.batchTarget() })
-    }
-
-    // Handle patch trigger from dialog
-    LaunchedEffect(patchTriggerPackage) {
-        patchTriggerPackage?.let { packageName ->
-            homeViewModel.patchFlow.showPatchDialog(packageName)
-            onPatchTriggerHandled()
-        }
     }
 
     // Handle app info trigger (e.g. from mount replaced notification)

@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Versteek hierdie program?</string>
     <string name="home_more_apps_title">Meer programme</string>
     <string name="home_more_apps_hide_title">Versteek hierdie kaart?</string>
-    <string name="home_more_apps_hide_message">Jy kan dit enige tyd terugbring in Instellings &gt; Voorkoms &gt; Tuisskerm</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Jy kan dit enige tyd terugbring in %1$s</string>
     <string name="home_app_hide_message">Hierdie app sal van die tuisskerm weggesteek word. Jy kan dit later herstel deur die \'\'-knoppie onderaan die lys te gebruik</string>
     <string name="home_app_will_be_hidden">Hierdie program sal versteek word</string>
     <string name="home_app_hidden_named">%s versteek</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Vertroude sleutel</string>
     <string name="sources_signing_key_new">Nuwe sleutel</string>
     <string name="sources_patch_expert_badge">Kundige</string>
-    <string name="sources_patch_expert_badge_tooltip">Aktiveer Ekspermodus in Instellings om hierdie pleister handmatig by te voeg</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Skakel %1$s aan om hierdie pleister handmatig in te sluit</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Hulp nodig om die APK te vind?</string>
     <string name="home_apk_availability_dialog_simple">Om &lt;b&gt;%s&lt;/b&gt; te verander, benodig jy die onveranderde APK-weergawe:</string>
@@ -508,7 +510,6 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="shortcut_repatch_long">Her-pleister verouderde programme</string>
     <string name="shortcut_check_updates_short">Kyk vir opgraderings</string>
     <string name="shortcut_check_updates_long">Kyk vir pleister opgraderings</string>
-    <string name="shortcut_patch_app">Pleister %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Deïnstalleer hierdie toepassing?</string>
     <string name="home_app_info_uninstall_removes_data">Die toepassing en sy data word van hierdie toestel verwyder</string>
@@ -529,6 +530,7 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="home_app_info_install_type_custom_installer">Pasgemaakte installer</string>
     <string name="home_app_info_install_type_system_installer">Stelsel installer</string>
     <string name="home_app_info_install_type_play_store">Play Winkel installering</string>
+    <string name="home_app_info_install_type_root">Root-installasie</string>
     <string name="home_app_info_install_type_root_play_store">Root Play Winkel installering</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Winkel installering</string>
     <string name="home_app_info_patch_update_available">Patch opdatering beskikbaar</string>
@@ -570,7 +572,8 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="root_mount_module_unmount_warning">As KernelSU \"Verwyder modules by verstek\" aangeskakel het, oop KernelSU &lt;b&gt;&amp;gt;&lt;/b&gt; Superuser &lt;b&gt;&amp;gt;&lt;/b&gt; die program wat u gemonteer het &lt;b&gt;&amp;gt;&lt;/b&gt; Profiel &lt;b&gt;&amp;gt;&lt;/b&gt; Aangepas en skakel \"Modules verwyder\" af. Andersins mag die gemonteerde ge-kolte APK nie werksaam wees nie, selfs al dui Morphe aan dat dit gemonteer is</string>
     <string name="root_pre_patch_installer_standard_title">Standaard installasiemodus</string>
     <string name="root_pre_patch_installer_standard_description">Patches as \'n normale APK met GmsCore ondersteuning. Jou installeringsinstelling word gebruik na die patching.</string>
-    <string name="root_pre_patch_installer_hint">Gevraag tydens Instellings &gt; Flikkering &gt; Installasie &gt; Installateur-seleksie-aantekening is aan. Die flikkermodus kan nie na flikkering verander word nie</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Gevra terwyl %1$s op %2$s gestel is. Die pleistermodus kan nie na pleistering verander word nie</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Fout gekopieer na knipbord</string>
     <string name="patcher_error_log">Foutlog</string>
@@ -669,6 +672,14 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="patcher_step_group_saving">Stoor</string>
     <string name="patcher_step_write_patched">Skryf gepatchte APK lêer</string>
     <string name="patcher_step_sign_apk">Teken gepatchte APK lêer</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Lees DEX-lêers</string>
+    <string name="patcher_task_extracting_resources">Onttrek hulpbronne</string>
+    <string name="patcher_task_decoding_resources">Dekodeer hulpbronne</string>
+    <string name="patcher_task_indexing_classes">Indekseer klasse</string>
+    <string name="patcher_task_compiling_dex">Kompileer DEX-lêers</string>
+    <string name="patcher_task_compiling_resources">Kompileer hulpbronne</string>
+    <string name="patcher_task_writing_apk">Skryf APK-lêer</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Beskerming teen agtergrondpleister</string>
     <string name="battery_optimization_dialog_description">Sommige toestelle kan die pleister stop wanneer die toepassing geminimaliseer word. Laat Morphe sonder batterybeperkings loop om te verseker dat die pleister betroubaar voltooi word.</string>
@@ -717,7 +728,8 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="patched_app_save_failed_toast">Kon nie gepatchte app stoor nie</string>
     <string name="plugin_activity_dialog_body">Gebruikers interaksie is vereis om met hierdie inprop voort te gaan</string>
     <string name="patcher_process_killed_message">Die stelsel het die patcher gestop voordat dit voltooi is, gewoonlik om geheue vry te stel. Maak ander programme toe en probeer weer</string>
-    <string name="patcher_process_crashed_message">Die patcher het gecrash voordat dit klaar was. As dit weer gebeur, skakel \"Gebruik ingebedde VM\" in instellings af en rapporteer die probleem met die log</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Die pleisterprogram het vasgeloop voordat dit klaar was. As dit weer gebeur, skakel %1$s af en rapporteer die probleem met die log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Die patsjering het uit geheue geloop met \'n %1$s MB-heap. Hierdie toepassing is te groot vir die geselekteerde patsjies. Probeer om met minder patsjibronne te werk, of selekteer minder patsjies</string>
     <string name="install_app_success">Suksesvol geïnstalleer</string>
@@ -1017,9 +1029,8 @@ Die beeld afmetings moet soos volg wees:
     <string name="installer_title">Kies installer</string>
     <string name="installer_internal_description">Gebruik die Android pakketinstalleerder</string>
     <string name="installer_play_store_description">Gebruik die stelsel se installeerder en stel Google Play Winkel as die installasiefontein in</string>
+    <string name="installer_root_description">Installeer stilweg met root</string>
     <string name="installer_root_play_store_description">Installeer stilweg met wortelregte en stel Google Play Winkel as die installasiebron in</string>
-    <string name="installer_auto_saved_name">Root mount</string>
-    <string name="installer_auto_saved_description">Monteer toepassings wat in root mount modus gepatched is. Standaard gepatched APK\'s gebruik \'n ander installer.</string>
     <string name="installer_shizuku_description">Installeer stilweg met behulp van Shizuku of Sui</string>
     <string name="installer_shizuku_play_store_description">Installeer stilweg deur Shizuku of Sui en stel Google Play Winkel as die installasiebron in</string>
     <string name="installer_option_none">Geen terugval</string>
@@ -1029,7 +1040,7 @@ Die beeld afmetings moet soos volg wees:
     <string name="installer_status_shizuku_not_installed">Installeer Shizuku of Sui om hierdie opsie te gebruik</string>
     <string name="installer_status_shizuku_not_running">Begin Shizuku of Sui en probeer weer</string>
     <string name="installer_status_shizuku_permission">Vergunning verleen aan Morphe vanaf die Shizuku-app</string>
-    <string name="installer_mount_warning_install">Die geïnstalleerde Shizuku weergawe is nie ondersteun nie</string>
+    <string name="installer_mount_warning_install">Patch-modus is gestel na root-mount. Hierdie gestoorde toepassing is nie met mount geïnstalleer nie</string>
     <string name="mount_version_mismatch_message">Die stock app weergawe (%2$s) stem nie ooreen met die gepatched app weergawe (%1$s). Herstel die ooreenstemmende stock weergawe, en probeer weer</string>
     <string name="mount_stock_restore_failed_message">Android het die gestoorde oorspronklike APK verwerp. Installeer die ooreenstemmende standaard weergawe, en probeer dan weer Mount.</string>
     <string name="installer_status_shizuku_unsupported">Die geïnstalleerde Shizuku weergawe is nie ondersteun nie</string>
@@ -1051,11 +1062,17 @@ Die beeld afmetings moet soos volg wees:
     <string name="installer_play_store_warning_continue">Ek verstaan, gaan voort</string>
     <string name="installer_play_store_mode">Installeer as Play Winkel</string>
     <string name="installer_play_store_mode_description">Merk Google Play-winkel as die installeerbron</string>
+    <string name="settings_section_patch_mode">Patch-modus</string>
+    <string name="settings_patch_mode_ask">Vra elke keer</string>
+    <string name="settings_patch_mode_ask_description">Vra voor elke toepassing gepatch word of dit vir root-mount of \'n standaard-installasie gepatch moet word</string>
+    <string name="settings_section_after_patching">Na patching</string>
+    <string name="settings_after_patching_install">Installeer outomaties</string>
+    <string name="settings_after_patching_ask">Vra watter installeerder</string>
+    <string name="settings_after_patching_ask_description">Vra elke keer wanneer \'n toepassing geïnstalleer word watter installeerder gebruik moet word</string>
+    <string name="settings_after_patching_manual">Installeer handmatig</string>
+    <string name="settings_after_patching_manual_description">Installeer met die standaardinstalleerder sodra jy op Installeer tik</string>
     <string name="settings_nomount_only">Slegs NoMount</string>
     <string name="settings_nomount_only_description">Monteer toepassings slegs met NoMount en val nooit terug na \'n bind-montering nie, sodat hulle ongemonteer bly sonder dit</string>
-    <string name="settings_prompt_installer_on_install">Installeerder seleksie prompt</string>
-    <string name="settings_prompt_installer_on_install_description">Vraag hoe om elke app te installeer: met root voor flikkering, andersins daarna</string>
-    <string name="settings_auto_install_with_shizuku">Outomatiese installering na patstelling</string>
     <string name="settings_auto_install_with_shizuku_description">Installeer of mount die geflakte APK so gou as wat flikkering voltooi is</string>
     <string name="settings_auto_uninstall_with_shizuku">Outo-deïnstallering by konflik</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Uninstall the existing app on a signature conflict. This can remove app data</string>

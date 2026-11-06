@@ -16,7 +16,9 @@ import androidx.lifecycle.viewModelScope
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.SessionInstaller
+import app.morphe.manager.domain.manager.AfterPatching
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.domain.manager.RootPatchMode
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFAULT_SOURCE_UID
 import app.morphe.manager.domain.repository.PatchOptionsRepository
@@ -224,19 +226,8 @@ class SettingsViewModel(
         prefs.includeGitHubPatInExports.update(includeInExport)
     }
 
-    // Asking how to install and installing on its own exclude each other, so turning one on turns the other off
-
-    // Without root the installer prompt comes after patching and waits for the user there, so it
-    // excludes installing on its own. With root, it is answered before patching, and they go together
-
-    fun setPromptInstallerOnInstall(enabled: Boolean) = viewModelScope.launch {
-        prefs.promptInstallerOnInstall.update(enabled)
-        if (enabled && !isDeviceRooted()) prefs.autoInstallAfterPatching.update(false)
-    }
-
-    fun setAutoInstallAfterPatching(enabled: Boolean) = viewModelScope.launch {
-        prefs.autoInstallAfterPatching.update(enabled)
-        if (enabled && !isDeviceRooted()) prefs.promptInstallerOnInstall.update(false)
+    fun setAfterPatching(action: AfterPatching) = viewModelScope.launch {
+        prefs.afterPatching.update(action)
     }
 
     fun setNoMountOnly(enabled: Boolean) = viewModelScope.launch {
@@ -300,19 +291,18 @@ class SettingsViewModel(
         prefs.patcherErrorSoundUri.update(uri)
     }
 
-    /**
-     * Requests root access when the AutoSaved (root-mount) installer is chosen,
-     * then persists the selection.
-     */
+    /** Asks for root access when [token] installs with root, then saves it. */
     fun confirmInstallerSelection(token: InstallerManager.Token) =
         viewModelScope.launch(Dispatchers.IO) {
-            if (token == InstallerManager.Token.AutoSaved ||
-                token == InstallerManager.Token.RootPlayStore
-            ) {
-                runCatching { rootInstaller.hasRootAccess() }
-            }
+            if (token.usesRoot) runCatching { rootInstaller.hasRootAccess() }
             installerManager.updatePrimaryToken(token)
         }
+
+    /** Asks for root access when [mode] can mount, then saves it. */
+    fun setRootPatchMode(mode: RootPatchMode) = viewModelScope.launch(Dispatchers.IO) {
+        if (mode != RootPatchMode.STANDARD) runCatching { rootInstaller.hasRootAccess() }
+        prefs.rootPatchMode.update(mode)
+    }
 
     /**
      * Returns a deduplicated, validated list of installer entries for [installTarget],

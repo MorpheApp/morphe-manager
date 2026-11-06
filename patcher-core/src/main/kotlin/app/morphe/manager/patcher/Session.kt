@@ -14,6 +14,7 @@ import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.util.toLogString
 import app.morphe.patcher.Patcher
 import app.morphe.patcher.PatcherConfig
+import app.morphe.patcher.PatcherProgress
 import app.morphe.patcher.patch.Patch
 import app.morphe.patcher.patch.PatchResult
 import app.morphe.patcher.resource.CpuArchitecture
@@ -25,7 +26,7 @@ import java.nio.file.Files
 import java.nio.file.StandardCopyOption
 import kotlin.time.measureTime
 
-internal typealias PatchList = List<Patch<*>>
+internal typealias PatchList = List<Patch>
 
 /**
  * @param keepArchitectures The native libraries the output keeps, every one of them when empty.
@@ -50,7 +51,8 @@ class Session(
             temporaryFilesPath = tempDir,
             // The patcher drops every other ABI while it writes the output, sparing a second pass over it
             keepArchitectures = keepArchitectures,
-            fileWorkspacePath = fileWorkspace
+            fileWorkspacePath = fileWorkspace,
+            progress = PatcherProgress(listener::taskProgress)
         )
     )
 

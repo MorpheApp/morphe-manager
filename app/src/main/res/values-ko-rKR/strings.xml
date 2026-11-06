@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">이 앱을 숨기시겠습니까?</string>
     <string name="home_more_apps_title">앱 더보기</string>
     <string name="home_more_apps_hide_title">이 카드를 숨기시겠습니까?</string>
-    <string name="home_more_apps_hide_message">\'설정 &gt; 디자인 &gt; 홈 화면\'에서 언제든지 다시 표시할 수 있습니다</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">%1$s에서 언제든지 다시 되돌릴 수 있습니다</string>
     <string name="home_app_hide_message">이 앱은 홈 화면에서 숨겨집니다. 목록 하단에 있는 버튼을 사용하여 숨겨진 앱 목록에서 나중에 복원할 수 있습니다</string>
     <string name="home_app_will_be_hidden">이 앱이 숨겨집니다</string>
     <string name="home_app_hidden_named">%s 숨겨짐</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">신뢰할 수 있는 키</string>
     <string name="sources_signing_key_new">새 키</string>
     <string name="sources_patch_expert_badge">전문가</string>
-    <string name="sources_patch_expert_badge_tooltip">설정에서 전문가 모드를 활성화하여 이 패치를 수동으로 포함할 수 있습니다</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">%1$s를 켜서 이 패치를 수동으로 포함하세요</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">APK를 찾는 데 도움이 필요하세요?</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt;를 패치하려면 패치되지 않은 APK가 필요합니다:</string>
@@ -508,7 +510,6 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="shortcut_repatch_long">오래된 앱 다시 패치</string>
     <string name="shortcut_check_updates_short">업데이트 확인</string>
     <string name="shortcut_check_updates_long">패치 업데이트 확인</string>
-    <string name="shortcut_patch_app">%s 패치</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">이 앱을 제거하시겠습니까?</string>
     <string name="home_app_info_uninstall_removes_data">앱과 해당 데이터가 이 기기에서 제거됩니다</string>
@@ -529,6 +530,7 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="home_app_info_install_type_custom_installer">커스텀 설치 프로그램</string>
     <string name="home_app_info_install_type_system_installer">시스템 설치 프로그램</string>
     <string name="home_app_info_install_type_play_store">Play 스토어 설치</string>
+    <string name="home_app_info_install_type_root">루트 설치</string>
     <string name="home_app_info_install_type_root_play_store">루트 Play 스토어 설치</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play 스토어 설치</string>
     <string name="home_app_info_patch_update_available">패치 업데이트 사용 가능</string>
@@ -570,7 +572,8 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="root_mount_module_unmount_warning">KernelSU에서 \"기본값으로 모듈 언마운트\"가 활성화되어 있으면 KernelSU &gt; 슈퍼유저 &gt; 마운트한 앱 &gt; 프로필 &gt; 사용자 지정을 열고 \"모듈 언마운트\"를 끕니다. 그렇지 않으면 Morphe가 마운트된 것으로 표시하더라도 마운트된 패치 APK가 적용되지 않을 수 있습니다</string>
     <string name="root_pre_patch_installer_standard_title">일반 설치 모드</string>
     <string name="root_pre_patch_installer_standard_description">GmsCore를 지원하는 일반 APK로 패치합니다. 패치가 완료된 후에는 현재 설정된 설치 프로그램 설정을 사용하여 설치됩니다</string>
-    <string name="root_pre_patch_installer_hint">\'설정 &gt; 패치 &gt; 설치 &gt; 설치 프로그램 선택 프롬프트\'가 활성화 중일 경우에 물어봅니다. 패치 후 패치 모드는 변경할 수 없습니다</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">%1$s가 %2$s로 설정된 상태에서 요청되었습니다. 패치 후에는 패치 모드를 변경할 수 없습니다</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">오류 정보를 클립보드에 복사하였습니다</string>
     <string name="patcher_error_log">오류 로그</string>
@@ -669,6 +672,14 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="patcher_step_group_saving">저장하는 중</string>
     <string name="patcher_step_write_patched">패치된 APK 파일을 작성하는 중</string>
     <string name="patcher_step_sign_apk">패치된 APK 파일에 서명하는 중</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">DEX 파일을 읽어오는 중</string>
+    <string name="patcher_task_extracting_resources">리소스를 추출하는 중</string>
+    <string name="patcher_task_decoding_resources">리소스를 디코딩하는 중</string>
+    <string name="patcher_task_indexing_classes">클래스를 인덱싱하는 중</string>
+    <string name="patcher_task_compiling_dex">DEX 파일를 컴파일하는 중</string>
+    <string name="patcher_task_compiling_resources">리소스를 컴파일하는 중</string>
+    <string name="patcher_task_writing_apk">APK 파일를 작성하는 중</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">백그라운드 패치 보호</string>
     <string name="battery_optimization_dialog_description">일부 기기에서는 앱이 최소화되면 패처가 중지될 수 있습니다. 패치가 안정적으로 완료되도록 Morphe가 배터리 제한 없이 실행되도록 허용하세요</string>
@@ -717,7 +728,8 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="patched_app_save_failed_toast">패치된 앱을 저장할 수 없습니다</string>
     <string name="plugin_activity_dialog_body">이 플러그인을 사용하려면 사용자 상호작용이 필요합니다</string>
     <string name="patcher_process_killed_message">시스템이 메모리를 확보하기 위해 패처가 작업을 완료하기 전에 중단하였습니다. 다른 앱을 종료한 후 다시 시도하세요</string>
-    <string name="patcher_process_crashed_message">패치 작업이 완료되기 전에 패처가 충돌하여 종료되었습니다. 문제가 반복되면 설정에서 \'임베디드 VM 사용\'을 비활성화하고, 로그와 함께 문제를 보고해 주세요</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">패치 작업이 완료되기 전에 패처가 충돌하여 종료되었습니다. 문제가 반복되면 %1$s를 비활성화하고 로그와 함께 문제를 보고해 주세요</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">패처가 %1$s MB 힙 메모리를 사용하는 동안 메모리가 부족해졌습니다. 이 앱은 선택한 패치를 적용하기에는 너무 큽니다. 패치 소스를 더 적게 사용하거나 패치를 더 적게 선택한 후 다시 패치해 보세요</string>
     <string name="install_app_success">성공적으로 설치하였습니다</string>
@@ -1017,9 +1029,8 @@ morphe_header_custom_dark.png
     <string name="installer_title">설치 프로그램 선택</string>
     <string name="installer_internal_description">Android 패키지 설치 프로그램을 사용합니다</string>
     <string name="installer_play_store_description">시스템 설치 관리자를 사용하고 Google Play 스토어를 앱 설치 출처로 설정합니다</string>
+    <string name="installer_root_description">루트 권한으로 무음 설치</string>
     <string name="installer_root_play_store_description">루트 권한으로 자동으로 설치하고 Google Play 스토어를 앱 설치 출처로 설정합니다</string>
-    <string name="installer_auto_saved_name">루트 마운트</string>
-    <string name="installer_auto_saved_description">루트 마운트 모드로 패치된 앱을 마운트합니다. 일반 APK 방식으로 패치된 앱은 다른 설치 프로그램을 사용합니다</string>
     <string name="installer_shizuku_description">Shizuku 또는 Sui를 사용하여 자동으로 설치합니다</string>
     <string name="installer_shizuku_play_store_description">Shizuku 또는 Sui를 통해 자동으로 설치하고 Google Play 스토어를 앱 설치 출처로 설정합니다</string>
     <string name="installer_option_none">대체 없음</string>
@@ -1029,7 +1040,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">이 옵션을 사용하려면 Shizuku 또는 Sui를 설치하세요</string>
     <string name="installer_status_shizuku_not_running">Shizuku 또는 Sui 을 시작하고 다시 시도하세요</string>
     <string name="installer_status_shizuku_permission">Shizuku 앱에서 Morphe에 권한을 부여하세요</string>
-    <string name="installer_mount_warning_install">기본 설치 프로그램이 루팅된 마운트 설치 프로그램으로 설정되어 있습니다. 이 저장된 앱은 마운트를 사용하여 설치되지 않았습니다</string>
+    <string name="installer_mount_warning_install">패치 모드가 루트 마운트로 설정되어 있습니다. 이 저장된 앱은 마운트를 사용하여 설치되지 않았습니다</string>
     <string name="mount_version_mismatch_message">순정 앱 버전(%2$s)이 패치된 앱 버전(%1$s)과 일치하지 않습니다. 일치하는 순정 버전을 마운트한 다음에 다시 시도하세요</string>
     <string name="mount_stock_restore_failed_message">Android에서 저장된 원본 APK를 거부하였습니다. 해당 버전과 일치하는 순정 앱을 설치한 후에 다시 마운트를 시도하세요</string>
     <string name="installer_status_shizuku_unsupported">설치된 Shizuku 버전은 지원되지 않습니다</string>
@@ -1051,11 +1062,17 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_continue">알겠습니다. 계속하겠습니다</string>
     <string name="installer_play_store_mode">Play 스토어로 설치</string>
     <string name="installer_play_store_mode_description">Google Play 스토어를 설치 출처로 지정합니다</string>
+    <string name="settings_section_patch_mode">패치 모드</string>
+    <string name="settings_patch_mode_ask">매번 확인</string>
+    <string name="settings_patch_mode_ask_description">각 앱을 패치하기 전에 루트 마운트로 패치할지 표준 설치로 패치할지 물어봅니다</string>
+    <string name="settings_section_after_patching">패치 후 작업</string>
+    <string name="settings_after_patching_install">자동 설치</string>
+    <string name="settings_after_patching_ask">설치 프로그램 선택</string>
+    <string name="settings_after_patching_ask_description">앱을 설치할 때마다 사용할 설치 프로그램을 선택하도록 물어봅니다</string>
+    <string name="settings_after_patching_manual">수동 설치</string>
+    <string name="settings_after_patching_manual_description">설치 버튼을 누르면 기본 설치 프로그램으로 설치합니다</string>
     <string name="settings_nomount_only">NoMount 전용</string>
     <string name="settings_nomount_only_description">NoMount를 통해서만 앱을 마운트하며, 바인드 마운트 방식으로는 절대 대체하지 않습니다. 따라서 NoMount가 없으면 해당 앱은 마운트되지 않은 상태로 유지됩니다</string>
-    <string name="settings_prompt_installer_on_install">설치 프로그램 선택 프롬프트</string>
-    <string name="settings_prompt_installer_on_install_description">모든 앱의 설치 방법을 묻습니다: 패치 전에 루트 권한이 있어야 하고, 그렇지 않으면 패치 후에 설치합니다</string>
-    <string name="settings_auto_install_with_shizuku">패치 후 자동 설치</string>
     <string name="settings_auto_install_with_shizuku_description">패치가 완료되면 즉시 패치된 APK를 설치하거나 마운트합니다</string>
     <string name="settings_auto_uninstall_with_shizuku">충돌 시 자동 제거</string>
     <string name="settings_auto_uninstall_with_shizuku_description">서명 충돌이 발생하면 기존 앱을 제거합니다. 이 경우 앱 데이터가 삭제될 수 있습니다</string>

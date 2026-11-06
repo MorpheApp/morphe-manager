@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Ezkutatu aplikazio hau ?</string>
     <string name="home_more_apps_title">Aplikazio gehiago</string>
     <string name="home_more_apps_hide_title">Ezkutatu tx thẻ hau?</string>
-    <string name="home_more_apps_hide_message">Ezarpenak &gt; Itxura &gt; Hasierako pantailatik etengabe itzuli dezakezu</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Eduki berriroBringing it back anytime in %1$s</string>
     <string name="home_app_hide_message">Aplikazio hau ezkutuko da pantaila nagusitik. Gero berreskuratu dezakezu ezkutuko aplikazioetatik, zerrendaren beheko botoia erabiliz</string>
     <string name="home_app_will_be_hidden">Aplikazio hau ezkutuko da</string>
     <string name="home_app_hidden_named">%s ezkututa</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Gako fidagarria</string>
     <string name="sources_signing_key_new">Giltza berria</string>
     <string name="sources_patch_expert_badge">Aditua</string>
-    <string name="sources_patch_expert_badge_tooltip">Aktibatu Adituen modua Konfigurazioan patch hau eskualdian sartzeko</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Aktibatu %1$s patch hau eskuz sartzeko</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Laguntza behar duzu APKa aurkitzeko?</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt; patch-atzeko, APK bertsio patch-atu gabekoa behar duzu:</string>
@@ -508,7 +510,6 @@ Emaitzarik onenak lortzeko, aplikazio honek &lt;b&gt;APK oso bat&lt;/b&gt; patch
     <string name="shortcut_repatch_long">Aplikazio zaharkituta berrepatchatu</string>
     <string name="shortcut_check_updates_short">Eguneratzeak egiaztatu</string>
     <string name="shortcut_check_updates_long">Egitezak eguneratzea egiaztatu</string>
-    <string name="shortcut_patch_app">%s patchatu</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Desinstalatu aplikazio hau?</string>
     <string name="home_app_info_uninstall_removes_data">Aplikazioa eta haren datuak kendu dira gailu honetatik</string>
@@ -529,6 +530,7 @@ Emaitzarik onenak lortzeko, aplikazio honek &lt;b&gt;APK oso bat&lt;/b&gt; patch
     <string name="home_app_info_install_type_custom_installer">Instalatzaile pertsonalizatua</string>
     <string name="home_app_info_install_type_system_installer">Sistemaren instalatzailea</string>
     <string name="home_app_info_install_type_play_store">Play Store instalazioa</string>
+    <string name="home_app_info_install_type_root">Root instalazioa</string>
     <string name="home_app_info_install_type_root_play_store">Root Play Store instalazioa</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Store instalazioa</string>
     <string name="home_app_info_patch_update_available">Patch-en eguneratze bat eskuragarri dago</string>
@@ -570,7 +572,8 @@ Emaitzarik onenak lortzeko, aplikazio honek &lt;b&gt;APK oso bat&lt;/b&gt; patch
     <string name="root_mount_module_unmount_warning">KernelSU-k \"Unmount modules by default\" aktibatuta badu, ireki KernelSU &gt; Superuser &gt; muntatu duzun aplikazioa &gt; Profile &gt; Custom eta desaktibu \"Unmount modules\". Bestela, muntatu den APK patch-atua agian ez da eragikorra izango, Morphe-k muntatuta erakutsirik hala ere</string>
     <string name="root_pre_patch_installer_standard_title">Instalazio standarren modua</string>
     <string name="root_pre_patch_installer_standard_description">APK normal batean patch-otzen du GmsCore support-arekin. Zure instalatzailearen konfigurazioa erabiltzen da patch-otzearen ondoren</string>
-    <string name="root_pre_patch_installer_hint">Settings &gt; Patching &gt; Installation &gt; Installer selection prompt aktibatuta dagoenean galdetzen da. Patch-egoera ezin da alda egin patch-a egin ondoren</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">%1$s %2$s-en konfiguratuta dagoen bitartean galdetu da. Patch-modua ezin da alda egin patch-atze aftermath</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Errorea portapaperean kopiatuta</string>
     <string name="patcher_error_log">Erroren fitxategia</string>
@@ -669,6 +672,14 @@ Instalazioa kendupean aplikazioaren datu guztiak betiko ezabatuko dira"</string>
     <string name="patcher_step_group_saving">Gorde</string>
     <string name="patcher_step_write_patched">APK patched fitxategia idazten</string>
     <string name="patcher_step_sign_apk">APK patched fitxategia sinatzen</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">DEX fitxategiak irakurtzen</string>
+    <string name="patcher_task_extracting_resources">Baliabideak ateratzen</string>
+    <string name="patcher_task_decoding_resources">Baliabideak dekodatzen</string>
+    <string name="patcher_task_indexing_classes">Klaseak indexatzen</string>
+    <string name="patcher_task_compiling_dex">DEX fitxategiak konpilatzen</string>
+    <string name="patcher_task_compiling_resources">Baliagarriak konpilatzen</string>
+    <string name="patcher_task_writing_apk">APK fitxategia idazten</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Atzeko planeko patching babesa</string>
     <string name="battery_optimization_dialog_description">Gailu batzuek patching-a stop egin dezakete aplikazioa minimizatu denean. Morphe-ri bateria-muga gabera egiteko baimena eman patching-a fidagarriki amaitzea bermatzeko</string>
@@ -717,7 +728,8 @@ Instalazioa kendupean aplikazioaren datu guztiak betiko ezabatuko dira"</string>
     <string name="patched_app_save_failed_toast">Aplikazio patched-a gordestea huts egin du</string>
     <string name="plugin_activity_dialog_body">Hizkia honekin aurrera egiteko erabiltzailearen elkarrizatera beharrezkoa da</string>
     <string name="patcher_process_killed_message">Sistemak patchera utzi du amaitu aurretik, normalean memoria askatzeko. Itxi beste aplikazioak eta saiatu berriz</string>
-    <string name="patcher_process_crashed_message">Patcher-a crash egin du amaitu aurretik. Berriro gertatzen bada, txukutu \"Erabili VM integratua\" araumeetan eta reportatu arazoa log-arekin</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Patcher-a crash egin du amaitu aurretik. Berriz gertatzen bada, desaktibatu %1$s eta reportatu arazoa log-arekin</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Patcher-i memoria amaitsio zaio %1$s MB heap-ekin. Aplikazio hau handia egizgi da hautatutako patch-entzat. Saiatu patch-iturri gutxiagoekin, edo hautatu patch gutxiago</string>
     <string name="install_app_success">Arrakastaz instalatu da</string>
@@ -1017,9 +1029,8 @@ Irudien dimentsioak honako hauek izan behar dira:
     <string name="installer_title">Aukeratu instalatzailea</string>
     <string name="installer_internal_description">Android pakete instalatzailea erabiltzen du</string>
     <string name="installer_play_store_description">Sistemaren instalatzailea erabiltzen du eta Google Play Storea instalazio-iturri gisa ezartzen du</string>
+    <string name="installer_root_description">Instalatzen da isilki root-arekin</string>
     <string name="installer_root_play_store_description">Root-en bidez isilik instalatzen du eta Google Play Storea instalazio-iturri gisa ezartzen du</string>
-    <string name="installer_auto_saved_name">Root mount</string>
-    <string name="installer_auto_saved_description">Root mount moduan patchatutako aplikazioak mount egiten ditu. APK patchatuen bertsio estandarrek beste instalatzaile bat erabiltzen dute</string>
     <string name="installer_shizuku_description">Isilki instalatzen du Shizuku edo Sui erabiliz</string>
     <string name="installer_shizuku_play_store_description">Shizuku edo Sui bidez isilik instalatzen du eta Google Play Storea instalazio-iturri gisa ezartzen du</string>
     <string name="installer_option_none">Ez dago ordezkoia</string>
@@ -1029,7 +1040,7 @@ Irudien dimentsioak honako hauek izan behar dira:
     <string name="installer_status_shizuku_not_installed">Instalatu Shizuku edo Sui aukera hau erabiltzeko</string>
     <string name="installer_status_shizuku_not_running">Hasi Shizuku edo Sui eta saiatu berriz</string>
     <string name="installer_status_shizuku_permission">Eman baimena Morphe-ri Shizuku aplikaziotik</string>
-    <string name="installer_mount_warning_install">Zure instalatzaile nagusia rooted mount instalatzailean dago. Gorde 된 app hau ez da mount erabiliz instalatu</string>
+    <string name="installer_mount_warning_install">Patch modua root mount-era konfiguratu dago. Gorde 된 aplikazio hau ez da mount erabiliz instalatu</string>
     <string name="mount_version_mismatch_message">Aplikazio stock bertsioa (%2$s) ez da patched aplikazio bertsioarekin (%1$s) bat. Montatu stock bertsio egokia eta saiatu berriro</string>
     <string name="mount_stock_restore_failed_message">Android-ek uste du gorde zen APK originala. Instalatu bertsio stock dagokiona, eta saiatu Mount berriro</string>
     <string name="installer_status_shizuku_unsupported">Instalatuen Shizuku bertsioa ez da onartua</string>
@@ -1051,11 +1062,17 @@ Irudien dimentsioak honako hauek izan behar dira:
     <string name="installer_play_store_warning_continue">Ulertu dut, jarraitu</string>
     <string name="installer_play_store_mode">Instalatu Play Store bezala</string>
     <string name="installer_play_store_mode_description">Markatu Google Play Store instalazio-iturri gisa</string>
+    <string name="settings_section_patch_mode">Patch modua</string>
+    <string name="settings_patch_mode_ask">Behin guztiz galdetu</string>
+    <string name="settings_patch_mode_ask_description">Aplikazio bakoitza patch-atu aurretik, root mount-erako ala instalazio standarbatzako patch-a egiteko galdetzen du</string>
+    <string name="settings_section_after_patching">Patch-atu ondoren</string>
+    <string name="settings_after_patching_install">Instalatu automatikoki</string>
+    <string name="settings_after_patching_ask">Galdetu zein instalatzailea</string>
+    <string name="settings_after_patching_ask_description">Aplikazio bat instalatu gymnastics bakoitzean, zein instalatzailea erabili galdetzen du</string>
+    <string name="settings_after_patching_manual">Instalatu eskuz</string>
+    <string name="settings_after_patching_manual_description">Instalatu botoia sakatu ondoren, instalatzaile lehenetsuarekin instalatzen da</string>
     <string name="settings_nomount_only">NoMount bakarrik</string>
     <string name="settings_nomount_only_description">Aplikazioak NoMount-ekin bakarrik muntatzen ditu eta inoiz ez baliatzen bind mount-era, beraz, hori gabe muntatu gabe geratzen dira</string>
-    <string name="settings_prompt_installer_on_install">Instalatzailea aukeratzeko gomendioa</string>
-    <string name="settings_prompt_installer_on_install_description">Nola instalatu aplikazio bakoitza galdetzen du: root-arekin patch-a egin aurretik, bestela patch-a egin ondoren</string>
-    <string name="settings_auto_install_with_shizuku">Automatiko instalazioa patching-en ondoren</string>
     <string name="settings_auto_install_with_shizuku_description">Patch-a amaitu bezain laster instalatzen edo muntatzen du patch-atutako APK-a</string>
     <string name="settings_auto_uninstall_with_shizuku">Auto-desinstalatu gatazkadan</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Desinstalatzen du aplikazio existentea sinatura-gataika dagoenean. Honek aplikazioaren datuak kendu ditzake</string>

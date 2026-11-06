@@ -234,9 +234,9 @@ class UpdateViewModel(
             is InstallerManager.InstallPlan.PlayStore ->
                 launchSystemInstall { sessionInstaller.launchPlayStoreInstall(location) }
 
+            is InstallerManager.InstallPlan.Root,
             is InstallerManager.InstallPlan.RootPlayStore,
-            is InstallerManager.InstallPlan.ShizukuPlayStore,
-            is InstallerManager.InstallPlan.Mount ->
+            is InstallerManager.InstallPlan.ShizukuPlayStore ->
                 failInstall(app.getString(R.string.installer_status_not_supported))
 
             is InstallerManager.InstallPlan.Shizuku ->

@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Fela þetta app?</string>
     <string name="home_more_apps_title">Fleiri forrit</string>
     <string name="home_more_apps_hide_title">Fela þetta kort?</string>
-    <string name="home_more_apps_hide_message">Þú getur sýnt það aftur hvenær sem er undir Stillingar &gt; Útlitsstillingar &gt; Heimsíru</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Þú getur fengið það aftur hvenær sem er í %1$s</string>
     <string name="home_app_hide_message">Þetta app verður falið frá heimaskjánum. Hægt er að endurheimta það síðar frá falinu forritum með því að nota hnappinn neðst á listanum</string>
     <string name="home_app_will_be_hidden">Þetta app verður falin</string>
     <string name="home_app_hidden_named">%s falin</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Treystur lykill</string>
     <string name="sources_signing_key_new">Nýr lykill</string>
     <string name="sources_patch_expert_badge">Sérfærni</string>
-    <string name="sources_patch_expert_badge_tooltip">Virkja sérfærni stillingu til að bæta við þessari breytingu handvirkt</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Kveiktu á %1$s til að taka þessa bætingu með handvirkt</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Þarfðu hjálp við að finna APK-skrána?</string>
     <string name="home_apk_availability_dialog_simple">Til að pakka &lt;b&gt;%s&lt;/b&gt;, þarf unguðan APK útgáfa:</string>
@@ -508,7 +510,6 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="shortcut_repatch_long">Endurbreyta úreltum appum</string>
     <string name="shortcut_check_updates_short">Leita að uppfærslum</string>
     <string name="shortcut_check_updates_long">Leita að breytingum</string>
-    <string name="shortcut_patch_app">Breyta %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Afuppsetja þetta forrit?</string>
     <string name="home_app_info_uninstall_removes_data">Forappið og gögn þess eru fjarlægð frá þessu tæki</string>
@@ -529,6 +530,7 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="home_app_info_install_type_custom_installer">Sérstakur uppsetjari</string>
     <string name="home_app_info_install_type_system_installer">Kerfisuppsetjari</string>
     <string name="home_app_info_install_type_play_store">Play Store uppsetning</string>
+    <string name="home_app_info_install_type_root">Rót uppsetning</string>
     <string name="home_app_info_install_type_root_play_store">Root Play Store uppsetning</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Store uppsetning</string>
     <string name="home_app_info_patch_update_available">Breytistilling er til staðar</string>
@@ -570,7 +572,8 @@ Fyrir bestu niðurstöður mælt er með því að breyta &lt;b&gt;fullu APK&lt;
     <string name="root_mount_module_unmount_warning">Ef KernelSU hefur \"Afmontera einingar sjálfgefið\" kveikt, opnaðu KernelSU &gt; Superuser &gt; forritið sem þú montir &gt; Profíll &gt; Sérsniðið og slökktu á \"Afmontera einingar\". Annars gæti montaður breytt APK ekki komið í gildi, jafnvel þótt Morphe sýni það sem mont</string>
     <string name="root_pre_patch_installer_standard_title">Venjulegur uppsetningarmáti</string>
     <string name="root_pre_patch_installer_standard_description">Pökkun sem venjulegt APK með GmsCore stuðningi. Uppsetningastillingin þín er notuð eftir pökkun</string>
-    <string name="root_pre_patch_installer_hint">Átt að spyrja þegar Stillingar &gt; Pökkun &gt; Uppsetning &gt; Valsval fyrir uppsetara er virkt. Ekki er hægt að breyta pökkunarham eftir pökkun</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Beðið á meðan %1$s er stillt á %2$s. Bætingartillbúningur holdu ekki breyta eftir bætingu</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Villa afrituð á klippiborð</string>
     <string name="patcher_error_log">Villulog</string>
@@ -669,6 +672,14 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="patcher_step_group_saving">Vista</string>
     <string name="patcher_step_write_patched">Skrifa breytta APK skrá</string>
     <string name="patcher_step_sign_apk">Undirskrifa breytta APK skrá</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Að lesa DEX-skráir</string>
+    <string name="patcher_task_extracting_resources">Úttak auðlinda</string>
+    <string name="patcher_task_decoding_resources">Afkóðun auðlinda</string>
+    <string name="patcher_task_indexing_classes">Vísun flokka</string>
+    <string name="patcher_task_compiling_dex">Samsetning DEX skrár</string>
+    <string name="patcher_task_compiling_resources">Samsetning auðlinda</string>
+    <string name="patcher_task_writing_apk">Ritar APK-skrá</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Vernd fyrir bakgrunns breytingar</string>
     <string name="battery_optimization_dialog_description">Sum tæki gætu stöðvað breytingasmáttana þegar appið er lágmarks. Leyfðu Morphe að keyra án rafhlöðubindingar til að tryggja áreiðanlega breytinga</string>
@@ -717,7 +728,8 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="patched_app_save_failed_toast">Ekki tókst að vista breytt app</string>
     <string name="plugin_activity_dialog_body">Þú þarft að grípa í gagnvirkt á hugbuginn til að fara áfram</string>
     <string name="patcher_process_killed_message">Kerfið stóð patcharann áður en hann tókst, yfirleitt til að losa um minni. Lokaðu öðrum forritum og reyndu aftur</string>
-    <string name="patcher_process_crashed_message">Patcherinn hroupaði áður en hann var lokið. Ef þetta gerist aftur, slökkvið á \"Nota innbyggða VM\" í stillingum og tilkynnið vandamálið með logga</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Bætingartólið hrynjaði áður en það var lokið. Ef þetta gerist aftur, slökkðu á %1$s og tilkýnðu vandamálið með skrárúta</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Fleipir hlaup út fyrir minni með %1$s MB stakflötum. Þessi forrit er of stórt fyrir valda fleipa. Reyndu að fleipa með færri fleiugrunnum eða veldu færri fleipa</string>
     <string name="install_app_success">Uppsett með góðum árangri</string>
@@ -1014,9 +1026,8 @@ Myndastærðin verður að vera sem hér segir:
     <string name="installer_title">Velji uppsetjara</string>
     <string name="installer_internal_description">Installerar hljóðlega með Shizuku eða Sui</string>
     <string name="installer_play_store_description">Notar kerfiuppsetninguna og stillir Google Play Store sem uppsprettu</string>
+    <string name="installer_root_description">Uppsetning vegna root gerist hljóðlega</string>
     <string name="installer_root_play_store_description">Uppsetja með rótaraðgangi og stillir Google Play Store sem uppsetningartöku</string>
-    <string name="installer_auto_saved_name">Root mount</string>
-    <string name="installer_auto_saved_description">Mountar forrit sem voru pökkunin í root mount ham. Venjulegar pökkaðar APK nota aðra uppsetningu</string>
     <string name="installer_shizuku_description">Installar biðjaðrun</string>
     <string name="installer_shizuku_play_store_description">Uppsetja þögnrænlega í gegnum Shizuku eða Sui og stillir Google Play Store sem uppsetningartöku</string>
     <string name="installer_option_none">Engin varabreyting</string>
@@ -1026,7 +1037,7 @@ Myndastærðin verður að vera sem hér segir:
     <string name="installer_status_shizuku_not_installed">Install Shizuku eða Sui til að nota þennan valkost</string>
     <string name="installer_status_shizuku_not_running">Ræsa Shizuku eða Sui og reyndu aftur</string>
     <string name="installer_status_shizuku_permission">Leyfðu Morphe aðgang frá Shizuku appinu</string>
-    <string name="installer_mount_warning_install">Uppsettur uppsetjara þinn er stilltur á róttæka uppsetjarann. Þetta vistaða app var ekki uppsett með uppsetningu</string>
+    <string name="installer_mount_warning_install">Bætingartillbúningur er stilltur á root mount. Þessi vistuð forrit voru ekki sett upp með mount</string>
     <string name="mount_version_mismatch_message">Lager gerð app útgáfa (%2$s) passar ekki við pattaða app útgáfu (%1$s). Uppsetja samsvarandi vísindalaga gerð og reyna aftur</string>
     <string name="mount_stock_restore_failed_message">Android hafnaði vistaðri upprunalegu APK. Settu upp samsvarandi staðalútgáfu, prófaðu síðan Mount aftur</string>
     <string name="installer_status_shizuku_unsupported">Stuðlað er ekki við uppsettu Shizuku útgáfuna</string>
@@ -1048,11 +1059,17 @@ Myndastærðin verður að vera sem hér segir:
     <string name="installer_play_store_warning_continue">Ég skil, halda áfram</string>
     <string name="installer_play_store_mode">Installera sem Play Store</string>
     <string name="installer_play_store_mode_description">Merkir Google Play Store sem uppsetningaruppspretta</string>
+    <string name="settings_section_patch_mode">Bætingartillbúningur</string>
+    <string name="settings_patch_mode_ask">Spyrja每次</string>
+    <string name="settings_patch_mode_ask_description">Spyrst fyrir hverju forriti hvort eigi að bæta það fyrir root mount eða staðlaða uppsetningu</string>
+    <string name="settings_section_after_patching">Eftir bætingu</string>
+    <string name="settings_after_patching_install">Setja upp sjálfkrafa</string>
+    <string name="settings_after_patching_ask">Spyrja hvaða uppsetningartóli</string>
+    <string name="settings_after_patching_ask_description">Spyrst hvaða uppsetningartóli eigi að nota hverja vítru sinnum þegar forrit er sett upp</string>
+    <string name="settings_after_patching_manual">Setja upp handvirkt</string>
+    <string name="settings_after_patching_manual_description">Setur upp með sjálfgefnu uppsetningartóli þegar þú smellir á Uppsetningu</string>
     <string name="settings_nomount_only">Aðeins NoMount</string>
     <string name="settings_nomount_only_description">Settar upp forrit að sameiginlega með NoMount og fellur aldrei til baka á bind mount, svo þau halda sér ósettum án þess</string>
-    <string name="settings_prompt_installer_on_install">Bestaður heimildurum í hverjum breyttu app installu</string>
-    <string name="settings_prompt_installer_on_install_description">Biður um hvernig á að setja upp hver forrit: með root-veitingum áður en pökkuð er, annars eftir það</string>
-    <string name="settings_auto_install_with_shizuku">Sjálfvirkt uppsetning eftir breytingar</string>
     <string name="settings_auto_install_with_shizuku_description">Setur upp eða festir pökkaða APK strax og pökkun lokast</string>
     <string name="settings_auto_uninstall_with_shizuku">Sjálfvirk upphæfing við átök</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Týnir núverandi forriti við undirskriftaratvik. Þetta getur fjarlægt forritagögn</string>

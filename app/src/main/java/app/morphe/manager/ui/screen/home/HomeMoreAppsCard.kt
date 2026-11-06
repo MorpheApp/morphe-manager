@@ -18,6 +18,7 @@ import app.morphe.manager.ui.screen.shared.ConfirmDialog
 import app.morphe.manager.ui.screen.shared.DialogHost
 import app.morphe.manager.ui.screen.shared.GlassPlaceholderIcon
 import app.morphe.manager.util.AppCardColorDefaults
+import app.morphe.manager.util.settingsPath
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
 
@@ -96,7 +97,10 @@ private fun MoreAppsCard(
     DialogHost(visible = showHideDialog) {
         ConfirmDialog(
             title = stringResource(R.string.home_more_apps_hide_title),
-            message = stringResource(R.string.home_more_apps_hide_message),
+            message = stringResource(
+                R.string.home_more_apps_hide_message,
+                settingsPath(R.string.appearance, R.string.settings_appearance_home_screen)
+            ),
             primaryText = hideAction.label,
             isPrimaryDestructive = false,
             onConfirm = {

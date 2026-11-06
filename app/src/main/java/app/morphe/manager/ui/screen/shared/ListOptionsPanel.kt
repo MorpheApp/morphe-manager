@@ -13,6 +13,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -47,16 +49,38 @@ inline fun <reified T> listOptionSection(
     ListOptionSection(titleRes, icon, current, default, sortModeOptions(default), onSelect)
 
 /**
- * What the button opening a [ListOptionsPanel] says it holds: the order alone while nothing is
- * filtered, and the filter with it once one narrows the list.
+ * The header button opening a [ListOptionsPanel], engaged while it is open. Only a filter marks it,
+ * as the one option hiding part of the list: an order or a grouping is kept for good, so a mark for
+ * it would never go away.
+ *
+ * @param filterRes The active filter, null while nothing narrows the list.
  */
 @Composable
-fun listOptionsStateDescription(@StringRes sortRes: Int, @StringRes filterRes: Int?): String =
-    if (filterRes != null) {
+fun ListOptionsButton(
+    @StringRes sortRes: Int,
+    @StringRes filterRes: Int?,
+    open: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true
+) {
+    // The order alone while nothing is filtered, and the filter with it once one narrows the list
+    val state = if (filterRes != null) {
         stringResource(R.string.list_options_state_description, stringResource(sortRes), stringResource(filterRes))
     } else {
         stringResource(sortRes)
     }
+    TitleAction(
+        icon = MaterialSymbols.Rounded.Sort.autoMirrored,
+        contentDescription = stringResource(R.string.sort),
+        onClick = onClick,
+        modifier = modifier.semantics { stateDescription = state },
+        style = TitleActionStyle.Toggle,
+        active = open,
+        marked = filterRes != null,
+        enabled = enabled
+    )
+}
 
 /**
  * How a list is sorted and filtered, and grouped where it can be: a row for each [sections] entry

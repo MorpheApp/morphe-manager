@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Бул колдонмону жашыруу керекпи?</string>
     <string name="home_more_apps_title">Көбүрөөк колдонмолор</string>
     <string name="home_more_apps_hide_title">Бул картаны жашыруу керекпи?</string>
-    <string name="home_more_apps_hide_message">Сиз аны каалаган убакта Жөндөөлөр &gt; Сырткы көрүнүш &gt; Башкы экран бөлүмүнөн кайтарып алсаңыз болот</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Сиз аны каалаган убакта %1$s бөлүмүнөн кайтарып алсаңыз болот</string>
     <string name="home_app_hide_message">Бул тиркеме башкы экрандан жашырылат. Кийин аны жашырылган тиркемелерден тизменин төмөгүндөгү баскычтун жардамы менен калыбына келтирсеңиз болот</string>
     <string name="home_app_will_be_hidden">Бул колдонмо жашырылат</string>
     <string name="home_app_hidden_named">%s жашырылды</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Ишенимдүү ачкыч</string>
     <string name="sources_signing_key_new">Жаңы ачкыч</string>
     <string name="sources_patch_expert_badge">Эксперт</string>
-    <string name="sources_patch_expert_badge_tooltip">Бул патчты кол менен кошуу үчүн Жөндөөлөрдөн Эксперт режимин иштетиңиз</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Бул патчты кол менен кошуу үчүн %1$s бөлүмүн күйгүзүңүз</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">APK файлын табууга жардам керекпи?</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt; тиркемесин патчтөө үчүн, сизге патчтелбеген APK версиясы керек:</string>
@@ -508,7 +510,6 @@
     <string name="shortcut_repatch_long">Эскирген колдонмолорду кайра патчилөө</string>
     <string name="shortcut_check_updates_short">Жаңыртууларды текшерүү</string>
     <string name="shortcut_check_updates_long">Патч жаңыртууларын текшерүү</string>
-    <string name="shortcut_patch_app">%s патчилөө</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Бул тиркемени өчүрөсүзбү?</string>
     <string name="home_app_info_uninstall_removes_data">Тиркеме жана анын маалыматтары бул түзүлүштөн өчүрүлөт</string>
@@ -529,6 +530,7 @@
     <string name="home_app_info_install_type_custom_installer">Ыйыкталган орноткуч</string>
     <string name="home_app_info_install_type_system_installer">Системалык орноткуч</string>
     <string name="home_app_info_install_type_play_store">Play Store орнотуусу</string>
+    <string name="home_app_info_install_type_root">Root орнотуу</string>
     <string name="home_app_info_install_type_root_play_store">Root Play Store орнотуу</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Store орнотуу</string>
     <string name="home_app_info_patch_update_available">Патч жаңыртуусу жеткиликтүү</string>
@@ -570,7 +572,8 @@
     <string name="root_mount_module_unmount_warning">Эгерде KernelSU\'да \"Модулдарды стандарттык түрдө размонтировать кылуу\" күйгүзүлгөн болсо, KernelSU &gt; Superuser &gt; сиз монтировать кылган колдонмо &gt; Profile &gt; Custom бөлүмүн ачып, \"Unmount modules\" функциясын өчүрүңүз. Болбосо, монтировать кылынган патчтелген APK иштебеши мүмкүн, атүгүл Morphe аны монтировать кылынган деп көрсөтсө да</string>
     <string name="root_pre_patch_installer_standard_title">Стандарттуу орнотуу режими</string>
     <string name="root_pre_patch_installer_standard_description">GmsCore колдоосу менен кадимки APK катары патчилет. Патчилгенден кийин сиздин орноткуч жөндөөлөрүңүз колдонулат</string>
-    <string name="root_pre_patch_installer_hint">Параметрлери &gt; Патчтоо &gt; Орнотуу &gt; Орнотуучуну тандоо суроосу күйгүзүлгөндө суралат. Патчтоодон кийин патч режиминин өзгөртүлбөйт</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">%1$s бөлүмү %2$s деп коюлганда суралды. Патчтоодон кийин патч режиминин өзгөртүүгө мүмкүн эмес</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Ката алмаштыргычка көчүрүлдү</string>
     <string name="patcher_error_log">Каталардын журналы</string>
@@ -669,6 +672,14 @@
     <string name="patcher_step_group_saving">Сакталууда</string>
     <string name="patcher_step_write_patched">Патчталган APK файлы жазылууда</string>
     <string name="patcher_step_sign_apk">Патчталган APK файлы кол коюлууда</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">DEX файлдарын окуу</string>
+    <string name="patcher_task_extracting_resources">Ресурстарды чыгаруу</string>
+    <string name="patcher_task_decoding_resources">Ресурстарды декоддоо</string>
+    <string name="patcher_task_indexing_classes">Класстарды индексациялоо</string>
+    <string name="patcher_task_compiling_dex">DEX файлдарын компиляциялоо</string>
+    <string name="patcher_task_compiling_resources">Ресурстарды компиляциялоо</string>
+    <string name="patcher_task_writing_apk">APK файлын жазуу</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Фондук патчингди коргоо</string>
     <string name="battery_optimization_dialog_description">Кээ бир түзүлүштөр тиркеме минималдаштырылганда патчерди токтотушу мүмкүн. Патчингдин ишенимдүү бүтүшүн камсыз кылуу үчүн Morphe\'ге батарея чектөөлөрсүз иштөөгө уруксат бериңиз</string>
@@ -717,7 +728,8 @@
     <string name="patched_app_save_failed_toast">Патчталган колдонмону сактоо мүмкүн болгон жок</string>
     <string name="plugin_activity_dialog_body">Бул плагин менен улантуу үчүн колдонуучунун өз ара аракеттенүүсү талап кылынат</string>
     <string name="patcher_process_killed_message">Система патчерди бүтөрүнө чейин токтотту, адатта бул эс тутумду бошотуу үчүн жасалат. Башка колдонмолорду жаап, кайра аракет кылып көрүңүз</string>
-    <string name="patcher_process_crashed_message">Патчер бүтөрүнө чейин бузулду. Эгерде бул кайрадан болсо, жөндөөлөрдөн \"Кириktirүүчү VM колдонуу\" функциясын өчүрүңүз жана лог менен бирге маселе жөнүндө билдирүү жөнөтүңүз</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Патчер бүтө электе ката берип жабылды. Эгер бул кайрадан болсо, %1$s бөлүмүн өчүрүңүз жана лог менен бирге маселе жөнүндө билдириңиз</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Патчердин %1$s MB үйрүк эс тутуму түгөндү. Бул колдонмо тандалган патчтар үчүн өтө чоң. Азыраак патч булактарын колдонуп көрүңүз же патчтардын санын азайтыңыз</string>
     <string name="install_app_success">Ийгиликтүү орнотулду</string>
@@ -1017,9 +1029,8 @@ morphe_header_custom_dark.png
     <string name="installer_title">Орноткучну тандаңыз</string>
     <string name="installer_internal_description">Android пакет орнотуучусун колдонот</string>
     <string name="installer_play_store_description">Системалык орнотуучуну колдонот жана орнотуу булагы катары Google Play Store\'ду белгилейт</string>
+    <string name="installer_root_description">Root менен унчукпай орнотулат</string>
     <string name="installer_root_play_store_description">Root аркылуу унчукпай орнотот жана орнотуу булагы катары Google Play Store\'ду белгилейт</string>
-    <string name="installer_auto_saved_name">Root mount</string>
-    <string name="installer_auto_saved_description">Root mount режиминде патчталган колдонмолорду орнотут. Стандарттык патчталган APK-лар башка орнотуучуну колдонушат</string>
     <string name="installer_shizuku_description">Shizuku же Sui аркылуу унчукпай орнотот</string>
     <string name="installer_shizuku_play_store_description">Shizuku же Sui аркылуу унчукпай орнотот жана орнотуу булагы катары Google Play Store\'ду белгилейт</string>
     <string name="installer_option_none">Резерв жок</string>
@@ -1029,7 +1040,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">Бул опцияны колдонуу үчүн Shizuku же Sui орнотуңуз</string>
     <string name="installer_status_shizuku_not_running">Shizuku же Sui иштетиңиз жана кайра аракет кылыңыз</string>
     <string name="installer_status_shizuku_permission">Shizuku тиркемесинен Morphe\'ге уруксат бериңиз</string>
-    <string name="installer_mount_warning_install">Сиздин негизги орноткучуңуз rooted mount орноткучуна коюлган. Бул сакталган тиркеме mount аркылуу орнотулган эмес</string>
+    <string name="installer_mount_warning_install">Патч режими root mount режимине коюлган. Бул сакталган колдонмо mount аркылуу орнотулган эмес</string>
     <string name="mount_version_mismatch_message">Стоктун тиркеме версиясы (%2$s) патчталган тиркеме версиясына (%1$s) дал келбейт. Тиешелүү сток версиясын mount кылып, андан кийин кайра аракет кылыңыз</string>
     <string name="mount_stock_restore_failed_message">Android сакталган түпкүл APK-ны четке acordoтту. Тиешелүү сток версиясын орнотуп, андан кийин кайра Mount кылууга аракет кылыңыз</string>
     <string name="installer_status_shizuku_unsupported">Орнотулган Shizuku версиясы колдогуမဟုတ်</string>
@@ -1051,11 +1062,17 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_continue">Түшүндүм, улантуу</string>
     <string name="installer_play_store_mode">Play Store катары орнотуу</string>
     <string name="installer_play_store_mode_description">Орнотуу булагы катары Google Play Store\'ду белгилейт</string>
+    <string name="settings_section_patch_mode">Патч режими</string>
+    <string name="settings_patch_mode_ask">Ар бир жолу суроо</string>
+    <string name="settings_patch_mode_ask_description">Ар бир колдонмону патчтөөдөн мурун аны root mount үчүн же стандарттуу орнотуу үчүн патчтөөнү сурайт</string>
+    <string name="settings_section_after_patching">Патчтөөдөн кийин</string>
+    <string name="settings_after_patching_install">Автоматтык түрдө орнотуу</string>
+    <string name="settings_after_patching_ask">Кайсы орноткуч экенин суроо</string>
+    <string name="settings_after_patching_ask_description">Колдонмо орнотулган сайын кайсы орноткучту колдонууну сурайт</string>
+    <string name="settings_after_patching_manual">Кол менен орнотуу</string>
+    <string name="settings_after_patching_manual_description">Орнотуу баскычын баскандан кийин стандарттуу орноткуч менен орнотулат</string>
     <string name="settings_nomount_only">NoMount гана</string>
     <string name="settings_nomount_only_description">Тиркемелерди NoMount менен гана монтаж жасайт жана bind mount\'ка эч качан кайрылбайт, ошондуктан алар алсыз монтаждалбаган бойдон калат</string>
-    <string name="settings_prompt_installer_on_install">Орноткондо орнотуучуну тандоо суроосу</string>
-    <string name="settings_prompt_installer_on_install_description">Ар бир тиркемени кантип орноту luxurious сурайт: патчтоодон мурун root менен, же болбосо андан кийин</string>
-    <string name="settings_auto_install_with_shizuku">Патчтоодон кийин автоматтык түрдө орнотуу</string>
     <string name="settings_auto_install_with_shizuku_description">Патчтоо аяктагандан кийин дароо патчталган APK файлын орнотот же монтирует</string>
     <string name="settings_auto_uninstall_with_shizuku">Конфликт болгондо автоматтык түрдө өчүрүү</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Кол тамгалардын карама-каршылыгы болгондо mevcut колдонмону өчүрөт. Бул колдонмонун маалыматтарын өчүрүп салышы мүмкүн</string>

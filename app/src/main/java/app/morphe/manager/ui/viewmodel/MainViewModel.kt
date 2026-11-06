@@ -71,9 +71,6 @@ class MainViewModel(
     /** Set by the launcher shortcut, which asks the app to work out what needs re-patching. */
     var pendingOutdatedBatch by mutableStateOf(false)
 
-    /** Package a per-app launcher shortcut wants the patch dialog opened for. */
-    var pendingPatchPackage: String? by mutableStateOf(null)
-
     /** Package a notification wants the app info dialog opened for. */
     var pendingAppInfoPackage: String? by mutableStateOf(null)
 

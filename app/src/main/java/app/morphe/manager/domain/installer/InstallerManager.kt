@@ -27,8 +27,10 @@ import android.util.Log
 import androidx.annotation.StringRes
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.InstallType
+import app.morphe.manager.domain.manager.AfterPatching
 import app.morphe.manager.domain.manager.InstallerPreferenceTokens
 import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.domain.manager.RootPatchMode
 import app.morphe.manager.util.AOSP_INSTALLER_LABEL
 import app.morphe.manager.util.AOSP_INSTALLER_PACKAGE
 import app.morphe.manager.util.AOSP_INSTALLER_PACKAGE_LEGACY
@@ -60,8 +62,8 @@ class InstallerManager(
 
         entryFor(Token.Internal, target, checkRoot = false)?.let(entries::add)
         entryFor(Token.PlayStore, target, checkRoot = false)?.let(entries::add)
+        entryFor(Token.Root, target, checkRoot = false)?.let(entries::add)
         entryFor(Token.RootPlayStore, target, checkRoot = false)?.let(entries::add)
-        entryFor(Token.AutoSaved, target, checkRoot = false)?.let(entries::add)
         entryFor(Token.Shizuku, target, checkRoot = false)?.let(entries::add)
         entryFor(Token.ShizukuPlayStore, target, checkRoot = false)?.let(entries::add)
 
@@ -107,10 +109,9 @@ class InstallerManager(
 
     fun parseToken(value: String?): Token {
         val token = when (value) {
-            InstallerPreferenceTokens.AUTO_SAVED,
-            InstallerPreferenceTokens.ROOT -> Token.AutoSaved
             InstallerPreferenceTokens.SYSTEM -> Token.Internal
             InstallerPreferenceTokens.PLAY_STORE -> Token.PlayStore
+            InstallerPreferenceTokens.ROOT -> Token.Root
             InstallerPreferenceTokens.ROOT_PLAY_STORE -> Token.RootPlayStore
             InstallerPreferenceTokens.NONE -> Token.None
             InstallerPreferenceTokens.SHIZUKU -> Token.Shizuku
@@ -127,8 +128,8 @@ class InstallerManager(
     fun tokenToPreference(token: Token): String = when (token) {
         Token.Internal -> InstallerPreferenceTokens.INTERNAL
         Token.PlayStore -> InstallerPreferenceTokens.PLAY_STORE
+        Token.Root -> InstallerPreferenceTokens.ROOT
         Token.RootPlayStore -> InstallerPreferenceTokens.ROOT_PLAY_STORE
-        Token.AutoSaved -> InstallerPreferenceTokens.AUTO_SAVED
         Token.None -> InstallerPreferenceTokens.NONE
         Token.Shizuku -> InstallerPreferenceTokens.SHIZUKU
         Token.ShizukuPlayStore -> InstallerPreferenceTokens.SHIZUKU_PLAY_STORE
@@ -137,30 +138,29 @@ class InstallerManager(
 
     fun getPrimaryToken(): Token = parseToken(prefs.installerPrimary.getBlocking())
 
-    /**
-     * Whether the installer prompt is answered before patching, which a rooted device does by
-     * choosing between a mount and a standard install. Anywhere else it comes after patching.
-     */
+    /** Whether apps are patched for root mount without asking first. */
+    fun mountsByDefault(): Boolean =
+        rootInstaller.isDeviceRooted() && prefs.rootPatchMode.getBlocking() == RootPatchMode.MOUNT
+
+    /** Whether a rooted device asks before patching whether to patch for root mount. */
     suspend fun promptsBeforePatching(): Boolean =
-        prefs.promptInstallerOnInstall.get() && rootInstaller.isDeviceRooted()
+        rootInstaller.isDeviceRooted() && prefs.rootPatchMode.get() == RootPatchMode.ASK
 
     /**
      * Whether an install started right after patching reaches the user on its own, either
-     * silently or through a confirmation the installer knows how to put in front of them. A
-     * standard install chosen before patching goes through the default installer.
+     * silently or through a confirmation the installer knows how to put in front of them.
      *
      * @param mount Whether the build is mounted rather than installed, which root does without
-     *   any installer.
+     *   any installer, so asking for one leaves nothing to wait for.
      */
     suspend fun autoInstallAllowed(targetPackageName: String, mount: Boolean): Boolean {
-        if (!prefs.autoInstallAfterPatching.get()) return false
-        if (mount) return true
-        // A prompt still to come after patching needs the user there to answer it
-        if (prefs.promptInstallerOnInstall.get() && !promptsBeforePatching()) return false
+        val afterPatching = prefs.afterPatching.get()
+        if (mount) return afterPatching != AfterPatching.MANUAL
+        if (afterPatching != AfterPatching.INSTALL) return false
 
         return when (val token = parseToken(prefs.installerPrimary.get())) {
-            // Both go through a system session, which only updates an app silently in some cases
-            Token.Internal, Token.AutoSaved -> sessionInstaller.canUpdateSilently(targetPackageName)
+            // A system session only updates an app silently in some cases
+            Token.Internal -> sessionInstaller.canUpdateSilently(targetPackageName)
             else -> token.supportsAutoInstall
         }
     }
@@ -190,7 +190,7 @@ class InstallerManager(
                 sessionInstaller.uninstall(packageName)
             }
 
-            Token.AutoSaved,
+            Token.Root,
             Token.RootPlayStore -> {
                 if (availabilityFor(primaryToken, InstallTarget.PATCHER, checkRoot = true).available) {
                     rootInstaller.uninstallPackage(packageName)
@@ -231,11 +231,10 @@ class InstallerManager(
             }
         }
 
-        // Primary is unavailable - check if it's Shizuku or AutoSaved (special cases)
+        // Primary is unavailable - check if it's Shizuku or root (special cases)
         val isSpecialInstaller = primaryToken == Token.Shizuku ||
                 primaryToken == Token.ShizukuPlayStore ||
-                primaryToken == Token.AutoSaved ||
-                primaryToken == Token.RootPlayStore
+                primaryToken.usesRoot
 
         if (isSpecialInstaller) {
             // Return info about unavailability so UI can show appropriate dialog
@@ -292,9 +291,9 @@ class InstallerManager(
         return when (token) {
             Token.Internal -> InstallPlan.Internal(target)
             Token.PlayStore -> InstallPlan.PlayStore(target)
+            Token.Root -> InstallPlan.Root(target)
             Token.RootPlayStore -> InstallPlan.RootPlayStore(target)
             Token.None -> null
-            Token.AutoSaved -> InstallPlan.Mount(target)
             Token.Shizuku -> InstallPlan.Shizuku(target)
             Token.ShizukuPlayStore -> InstallPlan.ShizukuPlayStore(target)
             is Token.Component -> {
@@ -372,20 +371,20 @@ class InstallerManager(
             icon = loadInstallerIcon(PLAY_STORE_INSTALLER_PACKAGE)
         )
 
+        Token.Root -> Entry(
+            token = Token.Root,
+            label = app.getString(R.string.home_app_info_install_type_root),
+            description = app.getString(R.string.installer_root_description),
+            availability = availabilityFor(Token.Root, target, checkRoot),
+            icon = null
+        )
+
         Token.RootPlayStore -> Entry(
             token = Token.RootPlayStore,
             label = app.getString(R.string.home_app_info_install_type_root_play_store),
             description = app.getString(R.string.installer_root_play_store_description),
             availability = availabilityFor(Token.RootPlayStore, target, checkRoot),
             icon = loadInstallerIcon(PLAY_STORE_INSTALLER_PACKAGE)
-        )
-
-        Token.AutoSaved -> Entry(
-            token = Token.AutoSaved,
-            label = app.getString(R.string.installer_auto_saved_name),
-            description = app.getString(R.string.installer_auto_saved_description),
-            availability = availabilityFor(Token.AutoSaved, target, checkRoot),
-            icon = null
         )
 
         Token.Shizuku -> Entry(
@@ -438,6 +437,7 @@ class InstallerManager(
     private fun availabilityFor(token: Token, target: InstallTarget, checkRoot: Boolean = true): Availability = when (token) {
         Token.Internal -> Availability(true)
         Token.PlayStore -> Availability(true)
+        Token.Root,
         Token.RootPlayStore -> if (!target.supportsRoot) {
             Availability(false, R.string.installer_status_not_supported)
         } else if (checkRoot) {
@@ -454,26 +454,6 @@ class InstallerManager(
             }
         }
         Token.None -> Availability(true)
-
-        Token.AutoSaved -> if (!target.supportsRoot) {
-            Availability(false, R.string.installer_status_not_supported)
-        } else if (checkRoot) {
-            // Check root access
-            if (!rootInstaller.hasRootAccess()) {
-                Availability(false, R.string.installer_status_requires_root)
-            } else {
-                Availability(true)
-            }
-        } else {
-            // Check if device is rooted without requesting access.
-            // This prevents showing root installer on non-rooted devices
-            if (!rootInstaller.isDeviceRooted()) {
-                Availability(false, R.string.installer_status_requires_root)
-            } else {
-                // Device is rooted, but don't verify access yet (avoid prompt)
-                Availability(true)
-            }
-        }
 
         Token.Shizuku -> {
             if (!sessionInstaller.isShizukuInstalled()) {
@@ -608,24 +588,24 @@ class InstallerManager(
     sealed class Token {
         /**
          * Whether an install through it can go ahead right after patching, which is what the
-         * auto-install setting is offered for. Root mount mounts its own builds with root and hands
-         * the rest to the system installer, which needs Android 12+ to update silently.
+         * auto-install setting is offered for. The system installer needs Android 12+ to update
+         * silently.
          */
         val supportsAutoInstall: Boolean
             get() = when (this) {
-                Shizuku, ShizukuPlayStore, AutoSaved, RootPlayStore -> true
+                Shizuku, ShizukuPlayStore, Root, RootPlayStore -> true
                 Internal -> Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
                 else -> false
             }
 
-        /** Whether it is root mount, with or without Google Play as the install source. */
-        val isRootMount: Boolean
-            get() = this == AutoSaved || this == RootPlayStore
-
         object Internal : Token()
         object PlayStore : Token()
+        /** Whether it installs with root, with or without Google Play as the install source. */
+        val usesRoot: Boolean
+            get() = this == Root || this == RootPlayStore
+
+        object Root : Token()
         object RootPlayStore : Token()
-        object AutoSaved : Token()
         object Shizuku : Token()
         object ShizukuPlayStore : Token()
         object None : Token()
@@ -635,8 +615,8 @@ class InstallerManager(
     sealed class InstallPlan {
         data class Internal(val target: InstallTarget) : InstallPlan()
         data class PlayStore(val target: InstallTarget) : InstallPlan()
+        data class Root(val target: InstallTarget) : InstallPlan()
         data class RootPlayStore(val target: InstallTarget) : InstallPlan()
-        data class Mount(val target: InstallTarget) : InstallPlan()
         data class Shizuku(val target: InstallTarget) : InstallPlan()
         data class ShizukuPlayStore(val target: InstallTarget) : InstallPlan()
         data class External(
@@ -683,8 +663,7 @@ class InstallerManager(
         }
         val tokenExists = token == Token.Internal ||
                 token == Token.PlayStore ||
-                token == Token.RootPlayStore ||
-                token == Token.AutoSaved ||
+                token.usesRoot ||
                 token == Token.ShizukuPlayStore ||
                 normalized.any { tokensEqual(it.token, token) }
         return if (tokenExists) normalized
@@ -695,8 +674,8 @@ class InstallerManager(
 private fun InstallerManager.Token.describe(): String = when (this) {
     InstallerManager.Token.Internal -> "Internal"
     InstallerManager.Token.PlayStore -> "PlayStore"
+    InstallerManager.Token.Root -> "Root"
     InstallerManager.Token.RootPlayStore -> "RootPlayStore"
-    InstallerManager.Token.AutoSaved -> "AutoSaved"
     InstallerManager.Token.Shizuku -> "Shizuku"
     InstallerManager.Token.ShizukuPlayStore -> "ShizukuPlayStore"
     InstallerManager.Token.None -> "None"

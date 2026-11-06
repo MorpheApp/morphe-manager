@@ -393,6 +393,7 @@ class PatcherProcesses(
                     HostEvent.PatchesStarted -> listener.patchesStarted()
                     is HostEvent.PatchExecuting -> runningPatch.started(event.name)
                     is HostEvent.PatchSucceeded -> listener.patchSucceeded(event.name)
+                    is HostEvent.TaskProgress -> listener.taskProgress(event.task, event.done, event.total)
                     is HostEvent.PatchFailed -> {
                         runningPatch.stopped()
                         listener.patchFailed(event.name, event.stackTrace)

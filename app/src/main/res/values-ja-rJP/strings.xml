@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">このアプリを非表示にしますか？</string>
     <string name="home_more_apps_title">その他のアプリ</string>
     <string name="home_more_apps_hide_title">このカードを非表示にしますか？</string>
-    <string name="home_more_apps_hide_message">[設定] &gt; [外観] &gt; [ホーム画面] からいつでも戻せます</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">%1$s でいつでも元に戻せます</string>
     <string name="home_app_hide_message">このアプリはホーム画面から非表示になります。リスト下部のボタンから再表示できます</string>
     <string name="home_app_will_be_hidden">このアプリは非表示になります</string>
     <string name="home_app_hidden_named">%s が非表示になります</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">信頼済みの署名キー</string>
     <string name="sources_signing_key_new">新しい署名キー</string>
     <string name="sources_patch_expert_badge">エキスパート</string>
-    <string name="sources_patch_expert_badge_tooltip">このパッチを手動で追加するには、設定でエキスパート モードを有効にしてください</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">このパッチを手動で含めるには、%1$s をオンにしてください</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">APK を探すのにお困りですか？</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt; にパッチを適用するには、以下のバージョンの APK (未パッチ) が必要です</string>
@@ -508,7 +510,6 @@ APK ファイルの取得元を選択してください"</string>
     <string name="shortcut_repatch_long">古いアプリを再パッチ</string>
     <string name="shortcut_check_updates_short">更新を確認</string>
     <string name="shortcut_check_updates_long">パッチの更新を確認</string>
-    <string name="shortcut_patch_app">%s をパッチ処理</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">このアプリをアンインストールしますか？</string>
     <string name="home_app_info_uninstall_removes_data">このデバイスからアプリとアプリデータが削除されます</string>
@@ -529,6 +530,7 @@ APK ファイルの取得元を選択してください"</string>
     <string name="home_app_info_install_type_custom_installer">カスタム インストーラー</string>
     <string name="home_app_info_install_type_system_installer">システム インストーラー</string>
     <string name="home_app_info_install_type_play_store">Play ストア経由としてインストール</string>
+    <string name="home_app_info_install_type_root">Root インストール</string>
     <string name="home_app_info_install_type_root_play_store">root 権限で Play ストア経由としてインストール</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku を使用して Play ストア経由としてインストール</string>
     <string name="home_app_info_patch_update_available">パッチの更新が利用可能です</string>
@@ -570,7 +572,8 @@ APK ファイルの取得元を選択してください"</string>
     <string name="root_mount_module_unmount_warning">KernelSU で「デフォルトでモジュールをアンマウント」が有効になっている場合は、KernelSU &gt; Superuser &gt; マウントしたアプリ &gt; プロファイル &gt; カスタムから「モジュールをアンマウント」を無効にしてください。無効にしないと、Morphe でマウント済みと表示されても、パッチ適用済み APK が反映されない場合があります</string>
     <string name="root_pre_patch_installer_standard_title">標準インストールモード</string>
     <string name="root_pre_patch_installer_standard_description">GmsCore 対応の通常の APK としてパッチを適用します。パッチ適用後は、設定したインストーラーが使用されます</string>
-    <string name="root_pre_patch_installer_hint">設定 &gt; パッチ &gt; インストール &gt; インストーラーの選択 が有効な場合に表示されます。パッチ適用後は、パッチモードを変更できません</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">%1$s が %2$s に設定されている間に要求されました。パッチ適用後にパッチモードを変更することはできません</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">エラーをクリップボードにコピーしました</string>
     <string name="patcher_error_log">エラーログ</string>
@@ -669,6 +672,14 @@ APK ファイルの取得元を選択してください"</string>
     <string name="patcher_step_group_saving">保存中</string>
     <string name="patcher_step_write_patched">パッチ済み APK ファイルを出力中</string>
     <string name="patcher_step_sign_apk">パッチ済み APK ファイルに署名中</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">DEXファイルを読み込んでいます</string>
+    <string name="patcher_task_extracting_resources">リソースを抽出しています</string>
+    <string name="patcher_task_decoding_resources">リソースをデコードしています</string>
+    <string name="patcher_task_indexing_classes">クラスをインデックス作成しています</string>
+    <string name="patcher_task_compiling_dex">DEXファイルをコンパイルしています</string>
+    <string name="patcher_task_compiling_resources">リソースをコンパイル中</string>
+    <string name="patcher_task_writing_apk">APK ファイルを書き込み中</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">バックグラウンドパッチ保護</string>
     <string name="battery_optimization_dialog_description">一部のデバイスでは、アプリを最小化するとパッチャーが停止する場合があります。確実にパッチ処理を完了するため、Morphe をバッテリー制限の対象外にしてください</string>
@@ -717,7 +728,8 @@ APK ファイルの取得元を選択してください"</string>
     <string name="patched_app_save_failed_toast">パッチ適用済みアプリの保存に失敗しました</string>
     <string name="plugin_activity_dialog_body">このプラグインを続行するには、ユーザーの操作が必要です</string>
     <string name="patcher_process_killed_message">メモリを解放するためなどの理由で、システムがパッチ処理を完了前に停止しました。他のアプリを閉じて、もう一度お試しください</string>
-    <string name="patcher_process_crashed_message">パッチ処理が完了する前にクラッシュしました。再発する場合は、設定で「内蔵の実行環境を使用する」をオフにし、ログを添付して問題を報告してください</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">パッチ処理が完了する前にクラッシュしました。再発する場合は、%1$s をオフにしてログとともに問題を報告してください</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">ヒープメモリが %1$s MBの状態でメモリ不足が発生しました。選択したパッチが多すぎます。パッチソースまたは適用するパッチを減らしてください</string>
     <string name="install_app_success">正常にインストールされました</string>
@@ -1018,9 +1030,8 @@ morphe_header_custom_dark.png
     <string name="installer_title">インストーラーを選択</string>
     <string name="installer_internal_description">Android パッケージ インストーラーを使用します</string>
     <string name="installer_play_store_description">システム インストーラーを使用し、インストール元を Google Play ストアに設定します</string>
+    <string name="installer_root_description">root 権限でサイレント インストールを行います</string>
     <string name="installer_root_play_store_description">root 権限でサイレント インストールし、インストール元を Google Play ストアに設定します</string>
-    <string name="installer_auto_saved_name">root 権限マウント</string>
-    <string name="installer_auto_saved_description">root マウントモードでパッチを適用したアプリをマウントします。通常のパッチ済み APK は別の方法でインストールします</string>
     <string name="installer_shizuku_description">Shizuku または Sui を使用して自動インストールします</string>
     <string name="installer_shizuku_play_store_description">Shizuku または Sui を介してサイレント インストールし、インストール元を Google Play ストアに設定します</string>
     <string name="installer_option_none">代替なし</string>
@@ -1030,7 +1041,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">このオプションを使用するには、Shizuku または Sui をインストールしてください</string>
     <string name="installer_status_shizuku_not_running">Shizuku または Sui を起動して、もう一度お試しください</string>
     <string name="installer_status_shizuku_permission">Shizuku アプリで Morphe に権限を付与してください</string>
-    <string name="installer_mount_warning_install">既定のインストーラーが root 権限マウント式インストーラーに設定されています。この保存済みアプリは、マウント方式でインストールされたものではありません</string>
+    <string name="installer_mount_warning_install">パッチモードが root マウントに設定されています。この保存済みアプリはマウント方式でインストールされていません</string>
     <string name="mount_version_mismatch_message">オリジナルのアプリのバージョン (%2$s) がパッチ適用済みアプリのバージョン (%1$s) と一致しません。対応するオリジナルのアプリをマウントしてから、再度お試しください</string>
     <string name="mount_stock_restore_failed_message">Android が保存済みのオリジナルの APK を拒否しました。対応する純正バージョンをインストールしてから、再度マウントしてください</string>
     <string name="installer_status_shizuku_unsupported">インストールされている Shizuku のバージョンはサポートされていません</string>
@@ -1052,11 +1063,17 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_continue">了解しました。続行します</string>
     <string name="installer_play_store_mode">Play ストア経由としてインストール</string>
     <string name="installer_play_store_mode_description">Google Play ストアをインストール元として設定します</string>
+    <string name="settings_section_patch_mode">パッチモード</string>
+    <string name="settings_patch_mode_ask">毎回確認する</string>
+    <string name="settings_patch_mode_ask_description">各アプリにパッチを適用する前に、root マウントか標準インストールのどちらで適用するかを確認します</string>
+    <string name="settings_section_after_patching">パッチ適用後</string>
+    <string name="settings_after_patching_install">自動的にインストール</string>
+    <string name="settings_after_patching_ask">インストーラーを選択</string>
+    <string name="settings_after_patching_ask_description">アプリをインストールするたびに、使用するインストーラーを確認します</string>
+    <string name="settings_after_patching_manual">手動でインストール</string>
+    <string name="settings_after_patching_manual_description">「インストール」をタップすると、既定のインストーラーでインストールされます</string>
     <string name="settings_nomount_only">NoMount のみ（バインド マウントを使用しない）</string>
     <string name="settings_nomount_only_description">NoMount がインストールされている場合にのみアプリをマウントします。バインド マウントへのフォールバックは発生しないため、NoMount がインストールされていない場合はアプリはマウントされません</string>
-    <string name="settings_prompt_installer_on_install">インストーラーの選択</string>
-    <string name="settings_prompt_installer_on_install_description">各アプリのインストール方法（root 権限がある場合はパッチ適用前に、ない場合はパッチ適用後に）を確認します</string>
-    <string name="settings_auto_install_with_shizuku">パッチ適用後の自動インストール</string>
     <string name="settings_auto_install_with_shizuku_description">パッチ適用が完了次第、パッチ適用済み APK をインストールまたはマウントします</string>
     <string name="settings_auto_uninstall_with_shizuku">競合時に自動でアンインストール</string>
     <string name="settings_auto_uninstall_with_shizuku_description">署名競合時に既存のアプリをアンインストールします。これによりアプリデータが削除される場合があります</string>

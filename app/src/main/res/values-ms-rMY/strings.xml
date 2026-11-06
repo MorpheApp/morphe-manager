@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Sorokkan aplikasi ini?</string>
     <string name="home_more_apps_title">Lebih banyak aplikasi</string>
     <string name="home_more_apps_hide_title">Sorokkan kad ini?</string>
-    <string name="home_more_apps_hide_message">Anda boleh mengembalikannya pada bila-bila masa di Tetapan &gt; Penampilan &gt; Skrin utama</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Anda boleh mengembalikannya pada bila-bila masa dalam %1$s</string>
     <string name="home_app_hide_message">Aplikasi ini akan disorokkan daripada skrin utama. Anda boleh mengembalikannya kemudian daripada aplikasi tersorok dengan menggunakan butang di bahagian bawah senarai</string>
     <string name="home_app_will_be_hidden">Aplikasi ini akan disorokkan</string>
     <string name="home_app_hidden_named">%s tersorok</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Kunci dipercayai</string>
     <string name="sources_signing_key_new">Kunci baharu</string>
     <string name="sources_patch_expert_badge">Pakar</string>
-    <string name="sources_patch_expert_badge_tooltip">Dayakan mod pakar di Tetapan untuk memasukkan tampalan ini secara manual</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Hidupkan %1$s untuk memasukkan tampalan ini secara manual</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Perlukan bantuan mencari APK?</string>
     <string name="home_apk_availability_dialog_simple">Untuk menampal &lt;b&gt;%s&lt;/b&gt;, anda memerlukan versi APK yang belum ditampal:</string>
@@ -509,7 +511,6 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="shortcut_repatch_long">Tampal semula aplikasi lapuk</string>
     <string name="shortcut_check_updates_short">Semak kemas kini</string>
     <string name="shortcut_check_updates_long">Semak kemas kini tampalan</string>
-    <string name="shortcut_patch_app">Tampal %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Nyahpasang apl ini?</string>
     <string name="home_app_info_uninstall_removes_data">Apl dan datanya akan dialih keluar daripada peranti ini</string>
@@ -530,6 +531,7 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="home_app_info_install_type_custom_installer">Pemasang tersuai</string>
     <string name="home_app_info_install_type_system_installer">Pemasang sistem</string>
     <string name="home_app_info_install_type_play_store">Pasang Play Store</string>
+    <string name="home_app_info_install_type_root">Pemasangan root</string>
     <string name="home_app_info_install_type_root_play_store">Pasang Play Store root</string>
     <string name="home_app_info_install_type_shizuku_play_store">Pasang Play Store Shizuku</string>
     <string name="home_app_info_patch_update_available">Kemas kini tampalan tersedia</string>
@@ -571,7 +573,8 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="root_mount_module_unmount_warning">Jika KernelSU mempunyai \"Unmount modules by default\" dihidupkan, buka KernelSU &gt; Superuser &gt; aplikasi yang anda mount &gt; Profile &gt; Custom dan matikan \"Unmount modules\". Jika tidak, APK yang dipatch dan dimount mungkin tidak berkesan, walaupun Morphe menunjukkan ia telah dimount</string>
     <string name="root_pre_patch_installer_standard_title">Mod pemasangan standard</string>
     <string name="root_pre_patch_installer_standard_description">Tampal sebagai APK biasa dengan sokongan GmsCore. Tetapan pemasang anda digunakan selepas tampalan</string>
-    <string name="root_pre_patch_installer_hint">Ditanya apabila Tetapan &gt; Penambalan &gt; Pemasangan &gt; Gesaan pemilihan pemasang diaktifkan. Mod tambalan tidak boleh diubah selepas penambalan</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Ditanya semasa %1$s ditetapkan kepada %2$s. Mod tampalan tidak boleh diubah selepas proses menampal</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Ralat disalin ke papan keratan</string>
     <string name="patcher_error_log">Log ralat</string>
@@ -670,6 +673,14 @@ Nyahpasang akan memadam semua data aplikasi secara kekal"</string>
     <string name="patcher_step_group_saving">Menyimpan</string>
     <string name="patcher_step_write_patched">Menulis fail APK yang ditampal</string>
     <string name="patcher_step_sign_apk">Menandatangani fail APK ditampal</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Membaca fail DEX</string>
+    <string name="patcher_task_extracting_resources">Mengekstrak sumber</string>
+    <string name="patcher_task_decoding_resources">Menyahkod sumber</string>
+    <string name="patcher_task_indexing_classes">Mengindeks kelas</string>
+    <string name="patcher_task_compiling_dex">Menyusun fail DEX</string>
+    <string name="patcher_task_compiling_resources">Menyusun sumber</string>
+    <string name="patcher_task_writing_apk">Menulis fail APK</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Perlindungan tampalan latar belakang</string>
     <string name="battery_optimization_dialog_description">Sesetengah peranti mungkin menghentikan penampal apabila aplikasi diminimumkan. Benarkan Morphe berjalan tanpa keterbatasan bateri untuk memastikan tampalan selesai dengan teliti</string>
@@ -718,7 +729,8 @@ Nyahpasang akan memadam semua data aplikasi secara kekal"</string>
     <string name="patched_app_save_failed_toast">Gagal untuk menyimpan aplikasi yang telah ditampal</string>
     <string name="plugin_activity_dialog_body">Interaksi pengguna diperlukan untuk meneruskan dengan pemalam ini</string>
     <string name="patcher_process_killed_message">Sistem menghentikan patcher sebelum ia selesai, biasanya untuk mengosongkan memori. Tutup aplikasi lain dan cuba lagi</string>
-    <string name="patcher_process_crashed_message">Patcher telah terhenti secara tiba-tiba sebelum selesai. Jika ini berlaku lagi, matikan \"Gunakan VM terbenam\" dalam tetapan dan laporkan isu tersebut bersama log</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Penyampal terhenti secara tiba-tiba sebelum selesai. Jika ini berlaku lagi, matikan %1$s dan laporkan isu tersebut bersama log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Patcher kehabisan memori dengan heap %1$s MB. Aplikasi ini terlalu besar untuk patch yang dipilih. Cuba patch dengan lebih sedikit sumber patch, atau pilih lebih sedikit patch</string>
     <string name="install_app_success">Pemasangan berjaya</string>
@@ -1018,9 +1030,8 @@ Dimensi gambar mestilah seperti berikut:
     <string name="installer_title">Pilih pemasang</string>
     <string name="installer_internal_description">Menggunakan pemasang pakej Android</string>
     <string name="installer_play_store_description">Menggunakan pemasang sistem dan menetapkan Google Play Store sebagai sumber pemasangan</string>
+    <string name="installer_root_description">Memasang secara senyap dengan root</string>
     <string name="installer_root_play_store_description">Memasang secara senyap dengan root dan menetapkan Google Play Store sebagai sumber pemasangan</string>
-    <string name="installer_auto_saved_name">Lekap root</string>
-    <string name="installer_auto_saved_description">Melekapkan aplikasi yang ditampal dalam mod lekap root. APK bertampal standard menggunakan pemasang lain</string>
     <string name="installer_shizuku_description">Memasang secara senyap menggunakan Shizuku atau Sui</string>
     <string name="installer_shizuku_play_store_description">Memasang secara senyap melalui Shizuku atau Sui dan menetapkan Google Play Store sebagai sumber pemasangan</string>
     <string name="installer_option_none">Tiada kejatuhan</string>
@@ -1030,7 +1041,7 @@ Dimensi gambar mestilah seperti berikut:
     <string name="installer_status_shizuku_not_installed">Pasang Shizuku atau Sui untuk menggunakan pilihan ini</string>
     <string name="installer_status_shizuku_not_running">Mula Shizuku atau Sui dan cuba lagi</string>
     <string name="installer_status_shizuku_permission">Berikan kebenaran kepada Morphe daripada aplikasi Shizuku</string>
-    <string name="installer_mount_warning_install">Pemasang utama anda ditetapkan kepada pemasang mount berakar. Aplikasi yang disimpan ini tidak dipasang menggunakan mount</string>
+    <string name="installer_mount_warning_install">Mod tampalan ditetapkan kepada mount root. Aplikasi yang disimpan ini tidak dipasang menggunakan mount</string>
     <string name="mount_version_mismatch_message">Versi aplikasi Stok (%2$s) tidak serasi dengan versi aplikasi yang dipatch (%1$s). Pasang versi Stok yang serasi, kemudian cuba lagi</string>
     <string name="mount_stock_restore_failed_message">Android menolak APK asal yang disimpan. Pasang versi stok yang sepadan, kemudian cuba Lekap semula</string>
     <string name="installer_status_shizuku_unsupported">Pemasangan gagal. Cuba lagi atau tukar kepada pemasang yang berbeza</string>
@@ -1052,11 +1063,17 @@ Dimensi gambar mestilah seperti berikut:
     <string name="installer_play_store_warning_continue">Saya faham, teruskan</string>
     <string name="installer_play_store_mode">Pasang sebagai Play Store</string>
     <string name="installer_play_store_mode_description">Menandakan Google Play Store sebagai sumber pemasangan</string>
+    <string name="settings_section_patch_mode">Mod tampalan</string>
+    <string name="settings_patch_mode_ask">Tanya setiap kali</string>
+    <string name="settings_patch_mode_ask_description">Bertanya sebelum menampal setiap aplikasi sama ada untuk menampalnya untuk mount root atau pemasangan standard</string>
+    <string name="settings_section_after_patching">Selepas menampal</string>
+    <string name="settings_after_patching_install">Pasang secara automatik</string>
+    <string name="settings_after_patching_ask">Tanya pemasang mana</string>
+    <string name="settings_after_patching_ask_description">Bertanya pemasang mana yang hendak digunakan setiap kali aplikasi dipasang</string>
+    <string name="settings_after_patching_manual">Pasang secara manual</string>
+    <string name="settings_after_patching_manual_description">Pasang dengan pemasang lalai sebaik sahaja anda mengetik Pasang</string>
     <string name="settings_nomount_only">Hanya NoMount</string>
     <string name="settings_nomount_only_description">Hanya memasang aplikasi dengan NoMount dan tidak pernah kembali kepada bind mount, jadi ia kekal tidak dipasang tanpanya</string>
-    <string name="settings_prompt_installer_on_install">Gesaan pemilihan pemasang</string>
-    <string name="settings_prompt_installer_on_install_description">Bertanya cara memasang setiap apl: dengan root sebelum pematikan, jika tidak selepas itu</string>
-    <string name="settings_auto_install_with_shizuku">Pasang automatik selepas tampalan</string>
     <string name="settings_auto_install_with_shizuku_description">Memasang atau memuat APK yang telah dipatch sebaik sahaja pematikan selesai</string>
     <string name="settings_auto_uninstall_with_shizuku">Nyahpasang automatik apabila konflik</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Menyahpasang aplikasi sedia ada jika terdapat konflik tandatangan. Ini boleh membuang data aplikasi</string>

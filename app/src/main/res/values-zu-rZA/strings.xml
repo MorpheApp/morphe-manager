@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Fihla lolu hlelo?</string>
     <string name="home_more_apps_title">Ezinye izinhlelo</string>
     <string name="home_more_apps_hide_title">Fihla le khadi?</string>
-    <string name="home_more_apps_hide_message">Ungalibuyisa noma nini ku-Settings &gt; Appearance &gt; Home screen</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Ungayibuyisela noma nini ku-%1$s</string>
     <string name="home_app_hide_message">Lolu hlelo luzofihlelwa esikrinini sasekhaya. Ungalubuyisa kamuva ezinhlelweni ezifihliwe usebenzisa inkinobho esekhasini laphansi lolu hlu</string>
     <string name="home_app_will_be_hidden">Lolu hlelo luzofihleka</string>
     <string name="home_app_hidden_named">{%s} ifihliwe</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">I-key ethembekile</string>
     <string name="sources_signing_key_new">Ikey entsha</string>
     <string name="sources_patch_expert_badge">Ingcweti</string>
-    <string name="sources_patch_expert_badge_tooltip">Vula imodi yengcweti (Expert mode) ku-Settings ukuze ufake le patch ngomzamo wakho</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Vula u-%1$s ukuze ufake lolu lungiso ngesandla</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Udinga usizo lokuthola i-APK?</string>
     <string name="home_apk_availability_dialog_simple">Ukuze u-patch-e i&lt;b&gt;%s&lt;/b&gt;, udinga i-version ye-APK engaphathwe:</string>
@@ -508,7 +510,6 @@ Ukuze uthole imiphumela engcono kakhulu, lolu hlelo luhlanganisa ukulungisa i-&l
     <string name="shortcut_repatch_long">Phinda u-patch izinhlelo ezindala</string>
     <string name="shortcut_check_updates_short">Hlola izibuyekezo</string>
     <string name="shortcut_check_updates_long">Hlola izibuyekezo ze-patch</string>
-    <string name="shortcut_patch_app">Patch %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Susa le app?</string>
     <string name="home_app_info_uninstall_removes_data">I-app kanye nedatha yayo zisuswa kuleli device</string>
@@ -529,6 +530,7 @@ Ukuze uthole imiphumela engcono kakhulu, lolu hlelo luhlanganisa ukulungisa i-&l
     <string name="home_app_info_install_type_custom_installer">Umfakisi wekাস্টam</string>
     <string name="home_app_info_install_type_system_installer">Umfakisi ohlelo lwesistimu</string>
     <string name="home_app_info_install_type_play_store">Ukufaka kwe-Play Store</string>
+    <string name="home_app_info_install_type_root">Ukufaka kwe-Root</string>
     <string name="home_app_info_install_type_root_play_store">Ukufaka kwe-Root Play Store</string>
     <string name="home_app_info_install_type_shizuku_play_store">Ukufaka kwe-Shizuku Play Store</string>
     <string name="home_app_info_patch_update_available">Kukhona ukuvuselelwa kwe-patch</string>
@@ -570,7 +572,8 @@ Ukuze uthole imiphumela engcono kakhulu, lolu hlelo luhlanganisa ukulungisa i-&l
     <string name="root_mount_module_unmount_warning">Uma iKernelSU inekhasi elithi \"Unmount modules by default\" livuliwe, vula iKernelSU &gt; Superuser &gt; uhlelo lokusebenza oluwamontile &gt; Profile &gt; Custom bese ucisha u\"Unmount modules\". Ngaphandle kwalokho, iAPK ephethwe enamontile kungenzeka ingasebenzi, ngisho noma iMorphe ikhombisa ukuthi yamontwa</string>
     <string name="root_pre_patch_installer_standard_title">Imodi yokufaka okujwayelekile</string>
     <string name="root_pre_patch_installer_standard_description">Ipatcha njenge-APK ejwayelekile enosekelo lwe-GmsCore. Isetingi sakho somfaka sisebenzisa emva kokupatcha</string>
-    <string name="root_pre_patch_installer_hint">Buyiswa ngenkathi i-Settings &gt; Patching &gt; Installation &gt; Installer selection prompt ivuliwe. I-patch mode ayikwazi ukushintshwa ngemva kwe-patching</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Kubuzwa ngenkathi u-%1$s ebekwe ku-%2$s. Imode yokulungisa ayikwazi ukushintshwa ngemuva kokulungisa</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Iphutha likopiwe ku-clipboard</string>
     <string name="patcher_error_log">I-log yamaphutha</string>
@@ -669,6 +672,14 @@ Ukususa kuzosula uphakade yonke idatha yohlelo"</string>
     <string name="patcher_step_group_saving">Kugcinwa</string>
     <string name="patcher_step_write_patched">Kubhalwa ifayela le-APK elilungisiwe</string>
     <string name="patcher_step_sign_apk">Kusayina ifayela le-APK elilungisiwe</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Ukufundwa kwamafayela e-DEX</string>
+    <string name="patcher_task_extracting_resources">Kukhiphelwa izinsiza</string>
+    <string name="patcher_task_decoding_resources">Kudekodiwa izinsiza</string>
+    <string name="patcher_task_indexing_classes">Kwenziwa uhlu lwezikhala</string>
+    <string name="patcher_task_compiling_dex">Kuhlanganywa amafayela e-DEX</string>
+    <string name="patcher_task_compiling_resources">Kuhlanganiswa izinsiza</string>
+    <string name="patcher_task_writing_apk">Kubhalwa ifayela le-APK</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Vikela ukulungiswa kwengemuva</string>
     <string name="battery_optimization_dialog_description">Amanye amadivayisi angase ayimise inkqubo yokulungisa lapho uhlelo luncishiswa. Vumela i-Morphe ukuba isebenze ngaphandle kwezinqubo zokuvikela ibhethri ukuze kuqinisekiswe ukuthi ukulungiswa kuqedwa ngendlela ethembekile</string>
@@ -717,7 +728,8 @@ Ukususa kuzosula uphakade yonke idatha yohlelo"</string>
     <string name="patched_app_save_failed_toast">Kuhleleke ukulonda i-app e-patched</string>
     <string name="plugin_activity_dialog_body">Kudingeka ukuhlanganyela komsebenzisi ukuze kuqhubekwe nalolu plugin</string>
     <string name="patcher_process_killed_message">Uhlelo lwemishini lumise i-patcher ngaphambi kokuba iqedele, imvamisa ukuze kukhululwe inkumbulo. Vala ezinye izinhlelo uzame futhi</string>
-    <string name="patcher_process_crashed_message">I-patcher ibuye yawa ngaphambi kokuba iqedele. Uma kwenzeka futhi, cisha u\"Use embedded VM\" kuzilungiselelo (settings) bese ubika inkinga ngokusebenzisa i-log</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">I-patcher iye yahluleka ngaphambi kokuba iqedele. Uma kwenzeka futhi, vala u-%1$s bese ubika inkinga ngokusebenzisa i-log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">I-patcher ipheliselwe inkumbulo nge-heap engu-%1$s MB. Le app inkulu kakhulu kuma-patches akhethiwe. Zama uku-patch usebenzisa imithombo embalwa yama-patch, noma ukhethe ama-patches ambalwa</string>
     <string name="install_app_success">Kufakwe ngempumelelo</string>
@@ -1017,9 +1029,8 @@ Ubukhulu bemiyalo yemifanekiso kumele kube kanje:
     <string name="installer_title">Khetha installer</string>
     <string name="installer_internal_description">Isebenzisa i-Android package installer</string>
     <string name="installer_play_store_description">Usebenzisa isifaka sesistimu futhi ibeke i-Google Play Store njengomthombo wokufaka</string>
+    <string name="installer_root_description">Kufakwa ngendlela ethule ngokusebenzisa i-root</string>
     <string name="installer_root_play_store_description">Ifaka ngokuthula ngokusebenzisa i-root futhi ibeke i-Google Play Store njengomthombo wokufaka</string>
-    <string name="installer_auto_saved_name">Root mount</string>
-    <string name="installer_auto_saved_description">I-mount izinhlelo ezipatchwe ngendlela ye-root mount. Ama-APK apatchwe ngokujwayelekile asebenzisa omunye umfaka</string>
     <string name="installer_shizuku_description">Ifaka ngokuthula usebenzisa i-Shizuku noma i-Sui</string>
     <string name="installer_shizuku_play_store_description">Ifaka ngokuthula nge-Shizuku noma i-Sui futhi ibeke i-Google Play Store njengomthombo wokufaka</string>
     <string name="installer_option_none">Ayikho i-fallback</string>
@@ -1029,7 +1040,7 @@ Ubukhulu bemiyalo yemifanekiso kumele kube kanje:
     <string name="installer_status_shizuku_not_installed">Faka i-Shizuku noma i-Sui ukuze usebenzise le option</string>
     <string name="installer_status_shizuku_not_running">Qala iShizuku noma iSui bese uzama futhi</string>
     <string name="installer_status_shizuku_permission">Nikeza imvume ku-Morphe kusuka kohlelo lwe-Shizuku</string>
-    <string name="installer_mount_warning_install">Ufaka-ohlelo lwakho oluyinhloko lubekwe kukufaka-ohlelo lokugibela okunezimpande (rooted mount installer). Lolu hlelo olugcinwe alufakwanga ngokusebenzisa ukugibela (mount)</string>
+    <string name="installer_mount_warning_install">Imode yokulungisa ibekwe ku-root mount. Le app egcinwe ayizange ifakwe kusetshenziswa i-mount</string>
     <string name="mount_version_mismatch_message">Inguqulo yohlelo lwasemqoka (%2$s) ayihambisani nenguqulo yohlelo olulungisiwe (%1$s). Gibela (mount) inguqulo yasemqoka efanele, bese uzama futhi</string>
     <string name="mount_stock_restore_failed_message">I-Android yenqabe i-APK yokuqala egcinwe. Faka inguqulo efanele ye-stock, bese uzama i-Mount futhi</string>
     <string name="installer_status_shizuku_unsupported">Inguqulo yeShizuku efakiwe ayisekelwa</string>
@@ -1051,11 +1062,17 @@ Ubukhulu bemiyalo yemifanekiso kumele kube kanje:
     <string name="installer_play_store_warning_continue">Ngiyazwisisa, qhubeka</string>
     <string name="installer_play_store_mode">Faka njenge-Play Store</string>
     <string name="installer_play_store_mode_description">Markha i-Google Play Store njengomthombo wokufaka</string>
+    <string name="settings_section_patch_mode">Imode yokulungisa</string>
+    <string name="settings_patch_mode_ask">Buza njalo</string>
+    <string name="settings_patch_mode_ask_description">Ibuza ngaphambi kokulungisa i-app ngabe kufanele ilungiswe ye-root mount noma ukufaka okujwayelekile</string>
+    <string name="settings_section_after_patching">Ngemuva kokulungisa</string>
+    <string name="settings_after_patching_install">Faka ngokuzenzakalelayo</string>
+    <string name="settings_after_patching_ask">Buza ukuthi iyiphi i-installer</string>
+    <string name="settings_after_patching_ask_description">Ibuza ukuthi iyiphi i-installer okufanele isetshenziswe njalo lapho kufakwa i-app</string>
+    <string name="settings_after_patching_manual">Faka ngesandla</string>
+    <string name="settings_after_patching_manual_description">Kufakwa kusetshenziswa i-installer ejejikelele kanye lapho uchofoza uFaka</string>
     <string name="settings_nomount_only">iNoMount kuphela</string>
     <string name="settings_nomount_only_description">I-mount i-apps kuphela nge-NoMount futhi ayibuyi emuva ku-bind mount, ngakho zahlala zingakhonjise ngaphandle kwayo</string>
-    <string name="settings_prompt_installer_on_install">Isicelo sokukhetha isifaka</string>
-    <string name="settings_prompt_installer_on_install_description">Buza ukuthi kufakwa kanjani wonke uhlelo: ngokusebenzisa i-root ngaphambi kwe-patching, kungenjalo ngemva kwayo</string>
-    <string name="settings_auto_install_with_shizuku">Faka ngokuzenzakalelayo emva kokulungisa</string>
     <string name="settings_auto_install_with_shizuku_description">Ifaka noma uxhumise i-APK elungisiwe masinyane lapho ukulungisa kuqedile</string>
     <string name="settings_auto_uninstall_with_shizuku">Zisuse ngokuzenzakalelayo lapho kukhona ukungahambisani</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Yisuse i-app esekhona lapho kunengxabano yesigingisigi. Lokhu kungasusa idatha ye-app</string>

@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen.patcher
 
+import androidx.annotation.StringRes
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -80,7 +81,9 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.screen.shared.Animations
 import app.morphe.manager.ui.theme.MorpheBrandTeal
 import app.morphe.manager.util.formatBytesForReport
+import app.morphe.manager.util.formatCount
 import app.morphe.manager.util.formatKibibytesPerSecond
+import app.morphe.patcher.PatcherTask
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
 import kotlinx.coroutines.delay
@@ -577,6 +580,12 @@ private fun ExpertProgressHeader(
             patchProgress.steps.firstOrNull { it.state == State.RUNNING }
         }
     }
+    // Only which task runs, so its count moving on leaves the step name alone
+    val runningTask by remember(patchProgress) {
+        derivedStateOf {
+            patchProgress.runningTask?.task?.takeIf { patchProgress.steps.any { it.state == State.RUNNING } }
+        }
+    }
 
     // The eased progress moves every frame, so only the whole percent is read while composing
     val percent by remember(progress) { derivedStateOf { (progress() * 100).toInt() } }
@@ -607,7 +616,9 @@ private fun ExpertProgressHeader(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     CrossfadeText(
-                        text = currentStep?.name ?: stringResource(R.string.patcher_success_title),
+                        text = runningTask?.let { stringResource(it.labelRes) }
+                            ?: currentStep?.name
+                            ?: stringResource(R.string.patcher_success_title),
                         style = MaterialTheme.typography.labelLarge,
                         fontWeight = FontWeight.SemiBold,
                         color = usableAppAccent(accentColor) ?: MaterialTheme.colorScheme.primary,
@@ -618,13 +629,12 @@ private fun ExpertProgressHeader(
                         label = "expert_step_name"
                     )
 
-                    if (total > 0) {
-                        // A finished run wears the same success tone as the success card
-                        StatusBadge(
-                            text = stringResource(R.string.patcher_patches_progress_format, completed, total),
-                            tone = if (patcherSucceeded == true) SemanticTone.Success else SemanticTone.Primary
-                        )
-                    }
+                    CountBadge(
+                        patchProgress = patchProgress,
+                        completed = completed,
+                        total = total,
+                        patcherSucceeded = patcherSucceeded
+                    )
 
                     StatusBadge(
                         text = stringResource(R.string.patcher_percentage, percent),
@@ -650,6 +660,62 @@ private fun ExpertProgressHeader(
         )
     }
 }
+
+/**
+ * How far the run got, in the classes or entries of the task that runs, or else in patches. Reads
+ * the task's count on its own, so the surrounding header does not recompose on every report.
+ */
+@Composable
+private fun CountBadge(
+    patchProgress: PatchProgressSource,
+    completed: Int,
+    total: Int,
+    patcherSucceeded: Boolean?
+) {
+    val context = LocalContext.current
+    val task = patchProgress.runningTask?.takeIf { it.task.countsItems }
+    when {
+        task != null -> StatusBadge(
+            text = stringResource(
+                R.string.patcher_patches_progress_format,
+                context.formatCount(task.done),
+                context.formatCount(task.total)
+            ),
+            tone = SemanticTone.Primary
+        )
+
+        // A finished run wears the same success tone as the success card
+        total > 0 -> StatusBadge(
+            text = stringResource(R.string.patcher_patches_progress_format, completed, total),
+            tone = if (patcherSucceeded == true) SemanticTone.Success else SemanticTone.Primary
+        )
+    }
+}
+
+/**
+ * Whether the task counts things a reader can make sense of, classes or entries, rather than bytes,
+ * stages or nothing at all.
+ */
+private val PatcherTask.countsItems: Boolean
+    get() = when (this) {
+        PatcherTask.INDEXING_CLASSES, PatcherTask.COMPILING_DEX, PatcherTask.WRITING_APK -> true
+        PatcherTask.DECODING_DEX,
+        PatcherTask.EXTRACTING_RESOURCES,
+        PatcherTask.DECODING_RESOURCES,
+        PatcherTask.COMPILING_RESOURCES -> false
+    }
+
+/** What the screen calls the task. */
+private val PatcherTask.labelRes: Int
+    @StringRes get() = when (this) {
+        PatcherTask.DECODING_DEX -> R.string.patcher_task_decoding_dex
+        PatcherTask.EXTRACTING_RESOURCES -> R.string.patcher_task_extracting_resources
+        PatcherTask.DECODING_RESOURCES -> R.string.patcher_task_decoding_resources
+        PatcherTask.INDEXING_CLASSES -> R.string.patcher_task_indexing_classes
+        PatcherTask.COMPILING_DEX -> R.string.patcher_task_compiling_dex
+        PatcherTask.COMPILING_RESOURCES -> R.string.patcher_task_compiling_resources
+        PatcherTask.WRITING_APK -> R.string.patcher_task_writing_apk
+    }
 
 private const val LOG_PANEL_TAB_LOGS = 0
 private const val LOG_PANEL_TAB_GAMES = 1

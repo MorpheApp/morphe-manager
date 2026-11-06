@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Dölj den här appen?</string>
     <string name="home_more_apps_title">Fler appar</string>
     <string name="home_more_apps_hide_title">Dölj det här kortet?</string>
-    <string name="home_more_apps_hide_message">Du kan återställa det när som helst i Inställningar &gt; Utseende &gt; Startskärm</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Du kan ta tillbaka den när som helst i %1$s</string>
     <string name="home_app_hide_message">Den här appen döljs från startskärmen. Du kan återställa den senare från de dolda apparna med knappen längst ned i listan</string>
     <string name="home_app_will_be_hidden">Den här appen döljs</string>
     <string name="home_app_hidden_named">%s har dolts</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Betrodd nyckel</string>
     <string name="sources_signing_key_new">Ny nyckel</string>
     <string name="sources_patch_expert_badge">Expert</string>
-    <string name="sources_patch_expert_badge_tooltip">Aktivera Expertläge i inställningarna för att inkludera det här tillägget manuellt</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Aktivera %1$s för att inkludera det här tillägget manuellt</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Behöver du hjälp med att hitta APK-filen?</string>
     <string name="home_apk_availability_dialog_simple">Om du vill modifiera &lt;b&gt;%s&lt;/b&gt; behöver du en omodifierad APK-fil med följande version:</string>
@@ -508,7 +510,6 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="shortcut_repatch_long">Modifiera inaktuella appar igen</string>
     <string name="shortcut_check_updates_short">Sök efter uppdateringar</string>
     <string name="shortcut_check_updates_long">Sök efter tilläggsuppdateringar</string>
-    <string name="shortcut_patch_app">Modifiera %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Avinstallera den här appen?</string>
     <string name="home_app_info_uninstall_removes_data">Appen och dess data tas bort från den här enheten</string>
@@ -529,6 +530,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="home_app_info_install_type_custom_installer">Anpassad installerare</string>
     <string name="home_app_info_install_type_system_installer">Systemets installerare</string>
     <string name="home_app_info_install_type_play_store">Play Butik-installation</string>
+    <string name="home_app_info_install_type_root">Root-installation</string>
     <string name="home_app_info_install_type_root_play_store">Play Butik-installation med rotbehörigheter</string>
     <string name="home_app_info_install_type_shizuku_play_store">Play Butik-installation med Shizuku</string>
     <string name="home_app_info_patch_update_available">Tilläggsuppdatering är tillgänglig</string>
@@ -570,7 +572,8 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="root_mount_module_unmount_warning">Om KernelSU har \"Unmount modules by default\" aktiverat öppnar du KernelSU &gt; Superuser &gt; appen som du har monterat &gt; Profile &gt; Custom och inaktivera \"Unmount modules\". Annars kan det hända att den modifierade APK-filen som har monterats inte träder i kraft, även om Morphe visar att den är monterad</string>
     <string name="root_pre_patch_installer_standard_title">Standardinstallationsläge</string>
     <string name="root_pre_patch_installer_standard_description">Modifierar som en vanlig APK-fil med stöd för GmsCore. Din installerarinställning används efter modifieringen</string>
-    <string name="root_pre_patch_installer_hint">Frågas om Inställningar &gt; Modifiering &gt; Installation &gt; Uppmaning om val av installerare har aktiverats. Modifieringsläget går inte att ändra efter modifiering</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Frågades medan %1$s är inställd på %2$s. Modifieringsläget kan inte ändras efter modifiering</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Felmeddelande kopierades till urklipp</string>
     <string name="patcher_error_log">Fellogg</string>
@@ -669,6 +672,14 @@ Om du avinstallerar raderas alla appdata permanent"</string>
     <string name="patcher_step_group_saving">Sparar</string>
     <string name="patcher_step_write_patched">Skriver modifierad APK-fil</string>
     <string name="patcher_step_sign_apk">Signerar modifierad APK-fil</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Läser DEX-filer</string>
+    <string name="patcher_task_extracting_resources">Extraherar resurser</string>
+    <string name="patcher_task_decoding_resources">Avkodar resurser</string>
+    <string name="patcher_task_indexing_classes">Indexerar klasser</string>
+    <string name="patcher_task_compiling_dex">Kompilerar DEX-filer</string>
+    <string name="patcher_task_compiling_resources">Kompilerar resurser</string>
+    <string name="patcher_task_writing_apk">Skriver APK-fil</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Skydd för modifiering i bakgrunden</string>
     <string name="battery_optimization_dialog_description">Vissa enheter kan stoppa modifieringsverktyget när appen minimeras. Tillåt att Morphe körs utan batteribegränsningar för att säkerställa att modifieringen slutförs tillförlitligt</string>
@@ -717,7 +728,8 @@ Om du avinstallerar raderas alla appdata permanent"</string>
     <string name="patched_app_save_failed_toast">Det gick inte att spara den modifierade appen</string>
     <string name="plugin_activity_dialog_body">Användarinteraktion krävs för att fortsätta med den här insticksmodulen</string>
     <string name="patcher_process_killed_message">Systemet stoppade modifieringsverktyget innan det var klart, oftast för att frigöra minne. Stäng andra appar och försök igen</string>
-    <string name="patcher_process_crashed_message">Modifieringsverktyget kraschade innan det var klart. Om det händer igen inaktiverar du \"Använd inbäddad VM\" i inställningarna och rapporterar problemet med loggen</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Modifieringsverktyget kraschade innan det var klart. Om det händer igen, inaktivera %1$s och rapportera problemet med loggen</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Modifieringsverktygets minne tog slut med en heap på %1$s MB. Den här appen är för stor för de valda tilläggen. Försök att modifiera med färre tilläggskällor eller välj färre tillägg</string>
     <string name="install_app_success">Installationen lyckades</string>
@@ -1017,9 +1029,8 @@ Bildernas mått ska vara följande:
     <string name="installer_title">Välj installerare</string>
     <string name="installer_internal_description">Använder Androids paketinstallerare</string>
     <string name="installer_play_store_description">Använder systemets installerare och anger Google Play Butik som installationskälla</string>
+    <string name="installer_root_description">Installeras tyst med root</string>
     <string name="installer_root_play_store_description">Installerar tyst med rotbehörigheter och anger Google Play Butik som installationskälla</string>
-    <string name="installer_auto_saved_name">Rotmontering</string>
-    <string name="installer_auto_saved_description">Monterar appar som har modifierats i rotmonteringsläget. Standardmässigt modifierade APK-filer använder en annan installerare</string>
     <string name="installer_shizuku_description">Installerar tyst med Shizuku eller Sui</string>
     <string name="installer_shizuku_play_store_description">Installerar tyst genom Shizuku eller Sui och anger Google Play Butik som installationskälla</string>
     <string name="installer_option_none">Ingen alternativ installerare</string>
@@ -1029,7 +1040,7 @@ Bildernas mått ska vara följande:
     <string name="installer_status_shizuku_not_installed">Installera Shizuku eller Sui för att använda det här alternativet</string>
     <string name="installer_status_shizuku_not_running">Starta Shizuku eller Sui och försök igen</string>
     <string name="installer_status_shizuku_permission">Ge behörighet till Morphe från Shizuku-appen</string>
-    <string name="installer_mount_warning_install">Din primära installerare har angetts till den rootade monteringsinstalleraren. Den här sparade appen installerades inte med montering</string>
+    <string name="installer_mount_warning_install">Modifieringsläget är inställt på root-montering. Den här sparade appen installerades inte med montering</string>
     <string name="mount_version_mismatch_message">Den ursprungliga appens version (%2$s) matchar inte den modifierade appens version (%1$s). Montera den matchande ursprungliga versionen och försök igen</string>
     <string name="mount_stock_restore_failed_message">Android avvisade den sparade ursprungliga APK-filen. Installera den matchande ursprungliga versionen och försök sedan montera igen</string>
     <string name="installer_status_shizuku_unsupported">Den installerade Shizuku-versionen stöds inte</string>
@@ -1051,11 +1062,17 @@ Bildernas mått ska vara följande:
     <string name="installer_play_store_warning_continue">Jag förstår, fortsätt</string>
     <string name="installer_play_store_mode">Installera som Play Butik</string>
     <string name="installer_play_store_mode_description">Markerar Google Play Butik som installationskälla</string>
+    <string name="settings_section_patch_mode">Modifieringsläge</string>
+    <string name="settings_patch_mode_ask">Fråga varje gång</string>
+    <string name="settings_patch_mode_ask_description">Frågar innan varje app modifieras om den ska modifieras för root-montering eller en standardinstallation</string>
+    <string name="settings_section_after_patching">Efter modifiering</string>
+    <string name="settings_after_patching_install">Installera automatiskt</string>
+    <string name="settings_after_patching_ask">Fråga vilken installerare</string>
+    <string name="settings_after_patching_ask_description">Frågar vilken installerare som ska användas varje gång en app installeras</string>
+    <string name="settings_after_patching_manual">Installera manuellt</string>
+    <string name="settings_after_patching_manual_description">Installeras med standardinstalleraren när du trycker på Installera</string>
     <string name="settings_nomount_only">Endast NoMount</string>
     <string name="settings_nomount_only_description">Monterar endast appar med NoMount och återgår aldrig till en bind-mount, så att de förblir omonterade utan det</string>
-    <string name="settings_prompt_installer_on_install">Uppmaning om val av installerare</string>
-    <string name="settings_prompt_installer_on_install_description">Frågar hur varje app ska installeras: med rotbehörigheter före modifieringen, annars därefter</string>
-    <string name="settings_auto_install_with_shizuku">Installera automatiskt efter modifiering</string>
     <string name="settings_auto_install_with_shizuku_description">Installerar eller monterar den modifierade APK-filen så fort modifieringen är klar</string>
     <string name="settings_auto_uninstall_with_shizuku">Avinstallera automatiskt vid konflikt</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Avinstallerar befintlig app vid signaturkonflikt. Detta kan ta bort appdata</string>

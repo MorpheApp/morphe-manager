@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Ushbu ilovani yashirasizmi?</string>
     <string name="home_more_apps_title">Yana ko\'proq ilovalar</string>
     <string name="home_more_apps_hide_title">Ushbu kartani yashirasizmi?</string>
-    <string name="home_more_apps_hide_message">Siz uni istalgan vaqtda Sozlamalar &gt; Tashqi ko\'rinish &gt; Bosh sahifa bo\'limidan qaytarishingiz mumkin</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Siz uni istalgan vaqtda %1$s bo\"shimi orqali qaytarishingiz mumkin</string>
     <string name="home_app_hide_message">Bu ilova bosh ekrandan yashiriladi. Uni keyinroq ro‘yxat pastidagi tugma orqali \"Yashirilgan ilovalar\" bo‘limidan qayta tiklashingiz mumkin.</string>
     <string name="home_app_will_be_hidden">Bu ilova yashiriladi</string>
     <string name="home_app_hidden_named">%s yashirildi</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Ishonchli kalit</string>
     <string name="sources_signing_key_new">Yangi kalit</string>
     <string name="sources_patch_expert_badge">Ekspert</string>
-    <string name="sources_patch_expert_badge_tooltip">Ekspert rejimini sozlamalarda yoqing, shu bilan ushbu patchni qo‘lda kiritishingiz mumkin</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Ushbu patchni qo\"l bilan kiritish uchun %1$s ni yoqing</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">APKni topishda yordam kerakmi?</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt; ni patchlash uchun, uning patchlanmagan APK versiyasi kerak:</string>
@@ -508,7 +510,6 @@ Eng yaxshi natijalar uchun ushbu ilova to‘liq &lt;b&gt;APK&lt;/b&gt;ni patchla
     <string name="shortcut_repatch_long">Eski ilovalarni qayta ta’mirlash</string>
     <string name="shortcut_check_updates_short">Yangilanishlarni tekshirish</string>
     <string name="shortcut_check_updates_long">Patch yangilanishlarini tekshirish</string>
-    <string name="shortcut_patch_app">%s ni ta’mirlash</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Ushbu ilovani o‘chirishmi?</string>
     <string name="home_app_info_uninstall_removes_data">Ilova va uning ma\'lumotlari ushbu qurilmadan o‘chiriladi</string>
@@ -529,6 +530,7 @@ Eng yaxshi natijalar uchun ushbu ilova to‘liq &lt;b&gt;APK&lt;/b&gt;ni patchla
     <string name="home_app_info_install_type_custom_installer">Maxsus o\'rnatuvchi</string>
     <string name="home_app_info_install_type_system_installer">Tizim o\'rnatuvchisi</string>
     <string name="home_app_info_install_type_play_store">Play Store o\'rnatish</string>
+    <string name="home_app_info_install_type_root">Root orqali o\'rnatish</string>
     <string name="home_app_info_install_type_root_play_store">Root Play Store o\'rnatish</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Store o\'rnatish</string>
     <string name="home_app_info_patch_update_available">Tuzatish yangilanishi mavjud</string>
@@ -570,7 +572,8 @@ Eng yaxshi natijalar uchun ushbu ilova to‘liq &lt;b&gt;APK&lt;/b&gt;ni patchla
     <string name="root_mount_module_unmount_warning">Agar KernelSU\'da \"Unmount modules by default\" yoqilgan bo\'lsa, KernelSU &gt; Superuser &gt; siz mount qilgan ilova &gt; Profile &gt; Custom ni oching va \"Unmount modules\" ni o\'chiring. Aks holda, mount qilingan patchlangan APK kuchga kirmasligi mumkin, hatto Morphe uni mount qilingan deb ko\'rsatsa ham.</string>
     <string name="root_pre_patch_installer_standard_title">Standart oʻrnatish rejimi</string>
     <string name="root_pre_patch_installer_standard_description">GmsCore qoʻllab-quvvati bilan oddiy APK sifatida patchlar. Patchdan keyin sizning oʻrnatish sozlamangiz ishlatiladi</string>
-    <string name="root_pre_patch_installer_hint">Sozlamalar &gt; Patchlash &gt; O\'rnatish &gt; O\'rnatuvchini tanlash so\'rovi yoqilganda so\'raladi. Patch rejimini patchlashdan keyin o\'zgartirib bo\'lmaydi.</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">%1$s %2$s ga o\"rnatilgan holatda so\"raldi. Patch jarayonidan so\"ng patch rejimini o\"zgartirib bo\"lmaydi</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Xatolik buferga kopyalandi</string>
     <string name="patcher_error_log">Xatolik jurnali</string>
@@ -668,6 +671,14 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="patcher_step_group_saving">Saqlash</string>
     <string name="patcher_step_write_patched">Patchlangan APK faylini yozish</string>
     <string name="patcher_step_sign_apk">Patchlangan APK faylini imzolash</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">DEX fayllari o\'qilmoqda</string>
+    <string name="patcher_task_extracting_resources">Resurslar ajratilmoqda</string>
+    <string name="patcher_task_decoding_resources">Resurslar dekodlanmoqda</string>
+    <string name="patcher_task_indexing_classes">Klasslar indekslanmoqda</string>
+    <string name="patcher_task_compiling_dex">DEX fayllari kompilyatsiya qilmoqda</string>
+    <string name="patcher_task_compiling_resources">Resurslar kompilyatsiya qilinmoqda</string>
+    <string name="patcher_task_writing_apk">APK fayli yozilmoqda</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Patchlashni himoya qilish</string>
     <string name="battery_optimization_dialog_description">Ba\'zi moslamalar ilovani minimallashtirganda patcherni to‘xtatishi mumkin. Patchlash ishonchli bajarilishini ta\'minlash uchun Morphe batareyani cheklashsiz ishlay olishiga ruxsat bering</string>
@@ -716,7 +727,8 @@ O‘rnatish barcha ilova ma'lumotlarini o‘chiradi"</string>
     <string name="patched_app_save_failed_toast">Patchlangan ilovni saqlashda xatolik</string>
     <string name="plugin_activity_dialog_body">Ushbu plagin bilan davom etish uchun foydalanuvchi aralashuvi kerak</string>
     <string name="patcher_process_killed_message">Tizim patcherni tugashidan oldin to\'xtatdi, odatda xotirani bo\'shatish uchun. Boshqa ilovalarni yoping va qayta urinib ko\'ring.</string>
-    <string name="patcher_process_crashed_message">Patcher yakunlanmasdan avval ishdan chiqdi. Agar bu yana takrorlansa, sozlamalarda \"Use embedded VM\" funksiyasini o\'chiring va muammoni log bilan birga xabar qiling</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Patcher yakunlanmasdan oldin ishdan chiqdi. Agar bu yana takrorlansa, %1$s ni o\"chiring va muammoni log fayli bilan birga xabar qiling</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Patcher %1$s MB xotira maydoni bilan xotirasi tugadi. Bu ilova tanlangan patchlar uchun juda katta. Kamroq patch manbalari bilan patchlashga urinib ko\'ring yoki kamroq patchlarni tanlang.</string>
     <string name="install_app_success">O‘rnatish muvaffaqiyatli yakunlandi</string>
@@ -1016,9 +1028,8 @@ Rasm o'lchamlari quyidagicha bo'lishi kerak:
     <string name="installer_title">O\'rnatuvchini tanlang</string>
     <string name="installer_internal_description">Android paketni o‘rnatuvchidan foydalanish</string>
     <string name="installer_play_store_description">Tizim o\'rnatuvchisidan foydalanadi va o\'rnatish manbai sifatida Google Play Store ni belgilaydi</string>
+    <string name="installer_root_description">Root orqali yashirin tarzda o\'rnatadi</string>
     <string name="installer_root_play_store_description">Root bilan jim o\'rnatadi va o\'rnatish manbai sifatida Google Play Store ni belgilaydi</string>
-    <string name="installer_auto_saved_name">Root mount</string>
-    <string name="installer_auto_saved_description">Root mount rejimida patchlangan ilovalarni mount qiladi. Standart patchlangan APK-lar boshqa oʻrnatuvchidan foydalanadi</string>
     <string name="installer_shizuku_description">Shizuku yoki Sui orqali jim o‘rnatish</string>
     <string name="installer_shizuku_play_store_description">Shizuku yoki Sui orqali jim o\'rnatadi va o\'rnatish manbai sifatida Google Play Store ni belgilaydi</string>
     <string name="installer_option_none">Hech qanday muqobil yo‘l yo‘q</string>
@@ -1028,7 +1039,7 @@ Rasm o'lchamlari quyidagicha bo'lishi kerak:
     <string name="installer_status_shizuku_not_installed">Ushbu variantdan foydalanish uchun Shizuku yoki Sui o\'rnating</string>
     <string name="installer_status_shizuku_not_running">Shizuku yoki Sui ishga tushiring va yana urinib ko\'ring</string>
     <string name="installer_status_shizuku_permission">Morphe dan Shizuku ilovasidan ruxsat bering</string>
-    <string name="installer_mount_warning_install">Sizning asosiy o\'rnatuvchingiz ildizga asoslangan o\'rnatuvchi sifatida belgilangan. Ushbu saqlangan ilova mount orqali o\'rnatilmagan</string>
+    <string name="installer_mount_warning_install">Patch rejimi root mount rejimiga sozlangan. Ushbu saqlangan ilova mount orqali o\'rnatilmagan</string>
     <string name="mount_version_mismatch_message">Versiyalar mos kelmaydi (%2$s) saqlangan ilova versiyasi (%1$s). Mount mos keladigan saqlangan versiyani, so\'ngra yana urinib ko\'ring</string>
     <string name="mount_stock_restore_failed_message">Android saqlangan original APK-ni rad etdi. Mos keladigan stock versiyasini oʻrnating, keyin yana Mount qilishga harakat qiling</string>
     <string name="installer_status_shizuku_unsupported">O\'rnatilgan Shizuku versiyasi qo\'llab-quvvatlanmaydi</string>
@@ -1050,11 +1061,17 @@ Rasm o'lchamlari quyidagicha bo'lishi kerak:
     <string name="installer_play_store_warning_continue">Saya mengerti, lanjutkan</string>
     <string name="installer_play_store_mode">Play Do‘kon sifatida o‘rnating</string>
     <string name="installer_play_store_mode_description">Google Play Store\'ni o\'rnatish manbasi sifatida belgilaydi.</string>
+    <string name="settings_section_patch_mode">Patch rejimi</string>
+    <string name="settings_patch_mode_ask">Har safar so\'rash</string>
+    <string name="settings_patch_mode_ask_description">Har bir ilovani patch qilishdan oldin uni root mount yoki standart o\'rnatish orqali patch qilishni so\'raydi</string>
+    <string name="settings_section_after_patching">Patch qilishdan so\'ng</string>
+    <string name="settings_after_patching_install">Avtomatik o\'rnatish</string>
+    <string name="settings_after_patching_ask">Qaysi o\'rnatuvchi ekanligini so\'rash</string>
+    <string name="settings_after_patching_ask_description">Ilova o\'rnatilganda har safar qaysi o\'rnatuvchidan foydalanishni so\'raydi</string>
+    <string name="settings_after_patching_manual">Qo\'lda o\'rnatish</string>
+    <string name="settings_after_patching_manual_description">O\'rnatish tugmasini bosganingizdan so\'ng standart o\'rnatuvchi orqali o\'rnatadi</string>
     <string name="settings_nomount_only">Faqat NoMount</string>
     <string name="settings_nomount_only_description">Ilovalarni faqat NoMount bilan o\'rnatadi va hech qachon bind mount\'ga qaytmaydi, shuning uchun usiz ular o\'rnatilmagan holatda qoladi</string>
-    <string name="settings_prompt_installer_on_install">O‘rnatishni tanlash bosqichi</string>
-    <string name="settings_prompt_installer_on_install_description">Har bir ilovani qanday o\'rnatishni so\'raydi: patchlashdan oldin root bilan, aks holda undan keyin.</string>
-    <string name="settings_auto_install_with_shizuku">Patchlashdan keyin avtomatik o\'rnatish</string>
     <string name="settings_auto_install_with_shizuku_description">Patchlash tugashi bilan patchlangan APK\'ni o\'rnatadi yoki mount qiladi.</string>
     <string name="settings_auto_uninstall_with_shizuku">Ziddiyat yuzaga kelganda avtomatik ravishda o‘chirib tashlash</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Imzo ziddiyatida mavjud ilovani o\'chiradi. Bu ilova ma\'lumotlarini olib tashlashi mumkin.</string>

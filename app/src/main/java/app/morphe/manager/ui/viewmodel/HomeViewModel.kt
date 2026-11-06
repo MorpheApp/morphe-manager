@@ -89,6 +89,7 @@ class HomeViewModel(
 ) : ViewModel(), KoinComponent {
     // Past the parameters viewModelOf takes
     private val patcherProcesses: PatcherProcesses by inject()
+    private val patchOptionsPrefs: PatchOptionsPreferencesManager by inject()
 
     /** The app list on the home screen. */
     val apps = HomeApps(
@@ -308,6 +309,7 @@ class HomeViewModel(
         patchSelectionRepository = patchSelectionRepository,
         sourceMuteRepository = sourceMuteRepository,
         optionsRepository = optionsRepository,
+        patchOptionsPrefs = patchOptionsPrefs,
         networkInfo = networkInfo,
         prefs = prefs,
         pm = pm,

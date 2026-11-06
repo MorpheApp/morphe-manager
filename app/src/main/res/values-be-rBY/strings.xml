@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Схаваць гэтую праграму?</string>
     <string name="home_more_apps_title">Больш праграм</string>
     <string name="home_more_apps_hide_title">Схаваць гэтую картку?</string>
-    <string name="home_more_apps_hide_message">Вы можаце вярнуць яе ў любы час у Налады &gt; Выгляд &gt; Галоўны экран</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Вы можаце вернуць гэта ў любы час праз %1$s</string>
     <string name="home_app_hide_message">Гэтая праграма будзе схавана з галоўнага экрана. Вы зможаце пазней яе аднавіць са спіса схаваных праграм з дапамогай кнопкі ўнізе спіса</string>
     <string name="home_app_will_be_hidden">Гэтая праграма будзе схавана</string>
     <string name="home_app_hidden_named">%s схаваных</string>
@@ -102,7 +103,7 @@
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="home_greeting_6">Давайце зробім так, каб вашы праграмы паводзілі сябе добра</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Прагноз на сёння: 100% верагоднасць выпраўлення</string>
+    <string name="home_greeting_7" formatted="false">Прагноз на сёння: 100% верагоднасць патчынга</string>
     <!-- From mediocrity to amazing -->
     <string name="home_greeting_8">Гатовыя змяніць непрыемнае на цудоўнае?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Давераны ключ</string>
     <string name="sources_signing_key_new">Новы ключ</string>
     <string name="sources_patch_expert_badge">Эксперт</string>
-    <string name="sources_patch_expert_badge_tooltip">Уключыце рэжым эксперта ў наладах, каб уручную дадаць гэты патч</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Уключыце %1$s, каб дадаць гэты патч уручную</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Трэба дапамогі ў пошуку APK?</string>
     <string name="home_apk_availability_dialog_simple">Каб прапатчыць &lt;b&gt;%s&lt;/b&gt;, вам спатрэбіцца арыгінальны APK наступнай версіі:</string>
@@ -509,7 +511,6 @@
     <string name="shortcut_repatch_long">Перапатчыць састарэлыя праграмы</string>
     <string name="shortcut_check_updates_short">Праверыць абнаўленні</string>
     <string name="shortcut_check_updates_long">Праверыць наяўнасць абнаўленняў патчаў</string>
-    <string name="shortcut_patch_app">Патчыць %s</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Выдаліць гэтую праграму?</string>
     <string name="home_app_info_uninstall_removes_data">Праграма і яе даныя будуць выдалены з гэтай прылады</string>
@@ -530,6 +531,7 @@
     <string name="home_app_info_install_type_custom_installer">Карыстальніцкі ўсталёўшчык</string>
     <string name="home_app_info_install_type_system_installer">Сістэмны ўсталёўшчык</string>
     <string name="home_app_info_install_type_play_store">Усталёўка з Play Store</string>
+    <string name="home_app_info_install_type_root">Усталёўка праз root</string>
     <string name="home_app_info_install_type_root_play_store">Root-усталёўка з Play Store</string>
     <string name="home_app_info_install_type_shizuku_play_store">Усталёўка з Play Store праз Shizuku</string>
     <string name="home_app_info_patch_update_available">Даступна абнаўленне патча</string>
@@ -571,7 +573,8 @@
     <string name="root_mount_module_unmount_warning">Калі ў KernelSU ўключана \"Размантаваць модулі па змаўчанні\", адкрыйце KernelSU &gt; Superuser &gt; праграму, якую вы замантавалі &gt; Profile &gt; Custom і выключыце \"Размантаваць модулі\". У супрацьвыпадку замантаваны патчаны APK можа не спрацаваць, нават калі Morphe паказвае яго як замантаваны</string>
     <string name="root_pre_patch_installer_standard_title">Рэжым стандартнай устаноўкі</string>
     <string name="root_pre_patch_installer_standard_description">Патчыруе як звычайны APK з падтрымкай GmsCore. Налады вашага інсталятара выкарыстоўваюцца пасля патчавання</string>
-    <string name="root_pre_patch_installer_hint">Запытваецца, калі ўключаны пункт Налады &gt; Патчынг &gt; Усталёўка &gt; Запыт выбару інсталятара. Рэжым патчынгу нельга змяніць пасля прымянення патча</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">Запыт быў адпраўлены, пакуль %1$s было ўстаўлена ў значэнне %2$s. Рэжым патчынгаў нельга змяніць пасля патчынгаў</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Памылка скопіявана ў буфер абмену</string>
     <string name="patcher_error_log">Журнал памылак</string>
@@ -670,6 +673,14 @@
     <string name="patcher_step_group_saving">Захаванне</string>
     <string name="patcher_step_write_patched">Запіс патчанага APK-файла</string>
     <string name="patcher_step_sign_apk">Падпіс патчанага APK-файла</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">Чытанне DEX-файлаў</string>
+    <string name="patcher_task_extracting_resources">Извягненне рэсурсаў</string>
+    <string name="patcher_task_decoding_resources">Дэкадаванне рэсурсаў</string>
+    <string name="patcher_task_indexing_classes">Індэксацыя класаў</string>
+    <string name="patcher_task_compiling_dex">Кампіляцыя DEX-файлаў</string>
+    <string name="patcher_task_compiling_resources">Кампіляцыя рэсурсаў</string>
+    <string name="patcher_task_writing_apk">Запіс APK-файла</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Ахова патчынга ў фоне</string>
     <string name="battery_optimization_dialog_description">Некаторыя прылады могуць спыніць працу патчера, калі праграма зведзена. Дазвольце Morphe працаваць без абмежаванняў па акумулятары, каб патчынг завяршаўся надзейна</string>
@@ -718,7 +729,8 @@
     <string name="patched_app_save_failed_toast">Не ўдалося захаваць патчаную праграму</string>
     <string name="plugin_activity_dialog_body">Для працягу работы з гэтым плагінам патрабуецца ўзаемадзеянне карыстальніка</string>
     <string name="patcher_process_killed_message">Сістэма спыніла патчар да яго завяршэння, звычайна для вызвалення памяці. Закрыйце іншыя праграмы і паспрабуйце зноў</string>
-    <string name="patcher_process_crashed_message">Патчар завярнуўся з памылкай да завяршэння працы. Калі гэта паўторыцца, выключаце \"Выкарыстоўваць убудаваную VM\" у наладах і паведаміце пра праблему, дадаўшы лог</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Патчер завярсыўся з памылкай да завяршэння працы. Калі гэта паўторыцца, выключыце %1$s і паведаміце пра праблему, прыклаўшы лог</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">У патчара скончылася памяць з кучай %1$s МБ. Гэтая праграма занадта вялікая для выбраных патчаў. Паспрабуйце правесці патчынг з меншай колькасцю крыніц патчаў або выберыце менш патчаў</string>
     <string name="install_app_success">Паспяхова усталявана</string>
@@ -1018,9 +1030,8 @@ morphe_header_custom_dark.png
     <string name="installer_title">Выберыце ўсталявальнік</string>
     <string name="installer_internal_description">Выкарыстоўвае ўсталёўшчык пакетаў Android</string>
     <string name="installer_play_store_description">Выкарыстоўвае сістэмны ўсталёўшчык і ўсталёўвае Google Play Store як крыніцу ўсталёўкі</string>
+    <string name="installer_root_description">Ціхая ўсталёўка праз root</string>
     <string name="installer_root_play_store_description">Выконвае ціху ўсталёўку з root-правам і ўсталёўвае Google Play Store як крыніцу ўсталёўкі</string>
-    <string name="installer_auto_saved_name">Root-мантаванне</string>
-    <string name="installer_auto_saved_description">Мантуе праграмы, якія былі патчаваны ў рэжыме root-мантавання. Стандартныя патчаныя APK выкарыстоўваюць іншы інсталятар</string>
     <string name="installer_shizuku_description">Усталёўвае ў скрытым рэжыме праз Shizuku або Sui</string>
     <string name="installer_shizuku_play_store_description">Усталёўвае ў скрытым режиме праз Shizuku або Sui і прызначае Google Play Store як крыніцу ўсталёўкі</string>
     <string name="installer_option_none">Без рэзервовага варыянту</string>
@@ -1030,7 +1041,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">Усталюйце Shizuku або Sui, каб скарыстацца гэтым варыянтам</string>
     <string name="installer_status_shizuku_not_running">Запусціце Shizuku або Sui і паспрабуйце зноў</string>
     <string name="installer_status_shizuku_permission">Даць дазвол Morphe ў праграме Shizuku</string>
-    <string name="installer_mount_warning_install">Ваш асноўны інсталятар ustawлены на rooted mount інсталятар. Гэтая захаваная праграма не была ўсталявана праз mount</string>
+    <string name="installer_mount_warning_install">Рэжым патчынгу ўсталяваны на root mount. Гэтая захаваная праграма была ўсталявана не праз mount</string>
     <string name="mount_version_mismatch_message">ВерсіяK стакавай праграмы (%2$s) не супадае з версіяй прапатчанай праграмы (%1$s). Прымацуйце адпаведную стакавую версію, а затым паспрабуйце зноў</string>
     <string name="mount_stock_restore_failed_message">Android адхіліў захаваны арыгінальны APK. Усталюйце адпаведную штатную версію, а затым паспрабуйце Mount зноў</string>
     <string name="installer_status_shizuku_unsupported">Усталяваная версія Shizuku не падтрымліваецца</string>
@@ -1052,11 +1063,17 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_continue">Я разумею, працягнуць</string>
     <string name="installer_play_store_mode">Усталяваць як Play Store</string>
     <string name="installer_play_store_mode_description">Прызначае Google Play Store крыніцай усталёўкі</string>
+    <string name="settings_section_patch_mode">Рэжым патчынгу</string>
+    <string name="settings_patch_mode_ask">Запытваць кожны раз</string>
+    <string name="settings_patch_mode_ask_description">Перад патчынгам кожнай праграмы запытваецца, ці патчыць яе для root mount або для стандартнай ўсталёўкі</string>
+    <string name="settings_section_after_patching">Пасля патчынга</string>
+    <string name="settings_after_patching_install">Усталяваць аўтаматычна</string>
+    <string name="settings_after_patching_ask">Спытаць, які ўсталёўшчык</string>
+    <string name="settings_after_patching_ask_description">Кожны раз пры ўсталёўцы праграмы будзе запытываць, які ўсталёўшчык выкарыстоўваць</string>
+    <string name="settings_after_patching_manual">Усталяваць уручную</string>
+    <string name="settings_after_patching_manual_description">Усталёўваецца з дапамогай усталёўшчыка па змаўчанні пасля націскання кнопкі \"Усталяваць\"</string>
     <string name="settings_nomount_only">Толькі NoMount</string>
     <string name="settings_nomount_only_description">Мантуе праграмы толькі з NoMount і ніколі не вяртаецца да bind mount, такім чынам яны застаюцца непрымацанымі без яго</string>
-    <string name="settings_prompt_installer_on_install">Запыт на выбар усталёўшчыка пры ўсталёўцы</string>
-    <string name="settings_prompt_installer_on_install_description">Запытвае спосаб усталёўкі кожнай праграмы: з root-правам да пэчынгу, у іншым выпадку — пасля яго</string>
-    <string name="settings_auto_install_with_shizuku">Аўтаматычная ўсталёўка пасля патчынга</string>
     <string name="settings_auto_install_with_shizuku_description">Усталёўвае або мантуе патчаны APK адразу пасля завяршэння пэчынгу</string>
     <string name="settings_auto_uninstall_with_shizuku">Аўтаматычнае выдаленне пры канфлікце</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Выдаляе існуючую праграму пры канфлікце подпісаў. Гэта можа выдаліць даныя праграмы</string>

@@ -10,7 +10,8 @@
     <string name="home_app_hide_title">Энэ апп-ыг нуух уу?</string>
     <string name="home_more_apps_title">Илүү олон апп</string>
     <string name="home_more_apps_hide_title">Энэхүү картыг нуух уу?</string>
-    <string name="home_more_apps_hide_message">Та үүнийг Тохиргоо &gt; Гадаад төрх &gt; Нүүр дэлгэц хэсгээс хэзээ ч буцаан авч болно</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">Та үүнийг хэзээ ч %1$s хэсгээс буцаан авч болно</string>
     <string name="home_app_hide_message">Энэ апп нүүр дэлгэцээс нуугдах болно. Та дараа нь жагсаалтын доор байрлах товчийг ашиглан нуугдсан апп-уудаас сэргээх боломжтой</string>
     <string name="home_app_will_be_hidden">Энэ апп нуугдах болно</string>
     <string name="home_app_hidden_named">%s нуугдсан</string>
@@ -243,7 +244,8 @@
     <string name="sources_signing_key_trusted">Итгэмжлэгдсэн түлхүүр</string>
     <string name="sources_signing_key_new">Шинэ түлхүүр</string>
     <string name="sources_patch_expert_badge">Мэргэжилтэн</string>
-    <string name="sources_patch_expert_badge_tooltip">Энэхүү патчийг гараар нэмэхийн тулд Тохиргоо хэсгээс Мэргэжилтний горимыг идэвхжүүлнэ үү</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
+    <string name="sources_patch_expert_badge_tooltip">Энэхүү пачийг гараар оруулахын тулд %1$s-ийг асаана уу</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">APK-г олоход тусламж хэрэгтэй байна уу?</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt;-ыг патч хийхийн тулд патч хийгдээгүй APK хувилбар шаардлагатай:</string>
@@ -508,7 +510,6 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="shortcut_repatch_long">Хуучирсан апп-уудыг дахин патлах</string>
     <string name="shortcut_check_updates_short">Шинэчлэлийг шалгах</string>
     <string name="shortcut_check_updates_long">Патчийн шинэчлэлтийг шалгах</string>
-    <string name="shortcut_patch_app">%s-ыг патлах</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Энэ аппликейшнийг устгах уу?</string>
     <string name="home_app_info_uninstall_removes_data">Аппликейшн болон түүний өгөгдлүүд энэ төхөөрөмжөөс устгагдана</string>
@@ -529,6 +530,7 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="home_app_info_install_type_custom_installer">Тусгай суулгагч</string>
     <string name="home_app_info_install_type_system_installer">Системийн суулгагч</string>
     <string name="home_app_info_install_type_play_store">Play Store-оор суулгах</string>
+    <string name="home_app_info_install_type_root">Root суулгалт</string>
     <string name="home_app_info_install_type_root_play_store">Root Play Store-оор суулгах</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Store-оор суулгах</string>
     <string name="home_app_info_patch_update_available">Нөхцөлийн шинэчлэлт боломжтой</string>
@@ -570,7 +572,8 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="root_mount_module_unmount_warning">Хэрэв KernelSU-ийн \"Unmount modules by default\" тохиргоо асаалттай бол KernelSU &gt; Superuser &gt; таны mount хийсэн апп &gt; Profile &gt; Custom руу орж \"Unmount modules\"-ийг унтраагаарай. Эсвэл Morphe-д mount хийгдсэн гэж харагдаж байсан ч mount хийсэн патчлагдсан APK-ийн үйлчилгээ идэвхжихгүй байх可能性があります</string>
     <string name="root_pre_patch_installer_standard_title">Стандарт суулгалт горим</string>
     <string name="root_pre_patch_installer_standard_description">GmsCore дэмжлэгтэй энгийн APK байдлаар патлана. Патлалтын дараа таны суулጋгчийн тохиргоог ашиглана</string>
-    <string name="root_pre_patch_installer_hint">Тохиргоо &gt; Патчлах &gt; Суурилуулах &gt; Суурилуулагчийг сонгох заавар идэвхтэй үед гарна. Патч хийсний дараа патчийн горимыг өөрчилж болохгүй</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
+    <string name="root_pre_patch_installer_hint">%1$s тохиргоо %2$s дээр байх үед асуулаа. Пач хийсний дараа пачийн горимыг өөрчилж болохгүй</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Алдааг санах баруунд хууллаа</string>
     <string name="patcher_error_log">Алдааны лог</string>
@@ -669,6 +672,14 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="patcher_step_group_saving">Хадгалж байна</string>
     <string name="patcher_step_write_patched">Засварласан APK файлыг бичиж байна</string>
     <string name="patcher_step_sign_apk">Засварласан APK файлд гарын үсэг зурж байна</string>
+    <!-- Patcher Screen - Patcher Tasks -->
+    <string name="patcher_task_decoding_dex">DEX файлуудыг уншиж байна</string>
+    <string name="patcher_task_extracting_resources">Нөөцүүдийг задлаж байна</string>
+    <string name="patcher_task_decoding_resources">Нөөцүүдийг декодлож байна</string>
+    <string name="patcher_task_indexing_classes">Классуудыг индексжүүлж байна</string>
+    <string name="patcher_task_compiling_dex">DEX файлуудыг хөрвүүлж байна</string>
+    <string name="patcher_task_compiling_resources">Нөөцийг хөрвүүлж байна</string>
+    <string name="patcher_task_writing_apk">APK файлыг бичиж байна</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Ард тал дээр патч хийх хамгаалалт</string>
     <string name="battery_optimization_dialog_description">Зарим төхөөрөмжүүд аппликейшныг багасгахад патчер-ийг зогсоож магадгүй. Патч хийх явц найдвартай дуусахыг баталгаажуулахын тулд Morphe-д батерейны хязгаарлалтгүй ажиллахыг зөвшөөрнө үү</string>
@@ -717,7 +728,8 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="patched_app_save_failed_toast">Зассан аппликейшнийг хадгалах үед алдаа гарлаа</string>
     <string name="plugin_activity_dialog_body">Энэхүү нэмэлт програмыг ашиглахын тулд хэрэглэгчийн үйлдэл шаардлагатай</string>
     <string name="patcher_process_killed_message">Систем патчерыг дуусахаас нь өмнө зогсоолоо, энэ нь ихэвчлэн санах ойг чөлөөлөх зорилготой байдаг. Бусад апп-уудыг хааж дахин оролдоно уу</string>
-    <string name="patcher_process_crashed_message">Патчер дуусахаас өмнө гацаж алдлаа. Хэрэв энэ дахин тохиолдовлоо, тохиргооноос \"Use embedded VM\"-ийг унтрааж, логтой хамт асуудлыг мэдэгдэнэ үү</string>
+    <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
+    <string name="patcher_process_crashed_message">Пачер дуусахаас өмнө гацав. Хэрэв дахин ийм зүйл гарвал %1$s-ийг унтрааж, логтой хамт алдаагаа мэдээлнэ үү</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Патчер %1$s MB heap-тэй санах ойгоос дууссан. Энэхүү апп нь сонгосон патчуудад хэтэрхий том байна. Цөөн патчийн эх сурвалж ашиглан патлах эсвэл цөөн патч сонгоно уу</string>
     <string name="install_app_success">Амжилттай суулгалаа</string>
@@ -1017,9 +1029,8 @@ morphe_header_custom_dark.png
     <string name="installer_title">Суулгагчийг сонгох</string>
     <string name="installer_internal_description">Android-ийн багц суулгагчийг ашиглана</string>
     <string name="installer_play_store_description">Системийн суулгагчийг ашиглаж, Google Play Store-ыг суулгалтын эх сурвалж болгон тохируулна</string>
+    <string name="installer_root_description">Root эрхээр чимээгүй суулгана</string>
     <string name="installer_root_play_store_description">Root эрхээр чимээгүй суулгаж, Google Play Store-ыг суулгалтын эх сурвалж болгон тохируулна</string>
-    <string name="installer_auto_saved_name">Root mount</string>
-    <string name="installer_auto_saved_description">Root mount горимоор патлагдсан апп-уудыг mount хийнэ. Стандарт патлагдсан APK-нууд өөр суулгагч ашиглана</string>
     <string name="installer_shizuku_description">Shizuku эсвэл Sui ашиглан чимээгүй суулгана</string>
     <string name="installer_shizuku_play_store_description">Shizuku эсвэл Sui-ээр дамжуулан чимээгүй суулгаж, Google Play Store-ыг суулгалтын эх сурвалж болгон тохируулна</string>
     <string name="installer_option_none">Нөөцгүй</string>
@@ -1029,7 +1040,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">Энэхүү сонголтыг ашиглахын тулд Shizuku эсвэл Sui-г суулгана уу</string>
     <string name="installer_status_shizuku_not_running">Shizuku эсвэл Sui-г ажиллуулж дахин оролдоно уу</string>
     <string name="installer_status_shizuku_permission">Shizuku аппликейшнээс Morphe-д зөвшөөрөл олгоно уу</string>
-    <string name="installer_mount_warning_install">Таны үндсэн суулгагч rooted mount суулгагч болж тохируулагдсан байна. Энэхүү хадгалсан апп нь mount ашиглан суулгагдаагүй байна</string>
+    <string name="installer_mount_warning_install">Нөхцөлжөөх горим root mount болгож тохируулагдсан байна. Хадгалагдсан энэ аппликейшн mount ашиглан суулгагдаагүй байна</string>
     <string name="mount_version_mismatch_message">Үндсэн апп-ны хувилбар (%2$s) нь патч хийсэн апп-ны хувилбартай (%1$s) тохирохгүй байна. Тохирох үндсэн хувилбарыг mount хийгээд дахин оролдоно уу</string>
     <string name="mount_stock_restore_failed_message">Android хадгалсан эх APK-г татгалзлаа. Тохирох стандарт хувилбарыг суулгаад, Mount-ийг дахин оролдоно уу</string>
     <string name="installer_status_shizuku_unsupported">Суулгасан Shizuku хувилбар дэмжигдэхгүй байна</string>
@@ -1051,11 +1062,17 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_continue">Ойлголоо, үргэлжлүүлэх</string>
     <string name="installer_play_store_mode">Play Store-оор суулгах</string>
     <string name="installer_play_store_mode_description">Суулгасан эх сурвалжийг Google Play Store гэж тэмдэглэнэ</string>
+    <string name="settings_section_patch_mode">Нөхцөлжөөх горим</string>
+    <string name="settings_patch_mode_ask">Удирдлага бүрдээс асуух</string>
+    <string name="settings_patch_mode_ask_description">Апп бүрийг нөхцөлжөөхөөс өмнө root mount эсвэл стандарт суулгалтаар нөхцөлжөөхийг асууна</string>
+    <string name="settings_section_after_patching">Нөхцөлжөөсний дараа</string>
+    <string name="settings_after_patching_install">Автоматаар суулгах</string>
+    <string name="settings_after_patching_ask">Суулгагч сонгохыг асуух</string>
+    <string name="settings_after_patching_ask_description">Аппликейшн суулгах бүрд аль суулгагчийг ашиглахыг асууна</string>
+    <string name="settings_after_patching_manual">Гараар суулгах</string>
+    <string name="settings_after_patching_manual_description">Суулгах товчийг дарсны дараа үндсэн суулгагчаар суулгана</string>
     <string name="settings_nomount_only">Зөвхөн NoMount</string>
     <string name="settings_nomount_only_description">Аппликейшнүүдийг зөвхөн NoMount-оор mount хийнэ бөгөөд bind mount руу хэзээ ч шилжихгүй, ингэснээр NoMount-гүйгээр mount хийгдээгүй хэвээр байна</string>
-    <string name="settings_prompt_installer_on_install">Суулгахдаа суулгагч сонгох сануулга</string>
-    <string name="settings_prompt_installer_on_install_description">Апп бүрийг хэрхэн суурилуулахыг асууна: патчлахын өмнө root-той, эсвэл патчлсны дараа</string>
-    <string name="settings_auto_install_with_shizuku">Патч хийсний дараа автоматаар суулгах</string>
     <string name="settings_auto_install_with_shizuku_description">Патч хийж дуусмагц патчлагдсан APK-г шууд суулгах эсвэл mount хийнэ</string>
     <string name="settings_auto_uninstall_with_shizuku">Зөрчилдөөнтэй үед автоматаар устгах</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Гарын үсгийн зөрчил гарсан тохиолдолд байгаа апп-ыг устгана. Энэ нь апп-ын өгөгдлийг устгаж болзошгүй</string>
