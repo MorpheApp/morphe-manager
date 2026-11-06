@@ -257,17 +257,8 @@ class PatcherViewModel(
     var batteryOptimizationDialog by mutableStateOf(false)
         private set
 
-    /**
-     * Non-null when one or more patch option paths cannot be read before patching starts.
-     *
-     * @param canClear Whether the values behind the failing paths can be dropped from the dialog.
-     *                 Only simple mode keeps them, expert mode edits them while selecting patches.
-     */
-    data class InaccessibleOptionPathsState(
-        val failures: List<PathValidationResult>,
-        val canClear: Boolean
-    )
-    var inaccessibleOptionPaths by mutableStateOf<InaccessibleOptionPathsState?>(null)
+    /** Non-null when one or more patch option paths cannot be read before patching starts. */
+    var inaccessibleOptionPaths by mutableStateOf<List<PathValidationResult>?>(null)
         private set
 
     fun dismissInaccessibleOptionPathsError() {
@@ -275,16 +266,20 @@ class PatcherViewModel(
     }
 
     /**
-     * Drops the saved option values behind the failing paths and resumes the check, so a run
-     * whose files are gone for good goes on with the defaults the patches declare.
+     * Drops the option values behind the failing paths and resumes the check, so a run whose
+     * files are gone for good goes on with the defaults the patches declare.
      */
     fun clearInaccessibleOptionPaths() {
-        val failures = inaccessibleOptionPaths?.failures.orEmpty()
+        val failures = inaccessibleOptionPaths.orEmpty()
         inaccessibleOptionPaths = null
+        appliedOptions = appliedOptions.withoutFailingPaths(failures)
 
         viewModelScope.launch {
-            failures.forEach { failure ->
-                patchOptionsPrefs.clearOptionValue(packageName, failure.patchName, failure.optionKey)
+            // Options simple mode keeps in its settings would hand the same paths to its next run
+            if (!input.selectedByHand) {
+                failures.forEach { failure ->
+                    patchOptionsPrefs.clearOptionValue(packageName, failure.patchName, failure.optionKey)
+                }
             }
 
             runPreflightCheck()
@@ -625,22 +620,12 @@ class PatcherViewModel(
             }
         }
 
-        // Expert mode carries its options with the run, simple mode keeps them per app
-        val options = if (prefs.useExpertMode.get()) {
-            input.options
-        } else {
-            patchOptionsPrefs.exportPatchOptions(packageName)
-        }
-
         // Validate any file-system paths supplied as patch options before handing off to the worker
         val pathFailures = withContext(Dispatchers.IO) {
-            validateOptionPaths(options.restrictTo(runSelection), globalBundlesForCheck.values, packageName)
+            validateOptionPaths(appliedOptions.restrictTo(runSelection), globalBundlesForCheck.values, packageName)
         }
         if (pathFailures.isNotEmpty()) {
-            inaccessibleOptionPaths = InaccessibleOptionPathsState(
-                failures = pathFailures,
-                canClear = !prefs.useExpertMode.get()
-            )
+            inaccessibleOptionPaths = pathFailures
             return false
         }
 
@@ -650,7 +635,7 @@ class PatcherViewModel(
             return false
         }
 
-        startWorker(options)
+        startWorker(appliedOptions)
         return true
     }
 
@@ -843,7 +828,9 @@ class PatcherViewModel(
             selection,
             scope = input.sourceScope
         )
-        patchOptionsRepository.saveOptions(configurationPackageName, options)
+        // Options simple mode keeps in its settings stay there, rather than replacing the ones
+        // saved for the sources they name
+        if (input.selectedByHand) patchOptionsRepository.saveOptions(configurationPackageName, options)
 
         // Taken here as well as before patching, because a copy starts out with no snapshot of
         // its own and would flag every patch it was just built with as new

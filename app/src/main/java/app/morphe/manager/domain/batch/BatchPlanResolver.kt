@@ -397,6 +397,8 @@ class BatchPlanResolver(
             source = source,
             selection = emptyMap(),
             options = emptyMap(),
+            // Nothing is selected only where the defaults leave nothing, which is set up by hand
+            selectedByHand = nothingSelected,
             bundles = contributing.map { it.toRef() },
             experimentalVersion = support.isExperimental,
             state = when {
@@ -425,9 +427,9 @@ class BatchPlanResolver(
             apkArchitecture = source.apkArchitecture()
         )
 
-        if (selection.values.sumOf { it.size } == 0) return blocked(contributing, nothingSelected = true)
+        if (selection.patches.values.sumOf { it.size } == 0) return blocked(contributing, nothingSelected = true)
 
-        val savedOptions = resolveOptions(target, configurationKey, contributing)
+        val savedOptions = resolveOptions(target, configurationKey, contributing, selection.selectedByHand)
 
         // A queue must not stop to ask about one app, so a path that leads nowhere is dropped
         // here and reported on the preflight screen instead of failing inside the patcher
@@ -438,8 +440,9 @@ class BatchPlanResolver(
             target = target,
             appName = appName,
             source = source,
-            selection = selection,
+            selection = selection.patches,
             options = options,
+            selectedByHand = selection.selectedByHand,
             bundles = contributing.map { it.toRef() },
             experimentalVersion = support.isExperimental,
             // An unsupported version already has a warning of its own, which tells the same story
@@ -481,9 +484,19 @@ class BatchPlanResolver(
     }
 
     /**
-     * Mirrors the single-app selection rules across every contributing bundle: a validated
-     * saved selection wins, otherwise the bundle defaults are used. Whichever selection is
-     * reached, the patches' own availability for the install target has the final say.
+     * What an app is patched with, see [resolveSelection].
+     *
+     * @param selectedByHand See [BatchPatchItem.selectedByHand], which also decides where the
+     *   options come from, see [resolveOptions].
+     */
+    private data class ResolvedSelection(val patches: PatchSelection, val selectedByHand: Boolean)
+
+    /**
+     * Mirrors the single-app selection rules across every contributing bundle. Simple mode
+     * patches with the bundle defaults, while a selection set up by hand, as expert mode always
+     * has and simple mode has for sources that select nothing by default, is the validated
+     * saved one where there is any. Whichever selection is reached, the patches' own
+     * availability for the install target has the final say.
      */
     private suspend fun resolveSelection(
         configurationKey: String,
@@ -491,10 +504,22 @@ class BatchPlanResolver(
         allowIncompatible: Boolean,
         useMount: Boolean,
         apkArchitecture: ApkArchitecture
-    ): PatchSelection {
+    ): ResolvedSelection {
         val installerType = installerTypeFor(useMount)
         val uids = bundles.mapTo(mutableSetOf()) { it.uid }
         val patchesByName = bundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
+        val defaults = bundles
+            .toPatchSelection(allowIncompatible) { _, patch ->
+                patch.defaultSelected(installerType, apkArchitecture)
+            }
+            .filterValues { it.isNotEmpty() }
+            .applyAvailability(installerType, apkArchitecture, patchesByName)
+
+        // The single-app flow opens the selection by hand in simple mode too when the defaults
+        // leave nothing, and saves what is picked there
+        val selectedByHand = prefs.useExpertMode.get() || defaults.isEmpty()
+        if (!selectedByHand) return ResolvedSelection(defaults, selectedByHand = false)
+
         val saved = patchSelectionRepository.getAllSelectionsForPackage(configurationKey)
             .filterKeys { it in uids }
 
@@ -515,21 +540,19 @@ class BatchPlanResolver(
             )
 
             if (merged.isNotEmpty()) {
-                return merged.applyAvailability(installerType, apkArchitecture, patchesByName)
+                return ResolvedSelection(
+                    merged.applyAvailability(installerType, apkArchitecture, patchesByName),
+                    selectedByHand = true
+                )
             }
         }
 
-        return bundles
-            .toPatchSelection(allowIncompatible) { _, patch ->
-                patch.defaultSelected(installerType, apkArchitecture)
-            }
-            .filterValues { it.isNotEmpty() }
-            .applyAvailability(installerType, apkArchitecture, patchesByName)
+        return ResolvedSelection(defaults, selectedByHand = true)
     }
 
     /**
-     * Expert mode stores options per bundle in the database, simple mode derives them from the
-     * per-app preference screen. The patcher is handed whichever set the active mode owns.
+     * A selection set up by hand keeps its options per bundle in the database, the bundle
+     * defaults take the ones simple mode sets on its per-app preference screen.
      *
      * Only the database is keyed per install: the preference screen belongs to the app, so every
      * copy of it is built with what the user set there.
@@ -537,9 +560,10 @@ class BatchPlanResolver(
     private suspend fun resolveOptions(
         target: BatchTarget,
         configurationKey: String,
-        bundles: List<PatchBundleInfo.Scoped>
+        bundles: List<PatchBundleInfo.Scoped>,
+        selectedByHand: Boolean
     ): Options {
-        if (!prefs.useExpertMode.get()) {
+        if (!selectedByHand) {
             return runCatching { patchOptionsPrefs.exportPatchOptions(target.packageName) }
                 .getOrDefault(emptyMap())
         }

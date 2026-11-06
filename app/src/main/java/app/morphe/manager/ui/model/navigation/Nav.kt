@@ -52,6 +52,9 @@ data object Patcher : ComplexParameter<Patcher.ViewModelParams> {
      * @param selectedApp The APK to patch and where it came from.
      * @param selectedPatches The patches to apply, per source.
      * @param options The values configured for those patches, per source.
+     * @param selectedByHand Whether the patches were picked by hand rather than taken from the
+     *   source defaults. Only then do [options] belong to the configuration the run leaves
+     *   behind, simple mode keeps its own in its settings.
      * @param sourceScope The sources the run was offered. What is saved for the app afterwards
      *   is replaced for these alone, so a source held back keeps what it had.
      * @param targetPackageName The install this run is aimed at when that is a clone rather than
@@ -66,6 +69,7 @@ data object Patcher : ComplexParameter<Patcher.ViewModelParams> {
         val selectedApp: SelectedApp,
         val selectedPatches: PatchSelection,
         val options: @RawValue Options,
+        val selectedByHand: Boolean,
         val sourceScope: Set<Int>,
         val targetPackageName: String? = null,
         val allowIncompatible: Boolean = false,

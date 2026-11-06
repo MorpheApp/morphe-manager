@@ -436,7 +436,6 @@ private fun DialogHostScope.PatchFlowDialog(
                     UnusableOptionPathsDialog(
                         failures = failures,
                         onRetryAfterPermission = flow::proceedExpertMode,
-                        canClearPaths = true,
                         onClearPaths = flow::proceedExpertModeWithoutUnreadablePaths,
                         onDismiss = selection::dismissUnreadablePaths
                     )
