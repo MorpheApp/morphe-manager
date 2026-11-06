@@ -1,3 +1,21 @@
+## [2.5.0](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0...v2.5.0) (2026-11-06)
+
+### Features
+
+* Copy app and source details with a long press ([d73e5bf](https://github.com/MorpheApp/morphe-manager/commit/d73e5bf38af3ff3601e2952041e6e7f45b2e8465))
+* Mark the sort button only while a filter narrows the list ([4fd6c74](https://github.com/MorpheApp/morphe-manager/commit/4fd6c74f0301bb67ef98e4bbef945e21fd0eb7e3))
+* Rework installation settings and add root install ([56f13f6](https://github.com/MorpheApp/morphe-manager/commit/56f13f60722276f62cd81f0d8b3baed41b73564c))
+* Show patching progress as the patcher reports it ([1d16f32](https://github.com/MorpheApp/morphe-manager/commit/1d16f32614fef8c9642350a7544424b6841be5f9))
+* Sort saved APKs by name or size ([bebb7ee](https://github.com/MorpheApp/morphe-manager/commit/bebb7ee1e929cdef9737c1c7bbc782c428b4ba25))
+
+### Bug Fixes
+
+* Apply patch options picked by hand in simple mode ([bc122d3](https://github.com/MorpheApp/morphe-manager/commit/bc122d34db2b82782c181199449d456e3af291aa))
+* Bump patcher ([5a7a04d](https://github.com/MorpheApp/morphe-manager/commit/5a7a04d902c693020675e42ade3698811f669ac8))
+* Keep only the standard launcher shortcuts ([82bdb1d](https://github.com/MorpheApp/morphe-manager/commit/82bdb1d8ebcd1bba5f628615362f9f872e0c10bb))
+* Mount after patching unless installing manually ([0493aeb](https://github.com/MorpheApp/morphe-manager/commit/0493aeb43760a7383976861fe871380b449d2d07))
+* Slide dialog panels in and out ([a5b148e](https://github.com/MorpheApp/morphe-manager/commit/a5b148e10bded398e5f050960b5960c0a9368d33))
+
 ## [2.5.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v2.5.0-dev.2...v2.5.0-dev.3) (2026-11-06)
 
 ### Features
