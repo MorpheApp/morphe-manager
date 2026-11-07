@@ -950,7 +950,7 @@
     <string name="settings_advanced_github_pat_export_warning">אל תשתף את הטוקן שלך. אם תכלילו אותו בהגדרות ייצוא, שמור את הקובץ הפרטי כי הוא מכיל את הטוקן</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">אפשרויות תיקון</string>
-    <string name="settings_advanced_patch_options_restart_message">שנה את שמה של הגרסה</string>
+    <string name="settings_advanced_patch_options_restart_message">שינוי אפשרויות התיקון מחייב תיקון מחדש של האפליקציה כדי שייכנס לתוקף</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">במצב מומחה, אפשרויות התיקון יהיו זמינות במהלך תהליך התיקון</string>
     <string name="settings_advanced_patch_options_loading">טוען אפשרויות תיקון…</string>
     <string name="settings_advanced_patch_options_waiting_for_source">המתן עד לעדכון מקור התיקון</string>

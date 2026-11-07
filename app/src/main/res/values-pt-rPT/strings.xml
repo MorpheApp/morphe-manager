@@ -1102,7 +1102,7 @@ Detalhes: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">O Android bloqueou isso porque isso rebaixaria o aplicativo instalado</string>
     <string name="installer_shizuku_error_signature">O Android bloqueou isso porque o aplicativo instalado tem uma assinatura diferente</string>
     <string name="installer_shizuku_error_invalid_apk">O Android não conseguiu ler este APK</string>
-    <string name="installer_shizuku_error_user_profile">Excluir</string>
+    <string name="installer_shizuku_error_user_profile">O sistema bloqueou esta instalação. Em dispositivos Xiaomi e semelhantes, ative \"Instalar via USB\" nas opções de programador. Num perfil de trabalho, as instalações podem estar restringidas por política</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Otimização de bateria</string>
     <string name="settings_system_battery_optimization_description">Mantém o modificador em execução quando a aplicação é minimizada</string>

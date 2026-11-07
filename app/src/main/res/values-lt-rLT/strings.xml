@@ -359,7 +359,7 @@ Pasirinkite, iš kur paimti jos APK"</string>
     <string name="expert_mode_multiple_sources_warning_conflict">Taisyklai iš skirtingų šaltinių nėra skirti veikti kartu ir gali sukelti konfliktų arba sugadinti programėlę</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_invalid_signature_title">Nepatvirtintas APK</string>
-    <string name="home_invalid_signature_message">Pasiringtas APK rinkinys nesutampa su tikėtinu skaitmenimis sertifikatu. Jis galbētč buvo modifikuotas arba yra nepatikimos šaltinio.</string>
+    <string name="home_invalid_signature_message">Pasirinktas &lt;b&gt;%s&lt;/b&gt; APK nesutampa su numatytu pasirašymo sertifikatu. Jis gali būti modifikuotas arba gautas iš nepatikimo šaltinio</string>
     <string name="home_invalid_signature_badge">Šis APK galimai neoriginalus</string>
     <string name="home_split_apk_warning_title">Dalinis APK aptiktas</string>
     <string name="home_split_apk_warning_message">"Šis failas yra APK paketas
@@ -1256,7 +1256,7 @@ Išsami informacija: %2$s"</string>
     <string name="copy_selection_available_format">Prieinama %1$s iš %2$s</string>
     <!-- Settings - System Tab - Custom file picker -->
     <string name="settings_system_custom_file_picker">Pasirinktinis failų parinkiklis</string>
-    <string name="settings_system_custom_file_picker_description">Naudoja „Morphe</string>
+    <string name="settings_system_custom_file_picker_description">Naudoja „Morphe“ integruotą failų parinkiklį vietoj sistemos</string>
     <!-- Settings - System Tab - APK download helper -->
     <string name="settings_system_apk_download_helper">APK atsisiuntimo pagalbinė programa</string>
     <string name="settings_system_apk_download_helper_trusted_count">Patikima: %1$d iš %2$d</string>

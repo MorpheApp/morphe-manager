@@ -63,7 +63,7 @@
     <string name="home_search_apps">Hledat aplikace</string>
     <string name="list_options_title">Seřadit a filtrovat</string>
     <string name="list_options_state_description">Seřazeno podle %1$s, filtrováno podle %2$s</string>
-    <string name="home_app_filter_clones">Klonované aplikace nainstalované vedle původní aplikace pod jiným názvem balíčku</string>
+    <string name="home_app_filter_clones">Klony</string>
     <string name="home_app_grouping_none">Žádné</string>
     <string name="home_app_sort_manual_hint">Dlouhým stisknutím aplikace zvolte tlačítko pro změnu pořadí</string>
     <string name="home_app_sort_recommended">Doporučené pořadí</string>

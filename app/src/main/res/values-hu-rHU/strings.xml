@@ -22,7 +22,7 @@
     <string name="home_apps_unhide_message">A nem rejtett alkalmazások visszatérnek a kezdőképernyőre</string>
     <string name="home_app_patch_sources_description">A bejelöletlenül hagyott források nincsenek felajánlva, amikor ezeket az alkalmazásokat javítják, és a javításaik soha nem kerülnek be maguktól egy kiválasztásba. Minden másik alkalmazásnál minden forrás bekapcsolva marad.</string>
     <string name="home_app_patch_sources_mixed">Felajánlva: %1$s a %2$s közül</string>
-    <string name="home_app_patch_sources_covers">A(z) %2$s forrás közül %1$s rendelkezik javításokkal. MAX_LENGTH_32256: MUST BE EMPTY, TERMS: EMPTY</string>
+    <string name="home_app_patch_sources_covers">%2$s forrásból %1$s tartalmaz javításokat</string>
     <string name="home_app_patch_sources_last">Minden alkalmazáshoz maradnia kell legalább egy forrásnak, amelyből javítani lehet.</string>
     <string name="android_11_bug_dialog_title">Android 11 hiba</string>
     <string name="android_11_bug_dialog_description">Az alkalmazástelepítési engedélyt előre el kell fogadni, hogy elkerülhető legyen az Android 11 rendszerben fellépő hiba, mely negatívan befolyásolja a felhasználói élményt</string>
@@ -247,7 +247,7 @@
     <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
     <string name="sources_patch_expert_badge_tooltip">Kapcsold be a(z) %1$s opciót, hogy manuálisan hozzáadhassad ezt a patchet</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_title">Segítségre van szükséged az APK megtalálásához?</string>
+    <string name="home_apk_availability_title">Segítség kell az APK megtalálásához?</string>
     <string name="home_apk_availability_dialog_simple">​A(z) &lt;b&gt;%s&lt;/b&gt; módosításához a következő, módosítások nélküli APK-verzióra van szükséged:</string>
     <string name="home_apk_availability_dialog_expert">​A(z) &lt;b&gt;%s&lt;/b&gt; módosításához a következő, módosítások nélküli APK-verziók egyikére van szükséged:</string>
     <string name="home_apk_availability_recommended_label">Javasolt</string>
@@ -256,7 +256,7 @@
     <string name="home_apk_availability_find">Igen, segíts megtalálni</string>
     <string name="home_apk_availability_have">Nem, már megvan</string>
     <string name="home_apk_helper_download">Használj egy segédalkalmazást.</string>
-    <string name="home_apk_helper_untrusted">Egy segédalkalmazás telepítve van, de még nem megbízható, így itt nem jelenik meg meg</string>
+    <string name="home_apk_helper_untrusted">Egy segédalkalmazás telepítve van, de még nem megbízható, így itt nem jelenik meg</string>
     <string name="home_apk_helper_untrusted_action">Segédalkalmazások áttekintése</string>
     <string name="home_apk_helper_title">Töltsd le egy segédalkalmazással.</string>
     <string name="home_apk_helper_description">A Morphe megkéri az alábbi segédalkalmazást, hogy töltse le az eredeti APK-t, és adja vissza a fájlt.</string>
@@ -1261,7 +1261,7 @@ Részletek: %2$s"</string>
     <string name="settings_system_apk_download_helper">APK letöltő segédprogram</string>
     <string name="settings_system_apk_download_helper_trusted_count">Megbízható: %1$d / %2$d</string>
     <string name="settings_system_apk_download_helper_dialog_description">A segédalkalmazások letölthetik Ön helyett az eredeti APK-kat. A letöltési utasításokban csak az itt megbízhatónak jelöltek jelennek meg.</string>
-    <string name="settings_system_apk_download_helper_trust_title">Bízna ebben a segédprogramban?</string>
+    <string name="settings_system_apk_download_helper_trust_title">Megbízik ebben a segédprogramban?</string>
     <string name="settings_system_apk_download_helper_warning">Az APK a segédalkalmazásból származik, ezért csak olyan alkalmazásokban bízzon meg, amelyeket ismer. A Morphe a módosítás előtt továbbra is ellenőrzi minden fájl csomagját, verzióját és aláírását.</string>
     <string name="settings_system_apk_download_helper_installed_by">Telepítő: %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Ismeretlen telepítő</string>
@@ -1323,8 +1323,8 @@ Részletek: %2$s"</string>
     <string name="settings_section_patch_options_summary">Egyszerű módban az alkalmazásokat patch-eli</string>
     <string name="settings_section_general">Általános</string>
     <string name="settings_section_patcher_summary">Hogyan javítják az alkalmazásokat ezen az eszközen</string>
-    <string name="settings_section_help_info">Segítség és <b>&amp;amp;</b> információ</string>
-    <string name="settings_section_about_summary">További információk a Morrphéről és a segítségnyújtásról</string>
+    <string name="settings_section_help_info">Segítség &amp; információ</string>
+    <string name="settings_section_about_summary">További információk a Morphéről és a segítségnyújtásról</string>
     <string name="settings_section_local_files">Fájlok</string>
     <string name="settings_section_backup">Biztonsági mentés</string>
     <string name="settings_search">Beállítások keresése</string>

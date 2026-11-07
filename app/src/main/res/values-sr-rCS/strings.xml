@@ -373,7 +373,7 @@ Izaberite odakle da uzme njen APK"</string>
     <string name="morphe_experimental_app_version_dialog_message">"Ova verzija &lt;b&gt;%s&lt;/b&gt; ima ranu eksperimentalnu podršku.
 
 🔧 Očekujte neobično ponašanje aplikacije ili neidentifikovane bagove dok se zakrpe usavršavaju za ovu verziju aplikacije"</string>
-    <string name="home_dialog_unsupported_version_dialog_title">Ova APK nije preporučena verzija aplikacije. Nastavljanje može dovesti nefunkcionalnu aplikaciju.</string>
+    <string name="home_dialog_unsupported_version_dialog_title">Nepodržana verzija</string>
     <string name="home_dialog_unsupported_version_dialog_description">Ova verzija APK-a nije preporučena. Nastavljanje može dovesti do nefunkcionalne aplikacije</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="home_dialog_unsupported_version_dialog_proceed">Pogrešni izvor</string>
@@ -956,7 +956,7 @@ Zakrpe nisu pogođene: omogućite prerelease zakrpe za svaki izvor na listi izvo
     <string name="settings_advanced_patch_options_load_error">Nijeleženo učitavanje opcija patchiranja</string>
     <string name="settings_advanced_patch_options_no_available">Prilagođeni filtr</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
-    <string name="settings_advanced_patch_options_custom_branding">Mapa sa slikama za korištenje kao prilagođena zaglavlje</string>
+    <string name="settings_advanced_patch_options_custom_branding">Prilagođeno brendiranje</string>
     <string name="settings_advanced_patch_options_custom_branding_description">Menja naziv aplikacije</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Naziv aplikacije</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Unesi ime</string>
@@ -1000,7 +1000,23 @@ Opciono, putanja sadrži ikonu obaveštenja u jednom od sledećih formata:
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">Promeni ikonu zaglavlja</string>
     <string name="settings_advanced_patch_options_custom_header_description">Menja logo zaglavlja</string>
-    <string name="settings_advanced_patch_options_custom_header_instruction">"Sakrij dugme „Shorts”"</string>
+    <string name="settings_advanced_patch_options_custom_header_instruction">"Fascikla sa slikama za prilagođeni logo zaglavlja.
+
+Fascikla mora da sadrži jednu ili više sledećih fascikli, u zavisnosti od DPI-ja uređaja:
+- drawable-hdpi
+- drawable-xhdpi
+- drawable-xxhdpi
+- drawable-xxxhdpi
+
+Svaka fascikla mora da sadrži sve sledeće datoteke:
+morphe_header_custom_light.png
+morphe_header_custom_dark.png
+
+Dimenzije slika moraju biti sledeće:
+- drawable-hdpi: 194x72 px
+- drawable-xhdpi: 258x96 px
+- drawable-xxhdpi: 387x144 px
+- drawable-xxxhdpi: 512x192 px"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Ukloni dugme „Shorts” iz dugmeta izbornog menija</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Uklanja Shorts iz dugog pritiska na meni pokretača</string>
@@ -1206,7 +1222,7 @@ Detalji: %2$s"</string>
     <string name="settings_system_original_apks_delete_notice">Nećete moći ponovo da zakrpate bez obezbeđivanja novog APK-a</string>
     <string name="settings_system_original_apks_delete_all_title">Brisati sve originalne APK-ove?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
-    <string name="settings_system_patch_selections_title">Upravljanje sačuvanim patch-ovima i opcijama. Ovo ostaje nakon deinstalacije aplikacije</string>
+    <string name="settings_system_patch_selections_title">Izbori patch-ova</string>
     <string name="settings_system_patch_selections_description">Čuva odabrane patchove, zadržane nakon deinstalacije</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Poništiti sve odabire?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Resetovati selektovane pakete?</string>

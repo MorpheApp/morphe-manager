@@ -490,7 +490,7 @@
     <string name="batch_patch_policy_install_mount">Инсталирај или монтирај кога ќе заврши</string>
     <string name="batch_patch_policy_install_mount_description">Инсталира или монтира секоја крпана апликација штом редот ќе заврши. Исклученото ги чува APK датотеките за подоцна</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
-    <string name="batch_patch_start">Табела на водечки спонзори SponsorBlock</string>
+    <string name="batch_patch_start">Започни</string>
     <string name="batch_patch_stop_title">Прекини го групното закрпување?</string>
     <string name="batch_patch_stop_description">Апликацијата што се закрпува во моментов и сè што е сè уште во редица ќе биде откажано</string>
     <!-- Label of a footer button beside "Done". Keep it short, a longer one moves the buttons onto two rows -->
@@ -1222,7 +1222,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_delete_all_title">Избриши ги сите оригинални APK-а?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Изборите за закрпување</string>
-    <string name="settings_system_patch_selections_description">Споделување</string>
+    <string name="settings_system_patch_selections_description">Зачувани избори на печеви, се задржуваат по деинсталација</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Дали да се ресетираат сите избори?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Ресетирај ги избраните пакети?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Дали да се ресетира изборот на извор?</string>

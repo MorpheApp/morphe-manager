@@ -48,7 +48,7 @@
     <string name="home_outdated_manager_title">Morphe е остарял</string>
     <string name="home_outdated_manager_subtitle">Някои източници на пачове изискват по-нова версия</string>
     <string name="home_held_back_title">Един източник на пачове предизвика срив на Morphe</string>
-    <string name="home_held_back_subtitle">Срив</string>
+    <string name="home_held_back_subtitle">Пропуснато е, за да може приложението да стартира. Докоснете за преглед</string>
     <string name="home_metered_skipped_title">Актуализациите са спрени при използване на мобилни данни</string>
     <string name="home_metered_skipped_subtitle">Докоснете, за да разрешите актуализации през мобилни данни</string>
     <string name="home_repatch_available_subtitle">Докоснете, за да ги добавите всички в опашката</string>
@@ -533,7 +533,7 @@
     <string name="home_app_info_install_type_custom_installer">Намиране на инсталатор</string>
     <string name="home_app_info_install_type_system_installer">Системен инсталатор</string>
     <string name="home_app_info_install_type_play_store">Инсталиране от Play Store</string>
-    <string name="home_app_info_install_type_root">Root инсталиране</string>
+    <string name="home_app_info_install_type_root">Root инсталация</string>
     <string name="home_app_info_install_type_root_play_store">Инсталиране от Play Store с root</string>
     <string name="home_app_info_install_type_shizuku_play_store">Инсталиране от Play Store чрез Shizuku</string>
     <string name="home_app_info_patch_update_available">Достъпно е ново издание на замести</string>
@@ -689,7 +689,7 @@
     <string name="battery_optimization_not_now">Не сега</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Morphe</string>
-    <string name="patcher_notification_text">Toast</string>
+    <string name="patcher_notification_text">Докоснете, за да се върнете към инструмента за закърпване</string>
     <string name="patcher_stop_title">Да се спре ли модифицирането?</string>
     <string name="patcher_stop_discards">Направеното дотук се изхвърля и нищо не се инсталира</string>
     <!-- Keeps the run going, the way out of a dialog that asks whether to stop it -->
@@ -728,7 +728,7 @@
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Error</string>
     <string name="failed_to_execute_patch">Неуспешно прилагане на %s</string>
-    <string name="patched_app_save_failed_toast">Import</string>
+    <string name="patched_app_save_failed_toast">Запазването на закърпеното приложение не бе успешно</string>
     <string name="plugin_activity_dialog_body">Потребителски интеракция е нужна, за да продължите с този плагин.</string>
     <string name="patcher_process_killed_message">Системата спря програма за обновяване преди тя да приключи, обикновено с цел освобождаване на памет. Затворете други приложения и опитайте отново</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
@@ -1043,7 +1043,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">Инсталирайте Shizuku или Sui, за да използвате тази опция.</string>
     <string name="installer_status_shizuku_not_running">Запустете Shizuku или Sui и опитайте отново.</string>
     <string name="installer_status_shizuku_permission">Разрешете на Morphe достъп от приложението Shizuku</string>
-    <string name="installer_mount_warning_install">Режимът на пачване е настроен на root mount. Товато запазено приложение не е било инсталирано чрез mount</string>
+    <string name="installer_mount_warning_install">Режимът на пачване е настроен на root mount. Това запазено приложение не е било инсталирано чрез mount</string>
     <string name="mount_version_mismatch_message">Версия на приложението за акции (%2$s) не съвпада с версията на патнатото приложение (%1$s). Монтирайте съответстващата версия на приложението за акции, след това опитайте отново</string>
     <string name="mount_stock_restore_failed_message">Android отхвърли запазения оригинален APK. Инсталирайте съответстващата стокова версия, след това опитайте да монтирате отново.</string>
     <string name="installer_status_shizuku_unsupported">Версията на инсталирания Shizuku не е поддържана.</string>
@@ -1373,7 +1373,7 @@ morphe_header_custom_dark.png
     <string name="search">Търсене</string>
     <string name="search_no_results">Няма намерени резултати</string>
     <string name="sort">Сортиране</string>
-    <string name="any_version">Изтриване на запазеното приложение</string>
+    <string name="any_version">Всякаква</string>
     <string name="enabled">Включен</string>
     <string name="disabled">Изключен</string>
     <string name="state_selected">Избран</string>
@@ -1406,7 +1406,7 @@ morphe_header_custom_dark.png
     <string name="collapse">Свиване</string>
     <string name="collapsed">Сгънат</string>
     <string name="continue_">Toast</string>
-    <string name="version">New downloader plugins available. Click here to configure them.</string>
+    <string name="version">Версия</string>
     <!-- Who made a patch source, as a field label -->
     <string name="author">Автор</string>
     <!-- A file a patch source is added from, as a field label -->
@@ -1426,7 +1426,7 @@ morphe_header_custom_dark.png
     <string name="share">Споделяне</string>
     <string name="install">Инсталиране</string>
     <string name="installed">Инсталирано</string>
-    <string name="reinstall">Изтриване на запазеното приложение</string>
+    <string name="reinstall">Преинсталиране</string>
     <string name="uninstall">Деинсталирай</string>
     <string name="uninstalled">Изтрит</string>
     <string name="save">Запази</string>

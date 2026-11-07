@@ -576,7 +576,7 @@ APK-nı haradan götürəcəyinizi seçin"</string>
     <string name="root_pre_patch_installer_hint">%1$s %2$s olaraq təyin edildikdə soruşuldu. Yamaq rejimi yamaqlamadan sonra dəyişdirilə bilməz</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Xəta buferə köçürüldü</string>
-    <string name="patcher_error_log">Xəta jurnalı</string>
+    <string name="patcher_error_log">Xəta qeydi</string>
     <string name="patcher_error_technical">Texniki təfsilatlar</string>
     <string name="patcher_error_dialog_diagnostics">Diaqnostika</string>
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->

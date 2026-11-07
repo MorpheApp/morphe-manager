@@ -573,7 +573,7 @@ APK ファイルの取得元を選択してください"</string>
     <string name="root_pre_patch_installer_standard_title">標準インストールモード</string>
     <string name="root_pre_patch_installer_standard_description">GmsCore 対応の通常の APK としてパッチを適用します。パッチ適用後は、設定したインストーラーが使用されます</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
-    <string name="root_pre_patch_installer_hint">%1$s が %2$s に設定されている間に要求されました。パッチ適用後にパッチモードを変更することはできません</string>
+    <string name="root_pre_patch_installer_hint">%1$s が %2$s に設定されています。パッチ適用後にパッチモードを変更することはできません</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">エラーをクリップボードにコピーしました</string>
     <string name="patcher_error_log">エラーログ</string>
@@ -673,11 +673,11 @@ APK ファイルの取得元を選択してください"</string>
     <string name="patcher_step_write_patched">パッチ済み APK ファイルを出力中</string>
     <string name="patcher_step_sign_apk">パッチ済み APK ファイルに署名中</string>
     <!-- Patcher Screen - Patcher Tasks -->
-    <string name="patcher_task_decoding_dex">DEXファイルを読み込んでいます</string>
+    <string name="patcher_task_decoding_dex">DEX ファイルを読み込み中</string>
     <string name="patcher_task_extracting_resources">リソースを抽出しています</string>
     <string name="patcher_task_decoding_resources">リソースをデコードしています</string>
-    <string name="patcher_task_indexing_classes">クラスをインデックス作成しています</string>
-    <string name="patcher_task_compiling_dex">DEXファイルをコンパイルしています</string>
+    <string name="patcher_task_indexing_classes">クラスをインデックスしています</string>
+    <string name="patcher_task_compiling_dex">DEX ファイルをコンパイル中</string>
     <string name="patcher_task_compiling_resources">リソースをコンパイル中</string>
     <string name="patcher_task_writing_apk">APK ファイルを書き込み中</string>
     <!-- Battery optimization pre-flight dialog -->

@@ -673,9 +673,9 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="patcher_step_write_patched">Yamalanmış APK dosyası yazılıyor</string>
     <string name="patcher_step_sign_apk">Yamalanmış APK dosyası imzalanıyor</string>
     <!-- Patcher Screen - Patcher Tasks -->
-    <string name="patcher_task_decoding_dex">Dex dosyaları okunyor...</string>
-    <string name="patcher_task_extracting_resources">Kaynaklar çıkartılıyor...</string>
-    <string name="patcher_task_decoding_resources">Kaynakların kodu çözülüyor...</string>
+    <string name="patcher_task_decoding_dex">DEX dosyaları okunuyor</string>
+    <string name="patcher_task_extracting_resources">Kaynaklar çıkartılıyor</string>
+    <string name="patcher_task_decoding_resources">Kaynaklar çözümleniyor</string>
     <string name="patcher_task_indexing_classes">Sınıflar indeksleniyor</string>
     <string name="patcher_task_compiling_dex">DEX dosyaları derleniyor</string>
     <string name="patcher_task_compiling_resources">Kaynaklar derleniyor</string>
@@ -1067,7 +1067,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_patch_mode_ask_description">Her uygulamayı yamalamadan önce, root bağlama için mi yoksa standart kurulum için mi yamalanacağını sorar</string>
     <string name="settings_section_after_patching">Yamalamadan sonra</string>
     <string name="settings_after_patching_install">Otomatik olarak kur</string>
-    <string name="settings_after_patching_ask">Hangi yükleyici olduğunu sor</string>
+    <string name="settings_after_patching_ask">Hangi yükleyicinin kullanılacağını sor</string>
     <string name="settings_after_patching_ask_description">Bir uygulama kurulduğunda her seferinde hangi yükleyicinin kullanılacağını sorar</string>
     <string name="settings_after_patching_manual">Manuel olarak kur</string>
     <string name="settings_after_patching_manual_description">Kur butonuna dokunduğunuzda varsayılan yükleyici ile kurar</string>
@@ -1102,7 +1102,7 @@ Ayrıntılar: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">Android, bunu mevcut uygulamayı düşürdüğü için engelledi.</string>
     <string name="installer_shizuku_error_signature">Android, yüklenen uygulamanın farklı bir imzaya sahip olması nedeniyle bunu engelledi.</string>
     <string name="installer_shizuku_error_invalid_apk">Android bu APK\'yı okuyamadı.</string>
-    <string name="installer_shizuku_error_user_profile">Dışla</string>
+    <string name="installer_shizuku_error_user_profile">Sistem bu yüklemeyi engelledi. Xiaomi ve benzeri cihazlarda geliştirici seçeneklerinden \"USB ile yükle\" seçeneğini açın. İş profilinde yüklemeler politika ile kısıtlanabilir</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Pil optimizasyonu</string>
     <string name="settings_system_battery_optimization_description">Uygulama küçültüldüğünde patcher\'ı çalışır durumda tutar</string>

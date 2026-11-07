@@ -178,7 +178,7 @@
     <string name="sources_management_prerelease_toggle">For úgáfur</string>
     <string name="sources_management_prerelease_toggle_description">Fáðu snemma aðgang að nýjum tilraunabreytingar útgáfum</string>
     <string name="sources_prerelease_warning_title">Tilkynna vandamál</string>
-    <string name="sources_prerelease_warning_message">Virkja forútgáfuplástra?</string>
+    <string name="sources_prerelease_warning_message">Forútgáfur eru enn í þróun. Plástrar geta mistekist eða skemmt forritið og eiginleikar geta breyst án fyrirvara</string>
     <string name="expert_mode_unstable_notice">Forútgáfu- eða tilraunauppfærslur gætu verið óstöðugar</string>
     <string name="sources_management_experimental_versions_toggle">Tilrauna app úgáfur</string>
     <string name="sources_management_experimental_versions_toggle_description">Sýnir og lagar tilraunamarkmið forrita</string>
@@ -659,7 +659,7 @@ Afnaman eyðir varanlega öllum forritsgögnum"</string>
     <string name="patcher_missing_patches_description">Viðvarandi valið fyrir þetta forrit nefnir flika sem enginn virkur uppruni býður upp á lengur. Að halda áfram breytir forritinu án þeirra</string>
     <string name="patcher_missing_patches_label">Skrár plásturvalkosta vantar.</string>
     <string name="patcher_option_paths_gone_title">Fjarlægðu slóðirnar og haltu áfram.</string>
-    <string name="patcher_option_paths_gone_description">Forritstákn.</string>
+    <string name="patcher_option_paths_gone_description">Einn eða fleiri plástravalkostir vísa á skrár sem eru ekki lengur til. Fjarlægðu slóðirnar til að plástra án þeirra, eða settu skrárnar aftur og reyndu aftur</string>
     <string name="patcher_option_paths_rejected_title">Hægt er ekki að nota valskrár fyrir váð</string>
     <string name="patcher_option_paths_rejected_description">Ein eða fleiri valkostir fyrir váð vísa til skráa sem vantar eða innihalda ekki það sem váðið krefst. Fjarlæg slíkar leiðir til að váða án þeirra, eða leiðréttu skránar eins og lýst er í leiðbeiningum valkostsins og reyndu aftur</string>
     <string name="patcher_option_paths_clear">Fjarlægja slóðirnar og halda áfram</string>
@@ -1043,7 +1043,7 @@ Myndastærðin verður að vera sem hér segir:
     <string name="installer_status_shizuku_unsupported">Stuðlað er ekki við uppsettu Shizuku útgáfuna</string>
     <string name="installer_action_open_shizuku">Opna Shizuku</string>
     <string name="installer_hint_generic">Uppsetningin tókst ekki. Reyndu aftur eða skiptu yfir á annan uppsetjara</string>
-    <string name="installer_hint_conflict">Fela þetta app?</string>
+    <string name="installer_hint_conflict">Annað forrit með þessu pakkaheiti er þegar uppsett. Fjarlægðu það áður en þú heldur áfram</string>
     <string name="installer_confirm_notification_title">Staðfestu uppsetninguna</string>
     <string name="installer_confirm_notification_text">Snertu til að ljúka við að setja upp plástraða appið</string>
     <string name="installer_external_launched">Opnun %s…</string>

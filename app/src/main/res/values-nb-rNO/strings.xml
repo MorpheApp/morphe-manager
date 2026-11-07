@@ -1046,7 +1046,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_unsupported">Den installerte Shizuku-versjonen støttes ikke</string>
     <string name="installer_action_open_shizuku">Åpne Shizuku</string>
     <string name="installer_hint_generic">Installeringen mislyktes. Prøv igjen eller bytt til en annen installasjonsprogram</string>
-    <string name="installer_hint_conflict">Flere patch-kilder valgt</string>
+    <string name="installer_hint_conflict">En annen app med dette pakkenavnet er allerede installert. Avinstaller den før du fortsetter</string>
     <string name="installer_confirm_notification_title">Bekreft installasjonen</string>
     <string name="installer_confirm_notification_text">Trykk for å fullføre installasjonen av den patchede appen</string>
     <string name="installer_external_launched">Åpner %s…</string>

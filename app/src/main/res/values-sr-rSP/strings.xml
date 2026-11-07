@@ -274,7 +274,7 @@
     <string name="home_apk_use_installed_app">Користи инсталирану апликацију</string>
     <string name="home_apk_use_saved_unsupported">Ове закрпе не подржавају сачувану копију. Приликом примене затражиће потврду или изаберите другу АПК датотеку.</string>
     <string name="home_apk_use_installed_unverified">Нисмо могли да потврдимо потпис инсталиране апликације, тако да је она можда већ закрпљена</string>
-    <string name="home_unverified">Неверификовано. Морпхе не може да потврди да је инсталирана апликација верзија коју је закрпио. Поново је инсталирајте из сачуваног АПК-а да бисте вратили његове радње.</string>
+    <string name="home_unverified">Неверификовано</string>
     <string name="home_install_verification_pending">Проверавање инсталације…</string>
     <string name="home_app_info_install_unverified">Morphe не може да потврди да је инсталирана апликација верзија која је исправљена. Поново је исправљете или инсталирајте из сачуваног APK-а како бисте вратили њене функције</string>
     <string name="home_app_info_no_saved_apk">Nema saćuvanog APK-a. Patching zahtijeva ponovno odabir APK datoteke</string>

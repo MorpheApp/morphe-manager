@@ -1102,7 +1102,7 @@ morphe_header_custom_dark.png
     <string name="installer_shizuku_error_downgrade">Το Android μπλόκαρε αυτό επειδή θα υποβάθμιζε την εγκατεστημένη εφαρμογή</string>
     <string name="installer_shizuku_error_signature">Το Android μπλόκαρε αυτό επειδή η εγκατεστημένη εφαρμογή έχει διαφορετική υπογραφή</string>
     <string name="installer_shizuku_error_invalid_apk">Το Android δεν μπόρεσε να διαβάσει αυτό το APK</string>
-    <string name="installer_shizuku_error_user_profile">Αποκλεισμός</string>
+    <string name="installer_shizuku_error_user_profile">Το σύστημα απέκλεισε αυτή την εγκατάσταση. Σε συσκευές Xiaomi και παρόμοιες, ενεργοποιήστε την επιλογή \"Εγκατάσταση μέσω USB\" στις επιλογές προγραμματιστή. Σε προφίλ εργασίας, οι εγκαταστάσεις μπορεί να περιορίζονται από πολιτική</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Βελτιστοποίηση μπαταρίας</string>
     <string name="settings_system_battery_optimization_description">Διατηρεί τον επεξεργαστή ενεργό όταν η εφαρμογή είναι ελαχιστοποιημένη</string>

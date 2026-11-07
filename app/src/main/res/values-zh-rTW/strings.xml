@@ -230,7 +230,7 @@
     <string name="sources_dialog_choose_apps_description">在來源載入後，選擇要保留其中的哪些應用程式。</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">第三方修補程式來源</string>
-    <string name="sources_dialog_community_notice_message">"社群補丁來源由其作者自行製作與維護。Morphe 不審核或驗證第三方補丁，且對其內容或在您的裝置上的操作不承擔任何責任"</string>
+    <string name="sources_dialog_community_notice_message">"社群修補檔來源由其作者自行製作與維護。Morphe 不審核或驗證第三方修補檔，且對其內容或在您的裝置上的操作不承擔任何責任"</string>
     <string name="sources_update_success">更新成功</string>
     <string name="sources_update_unavailable">沒有可用的更新</string>
     <string name="sources_download_fail">無法下載來源: %s</string>
@@ -318,7 +318,7 @@
     <string name="home_recommended_version">推薦版本</string>
     <string name="home_selected_version">所選版本</string>
     <string name="home_select_apk_title">選取 APK</string>
-    <string name="home_select_apk_description">"通用補丁適用於任何應用程式
+    <string name="home_select_apk_description">"通用修補檔適用於任何應用程式
 
 選擇 APK 的來源"</string>
     <string name="home_use_installed_app">使用已安裝的應用程式</string>
@@ -347,7 +347,7 @@
     <string name="expert_mode_restore_saved_done">已儲存的選取已還原</string>
     <string name="expert_mode_copy_from_bundle_no_patches">此套件中沒有相符的修補程式</string>
     <string name="expert_mode_no_results">找不到修補程式</string>
-    <string name="expert_mode_selected_only">僅限已選取的修補補丁</string>
+    <string name="expert_mode_selected_only">僅限已選取的修補檔</string>
     <string name="expert_mode_selected_only_on">僅顯示已選取的修補程式</string>
     <string name="expert_mode_selected_only_off">顯示所有修補程式</string>
     <string name="expert_mode_universal_patches">通用型修補程式</string>
@@ -356,7 +356,7 @@
     <string name="expert_mode_patch_required_by_installer">選定安裝目標需要</string>
     <string name="expert_mode_patch_unavailable_for_installer">未針對選定的安裝目標提供</string>
     <string name="expert_mode_multiple_sources_warning_title">選取了多個修補來源</string>
-    <string name="expert_mode_multiple_sources_warning_conflict">來自不同來源的補丁並非設計為共同運作，可能會產生衝突或導致應用程式損壞</string>
+    <string name="expert_mode_multiple_sources_warning_conflict">來自不同來源的修補檔並非設計為共同運作，可能會產生衝突或導致應用程式損壞</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_invalid_signature_title">未驗證的 APK</string>
     <string name="home_invalid_signature_message">您為 &lt;b&gt;%s&lt;/b&gt; 選取的 APK 與預期的簽署憑證不符。APK 可能已遭修改，或來自不受信任的來源</string>
@@ -687,7 +687,7 @@
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">修補進行中…</string>
     <string name="patcher_notification_text">輕觸以返回修補程式畫面</string>
-    <string name="patcher_stop_title">停止補丁？</string>
+    <string name="patcher_stop_title">停止修補？</string>
     <string name="patcher_stop_discards">目前的進度將被捨棄且不會安裝任何內容</string>
     <!-- Keeps the run going, the way out of a dialog that asks whether to stop it -->
     <string name="patcher_keep_patching">繼續修補</string>

@@ -373,7 +373,7 @@
     <string name="morphe_experimental_app_version_dialog_message">"&lt;b&gt;%s&lt;/b&gt; के इस वर्ज़न में शुरुआती प्रायोगिक सपोर्ट है।
 
 🔧 ऐप के व्यवहार में अजीबोगरीब बदलाव या अज्ञात बग्स की उम्मीद रखें क्योंकि इस ऐप वर्ज़न के लिए पैच को रिफ़ाइन किया जा रहा है"</string>
-    <string name="home_dialog_unsupported_version_dialog_title">यह एपीएम अनुशासित संस्करण नहीं है। आगे बढ़ने से अनुशासित एप्प्लिकेशन संस्करण हो सकता है।</string>
+    <string name="home_dialog_unsupported_version_dialog_title">असमर्थित संस्करण</string>
     <string name="home_dialog_unsupported_version_dialog_description">यह APK अनुशंसित एप्लिकेशन संस्करण नहीं है। जारी रखना परिणामस्वरूप एक कार्यक्षम एप्लिकेशन नहीं हो सकता है।</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="home_dialog_unsupported_version_dialog_proceed">अब भी आगे बढ़ें</string>
@@ -1102,7 +1102,7 @@ morphe_header_custom_dark.png
     <string name="installer_shizuku_error_downgrade">Android ने इसे इस वजह से अवरुद्ध कर दिया क्योंकि यह इंस्टॉल किए गए ऐप को डिग्रेड करेगा</string>
     <string name="installer_shizuku_error_signature">Android ने इसे रोक दिया क्योंकि इंस्टॉल किए गए ऐप में अलग हस्ताक्षर हैं</string>
     <string name="installer_shizuku_error_invalid_apk">Android इस APK को पढ़ने में विफल रहा</string>
-    <string name="installer_shizuku_error_user_profile">बहिष्कृत करें</string>
+    <string name="installer_shizuku_error_user_profile">सिस्टम ने यह इंस्टॉल रोक दिया। Xiaomi और इसी तरह के डिवाइस पर, डेवलपर विकल्पों में \"Install via USB\" चालू करें। वर्क प्रोफ़ाइल पर, नीति के कारण इंस्टॉल प्रतिबंधित हो सकते हैं</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">बैटरी अनुकूलन</string>
     <string name="settings_system_battery_optimization_description">जब ऐप छोटा किया जाता है, तो पैचर को चालू रखता है।</string>

@@ -657,12 +657,12 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="batch_patch_option_paths_skipped">Các tệp tùy chọn bản vá bị thiếu và sẽ bị bỏ qua: %1$s</string>
     <string name="patcher_missing_patches_title">Không còn được cung cấp</string>
     <string name="patcher_missing_patches_description">Lựa chọn đã lưu cho ứng dụng này chỉ tên các bản vá mà nguồn đang kích hoạt không còn cung cấp nữa. Tiếp tục sẽ vá ứng dụng mà không có chúng</string>
-    <string name="patcher_missing_patches_label">Một hoặc nhiều tùy chọn vá trỏ đến các tệp không còn ở đó. Hãy xóa các đường dẫn để vá mà không có chúng, hoặc đặt lại các tệp và thử lại.</string>
+    <string name="patcher_missing_patches_label">Không còn được cung cấp</string>
     <string name="patcher_option_paths_gone_title">Xóa các đường dẫn và tiếp tục</string>
     <string name="patcher_option_paths_gone_description">Thư mục này không thể đọc được nữa. Hãy chọn lại thư mục hoặc xóa nó, nếu không quá trình vá sẽ dừng lại và hỏi về nó.</string>
     <string name="patcher_option_paths_rejected_title">Không thể sử dụng các tệp tùy chọn bản vá</string>
     <string name="patcher_option_paths_rejected_description">Một hoặc nhiều tùy chọn bản vá trỏ đến các tệp bị thiếu hoặc không có nội dung mà bản vá yêu cầu. Hãy xóa các đường dẫn để vá mà không cần chúng, hoặc sửa các tệp theo hướng dẫn của tùy chọn và thử lại</string>
-    <string name="patcher_option_paths_clear">Biểu tượng dùng để vá ứng dụng. Nó cũng được sử dụng ở những nơi mà ứng dụng không thể thay đổi nó sau này, chẳng hạn như Android Auto và danh sách ứng dụng trong cài đặt hệ thống.</string>
+    <string name="patcher_option_paths_clear">Xóa các đường dẫn và tiếp tục</string>
     <string name="patcher_storage_permission_hint">Gợi ý: Di chuyển tệp sang /Android/data/app.morphe.manager/files/ - sẽ không cần cấp thêm quyền truy cập</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Đang chuẩn bị</string>

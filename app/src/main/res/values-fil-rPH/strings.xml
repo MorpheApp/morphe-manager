@@ -1102,7 +1102,7 @@ Mga Detalye: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">Hinarangan ito ng Android dahil bababa ang bersyon ng naka-install na app</string>
     <string name="installer_shizuku_error_signature">Hinarangan ito ng Android dahil ang naka-install na app ay mayroong ibang lagda</string>
     <string name="installer_shizuku_error_invalid_apk">Hindi mabasa ng Android ang APK na ito</string>
-    <string name="installer_shizuku_error_user_profile">Ibukod</string>
+    <string name="installer_shizuku_error_user_profile">Hinarang ng system ang pag-install na ito. Sa Xiaomi at mga katulad na device, i-on ang \"Install via USB\" sa developer options. Sa work profile, maaaring limitado ng patakaran ang mga pag-install</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Pag-optimize sa baterya</string>
     <string name="settings_system_battery_optimization_description">Pinapanatili ang patcher na tumatakbo kapag ang app ay minimize</string>

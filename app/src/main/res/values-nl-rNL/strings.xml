@@ -48,7 +48,7 @@
     <string name="home_outdated_manager_title">Morphe is verouderd</string>
     <string name="home_outdated_manager_subtitle">Sommige patchbronnen vereisen een nieuwere versie</string>
     <string name="home_held_back_title">Een patchbron heeft Morphe laten crashen.</string>
-    <string name="home_held_back_subtitle">Empty</string>
+    <string name="home_held_back_subtitle">Dit is overgeslagen zodat de app kon starten. Tik om te bekijken</string>
     <string name="home_metered_skipped_title">Updates gepauzeerd op mobiele data</string>
     <string name="home_metered_skipped_subtitle">Tik om updates via mobiele data toe te staan</string>
     <string name="home_repatch_available_subtitle">Tik om ze allemaal in de wachtrij te zetten</string>
@@ -657,12 +657,12 @@ Deïnstalleren wist alle app-gegevens permanent."</string>
     <string name="batch_patch_option_paths_skipped">Patchoptiebestanden ontbreken en worden overgeslagen: %1$s</string>
     <string name="patcher_missing_patches_title">Niet meer aangeboden</string>
     <string name="patcher_missing_patches_description">De opgeslagen selectie voor deze app verwijst naar patches die door geen enkele ingeschakelde bron meer worden aangeboden. Bij het voortzetten wordt de app zonder deze patches gepatcht</string>
-    <string name="patcher_missing_patches_label">Een of meer patchopties verwijzen naar bestanden die er niet meer zijn. Verwijder de paden om zonder deze bestanden te patchen, of zet de bestanden terug en probeer het opnieuw.</string>
+    <string name="patcher_missing_patches_label">Niet meer aangeboden</string>
     <string name="patcher_option_paths_gone_title">Verwijder de paden en ga door</string>
     <string name="patcher_option_paths_gone_description">Deze map kan niet meer worden gelezen. Kies hem opnieuw of wis hem, anders stopt het patchen en wordt ernaar gevraagd.</string>
     <string name="patcher_option_paths_rejected_title">Patch-optiebestanden kunnen niet worden gebruikt</string>
     <string name="patcher_option_paths_rejected_description">Een of meer patch-opties verwijzen naar bestanden die ontbreken of niet voldoen aan de vereisten van de patch. Verwijder de paden om zonder deze bestanden te patchen, of herstel de bestanden volgens de instructies van de optie en probeer het opnieuw</string>
-    <string name="patcher_option_paths_clear">Het pictogram waarmee de app wordt gepatcht. Het wordt ook gebruikt waar de app het later niet kan wijzigen, zoals bij Android Auto en in de app-lijst van de systeeminstellingen.</string>
+    <string name="patcher_option_paths_clear">Verwijder de paden en ga door</string>
     <string name="patcher_storage_permission_hint">Tip: Verplaats bestanden naar /Android/data/app.morphe.manager/files/ - geen extra toestemmingen nodig</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Voorbereiden</string>
