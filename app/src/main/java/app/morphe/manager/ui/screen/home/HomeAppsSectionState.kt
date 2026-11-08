@@ -7,6 +7,7 @@ package app.morphe.manager.ui.screen.home
 
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.runtime.*
 import app.morphe.manager.domain.manager.HomeAppCategory
 import app.morphe.manager.ui.model.HomeAppItem
@@ -38,6 +39,7 @@ internal class HomeAppsSectionState(
 ) {
     // Selection
     var isMultiSelectMode by mutableStateOf(false)
+    var selectedAppRequester by mutableStateOf<BringIntoViewRequester?>(null)
     /** Group the latest card was picked in, which decides the selection's group when an app sits in several. */
     var pickedGroupKey by mutableStateOf<String?>(null)
 
@@ -100,6 +102,7 @@ internal class HomeAppsSectionState(
 
     fun exitMultiSelect() {
         isMultiSelectMode = false
+        selectedAppRequester = null
         selectedPackages.clear()
         pickedGroupKey = null
     }

@@ -781,6 +781,9 @@ internal fun MainAppsSection(
                             animationSpec = tween(Defaults.ANIMATION_DURATION, easing = FastOutSlowInEasing),
                             label = "footerClearance"
                         )
+                        LaunchedEffect(state.isMultiSelectMode, state.selectedAppRequester, footerClearance) {
+                            if (state.isMultiSelectMode) state.selectedAppRequester?.bringIntoView()
+                        }
                         // Cached so the LazyColumn doesn't allocate a new PaddingValues on
                         // every recomposition (which can be per-frame under scroll)
                         val listContentPadding = remember(insets, alertsHeight, footerClearance) {
