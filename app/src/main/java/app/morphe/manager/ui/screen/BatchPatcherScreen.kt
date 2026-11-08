@@ -141,6 +141,8 @@ fun BatchPatcherScreen(
 
     val useExpertMode by prefs.useExpertMode.getAsState()
     val autoDownloadApkHelpers by prefs.autoDownloadApkHelpersInBatch.getAsState()
+    // Whether the automatic pass has a trusted helper to start, known once the queue resolves them
+    var autoHelperAvailable by remember { mutableStateOf(false) }
 
     // Outlives its item so a round in play survives the gap between apps and the end of the queue
     var lastRun by remember { mutableStateOf<PatchRunProgress?>(null) }
@@ -303,6 +305,9 @@ fun BatchPatcherScreen(
                 viewModel.apkSearch != null ||
                 (autoDownloadApkHelpers && current?.phase == BatchPhase.PREFLIGHT)
     ) { apkDownloadHelpers ->
+        // Read outside the content, where the footer decides whether Start can fetch anything
+        SideEffect { autoHelperAvailable = apkDownloadHelpers.canOpenAutomatically }
+
         // One automatic request at a time: a helper is an activity of its own, so the next app is
         // asked for only once the previous APK is attached and nothing else holds the screen
         val autoSearch = viewModel.apkSearch?.takeIf { it.auto }
@@ -327,9 +332,12 @@ fun BatchPatcherScreen(
             if (!apkDownloadHelpers.openAutomatically()) viewModel.cancelAutoDownload()
         }
 
-        // Carries the pass to the next app once whatever it waited on settled
+        // Carries the pass the Start press asked for to the next app once whatever it waited on
+        // settled. The queue itself starts only when there is nothing left to download for.
         LaunchedEffect(
+            viewModel.autoStartPending,
             autoDownloadApkHelpers,
+            apkDownloadHelpers.isResolved,
             apkDownloadHelpers.canOpenAutomatically,
             autoSearch,
             viewModel.apkSearch,
@@ -340,10 +348,17 @@ fun BatchPatcherScreen(
             viewModel.apkChoice,
             viewModel.sourcePick,
             viewModel.attachPrompt,
-            viewModel.edit
+            viewModel.edit,
+            showKeepDialog,
+            showClearDialog
         ) {
-            if (!autoDownloadApkHelpers || autoSearch != null) return@LaunchedEffect
-            if (!apkDownloadHelpers.canOpenAutomatically) return@LaunchedEffect
+            if (!viewModel.autoStartPending || autoSearch != null) return@LaunchedEffect
+            if (!autoDownloadApkHelpers) {
+                // The pass was turned off while Start waited on it, so the queue goes ahead
+                viewModel.startQueueAfterAutoDownload()
+                return@LaunchedEffect
+            }
+            if (showKeepDialog || showClearDialog) return@LaunchedEffect
             if (viewModel.processingApk ||
                 viewModel.attachTarget != null ||
                 viewModel.apkChoice != null ||
@@ -351,6 +366,12 @@ fun BatchPatcherScreen(
                 viewModel.attachPrompt != null ||
                 viewModel.edit != null
             ) {
+                return@LaunchedEffect
+            }
+            if (!apkDownloadHelpers.isResolved) return@LaunchedEffect
+            if (!apkDownloadHelpers.canOpenAutomatically) {
+                // No helper can take the downloads, so the queue starts with what it can patch
+                viewModel.startQueueAfterAutoDownload()
                 return@LaunchedEffect
             }
             viewModel.startAutoDownload()
@@ -657,7 +678,10 @@ fun BatchPatcherScreen(
                 BatchDialogButtons(
                     state = current,
                     canInstall = installRequests.isNotEmpty(),
-                    onStart = viewModel::start,
+                    autoDownloadEnabled = autoDownloadApkHelpers,
+                    autoHelperAvailable = autoHelperAvailable,
+                    autoStartPending = viewModel.autoStartPending,
+                    onStart = { viewModel.start(autoDownloadApkHelpers) },
                     onInstallAll = { startInstallQueue(installRequests) },
                     onClose = close
                 )
@@ -752,20 +776,32 @@ private enum class QueueDialog { SourcePick, ApkChoice, ApkSearch, AttachPrompt,
 private fun BatchDialogButtons(
     state: BatchRunState?,
     canInstall: Boolean,
+    autoDownloadEnabled: Boolean,
+    autoHelperAvailable: Boolean,
+    autoStartPending: Boolean,
     onStart: () -> Unit,
     onInstallAll: () -> Unit,
     onClose: () -> Unit
 ) {
     when (state?.phase) {
         // Closing keeps the queue for apps added later, once the user chose to keep it
-        BatchPhase.PREFLIGHT -> AppDialogButtonRow(
-            primaryText = stringResource(R.string.batch_patch_start),
-            primaryIcon = MaterialSymbols.Rounded.Play_arrow,
-            onPrimaryClick = onStart,
-            primaryEnabled = state.runnable.isNotEmpty(),
-            secondaryText = stringResource(R.string.close),
-            onSecondaryClick = onClose
-        )
+        BatchPhase.PREFLIGHT -> {
+            // An app the pass can fetch an APK for keeps Start available even before there is
+            // anything runnable, while a queue only lacking APKs needs a helper to start at all
+            val autoWork = autoDownloadEnabled && autoHelperAvailable && state.items.any {
+                it.state == BatchItemState.NEEDS_APK ||
+                        it.state == BatchItemState.VERSION_MISMATCH ||
+                        it.state == BatchItemState.UNVERIFIED_SIGNATURE
+            }
+            AppDialogButtonRow(
+                primaryText = stringResource(R.string.batch_patch_start),
+                primaryIcon = MaterialSymbols.Rounded.Play_arrow,
+                onPrimaryClick = onStart,
+                primaryEnabled = !autoStartPending && (state.runnable.isNotEmpty() || autoWork),
+                secondaryText = stringResource(R.string.close),
+                onSecondaryClick = onClose
+            )
+        }
 
         BatchPhase.FINISHED -> if (canInstall) {
             AppDialogButtonRow(

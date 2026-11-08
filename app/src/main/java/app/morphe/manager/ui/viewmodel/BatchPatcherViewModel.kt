@@ -479,16 +479,22 @@ class BatchPatcherViewModel(
     /** True once the user stopped the pass, until the queue is opened again. */
     private var autoDownloadStopped = false
 
+    /** True while a Start press is waiting on the automatic downloads before the queue begins. */
+    var autoStartPending by mutableStateOf(false)
+        private set
+
     /**
      * Asks a helper for the next queued app that is missing an APK or behind the newest version
-     * the sources the app is patched from offer, the pass the batch screen drives while the queue
-     * is being prepared. The source order and the experimental and prerelease settings the user
-     * made decide what is offered.
+     * the sources the app is patched from offer, the pass the batch screen drives after Start.
+     * The source order and the experimental and prerelease settings the user made decide what is
+     * offered.
      *
      * Nothing starts while another question is on screen, an APK is being processed, or the user
-     * turned the pass off. The screen calls this again whenever one of those settles.
+     * turned the pass off. The screen calls this again whenever one of those settles, and the
+     * queue starts once no app is left to download for.
      */
     fun startAutoDownload() {
+        if (!autoStartPending) return
         if (autoDownloadStarting || autoDownloadStopped || apkSearch != null) return
         if (processingApk ||
             attachTarget != null ||
@@ -506,7 +512,10 @@ class BatchPatcherViewModel(
         autoDownloadStarting = true
         viewModelScope.launch {
             try {
-                if (!prefs.autoDownloadApkHelpersInBatch.get()) return@launch
+                if (!prefs.autoDownloadApkHelpersInBatch.get()) {
+                    startQueueAfterAutoDownload()
+                    return@launch
+                }
 
                 val metadata = patchBundleRepository.appMetadata.value
                 val catalog = versionCatalog.compatibleVersions.first()
@@ -520,7 +529,10 @@ class BatchPatcherViewModel(
                                 canVerifySignature = helperSignatureCheckAvailable(metadata[item.packageName]),
                                 ignoredVersion = ignoredVersions[item.packageName]
                             )
-                } ?: return@launch
+                } ?: run {
+                    startQueueAfterAutoDownload()
+                    return@launch
+                }
 
                 // The queue may have moved on while the catalog was read
                 val planned = state.value?.items?.firstOrNull { it.id == candidate.id } ?: return@launch
@@ -551,6 +563,18 @@ class BatchPatcherViewModel(
         }
     }
 
+    /**
+     * Starts the queue the user asked for, which waits until the automatic downloads are done.
+     * Called when there is nothing left to download for, or when no helper can take the pass.
+     */
+    fun startQueueAfterAutoDownload() {
+        if (!autoStartPending) return
+        autoStartPending = false
+        val current = state.value ?: return
+        if (current.phase != BatchPhase.PREFLIGHT) return
+        coordinator.start()
+    }
+
     /** Drops an automatic request the screen could not hand to a helper, leaving the app for the user. */
     fun cancelAutoDownload() {
         if (apkSearch?.auto == true) apkSearch = null
@@ -565,6 +589,7 @@ class BatchPatcherViewModel(
         if (apkSearch?.auto != true) return
         apkSearch = null
         autoDownloadStopped = true
+        autoStartPending = false
         messages.show(R.string.batch_patch_auto_download_stopped)
     }
 
@@ -864,13 +889,25 @@ class BatchPatcherViewModel(
         pm.launch(packageName)
     }
 
-    fun start() {
+    /**
+     * Starts the queue, first fetching the APKs an automatic pass was asked for when
+     * [autoDownload] is set. The pass reports back through [startQueueAfterAutoDownload].
+     */
+    fun start(autoDownload: Boolean) {
+        if (autoStartPending) return
         cancelAutoDownload()
-        coordinator.start()
+        if (!autoDownload) {
+            coordinator.start()
+            return
+        }
+
+        resetAutoDownload()
+        autoStartPending = true
     }
 
     fun cancel() {
         cancelAutoDownload()
+        autoStartPending = false
         coordinator.cancel()
     }
 
@@ -878,6 +915,7 @@ class BatchPatcherViewModel(
 
     fun clear() {
         cancelAutoDownload()
+        autoStartPending = false
         coordinator.clear()
     }
 

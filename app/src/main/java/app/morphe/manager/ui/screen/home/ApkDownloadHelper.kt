@@ -38,13 +38,16 @@ import org.koin.compose.koinInject
  * @param opensAutomatically Starts the first trusted helper without asking, null while none is.
  *   Meant for a flow that already made the hand-off a choice of its own, see
  *   [app.morphe.manager.domain.manager.PreferencesManager.autoDownloadApkHelpersInBatch].
+ * @param isResolved Whether the installed helpers were looked up already, so [canOpenAutomatically]
+ *   answers about the device rather than about the lookup still running.
  */
 @Immutable
 class ApkDownloadHelperOffer(
     val open: (() -> Unit)?,
     val hasUntrusted: Boolean,
     private val opensDirectly: Boolean,
-    private val opensAutomatically: (() -> Boolean)?
+    private val opensAutomatically: (() -> Boolean)?,
+    val isResolved: Boolean
 ) {
     /** Whether a helper is there for a flow that asks for one on its own. */
     val canOpenAutomatically get() = opensAutomatically != null
@@ -76,7 +79,7 @@ class ApkDownloadHelperOffer(
  * @param host The patching flow asking for the APK, which is what a result is handed back to.
  * @param enabled Whether a helper may be offered right now. Resolving helpers queries
  * PackageManager, so callers pass true only while a helper could start: one of the flow's dialogs
- * is on screen, or the flow downloads APKs on its own.
+ * is on screen, or the flow is preparing to download APKs on its own.
  */
 @Composable
 fun WithApkDownloadHelpers(
@@ -93,14 +96,17 @@ fun WithApkDownloadHelpers(
     val noAccessMessage = stringResource(R.string.home_apk_helper_no_access)
     val noPackageMessage = stringResource(R.string.home_apk_helper_no_package)
     var installed by remember { mutableStateOf(emptyList<ApkDownloadHelperContract.Helper>()) }
+    var resolved by remember { mutableStateOf(false) }
     var showPicker by remember { mutableStateOf(false) }
 
     // Re-resolved every time an APK is asked for, so helpers installed mid-session are picked up
     LaunchedEffect(enabled) {
-        installed = if (enabled) {
-            withContext(Dispatchers.IO) { ApkDownloadHelperContract.findHelpers(context) }
+        if (enabled) {
+            installed = withContext(Dispatchers.IO) { ApkDownloadHelperContract.findHelpers(context) }
+            resolved = true
         } else {
-            emptyList()
+            installed = emptyList()
+            resolved = false
         }
     }
     val helpers = installed.filter { it.componentName.packageName in trustedPackages }
@@ -174,7 +180,8 @@ fun WithApkDownloadHelpers(
             open = open.takeIf { helpers.isNotEmpty() },
             hasUntrusted = helpers.isEmpty() && installed.any { it.componentName.packageName !in trustedPackages },
             opensDirectly = openDirectly,
-            opensAutomatically = openAutomatically
+            opensAutomatically = openAutomatically,
+            isResolved = resolved
         )
     )
 
