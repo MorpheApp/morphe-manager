@@ -125,9 +125,10 @@ private fun DialogHost(
     onGone: (() -> Unit)?,
     content: @Composable DialogHostScope.() -> Unit
 ) {
-    val phase = screenPhase()
+    val screen = screenLifecycles()
+    val phase = screen.phase
     val inFront = phase == ScreenPhase.InFront
-    val showing = visible && phase != ScreenPhase.Leaving
+    val showing = screen.showsDialog(visible)
     // Put away with its screen, the dialog leaves along with the one it would hand over to
     val handsOverHere = handsOver && inFront
     val handingOver = !showing && handsOverHere
@@ -223,7 +224,7 @@ private class DialogStackOrder<T>(initial: List<T>) {
  * Where the screen a dialog is raised from stands. Leaving the app does not count as leaving the
  * screen, as it stays in front of the app for when the user comes back.
  */
-private enum class ScreenPhase {
+internal enum class ScreenPhase {
     /** Settled in front. */
     InFront,
     /** Moving in, opened or come back to. */
@@ -234,17 +235,17 @@ private enum class ScreenPhase {
 
 /** The [ScreenPhase] of the screen this is composed in. */
 @Composable
-private fun screenPhase(): ScreenPhase {
+private fun screenLifecycles(): ScreenLifecycles {
     val screen = LocalLifecycleOwner.current.lifecycle
     val app = (LocalActivity.current as? LifecycleOwner)?.lifecycle ?: screen
-    return remember(screen, app) { ScreenLifecycles(screen, app) }.phase
+    return remember(screen, app) { ScreenLifecycles(screen, app) }
 }
 
 /**
  * Where a screen's lifecycle and the app's stand, written as each move rather than collected a
  * frame later: a screen is left in the same moment its dialogs close for the one opening over it.
  */
-private class ScreenLifecycles(
+internal class ScreenLifecycles(
     private val screen: Lifecycle,
     private val app: Lifecycle
 ) : RememberObserver {
@@ -279,6 +280,8 @@ private class ScreenLifecycles(
             comingIn -> ScreenPhase.ComingIn
             else -> ScreenPhase.Leaving
         }
+
+    fun showsDialog(visible: Boolean): Boolean = visible && phase == ScreenPhase.InFront
 
     override fun onRemembered() = Unit
 
