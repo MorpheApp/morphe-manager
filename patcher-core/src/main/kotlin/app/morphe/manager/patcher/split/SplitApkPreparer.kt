@@ -470,13 +470,17 @@ object SplitApkPreparer {
         val cleanup: () -> Unit = {}
     )
 
-    private fun Logger.toPatcherLogger() = object : PatcherLogger() {
+}
+
+internal fun Logger.toPatcherLogger(): PatcherLogger {
+    val managerLogger = this
+    return object : PatcherLogger() {
         override fun log(level: PatcherLogLevel, message: String) {
             when (level) {
-                PatcherLogLevel.TRACE -> trace(message)
-                PatcherLogLevel.INFO -> info(message)
-                PatcherLogLevel.WARN -> warn(message)
-                PatcherLogLevel.ERROR -> error(message)
+                PatcherLogLevel.TRACE -> managerLogger.trace(message)
+                PatcherLogLevel.INFO -> managerLogger.info(message)
+                PatcherLogLevel.WARN -> managerLogger.warn(message)
+                PatcherLogLevel.ERROR -> managerLogger.error(message)
             }
         }
     }
