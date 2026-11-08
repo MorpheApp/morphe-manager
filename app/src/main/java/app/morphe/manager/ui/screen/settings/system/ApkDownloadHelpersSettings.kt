@@ -49,6 +49,7 @@ fun ApkDownloadHelpersSettings(
     var pendingTrust by remember { mutableStateOf<ApkDownloadHelperApp?>(null) }
     val trustedPackages by settingsViewModel.prefs.trustedApkDownloadHelpers.getAsState()
     val openDirectly by settingsViewModel.prefs.openApkDownloadHelperDirectly.getAsState()
+    val autoInBatch by settingsViewModel.prefs.autoDownloadApkHelpersInBatch.getAsState()
     val unknownInstaller = stringResource(R.string.settings_system_apk_download_helper_installed_by_unknown)
 
     // Version and install source are what tell two helpers apart, so they are worth a PackageManager round trip
@@ -129,6 +130,14 @@ fun ApkDownloadHelpersSettings(
                     icon = MaterialSymbols.Rounded.Download,
                     title = stringResource(R.string.settings_system_apk_download_helper_open_directly),
                     subtitle = stringResource(R.string.settings_system_apk_download_helper_open_directly_description)
+                )
+
+                SettingsSwitchItem(
+                    checked = autoInBatch,
+                    onToggle = { settingsViewModel.setAutoDownloadApkHelpersInBatch(!autoInBatch) },
+                    icon = MaterialSymbols.Rounded.Bolt,
+                    title = stringResource(R.string.settings_system_apk_download_helper_auto_batch),
+                    subtitle = stringResource(R.string.settings_system_apk_download_helper_auto_batch_description)
                 )
             }
         }

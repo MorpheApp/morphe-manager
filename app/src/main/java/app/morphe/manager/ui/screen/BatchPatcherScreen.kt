@@ -28,7 +28,10 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.compose.currentStateAsState
 import app.morphe.manager.R
 import app.morphe.manager.domain.batch.*
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.usesPrerelease
@@ -137,6 +140,7 @@ fun BatchPatcherScreen(
     val installRequests: List<InstallQueueRequest> = installRequestsByItem.values.toList()
 
     val useExpertMode by prefs.useExpertMode.getAsState()
+    val autoDownloadApkHelpers by prefs.autoDownloadApkHelpersInBatch.getAsState()
 
     // Outlives its item so a round in play survives the gap between apps and the end of the queue
     var lastRun by remember { mutableStateOf<PatchRunProgress?>(null) }
@@ -285,7 +289,7 @@ fun BatchPatcherScreen(
     val queueDialogs = listOfNotNull(
         QueueDialog.SourcePick.takeIf { viewModel.sourcePick != null },
         QueueDialog.ApkChoice.takeIf { viewModel.apkChoice != null },
-        QueueDialog.ApkSearch.takeIf { viewModel.apkSearch != null },
+        QueueDialog.ApkSearch.takeIf { viewModel.apkSearch?.auto == false },
         QueueDialog.AttachPrompt.takeIf { viewModel.attachPrompt != null },
         QueueDialog.Edit.takeIf { viewModel.edit != null }
     )
@@ -293,8 +297,65 @@ fun BatchPatcherScreen(
     // Kept outside the dialogs so the picker state survives the download dialog's exit animation
     WithApkDownloadHelpers(
         host = viewModel,
-        enabled = viewModel.apkChoice != null || viewModel.apkSearch != null
+        // A queue that downloads on its own needs the helpers resolved before it asks for one,
+        // with no dialog of its own to trigger that
+        enabled = viewModel.apkChoice != null ||
+                viewModel.apkSearch != null ||
+                (autoDownloadApkHelpers && current?.phase == BatchPhase.PREFLIGHT)
     ) { apkDownloadHelpers ->
+        // One automatic request at a time: a helper is an activity of its own, so the next app is
+        // asked for only once the previous APK is attached and nothing else holds the screen
+        val autoSearch = viewModel.apkSearch?.takeIf { it.auto }
+        val lifecycleState by LocalLifecycleOwner.current.lifecycle.currentStateAsState()
+        // Kept across the pause a running helper causes and a recreation, so coming back cannot
+        // start the same helper twice
+        var automaticLaunchStarted by rememberSaveable(autoSearch) { mutableStateOf(false) }
+
+        LaunchedEffect(autoSearch, apkDownloadHelpers.canOpenAutomatically, lifecycleState, viewModel.processingApk) {
+            if (autoSearch == null) return@LaunchedEffect
+            if (!apkDownloadHelpers.canOpenAutomatically) {
+                // Nothing is there to take the request, which can only happen before the helper
+                // activity was started: a launched one still returns its result either way
+                if (!automaticLaunchStarted) viewModel.cancelAutoDownload()
+                return@LaunchedEffect
+            }
+            if (automaticLaunchStarted || viewModel.processingApk) return@LaunchedEffect
+            // A helper started from the background would be refused by the system
+            if (lifecycleState != Lifecycle.State.RESUMED) return@LaunchedEffect
+
+            automaticLaunchStarted = true
+            if (!apkDownloadHelpers.openAutomatically()) viewModel.cancelAutoDownload()
+        }
+
+        // Carries the pass to the next app once whatever it waited on settled
+        LaunchedEffect(
+            autoDownloadApkHelpers,
+            apkDownloadHelpers.canOpenAutomatically,
+            autoSearch,
+            viewModel.apkSearch,
+            state?.phase,
+            state?.items,
+            viewModel.processingApk,
+            viewModel.attachTarget,
+            viewModel.apkChoice,
+            viewModel.sourcePick,
+            viewModel.attachPrompt,
+            viewModel.edit
+        ) {
+            if (!autoDownloadApkHelpers || autoSearch != null) return@LaunchedEffect
+            if (!apkDownloadHelpers.canOpenAutomatically) return@LaunchedEffect
+            if (viewModel.processingApk ||
+                viewModel.attachTarget != null ||
+                viewModel.apkChoice != null ||
+                viewModel.sourcePick != null ||
+                viewModel.attachPrompt != null ||
+                viewModel.edit != null
+            ) {
+                return@LaunchedEffect
+            }
+            viewModel.startAutoDownload()
+        }
+
         DialogStack(queueDialogs) { dialog ->
             when (dialog) {
                 // The same source question simple mode answers before a single-app patch, asked on

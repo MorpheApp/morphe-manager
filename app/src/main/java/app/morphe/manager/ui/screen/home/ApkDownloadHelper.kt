@@ -35,13 +35,29 @@ import org.koin.compose.koinInject
  *   let in, while none trusted is there to download with instead.
  * @param opensDirectly Whether the user asked for the helper flow to start as soon as an APK is
  *   needed, see [showInstructions].
+ * @param opensAutomatically Starts the first trusted helper without asking, null while none is.
+ *   Meant for a flow that already made the hand-off a choice of its own, see
+ *   [app.morphe.manager.domain.manager.PreferencesManager.autoDownloadApkHelpersInBatch].
  */
 @Immutable
 class ApkDownloadHelperOffer(
     val open: (() -> Unit)?,
     val hasUntrusted: Boolean,
-    private val opensDirectly: Boolean
+    private val opensDirectly: Boolean,
+    private val opensAutomatically: (() -> Boolean)?
 ) {
+    /** Whether a helper is there for a flow that asks for one on its own. */
+    val canOpenAutomatically get() = opensAutomatically != null
+
+    /**
+     * Starts the first trusted helper for an automatic download.
+     *
+     * @return False when the flow has nothing left to ask about, or the helper is gone. The
+     *   automatic flow drops its request on false rather than waiting for a result that is
+     *   not coming.
+     */
+    fun openAutomatically(): Boolean = opensAutomatically?.invoke() == true
+
     /**
      * Shows the download instructions with [show] and starts the helper flow over them at once
      * where the user asked for that. The instructions stay behind it for when the helper finds nothing.
@@ -59,8 +75,8 @@ class ApkDownloadHelperOffer(
  *
  * @param host The patching flow asking for the APK, which is what a result is handed back to.
  * @param enabled Whether a helper may be offered right now. Resolving helpers queries
- * PackageManager, so callers pass true only while the APK availability or download instructions
- * dialog is on screen.
+ * PackageManager, so callers pass true only while a helper could start: one of the flow's dialogs
+ * is on screen, or the flow downloads APKs on its own.
  */
 @Composable
 fun WithApkDownloadHelpers(
@@ -92,12 +108,16 @@ fun WithApkDownloadHelpers(
     val helperLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
     ) { result ->
-        if (result.resultCode != Activity.RESULT_OK) return@rememberLauncherForActivityResult
+        if (result.resultCode != Activity.RESULT_OK) {
+            host.onHelperDismissed()
+            return@rememberLauncherForActivityResult
+        }
 
         if (ApkDownloadHelperContract.isInstalledAppResult(result.data)) {
             val packageName = ApkDownloadHelperContract.resultInstalledPackageName(result.data)
             if (packageName == null) {
                 messages.show(noPackageMessage)
+                host.onHelperDismissed()
                 return@rememberLauncherForActivityResult
             }
 
@@ -108,6 +128,7 @@ fun WithApkDownloadHelpers(
         val uri = ApkDownloadHelperContract.resultUri(result.data)
         if (uri == null) {
             messages.show(noResultMessage)
+            host.onHelperDismissed()
             return@rememberLauncherForActivityResult
         }
 
@@ -115,33 +136,45 @@ fun WithApkDownloadHelpers(
         // "try again" error, which is misleading when the helper is the one at fault
         if (!ApkDownloadHelperContract.grantsReadAccess(result.data)) {
             messages.show(noAccessMessage)
+            host.onHelperDismissed()
             return@rememberLauncherForActivityResult
         }
 
         host.onHelperApkReceived(uri)
     }
 
-    fun launch(helper: ApkDownloadHelperContract.Helper) {
-        val intent = host.createApkDownloadHelperIntent(helper.componentName) ?: return
-        try {
+    /** @return false when the flow has nothing left to ask about, or the helper is gone. */
+    fun launch(helper: ApkDownloadHelperContract.Helper): Boolean {
+        val intent = host.createApkDownloadHelperIntent(helper.componentName) ?: return false
+        return try {
             helperLauncher.launch(intent)
+            true
         } catch (_: ActivityNotFoundException) {
             // The helper was uninstalled between resolving and launching it
             installed = installed - helper
+            false
         }
     }
 
     // A user who wants the helper right away has nothing left to confirm with a single one trusted,
     // unless the APK it brings cannot be verified, which only the picker warns about
-    val open = {
+    val open: () -> Unit = {
         val helper = helpers.singleOrNull()?.takeIf { openDirectly && host.helperSignatureCheckAvailable }
         if (helper != null) launch(helper) else showPicker = true
     }
+
+    // The first trusted helper answers for a flow that downloads on its own, since stopping for a
+    // pick would undo the point of asking for that flow
+    val openAutomatically: (() -> Boolean)? = helpers.firstOrNull()?.let { helper ->
+        { launch(helper) }
+    }
+
     content(
         ApkDownloadHelperOffer(
             open = open.takeIf { helpers.isNotEmpty() },
             hasUntrusted = helpers.isEmpty() && installed.any { it.componentName.packageName !in trustedPackages },
-            opensDirectly = openDirectly
+            opensDirectly = openDirectly,
+            opensAutomatically = openAutomatically
         )
     )
 

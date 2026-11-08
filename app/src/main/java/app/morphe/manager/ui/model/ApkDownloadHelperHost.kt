@@ -44,6 +44,13 @@ interface ApkDownloadHelperHost {
 
     /** Takes a helper's answer that the user installed the app from an app store instead. */
     fun onHelperInstalledAppChosen(packageName: String)
+
+    /**
+     * Called when a helper returned without a usable answer, including the user backing out of it.
+     * A flow that started the helper on its own uses this to stop waiting for a result that is not
+     * coming, while an interactive one leaves its dialog up for another try.
+     */
+    fun onHelperDismissed() = Unit
 }
 
 /**

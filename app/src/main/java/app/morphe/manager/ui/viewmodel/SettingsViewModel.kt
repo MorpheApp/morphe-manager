@@ -279,6 +279,10 @@ class SettingsViewModel(
         prefs.openApkDownloadHelperDirectly.update(enabled)
     }
 
+    fun setAutoDownloadApkHelpersInBatch(enabled: Boolean) = viewModelScope.launch {
+        prefs.autoDownloadApkHelpersInBatch.update(enabled)
+    }
+
     fun setPatcherCompletionSound(enabled: Boolean) = viewModelScope.launch {
         prefs.patcherCompletionSound.update(enabled)
     }

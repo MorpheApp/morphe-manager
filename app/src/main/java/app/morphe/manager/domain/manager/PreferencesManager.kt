@@ -186,6 +186,12 @@ class PreferencesManager(
     /** Whether asking for an APK starts the helper flow at once, over the download instructions. */
     val openApkDownloadHelperDirectly = booleanPreference("open_apk_download_helper_directly", false)
 
+    /**
+     * Whether a batch queue asks a helper for every app it has no APK for, rather than leaving each
+     * of them for the user to send to one.
+     */
+    val autoDownloadApkHelpersInBatch = booleanPreference("auto_download_apk_helpers_in_batch", false)
+
     val lastFilePickerPath = stringPreference("last_file_picker_path", "")
     val filePickerSortMode = stringPreference("file_picker_sort_mode", "DATE_DESC")
     val filePickerShowHiddenFiles = booleanPreference("file_picker_show_hidden_files", false)
@@ -367,6 +373,7 @@ class PreferencesManager(
         val useApkDownloadHelper: Boolean? = null,
         val trustedApkDownloadHelpers: Set<String>? = null,
         val openApkDownloadHelperDirectly: Boolean? = null,
+        val autoDownloadApkHelpersInBatch: Boolean? = null,
         val sourceBundleSortMode: String? = null,
         val saveOriginalApks: Boolean? = null,
         val savePatchedApks: Boolean? = null,
@@ -439,6 +446,7 @@ class PreferencesManager(
                 useApkDownloadHelper = useApkDownloadHelper.takeIf { patching },
                 trustedApkDownloadHelpers = trustedApkDownloadHelpers.takeIf { patching },
                 openApkDownloadHelperDirectly = openApkDownloadHelperDirectly.takeIf { patching },
+                autoDownloadApkHelpersInBatch = autoDownloadApkHelpersInBatch.takeIf { patching },
                 sourceBundleSortMode = sourceBundleSortMode.takeIf { sources },
                 saveOriginalApks = saveOriginalApks.takeIf { patching },
                 savePatchedApks = savePatchedApks.takeIf { patching },
@@ -498,6 +506,7 @@ class PreferencesManager(
         customFilePickerUserConfigured = customFilePickerUserConfigured.get(),
         trustedApkDownloadHelpers = trustedApkDownloadHelpers.get(),
         openApkDownloadHelperDirectly = openApkDownloadHelperDirectly.get(),
+        autoDownloadApkHelpersInBatch = autoDownloadApkHelpersInBatch.get(),
         sourceBundleSortMode = sourceBundleSortMode.get(),
         saveOriginalApks = saveOriginalApks.get(),
         savePatchedApks = savePatchedApks.get(),
@@ -582,6 +591,7 @@ class PreferencesManager(
                 }
             }
         snapshot.openApkDownloadHelperDirectly?.let { openApkDownloadHelperDirectly.value = it }
+        snapshot.autoDownloadApkHelpersInBatch?.let { autoDownloadApkHelpersInBatch.value = it }
         snapshot.sourceBundleSortMode?.let { sourceBundleSortMode.value = it }
         snapshot.saveOriginalApks?.let { saveOriginalApks.value = it }
         snapshot.savePatchedApks?.let { savePatchedApks.value = it }
