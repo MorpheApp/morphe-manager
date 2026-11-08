@@ -29,6 +29,7 @@ import app.morphe.manager.domain.bundles.patchableBy
 import app.morphe.manager.domain.bundles.recommendedEntry
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.DownloadUrlResolver
+import app.morphe.manager.domain.manager.HomeAppButtonPreferences
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
@@ -279,6 +280,7 @@ class BatchPatcherViewModel(
     private val versionCatalog: AppVersionCatalog,
     private val localApkSources: LocalApkSources,
     private val prefs: PreferencesManager,
+    private val homeAppButtonPrefs: HomeAppButtonPreferences,
     rootInstaller: RootInstaller,
     /** Panel the editor docks under its list, with the sets kept for the app and the copies. */
     val editPanel: SelectionPanelController
@@ -305,9 +307,9 @@ class BatchPatcherViewModel(
             if (current.targets == queued) return
             coordinator.clear()
         }
-        // A queue the screen opens again gets a fresh automatic download pass, while the one it
+        // A queue the screen plans or opens starts its automatic downloads over, while the one it
         // re-enters with the same apps keeps what that pass already tried
-        if (current == null || current.phase != BatchPhase.PREFLIGHT || current.targets != queued) {
+        if (current == null || current.phase != BatchPhase.PREFLIGHT || !current.targets.containsAll(queued)) {
             resetAutoDownload()
         }
         coordinator.enqueue(queued)
@@ -468,22 +470,26 @@ class BatchPatcherViewModel(
         apkSearch = null
     }
 
-    /** Apps the automatic helper pass already asked for, so one refusal cannot hold it up. */
+    /** Apps the automatic helper pass already asked for, so one download cannot repeat. */
     private val autoDownloadTried = mutableSetOf<String>()
 
     /** True while the next automatic request is being worked out from the version catalog. */
     private var autoDownloadStarting = false
 
+    /** True once the user stopped the pass, until the queue is opened again. */
+    private var autoDownloadStopped = false
+
     /**
-     * Asks a helper for the next queued app without an APK, the pass the batch screen drives while
-     * the queue is being prepared. The newest version the sources cover is requested, which is the
-     * same one the availability dialog would suggest.
+     * Asks a helper for the next queued app that is missing an APK or behind the newest version
+     * the sources the app is patched from offer, the pass the batch screen drives while the queue
+     * is being prepared. The source order and the experimental and prerelease settings the user
+     * made decide what is offered.
      *
      * Nothing starts while another question is on screen, an APK is being processed, or the user
      * turned the pass off. The screen calls this again whenever one of those settles.
      */
     fun startAutoDownload() {
-        if (autoDownloadStarting || apkSearch != null) return
+        if (autoDownloadStarting || autoDownloadStopped || apkSearch != null) return
         if (processingApk ||
             attachTarget != null ||
             apkChoice != null ||
@@ -497,31 +503,46 @@ class BatchPatcherViewModel(
         val current = state.value ?: return
         if (current.phase != BatchPhase.PREFLIGHT) return
 
-        val metadata = patchBundleRepository.appMetadata.value
-        val item = current.items
-            .autoDownloadCandidates(autoDownloadTried) { helperSignatureCheckAvailable(metadata[it.packageName]) }
-            .firstOrNull() ?: return
-
-        autoDownloadTried += item.id
         autoDownloadStarting = true
         viewModelScope.launch {
             try {
                 if (!prefs.autoDownloadApkHelpersInBatch.get()) return@launch
 
-                val allCompatible = versionCatalog.compatibleVersions.first()[item.packageName].orEmpty()
-                val compatible = allCompatible.filter { it.bundleUid == item.chosenBundleUid }.ifEmpty { allCompatible }
-                val version = compatible.recommendedEntry()?.target?.version
+                val metadata = patchBundleRepository.appMetadata.value
+                val catalog = versionCatalog.compatibleVersions.first()
+                val ignoredVersions = homeAppButtonPrefs.ignoredVersions.value
 
-                // The queue may have moved on while the versions were looked up
-                val planned = state.value?.items?.firstOrNull { it.id == item.id }
+                val candidate = current.items.firstOrNull { item ->
+                    item.id !in autoDownloadTried &&
+                            item.autoDownloadWanted(
+                                newest = batchAutoDownloadTargets(item, catalog[item.packageName].orEmpty())
+                                    .recommendedEntry(),
+                                canVerifySignature = helperSignatureCheckAvailable(metadata[item.packageName]),
+                                ignoredVersion = ignoredVersions[item.packageName]
+                            )
+                } ?: return@launch
+
+                // The queue may have moved on while the catalog was read
+                val planned = state.value?.items?.firstOrNull { it.id == candidate.id } ?: return@launch
                 if (state.value?.phase != BatchPhase.PREFLIGHT || apkSearch != null) return@launch
-                if (planned == null || planned.state != BatchItemState.NEEDS_APK) return@launch
 
+                val targets = batchAutoDownloadTargets(planned, catalog[planned.packageName].orEmpty())
+                val newest = targets.recommendedEntry()
+                if (!planned.autoDownloadWanted(
+                        newest = newest,
+                        canVerifySignature = helperSignatureCheckAvailable(metadata[planned.packageName]),
+                        ignoredVersion = ignoredVersions[planned.packageName]
+                    )
+                ) {
+                    return@launch
+                }
+
+                autoDownloadTried += planned.id
                 apkSearch = ApkSearch(
                     item = planned,
-                    version = version,
-                    url = downloadUrlResolver.apiSearchUrl(planned.packageName, version),
-                    compatible = compatible,
+                    version = newest?.target?.version,
+                    url = downloadUrlResolver.apiSearchUrl(planned.packageName, newest?.target?.version),
+                    compatible = targets,
                     auto = true
                 )
             } finally {
@@ -536,16 +557,14 @@ class BatchPatcherViewModel(
     }
 
     /**
-     * Ends the automatic pass where the user stopped waiting on a helper. Every app still without
-     * an APK is left for them to handle, which is what backing out of the helper means; leaving the
-     * queue and opening it again starts a fresh pass.
+     * Ends the automatic pass where the user stopped waiting on a helper. Every app still waiting
+     * for one is left for them to handle, which is what backing out of the helper means; leaving
+     * the queue and opening it again starts a fresh pass.
      */
     private fun stopAutoDownload() {
         if (apkSearch?.auto != true) return
         apkSearch = null
-        val waiting = state.value?.items.orEmpty().filter { it.state == BatchItemState.NEEDS_APK }
-        if (waiting.isEmpty()) return
-        autoDownloadTried += waiting.map { it.id }
+        autoDownloadStopped = true
         messages.show(R.string.batch_patch_auto_download_stopped)
     }
 
@@ -554,6 +573,7 @@ class BatchPatcherViewModel(
         // A request already with a helper is left to finish
         if (apkSearch?.auto == true) return
         autoDownloadTried.clear()
+        autoDownloadStopped = false
     }
 
     override fun onHelperDismissed() {

@@ -226,20 +226,6 @@ data class BatchPatchItem(
     )
 }
 
-/**
- * Apps an automatic helper pass may download for, in queue order: those without an APK, not
- * tried by the pass yet, and whose APK can still be signature-checked. An app the pass cannot
- * verify is left for the user to hand over by hand, where the helper picker warns about it.
- */
-internal fun List<BatchPatchItem>.autoDownloadCandidates(
-    attempted: Set<String>,
-    canVerifySignature: (BatchPatchItem) -> Boolean
-): List<BatchPatchItem> = filter {
-    it.state == BatchItemState.NEEDS_APK &&
-            it.id !in attempted &&
-            canVerifySignature(it)
-}
-
 /** What the queue does with each APK once patching succeeds. */
 enum class BatchInstallPolicy {
     /** Keep the patched APK only, the user installs later from the summary. */

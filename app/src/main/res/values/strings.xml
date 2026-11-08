@@ -1352,7 +1352,7 @@ Details: %2$s"</string>
     <string name="settings_system_apk_download_helper_open_directly">Open helper right away</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Skips the download instructions and opens the trusted helper</string>
     <string name="settings_system_apk_download_helper_auto_batch">Download APKs automatically in batch</string>
-    <string name="settings_system_apk_download_helper_auto_batch_description">Opens the first trusted helper for each queued app without an APK, asking for the newest version its patches support</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">Checks every queued app for the newest version its patches support and downloads it with the first trusted helper when it is missing or behind</string>
 
     <!-- File Picker -->
     <string name="file_picker_no_files">No files here</string>
