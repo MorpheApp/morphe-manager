@@ -14,6 +14,7 @@ import app.morphe.manager.patcher.DeviceConfig
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.util.Abi
 import app.morphe.manager.patcher.util.NativeLibs
+import app.morphe.patcher.apk.ApkMerger
 import com.reandroid.arsc.chunk.xml.AndroidManifestBlock
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runInterruptible
@@ -28,6 +29,8 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 import java.util.zip.ZipInputStream
 import java.util.zip.ZipOutputStream
+import app.morphe.patcher.logging.LogLevel as PatcherLogLevel
+import app.morphe.patcher.logging.Logger as PatcherLogger
 
 @Serializable
 sealed class SplitPreparationEvent {
@@ -113,6 +116,20 @@ object SplitApkPreparer {
                 (file.extension.lowercase(Locale.ROOT) in SUPPORTED_EXTENSIONS || hasEmbeddedApkEntries(file))
 
     /**
+     * Returns `true` if the split archive [file] has OBB files, which [prepareIfNeeded] extracts for
+     * patches to read. The APK merged from such an archive lacks them, so the archive is what is kept
+     * for repatching.
+     */
+    @Throws(IOException::class)
+    fun hasObbFiles(file: File): Boolean =
+        ZipFile(file).use { zip ->
+            zip.entries().asSequence().any { entry ->
+                !entry.isDirectory && (entry.name.endsWith(".obb", ignoreCase = true) ||
+                        entry.name.startsWith("Android/obb/", ignoreCase = true))
+            }
+        }
+
+    /**
      * If [source] is a split APK bundle, extracts all modules into [workspace], merges them into
      * a single APK and returns a [PreparationResult] pointing to the merged file.
      * If [source] is already a plain APK, returns a [PreparationResult] wrapping it unchanged.
@@ -156,6 +173,17 @@ object SplitApkPreparer {
                 onEvent = onEvent
             )
 
+            // Patches read the OBB files of the bundle, which are not part of the merged APK
+            val obbFiles = runInterruptible(Dispatchers.IO) {
+                ApkMerger(logger.toPatcherLogger()).extractObbFiles(source, workingDir.resolve("obb"))
+            }
+            if (obbFiles.isNotEmpty()) {
+                logger.info(
+                    "Extracted ${obbFiles.size} OBB files: " +
+                            obbFiles.entries.joinToString { (path, file) -> "$path=${file.length()} bytes" }
+                )
+            }
+
             onEvent?.invoke(SplitPreparationEvent.Finalizing)
 
             logger.info(
@@ -164,7 +192,8 @@ object SplitApkPreparer {
             )
             PreparationResult(
                 file = mergedApk,
-                merged = true
+                merged = true,
+                obbFiles = obbFiles
             ) {
                 workingDir.deleteRecursively()
             }
@@ -428,10 +457,27 @@ object SplitApkPreparer {
             extracted
         }
 
-    /** Result of [prepareIfNeeded]. */
+    /**
+     * Result of [prepareIfNeeded].
+     *
+     * @param obbFiles The OBB files of the bundle, keyed by their path inside it. They are removed
+     *                 by [cleanup], so they must not be used after it.
+     */
     data class PreparationResult(
         val file: File,
         val merged: Boolean,
+        val obbFiles: Map<String, File> = emptyMap(),
         val cleanup: () -> Unit = {}
     )
+
+    private fun Logger.toPatcherLogger() = object : PatcherLogger() {
+        override fun log(level: PatcherLogLevel, message: String) {
+            when (level) {
+                PatcherLogLevel.TRACE -> trace(message)
+                PatcherLogLevel.INFO -> info(message)
+                PatcherLogLevel.WARN -> warn(message)
+                PatcherLogLevel.ERROR -> error(message)
+            }
+        }
+    }
 }

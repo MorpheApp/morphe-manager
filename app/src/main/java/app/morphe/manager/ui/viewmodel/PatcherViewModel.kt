@@ -667,6 +667,8 @@ class PatcherViewModel(
      * originalApksDir by the worker via onMergedApkReady - this call will detect the
      * existing record and skip re-saving. A mount install keeps the archive instead, which is
      * saved here, as the stock app it restores is installed from the archive's signed splits.
+     * An archive with OBB files is saved here as well, since the merged APK lacks the OBB files
+     * patches read, so the worker does not keep it.
      * For regular APK files, saves the APK itself.
      *
      * Thread-safe: uses mutex to prevent concurrent saves from observeWorker and persistPatchedApp.

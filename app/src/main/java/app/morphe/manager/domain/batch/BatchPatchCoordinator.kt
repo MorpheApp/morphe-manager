@@ -36,6 +36,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import kotlinx.serialization.json.Json
 import java.io.File
+import java.io.IOException
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
 
@@ -841,7 +842,8 @@ class BatchPatchCoordinator(
      * Keeps the unpatched APK for future runs. Split archives are skipped because the patcher
      * already stored the merged mono-APK it built from them, which is the better input for a
      * later run than the archive itself. A mount keeps the archive, as the stock app it restores
-     * is installed from its signed splits.
+     * is installed from its signed splits. An archive with OBB files is kept as well, as the
+     * patcher does not store the merged APK, which lacks them.
      */
     private suspend fun saveOriginalApk(
         item: BatchPatchItem,
@@ -849,7 +851,7 @@ class BatchPatchCoordinator(
         patchedVersion: String
     ) {
         val file = (selectedApp as? SelectedApp.Local)?.file?.takeIf { it.exists() } ?: return
-        if (!item.useMount && SplitApkPreparer.isSplitArchive(file)) return
+        if (!item.useMount && SplitApkPreparer.isSplitArchive(file) && !hasObbFiles(file)) return
         // Recorded under its own version, which a patch may have renamed in the patched build
         val version = pm.getPackageInfo(file)?.versionName?.takeUnless { it.isBlank() }
             ?: item.version
@@ -866,6 +868,14 @@ class BatchPatchCoordinator(
             )
         }.onFailure { Log.w(TAG, "Failed to save original APK for ${item.packageName}", it) }
     }
+
+    private fun hasObbFiles(archive: File): Boolean =
+        try {
+            SplitApkPreparer.hasObbFiles(archive)
+        } catch (e: IOException) {
+            Log.w(TAG, "Failed to look for OBB files in ${archive.name}", e)
+            false
+        }
 
     private fun markRemainingCancelled() {
         _state.update { state ->
