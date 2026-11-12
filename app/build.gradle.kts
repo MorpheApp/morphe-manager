@@ -101,6 +101,11 @@ dependencies {
 
     // Unit tests
     testImplementation(libs.kotlin.test.junit)
+    // Compose UI under Robolectric, for behavior only a composition shows
+    testImplementation(platform(libs.compose.bom))
+    testImplementation(libs.compose.ui.test.junit4)
+    testImplementation(libs.robolectric)
+    debugImplementation(libs.compose.ui.test.manifest)
 }
 
 // The full Kotlin reflection comes with the patcher, yet neither it, the patches nor the app go
@@ -305,6 +310,8 @@ android {
 
     // Unit tests run on the JVM, where android.util.Log is only a stub
     testOptions.unitTests.isReturnDefaultValues = true
+    // Robolectric reads the merged manifest and resources to start the activity a Compose test runs in
+    testOptions.unitTests.isIncludeAndroidResources = true
 
     dependenciesInfo {
         includeInApk = false
@@ -444,6 +451,8 @@ tasks {
             events(TestLogEvent.FAILED)
             exceptionFormat = TestExceptionFormat.FULL
         }
+        // Robolectric sets up the shared memory of Android 16 through the JDK's own internals
+        jvmArgs("--add-exports=java.base/jdk.internal.access=ALL-UNNAMED")
     }
 }
 

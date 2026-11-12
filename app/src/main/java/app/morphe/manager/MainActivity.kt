@@ -22,6 +22,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
@@ -37,6 +38,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -64,6 +66,7 @@ import app.morphe.manager.ui.screen.shared.BackgroundType
 import app.morphe.manager.ui.screen.shared.DialogHost
 import app.morphe.manager.ui.screen.shared.MainPage
 import app.morphe.manager.ui.screen.shared.MessageHost
+import app.morphe.manager.ui.screen.shared.ModalLayer
 import app.morphe.manager.ui.screen.shared.RandomBackground
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.ui.screen.shared.rememberRandomBackground
@@ -181,7 +184,10 @@ class MainActivity : ComponentActivity() {
                 appCardColorValues = appCardColorValues
             ) {
                 MessageHost(modifier = Modifier.fillMaxSize()) {
-                    MorpheManager(vm)
+                    // Dialogs raised over whichever screen is open, such as an update's changelog
+                    ModalLayer {
+                        MorpheManager(vm)
+                    }
                 }
             }
         }
@@ -585,7 +591,7 @@ private fun MorpheManager(vm: MainViewModel) {
             predictivePopEnterTransition = { sharedAxisZEnter(forward = false) },
             predictivePopExitTransition = { Animations.predictiveBackExit }
         ) {
-            composable<HomeScreen> { entry ->
+            screen<HomeScreen> { entry ->
                 val bundleUpdateProgress by homeViewModel.bundleUpdateProgress.collectAsStateWithLifecycle(null)
                 val appInfoTriggerPackage by entry.savedStateHandle.getStateFlow<String?>("app_info_trigger_package", null)
                     .collectAsStateWithLifecycle()
@@ -624,8 +630,8 @@ private fun MorpheManager(vm: MainViewModel) {
                 )
             }
 
-            composable<BatchPatcher> { entry ->
-                val params = entry.getComplexArg<BatchPatcher.ViewModelParams>() ?: return@composable
+            screen<BatchPatcher> { entry ->
+                val params = entry.getComplexArg<BatchPatcher.ViewModelParams>() ?: return@screen
                 BatchPatcherScreen(
                     targets = params.targets,
                     onBackClick = {
@@ -640,8 +646,8 @@ private fun MorpheManager(vm: MainViewModel) {
                 )
             }
 
-            composable<Patcher> { entry ->
-                val params = entry.getComplexArg<Patcher.ViewModelParams>() ?: return@composable
+            screen<Patcher> { entry ->
+                val params = entry.getComplexArg<Patcher.ViewModelParams>() ?: return@screen
                 val patcherViewModel: PatcherViewModel = koinViewModel { parametersOf(params) }
                 val leavePatcher: () -> Unit = {
                     patcherViewModel.stopCompletionSound()
@@ -663,7 +669,7 @@ private fun MorpheManager(vm: MainViewModel) {
                 )
             }
 
-            composable<SettingsDetail> { entry ->
+            screen<SettingsDetail> { entry ->
                 SettingsSubpageScreen(
                     subpage = SettingsSubpage.valueOf(entry.toRoute<SettingsDetail>().subpage),
                     homeViewModel = homeViewModel,
@@ -679,11 +685,11 @@ private fun MorpheManager(vm: MainViewModel) {
                 )
             }
 
-            composable<PatchSelections> {
+            screen<PatchSelections> {
                 PatchSelectionsPage(onBack = { navController.popBackStack(HomeScreen, false) })
             }
 
-            composable<Licenses> {
+            screen<Licenses> {
                 LicensesPage(onBack = { navController.popBackStack() })
             }
         }
@@ -693,6 +699,18 @@ private fun MorpheManager(vm: MainViewModel) {
                 OnboardingShowcase(steps = onboardingSteps, onComplete = finishOnboardingTour)
             }
         }
+    }
+}
+
+/**
+ * The destination of route [T], laid out with the dialogs raised on it over it, so they move with
+ * the screen as navigation does, see [ModalLayer].
+ */
+private inline fun <reified T : Any> NavGraphBuilder.screen(
+    noinline content: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit
+) {
+    composable<T> { entry ->
+        ModalLayer { content(entry) }
     }
 }
 

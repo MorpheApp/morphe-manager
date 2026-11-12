@@ -44,14 +44,13 @@ import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 
 /**
- * Short messages for the user, shown as a snackbar on whichever surface is on top, see
+ * Short messages for the user, shown as a snackbar over the app's screens and dialogs, see
  * [MessageHost]. A screen or the work behind it raises one without holding a [Context], as a
- * string resource is resolved by the surface that shows it.
+ * string resource is resolved by the host that shows it.
  *
- * The messages are played here, one at a time and on a clock of their own, while the surfaces only
- * draw the one playing. A surface opening or closing therefore moves the message that is up to
- * another surface without starting it over, and one raised before any surface is up waits for the
- * first.
+ * The messages are played here, one at a time and on a clock of their own, while the host only
+ * draws the one playing. One raised while no host is up, such as before the app's screens come up
+ * or while they are recreated, waits for one.
  */
 class UserMessages(
     context: Context,
@@ -59,8 +58,8 @@ class UserMessages(
 ) {
     private val appContext = context.applicationContext
     private val incoming = Channel<Message>(Channel.UNLIMITED)
-    private val surfaces = MutableStateFlow<List<MessageSurface>>(emptyList())
-    private val playing = MutableStateFlow<Playing?>(null)
+    private val hosts = MutableStateFlow(0)
+    private val playingNow = MutableStateFlow<Message?>(null)
 
     init {
         scope.launch {
@@ -101,13 +100,13 @@ class UserMessages(
 
     private suspend fun play(message: Message) {
         if (message.closed.isCompleted) return
-        val first = surfaces.first { it.isNotEmpty() }.last()
-        playing.value = Playing(message, cameOn = first)
+        hosts.first { it > 0 }
+        playingNow.value = message
         val timeout = message.timeout()
         if (timeout == null) message.closed.await() else withTimeoutOrNull(timeout) { message.closed.await() }
         // Over, so a press landing on it as it fades no longer acts
         message.closed.complete(Unit)
-        playing.value = null
+        playingNow.value = null
     }
 
     /** How long [this] stays up, or null for one that stays until it is closed. */
@@ -118,41 +117,15 @@ class UserMessages(
         return readableTimeout(base, accessibility, hasAction = action != null)
     }
 
-    /** The message playing, while [surface] is the one on top, and nothing while another is. */
-    internal fun playingOn(surface: MessageSurface): Flow<Message?> =
-        combine(playing, surfaces) { up, open -> up?.message?.takeIf { open.lastOrNull() === surface } }
+    /** The message up, as it changes. */
+    internal val playing: StateFlow<Message?> = playingNow.asStateFlow()
 
-    /** The message up, on whichever surface, as it changes. */
-    internal val current: Flow<Message?> = playing.map { it?.message }
-
-    /** The message up right now, on whichever surface. */
-    internal val currentNow: Message?
-        get() = playing.value?.message
-
-    /** Whether [message] is still up, on whichever surface. */
-    internal fun isPlaying(message: Message): Boolean = currentNow === message
-
-    /**
-     * Whether [message] comes up on [surface] as it starts, rather than handed over from another
-     * surface it was showing on.
-     */
-    internal fun startsOn(message: Message, surface: MessageSurface): Boolean =
-        playing.value.let { up -> up != null && up.message === message && up.cameOn === surface }
-
-    internal fun attach(surface: MessageSurface) {
-        surfaces.update { it + surface }
-        handOver()
+    internal fun attach() {
+        hosts.update { it + 1 }
     }
 
-    internal fun detach(surface: MessageSurface) {
-        surfaces.update { it - surface }
-        handOver()
-    }
-
-    // A message moving to another surface has come up already, so it carries on there as it is
-    private fun handOver() {
-        val top = surfaces.value.lastOrNull()
-        playing.update { up -> up?.takeIf { it.cameOn === top } ?: up?.copy(cameOn = null) }
+    internal fun detach() {
+        hosts.update { it - 1 }
     }
 
     /** Takes [message] down, as the user swiping or closing it does. */
@@ -209,50 +182,29 @@ internal class Message(
     val untilClosed: Boolean = false
 )
 
-/** A place messages are drawn, which is the top one of those open. */
-internal class MessageSurface
-
-/** The message up, and the surface it came up on while it is still the one showing it. */
-private data class Playing(val message: Message, val cameOn: MessageSurface?)
-
 /** How far a message floats above the navigation bar or the keyboard, clear of the screen's bottom edge. */
 private val MessageBottomInset = 64.dp
 
 /**
- * [content] with the app's messages shown over its bottom edge while it is the top surface. The
- * snackbar keeps one place on every surface, just clear of the navigation bar or the keyboard.
- * It sits over whatever bar the surface has there rather than moving with the bars of each, and
- * is only as wide as its text needs.
+ * [content] with the app's messages shown over its bottom edge, over its dialogs too. The snackbar
+ * keeps one place on every screen, just clear of the navigation bar or the keyboard. It sits over
+ * whatever bar the screen has there rather than moving with the bars of each, and is only as wide
+ * as its text needs.
  *
- * A message only fades as it comes up and as it goes. Moving between surfaces it stays as it is,
- * so it stands still while the screen under it changes.
- *
- * @param accepting Whether the surface still takes messages. One on its way out gives them up at
- * once, so the surface below carries on with the message that is up. It goes on showing the one it
- * had until it is gone, rather than leaving a hole in it as it fades.
+ * A message only fades as it comes up and as it goes, so it stands still while the screen under
+ * it changes.
  */
 @Composable
 fun MessageHost(
     modifier: Modifier = Modifier,
-    accepting: Boolean = true,
     content: @Composable BoxScope.() -> Unit
 ) {
     val messages = koinInject<UserMessages>()
-    val surface = remember { MessageSurface() }
-    if (accepting) {
-        DisposableEffect(messages, surface) {
-            messages.attach(surface)
-            onDispose { messages.detach(surface) }
-        }
+    DisposableEffect(messages) {
+        messages.attach()
+        onDispose { messages.detach() }
     }
-    // Opening on top of the others, it shows the message up from its first frame, before it has
-    // taken its place among them and that reaches it, so its window never covers it for a frame
-    val playing by remember(messages, surface) { messages.playingOn(surface) }
-        .collectAsState(initial = if (accepting) messages.currentNow else null)
-    val current by messages.current.collectAsState(initial = messages.currentNow)
-    val held = remember { HeldMessage() }
-    if (accepting) held.message = playing
-    val shown = if (accepting) playing else held.message?.takeIf { it === current }
+    val shown by messages.playing.collectAsState()
 
     Box(modifier = modifier) {
         content()
@@ -260,10 +212,8 @@ fun MessageHost(
             targetState = shown,
             // Faded only, as the room it takes growing up from the bottom edge would read as a slide
             transitionSpec = {
-                val enter = targetState?.takeIf { messages.startsOn(it, surface) }
-                    ?.let { fadeIn(tween(MessageFadeDuration)) } ?: EnterTransition.None
-                val exit = initialState?.takeUnless(messages::isPlaying)
-                    ?.let { fadeOut(tween(MessageFadeDuration)) } ?: ExitTransition.None
+                val enter = if (targetState != null) fadeIn(tween(MessageFadeDuration)) else EnterTransition.None
+                val exit = if (initialState != null) fadeOut(tween(MessageFadeDuration)) else ExitTransition.None
                 (enter togetherWith exit).using(null)
             },
             contentAlignment = Alignment.BottomCenter,
@@ -345,9 +295,6 @@ private fun MessageBubble(message: Message, messages: UserMessages) {
         }
     }
 }
-
-/** The message a [MessageHost] showed while it took them, held as it goes. */
-private class HeldMessage(var message: Message? = null)
 
 private const val MessageFadeDuration = 200
 

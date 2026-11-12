@@ -33,6 +33,7 @@ play-services-base = "18.11.1"
 preferences-datastore = "1.3.0"
 proguard = "7.10.0"
 reorderable = "3.1.0"
+robolectric = "4.17"
 room-version = "2.8.5"
 serialization = "1.12.0"
 shizuku = "13.1.5"
@@ -118,6 +119,9 @@ firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging
 
 # Unit tests
 kotlin-test-junit = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit", version.ref = "kotlin" }
+robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
+compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 
 # XZ: the build unpacks the JVM builds with it and packs the embedded JVM, which the app unpacks
 xz = { group = "org.tukaani", name = "xz", version.ref = "xz" }

@@ -69,8 +69,8 @@ fun rememberSearchFieldState(searchable: Boolean = true): SearchFieldState {
 /**
  * Routes the back gesture to close [state] before the surrounding dialog or sheet reacts to it.
  *
- * Compose it inside the dialog or sheet content, not next to [rememberSearchFieldState]:
- * both host their own back dispatcher, and a handler registered outside that window never runs.
+ * Compose it inside the dialog or sheet content, not next to [rememberSearchFieldState]: the
+ * screen under a dialog takes no back while the dialog is open, see [ModalLayer].
  */
 @Composable
 fun SearchFieldBackHandler(state: SearchFieldState) {

@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
  * [extraTop] adds what eases in under the top bar, such as the alerts, read as a row is brought in.
  *
  * Every scrolling container under it reads the insets, whichever way it scrolls, so one that is not
- * the list's own sets them aside: a dialog's window with [WithoutBringIntoViewInsets], a text field's
+ * the list's own sets them aside: a dialog over it with [WithoutBringIntoViewInsets], a text field's
  * line with [TextFieldLine].
  */
 @OptIn(ExperimentalFoundationApi::class)
@@ -42,7 +42,7 @@ fun ProvideBringIntoViewInsets(
 
 /**
  * Leaves the insets of [ProvideBringIntoViewInsets] out of what scrolls within [content], which is
- * not the list they belong to, such as a dialog's window over the list.
+ * not the list they belong to, such as a dialog over the list.
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
